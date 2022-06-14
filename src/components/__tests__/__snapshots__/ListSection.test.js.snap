@@ -16,40 +16,155 @@ exports[`renders list section with custom title style 1`] = `
         "scale": 1,
       },
       "colors": Object {
-        "accent": "#03dac4",
-        "backdrop": "rgba(0, 0, 0, 0.5)",
-        "background": "#f6f6f6",
-        "disabled": "rgba(0, 0, 0, 0.26)",
-        "error": "#B00020",
-        "notification": "#f50057",
-        "onSurface": "#000000",
-        "placeholder": "rgba(0, 0, 0, 0.54)",
-        "primary": "#6200ee",
-        "surface": "#ffffff",
-        "text": "#000000",
+        "background": "rgba(255, 251, 254, 1)",
+        "elevation": Object {
+          "level0": "transparent",
+          "level1": "rgb(247, 243, 249)",
+          "level2": "rgb(243, 237, 246)",
+          "level3": "rgb(238, 232, 244)",
+          "level4": "rgb(236, 230, 243)",
+          "level5": "rgb(233, 227, 241)",
+        },
+        "error": "rgba(179, 38, 30, 1)",
+        "errorContainer": "rgba(249, 222, 220, 1)",
+        "inverseOnSurface": "rgba(244, 239, 244, 1)",
+        "inversePrimary": "rgba(208, 188, 255, 1)",
+        "inverseSurface": "rgba(49, 48, 51, 1)",
+        "onBackground": "rgba(28, 27, 31, 1)",
+        "onError": "rgba(255, 255, 255, 1)",
+        "onErrorContainer": "rgba(65, 14, 11, 1)",
+        "onPrimary": "rgba(255, 255, 255, 1)",
+        "onPrimaryContainer": "rgba(33, 0, 93, 1)",
+        "onSecondary": "rgba(255, 255, 255, 1)",
+        "onSecondaryContainer": "rgba(29, 25, 43, 1)",
+        "onSurface": "rgba(28, 27, 31, 1)",
+        "onSurfaceDisabled": "rgba(28, 27, 31, 0.38)",
+        "onSurfaceVariant": "rgba(73, 69, 79, 1)",
+        "onTertiary": "rgba(255, 255, 255, 1)",
+        "onTertiaryContainer": "rgba(49, 17, 29, 1)",
+        "outline": "rgba(121, 116, 126, 1)",
+        "primary": "rgba(103, 80, 164, 1)",
+        "primaryContainer": "rgba(234, 221, 255, 1)",
+        "secondary": "rgba(98, 91, 113, 1)",
+        "secondaryContainer": "rgba(232, 222, 248, 1)",
+        "shadow": "rgba(0, 0, 0, 1)",
+        "surface": "rgba(255, 251, 254, 1)",
+        "surfaceDisabled": "rgba(28, 27, 31, 0.12)",
+        "surfaceVariant": "rgba(231, 224, 236, 1)",
+        "tertiary": "rgba(125, 82, 96, 1)",
+        "tertiaryContainer": "rgba(255, 216, 228, 1)",
       },
       "dark": false,
-      "fonts": Object {
-        "light": Object {
+      "isV3": true,
+      "roundness": 4,
+      "typescale": Object {
+        "bodyLarge": Object {
           "fontFamily": "System",
-          "fontWeight": "300",
-        },
-        "medium": Object {
-          "fontFamily": "System",
-          "fontWeight": "500",
-        },
-        "regular": Object {
-          "fontFamily": "System",
+          "fontSize": 16,
           "fontWeight": "400",
+          "letterSpacing": 0.15,
+          "lineHeight": 24,
         },
-        "thin": Object {
+        "bodyMedium": Object {
           "fontFamily": "System",
-          "fontWeight": "100",
+          "fontSize": 14,
+          "fontWeight": "400",
+          "letterSpacing": 0.25,
+          "lineHeight": 20,
+        },
+        "bodySmall": Object {
+          "fontFamily": "System",
+          "fontSize": 12,
+          "fontWeight": "400",
+          "letterSpacing": 0.4,
+          "lineHeight": 16,
+        },
+        "displayLarge": Object {
+          "fontFamily": "System",
+          "fontSize": 57,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 64,
+        },
+        "displayMedium": Object {
+          "fontFamily": "System",
+          "fontSize": 45,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 52,
+        },
+        "displaySmall": Object {
+          "fontFamily": "System",
+          "fontSize": 36,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 44,
+        },
+        "headlineLarge": Object {
+          "fontFamily": "System",
+          "fontSize": 32,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 40,
+        },
+        "headlineMedium": Object {
+          "fontFamily": "System",
+          "fontSize": 28,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 36,
+        },
+        "headlineSmall": Object {
+          "fontFamily": "System",
+          "fontSize": 24,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 32,
+        },
+        "labelLarge": Object {
+          "fontFamily": "System",
+          "fontSize": 14,
+          "fontWeight": "500",
+          "letterSpacing": 0.1,
+          "lineHeight": 20,
+        },
+        "labelMedium": Object {
+          "fontFamily": "System",
+          "fontSize": 12,
+          "fontWeight": "500",
+          "letterSpacing": 0.5,
+          "lineHeight": 16,
+        },
+        "labelSmall": Object {
+          "fontFamily": "System",
+          "fontSize": 11,
+          "fontWeight": "500",
+          "letterSpacing": 0.5,
+          "lineHeight": 16,
+        },
+        "titleLarge": Object {
+          "fontFamily": "System",
+          "fontSize": 22,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 28,
+        },
+        "titleMedium": Object {
+          "fontFamily": "System",
+          "fontSize": 16,
+          "fontWeight": "500",
+          "letterSpacing": 0.15,
+          "lineHeight": 24,
+        },
+        "titleSmall": Object {
+          "fontFamily": "System",
+          "fontSize": 14,
+          "fontWeight": "500",
+          "letterSpacing": 0.1,
+          "lineHeight": 20,
         },
       },
-      "isV3": false,
-      "roundness": 4,
-      "version": 2,
+      "version": 3,
     }
   }
 >
@@ -58,12 +173,17 @@ exports[`renders list section with custom title style 1`] = `
     style={
       Array [
         Object {
-          "color": "#000000",
-          "fontFamily": "System",
+          "color": "rgba(28, 27, 31, 1)",
+          "fontSize": 14,
           "fontWeight": "400",
+          "letterSpacing": 0.25,
+          "lineHeight": 20,
         },
         Object {
           "textAlign": "left",
+        },
+        Object {
+          "writingDirection": "ltr",
         },
         Array [
           Object {
@@ -71,9 +191,12 @@ exports[`renders list section with custom title style 1`] = `
             "paddingVertical": 13,
           },
           Object {
-            "color": "rgba(0, 0, 0, 0.54)",
+            "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
-            "fontWeight": "500",
+            "fontSize": 14,
+            "fontWeight": "400",
+            "letterSpacing": 0.25,
+            "lineHeight": 20,
           },
           Object {
             "color": "#f44336",
@@ -143,7 +266,7 @@ exports[`renders list section with custom title style 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "rgba(0, 0, 0, 0.54)",
+                "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
             ]
@@ -172,9 +295,7 @@ exports[`renders list section with custom title style 1`] = `
           style={
             Array [
               Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "color": "rgba(28, 27, 31, 1)",
               },
               Object {
                 "textAlign": "left",
@@ -184,7 +305,7 @@ exports[`renders list section with custom title style 1`] = `
                   "fontSize": 16,
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
+                  "color": "rgba(28, 27, 31, 1)",
                 },
                 undefined,
               ],
@@ -255,7 +376,7 @@ exports[`renders list section with custom title style 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "rgba(0, 0, 0, 0.54)",
+                "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
             ]
@@ -284,9 +405,7 @@ exports[`renders list section with custom title style 1`] = `
           style={
             Array [
               Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "color": "rgba(28, 27, 31, 1)",
               },
               Object {
                 "textAlign": "left",
@@ -296,7 +415,7 @@ exports[`renders list section with custom title style 1`] = `
                   "fontSize": 16,
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
+                  "color": "rgba(28, 27, 31, 1)",
                 },
                 undefined,
               ],
@@ -327,40 +446,155 @@ exports[`renders list section with subheader 1`] = `
         "scale": 1,
       },
       "colors": Object {
-        "accent": "#03dac4",
-        "backdrop": "rgba(0, 0, 0, 0.5)",
-        "background": "#f6f6f6",
-        "disabled": "rgba(0, 0, 0, 0.26)",
-        "error": "#B00020",
-        "notification": "#f50057",
-        "onSurface": "#000000",
-        "placeholder": "rgba(0, 0, 0, 0.54)",
-        "primary": "#6200ee",
-        "surface": "#ffffff",
-        "text": "#000000",
+        "background": "rgba(255, 251, 254, 1)",
+        "elevation": Object {
+          "level0": "transparent",
+          "level1": "rgb(247, 243, 249)",
+          "level2": "rgb(243, 237, 246)",
+          "level3": "rgb(238, 232, 244)",
+          "level4": "rgb(236, 230, 243)",
+          "level5": "rgb(233, 227, 241)",
+        },
+        "error": "rgba(179, 38, 30, 1)",
+        "errorContainer": "rgba(249, 222, 220, 1)",
+        "inverseOnSurface": "rgba(244, 239, 244, 1)",
+        "inversePrimary": "rgba(208, 188, 255, 1)",
+        "inverseSurface": "rgba(49, 48, 51, 1)",
+        "onBackground": "rgba(28, 27, 31, 1)",
+        "onError": "rgba(255, 255, 255, 1)",
+        "onErrorContainer": "rgba(65, 14, 11, 1)",
+        "onPrimary": "rgba(255, 255, 255, 1)",
+        "onPrimaryContainer": "rgba(33, 0, 93, 1)",
+        "onSecondary": "rgba(255, 255, 255, 1)",
+        "onSecondaryContainer": "rgba(29, 25, 43, 1)",
+        "onSurface": "rgba(28, 27, 31, 1)",
+        "onSurfaceDisabled": "rgba(28, 27, 31, 0.38)",
+        "onSurfaceVariant": "rgba(73, 69, 79, 1)",
+        "onTertiary": "rgba(255, 255, 255, 1)",
+        "onTertiaryContainer": "rgba(49, 17, 29, 1)",
+        "outline": "rgba(121, 116, 126, 1)",
+        "primary": "rgba(103, 80, 164, 1)",
+        "primaryContainer": "rgba(234, 221, 255, 1)",
+        "secondary": "rgba(98, 91, 113, 1)",
+        "secondaryContainer": "rgba(232, 222, 248, 1)",
+        "shadow": "rgba(0, 0, 0, 1)",
+        "surface": "rgba(255, 251, 254, 1)",
+        "surfaceDisabled": "rgba(28, 27, 31, 0.12)",
+        "surfaceVariant": "rgba(231, 224, 236, 1)",
+        "tertiary": "rgba(125, 82, 96, 1)",
+        "tertiaryContainer": "rgba(255, 216, 228, 1)",
       },
       "dark": false,
-      "fonts": Object {
-        "light": Object {
+      "isV3": true,
+      "roundness": 4,
+      "typescale": Object {
+        "bodyLarge": Object {
           "fontFamily": "System",
-          "fontWeight": "300",
-        },
-        "medium": Object {
-          "fontFamily": "System",
-          "fontWeight": "500",
-        },
-        "regular": Object {
-          "fontFamily": "System",
+          "fontSize": 16,
           "fontWeight": "400",
+          "letterSpacing": 0.15,
+          "lineHeight": 24,
         },
-        "thin": Object {
+        "bodyMedium": Object {
           "fontFamily": "System",
-          "fontWeight": "100",
+          "fontSize": 14,
+          "fontWeight": "400",
+          "letterSpacing": 0.25,
+          "lineHeight": 20,
+        },
+        "bodySmall": Object {
+          "fontFamily": "System",
+          "fontSize": 12,
+          "fontWeight": "400",
+          "letterSpacing": 0.4,
+          "lineHeight": 16,
+        },
+        "displayLarge": Object {
+          "fontFamily": "System",
+          "fontSize": 57,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 64,
+        },
+        "displayMedium": Object {
+          "fontFamily": "System",
+          "fontSize": 45,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 52,
+        },
+        "displaySmall": Object {
+          "fontFamily": "System",
+          "fontSize": 36,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 44,
+        },
+        "headlineLarge": Object {
+          "fontFamily": "System",
+          "fontSize": 32,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 40,
+        },
+        "headlineMedium": Object {
+          "fontFamily": "System",
+          "fontSize": 28,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 36,
+        },
+        "headlineSmall": Object {
+          "fontFamily": "System",
+          "fontSize": 24,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 32,
+        },
+        "labelLarge": Object {
+          "fontFamily": "System",
+          "fontSize": 14,
+          "fontWeight": "500",
+          "letterSpacing": 0.1,
+          "lineHeight": 20,
+        },
+        "labelMedium": Object {
+          "fontFamily": "System",
+          "fontSize": 12,
+          "fontWeight": "500",
+          "letterSpacing": 0.5,
+          "lineHeight": 16,
+        },
+        "labelSmall": Object {
+          "fontFamily": "System",
+          "fontSize": 11,
+          "fontWeight": "500",
+          "letterSpacing": 0.5,
+          "lineHeight": 16,
+        },
+        "titleLarge": Object {
+          "fontFamily": "System",
+          "fontSize": 22,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 28,
+        },
+        "titleMedium": Object {
+          "fontFamily": "System",
+          "fontSize": 16,
+          "fontWeight": "500",
+          "letterSpacing": 0.15,
+          "lineHeight": 24,
+        },
+        "titleSmall": Object {
+          "fontFamily": "System",
+          "fontSize": 14,
+          "fontWeight": "500",
+          "letterSpacing": 0.1,
+          "lineHeight": 20,
         },
       },
-      "isV3": false,
-      "roundness": 4,
-      "version": 2,
+      "version": 3,
     }
   }
 >
@@ -369,12 +603,17 @@ exports[`renders list section with subheader 1`] = `
     style={
       Array [
         Object {
-          "color": "#000000",
-          "fontFamily": "System",
+          "color": "rgba(28, 27, 31, 1)",
+          "fontSize": 14,
           "fontWeight": "400",
+          "letterSpacing": 0.25,
+          "lineHeight": 20,
         },
         Object {
           "textAlign": "left",
+        },
+        Object {
+          "writingDirection": "ltr",
         },
         Array [
           Object {
@@ -382,9 +621,12 @@ exports[`renders list section with subheader 1`] = `
             "paddingVertical": 13,
           },
           Object {
-            "color": "rgba(0, 0, 0, 0.54)",
+            "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
-            "fontWeight": "500",
+            "fontSize": 14,
+            "fontWeight": "400",
+            "letterSpacing": 0.25,
+            "lineHeight": 20,
           },
           undefined,
         ],
@@ -452,7 +694,7 @@ exports[`renders list section with subheader 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "rgba(0, 0, 0, 0.54)",
+                "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
             ]
@@ -481,9 +723,7 @@ exports[`renders list section with subheader 1`] = `
           style={
             Array [
               Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "color": "rgba(28, 27, 31, 1)",
               },
               Object {
                 "textAlign": "left",
@@ -493,7 +733,7 @@ exports[`renders list section with subheader 1`] = `
                   "fontSize": 16,
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
+                  "color": "rgba(28, 27, 31, 1)",
                 },
                 undefined,
               ],
@@ -564,7 +804,7 @@ exports[`renders list section with subheader 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "rgba(0, 0, 0, 0.54)",
+                "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
             ]
@@ -593,9 +833,7 @@ exports[`renders list section with subheader 1`] = `
           style={
             Array [
               Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "color": "rgba(28, 27, 31, 1)",
               },
               Object {
                 "textAlign": "left",
@@ -605,7 +843,7 @@ exports[`renders list section with subheader 1`] = `
                   "fontSize": 16,
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
+                  "color": "rgba(28, 27, 31, 1)",
                 },
                 undefined,
               ],
@@ -636,40 +874,155 @@ exports[`renders list section without subheader 1`] = `
         "scale": 1,
       },
       "colors": Object {
-        "accent": "#03dac4",
-        "backdrop": "rgba(0, 0, 0, 0.5)",
-        "background": "#f6f6f6",
-        "disabled": "rgba(0, 0, 0, 0.26)",
-        "error": "#B00020",
-        "notification": "#f50057",
-        "onSurface": "#000000",
-        "placeholder": "rgba(0, 0, 0, 0.54)",
-        "primary": "#6200ee",
-        "surface": "#ffffff",
-        "text": "#000000",
+        "background": "rgba(255, 251, 254, 1)",
+        "elevation": Object {
+          "level0": "transparent",
+          "level1": "rgb(247, 243, 249)",
+          "level2": "rgb(243, 237, 246)",
+          "level3": "rgb(238, 232, 244)",
+          "level4": "rgb(236, 230, 243)",
+          "level5": "rgb(233, 227, 241)",
+        },
+        "error": "rgba(179, 38, 30, 1)",
+        "errorContainer": "rgba(249, 222, 220, 1)",
+        "inverseOnSurface": "rgba(244, 239, 244, 1)",
+        "inversePrimary": "rgba(208, 188, 255, 1)",
+        "inverseSurface": "rgba(49, 48, 51, 1)",
+        "onBackground": "rgba(28, 27, 31, 1)",
+        "onError": "rgba(255, 255, 255, 1)",
+        "onErrorContainer": "rgba(65, 14, 11, 1)",
+        "onPrimary": "rgba(255, 255, 255, 1)",
+        "onPrimaryContainer": "rgba(33, 0, 93, 1)",
+        "onSecondary": "rgba(255, 255, 255, 1)",
+        "onSecondaryContainer": "rgba(29, 25, 43, 1)",
+        "onSurface": "rgba(28, 27, 31, 1)",
+        "onSurfaceDisabled": "rgba(28, 27, 31, 0.38)",
+        "onSurfaceVariant": "rgba(73, 69, 79, 1)",
+        "onTertiary": "rgba(255, 255, 255, 1)",
+        "onTertiaryContainer": "rgba(49, 17, 29, 1)",
+        "outline": "rgba(121, 116, 126, 1)",
+        "primary": "rgba(103, 80, 164, 1)",
+        "primaryContainer": "rgba(234, 221, 255, 1)",
+        "secondary": "rgba(98, 91, 113, 1)",
+        "secondaryContainer": "rgba(232, 222, 248, 1)",
+        "shadow": "rgba(0, 0, 0, 1)",
+        "surface": "rgba(255, 251, 254, 1)",
+        "surfaceDisabled": "rgba(28, 27, 31, 0.12)",
+        "surfaceVariant": "rgba(231, 224, 236, 1)",
+        "tertiary": "rgba(125, 82, 96, 1)",
+        "tertiaryContainer": "rgba(255, 216, 228, 1)",
       },
       "dark": false,
-      "fonts": Object {
-        "light": Object {
+      "isV3": true,
+      "roundness": 4,
+      "typescale": Object {
+        "bodyLarge": Object {
           "fontFamily": "System",
-          "fontWeight": "300",
-        },
-        "medium": Object {
-          "fontFamily": "System",
-          "fontWeight": "500",
-        },
-        "regular": Object {
-          "fontFamily": "System",
+          "fontSize": 16,
           "fontWeight": "400",
+          "letterSpacing": 0.15,
+          "lineHeight": 24,
         },
-        "thin": Object {
+        "bodyMedium": Object {
           "fontFamily": "System",
-          "fontWeight": "100",
+          "fontSize": 14,
+          "fontWeight": "400",
+          "letterSpacing": 0.25,
+          "lineHeight": 20,
+        },
+        "bodySmall": Object {
+          "fontFamily": "System",
+          "fontSize": 12,
+          "fontWeight": "400",
+          "letterSpacing": 0.4,
+          "lineHeight": 16,
+        },
+        "displayLarge": Object {
+          "fontFamily": "System",
+          "fontSize": 57,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 64,
+        },
+        "displayMedium": Object {
+          "fontFamily": "System",
+          "fontSize": 45,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 52,
+        },
+        "displaySmall": Object {
+          "fontFamily": "System",
+          "fontSize": 36,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 44,
+        },
+        "headlineLarge": Object {
+          "fontFamily": "System",
+          "fontSize": 32,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 40,
+        },
+        "headlineMedium": Object {
+          "fontFamily": "System",
+          "fontSize": 28,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 36,
+        },
+        "headlineSmall": Object {
+          "fontFamily": "System",
+          "fontSize": 24,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 32,
+        },
+        "labelLarge": Object {
+          "fontFamily": "System",
+          "fontSize": 14,
+          "fontWeight": "500",
+          "letterSpacing": 0.1,
+          "lineHeight": 20,
+        },
+        "labelMedium": Object {
+          "fontFamily": "System",
+          "fontSize": 12,
+          "fontWeight": "500",
+          "letterSpacing": 0.5,
+          "lineHeight": 16,
+        },
+        "labelSmall": Object {
+          "fontFamily": "System",
+          "fontSize": 11,
+          "fontWeight": "500",
+          "letterSpacing": 0.5,
+          "lineHeight": 16,
+        },
+        "titleLarge": Object {
+          "fontFamily": "System",
+          "fontSize": 22,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 28,
+        },
+        "titleMedium": Object {
+          "fontFamily": "System",
+          "fontSize": 16,
+          "fontWeight": "500",
+          "letterSpacing": 0.15,
+          "lineHeight": 24,
+        },
+        "titleSmall": Object {
+          "fontFamily": "System",
+          "fontSize": 14,
+          "fontWeight": "500",
+          "letterSpacing": 0.1,
+          "lineHeight": 20,
         },
       },
-      "isV3": false,
-      "roundness": 4,
-      "version": 2,
+      "version": 3,
     }
   }
 >
@@ -732,7 +1085,7 @@ exports[`renders list section without subheader 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "rgba(0, 0, 0, 0.54)",
+                "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
             ]
@@ -761,9 +1114,7 @@ exports[`renders list section without subheader 1`] = `
           style={
             Array [
               Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "color": "rgba(28, 27, 31, 1)",
               },
               Object {
                 "textAlign": "left",
@@ -773,7 +1124,7 @@ exports[`renders list section without subheader 1`] = `
                   "fontSize": 16,
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
+                  "color": "rgba(28, 27, 31, 1)",
                 },
                 undefined,
               ],
@@ -844,7 +1195,7 @@ exports[`renders list section without subheader 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "rgba(0, 0, 0, 0.54)",
+                "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
             ]
@@ -873,9 +1224,7 @@ exports[`renders list section without subheader 1`] = `
           style={
             Array [
               Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "color": "rgba(28, 27, 31, 1)",
               },
               Object {
                 "textAlign": "left",
@@ -885,7 +1234,7 @@ exports[`renders list section without subheader 1`] = `
                   "fontSize": 16,
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
+                  "color": "rgba(28, 27, 31, 1)",
                 },
                 undefined,
               ],

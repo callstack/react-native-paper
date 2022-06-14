@@ -5,7 +5,7 @@ exports[`renders expanded accordion 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "#f6f6f6",
+        "backgroundColor": "rgba(255, 251, 254, 1)",
       }
     }
   >
@@ -67,9 +67,7 @@ exports[`renders expanded accordion 1`] = `
             style={
               Array [
                 Object {
-                  "color": "#000000",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
+                  "color": "rgba(28, 27, 31, 1)",
                 },
                 Object {
                   "textAlign": "left",
@@ -79,7 +77,7 @@ exports[`renders expanded accordion 1`] = `
                     "fontSize": 16,
                   },
                   Object {
-                    "color": "#6200ee",
+                    "color": "rgba(103, 80, 164, 1)",
                   },
                   undefined,
                 ],
@@ -110,7 +108,7 @@ exports[`renders expanded accordion 1`] = `
                   "backgroundColor": "transparent",
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
+                  "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
               ]
@@ -171,9 +169,7 @@ exports[`renders expanded accordion 1`] = `
           style={
             Array [
               Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "color": "rgba(28, 27, 31, 1)",
               },
               Object {
                 "textAlign": "left",
@@ -183,7 +179,7 @@ exports[`renders expanded accordion 1`] = `
                   "fontSize": 16,
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
+                  "color": "rgba(28, 27, 31, 1)",
                 },
                 undefined,
               ],
@@ -203,7 +199,7 @@ exports[`renders list accordion with children 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "#f6f6f6",
+        "backgroundColor": "rgba(255, 251, 254, 1)",
       }
     }
   >
@@ -272,7 +268,7 @@ exports[`renders list accordion with children 1`] = `
                   "backgroundColor": "transparent",
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, 0.54)",
+                  "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
               ]
@@ -300,9 +296,7 @@ exports[`renders list accordion with children 1`] = `
             style={
               Array [
                 Object {
-                  "color": "#000000",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
+                  "color": "rgba(28, 27, 31, 1)",
                 },
                 Object {
                   "textAlign": "left",
@@ -312,7 +306,7 @@ exports[`renders list accordion with children 1`] = `
                     "fontSize": 16,
                   },
                   Object {
-                    "color": "rgba(0, 0, 0, 0.87)",
+                    "color": "rgba(28, 27, 31, 1)",
                   },
                   undefined,
                 ],
@@ -343,7 +337,7 @@ exports[`renders list accordion with children 1`] = `
                   "backgroundColor": "transparent",
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
+                  "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
               ]
@@ -363,7 +357,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "#f6f6f6",
+        "backgroundColor": "rgba(255, 251, 254, 1)",
       }
     }
   >
@@ -425,9 +419,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
             style={
               Array [
                 Object {
-                  "color": "#000000",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
+                  "color": "rgba(28, 27, 31, 1)",
                 },
                 Object {
                   "textAlign": "left",
@@ -437,7 +429,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
                     "fontSize": 16,
                   },
                   Object {
-                    "color": "rgba(0, 0, 0, 0.87)",
+                    "color": "rgba(28, 27, 31, 1)",
                   },
                   Object {
                     "color": "#f44336",
@@ -454,9 +446,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
             style={
               Array [
                 Object {
-                  "color": "#000000",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
+                  "color": "rgba(28, 27, 31, 1)",
                 },
                 Object {
                   "textAlign": "left",
@@ -466,7 +456,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
                     "fontSize": 14,
                   },
                   Object {
-                    "color": "rgba(0, 0, 0, 0.54)",
+                    "color": "rgba(73, 69, 79, 1)",
                   },
                   Object {
                     "color": "#f44336",
@@ -503,7 +493,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
                   "backgroundColor": "transparent",
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
+                  "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
               ]
@@ -523,7 +513,7 @@ exports[`renders list accordion with left items 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "#f6f6f6",
+        "backgroundColor": "rgba(255, 251, 254, 1)",
       }
     }
   >
@@ -592,7 +582,7 @@ exports[`renders list accordion with left items 1`] = `
                   "backgroundColor": "transparent",
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, 0.54)",
+                  "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
               ]
@@ -620,9 +610,7 @@ exports[`renders list accordion with left items 1`] = `
             style={
               Array [
                 Object {
-                  "color": "#000000",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
+                  "color": "rgba(28, 27, 31, 1)",
                 },
                 Object {
                   "textAlign": "left",
@@ -632,7 +620,7 @@ exports[`renders list accordion with left items 1`] = `
                     "fontSize": 16,
                   },
                   Object {
-                    "color": "rgba(0, 0, 0, 0.87)",
+                    "color": "rgba(28, 27, 31, 1)",
                   },
                   undefined,
                 ],
@@ -663,7 +651,7 @@ exports[`renders list accordion with left items 1`] = `
                   "backgroundColor": "transparent",
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
+                  "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
               ]
@@ -683,7 +671,7 @@ exports[`renders multiline list accordion 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "#f6f6f6",
+        "backgroundColor": "rgba(255, 251, 254, 1)",
       }
     }
   >
@@ -745,9 +733,7 @@ exports[`renders multiline list accordion 1`] = `
             style={
               Array [
                 Object {
-                  "color": "#000000",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
+                  "color": "rgba(28, 27, 31, 1)",
                 },
                 Object {
                   "textAlign": "left",
@@ -757,7 +743,7 @@ exports[`renders multiline list accordion 1`] = `
                     "fontSize": 16,
                   },
                   Object {
-                    "color": "rgba(0, 0, 0, 0.87)",
+                    "color": "rgba(28, 27, 31, 1)",
                   },
                   undefined,
                 ],
@@ -772,9 +758,7 @@ exports[`renders multiline list accordion 1`] = `
             style={
               Array [
                 Object {
-                  "color": "#000000",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
+                  "color": "rgba(28, 27, 31, 1)",
                 },
                 Object {
                   "textAlign": "left",
@@ -784,7 +768,7 @@ exports[`renders multiline list accordion 1`] = `
                     "fontSize": 14,
                   },
                   Object {
-                    "color": "rgba(0, 0, 0, 0.54)",
+                    "color": "rgba(73, 69, 79, 1)",
                   },
                   undefined,
                 ],
@@ -819,7 +803,7 @@ exports[`renders multiline list accordion 1`] = `
                   "backgroundColor": "transparent",
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
+                  "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
               ]

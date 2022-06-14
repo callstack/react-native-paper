@@ -284,7 +284,7 @@ exports[`renders hidden indicator 1`] = `
               <View
                 style={
                   Object {
-                    "borderColor": "#6200ee",
+                    "borderColor": "rgba(103, 80, 164, 1)",
                     "borderRadius": 12,
                     "borderWidth": 2.4,
                     "height": 24,
@@ -363,7 +363,7 @@ exports[`renders hidden indicator 1`] = `
               <View
                 style={
                   Object {
-                    "borderColor": "#6200ee",
+                    "borderColor": "rgba(103, 80, 164, 1)",
                     "borderRadius": 12,
                     "borderWidth": 2.4,
                     "height": 24,
@@ -474,7 +474,7 @@ exports[`renders indicator 1`] = `
               <View
                 style={
                   Object {
-                    "borderColor": "#6200ee",
+                    "borderColor": "rgba(103, 80, 164, 1)",
                     "borderRadius": 12,
                     "borderWidth": 2.4,
                     "height": 24,
@@ -553,7 +553,7 @@ exports[`renders indicator 1`] = `
               <View
                 style={
                   Object {
-                    "borderColor": "#6200ee",
+                    "borderColor": "rgba(103, 80, 164, 1)",
                     "borderRadius": 12,
                     "borderWidth": 2.4,
                     "height": 24,
@@ -664,7 +664,7 @@ exports[`renders large indicator 1`] = `
               <View
                 style={
                   Object {
-                    "borderColor": "#6200ee",
+                    "borderColor": "rgba(103, 80, 164, 1)",
                     "borderRadius": 24,
                     "borderWidth": 4.8,
                     "height": 48,
@@ -743,7 +743,7 @@ exports[`renders large indicator 1`] = `
               <View
                 style={
                   Object {
-                    "borderColor": "#6200ee",
+                    "borderColor": "rgba(103, 80, 164, 1)",
                     "borderRadius": 24,
                     "borderWidth": 4.8,
                     "height": 48,

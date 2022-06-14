@@ -4,191 +4,229 @@ exports[`renders chip with close button 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": "#ebebeb",
-      "borderColor": "#ebebeb",
-      "borderRadius": 16,
-      "borderStyle": "solid",
-      "borderWidth": 0.5,
-      "elevation": 0,
-      "flexDirection": "column",
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0,
+      "shadowRadius": 0,
     }
   }
 >
   <View
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-        "selected": false,
-      }
-    }
-    accessible={true}
-    focusable={false}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "overflow": "hidden",
+      Object {
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 0,
+          "width": 0,
         },
-        Array [
-          Object {
-            "borderRadius": 16,
-          },
-          Object {
-            "flexGrow": 1,
-          },
-        ],
-      ]
+        "shadowOpacity": 0,
+        "shadowRadius": 0,
+      }
     }
   >
     <View
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "flexGrow": 1,
-            "paddingLeft": 4,
-            "position": "relative",
-          },
-          false,
-          Object {
-            "paddingRight": 32,
-          },
-        ]
+        Object {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderRadius": 8,
+          "borderStyle": "solid",
+          "borderWidth": 0,
+          "flexDirection": "column",
+        }
       }
     >
       <View
-        style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "padding": 4,
-            },
-            false,
-            null,
-          ]
-        }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
-          style={
-            Array [
-              Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "fontSize": 18,
-              },
-            ]
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+            "selected": false,
           }
-        >
-          □
-        </Text>
-      </View>
-      <Text
-        numberOfLines={1}
-        selectable={false}
+        }
+        accessible={true}
+        focusable={false}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
           Array [
             Object {
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontWeight": "400",
-            },
-            Object {
-              "textAlign": "left",
+              "overflow": "hidden",
             },
             Array [
               Object {
-                "lineHeight": 24,
-                "marginVertical": 4,
-                "minHeight": 24,
-                "textAlignVertical": "center",
+                "borderRadius": 8,
               },
               Object {
-                "color": "rgba(0, 0, 0, 0.87)",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "flexGrow": 1,
               },
-              Object {
-                "marginLeft": 4,
-                "marginRight": 0,
-              },
-              undefined,
             ],
           ]
         }
       >
-        Example Chip
-      </Text>
-    </View>
-  </View>
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "height": "100%",
-        "justifyContent": "center",
-        "position": "absolute",
-        "right": 0,
-      }
-    }
-  >
-    <View
-      accessibilityLabel="Close"
-      accessibilityRole="button"
-      accessible={true}
-      focusable={true}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "padding": 4,
-          },
-          Object {
-            "marginRight": 4,
-          },
-          false,
-        ]
-      }
-    >
-      <Text
-        accessibilityElementsHidden={true}
-        importantForAccessibility="no-hide-descendants"
-        pointerEvents="none"
-        selectable={false}
+        <View
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "flexGrow": 1,
+                "paddingLeft": 4,
+                "position": "relative",
+              },
+              Object {
+                "paddingLeft": 0,
+              },
+              Object {
+                "paddingRight": 34,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignSelf": "center",
+                  "padding": 4,
+                },
+                Object {
+                  "paddingLeft": 8,
+                  "paddingRight": 0,
+                },
+                null,
+              ]
+            }
+          >
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  Object {
+                    "color": "rgba(103, 80, 164, 1)",
+                    "fontSize": 18,
+                  },
+                ]
+              }
+            >
+              □
+            </Text>
+          </View>
+          <Text
+            numberOfLines={1}
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "rgba(28, 27, 31, 1)",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                Object {
+                  "textAlign": "left",
+                },
+                Object {
+                  "writingDirection": "ltr",
+                },
+                Array [
+                  Object {
+                    "lineHeight": 24,
+                    "marginVertical": 4,
+                    "minHeight": 24,
+                    "textAlignVertical": "center",
+                  },
+                  Object {
+                    "color": "rgba(29, 25, 43, 1)",
+                  },
+                  Object {
+                    "marginLeft": 8,
+                    "marginRight": 0,
+                  },
+                  undefined,
+                ],
+              ]
+            }
+          >
+            Example Chip
+          </Text>
+        </View>
+      </View>
+      <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "transparent",
-            },
-            Object {
-              "color": "rgba(0, 0, 0, 0.54)",
-              "fontSize": 16,
-            },
-          ]
+          Object {
+            "alignItems": "center",
+            "height": "100%",
+            "justifyContent": "center",
+            "position": "absolute",
+            "right": 0,
+          }
         }
       >
-        □
-      </Text>
+        <View
+          accessibilityLabel="Close"
+          accessibilityRole="button"
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "alignSelf": "center",
+                "padding": 4,
+              },
+              Object {
+                "marginRight": 4,
+              },
+              Object {
+                "marginRight": 8,
+                "padding": 0,
+              },
+            ]
+          }
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                },
+                Object {
+                  "color": "rgba(29, 25, 43, 1)",
+                  "fontSize": 18,
+                },
+              ]
+            }
+          >
+            □
+          </Text>
+        </View>
+      </View>
     </View>
   </View>
 </View>
@@ -198,191 +236,229 @@ exports[`renders chip with custom close button 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": "#ebebeb",
-      "borderColor": "#ebebeb",
-      "borderRadius": 16,
-      "borderStyle": "solid",
-      "borderWidth": 0.5,
-      "elevation": 0,
-      "flexDirection": "column",
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0,
+      "shadowRadius": 0,
     }
   }
 >
   <View
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-        "selected": false,
-      }
-    }
-    accessible={true}
-    focusable={false}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "overflow": "hidden",
+      Object {
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 0,
+          "width": 0,
         },
-        Array [
-          Object {
-            "borderRadius": 16,
-          },
-          Object {
-            "flexGrow": 1,
-          },
-        ],
-      ]
+        "shadowOpacity": 0,
+        "shadowRadius": 0,
+      }
     }
   >
     <View
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "flexGrow": 1,
-            "paddingLeft": 4,
-            "position": "relative",
-          },
-          false,
-          Object {
-            "paddingRight": 32,
-          },
-        ]
+        Object {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderRadius": 8,
+          "borderStyle": "solid",
+          "borderWidth": 0,
+          "flexDirection": "column",
+        }
       }
     >
       <View
-        style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "padding": 4,
-            },
-            false,
-            null,
-          ]
-        }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
-          style={
-            Array [
-              Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "fontSize": 18,
-              },
-            ]
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+            "selected": false,
           }
-        >
-          □
-        </Text>
-      </View>
-      <Text
-        numberOfLines={1}
-        selectable={false}
+        }
+        accessible={true}
+        focusable={false}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
           Array [
             Object {
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontWeight": "400",
-            },
-            Object {
-              "textAlign": "left",
+              "overflow": "hidden",
             },
             Array [
               Object {
-                "lineHeight": 24,
-                "marginVertical": 4,
-                "minHeight": 24,
-                "textAlignVertical": "center",
+                "borderRadius": 8,
               },
               Object {
-                "color": "rgba(0, 0, 0, 0.87)",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "flexGrow": 1,
               },
-              Object {
-                "marginLeft": 4,
-                "marginRight": 0,
-              },
-              undefined,
             ],
           ]
         }
       >
-        Example Chip
-      </Text>
-    </View>
-  </View>
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "height": "100%",
-        "justifyContent": "center",
-        "position": "absolute",
-        "right": 0,
-      }
-    }
-  >
-    <View
-      accessibilityLabel="Close"
-      accessibilityRole="button"
-      accessible={true}
-      focusable={true}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Array [
-          Object {
-            "alignSelf": "center",
-            "padding": 4,
-          },
-          Object {
-            "marginRight": 4,
-          },
-          false,
-        ]
-      }
-    >
-      <Text
-        accessibilityElementsHidden={true}
-        importantForAccessibility="no-hide-descendants"
-        pointerEvents="none"
-        selectable={false}
+        <View
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "flexGrow": 1,
+                "paddingLeft": 4,
+                "position": "relative",
+              },
+              Object {
+                "paddingLeft": 0,
+              },
+              Object {
+                "paddingRight": 34,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignSelf": "center",
+                  "padding": 4,
+                },
+                Object {
+                  "paddingLeft": 8,
+                  "paddingRight": 0,
+                },
+                null,
+              ]
+            }
+          >
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  Object {
+                    "color": "rgba(103, 80, 164, 1)",
+                    "fontSize": 18,
+                  },
+                ]
+              }
+            >
+              □
+            </Text>
+          </View>
+          <Text
+            numberOfLines={1}
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "rgba(28, 27, 31, 1)",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                Object {
+                  "textAlign": "left",
+                },
+                Object {
+                  "writingDirection": "ltr",
+                },
+                Array [
+                  Object {
+                    "lineHeight": 24,
+                    "marginVertical": 4,
+                    "minHeight": 24,
+                    "textAlignVertical": "center",
+                  },
+                  Object {
+                    "color": "rgba(29, 25, 43, 1)",
+                  },
+                  Object {
+                    "marginLeft": 8,
+                    "marginRight": 0,
+                  },
+                  undefined,
+                ],
+              ]
+            }
+          >
+            Example Chip
+          </Text>
+        </View>
+      </View>
+      <View
         style={
-          Array [
-            Object {
-              "backgroundColor": "transparent",
-            },
-            Object {
-              "color": "rgba(0, 0, 0, 0.54)",
-              "fontSize": 16,
-            },
-          ]
+          Object {
+            "alignItems": "center",
+            "height": "100%",
+            "justifyContent": "center",
+            "position": "absolute",
+            "right": 0,
+          }
         }
       >
-        □
-      </Text>
+        <View
+          accessibilityLabel="Close"
+          accessibilityRole="button"
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "alignSelf": "center",
+                "padding": 4,
+              },
+              Object {
+                "marginRight": 4,
+              },
+              Object {
+                "marginRight": 8,
+                "padding": 0,
+              },
+            ]
+          }
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                },
+                Object {
+                  "color": "rgba(29, 25, 43, 1)",
+                  "fontSize": 18,
+                },
+              ]
+            }
+          >
+            □
+          </Text>
+        </View>
+      </View>
     </View>
   </View>
 </View>
@@ -392,134 +468,169 @@ exports[`renders chip with icon 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": "#ebebeb",
-      "borderColor": "#ebebeb",
-      "borderRadius": 16,
-      "borderStyle": "solid",
-      "borderWidth": 0.5,
-      "elevation": 0,
-      "flexDirection": "column",
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0,
+      "shadowRadius": 0,
     }
   }
 >
   <View
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-        "selected": false,
-      }
-    }
-    accessible={true}
-    focusable={false}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "overflow": "hidden",
+      Object {
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 0,
+          "width": 0,
         },
-        Array [
-          Object {
-            "borderRadius": 16,
-          },
-          Object {
-            "flexGrow": 1,
-          },
-        ],
-      ]
+        "shadowOpacity": 0,
+        "shadowRadius": 0,
+      }
     }
   >
     <View
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "flexGrow": 1,
-            "paddingLeft": 4,
-            "position": "relative",
-          },
-          false,
-          Object {
-            "paddingRight": 4,
-          },
-        ]
+        Object {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderRadius": 8,
+          "borderStyle": "solid",
+          "borderWidth": 0,
+          "flexDirection": "column",
+        }
       }
     >
       <View
-        style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "padding": 4,
-            },
-            false,
-            null,
-          ]
-        }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
-          style={
-            Array [
-              Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "fontSize": 18,
-              },
-            ]
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+            "selected": false,
           }
-        >
-          □
-        </Text>
-      </View>
-      <Text
-        numberOfLines={1}
-        selectable={false}
+        }
+        accessible={true}
+        focusable={false}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
           Array [
             Object {
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontWeight": "400",
-            },
-            Object {
-              "textAlign": "left",
+              "overflow": "hidden",
             },
             Array [
               Object {
-                "lineHeight": 24,
-                "marginVertical": 4,
-                "minHeight": 24,
-                "textAlignVertical": "center",
+                "borderRadius": 8,
               },
               Object {
-                "color": "rgba(0, 0, 0, 0.87)",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "flexGrow": 1,
               },
-              Object {
-                "marginLeft": 4,
-                "marginRight": 8,
-              },
-              undefined,
             ],
           ]
         }
       >
-        Example Chip
-      </Text>
+        <View
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "flexGrow": 1,
+                "paddingLeft": 4,
+                "position": "relative",
+              },
+              Object {
+                "paddingLeft": 0,
+              },
+              Object {
+                "paddingRight": 0,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignSelf": "center",
+                  "padding": 4,
+                },
+                Object {
+                  "paddingLeft": 8,
+                  "paddingRight": 0,
+                },
+                null,
+              ]
+            }
+          >
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  Object {
+                    "color": "rgba(103, 80, 164, 1)",
+                    "fontSize": 18,
+                  },
+                ]
+              }
+            >
+              □
+            </Text>
+          </View>
+          <Text
+            numberOfLines={1}
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "rgba(28, 27, 31, 1)",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                Object {
+                  "textAlign": "left",
+                },
+                Object {
+                  "writingDirection": "ltr",
+                },
+                Array [
+                  Object {
+                    "lineHeight": 24,
+                    "marginVertical": 4,
+                    "minHeight": 24,
+                    "textAlignVertical": "center",
+                  },
+                  Object {
+                    "color": "rgba(29, 25, 43, 1)",
+                  },
+                  Object {
+                    "marginLeft": 8,
+                    "marginRight": 16,
+                  },
+                  undefined,
+                ],
+              ]
+            }
+          >
+            Example Chip
+          </Text>
+        </View>
+      </View>
     </View>
   </View>
 </View>
@@ -529,102 +640,134 @@ exports[`renders chip with onPress 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": "#ebebeb",
-      "borderColor": "#ebebeb",
-      "borderRadius": 16,
-      "borderStyle": "solid",
-      "borderWidth": 0.5,
-      "elevation": 0,
-      "flexDirection": "column",
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0,
+      "shadowRadius": 0,
     }
   }
 >
   <View
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-        "selected": false,
-      }
-    }
-    accessible={true}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "overflow": "hidden",
+      Object {
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 0,
+          "width": 0,
         },
-        Array [
-          Object {
-            "borderRadius": 16,
-          },
-          Object {
-            "flexGrow": 1,
-          },
-        ],
-      ]
+        "shadowOpacity": 0,
+        "shadowRadius": 0,
+      }
     }
   >
     <View
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "flexGrow": 1,
-            "paddingLeft": 4,
-            "position": "relative",
-          },
-          false,
-          Object {
-            "paddingRight": 4,
-          },
-        ]
+        Object {
+          "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderRadius": 8,
+          "borderStyle": "solid",
+          "borderWidth": 0,
+          "flexDirection": "column",
+        }
       }
     >
-      <Text
-        numberOfLines={1}
-        selectable={false}
+      <View
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+            "selected": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
           Array [
             Object {
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontWeight": "400",
-            },
-            Object {
-              "textAlign": "left",
+              "overflow": "hidden",
             },
             Array [
               Object {
-                "lineHeight": 24,
-                "marginVertical": 4,
-                "minHeight": 24,
-                "textAlignVertical": "center",
+                "borderRadius": 8,
               },
               Object {
-                "color": "rgba(0, 0, 0, 0.87)",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "flexGrow": 1,
               },
-              Object {
-                "marginLeft": 8,
-                "marginRight": 8,
-              },
-              undefined,
             ],
           ]
         }
       >
-        Example Chip
-      </Text>
+        <View
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "flexGrow": 1,
+                "paddingLeft": 4,
+                "position": "relative",
+              },
+              Object {
+                "paddingLeft": 0,
+              },
+              Object {
+                "paddingRight": 0,
+              },
+            ]
+          }
+        >
+          <Text
+            numberOfLines={1}
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "rgba(28, 27, 31, 1)",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                Object {
+                  "textAlign": "left",
+                },
+                Object {
+                  "writingDirection": "ltr",
+                },
+                Array [
+                  Object {
+                    "lineHeight": 24,
+                    "marginVertical": 4,
+                    "minHeight": 24,
+                    "textAlignVertical": "center",
+                  },
+                  Object {
+                    "color": "rgba(29, 25, 43, 1)",
+                  },
+                  Object {
+                    "marginLeft": 16,
+                    "marginRight": 16,
+                  },
+                  undefined,
+                ],
+              ]
+            }
+          >
+            Example Chip
+          </Text>
+        </View>
+      </View>
     </View>
   </View>
 </View>
@@ -634,102 +777,134 @@ exports[`renders outlined disabled chip 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": "#ffffff",
-      "borderColor": "rgba(0, 0, 0, 0.29)",
-      "borderRadius": 16,
-      "borderStyle": "solid",
-      "borderWidth": 0.5,
-      "elevation": 0,
-      "flexDirection": "column",
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0,
+      "shadowRadius": 0,
     }
   }
 >
   <View
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": true,
-        "selected": false,
-      }
-    }
-    accessible={true}
-    focusable={false}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "overflow": "hidden",
+      Object {
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 0,
+          "width": 0,
         },
-        Array [
-          Object {
-            "borderRadius": 16,
-          },
-          Object {
-            "flexGrow": 1,
-          },
-        ],
-      ]
+        "shadowOpacity": 0,
+        "shadowRadius": 0,
+      }
     }
   >
     <View
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "flexGrow": 1,
-            "paddingLeft": 4,
-            "position": "relative",
-          },
-          false,
-          Object {
-            "paddingRight": 4,
-          },
-        ]
+        Object {
+          "backgroundColor": "transparent",
+          "borderColor": "rgba(73, 69, 79, 0.12)",
+          "borderRadius": 8,
+          "borderStyle": "solid",
+          "borderWidth": 1,
+          "flexDirection": "column",
+        }
       }
     >
-      <Text
-        numberOfLines={1}
-        selectable={false}
+      <View
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": true,
+            "selected": false,
+          }
+        }
+        accessible={true}
+        focusable={false}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
           Array [
             Object {
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontWeight": "400",
-            },
-            Object {
-              "textAlign": "left",
+              "overflow": "hidden",
             },
             Array [
               Object {
-                "lineHeight": 24,
-                "marginVertical": 4,
-                "minHeight": 24,
-                "textAlignVertical": "center",
+                "borderRadius": 8,
               },
               Object {
-                "color": "rgba(0, 0, 0, 0.26)",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "flexGrow": 1,
               },
-              Object {
-                "marginLeft": 8,
-                "marginRight": 8,
-              },
-              undefined,
             ],
           ]
         }
       >
-        Example Chip
-      </Text>
+        <View
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "flexGrow": 1,
+                "paddingLeft": 4,
+                "position": "relative",
+              },
+              Object {
+                "paddingLeft": 0,
+              },
+              Object {
+                "paddingRight": 0,
+              },
+            ]
+          }
+        >
+          <Text
+            numberOfLines={1}
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "rgba(28, 27, 31, 1)",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                Object {
+                  "textAlign": "left",
+                },
+                Object {
+                  "writingDirection": "ltr",
+                },
+                Array [
+                  Object {
+                    "lineHeight": 24,
+                    "marginVertical": 4,
+                    "minHeight": 24,
+                    "textAlignVertical": "center",
+                  },
+                  Object {
+                    "color": "rgba(28, 27, 31, 0.38)",
+                  },
+                  Object {
+                    "marginLeft": 16,
+                    "marginRight": 16,
+                  },
+                  undefined,
+                ],
+              ]
+            }
+          >
+            Example Chip
+          </Text>
+        </View>
+      </View>
     </View>
   </View>
 </View>
@@ -739,134 +914,169 @@ exports[`renders selected chip 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": "rgb(188, 188, 188)",
-      "borderColor": "#ebebeb",
-      "borderRadius": 16,
-      "borderStyle": "solid",
-      "borderWidth": 0.5,
-      "elevation": 0,
-      "flexDirection": "column",
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0,
+      "shadowRadius": 0,
     }
   }
 >
   <View
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-        "selected": true,
-      }
-    }
-    accessible={true}
-    focusable={false}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "overflow": "hidden",
+      Object {
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 0,
+          "width": 0,
         },
-        Array [
-          Object {
-            "borderRadius": 16,
-          },
-          Object {
-            "flexGrow": 1,
-          },
-        ],
-      ]
+        "shadowOpacity": 0,
+        "shadowRadius": 0,
+      }
     }
   >
     <View
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "flexGrow": 1,
-            "paddingLeft": 4,
-            "position": "relative",
-          },
-          false,
-          Object {
-            "paddingRight": 4,
-          },
-        ]
+        Object {
+          "backgroundColor": "rgb(232, 222, 248)",
+          "borderColor": "rgba(121, 116, 126, 1)",
+          "borderRadius": 8,
+          "borderStyle": "solid",
+          "borderWidth": 0,
+          "flexDirection": "column",
+        }
       }
     >
       <View
-        style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "padding": 4,
-            },
-            false,
-            null,
-          ]
-        }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
-          style={
-            Array [
-              Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "fontSize": 18,
-              },
-            ]
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+            "selected": true,
           }
-        >
-          □
-        </Text>
-      </View>
-      <Text
-        numberOfLines={1}
-        selectable={false}
+        }
+        accessible={true}
+        focusable={false}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
           Array [
             Object {
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontWeight": "400",
-            },
-            Object {
-              "textAlign": "left",
+              "overflow": "hidden",
             },
             Array [
               Object {
-                "lineHeight": 24,
-                "marginVertical": 4,
-                "minHeight": 24,
-                "textAlignVertical": "center",
+                "borderRadius": 8,
               },
               Object {
-                "color": "rgba(0, 0, 0, 0.87)",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "flexGrow": 1,
               },
-              Object {
-                "marginLeft": 4,
-                "marginRight": 8,
-              },
-              undefined,
             ],
           ]
         }
       >
-        Example Chip
-      </Text>
+        <View
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "flexGrow": 1,
+                "paddingLeft": 4,
+                "position": "relative",
+              },
+              Object {
+                "paddingLeft": 0,
+              },
+              Object {
+                "paddingRight": 0,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignSelf": "center",
+                  "padding": 4,
+                },
+                Object {
+                  "paddingLeft": 8,
+                  "paddingRight": 0,
+                },
+                null,
+              ]
+            }
+          >
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  Object {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontSize": 18,
+                  },
+                ]
+              }
+            >
+              □
+            </Text>
+          </View>
+          <Text
+            numberOfLines={1}
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "rgba(28, 27, 31, 1)",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                Object {
+                  "textAlign": "left",
+                },
+                Object {
+                  "writingDirection": "ltr",
+                },
+                Array [
+                  Object {
+                    "lineHeight": 24,
+                    "marginVertical": 4,
+                    "minHeight": 24,
+                    "textAlignVertical": "center",
+                  },
+                  Object {
+                    "color": "rgba(29, 25, 43, 1)",
+                  },
+                  Object {
+                    "marginLeft": 8,
+                    "marginRight": 16,
+                  },
+                  undefined,
+                ],
+              ]
+            }
+          >
+            Example Chip
+          </Text>
+        </View>
+      </View>
     </View>
   </View>
 </View>

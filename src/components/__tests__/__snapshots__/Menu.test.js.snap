@@ -7,14 +7,7 @@ exports[`renders menu with content styles 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "transparent",
-        "borderColor": "rgba(0, 0, 0, 0.29)",
-        "borderRadius": 4,
-        "borderStyle": "solid",
-        "borderWidth": 0.5,
-        "elevation": 0,
-        "minWidth": 64,
-        "shadowColor": "#000000",
+        "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
           "width": 0,
@@ -25,83 +18,117 @@ exports[`renders menu with content styles 1`] = `
     }
   >
     <View
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "disabled": undefined,
-        }
-      }
-      accessible={true}
-      focusable={false}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
+        Object {
+          "shadowColor": "#000",
+          "shadowOffset": Object {
+            "height": 0,
+            "width": 0,
           },
-          Object {
-            "borderRadius": 4,
-          },
-        ]
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        }
       }
     >
       <View
         style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-            },
-            undefined,
-          ]
+          Object {
+            "backgroundColor": "transparent",
+            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderRadius": 20,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "minWidth": 64,
+          }
         }
       >
-        <Text
-          numberOfLines={1}
-          selectable={false}
+        <View
+          accessibilityRole="button"
+          accessibilityState={
+            Object {
+              "disabled": undefined,
+            }
+          }
+          accessible={true}
+          focusable={false}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
               Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "overflow": "hidden",
               },
               Object {
-                "textAlign": "left",
+                "borderRadius": 20,
               },
-              Array [
-                Object {
-                  "marginHorizontal": 16,
-                  "marginVertical": 9,
-                  "textAlign": "center",
-                },
-                Object {
-                  "letterSpacing": 1,
-                },
-                false,
-                undefined,
-                Object {
-                  "textTransform": "uppercase",
-                },
-                Object {
-                  "color": "#6200ee",
-                  "fontFamily": "System",
-                  "fontWeight": "500",
-                },
-                undefined,
-              ],
             ]
           }
         >
-          Open menu
-        </Text>
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                },
+                undefined,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "color": "rgba(28, 27, 31, 1)",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  Object {
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "writingDirection": "ltr",
+                  },
+                  Array [
+                    Object {
+                      "marginHorizontal": 16,
+                      "marginVertical": 9,
+                      "textAlign": "center",
+                    },
+                    false,
+                    Object {
+                      "marginHorizontal": 24,
+                      "marginVertical": 10,
+                    },
+                    undefined,
+                    false,
+                    Object {
+                      "color": "rgba(103, 80, 164, 1)",
+                      "fontFamily": "System",
+                      "fontSize": 14,
+                      "fontWeight": "500",
+                      "letterSpacing": 0.1,
+                      "lineHeight": 20,
+                    },
+                    undefined,
+                  ],
+                ]
+              }
+            >
+              Open menu
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
   </View>
@@ -115,14 +142,7 @@ exports[`renders not visible menu 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "transparent",
-        "borderColor": "rgba(0, 0, 0, 0.29)",
-        "borderRadius": 4,
-        "borderStyle": "solid",
-        "borderWidth": 0.5,
-        "elevation": 0,
-        "minWidth": 64,
-        "shadowColor": "#000000",
+        "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
           "width": 0,
@@ -133,83 +153,117 @@ exports[`renders not visible menu 1`] = `
     }
   >
     <View
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "disabled": undefined,
-        }
-      }
-      accessible={true}
-      focusable={false}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
+        Object {
+          "shadowColor": "#000",
+          "shadowOffset": Object {
+            "height": 0,
+            "width": 0,
           },
-          Object {
-            "borderRadius": 4,
-          },
-        ]
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        }
       }
     >
       <View
         style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-            },
-            undefined,
-          ]
+          Object {
+            "backgroundColor": "transparent",
+            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderRadius": 20,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "minWidth": 64,
+          }
         }
       >
-        <Text
-          numberOfLines={1}
-          selectable={false}
+        <View
+          accessibilityRole="button"
+          accessibilityState={
+            Object {
+              "disabled": undefined,
+            }
+          }
+          accessible={true}
+          focusable={false}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
               Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "overflow": "hidden",
               },
               Object {
-                "textAlign": "left",
+                "borderRadius": 20,
               },
-              Array [
-                Object {
-                  "marginHorizontal": 16,
-                  "marginVertical": 9,
-                  "textAlign": "center",
-                },
-                Object {
-                  "letterSpacing": 1,
-                },
-                false,
-                undefined,
-                Object {
-                  "textTransform": "uppercase",
-                },
-                Object {
-                  "color": "#6200ee",
-                  "fontFamily": "System",
-                  "fontWeight": "500",
-                },
-                undefined,
-              ],
             ]
           }
         >
-          Open menu
-        </Text>
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                },
+                undefined,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "color": "rgba(28, 27, 31, 1)",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  Object {
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "writingDirection": "ltr",
+                  },
+                  Array [
+                    Object {
+                      "marginHorizontal": 16,
+                      "marginVertical": 9,
+                      "textAlign": "center",
+                    },
+                    false,
+                    Object {
+                      "marginHorizontal": 24,
+                      "marginVertical": 10,
+                    },
+                    undefined,
+                    false,
+                    Object {
+                      "color": "rgba(103, 80, 164, 1)",
+                      "fontFamily": "System",
+                      "fontSize": 14,
+                      "fontWeight": "500",
+                      "letterSpacing": 0.1,
+                      "lineHeight": 20,
+                    },
+                    undefined,
+                  ],
+                ]
+              }
+            >
+              Open menu
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
   </View>
@@ -223,14 +277,7 @@ exports[`renders visible menu 1`] = `
   <View
     style={
       Object {
-        "backgroundColor": "transparent",
-        "borderColor": "rgba(0, 0, 0, 0.29)",
-        "borderRadius": 4,
-        "borderStyle": "solid",
-        "borderWidth": 0.5,
-        "elevation": 0,
-        "minWidth": 64,
-        "shadowColor": "#000000",
+        "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
           "width": 0,
@@ -241,83 +288,117 @@ exports[`renders visible menu 1`] = `
     }
   >
     <View
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "disabled": undefined,
-        }
-      }
-      accessible={true}
-      focusable={false}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
+        Object {
+          "shadowColor": "#000",
+          "shadowOffset": Object {
+            "height": 0,
+            "width": 0,
           },
-          Object {
-            "borderRadius": 4,
-          },
-        ]
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+        }
       }
     >
       <View
         style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-            },
-            undefined,
-          ]
+          Object {
+            "backgroundColor": "transparent",
+            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderRadius": 20,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "minWidth": 64,
+          }
         }
       >
-        <Text
-          numberOfLines={1}
-          selectable={false}
+        <View
+          accessibilityRole="button"
+          accessibilityState={
+            Object {
+              "disabled": undefined,
+            }
+          }
+          accessible={true}
+          focusable={false}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Array [
               Object {
-                "color": "#000000",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "overflow": "hidden",
               },
               Object {
-                "textAlign": "left",
+                "borderRadius": 20,
               },
-              Array [
-                Object {
-                  "marginHorizontal": 16,
-                  "marginVertical": 9,
-                  "textAlign": "center",
-                },
-                Object {
-                  "letterSpacing": 1,
-                },
-                false,
-                undefined,
-                Object {
-                  "textTransform": "uppercase",
-                },
-                Object {
-                  "color": "#6200ee",
-                  "fontFamily": "System",
-                  "fontWeight": "500",
-                },
-                undefined,
-              ],
             ]
           }
         >
-          Open menu
-        </Text>
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                },
+                undefined,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "color": "rgba(28, 27, 31, 1)",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  Object {
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "writingDirection": "ltr",
+                  },
+                  Array [
+                    Object {
+                      "marginHorizontal": 16,
+                      "marginVertical": 9,
+                      "textAlign": "center",
+                    },
+                    false,
+                    Object {
+                      "marginHorizontal": 24,
+                      "marginVertical": 10,
+                    },
+                    undefined,
+                    false,
+                    Object {
+                      "color": "rgba(103, 80, 164, 1)",
+                      "fontFamily": "System",
+                      "fontSize": 14,
+                      "fontWeight": "500",
+                      "letterSpacing": 0.1,
+                      "lineHeight": 20,
+                    },
+                    undefined,
+                  ],
+                ]
+              }
+            >
+              Open menu
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
   </View>
