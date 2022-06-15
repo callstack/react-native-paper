@@ -68,8 +68,8 @@ const BottomNavigationExample = () => {
     {
       key: 'purchased',
       title: 'Purchased',
-      focusedIcon: 'shopping-music',
-      ...(!isV3 && { color: '#c51162' }),
+      focusedIcon: 'shopping',
+      ...(isV3 ? { unfocusedIcon: 'shopping-outline' } : { color: '#c51162' }),
     },
   ]);
 
