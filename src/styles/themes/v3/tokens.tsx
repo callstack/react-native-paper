@@ -85,12 +85,14 @@ const ref = {
 
   typeface: {
     brandRegular: Platform.select({
+      web: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
       ios: 'System',
       default: 'sans-serif',
     }),
     weightRegular: '400' as Font['fontWeight'],
 
     plainMedium: Platform.select({
+      web: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
       ios: 'System',
       default: 'sans-serif-medium',
     }),
