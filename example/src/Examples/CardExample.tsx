@@ -12,6 +12,7 @@ import {
 } from 'react-native-paper';
 import { PreferencesContext } from '..';
 import ScreenWrapper from '../ScreenWrapper';
+import { isWeb } from '../../utils';
 
 type Mode = 'elevated' | 'outlined' | 'contained';
 
@@ -121,7 +122,9 @@ const CardExample = () => {
         <Card
           style={styles.card}
           onPress={() => {
-            Alert.alert('The Chameleon is Pressed');
+            isWeb
+              ? alert('The Chameleon is Pressed')
+              : Alert.alert('The Chameleon is Pressed');
           }}
           mode={selectedMode}
         >
@@ -136,7 +139,9 @@ const CardExample = () => {
         <Card
           style={styles.card}
           onLongPress={() => {
-            Alert.alert('The City is Long Pressed');
+            isWeb
+              ? alert('The City is Long Pressed')
+              : Alert.alert('The City is Long Pressed');
           }}
           mode={selectedMode}
         >
