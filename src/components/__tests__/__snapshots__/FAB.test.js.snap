@@ -1,122 +1,143 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders FAB with size prop 1`] = `
+exports[`renders FAB with custom size prop 1`] = `
 <View
-  pointerEvents="auto"
   style={
     Object {
-      "backgroundColor": "#03dac4",
-      "borderRadius": 28,
-      "elevation": 6,
-      "opacity": 1,
-      "shadowColor": "#000000",
+      "shadowColor": "#000",
       "shadowOffset": Object {
-        "height": 5,
+        "height": 4,
         "width": 0,
       },
-      "shadowOpacity": 0.24,
-      "shadowRadius": 6,
-      "transform": Array [
-        Object {
-          "scale": 1,
-        },
-      ],
+      "shadowOpacity": 0.15,
+      "shadowRadius": 8,
     }
   }
 >
   <View
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": undefined,
-      }
-    }
-    accessible={true}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "overflow": "hidden",
+      Object {
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 1,
+          "width": 0,
         },
-        Object {
-          "borderRadius": 28,
-        },
-      ]
+        "shadowOpacity": 0.3,
+        "shadowRadius": 3,
+      }
     }
   >
     <View
-      pointerEvents="none"
+      pointerEvents="auto"
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "justifyContent": "center",
-          },
-          Object {
-            "height": 12,
-            "width": 12,
-          },
-        ]
+        Object {
+          "backgroundColor": "rgba(234, 221, 255, 1)",
+          "borderRadius": 25,
+          "opacity": 1,
+          "transform": Array [
+            Object {
+              "scale": 1,
+            },
+          ],
+        }
       }
     >
       <View
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
           Array [
             Object {
-              "alignItems": "center",
-              "justifyContent": "center",
+              "overflow": "hidden",
             },
             Object {
-              "height": 24,
-              "width": 24,
+              "borderRadius": 25,
             },
           ]
         }
       >
         <View
+          pointerEvents="none"
           style={
-            Object {
-              "bottom": 0,
-              "left": 0,
-              "opacity": 1,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-              "transform": Array [
-                Object {
-                  "rotate": "0deg",
-                },
-              ],
-            }
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "center",
+              },
+              Object {
+                "borderRadius": 25,
+                "height": 100,
+                "width": 100,
+              },
+            ]
           }
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
               Array [
                 Object {
-                  "backgroundColor": "transparent",
+                  "alignItems": "center",
+                  "justifyContent": "center",
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, .54)",
-                  "fontSize": 24,
+                  "height": 50,
+                  "width": 50,
                 },
               ]
             }
           >
-            □
-          </Text>
+            <View
+              style={
+                Object {
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                  "transform": Array [
+                    Object {
+                      "rotate": "0deg",
+                    },
+                  ],
+                }
+              }
+            >
+              <Text
+                accessibilityElementsHidden={true}
+                importantForAccessibility="no-hide-descendants"
+                pointerEvents="none"
+                selectable={false}
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "color": "rgba(33, 0, 93, 1)",
+                      "fontSize": 50,
+                    },
+                  ]
+                }
+              >
+                □
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
     </View>
@@ -596,156 +617,182 @@ exports[`renders extended FAB 1`] = `
 </View>
 `;
 
-exports[`renders extended FAB with size prop 1`] = `
+exports[`renders extended FAB custom size prop 1`] = `
 <View
-  pointerEvents="auto"
   style={
     Object {
-      "backgroundColor": "#03dac4",
-      "borderRadius": 28,
-      "elevation": 6,
-      "opacity": 1,
-      "shadowColor": "#000000",
+      "shadowColor": "#000",
       "shadowOffset": Object {
-        "height": 5,
+        "height": 4,
         "width": 0,
       },
-      "shadowOpacity": 0.24,
-      "shadowRadius": 6,
-      "transform": Array [
-        Object {
-          "scale": 1,
-        },
-      ],
+      "shadowOpacity": 0.15,
+      "shadowRadius": 8,
     }
   }
 >
   <View
-    accessibilityLabel="Add items"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": undefined,
-      }
-    }
-    accessible={true}
-    focusable={true}
-    onClick={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "overflow": "hidden",
+      Object {
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 1,
+          "width": 0,
         },
-        Object {
-          "borderRadius": 28,
-        },
-      ]
+        "shadowOpacity": 0.3,
+        "shadowRadius": 3,
+      }
     }
   >
     <View
-      pointerEvents="none"
+      pointerEvents="auto"
       style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "justifyContent": "center",
-          },
-          Object {
-            "height": 12,
-            "paddingHorizontal": 4,
-          },
-        ]
+        Object {
+          "backgroundColor": "rgba(234, 221, 255, 1)",
+          "borderRadius": 25,
+          "opacity": 1,
+          "transform": Array [
+            Object {
+              "scale": 1,
+            },
+          ],
+        }
       }
     >
       <View
+        accessibilityLabel="Add items"
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
           Array [
             Object {
-              "alignItems": "center",
-              "justifyContent": "center",
+              "overflow": "hidden",
             },
             Object {
-              "height": 24,
-              "width": 24,
+              "borderRadius": 25,
             },
           ]
         }
       >
         <View
+          pointerEvents="none"
           style={
-            Object {
-              "bottom": 0,
-              "left": 0,
-              "opacity": 1,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-              "transform": Array [
-                Object {
-                  "rotate": "0deg",
-                },
-              ],
-            }
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "center",
+              },
+              Object {
+                "height": 100,
+                "paddingHorizontal": 33.333333333333336,
+              },
+            ]
           }
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
               Array [
                 Object {
-                  "backgroundColor": "transparent",
+                  "alignItems": "center",
+                  "justifyContent": "center",
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, .54)",
-                  "fontSize": 24,
+                  "height": 50,
+                  "width": 50,
                 },
               ]
             }
           >
-            □
+            <View
+              style={
+                Object {
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                  "transform": Array [
+                    Object {
+                      "rotate": "0deg",
+                    },
+                  ],
+                }
+              }
+            >
+              <Text
+                accessibilityElementsHidden={true}
+                importantForAccessibility="no-hide-descendants"
+                pointerEvents="none"
+                selectable={false}
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                    Object {
+                      "color": "rgba(33, 0, 93, 1)",
+                      "fontSize": 50,
+                    },
+                  ]
+                }
+              >
+                □
+              </Text>
+            </View>
+          </View>
+          <Text
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "rgba(28, 27, 31, 1)",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                Object {
+                  "textAlign": "left",
+                },
+                Object {
+                  "writingDirection": "ltr",
+                },
+                Array [
+                  Object {
+                    "marginHorizontal": 8,
+                  },
+                  false,
+                  Object {
+                    "color": "rgba(33, 0, 93, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                ],
+              ]
+            }
+          >
+            Add items
           </Text>
         </View>
       </View>
-      <Text
-        selectable={false}
-        style={
-          Array [
-            Object {
-              "color": "#000000",
-              "fontFamily": "System",
-              "fontWeight": "400",
-            },
-            Object {
-              "textAlign": "left",
-            },
-            Array [
-              Object {
-                "marginHorizontal": 8,
-              },
-              Object {
-                "textTransform": "uppercase",
-              },
-              Object {
-                "color": "rgba(0, 0, 0, .54)",
-                "fontFamily": "System",
-                "fontWeight": "500",
-              },
-            ],
-          ]
-        }
-      >
-        Add items
-      </Text>
     </View>
   </View>
 </View>

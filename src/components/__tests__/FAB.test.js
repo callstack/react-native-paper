@@ -39,9 +39,9 @@ it('renders small FAB', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders FAB with size prop', () => {
+it('renders FAB with custom size prop', () => {
   const tree = renderer
-    .create(<FAB size={12} onPress={() => {}} icon="plus" />)
+    .create(<FAB customSize={100} onPress={() => {}} icon="plus" />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -55,9 +55,11 @@ it('renders extended FAB', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders extended FAB with size prop', () => {
+it('renders extended FAB custom size prop', () => {
   const tree = renderer
-    .create(<FAB size={12} onPress={() => {}} icon="plus" label="Add items" />)
+    .create(
+      <FAB customSize={100} onPress={() => {}} icon="plus" label="Add items" />
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();

@@ -92,17 +92,26 @@ const FABExample = () => {
         <FAB
           icon="map"
           style={styles.fab}
-          size={70}
+          customSize={100}
           onPress={() => {}}
           visible={visible}
         />
         <FAB
           icon="map"
-          label="Extended FAB with size"
+          label="Extended FAB with custom size"
           style={styles.fab}
-          size={70}
+          customSize={100}
           onPress={() => {}}
           visible={visible}
+        />
+        <FAB
+          icon="map"
+          label="Loading FAB with custom size"
+          style={styles.fab}
+          customSize={100}
+          onPress={() => {}}
+          visible={visible}
+          loading
         />
         <FAB
           icon="check"
