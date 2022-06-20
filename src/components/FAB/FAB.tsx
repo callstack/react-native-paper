@@ -14,7 +14,7 @@ import Icon, { IconSource } from '../Icon';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
-import { getExtendFabStyle, getFABColors, getFabStyle } from './utils';
+import { getExtendedFabStyle, getFABColors, getFabStyle } from './utils';
 import type { $RemoveChildren, Theme } from '../../types';
 
 type FABSize = 'small' | 'medium' | 'large';
@@ -87,7 +87,9 @@ type Props = $RemoveChildren<typeof Surface> & {
    */
   size?: FABSize;
   /**
-   * Custom size for the `FAB`.
+   * @supported Available in v5.x
+   *
+   * Custom size for the `FAB`. This prop takes precedence over size prop
    */
   customSize?: number;
   /**
@@ -207,7 +209,7 @@ const FAB = ({
   const loadingIndicatorSize = isLargeSize ? 24 : 18;
 
   const fabStyle = getFabStyle({ customSize, size, theme });
-  const extendedStyle = getExtendFabStyle({ customSize, theme });
+  const extendedStyle = getExtendedFabStyle({ customSize, theme });
   const textStyle = {
     color: foregroundColor,
     ...(isV3 ? theme.typescale.labelLarge : theme.fonts.medium),
