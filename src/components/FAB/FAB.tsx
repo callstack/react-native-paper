@@ -82,8 +82,8 @@ type Props = $RemoveChildren<typeof Surface> & {
    *
    * Size of the `FAB`.
    * - `small` - FAB with small height (40).
-   * - `medium` - Appbar with default medium height (56).
-   * - `large` - Appbar with large height (96).
+   * - `medium` - FAB with default medium height (56).
+   * - `large` - FAB with large height (96).
    */
   size?: FABSize;
   /**
