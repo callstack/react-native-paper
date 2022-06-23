@@ -16,7 +16,7 @@ import CardTitle, { CardTitle as _CardTitle } from './CardTitle';
 import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-import { getCardColors } from './helpers';
+import { getCardColors } from './utils';
 
 type OutlinedCardProps = {
   mode: 'outlined';
@@ -190,7 +190,7 @@ const Card = ({
       Animated.timing(elevation, {
         toValue: isPressTypeIn ? (isV3 ? 2 : 8) : cardElevation,
         duration: animationDuration,
-        useNativeDriver: false,
+        useNativeDriver: true,
       }).start();
     }
   };
@@ -215,8 +215,6 @@ const Card = ({
   const { backgroundColor, borderColor } = getCardColors({
     theme,
     mode: cardMode,
-    isAdaptiveMode,
-    elevation,
   });
 
   return (
@@ -224,8 +222,8 @@ const Card = ({
       style={[
         {
           borderRadius: roundness,
-          backgroundColor: backgroundColor as unknown as string,
         },
+        isV3 && { backgroundColor },
         !isV3 && isMode('outlined')
           ? styles.resetElevation
           : {
