@@ -3,8 +3,10 @@ import { Appearance, AccessibilityInfo, View } from 'react-native';
 import { render, act } from 'react-native-testing-library';
 import Provider from '../Provider';
 import { useTheme } from '../theming';
-import DarkTheme from '../../styles/themes/v3/DarkTheme';
-import LightTheme from '../../styles/themes/v3/LightTheme';
+import MD2LightTheme from '../../styles/themes/v2/LightTheme';
+import MD2DarkTheme from '../../styles/themes/v2/DarkTheme';
+import MD3LightTheme from '../../styles/themes/v3/LightTheme';
+import MD3DarkTheme from '../../styles/themes/v3/DarkTheme';
 import { typescale } from '../../styles/themes/v3/tokens';
 
 const mockAppearance = () => {
@@ -65,8 +67,8 @@ const createProvider = (theme) => {
   );
 };
 
-const ExtendedLightTheme = { ...LightTheme, typescale, isV3: true };
-const ExtendedDarkTheme = { ...DarkTheme, typescale, isV3: true };
+const ExtendedLightTheme = { ...MD3LightTheme, typescale, isV3: true };
+const ExtendedDarkTheme = { ...MD3DarkTheme, typescale, isV3: true };
 
 describe('Provider', () => {
   beforeEach(() => {
@@ -181,4 +183,23 @@ describe('Provider', () => {
       customTheme
     );
   });
+
+  it.each`
+    version | colorScheme | expectedTheme
+    ${2}    | ${'light'}  | ${MD2LightTheme}
+    ${2}    | ${'dark'}   | ${MD2DarkTheme}
+    ${3}    | ${'light'}  | ${MD3LightTheme}
+    ${3}    | ${'dark'}   | ${MD3DarkTheme}
+  `(
+    'uses correct theme, $colorScheme mode, version $version',
+    async ({ version, colorScheme, expectedTheme }) => {
+      mockAppearance();
+      Appearance.getColorScheme.mockReturnValue(colorScheme);
+      const { getByTestId } = render(createProvider({ version }));
+
+      expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
+        expectedTheme
+      );
+    }
+  );
 });

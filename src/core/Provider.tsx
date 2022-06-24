@@ -15,7 +15,6 @@ import MD3LightTheme from '../styles/themes/v3/LightTheme';
 import MD3DarkTheme from '../styles/themes/v3/DarkTheme';
 import { addEventListener } from '../utils/addEventListener';
 import type { Theme, ThemeBase } from '../types';
-import { typescale } from '../styles/themes/v3/tokens';
 
 type ThemeProp =
   | ThemeBase
@@ -30,8 +29,12 @@ type Props = {
 };
 
 const Provider = (props: Props) => {
+  const isOnlyVersionInTheme =
+    props.theme && Object.keys(props.theme).length === 1 && props.theme.version;
+
   const colorSchemeName =
-    (!props.theme && Appearance?.getColorScheme()) || 'light';
+    ((!props.theme || isOnlyVersionInTheme) && Appearance?.getColorScheme()) ||
+    'light';
 
   const [reduceMotionEnabled, setReduceMotionEnabled] =
     React.useState<boolean>(false);
@@ -64,13 +67,13 @@ const Provider = (props: Props) => {
 
   React.useEffect(() => {
     let appearanceSubscription: NativeEventSubscription | undefined;
-    if (!props.theme) {
+    if (!props.theme || isOnlyVersionInTheme) {
       appearanceSubscription = Appearance?.addChangeListener(
         handleAppearanceChange
       ) as NativeEventSubscription | undefined;
     }
     return () => {
-      if (!props.theme) {
+      if (!props.theme || isOnlyVersionInTheme) {
         if (appearanceSubscription) {
           appearanceSubscription.remove();
         } else {
@@ -99,11 +102,10 @@ const Provider = (props: Props) => {
     const extendedThemeBase = {
       ...defaultThemeBase,
       ...(props.theme as ThemeBase),
-      version: props.theme?.version || 3,
+      version: themeVersion,
       animation: {
         scale: reduceMotionEnabled ? 0 : 1,
       },
-      typescale,
     };
 
     return {
