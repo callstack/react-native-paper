@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import renderer from 'react-test-renderer';
-import { get } from 'lodash';
 import Menu from '../../Menu/Menu';
 import Appbar from '../../Appbar';
 import AppbarAction from '../../Appbar/AppbarAction';
@@ -11,10 +10,7 @@ import AppbarHeader from '../../Appbar/AppbarHeader';
 import { getAppbarColor, renderAppbarContent } from '../../Appbar/utils';
 import Searchbar from '../../Searchbar';
 import { tokens } from '../../../styles/themes/v3/tokens';
-import MD3LightTheme from '../../../styles/themes/v3/LightTheme';
-import MD2LightTheme from '../../../styles/themes/v2/LightTheme';
-import MD3DarkTheme from '../../../styles/themes/v3/DarkTheme';
-import MD2DarkTheme from '../../../styles/themes/v2/DarkTheme';
+import { getTheme } from '../../../core/theming';
 import overlay from '../../../styles/overlay';
 
 describe('Appbar', () => {
@@ -157,21 +153,6 @@ describe('renderAppbarContent', () => {
 });
 
 describe('getAppbarColors', () => {
-  const getTheme = (isDark = false, isV3 = true) => {
-    const theme = isDark
-      ? isV3
-        ? MD3DarkTheme
-        : MD2DarkTheme
-      : isV3
-      ? MD3LightTheme
-      : MD2LightTheme;
-    return {
-      ...theme,
-      isV3,
-      md: (tokenKey) => get(theme.tokens, tokenKey),
-    };
-  };
-
   const elevation = 4;
   const customBackground = 'aquamarine';
 

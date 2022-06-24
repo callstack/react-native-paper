@@ -4,10 +4,7 @@ import color from 'color';
 import ToggleButton from '../ToggleButton';
 import { getToggleButtonColor } from '../ToggleButton/utils';
 import { tokens } from '../../styles/themes/v3/tokens';
-import MD3LightTheme from '../../styles/themes/v3/LightTheme';
-import MD2LightTheme from '../../styles/themes/v2/LightTheme';
-import MD3DarkTheme from '../../styles/themes/v3/DarkTheme';
-import MD2DarkTheme from '../../styles/themes/v2/DarkTheme';
+import { getTheme } from '../../core/theming';
 
 it('renders toggle button', () => {
   const tree = renderer
@@ -49,21 +46,6 @@ it('renders unchecked toggle button', () => {
 });
 
 describe('getToggleButtonColor', () => {
-  const getTheme = (isDark = false, isV3 = true) => {
-    const theme = isDark
-      ? isV3
-        ? MD3DarkTheme
-        : MD2DarkTheme
-      : isV3
-      ? MD3LightTheme
-      : MD2LightTheme;
-    return {
-      ...theme,
-      isV3,
-      md: (tokenKey) => get(theme.tokens, tokenKey),
-    };
-  };
-
   it('should return correct color when checked and theme version 3', () => {
     expect(getToggleButtonColor({ theme: getTheme(), checked: true })).toBe(
       color(getTheme().colors.onSecondaryContainer)

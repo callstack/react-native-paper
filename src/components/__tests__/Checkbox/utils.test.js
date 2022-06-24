@@ -3,25 +3,7 @@ import {
   getAndroidSelectionControlColor,
   getSelectionControlIOSColor,
 } from '../../Checkbox/utils';
-
-import MD3LightTheme from '../../../styles/themes/v3/LightTheme';
-import MD2LightTheme from '../../../styles/themes/v2/LightTheme';
-import MD3DarkTheme from '../../../styles/themes/v3/DarkTheme';
-import MD2DarkTheme from '../../../styles/themes/v2/DarkTheme';
-
-const getTheme = (isDark = false, isV3 = true) => {
-  const theme = isDark
-    ? isV3
-      ? MD3DarkTheme
-      : MD2DarkTheme
-    : isV3
-    ? MD3LightTheme
-    : MD2LightTheme;
-  return {
-    ...theme,
-    isV3,
-  };
-};
+import { getTheme } from '../../../core/theming';
 
 describe('getAndroidSelectionControlColor - ripple color', () => {
   it('should return correct disabled color, for theme version 3', () => {
