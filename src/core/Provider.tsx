@@ -9,19 +9,27 @@ import { ThemeProvider } from './theming';
 import { Provider as SettingsProvider, Settings } from './settings';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
-import LightTheme from '../styles/themes/v3/LightTheme';
-import DarkTheme from '../styles/themes/v3/DarkTheme';
+import MD2LightTheme from '../styles/themes/v2/LightTheme';
+import MD2DarkTheme from '../styles/themes/v2/DarkTheme';
+import MD3LightTheme from '../styles/themes/v3/LightTheme';
+import MD3DarkTheme from '../styles/themes/v3/DarkTheme';
 import { addEventListener } from '../utils/addEventListener';
 import type { Theme, ThemeBase } from '../types';
 import { typescale } from '../styles/themes/v3/tokens';
 
+type ThemeProp =
+  | ThemeBase
+  | {
+      version: 2 | 3;
+    };
+
 type Props = {
   children: React.ReactNode;
-  theme?: ThemeBase;
+  theme?: ThemeProp;
   settings?: Settings;
 };
 
-const Provider = ({ ...props }: Props) => {
+const Provider = (props: Props) => {
   const colorSchemeName =
     (!props.theme && Appearance?.getColorScheme()) || 'light';
 
@@ -73,25 +81,35 @@ const Provider = ({ ...props }: Props) => {
   }, [props.theme]);
 
   const getTheme = () => {
-    const { theme: providedTheme } = props;
+    const defaultThemesByVersion = {
+      2: {
+        light: MD2LightTheme,
+        dark: MD2DarkTheme,
+      },
+      3: {
+        light: MD3LightTheme,
+        dark: MD3DarkTheme,
+      },
+    };
 
-    const theme = providedTheme
-      ? (providedTheme as ThemeBase)
-      : ((colorScheme === 'dark' ? DarkTheme : LightTheme) as ThemeBase);
-
-    const isV3 = theme.version === 3;
+    const themeVersion = props.theme?.version || 3;
+    const scheme = colorScheme || 'light';
+    const defaultThemeBase = defaultThemesByVersion[themeVersion][scheme];
 
     const extendedThemeBase = {
-      ...theme,
-      version: theme.version || 3,
+      ...defaultThemeBase,
+      ...(props.theme as ThemeBase),
+      version: props.theme?.version || 3,
       animation: {
         scale: reduceMotionEnabled ? 0 : 1,
       },
-      isV3,
       typescale,
     };
 
-    return extendedThemeBase as Theme;
+    return {
+      ...extendedThemeBase,
+      isV3: extendedThemeBase.version === 3,
+    } as Theme;
   };
 
   const { children, settings } = props;
