@@ -5,14 +5,10 @@ import {
   ColorSchemeName,
   NativeEventSubscription,
 } from 'react-native';
-import { ThemeProvider } from './theming';
+import { defaultThemesByVersion, ThemeProvider } from './theming';
 import { Provider as SettingsProvider, Settings } from './settings';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
-import MD2LightTheme from '../styles/themes/v2/LightTheme';
-import MD2DarkTheme from '../styles/themes/v2/DarkTheme';
-import MD3LightTheme from '../styles/themes/v3/LightTheme';
-import MD3DarkTheme from '../styles/themes/v3/DarkTheme';
 import { addEventListener } from '../utils/addEventListener';
 import type { Theme, ThemeBase } from '../types';
 
@@ -84,17 +80,6 @@ const Provider = (props: Props) => {
   }, [props.theme]);
 
   const getTheme = () => {
-    const defaultThemesByVersion = {
-      2: {
-        light: MD2LightTheme,
-        dark: MD2DarkTheme,
-      },
-      3: {
-        light: MD3LightTheme,
-        dark: MD3DarkTheme,
-      },
-    };
-
     const themeVersion = props.theme?.version || 3;
     const scheme = colorScheme || 'light';
     const defaultThemeBase = defaultThemesByVersion[themeVersion][scheme];
