@@ -5,25 +5,32 @@ import {
   ColorSchemeName,
   NativeEventSubscription,
 } from 'react-native';
-import { ThemeProvider } from './theming';
+import { defaultThemesByVersion, ThemeProvider } from './theming';
 import { Provider as SettingsProvider, Settings } from './settings';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
-import LightTheme from '../styles/themes/v3/LightTheme';
-import DarkTheme from '../styles/themes/v3/DarkTheme';
 import { addEventListener } from '../utils/addEventListener';
 import type { Theme, ThemeBase } from '../types';
-import { typescale } from '../styles/themes/v3/tokens';
+
+type ThemeProp =
+  | ThemeBase
+  | {
+      version: 2 | 3;
+    };
 
 type Props = {
   children: React.ReactNode;
-  theme?: ThemeBase;
+  theme?: ThemeProp;
   settings?: Settings;
 };
 
-const Provider = ({ ...props }: Props) => {
+const Provider = (props: Props) => {
+  const isOnlyVersionInTheme =
+    props.theme && Object.keys(props.theme).length === 1 && props.theme.version;
+
   const colorSchemeName =
-    (!props.theme && Appearance?.getColorScheme()) || 'light';
+    ((!props.theme || isOnlyVersionInTheme) && Appearance?.getColorScheme()) ||
+    'light';
 
   const [reduceMotionEnabled, setReduceMotionEnabled] =
     React.useState<boolean>(false);
@@ -56,13 +63,13 @@ const Provider = ({ ...props }: Props) => {
 
   React.useEffect(() => {
     let appearanceSubscription: NativeEventSubscription | undefined;
-    if (!props.theme) {
+    if (!props.theme || isOnlyVersionInTheme) {
       appearanceSubscription = Appearance?.addChangeListener(
         handleAppearanceChange
       ) as NativeEventSubscription | undefined;
     }
     return () => {
-      if (!props.theme) {
+      if (!props.theme || isOnlyVersionInTheme) {
         if (appearanceSubscription) {
           appearanceSubscription.remove();
         } else {
@@ -73,25 +80,23 @@ const Provider = ({ ...props }: Props) => {
   }, [props.theme]);
 
   const getTheme = () => {
-    const { theme: providedTheme } = props;
-
-    const theme = providedTheme
-      ? (providedTheme as ThemeBase)
-      : ((colorScheme === 'dark' ? DarkTheme : LightTheme) as ThemeBase);
-
-    const isV3 = theme.version === 3;
+    const themeVersion = props.theme?.version || 3;
+    const scheme = colorScheme || 'light';
+    const defaultThemeBase = defaultThemesByVersion[themeVersion][scheme];
 
     const extendedThemeBase = {
-      ...theme,
-      version: theme.version || 3,
+      ...defaultThemeBase,
+      ...(props.theme as ThemeBase),
+      version: themeVersion,
       animation: {
         scale: reduceMotionEnabled ? 0 : 1,
       },
-      isV3,
-      typescale,
     };
 
-    return extendedThemeBase as Theme;
+    return {
+      ...extendedThemeBase,
+      isV3: extendedThemeBase.version === 3,
+    } as Theme;
   };
 
   const { children, settings } = props;
