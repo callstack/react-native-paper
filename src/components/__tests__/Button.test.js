@@ -5,32 +5,13 @@ import color from 'color';
 import Button from '../Button/Button.tsx';
 import { pink500, black, white } from '../../styles/themes/v2/colors';
 import { getButtonColors } from '../Button/utils';
-
-import MD3LightTheme from '../../styles/themes/v3/LightTheme';
-import MD2LightTheme from '../../styles/themes/v2/LightTheme';
-import MD3DarkTheme from '../../styles/themes/v3/DarkTheme';
-import MD2DarkTheme from '../../styles/themes/v2/DarkTheme';
+import { getTheme } from '../../core/theming';
 
 const styles = StyleSheet.create({
   flexing: {
     flexDirection: 'row-reverse',
   },
 });
-
-const getTheme = (isDark = false, isV3 = true) => {
-  const theme = isDark
-    ? isV3
-      ? MD3DarkTheme
-      : MD2DarkTheme
-    : isV3
-    ? MD3LightTheme
-    : MD2LightTheme;
-  return {
-    ...theme,
-    isV3,
-    md: (tokenKey) => get(theme.tokens, tokenKey),
-  };
-};
 
 it('renders text button by default', () => {
   const tree = renderer.create(<Button>Text Button</Button>).toJSON();

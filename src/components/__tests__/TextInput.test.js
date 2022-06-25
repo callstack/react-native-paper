@@ -8,11 +8,8 @@ import {
   getFlatInputColors,
   getOutlinedInputColors,
 } from '../TextInput/helpers';
-
+import { getTheme } from '../../core/theming';
 import MD3LightTheme from '../../styles/themes/v3/LightTheme';
-import MD2LightTheme from '../../styles/themes/v2/LightTheme';
-import MD3DarkTheme from '../../styles/themes/v3/DarkTheme';
-import MD2DarkTheme from '../../styles/themes/v2/DarkTheme';
 
 const style = StyleSheet.create({
   inputStyle: {
@@ -25,20 +22,6 @@ const style = StyleSheet.create({
     height: 100,
   },
 });
-
-const getTheme = (isDark = false, isV3 = true) => {
-  const theme = isDark
-    ? isV3
-      ? MD3DarkTheme
-      : MD2DarkTheme
-    : isV3
-    ? MD3LightTheme
-    : MD2LightTheme;
-  return {
-    ...theme,
-    isV3,
-  };
-};
 
 const affixTextValue = '/100';
 it('correctly renders left-side icon adornment, and right-side affix adornment', () => {

@@ -2,28 +2,9 @@ import * as React from 'react';
 import color from 'color';
 import renderer from 'react-test-renderer';
 import Menu from '../Menu/Menu.tsx';
-
 import { getMenuItemColor } from '../Menu/utils';
-
-import MD3LightTheme from '../../styles/themes/v3/LightTheme';
-import MD2LightTheme from '../../styles/themes/v2/LightTheme';
-import MD3DarkTheme from '../../styles/themes/v3/DarkTheme';
-import MD2DarkTheme from '../../styles/themes/v2/DarkTheme';
 import { black, white } from '../../styles/themes/v2/colors';
-
-const getTheme = (isDark = false, isV3 = true) => {
-  const theme = isDark
-    ? isV3
-      ? MD3DarkTheme
-      : MD2DarkTheme
-    : isV3
-    ? MD3LightTheme
-    : MD2LightTheme;
-  return {
-    ...theme,
-    isV3,
-  };
-};
+import { getTheme } from '../../core/theming';
 
 describe('getMenuItemColor - title color', () => {
   it('should return disabled color if disabled, for theme version 3', () => {
