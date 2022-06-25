@@ -308,7 +308,7 @@ const TextInputFlat = ({
           },
         ]}
       >
-        {!isAndroid && multiline && label && (
+        {!isAndroid && multiline && !!label && (
           // Workaround for: https://github.com/callstack/react-native-paper/issues/2799
           // Patch for a multiline TextInput with fixed height, which allow to avoid covering input label with its value.
           <View
