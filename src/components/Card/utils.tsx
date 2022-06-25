@@ -1,11 +1,8 @@
-import type { Animated } from 'react-native';
 import color from 'color';
 import { black, white } from '../../styles/themes/v2/colors';
 import type { Theme } from '../../types';
-import overlay from '../../styles/overlay';
 
 type CardMode = 'elevated' | 'outlined' | 'contained';
-type Elevation = 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
 
 export const getCardCoverStyle = ({
   theme,
@@ -60,34 +57,25 @@ const getBorderColor = ({ theme }: { theme: Theme }) => {
 const getBackgroundColor = ({
   theme,
   isMode,
-  isAdaptiveMode,
-  elevation,
 }: {
   theme: Theme;
   isMode: (mode: CardMode) => boolean;
-  isAdaptiveMode?: boolean;
-  elevation: Elevation;
 }) => {
-  if (theme.isV3 && isMode('contained')) {
-    return theme.colors.surfaceVariant;
+  if (theme.isV3) {
+    if (isMode('contained')) {
+      return theme.colors.surfaceVariant;
+    }
+    return theme.colors.surface;
   }
-
-  if (theme.dark && isAdaptiveMode) {
-    return overlay(elevation, theme.colors.surface);
-  }
-  return theme.colors.surface;
+  return undefined;
 };
 
 export const getCardColors = ({
   theme,
   mode,
-  isAdaptiveMode,
-  elevation,
 }: {
   theme: Theme;
   mode: CardMode;
-  isAdaptiveMode?: boolean;
-  elevation: Elevation;
 }) => {
   const isMode = (modeToCompare: CardMode) => {
     return mode === modeToCompare;
@@ -97,8 +85,6 @@ export const getCardColors = ({
     backgroundColor: getBackgroundColor({
       theme,
       isMode,
-      isAdaptiveMode,
-      elevation,
     }),
     borderColor: getBorderColor({ theme }),
   };
