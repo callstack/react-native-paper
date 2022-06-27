@@ -2,6 +2,7 @@
 
 exports[`renders chip with close button 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -15,6 +16,7 @@ exports[`renders chip with close button 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -28,6 +30,7 @@ exports[`renders chip with close button 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "rgba(232, 222, 248, 1)",
@@ -43,7 +46,7 @@ exports[`renders chip with close button 1`] = `
         accessibilityRole="button"
         accessibilityState={
           Object {
-            "disabled": false,
+            "disabled": true,
             "selected": false,
           }
         }
@@ -234,6 +237,7 @@ exports[`renders chip with close button 1`] = `
 
 exports[`renders chip with custom close button 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -247,6 +251,7 @@ exports[`renders chip with custom close button 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -260,6 +265,7 @@ exports[`renders chip with custom close button 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "rgba(232, 222, 248, 1)",
@@ -275,7 +281,7 @@ exports[`renders chip with custom close button 1`] = `
         accessibilityRole="button"
         accessibilityState={
           Object {
-            "disabled": false,
+            "disabled": true,
             "selected": false,
           }
         }
@@ -466,6 +472,7 @@ exports[`renders chip with custom close button 1`] = `
 
 exports[`renders chip with icon 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -479,6 +486,7 @@ exports[`renders chip with icon 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -492,6 +500,7 @@ exports[`renders chip with icon 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "rgba(232, 222, 248, 1)",
@@ -507,7 +516,7 @@ exports[`renders chip with icon 1`] = `
         accessibilityRole="button"
         accessibilityState={
           Object {
-            "disabled": false,
+            "disabled": true,
             "selected": false,
           }
         }
@@ -638,6 +647,7 @@ exports[`renders chip with icon 1`] = `
 
 exports[`renders chip with onPress 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -651,6 +661,7 @@ exports[`renders chip with onPress 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -664,6 +675,7 @@ exports[`renders chip with onPress 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "rgba(232, 222, 248, 1)",
@@ -775,6 +787,7 @@ exports[`renders chip with onPress 1`] = `
 
 exports[`renders outlined disabled chip 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -788,6 +801,7 @@ exports[`renders outlined disabled chip 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -801,6 +815,7 @@ exports[`renders outlined disabled chip 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "transparent",
@@ -912,6 +927,7 @@ exports[`renders outlined disabled chip 1`] = `
 
 exports[`renders selected chip 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -925,6 +941,7 @@ exports[`renders selected chip 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -938,6 +955,7 @@ exports[`renders selected chip 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "rgb(232, 222, 248)",
@@ -953,7 +971,7 @@ exports[`renders selected chip 1`] = `
         accessibilityRole="button"
         accessibilityState={
           Object {
-            "disabled": false,
+            "disabled": true,
             "selected": true,
           }
         }

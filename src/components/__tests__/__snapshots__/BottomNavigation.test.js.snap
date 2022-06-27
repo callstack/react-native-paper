@@ -48,6 +48,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
       testID="RouteScreen: 0"
     >
       <View
+        collapsable={false}
         style={
           Object {
             "flex": 1,
@@ -60,6 +61,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -73,6 +75,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -86,6 +89,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
       }
     >
       <View
+        collapsable={false}
         onLayout={[Function]}
         pointerEvents="none"
         style={
@@ -104,6 +108,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "alignItems": "center",
@@ -166,6 +171,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -179,6 +185,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -195,6 +202,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -228,6 +236,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -275,6 +284,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -337,6 +347,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -350,6 +361,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -366,6 +378,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -399,6 +412,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -446,6 +460,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -508,6 +523,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -521,6 +537,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -537,6 +554,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -570,6 +588,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -617,6 +636,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -696,6 +716,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
       testID="RouteScreen: 0"
     >
       <View
+        collapsable={false}
         style={
           Object {
             "flex": 1,
@@ -708,6 +729,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -721,6 +743,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -734,6 +757,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
       }
     >
       <View
+        collapsable={false}
         onLayout={[Function]}
         pointerEvents="none"
         style={
@@ -752,6 +776,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "alignItems": "center",
@@ -776,6 +801,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             }
           >
             <View
+              collapsable={false}
               pointerEvents="none"
               style={
                 Object {
@@ -834,6 +860,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -847,6 +874,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -863,6 +891,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -896,6 +925,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -943,6 +973,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -1005,6 +1036,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -1018,6 +1050,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -1034,6 +1067,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -1067,6 +1101,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -1114,6 +1149,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -1176,6 +1212,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -1189,6 +1226,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -1205,6 +1243,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -1238,6 +1277,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -1285,6 +1325,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -1364,6 +1405,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       testID="RouteScreen: 0"
     >
       <View
+        collapsable={false}
         style={
           Object {
             "flex": 1,
@@ -1376,6 +1418,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -1389,6 +1432,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -1402,6 +1446,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       }
     >
       <View
+        collapsable={false}
         onLayout={[Function]}
         pointerEvents="none"
         style={
@@ -1420,6 +1465,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "alignItems": "center",
@@ -1481,6 +1527,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -1494,6 +1541,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -1510,6 +1558,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -1527,6 +1576,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     />
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -1558,6 +1608,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -1580,6 +1631,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -1588,6 +1640,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -1603,6 +1656,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     />
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -1659,6 +1713,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -1672,6 +1727,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -1688,6 +1744,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -1705,6 +1762,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     />
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -1736,6 +1794,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -1758,6 +1817,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -1766,6 +1826,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -1781,6 +1842,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     />
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -1837,6 +1899,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -1850,6 +1913,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -1866,6 +1930,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -1883,6 +1948,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     />
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -1914,6 +1980,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -1936,6 +2003,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -1944,6 +2012,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -1959,6 +2028,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     />
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -2033,6 +2103,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       testID="RouteScreen: 0"
     >
       <View
+        collapsable={false}
         style={
           Object {
             "flex": 1,
@@ -2045,6 +2116,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -2058,6 +2130,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -2071,6 +2144,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       }
     >
       <View
+        collapsable={false}
         onLayout={[Function]}
         pointerEvents="none"
         style={
@@ -2089,6 +2163,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "alignItems": "center",
@@ -2113,6 +2188,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             }
           >
             <View
+              collapsable={false}
               pointerEvents="none"
               style={
                 Object {
@@ -2170,6 +2246,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -2188,6 +2265,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -2204,6 +2282,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -2221,6 +2300,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     />
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -2252,6 +2332,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -2274,6 +2355,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -2282,6 +2364,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -2338,6 +2421,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -2356,6 +2440,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -2372,6 +2457,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -2389,6 +2475,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     />
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -2420,6 +2507,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -2442,6 +2530,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -2450,6 +2539,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -2506,6 +2596,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -2524,6 +2615,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -2540,6 +2632,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -2557,6 +2650,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     />
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -2588,6 +2682,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -2610,6 +2705,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -2618,6 +2714,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -2674,6 +2771,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -2692,6 +2790,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -2708,6 +2807,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -2725,6 +2825,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     />
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -2756,6 +2857,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -2778,6 +2880,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -2786,6 +2889,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -2842,6 +2946,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -2860,6 +2965,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -2876,6 +2982,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -2893,6 +3000,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     />
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -2924,6 +3032,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -2946,6 +3055,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -2954,6 +3064,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -3028,6 +3139,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       testID="RouteScreen: 0"
     >
       <View
+        collapsable={false}
         style={
           Object {
             "flex": 1,
@@ -3040,6 +3152,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -3053,6 +3166,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -3066,6 +3180,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       }
     >
       <View
+        collapsable={false}
         onLayout={[Function]}
         pointerEvents="none"
         style={
@@ -3085,6 +3200,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "alignItems": "center",
@@ -3146,6 +3262,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -3159,6 +3276,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -3175,6 +3293,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -3208,6 +3327,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -3255,6 +3375,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -3277,6 +3398,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -3285,6 +3407,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -3330,6 +3453,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -3417,6 +3541,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -3430,6 +3555,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -3446,6 +3572,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -3479,6 +3606,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -3526,6 +3654,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -3548,6 +3677,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -3556,6 +3686,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -3601,6 +3732,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -3688,6 +3820,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -3701,6 +3834,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -3717,6 +3851,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -3750,6 +3885,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -3797,6 +3933,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -3819,6 +3956,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -3827,6 +3965,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -3872,6 +4011,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -3977,6 +4117,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       testID="RouteScreen: 0"
     >
       <View
+        collapsable={false}
         style={
           Object {
             "flex": 1,
@@ -3989,6 +4130,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -4002,6 +4144,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -4015,6 +4158,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       }
     >
       <View
+        collapsable={false}
         onLayout={[Function]}
         pointerEvents="none"
         style={
@@ -4034,6 +4178,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "alignItems": "center",
@@ -4058,6 +4203,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             }
           >
             <View
+              collapsable={false}
               pointerEvents="none"
               style={
                 Object {
@@ -4115,6 +4261,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -4133,6 +4280,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -4149,6 +4297,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -4182,6 +4331,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -4229,6 +4379,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -4251,6 +4402,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -4259,6 +4411,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -4345,6 +4498,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -4363,6 +4517,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -4379,6 +4534,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -4412,6 +4568,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -4459,6 +4616,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -4481,6 +4639,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -4489,6 +4648,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -4575,6 +4735,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -4593,6 +4754,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -4609,6 +4771,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -4642,6 +4805,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -4689,6 +4853,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -4711,6 +4876,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -4719,6 +4885,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -4823,6 +4990,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
       testID="RouteScreen: 0"
     >
       <View
+        collapsable={false}
         style={
           Object {
             "flex": 1,
@@ -4835,6 +5003,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -4848,6 +5017,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -4861,6 +5031,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
       }
     >
       <View
+        collapsable={false}
         onLayout={[Function]}
         pointerEvents="none"
         style={
@@ -4879,6 +5050,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "alignItems": "center",
@@ -4940,6 +5112,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -4953,6 +5126,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -4969,6 +5143,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -5002,6 +5177,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -5049,6 +5225,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -5071,6 +5248,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -5079,6 +5257,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -5124,6 +5303,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -5211,6 +5391,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -5224,6 +5405,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -5240,6 +5422,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -5273,6 +5456,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -5320,6 +5504,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -5342,6 +5527,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -5350,6 +5536,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -5395,6 +5582,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -5482,6 +5670,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -5495,6 +5684,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -5511,6 +5701,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -5544,6 +5735,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -5591,6 +5783,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -5613,6 +5806,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -5621,6 +5815,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -5666,6 +5861,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -5771,6 +5967,7 @@ exports[`renders shifting bottom navigation 1`] = `
       testID="RouteScreen: 0"
     >
       <View
+        collapsable={false}
         style={
           Object {
             "flex": 1,
@@ -5783,6 +5980,7 @@ exports[`renders shifting bottom navigation 1`] = `
     </View>
   </View>
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -5796,6 +5994,7 @@ exports[`renders shifting bottom navigation 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -5809,6 +6008,7 @@ exports[`renders shifting bottom navigation 1`] = `
       }
     >
       <View
+        collapsable={false}
         onLayout={[Function]}
         pointerEvents="none"
         style={
@@ -5827,6 +6027,7 @@ exports[`renders shifting bottom navigation 1`] = `
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "alignItems": "center",
@@ -5851,6 +6052,7 @@ exports[`renders shifting bottom navigation 1`] = `
             }
           >
             <View
+              collapsable={false}
               pointerEvents="none"
               style={
                 Object {
@@ -5908,6 +6110,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -5926,6 +6129,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -5942,6 +6146,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -5975,6 +6180,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -6022,6 +6228,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -6044,6 +6251,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -6052,6 +6260,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -6138,6 +6347,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -6156,6 +6366,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -6172,6 +6383,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -6205,6 +6417,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -6252,6 +6465,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -6274,6 +6488,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -6282,6 +6497,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -6368,6 +6584,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -6386,6 +6603,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -6402,6 +6620,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -6435,6 +6654,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -6482,6 +6702,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -6504,6 +6725,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -6512,6 +6734,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -6598,6 +6821,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -6616,6 +6840,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -6632,6 +6857,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -6665,6 +6891,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -6712,6 +6939,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -6734,6 +6962,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -6742,6 +6971,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,
@@ -6828,6 +7058,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "alignSelf": "center",
@@ -6846,6 +7077,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignSelf": "center",
@@ -6862,6 +7094,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     }
                   />
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -6895,6 +7128,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     </Text>
                   </View>
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "alignItems": "center",
@@ -6942,6 +7176,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     }
                   >
                     <Text
+                      collapsable={false}
                       numberOfLines={1}
                       style={
                         Object {
@@ -6964,6 +7199,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   </View>
                 </View>
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 16,
@@ -6972,6 +7208,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   }
                 >
                   <View
+                    collapsable={false}
                     style={
                       Object {
                         "bottom": 0,

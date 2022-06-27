@@ -2,6 +2,7 @@
 
 exports[`renders button with an accessibility hint 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -15,6 +16,7 @@ exports[`renders button with an accessibility hint 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -28,6 +30,7 @@ exports[`renders button with an accessibility hint 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "transparent",
@@ -44,7 +47,7 @@ exports[`renders button with an accessibility hint 1`] = `
         accessibilityRole="button"
         accessibilityState={
           Object {
-            "disabled": undefined,
+            "disabled": true,
           }
         }
         accessible={true}
@@ -133,6 +136,7 @@ exports[`renders button with an accessibility hint 1`] = `
 
 exports[`renders button with an accessibility label 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -146,6 +150,7 @@ exports[`renders button with an accessibility label 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -159,6 +164,7 @@ exports[`renders button with an accessibility label 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "transparent",
@@ -175,7 +181,7 @@ exports[`renders button with an accessibility label 1`] = `
         accessibilityRole="button"
         accessibilityState={
           Object {
-            "disabled": undefined,
+            "disabled": true,
           }
         }
         accessible={true}
@@ -264,6 +270,7 @@ exports[`renders button with an accessibility label 1`] = `
 
 exports[`renders button with button color 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -277,6 +284,7 @@ exports[`renders button with button color 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -290,6 +298,7 @@ exports[`renders button with button color 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "#e91e63",
@@ -305,7 +314,7 @@ exports[`renders button with button color 1`] = `
         accessibilityRole="button"
         accessibilityState={
           Object {
-            "disabled": undefined,
+            "disabled": true,
           }
         }
         accessible={true}
@@ -394,6 +403,7 @@ exports[`renders button with button color 1`] = `
 
 exports[`renders button with color 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -407,6 +417,7 @@ exports[`renders button with color 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -420,6 +431,7 @@ exports[`renders button with color 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "transparent",
@@ -435,7 +447,7 @@ exports[`renders button with color 1`] = `
         accessibilityRole="button"
         accessibilityState={
           Object {
-            "disabled": undefined,
+            "disabled": true,
           }
         }
         accessible={true}
@@ -524,6 +536,7 @@ exports[`renders button with color 1`] = `
 
 exports[`renders button with custom testID 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -537,6 +550,7 @@ exports[`renders button with custom testID 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -550,6 +564,7 @@ exports[`renders button with custom testID 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "transparent",
@@ -565,7 +580,7 @@ exports[`renders button with custom testID 1`] = `
         accessibilityRole="button"
         accessibilityState={
           Object {
-            "disabled": undefined,
+            "disabled": true,
           }
         }
         accessible={true}
@@ -655,6 +670,7 @@ exports[`renders button with custom testID 1`] = `
 
 exports[`renders button with icon 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -668,6 +684,7 @@ exports[`renders button with icon 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -681,6 +698,7 @@ exports[`renders button with icon 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "transparent",
@@ -696,7 +714,7 @@ exports[`renders button with icon 1`] = `
         accessibilityRole="button"
         accessibilityState={
           Object {
-            "disabled": undefined,
+            "disabled": true,
           }
         }
         accessible={true}
@@ -823,6 +841,7 @@ exports[`renders button with icon 1`] = `
 
 exports[`renders button with icon in reverse order 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -836,6 +855,7 @@ exports[`renders button with icon in reverse order 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -849,6 +869,7 @@ exports[`renders button with icon in reverse order 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "transparent",
@@ -864,7 +885,7 @@ exports[`renders button with icon in reverse order 1`] = `
         accessibilityRole="button"
         accessibilityState={
           Object {
-            "disabled": undefined,
+            "disabled": true,
           }
         }
         accessible={true}
@@ -993,6 +1014,7 @@ exports[`renders button with icon in reverse order 1`] = `
 
 exports[`renders contained contained with mode 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -1006,6 +1028,7 @@ exports[`renders contained contained with mode 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -1019,6 +1042,7 @@ exports[`renders contained contained with mode 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "rgba(103, 80, 164, 1)",
@@ -1034,7 +1058,7 @@ exports[`renders contained contained with mode 1`] = `
         accessibilityRole="button"
         accessibilityState={
           Object {
-            "disabled": undefined,
+            "disabled": true,
           }
         }
         accessible={true}
@@ -1124,6 +1148,7 @@ exports[`renders contained contained with mode 1`] = `
 
 exports[`renders disabled button 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -1137,6 +1162,7 @@ exports[`renders disabled button 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -1150,6 +1176,7 @@ exports[`renders disabled button 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "transparent",
@@ -1254,6 +1281,7 @@ exports[`renders disabled button 1`] = `
 
 exports[`renders loading button 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -1267,6 +1295,7 @@ exports[`renders loading button 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -1280,6 +1309,7 @@ exports[`renders loading button 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "transparent",
@@ -1295,7 +1325,7 @@ exports[`renders loading button 1`] = `
         accessibilityRole="button"
         accessibilityState={
           Object {
-            "disabled": undefined,
+            "disabled": true,
           }
         }
         accessible={true}
@@ -1372,6 +1402,7 @@ exports[`renders loading button 1`] = `
               }
             >
               <View
+                collapsable={false}
                 style={
                   Object {
                     "alignItems": "center",
@@ -1385,6 +1416,7 @@ exports[`renders loading button 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 18,
@@ -1408,6 +1440,7 @@ exports[`renders loading button 1`] = `
                     }
                   >
                     <View
+                      collapsable={false}
                       style={
                         Object {
                           "height": 18,
@@ -1434,6 +1467,7 @@ exports[`renders loading button 1`] = `
                         }
                       >
                         <View
+                          collapsable={false}
                           style={
                             Object {
                               "borderColor": "rgba(103, 80, 164, 1)",
@@ -1450,6 +1484,7 @@ exports[`renders loading button 1`] = `
                 </View>
               </View>
               <View
+                collapsable={false}
                 style={
                   Object {
                     "alignItems": "center",
@@ -1463,6 +1498,7 @@ exports[`renders loading button 1`] = `
                 }
               >
                 <View
+                  collapsable={false}
                   style={
                     Object {
                       "height": 18,
@@ -1487,6 +1523,7 @@ exports[`renders loading button 1`] = `
                     }
                   >
                     <View
+                      collapsable={false}
                       style={
                         Object {
                           "height": 18,
@@ -1513,6 +1550,7 @@ exports[`renders loading button 1`] = `
                         }
                       >
                         <View
+                          collapsable={false}
                           style={
                             Object {
                               "borderColor": "rgba(103, 80, 164, 1)",
@@ -1584,6 +1622,7 @@ exports[`renders loading button 1`] = `
 
 exports[`renders outlined button with mode 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -1597,6 +1636,7 @@ exports[`renders outlined button with mode 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -1610,6 +1650,7 @@ exports[`renders outlined button with mode 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "transparent",
@@ -1625,7 +1666,7 @@ exports[`renders outlined button with mode 1`] = `
         accessibilityRole="button"
         accessibilityState={
           Object {
-            "disabled": undefined,
+            "disabled": true,
           }
         }
         accessible={true}
@@ -1715,6 +1756,7 @@ exports[`renders outlined button with mode 1`] = `
 
 exports[`renders text button by default 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -1728,6 +1770,7 @@ exports[`renders text button by default 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -1741,6 +1784,7 @@ exports[`renders text button by default 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "transparent",
@@ -1756,7 +1800,7 @@ exports[`renders text button by default 1`] = `
         accessibilityRole="button"
         accessibilityState={
           Object {
-            "disabled": undefined,
+            "disabled": true,
           }
         }
         accessible={true}
@@ -1845,6 +1889,7 @@ exports[`renders text button by default 1`] = `
 
 exports[`renders text button with mode 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -1858,6 +1903,7 @@ exports[`renders text button with mode 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -1871,6 +1917,7 @@ exports[`renders text button with mode 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "transparent",
@@ -1886,7 +1933,7 @@ exports[`renders text button with mode 1`] = `
         accessibilityRole="button"
         accessibilityState={
           Object {
-            "disabled": undefined,
+            "disabled": true,
           }
         }
         accessible={true}

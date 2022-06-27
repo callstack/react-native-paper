@@ -18,6 +18,7 @@ exports[`renders snackbar with Text as a child 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -31,6 +32,7 @@ exports[`renders snackbar with Text as a child 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -45,6 +47,7 @@ exports[`renders snackbar with Text as a child 1`] = `
     >
       <View
         accessibilityLiveRegion="polite"
+        collapsable={false}
         pointerEvents="box-none"
         style={
           Object {
@@ -113,6 +116,7 @@ exports[`renders snackbar with action button 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -126,6 +130,7 @@ exports[`renders snackbar with action button 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -140,6 +145,7 @@ exports[`renders snackbar with action button 1`] = `
     >
       <View
         accessibilityLiveRegion="polite"
+        collapsable={false}
         pointerEvents="box-none"
         style={
           Object {
@@ -185,6 +191,7 @@ exports[`renders snackbar with action button 1`] = `
           Snackbar content
         </Text>
         <View
+          collapsable={false}
           style={
             Object {
               "shadowColor": "#000",
@@ -198,6 +205,7 @@ exports[`renders snackbar with action button 1`] = `
           }
         >
           <View
+            collapsable={false}
             style={
               Object {
                 "shadowColor": "#000",
@@ -211,6 +219,7 @@ exports[`renders snackbar with action button 1`] = `
             }
           >
             <View
+              collapsable={false}
               style={
                 Object {
                   "backgroundColor": "transparent",
@@ -228,7 +237,7 @@ exports[`renders snackbar with action button 1`] = `
                 accessibilityRole="button"
                 accessibilityState={
                   Object {
-                    "disabled": undefined,
+                    "disabled": false,
                   }
                 }
                 accessible={true}
@@ -337,6 +346,7 @@ exports[`renders snackbar with content 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -350,6 +360,7 @@ exports[`renders snackbar with content 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -364,6 +375,7 @@ exports[`renders snackbar with content 1`] = `
     >
       <View
         accessibilityLiveRegion="polite"
+        collapsable={false}
         pointerEvents="box-none"
         style={
           Object {

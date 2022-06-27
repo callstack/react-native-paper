@@ -208,6 +208,11 @@ exports[`renders list section with custom title style 1`] = `
     Some title
   </Text>
   <View
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
+    }
     accessible={true}
     focusable={false}
     onClick={[Function]}
@@ -318,6 +323,11 @@ exports[`renders list section with custom title style 1`] = `
     </View>
   </View>
   <View
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
+    }
     accessible={true}
     focusable={false}
     onClick={[Function]}
@@ -636,6 +646,11 @@ exports[`renders list section with subheader 1`] = `
     Some title
   </Text>
   <View
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
+    }
     accessible={true}
     focusable={false}
     onClick={[Function]}
@@ -746,6 +761,11 @@ exports[`renders list section with subheader 1`] = `
     </View>
   </View>
   <View
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
+    }
     accessible={true}
     focusable={false}
     onClick={[Function]}
@@ -1027,6 +1047,11 @@ exports[`renders list section without subheader 1`] = `
   }
 >
   <View
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
+    }
     accessible={true}
     focusable={false}
     onClick={[Function]}
@@ -1137,6 +1162,11 @@ exports[`renders list section without subheader 1`] = `
     </View>
   </View>
   <View
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
+    }
     accessible={true}
     focusable={false}
     onClick={[Function]}

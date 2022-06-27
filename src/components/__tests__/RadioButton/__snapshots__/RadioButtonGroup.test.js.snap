@@ -10,7 +10,7 @@ exports[`RadioButtonGroup renders properly 1`] = `
     accessibilityState={
       Object {
         "checked": true,
-        "disabled": undefined,
+        "disabled": false,
       }
     }
     accessible={true}

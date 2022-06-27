@@ -14,6 +14,7 @@ exports[`correctly applies a component as the text label 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "backgroundColor": "rgba(28, 27, 31, 1)",
@@ -45,6 +46,7 @@ exports[`correctly applies a component as the text label 1`] = `
     }
   >
     <View
+      collapsable={false}
       pointerEvents="none"
       style={
         Object {
@@ -64,6 +66,7 @@ exports[`correctly applies a component as the text label 1`] = `
       }
     >
       <Text
+        collapsable={false}
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onLayout={[Function]}
@@ -107,6 +110,7 @@ exports[`correctly applies a component as the text label 1`] = `
         </Text>
       </Text>
       <Text
+        collapsable={false}
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
@@ -150,7 +154,6 @@ exports[`correctly applies a component as the text label 1`] = `
       </Text>
     </View>
     <TextInput
-      allowFontScaling={true}
       editable={true}
       maxFontSizeMultiplier={1.5}
       multiline={false}
@@ -159,7 +162,6 @@ exports[`correctly applies a component as the text label 1`] = `
       onFocus={[Function]}
       placeholder=""
       placeholderTextColor="rgba(73, 69, 79, 1)"
-      rejectResponderTermination={true}
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         Array [
@@ -213,6 +215,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "backgroundColor": "rgba(28, 27, 31, 1)",
@@ -244,6 +247,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
     }
   >
     <View
+      collapsable={false}
       pointerEvents="none"
       style={
         Object {
@@ -263,6 +267,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
       }
     >
       <Text
+        collapsable={false}
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onLayout={[Function]}
@@ -298,6 +303,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
         Flat input
       </Text>
       <Text
+        collapsable={false}
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
@@ -333,7 +339,6 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
       </Text>
     </View>
     <TextInput
-      allowFontScaling={true}
       editable={true}
       maxFontSizeMultiplier={1.5}
       multiline={false}
@@ -342,7 +347,6 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
       onFocus={[Function]}
       placeholder=""
       placeholderTextColor="rgba(73, 69, 79, 1)"
-      rejectResponderTermination={true}
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         Array [
@@ -422,6 +426,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
       }
     >
       <View
+        collapsable={false}
         pointerEvents="none"
         style={
           Object {
@@ -441,6 +446,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
         }
       >
         <View
+          collapsable={false}
           pointerEvents="none"
           style={
             Object {
@@ -462,6 +468,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           }
         />
         <Text
+          collapsable={false}
           maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           style={
@@ -495,6 +502,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           Outline Input
         </Text>
         <Text
+          collapsable={false}
           maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           onLayout={[Function]}
@@ -529,6 +537,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           Outline Input
         </Text>
         <Text
+          collapsable={false}
           maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           style={
@@ -563,7 +572,6 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
         </Text>
       </View>
       <TextInput
-        allowFontScaling={true}
         editable={true}
         maxFontSizeMultiplier={1.5}
         multiline={true}
@@ -572,7 +580,6 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
         onFocus={[Function]}
         placeholder=""
         placeholderTextColor="rgba(73, 69, 79, 1)"
-        rejectResponderTermination={true}
         selectionColor="rgba(103, 80, 164, 1)"
         style={
           Array [
@@ -625,6 +632,7 @@ exports[`correctly applies textAlign center 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "backgroundColor": "rgba(28, 27, 31, 1)",
@@ -656,6 +664,7 @@ exports[`correctly applies textAlign center 1`] = `
     }
   >
     <View
+      collapsable={false}
       pointerEvents="none"
       style={
         Object {
@@ -675,6 +684,7 @@ exports[`correctly applies textAlign center 1`] = `
       }
     >
       <Text
+        collapsable={false}
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onLayout={[Function]}
@@ -710,6 +720,7 @@ exports[`correctly applies textAlign center 1`] = `
         Flat input
       </Text>
       <Text
+        collapsable={false}
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
@@ -745,7 +756,6 @@ exports[`correctly applies textAlign center 1`] = `
       </Text>
     </View>
     <TextInput
-      allowFontScaling={true}
       editable={true}
       maxFontSizeMultiplier={1.5}
       multiline={false}
@@ -754,7 +764,6 @@ exports[`correctly applies textAlign center 1`] = `
       onFocus={[Function]}
       placeholder=""
       placeholderTextColor="rgba(73, 69, 79, 1)"
-      rejectResponderTermination={true}
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         Array [
@@ -808,6 +817,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "backgroundColor": "rgba(28, 27, 31, 1)",
@@ -839,6 +849,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     }
   >
     <View
+      collapsable={false}
       pointerEvents="none"
       style={
         Object {
@@ -858,6 +869,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       }
     >
       <Text
+        collapsable={false}
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onLayout={[Function]}
@@ -893,6 +905,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         Flat input
       </Text>
       <Text
+        collapsable={false}
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
@@ -928,7 +941,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       </Text>
     </View>
     <TextInput
-      allowFontScaling={true}
       editable={true}
       maxFontSizeMultiplier={1.5}
       multiline={false}
@@ -937,7 +949,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       onFocus={[Function]}
       placeholder=""
       placeholderTextColor="rgba(73, 69, 79, 1)"
-      rejectResponderTermination={true}
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         Array [
@@ -978,6 +989,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     />
   </View>
   <View
+    collapsable={false}
     onLayout={[Function]}
     style={
       Object {
@@ -1028,6 +1040,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -1041,6 +1054,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -1054,6 +1068,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
@@ -1072,7 +1087,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             accessibilityRole="button"
             accessibilityState={
               Object {
-                "disabled": undefined,
+                "disabled": false,
               }
             }
             accessible={true}
@@ -1146,6 +1161,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "backgroundColor": "rgba(28, 27, 31, 1)",
@@ -1177,6 +1193,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     }
   >
     <View
+      collapsable={false}
       pointerEvents="none"
       style={
         Object {
@@ -1196,6 +1213,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       }
     >
       <Text
+        collapsable={false}
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onLayout={[Function]}
@@ -1231,6 +1249,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         Flat input
       </Text>
       <Text
+        collapsable={false}
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
@@ -1266,7 +1285,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       </Text>
     </View>
     <TextInput
-      allowFontScaling={true}
       editable={true}
       maxFontSizeMultiplier={1.5}
       multiline={false}
@@ -1275,7 +1293,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       onFocus={[Function]}
       placeholder=""
       placeholderTextColor="rgba(73, 69, 79, 1)"
-      rejectResponderTermination={true}
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         Array [
@@ -1333,6 +1350,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "shadowColor": "#000",
@@ -1346,6 +1364,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
             "shadowColor": "#000",
@@ -1359,6 +1378,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         }
       >
         <View
+          collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
@@ -1377,7 +1397,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             accessibilityRole="button"
             accessibilityState={
               Object {
-                "disabled": undefined,
+                "disabled": false,
               }
             }
             accessible={true}
@@ -1435,6 +1455,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     </View>
   </View>
   <View
+    collapsable={false}
     onLayout={[Function]}
     style={
       Object {

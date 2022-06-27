@@ -6,6 +6,7 @@ exports[`renders DrawerItem with icon 1`] = `
     accessibilityRole="button"
     accessibilityState={
       Object {
+        "disabled": true,
         "selected": undefined,
       }
     }
@@ -137,6 +138,7 @@ exports[`renders active DrawerItem 1`] = `
     accessibilityRole="button"
     accessibilityState={
       Object {
+        "disabled": true,
         "selected": true,
       }
     }
@@ -268,6 +270,7 @@ exports[`renders basic DrawerItem 1`] = `
     accessibilityRole="button"
     accessibilityState={
       Object {
+        "disabled": false,
         "selected": undefined,
       }
     }

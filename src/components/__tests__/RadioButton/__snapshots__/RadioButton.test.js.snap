@@ -7,7 +7,7 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
   accessibilityState={
     Object {
       "checked": false,
-      "disabled": undefined,
+      "disabled": false,
     }
   }
   accessible={true}
@@ -70,7 +70,7 @@ exports[`RadioButton on default platform renders properly 1`] = `
   accessibilityState={
     Object {
       "checked": false,
-      "disabled": undefined,
+      "disabled": false,
     }
   }
   accessible={true}
@@ -132,7 +132,7 @@ exports[`RadioButton on ios platform renders properly 1`] = `
   accessibilityState={
     Object {
       "checked": false,
-      "disabled": undefined,
+      "disabled": false,
     }
   }
   accessible={true}
@@ -194,7 +194,7 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
   accessibilityState={
     Object {
       "checked": false,
-      "disabled": undefined,
+      "disabled": false,
     }
   }
   accessible={true}

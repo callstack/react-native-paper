@@ -6,7 +6,7 @@ Array [
     accessibilityRole="menuitem"
     accessibilityState={
       Object {
-        "disabled": undefined,
+        "disabled": false,
       }
     }
     accessible={true}
@@ -131,7 +131,7 @@ Array [
     accessibilityRole="menuitem"
     accessibilityState={
       Object {
-        "disabled": undefined,
+        "disabled": false,
       }
     }
     accessible={true}
@@ -506,7 +506,7 @@ Array [
     accessibilityRole="menuitem"
     accessibilityState={
       Object {
-        "disabled": undefined,
+        "disabled": false,
       }
     }
     accessible={true}

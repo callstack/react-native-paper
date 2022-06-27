@@ -2,6 +2,7 @@
 
 exports[`renders disabled toggle button 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -15,6 +16,7 @@ exports[`renders disabled toggle button 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -28,6 +30,7 @@ exports[`renders disabled toggle button 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "rgba(29, 25, 43, 0.12)",
@@ -105,6 +108,7 @@ exports[`renders disabled toggle button 1`] = `
 
 exports[`renders toggle button 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -118,6 +122,7 @@ exports[`renders toggle button 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -131,6 +136,7 @@ exports[`renders toggle button 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "rgba(29, 25, 43, 0.12)",
@@ -149,7 +155,7 @@ exports[`renders toggle button 1`] = `
         accessibilityRole="button"
         accessibilityState={
           Object {
-            "disabled": undefined,
+            "disabled": false,
             "selected": true,
           }
         }
@@ -208,6 +214,7 @@ exports[`renders toggle button 1`] = `
 
 exports[`renders unchecked toggle button 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "shadowColor": "#000",
@@ -221,6 +228,7 @@ exports[`renders unchecked toggle button 1`] = `
   }
 >
   <View
+    collapsable={false}
     style={
       Object {
         "shadowColor": "#000",
@@ -234,6 +242,7 @@ exports[`renders unchecked toggle button 1`] = `
     }
   >
     <View
+      collapsable={false}
       style={
         Object {
           "backgroundColor": "transparent",

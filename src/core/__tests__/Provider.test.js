@@ -41,14 +41,17 @@ const mockAccessibilityInfo = () => {
 
       const listeners = [];
       return {
-        realApp,
-        addEventListener: jest.fn((event, cb) => {
-          listeners.push(cb);
-        }),
-        removeEventListener: jest.fn((cb) => {
-          listeners.push(cb);
-        }),
-        __internalListeners: listeners,
+        __esModule: true,
+        default: {
+          realApp,
+          addEventListener: jest.fn((event, cb) => {
+            listeners.push(cb);
+          }),
+          removeEventListener: jest.fn((cb) => {
+            listeners.push(cb);
+          }),
+          __internalListeners: listeners,
+        },
       };
     }
   );
