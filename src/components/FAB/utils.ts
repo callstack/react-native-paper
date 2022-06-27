@@ -350,14 +350,25 @@ const v3LargeSize = {
   width: 96,
 };
 
+const getCustomFabSize = (customSize: number, roundness: number) => ({
+  height: customSize,
+  width: customSize,
+  borderRadius: customSize / roundness,
+});
+
 export const getFabStyle = ({
   size,
   theme,
+  customSize,
 }: {
+  customSize?: number;
   size: 'small' | 'medium' | 'large';
   theme: Theme;
 }) => {
   const { isV3, roundness } = theme;
+
+  if (customSize) return getCustomFabSize(customSize, roundness);
+
   if (isV3) {
     switch (size) {
       case 'small':
@@ -373,4 +384,34 @@ export const getFabStyle = ({
     return smallSize;
   }
   return standardSize;
+};
+
+const extended = {
+  height: 48,
+  paddingHorizontal: 16,
+};
+
+const v3Extended = {
+  height: 56,
+  borderRadius: 16,
+  paddingHorizontal: 16,
+};
+
+const getExtendedFabDimensions = (customSize: number) => ({
+  height: customSize,
+  paddingHorizontal: 16,
+});
+
+export const getExtendedFabStyle = ({
+  customSize,
+  theme,
+}: {
+  customSize?: number;
+  theme: Theme;
+}) => {
+  if (customSize) return getExtendedFabDimensions(customSize);
+
+  const { isV3 } = theme;
+
+  return isV3 ? v3Extended : extended;
 };

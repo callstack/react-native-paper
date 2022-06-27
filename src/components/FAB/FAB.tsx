@@ -14,7 +14,7 @@ import Icon, { IconSource } from '../Icon';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
-import { getFABColors, getFabStyle } from './utils';
+import { getExtendedFabStyle, getFABColors, getFabStyle } from './utils';
 import type { $RemoveChildren, Theme } from '../../types';
 
 type FABSize = 'small' | 'medium' | 'large';
@@ -86,6 +86,12 @@ type Props = $RemoveChildren<typeof Surface> & {
    * - `large` - FAB with large height (96).
    */
   size?: FABSize;
+  /**
+   * @supported Available in v5.x
+   *
+   * Custom size for the `FAB`. This prop takes precedence over size prop
+   */
+  customSize?: number;
   /**
    * @supported Available in v5.x with theme version 3
    *
@@ -160,6 +166,7 @@ const FAB = ({
   loading,
   testID,
   size = 'medium',
+  customSize,
   mode = 'elevated',
   variant = 'primary',
   ...rest
@@ -201,20 +208,19 @@ const FAB = ({
   const iconSize = isLargeSize ? 36 : 24;
   const loadingIndicatorSize = isLargeSize ? 24 : 18;
 
-  const fabStyle = getFabStyle({ size, theme });
-
-  const shapeStyle = { borderRadius: fabStyle.borderRadius };
+  const fabStyle = getFabStyle({ customSize, size, theme });
+  const extendedStyle = getExtendedFabStyle({ customSize, theme });
   const textStyle = {
     color: foregroundColor,
     ...(isV3 ? theme.typescale.labelLarge : theme.fonts.medium),
   };
+  const shapeStyle = { borderRadius: fabStyle.borderRadius };
 
   const containerStyles = [
     !isV3 && styles.elevated,
     !isV3 && disabled && styles.disabled,
     shapeStyle,
   ];
-  const extendedStyle = isV3 ? styles.v3Extended : styles.extended;
   const md3Elevation = isFlatMode || disabled ? 0 : 3;
 
   return (
@@ -257,13 +263,13 @@ const FAB = ({
           {icon && loading !== true ? (
             <IconComponent
               source={icon}
-              size={iconSize}
+              size={customSize ? customSize / 2 : iconSize}
               color={foregroundColor}
             />
           ) : null}
           {loading ? (
             <ActivityIndicator
-              size={loadingIndicatorSize}
+              size={customSize ? customSize / 2 : loadingIndicatorSize}
               color={foregroundColor}
             />
           ) : null}
@@ -290,10 +296,6 @@ const styles = StyleSheet.create({
   elevated: {
     elevation: 6,
   },
-  extended: {
-    height: 48,
-    paddingHorizontal: 16,
-  },
   content: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -307,11 +309,6 @@ const styles = StyleSheet.create({
   },
   disabled: {
     elevation: 0,
-  },
-  v3Extended: {
-    height: 56,
-    borderRadius: 16,
-    paddingHorizontal: 16,
   },
 });
 
