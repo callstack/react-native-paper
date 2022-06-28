@@ -18,21 +18,6 @@ import DrawerItems from './DrawerItems';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { isWeb } from '../utils';
 
-// Add new typescript properties to the theme
-declare global {
-  namespace ReactNativePaper {
-    interface ThemeFonts {
-      superLight: ThemeFont;
-    }
-    interface ThemeColors {
-      customColor: string;
-    }
-    interface ThemeAnimation {
-      customProperty: number;
-    }
-  }
-}
-
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
 
@@ -82,7 +67,7 @@ export default function PaperExample() {
       light: MD3LightTheme,
       dark: MD3DarkTheme,
     },
-  }[themeVersion][themeMode];
+  }[themeVersion][themeMode] as ReactNativePaper.Theme;
 
   React.useEffect(() => {
     const restoreState = async () => {

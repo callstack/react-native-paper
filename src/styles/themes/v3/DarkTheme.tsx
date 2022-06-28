@@ -1,11 +1,11 @@
-import LightTheme from './LightTheme';
-import type { ThemeBase } from '../../../types';
-import { tokens, typescale } from './tokens';
 import color from 'color';
+import type { MD3Theme } from '../../../types';
+import LightTheme from './LightTheme';
+import { tokens } from './tokens';
 
 const { palette, opacity } = tokens.md.ref;
 
-const DarkTheme: ThemeBase = {
+const DarkTheme: MD3Theme = {
   ...LightTheme,
   dark: true,
   mode: 'adaptive',
@@ -59,7 +59,6 @@ const DarkTheme: ThemeBase = {
       level5: 'rgb(52, 49, 63)', // palette.primary80, alpha 0.14
     },
   },
-  typescale,
 };
 
 export default DarkTheme;

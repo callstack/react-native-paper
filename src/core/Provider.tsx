@@ -10,13 +10,7 @@ import { Provider as SettingsProvider, Settings } from './settings';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
 import { addEventListener } from '../utils/addEventListener';
-import type { Theme, ThemeBase } from '../types';
-
-type ThemeProp =
-  | ThemeBase
-  | {
-      version: 2 | 3;
-    };
+import type { ThemeProp } from '../types';
 
 type Props = {
   children: React.ReactNode;
@@ -77,7 +71,7 @@ const Provider = (props: Props) => {
         }
       }
     };
-  }, [props.theme]);
+  }, [props.theme, isOnlyVersionInTheme]);
 
   const getTheme = () => {
     const themeVersion = props.theme?.version || 3;
@@ -86,7 +80,7 @@ const Provider = (props: Props) => {
 
     const extendedThemeBase = {
       ...defaultThemeBase,
-      ...(props.theme as ThemeBase),
+      ...props.theme,
       version: themeVersion,
       animation: {
         scale: reduceMotionEnabled ? 0 : 1,
@@ -96,7 +90,7 @@ const Provider = (props: Props) => {
     return {
       ...extendedThemeBase,
       isV3: extendedThemeBase.version === 3,
-    } as Theme;
+    } as ReactNativePaper.Theme;
   };
 
   const { children, settings } = props;

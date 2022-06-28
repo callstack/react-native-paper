@@ -1,10 +1,10 @@
 import color from 'color';
-import LightTheme from './LightTheme';
-import { black, white, pinkA100 } from './colors';
+import type { MD2Theme } from '../../../types';
 import configureFonts from '../../fonts';
-import type { ThemeBase } from '../../../types';
+import { black, pinkA100, white } from './colors';
+import LightTheme from './LightTheme';
 
-const DarkTheme: ThemeBase = {
+const DarkTheme: MD2Theme = {
   ...LightTheme,
   dark: true,
   mode: 'adaptive',
