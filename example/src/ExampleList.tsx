@@ -10,6 +10,7 @@ import AvatarExample from './Examples/AvatarExample';
 import BadgeExample from './Examples/BadgeExample';
 import BannerExample from './Examples/BannerExample';
 import BottomNavigationExample from './Examples/BottomNavigationExample';
+import BottomSheetModalExample from './Examples/BottomSheetModalExample';
 import ButtonExample from './Examples/ButtonExample';
 import CardExample from './Examples/CardExample';
 import CheckboxExample from './Examples/CheckboxExample';
@@ -50,6 +51,7 @@ export const examples: Record<
   badge: BadgeExample,
   banner: BannerExample,
   bottomNavigation: BottomNavigationExample,
+  bottomSheetModal: BottomSheetModalExample,
   button: ButtonExample,
   card: CardExample,
   checkbox: CheckboxExample,
