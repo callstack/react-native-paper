@@ -140,7 +140,7 @@ const AppbarHeader = ({
             backgroundColor,
             zIndex,
             elevation,
-            paddingTop: statusBarHeight || APPROX_STATUSBAR_HEIGHT,
+            paddingTop: statusBarHeight ?? APPROX_STATUSBAR_HEIGHT,
           },
           shadow(elevation),
         ] as StyleProp<ViewStyle>
