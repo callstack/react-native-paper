@@ -164,9 +164,9 @@ const Surface = ({
       return elevationLevel[elevation];
     };
 
-    const { margin, padding, transform, borderRadius } = StyleSheet.flatten(
+    const { margin, padding, transform, borderRadius } = (StyleSheet.flatten(
       style
-    ) as ViewStyle;
+    ) || {}) as ViewStyle;
 
     const outerLayerStyles = { margin, padding, transform, borderRadius };
 
