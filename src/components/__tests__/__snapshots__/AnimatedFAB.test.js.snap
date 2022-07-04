@@ -5,6 +5,10 @@ exports[`renders animated fab 1`] = `
   collapsable={false}
   style={
     Object {
+      "bottom": undefined,
+      "left": undefined,
+      "position": "absolute",
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -12,6 +16,7 @@ exports[`renders animated fab 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "top": undefined,
     }
   }
 >
@@ -36,7 +41,6 @@ exports[`renders animated fab 1`] = `
           "backgroundColor": "transparent",
           "borderRadius": 16,
           "opacity": 1,
-          "position": "absolute",
           "transform": Array [
             Object {
               "scale": 1,
@@ -265,6 +269,10 @@ exports[`renders animated fab with label on the left 1`] = `
   collapsable={false}
   style={
     Object {
+      "bottom": undefined,
+      "left": undefined,
+      "position": "absolute",
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -272,6 +280,7 @@ exports[`renders animated fab with label on the left 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "top": undefined,
     }
   }
 >
@@ -296,7 +305,6 @@ exports[`renders animated fab with label on the left 1`] = `
           "backgroundColor": "transparent",
           "borderRadius": 16,
           "opacity": 1,
-          "position": "absolute",
           "transform": Array [
             Object {
               "scale": 1,
@@ -528,6 +536,10 @@ exports[`renders animated fab with label on the right by default 1`] = `
   collapsable={false}
   style={
     Object {
+      "bottom": undefined,
+      "left": undefined,
+      "position": "absolute",
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -535,6 +547,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "top": undefined,
     }
   }
 >
@@ -559,7 +572,6 @@ exports[`renders animated fab with label on the right by default 1`] = `
           "backgroundColor": "transparent",
           "borderRadius": 16,
           "opacity": 1,
-          "position": "absolute",
           "transform": Array [
             Object {
               "scale": 1,

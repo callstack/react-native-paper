@@ -1043,6 +1043,10 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       collapsable={false}
       style={
         Object {
+          "bottom": undefined,
+          "left": undefined,
+          "position": undefined,
+          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -1050,6 +1054,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "top": undefined,
         }
       }
     >
@@ -1353,6 +1358,10 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       collapsable={false}
       style={
         Object {
+          "bottom": undefined,
+          "left": undefined,
+          "position": undefined,
+          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -1360,6 +1369,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "top": undefined,
         }
       }
     >

@@ -5,6 +5,10 @@ exports[`renders disabled toggle button 1`] = `
   collapsable={false}
   style={
     Object {
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 0,
@@ -12,6 +16,7 @@ exports[`renders disabled toggle button 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
+      "top": undefined,
     }
   }
 >
@@ -111,6 +116,10 @@ exports[`renders toggle button 1`] = `
   collapsable={false}
   style={
     Object {
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 0,
@@ -118,6 +127,7 @@ exports[`renders toggle button 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
+      "top": undefined,
     }
   }
 >
@@ -217,6 +227,10 @@ exports[`renders unchecked toggle button 1`] = `
   collapsable={false}
   style={
     Object {
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 0,
@@ -224,6 +238,7 @@ exports[`renders unchecked toggle button 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
+      "top": undefined,
     }
   }
 >

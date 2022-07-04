@@ -119,7 +119,7 @@ const AppbarHeader = ({
     height = isV3 ? modeAppbarHeight[mode] : DEFAULT_APPBAR_HEIGHT,
     elevation = isV3 ? (elevated ? 2 : 0) : 4,
     backgroundColor: customBackground,
-    zIndex = 0,
+    zIndex = isV3 && elevated ? 1 : 0,
     ...restStyle
   }: ViewStyle = StyleSheet.flatten(style) || {};
 

@@ -5,6 +5,10 @@ exports[`renders FAB with custom size prop 1`] = `
   collapsable={false}
   style={
     Object {
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -12,6 +16,7 @@ exports[`renders FAB with custom size prop 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "top": undefined,
     }
   }
 >
@@ -154,6 +159,10 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
   collapsable={false}
   style={
     Object {
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -161,6 +170,7 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "top": undefined,
     }
   }
 >
@@ -303,6 +313,10 @@ exports[`renders disabled FAB 1`] = `
   collapsable={false}
   style={
     Object {
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 0,
@@ -310,6 +324,7 @@ exports[`renders disabled FAB 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
+      "top": undefined,
     }
   }
 >
@@ -452,6 +467,10 @@ exports[`renders extended FAB 1`] = `
   collapsable={false}
   style={
     Object {
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -459,6 +478,7 @@ exports[`renders extended FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "top": undefined,
     }
   }
 >
@@ -638,6 +658,10 @@ exports[`renders extended FAB with custom size prop 1`] = `
   collapsable={false}
   style={
     Object {
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -645,6 +669,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "top": undefined,
     }
   }
 >
@@ -823,6 +848,10 @@ exports[`renders loading FAB 1`] = `
   collapsable={false}
   style={
     Object {
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -830,6 +859,7 @@ exports[`renders loading FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "top": undefined,
     }
   }
 >
@@ -1114,6 +1144,10 @@ exports[`renders loading FAB with custom size prop 1`] = `
   collapsable={false}
   style={
     Object {
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -1121,6 +1155,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "top": undefined,
     }
   }
 >
@@ -1405,6 +1440,10 @@ exports[`renders normal FAB 1`] = `
   collapsable={false}
   style={
     Object {
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -1412,6 +1451,7 @@ exports[`renders normal FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "top": undefined,
     }
   }
 >
@@ -1554,6 +1594,10 @@ exports[`renders not visible FAB 1`] = `
   collapsable={false}
   style={
     Object {
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -1561,6 +1605,7 @@ exports[`renders not visible FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "top": undefined,
     }
   }
 >
@@ -1703,6 +1748,10 @@ exports[`renders small FAB 1`] = `
   collapsable={false}
   style={
     Object {
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -1710,6 +1759,7 @@ exports[`renders small FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "top": undefined,
     }
   }
 >
@@ -1852,6 +1902,10 @@ exports[`renders visible FAB 1`] = `
   collapsable={false}
   style={
     Object {
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -1859,6 +1913,7 @@ exports[`renders visible FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "top": undefined,
     }
   }
 >
