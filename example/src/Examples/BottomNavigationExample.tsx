@@ -1,8 +1,16 @@
 import * as React from 'react';
-import { View, Image, Dimensions, StyleSheet, Platform } from 'react-native';
-import { BottomNavigation, useTheme } from 'react-native-paper';
+import {
+  View,
+  Image,
+  Dimensions,
+  StyleSheet,
+  Platform,
+  Easing,
+} from 'react-native';
+import { Appbar, BottomNavigation, Menu, useTheme } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import type { StackNavigationProp } from '@react-navigation/stack';
 
 type RoutesState = Array<{
   key: string;
@@ -16,6 +24,12 @@ type RoutesState = Array<{
 }>;
 
 type Route = { route: { key: string } };
+
+type Props = {
+  navigation: StackNavigationProp<{}>;
+};
+
+const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
 const PhotoGallery = ({ route }: Route) => {
   const PHOTOS = Array.from({ length: 24 }).map(
@@ -33,10 +47,16 @@ const PhotoGallery = ({ route }: Route) => {
   );
 };
 
-const BottomNavigationExample = () => {
+const BottomNavigationExample = ({ navigation }: Props) => {
   const { isV3 } = useTheme();
   const insets = useSafeAreaInsets();
   const [index, setIndex] = React.useState(0);
+  const [menuVisible, setMenuVisible] = React.useState(false);
+  const [sceneAnimation, setSceneAnimation] =
+    React.useState<
+      React.ComponentProps<typeof BottomNavigation>['sceneAnimationType']
+    >();
+
   const [routes] = React.useState<RoutesState>([
     {
       key: 'album',
@@ -73,19 +93,70 @@ const BottomNavigationExample = () => {
     },
   ]);
 
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
+  }, [navigation]);
+
   return (
-    <BottomNavigation
-      safeAreaInsets={{ bottom: insets.bottom }}
-      navigationState={{ index, routes }}
-      onIndexChange={setIndex}
-      labelMaxFontSizeMultiplier={2}
-      renderScene={BottomNavigation.SceneMap({
-        album: PhotoGallery,
-        library: PhotoGallery,
-        favorites: PhotoGallery,
-        purchased: PhotoGallery,
-      })}
-    />
+    <View style={styles.screen}>
+      <Appbar.Header elevated>
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
+        <Appbar.Content title="Bottom Navigation" />
+        <Menu
+          visible={menuVisible}
+          onDismiss={() => setMenuVisible(false)}
+          anchor={
+            <Appbar.Action
+              icon={MORE_ICON}
+              onPress={() => setMenuVisible(true)}
+              {...(!isV3 && { color: 'white' })}
+            />
+          }
+        >
+          <Menu.Item
+            trailingIcon={sceneAnimation === undefined ? 'check' : undefined}
+            onPress={() => {
+              setSceneAnimation(undefined);
+              setMenuVisible(false);
+            }}
+            title="Scene animation: none"
+          />
+          <Menu.Item
+            trailingIcon={sceneAnimation === 'shifting' ? 'check' : undefined}
+            onPress={() => {
+              setSceneAnimation('shifting');
+              setMenuVisible(false);
+            }}
+            title="Scene animation: shifting"
+          />
+          <Menu.Item
+            trailingIcon={sceneAnimation === 'opacity' ? 'check' : undefined}
+            onPress={() => {
+              setSceneAnimation('opacity');
+              setMenuVisible(false);
+            }}
+            title="Scene animation: opacity"
+          />
+        </Menu>
+      </Appbar.Header>
+      <BottomNavigation
+        safeAreaInsets={{ bottom: insets.bottom }}
+        navigationState={{ index, routes }}
+        onIndexChange={setIndex}
+        labelMaxFontSizeMultiplier={2}
+        renderScene={BottomNavigation.SceneMap({
+          album: PhotoGallery,
+          library: PhotoGallery,
+          favorites: PhotoGallery,
+          purchased: PhotoGallery,
+        })}
+        sceneAnimationEnabled={sceneAnimation !== undefined}
+        sceneAnimationType={sceneAnimation}
+        sceneAnimationEasing={Easing.ease}
+      />
+    </View>
   );
 };
 
@@ -125,5 +196,8 @@ const styles = StyleSheet.create({
   photo: {
     flex: 1,
     resizeMode: 'cover',
+  },
+  screen: {
+    flex: 1,
   },
 });
