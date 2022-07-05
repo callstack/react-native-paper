@@ -16,12 +16,13 @@ export default function Root() {
           header: ({ navigation, route, options, back }) => {
             const title = getHeaderTitle(options, route.name);
             return (
-              <Appbar.Header>
+              <Appbar.Header elevated>
                 {back ? (
                   <Appbar.BackAction onPress={() => navigation.goBack()} />
                 ) : (navigation as any).openDrawer ? (
                   <Appbar.Action
                     icon="menu"
+                    isLeading
                     onPress={() =>
                       (
                         navigation as any as DrawerNavigationProp<{}>

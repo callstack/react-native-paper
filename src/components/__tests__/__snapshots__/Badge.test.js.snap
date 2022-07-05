@@ -2,22 +2,21 @@
 
 exports[`renders badge 1`] = `
 <Text
+  collapsable={false}
   numberOfLines={1}
   style={
     Object {
       "alignSelf": "flex-end",
-      "backgroundColor": "#f50057",
+      "backgroundColor": "rgba(179, 38, 30, 1)",
       "borderRadius": 10,
-      "color": "#ffffff",
-      "fontFamily": "System",
+      "color": "rgba(255, 255, 255, 1)",
       "fontSize": 10,
-      "fontWeight": "400",
       "height": 20,
       "lineHeight": 20,
       "minWidth": 20,
       "opacity": 1,
       "overflow": "hidden",
-      "paddingHorizontal": 4,
+      "paddingHorizontal": 3,
       "textAlign": "center",
       "textAlignVertical": "center",
     }
@@ -27,22 +26,21 @@ exports[`renders badge 1`] = `
 
 exports[`renders badge as hidden 1`] = `
 <Text
+  collapsable={false}
   numberOfLines={1}
   style={
     Object {
       "alignSelf": "flex-end",
-      "backgroundColor": "#f50057",
+      "backgroundColor": "rgba(179, 38, 30, 1)",
       "borderRadius": 6,
-      "color": "#ffffff",
-      "fontFamily": "System",
+      "color": "rgba(255, 255, 255, 1)",
       "fontSize": 6,
-      "fontWeight": "400",
       "height": 12,
       "lineHeight": 12,
       "minWidth": 12,
       "opacity": 0,
       "overflow": "hidden",
-      "paddingHorizontal": 4,
+      "paddingHorizontal": 3,
       "textAlign": "center",
       "textAlignVertical": "center",
     }
@@ -54,22 +52,21 @@ exports[`renders badge as hidden 1`] = `
 
 exports[`renders badge in different color 1`] = `
 <Text
+  collapsable={false}
   numberOfLines={1}
   style={
     Object {
       "alignSelf": "flex-end",
       "backgroundColor": "#f44336",
       "borderRadius": 10,
-      "color": "#ffffff",
-      "fontFamily": "System",
+      "color": "rgba(255, 255, 255, 1)",
       "fontSize": 10,
-      "fontWeight": "400",
       "height": 20,
       "lineHeight": 20,
       "minWidth": 20,
       "opacity": 1,
       "overflow": "hidden",
-      "paddingHorizontal": 4,
+      "paddingHorizontal": 3,
       "textAlign": "center",
       "textAlignVertical": "center",
     }
@@ -81,22 +78,21 @@ exports[`renders badge in different color 1`] = `
 
 exports[`renders badge in different size 1`] = `
 <Text
+  collapsable={false}
   numberOfLines={1}
   style={
     Object {
       "alignSelf": "flex-end",
-      "backgroundColor": "#f50057",
+      "backgroundColor": "rgba(179, 38, 30, 1)",
       "borderRadius": 6,
-      "color": "#ffffff",
-      "fontFamily": "System",
+      "color": "rgba(255, 255, 255, 1)",
       "fontSize": 6,
-      "fontWeight": "400",
       "height": 12,
       "lineHeight": 12,
       "minWidth": 12,
       "opacity": 1,
       "overflow": "hidden",
-      "paddingHorizontal": 4,
+      "paddingHorizontal": 3,
       "textAlign": "center",
       "textAlignVertical": "center",
     }
@@ -108,22 +104,21 @@ exports[`renders badge in different size 1`] = `
 
 exports[`renders badge with content 1`] = `
 <Text
+  collapsable={false}
   numberOfLines={1}
   style={
     Object {
       "alignSelf": "flex-end",
-      "backgroundColor": "#f50057",
+      "backgroundColor": "rgba(179, 38, 30, 1)",
       "borderRadius": 10,
-      "color": "#ffffff",
-      "fontFamily": "System",
+      "color": "rgba(255, 255, 255, 1)",
       "fontSize": 10,
-      "fontWeight": "400",
       "height": 20,
       "lineHeight": 20,
       "minWidth": 20,
       "opacity": 1,
       "overflow": "hidden",
-      "paddingHorizontal": 4,
+      "paddingHorizontal": 3,
       "textAlign": "center",
       "textAlignVertical": "center",
     }

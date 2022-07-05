@@ -1,13 +1,31 @@
 import type { Animated } from 'react-native';
+import color from 'color';
 import type { AdornmentConfig } from './Adornment/types';
 import {
-  LABEL_PADDING_HORIZONTAL,
-  ADORNMENT_OFFSET,
   ADORNMENT_SIZE,
-  FLAT_INPUT_OFFSET,
+  MD3_LABEL_PADDING_HORIZONTAL,
+  MD2_LABEL_PADDING_HORIZONTAL,
+  MD3_ADORNMENT_OFFSET,
+  MD2_ADORNMENT_OFFSET,
+  MD3_FLAT_INPUT_OFFSET,
+  MD2_FLAT_INPUT_OFFSET,
+  MD3_AFFIX_OFFSET,
+  MD2_AFFIX_OFFSET,
+  MD3_ICON_OFFSET,
+  MD2_ICON_OFFSET,
+  MD3_LABEL_PADDING_TOP,
+  MD2_LABEL_PADDING_TOP,
+  MD3_MIN_HEIGHT,
+  MD2_MIN_HEIGHT,
+  MD3_INPUT_PADDING_HORIZONTAL,
+  MD2_INPUT_PADDING_HORIZONTAL,
+  MD3_OUTLINED_INPUT_OFFSET,
+  MD2_OUTLINED_INPUT_OFFSET,
 } from './constants';
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
 import type { TextInputLabelProp } from './types';
+import MD3LightTheme from '../../styles/themes/v3/LightTheme';
+import type { Theme } from '../../types';
 
 type PaddingProps = {
   height: number | null;
@@ -267,9 +285,14 @@ export function calculateOutlinedIconAndAffixTopPosition({
 
 export const calculateFlatInputHorizontalPadding = ({
   adornmentConfig,
+  isV3,
 }: {
   adornmentConfig: AdornmentConfig[];
+  isV3?: boolean;
 }) => {
+  const { LABEL_PADDING_HORIZONTAL, ADORNMENT_OFFSET, FLAT_INPUT_OFFSET } =
+    getConstants(isV3);
+
   let paddingLeft = LABEL_PADDING_HORIZONTAL;
   let paddingRight = LABEL_PADDING_HORIZONTAL;
 
@@ -286,4 +309,281 @@ export const calculateFlatInputHorizontalPadding = ({
   });
 
   return { paddingLeft, paddingRight };
+};
+
+type BaseProps = {
+  theme: Theme;
+  disabled?: boolean;
+};
+
+type Mode = 'flat' | 'outlined';
+
+const getInputTextColor = ({
+  theme,
+  disabled,
+  mode,
+}: BaseProps & { mode: Mode }) => {
+  const isFlat = mode === 'flat';
+  if (theme.isV3) {
+    if (disabled) {
+      return theme.colors.onSurfaceDisabled;
+    }
+
+    if (isFlat) {
+      return theme.colors.onSurfaceVariant;
+    }
+
+    return theme.colors.onSurface;
+  }
+
+  if (disabled) {
+    return color(theme.colors.text).alpha(0.54).rgb().string();
+  }
+
+  return theme.colors.text;
+};
+
+const getActiveColor = ({
+  theme,
+  disabled,
+  error,
+  activeUnderlineColor,
+  activeOutlineColor,
+  mode,
+}: BaseProps & {
+  error?: boolean;
+  activeUnderlineColor?: string;
+  activeOutlineColor?: string;
+  mode?: Mode;
+}) => {
+  const isFlat = mode === 'flat';
+  const modeColor = isFlat ? activeUnderlineColor : activeOutlineColor;
+
+  if (error) {
+    return theme.colors.error;
+  }
+
+  if (modeColor) {
+    return modeColor;
+  }
+
+  if (disabled) {
+    if (theme.isV3) {
+      return theme.colors.onSurfaceDisabled;
+    }
+
+    return color(theme.colors.text).alpha(0.54).rgb().string();
+  }
+
+  return theme.colors.primary;
+};
+
+const getPlaceholderColor = ({ theme, disabled }: BaseProps) => {
+  if (theme.isV3) {
+    if (disabled) {
+      return theme.colors.onSurfaceDisabled;
+    }
+
+    return theme.colors.onSurfaceVariant;
+  }
+
+  if (disabled) {
+    return theme.colors.disabled;
+  }
+
+  return theme.colors.placeholder;
+};
+
+const getFlatBackgroundColor = ({ theme, disabled }: BaseProps) => {
+  if (theme.isV3) {
+    if (disabled) {
+      // @ts-ignore According to Figma for both themes the base color for disabled in `onSecondaryContainer`
+      return color(MD3LightTheme.colors.onSecondaryContainer)
+        .alpha(0.08)
+        .rgb()
+        .string();
+    } else {
+      return theme.colors.surfaceVariant;
+    }
+  }
+
+  if (disabled) {
+    return undefined;
+  }
+
+  return theme.dark
+    ? color(theme.colors?.background).lighten(0.24).rgb().string()
+    : color(theme.colors?.background).darken(0.06).rgb().string();
+};
+
+const getFlatUnderlineColor = ({
+  theme,
+  disabled,
+  underlineColor,
+}: BaseProps & { underlineColor?: string }) => {
+  if (!disabled && underlineColor) {
+    return underlineColor;
+  }
+
+  if (theme.isV3) {
+    if (disabled) {
+      return theme.colors.onSurfaceDisabled;
+    }
+
+    return theme.colors.onSurface;
+  }
+
+  if (disabled) {
+    return 'transparent';
+  }
+
+  return theme.colors.disabled;
+};
+
+const getOutlinedOutlineInputColor = ({
+  theme,
+  disabled,
+  customOutlineColor,
+}: BaseProps & { customOutlineColor?: string }) => {
+  const isTransparent = color(customOutlineColor).alpha() === 0;
+
+  if (!disabled && customOutlineColor) {
+    return customOutlineColor;
+  }
+
+  if (theme.isV3) {
+    if (disabled) {
+      if (theme.dark) {
+        return 'transparent';
+      }
+      return theme.colors.surfaceDisabled;
+    }
+
+    return theme.colors.outline;
+  }
+
+  if (disabled) {
+    if (isTransparent) {
+      return customOutlineColor;
+    }
+    return theme.colors.disabled;
+  }
+  return theme.colors.placeholder;
+};
+
+export const getFlatInputColors = ({
+  underlineColor,
+  activeUnderlineColor,
+  disabled,
+  error,
+  theme,
+}: {
+  underlineColor?: string;
+  activeUnderlineColor?: string;
+  disabled?: boolean;
+  error?: boolean;
+  theme: Theme;
+}) => {
+  const baseFlatColorProps = { theme, disabled };
+  return {
+    inputTextColor: getInputTextColor({ ...baseFlatColorProps, mode: 'flat' }),
+    activeColor: getActiveColor({
+      ...baseFlatColorProps,
+      error,
+      activeUnderlineColor,
+      mode: 'flat',
+    }),
+    underlineColorCustom: getFlatUnderlineColor({
+      ...baseFlatColorProps,
+      underlineColor,
+    }),
+    placeholderColor: getPlaceholderColor(baseFlatColorProps),
+    errorColor: theme.colors.error,
+    backgroundColor: getFlatBackgroundColor(baseFlatColorProps),
+  };
+};
+
+export const getOutlinedInputColors = ({
+  activeOutlineColor,
+  customOutlineColor,
+  disabled,
+  error,
+  theme,
+}: {
+  activeOutlineColor?: string;
+  customOutlineColor?: string;
+  disabled?: boolean;
+  error?: boolean;
+  theme: Theme;
+}) => {
+  const baseOutlinedColorProps = { theme, disabled };
+
+  return {
+    inputTextColor: getInputTextColor({
+      ...baseOutlinedColorProps,
+      mode: 'outlined',
+    }),
+    activeColor: getActiveColor({
+      ...baseOutlinedColorProps,
+      error,
+      activeOutlineColor,
+      mode: 'outlined',
+    }),
+    outlineColor: getOutlinedOutlineInputColor({
+      ...baseOutlinedColorProps,
+      customOutlineColor,
+    }),
+    placeholderColor: getPlaceholderColor(baseOutlinedColorProps),
+    errorColor: theme.colors.error,
+  };
+};
+
+export const getConstants = (isV3?: boolean) => {
+  // Text input affix
+  let AFFIX_OFFSET;
+  // Text input icon
+  let ICON_OFFSET;
+  //Text input flat
+  let LABEL_PADDING_TOP;
+  let LABEL_PADDING_HORIZONTAL;
+  let FLAT_INPUT_OFFSET;
+  let MIN_HEIGHT;
+  // Text input outlined;
+  let INPUT_PADDING_HORIZONTAL;
+  let ADORNMENT_OFFSET;
+  let OUTLINED_INPUT_OFFSET;
+
+  if (isV3) {
+    AFFIX_OFFSET = MD3_AFFIX_OFFSET;
+    ICON_OFFSET = MD3_ICON_OFFSET;
+    LABEL_PADDING_TOP = MD3_LABEL_PADDING_TOP;
+    LABEL_PADDING_HORIZONTAL = MD3_LABEL_PADDING_HORIZONTAL;
+    FLAT_INPUT_OFFSET = MD3_FLAT_INPUT_OFFSET;
+    MIN_HEIGHT = MD3_MIN_HEIGHT;
+    INPUT_PADDING_HORIZONTAL = MD3_INPUT_PADDING_HORIZONTAL;
+    ADORNMENT_OFFSET = MD3_ADORNMENT_OFFSET;
+    OUTLINED_INPUT_OFFSET = MD3_OUTLINED_INPUT_OFFSET;
+  } else {
+    AFFIX_OFFSET = MD2_AFFIX_OFFSET;
+    ICON_OFFSET = MD2_ICON_OFFSET;
+    LABEL_PADDING_TOP = MD2_LABEL_PADDING_TOP;
+    LABEL_PADDING_HORIZONTAL = MD2_LABEL_PADDING_HORIZONTAL;
+    FLAT_INPUT_OFFSET = MD2_FLAT_INPUT_OFFSET;
+    MIN_HEIGHT = MD2_MIN_HEIGHT;
+    INPUT_PADDING_HORIZONTAL = MD2_INPUT_PADDING_HORIZONTAL;
+    ADORNMENT_OFFSET = MD2_ADORNMENT_OFFSET;
+    OUTLINED_INPUT_OFFSET = MD2_OUTLINED_INPUT_OFFSET;
+  }
+
+  return {
+    AFFIX_OFFSET,
+    ICON_OFFSET,
+    LABEL_PADDING_TOP,
+    LABEL_PADDING_HORIZONTAL,
+    FLAT_INPUT_OFFSET,
+    MIN_HEIGHT,
+    INPUT_PADDING_HORIZONTAL,
+    ADORNMENT_OFFSET,
+    OUTLINED_INPUT_OFFSET,
+  };
 };

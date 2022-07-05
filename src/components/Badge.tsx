@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Animated, StyleSheet, StyleProp, TextStyle } from 'react-native';
-import { white, black } from '../styles/colors';
+import { white, black } from '../styles/themes/v2/colors';
 import { withTheme } from '../core/theming';
 import getContrastingColor from '../utils/getContrastingColor';
+import type { Theme } from '../types';
 
 const defaultSize = 20;
 
@@ -24,7 +25,7 @@ type Props = React.ComponentProps<typeof Animated.Text> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 /**
@@ -85,12 +86,20 @@ const Badge = ({
     }).start();
   }, [visible, opacity, scale]);
 
-  const { backgroundColor = theme.colors.notification, ...restStyle } =
-    (StyleSheet.flatten(style) || {}) as TextStyle;
+  const {
+    backgroundColor = theme.isV3
+      ? theme.colors.error
+      : theme.colors?.notification,
+    ...restStyle
+  } = (StyleSheet.flatten(style) || {}) as TextStyle;
 
-  const textColor = getContrastingColor(backgroundColor, white, black);
+  const textColor = theme.isV3
+    ? theme.colors.onError
+    : getContrastingColor(backgroundColor, white, black);
 
   const borderRadius = size / 2;
+
+  const paddingHorizontal = theme.isV3 ? 3 : 4;
 
   return (
     <Animated.Text
@@ -101,11 +110,12 @@ const Badge = ({
           backgroundColor,
           color: textColor,
           fontSize: size * 0.5,
-          ...theme.fonts.regular,
+          ...(!theme.isV3 && theme.fonts.regular),
           lineHeight: size,
           height: size,
           minWidth: size,
           borderRadius,
+          paddingHorizontal,
         },
         styles.container,
         restStyle,
@@ -124,7 +134,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     textAlign: 'center',
     textAlignVertical: 'center',
-    paddingHorizontal: 4,
     overflow: 'hidden',
   },
 });

@@ -2,8 +2,9 @@ import * as React from 'react';
 import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import Icon, { IconSource } from '../Icon';
 import { withTheme } from '../../core/theming';
-import { white } from '../../styles/colors';
+import { white } from '../../styles/themes/v2/colors';
 import getContrastingColor from '../../utils/getContrastingColor';
+import type { Theme } from '../../types';
 
 const defaultSize = 64;
 
@@ -24,7 +25,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 /**
@@ -47,7 +48,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const Avatar = ({ icon, size = defaultSize, style, theme, ...rest }: Props) => {
-  const { backgroundColor = theme.colors.primary, ...restStyle } =
+  const { backgroundColor = theme.colors?.primary, ...restStyle } =
     StyleSheet.flatten(style) || {};
   const textColor =
     rest.color ??

@@ -1,6 +1,10 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
+import color from 'color';
 import ToggleButton from '../ToggleButton';
+import { getToggleButtonColor } from '../ToggleButton/utils';
+import { tokens } from '../../styles/themes/v3/tokens';
+import { getTheme } from '../../core/theming';
 
 it('renders toggle button', () => {
   const tree = renderer
@@ -39,4 +43,42 @@ it('renders unchecked toggle button', () => {
     .toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+describe('getToggleButtonColor', () => {
+  it('should return correct color when checked and theme version 3', () => {
+    expect(getToggleButtonColor({ theme: getTheme(), checked: true })).toBe(
+      color(getTheme().colors.onSecondaryContainer)
+        .alpha(tokens.md.ref.opacity.level2)
+        .rgb()
+        .string()
+    );
+  });
+
+  it('should return correct color when checked and theme version 3, dark theme', () => {
+    expect(getToggleButtonColor({ theme: getTheme(true), checked: true })).toBe(
+      color(getTheme(true).colors.onSecondaryContainer)
+        .alpha(tokens.md.ref.opacity.level2)
+        .rgb()
+        .string()
+    );
+  });
+
+  it('should return correct color when checked and theme version 2', () => {
+    expect(
+      getToggleButtonColor({ theme: getTheme(false, false), checked: true })
+    ).toBe('rgba(0, 0, 0, .08)');
+  });
+
+  it('should return correct color when checked and theme version 2, dark theme', () => {
+    expect(
+      getToggleButtonColor({ theme: getTheme(true, false), checked: true })
+    ).toBe('rgba(255, 255, 255, .12)');
+  });
+
+  it('should return transparent color when not checked', () => {
+    expect(getToggleButtonColor({ theme: getTheme(), checked: false })).toBe(
+      'transparent'
+    );
+  });
 });

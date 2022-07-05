@@ -9,13 +9,14 @@
     "start": "component-docs serve",
     "build": "component-docs build",
     "clean": "del dist/",
-    "prestart": "yarn clean"
+    "prestart": "yarn clean",
+    "prepare": "patch-package"
   },
   "dependencies": {
     "color": "^3.1.2",
     "component-docs": "^0.23.0",
     "linaria": "^1.2.4",
-    "react-native-vector-icons": "^6.6.0"
+    "react-native-vector-icons": "^9.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
@@ -28,6 +29,8 @@
     "del-cli": "^3.0.0",
     "file-loader": "^4.2.0",
     "metro-react-native-babel-preset": "^0.56.0",
+    "patch-package": "^6.4.7",
+    "postinstall-prepare": "^2.0.0",
     "url-loader": "^4.1.0"
   }
 }

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import ListSubheader from './ListSubheader';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -21,7 +22,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * Style that is passed to Title element.
    */
@@ -39,7 +40,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { List } from 'react-native-paper';
+ * import { List, MD3Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <List.Section>
@@ -47,7 +48,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  *     <List.Item title="First Item" left={() => <List.Icon icon="folder" />} />
  *     <List.Item
  *       title="Second Item"
- *       left={() => <List.Icon color="#000" icon="folder" />}
+ *       left={() => <List.Icon color={MD3Colors.tertiary70} icon="folder" />}
  *     />
  *   </List.Section>
  * );

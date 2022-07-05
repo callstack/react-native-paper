@@ -10,6 +10,7 @@ import {
   View,
   NativeEventSubscription,
 } from 'react-native';
+import color from 'color';
 import {
   getStatusBarHeight,
   getBottomSpace,
@@ -18,6 +19,7 @@ import Surface from './Surface';
 import { useTheme } from '../core/theming';
 import useAnimatedValue from '../utils/useAnimatedValue';
 import { addEventListener } from '../utils/addEventListener';
+import { MD3Colors } from '../styles/themes/v3/tokens';
 
 type Props = {
   /**
@@ -109,7 +111,9 @@ export default function Modal({
     visibleRef.current = visible;
   });
 
-  const { colors, animation } = useTheme();
+  const theme = useTheme();
+
+  const { scale } = theme.animation;
 
   const opacity = useAnimatedValue(visible ? 1 : 0);
 
@@ -138,8 +142,6 @@ export default function Modal({
       handleBack
     );
 
-    const { scale } = animation;
-
     Animated.timing(opacity, {
       toValue: 1,
       duration: scale * DEFAULT_DURATION,
@@ -158,7 +160,6 @@ export default function Modal({
 
   const hideModal = () => {
     removeListeners();
-    const { scale } = animation;
 
     Animated.timing(opacity, {
       toValue: 0,
@@ -219,7 +220,12 @@ export default function Modal({
         <Animated.View
           style={[
             styles.backdrop,
-            { backgroundColor: colors.backdrop, opacity },
+            {
+              backgroundColor: theme.isV3
+                ? color(MD3Colors.neutralVariant20).alpha(0.4).rgb().string()
+                : theme.colors?.backdrop,
+              opacity,
+            },
           ]}
         />
       </TouchableWithoutFeedback>

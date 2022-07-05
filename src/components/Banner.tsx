@@ -2,13 +2,11 @@ import * as React from 'react';
 import { View, ViewStyle, StyleSheet, StyleProp, Animated } from 'react-native';
 import Surface from './Surface';
 import Text from './Typography/Text';
-import Button from './Button';
+import Button from './Button/Button';
 import Icon, { IconSource } from './Icon';
 import { withTheme } from '../core/theming';
-import type { $RemoveChildren } from '../types';
-import shadow from '../styles/shadow';
+import type { $RemoveChildren, Theme } from '../types';
 
-const ELEVATION = 1;
 const DEFAULT_MAX_WIDTH = 960;
 
 type Props = $RemoveChildren<typeof Surface> & {
@@ -43,12 +41,17 @@ type Props = $RemoveChildren<typeof Surface> & {
    * Use this prop to apply custom width for wide layouts.
    */
   contentStyle?: StyleProp<ViewStyle>;
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Changes Banner shadow and background on iOS and Android.
+   */
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
   style?: StyleProp<ViewStyle>;
   ref?: React.RefObject<View>;
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * @optional
    * Optional callback that will be called after the opening animation finished running normally
@@ -76,7 +79,7 @@ type NativeEvent = {
  * Banner displays a prominent message and related actions.
  *
  * <div class="screenshots">
- *   <img class="medium" src="screenshots/banner.gif" />
+ *   <img class="small" src="screenshots/banner.gif" />
  * </div>
  *
  * ## Usage
@@ -126,6 +129,7 @@ const Banner = ({
   children,
   actions,
   contentStyle,
+  elevation = 1,
   style,
   theme,
   onShowAnimationFinished = () => {},
@@ -184,8 +188,9 @@ const Banner = ({
   return (
     <Surface
       {...rest}
-      style={[styles.container, shadow(ELEVATION) as ViewStyle, style]}
+      style={[!theme.isV3 && styles.elevation, style]}
       theme={theme}
+      {...(theme.isV3 && { elevation })}
     >
       <View style={[styles.wrapper, contentStyle]}>
         <Animated.View style={{ height }} />
@@ -212,7 +217,14 @@ const Banner = ({
               </View>
             ) : null}
             <Text
-              style={[styles.message, { color: theme.colors.text }]}
+              style={[
+                styles.message,
+                {
+                  color: theme.isV3
+                    ? theme.colors.onSurface
+                    : theme.colors.text,
+                },
+              ]}
               accessibilityLiveRegion={visible ? 'polite' : 'none'}
               accessibilityRole="alert"
             >
@@ -226,7 +238,7 @@ const Banner = ({
                 compact
                 mode="text"
                 style={styles.button}
-                color={theme.colors.primary}
+                textColor={theme.colors?.primary}
                 {...others}
               >
                 {label}
@@ -240,9 +252,6 @@ const Banner = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    elevation: ELEVATION,
-  },
   wrapper: {
     overflow: 'hidden',
     alignSelf: 'center',
@@ -275,6 +284,9 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 4,
+  },
+  elevation: {
+    elevation: 1,
   },
 });
 

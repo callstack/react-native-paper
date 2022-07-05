@@ -78,6 +78,7 @@ export type InputLabelProps = {
   labelProps: LabelProps;
   labelBackground?: any;
   maxFontSizeMultiplier?: number | undefined | null;
+  mode?: 'flat' | 'outlined';
 };
 
 export type LabelBackgroundProps = {

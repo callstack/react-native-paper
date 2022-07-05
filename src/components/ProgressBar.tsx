@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import setColor from 'color';
 import { withTheme } from '../core/theming';
+import type { Theme } from '../types';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -33,7 +34,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
 };
 
 const INDETERMINATE_DURATION = 2000;
@@ -50,10 +51,10 @@ const { isRTL } = I18nManager;
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ProgressBar, Colors } from 'react-native-paper';
+ * import { ProgressBar, MD3Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <ProgressBar progress={0.5} color={Colors.red800} />
+ *   <ProgressBar progress={0.5} color={MD3Colors.error50} />
  * );
  *
  * export default MyComponent;
@@ -146,7 +147,7 @@ const ProgressBar = ({
     setWidth(event.nativeEvent.layout.width);
   };
 
-  const tintColor = color || theme.colors.primary;
+  const tintColor = color || theme.colors?.primary;
   const trackTintColor = setColor(tintColor).alpha(0.38).rgb().string();
 
   return (

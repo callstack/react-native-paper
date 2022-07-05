@@ -5,9 +5,7 @@ exports[`renders caption applying style 1`] = `
   style={
     Array [
       Object {
-        "color": "#000000",
-        "fontFamily": "System",
-        "fontWeight": "400",
+        "color": "rgba(28, 27, 31, 1)",
       },
       Object {
         "textAlign": "left",
@@ -17,9 +15,7 @@ exports[`renders caption applying style 1`] = `
           "textAlign": "left",
         },
         Object {
-          "color": "rgba(0, 0, 0, 0.54)",
-          "fontFamily": "System",
-          "fontWeight": "400",
+          "color": "rgba(28, 27, 31, 0.54)",
           "writingDirection": "ltr",
         },
         Array [
@@ -47,9 +43,7 @@ exports[`renders caption with children as content 1`] = `
   style={
     Array [
       Object {
-        "color": "#000000",
-        "fontFamily": "System",
-        "fontWeight": "400",
+        "color": "rgba(28, 27, 31, 1)",
       },
       Object {
         "textAlign": "left",
@@ -59,9 +53,7 @@ exports[`renders caption with children as content 1`] = `
           "textAlign": "left",
         },
         Object {
-          "color": "rgba(0, 0, 0, 0.54)",
-          "fontFamily": "System",
-          "fontWeight": "400",
+          "color": "rgba(28, 27, 31, 0.54)",
           "writingDirection": "ltr",
         },
         Array [

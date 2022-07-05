@@ -1,4 +1,3 @@
-import color from 'color';
 import * as React from 'react';
 import {
   StyleProp,
@@ -10,8 +9,14 @@ import {
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
+import {
+  getContentMaxWidth,
+  getMenuItemColor,
+  MAX_WIDTH,
+  MIN_WIDTH,
+} from './utils';
 
 type Props = {
   /**
@@ -19,13 +24,27 @@ type Props = {
    */
   title: React.ReactNode;
   /**
-   * Icon to display for the `MenuItem`.
+   * @renamed Renamed from 'icon' to 'leadingIcon' in v5.x
+   *
+   * Leading icon to display for the `MenuItem`.
    */
-  icon?: IconSource;
+  leadingIcon?: IconSource;
+  /**
+   * @supported Available in v5.x with theme version 3
+   *
+   * Trailing icon to display for the `MenuItem`.
+   */
+  trailingIcon?: IconSource;
   /**
    * Whether the 'item' is disabled. A disabled 'item' is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
+  /**
+   * @supported Available in v5.x with theme version 3
+   *
+   * Sets min height with densed layout.
+   */
+  dense?: boolean;
   /**
    * Function to execute on press.
    */
@@ -39,7 +58,7 @@ type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * TestID used for testing purposes
    */
@@ -67,11 +86,11 @@ type Props = {
  *
  * const MyComponent = () => (
  *   <View style={{ flex: 1 }}>
- *     <Menu.Item icon="redo" onPress={() => {}} title="Redo" />
- *     <Menu.Item icon="undo" onPress={() => {}} title="Undo" />
- *     <Menu.Item icon="content-cut" onPress={() => {}} title="Cut" disabled />
- *     <Menu.Item icon="content-copy" onPress={() => {}} title="Copy" disabled />
- *     <Menu.Item icon="content-paste" onPress={() => {}} title="Paste" />
+ *     <Menu.Item leadingIcon="redo" onPress={() => {}} title="Redo" />
+ *     <Menu.Item leadingIcon="undo" onPress={() => {}} title="Undo" />
+ *     <Menu.Item leadingIcon="content-cut" onPress={() => {}} title="Cut" disabled />
+ *     <Menu.Item leadingIcon="content-copy" onPress={() => {}} title="Copy" disabled />
+ *     <Menu.Item leadingIcon="content-paste" onPress={() => {}} title="Paste" />
  *   </View>
  * );
  *
@@ -79,7 +98,9 @@ type Props = {
  * ```
  */
 const MenuItem = ({
-  icon,
+  leadingIcon,
+  trailingIcon,
+  dense,
   title,
   disabled,
   onPress,
@@ -90,52 +111,80 @@ const MenuItem = ({
   accessibilityLabel,
   theme,
 }: Props) => {
-  const disabledColor = color(theme.dark ? white : black)
-    .alpha(0.32)
-    .rgb()
-    .string();
+  const { titleColor, iconColor, underlayColor } = getMenuItemColor({
+    theme,
+    disabled,
+  });
+  const { isV3 } = theme;
 
-  const titleColor = disabled
-    ? disabledColor
-    : color(theme.colors.text).alpha(0.87).rgb().string();
+  const containerPadding = isV3 ? 12 : 8;
 
-  const iconColor = disabled
-    ? disabledColor
-    : color(theme.colors.text).alpha(0.54).rgb().string();
+  const iconWidth = isV3 ? 24 : 40;
+
+  const minWidth = MIN_WIDTH - (isV3 ? 12 : 16);
+
+  const maxWidth = getContentMaxWidth({
+    isV3,
+    iconWidth,
+    leadingIcon,
+    trailingIcon,
+  });
 
   return (
     <TouchableRipple
-      style={[styles.container, style]}
+      style={[
+        styles.container,
+        { paddingHorizontal: containerPadding },
+        dense && styles.md3DenseContainer,
+        style,
+      ]}
       onPress={onPress}
       disabled={disabled}
       testID={testID}
       accessibilityLabel={accessibilityLabel}
       accessibilityRole="menuitem"
       accessibilityState={{ disabled }}
+      underlayColor={underlayColor}
     >
       <View style={styles.row}>
-        {icon ? (
-          <View style={[styles.item, styles.icon]} pointerEvents="box-none">
-            <Icon source={icon} size={24} color={iconColor} />
+        {leadingIcon ? (
+          <View
+            style={[!isV3 && styles.item, { width: iconWidth }]}
+            pointerEvents="box-none"
+          >
+            <Icon source={leadingIcon} size={24} color={iconColor} />
           </View>
         ) : null}
         <View
           style={[
-            styles.item,
+            !isV3 && styles.item,
             styles.content,
-            icon ? styles.widthWithIcon : null,
+            { minWidth, maxWidth },
+            isV3 &&
+              (leadingIcon
+                ? styles.md3LeadingIcon
+                : styles.md3WithoutLeadingIcon),
             contentStyle,
           ]}
           pointerEvents="none"
         >
           <Text
+            variant="bodyLarge"
             selectable={false}
             numberOfLines={1}
-            style={[styles.title, { color: titleColor }, titleStyle]}
+            style={[!isV3 && styles.title, { color: titleColor }, titleStyle]}
           >
             {title}
           </Text>
         </View>
+        {isV3 && trailingIcon ? (
+          <View
+            style={[!isV3 && styles.item, { width: iconWidth }]}
+            pointerEvents="box-none"
+          >
+            <Icon source={trailingIcon} size={24} color={iconColor} />
+          </View>
+        ) : null}
       </View>
     </TouchableRipple>
   );
@@ -143,23 +192,18 @@ const MenuItem = ({
 
 MenuItem.displayName = 'Menu.Item';
 
-const minWidth = 112;
-const maxWidth = 280;
-const iconWidth = 40;
-
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 8,
-    minWidth,
-    maxWidth,
+    minWidth: MIN_WIDTH,
+    maxWidth: MAX_WIDTH,
     height: 48,
     justifyContent: 'center',
   },
+  md3DenseContainer: {
+    height: 32,
+  },
   row: {
     flexDirection: 'row',
-  },
-  icon: {
-    width: iconWidth,
   },
   title: {
     fontSize: 16,
@@ -169,11 +213,12 @@ const styles = StyleSheet.create({
   },
   content: {
     justifyContent: 'center',
-    minWidth: minWidth - 16,
-    maxWidth: maxWidth - 16,
   },
-  widthWithIcon: {
-    maxWidth: maxWidth - (iconWidth + 48),
+  md3LeadingIcon: {
+    marginLeft: 12,
+  },
+  md3WithoutLeadingIcon: {
+    marginLeft: 4,
   },
 });
 

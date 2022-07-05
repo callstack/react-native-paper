@@ -8,9 +8,9 @@ import {
   ViewProps,
 } from 'react-native';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { black, white } from '../../styles/colors';
+import { black, white } from '../../styles/themes/v2/colors';
 import { withTheme } from '../../core/theming';
-import type { $RemoveChildren } from '../../types';
+import type { $RemoveChildren, Theme } from '../../types';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -25,7 +25,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * `pointerEvents` passed to the `View` container, which is wrapping children within `TouchableRipple`.
    */
@@ -68,10 +68,12 @@ const DataTableRow = ({
   pointerEvents,
   ...rest
 }: Props) => {
-  const borderBottomColor = color(theme.dark ? white : black)
-    .alpha(0.12)
-    .rgb()
-    .string();
+  const borderBottomColor = theme.isV3
+    ? theme.colors.surfaceVariant
+    : color(theme.dark ? white : black)
+        .alpha(0.12)
+        .rgb()
+        .string();
 
   return (
     <TouchableRipple

@@ -7,14 +7,15 @@ import {
   Platform,
   Easing,
 } from 'react-native';
-import { BottomNavigation } from 'react-native-paper';
+import { BottomNavigation, useTheme } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type RoutesState = Array<{
   key: string;
   title: string;
-  icon: string;
+  focusedIcon: string;
+  unfocusedIcon?: string;
   color?: string;
   badge?: boolean;
   getAccessibilityLabel?: string;
@@ -39,29 +40,43 @@ const PhotoGallery = ({ route }: Route) => {
   );
 };
 
-const BottomNavigationExample = () => {
+const BottomNavigationAnimatedExample = () => {
+  const { isV3 } = useTheme();
   const insets = useSafeAreaInsets();
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState<RoutesState>([
-    { key: 'album', title: 'Album', icon: 'image-album', color: '#6200ee' },
+    {
+      key: 'album',
+      title: 'Album',
+      focusedIcon: 'image-album',
+      ...(!isV3 && { color: '#6200ee' }),
+    },
     {
       key: 'library',
       title: 'Library',
-      icon: 'inbox',
-      color: '#2962ff',
+      focusedIcon: 'inbox',
       badge: true,
+      ...(isV3
+        ? { unfocusedIcon: 'inbox-outline' }
+        : {
+            color: '#2962ff',
+          }),
     },
     {
       key: 'favorites',
       title: 'Favorites',
-      icon: 'heart',
-      color: '#00796b',
+      focusedIcon: 'heart',
+      ...(isV3
+        ? { unfocusedIcon: 'heart-outline' }
+        : {
+            color: '#00796b',
+          }),
     },
     {
       key: 'purchased',
       title: 'Purchased',
-      icon: 'shopping-music',
-      color: '#c51162',
+      focusedIcon: 'shopping',
+      ...(isV3 ? { unfocusedIcon: 'shopping-outline' } : { color: '#c51162' }),
     },
   ]);
 
@@ -84,9 +99,10 @@ const BottomNavigationExample = () => {
   );
 };
 
-BottomNavigationExample.title = 'Bottom Navigation w/ shifting animation';
+BottomNavigationAnimatedExample.title =
+  'Bottom Navigation w/ shifting animation';
 
-export default BottomNavigationExample;
+export default BottomNavigationAnimatedExample;
 
 const styles = StyleSheet.create({
   ...Platform.select({

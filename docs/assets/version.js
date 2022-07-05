@@ -4,6 +4,11 @@
 
 function createUrlForVersion(version) {
   const url = window.location.pathname;
+  const versionRegex = /(\d+)(.\d+)/;
+
+  if (url.match(versionRegex)) {
+    return url.replace(/(\d+)(.\d+)/, `${version}`);
+  }
   return url.replace(/react-native-paper\//, `react-native-paper/${version}/`);
 }
 
@@ -125,6 +130,16 @@ function appendVersionBanner() {
             <a class="link" href="${createUrlForVersion(
               '2.0'
             )}" role="menuitem">v2.x</a>
+          </li>
+          <li class="list-item">
+            <a class="link" href="${createUrlForVersion(
+              '3.0'
+            )}" role="menuitem">v3.x</a>
+          </li>
+          <li class="list-item">
+            <a class="link" href="${createUrlForVersion(
+              '4.0'
+            )}" role="menuitem">v4.x</a>
           </li>
         </ul>
       </div>

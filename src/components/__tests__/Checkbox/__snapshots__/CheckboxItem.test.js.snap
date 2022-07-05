@@ -7,7 +7,7 @@ exports[`can render leading checkbox control 1`] = `
   accessibilityState={
     Object {
       "checked": false,
-      "disabled": undefined,
+      "disabled": true,
     }
   }
   accessible={true}
@@ -48,7 +48,7 @@ exports[`can render leading checkbox control 1`] = `
       accessibilityState={
         Object {
           "checked": false,
-          "disabled": undefined,
+          "disabled": true,
         }
       }
       accessible={true}
@@ -91,7 +91,7 @@ exports[`can render leading checkbox control 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "#03dac4",
+                "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
             ]
@@ -105,21 +105,26 @@ exports[`can render leading checkbox control 1`] = `
       style={
         Array [
           Object {
-            "color": "#000000",
-            "fontFamily": "System",
+            "color": "rgba(28, 27, 31, 1)",
+            "fontSize": 16,
             "fontWeight": "400",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
           Object {
             "textAlign": "left",
+          },
+          Object {
+            "writingDirection": "ltr",
           },
           Array [
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
-              "fontSize": 16,
             },
+            false,
             Object {
-              "color": "#000000",
+              "color": "rgba(28, 27, 31, 1)",
               "textAlign": "right",
             },
             undefined,
@@ -140,7 +145,7 @@ exports[`can render the Android checkbox on different platforms 1`] = `
   accessibilityState={
     Object {
       "checked": false,
-      "disabled": undefined,
+      "disabled": true,
     }
   }
   accessible={true}
@@ -179,21 +184,26 @@ exports[`can render the Android checkbox on different platforms 1`] = `
       style={
         Array [
           Object {
-            "color": "#000000",
-            "fontFamily": "System",
+            "color": "rgba(28, 27, 31, 1)",
+            "fontSize": 16,
             "fontWeight": "400",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
           Object {
             "textAlign": "left",
+          },
+          Object {
+            "writingDirection": "ltr",
           },
           Array [
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
-              "fontSize": 16,
             },
+            false,
             Object {
-              "color": "#000000",
+              "color": "rgba(28, 27, 31, 1)",
               "textAlign": "left",
             },
             undefined,
@@ -209,7 +219,7 @@ exports[`can render the Android checkbox on different platforms 1`] = `
       accessibilityState={
         Object {
           "checked": false,
-          "disabled": undefined,
+          "disabled": true,
         }
       }
       accessible={true}
@@ -236,6 +246,7 @@ exports[`can render the Android checkbox on different platforms 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
             "transform": Array [
@@ -258,7 +269,7 @@ exports[`can render the Android checkbox on different platforms 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "rgba(0, 0, 0, 0.54)",
+                "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
             ]
@@ -284,9 +295,10 @@ exports[`can render the Android checkbox on different platforms 1`] = `
           }
         >
           <View
+            collapsable={false}
             style={
               Object {
-                "borderColor": "rgba(0, 0, 0, 0.54)",
+                "borderColor": "rgba(73, 69, 79, 1)",
                 "borderWidth": 0,
                 "height": 14,
                 "width": 14,
@@ -307,7 +319,7 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
   accessibilityState={
     Object {
       "checked": false,
-      "disabled": undefined,
+      "disabled": true,
     }
   }
   accessible={true}
@@ -346,21 +358,27 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
       style={
         Array [
           Object {
-            "color": "#000000",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
+            "fontSize": 16,
             "fontWeight": "400",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
           Object {
             "textAlign": "left",
+          },
+          Object {
+            "writingDirection": "ltr",
           },
           Array [
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
-              "fontSize": 16,
             },
+            false,
             Object {
-              "color": "#000000",
+              "color": "rgba(28, 27, 31, 1)",
               "textAlign": "left",
             },
             undefined,
@@ -376,7 +394,7 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
       accessibilityState={
         Object {
           "checked": false,
-          "disabled": undefined,
+          "disabled": true,
         }
       }
       accessible={true}
@@ -419,7 +437,7 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "#03dac4",
+                "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
             ]
@@ -440,7 +458,7 @@ exports[`renders unchecked 1`] = `
   accessibilityState={
     Object {
       "checked": false,
-      "disabled": undefined,
+      "disabled": true,
     }
   }
   accessible={true}
@@ -479,21 +497,26 @@ exports[`renders unchecked 1`] = `
       style={
         Array [
           Object {
-            "color": "#000000",
-            "fontFamily": "System",
+            "color": "rgba(28, 27, 31, 1)",
+            "fontSize": 16,
             "fontWeight": "400",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
           Object {
             "textAlign": "left",
+          },
+          Object {
+            "writingDirection": "ltr",
           },
           Array [
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
-              "fontSize": 16,
             },
+            false,
             Object {
-              "color": "#000000",
+              "color": "rgba(28, 27, 31, 1)",
               "textAlign": "left",
             },
             undefined,
@@ -509,7 +532,7 @@ exports[`renders unchecked 1`] = `
       accessibilityState={
         Object {
           "checked": false,
-          "disabled": undefined,
+          "disabled": true,
         }
       }
       accessible={true}
@@ -552,7 +575,7 @@ exports[`renders unchecked 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "#03dac4",
+                "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
             ]

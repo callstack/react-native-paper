@@ -3,12 +3,13 @@ import { StyleSheet, StyleProp, TextStyle } from 'react-native';
 import color from 'color';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 
 type Props = React.ComponentProps<typeof Text> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * Style that is passed to Text element.
    */
@@ -29,15 +30,23 @@ type Props = React.ComponentProps<typeof Text> & {
  * ```
  */
 const ListSubheader = ({ style, theme, ...rest }: Props) => {
-  const { colors, fonts } = theme;
-  const font = fonts.medium;
-  const textColor = color(colors.text).alpha(0.54).rgb().string();
+  const textColor = theme.isV3
+    ? theme.colors.onSurfaceVariant
+    : color(theme.colors.text).alpha(0.54).rgb().string();
 
   return (
     <Text
+      variant="bodyMedium"
       numberOfLines={1}
       {...rest}
-      style={[styles.container, { color: textColor, ...font }, style]}
+      style={[
+        styles.container,
+        {
+          color: textColor,
+          ...(theme.isV3 ? theme.typescale.bodyMedium : theme.fonts.medium),
+        },
+        style,
+      ]}
     />
   );
 };

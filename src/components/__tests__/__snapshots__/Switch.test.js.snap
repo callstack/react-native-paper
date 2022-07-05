@@ -7,14 +7,14 @@ exports[`renders disabled switch 1`] = `
   onChange={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-  onTintColor="#03dac4"
+  onTintColor="rgba(103, 80, 164, 1)"
   style={
     Object {
       "height": 31,
       "width": 51,
     }
   }
-  tintColor=""
+  tintColor="rgba(103, 80, 164, 1)"
   value={true}
 />
 `;
@@ -25,14 +25,14 @@ exports[`renders off switch 1`] = `
   onChange={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-  onTintColor="#03dac4"
+  onTintColor="rgba(103, 80, 164, 1)"
   style={
     Object {
       "height": 31,
       "width": 51,
     }
   }
-  tintColor=""
+  tintColor="rgba(103, 80, 164, 1)"
   value={false}
 />
 `;
@@ -43,14 +43,14 @@ exports[`renders on switch 1`] = `
   onChange={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-  onTintColor="#03dac4"
+  onTintColor="rgba(103, 80, 164, 1)"
   style={
     Object {
       "height": 31,
       "width": 51,
     }
   }
-  tintColor=""
+  tintColor="rgba(103, 80, 164, 1)"
   value={true}
 />
 `;
@@ -68,7 +68,7 @@ exports[`renders switch with color 1`] = `
       "width": 51,
     }
   }
-  tintColor=""
+  tintColor="#e91e63"
   value={true}
 />
 `;

@@ -55,6 +55,14 @@ a:hover {
   margin-top: 10px;
 }
 
+i {
+  font-style: italic;
+}
+
+b {
+  font-weight: bold;
+}
+
 @media (min-width: 1100px) {
   .screenshots img {
     width: 240px;

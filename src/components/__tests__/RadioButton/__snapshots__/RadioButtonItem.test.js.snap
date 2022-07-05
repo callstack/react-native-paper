@@ -2,6 +2,14 @@
 
 exports[`can render leading radio button control 1`] = `
 <View
+  accessibilityLabel="Default with leading control"
+  accessibilityRole="radio"
+  accessibilityState={
+    Object {
+      "checked": false,
+      "disabled": false,
+    }
+  }
   accessible={true}
   focusable={true}
   onClick={[Function]}
@@ -39,7 +47,7 @@ exports[`can render leading radio button control 1`] = `
       accessibilityState={
         Object {
           "checked": false,
-          "disabled": undefined,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -82,7 +90,7 @@ exports[`can render leading radio button control 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "#03dac4",
+                "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
             ]
@@ -96,21 +104,26 @@ exports[`can render leading radio button control 1`] = `
       style={
         Array [
           Object {
-            "color": "#000000",
-            "fontFamily": "System",
+            "color": "rgba(28, 27, 31, 1)",
+            "fontSize": 16,
             "fontWeight": "400",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
           Object {
             "textAlign": "left",
+          },
+          Object {
+            "writingDirection": "ltr",
           },
           Array [
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
-              "fontSize": 16,
             },
+            false,
             Object {
-              "color": "#000000",
+              "color": "rgba(28, 27, 31, 1)",
               "textAlign": "right",
             },
             undefined,
@@ -126,6 +139,14 @@ exports[`can render leading radio button control 1`] = `
 
 exports[`can render the Android radio button on different platforms 1`] = `
 <View
+  accessibilityLabel="iOS Checkbox"
+  accessibilityRole="radio"
+  accessibilityState={
+    Object {
+      "checked": false,
+      "disabled": false,
+    }
+  }
   accessible={true}
   focusable={true}
   onClick={[Function]}
@@ -161,21 +182,26 @@ exports[`can render the Android radio button on different platforms 1`] = `
       style={
         Array [
           Object {
-            "color": "#000000",
-            "fontFamily": "System",
+            "color": "rgba(28, 27, 31, 1)",
+            "fontSize": 16,
             "fontWeight": "400",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
           Object {
             "textAlign": "left",
+          },
+          Object {
+            "writingDirection": "ltr",
           },
           Array [
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
-              "fontSize": 16,
             },
+            false,
             Object {
-              "color": "#000000",
+              "color": "rgba(28, 27, 31, 1)",
               "textAlign": "left",
             },
             undefined,
@@ -191,7 +217,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
       accessibilityState={
         Object {
           "checked": false,
-          "disabled": undefined,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -215,9 +241,10 @@ exports[`can render the Android radio button on different platforms 1`] = `
       }
     >
       <View
+        collapsable={false}
         style={
           Object {
-            "borderColor": "rgba(0, 0, 0, 0.54)",
+            "borderColor": "rgba(73, 69, 79, 1)",
             "borderRadius": 10,
             "borderWidth": 2,
             "height": 20,
@@ -233,6 +260,14 @@ exports[`can render the Android radio button on different platforms 1`] = `
 
 exports[`can render the iOS radio button on different platforms 1`] = `
 <View
+  accessibilityLabel="iOS Radio button"
+  accessibilityRole="radio"
+  accessibilityState={
+    Object {
+      "checked": false,
+      "disabled": false,
+    }
+  }
   accessible={true}
   focusable={true}
   onClick={[Function]}
@@ -268,21 +303,27 @@ exports[`can render the iOS radio button on different platforms 1`] = `
       style={
         Array [
           Object {
-            "color": "#000000",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
+            "fontSize": 16,
             "fontWeight": "400",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
           Object {
             "textAlign": "left",
+          },
+          Object {
+            "writingDirection": "ltr",
           },
           Array [
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
-              "fontSize": 16,
             },
+            false,
             Object {
-              "color": "#000000",
+              "color": "rgba(28, 27, 31, 1)",
               "textAlign": "left",
             },
             undefined,
@@ -298,7 +339,7 @@ exports[`can render the iOS radio button on different platforms 1`] = `
       accessibilityState={
         Object {
           "checked": false,
-          "disabled": undefined,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -341,7 +382,7 @@ exports[`can render the iOS radio button on different platforms 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "#03dac4",
+                "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
             ]
@@ -357,6 +398,14 @@ exports[`can render the iOS radio button on different platforms 1`] = `
 
 exports[`renders unchecked 1`] = `
 <View
+  accessibilityLabel="Unchecked Button"
+  accessibilityRole="radio"
+  accessibilityState={
+    Object {
+      "checked": false,
+      "disabled": false,
+    }
+  }
   accessible={true}
   focusable={true}
   onClick={[Function]}
@@ -392,21 +441,26 @@ exports[`renders unchecked 1`] = `
       style={
         Array [
           Object {
-            "color": "#000000",
-            "fontFamily": "System",
+            "color": "rgba(28, 27, 31, 1)",
+            "fontSize": 16,
             "fontWeight": "400",
+            "letterSpacing": 0.15,
+            "lineHeight": 24,
           },
           Object {
             "textAlign": "left",
+          },
+          Object {
+            "writingDirection": "ltr",
           },
           Array [
             Object {
               "flexGrow": 1,
               "flexShrink": 1,
-              "fontSize": 16,
             },
+            false,
             Object {
-              "color": "#000000",
+              "color": "rgba(28, 27, 31, 1)",
               "textAlign": "left",
             },
             undefined,
@@ -422,7 +476,7 @@ exports[`renders unchecked 1`] = `
       accessibilityState={
         Object {
           "checked": false,
-          "disabled": undefined,
+          "disabled": false,
         }
       }
       accessible={true}
@@ -465,7 +519,7 @@ exports[`renders unchecked 1`] = `
                 "backgroundColor": "transparent",
               },
               Object {
-                "color": "#03dac4",
+                "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
             ]

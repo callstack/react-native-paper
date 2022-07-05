@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import color from 'color';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
-import type { $RemoveChildren } from '../../types';
+import type { $RemoveChildren, Theme } from '../../types';
+import { getSelectionControlIOSColor } from './utils';
 
 type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -26,7 +26,7 @@ type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: Theme;
   /**
    * testID to be used on tests.
    */
@@ -60,17 +60,11 @@ const CheckboxIOS = ({
   const checked = status === 'checked';
   const indeterminate = status === 'indeterminate';
 
-  const checkedColor = disabled
-    ? theme.colors.disabled
-    : rest.color || theme.colors.accent;
-
-  let rippleColor;
-
-  if (disabled) {
-    rippleColor = color(theme.colors.text).alpha(0.16).rgb().string();
-  } else {
-    rippleColor = color(checkedColor).fade(0.32).rgb().string();
-  }
+  const { checkedColor, rippleColor } = getSelectionControlIOSColor({
+    theme,
+    disabled,
+    customColor: rest.color,
+  });
 
   const icon = indeterminate ? 'minus' : 'check';
 
@@ -81,9 +75,6 @@ const CheckboxIOS = ({
       rippleColor={rippleColor}
       onPress={onPress}
       disabled={disabled}
-      // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-      accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
-      accessibilityComponentType="button"
       accessibilityRole="checkbox"
       accessibilityState={{ disabled, checked }}
       accessibilityLiveRegion="polite"

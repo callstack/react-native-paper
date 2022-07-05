@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
+import { useTheme } from '../../../core/theming';
 
 import AnimatedText from '../../Typography/AnimatedText';
 
@@ -25,16 +26,36 @@ const LabelBackground = ({
     outputRange: [hasFocus ? 1 : 0, 0],
   });
 
+  const { isV3, colors } = useTheme();
+
   const labelTranslationX = {
-    transform: [
-      {
-        translateX: parentState.labeled.interpolate({
-          inputRange: [0, 1],
-          outputRange: [-baseLabelTranslateX, 0],
-        }),
-      },
-    ],
+    translateX: parentState.labeled.interpolate({
+      inputRange: [0, 1],
+      outputRange: [-baseLabelTranslateX, 0],
+    }),
   };
+
+  const labelTextScaleY = {
+    scaleY: parentState.labeled.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0.2, 1],
+    }),
+  };
+
+  const labelTextTransform = isV3
+    ? [...labelStyle.transform]
+    : [...labelStyle.transform, labelTextScaleY];
+
+  const labelTextWidth = isV3
+    ? {
+        width:
+          parentState.labelLayout.width - placeholderStyle.paddingHorizontal,
+      }
+    : {
+        maxWidth:
+          parentState.labelLayout.width -
+          2 * placeholderStyle.paddingHorizontal,
+      };
 
   return label
     ? [
@@ -49,8 +70,8 @@ const LabelBackground = ({
               maxHeight: Math.max(roundness / 3, 2),
               opacity,
               bottom: Math.max(roundness, 2),
+              transform: [labelTranslationX],
             },
-            labelTranslationX,
           ]}
         />,
         <AnimatedText
@@ -59,23 +80,14 @@ const LabelBackground = ({
             placeholderStyle,
             labelStyle,
             styles.outlinedLabel,
+            isV3 && styles.md3OutlinedLabel,
             {
-              top: topPosition + 1,
-              backgroundColor,
+              top: topPosition + (isV3 ? 0 : 1),
+              backgroundColor: isV3 ? colors.surface : backgroundColor,
               opacity,
-              transform: [
-                ...labelStyle.transform,
-                {
-                  scaleY: parentState.labeled.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0.2, 1],
-                  }),
-                },
-              ],
-              maxWidth:
-                parentState.labelLayout.width -
-                2 * placeholderStyle.paddingHorizontal,
+              transform: labelTextTransform,
             },
+            labelTextWidth,
           ]}
           numberOfLines={1}
           maxFontSizeMultiplier={maxFontSizeMultiplier}
@@ -100,5 +112,8 @@ const styles = StyleSheet.create({
     left: 18,
     paddingHorizontal: 0,
     color: 'transparent',
+  },
+  md3OutlinedLabel: {
+    left: 8,
   },
 });
