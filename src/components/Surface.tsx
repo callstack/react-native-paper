@@ -133,8 +133,6 @@ const Surface = ({
     return colors.elevation?.[`level${elevation}`];
   })();
 
-  const sharedStyle = [{ backgroundColor }, style];
-
   if (Platform.OS === 'web') {
     return (
       <Animated.View
@@ -169,6 +167,7 @@ const Surface = ({
     ) || {}) as ViewStyle;
 
     const outerLayerStyles = { margin, padding, transform, borderRadius };
+    const sharedStyle = [{ backgroundColor }, style];
 
     return (
       <Animated.View
@@ -204,6 +203,12 @@ const Surface = ({
 
   const shadowColor = '#000';
 
+  const { position, alignSelf, top, left, right, bottom, ...restStyle } =
+    (StyleSheet.flatten(style) || {}) as ViewStyle;
+
+  const absoluteStyles = { position, alignSelf, top, right, bottom, left };
+  const sharedStyle = [{ backgroundColor }, restStyle];
+
   if (isAnimatedValue(elevation)) {
     const inputRange = [0, 1, 2, 3, 4, 5];
 
@@ -230,7 +235,9 @@ const Surface = ({
     };
 
     return (
-      <Animated.View style={getStyleForAnimatedShadowLayer(0)}>
+      <Animated.View
+        style={[getStyleForAnimatedShadowLayer(0), absoluteStyles]}
+      >
         <Animated.View style={getStyleForAnimatedShadowLayer(1)}>
           <Animated.View {...props} style={sharedStyle}>
             {children}
@@ -253,8 +260,8 @@ const Surface = ({
   };
 
   return (
-    <Animated.View style={getStyleForShadowLayer(0)}>
-      <Animated.View style={getStyleForShadowLayer(1)}>
+    <Animated.View style={[getStyleForShadowLayer(0), absoluteStyles]}>
+      <Animated.View style={[getStyleForShadowLayer(1)]}>
         <Animated.View {...props} style={sharedStyle}>
           {children}
         </Animated.View>

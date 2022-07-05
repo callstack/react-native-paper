@@ -240,6 +240,11 @@ exports[`renders data table pagination 1`] = `
       collapsable={false}
       style={
         Object {
+          "alignSelf": undefined,
+          "bottom": undefined,
+          "left": undefined,
+          "position": undefined,
+          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -247,6 +252,7 @@ exports[`renders data table pagination 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "top": undefined,
         }
       }
     >
@@ -345,6 +351,11 @@ exports[`renders data table pagination 1`] = `
       collapsable={false}
       style={
         Object {
+          "alignSelf": undefined,
+          "bottom": undefined,
+          "left": undefined,
+          "position": undefined,
+          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -352,6 +363,7 @@ exports[`renders data table pagination 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "top": undefined,
         }
       }
     >
@@ -502,6 +514,11 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       collapsable={false}
       style={
         Object {
+          "alignSelf": undefined,
+          "bottom": undefined,
+          "left": undefined,
+          "position": undefined,
+          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -509,6 +526,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "top": undefined,
         }
       }
     >
@@ -607,6 +625,11 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       collapsable={false}
       style={
         Object {
+          "alignSelf": undefined,
+          "bottom": undefined,
+          "left": undefined,
+          "position": undefined,
+          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -614,6 +637,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "top": undefined,
         }
       }
     >
@@ -712,6 +736,11 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       collapsable={false}
       style={
         Object {
+          "alignSelf": undefined,
+          "bottom": undefined,
+          "left": undefined,
+          "position": undefined,
+          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -719,6 +748,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "top": undefined,
         }
       }
     >
@@ -817,6 +847,11 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       collapsable={false}
       style={
         Object {
+          "alignSelf": undefined,
+          "bottom": undefined,
+          "left": undefined,
+          "position": undefined,
+          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -824,6 +859,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "top": undefined,
         }
       }
     >
@@ -974,6 +1010,11 @@ exports[`renders data table pagination with label 1`] = `
       collapsable={false}
       style={
         Object {
+          "alignSelf": undefined,
+          "bottom": undefined,
+          "left": undefined,
+          "position": undefined,
+          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -981,6 +1022,7 @@ exports[`renders data table pagination with label 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "top": undefined,
         }
       }
     >
@@ -1079,6 +1121,11 @@ exports[`renders data table pagination with label 1`] = `
       collapsable={false}
       style={
         Object {
+          "alignSelf": undefined,
+          "bottom": undefined,
+          "left": undefined,
+          "position": undefined,
+          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -1086,6 +1133,7 @@ exports[`renders data table pagination with label 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "top": undefined,
         }
       }
     >
@@ -1242,6 +1290,11 @@ exports[`renders data table pagination with options select 1`] = `
         collapsable={false}
         style={
           Object {
+            "alignSelf": undefined,
+            "bottom": undefined,
+            "left": undefined,
+            "position": undefined,
+            "right": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -1249,6 +1302,7 @@ exports[`renders data table pagination with options select 1`] = `
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
+            "top": undefined,
           }
         }
       >
@@ -1446,6 +1500,11 @@ exports[`renders data table pagination with options select 1`] = `
       collapsable={false}
       style={
         Object {
+          "alignSelf": undefined,
+          "bottom": undefined,
+          "left": undefined,
+          "position": undefined,
+          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -1453,6 +1512,7 @@ exports[`renders data table pagination with options select 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "top": undefined,
         }
       }
     >
@@ -1551,6 +1611,11 @@ exports[`renders data table pagination with options select 1`] = `
       collapsable={false}
       style={
         Object {
+          "alignSelf": undefined,
+          "bottom": undefined,
+          "left": undefined,
+          "position": undefined,
+          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -1558,6 +1623,7 @@ exports[`renders data table pagination with options select 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "top": undefined,
         }
       }
     >
@@ -1656,6 +1722,11 @@ exports[`renders data table pagination with options select 1`] = `
       collapsable={false}
       style={
         Object {
+          "alignSelf": undefined,
+          "bottom": undefined,
+          "left": undefined,
+          "position": undefined,
+          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -1663,6 +1734,7 @@ exports[`renders data table pagination with options select 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "top": undefined,
         }
       }
     >
@@ -1761,6 +1833,11 @@ exports[`renders data table pagination with options select 1`] = `
       collapsable={false}
       style={
         Object {
+          "alignSelf": undefined,
+          "bottom": undefined,
+          "left": undefined,
+          "position": undefined,
+          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -1768,6 +1845,7 @@ exports[`renders data table pagination with options select 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "top": undefined,
         }
       }
     >

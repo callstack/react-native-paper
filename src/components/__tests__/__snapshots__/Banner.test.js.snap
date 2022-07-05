@@ -5,6 +5,11 @@ exports[`render visible banner, with custom theme 1`] = `
   collapsable={false}
   style={
     Object {
+      "alignSelf": undefined,
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 1,
@@ -12,6 +17,7 @@ exports[`render visible banner, with custom theme 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 3,
+      "top": undefined,
     }
   }
 >
@@ -113,6 +119,11 @@ exports[`render visible banner, with custom theme 1`] = `
               collapsable={false}
               style={
                 Object {
+                  "alignSelf": undefined,
+                  "bottom": undefined,
+                  "left": undefined,
+                  "position": undefined,
+                  "right": undefined,
                   "shadowColor": "#000",
                   "shadowOffset": Object {
                     "height": 0,
@@ -120,6 +131,7 @@ exports[`render visible banner, with custom theme 1`] = `
                   },
                   "shadowOpacity": 0,
                   "shadowRadius": 0,
+                  "top": undefined,
                 }
               }
             >
@@ -255,6 +267,11 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
   collapsable={false}
   style={
     Object {
+      "alignSelf": undefined,
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 1,
@@ -262,6 +279,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 3,
+      "top": undefined,
     }
   }
 >
@@ -383,6 +401,11 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
   collapsable={false}
   style={
     Object {
+      "alignSelf": undefined,
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 1,
@@ -390,6 +413,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 3,
+      "top": undefined,
     }
   }
 >
@@ -492,6 +516,11 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
               collapsable={false}
               style={
                 Object {
+                  "alignSelf": undefined,
+                  "bottom": undefined,
+                  "left": undefined,
+                  "position": undefined,
+                  "right": undefined,
                   "shadowColor": "#000",
                   "shadowOffset": Object {
                     "height": 0,
@@ -499,6 +528,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                   },
                   "shadowOpacity": 0,
                   "shadowRadius": 0,
+                  "top": undefined,
                 }
               }
             >
@@ -634,6 +664,11 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
   collapsable={false}
   style={
     Object {
+      "alignSelf": undefined,
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 1,
@@ -641,6 +676,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 3,
+      "top": undefined,
     }
   }
 >
@@ -742,6 +778,11 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
               collapsable={false}
               style={
                 Object {
+                  "alignSelf": undefined,
+                  "bottom": undefined,
+                  "left": undefined,
+                  "position": undefined,
+                  "right": undefined,
                   "shadowColor": "#000",
                   "shadowOffset": Object {
                     "height": 0,
@@ -749,6 +790,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   },
                   "shadowOpacity": 0,
                   "shadowRadius": 0,
+                  "top": undefined,
                 }
               }
             >
@@ -875,6 +917,11 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
               collapsable={false}
               style={
                 Object {
+                  "alignSelf": undefined,
+                  "bottom": undefined,
+                  "left": undefined,
+                  "position": undefined,
+                  "right": undefined,
                   "shadowColor": "#000",
                   "shadowOffset": Object {
                     "height": 0,
@@ -882,6 +929,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   },
                   "shadowOpacity": 0,
                   "shadowRadius": 0,
+                  "top": undefined,
                 }
               }
             >
@@ -1017,6 +1065,11 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
   collapsable={false}
   style={
     Object {
+      "alignSelf": undefined,
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 1,
@@ -1024,6 +1077,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 3,
+      "top": undefined,
     }
   }
 >
@@ -1134,6 +1188,11 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
   collapsable={false}
   style={
     Object {
+      "alignSelf": undefined,
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 1,
@@ -1141,6 +1200,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 3,
+      "top": undefined,
     }
   }
 >

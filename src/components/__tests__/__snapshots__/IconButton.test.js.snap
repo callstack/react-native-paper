@@ -5,6 +5,11 @@ exports[`renders disabled icon button 1`] = `
   collapsable={false}
   style={
     Object {
+      "alignSelf": undefined,
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 0,
@@ -12,6 +17,7 @@ exports[`renders disabled icon button 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
+      "top": undefined,
     }
   }
 >
@@ -112,6 +118,11 @@ exports[`renders icon button by default 1`] = `
   collapsable={false}
   style={
     Object {
+      "alignSelf": undefined,
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 0,
@@ -119,6 +130,7 @@ exports[`renders icon button by default 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
+      "top": undefined,
     }
   }
 >
@@ -219,6 +231,11 @@ exports[`renders icon button with color 1`] = `
   collapsable={false}
   style={
     Object {
+      "alignSelf": undefined,
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 0,
@@ -226,6 +243,7 @@ exports[`renders icon button with color 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
+      "top": undefined,
     }
   }
 >
@@ -326,6 +344,11 @@ exports[`renders icon button with size 1`] = `
   collapsable={false}
   style={
     Object {
+      "alignSelf": undefined,
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 0,
@@ -333,6 +356,7 @@ exports[`renders icon button with size 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
+      "top": undefined,
     }
   }
 >
@@ -433,6 +457,11 @@ exports[`renders icon change animated 1`] = `
   collapsable={false}
   style={
     Object {
+      "alignSelf": undefined,
+      "bottom": undefined,
+      "left": undefined,
+      "position": undefined,
+      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 0,
@@ -440,6 +469,7 @@ exports[`renders icon change animated 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
+      "top": undefined,
     }
   }
 >

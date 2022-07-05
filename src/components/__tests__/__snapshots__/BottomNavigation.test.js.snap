@@ -64,6 +64,11 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
     collapsable={false}
     style={
       Object {
+        "alignSelf": undefined,
+        "bottom": 0,
+        "left": 0,
+        "position": null,
+        "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -71,6 +76,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "top": undefined,
       }
     }
   >
@@ -95,10 +101,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         style={
           Object {
             "backgroundColor": "transparent",
-            "bottom": 0,
-            "left": 0,
-            "position": null,
-            "right": 0,
             "transform": Array [
               Object {
                 "translateY": 0,
@@ -732,6 +734,11 @@ exports[`hides labels in shifting bottom navigation 1`] = `
     collapsable={false}
     style={
       Object {
+        "alignSelf": undefined,
+        "bottom": 0,
+        "left": 0,
+        "position": null,
+        "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -739,6 +746,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "top": undefined,
       }
     }
   >
@@ -763,10 +771,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         style={
           Object {
             "backgroundColor": "transparent",
-            "bottom": 0,
-            "left": 0,
-            "position": null,
-            "right": 0,
             "transform": Array [
               Object {
                 "translateY": 0,
@@ -1421,6 +1425,11 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     collapsable={false}
     style={
       Object {
+        "alignSelf": undefined,
+        "bottom": 0,
+        "left": 0,
+        "position": null,
+        "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -1428,6 +1437,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "top": undefined,
       }
     }
   >
@@ -1452,10 +1462,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         style={
           Object {
             "backgroundColor": "transparent",
-            "bottom": 0,
-            "left": 0,
-            "position": null,
-            "right": 0,
             "transform": Array [
               Object {
                 "translateY": 0,
@@ -2119,6 +2125,11 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
     collapsable={false}
     style={
       Object {
+        "alignSelf": undefined,
+        "bottom": 0,
+        "left": 0,
+        "position": null,
+        "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -2126,6 +2137,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "top": undefined,
       }
     }
   >
@@ -2150,10 +2162,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         style={
           Object {
             "backgroundColor": "transparent",
-            "bottom": 0,
-            "left": 0,
-            "position": null,
-            "right": 0,
             "transform": Array [
               Object {
                 "translateY": 0,
@@ -3155,6 +3163,11 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
     collapsable={false}
     style={
       Object {
+        "alignSelf": undefined,
+        "bottom": 0,
+        "left": 0,
+        "position": null,
+        "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -3162,6 +3175,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "top": undefined,
       }
     }
   >
@@ -3186,11 +3200,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         style={
           Object {
             "backgroundColor": "transparent",
-            "bottom": 0,
             "color": "#e57373",
-            "left": 0,
-            "position": null,
-            "right": 0,
             "transform": Array [
               Object {
                 "translateY": 0,
@@ -4133,6 +4143,11 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
     collapsable={false}
     style={
       Object {
+        "alignSelf": undefined,
+        "bottom": 0,
+        "left": 0,
+        "position": null,
+        "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -4140,6 +4155,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "top": undefined,
       }
     }
   >
@@ -4164,11 +4180,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         style={
           Object {
             "backgroundColor": "transparent",
-            "bottom": 0,
             "color": "#e57373",
-            "left": 0,
-            "position": null,
-            "right": 0,
             "transform": Array [
               Object {
                 "translateY": 0,
@@ -5006,6 +5018,11 @@ exports[`renders non-shifting bottom navigation 1`] = `
     collapsable={false}
     style={
       Object {
+        "alignSelf": undefined,
+        "bottom": 0,
+        "left": 0,
+        "position": null,
+        "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -5013,6 +5030,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "top": undefined,
       }
     }
   >
@@ -5037,10 +5055,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
         style={
           Object {
             "backgroundColor": "transparent",
-            "bottom": 0,
-            "left": 0,
-            "position": null,
-            "right": 0,
             "transform": Array [
               Object {
                 "translateY": 0,
@@ -5983,6 +5997,11 @@ exports[`renders shifting bottom navigation 1`] = `
     collapsable={false}
     style={
       Object {
+        "alignSelf": undefined,
+        "bottom": 0,
+        "left": 0,
+        "position": null,
+        "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -5990,6 +6009,7 @@ exports[`renders shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "top": undefined,
       }
     }
   >
@@ -6014,10 +6034,6 @@ exports[`renders shifting bottom navigation 1`] = `
         style={
           Object {
             "backgroundColor": "transparent",
-            "bottom": 0,
-            "left": 0,
-            "position": null,
-            "right": 0,
             "transform": Array [
               Object {
                 "translateY": 0,
