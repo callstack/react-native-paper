@@ -213,11 +213,13 @@ type Props = {
    */
   sceneAnimationEnabled?: boolean;
   /**
+   * @supported Available in v5.x
    * The scene animation effect. Specify `'shifting'` for a different effect.
    * By default, 'opacity' will be used.
    */
   sceneAnimationType?: 'opacity' | 'shifting';
   /**
+   * @supported Available in v5.x
    * The scene animation Easing.
    */
   sceneAnimationEasing?: EasingFunction | undefined;
