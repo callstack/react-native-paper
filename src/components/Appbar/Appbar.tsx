@@ -132,7 +132,7 @@ const Appbar = ({
   let shouldCenterContent = false;
   let shouldAddLeftSpacing = false;
   let shouldAddRightSpacing = false;
-  if (Platform.OS === 'ios') {
+  if (isV3 || Platform.OS === 'ios') {
     let hasAppbarContent = false;
     let leftItemsCount = 0;
     let rightItemsCount = 0;
@@ -150,10 +150,11 @@ const Appbar = ({
     });
 
     shouldCenterContent =
-      !isV3 && hasAppbarContent && leftItemsCount < 2 && rightItemsCount < 2;
-    shouldAddLeftSpacing = !isV3 && shouldCenterContent && leftItemsCount === 0;
-    shouldAddRightSpacing =
-      !isV3 && shouldCenterContent && rightItemsCount === 0;
+      hasAppbarContent &&
+      leftItemsCount < 2 &&
+      rightItemsCount < (isV3 ? 3 : 2);
+    shouldAddLeftSpacing = shouldCenterContent && leftItemsCount === 0;
+    shouldAddRightSpacing = shouldCenterContent && rightItemsCount === 0;
   }
 
   const isMode = (modeToCompare: AppbarModes) => {
@@ -169,6 +170,8 @@ const Appbar = ({
     [children]
   );
 
+  const spacingStyle = isV3 ? styles.v3Spacing : styles.spacing;
+
   return (
     <Surface
       style={[
@@ -183,15 +186,16 @@ const Appbar = ({
       elevation={elevation as MD3Elevation}
       {...rest}
     >
-      {shouldAddLeftSpacing ? <View style={styles.spacing} /> : null}
-      {(!isV3 || isMode('small')) &&
+      {shouldAddLeftSpacing ? <View style={spacingStyle} /> : null}
+      {(!isV3 || isMode('small') || isMode('center-aligned')) &&
         renderAppbarContent({
           children,
           isDark,
           isV3,
-          shouldCenterContent,
+          shouldCenterContent:
+            (isV3 && !isMode('small')) ?? shouldCenterContent,
         })}
-      {(isMode('medium') || isMode('large') || isMode('center-aligned')) && (
+      {(isMode('medium') || isMode('large')) && (
         <View
           style={[
             styles.columnContainer,
@@ -236,13 +240,12 @@ const Appbar = ({
             children,
             isDark,
             isV3,
-            shouldCenterContent: isMode('center-aligned'),
             renderOnly: [AppbarContent],
             mode,
           })}
         </View>
       )}
-      {shouldAddRightSpacing ? <View style={styles.spacing} /> : null}
+      {shouldAddRightSpacing ? <View style={spacingStyle} /> : null}
     </Surface>
   );
 };
@@ -255,6 +258,9 @@ const styles = StyleSheet.create({
   },
   spacing: {
     width: 48,
+  },
+  v3Spacing: {
+    width: 52,
   },
   controlsRow: {
     flex: 1,

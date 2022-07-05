@@ -114,11 +114,10 @@ export const renderAppbarContent = ({
         if (child.type === AppbarContent) {
           props.mode = mode;
           props.style = [
-            isV3 ? i === 0 && styles.v3Spacing : i !== 0 && styles.v2Spacing,
-            shouldCenterContent &&
-              (isV3
-                ? styles.v3CenterAlignedContent
-                : styles.v2CenterAlignedContent),
+            isV3
+              ? i === 0 && !shouldCenterContent && styles.v3Spacing
+              : i !== 0 && styles.v2Spacing,
+            shouldCenterContent && styles.centerAlignedContent,
             child.props.style,
           ];
         }
@@ -128,18 +127,13 @@ export const renderAppbarContent = ({
 };
 
 const styles = StyleSheet.create({
+  centerAlignedContent: {
+    alignItems: 'center',
+  },
   v2Spacing: {
     marginLeft: 8,
   },
-  v2CenterAlignedContent: {
-    alignItems: 'center',
-  },
   v3Spacing: {
     marginLeft: 12,
-  },
-  v3CenterAlignedContent: {
-    ...StyleSheet.absoluteFillObject,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
