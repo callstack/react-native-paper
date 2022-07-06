@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import renderer from 'react-test-renderer';
 import Menu from '../../Menu/Menu';
 import Appbar from '../../Appbar';
@@ -106,22 +105,16 @@ describe('renderAppbarContent', () => {
         shouldCenterContent: true,
       });
 
-    const v3CenterAlignedStyle = {
-      ...StyleSheet.absoluteFillObject,
-      alignItems: 'center',
-      justifyContent: 'center',
-    };
-
-    const v2CenterAlignedContent = {
+    const centerAlignedContent = {
       alignItems: 'center',
     };
 
     expect(renderResult()[0].props.style).toEqual(
-      expect.arrayContaining([expect.objectContaining(v3CenterAlignedStyle)])
+      expect.arrayContaining([expect.objectContaining(centerAlignedContent)])
     );
 
     expect(renderResult(false)[0].props.style).toEqual(
-      expect.arrayContaining([expect.objectContaining(v2CenterAlignedContent)])
+      expect.arrayContaining([expect.objectContaining(centerAlignedContent)])
     );
   });
 
