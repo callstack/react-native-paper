@@ -1,10 +1,10 @@
-import type { ThemeBase } from '../../../types';
-import { tokens, typescale } from './tokens';
 import color from 'color';
+import type { MD3Theme } from '../../../types';
+import { tokens, typescale } from './tokens';
 
 const { palette, opacity } = tokens.md.ref;
 
-const LightTheme: ThemeBase = {
+export const MD3LightTheme: MD3Theme = {
   dark: false,
   roundness: 4,
   version: 3,
@@ -62,5 +62,3 @@ const LightTheme: ThemeBase = {
     scale: 1.0,
   },
 };
-
-export default LightTheme;

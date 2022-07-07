@@ -24,7 +24,7 @@ import {
 } from './constants';
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
 import type { TextInputLabelProp } from './types';
-import MD3LightTheme from '../../styles/themes/v3/LightTheme';
+import { MD3LightTheme } from '../../styles/themes';
 import type { Theme } from '../../types';
 
 type PaddingProps = {

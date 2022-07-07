@@ -3,11 +3,12 @@ import { Appearance, AccessibilityInfo, View } from 'react-native';
 import { render, act } from 'react-native-testing-library';
 import Provider from '../Provider';
 import { useTheme } from '../theming';
-import MD2LightTheme from '../../styles/themes/v2/LightTheme';
-import MD2DarkTheme from '../../styles/themes/v2/DarkTheme';
-import MD3LightTheme from '../../styles/themes/v3/LightTheme';
-import MD3DarkTheme from '../../styles/themes/v3/DarkTheme';
-import { typescale } from '../../styles/themes/v3/tokens';
+import {
+  MD2LightTheme,
+  MD2DarkTheme,
+  MD3LightTheme,
+  MD3DarkTheme,
+} from '../../styles/themes';
 
 const mockAppearance = () => {
   jest.mock('react-native/Libraries/Utilities/Appearance', () => {
@@ -70,8 +71,8 @@ const createProvider = (theme) => {
   );
 };
 
-const ExtendedLightTheme = { ...MD3LightTheme, typescale, isV3: true };
-const ExtendedDarkTheme = { ...MD3DarkTheme, typescale, isV3: true };
+const ExtendedLightTheme = { ...MD3LightTheme, isV3: true };
+const ExtendedDarkTheme = { ...MD3DarkTheme, isV3: true };
 
 describe('Provider', () => {
   beforeEach(() => {

@@ -1,9 +1,9 @@
 import color from 'color';
-import { black, white, pinkA400 } from './colors';
+import type { MD2Theme } from '../../../types';
 import configureFonts from '../../fonts';
-import type { ThemeBase } from '../../../types';
+import { black, pinkA400, white } from './colors';
 
-const LightTheme: ThemeBase = {
+export const MD2LightTheme: MD2Theme = {
   dark: false,
   roundness: 4,
   version: 2,
@@ -26,5 +26,3 @@ const LightTheme: ThemeBase = {
     scale: 1.0,
   },
 };
-
-export default LightTheme;

@@ -75,7 +75,7 @@ export type MD3Colors = {
 
 export type MD3Palette = {};
 
-export type ThemeProp = $DeepPartial<Theme>;
+export type ThemeProp = $DeepPartial<ReactNativePaper.Theme>;
 
 export type ThemeBase = {
   dark: boolean;
@@ -84,17 +84,23 @@ export type ThemeBase = {
   animation: {
     scale: number;
   };
-} & (
-  | { version: 2; colors: MD2Colors; isV3: false; fonts: Fonts }
-  | {
-      version: 3;
-      colors: MD3Colors;
-      isV3: true;
-      typescale: MD3Typescale;
-    }
-);
+};
 
-export type Theme = ThemeBase;
+export type MD3Theme = ThemeBase & {
+  version: 3;
+  isV3: true;
+  colors: MD3Colors;
+  typescale: MD3Typescale;
+};
+
+export type MD2Theme = ThemeBase & {
+  version: 2;
+  isV3: false;
+  colors: MD2Colors;
+  fonts: Fonts;
+};
+
+export type Theme = MD2Theme | MD3Theme;
 
 // MD3 types
 export enum MD3TypescaleKey {
@@ -131,30 +137,6 @@ export type MD3Typescale = {
   [key in MD3TypescaleKey]: MD3Type;
 };
 
-export type MD3Tokens = {
-  md: {
-    sys: {
-      color: MD3Colors;
-      typescale: MD3Typescale;
-    };
-    ref: {
-      palette: MD3Palette;
-      typeface: {
-        brandRegular: Font['fontFamily'];
-        weightRegular: Font['fontWeight'];
-        plainMedium: Font['fontFamily'];
-        weightMedium: Font['fontWeight'];
-      };
-      opacity: {
-        level1: number;
-        level2: number;
-        level3: number;
-        level4: number;
-      };
-    };
-  };
-};
-
 export type MD3Elevation = 0 | 1 | 2 | 3 | 4 | 5;
 
 export enum ElevationLevels {
@@ -177,46 +159,3 @@ export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<
 >;
 
 export type EllipsizeProp = 'head' | 'middle' | 'tail' | 'clip';
-
-declare global {
-  namespace ReactNativePaper {
-    interface ThemeFont {
-      fontFamily: string;
-      fontWeight?:
-        | 'normal'
-        | 'bold'
-        | '100'
-        | '200'
-        | '300'
-        | '400'
-        | '500'
-        | '600'
-        | '700'
-        | '800'
-        | '900';
-    }
-    interface ThemeFonts {
-      regular: ThemeFont;
-      medium: ThemeFont;
-      light: ThemeFont;
-      thin: ThemeFont;
-    }
-    interface ThemeColors {
-      primary: string;
-      background: string;
-      surface: string;
-      accent: string;
-      error: string;
-      text: string;
-      onSurface: string;
-      disabled: string;
-      placeholder: string;
-      backdrop: string;
-      notification: string;
-    }
-
-    interface ThemeAnimation {
-      scale: number;
-    }
-  }
-}

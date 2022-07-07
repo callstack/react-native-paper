@@ -1,14 +1,11 @@
 import * as MD2Colors from './styles/themes/v2/colors';
+export { MD2Colors };
 
 export { MD3Colors } from './styles/themes/v3/tokens';
-export { MD2Colors };
 
 export { useTheme, withTheme, ThemeProvider } from './core/theming';
 
-export { default as MD2LightTheme } from './styles/themes/v2/LightTheme';
-export { default as MD2DarkTheme } from './styles/themes/v2/DarkTheme';
-export { default as MD3LightTheme } from './styles/themes/v3/LightTheme';
-export { default as MD3DarkTheme } from './styles/themes/v3/DarkTheme';
+export * from './styles/themes';
 
 export { default as Provider } from './core/Provider';
 export { default as shadow } from './styles/shadow';
@@ -61,4 +58,10 @@ export {
 } from './components/Typography/v2';
 export { default as Text } from './components/Typography/Text';
 
-export type { Theme, ThemeBase, MD3Elevation } from './types';
+export type {
+  MD2Theme,
+  MD3Theme,
+  ThemeBase,
+  MD3Elevation,
+  Theme,
+} from './types';
