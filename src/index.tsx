@@ -1,4 +1,5 @@
-export * as MD2Colors from './styles/themes/v2/colors';
+import * as MD2Colors from './styles/themes/v2/colors';
+export { MD2Colors };
 
 export { MD3Colors } from './styles/themes/v3/tokens';
 
@@ -57,4 +58,10 @@ export {
 } from './components/Typography/v2';
 export { default as Text } from './components/Typography/Text';
 
-export type { MD2Theme, MD3Theme, ThemeBase, MD3Elevation } from './types';
+export type {
+  MD2Theme,
+  MD3Theme,
+  ThemeBase,
+  MD3Elevation,
+  Theme,
+} from './types';

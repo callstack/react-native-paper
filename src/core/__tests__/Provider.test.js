@@ -8,7 +8,6 @@ import {
   MD2DarkTheme,
   MD3LightTheme,
   MD3DarkTheme,
-  typescale,
 } from '../../styles/themes';
 
 const mockAppearance = () => {
@@ -72,8 +71,8 @@ const createProvider = (theme) => {
   );
 };
 
-const ExtendedLightTheme = { ...MD3LightTheme, typescale, isV3: true };
-const ExtendedDarkTheme = { ...MD3DarkTheme, typescale, isV3: true };
+const ExtendedLightTheme = { ...MD3LightTheme, isV3: true };
+const ExtendedDarkTheme = { ...MD3DarkTheme, isV3: true };
 
 describe('Provider', () => {
   beforeEach(() => {

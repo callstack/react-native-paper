@@ -9,7 +9,7 @@ import {
   getOutlinedInputColors,
 } from '../TextInput/helpers';
 import { getTheme } from '../../core/theming';
-import MD3LightTheme from '../../styles/themes/v3/LightTheme';
+import { MD3LightTheme } from '../../styles/themes';
 
 const style = StyleSheet.create({
   inputStyle: {
