@@ -26,10 +26,6 @@ export default function ScreenWrapper({
 }: Props) {
   const theme = useTheme();
 
-  theme.isV3;
-  theme.colors;
-  theme.typescale;
-
   const insets = useSafeAreaInsets();
 
   const containerStyle = [
