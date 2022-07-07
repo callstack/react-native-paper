@@ -4,7 +4,7 @@ import { tokens, typescale } from './tokens';
 
 const { palette, opacity } = tokens.md.ref;
 
-const LightTheme: MD3Theme = {
+export const MD3LightTheme: MD3Theme = {
   dark: false,
   roundness: 4,
   version: 3,
@@ -62,5 +62,3 @@ const LightTheme: MD3Theme = {
     scale: 1.0,
   },
 };
-
-export default LightTheme;

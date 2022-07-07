@@ -2,16 +2,16 @@ import color from 'color';
 import type { MD2Theme } from '../../../types';
 import configureFonts from '../../fonts';
 import { black, pinkA100, white } from './colors';
-import LightTheme from './LightTheme';
+import { MD2LightTheme } from './LightTheme';
 
-const DarkTheme: MD2Theme = {
-  ...LightTheme,
+export const MD2DarkTheme: MD2Theme = {
+  ...MD2LightTheme,
   dark: true,
   mode: 'adaptive',
   version: 2,
   isV3: false,
   colors: {
-    ...LightTheme.colors,
+    ...MD2LightTheme.colors,
     primary: '#BB86FC',
     accent: '#03dac6',
     background: '#121212',
@@ -26,5 +26,3 @@ const DarkTheme: MD2Theme = {
   },
   fonts: configureFonts(),
 };
-
-export default DarkTheme;

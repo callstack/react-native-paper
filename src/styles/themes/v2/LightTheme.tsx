@@ -3,7 +3,7 @@ import type { MD2Theme } from '../../../types';
 import configureFonts from '../../fonts';
 import { black, pinkA400, white } from './colors';
 
-const LightTheme: MD2Theme = {
+export const MD2LightTheme: MD2Theme = {
   dark: false,
   roundness: 4,
   version: 2,
@@ -26,5 +26,3 @@ const LightTheme: MD2Theme = {
     scale: 1.0,
   },
 };
-
-export default LightTheme;

@@ -1,14 +1,15 @@
 import { createTheming } from '@callstack/react-theme-provider';
-import MD2DarkTheme from '../styles/themes/v2/DarkTheme';
-import MD2LightTheme from '../styles/themes/v2/LightTheme';
-import MD3DarkTheme from '../styles/themes/v3/DarkTheme';
 import {
-  default as LightTheme,
-  default as MD3LightTheme,
-} from '../styles/themes/v3/LightTheme';
+  MD2DarkTheme,
+  MD2LightTheme,
+  MD3DarkTheme,
+  MD3LightTheme,
+} from '../styles/themes';
+
+const defaultTheme = MD3LightTheme;
 
 export const { ThemeProvider, withTheme, useTheme } =
-  createTheming<ReactNativePaper.Theme>(LightTheme as ReactNativePaper.Theme);
+  createTheming<ReactNativePaper.Theme>(defaultTheme as ReactNativePaper.Theme);
 
 export const defaultThemesByVersion = {
   2: {

@@ -1,6 +1,6 @@
 import color from 'color';
 import { Animated } from 'react-native';
-import DarkTheme from './themes/v2/DarkTheme';
+import { MD2DarkTheme } from './themes/v2/DarkTheme';
 
 export const isAnimatedValue = (
   it: number | string | Animated.AnimatedInterpolation
@@ -8,7 +8,7 @@ export const isAnimatedValue = (
 
 export default function overlay<T extends Animated.Value | number>(
   elevation: T,
-  surfaceColor: string = DarkTheme.colors?.surface
+  surfaceColor: string = MD2DarkTheme.colors?.surface
 ): T extends number ? string : Animated.AnimatedInterpolation {
   if (isAnimatedValue(elevation)) {
     const inputRange = [0, 1, 2, 3, 8, 24];
