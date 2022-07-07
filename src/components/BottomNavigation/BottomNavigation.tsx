@@ -8,6 +8,7 @@ import {
   StyleProp,
   Platform,
   ViewStyle,
+  EasingFunction,
 } from 'react-native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 import color from 'color';
@@ -212,6 +213,17 @@ type Props = {
    */
   sceneAnimationEnabled?: boolean;
   /**
+   * @supported Available in v5.x
+   * The scene animation effect. Specify `'shifting'` for a different effect.
+   * By default, 'opacity' will be used.
+   */
+  sceneAnimationType?: 'opacity' | 'shifting';
+  /**
+   * @supported Available in v5.x
+   * The scene animation Easing.
+   */
+  sceneAnimationEasing?: EasingFunction | undefined;
+  /**
    * Whether the bottom navigation bar is hidden when keyboard is shown.
    * On Android, this works best when [`windowSoftInputMode`](https://developer.android.com/guide/topics/manifest/activity-element#wsoft) is set to `adjustResize`.
    */
@@ -354,6 +366,8 @@ const BottomNavigation = ({
   style,
   theme,
   sceneAnimationEnabled = false,
+  sceneAnimationType = 'opacity',
+  sceneAnimationEasing,
   onTabPress,
   onIndexChange,
   shifting = theme.isV3 ? false : navigationState.routes.length > 3,
@@ -377,6 +391,16 @@ const BottomNavigation = ({
     navigationState.routes.map(
       // focused === 1, unfocused === 0
       (_, i) => (i === navigationState.index ? 1 : 0)
+    )
+  );
+
+  /**
+   * Active state of individual tab item positions:
+   * -1 if they're before the active tab, 0 if they're active, 1 if they're after the active tab
+   */
+  const tabsPositionAnims = useAnimatedValueArray(
+    navigationState.routes.map((_, i) =>
+      i === navigationState.index ? 0 : i >= navigationState.index ? 1 : -1
     )
   );
 
@@ -458,6 +482,15 @@ const BottomNavigation = ({
             toValue: i === index ? 1 : 0,
             duration: theme.isV3 || shifting ? 150 * scale : 0,
             useNativeDriver: true,
+            easing: sceneAnimationEasing,
+          })
+        ),
+        ...navigationState.routes.map((_, i) =>
+          Animated.timing(tabsPositionAnims[i], {
+            toValue: i === index ? 0 : i >= index ? 1 : -1,
+            duration: theme.isV3 || shifting ? 150 * scale : 0,
+            useNativeDriver: true,
+            easing: sceneAnimationEasing,
           })
         ),
       ]).start(({ finished }) => {
@@ -489,6 +522,8 @@ const BottomNavigation = ({
       rippleAnim,
       scale,
       tabsAnims,
+      tabsPositionAnims,
+      sceneAnimationEasing,
       theme,
     ]
   );
@@ -629,7 +664,10 @@ const BottomNavigation = ({
           const focused = navigationState.index === index;
 
           const opacity = sceneAnimationEnabled
-            ? tabsAnims[index]
+            ? tabsPositionAnims[index].interpolate({
+                inputRange: [-1, 0, 1],
+                outputRange: [0, 1, 0],
+              })
             : focused
             ? 1
             : 0;
@@ -643,6 +681,16 @@ const BottomNavigation = ({
             ? 0
             : FAR_FAR_AWAY;
 
+          const left =
+            sceneAnimationType === 'shifting'
+              ? tabsPositionAnims[index].interpolate({
+                  inputRange: [-1, 0, 1],
+                  outputRange: [-50, 0, 50],
+                })
+              : 0;
+
+          const zIndex = focused ? 1 : 0;
+
           return (
             <BottomNavigationRouteScreen
               key={route.key}
@@ -653,7 +701,7 @@ const BottomNavigation = ({
               }
               index={index}
               visibility={opacity}
-              style={[StyleSheet.absoluteFill, { opacity }]}
+              style={[StyleSheet.absoluteFill, { zIndex }]}
               collapsable={false}
               removeClippedSubviews={
                 // On iOS, set removeClippedSubviews to true only when not focused
@@ -661,7 +709,15 @@ const BottomNavigation = ({
                 Platform.OS === 'ios' ? navigationState.index !== index : true
               }
             >
-              <Animated.View style={[styles.content, { top }]}>
+              <Animated.View
+                style={[
+                  styles.content,
+                  {
+                    opacity: opacity,
+                    transform: [{ translateX: left }, { translateY: top }],
+                  },
+                ]}
+              >
                 {renderScene({ route, jumpTo })}
               </Animated.View>
             </BottomNavigationRouteScreen>

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import { render } from 'react-native-testing-library';
+import { StyleSheet, Easing, Animated } from 'react-native';
+import { fireEvent, render } from 'react-native-testing-library';
 import renderer from 'react-test-renderer';
 import BottomNavigation from '../BottomNavigation/BottomNavigation.tsx';
 import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRouteScreen.tsx';
@@ -16,12 +16,25 @@ const styles = StyleSheet.create({
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native');
 
+  const mock = jest.fn(() => ({
+    delay: () => jest.fn(),
+    interpolate: () => jest.fn(),
+    timing: () => jest.fn(),
+    start: () => jest.fn(),
+    stop: () => jest.fn(),
+    reset: () => jest.fn(),
+  }));
+
   RN.Animated.timing = (value, config) => ({
     start: (callback) => {
       value.setValue(config.toValue);
       callback && callback({ finished: true });
     },
+    value,
+    config,
   });
+
+  RN.Animated.parallel = mock;
 
   return RN;
 });
@@ -50,6 +63,92 @@ it('renders shifting bottom navigation', () => {
     .toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('renders bottom navigation with scene animation', () => {
+  const tree = renderer
+    .create(
+      <BottomNavigation
+        shifting
+        sceneAnimationEnabled
+        sceneAnimationType="shifting"
+        sceneAnimationEasing={Easing.ease}
+        navigationState={createState(0, 5)}
+        onIndexChange={jest.fn()}
+        renderScene={({ route }) => route.title}
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('sceneAnimationEnabled matches animation requirements', () => {
+  const ease = Easing.ease;
+
+  const tree = render(
+    <BottomNavigation
+      shifting
+      sceneAnimationEnabled
+      sceneAnimationType="shifting"
+      sceneAnimationEasing={ease}
+      navigationState={createState(1, 5)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+    />
+  );
+  fireEvent(tree.getByText('Route: 1'), 'onPress');
+
+  expect(Animated.parallel).toHaveBeenLastCalledWith(
+    expect.arrayContaining([
+      expect.objectContaining({
+        // ripple
+        config: expect.objectContaining({ toValue: 1, duration: 400 }),
+      }),
+      expect.objectContaining({
+        // previous position anims, shifting to the left
+        config: expect.objectContaining({
+          toValue: -1,
+          duration: 150,
+          easing: ease,
+        }),
+      }),
+      expect.objectContaining({
+        // active page visibility
+        config: expect.objectContaining({
+          toValue: 1,
+          duration: 150,
+          easing: ease,
+        }),
+      }),
+      expect.objectContaining({
+        // next position anims, shifting to the right
+        config: expect.objectContaining({
+          toValue: 1,
+          duration: 150,
+          easing: ease,
+        }),
+      }),
+    ])
+  );
+});
+
+it('calls onIndexChange', () => {
+  const onIndexChange = jest.fn();
+  const tree = render(
+    <BottomNavigation
+      shifting
+      navigationState={createState(0, 5)}
+      onIndexChange={onIndexChange}
+      renderScene={({ route }) => route.title}
+    />
+  );
+  // pressing same index as active navigation state does not call onIndexChange
+  fireEvent(tree.getByText('Route: 0'), 'onPress');
+  expect(onIndexChange).not.toHaveBeenCalled();
+
+  fireEvent(tree.getByText('Route: 1'), 'onPress');
+  expect(onIndexChange).toHaveBeenCalledTimes(1);
 });
 
 it('renders non-shifting bottom navigation', () => {
