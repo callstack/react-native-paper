@@ -100,6 +100,8 @@ export type MD2Theme = ThemeBase & {
   fonts: Fonts;
 };
 
+export type Theme = MD2Theme | MD3Theme;
+
 // MD3 types
 export enum MD3TypescaleKey {
   displayLarge = 'displayLarge',
