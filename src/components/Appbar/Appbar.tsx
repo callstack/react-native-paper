@@ -118,6 +118,10 @@ const Appbar = ({
     elevated
   );
 
+  const isMode = (modeToCompare: AppbarModes) => {
+    return isV3 && mode === modeToCompare;
+  };
+
   if (typeof dark === 'boolean') {
     isDark = dark;
   } else {
@@ -129,10 +133,12 @@ const Appbar = ({
         : true;
   }
 
+  const isV3CenterAlignedMode = isV3 && isMode('center-aligned');
+
   let shouldCenterContent = false;
   let shouldAddLeftSpacing = false;
   let shouldAddRightSpacing = false;
-  if (isV3 || Platform.OS === 'ios') {
+  if ((!isV3 && Platform.OS === 'ios') || isV3CenterAlignedMode) {
     let hasAppbarContent = false;
     let leftItemsCount = 0;
     let rightItemsCount = 0;
@@ -156,10 +162,6 @@ const Appbar = ({
     shouldAddLeftSpacing = shouldCenterContent && leftItemsCount === 0;
     shouldAddRightSpacing = shouldCenterContent && rightItemsCount === 0;
   }
-
-  const isMode = (modeToCompare: AppbarModes) => {
-    return isV3 && mode === modeToCompare;
-  };
 
   const filterAppbarActions = React.useCallback(
     (isLeading = false) =>
@@ -192,8 +194,7 @@ const Appbar = ({
           children,
           isDark,
           isV3,
-          shouldCenterContent:
-            (isV3 && !isMode('small')) ?? shouldCenterContent,
+          shouldCenterContent: isV3CenterAlignedMode || shouldCenterContent,
         })}
       {(isMode('medium') || isMode('large')) && (
         <View

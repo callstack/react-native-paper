@@ -11,6 +11,7 @@ import Searchbar from '../../Searchbar';
 import { tokens } from '../../../styles/themes/v3/tokens';
 import { getTheme } from '../../../core/theming';
 import overlay from '../../../styles/overlay';
+import { Platform } from 'react-native';
 
 describe('Appbar', () => {
   it('does not pass any additional props to Searchbar', () => {
@@ -112,6 +113,48 @@ describe('renderAppbarContent', () => {
     expect(renderResult()[0].props.style).toEqual(
       expect.arrayContaining([expect.objectContaining(centerAlignedContent)])
     );
+
+    expect(renderResult(false)[0].props.style).toEqual(
+      expect.arrayContaining([expect.objectContaining(centerAlignedContent)])
+    );
+  });
+
+  it('should not render centered AppbarContent for Android, if not V3', () => {
+    Platform.OS = 'android';
+    const renderResult = (isV3 = true) =>
+      renderAppbarContent({
+        children,
+        isDark: false,
+        isV3,
+        renderOnly: [AppbarContent],
+        mode: 'center-aligned',
+        shouldCenterContent: !isV3 && Platform.OS === 'ios',
+      });
+
+    const centerAlignedContent = {
+      alignItems: 'center',
+    };
+
+    expect(renderResult(false)[0].props.style).not.toEqual(
+      expect.arrayContaining([expect.objectContaining(centerAlignedContent)])
+    );
+  });
+
+  it('should render centered AppbarContent always for iOS, if not V3', () => {
+    Platform.OS = 'ios';
+    const renderResult = (isV3 = true) =>
+      renderAppbarContent({
+        children,
+        isDark: false,
+        isV3,
+        renderOnly: [AppbarContent],
+        mode: 'center-aligned',
+        shouldCenterContent: !isV3 && Platform.OS === 'ios',
+      });
+
+    const centerAlignedContent = {
+      alignItems: 'center',
+    };
 
     expect(renderResult(false)[0].props.style).toEqual(
       expect.arrayContaining([expect.objectContaining(centerAlignedContent)])
