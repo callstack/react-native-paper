@@ -179,7 +179,7 @@ export default function PaperExample() {
                   />
                 </Drawer.Navigator>
               )}
-              <StatusBar style={!theme.dark ? 'dark' : 'light'} />
+              <StatusBar style={!theme.isV3 || theme.dark ? 'light' : 'dark'} />
             </NavigationContainer>
           </React.Fragment>
         </PreferencesContext.Provider>

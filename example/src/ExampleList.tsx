@@ -116,6 +116,7 @@ export default function ExampleList({ navigation }: Props) {
       style={{
         backgroundColor: colors.background,
       }}
+      showsVerticalScrollIndicator={false}
       ItemSeparatorComponent={Divider}
       renderItem={renderItem}
       keyExtractor={keyExtractor}
