@@ -17,7 +17,7 @@ const scripts = [
   path.join(__dirname, 'assets', 'snack.js'),
   path.join(__dirname, 'assets', 'version.js'),
 ];
-const github = 'https://github.com/callstack/react-native-paper/edit/master/';
+const github = 'https://github.com/callstack/react-native-paper/edit/main/';
 
 if (!fs.existsSync(dist)) {
   fs.mkdirSync(dist);
