@@ -29,13 +29,15 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
 };
 
 /**
- * Avatars can be used to represent people in a graphical way.
+ * Avatars can be used to graphically represent users or actions.
  *
  * <div class="screenshots">
  *   <figure>
  *     <img class="medium" src="screenshots/avatar-icon.png" />
  *   </figure>
  * </div>
+ *
+ * You can see a list of available icons in the [Icons](icons.html) section.
  *
  * ## Usage
  * ```js
