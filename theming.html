@@ -50,7 +50,7 @@
     </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PaperProvider</span></span><span class="token punctuation">&gt;</span></span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<p>By default React Native Paper will apply the <a href="https://github.com/callstack/react-native-paper/blob/main/src/styles/DefaultTheme.tsx">default theme</a> if no <code>theme</code> or <code>version</code> prop is passed to to the <code>Provider</code>.</p>
+<p>By default React Native Paper will apply the <a href="https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v3/LightTheme.tsx">Material Design 3 default theme</a> if no <code>theme</code> or <code>version</code> prop is passed to to the <code>Provider</code>.</p>
 <p>You can also provide a <code>theme</code> prop with a theme object with same properties as the default theme:</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> MD3LightTheme <span class="token keyword">as</span> DefaultTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
@@ -363,7 +363,7 @@
             </svg>
           </a>
         Customizing all instances of a component</h2>
-<p>Sometimes you want to style a component in a different way everywhere but don't want to change the properties in the theme so that other components are not affected. For example, say you want to change the font for all your buttons, but don't want to change <code>theme.fonts.medium</code> because it affects other components.</p>
+<p>Sometimes you want to style a component in a different way everywhere, but don't want to change the properties in the theme, so that other components are not affected. For example, say you want to change the font for all your buttons, but don't want to change <code>theme.typescale.labelLarge</code> because it affects other components.</p>
 <p>We don't have an API to do this, because you can already do it with components:</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> Button <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>

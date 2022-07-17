@@ -124,10 +124,10 @@ AppRegistry<span class="token punctuation">.</span><span class="token function">
             </svg>
           </a>
         Customization</h2>
-<p>You can provide a custom theme to customize the colors, fonts etc. with the <code>Provider</code> component. Check the <a href="https://github.com/callstack/react-native-paper/blob/main/src/styles/DefaultTheme.tsx">default theme</a> to see what customization options are supported.</p>
+<p>You can provide a custom theme to customize the colors, typescales etc. with the <code>Provider</code> component. Check the <a href="https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v3/LightTheme.tsx">Material Design 3 default theme</a> to see what customization options are supported.</p>
 <p>Example:</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> DefaultTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> MD3LightTheme <span class="token keyword">as</span> DefaultTheme<span class="token punctuation">,</span><span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> theme <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -135,7 +135,7 @@ AppRegistry<span class="token punctuation">.</span><span class="token function">
   colors<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     <span class="token operator">...</span>DefaultTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
     primary<span class="token punctuation">:</span> <span class="token string">'tomato'</span><span class="token punctuation">,</span>
-    accent<span class="token punctuation">:</span> <span class="token string">'yellow'</span><span class="token punctuation">,</span>
+    secondary<span class="token punctuation">:</span> <span class="token string">'yellow'</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
@@ -146,6 +146,7 @@ AppRegistry<span class="token punctuation">.</span><span class="token function">
     </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PaperProvider</span></span><span class="token punctuation">&gt;</span></span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
+<p><i>Note: For MD2 check the following <a href="https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v2/LightTheme.tsx">Material Design 2 default theme</a>.</i></p>
 </div></div></main></div></div>
     <style type="text/css">
       :root {
