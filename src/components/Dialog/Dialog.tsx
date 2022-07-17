@@ -103,6 +103,7 @@ const Dialog = ({
       styles.container,
       style,
     ]}
+    theme={theme}
   >
     {React.Children.toArray(children)
       .filter((child) => child != null && typeof child !== 'boolean')

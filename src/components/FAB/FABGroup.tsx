@@ -55,6 +55,10 @@ type Props = {
    */
   color?: string;
   /**
+   * Custom backdrop color for opened speed dial background.
+   */
+  backdropColor?: string;
+  /**
    * Function to execute on pressing the `FAB`.
    */
   onPress?: () => void;
@@ -163,6 +167,7 @@ const FABGroup = ({
   testID,
   onStateChange,
   color: colorProp,
+  backdropColor,
 }: Props) => {
   const { current: backdrop } = React.useRef<Animated.Value>(
     new Animated.Value(0)
@@ -267,7 +272,7 @@ const FABGroup = ({
             styles.backdrop,
             {
               opacity: backdropOpacity,
-              backgroundColor: colors.backdrop,
+              backgroundColor: backdropColor || colors.backdrop,
             },
           ]}
         />

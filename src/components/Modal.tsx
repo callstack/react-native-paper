@@ -15,7 +15,7 @@ import {
   getBottomSpace,
 } from 'react-native-iphone-x-helper';
 import Surface from './Surface';
-import { useTheme } from '../core/theming';
+import { withTheme } from '../core/theming';
 import useAnimatedValue from '../utils/useAnimatedValue';
 import { addEventListener } from '../utils/addEventListener';
 
@@ -49,6 +49,11 @@ type Props = {
    * Use this prop to change the default wrapper style or to override safe area insets with marginTop and marginBottom.
    */
   style?: StyleProp<ViewStyle>;
+  /**
+   * @optional
+   */
+  theme: ReactNativePaper.Theme;
+  testID?: string;
 };
 
 const DEFAULT_DURATION = 220;
@@ -94,7 +99,7 @@ const BOTTOM_INSET = getBottomSpace();
  * export default MyComponent;
  * ```
  */
-export default function Modal({
+function Modal({
   dismissable = true,
   visible = false,
   overlayAccessibilityLabel = 'Close modal',
@@ -102,6 +107,8 @@ export default function Modal({
   children,
   contentContainerStyle,
   style,
+  theme,
+  testID,
 }: Props) {
   const visibleRef = React.useRef(visible);
 
@@ -109,7 +116,7 @@ export default function Modal({
     visibleRef.current = visible;
   });
 
-  const { colors, animation } = useTheme();
+  const { colors, animation } = theme;
 
   const opacity = useAnimatedValue(visible ? 1 : 0);
 
@@ -208,6 +215,7 @@ export default function Modal({
       accessibilityLiveRegion="polite"
       style={StyleSheet.absoluteFill}
       onAccessibilityEscape={hideModal}
+      testID={testID}
     >
       <TouchableWithoutFeedback
         accessibilityLabel={overlayAccessibilityLabel}
@@ -217,6 +225,7 @@ export default function Modal({
         importantForAccessibility="no"
       >
         <Animated.View
+          testID={`${testID}-backdrop`}
           style={[
             styles.backdrop,
             { backgroundColor: colors.backdrop, opacity },
@@ -246,6 +255,8 @@ export default function Modal({
     </Animated.View>
   );
 }
+
+export default withTheme(Modal);
 
 const styles = StyleSheet.create({
   backdrop: {
