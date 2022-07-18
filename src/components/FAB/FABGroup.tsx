@@ -243,7 +243,7 @@ const FABGroup = ({
   const toggle = () => onStateChange({ open: !open });
 
   const { labelColor, backdropColor, stackedFABBackgroundColor } =
-    getFABGroupColors({ theme });
+    getFABGroupColors({ theme, customBackdropColor });
 
   const backdropOpacity = open
     ? backdrop.interpolate({
@@ -295,7 +295,7 @@ const FABGroup = ({
             styles.backdrop,
             {
               opacity: backdropOpacity,
-              backgroundColor: customBackdropColor || backdropColor,
+              backgroundColor: backdropColor,
             },
           ]}
         />
