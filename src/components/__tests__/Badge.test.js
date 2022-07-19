@@ -3,6 +3,16 @@ import renderer from 'react-test-renderer';
 import Badge from '../Badge.tsx';
 import { red500 } from '../../styles/themes/v2/colors';
 
+jest.mock('react-native', () => {
+  const RN = jest.requireActual('react-native');
+
+  RN.Dimensions.get = () => ({
+    fontScale: 1,
+  });
+
+  return RN;
+});
+
 it('renders badge', () => {
   const tree = renderer.create(<Badge />).toJSON();
 
