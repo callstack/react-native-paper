@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Animated, StyleSheet, StyleProp, TextStyle } from 'react-native';
+import {
+  Animated,
+  StyleSheet,
+  StyleProp,
+  TextStyle,
+  useWindowDimensions,
+} from 'react-native';
 import { white, black } from '../styles/colors';
 import { withTheme } from '../core/theming';
 import getContrastingColor from '../utils/getContrastingColor';
@@ -65,6 +71,8 @@ const Badge = ({
   const { current: opacity } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
+  const { fontScale } = useWindowDimensions();
+
   const isFirstRendering = React.useRef<boolean>(true);
 
   const {
@@ -102,7 +110,7 @@ const Badge = ({
           color: textColor,
           fontSize: size * 0.5,
           ...theme.fonts.regular,
-          lineHeight: size,
+          lineHeight: size / fontScale,
           height: size,
           minWidth: size,
           borderRadius,
