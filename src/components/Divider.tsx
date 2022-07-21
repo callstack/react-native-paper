@@ -5,7 +5,7 @@ import { withTheme } from '../core/theming';
 import { black, white } from '../styles/colors';
 import type { $RemoveChildren } from '../types';
 
-type Props = $RemoveChildren<typeof View> & {
+export type Props = $RemoveChildren<typeof View> & {
   /**
    *  Whether divider has a left inset.
    */

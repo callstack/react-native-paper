@@ -12,7 +12,7 @@ import { ToggleButtonGroupContext } from './ToggleButtonGroup';
 import { black, white } from '../../styles/colors';
 import type { IconSource } from '../Icon';
 
-type Props = {
+export type Props = {
   /**
    * Icon to display for the `ToggleButton`.
    */

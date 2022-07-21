@@ -11,7 +11,7 @@ import { withTheme } from '../../core/theming';
 import Caption from './../Typography/Caption';
 import Title from './../Typography/Title';
 
-type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Text for the title. Note that this will only accept a string or `<Text>`-based node.
    */

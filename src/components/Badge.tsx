@@ -12,7 +12,7 @@ import getContrastingColor from '../utils/getContrastingColor';
 
 const defaultSize = 20;
 
-type Props = React.ComponentProps<typeof Animated.Text> & {
+export type Props = React.ComponentProps<typeof Animated.Text> & {
   /**
    * Whether the badge is visible
    */

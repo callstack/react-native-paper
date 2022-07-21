@@ -7,7 +7,7 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
 
-type Props = $RemoveChildren<typeof TouchableRipple> & {
+export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Value of the radio button
    */

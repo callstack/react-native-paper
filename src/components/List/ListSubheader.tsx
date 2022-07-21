@@ -4,7 +4,7 @@ import color from 'color';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 
-type Props = React.ComponentProps<typeof Text> & {
+export type Props = React.ComponentProps<typeof Text> & {
   /**
    * @optional
    */

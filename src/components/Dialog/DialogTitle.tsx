@@ -3,7 +3,7 @@ import { StyleSheet, StyleProp, TextStyle } from 'react-native';
 import Title from '../Typography/Title';
 import { withTheme } from '../../core/theming';
 
-type Props = React.ComponentPropsWithRef<typeof Title> & {
+export type Props = React.ComponentPropsWithRef<typeof Title> & {
   /**
    * Title text for the `DialogTitle`.
    */

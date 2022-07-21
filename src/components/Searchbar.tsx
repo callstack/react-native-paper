@@ -17,7 +17,7 @@ import { withTheme } from '../core/theming';
 import type { IconSource } from './Icon';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 
-type Props = React.ComponentPropsWithRef<typeof TextInput> & {
+export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */

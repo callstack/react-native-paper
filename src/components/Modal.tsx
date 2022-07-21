@@ -19,7 +19,7 @@ import { withTheme } from '../core/theming';
 import useAnimatedValue from '../utils/useAnimatedValue';
 import { addEventListener } from '../utils/addEventListener';
 
-type Props = {
+export type Props = {
   /**
    * Determines whether clicking outside the modal dismiss it.
    */

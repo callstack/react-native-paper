@@ -14,7 +14,9 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 
-type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
+export type Props = React.ComponentPropsWithRef<
+  typeof TouchableWithoutFeedback
+> & {
   /**
    * Text content of the `DataTableTitle`.
    */

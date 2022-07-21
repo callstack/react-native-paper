@@ -4,7 +4,7 @@ import shadow from '../styles/shadow';
 import { withTheme } from '../core/theming';
 import overlay from '../styles/overlay';
 
-type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Content of the `Surface`.
    */

@@ -17,7 +17,7 @@ import { white } from '../../styles/colors';
 
 import type { $RemoveChildren } from '../../types';
 
-type Props = $RemoveChildren<typeof View> & {
+export type Props = $RemoveChildren<typeof View> & {
   /**
    * Custom color for the text.
    */

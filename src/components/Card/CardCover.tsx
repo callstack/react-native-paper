@@ -3,7 +3,7 @@ import { StyleSheet, View, ViewStyle, Image, StyleProp } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { grey200 } from '../../styles/colors';
 
-type Props = React.ComponentPropsWithRef<typeof Image> & {
+export type Props = React.ComponentPropsWithRef<typeof Image> & {
   /**
    * @internal
    */

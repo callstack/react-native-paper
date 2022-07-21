@@ -6,7 +6,7 @@ import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 
-type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * The label text of the item.
    */

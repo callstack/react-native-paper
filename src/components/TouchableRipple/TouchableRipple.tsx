@@ -11,7 +11,9 @@ import {
 import color from 'color';
 import { withTheme } from '../../core/theming';
 
-type Props = React.ComponentPropsWithRef<typeof TouchableWithoutFeedback> & {
+export type Props = React.ComponentPropsWithRef<
+  typeof TouchableWithoutFeedback
+> & {
   /**
    * Whether to render the ripple outside the view bounds.
    */

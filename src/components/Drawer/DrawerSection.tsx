@@ -5,7 +5,7 @@ import Text from '../Typography/Text';
 import Divider from '../Divider';
 import { withTheme } from '../../core/theming';
 
-type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Title to show as the header for the section.
    */

@@ -13,7 +13,7 @@ import DefaultTheme from '../styles/DefaultTheme';
 import DarkTheme from '../styles/DarkTheme';
 import { addEventListener } from '../utils/addEventListener';
 
-type Props = {
+export type Props = {
   children: React.ReactNode;
   theme?: ReactNativePaper.Theme;
   settings?: Settings;

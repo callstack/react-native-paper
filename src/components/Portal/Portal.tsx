@@ -7,7 +7,7 @@ import {
 } from '../../core/settings';
 import { ThemeProvider, withTheme } from '../../core/theming';
 
-type Props = {
+export type Props = {
   /**
    * Content of the `Portal`.
    */

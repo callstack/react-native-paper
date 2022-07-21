@@ -14,7 +14,7 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Menu from '../Menu/Menu';
 import Button from '../Button';
 
-type Props = React.ComponentPropsWithRef<typeof View> &
+export type Props = React.ComponentPropsWithRef<typeof View> &
   PaginationControlsProps &
   PaginationDropdownProps & {
     /**

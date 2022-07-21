@@ -13,7 +13,7 @@ import Text from '../Typography/Text';
 import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 
-type Props = {
+export type Props = {
   /**
    * Title text for the `MenuItem`.
    */

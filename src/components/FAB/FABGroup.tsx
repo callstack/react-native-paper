@@ -15,7 +15,7 @@ import Card from '../Card/Card';
 import { withTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 
-type Props = {
+export type Props = {
   /**
    * Action items to display in the form of a speed dial.
    * An action item should contain the following properties:

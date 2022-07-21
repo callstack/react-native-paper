@@ -11,7 +11,7 @@ import shadow from '../styles/shadow';
 const ELEVATION = 1;
 const DEFAULT_MAX_WIDTH = 960;
 
-type Props = $RemoveChildren<typeof Surface> & {
+export type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Whether banner is currently visible.
    */

@@ -9,7 +9,7 @@ import {
 import ListSubheader from './ListSubheader';
 import { withTheme } from '../../core/theming';
 
-type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Title text for the section.
    */

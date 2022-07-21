@@ -12,7 +12,7 @@ import { black, white } from '../../styles/colors';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren } from '../../types';
 
-type Props = $RemoveChildren<typeof TouchableRipple> & {
+export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Content of the `DataTableRow`.
    */

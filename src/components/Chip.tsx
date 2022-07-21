@@ -21,7 +21,7 @@ import { withTheme } from '../core/theming';
 import { black, white } from '../styles/colors';
 import type { EllipsizeProp } from '../types';
 
-type Props = React.ComponentProps<typeof Surface> & {
+export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Mode of the chip.
    * - `flat` - flat chip without outline.

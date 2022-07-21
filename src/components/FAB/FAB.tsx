@@ -21,7 +21,7 @@ import type { $RemoveChildren } from '../../types';
 
 getContrastingColor;
 
-type Props = $RemoveChildren<typeof Surface> & {
+export type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Icon to display for the `FAB`.
    */

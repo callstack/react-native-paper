@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { withTheme } from '../../core/theming';
 
-type Props = React.ComponentProps<typeof NativeText> & {
+export type Props = React.ComponentProps<typeof NativeText> & {
   style?: StyleProp<TextStyle>;
   /**
    * @optional

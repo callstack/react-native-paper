@@ -15,7 +15,7 @@ import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 
-type Props = {
+export type Props = {
   /**
    * Status of checkbox.
    */

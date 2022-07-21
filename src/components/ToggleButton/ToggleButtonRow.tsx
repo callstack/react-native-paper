@@ -3,7 +3,7 @@ import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
 import ToggleButtonGroup from './ToggleButtonGroup';
 import ToggleButton from './ToggleButton';
 
-type Props = {
+export type Props = {
   /**
    * Function to execute on selection change.
    */

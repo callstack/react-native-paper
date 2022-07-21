@@ -9,7 +9,7 @@ import DialogScrollArea from './DialogScrollArea';
 import { withTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
 
-type Props = {
+export type Props = {
   /**
    * Determines whether clicking outside the dialog dismiss it.
    */

@@ -30,7 +30,7 @@ import { getCombinedStyles } from './utils';
 export type AnimatedFABIconMode = 'static' | 'dynamic';
 export type AnimatedFABAnimateFrom = 'left' | 'right';
 
-type Props = $RemoveChildren<typeof Surface> & {
+export type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Icon to display for the `FAB`.
    */

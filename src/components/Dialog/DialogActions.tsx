@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
 
-type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Content of the `DialogActions`.
    */

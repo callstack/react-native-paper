@@ -30,7 +30,7 @@ type ElevatedCardProps = {
 
 type HandlePressType = 'in' | 'out';
 
-type Props = React.ComponentProps<typeof Surface> & {
+export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Resting elevation of the card which controls the drop shadow.
    */

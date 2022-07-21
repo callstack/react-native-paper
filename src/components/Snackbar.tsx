@@ -13,7 +13,7 @@ import Surface from './Surface';
 import Text from './Typography/Text';
 import { withTheme } from '../core/theming';
 
-export type SnackbarProps = React.ComponentProps<typeof Surface> & {
+export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Whether the Snackbar is currently visible.
    */
@@ -112,7 +112,7 @@ const Snackbar = ({
   style,
   theme,
   ...rest
-}: SnackbarProps) => {
+}: Props) => {
   const { current: opacity } = React.useRef<Animated.Value>(
     new Animated.Value(0.0)
   );
