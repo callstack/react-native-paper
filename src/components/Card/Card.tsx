@@ -37,7 +37,7 @@ type HandlePressType = 'in' | 'out';
 
 type Mode = 'elevated' | 'outlined' | 'contained';
 
-type Props = React.ComponentProps<typeof Surface> & {
+export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Changes Card shadow and background on iOS and Android.
    */

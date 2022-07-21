@@ -16,7 +16,7 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { MD3TypescaleKey, Theme } from '../../types';
 
-type Props = {
+export type Props = {
   /**
    * Status of checkbox.
    */

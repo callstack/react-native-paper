@@ -16,7 +16,7 @@ import type { IconSource } from '../Icon';
 import type { Theme } from '../../types';
 import { getFABGroupColors } from './utils';
 
-type Props = {
+export type Props = {
   /**
    * Action items to display in the form of a speed dial.
    * An action item should contain the following properties:

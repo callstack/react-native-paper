@@ -5,7 +5,7 @@ import { grey200 } from '../../styles/themes/v2/colors';
 import type { Theme } from '../../types';
 import { getCardCoverStyle } from './utils';
 
-type Props = React.ComponentPropsWithRef<typeof Image> & {
+export type Props = React.ComponentPropsWithRef<typeof Image> & {
   /**
    * @internal
    */

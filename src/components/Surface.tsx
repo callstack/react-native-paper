@@ -12,7 +12,7 @@ import { useTheme } from '../core/theming';
 import overlay, { isAnimatedValue } from '../styles/overlay';
 import type { MD3Elevation, Theme } from '../types';
 
-type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Content of the `Surface`.
    */

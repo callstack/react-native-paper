@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { useTheme } from '../../core/theming';
 import Icon, { IconSource } from '../Icon';
 
-type Props = {
+export type Props = {
   /**
    *  Custom color for action icon.
    */

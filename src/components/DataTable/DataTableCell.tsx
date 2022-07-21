@@ -4,7 +4,7 @@ import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { $RemoveChildren } from '../../types';
 
-type Props = $RemoveChildren<typeof TouchableRipple> & {
+export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Content of the `DataTableCell`.
    */

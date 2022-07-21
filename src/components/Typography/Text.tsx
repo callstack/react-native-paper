@@ -10,7 +10,7 @@ import {
 import { useTheme } from '../../core/theming';
 import { Font, MD3TypescaleKey, ThemeProp } from '../../types';
 
-type Props = React.ComponentProps<typeof NativeText> & {
+export type Props = React.ComponentProps<typeof NativeText> & {
   /**
    * @supported Available in v5.x with theme version 3
    *

@@ -27,7 +27,7 @@ import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 import { addEventListener } from '../../utils/addEventListener';
 import type { Theme } from '../../types';
 
-type Props = {
+export type Props = {
   /**
    * Whether the Menu is currently visible.
    */

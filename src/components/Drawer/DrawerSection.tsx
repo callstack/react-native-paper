@@ -7,7 +7,7 @@ import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 import { MD3Colors } from '../../styles/themes/v3/tokens';
 
-type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Title to show as the header for the section.
    */

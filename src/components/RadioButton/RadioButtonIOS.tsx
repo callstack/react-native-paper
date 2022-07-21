@@ -8,7 +8,7 @@ import { withTheme } from '../../core/theming';
 import type { $RemoveChildren, Theme } from '../../types';
 import { getSelectionControlIOSColor } from '../Checkbox/utils';
 
-type Props = $RemoveChildren<typeof TouchableRipple> & {
+export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Value of the radio button
    */

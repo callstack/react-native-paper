@@ -32,7 +32,7 @@ type Description =
       fontSize: number;
     }) => React.ReactNode);
 
-type Props = $RemoveChildren<typeof TouchableRipple> & {
+export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Title text for the list item.
    */

@@ -11,7 +11,7 @@ import AnimatedText from './Typography/AnimatedText';
 import { withTheme } from '../core/theming';
 import type { $Omit, Theme } from '../types';
 
-type Props = $Omit<
+export type Props = $Omit<
   $Omit<React.ComponentPropsWithRef<typeof AnimatedText>, 'padding'>,
   'type'
 > & {

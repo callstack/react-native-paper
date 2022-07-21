@@ -21,9 +21,7 @@ import type { Theme } from '../../types';
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
 
-export type TextInputProps = React.ComponentPropsWithRef<
-  typeof NativeTextInput
-> & {
+export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
   /**
    * Mode of the TextInput.
    * - `flat` - flat input with an underline.
@@ -138,7 +136,7 @@ export type TextInputProps = React.ComponentPropsWithRef<
 
 interface CompoundedComponent
   extends React.ForwardRefExoticComponent<
-    TextInputProps & React.RefAttributes<TextInputHandles>
+    Props & React.RefAttributes<TextInputHandles>
   > {
   Icon: React.FunctionComponent<TextInputIconProps>;
   Affix: React.FunctionComponent<Partial<TextInputAffixProps>>;
@@ -194,7 +192,7 @@ type TextInputHandles = Pick<
  * @extends TextInput props https://reactnative.dev/docs/textinput#props
  */
 
-const TextInput = React.forwardRef<TextInputHandles, TextInputProps>(
+const TextInput = React.forwardRef<TextInputHandles, Props>(
   (
     {
       mode = 'flat',
@@ -205,7 +203,7 @@ const TextInput = React.forwardRef<TextInputHandles, TextInputProps>(
       editable = true,
       render = (props: RenderProps) => <NativeTextInput {...props} />,
       ...rest
-    }: TextInputProps,
+    }: Props,
     ref
   ) => {
     const isControlled = rest.value !== undefined;
