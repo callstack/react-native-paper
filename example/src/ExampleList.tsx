@@ -38,6 +38,7 @@ import TouchableRippleExample from './Examples/TouchableRippleExample';
 import ThemeExample from './Examples/ThemeExample';
 import RadioButtonItemExample from './Examples/RadioButtonItemExample';
 import AnimatedFABExample from './Examples/AnimatedFABExample';
+import SegmentedButtonExample from './Examples/SegmentedButtonExample';
 
 export const examples: Record<
   string,
@@ -51,6 +52,7 @@ export const examples: Record<
   banner: BannerExample,
   bottomNavigation: BottomNavigationExample,
   button: ButtonExample,
+  segmentedButton: SegmentedButtonExample,
   card: CardExample,
   checkbox: CheckboxExample,
   checkboxItem: CheckboxItemExample,

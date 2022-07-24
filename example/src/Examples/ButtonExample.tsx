@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import { Button, List, useTheme } from 'react-native-paper';
+import { View, StyleSheet, Image, Text } from 'react-native';
+import { Button, List, TouchableRipple, useTheme } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const ButtonExample = () => {
@@ -141,6 +141,9 @@ const ButtonExample = () => {
       </List.Section>
       <List.Section title={`Contained button ${theme.isV3 ? '(filled)' : ''}`}>
         <View style={styles.row}>
+          <TouchableRipple>
+            <Text>Test</Text>
+          </TouchableRipple>
           <Button mode="contained" onPress={() => {}} style={styles.button}>
             Default
           </Button>
