@@ -53,6 +53,7 @@ export { default as Appbar } from './components/Appbar';
 export { default as TouchableRipple } from './components/TouchableRipple/TouchableRipple';
 export { default as TextInput } from './components/TextInput/TextInput';
 export { default as ToggleButton } from './components/ToggleButton';
+export { default as SegmentedButton } from './components/SegmentedButton/SegmentedButton';
 
 export {
   Caption,
