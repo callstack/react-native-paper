@@ -285,6 +285,7 @@ exports[`renders data table pagination 1`] = `
               "width": 40,
             }
           }
+          testID="surface-container"
         >
           <View
             accessibilityLabel="chevron-left"
@@ -396,6 +397,7 @@ exports[`renders data table pagination 1`] = `
               "width": 40,
             }
           }
+          testID="surface-container"
         >
           <View
             accessibilityLabel="chevron-right"
@@ -559,6 +561,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
               "width": 40,
             }
           }
+          testID="surface-container"
         >
           <View
             accessibilityLabel="page-first"
@@ -670,6 +673,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
               "width": 40,
             }
           }
+          testID="surface-container"
         >
           <View
             accessibilityLabel="chevron-left"
@@ -781,6 +785,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
               "width": 40,
             }
           }
+          testID="surface-container"
         >
           <View
             accessibilityLabel="chevron-right"
@@ -892,6 +897,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
               "width": 40,
             }
           }
+          testID="surface-container"
         >
           <View
             accessibilityLabel="page-last"
@@ -1055,6 +1061,7 @@ exports[`renders data table pagination with label 1`] = `
               "width": 40,
             }
           }
+          testID="surface-container"
         >
           <View
             accessibilityLabel="chevron-left"
@@ -1166,6 +1173,7 @@ exports[`renders data table pagination with label 1`] = `
               "width": 40,
             }
           }
+          testID="surface-container"
         >
           <View
             accessibilityLabel="chevron-right"
@@ -1334,6 +1342,7 @@ exports[`renders data table pagination with options select 1`] = `
                 "textAlign": "center",
               }
             }
+            testID="surface-container"
           >
             <View
               accessibilityRole="button"
@@ -1545,6 +1554,7 @@ exports[`renders data table pagination with options select 1`] = `
               "width": 40,
             }
           }
+          testID="surface-container"
         >
           <View
             accessibilityLabel="page-first"
@@ -1656,6 +1666,7 @@ exports[`renders data table pagination with options select 1`] = `
               "width": 40,
             }
           }
+          testID="surface-container"
         >
           <View
             accessibilityLabel="chevron-left"
@@ -1767,6 +1778,7 @@ exports[`renders data table pagination with options select 1`] = `
               "width": 40,
             }
           }
+          testID="surface-container"
         >
           <View
             accessibilityLabel="chevron-right"
@@ -1878,6 +1890,7 @@ exports[`renders data table pagination with options select 1`] = `
               "width": 40,
             }
           }
+          testID="surface-container"
         >
           <View
             accessibilityLabel="page-last"

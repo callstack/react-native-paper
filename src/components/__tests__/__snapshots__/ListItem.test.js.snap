@@ -133,6 +133,7 @@ exports[`renders list item with custom description 1`] = `
                     "flexDirection": "column",
                   }
                 }
+                testID="surface-container"
               >
                 <View
                   accessibilityRole="button"

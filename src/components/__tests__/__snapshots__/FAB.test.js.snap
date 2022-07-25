@@ -50,6 +50,7 @@ exports[`renders FAB with custom size prop 1`] = `
           ],
         }
       }
+      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -205,6 +206,7 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
           ],
         }
       }
+      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -360,6 +362,7 @@ exports[`renders disabled FAB 1`] = `
           ],
         }
       }
+      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -515,6 +518,7 @@ exports[`renders extended FAB 1`] = `
           ],
         }
       }
+      testID="surface-container"
     >
       <View
         accessibilityLabel="Add items"
@@ -707,6 +711,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
           ],
         }
       }
+      testID="surface-container"
     >
       <View
         accessibilityLabel="Add items"
@@ -898,6 +903,7 @@ exports[`renders loading FAB 1`] = `
           ],
         }
       }
+      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -1195,6 +1201,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
           ],
         }
       }
+      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -1492,6 +1499,7 @@ exports[`renders normal FAB 1`] = `
           ],
         }
       }
+      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -1647,6 +1655,7 @@ exports[`renders not visible FAB 1`] = `
           ],
         }
       }
+      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -1802,6 +1811,7 @@ exports[`renders small FAB 1`] = `
           ],
         }
       }
+      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -1957,6 +1967,7 @@ exports[`renders visible FAB 1`] = `
           ],
         }
       }
+      testID="surface-container"
     >
       <View
         accessibilityRole="button"

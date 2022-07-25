@@ -42,6 +42,7 @@ exports[`render visible banner, with custom theme 1`] = `
           "backgroundColor": "rgb(247, 243, 249)",
         }
       }
+      testID="surface-container"
     >
       <View
         style={
@@ -162,6 +163,7 @@ exports[`render visible banner, with custom theme 1`] = `
                       "minWidth": "auto",
                     }
                   }
+                  testID="surface-container"
                 >
                   <View
                     accessibilityRole="button"
@@ -304,6 +306,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
           "backgroundColor": "rgb(247, 243, 249)",
         }
       }
+      testID="surface-container"
     >
       <View
         style={
@@ -439,6 +442,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
           "backgroundColor": "rgb(247, 243, 249)",
         }
       }
+      testID="surface-container"
     >
       <View
         style={
@@ -559,6 +563,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                       "minWidth": "auto",
                     }
                   }
+                  testID="surface-container"
                 >
                   <View
                     accessibilityRole="button"
@@ -701,6 +706,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
           "backgroundColor": "rgb(247, 243, 249)",
         }
       }
+      testID="surface-container"
     >
       <View
         style={
@@ -821,6 +827,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                       "minWidth": "auto",
                     }
                   }
+                  testID="surface-container"
                 >
                   <View
                     accessibilityRole="button"
@@ -960,6 +967,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                       "minWidth": "auto",
                     }
                   }
+                  testID="surface-container"
                 >
                   <View
                     accessibilityRole="button"
@@ -1103,6 +1111,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
           "backgroundColor": "rgb(247, 243, 249)",
         }
       }
+      testID="surface-container"
     >
       <View
         style={
@@ -1225,6 +1234,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
           "backgroundColor": "rgb(247, 243, 249)",
         }
       }
+      testID="surface-container"
     >
       <View
         style={

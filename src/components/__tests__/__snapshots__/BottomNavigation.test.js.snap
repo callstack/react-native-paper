@@ -116,6 +116,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             ],
           }
         }
+        testID="surface-container"
       >
         <View
           collapsable={false}
@@ -794,6 +795,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             ],
           }
         }
+        testID="surface-container"
       >
         <View
           collapsable={false}
@@ -1493,6 +1495,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
             ],
           }
         }
+        testID="surface-container"
       >
         <View
           collapsable={false}
@@ -2849,6 +2852,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             ],
           }
         }
+        testID="surface-container"
       >
         <View
           collapsable={false}
@@ -3557,6 +3561,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             ],
           }
         }
+        testID="surface-container"
       >
         <View
           collapsable={false}
@@ -4604,6 +4609,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             ],
           }
         }
+        testID="surface-container"
       >
         <View
           collapsable={false}
@@ -5592,6 +5598,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             ],
           }
         }
+        testID="surface-container"
       >
         <View
           collapsable={false}
@@ -6474,6 +6481,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             ],
           }
         }
+        testID="surface-container"
       >
         <View
           collapsable={false}
@@ -7461,6 +7469,7 @@ exports[`renders shifting bottom navigation 1`] = `
             ],
           }
         }
+        testID="surface-container"
       >
         <View
           collapsable={false}

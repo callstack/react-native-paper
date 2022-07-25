@@ -50,6 +50,7 @@ exports[`renders disabled icon button 1`] = `
           "width": 40,
         }
       }
+      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -163,6 +164,7 @@ exports[`renders icon button by default 1`] = `
           "width": 40,
         }
       }
+      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -276,6 +278,7 @@ exports[`renders icon button with color 1`] = `
           "width": 40,
         }
       }
+      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -389,6 +392,7 @@ exports[`renders icon button with size 1`] = `
           "width": 46,
         }
       }
+      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -502,6 +506,7 @@ exports[`renders icon change animated 1`] = `
           "width": 40,
         }
       }
+      testID="surface-container"
     >
       <View
         accessibilityRole="button"

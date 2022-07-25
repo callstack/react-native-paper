@@ -50,6 +50,7 @@ exports[`renders menu with content styles 1`] = `
             "minWidth": 64,
           }
         }
+        testID="surface-container"
       >
         <View
           accessibilityRole="button"
@@ -194,6 +195,7 @@ exports[`renders not visible menu 1`] = `
             "minWidth": 64,
           }
         }
+        testID="surface-container"
       >
         <View
           accessibilityRole="button"
@@ -338,6 +340,7 @@ exports[`renders visible menu 1`] = `
             "minWidth": 64,
           }
         }
+        testID="surface-container"
       >
         <View
           accessibilityRole="button"

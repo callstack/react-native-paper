@@ -46,6 +46,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           "paddingHorizontal": 4,
         }
       }
+      testID="surface-container"
     >
       <View
         collapsable={false}
@@ -91,6 +92,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                 "flexDirection": "row",
               }
             }
+            testID="surface-container"
           >
             <View
               collapsable={false}
@@ -141,6 +143,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                       "width": 40,
                     }
                   }
+                  testID="surface-container"
                 >
                   <View
                     accessibilityLabel="search"
@@ -277,6 +280,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                       "width": 40,
                     }
                   }
+                  testID="surface-container"
                 >
                   <View
                     accessibilityLabel="clear"
@@ -393,6 +397,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           "paddingHorizontal": 4,
         }
       }
+      testID="surface-container"
     >
       <View
         collapsable={false}
@@ -443,6 +448,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                 "width": 40,
               }
             }
+            testID="surface-container"
           >
             <View
               accessibilityLabel="Back"
@@ -678,6 +684,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                 "width": 40,
               }
             }
+            testID="surface-container"
           >
             <View
               accessibilityRole="button"
