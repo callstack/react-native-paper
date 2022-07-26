@@ -27,6 +27,10 @@ jest.mock('react-native', () => {
     fontScale: 1,
   });
 
+  RN.Dimensions.get = () => ({
+    fontScale: 1,
+  });
+
   return RN;
 });
 

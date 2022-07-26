@@ -13,6 +13,16 @@ jest.mock('react-native', () => {
   return RN;
 });
 
+jest.mock('react-native', () => {
+  const RN = jest.requireActual('react-native');
+
+  RN.Dimensions.get = () => ({
+    fontScale: 1,
+  });
+
+  return RN;
+});
+
 it('renders badge', () => {
   const tree = renderer.create(<Badge />).toJSON();
 
