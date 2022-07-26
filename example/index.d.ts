@@ -3,7 +3,5 @@
 // import type { MD2Theme } from 'react-native-paper';
 
 // declare global {
-//   namespace ReactNativePaper {
-//     interface Theme extends MD2Theme {}
-//   }
+//   export type ReactNativePaperTheme = MD2Theme;
 // }
