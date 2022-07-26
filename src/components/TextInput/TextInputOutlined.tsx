@@ -81,6 +81,7 @@ const TextInputOutlined = ({
   const {
     fontSize: fontSizeStyle,
     fontWeight,
+    fontVariant,
     lineHeight,
     height,
     backgroundColor = colors.background,
@@ -325,6 +326,7 @@ const TextInputOutlined = ({
                 ...font,
                 fontSize,
                 fontWeight,
+                fontVariant,
                 color: inputTextColor,
                 textAlignVertical: multiline ? 'top' : 'center',
                 textAlign: textAlign

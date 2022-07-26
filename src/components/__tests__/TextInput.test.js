@@ -14,6 +14,9 @@ const style = StyleSheet.create({
   height: {
     height: 100,
   },
+  inputFontVariant: {
+    fontVariant: ['small-caps'],
+  },
 });
 
 const affixTextValue = '/100';
@@ -173,6 +176,28 @@ it('correctly applies a component as the text label', () => {
   );
 
   expect(toJSON()).toMatchSnapshot();
+});
+
+it('renders flat input with custom font variant', () => {
+  const { getByTestId } = render(<TextInput style={style.inputFontVariant} />);
+
+  expect(getByTestId('text-input-flat').props.style).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({ fontVariant: ['small-caps'] }),
+    ])
+  );
+});
+
+it('renders outlined input with custom font variant', () => {
+  const { getByTestId } = render(
+    <TextInput mode="outlined" style={style.inputFontVariant} />
+  );
+
+  expect(getByTestId('text-input-outlined').props.style).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({ fontVariant: ['small-caps'] }),
+    ])
+  );
 });
 
 describe('maxFontSizeMultiplier', () => {

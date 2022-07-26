@@ -82,6 +82,7 @@ const TextInputFlat = ({
   const {
     fontSize: fontSizeStyle,
     fontWeight,
+    fontVariant,
     height,
     paddingHorizontal,
     textAlign,
@@ -357,6 +358,7 @@ const TextInputFlat = ({
               ...font,
               fontSize,
               fontWeight,
+              fontVariant,
               color: inputTextColor,
               textAlignVertical: multiline ? 'top' : 'center',
               textAlign: textAlign
