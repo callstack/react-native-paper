@@ -30,7 +30,7 @@ import type { Theme } from '../../types';
 type Route = {
   key: string;
   title?: string;
-  focusedIcon: IconSource;
+  focusedIcon?: IconSource;
   unfocusedIcon?: IconSource;
   badge?: string | number | boolean;
   color?: string;
