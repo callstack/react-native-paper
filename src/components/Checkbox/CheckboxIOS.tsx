@@ -2,8 +2,8 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { withTheme } from '../../core/theming';
-import type { $RemoveChildren, Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { $RemoveChildren, InternalTheme } from '../../types';
 import { getSelectionControlIOSColor } from './utils';
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
@@ -26,7 +26,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * testID to be used on tests.
    */
@@ -103,9 +103,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(CheckboxIOS);
+export default withInternalTheme(CheckboxIOS);
 
 // @component-docs ignore-next-line
-const CheckboxIOSWithTheme = withTheme(CheckboxIOS);
+const CheckboxIOSWithTheme = withInternalTheme(CheckboxIOS);
 // @component-docs ignore-next-line
 export { CheckboxIOSWithTheme as CheckboxIOS };

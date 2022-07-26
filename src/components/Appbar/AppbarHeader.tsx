@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 import { Appbar } from './Appbar';
 import shadow from '../../styles/shadow';
-import { withTheme } from '../../core/theming';
+import { withInternalTheme } from '../../core/theming';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 import {
   DEFAULT_APPBAR_HEIGHT,
   getAppbarColor,
@@ -52,7 +52,7 @@ export type Props = React.ComponentProps<typeof Appbar> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   style?: StyleProp<ViewStyle>;
 };
 
@@ -166,9 +166,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(AppbarHeader);
+export default withInternalTheme(AppbarHeader);
 
 // @component-docs ignore-next-line
-const AppbarHeaderWithTheme = withTheme(AppbarHeader);
+const AppbarHeaderWithTheme = withInternalTheme(AppbarHeader);
 // @component-docs ignore-next-line
 export { AppbarHeaderWithTheme as AppbarHeader };

@@ -9,10 +9,10 @@ import {
   white,
   black,
 } from '../../styles/themes/v2/colors';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 
 type BaseProps = {
-  theme: Theme;
+  theme: InternalTheme;
   disabled?: boolean;
   value?: boolean;
 };
@@ -21,7 +21,7 @@ const getCheckedColor = ({
   theme,
   color,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   color?: string;
 }) => {
   if (color) {

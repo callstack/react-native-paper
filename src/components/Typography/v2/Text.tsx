@@ -5,15 +5,15 @@ import {
   StyleProp,
   StyleSheet,
 } from 'react-native';
-import type { Theme } from '../../../types';
-import { useTheme } from '../../../core/theming';
+import type { MD2Theme } from 'src/types';
+import { useInternalTheme } from '../../../core/theming';
 
 type Props = React.ComponentProps<typeof NativeText> & {
   style?: StyleProp<TextStyle>;
   /**
    * @optional
    */
-  theme?: Theme;
+  theme?: MD2Theme;
 };
 
 // @component-group Typography
@@ -28,7 +28,7 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
   ref
 ) => {
   const root = React.useRef<NativeText | null>(null);
-  const theme = useTheme(overrideTheme);
+  const theme = useInternalTheme(overrideTheme);
 
   React.useImperativeHandle(ref, () => ({
     setNativeProps: (args: Object) => root.current?.setNativeProps(args),

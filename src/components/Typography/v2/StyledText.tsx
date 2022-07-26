@@ -1,18 +1,26 @@
 import color from 'color';
 import * as React from 'react';
-import { I18nManager, StyleProp, TextStyle, StyleSheet } from 'react-native';
+import { I18nManager, StyleProp, StyleSheet, TextStyle } from 'react-native';
+import type { ThemeProp } from 'src/types';
 
+import { useInternalTheme } from '../../../core/theming';
 import Text from './Text';
-import { useTheme } from '../../../core/theming';
 
 type Props = React.ComponentProps<typeof Text> & {
   alpha?: number;
   family: 'regular' | 'medium' | 'light' | 'thin';
   style?: StyleProp<TextStyle>;
+  theme?: ThemeProp;
 };
 
-const StyledText = ({ alpha = 1, family, style, ...rest }: Props) => {
-  const theme = useTheme();
+const StyledText = ({
+  alpha = 1,
+  family,
+  style,
+  theme: themeOverrides,
+  ...rest
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
 
   const textColor = color(
     theme.isV3 ? theme.colors.onSurface : theme.colors?.text

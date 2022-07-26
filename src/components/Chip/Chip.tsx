@@ -16,9 +16,9 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { withTheme } from '../../core/theming';
+import { withInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
-import type { EllipsizeProp, Theme } from '../../types';
+import type { EllipsizeProp, InternalTheme } from '../../types';
 import { getChipColors } from './helpers';
 
 export type Props = React.ComponentProps<typeof Surface> & {
@@ -100,7 +100,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * Pass down testID from chip props to touchable for Detox tests.
    */
@@ -448,4 +448,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Chip);
+export default withInternalTheme(Chip);

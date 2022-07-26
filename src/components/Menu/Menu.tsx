@@ -18,14 +18,14 @@ import {
 } from 'react-native';
 import color from 'color';
 
-import { withTheme } from '../../core/theming';
+import { withInternalTheme } from '../../core/theming';
 import type { $Omit } from '../../types';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import MenuItem from './MenuItem';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 import { addEventListener } from '../../utils/addEventListener';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 
 export type Props = {
   /**
@@ -63,7 +63,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 type Layout = $Omit<$Omit<LayoutRectangle, 'x'>, 'y'>;
@@ -607,4 +607,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Menu);
+export default withInternalTheme(Menu);

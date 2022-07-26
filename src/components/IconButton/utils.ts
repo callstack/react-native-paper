@@ -1,10 +1,10 @@
 import color from 'color';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 
 type IconButtonMode = 'outlined' | 'contained' | 'contained-tonal';
 
 type BaseProps = {
-  theme: Theme;
+  theme: InternalTheme;
   isMode: (mode: IconButtonMode) => boolean;
   disabled?: boolean;
   selected?: boolean;
@@ -14,7 +14,7 @@ const getBorderColor = ({
   theme,
   disabled,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   disabled?: boolean;
 }) => {
   if (theme.isV3) {
@@ -128,7 +128,7 @@ const getRippleColor = ({
   theme,
   iconColor,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   iconColor: string;
 }) => {
   if (theme.isV3) {
@@ -145,7 +145,7 @@ export const getIconButtonColor = ({
   customIconColor,
   customContainerColor,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   disabled?: boolean;
   selected?: boolean;
   mode?: IconButtonMode;

@@ -6,9 +6,9 @@ import DialogActions from './DialogActions';
 import DialogIcon from './DialogIcon';
 import DialogTitle from './DialogTitle';
 import DialogScrollArea from './DialogScrollArea';
-import { withTheme } from '../../core/theming';
+import { withInternalTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 
 export type Props = {
   /**
@@ -31,7 +31,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 const DIALOG_ELEVATION: number = 24;
@@ -171,4 +171,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Dialog);
+export default withInternalTheme(Dialog);

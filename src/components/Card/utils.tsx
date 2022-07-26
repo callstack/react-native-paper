@@ -1,6 +1,6 @@
 import color from 'color';
 import { black, white } from '../../styles/themes/v2/colors';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 
 type CardMode = 'elevated' | 'outlined' | 'contained';
 
@@ -9,7 +9,7 @@ export const getCardCoverStyle = ({
   index,
   total,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   index?: number;
   total?: number;
 }) => {
@@ -43,7 +43,7 @@ export const getCardCoverStyle = ({
   return undefined;
 };
 
-const getBorderColor = ({ theme }: { theme: Theme }) => {
+const getBorderColor = ({ theme }: { theme: InternalTheme }) => {
   if (theme.isV3) {
     return theme.colors.outline;
   }
@@ -58,7 +58,7 @@ const getBackgroundColor = ({
   theme,
   isMode,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   isMode: (mode: CardMode) => boolean;
 }) => {
   if (theme.isV3) {
@@ -74,7 +74,7 @@ export const getCardColors = ({
   theme,
   mode,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   mode: CardMode;
 }) => {
   const isMode = (modeToCompare: CardMode) => {

@@ -1,11 +1,11 @@
 import color from 'color';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 
 const getAndroidCheckedColor = ({
   theme,
   customColor,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   customColor?: string;
 }) => {
   if (customColor) {
@@ -23,7 +23,7 @@ const getAndroidUncheckedColor = ({
   theme,
   customUncheckedColor,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   customUncheckedColor?: string;
 }) => {
   if (customUncheckedColor) {
@@ -46,7 +46,7 @@ const getAndroidRippleColor = ({
   checkedColor,
   disabled,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   checkedColor: string;
   disabled?: boolean;
 }) => {
@@ -67,7 +67,7 @@ const getAndroidControlColor = ({
   checkedColor,
   uncheckedColor,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   checked: boolean;
   checkedColor: string;
   uncheckedColor: string;
@@ -93,7 +93,7 @@ export const getAndroidSelectionControlColor = ({
   customColor,
   customUncheckedColor,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   checked: boolean;
   disabled?: boolean;
   customColor?: string;
@@ -121,7 +121,7 @@ const getIOSCheckedColor = ({
   disabled,
   customColor,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   customColor?: string;
   disabled?: boolean;
 }) => {
@@ -148,7 +148,7 @@ const getIOSRippleColor = ({
   checkedColor,
   disabled,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   checkedColor: string;
   disabled?: boolean;
 }) => {
@@ -166,7 +166,7 @@ export const getSelectionControlIOSColor = ({
   disabled,
   customColor,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   disabled?: boolean;
   customColor?: string;
 }) => {

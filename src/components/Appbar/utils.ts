@@ -6,13 +6,13 @@ import AppbarContent from './AppbarContent';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
 import overlay from '../../styles/overlay';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 import { black, white } from '../../styles/themes/v2/colors';
 
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 
 export const getAppbarColor = (
-  theme: Theme,
+  theme: InternalTheme,
   elevation: number,
   customBackground?: ColorValue,
   elevated?: boolean

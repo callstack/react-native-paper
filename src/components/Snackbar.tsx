@@ -12,8 +12,8 @@ import {
 import Button from './Button/Button';
 import Surface from './Surface';
 import Text from './Typography/Text';
-import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
+import { withInternalTheme } from '../core/theming';
+import type { InternalTheme } from '../types';
 
 export type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -54,7 +54,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 const DURATION_SHORT = 4000;
@@ -289,4 +289,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Snackbar);
+export default withInternalTheme(Snackbar);

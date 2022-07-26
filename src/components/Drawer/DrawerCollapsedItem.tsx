@@ -12,8 +12,8 @@ import {
 } from 'react-native';
 import Text from '../Typography/Text';
 import Icon, { IconSource } from '../Icon';
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import Badge from '../Badge';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
@@ -41,7 +41,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * Badge to show on the icon, can be `true` to show a dot, `string` or `number` to show text.
    */
@@ -247,4 +247,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(DrawerCollapsedItem);
+export default withInternalTheme(DrawerCollapsedItem);

@@ -13,7 +13,7 @@ import TextInputAdornment, {
   TextInputAdornmentProps,
 } from './Adornment/TextInputAdornment';
 import type { RenderProps, ChildTextInputProps } from './types';
-import { useTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 
 import {
   MAXIMIZED_LABEL_FONT_SIZE,
@@ -400,7 +400,7 @@ const Underline = ({
   underlineColorCustom,
   hasActiveOutline,
 }: UnderlineProps) => {
-  const { isV3 } = useTheme();
+  const { isV3 } = useInternalTheme();
 
   let backgroundColor = parentState.focused
     ? activeColor

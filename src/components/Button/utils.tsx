@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import color from 'color';
 import { black, white } from '../../styles/themes/v2/colors';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 
 export type ButtonMode =
   | 'text'
@@ -12,7 +12,7 @@ export type ButtonMode =
 
 type BaseProps = {
   isMode: (mode: ButtonMode) => boolean;
-  theme: Theme;
+  theme: InternalTheme;
   disabled?: boolean;
 };
 
@@ -190,7 +190,7 @@ export const getButtonColors = ({
   disabled,
   dark,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   mode: ButtonMode;
   customButtonColor?: string;
   customTextColor?: string;

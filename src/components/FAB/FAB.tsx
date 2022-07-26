@@ -13,9 +13,9 @@ import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { withTheme } from '../../core/theming';
+import { withInternalTheme } from '../../core/theming';
 import { getExtendedFabStyle, getFABColors, getFabStyle } from './utils';
-import type { $RemoveChildren, Theme } from '../../types';
+import type { $RemoveChildren, InternalTheme } from '../../types';
 
 type FABSize = 'small' | 'medium' | 'large';
 
@@ -110,7 +110,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   testID?: string;
 };
 
@@ -316,9 +316,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(FAB);
+export default withInternalTheme(FAB);
 
 // @component-docs ignore-next-line
-const FABWithTheme = withTheme(FAB);
+const FABWithTheme = withInternalTheme(FAB);
 // @component-docs ignore-next-line
 export { FABWithTheme as FAB };

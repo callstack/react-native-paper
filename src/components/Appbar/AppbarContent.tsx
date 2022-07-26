@@ -12,10 +12,14 @@ import color from 'color';
 
 import Text from '../Typography/Text';
 
-import { withTheme } from '../../core/theming';
+import { withInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 
-import type { $RemoveChildren, MD3TypescaleKey, Theme } from '../../types';
+import type {
+  $RemoveChildren,
+  MD3TypescaleKey,
+  InternalTheme,
+} from '../../types';
 import { modeTextVariant } from './utils';
 
 export type Props = $RemoveChildren<typeof View> & {
@@ -57,7 +61,7 @@ export type Props = $RemoveChildren<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 /**
@@ -184,9 +188,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(AppbarContent);
+export default withInternalTheme(AppbarContent);
 
 // @component-docs ignore-next-line
-const AppbarContentWithTheme = withTheme(AppbarContent);
+const AppbarContentWithTheme = withInternalTheme(AppbarContent);
 // @component-docs ignore-next-line
 export { AppbarContentWithTheme as AppbarContent };

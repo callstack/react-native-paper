@@ -1,16 +1,16 @@
 import * as React from 'react';
 import {
   Animated,
+  Platform,
+  StyleProp,
   StyleSheet,
   View,
-  StyleProp,
   ViewStyle,
-  Platform,
 } from 'react-native';
-import shadow from '../styles/shadow';
-import { useTheme } from '../core/theming';
+import { useInternalTheme } from '../core/theming';
 import overlay, { isAnimatedValue } from '../styles/overlay';
-import type { MD3Elevation, Theme } from '../types';
+import shadow from '../styles/shadow';
+import type { InternalTheme, MD3Elevation } from '../types';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -30,7 +30,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme?: Theme;
+  theme?: InternalTheme;
   /**
    * TestID used for testing purposes
    */
@@ -43,7 +43,7 @@ const MD2Surface = ({
   ...rest
 }: Omit<Props, 'elevation'>) => {
   const { elevation = 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
-  const { dark: isDarkTheme, mode, colors } = useTheme(overrideTheme);
+  const { dark: isDarkTheme, mode, colors } = useInternalTheme(overrideTheme);
 
   return (
     <Animated.View
@@ -65,7 +65,7 @@ const MD2Surface = ({
 /**
  * Surface is a basic container that can give depth to an element with elevation shadow.
  * On dark theme with `adaptive` mode, surface is constructed by also placing a semi-transparent white overlay over a component surface.
- * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more information.
+ * See [Dark InternalTheme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more information.
  * Overlay and shadow can be applied by specifying the `elevation` property both on Android and iOS.
  *
  * <div class="screenshots">
@@ -112,7 +112,7 @@ const Surface = ({
   testID,
   ...props
 }: Props) => {
-  const theme = useTheme(overridenTheme);
+  const theme = useInternalTheme(overridenTheme);
 
   if (!theme.isV3)
     return (

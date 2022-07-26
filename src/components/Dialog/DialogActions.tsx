@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
-import { useTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -45,7 +45,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const DialogActions = (props: Props) => {
-  const { isV3 } = useTheme();
+  const { isV3 } = useInternalTheme();
   const actionsLength = React.Children.toArray(props.children).length;
 
   return (

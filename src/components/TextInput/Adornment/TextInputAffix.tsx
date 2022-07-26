@@ -10,9 +10,9 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { withTheme } from '../../../core/theming';
+import { withInternalTheme } from '../../../core/theming';
 import { AdornmentSide } from './enums';
-import type { Theme } from '../../../types';
+import type { InternalTheme } from '../../../types';
 import { getConstants } from '../helpers';
 
 export type Props = {
@@ -28,7 +28,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 type ContextState = {
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(TextInputAffix);
+export default withInternalTheme(TextInputAffix);
 
 // @component-docs ignore-next-line
 export { TextInputAffix, AffixAdornment };

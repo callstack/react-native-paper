@@ -3,8 +3,8 @@ import * as React from 'react';
 import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 import Text from '../Typography/Text';
 import Divider from '../Divider';
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import { MD3Colors } from '../../styles/themes/v3/tokens';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
@@ -20,7 +20,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 /**
@@ -116,4 +116,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(DrawerSection);
+export default withInternalTheme(DrawerSection);

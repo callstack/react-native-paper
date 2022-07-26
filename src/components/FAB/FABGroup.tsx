@@ -11,9 +11,9 @@ import {
 import FAB from './FAB';
 import Text from '../Typography/Text';
 import Card from '../Card/Card';
-import { withTheme } from '../../core/theming';
+import { withInternalTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 import { getFABGroupColors } from './utils';
 
 export type Props = {
@@ -95,7 +95,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * Pass down testID from Group props to FAB.
    */
@@ -409,10 +409,10 @@ const FABGroup = ({
 
 FABGroup.displayName = 'FAB.Group';
 
-export default withTheme(FABGroup);
+export default withInternalTheme(FABGroup);
 
 // @component-docs ignore-next-line
-const FABGroupWithTheme = withTheme(FABGroup);
+const FABGroupWithTheme = withInternalTheme(FABGroup);
 // @component-docs ignore-next-line
 export { FABGroupWithTheme as FABGroup };
 

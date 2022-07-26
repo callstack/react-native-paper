@@ -25,7 +25,7 @@ import {
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
 import type { TextInputLabelProp } from './types';
 import { MD3LightTheme } from '../../styles/themes';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 
 type PaddingProps = {
   height: number | null;
@@ -312,7 +312,7 @@ export const calculateFlatInputHorizontalPadding = ({
 };
 
 type BaseProps = {
-  theme: Theme;
+  theme: InternalTheme;
   disabled?: boolean;
 };
 
@@ -482,7 +482,7 @@ export const getFlatInputColors = ({
   activeUnderlineColor?: string;
   disabled?: boolean;
   error?: boolean;
-  theme: Theme;
+  theme: InternalTheme;
 }) => {
   const baseFlatColorProps = { theme, disabled };
   return {
@@ -514,7 +514,7 @@ export const getOutlinedInputColors = ({
   customOutlineColor?: string;
   disabled?: boolean;
   error?: boolean;
-  theme: Theme;
+  theme: InternalTheme;
 }) => {
   const baseOutlinedColorProps = { theme, disabled };
 

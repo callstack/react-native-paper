@@ -1,19 +1,19 @@
+import color from 'color';
 import * as React from 'react';
 import {
-  StyleSheet,
+  I18nManager,
   StyleProp,
+  StyleSheet,
   View,
   ViewStyle,
-  I18nManager,
 } from 'react-native';
-import color from 'color';
+import type { InternalTheme } from 'src/types';
+import { useInternalTheme, withInternalTheme } from '../../core/theming';
+import Button from '../Button/Button';
 import IconButton from '../IconButton/IconButton';
-import Text from '../Typography/Text';
-import { withTheme, useTheme } from '../../core/theming';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Menu from '../Menu/Menu';
-import Button from '../Button/Button';
-import type { Theme } from '../../types';
+import Text from '../Typography/Text';
 
 export type Props = React.ComponentPropsWithRef<typeof View> &
   PaginationControlsProps &
@@ -38,7 +38,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> &
     /**
      * @optional
      */
-    theme: Theme;
+    theme: InternalTheme;
   };
 
 type PaginationDropdownProps = {
@@ -81,7 +81,7 @@ const PaginationControls = ({
   onPageChange,
   showFastPaginationControls,
 }: PaginationControlsProps) => {
-  const theme = useTheme();
+  const theme = useInternalTheme();
 
   const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
 
@@ -156,7 +156,7 @@ const PaginationDropdown = ({
   numberOfItemsPerPage,
   onItemsPerPageChange,
 }: PaginationDropdownProps) => {
-  const { colors } = useTheme();
+  const { colors } = useInternalTheme();
   const [showSelect, toggleSelect] = React.useState<boolean>(false);
 
   return (
@@ -359,7 +359,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(DataTablePagination);
+export default withInternalTheme(DataTablePagination);
 
 // @component-docs ignore-next-line
 export { DataTablePagination };

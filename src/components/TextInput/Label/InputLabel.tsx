@@ -1,12 +1,12 @@
 import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 import AnimatedText from '../../Typography/AnimatedText';
-import { useTheme } from '../../../core/theming';
+import { useInternalTheme } from '../../../core/theming';
 
 import type { InputLabelProps } from '../types';
 
 const InputLabel = (props: InputLabelProps) => {
-  const { isV3 } = useTheme();
+  const { isV3 } = useInternalTheme();
   const { parentState, labelBackground } = props;
   const {
     label,

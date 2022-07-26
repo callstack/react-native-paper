@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, View, ViewStyle, Image, StyleProp } from 'react-native';
-import { withTheme } from '../../core/theming';
+import { withInternalTheme } from '../../core/theming';
 import { grey200 } from '../../styles/themes/v2/colors';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 import { getCardCoverStyle } from './utils';
 
 export type Props = React.ComponentPropsWithRef<typeof Image> & {
@@ -18,7 +18,7 @@ export type Props = React.ComponentPropsWithRef<typeof Image> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 /**
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(CardCover);
+export default withInternalTheme(CardCover);
 
 // @component-docs ignore-next-line
 export { CardCover };

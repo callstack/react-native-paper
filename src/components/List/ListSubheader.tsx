@@ -2,14 +2,14 @@ import * as React from 'react';
 import { StyleSheet, StyleProp, TextStyle } from 'react-native';
 import color from 'color';
 import Text from '../Typography/Text';
-import { useTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { InternalTheme } from 'src/types';
 
 export type Props = React.ComponentProps<typeof Text> & {
   /**
    * @optional
    */
-  theme?: Theme;
+  theme?: InternalTheme;
   /**
    * Style that is passed to Text element.
    */
@@ -30,7 +30,7 @@ export type Props = React.ComponentProps<typeof Text> & {
  * ```
  */
 const ListSubheader = ({ style, theme: overrideTheme, ...rest }: Props) => {
-  const theme = useTheme(overrideTheme);
+  const theme = useInternalTheme(overrideTheme);
 
   const textColor = theme.isV3
     ? theme.colors.onSurfaceVariant

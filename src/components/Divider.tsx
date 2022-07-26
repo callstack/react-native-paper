@@ -1,9 +1,9 @@
 import * as React from 'react';
 import color from 'color';
 import { StyleSheet, View, ViewStyle, StyleProp } from 'react-native';
-import { withTheme } from '../core/theming';
+import { withInternalTheme } from '../core/theming';
 import { black, white } from '../styles/themes/v2/colors';
-import type { $RemoveChildren, Theme } from '../types';
+import type { $RemoveChildren, InternalTheme } from '../types';
 
 export type Props = $RemoveChildren<typeof View> & {
   /**
@@ -25,7 +25,7 @@ export type Props = $RemoveChildren<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 /**
@@ -99,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Divider);
+export default withInternalTheme(Divider);

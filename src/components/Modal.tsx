@@ -15,9 +15,10 @@ import {
   getBottomSpace,
 } from 'react-native-iphone-x-helper';
 import Surface from './Surface';
-import { withTheme } from '../core/theming';
+import { withInternalTheme } from '../core/theming';
 import useAnimatedValue from '../utils/useAnimatedValue';
 import { addEventListener } from '../utils/addEventListener';
+import type { InternalTheme } from 'src/types';
 
 export type Props = {
   /**
@@ -52,7 +53,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: ReactNativePaper.Theme;
+  theme: InternalTheme;
   /**
    * testID to be used on tests.
    */
@@ -259,7 +260,7 @@ function Modal({
   );
 }
 
-export default withTheme(Modal);
+export default withInternalTheme(Modal);
 
 const styles = StyleSheet.create({
   backdrop: {

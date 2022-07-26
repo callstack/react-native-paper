@@ -8,8 +8,8 @@ import {
   LayoutChangeEvent,
 } from 'react-native';
 import AnimatedText from './Typography/AnimatedText';
-import { withTheme } from '../core/theming';
-import type { $Omit, Theme } from '../types';
+import { withInternalTheme } from '../core/theming';
+import type { $Omit, InternalTheme } from '../types';
 
 export type Props = $Omit<
   $Omit<React.ComponentPropsWithRef<typeof AnimatedText>, 'padding'>,
@@ -35,7 +35,7 @@ export type Props = $Omit<
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * TestID used for testing purposes
    */
@@ -170,4 +170,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(HelperText);
+export default withInternalTheme(HelperText);

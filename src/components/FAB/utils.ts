@@ -6,7 +6,7 @@ import {
   ViewStyle,
   StyleSheet,
 } from 'react-native';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 import { white, black } from '../../styles/themes/v2/colors';
 import getContrastingColor from '../../utils/getContrastingColor';
 
@@ -27,7 +27,7 @@ type Variant = 'primary' | 'secondary' | 'tertiary' | 'surface';
 
 type BaseProps = {
   isVariant: (variant: Variant) => boolean;
-  theme: Theme;
+  theme: InternalTheme;
   disabled?: boolean;
 };
 
@@ -263,7 +263,7 @@ export const getFABColors = ({
   customColor,
   style,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   variant: string;
   disabled?: boolean;
   customColor?: string;
@@ -293,7 +293,7 @@ export const getFABColors = ({
   };
 };
 
-const getLabelColor = ({ theme }: { theme: Theme }) => {
+const getLabelColor = ({ theme }: { theme: InternalTheme }) => {
   if (theme.isV3) {
     return theme.colors.onSurface;
   }
@@ -309,7 +309,7 @@ const getBackdropColor = ({
   theme,
   customBackdropColor,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   customBackdropColor?: string;
 }) => {
   if (customBackdropColor) {
@@ -321,7 +321,7 @@ const getBackdropColor = ({
   return theme.colors?.backdrop;
 };
 
-const getStackedFABBackgroundColor = ({ theme }: { theme: Theme }) => {
+const getStackedFABBackgroundColor = ({ theme }: { theme: InternalTheme }) => {
   if (theme.isV3) {
     return theme.colors.elevation.level3;
   }
@@ -332,7 +332,7 @@ export const getFABGroupColors = ({
   theme,
   customBackdropColor,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   customBackdropColor?: string;
 }) => {
   return {
@@ -378,7 +378,7 @@ export const getFabStyle = ({
 }: {
   customSize?: number;
   size: 'small' | 'medium' | 'large';
-  theme: Theme;
+  theme: InternalTheme;
 }) => {
   const { isV3, roundness } = theme;
 
@@ -422,7 +422,7 @@ export const getExtendedFabStyle = ({
   theme,
 }: {
   customSize?: number;
-  theme: Theme;
+  theme: InternalTheme;
 }) => {
   if (customSize) return getExtendedFabDimensions(customSize);
 

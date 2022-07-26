@@ -9,8 +9,8 @@ import {
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import {
   getContentMaxWidth,
   getMenuItemColor,
@@ -58,7 +58,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * TestID used for testing purposes
    */
@@ -222,4 +222,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(MenuItem);
+export default withInternalTheme(MenuItem);

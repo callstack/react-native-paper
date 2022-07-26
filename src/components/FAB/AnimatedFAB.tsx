@@ -15,9 +15,9 @@ import {
 import Surface from '../Surface';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import type { $RemoveChildren, Theme } from '../../types';
+import type { $RemoveChildren, InternalTheme } from '../../types';
 import type { IconSource } from '../Icon';
-import { withTheme } from '../../core/theming';
+import { withInternalTheme } from '../../core/theming';
 import type {
   AccessibilityState,
   NativeSyntheticEvent,
@@ -93,7 +93,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   testID?: string;
 };
 
@@ -515,4 +515,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(AnimatedFAB);
+export default withInternalTheme(AnimatedFAB);
