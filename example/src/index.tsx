@@ -67,7 +67,7 @@ export default function PaperExample() {
       light: MD3LightTheme,
       dark: MD3DarkTheme,
     },
-  }[themeVersion][themeMode] as ReactNativePaper.Theme;
+  }[themeVersion][themeMode];
 
   React.useEffect(() => {
     const restoreState = async () => {

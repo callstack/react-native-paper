@@ -94,7 +94,7 @@ const DrawerItems = ({
 
   const _setDrawerItem = (index: number) => setDrawerItemIndex(index);
 
-  const { colors, isV3 } = useTheme();
+  const { isV3, colors } = useTheme();
 
   const _handleToggleRTL = () => {
     toggleRTL();
