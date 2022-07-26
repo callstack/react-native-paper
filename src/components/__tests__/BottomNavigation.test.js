@@ -36,6 +36,10 @@ jest.mock('react-native', () => {
 
   RN.Animated.parallel = mock;
 
+  RN.Dimensions.get = () => ({
+    fontScale: 1,
+  });
+
   return RN;
 });
 
