@@ -13,7 +13,6 @@ import type { IconSource } from '../Icon';
 import type { MD3Theme } from '../../types';
 import { getButtonColors } from '../Button/utils';
 import color from 'color';
-import Surface from '../Surface';
 import Icon from '../Icon';
 
 type Props = {
@@ -26,7 +25,7 @@ type Props = {
   label?: string;
   status?: 'checked' | 'unchecked';
   segment?: 'first' | 'last' | 'default';
-  density?: number;
+  density?: 0 | -1 | -2 | -3;
   style?: StyleProp<ViewStyle>;
   theme: MD3Theme;
 };
@@ -87,8 +86,9 @@ const SegmentedButton = ({
   const iconSize = isV3 ? 18 : 16;
   const iconStyle = { marginRight: label ? 5 : 0 };
   let showIcon = icon && !label ? true : checked ? false : true;
+
   return (
-    <Surface style={[buttonStyle, style, [styles.button]]} elevation={0}>
+    <View style={[buttonStyle, [styles.button, style]]}>
       <TouchableRipple
         borderless
         delayPressIn={0}
@@ -100,7 +100,7 @@ const SegmentedButton = ({
         accessibilityRole="button"
         disabled={disabled}
         rippleColor={rippleColor}
-        style={touchableStyle}
+        style={[touchableStyle, style]}
       >
         <View style={[styles.content]}>
           {checked ? (
@@ -110,12 +110,16 @@ const SegmentedButton = ({
           ) : null}
           {showIcon ? (
             <View style={iconStyle}>
-              <Icon source={icon} size={iconSize} />
+              <Icon
+                source={icon}
+                size={iconSize}
+                color={disabled ? textColor : undefined}
+              />
             </View>
           ) : null}
           <Text
             variant="labelLarge"
-            style={styles.label}
+            style={[styles.label, disabled && { color: textColor }]}
             selectable={false}
             numberOfLines={1}
           >
@@ -123,7 +127,7 @@ const SegmentedButton = ({
           </Text>
         </View>
       </TouchableRipple>
-    </Surface>
+    </View>
   );
 };
 
