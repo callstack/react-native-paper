@@ -26,7 +26,6 @@ type Props = {
   label?: string;
   status?: 'checked' | 'unchecked';
   segment?: 'first' | 'last' | 'default';
-  showSelectedCheck?: boolean;
   density?: number;
   style?: StyleProp<ViewStyle>;
   theme: MD3Theme;
@@ -37,13 +36,13 @@ const SegmentedButton = ({
   status,
   theme,
   disabled,
-  showSelectedCheck,
   style,
   icon,
   label,
   onPress,
   segment = 'default',
 }: Props) => {
+  const checked = status === 'checked';
   const { roundness, isV3 } = theme;
   const { borderColor, textColor, borderWidth } = getButtonColors({
     customButtonColor: undefined,
@@ -75,8 +74,7 @@ const SegmentedButton = ({
   const rippleColor = color(textColor).alpha(0.12).rgb().string();
 
   const buttonStyle: ViewStyle = {
-    backgroundColor:
-      status === 'checked' ? theme.colors.secondaryContainer : 'transparent',
+    backgroundColor: checked ? theme.colors.secondaryContainer : 'transparent',
     borderColor,
     borderWidth,
     ...segmentBorderRadius,
@@ -88,7 +86,7 @@ const SegmentedButton = ({
 
   const iconSize = isV3 ? 18 : 16;
   const iconStyle = { marginRight: label ? 5 : 0 };
-
+  let showIcon = icon && !label ? true : checked ? false : true;
   return (
     <Surface style={[buttonStyle, style, [styles.button]]} elevation={0}>
       <TouchableRipple
@@ -105,18 +103,14 @@ const SegmentedButton = ({
         style={touchableStyle}
       >
         <View style={[styles.content]}>
-          {icon || status === 'checked' ? (
+          {checked ? (
             <View style={iconStyle}>
-              <Icon
-                source={
-                  status === 'checked'
-                    ? showSelectedCheck
-                      ? 'check'
-                      : icon
-                    : icon
-                }
-                size={iconSize}
-              />
+              <Icon source={'check'} size={iconSize} />
+            </View>
+          ) : null}
+          {showIcon ? (
+            <View style={iconStyle}>
+              <Icon source={icon} size={iconSize} />
             </View>
           ) : null}
           <Text
