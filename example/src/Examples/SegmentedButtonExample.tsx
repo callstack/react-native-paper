@@ -1,37 +1,76 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { List, SegmentedButton } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const SegmentedButtonExample = () => {
+  const [first, setFirst] = React.useState('week');
+  const [second, setSecond] = React.useState('');
+  const [third, setThird] = React.useState('');
+
   return (
     <ScreenWrapper>
       <List.Section title={`Segmented Button`}>
-        <View style={styles.row}>
+        <SegmentedButton.Group
+          onValueChange={(value: string) => {
+            setFirst(value);
+          }}
+          value={first}
+          style={styles.group}
+        >
           <SegmentedButton
-            segment="first"
-            icon="android"
-            onPress={() => {}}
-            showSelectedCheck
+            icon="walk"
             style={styles.button}
-            value="day"
-            label="Day"
+            value="walk"
+            label="Walking"
           />
           <SegmentedButton
-            status="checked"
-            showSelectedCheck
-            onPress={() => {}}
             style={styles.button}
-            label="Week"
+            icon="train"
+            label="Transit"
+            value="transit"
           />
           <SegmentedButton
-            segment="last"
-            onPress={() => {}}
             style={styles.button}
-            icon="calendar"
-            label="Month"
+            icon="car"
+            label="Driving"
+            value="drive"
           />
-        </View>
+        </SegmentedButton.Group>
+      </List.Section>
+      <List.Section title={`Segmented Button - only labels`}>
+        <SegmentedButton.Group
+          onValueChange={(value: string) => {
+            setSecond(value);
+          }}
+          value={second}
+          style={styles.group}
+        >
+          <SegmentedButton style={styles.button} value="walk" label="Walking" />
+          <SegmentedButton
+            style={styles.button}
+            label="Transit"
+            value="transit"
+          />
+          <SegmentedButton
+            style={styles.button}
+            label="Driving"
+            value="drive"
+          />
+        </SegmentedButton.Group>
+      </List.Section>
+      <List.Section title={`Segmented Button - only icons`}>
+        <SegmentedButton.Group
+          onValueChange={(value: string) => {
+            setThird(value);
+          }}
+          style={styles.group}
+          value={third}
+        >
+          <SegmentedButton icon="walk" value="walk" />
+          <SegmentedButton icon="train" value="transit" />
+          <SegmentedButton icon="car" value="drive" />
+        </SegmentedButton.Group>
       </List.Section>
     </ScreenWrapper>
   );
@@ -40,16 +79,10 @@ const SegmentedButtonExample = () => {
 SegmentedButtonExample.title = 'SegmentedButton';
 
 const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginHorizontal: 10,
-    paddingHorizontal: 12,
-    alignItems: 'center',
-  },
   button: {
     flex: 1,
   },
+  group: { paddingHorizontal: 20, justifyContent: 'center' },
 });
 
 export default SegmentedButtonExample;

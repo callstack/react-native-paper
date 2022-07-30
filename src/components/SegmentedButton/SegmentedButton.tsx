@@ -14,6 +14,7 @@ import type { MD3Theme } from '../../types';
 import { getButtonColors } from '../Button/utils';
 import color from 'color';
 import Icon from '../Icon';
+import { SegmentedButtonGroupContext } from './SegmentedButtonGroup';
 
 type Props = {
   icon?: IconSource;
@@ -41,7 +42,16 @@ const SegmentedButton = ({
   onPress,
   segment = 'default',
 }: Props) => {
-  const checked = status === 'checked';
+  const context: { value: string | null; onValueChange: Function } =
+    React.useContext(SegmentedButtonGroupContext);
+
+  if (!context) {
+    throw new Error(
+      "<SegmentedButton/> can't be used without <SegmentedButton.Group/> wrapper."
+    );
+  }
+  const checked: boolean | null =
+    (context && context.value === value) || status === 'checked';
   const { roundness, isV3 } = theme;
   const { borderColor, textColor, borderWidth } = getButtonColors({
     customButtonColor: undefined,
@@ -69,8 +79,10 @@ const SegmentedButton = ({
         }
       : { borderRadius: 0 }),
   };
-
   const rippleColor = color(textColor).alpha(0.12).rgb().string();
+
+  const iconSize = isV3 ? 18 : 16;
+  const iconStyle = { marginRight: label ? 5 : checked ? 3 : 0 };
 
   const buttonStyle: ViewStyle = {
     backgroundColor: checked ? theme.colors.secondaryContainer : 'transparent',
@@ -79,12 +91,6 @@ const SegmentedButton = ({
     ...segmentBorderRadius,
   };
 
-  const touchableStyle = {
-    ...segmentBorderRadius,
-  };
-
-  const iconSize = isV3 ? 18 : 16;
-  const iconStyle = { marginRight: label ? 5 : 0 };
   let showIcon = icon && !label ? true : checked ? false : true;
 
   return (
@@ -92,15 +98,19 @@ const SegmentedButton = ({
       <TouchableRipple
         borderless
         delayPressIn={0}
-        onPress={() => {
+        onPress={(e?: GestureResponderEvent | string) => {
           if (onPress) {
-            onPress(value);
+            onPress(e);
+          }
+
+          if (context) {
+            context.onValueChange(!checked ? value : null);
           }
         }}
         accessibilityRole="button"
         disabled={disabled}
         rippleColor={rippleColor}
-        style={[touchableStyle, style]}
+        style={[{ ...segmentBorderRadius }, style]}
       >
         <View style={[styles.content]}>
           {checked ? (
