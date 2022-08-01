@@ -6,21 +6,22 @@ type Props = {
   /**
    * Function to execute on selection change.
    */
-  onValueChange: (value: string) => void | null;
+  onValueChange: (item: string | string[] | null) => void | null;
   /**
    * Value of the currently selected segmented button.
    */
-  value: string | null;
+  value: string | string[] | null;
   /**
    * React elements containing segmented buttons.
    */
   children: React.ReactNode;
+  multiselect?: boolean;
   style?: StyleProp<ViewStyle>;
 };
 
 type SegmentedButtonContextType = {
-  value: string | null;
-  onValueChange: (item: string) => void | null;
+  value: string | string[] | null;
+  onValueChange: (item: string | string[] | null) => void | null;
 };
 
 export const SegmentedButtonGroupContext =
@@ -55,6 +56,7 @@ export const SegmentedButtonGroupContext =
 const SegmentedButtonGroup = ({
   value,
   onValueChange,
+  multiselect,
   children,
   style,
 }: Props) => {
@@ -79,6 +81,7 @@ const SegmentedButtonGroup = ({
             // @ts-expect-error: We're sure that child is a React Element
             return React.cloneElement(child, {
               segment: i === 0 ? 'first' : i === count - 1 ? 'last' : 'default',
+              multiselect,
               style: [
                 // @ts-expect-error: We're sure that child is a React Element
                 child.props.style,

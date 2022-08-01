@@ -24,6 +24,7 @@ type Props = {
   onPress?: (value?: GestureResponderEvent | string) => void;
   value?: string;
   label?: string;
+  multiselect?: boolean;
   status?: 'checked' | 'unchecked';
   segment?: 'first' | 'last' | 'default';
   density?: 0 | -1 | -2 | -3;
@@ -37,29 +38,33 @@ const SegmentedButton = ({
   theme,
   disabled,
   style,
+  multiselect,
   icon,
   label,
   onPress,
   segment = 'default',
 }: Props) => {
-  const context: { value: string | null; onValueChange: Function } =
-    React.useContext(SegmentedButtonGroupContext);
+  const context = React.useContext(SegmentedButtonGroupContext);
 
   if (!context) {
     throw new Error(
       "<SegmentedButton/> can't be used without <SegmentedButton.Group/> wrapper."
     );
   }
+
   const checked: boolean | null =
-    (context && context.value === value) || status === 'checked';
-  const { roundness, isV3 } = theme;
+    (context && Array.isArray(context.value)
+      ? context.value.includes(value || '')
+      : context.value === value) || status === 'checked';
+
+  const { roundness, isV3, dark } = theme;
   const { borderColor, textColor, borderWidth } = getButtonColors({
     customButtonColor: undefined,
     customTextColor: undefined,
     theme,
     mode: 'outlined',
     disabled,
-    dark: false,
+    dark,
   });
 
   const borderRadius = (isV3 ? 5 : 1) * roundness;
@@ -93,20 +98,30 @@ const SegmentedButton = ({
 
   let showIcon = icon && !label ? true : checked ? false : true;
 
+  const handleOnPress = (e?: GestureResponderEvent | string) => {
+    if (onPress) {
+      onPress(e);
+    }
+    if (!value) {
+      return;
+    }
+    if (multiselect && Array.isArray(context.value)) {
+      context.onValueChange(
+        checked
+          ? [...context.value.filter((val) => value !== val)]
+          : [...context.value, value]
+      );
+    } else {
+      context.onValueChange(!checked ? value : null);
+    }
+  };
+
   return (
     <View style={[buttonStyle, [styles.button, style]]}>
       <TouchableRipple
         borderless
         delayPressIn={0}
-        onPress={(e?: GestureResponderEvent | string) => {
-          if (onPress) {
-            onPress(e);
-          }
-
-          if (context) {
-            context.onValueChange(!checked ? value : null);
-          }
-        }}
+        onPress={handleOnPress}
         accessibilityRole="button"
         disabled={disabled}
         rippleColor={rippleColor}
