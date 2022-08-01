@@ -140,6 +140,13 @@ const data: Data[] = [
     image: 'showcase/quakemap.png',
     android: 'https://play.google.com/store/apps/details?id=com.sal.quakemap',
   },
+  {
+    color: '#E1352F',
+    name: 'CrazyThursday',
+    image: 'showcase/crazythursday.jpg',
+    github: 'https://github.com/shensven/Crazy-Thursday',
+    android: 'https://play.google.com/store/apps/details?id=com.shensven.crazythursday',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {
