@@ -50,7 +50,6 @@ exports[`renders disabled toggle button 1`] = `
           "width": 42,
         }
       }
-      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -163,7 +162,6 @@ exports[`renders toggle button 1`] = `
           "width": 42,
         }
       }
-      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -276,7 +274,6 @@ exports[`renders unchecked toggle button 1`] = `
           "width": 42,
         }
       }
-      testID="surface-container"
     >
       <View
         accessibilityRole="button"

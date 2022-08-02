@@ -31,6 +31,10 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
    * @optional
    */
   theme?: Theme;
+  /**
+   * TestID used for testing purposes
+   */
+  testID?: string;
 };
 
 const MD2Surface = ({
@@ -105,6 +109,7 @@ const Surface = ({
   children,
   theme: overridenTheme,
   style,
+  testID,
   ...props
 }: Props) => {
   const theme = useTheme(overridenTheme);
@@ -137,7 +142,7 @@ const Surface = ({
     return (
       <Animated.View
         {...props}
-        testID={'surface-container'}
+        testID={testID}
         style={[
           { backgroundColor },
           elevation ? shadow(elevation, theme.isV3) : null,
@@ -173,7 +178,7 @@ const Surface = ({
     return (
       <Animated.View
         {...props}
-        testID={'surface-container'}
+        testID={testID}
         style={[
           {
             backgroundColor,
@@ -242,11 +247,7 @@ const Surface = ({
         style={[getStyleForAnimatedShadowLayer(0), absoluteStyles]}
       >
         <Animated.View style={getStyleForAnimatedShadowLayer(1)}>
-          <Animated.View
-            {...props}
-            testID={'surface-container'}
-            style={sharedStyle}
-          >
+          <Animated.View {...props} testID={testID} style={sharedStyle}>
             {children}
           </Animated.View>
         </Animated.View>
@@ -269,11 +270,7 @@ const Surface = ({
   return (
     <Animated.View style={[getStyleForShadowLayer(0), absoluteStyles]}>
       <Animated.View style={[getStyleForShadowLayer(1)]}>
-        <Animated.View
-          {...props}
-          testID={'surface-container'}
-          style={sharedStyle}
-        >
+        <Animated.View {...props} testID={testID} style={sharedStyle}>
           {children}
         </Animated.View>
       </Animated.View>

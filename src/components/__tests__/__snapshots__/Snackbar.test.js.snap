@@ -71,7 +71,6 @@ exports[`renders snackbar with Text as a child 1`] = `
             ],
           }
         }
-        testID="surface-container"
       >
         <Text
           style={
@@ -176,7 +175,6 @@ exports[`renders snackbar with action button 1`] = `
             ],
           }
         }
-        testID="surface-container"
       >
         <Text
           style={
@@ -252,7 +250,6 @@ exports[`renders snackbar with action button 1`] = `
                   "minWidth": "auto",
                 }
               }
-              testID="surface-container"
             >
               <View
                 accessibilityRole="button"
@@ -420,7 +417,6 @@ exports[`renders snackbar with content 1`] = `
             ],
           }
         }
-        testID="surface-container"
       >
         <Text
           style={

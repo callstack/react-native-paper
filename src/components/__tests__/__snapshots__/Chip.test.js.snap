@@ -47,7 +47,6 @@ exports[`renders chip with close button 1`] = `
           "flexDirection": "column",
         }
       }
-      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -289,7 +288,6 @@ exports[`renders chip with custom close button 1`] = `
           "flexDirection": "column",
         }
       }
-      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -531,7 +529,6 @@ exports[`renders chip with icon 1`] = `
           "flexDirection": "column",
         }
       }
-      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -713,7 +710,6 @@ exports[`renders chip with onPress 1`] = `
           "flexDirection": "column",
         }
       }
-      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -860,7 +856,6 @@ exports[`renders outlined disabled chip 1`] = `
           "flexDirection": "column",
         }
       }
-      testID="surface-container"
     >
       <View
         accessibilityRole="button"
@@ -1007,7 +1002,6 @@ exports[`renders selected chip 1`] = `
           "flexDirection": "column",
         }
       }
-      testID="surface-container"
     >
       <View
         accessibilityRole="button"

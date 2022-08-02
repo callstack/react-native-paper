@@ -45,7 +45,6 @@ exports[`renders with placeholder 1`] = `
           "flexDirection": "row",
         }
       }
-      testID="surface-container"
     >
       <View
         collapsable={false}
@@ -96,7 +95,6 @@ exports[`renders with placeholder 1`] = `
                 "width": 40,
               }
             }
-            testID="surface-container"
           >
             <View
               accessibilityLabel="search"
@@ -233,7 +231,6 @@ exports[`renders with placeholder 1`] = `
                 "width": 40,
               }
             }
-            testID="surface-container"
           >
             <View
               accessibilityLabel="clear"
@@ -346,7 +343,6 @@ exports[`renders with text 1`] = `
           "flexDirection": "row",
         }
       }
-      testID="surface-container"
     >
       <View
         collapsable={false}
@@ -397,7 +393,6 @@ exports[`renders with text 1`] = `
                 "width": 40,
               }
             }
-            testID="surface-container"
           >
             <View
               accessibilityLabel="search"
@@ -535,7 +530,6 @@ exports[`renders with text 1`] = `
                 "width": 40,
               }
             }
-            testID="surface-container"
           >
             <View
               accessibilityLabel="clear"

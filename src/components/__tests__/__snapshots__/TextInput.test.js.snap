@@ -1088,7 +1088,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
               "width": 40,
             }
           }
-          testID="surface-container"
         >
           <View
             accessibilityRole="button"
@@ -1405,7 +1404,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
               "width": 40,
             }
           }
-          testID="surface-container"
         >
           <View
             accessibilityRole="button"
