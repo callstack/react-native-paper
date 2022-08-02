@@ -36,6 +36,7 @@ const SegmentedButton = ({
   value,
   status,
   theme,
+  accessibilityLabel,
   disabled,
   style,
   multiselect,
@@ -121,6 +122,7 @@ const SegmentedButton = ({
         borderless
         delayPressIn={0}
         onPress={handleOnPress}
+        accessibilityLabel={accessibilityLabel}
         accessibilityRole="button"
         disabled={disabled}
         rippleColor={rippleColor}
