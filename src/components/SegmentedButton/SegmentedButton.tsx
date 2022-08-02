@@ -78,11 +78,10 @@ const SegmentedButton = ({
         }
       : segment === 'last'
       ? {
-          borderLeftWidth: 0,
           borderTopLeftRadius: 0,
           borderBottomLeftRadius: 0,
         }
-      : { borderRadius: 0 }),
+      : { borderRadius: 0, borderRightWidth: 0 }),
   };
   const rippleColor = color(textColor).alpha(0.12).rgb().string();
 

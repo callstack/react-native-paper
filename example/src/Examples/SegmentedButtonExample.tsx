@@ -8,6 +8,7 @@ const SegmentedButtonExample = () => {
   const [second, setSecond] = React.useState('');
   const [third, setThird] = React.useState('');
   const [fourth, setFourth] = React.useState<string[]>([]);
+  const [fifth, setFifth] = React.useState<string[]>([]);
 
   return (
     <ScreenWrapper>
@@ -95,6 +96,24 @@ const SegmentedButtonExample = () => {
             label="Driving"
             value="drive"
           />
+        </SegmentedButton.Group>
+      </List.Section>
+      <List.Section title={`Segmented Button - multiselect only icons`}>
+        <SegmentedButton.Group
+          multiselect
+          onValueChange={(value) => {
+            if (Array.isArray(value)) {
+              setFifth(value);
+            }
+          }}
+          value={fifth}
+          style={styles.group}
+        >
+          <SegmentedButton value="size-s" icon="size-s" />
+          <SegmentedButton value="size-m" icon="size-m" />
+          <SegmentedButton value="size-l" icon="size-l" />
+          <SegmentedButton value="size-xl" icon="size-xl" />
+          <SegmentedButton value="size-xxl" icon="size-xxl" />
         </SegmentedButton.Group>
       </List.Section>
     </ScreenWrapper>
