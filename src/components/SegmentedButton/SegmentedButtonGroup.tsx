@@ -62,7 +62,7 @@ const SegmentedButtonGroup = ({
 }: Props) => {
   const count = React.Children.count(children);
   if (count < 2 || count > 5) {
-    throw new Error(
+    console.warn(
       'Segmented buttons are best used for selecting between 2 and 5 choices. If you have more than five choices, consider using another component, such as chips.'
     );
   }
