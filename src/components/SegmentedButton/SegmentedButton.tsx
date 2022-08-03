@@ -21,6 +21,8 @@ import {
   getSegmentedButtonColors,
 } from './utils';
 
+const DEFAULT_PADDING = 9;
+
 type Props = {
   /**
    * Icon to display for the `SegmentedButton`.
@@ -91,6 +93,7 @@ const SegmentedButton = ({
   label,
   onPress,
   segment,
+  density = 0,
 }: Props) => {
   const context = React.useContext(SegmentedButtonGroupContext);
 
@@ -161,12 +164,14 @@ const SegmentedButton = ({
     borderRadius,
     ...segmentBorderRadius,
   };
+  const paddingVertical = density
+    ? DEFAULT_PADDING + density * 2
+    : DEFAULT_PADDING;
 
   const rippleStyle: ViewStyle = {
     borderRadius,
     ...segmentBorderRadius,
   };
-
   const showIcon = icon && !label ? true : checked ? !showSelectedCheck : true;
   const textStyle: TextStyle = {
     ...(!isV3 && {
@@ -208,7 +213,7 @@ const SegmentedButton = ({
         testID={testID}
         style={rippleStyle}
       >
-        <View style={[styles.content]}>
+        <View style={[styles.content, { paddingVertical }]}>
           {checked && showSelectedCheck ? (
             <Animated.View
               style={[iconStyle, { transform: [{ scale: checkScale }] }]}
@@ -251,8 +256,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 9,
-    marginHorizontal: 16,
+    paddingVertical: 9,
+    paddingHorizontal: 16,
   },
 });
 
