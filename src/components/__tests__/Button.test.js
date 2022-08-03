@@ -133,7 +133,7 @@ it('should execute onPressIn', () => {
     <Button onPressIn={onPressInMock} testID="button" />
   );
   fireEvent(getByTestId('button'), 'onPressIn');
-  expect(onPressInMock).toHaveBeenCalled();
+  expect(onPressInMock).toHaveBeenCalledTimes(1);
 });
 
 it('should execute onPressOut', () => {
@@ -143,7 +143,7 @@ it('should execute onPressOut', () => {
     <Button onPressOut={onPressOutMock} testID="button" />
   );
   fireEvent(getByTestId('button'), 'onPressOut');
-  expect(onPressOutMock).toHaveBeenCalled();
+  expect(onPressOutMock).toHaveBeenCalledTimes(1);
 });
 
 describe('getButtonColors - background color', () => {
