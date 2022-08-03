@@ -31,6 +31,7 @@ type Props = {
   multiselect?: boolean;
   status?: 'checked' | 'unchecked';
   segment?: 'first' | 'last';
+  showSelectedCheck?: boolean;
   density?: 0 | -1 | -2 | -3;
   style?: StyleProp<ViewStyle>;
   theme: Theme;
@@ -44,6 +45,7 @@ const SegmentedButton = ({
   disabled,
   style,
   multiselect,
+  showSelectedCheck,
   icon,
   label,
   onPress,
@@ -78,7 +80,9 @@ const SegmentedButton = ({
   const rippleColor = color(textColor).alpha(0.12).rgb().string();
 
   const iconSize = isV3 ? 18 : 16;
-  const iconStyle = { marginRight: label ? 5 : checked ? 3 : 0 };
+  const iconStyle = {
+    marginRight: label ? 5 : checked && showSelectedCheck ? 3 : 0,
+  };
 
   const buttonStyle: ViewStyle = {
     backgroundColor,
@@ -93,7 +97,7 @@ const SegmentedButton = ({
     ...segmentBorderRadius,
   };
 
-  const showIcon = icon && !label ? true : checked ? false : true;
+  const showIcon = icon && !label ? true : checked ? !showSelectedCheck : true;
   const textStyle: TextStyle = {
     ...(!isV3 && {
       textTransform: 'uppercase',
@@ -134,7 +138,7 @@ const SegmentedButton = ({
         style={rippleStyle}
       >
         <View style={[styles.content]}>
-          {checked ? (
+          {checked && showSelectedCheck ? (
             <View style={iconStyle}>
               <Icon source={'check'} size={iconSize} />
             </View>
