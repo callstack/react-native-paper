@@ -53,6 +53,9 @@ type Props = {
    * @optional
    */
   theme: ReactNativePaper.Theme;
+  /**
+   * testID to be used on tests.
+   */
   testID?: string;
 };
 
@@ -108,7 +111,7 @@ function Modal({
   contentContainerStyle,
   style,
   theme,
-  testID,
+  testID = 'modal',
 }: Props) {
   const visibleRef = React.useRef(visible);
 

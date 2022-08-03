@@ -22,13 +22,14 @@ type Props = {
    * An action item should contain the following properties:
    * - `icon`: icon to display (required)
    * - `label`: optional label text
-   * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `color`: custom icon color of the action item
    * - `labelTextColor`: custom label text color of the action item
+   * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
    * - `labelStyle`: pass additional styles for the fab item label, for example, `backgroundColor`
-   * - `size`: size of action item. Defaults to `small`. @supported Available in v5.x
    * - `onPress`: callback that is called when `FAB` is pressed (required)
+   * - `size`: size of action item. Defaults to `small`. @supported Available in v5.x
+   * - `testID`: testID to be used on tests
    */
   actions: Array<{
     icon: IconSource;
