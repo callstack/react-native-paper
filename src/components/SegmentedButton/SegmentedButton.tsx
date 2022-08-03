@@ -39,7 +39,7 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: (value?: GestureResponderEvent | string) => void;
+  onPress?: (value?: GestureResponderEvent) => void;
   /**
    * Value of button.
    */
@@ -181,7 +181,7 @@ const SegmentedButton = ({
     color: textColor,
   };
 
-  const handleOnPress = (e?: GestureResponderEvent | string) => {
+  const handleOnPress = (e?: GestureResponderEvent) => {
     onPress?.(e);
 
     if (!value) {
