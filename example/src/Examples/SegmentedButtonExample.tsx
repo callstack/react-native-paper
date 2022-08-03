@@ -7,8 +7,11 @@ const SegmentedButtonExample = () => {
   const [first, setFirst] = React.useState('week');
   const [second, setSecond] = React.useState('');
   const [third, setThird] = React.useState('');
-  const [fourth, setFourth] = React.useState<string[]>([]);
-  const [fifth, setFifth] = React.useState<string[]>([]);
+  const [fourth, setFourth] = React.useState('');
+  const [fifth, setFifth] = React.useState('');
+  const [sixth, setSixth] = React.useState<string[]>([]);
+  const [seventh, setSeventh] = React.useState<string[]>([]);
+  const [eighth, setEighth] = React.useState<string[]>([]);
 
   return (
     <ScreenWrapper>
@@ -21,8 +24,8 @@ const SegmentedButtonExample = () => {
           style={styles.group}
         >
           <SegmentedButton
-            icon="walk"
             style={styles.button}
+            icon="walk"
             value="walk"
             label="Walking"
           />
@@ -40,7 +43,7 @@ const SegmentedButtonExample = () => {
           />
         </SegmentedButton.Group>
       </List.Section>
-      <List.Section title={`Segmented Button - only labels`}>
+      <List.Section title={`Segmented Button - show selected check`}>
         <SegmentedButton.Group
           onValueChange={(value) => {
             typeof value === 'string' && setSecond(value);
@@ -48,13 +51,51 @@ const SegmentedButtonExample = () => {
           value={second}
           style={styles.group}
         >
-          <SegmentedButton style={styles.button} value="walk" label="Walking" />
           <SegmentedButton
+            style={styles.button}
+            icon="walk"
+            value="walk"
+            label="Walking"
+            showSelectedCheck
+          />
+          <SegmentedButton
+            style={styles.button}
+            icon="train"
+            label="Transit"
+            value="transit"
+            showSelectedCheck
+          />
+          <SegmentedButton
+            style={styles.button}
+            icon="car"
+            label="Driving"
+            value="drive"
+            showSelectedCheck
+          />
+        </SegmentedButton.Group>
+      </List.Section>
+      <List.Section title={`Segmented Button - only labels + density`}>
+        <SegmentedButton.Group
+          onValueChange={(value) => {
+            typeof value === 'string' && setThird(value);
+          }}
+          value={third}
+          style={styles.group}
+        >
+          <SegmentedButton
+            density={-2}
+            style={styles.button}
+            value="walk"
+            label="Walking"
+          />
+          <SegmentedButton
+            density={-2}
             style={styles.button}
             label="Transit"
             value="transit"
           />
           <SegmentedButton
+            density={-2}
             style={styles.button}
             label="Driving"
             value="drive"
@@ -64,14 +105,27 @@ const SegmentedButtonExample = () => {
       <List.Section title={`Segmented Button - only icons`}>
         <SegmentedButton.Group
           onValueChange={(value) => {
-            typeof value === 'string' && setThird(value);
+            typeof value === 'string' && setFourth(value);
           }}
           style={styles.group}
-          value={third}
+          value={fourth}
         >
           <SegmentedButton icon="walk" value="walk" />
           <SegmentedButton icon="train" value="transit" />
           <SegmentedButton icon="car" value="drive" />
+        </SegmentedButton.Group>
+      </List.Section>
+      <List.Section title={`Segmented Button - icons + show selected check`}>
+        <SegmentedButton.Group
+          onValueChange={(value) => {
+            typeof value === 'string' && setFifth(value);
+          }}
+          style={styles.group}
+          value={fifth}
+        >
+          <SegmentedButton icon="walk" showSelectedCheck value="walk" />
+          <SegmentedButton icon="train" showSelectedCheck value="transit" />
+          <SegmentedButton icon="car" showSelectedCheck value="drive" />
         </SegmentedButton.Group>
       </List.Section>
       <List.Section title={`Segmented Button - multiselect`}>
@@ -79,22 +133,29 @@ const SegmentedButtonExample = () => {
           multiselect
           onValueChange={(value) => {
             if (Array.isArray(value)) {
-              setFourth(value);
+              setSixth(value);
             }
           }}
-          value={fourth}
+          value={sixth}
           style={styles.group}
         >
-          <SegmentedButton style={styles.button} value="walk" label="Walking" />
+          <SegmentedButton
+            style={styles.button}
+            value="walk"
+            label="Walking"
+            showSelectedCheck
+          />
           <SegmentedButton
             style={styles.button}
             label="Transit"
             value="transit"
+            showSelectedCheck
           />
           <SegmentedButton
             style={styles.button}
             label="Driving"
             value="drive"
+            showSelectedCheck
           />
         </SegmentedButton.Group>
       </List.Section>
@@ -103,10 +164,10 @@ const SegmentedButtonExample = () => {
           multiselect
           onValueChange={(value) => {
             if (Array.isArray(value)) {
-              setFifth(value);
+              setSeventh(value);
             }
           }}
-          value={fifth}
+          value={seventh}
           style={styles.group}
         >
           <SegmentedButton value="size-s" icon="size-s" />
@@ -116,17 +177,41 @@ const SegmentedButtonExample = () => {
           <SegmentedButton value="size-xxl" icon="size-xxl" />
         </SegmentedButton.Group>
       </List.Section>
+      <List.Section
+        title={`Segmented Button - multiselect (disabled)`}
+        style={styles.lastSection}
+      >
+        <SegmentedButton.Group
+          multiselect
+          onValueChange={(value) => {
+            if (Array.isArray(value)) {
+              setEighth(value);
+            }
+          }}
+          value={eighth}
+          style={styles.group}
+        >
+          <SegmentedButton style={styles.button} value="walk" label="Walking" />
+          <SegmentedButton style={styles.button} label="Disabled" disabled />
+          <SegmentedButton
+            style={styles.button}
+            label="Driving"
+            value="drive"
+          />
+        </SegmentedButton.Group>
+      </List.Section>
     </ScreenWrapper>
   );
 };
 
-SegmentedButtonExample.title = 'SegmentedButton';
+SegmentedButtonExample.title = 'Segmented Button';
 
 const styles = StyleSheet.create({
   button: {
     flex: 1,
   },
   group: { paddingHorizontal: 20, justifyContent: 'center' },
+  lastSection: { paddingBottom: 30 },
 });
 
 export default SegmentedButtonExample;
