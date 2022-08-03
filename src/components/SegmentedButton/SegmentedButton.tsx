@@ -6,6 +6,7 @@ import {
   StyleSheet,
   View,
   TextStyle,
+  Animated,
 } from 'react-native';
 import { withTheme } from '../../core/theming';
 import Text from '../Typography/Text';
@@ -59,10 +60,29 @@ const SegmentedButton = ({
     );
   }
 
+  const checkScale = React.useRef(new Animated.Value(0)).current;
+
   const checked =
     (context && Array.isArray(context.value)
       ? context.value.includes(value || '')
       : context.value === value) || status === 'checked';
+
+  React.useEffect(() => {
+    if (!showSelectedCheck) {
+      return;
+    }
+    if (checked) {
+      Animated.spring(checkScale, {
+        toValue: 1,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      Animated.spring(checkScale, {
+        toValue: 0,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [checked, checkScale, showSelectedCheck]);
 
   const { roundness, isV3 } = theme;
   const { borderColor, textColor, borderWidth, backgroundColor } =
@@ -82,6 +102,16 @@ const SegmentedButton = ({
   const iconSize = isV3 ? 18 : 16;
   const iconStyle = {
     marginRight: label ? 5 : checked && showSelectedCheck ? 3 : 0,
+    ...(label && {
+      transform: [
+        {
+          scale: checkScale.interpolate({
+            inputRange: [0, 1],
+            outputRange: [1, 0],
+          }),
+        },
+      ],
+    }),
   };
 
   const buttonStyle: ViewStyle = {
@@ -139,18 +169,20 @@ const SegmentedButton = ({
       >
         <View style={[styles.content]}>
           {checked && showSelectedCheck ? (
-            <View style={iconStyle}>
+            <Animated.View
+              style={[iconStyle, { transform: [{ scale: checkScale }] }]}
+            >
               <Icon source={'check'} size={iconSize} />
-            </View>
+            </Animated.View>
           ) : null}
           {showIcon ? (
-            <View style={iconStyle}>
+            <Animated.View style={iconStyle}>
               <Icon
                 source={icon}
                 size={iconSize}
                 color={disabled ? textColor : undefined}
               />
-            </View>
+            </Animated.View>
           ) : null}
           <Text
             variant="labelLarge"
