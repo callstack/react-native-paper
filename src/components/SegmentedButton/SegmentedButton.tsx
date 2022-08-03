@@ -5,16 +5,20 @@ import {
   GestureResponderEvent,
   StyleSheet,
   View,
+  TextStyle,
 } from 'react-native';
 import { withTheme } from '../../core/theming';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { IconSource } from '../Icon';
-import type { MD3Theme } from '../../types';
-import { getButtonColors } from '../Button/utils';
+import type { Theme } from '../../types';
 import color from 'color';
 import Icon from '../Icon';
 import { SegmentedButtonGroupContext } from './SegmentedButtonGroup';
+import {
+  getSegmentedButtonBorderRadius,
+  getSegmentedButtonColors,
+} from './utils';
 
 type Props = {
   icon?: IconSource;
@@ -26,10 +30,10 @@ type Props = {
   label?: string;
   multiselect?: boolean;
   status?: 'checked' | 'unchecked';
-  segment?: 'first' | 'last' | 'default';
+  segment?: 'first' | 'last';
   density?: 0 | -1 | -2 | -3;
   style?: StyleProp<ViewStyle>;
-  theme: MD3Theme;
+  theme: Theme;
 };
 
 const SegmentedButton = ({
@@ -43,7 +47,7 @@ const SegmentedButton = ({
   icon,
   label,
   onPress,
-  segment = 'default',
+  segment,
 }: Props) => {
   const context = React.useContext(SegmentedButtonGroupContext);
 
@@ -53,58 +57,58 @@ const SegmentedButton = ({
     );
   }
 
-  const checked: boolean | null =
+  const checked =
     (context && Array.isArray(context.value)
       ? context.value.includes(value || '')
       : context.value === value) || status === 'checked';
 
-  const { roundness, isV3, dark } = theme;
-  const { borderColor, textColor, borderWidth } = getButtonColors({
-    customButtonColor: undefined,
-    customTextColor: undefined,
-    theme,
-    mode: 'outlined',
-    disabled,
-    dark,
-  });
+  const { roundness, isV3 } = theme;
+  const { borderColor, textColor, borderWidth, backgroundColor } =
+    getSegmentedButtonColors({
+      checked,
+      theme,
+      disabled,
+    });
 
   const borderRadius = (isV3 ? 5 : 1) * roundness;
-  const segmentBorderRadius = {
-    borderRadius,
-    ...(segment === 'first'
-      ? {
-          borderTopRightRadius: 0,
-          borderBottomRightRadius: 0,
-          borderRightWidth: 0,
-        }
-      : segment === 'last'
-      ? {
-          borderTopLeftRadius: 0,
-          borderBottomLeftRadius: 0,
-        }
-      : { borderRadius: 0, borderRightWidth: 0 }),
-  };
+  const segmentBorderRadius = getSegmentedButtonBorderRadius({
+    theme,
+    segment,
+  });
   const rippleColor = color(textColor).alpha(0.12).rgb().string();
 
   const iconSize = isV3 ? 18 : 16;
   const iconStyle = { marginRight: label ? 5 : checked ? 3 : 0 };
 
   const buttonStyle: ViewStyle = {
-    backgroundColor: checked ? theme.colors.secondaryContainer : 'transparent',
+    backgroundColor,
     borderColor,
     borderWidth,
+    borderRadius,
     ...segmentBorderRadius,
   };
 
-  let showIcon = icon && !label ? true : checked ? false : true;
+  const rippleStyle: ViewStyle = {
+    borderRadius,
+    ...segmentBorderRadius,
+  };
+
+  const showIcon = icon && !label ? true : checked ? false : true;
+  const textStyle: TextStyle = {
+    ...(!isV3 && {
+      textTransform: 'uppercase',
+      fontWeight: '500',
+    }),
+    color: textColor,
+  };
 
   const handleOnPress = (e?: GestureResponderEvent | string) => {
-    if (onPress) {
-      onPress(e);
-    }
+    onPress?.(e);
+
     if (!value) {
       return;
     }
+
     if (multiselect && Array.isArray(context.value)) {
       context.onValueChange(
         checked
@@ -123,10 +127,11 @@ const SegmentedButton = ({
         delayPressIn={0}
         onPress={handleOnPress}
         accessibilityLabel={accessibilityLabel}
+        accessibilityState={{ disabled, checked }}
         accessibilityRole="button"
         disabled={disabled}
         rippleColor={rippleColor}
-        style={[{ ...segmentBorderRadius }, style]}
+        style={rippleStyle}
       >
         <View style={[styles.content]}>
           {checked ? (
@@ -145,7 +150,7 @@ const SegmentedButton = ({
           ) : null}
           <Text
             variant="labelLarge"
-            style={[styles.label, disabled && { color: textColor }]}
+            style={[styles.label, textStyle]}
             selectable={false}
             numberOfLines={1}
           >
