@@ -22,20 +22,59 @@ import {
 } from './utils';
 
 type Props = {
+  /**
+   * Icon to display for the `SegmentedButton`.
+   */
   icon?: IconSource;
-  color?: string;
+  /**
+   * Whether the button is disabled.
+   */
   disabled?: boolean;
+  /**
+   * Accessibility label for the `SegmentedButton`. This is read by the screen reader when the user taps the button.
+   */
   accessibilityLabel?: string;
+  /**
+   * Function to execute on press.
+   */
   onPress?: (value?: GestureResponderEvent | string) => void;
+  /**
+   * Value of button.
+   */
   value?: string;
+  /**
+   * Label text of the button.
+   */
   label?: string;
+  /**
+   * Support multiple selected options.
+   */
   multiselect?: boolean;
+  /**
+   * Status of button.
+   */
   status?: 'checked' | 'unchecked';
+  /**
+   * Button segment.
+   */
   segment?: 'first' | 'last';
+  /**
+   * Show optional check icon to indicate selected state
+   */
   showSelectedCheck?: boolean;
+  /**
+   * Density is applied to the height, to allow usage in denser UIs.
+   */
   density?: 0 | -1 | -2 | -3;
   style?: StyleProp<ViewStyle>;
+  /**
+   * @optional
+   */
   theme: Theme;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 const SegmentedButton = ({
@@ -48,6 +87,7 @@ const SegmentedButton = ({
   multiselect,
   showSelectedCheck,
   icon,
+  testID,
   label,
   onPress,
   segment,
@@ -165,6 +205,7 @@ const SegmentedButton = ({
         accessibilityRole="button"
         disabled={disabled}
         rippleColor={rippleColor}
+        testID={testID}
         style={rippleStyle}
       >
         <View style={[styles.content]}>

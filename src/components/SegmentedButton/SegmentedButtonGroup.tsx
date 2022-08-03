@@ -15,6 +15,9 @@ type Props = {
    * React elements containing segmented buttons.
    */
   children: React.ReactNode;
+  /**
+   * Support multiple selected options.
+   */
   multiselect?: boolean;
   style?: StyleProp<ViewStyle>;
 };
@@ -42,6 +45,28 @@ export const SegmentedButtonGroupContext =
  *
  *   return (
  *     <SegmentedButton.Group
+ *       onValueChange={value => setValue(value)}
+ *       value={value}>
+ *       <SegmentedButton icon="format-align-left" value="left" showSelectedCheck />
+ *       <SegmentedButton icon="format-align-right" value="right" showSelectedCheck />
+ *     </SegmentedButton.Group>
+ *   );
+ * };
+ *
+ * export default MyComponent;
+ *```
+ *
+ * ## Multiselect
+ * ```js
+ * import * as React from 'react';
+ * import { SegmentedButton } from 'react-native-paper';
+ *
+ * const MyComponent = () => {
+ *   const [value, setValue] = React.useState('left');
+ *
+ *   return (
+ *     <SegmentedButton.Group
+ *       multiselect
  *       onValueChange={value => setValue(value)}
  *       value={value}>
  *       <SegmentedButton icon="format-align-left" value="left" />
