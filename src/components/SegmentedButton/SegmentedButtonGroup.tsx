@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import type { Theme } from '../../types';
+import { withTheme } from '../../core/theming';
 import SegmentedButton from './SegmentedButton';
 
 type Props = {
@@ -20,6 +22,10 @@ type Props = {
    */
   multiselect?: boolean;
   style?: StyleProp<ViewStyle>;
+  /**
+   * @optional
+   */
+  theme: Theme;
 };
 
 type SegmentedButtonContextType = {
@@ -84,6 +90,7 @@ const SegmentedButtonGroup = ({
   multiselect,
   children,
   style,
+  theme,
 }: Props) => {
   const count = React.Children.count(children);
   if (count < 2 || count > 5) {
@@ -91,6 +98,7 @@ const SegmentedButtonGroup = ({
       'Segmented buttons are best used for selecting between 2 and 5 choices. If you have more than five choices, consider using another component, such as chips.'
     );
   }
+  const childrenArray = React.Children.toArray(children);
 
   return (
     <SegmentedButtonGroupContext.Provider
@@ -100,14 +108,23 @@ const SegmentedButtonGroup = ({
       }}
     >
       <View style={[styles.row, style]}>
-        {React.Children.map(children, (child, i) => {
+        {React.Children.map(childrenArray, (child, i) => {
           // @ts-expect-error: TypeScript complains about child.type but it doesn't matter
           if (child && child.type === SegmentedButton) {
+            // @ts-expect-error: TypeScript complains about child.props but we are sure there is disabled prop
+            const isNextChildDisabled = childrenArray[i + 1]?.props?.disabled;
+            const segment =
+              i === 0 ? 'first' : i === count - 1 ? 'last' : 'default';
             // @ts-expect-error: We're sure that child is a React Element
             return React.cloneElement(child, {
-              segment: i === 0 ? 'first' : i === count - 1 ? 'last' : 'default',
+              segment,
               multiselect,
               style: [
+                {
+                  ...(isNextChildDisabled && {
+                    borderRightWidth: theme.isV3 ? 1 : StyleSheet.hairlineWidth,
+                  }),
+                },
                 // @ts-expect-error: We're sure that child is a React Element
                 child.props.style,
               ],
@@ -129,7 +146,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SegmentedButtonGroup;
+export default withTheme(SegmentedButtonGroup);
 
 // @component-docs ignore-next-line
 export { SegmentedButtonGroup };
