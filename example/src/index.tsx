@@ -154,7 +154,7 @@ export default function PaperExample() {
 
   return (
     <PaperProvider theme={theme}>
-      <SafeAreaProvider>
+      <SafeAreaProvider style={{backgroundColor: preferences?.theme === "dark" ? "black" : "white"}}>
         <PreferencesContext.Provider value={preferences}>
           <React.Fragment>
             <NavigationContainer
