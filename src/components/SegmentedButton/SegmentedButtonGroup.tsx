@@ -3,6 +3,7 @@ import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import type { Theme } from '../../types';
 import { withTheme } from '../../core/theming';
 import SegmentedButton from './SegmentedButton';
+import { getDisabledSegmentedButtonStyle } from './utils';
 
 type Props = {
   /**
@@ -16,7 +17,12 @@ type Props = {
   /**
    * React elements containing segmented buttons.
    */
-  children: React.ReactNode;
+  children: React.ReactElement<{
+    disabled?: boolean;
+    segment: 'first' | 'last' | 'default';
+    style: StyleProp<ViewStyle>;
+    multiselect?: boolean;
+  }>[];
   /**
    * Support multiple selected options.
    */
@@ -98,7 +104,6 @@ const SegmentedButtonGroup = ({
       'Segmented buttons are best used for selecting between 2 and 5 choices. If you have more than five choices, consider using another component, such as chips.'
     );
   }
-  const childrenArray = React.Children.toArray(children);
 
   return (
     <SegmentedButtonGroupContext.Provider
@@ -108,26 +113,20 @@ const SegmentedButtonGroup = ({
       }}
     >
       <View style={[styles.row, style]}>
-        {React.Children.map(childrenArray, (child, i) => {
-          // @ts-expect-error: TypeScript complains about child.type but it doesn't matter
+        {React.Children.map(children, (child, i) => {
           if (child && child.type === SegmentedButton) {
-            // @ts-expect-error: TypeScript complains about child.props but we are sure there is disabled prop
-            const isNextChildDisabled = childrenArray[i + 1]?.props?.disabled;
+            const disabledChildStyle = getDisabledSegmentedButtonStyle({
+              theme,
+              children,
+              index: i,
+            });
             const segment =
               i === 0 ? 'first' : i === count - 1 ? 'last' : 'default';
-            // @ts-expect-error: We're sure that child is a React Element
+
             return React.cloneElement(child, {
               segment,
               multiselect,
-              style: [
-                {
-                  ...(isNextChildDisabled && {
-                    borderRightWidth: theme.isV3 ? 1 : StyleSheet.hairlineWidth,
-                  }),
-                },
-                // @ts-expect-error: We're sure that child is a React Element
-                child.props.style,
-              ],
+              style: [disabledChildStyle, child.props.style],
             });
           }
 

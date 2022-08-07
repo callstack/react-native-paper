@@ -9,6 +9,27 @@ type BaseProps = {
   checked: boolean;
 };
 
+export const getDisabledSegmentedButtonStyle = ({
+  theme,
+  index,
+  children,
+}: {
+  theme: Theme;
+  children: React.ReactElement<{ disabled?: boolean }>[];
+  index: number;
+}): ViewStyle => {
+  const width = getSegmentedButtonBorderWidth({ theme });
+  const isDisabled = children[index]?.props.disabled;
+  const isNextDisabled = children[index + 1]?.props.disabled;
+
+  if (!isDisabled && isNextDisabled) {
+    return {
+      borderRightWidth: width,
+    };
+  }
+  return {};
+};
+
 export const getSegmentedButtonBorderRadius = ({
   segment,
   theme,

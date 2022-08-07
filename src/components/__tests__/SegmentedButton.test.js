@@ -1,7 +1,10 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
 import SegmentedButton from '../SegmentedButton';
-import { getSegmentedButtonColors } from '../SegmentedButton/utils';
+import {
+  getDisabledSegmentedButtonStyle,
+  getSegmentedButtonColors,
+} from '../SegmentedButton/utils';
 import { getTheme } from '../../core/theming';
 import { black } from '../../styles/themes/v2/colors';
 import color from 'color';
@@ -182,6 +185,71 @@ describe('getSegmentedButtonColors', () => {
       })
     ).toMatchObject({
       textColor: getTheme(false, false).colors.disabled,
+    });
+  });
+});
+
+describe('getDisabledSegmentedButtonBorderWidth', () => {
+  it('Returns empty style object for all enabled buttons', () => {
+    [0, 1, 2].forEach((index) => {
+      expect(
+        getDisabledSegmentedButtonStyle({
+          theme: getTheme(),
+          children: [
+            { props: { disabled: false } },
+            { props: { disabled: false } },
+            { props: { disabled: false } },
+          ],
+          index,
+        })
+      ).toMatchObject({});
+    });
+  });
+
+  it('Returns empty style object for all disabled buttons', () => {
+    [0, 1, 2].forEach((index) => {
+      expect(
+        getDisabledSegmentedButtonStyle({
+          theme: getTheme(),
+          children: [
+            { props: { disabled: true } },
+            { props: { disabled: true } },
+            { props: { disabled: true } },
+          ],
+          index,
+        })
+      ).toMatchObject({});
+    });
+  });
+
+  it('Returns proper style object for one disabled button', () => {
+    expect(
+      getDisabledSegmentedButtonStyle({
+        theme: getTheme(),
+        children: [
+          { props: { disabled: false } },
+          { props: { disabled: true } },
+          { props: { disabled: true } },
+        ],
+        index: 0,
+      })
+    ).toMatchObject({ borderRightWidth: 1 });
+  });
+
+  it('Returns proper style object for two disabled buttons (alternately)', () => {
+    [0, 2].forEach((index) => {
+      expect(
+        getDisabledSegmentedButtonStyle({
+          theme: getTheme(),
+          children: [
+            { props: { disabled: false } },
+            { props: { disabled: true } },
+            { props: { disabled: false } },
+            { props: { disabled: true } },
+          ],
+          index,
+        })
+      ).toMatchObject({ borderRightWidth: 1 });
     });
   });
 });
