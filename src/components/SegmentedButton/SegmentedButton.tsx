@@ -39,7 +39,7 @@ type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: (value?: GestureResponderEvent) => void;
+  onPress?: (event?: GestureResponderEvent) => void;
   /**
    * Value of button.
    */
