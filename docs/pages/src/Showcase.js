@@ -153,7 +153,8 @@ const data: Data[] = [
     name: 'CrazyThursday',
     image: 'showcase/crazythursday.jpg',
     github: 'https://github.com/shensven/Crazy-Thursday',
-    android: 'https://play.google.com/store/apps/details?id=com.shensven.crazythursday',
+    android:
+      'https://play.google.com/store/apps/details?id=com.shensven.crazythursday',
   },
 ];
 
