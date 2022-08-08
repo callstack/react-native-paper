@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import renderer from 'react-test-renderer';
-import { fireEvent, render } from 'react-native-testing-library';
+import { fireEvent, render } from '@testing-library/react-native';
 import * as Avatar from '../Avatar/Avatar.tsx';
 import { red500 } from '../../styles/themes/v2/colors';
 
@@ -63,44 +63,99 @@ it('renders avatar with image', () => {
 
 describe('AvatarImage listener', () => {
   const onListenerMock = jest.fn();
-  const { getByTestId } = render(
-    <Avatar.Image
-      testID={'avatar-image'}
-      onError={onListenerMock}
-      onLayout={onListenerMock}
-      onLoad={onListenerMock}
-      onLoadEnd={onListenerMock}
-      onLoadStart={onListenerMock}
-      onProgress={onListenerMock}
-    />
-  );
 
   it('onError should be called', () => {
+    const { getByTestId } = render(
+      <Avatar.Image
+        testID={'avatar-image'}
+        onError={onListenerMock}
+        onLayout={onListenerMock}
+        onLoad={onListenerMock}
+        onLoadEnd={onListenerMock}
+        onLoadStart={onListenerMock}
+        onProgress={onListenerMock}
+      />
+    );
     fireEvent(getByTestId('avatar-image'), 'onError');
     expect(onListenerMock).toHaveBeenCalled();
   });
 
   it('onLayout should be called', () => {
+    const { getByTestId } = render(
+      <Avatar.Image
+        testID={'avatar-image'}
+        onError={onListenerMock}
+        onLayout={onListenerMock}
+        onLoad={onListenerMock}
+        onLoadEnd={onListenerMock}
+        onLoadStart={onListenerMock}
+        onProgress={onListenerMock}
+      />
+    );
     fireEvent(getByTestId('avatar-image'), 'onLayout');
     expect(onListenerMock).toHaveBeenCalled();
   });
 
   it('onLoad should be called', () => {
+    const { getByTestId } = render(
+      <Avatar.Image
+        testID={'avatar-image'}
+        onError={onListenerMock}
+        onLayout={onListenerMock}
+        onLoad={onListenerMock}
+        onLoadEnd={onListenerMock}
+        onLoadStart={onListenerMock}
+        onProgress={onListenerMock}
+      />
+    );
     fireEvent(getByTestId('avatar-image'), 'onLoad');
     expect(onListenerMock).toHaveBeenCalled();
   });
 
   it('onLoadEnd should be called', () => {
+    const { getByTestId } = render(
+      <Avatar.Image
+        testID={'avatar-image'}
+        onError={onListenerMock}
+        onLayout={onListenerMock}
+        onLoad={onListenerMock}
+        onLoadEnd={onListenerMock}
+        onLoadStart={onListenerMock}
+        onProgress={onListenerMock}
+      />
+    );
     fireEvent(getByTestId('avatar-image'), 'onLoadEnd');
     expect(onListenerMock).toHaveBeenCalled();
   });
 
   it('onLoadStart should be called', () => {
+    const { getByTestId } = render(
+      <Avatar.Image
+        testID={'avatar-image'}
+        onError={onListenerMock}
+        onLayout={onListenerMock}
+        onLoad={onListenerMock}
+        onLoadEnd={onListenerMock}
+        onLoadStart={onListenerMock}
+        onProgress={onListenerMock}
+      />
+    );
     fireEvent(getByTestId('avatar-image'), 'onLoadStart');
     expect(onListenerMock).toHaveBeenCalled();
   });
 
   it('onProgress should be called', () => {
+    const { getByTestId } = render(
+      <Avatar.Image
+        testID={'avatar-image'}
+        onError={onListenerMock}
+        onLayout={onListenerMock}
+        onLoad={onListenerMock}
+        onLoadEnd={onListenerMock}
+        onLoadStart={onListenerMock}
+        onProgress={onListenerMock}
+      />
+    );
     fireEvent(getByTestId('avatar-image'), 'onProgress');
     expect(onListenerMock).toHaveBeenCalled();
   });

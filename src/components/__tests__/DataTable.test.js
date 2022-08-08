@@ -1,6 +1,6 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import { render } from 'react-native-testing-library';
+import { render } from '@testing-library/react-native';
 import DataTable from '../DataTable/DataTable.tsx';
 
 it('renders data table header', () => {
@@ -92,7 +92,7 @@ it('renders data table pagination with label', () => {
 });
 
 it('renders data table pagination with fast-forward buttons', () => {
-  const { getByA11yLabel, toJSON } = render(
+  const { getByLabelText, toJSON } = render(
     <DataTable.Pagination
       page={3}
       numberOfPages={15}
@@ -102,13 +102,13 @@ it('renders data table pagination with fast-forward buttons', () => {
     />
   );
 
-  expect(() => getByA11yLabel('page-first')).not.toThrow();
-  expect(() => getByA11yLabel('page-last')).not.toThrow();
+  expect(() => getByLabelText('page-first')).not.toThrow();
+  expect(() => getByLabelText('page-last')).not.toThrow();
   expect(toJSON()).toMatchSnapshot();
 });
 
 it('renders data table pagination without options select', () => {
-  const { getByA11yLabel } = render(
+  const { getByLabelText } = render(
     <DataTable.Pagination
       page={3}
       numberOfPages={15}
@@ -118,11 +118,11 @@ it('renders data table pagination without options select', () => {
     />
   );
 
-  expect(() => getByA11yLabel('Options Select')).toThrow();
+  expect(() => getByLabelText('Options Select')).toThrow();
 });
 
 it('renders data table pagination with options select', () => {
-  const { getByA11yLabel, toJSON } = render(
+  const { getByLabelText, toJSON } = render(
     <DataTable.Pagination
       page={3}
       numberOfPages={15}
@@ -136,8 +136,8 @@ it('renders data table pagination with options select', () => {
     />
   );
 
-  expect(() => getByA11yLabel('Options Select')).not.toThrow();
-  expect(() => getByA11yLabel('selectPageDropdownLabel')).not.toThrow();
+  expect(() => getByLabelText('Options Select')).not.toThrow();
+  expect(() => getByLabelText('selectPageDropdownLabel')).not.toThrow();
 
   expect(toJSON()).toMatchSnapshot();
 });

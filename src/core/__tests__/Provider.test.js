@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Appearance, AccessibilityInfo, View } from 'react-native';
-import { render, act } from 'react-native-testing-library';
+import { render, act } from '@testing-library/react-native';
 import Provider from '../Provider';
 import { useTheme } from '../theming';
 import {

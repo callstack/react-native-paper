@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
 import renderer from 'react-test-renderer';
-import { render } from 'react-native-testing-library';
+import { render } from '@testing-library/react-native';
 import Checkbox from '../../Checkbox';
 
 it('renders unchecked', () => {
@@ -50,38 +50,38 @@ it('can render leading checkbox control', () => {
 });
 
 it('should have `accessibilityState={ checked: true }` when `status="checked"`', () => {
-  const { getByA11yState } = render(
+  const { getAllByA11yState } = render(
     <Checkbox.Item status="checked" label="Checked Button" />
   );
 
-  const element = getByA11yState({ checked: true });
-  expect(element).toBeTruthy();
+  const elements = getAllByA11yState({ checked: true });
+  expect(elements).toHaveLength(2);
 });
 
 it('should have `accessibilityState={ checked: false }` when `status="unchecked"', () => {
-  const { getByA11yState } = render(
+  const { getAllByA11yState } = render(
     <Checkbox.Item status="unchecked" label="Unchecked Button" />
   );
 
-  const element = getByA11yState({ checked: false });
-  expect(element).toBeTruthy();
+  const elements = getAllByA11yState({ checked: false });
+  expect(elements).toHaveLength(2);
 });
 
 it('should have `accessibilityState={ checked: false }` when `status="indeterminate"', () => {
-  const { getByA11yState } = render(
+  const { getAllByA11yState } = render(
     <Checkbox.Item status="indeterminate" label="Indeterminate Button" />
   );
 
-  const element = getByA11yState({ checked: false });
-  expect(element).toBeTruthy();
+  const elements = getAllByA11yState({ checked: false });
+  expect(elements).toHaveLength(2);
 });
 
 it('disables the row when the prop disabled is true', () => {
-  const { getByA11yLabel } = render(
+  const { getByLabelText } = render(
     <Checkbox.Item accessibilityLabel="some checkbox" disabled />
   );
 
-  const touchable = getByA11yLabel('some checkbox');
+  const touchable = getByLabelText('some checkbox');
 
   expect(touchable.props).toMatchObject({
     accessibilityState: { disabled: true },

@@ -39,6 +39,7 @@ type ContextState = {
   side: AdornmentSide;
   paddingHorizontal?: number | string;
   maxFontSizeMultiplier?: number | undefined | null;
+  testID?: string;
 };
 
 const AffixContext = React.createContext<ContextState>({
@@ -61,6 +62,7 @@ const AffixAdornment: React.FunctionComponent<
   visible,
   paddingHorizontal,
   maxFontSizeMultiplier,
+  testID,
 }) => {
   return (
     <AffixContext.Provider
@@ -72,6 +74,7 @@ const AffixAdornment: React.FunctionComponent<
         visible,
         paddingHorizontal,
         maxFontSizeMultiplier,
+        testID,
       }}
     >
       {affix}
@@ -121,6 +124,7 @@ const TextInputAffix = ({ text, textStyle: labelStyle, theme }: Props) => {
     visible,
     paddingHorizontal,
     maxFontSizeMultiplier,
+    testID,
   } = React.useContext(AffixContext);
 
   const textColor = color(
@@ -152,6 +156,7 @@ const TextInputAffix = ({ text, textStyle: labelStyle, theme }: Props) => {
         },
       ]}
       onLayout={onLayout}
+      testID={testID}
     >
       <Text
         maxFontSizeMultiplier={maxFontSizeMultiplier}
