@@ -86,6 +86,16 @@ type Props = React.ComponentProps<typeof Surface> & {
    */
   onPress?: () => void;
   /**
+   * @supported Available in v5.x
+   * Function to execute as soon as the touchable element is pressed and invoked even before onPress.
+   */
+  onPressIn?: () => void;
+  /**
+   * @supported Available in v5.x
+   * Function to execute as soon as the touch is released even before onPress.
+   */
+  onPressOut?: () => void;
+  /**
    * Function to execute on long press.
    */
   onLongPress?: () => void;
@@ -162,6 +172,8 @@ const Button = ({
   accessibilityLabel,
   accessibilityHint,
   onPress,
+  onPressIn,
+  onPressOut,
   onLongPress,
   style,
   theme,
@@ -194,7 +206,8 @@ const Button = ({
   }, [isElevationEntitled, elevation, initialElevation]);
 
   const handlePressIn = () => {
-    if (isMode('contained')) {
+    onPressIn?.();
+    if (isV3 ? isMode('elevated') : isMode('contained')) {
       const { scale } = animation;
       Animated.timing(elevation, {
         toValue: activeElevation,
@@ -205,7 +218,8 @@ const Button = ({
   };
 
   const handlePressOut = () => {
-    if (isMode('contained')) {
+    onPressOut?.();
+    if (isV3 ? isMode('elevated') : isMode('contained')) {
       const { scale } = animation;
       Animated.timing(elevation, {
         toValue: initialElevation,
