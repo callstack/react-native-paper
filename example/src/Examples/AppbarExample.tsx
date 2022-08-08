@@ -194,27 +194,25 @@ const AppbarExample = ({ navigation }: Props) => {
           </List.Section>
         )}
       </ScreenWrapper>
-      {
-        <Appbar
-          style={[
-            styles.bottom,
-            {
-              height: height + bottom,
-              backgroundColor: theme.isV3
-                ? theme.colors.elevation.level2
-                : theme.colors.primary,
-            },
-          ]}
-          safeAreaInsets={{ bottom, left, right }}
-          theme={{ mode: showExactTheme ? 'exact' : 'adaptive' }}
-        >
-          <Appbar.Action icon="archive" onPress={() => {}} />
-          <Appbar.Action icon="email" onPress={() => {}} />
-          <Appbar.Action icon="label" onPress={() => {}} />
-          <Appbar.Action icon="delete" onPress={() => {}} />
-          {renderFAB()}
-        </Appbar>
-      }
+      <Appbar
+        style={[
+          styles.bottom,
+          {
+            height: height + bottom,
+            backgroundColor: theme.isV3
+              ? theme.colors.elevation.level2
+              : theme.colors.primary,
+          },
+        ]}
+        safeAreaInsets={{ bottom, left, right }}
+        theme={{ mode: showExactTheme ? 'exact' : 'adaptive' }}
+      >
+        <Appbar.Action icon="archive" onPress={() => {}} />
+        <Appbar.Action icon="email" onPress={() => {}} />
+        <Appbar.Action icon="label" onPress={() => {}} />
+        <Appbar.Action icon="delete" onPress={() => {}} />
+        {theme.isV3 && renderFAB()}
+      </Appbar>
       {!theme.isV3 && renderFAB()}
     </>
   );
