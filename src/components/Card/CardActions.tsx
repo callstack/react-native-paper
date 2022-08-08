@@ -49,7 +49,9 @@ const CardActions = (props: Props) => {
         return React.isValidElement(child)
           ? React.cloneElement(child, {
               compact: !isV3 && child.props.compact !== false,
-              mode: isV3 && (i === 0 ? 'outlined' : 'contained'),
+              mode:
+                child.props.mode ||
+                (isV3 && (i === 0 ? 'outlined' : 'contained')),
               style: isV3 && styles.button,
             })
           : child;
