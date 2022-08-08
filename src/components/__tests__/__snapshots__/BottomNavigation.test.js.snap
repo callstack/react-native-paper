@@ -11,6 +11,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
       undefined,
     ]
   }
+  testID="bottom-navigation"
 >
   <View
     style={
@@ -122,10 +123,11 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "rgba(255, 251, 254, 1)",
+              "backgroundColor": "rgb(243, 237, 246)",
               "overflow": "hidden",
             }
           }
+          testID="bottom-navigation-bar-content"
         >
           <View
             accessibilityRole="tablist"
@@ -689,6 +691,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
       undefined,
     ]
   }
+  testID="bottom-navigation"
 >
   <View
     style={
@@ -800,10 +803,11 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "rgba(255, 251, 254, 1)",
+              "backgroundColor": "rgb(243, 237, 246)",
               "overflow": "hidden",
             }
           }
+          testID="bottom-navigation-bar-content"
         >
           <View
             accessibilityRole="tablist"
@@ -1388,6 +1392,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
       undefined,
     ]
   }
+  testID="bottom-navigation"
 >
   <View
     style={
@@ -1499,10 +1504,11 @@ exports[`renders bottom navigation with scene animation 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "rgba(255, 251, 254, 1)",
+              "backgroundColor": "rgb(243, 237, 246)",
               "overflow": "hidden",
             }
           }
+          testID="bottom-navigation-bar-content"
         >
           <View
             accessibilityRole="tablist"
@@ -2744,6 +2750,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       undefined,
     ]
   }
+  testID="bottom-navigation"
 >
   <View
     style={
@@ -2855,10 +2862,11 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "rgba(255, 251, 254, 1)",
+              "backgroundColor": "rgb(243, 237, 246)",
               "overflow": "hidden",
             }
           }
+          testID="bottom-navigation-bar-content"
         >
           <View
             accessibilityRole="tablist"
@@ -3452,6 +3460,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       undefined,
     ]
   }
+  testID="bottom-navigation"
 >
   <View
     style={
@@ -3563,10 +3572,11 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "rgba(255, 251, 254, 1)",
+              "backgroundColor": "rgb(243, 237, 246)",
               "overflow": "hidden",
             }
           }
+          testID="bottom-navigation-bar-content"
         >
           <View
             accessibilityRole="tablist"
@@ -4498,6 +4508,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       undefined,
     ]
   }
+  testID="bottom-navigation"
 >
   <View
     style={
@@ -4610,10 +4621,11 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "rgba(255, 251, 254, 1)",
+              "backgroundColor": "rgb(243, 237, 246)",
               "overflow": "hidden",
             }
           }
+          testID="bottom-navigation-bar-content"
         >
           <View
             accessibilityRole="tablist"
@@ -5486,6 +5498,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       undefined,
     ]
   }
+  testID="bottom-navigation"
 >
   <View
     style={
@@ -5598,10 +5611,11 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "rgba(255, 251, 254, 1)",
+              "backgroundColor": "rgb(243, 237, 246)",
               "overflow": "hidden",
             }
           }
+          testID="bottom-navigation-bar-content"
         >
           <View
             accessibilityRole="tablist"
@@ -6369,6 +6383,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
       undefined,
     ]
   }
+  testID="bottom-navigation"
 >
   <View
     style={
@@ -6480,10 +6495,11 @@ exports[`renders non-shifting bottom navigation 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "rgba(255, 251, 254, 1)",
+              "backgroundColor": "rgb(243, 237, 246)",
               "overflow": "hidden",
             }
           }
+          testID="bottom-navigation-bar-content"
         >
           <View
             accessibilityRole="tablist"
@@ -7356,6 +7372,7 @@ exports[`renders shifting bottom navigation 1`] = `
       undefined,
     ]
   }
+  testID="bottom-navigation"
 >
   <View
     style={
@@ -7467,10 +7484,11 @@ exports[`renders shifting bottom navigation 1`] = `
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "rgba(255, 251, 254, 1)",
+              "backgroundColor": "rgb(243, 237, 246)",
               "overflow": "hidden",
             }
           }
+          testID="bottom-navigation-bar-content"
         >
           <View
             accessibilityRole="tablist"

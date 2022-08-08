@@ -7,8 +7,11 @@ import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRou
 import { red300 } from '../../styles/themes/v2/colors';
 
 const styles = StyleSheet.create({
-  bgColor: {
+  labelColor: {
     color: red300,
+  },
+  backgroundColor: {
+    backgroundColor: red300,
   },
 });
 
@@ -222,7 +225,7 @@ it('renders custom icon and label with custom colors in shifting bottom navigati
         renderScene={({ route }) => route.title}
         activeColor="#FBF7DB"
         inactiveColor="#853D4B"
-        barStyle={styles.bgColor}
+        barStyle={styles.labelColor}
       />
     )
     .toJSON();
@@ -240,7 +243,7 @@ it('renders custom icon and label with custom colors in non-shifting bottom navi
         renderScene={({ route }) => route.title}
         activeColor="#FBF7DB"
         inactiveColor="#853D4B"
-        barStyle={styles.bgColor}
+        barStyle={styles.labelColor}
       />
     )
     .toJSON();
@@ -314,4 +317,25 @@ it('should have labelMaxFontSizeMultiplier passed to label', () => {
   const label = getAllByText('Route: 0')[0];
 
   expect(label.props.maxFontSizeMultiplier).toBe(labelMaxFontSizeMultiplier);
+});
+
+it('renders custom background color passed to barStyle property', () => {
+  const { getByTestId } = render(
+    <BottomNavigation
+      shifting={false}
+      labeled={true}
+      navigationState={createState(0, 3)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+      barStyle={styles.backgroundColor}
+      testID={'bottom-navigation'}
+    />
+  );
+
+  const wrapper = getByTestId('bottom-navigation-bar-content');
+  expect(wrapper.props.style).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({ backgroundColor: red300 }),
+    ])
+  );
 });
