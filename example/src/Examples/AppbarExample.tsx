@@ -13,6 +13,7 @@ import {
 } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 import { yellowA200 } from '../../../src/styles/themes/v2/colors';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type Props = {
   navigation: StackNavigationProp<{}>;
@@ -21,6 +22,7 @@ type Props = {
 type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
+const MEDIUM_FAB_HEIGHT = 56;
 
 const AppbarExample = ({ navigation }: Props) => {
   const [showLeftIcon, setShowLeftIcon] = React.useState(true);
@@ -33,7 +35,9 @@ const AppbarExample = ({ navigation }: Props) => {
   const [showCalendarIcon, setShowCalendarIcon] = React.useState(false);
   const [showElevated, setShowElevated] = React.useState(false);
 
-  const { isV3 } = useTheme();
+  const theme = useTheme();
+  const { bottom, left, right } = useSafeAreaInsets();
+  const height = theme.isV3 ? 80 : 56;
 
   const isCenterAlignedMode = appbarMode === 'center-aligned';
 
@@ -83,7 +87,24 @@ const AppbarExample = ({ navigation }: Props) => {
     showElevated,
   ]);
 
-  const TextComponent = isV3 ? Text : Paragraph;
+  const TextComponent = theme.isV3 ? Text : Paragraph;
+
+  const renderFAB = () => {
+    return (
+      <FAB
+        mode={theme.isV3 ? 'flat' : 'elevated'}
+        size="medium"
+        icon="plus"
+        onPress={() => {}}
+        style={[
+          styles.fab,
+          theme.isV3
+            ? { top: (height - MEDIUM_FAB_HEIGHT) / 2 }
+            : { bottom: height / 2 + bottom },
+        ]}
+      />
+    );
+  };
 
   const renderDefaultOptions = () => (
     <>
@@ -91,7 +112,7 @@ const AppbarExample = ({ navigation }: Props) => {
         <TextComponent>Left icon</TextComponent>
         <Switch value={showLeftIcon} onValueChange={setShowLeftIcon} />
       </View>
-      {!isV3 && (
+      {!theme.isV3 && (
         <View style={styles.row}>
           <TextComponent>Subtitle</TextComponent>
           <Switch value={showSubtitle} onValueChange={setShowSubtitle} />
@@ -105,7 +126,7 @@ const AppbarExample = ({ navigation }: Props) => {
         <TextComponent>More icon</TextComponent>
         <Switch value={showMoreIcon} onValueChange={setShowMoreIcon} />
       </View>
-      {isV3 && (
+      {theme.isV3 && (
         <View style={styles.row}>
           <TextComponent>Calendar icon</TextComponent>
           <Switch
@@ -123,7 +144,7 @@ const AppbarExample = ({ navigation }: Props) => {
         <TextComponent>Exact Dark Theme</TextComponent>
         <Switch value={showExactTheme} onValueChange={setShowExactTheme} />
       </View>
-      {isV3 && (
+      {theme.isV3 && (
         <View style={styles.row}>
           <TextComponent>Elevated</TextComponent>
           <Switch value={showElevated} onValueChange={setShowElevated} />
@@ -138,14 +159,14 @@ const AppbarExample = ({ navigation }: Props) => {
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
       >
-        {isV3 ? (
+        {theme.isV3 ? (
           <List.Section title="Default options">
             {renderDefaultOptions()}
           </List.Section>
         ) : (
           renderDefaultOptions()
         )}
-        {isV3 && (
+        {theme.isV3 && (
           <List.Section title="Appbar Modes">
             <RadioButton.Group
               value={appbarMode}
@@ -174,15 +195,25 @@ const AppbarExample = ({ navigation }: Props) => {
         )}
       </ScreenWrapper>
       <Appbar
-        style={styles.bottom}
+        style={[
+          styles.bottom,
+          {
+            height: height + bottom,
+            backgroundColor: theme.isV3
+              ? theme.colors.elevation.level2
+              : theme.colors.primary,
+          },
+        ]}
+        safeAreaInsets={{ bottom, left, right }}
         theme={{ mode: showExactTheme ? 'exact' : 'adaptive' }}
       >
         <Appbar.Action icon="archive" onPress={() => {}} />
         <Appbar.Action icon="email" onPress={() => {}} />
         <Appbar.Action icon="label" onPress={() => {}} />
         <Appbar.Action icon="delete" onPress={() => {}} />
+        {theme.isV3 && renderFAB()}
       </Appbar>
-      <FAB icon="reply" onPress={() => {}} style={styles.fab} />
+      {!theme.isV3 && renderFAB()}
     </>
   );
 };
@@ -214,7 +245,6 @@ const styles = StyleSheet.create({
   fab: {
     position: 'absolute',
     right: 16,
-    bottom: 28,
   },
   customColor: {
     backgroundColor: yellowA200,

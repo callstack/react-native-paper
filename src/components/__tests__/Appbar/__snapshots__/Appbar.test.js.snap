@@ -43,7 +43,11 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           "backgroundColor": "rgba(255, 251, 254, 1)",
           "flexDirection": "row",
           "height": 64,
+          "paddingBottom": undefined,
           "paddingHorizontal": 4,
+          "paddingLeft": undefined,
+          "paddingRight": undefined,
+          "paddingTop": undefined,
         }
       }
     >
@@ -390,7 +394,11 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           "backgroundColor": "rgba(255, 251, 254, 1)",
           "flexDirection": "row",
           "height": 64,
+          "paddingBottom": undefined,
           "paddingHorizontal": 4,
+          "paddingLeft": undefined,
+          "paddingRight": undefined,
+          "paddingTop": undefined,
         }
       }
     >
