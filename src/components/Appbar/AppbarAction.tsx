@@ -10,7 +10,7 @@ import IconButton from '../IconButton/IconButton';
 import type { IconSource } from '../Icon';
 import { useTheme } from '../../core/theming';
 
-type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
+export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
   /**
    *  Custom color for action icon.
    */

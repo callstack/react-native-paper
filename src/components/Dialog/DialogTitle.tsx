@@ -5,7 +5,7 @@ import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-type Props = React.ComponentPropsWithRef<typeof Title> & {
+export type Props = React.ComponentPropsWithRef<typeof Title> & {
   /**
    * Title text for the `DialogTitle`.
    */

@@ -10,7 +10,7 @@ import { withTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
 import type { Theme } from '../../types';
 
-type Props = {
+export type Props = {
   /**
    * Determines whether clicking outside the dialog dismiss it.
    */
@@ -114,6 +114,7 @@ const Dialog = ({
         styles.container,
         style,
       ]}
+      theme={theme}
     >
       {React.Children.toArray(children)
         .filter((child) => child != null && typeof child !== 'boolean')

@@ -18,7 +18,7 @@ import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 import { ButtonMode, getButtonColors } from './utils';
 
-type Props = React.ComponentProps<typeof Surface> & {
+export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis.
    * - `text` - flat button without background or outline, used for the lowest priority actions, especially when presenting multiple options.
@@ -85,6 +85,16 @@ type Props = React.ComponentProps<typeof Surface> & {
    * Function to execute on press.
    */
   onPress?: () => void;
+  /**
+   * @supported Available in v5.x
+   * Function to execute as soon as the touchable element is pressed and invoked even before onPress.
+   */
+  onPressIn?: () => void;
+  /**
+   * @supported Available in v5.x
+   * Function to execute as soon as the touch is released even before onPress.
+   */
+  onPressOut?: () => void;
   /**
    * Function to execute on long press.
    */
@@ -162,6 +172,8 @@ const Button = ({
   accessibilityLabel,
   accessibilityHint,
   onPress,
+  onPressIn,
+  onPressOut,
   onLongPress,
   style,
   theme,
@@ -194,7 +206,8 @@ const Button = ({
   }, [isElevationEntitled, elevation, initialElevation]);
 
   const handlePressIn = () => {
-    if (isMode('contained')) {
+    onPressIn?.();
+    if (isV3 ? isMode('elevated') : isMode('contained')) {
       const { scale } = animation;
       Animated.timing(elevation, {
         toValue: activeElevation,
@@ -205,7 +218,8 @@ const Button = ({
   };
 
   const handlePressOut = () => {
-    if (isMode('contained')) {
+    onPressOut?.();
+    if (isV3 ? isMode('elevated') : isMode('contained')) {
       const { scale } = animation;
       Animated.timing(elevation, {
         toValue: initialElevation,

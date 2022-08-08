@@ -16,7 +16,7 @@ import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 import { ListAccordionGroupContext } from './ListAccordionGroup';
 
-type Props = {
+export type Props = {
   /**
    * Title text for the list accordion.
    */

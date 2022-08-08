@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import renderer from 'react-test-renderer';
+import { fireEvent, render } from 'react-native-testing-library';
 import color from 'color';
 import Button from '../Button/Button.tsx';
 import { pink500, black, white } from '../../styles/themes/v2/colors';
@@ -123,6 +124,26 @@ it('renders button with an accessibility hint', () => {
     .toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('should execute onPressIn', () => {
+  const onPressInMock = jest.fn();
+
+  const { getByTestId } = render(
+    <Button onPressIn={onPressInMock} testID="button" />
+  );
+  fireEvent(getByTestId('button'), 'onPressIn');
+  expect(onPressInMock).toHaveBeenCalledTimes(1);
+});
+
+it('should execute onPressOut', () => {
+  const onPressOutMock = jest.fn();
+
+  const { getByTestId } = render(
+    <Button onPressOut={onPressOutMock} testID="button" />
+  );
+  fireEvent(getByTestId('button'), 'onPressOut');
+  expect(onPressOutMock).toHaveBeenCalledTimes(1);
 });
 
 describe('getButtonColors - background color', () => {

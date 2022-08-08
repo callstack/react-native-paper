@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 import { render } from 'react-native-testing-library';
 import color from 'color';
 import Card from '../../Card/Card';
+import Button from '../../Button/Button';
 import { black, white } from '../../../styles/themes/v2/colors';
 import { getCardColors } from '../../Card/utils';
 import { getTheme } from '../../../core/theming';
@@ -26,6 +27,22 @@ describe('Card', () => {
     expect(getByA11yLabel('card').props.style.backgroundColor).toEqual(
       '#0000FF'
     );
+  });
+});
+
+describe('CardActions', () => {
+  it('renders button with passed mode', () => {
+    const { getByTestId } = render(
+      <Card>
+        <Card.Actions>
+          <Button mode="contained" testID="card-action-button">
+            Agree
+          </Button>
+        </Card.Actions>
+      </Card>
+    );
+
+    expect(getByTestId('card-action-button').props.mode).toBe('contained');
   });
 });
 

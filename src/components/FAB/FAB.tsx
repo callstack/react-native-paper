@@ -21,7 +21,7 @@ type FABSize = 'small' | 'medium' | 'large';
 
 type FABMode = 'flat' | 'elevated';
 
-type Props = $RemoveChildren<typeof Surface> & {
+export type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Icon to display for the `FAB`.
    */

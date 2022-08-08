@@ -14,7 +14,7 @@ const version = NativeModules.PlatformConstants
   ? NativeModules.PlatformConstants.reactNativeVersion
   : undefined;
 
-type Props = React.ComponentPropsWithRef<typeof NativeSwitch> & {
+export type Props = React.ComponentPropsWithRef<typeof NativeSwitch> & {
   /**
    * Disable toggling the switch.
    */

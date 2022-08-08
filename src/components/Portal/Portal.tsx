@@ -8,7 +8,7 @@ import {
 import { ThemeProvider, withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-type Props = {
+export type Props = {
   /**
    * Content of the `Portal`.
    */

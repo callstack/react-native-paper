@@ -5,7 +5,7 @@ import { withTheme } from '../core/theming';
 import { black, white } from '../styles/themes/v2/colors';
 import type { $RemoveChildren, Theme } from '../types';
 
-type Props = $RemoveChildren<typeof View> & {
+export type Props = $RemoveChildren<typeof View> & {
   /**
    * @renamed Renamed from 'inset' to 'leftInset` in v5.x
    * Whether divider has a left inset.

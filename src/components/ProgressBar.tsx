@@ -13,7 +13,7 @@ import setColor from 'color';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
-type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Progress value (between 0 and 1).
    */

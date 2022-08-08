@@ -5,7 +5,7 @@ import CheckboxAndroid from './CheckboxAndroid';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-type Props = {
+export type Props = {
   /**
    * Status of checkbox.
    */

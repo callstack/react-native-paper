@@ -18,7 +18,7 @@ import {
   MIN_WIDTH,
 } from './utils';
 
-type Props = {
+export type Props = {
   /**
    * Title text for the `MenuItem`.
    */

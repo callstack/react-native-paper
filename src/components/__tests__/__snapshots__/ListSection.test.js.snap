@@ -16,6 +16,7 @@ exports[`renders list section with custom title style 1`] = `
         "scale": 1,
       },
       "colors": Object {
+        "backdrop": "rgba(50, 47, 55, 0.4)",
         "background": "rgba(255, 251, 254, 1)",
         "elevation": Object {
           "level0": "transparent",
@@ -47,7 +48,6 @@ exports[`renders list section with custom title style 1`] = `
         "primaryContainer": "rgba(234, 221, 255, 1)",
         "secondary": "rgba(98, 91, 113, 1)",
         "secondaryContainer": "rgba(232, 222, 248, 1)",
-        "shadow": "rgba(0, 0, 0, 1)",
         "surface": "rgba(255, 251, 254, 1)",
         "surfaceDisabled": "rgba(28, 27, 31, 0.12)",
         "surfaceVariant": "rgba(231, 224, 236, 1)",
@@ -456,6 +456,7 @@ exports[`renders list section with subheader 1`] = `
         "scale": 1,
       },
       "colors": Object {
+        "backdrop": "rgba(50, 47, 55, 0.4)",
         "background": "rgba(255, 251, 254, 1)",
         "elevation": Object {
           "level0": "transparent",
@@ -487,7 +488,6 @@ exports[`renders list section with subheader 1`] = `
         "primaryContainer": "rgba(234, 221, 255, 1)",
         "secondary": "rgba(98, 91, 113, 1)",
         "secondaryContainer": "rgba(232, 222, 248, 1)",
-        "shadow": "rgba(0, 0, 0, 1)",
         "surface": "rgba(255, 251, 254, 1)",
         "surfaceDisabled": "rgba(28, 27, 31, 0.12)",
         "surfaceVariant": "rgba(231, 224, 236, 1)",
@@ -894,6 +894,7 @@ exports[`renders list section without subheader 1`] = `
         "scale": 1,
       },
       "colors": Object {
+        "backdrop": "rgba(50, 47, 55, 0.4)",
         "background": "rgba(255, 251, 254, 1)",
         "elevation": Object {
           "level0": "transparent",
@@ -925,7 +926,6 @@ exports[`renders list section without subheader 1`] = `
         "primaryContainer": "rgba(234, 221, 255, 1)",
         "secondary": "rgba(98, 91, 113, 1)",
         "secondaryContainer": "rgba(232, 222, 248, 1)",
-        "shadow": "rgba(0, 0, 0, 1)",
         "surface": "rgba(255, 251, 254, 1)",
         "surfaceDisabled": "rgba(28, 27, 31, 0.12)",
         "surfaceVariant": "rgba(231, 224, 236, 1)",

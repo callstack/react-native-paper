@@ -9,7 +9,7 @@ import type { $RemoveChildren, Theme } from '../types';
 
 const DEFAULT_MAX_WIDTH = 960;
 
-type Props = $RemoveChildren<typeof Surface> & {
+export type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Whether banner is currently visible.
    */

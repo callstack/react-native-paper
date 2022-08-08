@@ -15,7 +15,7 @@ import Menu from '../Menu/Menu';
 import Button from '../Button/Button';
 import type { Theme } from '../../types';
 
-type Props = React.ComponentPropsWithRef<typeof View> &
+export type Props = React.ComponentPropsWithRef<typeof View> &
   PaginationControlsProps &
   PaginationDropdownProps & {
     /**

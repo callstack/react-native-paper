@@ -16,7 +16,7 @@ import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 import Badge from '../Badge';
 
-type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * The label text of the item.
    */
