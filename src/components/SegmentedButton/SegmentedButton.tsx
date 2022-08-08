@@ -79,6 +79,13 @@ type Props = {
   testID?: string;
 };
 
+/**
+ * Segmented buttons can be used to select options, switch views or sort elements.
+ *
+ * <div class="screenshots">
+ *   <img class="medium" src="screenshots/segmented-button.png" />
+ * </div>
+ */
 const SegmentedButton = ({
   value,
   status,

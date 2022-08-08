@@ -48,6 +48,7 @@ export const SegmentedButtonGroupContext =
  * Segmented button group allows to control a group of segmented buttons.</br>
  *
  * ## Usage
+ * ### Single select
  * ```js
  * import * as React from 'react';
  * import { SegmentedButton } from 'react-native-paper';
@@ -68,7 +69,7 @@ export const SegmentedButtonGroupContext =
  * export default MyComponent;
  *```
  *
- * ## Multiselect
+ * ### Multiselect
  * ```js
  * import * as React from 'react';
  * import { SegmentedButton } from 'react-native-paper';
