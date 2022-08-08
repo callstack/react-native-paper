@@ -3,7 +3,12 @@ export { MD2Colors };
 
 export { MD3Colors } from './styles/themes/v3/tokens';
 
-export { useTheme, withTheme, ThemeProvider } from './core/theming';
+export {
+  useTheme,
+  withTheme,
+  ThemeProvider,
+  DefaultTheme,
+} from './core/theming';
 
 export * from './styles/themes';
 
