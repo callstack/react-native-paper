@@ -255,6 +255,10 @@ export type Props = {
    * @optional
    */
   theme: Theme;
+  /**
+   * TestID used for testing purposes
+   */
+  testID?: string;
 };
 
 const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animation
@@ -374,6 +378,7 @@ const BottomNavigation = ({
   safeAreaInsets,
   labelMaxFontSizeMultiplier = 1,
   compact = !theme.isV3,
+  testID = 'bottom-navigation',
 }: Props) => {
   const { scale } = theme.animation;
 
@@ -599,17 +604,25 @@ const BottomNavigation = ({
     ? overlay(elevation, colors?.surface)
     : colors?.primary;
 
+  const v2BackgroundColorInterpolation = indexAnim.interpolate({
+    inputRange: routes.map((_, i) => i),
+    // FIXME: does outputRange support ColorValue or just strings?
+    // @ts-expect-error
+    outputRange: routes.map(
+      (route) => getColor({ route }) || approxBackgroundColor
+    ),
+  });
+
+  const v3BackgroundColor =
+    customBackground ||
+    //@ts-ignore TS indicates that MD2Colors does not contain 'elevation' property,
+    // which is true, however 'v3BackgroundColor' is used only for theme version 3.
+    theme.colors.elevation.level2;
+
   const backgroundColor = isV3
-    ? theme.colors.surface
+    ? v3BackgroundColor
     : shifting
-    ? indexAnim.interpolate({
-        inputRange: routes.map((_, i) => i),
-        // FIXME: does outputRange support ColorValue or just strings?
-        // @ts-expect-error
-        outputRange: routes.map(
-          (route) => getColor({ route }) || approxBackgroundColor
-        ),
-      })
+    ? v2BackgroundColorInterpolation
     : approxBackgroundColor;
 
   const isDark =
@@ -653,7 +666,7 @@ const BottomNavigation = ({
   };
 
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container, style]} testID={testID}>
       <View style={[styles.content, { backgroundColor: colors?.background }]}>
         {routes.map((route, index) => {
           if (!loaded.includes(route.key)) {
@@ -758,7 +771,10 @@ const BottomNavigation = ({
         }
         onLayout={onLayout}
       >
-        <Animated.View style={[styles.barContent, { backgroundColor }]}>
+        <Animated.View
+          style={[styles.barContent, { backgroundColor }]}
+          testID={`${testID}-bar-content`}
+        >
           <View
             style={[
               styles.items,
