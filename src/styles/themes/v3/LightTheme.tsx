@@ -1,6 +1,6 @@
 import color from 'color';
 import type { MD3Theme } from '../../../types';
-import { tokens, typescale } from './tokens';
+import { MD3Colors, tokens, typescale } from './tokens';
 
 const { palette, opacity } = tokens.md.ref;
 
@@ -41,10 +41,10 @@ export const MD3LightTheme: MD3Theme = {
     onErrorContainer: palette.error10,
     onBackground: palette.neutral10,
     outline: palette.neutralVariant50,
-    shadow: palette.neutral0,
     inverseSurface: palette.neutral20,
     inverseOnSurface: palette.neutral95,
     inversePrimary: palette.primary80,
+    backdrop: color(MD3Colors.neutralVariant20).alpha(0.4).rgb().string(),
     elevation: {
       level0: 'transparent',
       // Note: Color values with transparency cause RN to transfer shadows to children nodes

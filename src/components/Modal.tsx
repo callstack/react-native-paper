@@ -10,16 +10,14 @@ import {
   View,
   NativeEventSubscription,
 } from 'react-native';
-import color from 'color';
 import {
   getStatusBarHeight,
   getBottomSpace,
 } from 'react-native-iphone-x-helper';
 import Surface from './Surface';
-import { useTheme } from '../core/theming';
+import { withTheme } from '../core/theming';
 import useAnimatedValue from '../utils/useAnimatedValue';
 import { addEventListener } from '../utils/addEventListener';
-import { MD3Colors } from '../styles/themes/v3/tokens';
 
 export type Props = {
   /**
@@ -51,6 +49,14 @@ export type Props = {
    * Use this prop to change the default wrapper style or to override safe area insets with marginTop and marginBottom.
    */
   style?: StyleProp<ViewStyle>;
+  /**
+   * @optional
+   */
+  theme: ReactNativePaper.Theme;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 const DEFAULT_DURATION = 220;
@@ -96,7 +102,7 @@ const BOTTOM_INSET = getBottomSpace();
  * export default MyComponent;
  * ```
  */
-export default function Modal({
+function Modal({
   dismissable = true,
   visible = false,
   overlayAccessibilityLabel = 'Close modal',
@@ -104,14 +110,14 @@ export default function Modal({
   children,
   contentContainerStyle,
   style,
+  theme,
+  testID = 'modal',
 }: Props) {
   const visibleRef = React.useRef(visible);
 
   React.useEffect(() => {
     visibleRef.current = visible;
   });
-
-  const theme = useTheme();
 
   const { scale } = theme.animation;
 
@@ -209,6 +215,7 @@ export default function Modal({
       accessibilityLiveRegion="polite"
       style={StyleSheet.absoluteFill}
       onAccessibilityEscape={hideModal}
+      testID={testID}
     >
       <TouchableWithoutFeedback
         accessibilityLabel={overlayAccessibilityLabel}
@@ -218,12 +225,11 @@ export default function Modal({
         importantForAccessibility="no"
       >
         <Animated.View
+          testID={`${testID}-backdrop`}
           style={[
             styles.backdrop,
             {
-              backgroundColor: theme.isV3
-                ? color(MD3Colors.neutralVariant20).alpha(0.4).rgb().string()
-                : theme.colors?.backdrop,
+              backgroundColor: theme.colors?.backdrop,
               opacity,
             },
           ]}
@@ -252,6 +258,8 @@ export default function Modal({
     </Animated.View>
   );
 }
+
+export default withTheme(Modal);
 
 const styles = StyleSheet.create({
   backdrop: {

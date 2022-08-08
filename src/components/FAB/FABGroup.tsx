@@ -22,13 +22,14 @@ export type Props = {
    * An action item should contain the following properties:
    * - `icon`: icon to display (required)
    * - `label`: optional label text
-   * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `color`: custom icon color of the action item
    * - `labelTextColor`: custom label text color of the action item
+   * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
    * - `labelStyle`: pass additional styles for the fab item label, for example, `backgroundColor`
-   * - `size`: size of action item. Defaults to `small`. @supported Available in v5.x
    * - `onPress`: callback that is called when `FAB` is pressed (required)
+   * - `size`: size of action item. Defaults to `small`. @supported Available in v5.x
+   * - `testID`: testID to be used on tests
    */
   actions: Array<{
     icon: IconSource;
@@ -55,6 +56,10 @@ export type Props = {
    * Custom color for the `FAB`.
    */
   color?: string;
+  /**
+   * Custom backdrop color for opened speed dial background.
+   */
+  backdropColor?: string;
   /**
    * Function to execute on pressing the `FAB`.
    */
@@ -170,6 +175,7 @@ const FABGroup = ({
   onStateChange,
   color: colorProp,
   variant = 'primary',
+  backdropColor: customBackdropColor,
 }: Props) => {
   const { current: backdrop } = React.useRef<Animated.Value>(
     new Animated.Value(0)
@@ -238,7 +244,7 @@ const FABGroup = ({
   const toggle = () => onStateChange({ open: !open });
 
   const { labelColor, backdropColor, stackedFABBackgroundColor } =
-    getFABGroupColors({ theme });
+    getFABGroupColors({ theme, customBackdropColor });
 
   const backdropOpacity = open
     ? backdrop.interpolate({

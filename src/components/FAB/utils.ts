@@ -305,7 +305,16 @@ const getLabelColor = ({ theme }: { theme: Theme }) => {
   return color(theme.colors.text).fade(0.54).rgb().string();
 };
 
-const getBackdropColor = ({ theme }: { theme: Theme }) => {
+const getBackdropColor = ({
+  theme,
+  customBackdropColor,
+}: {
+  theme: Theme;
+  customBackdropColor?: string;
+}) => {
+  if (customBackdropColor) {
+    return customBackdropColor;
+  }
   if (theme.isV3) {
     return color(theme.colors.background).alpha(0.95).rgb().string();
   }
@@ -319,10 +328,16 @@ const getStackedFABBackgroundColor = ({ theme }: { theme: Theme }) => {
   return theme.colors.surface;
 };
 
-export const getFABGroupColors = ({ theme }: { theme: Theme }) => {
+export const getFABGroupColors = ({
+  theme,
+  customBackdropColor,
+}: {
+  theme: Theme;
+  customBackdropColor?: string;
+}) => {
   return {
     labelColor: getLabelColor({ theme }),
-    backdropColor: getBackdropColor({ theme }),
+    backdropColor: getBackdropColor({ theme, customBackdropColor }),
     stackedFABBackgroundColor: getStackedFABBackgroundColor({ theme }),
   };
 };

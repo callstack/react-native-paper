@@ -66,10 +66,10 @@ export type MD3Colors = {
   onErrorContainer: string;
   onBackground: string;
   outline: string;
-  shadow: string;
   inverseSurface: string;
   inverseOnSurface: string;
   inversePrimary: string;
+  backdrop: string;
   elevation: MD3ElevationColors;
 };
 
