@@ -14,7 +14,7 @@ import type { IconSource } from '../Icon';
 import type { Theme } from '../../types';
 import { getToggleButtonColor } from './utils';
 
-type Props = {
+export type Props = {
   /**
    * Icon to display for the `ToggleButton`.
    */

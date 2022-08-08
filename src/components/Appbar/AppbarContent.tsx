@@ -18,7 +18,7 @@ import { white } from '../../styles/themes/v2/colors';
 import type { $RemoveChildren, MD3TypescaleKey, Theme } from '../../types';
 import { modeTextVariant } from './utils';
 
-type Props = $RemoveChildren<typeof View> & {
+export type Props = $RemoveChildren<typeof View> & {
   /**
    * Custom color for the text.
    */

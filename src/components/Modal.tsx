@@ -21,7 +21,7 @@ import useAnimatedValue from '../utils/useAnimatedValue';
 import { addEventListener } from '../utils/addEventListener';
 import { MD3Colors } from '../styles/themes/v3/tokens';
 
-type Props = {
+export type Props = {
   /**
    * Determines whether clicking outside the modal dismiss it.
    */

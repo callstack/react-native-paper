@@ -12,7 +12,7 @@ import PortalHost from '../components/Portal/PortalHost';
 import { addEventListener } from '../utils/addEventListener';
 import type { ThemeProp } from '../types';
 
-type Props = {
+export type Props = {
   children: React.ReactNode;
   theme?: ThemeProp;
   settings?: Settings;

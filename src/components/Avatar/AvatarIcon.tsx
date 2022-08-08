@@ -8,7 +8,7 @@ import type { Theme } from '../../types';
 
 const defaultSize = 64;
 
-type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Icon to display for the `Avatar`.
    */

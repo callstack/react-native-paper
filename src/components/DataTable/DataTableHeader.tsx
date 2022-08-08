@@ -5,7 +5,7 @@ import { black, white } from '../../styles/themes/v2/colors';
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
-type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Content of the `DataTableHeader`.
    */

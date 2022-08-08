@@ -57,7 +57,7 @@ type TouchableProps = TouchableWithoutFeedbackProps & {
   rippleColor?: string;
 };
 
-type Props = {
+export type Props = {
   /**
    * Whether the shifting style is used, the active tab icon shifts up to show the label and the inactive tabs won't have a label.
    *

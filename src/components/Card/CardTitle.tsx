@@ -13,7 +13,7 @@ import Caption from '../Typography/v2/Caption';
 import Title from '../Typography/v2/Title';
 import Text from '../Typography/Text';
 
-type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Text for the title. Note that this will only accept a string or `<Text>`-based node.
    */
