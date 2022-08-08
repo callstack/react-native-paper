@@ -613,14 +613,8 @@ const BottomNavigation = ({
     ),
   });
 
-  const v3BackgroundColor =
-    customBackground ||
-    //@ts-ignore TS indicates that MD2Colors does not contain 'elevation' property,
-    // which is true, however 'v3BackgroundColor' is used only for theme version 3.
-    theme.colors.elevation.level2;
-
   const backgroundColor = isV3
-    ? v3BackgroundColor
+    ? customBackground || theme.colors.elevation.level2
     : shifting
     ? v2BackgroundColorInterpolation
     : approxBackgroundColor;
