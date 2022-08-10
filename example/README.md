@@ -2,7 +2,7 @@
 
 ## React Native App
 
-You can run the React Native app with [this Snack](https://snack.expo.dev/@react-native-paper/github.com-callstack-react-native-paper:example). Snack allows you to make changes to the example app directly in the online editor and see changes on your phone instantly using the [Expo](https://expo.dev/) app without having to install or setup anything on your computer. You can also "Export" it to download as a standalone Expo app to run locally.
+You can run the React Native app with [this Snack](https://snack.expo.dev/@react-native-paper/react-native-paper-example_v5). Snack allows you to make changes to the example app directly in the online editor and see changes on your phone instantly using the [Expo](https://expo.dev/) app without having to install or setup anything on your computer. You can also "Export" it to download as a standalone Expo app to run locally.
 
 If you want to run the example from the repo,
 
