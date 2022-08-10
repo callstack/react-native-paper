@@ -45,7 +45,7 @@ const AppbarExample = ({ navigation }: Props) => {
     navigation.setOptions({
       header: () => (
         <Appbar.Header
-          style={[showCustomColor ? styles.customColor : null]}
+          style={showCustomColor ? styles.customColor : null}
           theme={{
             mode: showExactTheme ? 'exact' : 'adaptive',
           }}
