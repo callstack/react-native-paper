@@ -23,7 +23,7 @@ import {
 
 const DEFAULT_PADDING = 9;
 
-type Props = {
+export type Props = {
   /**
    * Icon to display for the `SegmentedButton`.
    */

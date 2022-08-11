@@ -4,8 +4,9 @@ import type { Theme } from '../../types';
 import { withTheme } from '../../core/theming';
 import SegmentedButton from './SegmentedButton';
 import { getDisabledSegmentedButtonStyle } from './utils';
+import type { SegmentedButtonProps } from 'react-native-paper';
 
-type Props = {
+export type Props = {
   /**
    * Function to execute on selection change.
    */
@@ -17,12 +18,7 @@ type Props = {
   /**
    * React elements containing segmented buttons.
    */
-  children: React.ReactElement<{
-    disabled?: boolean;
-    segment: 'first' | 'last' | 'default';
-    style: StyleProp<ViewStyle>;
-    multiselect?: boolean;
-  }>[];
+  children: React.ReactElement<SegmentedButtonProps>[];
   /**
    * Support multiple selected options.
    */
@@ -122,7 +118,7 @@ const SegmentedButtonGroup = ({
               index: i,
             });
             const segment =
-              i === 0 ? 'first' : i === count - 1 ? 'last' : 'default';
+              i === 0 ? 'first' : i === count - 1 ? 'last' : undefined;
 
             return React.cloneElement(child, {
               segment,

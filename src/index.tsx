@@ -144,6 +144,8 @@ export type { Props as ParagraphProps } from './components/Typography/v2/Paragra
 export type { Props as SubheadingProps } from './components/Typography/v2/Subheading';
 export type { Props as TitleProps } from './components/Typography/v2/Title';
 export type { Props as TextProps } from './components/Typography/Text';
+export type { Props as SegmentedButtonProps } from './components/SegmentedButton/SegmentedButton';
+export type { Props as SegmentedButtonGroupProps } from './components/SegmentedButton/SegmentedButtonGroup';
 
 export type {
   MD2Theme,
