@@ -128,9 +128,7 @@ it('correctly applies error state Outline TextInput', () => {
   );
 
   const outline = getByTestId('text-input-outline');
-  expect(outline.props.style).toEqual(
-    expect.arrayContaining([expect.objectContaining({ borderWidth: 2 })])
-  );
+  expect(outline).toHaveStyle({ borderWidth: 2 });
 });
 
 it('correctly applies focused state Outline TextInput', () => {
@@ -145,15 +143,11 @@ it('correctly applies focused state Outline TextInput', () => {
   );
 
   const outline = getByTestId('text-input-outline');
-  expect(outline.props.style).toEqual(
-    expect.arrayContaining([expect.objectContaining({ borderWidth: 2 })])
-  );
+  expect(outline).toHaveStyle({ borderWidth: 2 });
 
   fireEvent(getByTestId('text-input-outlined'), 'focus');
 
-  expect(outline.props.style).toEqual(
-    expect.arrayContaining([expect.objectContaining({ borderWidth: 2 })])
-  );
+  expect(outline).toHaveStyle({ borderWidth: 2 });
 });
 
 it('contains patch spacing for flat input when ios and multiline', () => {

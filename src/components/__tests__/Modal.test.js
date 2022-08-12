@@ -16,8 +16,8 @@ describe('Modal', () => {
       />
     );
 
-    expect(getByTestId('modal-backdrop').props.style).toEqual(
-      expect.objectContaining({ backgroundColor: 'transparent' })
-    );
+    expect(getByTestId('modal-backdrop')).toHaveStyle({
+      backgroundColor: 'transparent',
+    });
   });
 });

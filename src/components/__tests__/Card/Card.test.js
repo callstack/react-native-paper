@@ -24,9 +24,9 @@ describe('Card', () => {
       />
     );
 
-    expect(getByLabelText('card').props.style.backgroundColor).toEqual(
-      '#0000FF'
-    );
+    expect(getByLabelText('card')).toHaveStyle({
+      backgroundColor: '#0000FF',
+    });
   });
 });
 
