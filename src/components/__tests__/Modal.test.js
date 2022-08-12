@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render } from 'react-native-testing-library';
+import { render } from '@testing-library/react-native';
 import Modal from '../Modal';
 
 describe('Modal', () => {
@@ -17,9 +17,7 @@ describe('Modal', () => {
     );
 
     expect(getByTestId('modal-backdrop').props.style).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ backgroundColor: 'transparent' }),
-      ])
+      expect.objectContaining({ backgroundColor: 'transparent' })
     );
   });
 });

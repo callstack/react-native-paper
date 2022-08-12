@@ -334,8 +334,6 @@ it('renders custom background color passed to barStyle property', () => {
 
   const wrapper = getByTestId('bottom-navigation-bar-content');
   expect(wrapper.props.style).toEqual(
-    expect.arrayContaining([
-      expect.objectContaining({ backgroundColor: red300 }),
-    ])
+    expect.objectContaining({ backgroundColor: red300 })
   );
 });

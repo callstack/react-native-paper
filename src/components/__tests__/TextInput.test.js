@@ -44,9 +44,9 @@ it('correctly renders left-side icon adornment, and right-side affix adornment',
       }
     />
   );
-  expect(() => getByText(affixTextValue)).not.toThrow();
-  expect(() => getByTestId('left-icon-adornment')).not.toThrow();
-  expect(() => getByTestId('right-affix-adornment')).not.toThrow();
+  expect(getByText(affixTextValue)).toBeTruthy();
+  expect(getByTestId('left-icon-adornment')).toBeTruthy();
+  expect(getByTestId('right-affix-adornment')).toBeTruthy();
   expect(toJSON()).toMatchSnapshot();
 });
 
@@ -70,9 +70,9 @@ it('correctly renders left-side icon adornment, and right-side affix adornment '
       }
     />
   );
-  expect(() => getByText(affixTextValue)).not.toThrow();
-  expect(() => getByTestId('right-icon-adornment')).not.toThrow();
-  expect(() => getByTestId('left-affix-adornment')).not.toThrow();
+  expect(getByText(affixTextValue)).toBeTruthy();
+  expect(getByTestId('right-icon-adornment')).toBeTruthy();
+  expect(getByTestId('left-affix-adornment')).toBeTruthy();
   expect(toJSON()).toMatchSnapshot();
 });
 
@@ -167,7 +167,7 @@ it('contains patch spacing for flat input when ios and multiline', () => {
       onChangeText={(text) => this.setState({ text })}
     />
   );
-  expect(() => getByTestId('patch-container')).not.toThrow();
+  expect(getByTestId('patch-container')).toBeTruthy();
 });
 
 it('correctly applies a component as the text label', () => {

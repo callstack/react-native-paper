@@ -102,13 +102,13 @@ it('renders data table pagination with fast-forward buttons', () => {
     />
   );
 
-  expect(() => getByLabelText('page-first')).not.toThrow();
-  expect(() => getByLabelText('page-last')).not.toThrow();
+  expect(getByLabelText('page-first')).toBeTruthy();
+  expect(getByLabelText('page-last')).toBeTruthy();
   expect(toJSON()).toMatchSnapshot();
 });
 
 it('renders data table pagination without options select', () => {
-  const { getByLabelText } = render(
+  const { queryByLabelText } = render(
     <DataTable.Pagination
       page={3}
       numberOfPages={15}
@@ -118,7 +118,7 @@ it('renders data table pagination without options select', () => {
     />
   );
 
-  expect(() => getByLabelText('Options Select')).toThrow();
+  expect(queryByLabelText('Options Select')).toBeFalsy();
 });
 
 it('renders data table pagination with options select', () => {
@@ -136,8 +136,8 @@ it('renders data table pagination with options select', () => {
     />
   );
 
-  expect(() => getByLabelText('Options Select')).not.toThrow();
-  expect(() => getByLabelText('selectPageDropdownLabel')).not.toThrow();
+  expect(getByLabelText('Options Select')).toBeTruthy();
+  expect(getByLabelText('selectPageDropdownLabel')).toBeTruthy();
 
   expect(toJSON()).toMatchSnapshot();
 });
