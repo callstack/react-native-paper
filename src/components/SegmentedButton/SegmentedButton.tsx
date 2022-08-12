@@ -208,7 +208,7 @@ const SegmentedButton = ({
   };
 
   return (
-    <View style={[buttonStyle, [styles.button, style]]}>
+    <View style={[buttonStyle, styles.button, style]}>
       <TouchableRipple
         borderless
         delayPressIn={0}
@@ -254,7 +254,7 @@ const SegmentedButton = ({
 
 const styles = StyleSheet.create({
   button: {
-    minWidth: 64,
+    minWidth: 76,
     borderStyle: 'solid',
   },
   label: {

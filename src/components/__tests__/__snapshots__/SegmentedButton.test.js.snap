@@ -11,13 +11,11 @@ exports[`renders checked segmented button with selected check 1`] = `
         "borderRightWidth": 0,
         "borderWidth": 1,
       },
-      Array [
-        Object {
-          "borderStyle": "solid",
-          "minWidth": 64,
-        },
-        undefined,
-      ],
+      Object {
+        "borderStyle": "solid",
+        "minWidth": 76,
+      },
+      undefined,
     ]
   }
 >
@@ -172,13 +170,11 @@ exports[`renders disabled segmented button 1`] = `
         "borderRightWidth": 0,
         "borderWidth": 1,
       },
-      Array [
-        Object {
-          "borderStyle": "solid",
-          "minWidth": 64,
-        },
-        undefined,
-      ],
+      Object {
+        "borderStyle": "solid",
+        "minWidth": 76,
+      },
+      undefined,
     ]
   }
 >
@@ -300,13 +296,11 @@ exports[`renders segmented button 1`] = `
         "borderRightWidth": 0,
         "borderWidth": 1,
       },
-      Array [
-        Object {
-          "borderStyle": "solid",
-          "minWidth": 64,
-        },
-        undefined,
-      ],
+      Object {
+        "borderStyle": "solid",
+        "minWidth": 76,
+      },
+      undefined,
     ]
   }
 >
@@ -440,17 +434,15 @@ exports[`renders segmented button with a group 1`] = `
           "borderTopRightRadius": 0,
           "borderWidth": 1,
         },
+        Object {
+          "borderStyle": "solid",
+          "minWidth": 76,
+        },
         Array [
           Object {
-            "borderStyle": "solid",
-            "minWidth": 64,
+            "borderRightWidth": 1,
           },
-          Array [
-            Object {
-              "borderRightWidth": 1,
-            },
-            undefined,
-          ],
+          undefined,
         ],
       ]
     }
@@ -606,15 +598,13 @@ exports[`renders segmented button with a group 1`] = `
           "borderTopLeftRadius": 0,
           "borderWidth": 1,
         },
+        Object {
+          "borderStyle": "solid",
+          "minWidth": 76,
+        },
         Array [
-          Object {
-            "borderStyle": "solid",
-            "minWidth": 64,
-          },
-          Array [
-            Object {},
-            undefined,
-          ],
+          Object {},
+          undefined,
         ],
       ]
     }
