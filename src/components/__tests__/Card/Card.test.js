@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { render } from 'react-native-testing-library';
+import { render } from '@testing-library/react-native';
 import color from 'color';
 import Card from '../../Card/Card';
 import Button from '../../Button/Button';
@@ -16,7 +16,7 @@ describe('Card', () => {
   });
 
   it('renders with a custom theme', () => {
-    const { getByA11yLabel } = render(
+    const { getByLabelText } = render(
       <Card
         mode="outlined"
         accessibilityLabel="card"
@@ -24,7 +24,7 @@ describe('Card', () => {
       />
     );
 
-    expect(getByA11yLabel('card').props.style.backgroundColor).toEqual(
+    expect(getByLabelText('card').props.style.backgroundColor).toEqual(
       '#0000FF'
     );
   });

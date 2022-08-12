@@ -4,8 +4,6 @@ import { RadioButtonContext } from '../../RadioButton/RadioButtonGroup';
 import RadioButton from '../../RadioButton';
 
 describe('RadioButton', () => {
-  afterEach(() => jest.resetModules());
-
   describe('on default platform', () => {
     beforeAll(() => {
       jest.mock('react-native', () => {

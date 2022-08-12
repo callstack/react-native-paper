@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Easing, Animated } from 'react-native';
-import { fireEvent, render } from 'react-native-testing-library';
+import { fireEvent, render } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
 import BottomNavigation from '../BottomNavigation/BottomNavigation.tsx';
 import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRouteScreen.tsx';

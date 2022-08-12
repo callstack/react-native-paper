@@ -1001,6 +1001,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         "top": null,
       }
     }
+    testID="left-affix-adornment"
   >
     <Text
       maxFontSizeMultiplier={1.5}
@@ -1125,6 +1126,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
                 },
               ]
             }
+            testID="right-icon-adornment"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -1441,6 +1443,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
                 },
               ]
             }
+            testID="left-icon-adornment"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -1479,6 +1482,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         "top": null,
       }
     }
+    testID="right-affix-adornment"
   >
     <Text
       maxFontSizeMultiplier={1.5}

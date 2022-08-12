@@ -1,7 +1,7 @@
 import * as React from 'react';
 import color from 'color';
 import { StyleSheet, Text, Platform } from 'react-native';
-import { fireEvent, render } from 'react-native-testing-library';
+import { fireEvent, render } from '@testing-library/react-native';
 import TextInput from '../TextInput/TextInput';
 import { red500 } from '../../styles/themes/v2/colors';
 import {
