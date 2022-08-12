@@ -80,6 +80,7 @@ export type Props = {
 };
 
 /**
+ * @supported Available in v5.x
  * Segmented buttons can be used to select options, switch views or sort elements.
  *
  * <div class="screenshots">

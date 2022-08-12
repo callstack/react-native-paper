@@ -41,6 +41,7 @@ export const SegmentedButtonGroupContext =
   );
 
 /**
+ * @supported Available in v5.x
  * Segmented button group allows to control a group of segmented buttons.</br>
  *
  * ## Usage
@@ -111,7 +112,7 @@ const SegmentedButtonGroup = ({
     >
       <View style={[styles.row, style]}>
         {React.Children.map(children, (child, i) => {
-          if (child && child.type === SegmentedButton) {
+          if (child?.type === SegmentedButton) {
             const disabledChildStyle = getDisabledSegmentedButtonStyle({
               theme,
               children,

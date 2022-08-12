@@ -55,7 +55,6 @@ export type Props = {
 };
 
 /**
- * @supported Available in v5.x
  * Toggle buttons can be used to group related options. To emphasize groups of related toggle buttons,
  * a group should share a common container.
  *
