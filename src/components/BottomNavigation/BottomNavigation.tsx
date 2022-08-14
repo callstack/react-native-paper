@@ -750,7 +750,9 @@ const BottomNavigation = ({
                   ],
                   // Absolutely position the navigation bar so that the content is below it
                   // This is needed to avoid gap at bottom when the navigation bar is hidden
-                  position: keyboardVisible ? 'absolute' : null,
+                  ...(Platform.OS === 'android' && {
+                    position: keyboardVisible ? 'absolute' : null,
+                  }),
                 }
               : null,
             barStyle,
