@@ -290,15 +290,10 @@ it('should have appropriate display style according to the visibility', () => {
 
   const wrapper = getByTestId('RouteScreen: 0');
 
-  expect(wrapper.props.style).toEqual(
-    expect.arrayContaining([expect.objectContaining({ display: 'flex' })])
-  );
+  expect(wrapper).toHaveStyle({ display: 'flex' });
 
   rerender(<BottomNavigationRouteScreen visibility={0} index={0} />);
-
-  expect(wrapper.props.style).toEqual(
-    expect.arrayContaining([expect.objectContaining({ display: 'none' })])
-  );
+  expect(wrapper).toHaveStyle({ display: 'none' });
 });
 
 it('should have labelMaxFontSizeMultiplier passed to label', () => {
@@ -333,9 +328,5 @@ it('renders custom background color passed to barStyle property', () => {
   );
 
   const wrapper = getByTestId('bottom-navigation-bar-content');
-  expect(wrapper.props.style).toEqual(
-    expect.arrayContaining([
-      expect.objectContaining({ backgroundColor: red300 }),
-    ])
-  );
+  expect(wrapper).toHaveStyle({ backgroundColor: red300 });
 });

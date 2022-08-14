@@ -24,9 +24,9 @@ describe('Card', () => {
       />
     );
 
-    expect(getByLabelText('card').props.style.backgroundColor).toEqual(
-      '#0000FF'
-    );
+    expect(getByLabelText('card')).toHaveStyle({
+      backgroundColor: '#0000FF',
+    });
   });
 });
 
@@ -34,15 +34,15 @@ describe('CardActions', () => {
   it('renders button with passed mode', () => {
     const { getByTestId } = render(
       <Card>
-        <Card.Actions>
-          <Button mode="contained" testID="card-action-button">
-            Agree
-          </Button>
+        <Card.Actions testID="card-actions">
+          <Button mode="contained">Agree</Button>
         </Card.Actions>
       </Card>
     );
 
-    expect(getByTestId('card-action-button').props.mode).toBe('contained');
+    expect(getByTestId('card-actions').props.children[0].props.mode).toBe(
+      'contained'
+    );
   });
 });
 

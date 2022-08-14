@@ -56,6 +56,7 @@
     "@callstack/eslint-config": "^9.0.0",
     "@commitlint/config-conventional": "^8.3.4",
     "@release-it/conventional-changelog": "^1.1.0",
+    "@testing-library/jest-native": "^4.0.11",
     "@testing-library/react-native": "11.0.0",
     "@types/color": "^3.0.0",
     "@types/jest": "^24.0.13",
@@ -113,6 +114,7 @@
     "setupFiles": [
       "<rootDir>/testSetup.js"
     ],
+    "setupFilesAfterEnv": ["@testing-library/jest-native/extend-expect"],
     "cacheDirectory": "./cache/jest",
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",
