@@ -69,6 +69,7 @@ const TextInputFlat = ({
   left,
   right,
   placeholderTextColor,
+  testID = 'text-input',
   ...rest
 }: ChildTextInputProps) => {
   const isAndroid = Platform.OS === 'android';
@@ -258,6 +259,7 @@ const TextInputFlat = ({
     errorColor,
     roundness,
     maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
+    testID,
   };
   const affixTopPosition = {
     [AdornmentSide.Left]: leftAffixTopPosition,
@@ -328,7 +330,7 @@ const TextInputFlat = ({
         )}
         <InputLabel parentState={parentState} labelProps={labelProps} />
         {render?.({
-          testID: 'text-input-flat',
+          testID: `${testID}-flat`,
           ...rest,
           ref: innerRef,
           onChangeText,

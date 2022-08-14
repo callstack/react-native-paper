@@ -67,6 +67,7 @@ const TextInputOutlined = ({
   left,
   right,
   placeholderTextColor,
+  testID = 'text-input',
   ...rest
 }: ChildTextInputProps) => {
   const adornmentConfig = getAdornmentConfig({ left, right });
@@ -202,6 +203,7 @@ const TextInputOutlined = ({
     labelTranslationXOffset,
     roundness,
     maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
+    testID,
   };
 
   const minHeight = (height ||
@@ -299,14 +301,13 @@ const TextInputOutlined = ({
           ]}
         >
           <InputLabel
-            mode="outlined"
             parentState={parentState}
             labelProps={labelProps}
             labelBackground={LabelBackground}
             maxFontSizeMultiplier={rest.maxFontSizeMultiplier}
           />
           {render?.({
-            testID: 'text-input-outlined',
+            testID: `${testID}-outlined`,
             ...rest,
             ref: innerRef,
             onChangeText,

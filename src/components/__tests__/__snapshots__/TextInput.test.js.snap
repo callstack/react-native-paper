@@ -98,6 +98,7 @@ exports[`correctly applies a component as the text label 1`] = `
             "writingDirection": "ltr",
           }
         }
+        testID="text-input-label-active"
       >
         <Text
           style={
@@ -115,7 +116,7 @@ exports[`correctly applies a component as the text label 1`] = `
         numberOfLines={1}
         style={
           Object {
-            "color": "rgba(103, 80, 164, 1)",
+            "color": "rgba(73, 69, 79, 1)",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
@@ -141,6 +142,7 @@ exports[`correctly applies a component as the text label 1`] = `
             "writingDirection": "ltr",
           }
         }
+        testID="text-input-label-inactive"
       >
         <Text
           style={
@@ -299,6 +301,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "writingDirection": "ltr",
           }
         }
+        testID="text-input-label-active"
       >
         Flat input
       </Text>
@@ -308,7 +311,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
         numberOfLines={1}
         style={
           Object {
-            "color": "rgba(103, 80, 164, 1)",
+            "color": "rgba(73, 69, 79, 1)",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
@@ -334,6 +337,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "writingDirection": "ltr",
           }
         }
+        testID="text-input-label-inactive"
       >
         Flat input
       </Text>
@@ -533,6 +537,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "writingDirection": "ltr",
             }
           }
+          testID="text-input-label-active"
         >
           Outline Input
         </Text>
@@ -567,6 +572,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "writingDirection": "ltr",
             }
           }
+          testID="text-input-label-inactive"
         >
           Outline Input
         </Text>
@@ -716,6 +722,7 @@ exports[`correctly applies textAlign center 1`] = `
             "writingDirection": "ltr",
           }
         }
+        testID="text-input-label-active"
       >
         Flat input
       </Text>
@@ -725,7 +732,7 @@ exports[`correctly applies textAlign center 1`] = `
         numberOfLines={1}
         style={
           Object {
-            "color": "rgba(103, 80, 164, 1)",
+            "color": "rgba(73, 69, 79, 1)",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
@@ -751,6 +758,7 @@ exports[`correctly applies textAlign center 1`] = `
             "writingDirection": "ltr",
           }
         }
+        testID="text-input-label-inactive"
       >
         Flat input
       </Text>
@@ -901,6 +909,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "writingDirection": "ltr",
           }
         }
+        testID="text-input-label-active"
       >
         Flat input
       </Text>
@@ -910,7 +919,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         numberOfLines={1}
         style={
           Object {
-            "color": "rgba(103, 80, 164, 1)",
+            "color": "rgba(73, 69, 79, 1)",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
@@ -936,6 +945,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "writingDirection": "ltr",
           }
         }
+        testID="text-input-label-inactive"
       >
         Flat input
       </Text>
@@ -1253,6 +1263,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "writingDirection": "ltr",
           }
         }
+        testID="text-input-label-active"
       >
         Flat input
       </Text>
@@ -1262,7 +1273,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         numberOfLines={1}
         style={
           Object {
-            "color": "rgba(103, 80, 164, 1)",
+            "color": "rgba(73, 69, 79, 1)",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
@@ -1288,6 +1299,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "writingDirection": "ltr",
           }
         }
+        testID="text-input-label-inactive"
       >
         Flat input
       </Text>

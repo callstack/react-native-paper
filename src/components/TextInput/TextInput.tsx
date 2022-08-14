@@ -132,6 +132,10 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    * @optional
    */
   theme: Theme;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 interface CompoundedComponent

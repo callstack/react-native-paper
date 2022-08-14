@@ -176,6 +176,40 @@ it('correctly applies a component as the text label', () => {
   expect(toJSON()).toMatchSnapshot();
 });
 
+it('renders label with correct color when active', () => {
+  const { getByTestId } = render(
+    <TextInput
+      label="Flat input"
+      placeholder="Type something"
+      value={'Some test value'}
+      onChangeText={(text) => this.setState({ text })}
+      testID={'text-input'}
+    />
+  );
+
+  fireEvent(getByTestId('text-input-flat'), 'focus');
+
+  expect(getByTestId('text-input-label-active')).toHaveStyle({
+    color: getTheme().colors.primary,
+  });
+});
+
+it('renders label with correct color when inactive', () => {
+  const { getByTestId } = render(
+    <TextInput
+      label="Flat input"
+      placeholder="Type something"
+      value={'Some test value'}
+      onChangeText={(text) => this.setState({ text })}
+      testID={'text-input'}
+    />
+  );
+
+  expect(getByTestId('text-input-label-inactive')).toHaveStyle({
+    color: getTheme().colors.onSurfaceVariant,
+  });
+});
+
 describe('maxFontSizeMultiplier', () => {
   const createInput = (type, maxFontSizeMultiplier) => {
     return (
