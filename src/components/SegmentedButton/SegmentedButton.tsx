@@ -49,10 +49,6 @@ export type Props = {
    */
   label?: string;
   /**
-   * Support multiple selected options.
-   */
-  multiSelect?: boolean;
-  /**
    * Status of button.
    */
   status?: 'checked' | 'unchecked';
@@ -94,7 +90,6 @@ const SegmentedButton = ({
   accessibilityLabel,
   disabled,
   style,
-  multiSelect,
   showSelectedCheck,
   icon,
   testID,
@@ -196,7 +191,7 @@ const SegmentedButton = ({
       return;
     }
 
-    if (multiSelect && Array.isArray(context.value)) {
+    if (context.multiSelect && Array.isArray(context.value)) {
       context.onValueChange(
         checked
           ? [...context.value.filter((val) => value !== val)]

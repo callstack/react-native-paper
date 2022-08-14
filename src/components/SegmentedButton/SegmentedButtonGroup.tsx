@@ -32,6 +32,7 @@ export type Props = {
 
 type SegmentedButtonContextType = {
   value: string | string[];
+  multiSelect?: boolean;
   onValueChange: (item: string | string[]) => void;
 };
 
@@ -107,6 +108,7 @@ const SegmentedButtonGroup = ({
       value={{
         value,
         onValueChange,
+        multiSelect,
       }}
     >
       <View style={[styles.row, style]}>
@@ -122,7 +124,6 @@ const SegmentedButtonGroup = ({
 
             return React.cloneElement(child, {
               segment,
-              multiSelect,
               style: [disabledChildStyle, child.props.style],
             });
           }
