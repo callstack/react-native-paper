@@ -117,7 +117,7 @@ function appendVersionBanner() {
     }
     </style>
     <div class="banner">
-      Looking for the documentation for previous version? You can find it 
+      Current documentation is prepared for the <b>v5 release candidate</b>. If you are looking for the documentation related to the latest stable version, please choose <b>v4.x</b> from the dropdown
       <div tabindex="0" class="menu-button" role="button" aria-haspopup="true">
         here
         <ul class="list" role="menu">
