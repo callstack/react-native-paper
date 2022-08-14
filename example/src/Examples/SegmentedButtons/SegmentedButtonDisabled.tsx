@@ -8,7 +8,7 @@ const SegmentedButtonDisabled = () => {
   return (
     <List.Section title={`Segmented Button - disabled`}>
       <SegmentedButton.Group
-        multiselect
+        multiSelect
         onValueChange={(value) => {
           typeof value === 'string' && setValue(value);
         }}
@@ -16,7 +16,12 @@ const SegmentedButtonDisabled = () => {
         style={styles.group}
       >
         <SegmentedButton style={styles.button} value="walk" label="Walking" />
-        <SegmentedButton style={styles.button} label="Disabled" disabled />
+        <SegmentedButton
+          style={styles.button}
+          value="disabled"
+          label="Disabled"
+          disabled
+        />
         <SegmentedButton style={styles.button} label="Driving" value="drive" />
       </SegmentedButton.Group>
     </List.Section>

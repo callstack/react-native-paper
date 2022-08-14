@@ -8,7 +8,7 @@ const SegmentedButtonMultiselect = () => {
   return (
     <List.Section title={`Segmented Button - multiselect`}>
       <SegmentedButton.Group
-        multiselect
+        multiSelect
         onValueChange={(value) => {
           if (Array.isArray(value)) {
             setValue(value);

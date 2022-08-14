@@ -39,11 +39,11 @@ export type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: (event?: GestureResponderEvent) => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * Value of button.
    */
-  value?: string;
+  value: string;
   /**
    * Label text of the button.
    */
@@ -51,7 +51,7 @@ export type Props = {
   /**
    * Support multiple selected options.
    */
-  multiselect?: boolean;
+  multiSelect?: boolean;
   /**
    * Status of button.
    */
@@ -94,7 +94,7 @@ const SegmentedButton = ({
   accessibilityLabel,
   disabled,
   style,
-  multiselect,
+  multiSelect,
   showSelectedCheck,
   icon,
   testID,
@@ -189,21 +189,21 @@ const SegmentedButton = ({
     color: textColor,
   };
 
-  const handleOnPress = (e?: GestureResponderEvent) => {
+  const handleOnPress = (e: GestureResponderEvent) => {
     onPress?.(e);
 
     if (!value) {
       return;
     }
 
-    if (multiselect && Array.isArray(context.value)) {
+    if (multiSelect && Array.isArray(context.value)) {
       context.onValueChange(
         checked
           ? [...context.value.filter((val) => value !== val)]
           : [...context.value, value]
       );
-    } else {
-      context.onValueChange(!checked ? value : null);
+    } else if (!checked) {
+      context.onValueChange(value);
     }
   };
 

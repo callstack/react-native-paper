@@ -10,11 +10,11 @@ export type Props = {
   /**
    * Function to execute on selection change.
    */
-  onValueChange: (item: string | string[] | null) => void | null;
+  onValueChange: (item: string | string[]) => void;
   /**
    * Value of the currently selected segmented button.
    */
-  value: string | string[] | null;
+  value: string | string[];
   /**
    * React elements containing segmented buttons.
    */
@@ -22,7 +22,7 @@ export type Props = {
   /**
    * Support multiple selected options.
    */
-  multiselect?: boolean;
+  multiSelect?: boolean;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -31,14 +31,13 @@ export type Props = {
 };
 
 type SegmentedButtonContextType = {
-  value: string | string[] | null;
-  onValueChange: (item: string | string[] | null) => void | null;
+  value: string | string[];
+  onValueChange: (item: string | string[]) => void;
 };
 
-export const SegmentedButtonGroupContext =
-  React.createContext<SegmentedButtonContextType>(
-    {} as SegmentedButtonContextType
-  );
+export const SegmentedButtonGroupContext = React.createContext<
+  SegmentedButtonContextType | undefined
+>(undefined);
 
 /**
  * @supported Available in v5.x
@@ -76,7 +75,7 @@ export const SegmentedButtonGroupContext =
  *
  *   return (
  *     <SegmentedButton.Group
- *       multiselect
+ *       multiSelect
  *       onValueChange={value => setValue(value)}
  *       value={value}>
  *       <SegmentedButton icon="format-align-left" value="left" />
@@ -91,7 +90,7 @@ export const SegmentedButtonGroupContext =
 const SegmentedButtonGroup = ({
   value,
   onValueChange,
-  multiselect,
+  multiSelect,
   children,
   style,
   theme,
@@ -123,7 +122,7 @@ const SegmentedButtonGroup = ({
 
             return React.cloneElement(child, {
               segment,
-              multiselect,
+              multiSelect,
               style: [disabledChildStyle, child.props.style],
             });
           }
