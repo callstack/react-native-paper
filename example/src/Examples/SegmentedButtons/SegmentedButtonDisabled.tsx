@@ -8,7 +8,6 @@ const SegmentedButtonDisabled = () => {
   return (
     <List.Section title={`Segmented Button - disabled`}>
       <SegmentedButton.Group
-        multiSelect
         onValueChange={(value) => {
           typeof value === 'string' && setValue(value);
         }}
