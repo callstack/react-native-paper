@@ -6,29 +6,40 @@ import SegmentedButton from './SegmentedButton';
 import { getDisabledSegmentedButtonStyle } from './utils';
 import type { SegmentedButtonProps } from 'react-native-paper';
 
+type ConditionalValue =
+  | {
+      /**
+       * Support multiple selected options.
+       */
+      multiSelect: true;
+      /**
+       * Array of the currently selected segmented button values.
+       */
+      value: string[];
+    }
+  | {
+      multiSelect?: false;
+      /**
+       * Value of the currently selected segmented button.
+       */
+      value: string;
+    };
+
 export type Props = {
   /**
    * Function to execute on selection change.
    */
   onValueChange: (item: string | string[]) => void;
   /**
-   * Value of the currently selected segmented button.
-   */
-  value: string | string[];
-  /**
    * React elements containing segmented buttons.
    */
   children: React.ReactElement<SegmentedButtonProps>[];
-  /**
-   * Support multiple selected options.
-   */
-  multiSelect?: boolean;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
   theme: Theme;
-};
+} & ConditionalValue;
 
 type SegmentedButtonContextType = {
   value: string | string[];
