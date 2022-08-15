@@ -364,7 +364,7 @@ const BottomNavigation = ({
   getTestID = ({ route }: { route: Route }) => route.testID,
   activeColor,
   inactiveColor,
-  keyboardHidesNavigationBar = true,
+  keyboardHidesNavigationBar = Platform.OS === 'android',
   barStyle,
   labeled = true,
   style,
@@ -750,9 +750,7 @@ const BottomNavigation = ({
                   ],
                   // Absolutely position the navigation bar so that the content is below it
                   // This is needed to avoid gap at bottom when the navigation bar is hidden
-                  ...(Platform.OS === 'android' && {
-                    position: keyboardVisible ? 'absolute' : null,
-                  }),
+                  position: keyboardVisible ? 'absolute' : null,
                 }
               : null,
             barStyle,
