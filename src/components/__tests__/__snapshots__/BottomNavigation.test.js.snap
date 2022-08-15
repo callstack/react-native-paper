@@ -76,7 +76,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         "alignSelf": undefined,
         "bottom": 0,
         "left": 0,
-        "position": null,
+        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -110,11 +110,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         style={
           Object {
             "backgroundColor": "transparent",
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
           }
         }
       >
@@ -756,7 +751,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         "alignSelf": undefined,
         "bottom": 0,
         "left": 0,
-        "position": null,
+        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -790,11 +785,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         style={
           Object {
             "backgroundColor": "transparent",
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
           }
         }
       >
@@ -1457,7 +1447,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
         "alignSelf": undefined,
         "bottom": 0,
         "left": 0,
-        "position": null,
+        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -1491,11 +1481,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
         style={
           Object {
             "backgroundColor": "transparent",
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
           }
         }
       >
@@ -2815,7 +2800,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         "alignSelf": undefined,
         "bottom": 0,
         "left": 0,
-        "position": null,
+        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -2849,11 +2834,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         style={
           Object {
             "backgroundColor": "transparent",
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
           }
         }
       >
@@ -3525,7 +3505,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         "alignSelf": undefined,
         "bottom": 0,
         "left": 0,
-        "position": null,
+        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -3559,11 +3539,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         style={
           Object {
             "backgroundColor": "transparent",
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
           }
         }
       >
@@ -4573,7 +4548,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         "alignSelf": undefined,
         "bottom": 0,
         "left": 0,
-        "position": null,
+        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -4608,11 +4583,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           Object {
             "backgroundColor": "transparent",
             "color": "#e57373",
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
           }
         }
       >
@@ -5563,7 +5533,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         "alignSelf": undefined,
         "bottom": 0,
         "left": 0,
-        "position": null,
+        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -5598,11 +5568,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           Object {
             "backgroundColor": "transparent",
             "color": "#e57373",
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
           }
         }
       >
@@ -6448,7 +6413,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
         "alignSelf": undefined,
         "bottom": 0,
         "left": 0,
-        "position": null,
+        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -6482,11 +6447,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
         style={
           Object {
             "backgroundColor": "transparent",
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
           }
         }
       >
@@ -7437,7 +7397,7 @@ exports[`renders shifting bottom navigation 1`] = `
         "alignSelf": undefined,
         "bottom": 0,
         "left": 0,
-        "position": null,
+        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -7471,11 +7431,6 @@ exports[`renders shifting bottom navigation 1`] = `
         style={
           Object {
             "backgroundColor": "transparent",
-            "transform": Array [
-              Object {
-                "translateY": 0,
-              },
-            ],
           }
         }
       >
