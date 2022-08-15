@@ -11,7 +11,11 @@ import color from 'color';
 
 it('renders segmented button', () => {
   const tree = renderer
-    .create(<SegmentedButton status="checked" onPress={() => {}} icon="walk" />)
+    .create(
+      <SegmentedButton.Group>
+        <SegmentedButton status="checked" onPress={() => {}} icon="walk" />
+      </SegmentedButton.Group>
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -20,12 +24,14 @@ it('renders segmented button', () => {
 it('renders disabled segmented button', () => {
   const tree = renderer
     .create(
-      <SegmentedButton
-        disabled
-        value="toggle"
-        onValueChange={() => {}}
-        icon="walk"
-      />
+      <SegmentedButton.Group>
+        <SegmentedButton
+          disabled
+          value="toggle"
+          onValueChange={() => {}}
+          icon="walk"
+        />
+      </SegmentedButton.Group>
     )
     .toJSON();
 
@@ -35,13 +41,15 @@ it('renders disabled segmented button', () => {
 it('renders checked segmented button with selected check', () => {
   const tree = renderer
     .create(
-      <SegmentedButton
-        value="toggle"
-        status="checked"
-        showSelectedCheck
-        onValueChange={() => {}}
-        icon="walk"
-      />
+      <SegmentedButton.Group>
+        <SegmentedButton
+          value="toggle"
+          status="checked"
+          showSelectedCheck
+          onValueChange={() => {}}
+          icon="walk"
+        />
+      </SegmentedButton.Group>
     )
     .toJSON();
 
