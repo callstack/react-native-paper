@@ -30,6 +30,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   color?: string;
   /**
+   * Custom icon to display for the checked radio button.
+   */
+  icon?: string;
+  /**
    * @optional
    */
   theme: Theme;
@@ -61,6 +65,7 @@ const RadioButtonIOS = ({
   theme,
   status,
   value,
+  icon = 'check',
   testID,
   ...rest
 }: Props) => {
@@ -105,7 +110,7 @@ const RadioButtonIOS = ({
             <View style={{ opacity: checked ? 1 : 0 }}>
               <MaterialCommunityIcon
                 allowFontScaling={false}
-                name="check"
+                name={icon}
                 size={24}
                 color={checkedColor}
                 direction="ltr"

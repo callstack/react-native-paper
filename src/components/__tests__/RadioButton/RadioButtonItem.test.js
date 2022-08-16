@@ -26,6 +26,7 @@ it('can render the iOS radio button on different platforms', () => {
         label="iOS Radio button"
         mode="ios"
         value="ios"
+        icon="check-outline"
       />
     )
     .toJSON();

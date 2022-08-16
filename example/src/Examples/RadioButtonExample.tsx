@@ -11,7 +11,7 @@ import {
 } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
-type State = 'normal' | 'normal-ios' | 'normal-item' | 'custom';
+type State = 'normal' | 'normal-ios' | 'normal-item' | 'custom' | 'custom-ios';
 
 const RadioButtonExample = () => {
   const [checked, setChecked] = React.useState<State>('normal');
@@ -50,6 +50,19 @@ const RadioButtonExample = () => {
               value="custom"
               color={isV3 ? MD3Colors.error70 : MD2Colors.blue500}
               status={checked === 'custom' ? 'checked' : 'unchecked'}
+            />
+          </View>
+        </View>
+      </TouchableRipple>
+      <TouchableRipple onPress={() => setChecked('custom-ios')}>
+        <View style={styles.row}>
+          <TextComponent>Custom 2 - IOS (Icon)</TextComponent>
+          <View pointerEvents="none">
+            <RadioButton.IOS
+              value="custom-ios"
+              color={isV3 ? MD3Colors.error70 : MD2Colors.blue500}
+              status={checked === 'custom-ios' ? 'checked' : 'unchecked'}
+              icon="check-underline-circle"
             />
           </View>
         </View>
