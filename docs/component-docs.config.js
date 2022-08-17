@@ -42,6 +42,7 @@ function getPages() {
     .split('\n')
     .map((line) => line.split(' ').pop().replace(/('|;)/g, ''))
     .filter((line) => line.startsWith('./components/'))
+    .filter((line) => !line.includes('v2'))
     .map((line) => {
       const file = require.resolve(path.join(__dirname, '../src', line));
       if (/\/index\.(js|tsx?)$/.test(file)) {
