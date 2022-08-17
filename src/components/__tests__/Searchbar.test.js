@@ -15,3 +15,9 @@ it('renders with text', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('renders with loadingIcon', () => {
+  const tree = renderer.create(<Searchbar loading={true} />).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
