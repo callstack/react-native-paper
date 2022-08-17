@@ -18,6 +18,9 @@ import { withTheme } from '../core/theming';
 import type { IconSource } from './Icon';
 import type { Theme } from '../types';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
+import ActivityIndicator, {
+  Props as ActivityIndicatorProps,
+} from './ActivityIndicator';
 
 export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   /**
@@ -70,6 +73,14 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    * Custom icon for clear button, default will be icon close
    */
   clearIcon?: IconSource;
+  /**
+   * Custom flag for replacing clear button with activity indicator.
+   */
+  loading?: Boolean;
+  /**
+   * Custom styles for the activity indicator.
+   */
+  loaderStyle?: Omit<ActivityIndicatorProps, 'theme'>;
 };
 
 type TextInputHandles = Pick<
@@ -122,6 +133,8 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
       style,
       theme,
       value,
+      loading = false,
+      loaderStyle,
       ...rest
     }: Props,
     ref
@@ -218,26 +231,30 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
           value={value}
           {...rest}
         />
-        <IconButton
-          borderless
-          disabled={!value}
-          accessibilityLabel={clearAccessibilityLabel}
-          iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
-          rippleColor={rippleColor}
-          onPress={handleClearPress}
-          icon={
-            clearIcon ||
-            (({ size, color }) => (
-              <MaterialCommunityIcon
-                name="close"
-                color={color}
-                size={size}
-                direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-              />
-            ))
-          }
-          accessibilityRole="button"
-        />
+        {loading ? (
+          <ActivityIndicator {...loaderStyle} style={styles.loader} />
+        ) : (
+          <IconButton
+            borderless
+            disabled={!value}
+            accessibilityLabel={clearAccessibilityLabel}
+            iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
+            rippleColor={rippleColor}
+            onPress={handleClearPress}
+            icon={
+              clearIcon ||
+              (({ size, color }) => (
+                <MaterialCommunityIcon
+                  name="close"
+                  color={color}
+                  size={size}
+                  direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+                />
+              ))
+            }
+            accessibilityRole="button"
+          />
+        )}
       </Surface>
     );
   }
@@ -258,6 +275,9 @@ const styles = StyleSheet.create({
   },
   elevation: {
     elevation: 4,
+  },
+  loader: {
+    margin: 10,
   },
 });
 

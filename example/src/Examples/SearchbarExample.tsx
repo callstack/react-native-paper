@@ -12,6 +12,7 @@ const SearchExample = ({ navigation }: Props) => {
   const [firstQuery, setFirstQuery] = React.useState<string>('');
   const [secondQuery, setSecondQuery] = React.useState<string>('');
   const [thirdQuery, setThirdQuery] = React.useState<string>('');
+  const [fourthQuery, setFourthQuery] = React.useState<string>('');
 
   const { isV3 } = useTheme();
 
@@ -42,6 +43,14 @@ const SearchExample = ({ navigation }: Props) => {
         value={thirdQuery}
         onIconPress={/* In real code, this will open the drawer */ () => {}}
         icon="menu"
+        style={styles.searchbar}
+      />
+
+      <Searchbar
+        placeholder="Search"
+        onChangeText={(query: string) => setFourthQuery(query)}
+        value={fourthQuery}
+        loading
         style={styles.searchbar}
       />
     </ScreenWrapper>
