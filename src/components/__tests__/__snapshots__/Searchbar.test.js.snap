@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders with loadingIcon 1`] = `
+exports[`activity indicator snapshot test 1`] = `
 <View
   collapsable={false}
   style={
