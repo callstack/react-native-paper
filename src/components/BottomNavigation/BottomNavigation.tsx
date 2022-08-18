@@ -364,7 +364,7 @@ const BottomNavigation = ({
   getTestID = ({ route }: { route: Route }) => route.testID,
   activeColor,
   inactiveColor,
-  keyboardHidesNavigationBar = true,
+  keyboardHidesNavigationBar = Platform.OS === 'android',
   barStyle,
   labeled = true,
   style,
