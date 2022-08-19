@@ -18,9 +18,7 @@ import { withTheme } from '../core/theming';
 import type { IconSource } from './Icon';
 import type { Theme } from '../types';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
-import ActivityIndicator, {
-  Props as ActivityIndicatorProps,
-} from './ActivityIndicator';
+import ActivityIndicator from './ActivityIndicator';
 
 export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   /**
@@ -74,13 +72,10 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    */
   clearIcon?: IconSource;
   /**
+   * @supported Available in v5.x
    * Custom flag for replacing clear button with activity indicator.
    */
   loading?: Boolean;
-  /**
-   * Custom styles for the activity indicator.
-   */
-  loaderStyle?: Omit<ActivityIndicatorProps, 'theme'>;
 };
 
 type TextInputHandles = Pick<
@@ -134,7 +129,6 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
       theme,
       value,
       loading = false,
-      loaderStyle,
       ...rest
     }: Props,
     ref
@@ -232,7 +226,10 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
           {...rest}
         />
         {loading ? (
-          <ActivityIndicator {...loaderStyle} style={styles.loader} />
+          <ActivityIndicator
+            testID="activity-indicator"
+            style={styles.loader}
+          />
         ) : (
           <IconButton
             borderless

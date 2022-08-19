@@ -24,23 +24,13 @@ it('activity indicator snapshot test', () => {
 });
 
 it('renders with ActivityIndicator', () => {
-  const tree = render(
-    <Searchbar
-      loading={true}
-      loaderStyle={{ testID: 'withActivityIndicator' }}
-    />
-  );
+  const tree = render(<Searchbar loading={true} />);
 
-  expect(tree.getByTestId('withActivityIndicator')).toBeTruthy();
+  expect(tree.getByTestId('activity-indicator')).toBeTruthy();
 });
 
 it('renders without ActivityIndicator', () => {
-  const tree = render(
-    <Searchbar
-      loading={false}
-      loaderStyle={{ testID: 'withOutActivityIndicator' }}
-    />
-  );
+  const tree = render(<Searchbar loading={false} />);
 
-  expect(() => tree.getByTestId('withOutActivityIndicator')).toThrow();
+  expect(() => tree.getByTestId('activity-indicator')).toThrow();
 });
