@@ -49,7 +49,7 @@ export type Props = {
    * - `onPress`: callback that is called when button is pressed
    * - `label`: label text of the button
    * - `showSelectedCheck`: show optional check icon to indicate selected state
-   * - `density: density is applied to the height, to allow usage in denser UIs
+   * - `density`: density is applied to the height, to allow usage in denser UIs
    * - `style`: pass additional styles for the button
    * - `testID`: testID to be used on tests
    */
@@ -98,7 +98,7 @@ export const SegmentedButtonGroupContext =
  * import { SegmentedButton } from 'react-native-paper';
  *
  * const MyComponent = () => {
- *   const [value, setValue] = React.useState('left');
+ *   const [value, setValue] = React.useState('');
  *
  *   return (
  *     <SegmentedButtons
@@ -170,7 +170,7 @@ const SegmentedButtons = ({
   );
 };
 
-SegmentedButtons.displayName = 'SegmentedButton.Group';
+SegmentedButtons.displayName = 'SegmentedButtons';
 
 const styles = StyleSheet.create({
   row: {
