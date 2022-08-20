@@ -95,6 +95,7 @@ exports[`renders checked segmented button with selected check 1`] = `
               ],
             }
           }
+          testID="undefined-check-icon"
         >
           <Text
             accessibilityElementsHidden={true}

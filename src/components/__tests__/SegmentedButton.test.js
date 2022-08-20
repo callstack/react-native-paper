@@ -8,6 +8,7 @@ import { getTheme } from '../../core/theming';
 import { black } from '../../styles/themes/v2/colors';
 import color from 'color';
 import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
+import { render } from '@testing-library/react-native';
 
 it('renders segmented button', () => {
   const tree = renderer
@@ -231,5 +232,50 @@ describe('getDisabledSegmentedButtonBorderWidth', () => {
         })
       ).toMatchObject({ borderRightWidth: 1 });
     });
+  });
+});
+
+describe('should have `accessibilityState={ checked: true }` when selected', () => {
+  it('should have two button selected', () => {
+    const onValueChange = jest.fn();
+    const { getAllByA11yState } = render(
+      <SegmentedButtons
+        multiSelect
+        value={['walk', 'transit']}
+        buttons={[
+          { value: 'walk', label: 'Walking' },
+          { value: 'transit', label: 'Transit' },
+          { value: 'drive', label: 'Driving' },
+        ]}
+        onValueChange={onValueChange}
+      />
+    );
+
+    const checkedButtons = getAllByA11yState({ checked: true });
+    expect(checkedButtons).toHaveLength(2);
+  });
+
+  it('show selected check icon should be shown', () => {
+    const onValueChange = jest.fn();
+
+    const { getByTestId } = render(
+      <SegmentedButtons
+        multiSelect
+        value={['walk', 'transit']}
+        buttons={[
+          {
+            value: 'walk',
+            label: 'Walking',
+            showSelectedCheck: true,
+            testID: 'walking-check-icon',
+          },
+          { value: 'transit', label: 'Transit' },
+          { value: 'drive', label: 'Driving' },
+        ]}
+        onValueChange={onValueChange}
+      />
+    );
+
+    expect(getByTestId('walking-check-icon')).toBeDefined();
   });
 });

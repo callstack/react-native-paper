@@ -194,6 +194,7 @@ const SegmentedButtonItem = ({
         <View style={[styles.content, { paddingVertical }]}>
           {checked && showSelectedCheck ? (
             <Animated.View
+              testID={`${testID}-check-icon`}
               style={[iconStyle, { transform: [{ scale: checkScale }] }]}
             >
               <Icon source={'check'} size={iconSize} />
