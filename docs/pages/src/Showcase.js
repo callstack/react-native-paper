@@ -156,6 +156,12 @@ const data: Data[] = [
     android:
       'https://play.google.com/store/apps/details?id=com.shensven.crazythursday',
   },
+  {
+    color: '#566193',
+    name: 'Moon Meet',
+    image: 'showcase/moonmeet.png',
+    github: 'https://github.com/MoonMeet/MoonMeet-CrossPlatform',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {
