@@ -1,41 +1,42 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { List, SegmentedButton } from 'react-native-paper';
+import { List, SegmentedButtons } from 'react-native-paper';
 
 const SegmentedButtonWithSelectedCheck = () => {
   const [value, setValue] = React.useState('');
 
   return (
     <List.Section title={`Segmented Button - show selected check`}>
-      <SegmentedButton.Group
+      <SegmentedButtons
         onValueChange={(value) => {
           typeof value === 'string' && setValue(value);
         }}
         value={value}
         style={styles.group}
-      >
-        <SegmentedButton
-          style={styles.button}
-          icon="walk"
-          value="walk"
-          label="Walking"
-          showSelectedCheck
-        />
-        <SegmentedButton
-          style={styles.button}
-          icon="train"
-          label="Transit"
-          value="transit"
-          showSelectedCheck
-        />
-        <SegmentedButton
-          style={styles.button}
-          icon="car"
-          label="Driving"
-          value="drive"
-          showSelectedCheck
-        />
-      </SegmentedButton.Group>
+        buttons={[
+          {
+            icon: 'walk',
+            value: 'walk',
+            label: 'Walking',
+            showSelectedCheck: true,
+            style: styles.button,
+          },
+          {
+            icon: 'train',
+            value: 'transit',
+            label: 'Transit',
+            showSelectedCheck: true,
+            style: styles.button,
+          },
+          {
+            icon: 'car',
+            value: 'drive',
+            label: 'Driving',
+            showSelectedCheck: true,
+            style: styles.button,
+          },
+        ]}
+      />
     </List.Section>
   );
 };

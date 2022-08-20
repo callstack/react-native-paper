@@ -12,15 +12,15 @@ type BaseProps = {
 export const getDisabledSegmentedButtonStyle = ({
   theme,
   index,
-  children,
+  buttons,
 }: {
   theme: Theme;
-  children: React.ReactElement<{ disabled?: boolean }>[];
+  buttons: { disabled?: boolean }[];
   index: number;
 }): ViewStyle => {
   const width = getSegmentedButtonBorderWidth({ theme });
-  const isDisabled = children[index]?.props.disabled;
-  const isNextDisabled = children[index + 1]?.props.disabled;
+  const isDisabled = buttons[index]?.disabled;
+  const isNextDisabled = buttons[index + 1]?.disabled;
 
   if (!isDisabled && isNextDisabled) {
     return {

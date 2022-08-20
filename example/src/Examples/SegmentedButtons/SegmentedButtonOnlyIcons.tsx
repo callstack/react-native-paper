@@ -1,23 +1,33 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { List, SegmentedButton } from 'react-native-paper';
+import { List, SegmentedButtons } from 'react-native-paper';
 
 const SegmentedButtonOnlyIcons = () => {
   const [value, setValue] = React.useState('');
 
   return (
     <List.Section title={`Segmented Button - only icons`}>
-      <SegmentedButton.Group
+      <SegmentedButtons
         onValueChange={(value) => {
           typeof value === 'string' && setValue(value);
         }}
         style={styles.group}
         value={value}
-      >
-        <SegmentedButton icon="walk" value="walk" />
-        <SegmentedButton icon="train" value="transit" />
-        <SegmentedButton icon="car" value="drive" />
-      </SegmentedButton.Group>
+        buttons={[
+          {
+            icon: 'walk',
+            value: 'walk',
+          },
+          {
+            icon: 'train',
+            value: 'trainsit',
+          },
+          {
+            icon: 'car',
+            value: 'drive',
+          },
+        ]}
+      />
     </List.Section>
   );
 };

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { List, SegmentedButton } from 'react-native-paper';
+import { List, SegmentedButtons } from 'react-native-paper';
 
 const SegmentedButtonMultiselectIcons = () => {
   const [value, setValue] = React.useState<string[]>([]);
 
   return (
     <List.Section title={`Segmented Button - multiselect only icons`}>
-      <SegmentedButton.Group
+      <SegmentedButtons
         multiSelect
         onValueChange={(value) => {
           if (Array.isArray(value)) {
@@ -16,13 +16,29 @@ const SegmentedButtonMultiselectIcons = () => {
         }}
         value={value}
         style={styles.group}
-      >
-        <SegmentedButton value="size-s" icon="size-s" />
-        <SegmentedButton value="size-m" icon="size-m" />
-        <SegmentedButton value="size-l" icon="size-l" />
-        <SegmentedButton value="size-xl" icon="size-xl" />
-        <SegmentedButton value="size-xxl" icon="size-xxl" />
-      </SegmentedButton.Group>
+        buttons={[
+          {
+            value: 'size-s',
+            icon: 'size-s',
+          },
+          {
+            value: 'size-m',
+            icon: 'size-m',
+          },
+          {
+            value: 'size-l',
+            icon: 'size-l',
+          },
+          {
+            value: 'size-xl',
+            icon: 'size-xl',
+          },
+          {
+            value: 'size-xxl',
+            icon: 'size-xxl',
+          },
+        ]}
+      />
     </List.Section>
   );
 };

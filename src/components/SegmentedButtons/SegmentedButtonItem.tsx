@@ -15,7 +15,7 @@ import type { IconSource } from '../Icon';
 import type { Theme } from '../../types';
 import color from 'color';
 import Icon from '../Icon';
-import { SegmentedButtonGroupContext } from './SegmentedButtonGroup';
+import { SegmentedButtonGroupContext } from './SegmentedButtons';
 import {
   getSegmentedButtonBorderRadius,
   getSegmentedButtonColors,
@@ -25,7 +25,7 @@ const DEFAULT_PADDING = 9;
 
 export type Props = {
   /**
-   * Icon to display for the `SegmentedButton`.
+   * Icon to display for the `SegmentedButtonItem`.
    */
   icon?: IconSource;
   /**
@@ -33,7 +33,7 @@ export type Props = {
    */
   disabled?: boolean;
   /**
-   * Accessibility label for the `SegmentedButton`. This is read by the screen reader when the user taps the button.
+   * Accessibility label for the `SegmentedButtonItem`. This is read by the screen reader when the user taps the button.
    */
   accessibilityLabel?: string;
   /**
@@ -48,10 +48,6 @@ export type Props = {
    * Label text of the button.
    */
   label?: string;
-  /**
-   * Status of button.
-   */
-  status?: 'checked' | 'unchecked';
   /**
    * Button segment.
    */
@@ -75,17 +71,8 @@ export type Props = {
   testID?: string;
 };
 
-/**
- * @supported Available in v5.x
- * Segmented buttons can be used to select options, switch views or sort elements.
- *
- * <div class="screenshots">
- *   <img class="medium" src="screenshots/segmented-button.png" />
- * </div>
- */
-const SegmentedButton = ({
+const SegmentedButtonItem = ({
   value,
-  status,
   theme,
   accessibilityLabel,
   disabled,
@@ -99,19 +86,11 @@ const SegmentedButton = ({
   density = 0,
 }: Props) => {
   const context = React.useContext(SegmentedButtonGroupContext);
-
-  if (!context) {
-    throw new Error(
-      "<SegmentedButton/> can't be used without <SegmentedButton.Group/> wrapper."
-    );
-  }
-
   const checkScale = React.useRef(new Animated.Value(0)).current;
 
-  const checked =
-    (context && Array.isArray(context.value)
-      ? context.value.includes(value || '')
-      : context.value === value) || status === 'checked';
+  const checked = Array.isArray(context.value)
+    ? context.value.includes(value)
+    : context.value === value;
 
   React.useEffect(() => {
     if (!showSelectedCheck) {
@@ -187,10 +166,6 @@ const SegmentedButton = ({
   const handleOnPress = (e: GestureResponderEvent) => {
     onPress?.(e);
 
-    if (!value) {
-      return;
-    }
-
     if (context.multiSelect && Array.isArray(context.value)) {
       context.onValueChange(
         checked
@@ -264,9 +239,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(SegmentedButton);
+export default withTheme(SegmentedButtonItem);
 
-// @component-docs ignore-next-line
-const SegmentedButtonWithTheme = withTheme(SegmentedButton);
-// @component-docs ignore-next-line
+const SegmentedButtonWithTheme = withTheme(SegmentedButtonItem);
 export { SegmentedButtonWithTheme as SegmentedButton };

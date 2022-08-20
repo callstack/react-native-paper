@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { List, SegmentedButton } from 'react-native-paper';
+import { List, SegmentedButtons } from 'react-native-paper';
 
 const SegmentedButtonMultiselect = () => {
   const [value, setValue] = React.useState<string[]>([]);
 
   return (
     <List.Section title={`Segmented Button - multiselect`}>
-      <SegmentedButton.Group
+      <SegmentedButtons
         multiSelect
         onValueChange={(value) => {
           if (Array.isArray(value)) {
@@ -16,26 +16,27 @@ const SegmentedButtonMultiselect = () => {
         }}
         value={value}
         style={styles.group}
-      >
-        <SegmentedButton
-          style={styles.button}
-          value="walk"
-          label="Walking"
-          showSelectedCheck
-        />
-        <SegmentedButton
-          style={styles.button}
-          label="Transit"
-          value="transit"
-          showSelectedCheck
-        />
-        <SegmentedButton
-          style={styles.button}
-          label="Driving"
-          value="drive"
-          showSelectedCheck
-        />
-      </SegmentedButton.Group>
+        buttons={[
+          {
+            style: styles.button,
+            value: 'walk',
+            label: 'Walking',
+            showSelectedCheck: true,
+          },
+          {
+            style: styles.button,
+            value: 'transit',
+            label: 'Transit',
+            showSelectedCheck: true,
+          },
+          {
+            style: styles.button,
+            value: 'drive',
+            label: 'Driving',
+            showSelectedCheck: true,
+          },
+        ]}
+      />
     </List.Section>
   );
 };

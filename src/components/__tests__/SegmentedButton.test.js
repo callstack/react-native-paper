@@ -1,20 +1,22 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import SegmentedButton from '../SegmentedButton';
 import {
   getDisabledSegmentedButtonStyle,
   getSegmentedButtonColors,
-} from '../SegmentedButton/utils';
+} from '../SegmentedButtons/utils';
 import { getTheme } from '../../core/theming';
 import { black } from '../../styles/themes/v2/colors';
 import color from 'color';
+import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
 
 it('renders segmented button', () => {
   const tree = renderer
     .create(
-      <SegmentedButton.Group>
-        <SegmentedButton status="checked" onPress={() => {}} icon="walk" />
-      </SegmentedButton.Group>
+      <SegmentedButtons
+        onValueChange={() => {}}
+        value={'walk'}
+        buttons={[{ value: 'walk' }, { value: 'ride' }]}
+      />
     )
     .toJSON();
 
@@ -24,14 +26,11 @@ it('renders segmented button', () => {
 it('renders disabled segmented button', () => {
   const tree = renderer
     .create(
-      <SegmentedButton.Group>
-        <SegmentedButton
-          disabled
-          value="toggle"
-          onValueChange={() => {}}
-          icon="walk"
-        />
-      </SegmentedButton.Group>
+      <SegmentedButtons
+        onValueChange={() => {}}
+        value={'walk'}
+        buttons={[{ value: 'walk' }, { value: 'ride', disabled: true }]}
+      />
     )
     .toJSON();
 
@@ -41,33 +40,14 @@ it('renders disabled segmented button', () => {
 it('renders checked segmented button with selected check', () => {
   const tree = renderer
     .create(
-      <SegmentedButton.Group>
-        <SegmentedButton
-          value="toggle"
-          status="checked"
-          showSelectedCheck
-          onValueChange={() => {}}
-          icon="walk"
-        />
-      </SegmentedButton.Group>
-    )
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('renders segmented button with a group', () => {
-  const tree = renderer
-    .create(
-      <SegmentedButton.Group>
-        <SegmentedButton
-          value="walk"
-          status="checked"
-          showSelectedCheck
-          icon="walk"
-        />
-        <SegmentedButton disabled value="ride" showSelectedCheck icon="ride" />
-      </SegmentedButton.Group>
+      <SegmentedButtons
+        onValueChange={() => {}}
+        value={'walk'}
+        buttons={[
+          { value: 'walk', showSelectedCheck: true },
+          { value: 'ride', disabled: true },
+        ]}
+      />
     )
     .toJSON();
 
@@ -203,10 +183,10 @@ describe('getDisabledSegmentedButtonBorderWidth', () => {
       expect(
         getDisabledSegmentedButtonStyle({
           theme: getTheme(),
-          children: [
-            { props: { disabled: false } },
-            { props: { disabled: false } },
-            { props: { disabled: false } },
+          buttons: [
+            { disabled: false },
+            { disabled: false },
+            { disabled: false },
           ],
           index,
         })
@@ -219,11 +199,7 @@ describe('getDisabledSegmentedButtonBorderWidth', () => {
       expect(
         getDisabledSegmentedButtonStyle({
           theme: getTheme(),
-          children: [
-            { props: { disabled: true } },
-            { props: { disabled: true } },
-            { props: { disabled: true } },
-          ],
+          buttons: [{ disabled: true }, { disabled: true }, { disabled: true }],
           index,
         })
       ).toMatchObject({});
@@ -234,11 +210,7 @@ describe('getDisabledSegmentedButtonBorderWidth', () => {
     expect(
       getDisabledSegmentedButtonStyle({
         theme: getTheme(),
-        children: [
-          { props: { disabled: false } },
-          { props: { disabled: true } },
-          { props: { disabled: true } },
-        ],
+        buttons: [{ disabled: false }, { disabled: true }, { disabled: true }],
         index: 0,
       })
     ).toMatchObject({ borderRightWidth: 1 });
@@ -249,11 +221,11 @@ describe('getDisabledSegmentedButtonBorderWidth', () => {
       expect(
         getDisabledSegmentedButtonStyle({
           theme: getTheme(),
-          children: [
-            { props: { disabled: false } },
-            { props: { disabled: true } },
-            { props: { disabled: false } },
-            { props: { disabled: true } },
+          buttons: [
+            { disabled: false },
+            { disabled: true },
+            { disabled: false },
+            { disabled: true },
           ],
           index,
         })

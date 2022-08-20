@@ -24,6 +24,6 @@ const SegmentedButtonExample = () => (
   </ScreenWrapper>
 );
 
-SegmentedButtonExample.title = 'Segmented Button';
+SegmentedButtonExample.title = 'Segmented Buttons';
 
 export default SegmentedButtonExample;
