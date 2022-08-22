@@ -33,7 +33,7 @@ it('correctly renders left-side icon adornment, and right-side affix adornment',
       onChangeText={(text) => this.setState({ text })}
       left={
         <TextInput.Icon
-          name="heart"
+          icon="heart"
           onPress={() => {
             console.log('!@# press left');
           }}
@@ -62,7 +62,7 @@ it('correctly renders left-side icon adornment, and right-side affix adornment '
       }
       right={
         <TextInput.Icon
-          name="heart"
+          icon="heart"
           onPress={() => {
             console.log('!@# press left');
           }}

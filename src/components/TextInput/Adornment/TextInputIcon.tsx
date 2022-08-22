@@ -13,9 +13,10 @@ export type Props = $Omit<
   'icon' | 'theme' | 'color'
 > & {
   /**
+   * @renamed Renamed from 'name' to 'icon` in v5.x
    * Icon to show.
    */
-  name: IconSource;
+  icon: IconSource;
   /**
    * Function to execute on press.
    */
@@ -92,7 +93,7 @@ const IconAdornment: React.FunctionComponent<
  *     <TextInput
  *       label="Password"
  *       secureTextEntry
- *       right={<TextInput.Icon name="eye" />}
+ *       right={<TextInput.Icon icon="eye" />}
  *     />
  *   );
  * };
@@ -102,7 +103,7 @@ const IconAdornment: React.FunctionComponent<
  */
 
 const TextInputIcon = ({
-  name,
+  icon,
   onPress,
   forceTextInputFocus,
   color,
@@ -134,7 +135,7 @@ const TextInputIcon = ({
   return (
     <View style={[styles.container, style]}>
       <IconButton
-        icon={name}
+        icon={icon}
         style={styles.iconButton}
         size={ICON_SIZE}
         onPress={onPressWithFocusControl}

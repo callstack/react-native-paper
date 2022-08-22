@@ -150,7 +150,7 @@ const TextInputExample = () => {
             onChangeText={(text) => inputActionHandler('text', text)}
             left={
               <TextInput.Icon
-                name="magnify"
+                icon="magnify"
                 color={flatLeftIcon}
                 onPress={() => {
                   changeIconColor('flatLeftIcon');
@@ -168,7 +168,7 @@ const TextInputExample = () => {
             right={<TextInput.Affix text="/100" />}
             left={
               <TextInput.Icon
-                name={() => (
+                icon={() => (
                   <Icon
                     name="home"
                     size={24}
@@ -192,7 +192,7 @@ const TextInputExample = () => {
             left={<TextInput.Affix text="#" />}
             right={
               <TextInput.Icon
-                name="magnify"
+                icon="magnify"
                 color={flatRightIcon}
                 onPress={() => {
                   changeIconColor('flatRightIcon');
@@ -211,7 +211,7 @@ const TextInputExample = () => {
             secureTextEntry={flatTextSecureEntry}
             right={
               <TextInput.Icon
-                name={flatTextSecureEntry ? 'eye' : 'eye-off'}
+                icon={flatTextSecureEntry ? 'eye' : 'eye-off'}
                 onPress={() =>
                   dispatch({
                     type: 'flatTextSecureEntry',
@@ -235,7 +235,7 @@ const TextInputExample = () => {
             }
             left={
               <TextInput.Icon
-                name="magnify"
+                icon="magnify"
                 color={outlineLeftIcon}
                 onPress={() => {
                   changeIconColor('outlineLeftIcon');
@@ -256,7 +256,7 @@ const TextInputExample = () => {
             left={<TextInput.Affix text="$" />}
             right={
               <TextInput.Icon
-                name="magnify"
+                icon="magnify"
                 color={outlineRightIcon}
                 onPress={() => {
                   changeIconColor('outlineRightIcon');
@@ -276,7 +276,7 @@ const TextInputExample = () => {
             secureTextEntry={outlineTextSecureEntry}
             right={
               <TextInput.Icon
-                name={outlineTextSecureEntry ? 'eye' : 'eye-off'}
+                icon={outlineTextSecureEntry ? 'eye' : 'eye-off'}
                 onPress={() =>
                   dispatch({
                     type: 'outlineTextSecureEntry',
@@ -326,7 +326,7 @@ const TextInputExample = () => {
             left={<TextInput.Affix text="#" />}
             right={
               <TextInput.Icon
-                name="chevron-up"
+                icon="chevron-up"
                 color={(focused) =>
                   focused ? theme.colors?.primary : undefined
                 }
