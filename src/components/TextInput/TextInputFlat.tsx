@@ -252,7 +252,12 @@ const TextInputFlat = ({
     labelScale,
     wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
     topPosition,
-    paddingOffset: { paddingLeft, paddingRight },
+    paddingOffset: isAndroid
+      ? {
+          paddingLeft: I18nManager.isRTL ? paddingRight : paddingLeft,
+          paddingRight: I18nManager.isRTL ? paddingLeft : paddingRight,
+        }
+      : { paddingRight, paddingLeft },
     hasActiveOutline,
     activeColor,
     placeholderColor,
