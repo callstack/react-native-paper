@@ -323,6 +323,8 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  *
  * const RecentsRoute = () => <Text>Recents</Text>;
  *
+ * const NotificationsRoute = () => <Text>Notifications</Text>;
+ *
  * const MyComponent = () => {
  *   const [index, setIndex] = React.useState(0);
  *   const [routes] = React.useState([
@@ -336,6 +338,7 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  *     music: MusicRoute,
  *     albums: AlbumsRoute,
  *     recents: RecentsRoute,
+ *     notifications: NotificationsRoute,
  *   });
  *
  *   return (
