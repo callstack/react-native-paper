@@ -7,7 +7,7 @@ import type { InputLabelProps } from '../types';
 
 const InputLabel = (props: InputLabelProps) => {
   const { isV3 } = useTheme();
-  const { parentState, labelBackground, mode } = props;
+  const { parentState, labelBackground } = props;
   const {
     label,
     error,
@@ -29,6 +29,7 @@ const InputLabel = (props: InputLabelProps) => {
     errorColor,
     labelTranslationXOffset,
     maxFontSizeMultiplier,
+    testID,
   } = props.labelProps;
 
   const labelTranslationX = {
@@ -72,14 +73,7 @@ const InputLabel = (props: InputLabelProps) => {
     ],
   };
 
-  let textColor = placeholderColor;
-
-  if (error && errorColor) {
-    textColor = errorColor;
-  }
-  if (isV3 && parentState.value && mode !== 'outlined') {
-    textColor = activeColor;
-  }
+  const textColor = error && errorColor ? errorColor : placeholderColor;
 
   return label ? (
     // Position colored placeholder and gray placeholder on top of each other and crossfade them
@@ -128,6 +122,7 @@ const InputLabel = (props: InputLabelProps) => {
         ]}
         numberOfLines={1}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
+        testID={`${testID}-label-active`}
       >
         {label}
       </AnimatedText>
@@ -148,6 +143,7 @@ const InputLabel = (props: InputLabelProps) => {
         ]}
         numberOfLines={1}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
+        testID={`${testID}-label-inactive`}
       >
         {label}
       </AnimatedText>

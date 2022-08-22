@@ -25,6 +25,7 @@ export type RenderProps = {
   numberOfLines?: number;
   value?: string;
   adjustsFontSizeToFit?: boolean;
+  testID?: string;
 };
 type TextInputTypesWithoutMode = $Omit<TextInputProps, 'mode'>;
 export type State = {
@@ -72,13 +73,13 @@ export type LabelProps = {
   onLayoutAnimatedText: (args: any) => void;
   roundness: number;
   maxFontSizeMultiplier?: number | undefined | null;
+  testID?: string;
 };
 export type InputLabelProps = {
   parentState: State;
   labelProps: LabelProps;
   labelBackground?: any;
   maxFontSizeMultiplier?: number | undefined | null;
-  mode?: 'flat' | 'outlined';
 };
 
 export type LabelBackgroundProps = {
