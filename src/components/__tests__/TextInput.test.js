@@ -210,6 +210,14 @@ it('renders label with correct color when inactive', () => {
   });
 });
 
+it('renders input placeholder initially with an empty space character', () => {
+  const { getByTestId } = render(
+    <TextInput multiline label="Multiline input" testID={'text-input'} />
+  );
+
+  expect(getByTestId('text-input-flat').props.placeholder).toBe(' ');
+});
+
 describe('maxFontSizeMultiplier', () => {
   const createInput = (type, maxFontSizeMultiplier) => {
     return (
