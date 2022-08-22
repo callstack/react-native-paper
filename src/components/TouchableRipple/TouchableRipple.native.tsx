@@ -40,7 +40,7 @@ const TouchableRipple = ({
   theme,
   ...rest
 }: Props) => {
-  const disabled = disabledProp || !rest.onPress;
+  const disabled = disabledProp || (!rest.onPress && !rest.onLongPress);
   const { calculatedRippleColor, calculatedUnderlayColor } =
     getTouchableRippleColors({
       theme,

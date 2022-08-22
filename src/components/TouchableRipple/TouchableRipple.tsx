@@ -229,7 +229,7 @@ const TouchableRipple = ({
     });
   };
 
-  const disabled = disabledProp || !rest.onPress;
+  const disabled = disabledProp || (!rest.onPress && !rest.onLongPress);
 
   return (
     <TouchableWithoutFeedback
