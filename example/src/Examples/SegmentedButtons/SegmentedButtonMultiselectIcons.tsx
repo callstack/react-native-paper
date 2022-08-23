@@ -10,9 +10,7 @@ const SegmentedButtonMultiselectIcons = () => {
       <SegmentedButtons
         multiSelect
         onValueChange={(value) => {
-          if (Array.isArray(value)) {
-            setValue(value);
-          }
+          setValue(value);
         }}
         value={value}
         style={styles.group}

@@ -6,8 +6,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import type { Theme } from '../../types';
-import { withTheme } from '../../core/theming';
+import { useTheme } from '../../core/theming';
 import SegmentedButtonItem from './SegmentedButtonItem';
 import { getDisabledSegmentedButtonStyle } from './utils';
 import type { IconSource } from '../Icon';
@@ -22,6 +21,10 @@ type ConditionalValue =
        * Support multiple selected options.
        */
       multiSelect: true;
+      /**
+       * Function to execute on selection change
+       */
+      onValueChange: (value: string[]) => void;
     }
   | {
       /**
@@ -32,13 +35,13 @@ type ConditionalValue =
        * Support multiple selected options.
        */
       multiSelect?: false;
+      /**
+       * Function to execute on selection change
+       */
+      onValueChange: (value: string) => void;
     };
 
 export type Props = {
-  /**
-   * Function to execute on selection change
-   */
-  onValueChange: (item: string | string[]) => void;
   /**
    * Buttons to display as options in toggle button.
    * Button should contain the following properties:
@@ -66,23 +69,7 @@ export type Props = {
     testID?: string;
   }[];
   style?: StyleProp<ViewStyle>;
-  /**
-   * @optional
-   */
-  theme: Theme;
 } & ConditionalValue;
-
-type SegmentedButtonContextType = {
-  value: string | string[];
-  onValueChange: (item: string | string[]) => void;
-  multiSelect?: boolean;
-};
-
-export const SegmentedButtonGroupContext =
-  React.createContext<SegmentedButtonContextType>({
-    value: '',
-    onValueChange: () => {},
-  });
 
 /**
  * @supported Available in v5.x
@@ -130,47 +117,35 @@ const SegmentedButtons = ({
   buttons,
   multiSelect,
   style,
-  theme,
 }: Props) => {
-  if (buttons.length < 2 || buttons.length > 5) {
-    console.warn(
-      'Segmented buttons are best used for selecting between 2 and 5 choices. If you have more than five choices, consider using another component, such as chips.'
-    );
-  }
-
+  const theme = useTheme();
   return (
-    <SegmentedButtonGroupContext.Provider
-      value={{
-        value,
-        onValueChange,
-        multiSelect,
-      }}
-    >
-      <View style={[styles.row, style]}>
-        {buttons.map((item, i) => {
-          const disabledChildStyle = getDisabledSegmentedButtonStyle({
-            theme,
-            buttons,
-            index: i,
-          });
-          const segment =
-            i === 0 ? 'first' : i === buttons.length - 1 ? 'last' : undefined;
+    <View style={[styles.row, style]}>
+      {buttons.map((item, i) => {
+        const disabledChildStyle = getDisabledSegmentedButtonStyle({
+          theme,
+          buttons,
+          index: i,
+        });
+        const segment =
+          i === 0 ? 'first' : i === buttons.length - 1 ? 'last' : undefined;
 
-          return (
-            <SegmentedButtonItem
-              key={i}
-              segment={segment}
-              style={[item.style, disabledChildStyle]}
-              {...item}
-            />
-          );
-        })}
-      </View>
-    </SegmentedButtonGroupContext.Provider>
+        return (
+          <SegmentedButtonItem
+            // @ts-expect-error We can't statically determine the type of the function
+            onValueChange={onValueChange}
+            key={i}
+            currentValue={value}
+            multiSelect={multiSelect}
+            segment={segment}
+            {...item}
+            style={[item.style, disabledChildStyle]}
+          />
+        );
+      })}
+    </View>
   );
 };
-
-SegmentedButtons.displayName = 'SegmentedButtons';
 
 const styles = StyleSheet.create({
   row: {
@@ -178,7 +153,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(SegmentedButtons);
+export default SegmentedButtons;
 
 // @component-docs ignore-next-line
 export { SegmentedButtons as SegmentedButtons };

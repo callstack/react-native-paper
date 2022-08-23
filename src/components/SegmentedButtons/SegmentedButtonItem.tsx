@@ -8,14 +8,12 @@ import {
   TextStyle,
   Animated,
 } from 'react-native';
-import { withTheme } from '../../core/theming';
+import { useTheme } from '../../core/theming';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { IconSource } from '../Icon';
-import type { Theme } from '../../types';
 import color from 'color';
 import Icon from '../Icon';
-import { SegmentedButtonGroupContext } from './SegmentedButtons';
 import {
   getSegmentedButtonBorderRadius,
   getSegmentedButtonColors,
@@ -24,6 +22,18 @@ import {
 const DEFAULT_PADDING = 9;
 
 export type Props = {
+  /**
+   * Value of the currently selected segmented button.
+   */
+  currentValue: string | string[];
+  /**
+   * Support multiple selected options.
+   */
+  multiSelect?: boolean;
+  /**
+   * Function to execute on selection change
+   */
+  onValueChange: (value: string | string[]) => void;
   /**
    * Icon to display for the `SegmentedButtonItem`.
    */
@@ -62,10 +72,6 @@ export type Props = {
   density?: 0 | -1 | -2 | -3;
   style?: StyleProp<ViewStyle>;
   /**
-   * @optional
-   */
-  theme: Theme;
-  /**
    * testID to be used on tests.
    */
   testID?: string;
@@ -73,24 +79,27 @@ export type Props = {
 
 const SegmentedButtonItem = ({
   value,
-  theme,
   accessibilityLabel,
   disabled,
   style,
   showSelectedCheck,
   icon,
   testID,
+  onValueChange,
+  multiSelect,
   label,
   onPress,
   segment,
+  currentValue,
   density = 0,
 }: Props) => {
-  const context = React.useContext(SegmentedButtonGroupContext);
+  const theme = useTheme();
+
   const checkScale = React.useRef(new Animated.Value(0)).current;
 
-  const checked = Array.isArray(context.value)
-    ? context.value.includes(value)
-    : context.value === value;
+  const checked = Array.isArray(currentValue)
+    ? currentValue.includes(value)
+    : currentValue === value;
 
   React.useEffect(() => {
     if (!showSelectedCheck) {
@@ -166,14 +175,14 @@ const SegmentedButtonItem = ({
   const handleOnPress = (e: GestureResponderEvent) => {
     onPress?.(e);
 
-    if (context.multiSelect && Array.isArray(context.value)) {
-      context.onValueChange(
+    if (multiSelect && Array.isArray(currentValue)) {
+      onValueChange(
         checked
-          ? [...context.value.filter((val) => value !== val)]
-          : [...context.value, value]
+          ? [...currentValue.filter((val) => value !== val)]
+          : [...currentValue, value]
       );
-    } else if (!checked) {
-      context.onValueChange(value);
+    } else if (!checked && !multiSelect) {
+      onValueChange(value);
     }
   };
 
@@ -240,7 +249,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(SegmentedButtonItem);
+export default SegmentedButtonItem;
 
-const SegmentedButtonWithTheme = withTheme(SegmentedButtonItem);
+const SegmentedButtonWithTheme = SegmentedButtonItem;
 export { SegmentedButtonWithTheme as SegmentedButton };

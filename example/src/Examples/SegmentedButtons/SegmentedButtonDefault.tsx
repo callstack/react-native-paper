@@ -10,7 +10,7 @@ const SegmentedButtonDefault = () => {
       <SegmentedButtons
         value={value}
         onValueChange={(value) => {
-          typeof value === 'string' && setValue(value);
+          setValue(value);
         }}
         buttons={[
           {

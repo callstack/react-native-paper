@@ -9,7 +9,7 @@ const SegmentedButtonDisabled = () => {
     <List.Section title={`Segmented Button - disabled`}>
       <SegmentedButtons
         onValueChange={(value) => {
-          typeof value === 'string' && setValue(value);
+          setValue(value);
         }}
         buttons={[
           {
