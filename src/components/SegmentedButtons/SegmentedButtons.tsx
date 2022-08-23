@@ -84,7 +84,7 @@ export type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { SegmentedButton } from 'react-native-paper';
+ * import { SegmentedButtons } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [value, setValue] = React.useState('');
