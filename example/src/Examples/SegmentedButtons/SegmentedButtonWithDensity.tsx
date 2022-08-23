@@ -12,23 +12,21 @@ const SegmentedButtonWithDensity = () => {
           setValue(value);
         }}
         value={value}
+        density="medium"
         style={styles.group}
         buttons={[
           {
             style: styles.button,
-            density: -2,
             value: 'walk',
             label: 'Walking',
           },
           {
             style: styles.button,
-            density: -2,
             value: 'transit',
             label: 'Transit',
           },
           {
             style: styles.button,
-            density: -2,
             value: 'drive',
             label: 'Driving',
           },

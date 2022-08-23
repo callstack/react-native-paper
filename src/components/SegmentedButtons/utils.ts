@@ -9,6 +9,27 @@ type BaseProps = {
   checked: boolean;
 };
 
+const DEFAULT_PADDING = 9;
+
+export const getSegmentedButtonDensityPadding = ({
+  density,
+}: {
+  density?: 'regular' | 'small' | 'medium' | 'high';
+}) => {
+  let padding = DEFAULT_PADDING;
+
+  switch (density) {
+    case 'small':
+      return padding - 2;
+    case 'medium':
+      return padding - 4;
+    case 'high':
+      return padding - 8;
+    default:
+      return padding;
+  }
+};
+
 export const getDisabledSegmentedButtonStyle = ({
   theme,
   index,

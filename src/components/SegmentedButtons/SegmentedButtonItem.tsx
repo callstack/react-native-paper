@@ -17,9 +17,8 @@ import Icon from '../Icon';
 import {
   getSegmentedButtonBorderRadius,
   getSegmentedButtonColors,
+  getSegmentedButtonDensityPadding,
 } from './utils';
-
-const DEFAULT_PADDING = 9;
 
 export type Props = {
   /**
@@ -69,7 +68,7 @@ export type Props = {
   /**
    * Density is applied to the height, to allow usage in denser UIs.
    */
-  density?: 0 | -1 | -2 | -3;
+  density?: 'regular' | 'small' | 'medium' | 'high';
   style?: StyleProp<ViewStyle>;
   /**
    * testID to be used on tests.
@@ -91,7 +90,7 @@ const SegmentedButtonItem = ({
   onPress,
   segment,
   currentValue,
-  density = 0,
+  density = 'regular',
 }: Props) => {
   const theme = useTheme();
 
@@ -155,10 +154,7 @@ const SegmentedButtonItem = ({
     borderRadius,
     ...segmentBorderRadius,
   };
-  const paddingVertical = density
-    ? DEFAULT_PADDING + density * 2
-    : DEFAULT_PADDING;
-
+  const paddingVertical = getSegmentedButtonDensityPadding({ density });
   const rippleStyle: ViewStyle = {
     borderRadius,
     ...segmentBorderRadius,

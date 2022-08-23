@@ -52,7 +52,6 @@ export type Props = {
    * - `onPress`: callback that is called when button is pressed
    * - `label`: label text of the button
    * - `showSelectedCheck`: show optional check icon to indicate selected state
-   * - `density`: density is applied to the height, to allow usage in denser UIs
    * - `style`: pass additional styles for the button
    * - `testID`: testID to be used on tests
    */
@@ -64,10 +63,13 @@ export type Props = {
     onPress?: (event: GestureResponderEvent) => void;
     label?: string;
     showSelectedCheck?: boolean;
-    density?: 0 | -1 | -2 | -3;
     style?: StyleProp<ViewStyle>;
     testID?: string;
   }[];
+  /**
+   * Density is applied to the height, to allow usage in denser UIs
+   */
+  density?: 'regular' | 'small' | 'medium' | 'high';
   style?: StyleProp<ViewStyle>;
 } & ConditionalValue;
 
@@ -116,6 +118,7 @@ const SegmentedButtons = ({
   onValueChange,
   buttons,
   multiSelect,
+  density,
   style,
 }: Props) => {
   const theme = useTheme();
@@ -138,6 +141,7 @@ const SegmentedButtons = ({
             currentValue={value}
             multiSelect={multiSelect}
             segment={segment}
+            density={density}
             {...item}
             style={[item.style, disabledChildStyle]}
           />
