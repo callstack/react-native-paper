@@ -614,6 +614,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             Array [
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
                 "fontSize": 22,
                 "fontWeight": "400",
                 "letterSpacing": 0,

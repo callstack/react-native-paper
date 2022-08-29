@@ -58,6 +58,7 @@ export type LabelProps = {
   wiggleOffsetX: number;
   labelScale: number;
   fontSize: number;
+  lineHeight?: number | undefined;
   fontWeight: TextStyle['fontWeight'];
   font: any;
   topPosition: number;

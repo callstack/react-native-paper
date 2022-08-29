@@ -1669,6 +1669,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -1889,6 +1890,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -2109,6 +2111,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -2329,6 +2332,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -2549,6 +2553,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -4574,6 +4579,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -4622,6 +4628,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -4836,6 +4843,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -4884,6 +4892,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -5098,6 +5107,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -5146,6 +5156,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -5552,6 +5563,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -5772,6 +5784,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -5992,6 +6005,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -6370,6 +6384,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -6418,6 +6433,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -6632,6 +6648,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -6680,6 +6697,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -6894,6 +6912,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -6942,6 +6961,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -7347,6 +7367,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -7567,6 +7588,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -7787,6 +7809,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -8007,6 +8030,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
@@ -8227,6 +8251,7 @@ exports[`renders shifting bottom navigation 1`] = `
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,

@@ -5,7 +5,6 @@ import {
   StyleProp,
   StyleSheet,
   I18nManager,
-  Platform,
 } from 'react-native';
 import { useTheme } from '../../core/theming';
 import { Font, MD3TypescaleKey, ThemeProp } from '../../types';
@@ -99,7 +98,7 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
         return {
           ...acc,
           [key]: {
-            ...(Platform.OS === 'android' && { fontFamily }),
+            fontFamily,
             fontSize,
             fontWeight,
             lineHeight,

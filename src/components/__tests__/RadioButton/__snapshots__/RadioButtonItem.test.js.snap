@@ -105,6 +105,7 @@ exports[`can render leading radio button control 1`] = `
         Array [
           Object {
             "color": "rgba(28, 27, 31, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": "400",
             "letterSpacing": 0.15,
@@ -183,6 +184,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
         Array [
           Object {
             "color": "rgba(28, 27, 31, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": "400",
             "letterSpacing": 0.15,
@@ -442,6 +444,7 @@ exports[`renders unchecked 1`] = `
         Array [
           Object {
             "color": "rgba(28, 27, 31, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": "400",
             "letterSpacing": 0.15,
