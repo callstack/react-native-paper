@@ -1,13 +1,36 @@
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 import renderer from 'react-test-renderer';
 import color from 'color';
+import { render } from '@testing-library/react-native';
 import FAB from '../FAB';
 import { getFABColors } from '../FAB/utils';
 import getContrastingColor from '../../utils/getContrastingColor';
 import { black, white } from '../../styles/themes/v2/colors';
 import { getTheme } from '../../core/theming';
 
-it('renders normal FAB', () => {
+const styles = StyleSheet.create({
+  borderRadius: {
+    borderRadius: 0,
+  },
+  small: {
+    height: 40,
+    width: 40,
+    borderRadius: 12,
+  },
+  medium: {
+    height: 56,
+    width: 56,
+    borderRadius: 16,
+  },
+  large: {
+    height: 96,
+    width: 96,
+    borderRadius: 28,
+  },
+});
+
+it('renders default FAB', () => {
   const tree = renderer.create(<FAB onPress={() => {}} icon="plus" />).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -16,6 +39,14 @@ it('renders normal FAB', () => {
 it('renders small FAB', () => {
   const tree = renderer
     .create(<FAB size="small" onPress={() => {}} icon="plus" />)
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders large FAB', () => {
+  const tree = renderer
+    .create(<FAB size="large" onPress={() => {}} icon="plus" />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -98,6 +129,29 @@ it('renders visible FAB', () => {
   update(<FAB onPress={() => {}} icon="plus" visible={true} />);
 
   expect(toJSON()).toMatchSnapshot();
+});
+
+it('renders FAB with custom border radius', () => {
+  const { getByTestId } = render(
+    <FAB
+      onPress={() => {}}
+      icon="plus"
+      testID="fab"
+      style={styles.borderRadius}
+    />
+  );
+
+  expect(getByTestId('fab-container')).toHaveStyle({ borderRadius: 0 });
+});
+
+['small', 'medium', 'large'].forEach((size) => {
+  it(`renders ${size} FAB with correct size and border radius`, () => {
+    const { getByTestId } = render(
+      <FAB onPress={() => {}} size={size} icon="plus" testID={`${size}-fab`} />
+    );
+
+    expect(getByTestId(`${size}-fab-content`)).toHaveStyle(styles[size]);
+  });
 });
 
 describe('getFABColors - background color', () => {

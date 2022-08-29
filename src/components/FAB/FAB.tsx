@@ -164,7 +164,7 @@ const FAB = ({
   visible = true,
   uppercase = !theme.isV3,
   loading,
-  testID,
+  testID = 'fab',
   size = 'medium',
   customSize,
   mode = 'elevated',
@@ -214,13 +214,10 @@ const FAB = ({
     color: foregroundColor,
     ...(isV3 ? theme.typescale.labelLarge : theme.fonts.medium),
   };
-  const shapeStyle = { borderRadius: fabStyle.borderRadius };
 
-  const containerStyles = [
-    !isV3 && styles.elevated,
-    !isV3 && disabled && styles.disabled,
-    shapeStyle,
-  ];
+  const { borderRadius = fabStyle.borderRadius } = (StyleSheet.flatten(style) ||
+    {}) as ViewStyle;
+
   const md3Elevation = isFlatMode || disabled ? 0 : 3;
 
   return (
@@ -229,6 +226,7 @@ const FAB = ({
       style={
         [
           {
+            borderRadius,
             backgroundColor,
             opacity: visibility,
             transform: [
@@ -237,11 +235,14 @@ const FAB = ({
               },
             ],
           },
-          containerStyles,
+          styles.container,
+          !isV3 && styles.elevated,
+          !isV3 && disabled && styles.disabled,
           style,
         ] as StyleProp<ViewStyle>
       }
       pointerEvents={visible ? 'auto' : 'none'}
+      testID={`${testID}-container`}
       {...(isV3 && { elevation: md3Elevation })}
     >
       <TouchableRipple
@@ -253,11 +254,11 @@ const FAB = ({
         accessibilityLabel={accessibilityLabel}
         accessibilityRole="button"
         accessibilityState={{ ...accessibilityState, disabled }}
-        style={shapeStyle}
         testID={testID}
       >
         <View
           style={[styles.content, label ? extendedStyle : fabStyle]}
+          testID={`${testID}-content`}
           pointerEvents="none"
         >
           {icon && loading !== true ? (
@@ -295,6 +296,9 @@ const FAB = ({
 const styles = StyleSheet.create({
   elevated: {
     elevation: 6,
+  },
+  container: {
+    overflow: 'hidden',
   },
   content: {
     flexDirection: 'row',
