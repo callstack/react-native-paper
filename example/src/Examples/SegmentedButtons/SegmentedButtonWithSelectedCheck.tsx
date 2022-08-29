@@ -8,9 +8,7 @@ const SegmentedButtonWithSelectedCheck = () => {
   return (
     <List.Section title={`Segmented Button - show selected check`}>
       <SegmentedButtons
-        onValueChange={(value) => {
-          setValue(value);
-        }}
+        onValueChange={setValue}
         value={value}
         style={styles.group}
         buttons={[

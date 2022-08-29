@@ -92,9 +92,7 @@ export type Props = {
  *   return (
  *     <SegmentedButtons
         value={value}
-        onValueChange={(value) => {
-          typeof value === 'string' && setValue(value);
-        }}
+        onValueChange={setValue}
         buttons={[
           {
             value: 'walk',

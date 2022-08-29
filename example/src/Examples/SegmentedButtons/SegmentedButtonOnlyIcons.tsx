@@ -8,9 +8,7 @@ const SegmentedButtonOnlyIcons = () => {
   return (
     <List.Section title={`Segmented Button - only icons`}>
       <SegmentedButtons
-        onValueChange={(value) => {
-          setValue(value);
-        }}
+        onValueChange={setValue}
         style={styles.group}
         value={value}
         buttons={[

@@ -9,9 +9,7 @@ const SegmentedButtonMultiselect = () => {
     <List.Section title={`Segmented Button - multiselect`}>
       <SegmentedButtons
         multiSelect
-        onValueChange={(value) => {
-          setValue(value);
-        }}
+        onValueChange={setValue}
         value={value}
         style={styles.group}
         buttons={[

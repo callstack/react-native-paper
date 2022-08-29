@@ -8,9 +8,7 @@ const SegmentedButtonWithDensity = () => {
   return (
     <List.Section title={`Segmented Button - only labels + density`}>
       <SegmentedButtons
-        onValueChange={(value) => {
-          setValue(value);
-        }}
+        onValueChange={setValue}
         value={value}
         density="medium"
         style={styles.group}
