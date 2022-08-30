@@ -22,17 +22,9 @@ import {
 
 export type Props = {
   /**
-   * Value of the currently selected segmented button.
+   * Whether the segmented button is checked
    */
-  currentValue: string | string[];
-  /**
-   * Support multiple selected options.
-   */
-  multiSelect?: boolean;
-  /**
-   * Function to execute on selection change
-   */
-  onValueChange: (value: string | string[]) => void;
+  checked: boolean;
   /**
    * Icon to display for the `SegmentedButtonItem`.
    */
@@ -77,28 +69,21 @@ export type Props = {
 };
 
 const SegmentedButtonItem = ({
-  value,
+  checked,
   accessibilityLabel,
   disabled,
   style,
   showSelectedCheck,
   icon,
   testID,
-  onValueChange,
-  multiSelect,
   label,
   onPress,
   segment,
-  currentValue,
   density = 'regular',
 }: Props) => {
   const theme = useTheme();
 
   const checkScale = React.useRef(new Animated.Value(0)).current;
-
-  const checked = Array.isArray(currentValue)
-    ? currentValue.includes(value)
-    : currentValue === value;
 
   React.useEffect(() => {
     if (!showSelectedCheck) {
@@ -168,26 +153,12 @@ const SegmentedButtonItem = ({
     color: textColor,
   };
 
-  const handleOnPress = (e: GestureResponderEvent) => {
-    onPress?.(e);
-
-    if (multiSelect && Array.isArray(currentValue)) {
-      onValueChange(
-        checked
-          ? [...currentValue.filter((val) => value !== val)]
-          : [...currentValue, value]
-      );
-    } else if (!checked && !multiSelect) {
-      onValueChange(value);
-    }
-  };
-
   return (
     <View style={[buttonStyle, styles.button, style]}>
       <TouchableRipple
         borderless
         delayPressIn={0}
-        onPress={handleOnPress}
+        onPress={onPress}
         accessibilityLabel={accessibilityLabel}
         accessibilityState={{ disabled, checked }}
         accessibilityRole="button"

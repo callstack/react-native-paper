@@ -76,7 +76,7 @@ export type Props = {
 /**
  * @supported Available in v5.x
  * Segmented buttons can be used to select options, switch views or sort elements.</br>
- * 
+ *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/segmented-button.png" />
  * </div>
@@ -91,20 +91,20 @@ export type Props = {
  *
  *   return (
  *     <SegmentedButtons
-        value={value}
-        onValueChange={setValue}
-        buttons={[
-          {
-            value: 'walk',
-            label: 'Walking',
-          },
-          {
-            value: 'train',
-            label: 'Transit',
-          },
-        ]}
-        style={styles.group}
-      />
+ *      value={value}
+ *      onValueChange={setValue}
+ *      buttons={[
+ *        {
+ *          value: 'walk',
+ *          label: 'Walking',
+ *        },
+ *        {
+ *          value: 'train',
+ *          label: 'Transit',
+ *        },
+ *      ]}
+ *      style={styles.group}
+ *    />
  *   );
  * };
  *
@@ -131,16 +131,33 @@ const SegmentedButtons = ({
         const segment =
           i === 0 ? 'first' : i === buttons.length - 1 ? 'last' : undefined;
 
+        const checked =
+          multiSelect && Array.isArray(value)
+            ? value.includes(item.value)
+            : value === item.value;
+
+        const onPress = (e: GestureResponderEvent) => {
+          item.onPress?.(e);
+
+          const nextValue =
+            multiSelect && Array.isArray(value)
+              ? checked
+                ? value.filter((val) => item.value !== val)
+                : [...value, item.value]
+              : item.value;
+
+          // @ts-expect-error: TS doesn't preserve types after destructuring, so the type isn't inferred correctly
+          onValueChange(nextValue);
+        };
+
         return (
           <SegmentedButtonItem
-            // @ts-expect-error We can't statically determine the type of the function
-            onValueChange={onValueChange}
+            {...item}
             key={i}
-            currentValue={value}
-            multiSelect={multiSelect}
+            checked={checked}
             segment={segment}
             density={density}
-            {...item}
+            onPress={onPress}
             style={[item.style, disabledChildStyle]}
           />
         );
