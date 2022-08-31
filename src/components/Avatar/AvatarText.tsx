@@ -5,6 +5,7 @@ import {
   StyleSheet,
   StyleProp,
   TextStyle,
+  useWindowDimensions,
 } from 'react-native';
 import Text from '../Typography/Text';
 import { withTheme } from '../../core/theming';
@@ -74,6 +75,7 @@ const AvatarText = ({
   const textColor =
     customColor ??
     getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
+  const { fontScale } = useWindowDimensions();
 
   return (
     <View
@@ -95,7 +97,7 @@ const AvatarText = ({
           {
             color: textColor,
             fontSize: size / 2,
-            lineHeight: size,
+            lineHeight: size / fontScale,
           },
           labelStyle,
         ]}

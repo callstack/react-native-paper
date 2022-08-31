@@ -147,7 +147,7 @@ exports[`renders avatar with text 1`] = `
           Object {
             "color": "#ffffff",
             "fontSize": 32,
-            "lineHeight": 64,
+            "lineHeight": 32,
           },
           undefined,
         ],
@@ -195,7 +195,7 @@ exports[`renders avatar with text and custom background color 1`] = `
           Object {
             "color": "#ffffff",
             "fontSize": 32,
-            "lineHeight": 64,
+            "lineHeight": 32,
           },
           undefined,
         ],
@@ -243,7 +243,7 @@ exports[`renders avatar with text and custom colors 1`] = `
           Object {
             "color": "#FFFFFF",
             "fontSize": 32,
-            "lineHeight": 64,
+            "lineHeight": 32,
           },
           undefined,
         ],
@@ -291,7 +291,7 @@ exports[`renders avatar with text and custom size 1`] = `
           Object {
             "color": "#ffffff",
             "fontSize": 48,
-            "lineHeight": 96,
+            "lineHeight": 48,
           },
           undefined,
         ],
