@@ -53,6 +53,7 @@ export { default as Appbar } from './components/Appbar';
 export { default as TouchableRipple } from './components/TouchableRipple/TouchableRipple';
 export { default as TextInput } from './components/TextInput/TextInput';
 export { default as ToggleButton } from './components/ToggleButton';
+export { default as SegmentedButtons } from './components/SegmentedButtons/SegmentedButtons';
 
 export {
   Caption,
@@ -143,6 +144,7 @@ export type { Props as ParagraphProps } from './components/Typography/v2/Paragra
 export type { Props as SubheadingProps } from './components/Typography/v2/Subheading';
 export type { Props as TitleProps } from './components/Typography/v2/Title';
 export type { Props as TextProps } from './components/Typography/Text';
+export type { Props as SegmentedButtonsProps } from './components/SegmentedButtons/SegmentedButtons';
 
 export type {
   MD2Theme,

@@ -38,6 +38,7 @@ import TouchableRippleExample from './Examples/TouchableRippleExample';
 import ThemeExample from './Examples/ThemeExample';
 import RadioButtonItemExample from './Examples/RadioButtonItemExample';
 import AnimatedFABExample from './Examples/AnimatedFABExample';
+import SegmentedButtonExample from './Examples/SegmentedButtonsExample';
 
 export const examples: Record<
   string,
@@ -69,6 +70,7 @@ export const examples: Record<
   radioGroup: RadioButtonGroupExample,
   radioItem: RadioButtonItemExample,
   searchbar: SearchbarExample,
+  segmentedButton: SegmentedButtonExample,
   snackbar: SnackbarExample,
   surface: SurfaceExample,
   switch: SwitchExample,
