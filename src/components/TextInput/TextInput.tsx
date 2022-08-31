@@ -221,7 +221,7 @@ const TextInput = React.forwardRef<TextInputHandles, Props>(
     );
     const [focused, setFocused] = React.useState<boolean>(false);
     const [placeholder, setPlaceholder] = React.useState<string | undefined>(
-      ''
+      ' '
     );
     const [uncontrolledValue, setUncontrolledValue] = React.useState<
       string | undefined
@@ -304,7 +304,15 @@ const TextInput = React.forwardRef<TextInputHandles, Props>(
         ) as unknown as NodeJS.Timeout;
       } else {
         // hidePlaceholder
-        setPlaceholder('');
+
+        // Issue: https://github.com/callstack/react-native-paper/issues/3138
+        // Description:   Changing the placeholder text value dynamically,
+        //                within multiline input on iOS, doesn't work properly –
+        //                the placeholder is not displayed initially.
+        // Root cause:    Placeholder initial value, which has length 0.
+        // More context:  The issue was also reproduced in react-native, using its own TextInput.
+        // Workaround:    Set an empty space character in the default value.
+        setPlaceholder(' ');
       }
 
       return () => {
