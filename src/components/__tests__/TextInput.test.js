@@ -200,6 +200,14 @@ it('renders outlined input with custom font variant', () => {
   );
 });
 
+it('renders input placeholder initially with an empty space character', () => {
+  const { getByTestId } = render(
+    <TextInput multiline label="Multiline input" />
+  );
+
+  expect(getByTestId('text-input-flat').props.placeholder).toBe(' ');
+});
+
 describe('maxFontSizeMultiplier', () => {
   const createInput = (type, maxFontSizeMultiplier) => {
     return (
