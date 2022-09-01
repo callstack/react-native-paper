@@ -65,6 +65,8 @@ const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
     ? theme.colors.onSurfaceVariant
     : color(theme.colors.text).alpha(0.54).rgb().string();
   const titleMargin = isV3 ? 28 : 16;
+  const font = isV3 ? theme.fonts.titleSmall : theme.fonts.medium;
+
   return (
     <View style={[styles.container, style]} {...rest}>
       {title && (
@@ -77,7 +79,7 @@ const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
                 {
                   color: titleColor,
                   marginLeft: titleMargin,
-                  ...(isV3 ? theme.typescale.titleSmall : theme.fonts.medium),
+                  ...font,
                 },
               ]}
             >

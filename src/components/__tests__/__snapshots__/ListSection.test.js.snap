@@ -55,9 +55,7 @@ exports[`renders list section with custom title style 1`] = `
         "tertiaryContainer": "rgba(255, 216, 228, 1)",
       },
       "dark": false,
-      "isV3": true,
-      "roundness": 4,
-      "typescale": Object {
+      "fonts": Object {
         "bodyLarge": Object {
           "fontFamily": "System",
           "fontSize": 16,
@@ -164,6 +162,8 @@ exports[`renders list section with custom title style 1`] = `
           "lineHeight": 20,
         },
       },
+      "isV3": true,
+      "roundness": 4,
       "version": 3,
     }
   }
@@ -496,9 +496,7 @@ exports[`renders list section with subheader 1`] = `
         "tertiaryContainer": "rgba(255, 216, 228, 1)",
       },
       "dark": false,
-      "isV3": true,
-      "roundness": 4,
-      "typescale": Object {
+      "fonts": Object {
         "bodyLarge": Object {
           "fontFamily": "System",
           "fontSize": 16,
@@ -605,6 +603,8 @@ exports[`renders list section with subheader 1`] = `
           "lineHeight": 20,
         },
       },
+      "isV3": true,
+      "roundness": 4,
       "version": 3,
     }
   }
@@ -935,9 +935,7 @@ exports[`renders list section without subheader 1`] = `
         "tertiaryContainer": "rgba(255, 216, 228, 1)",
       },
       "dark": false,
-      "isV3": true,
-      "roundness": 4,
-      "typescale": Object {
+      "fonts": Object {
         "bodyLarge": Object {
           "fontFamily": "System",
           "fontSize": 16,
@@ -1044,6 +1042,8 @@ exports[`renders list section without subheader 1`] = `
           "lineHeight": 20,
         },
       },
+      "isV3": true,
+      "roundness": 4,
       "version": 3,
     }
   }

@@ -260,10 +260,13 @@ const Button = ({
   const { color: customLabelColor, fontSize: customLabelSize } =
     StyleSheet.flatten(labelStyle) || {};
 
+  const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
+
   const textStyle = {
     color: textColor,
-    ...(isV3 ? theme.typescale.labelLarge : theme.fonts.medium),
+    ...font,
   };
+
   const iconStyle =
     StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
       ? [

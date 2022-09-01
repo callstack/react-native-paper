@@ -207,12 +207,13 @@ const FAB = ({
   const isFlatMode = mode === 'flat';
   const iconSize = isLargeSize ? 36 : 24;
   const loadingIndicatorSize = isLargeSize ? 24 : 18;
+  const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
 
   const fabStyle = getFabStyle({ customSize, size, theme });
   const extendedStyle = getExtendedFabStyle({ customSize, theme });
   const textStyle = {
     color: foregroundColor,
-    ...(isV3 ? theme.typescale.labelLarge : theme.fonts.medium),
+    ...font,
   };
 
   const { borderRadius = fabStyle.borderRadius } = (StyleSheet.flatten(style) ||
