@@ -10,12 +10,14 @@ class BottomNavigationRouteScreen extends React.Component<Props> {
   render(): JSX.Element {
     const { style, index, children, visibility, ...rest } = this.props;
 
-    const display = visibility === 0 ? 'none' : 'flex';
+    // Use display only on web, to fix animations during transitions between tabs.
+    const display =
+      Platform.OS === 'web' ? (visibility === 0 ? 'none' : 'flex') : undefined;
 
     return (
       <View
         testID={`RouteScreen: ${index}`}
-        style={[style, Platform.OS === 'web' && { display }]}
+        style={[style, { display }]}
         {...rest}
       >
         {children}

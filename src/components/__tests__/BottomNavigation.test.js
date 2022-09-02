@@ -284,6 +284,7 @@ it('hides labels in non-shifting bottom navigation', () => {
 });
 
 it('should have appropriate display style according to the visibility on web', () => {
+  const originalPlatform = Platform.OS;
   Platform.OS = 'web';
 
   const { getByTestId, rerender } = render(
@@ -296,6 +297,8 @@ it('should have appropriate display style according to the visibility on web', (
 
   rerender(<BottomNavigationRouteScreen visibility={0} index={0} />);
   expect(wrapper).toHaveStyle({ display: 'none' });
+
+  Platform.OS = originalPlatform;
 });
 
 it('should have labelMaxFontSizeMultiplier passed to label', () => {
