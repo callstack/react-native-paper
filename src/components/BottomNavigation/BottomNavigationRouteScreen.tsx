@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, View, ViewProps } from 'react-native';
+import { Animated, Platform, View, ViewProps } from 'react-native';
 
 interface Props extends ViewProps {
   visibility?: 0 | 1 | Animated.AnimatedInterpolation;
@@ -15,7 +15,7 @@ class BottomNavigationRouteScreen extends React.Component<Props> {
     return (
       <View
         testID={`RouteScreen: ${index}`}
-        style={[style, { display }]}
+        style={[style, Platform.OS === 'web' && { display }]}
         {...rest}
       >
         {children}
