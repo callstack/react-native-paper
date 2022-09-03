@@ -1,5 +1,5 @@
-import type { InternalTheme } from 'src/types';
+import type { InternalTheme } from './src/types';
 
 declare global {
-  export type ReactNativePaperTheme = InternalTheme;
+  export type ReactNativePaperTheme = {} & InternalTheme;
 }
