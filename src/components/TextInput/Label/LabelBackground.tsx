@@ -26,7 +26,7 @@ const LabelBackground = ({
     outputRange: [hasFocus ? 1 : 0, 0],
   });
 
-  const { isV3, colors } = useTheme();
+  const { isV3 } = useTheme();
 
   const labelTranslationX = {
     translateX: parentState.labeled.interpolate({
@@ -42,9 +42,7 @@ const LabelBackground = ({
     }),
   };
 
-  const labelTextTransform = isV3
-    ? [...labelStyle.transform]
-    : [...labelStyle.transform, labelTextScaleY];
+  const labelTextTransform = [...labelStyle.transform, labelTextScaleY];
 
   const labelTextWidth = isV3
     ? {
@@ -82,8 +80,8 @@ const LabelBackground = ({
             styles.outlinedLabel,
             isV3 && styles.md3OutlinedLabel,
             {
-              top: topPosition + (isV3 ? 0 : 1),
-              backgroundColor: isV3 ? colors.surface : backgroundColor,
+              top: topPosition + 1,
+              backgroundColor,
               opacity,
               transform: labelTextTransform,
             },
