@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper",
-  "version": "5.0.0-rc.4",
+  "version": "5.0.0-rc.5",
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -114,7 +114,9 @@
     "setupFiles": [
       "<rootDir>/testSetup.js"
     ],
-    "setupFilesAfterEnv": ["@testing-library/jest-native/extend-expect"],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect"
+    ],
     "cacheDirectory": "./cache/jest",
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",
