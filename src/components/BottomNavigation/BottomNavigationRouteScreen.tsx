@@ -10,7 +10,9 @@ class BottomNavigationRouteScreen extends React.Component<Props> {
   render(): JSX.Element {
     const { style, index, children, visibility, ...rest } = this.props;
 
-    // Use display only on web, to fix animations during transitions between tabs.
+    // On Web, the unfocused tab screens can still be clicked since they are transparent, but still there
+    // Hiding them with `display: none` makes sure that they won't receive clicks
+    // We only set it on Web since on native, react-native-pager-view's breaks due to layout changing
     const display =
       Platform.OS === 'web' ? (visibility === 0 ? 'none' : 'flex') : undefined;
 
