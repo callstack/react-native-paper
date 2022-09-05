@@ -120,7 +120,7 @@ const DataTableTitle = ({
         name="arrow-up"
         size={16}
         color={textColor}
-        direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+        direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
       />
     </Animated.View>
   ) : null;
@@ -138,7 +138,7 @@ const DataTableTitle = ({
             // if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
             numberOfLines > 1
               ? numeric
-                ? I18nManager.isRTL
+                ? I18nManager.getConstants().isRTL
                   ? styles.leftText
                   : styles.rightText
                 : styles.centerText

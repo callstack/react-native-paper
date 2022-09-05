@@ -94,7 +94,7 @@ const PaginationControls = ({
               name="page-first"
               color={color}
               size={size}
-              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+              direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
             />
           )}
           iconColor={textColor}
@@ -109,7 +109,7 @@ const PaginationControls = ({
             name="chevron-left"
             color={color}
             size={size}
-            direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+            direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
           />
         )}
         iconColor={textColor}
@@ -123,7 +123,7 @@ const PaginationControls = ({
             name="chevron-right"
             color={color}
             size={size}
-            direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+            direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
           />
         )}
         iconColor={textColor}
@@ -138,7 +138,7 @@ const PaginationControls = ({
               name="page-last"
               color={color}
               size={size}
-              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+              direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
             />
           )}
           iconColor={textColor}

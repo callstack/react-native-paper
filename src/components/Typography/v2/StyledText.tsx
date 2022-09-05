@@ -20,7 +20,7 @@ const StyledText = ({ alpha = 1, family, style, ...rest }: Props) => {
     .alpha(alpha)
     .rgb()
     .string();
-  const writingDirection = I18nManager.isRTL ? 'rtl' : 'ltr';
+  const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
 
   return (
     <Text
