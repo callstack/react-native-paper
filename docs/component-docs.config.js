@@ -129,4 +129,13 @@ module.exports = {
       renamed: '#006400',
     },
   },
+  typeDefinitions: {
+    IconSource: 'https://callstack.github.io/react-native-paper/icons.html',
+    Theme:
+      'https://callstack.github.io/react-native-paper/theming.html#theme-properties',
+    AccessibilityState:
+      'https://reactnative.dev/docs/accessibility#accessibilitystate',
+    'StyleProp<ViewStyle>': 'https://reactnative.dev/docs/view-style-props',
+    'StyleProp<TextStyle>': 'https://reactnative.dev/docs/text-style-props',
+  },
 };
