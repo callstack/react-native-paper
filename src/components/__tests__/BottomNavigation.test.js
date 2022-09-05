@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Easing, Animated } from 'react-native';
+import { StyleSheet, Easing, Animated, Platform } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
 import BottomNavigation from '../BottomNavigation/BottomNavigation.tsx';
@@ -283,7 +283,10 @@ it('hides labels in non-shifting bottom navigation', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('should have appropriate display style according to the visibility', () => {
+it('should have appropriate display style according to the visibility on web', () => {
+  const originalPlatform = Platform.OS;
+  Platform.OS = 'web';
+
   const { getByTestId, rerender } = render(
     <BottomNavigationRouteScreen visibility={1} index={0} />
   );
@@ -294,6 +297,8 @@ it('should have appropriate display style according to the visibility', () => {
 
   rerender(<BottomNavigationRouteScreen visibility={0} index={0} />);
   expect(wrapper).toHaveStyle({ display: 'none' });
+
+  Platform.OS = originalPlatform;
 });
 
 it('should have labelMaxFontSizeMultiplier passed to label', () => {

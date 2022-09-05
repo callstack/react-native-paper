@@ -42,7 +42,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             "zIndex": 1,
           },
           Object {
-            "display": "flex",
+            "display": undefined,
           },
         ]
       }
@@ -717,7 +717,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             "zIndex": 1,
           },
           Object {
-            "display": "flex",
+            "display": undefined,
           },
         ]
       }
@@ -1413,7 +1413,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
             "zIndex": 1,
           },
           Object {
-            "display": "flex",
+            "display": undefined,
           },
         ]
       }
@@ -2766,7 +2766,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             "zIndex": 1,
           },
           Object {
-            "display": "flex",
+            "display": undefined,
           },
         ]
       }
@@ -3471,7 +3471,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             "zIndex": 1,
           },
           Object {
-            "display": "flex",
+            "display": undefined,
           },
         ]
       }
@@ -4514,7 +4514,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             "zIndex": 1,
           },
           Object {
-            "display": "flex",
+            "display": undefined,
           },
         ]
       }
@@ -5499,7 +5499,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             "zIndex": 1,
           },
           Object {
-            "display": "flex",
+            "display": undefined,
           },
         ]
       }
@@ -6379,7 +6379,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             "zIndex": 1,
           },
           Object {
-            "display": "flex",
+            "display": undefined,
           },
         ]
       }
@@ -7363,7 +7363,7 @@ exports[`renders shifting bottom navigation 1`] = `
             "zIndex": 1,
           },
           Object {
-            "display": "flex",
+            "display": undefined,
           },
         ]
       }
