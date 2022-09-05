@@ -413,7 +413,7 @@ const styles = StyleSheet.create({
   },
   md3Label: {
     marginVertical: 10,
-    marginHorizontal: 24,
+    marginHorizontal: 24
   },
   md3LabelText: {
     marginHorizontal: 12,
