@@ -486,7 +486,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "paddingHorizontal": 0,
               "position": "absolute",
               "textAlign": "left",
-              "top": 58,
+              "top": 59,
               "transform": Array [
                 Object {
                   "translateX": 0,
@@ -496,6 +496,9 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
                 },
                 Object {
                   "scale": 0.75,
+                },
+                Object {
+                  "scaleY": 0.2,
                 },
               ],
               "width": -16,
