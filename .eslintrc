@@ -3,9 +3,7 @@
     "browser": true
   },
 
-  "extends": ["@callstack"],
-
-  "plugins": ["react-native"],
+  "extends": "@callstack",
 
   "rules": {
     "one-var": "off",
