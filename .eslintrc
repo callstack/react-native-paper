@@ -34,14 +34,5 @@
         "extensions": [".js", ".ts", ".tsx"]
       }
     }
-  },
-  "overrides": [
-    {
-      "files": ["**/*.test.js"],
-      "rules": {
-        "react-native-a11y/has-accessibility-hint": "off",
-        "react-native-a11y/has-valid-accessibility-ignores-invert-colors": "off"
-      }
-    }
-  ]
+  }
 }
