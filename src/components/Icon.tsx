@@ -91,7 +91,6 @@ const Icon = ({ source, color, size, theme, ...rest }: Props) => {
           {
             transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
           },
-          // eslint-disable-next-line react-native/no-inline-styles
           {
             width: size,
             height: size,
@@ -100,6 +99,7 @@ const Icon = ({ source, color, size, theme, ...rest }: Props) => {
           },
         ]}
         {...accessibilityProps}
+        accessibilityIgnoresInvertColors={true}
       />
     );
   } else if (typeof s === 'string') {

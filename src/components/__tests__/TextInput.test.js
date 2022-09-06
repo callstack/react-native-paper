@@ -54,7 +54,7 @@ it('correctly renders left-side icon adornment, and right-side affix adornment',
   expect(toJSON()).toMatchSnapshot();
 });
 
-it('correctly renders left-side icon adornment, and right-side affix adornment', () => {
+it('correctly renders left-side affix adornment, and right-side icon adornment', () => {
   const { getByText, getByTestId, toJSON } = render(
     <TextInput
       accessibilityLabel="Text input field"

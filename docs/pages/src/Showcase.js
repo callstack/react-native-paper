@@ -190,7 +190,11 @@ export default class Showcase extends React.Component<{}> {
               return (
                 <div key={item.image}>
                   <ImageContainer>
-                    <Image src={item.image} alt="" />
+                    <Image
+                      src={item.image}
+                      alt=""
+                      accessibilityIgnoresInvertColors={true}
+                    />
                     <Info style={{ backgroundColor: item.color }}>
                       <AppName
                         style={{

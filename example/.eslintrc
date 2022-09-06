@@ -6,6 +6,8 @@
   },
 
   "rules": {
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "react-native-a11y/has-accessibility-hint": "off",
+    "react-native-a11y/has-valid-accessibility-ignores-invert-colors": "off"
   }
 }

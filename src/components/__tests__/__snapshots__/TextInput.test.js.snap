@@ -837,6 +837,361 @@ exports[`correctly applies textAlign center 1`] = `
 </View>
 `;
 
+exports[`correctly renders left-side affix adornment, and right-side icon adornment 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "rgba(231, 224, 236, 1)",
+        "borderTopLeftRadius": 4,
+        "borderTopRightRadius": 4,
+      },
+      Object {},
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      Object {
+        "backgroundColor": "rgba(28, 27, 31, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "transform": Array [
+          Object {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
+    }
+  />
+  <View
+    style={
+      Array [
+        Object {
+          "paddingBottom": 0,
+          "paddingTop": 0,
+        },
+        Object {
+          "minHeight": 56,
+        },
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "opacity": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": Array [
+            Object {
+              "translateX": 4,
+            },
+          ],
+          "zIndex": 3,
+        }
+      }
+    >
+      <Text
+        collapsable={false}
+        maxFontSizeMultiplier={1.5}
+        numberOfLines={1}
+        onLayout={[Function]}
+        style={
+          Object {
+            "color": "rgba(103, 80, 164, 1)",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "left": 0,
+            "letterSpacing": 0.4,
+            "lineHeight": undefined,
+            "opacity": 0,
+            "paddingLeft": 16,
+            "paddingRight": 56,
+            "position": "absolute",
+            "textAlign": "left",
+            "top": 30,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "translateY": -12,
+              },
+              Object {
+                "scale": 0.75,
+              },
+            ],
+            "writingDirection": "ltr",
+          }
+        }
+        testID="text-input-label-active"
+      >
+        Flat input
+      </Text>
+      <Text
+        collapsable={false}
+        maxFontSizeMultiplier={1.5}
+        numberOfLines={1}
+        style={
+          Object {
+            "color": "rgba(73, 69, 79, 1)",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "left": 0,
+            "letterSpacing": 0.4,
+            "lineHeight": undefined,
+            "opacity": 0,
+            "paddingLeft": 16,
+            "paddingRight": 56,
+            "position": "absolute",
+            "textAlign": "left",
+            "top": 30,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "translateY": -12,
+              },
+              Object {
+                "scale": 0.75,
+              },
+            ],
+            "writingDirection": "ltr",
+          }
+        }
+        testID="text-input-label-inactive"
+      >
+        Flat input
+      </Text>
+    </View>
+    <TextInput
+      accessibilityLabel="Text input field"
+      editable={true}
+      maxFontSizeMultiplier={1.5}
+      multiline={false}
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder=" "
+      placeholderTextColor="rgba(73, 69, 79, 1)"
+      selectionColor="rgba(103, 80, 164, 1)"
+      style={
+        Array [
+          Object {
+            "flexGrow": 1,
+            "margin": 0,
+          },
+          Object {
+            "paddingLeft": 16,
+            "paddingRight": 56,
+          },
+          Object {
+            "height": 56,
+          },
+          Object {
+            "paddingBottom": 4,
+            "paddingTop": 24,
+          },
+          Object {
+            "color": "rgba(73, 69, 79, 1)",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "textAlign": "left",
+            "textAlignVertical": "center",
+          },
+          false,
+          Object {
+            "marginLeft": 0,
+            "marginRight": 40,
+            "paddingLeft": 40,
+            "paddingRight": 16,
+          },
+        ]
+      }
+      testID="text-input-flat"
+      underlineColorAndroid="transparent"
+      value="Some test value"
+    />
+  </View>
+  <View
+    collapsable={false}
+    onLayout={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "left": 16,
+        "opacity": 1,
+        "position": "absolute",
+        "top": null,
+      }
+    }
+    testID="left-affix-adornment"
+  >
+    <Text
+      maxFontSizeMultiplier={1.5}
+      style={
+        Array [
+          Object {
+            "color": "rgba(28, 27, 31, 0.54)",
+          },
+          Object {
+            "fontSize": 16,
+            "fontWeight": undefined,
+          },
+          Object {
+            "color": "#f44336",
+          },
+        ]
+      }
+    >
+      /100
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "height": 24,
+          "justifyContent": "center",
+          "position": "absolute",
+          "width": 24,
+        },
+        Object {
+          "right": 16,
+          "top": 16,
+        },
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        Object {
+          "alignSelf": undefined,
+          "bottom": undefined,
+          "left": undefined,
+          "position": undefined,
+          "right": undefined,
+          "shadowColor": "#000",
+          "shadowOffset": Object {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+          "top": undefined,
+        }
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          Object {
+            "shadowColor": "#000",
+            "shadowOffset": Object {
+              "height": 0,
+              "width": 0,
+            },
+            "shadowOpacity": 0,
+            "shadowRadius": 0,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            Object {
+              "backgroundColor": undefined,
+              "borderColor": "rgba(121, 116, 126, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+              "elevation": 0,
+              "height": 40,
+              "margin": 0,
+              "overflow": "hidden",
+              "width": 40,
+            }
+          }
+        >
+          <View
+            accessibilityRole="button"
+            accessibilityState={
+              Object {
+                "disabled": false,
+              }
+            }
+            accessible={true}
+            focusable={true}
+            hitSlop={
+              Object {
+                "bottom": 6,
+                "left": 6,
+                "right": 6,
+                "top": 6,
+              }
+            }
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Array [
+                Object {
+                  "overflow": "hidden",
+                },
+                Object {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+              ]
+            }
+            testID="right-icon-adornment"
+          >
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  Object {
+                    "color": "rgba(73, 69, 79, 1)",
+                    "fontSize": 24,
+                  },
+                ]
+              }
+            >
+              □
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`correctly renders left-side icon adornment, and right-side affix adornment  1`] = `
 <View
   style={

@@ -156,7 +156,6 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
           }
 
           const commonProps = {
-            key: side,
             side: side,
             testID: `${side}-${type}-adornment`,
             isTextInputFocused,
@@ -166,6 +165,7 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
             return (
               <IconAdornment
                 {...commonProps}
+                key={side}
                 icon={inputAdornmentComponent}
                 topPosition={topPosition[AdornmentType.Icon]}
                 forceFocus={forceFocus}
@@ -175,6 +175,7 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
             return (
               <AffixAdornment
                 {...commonProps}
+                key={side}
                 topPosition={topPosition[AdornmentType.Affix][side]}
                 affix={inputAdornmentComponent}
                 textStyle={textStyle}

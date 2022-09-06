@@ -97,7 +97,7 @@
     "react-test-renderer": "16.13.1",
     "release-it": "^13.4.0",
     "rimraf": "^3.0.2",
-    "typescript": "^4.5.4"
+    "typescript": "4.5.4"
   },
   "peerDependencies": {
     "react": "*",

@@ -22,6 +22,7 @@ const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
           styles.icon,
           { tintColor: color, width: iosIconSize, height: iosIconSize },
         ]}
+        accessibilityIgnoresInvertColors={true}
       />
     </View>
   ) : (
