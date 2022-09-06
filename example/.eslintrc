@@ -6,7 +6,6 @@
   },
 
   "rules": {
-    "react/prop-types": "off",
-    "react-native-a11y/has-accessibility-hint": "off"
+    "react/prop-types": "off"
   }
 }

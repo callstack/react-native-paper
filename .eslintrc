@@ -18,7 +18,6 @@
     "react-native/no-unused-styles": "error",
     "react-native/split-platform-components": "off",
     "react-native/no-raw-text": "off",
-    "react-native/no-inline-styles": "off",
     "react-native-a11y/has-accessibility-hint": "off",
     // crashes for some reason with error: TypeError: Cannot read properties of undefined (reading 'type')
     "react-native-a11y/has-valid-accessibility-state": "off"
