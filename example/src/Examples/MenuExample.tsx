@@ -1,11 +1,3 @@
-import * as React from 'react';
-import {
-  View,
-  StyleSheet,
-  Platform,
-  GestureResponderEvent,
-} from 'react-native';
-import type { StackNavigationProp } from '@react-navigation/stack';
 import {
   Menu,
   Appbar,
@@ -15,6 +7,14 @@ import {
   TouchableRipple,
   useTheme,
 } from 'react-native-paper';
+import * as React from 'react';
+import {
+  View,
+  StyleSheet,
+  Platform,
+  GestureResponderEvent,
+} from 'react-native';
+import type { StackNavigationProp } from '@react-navigation/stack';
 import ScreenWrapper from '../ScreenWrapper';
 
 type ContextualMenuCoord = { x: number; y: number };

@@ -11,9 +11,9 @@ import {
 } from 'react-native';
 
 import { withTheme } from '../../../core/theming';
-import { AdornmentSide } from './enums';
 import type { Theme } from '../../../types';
 import { getConstants } from '../helpers';
+import { AdornmentSide } from './enums';
 
 export type Props = {
   /**

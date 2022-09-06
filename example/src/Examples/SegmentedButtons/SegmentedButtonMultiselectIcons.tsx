@@ -1,6 +1,6 @@
+import { List, SegmentedButtons } from 'react-native-paper';
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { List, SegmentedButtons } from 'react-native-paper';
 
 const SegmentedButtonMultiselectIcons = () => {
   const [value, setValue] = React.useState<string[]>([]);

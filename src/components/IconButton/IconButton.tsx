@@ -12,8 +12,8 @@ import Icon, { IconSource } from '../Icon';
 import CrossFadeIcon from '../CrossFadeIcon';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren, Theme } from '../../types';
-import { getIconButtonColor } from './utils';
 import Surface from '../Surface';
+import { getIconButtonColor } from './utils';
 
 const PADDING = 8;
 

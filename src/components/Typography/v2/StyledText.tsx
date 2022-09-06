@@ -2,8 +2,8 @@ import color from 'color';
 import * as React from 'react';
 import { I18nManager, StyleProp, TextStyle, StyleSheet } from 'react-native';
 
-import Text from './Text';
 import { useTheme } from '../../../core/theming';
+import Text from './Text';
 
 type Props = React.ComponentProps<typeof Text> & {
   alpha?: number;

@@ -8,12 +8,12 @@ import {
   Platform,
   TextStyle,
 } from 'react-native';
+import { useTheme } from '../../core/theming';
 import InputLabel from './Label/InputLabel';
 import TextInputAdornment, {
   TextInputAdornmentProps,
 } from './Adornment/TextInputAdornment';
 import type { RenderProps, ChildTextInputProps } from './types';
-import { useTheme } from '../../core/theming';
 
 import {
   MAXIMIZED_LABEL_FONT_SIZE,

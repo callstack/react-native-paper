@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
-import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
-import { handlePress, isChecked } from './utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren, Theme } from '../../types';
 import { getAndroidSelectionControlColor } from '../Checkbox/utils';
+import { handlePress, isChecked } from './utils';
+import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**

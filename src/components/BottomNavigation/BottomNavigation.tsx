@@ -24,8 +24,8 @@ import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import useLayout from '../../utils/useLayout';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
-import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 import type { Theme } from '../../types';
+import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 
 type Route = {
   key: string;

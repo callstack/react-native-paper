@@ -14,10 +14,10 @@ import {
   getStatusBarHeight,
   getBottomSpace,
 } from 'react-native-iphone-x-helper';
-import Surface from './Surface';
 import { withTheme } from '../core/theming';
 import useAnimatedValue from '../utils/useAnimatedValue';
 import { addEventListener } from '../utils/addEventListener';
+import Surface from './Surface';
 
 export type Props = {
   /**

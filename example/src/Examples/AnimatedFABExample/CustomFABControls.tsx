@@ -1,10 +1,10 @@
-import React from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
 import { Paragraph, RadioButton, Text, useTheme } from 'react-native-paper';
 import type {
   AnimatedFABAnimateFrom,
   AnimatedFABIconMode,
 } from 'react-native-paper';
+import React from 'react';
+import { StyleSheet, View, FlatList } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export type Controls = {
@@ -45,6 +45,7 @@ const CustomControl = ({
 
       return (
         <TouchableOpacity
+          accessibilityRole="button"
           onPress={() => onChange(item)}
           style={styles.controlItem}
         >

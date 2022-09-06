@@ -8,11 +8,11 @@ import {
   TextStyle,
   Animated,
 } from 'react-native';
+import color from 'color';
 import { useTheme } from '../../core/theming';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { IconSource } from '../Icon';
-import color from 'color';
 import Icon from '../Icon';
 import {
   getSegmentedButtonBorderRadius,

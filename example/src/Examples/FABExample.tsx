@@ -1,6 +1,6 @@
+import { FAB, Portal, useTheme, Text } from 'react-native-paper';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { FAB, Portal, useTheme, Text } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 type FABVariant = 'primary' | 'secondary' | 'tertiary' | 'surface';

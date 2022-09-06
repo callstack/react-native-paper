@@ -13,11 +13,11 @@ import {
 } from 'react-native';
 
 import color from 'color';
+import { withTheme } from '../core/theming';
+import type { Theme } from '../types';
 import IconButton from './IconButton/IconButton';
 import Surface from './Surface';
-import { withTheme } from '../core/theming';
 import type { IconSource } from './Icon';
-import type { Theme } from '../types';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import ActivityIndicator from './ActivityIndicator';
 

@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { StyleSheet, Platform, StyleProp, ViewStyle } from 'react-native';
 import Modal from '../Modal';
+import { withTheme } from '../../core/theming';
+import overlay from '../../styles/overlay';
+import type { Theme } from '../../types';
 import DialogContent from './DialogContent';
 import DialogActions from './DialogActions';
 import DialogIcon from './DialogIcon';
 import DialogTitle from './DialogTitle';
 import DialogScrollArea from './DialogScrollArea';
-import { withTheme } from '../../core/theming';
-import overlay from '../../styles/overlay';
-import type { Theme } from '../../types';
 
 export type Props = {
   /**

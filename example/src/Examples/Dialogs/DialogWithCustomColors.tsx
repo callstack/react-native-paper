@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
   Button,
   Portal,
@@ -7,6 +6,7 @@ import {
   useTheme,
   MD3Colors,
 } from 'react-native-paper';
+import * as React from 'react';
 import { TextComponent } from './DialogTextComponent';
 const DialogWithCustomColors = ({
   visible,

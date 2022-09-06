@@ -1,5 +1,3 @@
-import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
 import {
   ActivityIndicator,
   MD2Colors,
@@ -7,6 +5,8 @@ import {
   useTheme,
   MD3Colors,
 } from 'react-native-paper';
+import * as React from 'react';
+import { View, StyleSheet } from 'react-native';
 import ScreenWrapper from '../ScreenWrapper';
 
 const ActivityIndicatorExample = () => {

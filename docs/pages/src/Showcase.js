@@ -7,8 +7,8 @@ import { Header } from 'component-docs/components';
 
 import GooglePlayIcon from '../../components/google-play-icon';
 import IphoneIcon from '../../components/iphone-icon';
-import Content from './components/Content';
 import GithubIcon from '../../components/github-icon';
+import Content from './components/Content';
 
 type Data = {
   color: string,

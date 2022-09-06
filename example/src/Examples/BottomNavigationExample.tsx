@@ -1,3 +1,4 @@
+import { Appbar, BottomNavigation, Menu, useTheme } from 'react-native-paper';
 import * as React from 'react';
 import {
   View,
@@ -7,10 +8,9 @@ import {
   Platform,
   Easing,
 } from 'react-native';
-import { Appbar, BottomNavigation, Menu, useTheme } from 'react-native-paper';
-import ScreenWrapper from '../ScreenWrapper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { StackNavigationProp } from '@react-navigation/stack';
+import ScreenWrapper from '../ScreenWrapper';
 
 type RoutesState = Array<{
   key: string;

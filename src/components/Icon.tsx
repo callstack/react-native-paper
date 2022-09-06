@@ -6,9 +6,9 @@ import {
   ImageSourcePropType,
 } from 'react-native';
 import { Consumer as SettingsConsumer } from '../core/settings';
-import { accessibilityProps } from './MaterialCommunityIcon';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
+import { accessibilityProps } from './MaterialCommunityIcon';
 
 type IconSourceBase = string | ImageSourcePropType;
 

@@ -1,18 +1,18 @@
 import React from 'react';
-import TextInputIcon, { IconAdornment } from './TextInputIcon';
-import TextInputAffix, { AffixAdornment } from './TextInputAffix';
 import type {
   LayoutChangeEvent,
   TextStyle,
   StyleProp,
   Animated,
 } from 'react-native';
+import { getConstants } from '../helpers';
+import TextInputIcon, { IconAdornment } from './TextInputIcon';
+import TextInputAffix, { AffixAdornment } from './TextInputAffix';
 import type {
   AdornmentConfig,
   AdornmentStyleAdjustmentForNativeInput,
 } from './types';
 import { AdornmentSide, AdornmentType, InputMode } from './enums';
-import { getConstants } from '../helpers';
 
 export function getAdornmentConfig({
   left,

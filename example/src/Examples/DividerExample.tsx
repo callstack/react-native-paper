@@ -1,6 +1,6 @@
+import { Divider, List, useTheme } from 'react-native-paper';
 import * as React from 'react';
 import { FlatList } from 'react-native';
-import { Divider, List, useTheme } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const items = ['Apple', 'Banana', 'Coconut', 'Lemon', 'Mango', 'Peach'];

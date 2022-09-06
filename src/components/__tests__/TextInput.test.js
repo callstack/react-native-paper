@@ -30,6 +30,7 @@ const affixTextValue = '/100';
 it('correctly renders left-side icon adornment, and right-side affix adornment', () => {
   const { getByText, getByTestId, toJSON } = render(
     <TextInput
+      accessibilityLabel="Text input field"
       label="Flat input"
       placeholder="Type something"
       value={'Some test value'}
@@ -53,9 +54,10 @@ it('correctly renders left-side icon adornment, and right-side affix adornment',
   expect(toJSON()).toMatchSnapshot();
 });
 
-it('correctly renders left-side icon adornment, and right-side affix adornment ', () => {
+it('correctly renders left-side icon adornment, and right-side affix adornment', () => {
   const { getByText, getByTestId, toJSON } = render(
     <TextInput
+      accessibilityLabel="Text input field"
       label="Flat input"
       placeholder="Type something"
       value={'Some test value'}
@@ -82,6 +84,7 @@ it('correctly renders left-side icon adornment, and right-side affix adornment '
 it('correctly applies default textAlign based on default RTL', () => {
   const { toJSON } = render(
     <TextInput
+      accessibilityLabel="Text input field"
       label="Flat input"
       placeholder="Type something"
       value={'Some test value'}
@@ -94,6 +97,7 @@ it('correctly applies default textAlign based on default RTL', () => {
 it('correctly applies textAlign center', () => {
   const { toJSON } = render(
     <TextInput
+      accessibilityLabel="Text input field"
       label="Flat input"
       placeholder="Type something"
       value={'Some test value'}
@@ -107,6 +111,7 @@ it('correctly applies textAlign center', () => {
 it('correctly applies height to multiline Outline TextInput', () => {
   const { toJSON } = render(
     <TextInput
+      accessibilityLabel="Text input field"
       mode="outlined"
       label="Outline Input"
       placeholder="Type Something"
@@ -122,6 +127,7 @@ it('correctly applies height to multiline Outline TextInput', () => {
 it('correctly applies error state Outline TextInput', () => {
   const { getByTestId } = render(
     <TextInput
+      accessibilityLabel="Text input field"
       mode="outlined"
       label="Outline Input with error"
       placeholder="Type Something"
@@ -137,6 +143,7 @@ it('correctly applies error state Outline TextInput', () => {
 it('correctly applies focused state Outline TextInput', () => {
   const { getByTestId } = render(
     <TextInput
+      accessibilityLabel="Text input field"
       mode="outlined"
       label="Outline Input with error"
       placeholder="Type Something"
@@ -157,6 +164,7 @@ it('contains patch spacing for flat input when ios and multiline', () => {
   Platform.OS = 'ios';
   const { getByTestId } = render(
     <TextInput
+      accessibilityLabel="Text input field"
       label="Flat input"
       multiline
       placeholder="Type something"
@@ -170,6 +178,7 @@ it('contains patch spacing for flat input when ios and multiline', () => {
 it('correctly applies a component as the text label', () => {
   const { toJSON } = render(
     <TextInput
+      accessibilityLabel="Text input field"
       label={<Text style={style.inputStyle}>Flat input</Text>}
       placeholder="Type something"
       value={'Some test value'}
@@ -182,6 +191,7 @@ it('correctly applies a component as the text label', () => {
 it('renders label with correct color when active', () => {
   const { getByTestId } = render(
     <TextInput
+      accessibilityLabel="Text input field"
       label="Flat input"
       placeholder="Type something"
       value={'Some test value'}
@@ -200,6 +210,7 @@ it('renders label with correct color when active', () => {
 it('renders label with correct color when inactive', () => {
   const { getByTestId } = render(
     <TextInput
+      accessibilityLabel="Text input field"
       label="Flat input"
       placeholder="Type something"
       value={'Some test value'}
@@ -215,7 +226,12 @@ it('renders label with correct color when inactive', () => {
 
 it('renders input placeholder initially with an empty space character', () => {
   const { getByTestId } = render(
-    <TextInput multiline label="Multiline input" testID={'text-input'} />
+    <TextInput
+      accessibilityLabel="Text input field"
+      multiline
+      label="Multiline input"
+      testID={'text-input'}
+    />
   );
 
   expect(getByTestId('text-input-flat').props.placeholder).toBe(' ');
@@ -227,6 +243,7 @@ it('correctly applies padding offset to input label on Android when RTL', () => 
 
   const { getByTestId } = render(
     <TextInput
+      accessibilityLabel="Text input field"
       label="Flat input"
       mode="flat"
       testID="text-input-flat"
@@ -252,6 +269,7 @@ it('correctly applies padding offset to input label on Android when LTR', () => 
 
   const { getByTestId } = render(
     <TextInput
+      accessibilityLabel="Text input field"
       label="Flat input"
       mode="flat"
       testID="text-input-flat"
@@ -290,7 +308,11 @@ it('correctly applies padding offset to input label on Android when LTR', () => 
 describe('maxFontSizeMultiplier', () => {
   const createInput = (type, maxFontSizeMultiplier) => {
     return (
-      <TextInput mode={type} maxFontSizeMultiplier={maxFontSizeMultiplier} />
+      <TextInput
+        accessibilityLabel="Text input field"
+        mode={type}
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
+      />
     );
   };
 

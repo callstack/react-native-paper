@@ -1,5 +1,3 @@
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
 import {
   Caption,
   Headline,
@@ -9,6 +7,8 @@ import {
   Title,
   useTheme,
 } from 'react-native-paper';
+import * as React from 'react';
+import { StyleSheet, View } from 'react-native';
 import ScreenWrapper from '../ScreenWrapper';
 
 const TextExample = () => {

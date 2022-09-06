@@ -1,6 +1,6 @@
+import { TouchableRipple, Paragraph } from 'react-native-paper';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { TouchableRipple, Paragraph } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 const RippleExample = () => {

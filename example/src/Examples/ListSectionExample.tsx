@@ -1,6 +1,6 @@
+import { Caption, List, Text, Chip, Divider } from 'react-native-paper';
 import * as React from 'react';
 import { StyleSheet, Image, View } from 'react-native';
-import { Caption, List, Text, Chip, Divider } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 const ListSectionExample = () => {
   return (

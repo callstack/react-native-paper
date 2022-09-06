@@ -7,9 +7,9 @@ import {
   ViewStyle,
 } from 'react-native';
 import { useTheme } from '../../core/theming';
+import type { IconSource } from '../Icon';
 import SegmentedButtonItem from './SegmentedButtonItem';
 import { getDisabledSegmentedButtonStyle } from './utils';
-import type { IconSource } from '../Icon';
 
 type ConditionalValue =
   | {

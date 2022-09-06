@@ -114,7 +114,11 @@ const AppbarContent = ({
   const variant = modeTextVariant[mode] as MD3TypescaleKey;
 
   return (
-    <TouchableWithoutFeedback onPress={onPress} disabled={!onPress}>
+    <TouchableWithoutFeedback
+      accessibilityRole="button"
+      onPress={onPress}
+      disabled={!onPress}
+    >
       <View
         pointerEvents="box-none"
         style={[styles.container, isV3 && modeContainerStyles[mode], style]}

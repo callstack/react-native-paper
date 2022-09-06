@@ -5,12 +5,12 @@ import {
   ColorSchemeName,
   NativeEventSubscription,
 } from 'react-native';
-import { defaultThemesByVersion, ThemeProvider } from './theming';
-import { Provider as SettingsProvider, Settings } from './settings';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
 import { addEventListener } from '../utils/addEventListener';
 import type { ThemeProp } from '../types';
+import { Provider as SettingsProvider, Settings } from './settings';
+import { defaultThemesByVersion, ThemeProvider } from './theming';
 
 export type Props = {
   children: React.ReactNode;

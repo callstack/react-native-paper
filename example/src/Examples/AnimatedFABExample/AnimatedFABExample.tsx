@@ -1,6 +1,3 @@
-import * as React from 'react';
-import { View, StyleSheet, FlatList, Animated, Platform } from 'react-native';
-import type { NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import {
   MD2Colors,
   MD3Colors,
@@ -9,6 +6,9 @@ import {
   Paragraph,
   Text,
 } from 'react-native-paper';
+import * as React from 'react';
+import { View, StyleSheet, FlatList, Animated, Platform } from 'react-native';
+import type { NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { animatedFABExampleData } from '../../../utils';
 import CustomFAB from './CustomFAB';

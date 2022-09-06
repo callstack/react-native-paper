@@ -1,3 +1,10 @@
+import {
+  Provider as PaperProvider,
+  MD3DarkTheme,
+  MD3LightTheme,
+  MD2DarkTheme,
+  MD2LightTheme,
+} from 'react-native-paper';
 import * as React from 'react';
 import { I18nManager, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -6,17 +13,10 @@ import { useKeepAwake } from 'expo-keep-awake';
 import { StatusBar } from 'expo-status-bar';
 import { InitialState, NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import {
-  Provider as PaperProvider,
-  MD3DarkTheme,
-  MD3LightTheme,
-  MD2DarkTheme,
-  MD2LightTheme,
-} from 'react-native-paper';
-import App from './RootNavigator';
-import DrawerItems from './DrawerItems';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { isWeb } from '../utils';
+import App from './RootNavigator';
+import DrawerItems from './DrawerItems';
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';

@@ -1,5 +1,3 @@
-import * as React from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
 import {
   Paragraph,
   Switch,
@@ -9,6 +7,8 @@ import {
   useTheme,
   Text,
 } from 'react-native-paper';
+import * as React from 'react';
+import { View, StyleSheet, Platform } from 'react-native';
 import ScreenWrapper from '../ScreenWrapper';
 
 const SwitchExample = () => {
