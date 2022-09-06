@@ -67,7 +67,11 @@ const BannerExample = () => {
         <View style={styles.grid}>
           {PHOTOS.map((uri) => (
             <View key={uri} style={styles.item}>
-              <Image source={{ uri }} style={styles.photo} />
+              <Image
+                source={{ uri }}
+                style={styles.photo}
+                accessibilityIgnoresInvertColors={true}
+              />
             </View>
           ))}
         </View>

@@ -60,7 +60,10 @@ const ChipExample = () => {
             </Chip>
             <Chip
               avatar={
-                <Image source={require('../../assets/images/avatar.png')} />
+                <Image
+                  source={require('../../assets/images/avatar.png')}
+                  accessibilityIgnoresInvertColors={true}
+                />
               }
               onPress={() => {}}
               onClose={() => {}}
@@ -71,7 +74,10 @@ const ChipExample = () => {
             <Chip
               selected
               avatar={
-                <Image source={require('../../assets/images/avatar.png')} />
+                <Image
+                  source={require('../../assets/images/avatar.png')}
+                  accessibilityIgnoresInvertColors={true}
+                />
               }
               onPress={() => {}}
               style={styles.chip}
@@ -84,7 +90,10 @@ const ChipExample = () => {
             <Chip
               disabled
               avatar={
-                <Image source={require('../../assets/images/avatar.png')} />
+                <Image
+                  source={require('../../assets/images/avatar.png')}
+                  accessibilityIgnoresInvertColors={true}
+                />
               }
               style={styles.chip}
             >
@@ -146,7 +155,10 @@ const ChipExample = () => {
             <Chip
               mode="outlined"
               avatar={
-                <Image source={require('../../assets/images/avatar.png')} />
+                <Image
+                  source={require('../../assets/images/avatar.png')}
+                  accessibilityIgnoresInvertColors={true}
+                />
               }
               onPress={() => {}}
               style={styles.chip}
@@ -157,7 +169,10 @@ const ChipExample = () => {
               selected
               mode="outlined"
               avatar={
-                <Image source={require('../../assets/images/avatar.png')} />
+                <Image
+                  source={require('../../assets/images/avatar.png')}
+                  accessibilityIgnoresInvertColors={true}
+                />
               }
               onPress={() => {}}
               style={styles.chip}
@@ -177,7 +192,10 @@ const ChipExample = () => {
               disabled
               mode="outlined"
               avatar={
-                <Image source={require('../../assets/images/avatar.png')} />
+                <Image
+                  source={require('../../assets/images/avatar.png')}
+                  accessibilityIgnoresInvertColors={true}
+                />
               }
               style={styles.chip}
             >
@@ -194,7 +212,10 @@ const ChipExample = () => {
                   onPress={() => {}}
                   compact
                   avatar={
-                    <Image source={require('../../assets/images/avatar.png')} />
+                    <Image
+                      source={require('../../assets/images/avatar.png')}
+                      accessibilityIgnoresInvertColors={true}
+                    />
                   }
                   style={[styles.chip, styles.customBorderRadius]}
                 >
@@ -205,7 +226,10 @@ const ChipExample = () => {
                   onPress={() => {}}
                   compact
                   avatar={
-                    <Image source={require('../../assets/images/avatar.png')} />
+                    <Image
+                      source={require('../../assets/images/avatar.png')}
+                      accessibilityIgnoresInvertColors={true}
+                    />
                   }
                   style={[styles.chip, styles.customBorderRadius]}
                 >

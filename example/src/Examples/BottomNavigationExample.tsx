@@ -40,7 +40,11 @@ const PhotoGallery = ({ route }: Route) => {
     <ScreenWrapper contentContainerStyle={styles.content}>
       {PHOTOS.map((uri) => (
         <View key={uri} style={styles.item}>
-          <Image source={{ uri }} style={styles.photo} />
+          <Image
+            source={{ uri }}
+            style={styles.photo}
+            accessibilityIgnoresInvertColors={true}
+          />
         </View>
       ))}
     </ScreenWrapper>

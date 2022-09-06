@@ -29,6 +29,7 @@ const ListSectionExample = () => {
             <Image
               source={require('../../assets/images/email-icon.png')}
               style={styles.image}
+              accessibilityIgnoresInvertColors={true}
             />
           )}
           title="List item 1"
@@ -39,6 +40,7 @@ const ListSectionExample = () => {
             <Image
               source={require('../../assets/images/email-icon.png')}
               style={styles.image}
+              accessibilityIgnoresInvertColors={true}
             />
           )}
           right={(props) => <List.Icon {...props} icon="information" />}
@@ -54,6 +56,7 @@ const ListSectionExample = () => {
             <Image
               source={require('../../assets/images/email-icon.png')}
               style={styles.image}
+              accessibilityIgnoresInvertColors={true}
             />
           )}
           title="List item 1"
@@ -64,6 +67,7 @@ const ListSectionExample = () => {
             <Image
               source={require('../../assets/images/email-icon.png')}
               style={styles.image}
+              accessibilityIgnoresInvertColors={true}
             />
           )}
           right={(props) => <List.Icon {...props} icon="star-outline" />}
@@ -79,6 +83,7 @@ const ListSectionExample = () => {
             <Image
               source={require('../../assets/images/email-icon.png')}
               style={styles.image}
+              accessibilityIgnoresInvertColors={true}
             />
           )}
           right={(props) => <List.Icon {...props} icon="star-outline" />}
