@@ -226,7 +226,10 @@ const Chip = ({
   const contentSpacings = {
     paddingRight: isV3 ? (onClose ? 34 : 0) : onClose ? 32 : 4,
   };
-
+  const labelTextStyle = {
+    color: textColor,
+    ...(isV3 ? theme.fonts.labelLarge : theme.fonts.regular),
+  };
   return (
     <Surface
       style={
@@ -323,17 +326,7 @@ const Chip = ({
             variant="labelLarge"
             selectable={false}
             numberOfLines={1}
-            style={[
-              styles.text,
-              {
-                color: textColor,
-                ...(!isV3 && {
-                  ...theme.fonts.regular,
-                }),
-              },
-              labelSpacings,
-              textStyle,
-            ]}
+            style={[styles.text, labelTextStyle, labelSpacings, textStyle]}
             ellipsizeMode={ellipsizeMode}
           >
             {children}

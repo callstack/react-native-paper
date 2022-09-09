@@ -1690,6 +1690,11 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             },
                             Object {
                               "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -1911,6 +1916,11 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -2132,6 +2142,11 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -2353,6 +2368,11 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -2574,6 +2594,11 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -4600,6 +4625,11 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             },
                             Object {
                               "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -4649,6 +4679,11 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             },
                             Object {
                               "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -4864,6 +4899,11 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -4913,6 +4953,11 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -5128,6 +5173,11 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -5177,6 +5227,11 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -5584,6 +5639,11 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             },
                             Object {
                               "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -5805,6 +5865,11 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -6026,6 +6091,11 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -6405,6 +6475,11 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             },
                             Object {
                               "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -6454,6 +6529,11 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             },
                             Object {
                               "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -6669,6 +6749,11 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -6718,6 +6803,11 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -6933,6 +7023,11 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -6982,6 +7077,11 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -7388,6 +7488,11 @@ exports[`renders shifting bottom navigation 1`] = `
                             },
                             Object {
                               "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -7609,6 +7714,11 @@ exports[`renders shifting bottom navigation 1`] = `
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -7830,6 +7940,11 @@ exports[`renders shifting bottom navigation 1`] = `
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -8051,6 +8166,11 @@ exports[`renders shifting bottom navigation 1`] = `
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]
@@ -8272,6 +8392,11 @@ exports[`renders shifting bottom navigation 1`] = `
                             },
                             Object {
                               "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
                             },
                           ],
                         ]

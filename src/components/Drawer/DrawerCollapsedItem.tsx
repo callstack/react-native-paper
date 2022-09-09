@@ -139,6 +139,11 @@ const DrawerCollapsedItem = ({
   const androidLetterSpacingStyle =
     Platform.OS === 'android' && numOfLines > 4 && styles.letterSpacing;
 
+  const labelTextStyle = {
+    color: labelColor,
+    ...(isV3 ? theme.fonts.labelMedium : {}),
+  };
+
   return (
     <View {...rest}>
       <TouchableWithoutFeedback
@@ -191,13 +196,7 @@ const DrawerCollapsedItem = ({
               selectable={false}
               numberOfLines={2}
               onTextLayout={onTextLayout}
-              style={[
-                styles.label,
-                androidLetterSpacingStyle,
-                {
-                  color: labelColor,
-                },
-              ]}
+              style={[styles.label, androidLetterSpacingStyle, labelTextStyle]}
             >
               {label}
             </Text>

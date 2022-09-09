@@ -127,18 +127,17 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
       />
     );
   } else {
+    const font = !theme.isV3 ? theme.fonts?.regular : {};
+    const textStyle = {
+      ...font,
+      color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,
+    };
+
     return (
       <NativeText
         {...rest}
         ref={root}
-        style={[
-          {
-            ...(!theme.isV3 && theme.fonts?.regular),
-            color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,
-          },
-          styles.text,
-          style,
-        ]}
+        style={[textStyle, styles.text, style]}
       />
     );
   }

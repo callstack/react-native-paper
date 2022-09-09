@@ -55,13 +55,17 @@ const DialogTitle = ({ children, theme, style, ...rest }: Props) => {
   const { isV3 } = theme;
 
   const TextComponent = isV3 ? Text : Title;
-  const textColor = isV3 ? theme.colors.onSurface : theme.colors?.text;
+
+  const headerTextStyle = {
+    color: isV3 ? theme.colors.onSurface : theme.colors?.text,
+    ...(isV3 ? theme.fonts.headlineSmall : {}),
+  };
 
   return (
     <TextComponent
       variant="headlineSmall"
       accessibilityRole="header"
-      style={[styles.text, isV3 && styles.v3Text, { color: textColor }, style]}
+      style={[styles.text, isV3 && styles.v3Text, headerTextStyle, style]}
       {...rest}
     >
       {children}

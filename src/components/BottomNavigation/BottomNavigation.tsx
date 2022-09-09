@@ -890,6 +890,8 @@ const BottomNavigation = ({
 
               const isV3Shifting = isV3 && shifting && labeled;
 
+              const font = isV3 ? theme.fonts.labelMedium : {};
+
               return renderTouchable({
                 key: route.key,
                 route,
@@ -1023,6 +1025,7 @@ const BottomNavigation = ({
                                 styles.label,
                                 {
                                   color: activeLabelColor,
+                                  ...font,
                                 },
                               ]}
                             >
@@ -1054,6 +1057,7 @@ const BottomNavigation = ({
                                   styles.label,
                                   {
                                     color: inactiveLabelColor,
+                                    ...font,
                                   },
                                 ]}
                               >

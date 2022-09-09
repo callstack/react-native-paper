@@ -130,6 +130,11 @@ const MenuItem = ({
     trailingIcon,
   });
 
+  const titleTextStyle = {
+    color: titleColor,
+    ...(isV3 ? theme.fonts.bodyLarge : {}),
+  };
+
   return (
     <TouchableRipple
       style={[
@@ -172,7 +177,7 @@ const MenuItem = ({
             variant="bodyLarge"
             selectable={false}
             numberOfLines={1}
-            style={[!isV3 && styles.title, { color: titleColor }, titleStyle]}
+            style={[!isV3 && styles.title, titleTextStyle, titleStyle]}
           >
             {title}
           </Text>
