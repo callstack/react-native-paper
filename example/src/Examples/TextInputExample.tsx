@@ -143,7 +143,6 @@ const TextInputExample = () => {
       >
         <List.Section title="Flat inputs">
           <TextInput
-            accessibilityLabel="Text input field"
             style={styles.inputContainerStyle}
             label="Flat input"
             placeholder="Type something"
@@ -161,7 +160,6 @@ const TextInputExample = () => {
             right={<TextInput.Affix text="/100" />}
           />
           <TextInput
-            accessibilityLabel="Text input field"
             style={styles.inputContainerStyle}
             label="Flat input with custom icon"
             placeholder="Type something"
@@ -184,7 +182,6 @@ const TextInputExample = () => {
             }
           />
           <TextInput
-            accessibilityLabel="Text input field"
             style={[styles.inputContainerStyle, styles.fontSize]}
             label="Flat input large font"
             placeholder="Type something"
@@ -204,7 +201,6 @@ const TextInputExample = () => {
             }
           />
           <TextInput
-            accessibilityLabel="Text input field"
             style={[styles.inputContainerStyle, styles.fontSize]}
             label="Flat input large font"
             placeholder="Type something"
@@ -229,7 +225,6 @@ const TextInputExample = () => {
         </List.Section>
         <List.Section title="Outline inputs">
           <TextInput
-            accessibilityLabel="Text input field"
             mode="outlined"
             style={styles.inputContainerStyle}
             label="Outlined input"
@@ -250,7 +245,6 @@ const TextInputExample = () => {
             right={<TextInput.Affix text="/100" />}
           />
           <TextInput
-            accessibilityLabel="Text input field"
             mode="outlined"
             style={[styles.inputContainerStyle, styles.fontSize]}
             label="Outlined large font"
@@ -271,7 +265,6 @@ const TextInputExample = () => {
             }
           />
           <TextInput
-            accessibilityLabel="Text input field"
             mode="outlined"
             style={[styles.inputContainerStyle, styles.fontSize]}
             label="Outlined large font"
@@ -296,27 +289,23 @@ const TextInputExample = () => {
         </List.Section>
         <List.Section title="Disabled inputs">
           <TextInput
-            accessibilityLabel="Text input field"
             disabled
             style={styles.inputContainerStyle}
             label="Disabled flat input"
           />
           <TextInput
-            accessibilityLabel="Text input field"
             disabled
             style={styles.inputContainerStyle}
             label="Disabled flat input with value"
             value="Disabled flat input value"
           />
           <TextInput
-            accessibilityLabel="Text input field"
             mode="outlined"
             disabled
             style={styles.inputContainerStyle}
             label="Disabled outlined input"
           />
           <TextInput
-            accessibilityLabel="Text input field"
             mode="outlined"
             disabled
             style={styles.inputContainerStyle}
@@ -326,7 +315,6 @@ const TextInputExample = () => {
         </List.Section>
         <List.Section title="Dense inputs">
           <TextInput
-            accessibilityLabel="Text input field"
             style={styles.inputContainerStyle}
             dense
             label="Dense flat input"
@@ -346,7 +334,6 @@ const TextInputExample = () => {
             }
           />
           <TextInput
-            accessibilityLabel="Text input field"
             style={styles.inputContainerStyle}
             dense
             placeholder="Dense flat input without label"
@@ -356,7 +343,6 @@ const TextInputExample = () => {
             }
           />
           <TextInput
-            accessibilityLabel="Text input field"
             mode="outlined"
             style={styles.inputContainerStyle}
             dense
@@ -369,7 +355,6 @@ const TextInputExample = () => {
             left={<TextInput.Affix text="$" />}
           />
           <TextInput
-            accessibilityLabel="Text input field"
             mode="outlined"
             style={styles.inputContainerStyle}
             dense
@@ -382,7 +367,6 @@ const TextInputExample = () => {
         </List.Section>
         <List.Section title="Multiline inputs">
           <TextInput
-            accessibilityLabel="Text input field"
             style={styles.inputContainerStyle}
             label="Flat input multiline"
             multiline
@@ -393,7 +377,6 @@ const TextInputExample = () => {
             }
           />
           <TextInput
-            accessibilityLabel="Text input field"
             style={[styles.inputContainerStyle, styles.textArea]}
             label="Flat input text area"
             multiline
@@ -405,7 +388,6 @@ const TextInputExample = () => {
           />
           <View style={styles.inputContainerStyle}>
             <TextInput
-              accessibilityLabel="Text input field"
               mode="flat"
               label="Flat multiline text input with fixed height"
               multiline
@@ -413,7 +395,6 @@ const TextInputExample = () => {
             />
           </View>
           <TextInput
-            accessibilityLabel="Text input field"
             mode="outlined"
             style={styles.inputContainerStyle}
             label="Outlined input multiline"
@@ -425,7 +406,6 @@ const TextInputExample = () => {
             }
           />
           <TextInput
-            accessibilityLabel="Text input field"
             mode="outlined"
             style={[styles.inputContainerStyle, styles.textArea]}
             label="Outlined input text area"
@@ -438,7 +418,6 @@ const TextInputExample = () => {
           />
           <View style={styles.inputContainerStyle}>
             <TextInput
-              accessibilityLabel="Text input field"
               mode="outlined"
               label="Outlined multiline text input with fixed height"
               multiline
@@ -449,7 +428,6 @@ const TextInputExample = () => {
         <List.Section title="Inputs with helpers">
           <View style={styles.inputContainerStyle}>
             <TextInput
-              accessibilityLabel="Text input field"
               label="Input with helper text"
               placeholder="Enter username, only letters"
               value={name}
@@ -462,7 +440,6 @@ const TextInputExample = () => {
           </View>
           <View style={styles.inputContainerStyle}>
             <TextInput
-              accessibilityLabel="Text input field"
               label="Input with helper text and character counter"
               placeholder="Enter username, only letters"
               value={maxLengthName}
@@ -487,7 +464,6 @@ const TextInputExample = () => {
           </View>
           <View style={styles.inputContainerStyle}>
             <TextInput
-              accessibilityLabel="Text input field"
               label={
                 <Text>
                   <Text
@@ -515,7 +491,6 @@ const TextInputExample = () => {
         </List.Section>
         <List.Section title="Custom inputs">
           <TextInput
-            accessibilityLabel="Text input field"
             style={styles.inputContainerStyle}
             label="Flat input with custom underline colors"
             placeholder="Type something"
@@ -531,7 +506,6 @@ const TextInputExample = () => {
             }
           />
           <TextInput
-            accessibilityLabel="Text input field"
             mode="outlined"
             style={styles.inputContainerStyle}
             label="Outlined input with custom outline colors"
@@ -546,7 +520,6 @@ const TextInputExample = () => {
             }
           />
           <TextInput
-            accessibilityLabel="Text input field"
             mode="outlined"
             style={styles.inputContainerStyle}
             label="Outlined with super long label which is truncating at some point"
@@ -558,7 +531,6 @@ const TextInputExample = () => {
 
           <View style={styles.inputContainerStyle}>
             <TextInput
-              accessibilityLabel="Text input field"
               label="Input with no padding"
               style={styles.noPaddingInput}
               placeholder="Enter username, only letters"
@@ -579,14 +551,12 @@ const TextInputExample = () => {
 
           <View style={styles.inputContainerStyle}>
             <TextInput
-              accessibilityLabel="Text input field"
               label="Input with text align center"
               style={styles.centeredText}
             />
           </View>
           <View style={styles.inputContainerStyle}>
             <TextInput
-              accessibilityLabel="Text input field"
               mode="outlined"
               label="Outlined input with text align center"
               style={styles.centeredText}
@@ -594,7 +564,6 @@ const TextInputExample = () => {
           </View>
           <View style={styles.inputContainerStyle}>
             <TextInput
-              accessibilityLabel="Text input field"
               mode="outlined"
               theme={{
                 roundness: 25,
@@ -604,7 +573,6 @@ const TextInputExample = () => {
           </View>
           <View style={styles.inputContainerStyle}>
             <TextInput
-              accessibilityLabel="Text input field"
               mode="outlined"
               label="Outlined text input without roundness"
               theme={{ roundness: 0 }}
@@ -612,7 +580,6 @@ const TextInputExample = () => {
           </View>
           <View style={styles.inputContainerStyle}>
             <TextInput
-              accessibilityLabel="Text input field"
               mode="outlined"
               label="Outlined text input with error"
               error

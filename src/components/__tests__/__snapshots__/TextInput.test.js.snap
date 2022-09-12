@@ -977,7 +977,6 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
       </Text>
     </View>
     <TextInput
-      accessibilityLabel="Text input field"
       editable={true}
       maxFontSizeMultiplier={1.5}
       multiline={false}
