@@ -347,6 +347,7 @@ const FABGroup = ({
                         ? it.accessibilityLabel
                         : it.label
                     }
+                    accessibilityHint="hint"
                     accessibilityRole="button"
                     {...(isV3 && { elevation: 0 })}
                   >

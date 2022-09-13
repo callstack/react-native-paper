@@ -1,6 +1,6 @@
 import color from 'color';
 import * as React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react-native';
 import { getTheme } from '../../core/theming';
 import { getFABGroupColors } from '../FAB/utils';
 import FAB from '../FAB';
@@ -99,45 +99,51 @@ describe('getFABGroupColors - stacked FAB background color', () => {
 });
 
 describe('FABActions - labelStyle - containerStyle', () => {
-  it('renders actions with custom label style', () => {
-    const tree = renderer
-      .create(
-        <FAB.Group
-          visible
-          open
-          icon="filter"
-          actions={[
-            {
-              label: 'test',
-              icon: 'arrow-up',
-              labelStyle: { fontSize: 24, fontWeight: '500' },
+  it('correctly applies label style', () => {
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open
+        actions={[
+          {
+            label: 'complete',
+            labelStyle: {
+              fontSize: 24,
+              fontWeight: '500',
             },
-          ]}
-        />
-      )
-      .toJSON();
+          },
+        ]}
+      />
+    );
 
-    expect(tree).toMatchSnapshot();
+    expect(getByText('complete')).toHaveStyle({
+      fontSize: 24,
+      fontWeight: '500',
+    });
   });
 
-  it('renders actions with custom container style', () => {
-    const tree = renderer
-      .create(
-        <FAB.Group
-          visible
-          open
-          icon="filter"
-          actions={[
-            {
-              label: 'test',
-              icon: 'arrow-up',
-              containerStyle: { padding: 16, backgroundColor: 'royalblue' },
+  it('correctly applies containerStyle style', () => {
+    const { getByA11yHint } = render(
+      <FAB.Group
+        visible
+        open
+        actions={[
+          {
+            label: 'remove',
+            containerStyle: {
+              padding: 16,
+              backgroundColor: '#687456',
+              marginLeft: 16,
             },
-          ]}
-        />
-      )
-      .toJSON();
+          },
+        ]}
+      />
+    );
 
-    expect(tree).toMatchSnapshot();
+    expect(getByA11yHint('hint')).toHaveStyle({
+      padding: 16,
+      backgroundColor: '#687456',
+      marginLeft: 16,
+    });
   });
 });
