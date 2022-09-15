@@ -156,9 +156,7 @@ exports[`renders chip with close button 1`] = `
                 },
                 Array [
                   Object {
-                    "lineHeight": 24,
-                    "marginVertical": 4,
-                    "minHeight": 24,
+                    "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
                   Object {
@@ -403,9 +401,7 @@ exports[`renders chip with custom close button 1`] = `
                 },
                 Array [
                   Object {
-                    "lineHeight": 24,
-                    "marginVertical": 4,
-                    "minHeight": 24,
+                    "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
                   Object {
@@ -650,9 +646,7 @@ exports[`renders chip with icon 1`] = `
                 },
                 Array [
                   Object {
-                    "lineHeight": 24,
-                    "marginVertical": 4,
-                    "minHeight": 24,
+                    "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
                   Object {
@@ -802,9 +796,7 @@ exports[`renders chip with onPress 1`] = `
                 },
                 Array [
                   Object {
-                    "lineHeight": 24,
-                    "marginVertical": 4,
-                    "minHeight": 24,
+                    "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
                   Object {
@@ -954,9 +946,7 @@ exports[`renders outlined disabled chip 1`] = `
                 },
                 Array [
                   Object {
-                    "lineHeight": 24,
-                    "marginVertical": 4,
-                    "minHeight": 24,
+                    "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
                   Object {
@@ -1141,9 +1131,7 @@ exports[`renders selected chip 1`] = `
                 },
                 Array [
                   Object {
-                    "lineHeight": 24,
-                    "marginVertical": 4,
-                    "minHeight": 24,
+                    "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
                   Object {

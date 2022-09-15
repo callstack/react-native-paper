@@ -326,7 +326,12 @@ const Chip = ({
             variant="labelLarge"
             selectable={false}
             numberOfLines={1}
-            style={[styles.text, labelTextStyle, labelSpacings, textStyle]}
+            style={[
+              isV3 ? styles.md3LabelText : styles.labelText,
+              labelTextStyle,
+              labelSpacings,
+              textStyle,
+            ]}
             ellipsizeMode={ellipsizeMode}
           >
             {children}
@@ -402,11 +407,15 @@ const styles = StyleSheet.create({
     marginRight: 8,
     padding: 0,
   },
-  text: {
+  labelText: {
     minHeight: 24,
     lineHeight: 24,
     textAlignVertical: 'center',
     marginVertical: 4,
+  },
+  md3LabelText: {
+    textAlignVertical: 'center',
+    marginVertical: 6,
   },
   avatar: {
     width: 24,

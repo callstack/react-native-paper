@@ -242,9 +242,7 @@ exports[`renders list item with custom description 1`] = `
                           },
                           Array [
                             Object {
-                              "lineHeight": 24,
-                              "marginVertical": 4,
-                              "minHeight": 24,
+                              "marginVertical": 6,
                               "textAlignVertical": "center",
                             },
                             Object {
