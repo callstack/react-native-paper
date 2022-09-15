@@ -39,6 +39,7 @@ export type Props = {
     color?: string;
     labelTextColor?: string;
     accessibilityLabel?: string;
+    accessibilityHint?: string;
     style?: StyleProp<ViewStyle>;
     containerStyle?: StyleProp<ViewStyle>;
     labelStyle?: StyleProp<TextStyle>;
@@ -323,6 +324,7 @@ const FABGroup = ({
               {it.label && (
                 <View>
                   <Card
+                    accessibilityHint={it.accessibilityHint}
                     style={
                       [
                         styles.containerStyle,
@@ -347,7 +349,6 @@ const FABGroup = ({
                         ? it.accessibilityLabel
                         : it.label
                     }
-                    accessibilityHint="hint"
                     accessibilityRole="button"
                     {...(isV3 && { elevation: 0 })}
                   >

@@ -130,6 +130,7 @@ describe('FABActions - labelStyle - containerStyle', () => {
         actions={[
           {
             label: 'remove',
+            accessibilityHint: 'hint',
             containerStyle: {
               padding: 16,
               backgroundColor: '#687456',
