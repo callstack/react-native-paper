@@ -180,6 +180,7 @@ exports[`activity indicator snapshot test 1`] = `
             undefined,
           ]
         }
+        testID="search-bar"
         underlineColorAndroid="transparent"
       />
       <View
@@ -565,32 +566,22 @@ exports[`renders with placeholder 1`] = `
             undefined,
           ]
         }
+        testID="search-bar"
         underlineColorAndroid="transparent"
       />
       <View
-        collapsable={false}
-        style={
-          Object {
-            "alignSelf": undefined,
-            "bottom": undefined,
-            "left": undefined,
-            "position": undefined,
-            "right": undefined,
-            "shadowColor": "#000",
-            "shadowOffset": Object {
-              "height": 0,
-              "width": 0,
-            },
-            "shadowOpacity": 0,
-            "shadowRadius": 0,
-            "top": undefined,
-          }
-        }
+        pointerEvents="none"
+        testID="search-bar-icon-wrapper"
       >
         <View
           collapsable={false}
           style={
             Object {
+              "alignSelf": undefined,
+              "bottom": undefined,
+              "left": undefined,
+              "position": undefined,
+              "right": undefined,
               "shadowColor": "#000",
               "shadowOffset": Object {
                 "height": 0,
@@ -598,6 +589,7 @@ exports[`renders with placeholder 1`] = `
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
+              "top": undefined,
             }
           }
         >
@@ -605,75 +597,90 @@ exports[`renders with placeholder 1`] = `
             collapsable={false}
             style={
               Object {
-                "backgroundColor": undefined,
-                "borderColor": "rgba(28, 27, 31, 0.12)",
-                "borderRadius": 20,
-                "borderWidth": 0,
-                "elevation": 0,
-                "height": 40,
-                "margin": 6,
-                "overflow": "hidden",
-                "width": 40,
+                "shadowColor": "#000",
+                "shadowOffset": Object {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
               }
             }
           >
             <View
-              accessibilityLabel="clear"
-              accessibilityRole="button"
-              accessibilityState={
-                Object {
-                  "disabled": true,
-                }
-              }
-              accessible={true}
-              focusable={true}
-              hitSlop={
-                Object {
-                  "bottom": 6,
-                  "left": 6,
-                  "right": 6,
-                  "top": 6,
-                }
-              }
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
+              collapsable={false}
               style={
-                Array [
-                  Object {
-                    "overflow": "hidden",
-                  },
-                  Object {
-                    "alignItems": "center",
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                  },
-                ]
+                Object {
+                  "backgroundColor": undefined,
+                  "borderColor": "rgba(121, 116, 126, 1)",
+                  "borderRadius": 20,
+                  "borderWidth": 0,
+                  "elevation": 0,
+                  "height": 40,
+                  "margin": 6,
+                  "overflow": "hidden",
+                  "width": 40,
+                }
               }
             >
-              <Text
-                accessibilityElementsHidden={true}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
+              <View
+                accessibilityLabel="clear"
+                accessibilityRole="button"
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
+                accessible={true}
+                focusable={true}
+                hitSlop={
+                  Object {
+                    "bottom": 6,
+                    "left": 6,
+                    "right": 6,
+                    "top": 6,
+                  }
+                }
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
                 style={
                   Array [
                     Object {
-                      "backgroundColor": "transparent",
+                      "overflow": "hidden",
                     },
                     Object {
-                      "color": "rgba(28, 27, 31, 0.38)",
-                      "fontSize": 24,
+                      "alignItems": "center",
+                      "flexGrow": 1,
+                      "justifyContent": "center",
                     },
                   ]
                 }
               >
-                □
-              </Text>
+                <Text
+                  accessibilityElementsHidden={true}
+                  importantForAccessibility="no-hide-descendants"
+                  pointerEvents="none"
+                  selectable={false}
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                      Object {
+                        "color": "rgba(255, 255, 255, 0)",
+                        "fontSize": 24,
+                      },
+                    ]
+                  }
+                >
+                  □
+                </Text>
+              </View>
             </View>
           </View>
         </View>
@@ -863,33 +870,23 @@ exports[`renders with text 1`] = `
             undefined,
           ]
         }
+        testID="search-bar"
         underlineColorAndroid="transparent"
         value="query"
       />
       <View
-        collapsable={false}
-        style={
-          Object {
-            "alignSelf": undefined,
-            "bottom": undefined,
-            "left": undefined,
-            "position": undefined,
-            "right": undefined,
-            "shadowColor": "#000",
-            "shadowOffset": Object {
-              "height": 0,
-              "width": 0,
-            },
-            "shadowOpacity": 0,
-            "shadowRadius": 0,
-            "top": undefined,
-          }
-        }
+        pointerEvents="auto"
+        testID="search-bar-icon-wrapper"
       >
         <View
           collapsable={false}
           style={
             Object {
+              "alignSelf": undefined,
+              "bottom": undefined,
+              "left": undefined,
+              "position": undefined,
+              "right": undefined,
               "shadowColor": "#000",
               "shadowOffset": Object {
                 "height": 0,
@@ -897,6 +894,7 @@ exports[`renders with text 1`] = `
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
+              "top": undefined,
             }
           }
         >
@@ -904,75 +902,90 @@ exports[`renders with text 1`] = `
             collapsable={false}
             style={
               Object {
-                "backgroundColor": undefined,
-                "borderColor": "rgba(121, 116, 126, 1)",
-                "borderRadius": 20,
-                "borderWidth": 0,
-                "elevation": 0,
-                "height": 40,
-                "margin": 6,
-                "overflow": "hidden",
-                "width": 40,
+                "shadowColor": "#000",
+                "shadowOffset": Object {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
               }
             }
           >
             <View
-              accessibilityLabel="clear"
-              accessibilityRole="button"
-              accessibilityState={
-                Object {
-                  "disabled": false,
-                }
-              }
-              accessible={true}
-              focusable={true}
-              hitSlop={
-                Object {
-                  "bottom": 6,
-                  "left": 6,
-                  "right": 6,
-                  "top": 6,
-                }
-              }
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
+              collapsable={false}
               style={
-                Array [
-                  Object {
-                    "overflow": "hidden",
-                  },
-                  Object {
-                    "alignItems": "center",
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                  },
-                ]
+                Object {
+                  "backgroundColor": undefined,
+                  "borderColor": "rgba(121, 116, 126, 1)",
+                  "borderRadius": 20,
+                  "borderWidth": 0,
+                  "elevation": 0,
+                  "height": 40,
+                  "margin": 6,
+                  "overflow": "hidden",
+                  "width": 40,
+                }
               }
             >
-              <Text
-                accessibilityElementsHidden={true}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
+              <View
+                accessibilityLabel="clear"
+                accessibilityRole="button"
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
+                accessible={true}
+                focusable={true}
+                hitSlop={
+                  Object {
+                    "bottom": 6,
+                    "left": 6,
+                    "right": 6,
+                    "top": 6,
+                  }
+                }
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
                 style={
                   Array [
                     Object {
-                      "backgroundColor": "transparent",
+                      "overflow": "hidden",
                     },
                     Object {
-                      "color": "rgba(28, 27, 31, 0.54)",
-                      "fontSize": 24,
+                      "alignItems": "center",
+                      "flexGrow": 1,
+                      "justifyContent": "center",
                     },
                   ]
                 }
               >
-                □
-              </Text>
+                <Text
+                  accessibilityElementsHidden={true}
+                  importantForAccessibility="no-hide-descendants"
+                  pointerEvents="none"
+                  selectable={false}
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                      Object {
+                        "color": "rgba(28, 27, 31, 0.54)",
+                        "fontSize": 24,
+                      },
+                    ]
+                  }
+                >
+                  □
+                </Text>
+              </View>
             </View>
           </View>
         </View>
