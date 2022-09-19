@@ -26,6 +26,7 @@ export type Props = {
    * - `color`: custom icon color of the action item
    * - `labelTextColor`: custom label text color of the action item
    * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
+   * - `accessibilityHint`: accessibility hint for the action
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
    * - `containerStyle`: pass additional styles for the fab item label container, for example, `backgroundColor`
    * - `labelStyle`: pass additional styles for the fab item label, for example, `fontSize`
