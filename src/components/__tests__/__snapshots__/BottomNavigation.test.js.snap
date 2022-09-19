@@ -371,23 +371,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
                         "alignItems": "center",
                         "bottom": 0,
                         "left": 0,
@@ -543,23 +526,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
                   <View
                     collapsable={false}
                     style={
@@ -1067,23 +1033,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
                         "alignItems": "center",
                         "bottom": 0,
                         "left": 0,
@@ -1239,23 +1188,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
                   <View
                     collapsable={false}
                     style={
@@ -1828,23 +1760,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
                         "alignItems": "center",
                         "bottom": 0,
                         "left": 0,
@@ -2061,23 +1976,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     }
                   }
                 >
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
                   <View
                     collapsable={false}
                     style={
@@ -2302,23 +2200,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
                         "alignItems": "center",
                         "bottom": 0,
                         "left": 0,
@@ -2535,23 +2416,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     }
                   }
                 >
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
                   <View
                     collapsable={false}
                     style={
@@ -3104,23 +2968,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
                         "alignItems": "center",
                         "bottom": 0,
                         "left": 0,
@@ -3286,23 +3133,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
                   <View
                     collapsable={false}
                     style={
@@ -3824,19 +3654,160 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "opacity": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 4,
                       }
                     }
-                  />
+                  >
+                    <icon
+                      color="rgba(29, 25, 43, 1)"
+                    />
+                  </View>
+                  <View
+                    collapsable={false}
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "opacity": 1,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 4,
+                      }
+                    }
+                  >
+                    <icon
+                      color="rgba(73, 69, 79, 1)"
+                    />
+                  </View>
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "left": 0,
+                          "position": "absolute",
+                        },
+                        Object {
+                          "right": 0,
+                          "top": 2,
+                        },
+                      ]
+                    }
+                  >
+                    <Text
+                      collapsable={false}
+                      numberOfLines={1}
+                      style={
+                        Object {
+                          "alignSelf": "flex-end",
+                          "backgroundColor": "rgba(179, 38, 30, 1)",
+                          "borderRadius": 8,
+                          "color": "rgba(255, 255, 255, 1)",
+                          "fontSize": 8,
+                          "height": 16,
+                          "lineHeight": 16,
+                          "minWidth": 16,
+                          "opacity": 0,
+                          "overflow": "hidden",
+                          "paddingHorizontal": 3,
+                          "textAlign": "center",
+                          "textAlignVertical": "center",
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+                <View
+                  collapsable={false}
+                  style={
+                    Object {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    }
+                  }
+                >
+                  <View
+                    collapsable={false}
+                    style={
+                      Object {
+                        "bottom": 0,
+                        "left": 0,
+                        "opacity": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      }
+                    }
+                  >
+                    <text
+                      color="rgba(73, 69, 79, 1)"
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View
+              accessibilityRole="button"
+              accessibilityState={
+                Object {
+                  "selected": false,
+                }
+              }
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "flex": 1,
+                    "paddingVertical": 6,
+                  },
+                  Object {
+                    "paddingVertical": 0,
+                  },
+                ]
+              }
+            >
+              <View
+                pointerEvents="none"
+                style={
+                  Object {
+                    "paddingBottom": 16,
+                    "paddingTop": 12,
+                  }
+                }
+              >
+                <View
+                  collapsable={false}
+                  style={
+                    Object {
+                      "alignSelf": "center",
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginHorizontal": 12,
+                      "marginTop": 0,
+                      "transform": Array [
+                        Object {
+                          "translateY": 7,
+                        },
+                      ],
+                      "width": 32,
+                    }
+                  }
+                >
                   <View
                     collapsable={false}
                     style={
@@ -3999,23 +3970,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
                         "alignItems": "center",
                         "bottom": 0,
                         "left": 0,
@@ -4170,198 +4124,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "alignItems": "center",
-                        "bottom": 0,
-                        "left": 0,
-                        "opacity": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 4,
-                      }
-                    }
-                  >
-                    <icon
-                      color="rgba(29, 25, 43, 1)"
-                    />
-                  </View>
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "alignItems": "center",
-                        "bottom": 0,
-                        "left": 0,
-                        "opacity": 1,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 4,
-                      }
-                    }
-                  >
-                    <icon
-                      color="rgba(73, 69, 79, 1)"
-                    />
-                  </View>
-                  <View
-                    style={
-                      Array [
-                        Object {
-                          "left": 0,
-                          "position": "absolute",
-                        },
-                        Object {
-                          "right": 0,
-                          "top": 2,
-                        },
-                      ]
-                    }
-                  >
-                    <Text
-                      collapsable={false}
-                      numberOfLines={1}
-                      style={
-                        Object {
-                          "alignSelf": "flex-end",
-                          "backgroundColor": "rgba(179, 38, 30, 1)",
-                          "borderRadius": 8,
-                          "color": "rgba(255, 255, 255, 1)",
-                          "fontSize": 8,
-                          "height": 16,
-                          "lineHeight": 16,
-                          "minWidth": 16,
-                          "opacity": 0,
-                          "overflow": "hidden",
-                          "paddingHorizontal": 3,
-                          "textAlign": "center",
-                          "textAlignVertical": "center",
-                        }
-                      }
-                    />
-                  </View>
-                </View>
-                <View
-                  collapsable={false}
-                  style={
-                    Object {
-                      "height": 16,
-                      "paddingBottom": 2,
-                    }
-                  }
-                >
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "bottom": 0,
-                        "left": 0,
-                        "opacity": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      }
-                    }
-                  >
-                    <text
-                      color="rgba(73, 69, 79, 1)"
-                    />
-                  </View>
-                </View>
-              </View>
-            </View>
-            <View
-              accessibilityRole="button"
-              accessibilityState={
-                Object {
-                  "selected": false,
-                }
-              }
-              accessible={true}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
-                Array [
-                  Object {
-                    "flex": 1,
-                    "paddingVertical": 6,
-                  },
-                  Object {
-                    "paddingVertical": 0,
-                  },
-                ]
-              }
-            >
-              <View
-                pointerEvents="none"
-                style={
-                  Object {
-                    "paddingBottom": 16,
-                    "paddingTop": 12,
-                  }
-                }
-              >
-                <View
-                  collapsable={false}
-                  style={
-                    Object {
-                      "alignSelf": "center",
-                      "height": 32,
-                      "justifyContent": "center",
-                      "marginBottom": 4,
-                      "marginHorizontal": 12,
-                      "marginTop": 0,
-                      "transform": Array [
-                        Object {
-                          "translateY": 7,
-                        },
-                      ],
-                      "width": 32,
-                    }
-                  }
-                >
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
                   <View
                     collapsable={false}
                     style={
@@ -4946,23 +4708,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     collapsable={false}
                     style={
                       Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
                         "alignItems": "center",
                         "bottom": 0,
                         "left": 0,
@@ -5221,23 +4966,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     }
                   }
                 >
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
                   <View
                     collapsable={false}
                     style={
@@ -5915,23 +5643,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     collapsable={false}
                     style={
                       Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
                         "alignItems": "center",
                         "bottom": 0,
                         "left": 0,
@@ -6148,23 +5859,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     }
                   }
                 >
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
                   <View
                     collapsable={false}
                     style={
@@ -6810,23 +6504,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
                         "alignItems": "center",
                         "bottom": 0,
                         "left": 0,
@@ -7085,23 +6762,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
                   <View
                     collapsable={false}
                     style={
@@ -7778,23 +7438,6 @@ exports[`renders shifting bottom navigation 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
                         "alignItems": "center",
                         "bottom": 0,
                         "left": 0,
@@ -8011,23 +7654,6 @@ exports[`renders shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
                   <View
                     collapsable={false}
                     style={
@@ -8252,23 +7878,6 @@ exports[`renders shifting bottom navigation 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
                         "alignItems": "center",
                         "bottom": 0,
                         "left": 0,
@@ -8485,23 +8094,6 @@ exports[`renders shifting bottom navigation 1`] = `
                     }
                   }
                 >
-                  <View
-                    collapsable={false}
-                    style={
-                      Object {
-                        "alignSelf": "center",
-                        "backgroundColor": "rgba(232, 222, 248, 1)",
-                        "borderRadius": 16,
-                        "height": 32,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 0,
-                          },
-                        ],
-                        "width": 64,
-                      }
-                    }
-                  />
                   <View
                     collapsable={false}
                     style={

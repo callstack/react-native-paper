@@ -921,7 +921,7 @@ const BottomNavigation = ({
                         },
                       ]}
                     >
-                      {isV3 && (
+                      {isV3 && focused && (
                         <Animated.View
                           style={[
                             styles.outline,
