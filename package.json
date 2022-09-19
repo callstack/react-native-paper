@@ -38,8 +38,9 @@
     "test": "jest",
     "prepare": "bob build && node ./scripts/generate-mappings.js",
     "release": "release-it",
-    "bootstrap": "yarn --cwd example && yarn --cwd docs && yarn",
+    "bootstrap": "yarn --cwd example && yarn --cwd docs && yarn --cwd docusaurus && yarn",
     "docs": "yarn --cwd docs",
+    "docusaurus": "yarn --cwd docusaurus",
     "example": "yarn --cwd example"
   },
   "publishConfig": {
