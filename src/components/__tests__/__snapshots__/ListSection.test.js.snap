@@ -301,10 +301,13 @@ exports[`renders list section with custom title style 1`] = `
           style={
             Array [
               Object {
+                "textAlign": "left",
+              },
+              Object {
                 "color": "rgba(28, 27, 31, 1)",
               },
               Object {
-                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -416,10 +419,13 @@ exports[`renders list section with custom title style 1`] = `
           style={
             Array [
               Object {
+                "textAlign": "left",
+              },
+              Object {
                 "color": "rgba(28, 27, 31, 1)",
               },
               Object {
-                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -740,10 +746,13 @@ exports[`renders list section with subheader 1`] = `
           style={
             Array [
               Object {
+                "textAlign": "left",
+              },
+              Object {
                 "color": "rgba(28, 27, 31, 1)",
               },
               Object {
-                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -855,10 +864,13 @@ exports[`renders list section with subheader 1`] = `
           style={
             Array [
               Object {
+                "textAlign": "left",
+              },
+              Object {
                 "color": "rgba(28, 27, 31, 1)",
               },
               Object {
-                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -1141,10 +1153,13 @@ exports[`renders list section without subheader 1`] = `
           style={
             Array [
               Object {
+                "textAlign": "left",
+              },
+              Object {
                 "color": "rgba(28, 27, 31, 1)",
               },
               Object {
-                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -1256,10 +1271,13 @@ exports[`renders list section without subheader 1`] = `
           style={
             Array [
               Object {
+                "textAlign": "left",
+              },
+              Object {
                 "color": "rgba(28, 27, 31, 1)",
               },
               Object {
-                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {

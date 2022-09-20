@@ -77,14 +77,18 @@ function AnimatedText({ style, theme, variant, ...rest }: Props) {
       />
     );
   } else {
+    const font = !theme.isV3 ? theme.fonts.regular : theme.fonts.bodyMedium;
+    const textStyle = {
+      ...font,
+      color: theme.isV3 ? theme.colors.onSurface : theme.colors.text,
+    };
     return (
       <Animated.Text
         {...rest}
         style={[
           styles.text,
+          textStyle,
           {
-            ...(!theme.isV3 && theme.fonts.regular),
-            color: theme.isV3 ? theme.colors.onSurface : theme.colors.text,
             writingDirection,
           },
           style,

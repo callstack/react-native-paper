@@ -132,12 +132,11 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
       ...font,
       color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,
     };
-
     return (
       <NativeText
         {...rest}
         ref={root}
-        style={[textStyle, styles.text, style]}
+        style={[styles.text, textStyle, { writingDirection }, style]}
       />
     );
   }
