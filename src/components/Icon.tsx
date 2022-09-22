@@ -70,7 +70,7 @@ const Icon = ({ source, color, size, theme, ...rest }: Props) => {
   const direction =
     typeof source === 'object' && source.direction && source.source
       ? source.direction === 'auto'
-        ? I18nManager.isRTL
+        ? I18nManager.getConstants().isRTL
           ? 'rtl'
           : 'ltr'
         : source.direction

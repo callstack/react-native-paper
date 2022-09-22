@@ -251,7 +251,7 @@ const ListAccordion = ({
                   name={isExpanded ? 'chevron-up' : 'chevron-down'}
                   color={theme.isV3 ? descriptionColor : titleColor}
                   size={24}
-                  direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+                  direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
                 />
               )}
             </View>

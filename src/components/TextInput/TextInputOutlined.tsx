@@ -113,7 +113,7 @@ const TextInputOutlined = ({
   const labelHalfHeight = labelHeight / 2;
 
   const baseLabelTranslateX =
-    (I18nManager.isRTL ? 1 : -1) *
+    (I18nManager.getConstants().isRTL ? 1 : -1) *
     (labelHalfWidth -
       (labelScale * labelWidth) / 2 -
       (fontSize - MINIMIZED_LABEL_FONT_SIZE) * labelScale);
@@ -125,7 +125,7 @@ const TextInputOutlined = ({
   );
   if (isAdornmentLeftIcon) {
     labelTranslationXOffset =
-      (I18nManager.isRTL ? -1 : 1) *
+      (I18nManager.getConstants().isRTL ? -1 : 1) *
       (ADORNMENT_SIZE + ADORNMENT_OFFSET - (isV3 ? 0 : 8));
   }
 
@@ -336,7 +336,7 @@ const TextInputOutlined = ({
                 textAlignVertical: multiline ? 'top' : 'center',
                 textAlign: textAlign
                   ? textAlign
-                  : I18nManager.isRTL
+                  : I18nManager.getConstants().isRTL
                   ? 'right'
                   : 'left',
                 paddingHorizontal: INPUT_PADDING_HORIZONTAL,

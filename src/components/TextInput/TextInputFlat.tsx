@@ -159,9 +159,11 @@ const TextInputFlat = ({
   const labelHalfHeight = labelHeight / 2;
 
   const baseLabelTranslateX =
-    (I18nManager.isRTL ? 1 : -1) *
+    (I18nManager.getConstants().isRTL ? 1 : -1) *
       (labelHalfWidth - (labelScale * labelWidth) / 2) +
-    (1 - labelScale) * (I18nManager.isRTL ? -1 : 1) * paddingLeft;
+    (1 - labelScale) *
+      (I18nManager.getConstants().isRTL ? -1 : 1) *
+      paddingLeft;
 
   const minInputHeight = dense
     ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) - LABEL_PADDING_TOP_DENSE
@@ -363,7 +365,7 @@ const TextInputFlat = ({
               textAlignVertical: multiline ? 'top' : 'center',
               textAlign: textAlign
                 ? textAlign
-                : I18nManager.isRTL
+                : I18nManager.getConstants().isRTL
                 ? 'right'
                 : 'left',
             },
