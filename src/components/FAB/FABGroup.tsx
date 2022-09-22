@@ -28,7 +28,7 @@ export type Props = {
    * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
    * - `accessibilityHint`: accessibility hint for the action
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
-   * - `containerStyle`: pass additional styles for the fab item label container, for example, `backgroundColor`
+   * - `containerStyle`: pass additional styles for the fab item label container, for example, `backgroundColor` @supported Available in 5.x
    * - `labelStyle`: pass additional styles for the fab item label, for example, `fontSize`
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    * - `size`: size of action item. Defaults to `small`. @supported Available in v5.x
