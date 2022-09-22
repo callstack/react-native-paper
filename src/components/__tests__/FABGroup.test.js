@@ -1,6 +1,9 @@
 import color from 'color';
-import { getFABGroupColors } from '../FAB/utils';
+import * as React from 'react';
+import { render } from '@testing-library/react-native';
 import { getTheme } from '../../core/theming';
+import { getFABGroupColors } from '../FAB/utils';
+import FAB from '../FAB';
 
 describe('getFABGroupColors - backdrop color', () => {
   it('should return custom color', () => {
@@ -91,6 +94,57 @@ describe('getFABGroupColors - stacked FAB background color', () => {
       })
     ).toMatchObject({
       stackedFABBackgroundColor: getTheme(false, false).colors.surface,
+    });
+  });
+});
+
+describe('FABActions - labelStyle - containerStyle', () => {
+  it('correctly applies label style', () => {
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open
+        actions={[
+          {
+            label: 'complete',
+            labelStyle: {
+              fontSize: 24,
+              fontWeight: '500',
+            },
+          },
+        ]}
+      />
+    );
+
+    expect(getByText('complete')).toHaveStyle({
+      fontSize: 24,
+      fontWeight: '500',
+    });
+  });
+
+  it('correctly applies containerStyle style', () => {
+    const { getByA11yHint } = render(
+      <FAB.Group
+        visible
+        open
+        actions={[
+          {
+            label: 'remove',
+            accessibilityHint: 'hint',
+            containerStyle: {
+              padding: 16,
+              backgroundColor: '#687456',
+              marginLeft: 16,
+            },
+          },
+        ]}
+      />
+    );
+
+    expect(getByA11yHint('hint')).toHaveStyle({
+      padding: 16,
+      backgroundColor: '#687456',
+      marginLeft: 16,
     });
   });
 });

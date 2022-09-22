@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewStyle,
+  TextStyle,
 } from 'react-native';
 import FAB from './FAB';
 import Text from '../Typography/Text';
@@ -25,8 +26,10 @@ export type Props = {
    * - `color`: custom icon color of the action item
    * - `labelTextColor`: custom label text color of the action item
    * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
+   * - `accessibilityHint`: accessibility hint for the action
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
-   * - `labelStyle`: pass additional styles for the fab item label, for example, `backgroundColor`
+   * - `containerStyle`: pass additional styles for the fab item label container, for example, `backgroundColor`
+   * - `labelStyle`: pass additional styles for the fab item label, for example, `fontSize`
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    * - `size`: size of action item. Defaults to `small`. @supported Available in v5.x
    * - `testID`: testID to be used on tests
@@ -37,8 +40,10 @@ export type Props = {
     color?: string;
     labelTextColor?: string;
     accessibilityLabel?: string;
+    accessibilityHint?: string;
     style?: StyleProp<ViewStyle>;
-    labelStyle?: StyleProp<ViewStyle>;
+    containerStyle?: StyleProp<ViewStyle>;
+    labelStyle?: StyleProp<TextStyle>;
     onPress: () => void;
     size?: 'small' | 'medium';
     testID?: string;
@@ -320,9 +325,10 @@ const FABGroup = ({
               {it.label && (
                 <View>
                   <Card
+                    accessibilityHint={it.accessibilityHint}
                     style={
                       [
-                        styles.label,
+                        styles.containerStyle,
                         {
                           transform: [
                             isV3
@@ -331,8 +337,8 @@ const FABGroup = ({
                           ],
                           opacity: opacities[i],
                         },
-                        isV3 && styles.v3LabelStyle,
-                        it.labelStyle,
+                        isV3 && styles.v3ContainerStyle,
+                        it.containerStyle,
                       ] as StyleProp<ViewStyle>
                     }
                     onPress={() => {
@@ -349,7 +355,10 @@ const FABGroup = ({
                   >
                     <Text
                       variant="titleMedium"
-                      style={{ color: it.labelTextColor ?? labelColor }}
+                      style={[
+                        { color: it.labelTextColor ?? labelColor },
+                        it.labelStyle,
+                      ]}
                     >
                       {it.label}
                     </Text>
@@ -432,7 +441,7 @@ const styles = StyleSheet.create({
   backdrop: {
     ...StyleSheet.absoluteFillObject,
   },
-  label: {
+  containerStyle: {
     borderRadius: 5,
     paddingHorizontal: 12,
     paddingVertical: 6,
@@ -446,7 +455,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  v3LabelStyle: {
+  v3ContainerStyle: {
     backgroundColor: 'transparent',
     elevation: 0,
   },
