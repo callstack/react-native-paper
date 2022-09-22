@@ -90,8 +90,10 @@ To render the group above other components, you'll need to wrap it with the <a h
   color?: string;
   labelTextColor?: string;
   accessibilityLabel?: string;
+  accessibilityHint?: string;
   style?: StyleProp&lt;ViewStyle&gt;;
-  labelStyle?: StyleProp&lt;ViewStyle&gt;;
+  containerStyle?: StyleProp&lt;ViewStyle&gt;;
+  labelStyle?: StyleProp&lt;TextStyle&gt;;
   onPress: () =&gt; void;
   size?: &#x27;small&#x27; | &#x27;medium&#x27;;
   testID?: string;
@@ -103,8 +105,10 @@ An action item should contain the following properties:</p>
 <li><code>color</code>: custom icon color of the action item</li>
 <li><code>labelTextColor</code>: custom label text color of the action item</li>
 <li><code>accessibilityLabel</code>: accessibility label for the action, uses label by default if specified</li>
+<li><code>accessibilityHint</code>: accessibility hint for the action</li>
 <li><code>style</code>: pass additional styles for the fab item, for example, <code>backgroundColor</code></li>
-<li><code>labelStyle</code>: pass additional styles for the fab item label, for example, <code>backgroundColor</code></li>
+<li><code>containerStyle</code>: pass additional styles for the fab item label container, for example, <code>backgroundColor</code></li>
+<li><code>labelStyle</code>: pass additional styles for the fab item label, for example, <code>fontSize</code></li>
 <li><code>onPress</code>: callback that is called when <code>FAB</code> is pressed (required)</li>
 <li><code>size</code>: size of action item. Defaults to <code>small</code>. <span class="badge supported">Available in v5.x</span>
 </li><li><code>testID</code>: testID to be used on tests</li>
