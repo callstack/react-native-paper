@@ -6,6 +6,7 @@ const {
 } = require('component-docs/dist/parsers/component');
 
 const clean = require('./clean');
+const { pluginName } = require('./config');
 const createCategory = require('./createCategory');
 const generatePageMDX = require('./generatePageMDX');
 const getPages = require('./getPages');
@@ -13,7 +14,7 @@ const { docsRootDir } = require('./paths');
 
 async function componentsPlugin() {
   return {
-    name: 'component-docs-plugin',
+    name: pluginName,
     async loadContent() {
       // Clean up docs directory.
       clean();
@@ -32,11 +33,11 @@ async function componentsPlugin() {
 
       for (const page of pages) {
         // Create subcategory if necessary.
-        if (page.group) {
-          createCategory(page.group, page.group ?? '.');
+        if (page.doc.group) {
+          createCategory(page.doc.group, page.doc.group ?? '.');
         }
         fs.writeFile(
-          path.join(docsRootDir, page.group ?? '.', `${page.doc.link}.mdx`),
+          path.join(docsRootDir, page.doc.group ?? '.', `${page.doc.link}.mdx`),
           generatePageMDX(page.doc),
           () => {}
         );

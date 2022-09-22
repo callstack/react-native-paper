@@ -1,43 +1,71 @@
 import React from 'react';
-import { usePluginData } from '@docusaurus/useGlobalData';
+import useDoc from '@site/component-docs-plugin/useDocs';
+
+const typeDefinitions = {
+  IconSource: '/docs/icons',
+  Theme: '/docs/theming#theme-properties',
+  AccessibilityState:
+    'https://reactnative.dev/docs/accessibility#accessibilitystate',
+  'StyleProp<ViewStyle>': 'https://reactnative.dev/docs/view-style-props',
+  'StyleProp<TextStyle>': 'https://reactnative.dev/docs/text-style-props',
+};
+
+const ANNOTATION_OPTIONAL = '@optional';
+const ANNOTATION_INTERNAL = '@internal';
 
 export default function PropTable({ link }) {
-  const { pages } = usePluginData('component-docs-plugin');
-  const page = pages.find((page) => page.doc.link === link);
-  const props = page.doc.data.props;
+  const { doc } = useDoc(link);
+  const props = doc.data.props;
+
+  for (const prop in props) {
+    // Remove @optional annotations from descriptions.
+    if (props[prop].description.includes(ANNOTATION_OPTIONAL)) {
+      props[prop].description = props[prop].description.replace(
+        ANNOTATION_OPTIONAL,
+        ''
+      );
+    }
+    // Hide props with @internal annotations.
+    if (props[prop].description.includes(ANNOTATION_INTERNAL)) {
+      delete props[prop];
+    }
+  }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Required</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        {Object.keys(props).map((key) => {
-          return (
-            <tr key={key}>
-              <td>
-                <code>{key}</code>
-              </td>
-              <td>
-                <code>{props[key].tsType?.name}</code>
-              </td>
-              <td>
-                {props[key].defaultValue && (
-                  <code>{props[key].defaultValue.value}</code>
-                )}
-              </td>
-              <td>{props[key].required ? 'Yes' : 'No'}</td>
-              <td>{props[key].description}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <div>
+      {Object.keys(props).map((key) => {
+        const tsType = props[key].tsType?.raw ?? props[key].tsType?.name;
+
+        return (
+          <div key={key}>
+            <h3>
+              {key} {props[key].required ? '(required)' : ''}
+            </h3>
+            <p>
+              Type:{' '}
+              {typeDefinitions[tsType] ? (
+                <a
+                  href={typeDefinitions[tsType]}
+                  target={
+                    typeDefinitions[tsType].startsWith('/') ? '_self' : '_blank'
+                  }
+                  rel="noreferrer"
+                >
+                  <code>{tsType}</code>
+                </a>
+              ) : (
+                <code>{tsType}</code>
+              )}
+            </p>
+            {props[key].defaultValue && (
+              <p>
+                Default value: <code>{props[key].defaultValue.value}</code>
+              </p>
+            )}
+            <p>{props[key].description}</p>
+          </div>
+        );
+      })}
+    </div>
   );
 }

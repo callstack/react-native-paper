@@ -12,7 +12,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'images/favicon.ico',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -59,21 +59,20 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'React Native Paper',
         logo: {
           alt: 'React Native Paper',
-          src: 'img/logo.svg',
+          src: 'images/sidebar-logo.svg',
         },
         items: [
           {
             type: 'doc',
-            docId: 'getting-started',
+            docId: 'guides/getting-started',
             position: 'left',
             label: 'Guides',
           },
           {
             type: 'doc',
-            docId: '/category/components',
+            docId: 'components/activity-indicator',
             position: 'left',
             label: 'Components',
           },

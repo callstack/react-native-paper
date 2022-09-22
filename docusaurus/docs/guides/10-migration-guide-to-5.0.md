@@ -245,7 +245,7 @@ Two additional props that control the scene animation were introduced that contr
 * `sceneAnimationType: "opacity" | "shifting" | undefined` - defines the animation type for the scene. `shifting` enables a new animation where navigating to a scene will shift it horizontally into view. Both `opacity` and `undefined` have the same effect, fading the scene into view.
 * `sceneAnimationEasing` allows specifying a custom easing function for the scene animation.
 
-![shiftingAnimation](../static/screenshots/bottom-navigation-shifting.gif)
+![shiftingAnimation](../../static/screenshots/bottom-navigation-shifting.gif)
 
 On a final note, please be aware that `BottomNavigation` with theme version 3 doesn't have a shadow.
 
@@ -495,7 +495,7 @@ Previously `elevation` was passed inside the `style` prop. Since it supported no
 
 `SegmentedButtons` is a completely new component introduced in the latest version. It allows people to select options, switch views, or sort elements. It supports single and multiselect select variant and provide a lot of customization options.
 
-![segmentedButtons](../static/screenshots/segmentedbuttons.gif)
+![segmentedButtons](../../static/screenshots/segmentedbuttons.gif)
 
 ```js
 const MyComponent = () => {

@@ -32,3 +32,13 @@
 .screenshots {
   max-width: 300px;
 }
+
+.gallery {
+  display: flex;
+  flex-direction: row;
+}
+
+.gallery img {
+  padding: 8px;
+  width: 33%;
+}

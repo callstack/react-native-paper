@@ -75,7 +75,7 @@ const style = StyleSheet.create({
 
 Once we have finished implementing the components, we can run the app and check how Stack looks like.
 
-![navigationAppBar1](../static/screenshots/react-navigation-appBar1.png)
+![navigationAppBar1](../../static/screenshots/react-navigation-appBar1.png)
 
 To navigate from `HomeScreen` to `DetailsScreen` we can use the navigation object provided by `Stack.Screen` component. Every component rendered by `Stack.Screen` has an access to the navigation object via props. Let's modify our `HomeScreen` component:
 
@@ -95,7 +95,7 @@ function HomeScreen({ navigation }) {
 
 Our result:
 
-![navigationAppBar2](../static/screenshots/react-navigation-appBar2.gif)
+![navigationAppBar2](../../static/screenshots/react-navigation-appBar2.gif)
 
 As you can see, we can already navigate between two screens. In the next steps, we will show you how to use Paper's `AppBar` instead of the default header.
 
@@ -168,7 +168,7 @@ function CustomNavigationBar({ navigation, back }) {
 }
 ```
 
-![navigationAppBar3](../static/screenshots/react-navigation-appBar3.gif)
+![navigationAppBar3](../../static/screenshots/react-navigation-appBar3.gif)
 
 
 Another interesting pattern that can be implemented with `react-native-paper` and `react-navigation` is a "hamburger menu". Thanks to the `Menu` component we can add a nice looking pop-up to our `Appbar`. To implement this feature we need to make a couple of changes in `CustomNavigationBar`:
@@ -207,6 +207,6 @@ function CustomNavigationBar({ navigation, back }) {
 
 Final result:
 
-![navigationAppBar4](../static/screenshots/react-navigation-appBar4.gif)
+![navigationAppBar4](../../static/screenshots/react-navigation-appBar4.gif)
 
 That's all we need! We have app bar that contains everything we need to navigate through screens and access an additional menu on the main screen. As you can see, with Material design `Appbar` provided by `react-native-paper` used together with `react-navigation` we can easily create an app that looks and works great.
