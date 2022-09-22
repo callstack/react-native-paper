@@ -73,10 +73,11 @@ exports[`correctly applies a component as the text label 1`] = `
         style={
           Object {
             "color": "rgba(103, 80, 164, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
-            "letterSpacing": 0.4,
+            "letterSpacing": 0.15,
             "lineHeight": undefined,
             "opacity": 0,
             "paddingLeft": 16,
@@ -117,10 +118,11 @@ exports[`correctly applies a component as the text label 1`] = `
         style={
           Object {
             "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
-            "letterSpacing": 0.4,
+            "letterSpacing": 0.15,
             "lineHeight": undefined,
             "opacity": 0,
             "paddingLeft": 16,
@@ -184,8 +186,11 @@ exports[`correctly applies a component as the text label 1`] = `
           },
           Object {
             "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
+            "letterSpacing": 0.15,
+            "lineHeight": undefined,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
@@ -276,10 +281,11 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
         style={
           Object {
             "color": "rgba(103, 80, 164, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
-            "letterSpacing": 0.4,
+            "letterSpacing": 0.15,
             "lineHeight": undefined,
             "opacity": 0,
             "paddingLeft": 16,
@@ -312,10 +318,11 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
         style={
           Object {
             "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
-            "letterSpacing": 0.4,
+            "letterSpacing": 0.15,
             "lineHeight": undefined,
             "opacity": 0,
             "paddingLeft": 16,
@@ -371,8 +378,11 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
           },
           Object {
             "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
+            "letterSpacing": 0.15,
+            "lineHeight": undefined,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
@@ -479,9 +489,12 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
             Object {
               "backgroundColor": "rgba(255, 251, 254, 1)",
               "color": "transparent",
+              "fontFamily": "System",
               "fontSize": 16,
               "fontWeight": undefined,
               "left": 8,
+              "letterSpacing": 0.15,
+              "lineHeight": undefined,
               "opacity": 1,
               "paddingHorizontal": 0,
               "position": "absolute",
@@ -516,10 +529,11 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           style={
             Object {
               "color": "rgba(103, 80, 164, 1)",
+              "fontFamily": "System",
               "fontSize": 16,
               "fontWeight": undefined,
               "left": 0,
-              "letterSpacing": 0.4,
+              "letterSpacing": 0.15,
               "lineHeight": undefined,
               "opacity": 0,
               "paddingHorizontal": 16,
@@ -551,10 +565,11 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           style={
             Object {
               "color": "rgba(73, 69, 79, 1)",
+              "fontFamily": "System",
               "fontSize": 16,
               "fontWeight": undefined,
               "left": 0,
-              "letterSpacing": 0.4,
+              "letterSpacing": 0.15,
               "lineHeight": undefined,
               "opacity": 0,
               "paddingHorizontal": 16,
@@ -606,8 +621,11 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
             },
             Object {
               "color": "rgba(28, 27, 31, 1)",
+              "fontFamily": "System",
               "fontSize": 16,
               "fontWeight": undefined,
+              "letterSpacing": 0.15,
+              "lineHeight": undefined,
               "paddingHorizontal": 16,
               "textAlign": "left",
               "textAlignVertical": "top",
@@ -700,10 +718,11 @@ exports[`correctly applies textAlign center 1`] = `
         style={
           Object {
             "color": "rgba(103, 80, 164, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
-            "letterSpacing": 0.4,
+            "letterSpacing": 0.15,
             "lineHeight": undefined,
             "opacity": 0,
             "paddingLeft": 16,
@@ -736,10 +755,11 @@ exports[`correctly applies textAlign center 1`] = `
         style={
           Object {
             "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
-            "letterSpacing": 0.4,
+            "letterSpacing": 0.15,
             "lineHeight": undefined,
             "opacity": 0,
             "paddingLeft": 16,
@@ -795,8 +815,11 @@ exports[`correctly applies textAlign center 1`] = `
           },
           Object {
             "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
+            "letterSpacing": 0.15,
+            "lineHeight": undefined,
             "textAlign": "center",
             "textAlignVertical": "center",
           },
@@ -887,10 +910,11 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         style={
           Object {
             "color": "rgba(103, 80, 164, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
-            "letterSpacing": 0.4,
+            "letterSpacing": 0.15,
             "lineHeight": undefined,
             "opacity": 0,
             "paddingLeft": 16,
@@ -923,10 +947,11 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         style={
           Object {
             "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
-            "letterSpacing": 0.4,
+            "letterSpacing": 0.15,
             "lineHeight": undefined,
             "opacity": 0,
             "paddingLeft": 16,
@@ -982,8 +1007,11 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           },
           Object {
             "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
+            "letterSpacing": 0.15,
+            "lineHeight": undefined,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
@@ -1024,8 +1052,11 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "color": "rgba(28, 27, 31, 0.54)",
           },
           Object {
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
+            "letterSpacing": 0.15,
+            "lineHeight": undefined,
           },
           Object {
             "color": "#f44336",
@@ -1241,10 +1272,11 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         style={
           Object {
             "color": "rgba(103, 80, 164, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
-            "letterSpacing": 0.4,
+            "letterSpacing": 0.15,
             "lineHeight": undefined,
             "opacity": 0,
             "paddingLeft": 56,
@@ -1277,10 +1309,11 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         style={
           Object {
             "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "left": 0,
-            "letterSpacing": 0.4,
+            "letterSpacing": 0.15,
             "lineHeight": undefined,
             "opacity": 0,
             "paddingLeft": 56,
@@ -1336,8 +1369,11 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           },
           Object {
             "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
+            "letterSpacing": 0.15,
+            "lineHeight": undefined,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
@@ -1507,8 +1543,11 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "color": "rgba(28, 27, 31, 0.54)",
           },
           Object {
+            "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
+            "letterSpacing": 0.15,
+            "lineHeight": undefined,
           },
           Object {
             "color": "#f44336",

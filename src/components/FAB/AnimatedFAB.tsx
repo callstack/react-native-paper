@@ -291,9 +291,11 @@ const AnimatedFAB = ({
     animFAB,
   });
 
+  const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
+
   const textStyle = {
     color: foregroundColor,
-    ...(isV3 ? theme.typescale.labelLarge : theme.fonts.medium),
+    ...font,
   };
 
   const md2Elevation = disabled || !isIOS ? 0 : 6;

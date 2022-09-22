@@ -124,6 +124,7 @@ exports[`renders checked segmented button with selected check 1`] = `
             Array [
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "500",
                 "letterSpacing": 0.1,
@@ -141,6 +142,11 @@ exports[`renders checked segmented button with selected check 1`] = `
                 },
                 Object {
                   "color": "rgba(28, 27, 31, 1)",
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
               ],
             ]
@@ -232,6 +238,7 @@ exports[`renders checked segmented button with selected check 1`] = `
             Array [
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "500",
                 "letterSpacing": 0.1,
@@ -249,6 +256,11 @@ exports[`renders checked segmented button with selected check 1`] = `
                 },
                 Object {
                   "color": "rgba(28, 27, 31, 0.38)",
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
               ],
             ]
@@ -358,6 +370,7 @@ exports[`renders disabled segmented button 1`] = `
             Array [
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "500",
                 "letterSpacing": 0.1,
@@ -375,6 +388,11 @@ exports[`renders disabled segmented button 1`] = `
                 },
                 Object {
                   "color": "rgba(28, 27, 31, 1)",
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
               ],
             ]
@@ -466,6 +484,7 @@ exports[`renders disabled segmented button 1`] = `
             Array [
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "500",
                 "letterSpacing": 0.1,
@@ -483,6 +502,11 @@ exports[`renders disabled segmented button 1`] = `
                 },
                 Object {
                   "color": "rgba(28, 27, 31, 0.38)",
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
               ],
             ]
@@ -590,6 +614,7 @@ exports[`renders segmented button 1`] = `
             Array [
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "500",
                 "letterSpacing": 0.1,
@@ -607,6 +632,11 @@ exports[`renders segmented button 1`] = `
                 },
                 Object {
                   "color": "rgba(28, 27, 31, 1)",
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
               ],
             ]
@@ -698,6 +728,7 @@ exports[`renders segmented button 1`] = `
             Array [
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "500",
                 "letterSpacing": 0.1,
@@ -715,6 +746,11 @@ exports[`renders segmented button 1`] = `
                 },
                 Object {
                   "color": "rgba(28, 27, 31, 1)",
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
                 },
               ],
             ]

@@ -36,6 +36,8 @@ const ListSubheader = ({ style, theme: overrideTheme, ...rest }: Props) => {
     ? theme.colors.onSurfaceVariant
     : color(theme.colors.text).alpha(0.54).rgb().string();
 
+  const font = theme.isV3 ? theme.fonts.bodyMedium : theme.fonts.medium;
+
   return (
     <Text
       variant="bodyMedium"
@@ -45,7 +47,7 @@ const ListSubheader = ({ style, theme: overrideTheme, ...rest }: Props) => {
         styles.container,
         {
           color: textColor,
-          ...(theme.isV3 ? theme.typescale.bodyMedium : theme.fonts.medium),
+          ...font,
         },
         style,
       ]}

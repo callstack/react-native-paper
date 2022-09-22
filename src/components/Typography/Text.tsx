@@ -5,7 +5,6 @@ import {
   StyleProp,
   StyleSheet,
   I18nManager,
-  Platform,
 } from 'react-native';
 import { useTheme } from '../../core/theming';
 import { Font, MD3TypescaleKey, ThemeProp } from '../../types';
@@ -94,12 +93,12 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
     const stylesByVariant = Object.keys(MD3TypescaleKey).reduce(
       (acc, key) => {
         const { fontSize, fontWeight, lineHeight, letterSpacing, fontFamily } =
-          theme.typescale[key as keyof typeof MD3TypescaleKey];
+          theme.fonts[key as keyof typeof MD3TypescaleKey];
 
         return {
           ...acc,
           [key]: {
-            ...(Platform.OS === 'android' && { fontFamily }),
+            fontFamily,
             fontSize,
             fontWeight,
             lineHeight,
@@ -128,18 +127,16 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
       />
     );
   } else {
+    const font = !theme.isV3 ? theme.fonts?.regular : {};
+    const textStyle = {
+      ...font,
+      color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,
+    };
     return (
       <NativeText
         {...rest}
         ref={root}
-        style={[
-          {
-            ...(!theme.isV3 && theme.fonts?.regular),
-            color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,
-          },
-          styles.text,
-          style,
-        ]}
+        style={[styles.text, textStyle, { writingDirection }, style]}
       />
     );
   }

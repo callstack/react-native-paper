@@ -145,11 +145,13 @@ const SegmentedButtonItem = ({
     ...segmentBorderRadius,
   };
   const showIcon = icon && !label ? true : checked ? !showSelectedCheck : true;
-  const textStyle: TextStyle = {
-    ...(!isV3 && {
-      textTransform: 'uppercase',
-      fontWeight: '500',
-    }),
+  const labelTextStyle: TextStyle = {
+    ...(!isV3
+      ? {
+          textTransform: 'uppercase',
+          fontWeight: '500',
+        }
+      : theme.fonts.labelLarge),
     color: textColor,
   };
 
@@ -187,7 +189,7 @@ const SegmentedButtonItem = ({
           ) : null}
           <Text
             variant="labelLarge"
-            style={[styles.label, textStyle]}
+            style={[styles.label, labelTextStyle]}
             selectable={false}
             numberOfLines={1}
           >

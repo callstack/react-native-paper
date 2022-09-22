@@ -127,7 +127,7 @@ const AppbarContent = ({
             {
               color: titleTextColor,
               ...(isV3
-                ? theme.typescale[variant]
+                ? theme.fonts[variant]
                 : Platform.OS === 'ios'
                 ? theme.fonts.regular
                 : theme.fonts.medium),

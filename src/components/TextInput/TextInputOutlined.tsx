@@ -26,6 +26,7 @@ import {
   OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
   LABEL_PADDING_TOP,
   MIN_DENSE_HEIGHT_OUTLINED,
+  LABEL_PADDING_TOP_DENSE,
 } from './constants';
 
 import {
@@ -73,7 +74,7 @@ const TextInputOutlined = ({
   const adornmentConfig = getAdornmentConfig({ left, right });
 
   const { colors, isV3, roundness } = theme;
-  const font = !isV3 ? theme.fonts.regular : {};
+  const font = isV3 ? theme.fonts.bodyLarge : theme.fonts.regular;
   const hasActiveOutline = parentState.focused || error;
 
   const { INPUT_PADDING_HORIZONTAL, MIN_HEIGHT, ADORNMENT_OFFSET } =
@@ -191,6 +192,7 @@ const TextInputOutlined = ({
     baseLabelTranslateX,
     font,
     fontSize,
+    lineHeight,
     fontWeight,
     labelScale,
     wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
@@ -209,21 +211,25 @@ const TextInputOutlined = ({
   const minHeight = (height ||
     (dense ? MIN_DENSE_HEIGHT_OUTLINED : MIN_HEIGHT)) as number;
 
+  const outlinedHeight =
+    inputHeight +
+    (!height ? (dense ? LABEL_PADDING_TOP_DENSE / 2 : LABEL_PADDING_TOP) : 0);
+
   const { leftLayout, rightLayout } = parentState;
 
   const leftAffixTopPosition = calculateOutlinedIconAndAffixTopPosition({
-    height: minHeight,
+    height: outlinedHeight,
     affixHeight: leftLayout.height || 0,
     labelYOffset: -OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
   });
 
   const rightAffixTopPosition = calculateOutlinedIconAndAffixTopPosition({
-    height: minHeight,
+    height: outlinedHeight,
     affixHeight: rightLayout.height || 0,
     labelYOffset: -OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
   });
   const iconTopPosition = calculateOutlinedIconAndAffixTopPosition({
-    height: minHeight,
+    height: outlinedHeight,
     affixHeight: ADORNMENT_SIZE,
     labelYOffset: -OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
   });
@@ -269,7 +275,7 @@ const TextInputOutlined = ({
       ...adornmentProps,
       left,
       right,
-      textStyle: { ...font, fontSize, fontWeight },
+      textStyle: { ...font, fontSize, lineHeight, fontWeight },
       visible: parentState.labeled,
     };
   }
@@ -331,6 +337,7 @@ const TextInputOutlined = ({
               {
                 ...font,
                 fontSize,
+                lineHeight,
                 fontWeight,
                 color: inputTextColor,
                 textAlignVertical: multiline ? 'top' : 'center',

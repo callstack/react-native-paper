@@ -142,6 +142,7 @@ exports[`renders chip with close button 1`] = `
               Array [
                 Object {
                   "color": "rgba(28, 27, 31, 1)",
+                  "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
@@ -155,13 +156,16 @@ exports[`renders chip with close button 1`] = `
                 },
                 Array [
                   Object {
-                    "lineHeight": 24,
-                    "marginVertical": 4,
-                    "minHeight": 24,
+                    "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
                   Object {
                     "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
                   },
                   Object {
                     "marginLeft": 8,
@@ -383,6 +387,7 @@ exports[`renders chip with custom close button 1`] = `
               Array [
                 Object {
                   "color": "rgba(28, 27, 31, 1)",
+                  "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
@@ -396,13 +401,16 @@ exports[`renders chip with custom close button 1`] = `
                 },
                 Array [
                   Object {
-                    "lineHeight": 24,
-                    "marginVertical": 4,
-                    "minHeight": 24,
+                    "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
                   Object {
                     "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
                   },
                   Object {
                     "marginLeft": 8,
@@ -624,6 +632,7 @@ exports[`renders chip with icon 1`] = `
               Array [
                 Object {
                   "color": "rgba(28, 27, 31, 1)",
+                  "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
@@ -637,13 +646,16 @@ exports[`renders chip with icon 1`] = `
                 },
                 Array [
                   Object {
-                    "lineHeight": 24,
-                    "marginVertical": 4,
-                    "minHeight": 24,
+                    "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
                   Object {
                     "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
                   },
                   Object {
                     "marginLeft": 8,
@@ -770,6 +782,7 @@ exports[`renders chip with onPress 1`] = `
               Array [
                 Object {
                   "color": "rgba(28, 27, 31, 1)",
+                  "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
@@ -783,13 +796,16 @@ exports[`renders chip with onPress 1`] = `
                 },
                 Array [
                   Object {
-                    "lineHeight": 24,
-                    "marginVertical": 4,
-                    "minHeight": 24,
+                    "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
                   Object {
                     "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
                   },
                   Object {
                     "marginLeft": 16,
@@ -916,6 +932,7 @@ exports[`renders outlined disabled chip 1`] = `
               Array [
                 Object {
                   "color": "rgba(28, 27, 31, 1)",
+                  "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
@@ -929,13 +946,16 @@ exports[`renders outlined disabled chip 1`] = `
                 },
                 Array [
                   Object {
-                    "lineHeight": 24,
-                    "marginVertical": 4,
-                    "minHeight": 24,
+                    "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
                   Object {
                     "color": "rgba(28, 27, 31, 0.38)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
                   },
                   Object {
                     "marginLeft": 16,
@@ -1097,6 +1117,7 @@ exports[`renders selected chip 1`] = `
               Array [
                 Object {
                   "color": "rgba(28, 27, 31, 1)",
+                  "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
@@ -1110,13 +1131,16 @@ exports[`renders selected chip 1`] = `
                 },
                 Array [
                   Object {
-                    "lineHeight": 24,
-                    "marginVertical": 4,
-                    "minHeight": 24,
+                    "marginVertical": 6,
                     "textAlignVertical": "center",
                   },
                   Object {
                     "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
                   },
                   Object {
                     "marginLeft": 8,

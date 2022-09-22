@@ -1,12 +1,10 @@
 import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 import AnimatedText from '../../Typography/AnimatedText';
-import { useTheme } from '../../../core/theming';
 
 import type { InputLabelProps } from '../types';
 
 const InputLabel = (props: InputLabelProps) => {
-  const { isV3 } = useTheme();
   const { parentState, labelBackground } = props;
   const {
     label,
@@ -19,6 +17,7 @@ const InputLabel = (props: InputLabelProps) => {
     baseLabelTranslateY,
     font,
     fontSize,
+    lineHeight,
     fontWeight,
     placeholderOpacity,
     wiggleOffsetX,
@@ -47,6 +46,7 @@ const InputLabel = (props: InputLabelProps) => {
   const labelStyle = {
     ...font,
     fontSize,
+    lineHeight,
     fontWeight,
     transform: [
       {
@@ -118,7 +118,6 @@ const InputLabel = (props: InputLabelProps) => {
               outputRange: [hasActiveOutline ? 1 : 0, 0],
             }),
           },
-          isV3 && styles.md3TextLine,
         ]}
         numberOfLines={1}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
@@ -139,7 +138,6 @@ const InputLabel = (props: InputLabelProps) => {
             color: textColor,
             opacity: placeholderOpacity,
           },
-          isV3 && styles.md3TextLine,
         ]}
         numberOfLines={1}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
@@ -154,9 +152,6 @@ const InputLabel = (props: InputLabelProps) => {
 const styles = StyleSheet.create({
   labelContainer: {
     zIndex: 3,
-  },
-  md3TextLine: {
-    lineHeight: undefined,
   },
 });
 

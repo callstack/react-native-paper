@@ -7,6 +7,7 @@ Array [
       Array [
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
           "fontSize": 57,
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -29,6 +30,7 @@ Array [
       Array [
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
           "fontSize": 45,
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -51,6 +53,7 @@ Array [
       Array [
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
           "fontSize": 36,
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -73,6 +76,7 @@ Array [
       Array [
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
           "fontSize": 32,
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -95,6 +99,7 @@ Array [
       Array [
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
           "fontSize": 28,
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -117,6 +122,7 @@ Array [
       Array [
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
           "fontSize": 24,
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -139,6 +145,7 @@ Array [
       Array [
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
           "fontSize": 22,
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -161,6 +168,7 @@ Array [
       Array [
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
           "fontSize": 16,
           "fontWeight": "500",
           "letterSpacing": 0.15,
@@ -183,6 +191,7 @@ Array [
       Array [
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "500",
           "letterSpacing": 0.1,
@@ -205,6 +214,7 @@ Array [
       Array [
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
           "fontSize": 16,
           "fontWeight": "400",
           "letterSpacing": 0.15,
@@ -227,6 +237,7 @@ Array [
       Array [
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "400",
           "letterSpacing": 0.25,
@@ -249,6 +260,7 @@ Array [
       Array [
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
           "fontSize": 12,
           "fontWeight": "400",
           "letterSpacing": 0.4,
@@ -271,6 +283,7 @@ Array [
       Array [
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "500",
           "letterSpacing": 0.1,
@@ -293,6 +306,7 @@ Array [
       Array [
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
           "fontSize": 12,
           "fontWeight": "500",
           "letterSpacing": 0.5,
@@ -315,6 +329,7 @@ Array [
       Array [
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
           "fontSize": 11,
           "fontWeight": "500",
           "letterSpacing": 0.5,

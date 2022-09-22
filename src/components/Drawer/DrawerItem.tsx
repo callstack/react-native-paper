@@ -98,6 +98,7 @@ const DrawerItem = ({
         .rgb()
         .toString()
     : undefined;
+  const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
 
   return (
     <View {...rest}>
@@ -130,7 +131,7 @@ const DrawerItem = ({
                 {
                   color: contentColor,
                   marginLeft: labelMargin,
-                  ...(isV3 ? theme.typescale.labelLarge : theme.fonts.medium),
+                  ...font,
                 },
               ]}
             >

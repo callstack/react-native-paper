@@ -5,7 +5,6 @@ import {
   I18nManager,
   StyleProp,
   StyleSheet,
-  Platform,
 } from 'react-native';
 import { withTheme } from '../../core/theming';
 import { Font, MD3TypescaleKey, Theme } from '../../types';
@@ -45,12 +44,12 @@ function AnimatedText({ style, theme, variant, ...rest }: Props) {
     const stylesByVariant = Object.keys(MD3TypescaleKey).reduce(
       (acc, key) => {
         const { fontSize, fontWeight, lineHeight, letterSpacing, fontFamily } =
-          theme.typescale[key as keyof typeof MD3TypescaleKey];
+          theme.fonts[key as keyof typeof MD3TypescaleKey];
 
         return {
           ...acc,
           [key]: {
-            ...(Platform.OS === 'android' && { fontFamily }),
+            fontFamily,
             fontSize,
             fontWeight,
             lineHeight: lineHeight,
@@ -78,14 +77,18 @@ function AnimatedText({ style, theme, variant, ...rest }: Props) {
       />
     );
   } else {
+    const font = !theme.isV3 ? theme.fonts.regular : theme.fonts.bodyMedium;
+    const textStyle = {
+      ...font,
+      color: theme.isV3 ? theme.colors.onSurface : theme.colors.text,
+    };
     return (
       <Animated.Text
         {...rest}
         style={[
           styles.text,
+          textStyle,
           {
-            ...(!theme.isV3 && theme.fonts.regular),
-            color: theme.isV3 ? theme.colors.onSurface : theme.colors.text,
             writingDirection,
           },
           style,
