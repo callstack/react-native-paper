@@ -30,7 +30,35 @@ it('renders with ActivityIndicator', () => {
 });
 
 it('renders without ActivityIndicator', () => {
-  const tree = render(<Searchbar loading={false} />);
+  const { getByTestId } = render(<Searchbar loading={false} />);
 
-  expect(() => tree.getByTestId('activity-indicator')).toThrow();
+  expect(() => getByTestId('activity-indicator')).toThrow();
+});
+
+it('renders clear icon with custom color', () => {
+  const { getByTestId } = render(
+    <Searchbar testID="search-bar" value="value" iconColor="purple" />
+  );
+
+  const iconComponent = getByTestId('search-bar-icon-wrapper').props.children;
+
+  expect(iconComponent.props.iconColor).toBe('purple');
+});
+
+it('renders clear icon wrapper, which can be the target of touch events, if search has value', () => {
+  const { getByTestId } = render(
+    <Searchbar testID="search-bar" value="value" />
+  );
+
+  expect(getByTestId('search-bar-icon-wrapper').props.pointerEvents).toBe(
+    'auto'
+  );
+});
+
+it('renders clear icon wrapper, which is never target of touch events, if search has no value', () => {
+  const { getByTestId } = render(<Searchbar testID="search-bar" value="" />);
+
+  expect(getByTestId('search-bar-icon-wrapper').props.pointerEvents).toBe(
+    'none'
+  );
 });

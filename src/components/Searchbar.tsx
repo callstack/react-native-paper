@@ -9,6 +9,7 @@ import {
   ViewStyle,
   TextStyle,
   Animated,
+  View,
 } from 'react-native';
 
 import color from 'color';
@@ -60,10 +61,6 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   inputStyle?: StyleProp<TextStyle>;
   style?: StyleProp<ViewStyle>;
   /**
-   * @optional
-   */
-  theme: Theme;
-  /**
    * Custom color for icon, default will be derived from theme
    */
   iconColor?: string;
@@ -76,6 +73,14 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    * Custom flag for replacing clear button with activity indicator.
    */
   loading?: Boolean;
+  /**
+   * TestID used for testing purposes
+   */
+  testID?: string;
+  /**
+   * @optional
+   */
+  theme: Theme;
 };
 
 type TextInputHandles = Pick<
@@ -129,6 +134,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
       theme,
       value,
       loading = false,
+      testID = 'search-bar',
       ...rest
     }: Props,
     ref
@@ -223,6 +229,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
           accessibilityRole="search"
           ref={root}
           value={value}
+          testID={testID}
           {...rest}
         />
         {loading ? (
@@ -231,26 +238,34 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
             style={styles.loader}
           />
         ) : (
-          <IconButton
-            borderless
-            disabled={!value}
-            accessibilityLabel={clearAccessibilityLabel}
-            iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
-            rippleColor={rippleColor}
-            onPress={handleClearPress}
-            icon={
-              clearIcon ||
-              (({ size, color }) => (
-                <MaterialCommunityIcon
-                  name="close"
-                  color={color}
-                  size={size}
-                  direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-                />
-              ))
-            }
-            accessibilityRole="button"
-          />
+          // Clear icon should be always rendered within Searchbar – it's transparent,
+          // without touch events, when there is no value. It's done to avoid issues
+          // with the abruptly stopping ripple effect and changing bar width on web,
+          // when clearing the value.
+          <View
+            pointerEvents={value ? 'auto' : 'none'}
+            testID={`${testID}-icon-wrapper`}
+          >
+            <IconButton
+              borderless
+              accessibilityLabel={clearAccessibilityLabel}
+              iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
+              rippleColor={rippleColor}
+              onPress={handleClearPress}
+              icon={
+                clearIcon ||
+                (({ size, color }) => (
+                  <MaterialCommunityIcon
+                    name="close"
+                    color={color}
+                    size={size}
+                    direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+                  />
+                ))
+              }
+              accessibilityRole="button"
+            />
+          </View>
         )}
       </Surface>
     );
