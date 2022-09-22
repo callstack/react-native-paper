@@ -102,13 +102,14 @@ export const renderAppbarContent = ({
           style?: StyleProp<ViewStyle>;
           mode?: AppbarModes;
         } = {
-          color: isV3
-            ? undefined
-            : typeof child.props.color !== 'undefined'
-            ? child.props.color
-            : isDark
-            ? white
-            : black,
+          color:
+            typeof child.props.color !== 'undefined'
+              ? child.props.color
+              : isV3
+              ? undefined
+              : isDark
+              ? white
+              : black,
         };
 
         if (child.type === AppbarContent) {

@@ -1,5 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react-native';
+import { Platform } from 'react-native';
 import Menu from '../../Menu/Menu';
 import Appbar from '../../Appbar';
 import AppbarAction from '../../Appbar/AppbarAction';
@@ -11,7 +13,6 @@ import Searchbar from '../../Searchbar';
 import { tokens } from '../../../styles/themes/v3/tokens';
 import { getTheme } from '../../../core/theming';
 import overlay from '../../../styles/overlay';
-import { Platform } from 'react-native';
 
 describe('Appbar', () => {
   it('does not pass any additional props to Searchbar', () => {
@@ -185,6 +186,50 @@ describe('renderAppbarContent', () => {
     expect(renderResult(false, true)[1].props.style).toEqual(
       expect.arrayContaining([expect.objectContaining(v2Spacing)])
     );
+  });
+});
+
+describe('AppbarAction', () => {
+  it('should be rendered with default theme color', () => {
+    const { getByTestId } = render(
+      <Appbar>
+        <Appbar.Action icon="menu" testID="appbar-action" />
+      </Appbar>
+    );
+    const appbarActionIcon = getByTestId('appbar-action').props.children[0];
+    expect(appbarActionIcon.props.color).toBe(
+      getTheme().colors.onSurfaceVariant
+    );
+  });
+
+  it('should be rendered with specific theme color if is leading', () => {
+    const { getByTestId } = render(
+      <Appbar>
+        <Appbar.Action icon="menu" testID="appbar-action" isLeading />
+      </Appbar>
+    );
+    const appbarActionIcon = getByTestId('appbar-action').props.children[0];
+    expect(appbarActionIcon.props.color).toBe(getTheme().colors.onSurface);
+  });
+
+  it('should be rendered with custom color', () => {
+    const { getByTestId } = render(
+      <Appbar>
+        <Appbar.Action icon="menu" color="purple" testID="appbar-action" />
+      </Appbar>
+    );
+    const appbarActionIcon = getByTestId('appbar-action').props.children[0];
+    expect(appbarActionIcon.props.color).toBe('purple');
+  });
+
+  it('should render AppbarBackAction with custom color', () => {
+    const { getByTestId } = render(
+      <Appbar>
+        <Appbar.BackAction icon="menu" color="purple" testID="appbar-action" />
+      </Appbar>
+    );
+    const appbarBackActionIcon = getByTestId('appbar-action').props.children[0];
+    expect(appbarBackActionIcon.props.color).toBe('purple');
   });
 });
 
