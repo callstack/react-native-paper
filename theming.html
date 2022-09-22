@@ -186,7 +186,7 @@
 <li><code>backdrop</code></li>
 </ul>
 </li>
-<li><p><code>typescale</code> (<code>object</code>): various fonts styling properties under the text variant key used in component.</p>
+<li><p><code>fonts</code> (<code>object</code>): various fonts styling properties under the text variant key used in component.</p>
 <ul>
 <li>[<code>variant</code> e.g. <code>labelMedium</code>] (<code>object</code>):<ul>
 <li><code>fontFamily</code></li>
@@ -371,13 +371,13 @@
             </svg>
           </a>
         Customizing all instances of a component</h2>
-<p>Sometimes you want to style a component in a different way everywhere, but don't want to change the properties in the theme, so that other components are not affected. For example, say you want to change the font for all your buttons, but don't want to change <code>theme.typescale.labelLarge</code> because it affects other components.</p>
+<p>Sometimes you want to style a component in a different way everywhere, but don't want to change the properties in the theme, so that other components are not affected. For example, say you want to change the font for all your buttons, but don't want to change <code>theme.fonts.labelLarge</code> because it affects other components.</p>
 <p>We don't have an API to do this, because you can already do it with components:</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> Button <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">FancyButton</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token operator">&lt;</span>Button theme<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> typescale<span class="token punctuation">:</span> <span class="token punctuation">{</span> labelLarge<span class="token punctuation">:</span> <span class="token punctuation">{</span>letterSpacing<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token punctuation">{</span><span class="token operator">...</span>props<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token operator">&lt;</span>Button theme<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> fonts<span class="token punctuation">:</span> <span class="token punctuation">{</span> labelLarge<span class="token punctuation">:</span> <span class="token punctuation">{</span>letterSpacing<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token punctuation">{</span><span class="token operator">...</span>props<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <p>Now you can use your <code>FancyButton</code> component everywhere instead of using <code>Button</code> from Paper.</p>
 <h2 id="dark-theme">
