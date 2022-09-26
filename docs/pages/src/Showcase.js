@@ -162,6 +162,14 @@ const data: Data[] = [
     image: 'showcase/moonmeet.png',
     github: 'https://github.com/MoonMeet/MoonMeet-CrossPlatform',
   },
+  {
+    color: '#850E35',
+    name: 'Pharmacies On Duty Turkey',
+    image: 'showcase/pharmaciesondutyturkey.png',
+    android:
+      'https://play.google.com/store/apps/details?id=com.tarikfp.pharmacyfinder',
+    ios: 'https://apps.apple.com/us/app/n%C3%B6bet%C3%A7i-eczane-t%C3%BCm-t%C3%BCrkiye/id6443454675',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {
