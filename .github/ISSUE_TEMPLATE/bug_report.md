@@ -4,41 +4,32 @@ about: Create a report to help us improve
 title: ''
 labels: ''
 assignees: ''
-
 ---
 
-<!-- Issues that don't use this template are likely to be closed. -->
-<!-- Please search the existing issues and read the documentation before opening an issue. -->
-
 ### Current behaviour
-
-<!-- What's currently happening? -->
+<!-- Describe your issue in detail -->
 
 ### Expected behaviour
+<!-- A clear and concise description of what you expected to happen -->
 
-<!-- What do you expect to happen? If there is an error, provide the complete error message with stack trace. -->
+### How to reproduce?
+<!-- Help us to reproduce the issue and describe the steps -->
+<!-- Attach code example on snack.expo.dev or in a GitHub repo -->
 
-### Code sample
+### Preview
+<!-- Include screenshots or video if applicable. -->
 
-<!-- Provide a complete code sample that could be run to reproduce the issue, ideally on snack.expo.dev or in a github repo. -->
-
-### Screenshots (if applicable)
-
-<!-- Include screenshots if there's a bug in the layout. -->
-
-### What have you tried
-
-<!-- List down the steps you have tried to fix or identify the issue and links to any related issues you found. -->
+### What have you tried so far?
+<!-- List down the steps you have tried to fix or identify the issue. -->
 
 ### Your Environment
 
-| software              | version
+| software                      | version
 | --------------------- | -------
-| ios or android        |
-| react-native          |
-| react-native-paper    |
-| node                  |
-| npm or yarn           |
-| expo sdk              |
-
-<!-- Add expo sdk version along with snack that reproduces the issue -->
+| ios                                | x
+| android                        | x
+| react-native                | x.x.x
+| react-native-paper    | x.x.x
+| node                            | x.x.x
+| npm or yarn                | x.x.x
+| expo sdk                     | x.x.x
