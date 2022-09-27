@@ -194,7 +194,7 @@ export default class Showcase extends React.Component<{}> {
                     <Image
                       src={item.image}
                       alt=""
-                      accessibilityIgnoresInvertColors={true}
+                      accessibilityIgnoresInvertColors
                     />
                     <Info style={{ backgroundColor: item.color }}>
                       <AppName
