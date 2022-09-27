@@ -6,8 +6,8 @@ import {
   createStackNavigator,
 } from '@react-navigation/stack';
 import { getHeaderTitle } from '@react-navigation/elements';
-import ExampleList, { examples } from './ExampleList';
 import { Platform } from 'react-native';
+import ExampleList, { examples } from './ExampleList';
 
 const Stack = createStackNavigator();
 
