@@ -1,9 +1,9 @@
 /* @flow */
 
-const path = require('path');
-const fs = require('fs');
-const types = require('babel-types');
 const parser = require('@babel/parser');
+const types = require('babel-types');
+const fs = require('fs');
+const path = require('path');
 
 const packageJson = require('../package.json');
 const root = path.resolve(__dirname, '..');

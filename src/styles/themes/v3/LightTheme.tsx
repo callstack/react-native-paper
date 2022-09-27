@@ -1,4 +1,5 @@
 import color from 'color';
+
 import type { MD3Theme } from '../../../types';
 import { MD3Colors, tokens, typescale } from './tokens';
 

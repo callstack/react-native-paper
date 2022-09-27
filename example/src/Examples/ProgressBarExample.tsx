@@ -1,3 +1,6 @@
+import * as React from 'react';
+import { View, StyleSheet } from 'react-native';
+
 import {
   Button,
   ProgressBar,
@@ -6,8 +9,7 @@ import {
   MD3Colors,
   useTheme,
 } from 'react-native-paper';
-import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+
 import ScreenWrapper from '../ScreenWrapper';
 
 const ProgressBarExample = () => {

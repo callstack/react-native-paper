@@ -1,7 +1,7 @@
 import CheckboxComponent from './Checkbox';
-import CheckboxItem from './CheckboxItem';
 import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
+import CheckboxItem from './CheckboxItem';
 
 const Checkbox = Object.assign(
   // @component ./Checkbox.tsx

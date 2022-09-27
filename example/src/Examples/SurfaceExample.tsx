@@ -1,8 +1,10 @@
-import { Text, Surface, useTheme, MD3Elevation } from 'react-native-paper';
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import ScreenWrapper from '../ScreenWrapper';
+
+import { Text, Surface, useTheme, MD3Elevation } from 'react-native-paper';
+
 import { isWeb } from '../../utils';
+import ScreenWrapper from '../ScreenWrapper';
 
 const SurfaceExample = () => {
   const { isV3 } = useTheme();

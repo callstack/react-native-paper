@@ -1,6 +1,8 @@
-import { Button, List, useTheme } from 'react-native-paper';
 import * as React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
+
+import { Button, List, useTheme } from 'react-native-paper';
+
 import ScreenWrapper from '../ScreenWrapper';
 
 const ButtonExample = () => {

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import color from 'color';
 import {
   Animated,
   View,
@@ -17,12 +16,15 @@ import type {
   NativeSyntheticEvent,
   TextLayoutEventData,
 } from 'react-native';
-import Surface from '../Surface';
-import Icon from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import type { $RemoveChildren, Theme } from '../../types';
-import type { IconSource } from '../Icon';
+
+import color from 'color';
+
 import { withTheme } from '../../core/theming';
+import type { $RemoveChildren, Theme } from '../../types';
+import Icon from '../Icon';
+import type { IconSource } from '../Icon';
+import Surface from '../Surface';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import AnimatedText from '../Typography/AnimatedText';
 import { getCombinedStyles, getFABColors } from './utils';
 

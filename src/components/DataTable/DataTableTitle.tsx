@@ -9,11 +9,13 @@ import {
   I18nManager,
   TextStyle,
 } from 'react-native';
+
 import color from 'color';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import Text from '../Typography/Text';
+
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import Text from '../Typography/Text';
 
 export type Props = React.ComponentPropsWithRef<
   typeof TouchableWithoutFeedback

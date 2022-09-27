@@ -8,14 +8,13 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import color from 'color';
 
-import Text from '../Typography/Text';
+import color from 'color';
 
 import { withTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
-
 import type { $RemoveChildren, MD3TypescaleKey, Theme } from '../../types';
+import Text from '../Typography/Text';
 import { modeTextVariant } from './utils';
 
 export type Props = $RemoveChildren<typeof View> & {

@@ -1,7 +1,9 @@
-import { Caption, Searchbar, Text, useTheme } from 'react-native-paper';
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+
 import type { StackNavigationProp } from '@react-navigation/stack';
+import { Caption, Searchbar, Text, useTheme } from 'react-native-paper';
+
 import ScreenWrapper from '../ScreenWrapper';
 
 type Props = {

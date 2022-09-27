@@ -7,11 +7,12 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import Surface from '../Surface';
+
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-import CardContent from './CardContent';
+import Surface from '../Surface';
 import CardActions from './CardActions';
+import CardContent from './CardContent';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import CardCover, { CardCover as _CardCover } from './CardCover';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

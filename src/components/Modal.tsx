@@ -10,13 +10,15 @@ import {
   View,
   NativeEventSubscription,
 } from 'react-native';
+
 import {
   getStatusBarHeight,
   getBottomSpace,
 } from 'react-native-iphone-x-helper';
+
 import { withTheme } from '../core/theming';
-import useAnimatedValue from '../utils/useAnimatedValue';
 import { addEventListener } from '../utils/addEventListener';
+import useAnimatedValue from '../utils/useAnimatedValue';
 import Surface from './Surface';
 
 export type Props = {

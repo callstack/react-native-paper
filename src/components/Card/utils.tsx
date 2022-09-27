@@ -1,4 +1,5 @@
 import color from 'color';
+
 import { black, white } from '../../styles/themes/v2/colors';
 import type { Theme } from '../../types';
 

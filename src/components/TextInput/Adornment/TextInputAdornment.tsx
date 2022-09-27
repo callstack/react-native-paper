@@ -5,14 +5,15 @@ import type {
   StyleProp,
   Animated,
 } from 'react-native';
+
 import { getConstants } from '../helpers';
-import TextInputIcon, { IconAdornment } from './TextInputIcon';
+import { AdornmentSide, AdornmentType, InputMode } from './enums';
 import TextInputAffix, { AffixAdornment } from './TextInputAffix';
+import TextInputIcon, { IconAdornment } from './TextInputIcon';
 import type {
   AdornmentConfig,
   AdornmentStyleAdjustmentForNativeInput,
 } from './types';
-import { AdornmentSide, AdornmentType, InputMode } from './enums';
 
 export function getAdornmentConfig({
   left,

@@ -1,4 +1,5 @@
 import color from 'color';
+
 import type { MD2Theme } from '../../../types';
 import configureFonts from '../../fonts';
 import { black, pinkA400, white } from './colors';

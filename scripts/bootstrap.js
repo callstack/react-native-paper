@@ -1,5 +1,5 @@
-const path = require('path');
 const child_process = require('child_process');
+const path = require('path');
 
 const root = path.resolve(__dirname, '..');
 const args = process.argv.slice(2);

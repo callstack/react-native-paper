@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
-import renderer from 'react-test-renderer';
+
 import { render } from '@testing-library/react-native';
+import renderer from 'react-test-renderer';
+
 import Checkbox from '../../Checkbox';
 
 it('renders unchecked', () => {

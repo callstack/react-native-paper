@@ -1,6 +1,3 @@
-import * as MD2Colors from './styles/themes/v2/colors';
-export { MD2Colors };
-
 export { MD3Colors } from './styles/themes/v3/tokens';
 
 export {
@@ -18,9 +15,11 @@ export { default as overlay } from './styles/overlay';
 export { default as configureFonts } from './styles/fonts';
 
 import * as Avatar from './components/Avatar/Avatar';
-import * as List from './components/List/List';
 import * as Drawer from './components/Drawer/Drawer';
+import * as List from './components/List/List';
+import * as MD2Colors from './styles/themes/v2/colors';
 
+export { MD2Colors };
 export { Avatar, List, Drawer };
 
 export * from './components/FAB/AnimatedFAB';

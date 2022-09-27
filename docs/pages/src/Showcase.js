@@ -1,13 +1,14 @@
 /* @flow */
 
 import * as React from 'react';
-import { styled } from 'linaria/react';
+
 import color from 'color';
 import { Header } from 'component-docs/components';
+import { styled } from 'linaria/react';
 
+import GithubIcon from '../../components/github-icon';
 import GooglePlayIcon from '../../components/google-play-icon';
 import IphoneIcon from '../../components/iphone-icon';
-import GithubIcon from '../../components/github-icon';
 import Content from './components/Content';
 
 type Data = {

@@ -6,10 +6,11 @@ import {
   TextStyle,
   useWindowDimensions,
 } from 'react-native';
-import { white, black } from '../styles/themes/v2/colors';
+
 import { withTheme } from '../core/theming';
-import getContrastingColor from '../utils/getContrastingColor';
+import { white, black } from '../styles/themes/v2/colors';
 import type { Theme } from '../types';
+import getContrastingColor from '../utils/getContrastingColor';
 
 const defaultSize = 20;
 

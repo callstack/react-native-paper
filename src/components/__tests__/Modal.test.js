@@ -1,5 +1,7 @@
 import * as React from 'react';
+
 import { render } from '@testing-library/react-native';
+
 import Modal from '../Modal';
 
 describe('Modal', () => {

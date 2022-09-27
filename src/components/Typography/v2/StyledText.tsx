@@ -1,6 +1,7 @@
-import color from 'color';
 import * as React from 'react';
 import { I18nManager, StyleProp, TextStyle, StyleSheet } from 'react-native';
+
+import color from 'color';
 
 import { useTheme } from '../../../core/theming';
 import Text from './Text';

@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+
 import renderer from 'react-test-renderer';
-import ListAccordion from '../List/ListAccordion.tsx';
-import ListItem from '../List/ListItem.tsx';
-import ListIcon from '../List/ListIcon.tsx';
+
 import { red500 } from '../../styles/themes/v2/colors';
+import ListAccordion from '../List/ListAccordion.tsx';
+import ListIcon from '../List/ListIcon.tsx';
+import ListItem from '../List/ListItem.tsx';
 
 const styles = StyleSheet.create({
   coloring: {

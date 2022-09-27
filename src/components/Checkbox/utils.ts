@@ -1,4 +1,5 @@
 import color from 'color';
+
 import type { Theme } from '../../types';
 
 const getAndroidCheckedColor = ({

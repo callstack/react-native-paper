@@ -1,5 +1,4 @@
 import React from 'react';
-import color from 'color';
 import {
   Text,
   StyleSheet,
@@ -9,6 +8,8 @@ import {
   Animated,
   ViewStyle,
 } from 'react-native';
+
+import color from 'color';
 
 import { withTheme } from '../../../core/theming';
 import type { Theme } from '../../../types';

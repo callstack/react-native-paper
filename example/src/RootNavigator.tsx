@@ -1,12 +1,14 @@
-import { Appbar } from 'react-native-paper';
 import * as React from 'react';
+import { Platform } from 'react-native';
+
 import type { DrawerNavigationProp } from '@react-navigation/drawer';
+import { getHeaderTitle } from '@react-navigation/elements';
 import {
   CardStyleInterpolators,
   createStackNavigator,
 } from '@react-navigation/stack';
-import { getHeaderTitle } from '@react-navigation/elements';
-import { Platform } from 'react-native';
+import { Appbar } from 'react-native-paper';
+
 import ExampleList, { examples } from './ExampleList';
 
 const Stack = createStackNavigator();

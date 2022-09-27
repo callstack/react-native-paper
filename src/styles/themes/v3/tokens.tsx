@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+
 import type { Font } from '../../../types';
 
 const ref = {

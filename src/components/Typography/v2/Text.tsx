@@ -5,8 +5,9 @@ import {
   StyleProp,
   StyleSheet,
 } from 'react-native';
-import type { Theme } from '../../../types';
+
 import { useTheme } from '../../../core/theming';
+import type { Theme } from '../../../types';
 
 type Props = React.ComponentProps<typeof NativeText> & {
   style?: StyleProp<TextStyle>;

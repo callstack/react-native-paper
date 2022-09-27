@@ -6,16 +6,17 @@ import {
   StyleProp,
   TextStyle,
 } from 'react-native';
+
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-import TextInputOutlined from './TextInputOutlined';
-import TextInputFlat from './TextInputFlat';
-import TextInputIcon, {
-  Props as TextInputIconProps,
-} from './Adornment/TextInputIcon';
 import TextInputAffix, {
   Props as TextInputAffixProps,
 } from './Adornment/TextInputAffix';
+import TextInputIcon, {
+  Props as TextInputIconProps,
+} from './Adornment/TextInputIcon';
+import TextInputFlat from './TextInputFlat';
+import TextInputOutlined from './TextInputOutlined';
 import type { RenderProps, TextInputLabelProp } from './types';
 
 const BLUR_ANIMATION_DURATION = 180;

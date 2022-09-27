@@ -8,16 +8,13 @@ import {
   TextStyle,
   ColorValue,
 } from 'react-native';
+
+import { AdornmentType, AdornmentSide } from './Adornment/enums';
 import TextInputAdornment, {
   getAdornmentConfig,
   getAdornmentStyleAdjustmentForNativeInput,
   TextInputAdornmentProps,
 } from './Adornment/TextInputAdornment';
-
-import InputLabel from './Label/InputLabel';
-import LabelBackground from './Label/LabelBackground';
-import type { RenderProps, ChildTextInputProps } from './types';
-
 import {
   MAXIMIZED_LABEL_FONT_SIZE,
   MINIMIZED_LABEL_FONT_SIZE,
@@ -28,7 +25,6 @@ import {
   MIN_DENSE_HEIGHT_OUTLINED,
   LABEL_PADDING_TOP_DENSE,
 } from './constants';
-
 import {
   calculateLabelTopPosition,
   calculateInputHeight,
@@ -40,7 +36,9 @@ import {
   getOutlinedInputColors,
   getConstants,
 } from './helpers';
-import { AdornmentType, AdornmentSide } from './Adornment/enums';
+import InputLabel from './Label/InputLabel';
+import LabelBackground from './Label/LabelBackground';
+import type { RenderProps, ChildTextInputProps } from './types';
 
 const TextInputOutlined = ({
   disabled = false,

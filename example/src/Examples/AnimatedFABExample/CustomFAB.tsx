@@ -1,4 +1,3 @@
-import { AnimatedFAB, useTheme } from 'react-native-paper';
 import React from 'react';
 import {
   StyleProp,
@@ -7,6 +6,8 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native';
+
+import { AnimatedFAB, useTheme } from 'react-native-paper';
 
 type CustomFABProps = {
   animatedValue: Animated.Value;

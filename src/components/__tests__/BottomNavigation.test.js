@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { StyleSheet, Easing, Animated, Platform } from 'react-native';
+
 import { fireEvent, render } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
+
+import { red300 } from '../../styles/themes/v2/colors';
 import BottomNavigation from '../BottomNavigation/BottomNavigation.tsx';
 import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRouteScreen.tsx';
-import { red300 } from '../../styles/themes/v2/colors';
 
 const styles = StyleSheet.create({
   labelColor: {

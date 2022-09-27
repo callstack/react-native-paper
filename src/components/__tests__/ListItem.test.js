@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import renderer from 'react-test-renderer';
 import { Text, View } from 'react-native';
-import ListItem from '../List/ListItem.tsx';
-import ListIcon from '../List/ListIcon.tsx';
-import Chip from '../Chip/Chip';
+
+import renderer from 'react-test-renderer';
+
 import { red500 } from '../../styles/themes/v2/colors';
+import Chip from '../Chip/Chip';
+import ListIcon from '../List/ListIcon.tsx';
+import ListItem from '../List/ListItem.tsx';
 
 const styles = StyleSheet.create({
   title: {

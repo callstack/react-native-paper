@@ -1,5 +1,4 @@
 import * as React from 'react';
-import color from 'color';
 import {
   Animated,
   StyleSheet,
@@ -7,6 +6,9 @@ import {
   TextStyle,
   LayoutChangeEvent,
 } from 'react-native';
+
+import color from 'color';
+
 import { withTheme } from '../core/theming';
 import type { $Omit, Theme } from '../types';
 import AnimatedText from './Typography/AnimatedText';

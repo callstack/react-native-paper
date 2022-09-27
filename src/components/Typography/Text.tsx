@@ -6,6 +6,7 @@ import {
   StyleSheet,
   I18nManager,
 } from 'react-native';
+
 import { useTheme } from '../../core/theming';
 import { Font, MD3TypescaleKey, ThemeProp } from '../../types';
 

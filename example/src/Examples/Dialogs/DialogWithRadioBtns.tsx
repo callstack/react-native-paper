@@ -1,3 +1,6 @@
+import * as React from 'react';
+import { ScrollView, View, StyleSheet } from 'react-native';
+
 import {
   Button,
   Portal,
@@ -5,8 +8,7 @@ import {
   RadioButton,
   TouchableRipple,
 } from 'react-native-paper';
-import * as React from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
+
 import { TextComponent } from './DialogTextComponent';
 
 type Props = {

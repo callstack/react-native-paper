@@ -7,9 +7,10 @@ import {
   ViewStyle,
   Platform,
 } from 'react-native';
-import shadow from '../styles/shadow';
+
 import { useTheme } from '../core/theming';
 import overlay, { isAnimatedValue } from '../styles/overlay';
+import shadow from '../styles/shadow';
 import type { MD3Elevation, Theme } from '../types';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {

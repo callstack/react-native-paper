@@ -6,6 +6,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+
 import { useTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 import SegmentedButtonItem from './SegmentedButtonItem';

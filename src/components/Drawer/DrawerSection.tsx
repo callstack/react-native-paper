@@ -1,11 +1,13 @@
-import color from 'color';
 import * as React from 'react';
 import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
-import Text from '../Typography/Text';
-import Divider from '../Divider';
+
+import color from 'color';
+
 import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
 import { MD3Colors } from '../../styles/themes/v3/tokens';
+import type { Theme } from '../../types';
+import Divider from '../Divider';
+import Text from '../Typography/Text';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**

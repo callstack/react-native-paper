@@ -6,6 +6,7 @@ import {
   StyleProp,
   TextStyle,
 } from 'react-native';
+
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 import ListSubheader from './ListSubheader';

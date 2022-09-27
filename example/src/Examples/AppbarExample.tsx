@@ -1,3 +1,7 @@
+import * as React from 'react';
+import { View, Platform, StyleSheet } from 'react-native';
+
+import type { StackNavigationProp } from '@react-navigation/stack';
 import {
   Appbar,
   FAB,
@@ -8,12 +12,10 @@ import {
   RadioButton,
   List,
 } from 'react-native-paper';
-import * as React from 'react';
-import { View, Platform, StyleSheet } from 'react-native';
-import type { StackNavigationProp } from '@react-navigation/stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import ScreenWrapper from '../ScreenWrapper';
+
 import { yellowA200 } from '../../../src/styles/themes/v2/colors';
+import ScreenWrapper from '../ScreenWrapper';
 
 type Props = {
   navigation: StackNavigationProp<{}>;

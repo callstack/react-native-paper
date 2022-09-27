@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
+
 import renderer from 'react-test-renderer';
+
 import RadioButton from '../../RadioButton';
 
 it('renders unchecked', () => {

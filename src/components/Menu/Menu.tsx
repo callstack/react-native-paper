@@ -16,15 +16,16 @@ import {
   findNodeHandle,
   NativeEventSubscription,
 } from 'react-native';
+
 import color from 'color';
 
+import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 import { withTheme } from '../../core/theming';
 import type { $Omit } from '../../types';
+import type { Theme } from '../../types';
+import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
-import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
-import { addEventListener } from '../../utils/addEventListener';
-import type { Theme } from '../../types';
 import MenuItem from './MenuItem';
 
 export type Props = {

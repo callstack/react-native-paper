@@ -1,3 +1,6 @@
+import * as React from 'react';
+import { View, StyleSheet, Image, Dimensions, Platform } from 'react-native';
+
 import {
   Banner,
   FAB,
@@ -5,8 +8,7 @@ import {
   MD2Colors,
   MD3Colors,
 } from 'react-native-paper';
-import * as React from 'react';
-import { View, StyleSheet, Image, Dimensions, Platform } from 'react-native';
+
 import ScreenWrapper from '../ScreenWrapper';
 
 const PHOTOS = Array.from({ length: 24 }).map(

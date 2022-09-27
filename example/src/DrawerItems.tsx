@@ -1,3 +1,8 @@
+import * as React from 'react';
+import { View, StyleSheet, I18nManager } from 'react-native';
+
+import { DrawerContentScrollView } from '@react-navigation/drawer';
+import * as Updates from 'expo-updates';
 import {
   Badge,
   Drawer,
@@ -8,11 +13,9 @@ import {
   useTheme,
   MD3Colors,
 } from 'react-native-paper';
-import * as React from 'react';
-import { View, StyleSheet, I18nManager } from 'react-native';
-import { DrawerContentScrollView } from '@react-navigation/drawer';
-import * as Updates from 'expo-updates';
+
 import { isWeb } from '../utils';
+
 import { PreferencesContext } from './';
 
 type Props = {

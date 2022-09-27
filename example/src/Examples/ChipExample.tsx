@@ -1,3 +1,7 @@
+import * as React from 'react';
+import { View, StyleSheet, Image } from 'react-native';
+
+import color from 'color';
 import {
   Chip,
   List,
@@ -6,9 +10,7 @@ import {
   MD3Colors,
   MD2Colors,
 } from 'react-native-paper';
-import * as React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import color from 'color';
+
 import ScreenWrapper from '../ScreenWrapper';
 
 const ChipExample = () => {

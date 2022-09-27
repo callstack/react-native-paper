@@ -1,6 +1,8 @@
 import * as React from 'react';
-import color from 'color';
 import { StyleSheet, View, ViewStyle, StyleProp } from 'react-native';
+
+import color from 'color';
+
 import { withTheme } from '../core/theming';
 import { black, white } from '../styles/themes/v2/colors';
 import type { $RemoveChildren, Theme } from '../types';

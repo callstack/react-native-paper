@@ -1,3 +1,6 @@
+import * as React from 'react';
+import { StyleSheet, View } from 'react-native';
+
 import {
   IconButton,
   List,
@@ -5,8 +8,7 @@ import {
   MD3Colors,
   useTheme,
 } from 'react-native-paper';
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+
 import ScreenWrapper from '../ScreenWrapper';
 
 const ButtonExample = () => {

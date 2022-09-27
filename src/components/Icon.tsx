@@ -5,6 +5,7 @@ import {
   Platform,
   ImageSourcePropType,
 } from 'react-native';
+
 import { Consumer as SettingsConsumer } from '../core/settings';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';

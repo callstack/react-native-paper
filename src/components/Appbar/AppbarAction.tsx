@@ -1,14 +1,16 @@
 import * as React from 'react';
-import color from 'color';
 import type {
   StyleProp,
   ViewStyle,
   TouchableWithoutFeedback,
 } from 'react-native';
-import { black } from '../../styles/themes/v2/colors';
-import IconButton from '../IconButton/IconButton';
-import type { IconSource } from '../Icon';
+
+import color from 'color';
+
 import { useTheme } from '../../core/theming';
+import { black } from '../../styles/themes/v2/colors';
+import type { IconSource } from '../Icon';
+import IconButton from '../IconButton/IconButton';
 
 export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
   /**

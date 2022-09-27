@@ -1,4 +1,5 @@
 import type { ColorValue } from 'react-native';
+
 import color from 'color';
 
 export default function getContrastingColor(

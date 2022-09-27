@@ -1,5 +1,6 @@
 import { createTheming } from '@callstack/react-theme-provider';
 import type { Theme, MD2Theme, MD3Theme } from 'src/types';
+
 import {
   MD2DarkTheme,
   MD2LightTheme,

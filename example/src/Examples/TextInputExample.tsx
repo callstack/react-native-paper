@@ -1,11 +1,3 @@
-import {
-  TextInput,
-  HelperText,
-  useTheme,
-  MD2Colors,
-  MD3Colors,
-  List,
-} from 'react-native-paper';
 import * as React from 'react';
 import {
   StyleSheet,
@@ -14,7 +6,17 @@ import {
   Platform,
   Text,
 } from 'react-native';
+
+import {
+  TextInput,
+  HelperText,
+  useTheme,
+  MD2Colors,
+  MD3Colors,
+  List,
+} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
 import { inputReducer, State } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';
 

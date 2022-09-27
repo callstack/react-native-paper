@@ -1,6 +1,6 @@
 const { readFileSync, writeFileSync, mkdirSync } = require('fs');
-const path = require('path');
 const glob = require('glob');
+const path = require('path');
 const rimraf = require('rimraf');
 
 const SOURCE_FILES_PATTERN = './src/**/*.js';
