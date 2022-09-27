@@ -34,7 +34,7 @@
   ],
   "scripts": {
     "typescript": "tsc --noEmit",
-    "lint": "eslint --ext '.js,.ts,.tsx' .",
+    "lint": "eslint --ext '.js,.ts,.tsx' . --fix",
     "test": "jest",
     "prepare": "bob build && node ./scripts/generate-mappings.js",
     "release": "release-it",
