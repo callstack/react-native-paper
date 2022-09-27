@@ -62,7 +62,7 @@ const ChipExample = () => {
               avatar={
                 <Image
                   source={require('../../assets/images/avatar.png')}
-                  accessibilityIgnoresInvertColors={true}
+                  accessibilityIgnoresInvertColors
                 />
               }
               onPress={() => {}}
@@ -76,7 +76,7 @@ const ChipExample = () => {
               avatar={
                 <Image
                   source={require('../../assets/images/avatar.png')}
-                  accessibilityIgnoresInvertColors={true}
+                  accessibilityIgnoresInvertColors
                 />
               }
               onPress={() => {}}
@@ -92,7 +92,7 @@ const ChipExample = () => {
               avatar={
                 <Image
                   source={require('../../assets/images/avatar.png')}
-                  accessibilityIgnoresInvertColors={true}
+                  accessibilityIgnoresInvertColors
                 />
               }
               style={styles.chip}
@@ -157,7 +157,7 @@ const ChipExample = () => {
               avatar={
                 <Image
                   source={require('../../assets/images/avatar.png')}
-                  accessibilityIgnoresInvertColors={true}
+                  accessibilityIgnoresInvertColors
                 />
               }
               onPress={() => {}}
@@ -171,7 +171,7 @@ const ChipExample = () => {
               avatar={
                 <Image
                   source={require('../../assets/images/avatar.png')}
-                  accessibilityIgnoresInvertColors={true}
+                  accessibilityIgnoresInvertColors
                 />
               }
               onPress={() => {}}
@@ -194,7 +194,7 @@ const ChipExample = () => {
               avatar={
                 <Image
                   source={require('../../assets/images/avatar.png')}
-                  accessibilityIgnoresInvertColors={true}
+                  accessibilityIgnoresInvertColors
                 />
               }
               style={styles.chip}
@@ -214,7 +214,7 @@ const ChipExample = () => {
                   avatar={
                     <Image
                       source={require('../../assets/images/avatar.png')}
-                      accessibilityIgnoresInvertColors={true}
+                      accessibilityIgnoresInvertColors
                     />
                   }
                   style={[styles.chip, styles.customBorderRadius]}
@@ -228,7 +228,7 @@ const ChipExample = () => {
                   avatar={
                     <Image
                       source={require('../../assets/images/avatar.png')}
-                      accessibilityIgnoresInvertColors={true}
+                      accessibilityIgnoresInvertColors
                     />
                   }
                   style={[styles.chip, styles.customBorderRadius]}

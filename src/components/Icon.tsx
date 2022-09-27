@@ -99,7 +99,7 @@ const Icon = ({ source, color, size, theme, ...rest }: Props) => {
           },
         ]}
         {...accessibilityProps}
-        accessibilityIgnoresInvertColors={true}
+        accessibilityIgnoresInvertColors
       />
     );
   } else if (typeof s === 'string') {

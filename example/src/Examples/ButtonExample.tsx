@@ -263,7 +263,7 @@ const ButtonExample = () => {
               <Image
                 source={require('../../assets/images/chameleon.jpg')}
                 style={{ width: size, height: size, borderRadius: size / 2 }}
-                accessibilityIgnoresInvertColors={true}
+                accessibilityIgnoresInvertColors
               />
             )}
             onPress={() => {}}

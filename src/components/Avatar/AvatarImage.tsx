@@ -120,7 +120,7 @@ const AvatarImage = ({
           onLoadEnd={onLoadEnd}
           onLoadStart={onLoadStart}
           onProgress={onProgress}
-          accessibilityIgnoresInvertColors={true}
+          accessibilityIgnoresInvertColors
         />
       )}
     </View>

@@ -43,7 +43,7 @@ const PhotoGallery = ({ route }: Route) => {
           <Image
             source={{ uri }}
             style={styles.photo}
-            accessibilityIgnoresInvertColors={true}
+            accessibilityIgnoresInvertColors
           />
         </View>
       ))}

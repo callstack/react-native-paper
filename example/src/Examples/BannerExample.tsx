@@ -70,7 +70,7 @@ const BannerExample = () => {
               <Image
                 source={{ uri }}
                 style={styles.photo}
-                accessibilityIgnoresInvertColors={true}
+                accessibilityIgnoresInvertColors
               />
             </View>
           ))}

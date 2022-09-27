@@ -54,7 +54,7 @@ const CardCover = ({ index, total, style, theme, ...rest }: Props) => {
       <Image
         {...rest}
         style={[styles.image, coverStyle]}
-        accessibilityIgnoresInvertColors={true}
+        accessibilityIgnoresInvertColors
       />
     </View>
   );
