@@ -13,13 +13,14 @@ import {
 } from 'react-native';
 
 import color from 'color';
-import IconButton from './IconButton/IconButton';
-import Surface from './Surface';
+
 import { withTheme } from '../core/theming';
-import type { IconSource } from './Icon';
 import type { Theme } from '../types';
-import MaterialCommunityIcon from './MaterialCommunityIcon';
 import ActivityIndicator from './ActivityIndicator';
+import type { IconSource } from './Icon';
+import IconButton from './IconButton/IconButton';
+import MaterialCommunityIcon from './MaterialCommunityIcon';
+import Surface from './Surface';
 
 export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   /**

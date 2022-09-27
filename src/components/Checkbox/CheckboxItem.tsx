@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import {
   StyleProp,
   StyleSheet,
@@ -8,13 +7,13 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { withTheme } from '../../core/theming';
+import type { MD3TypescaleKey, Theme } from '../../types';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
 import Checkbox from './Checkbox';
 import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
-import Text from '../Typography/Text';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { withTheme } from '../../core/theming';
-import type { MD3TypescaleKey, Theme } from '../../types';
 
 export type Props = {
   /**

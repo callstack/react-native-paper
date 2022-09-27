@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+
 import { List, SegmentedButtons } from 'react-native-paper';
 
 const SegmentedButtonDefault = () => {

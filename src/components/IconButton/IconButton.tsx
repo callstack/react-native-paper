@@ -7,13 +7,13 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Icon, { IconSource } from '../Icon';
-import CrossFadeIcon from '../CrossFadeIcon';
 import { withTheme } from '../../core/theming';
 import type { $RemoveChildren, Theme } from '../../types';
-import { getIconButtonColor } from './utils';
+import CrossFadeIcon from '../CrossFadeIcon';
+import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import { getIconButtonColor } from './utils';
 
 const PADDING = 8;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
-import AnimatedText from '../../Typography/AnimatedText';
 
+import AnimatedText from '../../Typography/AnimatedText';
 import type { InputLabelProps } from '../types';
 
 const InputLabel = (props: InputLabelProps) => {

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
+
 import {
   RadioButton,
   Paragraph,
@@ -7,6 +8,7 @@ import {
   Text,
   useTheme,
 } from 'react-native-paper';
+
 import ScreenWrapper from '../ScreenWrapper';
 
 const RadioButtonGroupExample = () => {

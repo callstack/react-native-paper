@@ -8,6 +8,7 @@ import {
   ViewStyle,
   StyleProp,
 } from 'react-native';
+
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
@@ -120,6 +121,7 @@ const AvatarImage = ({
           onLoadEnd={onLoadEnd}
           onLoadStart={onLoadStart}
           onProgress={onProgress}
+          accessibilityIgnoresInvertColors
         />
       )}
     </View>

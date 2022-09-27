@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+
 import renderer from 'react-test-renderer';
-import Menu from '../Menu/Menu.tsx';
+
 import Button from '../Button/Button.tsx';
+import Menu from '../Menu/Menu.tsx';
 
 const styles = StyleSheet.create({
   contentStyle: {

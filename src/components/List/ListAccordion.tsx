@@ -1,4 +1,3 @@
-import color from 'color';
 import * as React from 'react';
 import {
   View,
@@ -9,11 +8,14 @@ import {
   I18nManager,
   GestureResponderEvent,
 } from 'react-native';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import Text from '../Typography/Text';
+
+import color from 'color';
+
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
 import { ListAccordionGroupContext } from './ListAccordionGroup';
 
 export type Props = {

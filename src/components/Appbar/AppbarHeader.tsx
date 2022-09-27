@@ -7,11 +7,12 @@ import {
   ViewStyle,
   Platform,
 } from 'react-native';
-import { Appbar } from './Appbar';
-import shadow from '../../styles/shadow';
-import { withTheme } from '../../core/theming';
+
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
+import { withTheme } from '../../core/theming';
+import shadow from '../../styles/shadow';
 import type { Theme } from '../../types';
+import { Appbar } from './Appbar';
 import {
   DEFAULT_APPBAR_HEIGHT,
   getAppbarColor,

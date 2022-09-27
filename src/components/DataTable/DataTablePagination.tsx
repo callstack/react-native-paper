@@ -6,14 +6,16 @@ import {
   ViewStyle,
   I18nManager,
 } from 'react-native';
+
 import color from 'color';
-import IconButton from '../IconButton/IconButton';
-import Text from '../Typography/Text';
+
 import { withTheme, useTheme } from '../../core/theming';
+import type { Theme } from '../../types';
+import Button from '../Button/Button';
+import IconButton from '../IconButton/IconButton';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Menu from '../Menu/Menu';
-import Button from '../Button/Button';
-import type { Theme } from '../../types';
+import Text from '../Typography/Text';
 
 export type Props = React.ComponentPropsWithRef<typeof View> &
   PaginationControlsProps &

@@ -1,8 +1,10 @@
 import * as React from 'react';
-import color from 'color';
 import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
-import { black, white } from '../../styles/themes/v2/colors';
+
+import color from 'color';
+
 import { withTheme } from '../../core/theming';
+import { black, white } from '../../styles/themes/v2/colors';
 import type { Theme } from '../../types';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {

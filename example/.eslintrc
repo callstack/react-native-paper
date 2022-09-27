@@ -2,7 +2,7 @@
   "extends": "../.eslintrc",
 
   "settings": {
-    "import/core-modules": [ "react-native-paper" ]
+    "import/core-modules": ["react-native-paper"]
   },
 
   "rules": {

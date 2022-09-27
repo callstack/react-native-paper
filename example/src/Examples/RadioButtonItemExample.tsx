@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+
 import { RadioButton, useTheme } from 'react-native-paper';
+
 import ScreenWrapper from '../ScreenWrapper';
 
 const RadioButtonItemExample = () => {

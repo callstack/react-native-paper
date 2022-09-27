@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ActivityIndicator, Platform, View, StyleSheet } from 'react-native';
+
 import {
   MD2Colors,
   Portal,
@@ -7,6 +8,7 @@ import {
   useTheme,
   MD3Colors,
 } from 'react-native-paper';
+
 import { TextComponent } from './DialogTextComponent';
 
 const isIOS = Platform.OS === 'ios';

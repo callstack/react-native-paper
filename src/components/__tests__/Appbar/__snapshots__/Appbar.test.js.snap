@@ -548,6 +548,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                     }
                   >
                     <Image
+                      accessibilityIgnoresInvertColors={true}
                       source={
                         Object {
                           "testUri": "../../../src/assets/back-chevron.png",
@@ -574,6 +575,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         </View>
       </View>
       <View
+        accessibilityRole="button"
         accessibilityState={
           Object {
             "disabled": true,

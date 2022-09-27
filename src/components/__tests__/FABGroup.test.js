@@ -1,9 +1,11 @@
-import color from 'color';
 import * as React from 'react';
+
 import { render } from '@testing-library/react-native';
+import color from 'color';
+
 import { getTheme } from '../../core/theming';
-import { getFABGroupColors } from '../FAB/utils';
 import FAB from '../FAB';
+import { getFABGroupColors } from '../FAB/utils';
 
 describe('getFABGroupColors - backdrop color', () => {
   it('should return custom color', () => {

@@ -1,10 +1,12 @@
 import * as React from 'react';
+
 import color from 'color';
 import renderer from 'react-test-renderer';
+
+import { getTheme } from '../../core/theming';
+import { black, white } from '../../styles/themes/v2/colors';
 import Menu from '../Menu/Menu.tsx';
 import { getMenuItemColor } from '../Menu/utils';
-import { black, white } from '../../styles/themes/v2/colors';
-import { getTheme } from '../../core/theming';
 
 describe('getMenuItemColor - title color', () => {
   it('should return disabled color if disabled, for theme version 3', () => {

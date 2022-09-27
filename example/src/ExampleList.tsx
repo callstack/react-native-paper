@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { FlatList } from 'react-native';
+
+import type { StackNavigationProp } from '@react-navigation/stack';
 import { List, Divider, useTheme } from 'react-native-paper';
 import { useSafeArea } from 'react-native-safe-area-context';
-import type { StackNavigationProp } from '@react-navigation/stack';
 
 import ActivityIndicatorExample from './Examples/ActivityIndicatorExample';
+import AnimatedFABExample from './Examples/AnimatedFABExample';
 import AppbarExample from './Examples/AppbarExample';
 import AvatarExample from './Examples/AvatarExample';
 import BadgeExample from './Examples/BadgeExample';
@@ -27,18 +29,17 @@ import MenuExample from './Examples/MenuExample';
 import ProgressBarExample from './Examples/ProgressBarExample';
 import RadioButtonExample from './Examples/RadioButtonExample';
 import RadioButtonGroupExample from './Examples/RadioButtonGroupExample';
+import RadioButtonItemExample from './Examples/RadioButtonItemExample';
 import SearchbarExample from './Examples/SearchbarExample';
+import SegmentedButtonExample from './Examples/SegmentedButtonsExample';
 import SnackbarExample from './Examples/SnackbarExample';
 import SurfaceExample from './Examples/SurfaceExample';
 import SwitchExample from './Examples/SwitchExample';
 import TextExample from './Examples/TextExample';
 import TextInputExample from './Examples/TextInputExample';
+import ThemeExample from './Examples/ThemeExample';
 import ToggleButtonExample from './Examples/ToggleButtonExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
-import ThemeExample from './Examples/ThemeExample';
-import RadioButtonItemExample from './Examples/RadioButtonItemExample';
-import AnimatedFABExample from './Examples/AnimatedFABExample';
-import SegmentedButtonExample from './Examples/SegmentedButtonsExample';
 
 export const examples: Record<
   string,

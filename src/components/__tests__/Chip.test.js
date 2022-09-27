@@ -1,10 +1,12 @@
 import * as React from 'react';
-import renderer from 'react-test-renderer';
+
 import color from 'color';
+import renderer from 'react-test-renderer';
+
+import { getTheme } from '../../core/theming';
+import { black, white } from '../../styles/themes/v2/colors';
 import Chip from '../Chip/Chip.tsx';
 import { getChipColors } from '../Chip/helpers';
-import { black, white } from '../../styles/themes/v2/colors';
-import { getTheme } from '../../core/theming';
 
 it('renders chip with onPress', () => {
   const tree = renderer

@@ -1,7 +1,7 @@
 /* @flow */
 
-import path from 'path';
 import fs from 'fs';
+import path from 'path';
 
 const root = path.join(__dirname, '..');
 const dist = path.join(__dirname, 'dist');

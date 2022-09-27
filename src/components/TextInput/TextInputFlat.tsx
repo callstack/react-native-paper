@@ -8,13 +8,16 @@ import {
   Platform,
   TextStyle,
 } from 'react-native';
-import InputLabel from './Label/InputLabel';
+
+import { useTheme } from '../../core/theming';
+import { AdornmentSide, AdornmentType, InputMode } from './Adornment/enums';
 import TextInputAdornment, {
   TextInputAdornmentProps,
 } from './Adornment/TextInputAdornment';
-import type { RenderProps, ChildTextInputProps } from './types';
-import { useTheme } from '../../core/theming';
-
+import {
+  getAdornmentConfig,
+  getAdornmentStyleAdjustmentForNativeInput,
+} from './Adornment/TextInputAdornment';
 import {
   MAXIMIZED_LABEL_FONT_SIZE,
   MINIMIZED_LABEL_FONT_SIZE,
@@ -25,7 +28,6 @@ import {
   MIN_DENSE_HEIGHT_WL,
   MIN_DENSE_HEIGHT,
 } from './constants';
-
 import {
   calculateLabelTopPosition,
   calculateInputHeight,
@@ -38,11 +40,8 @@ import {
   getFlatInputColors,
   getConstants,
 } from './helpers';
-import {
-  getAdornmentConfig,
-  getAdornmentStyleAdjustmentForNativeInput,
-} from './Adornment/TextInputAdornment';
-import { AdornmentSide, AdornmentType, InputMode } from './Adornment/enums';
+import InputLabel from './Label/InputLabel';
+import type { RenderProps, ChildTextInputProps } from './types';
 
 const TextInputFlat = ({
   disabled = false,

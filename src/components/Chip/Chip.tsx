@@ -10,15 +10,16 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+
+import { withTheme } from '../../core/theming';
+import { white } from '../../styles/themes/v2/colors';
+import type { EllipsizeProp, Theme } from '../../types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
-import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { withTheme } from '../../core/theming';
-import { white } from '../../styles/themes/v2/colors';
-import type { EllipsizeProp, Theme } from '../../types';
+import Text from '../Typography/Text';
 import { getChipColors } from './helpers';
 
 export type Props = React.ComponentProps<typeof Surface> & {

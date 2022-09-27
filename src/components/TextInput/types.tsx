@@ -5,8 +5,9 @@ import type {
   LayoutChangeEvent,
   ColorValue,
 } from 'react-native';
-import type { Props as TextInputProps } from './TextInput';
+
 import type { $Omit } from './../../types';
+import type { Props as TextInputProps } from './TextInput';
 
 export type TextInputLabelProp = string | React.ReactElement;
 

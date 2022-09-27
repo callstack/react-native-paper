@@ -1,5 +1,6 @@
-import type { $DeepPartial } from '@callstack/react-theme-provider';
 import type * as React from 'react';
+
+import type { $DeepPartial } from '@callstack/react-theme-provider';
 
 export type Font = {
   fontFamily: string;

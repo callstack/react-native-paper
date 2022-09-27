@@ -7,10 +7,12 @@ import {
   Platform,
   Easing,
 } from 'react-native';
-import { Appbar, BottomNavigation, Menu, useTheme } from 'react-native-paper';
-import ScreenWrapper from '../ScreenWrapper';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import type { StackNavigationProp } from '@react-navigation/stack';
+import { Appbar, BottomNavigation, Menu, useTheme } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import ScreenWrapper from '../ScreenWrapper';
 
 type RoutesState = Array<{
   key: string;
@@ -40,7 +42,11 @@ const PhotoGallery = ({ route }: Route) => {
     <ScreenWrapper contentContainerStyle={styles.content}>
       {PHOTOS.map((uri) => (
         <View key={uri} style={styles.item}>
-          <Image source={{ uri }} style={styles.photo} />
+          <Image
+            source={{ uri }}
+            style={styles.photo}
+            accessibilityIgnoresInvertColors
+          />
         </View>
       ))}
     </ScreenWrapper>

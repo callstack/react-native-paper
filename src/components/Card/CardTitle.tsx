@@ -9,9 +9,9 @@ import {
 
 import { withTheme } from '../../core/theming';
 import type { MD3TypescaleKey, Theme } from '../../types';
+import Text from '../Typography/Text';
 import Caption from '../Typography/v2/Caption';
 import Title from '../Typography/v2/Title';
-import Text from '../Typography/Text';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**

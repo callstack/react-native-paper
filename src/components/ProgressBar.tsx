@@ -9,7 +9,9 @@ import {
   LayoutChangeEvent,
   I18nManager,
 } from 'react-native';
+
 import setColor from 'color';
+
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 

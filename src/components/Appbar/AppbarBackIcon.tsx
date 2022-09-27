@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Platform, I18nManager, View, Image, StyleSheet } from 'react-native';
+
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 
 const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
@@ -22,6 +23,7 @@ const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
           styles.icon,
           { tintColor: color, width: iosIconSize, height: iosIconSize },
         ]}
+        accessibilityIgnoresInvertColors
       />
     </View>
   ) : (

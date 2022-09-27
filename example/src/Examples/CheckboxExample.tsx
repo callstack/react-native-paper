@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
+
 import {
   Paragraph,
   Text,
@@ -9,6 +10,7 @@ import {
   TouchableRipple,
   useTheme,
 } from 'react-native-paper';
+
 import ScreenWrapper from '../ScreenWrapper';
 
 const CheckboxExample = () => {

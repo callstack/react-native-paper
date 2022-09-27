@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { Appearance, AccessibilityInfo, View } from 'react-native';
+
 import { render, act } from '@testing-library/react-native';
-import Provider from '../Provider';
-import { useTheme } from '../theming';
+
 import {
   MD2LightTheme,
   MD2DarkTheme,
   MD3LightTheme,
   MD3DarkTheme,
 } from '../../styles/themes';
+import Provider from '../Provider';
+import { useTheme } from '../theming';
 
 const mockAppearance = () => {
   jest.mock('react-native/Libraries/Utilities/Appearance', () => {

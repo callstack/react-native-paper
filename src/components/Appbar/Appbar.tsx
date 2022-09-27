@@ -1,13 +1,15 @@
 import * as React from 'react';
 import { View, ViewStyle, Platform, StyleSheet, StyleProp } from 'react-native';
+
 import color from 'color';
 
-import AppbarContent from './AppbarContent';
-import AppbarAction from './AppbarAction';
-import AppbarBackAction from './AppbarBackAction';
-import Surface from '../Surface';
 import { withTheme } from '../../core/theming';
 import type { MD3Elevation, Theme } from '../../types';
+import Surface from '../Surface';
+import AppbarAction from './AppbarAction';
+import AppbarBackAction from './AppbarBackAction';
+import AppbarContent from './AppbarContent';
+import AppbarHeader from './AppbarHeader';
 import {
   getAppbarColor,
   renderAppbarContent,
@@ -15,7 +17,6 @@ import {
   modeAppbarHeight,
   AppbarModes,
 } from './utils';
-import AppbarHeader from './AppbarHeader';
 
 export type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
   /**

@@ -1,13 +1,15 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import renderer from 'react-test-renderer';
-import color from 'color';
+
 import { render } from '@testing-library/react-native';
+import color from 'color';
+import renderer from 'react-test-renderer';
+
+import { getTheme } from '../../core/theming';
+import { black, white } from '../../styles/themes/v2/colors';
+import getContrastingColor from '../../utils/getContrastingColor';
 import FAB from '../FAB';
 import { getFABColors } from '../FAB/utils';
-import getContrastingColor from '../../utils/getContrastingColor';
-import { black, white } from '../../styles/themes/v2/colors';
-import { getTheme } from '../../core/theming';
 
 const styles = StyleSheet.create({
   borderRadius: {

@@ -1,13 +1,15 @@
 import React from 'react';
-import color from 'color';
 import { StyleSheet } from 'react-native';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
-import AppbarContent from './AppbarContent';
+
+import color from 'color';
+
+import overlay from '../../styles/overlay';
+import { black, white } from '../../styles/themes/v2/colors';
+import type { Theme } from '../../types';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
-import overlay from '../../styles/overlay';
-import type { Theme } from '../../types';
-import { black, white } from '../../styles/themes/v2/colors';
+import AppbarContent from './AppbarContent';
 
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 

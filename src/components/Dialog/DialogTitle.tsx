@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, StyleProp, TextStyle } from 'react-native';
-import Title from '../Typography/v2/Title';
-import Text from '../Typography/Text';
+
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
+import Text from '../Typography/Text';
+import Title from '../Typography/v2/Title';
 
 export type Props = React.ComponentPropsWithRef<typeof Title> & {
   /**

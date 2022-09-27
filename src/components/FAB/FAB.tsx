@@ -7,15 +7,16 @@ import {
   StyleProp,
   AccessibilityState,
 } from 'react-native';
+
+import { withTheme } from '../../core/theming';
+import type { $RemoveChildren, Theme } from '../../types';
 import ActivityIndicator from '../ActivityIndicator';
-import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
-import Text from '../Typography/Text';
+import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { withTheme } from '../../core/theming';
+import Text from '../Typography/Text';
 import { getExtendedFabStyle, getFABColors, getFabStyle } from './utils';
-import type { $RemoveChildren, Theme } from '../../types';
 
 type FABSize = 'small' | 'medium' | 'large';
 
@@ -221,6 +222,8 @@ const FAB = ({
 
   const md3Elevation = isFlatMode || disabled ? 0 : 3;
 
+  const newAccessibilityState = { ...accessibilityState, disabled };
+
   return (
     <Surface
       {...rest}
@@ -254,7 +257,7 @@ const FAB = ({
         disabled={disabled}
         accessibilityLabel={accessibilityLabel}
         accessibilityRole="button"
-        accessibilityState={{ ...accessibilityState, disabled }}
+        accessibilityState={newAccessibilityState}
         testID={testID}
       >
         <View

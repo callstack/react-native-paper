@@ -1,11 +1,13 @@
-import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
-import Text from '../Typography/Text';
-import Icon, { IconSource } from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+
+import color from 'color';
+
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
+import Icon, { IconSource } from '../Icon';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**

@@ -837,7 +837,7 @@ exports[`correctly applies textAlign center 1`] = `
 </View>
 `;
 
-exports[`correctly renders left-side icon adornment, and right-side affix adornment  1`] = `
+exports[`correctly renders left-side affix adornment, and right-side icon adornment 1`] = `
 <View
   style={
     Array [

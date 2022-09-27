@@ -1,5 +1,10 @@
 import type { Animated } from 'react-native';
+
 import color from 'color';
+
+import { MD3LightTheme } from '../../styles/themes';
+import type { Theme } from '../../types';
+import { AdornmentType, AdornmentSide } from './Adornment/enums';
 import type { AdornmentConfig } from './Adornment/types';
 import {
   ADORNMENT_SIZE,
@@ -22,10 +27,7 @@ import {
   MD3_OUTLINED_INPUT_OFFSET,
   MD2_OUTLINED_INPUT_OFFSET,
 } from './constants';
-import { AdornmentType, AdornmentSide } from './Adornment/enums';
 import type { TextInputLabelProp } from './types';
-import { MD3LightTheme } from '../../styles/themes';
-import type { Theme } from '../../types';
 
 type PaddingProps = {
   height: number | null;

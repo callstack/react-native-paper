@@ -1,5 +1,5 @@
-const glob = require('glob');
 const { readFileSync, writeFileSync, mkdirSync } = require('fs');
+const glob = require('glob');
 const path = require('path');
 const rimraf = require('rimraf');
 

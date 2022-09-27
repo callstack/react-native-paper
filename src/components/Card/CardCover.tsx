@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View, ViewStyle, Image, StyleProp } from 'react-native';
+
 import { withTheme } from '../../core/theming';
 import { grey200 } from '../../styles/themes/v2/colors';
 import type { Theme } from '../../types';
@@ -51,7 +52,11 @@ const CardCover = ({ index, total, style, theme, ...rest }: Props) => {
 
   return (
     <View style={[styles.container, coverStyle, style]}>
-      <Image {...rest} style={[styles.image, coverStyle]} />
+      <Image
+        {...rest}
+        style={[styles.image, coverStyle]}
+        accessibilityIgnoresInvertColors
+      />
     </View>
   );
 };

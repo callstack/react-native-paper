@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+
 import renderer from 'react-test-renderer';
-import ListSection from '../List/ListSection.tsx';
-import ListItem from '../List/ListItem.tsx';
-import ListIcon from '../List/ListIcon.tsx';
-import ListSubheader from '../List/ListSubheader.tsx';
+
 import { red500 } from '../../styles/themes/v2/colors';
+import ListIcon from '../List/ListIcon.tsx';
+import ListItem from '../List/ListItem.tsx';
+import ListSection from '../List/ListSection.tsx';
+import ListSubheader from '../List/ListSubheader.tsx';
 
 const styles = StyleSheet.create({
   itemColor: {

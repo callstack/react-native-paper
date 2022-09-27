@@ -1,6 +1,8 @@
-import { render } from '@testing-library/react-native';
 import * as React from 'react';
+
+import { render } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
+
 import Searchbar from '../Searchbar.tsx';
 
 it('renders with placeholder', () => {

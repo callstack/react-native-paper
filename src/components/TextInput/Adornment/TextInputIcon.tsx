@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 
-import IconButton from '../../IconButton/IconButton';
+import { useTheme } from '../../../core/theming';
 import type { $Omit, Theme } from '../../../types';
 import type { IconSource } from '../../Icon';
-import { useTheme } from '../../../core/theming';
-import { getConstants } from '../helpers';
+import IconButton from '../../IconButton/IconButton';
 import { ICON_SIZE } from '../constants';
+import { getConstants } from '../helpers';
 
 export type Props = $Omit<
   React.ComponentProps<typeof IconButton>,

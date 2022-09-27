@@ -10,22 +10,24 @@ import {
   ViewStyle,
   EasingFunction,
 } from 'react-native';
-import { getBottomSpace } from 'react-native-iphone-x-helper';
+
 import color from 'color';
-import overlay from '../../styles/overlay';
-import Icon, { IconSource } from '../Icon';
-import Surface from '../Surface';
-import Badge from '../Badge';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
-import { black, white } from '../../styles/themes/v2/colors';
+import { getBottomSpace } from 'react-native-iphone-x-helper';
+
 import { withTheme } from '../../core/theming';
+import overlay from '../../styles/overlay';
+import { black, white } from '../../styles/themes/v2/colors';
+import type { Theme } from '../../types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
-import useLayout from '../../utils/useLayout';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
+import useLayout from '../../utils/useLayout';
+import Badge from '../Badge';
+import Icon, { IconSource } from '../Icon';
+import Surface from '../Surface';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
 import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
-import type { Theme } from '../../types';
 
 type Route = {
   key: string;

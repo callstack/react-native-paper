@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
+
 import { Button, List, useTheme } from 'react-native-paper';
+
 import ScreenWrapper from '../ScreenWrapper';
 
 const ButtonExample = () => {
@@ -263,6 +265,7 @@ const ButtonExample = () => {
               <Image
                 source={require('../../assets/images/chameleon.jpg')}
                 style={{ width: size, height: size, borderRadius: size / 2 }}
+                accessibilityIgnoresInvertColors
               />
             )}
             onPress={() => {}}

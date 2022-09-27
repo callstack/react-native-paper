@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import renderer from 'react-test-renderer';
+
 import { fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
-import Button from '../Button/Button.tsx';
-import { pink500, black, white } from '../../styles/themes/v2/colors';
-import { getButtonColors } from '../Button/utils';
+import renderer from 'react-test-renderer';
+
 import { getTheme } from '../../core/theming';
+import { pink500, black, white } from '../../styles/themes/v2/colors';
+import Button from '../Button/Button.tsx';
+import { getButtonColors } from '../Button/utils';
 
 const styles = StyleSheet.create({
   flexing: {

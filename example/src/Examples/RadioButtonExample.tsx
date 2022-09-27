@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
+
 import {
   Paragraph,
   RadioButton,
@@ -9,6 +10,7 @@ import {
   MD3Colors,
   Text,
 } from 'react-native-paper';
+
 import ScreenWrapper from '../ScreenWrapper';
 
 type State = 'normal' | 'normal-ios' | 'normal-item' | 'custom';

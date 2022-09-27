@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native';
+
 import { AnimatedFAB, useTheme } from 'react-native-paper';
 
 type CustomFABProps = {

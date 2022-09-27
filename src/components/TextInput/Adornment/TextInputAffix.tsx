@@ -1,5 +1,4 @@
 import React from 'react';
-import color from 'color';
 import {
   Text,
   StyleSheet,
@@ -10,10 +9,12 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import color from 'color';
+
 import { withTheme } from '../../../core/theming';
-import { AdornmentSide } from './enums';
 import type { Theme } from '../../../types';
 import { getConstants } from '../helpers';
+import { AdornmentSide } from './enums';
 
 export type Props = {
   /**

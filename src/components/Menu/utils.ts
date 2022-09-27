@@ -1,6 +1,7 @@
 import color from 'color';
-import type { Theme } from '../../types';
+
 import { white, black } from '../../styles/themes/v2/colors';
+import type { Theme } from '../../types';
 import type { IconSource } from '../Icon';
 
 export const MIN_WIDTH = 112;

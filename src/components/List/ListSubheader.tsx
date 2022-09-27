@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { StyleSheet, StyleProp, TextStyle } from 'react-native';
+
 import color from 'color';
-import Text from '../Typography/Text';
+
 import { useTheme } from '../../core/theming';
 import type { Theme } from '../../types';
+import Text from '../Typography/Text';
 
 export type Props = React.ComponentProps<typeof Text> & {
   /**

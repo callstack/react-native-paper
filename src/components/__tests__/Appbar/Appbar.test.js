@@ -1,18 +1,20 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { render } from '@testing-library/react-native';
 import { Platform } from 'react-native';
-import Menu from '../../Menu/Menu';
-import Appbar from '../../Appbar';
-import AppbarAction from '../../Appbar/AppbarAction';
-import AppbarContent from '../../Appbar/AppbarContent';
-import AppbarBackAction from '../../Appbar/AppbarBackAction';
-import AppbarHeader from '../../Appbar/AppbarHeader';
-import { getAppbarColor, renderAppbarContent } from '../../Appbar/utils';
-import Searchbar from '../../Searchbar';
-import { tokens } from '../../../styles/themes/v3/tokens';
+
+import { render } from '@testing-library/react-native';
+import renderer from 'react-test-renderer';
+
 import { getTheme } from '../../../core/theming';
 import overlay from '../../../styles/overlay';
+import { tokens } from '../../../styles/themes/v3/tokens';
+import Appbar from '../../Appbar';
+import AppbarAction from '../../Appbar/AppbarAction';
+import AppbarBackAction from '../../Appbar/AppbarBackAction';
+import AppbarContent from '../../Appbar/AppbarContent';
+import AppbarHeader from '../../Appbar/AppbarHeader';
+import { getAppbarColor, renderAppbarContent } from '../../Appbar/utils';
+import Menu from '../../Menu/Menu';
+import Searchbar from '../../Searchbar';
 
 describe('Appbar', () => {
   it('does not pass any additional props to Searchbar', () => {

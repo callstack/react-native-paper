@@ -1,14 +1,15 @@
 /* @flow */
 
 import * as React from 'react';
-import { styled } from 'linaria/react';
+
 import color from 'color';
 import { Header } from 'component-docs/components';
+import { styled } from 'linaria/react';
 
+import GithubIcon from '../../components/github-icon';
 import GooglePlayIcon from '../../components/google-play-icon';
 import IphoneIcon from '../../components/iphone-icon';
 import Content from './components/Content';
-import GithubIcon from '../../components/github-icon';
 
 type Data = {
   color: string,
@@ -198,7 +199,11 @@ export default class Showcase extends React.Component<{}> {
               return (
                 <div key={item.image}>
                   <ImageContainer>
-                    <Image src={item.image} alt="" />
+                    <Image
+                      src={item.image}
+                      alt=""
+                      accessibilityIgnoresInvertColors
+                    />
                     <Info style={{ backgroundColor: item.color }}>
                       <AppName
                         style={{

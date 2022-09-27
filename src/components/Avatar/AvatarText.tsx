@@ -7,11 +7,12 @@ import {
   TextStyle,
   useWindowDimensions,
 } from 'react-native';
-import Text from '../Typography/Text';
+
 import { withTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
-import getContrastingColor from '../../utils/getContrastingColor';
 import type { Theme } from '../../types';
+import getContrastingColor from '../../utils/getContrastingColor';
+import Text from '../Typography/Text';
 
 const defaultSize = 64;
 

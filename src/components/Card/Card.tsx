@@ -7,15 +7,16 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import CardContent from './CardContent';
+
+import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
+import Surface from '../Surface';
 import CardActions from './CardActions';
+import CardContent from './CardContent';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import CardCover, { CardCover as _CardCover } from './CardCover';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import CardTitle, { CardTitle as _CardTitle } from './CardTitle';
-import Surface from '../Surface';
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
 import { getCardColors } from './utils';
 
 type OutlinedCardProps = {

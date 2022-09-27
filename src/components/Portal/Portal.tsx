@@ -1,12 +1,13 @@
 import * as React from 'react';
-import PortalConsumer from './PortalConsumer';
-import PortalHost, { PortalContext, PortalMethods } from './PortalHost';
+
 import {
   Provider as SettingsProvider,
   Consumer as SettingsConsumer,
 } from '../../core/settings';
 import { ThemeProvider, withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
+import PortalConsumer from './PortalConsumer';
+import PortalHost, { PortalContext, PortalMethods } from './PortalHost';
 
 export type Props = {
   /**

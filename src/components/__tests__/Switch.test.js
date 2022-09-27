@@ -1,9 +1,10 @@
 import * as React from 'react';
-import renderer from 'react-test-renderer';
 import { Platform } from 'react-native';
-import color from 'color';
-import Switch from '../Switch/Switch.tsx';
 
+import color from 'color';
+import renderer from 'react-test-renderer';
+
+import { getTheme } from '../../core/theming';
 import {
   white,
   black,
@@ -13,8 +14,8 @@ import {
   pink500,
   grey700,
 } from '../../styles/themes/v2/colors';
+import Switch from '../Switch/Switch.tsx';
 import { getSwitchColor } from '../Switch/utils';
-import { getTheme } from '../../core/theming';
 
 it('renders on switch', () => {
   const tree = renderer.create(<Switch value />).toJSON();

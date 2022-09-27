@@ -1,10 +1,12 @@
 import * as React from 'react';
-import renderer from 'react-test-renderer';
+
 import color from 'color';
+import renderer from 'react-test-renderer';
+
+import { getTheme } from '../../core/theming';
+import { tokens } from '../../styles/themes/v3/tokens';
 import ToggleButton from '../ToggleButton';
 import { getToggleButtonColor } from '../ToggleButton/utils';
-import { tokens } from '../../styles/themes/v3/tokens';
-import { getTheme } from '../../core/theming';
 
 it('renders toggle button', () => {
   const tree = renderer

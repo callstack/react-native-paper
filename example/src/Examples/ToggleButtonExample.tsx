@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { View, StyleSheet, ImageBackground } from 'react-native';
+
 import { ToggleButton, List } from 'react-native-paper';
+
 import ScreenWrapper from '../ScreenWrapper';
 
 type StatusState = 'checked' | 'unchecked';

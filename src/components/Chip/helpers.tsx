@@ -1,7 +1,9 @@
-import color from 'color';
-import type { Theme } from '../../types';
-import { black, white } from '../../styles/themes/v2/colors';
 import type { ColorValue } from 'react-native';
+
+import color from 'color';
+
+import { black, white } from '../../styles/themes/v2/colors';
+import type { Theme } from '../../types';
 
 type BaseProps = {
   theme: Theme;

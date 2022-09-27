@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+
 import { Button, Portal, Dialog, MD3Colors } from 'react-native-paper';
+
 import { TextComponent } from './DialogTextComponent';
 
 const DialogWithIcon = ({

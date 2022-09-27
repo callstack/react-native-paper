@@ -1,6 +1,8 @@
 import * as React from 'react';
-import renderer from 'react-test-renderer';
 import { Image } from 'react-native';
+
+import renderer from 'react-test-renderer';
+
 import Banner from '../Banner.tsx';
 
 it('renders hidden banner, without action buttons and without image', () => {
@@ -57,6 +59,7 @@ it('renders visible banner, without action buttons and with image', () => {
           <Image
             source={{ uri: 'https://callstack.com/images/team/Satya.png' }}
             style={{ width: size, height: size }}
+            accessibilityIgnoresInvertColors
           />
         )}
         actions={[]}
@@ -79,6 +82,7 @@ it('renders visible banner, with action buttons and with image', () => {
           <Image
             source={{ uri: 'https://callstack.com/images/team/Satya.png' }}
             style={{ width: size, height: size }}
+            accessibilityIgnoresInvertColors
           />
         )}
         actions={[{ label: 'first', onPress: () => {} }]}

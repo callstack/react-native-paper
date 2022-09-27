@@ -7,15 +7,16 @@ import {
   StyleProp,
   TextStyle,
 } from 'react-native';
+
 import color from 'color';
 
+import { withTheme } from '../../core/theming';
+import type { Theme } from '../../types';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
-import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import Text from '../Typography/Text';
 import { ButtonMode, getButtonColors } from './utils';
 
 export type Props = React.ComponentProps<typeof Surface> & {

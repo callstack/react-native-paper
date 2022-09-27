@@ -10,6 +10,7 @@ import {
   ViewStyle,
   StyleSheet,
 } from 'react-native';
+
 import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 import { getTouchableRippleColors } from './utils';

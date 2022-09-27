@@ -1,15 +1,17 @@
 import * as React from 'react';
-import color from 'color';
 import { StyleSheet, Text, Platform, I18nManager } from 'react-native';
+
 import { fireEvent, render } from '@testing-library/react-native';
-import TextInput from '../TextInput/TextInput';
+import color from 'color';
+
+import { getTheme } from '../../core/theming';
+import { MD3LightTheme } from '../../styles/themes';
 import { red500 } from '../../styles/themes/v2/colors';
 import {
   getFlatInputColors,
   getOutlinedInputColors,
 } from '../TextInput/helpers';
-import { getTheme } from '../../core/theming';
-import { MD3LightTheme } from '../../styles/themes';
+import TextInput from '../TextInput/TextInput';
 
 const style = StyleSheet.create({
   inputStyle: {
@@ -53,7 +55,7 @@ it('correctly renders left-side icon adornment, and right-side affix adornment',
   expect(toJSON()).toMatchSnapshot();
 });
 
-it('correctly renders left-side icon adornment, and right-side affix adornment ', () => {
+it('correctly renders left-side affix adornment, and right-side icon adornment', () => {
   const { getByText, getByTestId, toJSON } = render(
     <TextInput
       label="Flat input"

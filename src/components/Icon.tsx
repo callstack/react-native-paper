@@ -5,10 +5,11 @@ import {
   Platform,
   ImageSourcePropType,
 } from 'react-native';
+
 import { Consumer as SettingsConsumer } from '../core/settings';
-import { accessibilityProps } from './MaterialCommunityIcon';
 import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
+import { accessibilityProps } from './MaterialCommunityIcon';
 
 type IconSourceBase = string | ImageSourcePropType;
 
@@ -91,7 +92,6 @@ const Icon = ({ source, color, size, theme, ...rest }: Props) => {
           {
             transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
           },
-          // eslint-disable-next-line react-native/no-inline-styles
           {
             width: size,
             height: size,
@@ -100,6 +100,7 @@ const Icon = ({ source, color, size, theme, ...rest }: Props) => {
           },
         ]}
         {...accessibilityProps}
+        accessibilityIgnoresInvertColors
       />
     );
   } else if (typeof s === 'string') {

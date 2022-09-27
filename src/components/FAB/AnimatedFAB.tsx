@@ -1,5 +1,4 @@
 import * as React from 'react';
-import color from 'color';
 import {
   Animated,
   View,
@@ -12,17 +11,20 @@ import {
   Platform,
   I18nManager,
 } from 'react-native';
-import Surface from '../Surface';
-import Icon from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import type { $RemoveChildren, Theme } from '../../types';
-import type { IconSource } from '../Icon';
-import { withTheme } from '../../core/theming';
 import type {
   AccessibilityState,
   NativeSyntheticEvent,
   TextLayoutEventData,
 } from 'react-native';
+
+import color from 'color';
+
+import { withTheme } from '../../core/theming';
+import type { $RemoveChildren, Theme } from '../../types';
+import Icon from '../Icon';
+import type { IconSource } from '../Icon';
+import Surface from '../Surface';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import AnimatedText from '../Typography/AnimatedText';
 import { getCombinedStyles, getFABColors } from './utils';
 
@@ -301,6 +303,8 @@ const AnimatedFAB = ({
   const md2Elevation = disabled || !isIOS ? 0 : 6;
   const md3Elevation = disabled || !isIOS ? 0 : 3;
 
+  const newAccessibilityState = { ...accessibilityState, disabled };
+
   return (
     <Surface
       {...rest}
@@ -402,7 +406,7 @@ const AnimatedFAB = ({
               disabled={disabled}
               accessibilityLabel={accessibilityLabel}
               accessibilityRole="button"
-              accessibilityState={{ ...accessibilityState, disabled }}
+              accessibilityState={newAccessibilityState}
               testID={testID}
               style={{ borderRadius }}
             >

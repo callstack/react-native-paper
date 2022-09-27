@@ -6,6 +6,7 @@ import {
   StyleProp,
   StyleSheet,
 } from 'react-native';
+
 import { withTheme } from '../../core/theming';
 import { Font, MD3TypescaleKey, Theme } from '../../types';
 

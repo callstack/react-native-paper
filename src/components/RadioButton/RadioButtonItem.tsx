@@ -6,15 +6,16 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
+
 import { withTheme } from '../../core/theming';
-import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
-import { handlePress, isChecked } from './utils';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import RadioButton from './RadioButton';
-import Text from '../Typography/Text';
-import RadioButtonAndroid from './RadioButtonAndroid';
-import RadioButtonIOS from './RadioButtonIOS';
 import type { MD3TypescaleKey, Theme } from '../../types';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
+import RadioButton from './RadioButton';
+import RadioButtonAndroid from './RadioButtonAndroid';
+import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
+import RadioButtonIOS from './RadioButtonIOS';
+import { handlePress, isChecked } from './utils';
 
 export type Props = {
   /**

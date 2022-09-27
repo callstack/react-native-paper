@@ -2,8 +2,10 @@
 /* eslint-disable import/no-commonjs */
 
 import * as React from 'react';
-import { styled } from 'linaria/react';
+
 import { Link, Header } from 'component-docs/components';
+import { styled } from 'linaria/react';
+
 import ThemeIcon from '../../components/theme-icon';
 import Content from './components/Content';
 
