@@ -253,7 +253,7 @@ const Button = ({
   };
   const touchableStyle = {
     borderRadius: style
-      ? ((StyleSheet.flatten(style) || {}) as ViewStyle).borderRadius ||
+      ? ((StyleSheet.flatten(style) || {}) as ViewStyle).borderRadius ??
         borderRadius
       : borderRadius,
   };
