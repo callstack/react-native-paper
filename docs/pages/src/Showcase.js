@@ -171,6 +171,12 @@ const data: Data[] = [
       'https://play.google.com/store/apps/details?id=com.tarikfp.pharmacyfinder',
     ios: 'https://apps.apple.com/us/app/n%C3%B6bet%C3%A7i-eczane-t%C3%BCm-t%C3%BCrkiye/id6443454675',
   },
+  {
+    color: '#0984e3',
+    name: 'Kuroga: Make GIF by sketching',
+    image: 'showcase/kurogahome.png',
+    android: 'https://play.google.com/store/apps/details?id=com.personal.butterfly',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {
