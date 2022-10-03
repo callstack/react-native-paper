@@ -175,7 +175,8 @@ const data: Data[] = [
     color: '#0984e3',
     name: 'Kuroga: Make GIF by sketching',
     image: 'showcase/kurogahome.png',
-    android: 'https://play.google.com/store/apps/details?id=com.personal.butterfly',
+    android:
+      'https://play.google.com/store/apps/details?id=com.personal.butterfly',
   },
 ];
 
