@@ -421,6 +421,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           "borderRadius": 4,
           "borderWidth": 1,
         },
+        undefined,
       ]
     }
     testID="text-input-outline"

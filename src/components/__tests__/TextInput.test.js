@@ -967,3 +967,37 @@ describe('getOutlinedInputColors - active color', () => {
     });
   });
 });
+
+
+describe('outlineStyle - underlineStyle', () => {
+  it('correctly applies outline style', () => {
+    const { getByTestId } = render(
+      <TextInput
+        mode="outlined"
+        outlineStyle={{ borderRadius: 16, borderWidth: 6 }}
+        outlineTestID="text-input-outline"
+      />
+    );
+
+    expect(getByTestId('text-input-outline')).toHaveStyle({
+      borderRadius: 16,
+      borderWidth: 6,
+    });
+  });
+
+  it('correctly applies underline style', () => {
+    const { getByTestId } = render(
+      <TextInput
+        mode="flat"
+        underlineStyle={{ borderRadius: 16, borderWidth: 6 }}
+        underlineTestID="text-input-underline"
+      />
+    );
+
+    expect(getByTestId('text-input-underline')).toHaveStyle({
+      borderRadius: 16,
+      borderWidth: 6,
+    });
+  });
+});
+
