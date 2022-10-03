@@ -16,7 +16,6 @@ import type { Theme } from '../../types';
 import { getTouchableRippleColors } from './utils';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
-const ANDROID_VERSION_PIE = 28;
 
 type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
   borderless?: boolean;
@@ -49,14 +48,9 @@ const TouchableRipple = ({
       underlayColor,
     });
 
-  // A workaround for ripple on Android P is to use useForeground + overflow: 'hidden'
-  // https://github.com/facebook/react-native/issues/6480
-  const useForeground =
-    Platform.OS === 'android' &&
-    Platform.Version >= ANDROID_VERSION_PIE &&
-    borderless;
-
   if (TouchableRipple.supported) {
+    const useForeground = TouchableRipple.supportedForeground && borderless;
+
     return (
       <TouchableNativeFeedback
         {...rest}
@@ -89,6 +83,9 @@ const TouchableRipple = ({
 
 TouchableRipple.supported =
   Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_LOLLIPOP;
+// A workaround for ripple on Android API >= 23 is to use useForeground + overflow: 'hidden'
+// https://github.com/facebook/react-native/issues/6480
+TouchableRipple.supportedForeground = TouchableNativeFeedback.canUseNativeForeground();
 
 const styles = StyleSheet.create({
   overflowHidden: {
