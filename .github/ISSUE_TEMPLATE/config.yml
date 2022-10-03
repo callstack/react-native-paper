@@ -7,7 +7,7 @@ contact_links:
     url: https://callstack.github.io/react-native-paper/index.html
     about: Read the official documentation.
   - name: Example
-    url: https://snack.expo.dev/@react-native-paper/github.com-callstack-react-native-paper:example
+    url: https://snack.expo.dev/@react-native-paper/react-native-paper-example_v5
     about: See the official example app.
   - name: Contributing guide
     url: https://github.com/callstack/react-native-paper/blob/main/CONTRIBUTING.md
