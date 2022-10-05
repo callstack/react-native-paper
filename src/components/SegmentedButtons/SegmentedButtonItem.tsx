@@ -8,7 +8,7 @@ import {
   TextStyle,
   Animated,
 } from 'react-native';
-import { useTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import type { IconSource } from '../Icon';
@@ -81,7 +81,7 @@ const SegmentedButtonItem = ({
   segment,
   density = 'regular',
 }: Props) => {
-  const theme = useTheme();
+  const theme = useInternalTheme();
 
   const checkScale = React.useRef(new Animated.Value(0)).current;
 

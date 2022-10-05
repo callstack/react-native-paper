@@ -1,6 +1,6 @@
 import { $DeepPartial, createTheming } from '@callstack/react-theme-provider';
 import type { ComponentType } from 'react';
-import type { InternalTheme } from 'src/types';
+import type { InternalTheme, MD3Theme } from 'src/types';
 import {
   MD2DarkTheme,
   MD2LightTheme,
@@ -10,16 +10,21 @@ import {
 
 export const DefaultTheme = MD3LightTheme;
 
-export const { ThemeProvider, withTheme, useTheme } =
-  createTheming<ReactNativePaperTheme>(DefaultTheme);
+export const {
+  ThemeProvider,
+  withTheme,
+  useTheme: useAppTheme,
+} = createTheming<unknown>(MD3LightTheme);
+
+export const useTheme = () => useAppTheme<MD3Theme>();
 
 export const useInternalTheme = (
   themeOverrides?: $DeepPartial<InternalTheme>
-) => useTheme<InternalTheme>(themeOverrides);
+) => useAppTheme<InternalTheme>(themeOverrides);
 
-export const withInternalTheme = <Props extends {}, C>(
+export const withInternalTheme = <Props extends { theme: InternalTheme }, C>(
   WrappedComponent: ComponentType<Props & { theme: InternalTheme }> & C
-) => withTheme(WrappedComponent);
+) => withTheme<Props, C, InternalTheme>(WrappedComponent);
 
 export const defaultThemesByVersion = {
   2: {

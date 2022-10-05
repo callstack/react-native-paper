@@ -75,7 +75,7 @@ export type MD3Colors = {
 
 export type MD3Palette = {};
 
-export type ThemeProp = $DeepPartial<ReactNativePaperTheme>;
+export type ThemeProp = $DeepPartial<InternalTheme>;
 
 export type ThemeBase = {
   dark: boolean;
