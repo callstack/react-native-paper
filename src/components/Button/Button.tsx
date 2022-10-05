@@ -1,21 +1,22 @@
 import * as React from 'react';
 import {
   Animated,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
   View,
   ViewStyle,
-  StyleSheet,
-  StyleProp,
-  TextStyle,
 } from 'react-native';
+
 import color from 'color';
 
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
-import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import Text from '../Typography/Text';
 import { ButtonMode, getButtonColors } from './utils';
 
 export type Props = React.ComponentProps<typeof Surface> & {
@@ -252,7 +253,7 @@ const Button = ({
   };
   const touchableStyle = {
     borderRadius: style
-      ? ((StyleSheet.flatten(style) || {}) as ViewStyle).borderRadius ||
+      ? ((StyleSheet.flatten(style) || {}) as ViewStyle).borderRadius ??
         borderRadius
       : borderRadius,
   };
@@ -260,10 +261,13 @@ const Button = ({
   const { color: customLabelColor, fontSize: customLabelSize } =
     StyleSheet.flatten(labelStyle) || {};
 
+  const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
+
   const textStyle = {
     color: textColor,
-    ...(isV3 ? theme.typescale.labelLarge : theme.fonts.medium),
+    ...font,
   };
+
   const iconStyle =
     StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
       ? [

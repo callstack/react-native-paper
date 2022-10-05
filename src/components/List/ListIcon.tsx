@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+
 import Icon, { IconSource } from '../Icon';
 
 export type Props = {

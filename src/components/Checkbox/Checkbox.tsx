@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
-import CheckboxIOS from './CheckboxIOS';
-import CheckboxAndroid from './CheckboxAndroid';
+
 import { withInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';
+import CheckboxAndroid from './CheckboxAndroid';
+import CheckboxIOS from './CheckboxIOS';
 
 export type Props = {
   /**

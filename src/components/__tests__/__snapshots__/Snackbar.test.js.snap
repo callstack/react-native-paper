@@ -76,10 +76,13 @@ exports[`renders snackbar with Text as a child 1`] = `
           style={
             Array [
               Object {
+                "textAlign": "left",
+              },
+              Object {
                 "color": "rgba(28, 27, 31, 1)",
               },
               Object {
-                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -180,10 +183,13 @@ exports[`renders snackbar with action button 1`] = `
           style={
             Array [
               Object {
+                "textAlign": "left",
+              },
+              Object {
                 "color": "rgba(28, 27, 31, 1)",
               },
               Object {
-                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -297,6 +303,7 @@ exports[`renders snackbar with action button 1`] = `
                       Array [
                         Object {
                           "color": "rgba(28, 27, 31, 1)",
+                          "fontFamily": "System",
                           "fontSize": 14,
                           "fontWeight": "500",
                           "letterSpacing": 0.1,
@@ -422,10 +429,13 @@ exports[`renders snackbar with content 1`] = `
           style={
             Array [
               Object {
+                "textAlign": "left",
+              },
+              Object {
                 "color": "rgba(28, 27, 31, 1)",
               },
               Object {
-                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {

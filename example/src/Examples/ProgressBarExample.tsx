@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
+
 import {
   Button,
   MD2Colors,
@@ -7,6 +8,7 @@ import {
   Paragraph,
   ProgressBar,
 } from 'react-native-paper';
+
 import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 

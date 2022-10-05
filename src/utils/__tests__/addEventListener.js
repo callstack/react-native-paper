@@ -1,4 +1,5 @@
 import { BackHandler, Keyboard } from 'react-native';
+
 import { addEventListener, addListener } from '../addEventListener';
 
 const mockModule = jest.fn();

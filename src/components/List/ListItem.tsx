@@ -1,4 +1,3 @@
-import color from 'color';
 import * as React from 'react';
 import {
   StyleProp,
@@ -8,11 +7,16 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import color from 'color';
+
+import { withInternalTheme } from '../../core/theming';
+import type {
+  $RemoveChildren,
+  EllipsizeProp,
+  InternalTheme,
+} from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { withInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, EllipsizeProp } from '../../types';
-import type { InternalTheme } from '../../types';
 
 type Title =
   | React.ReactNode

@@ -5,8 +5,9 @@ import type {
   LayoutChangeEvent,
   ColorValue,
 } from 'react-native';
-import type { Props as TextInputProps } from './TextInput';
+
 import type { $Omit } from './../../types';
+import type { Props as TextInputProps } from './TextInput';
 
 export type TextInputLabelProp = string | React.ReactElement;
 
@@ -58,6 +59,7 @@ export type LabelProps = {
   wiggleOffsetX: number;
   labelScale: number;
   fontSize: number;
+  lineHeight?: number | undefined;
   fontWeight: TextStyle['fontWeight'];
   font: any;
   topPosition: number;

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
-import ToggleButtonGroup from './ToggleButtonGroup';
+
 import ToggleButton from './ToggleButton';
+import ToggleButtonGroup from './ToggleButtonGroup';
 
 export type Props = {
   /**

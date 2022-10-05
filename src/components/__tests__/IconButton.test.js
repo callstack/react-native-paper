@@ -1,10 +1,12 @@
 import * as React from 'react';
-import renderer from 'react-test-renderer';
+
 import color from 'color';
-import IconButton from '../IconButton/IconButton.tsx';
-import { pink500 } from '../../styles/themes/v2/colors';
-import { getIconButtonColor } from '../IconButton/utils';
+import renderer from 'react-test-renderer';
+
 import { getTheme } from '../../core/theming';
+import { pink500 } from '../../styles/themes/v2/colors';
+import IconButton from '../IconButton/IconButton.tsx';
+import { getIconButtonColor } from '../IconButton/utils';
 
 it('renders icon button by default', () => {
   const tree = renderer.create(<IconButton icon="camera" />).toJSON();

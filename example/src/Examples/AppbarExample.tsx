@@ -1,6 +1,7 @@
-import type { StackNavigationProp } from '@react-navigation/stack';
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
+
+import type { StackNavigationProp } from '@react-navigation/stack';
 import {
   Appbar,
   FAB,
@@ -11,6 +12,7 @@ import {
   Text,
 } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import { useExampleTheme } from '..';
 import { yellowA200 } from '../../../src/styles/themes/v2/colors';
 import ScreenWrapper from '../ScreenWrapper';

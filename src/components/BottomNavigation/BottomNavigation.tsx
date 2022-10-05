@@ -1,31 +1,33 @@
 import * as React from 'react';
 import {
-  View,
   Animated,
+  EasingFunction,
+  Platform,
+  StyleProp,
+  StyleSheet,
   TouchableWithoutFeedback,
   TouchableWithoutFeedbackProps,
-  StyleSheet,
-  StyleProp,
-  Platform,
+  View,
   ViewStyle,
-  EasingFunction,
 } from 'react-native';
-import { getBottomSpace } from 'react-native-iphone-x-helper';
+
 import color from 'color';
-import overlay from '../../styles/overlay';
-import Icon, { IconSource } from '../Icon';
-import Surface from '../Surface';
-import Badge from '../Badge';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
-import { black, white } from '../../styles/themes/v2/colors';
+import { getBottomSpace } from 'react-native-iphone-x-helper';
+
 import { withInternalTheme } from '../../core/theming';
+import overlay from '../../styles/overlay';
+import { black, white } from '../../styles/themes/v2/colors';
+import type { InternalTheme } from '../../types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
-import useLayout from '../../utils/useLayout';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
+import useLayout from '../../utils/useLayout';
+import Badge from '../Badge';
+import Icon, { IconSource } from '../Icon';
+import Surface from '../Surface';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
 import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
-import type { InternalTheme } from '../../types';
 
 type Route = {
   key: string;
@@ -890,6 +892,8 @@ const BottomNavigation = ({
 
               const isV3Shifting = isV3 && shifting && labeled;
 
+              const font = isV3 ? theme.fonts.labelMedium : {};
+
               return renderTouchable({
                 key: route.key,
                 route,
@@ -921,7 +925,7 @@ const BottomNavigation = ({
                         },
                       ]}
                     >
-                      {isV3 && (
+                      {isV3 && focused && (
                         <Animated.View
                           style={[
                             styles.outline,
@@ -1023,6 +1027,7 @@ const BottomNavigation = ({
                                 styles.label,
                                 {
                                   color: activeLabelColor,
+                                  ...font,
                                 },
                               ]}
                             >
@@ -1054,6 +1059,7 @@ const BottomNavigation = ({
                                   styles.label,
                                   {
                                     color: inactiveLabelColor,
+                                    ...font,
                                   },
                                 ]}
                               >

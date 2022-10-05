@@ -1,12 +1,14 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+
 import { render } from '@testing-library/react-native';
 import color from 'color';
-import Card from '../../Card/Card';
-import Button from '../../Button/Button';
-import { black, white } from '../../../styles/themes/v2/colors';
-import { getCardColors } from '../../Card/utils';
+import renderer from 'react-test-renderer';
+
 import { getTheme } from '../../../core/theming';
+import { black, white } from '../../../styles/themes/v2/colors';
+import Button from '../../Button/Button';
+import Card from '../../Card/Card';
+import { getCardColors } from '../../Card/utils';
 
 describe('Card', () => {
   it('renders an outlined card', () => {

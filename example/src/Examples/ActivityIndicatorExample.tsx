@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
+
 import {
   ActivityIndicator,
   FAB,
   MD2Colors,
   MD3Colors,
 } from 'react-native-paper';
+
 import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 

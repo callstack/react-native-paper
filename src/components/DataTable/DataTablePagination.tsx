@@ -1,4 +1,3 @@
-import color from 'color';
 import * as React from 'react';
 import {
   I18nManager,
@@ -7,7 +6,10 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+
+import color from 'color';
 import type { InternalTheme } from 'src/types';
+
 import { useInternalTheme, withInternalTheme } from '../../core/theming';
 import Button from '../Button/Button';
 import IconButton from '../IconButton/IconButton';
@@ -94,7 +96,7 @@ const PaginationControls = ({
               name="page-first"
               color={color}
               size={size}
-              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+              direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
             />
           )}
           iconColor={textColor}
@@ -109,7 +111,7 @@ const PaginationControls = ({
             name="chevron-left"
             color={color}
             size={size}
-            direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+            direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
           />
         )}
         iconColor={textColor}
@@ -123,7 +125,7 @@ const PaginationControls = ({
             name="chevron-right"
             color={color}
             size={size}
-            direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+            direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
           />
         )}
         iconColor={textColor}
@@ -138,7 +140,7 @@ const PaginationControls = ({
               name="page-last"
               color={color}
               size={size}
-              direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+              direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
             />
           )}
           iconColor={textColor}

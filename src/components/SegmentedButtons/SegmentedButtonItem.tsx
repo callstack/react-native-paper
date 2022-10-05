@@ -1,19 +1,21 @@
 import * as React from 'react';
 import {
-  StyleProp,
-  ViewStyle,
-  GestureResponderEvent,
-  StyleSheet,
-  View,
-  TextStyle,
   Animated,
+  GestureResponderEvent,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  View,
+  ViewStyle,
 } from 'react-native';
-import { useInternalTheme } from '../../core/theming';
-import Text from '../Typography/Text';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import type { IconSource } from '../Icon';
+
 import color from 'color';
+
+import { useInternalTheme } from '../../core/theming';
+import type { IconSource } from '../Icon';
 import Icon from '../Icon';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
 import {
   getSegmentedButtonBorderRadius,
   getSegmentedButtonColors,
@@ -145,11 +147,13 @@ const SegmentedButtonItem = ({
     ...segmentBorderRadius,
   };
   const showIcon = icon && !label ? true : checked ? !showSelectedCheck : true;
-  const textStyle: TextStyle = {
-    ...(!isV3 && {
-      textTransform: 'uppercase',
-      fontWeight: '500',
-    }),
+  const labelTextStyle: TextStyle = {
+    ...(!isV3
+      ? {
+          textTransform: 'uppercase',
+          fontWeight: '500',
+        }
+      : theme.fonts.labelLarge),
     color: textColor,
   };
 
@@ -187,7 +191,7 @@ const SegmentedButtonItem = ({
           ) : null}
           <Text
             variant="labelLarge"
-            style={[styles.label, textStyle]}
+            style={[styles.label, labelTextStyle]}
             selectable={false}
             numberOfLines={1}
           >

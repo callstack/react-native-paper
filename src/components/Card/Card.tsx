@@ -1,21 +1,22 @@
 import * as React from 'react';
 import {
+  Animated,
   StyleProp,
   StyleSheet,
-  Animated,
   TouchableWithoutFeedback,
   View,
   ViewStyle,
 } from 'react-native';
-import CardContent from './CardContent';
-import CardActions from './CardActions';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import CardCover, { CardCover as _CardCover } from './CardCover';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import CardTitle, { CardTitle as _CardTitle } from './CardTitle';
-import Surface from '../Surface';
+
 import { withInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';
+import Surface from '../Surface';
+import CardActions from './CardActions';
+import CardContent from './CardContent';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import CardCover from './CardCover';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import CardTitle from './CardTitle';
 import { getCardColors } from './utils';
 
 type OutlinedCardProps = {

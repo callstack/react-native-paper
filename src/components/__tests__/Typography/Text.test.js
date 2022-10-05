@@ -1,5 +1,7 @@
 import * as React from 'react';
+
 import renderer from 'react-test-renderer';
+
 import Text from '../../Typography/Text.tsx';
 
 it('renders every variant of Text with children as content', () => {

@@ -1,5 +1,7 @@
 import * as React from 'react';
+
 import { Button, Portal, Dialog, MD2Colors } from 'react-native-paper';
+
 import { TextComponent } from './DialogTextComponent';
 
 const UndismissableDialog = ({

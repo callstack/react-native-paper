@@ -1,11 +1,13 @@
-import color from 'color';
 import * as React from 'react';
-import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
-import Text from '../Typography/Text';
-import Divider from '../Divider';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+
+import color from 'color';
+
 import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
 import { MD3Colors } from '../../styles/themes/v3/tokens';
+import type { InternalTheme } from '../../types';
+import Divider from '../Divider';
+import Text from '../Typography/Text';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -65,6 +67,8 @@ const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
     ? theme.colors.onSurfaceVariant
     : color(theme.colors.text).alpha(0.54).rgb().string();
   const titleMargin = isV3 ? 28 : 16;
+  const font = isV3 ? theme.fonts.titleSmall : theme.fonts.medium;
+
   return (
     <View style={[styles.container, style]} {...rest}>
       {title && (
@@ -77,7 +81,7 @@ const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
                 {
                   color: titleColor,
                   marginLeft: titleMargin,
-                  ...(isV3 ? theme.typescale.titleSmall : theme.fonts.medium),
+                  ...font,
                 },
               ]}
             >

@@ -6,11 +6,12 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
 import {
   getContentMaxWidth,
   getMenuItemColor,
@@ -130,6 +131,11 @@ const MenuItem = ({
     trailingIcon,
   });
 
+  const titleTextStyle = {
+    color: titleColor,
+    ...(isV3 ? theme.fonts.bodyLarge : {}),
+  };
+
   return (
     <TouchableRipple
       style={[
@@ -172,7 +178,7 @@ const MenuItem = ({
             variant="bodyLarge"
             selectable={false}
             numberOfLines={1}
-            style={[!isV3 && styles.title, { color: titleColor }, titleStyle]}
+            style={[!isV3 && styles.title, titleTextStyle, titleStyle]}
           >
             {title}
           </Text>

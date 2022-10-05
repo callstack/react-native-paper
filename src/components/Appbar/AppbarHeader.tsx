@@ -1,17 +1,18 @@
 import * as React from 'react';
 import {
-  StyleSheet,
-  StyleProp,
-  View,
-  SafeAreaView,
-  ViewStyle,
   Platform,
+  SafeAreaView,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
 } from 'react-native';
-import { Appbar } from './Appbar';
-import shadow from '../../styles/shadow';
-import { withInternalTheme } from '../../core/theming';
+
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
+import { withInternalTheme } from '../../core/theming';
+import shadow from '../../styles/shadow';
 import type { InternalTheme } from '../../types';
+import { Appbar } from './Appbar';
 import {
   DEFAULT_APPBAR_HEIGHT,
   getAppbarColor,

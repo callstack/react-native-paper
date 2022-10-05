@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
+
 import { FAB, Portal, Text } from 'react-native-paper';
+
 import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 

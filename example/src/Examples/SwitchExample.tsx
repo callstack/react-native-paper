@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
+
 import {
   MD2Colors,
   MD3Colors,
@@ -8,6 +9,7 @@ import {
   Text,
   TouchableRipple,
 } from 'react-native-paper';
+
 import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 

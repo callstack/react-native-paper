@@ -1,4 +1,3 @@
-import type { StackNavigationProp } from '@react-navigation/stack';
 import * as React from 'react';
 import {
   Dimensions,
@@ -8,8 +7,11 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+
+import type { StackNavigationProp } from '@react-navigation/stack';
 import { Appbar, BottomNavigation, Menu } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -41,7 +43,11 @@ const PhotoGallery = ({ route }: Route) => {
     <ScreenWrapper contentContainerStyle={styles.content}>
       {PHOTOS.map((uri) => (
         <View key={uri} style={styles.item}>
-          <Image source={{ uri }} style={styles.photo} />
+          <Image
+            source={{ uri }}
+            style={styles.photo}
+            accessibilityIgnoresInvertColors
+          />
         </View>
       ))}
     </ScreenWrapper>

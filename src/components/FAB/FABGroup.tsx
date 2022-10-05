@@ -1,19 +1,21 @@
 import * as React from 'react';
 import {
-  StyleProp,
-  StyleSheet,
   Animated,
   SafeAreaView,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
   TouchableWithoutFeedback,
   View,
   ViewStyle,
 } from 'react-native';
-import FAB from './FAB';
-import Text from '../Typography/Text';
-import Card from '../Card/Card';
+
 import { withInternalTheme } from '../../core/theming';
-import type { IconSource } from '../Icon';
 import type { InternalTheme } from '../../types';
+import Card from '../Card/Card';
+import type { IconSource } from '../Icon';
+import Text from '../Typography/Text';
+import FAB from './FAB';
 import { getFABGroupColors } from './utils';
 
 export type Props = {
@@ -25,8 +27,10 @@ export type Props = {
    * - `color`: custom icon color of the action item
    * - `labelTextColor`: custom label text color of the action item
    * - `accessibilityLabel`: accessibility label for the action, uses label by default if specified
+   * - `accessibilityHint`: accessibility hint for the action
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
-   * - `labelStyle`: pass additional styles for the fab item label, for example, `backgroundColor`
+   * - `containerStyle`: pass additional styles for the fab item label container, for example, `backgroundColor` @supported Available in 5.x
+   * - `labelStyle`: pass additional styles for the fab item label, for example, `fontSize`
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    * - `size`: size of action item. Defaults to `small`. @supported Available in v5.x
    * - `testID`: testID to be used on tests
@@ -37,8 +41,10 @@ export type Props = {
     color?: string;
     labelTextColor?: string;
     accessibilityLabel?: string;
+    accessibilityHint?: string;
     style?: StyleProp<ViewStyle>;
-    labelStyle?: StyleProp<ViewStyle>;
+    containerStyle?: StyleProp<ViewStyle>;
+    labelStyle?: StyleProp<TextStyle>;
     onPress: () => void;
     size?: 'small' | 'medium';
     testID?: string;
@@ -289,7 +295,7 @@ const FABGroup = ({
 
   return (
     <View pointerEvents="box-none" style={[styles.container, style]}>
-      <TouchableWithoutFeedback onPress={close}>
+      <TouchableWithoutFeedback accessibilityRole="button" onPress={close}>
         <Animated.View
           pointerEvents={open ? 'auto' : 'none'}
           style={[
@@ -303,89 +309,93 @@ const FABGroup = ({
       </TouchableWithoutFeedback>
       <SafeAreaView pointerEvents="box-none" style={styles.safeArea}>
         <View pointerEvents={open ? 'box-none' : 'none'}>
-          {actions.map((it, i) => (
-            <View
-              key={i} // eslint-disable-line react/no-array-index-key
-              style={[
-                styles.item,
-                {
-                  marginHorizontal:
-                    typeof it.size === 'undefined' || it.size === 'small'
-                      ? 24
-                      : 16,
-                },
-              ]}
-              pointerEvents={open ? 'box-none' : 'none'}
-            >
-              {it.label && (
-                <View>
-                  <Card
-                    style={
-                      [
-                        styles.label,
-                        {
-                          transform: [
-                            isV3
-                              ? { translateY: labelTranslations[i] }
-                              : { scale: scales[i] },
-                          ],
-                          opacity: opacities[i],
-                        },
-                        isV3 && styles.v3LabelStyle,
-                        it.labelStyle,
-                      ] as StyleProp<ViewStyle>
-                    }
-                    onPress={() => {
-                      it.onPress();
-                      close();
-                    }}
-                    accessibilityLabel={
-                      it.accessibilityLabel !== 'undefined'
-                        ? it.accessibilityLabel
-                        : it.label
-                    }
-                    accessibilityRole="button"
-                    {...(isV3 && { elevation: 0 })}
-                  >
-                    <Text
-                      variant="titleMedium"
-                      style={{ color: it.labelTextColor ?? labelColor }}
+          {actions.map((it, i) => {
+            const labelTextStyle = {
+              color: it.labelTextColor ?? labelColor,
+              ...(isV3 ? theme.fonts.titleMedium : {}),
+            };
+            const marginHorizontal =
+              typeof it.size === 'undefined' || it.size === 'small' ? 24 : 16;
+            const accessibilityLabel =
+              typeof it.accessibilityLabel !== 'undefined'
+                ? it.accessibilityLabel
+                : it.label;
+            const size = typeof it.size !== 'undefined' ? it.size : 'small';
+
+            return (
+              <View
+                key={i} // eslint-disable-line react/no-array-index-key
+                style={[
+                  styles.item,
+                  {
+                    marginHorizontal,
+                  },
+                ]}
+                pointerEvents={open ? 'box-none' : 'none'}
+              >
+                {it.label && (
+                  <View>
+                    <Card
+                      accessibilityHint={it.accessibilityHint}
+                      style={
+                        [
+                          styles.containerStyle,
+                          {
+                            transform: [
+                              isV3
+                                ? { translateY: labelTranslations[i] }
+                                : { scale: scales[i] },
+                            ],
+                            opacity: opacities[i],
+                          },
+                          isV3 && styles.v3ContainerStyle,
+                          it.containerStyle,
+                        ] as StyleProp<ViewStyle>
+                      }
+                      onPress={() => {
+                        it.onPress();
+                        close();
+                      }}
+                      accessibilityLabel={accessibilityLabel}
+                      accessibilityRole="button"
+                      {...(isV3 && { elevation: 0 })}
                     >
-                      {it.label}
-                    </Text>
-                  </Card>
-                </View>
-              )}
-              <FAB
-                size={typeof it.size !== 'undefined' ? it.size : 'small'}
-                icon={it.icon}
-                color={it.color}
-                style={
-                  [
-                    {
-                      transform: [{ scale: scales[i] }],
-                      opacity: opacities[i],
-                      backgroundColor: stackedFABBackgroundColor,
-                    },
-                    isV3 && { transform: [{ translateY: translations[i] }] },
-                    it.style,
-                  ] as StyleProp<ViewStyle>
-                }
-                onPress={() => {
-                  it.onPress();
-                  close();
-                }}
-                accessibilityLabel={
-                  typeof it.accessibilityLabel !== 'undefined'
-                    ? it.accessibilityLabel
-                    : it.label
-                }
-                accessibilityRole="button"
-                testID={it.testID}
-                visible={open}
-              />
-            </View>
-          ))}
+                      <Text
+                        variant="titleMedium"
+                        style={[labelTextStyle, it.labelStyle]}
+                      >
+                        {it.label}
+                      </Text>
+                    </Card>
+                  </View>
+                )}
+                <FAB
+                  size={size}
+                  icon={it.icon}
+                  color={it.color}
+                  style={
+                    [
+                      {
+                        transform: [{ scale: scales[i] }],
+                        opacity: opacities[i],
+                        backgroundColor: stackedFABBackgroundColor,
+                      },
+                      isV3 && { transform: [{ translateY: translations[i] }] },
+                      it.style,
+                    ] as StyleProp<ViewStyle>
+                  }
+                  onPress={() => {
+                    it.onPress();
+                    close();
+                  }}
+                  accessibilityLabel={accessibilityLabel}
+                  accessibilityRole="button"
+                  testID={it.testID}
+                  visible={open}
+                />
+              </View>
+            );
+          })}
         </View>
         <FAB
           onPress={() => {
@@ -432,7 +442,7 @@ const styles = StyleSheet.create({
   backdrop: {
     ...StyleSheet.absoluteFillObject,
   },
-  label: {
+  containerStyle: {
     borderRadius: 5,
     paddingHorizontal: 12,
     paddingVertical: 6,
@@ -446,7 +456,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  v3LabelStyle: {
+  v3ContainerStyle: {
     backgroundColor: 'transparent',
     elevation: 0,
   },

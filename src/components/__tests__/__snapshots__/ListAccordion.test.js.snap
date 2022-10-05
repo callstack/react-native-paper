@@ -68,10 +68,13 @@ exports[`renders expanded accordion 1`] = `
             style={
               Array [
                 Object {
+                  "textAlign": "left",
+                },
+                Object {
                   "color": "rgba(28, 27, 31, 1)",
                 },
                 Object {
-                  "textAlign": "left",
+                  "writingDirection": "ltr",
                 },
                 Array [
                   Object {
@@ -175,10 +178,13 @@ exports[`renders expanded accordion 1`] = `
           style={
             Array [
               Object {
+                "textAlign": "left",
+              },
+              Object {
                 "color": "rgba(28, 27, 31, 1)",
               },
               Object {
-                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -303,10 +309,13 @@ exports[`renders list accordion with children 1`] = `
             style={
               Array [
                 Object {
+                  "textAlign": "left",
+                },
+                Object {
                   "color": "rgba(28, 27, 31, 1)",
                 },
                 Object {
-                  "textAlign": "left",
+                  "writingDirection": "ltr",
                 },
                 Array [
                   Object {
@@ -427,10 +436,13 @@ exports[`renders list accordion with custom title and description styles 1`] = `
             style={
               Array [
                 Object {
+                  "textAlign": "left",
+                },
+                Object {
                   "color": "rgba(28, 27, 31, 1)",
                 },
                 Object {
-                  "textAlign": "left",
+                  "writingDirection": "ltr",
                 },
                 Array [
                   Object {
@@ -454,10 +466,13 @@ exports[`renders list accordion with custom title and description styles 1`] = `
             style={
               Array [
                 Object {
+                  "textAlign": "left",
+                },
+                Object {
                   "color": "rgba(28, 27, 31, 1)",
                 },
                 Object {
-                  "textAlign": "left",
+                  "writingDirection": "ltr",
                 },
                 Array [
                   Object {
@@ -619,10 +634,13 @@ exports[`renders list accordion with left items 1`] = `
             style={
               Array [
                 Object {
+                  "textAlign": "left",
+                },
+                Object {
                   "color": "rgba(28, 27, 31, 1)",
                 },
                 Object {
-                  "textAlign": "left",
+                  "writingDirection": "ltr",
                 },
                 Array [
                   Object {
@@ -743,10 +761,13 @@ exports[`renders multiline list accordion 1`] = `
             style={
               Array [
                 Object {
+                  "textAlign": "left",
+                },
+                Object {
                   "color": "rgba(28, 27, 31, 1)",
                 },
                 Object {
-                  "textAlign": "left",
+                  "writingDirection": "ltr",
                 },
                 Array [
                   Object {
@@ -768,10 +789,13 @@ exports[`renders multiline list accordion 1`] = `
             style={
               Array [
                 Object {
+                  "textAlign": "left",
+                },
+                Object {
                   "color": "rgba(28, 27, 31, 1)",
                 },
                 Object {
-                  "textAlign": "left",
+                  "writingDirection": "ltr",
                 },
                 Array [
                   Object {

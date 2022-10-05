@@ -10,15 +10,16 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+
+import { withInternalTheme } from '../../core/theming';
+import { white } from '../../styles/themes/v2/colors';
+import type { EllipsizeProp, InternalTheme } from '../../types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
-import Text from '../Typography/Text';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { withInternalTheme } from '../../core/theming';
-import { white } from '../../styles/themes/v2/colors';
-import type { EllipsizeProp, InternalTheme } from '../../types';
+import Text from '../Typography/Text';
 import { getChipColors } from './helpers';
 
 export type Props = React.ComponentProps<typeof Surface> & {
@@ -226,7 +227,10 @@ const Chip = ({
   const contentSpacings = {
     paddingRight: isV3 ? (onClose ? 34 : 0) : onClose ? 32 : 4,
   };
-
+  const labelTextStyle = {
+    color: textColor,
+    ...(isV3 ? theme.fonts.labelLarge : theme.fonts.regular),
+  };
   return (
     <Surface
       style={
@@ -324,13 +328,8 @@ const Chip = ({
             selectable={false}
             numberOfLines={1}
             style={[
-              styles.text,
-              {
-                color: textColor,
-                ...(!isV3 && {
-                  ...theme.fonts.regular,
-                }),
-              },
+              isV3 ? styles.md3LabelText : styles.labelText,
+              labelTextStyle,
               labelSpacings,
               textStyle,
             ]}
@@ -409,11 +408,15 @@ const styles = StyleSheet.create({
     marginRight: 8,
     padding: 0,
   },
-  text: {
+  labelText: {
     minHeight: 24,
     lineHeight: 24,
     textAlignVertical: 'center',
     marginVertical: 4,
+  },
+  md3LabelText: {
+    textAlignVertical: 'center',
+    marginVertical: 6,
   },
   avatar: {
     width: 24,

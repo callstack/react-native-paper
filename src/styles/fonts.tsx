@@ -1,7 +1,8 @@
 import { Platform, PlatformOSType } from 'react-native';
+
 import type { Fonts } from '../types';
 
-const fontConfig = {
+export const fontConfig = {
   web: {
     regular: {
       fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',

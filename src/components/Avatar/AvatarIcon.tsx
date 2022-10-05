@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
-import Icon, { IconSource } from '../Icon';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+
 import { withInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
-import getContrastingColor from '../../utils/getContrastingColor';
 import type { InternalTheme } from '../../types';
+import getContrastingColor from '../../utils/getContrastingColor';
+import Icon, { IconSource } from '../Icon';
 
 const defaultSize = 64;
 

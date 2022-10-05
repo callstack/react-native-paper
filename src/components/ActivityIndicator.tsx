@@ -8,8 +8,9 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import type { InternalTheme } from '../types';
+
 import { withInternalTheme } from '../core/theming';
+import type { InternalTheme } from '../types';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**

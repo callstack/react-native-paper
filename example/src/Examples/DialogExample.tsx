@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+
 import { Button } from 'react-native-paper';
+
 import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 import {

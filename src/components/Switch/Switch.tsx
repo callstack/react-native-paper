@@ -6,6 +6,7 @@ import {
   Switch as NativeSwitch,
   ViewStyle,
 } from 'react-native';
+
 import { withInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';
 import { getSwitchColor } from './utils';

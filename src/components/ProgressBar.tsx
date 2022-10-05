@@ -1,15 +1,17 @@
 import * as React from 'react';
 import {
   Animated,
+  I18nManager,
+  LayoutChangeEvent,
   Platform,
+  StyleProp,
   StyleSheet,
   View,
   ViewStyle,
-  StyleProp,
-  LayoutChangeEvent,
-  I18nManager,
 } from 'react-native';
+
 import setColor from 'color';
+
 import { withInternalTheme } from '../core/theming';
 import type { InternalTheme } from '../types';
 

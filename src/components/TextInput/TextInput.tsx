@@ -1,22 +1,23 @@
 import * as React from 'react';
 import {
   Animated,
-  TextInput as NativeTextInput,
   LayoutChangeEvent,
   StyleProp,
+  TextInput as NativeTextInput,
   TextStyle,
 } from 'react-native';
-import TextInputOutlined from './TextInputOutlined';
-import TextInputFlat from './TextInputFlat';
-import TextInputIcon, {
-  Props as TextInputIconProps,
-} from './Adornment/TextInputIcon';
+
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import TextInputAffix, {
   Props as TextInputAffixProps,
 } from './Adornment/TextInputAffix';
-import { withInternalTheme } from '../../core/theming';
+import TextInputIcon, {
+  Props as TextInputIconProps,
+} from './Adornment/TextInputIcon';
+import TextInputFlat from './TextInputFlat';
+import TextInputOutlined from './TextInputOutlined';
 import type { RenderProps, TextInputLabelProp } from './types';
-import type { InternalTheme } from '../../types';
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;

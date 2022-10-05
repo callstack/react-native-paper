@@ -1,31 +1,33 @@
 import type { Animated } from 'react-native';
+
 import color from 'color';
+
+import { MD3LightTheme } from '../../styles/themes';
+import type { InternalTheme } from '../../types';
+import { AdornmentSide, AdornmentType } from './Adornment/enums';
 import type { AdornmentConfig } from './Adornment/types';
 import {
   ADORNMENT_SIZE,
-  MD3_LABEL_PADDING_HORIZONTAL,
-  MD2_LABEL_PADDING_HORIZONTAL,
-  MD3_ADORNMENT_OFFSET,
   MD2_ADORNMENT_OFFSET,
-  MD3_FLAT_INPUT_OFFSET,
-  MD2_FLAT_INPUT_OFFSET,
-  MD3_AFFIX_OFFSET,
   MD2_AFFIX_OFFSET,
-  MD3_ICON_OFFSET,
+  MD2_FLAT_INPUT_OFFSET,
   MD2_ICON_OFFSET,
-  MD3_LABEL_PADDING_TOP,
-  MD2_LABEL_PADDING_TOP,
-  MD3_MIN_HEIGHT,
-  MD2_MIN_HEIGHT,
-  MD3_INPUT_PADDING_HORIZONTAL,
   MD2_INPUT_PADDING_HORIZONTAL,
-  MD3_OUTLINED_INPUT_OFFSET,
+  MD2_LABEL_PADDING_HORIZONTAL,
+  MD2_LABEL_PADDING_TOP,
+  MD2_MIN_HEIGHT,
   MD2_OUTLINED_INPUT_OFFSET,
+  MD3_ADORNMENT_OFFSET,
+  MD3_AFFIX_OFFSET,
+  MD3_FLAT_INPUT_OFFSET,
+  MD3_ICON_OFFSET,
+  MD3_INPUT_PADDING_HORIZONTAL,
+  MD3_LABEL_PADDING_HORIZONTAL,
+  MD3_LABEL_PADDING_TOP,
+  MD3_MIN_HEIGHT,
+  MD3_OUTLINED_INPUT_OFFSET,
 } from './constants';
-import { AdornmentType, AdornmentSide } from './Adornment/enums';
 import type { TextInputLabelProp } from './types';
-import { MD3LightTheme } from '../../styles/themes';
-import type { InternalTheme } from '../../types';
 
 type PaddingProps = {
   height: number | null;

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+
 import { useInternalTheme } from '../../core/theming';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
-import Icon, { isValidIcon, IconSource, isEqualIcon } from './Icon';
 
 import { withInternalTheme } from '../core/theming';
 import type { InternalTheme } from '../types';
+import Icon, { IconSource, isEqualIcon, isValidIcon } from './Icon';
 
 type Props = {
   /**

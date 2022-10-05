@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { FlatList } from 'react-native';
+
 import { Divider, List } from 'react-native-paper';
+
 import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 

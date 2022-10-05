@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { I18nManager, StyleSheet } from 'react-native';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as Updates from 'expo-updates';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { InitialState, NavigationContainer } from '@react-navigation/native';
 import { useKeepAwake } from 'expo-keep-awake';
 import { StatusBar } from 'expo-status-bar';
-import { InitialState, NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import * as Updates from 'expo-updates';
 import {
   Provider as PaperProvider,
   MD3DarkTheme,
@@ -16,10 +17,11 @@ import {
   MD3Theme,
   useTheme,
 } from 'react-native-paper';
-import App from './RootNavigator';
-import DrawerItems from './DrawerItems';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 import { isWeb } from '../utils';
+import DrawerItems from './DrawerItems';
+import App from './RootNavigator';
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
@@ -58,7 +60,9 @@ export default function PaperExample() {
 
   const [isDarkMode, setIsDarkMode] = React.useState(false);
   const [themeVersion, setThemeVersion] = React.useState<2 | 3>(3);
-  const [rtl, setRtl] = React.useState<boolean>(I18nManager.isRTL);
+  const [rtl, setRtl] = React.useState<boolean>(
+    I18nManager.getConstants().isRTL
+  );
   const [collapsed, setCollapsed] = React.useState(false);
 
   const themeMode = isDarkMode ? 'dark' : 'light';
@@ -128,7 +132,7 @@ export default function PaperExample() {
         // ignore error
       }
 
-      if (I18nManager.isRTL !== rtl) {
+      if (I18nManager.getConstants().isRTL !== rtl) {
         I18nManager.forceRTL(rtl);
         if (!isWeb) {
           Updates.reloadAsync();

@@ -3,9 +3,7 @@
     "browser": true
   },
 
-  "extends": ["@callstack"],
-
-  "plugins": ["react-native"],
+  "extends": "@callstack",
 
   "rules": {
     "one-var": "off",
@@ -16,10 +14,39 @@
 
     "import/no-extraneous-dependencies": "off",
     "import/first": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          ["external", "builtin"],
+          "internal",
+          ["sibling", "parent"],
+          "index"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "@(react|react-native)",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "@src/**",
+            "group": "internal"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["internal", "react"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
 
     "react-native/no-unused-styles": "error",
     "react-native/split-platform-components": "off",
-    "react-native/no-raw-text": "off"
+    "react-native/no-raw-text": "off",
+    "react-native-a11y/has-valid-accessibility-descriptors": "off"
   },
 
   "settings": {

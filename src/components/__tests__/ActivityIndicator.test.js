@@ -1,5 +1,7 @@
 import * as React from 'react';
+
 import renderer from 'react-test-renderer';
+
 import ActivityIndicator from '../ActivityIndicator.tsx';
 
 it('renders indicator', () => {

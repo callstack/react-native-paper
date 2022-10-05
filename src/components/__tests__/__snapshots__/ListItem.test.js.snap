@@ -55,10 +55,13 @@ exports[`renders list item with custom description 1`] = `
         style={
           Array [
             Object {
+              "textAlign": "left",
+            },
+            Object {
               "color": "rgba(28, 27, 31, 1)",
             },
             Object {
-              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -228,6 +231,7 @@ exports[`renders list item with custom description 1`] = `
                         Array [
                           Object {
                             "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
                             "fontSize": 14,
                             "fontWeight": "500",
                             "letterSpacing": 0.1,
@@ -241,13 +245,16 @@ exports[`renders list item with custom description 1`] = `
                           },
                           Array [
                             Object {
-                              "lineHeight": 24,
-                              "marginVertical": 4,
-                              "minHeight": 24,
+                              "marginVertical": 6,
                               "textAlignVertical": "center",
                             },
                             Object {
                               "color": "rgba(29, 25, 43, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
                             },
                             Object {
                               "marginLeft": 8,
@@ -327,10 +334,13 @@ exports[`renders list item with custom title and description styles 1`] = `
         style={
           Array [
             Object {
+              "textAlign": "left",
+            },
+            Object {
               "color": "rgba(28, 27, 31, 1)",
             },
             Object {
-              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -354,10 +364,13 @@ exports[`renders list item with custom title and description styles 1`] = `
         style={
           Array [
             Object {
+              "textAlign": "left",
+            },
+            Object {
               "color": "rgba(28, 27, 31, 1)",
             },
             Object {
-              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -438,10 +451,13 @@ exports[`renders list item with left and right items 1`] = `
         style={
           Array [
             Object {
+              "textAlign": "left",
+            },
+            Object {
               "color": "rgba(28, 27, 31, 1)",
             },
             Object {
-              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -463,10 +479,13 @@ exports[`renders list item with left and right items 1`] = `
         style={
           Array [
             Object {
+              "textAlign": "left",
+            },
+            Object {
               "color": "rgba(28, 27, 31, 1)",
             },
             Object {
-              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -618,10 +637,13 @@ exports[`renders list item with left item 1`] = `
         style={
           Array [
             Object {
+              "textAlign": "left",
+            },
+            Object {
               "color": "rgba(28, 27, 31, 1)",
             },
             Object {
-              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -697,10 +719,13 @@ exports[`renders list item with right item 1`] = `
         style={
           Array [
             Object {
+              "textAlign": "left",
+            },
+            Object {
               "color": "rgba(28, 27, 31, 1)",
             },
             Object {
-              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -779,10 +804,13 @@ exports[`renders list item with title and description 1`] = `
         style={
           Array [
             Object {
+              "textAlign": "left",
+            },
+            Object {
               "color": "rgba(28, 27, 31, 1)",
             },
             Object {
-              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -804,10 +832,13 @@ exports[`renders list item with title and description 1`] = `
         style={
           Array [
             Object {
+              "textAlign": "left",
+            },
+            Object {
               "color": "rgba(28, 27, 31, 1)",
             },
             Object {
-              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -883,10 +914,13 @@ exports[`renders with a description with typeof number 1`] = `
         style={
           Array [
             Object {
+              "textAlign": "left",
+            },
+            Object {
               "color": "rgba(28, 27, 31, 1)",
             },
             Object {
-              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -910,10 +944,13 @@ exports[`renders with a description with typeof number 1`] = `
         style={
           Array [
             Object {
+              "textAlign": "left",
+            },
+            Object {
               "color": "rgba(28, 27, 31, 1)",
             },
             Object {
-              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {

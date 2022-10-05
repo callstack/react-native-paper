@@ -1,9 +1,10 @@
 import color from 'color';
+
+import { getTheme } from '../../../core/theming';
 import {
   getAndroidSelectionControlColor,
   getSelectionControlIOSColor,
 } from '../../Checkbox/utils';
-import { getTheme } from '../../../core/theming';
 
 describe('getAndroidSelectionControlColor - ripple color', () => {
   it('should return correct disabled color, for theme version 3', () => {

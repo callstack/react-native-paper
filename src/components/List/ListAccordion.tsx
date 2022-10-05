@@ -1,19 +1,21 @@
-import color from 'color';
 import * as React from 'react';
 import {
+  GestureResponderEvent,
+  I18nManager,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
   View,
   ViewStyle,
-  StyleSheet,
-  StyleProp,
-  TextStyle,
-  I18nManager,
-  GestureResponderEvent,
 } from 'react-native';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import Text from '../Typography/Text';
+
+import color from 'color';
+
 import { withInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
 import { ListAccordionGroupContext } from './ListAccordionGroup';
 
 export type Props = {
@@ -251,7 +253,7 @@ const ListAccordion = ({
                   name={isExpanded ? 'chevron-up' : 'chevron-down'}
                   color={theme.isV3 ? descriptionColor : titleColor}
                   size={24}
-                  direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+                  direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
                 />
               )}
             </View>

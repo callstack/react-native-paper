@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Platform, I18nManager, View, Image, StyleSheet } from 'react-native';
+
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 
 const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
@@ -12,7 +13,7 @@ const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
         {
           width: size,
           height: size,
-          transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
+          transform: [{ scaleX: I18nManager.getConstants().isRTL ? -1 : 1 }],
         },
       ]}
     >
@@ -22,6 +23,7 @@ const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
           styles.icon,
           { tintColor: color, width: iosIconSize, height: iosIconSize },
         ]}
+        accessibilityIgnoresInvertColors
       />
     </View>
   ) : (
@@ -29,7 +31,7 @@ const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
       name="arrow-left"
       color={color}
       size={size}
-      direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+      direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
     />
   );
 };

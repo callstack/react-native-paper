@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Dimensions, Image, Platform, StyleSheet, View } from 'react-native';
+
 import { Banner, FAB, MD2Colors, MD3Colors } from 'react-native-paper';
+
 import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -62,7 +64,11 @@ const BannerExample = () => {
         <View style={styles.grid}>
           {PHOTOS.map((uri) => (
             <View key={uri} style={styles.item}>
-              <Image source={{ uri }} style={styles.photo} />
+              <Image
+                source={{ uri }}
+                style={styles.photo}
+                accessibilityIgnoresInvertColors
+              />
             </View>
           ))}
         </View>

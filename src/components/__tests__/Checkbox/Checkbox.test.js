@@ -1,5 +1,7 @@
 import * as React from 'react';
+
 import renderer from 'react-test-renderer';
+
 import Checkbox from '../../Checkbox';
 
 it('renders checked Checkbox with onPress', () => {

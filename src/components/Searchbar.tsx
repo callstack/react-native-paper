@@ -1,24 +1,26 @@
 import * as React from 'react';
 import {
-  Platform,
-  StyleSheet,
-  StyleProp,
-  TextInput,
-  I18nManager,
-  TextInputProps,
-  ViewStyle,
-  TextStyle,
   Animated,
+  I18nManager,
+  Platform,
+  StyleProp,
+  StyleSheet,
+  TextInput,
+  TextInputProps,
+  TextStyle,
+  View,
+  ViewStyle,
 } from 'react-native';
 
 import color from 'color';
-import IconButton from './IconButton/IconButton';
-import Surface from './Surface';
+
 import { withInternalTheme } from '../core/theming';
-import type { IconSource } from './Icon';
 import type { InternalTheme } from '../types';
-import MaterialCommunityIcon from './MaterialCommunityIcon';
 import ActivityIndicator from './ActivityIndicator';
+import type { IconSource } from './Icon';
+import IconButton from './IconButton/IconButton';
+import MaterialCommunityIcon from './MaterialCommunityIcon';
+import Surface from './Surface';
 
 export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   /**
@@ -60,10 +62,6 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   inputStyle?: StyleProp<TextStyle>;
   style?: StyleProp<ViewStyle>;
   /**
-   * @optional
-   */
-  theme: InternalTheme;
-  /**
    * Custom color for icon, default will be derived from theme
    */
   iconColor?: string;
@@ -76,6 +74,14 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    * Custom flag for replacing clear button with activity indicator.
    */
   loading?: Boolean;
+  /**
+   * TestID used for testing purposes
+   */
+  testID?: string;
+  /**
+   * @optional
+   */
+  theme: InternalTheme;
 };
 
 type TextInputHandles = Pick<
@@ -129,6 +135,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
       theme,
       value,
       loading = false,
+      testID = 'search-bar',
       ...rest
     }: Props,
     ref
@@ -196,7 +203,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
                 name="magnify"
                 color={color}
                 size={size}
-                direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+                direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
               />
             ))
           }
@@ -223,6 +230,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
           accessibilityRole="search"
           ref={root}
           value={value}
+          testID={testID}
           {...rest}
         />
         {loading ? (
@@ -231,26 +239,34 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
             style={styles.loader}
           />
         ) : (
-          <IconButton
-            borderless
-            disabled={!value}
-            accessibilityLabel={clearAccessibilityLabel}
-            iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
-            rippleColor={rippleColor}
-            onPress={handleClearPress}
-            icon={
-              clearIcon ||
-              (({ size, color }) => (
-                <MaterialCommunityIcon
-                  name="close"
-                  color={color}
-                  size={size}
-                  direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
-                />
-              ))
-            }
-            accessibilityRole="button"
-          />
+          // Clear icon should be always rendered within Searchbar – it's transparent,
+          // without touch events, when there is no value. It's done to avoid issues
+          // with the abruptly stopping ripple effect and changing bar width on web,
+          // when clearing the value.
+          <View
+            pointerEvents={value ? 'auto' : 'none'}
+            testID={`${testID}-icon-wrapper`}
+          >
+            <IconButton
+              borderless
+              accessibilityLabel={clearAccessibilityLabel}
+              iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
+              rippleColor={rippleColor}
+              onPress={handleClearPress}
+              icon={
+                clearIcon ||
+                (({ size, color }) => (
+                  <MaterialCommunityIcon
+                    name="close"
+                    color={color}
+                    size={size}
+                    direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                  />
+                ))
+              }
+              accessibilityRole="button"
+            />
+          </View>
         )}
       </Surface>
     );
@@ -267,7 +283,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingLeft: 8,
     alignSelf: 'stretch',
-    textAlign: I18nManager.isRTL ? 'right' : 'left',
+    textAlign: I18nManager.getConstants().isRTL ? 'right' : 'left',
     minWidth: 0,
   },
   elevation: {

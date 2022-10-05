@@ -1,11 +1,13 @@
 import * as React from 'react';
 import {
-  Text as NativeText,
-  TextStyle,
   StyleProp,
   StyleSheet,
+  Text as NativeText,
+  TextStyle,
 } from 'react-native';
+
 import type { MD2Theme } from 'src/types';
+
 import { useInternalTheme } from '../../../core/theming';
 
 type Props = React.ComponentProps<typeof NativeText> & {

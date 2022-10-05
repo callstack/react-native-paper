@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
+
 import { useInternalTheme } from '../../core/theming';
 import Icon, { IconSource } from '../Icon';
 

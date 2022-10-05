@@ -7,6 +7,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+
 import { useInternalTheme } from '../core/theming';
 import overlay, { isAnimatedValue } from '../styles/overlay';
 import shadow from '../styles/shadow';

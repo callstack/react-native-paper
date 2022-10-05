@@ -1,20 +1,21 @@
 import * as React from 'react';
 import {
-  View,
-  StyleSheet,
   StyleProp,
-  ViewStyle,
+  StyleSheet,
   TextStyle,
+  View,
+  ViewStyle,
 } from 'react-native';
+
 import { withInternalTheme } from '../../core/theming';
-import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
-import { handlePress, isChecked } from './utils';
+import type { InternalTheme, MD3TypescaleKey } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import RadioButton from './RadioButton';
 import Text from '../Typography/Text';
+import RadioButton from './RadioButton';
 import RadioButtonAndroid from './RadioButtonAndroid';
+import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import RadioButtonIOS from './RadioButtonIOS';
-import type { MD3TypescaleKey, InternalTheme } from '../../types';
+import { handlePress, isChecked } from './utils';
 
 export type Props = {
   /**

@@ -1,19 +1,21 @@
 import * as React from 'react';
 import {
   Animated,
+  I18nManager,
   StyleProp,
   StyleSheet,
+  TextStyle,
   TouchableWithoutFeedback,
   View,
   ViewStyle,
-  I18nManager,
-  TextStyle,
 } from 'react-native';
+
 import color from 'color';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import Text from '../Typography/Text';
+
 import { withInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import Text from '../Typography/Text';
 
 export type Props = React.ComponentPropsWithRef<
   typeof TouchableWithoutFeedback
@@ -120,7 +122,7 @@ const DataTableTitle = ({
         name="arrow-up"
         size={16}
         color={textColor}
-        direction={I18nManager.isRTL ? 'rtl' : 'ltr'}
+        direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
       />
     </Animated.View>
   ) : null;
@@ -138,7 +140,7 @@ const DataTableTitle = ({
             // if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
             numberOfLines > 1
               ? numeric
-                ? I18nManager.isRTL
+                ? I18nManager.getConstants().isRTL
                   ? styles.leftText
                   : styles.rightText
                 : styles.centerText

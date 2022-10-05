@@ -1,6 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
+
 import { styled } from 'linaria/react';
 import icons from 'react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json';
 

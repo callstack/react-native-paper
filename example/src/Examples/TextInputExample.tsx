@@ -6,6 +6,7 @@ import {
   Text,
   View,
 } from 'react-native';
+
 import {
   HelperText,
   List,
@@ -14,6 +15,7 @@ import {
   TextInput,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
 import { useExampleTheme } from '..';
 import { inputReducer, State } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';

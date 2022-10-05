@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+
 import setColor from 'color';
 
 import {

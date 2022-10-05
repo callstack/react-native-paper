@@ -1,4 +1,3 @@
-import type { StackNavigationProp } from '@react-navigation/stack';
 import * as React from 'react';
 import {
   GestureResponderEvent,
@@ -6,6 +5,8 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+
+import type { StackNavigationProp } from '@react-navigation/stack';
 import {
   Appbar,
   Button,
@@ -14,6 +15,7 @@ import {
   Menu,
   TouchableRipple,
 } from 'react-native-paper';
+
 import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 

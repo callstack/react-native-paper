@@ -1,21 +1,22 @@
 import * as React from 'react';
-import { View, ViewStyle, Platform, StyleSheet, StyleProp } from 'react-native';
+import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+
 import color from 'color';
 
-import AppbarContent from './AppbarContent';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme, MD3Elevation } from '../../types';
+import Surface from '../Surface';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
-import Surface from '../Surface';
-import { withInternalTheme } from '../../core/theming';
-import type { MD3Elevation, InternalTheme } from '../../types';
-import {
-  getAppbarColor,
-  renderAppbarContent,
-  DEFAULT_APPBAR_HEIGHT,
-  modeAppbarHeight,
-  AppbarModes,
-} from './utils';
+import AppbarContent from './AppbarContent';
 import AppbarHeader from './AppbarHeader';
+import {
+  AppbarModes,
+  DEFAULT_APPBAR_HEIGHT,
+  getAppbarColor,
+  modeAppbarHeight,
+  renderAppbarContent,
+} from './utils';
 
 export type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
   /**

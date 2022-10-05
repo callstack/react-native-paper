@@ -1,15 +1,16 @@
 import * as React from 'react';
 import {
   Animated,
-  StyleSheet,
   StyleProp,
+  StyleSheet,
   TextStyle,
   useWindowDimensions,
 } from 'react-native';
-import { white, black } from '../styles/themes/v2/colors';
+
 import { withInternalTheme } from '../core/theming';
-import getContrastingColor from '../utils/getContrastingColor';
+import { black, white } from '../styles/themes/v2/colors';
 import type { InternalTheme } from '../types';
+import getContrastingColor from '../utils/getContrastingColor';
 
 const defaultSize = 20;
 

@@ -1,11 +1,13 @@
-import color from 'color';
 import * as React from 'react';
-import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
-import Text from '../Typography/Text';
-import Icon, { IconSource } from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+
+import color from 'color';
+
 import { withInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';
+import Icon, { IconSource } from '../Icon';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -98,6 +100,7 @@ const DrawerItem = ({
         .rgb()
         .toString()
     : undefined;
+  const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
 
   return (
     <View {...rest}>
@@ -130,7 +133,7 @@ const DrawerItem = ({
                 {
                   color: contentColor,
                   marginLeft: labelMargin,
-                  ...(isV3 ? theme.typescale.labelLarge : theme.fonts.medium),
+                  ...font,
                 },
               ]}
             >

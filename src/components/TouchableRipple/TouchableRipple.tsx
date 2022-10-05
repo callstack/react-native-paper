@@ -1,13 +1,14 @@
 import * as React from 'react';
 import {
+  GestureResponderEvent,
+  Platform,
+  StyleProp,
+  StyleSheet,
   TouchableWithoutFeedback,
   View,
   ViewStyle,
-  StyleSheet,
-  StyleProp,
-  GestureResponderEvent,
-  Platform,
 } from 'react-native';
+
 import { withInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';
 import { getTouchableRippleColors } from './utils';

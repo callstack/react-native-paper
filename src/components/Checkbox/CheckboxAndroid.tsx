@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { Animated, View, StyleSheet } from 'react-native';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import { Animated, StyleSheet, View } from 'react-native';
+
 import { withInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, InternalTheme } from '../../types';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { getAndroidSelectionControlColor } from './utils';
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {

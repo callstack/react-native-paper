@@ -1,5 +1,6 @@
-import type { $DeepPartial } from '@callstack/react-theme-provider';
 import type * as React from 'react';
+
+import type { $DeepPartial } from '@callstack/react-theme-provider';
 
 export type Font = {
   fontFamily: string;
@@ -90,7 +91,7 @@ export type MD3Theme = ThemeBase & {
   version: 3;
   isV3: true;
   colors: MD3Colors;
-  typescale: MD3Typescale;
+  fonts: MD3Typescale;
 };
 
 export type MD2Theme = ThemeBase & {

@@ -1,21 +1,22 @@
 import * as React from 'react';
 import {
+  AccessibilityState,
   Animated,
+  StyleProp,
+  StyleSheet,
   View,
   ViewStyle,
-  StyleSheet,
-  StyleProp,
-  AccessibilityState,
 } from 'react-native';
+
+import { withInternalTheme } from '../../core/theming';
+import type { $RemoveChildren, InternalTheme } from '../../types';
 import ActivityIndicator from '../ActivityIndicator';
-import Surface from '../Surface';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
-import Text from '../Typography/Text';
+import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { withInternalTheme } from '../../core/theming';
+import Text from '../Typography/Text';
 import { getExtendedFabStyle, getFABColors, getFabStyle } from './utils';
-import type { $RemoveChildren, InternalTheme } from '../../types';
 
 type FABSize = 'small' | 'medium' | 'large';
 
@@ -207,18 +208,21 @@ const FAB = ({
   const isFlatMode = mode === 'flat';
   const iconSize = isLargeSize ? 36 : 24;
   const loadingIndicatorSize = isLargeSize ? 24 : 18;
+  const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
 
   const fabStyle = getFabStyle({ customSize, size, theme });
   const extendedStyle = getExtendedFabStyle({ customSize, theme });
   const textStyle = {
     color: foregroundColor,
-    ...(isV3 ? theme.typescale.labelLarge : theme.fonts.medium),
+    ...font,
   };
 
   const { borderRadius = fabStyle.borderRadius } = (StyleSheet.flatten(style) ||
     {}) as ViewStyle;
 
   const md3Elevation = isFlatMode || disabled ? 0 : 3;
+
+  const newAccessibilityState = { ...accessibilityState, disabled };
 
   return (
     <Surface
@@ -253,7 +257,7 @@ const FAB = ({
         disabled={disabled}
         accessibilityLabel={accessibilityLabel}
         accessibilityRole="button"
-        accessibilityState={{ ...accessibilityState, disabled }}
+        accessibilityState={newAccessibilityState}
         testID={testID}
       >
         <View

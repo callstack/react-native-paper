@@ -1,6 +1,8 @@
 import * as React from 'react';
-import renderer from 'react-test-renderer';
+
 import { render } from '@testing-library/react-native';
+import renderer from 'react-test-renderer';
+
 import DataTable from '../DataTable/DataTable.tsx';
 
 it('renders data table header', () => {

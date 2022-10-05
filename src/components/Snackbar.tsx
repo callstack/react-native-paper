@@ -1,19 +1,19 @@
 import * as React from 'react';
 import {
   Animated,
+  Easing,
   SafeAreaView,
   StyleProp,
   StyleSheet,
-  ViewStyle,
   View,
-  Easing,
+  ViewStyle,
 } from 'react-native';
 
+import { withInternalTheme } from '../core/theming';
+import type { InternalTheme } from '../types';
 import Button from './Button/Button';
 import Surface from './Surface';
 import Text from './Typography/Text';
-import { withInternalTheme } from '../core/theming';
-import type { InternalTheme } from '../types';
 
 export type Props = React.ComponentProps<typeof Surface> & {
   /**

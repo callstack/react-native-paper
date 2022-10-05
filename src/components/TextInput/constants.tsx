@@ -18,6 +18,8 @@ export const MD2_MIN_HEIGHT = 64;
 export const MD3_MIN_HEIGHT = 56;
 export const MD3_ADORNMENT_OFFSET = 16;
 export const MD2_ADORNMENT_OFFSET = 12;
+export const LABEL_PADDING_TOP_DENSE = 24;
+export const LABEL_PADDING_TOP = 8;
 
 // Text input flat
 export const MD2_LABEL_PADDING_TOP = 30;
@@ -30,7 +32,6 @@ export const MD2_FLAT_INPUT_OFFSET = 8;
 export const MD3_FLAT_INPUT_OFFSET = 16;
 
 export const MINIMIZED_LABEL_Y_OFFSET = -18;
-export const LABEL_PADDING_TOP_DENSE = 24;
 export const MIN_DENSE_HEIGHT_WL = 52;
 export const MIN_DENSE_HEIGHT = 40;
 
@@ -43,5 +44,4 @@ export const MD2_OUTLINED_INPUT_OFFSET = 8;
 export const MD3_OUTLINED_INPUT_OFFSET = 16;
 
 export const OUTLINE_MINIMIZED_LABEL_Y_OFFSET = -6;
-export const LABEL_PADDING_TOP = 8;
 export const MIN_DENSE_HEIGHT_OUTLINED = 48;

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
+
 import {
   Badge,
   IconButton,
@@ -9,6 +10,7 @@ import {
   Paragraph,
   Switch,
 } from 'react-native-paper';
+
 import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 

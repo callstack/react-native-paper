@@ -1,31 +1,31 @@
 import * as React from 'react';
 import {
-  Platform,
-  StyleProp,
-  StyleSheet,
   Animated,
   BackHandler,
   Dimensions,
   Easing,
+  findNodeHandle,
   I18nManager,
   LayoutRectangle,
+  NativeEventSubscription,
+  Platform,
+  ScrollView,
+  StyleProp,
+  StyleSheet,
   TouchableWithoutFeedback,
   View,
   ViewStyle,
-  ScrollView,
-  findNodeHandle,
-  NativeEventSubscription,
 } from 'react-native';
+
 import color from 'color';
 
+import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 import { withInternalTheme } from '../../core/theming';
-import type { $Omit } from '../../types';
+import type { $Omit, InternalTheme } from '../../types';
+import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 import MenuItem from './MenuItem';
-import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
-import { addEventListener } from '../../utils/addEventListener';
-import type { InternalTheme } from '../../types';
 
 export type Props = {
   /**
@@ -537,7 +537,7 @@ class Menu extends React.Component<Props, State> {
 
     const positionStyle = {
       top: this.isCoordinate(anchor) ? top : top + additionalVerticalValue,
-      ...(I18nManager.isRTL ? { right: left } : { left }),
+      ...(I18nManager.getConstants().isRTL ? { right: left } : { left }),
     };
 
     return (

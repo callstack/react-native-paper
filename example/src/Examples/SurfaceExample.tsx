@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+
 import { MD3Elevation, Surface, Text } from 'react-native-paper';
+
 import { useExampleTheme } from '..';
 import { isWeb } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';

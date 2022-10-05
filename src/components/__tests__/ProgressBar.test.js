@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { View } from 'react-native';
+
 import { act } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
+
 import ProgressBar from '../ProgressBar.tsx';
 
 const layoutEvent = {

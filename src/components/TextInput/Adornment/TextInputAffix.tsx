@@ -1,19 +1,20 @@
 import React from 'react';
-import color from 'color';
 import {
-  Text,
-  StyleSheet,
-  StyleProp,
-  TextStyle,
-  LayoutChangeEvent,
   Animated,
+  LayoutChangeEvent,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
   ViewStyle,
 } from 'react-native';
 
+import color from 'color';
+
 import { withInternalTheme } from '../../../core/theming';
-import { AdornmentSide } from './enums';
 import type { InternalTheme } from '../../../types';
 import { getConstants } from '../helpers';
+import { AdornmentSide } from './enums';
 
 export type Props = {
   /**

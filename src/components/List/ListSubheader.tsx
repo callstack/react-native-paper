@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp, TextStyle } from 'react-native';
+import { StyleProp, StyleSheet, TextStyle } from 'react-native';
+
 import color from 'color';
-import Text from '../Typography/Text';
-import { useInternalTheme } from '../../core/theming';
 import type { InternalTheme } from 'src/types';
+
+import { useInternalTheme } from '../../core/theming';
+import Text from '../Typography/Text';
 
 export type Props = React.ComponentProps<typeof Text> & {
   /**
@@ -36,6 +38,8 @@ const ListSubheader = ({ style, theme: overrideTheme, ...rest }: Props) => {
     ? theme.colors.onSurfaceVariant
     : color(theme.colors.text).alpha(0.54).rgb().string();
 
+  const font = theme.isV3 ? theme.fonts.bodyMedium : theme.fonts.medium;
+
   return (
     <Text
       variant="bodyMedium"
@@ -45,7 +49,7 @@ const ListSubheader = ({ style, theme: overrideTheme, ...rest }: Props) => {
         styles.container,
         {
           color: textColor,
-          ...(theme.isV3 ? theme.typescale.bodyMedium : theme.fonts.medium),
+          ...font,
         },
         style,
       ]}

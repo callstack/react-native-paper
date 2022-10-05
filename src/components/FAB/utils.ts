@@ -1,13 +1,15 @@
-import color from 'color';
 import {
   Animated,
   I18nManager,
   StyleProp,
-  ViewStyle,
   StyleSheet,
+  ViewStyle,
 } from 'react-native';
+
+import color from 'color';
+
+import { black, white } from '../../styles/themes/v2/colors';
 import type { InternalTheme } from '../../types';
-import { white, black } from '../../styles/themes/v2/colors';
 import getContrastingColor from '../../utils/getContrastingColor';
 
 type GetCombinedStylesProps = {

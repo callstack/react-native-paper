@@ -1,15 +1,16 @@
 import * as React from 'react';
 import {
   BackgroundPropType,
-  StyleProp,
   Platform,
+  StyleProp,
+  StyleSheet,
   TouchableHighlight,
   TouchableNativeFeedback,
   TouchableWithoutFeedback,
   View,
   ViewStyle,
-  StyleSheet,
 } from 'react-native';
+
 import { withInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';
 import { getTouchableRippleColors } from './utils';

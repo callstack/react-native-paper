@@ -1,6 +1,8 @@
-import { $DeepPartial, createTheming } from '@callstack/react-theme-provider';
 import type { ComponentType } from 'react';
+
+import { $DeepPartial, createTheming } from '@callstack/react-theme-provider';
 import type { InternalTheme, MD3Theme } from 'src/types';
+
 import {
   MD2DarkTheme,
   MD2LightTheme,
@@ -26,7 +28,7 @@ export const useInternalTheme = (
 
 export const withInternalTheme = <Props extends { theme: InternalTheme }, C>(
   WrappedComponent: ComponentType<Props & { theme: InternalTheme }> & C
-) => withTheme<Props, C, InternalTheme>(WrappedComponent);
+) => withTheme<Props, C>(WrappedComponent);
 
 export const defaultThemesByVersion = {
   2: {

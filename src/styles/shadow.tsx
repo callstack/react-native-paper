@@ -1,5 +1,6 @@
-import * as MD2Colors from './themes/v2/colors';
 import { Animated } from 'react-native';
+
+import * as MD2Colors from './themes/v2/colors';
 import { MD3Colors } from './themes/v3/tokens';
 
 const SHADOW_COLOR = MD2Colors.black;

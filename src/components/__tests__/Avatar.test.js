@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import renderer from 'react-test-renderer';
+
 import { fireEvent, render } from '@testing-library/react-native';
-import * as Avatar from '../Avatar/Avatar.tsx';
+import renderer from 'react-test-renderer';
+
 import { red500 } from '../../styles/themes/v2/colors';
+import * as Avatar from '../Avatar/Avatar.tsx';
 
 const styles = StyleSheet.create({
   bgColor: {

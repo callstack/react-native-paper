@@ -1,17 +1,20 @@
 import * as React from 'react';
-import { View, StyleSheet, I18nManager } from 'react-native';
+import { I18nManager, StyleSheet, View } from 'react-native';
+
 import { DrawerContentScrollView } from '@react-navigation/drawer';
+import * as Updates from 'expo-updates';
 import {
   Badge,
   Drawer,
+  MD2Colors,
+  MD3Colors,
   Switch,
   Text,
   TouchableRipple,
-  MD2Colors,
-  MD3Colors,
 } from 'react-native-paper';
-import * as Updates from 'expo-updates';
+
 import { isWeb } from '../utils';
+
 import { PreferencesContext, useExampleTheme } from './';
 
 type Props = {
