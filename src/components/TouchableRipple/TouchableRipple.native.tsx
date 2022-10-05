@@ -1,14 +1,12 @@
 import * as React from 'react';
 import {
-  BackgroundPropType,
+  PressableAndroidRippleConfig,
   StyleProp,
   Platform,
-  TouchableHighlight,
-  TouchableNativeFeedback,
-  TouchableWithoutFeedback,
-  View,
   ViewStyle,
   StyleSheet,
+  Pressable,
+  GestureResponderEvent,
 } from 'react-native';
 
 import { withTheme } from '../../core/theming';
@@ -18,9 +16,9 @@ import { getTouchableRippleColors } from './utils';
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
 
-type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
+type Props = React.ComponentProps<typeof Pressable> & {
   borderless?: boolean;
-  background?: BackgroundPropType;
+  background?: PressableAndroidRippleConfig;
   disabled?: boolean;
   onPress?: () => void | null;
   rippleColor?: string;
@@ -41,6 +39,8 @@ const TouchableRipple = ({
   theme,
   ...rest
 }: Props) => {
+  const [showUnderlay, setShowUnderlay] = React.useState<boolean>(false);
+
   const disabled = disabledProp || !rest.onPress;
   const { calculatedRippleColor, calculatedUnderlayColor } =
     getTouchableRippleColors({
@@ -58,32 +58,45 @@ const TouchableRipple = ({
 
   if (TouchableRipple.supported) {
     return (
-      <TouchableNativeFeedback
+      <Pressable
         {...rest}
         disabled={disabled}
-        useForeground={useForeground}
-        background={
+        style={[borderless && styles.overflowHidden, style]}
+        android_ripple={
           background != null
             ? background
-            : TouchableNativeFeedback.Ripple(calculatedRippleColor, borderless)
+            : {
+                color: calculatedRippleColor,
+                borderless,
+                foreground: useForeground,
+              }
         }
       >
-        <View style={[borderless && styles.overflowHidden, style]}>
-          {React.Children.only(children)}
-        </View>
-      </TouchableNativeFeedback>
+        {React.Children.only(children)}
+      </Pressable>
     );
   }
 
   return (
-    <TouchableHighlight
+    <Pressable
       {...rest}
       disabled={disabled}
-      style={[borderless && styles.overflowHidden, style]}
-      underlayColor={calculatedUnderlayColor}
+      style={[
+        borderless && styles.overflowHidden,
+        showUnderlay && { backgroundColor: calculatedUnderlayColor },
+        style,
+      ]}
+      onPressIn={(e: GestureResponderEvent) => {
+        setShowUnderlay(true);
+        rest.onPressIn?.(e);
+      }}
+      onPressOut={(e: GestureResponderEvent) => {
+        setShowUnderlay(false);
+        rest.onPressOut?.(e);
+      }}
     >
       {React.Children.only(children)}
-    </TouchableHighlight>
+    </Pressable>
   );
 };
 

@@ -147,6 +147,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                   }
                 >
                   <View
+                    accessibilityComponentType="button"
                     accessibilityLabel="search"
                     accessibilityRole="button"
                     accessibilityState={
@@ -154,8 +155,11 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                         "disabled": true,
                       }
                     }
+                    accessibilityTraits="button"
                     accessible={true}
-                    focusable={false}
+                    centered={true}
+                    collapsable={false}
+                    focusable={true}
                     hitSlop={
                       Object {
                         "bottom": 6,
@@ -164,7 +168,9 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                         "top": 6,
                       }
                     }
+                    onBlur={[Function]}
                     onClick={[Function]}
+                    onFocus={[Function]}
                     onResponderGrant={[Function]}
                     onResponderMove={[Function]}
                     onResponderRelease={[Function]}
@@ -176,6 +182,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                         Object {
                           "overflow": "hidden",
                         },
+                        false,
                         Object {
                           "alignItems": "center",
                           "flexGrow": 1,
@@ -288,6 +295,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                     }
                   >
                     <View
+                      accessibilityComponentType="button"
                       accessibilityLabel="clear"
                       accessibilityRole="button"
                       accessibilityState={
@@ -295,7 +303,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                           "disabled": false,
                         }
                       }
+                      accessibilityTraits="button"
                       accessible={true}
+                      centered={true}
+                      collapsable={false}
                       focusable={true}
                       hitSlop={
                         Object {
@@ -305,7 +316,9 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                           "top": 6,
                         }
                       }
+                      onBlur={[Function]}
                       onClick={[Function]}
+                      onFocus={[Function]}
                       onResponderGrant={[Function]}
                       onResponderMove={[Function]}
                       onResponderRelease={[Function]}
@@ -317,6 +330,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                           Object {
                             "overflow": "hidden",
                           },
+                          false,
                           Object {
                             "alignItems": "center",
                             "flexGrow": 1,
@@ -459,6 +473,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             }
           >
             <View
+              accessibilityComponentType="button"
               accessibilityLabel="Back"
               accessibilityRole="button"
               accessibilityState={
@@ -466,7 +481,10 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                   "disabled": false,
                 }
               }
+              accessibilityTraits="button"
               accessible={true}
+              centered={true}
+              collapsable={false}
               focusable={true}
               hitSlop={
                 Object {
@@ -476,7 +494,9 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                   "top": 6,
                 }
               }
+              onBlur={[Function]}
               onClick={[Function]}
+              onFocus={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -488,6 +508,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                   Object {
                     "overflow": "hidden",
                   },
+                  false,
                   Object {
                     "alignItems": "center",
                     "flexGrow": 1,
@@ -697,13 +718,17 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             }
           >
             <View
+              accessibilityComponentType="button"
               accessibilityRole="button"
               accessibilityState={
                 Object {
                   "disabled": false,
                 }
               }
+              accessibilityTraits="button"
               accessible={true}
+              centered={true}
+              collapsable={false}
               focusable={true}
               hitSlop={
                 Object {
@@ -713,7 +738,9 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                   "top": 6,
                 }
               }
+              onBlur={[Function]}
               onClick={[Function]}
+              onFocus={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -725,6 +752,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                   Object {
                     "overflow": "hidden",
                   },
+                  false,
                   Object {
                     "alignItems": "center",
                     "flexGrow": 1,

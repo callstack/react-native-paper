@@ -106,7 +106,6 @@ const DrawerItem = ({
     <View {...rest}>
       <TouchableRipple
         borderless
-        delayPressIn={0}
         onPress={onPress}
         style={[
           styles.container,

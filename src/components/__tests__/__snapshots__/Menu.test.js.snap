@@ -59,8 +59,11 @@ exports[`renders menu with content styles 1`] = `
             }
           }
           accessible={true}
-          focusable={false}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -72,6 +75,7 @@ exports[`renders menu with content styles 1`] = `
               Object {
                 "overflow": "hidden",
               },
+              false,
               Object {
                 "borderRadius": 20,
               },
@@ -204,8 +208,11 @@ exports[`renders not visible menu 1`] = `
             }
           }
           accessible={true}
-          focusable={false}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -217,6 +224,7 @@ exports[`renders not visible menu 1`] = `
               Object {
                 "overflow": "hidden",
               },
+              false,
               Object {
                 "borderRadius": 20,
               },
@@ -349,8 +357,11 @@ exports[`renders visible menu 1`] = `
             }
           }
           accessible={true}
-          focusable={false}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
           onClick={[Function]}
+          onFocus={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -362,6 +373,7 @@ exports[`renders visible menu 1`] = `
               Object {
                 "overflow": "hidden",
               },
+              false,
               Object {
                 "borderRadius": 20,
               },

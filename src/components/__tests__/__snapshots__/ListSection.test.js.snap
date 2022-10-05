@@ -215,8 +215,11 @@ exports[`renders list section with custom title style 1`] = `
       }
     }
     accessible={true}
-    focusable={false}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -225,6 +228,7 @@ exports[`renders list section with custom title style 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {
@@ -333,8 +337,11 @@ exports[`renders list section with custom title style 1`] = `
       }
     }
     accessible={true}
-    focusable={false}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -343,6 +350,7 @@ exports[`renders list section with custom title style 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {
@@ -660,8 +668,11 @@ exports[`renders list section with subheader 1`] = `
       }
     }
     accessible={true}
-    focusable={false}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -670,6 +681,7 @@ exports[`renders list section with subheader 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {
@@ -778,8 +790,11 @@ exports[`renders list section with subheader 1`] = `
       }
     }
     accessible={true}
-    focusable={false}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -788,6 +803,7 @@ exports[`renders list section with subheader 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {
@@ -1067,8 +1083,11 @@ exports[`renders list section without subheader 1`] = `
       }
     }
     accessible={true}
-    focusable={false}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1077,6 +1096,7 @@ exports[`renders list section without subheader 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {
@@ -1185,8 +1205,11 @@ exports[`renders list section without subheader 1`] = `
       }
     }
     accessible={true}
-    focusable={false}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1195,6 +1218,7 @@ exports[`renders list section without subheader 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {

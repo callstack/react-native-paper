@@ -265,8 +265,11 @@ exports[`renders snackbar with action button 1`] = `
                   }
                 }
                 accessible={true}
+                collapsable={false}
                 focusable={true}
+                onBlur={[Function]}
                 onClick={[Function]}
+                onFocus={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -278,6 +281,7 @@ exports[`renders snackbar with action button 1`] = `
                     Object {
                       "overflow": "hidden",
                     },
+                    false,
                     Object {
                       "borderRadius": 20,
                     },
