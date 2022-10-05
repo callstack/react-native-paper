@@ -18,7 +18,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Content that will be displayed inside banner.
    */
-  children: string;
+  children: React.ReactNode;
   /**
    * Icon to display for the `Banner`. Can be an image.
    */
