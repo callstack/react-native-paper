@@ -12,6 +12,9 @@ import {
   MD3LightTheme,
   MD2DarkTheme,
   MD2LightTheme,
+  MD2Theme,
+  MD3Theme,
+  useTheme,
 } from 'react-native-paper';
 import App from './RootNavigator';
 import DrawerItems from './DrawerItems';
@@ -22,6 +25,8 @@ const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
 
 export const PreferencesContext = React.createContext<any>(null);
+
+export const useExampleTheme = () => useTheme<MD2Theme | MD3Theme>();
 
 const DrawerContent = () => {
   return (

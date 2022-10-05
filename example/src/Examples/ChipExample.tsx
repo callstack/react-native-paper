@@ -1,19 +1,13 @@
-import * as React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import {
-  Chip,
-  List,
-  useTheme,
-  Snackbar,
-  MD3Colors,
-  MD2Colors,
-} from 'react-native-paper';
 import color from 'color';
+import * as React from 'react';
+import { Image, StyleSheet, View } from 'react-native';
+import { Chip, List, MD2Colors, MD3Colors, Snackbar } from 'react-native-paper';
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const ChipExample = () => {
   const [visible, setVisible] = React.useState<boolean>(false);
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
   const customColor = isV3 ? MD3Colors.secondary20 : MD2Colors.purple900;
 
   return (

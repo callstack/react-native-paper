@@ -16,7 +16,9 @@ export const {
   useTheme: useAppTheme,
 } = createTheming<unknown>(MD3LightTheme);
 
-export const useTheme = () => useAppTheme<MD3Theme>();
+export function useTheme<T = MD3Theme>(overrides?: $DeepPartial<T>) {
+  return useAppTheme<T>(overrides);
+}
 
 export const useInternalTheme = (
   themeOverrides?: $DeepPartial<InternalTheme>

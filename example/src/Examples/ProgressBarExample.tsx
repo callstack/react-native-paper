@@ -1,19 +1,19 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import {
   Button,
-  ProgressBar,
-  Paragraph,
   MD2Colors,
   MD3Colors,
-  useTheme,
+  Paragraph,
+  ProgressBar,
 } from 'react-native-paper';
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const ProgressBarExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [progress, setProgress] = React.useState<number>(0.3);
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
 
   return (
     <ScreenWrapper contentContainerStyle={styles.container}>

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { RadioButton, useTheme } from 'react-native-paper';
+import { RadioButton } from 'react-native-paper';
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const RadioButtonItemExample = () => {
@@ -12,7 +13,7 @@ const RadioButtonItemExample = () => {
   const [checkedDisabled, setCheckedDisabled] = React.useState<boolean>(true);
   const [checkedLabelVariant, setCheckedLabelVariant] = React.useState(true);
 
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
 
   return (
     <ScreenWrapper style={styles.container}>

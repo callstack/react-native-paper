@@ -1,10 +1,10 @@
+import { useExampleTheme } from '../..';
 import * as React from 'react';
 import {
   Paragraph,
-  Text,
-  Text as NativeText,
-  useTheme,
   Subheading,
+  Text as NativeText,
+  Text,
 } from 'react-native-paper';
 
 type Props = React.ComponentProps<typeof NativeText> & {
@@ -12,7 +12,7 @@ type Props = React.ComponentProps<typeof NativeText> & {
 };
 
 export const TextComponent = ({ isSubheading = false, ...props }: Props) => {
-  const theme = useTheme();
+  const theme = useExampleTheme();
 
   if (theme.isV3) {
     return (

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { Checkbox, useTheme } from 'react-native-paper';
+import { Checkbox } from 'react-native-paper';
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const CheckboxExample = () => {
@@ -12,7 +13,7 @@ const CheckboxExample = () => {
   const [checkedDisabled, setCheckedDisabled] = React.useState<boolean>(true);
   const [checkedLabelVariant, setCheckedLabelVariant] = React.useState(true);
 
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
 
   return (
     <ScreenWrapper style={styles.container}>

@@ -8,12 +8,11 @@ import {
   Text,
   TouchableRipple,
   MD2Colors,
-  useTheme,
   MD3Colors,
 } from 'react-native-paper';
 import * as Updates from 'expo-updates';
 import { isWeb } from '../utils';
-import { PreferencesContext } from './';
+import { PreferencesContext, useExampleTheme } from './';
 
 type Props = {
   toggleTheme: () => void;
@@ -94,7 +93,7 @@ const DrawerItems = ({
 
   const _setDrawerItem = (index: number) => setDrawerItemIndex(index);
 
-  const { isV3, colors } = useTheme();
+  const { isV3, colors } = useExampleTheme();
 
   const _handleToggleRTL = () => {
     toggleRTL();

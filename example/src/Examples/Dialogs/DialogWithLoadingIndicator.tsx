@@ -1,13 +1,8 @@
 import * as React from 'react';
-import { ActivityIndicator, Platform, View, StyleSheet } from 'react-native';
-import {
-  MD2Colors,
-  Portal,
-  Dialog,
-  useTheme,
-  MD3Colors,
-} from 'react-native-paper';
+import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
+import { Dialog, MD2Colors, MD3Colors, Portal } from 'react-native-paper';
 import { TextComponent } from './DialogTextComponent';
+import { useExampleTheme } from '../..';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -18,7 +13,7 @@ const DialogWithLoadingIndicator = ({
   visible: boolean;
   close: () => void;
 }) => {
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
   return (
     <Portal>
       <Dialog onDismiss={close} visible={visible}>

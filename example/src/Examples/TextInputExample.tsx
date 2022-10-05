@@ -1,20 +1,20 @@
 import * as React from 'react';
 import {
-  StyleSheet,
-  View,
   KeyboardAvoidingView,
   Platform,
+  StyleSheet,
   Text,
+  View,
 } from 'react-native';
 import {
-  TextInput,
   HelperText,
-  useTheme,
+  List,
   MD2Colors,
   MD3Colors,
-  List,
+  TextInput,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useExampleTheme } from '..';
 import { inputReducer, State } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -109,7 +109,7 @@ const TextInputExample = () => {
 
   const _isUsernameValid = (name: string) => /^[a-zA-Z]*$/.test(name);
 
-  const theme = useTheme();
+  const theme = useExampleTheme();
 
   const inputActionHandler = (type: keyof State, payload: string) =>
     dispatch({

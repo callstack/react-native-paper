@@ -1,7 +1,8 @@
+import type { StackNavigationProp } from '@react-navigation/stack';
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { Caption, Searchbar, Text, useTheme } from 'react-native-paper';
-import type { StackNavigationProp } from '@react-navigation/stack';
+import { Caption, Searchbar, Text } from 'react-native-paper';
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 type Props = {
@@ -14,7 +15,7 @@ const SearchExample = ({ navigation }: Props) => {
   const [thirdQuery, setThirdQuery] = React.useState<string>('');
   const [fourthQuery, setFourthQuery] = React.useState<string>('');
 
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
 
   const TextComponent = isV3 ? Text : Caption;
 
