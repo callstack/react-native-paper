@@ -72,7 +72,7 @@ const config = {
           },
           {
             type: 'doc',
-            docId: 'components/activity-indicator',
+            docId: 'components/activityindicator',
             position: 'left',
             label: 'Components',
           },

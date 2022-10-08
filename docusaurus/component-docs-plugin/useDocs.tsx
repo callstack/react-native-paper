@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 import { usePluginData } from '@docusaurus/useGlobalData';
 
 import { pluginName } from './config';

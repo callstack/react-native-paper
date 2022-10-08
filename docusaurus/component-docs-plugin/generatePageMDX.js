@@ -1,7 +1,7 @@
 function generatePageMDX(doc) {
   const description = doc.description
     .replace(/<\/br>/g, '')
-    .replace(/style="[a-zA-Z0-9:;\.\s\(\)\-\,]*"/gi, '')
+    .replace(/style="[a-zA-Z0-9:;.\s()\-,]*"/gi, '')
     .replace(/src="screenshots/g, 'src="/screenshots');
 
   const mdx = `

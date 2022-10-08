@@ -1,4 +1,5 @@
 import React from 'react';
+// eslint-disable-next-line import/no-unresolved
 import useDoc from '@site/component-docs-plugin/useDocs';
 
 const typeDefinitions = {

@@ -21,7 +21,7 @@ async function componentsPlugin() {
       // Create root components category.
       createCategory('Components', '.');
 
-      const pages = getPages().map((page) => {
+      let pages = getPages().map((page) => {
         const filepath = page.file;
         const root = page.file.split('/').slice(0, -1).join('/');
         const doc = parseComponentDocs(filepath, { root });
@@ -31,13 +31,33 @@ async function componentsPlugin() {
         };
       });
 
+      pages = pages.map((page) => {
+        const group = page.group || page.doc.group;
+        page.group = group;
+        if (
+          pages.findIndex(({ doc }) =>
+            doc.title.includes(page.doc.title + '.')
+          ) !== -1
+        ) {
+          page.group = page.doc.title;
+        }
+        page.doc.link = page.doc.link.replaceAll('-', '');
+        return page;
+      });
+
       for (const page of pages) {
         // Create subcategory if necessary.
-        if (page.doc.group) {
-          createCategory(page.doc.group, page.doc.group ?? '.');
+        if (page.group) {
+          createCategory(page.group, page.group ?? '.');
         }
         fs.writeFile(
-          path.join(docsRootDir, page.doc.group ?? '.', `${page.doc.link}.mdx`),
+          path.join(
+            docsRootDir,
+            fs.existsSync(path.join(docsRootDir, page.doc.link))
+              ? page.doc.link
+              : page.group ?? '.',
+            `${page.doc.link}.mdx`
+          ),
           generatePageMDX(page.doc),
           () => {}
         );
