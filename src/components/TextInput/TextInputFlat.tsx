@@ -68,7 +68,7 @@ const TextInputFlat = ({
   left,
   right,
   placeholderTextColor,
-  testID = 'text-input',
+  testID = 'text-input-flat',
   ...rest
 }: ChildTextInputProps) => {
   const isAndroid = Platform.OS === 'android';
@@ -339,7 +339,7 @@ const TextInputFlat = ({
         )}
         <InputLabel parentState={parentState} labelProps={labelProps} />
         {render?.({
-          testID: `${testID}-flat`,
+          testID,
           ...rest,
           ref: innerRef,
           onChangeText,

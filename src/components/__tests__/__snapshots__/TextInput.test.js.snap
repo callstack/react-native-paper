@@ -99,7 +99,7 @@ exports[`correctly applies a component as the text label 1`] = `
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-active"
+        testID="text-input-flat-label-active"
       >
         <Text
           style={
@@ -144,7 +144,7 @@ exports[`correctly applies a component as the text label 1`] = `
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-inactive"
+        testID="text-input-flat-label-inactive"
       >
         <Text
           style={
@@ -307,7 +307,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-active"
+        testID="text-input-flat-label-active"
       >
         Flat input
       </Text>
@@ -344,7 +344,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-inactive"
+        testID="text-input-flat-label-inactive"
       >
         Flat input
       </Text>
@@ -554,7 +554,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "writingDirection": "ltr",
             }
           }
-          testID="text-input-label-active"
+          testID="text-input-outlined-label-active"
         >
           Outline Input
         </Text>
@@ -590,7 +590,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "writingDirection": "ltr",
             }
           }
-          testID="text-input-label-inactive"
+          testID="text-input-outlined-label-inactive"
         >
           Outline Input
         </Text>
@@ -744,7 +744,7 @@ exports[`correctly applies textAlign center 1`] = `
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-active"
+        testID="text-input-flat-label-active"
       >
         Flat input
       </Text>
@@ -781,7 +781,7 @@ exports[`correctly applies textAlign center 1`] = `
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-inactive"
+        testID="text-input-flat-label-inactive"
       >
         Flat input
       </Text>
@@ -936,7 +936,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-active"
+        testID="text-input-flat-label-active"
       >
         Flat input
       </Text>
@@ -973,7 +973,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-inactive"
+        testID="text-input-flat-label-inactive"
       >
         Flat input
       </Text>
@@ -1298,7 +1298,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-active"
+        testID="text-input-flat-label-active"
       >
         Flat input
       </Text>
@@ -1335,7 +1335,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-inactive"
+        testID="text-input-flat-label-inactive"
       >
         Flat input
       </Text>
