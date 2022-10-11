@@ -59,6 +59,8 @@ exports[`renders list item with custom description 1`] = `
             },
             Object {
               "color": "rgba(28, 27, 31, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
             },
             Object {
               "writingDirection": "ltr",
@@ -338,6 +340,8 @@ exports[`renders list item with custom title and description styles 1`] = `
             },
             Object {
               "color": "rgba(28, 27, 31, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
             },
             Object {
               "writingDirection": "ltr",
@@ -368,6 +372,8 @@ exports[`renders list item with custom title and description styles 1`] = `
             },
             Object {
               "color": "rgba(28, 27, 31, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
             },
             Object {
               "writingDirection": "ltr",
@@ -455,6 +461,8 @@ exports[`renders list item with left and right items 1`] = `
             },
             Object {
               "color": "rgba(28, 27, 31, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
             },
             Object {
               "writingDirection": "ltr",
@@ -483,6 +491,8 @@ exports[`renders list item with left and right items 1`] = `
             },
             Object {
               "color": "rgba(28, 27, 31, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
             },
             Object {
               "writingDirection": "ltr",
@@ -641,6 +651,8 @@ exports[`renders list item with left item 1`] = `
             },
             Object {
               "color": "rgba(28, 27, 31, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
             },
             Object {
               "writingDirection": "ltr",
@@ -723,6 +735,8 @@ exports[`renders list item with right item 1`] = `
             },
             Object {
               "color": "rgba(28, 27, 31, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
             },
             Object {
               "writingDirection": "ltr",
@@ -808,6 +822,8 @@ exports[`renders list item with title and description 1`] = `
             },
             Object {
               "color": "rgba(28, 27, 31, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
             },
             Object {
               "writingDirection": "ltr",
@@ -836,6 +852,8 @@ exports[`renders list item with title and description 1`] = `
             },
             Object {
               "color": "rgba(28, 27, 31, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
             },
             Object {
               "writingDirection": "ltr",
@@ -918,6 +936,8 @@ exports[`renders with a description with typeof number 1`] = `
             },
             Object {
               "color": "rgba(28, 27, 31, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
             },
             Object {
               "writingDirection": "ltr",
@@ -948,6 +968,8 @@ exports[`renders with a description with typeof number 1`] = `
             },
             Object {
               "color": "rgba(28, 27, 31, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
             },
             Object {
               "writingDirection": "ltr",

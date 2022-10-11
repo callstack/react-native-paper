@@ -40,6 +40,8 @@ exports[`renders data table cell 1`] = `
         },
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
         },
         Object {
           "writingDirection": "ltr",
@@ -107,6 +109,8 @@ exports[`renders data table header 1`] = `
           },
           Object {
             "color": "rgba(28, 27, 31, 1)",
+            "fontFamily": "System",
+            "fontWeight": "400",
           },
           Object {
             "writingDirection": "ltr",
@@ -170,6 +174,8 @@ exports[`renders data table header 1`] = `
           },
           Object {
             "color": "rgba(28, 27, 31, 1)",
+            "fontFamily": "System",
+            "fontWeight": "400",
           },
           Object {
             "writingDirection": "ltr",
@@ -225,6 +231,8 @@ exports[`renders data table pagination 1`] = `
         },
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
         },
         Object {
           "writingDirection": "ltr",
@@ -500,6 +508,8 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
         },
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
         },
         Object {
           "writingDirection": "ltr",
@@ -999,6 +1009,8 @@ exports[`renders data table pagination with label 1`] = `
         },
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
         },
         Object {
           "writingDirection": "ltr",
@@ -1286,6 +1298,8 @@ exports[`renders data table pagination with options select 1`] = `
           },
           Object {
             "color": "rgba(28, 27, 31, 1)",
+            "fontFamily": "System",
+            "fontWeight": "400",
           },
           Object {
             "writingDirection": "ltr",
@@ -1496,6 +1510,8 @@ exports[`renders data table pagination with options select 1`] = `
         },
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
         },
         Object {
           "writingDirection": "ltr",
@@ -2041,6 +2057,8 @@ exports[`renders data table title with press handler 1`] = `
         },
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
         },
         Object {
           "writingDirection": "ltr",
@@ -2141,6 +2159,8 @@ exports[`renders data table title with sort icon 1`] = `
         },
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
         },
         Object {
           "writingDirection": "ltr",
@@ -2211,6 +2231,8 @@ exports[`renders right aligned data table cell 1`] = `
         },
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
         },
         Object {
           "writingDirection": "ltr",
@@ -2264,6 +2286,8 @@ exports[`renders right aligned data table title 1`] = `
         },
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
         },
         Object {
           "writingDirection": "ltr",
