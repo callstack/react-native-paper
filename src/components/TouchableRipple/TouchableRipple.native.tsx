@@ -56,6 +56,16 @@ const TouchableRipple = ({
     Platform.Version >= ANDROID_VERSION_PIE &&
     borderless;
 
+  const handlePressIn = (e: GestureResponderEvent) => {
+    setShowUnderlay(true);
+    rest.onPressIn?.(e);
+  };
+
+  const handlePressOut = (e: GestureResponderEvent) => {
+    setShowUnderlay(false);
+    rest.onPressOut?.(e);
+  };
+
   if (TouchableRipple.supported) {
     return (
       <Pressable
@@ -86,14 +96,8 @@ const TouchableRipple = ({
         showUnderlay && { backgroundColor: calculatedUnderlayColor },
         style,
       ]}
-      onPressIn={(e: GestureResponderEvent) => {
-        setShowUnderlay(true);
-        rest.onPressIn?.(e);
-      }}
-      onPressOut={(e: GestureResponderEvent) => {
-        setShowUnderlay(false);
-        rest.onPressOut?.(e);
-      }}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
     >
       {React.Children.only(children)}
     </Pressable>

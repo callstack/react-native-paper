@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  View,
   ViewStyle,
   StyleSheet,
   StyleProp,
@@ -236,10 +235,9 @@ const TouchableRipple = ({
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
       disabled={disabled}
+      style={[styles.touchable, borderless && styles.borderless, style]}
     >
-      <View style={[styles.touchable, borderless && styles.borderless, style]}>
-        {React.Children.only(children)}
-      </View>
+      {React.Children.only(children)}
     </Pressable>
   );
 };
