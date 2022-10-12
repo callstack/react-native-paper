@@ -6,6 +6,7 @@ import {
   StyleSheet,
   StyleProp,
   TextStyle,
+  GestureResponderEvent,
 } from 'react-native';
 
 import color from 'color';
@@ -85,7 +86,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
   /**
    * @supported Available in v5.x
    * Function to execute as soon as the touchable element is pressed and invoked even before onPress.

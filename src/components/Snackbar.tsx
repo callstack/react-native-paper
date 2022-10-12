@@ -228,8 +228,8 @@ const Snackbar = ({
         </Text>
         {action ? (
           <Button
-            onPress={() => {
-              onPressAction?.();
+            onPress={(event) => {
+              onPressAction?.(event);
               onDismiss();
             }}
             style={[styles.button, actionStyle]}
