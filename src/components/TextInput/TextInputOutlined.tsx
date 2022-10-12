@@ -49,6 +49,7 @@ const TextInputOutlined = ({
   underlineColor: _underlineColor,
   outlineColor: customOutlineColor,
   activeOutlineColor,
+  textColor,
   dense,
   style,
   theme,
@@ -98,6 +99,7 @@ const TextInputOutlined = ({
   } = getOutlinedInputColors({
     activeOutlineColor,
     customOutlineColor,
+    textColor,
     disabled,
     error,
     theme,
