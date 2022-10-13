@@ -293,7 +293,6 @@ const styles = StyleSheet.create({
   content: {
     marginLeft: 16,
     marginVertical: 14,
-    flexWrap: 'wrap',
     flex: 1,
   },
   button: {
