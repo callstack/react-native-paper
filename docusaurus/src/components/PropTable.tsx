@@ -15,7 +15,7 @@ const ANNOTATION_OPTIONAL = '@optional';
 const ANNOTATION_INTERNAL = '@internal';
 
 export default function PropTable({ link }) {
-  const { doc } = useDoc(link);
+  const doc = useDoc(link);
   const props = doc.data.props;
 
   for (const prop in props) {

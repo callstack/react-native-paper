@@ -5,14 +5,54 @@ const {
   default: parseComponentDocs,
 } = require('component-docs/dist/parsers/component');
 
-const clean = require('./clean');
 const { pluginName } = require('./config');
-const createCategory = require('./createCategory');
 const generatePageMDX = require('./generatePageMDX');
-const getPages = require('./getPages');
-const { docsRootDir } = require('./paths');
 
-async function componentsPlugin() {
+async function componentsPlugin(_, options) {
+  const { docsRootDir, libsRootDir, pages } = options;
+
+  function clean() {
+    fs.rmSync(docsRootDir, { recursive: true, force: true });
+  }
+
+  function createCategory(label, dir = '.') {
+    const categoryJSON = JSON.stringify({ label }, undefined, 2);
+    const docsCategoryDir = path.join(docsRootDir, dir);
+    if (!fs.existsSync(docsCategoryDir)) {
+      fs.mkdirSync(docsCategoryDir);
+    }
+    fs.writeFileSync(
+      path.join(docsCategoryDir, `_category_.json`),
+      categoryJSON
+    );
+  }
+
+  function createPageForComponent(targetArray, source) {
+    const [item, subitem] = targetArray;
+    const target = subitem ? `${item}/${subitem}` : item;
+    const targetPath = target + '.mdx';
+    const sourcePath = source + '.tsx';
+
+    // Parse component using component-docs.
+    const doc = parseComponentDocs(path.join(libsRootDir, sourcePath), {
+      root: libsRootDir,
+    });
+
+    // Create directory for the output mdx file.
+    fs.mkdirSync(
+      path.join(docsRootDir, targetPath).split('/').slice(0, -1).join('/'),
+      { recursive: true }
+    );
+
+    // Generate and write mdx file.
+    fs.writeFileSync(
+      path.join(docsRootDir, targetPath),
+      generatePageMDX(doc, source)
+    );
+
+    return doc;
+  }
+
   return {
     name: pluginName,
     async loadContent() {
@@ -21,54 +61,29 @@ async function componentsPlugin() {
       // Create root components category.
       createCategory('Components', '.');
 
-      let pages = getPages().map((page) => {
-        const filepath = page.file;
-        const root = page.file.split('/').slice(0, -1).join('/');
-        const doc = parseComponentDocs(filepath, { root });
-        return {
-          ...page,
-          doc,
-        };
-      });
+      const docs = {};
 
-      pages = pages.map((page) => {
-        const group = page.group || page.doc.group;
-        page.group = group;
-        if (
-          pages.findIndex(({ doc }) =>
-            doc.title.includes(page.doc.title + '.')
-          ) !== -1
-        ) {
-          page.group = page.doc.title;
+      for (const item in pages) {
+        if (typeof pages[item] === 'string') {
+          const doc = createPageForComponent([item], pages[item]);
+          docs[pages[item]] = doc;
+        } else {
+          for (const subitem in pages[item]) {
+            const doc = createPageForComponent(
+              [item, subitem],
+              pages[item][subitem]
+            );
+            docs[pages[item][subitem]] = doc;
+          }
         }
-        page.doc.link = page.doc.link.replaceAll('-', '');
-        return page;
-      });
-
-      for (const page of pages) {
-        // Create subcategory if necessary.
-        if (page.group) {
-          createCategory(page.group, page.group ?? '.');
-        }
-        fs.writeFile(
-          path.join(
-            docsRootDir,
-            fs.existsSync(path.join(docsRootDir, page.doc.link))
-              ? page.doc.link
-              : page.group ?? '.',
-            `${page.doc.link}.mdx`
-          ),
-          generatePageMDX(page.doc),
-          () => {}
-        );
       }
 
-      return pages;
+      return docs;
     },
-    async contentLoaded({ content, actions }) {
+    async contentLoaded({ content: docs, actions }) {
       // Store component docs global data so it can be used in `PropsTable` component.
       actions.setGlobalData({
-        pages: content,
+        docs,
       });
     },
   };

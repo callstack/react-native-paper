@@ -1,17 +1,21 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+const path = require('path');
+
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
+const title = 'React Native Paper';
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'React Native Paper',
+  title,
   tagline: 'Material Design for React Native',
   url: 'https://reactnativepaper.com',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'log',
+  onBrokenMarkdownLinks: 'log',
   favicon: 'images/favicon.ico',
 
   // GitHub pages deployment config.
@@ -27,7 +31,122 @@ const config = {
     locales: ['en'],
   },
 
-  plugins: ['./component-docs-plugin'],
+  plugins: [
+    [
+      './component-docs-plugin',
+      {
+        docsRootDir: path.join(__dirname, 'docs', 'components'),
+        libsRootDir: path.join(__dirname, '..', 'src', 'components'),
+        pages: {
+          ActivityIndicator: 'ActivityIndicator',
+          AnimatedFAB: 'FAB/AnimatedFAB',
+          Appbar: {
+            Appbar: 'Appbar/Appbar',
+            AppbarAction: 'Appbar/AppbarAction',
+            AppbarBackAction: 'Appbar/AppbarBackAction',
+            AppbarContent: 'Appbar/AppbarContent',
+            AppbarHeader: 'Appbar/AppbarHeader',
+          },
+          Avatar: {
+            AvatarIcon: 'Avatar/AvatarIcon',
+            AvatarImage: 'Avatar/AvatarImage',
+            AvatarText: 'Avatar/AvatarText',
+          },
+          Badge: 'Badge',
+          Banner: 'Banner',
+          BottomNavigation: 'BottomNavigation/BottomNavigation',
+          Button: 'Button/Button',
+          Card: {
+            Card: 'Card/Card',
+            CardActions: 'Card/CardActions',
+            CardContent: 'Card/CardContent',
+            CardCover: 'Card/CardCover',
+            CardTitle: 'Card/CardTitle',
+          },
+          Checkbox: {
+            Checkbox: 'Checkbox/Checkbox',
+            CheckboxAndroid: 'Checkbox/CheckboxAndroid',
+            CheckboxIOS: 'Checkbox/CheckboxIOS',
+            CheckboxItem: 'Checkbox/CheckboxItem',
+          },
+          Chip: 'Chip/Chip',
+          DataTable: {
+            DataTable: 'DataTable/DataTable',
+            DataTableCell: 'DataTable/DataTableCell',
+            DataTableHeader: 'DataTable/DataTableHeader',
+            DataTablePagination: 'DataTable/DataTablePagination',
+            DataTableRow: 'DataTable/DataTableRow',
+            DataTableTitle: 'DataTable/DataTableTitle',
+          },
+          Dialog: {
+            Dialog: 'Dialog/Dialog',
+            DialogActions: 'Dialog/DialogActions',
+            DialogContent: 'Dialog/DialogContent',
+            DialogIcon: 'Dialog/DialogIcon',
+            DialogScrollArea: 'Dialog/DialogScrollArea',
+            DialogTitle: 'Dialog/DialogTitle',
+          },
+          Divider: 'Divider',
+          Drawer: {
+            DrawerCollapsedItem: 'Drawer/DrawerCollapsedItem',
+            DrawerItem: 'Drawer/DrawerItem',
+            DrawerSection: 'Drawer/DrawerSection',
+          },
+          FAB: {
+            FAB: 'FAB/FAB',
+            FABGroup: 'FAB/FABGroup',
+          },
+          HelperText: 'HelperText',
+          IconButton: 'IconButton/IconButton',
+          List: {
+            ListAccordion: 'List/ListAccordion',
+            ListAccordionGroup: 'List/ListAccordionGroup',
+            ListIcon: 'List/ListIcon',
+            ListItem: 'List/ListItem',
+            ListSection: 'List/ListSection',
+            ListSubheader: 'List/ListSubheader',
+          },
+          Menu: {
+            Menu: 'Menu/Menu',
+            MenuItem: 'Menu/MenuItem',
+          },
+          Modal: 'Modal',
+          Portal: {
+            Portal: 'Portal/Portal',
+            PortalHost: 'Portal/PortalHost',
+          },
+          ProgressBar: 'ProgressBar',
+          RadioButton: {
+            RadioButton: 'RadioButton/RadioButton',
+            RadioButtonAndroid: 'RadioButton/RadioButtonAndroid',
+            RadioButtonGroup: 'RadioButton/RadioButtonGroup',
+            RadioButtonIOS: 'RadioButton/RadioButtonIOS',
+            RadioButtonItem: 'RadioButton/RadioButtonItem',
+          },
+          Searchbar: 'Searchbar',
+          SegmentedButtons: 'SegmentedButtons/SegmentedButtons',
+          Snackbar: 'Snackbar',
+          Surface: 'Surface',
+          Switch: 'Switch/Switch',
+          TextInput: {
+            TextInput: 'TextInput/TextInput',
+            TextInputAffix: 'TextInput/Adornment/TextInputAffix',
+            TextInputIcon: 'TextInput/Adornment/TextInputIcon',
+          },
+          ToggleButton: {
+            ToggleButton: 'ToggleButton/ToggleButton',
+            ToggleButtonGroup: 'ToggleButton/ToggleButtonGroup',
+            ToggleButtonRow: 'ToggleButton/ToggleButtonRow',
+          },
+          TouchableRipple: 'TouchableRipple/TouchableRipple',
+          Typography: {
+            Text: 'Typography/Text',
+          },
+        },
+      },
+    ],
+    'docusaurus-lunr-search',
+  ],
 
   presets: [
     [
@@ -67,14 +186,8 @@ const config = {
           {
             type: 'doc',
             docId: 'guides/getting-started',
-            position: 'left',
-            label: 'Guides',
-          },
-          {
-            type: 'doc',
-            docId: 'components/activityindicator',
-            position: 'left',
-            label: 'Components',
+            position: 'right',
+            label: 'Docs',
           },
           {
             href: 'https://github.com/callstack/react-native-paper',
@@ -82,6 +195,7 @@ const config = {
             position: 'right',
           },
         ],
+        title,
       },
       prism: {
         theme: lightCodeTheme,

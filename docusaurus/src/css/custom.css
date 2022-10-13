@@ -30,7 +30,16 @@
 }
 
 .screenshots {
-  max-width: 300px;
+  display: flex;
+}
+
+.screenshots img,
+.screenshots figure {
+  max-width: 25%;
+}
+
+.screenshots figure>img {
+  max-width: 100%;
 }
 
 .gallery {
@@ -41,6 +50,17 @@
 .gallery img {
   padding: 8px;
   width: 33%;
+}
+
+
+html[data-theme='dark'] .gallery-dark,
+html[data-theme='light'] .gallery-light {
+  display: block;
+}
+
+html[data-theme='dark'] .gallery-light,
+html[data-theme='light'] .gallery-dark {
+  display: none;
 }
 
 .icons-list-container {

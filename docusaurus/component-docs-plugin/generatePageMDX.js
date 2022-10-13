@@ -1,4 +1,4 @@
-function generatePageMDX(doc) {
+function generatePageMDX(doc, link) {
   const description = doc.description
     .replace(/<\/br>/g, '')
     .replace(/style="[a-zA-Z0-9:;.\s()\-,]*"/gi, '')
@@ -15,7 +15,7 @@ ${description}
 
 ## Props
 
-<PropTable link="${doc.link}" />
+<PropTable link="${link}" />
 `;
 
   return mdx.slice(1);

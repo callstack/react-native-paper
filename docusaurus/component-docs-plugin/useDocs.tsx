@@ -4,14 +4,7 @@ import { usePluginData } from '@docusaurus/useGlobalData';
 import { pluginName } from './config';
 
 export interface ComponentDocsPluginData {
-  pages: Page[];
-}
-
-export interface Page {
-  file: string;
-  type: string;
-  doc: PageDoc;
-  group?: string;
+  docs: { [key in string]: PageDoc };
 }
 
 export interface PageDoc {
@@ -43,10 +36,9 @@ export interface Prop {
   };
 }
 
-function useDoc(link: string) {
-  const { pages } = usePluginData(pluginName) as ComponentDocsPluginData;
-  const page = pages.find((page) => page.doc.link === link);
-  return page;
+function useDoc(withPath: string) {
+  const { docs } = usePluginData(pluginName) as ComponentDocsPluginData;
+  return docs[withPath];
 }
 
 export default useDoc;

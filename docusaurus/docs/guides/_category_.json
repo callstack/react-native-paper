@@ -1,7 +1,4 @@
 {
   "label": "Guides",
-  "link": {
-    "type": "generated-index"
-  },
-  "position": 1
+  "position": 0
 }
