@@ -1,182 +1,525 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders menu with content styles 1`] = `
-<View
-  collapsable={false}
->
+Array [
   <View
     collapsable={false}
+    pointerEvents="box-none"
     style={
       Object {
-        "alignSelf": undefined,
-        "bottom": undefined,
-        "left": undefined,
-        "position": undefined,
-        "right": undefined,
-        "shadowColor": "#000",
-        "shadowOffset": Object {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-        "top": undefined,
+        "flex": 1,
       }
     }
   >
     <View
       collapsable={false}
+    >
+      <View
+        collapsable={false}
+        style={
+          Object {
+            "alignSelf": undefined,
+            "bottom": undefined,
+            "left": undefined,
+            "position": undefined,
+            "right": undefined,
+            "shadowColor": "#000",
+            "shadowOffset": Object {
+              "height": 0,
+              "width": 0,
+            },
+            "shadowOpacity": 0,
+            "shadowRadius": 0,
+            "top": undefined,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            Object {
+              "shadowColor": "#000",
+              "shadowOffset": Object {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "backgroundColor": "transparent",
+                "borderColor": "rgba(121, 116, 126, 1)",
+                "borderRadius": 20,
+                "borderStyle": "solid",
+                "borderWidth": 1,
+                "minWidth": 64,
+              }
+            }
+          >
+            <View
+              accessibilityRole="button"
+              accessibilityState={
+                Object {
+                  "disabled": true,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "overflow": "hidden",
+                  },
+                  false,
+                  Object {
+                    "borderRadius": 20,
+                  },
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "center",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  selectable={false}
+                  style={
+                    Array [
+                      Object {
+                        "color": "rgba(28, 27, 31, 1)",
+                        "fontFamily": "System",
+                        "fontSize": 14,
+                        "fontWeight": "500",
+                        "letterSpacing": 0.1,
+                        "lineHeight": 20,
+                      },
+                      Object {
+                        "textAlign": "left",
+                      },
+                      Object {
+                        "writingDirection": "ltr",
+                      },
+                      Array [
+                        Object {
+                          "marginHorizontal": 16,
+                          "marginVertical": 9,
+                          "textAlign": "center",
+                        },
+                        false,
+                        Object {
+                          "marginHorizontal": 24,
+                          "marginVertical": 10,
+                        },
+                        undefined,
+                        false,
+                        Object {
+                          "color": "rgba(103, 80, 164, 1)",
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        undefined,
+                      ],
+                    ]
+                  }
+                >
+                  Open menu
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>,
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="Close menu"
+      accessibilityRole="button"
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "shadowColor": "#000",
-          "shadowOffset": Object {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
         }
+      }
+    />
+    <View
+      accessibilityViewIsModal={true}
+      collapsable={false}
+      onAccessibilityEscape={[MockFunction]}
+      pointerEvents="box-none"
+      style={
+        Array [
+          Object {
+            "position": "absolute",
+          },
+          Object {
+            "left": 8,
+            "top": 8,
+          },
+          undefined,
+        ]
       }
     >
       <View
         collapsable={false}
         style={
           Object {
-            "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
-            "borderRadius": 20,
-            "borderStyle": "solid",
-            "borderWidth": 1,
-            "minWidth": 64,
+            "transform": Array [
+              Object {
+                "translateX": -0,
+              },
+              Object {
+                "translateY": -0,
+              },
+            ],
           }
         }
       >
         <View
-          accessibilityRole="button"
-          accessibilityState={
-            Object {
-              "disabled": true,
-            }
-          }
-          accessible={true}
           collapsable={false}
-          focusable={true}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
-            Array [
-              Object {
-                "overflow": "hidden",
+            Object {
+              "alignSelf": undefined,
+              "bottom": undefined,
+              "left": undefined,
+              "position": undefined,
+              "right": undefined,
+              "shadowColor": "#000",
+              "shadowOffset": Object {
+                "height": 2,
+                "width": 0,
               },
-              false,
-              Object {
-                "borderRadius": 20,
-              },
-            ]
+              "shadowOpacity": 0.15,
+              "shadowRadius": 6,
+              "top": undefined,
+            }
           }
         >
           <View
+            collapsable={false}
             style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "flexDirection": "row",
-                  "justifyContent": "center",
+              Object {
+                "shadowColor": "#000",
+                "shadowOffset": Object {
+                  "height": 1,
+                  "width": 0,
                 },
-                undefined,
-              ]
+                "shadowOpacity": 0.3,
+                "shadowRadius": 2,
+              }
             }
           >
-            <Text
-              numberOfLines={1}
-              selectable={false}
+            <View
+              collapsable={false}
               style={
-                Array [
-                  Object {
-                    "color": "rgba(28, 27, 31, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  Object {
-                    "textAlign": "left",
-                  },
-                  Object {
-                    "writingDirection": "ltr",
-                  },
-                  Array [
+                Object {
+                  "backgroundColor": "rgb(243, 237, 247)",
+                  "borderRadius": 4,
+                  "borderTopLeftRadius": 0,
+                  "borderTopRightRadius": 0,
+                  "opacity": 0,
+                  "paddingVertical": 8,
+                  "transform": Array [
                     Object {
-                      "marginHorizontal": 16,
-                      "marginVertical": 9,
-                      "textAlign": "center",
+                      "scaleX": 0,
                     },
-                    false,
                     Object {
-                      "marginHorizontal": 24,
-                      "marginVertical": 10,
+                      "scaleY": 0,
                     },
-                    undefined,
-                    false,
-                    Object {
-                      "color": "rgba(103, 80, 164, 1)",
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "500",
-                      "letterSpacing": 0.1,
-                      "lineHeight": 20,
-                    },
-                    undefined,
                   ],
-                ]
+                }
               }
             >
-              Open menu
-            </Text>
+              <View
+                accessibilityRole="menuitem"
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Array [
+                    false,
+                    false,
+                    Array [
+                      Object {
+                        "height": 48,
+                        "justifyContent": "center",
+                        "maxWidth": 280,
+                        "minWidth": 112,
+                      },
+                      Object {
+                        "paddingHorizontal": 12,
+                      },
+                      undefined,
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <View
+                    pointerEvents="none"
+                    style={
+                      Array [
+                        false,
+                        Object {
+                          "justifyContent": "center",
+                        },
+                        Object {
+                          "maxWidth": 268,
+                          "minWidth": 100,
+                        },
+                        Object {
+                          "marginLeft": 4,
+                        },
+                        undefined,
+                      ]
+                    }
+                  >
+                    <Text
+                      numberOfLines={1}
+                      selectable={false}
+                      style={
+                        Array [
+                          Object {
+                            "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
+                            "fontSize": 16,
+                            "fontWeight": "400",
+                            "letterSpacing": 0.15,
+                            "lineHeight": 24,
+                          },
+                          Object {
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "writingDirection": "ltr",
+                          },
+                          Array [
+                            false,
+                            Object {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 16,
+                              "fontWeight": "400",
+                              "letterSpacing": 0.15,
+                              "lineHeight": 24,
+                            },
+                            undefined,
+                          ],
+                        ]
+                      }
+                    >
+                      Undo
+                    </Text>
+                  </View>
+                </View>
+              </View>
+              <View
+                accessibilityRole="menuitem"
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Array [
+                    false,
+                    false,
+                    Array [
+                      Object {
+                        "height": 48,
+                        "justifyContent": "center",
+                        "maxWidth": 280,
+                        "minWidth": 112,
+                      },
+                      Object {
+                        "paddingHorizontal": 12,
+                      },
+                      undefined,
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <View
+                    pointerEvents="none"
+                    style={
+                      Array [
+                        false,
+                        Object {
+                          "justifyContent": "center",
+                        },
+                        Object {
+                          "maxWidth": 268,
+                          "minWidth": 100,
+                        },
+                        Object {
+                          "marginLeft": 4,
+                        },
+                        undefined,
+                      ]
+                    }
+                  >
+                    <Text
+                      numberOfLines={1}
+                      selectable={false}
+                      style={
+                        Array [
+                          Object {
+                            "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
+                            "fontSize": 16,
+                            "fontWeight": "400",
+                            "letterSpacing": 0.15,
+                            "lineHeight": 24,
+                          },
+                          Object {
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "writingDirection": "ltr",
+                          },
+                          Array [
+                            false,
+                            Object {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 16,
+                              "fontWeight": "400",
+                              "letterSpacing": 0.15,
+                              "lineHeight": 24,
+                            },
+                            undefined,
+                          ],
+                        ]
+                      }
+                    >
+                      Redo
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
           </View>
         </View>
       </View>
     </View>
-  </View>
-</View>
+  </View>,
+]
 `;
 
 exports[`renders not visible menu 1`] = `
 <View
   collapsable={false}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
 >
   <View
     collapsable={false}
-    style={
-      Object {
-        "alignSelf": undefined,
-        "bottom": undefined,
-        "left": undefined,
-        "position": undefined,
-        "right": undefined,
-        "shadowColor": "#000",
-        "shadowOffset": Object {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-        "top": undefined,
-      }
-    }
   >
     <View
       collapsable={false}
       style={
         Object {
+          "alignSelf": undefined,
+          "bottom": undefined,
+          "left": undefined,
+          "position": undefined,
+          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -184,6 +527,7 @@ exports[`renders not visible menu 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "top": undefined,
         }
       }
     >
@@ -191,105 +535,120 @@ exports[`renders not visible menu 1`] = `
         collapsable={false}
         style={
           Object {
-            "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
-            "borderRadius": 20,
-            "borderStyle": "solid",
-            "borderWidth": 1,
-            "minWidth": 64,
+            "shadowColor": "#000",
+            "shadowOffset": Object {
+              "height": 0,
+              "width": 0,
+            },
+            "shadowOpacity": 0,
+            "shadowRadius": 0,
           }
         }
       >
         <View
-          accessibilityRole="button"
-          accessibilityState={
-            Object {
-              "disabled": true,
-            }
-          }
-          accessible={true}
           collapsable={false}
-          focusable={true}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
-            Array [
-              Object {
-                "overflow": "hidden",
-              },
-              false,
-              Object {
-                "borderRadius": 20,
-              },
-            ]
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(121, 116, 126, 1)",
+              "borderRadius": 20,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "minWidth": 64,
+            }
           }
         >
           <View
+            accessibilityRole="button"
+            accessibilityState={
+              Object {
+                "disabled": true,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "alignItems": "center",
-                  "flexDirection": "row",
-                  "justifyContent": "center",
+                  "overflow": "hidden",
                 },
-                undefined,
+                false,
+                Object {
+                  "borderRadius": 20,
+                },
               ]
             }
           >
-            <Text
-              numberOfLines={1}
-              selectable={false}
+            <View
               style={
                 Array [
                   Object {
-                    "color": "rgba(28, 27, 31, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "center",
                   },
-                  Object {
-                    "textAlign": "left",
-                  },
-                  Object {
-                    "writingDirection": "ltr",
-                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                numberOfLines={1}
+                selectable={false}
+                style={
                   Array [
                     Object {
-                      "marginHorizontal": 16,
-                      "marginVertical": 9,
-                      "textAlign": "center",
-                    },
-                    false,
-                    Object {
-                      "marginHorizontal": 24,
-                      "marginVertical": 10,
-                    },
-                    undefined,
-                    false,
-                    Object {
-                      "color": "rgba(103, 80, 164, 1)",
+                      "color": "rgba(28, 27, 31, 1)",
                       "fontFamily": "System",
                       "fontSize": 14,
                       "fontWeight": "500",
                       "letterSpacing": 0.1,
                       "lineHeight": 20,
                     },
-                    undefined,
-                  ],
-                ]
-              }
-            >
-              Open menu
-            </Text>
+                    Object {
+                      "textAlign": "left",
+                    },
+                    Object {
+                      "writingDirection": "ltr",
+                    },
+                    Array [
+                      Object {
+                        "marginHorizontal": 16,
+                        "marginVertical": 9,
+                        "textAlign": "center",
+                      },
+                      false,
+                      Object {
+                        "marginHorizontal": 24,
+                        "marginVertical": 10,
+                      },
+                      undefined,
+                      false,
+                      Object {
+                        "color": "rgba(103, 80, 164, 1)",
+                        "fontFamily": "System",
+                        "fontSize": 14,
+                        "fontWeight": "500",
+                        "letterSpacing": 0.1,
+                        "lineHeight": 20,
+                      },
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                Open menu
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -299,150 +658,497 @@ exports[`renders not visible menu 1`] = `
 `;
 
 exports[`renders visible menu 1`] = `
-<View
-  collapsable={false}
->
+Array [
   <View
     collapsable={false}
+    pointerEvents="box-none"
     style={
       Object {
-        "alignSelf": undefined,
-        "bottom": undefined,
-        "left": undefined,
-        "position": undefined,
-        "right": undefined,
-        "shadowColor": "#000",
-        "shadowOffset": Object {
-          "height": 0,
-          "width": 0,
-        },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
-        "top": undefined,
+        "flex": 1,
       }
     }
   >
     <View
       collapsable={false}
+    >
+      <View
+        collapsable={false}
+        style={
+          Object {
+            "alignSelf": undefined,
+            "bottom": undefined,
+            "left": undefined,
+            "position": undefined,
+            "right": undefined,
+            "shadowColor": "#000",
+            "shadowOffset": Object {
+              "height": 0,
+              "width": 0,
+            },
+            "shadowOpacity": 0,
+            "shadowRadius": 0,
+            "top": undefined,
+          }
+        }
+      >
+        <View
+          collapsable={false}
+          style={
+            Object {
+              "shadowColor": "#000",
+              "shadowOffset": Object {
+                "height": 0,
+                "width": 0,
+              },
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+            }
+          }
+        >
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "backgroundColor": "transparent",
+                "borderColor": "rgba(121, 116, 126, 1)",
+                "borderRadius": 20,
+                "borderStyle": "solid",
+                "borderWidth": 1,
+                "minWidth": 64,
+              }
+            }
+          >
+            <View
+              accessibilityRole="button"
+              accessibilityState={
+                Object {
+                  "disabled": true,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "overflow": "hidden",
+                  },
+                  false,
+                  Object {
+                    "borderRadius": 20,
+                  },
+                ]
+              }
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "center",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  selectable={false}
+                  style={
+                    Array [
+                      Object {
+                        "color": "rgba(28, 27, 31, 1)",
+                        "fontFamily": "System",
+                        "fontSize": 14,
+                        "fontWeight": "500",
+                        "letterSpacing": 0.1,
+                        "lineHeight": 20,
+                      },
+                      Object {
+                        "textAlign": "left",
+                      },
+                      Object {
+                        "writingDirection": "ltr",
+                      },
+                      Array [
+                        Object {
+                          "marginHorizontal": 16,
+                          "marginVertical": 9,
+                          "textAlign": "center",
+                        },
+                        false,
+                        Object {
+                          "marginHorizontal": 24,
+                          "marginVertical": 10,
+                        },
+                        undefined,
+                        false,
+                        Object {
+                          "color": "rgba(103, 80, 164, 1)",
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        undefined,
+                      ],
+                    ]
+                  }
+                >
+                  Open menu
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>,
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="Close menu"
+      accessibilityRole="button"
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "shadowColor": "#000",
-          "shadowOffset": Object {
-            "height": 0,
-            "width": 0,
-          },
-          "shadowOpacity": 0,
-          "shadowRadius": 0,
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
         }
+      }
+    />
+    <View
+      accessibilityViewIsModal={true}
+      collapsable={false}
+      onAccessibilityEscape={[MockFunction]}
+      pointerEvents="box-none"
+      style={
+        Array [
+          Object {
+            "position": "absolute",
+          },
+          Object {
+            "left": 8,
+            "top": 8,
+          },
+          undefined,
+        ]
       }
     >
       <View
         collapsable={false}
         style={
           Object {
-            "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
-            "borderRadius": 20,
-            "borderStyle": "solid",
-            "borderWidth": 1,
-            "minWidth": 64,
+            "transform": Array [
+              Object {
+                "translateX": -0,
+              },
+              Object {
+                "translateY": -0,
+              },
+            ],
           }
         }
       >
         <View
-          accessibilityRole="button"
-          accessibilityState={
-            Object {
-              "disabled": true,
-            }
-          }
-          accessible={true}
           collapsable={false}
-          focusable={true}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
           style={
-            Array [
-              Object {
-                "overflow": "hidden",
+            Object {
+              "alignSelf": undefined,
+              "bottom": undefined,
+              "left": undefined,
+              "position": undefined,
+              "right": undefined,
+              "shadowColor": "#000",
+              "shadowOffset": Object {
+                "height": 2,
+                "width": 0,
               },
-              false,
-              Object {
-                "borderRadius": 20,
-              },
-            ]
+              "shadowOpacity": 0.15,
+              "shadowRadius": 6,
+              "top": undefined,
+            }
           }
         >
           <View
+            collapsable={false}
             style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "flexDirection": "row",
-                  "justifyContent": "center",
+              Object {
+                "shadowColor": "#000",
+                "shadowOffset": Object {
+                  "height": 1,
+                  "width": 0,
                 },
-                undefined,
-              ]
+                "shadowOpacity": 0.3,
+                "shadowRadius": 2,
+              }
             }
           >
-            <Text
-              numberOfLines={1}
-              selectable={false}
+            <View
+              collapsable={false}
               style={
-                Array [
-                  Object {
-                    "color": "rgba(28, 27, 31, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  Object {
-                    "textAlign": "left",
-                  },
-                  Object {
-                    "writingDirection": "ltr",
-                  },
-                  Array [
+                Object {
+                  "backgroundColor": "rgb(243, 237, 247)",
+                  "borderRadius": 4,
+                  "opacity": 0,
+                  "paddingVertical": 8,
+                  "transform": Array [
                     Object {
-                      "marginHorizontal": 16,
-                      "marginVertical": 9,
-                      "textAlign": "center",
+                      "scaleX": 0,
                     },
-                    false,
                     Object {
-                      "marginHorizontal": 24,
-                      "marginVertical": 10,
+                      "scaleY": 0,
                     },
-                    undefined,
-                    false,
-                    Object {
-                      "color": "rgba(103, 80, 164, 1)",
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "500",
-                      "letterSpacing": 0.1,
-                      "lineHeight": 20,
-                    },
-                    undefined,
                   ],
-                ]
+                }
               }
             >
-              Open menu
-            </Text>
+              <View
+                accessibilityRole="menuitem"
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Array [
+                    false,
+                    false,
+                    Array [
+                      Object {
+                        "height": 48,
+                        "justifyContent": "center",
+                        "maxWidth": 280,
+                        "minWidth": 112,
+                      },
+                      Object {
+                        "paddingHorizontal": 12,
+                      },
+                      undefined,
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <View
+                    pointerEvents="none"
+                    style={
+                      Array [
+                        false,
+                        Object {
+                          "justifyContent": "center",
+                        },
+                        Object {
+                          "maxWidth": 268,
+                          "minWidth": 100,
+                        },
+                        Object {
+                          "marginLeft": 4,
+                        },
+                        undefined,
+                      ]
+                    }
+                  >
+                    <Text
+                      numberOfLines={1}
+                      selectable={false}
+                      style={
+                        Array [
+                          Object {
+                            "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
+                            "fontSize": 16,
+                            "fontWeight": "400",
+                            "letterSpacing": 0.15,
+                            "lineHeight": 24,
+                          },
+                          Object {
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "writingDirection": "ltr",
+                          },
+                          Array [
+                            false,
+                            Object {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 16,
+                              "fontWeight": "400",
+                              "letterSpacing": 0.15,
+                              "lineHeight": 24,
+                            },
+                            undefined,
+                          ],
+                        ]
+                      }
+                    >
+                      Undo
+                    </Text>
+                  </View>
+                </View>
+              </View>
+              <View
+                accessibilityRole="menuitem"
+                accessibilityState={
+                  Object {
+                    "disabled": false,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Array [
+                    false,
+                    false,
+                    Array [
+                      Object {
+                        "height": 48,
+                        "justifyContent": "center",
+                        "maxWidth": 280,
+                        "minWidth": 112,
+                      },
+                      Object {
+                        "paddingHorizontal": 12,
+                      },
+                      undefined,
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <View
+                    pointerEvents="none"
+                    style={
+                      Array [
+                        false,
+                        Object {
+                          "justifyContent": "center",
+                        },
+                        Object {
+                          "maxWidth": 268,
+                          "minWidth": 100,
+                        },
+                        Object {
+                          "marginLeft": 4,
+                        },
+                        undefined,
+                      ]
+                    }
+                  >
+                    <Text
+                      numberOfLines={1}
+                      selectable={false}
+                      style={
+                        Array [
+                          Object {
+                            "color": "rgba(28, 27, 31, 1)",
+                            "fontFamily": "System",
+                            "fontSize": 16,
+                            "fontWeight": "400",
+                            "letterSpacing": 0.15,
+                            "lineHeight": 24,
+                          },
+                          Object {
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "writingDirection": "ltr",
+                          },
+                          Array [
+                            false,
+                            Object {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 16,
+                              "fontWeight": "400",
+                              "letterSpacing": 0.15,
+                              "lineHeight": 24,
+                            },
+                            undefined,
+                          ],
+                        ]
+                      }
+                    >
+                      Redo
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
           </View>
         </View>
       </View>
     </View>
-  </View>
-</View>
+  </View>,
+]
 `;
