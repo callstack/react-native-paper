@@ -202,7 +202,6 @@ const ListAccordion = ({
           accessibilityState={{ expanded: isExpanded }}
           accessibilityLabel={accessibilityLabel}
           testID={testID}
-          delayPressIn={0}
           borderless
         >
           <View style={styles.row} pointerEvents="none">

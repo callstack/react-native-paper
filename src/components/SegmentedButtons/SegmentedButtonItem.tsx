@@ -161,7 +161,6 @@ const SegmentedButtonItem = ({
     <View style={[buttonStyle, styles.button, style]}>
       <TouchableRipple
         borderless
-        delayPressIn={0}
         onPress={onPress}
         accessibilityLabel={accessibilityLabel}
         accessibilityState={{ disabled, checked }}
