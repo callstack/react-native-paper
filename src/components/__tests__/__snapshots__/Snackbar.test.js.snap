@@ -80,6 +80,8 @@ exports[`renders snackbar with Text as a child 1`] = `
               },
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
               },
               Object {
                 "writingDirection": "ltr",
@@ -187,6 +189,8 @@ exports[`renders snackbar with action button 1`] = `
               },
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
               },
               Object {
                 "writingDirection": "ltr",
@@ -437,6 +441,8 @@ exports[`renders snackbar with content 1`] = `
               },
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
               },
               Object {
                 "writingDirection": "ltr",

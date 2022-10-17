@@ -309,6 +309,8 @@ exports[`renders list section with custom title style 1`] = `
               },
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
               },
               Object {
                 "writingDirection": "ltr",
@@ -431,6 +433,8 @@ exports[`renders list section with custom title style 1`] = `
               },
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
               },
               Object {
                 "writingDirection": "ltr",
@@ -762,6 +766,8 @@ exports[`renders list section with subheader 1`] = `
               },
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
               },
               Object {
                 "writingDirection": "ltr",
@@ -884,6 +890,8 @@ exports[`renders list section with subheader 1`] = `
               },
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
               },
               Object {
                 "writingDirection": "ltr",
@@ -1177,6 +1185,8 @@ exports[`renders list section without subheader 1`] = `
               },
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
               },
               Object {
                 "writingDirection": "ltr",
@@ -1299,6 +1309,8 @@ exports[`renders list section without subheader 1`] = `
               },
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
               },
               Object {
                 "writingDirection": "ltr",

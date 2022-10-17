@@ -1,12 +1,14 @@
 import * as React from 'react';
 
+import { render } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
 
+import { tokens } from '../../../styles/themes/v3/tokens';
 import Text from '../../Typography/Text.tsx';
 
-it('renders every variant of Text with children as content', () => {
-  const content = 'Something rendered as a child content';
+const content = 'Something rendered as a child content';
 
+it('renders every variant of Text with children as content', () => {
   const variants = (
     <>
       <Text variant="displayLarge">{content}</Text>
@@ -34,4 +36,16 @@ it('renders every variant of Text with children as content', () => {
   const tree = renderer.create(variants).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('renders v3 Text component without variant with default fontWeight and fontFamily', () => {
+  const { getByTestId } = render(
+    <Text testID="text-without-variant">{content}</Text>
+  );
+  const { brandRegular, weightRegular } = tokens.md.ref.typeface;
+
+  expect(getByTestId('text-without-variant')).toHaveStyle({
+    fontFamily: brandRegular,
+    fontWeight: weightRegular,
+  });
 });
