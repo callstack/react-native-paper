@@ -69,8 +69,11 @@ Array [
                 }
               }
               accessible={true}
-              focusable={false}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
               onClick={[Function]}
+              onFocus={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -82,6 +85,7 @@ Array [
                   Object {
                     "overflow": "hidden",
                   },
+                  false,
                   Object {
                     "borderRadius": 20,
                   },
@@ -285,8 +289,11 @@ Array [
                   }
                 }
                 accessible={true}
+                collapsable={false}
                 focusable={true}
+                onBlur={[Function]}
                 onClick={[Function]}
+                onFocus={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -295,6 +302,7 @@ Array [
                 onStartShouldSetResponder={[Function]}
                 style={
                   Array [
+                    false,
                     false,
                     Array [
                       Object {
@@ -385,8 +393,11 @@ Array [
                   }
                 }
                 accessible={true}
+                collapsable={false}
                 focusable={true}
+                onBlur={[Function]}
                 onClick={[Function]}
+                onFocus={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -395,6 +406,7 @@ Array [
                 onStartShouldSetResponder={[Function]}
                 style={
                   Array [
+                    false,
                     false,
                     Array [
                       Object {
@@ -554,8 +566,11 @@ exports[`renders not visible menu 1`] = `
               }
             }
             accessible={true}
-            focusable={false}
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
             onClick={[Function]}
+            onFocus={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -567,6 +582,7 @@ exports[`renders not visible menu 1`] = `
                 Object {
                   "overflow": "hidden",
                 },
+                false,
                 Object {
                   "borderRadius": 20,
                 },
@@ -710,8 +726,11 @@ Array [
                 }
               }
               accessible={true}
-              focusable={false}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
               onClick={[Function]}
+              onFocus={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -723,6 +742,7 @@ Array [
                   Object {
                     "overflow": "hidden",
                   },
+                  false,
                   Object {
                     "borderRadius": 20,
                   },
@@ -924,8 +944,11 @@ Array [
                   }
                 }
                 accessible={true}
+                collapsable={false}
                 focusable={true}
+                onBlur={[Function]}
                 onClick={[Function]}
+                onFocus={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -934,6 +957,7 @@ Array [
                 onStartShouldSetResponder={[Function]}
                 style={
                   Array [
+                    false,
                     false,
                     Array [
                       Object {
@@ -1024,8 +1048,11 @@ Array [
                   }
                 }
                 accessible={true}
+                collapsable={false}
                 focusable={true}
+                onBlur={[Function]}
                 onClick={[Function]}
+                onFocus={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -1034,6 +1061,7 @@ Array [
                 onStartShouldSetResponder={[Function]}
                 style={
                   Array [
+                    false,
                     false,
                     Array [
                       Object {

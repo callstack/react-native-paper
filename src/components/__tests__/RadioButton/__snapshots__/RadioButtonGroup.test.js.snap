@@ -14,8 +14,11 @@ exports[`RadioButtonGroup renders properly 1`] = `
       }
     }
     accessible={true}
+    collapsable={false}
     focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -27,6 +30,7 @@ exports[`RadioButtonGroup renders properly 1`] = `
         Object {
           "overflow": "hidden",
         },
+        false,
         Object {
           "borderRadius": 18,
           "padding": 6,
