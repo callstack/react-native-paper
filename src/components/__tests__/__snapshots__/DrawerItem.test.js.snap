@@ -11,8 +11,11 @@ exports[`renders DrawerItem with icon 1`] = `
       }
     }
     accessible={true}
-    focusable={false}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -24,6 +27,7 @@ exports[`renders DrawerItem with icon 1`] = `
         Object {
           "overflow": "hidden",
         },
+        false,
         Array [
           Object {
             "marginHorizontal": 10,
@@ -144,8 +148,11 @@ exports[`renders active DrawerItem 1`] = `
       }
     }
     accessible={true}
-    focusable={false}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -157,6 +164,7 @@ exports[`renders active DrawerItem 1`] = `
         Object {
           "overflow": "hidden",
         },
+        false,
         Array [
           Object {
             "marginHorizontal": 10,
@@ -277,8 +285,11 @@ exports[`renders basic DrawerItem 1`] = `
       }
     }
     accessible={true}
+    collapsable={false}
     focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -290,6 +301,7 @@ exports[`renders basic DrawerItem 1`] = `
         Object {
           "overflow": "hidden",
         },
+        false,
         Array [
           Object {
             "marginHorizontal": 10,

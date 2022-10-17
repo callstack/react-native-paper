@@ -139,6 +139,8 @@ exports[`renders avatar with text 1`] = `
         },
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
         },
         Object {
           "writingDirection": "ltr",
@@ -190,6 +192,8 @@ exports[`renders avatar with text and custom background color 1`] = `
         },
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
         },
         Object {
           "writingDirection": "ltr",
@@ -241,6 +245,8 @@ exports[`renders avatar with text and custom colors 1`] = `
         },
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
         },
         Object {
           "writingDirection": "ltr",
@@ -292,6 +298,8 @@ exports[`renders avatar with text and custom size 1`] = `
         },
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
         },
         Object {
           "writingDirection": "ltr",

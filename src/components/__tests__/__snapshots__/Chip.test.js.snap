@@ -57,8 +57,11 @@ exports[`renders chip with close button 1`] = `
           }
         }
         accessible={true}
-        focusable={false}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
         onClick={[Function]}
+        onFocus={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -70,6 +73,7 @@ exports[`renders chip with close button 1`] = `
             Object {
               "overflow": "hidden",
             },
+            false,
             Array [
               Object {
                 "borderRadius": 8,
@@ -302,8 +306,11 @@ exports[`renders chip with custom close button 1`] = `
           }
         }
         accessible={true}
-        focusable={false}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
         onClick={[Function]}
+        onFocus={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -315,6 +322,7 @@ exports[`renders chip with custom close button 1`] = `
             Object {
               "overflow": "hidden",
             },
+            false,
             Array [
               Object {
                 "borderRadius": 8,
@@ -547,8 +555,11 @@ exports[`renders chip with icon 1`] = `
           }
         }
         accessible={true}
-        focusable={false}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
         onClick={[Function]}
+        onFocus={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -560,6 +571,7 @@ exports[`renders chip with icon 1`] = `
             Object {
               "overflow": "hidden",
             },
+            false,
             Array [
               Object {
                 "borderRadius": 8,
@@ -732,8 +744,11 @@ exports[`renders chip with onPress 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
+        onBlur={[Function]}
         onClick={[Function]}
+        onFocus={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -745,6 +760,7 @@ exports[`renders chip with onPress 1`] = `
             Object {
               "overflow": "hidden",
             },
+            false,
             Array [
               Object {
                 "borderRadius": 8,
@@ -882,8 +898,11 @@ exports[`renders outlined disabled chip 1`] = `
           }
         }
         accessible={true}
-        focusable={false}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
         onClick={[Function]}
+        onFocus={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -895,6 +914,7 @@ exports[`renders outlined disabled chip 1`] = `
             Object {
               "overflow": "hidden",
             },
+            false,
             Array [
               Object {
                 "borderRadius": 8,
@@ -1032,8 +1052,11 @@ exports[`renders selected chip 1`] = `
           }
         }
         accessible={true}
-        focusable={false}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
         onClick={[Function]}
+        onFocus={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1045,6 +1068,7 @@ exports[`renders selected chip 1`] = `
             Object {
               "overflow": "hidden",
             },
+            false,
             Array [
               Object {
                 "borderRadius": 8,
