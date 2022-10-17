@@ -190,6 +190,24 @@ const Snackbar = ({
     ? theme.colors.inversePrimary
     : theme.colors.accent;
 
+  const renderChildrenWithWrapper = () => {
+    const viewStyles = [
+      styles.content,
+      { marginRight, color: colors?.surface },
+    ];
+
+    if (typeof children === 'string') {
+      return <Text style={viewStyles}>{children}</Text>;
+    }
+
+    return (
+      <View style={viewStyles}>
+        {/* View is added to allow multiple lines support for Text component as children */}
+        <View>{children}</View>
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView
       pointerEvents="box-none"
@@ -223,9 +241,7 @@ const Snackbar = ({
         {...(isV3 && { elevation })}
         {...rest}
       >
-        <Text style={[styles.content, { marginRight, color: colors?.surface }]}>
-          {children}
-        </Text>
+        {renderChildrenWithWrapper()}
         {action ? (
           <Button
             onPress={() => {
@@ -277,7 +293,6 @@ const styles = StyleSheet.create({
   content: {
     marginLeft: 16,
     marginVertical: 14,
-    flexWrap: 'wrap',
     flex: 1,
   },
   button: {
