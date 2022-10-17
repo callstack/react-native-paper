@@ -297,7 +297,7 @@ it('correctly applies padding offset to input label on Android when LTR', () => 
         mode={mode}
         multiline
         label="Flat input"
-        testID={'text-input'}
+        testID={`text-input-${mode}`}
         style={style.lineHeight}
         textColor={'purple'}
       />
