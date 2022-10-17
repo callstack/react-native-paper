@@ -51,6 +51,7 @@ const TextInputFlat = ({
   selectionColor,
   underlineColor,
   activeUnderlineColor,
+  textColor,
   dense,
   style,
   theme,
@@ -139,6 +140,7 @@ const TextInputFlat = ({
   } = getFlatInputColors({
     underlineColor,
     activeUnderlineColor,
+    textColor,
     disabled,
     error,
     theme,

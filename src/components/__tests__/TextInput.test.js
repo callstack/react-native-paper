@@ -271,8 +271,9 @@ it('correctly applies padding offset to input label on Android when LTR', () => 
     paddingRight: 56,
   });
 });
+
 ['outlined', 'flat'].forEach((mode) =>
-  it('renders input with correct line height', () => {
+  it(`renders ${mode} input with correct line height`, () => {
     const input = render(
       <TextInput
         mode={mode}
@@ -285,6 +286,25 @@ it('correctly applies padding offset to input label on Android when LTR', () => 
 
     expect(input.getByTestId(`text-input-${mode}`)).toHaveStyle({
       lineHeight: 22,
+    });
+  })
+);
+
+['outlined', 'flat'].forEach((mode) =>
+  it(`renders ${mode} input with passed textColor`, () => {
+    const input = render(
+      <TextInput
+        mode={mode}
+        multiline
+        label="Flat input"
+        testID={'text-input'}
+        style={style.lineHeight}
+        textColor={'purple'}
+      />
+    );
+
+    expect(input.getByTestId(`text-input-${mode}`)).toHaveStyle({
+      color: 'purple',
     });
   })
 );
@@ -408,6 +428,26 @@ describe('getFlatInputColor - underline color', () => {
 });
 
 describe('getFlatInputColor - input text color', () => {
+  it('should return custom color, if not disabled, no matter what the theme is', () => {
+    expect(
+      getOutlinedInputColors({
+        textColor: 'beige',
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      inputTextColor: 'beige',
+    });
+
+    expect(
+      getOutlinedInputColors({
+        textColor: 'beige',
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      inputTextColor: 'beige',
+    });
+  });
+
   it('should return correct disabled color, for theme version 3', () => {
     expect(
       getFlatInputColors({
@@ -653,7 +693,7 @@ describe('getFlatInputColor - active color', () => {
     expect(
       getFlatInputColors({
         activeUnderlineColor: 'beige',
-        theme: getTheme(false, true),
+        theme: getTheme(false, false),
       })
     ).toMatchObject({
       activeColor: 'beige',
@@ -740,7 +780,7 @@ describe('getOutlinedInputColors - outline color', () => {
     expect(
       getOutlinedInputColors({
         customOutlineColor: 'beige',
-        theme: getTheme(),
+        theme: getTheme(false, false),
       })
     ).toMatchObject({
       outlineColor: 'beige',
@@ -940,7 +980,7 @@ describe('getOutlinedInputColors - active color', () => {
     expect(
       getOutlinedInputColors({
         activeOutlineColor: 'beige',
-        theme: getTheme(false, true),
+        theme: getTheme(false, false),
       })
     ).toMatchObject({
       activeColor: 'beige',
