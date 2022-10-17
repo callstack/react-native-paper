@@ -30,10 +30,11 @@ const ProgressBarExample = () => {
   const [progress, setProgress] = React.useState<number>(0.3);
   const theme = useTheme();
   const { isV3 } = theme;
-  const progressBarValue = React.useRef(new Animated.Value(0));
+  const { current: progressBarValue } = React.useRef(new Animated.Value(0));
 
-  const customAnim = () => {
-    Animated.timing(progressBarValue.current, {
+  const runCustomAnimation = () => {
+    progressBarValue.setValue(0);
+    Animated.timing(progressBarValue, {
       toValue: 1,
       duration: 2000,
       useNativeDriver: false,
@@ -42,10 +43,11 @@ const ProgressBarExample = () => {
 
   return (
     <ScreenWrapper contentContainerStyle={styles.container}>
-      <Button onPress={() => setVisible(!visible)}>Toggle visible</Button>
+      <Button onPress={() => setVisible(!visible)}>Toggle visibility</Button>
       <Button onPress={() => setProgress(Math.random())}>
         Random progress
       </Button>
+      <Button onPress={runCustomAnimation}>Toggle animation</Button>
 
       <View style={styles.row}>
         <Paragraph>Default ProgressBar </Paragraph>
@@ -87,13 +89,15 @@ const ProgressBarExample = () => {
         />
       </View>
 
-      <Button onPress={customAnim}>Animated Value</Button>
-      <AnimatedProgressBar
-        style={styles.progressBar}
-        animatedValue={progressBarValue.current}
-        color={MD2Colors.green200}
-        theme={theme}
-      />
+      <View style={styles.row}>
+        <Paragraph>ProgressBar with animated value</Paragraph>
+        <AnimatedProgressBar
+          style={styles.progressBar}
+          animatedValue={progressBarValue}
+          color={MD2Colors.green200}
+          theme={theme}
+        />
+      </View>
     </ScreenWrapper>
   );
 };
@@ -111,7 +115,6 @@ const styles = StyleSheet.create({
     height: 20,
   },
   progressBar: {
-    borderRadius: 7.5,
     height: 15,
   },
 });
