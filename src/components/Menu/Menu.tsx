@@ -47,7 +47,7 @@ export type Props = {
   /**
    * Callback called when Menu is dismissed. The `visible` prop needs to be updated when this is called.
    */
-  onDismiss: () => void;
+  onDismiss?: () => void;
   /**
    * Accessibility label for the overlay. This is read by the screen reader when the user taps outside the menu.
    */
@@ -234,14 +234,14 @@ class Menu extends React.Component<Props, State> {
 
   private handleDismiss = () => {
     if (this.props.visible) {
-      this.props.onDismiss();
+      this.props.onDismiss?.();
     }
     return true;
   };
 
   private handleKeypress = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
-      this.props.onDismiss();
+      this.props.onDismiss?.();
     }
   };
 
