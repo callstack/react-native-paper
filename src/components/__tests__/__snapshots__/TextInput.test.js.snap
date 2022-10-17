@@ -1135,13 +1135,17 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
           }
         >
           <View
+            accessibilityComponentType="button"
             accessibilityRole="button"
             accessibilityState={
               Object {
                 "disabled": false,
               }
             }
+            accessibilityTraits="button"
             accessible={true}
+            centered={true}
+            collapsable={false}
             focusable={true}
             hitSlop={
               Object {
@@ -1151,7 +1155,9 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
                 "top": 6,
               }
             }
+            onBlur={[Function]}
             onClick={[Function]}
+            onFocus={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -1163,6 +1169,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
                 Object {
                   "overflow": "hidden",
                 },
+                false,
                 Object {
                   "alignItems": "center",
                   "flexGrow": 1,
@@ -1459,13 +1466,17 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           }
         >
           <View
+            accessibilityComponentType="button"
             accessibilityRole="button"
             accessibilityState={
               Object {
                 "disabled": false,
               }
             }
+            accessibilityTraits="button"
             accessible={true}
+            centered={true}
+            collapsable={false}
             focusable={true}
             hitSlop={
               Object {
@@ -1475,7 +1486,9 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
                 "top": 6,
               }
             }
+            onBlur={[Function]}
             onClick={[Function]}
+            onFocus={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -1487,6 +1500,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
                 Object {
                   "overflow": "hidden",
                 },
+                false,
                 Object {
                   "alignItems": "center",
                   "flexGrow": 1,

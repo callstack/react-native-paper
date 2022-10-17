@@ -18,8 +18,11 @@ exports[`renders expanded accordion 1`] = `
         }
       }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -31,6 +34,7 @@ exports[`renders expanded accordion 1`] = `
           Object {
             "overflow": "hidden",
           },
+          false,
           Array [
             Object {
               "padding": 8,
@@ -131,8 +135,11 @@ exports[`renders expanded accordion 1`] = `
       }
     }
     accessible={true}
-    focusable={false}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -141,6 +148,7 @@ exports[`renders expanded accordion 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {
@@ -224,8 +232,11 @@ exports[`renders list accordion with children 1`] = `
         }
       }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -237,6 +248,7 @@ exports[`renders list accordion with children 1`] = `
           Object {
             "overflow": "hidden",
           },
+          false,
           Array [
             Object {
               "padding": 8,
@@ -386,8 +398,11 @@ exports[`renders list accordion with custom title and description styles 1`] = `
         }
       }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -399,6 +414,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
           Object {
             "overflow": "hidden",
           },
+          false,
           Array [
             Object {
               "padding": 8,
@@ -549,8 +565,11 @@ exports[`renders list accordion with left items 1`] = `
         }
       }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -562,6 +581,7 @@ exports[`renders list accordion with left items 1`] = `
           Object {
             "overflow": "hidden",
           },
+          false,
           Array [
             Object {
               "padding": 8,
@@ -711,8 +731,11 @@ exports[`renders multiline list accordion 1`] = `
         }
       }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -724,6 +747,7 @@ exports[`renders multiline list accordion 1`] = `
           Object {
             "overflow": "hidden",
           },
+          false,
           Array [
             Object {
               "padding": 8,

@@ -152,8 +152,11 @@ exports[`renders animated fab 1`] = `
                 }
               }
               accessible={true}
+              collapsable={false}
               focusable={true}
+              onBlur={[Function]}
               onClick={[Function]}
+              onFocus={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -165,6 +168,7 @@ exports[`renders animated fab 1`] = `
                   Object {
                     "overflow": "hidden",
                   },
+                  false,
                   Object {
                     "borderRadius": 16,
                   },
@@ -418,8 +422,11 @@ exports[`renders animated fab with label on the left 1`] = `
                 }
               }
               accessible={true}
+              collapsable={false}
               focusable={true}
+              onBlur={[Function]}
               onClick={[Function]}
+              onFocus={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -431,6 +438,7 @@ exports[`renders animated fab with label on the left 1`] = `
                   Object {
                     "overflow": "hidden",
                   },
+                  false,
                   Object {
                     "borderRadius": 16,
                   },
@@ -686,8 +694,11 @@ exports[`renders animated fab with label on the right by default 1`] = `
                 }
               }
               accessible={true}
+              collapsable={false}
               focusable={true}
+              onBlur={[Function]}
               onClick={[Function]}
+              onFocus={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -699,6 +710,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
                   Object {
                     "overflow": "hidden",
                   },
+                  false,
                   Object {
                     "borderRadius": 16,
                   },
