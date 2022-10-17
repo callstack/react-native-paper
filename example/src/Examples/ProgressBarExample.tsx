@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Animated } from 'react-native';
 
 import {
   Button,
@@ -8,21 +8,46 @@ import {
   MD2Colors,
   MD3Colors,
   useTheme,
+  ProgressBarProps,
 } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
+class ClassProgressBar extends React.Component {
+  constructor(props: ProgressBarProps) {
+    super(props);
+  }
+
+  render() {
+    return <ProgressBar {...this.props} />;
+  }
+}
+
+const AnimatedProgressBar = Animated.createAnimatedComponent(ClassProgressBar);
+
 const ProgressBarExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [progress, setProgress] = React.useState<number>(0.3);
-  const { isV3 } = useTheme();
+  const theme = useTheme();
+  const { isV3 } = theme;
+  const { current: progressBarValue } = React.useRef(new Animated.Value(0));
+
+  const runCustomAnimation = () => {
+    progressBarValue.setValue(0);
+    Animated.timing(progressBarValue, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: false,
+    }).start();
+  };
 
   return (
     <ScreenWrapper contentContainerStyle={styles.container}>
-      <Button onPress={() => setVisible(!visible)}>Toggle visible</Button>
+      <Button onPress={() => setVisible(!visible)}>Toggle visibility</Button>
       <Button onPress={() => setProgress(Math.random())}>
         Random progress
       </Button>
+      <Button onPress={runCustomAnimation}>Toggle animation</Button>
 
       <View style={styles.row}>
         <Paragraph>Default ProgressBar </Paragraph>
@@ -63,6 +88,16 @@ const ProgressBarExample = () => {
           style={styles.customHeight}
         />
       </View>
+
+      <View style={styles.row}>
+        <Paragraph>ProgressBar with animated value</Paragraph>
+        <AnimatedProgressBar
+          style={styles.progressBar}
+          animatedValue={progressBarValue}
+          color={MD2Colors.green200}
+          theme={theme}
+        />
+      </View>
     </ScreenWrapper>
   );
 };
@@ -78,6 +113,9 @@ const styles = StyleSheet.create({
   },
   customHeight: {
     height: 20,
+  },
+  progressBar: {
+    height: 15,
   },
 });
 
