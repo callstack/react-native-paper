@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Animated } from 'react-native';
 
 import {
   Button,
@@ -8,14 +8,37 @@ import {
   MD2Colors,
   MD3Colors,
   useTheme,
+  ProgressBarProps,
 } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
+class ClassProgressBar extends React.Component {
+  constructor(props: ProgressBarProps) {
+    super(props);
+  }
+
+  render() {
+    return <ProgressBar {...this.props} />;
+  }
+}
+
+const AnimatedProgressBar = Animated.createAnimatedComponent(ClassProgressBar);
+
 const ProgressBarExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [progress, setProgress] = React.useState<number>(0.3);
-  const { isV3 } = useTheme();
+  const theme = useTheme();
+  const { isV3 } = theme;
+  const progressBarValue = React.useRef(new Animated.Value(0));
+
+  const customAnim = () => {
+    Animated.timing(progressBarValue.current, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: false,
+    }).start();
+  };
 
   return (
     <ScreenWrapper contentContainerStyle={styles.container}>
@@ -63,6 +86,14 @@ const ProgressBarExample = () => {
           style={styles.customHeight}
         />
       </View>
+
+      <Button onPress={customAnim}>Animated Value</Button>
+      <AnimatedProgressBar
+        style={styles.progressBar}
+        animatedValue={progressBarValue.current}
+        color={MD2Colors.green200}
+        theme={theme}
+      />
     </ScreenWrapper>
   );
 };
@@ -78,6 +109,10 @@ const styles = StyleSheet.create({
   },
   customHeight: {
     height: 20,
+  },
+  progressBar: {
+    borderRadius: 7.5,
+    height: 15,
   },
 });
 
