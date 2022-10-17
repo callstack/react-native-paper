@@ -66,7 +66,7 @@ const TextInputOutlined = ({
   left,
   right,
   placeholderTextColor,
-  testID = 'text-input',
+  testID = 'text-input-outlined',
   ...rest
 }: ChildTextInputProps) => {
   const adornmentConfig = getAdornmentConfig({ left, right });
@@ -311,7 +311,7 @@ const TextInputOutlined = ({
             maxFontSizeMultiplier={rest.maxFontSizeMultiplier}
           />
           {render?.({
-            testID: `${testID}-outlined`,
+            testID,
             ...rest,
             ref: innerRef,
             onChangeText,

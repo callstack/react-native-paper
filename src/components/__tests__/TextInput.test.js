@@ -188,13 +188,13 @@ it('renders label with correct color when active', () => {
       placeholder="Type something"
       value={'Some test value'}
       onChangeText={(text) => this.setState({ text })}
-      testID={'text-input'}
+      testID={'text-input-flat'}
     />
   );
 
   fireEvent(getByTestId('text-input-flat'), 'focus');
 
-  expect(getByTestId('text-input-label-active')).toHaveStyle({
+  expect(getByTestId('text-input-flat-label-active')).toHaveStyle({
     color: getTheme().colors.primary,
   });
 });
@@ -220,7 +220,7 @@ it('renders input placeholder initially with an empty space character', () => {
     <TextInput multiline label="Multiline input" testID={'text-input'} />
   );
 
-  expect(getByTestId('text-input-flat').props.placeholder).toBe(' ');
+  expect(getByTestId('text-input').props.placeholder).toBe(' ');
 });
 
 it('correctly applies padding offset to input label on Android when RTL', () => {
@@ -278,7 +278,7 @@ it('correctly applies padding offset to input label on Android when LTR', () => 
         mode={mode}
         multiline
         label="Flat input"
-        testID={'text-input'}
+        testID={`text-input-${mode}`}
         style={style.lineHeight}
       />
     );
