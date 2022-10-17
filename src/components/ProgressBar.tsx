@@ -18,12 +18,12 @@ import type { Theme } from '../types';
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Animated value (between 0 and 1). This tells the progress bar to rely on this value to animate it.
-   * Should not be used with progress prop.
+   * Note: It should not be used in parallel with the `progress` prop.
    */
   animatedValue?: number;
   /**
    * Progress value (between 0 and 1).
-   * Should not be used with animatedValue prop.
+   * Note: It should not be used in parallel with the `animatedValue` prop.
    */
   progress?: number;
   /**
