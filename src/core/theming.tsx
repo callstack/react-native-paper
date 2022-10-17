@@ -14,7 +14,13 @@ import {
   MD3LightTheme,
 } from '../styles/themes';
 import { tokens } from '../styles/themes/v3/tokens';
-import type { Theme, MD2Theme, MD3Theme, MD3Colors } from '../types';
+import type {
+  Theme,
+  MD2Theme,
+  MD3Theme,
+  MD3Colors,
+  MD3AndroidColors,
+} from '../types';
 
 export const DefaultTheme = MD3LightTheme;
 
@@ -56,6 +62,22 @@ type Schemes = {
   darkScheme: MD3Colors;
 };
 
+export const getDynamicThemeElevations = (scheme: MD3AndroidColors) => {
+  const elevationValues = ['transparent', 0.05, 0.08, 0.11, 0.12, 0.14];
+  return elevationValues.reduce((elevations, elevationValue, index) => {
+    return {
+      ...elevations,
+      [`level${index}`]:
+        index === 0
+          ? elevationValue
+          : color(scheme.surface)
+              .mix(color(scheme.primary), elevationValue as number)
+              .rgb()
+              .string(),
+    };
+  }, {});
+};
+
 export const createDynamicThemeColors = ({ sourceColor }: Config): Schemes => {
   const { opacity } = tokens.md.ref;
   const modes = ['light', 'dark'] as const;
@@ -66,22 +88,7 @@ export const createDynamicThemeColors = ({ sourceColor }: Config): Schemes => {
 
   const { light, dark } = modes.reduce(
     (prev, curr) => {
-      const elevations = ['transparent', 0.05, 0.08, 0.11, 0.12, 0.14];
       const schemeModeJSON = schemes[curr].toJSON();
-
-      const elevation = elevations.reduce(
-        (a, v, index) => ({
-          ...a,
-          [`level${index}`]:
-            index === 0
-              ? v
-              : color(schemeModeJSON.surface)
-                  .mix(color(schemeModeJSON.primary), v as number)
-                  .rgb()
-                  .string(),
-        }),
-        {}
-      );
 
       const customColors = {
         surfaceDisabled: color(schemeModeJSON.onSurface)
@@ -97,6 +104,8 @@ export const createDynamicThemeColors = ({ sourceColor }: Config): Schemes => {
           .rgb()
           .string(),
       };
+
+      const elevation = getDynamicThemeElevations(schemeModeJSON);
 
       const dynamicThemeColors = Object.assign(
         {},

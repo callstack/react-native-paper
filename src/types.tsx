@@ -77,6 +77,38 @@ export type MD3Colors = {
   elevation: MD3ElevationColors;
 };
 
+export type MD3AndroidColors = {
+  primary: number;
+  primaryContainer: number;
+  secondary: number;
+  secondaryContainer: number;
+  tertiary: number;
+  tertiaryContainer: number;
+  surface: number;
+  surfaceVariant: number;
+  background: number;
+  error: number;
+  errorContainer: number;
+  onPrimary: number;
+  onPrimaryContainer: number;
+  onSecondary: number;
+  onSecondaryContainer: number;
+  onTertiary: number;
+  onTertiaryContainer: number;
+  onSurface: number;
+  onSurfaceVariant: number;
+  onError: number;
+  onErrorContainer: number;
+  onBackground: number;
+  outline: number;
+  outlineVariant: number;
+  inverseSurface: number;
+  inverseOnSurface: number;
+  inversePrimary: number;
+  shadow: number;
+  scrim: number;
+};
+
 export type MD3Palette = {};
 
 export type ThemeProp = $DeepPartial<ReactNativePaper.Theme>;

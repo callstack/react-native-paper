@@ -6,7 +6,10 @@ import color from 'color';
 
 import { MD3DarkTheme, MD3LightTheme } from '../../styles/themes';
 import { tokens } from '../../styles/themes/v3/tokens';
-import { createDynamicThemeColors } from '../theming';
+import {
+  createDynamicThemeColors,
+  getDynamicThemeElevations,
+} from '../theming';
 
 const sourceColor = 'rgba(200, 100, 0, 1)';
 
@@ -124,23 +127,13 @@ describe('createDynamicThemeColors', () => {
       const dynamicThemeColors = createDynamicThemeColors({
         sourceColor,
       });
-
-      const elevations = ['transparent', 0.05, 0.08, 0.11, 0.12, 0.14];
-      const elevation = elevations.reduce(
-        (a, v, index) => ({
-          ...a,
-          [`level${index}`]:
-            index === 0
-              ? v
-              : color(dynamicThemeColors[mode].surface)
-                  .mix(color(dynamicThemeColors[mode].primary), v)
-                  .rgb()
-                  .string(),
-        }),
-        {}
+      const dynamicThemeElevations = getDynamicThemeElevations(
+        dynamicThemeColors[mode]
       );
 
-      expect(dynamicThemeColors[mode].elevation).toMatchObject(elevation);
+      expect(dynamicThemeColors[mode].elevation).toMatchObject(
+        dynamicThemeElevations
+      );
     });
   });
 
