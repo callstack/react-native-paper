@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {
   Animated,
-  TextInput as NativeTextInput,
   LayoutChangeEvent,
   StyleProp,
+  TextInput as NativeTextInput,
   TextStyle,
 } from 'react-native';
 
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import TextInputAffix, {
   Props as TextInputAffixProps,
 } from './Adornment/TextInputAffix';
@@ -137,7 +137,7 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * testID to be used on tests.
    */
@@ -488,4 +488,4 @@ TextInput.Icon = TextInputIcon;
 // @ts-ignore Types of property 'theme' are incompatible.
 TextInput.Affix = TextInputAffix;
 
-export default withTheme(TextInput);
+export default withInternalTheme(TextInput);

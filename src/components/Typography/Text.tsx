@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {
-  Text as NativeText,
-  TextStyle,
+  I18nManager,
   StyleProp,
   StyleSheet,
-  I18nManager,
+  Text as NativeText,
+  TextStyle,
 } from 'react-native';
 
-import { useTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import { tokens } from '../../styles/themes/v3/tokens';
 import { Font, MD3TypescaleKey, ThemeProp } from '../../types';
 
@@ -84,7 +84,7 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
 ) => {
   const root = React.useRef<NativeText | null>(null);
   // FIXME: destructure it in TS 4.6+
-  const theme = useTheme(initialTheme);
+  const theme = useInternalTheme(initialTheme);
   const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
 
   React.useImperativeHandle(ref, () => ({

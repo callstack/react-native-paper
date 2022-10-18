@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Animated, View, StyleSheet } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
 
-import { withTheme } from '../../core/theming';
-import type { $RemoveChildren, Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { $RemoveChildren, InternalTheme } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { getAndroidSelectionControlColor } from './utils';
@@ -31,7 +31,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * testID to be used on tests.
    */
@@ -176,9 +176,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(CheckboxAndroid);
+export default withInternalTheme(CheckboxAndroid);
 
 // @component-docs ignore-next-line
-const CheckboxAndroidWithTheme = withTheme(CheckboxAndroid);
+const CheckboxAndroidWithTheme = withInternalTheme(CheckboxAndroid);
 // @component-docs ignore-next-line
 export { CheckboxAndroidWithTheme as CheckboxAndroid };

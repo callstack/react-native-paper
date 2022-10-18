@@ -1,19 +1,19 @@
 import * as React from 'react';
-import { View, Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 import type { StackNavigationProp } from '@react-navigation/stack';
 import {
   Appbar,
   FAB,
-  Switch,
-  Paragraph,
-  Text,
-  useTheme,
-  RadioButton,
   List,
+  Paragraph,
+  RadioButton,
+  Switch,
+  Text,
 } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useExampleTheme } from '..';
 import { yellowA200 } from '../../../src/styles/themes/v2/colors';
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -37,7 +37,7 @@ const AppbarExample = ({ navigation }: Props) => {
   const [showCalendarIcon, setShowCalendarIcon] = React.useState(false);
   const [showElevated, setShowElevated] = React.useState(false);
 
-  const theme = useTheme();
+  const theme = useExampleTheme();
   const { bottom, left, right } = useSafeAreaInsets();
   const height = theme.isV3 ? 80 : 56;
 

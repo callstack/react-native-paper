@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
-import { useTheme } from '../../../core/theming';
+import { useInternalTheme } from '../../../core/theming';
 import AnimatedText from '../../Typography/AnimatedText';
 import type { LabelBackgroundProps } from '../types';
 
@@ -25,7 +25,7 @@ const LabelBackground = ({
     outputRange: [hasFocus ? 1 : 0, 0],
   });
 
-  const { isV3 } = useTheme();
+  const { isV3 } = useInternalTheme();
 
   const labelTranslationX = {
     translateX: parentState.labeled.interpolate({

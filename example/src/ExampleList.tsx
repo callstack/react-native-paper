@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FlatList } from 'react-native';
 
 import type { StackNavigationProp } from '@react-navigation/stack';
-import { List, Divider, useTheme } from 'react-native-paper';
+import { Divider, List } from 'react-native-paper';
 import { useSafeArea } from 'react-native-safe-area-context';
 
 import ActivityIndicatorExample from './Examples/ActivityIndicatorExample';
@@ -40,6 +40,8 @@ import TextInputExample from './Examples/TextInputExample';
 import ThemeExample from './Examples/ThemeExample';
 import ToggleButtonExample from './Examples/ToggleButtonExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
+
+import { useExampleTheme } from '.';
 
 export const examples: Record<
   string,
@@ -105,7 +107,7 @@ export default function ExampleList({ navigation }: Props) {
 
   const keyExtractor = (item: { id: string }) => item.id;
 
-  const { colors } = useTheme();
+  const { colors } = useExampleTheme();
   const safeArea = useSafeArea();
 
   return (

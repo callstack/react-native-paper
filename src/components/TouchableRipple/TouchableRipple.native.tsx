@@ -9,8 +9,8 @@ import {
   GestureResponderEvent,
 } from 'react-native';
 
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import { getTouchableRippleColors } from './utils';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
@@ -25,7 +25,7 @@ type Props = React.ComponentProps<typeof Pressable> & {
   underlayColor?: string;
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 const TouchableRipple = ({
@@ -113,4 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(TouchableRipple);
+export default withInternalTheme(TouchableRipple);

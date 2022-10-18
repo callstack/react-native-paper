@@ -3,10 +3,10 @@ import { StyleSheet, ViewStyle } from 'react-native';
 import color from 'color';
 
 import { black, white } from '../../styles/themes/v2/colors';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 
 type BaseProps = {
-  theme: Theme;
+  theme: InternalTheme;
   disabled?: boolean;
   checked: boolean;
 };
@@ -37,7 +37,7 @@ export const getDisabledSegmentedButtonStyle = ({
   index,
   buttons,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   buttons: { disabled?: boolean }[];
   index: number;
 }): ViewStyle => {
@@ -57,7 +57,7 @@ export const getSegmentedButtonBorderRadius = ({
   segment,
   theme,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   segment?: 'first' | 'last';
 }): ViewStyle => {
   if (segment === 'first') {

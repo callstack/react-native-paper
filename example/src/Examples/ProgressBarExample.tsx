@@ -7,10 +7,10 @@ import {
   Paragraph,
   MD2Colors,
   MD3Colors,
-  useTheme,
   ProgressBarProps,
 } from 'react-native-paper';
 
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 class ClassProgressBar extends React.Component {
@@ -28,7 +28,7 @@ const AnimatedProgressBar = Animated.createAnimatedComponent(ClassProgressBar);
 const ProgressBarExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [progress, setProgress] = React.useState<number>(0.3);
-  const theme = useTheme();
+  const theme = useExampleTheme();
   const { isV3 } = theme;
   const { current: progressBarValue } = React.useRef(new Animated.Value(0));
 

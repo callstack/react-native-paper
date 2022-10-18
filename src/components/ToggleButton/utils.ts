@@ -1,13 +1,13 @@
 import color from 'color';
 
 import { tokens } from '../../styles/themes/v3/tokens';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 
 export const getToggleButtonColor = ({
   theme,
   checked,
 }: {
-  theme: Theme;
+  theme: InternalTheme;
   checked: boolean | null;
 }) => {
   if (checked) {

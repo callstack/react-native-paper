@@ -1,6 +1,7 @@
+import type { ComponentType } from 'react';
 import type { ColorValue } from 'react-native';
 
-import { createTheming } from '@callstack/react-theme-provider';
+import { $DeepPartial, createTheming } from '@callstack/react-theme-provider';
 import {
   argbFromHex,
   themeFromSourceColor,
@@ -15,8 +16,7 @@ import {
 } from '../styles/themes';
 import { tokens } from '../styles/themes/v3/tokens';
 import type {
-  Theme,
-  MD2Theme,
+  InternalTheme,
   MD3Theme,
   MD3Colors,
   MD3AndroidColors,
@@ -25,16 +25,23 @@ import type {
 
 export const DefaultTheme = MD3LightTheme;
 
-const {
+export const {
   ThemeProvider,
   withTheme,
-  useTheme: useThemeProviderTheme,
-} = createTheming<Theme>(DefaultTheme);
+  useTheme: useAppTheme,
+} = createTheming<unknown>(MD3LightTheme);
 
-const useTheme = (overrides?: Parameters<typeof useThemeProviderTheme>[0]) =>
-  useThemeProviderTheme<MD2Theme | MD3Theme>(overrides);
+export function useTheme<T = MD3Theme>(overrides?: $DeepPartial<T>) {
+  return useAppTheme<T>(overrides);
+}
 
-export { ThemeProvider, withTheme, useTheme };
+export const useInternalTheme = (
+  themeOverrides?: $DeepPartial<InternalTheme>
+) => useAppTheme<InternalTheme>(themeOverrides);
+
+export const withInternalTheme = <Props extends { theme: InternalTheme }, C>(
+  WrappedComponent: ComponentType<Props & { theme: InternalTheme }> & C
+) => withTheme<Props, C>(WrappedComponent);
 
 export const defaultThemesByVersion = {
   2: {

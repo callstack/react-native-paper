@@ -1,23 +1,23 @@
 import * as React from 'react';
 import {
-  View,
   Animated,
+  EasingFunction,
+  Platform,
+  StyleProp,
+  StyleSheet,
   TouchableWithoutFeedback,
   TouchableWithoutFeedbackProps,
-  StyleSheet,
-  StyleProp,
-  Platform,
+  View,
   ViewStyle,
-  EasingFunction,
 } from 'react-native';
 
 import color from 'color';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 
-import { withTheme } from '../../core/theming';
+import { withInternalTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
 import { black, white } from '../../styles/themes/v2/colors';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
@@ -257,7 +257,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * TestID used for testing purposes
    */
@@ -309,7 +309,7 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  * For integration with React Navigation, you can use [react-navigation-material-bottom-tabs](https://github.com/react-navigation/react-navigation/tree/main/packages/material-bottom-tabs) and consult [createMaterialBottomTabNavigator](https://reactnavigation.org/docs/material-bottom-tab-navigator/) documentation.
  *
  * By default Bottom navigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
- * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more information.
+ * See [Dark InternalTheme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more information.
  *
  * <div class="screenshots">
  *   <img class="small" src="screenshots/bottom-navigation.gif" />
@@ -1119,7 +1119,7 @@ BottomNavigation.SceneMap = (scenes: {
   );
 };
 
-export default withTheme(BottomNavigation);
+export default withInternalTheme(BottomNavigation);
 
 const styles = StyleSheet.create({
   container: {

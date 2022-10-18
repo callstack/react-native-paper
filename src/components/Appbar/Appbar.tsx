@@ -1,21 +1,21 @@
 import * as React from 'react';
-import { View, ViewStyle, Platform, StyleSheet, StyleProp } from 'react-native';
+import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import color from 'color';
 
-import { withTheme } from '../../core/theming';
-import type { MD3Elevation, Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme, MD3Elevation } from '../../types';
 import Surface from '../Surface';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
 import AppbarContent from './AppbarContent';
 import AppbarHeader from './AppbarHeader';
 import {
-  getAppbarColor,
-  renderAppbarContent,
-  DEFAULT_APPBAR_HEIGHT,
-  modeAppbarHeight,
   AppbarModes,
+  DEFAULT_APPBAR_HEIGHT,
+  getAppbarColor,
+  modeAppbarHeight,
+  renderAppbarContent,
 } from './utils';
 
 export type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
@@ -55,7 +55,7 @@ export type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   style?: StyleProp<ViewStyle>;
 };
 
@@ -63,6 +63,9 @@ export type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
  * A component to display action items in a bar. It can be placed at the top or bottom.
  * The top bar usually contains the screen title, controls such as navigation buttons, menu button etc.
  * The bottom bar usually provides access to a drawer and up to four actions.
+ *
+ * By default Appbar uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
+ * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more informations
  *
  * <div class="screenshots">
  *   <img class="small" src="screenshots/appbar.png" />
@@ -346,9 +349,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Appbar);
+export default withInternalTheme(Appbar);
 
 // @component-docs ignore-next-line
-const AppbarWithTheme = withTheme(Appbar);
+const AppbarWithTheme = withInternalTheme(Appbar);
 // @component-docs ignore-next-line
 export { AppbarWithTheme as Appbar };

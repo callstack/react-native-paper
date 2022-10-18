@@ -1,13 +1,13 @@
 import * as React from 'react';
 import type {
   StyleProp,
-  ViewStyle,
   TouchableWithoutFeedback,
+  ViewStyle,
 } from 'react-native';
 
 import color from 'color';
 
-import { useTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import { black } from '../../styles/themes/v2/colors';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
@@ -82,7 +82,7 @@ const AppbarAction = ({
   isLeading,
   ...rest
 }: Props) => {
-  const theme = useTheme();
+  const theme = useInternalTheme();
 
   const actionIconColor = iconColor
     ? iconColor

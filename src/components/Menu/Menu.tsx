@@ -1,28 +1,27 @@
 import * as React from 'react';
 import {
-  Platform,
-  StyleProp,
-  StyleSheet,
   Animated,
   BackHandler,
   Dimensions,
   Easing,
+  findNodeHandle,
   I18nManager,
   LayoutRectangle,
+  NativeEventSubscription,
+  Platform,
+  ScrollView,
+  StyleProp,
+  StyleSheet,
   TouchableWithoutFeedback,
   View,
   ViewStyle,
-  ScrollView,
-  findNodeHandle,
-  NativeEventSubscription,
 } from 'react-native';
 
 import color from 'color';
 
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
-import { withTheme } from '../../core/theming';
-import type { $Omit } from '../../types';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { $Omit, InternalTheme } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
@@ -64,7 +63,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 type Layout = $Omit<$Omit<LayoutRectangle, 'x'>, 'y'>;
@@ -608,4 +607,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Menu);
+export default withInternalTheme(Menu);

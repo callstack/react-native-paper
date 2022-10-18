@@ -1,18 +1,18 @@
 import * as React from 'react';
 import {
+  GestureResponderEvent,
+  I18nManager,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
   View,
   ViewStyle,
-  StyleSheet,
-  StyleProp,
-  TextStyle,
-  I18nManager,
-  GestureResponderEvent,
 } from 'react-native';
 
 import color from 'color';
 
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -56,7 +56,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * Style that is passed to the wrapping TouchableRipple element.
    */
@@ -313,4 +313,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(ListAccordion);
+export default withInternalTheme(ListAccordion);

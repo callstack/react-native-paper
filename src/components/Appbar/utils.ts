@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import color from 'color';
 
 import overlay from '../../styles/overlay';
 import { black, white } from '../../styles/themes/v2/colors';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
 import AppbarContent from './AppbarContent';
@@ -14,7 +14,7 @@ import AppbarContent from './AppbarContent';
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 
 export const getAppbarColor = (
-  theme: Theme,
+  theme: InternalTheme,
   elevation: number,
   customBackground?: ColorValue,
   elevated?: boolean

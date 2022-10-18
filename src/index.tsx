@@ -147,10 +147,4 @@ export type { Props as TitleProps } from './components/Typography/v2/Title';
 export type { Props as TextProps } from './components/Typography/Text';
 export type { Props as SegmentedButtonsProps } from './components/SegmentedButtons/SegmentedButtons';
 
-export type {
-  MD2Theme,
-  MD3Theme,
-  ThemeBase,
-  MD3Elevation,
-  Theme,
-} from './types';
+export type { MD2Theme, MD3Theme, ThemeBase, MD3Elevation } from './types';

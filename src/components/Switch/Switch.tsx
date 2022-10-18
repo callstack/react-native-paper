@@ -7,8 +7,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import { getSwitchColor } from './utils';
 
 const version = NativeModules.PlatformConstants
@@ -36,7 +36,7 @@ export type Props = React.ComponentPropsWithRef<typeof NativeSwitch> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 /**
@@ -123,4 +123,4 @@ const Switch = ({
   );
 };
 
-export default withTheme(Switch);
+export default withInternalTheme(Switch);

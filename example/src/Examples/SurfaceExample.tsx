@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Text, Surface, useTheme, MD3Elevation } from 'react-native-paper';
+import { MD3Elevation, Surface, Text } from 'react-native-paper';
 
+import { useExampleTheme } from '..';
 import { isWeb } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';
 
 const SurfaceExample = () => {
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
 
   const v2Elevation = [1, 2, 4, 8, 12];
   const baseElevation = isV3 ? Array.from({ length: 6 }) : v2Elevation;

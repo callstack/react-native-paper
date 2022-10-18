@@ -1,15 +1,15 @@
 import * as React from 'react';
 import {
-  ViewStyle,
-  StyleSheet,
-  StyleProp,
   GestureResponderEvent,
   Platform,
   Pressable,
+  StyleProp,
+  StyleSheet,
+  ViewStyle,
 } from 'react-native';
 
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import { getTouchableRippleColors } from './utils';
 
 export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
@@ -54,7 +54,7 @@ export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 /**
@@ -257,4 +257,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(TouchableRipple);
+export default withInternalTheme(TouchableRipple);

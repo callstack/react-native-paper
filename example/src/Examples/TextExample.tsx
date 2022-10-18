@@ -8,13 +8,13 @@ import {
   Subheading,
   Text,
   Title,
-  useTheme,
 } from 'react-native-paper';
 
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const TextExample = () => {
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
   return (
     <ScreenWrapper>
       <View style={styles.container}>

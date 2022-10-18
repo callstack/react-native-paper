@@ -111,7 +111,7 @@ export type MD3AndroidColors = {
 
 export type MD3Palette = {};
 
-export type ThemeProp = $DeepPartial<ReactNativePaper.Theme>;
+export type ThemeProp = $DeepPartial<InternalTheme>;
 
 export type ThemeBase = {
   dark: boolean;
@@ -136,7 +136,7 @@ export type MD2Theme = ThemeBase & {
   fonts: Fonts;
 };
 
-export type Theme = MD2Theme | MD3Theme;
+export type InternalTheme = MD2Theme | MD3Theme;
 
 // MD3 types
 export enum MD3TypescaleKey {

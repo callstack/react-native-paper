@@ -1,19 +1,19 @@
 import * as React from 'react';
 import {
   Animated,
+  I18nManager,
   StyleProp,
   StyleSheet,
+  TextStyle,
   TouchableWithoutFeedback,
   View,
   ViewStyle,
-  I18nManager,
-  TextStyle,
 } from 'react-native';
 
 import color from 'color';
 
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 
@@ -48,7 +48,7 @@ export type Props = React.ComponentPropsWithRef<
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 /**
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(DataTableTitle);
+export default withInternalTheme(DataTableTitle);
 
 // @component-docs ignore-next-line
 export { DataTableTitle };

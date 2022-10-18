@@ -1,28 +1,28 @@
 import * as React from 'react';
-import {
-  Animated,
-  View,
-  ViewStyle,
-  StyleSheet,
-  StyleProp,
-  Easing,
-  ScrollView,
-  Text,
-  Platform,
-  I18nManager,
-} from 'react-native';
 import type {
   AccessibilityState,
   NativeSyntheticEvent,
   TextLayoutEventData,
 } from 'react-native';
+import {
+  Animated,
+  Easing,
+  I18nManager,
+  Platform,
+  ScrollView,
+  StyleProp,
+  StyleSheet,
+  Text,
+  View,
+  ViewStyle,
+} from 'react-native';
 
 import color from 'color';
 
-import { withTheme } from '../../core/theming';
-import type { $RemoveChildren, Theme } from '../../types';
-import Icon from '../Icon';
+import { withInternalTheme } from '../../core/theming';
+import type { $RemoveChildren, InternalTheme } from '../../types';
 import type { IconSource } from '../Icon';
+import Icon from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import AnimatedText from '../Typography/AnimatedText';
@@ -95,7 +95,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   testID?: string;
 };
 
@@ -521,4 +521,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(AnimatedFAB);
+export default withInternalTheme(AnimatedFAB);
