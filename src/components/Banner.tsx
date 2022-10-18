@@ -32,7 +32,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
    *
    * To customize button you can pass other props that button component takes.
    */
-  actions: Array<
+  actions?: Array<
     {
       label: string;
     } & Omit<React.ComponentProps<typeof Button>, 'children'>
@@ -128,7 +128,7 @@ const Banner = ({
   visible,
   icon,
   children,
-  actions,
+  actions = [],
   contentStyle,
   elevation = 1,
   style,
