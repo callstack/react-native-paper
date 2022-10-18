@@ -15,6 +15,9 @@ import {
   ScrollView,
   findNodeHandle,
   NativeEventSubscription,
+  Keyboard,
+  KeyboardEvent as RNKeyboardEvent,
+  EmitterSubscription,
 } from 'react-native';
 
 import color from 'color';
@@ -85,6 +88,8 @@ const SCREEN_INDENT = 8;
 const ANIMATION_DURATION = 250;
 // From the 'Standard easing' section of https://material.io/design/motion/speed.html#easing
 const EASING = Easing.bezier(0.4, 0, 0.2, 1);
+
+const WINDOW_LAYOUT = Dimensions.get('window');
 
 /**
  * Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
@@ -159,6 +164,17 @@ class Menu extends React.Component<Props, State> {
     scaleAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
   };
 
+  componentDidMount() {
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      this.keyboardDidShow
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      this.keyboardDidHide
+    );
+  }
+
   componentDidUpdate(prevProps: Props) {
     if (prevProps.visible !== this.props.visible) {
       this.updateVisibility();
@@ -167,12 +183,17 @@ class Menu extends React.Component<Props, State> {
 
   componentWillUnmount() {
     this.removeListeners();
+    this.keyboardDidShowListener?.remove();
+    this.keyboardDidHideListener?.remove();
   }
 
   private anchor?: View | null = null;
   private menu?: View | null = null;
   private backHandlerSubscription: NativeEventSubscription | undefined;
   private dimensionsSubscription: NativeEventSubscription | undefined;
+  private keyboardDidShowListener: EmitterSubscription | undefined;
+  private keyboardDidHideListener: EmitterSubscription | undefined;
+  private keyboardHeight = 0;
 
   private isCoordinate = (anchor: any): anchor is { x: number; y: number } =>
     !React.isValidElement(anchor) &&
@@ -348,6 +369,14 @@ class Menu extends React.Component<Props, State> {
     });
   };
 
+  private keyboardDidShow = (e: RNKeyboardEvent) => {
+    this.keyboardHeight = e.endCoordinates.height;
+  };
+
+  private keyboardDidHide = () => {
+    this.keyboardHeight = 0;
+  };
+
   render() {
     const {
       visible,
@@ -392,8 +421,8 @@ class Menu extends React.Component<Props, State> {
       },
     ];
 
-    const windowLayout = Dimensions.get('window');
-
+    const windowLayout = { ...WINDOW_LAYOUT };
+    windowLayout.height = windowLayout.height - this.keyboardHeight;
     // We need to translate menu while animating scale to imitate transform origin for scale animation
     const positionTransforms = [];
 
