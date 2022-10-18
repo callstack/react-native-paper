@@ -65,6 +65,7 @@ export type Props = {
    *
    * By default, this is `false` with theme version 3 and `true` when you have more than 3 tabs.
    * Pass `shifting={false}` to explicitly disable this animation, or `shifting={true}` to always use this animation.
+   * Note that you need at least 2 tabs be able to run this animation.
    */
   shifting?: boolean;
   /**
@@ -387,6 +388,14 @@ const BottomNavigation = ({
 }: Props) => {
   const { scale } = theme.animation;
 
+  if (shifting && navigationState.routes.length < 2) {
+    shifting = false;
+
+    console.warn(
+      'BottomNavigation needs at least 2 tabs to run shifting animation'
+    );
+  }
+
   const focusedKey = navigationState.routes[navigationState.index].key;
 
   /**
@@ -609,14 +618,14 @@ const BottomNavigation = ({
     ? overlay(elevation, colors?.surface)
     : colors?.primary;
 
-  const v2BackgroundColorInterpolation = indexAnim.interpolate({
+  const v2BackgroundColorInterpolation = shifting ? indexAnim.interpolate({
     inputRange: routes.map((_, i) => i),
     // FIXME: does outputRange support ColorValue or just strings?
     // @ts-expect-error
     outputRange: routes.map(
       (route) => getColor({ route }) || approxBackgroundColor
     ),
-  });
+  }) : approxBackgroundColor;
 
   const backgroundColor = isV3
     ? customBackground || theme.colors.elevation.level2

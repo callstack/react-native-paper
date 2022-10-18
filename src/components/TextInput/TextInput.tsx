@@ -55,7 +55,7 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    */
   onChangeText?: Function;
   /**
-   * Selection color of the input
+   * Selection color of the input.
    */
   selectionColor?: string;
   /**
@@ -74,6 +74,11 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    * Active outline color of the input.
    */
   activeOutlineColor?: string;
+  /**
+   * @supported Available in v5.x
+   * Color of the text in the input.
+   */
+  textColor?: string;
   /**
    * Sets min height with densed layout. For `TextInput` in `flat` mode
    * height is `64dp` or in dense layout - `52dp` with label or `40dp` without label.

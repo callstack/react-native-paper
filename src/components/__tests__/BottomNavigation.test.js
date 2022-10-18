@@ -175,6 +175,25 @@ it('renders non-shifting bottom navigation', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('does not crash when shifting is true and the number of tabs in the navigationState is less than 2', () => {
+  jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+  render(
+    <BottomNavigation
+      shifting={true}
+      navigationState={createState(0, 1)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+    />
+  );
+
+  expect(console.warn).toHaveBeenCalledWith(
+    'BottomNavigation needs at least 2 tabs to run shifting animation'
+  );
+
+  jest.restoreAllMocks();
+});
+
 it('renders custom icon and label in shifting bottom navigation', () => {
   const tree = renderer
     .create(
@@ -337,3 +356,17 @@ it('renders custom background color passed to barStyle property', () => {
   const wrapper = getByTestId('bottom-navigation-bar-content');
   expect(wrapper).toHaveStyle({ backgroundColor: red300 });
 });
+
+it('renders a single tab', () => {
+  const { queryByTestId } = render(
+    <BottomNavigation
+      shifting={false}
+      navigationState={createState(0, 1)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+      testID={'bottom-navigation'}
+    />
+  );
+
+  expect(queryByTestId('bottom-navigation')).not.toBeNull();
+})

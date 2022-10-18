@@ -72,39 +72,150 @@ exports[`renders snackbar with Text as a child 1`] = `
           }
         }
       >
-        <Text
+        <View
           style={
             Array [
               Object {
-                "textAlign": "left",
+                "flex": 1,
+                "marginLeft": 16,
+                "marginVertical": 14,
               },
               Object {
-                "color": "rgba(28, 27, 31, 1)",
-                "fontFamily": "System",
-                "fontWeight": "400",
+                "color": "rgba(255, 251, 254, 1)",
+                "marginRight": 16,
               },
-              Object {
-                "writingDirection": "ltr",
-              },
-              Array [
-                Object {
-                  "flex": 1,
-                  "flexWrap": "wrap",
-                  "marginLeft": 16,
-                  "marginVertical": 14,
-                },
-                Object {
-                  "color": "rgba(255, 251, 254, 1)",
-                  "marginRight": 16,
-                },
-              ],
             ]
           }
         >
-          <Text>
-            Snackbar content
-          </Text>
-        </Text>
+          <View>
+            <Text>
+              Snackbar content
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`renders snackbar with View & Text as a child 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  pointerEvents="box-none"
+  style={
+    Array [
+      Object {
+        "bottom": 0,
+        "position": "absolute",
+        "width": "100%",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      Object {
+        "alignSelf": undefined,
+        "bottom": undefined,
+        "left": undefined,
+        "position": undefined,
+        "right": undefined,
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 2,
+          "width": 0,
+        },
+        "shadowOpacity": 0.15,
+        "shadowRadius": 6,
+        "top": undefined,
+      }
+    }
+  >
+    <View
+      collapsable={false}
+      style={
+        Object {
+          "shadowColor": "#000",
+          "shadowOffset": Object {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.3,
+          "shadowRadius": 2,
+        }
+      }
+    >
+      <View
+        accessibilityLiveRegion="polite"
+        collapsable={false}
+        pointerEvents="box-none"
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "rgba(28, 27, 31, 1)",
+            "borderRadius": 4,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "margin": 8,
+            "opacity": 1,
+            "transform": Array [
+              Object {
+                "scale": 1,
+              },
+            ],
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flex": 1,
+                "marginLeft": 16,
+                "marginVertical": 14,
+              },
+              Object {
+                "color": "rgba(255, 251, 254, 1)",
+                "marginRight": 16,
+              },
+            ]
+          }
+        >
+          <View>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "backgroundColor": "#ef9a9a",
+                    "padding": 15,
+                  }
+                }
+              />
+              <Text
+                style={
+                  Object {
+                    "color": "#ffffff",
+                    "flexShrink": 1,
+                    "flexWrap": "wrap",
+                    "marginLeft": 10,
+                  }
+                }
+              >
+                Error Message which is veryyyyyyyyyyyy longggggggg Error Message which is veryyyyyyyyyyyy longggggggg
+              </Text>
+            </View>
+          </View>
+        </View>
       </View>
     </View>
   </View>
@@ -198,7 +309,6 @@ exports[`renders snackbar with action button 1`] = `
               Array [
                 Object {
                   "flex": 1,
-                  "flexWrap": "wrap",
                   "marginLeft": 16,
                   "marginVertical": 14,
                 },
@@ -450,7 +560,6 @@ exports[`renders snackbar with content 1`] = `
               Array [
                 Object {
                   "flex": 1,
-                  "flexWrap": "wrap",
                   "marginLeft": 16,
                   "marginVertical": 14,
                 },
