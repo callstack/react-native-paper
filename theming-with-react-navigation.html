@@ -34,6 +34,53 @@
 <p>In this guide we will look into how to apply theming for an application using React Native Paper and React Navigation at the same time.</p>
 <p>Offering different theme options, especially dark/light ones, becomes increasingly a standard requirement of the modern mobile application. Fortunately, both React Navigation and React Native Paper support configurable theming out-of-the-box.
 But how to make them work together?</p>
+<h2 id="themes-adaptation">
+          <a class="anchor" href="#themes-adaptation">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Themes adaptation</h2>
+<h3 id="material-design-2">
+          <a class="anchor" href="#material-design-2">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Material Design 2</h3>
+<p>Fortunately, in Material Design 2, both React Navigation and React Native Paper offer very similar API when it comes to theming and theme color structure. It's possible to import them in light and dark variants from both.</p>
+<pre><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span>
+  DarkTheme <span class="token keyword">as</span> NavigationDarkTheme<span class="token punctuation">,</span>
+  DefaultTheme <span class="token keyword">as</span> NavigationDefaultTheme<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/native'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span>
+  MD2LightTheme<span class="token punctuation">,</span>
+  MD2DarkTheme<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span></code></pre>
+<h3 id="material-design-3">
+          <a class="anchor" href="#material-design-3">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Material Design 3</h3>
+<p>From v5, React Native Paper theme colors structure is following the Material Design 3 <i>(known as Material You)</i> colors system, which differs significantly from both previous Paper's theme and React Navigation theme. </p>
+<p>However, to simplify adapting React Navigation theme colors, to use the ones from React Native Paper, it's worth using a utility called <code>adaptNavigationTheme</code> – it accepts navigation compliant themes in both modes and returns their equivalents adjusted to Material Design 3.</p>
+<pre><code class="language-ts"><span class="token keyword">import</span> <span class="token punctuation">{</span>
+  DarkTheme <span class="token keyword">as</span> NavigationDarkTheme<span class="token punctuation">,</span>
+  DefaultTheme <span class="token keyword">as</span> NavigationDefaultTheme<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/native'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span> LightTheme<span class="token punctuation">,</span> DarkTheme <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">adaptNavigationTheme</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  light<span class="token punctuation">:</span> NavigationDefaultTheme<span class="token punctuation">,</span>
+  dark<span class="token punctuation">:</span> NavigationDarkTheme<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Library exports also Material Design 3 themes in both modes:</p>
+<pre><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span>
+  MD3LightTheme<span class="token punctuation">,</span>
+  MD3DarkTheme<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span></code></pre>
 <h2 id="combining-theme-objects">
           <a class="anchor" href="#combining-theme-objects">
             <svg width="16" height="16">
@@ -97,40 +144,104 @@ For React Native Paper theme to work, we need to use <code>PaperProvider</code> 
     </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PaperProvider</span></span><span class="token punctuation">&gt;</span></span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<p>Fortunately, both React Navigation and React Native Paper offer very similar API when it comes to theming. It's possible to import default themes in light and dark variants from both.</p>
-<p>React Navigation and React Native Paper use the same name for default themes - <code>DefaultTheme</code> and <code>DarkTheme</code>, so we need to alias them at the imports.</p>
 <p>Our goal here is to combine those two themes, so that we could control the theme for the entire application from a single place.</p>
 <p>To make things easier we can use <a href="https://www.npmjs.com/package/deepmerge">deepmerge</a> package. With <code>yarn</code> we can install it like this</p>
 <pre><code class="language-sh">yarn add deepmerge</code></pre>
+<h3 id="material-design-2-1">
+          <a class="anchor" href="#material-design-2">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Material Design 2</h3>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span>
   NavigationContainer<span class="token punctuation">,</span>
   DarkTheme <span class="token keyword">as</span> NavigationDarkTheme<span class="token punctuation">,</span>
   DefaultTheme <span class="token keyword">as</span> NavigationDefaultTheme<span class="token punctuation">,</span>
 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/native'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span>
-  DarkTheme <span class="token keyword">as</span> PaperDarkTheme<span class="token punctuation">,</span>
-  DefaultTheme <span class="token keyword">as</span> PaperDefaultTheme<span class="token punctuation">,</span>
-  Provider <span class="token keyword">as</span> PaperProvider<span class="token punctuation">,</span>
+  MD2DarkTheme<span class="token punctuation">,</span>
+  MD2LightTheme<span class="token punctuation">,</span>
 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> merge <span class="token keyword">from</span> <span class="token string">'deepmerge'</span><span class="token punctuation">;</span>
 
-<span class="token keyword">const</span> CombinedDefaultTheme <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span>PaperDefaultTheme<span class="token punctuation">,</span> NavigationDefaultTheme<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> CombinedDarkTheme <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span>PaperDarkTheme<span class="token punctuation">,</span> NavigationDarkTheme<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p>Alternatively, we could merge those themes using vanilla JavaScript</p>
+<span class="token keyword">const</span> CombinedDefaultTheme <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span>MD2DarkTheme<span class="token punctuation">,</span> NavigationDefaultTheme<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> CombinedDarkTheme <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span>MD2LightTheme<span class="token punctuation">,</span> NavigationDarkTheme<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h3 id="material-design-3-1">
+          <a class="anchor" href="#material-design-3">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Material Design 3</h3>
+<pre><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span>
+  NavigationContainer<span class="token punctuation">,</span>
+  DarkTheme <span class="token keyword">as</span> NavigationDarkTheme<span class="token punctuation">,</span>
+  DefaultTheme <span class="token keyword">as</span> NavigationDefaultTheme<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/native'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>
+  MD3DarkTheme<span class="token punctuation">,</span>
+  MD3LightTheme<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> merge <span class="token keyword">from</span> <span class="token string">'deepmerge'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span> LightTheme<span class="token punctuation">,</span> DarkTheme <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">adaptNavigationTheme</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  light<span class="token punctuation">:</span> NavigationDefaultTheme<span class="token punctuation">,</span>
+  dark<span class="token punctuation">:</span> NavigationDarkTheme<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> CombinedDefaultTheme <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span>MD2DarkTheme<span class="token punctuation">,</span> LightTheme<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> CombinedDarkTheme <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span>MD2LightTheme<span class="token punctuation">,</span> DarkTheme<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Alternatively, we could merge those themes using vanilla JavaScript:</p>
+<h3 id="material-design-2-2">
+          <a class="anchor" href="#material-design-2">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Material Design 2</h3>
 <pre><code class="language-js"><span class="token keyword">const</span> CombinedDefaultTheme <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token operator">...</span>PaperDefaultTheme<span class="token punctuation">,</span>
+  <span class="token operator">...</span>MD2LightTheme<span class="token punctuation">,</span>
   <span class="token operator">...</span>NavigationDefaultTheme<span class="token punctuation">,</span>
   colors<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    <span class="token operator">...</span>PaperDefaultTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
+    <span class="token operator">...</span>MD2LightTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
     <span class="token operator">...</span>NavigationDefaultTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> CombinedDarkTheme <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token operator">...</span>PaperDarkTheme<span class="token punctuation">,</span>
+  <span class="token operator">...</span>MD2DarkTheme<span class="token punctuation">,</span>
   <span class="token operator">...</span>NavigationDarkTheme<span class="token punctuation">,</span>
   colors<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    <span class="token operator">...</span>PaperDarkTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
+    <span class="token operator">...</span>MD2DarkTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
     <span class="token operator">...</span>NavigationDarkTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<h3 id="material-design-3-2">
+          <a class="anchor" href="#material-design-3">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Material Design 3</h3>
+<pre><code class="language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> LightTheme<span class="token punctuation">,</span> DarkTheme <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">adaptNavigationTheme</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  light<span class="token punctuation">:</span> NavigationDefaultTheme<span class="token punctuation">,</span>
+  dark<span class="token punctuation">:</span> NavigationDarkTheme<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> CombinedDefaultTheme <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>MD3LightTheme<span class="token punctuation">,</span>
+  <span class="token operator">...</span>LightTheme<span class="token punctuation">,</span>
+  colors<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token operator">...</span>MD3LightTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
+    <span class="token operator">...</span>LightTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> CombinedDarkTheme <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>MD3DarkTheme<span class="token punctuation">,</span>
+  <span class="token operator">...</span>DarkTheme<span class="token punctuation">,</span>
+  colors<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token operator">...</span>MD3DarkTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
+    <span class="token operator">...</span>DarkTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h2 id="passing-theme-with-providers">
@@ -142,10 +253,7 @@ For React Native Paper theme to work, we need to use <code>PaperProvider</code> 
         Passing theme with Providers</h2>
 <p>After combining the themes, we will be able to control theming in both libraries from a single source, which will come in handy later.</p>
 <p>Next, we need to pass merged themes into the Providers. For this part, we use the dark one - <code>CombinedDarkTheme</code>.</p>
-<pre><code class="language-js"><span class="token keyword">const</span> CombinedDefaultTheme <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span>PaperDefaultTheme<span class="token punctuation">,</span> NavigationDefaultTheme<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> CombinedDarkTheme <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span>PaperDarkTheme<span class="token punctuation">,</span> NavigationDarkTheme<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> Stack <span class="token operator">=</span> <span class="token function">createStackNavigator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="language-js"><span class="token keyword">const</span> Stack <span class="token operator">=</span> <span class="token function">createStackNavigator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token punctuation">(</span>
@@ -208,9 +316,6 @@ You can learn all about it their documentations:</p>
 
 <span class="token keyword">const</span> Stack <span class="token operator">=</span> <span class="token function">createStackNavigator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token keyword">const</span> CombinedDefaultTheme <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span>PaperDefaultTheme<span class="token punctuation">,</span> NavigationDefaultTheme<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> CombinedDarkTheme <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span>PaperDarkTheme<span class="token punctuation">,</span> NavigationDarkTheme<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> <span class="token punctuation">[</span>isThemeDark<span class="token punctuation">,</span> setIsThemeDark<span class="token punctuation">]</span> <span class="token operator">=</span> React<span class="token punctuation">.</span><span class="token function">useState</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -262,7 +367,6 @@ You can learn all about it their documentations:</p>
       </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Appbar.Content</span></span> <span class="token attr-name">title</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>scene<span class="token punctuation">.</span>route<span class="token operator">?</span><span class="token punctuation">.</span>name<span class="token punctuation">}</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
       </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">TouchableRipple</span></span> <span class="token attr-name">onPress</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">toggleTheme</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
         </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Switch</span></span>
-          <span class="token attr-name">style</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span><span class="token punctuation">{</span> backgroundColor<span class="token punctuation">:</span> theme<span class="token punctuation">.</span>colors<span class="token punctuation">.</span>accent <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span>
           <span class="token attr-name">color</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token string">'red'</span><span class="token punctuation">}</span></span>
           <span class="token attr-name">value</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>isThemeDark<span class="token punctuation">}</span></span>
         <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
