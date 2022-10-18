@@ -369,4 +369,4 @@ it('renders a single tab', () => {
   );
 
   expect(queryByTestId('bottom-navigation')).not.toBeNull();
-})
+});

@@ -618,14 +618,16 @@ const BottomNavigation = ({
     ? overlay(elevation, colors?.surface)
     : colors?.primary;
 
-  const v2BackgroundColorInterpolation = shifting ? indexAnim.interpolate({
-    inputRange: routes.map((_, i) => i),
-    // FIXME: does outputRange support ColorValue or just strings?
-    // @ts-expect-error
-    outputRange: routes.map(
-      (route) => getColor({ route }) || approxBackgroundColor
-    ),
-  }) : approxBackgroundColor;
+  const v2BackgroundColorInterpolation = shifting
+    ? indexAnim.interpolate({
+        inputRange: routes.map((_, i) => i),
+        // FIXME: does outputRange support ColorValue or just strings?
+        // @ts-expect-error
+        outputRange: routes.map(
+          (route) => getColor({ route }) || approxBackgroundColor
+        ),
+      })
+    : approxBackgroundColor;
 
   const backgroundColor = isV3
     ? customBackground || theme.colors.elevation.level2
