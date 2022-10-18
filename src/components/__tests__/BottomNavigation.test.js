@@ -337,3 +337,17 @@ it('renders custom background color passed to barStyle property', () => {
   const wrapper = getByTestId('bottom-navigation-bar-content');
   expect(wrapper).toHaveStyle({ backgroundColor: red300 });
 });
+
+it('renders a single tab', () => {
+  const { queryByTestId } = render(
+    <BottomNavigation
+      shifting={false}
+      navigationState={createState(0, 1)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+      testID={'bottom-navigation'}
+    />
+  );
+
+  expect(queryByTestId('bottom-navigation')).not.toBeNull();
+})
