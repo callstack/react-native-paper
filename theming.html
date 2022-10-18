@@ -50,31 +50,32 @@
     </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PaperProvider</span></span><span class="token punctuation">&gt;</span></span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<p>By default React Native Paper will apply the <a href="https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v3/LightTheme.tsx">Material Design 3 default theme</a> if no <code>theme</code> or <code>version</code> prop is passed to to the <code>Provider</code>.</p>
-<p>You can also provide a <code>theme</code> prop with a theme object with same properties as the default theme:</p>
+<p>By default React Native Paper will apply the <a href="https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v3/LightTheme.tsx">Material You theme (MD3)</a> if no <code>theme</code> or <code>version</code> prop is passed to to the <code>Provider</code>.</p>
+<h2 id="accessing-theme-properties">
+          <a class="anchor" href="#accessing-theme-properties">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Accessing theme properties</h2>
+<p>Use the built-in <code>useTheme()</code> hook to get access to the theme's variables:</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> MD3LightTheme <span class="token keyword">as</span> DefaultTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> useTheme <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 
-<span class="token keyword">const</span> theme <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token operator">...</span>DefaultTheme<span class="token punctuation">,</span>
-  roundness<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
-  version<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
-  colors<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    <span class="token operator">...</span>DefaultTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
-    primary<span class="token punctuation">:</span> <span class="token string">'#3498db'</span><span class="token punctuation">,</span>
-    secondary<span class="token punctuation">:</span> <span class="token string">'#f1c40f'</span><span class="token punctuation">,</span>
-    tertiary<span class="token punctuation">:</span> <span class="token string">'#a1b2c3'</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">PaymentScreen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> theme <span class="token operator">=</span> <span class="token function">useTheme</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token punctuation">(</span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PaperProvider</span></span> <span class="token attr-name">theme</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>theme<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
-      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">App</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
-    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PaperProvider</span></span><span class="token punctuation">&gt;</span></span>
-  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">View</span></span> <span class="token attr-name">style</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> backgroundColor<span class="token punctuation">:</span> theme<span class="token punctuation">.</span>colors<span class="token punctuation">.</span>primary <span class="token punctuation">}</span><span class="token punctuation">}</span></span> <span class="token punctuation">/&gt;</span></span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
+<p>You can also use the <code>withTheme()</code> HOC exported from the library. If you wrap your component with the HOC, you'll receive the theme as a prop:</p>
+<pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> withTheme <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">PaymentScreen</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> theme <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">View</span></span> <span class="token attr-name">style</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> backgroundColor<span class="token punctuation">:</span> theme<span class="token punctuation">.</span>colors<span class="token punctuation">.</span>primary <span class="token punctuation">}</span><span class="token punctuation">}</span></span> <span class="token punctuation">/&gt;</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">withTheme</span><span class="token punctuation">(</span>PaymentScreen<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <h2 id="theme-properties">
           <a class="anchor" href="#theme-properties">
             <svg width="16" height="16">
@@ -117,7 +118,7 @@
 <li><code>onSecondaryContainer</code></li>
 </ul>
 <blockquote>
-<p>The tertiary key color is used to derive the roles of contrasting accents that can be used to balance primary and secondary colors or bring heightened attention to an element. </p>
+<p>The tertiary key color is used to derive the roles of contrasting accents that can be used to balance primary and secondary colors or bring heightened attention to an element.</p>
 </blockquote>
 <blockquote>
 <p>The tertiary color role is left for teams to use at their discretion and is intended to support broader color expression in products.</p>
@@ -216,7 +217,10 @@
         Extending the theme</h2>
 <p>Keeping your own properties in the theme is fully supported by our library:</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> MD3LightTheme <span class="token keyword">as</span> DefaultTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>
+  MD3LightTheme <span class="token keyword">as</span> DefaultTheme<span class="token punctuation">,</span>
+  Provider <span class="token keyword">as</span> PaperProvider<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> theme <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -226,7 +230,7 @@
   <span class="token comment">// Specify custom property in nested object</span>
   colors<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     myOwnColor<span class="token punctuation">:</span> <span class="token string">'#BADA55'</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -341,26 +345,71 @@ Created schemes are following the Material Design 3 color system and covering co
             </svg>
           </a>
         TypeScript</h2>
-<p>By default extending the theme won't work well with TypeScript, but we can take advantage of <code>global augmentations</code> and specify the new properties that we added to the theme:</p>
-<pre><code class="language-ts"><span class="token comment">// App.tsx</span>
-<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span>
-  MD3LightTheme <span class="token keyword">as</span> DefaultTheme<span class="token punctuation">,</span>
-  Provider <span class="token keyword">as</span> PaperProvider<span class="token punctuation">,</span>
-<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+<p>By default, TypeScript works well whenever you change the value of the built-in theme's properties. It gets more complicated when you want to extend the theme's properties or change their types. In order to fully support TypeScript, you will need to follow the guide that fits your use-case most accurately:</p>
+<p>There are two supported ways of overriding the theme:</p>
+<ol>
+<li><strong>Simple built-in theme overrides</strong> - when you only customize the values and the whole theme schema remains the same</li>
+<li><strong>Advanced theme overrides</strong> - when you <em>add new properties</em> or <em>change the built-in schema shape</em></li>
+</ol>
+<p><strong>Warning</strong>: TypeScript support for withTheme is currently limited to Material You theme only. We are planning to provide a better support of handling custom theme overrides in future releases.</p>
+<h3 id="simple-built-in-theme-overrides">
+          <a class="anchor" href="#simple-built-in-theme-overrides">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Simple built-in theme overrides</h3>
+<p>You can provide a <code>theme</code> prop with a theme object with the same properties as the default theme:</p>
+<pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> MD3LightTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> theme <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token operator">...</span>DefaultTheme<span class="token punctuation">,</span>
-  <span class="token comment">// Specify custom property</span>
-  myOwnProperty<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-  <span class="token comment">// Specify custom property in nested object</span>
+  <span class="token operator">...</span>MD3LightTheme<span class="token punctuation">,</span> <span class="token comment">// or MD3DarkTheme</span>
+  roundness<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
   colors<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    myOwnColor<span class="token punctuation">:</span> <span class="token string">'#BADA55'</span><span class="token punctuation">,</span>
+    <span class="token operator">...</span>MD3LightTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
+    primary<span class="token punctuation">:</span> <span class="token string">'#3498db'</span><span class="token punctuation">,</span>
+    secondary<span class="token punctuation">:</span> <span class="token string">'#f1c40f'</span><span class="token punctuation">,</span>
+    tertiary<span class="token punctuation">:</span> <span class="token string">'#a1b2c3'</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="token keyword">export</span> <span class="token keyword">type</span> ThemeOverride <span class="token operator">=</span> <span class="token keyword">typeof</span> theme<span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PaperProvider</span></span> <span class="token attr-name">theme</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>theme<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">App</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PaperProvider</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="advanced-theme-overrides">
+          <a class="anchor" href="#advanced-theme-overrides">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Advanced theme overrides</h3>
+<p>If you need to modify the built-in theme schema by adding a new property or changing its type, you need to follow these steps:</p>
+<ol>
+<li>Pass your theme overrides to the Provider component</li>
+</ol>
+<pre><code class="language-ts"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> MD3LightTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> theme <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>MD3LightTheme<span class="token punctuation">,</span>
+
+  <span class="token comment">// Specify a custom property</span>
+  custom<span class="token punctuation">:</span> <span class="token string">'property'</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// Specify a custom property in nested object</span>
+  colors<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token operator">...</span>MD3LightTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
+    brandPrimary<span class="token punctuation">:</span> <span class="token string">'#fefefe'</span><span class="token punctuation">,</span>
+    brandSecondary<span class="token punctuation">:</span> <span class="token string">'red'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token punctuation">(</span>
@@ -369,14 +418,54 @@ Created schemes are following the Material Design 3 color system and covering co
     <span class="token operator">&lt;</span><span class="token operator">/</span>PaperProvider<span class="token operator">&gt;</span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<pre><code class="language-ts"><span class="token comment">// index.d.ts</span>
+<ol start="2">
+<li>Create a typed <code>useAppTheme()</code> hook in your project</li>
+</ol>
+<pre><code class="language-ts"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>
+  MD3LightTheme<span class="token punctuation">,</span>
+  Provider <span class="token keyword">as</span> PaperProvider<span class="token punctuation">,</span>
+  useTheme<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
 
-<span class="token keyword">import</span> <span class="token punctuation">{</span> ThemeOverride <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./src/App.tsx'</span>
+<span class="token keyword">const</span> theme <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>MD3LightTheme<span class="token punctuation">,</span>
 
-<span class="token keyword">declare</span> global <span class="token punctuation">{</span>
-  <span class="token keyword">namespace</span> ReactNativePaper <span class="token punctuation">{</span>
-    <span class="token keyword">interface</span> <span class="token class-name">Theme</span> <span class="token keyword">extends</span> <span class="token class-name">ThemeOverride</span>
-  <span class="token punctuation">}</span>
+  <span class="token comment">// Specify a custom property</span>
+  custom<span class="token punctuation">:</span> <span class="token string">'property'</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// Specify a custom property in nested object</span>
+  colors<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token operator">...</span>MD3LightTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
+    brandPrimary<span class="token punctuation">:</span> <span class="token string">'#fefefe'</span><span class="token punctuation">,</span>
+    brandSecondary<span class="token punctuation">:</span> <span class="token string">'red'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">type</span> AppTheme <span class="token operator">=</span> <span class="token keyword">typeof</span> theme<span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">useAppTheme</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> useTheme<span class="token operator">&lt;</span>AppTheme<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>PaperProvider theme<span class="token operator">=</span><span class="token punctuation">{</span>theme<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>App <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>PaperProvider<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<ol start="3">
+<li>Start using the <code>useAppTheme()</code> hook across your components in the whole app</li>
+</ol>
+<pre><code class="language-ts"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> useAppTheme <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./App'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">HomeScreen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span>
+    colors<span class="token punctuation">:</span> <span class="token punctuation">{</span> brandPrimary <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">useAppTheme</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token operator">&lt;</span>View style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> backgroundColor<span class="token punctuation">:</span> brandPrimary <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token operator">...</span><span class="token operator">&lt;</span><span class="token operator">/</span>View<span class="token operator">&gt;</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <h2 id="material-design-2">
           <a class="anchor" href="#material-design-2">
@@ -385,8 +474,15 @@ Created schemes are following the Material Design 3 color system and covering co
             </svg>
           </a>
         Material Design 2</h2>
-<p>If you want to use previous versions of Material Design <strong>we provide backwards support for older versions</strong>.</p>
-<p>In order to change the theme version, you can pass it as a prop to the <code>Provider</code> like so:</p>
+<p>Using Material Design 2 is <strong>fully supported in React Native Paper v5+</strong>.</p>
+<h3 id="simple-setup">
+          <a class="anchor" href="#simple-setup">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Simple setup</h3>
+<p>In order to use the Material Design 2 theme you can just pass <code>{ version: 2 }</code> to the PaperProvider theme prop:</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
@@ -399,6 +495,38 @@ Created schemes are following the Material Design 3 color system and covering co
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <p>Specifying <code>{ version: 2 }</code> tells React Native Paper to use the built in Material Design 2 theme, so you don't have to fully extend it on your own.</p>
+<h3 id="advanced-setup">
+          <a class="anchor" href="#advanced-setup">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Advanced setup</h3>
+<p>As with any theme, you can also specify your custom properties within the Material Design 2 theme:</p>
+<pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> MD2LightTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> theme <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token operator">...</span>MD2LightTheme<span class="token punctuation">,</span>
+
+    <span class="token comment">// Specify a custom property</span>
+    custom<span class="token punctuation">:</span> <span class="token string">'property'</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// Specify a custom nested property</span>
+    colors<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token operator">...</span>MD2LightTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
+      primary<span class="token punctuation">:</span> <span class="token string">'#fefefe'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PaperProvider</span></span> <span class="token attr-name">theme</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>theme<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">App</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PaperProvider</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <h3 id="typescript-1">
           <a class="anchor" href="#typescript">
             <svg width="16" height="16">
@@ -406,17 +534,57 @@ Created schemes are following the Material Design 3 color system and covering co
             </svg>
           </a>
         Typescript</h3>
-<p>You need to apply a global type change in a similar way how you would do that when <a href="#typescript">extending the theme</a></p>
-<p>Instead of extending it, you can import the built in types for Material Design 2 like so:</p>
-<pre><code class="language-ts"><span class="token comment">// index.d.ts</span>
+<p>Due to the amount of changes in the theme's schema shape it falls into the <a href="#advanced-theme-overrides">Advanced theme overrides</a> category. The steps are identical as with any advanced theme, just make sure to extend the built-in <code>MD2LightTheme</code> or <code>MD2DarkTheme</code> instead of <code>MD3LightTheme</code> or <code>MD3DarkTheme</code>.</p>
+<p>The final example for Material Design 2 would look like this:</p>
+<pre><code class="language-ts"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>
+  MD2LightTheme<span class="token punctuation">,</span>
+  Provider <span class="token keyword">as</span> PaperProvider<span class="token punctuation">,</span>
+  useTheme<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
 
-<span class="token keyword">import</span> <span class="token punctuation">{</span> MD2Theme <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span>
+<span class="token keyword">const</span> theme <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Extend Material Design 2 theme</span>
 
-<span class="token keyword">declare</span> global <span class="token punctuation">{</span>
-  <span class="token keyword">namespace</span> ReactNativePaper <span class="token punctuation">{</span>
-    <span class="token keyword">interface</span> <span class="token class-name">Theme</span> <span class="token keyword">extends</span> <span class="token class-name">MD2Theme</span>
-  <span class="token punctuation">}</span>
+  <span class="token operator">...</span>MD2LightTheme<span class="token punctuation">,</span> <span class="token comment">// or MD2DarkTheme</span>
+
+  <span class="token comment">// Specify a custom property</span>
+  myOwnProperty<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// Specify a custom nested property</span>
+  colors<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token operator">...</span>MD2LightTheme<span class="token punctuation">.</span>colors<span class="token punctuation">,</span>
+    myOwnColor<span class="token punctuation">:</span> <span class="token string">'#BADA55'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">type</span> AppTheme <span class="token operator">=</span> <span class="token keyword">typeof</span> theme<span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">useAppTheme</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> useTheme<span class="token operator">&lt;</span>AppTheme<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>PaperProvider theme<span class="token operator">=</span><span class="token punctuation">{</span>theme<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>App <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>PaperProvider<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// App.tsx</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> theme <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">useAppTheme</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token operator">&lt;</span>View style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> backgroundColor<span class="token punctuation">:</span> theme<span class="token punctuation">.</span>colors<span class="token punctuation">.</span>primary <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
+<h3 id="migrating-to-material-you">
+          <a class="anchor" href="#migrating-to-material-you">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Migrating to Material You</h3>
 <p>If you are migrating from Material Design 2 (4.x and lower) to Material You (5.x), please refer to our <a href="https://callstack.github.io/react-native-paper/introducing-v5-with-material-you.html">Migration Guide</a></p>
 <h2 id="applying-a-theme-to-a-paper-component">
           <a class="anchor" href="#applying-a-theme-to-a-paper-component">
@@ -436,34 +604,6 @@ Created schemes are following the Material Design 3 color system and covering co
     </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Button</span></span><span class="token punctuation">&gt;</span></span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<h2 id="using-the-theme-in-your-own-components">
-          <a class="anchor" href="#using-the-theme-in-your-own-components">
-            <svg width="16" height="16">
-              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
-            </svg>
-          </a>
-        Using the theme in your own components</h2>
-<p>To access the theme in your own components, you can use the <code>withTheme</code> HOC exported from the library. If you wrap your component with the HOC, you'll receive the theme as a prop:</p>
-<pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> withTheme <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
-
-<span class="token keyword">function</span> <span class="token function">MyComponent</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> <span class="token punctuation">{</span> colors <span class="token punctuation">}</span> <span class="token operator">=</span> props<span class="token punctuation">.</span>theme<span class="token punctuation">;</span>
-
-  <span class="token keyword">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">style</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> color<span class="token punctuation">:</span> colors<span class="token punctuation">.</span>primary <span class="token punctuation">}</span><span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Yo!</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">withTheme</span><span class="token punctuation">(</span>MyComponent<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p>Components wrapped with <code>withTheme</code> support the theme from the <code>Provider</code> as well as from the <code>theme</code> prop.</p>
-<p>You can also use the <code>useTheme</code> hook:</p>
-<pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> useTheme <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
-
-<span class="token keyword">function</span> <span class="token function">MyComponent</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> <span class="token punctuation">{</span> colors <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">useTheme</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token keyword">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">style</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> color<span class="token punctuation">:</span> colors<span class="token punctuation">.</span>primary <span class="token punctuation">}</span><span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">Yo!</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
 <h2 id="customizing-all-instances-of-a-component">
           <a class="anchor" href="#customizing-all-instances-of-a-component">
             <svg width="16" height="16">
@@ -477,7 +617,12 @@ Created schemes are following the Material Design 3 color system and covering co
 <span class="token keyword">import</span> <span class="token punctuation">{</span> Button <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">FancyButton</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token operator">&lt;</span>Button theme<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> fonts<span class="token punctuation">:</span> <span class="token punctuation">{</span> labelLarge<span class="token punctuation">:</span> <span class="token punctuation">{</span>letterSpacing<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token punctuation">{</span><span class="token operator">...</span>props<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>Button
+      theme<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> typescale<span class="token punctuation">:</span> <span class="token punctuation">{</span> labelLarge<span class="token punctuation">:</span> <span class="token punctuation">{</span> letterSpacing<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">}</span>
+      <span class="token punctuation">{</span><span class="token operator">...</span>props<span class="token punctuation">}</span>
+    <span class="token operator">/</span><span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <p>Now you can use your <code>FancyButton</code> component everywhere instead of using <code>Button</code> from Paper.</p>
 <h2 id="dark-theme">
