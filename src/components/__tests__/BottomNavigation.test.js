@@ -339,7 +339,7 @@ it('renders custom background color passed to barStyle property', () => {
 });
 
 it('renders a single tab', () => {
-  const { getByTestId } = render(
+  const { queryByTestId } = render(
     <BottomNavigation
       shifting={false}
       navigationState={createState(0, 1)}
@@ -349,5 +349,5 @@ it('renders a single tab', () => {
     />
   );
 
-  getByTestId('bottom-navigation')
+  expect(queryByTestId('bottom-navigation')).not.toBeNull();
 })
