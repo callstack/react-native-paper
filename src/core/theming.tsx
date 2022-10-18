@@ -20,6 +20,7 @@ import type {
   MD3Theme,
   MD3Colors,
   MD3AndroidColors,
+  NavigationTheme,
 } from '../types';
 
 export const DefaultTheme = MD3LightTheme;
@@ -61,6 +62,84 @@ type Schemes = {
   lightScheme: MD3Colors;
   darkScheme: MD3Colors;
 };
+
+// eslint-disable-next-line no-redeclare
+export function adaptNavigationTheme(themes: { light: NavigationTheme }): {
+  LightTheme: NavigationTheme;
+};
+// eslint-disable-next-line no-redeclare
+export function adaptNavigationTheme(themes: { dark: NavigationTheme }): {
+  DarkTheme: NavigationTheme;
+};
+// eslint-disable-next-line no-redeclare
+export function adaptNavigationTheme(themes: {
+  light: NavigationTheme;
+  dark: NavigationTheme;
+}): { LightTheme: NavigationTheme; DarkTheme: NavigationTheme };
+// eslint-disable-next-line no-redeclare
+export function adaptNavigationTheme(themes: any) {
+  const { light, dark } = themes;
+
+  const getAdaptedTheme = (
+    navigationTheme: NavigationTheme,
+    MD3Theme: MD3Theme
+  ) => {
+    return {
+      ...navigationTheme,
+      colors: {
+        ...navigationTheme.colors,
+        primary: MD3Theme.colors.primary,
+        background: MD3Theme.colors.background,
+        card: MD3Theme.colors.elevation.level2,
+        text: MD3Theme.colors.onSurface,
+        border: MD3Theme.colors.outline,
+        notification: MD3Theme.colors.error,
+      },
+    };
+  };
+
+  if (light && dark) {
+    const modes = ['light', 'dark'] as const;
+
+    const MD3Themes = {
+      light: MD3LightTheme,
+      dark: MD3DarkTheme,
+    };
+
+    const NavigationThemes = {
+      light,
+      dark,
+    };
+
+    const { light: adaptedLight, dark: adaptedDark } = modes.reduce(
+      (prev, curr) => {
+        return {
+          ...prev,
+          [curr]: getAdaptedTheme(NavigationThemes[curr], MD3Themes[curr]),
+        };
+      },
+      {
+        light,
+        dark,
+      }
+    );
+
+    return {
+      LightTheme: adaptedLight,
+      DarkTheme: adaptedDark,
+    };
+  }
+
+  if (!light) {
+    return {
+      DarkTheme: getAdaptedTheme(dark, MD3DarkTheme),
+    };
+  }
+
+  return {
+    LightTheme: getAdaptedTheme(light, MD3LightTheme),
+  };
+}
 
 export const getDynamicThemeElevations = (scheme: MD3AndroidColors) => {
   const elevationValues = ['transparent', 0.05, 0.08, 0.11, 0.12, 0.14];
