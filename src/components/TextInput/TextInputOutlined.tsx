@@ -50,7 +50,6 @@ const TextInputOutlined = ({
   selectionColor,
   underlineColor: _underlineColor,
   outlineStyle,
-  outlineTestID,
   outlineColor: customOutlineColor,
   activeOutlineColor,
   dense,
@@ -293,7 +292,7 @@ const TextInputOutlined = ({
         isV3={isV3}
         roundness={roundness}
         style={outlineStyle}
-        testID={outlineTestID}
+        testID={`${testID}-outline`}
         hasActiveOutline={hasActiveOutline}
         focused={parentState.focused}
         activeColor={activeColor}

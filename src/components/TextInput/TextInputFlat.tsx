@@ -53,7 +53,6 @@ const TextInputFlat = ({
   selectionColor,
   underlineColor,
   underlineStyle,
-  underlineTestID,
   activeUnderlineColor,
   dense,
   style,
@@ -311,7 +310,7 @@ const TextInputFlat = ({
         hasActiveOutline={hasActiveOutline}
         parentState={parentState}
         style={underlineStyle}
-        testID={underlineTestID}
+        testID={`${testID}-underline`}
         underlineColorCustom={underlineColorCustom}
         error={error}
         colors={colors}

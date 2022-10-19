@@ -968,14 +968,13 @@ describe('getOutlinedInputColors - active color', () => {
   });
 });
 
-
 describe('outlineStyle - underlineStyle', () => {
   it('correctly applies outline style', () => {
     const { getByTestId } = render(
       <TextInput
         mode="outlined"
         outlineStyle={{ borderRadius: 16, borderWidth: 6 }}
-        outlineTestID="text-input-outline"
+        testID="text-input"
       />
     );
 
@@ -990,7 +989,7 @@ describe('outlineStyle - underlineStyle', () => {
       <TextInput
         mode="flat"
         underlineStyle={{ borderRadius: 16, borderWidth: 6 }}
-        underlineTestID="text-input-underline"
+        testID="text-input"
       />
     );
 
@@ -1000,4 +999,3 @@ describe('outlineStyle - underlineStyle', () => {
     });
   });
 });
-

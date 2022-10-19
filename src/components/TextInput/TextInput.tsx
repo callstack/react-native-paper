@@ -139,25 +139,19 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    */
   testID?: string;
   /**
+   * @supported Available in v5.x
    * Pass style to override the default style of outlined wrapper.
    * Overrides style when mode is set to `outlined`
    * Example: `borderRadius`, `borderColor`
    */
   outlineStyle?: StyleProp<ViewStyle>;
   /**
-   * outline testID to be used on tests.
-   */
-  outlineTestID?: string;
-  /**
+   * @supported Available in v5.x
    * Pass style to override the default style of underlined wrapper.
    * Overrides style when mode is set to `flat`
    * Example: `borderRadius`, `borderColor`
    */
   underlineStyle?: StyleProp<ViewStyle>;
-  /**
-   * underline testID to be used on tests.
-   */
-  underlineTestID?: string;
 };
 
 interface CompoundedComponent
