@@ -224,22 +224,39 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰍉
                     </Text>
                   </View>
                   <View
@@ -258,22 +275,39 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰍉
                     </Text>
                   </View>
                   <View
@@ -383,22 +417,39 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰄀
                     </Text>
                   </View>
                   <View
@@ -417,22 +468,39 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰄀
                     </Text>
                   </View>
                   <View
@@ -542,22 +610,39 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰚇
                     </Text>
                   </View>
                   <View
@@ -576,22 +661,39 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰚇
                     </Text>
                   </View>
                   <View
@@ -886,22 +988,39 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰍉
                     </Text>
                   </View>
                   <View
@@ -920,22 +1039,39 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰍉
                     </Text>
                   </View>
                   <View
@@ -1045,22 +1181,39 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰄀
                     </Text>
                   </View>
                   <View
@@ -1079,22 +1232,39 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰄀
                     </Text>
                   </View>
                   <View
@@ -1204,22 +1374,39 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰚇
                     </Text>
                   </View>
                   <View
@@ -1238,22 +1425,39 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰚇
                     </Text>
                   </View>
                   <View
@@ -1552,22 +1756,39 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰍉
                     </Text>
                   </View>
                   <View
@@ -1586,22 +1807,39 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰍉
                     </Text>
                   </View>
                   <View
@@ -1778,22 +2016,39 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰄀
                     </Text>
                   </View>
                   <View
@@ -1812,22 +2067,39 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰄀
                     </Text>
                   </View>
                   <View
@@ -2004,22 +2276,39 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰚇
                     </Text>
                   </View>
                   <View
@@ -2038,22 +2327,39 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰚇
                     </Text>
                   </View>
                   <View
@@ -2230,22 +2536,39 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰋑
                     </Text>
                   </View>
                   <View
@@ -2264,22 +2587,39 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰋑
                     </Text>
                   </View>
                   <View
@@ -2456,22 +2796,39 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰒛
                     </Text>
                   </View>
                   <View
@@ -2490,22 +2847,39 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰒛
                     </Text>
                   </View>
                   <View
@@ -4488,22 +4862,39 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "#FBF7DB",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰍉
                     </Text>
                   </View>
                   <View
@@ -4522,22 +4913,39 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "#853D4B",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰍉
                     </Text>
                   </View>
                   <View
@@ -4762,22 +5170,39 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "#FBF7DB",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰄀
                     </Text>
                   </View>
                   <View
@@ -4796,22 +5221,39 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "#853D4B",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰄀
                     </Text>
                   </View>
                   <View
@@ -5036,22 +5478,39 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "#FBF7DB",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰚇
                     </Text>
                   </View>
                   <View
@@ -5070,22 +5529,39 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "#853D4B",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰚇
                     </Text>
                   </View>
                   <View
@@ -5501,22 +5977,39 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "#FBF7DB",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰍉
                     </Text>
                   </View>
                   <View
@@ -5535,22 +6028,39 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "#853D4B",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰍉
                     </Text>
                   </View>
                   <View
@@ -5727,22 +6237,39 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "#FBF7DB",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰄀
                     </Text>
                   </View>
                   <View
@@ -5761,22 +6288,39 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "#853D4B",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰄀
                     </Text>
                   </View>
                   <View
@@ -5953,22 +6497,39 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "#FBF7DB",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰚇
                     </Text>
                   </View>
                   <View
@@ -5987,22 +6548,39 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "#853D4B",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰚇
                     </Text>
                   </View>
                   <View
@@ -6338,22 +6916,39 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰍉
                     </Text>
                   </View>
                   <View
@@ -6372,22 +6967,39 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰍉
                     </Text>
                   </View>
                   <View
@@ -6612,22 +7224,39 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰄀
                     </Text>
                   </View>
                   <View
@@ -6646,22 +7275,39 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰄀
                     </Text>
                   </View>
                   <View
@@ -6886,22 +7532,39 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰚇
                     </Text>
                   </View>
                   <View
@@ -6920,22 +7583,39 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰚇
                     </Text>
                   </View>
                   <View
@@ -7350,22 +8030,39 @@ exports[`renders shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰍉
                     </Text>
                   </View>
                   <View
@@ -7384,22 +8081,39 @@ exports[`renders shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰍉
                     </Text>
                   </View>
                   <View
@@ -7576,22 +8290,39 @@ exports[`renders shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰄀
                     </Text>
                   </View>
                   <View
@@ -7610,22 +8341,39 @@ exports[`renders shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰄀
                     </Text>
                   </View>
                   <View
@@ -7802,22 +8550,39 @@ exports[`renders shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰚇
                     </Text>
                   </View>
                   <View
@@ -7836,22 +8601,39 @@ exports[`renders shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰚇
                     </Text>
                   </View>
                   <View
@@ -8028,22 +8810,39 @@ exports[`renders shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰋑
                     </Text>
                   </View>
                   <View
@@ -8062,22 +8861,39 @@ exports[`renders shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰋑
                     </Text>
                   </View>
                   <View
@@ -8254,22 +9070,39 @@ exports[`renders shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(29, 25, 43, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰒛
                     </Text>
                   </View>
                   <View
@@ -8288,22 +9121,39 @@ exports[`renders shifting bottom navigation 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
+                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                          },
-                          Object {
                             "color": "rgba(73, 69, 79, 1)",
                             "fontSize": 24,
                           },
+                          Array [
+                            Object {
+                              "lineHeight": 24,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
                         ]
                       }
                     >
-                      □
+                      󰒛
                     </Text>
                   </View>
                   <View

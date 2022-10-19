@@ -124,7 +124,7 @@
       "__fixtures__\\/[^/]+\\/(output|error)\\.js"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(@react-native|react-native|react-native-iphone-x-helper|@material)/)"
+      "node_modules/(?!(@react-native|react-native(-.*)?|react-native-iphone-x-helper|@material)/)"
     ]
   },
   "greenkeeper": {

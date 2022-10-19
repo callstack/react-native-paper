@@ -95,7 +95,7 @@ it('renders list item with custom description', () => {
               Design library that has you covered in all major use-cases.
             </Text>
             <View>
-              <Chip icon="file-pdf" onPress={() => {}}>
+              <Chip icon="file-pdf-box" onPress={() => {}}>
                 DOCS.pdf
               </Chip>
             </View>
