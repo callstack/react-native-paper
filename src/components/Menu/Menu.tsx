@@ -10,6 +10,7 @@ import {
   NativeEventSubscription,
   Platform,
   ScrollView,
+  ScrollViewProps,
   StyleProp,
   StyleSheet,
   TouchableWithoutFeedback,
@@ -64,6 +65,10 @@ export type Props = {
    * @optional
    */
   theme: InternalTheme;
+  /**
+   * Inner ScrollView prop
+   */
+  keyboardShouldPersistTaps?: ScrollViewProps['keyboardShouldPersistTaps'];
 };
 
 type Layout = $Omit<$Omit<LayoutRectangle, 'x'>, 'y'>;
@@ -358,6 +363,7 @@ class Menu extends React.Component<Props, State> {
       statusBarHeight,
       onDismiss,
       overlayAccessibilityLabel,
+      keyboardShouldPersistTaps,
     } = this.props;
 
     const {
@@ -585,7 +591,11 @@ class Menu extends React.Component<Props, State> {
                   {...(theme.isV3 && { elevation: 2 })}
                 >
                   {(scrollableMenuHeight && (
-                    <ScrollView>{children}</ScrollView>
+                    <ScrollView
+                      keyboardShouldPersistTaps={keyboardShouldPersistTaps}
+                    >
+                      {children}
+                    </ScrollView>
                   )) || <React.Fragment>{children}</React.Fragment>}
                 </Surface>
               </Animated.View>
