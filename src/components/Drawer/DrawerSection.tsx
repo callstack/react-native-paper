@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import color from 'color';
 
-import { withTheme } from '../../core/theming';
+import { withInternalTheme } from '../../core/theming';
 import { MD3Colors } from '../../styles/themes/v3/tokens';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 import Divider from '../Divider';
 import Text from '../Typography/Text';
 
@@ -22,7 +22,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 /**
@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(DrawerSection);
+export default withInternalTheme(DrawerSection);

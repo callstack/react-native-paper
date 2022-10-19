@@ -1,22 +1,22 @@
 import * as React from 'react';
 import {
+  Animated,
   StyleProp,
   StyleSheet,
-  Animated,
   TouchableWithoutFeedback,
   View,
   ViewStyle,
 } from 'react-native';
 
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import Surface from '../Surface';
 import CardActions from './CardActions';
 import CardContent from './CardContent';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import CardCover, { CardCover as _CardCover } from './CardCover';
+import CardCover from './CardCover';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import CardTitle, { CardTitle as _CardTitle } from './CardTitle';
+import CardTitle from './CardTitle';
 import { getCardColors } from './utils';
 
 type OutlinedCardProps = {
@@ -66,7 +66,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * Pass down testID from card props to touchable
    */
@@ -302,4 +302,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Card);
+export default withInternalTheme(Card);

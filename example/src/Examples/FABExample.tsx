@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import { FAB, Portal, useTheme, Text } from 'react-native-paper';
+import { FAB, Portal, Text } from 'react-native-paper';
 
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 type FABVariant = 'primary' | 'secondary' | 'tertiary' | 'surface';
@@ -12,7 +13,7 @@ type FABMode = 'flat' | 'elevated';
 const FABExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [open, setOpen] = React.useState<boolean>(false);
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
 
   const variants = ['primary', 'secondary', 'tertiary', 'surface'];
   const sizes = ['small', 'medium', 'large'];

@@ -52,6 +52,7 @@ const TextInputOutlined = ({
   outlineStyle,
   outlineColor: customOutlineColor,
   activeOutlineColor,
+  textColor,
   dense,
   style,
   theme,
@@ -69,7 +70,7 @@ const TextInputOutlined = ({
   left,
   right,
   placeholderTextColor,
-  testID = 'text-input',
+  testID = 'text-input-outlined',
   ...rest
 }: ChildTextInputProps) => {
   const adornmentConfig = getAdornmentConfig({ left, right });
@@ -101,6 +102,7 @@ const TextInputOutlined = ({
   } = getOutlinedInputColors({
     activeOutlineColor,
     customOutlineColor,
+    textColor,
     disabled,
     error,
     theme,
@@ -316,7 +318,7 @@ const TextInputOutlined = ({
             maxFontSizeMultiplier={rest.maxFontSizeMultiplier}
           />
           {render?.({
-            testID: `${testID}-outlined`,
+            testID,
             ...rest,
             ref: innerRef,
             onChangeText,

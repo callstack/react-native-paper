@@ -1,17 +1,18 @@
 import * as React from 'react';
 import {
-  View,
-  Image,
   Dimensions,
-  StyleSheet,
-  Platform,
   Easing,
+  Image,
+  Platform,
+  StyleSheet,
+  View,
 } from 'react-native';
 
 import type { StackNavigationProp } from '@react-navigation/stack';
-import { Appbar, BottomNavigation, Menu, useTheme } from 'react-native-paper';
+import { Appbar, BottomNavigation, Menu } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 type RoutesState = Array<{
@@ -54,7 +55,7 @@ const PhotoGallery = ({ route }: Route) => {
 };
 
 const BottomNavigationExample = ({ navigation }: Props) => {
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
   const insets = useSafeAreaInsets();
   const [index, setIndex] = React.useState(0);
   const [menuVisible, setMenuVisible] = React.useState(false);

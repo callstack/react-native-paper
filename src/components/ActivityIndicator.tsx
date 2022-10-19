@@ -9,8 +9,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
+import { withInternalTheme } from '../core/theming';
+import type { InternalTheme } from '../types';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -33,7 +33,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 const DURATION = 2400;
@@ -254,4 +254,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(ActivityIndicator);
+export default withInternalTheme(ActivityIndicator);

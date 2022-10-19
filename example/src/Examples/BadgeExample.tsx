@@ -1,22 +1,22 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import {
   Badge,
   IconButton,
   List,
+  MD2Colors,
+  MD3Colors,
   Paragraph,
   Switch,
-  MD2Colors,
-  useTheme,
-  MD3Colors,
 } from 'react-native-paper';
 
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const BadgeExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
 
   return (
     <ScreenWrapper>

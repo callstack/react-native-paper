@@ -1,17 +1,17 @@
 import * as React from 'react';
 import {
-  StyleProp,
-  StyleSheet,
   Animated,
   SafeAreaView,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
   TouchableWithoutFeedback,
   View,
   ViewStyle,
-  TextStyle,
 } from 'react-native';
 
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import Card from '../Card/Card';
 import type { IconSource } from '../Icon';
 import Text from '../Typography/Text';
@@ -101,7 +101,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * Pass down testID from Group props to FAB.
    */
@@ -419,10 +419,10 @@ const FABGroup = ({
 
 FABGroup.displayName = 'FAB.Group';
 
-export default withTheme(FABGroup);
+export default withInternalTheme(FABGroup);
 
 // @component-docs ignore-next-line
-const FABGroupWithTheme = withTheme(FABGroup);
+const FABGroupWithTheme = withInternalTheme(FABGroup);
 // @component-docs ignore-next-line
 export { FABGroupWithTheme as FABGroup };
 

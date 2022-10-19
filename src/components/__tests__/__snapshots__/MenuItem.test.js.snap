@@ -10,8 +10,11 @@ Array [
       }
     }
     accessible={true}
+    collapsable={false}
     focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -20,6 +23,7 @@ Array [
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {
@@ -141,8 +145,11 @@ Array [
       }
     }
     accessible={true}
+    collapsable={false}
     focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -151,6 +158,7 @@ Array [
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {
@@ -272,8 +280,11 @@ Array [
       }
     }
     accessible={true}
+    collapsable={false}
     focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -282,6 +293,7 @@ Array [
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {
@@ -403,8 +415,11 @@ Array [
       }
     }
     accessible={true}
+    collapsable={false}
     focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -413,6 +428,7 @@ Array [
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {
@@ -534,8 +550,11 @@ Array [
       }
     }
     accessible={true}
+    collapsable={false}
     focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -544,6 +563,7 @@ Array [
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {

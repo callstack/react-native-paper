@@ -1,21 +1,16 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import {
-  RadioButton,
-  Paragraph,
-  List,
-  Text,
-  useTheme,
-} from 'react-native-paper';
+import { List, Paragraph, RadioButton, Text } from 'react-native-paper';
 
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const RadioButtonGroupExample = () => {
   const [value, setValue] = React.useState('first');
   const [value2, setValue2] = React.useState('first');
 
-  const { colors, isV3 } = useTheme();
+  const { colors, isV3 } = useExampleTheme();
   const TextComponent = isV3 ? Text : Paragraph;
 
   return (

@@ -1,13 +1,15 @@
 import React from 'react';
 import {
-  StyleProp,
-  ViewStyle,
   Animated,
-  StyleSheet,
   Platform,
+  StyleProp,
+  StyleSheet,
+  ViewStyle,
 } from 'react-native';
 
-import { AnimatedFAB, useTheme } from 'react-native-paper';
+import { AnimatedFAB } from 'react-native-paper';
+
+import { useExampleTheme } from '../..';
 
 type CustomFABProps = {
   animatedValue: Animated.Value;
@@ -29,7 +31,7 @@ const CustomFAB = ({
   iconMode,
 }: CustomFABProps) => {
   const [isExtended, setIsExtended] = React.useState(true);
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
 
   const isIOS = Platform.OS === 'ios';
 

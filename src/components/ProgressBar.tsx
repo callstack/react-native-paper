@@ -1,23 +1,29 @@
 import * as React from 'react';
 import {
   Animated,
+  I18nManager,
+  LayoutChangeEvent,
   Platform,
+  StyleProp,
   StyleSheet,
   View,
   ViewStyle,
-  StyleProp,
-  LayoutChangeEvent,
-  I18nManager,
 } from 'react-native';
 
 import setColor from 'color';
 
-import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
+import { withInternalTheme } from '../core/theming';
+import type { InternalTheme } from '../types';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
+   * Animated value (between 0 and 1). This tells the progress bar to rely on this value to animate it.
+   * Note: It should not be used in parallel with the `progress` prop.
+   */
+  animatedValue?: number;
+  /**
    * Progress value (between 0 and 1).
+   * Note: It should not be used in parallel with the `animatedValue` prop.
    */
   progress?: number;
   /**
@@ -36,7 +42,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 const INDETERMINATE_DURATION = 2000;
@@ -69,6 +75,7 @@ const ProgressBar = ({
   progress = 0,
   visible = true,
   theme,
+  animatedValue,
   ...rest
 }: Props) => {
   const { current: timer } = React.useRef<Animated.Value>(
@@ -91,6 +98,10 @@ const ProgressBar = ({
       useNativeDriver: true,
       isInteraction: false,
     }).start();
+
+    if (animatedValue && animatedValue >= 0) {
+      return;
+    }
 
     // Animate progress bar
     if (indeterminate) {
@@ -116,7 +127,13 @@ const ProgressBar = ({
         isInteraction: false,
       }).start();
     }
-  }, [scale, timer, progress, indeterminate, fade]);
+    /**
+     * We shouldn't add @param animatedValue to the
+     * deps array, to avoid the unnecessary loop.
+     * We can only check if the prop is passed initially,
+     * and we do early return.
+     */
+  }, [fade, scale, indeterminate, timer, progress]);
 
   const stopAnimation = React.useCallback(() => {
     // Stop indeterminate animation
@@ -136,6 +153,12 @@ const ProgressBar = ({
     if (visible) startAnimation();
     else stopAnimation();
   }, [visible, startAnimation, stopAnimation]);
+
+  React.useEffect(() => {
+    if (animatedValue && animatedValue >= 0) {
+      timer.setValue(animatedValue);
+    }
+  }, [animatedValue, timer]);
 
   React.useEffect(() => {
     // Start animation the very first time when previously the width was unclear
@@ -237,4 +260,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(ProgressBar);
+export default withInternalTheme(ProgressBar);

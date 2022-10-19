@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
 
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
 
@@ -30,7 +30,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * testID to be used on tests.
    */
@@ -87,9 +87,9 @@ const Checkbox = (props: Props) =>
     <CheckboxAndroid {...props} />
   );
 
-export default withTheme(Checkbox);
+export default withInternalTheme(Checkbox);
 
 // @component-docs ignore-next-line
-const CheckboxWithTheme = withTheme(Checkbox);
+const CheckboxWithTheme = withInternalTheme(Checkbox);
 // @component-docs ignore-next-line
 export { CheckboxWithTheme as Checkbox };

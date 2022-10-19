@@ -1,18 +1,13 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import {
-  Avatar,
-  List,
-  MD2Colors,
-  MD3Colors,
-  useTheme,
-} from 'react-native-paper';
+import { Avatar, List, MD2Colors, MD3Colors } from 'react-native-paper';
 
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const AvatarExample = () => {
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
   return (
     <ScreenWrapper>
       <List.Section title="Text">

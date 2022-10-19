@@ -1,16 +1,16 @@
 import * as React from 'react';
 import {
   Animated,
-  StyleSheet,
-  StyleProp,
-  TextStyle,
   LayoutChangeEvent,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
 } from 'react-native';
 
 import color from 'color';
 
-import { withTheme } from '../core/theming';
-import type { $Omit, Theme } from '../types';
+import { withInternalTheme } from '../core/theming';
+import type { $Omit, InternalTheme } from '../types';
 import AnimatedText from './Typography/AnimatedText';
 
 export type Props = $Omit<
@@ -37,7 +37,7 @@ export type Props = $Omit<
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * TestID used for testing purposes
    */
@@ -172,4 +172,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(HelperText);
+export default withInternalTheme(HelperText);

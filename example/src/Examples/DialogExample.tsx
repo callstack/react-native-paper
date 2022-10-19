@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Button, useTheme } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 import {
   DialogWithCustomColors,
+  DialogWithIcon,
   DialogWithLoadingIndicator,
   DialogWithLongText,
   DialogWithRadioBtns,
   UndismissableDialog,
-  DialogWithIcon,
 } from './Dialogs';
 
 type ButtonVisibility = {
@@ -19,7 +20,7 @@ type ButtonVisibility = {
 
 const DialogExample = () => {
   const [visible, setVisible] = React.useState<ButtonVisibility>({});
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
 
   const _toggleDialog = (name: string) => () =>
     setVisible({ ...visible, [name]: !visible[name] });

@@ -1,21 +1,21 @@
 import * as React from 'react';
 import {
-  Platform,
-  StyleSheet,
-  StyleProp,
-  TextInput,
-  I18nManager,
-  TextInputProps,
-  ViewStyle,
-  TextStyle,
   Animated,
+  I18nManager,
+  Platform,
+  StyleProp,
+  StyleSheet,
+  TextInput,
+  TextInputProps,
+  TextStyle,
   View,
+  ViewStyle,
 } from 'react-native';
 
 import color from 'color';
 
-import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
+import { withInternalTheme } from '../core/theming';
+import type { InternalTheme } from '../types';
 import ActivityIndicator from './ActivityIndicator';
 import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
@@ -81,7 +81,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 type TextInputHandles = Pick<
@@ -294,4 +294,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Searchbar);
+export default withInternalTheme(Searchbar);

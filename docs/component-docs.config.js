@@ -137,5 +137,7 @@ module.exports = {
       'https://reactnative.dev/docs/accessibility#accessibilitystate',
     'StyleProp<ViewStyle>': 'https://reactnative.dev/docs/view-style-props',
     'StyleProp<TextStyle>': 'https://reactnative.dev/docs/text-style-props',
+    "ScrollViewProps['keyboardShouldPersistTaps']":
+      'https://reactnative.dev/docs/scrollview#keyboardshouldpersisttaps',
   },
 };

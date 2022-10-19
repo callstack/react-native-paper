@@ -3,23 +3,22 @@ import { Alert, ScrollView, StyleSheet, View } from 'react-native';
 
 import {
   Avatar,
-  Paragraph,
-  Card,
   Button,
-  IconButton,
-  useTheme,
+  Card,
   Chip,
+  IconButton,
+  Paragraph,
   Text,
 } from 'react-native-paper';
 
-import { PreferencesContext } from '..';
+import { PreferencesContext, useExampleTheme } from '..';
 import { isWeb } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';
 
 type Mode = 'elevated' | 'outlined' | 'contained';
 
 const CardExample = () => {
-  const { colors, isV3 } = useTheme();
+  const { colors, isV3 } = useExampleTheme();
   const [selectedMode, setSelectedMode] = React.useState('elevated' as Mode);
   const [isSelected, setIsSelected] = React.useState(false);
   const preferences = React.useContext(PreferencesContext);

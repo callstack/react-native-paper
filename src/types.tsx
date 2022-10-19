@@ -67,16 +67,51 @@ export type MD3Colors = {
   onErrorContainer: string;
   onBackground: string;
   outline: string;
+  outlineVariant: string;
   inverseSurface: string;
   inverseOnSurface: string;
   inversePrimary: string;
+  shadow: string;
+  scrim: string;
   backdrop: string;
   elevation: MD3ElevationColors;
 };
 
+export type MD3AndroidColors = {
+  primary: number;
+  primaryContainer: number;
+  secondary: number;
+  secondaryContainer: number;
+  tertiary: number;
+  tertiaryContainer: number;
+  surface: number;
+  surfaceVariant: number;
+  background: number;
+  error: number;
+  errorContainer: number;
+  onPrimary: number;
+  onPrimaryContainer: number;
+  onSecondary: number;
+  onSecondaryContainer: number;
+  onTertiary: number;
+  onTertiaryContainer: number;
+  onSurface: number;
+  onSurfaceVariant: number;
+  onError: number;
+  onErrorContainer: number;
+  onBackground: number;
+  outline: number;
+  outlineVariant: number;
+  inverseSurface: number;
+  inverseOnSurface: number;
+  inversePrimary: number;
+  shadow: number;
+  scrim: number;
+};
+
 export type MD3Palette = {};
 
-export type ThemeProp = $DeepPartial<ReactNativePaper.Theme>;
+export type ThemeProp = $DeepPartial<InternalTheme>;
 
 export type ThemeBase = {
   dark: boolean;
@@ -101,7 +136,7 @@ export type MD2Theme = ThemeBase & {
   fonts: Fonts;
 };
 
-export type Theme = MD2Theme | MD3Theme;
+export type InternalTheme = MD2Theme | MD3Theme;
 
 // MD3 types
 export enum MD3TypescaleKey {
@@ -160,3 +195,15 @@ export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<
 >;
 
 export type EllipsizeProp = 'head' | 'middle' | 'tail' | 'clip';
+
+export type NavigationTheme = {
+  dark: boolean;
+  colors: {
+    primary: string;
+    background: string;
+    card: string;
+    text: string;
+    border: string;
+    notification: string;
+  };
+};

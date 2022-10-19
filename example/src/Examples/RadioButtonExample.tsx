@@ -1,23 +1,23 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import {
+  MD2Colors,
+  MD3Colors,
   Paragraph,
   RadioButton,
-  MD2Colors,
-  TouchableRipple,
-  useTheme,
-  MD3Colors,
   Text,
+  TouchableRipple,
 } from 'react-native-paper';
 
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 type State = 'normal' | 'normal-ios' | 'normal-item' | 'custom';
 
 const RadioButtonExample = () => {
   const [checked, setChecked] = React.useState<State>('normal');
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
   const TextComponent = isV3 ? Text : Paragraph;
 
   return (

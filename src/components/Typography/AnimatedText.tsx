@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {
   Animated,
-  TextStyle,
   I18nManager,
   StyleProp,
   StyleSheet,
+  TextStyle,
 } from 'react-native';
 
-import { withTheme } from '../../core/theming';
-import { Font, MD3TypescaleKey, Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import { Font, InternalTheme, MD3TypescaleKey } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof Animated.Text> & {
   /**
@@ -30,7 +30,7 @@ type Props = React.ComponentPropsWithRef<typeof Animated.Text> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 /**
@@ -105,4 +105,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(AnimatedText);
+export default withInternalTheme(AnimatedText);

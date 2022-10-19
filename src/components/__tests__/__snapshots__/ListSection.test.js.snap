@@ -44,10 +44,13 @@ exports[`renders list section with custom title style 1`] = `
         "onTertiary": "rgba(255, 255, 255, 1)",
         "onTertiaryContainer": "rgba(49, 17, 29, 1)",
         "outline": "rgba(121, 116, 126, 1)",
+        "outlineVariant": "rgba(202, 196, 208, 1)",
         "primary": "rgba(103, 80, 164, 1)",
         "primaryContainer": "rgba(234, 221, 255, 1)",
+        "scrim": "rgba(0, 0, 0, 1)",
         "secondary": "rgba(98, 91, 113, 1)",
         "secondaryContainer": "rgba(232, 222, 248, 1)",
+        "shadow": "rgba(0, 0, 0, 1)",
         "surface": "rgba(255, 251, 254, 1)",
         "surfaceDisabled": "rgba(28, 27, 31, 0.12)",
         "surfaceVariant": "rgba(231, 224, 236, 1)",
@@ -215,8 +218,11 @@ exports[`renders list section with custom title style 1`] = `
       }
     }
     accessible={true}
-    focusable={false}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -225,6 +231,7 @@ exports[`renders list section with custom title style 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {
@@ -305,6 +312,8 @@ exports[`renders list section with custom title style 1`] = `
               },
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
               },
               Object {
                 "writingDirection": "ltr",
@@ -333,8 +342,11 @@ exports[`renders list section with custom title style 1`] = `
       }
     }
     accessible={true}
-    focusable={false}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -343,6 +355,7 @@ exports[`renders list section with custom title style 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {
@@ -423,6 +436,8 @@ exports[`renders list section with custom title style 1`] = `
               },
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
               },
               Object {
                 "writingDirection": "ltr",
@@ -491,10 +506,13 @@ exports[`renders list section with subheader 1`] = `
         "onTertiary": "rgba(255, 255, 255, 1)",
         "onTertiaryContainer": "rgba(49, 17, 29, 1)",
         "outline": "rgba(121, 116, 126, 1)",
+        "outlineVariant": "rgba(202, 196, 208, 1)",
         "primary": "rgba(103, 80, 164, 1)",
         "primaryContainer": "rgba(234, 221, 255, 1)",
+        "scrim": "rgba(0, 0, 0, 1)",
         "secondary": "rgba(98, 91, 113, 1)",
         "secondaryContainer": "rgba(232, 222, 248, 1)",
+        "shadow": "rgba(0, 0, 0, 1)",
         "surface": "rgba(255, 251, 254, 1)",
         "surfaceDisabled": "rgba(28, 27, 31, 0.12)",
         "surfaceVariant": "rgba(231, 224, 236, 1)",
@@ -660,8 +678,11 @@ exports[`renders list section with subheader 1`] = `
       }
     }
     accessible={true}
-    focusable={false}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -670,6 +691,7 @@ exports[`renders list section with subheader 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {
@@ -750,6 +772,8 @@ exports[`renders list section with subheader 1`] = `
               },
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
               },
               Object {
                 "writingDirection": "ltr",
@@ -778,8 +802,11 @@ exports[`renders list section with subheader 1`] = `
       }
     }
     accessible={true}
-    focusable={false}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -788,6 +815,7 @@ exports[`renders list section with subheader 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {
@@ -868,6 +896,8 @@ exports[`renders list section with subheader 1`] = `
               },
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
               },
               Object {
                 "writingDirection": "ltr",
@@ -936,10 +966,13 @@ exports[`renders list section without subheader 1`] = `
         "onTertiary": "rgba(255, 255, 255, 1)",
         "onTertiaryContainer": "rgba(49, 17, 29, 1)",
         "outline": "rgba(121, 116, 126, 1)",
+        "outlineVariant": "rgba(202, 196, 208, 1)",
         "primary": "rgba(103, 80, 164, 1)",
         "primaryContainer": "rgba(234, 221, 255, 1)",
+        "scrim": "rgba(0, 0, 0, 1)",
         "secondary": "rgba(98, 91, 113, 1)",
         "secondaryContainer": "rgba(232, 222, 248, 1)",
+        "shadow": "rgba(0, 0, 0, 1)",
         "surface": "rgba(255, 251, 254, 1)",
         "surfaceDisabled": "rgba(28, 27, 31, 0.12)",
         "surfaceVariant": "rgba(231, 224, 236, 1)",
@@ -1067,8 +1100,11 @@ exports[`renders list section without subheader 1`] = `
       }
     }
     accessible={true}
-    focusable={false}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1077,6 +1113,7 @@ exports[`renders list section without subheader 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {
@@ -1157,6 +1194,8 @@ exports[`renders list section without subheader 1`] = `
               },
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
               },
               Object {
                 "writingDirection": "ltr",
@@ -1185,8 +1224,11 @@ exports[`renders list section without subheader 1`] = `
       }
     }
     accessible={true}
-    focusable={false}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1195,6 +1237,7 @@ exports[`renders list section without subheader 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
         false,
         Array [
           Object {
@@ -1275,6 +1318,8 @@ exports[`renders list section without subheader 1`] = `
               },
               Object {
                 "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
               },
               Object {
                 "writingDirection": "ltr",

@@ -1,18 +1,13 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import {
-  IconButton,
-  List,
-  MD2Colors,
-  MD3Colors,
-  useTheme,
-} from 'react-native-paper';
+import { IconButton, List, MD2Colors, MD3Colors } from 'react-native-paper';
 
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const ButtonExample = () => {
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
   if (!isV3) {
     return (
       <ScreenWrapper contentContainerStyle={styles.v2Container}>
