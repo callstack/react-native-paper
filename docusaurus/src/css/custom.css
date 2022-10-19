@@ -136,3 +136,24 @@ html[data-theme='light'] .gallery-dark {
   font-family: 'MaterialCommunityIcons';
   src: url('../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf') format('truetype');
 }
+
+.badge {
+  background-color: black;
+  color: white;
+}
+
+.badge code {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.badge-supported {
+  background-color: #6200ee;
+}
+
+.badge-deprecated {
+  background-color: #B00020;
+}
+
+.badge-renamed {
+  background-color: #006400;
+}

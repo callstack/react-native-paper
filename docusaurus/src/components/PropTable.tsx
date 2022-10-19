@@ -1,6 +1,7 @@
 import React from 'react';
 // eslint-disable-next-line import/no-unresolved
 import useDoc from '@site/component-docs-plugin/useDocs';
+import Markdown from './Markdown';
 
 const typeDefinitions = {
   IconSource: '/docs/icons',
@@ -13,6 +14,13 @@ const typeDefinitions = {
 
 const ANNOTATION_OPTIONAL = '@optional';
 const ANNOTATION_INTERNAL = '@internal';
+
+const renderBadge = (annotation: string) => {
+  const [annotType, ...annotLabel] = annotation.split(' ');
+
+  // eslint-disable-next-line prettier/prettier
+  return `<span class="badge badge-${annotType.replace('@', '')} ">${annotLabel.join(' ')}</span>`;
+};
 
 export default function PropTable({ link }) {
   const doc = useDoc(link);
@@ -35,6 +43,18 @@ export default function PropTable({ link }) {
   return (
     <div>
       {Object.keys(props).map((key) => {
+        const description = props[key].description
+          .split('\n')
+          .map((line) => {
+            // Replace annotations with styled badges.
+            if (line.includes('@')) {
+              const annotIndex = line.indexOf('@');
+              // eslint-disable-next-line prettier/prettier
+              return `${line.substr(0, annotIndex)} ${renderBadge(line.substr(annotIndex))}`;
+            }
+          })
+          .join('\n');
+
         const tsType = props[key].tsType?.raw ?? props[key].tsType?.name;
 
         return (
@@ -63,7 +83,7 @@ export default function PropTable({ link }) {
                 Default value: <code>{props[key].defaultValue.value}</code>
               </p>
             )}
-            <p>{props[key].description}</p>
+            <Markdown content={description} />
           </div>
         );
       })}
