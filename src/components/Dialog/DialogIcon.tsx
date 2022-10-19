@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { useTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import Icon, { IconSource } from '../Icon';
 
 export type Props = {
@@ -61,7 +61,7 @@ export type Props = {
  * ```
  */
 const DialogIcon = ({ size = 24, color, icon }: Props) => {
-  const theme = useTheme();
+  const theme = useInternalTheme();
 
   if (!theme.isV3) {
     return null;

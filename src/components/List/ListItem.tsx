@@ -9,9 +9,12 @@ import {
 
 import color from 'color';
 
-import { withTheme } from '../../core/theming';
-import type { $RemoveChildren, EllipsizeProp } from '../../types';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type {
+  $RemoveChildren,
+  EllipsizeProp,
+  InternalTheme,
+} from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
@@ -70,7 +73,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * Style that is passed to the wrapping TouchableRipple element.
    */
@@ -274,4 +277,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(ListItem);
+export default withInternalTheme(ListItem);

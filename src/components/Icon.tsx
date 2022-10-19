@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {
-  Image,
   I18nManager,
-  Platform,
+  Image,
   ImageSourcePropType,
+  Platform,
 } from 'react-native';
 
 import { Consumer as SettingsConsumer } from '../core/settings';
-import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
+import { withInternalTheme } from '../core/theming';
+import type { InternalTheme } from '../types';
 import { accessibilityProps } from './MaterialCommunityIcon';
 
 type IconSourceBase = string | ImageSourcePropType;
@@ -29,7 +29,7 @@ type Props = IconProps & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 const isImageSource = (source: any) =>
@@ -123,4 +123,4 @@ const Icon = ({ source, color, size, theme, ...rest }: Props) => {
   return null;
 };
 
-export default withTheme(Icon);
+export default withInternalTheme(Icon);

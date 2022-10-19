@@ -1,15 +1,15 @@
 import * as React from 'react';
 import {
+  AccessibilityState,
   Animated,
+  StyleProp,
+  StyleSheet,
   View,
   ViewStyle,
-  StyleSheet,
-  StyleProp,
-  AccessibilityState,
 } from 'react-native';
 
-import { withTheme } from '../../core/theming';
-import type { $RemoveChildren, Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { $RemoveChildren, InternalTheme } from '../../types';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
@@ -111,7 +111,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   testID?: string;
 };
 
@@ -320,9 +320,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(FAB);
+export default withInternalTheme(FAB);
 
 // @component-docs ignore-next-line
-const FABWithTheme = withTheme(FAB);
+const FABWithTheme = withInternalTheme(FAB);
 // @component-docs ignore-next-line
 export { FABWithTheme as FAB };

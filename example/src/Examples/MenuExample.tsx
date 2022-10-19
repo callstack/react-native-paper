@@ -1,22 +1,22 @@
 import * as React from 'react';
 import {
-  View,
-  StyleSheet,
-  Platform,
   GestureResponderEvent,
+  Platform,
+  StyleSheet,
+  View,
 } from 'react-native';
 
 import type { StackNavigationProp } from '@react-navigation/stack';
 import {
-  Menu,
   Appbar,
-  Divider,
   Button,
+  Divider,
   List,
+  Menu,
   TouchableRipple,
-  useTheme,
 } from 'react-native-paper';
 
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 type ContextualMenuCoord = { x: number; y: number };
@@ -35,7 +35,7 @@ const MenuExample = ({ navigation }: Props) => {
   const [visible, setVisible] = React.useState<MenuVisibility>({});
   const [contextualMenuCoord, setContextualMenuCoor] =
     React.useState<ContextualMenuCoord>({ x: 0, y: 0 });
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
 
   const _toggleMenu = (name: string) => () =>
     setVisible({ ...visible, [name]: !visible[name] });

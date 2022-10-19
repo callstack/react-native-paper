@@ -91,7 +91,7 @@ const Provider = (props: Props) => {
     return {
       ...extendedThemeBase,
       isV3: extendedThemeBase.version === 3,
-    } as ReactNativePaper.Theme;
+    };
   };
 
   const { children, settings } = props;

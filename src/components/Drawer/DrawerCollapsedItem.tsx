@@ -1,18 +1,18 @@
 import * as React from 'react';
 import {
-  View,
-  StyleSheet,
-  StyleProp,
-  ViewStyle,
   Animated,
-  TouchableWithoutFeedback,
   NativeSyntheticEvent,
-  TextLayoutEventData,
   Platform,
+  StyleProp,
+  StyleSheet,
+  TextLayoutEventData,
+  TouchableWithoutFeedback,
+  View,
+  ViewStyle,
 } from 'react-native';
 
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import Badge from '../Badge';
 import Icon, { IconSource } from '../Icon';
 import Text from '../Typography/Text';
@@ -42,7 +42,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * Badge to show on the icon, can be `true` to show a dot, `string` or `number` to show text.
    */
@@ -248,4 +248,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(DrawerCollapsedItem);
+export default withInternalTheme(DrawerCollapsedItem);

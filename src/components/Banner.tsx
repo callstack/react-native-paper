@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { View, ViewStyle, StyleSheet, StyleProp, Animated } from 'react-native';
+import { Animated, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-import { withTheme } from '../core/theming';
-import type { $RemoveChildren, Theme } from '../types';
+import { withInternalTheme } from '../core/theming';
+import type { $RemoveChildren, InternalTheme } from '../types';
 import Button from './Button/Button';
 import Icon, { IconSource } from './Icon';
 import Surface from './Surface';
@@ -32,7 +32,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
    *
    * To customize button you can pass other props that button component takes.
    */
-  actions: Array<
+  actions?: Array<
     {
       label: string;
     } & Omit<React.ComponentProps<typeof Button>, 'children'>
@@ -52,7 +52,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * @optional
    * Optional callback that will be called after the opening animation finished running normally
@@ -128,7 +128,7 @@ const Banner = ({
   visible,
   icon,
   children,
-  actions,
+  actions = [],
   contentStyle,
   elevation = 1,
   style,
@@ -291,4 +291,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Banner);
+export default withInternalTheme(Banner);

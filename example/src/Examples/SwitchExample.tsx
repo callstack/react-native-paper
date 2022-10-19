@@ -1,23 +1,23 @@
 import * as React from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 import {
-  Paragraph,
-  Switch,
   MD2Colors,
   MD3Colors,
-  TouchableRipple,
-  useTheme,
+  Paragraph,
+  Switch,
   Text,
+  TouchableRipple,
 } from 'react-native-paper';
 
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const SwitchExample = () => {
   const [valueNormal, setNormalValue] = React.useState<boolean>(true);
   const [valueCustom, setCustomValue] = React.useState<boolean>(true);
 
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
 
   const switchValueNormalLabel = `switch ${
     valueNormal === true ? 'on' : 'off'

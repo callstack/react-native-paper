@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { StyleSheet, Platform, StyleProp, ViewStyle } from 'react-native';
+import { Platform, StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
-import { withTheme } from '../../core/theming';
+import { withInternalTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 import Modal from '../Modal';
 import DialogActions from './DialogActions';
 import DialogContent from './DialogContent';
@@ -32,7 +32,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 const DIALOG_ELEVATION: number = 24;
@@ -172,4 +172,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Dialog);
+export default withInternalTheme(Dialog);
