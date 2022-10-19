@@ -132,7 +132,7 @@ it('correctly applies error state Outline TextInput', () => {
     />
   );
 
-  const outline = getByTestId('text-input-outline');
+  const outline = getByTestId('text-input-outlined-outline');
   expect(outline).toHaveStyle({ borderWidth: 2 });
 });
 
@@ -147,7 +147,7 @@ it('correctly applies focused state Outline TextInput', () => {
     />
   );
 
-  const outline = getByTestId('text-input-outline');
+  const outline = getByTestId('text-input-outlined-outline');
   expect(outline).toHaveStyle({ borderWidth: 2 });
 
   fireEvent(getByTestId('text-input-outlined'), 'focus');
@@ -1014,11 +1014,10 @@ describe('outlineStyle - underlineStyle', () => {
       <TextInput
         mode="outlined"
         outlineStyle={{ borderRadius: 16, borderWidth: 6 }}
-        testID="text-input"
       />
     );
 
-    expect(getByTestId('text-input-outline')).toHaveStyle({
+    expect(getByTestId('text-input-outlined-outline')).toHaveStyle({
       borderRadius: 16,
       borderWidth: 6,
     });
@@ -1029,11 +1028,10 @@ describe('outlineStyle - underlineStyle', () => {
       <TextInput
         mode="flat"
         underlineStyle={{ borderRadius: 16, borderWidth: 6 }}
-        testID="text-input"
       />
     );
 
-    expect(getByTestId('text-input-underline')).toHaveStyle({
+    expect(getByTestId('text-input-flat-underline')).toHaveStyle({
       borderRadius: 16,
       borderWidth: 6,
     });

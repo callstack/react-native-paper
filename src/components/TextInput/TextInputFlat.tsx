@@ -1,17 +1,17 @@
 import * as React from 'react';
 import {
-  View,
   Animated,
-  TextInput as NativeTextInput,
-  StyleSheet,
   I18nManager,
   Platform,
-  TextStyle,
   StyleProp,
+  StyleSheet,
+  TextInput as NativeTextInput,
+  TextStyle,
+  View,
   ViewStyle,
 } from 'react-native';
 
-import { useTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import { AdornmentSide, AdornmentType, InputMode } from './Adornment/enums';
 import TextInputAdornment, {
   TextInputAdornmentProps,
@@ -21,29 +21,29 @@ import {
   getAdornmentStyleAdjustmentForNativeInput,
 } from './Adornment/TextInputAdornment';
 import {
+  ADORNMENT_SIZE,
+  LABEL_PADDING_TOP_DENSE,
+  LABEL_WIGGLE_X_OFFSET,
   MAXIMIZED_LABEL_FONT_SIZE,
   MINIMIZED_LABEL_FONT_SIZE,
-  LABEL_WIGGLE_X_OFFSET,
-  ADORNMENT_SIZE,
   MINIMIZED_LABEL_Y_OFFSET,
-  LABEL_PADDING_TOP_DENSE,
-  MIN_DENSE_HEIGHT_WL,
   MIN_DENSE_HEIGHT,
+  MIN_DENSE_HEIGHT_WL,
 } from './constants';
 import {
-  calculateLabelTopPosition,
-  calculateInputHeight,
-  calculatePadding,
   adjustPaddingFlat,
-  Padding,
-  interpolatePlaceholder,
   calculateFlatAffixTopPosition,
   calculateFlatInputHorizontalPadding,
-  getFlatInputColors,
+  calculateInputHeight,
+  calculateLabelTopPosition,
+  calculatePadding,
   getConstants,
+  getFlatInputColors,
+  interpolatePlaceholder,
+  Padding,
 } from './helpers';
 import InputLabel from './Label/InputLabel';
-import type { RenderProps, ChildTextInputProps } from './types';
+import type { ChildTextInputProps, RenderProps } from './types';
 
 const TextInputFlat = ({
   disabled = false,
@@ -54,6 +54,7 @@ const TextInputFlat = ({
   underlineColor,
   underlineStyle,
   activeUnderlineColor,
+  textColor,
   dense,
   style,
   theme,
@@ -71,7 +72,7 @@ const TextInputFlat = ({
   left,
   right,
   placeholderTextColor,
-  testID = 'text-input',
+  testID = 'text-input-flat',
   ...rest
 }: ChildTextInputProps) => {
   const isAndroid = Platform.OS === 'android';
@@ -142,6 +143,7 @@ const TextInputFlat = ({
   } = getFlatInputColors({
     underlineColor,
     activeUnderlineColor,
+    textColor,
     disabled,
     error,
     theme,
@@ -307,10 +309,10 @@ const TextInputFlat = ({
   return (
     <View style={[containerStyle, viewStyle]}>
       <Underline
+        testID={`${testID}-underline`}
+        style={underlineStyle}
         hasActiveOutline={hasActiveOutline}
         parentState={parentState}
-        style={underlineStyle}
-        testID={`${testID}-underline`}
         underlineColorCustom={underlineColorCustom}
         error={error}
         colors={colors}
@@ -344,7 +346,7 @@ const TextInputFlat = ({
         )}
         <InputLabel parentState={parentState} labelProps={labelProps} />
         {render?.({
-          testID: `${testID}-flat`,
+          testID,
           ...rest,
           ref: innerRef,
           onChangeText,
@@ -414,7 +416,7 @@ const Underline = ({
   style,
   testID,
 }: UnderlineProps) => {
-  const { isV3 } = useTheme();
+  const { isV3 } = useInternalTheme();
 
   let backgroundColor = parentState.focused
     ? activeColor
