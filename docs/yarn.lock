@@ -1535,6 +1535,11 @@
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.7.1.tgz#e93c13942592cf5ef01aa8297444dc192beee52f"
   integrity sha512-Qv4LTqO11jepd5Qmlp3M1YEjBumoTHcHFdgPTQ+sFlIL5myi/7xu/POwP7IRu6odBdmLXdtIs1D6TuW6kbwbbg==
 
+"@material/material-color-utilities@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@material/material-color-utilities/-/material-color-utilities-0.2.0.tgz#adc64dfea1eb124ff0654fa833a180d7080cbbaa"
+  integrity sha512-Wux17VAe27abfUyA+yPq/xN7+e6xkj1UFKd9g02KD0HhpM+GRqXLfytJ6nJKhFtliZouQfTcBcOg2cGrt/XbKA==
+
 "@mdx-js/mdx@^0.20.3":
   version "0.20.3"
   resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-0.20.3.tgz#1f32b4a4a0cc176a3192ef51a0a3502cdfdca3f0"
