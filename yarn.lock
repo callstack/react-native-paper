@@ -2095,11 +2095,6 @@
     mkdirp "^0.5.1"
     rimraf "^2.5.2"
 
-"@material/material-color-utilities@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@material/material-color-utilities/-/material-color-utilities-0.2.0.tgz#adc64dfea1eb124ff0654fa833a180d7080cbbaa"
-  integrity sha512-Wux17VAe27abfUyA+yPq/xN7+e6xkj1UFKd9g02KD0HhpM+GRqXLfytJ6nJKhFtliZouQfTcBcOg2cGrt/XbKA==
-
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
