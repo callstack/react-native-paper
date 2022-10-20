@@ -39,6 +39,7 @@ import TextExample from './Examples/TextExample';
 import TextInputExample from './Examples/TextInputExample';
 import ThemeExample from './Examples/ThemeExample';
 import ToggleButtonExample from './Examples/ToggleButtonExample';
+import ToolTipExample from './Examples/ToolTipExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
 
 import { useExampleTheme } from '.';
@@ -82,6 +83,7 @@ export const examples: Record<
   toggleButton: ToggleButtonExample,
   touchableRipple: TouchableRippleExample,
   theme: ThemeExample,
+  toolTip: ToolTipExample,
 };
 
 type Props = {
