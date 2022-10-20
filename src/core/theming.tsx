@@ -1,11 +1,6 @@
 import type { ComponentType } from 'react';
-import type { ColorValue } from 'react-native';
 
 import { $DeepPartial, createTheming } from '@callstack/react-theme-provider';
-import {
-  argbFromHex,
-  themeFromSourceColor,
-} from '@material/material-color-utilities';
 import color from 'color';
 
 import {
@@ -14,11 +9,9 @@ import {
   MD3DarkTheme,
   MD3LightTheme,
 } from '../styles/themes';
-import { tokens } from '../styles/themes/v3/tokens';
 import type {
   InternalTheme,
   MD3Theme,
-  MD3Colors,
   MD3AndroidColors,
   NavigationTheme,
 } from '../types';
@@ -59,15 +52,6 @@ export const getTheme = (isDark = false, isV3 = true) => {
   const scheme = isDark ? 'dark' : 'light';
 
   return defaultThemesByVersion[themeVersion][scheme];
-};
-
-type Config = {
-  sourceColor: ColorValue;
-};
-
-type Schemes = {
-  lightScheme: MD3Colors;
-  darkScheme: MD3Colors;
 };
 
 // eslint-disable-next-line no-redeclare
@@ -162,55 +146,4 @@ export const getDynamicThemeElevations = (scheme: MD3AndroidColors) => {
               .string(),
     };
   }, {});
-};
-
-export const createDynamicThemeColors = ({ sourceColor }: Config): Schemes => {
-  const { opacity } = tokens.md.ref;
-  const modes = ['light', 'dark'] as const;
-
-  const { schemes, palettes } = themeFromSourceColor(
-    argbFromHex(color(sourceColor).hex())
-  );
-
-  const { light, dark } = modes.reduce(
-    (prev, curr) => {
-      const schemeModeJSON = schemes[curr].toJSON();
-
-      const customColors = {
-        surfaceDisabled: color(schemeModeJSON.onSurface)
-          .alpha(opacity.level2)
-          .rgb()
-          .string(),
-        onSurfaceDisabled: color(schemeModeJSON.onSurface)
-          .alpha(opacity.level4)
-          .rgb()
-          .string(),
-        backdrop: color(palettes.neutralVariant.tone(20))
-          .alpha(0.4)
-          .rgb()
-          .string(),
-      };
-
-      const elevation = getDynamicThemeElevations(schemeModeJSON);
-
-      const dynamicThemeColors = Object.assign(
-        {},
-        ...Object.entries(schemeModeJSON).map(([colorName, colorValue]) => ({
-          [colorName]: color(colorValue).rgb().string(),
-        })),
-        {
-          elevation,
-          ...customColors,
-        }
-      );
-
-      return {
-        ...prev,
-        [curr]: dynamicThemeColors,
-      };
-    },
-    { light: MD3LightTheme.colors, dark: MD3DarkTheme.colors }
-  );
-
-  return { lightScheme: light, darkScheme: dark };
 };
