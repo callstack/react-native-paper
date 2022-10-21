@@ -145,7 +145,6 @@ const config = {
         },
       },
     ],
-    'docusaurus-lunr-search',
   ],
 
   presets: [
@@ -202,6 +201,15 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+
+  themes: [
+    [
+      '@easyops-cn/docusaurus-search-local',
+      {
+        hashed: true,
+      },
+    ],
+  ],
 };
 
 module.exports = config;

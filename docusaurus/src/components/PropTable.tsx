@@ -24,9 +24,18 @@ const renderBadge = (annotation: string) => {
 
 export default function PropTable({ link }) {
   const doc = useDoc(link);
+
+  if (!doc || !doc.data || !doc.data.props) {
+    return null;
+  }
+
   const props = doc.data.props;
 
   for (const prop in props) {
+    if (!props[prop].description) {
+      props[prop].description = '';
+    }
+
     // Remove @optional annotations from descriptions.
     if (props[prop].description.includes(ANNOTATION_OPTIONAL)) {
       props[prop].description = props[prop].description.replace(
@@ -43,24 +52,39 @@ export default function PropTable({ link }) {
   return (
     <div>
       {Object.keys(props).map((key) => {
-        const description = props[key].description
-          .split('\n')
-          .map((line) => {
-            // Replace annotations with styled badges.
-            if (line.includes('@')) {
-              const annotIndex = line.indexOf('@');
-              // eslint-disable-next-line prettier/prettier
-              return `${line.substr(0, annotIndex)} ${renderBadge(line.substr(annotIndex))}`;
-            }
-          })
-          .join('\n');
+        let leadingBadge: string;
+        let descriptionByLines = props[key].description.split('\n');
 
+        // Find leading badge and put it next after prop name.
+        if (descriptionByLines[0].includes('@')) {
+          leadingBadge = descriptionByLines[0];
+          descriptionByLines = descriptionByLines.slice(1);
+        }
+        descriptionByLines = descriptionByLines.map((line) => {
+          // Replace annotations with styled badges.
+          if (line.includes('@')) {
+            const annotIndex = line.indexOf('@');
+            // eslint-disable-next-line prettier/prettier
+              return `${line.substr(0, annotIndex)} ${renderBadge(line.substr(annotIndex))}`;
+          } else {
+            return line;
+          }
+        });
+
+        const description = descriptionByLines.join('\n');
         const tsType = props[key].tsType?.raw ?? props[key].tsType?.name;
 
         return (
           <div key={key}>
             <h3>
               {key} {props[key].required ? '(required)' : ''}
+              {leadingBadge && (
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: renderBadge(leadingBadge),
+                  }}
+                />
+              )}
             </h3>
             <p>
               Type:{' '}

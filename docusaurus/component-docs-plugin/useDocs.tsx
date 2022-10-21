@@ -37,8 +37,8 @@ export interface Prop {
 }
 
 function useDoc(withPath: string) {
-  const { docs } = usePluginData(pluginName) as ComponentDocsPluginData;
-  return docs[withPath];
+  const pluginData = usePluginData(pluginName) as ComponentDocsPluginData;
+  return pluginData?.docs?.[withPath];
 }
 
 export default useDoc;

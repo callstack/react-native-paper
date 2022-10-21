@@ -140,6 +140,7 @@ html[data-theme='light'] .gallery-dark {
 .badge {
   background-color: black;
   color: white;
+  font-size: 12px;
 }
 
 .badge code {
@@ -156,4 +157,77 @@ html[data-theme='light'] .gallery-dark {
 
 .badge-renamed {
   background-color: #006400;
+}
+
+.showcase-gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+@media (max-width: 680px) {
+  .showcase-gallery {
+    justify-content: center;
+  }
+}
+
+.showcase-image-container {
+  overflow: hidden;
+  margin: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+@media (min-width: 420px) {
+  .showcase-image-container {
+    height: 528px;
+  }
+
+  .showcase-image-container:hover .showcase-info,
+  .showcase-image-container:focus .showcase-info {
+    transform: translateY(-48px);
+  }
+}
+
+
+.showcase-image {
+  display: block;
+  max-height: 480px;
+  width: auto;
+}
+
+@media (min-width: 420px) {
+  .showcase-image {
+    height: 480px;
+    width: 270px;
+  }
+}
+
+.showcase-info {
+  height: 96px;
+  padding: 12px;
+  transform: translateY(0);
+  transition: 150ms;
+}
+
+.showcase-app-name {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 12px;
+
+  width: 246px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.showcase-badge-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 16px;
+  padding-left: 3px;
+}
+
+.showcase-separation {
+  margin: 0 10px;
 }
