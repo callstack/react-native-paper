@@ -65,7 +65,11 @@ const DynamicColorTheme = () => {
           sourceColor: color,
         });
 
-        dynamicThemeColors.current = { ...themeColors };
+        dynamicThemeColors.current = {
+          light: { ...themeColors.light },
+          dark: { ...themeColors.dark },
+        };
+
         nonMaterialCore.forEach((colorKey) => {
           delete themeColors.light[colorKey];
           delete themeColors.dark[colorKey];
@@ -97,7 +101,7 @@ const DynamicColorTheme = () => {
 
   const getColorScheme = () => {
     const _schema = {
-      [darkMode]: dynamicThemeColors.current[darkMode],
+      colors: dynamicThemeColors.current[darkMode],
     };
     return JSON.stringify(_schema, null, 2);
   };
