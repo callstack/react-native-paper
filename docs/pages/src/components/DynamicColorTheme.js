@@ -1,14 +1,20 @@
 /* @flow */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import createDynamicThemeColors from '../utils/createDynamicColorTheme';
+import Switch from './Switch';
 
 type SearchbarProps = {
   value: string,
-  type: String,
+  type: string,
   onChange?: SyntheticInputEvent<HTMLInputElement>,
-  placeholder: String,
+  placeholder: string,
+};
+
+type Schemes = {
+  light: Record<string, Record | string>,
+  dark: Record<string, Record | string>,
 };
 
 const Searchbar = (props: SearchbarProps) => {
@@ -17,19 +23,58 @@ const Searchbar = (props: SearchbarProps) => {
 
 const defaultColor = 'purple';
 
+const getFontColor = (colorName, colorSchemes) => {
+  let fontColor = '';
+  if (colorName.startsWith('on')) {
+    fontColor = `${colorName.charAt(2).toLowerCase()}${colorName.slice(3)}`;
+  } else {
+    fontColor = `on${colorName.charAt(0).toUpperCase()}${colorName.slice(1)}`;
+  }
+
+  return colorSchemes[fontColor];
+};
+
+const nonMaterialCore = [
+  'elevation',
+  'shadow',
+  'scrim',
+  'inverseSurface',
+  'inverseOnSurface',
+  'surfaceDisabled',
+  'onSurfaceDisabled',
+  'outlineVariant',
+  'backdrop',
+  'inversePrimary',
+];
+
 const DynamicColorTheme = () => {
+  const [isDark, setIsDark] = useState(false);
   const [color, setColor] = useState(defaultColor);
-  const [schemes, setSchemes] = useState({ light: {} });
+  const [schemes, setSchemes] = useState<Schemes>({ light: {}, dark: {} });
+  const [copied, setCopied] = useState(false);
+  const [error, setError] = useState('');
+
+  const dynamicThemeColors = useRef<Schemes>({ light: {}, dark: {} });
+
+  const darkMode = isDark ? 'dark' : 'light';
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (CSS.supports('color', color)) {
-        setSchemes(createDynamicThemeColors({ sourceColor: color }));
-        setError('');
+        const themeColors = createDynamicThemeColors({
+          sourceColor: color,
+        });
+
+        dynamicThemeColors.current = { ...themeColors };
+        nonMaterialCore.forEach((colorKey) => {
+          delete themeColors.light[colorKey];
+          delete themeColors.dark[colorKey];
+        });
+        setSchemes({ ...themeColors });
       } else if (!color) {
         setColor(defaultColor);
       } else {
-        // handle error
+        setError(`"${color}": it's not a color`);
       }
     }, 1000);
 
@@ -37,26 +82,66 @@ const DynamicColorTheme = () => {
   }, [color]);
 
   const onSearch = (e: SyntheticInputEvent<HTMLInputElement>) => {
+    if (error) {
+      setError('');
+    }
     setColor(e.target.value);
+  };
+
+  const onCopy = () => {
+    navigator.clipboard.writeText(getColorScheme());
+    setCopied(true);
+
+    setTimeout(() => setCopied(false), 1000);
+  };
+
+  const getColorScheme = () => {
+    const _schema = {
+      [darkMode]: dynamicThemeColors.current[darkMode],
+    };
+    return JSON.stringify(_schema, null, 2);
   };
 
   return (
     <div style={styles.container}>
-      <Searchbar type="search" value={color} onChange={onSearch} />
-      <div style={styles.grid}>
-        {Object.entries(schemes.light).map((item, index) => {
-          return (
-            <span
-              key={index}
-              style={{
-                backgroundColor: item[1],
-                ...styles.colorView,
-              }}
-            >
-              {item[0]}
-            </span>
-          );
-        })}
+      <span style={styles.searchContainer}>
+        <Searchbar type="search" value={color} onChange={onSearch} />
+        <span style={styles.switchView}>
+          <p style={styles.switchLabel}>Dark Mode:</p>
+          <Switch
+            value={isDark}
+            color="green"
+            onValueChange={() => setIsDark(!isDark)}
+          />
+        </span>
+      </span>
+      <p style={styles.error}>{error}</p>
+      <div style={styles.gridParent}>
+        <div style={styles.gridColors}>
+          {Object.entries(schemes[darkMode]).map((item, index) => {
+            return (
+              <span
+                key={index}
+                style={{
+                  backgroundColor: item[1],
+                  ...styles.colorView,
+                  color: getFontColor(item[0], schemes[darkMode]),
+                }}
+              >
+                <p style={styles.colorTitle}>{item[0]}</p>
+              </span>
+            );
+          })}
+        </div>
+
+        <div style={styles.schemaView}>
+          <pre>
+            <p onClick={onCopy} style={styles.copy}>
+              {copied ? 'copied' : 'copy'}
+            </p>
+            <code className="language-json">{getColorScheme()}</code>
+          </pre>
+        </div>
       </div>
     </div>
   );
@@ -78,16 +163,54 @@ const styles = {
     borderRadius: '3px',
     outline: 0,
   },
-  grid: {
+  gridColors: {
     display: 'grid',
-    gridTemplateColumns: 'auto auto auto auto',
-    gridGap: '10px',
+    gridTemplateColumns: '25% 25% 25% 25%',
+    gridColumnGap: '0px',
+    gridRowGap: '5px',
+    marginTop: '20px',
   },
   colorView: {
-    margin: '10px',
     border: '1px solid #ccc',
-    padding: '5px',
+    padding: '0px 0px 5px 5px',
+    height: '100%',
   },
+  colorTitle: {
+    fontSize: '0.8em',
+  },
+  gridParent: {
+    display: 'grid',
+    gridTemplateColumns: '50% 40%',
+    gridColumnGap: '15px',
+  },
+  copy: {
+    padding: '3px',
+    textAlign: 'center',
+    border: '1px solid #ccc',
+    width: '14%',
+    borderRadius: '2px',
+    float: 'right',
+    marginRight: '10px',
+    cursor: 'pointer',
+  },
+  schemaView: {
+    marginTop: '5px',
+  },
+  switchView: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: '20px',
+  },
+  switchLabel: {
+    fontWeight: 'bold',
+  },
+  searchContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  error: { color: 'red' },
 };
 
 export default DynamicColorTheme;
