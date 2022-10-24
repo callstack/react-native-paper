@@ -49,9 +49,21 @@
     }
   }
 
-  @media only screen and (min-width: 1200px) and (max-width: 1600px) {
+  @media only screen and (min-width: 1200px) and (max-width: 1400px) {
     .gridColors {
       grid-template-columns: 33.3% 33.3% 33.3%;
+    }
+    .gridParent {
+      grid-template-columns: 60% 40%;
+    }
+    .searchBar {
+      width: 40%;
+    }
+  }
+
+  @media only screen and (min-width: 1400px) and (max-width: 1600px) {
+    .gridColors {
+      grid-template-columns: 25% 25% 25% 25%;
     }
     .gridParent {
       grid-template-columns: 60% 40%;
