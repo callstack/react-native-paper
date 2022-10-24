@@ -24,7 +24,6 @@ const Searchbar = (props: SearchbarProps) => {
 };
 
 const defaultColor = 'purple';
-const mediaSize = '(max-width: 1600px)';
 
 const getFontColor = (colorName, colorSchemes) => {
   let fontColor = '';
@@ -56,23 +55,10 @@ const DynamicColorTheme = () => {
   const [schemes, setSchemes] = useState<Schemes>({ light: {}, dark: {} });
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState('');
-  const [isMobilePhone, setIsMobilePhone] = useState(false);
 
   const dynamicThemeColors = useRef<Schemes>({ light: {}, dark: {} });
 
   const darkMode = isDark ? 'dark' : 'light';
-
-  useEffect(() => {
-    setIsMobilePhone(window.matchMedia(mediaSize).matches);
-
-    window
-      .matchMedia(mediaSize)
-      .addEventListener('change', (e) => setIsMobilePhone(e.matches));
-
-    return () => {
-      window.matchMedia(mediaSize).removeEventListener('change');
-    };
-  }, []);
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
@@ -150,9 +136,6 @@ const DynamicColorTheme = () => {
       <div className="gridParent">
         <div className="gridColors">
           {schemesArray.map((item, index) => {
-            const factor = isMobilePhone ? 2 : 4;
-            const isFirstItemInRow = index % factor === 0;
-
             return (
               <span
                 key={index}
@@ -160,7 +143,6 @@ const DynamicColorTheme = () => {
                   backgroundColor: item[1],
                   ...styles.colorView,
                   color: getFontColor(item[0], schemes[darkMode]),
-                  ...(isFirstItemInRow ? { borderLeftWidth: '1px' } : null),
                 }}
               >
                 <p style={styles.colorTitle}>{item[0]}</p>
@@ -190,16 +172,15 @@ const styles = {
     border: '1px solid #ccc',
     padding: '0px 0px 5px 5px',
     height: '100%',
-    borderWidth: '1px 1px 0px 0px',
+    borderWidth: '1px 0px 0px 0px',
   },
   colorTitle: {
     fontSize: '0.8em',
   },
   copy: {
-    padding: '3px',
+    padding: '10px',
     textAlign: 'center',
     border: '1px solid #ccc',
-    width: '14%',
     borderRadius: '2px',
     float: 'right',
     marginRight: '10px',

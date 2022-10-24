@@ -2,8 +2,8 @@
     display: grid;
     margin-top: 20px;
     grid-template-columns: 25% 25% 25% 25%;
-    padding: 0px 0px 5px 5px;
     height: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   }
 
   .gridParent {
@@ -25,12 +25,36 @@
     outline: 0;
   }
 
-  @media only screen and (max-width: 1600px) {
+  @media only screen and (max-width: 1000px) {
     .gridColors {
       grid-template-columns: 50% 50%;
     }
     .gridParent {
       grid-template-columns: 100%;
+    }
+    .searchBar {
+      width: 40%;
+    }
+  }
+  
+  @media only screen and (min-width: 1000px) and (max-width: 1200px) {
+    .gridColors {
+      grid-template-columns: 50% 50%;
+    }
+    .gridParent {
+      grid-template-columns: 60% 40%;
+    }
+    .searchBar {
+      width: 40%;
+    }
+  }
+
+  @media only screen and (min-width: 1200px) and (max-width: 1600px) {
+    .gridColors {
+      grid-template-columns: 33.3% 33.3% 33.3%;
+    }
+    .gridParent {
+      grid-template-columns: 60% 40%;
     }
     .searchBar {
       width: 40%;
