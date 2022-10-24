@@ -1,6 +1,8 @@
----
-title: Theming
----
+export const meta = {
+  title: "Theming"
+}
+
+import DynamicColorTheme from './src/components/DynamicColorTheme.js'
 
 # Theming
 
@@ -178,6 +180,48 @@ export default function Main() {
   );
 }
 ```
+
+## Creating dynamic theme colors
+
+Dynamic Color Themes allows for generating two color schemes lightScheme and darkScheme, based on the provided source color. 
+Created schemes are following the Material Design 3 color system and covering colors structure from the Paper theme. User may generate these schemes using the following tool:
+
+<DynamicColorTheme />
+
+<br />
+
+Passed source color into the util is translated into tones to automatically provide the range of tones that map to color roles. 
+
+ <img class="medium" src="screenshots/custom-colors.png" />
+
+ <i>Source: [Material You Color System](https://m3.material.io/styles/color/the-color-system/custom-colors)</i>
+
+### Using schemes:
+
+Once we have copied the color schemes from the generated JSON above, we can use by passing it to the colors in `theme` object as below:
+
+```jsx
+import * as React from 'react';
+import {
+  MD3LightTheme as DefaultTheme,
+  Provider as PaperProvider,
+} from 'react-native-paper';
+import App from './src/App';
+
+const theme = {
+  ...DefaultTheme,
+  colors: yourGeneratedLightOrDarkScheme, // Copy it from the color codes scheme and then use it here
+};
+
+export default function Main() {
+  return (
+    <PaperProvider theme={theme}>
+      <App />
+    </PaperProvider>
+  );
+}
+```
+
 ## Adapting React Navigation theme
 
 The `adaptNavigationTheme` function takes an existing React Navigation theme and returns a React Navigation theme using the colors from Material Design 3. This theme can be passed to `NavigationContainer` so that React Navigation's UI elements have the same color scheme as Paper.
@@ -497,14 +541,14 @@ Now you can use your `FancyButton` component everywhere instead of using `Button
 
 ## Dark Theme
 
-Since 3.0 we adapt dark theme to follow [Material design guidelines](https://material.io/design/color/dark-theme.html). </br>
-In contrast to light theme, dark theme by default uses `surface` colour instead of `primary` on large components like `AppBar` or `BottomNavigation`.</br>
+Since 3.0 we adapt dark theme to follow [Material design guidelines](https://material.io/design/color/dark-theme.html). <br/>
+In contrast to light theme, dark theme by default uses `surface` colour instead of `primary` on large components like `AppBar` or `BottomNavigation`.<br/>
 The dark theme adds a white overlay with opacity depending on elevation of surfaces. It uses it for the better accentuation of surface elevation. Using only shadow is highly imperceptible on dark surfaces.
 
-We are aware that users often use dark theme in their own ways and may not want to use the default dark theme features from the guidelines.</br>
+We are aware that users often use dark theme in their own ways and may not want to use the default dark theme features from the guidelines.<br/>
 That's why if you are using dark theme you can switch between two dark theme `mode`s:
 
-- `exact` where everything is like it was before. `Appbar` and `BottomNavigation` will still use primary colour by default.</br>
+- `exact` where everything is like it was before. `Appbar` and `BottomNavigation` will still use primary colour by default.<br/>
 - `adaptive` where we follow [Material design guidelines](https://material.io/design/color/dark-theme.html), the surface will use white overlay with opacity to show elevation, `Appbar` and `BottomNavigation` will use surface colour as a background.
 
 If you don't use a custom theme, Paper will automatically change between the default theme and the default dark theme, depending on device settings.

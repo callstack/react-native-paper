@@ -1,0 +1,74 @@
+.gridColors {
+    display: grid;
+    margin-top: 20px;
+    grid-template-columns: 25% 25% 25% 25%;
+    height: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .gridParent {
+    display: grid;
+    grid-template-columns: 50% 40%;
+    column-gap: 15px;
+  }
+
+  .searchBar {
+    box-sizing: border-box;
+    appearance: none;
+    border: 0;
+    display: block;
+    width: 20%;
+    padding: 12px;
+    font-size: 1em;
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    outline: 0;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    .gridColors {
+      grid-template-columns: 50% 50%;
+    }
+    .gridParent {
+      grid-template-columns: 100%;
+    }
+    .searchBar {
+      width: 40%;
+    }
+  }
+  
+  @media only screen and (min-width: 1000px) and (max-width: 1200px) {
+    .gridColors {
+      grid-template-columns: 50% 50%;
+    }
+    .gridParent {
+      grid-template-columns: 60% 40%;
+    }
+    .searchBar {
+      width: 40%;
+    }
+  }
+
+  @media only screen and (min-width: 1200px) and (max-width: 1400px) {
+    .gridColors {
+      grid-template-columns: 33.3% 33.3% 33.3%;
+    }
+    .gridParent {
+      grid-template-columns: 60% 40%;
+    }
+    .searchBar {
+      width: 40%;
+    }
+  }
+
+  @media only screen and (min-width: 1400px) and (max-width: 1600px) {
+    .gridColors {
+      grid-template-columns: 25% 25% 25% 25%;
+    }
+    .gridParent {
+      grid-template-columns: 60% 40%;
+    }
+    .searchBar {
+      width: 40%;
+    }
+  }
