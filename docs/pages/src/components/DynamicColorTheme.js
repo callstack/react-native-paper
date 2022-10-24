@@ -4,12 +4,14 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import createDynamicThemeColors from '../utils/createDynamicColorTheme';
 import Switch from './Switch';
+import '../css/DynamicColorTheme.css';
 
 type SearchbarProps = {
   value: string,
   type: string,
   onChange?: SyntheticInputEvent<HTMLInputElement>,
   placeholder: string,
+  onBlur?: () => void,
 };
 
 type Schemes = {
@@ -18,10 +20,11 @@ type Schemes = {
 };
 
 const Searchbar = (props: SearchbarProps) => {
-  return <input {...props} style={styles.searchBar} />;
+  return <input className="searchBar" {...props} />;
 };
 
 const defaultColor = 'purple';
+const mediaSize = '(max-width: 1600px)';
 
 const getFontColor = (colorName, colorSchemes) => {
   let fontColor = '';
@@ -53,10 +56,23 @@ const DynamicColorTheme = () => {
   const [schemes, setSchemes] = useState<Schemes>({ light: {}, dark: {} });
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState('');
+  const [isMobilePhone, setIsMobilePhone] = useState(false);
 
   const dynamicThemeColors = useRef<Schemes>({ light: {}, dark: {} });
 
   const darkMode = isDark ? 'dark' : 'light';
+
+  useEffect(() => {
+    setIsMobilePhone(window.matchMedia(mediaSize).matches);
+
+    window
+      .matchMedia(mediaSize)
+      .addEventListener('change', (e) => setIsMobilePhone(e.matches));
+
+    return () => {
+      window.matchMedia(mediaSize).removeEventListener('change');
+    };
+  }, []);
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
@@ -75,9 +91,7 @@ const DynamicColorTheme = () => {
           delete themeColors.dark[colorKey];
         });
         setSchemes({ ...themeColors });
-      } else if (!color) {
-        setColor(defaultColor);
-      } else {
+      } else if (color.trim() !== '') {
         setError(`"${color}": it's not a color`);
       }
     }, 1000);
@@ -90,6 +104,12 @@ const DynamicColorTheme = () => {
       setError('');
     }
     setColor(e.target.value);
+  };
+
+  const onBlur = () => {
+    if (color.trim() === '') {
+      setColor(defaultColor);
+    }
   };
 
   const onCopy = () => {
@@ -106,10 +126,17 @@ const DynamicColorTheme = () => {
     return JSON.stringify(_schema, null, 2);
   };
 
+  const schemesArray = Object.entries(schemes[darkMode]);
+
   return (
     <div style={styles.container}>
       <span style={styles.searchContainer}>
-        <Searchbar type="search" value={color} onChange={onSearch} />
+        <Searchbar
+          onBlur={onBlur}
+          type="search"
+          value={color}
+          onChange={onSearch}
+        />
         <span style={styles.switchView}>
           <p style={styles.switchLabel}>Dark Mode:</p>
           <Switch
@@ -120,9 +147,12 @@ const DynamicColorTheme = () => {
         </span>
       </span>
       <p style={styles.error}>{error}</p>
-      <div style={styles.gridParent}>
-        <div style={styles.gridColors}>
-          {Object.entries(schemes[darkMode]).map((item, index) => {
+      <div className="gridParent">
+        <div className="gridColors">
+          {schemesArray.map((item, index) => {
+            const factor = isMobilePhone ? 2 : 4;
+            const isFirstItemInRow = index % factor === 0;
+
             return (
               <span
                 key={index}
@@ -130,6 +160,7 @@ const DynamicColorTheme = () => {
                   backgroundColor: item[1],
                   ...styles.colorView,
                   color: getFontColor(item[0], schemes[darkMode]),
+                  ...(isFirstItemInRow ? { borderLeftWidth: '1px' } : null),
                 }}
               >
                 <p style={styles.colorTitle}>{item[0]}</p>
@@ -155,37 +186,14 @@ const styles = {
   container: {
     margin: '16px',
   },
-  searchBar: {
-    boxSizing: 'border-box',
-    appearance: 'none',
-    border: 0,
-    display: 'block',
-    width: '20%',
-    padding: '12px',
-    fontSize: '1em',
-    backgroundColor: '#f0f0f0',
-    borderRadius: '3px',
-    outline: 0,
-  },
-  gridColors: {
-    display: 'grid',
-    gridTemplateColumns: '25% 25% 25% 25%',
-    gridColumnGap: '0px',
-    gridRowGap: '5px',
-    marginTop: '20px',
-  },
   colorView: {
     border: '1px solid #ccc',
     padding: '0px 0px 5px 5px',
     height: '100%',
+    borderWidth: '1px 1px 0px 0px',
   },
   colorTitle: {
     fontSize: '0.8em',
-  },
-  gridParent: {
-    display: 'grid',
-    gridTemplateColumns: '50% 40%',
-    gridColumnGap: '15px',
   },
   copy: {
     padding: '3px',

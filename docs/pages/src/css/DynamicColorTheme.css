@@ -1,0 +1,38 @@
+.gridColors {
+    display: grid;
+    margin-top: 20px;
+    grid-template-columns: 25% 25% 25% 25%;
+    padding: 0px 0px 5px 5px;
+    height: 100%;
+  }
+
+  .gridParent {
+    display: grid;
+    grid-template-columns: 50% 40%;
+    column-gap: 15px;
+  }
+
+  .searchBar {
+    box-sizing: border-box;
+    appearance: none;
+    border: 0;
+    display: block;
+    width: 20%;
+    padding: 12px;
+    font-size: 1em;
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    outline: 0;
+  }
+
+  @media only screen and (max-width: 1600px) {
+    .gridColors {
+      grid-template-columns: 50% 50%;
+    }
+    .gridParent {
+      grid-template-columns: 100%;
+    }
+    .searchBar {
+      width: 40%;
+    }
+  }
