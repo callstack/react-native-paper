@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import { tokens } from '../../styles/themes/v3/tokens';
 import { Font, MD3TypescaleKey, ThemeProp } from '../../types';
 
 export type Props = React.ComponentProps<typeof NativeText> & {
@@ -129,13 +128,7 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
       />
     );
   } else {
-    const { brandRegular, weightRegular } = tokens.md.ref.typeface;
-    const font = theme.isV3
-      ? {
-          fontFamily: brandRegular,
-          fontWeight: weightRegular,
-        }
-      : theme.fonts?.regular;
+    const font = theme.isV3 ? theme.fonts.default : theme.fonts?.regular;
     const textStyle = {
       ...font,
       color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,

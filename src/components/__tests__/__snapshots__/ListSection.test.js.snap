@@ -80,6 +80,11 @@ exports[`renders list section with custom title style 1`] = `
           "letterSpacing": 0.4,
           "lineHeight": 16,
         },
+        "default": Object {
+          "fontFamily": "System",
+          "fontWeight": "400",
+          "letterSpacing": 0,
+        },
         "displayLarge": Object {
           "fontFamily": "System",
           "fontSize": 57,
@@ -314,6 +319,7 @@ exports[`renders list section with custom title style 1`] = `
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+                "letterSpacing": 0,
               },
               Object {
                 "writingDirection": "ltr",
@@ -438,6 +444,7 @@ exports[`renders list section with custom title style 1`] = `
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+                "letterSpacing": 0,
               },
               Object {
                 "writingDirection": "ltr",
@@ -541,6 +548,11 @@ exports[`renders list section with subheader 1`] = `
           "fontWeight": "400",
           "letterSpacing": 0.4,
           "lineHeight": 16,
+        },
+        "default": Object {
+          "fontFamily": "System",
+          "fontWeight": "400",
+          "letterSpacing": 0,
         },
         "displayLarge": Object {
           "fontFamily": "System",
@@ -774,6 +786,7 @@ exports[`renders list section with subheader 1`] = `
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+                "letterSpacing": 0,
               },
               Object {
                 "writingDirection": "ltr",
@@ -898,6 +911,7 @@ exports[`renders list section with subheader 1`] = `
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+                "letterSpacing": 0,
               },
               Object {
                 "writingDirection": "ltr",
@@ -1001,6 +1015,11 @@ exports[`renders list section without subheader 1`] = `
           "fontWeight": "400",
           "letterSpacing": 0.4,
           "lineHeight": 16,
+        },
+        "default": Object {
+          "fontFamily": "System",
+          "fontWeight": "400",
+          "letterSpacing": 0,
         },
         "displayLarge": Object {
           "fontFamily": "System",
@@ -1196,6 +1215,7 @@ exports[`renders list section without subheader 1`] = `
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+                "letterSpacing": 0,
               },
               Object {
                 "writingDirection": "ltr",
@@ -1320,6 +1340,7 @@ exports[`renders list section without subheader 1`] = `
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+                "letterSpacing": 0,
               },
               Object {
                 "writingDirection": "ltr",
