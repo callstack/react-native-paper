@@ -17,11 +17,11 @@ Below you can find the most important information about the components whose API
 Currently v5 is a release candidate, which means it won't be installed by default from the `npm`. In order to do that, there is a need to explicitly pass package version during installation:
 
 ```sh
-yarn add react-native-paper@5.0.0-rc.5
+yarn add react-native-paper@5.0.0-rc.8
 ```
 or
 ```sh
-npm install react-native-paper@5.0.0-rc.5
+npm install react-native-paper@5.0.0-rc.8
 ```
 ## Theming
 
@@ -425,7 +425,14 @@ There is also deprecation in one of the `actions` properties, namely `small` pro
 
 ```diff
 - <FAB.Group actions={[{ icon: "plus", small }]} />
-+ <FAB.Group actions={[{ icon: "plus" }]}>
++ <FAB.Group actions={[{ icon: "plus" }]} />
+```
+
+Additionally, the action item property previously known as `labelStyle` was renamed to `containerStyle` since it's tied mostly with the container styles. At the same time, `labelStyle` is still available with the new role related to styling item label. 
+
+```diff
+- <FAB.Group actions={[{ icon: "plus", labelStyle: styles.customStyle }]} />
++ <FAB.Group actions={[{ icon: "plus", containerStyle: styles.customStyle, labelStyle: styles.newLabelStyle }]} />
 ```
 
 ## IconButton

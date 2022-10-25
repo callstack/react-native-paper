@@ -12,11 +12,11 @@ If you are looking for the latest stable version documentation, please check the
 Open a Terminal in your project's folder and run:
 
 ```sh
-yarn add react-native-paper@5.0.0-rc.5
+yarn add react-native-paper@5.0.0-rc.8
 ```
 or
 ```sh
-npm install react-native-paper@5.0.0-rc.5
+npm install react-native-paper@5.0.0-rc.8
 ```
 If you're on a vanilla React Native project, you also need to install and link [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons).
 
@@ -149,4 +149,4 @@ export default function Main() {
 }
 ```
 
-Note: For MD2 check the following [Material Design 2 default theme](https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v2/LightTheme.tsx).
+<i>Note: For MD2 check the following [Material Design 2 default theme](https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v2/LightTheme.tsx).</i>
