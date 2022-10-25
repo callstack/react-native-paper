@@ -162,6 +162,7 @@ const BottomNavigationExample = ({ navigation }: Props) => {
         sceneAnimationEnabled={sceneAnimation !== undefined}
         sceneAnimationType={sceneAnimation}
         sceneAnimationEasing={Easing.ease}
+        getLazy={({ route }) => route.key !== 'album'}
       />
     </View>
   );
