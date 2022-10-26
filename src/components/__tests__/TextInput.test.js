@@ -1017,7 +1017,7 @@ describe('outlineStyle - underlineStyle', () => {
       />
     );
 
-    expect(getByTestId('text-input-outlined-outline')).toHaveStyle({
+    expect(getByTestId('text-input-outline')).toHaveStyle({
       borderRadius: 16,
       borderWidth: 6,
     });
