@@ -132,7 +132,7 @@ it('correctly applies error state Outline TextInput', () => {
     />
   );
 
-  const outline = getByTestId('text-input-outlined-outline');
+  const outline = getByTestId('text-input-outline');
   expect(outline).toHaveStyle({ borderWidth: 2 });
 });
 
