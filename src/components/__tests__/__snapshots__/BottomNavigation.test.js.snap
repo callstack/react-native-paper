@@ -50,6 +50,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
     >
       <View
         collapsable={false}
+        renderToHardwareTextureAndroid={false}
         style={
           Object {
             "flex": 1,
@@ -691,6 +692,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
     >
       <View
         collapsable={false}
+        renderToHardwareTextureAndroid={false}
         style={
           Object {
             "flex": 1,
@@ -1353,6 +1355,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
     >
       <View
         collapsable={false}
+        renderToHardwareTextureAndroid={true}
         style={
           Object {
             "flex": 1,
@@ -2668,6 +2671,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     >
       <View
         collapsable={false}
+        renderToHardwareTextureAndroid={false}
         style={
           Object {
             "flex": 1,
@@ -3339,6 +3343,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
     >
       <View
         collapsable={false}
+        renderToHardwareTextureAndroid={false}
         style={
           Object {
             "flex": 1,
@@ -4314,6 +4319,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
     >
       <View
         collapsable={false}
+        renderToHardwareTextureAndroid={false}
         style={
           Object {
             "flex": 1,
@@ -5301,6 +5307,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
     >
       <View
         collapsable={false}
+        renderToHardwareTextureAndroid={false}
         style={
           Object {
             "flex": 1,
@@ -6165,6 +6172,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
     >
       <View
         collapsable={false}
+        renderToHardwareTextureAndroid={false}
         style={
           Object {
             "flex": 1,
@@ -7151,6 +7159,7 @@ exports[`renders shifting bottom navigation 1`] = `
     >
       <View
         collapsable={false}
+        renderToHardwareTextureAndroid={false}
         style={
           Object {
             "flex": 1,
