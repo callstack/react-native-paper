@@ -387,7 +387,6 @@ const Outline = ({
   outlineColor,
   roundness,
   style,
-  testID,
 }: OutlineProps) => (
   <View
     testID={testID}
