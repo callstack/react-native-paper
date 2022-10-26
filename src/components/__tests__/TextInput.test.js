@@ -1031,7 +1031,7 @@ describe('outlineStyle - underlineStyle', () => {
       />
     );
 
-    expect(getByTestId('text-input-flat-underline')).toHaveStyle({
+    expect(getByTestId('text-input-underline')).toHaveStyle({
       borderRadius: 16,
       borderWidth: 6,
     });
