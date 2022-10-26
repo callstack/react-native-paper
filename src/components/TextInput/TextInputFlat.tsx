@@ -309,7 +309,6 @@ const TextInputFlat = ({
   return (
     <View style={[containerStyle, viewStyle]}>
       <Underline
-        testID={`${testID}-underline`}
         style={underlineStyle}
         hasActiveOutline={hasActiveOutline}
         parentState={parentState}
