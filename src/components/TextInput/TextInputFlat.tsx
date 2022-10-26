@@ -414,7 +414,6 @@ const Underline = ({
   underlineColorCustom,
   hasActiveOutline,
   style,
-  testID,
 }: UnderlineProps) => {
   const { isV3 } = useInternalTheme();
 
