@@ -402,7 +402,6 @@ type UnderlineProps = {
   underlineColorCustom?: string;
   hasActiveOutline?: boolean;
   style?: StyleProp<ViewStyle>;
-  testID?: string;
 };
 
 const Underline = ({
