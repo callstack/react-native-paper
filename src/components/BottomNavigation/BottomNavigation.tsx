@@ -38,6 +38,7 @@ type Route = {
   color?: string;
   accessibilityLabel?: string;
   testID?: string;
+  lazy?: boolean;
 };
 
 type NavigationState = {
@@ -265,7 +266,7 @@ export type Props = {
   /**
    * Get lazy for the current screen. Uses true by default.
    */
-  getLazy?: (props: { route: Route }) => boolean;
+  getLazy?: (props: { route: Route }) => boolean | undefined;
 };
 
 const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animation
@@ -389,7 +390,7 @@ const BottomNavigation = ({
   labelMaxFontSizeMultiplier = 1,
   compact = !theme.isV3,
   testID = 'bottom-navigation',
-  getLazy = () => true,
+  getLazy = ({ route }: { route: Route }) => route.lazy,
 }: Props) => {
   const { scale } = theme.animation;
 
@@ -684,7 +685,7 @@ const BottomNavigation = ({
     <View style={[styles.container, style]} testID={testID}>
       <View style={[styles.content, { backgroundColor: colors?.background }]}>
         {routes.map((route, index) => {
-          if (getLazy({ route }) && !loaded.includes(route.key)) {
+          if (getLazy({ route }) !== false && !loaded.includes(route.key)) {
             // Don't render a screen if we've never navigated to it
             return null;
           }
