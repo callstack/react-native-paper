@@ -389,7 +389,7 @@ const Outline = ({
   style,
 }: OutlineProps) => (
   <View
-    testID={testID}
+    testID="text-input-outline"
     pointerEvents="none"
     style={[
       styles.outline,
