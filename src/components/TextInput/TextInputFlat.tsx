@@ -427,7 +427,7 @@ const Underline = ({
 
   return (
     <Animated.View
-      testID={testID}
+      testID="text-input-underline"
       style={[
         styles.underline,
         isV3 && styles.md3Underline,
