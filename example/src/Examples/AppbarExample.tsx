@@ -10,6 +10,7 @@ import {
   RadioButton,
   Switch,
   Text,
+  Tooltip,
 } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -67,10 +68,14 @@ const AppbarExample = ({ navigation }: Props) => {
                 <Appbar.Action icon="calendar" onPress={() => {}} />
               )}
           {showSearchIcon && (
-            <Appbar.Action icon="magnify" onPress={() => {}} />
+            <Tooltip title="Search">
+              <Appbar.Action icon="magnify" onPress={() => {}} />
+            </Tooltip>
           )}
           {showMoreIcon && (
-            <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
+            <Tooltip title="More options">
+              <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
+            </Tooltip>
           )}
         </Appbar.Header>
       ),
@@ -209,13 +214,25 @@ const AppbarExample = ({ navigation }: Props) => {
         safeAreaInsets={{ bottom, left, right }}
         theme={{ mode: showExactTheme ? 'exact' : 'adaptive' }}
       >
-        <Appbar.Action icon="archive" onPress={() => {}} />
-        <Appbar.Action icon="email" onPress={() => {}} />
-        <Appbar.Action icon="label" onPress={() => {}} />
-        <Appbar.Action icon="delete" onPress={() => {}} />
-        {theme.isV3 && renderFAB()}
+        <Tooltip title="Archive">
+          <Appbar.Action icon="archive" onPress={() => {}} />
+        </Tooltip>
+        <Tooltip title="Email">
+          <Appbar.Action icon="email" onPress={() => {}} />
+        </Tooltip>
+        <Tooltip title="Label">
+          <Appbar.Action icon="label" onPress={() => {}} />
+        </Tooltip>
+        <Tooltip title="Delete">
+          <Appbar.Action icon="delete" onPress={() => {}} />
+        </Tooltip>
+        {theme.isV3 && (
+          <Tooltip title="FAB" wrapperStyle={styles.flex}>
+            {renderFAB()}
+          </Tooltip>
+        )}
       </Appbar>
-      {!theme.isV3 && renderFAB()}
+      {!theme.isV3 && <Tooltip title="FAB">{renderFAB()}</Tooltip>}
     </>
   );
 };
@@ -250,5 +267,9 @@ const styles = StyleSheet.create({
   },
   customColor: {
     backgroundColor: yellowA200,
+  },
+  flex: {
+    flex: 1,
+    alignSelf: 'flex-start',
   },
 });

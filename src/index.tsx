@@ -54,6 +54,7 @@ export { default as TouchableRipple } from './components/TouchableRipple/Touchab
 export { default as TextInput } from './components/TextInput/TextInput';
 export { default as ToggleButton } from './components/ToggleButton';
 export { default as SegmentedButtons } from './components/SegmentedButtons/SegmentedButtons';
+export { default as Tooltip } from './components/Tooltip';
 
 export {
   Caption,

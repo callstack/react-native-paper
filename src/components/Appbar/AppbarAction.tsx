@@ -72,39 +72,45 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
  * export default MyComponent;
  * ```
  */
-const AppbarAction = ({
-  size = 24,
-  color: iconColor,
-  icon,
-  disabled,
-  onPress,
-  accessibilityLabel,
-  isLeading,
-  ...rest
-}: Props) => {
-  const theme = useInternalTheme();
+const AppbarAction = React.forwardRef<{}, Props>(
+  (
+    {
+      size = 24,
+      color: iconColor,
+      icon,
+      disabled,
+      onPress,
+      accessibilityLabel,
+      isLeading,
+      ...rest
+    }: Props,
+    ref
+  ) => {
+    const theme = useInternalTheme();
 
-  const actionIconColor = iconColor
-    ? iconColor
-    : theme.isV3
-    ? isLeading
-      ? theme.colors.onSurface
-      : theme.colors.onSurfaceVariant
-    : color(black).alpha(0.54).rgb().string();
+    const actionIconColor = iconColor
+      ? iconColor
+      : theme.isV3
+      ? isLeading
+        ? theme.colors.onSurface
+        : theme.colors.onSurfaceVariant
+      : color(black).alpha(0.54).rgb().string();
 
-  return (
-    <IconButton
-      size={size}
-      onPress={onPress}
-      iconColor={actionIconColor}
-      icon={icon}
-      disabled={disabled}
-      accessibilityLabel={accessibilityLabel}
-      animated
-      {...rest}
-    />
-  );
-};
+    return (
+      <IconButton
+        size={size}
+        onPress={onPress}
+        iconColor={actionIconColor}
+        icon={icon}
+        disabled={disabled}
+        accessibilityLabel={accessibilityLabel}
+        animated
+        ref={ref}
+        {...rest}
+      />
+    );
+  }
+);
 
 AppbarAction.displayName = 'Appbar.Action';
 
