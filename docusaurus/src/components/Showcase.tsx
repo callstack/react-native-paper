@@ -1,7 +1,9 @@
 import React from 'react';
+
 import color from 'color';
-import GithubIcon from './GitHubIcon';
+
 import AppStoreIcon from './AppStoreIcon';
+import GithubIcon from './GithubIcon';
 import GooglePlayIcon from './GooglePlayIcon';
 
 type Data = {

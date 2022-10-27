@@ -1,9 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-
 const {
   default: parseComponentDocs,
 } = require('component-docs/dist/parsers/component');
+const fs = require('fs');
+const path = require('path');
 
 const { pluginName } = require('./config');
 const generatePageMDX = require('./generatePageMDX');
