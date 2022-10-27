@@ -173,11 +173,7 @@ export type MD3Typescale =
   | {
       [key in MD3TypescaleKey]: MD3Type;
     } & {
-      ['default']: {
-        fontFamily: string;
-        fontWeight: Font['fontWeight'];
-        letterSpacing: number;
-      };
+      ['default']: Omit<MD3Type, 'lineHeight' | 'fontSize'>;
     };
 
 export type MD3Elevation = 0 | 1 | 2 | 3 | 4 | 5;
