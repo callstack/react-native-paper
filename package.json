@@ -34,6 +34,7 @@
   ],
   "scripts": {
     "typescript": "tsc --noEmit",
+    "typescript:docusaurus": "yarn --cwd docusaurus tsc --noEmit",
     "lint": "eslint --ext '.js,.ts,.tsx' . --fix",
     "test": "jest",
     "prepare": "bob build && node ./scripts/generate-mappings.js",

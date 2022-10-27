@@ -65,6 +65,7 @@ jobs:
           name: Typecheck files
           command: |
             yarn typescript
+            yarn typescript:docusaurus
 
   unit-tests:
     executor: default
