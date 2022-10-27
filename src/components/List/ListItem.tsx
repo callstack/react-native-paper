@@ -1,7 +1,9 @@
 import * as React from 'react';
 import {
+  NativeSyntheticEvent,
   StyleProp,
   StyleSheet,
+  TextLayoutEventData,
   TextStyle,
   View,
   ViewStyle,
@@ -48,24 +50,11 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Callback which returns a React element to display on the left side.
    */
-  left?: (props: {
-    color: string;
-    style: {
-      marginLeft: number;
-      marginRight: number;
-      marginVertical?: number;
-    };
-  }) => React.ReactNode;
+  left?: (props: { color: string; style: ViewStyle }) => React.ReactNode;
   /**
    * Callback which returns a React element to display on the right side.
    */
-  right?: (props: {
-    color: string;
-    style?: {
-      marginRight: number;
-      marginVertical?: number;
-    };
-  }) => React.ReactNode;
+  right?: (props: { color: string; style?: ViewStyle }) => React.ReactNode;
   /**
    * Function to execute on press.
    */
@@ -153,6 +142,18 @@ const ListItem = ({
   descriptionStyle,
   ...rest
 }: Props) => {
+  const [alignToTop, setAlignToTop] = React.useState(false);
+
+  const onDescriptionTextLayout = (
+    event: NativeSyntheticEvent<TextLayoutEventData>
+  ) => {
+    if (!theme.isV3) {
+      return;
+    }
+    const { nativeEvent } = event;
+    setAlignToTop(nativeEvent.lines.length >= 2);
+  };
+
   const renderDescription = (
     descriptionColor: string,
     description?: Description | null
@@ -174,6 +175,7 @@ const ListItem = ({
           { color: descriptionColor },
           descriptionStyle,
         ]}
+        onTextLayout={onDescriptionTextLayout}
       >
         {description}
       </Text>
@@ -211,22 +213,19 @@ const ListItem = ({
   return (
     <TouchableRipple
       {...rest}
-      style={[styles.container, style]}
+      style={[theme.isV3 ? styles.containerV3 : styles.container, style]}
       onPress={onPress}
     >
-      <View style={styles.row}>
+      <View style={theme.isV3 ? styles.rowV3 : styles.row}>
         {left
           ? left({
               color: descriptionColor,
-              style: description
-                ? styles.iconMarginLeft
-                : {
-                    ...styles.iconMarginLeft,
-                    ...styles.marginVerticalNone,
-                  },
+              style: getLeftStyles(alignToTop, description, theme.isV3),
             })
           : null}
-        <View style={[styles.item, styles.content]}>
+        <View
+          style={[theme.isV3 ? styles.itemV3 : styles.item, styles.content]}
+        >
           {renderTitle()}
 
           {description
@@ -236,17 +235,69 @@ const ListItem = ({
         {right
           ? right({
               color: descriptionColor,
-              style: description
-                ? styles.iconMarginRight
-                : {
-                    ...styles.iconMarginRight,
-                    ...styles.marginVerticalNone,
-                  },
+              style: getRightStyles(alignToTop, description, theme.isV3),
             })
           : null}
       </View>
     </TouchableRipple>
   );
+};
+
+const getLeftStyles = (
+  alignToTop: boolean,
+  description: Description,
+  isV3: boolean
+) => {
+  const stylesV3 = {
+    marginRight: 0,
+    marginLeft: 16,
+    alignSelf: alignToTop ? 'flex-start' : 'center',
+  };
+
+  if (!description) {
+    return {
+      ...styles.iconMarginLeft,
+      ...styles.marginVerticalNone,
+      ...(isV3 && { ...stylesV3 }),
+    };
+  }
+
+  if (!isV3) {
+    return styles.iconMarginLeft;
+  }
+
+  return {
+    ...styles.iconMarginLeft,
+    ...stylesV3,
+  };
+};
+
+const getRightStyles = (
+  alignToTop: boolean,
+  description: Description,
+  isV3: boolean
+) => {
+  const stylesV3 = {
+    marginLeft: 16,
+    alignSelf: alignToTop ? 'flex-start' : 'center',
+  };
+
+  if (!description) {
+    return {
+      ...styles.iconMarginRight,
+      ...styles.marginVerticalNone,
+      ...(isV3 && { ...stylesV3 }),
+    };
+  }
+
+  if (!isV3) {
+    return styles.iconMarginRight;
+  }
+
+  return {
+    ...styles.iconMarginRight,
+    ...stylesV3,
+  };
 };
 
 ListItem.displayName = 'List.Item';
@@ -255,8 +306,16 @@ const styles = StyleSheet.create({
   container: {
     padding: 8,
   },
+  containerV3: {
+    paddingVertical: 8,
+    paddingRight: 24,
+  },
   row: {
     flexDirection: 'row',
+  },
+  rowV3: {
+    flexDirection: 'row',
+    marginVertical: 6,
   },
   title: {
     fontSize: 16,
@@ -270,6 +329,9 @@ const styles = StyleSheet.create({
   item: {
     marginVertical: 6,
     paddingLeft: 8,
+  },
+  itemV3: {
+    paddingLeft: 16,
   },
   content: {
     flex: 1,
