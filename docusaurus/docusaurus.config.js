@@ -2,9 +2,8 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const path = require('path');
-
-const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require('prism-react-renderer/themes/github');
 
 const title = 'React Native Paper';
 
@@ -182,6 +181,29 @@ const config = {
           src: 'images/sidebar-logo.svg',
         },
         items: [
+          {
+            type: 'dropdown',
+            label: 'v5.x',
+            position: 'left',
+            items: [
+              {
+                label: 'v4.x',
+                href: 'https://callstack.github.io/react-native-paper/4.0/index.html',
+              },
+              {
+                label: 'v3.x',
+                href: 'https://callstack.github.io/react-native-paper/3.0/index.html',
+              },
+              {
+                label: 'v2.x',
+                href: 'https://callstack.github.io/react-native-paper/2.0/index.html',
+              },
+              {
+                label: 'v1.x',
+                href: 'https://callstack.github.io/react-native-paper/1.0/index.html',
+              },
+            ],
+          },
           {
             type: 'doc',
             docId: 'guides/getting-started',
