@@ -54,8 +54,8 @@ type Measurement = {
 };
 
 /**
- * Return true when the tooltip center x-coordinate relative to the wrapped component is negative.
- * The tooltip will be placed at the starting x-coordinate from the wrapped component.
+ * Return true when the tooltip center x-coordinate relative to the wrapped element is negative.
+ * The tooltip will be placed at the starting x-coordinate from the wrapped element.
  */
 const overflowLeft = (center: number): boolean => {
   return center < 0;
@@ -63,7 +63,7 @@ const overflowLeft = (center: number): boolean => {
 
 /**
  * Return true when the tooltip center x-coordinate + tooltip width is greater than the layout width
- * The tooltip width will grow from right to left relative to the wrapped component.
+ * The tooltip width will grow from right to left relative to the wrapped element.
  */
 const overflowRight = (center: number, tooltipWidth: number): boolean => {
   const { width: layoutWidth } = Dimensions.get('window');
@@ -73,7 +73,7 @@ const overflowRight = (center: number, tooltipWidth: number): boolean => {
 
 /**
  * Return true when the children y-coordinate + its height + tooltip height is greater than the layout height.
- * The tooltip will be placed at the top of the wrapped component.
+ * The tooltip will be placed at the top of the wrapped element.
  */
 const overflowBottom = (
   childrenY: number,
@@ -200,7 +200,7 @@ const Tooltip = ({
     showTooltipTimer.current = setTimeout(
       () => setVisible(true),
       enterTouchDelay
-    );
+    ) as unknown as NodeJS.Timeout;
   };
 
   const handleTouchEnd = () => {
@@ -209,7 +209,7 @@ const Tooltip = ({
     hideTooltipTimer.current = setTimeout(() => {
       setVisible(false);
       setMeasurement({ children: {}, tooltip: {}, measured: false });
-    }, leaveTouchDelay);
+    }, leaveTouchDelay) as unknown as NodeJS.Timeout;
   };
 
   return (
