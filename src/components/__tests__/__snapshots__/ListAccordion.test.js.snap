@@ -154,7 +154,8 @@ exports[`renders expanded accordion 1`] = `
         false,
         Array [
           Object {
-            "padding": 8,
+            "paddingRight": 24,
+            "paddingVertical": 8,
           },
           undefined,
         ],
@@ -165,6 +166,7 @@ exports[`renders expanded accordion 1`] = `
       style={
         Object {
           "flexDirection": "row",
+          "marginVertical": 6,
         }
       }
     >
@@ -172,8 +174,7 @@ exports[`renders expanded accordion 1`] = `
         style={
           Array [
             Object {
-              "marginVertical": 6,
-              "paddingLeft": 8,
+              "paddingLeft": 16,
             },
             Object {
               "flex": 1,
@@ -277,10 +278,7 @@ exports[`renders list accordion with children 1`] = `
             Array [
               Object {
                 "alignItems": "center",
-                "height": 40,
                 "justifyContent": "center",
-                "margin": 8,
-                "width": 40,
               },
               undefined,
             ]
@@ -616,10 +614,7 @@ exports[`renders list accordion with left items 1`] = `
             Array [
               Object {
                 "alignItems": "center",
-                "height": 40,
                 "justifyContent": "center",
-                "margin": 8,
-                "width": 40,
               },
               undefined,
             ]
