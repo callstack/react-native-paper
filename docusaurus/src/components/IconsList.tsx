@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+// @ts-ignore
 import icons from 'react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json';
 
 export default function IconsList() {

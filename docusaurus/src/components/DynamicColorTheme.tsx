@@ -8,13 +8,12 @@ import React, {
 
 import createDynamicThemeColors from '../utils/createDynamicColorTheme';
 import Switch from './Switch';
-// import '../css/DynamicColorTheme.css';
 
 interface SearchbarProps {
   value: string;
   type: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
-  placeholder: string;
+  placeholder?: string;
   onBlur?: () => void;
 }
 
@@ -168,7 +167,7 @@ const DynamicColorTheme = () => {
   );
 };
 
-const styles = {
+const styles: { [key in string]: React.CSSProperties } = {
   container: {
     margin: '16px',
   },
