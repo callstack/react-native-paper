@@ -5,7 +5,6 @@ export {
   withTheme,
   ThemeProvider,
   DefaultTheme,
-  createDynamicThemeColors,
   adaptNavigationTheme,
 } from './core/theming';
 
