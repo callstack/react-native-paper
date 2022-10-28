@@ -372,16 +372,16 @@ it('renders a single tab', () => {
 });
 
 it('renders bottom navigation with getLazy', () => {
-  const tree = renderer
-    .create(
-      <BottomNavigation
-        navigationState={createState(0, 5)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-        getLazy={({ route }) => route.key === 'key-2'}
-      />
-    )
-    .toJSON();
+  const tree = render(
+    <BottomNavigation
+      navigationState={createState(0, 5)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+      getLazy={({ route }) => route.key === 'key-2'}
+    />
+  );
 
   expect(tree).toMatchSnapshot();
+
+  expect(tree.queryByTestId('RouteScreen: 2')).toBeNull();
 });
