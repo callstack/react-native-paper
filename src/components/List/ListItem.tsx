@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  FlexAlignType,
   NativeSyntheticEvent,
   StyleProp,
   StyleSheet,
@@ -38,6 +39,13 @@ type Description =
       fontSize: number;
     }) => React.ReactNode);
 
+interface Style {
+  marginLeft?: number;
+  marginRight?: number;
+  marginVertical?: number;
+  alignSelf?: FlexAlignType;
+}
+
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Title text for the list item.
@@ -50,11 +58,11 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Callback which returns a React element to display on the left side.
    */
-  left?: (props: { color: string; style: ViewStyle }) => React.ReactNode;
+  left?: (props: { color: string; style: Style }) => React.ReactNode;
   /**
    * Callback which returns a React element to display on the right side.
    */
-  right?: (props: { color: string; style?: ViewStyle }) => React.ReactNode;
+  right?: (props: { color: string; style?: Style }) => React.ReactNode;
   /**
    * Function to execute on press.
    */
