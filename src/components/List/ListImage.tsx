@@ -50,6 +50,7 @@ const ListImage = ({ style, source, variant = 'image' }: Props) => {
       style={[style, variant === 'image' ? styles.image : styles.video]}
       source={source}
       accessibilityIgnoresInvertColors
+      testID="list-image"
     />
   );
 };
