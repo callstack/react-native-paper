@@ -99,7 +99,7 @@ const DynamicColorTheme = () => {
   };
 
   const onCopy = () => {
-    navigator.clipboard.writeText(getColorScheme());
+    navigator.clipboard.writeText(getColorScheme().slice(1, -1).trim());
     setCopied(true);
 
     setTimeout(() => setCopied(false), 1000);
@@ -183,10 +183,13 @@ const styles = {
     border: '1px solid #ccc',
     borderRadius: '2px',
     float: 'right',
-    marginRight: '10px',
     cursor: 'pointer',
+    top: '10px',
+    right: '10px',
+    position: 'absolute',
   },
   schemaView: {
+    position: 'relative',
     marginTop: '5px',
   },
   switchView: {
