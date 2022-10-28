@@ -268,7 +268,7 @@ const ListAccordion = ({
               !child.props.left &&
               !child.props.right
             ) {
-              return React.cloneElement(child, {
+              return React.cloneElement<any>(child, {
                 style: [styles.child, child.props.style],
               });
             }

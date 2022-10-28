@@ -277,6 +277,7 @@ class Menu extends React.Component<Props, State> {
       this.handleDismiss
     );
     this.dimensionsSubscription = addEventListener(
+      // @ts-expect-error
       Dimensions,
       'change',
       this.handleDismiss

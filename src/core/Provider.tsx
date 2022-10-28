@@ -44,6 +44,7 @@ const Provider = (props: Props) => {
 
     if (!props.theme) {
       subscription = addEventListener(
+        // @ts-expect-error
         AccessibilityInfo,
         'reduceMotionChanged',
         setReduceMotionEnabled
@@ -68,6 +69,7 @@ const Provider = (props: Props) => {
         if (appearanceSubscription) {
           appearanceSubscription.remove();
         } else {
+          // @ts-expect-error
           Appearance?.removeChangeListener(handleAppearanceChange);
         }
       }
@@ -99,6 +101,7 @@ const Provider = (props: Props) => {
   return (
     <PortalHost>
       <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>
+        {/* @ts-expect-error check @callstack/react-theme-provider's children prop */}
         <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
       </SettingsProvider>
     </PortalHost>

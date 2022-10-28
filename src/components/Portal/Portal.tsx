@@ -55,6 +55,7 @@ class Portal extends React.Component<Props> {
             {(manager) => (
               <PortalConsumer manager={manager as PortalMethods}>
                 <SettingsProvider value={settings}>
+                  {/* @ts-expect-error check @callstack/react-theme-provider's children prop */}
                   <ThemeProvider theme={theme}>{children}</ThemeProvider>
                 </SettingsProvider>
               </PortalConsumer>

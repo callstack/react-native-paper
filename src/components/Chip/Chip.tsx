@@ -280,7 +280,7 @@ const Chip = ({
               ]}
             >
               {React.isValidElement(avatar)
-                ? React.cloneElement(avatar, {
+                ? React.cloneElement<any>(avatar, {
                     style: [styles.avatar, avatar.props.style],
                   })
                 : avatar}

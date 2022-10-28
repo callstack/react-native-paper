@@ -25,24 +25,28 @@ export default function useIsKeyboardShown({ onShow, onHide }: Props) {
         if (willShowSubscription?.remove) {
           willShowSubscription.remove();
         } else {
+          // @ts-expect-error
           Keyboard.removeListener('keyboardWillShow', onShow);
         }
 
         if (willHideSubscription?.remove) {
           willHideSubscription.remove();
         } else {
+          // @ts-expect-error
           Keyboard.removeListener('keyboardWillHide', onHide);
         }
       } else {
         if (didShowSubscription?.remove) {
           didShowSubscription.remove();
         } else {
+          // @ts-expect-error
           Keyboard.removeListener('keyboardDidShow', onShow);
         }
 
         if (didHideSubscription?.remove) {
           didHideSubscription.remove();
         } else {
+          // @ts-expect-error
           Keyboard.removeListener('keyboardDidHide', onHide);
         }
       }
