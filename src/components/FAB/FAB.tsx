@@ -113,6 +113,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
    */
   theme: InternalTheme;
   testID?: string;
+  ref?: React.RefObject<View>;
 };
 
 /**
@@ -150,7 +151,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
  * export default MyComponent;
  * ```
  */
-const FAB = React.forwardRef<{}, Props>(
+const FAB = React.forwardRef<View, Props>(
   (
     {
       icon,

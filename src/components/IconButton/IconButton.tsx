@@ -3,8 +3,8 @@ import {
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
-  TouchableWithoutFeedback,
   ViewStyle,
+  View,
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
@@ -65,7 +65,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
-  ref?: React.RefObject<TouchableWithoutFeedback>;
+  ref?: React.RefObject<View>;
   /**
    * @optional
    */
@@ -113,7 +113,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  *
  * @extends TouchableRipple props https://callstack.github.io/react-native-paper/touchable-ripple.html
  */
-const IconButton = React.forwardRef<{}, Props>(
+const IconButton = React.forwardRef<View, Props>(
   (
     {
       icon,

@@ -1,9 +1,5 @@
 import * as React from 'react';
-import type {
-  StyleProp,
-  TouchableWithoutFeedback,
-  ViewStyle,
-} from 'react-native';
+import type { StyleProp, ViewStyle, View } from 'react-native';
 
 import color from 'color';
 
@@ -44,7 +40,7 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
    */
   isLeading?: boolean;
   style?: StyleProp<ViewStyle>;
-  ref?: React.RefObject<TouchableWithoutFeedback>;
+  ref?: React.RefObject<View>;
 };
 
 /**
@@ -72,7 +68,7 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
  * export default MyComponent;
  * ```
  */
-const AppbarAction = React.forwardRef<{}, Props>(
+const AppbarAction = React.forwardRef<View, Props>(
   (
     {
       size = 24,

@@ -4,6 +4,7 @@ import {
   StyleProp,
   StyleSheet,
   ViewStyle,
+  View,
 } from 'react-native';
 
 import color from 'color';
@@ -54,6 +55,7 @@ export type Props = {
    * @optional
    */
   theme: InternalTheme;
+  ref?: React.RefObject<View>;
 };
 
 /**
@@ -90,7 +92,7 @@ export type Props = {
  *
  * ```
  */
-const ToggleButton = React.forwardRef<{}, Props>(
+const ToggleButton = React.forwardRef<View, Props>(
   (
     {
       icon,

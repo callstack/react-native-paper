@@ -36,9 +36,10 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * TestID used for testing purposes
    */
   testID?: string;
+  ref?: React.RefObject<View>;
 };
 
-const MD2Surface = React.forwardRef<{}, Props>(
+const MD2Surface = React.forwardRef<View, Props>(
   ({ style, theme: overrideTheme, ...rest }: Omit<Props, 'elevation'>, ref) => {
     const { elevation = 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
     const { dark: isDarkTheme, mode, colors } = useInternalTheme(overrideTheme);
@@ -104,7 +105,7 @@ const MD2Surface = React.forwardRef<{}, Props>(
  * });
  * ```
  */
-const Surface = React.forwardRef<{}, Props>(
+const Surface = React.forwardRef<View, Props>(
   (
     {
       elevation = 1,
