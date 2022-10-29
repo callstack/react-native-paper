@@ -54,13 +54,16 @@ export type Props = $Omit<
  * export default MyComponent;
  * ```
  */
-const AppbarBackAction = ({ accessibilityLabel = 'Back', ...rest }: Props) => (
-  <AppbarAction
-    accessibilityLabel={accessibilityLabel}
-    {...rest}
-    icon={AppbarBackIcon}
-    isLeading
-  />
+const AppbarBackAction = React.forwardRef<{}, Props>(
+  ({ accessibilityLabel = 'Back', ...rest }: Props, ref) => (
+    <AppbarAction
+      accessibilityLabel={accessibilityLabel}
+      {...rest}
+      icon={AppbarBackIcon}
+      isLeading
+      ref={ref}
+    />
+  )
 );
 
 AppbarBackAction.displayName = 'Appbar.BackAction';

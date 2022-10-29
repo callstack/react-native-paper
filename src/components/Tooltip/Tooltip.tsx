@@ -1,12 +1,5 @@
 import * as React from 'react';
-import {
-  Dimensions,
-  View,
-  LayoutChangeEvent,
-  StyleSheet,
-  StyleProp,
-  ViewStyle,
-} from 'react-native';
+import { Dimensions, View, LayoutChangeEvent, StyleSheet } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import { addEventListener } from '../../utils/addEventListener';
@@ -31,10 +24,6 @@ export type Props = {
    * Tooltip title
    */
   title: string;
-  /**
-   * Style for the wrapper view
-   */
-  wrapperStyle?: StyleProp<ViewStyle>;
 };
 
 /**
@@ -68,7 +57,6 @@ const Tooltip = ({
   enterTouchDelay = 500,
   leaveTouchDelay = 1500,
   title,
-  wrapperStyle,
   ...rest
 }: Props) => {
   const theme = useInternalTheme();
@@ -162,7 +150,6 @@ const Tooltip = ({
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onTouchCancel={handleTouchEnd}
-        style={wrapperStyle}
       >
         {React.cloneElement(children, { ...rest, ref: childrenWrapperRef })}
       </View>
