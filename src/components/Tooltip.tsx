@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
-import * as MD2Colors from '../styles/themes/v2/colors';
 import { addEventListener } from '../utils/addEventListener';
 import Portal from './Portal/Portal';
 import Text from './Typography/Text';
@@ -221,6 +220,9 @@ const Tooltip = ({
             style={[
               styles.tooltip,
               {
+                backgroundColor: theme.isV3
+                  ? theme.colors.onSurface
+                  : theme.colors.tooltip,
                 ...getTooltipPosition(measurement as Measurement),
                 borderRadius: theme.roundness,
                 ...(measurement.measured ? styles.visible : styles.hidden),
@@ -233,7 +235,7 @@ const Tooltip = ({
               numberOfLines={1}
               selectable={false}
               variant="labelLarge"
-              style={styles.text}
+              style={{ color: theme.colors.surface }}
             >
               {title}
             </Text>
@@ -253,13 +255,9 @@ const Tooltip = ({
 };
 
 const styles = StyleSheet.create({
-  text: {
-    color: MD2Colors.white,
-  },
   tooltip: {
     alignSelf: 'flex-start',
     justifyContent: 'center',
-    backgroundColor: 'rgba(97, 97, 97, 0.9)',
     paddingHorizontal: 16,
     height: 32,
     maxHeight: 32,

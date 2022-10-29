@@ -251,7 +251,7 @@ describe('AppbarAction', () => {
       expect(appbarActionIcon.props.color).toBe('#ffffff');
     });
 
-    it('should be rendered with the right color when no color is passed and wrapped by a Tooltip', () => {
+    it('should be rendered with the right color when no color is passed but is wrapped by a Tooltip', () => {
       const { getByTestId } = render(
         <Provider>
           <Appbar theme={theme}>

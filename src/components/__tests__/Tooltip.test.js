@@ -220,7 +220,7 @@ describe('Tooltip', () => {
         expect(getByTestId('tooltip-container').props.style).toMatchObject([
           {},
           {
-            left: 950, // pageX (900) + width (150) - 100 (TOOLTIP_WIDTH) // Tooltip is placed from right to left without going offscreen to the right
+            left: 950, // pageX (900) + width (150) - 100 (TOOLTIP_WIDTH) // Tooltip is placed from right to left without going offscreen
             top: 250,
           },
         ]);
