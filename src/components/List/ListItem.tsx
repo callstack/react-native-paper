@@ -20,6 +20,7 @@ import type {
 } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
+import { getLeftStyles, getRightStyles } from './utils';
 
 type Title =
   | React.ReactNode
@@ -251,63 +252,6 @@ const ListItem = ({
   );
 };
 
-const getLeftStyles = (
-  alignToTop: boolean,
-  description: Description,
-  isV3: boolean
-) => {
-  const stylesV3 = {
-    marginRight: 0,
-    marginLeft: 16,
-    alignSelf: alignToTop ? 'flex-start' : 'center',
-  };
-
-  if (!description) {
-    return {
-      ...styles.iconMarginLeft,
-      ...styles.marginVerticalNone,
-      ...(isV3 && { ...stylesV3 }),
-    };
-  }
-
-  if (!isV3) {
-    return styles.iconMarginLeft;
-  }
-
-  return {
-    ...styles.iconMarginLeft,
-    ...stylesV3,
-  };
-};
-
-const getRightStyles = (
-  alignToTop: boolean,
-  description: Description,
-  isV3: boolean
-) => {
-  const stylesV3 = {
-    marginLeft: 16,
-    alignSelf: alignToTop ? 'flex-start' : 'center',
-  };
-
-  if (!description) {
-    return {
-      ...styles.iconMarginRight,
-      ...styles.marginVerticalNone,
-      ...(isV3 && { ...stylesV3 }),
-    };
-  }
-
-  if (!isV3) {
-    return styles.iconMarginRight;
-  }
-
-  return {
-    ...styles.iconMarginRight,
-    ...stylesV3,
-  };
-};
-
 ListItem.displayName = 'List.Item';
 
 const styles = StyleSheet.create({
@@ -331,9 +275,6 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
   },
-  marginVerticalNone: { marginVertical: 0 },
-  iconMarginLeft: { marginLeft: 0, marginRight: 16 },
-  iconMarginRight: { marginRight: 0 },
   item: {
     marginVertical: 6,
     paddingLeft: 8,
