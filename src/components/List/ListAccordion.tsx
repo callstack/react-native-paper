@@ -187,6 +187,11 @@ const ListAccordion = ({
   const isExpanded = groupContext
     ? groupContext.expandedId === id
     : expandedInternal;
+
+  const titleTextColor = isExpanded ? theme.colors?.primary : titleColor;
+
+  const rippleColor = color(titleTextColor).alpha(0.12).rgb().string();
+
   const handlePress =
     groupContext && id !== undefined
       ? () => groupContext.onAccordionPress(id)
@@ -198,6 +203,7 @@ const ListAccordion = ({
           style={[styles.container, style]}
           onPress={handlePress}
           onLongPress={onLongPress}
+          rippleColor={rippleColor}
           accessibilityRole="button"
           accessibilityState={{ expanded: isExpanded }}
           accessibilityLabel={accessibilityLabel}
@@ -217,7 +223,7 @@ const ListAccordion = ({
                 style={[
                   styles.title,
                   {
-                    color: isExpanded ? theme.colors?.primary : titleColor,
+                    color: titleTextColor,
                   },
                   titleStyle,
                 ]}
