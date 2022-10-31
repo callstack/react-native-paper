@@ -264,6 +264,7 @@ export type Props = {
    */
   testID?: string;
   /**
+   * @supported Available in v5.x
    * Get lazy for the current screen. Uses true by default.
    */
   getLazy?: (props: { route: Route }) => boolean | undefined;
