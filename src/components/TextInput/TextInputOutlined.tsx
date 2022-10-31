@@ -374,7 +374,6 @@ type OutlineProps = {
   outlineColor?: string;
   roundness?: number;
   style?: StyleProp<ViewStyle>;
-  testID?: string;
 };
 
 const Outline = ({
