@@ -44,10 +44,22 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const ListImage = ({ style, source, variant = 'image' }: Props) => {
+const ListImage = ({ style, source, variant = 'image', theme }: Props) => {
+  const getStyles = () => {
+    if (variant === 'video') {
+      if (!theme.isV3) {
+        return [style, styles.video];
+      }
+
+      return [style, styles.videoV3];
+    }
+
+    return [style, styles.image];
+  };
+
   return (
     <Image
-      style={[style, variant === 'image' ? styles.image : styles.video]}
+      style={getStyles()}
       source={source}
       accessibilityIgnoresInvertColors
       testID="list-image"
@@ -61,7 +73,12 @@ const styles = StyleSheet.create({
     height: 56,
   },
   video: {
-    width: 111,
+    width: 100,
+    height: 64,
+    marginLeft: 0,
+  },
+  videoV3: {
+    width: 114,
     height: 64,
     marginLeft: 0,
   },
