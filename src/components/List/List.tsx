@@ -15,3 +15,6 @@ export { default as Section } from './ListSection';
 
 // @component ./ListSubheader.tsx
 export { default as Subheader } from './ListSubheader';
+
+// @component ./ListImage.tsx
+export { default as Image } from './ListImage';
