@@ -110,22 +110,39 @@ exports[`renders expanded accordion 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
+            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
             style={
               Array [
                 Object {
-                  "backgroundColor": "transparent",
-                },
-                Object {
                   "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
+                Array [
+                  Object {
+                    "lineHeight": 24,
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
               ]
             }
           >
-            □
+            󰅃
           </Text>
         </View>
       </View>
@@ -290,22 +307,39 @@ exports[`renders list accordion with children 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
+            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
             style={
               Array [
                 Object {
-                  "backgroundColor": "transparent",
-                },
-                Object {
                   "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
+                Array [
+                  Object {
+                    "lineHeight": 24,
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
               ]
             }
           >
-            □
+            󰉋
           </Text>
         </View>
         <View
@@ -365,22 +399,39 @@ exports[`renders list accordion with children 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
+            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
             style={
               Array [
                 Object {
-                  "backgroundColor": "transparent",
-                },
-                Object {
                   "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
+                Array [
+                  Object {
+                    "lineHeight": 24,
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
               ]
             }
           >
-            □
+            󰅀
           </Text>
         </View>
       </View>
@@ -538,22 +589,39 @@ exports[`renders list accordion with custom title and description styles 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
+            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
             style={
               Array [
                 Object {
-                  "backgroundColor": "transparent",
-                },
-                Object {
                   "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
+                Array [
+                  Object {
+                    "lineHeight": 24,
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
               ]
             }
           >
-            □
+            󰅀
           </Text>
         </View>
       </View>
@@ -632,22 +700,39 @@ exports[`renders list accordion with left items 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
+            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
             style={
               Array [
                 Object {
-                  "backgroundColor": "transparent",
-                },
-                Object {
                   "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
+                Array [
+                  Object {
+                    "lineHeight": 24,
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
               ]
             }
           >
-            □
+            󰓎
           </Text>
         </View>
         <View
@@ -707,22 +792,39 @@ exports[`renders list accordion with left items 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
+            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
             style={
               Array [
                 Object {
-                  "backgroundColor": "transparent",
-                },
-                Object {
                   "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
+                Array [
+                  Object {
+                    "lineHeight": 24,
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
               ]
             }
           >
-            □
+            󰅀
           </Text>
         </View>
       </View>
@@ -876,22 +978,39 @@ exports[`renders multiline list accordion 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
+            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
             style={
               Array [
                 Object {
-                  "backgroundColor": "transparent",
-                },
-                Object {
                   "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
+                Array [
+                  Object {
+                    "lineHeight": 24,
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
               ]
             }
           >
-            □
+            󰅀
           </Text>
         </View>
       </View>
