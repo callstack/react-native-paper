@@ -31,6 +31,7 @@ exports[`correctly applies a component as the text label 1`] = `
         "zIndex": 1,
       }
     }
+    testID="text-input-underline"
   />
   <View
     style={
@@ -239,6 +240,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
         "zIndex": 1,
       }
     }
+    testID="text-input-underline"
   />
   <View
     style={
@@ -421,6 +423,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           "borderRadius": 4,
           "borderWidth": 1,
         },
+        undefined,
       ]
     }
     testID="text-input-outline"
@@ -676,6 +679,7 @@ exports[`correctly applies textAlign center 1`] = `
         "zIndex": 1,
       }
     }
+    testID="text-input-underline"
   />
   <View
     style={
@@ -868,6 +872,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
         "zIndex": 1,
       }
     }
+    testID="text-input-underline"
   />
   <View
     style={
@@ -1237,6 +1242,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         "zIndex": 1,
       }
     }
+    testID="text-input-underline"
   />
   <View
     style={
