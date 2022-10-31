@@ -292,7 +292,6 @@ const TextInputOutlined = ({
           */}
       <Outline
         isV3={isV3}
-        testID={`${testID}-outline`}
         style={outlineStyle}
         roundness={roundness}
         hasActiveOutline={hasActiveOutline}
