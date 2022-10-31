@@ -1,5 +1,4 @@
 import React from 'react';
-// import '../css/Switch.css';
 
 interface SwitchProps {
   value: boolean;
@@ -18,7 +17,7 @@ const Switch = ({ value, onValueChange, color }: SwitchProps) => {
         type="checkbox"
       />
       <label
-        style={{ background: value && color }}
+        style={{ background: value ? color : 'none' }}
         className="react-switch-label"
         htmlFor={`react-switch-new`}
       >

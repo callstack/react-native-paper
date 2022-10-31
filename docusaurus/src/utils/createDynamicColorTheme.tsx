@@ -8,7 +8,12 @@ type Config = {
   sourceColor: string;
 };
 
-const createDynamicThemeColors = ({ sourceColor }: Config) => {
+type Schemes = {
+  light: { [key in string]: string };
+  dark: { [key in string]: string };
+};
+
+const createDynamicThemeColors = ({ sourceColor }: Config): Schemes => {
   const opacity = {
     level1: 0.08,
     level2: 0.12,

@@ -1,5 +1,6 @@
 import React from 'react';
 
+// @ts-ignore
 // eslint-disable-next-line import/no-unresolved
 import useDoc from '@site/component-docs-plugin/useDocs';
 
@@ -24,7 +25,7 @@ const renderBadge = (annotation: string) => {
   return `<span class="badge badge-${annotType.replace('@', '')} ">${annotLabel.join(' ')}</span>`;
 };
 
-export default function PropTable({ link }) {
+export default function PropTable({ link }: { link: string }) {
   const doc = useDoc(link);
 
   if (!doc || !doc.data || !doc.data.props) {
@@ -54,7 +55,7 @@ export default function PropTable({ link }) {
   return (
     <div>
       {Object.keys(props).map((key) => {
-        let leadingBadge: string;
+        let leadingBadge = '';
         let descriptionByLines = props[key].description.split('\n');
 
         // Find leading badge and put it next after prop name.
@@ -62,7 +63,7 @@ export default function PropTable({ link }) {
           leadingBadge = descriptionByLines[0];
           descriptionByLines = descriptionByLines.slice(1);
         }
-        descriptionByLines = descriptionByLines.map((line) => {
+        descriptionByLines = descriptionByLines.map((line: string) => {
           // Replace annotations with styled badges.
           if (line.includes('@')) {
             const annotIndex = line.indexOf('@');
@@ -75,6 +76,8 @@ export default function PropTable({ link }) {
 
         const description = descriptionByLines.join('\n');
         const tsType = props[key].tsType?.raw ?? props[key].tsType?.name;
+        // @ts-ignore
+        const tsTypeLink = typeDefinitions[tsType];
 
         return (
           <div key={key}>
@@ -90,12 +93,10 @@ export default function PropTable({ link }) {
             </h3>
             <p>
               Type:{' '}
-              {typeDefinitions[tsType] ? (
+              {tsTypeLink ? (
                 <a
-                  href={typeDefinitions[tsType]}
-                  target={
-                    typeDefinitions[tsType].startsWith('/') ? '_self' : '_blank'
-                  }
+                  href={tsTypeLink}
+                  target={tsTypeLink.startsWith('/') ? '_self' : '_blank'}
                   rel="noreferrer"
                 >
                   <code>{tsType}</code>

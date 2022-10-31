@@ -4,8 +4,9 @@ const {
 const fs = require('fs');
 const path = require('path');
 
-const { pluginName } = require('./config');
 const generatePageMDX = require('./generatePageMDX');
+
+const pluginName = 'component-docs-plugin';
 
 async function componentsPlugin(_, options) {
   const { docsRootDir, libsRootDir, pages } = options;

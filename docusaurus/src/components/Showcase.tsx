@@ -184,7 +184,7 @@ export default function Showcase() {
                 </h3>
                 <div className="showcase-badge-container">
                   <a
-                    href={item.android || null}
+                    href={item.android}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ opacity: item.android ? 1 : 0.4 }}
@@ -193,7 +193,7 @@ export default function Showcase() {
                   </a>
                   <div className="showcase-separation" />
                   <a
-                    href={item.ios || null}
+                    href={item.ios}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ opacity: item.ios ? 1 : 0.4 }}
@@ -202,7 +202,7 @@ export default function Showcase() {
                   </a>
                   <div className="showcase-separation" />
                   <a
-                    href={item.github || null}
+                    href={item.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ opacity: item.github ? 1 : 0.4 }}

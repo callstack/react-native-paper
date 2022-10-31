@@ -18,8 +18,8 @@ interface SearchbarProps {
 }
 
 type Schemes = {
-  light: Record<string, any | string>;
-  dark: Record<string, any | string>;
+  light: { [key in string]: string };
+  dark: { [key in string]: string };
 };
 
 const Searchbar = (props: SearchbarProps) => {
@@ -28,7 +28,10 @@ const Searchbar = (props: SearchbarProps) => {
 
 const defaultColor = 'purple';
 
-const getFontColor = (colorName, colorSchemes) => {
+const getFontColor = (
+  colorName: string,
+  colorSchemes: { [key in string]: string }
+) => {
   let fontColor = '';
   if (colorName.startsWith('on')) {
     fontColor = `${colorName.charAt(2).toLowerCase()}${colorName.slice(3)}`;

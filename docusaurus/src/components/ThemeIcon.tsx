@@ -22,7 +22,7 @@ const ThemeIcon = ({ type = 'dark' }: Props) => {
         />
       </svg>
     );
-  } else if (type === 'light') {
+  } else {
     return (
       <svg
         version="1.1"
