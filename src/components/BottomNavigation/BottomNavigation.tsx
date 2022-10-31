@@ -733,6 +733,10 @@ const BottomNavigation = ({
               }
             >
               <Animated.View
+                {...(Platform.OS === 'android' && {
+                  needsOffscreenAlphaCompositing: sceneAnimationEnabled,
+                })}
+                renderToHardwareTextureAndroid={sceneAnimationEnabled}
                 style={[
                   styles.content,
                   {
