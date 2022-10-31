@@ -268,6 +268,11 @@ export type Props = {
    * TestID used for testing purposes
    */
   testID?: string;
+  /**
+   * @supported Available in v5.x
+   * Get lazy for the current screen. Uses true by default.
+   */
+  getLazy?: (props: { route: Route }) => boolean | undefined;
 };
 
 const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animation
