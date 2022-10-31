@@ -178,18 +178,10 @@ export type Props = {
    */
   renderTouchable?: (props: TouchableProps) => React.ReactNode;
   /**
-   * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
-   */
-  getLabelText?: (props: { route: Route }) => string | undefined;
-  /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
    * Uses `route.accessibilityLabel` by default.
    */
   getAccessibilityLabel?: (props: { route: Route }) => string | undefined;
-  /**
-   * Get the id to locate this tab button in tests, uses `route.testID` by default.
-   */
-  getTestID?: (props: { route: Route }) => string | undefined;
   /**
    * Get badge for the tab, uses `route.badge` by default.
    */
@@ -198,6 +190,19 @@ export type Props = {
    * Get color for the tab, uses `route.color` by default.
    */
   getColor?: (props: { route: Route }) => string | undefined;
+  /**
+   * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
+   */
+  getLabelText?: (props: { route: Route }) => string | undefined;
+  /**
+   * @supported Available in v5.x
+   * Get lazy for the current screen. Uses true by default.
+   */
+  getLazy?: (props: { route: Route }) => boolean | undefined;
+  /**
+   * Get the id to locate this tab button in tests, uses `route.testID` by default.
+   */
+  getTestID?: (props: { route: Route }) => string | undefined;
   /**
    * Function to execute on tab press. It receives the route for the pressed tab, useful for things like scroll to top.
    */
@@ -263,11 +268,6 @@ export type Props = {
    * TestID used for testing purposes
    */
   testID?: string;
-  /**
-   * @supported Available in v5.x
-   * Get lazy for the current screen. Uses true by default.
-   */
-  getLazy?: (props: { route: Route }) => boolean | undefined;
 };
 
 const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animation
