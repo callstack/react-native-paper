@@ -18,19 +18,19 @@
 [![Chat][chat-badge]][chat]
 [![Sponsored by Callstack][callstack-badge]][callstack]
 
+ <p align="center"><i>React Native Paper is the cross-platform UI kit library containing a collection of customizable and production-ready components, which by default are following and respecting the Google’s Material Design guidelines.</i></p>
+
 ## Features
 
-- Follows [material design guidelines](https://material.io/guidelines/)
+- Follows [material design guidelines](https://m3.material.io/get-started/)
 - Works on both iOS and Android following [platform adaptation guidelines](https://material.io/design/platform-guidance/cross-platform-adaptation.html)
 - Full [theming support](https://callstack.github.io/react-native-paper/theming.html)
 
-Currently supported React Native version: `>= 0.50.3`
-
 ## Try it out
 
-Run the [example app](https://snack.expo.dev/@react-native-paper/react-native-paper-example_v5) with [Expo](https://expo.dev/) to see it in action.
+🧑‍💻 Run the [example app](https://snack.expo.dev/@react-native-paper/react-native-paper-example_v5) with [Expo](https://expo.dev/) to see it in action. The source code for the examples are under the [/example](/example) folder.
 
-The source code for the examples are under the [/example](/example) folder.
+📲 You can also try out components in our demo apps available in the both stores [Android](https://play.google.com/store/apps/details?id=com.callstack.reactnativepaperexample&hl=pl&gl=US) and [ iOS](https://apps.apple.com/app/react-native-paper/id1548934513).
 
 ## Getting Started
 
@@ -46,7 +46,7 @@ Read the [contribution guidelines](/CONTRIBUTING.md) before contributing.
 
 ## Figma and Sketch component kits
 
-Use official component kits provided by [Material Design](https://material.io/resources).
+Use official component kits provided by [Material Design](https://m3.material.io/).
 
 ## Made with ❤️ at Callstack
 
