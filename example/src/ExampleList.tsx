@@ -24,6 +24,7 @@ import FABExample from './Examples/FABExample';
 import IconButtonExample from './Examples/IconButtonExample';
 import ListAccordionExample from './Examples/ListAccordionExample';
 import ListAccordionExampleGroup from './Examples/ListAccordionGroupExample';
+import ListItemExample from './Examples/ListItemExample';
 import ListSectionExample from './Examples/ListSectionExample';
 import MenuExample from './Examples/MenuExample';
 import ProgressBarExample from './Examples/ProgressBarExample';
@@ -67,6 +68,7 @@ export const examples: Record<
   listAccordion: ListAccordionExample,
   listAccordionGroup: ListAccordionExampleGroup,
   listSection: ListSectionExample,
+  listItem: ListItemExample,
   menu: MenuExample,
   progressbar: ProgressBarExample,
   radio: RadioButtonExample,
