@@ -317,12 +317,16 @@ const TextInput = React.forwardRef<TextInputHandles, Props>(
       // We don't show placeholder if there's a label because the label acts as placeholder
       // When focused, the label moves up, so we can show a placeholder
       if (focused || !rest.label) {
-        // Set the placeholder in a delay to offset the label animation
-        // If we show it immediately, they'll overlap and look ugly
-        timer.current = setTimeout(
-          () => setPlaceholder(rest.placeholder),
-          50
-        ) as unknown as NodeJS.Timeout;
+        // If the user wants to use the contextMenu, when changing the placeholder, the contextMenu is closed
+        // This is a workaround to mitigate this behavior in scenarios where the placeholder is not specified.
+        if (rest.placeholder) {
+          // Set the placeholder in a delay to offset the label animation
+          // If we show it immediately, they'll overlap and look ugly
+          timer.current = setTimeout(
+            () => setPlaceholder(rest.placeholder),
+            50
+          ) as unknown as NodeJS.Timeout;
+        }
       } else {
         // hidePlaceholder
 
