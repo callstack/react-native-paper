@@ -55,6 +55,10 @@ export type Props = React.ComponentProps<typeof Surface> & {
    * @optional
    */
   theme: InternalTheme;
+  /**
+   * Text align of content
+   */
+  textAlign?: 'left' | 'center' | 'right';
 };
 
 const DURATION_SHORT = 4000;
@@ -119,6 +123,7 @@ const Snackbar = ({
   wrapperStyle,
   style,
   theme,
+  textAlign = 'left',
   ...rest
 }: Props) => {
   const { current: opacity } = React.useRef<Animated.Value>(
@@ -199,7 +204,7 @@ const Snackbar = ({
   const renderChildrenWithWrapper = () => {
     const viewStyles = [
       styles.content,
-      { marginRight, color: colors?.surface },
+      { marginRight, color: colors?.surface, textAlign },
     ];
 
     if (typeof children === 'string') {
