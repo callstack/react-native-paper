@@ -41,6 +41,11 @@ export type Props = {
    */
   anchor: React.ReactNode | { x: number; y: number };
   /**
+   * Whether the menu should open at the top of the anchor or at its bottom.
+   * Applied only when anchor is a node, not an x/y position.
+   */
+  anchorPosition?: 'top' | 'bottom';
+  /**
    * Extra margin to add at the top of the menu to account for translucent status bar on Android.
    * If you are using Expo, we assume translucent status bar and set a height for status bar automatically.
    * Pass `0` or a custom value to and customize it.
@@ -385,6 +390,7 @@ class Menu extends React.Component<Props, State> {
     const {
       visible,
       anchor,
+      anchorPosition,
       contentStyle,
       style,
       children,
@@ -404,6 +410,10 @@ class Menu extends React.Component<Props, State> {
     } = this.state;
 
     let { left, top } = this.state;
+
+    if (!this.isCoordinate(this.anchor) && anchorPosition === 'bottom') {
+      top += anchorLayout.height;
+    }
 
     // I don't know why but on Android measure function is wrong by 24
     const additionalVerticalValue = Platform.select({
