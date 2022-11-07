@@ -68,6 +68,42 @@ it('renders snackbar with Text as a child', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('renders snackbar with Left align text', () => {
+  const tree = renderer
+    .create(
+      <Snackbar textAlign={'left'} visible onDismiss={jest.fn()}>
+        <Text>Snackbar content</Text>
+      </Snackbar>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders snackbar with Right Align text', () => {
+  const tree = renderer
+    .create(
+      <Snackbar textAlign={'right'} visible onDismiss={jest.fn()}>
+        <Text>Snackbar content</Text>
+      </Snackbar>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders snackbar with Center align text', () => {
+  const tree = renderer
+    .create(
+      <Snackbar textAlign={'center'} visible onDismiss={jest.fn()}>
+        <Text>Snackbar content</Text>
+      </Snackbar>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('renders snackbar with action button', () => {
   const tree = renderer
     .create(
