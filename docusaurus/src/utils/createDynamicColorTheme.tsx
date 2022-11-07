@@ -63,6 +63,7 @@ const createDynamicThemeColors = ({ sourceColor }: Config): Schemes => {
       const dynamicThemeColors = Object.assign(
         {},
         ...Object.entries(schemeModeJSON).map(([colorName, colorValue]) => ({
+          // @ts-ignore
           [colorName]: color(colorValue).rgb().string(),
         })),
         {
