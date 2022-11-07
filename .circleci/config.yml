@@ -31,6 +31,7 @@ jobs:
           command: |
             yarn install --cwd example --frozen-lockfile
             yarn install --cwd docs --frozen-lockfile
+            yarn install --cwd docusaurus --frozen-lockfile
             yarn install --frozen-lockfile
       - save_cache:
           key: dependencies-{{ checksum "package.json" }}
