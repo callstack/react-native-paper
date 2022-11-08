@@ -9,14 +9,13 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
-
 import { withInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import { ListAccordionGroupContext } from './ListAccordionGroup';
+import { getAccordionColors } from './utils';
 
 export type Props = {
   /**
@@ -169,13 +168,6 @@ const ListAccordion = ({
     }
   };
 
-  const titleColor = theme.isV3
-    ? theme.colors.onSurface
-    : color(theme.colors.text).alpha(0.87).rgb().string();
-  const descriptionColor = theme.isV3
-    ? theme.colors.onSurfaceVariant
-    : color(theme.colors.text).alpha(0.54).rgb().string();
-
   const expandedInternal = expandedProp !== undefined ? expandedProp : expanded;
 
   const groupContext = React.useContext(ListAccordionGroupContext);
@@ -188,9 +180,11 @@ const ListAccordion = ({
     ? groupContext.expandedId === id
     : expandedInternal;
 
-  const titleTextColor = isExpanded ? theme.colors?.primary : titleColor;
-
-  const rippleColor = color(titleTextColor).alpha(0.12).rgb().string();
+  const { titleColor, descriptionColor, titleTextColor, rippleColor } =
+    getAccordionColors({
+      theme,
+      isExpanded,
+    });
 
   const handlePress =
     groupContext && id !== undefined
