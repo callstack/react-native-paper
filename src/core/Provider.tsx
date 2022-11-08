@@ -44,7 +44,6 @@ const Provider = (props: Props) => {
 
     if (!props.theme) {
       subscription = addEventListener(
-        // @ts-expect-error
         AccessibilityInfo,
         'reduceMotionChanged',
         setReduceMotionEnabled
