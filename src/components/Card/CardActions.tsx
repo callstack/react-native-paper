@@ -48,7 +48,7 @@ const CardActions = (props: Props) => {
     >
       {React.Children.map(props.children, (child, i) => {
         return React.isValidElement(child)
-          ? React.cloneElement<any>(child, {
+          ? React.cloneElement(child as React.ReactElement<any>, {
               compact: !isV3 && child.props.compact !== false,
               mode:
                 child.props.mode ||

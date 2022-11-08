@@ -263,7 +263,7 @@ const Card = ({
         <View style={styles.innerContainer}>
           {React.Children.map(children, (child, index) =>
             React.isValidElement(child)
-              ? React.cloneElement<any>(child, {
+              ? React.cloneElement(child as React.ReactElement<any>, {
                   index,
                   total,
                   siblings,

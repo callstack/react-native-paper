@@ -56,7 +56,7 @@ const DialogActions = (props: Props) => {
     >
       {React.Children.map(props.children, (child, i) =>
         React.isValidElement(child)
-          ? React.cloneElement<any>(child, {
+          ? React.cloneElement(child as React.ReactElement<any>, {
               compact: true,
               uppercase: !isV3,
               style: isV3 && {
