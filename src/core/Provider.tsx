@@ -68,7 +68,7 @@ const Provider = (props: Props) => {
         if (appearanceSubscription) {
           appearanceSubscription.remove();
         } else {
-          // @ts-expect-error
+          // @ts-expect-error: We keep deprecated listener remove method for backwards compat with old RN versions
           Appearance?.removeChangeListener(handleAppearanceChange);
         }
       }
