@@ -1,7 +1,8 @@
 import color from 'color';
 
-import type { MD3Theme } from '../../../types';
-import { MD3Colors, tokens, typescale } from './tokens';
+import type { MD3Theme, MD3Typescale } from '../../../types';
+import configureFonts from '../../fonts';
+import { MD3Colors, tokens } from './tokens';
 
 const { palette, opacity } = tokens.md.ref;
 
@@ -61,7 +62,7 @@ export const MD3LightTheme: MD3Theme = {
       level5: 'rgb(233, 227, 241)', // palette.primary40, alpha 0.14
     },
   },
-  fonts: typescale,
+  fonts: configureFonts() as MD3Typescale,
   animation: {
     scale: 1.0,
   },

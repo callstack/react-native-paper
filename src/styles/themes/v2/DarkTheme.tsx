@@ -1,6 +1,6 @@
 import color from 'color';
 
-import type { MD2Theme } from '../../../types';
+import type { Fonts, MD2Theme } from '../../../types';
 import configureFonts from '../../fonts';
 import { black, pinkA100, white } from './colors';
 import { MD2LightTheme } from './LightTheme';
@@ -25,5 +25,5 @@ export const MD2DarkTheme: MD2Theme = {
     backdrop: color(black).alpha(0.5).rgb().string(),
     notification: pinkA100,
   },
-  fonts: configureFonts(),
+  fonts: configureFonts({ isV3: false }) as Fonts,
 };
