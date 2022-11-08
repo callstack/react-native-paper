@@ -152,7 +152,7 @@ const Snackbar = ({
             duration === Number.POSITIVE_INFINITY ||
             duration === Number.NEGATIVE_INFINITY;
 
-          if (finished && !isInfinity) {
+          if (!isInfinity) {
             hideTimeout.current = setTimeout(
               onDismiss,
               duration
@@ -162,21 +162,27 @@ const Snackbar = ({
       });
     } else {
       // hide
-      if (hideTimeout.current) clearTimeout(hideTimeout.current);
+      if (hideTimeout.current) {
+        clearTimeout(hideTimeout.current);
+      }
 
       Animated.timing(opacity, {
         toValue: 0,
         duration: 100 * scale,
         useNativeDriver: true,
       }).start(({ finished }) => {
-        if (finished) setHidden(true);
+        if (finished) {
+          setHidden(true);
+        }
       });
     }
   }, [visible, duration, opacity, scale, onDismiss]);
 
   const { colors, roundness, isV3 } = theme;
 
-  if (hidden) return null;
+  if (hidden) {
+    return null;
+  }
 
   const {
     style: actionStyle,

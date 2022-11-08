@@ -80,6 +80,11 @@ exports[`renders list section with custom title style 1`] = `
           "letterSpacing": 0.4,
           "lineHeight": 16,
         },
+        "default": Object {
+          "fontFamily": "System",
+          "fontWeight": "400",
+          "letterSpacing": 0,
+        },
         "displayLarge": Object {
           "fontFamily": "System",
           "fontSize": 57,
@@ -235,7 +240,8 @@ exports[`renders list section with custom title style 1`] = `
         false,
         Array [
           Object {
-            "padding": 8,
+            "paddingRight": 24,
+            "paddingVertical": 8,
           },
           undefined,
         ],
@@ -246,6 +252,7 @@ exports[`renders list section with custom title style 1`] = `
       style={
         Object {
           "flexDirection": "row",
+          "marginVertical": 6,
         }
       }
     >
@@ -255,14 +262,12 @@ exports[`renders list section with custom title style 1`] = `
           Array [
             Object {
               "alignItems": "center",
-              "height": 40,
               "justifyContent": "center",
-              "margin": 8,
-              "width": 40,
             },
             Object {
-              "marginLeft": 0,
-              "marginRight": 16,
+              "alignSelf": "center",
+              "marginLeft": 16,
+              "marginRight": 0,
               "marginVertical": 0,
             },
           ]
@@ -270,30 +275,46 @@ exports[`renders list section with custom title style 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
+          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
                 "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
             ]
           }
         >
-          □
+          󰉋
         </Text>
       </View>
       <View
         style={
           Array [
             Object {
-              "marginVertical": 6,
-              "paddingLeft": 8,
+              "paddingLeft": 16,
             },
             Object {
               "flex": 1,
@@ -314,6 +335,7 @@ exports[`renders list section with custom title style 1`] = `
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+                "letterSpacing": 0,
               },
               Object {
                 "writingDirection": "ltr",
@@ -359,7 +381,8 @@ exports[`renders list section with custom title style 1`] = `
         false,
         Array [
           Object {
-            "padding": 8,
+            "paddingRight": 24,
+            "paddingVertical": 8,
           },
           undefined,
         ],
@@ -370,6 +393,7 @@ exports[`renders list section with custom title style 1`] = `
       style={
         Object {
           "flexDirection": "row",
+          "marginVertical": 6,
         }
       }
     >
@@ -379,14 +403,12 @@ exports[`renders list section with custom title style 1`] = `
           Array [
             Object {
               "alignItems": "center",
-              "height": 40,
               "justifyContent": "center",
-              "margin": 8,
-              "width": 40,
             },
             Object {
-              "marginLeft": 0,
-              "marginRight": 16,
+              "alignSelf": "center",
+              "marginLeft": 16,
+              "marginRight": 0,
               "marginVertical": 0,
             },
           ]
@@ -394,30 +416,46 @@ exports[`renders list section with custom title style 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
+          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
                 "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
             ]
           }
         >
-          □
+          󰉋
         </Text>
       </View>
       <View
         style={
           Array [
             Object {
-              "marginVertical": 6,
-              "paddingLeft": 8,
+              "paddingLeft": 16,
             },
             Object {
               "flex": 1,
@@ -438,6 +476,7 @@ exports[`renders list section with custom title style 1`] = `
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+                "letterSpacing": 0,
               },
               Object {
                 "writingDirection": "ltr",
@@ -541,6 +580,11 @@ exports[`renders list section with subheader 1`] = `
           "fontWeight": "400",
           "letterSpacing": 0.4,
           "lineHeight": 16,
+        },
+        "default": Object {
+          "fontFamily": "System",
+          "fontWeight": "400",
+          "letterSpacing": 0,
         },
         "displayLarge": Object {
           "fontFamily": "System",
@@ -695,7 +739,8 @@ exports[`renders list section with subheader 1`] = `
         false,
         Array [
           Object {
-            "padding": 8,
+            "paddingRight": 24,
+            "paddingVertical": 8,
           },
           undefined,
         ],
@@ -706,6 +751,7 @@ exports[`renders list section with subheader 1`] = `
       style={
         Object {
           "flexDirection": "row",
+          "marginVertical": 6,
         }
       }
     >
@@ -715,14 +761,12 @@ exports[`renders list section with subheader 1`] = `
           Array [
             Object {
               "alignItems": "center",
-              "height": 40,
               "justifyContent": "center",
-              "margin": 8,
-              "width": 40,
             },
             Object {
-              "marginLeft": 0,
-              "marginRight": 16,
+              "alignSelf": "center",
+              "marginLeft": 16,
+              "marginRight": 0,
               "marginVertical": 0,
             },
           ]
@@ -730,30 +774,46 @@ exports[`renders list section with subheader 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
+          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
                 "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
             ]
           }
         >
-          □
+          󰉋
         </Text>
       </View>
       <View
         style={
           Array [
             Object {
-              "marginVertical": 6,
-              "paddingLeft": 8,
+              "paddingLeft": 16,
             },
             Object {
               "flex": 1,
@@ -774,6 +834,7 @@ exports[`renders list section with subheader 1`] = `
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+                "letterSpacing": 0,
               },
               Object {
                 "writingDirection": "ltr",
@@ -819,7 +880,8 @@ exports[`renders list section with subheader 1`] = `
         false,
         Array [
           Object {
-            "padding": 8,
+            "paddingRight": 24,
+            "paddingVertical": 8,
           },
           undefined,
         ],
@@ -830,6 +892,7 @@ exports[`renders list section with subheader 1`] = `
       style={
         Object {
           "flexDirection": "row",
+          "marginVertical": 6,
         }
       }
     >
@@ -839,14 +902,12 @@ exports[`renders list section with subheader 1`] = `
           Array [
             Object {
               "alignItems": "center",
-              "height": 40,
               "justifyContent": "center",
-              "margin": 8,
-              "width": 40,
             },
             Object {
-              "marginLeft": 0,
-              "marginRight": 16,
+              "alignSelf": "center",
+              "marginLeft": 16,
+              "marginRight": 0,
               "marginVertical": 0,
             },
           ]
@@ -854,30 +915,46 @@ exports[`renders list section with subheader 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
+          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
                 "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
             ]
           }
         >
-          □
+          󰉋
         </Text>
       </View>
       <View
         style={
           Array [
             Object {
-              "marginVertical": 6,
-              "paddingLeft": 8,
+              "paddingLeft": 16,
             },
             Object {
               "flex": 1,
@@ -898,6 +975,7 @@ exports[`renders list section with subheader 1`] = `
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+                "letterSpacing": 0,
               },
               Object {
                 "writingDirection": "ltr",
@@ -1001,6 +1079,11 @@ exports[`renders list section without subheader 1`] = `
           "fontWeight": "400",
           "letterSpacing": 0.4,
           "lineHeight": 16,
+        },
+        "default": Object {
+          "fontFamily": "System",
+          "fontWeight": "400",
+          "letterSpacing": 0,
         },
         "displayLarge": Object {
           "fontFamily": "System",
@@ -1117,7 +1200,8 @@ exports[`renders list section without subheader 1`] = `
         false,
         Array [
           Object {
-            "padding": 8,
+            "paddingRight": 24,
+            "paddingVertical": 8,
           },
           undefined,
         ],
@@ -1128,6 +1212,7 @@ exports[`renders list section without subheader 1`] = `
       style={
         Object {
           "flexDirection": "row",
+          "marginVertical": 6,
         }
       }
     >
@@ -1137,14 +1222,12 @@ exports[`renders list section without subheader 1`] = `
           Array [
             Object {
               "alignItems": "center",
-              "height": 40,
               "justifyContent": "center",
-              "margin": 8,
-              "width": 40,
             },
             Object {
-              "marginLeft": 0,
-              "marginRight": 16,
+              "alignSelf": "center",
+              "marginLeft": 16,
+              "marginRight": 0,
               "marginVertical": 0,
             },
           ]
@@ -1152,30 +1235,46 @@ exports[`renders list section without subheader 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
+          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
                 "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
             ]
           }
         >
-          □
+          󰉋
         </Text>
       </View>
       <View
         style={
           Array [
             Object {
-              "marginVertical": 6,
-              "paddingLeft": 8,
+              "paddingLeft": 16,
             },
             Object {
               "flex": 1,
@@ -1196,6 +1295,7 @@ exports[`renders list section without subheader 1`] = `
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+                "letterSpacing": 0,
               },
               Object {
                 "writingDirection": "ltr",
@@ -1241,7 +1341,8 @@ exports[`renders list section without subheader 1`] = `
         false,
         Array [
           Object {
-            "padding": 8,
+            "paddingRight": 24,
+            "paddingVertical": 8,
           },
           undefined,
         ],
@@ -1252,6 +1353,7 @@ exports[`renders list section without subheader 1`] = `
       style={
         Object {
           "flexDirection": "row",
+          "marginVertical": 6,
         }
       }
     >
@@ -1261,14 +1363,12 @@ exports[`renders list section without subheader 1`] = `
           Array [
             Object {
               "alignItems": "center",
-              "height": 40,
               "justifyContent": "center",
-              "margin": 8,
-              "width": 40,
             },
             Object {
-              "marginLeft": 0,
-              "marginRight": 16,
+              "alignSelf": "center",
+              "marginLeft": 16,
+              "marginRight": 0,
               "marginVertical": 0,
             },
           ]
@@ -1276,30 +1376,46 @@ exports[`renders list section without subheader 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
+          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
                 "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
             ]
           }
         >
-          □
+          󰉋
         </Text>
       </View>
       <View
         style={
           Array [
             Object {
-              "marginVertical": 6,
-              "paddingLeft": 8,
+              "paddingLeft": 16,
             },
             Object {
               "flex": 1,
@@ -1320,6 +1436,7 @@ exports[`renders list section without subheader 1`] = `
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
+                "letterSpacing": 0,
               },
               Object {
                 "writingDirection": "ltr",

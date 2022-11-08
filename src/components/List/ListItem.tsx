@@ -1,7 +1,10 @@
 import * as React from 'react';
 import {
+  FlexAlignType,
+  NativeSyntheticEvent,
   StyleProp,
   StyleSheet,
+  TextLayoutEventData,
   TextStyle,
   View,
   ViewStyle,
@@ -17,6 +20,7 @@ import type {
 } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
+import { getLeftStyles, getRightStyles } from './utils';
 
 type Title =
   | React.ReactNode
@@ -36,6 +40,13 @@ type Description =
       fontSize: number;
     }) => React.ReactNode);
 
+interface Style {
+  marginLeft?: number;
+  marginRight?: number;
+  marginVertical?: number;
+  alignSelf?: FlexAlignType;
+}
+
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Title text for the list item.
@@ -48,24 +59,11 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Callback which returns a React element to display on the left side.
    */
-  left?: (props: {
-    color: string;
-    style: {
-      marginLeft: number;
-      marginRight: number;
-      marginVertical?: number;
-    };
-  }) => React.ReactNode;
+  left?: (props: { color: string; style: Style }) => React.ReactNode;
   /**
    * Callback which returns a React element to display on the right side.
    */
-  right?: (props: {
-    color: string;
-    style?: {
-      marginRight: number;
-      marginVertical?: number;
-    };
-  }) => React.ReactNode;
+  right?: (props: { color: string; style?: Style }) => React.ReactNode;
   /**
    * Function to execute on press.
    */
@@ -153,6 +151,18 @@ const ListItem = ({
   descriptionStyle,
   ...rest
 }: Props) => {
+  const [alignToTop, setAlignToTop] = React.useState(false);
+
+  const onDescriptionTextLayout = (
+    event: NativeSyntheticEvent<TextLayoutEventData>
+  ) => {
+    if (!theme.isV3) {
+      return;
+    }
+    const { nativeEvent } = event;
+    setAlignToTop(nativeEvent.lines.length >= 2);
+  };
+
   const renderDescription = (
     descriptionColor: string,
     description?: Description | null
@@ -174,6 +184,7 @@ const ListItem = ({
           { color: descriptionColor },
           descriptionStyle,
         ]}
+        onTextLayout={onDescriptionTextLayout}
       >
         {description}
       </Text>
@@ -211,22 +222,19 @@ const ListItem = ({
   return (
     <TouchableRipple
       {...rest}
-      style={[styles.container, style]}
+      style={[theme.isV3 ? styles.containerV3 : styles.container, style]}
       onPress={onPress}
     >
-      <View style={styles.row}>
+      <View style={theme.isV3 ? styles.rowV3 : styles.row}>
         {left
           ? left({
               color: descriptionColor,
-              style: description
-                ? styles.iconMarginLeft
-                : {
-                    ...styles.iconMarginLeft,
-                    ...styles.marginVerticalNone,
-                  },
+              style: getLeftStyles(alignToTop, description, theme.isV3),
             })
           : null}
-        <View style={[styles.item, styles.content]}>
+        <View
+          style={[theme.isV3 ? styles.itemV3 : styles.item, styles.content]}
+        >
           {renderTitle()}
 
           {description
@@ -236,12 +244,7 @@ const ListItem = ({
         {right
           ? right({
               color: descriptionColor,
-              style: description
-                ? styles.iconMarginRight
-                : {
-                    ...styles.iconMarginRight,
-                    ...styles.marginVerticalNone,
-                  },
+              style: getRightStyles(alignToTop, description, theme.isV3),
             })
           : null}
       </View>
@@ -255,8 +258,16 @@ const styles = StyleSheet.create({
   container: {
     padding: 8,
   },
+  containerV3: {
+    paddingVertical: 8,
+    paddingRight: 24,
+  },
   row: {
     flexDirection: 'row',
+  },
+  rowV3: {
+    flexDirection: 'row',
+    marginVertical: 6,
   },
   title: {
     fontSize: 16,
@@ -264,12 +275,12 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
   },
-  marginVerticalNone: { marginVertical: 0 },
-  iconMarginLeft: { marginLeft: 0, marginRight: 16 },
-  iconMarginRight: { marginRight: 0 },
   item: {
     marginVertical: 6,
     paddingLeft: 8,
+  },
+  itemV3: {
+    paddingLeft: 16,
   },
   content: {
     flex: 1,

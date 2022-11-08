@@ -38,6 +38,7 @@ type Route = {
   color?: string;
   accessibilityLabel?: string;
   testID?: string;
+  lazy?: boolean;
 };
 
 type NavigationState = {
@@ -177,18 +178,10 @@ export type Props = {
    */
   renderTouchable?: (props: TouchableProps) => React.ReactNode;
   /**
-   * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
-   */
-  getLabelText?: (props: { route: Route }) => string | undefined;
-  /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
    * Uses `route.accessibilityLabel` by default.
    */
   getAccessibilityLabel?: (props: { route: Route }) => string | undefined;
-  /**
-   * Get the id to locate this tab button in tests, uses `route.testID` by default.
-   */
-  getTestID?: (props: { route: Route }) => string | undefined;
   /**
    * Get badge for the tab, uses `route.badge` by default.
    */
@@ -197,6 +190,19 @@ export type Props = {
    * Get color for the tab, uses `route.color` by default.
    */
   getColor?: (props: { route: Route }) => string | undefined;
+  /**
+   * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
+   */
+  getLabelText?: (props: { route: Route }) => string | undefined;
+  /**
+   * @supported Available in v5.x
+   * Get lazy for the current screen. Uses true by default.
+   */
+  getLazy?: (props: { route: Route }) => boolean | undefined;
+  /**
+   * Get the id to locate this tab button in tests, uses `route.testID` by default.
+   */
+  getTestID?: (props: { route: Route }) => string | undefined;
   /**
    * Function to execute on tab press. It receives the route for the pressed tab, useful for things like scroll to top.
    */
@@ -385,6 +391,7 @@ const BottomNavigation = ({
   labelMaxFontSizeMultiplier = 1,
   compact = !theme.isV3,
   testID = 'bottom-navigation',
+  getLazy = ({ route }: { route: Route }) => route.lazy,
 }: Props) => {
   const { scale } = theme.animation;
 
@@ -679,7 +686,7 @@ const BottomNavigation = ({
     <View style={[styles.container, style]} testID={testID}>
       <View style={[styles.content, { backgroundColor: colors?.background }]}>
         {routes.map((route, index) => {
-          if (!loaded.includes(route.key)) {
+          if (getLazy({ route }) !== false && !loaded.includes(route.key)) {
             // Don't render a screen if we've never navigated to it
             return null;
           }
@@ -733,6 +740,10 @@ const BottomNavigation = ({
               }
             >
               <Animated.View
+                {...(Platform.OS === 'android' && {
+                  needsOffscreenAlphaCompositing: sceneAnimationEnabled,
+                })}
+                renderToHardwareTextureAndroid={sceneAnimationEnabled}
                 style={[
                   styles.content,
                   {

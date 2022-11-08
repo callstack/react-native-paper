@@ -7,6 +7,8 @@ import {
   Platform,
   TextStyle,
   ColorValue,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
@@ -49,6 +51,7 @@ const TextInputOutlined = ({
   underlineColor: _underlineColor,
   outlineColor: customOutlineColor,
   activeOutlineColor,
+  outlineStyle,
   textColor,
   dense,
   style,
@@ -289,6 +292,7 @@ const TextInputOutlined = ({
           */}
       <Outline
         isV3={isV3}
+        style={outlineStyle}
         roundness={roundness}
         hasActiveOutline={hasActiveOutline}
         focused={parentState.focused}
@@ -369,6 +373,7 @@ type OutlineProps = {
   focused?: boolean;
   outlineColor?: string;
   roundness?: number;
+  style?: StyleProp<ViewStyle>;
 };
 
 const Outline = ({
@@ -379,6 +384,7 @@ const Outline = ({
   focused,
   outlineColor,
   roundness,
+  style,
 }: OutlineProps) => (
   <View
     testID="text-input-outline"
@@ -392,6 +398,7 @@ const Outline = ({
         borderWidth: (isV3 ? hasActiveOutline : focused) ? 2 : 1,
         borderColor: hasActiveOutline ? activeColor : outlineColor,
       },
+      style,
     ]}
   />
 );

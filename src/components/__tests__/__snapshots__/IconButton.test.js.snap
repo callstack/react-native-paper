@@ -102,22 +102,39 @@ exports[`renders disabled icon button 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
+          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
                 "color": "rgba(28, 27, 31, 0.38)",
                 "fontSize": 24,
               },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
             ]
           }
         >
-          □
+          󰄀
         </Text>
       </View>
     </View>
@@ -222,22 +239,39 @@ exports[`renders icon button by default 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
+          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
                 "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
             ]
           }
         >
-          □
+          󰄀
         </Text>
       </View>
     </View>
@@ -342,22 +376,39 @@ exports[`renders icon button with color 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
+          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
                 "color": "#e91e63",
                 "fontSize": 24,
               },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
             ]
           }
         >
-          □
+          󰄀
         </Text>
       </View>
     </View>
@@ -462,22 +513,39 @@ exports[`renders icon button with size 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
+          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
                 "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 30,
               },
+              Array [
+                Object {
+                  "lineHeight": 30,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
             ]
           }
         >
-          □
+          󰄀
         </Text>
       </View>
     </View>
@@ -614,22 +682,39 @@ exports[`renders icon change animated 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
+              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
               style={
                 Array [
                   Object {
-                    "backgroundColor": "transparent",
-                  },
-                  Object {
                     "color": "rgba(73, 69, 79, 1)",
                     "fontSize": 24,
                   },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
                 ]
               }
             >
-              □
+              󰄀
             </Text>
           </View>
         </View>
