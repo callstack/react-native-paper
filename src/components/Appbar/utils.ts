@@ -7,7 +7,7 @@ import color from 'color';
 import overlay from '../../styles/overlay';
 import { black, white } from '../../styles/themes/v2/colors';
 import type { InternalTheme } from '../../types';
-import Tooltip from '../Tooltip';
+import Tooltip from '../Tooltip/Tooltip';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
 import AppbarContent from './AppbarContent';

@@ -72,8 +72,13 @@ const Tooltip = ({
 
   React.useEffect(() => {
     return () => {
-      if (showTooltipTimer.current) clearTimeout(showTooltipTimer.current);
-      if (hideTooltipTimer.current) clearTimeout(hideTooltipTimer.current);
+      if (showTooltipTimer.current) {
+        clearTimeout(showTooltipTimer.current);
+      }
+
+      if (hideTooltipTimer.current) {
+        clearTimeout(hideTooltipTimer.current);
+      }
     };
   }, []);
 
@@ -98,7 +103,9 @@ const Tooltip = ({
   };
 
   const handleTouchStart = () => {
-    if (hideTooltipTimer.current) clearTimeout(hideTooltipTimer.current);
+    if (hideTooltipTimer.current) {
+      clearTimeout(hideTooltipTimer.current);
+    }
 
     showTooltipTimer.current = setTimeout(
       () => setVisible(true),
@@ -107,7 +114,9 @@ const Tooltip = ({
   };
 
   const handleTouchEnd = () => {
-    if (showTooltipTimer.current) clearTimeout(showTooltipTimer.current);
+    if (showTooltipTimer.current) {
+      clearTimeout(showTooltipTimer.current);
+    }
 
     hideTooltipTimer.current = setTimeout(() => {
       setVisible(false);

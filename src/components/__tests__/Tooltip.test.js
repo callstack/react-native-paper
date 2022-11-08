@@ -8,7 +8,7 @@ import {
 } from '@testing-library/react-native';
 
 import Provider from '../../core/Provider';
-import Tooltip from '../Tooltip';
+import Tooltip from '../Tooltip/Tooltip';
 
 const mockedRemoveEventListener = jest.fn();
 

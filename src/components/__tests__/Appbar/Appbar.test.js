@@ -16,7 +16,7 @@ import AppbarHeader from '../../Appbar/AppbarHeader';
 import { getAppbarColor, renderAppbarContent } from '../../Appbar/utils';
 import Menu from '../../Menu/Menu';
 import Searchbar from '../../Searchbar';
-import Tooltip from '../../Tooltip';
+import Tooltip from '../../Tooltip/Tooltip';
 
 describe('Appbar', () => {
   it('does not pass any additional props to Searchbar', () => {

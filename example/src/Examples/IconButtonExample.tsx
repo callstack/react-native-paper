@@ -1,13 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import {
-  IconButton,
-  List,
-  MD2Colors,
-  MD3Colors,
-  Tooltip,
-} from 'react-native-paper';
+import { IconButton, List, MD2Colors, MD3Colors } from 'react-native-paper';
 
 import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
@@ -40,12 +34,8 @@ const ButtonExample = () => {
     <ScreenWrapper contentContainerStyle={styles.v3Container}>
       <List.Section title="Default">
         <View style={styles.row}>
-          <Tooltip title="Camera">
-            <IconButton icon="camera" size={24} onPress={() => {}} />
-          </Tooltip>
-          <Tooltip title="Selected Camera">
-            <IconButton icon="camera" selected size={24} onPress={() => {}} />
-          </Tooltip>
+          <IconButton icon="camera" size={24} onPress={() => {}} />
+          <IconButton icon="camera" selected size={24} onPress={() => {}} />
           <IconButton icon="camera" disabled size={24} onPress={() => {}} />
         </View>
       </List.Section>
