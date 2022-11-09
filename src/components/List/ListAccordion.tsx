@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TextStyle,
   View,
+  ViewProps,
   ViewStyle,
 } from 'react-native';
 
@@ -91,6 +92,10 @@ export type Props = {
    * Accessibility label for the TouchableRipple. This is read by the screen reader when the user taps the touchable.
    */
   accessibilityLabel?: string;
+  /**
+   * `pointerEvents` passed to the `View` container
+   */
+  pointerEvents?: ViewProps['pointerEvents'];
 };
 
 /**
@@ -154,6 +159,7 @@ const ListAccordion = ({
   onLongPress,
   expanded: expandedProp,
   accessibilityLabel,
+  pointerEvents = 'none',
 }: Props) => {
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
@@ -204,7 +210,7 @@ const ListAccordion = ({
           testID={testID}
           borderless
         >
-          <View style={styles.row} pointerEvents="none">
+          <View style={styles.row} pointerEvents={pointerEvents}>
             {left
               ? left({
                   color: isExpanded ? theme.colors?.primary : descriptionColor,
