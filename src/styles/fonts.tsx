@@ -106,14 +106,38 @@ function configureV3Fonts(
   );
 }
 
+// eslint-disable-next-line no-redeclare
+export default function configureFonts(params: { isV3: false }): Fonts;
+// eslint-disable-next-line no-redeclare
+export default function configureFonts(params: {
+  config?: MD2FontsConfig;
+  isV3: false;
+}): Fonts;
+// eslint-disable-next-line no-redeclare
 export default function configureFonts(params?: {
-  config?: MD2FontsConfig | MD3FontsConfig;
-  isV3?: boolean;
-}) {
+  config?: MD3Type;
+  isV3?: true;
+}): MD3Typescale;
+// eslint-disable-next-line no-redeclare
+export default function configureFonts(params?: {
+  config?: {
+    [key in MD3TypescaleKey]: MD3Type;
+  };
+  isV3?: true;
+}): MD3Typescale;
+// eslint-disable-next-line no-redeclare
+export default function configureFonts(params: {
+  config: {
+    [key: string]: MD3Type;
+  };
+  isV3?: true;
+}): MD3Typescale & { [key: string]: MD3Type };
+// eslint-disable-next-line no-redeclare
+export default function configureFonts(params?: any) {
   const { isV3 = true, config } = params || {};
 
   if (isV3) {
-    return configureV3Fonts(config as MD3FontsConfig);
+    return configureV3Fonts(config);
   }
-  return configureV2Fonts(config as MD2FontsConfig);
+  return configureV2Fonts(config);
 }
