@@ -16,14 +16,14 @@ export const getCardCoverStyle = ({
 }) => {
   const { isV3, roundness } = theme;
 
+  if (isV3) {
+    return {
+      borderRadius: 3 * roundness,
+    };
+  }
+
   if (index === 0) {
     if (total === 1) {
-      return {
-        borderRadius: roundness,
-      };
-    }
-
-    if (isV3) {
       return {
         borderRadius: roundness,
       };

@@ -8,7 +8,7 @@ import { getTheme } from '../../../core/theming';
 import { black, white } from '../../../styles/themes/v2/colors';
 import Button from '../../Button/Button';
 import Card from '../../Card/Card';
-import { getCardColors } from '../../Card/utils';
+import { getCardColors, getCardCoverStyle } from '../../Card/utils';
 
 describe('Card', () => {
   it('renders an outlined card', () => {
@@ -104,6 +104,51 @@ describe('getCardColors - border color', () => {
       })
     ).toMatchObject({
       borderColor: color(black).alpha(0.12).rgb().string(),
+    });
+  });
+});
+
+describe('getCardCoverStyle - border radius', () => {
+  it('should return correct border radius based on roundness, for theme version 3', () => {
+    expect(
+      getCardCoverStyle({
+        theme: getTheme(),
+      })
+    ).toMatchObject({ borderRadius: 3 * getTheme().roundness });
+  });
+
+  it('should return correct border radius based on roundness, for theme version 2, when index is 0 and total is 1', () => {
+    expect(
+      getCardCoverStyle({
+        theme: getTheme(false, false),
+        index: 0,
+        total: 1,
+      })
+    ).toMatchObject({ borderRadius: getTheme(false, false).roundness });
+  });
+
+  it('should return correct border radius based on roundness, for theme version 2, when index is 0 and total is other than 1', () => {
+    expect(
+      getCardCoverStyle({
+        theme: getTheme(false, false),
+        index: 0,
+        total: 2,
+      })
+    ).toMatchObject({
+      borderTopLeftRadius: getTheme(false, false).roundness,
+      borderTopRightRadius: getTheme(false, false).roundness,
+    });
+  });
+
+  it('should return correct border radius based on roundness, for theme version 2, when index is equal to total - 1', () => {
+    expect(
+      getCardCoverStyle({
+        theme: getTheme(false, false),
+        index: 1,
+        total: 2,
+      })
+    ).toMatchObject({
+      borderBottomLeftRadius: getTheme(false, false).roundness,
     });
   });
 });

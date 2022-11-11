@@ -40,7 +40,7 @@ exports[`Card renders an outlined card 1`] = `
       style={
         Object {
           "backgroundColor": "rgba(255, 251, 254, 1)",
-          "borderRadius": 4,
+          "borderRadius": 12,
           "elevation": 1,
         }
       }
