@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, ListRenderItemInfo, StyleSheet, View } from 'react-native';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import type {
@@ -43,7 +43,7 @@ const CustomControl = ({
   const { isV3 } = useExampleTheme();
 
   const _renderItem = React.useCallback(
-    ({ item }) => {
+    ({ item }: ListRenderItemInfo<typeof options[number]>) => {
       const TextComponent = isV3 ? Text : Paragraph;
 
       return (
@@ -64,7 +64,10 @@ const CustomControl = ({
     [value, onChange, isV3]
   );
 
-  const _keyExtractor = React.useCallback((item) => item, []);
+  const _keyExtractor = React.useCallback(
+    (item: typeof options[number]) => item,
+    []
+  );
   const TextComponent = isV3 ? Text : Paragraph;
 
   return (

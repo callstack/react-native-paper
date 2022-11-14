@@ -122,7 +122,7 @@ const Dialog = ({
         .map((child, i) => {
           if (isV3) {
             if (i === 0 && React.isValidElement(child)) {
-              return React.cloneElement(child, {
+              return React.cloneElement(child as React.ReactElement<any>, {
                 style: [{ marginTop: 24 }, child.props.style],
               });
             }
@@ -134,7 +134,7 @@ const Dialog = ({
             child.type === DialogContent
           ) {
             // Dialog content is the first item, so we add a top padding
-            return React.cloneElement(child, {
+            return React.cloneElement(child as React.ReactElement<any>, {
               style: [{ paddingTop: 24 }, child.props.style],
             });
           }
