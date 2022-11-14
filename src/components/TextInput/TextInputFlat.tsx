@@ -3,10 +3,12 @@ import {
   Animated,
   I18nManager,
   Platform,
+  StyleProp,
   StyleSheet,
   TextInput as NativeTextInput,
   TextStyle,
   View,
+  ViewStyle,
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
@@ -50,6 +52,7 @@ const TextInputFlat = ({
   error = false,
   selectionColor,
   underlineColor,
+  underlineStyle,
   activeUnderlineColor,
   textColor,
   dense,
@@ -306,6 +309,7 @@ const TextInputFlat = ({
   return (
     <View style={[containerStyle, viewStyle]}>
       <Underline
+        style={underlineStyle}
         hasActiveOutline={hasActiveOutline}
         parentState={parentState}
         underlineColorCustom={underlineColorCustom}
@@ -397,6 +401,7 @@ type UnderlineProps = {
   activeColor: string;
   underlineColorCustom?: string;
   hasActiveOutline?: boolean;
+  style?: StyleProp<ViewStyle>;
 };
 
 const Underline = ({
@@ -406,6 +411,7 @@ const Underline = ({
   activeColor,
   underlineColorCustom,
   hasActiveOutline,
+  style,
 }: UnderlineProps) => {
   const { isV3 } = useInternalTheme();
 
@@ -419,6 +425,7 @@ const Underline = ({
 
   return (
     <Animated.View
+      testID="text-input-underline"
       style={[
         styles.underline,
         isV3 && styles.md3Underline,
@@ -433,6 +440,7 @@ const Underline = ({
             },
           ],
         },
+        style,
       ]}
     />
   );

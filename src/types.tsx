@@ -169,9 +169,12 @@ export type MD3Type = {
   fontSize: number;
 };
 
-export type MD3Typescale = {
-  [key in MD3TypescaleKey]: MD3Type;
-};
+export type MD3Typescale =
+  | {
+      [key in MD3TypescaleKey]: MD3Type;
+    } & {
+      ['default']: Omit<MD3Type, 'lineHeight' | 'fontSize'>;
+    };
 
 export type MD3Elevation = 0 | 1 | 2 | 3 | 4 | 5;
 

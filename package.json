@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper",
-  "version": "5.0.0-rc.8",
+  "version": "5.0.0-rc.9",
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -123,7 +123,7 @@
       "__fixtures__\\/[^/]+\\/(output|error)\\.js"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(@react-native|react-native|react-native-iphone-x-helper)/)"
+      "node_modules/(?!(@react-native|react-native(-.*)?|react-native-iphone-x-helper)/)"
     ]
   },
   "greenkeeper": {

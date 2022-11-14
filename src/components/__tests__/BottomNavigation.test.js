@@ -370,3 +370,18 @@ it('renders a single tab', () => {
 
   expect(queryByTestId('bottom-navigation')).not.toBeNull();
 });
+
+it('renders bottom navigation with getLazy', () => {
+  const tree = render(
+    <BottomNavigation
+      navigationState={createState(0, 5)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+      getLazy={({ route }) => route.key === 'key-2'}
+    />
+  );
+
+  expect(tree).toMatchSnapshot();
+
+  expect(tree.queryByTestId('RouteScreen: 2')).toBeNull();
+});

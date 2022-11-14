@@ -133,6 +133,7 @@ export type Props = {
  *       <Portal>
  *         <FAB.Group
  *           open={open}
+ *           visible
  *           icon={open ? 'calendar-today' : 'plus'}
  *           actions={[
  *             { icon: 'plus', onPress: () => console.log('Pressed add') },

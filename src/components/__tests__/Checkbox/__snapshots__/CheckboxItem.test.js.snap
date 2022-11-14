@@ -96,16 +96,32 @@ exports[`can render leading checkbox control 1`] = `
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
                 "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
             ]
           }
         >
-          □
+          󰄬
         </Text>
       </View>
     </View>
@@ -284,16 +300,32 @@ exports[`can render the Android checkbox on different platforms 1`] = `
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
                 "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
             ]
           }
         >
-          □
+          󰄱
         </Text>
         <View
           style={
@@ -460,16 +492,32 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
                 "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
             ]
           }
         >
-          □
+          󰄬
         </Text>
       </View>
     </View>
@@ -607,16 +655,32 @@ exports[`renders unchecked 1`] = `
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
                 "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
             ]
           }
         >
-          □
+          󰄬
         </Text>
       </View>
     </View>

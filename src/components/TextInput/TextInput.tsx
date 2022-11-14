@@ -5,6 +5,7 @@ import {
   StyleProp,
   TextInput as NativeTextInput,
   TextStyle,
+  ViewStyle,
 } from 'react-native';
 
 import { withInternalTheme } from '../../core/theming';
@@ -142,6 +143,20 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    * testID to be used on tests.
    */
   testID?: string;
+  /**
+   * @supported Available in v5.x
+   * Pass style to override the default style of outlined wrapper.
+   * Overrides style when mode is set to `outlined`
+   * Example: `borderRadius`, `borderColor`
+   */
+  outlineStyle?: StyleProp<ViewStyle>;
+  /**
+   * @supported Available in v5.x
+   * Pass style to override the default style of underlined wrapper.
+   * Overrides style when mode is set to `flat`
+   * Example: `borderRadius`, `borderColor`
+   */
+  underlineStyle?: StyleProp<ViewStyle>;
 };
 
 interface CompoundedComponent
@@ -302,12 +317,16 @@ const TextInput = React.forwardRef<TextInputHandles, Props>(
       // We don't show placeholder if there's a label because the label acts as placeholder
       // When focused, the label moves up, so we can show a placeholder
       if (focused || !rest.label) {
-        // Set the placeholder in a delay to offset the label animation
-        // If we show it immediately, they'll overlap and look ugly
-        timer.current = setTimeout(
-          () => setPlaceholder(rest.placeholder),
-          50
-        ) as unknown as NodeJS.Timeout;
+        // If the user wants to use the contextMenu, when changing the placeholder, the contextMenu is closed
+        // This is a workaround to mitigate this behavior in scenarios where the placeholder is not specified.
+        if (rest.placeholder) {
+          // Set the placeholder in a delay to offset the label animation
+          // If we show it immediately, they'll overlap and look ugly
+          timer.current = setTimeout(
+            () => setPlaceholder(rest.placeholder),
+            50
+          ) as unknown as NodeJS.Timeout;
+        }
       } else {
         // hidePlaceholder
 

@@ -46,6 +46,7 @@ exports[`renders data table cell 1`] = `
           "color": "rgba(28, 27, 31, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
+          "letterSpacing": 0,
         },
         Object {
           "writingDirection": "ltr",
@@ -115,6 +116,7 @@ exports[`renders data table header 1`] = `
             "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontWeight": "400",
+            "letterSpacing": 0,
           },
           Object {
             "writingDirection": "ltr",
@@ -180,6 +182,7 @@ exports[`renders data table header 1`] = `
             "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontWeight": "400",
+            "letterSpacing": 0,
           },
           Object {
             "writingDirection": "ltr",
@@ -237,6 +240,7 @@ exports[`renders data table pagination 1`] = `
           "color": "rgba(28, 27, 31, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
+          "letterSpacing": 0,
         },
         Object {
           "writingDirection": "ltr",
@@ -357,22 +361,39 @@ exports[`renders data table pagination 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
+              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
               style={
                 Array [
                   Object {
-                    "backgroundColor": "transparent",
-                  },
-                  Object {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontSize": 24,
                   },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
                 ]
               }
             >
-              □
+              󰅁
             </Text>
           </View>
         </View>
@@ -475,22 +496,39 @@ exports[`renders data table pagination 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
+              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
               style={
                 Array [
                   Object {
-                    "backgroundColor": "transparent",
-                  },
-                  Object {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontSize": 24,
                   },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
                 ]
               }
             >
-              □
+              󰅂
             </Text>
           </View>
         </View>
@@ -528,6 +566,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           "color": "rgba(28, 27, 31, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
+          "letterSpacing": 0,
         },
         Object {
           "writingDirection": "ltr",
@@ -650,22 +689,39 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
+              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
               style={
                 Array [
                   Object {
-                    "backgroundColor": "transparent",
-                  },
-                  Object {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontSize": 24,
                   },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
                 ]
               }
             >
-              □
+              󰘀
             </Text>
           </View>
         </View>
@@ -768,22 +824,39 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
+              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
               style={
                 Array [
                   Object {
-                    "backgroundColor": "transparent",
-                  },
-                  Object {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontSize": 24,
                   },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
                 ]
               }
             >
-              □
+              󰅁
             </Text>
           </View>
         </View>
@@ -886,22 +959,39 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
+              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
               style={
                 Array [
                   Object {
-                    "backgroundColor": "transparent",
-                  },
-                  Object {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontSize": 24,
                   },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
                 ]
               }
             >
-              □
+              󰅂
             </Text>
           </View>
         </View>
@@ -1004,22 +1094,39 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
+              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
               style={
                 Array [
                   Object {
-                    "backgroundColor": "transparent",
-                  },
-                  Object {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontSize": 24,
                   },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
                 ]
               }
             >
-              □
+              󰘁
             </Text>
           </View>
         </View>
@@ -1057,6 +1164,7 @@ exports[`renders data table pagination with label 1`] = `
           "color": "rgba(28, 27, 31, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
+          "letterSpacing": 0,
         },
         Object {
           "writingDirection": "ltr",
@@ -1179,22 +1287,39 @@ exports[`renders data table pagination with label 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
+              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
               style={
                 Array [
                   Object {
-                    "backgroundColor": "transparent",
-                  },
-                  Object {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontSize": 24,
                   },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
                 ]
               }
             >
-              □
+              󰅁
             </Text>
           </View>
         </View>
@@ -1297,22 +1422,39 @@ exports[`renders data table pagination with label 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
+              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
               style={
                 Array [
                   Object {
-                    "backgroundColor": "transparent",
-                  },
-                  Object {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontSize": 24,
                   },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
                 ]
               }
             >
-              □
+              󰅂
             </Text>
           </View>
         </View>
@@ -1360,6 +1502,7 @@ exports[`renders data table pagination with options select 1`] = `
             "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontWeight": "400",
+            "letterSpacing": 0,
           },
           Object {
             "writingDirection": "ltr",
@@ -1492,22 +1635,39 @@ exports[`renders data table pagination with options select 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
+                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
                     style={
                       Array [
                         Object {
-                          "backgroundColor": "transparent",
-                        },
-                        Object {
                           "color": "rgba(103, 80, 164, 1)",
                           "fontSize": 18,
                         },
+                        Array [
+                          Object {
+                            "lineHeight": 18,
+                            "transform": Array [
+                              Object {
+                                "scaleX": 1,
+                              },
+                            ],
+                          },
+                          Object {
+                            "backgroundColor": "transparent",
+                          },
+                        ],
+                        Object {
+                          "fontFamily": "Material Design Icons",
+                          "fontStyle": "normal",
+                          "fontWeight": "normal",
+                        },
+                        Object {},
                       ]
                     }
                   >
-                    □
+                    󰍝
                   </Text>
                 </View>
                 <Text
@@ -1576,6 +1736,7 @@ exports[`renders data table pagination with options select 1`] = `
           "color": "rgba(28, 27, 31, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
+          "letterSpacing": 0,
         },
         Object {
           "writingDirection": "ltr",
@@ -1698,22 +1859,39 @@ exports[`renders data table pagination with options select 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
+              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
               style={
                 Array [
                   Object {
-                    "backgroundColor": "transparent",
-                  },
-                  Object {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontSize": 24,
                   },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
                 ]
               }
             >
-              □
+              󰘀
             </Text>
           </View>
         </View>
@@ -1816,22 +1994,39 @@ exports[`renders data table pagination with options select 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
+              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
               style={
                 Array [
                   Object {
-                    "backgroundColor": "transparent",
-                  },
-                  Object {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontSize": 24,
                   },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
                 ]
               }
             >
-              □
+              󰅁
             </Text>
           </View>
         </View>
@@ -1934,22 +2129,39 @@ exports[`renders data table pagination with options select 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
+              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
               style={
                 Array [
                   Object {
-                    "backgroundColor": "transparent",
-                  },
-                  Object {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontSize": 24,
                   },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
                 ]
               }
             >
-              □
+              󰅂
             </Text>
           </View>
         </View>
@@ -2052,22 +2264,39 @@ exports[`renders data table pagination with options select 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
+              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
               style={
                 Array [
                   Object {
-                    "backgroundColor": "transparent",
-                  },
-                  Object {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontSize": 24,
                   },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
                 ]
               }
             >
-              □
+              󰘁
             </Text>
           </View>
         </View>
@@ -2122,22 +2351,39 @@ exports[`renders data table title with press handler 1`] = `
   >
     <Text
       accessibilityElementsHidden={true}
+      allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
       selectable={false}
       style={
         Array [
           Object {
-            "backgroundColor": "transparent",
-          },
-          Object {
             "color": "rgba(28, 27, 31, 1)",
             "fontSize": 16,
           },
+          Array [
+            Object {
+              "lineHeight": 16,
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Design Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
         ]
       }
     >
-      □
+      󰁝
     </Text>
   </View>
   <Text
@@ -2151,6 +2397,7 @@ exports[`renders data table title with press handler 1`] = `
           "color": "rgba(28, 27, 31, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
+          "letterSpacing": 0,
         },
         Object {
           "writingDirection": "ltr",
@@ -2224,22 +2471,39 @@ exports[`renders data table title with sort icon 1`] = `
   >
     <Text
       accessibilityElementsHidden={true}
+      allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
       selectable={false}
       style={
         Array [
           Object {
-            "backgroundColor": "transparent",
-          },
-          Object {
             "color": "rgba(28, 27, 31, 1)",
             "fontSize": 16,
           },
+          Array [
+            Object {
+              "lineHeight": 16,
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Design Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
         ]
       }
     >
-      □
+      󰁝
     </Text>
   </View>
   <Text
@@ -2253,6 +2517,7 @@ exports[`renders data table title with sort icon 1`] = `
           "color": "rgba(28, 27, 31, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
+          "letterSpacing": 0,
         },
         Object {
           "writingDirection": "ltr",
@@ -2329,6 +2594,7 @@ exports[`renders right aligned data table cell 1`] = `
           "color": "rgba(28, 27, 31, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
+          "letterSpacing": 0,
         },
         Object {
           "writingDirection": "ltr",
@@ -2384,6 +2650,7 @@ exports[`renders right aligned data table title 1`] = `
           "color": "rgba(28, 27, 31, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
+          "letterSpacing": 0,
         },
         Object {
           "writingDirection": "ltr",

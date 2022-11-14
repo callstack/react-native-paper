@@ -92,6 +92,7 @@ exports[`render visible banner, with custom theme 1`] = `
                     "color": "rgba(28, 27, 31, 1)",
                     "fontFamily": "System",
                     "fontWeight": "400",
+                    "letterSpacing": 0,
                   },
                   Object {
                     "writingDirection": "ltr",
@@ -376,6 +377,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
                     "color": "rgba(28, 27, 31, 1)",
                     "fontFamily": "System",
                     "fontWeight": "400",
+                    "letterSpacing": 0,
                   },
                   Object {
                     "writingDirection": "ltr",
@@ -504,6 +506,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                     "color": "rgba(28, 27, 31, 1)",
                     "fontFamily": "System",
                     "fontWeight": "400",
+                    "letterSpacing": 0,
                   },
                   Object {
                     "writingDirection": "ltr",
@@ -776,6 +779,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                     "color": "rgba(28, 27, 31, 1)",
                     "fontFamily": "System",
                     "fontWeight": "400",
+                    "letterSpacing": 0,
                   },
                   Object {
                     "writingDirection": "ltr",
@@ -1193,6 +1197,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
                     "color": "rgba(28, 27, 31, 1)",
                     "fontFamily": "System",
                     "fontWeight": "400",
+                    "letterSpacing": 0,
                   },
                   Object {
                     "writingDirection": "ltr",
@@ -1320,6 +1325,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
                     "color": "rgba(28, 27, 31, 1)",
                     "fontFamily": "System",
                     "fontWeight": "400",
+                    "letterSpacing": 0,
                   },
                   Object {
                     "writingDirection": "ltr",

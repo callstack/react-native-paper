@@ -145,5 +145,6 @@ export type { Props as SubheadingProps } from './components/Typography/v2/Subhea
 export type { Props as TitleProps } from './components/Typography/v2/Title';
 export type { Props as TextProps } from './components/Typography/Text';
 export type { Props as SegmentedButtonsProps } from './components/SegmentedButtons/SegmentedButtons';
+export type { Props as ListImageProps } from './components/List/ListImage';
 
 export type { MD2Theme, MD3Theme, ThemeBase, MD3Elevation } from './types';
