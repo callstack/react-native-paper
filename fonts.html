@@ -59,6 +59,191 @@
 </ul>
 <p>  <code>4.</code> Restart your project to refresh changes.</p>
 <p>Now, you are able to use <code>fontFamily</code> from font files.</p>
+<h2 id="configuring-fonts-in-themeprovider">
+          <a class="anchor" href="#configuring-fonts-in-themeprovider">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Configuring fonts in ThemeProvider</h2>
+<h3 id="material-design-2">
+          <a class="anchor" href="#material-design-2">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Material Design 2</h3>
+<p>To create a custom font, prepare a <code>fontConfig</code> object where fonts are divided by platforms. After that, you have to:</p>
+<ul>
+<li>pass the <code>fontConfig</code> into <code>configureFonts</code> params object property called <code>config</code> </li>
+<li>set the params object property <code>isV3</code> to <code>false</code>. </li>
+</ul>
+<p>The <code>fontConfig</code> object accepts <code>ios</code>, <code>android</code>, <code>macos</code>, <code>windows</code>, <code>web</code>, and <code>native</code>. Use these to override fonts on particular platforms.</p>
+<p>Note: At a minimum, you need to explicitly pass fonts for <code>android</code>, <code>ios</code>, and <code>web</code>.</p>
+<pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> configureFonts<span class="token punctuation">,</span> MD2LightTHeme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> fontConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+  web<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    regular<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">'sans-serif'</span><span class="token punctuation">,</span>
+      fontWeight<span class="token punctuation">:</span> <span class="token string">'normal'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    medium<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">'sans-serif-medium'</span><span class="token punctuation">,</span>
+      fontWeight<span class="token punctuation">:</span> <span class="token string">'normal'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    light<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">'sans-serif-light'</span><span class="token punctuation">,</span>
+      fontWeight<span class="token punctuation">:</span> <span class="token string">'normal'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    thin<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">'sans-serif-thin'</span><span class="token punctuation">,</span>
+      fontWeight<span class="token punctuation">:</span> <span class="token string">'normal'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  ios<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    regular<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">'sans-serif'</span><span class="token punctuation">,</span>
+      fontWeight<span class="token punctuation">:</span> <span class="token string">'normal'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    medium<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">'sans-serif-medium'</span><span class="token punctuation">,</span>
+      fontWeight<span class="token punctuation">:</span> <span class="token string">'normal'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    light<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">'sans-serif-light'</span><span class="token punctuation">,</span>
+      fontWeight<span class="token punctuation">:</span> <span class="token string">'normal'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    thin<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">'sans-serif-thin'</span><span class="token punctuation">,</span>
+      fontWeight<span class="token punctuation">:</span> <span class="token string">'normal'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  android<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    regular<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">'sans-serif'</span><span class="token punctuation">,</span>
+      fontWeight<span class="token punctuation">:</span> <span class="token string">'normal'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    medium<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">'sans-serif-medium'</span><span class="token punctuation">,</span>
+      fontWeight<span class="token punctuation">:</span> <span class="token string">'normal'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    light<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">'sans-serif-light'</span><span class="token punctuation">,</span>
+      fontWeight<span class="token punctuation">:</span> <span class="token string">'normal'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    thin<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      fontFamily<span class="token punctuation">:</span> <span class="token string">'sans-serif-thin'</span><span class="token punctuation">,</span>
+      fontWeight<span class="token punctuation">:</span> <span class="token string">'normal'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> theme <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>MD2LightTheme<span class="token punctuation">,</span>
+  fonts<span class="token punctuation">:</span> <span class="token function">configureFonts</span><span class="token punctuation">(</span><span class="token punctuation">{</span>config<span class="token punctuation">:</span> fontConfig<span class="token punctuation">,</span> isV3<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PaperProvider</span></span> <span class="token attr-name">theme</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>theme<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">App</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PaperProvider</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="material-design-3">
+          <a class="anchor" href="#material-design-3">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Material Design 3</h3>
+<p>In the latest version fonts in theme are structured based on the <code>variant</code> keys e.g. <code>displayLarge</code> or <code>bodyMedium</code> which are then used in <code>Text</code>'s component throughout the whole library.</p>
+<ul>
+<li>If there is a need to create a custom font variant, prepare its config object including required all fonts properties. After that, defined <code>fontConfig</code> has to be passed under the <b><code>variant</code></b> name as <code>config</code> into the params object:</li>
+</ul>
+<pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> configureFonts<span class="token punctuation">,</span> MD3LightTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> fontConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+  customVariant<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    fontFamily<span class="token punctuation">:</span> Platform<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      web<span class="token punctuation">:</span> <span class="token string">'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif'</span><span class="token punctuation">,</span>
+      ios<span class="token punctuation">:</span> <span class="token string">'System'</span><span class="token punctuation">,</span>
+      <span class="token keyword">default</span><span class="token punctuation">:</span> <span class="token string">'sans-serif'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    fontWeight<span class="token punctuation">:</span> <span class="token string">'400'</span><span class="token punctuation">,</span>
+    letterSpacing<span class="token punctuation">:</span> <span class="token number">0.5</span><span class="token punctuation">,</span>
+    lineHeight<span class="token punctuation">:</span> <span class="token number">22</span><span class="token punctuation">,</span>
+    fontSize<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> theme <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>MD3LightTheme<span class="token punctuation">,</span>
+  fonts<span class="token punctuation">:</span> <span class="token function">configureFonts</span><span class="token punctuation">(</span><span class="token punctuation">{</span>config<span class="token punctuation">:</span> fontConfig<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PaperProvider</span></span> <span class="token attr-name">theme</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>theme<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">App</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PaperProvider</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<ul>
+<li>In order to override one of the available <code>variant</code>'s font properties, pass the modified <code>fontConfig</code> under specific <b><code>variant</code></b> name as <code>config</code> into the params object:</li>
+</ul>
+<pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> configureFonts<span class="token punctuation">,</span> MD3LightTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> fontConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+  bodyLarge<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    letterSpacing<span class="token punctuation">:</span> <span class="token number">0.5</span><span class="token punctuation">,</span>
+    lineHeight<span class="token punctuation">:</span> <span class="token number">22</span><span class="token punctuation">,</span>
+    fontSize<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> theme <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>MD3LightTheme<span class="token punctuation">,</span>
+  fonts<span class="token punctuation">:</span> <span class="token function">configureFonts</span><span class="token punctuation">(</span><span class="token punctuation">{</span>config<span class="token punctuation">:</span> fontConfig<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PaperProvider</span></span> <span class="token attr-name">theme</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>theme<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">App</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PaperProvider</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<ul>
+<li>However, if you just want to override any font property e.g. <code>fontFamily</code> or <code>letterSpacing</code> for <b>all</b> variants, you can pass the <code>fontConfig</code> as a <code>config</code> into the params object <b>without</b> specifying variant name:</li>
+</ul>
+<pre><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> configureFonts<span class="token punctuation">,</span> MD3LightTheme<span class="token punctuation">,</span> Provider <span class="token keyword">as</span> PaperProvider <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./src/App'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> fontConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+  fontFamily<span class="token punctuation">:</span> <span class="token string">'NotoSans'</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> theme <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>MD3LightTheme<span class="token punctuation">,</span>
+  fonts<span class="token punctuation">:</span> <span class="token function">configureFonts</span><span class="token punctuation">(</span><span class="token punctuation">{</span>config<span class="token punctuation">:</span> fontConfig<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">PaperProvider</span></span> <span class="token attr-name">theme</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>theme<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">App</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PaperProvider</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 </div></div></main></div></div>
     <style type="text/css">
       :root {
