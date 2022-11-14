@@ -289,7 +289,6 @@ Card.Title = CardTitle;
 
 const styles = StyleSheet.create({
   innerContainer: {
-    flexGrow: 1,
     flexShrink: 1,
   },
   outline: {
