@@ -218,11 +218,13 @@ const Card = ({
     mode: cardMode,
   });
 
+  const borderRadius = (isV3 ? 3 : 1) * roundness;
+
   return (
     <Surface
       style={[
         {
-          borderRadius: roundness,
+          borderRadius,
         },
         isV3 && { backgroundColor },
         !isV3 && isMode('outlined')
