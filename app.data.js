@@ -948,7 +948,7 @@ var MDXContent = /*#__PURE__*/function (_React$Component) {
         props: {
           "className": "language-ts",
           "dangerouslySetInnerHTML": {
-            "__html": "<span class=\"token function\">adaptNavigationTheme</span><span class=\"token punctuation\">(</span>params<span class=\"token punctuation\">)</span>\n"
+            "__html": "<span class=\"token function\">adaptNavigationTheme</span><span class=\"token punctuation\">(</span>themes<span class=\"token punctuation\">)</span>\n"
           }
         }
       })), /*#__PURE__*/React.createElement(_tag.MDXTag, {
@@ -994,7 +994,7 @@ var MDXContent = /*#__PURE__*/function (_React$Component) {
         props: {
           "align": null
         }
-      }, "params"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+      }, "themes"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
         name: "td",
         components: components,
         parentName: "tr",
@@ -1008,7 +1008,7 @@ var MDXContent = /*#__PURE__*/function (_React$Component) {
         name: "inlineCode",
         components: components,
         parentName: "p"
-      }, "params"), " keys are:"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+      }, "themes"), " keys are:"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
         name: "ul",
         components: components
       }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
