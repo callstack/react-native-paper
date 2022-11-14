@@ -80,7 +80,6 @@ exports[`Card renders an outlined card 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "flexGrow": 1,
             "flexShrink": 1,
           }
         }
