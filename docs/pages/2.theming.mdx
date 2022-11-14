@@ -227,16 +227,16 @@ export default function Main() {
 The `adaptNavigationTheme` function takes an existing React Navigation theme and returns a React Navigation theme using the colors from Material Design 3. This theme can be passed to `NavigationContainer` so that React Navigation's UI elements have the same color scheme as Paper.
 
 ```ts
-adaptNavigationTheme(params)
+adaptNavigationTheme(themes)
 ```
 
 <b>Parameters:</b>
 
 | NAME        | TYPE        |
 | ----------- | ----------- |
-| params      | object      |
+| themes      | object      |
 
-Valid `params` keys are:
+Valid `themes` keys are:
 
   * `light` () - React Navigation compliant light theme.
   * `dark` () - React Navigation compliant dark theme.
