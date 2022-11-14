@@ -39,6 +39,7 @@ export type MD2Colors = {
   placeholder: string;
   backdrop: string;
   notification: string;
+  tooltip: string;
 };
 
 export type MD3Colors = {

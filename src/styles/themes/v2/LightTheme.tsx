@@ -21,6 +21,7 @@ export const MD2LightTheme: MD2Theme = {
     placeholder: color(black).alpha(0.54).rgb().string(),
     backdrop: color(black).alpha(0.5).rgb().string(),
     notification: pinkA400,
+    tooltip: 'rgba(28, 27, 31, 1)',
   },
   fonts: configureFonts(),
   animation: {

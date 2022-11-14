@@ -54,6 +54,7 @@ export { default as TouchableRipple } from './components/TouchableRipple/Touchab
 export { default as TextInput } from './components/TextInput/TextInput';
 export { default as ToggleButton } from './components/ToggleButton';
 export { default as SegmentedButtons } from './components/SegmentedButtons/SegmentedButtons';
+export { default as Tooltip } from './components/Tooltip/Tooltip';
 
 export {
   Caption,
@@ -146,5 +147,6 @@ export type { Props as TitleProps } from './components/Typography/v2/Title';
 export type { Props as TextProps } from './components/Typography/Text';
 export type { Props as SegmentedButtonsProps } from './components/SegmentedButtons/SegmentedButtons';
 export type { Props as ListImageProps } from './components/List/ListImage';
+export type { Props as TooltipProps } from './components/Tooltip/Tooltip';
 
 export type { MD2Theme, MD3Theme, ThemeBase, MD3Elevation } from './types';

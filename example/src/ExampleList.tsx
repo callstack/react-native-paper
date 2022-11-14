@@ -40,6 +40,7 @@ import TextExample from './Examples/TextExample';
 import TextInputExample from './Examples/TextInputExample';
 import ThemeExample from './Examples/ThemeExample';
 import ToggleButtonExample from './Examples/ToggleButtonExample';
+import TooltipExample from './Examples/TooltipExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
 
 import { useExampleTheme } from '.';
@@ -82,6 +83,7 @@ export const examples: Record<
   text: TextExample,
   textInput: TextInputExample,
   toggleButton: ToggleButtonExample,
+  tooltipExample: TooltipExample,
   touchableRipple: TouchableRippleExample,
   theme: ThemeExample,
 };

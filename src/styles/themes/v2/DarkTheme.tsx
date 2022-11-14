@@ -24,6 +24,7 @@ export const MD2DarkTheme: MD2Theme = {
     placeholder: color(white).alpha(0.54).rgb().string(),
     backdrop: color(black).alpha(0.5).rgb().string(),
     notification: pinkA100,
+    tooltip: 'rgba(230, 225, 229, 1)',
   },
   fonts: configureFonts(),
 };

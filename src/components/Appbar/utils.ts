@@ -7,6 +7,7 @@ import color from 'color';
 import overlay from '../../styles/overlay';
 import { black, white } from '../../styles/themes/v2/colors';
 import type { InternalTheme } from '../../types';
+import Tooltip from '../Tooltip/Tooltip';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
 import AppbarContent from './AppbarContent';
@@ -91,7 +92,7 @@ export const renderAppbarContent = ({
       .map((child, i) => {
         if (
           !React.isValidElement(child) ||
-          ![AppbarContent, AppbarAction, AppbarBackAction].includes(
+          ![AppbarContent, AppbarAction, AppbarBackAction, Tooltip].includes(
             // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
             child.type
           )
