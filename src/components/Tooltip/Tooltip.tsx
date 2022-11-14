@@ -33,8 +33,7 @@ export type Props = {
  *
  * <div class="screenshots">
  *   <figure>
- *     <img src="screenshots/TODO.png" />
- *     <figcaption>TODO</figcaption>
+ *     <img class="small" src="screenshots/tooltip.png" />
  *   </figure>
  * </div>
  *
