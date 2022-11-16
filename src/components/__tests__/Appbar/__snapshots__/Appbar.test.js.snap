@@ -250,6 +250,9 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                   },
                   Object {
                     "color": "rgba(28, 27, 31, 1)",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                    "letterSpacing": 0,
                   },
                   undefined,
                 ]
