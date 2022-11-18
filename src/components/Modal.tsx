@@ -11,10 +11,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import {
-  getBottomSpace,
-  getStatusBarHeight,
-} from 'react-native-iphone-x-helper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { InternalTheme } from 'src/types';
 
 import { withInternalTheme } from '../core/theming';
@@ -63,8 +60,6 @@ export type Props = {
 };
 
 const DEFAULT_DURATION = 220;
-const TOP_INSET = getStatusBarHeight(true);
-const BOTTOM_INSET = getBottomSpace();
 
 /**
  * The Modal component is a simple way to present content above an enclosing view.
@@ -123,6 +118,8 @@ function Modal({
   });
 
   const { scale } = theme.animation;
+
+  const { top, bottom } = useSafeAreaInsets();
 
   const opacity = useAnimatedValue(visible ? 1 : 0);
 
@@ -241,10 +238,11 @@ function Modal({
       <View
         style={[
           styles.wrapper,
-          { marginTop: TOP_INSET, marginBottom: BOTTOM_INSET },
+          { marginTop: top, marginBottom: bottom },
           style,
         ]}
         pointerEvents="box-none"
+        testID={`${testID}-wrapper`}
       >
         <Surface
           style={

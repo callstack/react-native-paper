@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { Divider, List } from 'react-native-paper';
-import { useSafeArea } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ActivityIndicatorExample from './Examples/ActivityIndicatorExample';
 import AnimatedFABExample from './Examples/AnimatedFABExample';
@@ -112,7 +112,7 @@ export default function ExampleList({ navigation }: Props) {
   const keyExtractor = (item: { id: string }) => item.id;
 
   const { colors } = useExampleTheme();
-  const safeArea = useSafeArea();
+  const safeArea = useSafeAreaInsets();
 
   return (
     <FlatList

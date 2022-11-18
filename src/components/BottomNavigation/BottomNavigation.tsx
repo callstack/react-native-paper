@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 import color from 'color';
-import { getBottomSpace } from 'react-native-iphone-x-helper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { withInternalTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
@@ -274,7 +274,6 @@ const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animat
 const MIN_TAB_WIDTH = 96;
 const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
-const BOTTOM_INSET = getBottomSpace();
 const FAR_FAR_AWAY = Platform.OS === 'web' ? 0 : 9999;
 const OUTLINE_WIDTH = 64;
 
@@ -393,6 +392,7 @@ const BottomNavigation = ({
   testID = 'bottom-navigation',
   getLazy = ({ route }: { route: Route }) => route.lazy,
 }: Props) => {
+  const { bottom } = useSafeAreaInsets();
   const { scale } = theme.animation;
 
   if (shifting && navigationState.routes.length < 2) {
@@ -679,7 +679,7 @@ const BottomNavigation = ({
   const insets = {
     left: safeAreaInsets?.left ?? 0,
     right: safeAreaInsets?.right ?? 0,
-    bottom: safeAreaInsets?.bottom ?? BOTTOM_INSET,
+    bottom: safeAreaInsets?.bottom ?? bottom,
   };
 
   return (

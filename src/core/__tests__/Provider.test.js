@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Appearance, AccessibilityInfo, View } from 'react-native';
 
 import { render, act } from '@testing-library/react-native';
+import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 
 import {
   MD2LightTheme,
@@ -11,6 +12,8 @@ import {
 } from '../../styles/themes';
 import Provider from '../Provider';
 import { useTheme } from '../theming';
+
+jest.mock('react-native-safe-area-context', () => mockSafeAreaContext);
 
 const mockAppearance = () => {
   jest.mock('react-native/Libraries/Utilities/Appearance', () => {

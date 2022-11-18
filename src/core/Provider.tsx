@@ -6,6 +6,8 @@ import {
   NativeEventSubscription,
 } from 'react-native';
 
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
 import type { ThemeProp } from '../types';
@@ -98,12 +100,14 @@ const Provider = (props: Props) => {
   const { children, settings } = props;
 
   return (
-    <PortalHost>
-      <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>
-        {/* @ts-expect-error check @callstack/react-theme-provider's children prop */}
-        <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
-      </SettingsProvider>
-    </PortalHost>
+    <SafeAreaProvider>
+      <PortalHost>
+        <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>
+          {/* @ts-expect-error check @callstack/react-theme-provider's children prop */}
+          <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
+        </SettingsProvider>
+      </PortalHost>
+    </SafeAreaProvider>
   );
 };
 
