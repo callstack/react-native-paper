@@ -204,6 +204,7 @@ const SegmentedButtonItem = ({
 
 const styles = StyleSheet.create({
   button: {
+    flex: 1,
     minWidth: 76,
     borderStyle: 'solid',
   },
