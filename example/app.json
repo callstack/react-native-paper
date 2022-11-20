@@ -5,6 +5,7 @@
     "slug": "react-native-paper-example",
     "privacy": "public",
     "version": "2.1.0",
+    "entryPoint": "App.js",
     "orientation": "default",
     "primaryColor": "#6200EE",
     "userInterfaceStyle": "automatic",
@@ -25,7 +26,7 @@
     },
     "android": {
       "package": "com.callstack.reactnativepaperexample",
-      "versionCode": 8,
+      "versionCode": 9,
       "permissions": [
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
