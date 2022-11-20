@@ -245,7 +245,7 @@ const Card = ({
           pointerEvents="none"
           style={[
             {
-              borderRadius: roundness,
+              borderRadius,
               borderColor,
             },
             styles.outline,
