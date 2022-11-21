@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  GestureResponderEvent,
   I18nManager,
   StyleProp,
   StyleSheet,
@@ -39,7 +40,7 @@ export type Props = React.ComponentPropsWithRef<
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
   /**
    * Text content style of the `DataTableTitle`.

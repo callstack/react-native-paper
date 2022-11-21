@@ -1,11 +1,15 @@
+import type { GestureResponderEvent } from 'react-native';
+
 export const handlePress = ({
   onPress,
   value,
   onValueChange,
+  event,
 }: {
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   value: string;
   onValueChange?: (value: string) => void;
+  event: GestureResponderEvent;
 }) => {
   if (onPress && onValueChange) {
     console.warn(
@@ -13,7 +17,7 @@ export const handlePress = ({
     );
   }
 
-  onValueChange ? onValueChange(value) : onPress?.();
+  onValueChange ? onValueChange(value) : onPress?.(event);
 };
 
 export const isChecked = ({

@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   AccessibilityState,
   Animated,
+  GestureResponderEvent,
   StyleProp,
   StyleSheet,
   View,
@@ -73,7 +74,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   /**
    * Function to execute on long press.
    */

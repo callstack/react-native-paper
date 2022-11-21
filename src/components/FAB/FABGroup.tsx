@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  GestureResponderEvent,
   SafeAreaView,
   StyleProp,
   StyleSheet,
@@ -45,7 +46,7 @@ export type Props = {
     style?: StyleProp<ViewStyle>;
     containerStyle?: StyleProp<ViewStyle>;
     labelStyle?: StyleProp<TextStyle>;
-    onPress: () => void;
+    onPress: (e: GestureResponderEvent) => void;
     size?: 'small' | 'medium';
     testID?: string;
   }>;
@@ -69,7 +70,7 @@ export type Props = {
   /**
    * Function to execute on pressing the `FAB`.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   /**
    * Whether the speed dial is open.
    */
@@ -198,7 +199,7 @@ const FABGroup = ({
         color?: string;
         accessibilityLabel?: string;
         style?: StyleProp<ViewStyle>;
-        onPress: () => void;
+        onPress: (e: GestureResponderEvent) => void;
         testID?: string;
       }[]
     | null
@@ -353,8 +354,8 @@ const FABGroup = ({
                           it.containerStyle,
                         ] as StyleProp<ViewStyle>
                       }
-                      onPress={() => {
-                        it.onPress();
+                      onPress={(e) => {
+                        it.onPress(e);
                         close();
                       }}
                       accessibilityLabel={accessibilityLabel}
@@ -385,8 +386,8 @@ const FABGroup = ({
                       it.style,
                     ] as StyleProp<ViewStyle>
                   }
-                  onPress={() => {
-                    it.onPress();
+                  onPress={(e) => {
+                    it.onPress(e);
                     close();
                   }}
                   accessibilityLabel={accessibilityLabel}
@@ -399,8 +400,8 @@ const FABGroup = ({
           })}
         </View>
         <FAB
-          onPress={() => {
-            onPress?.();
+          onPress={(e) => {
+            onPress?.(e);
             toggle();
           }}
           icon={icon}

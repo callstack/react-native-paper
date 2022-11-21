@@ -43,7 +43,7 @@ export type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   /**
    * Function to execute on long press.
    */
@@ -158,8 +158,8 @@ const ListAccordion = ({
     expandedProp || false
   );
 
-  const handlePressAction = () => {
-    onPress?.();
+  const handlePressAction = (e: GestureResponderEvent) => {
+    onPress?.(e);
 
     if (expandedProp === undefined) {
       // Only update state of the `expanded` prop was not passed

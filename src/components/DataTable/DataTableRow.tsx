@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  GestureResponderEvent,
   StyleProp,
   StyleSheet,
   View,
@@ -22,7 +23,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
