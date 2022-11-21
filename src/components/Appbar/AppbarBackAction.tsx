@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { GestureResponderEvent, StyleProp, ViewStyle, View } from 'react-native';
+import type {
+  GestureResponderEvent,
+  StyleProp,
+  ViewStyle,
+  View,
+} from 'react-native';
+
 import type { $Omit } from './../../types';
 import AppbarAction from './AppbarAction';
 import AppbarBackIcon from './AppbarBackIcon';
