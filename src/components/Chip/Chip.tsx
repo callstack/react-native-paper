@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   AccessibilityState,
   Animated,
+  GestureResponderEvent,
   Platform,
   StyleProp,
   StyleSheet,
@@ -73,7 +74,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   /**
    * @supported Available in v5.x with theme version 3
    * Sets smaller horizontal paddings `12dp` around label, when there is only label.

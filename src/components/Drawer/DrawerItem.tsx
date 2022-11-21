@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import {
+  GestureResponderEvent,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native';
 
 import color from 'color';
 
@@ -25,7 +31,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */

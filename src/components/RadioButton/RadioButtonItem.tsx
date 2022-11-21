@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  GestureResponderEvent,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -33,7 +34,7 @@ export type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   /**
    * Accessibility label for the touchable. This is read by the screen reader when the user taps the touchable.
    */
@@ -174,11 +175,12 @@ const RadioButtonItem = ({
           }) === 'checked';
         return (
           <TouchableRipple
-            onPress={() =>
+            onPress={(event) =>
               handlePress({
                 onPress: onPress,
                 onValueChange: context?.onValueChange,
                 value,
+                event,
               })
             }
             accessibilityLabel={accessibilityLabel}

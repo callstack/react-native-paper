@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  GestureResponderEvent,
   NativeSyntheticEvent,
   Platform,
   StyleProp,
@@ -33,7 +34,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */

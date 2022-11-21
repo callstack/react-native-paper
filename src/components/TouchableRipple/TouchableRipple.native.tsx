@@ -20,7 +20,7 @@ type Props = React.ComponentProps<typeof Pressable> & {
   borderless?: boolean;
   background?: PressableAndroidRippleConfig;
   disabled?: boolean;
-  onPress?: () => void | null;
+  onPress?: (e: GestureResponderEvent) => void | null;
   rippleColor?: string;
   underlayColor?: string;
   children: React.ReactNode;
