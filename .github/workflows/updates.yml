@@ -34,7 +34,7 @@ jobs:
           restore-keys: ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn
 
       - name: Publish Expo app update
         working-directory: ./example
