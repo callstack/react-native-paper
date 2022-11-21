@@ -4,7 +4,7 @@
     "description": "Example app for React Native Paper: https://callstack.github.io/react-native-paper/",
     "slug": "react-native-paper-example",
     "privacy": "public",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "entryPoint": "App.js",
     "orientation": "default",
     "primaryColor": "#6200EE",
@@ -22,7 +22,7 @@
     "owner": "react-native-paper",
     "ios": {
       "bundleIdentifier": "com.callstack.reactnativepaperexample",
-      "buildNumber": "5.0.0"
+      "buildNumber": "6.0.0"
     },
     "android": {
       "package": "com.callstack.reactnativepaperexample",
