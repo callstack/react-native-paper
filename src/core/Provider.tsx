@@ -68,6 +68,7 @@ const Provider = (props: Props) => {
         if (appearanceSubscription) {
           appearanceSubscription.remove();
         } else {
+          // @ts-expect-error: We keep deprecated listener remove method for backwards compat with old RN versions
           Appearance?.removeChangeListener(handleAppearanceChange);
         }
       }
@@ -99,6 +100,7 @@ const Provider = (props: Props) => {
   return (
     <PortalHost>
       <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>
+        {/* @ts-expect-error check @callstack/react-theme-provider's children prop */}
         <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
       </SettingsProvider>
     </PortalHost>

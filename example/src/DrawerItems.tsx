@@ -177,7 +177,7 @@ const DrawerItems = ({
 
             <TouchableRipple onPress={toggleThemeVersion}>
               <View style={[styles.preference, isV3 && styles.v3Preference]}>
-                <Text variant="labelLarge">Switch back to Material 2</Text>
+                <Text variant="labelLarge">MD 2</Text>
                 <View pointerEvents="none">
                   <Switch value={!isV3} />
                 </View>

@@ -4,6 +4,7 @@ import { Platform } from 'react-native';
 import { render } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
 
+import Provider from '../../../core/Provider';
 import { getTheme } from '../../../core/theming';
 import overlay from '../../../styles/overlay';
 import { tokens } from '../../../styles/themes/v3/tokens';
@@ -15,6 +16,7 @@ import AppbarHeader from '../../Appbar/AppbarHeader';
 import { getAppbarColor, renderAppbarContent } from '../../Appbar/utils';
 import Menu from '../../Menu/Menu';
 import Searchbar from '../../Searchbar';
+import Tooltip from '../../Tooltip/Tooltip';
 
 describe('Appbar', () => {
   it('does not pass any additional props to Searchbar', () => {
@@ -232,6 +234,38 @@ describe('AppbarAction', () => {
     );
     const appbarBackActionIcon = getByTestId('appbar-action').props.children[0];
     expect(appbarBackActionIcon.props.color).toBe('purple');
+  });
+
+  describe('When V2', () => {
+    const theme = { isV3: false };
+
+    it('should be rendered with the right color when no color is passed', () => {
+      const { getByTestId } = render(
+        <Appbar theme={theme}>
+          <Appbar.Action icon="menu" testID="appbar-action" />
+        </Appbar>
+      );
+
+      const appbarActionIcon = getByTestId('appbar-action').props.children[0];
+
+      expect(appbarActionIcon.props.color).toBe('#ffffff');
+    });
+
+    it('should be rendered with the right color when no color is passed but is wrapped by a Tooltip', () => {
+      const { getByTestId } = render(
+        <Provider>
+          <Appbar theme={theme}>
+            <Tooltip title="Menu">
+              <Appbar.Action icon="menu" testID="appbar-action" />
+            </Tooltip>
+          </Appbar>
+        </Provider>
+      );
+
+      const appbarActionIcon = getByTestId('appbar-action').props.children[0];
+
+      expect(appbarActionIcon.props.color).toBe('#ffffff');
+    });
   });
 });
 

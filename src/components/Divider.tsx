@@ -68,7 +68,7 @@ const Divider = ({
   const { dark: isDarkTheme, isV3 } = theme;
 
   const dividerColor = isV3
-    ? theme.colors.surfaceVariant
+    ? theme.colors.outlineVariant
     : color(isDarkTheme ? white : black)
         .alpha(0.12)
         .rgb()
@@ -79,7 +79,7 @@ const Divider = ({
       {...rest}
       style={[
         { height: StyleSheet.hairlineWidth, backgroundColor: dividerColor },
-        leftInset && styles.leftInset,
+        leftInset && (isV3 ? styles.v3LeftInset : styles.leftInset),
         isV3 && horizontalInset && styles.horizontalInset,
         isV3 && bold && styles.bold,
         style,
@@ -92,9 +92,12 @@ const styles = StyleSheet.create({
   leftInset: {
     marginLeft: 72,
   },
+  v3LeftInset: {
+    marginLeft: 16,
+  },
   horizontalInset: {
-    marginLeft: 28,
-    marginRight: 28,
+    marginLeft: 16,
+    marginRight: 16,
   },
   bold: {
     height: 1,

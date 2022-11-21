@@ -178,6 +178,12 @@ const data: Data[] = [
     android:
       'https://play.google.com/store/apps/details?id=com.personal.butterfly',
   },
+  {
+    color: '#262a33',
+    name: 'Prodigy IoT',
+    image: 'showcase/prodigyiot.png',
+    github: 'https://github.com/lcsjunior/prodigy-rn-app-v2',
+  },
 ];
 
 export default class Showcase extends React.Component<{}> {

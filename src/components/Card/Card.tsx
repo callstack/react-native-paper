@@ -219,11 +219,13 @@ const Card = ({
     mode: cardMode,
   });
 
+  const borderRadius = (isV3 ? 3 : 1) * roundness;
+
   return (
     <Surface
       style={[
         {
-          borderRadius: roundness,
+          borderRadius,
         },
         isV3 && { backgroundColor },
         !isV3 && isMode('outlined')
@@ -244,7 +246,7 @@ const Card = ({
           pointerEvents="none"
           style={[
             {
-              borderRadius: roundness,
+              borderRadius,
               borderColor,
             },
             styles.outline,
@@ -264,7 +266,7 @@ const Card = ({
         <View style={styles.innerContainer}>
           {React.Children.map(children, (child, index) =>
             React.isValidElement(child)
-              ? React.cloneElement(child, {
+              ? React.cloneElement(child as React.ReactElement<any>, {
                   index,
                   total,
                   siblings,
@@ -288,7 +290,6 @@ Card.Title = CardTitle;
 
 const styles = StyleSheet.create({
   innerContainer: {
-    flexGrow: 1,
     flexShrink: 1,
   },
   outline: {

@@ -3,8 +3,8 @@ import {
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
-  TouchableWithoutFeedback,
   ViewStyle,
+  View,
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
@@ -65,7 +65,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
-  ref?: React.RefObject<TouchableWithoutFeedback>;
+  ref?: React.RefObject<View>;
   /**
    * @optional
    */
@@ -113,85 +113,91 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  *
  * @extends TouchableRipple props https://callstack.github.io/react-native-paper/touchable-ripple.html
  */
-const IconButton = ({
-  icon,
-  iconColor: customIconColor,
-  containerColor: customContainerColor,
-  size = 24,
-  accessibilityLabel,
-  disabled,
-  onPress,
-  selected = false,
-  animated = false,
-  mode,
-  style,
-  ...rest
-}: Props) => {
-  const theme = useInternalTheme();
-  const { isV3 } = theme;
-
-  const IconComponent = animated ? CrossFadeIcon : Icon;
-
-  const { iconColor, rippleColor, backgroundColor, borderColor } =
-    getIconButtonColor({
-      theme,
+const IconButton = React.forwardRef<View, Props>(
+  (
+    {
+      icon,
+      iconColor: customIconColor,
+      containerColor: customContainerColor,
+      size = 24,
+      accessibilityLabel,
       disabled,
-      selected,
+      onPress,
+      selected = false,
+      animated = false,
       mode,
-      customIconColor,
-      customContainerColor,
-    });
+      style,
+      ...rest
+    }: Props,
+    ref
+  ) => {
+    const theme = useInternalTheme();
+    const { isV3 } = theme;
 
-  const buttonSize = isV3 ? size + 2 * PADDING : size * 1.5;
+    const IconComponent = animated ? CrossFadeIcon : Icon;
 
-  const borderStyles = {
-    borderWidth: isV3 && mode === 'outlined' && !selected ? 1 : 0,
-    borderRadius: buttonSize / 2,
-    borderColor,
-  };
+    const { iconColor, rippleColor, backgroundColor, borderColor } =
+      getIconButtonColor({
+        theme,
+        disabled,
+        selected,
+        mode,
+        customIconColor,
+        customContainerColor,
+      });
 
-  return (
-    <Surface
-      style={
-        [
-          {
-            backgroundColor,
-            width: buttonSize,
-            height: buttonSize,
-          },
-          styles.container,
-          borderStyles,
-          !isV3 && disabled && styles.disabled,
-          style,
-        ] as StyleProp<ViewStyle>
-      }
-      {...(isV3 && { elevation: 0 })}
-    >
-      <TouchableRipple
-        borderless
-        centered
-        onPress={onPress}
-        rippleColor={rippleColor}
-        accessibilityLabel={accessibilityLabel}
-        style={styles.touchable}
-        // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-        accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
-        accessibilityComponentType="button"
-        accessibilityRole="button"
-        accessibilityState={{ disabled }}
-        disabled={disabled}
-        hitSlop={
-          TouchableRipple.supported
-            ? { top: 10, left: 10, bottom: 10, right: 10 }
-            : { top: 6, left: 6, bottom: 6, right: 6 }
+    const buttonSize = isV3 ? size + 2 * PADDING : size * 1.5;
+
+    const borderStyles = {
+      borderWidth: isV3 && mode === 'outlined' && !selected ? 1 : 0,
+      borderRadius: buttonSize / 2,
+      borderColor,
+    };
+
+    return (
+      <Surface
+        ref={ref}
+        style={
+          [
+            {
+              backgroundColor,
+              width: buttonSize,
+              height: buttonSize,
+            },
+            styles.container,
+            borderStyles,
+            !isV3 && disabled && styles.disabled,
+            style,
+          ] as StyleProp<ViewStyle>
         }
-        {...rest}
+        {...(isV3 && { elevation: 0 })}
       >
-        <IconComponent color={iconColor} source={icon} size={size} />
-      </TouchableRipple>
-    </Surface>
-  );
-};
+        <TouchableRipple
+          borderless
+          centered
+          onPress={onPress}
+          rippleColor={rippleColor}
+          accessibilityLabel={accessibilityLabel}
+          style={styles.touchable}
+          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
+          accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
+          accessibilityComponentType="button"
+          accessibilityRole="button"
+          accessibilityState={{ disabled }}
+          disabled={disabled}
+          hitSlop={
+            TouchableRipple.supported
+              ? { top: 10, left: 10, bottom: 10, right: 10 }
+              : { top: 6, left: 6, bottom: 6, right: 6 }
+          }
+          {...rest}
+        >
+          <IconComponent color={iconColor} source={icon} size={size} />
+        </TouchableRipple>
+      </Surface>
+    );
+  }
+);
 
 const styles = StyleSheet.create({
   container: {
