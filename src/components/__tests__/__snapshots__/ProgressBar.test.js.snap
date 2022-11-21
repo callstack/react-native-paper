@@ -22,7 +22,7 @@ exports[`renders colored progress bar 1`] = `
     collapsable={false}
     style={
       Object {
-        "backgroundColor": "rgba(255, 0, 0, 0.38)",
+        "backgroundColor": "rgba(231, 224, 236, 1)",
         "height": 4,
         "opacity": 0,
         "overflow": "hidden",
@@ -73,7 +73,7 @@ exports[`renders hidden progress bar 1`] = `
     collapsable={false}
     style={
       Object {
-        "backgroundColor": "rgba(103, 80, 164, 0.38)",
+        "backgroundColor": "rgba(231, 224, 236, 1)",
         "height": 4,
         "opacity": 0,
         "overflow": "hidden",
@@ -118,7 +118,7 @@ exports[`renders indeterminate progress bar 1`] = `
     collapsable={false}
     style={
       Object {
-        "backgroundColor": "rgba(103, 80, 164, 0.38)",
+        "backgroundColor": "rgba(231, 224, 236, 1)",
         "height": 4,
         "opacity": 0,
         "overflow": "hidden",
@@ -169,7 +169,7 @@ exports[`renders progress bar with specific progress 1`] = `
     collapsable={false}
     style={
       Object {
-        "backgroundColor": "rgba(103, 80, 164, 0.38)",
+        "backgroundColor": "rgba(231, 224, 236, 1)",
         "height": 4,
         "opacity": 0,
         "overflow": "hidden",
