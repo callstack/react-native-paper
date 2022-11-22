@@ -94,7 +94,7 @@ const ProgressBarExample = () => {
         <AnimatedProgressBar
           style={styles.progressBar}
           animatedValue={progressBarValue}
-          color={MD2Colors.green200}
+          color={MD3Colors.secondary30}
           theme={theme}
         />
       </View>
