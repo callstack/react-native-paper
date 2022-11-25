@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Dimensions, View, LayoutChangeEvent, StyleSheet } from 'react-native';
+import {
+  Dimensions,
+  View,
+  LayoutChangeEvent,
+  StyleSheet,
+  Platform,
+} from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import { addEventListener } from '../../utils/addEventListener';
@@ -115,8 +121,6 @@ const Tooltip = ({
   };
 
   const handleTouchEnd = () => {
-    setTouched(false);
-
     if (showTooltipTimer.current) {
       clearTimeout(showTooltipTimer.current);
     }
@@ -125,6 +129,27 @@ const Tooltip = ({
       setVisible(false);
       setMeasurement({ children: {}, tooltip: {}, measured: false });
     }, leaveTouchDelay) as unknown as NodeJS.Timeout;
+  };
+
+  const childrenOnPress = React.useCallback(() => {
+    setTouched(false);
+
+    if (touched) {
+      return null;
+    } else {
+      return children.props.onPress?.();
+    }
+  }, [touched, children.props]);
+
+  const webPressProps = {
+    onPressIn: () => {
+      handleTouchStart();
+      children.props.onPressIn?.();
+    },
+    onPressOut: () => {
+      handleTouchEnd();
+      children.props.onPressOut?.();
+    },
   };
 
   return (
@@ -166,11 +191,8 @@ const Tooltip = ({
         {React.cloneElement(children, {
           ...rest,
           ref: childrenWrapperRef,
-          onPress: () => {
-            if (!touched) {
-              children.props.onPress?.();
-            }
-          },
+          onPress: childrenOnPress,
+          ...(Platform.OS === 'web' && webPressProps),
         })}
       </View>
     </>

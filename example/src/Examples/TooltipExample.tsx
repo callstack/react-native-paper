@@ -64,11 +64,7 @@ const TooltipExample = ({ navigation }: Props) => {
           >
             <ToggleButton icon="format-bold" value="bold" />
             <Tooltip title="Align center">
-              <ToggleButton
-                icon="format-align-center"
-                value="align-center"
-                onPress={() => console.log('TOGGLE BUTTON')}
-              />
+              <ToggleButton icon="format-align-center" value="align-center" />
             </Tooltip>
           </ToggleButton.Row>
         </List.Section>
