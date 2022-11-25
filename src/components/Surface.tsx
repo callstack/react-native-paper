@@ -147,6 +147,7 @@ const Surface = React.forwardRef<View, Props>(
       return (
         <Animated.View
           {...props}
+          ref={ref}
           testID={testID}
           style={[
             { backgroundColor },
@@ -280,7 +281,7 @@ const Surface = React.forwardRef<View, Props>(
         ref={ref}
         style={[getStyleForShadowLayer(0), absoluteStyles]}
       >
-        <Animated.View style={[getStyleForShadowLayer(1)]}>
+        <Animated.View style={getStyleForShadowLayer(1)}>
           <Animated.View {...props} testID={testID} style={sharedStyle}>
             {children}
           </Animated.View>

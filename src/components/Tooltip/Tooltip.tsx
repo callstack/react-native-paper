@@ -60,6 +60,8 @@ const Tooltip = ({
 }: Props) => {
   const theme = useInternalTheme();
   const [visible, setVisible] = React.useState(false);
+  const [touched, setTouched] = React.useState(false);
+
   const [measurement, setMeasurement] = React.useState({
     children: {},
     tooltip: {},
@@ -106,13 +108,15 @@ const Tooltip = ({
       clearTimeout(hideTooltipTimer.current);
     }
 
-    showTooltipTimer.current = setTimeout(
-      () => setVisible(true),
-      enterTouchDelay
-    ) as unknown as NodeJS.Timeout;
+    showTooltipTimer.current = setTimeout(() => {
+      setTouched(true);
+      setVisible(true);
+    }, enterTouchDelay) as unknown as NodeJS.Timeout;
   };
 
   const handleTouchEnd = () => {
+    setTouched(false);
+
     if (showTooltipTimer.current) {
       clearTimeout(showTooltipTimer.current);
     }
@@ -159,7 +163,15 @@ const Tooltip = ({
         onTouchEnd={handleTouchEnd}
         onTouchCancel={handleTouchEnd}
       >
-        {React.cloneElement(children, { ...rest, ref: childrenWrapperRef })}
+        {React.cloneElement(children, {
+          ...rest,
+          ref: childrenWrapperRef,
+          onPress: () => {
+            if (!touched) {
+              children.props.onPress?.();
+            }
+          },
+        })}
       </View>
     </>
   );

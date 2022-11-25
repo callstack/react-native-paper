@@ -23,7 +23,7 @@ const TooltipExample = ({ navigation }: Props) => {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       header: () => (
-        <Appbar.Header>
+        <Appbar.Header elevated>
           <Tooltip title="Go back">
             <Appbar.BackAction onPress={() => navigation.goBack()} />
           </Tooltip>
@@ -64,7 +64,11 @@ const TooltipExample = ({ navigation }: Props) => {
           >
             <ToggleButton icon="format-bold" value="bold" />
             <Tooltip title="Align center">
-              <ToggleButton icon="format-align-center" value="align-center" />
+              <ToggleButton
+                icon="format-align-center"
+                value="align-center"
+                onPress={() => console.log('TOGGLE BUTTON')}
+              />
             </Tooltip>
           </ToggleButton.Row>
         </List.Section>
