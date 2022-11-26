@@ -2,12 +2,16 @@ import * as React from 'react';
 import {
   Animated,
   Easing,
-  SafeAreaView,
   StyleProp,
   StyleSheet,
   View,
   ViewStyle,
 } from 'react-native';
+
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 import { withInternalTheme } from '../core/theming';
 import type { InternalTheme } from '../types';
@@ -121,6 +125,12 @@ const Snackbar = ({
   theme,
   ...rest
 }: Props) => {
+  const { top, bottom } = useSafeAreaInsets();
+  const wrapperPaddings = {
+    paddingTop: -top,
+    paddingBottom: -bottom,
+  };
+
   const { current: opacity } = React.useRef<Animated.Value>(
     new Animated.Value(0.0)
   );
@@ -217,7 +227,7 @@ const Snackbar = ({
   return (
     <SafeAreaView
       pointerEvents="box-none"
-      style={[styles.wrapper, wrapperStyle]}
+      style={[styles.wrapper, wrapperPaddings, wrapperStyle]}
     >
       <Surface
         pointerEvents="box-none"

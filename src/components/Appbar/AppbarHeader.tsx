@@ -1,14 +1,8 @@
 import * as React from 'react';
-import {
-  Platform,
-  SafeAreaView,
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import { withInternalTheme } from '../../core/theming';
 import shadow from '../../styles/shadow';
 import type { InternalTheme } from '../../types';
@@ -131,17 +125,17 @@ const AppbarHeader = ({
     elevated
   );
 
-  // Let the user override the behaviour
-  const Wrapper = typeof statusBarHeight === 'number' ? View : SafeAreaView;
+  const { top } = useSafeAreaInsets();
+
   return (
-    <Wrapper
+    <View
       style={
         [
           {
             backgroundColor,
             zIndex,
             elevation,
-            paddingTop: statusBarHeight ?? APPROX_STATUSBAR_HEIGHT,
+            paddingTop: statusBarHeight ?? top,
           },
           shadow(elevation),
         ] as StyleProp<ViewStyle>
@@ -155,7 +149,7 @@ const AppbarHeader = ({
         })}
         {...rest}
       />
-    </Wrapper>
+    </View>
   );
 };
 

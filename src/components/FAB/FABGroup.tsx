@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  SafeAreaView,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -9,6 +8,8 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { withInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';

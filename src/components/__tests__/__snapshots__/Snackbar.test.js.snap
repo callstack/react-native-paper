@@ -3,8 +3,15 @@
 exports[`renders not visible snackbar with content wrapper but no actual content 1`] = `null`;
 
 exports[`renders snackbar with Text as a child 1`] = `
-<RCTSafeAreaView
-  emulateUnlessSupported={true}
+<RNCSafeAreaView
+  edges={
+    Array [
+      "bottom",
+      "left",
+      "right",
+      "top",
+    ]
+  }
   pointerEvents="box-none"
   style={
     Array [
@@ -12,6 +19,10 @@ exports[`renders snackbar with Text as a child 1`] = `
         "bottom": 0,
         "position": "absolute",
         "width": "100%",
+      },
+      Object {
+        "paddingBottom": -34,
+        "paddingTop": -47,
       },
       undefined,
     ]
@@ -96,12 +107,19 @@ exports[`renders snackbar with Text as a child 1`] = `
       </View>
     </View>
   </View>
-</RCTSafeAreaView>
+</RNCSafeAreaView>
 `;
 
 exports[`renders snackbar with View & Text as a child 1`] = `
-<RCTSafeAreaView
-  emulateUnlessSupported={true}
+<RNCSafeAreaView
+  edges={
+    Array [
+      "bottom",
+      "left",
+      "right",
+      "top",
+    ]
+  }
   pointerEvents="box-none"
   style={
     Array [
@@ -109,6 +127,10 @@ exports[`renders snackbar with View & Text as a child 1`] = `
         "bottom": 0,
         "position": "absolute",
         "width": "100%",
+      },
+      Object {
+        "paddingBottom": -34,
+        "paddingTop": -47,
       },
       undefined,
     ]
@@ -219,12 +241,19 @@ exports[`renders snackbar with View & Text as a child 1`] = `
       </View>
     </View>
   </View>
-</RCTSafeAreaView>
+</RNCSafeAreaView>
 `;
 
 exports[`renders snackbar with action button 1`] = `
-<RCTSafeAreaView
-  emulateUnlessSupported={true}
+<RNCSafeAreaView
+  edges={
+    Array [
+      "bottom",
+      "left",
+      "right",
+      "top",
+    ]
+  }
   pointerEvents="box-none"
   style={
     Array [
@@ -232,6 +261,10 @@ exports[`renders snackbar with action button 1`] = `
         "bottom": 0,
         "position": "absolute",
         "width": "100%",
+      },
+      Object {
+        "paddingBottom": -34,
+        "paddingTop": -47,
       },
       undefined,
     ]
@@ -471,12 +504,19 @@ exports[`renders snackbar with action button 1`] = `
       </View>
     </View>
   </View>
-</RCTSafeAreaView>
+</RNCSafeAreaView>
 `;
 
 exports[`renders snackbar with content 1`] = `
-<RCTSafeAreaView
-  emulateUnlessSupported={true}
+<RNCSafeAreaView
+  edges={
+    Array [
+      "bottom",
+      "left",
+      "right",
+      "top",
+    ]
+  }
   pointerEvents="box-none"
   style={
     Array [
@@ -484,6 +524,10 @@ exports[`renders snackbar with content 1`] = `
         "bottom": 0,
         "position": "absolute",
         "width": "100%",
+      },
+      Object {
+        "paddingBottom": -34,
+        "paddingTop": -47,
       },
       undefined,
     ]
@@ -578,5 +622,5 @@ exports[`renders snackbar with content 1`] = `
       </View>
     </View>
   </View>
-</RCTSafeAreaView>
+</RNCSafeAreaView>
 `;

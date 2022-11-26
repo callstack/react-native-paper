@@ -17,7 +17,10 @@ import {
   MD3Theme,
   useTheme,
 } from 'react-native-paper';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaProvider,
+  initialWindowMetrics,
+} from 'react-native-safe-area-context';
 
 import { isWeb } from '../utils';
 import DrawerItems from './DrawerItems';
@@ -163,7 +166,7 @@ export default function PaperExample() {
 
   return (
     <PaperProvider theme={theme}>
-      <SafeAreaProvider>
+      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
         <PreferencesContext.Provider value={preferences}>
           <React.Fragment>
             <NavigationContainer
