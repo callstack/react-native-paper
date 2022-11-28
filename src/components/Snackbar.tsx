@@ -8,10 +8,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { withInternalTheme } from '../core/theming';
 import type { InternalTheme } from '../types';
@@ -125,11 +122,7 @@ const Snackbar = ({
   theme,
   ...rest
 }: Props) => {
-  const { top, bottom } = useSafeAreaInsets();
-  const wrapperPaddings = {
-    paddingTop: -top,
-    paddingBottom: -bottom,
-  };
+  const { bottom, right, left } = useSafeAreaInsets();
 
   const { current: opacity } = React.useRef<Animated.Value>(
     new Animated.Value(0.0)
@@ -206,6 +199,11 @@ const Snackbar = ({
     ? theme.colors.inversePrimary
     : theme.colors.accent;
 
+  const wrapperPaddings = {
+    paddingBottom: bottom,
+    paddingHorizontal: Math.max(left, right),
+  };
+
   const renderChildrenWithWrapper = () => {
     const viewStyles = [
       styles.content,
@@ -225,7 +223,7 @@ const Snackbar = ({
   };
 
   return (
-    <SafeAreaView
+    <View
       pointerEvents="box-none"
       style={[styles.wrapper, wrapperPaddings, wrapperStyle]}
     >
@@ -274,7 +272,7 @@ const Snackbar = ({
           </Button>
         ) : null}
       </Surface>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -295,8 +293,8 @@ Snackbar.DURATION_LONG = DURATION_LONG;
 
 const styles = StyleSheet.create({
   wrapper: {
-    position: 'absolute',
-    bottom: 0,
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: 'flex-end',
     width: '100%',
   },
   container: {

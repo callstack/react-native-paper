@@ -17,10 +17,6 @@ import {
   MD3Theme,
   useTheme,
 } from 'react-native-paper';
-import {
-  SafeAreaProvider,
-  initialWindowMetrics,
-} from 'react-native-safe-area-context';
 
 import { isWeb } from '../utils';
 import DrawerItems from './DrawerItems';
@@ -166,36 +162,34 @@ export default function PaperExample() {
 
   return (
     <PaperProvider theme={theme}>
-      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-        <PreferencesContext.Provider value={preferences}>
-          <React.Fragment>
-            <NavigationContainer
-              initialState={initialState}
-              onStateChange={(state) =>
-                AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
-              }
-            >
-              {isWeb ? (
-                <App />
-              ) : (
-                <Drawer.Navigator
-                  screenOptions={{
-                    drawerStyle: collapsed && styles.collapsed,
-                  }}
-                  drawerContent={() => <DrawerContent />}
-                >
-                  <Drawer.Screen
-                    name="Home"
-                    component={App}
-                    options={{ headerShown: false }}
-                  />
-                </Drawer.Navigator>
-              )}
-              <StatusBar style={!theme.isV3 || theme.dark ? 'light' : 'dark'} />
-            </NavigationContainer>
-          </React.Fragment>
-        </PreferencesContext.Provider>
-      </SafeAreaProvider>
+      <PreferencesContext.Provider value={preferences}>
+        <React.Fragment>
+          <NavigationContainer
+            initialState={initialState}
+            onStateChange={(state) =>
+              AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
+            }
+          >
+            {isWeb ? (
+              <App />
+            ) : (
+              <Drawer.Navigator
+                screenOptions={{
+                  drawerStyle: collapsed && styles.collapsed,
+                }}
+                drawerContent={() => <DrawerContent />}
+              >
+                <Drawer.Screen
+                  name="Home"
+                  component={App}
+                  options={{ headerShown: false }}
+                />
+              </Drawer.Navigator>
+            )}
+            <StatusBar style={!theme.isV3 || theme.dark ? 'light' : 'dark'} />
+          </NavigationContainer>
+        </React.Fragment>
+      </PreferencesContext.Provider>
     </PaperProvider>
   );
 }

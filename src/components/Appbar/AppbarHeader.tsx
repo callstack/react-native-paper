@@ -125,7 +125,7 @@ const AppbarHeader = ({
     elevated
   );
 
-  const { top } = useSafeAreaInsets();
+  const { top, left, right } = useSafeAreaInsets();
 
   return (
     <View
@@ -136,6 +136,7 @@ const AppbarHeader = ({
             zIndex,
             elevation,
             paddingTop: statusBarHeight ?? top,
+            paddingHorizontal: Math.max(left, right),
           },
           shadow(elevation),
         ] as StyleProp<ViewStyle>

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 import renderer from 'react-test-renderer';
 
 import { red200, white } from '../../styles/themes/v2/colors';
@@ -34,7 +33,6 @@ jest.mock('react-native', () => {
 });
 
 jest.mock('react-native-safe-area-context', () => ({
-  ...mockSafeAreaContext,
   useSafeAreaInsets: () => ({ bottom: 34, left: 0, right: 0, top: 47 }),
 }));
 

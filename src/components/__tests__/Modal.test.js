@@ -4,11 +4,9 @@ import { render } from '@testing-library/react-native';
 
 import Modal from '../Modal';
 
-jest.mock('react-native-safe-area-context', () => {
-  return {
-    useSafeAreaInsets: () => ({ bottom: 44, left: 0, right: 0, top: 37 }),
-  };
-});
+jest.mock('react-native-safe-area-context', () => ({
+  useSafeAreaInsets: () => ({ bottom: 44, left: 0, right: 0, top: 37 }),
+}));
 
 describe('Modal', () => {
   it('should render custom backdrop color', () => {

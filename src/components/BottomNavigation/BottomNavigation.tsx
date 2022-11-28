@@ -392,7 +392,7 @@ const BottomNavigation = ({
   testID = 'bottom-navigation',
   getLazy = ({ route }: { route: Route }) => route.lazy,
 }: Props) => {
-  const { bottom } = useSafeAreaInsets();
+  const { bottom, left, right } = useSafeAreaInsets();
   const { scale } = theme.animation;
 
   if (shifting && navigationState.routes.length < 2) {
@@ -677,8 +677,8 @@ const BottomNavigation = ({
   const rippleSize = layout.width / 4;
 
   const insets = {
-    left: safeAreaInsets?.left ?? 0,
-    right: safeAreaInsets?.right ?? 0,
+    left: safeAreaInsets?.left ?? left,
+    right: safeAreaInsets?.right ?? right,
     bottom: safeAreaInsets?.bottom ?? bottom,
   };
 
