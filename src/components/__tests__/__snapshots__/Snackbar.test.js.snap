@@ -57,12 +57,12 @@ exports[`renders snackbar with Text as a child 1`] = `
         pointerEvents="box-none"
         style={
           Object {
-            "alignItems": "center",
-            "backgroundColor": "rgba(28, 27, 31, 1)",
+            "backgroundColor": "rgba(49, 48, 51, 1)",
             "borderRadius": 4,
             "flexDirection": "row",
             "justifyContent": "space-between",
             "margin": 8,
+            "minHeight": 48,
             "opacity": 1,
             "transform": Array [
               Object {
@@ -74,17 +74,11 @@ exports[`renders snackbar with Text as a child 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
-                "flex": 1,
-                "marginLeft": 16,
-                "marginVertical": 14,
-              },
-              Object {
-                "color": "rgba(255, 251, 254, 1)",
-                "marginRight": 16,
-              },
-            ]
+            Object {
+              "flex": 1,
+              "marginHorizontal": 16,
+              "marginVertical": 14,
+            }
           }
         >
           <View>
@@ -154,12 +148,12 @@ exports[`renders snackbar with View & Text as a child 1`] = `
         pointerEvents="box-none"
         style={
           Object {
-            "alignItems": "center",
-            "backgroundColor": "rgba(28, 27, 31, 1)",
+            "backgroundColor": "rgba(49, 48, 51, 1)",
             "borderRadius": 4,
             "flexDirection": "row",
             "justifyContent": "space-between",
             "margin": 8,
+            "minHeight": 48,
             "opacity": 1,
             "transform": Array [
               Object {
@@ -171,17 +165,11 @@ exports[`renders snackbar with View & Text as a child 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
-                "flex": 1,
-                "marginLeft": 16,
-                "marginVertical": 14,
-              },
-              Object {
-                "color": "rgba(255, 251, 254, 1)",
-                "marginRight": 16,
-              },
-            ]
+            Object {
+              "flex": 1,
+              "marginHorizontal": 16,
+              "marginVertical": 14,
+            }
           }
         >
           <View>
@@ -277,12 +265,12 @@ exports[`renders snackbar with action button 1`] = `
         pointerEvents="box-none"
         style={
           Object {
-            "alignItems": "center",
-            "backgroundColor": "rgba(28, 27, 31, 1)",
+            "backgroundColor": "rgba(49, 48, 51, 1)",
             "borderRadius": 4,
             "flexDirection": "row",
             "justifyContent": "space-between",
             "margin": 8,
+            "minHeight": 48,
             "opacity": 1,
             "transform": Array [
               Object {
@@ -296,13 +284,15 @@ exports[`renders snackbar with action button 1`] = `
           style={
             Array [
               Object {
-                "textAlign": "left",
-              },
-              Object {
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
+                "fontSize": 14,
                 "fontWeight": "400",
-                "letterSpacing": 0,
+                "letterSpacing": 0.25,
+                "lineHeight": 20,
+              },
+              Object {
+                "textAlign": "left",
               },
               Object {
                 "writingDirection": "ltr",
@@ -310,12 +300,11 @@ exports[`renders snackbar with action button 1`] = `
               Array [
                 Object {
                   "flex": 1,
-                  "marginLeft": 16,
+                  "marginHorizontal": 16,
                   "marginVertical": 14,
                 },
                 Object {
-                  "color": "rgba(255, 251, 254, 1)",
-                  "marginRight": 0,
+                  "color": "rgba(244, 239, 244, 1)",
                 },
               ],
             ]
@@ -324,29 +313,29 @@ exports[`renders snackbar with action button 1`] = `
           Snackbar content
         </Text>
         <View
-          collapsable={false}
           style={
-            Object {
-              "alignSelf": undefined,
-              "bottom": undefined,
-              "left": undefined,
-              "position": undefined,
-              "right": undefined,
-              "shadowColor": "#000",
-              "shadowOffset": Object {
-                "height": 0,
-                "width": 0,
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "flex-end",
+                "minHeight": 48,
               },
-              "shadowOpacity": 0,
-              "shadowRadius": 0,
-              "top": undefined,
-            }
+              Object {
+                "marginLeft": -12,
+              },
+            ]
           }
         >
           <View
             collapsable={false}
             style={
               Object {
+                "alignSelf": undefined,
+                "bottom": undefined,
+                "left": undefined,
+                "position": undefined,
+                "right": undefined,
                 "shadowColor": "#000",
                 "shadowOffset": Object {
                   "height": 0,
@@ -354,6 +343,7 @@ exports[`renders snackbar with action button 1`] = `
                 },
                 "shadowOpacity": 0,
                 "shadowRadius": 0,
+                "top": undefined,
               }
             }
           >
@@ -361,108 +351,121 @@ exports[`renders snackbar with action button 1`] = `
               collapsable={false}
               style={
                 Object {
-                  "backgroundColor": "transparent",
-                  "borderColor": "transparent",
-                  "borderRadius": 20,
-                  "borderStyle": "solid",
-                  "borderWidth": 0,
-                  "marginHorizontal": 8,
-                  "marginVertical": 6,
-                  "minWidth": "auto",
+                  "shadowColor": "#000",
+                  "shadowOffset": Object {
+                    "height": 0,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0,
+                  "shadowRadius": 0,
                 }
               }
             >
               <View
-                accessibilityRole="button"
-                accessibilityState={
-                  Object {
-                    "disabled": false,
-                  }
-                }
-                accessible={true}
                 collapsable={false}
-                focusable={true}
-                onBlur={[Function]}
-                onClick={[Function]}
-                onFocus={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
                 style={
-                  Array [
-                    Object {
-                      "overflow": "hidden",
-                    },
-                    false,
-                    Object {
-                      "borderRadius": 20,
-                    },
-                  ]
+                  Object {
+                    "backgroundColor": "transparent",
+                    "borderColor": "transparent",
+                    "borderRadius": 20,
+                    "borderStyle": "solid",
+                    "borderWidth": 0,
+                    "marginLeft": 4,
+                    "marginRight": 8,
+                    "minWidth": 64,
+                  }
                 }
               >
                 <View
+                  accessibilityRole="button"
+                  accessibilityState={
+                    Object {
+                      "disabled": false,
+                    }
+                  }
+                  accessible={true}
+                  collapsable={false}
+                  focusable={true}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
                   style={
                     Array [
                       Object {
-                        "alignItems": "center",
-                        "flexDirection": "row",
-                        "justifyContent": "center",
+                        "overflow": "hidden",
                       },
-                      undefined,
+                      false,
+                      Object {
+                        "borderRadius": 20,
+                      },
                     ]
                   }
                 >
-                  <Text
-                    numberOfLines={1}
-                    selectable={false}
+                  <View
                     style={
                       Array [
                         Object {
-                          "color": "rgba(28, 27, 31, 1)",
-                          "fontFamily": "System",
-                          "fontSize": 14,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.1,
-                          "lineHeight": 20,
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                          "justifyContent": "center",
                         },
-                        Object {
-                          "textAlign": "left",
-                        },
-                        Object {
-                          "writingDirection": "ltr",
-                        },
+                        undefined,
+                      ]
+                    }
+                  >
+                    <Text
+                      numberOfLines={1}
+                      selectable={false}
+                      style={
                         Array [
                           Object {
-                            "marginHorizontal": 16,
-                            "marginVertical": 9,
-                            "textAlign": "center",
-                          },
-                          false,
-                          Object {
-                            "marginHorizontal": 12,
-                          },
-                          Object {
-                            "marginHorizontal": 8,
-                          },
-                          false,
-                          Object {
-                            "color": "rgba(208, 188, 255, 1)",
+                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 14,
                             "fontWeight": "500",
                             "letterSpacing": 0.1,
                             "lineHeight": 20,
                           },
-                          undefined,
-                        ],
-                      ]
-                    }
-                  >
-                    Undo
-                  </Text>
+                          Object {
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "writingDirection": "ltr",
+                          },
+                          Array [
+                            Object {
+                              "marginHorizontal": 16,
+                              "marginVertical": 9,
+                              "textAlign": "center",
+                            },
+                            false,
+                            Object {
+                              "marginHorizontal": 12,
+                            },
+                            false,
+                            false,
+                            Object {
+                              "color": "rgba(208, 188, 255, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
+                            },
+                            undefined,
+                          ],
+                        ]
+                      }
+                    >
+                      Undo
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
@@ -529,12 +532,12 @@ exports[`renders snackbar with content 1`] = `
         pointerEvents="box-none"
         style={
           Object {
-            "alignItems": "center",
-            "backgroundColor": "rgba(28, 27, 31, 1)",
+            "backgroundColor": "rgba(49, 48, 51, 1)",
             "borderRadius": 4,
             "flexDirection": "row",
             "justifyContent": "space-between",
             "margin": 8,
+            "minHeight": 48,
             "opacity": 1,
             "transform": Array [
               Object {
@@ -548,13 +551,15 @@ exports[`renders snackbar with content 1`] = `
           style={
             Array [
               Object {
-                "textAlign": "left",
-              },
-              Object {
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
+                "fontSize": 14,
                 "fontWeight": "400",
-                "letterSpacing": 0,
+                "letterSpacing": 0.25,
+                "lineHeight": 20,
+              },
+              Object {
+                "textAlign": "left",
               },
               Object {
                 "writingDirection": "ltr",
@@ -562,12 +567,11 @@ exports[`renders snackbar with content 1`] = `
               Array [
                 Object {
                   "flex": 1,
-                  "marginLeft": 16,
+                  "marginHorizontal": 16,
                   "marginVertical": 14,
                 },
                 Object {
-                  "color": "rgba(255, 251, 254, 1)",
-                  "marginRight": 16,
+                  "color": "rgba(244, 239, 244, 1)",
                 },
               ],
             ]
