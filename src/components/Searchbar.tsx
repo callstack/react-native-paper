@@ -214,7 +214,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
             styles.input,
             {
               color: textColor,
-              ...(!isV3 && theme.fonts.regular),
+              ...(theme.isV3 ? theme.fonts.default : theme.fonts.regular),
               ...Platform.select({ web: { outline: 'none' } }),
             },
             inputStyle,
