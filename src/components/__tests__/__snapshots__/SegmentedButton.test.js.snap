@@ -25,6 +25,7 @@ exports[`renders checked segmented button with selected check 1`] = `
         },
         Object {
           "borderStyle": "solid",
+          "flex": 1,
           "minWidth": 76,
         },
         Array [
@@ -189,6 +190,7 @@ exports[`renders checked segmented button with selected check 1`] = `
         },
         Object {
           "borderStyle": "solid",
+          "flex": 1,
           "minWidth": 76,
         },
         Array [
@@ -322,6 +324,7 @@ exports[`renders disabled segmented button 1`] = `
         },
         Object {
           "borderStyle": "solid",
+          "flex": 1,
           "minWidth": 76,
         },
         Array [
@@ -443,6 +446,7 @@ exports[`renders disabled segmented button 1`] = `
         },
         Object {
           "borderStyle": "solid",
+          "flex": 1,
           "minWidth": 76,
         },
         Array [
@@ -576,6 +580,7 @@ exports[`renders segmented button 1`] = `
         },
         Object {
           "borderStyle": "solid",
+          "flex": 1,
           "minWidth": 76,
         },
         Array [
@@ -695,6 +700,7 @@ exports[`renders segmented button 1`] = `
         },
         Object {
           "borderStyle": "solid",
+          "flex": 1,
           "minWidth": 76,
         },
         Array [
