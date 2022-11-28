@@ -11,8 +11,11 @@ exports[`can render leading radio button control 1`] = `
     }
   }
   accessible={true}
+  collapsable={false}
   focusable={true}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -21,6 +24,7 @@ exports[`can render leading radio button control 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
+      false,
       false,
       undefined,
     ]
@@ -51,8 +55,11 @@ exports[`can render leading radio button control 1`] = `
         }
       }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -64,6 +71,7 @@ exports[`can render leading radio button control 1`] = `
           Object {
             "overflow": "hidden",
           },
+          false,
           Object {
             "borderRadius": 18,
             "padding": 6,
@@ -87,16 +95,32 @@ exports[`can render leading radio button control 1`] = `
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
                 "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
             ]
           }
         >
-          □
+          󰄬
         </Text>
       </View>
     </View>
@@ -149,8 +173,11 @@ exports[`can render the Android radio button on different platforms 1`] = `
     }
   }
   accessible={true}
+  collapsable={false}
   focusable={true}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -159,6 +186,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
+      false,
       false,
       undefined,
     ]
@@ -223,8 +251,11 @@ exports[`can render the Android radio button on different platforms 1`] = `
         }
       }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -236,6 +267,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
           Object {
             "overflow": "hidden",
           },
+          false,
           Object {
             "borderRadius": 18,
           },
@@ -271,8 +303,11 @@ exports[`can render the iOS radio button on different platforms 1`] = `
     }
   }
   accessible={true}
+  collapsable={false}
   focusable={true}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -281,6 +316,7 @@ exports[`can render the iOS radio button on different platforms 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
+      false,
       false,
       undefined,
     ]
@@ -345,8 +381,11 @@ exports[`can render the iOS radio button on different platforms 1`] = `
         }
       }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -358,6 +397,7 @@ exports[`can render the iOS radio button on different platforms 1`] = `
           Object {
             "overflow": "hidden",
           },
+          false,
           Object {
             "borderRadius": 18,
             "padding": 6,
@@ -381,16 +421,32 @@ exports[`can render the iOS radio button on different platforms 1`] = `
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
                 "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
             ]
           }
         >
-          □
+          󰄬
         </Text>
       </View>
     </View>
@@ -409,8 +465,11 @@ exports[`renders unchecked 1`] = `
     }
   }
   accessible={true}
+  collapsable={false}
   focusable={true}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -419,6 +478,7 @@ exports[`renders unchecked 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
+      false,
       false,
       undefined,
     ]
@@ -483,8 +543,11 @@ exports[`renders unchecked 1`] = `
         }
       }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -496,6 +559,7 @@ exports[`renders unchecked 1`] = `
           Object {
             "overflow": "hidden",
           },
+          false,
           Object {
             "borderRadius": 18,
             "padding": 6,
@@ -519,16 +583,32 @@ exports[`renders unchecked 1`] = `
           style={
             Array [
               Object {
-                "backgroundColor": "transparent",
-              },
-              Object {
                 "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
+              Array [
+                Object {
+                  "lineHeight": 24,
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
             ]
           }
         >
-          □
+          󰄬
         </Text>
       </View>
     </View>

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {
-  Text as NativeText,
-  TextStyle,
+  I18nManager,
   StyleProp,
   StyleSheet,
-  I18nManager,
+  Text as NativeText,
+  TextStyle,
 } from 'react-native';
 
-import { useTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import { Font, MD3TypescaleKey, ThemeProp } from '../../types';
 
 export type Props = React.ComponentProps<typeof NativeText> & {
@@ -83,7 +83,7 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
 ) => {
   const root = React.useRef<NativeText | null>(null);
   // FIXME: destructure it in TS 4.6+
-  const theme = useTheme(initialTheme);
+  const theme = useInternalTheme(initialTheme);
   const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
 
   React.useImperativeHandle(ref, () => ({
@@ -128,7 +128,7 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
       />
     );
   } else {
-    const font = !theme.isV3 ? theme.fonts?.regular : {};
+    const font = theme.isV3 ? theme.fonts.default : theme.fonts?.regular;
     const textStyle = {
       ...font,
       color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,

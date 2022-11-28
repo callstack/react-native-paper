@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-import { useTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -38,7 +38,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const CardActions = (props: Props) => {
-  const { isV3 } = useTheme();
+  const { isV3 } = useInternalTheme();
   const justifyContent = isV3 ? 'flex-end' : 'flex-start';
 
   return (
@@ -48,7 +48,7 @@ const CardActions = (props: Props) => {
     >
       {React.Children.map(props.children, (child, i) => {
         return React.isValidElement(child)
-          ? React.cloneElement(child, {
+          ? React.cloneElement(child as React.ReactElement<any>, {
               compact: !isV3 && child.props.compact !== false,
               mode:
                 child.props.mode ||

@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import {
-  Paragraph,
-  Text,
   Checkbox,
   MD2Colors,
   MD3Colors,
+  Paragraph,
+  Text,
   TouchableRipple,
-  useTheme,
 } from 'react-native-paper';
 
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const CheckboxExample = () => {
@@ -18,7 +18,7 @@ const CheckboxExample = () => {
   const [checkedCustom, setCheckedCustom] = React.useState<boolean>(true);
   const [indeterminate, setIndeterminate] = React.useState<boolean>(true);
 
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
   const TextComponent = isV3 ? Text : Paragraph;
 
   return (

@@ -188,13 +188,13 @@ it('renders label with correct color when active', () => {
       placeholder="Type something"
       value={'Some test value'}
       onChangeText={(text) => this.setState({ text })}
-      testID={'text-input'}
+      testID={'text-input-flat'}
     />
   );
 
   fireEvent(getByTestId('text-input-flat'), 'focus');
 
-  expect(getByTestId('text-input-label-active')).toHaveStyle({
+  expect(getByTestId('text-input-flat-label-active')).toHaveStyle({
     color: getTheme().colors.primary,
   });
 });
@@ -220,7 +220,7 @@ it('renders input placeholder initially with an empty space character', () => {
     <TextInput multiline label="Multiline input" testID={'text-input'} />
   );
 
-  expect(getByTestId('text-input-flat').props.placeholder).toBe(' ');
+  expect(getByTestId('text-input').props.placeholder).toBe(' ');
 });
 
 it('correctly applies padding offset to input label on Android when RTL', () => {
@@ -271,20 +271,40 @@ it('correctly applies padding offset to input label on Android when LTR', () => 
     paddingRight: 56,
   });
 });
+
 ['outlined', 'flat'].forEach((mode) =>
-  it('renders input with correct line height', () => {
+  it(`renders ${mode} input with correct line height`, () => {
     const input = render(
       <TextInput
         mode={mode}
         multiline
         label="Flat input"
-        testID={'text-input'}
+        testID={`text-input-${mode}`}
         style={style.lineHeight}
       />
     );
 
     expect(input.getByTestId(`text-input-${mode}`)).toHaveStyle({
       lineHeight: 22,
+    });
+  })
+);
+
+['outlined', 'flat'].forEach((mode) =>
+  it(`renders ${mode} input with passed textColor`, () => {
+    const input = render(
+      <TextInput
+        mode={mode}
+        multiline
+        label="Flat input"
+        testID={`text-input-${mode}`}
+        style={style.lineHeight}
+        textColor={'purple'}
+      />
+    );
+
+    expect(input.getByTestId(`text-input-${mode}`)).toHaveStyle({
+      color: 'purple',
     });
   })
 );
@@ -408,6 +428,26 @@ describe('getFlatInputColor - underline color', () => {
 });
 
 describe('getFlatInputColor - input text color', () => {
+  it('should return custom color, if not disabled, no matter what the theme is', () => {
+    expect(
+      getOutlinedInputColors({
+        textColor: 'beige',
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      inputTextColor: 'beige',
+    });
+
+    expect(
+      getOutlinedInputColors({
+        textColor: 'beige',
+        theme: getTheme(false, false),
+      })
+    ).toMatchObject({
+      inputTextColor: 'beige',
+    });
+  });
+
   it('should return correct disabled color, for theme version 3', () => {
     expect(
       getFlatInputColors({
@@ -653,7 +693,7 @@ describe('getFlatInputColor - active color', () => {
     expect(
       getFlatInputColors({
         activeUnderlineColor: 'beige',
-        theme: getTheme(false, true),
+        theme: getTheme(false, false),
       })
     ).toMatchObject({
       activeColor: 'beige',
@@ -740,7 +780,7 @@ describe('getOutlinedInputColors - outline color', () => {
     expect(
       getOutlinedInputColors({
         customOutlineColor: 'beige',
-        theme: getTheme(),
+        theme: getTheme(false, false),
       })
     ).toMatchObject({
       outlineColor: 'beige',
@@ -940,7 +980,7 @@ describe('getOutlinedInputColors - active color', () => {
     expect(
       getOutlinedInputColors({
         activeOutlineColor: 'beige',
-        theme: getTheme(false, true),
+        theme: getTheme(false, false),
       })
     ).toMatchObject({
       activeColor: 'beige',
@@ -964,6 +1004,36 @@ describe('getOutlinedInputColors - active color', () => {
       })
     ).toMatchObject({
       activeColor: getTheme(false, true).colors.primary,
+    });
+  });
+});
+
+describe('outlineStyle - underlineStyle', () => {
+  it('correctly applies outline style', () => {
+    const { getByTestId } = render(
+      <TextInput
+        mode="outlined"
+        outlineStyle={{ borderRadius: 16, borderWidth: 6 }}
+      />
+    );
+
+    expect(getByTestId('text-input-outline')).toHaveStyle({
+      borderRadius: 16,
+      borderWidth: 6,
+    });
+  });
+
+  it('correctly applies underline style', () => {
+    const { getByTestId } = render(
+      <TextInput
+        mode="flat"
+        underlineStyle={{ borderRadius: 16, borderWidth: 6 }}
+      />
+    );
+
+    expect(getByTestId('text-input-underline')).toHaveStyle({
+      borderRadius: 16,
+      borderWidth: 6,
     });
   });
 });

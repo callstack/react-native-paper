@@ -3,8 +3,14 @@
 
 ### Motivation
 
-<!-- What existing problem does the pull request solve? Can you solve the issue with a different approach? -->
+<!-- Explain the **motivation** for making this change. What existing problem does the pull request solve? -->
+
+### Related issue
+
+<!-- If this pull request addresses an existing issue, link to the issue. If an issue is not present, describe the issue here. -->
 
 ### Test plan
 
-<!-- List the steps with which we can test this change. Provide screenshots if this changes anything visual. -->
+<!-- Describe the **steps to test this change**, so that a reviewer can verify it. Provide screenshots or videos if the change affects UI. -->
+
+<!-- Keep in mind that PR changes must pass lint, typescript and tests. -->

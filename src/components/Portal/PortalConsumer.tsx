@@ -8,11 +8,8 @@ type Props = {
 };
 
 export default class PortalConsumer extends React.Component<Props> {
-  async componentDidMount() {
+  componentDidMount() {
     this.checkManager();
-
-    // Delay updating to prevent React from going to infinite loop
-    await Promise.resolve();
 
     this.key = this.props.manager.mount(this.props.children);
   }

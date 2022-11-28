@@ -1,16 +1,16 @@
 import * as React from 'react';
 import {
-  View,
-  ViewStyle,
-  StyleSheet,
   StyleProp,
+  StyleSheet,
   TextStyle,
   useWindowDimensions,
+  View,
+  ViewStyle,
 } from 'react-native';
 
-import { withTheme } from '../../core/theming';
+import { withInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 import getContrastingColor from '../../utils/getContrastingColor';
 import Text from '../Typography/Text';
 
@@ -40,7 +40,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 /**
@@ -123,4 +123,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(AvatarText);
+export default withInternalTheme(AvatarText);

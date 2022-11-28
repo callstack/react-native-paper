@@ -20,22 +20,39 @@ exports[`renders avatar with icon 1`] = `
 >
   <Text
     accessibilityElementsHidden={true}
+    allowFontScaling={false}
     importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     selectable={false}
     style={
       Array [
         Object {
-          "backgroundColor": "transparent",
-        },
-        Object {
           "color": "#ffffff",
           "fontSize": 38.4,
         },
+        Array [
+          Object {
+            "lineHeight": 38.4,
+            "transform": Array [
+              Object {
+                "scaleX": 1,
+              },
+            ],
+          },
+          Object {
+            "backgroundColor": "transparent",
+          },
+        ],
+        Object {
+          "fontFamily": "Material Design Icons",
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+        },
+        Object {},
       ]
     }
   >
-    □
+    󰋼
   </Text>
 </View>
 `;
@@ -60,22 +77,39 @@ exports[`renders avatar with icon and custom background color 1`] = `
 >
   <Text
     accessibilityElementsHidden={true}
+    allowFontScaling={false}
     importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     selectable={false}
     style={
       Array [
         Object {
-          "backgroundColor": "transparent",
-        },
-        Object {
           "color": "#ffffff",
           "fontSize": 38.4,
         },
+        Array [
+          Object {
+            "lineHeight": 38.4,
+            "transform": Array [
+              Object {
+                "scaleX": 1,
+              },
+            ],
+          },
+          Object {
+            "backgroundColor": "transparent",
+          },
+        ],
+        Object {
+          "fontFamily": "Material Design Icons",
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+        },
+        Object {},
       ]
     }
   >
-    □
+    󰋼
   </Text>
 </View>
 `;
@@ -139,6 +173,9 @@ exports[`renders avatar with text 1`] = `
         },
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
+          "letterSpacing": 0,
         },
         Object {
           "writingDirection": "ltr",
@@ -190,6 +227,9 @@ exports[`renders avatar with text and custom background color 1`] = `
         },
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
+          "letterSpacing": 0,
         },
         Object {
           "writingDirection": "ltr",
@@ -241,6 +281,9 @@ exports[`renders avatar with text and custom colors 1`] = `
         },
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
+          "letterSpacing": 0,
         },
         Object {
           "writingDirection": "ltr",
@@ -292,6 +335,9 @@ exports[`renders avatar with text and custom size 1`] = `
         },
         Object {
           "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
+          "letterSpacing": 0,
         },
         Object {
           "writingDirection": "ltr",

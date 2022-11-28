@@ -212,6 +212,10 @@ export const typescale = {
     lineHeight: 16,
     fontSize: 12,
   },
+
+  default: {
+    ...regularType,
+  },
 };
 
 export const tokens = {

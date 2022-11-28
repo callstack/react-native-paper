@@ -1,14 +1,15 @@
 import * as React from 'react';
 import {
   Animated,
-  TextInput as NativeTextInput,
   LayoutChangeEvent,
   StyleProp,
+  TextInput as NativeTextInput,
   TextStyle,
+  ViewStyle,
 } from 'react-native';
 
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import TextInputAffix, {
   Props as TextInputAffixProps,
 } from './Adornment/TextInputAffix';
@@ -55,7 +56,7 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    */
   onChangeText?: Function;
   /**
-   * Selection color of the input
+   * Selection color of the input.
    */
   selectionColor?: string;
   /**
@@ -74,6 +75,11 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    * Active outline color of the input.
    */
   activeOutlineColor?: string;
+  /**
+   * @supported Available in v5.x
+   * Color of the text in the input.
+   */
+  textColor?: string;
   /**
    * Sets min height with densed layout. For `TextInput` in `flat` mode
    * height is `64dp` or in dense layout - `52dp` with label or `40dp` without label.
@@ -132,11 +138,25 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * testID to be used on tests.
    */
   testID?: string;
+  /**
+   * @supported Available in v5.x
+   * Pass style to override the default style of outlined wrapper.
+   * Overrides style when mode is set to `outlined`
+   * Example: `borderRadius`, `borderColor`
+   */
+  outlineStyle?: StyleProp<ViewStyle>;
+  /**
+   * @supported Available in v5.x
+   * Pass style to override the default style of underlined wrapper.
+   * Overrides style when mode is set to `flat`
+   * Example: `borderRadius`, `borderColor`
+   */
+  underlineStyle?: StyleProp<ViewStyle>;
 };
 
 interface CompoundedComponent
@@ -297,12 +317,16 @@ const TextInput = React.forwardRef<TextInputHandles, Props>(
       // We don't show placeholder if there's a label because the label acts as placeholder
       // When focused, the label moves up, so we can show a placeholder
       if (focused || !rest.label) {
-        // Set the placeholder in a delay to offset the label animation
-        // If we show it immediately, they'll overlap and look ugly
-        timer.current = setTimeout(
-          () => setPlaceholder(rest.placeholder),
-          50
-        ) as unknown as NodeJS.Timeout;
+        // If the user wants to use the contextMenu, when changing the placeholder, the contextMenu is closed
+        // This is a workaround to mitigate this behavior in scenarios where the placeholder is not specified.
+        if (rest.placeholder) {
+          // Set the placeholder in a delay to offset the label animation
+          // If we show it immediately, they'll overlap and look ugly
+          timer.current = setTimeout(
+            () => setPlaceholder(rest.placeholder),
+            50
+          ) as unknown as NodeJS.Timeout;
+        }
       } else {
         // hidePlaceholder
 
@@ -483,4 +507,4 @@ TextInput.Icon = TextInputIcon;
 // @ts-ignore Types of property 'theme' are incompatible.
 TextInput.Affix = TextInputAffix;
 
-export default withTheme(TextInput);
+export default withInternalTheme(TextInput);

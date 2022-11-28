@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-import { useTheme } from '../../../core/theming';
-import type { $Omit, Theme } from '../../../types';
+import { useInternalTheme } from '../../../core/theming';
+import type { $Omit, ThemeProp } from '../../../types';
 import type { IconSource } from '../../Icon';
 import IconButton from '../../IconButton/IconButton';
 import { ICON_SIZE } from '../constants';
@@ -33,7 +33,7 @@ export type Props = $Omit<
   /**
    * @optional
    */
-  theme?: Theme;
+  theme?: ThemeProp;
 };
 
 type StyleContextType = {
@@ -58,7 +58,7 @@ const IconAdornment: React.FunctionComponent<
     side: 'left' | 'right';
   } & Omit<StyleContextType, 'style'>
 > = ({ icon, topPosition, side, isTextInputFocused, forceFocus, testID }) => {
-  const { isV3 } = useTheme();
+  const { isV3 } = useInternalTheme();
   const { ICON_OFFSET } = getConstants(isV3);
 
   const style = {
@@ -119,7 +119,7 @@ const TextInputIcon = ({
     onPress?.();
   }, [forceTextInputFocus, forceFocus, isTextInputFocused, onPress]);
 
-  const theme = useTheme();
+  const theme = useInternalTheme();
 
   let iconColor = color;
 

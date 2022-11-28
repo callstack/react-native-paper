@@ -1,16 +1,16 @@
 import * as React from 'react';
 import {
   Animated,
+  Easing,
   SafeAreaView,
   StyleProp,
   StyleSheet,
-  ViewStyle,
   View,
-  Easing,
+  ViewStyle,
 } from 'react-native';
 
-import { withTheme } from '../core/theming';
-import type { Theme } from '../types';
+import { withInternalTheme } from '../core/theming';
+import type { InternalTheme } from '../types';
 import Button from './Button/Button';
 import Surface from './Surface';
 import Text from './Typography/Text';
@@ -54,7 +54,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 const DURATION_SHORT = 4000;
@@ -152,7 +152,7 @@ const Snackbar = ({
             duration === Number.POSITIVE_INFINITY ||
             duration === Number.NEGATIVE_INFINITY;
 
-          if (finished && !isInfinity) {
+          if (!isInfinity) {
             hideTimeout.current = setTimeout(
               onDismiss,
               duration
@@ -162,21 +162,27 @@ const Snackbar = ({
       });
     } else {
       // hide
-      if (hideTimeout.current) clearTimeout(hideTimeout.current);
+      if (hideTimeout.current) {
+        clearTimeout(hideTimeout.current);
+      }
 
       Animated.timing(opacity, {
         toValue: 0,
         duration: 100 * scale,
         useNativeDriver: true,
       }).start(({ finished }) => {
-        if (finished) setHidden(true);
+        if (finished) {
+          setHidden(true);
+        }
       });
     }
   }, [visible, duration, opacity, scale, onDismiss]);
 
   const { colors, roundness, isV3 } = theme;
 
-  if (hidden) return null;
+  if (hidden) {
+    return null;
+  }
 
   const {
     style: actionStyle,
@@ -189,6 +195,24 @@ const Snackbar = ({
   const textColor = theme.isV3
     ? theme.colors.inversePrimary
     : theme.colors.accent;
+
+  const renderChildrenWithWrapper = () => {
+    const viewStyles = [
+      styles.content,
+      { marginRight, color: colors?.surface },
+    ];
+
+    if (typeof children === 'string') {
+      return <Text style={viewStyles}>{children}</Text>;
+    }
+
+    return (
+      <View style={viewStyles}>
+        {/* View is added to allow multiple lines support for Text component as children */}
+        <View>{children}</View>
+      </View>
+    );
+  };
 
   return (
     <SafeAreaView
@@ -223,9 +247,7 @@ const Snackbar = ({
         {...(isV3 && { elevation })}
         {...rest}
       >
-        <Text style={[styles.content, { marginRight, color: colors?.surface }]}>
-          {children}
-        </Text>
+        {renderChildrenWithWrapper()}
         {action ? (
           <Button
             onPress={(event) => {
@@ -277,7 +299,6 @@ const styles = StyleSheet.create({
   content: {
     marginLeft: 16,
     marginVertical: 14,
-    flexWrap: 'wrap',
     flex: 1,
   },
   button: {
@@ -289,4 +310,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Snackbar);
+export default withInternalTheme(Snackbar);

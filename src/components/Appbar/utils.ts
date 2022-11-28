@@ -1,12 +1,13 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import color from 'color';
 
 import overlay from '../../styles/overlay';
 import { black, white } from '../../styles/themes/v2/colors';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
+import Tooltip from '../Tooltip/Tooltip';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
 import AppbarContent from './AppbarContent';
@@ -14,7 +15,7 @@ import AppbarContent from './AppbarContent';
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 
 export const getAppbarColor = (
-  theme: Theme,
+  theme: InternalTheme,
   elevation: number,
   customBackground?: ColorValue,
   elevated?: boolean
@@ -48,8 +49,8 @@ type RenderAppbarContentProps = {
   isDark: boolean;
   shouldCenterContent?: boolean;
   isV3: boolean;
-  renderOnly?: React.ReactNode[];
-  renderExcept?: React.ReactNode[];
+  renderOnly?: React.ComponentType<any>[];
+  renderExcept?: React.ComponentType<any>[];
   mode?: AppbarModes;
 };
 
@@ -80,7 +81,7 @@ export const renderAppbarContent = ({
   mode = 'small',
 }: RenderAppbarContentProps) => {
   return (
-    React.Children.toArray(children)
+    React.Children.toArray(children as React.ReactNode | React.ReactNode[])
       .filter((child) => child != null && typeof child !== 'boolean')
       .filter((child) =>
         // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
@@ -91,7 +92,7 @@ export const renderAppbarContent = ({
       .map((child, i) => {
         if (
           !React.isValidElement(child) ||
-          ![AppbarContent, AppbarAction, AppbarBackAction].includes(
+          ![AppbarContent, AppbarAction, AppbarBackAction, Tooltip].includes(
             // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
             child.type
           )

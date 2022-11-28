@@ -1,22 +1,21 @@
 import * as React from 'react';
 import {
+  GestureResponderEvent,
+  I18nManager,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
   View,
   ViewStyle,
-  StyleSheet,
-  StyleProp,
-  TextStyle,
-  I18nManager,
-  GestureResponderEvent,
 } from 'react-native';
 
-import color from 'color';
-
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import { ListAccordionGroupContext } from './ListAccordionGroup';
+import { getAccordionColors } from './utils';
 
 export type Props = {
   /**
@@ -56,7 +55,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * Style that is passed to the wrapping TouchableRipple element.
    */
@@ -169,13 +168,6 @@ const ListAccordion = ({
     }
   };
 
-  const titleColor = theme.isV3
-    ? theme.colors.onSurface
-    : color(theme.colors.text).alpha(0.87).rgb().string();
-  const descriptionColor = theme.isV3
-    ? theme.colors.onSurfaceVariant
-    : color(theme.colors.text).alpha(0.54).rgb().string();
-
   const expandedInternal = expandedProp !== undefined ? expandedProp : expanded;
 
   const groupContext = React.useContext(ListAccordionGroupContext);
@@ -187,6 +179,13 @@ const ListAccordion = ({
   const isExpanded = groupContext
     ? groupContext.expandedId === id
     : expandedInternal;
+
+  const { titleColor, descriptionColor, titleTextColor, rippleColor } =
+    getAccordionColors({
+      theme,
+      isExpanded,
+    });
+
   const handlePress =
     groupContext && id !== undefined
       ? () => groupContext.onAccordionPress(id)
@@ -198,11 +197,11 @@ const ListAccordion = ({
           style={[styles.container, style]}
           onPress={handlePress}
           onLongPress={onLongPress}
+          rippleColor={rippleColor}
           accessibilityRole="button"
           accessibilityState={{ expanded: isExpanded }}
           accessibilityLabel={accessibilityLabel}
           testID={testID}
-          delayPressIn={0}
           borderless
         >
           <View style={styles.row} pointerEvents="none">
@@ -218,7 +217,7 @@ const ListAccordion = ({
                 style={[
                   styles.title,
                   {
-                    color: isExpanded ? theme.colors?.primary : titleColor,
+                    color: titleTextColor,
                   },
                   titleStyle,
                 ]}
@@ -269,7 +268,7 @@ const ListAccordion = ({
               !child.props.left &&
               !child.props.right
             ) {
-              return React.cloneElement(child, {
+              return React.cloneElement(child as React.ReactElement<any>, {
                 style: [styles.child, child.props.style],
               });
             }
@@ -314,4 +313,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(ListAccordion);
+export default withInternalTheme(ListAccordion);

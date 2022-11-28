@@ -1,22 +1,22 @@
 import * as React from 'react';
 import {
-  View,
-  StyleSheet,
-  Platform,
   GestureResponderEvent,
+  Platform,
+  StyleSheet,
+  View,
 } from 'react-native';
 
 import type { StackNavigationProp } from '@react-navigation/stack';
 import {
-  Menu,
   Appbar,
-  Divider,
   Button,
+  Divider,
   List,
+  Menu,
   TouchableRipple,
-  useTheme,
 } from 'react-native-paper';
 
+import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 type ContextualMenuCoord = { x: number; y: number };
@@ -35,7 +35,7 @@ const MenuExample = ({ navigation }: Props) => {
   const [visible, setVisible] = React.useState<MenuVisibility>({});
   const [contextualMenuCoord, setContextualMenuCoor] =
     React.useState<ContextualMenuCoord>({ x: 0, y: 0 });
-  const { isV3 } = useTheme();
+  const { isV3 } = useExampleTheme();
 
   const _toggleMenu = (name: string) => () =>
     setVisible({ ...visible, [name]: !visible[name] });
@@ -81,66 +81,87 @@ const MenuExample = ({ navigation }: Props) => {
           <Menu.Item onPress={() => {}} title="Paste" />
         </Menu>
       </Appbar.Header>
-      <ScreenWrapper style={styles.container}>
-        <View style={styles.alignCenter}>
+      <ScreenWrapper
+        contentContainerStyle={styles.contentContainer}
+        style={styles.container}
+      >
+        <View>
+          <View style={styles.alignCenter}>
+            <Menu
+              visible={_getVisible('menu2')}
+              onDismiss={_toggleMenu('menu2')}
+              anchor={
+                <Button mode="outlined" onPress={_toggleMenu('menu2')}>
+                  Menu with icons
+                </Button>
+              }
+            >
+              <Menu.Item leadingIcon="undo" onPress={() => {}} title="Undo" />
+              <Menu.Item leadingIcon="redo" onPress={() => {}} title="Redo" />
+
+              <Divider style={isV3 && styles.md3Divider} />
+
+              <Menu.Item
+                leadingIcon="content-cut"
+                onPress={() => {}}
+                title="Cut"
+                disabled
+              />
+              <Menu.Item
+                leadingIcon="content-copy"
+                onPress={() => {}}
+                title="Copy"
+                disabled
+              />
+              <Menu.Item
+                leadingIcon="content-paste"
+                onPress={() => {}}
+                title="Paste"
+              />
+              {isV3 && (
+                <Menu.Item
+                  trailingIcon="share-variant"
+                  onPress={() => {}}
+                  title="Share"
+                />
+              )}
+            </Menu>
+          </View>
           <Menu
-            visible={_getVisible('menu2')}
-            onDismiss={_toggleMenu('menu2')}
+            visible={_getVisible('menu3')}
+            onDismiss={_toggleMenu('menu3')}
+            anchor={contextualMenuCoord}
+          >
+            <Menu.Item onPress={() => {}} title="Item 1" />
+            <Menu.Item onPress={() => {}} title="Item 2" />
+            <Divider style={isV3 && styles.md3Divider} />
+            <Menu.Item onPress={() => {}} title="Item 3" disabled />
+          </Menu>
+          <List.Section style={styles.list} title="Contextual menu">
+            <TouchableRipple onPress={() => {}} onLongPress={_handleLongPress}>
+              <List.Item
+                title="List item"
+                description="Long press me to open contextual menu"
+              />
+            </TouchableRipple>
+          </List.Section>
+        </View>
+
+        <View style={styles.bottomMenu}>
+          <Menu
+            visible={_getVisible('menu4')}
+            onDismiss={_toggleMenu('menu4')}
             anchor={
-              <Button mode="outlined" onPress={_toggleMenu('menu2')}>
-                Menu with icons
+              <Button mode="outlined" onPress={_toggleMenu('menu4')}>
+                Menu at bottom
               </Button>
             }
           >
-            <Menu.Item leadingIcon="undo" onPress={() => {}} title="Undo" />
-            <Menu.Item leadingIcon="redo" onPress={() => {}} title="Redo" />
-
-            <Divider style={isV3 && styles.md3Divider} />
-
-            <Menu.Item
-              leadingIcon="content-cut"
-              onPress={() => {}}
-              title="Cut"
-              disabled
-            />
-            <Menu.Item
-              leadingIcon="content-copy"
-              onPress={() => {}}
-              title="Copy"
-              disabled
-            />
-            <Menu.Item
-              leadingIcon="content-paste"
-              onPress={() => {}}
-              title="Paste"
-            />
-            {isV3 && (
-              <Menu.Item
-                trailingIcon="share-variant"
-                onPress={() => {}}
-                title="Share"
-              />
-            )}
+            <Menu.Item onPress={() => {}} title="Bottom Item 1" />
+            <Menu.Item onPress={() => {}} title="Bottom Item 2" />
+            <Menu.Item onPress={() => {}} title="Bottom Item 3" />
           </Menu>
         </View>
-        <Menu
-          visible={_getVisible('menu3')}
-          onDismiss={_toggleMenu('menu3')}
-          anchor={contextualMenuCoord}
-        >
-          <Menu.Item onPress={() => {}} title="Item 1" />
-          <Menu.Item onPress={() => {}} title="Item 2" />
-          <Divider style={isV3 && styles.md3Divider} />
-          <Menu.Item onPress={() => {}} title="Item 3" disabled />
-        </Menu>
-        <List.Section style={styles.list} title="Contextual menu">
-          <TouchableRipple onPress={() => {}} onLongPress={_handleLongPress}>
-            <List.Item
-              title="List item"
-              description="Long press me to open contextual menu"
-            />
-          </TouchableRipple>
-        </List.Section>
       </ScreenWrapper>
     </View>
   );
@@ -163,6 +184,11 @@ const styles = StyleSheet.create({
   },
   md3Divider: {
     marginVertical: 8,
+  },
+  bottomMenu: { width: '40%' },
+  contentContainer: {
+    justifyContent: 'space-between',
+    flex: 1,
   },
 });
 

@@ -13,6 +13,7 @@
     "prepare": "patch-package"
   },
   "dependencies": {
+    "@material/material-color-utilities": "^0.2.0",
     "color": "^3.1.2",
     "component-docs": "^0.23.0",
     "linaria": "^1.2.4",

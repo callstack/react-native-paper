@@ -1,28 +1,25 @@
 import * as React from 'react';
 import {
-  TouchableWithoutFeedback,
-  View,
-  ViewStyle,
-  StyleSheet,
-  StyleProp,
   GestureResponderEvent,
   Platform,
+  Pressable,
+  StyleProp,
+  StyleSheet,
+  ViewStyle,
 } from 'react-native';
 
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import { getTouchableRippleColors } from './utils';
 
-export type Props = React.ComponentPropsWithRef<
-  typeof TouchableWithoutFeedback
-> & {
+export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
   /**
    * Whether to render the ripple outside the view bounds.
    */
   borderless?: boolean;
   /**
    * Type of background drawabale to display the feedback (Android).
-   * https://reactnative.dev/docs/touchablenativefeedback#background
+   * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: Object;
   /**
@@ -57,7 +54,7 @@ export type Props = React.ComponentPropsWithRef<
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 /**
@@ -89,7 +86,7 @@ export type Props = React.ComponentPropsWithRef<
  * export default MyComponent;
  * ```
  *
- * @extends TouchableWithoutFeedback props https://reactnative.dev/docs/touchablewithoutfeedback#props
+ * @extends Pressable props https://reactnative.dev/docs/Pressable#props
  */
 const TouchableRipple = ({
   style,
@@ -233,16 +230,15 @@ const TouchableRipple = ({
   const disabled = disabledProp || !rest.onPress;
 
   return (
-    <TouchableWithoutFeedback
+    <Pressable
       {...rest}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
       disabled={disabled}
+      style={[styles.touchable, borderless && styles.borderless, style]}
     >
-      <View style={[styles.touchable, borderless && styles.borderless, style]}>
-        {React.Children.only(children)}
-      </View>
-    </TouchableWithoutFeedback>
+      {React.Children.only(children)}
+    </Pressable>
   );
 };
 
@@ -261,4 +257,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(TouchableRipple);
+export default withInternalTheme(TouchableRipple);

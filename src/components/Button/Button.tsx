@@ -1,18 +1,18 @@
 import * as React from 'react';
 import {
   Animated,
-  View,
-  ViewStyle,
-  StyleSheet,
   StyleProp,
+  StyleSheet,
   TextStyle,
   GestureResponderEvent,
+  View,
+  ViewStyle,
 } from 'react-native';
 
 import color from 'color';
 
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
@@ -114,7 +114,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * testID to be used on tests.
    */
@@ -298,7 +298,6 @@ const Button = ({
     >
       <TouchableRipple
         borderless
-        delayPressIn={0}
         onPress={onPress}
         onLongPress={onLongPress}
         onPressIn={handlePressIn}
@@ -428,4 +427,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(Button);
+export default withInternalTheme(Button);

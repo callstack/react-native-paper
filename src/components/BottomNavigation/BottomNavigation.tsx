@@ -1,23 +1,23 @@
 import * as React from 'react';
 import {
-  View,
   Animated,
+  EasingFunction,
+  Platform,
+  StyleProp,
+  StyleSheet,
   TouchableWithoutFeedback,
   TouchableWithoutFeedbackProps,
-  StyleSheet,
-  StyleProp,
-  Platform,
+  View,
   ViewStyle,
-  EasingFunction,
 } from 'react-native';
 
 import color from 'color';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 
-import { withTheme } from '../../core/theming';
+import { withInternalTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
 import { black, white } from '../../styles/themes/v2/colors';
-import type { Theme } from '../../types';
+import type { InternalTheme } from '../../types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
@@ -38,6 +38,7 @@ type Route = {
   color?: string;
   accessibilityLabel?: string;
   testID?: string;
+  lazy?: boolean;
 };
 
 type NavigationState = {
@@ -65,6 +66,7 @@ export type Props = {
    *
    * By default, this is `false` with theme version 3 and `true` when you have more than 3 tabs.
    * Pass `shifting={false}` to explicitly disable this animation, or `shifting={true}` to always use this animation.
+   * Note that you need at least 2 tabs be able to run this animation.
    */
   shifting?: boolean;
   /**
@@ -176,18 +178,10 @@ export type Props = {
    */
   renderTouchable?: (props: TouchableProps) => React.ReactNode;
   /**
-   * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
-   */
-  getLabelText?: (props: { route: Route }) => string | undefined;
-  /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
    * Uses `route.accessibilityLabel` by default.
    */
   getAccessibilityLabel?: (props: { route: Route }) => string | undefined;
-  /**
-   * Get the id to locate this tab button in tests, uses `route.testID` by default.
-   */
-  getTestID?: (props: { route: Route }) => string | undefined;
   /**
    * Get badge for the tab, uses `route.badge` by default.
    */
@@ -196,6 +190,19 @@ export type Props = {
    * Get color for the tab, uses `route.color` by default.
    */
   getColor?: (props: { route: Route }) => string | undefined;
+  /**
+   * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
+   */
+  getLabelText?: (props: { route: Route }) => string | undefined;
+  /**
+   * @supported Available in v5.x
+   * Get lazy for the current screen. Uses true by default.
+   */
+  getLazy?: (props: { route: Route }) => boolean | undefined;
+  /**
+   * Get the id to locate this tab button in tests, uses `route.testID` by default.
+   */
+  getTestID?: (props: { route: Route }) => string | undefined;
   /**
    * Function to execute on tab press. It receives the route for the pressed tab, useful for things like scroll to top.
    */
@@ -256,7 +263,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * TestID used for testing purposes
    */
@@ -308,7 +315,7 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  * For integration with React Navigation, you can use [react-navigation-material-bottom-tabs](https://github.com/react-navigation/react-navigation/tree/main/packages/material-bottom-tabs) and consult [createMaterialBottomTabNavigator](https://reactnavigation.org/docs/material-bottom-tab-navigator/) documentation.
  *
  * By default Bottom navigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
- * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more information.
+ * See [Dark InternalTheme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more information.
  *
  * <div class="screenshots">
  *   <img class="small" src="screenshots/bottom-navigation.gif" />
@@ -384,8 +391,17 @@ const BottomNavigation = ({
   labelMaxFontSizeMultiplier = 1,
   compact = !theme.isV3,
   testID = 'bottom-navigation',
+  getLazy = ({ route }: { route: Route }) => route.lazy,
 }: Props) => {
   const { scale } = theme.animation;
+
+  if (shifting && navigationState.routes.length < 2) {
+    shifting = false;
+
+    console.warn(
+      'BottomNavigation needs at least 2 tabs to run shifting animation'
+    );
+  }
 
   const focusedKey = navigationState.routes[navigationState.index].key;
 
@@ -609,14 +625,16 @@ const BottomNavigation = ({
     ? overlay(elevation, colors?.surface)
     : colors?.primary;
 
-  const v2BackgroundColorInterpolation = indexAnim.interpolate({
-    inputRange: routes.map((_, i) => i),
-    // FIXME: does outputRange support ColorValue or just strings?
-    // @ts-expect-error
-    outputRange: routes.map(
-      (route) => getColor({ route }) || approxBackgroundColor
-    ),
-  });
+  const v2BackgroundColorInterpolation = shifting
+    ? indexAnim.interpolate({
+        inputRange: routes.map((_, i) => i),
+        // FIXME: does outputRange support ColorValue or just strings?
+        // @ts-expect-error
+        outputRange: routes.map(
+          (route) => getColor({ route }) || approxBackgroundColor
+        ),
+      })
+    : approxBackgroundColor;
 
   const backgroundColor = isV3
     ? customBackground || theme.colors.elevation.level2
@@ -668,7 +686,7 @@ const BottomNavigation = ({
     <View style={[styles.container, style]} testID={testID}>
       <View style={[styles.content, { backgroundColor: colors?.background }]}>
         {routes.map((route, index) => {
-          if (!loaded.includes(route.key)) {
+          if (getLazy({ route }) !== false && !loaded.includes(route.key)) {
             // Don't render a screen if we've never navigated to it
             return null;
           }
@@ -722,6 +740,10 @@ const BottomNavigation = ({
               }
             >
               <Animated.View
+                {...(Platform.OS === 'android' && {
+                  needsOffscreenAlphaCompositing: sceneAnimationEnabled,
+                })}
+                renderToHardwareTextureAndroid={sceneAnimationEnabled}
                 style={[
                   styles.content,
                   {
@@ -1110,7 +1132,7 @@ BottomNavigation.SceneMap = (scenes: {
   );
 };
 
-export default withTheme(BottomNavigation);
+export default withInternalTheme(BottomNavigation);
 
 const styles = StyleSheet.create({
   container: {

@@ -7,8 +7,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { withTheme } from '../../core/theming';
-import type { MD3TypescaleKey, Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme, MD3TypescaleKey } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import Checkbox from './Checkbox';
@@ -72,7 +72,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
   /**
    * testID to be used on tests.
    */
@@ -182,10 +182,10 @@ const CheckboxItem = ({
 
 CheckboxItem.displayName = 'Checkbox.Item';
 
-export default withTheme(CheckboxItem);
+export default withInternalTheme(CheckboxItem);
 
 // @component-docs ignore-next-line
-const CheckboxItemWithTheme = withTheme(CheckboxItem);
+const CheckboxItemWithTheme = withInternalTheme(CheckboxItem);
 // @component-docs ignore-next-line
 export { CheckboxItemWithTheme as CheckboxItem };
 

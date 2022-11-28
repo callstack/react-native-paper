@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp, TextStyle } from 'react-native';
+import { StyleProp, StyleSheet, TextStyle } from 'react-native';
 
-import { withTheme } from '../../core/theming';
-import type { Theme } from '../../types';
+import { withInternalTheme } from '../../core/theming';
+import type { InternalTheme } from '../../types';
 import Text from '../Typography/Text';
 import Title from '../Typography/v2/Title';
 
@@ -15,7 +15,7 @@ export type Props = React.ComponentPropsWithRef<typeof Title> & {
   /**
    * @optional
    */
-  theme: Theme;
+  theme: InternalTheme;
 };
 
 /**
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withTheme(DialogTitle);
+export default withInternalTheme(DialogTitle);
 
 // @component-docs ignore-next-line
 export { DialogTitle };

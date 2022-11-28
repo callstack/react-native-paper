@@ -1,22 +1,21 @@
 import * as React from 'react';
-import { View, StyleSheet, I18nManager } from 'react-native';
+import { I18nManager, StyleSheet, View } from 'react-native';
 
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import * as Updates from 'expo-updates';
 import {
   Badge,
   Drawer,
+  MD2Colors,
+  MD3Colors,
   Switch,
   Text,
   TouchableRipple,
-  MD2Colors,
-  useTheme,
-  MD3Colors,
 } from 'react-native-paper';
 
 import { isWeb } from '../utils';
 
-import { PreferencesContext } from './';
+import { PreferencesContext, useExampleTheme } from './';
 
 type Props = {
   toggleTheme: () => void;
@@ -97,7 +96,7 @@ const DrawerItems = ({
 
   const _setDrawerItem = (index: number) => setDrawerItemIndex(index);
 
-  const { colors, isV3 } = useTheme();
+  const { isV3, colors } = useExampleTheme();
 
   const _handleToggleRTL = () => {
     toggleRTL();
@@ -178,7 +177,7 @@ const DrawerItems = ({
 
             <TouchableRipple onPress={toggleThemeVersion}>
               <View style={[styles.preference, isV3 && styles.v3Preference]}>
-                <Text variant="labelLarge">Switch back to Material 2</Text>
+                <Text variant="labelLarge">MD 2</Text>
                 <View pointerEvents="none">
                   <Switch value={!isV3} />
                 </View>

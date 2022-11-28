@@ -97,6 +97,7 @@ exports[`activity indicator snapshot test 1`] = `
             }
           >
             <View
+              accessibilityComponentType="button"
               accessibilityLabel="search"
               accessibilityRole="button"
               accessibilityState={
@@ -104,8 +105,11 @@ exports[`activity indicator snapshot test 1`] = `
                   "disabled": true,
                 }
               }
+              accessibilityTraits="button"
               accessible={true}
-              focusable={false}
+              centered={true}
+              collapsable={false}
+              focusable={true}
               hitSlop={
                 Object {
                   "bottom": 6,
@@ -114,7 +118,9 @@ exports[`activity indicator snapshot test 1`] = `
                   "top": 6,
                 }
               }
+              onBlur={[Function]}
               onClick={[Function]}
+              onFocus={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -126,6 +132,7 @@ exports[`activity indicator snapshot test 1`] = `
                   Object {
                     "overflow": "hidden",
                   },
+                  false,
                   Object {
                     "alignItems": "center",
                     "flexGrow": 1,
@@ -136,22 +143,39 @@ exports[`activity indicator snapshot test 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
+                allowFontScaling={false}
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 selectable={false}
                 style={
                   Array [
                     Object {
-                      "backgroundColor": "transparent",
-                    },
-                    Object {
                       "color": "rgba(28, 27, 31, 0.54)",
                       "fontSize": 24,
                     },
+                    Array [
+                      Object {
+                        "lineHeight": 24,
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
+                    Object {
+                      "fontFamily": "Material Design Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    Object {},
                   ]
                 }
               >
-                □
+                󰍉
               </Text>
             </View>
           </View>
@@ -483,6 +507,7 @@ exports[`renders with placeholder 1`] = `
             }
           >
             <View
+              accessibilityComponentType="button"
               accessibilityLabel="search"
               accessibilityRole="button"
               accessibilityState={
@@ -490,8 +515,11 @@ exports[`renders with placeholder 1`] = `
                   "disabled": true,
                 }
               }
+              accessibilityTraits="button"
               accessible={true}
-              focusable={false}
+              centered={true}
+              collapsable={false}
+              focusable={true}
               hitSlop={
                 Object {
                   "bottom": 6,
@@ -500,7 +528,9 @@ exports[`renders with placeholder 1`] = `
                   "top": 6,
                 }
               }
+              onBlur={[Function]}
               onClick={[Function]}
+              onFocus={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -512,6 +542,7 @@ exports[`renders with placeholder 1`] = `
                   Object {
                     "overflow": "hidden",
                   },
+                  false,
                   Object {
                     "alignItems": "center",
                     "flexGrow": 1,
@@ -522,22 +553,39 @@ exports[`renders with placeholder 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
+                allowFontScaling={false}
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 selectable={false}
                 style={
                   Array [
                     Object {
-                      "backgroundColor": "transparent",
-                    },
-                    Object {
                       "color": "rgba(28, 27, 31, 0.54)",
                       "fontSize": 24,
                     },
+                    Array [
+                      Object {
+                        "lineHeight": 24,
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
+                    Object {
+                      "fontFamily": "Material Design Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    Object {},
                   ]
                 }
               >
-                □
+                󰍉
               </Text>
             </View>
           </View>
@@ -624,6 +672,7 @@ exports[`renders with placeholder 1`] = `
               }
             >
               <View
+                accessibilityComponentType="button"
                 accessibilityLabel="clear"
                 accessibilityRole="button"
                 accessibilityState={
@@ -631,7 +680,10 @@ exports[`renders with placeholder 1`] = `
                     "disabled": false,
                   }
                 }
+                accessibilityTraits="button"
                 accessible={true}
+                centered={true}
+                collapsable={false}
                 focusable={true}
                 hitSlop={
                   Object {
@@ -641,7 +693,9 @@ exports[`renders with placeholder 1`] = `
                     "top": 6,
                   }
                 }
+                onBlur={[Function]}
                 onClick={[Function]}
+                onFocus={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -653,6 +707,7 @@ exports[`renders with placeholder 1`] = `
                     Object {
                       "overflow": "hidden",
                     },
+                    false,
                     Object {
                       "alignItems": "center",
                       "flexGrow": 1,
@@ -663,22 +718,39 @@ exports[`renders with placeholder 1`] = `
               >
                 <Text
                   accessibilityElementsHidden={true}
+                  allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
                   selectable={false}
                   style={
                     Array [
                       Object {
-                        "backgroundColor": "transparent",
-                      },
-                      Object {
                         "color": "rgba(255, 255, 255, 0)",
                         "fontSize": 24,
                       },
+                      Array [
+                        Object {
+                          "lineHeight": 24,
+                          "transform": Array [
+                            Object {
+                              "scaleX": 1,
+                            },
+                          ],
+                        },
+                        Object {
+                          "backgroundColor": "transparent",
+                        },
+                      ],
+                      Object {
+                        "fontFamily": "Material Design Icons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                      Object {},
                     ]
                   }
                 >
-                  □
+                  󰅖
                 </Text>
               </View>
             </View>
@@ -787,6 +859,7 @@ exports[`renders with text 1`] = `
             }
           >
             <View
+              accessibilityComponentType="button"
               accessibilityLabel="search"
               accessibilityRole="button"
               accessibilityState={
@@ -794,8 +867,11 @@ exports[`renders with text 1`] = `
                   "disabled": true,
                 }
               }
+              accessibilityTraits="button"
               accessible={true}
-              focusable={false}
+              centered={true}
+              collapsable={false}
+              focusable={true}
               hitSlop={
                 Object {
                   "bottom": 6,
@@ -804,7 +880,9 @@ exports[`renders with text 1`] = `
                   "top": 6,
                 }
               }
+              onBlur={[Function]}
               onClick={[Function]}
+              onFocus={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -816,6 +894,7 @@ exports[`renders with text 1`] = `
                   Object {
                     "overflow": "hidden",
                   },
+                  false,
                   Object {
                     "alignItems": "center",
                     "flexGrow": 1,
@@ -826,22 +905,39 @@ exports[`renders with text 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
+                allowFontScaling={false}
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 selectable={false}
                 style={
                   Array [
                     Object {
-                      "backgroundColor": "transparent",
-                    },
-                    Object {
                       "color": "rgba(28, 27, 31, 0.54)",
                       "fontSize": 24,
                     },
+                    Array [
+                      Object {
+                        "lineHeight": 24,
+                        "transform": Array [
+                          Object {
+                            "scaleX": 1,
+                          },
+                        ],
+                      },
+                      Object {
+                        "backgroundColor": "transparent",
+                      },
+                    ],
+                    Object {
+                      "fontFamily": "Material Design Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    Object {},
                   ]
                 }
               >
-                □
+                󰍉
               </Text>
             </View>
           </View>
@@ -929,6 +1025,7 @@ exports[`renders with text 1`] = `
               }
             >
               <View
+                accessibilityComponentType="button"
                 accessibilityLabel="clear"
                 accessibilityRole="button"
                 accessibilityState={
@@ -936,7 +1033,10 @@ exports[`renders with text 1`] = `
                     "disabled": false,
                   }
                 }
+                accessibilityTraits="button"
                 accessible={true}
+                centered={true}
+                collapsable={false}
                 focusable={true}
                 hitSlop={
                   Object {
@@ -946,7 +1046,9 @@ exports[`renders with text 1`] = `
                     "top": 6,
                   }
                 }
+                onBlur={[Function]}
                 onClick={[Function]}
+                onFocus={[Function]}
                 onResponderGrant={[Function]}
                 onResponderMove={[Function]}
                 onResponderRelease={[Function]}
@@ -958,6 +1060,7 @@ exports[`renders with text 1`] = `
                     Object {
                       "overflow": "hidden",
                     },
+                    false,
                     Object {
                       "alignItems": "center",
                       "flexGrow": 1,
@@ -968,22 +1071,39 @@ exports[`renders with text 1`] = `
               >
                 <Text
                   accessibilityElementsHidden={true}
+                  allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
                   selectable={false}
                   style={
                     Array [
                       Object {
-                        "backgroundColor": "transparent",
-                      },
-                      Object {
                         "color": "rgba(28, 27, 31, 0.54)",
                         "fontSize": 24,
                       },
+                      Array [
+                        Object {
+                          "lineHeight": 24,
+                          "transform": Array [
+                            Object {
+                              "scaleX": 1,
+                            },
+                          ],
+                        },
+                        Object {
+                          "backgroundColor": "transparent",
+                        },
+                      ],
+                      Object {
+                        "fontFamily": "Material Design Icons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                      Object {},
                     ]
                   }
                 >
-                  □
+                  󰅖
                 </Text>
               </View>
             </View>

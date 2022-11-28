@@ -45,8 +45,11 @@ exports[`renders checked segmented button with selected check 1`] = `
         }
       }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -58,6 +61,7 @@ exports[`renders checked segmented button with selected check 1`] = `
           Object {
             "overflow": "hidden",
           },
+          false,
           Object {
             "borderBottomRightRadius": 0,
             "borderRadius": 20,
@@ -99,22 +103,39 @@ exports[`renders checked segmented button with selected check 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
+            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
             style={
               Array [
                 Object {
-                  "backgroundColor": "transparent",
-                },
-                Object {
                   "color": "rgba(28, 27, 31, 1)",
                   "fontSize": 18,
                 },
+                Array [
+                  Object {
+                    "lineHeight": 18,
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
               ]
             }
           >
-            □
+            󰄬
           </Text>
         </View>
         <Text
@@ -186,8 +207,11 @@ exports[`renders checked segmented button with selected check 1`] = `
         }
       }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -199,6 +223,7 @@ exports[`renders checked segmented button with selected check 1`] = `
           Object {
             "overflow": "hidden",
           },
+          false,
           Object {
             "borderBottomLeftRadius": 0,
             "borderRadius": 20,
@@ -317,8 +342,11 @@ exports[`renders disabled segmented button 1`] = `
         }
       }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -330,6 +358,7 @@ exports[`renders disabled segmented button 1`] = `
           Object {
             "overflow": "hidden",
           },
+          false,
           Object {
             "borderBottomRightRadius": 0,
             "borderRadius": 20,
@@ -432,8 +461,11 @@ exports[`renders disabled segmented button 1`] = `
         }
       }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -445,6 +477,7 @@ exports[`renders disabled segmented button 1`] = `
           Object {
             "overflow": "hidden",
           },
+          false,
           Object {
             "borderBottomLeftRadius": 0,
             "borderRadius": 20,
@@ -561,8 +594,11 @@ exports[`renders segmented button 1`] = `
         }
       }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -574,6 +610,7 @@ exports[`renders segmented button 1`] = `
           Object {
             "overflow": "hidden",
           },
+          false,
           Object {
             "borderBottomRightRadius": 0,
             "borderRadius": 20,
@@ -676,8 +713,11 @@ exports[`renders segmented button 1`] = `
         }
       }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -689,6 +729,7 @@ exports[`renders segmented button 1`] = `
           Object {
             "overflow": "hidden",
           },
+          false,
           Object {
             "borderBottomLeftRadius": 0,
             "borderRadius": 20,

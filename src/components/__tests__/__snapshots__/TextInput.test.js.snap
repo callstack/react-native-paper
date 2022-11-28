@@ -31,6 +31,7 @@ exports[`correctly applies a component as the text label 1`] = `
         "zIndex": 1,
       }
     }
+    testID="text-input-underline"
   />
   <View
     style={
@@ -99,7 +100,7 @@ exports[`correctly applies a component as the text label 1`] = `
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-active"
+        testID="text-input-flat-label-active"
       >
         <Text
           style={
@@ -144,7 +145,7 @@ exports[`correctly applies a component as the text label 1`] = `
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-inactive"
+        testID="text-input-flat-label-inactive"
       >
         <Text
           style={
@@ -239,6 +240,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
         "zIndex": 1,
       }
     }
+    testID="text-input-underline"
   />
   <View
     style={
@@ -307,7 +309,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-active"
+        testID="text-input-flat-label-active"
       >
         Flat input
       </Text>
@@ -344,7 +346,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-inactive"
+        testID="text-input-flat-label-inactive"
       >
         Flat input
       </Text>
@@ -421,6 +423,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           "borderRadius": 4,
           "borderWidth": 1,
         },
+        undefined,
       ]
     }
     testID="text-input-outline"
@@ -554,7 +557,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "writingDirection": "ltr",
             }
           }
-          testID="text-input-label-active"
+          testID="text-input-outlined-label-active"
         >
           Outline Input
         </Text>
@@ -590,7 +593,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "writingDirection": "ltr",
             }
           }
-          testID="text-input-label-inactive"
+          testID="text-input-outlined-label-inactive"
         >
           Outline Input
         </Text>
@@ -676,6 +679,7 @@ exports[`correctly applies textAlign center 1`] = `
         "zIndex": 1,
       }
     }
+    testID="text-input-underline"
   />
   <View
     style={
@@ -744,7 +748,7 @@ exports[`correctly applies textAlign center 1`] = `
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-active"
+        testID="text-input-flat-label-active"
       >
         Flat input
       </Text>
@@ -781,7 +785,7 @@ exports[`correctly applies textAlign center 1`] = `
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-inactive"
+        testID="text-input-flat-label-inactive"
       >
         Flat input
       </Text>
@@ -868,6 +872,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
         "zIndex": 1,
       }
     }
+    testID="text-input-underline"
   />
   <View
     style={
@@ -936,7 +941,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-active"
+        testID="text-input-flat-label-active"
       >
         Flat input
       </Text>
@@ -973,7 +978,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-inactive"
+        testID="text-input-flat-label-inactive"
       >
         Flat input
       </Text>
@@ -1135,13 +1140,17 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
           }
         >
           <View
+            accessibilityComponentType="button"
             accessibilityRole="button"
             accessibilityState={
               Object {
                 "disabled": false,
               }
             }
+            accessibilityTraits="button"
             accessible={true}
+            centered={true}
+            collapsable={false}
             focusable={true}
             hitSlop={
               Object {
@@ -1151,7 +1160,9 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
                 "top": 6,
               }
             }
+            onBlur={[Function]}
             onClick={[Function]}
+            onFocus={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -1163,6 +1174,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
                 Object {
                   "overflow": "hidden",
                 },
+                false,
                 Object {
                   "alignItems": "center",
                   "flexGrow": 1,
@@ -1174,22 +1186,39 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
           >
             <Text
               accessibilityElementsHidden={true}
+              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
               style={
                 Array [
                   Object {
-                    "backgroundColor": "transparent",
-                  },
-                  Object {
                     "color": "rgba(73, 69, 79, 1)",
                     "fontSize": 24,
                   },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
                 ]
               }
             >
-              □
+              󰋑
             </Text>
           </View>
         </View>
@@ -1230,6 +1259,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         "zIndex": 1,
       }
     }
+    testID="text-input-underline"
   />
   <View
     style={
@@ -1298,7 +1328,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-active"
+        testID="text-input-flat-label-active"
       >
         Flat input
       </Text>
@@ -1335,7 +1365,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "writingDirection": "ltr",
           }
         }
-        testID="text-input-label-inactive"
+        testID="text-input-flat-label-inactive"
       >
         Flat input
       </Text>
@@ -1459,13 +1489,17 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           }
         >
           <View
+            accessibilityComponentType="button"
             accessibilityRole="button"
             accessibilityState={
               Object {
                 "disabled": false,
               }
             }
+            accessibilityTraits="button"
             accessible={true}
+            centered={true}
+            collapsable={false}
             focusable={true}
             hitSlop={
               Object {
@@ -1475,7 +1509,9 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
                 "top": 6,
               }
             }
+            onBlur={[Function]}
             onClick={[Function]}
+            onFocus={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
             onResponderRelease={[Function]}
@@ -1487,6 +1523,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
                 Object {
                   "overflow": "hidden",
                 },
+                false,
                 Object {
                   "alignItems": "center",
                   "flexGrow": 1,
@@ -1498,22 +1535,39 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           >
             <Text
               accessibilityElementsHidden={true}
+              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
               style={
                 Array [
                   Object {
-                    "backgroundColor": "transparent",
-                  },
-                  Object {
                     "color": "rgba(73, 69, 79, 1)",
                     "fontSize": 24,
                   },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
                 ]
               }
             >
-              □
+              󰋑
             </Text>
           </View>
         </View>

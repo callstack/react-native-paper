@@ -11,8 +11,11 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
     }
   }
   accessible={true}
+  collapsable={false}
   focusable={true}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -24,6 +27,7 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
       Object {
         "overflow": "hidden",
       },
+      false,
       Object {
         "borderRadius": 18,
         "padding": 6,
@@ -48,16 +52,32 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
       style={
         Array [
           Object {
-            "backgroundColor": "transparent",
-          },
-          Object {
             "color": "rgba(103, 80, 164, 1)",
             "fontSize": 24,
           },
+          Array [
+            Object {
+              "lineHeight": 24,
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Design Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
         ]
       }
     >
-      □
+      󰄬
     </Text>
   </View>
 </View>
@@ -74,8 +94,11 @@ exports[`RadioButton on default platform renders properly 1`] = `
     }
   }
   accessible={true}
+  collapsable={false}
   focusable={true}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -87,6 +110,7 @@ exports[`RadioButton on default platform renders properly 1`] = `
       Object {
         "overflow": "hidden",
       },
+      false,
       Object {
         "borderRadius": 18,
         "padding": 6,
@@ -110,16 +134,32 @@ exports[`RadioButton on default platform renders properly 1`] = `
       style={
         Array [
           Object {
-            "backgroundColor": "transparent",
-          },
-          Object {
             "color": "rgba(103, 80, 164, 1)",
             "fontSize": 24,
           },
+          Array [
+            Object {
+              "lineHeight": 24,
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Design Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
         ]
       }
     >
-      □
+      󰄬
     </Text>
   </View>
 </View>
@@ -136,8 +176,11 @@ exports[`RadioButton on ios platform renders properly 1`] = `
     }
   }
   accessible={true}
+  collapsable={false}
   focusable={true}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -149,6 +192,7 @@ exports[`RadioButton on ios platform renders properly 1`] = `
       Object {
         "overflow": "hidden",
       },
+      false,
       Object {
         "borderRadius": 18,
         "padding": 6,
@@ -172,16 +216,32 @@ exports[`RadioButton on ios platform renders properly 1`] = `
       style={
         Array [
           Object {
-            "backgroundColor": "transparent",
-          },
-          Object {
             "color": "rgba(103, 80, 164, 1)",
             "fontSize": 24,
           },
+          Array [
+            Object {
+              "lineHeight": 24,
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Design Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
         ]
       }
     >
-      □
+      󰄬
     </Text>
   </View>
 </View>
@@ -198,8 +258,11 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
     }
   }
   accessible={true}
+  collapsable={false}
   focusable={true}
+  onBlur={[Function]}
   onClick={[Function]}
+  onFocus={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -211,6 +274,7 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
       Object {
         "overflow": "hidden",
       },
+      false,
       Object {
         "borderRadius": 18,
         "padding": 6,
@@ -234,16 +298,32 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
       style={
         Array [
           Object {
-            "backgroundColor": "transparent",
-          },
-          Object {
             "color": "rgba(103, 80, 164, 1)",
             "fontSize": 24,
           },
+          Array [
+            Object {
+              "lineHeight": 24,
+              "transform": Array [
+                Object {
+                  "scaleX": 1,
+                },
+              ],
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ],
+          Object {
+            "fontFamily": "Material Design Icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
         ]
       }
     >
-      □
+      󰄬
     </Text>
   </View>
 </View>

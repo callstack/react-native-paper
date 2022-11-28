@@ -1,17 +1,17 @@
 import * as React from 'react';
 import {
-  StyleProp,
-  ViewStyle,
-  GestureResponderEvent,
-  StyleSheet,
-  View,
-  TextStyle,
   Animated,
+  GestureResponderEvent,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  View,
+  ViewStyle,
 } from 'react-native';
 
 import color from 'color';
 
-import { useTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -83,7 +83,7 @@ const SegmentedButtonItem = ({
   segment,
   density = 'regular',
 }: Props) => {
-  const theme = useTheme();
+  const theme = useInternalTheme();
 
   const checkScale = React.useRef(new Animated.Value(0)).current;
 
@@ -161,7 +161,6 @@ const SegmentedButtonItem = ({
     <View style={[buttonStyle, styles.button, style]}>
       <TouchableRipple
         borderless
-        delayPressIn={0}
         onPress={onPress}
         accessibilityLabel={accessibilityLabel}
         accessibilityState={{ disabled, checked }}

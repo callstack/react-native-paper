@@ -13,6 +13,9 @@ import {
   MD3LightTheme,
   MD2DarkTheme,
   MD2LightTheme,
+  MD2Theme,
+  MD3Theme,
+  useTheme,
 } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -24,6 +27,8 @@ const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
 
 export const PreferencesContext = React.createContext<any>(null);
+
+export const useExampleTheme = () => useTheme<MD2Theme | MD3Theme>();
 
 const DrawerContent = () => {
   return (
@@ -71,7 +76,7 @@ export default function PaperExample() {
       light: MD3LightTheme,
       dark: MD3DarkTheme,
     },
-  }[themeVersion][themeMode] as ReactNativePaper.Theme;
+  }[themeVersion][themeMode];
 
   React.useEffect(() => {
     const restoreState = async () => {
