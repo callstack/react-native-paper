@@ -77,6 +77,8 @@ const Tooltip = ({
   const hideTooltipTimer = React.useRef<NodeJS.Timeout>();
   const childrenWrapperRef = React.useRef() as React.MutableRefObject<View>;
 
+  const isWeb = Platform.OS === 'web';
+
   React.useEffect(() => {
     return () => {
       if (showTooltipTimer.current) {
@@ -131,24 +133,26 @@ const Tooltip = ({
     }, leaveTouchDelay) as unknown as NodeJS.Timeout;
   };
 
-  const childrenOnPress = React.useCallback(() => {
-    setTouched(false);
+  const mobilePressProps = {
+    onPress: React.useCallback(() => {
+      setTouched(false);
 
-    if (touched) {
-      return null;
-    } else {
-      return children.props.onPress?.();
-    }
-  }, [touched, children.props]);
+      if (touched) {
+        return null;
+      } else {
+        return children.props.onPress?.();
+      }
+    }, [touched, children.props]),
+  };
 
   const webPressProps = {
-    onPressIn: () => {
+    onHoverIn: () => {
       handleTouchStart();
-      children.props.onPressIn?.();
+      children.props.onHoverIn?.();
     },
-    onPressOut: () => {
+    onHoverOut: () => {
       handleTouchEnd();
-      children.props.onPressOut?.();
+      children.props.onHoverOut?.();
     },
   };
 
@@ -191,8 +195,7 @@ const Tooltip = ({
         {React.cloneElement(children, {
           ...rest,
           ref: childrenWrapperRef,
-          onPress: childrenOnPress,
-          ...(Platform.OS === 'web' && webPressProps),
+          ...(isWeb ? webPressProps : mobilePressProps),
         })}
       </View>
     </>
