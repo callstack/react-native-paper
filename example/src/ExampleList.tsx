@@ -36,6 +36,7 @@ import SegmentedButtonMultiselectRealCase from './Examples/SegmentedButtons/Segm
 import SegmentedButtonRealCase from './Examples/SegmentedButtons/SegmentedButtonRealCase';
 import SegmentedButtonExample from './Examples/SegmentedButtonsExample';
 import SnackbarExample from './Examples/SnackbarExample';
+// import StarredExample from './Examples/StarredExample';
 import SurfaceExample from './Examples/SurfaceExample';
 import SwitchExample from './Examples/SwitchExample';
 import TeamDetails from './Examples/TeamDetails';
@@ -103,6 +104,7 @@ export const nestedExamples: Record<
   teamsList: TeamsList,
   segmentedButtonRealCase: SegmentedButtonRealCase,
   segmentedButtonMultiselectRealCase: SegmentedButtonMultiselectRealCase,
+  // starred: StarredExample,
 };
 
 export const examples: Record<

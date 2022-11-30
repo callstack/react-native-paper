@@ -2,6 +2,7 @@ import * as React from 'react';
 import { I18nManager, StyleSheet, View } from 'react-native';
 
 import { DrawerContentScrollView } from '@react-navigation/drawer';
+import { StackActions, useNavigation } from '@react-navigation/native';
 import * as Updates from 'expo-updates';
 import {
   Badge,
@@ -60,26 +61,29 @@ const DrawerItemsData = [
 
 const DrawerCollapsedItemsData = [
   {
-    label: 'Inbox',
-    icon: 'inbox',
+    label: 'Example',
+    focusedIcon: 'view-list',
+    unfocusedIcon: 'view-list-outline',
     key: 0,
     badge: 44,
   },
   {
     label: 'Starred',
-    icon: 'star',
+    focusedIcon: 'star',
+    unfocusedIcon: 'star-outline',
     key: 1,
   },
-  { label: 'Sent mail', icon: 'send', key: 2 },
   {
-    label: 'A very long title that will be truncated',
-    icon: 'delete',
-    key: 3,
+    label: 'New',
+    focusedIcon: 'alpha-n-box',
+    unfocusedIcon: 'alpha-n-box-outline',
+
+    key: 2,
   },
-  { label: 'Full width', icon: 'arrow-all', key: 4 },
   {
-    icon: 'bell',
-    key: 5,
+    focusedIcon: 'bell',
+    unfocusedIcon: 'bell-outline',
+    key: 3,
     badge: true,
   },
 ];
@@ -121,6 +125,8 @@ const DrawerItems = ({
         },
   };
 
+  const navigation = useNavigation();
+
   return (
     <DrawerContentScrollView
       alwaysBounceVertical={false}
@@ -130,6 +136,11 @@ const DrawerItems = ({
           backgroundColor: colors.surface,
         },
       ]}
+      contentContainerStyle={{
+        flexGrow: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
     >
       {isV3 && collapsed && (
         <Drawer.Section>
@@ -140,82 +151,15 @@ const DrawerItems = ({
               active={drawerItemIndex === index}
               onPress={() => {
                 _setDrawerItem(index);
+                index === 0 &&
+                  navigation.dispatch(StackActions.replace('ExampleList'));
+                index === 1 &&
+                  navigation.dispatch(StackActions.replace('starred'));
                 index === 4 && preferences.toggleCollapsed();
               }}
             />
           ))}
         </Drawer.Section>
-      )}
-      {!collapsed && (
-        <>
-          <Drawer.Section title="Example items">
-            {DrawerItemsData.map((props, index) => (
-              <Drawer.Item
-                {...props}
-                key={props.key}
-                theme={props.key === 3 ? coloredLabelTheme : undefined}
-                active={drawerItemIndex === index}
-                onPress={() => _setDrawerItem(index)}
-              />
-            ))}
-          </Drawer.Section>
-
-          <Drawer.Section title="Preferences">
-            <TouchableRipple onPress={toggleTheme}>
-              <View style={[styles.preference, isV3 && styles.v3Preference]}>
-                <Text variant="labelLarge">Dark Theme</Text>
-                <View pointerEvents="none">
-                  <Switch value={isDarkTheme} />
-                </View>
-              </View>
-            </TouchableRipple>
-
-            <TouchableRipple onPress={_handleToggleRTL}>
-              <View style={[styles.preference, isV3 && styles.v3Preference]}>
-                <Text variant="labelLarge">RTL</Text>
-                <View pointerEvents="none">
-                  <Switch value={isRTL} />
-                </View>
-              </View>
-            </TouchableRipple>
-
-            <TouchableRipple onPress={toggleThemeVersion}>
-              <View style={[styles.preference, isV3 && styles.v3Preference]}>
-                <Text variant="labelLarge">MD 2</Text>
-                <View pointerEvents="none">
-                  <Switch value={!isV3} />
-                </View>
-              </View>
-            </TouchableRipple>
-
-            {isV3 && (
-              <TouchableRipple onPress={toggleCollapsed}>
-                <View style={[styles.preference, isV3 && styles.v3Preference]}>
-                  <Text variant="labelLarge">Collapsed drawer *</Text>
-                  <View pointerEvents="none">
-                    <Switch value={collapsed} />
-                  </View>
-                </View>
-              </TouchableRipple>
-            )}
-
-            {isV3 && (
-              <TouchableRipple onPress={toggleCustomFont}>
-                <View style={[styles.preference, isV3 && styles.v3Preference]}>
-                  <Text variant="labelLarge">Custom font *</Text>
-                  <View pointerEvents="none">
-                    <Switch value={customFontLoaded} />
-                  </View>
-                </View>
-              </TouchableRipple>
-            )}
-          </Drawer.Section>
-          {isV3 && (
-            <Text variant="bodySmall" style={styles.annotation}>
-              * - available only for MD3
-            </Text>
-          )}
-        </>
       )}
     </DrawerContentScrollView>
   );

@@ -91,10 +91,10 @@ const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
         </View>
       )}
       {children}
-      <Divider
+      {/* <Divider
         {...(isV3 && { horizontalInset: true, bold: true })}
         style={[styles.divider, isV3 && styles.v3Divider]}
-      />
+      /> */}
     </View>
   );
 };

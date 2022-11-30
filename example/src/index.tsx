@@ -77,7 +77,7 @@ export default function PaperExample() {
   const [rtl, setRtl] = React.useState<boolean>(
     I18nManager.getConstants().isRTL
   );
-  const [collapsed, setCollapsed] = React.useState(false);
+  const [collapsed, setCollapsed] = React.useState(true);
   const [customFontLoaded, setCustomFont] = React.useState(false);
 
   const themeMode = isDarkMode ? 'dark' : 'light';
@@ -236,6 +236,13 @@ export default function PaperExample() {
                 <Drawer.Navigator
                   screenOptions={{
                     drawerStyle: collapsed && styles.collapsed,
+                    drawerContentContainerStyle: {
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      flexGrow: 1,
+                      backgroundColor: 'red',
+                    },
+                    drawerType: 'permanent',
                   }}
                   drawerContent={() => <DrawerContent />}
                 >

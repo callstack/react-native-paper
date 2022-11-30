@@ -80,7 +80,8 @@ const outlineHeight = 32;
  * ```
  */
 const DrawerCollapsedItem = ({
-  icon,
+  focusedIcon,
+  unfocusedIcon,
   label,
   active,
   theme,
@@ -189,7 +190,11 @@ const DrawerCollapsedItem = ({
                 )}
               </View>
             )}
-            <Icon source={icon} size={iconSize} color={iconColor} />
+            <Icon
+              source={active ? focusedIcon : unfocusedIcon}
+              size={iconSize}
+              color={iconColor}
+            />
           </View>
 
           {label ? (

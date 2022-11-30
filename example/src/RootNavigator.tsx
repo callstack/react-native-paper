@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
 
-import type { DrawerNavigationProp } from '@react-navigation/drawer';
 import { getHeaderTitle } from '@react-navigation/elements';
 import {
   CardStyleInterpolators,
@@ -10,6 +9,7 @@ import {
 import { Appbar } from 'react-native-paper';
 
 import ExampleList, { examples } from './ExampleList';
+import StarredExample from './Examples/StarredExample';
 
 const Stack = createStackNavigator();
 
@@ -30,16 +30,6 @@ export default function Root() {
               <Appbar.Header elevated>
                 {back ? (
                   <Appbar.BackAction onPress={() => navigation.goBack()} />
-                ) : (navigation as any).openDrawer ? (
-                  <Appbar.Action
-                    icon="menu"
-                    isLeading
-                    onPress={() =>
-                      (
-                        navigation as any as DrawerNavigationProp<{}>
-                      ).openDrawer()
-                    }
-                  />
                 ) : null}
                 <Appbar.Content title={title} />
               </Appbar.Header>
@@ -53,6 +43,15 @@ export default function Root() {
         component={ExampleList}
         options={{
           title: 'Examples',
+          animationEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name="starred"
+        component={StarredExample}
+        options={{
+          title: 'Favorites',
+          animationEnabled: false,
         }}
       />
       {(Object.keys(examples) as Array<keyof typeof examples>).map((id) => {
@@ -64,6 +63,7 @@ export default function Root() {
             options={{
               title: examples[id].title,
               headerShown: id !== 'themingWithReactNavigation',
+              animationEnabled: id !== 'starred',
             }}
           />
         );
