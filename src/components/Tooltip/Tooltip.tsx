@@ -66,7 +66,6 @@ const Tooltip = ({
 }: Props) => {
   const theme = useInternalTheme();
   const [visible, setVisible] = React.useState(false);
-  const [touched, setTouched] = React.useState(false);
 
   const [measurement, setMeasurement] = React.useState({
     children: {},
@@ -76,6 +75,7 @@ const Tooltip = ({
   const showTooltipTimer = React.useRef<NodeJS.Timeout>();
   const hideTooltipTimer = React.useRef<NodeJS.Timeout>();
   const childrenWrapperRef = React.useRef() as React.MutableRefObject<View>;
+  const touched = React.useRef(false);
 
   const isWeb = Platform.OS === 'web';
 
@@ -117,12 +117,13 @@ const Tooltip = ({
     }
 
     showTooltipTimer.current = setTimeout(() => {
-      setTouched(true);
+      touched.current = true;
       setVisible(true);
     }, enterTouchDelay) as unknown as NodeJS.Timeout;
   };
 
   const handleTouchEnd = () => {
+    touched.current = false;
     if (showTooltipTimer.current) {
       clearTimeout(showTooltipTimer.current);
     }
@@ -135,14 +136,12 @@ const Tooltip = ({
 
   const mobilePressProps = {
     onPress: React.useCallback(() => {
-      setTouched(false);
-
-      if (touched) {
+      if (touched.current) {
         return null;
       } else {
         return children.props.onPress?.();
       }
-    }, [touched, children.props]),
+    }, [children.props]),
   };
 
   const webPressProps = {
