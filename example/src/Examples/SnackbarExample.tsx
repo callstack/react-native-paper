@@ -9,10 +9,12 @@ const SnackbarExample = () => {
   const [visible, setVisible] = React.useState<boolean>(false);
 
   return (
-    <ScreenWrapper contentContainerStyle={styles.container}>
-      <Button mode="outlined" onPress={() => setVisible(!visible)}>
-        {visible ? 'Hide' : 'Show'}
-      </Button>
+    <>
+      <ScreenWrapper contentContainerStyle={styles.container}>
+        <Button mode="outlined" onPress={() => setVisible(!visible)}>
+          {visible ? 'Hide' : 'Show'}
+        </Button>
+      </ScreenWrapper>
       <Snackbar
         visible={visible}
         onDismiss={() => setVisible(false)}
@@ -26,7 +28,7 @@ const SnackbarExample = () => {
       >
         Hey there! I&apos;m a Snackbar.
       </Snackbar>
-    </ScreenWrapper>
+    </>
   );
 };
 

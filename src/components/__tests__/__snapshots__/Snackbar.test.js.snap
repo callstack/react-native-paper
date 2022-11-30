@@ -3,15 +3,22 @@
 exports[`renders not visible snackbar with content wrapper but no actual content 1`] = `null`;
 
 exports[`renders snackbar with Text as a child 1`] = `
-<RCTSafeAreaView
-  emulateUnlessSupported={true}
+<View
   pointerEvents="box-none"
   style={
     Array [
       Object {
         "bottom": 0,
+        "justifyContent": "flex-end",
+        "left": 0,
         "position": "absolute",
+        "right": 0,
+        "top": 0,
         "width": "100%",
+      },
+      Object {
+        "paddingBottom": 34,
+        "paddingHorizontal": 0,
       },
       undefined,
     ]
@@ -96,19 +103,26 @@ exports[`renders snackbar with Text as a child 1`] = `
       </View>
     </View>
   </View>
-</RCTSafeAreaView>
+</View>
 `;
 
 exports[`renders snackbar with View & Text as a child 1`] = `
-<RCTSafeAreaView
-  emulateUnlessSupported={true}
+<View
   pointerEvents="box-none"
   style={
     Array [
       Object {
         "bottom": 0,
+        "justifyContent": "flex-end",
+        "left": 0,
         "position": "absolute",
+        "right": 0,
+        "top": 0,
         "width": "100%",
+      },
+      Object {
+        "paddingBottom": 34,
+        "paddingHorizontal": 0,
       },
       undefined,
     ]
@@ -219,19 +233,26 @@ exports[`renders snackbar with View & Text as a child 1`] = `
       </View>
     </View>
   </View>
-</RCTSafeAreaView>
+</View>
 `;
 
 exports[`renders snackbar with action button 1`] = `
-<RCTSafeAreaView
-  emulateUnlessSupported={true}
+<View
   pointerEvents="box-none"
   style={
     Array [
       Object {
         "bottom": 0,
+        "justifyContent": "flex-end",
+        "left": 0,
         "position": "absolute",
+        "right": 0,
+        "top": 0,
         "width": "100%",
+      },
+      Object {
+        "paddingBottom": 34,
+        "paddingHorizontal": 0,
       },
       undefined,
     ]
@@ -471,19 +492,26 @@ exports[`renders snackbar with action button 1`] = `
       </View>
     </View>
   </View>
-</RCTSafeAreaView>
+</View>
 `;
 
 exports[`renders snackbar with content 1`] = `
-<RCTSafeAreaView
-  emulateUnlessSupported={true}
+<View
   pointerEvents="box-none"
   style={
     Array [
       Object {
         "bottom": 0,
+        "justifyContent": "flex-end",
+        "left": 0,
         "position": "absolute",
+        "right": 0,
+        "top": 0,
         "width": "100%",
+      },
+      Object {
+        "paddingBottom": 34,
+        "paddingHorizontal": 0,
       },
       undefined,
     ]
@@ -578,5 +606,5 @@ exports[`renders snackbar with content 1`] = `
       </View>
     </View>
   </View>
-</RCTSafeAreaView>
+</View>
 `;

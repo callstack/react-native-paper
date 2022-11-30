@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  SafeAreaView,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -9,6 +8,8 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { withInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';
@@ -287,6 +288,14 @@ const FABGroup = ({
       : -8
   );
 
+  const { top, bottom, right, left } = useSafeAreaInsets();
+  const containerPaddings = {
+    paddingBottom: bottom,
+    paddingRight: right,
+    paddingLeft: left,
+    paddingTop: top,
+  };
+
   if (actions.length !== prevActions?.length) {
     animations.current = actions.map(
       (_, i) => animations.current[i] || new Animated.Value(open ? 1 : 0)
@@ -295,7 +304,10 @@ const FABGroup = ({
   }
 
   return (
-    <View pointerEvents="box-none" style={[styles.container, style]}>
+    <View
+      pointerEvents="box-none"
+      style={[styles.container, containerPaddings, style]}
+    >
       <TouchableWithoutFeedback accessibilityRole="button" onPress={close}>
         <Animated.View
           pointerEvents={open ? 'auto' : 'none'}
@@ -308,7 +320,7 @@ const FABGroup = ({
           ]}
         />
       </TouchableWithoutFeedback>
-      <SafeAreaView pointerEvents="box-none" style={styles.safeArea}>
+      <View pointerEvents="box-none" style={styles.safeArea}>
         <View pointerEvents={open ? 'box-none' : 'none'}>
           {actions.map((it, i) => {
             const labelTextStyle = {
@@ -413,7 +425,7 @@ const FABGroup = ({
           testID={testID}
           variant={variant}
         />
-      </SafeAreaView>
+      </View>
     </View>
   );
 };

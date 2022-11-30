@@ -6,11 +6,14 @@ import {
   render,
   waitForElementToBeRemoved,
 } from '@testing-library/react-native';
+import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 
 import Provider from '../../core/Provider';
 import Tooltip from '../Tooltip/Tooltip';
 
 const mockedRemoveEventListener = jest.fn();
+
+jest.mock('react-native-safe-area-context', () => mockSafeAreaContext);
 
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native');

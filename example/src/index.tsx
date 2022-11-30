@@ -25,7 +25,6 @@ import {
   adaptNavigationTheme,
   configureFonts,
 } from 'react-native-paper';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { isWeb } from '../utils';
 import DrawerItems from './DrawerItems';
@@ -220,44 +219,42 @@ export default function PaperExample() {
 
   return (
     <PaperProvider theme={customFontLoaded ? configuredFontTheme : theme}>
-      <SafeAreaProvider>
-        <PreferencesContext.Provider value={preferences}>
-          <React.Fragment>
-            <NavigationContainer
-              theme={combinedTheme}
-              initialState={initialState}
-              onStateChange={(state) =>
-                AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
-              }
-            >
-              {isWeb ? (
-                <App />
-              ) : (
-                <Drawer.Navigator
-                  screenOptions={{
-                    drawerStyle: collapsed && styles.collapsed,
-                    drawerContentContainerStyle: {
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      flexGrow: 1,
-                      backgroundColor: 'red',
-                    },
-                    drawerType: 'permanent',
-                  }}
-                  drawerContent={() => <DrawerContent />}
-                >
-                  <Drawer.Screen
-                    name="Home"
-                    component={App}
-                    options={{ headerShown: false }}
-                  />
-                </Drawer.Navigator>
-              )}
-              <StatusBar style={!theme.isV3 || theme.dark ? 'light' : 'dark'} />
-            </NavigationContainer>
-          </React.Fragment>
-        </PreferencesContext.Provider>
-      </SafeAreaProvider>
+      <PreferencesContext.Provider value={preferences}>
+        <React.Fragment>
+          <NavigationContainer
+            theme={combinedTheme}
+            initialState={initialState}
+            onStateChange={(state) =>
+              AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
+            }
+          >
+            {isWeb ? (
+              <App />
+            ) : (
+              <Drawer.Navigator
+                screenOptions={{
+                  drawerStyle: collapsed && styles.collapsed,
+                  drawerContentContainerStyle: {
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flexGrow: 1,
+                    backgroundColor: 'red',
+                  },
+                  drawerType: 'permanent',
+                }}
+                drawerContent={() => <DrawerContent />}
+              >
+                <Drawer.Screen
+                  name="Home"
+                  component={App}
+                  options={{ headerShown: false }}
+                />
+              </Drawer.Navigator>
+            )}
+            <StatusBar style={!theme.isV3 || theme.dark ? 'light' : 'dark'} />
+          </NavigationContainer>
+        </React.Fragment>
+      </PreferencesContext.Provider>
     </PaperProvider>
   );
 }
