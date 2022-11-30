@@ -22,6 +22,8 @@ type Props = {
   toggleRTL: () => void;
   toggleThemeVersion: () => void;
   toggleCollapsed: () => void;
+  toggleCustomFont: () => void;
+  customFontLoaded: boolean;
   collapsed: boolean;
   isRTL: boolean;
   isDarkTheme: boolean;
@@ -87,6 +89,8 @@ const DrawerItems = ({
   toggleRTL,
   toggleThemeVersion,
   toggleCollapsed,
+  toggleCustomFont,
+  customFontLoaded,
   collapsed,
   isRTL,
   isDarkTheme,
@@ -187,14 +191,30 @@ const DrawerItems = ({
             {isV3 && (
               <TouchableRipple onPress={toggleCollapsed}>
                 <View style={[styles.preference, isV3 && styles.v3Preference]}>
-                  <Text variant="labelLarge">Collapsed drawer</Text>
+                  <Text variant="labelLarge">Collapsed drawer *</Text>
                   <View pointerEvents="none">
                     <Switch value={collapsed} />
                   </View>
                 </View>
               </TouchableRipple>
             )}
+
+            {isV3 && (
+              <TouchableRipple onPress={toggleCustomFont}>
+                <View style={[styles.preference, isV3 && styles.v3Preference]}>
+                  <Text variant="labelLarge">Custom font *</Text>
+                  <View pointerEvents="none">
+                    <Switch value={customFontLoaded} />
+                  </View>
+                </View>
+              </TouchableRipple>
+            )}
           </Drawer.Section>
+          {isV3 && (
+            <Text variant="bodySmall" style={styles.annotation}>
+              * - available only for MD3
+            </Text>
+          )}
         </>
       )}
     </DrawerContentScrollView>
@@ -218,6 +238,9 @@ const styles = StyleSheet.create({
   },
   badge: {
     alignSelf: 'center',
+  },
+  annotation: {
+    marginHorizontal: 24,
   },
 });
 
