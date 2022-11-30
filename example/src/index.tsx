@@ -186,8 +186,8 @@ export default function PaperExample() {
   }
 
   const { LightTheme, DarkTheme } = adaptNavigationTheme({
-    light: NavigationDefaultTheme,
-    dark: NavigationDarkTheme,
+    reactNavigationLight: NavigationDefaultTheme,
+    reactNavigationDark: NavigationDarkTheme,
   });
 
   const CombinedDefaultTheme = {
