@@ -55,21 +55,34 @@ export const getTheme = (isDark = false, isV3 = true) => {
 };
 
 // eslint-disable-next-line no-redeclare
-export function adaptNavigationTheme(themes: { light: NavigationTheme }): {
+export function adaptNavigationTheme(themes: {
+  reactNaivgationLight: NavigationTheme;
+  materialLight?: MD3Theme;
+}): {
   LightTheme: NavigationTheme;
 };
 // eslint-disable-next-line no-redeclare
-export function adaptNavigationTheme(themes: { dark: NavigationTheme }): {
+export function adaptNavigationTheme(themes: {
+  reactNavigationDark: NavigationTheme;
+  materialDark?: MD3Theme;
+}): {
   DarkTheme: NavigationTheme;
 };
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme(themes: {
-  light: NavigationTheme;
-  dark: NavigationTheme;
+  reactNavigationLight: NavigationTheme;
+  reactNavigationDark: NavigationTheme;
+  materialLight?: MD3Theme;
+  materialDark?: MD3Theme;
 }): { LightTheme: NavigationTheme; DarkTheme: NavigationTheme };
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme(themes: any) {
-  const { light, dark } = themes;
+  const {
+    reactNavigationLight,
+    reactNavigationDark,
+    materialLight,
+    materialDark,
+  } = themes;
 
   const getAdaptedTheme = (
     navigationTheme: NavigationTheme,
@@ -89,17 +102,17 @@ export function adaptNavigationTheme(themes: any) {
     };
   };
 
-  if (light && dark) {
+  const MD3Themes = {
+    light: materialLight || MD3LightTheme,
+    dark: materialDark || MD3DarkTheme,
+  };
+
+  if (reactNavigationLight && reactNavigationDark) {
     const modes = ['light', 'dark'] as const;
 
-    const MD3Themes = {
-      light: MD3LightTheme,
-      dark: MD3DarkTheme,
-    };
-
     const NavigationThemes = {
-      light,
-      dark,
+      light: reactNavigationLight,
+      dark: reactNavigationDark,
     };
 
     const { light: adaptedLight, dark: adaptedDark } = modes.reduce(
@@ -110,8 +123,8 @@ export function adaptNavigationTheme(themes: any) {
         };
       },
       {
-        light,
-        dark,
+        light: reactNavigationLight,
+        dark: reactNavigationDark,
       }
     );
 
@@ -121,14 +134,14 @@ export function adaptNavigationTheme(themes: any) {
     };
   }
 
-  if (!light) {
+  if (reactNavigationDark) {
     return {
-      DarkTheme: getAdaptedTheme(dark, MD3DarkTheme),
+      DarkTheme: getAdaptedTheme(reactNavigationDark, MD3Themes.dark),
     };
   }
 
   return {
-    LightTheme: getAdaptedTheme(light, MD3LightTheme),
+    LightTheme: getAdaptedTheme(reactNavigationLight, MD3Themes.light),
   };
 }
 
