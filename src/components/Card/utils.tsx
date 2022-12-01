@@ -66,7 +66,9 @@ const getBackgroundColor = ({
     if (isMode('contained')) {
       return theme.colors.surfaceVariant;
     }
-    return theme.colors.surface;
+    if (isMode('outlined')) {
+      return theme.colors.surface;
+    }
   }
   return undefined;
 };

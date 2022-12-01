@@ -227,7 +227,7 @@ const Card = ({
         {
           borderRadius,
         },
-        isV3 && { backgroundColor },
+        isV3 && !isMode('elevated') && { backgroundColor },
         !isV3 && isMode('outlined')
           ? styles.resetElevation
           : {

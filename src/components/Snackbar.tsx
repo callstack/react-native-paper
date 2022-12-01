@@ -250,8 +250,8 @@ const Snackbar = ({
         {renderChildrenWithWrapper()}
         {action ? (
           <Button
-            onPress={(e) => {
-              onPressAction?.(e);
+            onPress={(event) => {
+              onPressAction?.(event);
               onDismiss();
             }}
             style={[styles.button, actionStyle]}

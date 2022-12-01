@@ -39,11 +39,27 @@ const NavigationCustomLightTheme = {
   },
 };
 
+const AppCustomLightTheme = {
+  ...MD3LightTheme,
+  colors: {
+    ...MD3LightTheme.colors,
+    primary: 'purple',
+  },
+};
+
+const AppCustomDarkTheme = {
+  ...MD3DarkTheme,
+  colors: {
+    ...MD3DarkTheme.colors,
+    primary: 'orchid',
+  },
+};
+
 describe('adaptNavigationTheme', () => {
   it('should return adapted both navigation themes', () => {
     const themes = adaptNavigationTheme({
-      light: NavigationLightTheme,
-      dark: NavigationDarkTheme,
+      reactNavigationLight: NavigationLightTheme,
+      reactNavigationDark: NavigationDarkTheme,
     });
 
     expect(themes).toMatchObject({
@@ -76,7 +92,7 @@ describe('adaptNavigationTheme', () => {
 
   it('should return adapted navigation light theme', () => {
     const { LightTheme } = adaptNavigationTheme({
-      light: NavigationLightTheme,
+      reactNavigationLight: NavigationLightTheme,
     });
 
     const { colors } = MD3LightTheme;
@@ -97,7 +113,7 @@ describe('adaptNavigationTheme', () => {
 
   it('should return adapted navigation dark theme', () => {
     const { DarkTheme } = adaptNavigationTheme({
-      dark: NavigationDarkTheme,
+      reactNavigationDark: NavigationDarkTheme,
     });
 
     const { colors } = MD3DarkTheme;
@@ -118,7 +134,7 @@ describe('adaptNavigationTheme', () => {
 
   it('should return adapted custom navigation theme', () => {
     const { LightTheme } = adaptNavigationTheme({
-      light: NavigationCustomLightTheme,
+      reactNavigationLight: NavigationCustomLightTheme,
     });
 
     const { colors } = MD3LightTheme;
@@ -135,6 +151,50 @@ describe('adaptNavigationTheme', () => {
         notification: colors.error,
         secondary: 'rgb(150,45,85)',
         tertiary: 'rgb(105,45,85)',
+      },
+    });
+  });
+
+  it('should return adapted navigation light theme based on custom app light theme', () => {
+    const { LightTheme } = adaptNavigationTheme({
+      reactNavigationLight: NavigationLightTheme,
+      materialLight: AppCustomLightTheme,
+    });
+
+    const { colors } = AppCustomLightTheme;
+
+    expect(LightTheme).toMatchObject({
+      ...NavigationLightTheme,
+      colors: {
+        ...NavigationLightTheme.colors,
+        primary: colors.primary,
+        background: colors.background,
+        card: colors.elevation.level2,
+        text: colors.onSurface,
+        border: colors.outline,
+        notification: colors.error,
+      },
+    });
+  });
+
+  it('should return adapted navigation dark theme based on custom app dark theme', () => {
+    const { DarkTheme } = adaptNavigationTheme({
+      reactNavigationDark: NavigationDarkTheme,
+      materialDark: AppCustomDarkTheme,
+    });
+
+    const { colors } = AppCustomDarkTheme;
+
+    expect(DarkTheme).toMatchObject({
+      ...NavigationDarkTheme,
+      colors: {
+        ...NavigationDarkTheme.colors,
+        primary: colors.primary,
+        background: colors.background,
+        card: colors.elevation.level2,
+        text: colors.onSurface,
+        border: colors.outline,
+        notification: colors.error,
       },
     });
   });
