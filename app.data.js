@@ -10,7 +10,7 @@ module.exports = [
      type: "custom",
      data: c
   };
-}()),{"filepath":"pages/1.getting-started.md","title":"Getting Started","description":"","link":"getting-started","data":"# Getting Started\n\n## Installation\n\n📍<i><b>Note:</b></i> The following documentation and installation steps are related to the <b>v5 release candidate</b>.\nIf you are looking for the latest stable version documentation, please check the [v4 docs](https://callstack.github.io/react-native-paper/4.0/index.html).\n\nOpen a Terminal in your project's folder and run:\n\n```sh\nyarn add react-native-paper@5.0.0-rc.10\n```\nor\n```sh\nnpm install react-native-paper@5.0.0-rc.10\n```\nIf you're on a vanilla React Native project, you also need to install and link [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons).\n\nSpecifically `MaterialCommunityIcons` icon pack needs to be included in the project, because some components use those internally (e.g. `AppBar.BackAction` on Android). \n\n```sh\nyarn add react-native-vector-icons\n```\n\nThe library has specified dedicated steps for each platform. Please follow their [installation guide](https://github.com/oblador/react-native-vector-icons#installation) in order to properly use icon fonts.\n\nIf you don't want to install vector icons, you can use [babel-plugin-optional-require](https://github.com/satya164/babel-plugin-optional-require) to opt-out.\n\nIf you use Expo, you don't need to install vector icons. But if you have a `babel.config.js` or `.babelrc` file, make sure that it includes `babel-preset-expo`.\n\nTo get smaller bundle size by excluding modules you don't use, you can use our optional babel plugin. The plugin automatically rewrites the import statements so that only the modules you use are imported instead of the whole library. Add `react-native-paper/babel` to the `plugins` section in your `babel.config.js` for production environment. It should look like this:\n\n```js\nmodule.exports = {\n  presets: ['module:metro-react-native-babel-preset'],\n  env: {\n    production: {\n      plugins: ['react-native-paper/babel'],\n    },\n  },\n};\n```\n\nIf you created your project using Expo, it'll look something like this:\n\n```js\nmodule.exports = function(api) {\n  api.cache(true);\n  return {\n    presets: ['babel-preset-expo'],\n    env: {\n      production: {\n        plugins: ['react-native-paper/babel'],\n      },\n    },\n  };\n};\n```\n\nThe plugin only works if you are importing the library using ES2015 import statements and not with `require`.\n\n**Note:** The above examples are for the latest `react-native` using Babel 7. If you have `react-native <= 0.55`, you'll have a `.babelrc` file instead of a `babel.config.js` file and the content of the file will be different.\n\nIf you're using Flow for typechecking your code, you need to add the following under the `[options]` section in your `.flowconfig`:\n\n```ini\nmodule.file_ext=.js\nmodule.file_ext=.native.js\nmodule.file_ext=.android.js\nmodule.file_ext=.ios.js\n```\n\n## Usage\n\nWrap your root component in `Provider` from `react-native-paper`. If you have a vanilla React Native project, it's a good idea to add it in the component which is passed to `AppRegistry.registerComponent`. This will usually be in the `index.js` file. If you have an Expo project, you can do this inside the exported component in the `App.js` file.\n\nExample:\n\n```js\nimport * as React from 'react';\nimport { AppRegistry } from 'react-native';\nimport { Provider as PaperProvider } from 'react-native-paper';\nimport { name as appName } from './app.json';\nimport App from './src/App';\n\nexport default function Main() {\n  return (\n    <PaperProvider>\n      <App />\n    </PaperProvider>\n  );\n}\n\nAppRegistry.registerComponent(appName, () => Main);\n```\n\nThe `PaperProvider` component provides the theme to all the components in the framework. It also acts as a portal to components which need to be rendered at the top level.\n\nIf you have another provider (such as `Redux`), wrap it outside `PaperProvider` so that the context is available to components rendered inside a `Modal` from the library:\n\n```js\nimport * as React from 'react';\nimport { Provider as PaperProvider } from 'react-native-paper';\nimport { Provider as StoreProvider } from 'react-redux';\nimport App from './src/App';\nimport store from './store';\n\nexport default function Main() {\n  return (\n    <StoreProvider store={store}>\n      <PaperProvider>\n        <App />\n      </PaperProvider>\n    </StoreProvider>\n  );\n}\n```\n\n## Customization\n\nYou can provide a custom theme to customize the colors, typescales etc. with the `Provider` component. Check the [Material Design 3 default theme](https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v3/LightTheme.tsx) to see what customization options are supported.\n\nExample:\n\n```js\nimport * as React from 'react';\nimport { MD3LightTheme as DefaultTheme, Provider as PaperProvider } from 'react-native-paper';\nimport App from './src/App';\n\nconst theme = {\n  ...DefaultTheme,\n  colors: {\n    ...DefaultTheme.colors,\n    primary: 'tomato',\n    secondary: 'yellow',\n  },\n};\n\nexport default function Main() {\n  return (\n    <PaperProvider theme={theme}>\n      <App />\n    </PaperProvider>\n  );\n}\n```\n\n<i>Note: For MD2 check the following [Material Design 2 default theme](https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v2/LightTheme.tsx).</i>\n","type":"md","dependencies":[]},{"filepath":"pages/10.migration-guide-to-5.0.md","title":"Introducing v5 with Material You","description":"","link":"introducing-v5-with-material-you","data":"React Native Paper v5 is all about adopting the new Material Design 3 <i>aka</i> Material You. It was released in October 2021 after intense work and effort to make Material You follow a more expressive approach to design.\n\nPaper now supports both Material Design 2 and 3 through the configuration described in [Versioning](#versioning) and is compatible with a handful of API changes. \n\n# Migration guide to Material You (5.0 RC)\n\nVersion 5.0 brings support for the next Material Design iteration branded as Material You <i>(in fact being Material Design v3 or in short MD3)</i> into the `react-native-paper` library. All the components were refined according to the official [design kit on figma](https://www.figma.com/community/file/1035203688168086460) and adjusted in terms of visuals by changes in colors, typography and animations. \n\nBelow you can find the most important information about the components whose API may have changed  API has been changed due to supporting new props, renaming existing ones or some deprecations. Hopefully, based on the presented required changes, migration to the latest version should be smooth. Enjoy!\n\n### Installation\n\nCurrently v5 is a release candidate, which means it won't be installed by default from the `npm`. In order to do that, there is a need to explicitly pass package version during installation:\n\n```sh\nyarn add react-native-paper@5.0.0-rc.10\n```\nor\n```sh\nnpm install react-native-paper@5.0.0-rc.10\n```\n## Theming\n\n### Versioning\n\nIntroducing Material You <i>(MD3)</i> into `react-native-paper` doesn't mean dropping previous Material Design <i>(MD2)</i>! On the contrary, both of them will be supported, however, not simultaneously. To specify which design system components should follow in the app, there is a newly created property in the theme called `version` which can accept only one of two values:\n\n* <b>3</b> – <b>(default)</b> new Material You <i>(MD3)</i>,\n* <b>2</b> - previous Material Design <i>(MD2)</i>.\n\n```js\ntheme: {\n  /* ... */\n  version: 3 | 2\n}\n```\n\nRead more about using Material Design 2 in our [Material Design 2 theming guide](https://callstack.github.io/react-native-paper/theming.html#material-design-2)\n\n### Colors\n\nNew theme introduces a new color palette along with new namings reflecting design color tokens, but written in camel case. Palette contains a set of five key colors, where primary, secondary and tertiary are classified into <i>accent colors</i>. The second group of colors is <i>neutral and neutral variant colors</i> used for defining surface or background roles as well as specifying high and medium emphasis text and icons. Additionally, the color system includes a semantic color role for error.\n\nEach accent and error colors has a group of related tones. The tones are mapped to roles that create contrast and visual interest when applied to elements in the UI.\n\n📍<i>Note: Dynamic colors are not supported yet.</i>\n\n<img class=\"medium\" src=\"migration/color-palette.png\" />\n\nColors theme structure should follow the default palette and contain the following properties:\n\n```js\ntheme: {\n  /* ... */\n  colors: {\n    primary,\n    primaryContainer,\n    secondary,\n    secondaryContainer,\n    tertiary,\n    tertiaryContainer,\n    surface,\n    surfaceVariant,\n    surfaceDisabled,\n    background,\n    error,\n    errorContainer,\n    onPrimary,\n    onPrimaryContainer,\n    onSecondary,\n    onSecondaryContainer,\n    onTertiary,\n    onTertiaryContainer,\n    onSurface,\n    onSurfaceVariant,\n    onSurfaceDisabled,\n    onError,\n    onErrorContainer,\n    onBackground,\n    outline,\n    shadow,\n    inverseOnSurface,\n    inverseSurface,\n    inversePrimary,\n    backdrop,\n    elevation: {\n      level0,\n      level1,\n      level2,\n      level3,\n      level4,\n      level5\n    }\n  }\n}\n```\n\n👉 You can find more about color on [Material You website](https://m3.material.io/styles/color/the-color-system/key-colors-tones)\n\n## Typography\n\nA new way of approaching typography introduces one component `<Text>` which accepts prop `variant`. Variant defines appropriate text styles for type role and its size. The updated type scale organizes styles into five roles that are named to describe their purposes: <b>Display</b>, <b>Headline</b>, <b>Title</b>, <b>Label</b> and <b>Body</b> along with three display styles <i>large</i>, <i>medium</i>, and <i>small</i>. In total, there are fifteen variants that are MD3 compliant and are reflecting design typography tokens written in camel case. \n\n```js\n<Text variant=\"displayLarge\">Display Large</Text>\n<Text variant=\"displayMedium\">Display Medium</Text>\n<Text variant=\"displaySmall\">Display small</Text>\n\n<Text variant=\"headlineLarge\">Headline Large</Text>\n<Text variant=\"headlineMedium\">Headline Medium</Text>\n<Text variant=\"headlineSmall\">Headline Small</Text>\n\n<Text variant=\"titleLarge\">Title Large</Text>\n<Text variant=\"titleMedium\">Title Medium</Text>\n<Text variant=\"titleSmall\">Title Small</Text>\n\n<Text variant=\"bodyLarge\">Body Large</Text>\n<Text variant=\"bodyMedium\">Body Medium</Text>\n<Text variant=\"bodySmall\">Body Small</Text>\n\n<Text variant=\"labelLarge\">Label Large</Text>\n<Text variant=\"labelMedium\">Label Medium</Text>\n<Text variant=\"labelSmall\">Label Small</Text>\n ```\n\nTake a look at the suggested replacement diff:\n\n ```diff\n- <Headline>Headline</Headline>\n+ <Text variant=\"headlineSmall\">Headline</Text>\n\n- <Title>Title</Title>\n+ <Text variant=\"titleLarge\">Title</Text>\n\n- <Subheading>Subheading</Subheading>\n+ <Text variant=\"titleMedium\">Subheading</Text>\n\n- <Paragraph>Paragraph</Paragraph>\n+ <Text variant=\"bodyMedium\">Paragraph</Text>\n\n- <Caption>Caption</Caption>\n+ <Text variant=\"bodySmall\">Caption</Text>\n ```\n\n\n👉 You can find more about color on [Material You website](https://m3.material.io/styles/typography/overview)\n\n### Configure fonts\n\nThe existing utility called `configureFonts` was adjusted to help users configure their theme fonts in both version, that's why that function, as of today, is going to accept the object with the follwing properties as an argument:\n\n```ts\nconfigureFonts(params)\n```\n\n<b>Parameters:</b>\n\n| NAME        | TYPE        | REQUIRED    |\n| ----------- | ----------- | ----------- |\n| params      | object      | No          |\n\nValid `params` keys are:\n\n  * `config` ([MD2FontsConfig](https://github.com/callstack/react-native-paper/blob/main/src/styles/fonts.tsx#L63) | [MD3FontsConfig](https://github.com/callstack/react-native-paper/blob/main/src/styles/fonts.tsx#L67)) - fonts config object appropriate to the MD version\n  * `isV3` (boolean) - whether adjusting theme fonts for v3. Default it <b>true</b>.\n\nTo use your current font config from <b>v2</b> and migrate to <b>v3</b> there are two requirements:\n* the font config previously passed directly into function has to be passed into the params object property called `config`\n* the params object property `isV3` has to be set to `false`\n\n```diff\n- configureFonts(fontConfig)\n+ configureFonts({config: fontConfig, isV3: false})\n```\n\n📍<i>Note: If you want to check how to use `configureFonts` on MD3, check the [Fonts](https://callstack.github.io/react-native-paper/fonts.html) guide.</i>\n\n# Components\n\n## Appbar <i>(Top app bar)</i>\n\n`Appbar` and `Appbar.Header` in the latest version can be used in four various modes due to new prop `mode`:\n\n* `small` - Appbar with default height <i>(56) (default)</i>,\n* `medium` - Appbar with medium height <i>(112)</i>,\n* `large` - Appbar with large height <i>(152)</i>,\n* `center-aligned` - Appbar with default height <i>(56)</i> and center-aligned title.\n\n```js\n<Appbar mode=\"center-aligned\">\n  /* ... */\n</Appbar>\n```\n\nTo make it easier for users to build the `BottomBar`, formed on the `Appbar` components, we have added a property `safeAreaInsets`:\n\n```js\n<Appbar safeAreaInsets={{ bottom: 47 }}>\n  /* ... */\n</Appbar>\n```\n \nIt's worth noting that by default the theme version 3 `Appbar` and `Appbar.Header` don't have a shadow. However, it can be added by passing prop `elevated` into the component:\n\n```js\n<Appbar elevated>\n  /* ... */\n</Appbar>\n```\n\n### Appbar.Action\n\n`Appbar.Action` received new prop `isLeading`, which defines whether it's the <b>leading</b> button and should be placed at the beginning of the `Appbar`.\n\n```js\n<Appbar.Action isLeading icon=\"magnify\" onPress={() => {}} />\n```\n\n### Appbar.Content\n\nNew design guidelines indicate there is no <b>subtitle</b> in `Appbar.Content`, that's why there are two deprecations and the following props won't be supported anymore: `subtitle` and `subtitleStyle`.\n\n```diff\n- <Appbar.Content title=\"Title\" subtitle=\"Subtitle\" styles={styles.subtitle} />\n+ <Appbar.Content title=\"Title\" />\n```\n\n## Banner, Searchbar and Snackbar\n\nAccording to the updates in `Surface` on the top of which `Banner`, `Searchbar` and `Snackbar` are implemented, all three component received `elevation` prop to adjust its value.\n\n```diff\n- <Snackbar style={{elevation: 1}}>Hello</Snackbar>\n+ <Snackbar elevation={1}>Hello</Snackbar>\n```\n\n## BottomNavigation <i>(Navigation bar)</i>\n\nFor the sake of new animation of pill shape, indicating active destination, and assisting icon change from outlined to filled, there are three changes within `navigationState.routes` property items:\n\n* `color` is deprecated since color is constant and the same for all routes,\n* `icon` is renamed to `focusedIcon`, as the name implies, with theme version 3 it's the outline icon used as focused tab icon and with theme version 2 it's a default icon,\n* `unfocusedIcon` <i>(optional)</i> is the filled icon used as the unfocused tab icon, compatible with theme version 3.\n\n📍<i>Note: `unfocusedIcon` is optional, if you can't find outline icon equivalent, omit that prop, so `focusedIcon` will be displayed in both active and inactive state</i>\n\n```diff\nroutes: [\n- { key: \"album\", title: \"Album\", icon: \"image-album\", color: \"#3F51B5\" },\n+ { key: \"album\", title: \"Album\", focusedIcon: \"image-album\" },\n- { key: \"library\", title: \"Library\", icon: \"inbox\", color: \"#009688\" },\n+ { key: \"library\", title: \"Library\", focusedIcon: \"inbox\", unfocusedIcon: \"inbox-outline\" },\n- { key: \"favorites\", title: \"Favorites\", icon: \"heart\", color: \"#795548\" },\n+ { key: \"favorites\", title: \"Favorites\", focusedIcon: \"heart\", unfocusedIcon: \"heart-outline; },\n- { key: \"purchased\", title: \"Purchased\", icon: \"shopping-cart\", color: \"#607D8B\" },\n+ { key: \"purchased\", title: \"Purchased\", focusedIcon: \"shopping-cart\" },\n]\n```\n\nThe `compact` prop was also introduced, working with both themes. It indicates whether tabs should be spread across the entire width, especially in a <i>horizontal</i> mode. \n\n```js\n<BottomNavigation compact />\n```\n\nIt's worth to mention that default value of prop `shifting` depends on the theme version:\n* <b>3</b> - it's `false`,\n* <b>2</b> - it's `true` when there are more than 3 tabs.\n\nTwo additional props that control the scene animation were introduced that control the animation of the tabs when `sceneAnimationEnabled` is `true`:\n* `sceneAnimationType: \"opacity\" | \"shifting\" | undefined` - defines the animation type for the scene. `shifting` enables a new animation where navigating to a scene will shift it horizontally into view. Both `opacity` and `undefined` have the same effect, fading the scene into view.\n* `sceneAnimationEasing` allows specifying a custom easing function for the scene animation.\n\n![shiftingAnimation](screenshots/bottom-navigation-shifting.gif)\n\nOn a final note, please be aware that `BottomNavigation` with theme version 3 doesn't have a shadow.\n\n## Button\n\n`Button`'s property `mode` has been expanded with two additional options:\n* `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background,\n* `container-tonal` - button with a secondary background color, an alternative middle ground between contained and outlined buttons.\n\n```js\n<>\n  <Button icon=\"camera\" mode=\"elevated\" onPress={onPress}>\n    Elevated\n  </Button>\n  <Button icon=\"camera\" mode=\"container-tonal\" onPress={onPress}>\n    Container tonal\n  </Button>\n</>\n```\n\nThe property `color` is deprecated, but in its place two new props called `buttonColor` and `textColor` are introduced:\n* `buttonColor` - custom button's background color,\n* `textColor` - custom button's text color.\n\n```diff\n- <Button mode=\"text\" color=\"red\" onPress={onPress}>Custom text color</Button>\n+ <Button mode=\"text\" textColor=\"red\" onPress={onPress}>Custom text color</Button>\n```\n\n```diff\n- <Button mode=\"contained\" color=\"red\" onPress={onPress}>Custom text color</Button>\n+ <Button mode=\"contained\" buttonColor=\"red\" onPress={onPress}>Custom background color</Button>\n```\n\nPlease be aware that along with theme version 3, by default text in the `Button` component isn't uppercased and `contained` button doesn't have any shadow <i>(use then `elevated`)</i>.\n\n## Card\n\nThe `Card` component's property `mode` has been expanded with one additional option called `contained`, which applies to the card's specified background color without any elevation and border.\n\n```js\n<Card mode=\"contained\" />\n```\n\n## Card.Title\n\nSince there is no one right way to make a card, there is also no one right way for specifying a title and subtitle variant. Therefore two new props come in handy:\n\n* `titleVariant` - title text variant defines appropriate text styles for type role and its size.\n* `subtitleVariant` - subtitle text variant defines appropriate text styles for type role and its size.\n\n```js\n<Card.Title\n  titleVariant=\"headlineMedium\"\n  subtitleVariant=\"bodyLarge\"\n/>\n```\n\n## Checkbox.Item\n\n`Checkbox.Item` similarly to `RadioButton.Item` has been expanded with the prop called `labelVariant`, which defines appropriate text styles for type role and its size.\n\n```js\n<Checkbox.Item \n  labelVariant=\"titleLarge\"\n>\n```\n\n## Chip\n\nTo properly compose `Chip` component and adjust into required type, there are three new props that will come in handy:\n\n* `compact` - sets smaller horizontal paddings around the label, useful for `Chip` containing only the label,\n* `elevated` - indicating whether `Chip` should be elevated,\n* `showSelectedOverlay` - defining whether to display an overlay on a selected button.\n\n```js\n<>\n  <Chip compact>Compact Chip</Chip>\n  <Chip icon=\"camera\" elevated>Elevated Chip</Chip>\n  <Chip icon=\"camera\" selected showSelectedOverlay>Chip with selected overlay</Chip>\n</>\n```\n\n## Dialog.Icon\n\n`Dialog.Icon` is another freshly added component presenting an icon within a `Dialog`, placed at the top of the content.\n\n📍<i>Note: It's working only with theme version 3.</i>\n\n```js\n<Portal>\n  <Dialog visible={visible} onDismiss={hideDialog}>\n    <Dialog.Icon icon=\"alert\" />\n  </Dialog>\n</Portal>\n```\n## Divider\n\n`Divider` component received two new props:\n\n* `bold` - divider is bolded,\n* `horizontalInset` - divider has horizontal insets on both sides.\n\nAdditionally prop `inset` was renamed to `leftInset`.\n\n```diff\n- <Divider inset />\n+ <Divider leftInset />\n```\n\n## Drawer.CollapsedItem <i>(Navigation rail)</i>\n\n`Drawer.CollapsedItem` is a newly created side navigation component that can be used within `Drawer`, representing a destination in the form of an action item with an icon and optionally label.\n\n📍<i>Note: It's working only with theme version 3.</i>\n\n```js\n<Drawer.Section>\n  <Drawer.CollapsedItem\n    icon=\"inbox\"\n    label=\"Inbox\"\n  />\n  <Drawer.CollapsedItem\n    icon=\"star\"\n    label=\"Starred\"\n  />\n</Drawer.Section>\n```\n\n## Floating Action Buttons\n\n`FAB`, `AnimatedFAB` and `FAB.Group` in the latest version can be used with four variants and two modes, thanks to two new props:\n\n* `variant` defines color mappings variant for combinations of container and icon colors. Can be one of: <b>primary</b> <i>(default)</i>, <b>secondary</b>, <b>tertiary</b> or <b>surface</b>.\n\n```js\n<FAB variant=\"tertiary\" />\n```\n\n* `mode` specifies whether a button should be <b>flat</b> or <b>elevated</b>:\n   - `flat` - button without a shadow,\n   - `elevated` - button with a shadow.\n\n```js\n<FAB mode=\"flat\" />\n```\n\n### FAB\n\nAdditionaly `FAB` may be applied in one of three available sizes, thanks to new prop `size`: \n\n* `small` - FAB with small height (40),\n* `medium` - Appbar with default medium height (56),\n* `large` - Appbar with large height (96).\n\n```js\n<FAB size=\"large\" />\n```\n\nHowever, if you would like to have your own size of `FAB`, there is a new prop called `customSize`:\n\n```js\n<FAB customSize={64}>\n```\n\nAccordingly to introducing `size=\"small\"`, prop `small` was deprecated.\n\n```diff\n- <FAB small />\n+ <FAB size=\"small\" />\n```\n\n### FAB.Group\n\nThere is also deprecation in one of the `actions` properties, namely `small` prop is deprecated and replaced in favour of the default `size=\"small\"`.\n\n```diff\n- <FAB.Group actions={[{ icon: \"plus\", small }]} />\n+ <FAB.Group actions={[{ icon: \"plus\" }]} />\n```\n\nAdditionally, the action item property previously known as `labelStyle` was renamed to `containerStyle` since it's tied mostly with the container styles. At the same time, `labelStyle` is still available with the new role related to styling item label. \n\n```diff\n- <FAB.Group actions={[{ icon: \"plus\", labelStyle: styles.customStyle }]} />\n+ <FAB.Group actions={[{ icon: \"plus\", containerStyle: styles.customStyle, labelStyle: styles.newLabelStyle }]} />\n```\n\n## IconButton\n\n`IconButton` received two new props:\n\n* `selected` sets alternative combination of icon and container color,\n\n```js\n<IconButton selected>\n```\n\n* `containerColor` custom background color of the icon container. \n\n```js\n<IconButton containerColor=\"red\">\n```\n\nAt the same time, the `color` prop was renamed to `iconColor`.\n\n```diff\n- <IconButton color=\"red\" />\n+ <IconButton iconColor=\"red\" />\n```\n\n## Menu.Item\n\n`Menu.Item` received two new props:\n\n* `dense` sets smaller item height for more condensed layout,\n* `trailingIcon` which handles displaying an icon at the end of the item row. \n\n```js\n<Menu.Item dense trailingIcon=\"chevron-up\">\n```\n\nAt the same time, by analogy to the second new prop, the `icon` prop was renamed to `leadingIcon`.\n\n```diff\n- <Menu.Item icon=\"redo\" onPress={() => {}} title=\"Redo\" />\n+ <Menu.Item leadingIcon=\"redo\" onPress={() => {}} title=\"Redo\" />\n```\n\n## RadioButton.Item\n\n`RadioButton.Item` has been expanded with the prop called `labelVariant`, which defines appropriate text styles for type role and its size.\n\n```js\n<RadioButton.Item \n  labelVariant=\"titleLarge\"\n>\n```\n\n## Surface\n\n`Surface` component received one new prop:\n* `elevation` - accepts values from `0` to `5` and applies background color and shadows to the `Surface` component. Supports both iOS and Android.\n\nPreviously `elevation` was passed inside the `style` prop. Since it supported not only Android, but also iOS, we decided to extract it from `style` and create a separate `elevation` prop for that.\n\n```diff\n- <Surface style={{ elevation: 1 }} />\n+ <Surface elevation={1} />\n```\n\n## SegmentedButtons\n\n`SegmentedButtons` is a completely new component introduced in the latest version. It allows people to select options, switch views, or sort elements. It supports single and multiselect select variant and provide a lot of customization options.\n\n![segmentedButtons](screenshots/segmentedbuttons.gif)\n\n```js\nconst MyComponent = () => {\n  const [value, setValue] = React.useState('');\n\n  return (\n      <SegmentedButtons\n        value={value}\n        onValueChange={setValue}\n        buttons={[\n          {\n            value: 'walk',\n            label: 'Walking',\n          },\n          {\n            value: 'train',\n            label: 'Transit',\n          },\n          {\n            value: 'drive',\n            label: 'Driving',\n          },\n        ]}\n      />\n  );\n};\n```\n\n## TextInput.Icon\n\nThe property `name` was renamed to `icon`, since the scope and type of that prop is much wider than just the icon name – it accepts also the function which receives an object with color and size properties and \n\n```diff\n- <TextInput.Icon name=\"magnify\" />\n+ <TextInput.Icon icon=\"magnify\" />\n```\n\n## Tooltip\n\nComponent displayed upon tapping and holding a screen element or component used to present an informative text label identifying an element, such as a description of its function.\n\n![tooltip](screenshots/tooltip.gif)\n\n\n```js\n<Tooltip title=\"Selected Camera\">\n  <IconButton icon=\"camera\" selected size={24} onPress={() => {}} />\n</Tooltip>\n```\n\n## Credits\n\n<i>With this, that’s a wrap.</i>\n\nThe update wouldn't happen without a group of great React Native experts I'm happy to work with. \nFrom this place I would like to thank:\n- [Daniel Szczepanik](https://github.com/Drakeoon) for his commitment, effort and collaborative work on adjusting components,\n- [Olimpia Zurek](https://github.com/OlimpiaZurek) for her contribution and help,\n- [Aleksandra Desmurs-Linczewska](https://github.com/p-syche), [Jan Jaworek](https://github.com/jaworek) and [Kewin Wereszczyński](https://github.com/kwereszczynski) for checking and testing changes as well as providing valuable feedback,\n\nand, <i>last but not least</i>, [Satya Sahoo](https://github.com/satya164) for his mentoring during the process.\n","type":"md","dependencies":[]},
+}()),{"filepath":"pages/1.getting-started.md","title":"Getting Started","description":"","link":"getting-started","data":"# Getting Started\n\n## Installation\n\n📍<i><b>Note:</b></i> The following documentation and installation steps are related to the <b>v5 release candidate</b>.\nIf you are looking for the latest stable version documentation, please check the [v4 docs](https://callstack.github.io/react-native-paper/4.0/index.html).\n\nOpen a Terminal in your project's folder and run:\n\n```sh\nyarn add react-native-paper@5.0.0-rc.10\n```\nor\n```sh\nnpm install react-native-paper@5.0.0-rc.10\n```\nIf you're on a vanilla React Native project, you also need to install and link [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons).\n\nSpecifically `MaterialCommunityIcons` icon pack needs to be included in the project, because some components use those internally (e.g. `AppBar.BackAction` on Android). \n\n```sh\nyarn add react-native-vector-icons\n```\n\nThe library has specified dedicated steps for each platform. Please follow their [installation guide](https://github.com/oblador/react-native-vector-icons#installation) in order to properly use icon fonts.\n\nIf you don't want to install vector icons, you can use [babel-plugin-optional-require](https://github.com/satya164/babel-plugin-optional-require) to opt-out.\n\nIf you use Expo, you don't need to install vector icons. But if you have a `babel.config.js` or `.babelrc` file, make sure that it includes `babel-preset-expo`.\n\nTo get smaller bundle size by excluding modules you don't use, you can use our optional babel plugin. The plugin automatically rewrites the import statements so that only the modules you use are imported instead of the whole library. Add `react-native-paper/babel` to the `plugins` section in your `babel.config.js` for production environment. It should look like this:\n\n```js\nmodule.exports = {\n  presets: ['module:metro-react-native-babel-preset'],\n  env: {\n    production: {\n      plugins: ['react-native-paper/babel'],\n    },\n  },\n};\n```\n\nIf you created your project using Expo, it'll look something like this:\n\n```js\nmodule.exports = function(api) {\n  api.cache(true);\n  return {\n    presets: ['babel-preset-expo'],\n    env: {\n      production: {\n        plugins: ['react-native-paper/babel'],\n      },\n    },\n  };\n};\n```\n\nThe plugin only works if you are importing the library using ES2015 import statements and not with `require`.\n\n**Note:** The above examples are for the latest `react-native` using Babel 7. If you have `react-native <= 0.55`, you'll have a `.babelrc` file instead of a `babel.config.js` file and the content of the file will be different.\n\nIf you're using Flow for typechecking your code, you need to add the following under the `[options]` section in your `.flowconfig`:\n\n```ini\nmodule.file_ext=.js\nmodule.file_ext=.native.js\nmodule.file_ext=.android.js\nmodule.file_ext=.ios.js\n```\n\n## Usage\n\nWrap your root component in `Provider` from `react-native-paper`. If you have a vanilla React Native project, it's a good idea to add it in the component which is passed to `AppRegistry.registerComponent`. This will usually be in the `index.js` file. If you have an Expo project, you can do this inside the exported component in the `App.js` file.\n\nExample:\n\n```js\nimport * as React from 'react';\nimport { AppRegistry } from 'react-native';\nimport { Provider as PaperProvider } from 'react-native-paper';\nimport { name as appName } from './app.json';\nimport App from './src/App';\n\nexport default function Main() {\n  return (\n    <PaperProvider>\n      <App />\n    </PaperProvider>\n  );\n}\n\nAppRegistry.registerComponent(appName, () => Main);\n```\n\nThe `PaperProvider` component provides the theme to all the components in the framework. It also acts as a portal to components which need to be rendered at the top level.\n\nIf you have another provider (such as `Redux`), wrap it outside `PaperProvider` so that the context is available to components rendered inside a `Modal` from the library:\n\n```js\nimport * as React from 'react';\nimport { Provider as PaperProvider } from 'react-native-paper';\nimport { Provider as StoreProvider } from 'react-redux';\nimport App from './src/App';\nimport store from './store';\n\nexport default function Main() {\n  return (\n    <StoreProvider store={store}>\n      <PaperProvider>\n        <App />\n      </PaperProvider>\n    </StoreProvider>\n  );\n}\n```\n\n## Customization\n\nYou can provide a custom theme to customize the colors, typescales etc. with the `Provider` component. Check the [Material Design 3 default theme](https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v3/LightTheme.tsx) to see what customization options are supported.\n\nExample:\n\n```js\nimport * as React from 'react';\nimport { MD3LightTheme as DefaultTheme, Provider as PaperProvider } from 'react-native-paper';\nimport App from './src/App';\n\nconst theme = {\n  ...DefaultTheme,\n  colors: {\n    ...DefaultTheme.colors,\n    primary: 'tomato',\n    secondary: 'yellow',\n  },\n};\n\nexport default function Main() {\n  return (\n    <PaperProvider theme={theme}>\n      <App />\n    </PaperProvider>\n  );\n}\n```\n\n<i>Note: For MD2 check the following [Material Design 2 default theme](https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v2/LightTheme.tsx).</i>\n","type":"md","dependencies":[]},{"filepath":"pages/10.migration-guide-to-5.0.md","title":"Introducing v5 with Material You","description":"","link":"introducing-v5-with-material-you","data":"React Native Paper v5 is all about adopting the new Material Design 3 <i>aka</i> Material You. It was released in October 2021 after intense work and effort to make Material You follow a more expressive approach to design.\n\nPaper now supports both Material Design 2 and 3 through the configuration described in [Versioning](#versioning) and is compatible with a handful of API changes. \n\n# Migration guide to Material You (5.0 RC)\n\nVersion 5.0 brings support for the next Material Design iteration branded as Material You <i>(in fact being Material Design v3 or in short MD3)</i> into the `react-native-paper` library. All the components were refined according to the official [design kit on figma](https://www.figma.com/community/file/1035203688168086460) and adjusted in terms of visuals by changes in colors, typography and animations. \n\nBelow you can find the most important information about the components whose API may have changed  API has been changed due to supporting new props, renaming existing ones or some deprecations. Hopefully, based on the presented required changes, migration to the latest version should be smooth. Enjoy!\n\n### Installation\n\nCurrently v5 is a release candidate, which means it won't be installed by default from the `npm`. In order to do that, there is a need to explicitly pass package version during installation:\n\n```sh\nyarn add react-native-paper@5.0.0-rc.10\n```\nor\n```sh\nnpm install react-native-paper@5.0.0-rc.10\n```\n## Theming\n\n### Versioning\n\nIntroducing Material You <i>(MD3)</i> into `react-native-paper` doesn't mean dropping previous Material Design <i>(MD2)</i>! On the contrary, both of them will be supported, however, not simultaneously. To specify which design system components should follow in the app, there is a newly created property in the theme called `version` which can accept only one of two values:\n\n* <b>3</b> – <b>(default)</b> new Material You <i>(MD3)</i>,\n* <b>2</b> - previous Material Design <i>(MD2)</i>.\n\n```js\ntheme: {\n  /* ... */\n  version: 3 | 2\n}\n```\n\nRead more about using Material Design 2 in our [Material Design 2 theming guide](https://callstack.github.io/react-native-paper/theming.html#material-design-2)\n\n### Colors\n\nNew theme introduces a new color palette along with new namings reflecting design color tokens, but written in camel case. Palette contains a set of five key colors, where primary, secondary and tertiary are classified into <i>accent colors</i>. The second group of colors is <i>neutral and neutral variant colors</i> used for defining surface or background roles as well as specifying high and medium emphasis text and icons. Additionally, the color system includes a semantic color role for error.\n\nEach accent and error colors has a group of related tones. The tones are mapped to roles that create contrast and visual interest when applied to elements in the UI.\n\n📍<i>Note: Dynamic colors are not supported yet.</i>\n\n<img class=\"medium\" src=\"migration/color-palette.png\" />\n\nColors theme structure should follow the default palette and contain the following properties:\n\n```js\ntheme: {\n  /* ... */\n  colors: {\n    primary,\n    primaryContainer,\n    secondary,\n    secondaryContainer,\n    tertiary,\n    tertiaryContainer,\n    surface,\n    surfaceVariant,\n    surfaceDisabled,\n    background,\n    error,\n    errorContainer,\n    onPrimary,\n    onPrimaryContainer,\n    onSecondary,\n    onSecondaryContainer,\n    onTertiary,\n    onTertiaryContainer,\n    onSurface,\n    onSurfaceVariant,\n    onSurfaceDisabled,\n    onError,\n    onErrorContainer,\n    onBackground,\n    outline,\n    shadow,\n    inverseOnSurface,\n    inverseSurface,\n    inversePrimary,\n    backdrop,\n    elevation: {\n      level0,\n      level1,\n      level2,\n      level3,\n      level4,\n      level5\n    }\n  }\n}\n```\n\n👉 You can find more about color on [Material You website](https://m3.material.io/styles/color/the-color-system/key-colors-tones)\n\n## Typography\n\nA new way of approaching typography introduces one component `<Text>` which accepts prop `variant`. Variant defines appropriate text styles for type role and its size. The updated type scale organizes styles into five roles that are named to describe their purposes: <b>Display</b>, <b>Headline</b>, <b>Title</b>, <b>Label</b> and <b>Body</b> along with three display styles <i>large</i>, <i>medium</i>, and <i>small</i>. In total, there are fifteen variants that are MD3 compliant and are reflecting design typography tokens written in camel case. \n\n<i>Note:</i> If any component uses Paper's `Text` component, without specified <b>variant</b>, then `default` variant is applied.\n\n```js\n<Text variant=\"displayLarge\">Display Large</Text>\n<Text variant=\"displayMedium\">Display Medium</Text>\n<Text variant=\"displaySmall\">Display small</Text>\n\n<Text variant=\"headlineLarge\">Headline Large</Text>\n<Text variant=\"headlineMedium\">Headline Medium</Text>\n<Text variant=\"headlineSmall\">Headline Small</Text>\n\n<Text variant=\"titleLarge\">Title Large</Text>\n<Text variant=\"titleMedium\">Title Medium</Text>\n<Text variant=\"titleSmall\">Title Small</Text>\n\n<Text variant=\"bodyLarge\">Body Large</Text>\n<Text variant=\"bodyMedium\">Body Medium</Text>\n<Text variant=\"bodySmall\">Body Small</Text>\n\n<Text variant=\"labelLarge\">Label Large</Text>\n<Text variant=\"labelMedium\">Label Medium</Text>\n<Text variant=\"labelSmall\">Label Small</Text>\n ```\n\nTake a look at the suggested replacement diff:\n\n ```diff\n- <Headline>Headline</Headline>\n+ <Text variant=\"headlineSmall\">Headline</Text>\n\n- <Title>Title</Title>\n+ <Text variant=\"titleLarge\">Title</Text>\n\n- <Subheading>Subheading</Subheading>\n+ <Text variant=\"titleMedium\">Subheading</Text>\n\n- <Paragraph>Paragraph</Paragraph>\n+ <Text variant=\"bodyMedium\">Paragraph</Text>\n\n- <Caption>Caption</Caption>\n+ <Text variant=\"bodySmall\">Caption</Text>\n ```\n\n\n👉 You can find more about color on [Material You website](https://m3.material.io/styles/typography/overview)\n\n### Configure fonts\n\nThe existing utility called `configureFonts` was adjusted to help users configure their theme fonts in both version, that's why that function, as of today, is going to accept the object with the follwing properties as an argument:\n\n```ts\nconfigureFonts(params)\n```\n\n<b>Parameters:</b>\n\n| NAME        | TYPE        | REQUIRED    |\n| ----------- | ----------- | ----------- |\n| params      | object      | No          |\n\nValid `params` keys are:\n\n  * `config` ([MD2FontsConfig](https://github.com/callstack/react-native-paper/blob/main/src/styles/fonts.tsx#L63) | [MD3FontsConfig](https://github.com/callstack/react-native-paper/blob/main/src/styles/fonts.tsx#L67)) - fonts config object appropriate to the MD version\n  * `isV3` (boolean) - whether adjusting theme fonts for v3. Default it <b>true</b>.\n\nTo use your current font config from <b>v2</b> and migrate to <b>v3</b> there are two requirements:\n* the font config previously passed directly into function has to be passed into the params object property called `config`\n* the params object property `isV3` has to be set to `false`\n\n```diff\n- configureFonts(fontConfig)\n+ configureFonts({config: fontConfig, isV3: false})\n```\n\n📍<i>Note: If you want to check how to use `configureFonts` on MD3, check the [Fonts](https://callstack.github.io/react-native-paper/fonts.html) guide.</i>\n\n# Components\n\n## Appbar <i>(Top app bar)</i>\n\n`Appbar` and `Appbar.Header` in the latest version can be used in four various modes due to new prop `mode`:\n\n* `small` - Appbar with default height <i>(56) (default)</i>,\n* `medium` - Appbar with medium height <i>(112)</i>,\n* `large` - Appbar with large height <i>(152)</i>,\n* `center-aligned` - Appbar with default height <i>(56)</i> and center-aligned title.\n\n```js\n<Appbar mode=\"center-aligned\">\n  /* ... */\n</Appbar>\n```\n\nTo make it easier for users to build the `BottomBar`, formed on the `Appbar` components, we have added a property `safeAreaInsets`:\n\n```js\n<Appbar safeAreaInsets={{ bottom: 47 }}>\n  /* ... */\n</Appbar>\n```\n \nIt's worth noting that by default the theme version 3 `Appbar` and `Appbar.Header` don't have a shadow. However, it can be added by passing prop `elevated` into the component:\n\n```js\n<Appbar elevated>\n  /* ... */\n</Appbar>\n```\n\n### Appbar.Action\n\n`Appbar.Action` received new prop `isLeading`, which defines whether it's the <b>leading</b> button and should be placed at the beginning of the `Appbar`.\n\n```js\n<Appbar.Action isLeading icon=\"magnify\" onPress={() => {}} />\n```\n\n### Appbar.Content\n\nNew design guidelines indicate there is no <b>subtitle</b> in `Appbar.Content`, that's why there are two deprecations and the following props won't be supported anymore: `subtitle` and `subtitleStyle`.\n\n```diff\n- <Appbar.Content title=\"Title\" subtitle=\"Subtitle\" styles={styles.subtitle} />\n+ <Appbar.Content title=\"Title\" />\n```\n\n## Banner, Searchbar and Snackbar\n\nAccording to the updates in `Surface` on the top of which `Banner`, `Searchbar` and `Snackbar` are implemented, all three component received `elevation` prop to adjust its value.\n\n```diff\n- <Snackbar style={{elevation: 1}}>Hello</Snackbar>\n+ <Snackbar elevation={1}>Hello</Snackbar>\n```\n\n## BottomNavigation <i>(Navigation bar)</i>\n\nFor the sake of new animation of pill shape, indicating active destination, and assisting icon change from outlined to filled, there are three changes within `navigationState.routes` property items:\n\n* `color` is deprecated since color is constant and the same for all routes,\n* `icon` is renamed to `focusedIcon`, as the name implies, with theme version 3 it's the outline icon used as focused tab icon and with theme version 2 it's a default icon,\n* `unfocusedIcon` <i>(optional)</i> is the filled icon used as the unfocused tab icon, compatible with theme version 3.\n\n📍<i>Note: `unfocusedIcon` is optional, if you can't find outline icon equivalent, omit that prop, so `focusedIcon` will be displayed in both active and inactive state</i>\n\n```diff\nroutes: [\n- { key: \"album\", title: \"Album\", icon: \"image-album\", color: \"#3F51B5\" },\n+ { key: \"album\", title: \"Album\", focusedIcon: \"image-album\" },\n- { key: \"library\", title: \"Library\", icon: \"inbox\", color: \"#009688\" },\n+ { key: \"library\", title: \"Library\", focusedIcon: \"inbox\", unfocusedIcon: \"inbox-outline\" },\n- { key: \"favorites\", title: \"Favorites\", icon: \"heart\", color: \"#795548\" },\n+ { key: \"favorites\", title: \"Favorites\", focusedIcon: \"heart\", unfocusedIcon: \"heart-outline; },\n- { key: \"purchased\", title: \"Purchased\", icon: \"shopping-cart\", color: \"#607D8B\" },\n+ { key: \"purchased\", title: \"Purchased\", focusedIcon: \"shopping-cart\" },\n]\n```\n\nThe `compact` prop was also introduced, working with both themes. It indicates whether tabs should be spread across the entire width, especially in a <i>horizontal</i> mode. \n\n```js\n<BottomNavigation compact />\n```\n\nIt's worth to mention that default value of prop `shifting` depends on the theme version:\n* <b>3</b> - it's `false`,\n* <b>2</b> - it's `true` when there are more than 3 tabs.\n\nTwo additional props that control the scene animation were introduced that control the animation of the tabs when `sceneAnimationEnabled` is `true`:\n* `sceneAnimationType: \"opacity\" | \"shifting\" | undefined` - defines the animation type for the scene. `shifting` enables a new animation where navigating to a scene will shift it horizontally into view. Both `opacity` and `undefined` have the same effect, fading the scene into view.\n* `sceneAnimationEasing` allows specifying a custom easing function for the scene animation.\n\n![shiftingAnimation](screenshots/bottom-navigation-shifting.gif)\n\nOn a final note, please be aware that `BottomNavigation` with theme version 3 doesn't have a shadow.\n\n## Button\n\n`Button`'s property `mode` has been expanded with two additional options:\n* `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background,\n* `container-tonal` - button with a secondary background color, an alternative middle ground between contained and outlined buttons.\n\n```js\n<>\n  <Button icon=\"camera\" mode=\"elevated\" onPress={onPress}>\n    Elevated\n  </Button>\n  <Button icon=\"camera\" mode=\"container-tonal\" onPress={onPress}>\n    Container tonal\n  </Button>\n</>\n```\n\nThe property `color` is deprecated, but in its place two new props called `buttonColor` and `textColor` are introduced:\n* `buttonColor` - custom button's background color,\n* `textColor` - custom button's text color.\n\n```diff\n- <Button mode=\"text\" color=\"red\" onPress={onPress}>Custom text color</Button>\n+ <Button mode=\"text\" textColor=\"red\" onPress={onPress}>Custom text color</Button>\n```\n\n```diff\n- <Button mode=\"contained\" color=\"red\" onPress={onPress}>Custom text color</Button>\n+ <Button mode=\"contained\" buttonColor=\"red\" onPress={onPress}>Custom background color</Button>\n```\n\nPlease be aware that along with theme version 3, by default text in the `Button` component isn't uppercased and `contained` button doesn't have any shadow <i>(use then `elevated`)</i>.\n\n## Card\n\nThe `Card` component's property `mode` has been expanded with one additional option called `contained`, which applies to the card's specified background color without any elevation and border.\n\n```js\n<Card mode=\"contained\" />\n```\n\n## Card.Title\n\nSince there is no one right way to make a card, there is also no one right way for specifying a title and subtitle variant. Therefore two new props come in handy:\n\n* `titleVariant` - title text variant defines appropriate text styles for type role and its size.\n* `subtitleVariant` - subtitle text variant defines appropriate text styles for type role and its size.\n\n```js\n<Card.Title\n  titleVariant=\"headlineMedium\"\n  subtitleVariant=\"bodyLarge\"\n/>\n```\n\n## Checkbox.Item\n\n`Checkbox.Item` similarly to `RadioButton.Item` has been expanded with the prop called `labelVariant`, which defines appropriate text styles for type role and its size.\n\n```js\n<Checkbox.Item \n  labelVariant=\"titleLarge\"\n>\n```\n\n## Chip\n\nTo properly compose `Chip` component and adjust into required type, there are three new props that will come in handy:\n\n* `compact` - sets smaller horizontal paddings around the label, useful for `Chip` containing only the label,\n* `elevated` - indicating whether `Chip` should be elevated,\n* `showSelectedOverlay` - defining whether to display an overlay on a selected button.\n\n```js\n<>\n  <Chip compact>Compact Chip</Chip>\n  <Chip icon=\"camera\" elevated>Elevated Chip</Chip>\n  <Chip icon=\"camera\" selected showSelectedOverlay>Chip with selected overlay</Chip>\n</>\n```\n\n## Dialog.Icon\n\n`Dialog.Icon` is another freshly added component presenting an icon within a `Dialog`, placed at the top of the content.\n\n📍<i>Note: It's working only with theme version 3.</i>\n\n```js\n<Portal>\n  <Dialog visible={visible} onDismiss={hideDialog}>\n    <Dialog.Icon icon=\"alert\" />\n  </Dialog>\n</Portal>\n```\n## Divider\n\n`Divider` component received two new props:\n\n* `bold` - divider is bolded,\n* `horizontalInset` - divider has horizontal insets on both sides.\n\nAdditionally prop `inset` was renamed to `leftInset`.\n\n```diff\n- <Divider inset />\n+ <Divider leftInset />\n```\n\n## Drawer.CollapsedItem <i>(Navigation rail)</i>\n\n`Drawer.CollapsedItem` is a newly created side navigation component that can be used within `Drawer`, representing a destination in the form of an action item with an icon and optionally label.\n\n📍<i>Note: It's working only with theme version 3.</i>\n\n```js\n<Drawer.Section>\n  <Drawer.CollapsedItem\n    icon=\"inbox\"\n    label=\"Inbox\"\n  />\n  <Drawer.CollapsedItem\n    icon=\"star\"\n    label=\"Starred\"\n  />\n</Drawer.Section>\n```\n\n## Floating Action Buttons\n\n`FAB`, `AnimatedFAB` and `FAB.Group` in the latest version can be used with four variants and two modes, thanks to two new props:\n\n* `variant` defines color mappings variant for combinations of container and icon colors. Can be one of: <b>primary</b> <i>(default)</i>, <b>secondary</b>, <b>tertiary</b> or <b>surface</b>.\n\n```js\n<FAB variant=\"tertiary\" />\n```\n\n* `mode` specifies whether a button should be <b>flat</b> or <b>elevated</b>:\n   - `flat` - button without a shadow,\n   - `elevated` - button with a shadow.\n\n```js\n<FAB mode=\"flat\" />\n```\n\n### FAB\n\nAdditionaly `FAB` may be applied in one of three available sizes, thanks to new prop `size`: \n\n* `small` - FAB with small height (40),\n* `medium` - Appbar with default medium height (56),\n* `large` - Appbar with large height (96).\n\n```js\n<FAB size=\"large\" />\n```\n\nHowever, if you would like to have your own size of `FAB`, there is a new prop called `customSize`:\n\n```js\n<FAB customSize={64}>\n```\n\nAccordingly to introducing `size=\"small\"`, prop `small` was deprecated.\n\n```diff\n- <FAB small />\n+ <FAB size=\"small\" />\n```\n\n### FAB.Group\n\nThere is also deprecation in one of the `actions` properties, namely `small` prop is deprecated and replaced in favour of the default `size=\"small\"`.\n\n```diff\n- <FAB.Group actions={[{ icon: \"plus\", small }]} />\n+ <FAB.Group actions={[{ icon: \"plus\" }]} />\n```\n\nAdditionally, the action item property previously known as `labelStyle` was renamed to `containerStyle` since it's tied mostly with the container styles. At the same time, `labelStyle` is still available with the new role related to styling item label. \n\n```diff\n- <FAB.Group actions={[{ icon: \"plus\", labelStyle: styles.customStyle }]} />\n+ <FAB.Group actions={[{ icon: \"plus\", containerStyle: styles.customStyle, labelStyle: styles.newLabelStyle }]} />\n```\n\n## IconButton\n\n`IconButton` received two new props:\n\n* `selected` sets alternative combination of icon and container color,\n\n```js\n<IconButton selected>\n```\n\n* `containerColor` custom background color of the icon container. \n\n```js\n<IconButton containerColor=\"red\">\n```\n\nAt the same time, the `color` prop was renamed to `iconColor`.\n\n```diff\n- <IconButton color=\"red\" />\n+ <IconButton iconColor=\"red\" />\n```\n\n## Menu.Item\n\n`Menu.Item` received two new props:\n\n* `dense` sets smaller item height for more condensed layout,\n* `trailingIcon` which handles displaying an icon at the end of the item row. \n\n```js\n<Menu.Item dense trailingIcon=\"chevron-up\">\n```\n\nAt the same time, by analogy to the second new prop, the `icon` prop was renamed to `leadingIcon`.\n\n```diff\n- <Menu.Item icon=\"redo\" onPress={() => {}} title=\"Redo\" />\n+ <Menu.Item leadingIcon=\"redo\" onPress={() => {}} title=\"Redo\" />\n```\n\n## RadioButton.Item\n\n`RadioButton.Item` has been expanded with the prop called `labelVariant`, which defines appropriate text styles for type role and its size.\n\n```js\n<RadioButton.Item \n  labelVariant=\"titleLarge\"\n>\n```\n\n## Surface\n\n`Surface` component received one new prop:\n* `elevation` - accepts values from `0` to `5` and applies background color and shadows to the `Surface` component. Supports both iOS and Android.\n\nPreviously `elevation` was passed inside the `style` prop. Since it supported not only Android, but also iOS, we decided to extract it from `style` and create a separate `elevation` prop for that.\n\n```diff\n- <Surface style={{ elevation: 1 }} />\n+ <Surface elevation={1} />\n```\n\n## SegmentedButtons\n\n`SegmentedButtons` is a completely new component introduced in the latest version. It allows people to select options, switch views, or sort elements. It supports single and multiselect select variant and provide a lot of customization options.\n\n![segmentedButtons](screenshots/segmentedbuttons.gif)\n\n```js\nconst MyComponent = () => {\n  const [value, setValue] = React.useState('');\n\n  return (\n      <SegmentedButtons\n        value={value}\n        onValueChange={setValue}\n        buttons={[\n          {\n            value: 'walk',\n            label: 'Walking',\n          },\n          {\n            value: 'train',\n            label: 'Transit',\n          },\n          {\n            value: 'drive',\n            label: 'Driving',\n          },\n        ]}\n      />\n  );\n};\n```\n\n## TextInput.Icon\n\nThe property `name` was renamed to `icon`, since the scope and type of that prop is much wider than just the icon name – it accepts also the function which receives an object with color and size properties and \n\n```diff\n- <TextInput.Icon name=\"magnify\" />\n+ <TextInput.Icon icon=\"magnify\" />\n```\n\n## Tooltip\n\nComponent displayed upon tapping and holding a screen element or component used to present an informative text label identifying an element, such as a description of its function.\n\n![tooltip](screenshots/tooltip.gif)\n\n\n```js\n<Tooltip title=\"Selected Camera\">\n  <IconButton icon=\"camera\" selected size={24} onPress={() => {}} />\n</Tooltip>\n```\n\n## Credits\n\n<i>With this, that’s a wrap.</i>\n\nThe update wouldn't happen without a group of great React Native experts I'm happy to work with. \nFrom this place I would like to thank:\n- [Daniel Szczepanik](https://github.com/Drakeoon) for his commitment, effort and collaborative work on adjusting components,\n- [Olimpia Zurek](https://github.com/OlimpiaZurek) for her contribution and help,\n- [Aleksandra Desmurs-Linczewska](https://github.com/p-syche), [Jan Jaworek](https://github.com/jaworek) and [Kewin Wereszczyński](https://github.com/kwereszczynski) for checking and testing changes as well as providing valuable feedback,\n\nand, <i>last but not least</i>, [Satya Sahoo](https://github.com/satya164) for his mentoring during the process.\n","type":"md","dependencies":[]},
 (function() {
   var React = require('react');
   var Content = require("/home/circleci/react-native-paper/docs/node_modules/component-docs/dist/templates/Content.js").default;
@@ -2055,7 +2055,974 @@ MDXContent.isMDXComponent = true;;
       );
     },
   };
-}()),{"filepath":"pages/4.fonts.md","title":"Fonts","description":"","link":"fonts","data":"# Fonts\n\n## Installing custom fonts\n\nThe easiest way to install custom fonts to your RN project is do as follows:\n\n  `1.` Define path to assets directory with fonts in project:\n\n  <i>Example:</i>\n\n  ```js\n    module.exports = {\n      ...\n      assets: [\n        './assets/fonts'\n      ],\n  ```\n\n  <i>Note:</i> `fonts` is a folder with `.ttf` files\n\n  `2.` Place your font files in your assets directory.\n\n  `3.` Link font files, using the following command in the terminal:\n\n  * React Native  `>= 0.69`:\n\n  ```sh\n  npx react-native-asset\n  ```\n\n  * React Native `< 0.69`:\n\n  ```sh\n  npx react-native link\n  ```\n\n\n  `4.` Restart your project to refresh changes.\n\nNow, you are able to use `fontFamily` from font files.\n\n## Configuring fonts in ThemeProvider\n\n### Material Design 2\n\nTo create a custom font, prepare a `fontConfig` object where fonts are divided by platforms. After that, you have to:\n\n* pass the `fontConfig` into `configureFonts` params object property called `config` \n* set the params object property `isV3` to `false`. \n\nThe `fontConfig` object accepts `ios`, `android`, `macos`, `windows`, `web`, and `native`. Use these to override fonts on particular platforms.\n\nNote: At a minimum, you need to explicitly pass fonts for `android`, `ios`, and `web`.\n\n```js\nimport * as React from 'react';\nimport { configureFonts, MD2LightTHeme, Provider as PaperProvider } from 'react-native-paper';\nimport App from './src/App';\n\nconst fontConfig = {\n  web: {\n    regular: {\n      fontFamily: 'sans-serif',\n      fontWeight: 'normal',\n    },\n    medium: {\n      fontFamily: 'sans-serif-medium',\n      fontWeight: 'normal',\n    },\n    light: {\n      fontFamily: 'sans-serif-light',\n      fontWeight: 'normal',\n    },\n    thin: {\n      fontFamily: 'sans-serif-thin',\n      fontWeight: 'normal',\n    },\n  },\n  ios: {\n    regular: {\n      fontFamily: 'sans-serif',\n      fontWeight: 'normal',\n    },\n    medium: {\n      fontFamily: 'sans-serif-medium',\n      fontWeight: 'normal',\n    },\n    light: {\n      fontFamily: 'sans-serif-light',\n      fontWeight: 'normal',\n    },\n    thin: {\n      fontFamily: 'sans-serif-thin',\n      fontWeight: 'normal',\n    },\n  },\n  android: {\n    regular: {\n      fontFamily: 'sans-serif',\n      fontWeight: 'normal',\n    },\n    medium: {\n      fontFamily: 'sans-serif-medium',\n      fontWeight: 'normal',\n    },\n    light: {\n      fontFamily: 'sans-serif-light',\n      fontWeight: 'normal',\n    },\n    thin: {\n      fontFamily: 'sans-serif-thin',\n      fontWeight: 'normal',\n    },\n  }\n};\n\nconst theme = {\n  ...MD2LightTheme,\n  fonts: configureFonts({config: fontConfig, isV3: false}),\n};\n\nexport default function Main() {\n  return (\n    <PaperProvider theme={theme}>\n      <App />\n    </PaperProvider>\n  );\n}\n```\n\n### Material Design 3\n\nIn the latest version fonts in theme are structured based on the `variant` keys e.g. `displayLarge` or `bodyMedium` which are then used in `Text`'s component throughout the whole library.\n\n* If there is a need to create a custom font variant, prepare its config object including required all fonts properties. After that, defined `fontConfig` has to be passed under the <b>`variant`</b> name as `config` into the params object:\n\n```js\nimport * as React from 'react';\nimport { configureFonts, MD3LightTheme, Provider as PaperProvider } from 'react-native-paper';\nimport App from './src/App';\n\nconst fontConfig = {\n  customVariant: {\n    fontFamily: Platform.select({\n      web: 'Roboto, \"Helvetica Neue\", Helvetica, Arial, sans-serif',\n      ios: 'System',\n      default: 'sans-serif',\n    }),\n    fontWeight: '400',\n    letterSpacing: 0.5,\n    lineHeight: 22,\n    fontSize: 20,\n  }\n};\n\nconst theme = {\n  ...MD3LightTheme,\n  fonts: configureFonts({config: fontConfig}),\n};\n\nexport default function Main() {\n  return (\n    <PaperProvider theme={theme}>\n      <App />\n    </PaperProvider>\n  );\n}\n```\n\n* In order to override one of the available `variant`'s font properties, pass the modified `fontConfig` under specific <b>`variant`</b> name as `config` into the params object:\n\n```js\nimport * as React from 'react';\nimport { configureFonts, MD3LightTheme, Provider as PaperProvider } from 'react-native-paper';\nimport App from './src/App';\n\nconst fontConfig = {\n  bodyLarge: {\n    letterSpacing: 0.5,\n    lineHeight: 22,\n    fontSize: 20,\n  }\n};\n\nconst theme = {\n  ...MD3LightTheme,\n  fonts: configureFonts({config: fontConfig}),\n};\n\nexport default function Main() {\n  return (\n    <PaperProvider theme={theme}>\n      <App />\n    </PaperProvider>\n  );\n}\n```\n\n* However, if you just want to override any font property e.g. `fontFamily` or `letterSpacing` for <b>all</b> variants, you can pass the `fontConfig` as a `config` into the params object <b>without</b> specifying variant name:\n\n```js\nimport * as React from 'react';\nimport { configureFonts, MD3LightTheme, Provider as PaperProvider } from 'react-native-paper';\nimport App from './src/App';\n\nconst fontConfig = {\n  fontFamily: 'NotoSans'\n};\n\nconst theme = {\n  ...MD3LightTheme,\n  fonts: configureFonts({config: fontConfig}),\n};\n\nexport default function Main() {\n  return (\n    <PaperProvider theme={theme}>\n      <App />\n    </PaperProvider>\n  );\n}\n```","type":"md","dependencies":[]},{"filepath":"pages/5.react-native-web.md","title":"Using on the Web","description":"","link":"using-on-the-web","data":"# Using on the Web\n\n## Pre-requisites\n\nMake sure that you have followed the getting started guide and have `react-native-paper` installed and configured before following this guide.\n\nWe're going to use [react-native-web](https://github.com/necolas/react-native-web) and [webpack](https://webpack.js.org/) to use React Native Paper on the web, so let's install them as well.\n\nTo install `react-native-web`, run:\n\n```sh\nyarn add react-native-web react-dom react-art\n```\n\n### Using CRA ([Create React App](https://github.com/facebook/create-react-app))\n\nInstall [`react-app-rewired`](https://github.com/timarney/react-app-rewired) to override `webpack` configuration:\n\n```sh\nyarn add --dev react-app-rewired\n```\n\n[Configure `babel-loader`](#2-configure-babel-loader) using a new file called `config-overrides.js`:\n\n```js\nmodule.exports = function override(config, env) {\n  config.module.rules.push({\n    test: /\\.js$/,\n    exclude: /node_modules[/\\\\](?!react-native-vector-icons)/,\n    use: {\n      loader: \"babel-loader\",\n      options: {\n        // Disable reading babel configuration\n        babelrc: false,\n        configFile: false,\n\n        // The configuration for compilation\n        presets: [\n          [\"@babel/preset-env\", { useBuiltIns: \"usage\" }],\n          \"@babel/preset-react\",\n          \"@babel/preset-flow\",\n          \"@babel/preset-typescript\"\n        ],\n        plugins: [\n          \"@babel/plugin-proposal-class-properties\",\n          \"@babel/plugin-proposal-object-rest-spread\"\n        ]\n      }\n    }\n  });\n\n  return config;\n};\n```\n\nChange your script in `package.json`:\n\n```diff\n/* package.json */\n\n  \"scripts\": {\n-   \"start\": \"react-scripts start\",\n+   \"start\": \"react-app-rewired start\",\n-   \"build\": \"react-scripts build\",\n+   \"build\": \"react-app-rewired build\",\n-   \"test\": \"react-scripts test --env=jsdom\",\n+   \"test\": \"react-app-rewired test --env=jsdom\"\n}\n```\n\n### Custom webpack setup\n\nTo install `webpack`, run:\n\n```sh\nyarn add --dev webpack webpack-cli webpack-dev-server\n```\n\nIf you don't have a webpack config in your project, copy the following to `webpack.config.js` get started:\n\n```js\nconst path = require('path');\n\nmodule.exports = {\n  mode: 'development',\n\n  // Path to the entry file, change it according to the path you have\n  entry: path.join(__dirname, 'App.js'),\n\n  // Path for the output files\n  output: {\n    path: path.join(__dirname, 'dist'),\n    filename: 'app.bundle.js',\n  },\n\n  // Enable source map support\n  devtool: 'source-map',\n\n  // Loaders and resolver config\n  module: {\n    rules: [\n\n    ],\n  },\n  resolve: {\n\n  },\n\n  // Development server config\n  devServer: {\n    contentBase: [path.join(__dirname, 'public')],\n    historyApiFallback: true,\n  },\n};\n```\n\nAlso create a folder named `public` and add the following file named `index.html`:\n\n```html\n<!doctype html>\n<head>\n  <meta charSet=\"utf-8\" />\n  <meta httpEquiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n\n  <meta name=\"viewport\" content=\"width=device-width,minimum-scale=1,initial-scale=1\" />\n\n  <title>App</title>\n\n  <style>\n    html, body, #root {\n      height: 100%;\n    }\n\n    #root {\n      display: flex;\n      flex-direction: column;\n    }\n  </style>\n</head>\n<body>\n  <div id=\"root\"></div>\n  <script src=\"app.bundle.js\"></script>\n</body>\n```\n\nNow we're ready to start configuring the project.\n\n## Configure webpack\n\n### 1. Alias `react-native` to `react-native-web`\n\nFirst, we have to tell webpack to use `react-native-web` instead of `react-native`. Add the following alias in your webpack config under `resolve`:\n\n```js\nalias: {\n  'react-native$': require.resolve('react-native-web'),\n}\n```\n\n### 2. Configure `babel-loader`\n\nNext, we want to tell `babel-loader` to compile `react-native-paper` and `react-native-vector-icons`. We would also want to disable reading the babel configuration files to prevent any conflicts.\n\nFirst install the required dependencies:\n\n```sh\nyarn add --dev babel-loader @babel/preset-env @babel/preset-react @babel/preset-flow @babel/preset-typescript @babel/plugin-proposal-class-properties @babel/plugin-proposal-object-rest-spread\n```\n\nNow, add the following in the `module.rules` array in your webpack config:\n\n```js\n{\n  test: /\\.js$/,\n  exclude: /node_modules[/\\\\](?!react-native-vector-icons)/,\n  use: {\n    loader: 'babel-loader',\n    options: {\n      // Disable reading babel configuration\n      babelrc: false,\n      configFile: false,\n\n      // The configuration for compilation\n      presets: [\n        ['@babel/preset-env', { useBuiltIns: 'usage' }],\n        '@babel/preset-react',\n        '@babel/preset-flow',\n        \"@babel/preset-typescript\"\n      ],\n      plugins: [\n        '@babel/plugin-proposal-class-properties',\n        '@babel/plugin-proposal-object-rest-spread'\n      ],\n    },\n  },\n},\n```\n\n### 3. Configure `file-loader`\n\n#### webpack < 5.0\n\nTo be able to import images and other assets using `require`, we need to configure `file-loader`. Let's install it:\n\n```sh\nyarn add --dev file-loader\n```\n\nTo configure it, add the following in the `module.rules` array in your webpack config:\n\n```js\n{\n  test: /\\.(jpg|png|woff|woff2|eot|ttf|svg)$/,\n  loader: 'file-loader',\n}\n```\n\n##### webpack >= 5.0\n\nUse `asset/resource`, since `file-loader` was deprecated in webpack v5.\n\n```js\n{\n  test: /\\.(jpg|png|woff|woff2|eot|ttf|svg)$/,\n  type: 'asset/resource'\n}\n```\n\n## Load the Material Community Icons\n\nIf you followed the getting started guide, you should have the following code in your root component:\n\n```js\n<PaperProvider>\n  <App />\n</PaperProvider>\n```\n\nNow we need tweak this section to load the Material Community Icons from the [`react-native-vector-icons`](https://github.com/oblador/react-native-vector-icons) library:\n\n```js\n<PaperProvider>\n  <React.Fragment>\n    {Platform.OS === 'web' ? (\n      <style type=\"text/css\">{`\n        @font-face {\n          font-family: 'MaterialCommunityIcons';\n          src: url(${require('react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf')}) format('truetype');\n        }\n      `}</style>\n    ) : null}\n    <App />\n  </React.Fragment>\n</PaperProvider>\n```\n\nRemember to import `Platform` from `react-native` at the top:\n\n```js\nimport { Platform } from 'react-native';\n```\n\nYou can also load these fonts using [`css-loader`](https://github.com/webpack-contrib/css-loader) if you prefer.\n\n## Load the Roboto fonts (optional)\n\nThe default theme in React Native Paper uses the Roboto font. You can add them to your project following [the instructions on its Google Fonts page](https://fonts.google.com/specimen/Roboto?selection.family=Roboto:100,300,400,500).\n\n## We're done!\n\nYou can run `webpack-dev-server` to run the webpack server and open your project in the browser. You can add the following script in your `package.json` under the `\"scripts\"` section to make it easier:\n\n```json\n\"web\": \"webpack-dev-server --open\"\n```\n\nNow you can run `yarn web` to run the project on web.\n","type":"md","dependencies":[]},{"filepath":"pages/6.recommended-libraries.md","title":"Recommended Libraries","description":"","link":"recommended-libraries","data":"# Recommended Libraries\n\nOur mission is to provide a full suite of well-integrated components built with Material Design in mind. However, many components already have better well maintained implementations.\n\nHere are some of the libraries we recommend:\n\n## Tabs\n\n[react-native-community/react-native-tab-view](https://github.com/react-native-community/react-native-tab-view)\nMaterial Design themed [swipeable tabs](https://material.io/design/components/tabs.html), maintained by [@satya164](https://twitter.com/satya164) and [@mosdnk](https://twitter.com/mosdnk).\n\n[react-native-paper-tabs](https://github.com/web-ridge/react-native-paper-tabs)\nMaterial Design themed [swipeable tabs](https://material.io/design/components/tabs.html) for React Native Paper, maintained by [@RichardLindhout](https://twitter.com/RichardLindhout)\n\n## Bottom sheet\n\n[osdnk/reanimated-bottom-sheet](https://github.com/osdnk/react-native-reanimated-bottom-sheet)\nAn implementation of the [bottom sheet behaviour](https://material.io/design/components/sheets-bottom.html), maintained by [@mosdnk](https://twitter.com/mosdnk).\n\n[gorhom/react-native-bottom-sheet](https://github.com/gorhom/react-native-bottom-sheet)\nAn implementation of the [bottom sheet behaviour](https://material.io/design/components/sheets-bottom.html), maintained by [@Gorhom](https://twitter.com/Gorhom).\n\n\n## Date Picker\n[web-ridge/react-native-paper-dates](https://github.com/web-ridge/react-native-paper-dates)\nMaterial Design themed [date picker](https://material.io/components/date-pickers), maintained by [@RichardLindhout](https://twitter.com/RichardLindhout)\n \n[react-native-community/react-native-datetimepicker](https://github.com/react-native-community/react-native-datetimepicker)\n\n## Time Picker\n[web-ridge/react-native-paper-dates](https://github.com/web-ridge/react-native-paper-dates)\nMaterial Design themed [time picker](https://material.io/components/time-pickers), maintained by [@RichardLindhout](https://twitter.com/RichardLindhout) \n","type":"md","dependencies":[]},(function() {
+}()),
+(function() {
+  var React = require('react');
+  var Content = require("/home/circleci/react-native-paper/docs/node_modules/component-docs/dist/templates/Content.js").default;
+
+  var m = { exports: {} };
+  var r = {
+    "react": require("/home/circleci/react-native-paper/docs/node_modules/react/index.js"),
+"@mdx-js/tag": require("/home/circleci/react-native-paper/docs/node_modules/@mdx-js/tag/dist/index.js")
+  };
+
+  (function(module, exports, require, __filename, __dirname) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = exports.meta = void 0;
+
+var React = _interopRequireWildcard(require("react"));
+
+var _tag = require("@mdx-js/tag");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var meta = {
+  title: "Fonts"
+};
+exports.meta = meta;
+var layoutProps = {
+  meta: meta
+};
+
+var MDXContent = /*#__PURE__*/function (_React$Component) {
+  _inherits(MDXContent, _React$Component);
+
+  var _super = _createSuper(MDXContent);
+
+  function MDXContent(props) {
+    var _this;
+
+    _classCallCheck(this, MDXContent);
+
+    _this = _super.call(this, props);
+    _this.layout = null;
+    return _this;
+  }
+
+  _createClass(MDXContent, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          components = _this$props.components,
+          props = _objectWithoutProperties(_this$props, ["components"]);
+
+      return /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "wrapper",
+        components: components
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "h1",
+        components: components
+      }, "Fonts"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "h2",
+        components: components
+      }, "Installing custom fonts"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "p",
+        components: components
+      }, "The easiest way to install custom fonts to your RN project is do as follows:"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "p",
+        components: components
+      }, "  ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "1."), " Define path to assets directory with fonts in project:"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "p",
+        components: components
+      }, "  ", /*#__PURE__*/React.createElement("i", null, "Example:")), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-js"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-js",
+          "dangerouslySetInnerHTML": {
+            "__html": "  module<span class=\"token punctuation\">.</span>exports <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token operator\">...</span>\n    assets<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">[</span>\n      <span class=\"token string\">'./assets/fonts'</span>\n    <span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n"
+          }
+        }
+      })), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "p",
+        components: components
+      }, "  ", /*#__PURE__*/React.createElement("i", null, "Note:"), " ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "fonts"), " is a folder with ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, ".ttf"), " files"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "p",
+        components: components
+      }, "  ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "2."), " Place your font files in your assets directory."), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "p",
+        components: components
+      }, "  ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "3."), " Link font files, using the following command in the terminal:"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "ul",
+        components: components
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "li",
+        components: components,
+        parentName: "ul"
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "p",
+        components: components,
+        parentName: "li"
+      }, "React Native  ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, ">= 0.69"), ":"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        parentName: "li",
+        props: {
+          "className": "language-sh"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-sh"
+        }
+      }, "npx react-native-asset\n"))), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "li",
+        components: components,
+        parentName: "ul"
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "p",
+        components: components,
+        parentName: "li"
+      }, "React Native ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "< 0.69"), ":"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        parentName: "li",
+        props: {
+          "className": "language-sh"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-sh"
+        }
+      }, "npx react-native link\n")))), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "p",
+        components: components
+      }, "  ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "4."), " Restart your project to refresh changes."), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "p",
+        components: components
+      }, "Now, you are able to use ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "fontFamily"), " from font files."), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "h2",
+        components: components
+      }, "Configuring fonts in ThemeProvider"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "h3",
+        components: components
+      }, "Material Design 2"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "h4",
+        components: components
+      }, "Using ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "h4"
+      }, "configureFonts"), " helper"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "p",
+        components: components
+      }, "To create a custom font, prepare a ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "fontConfig"), " object where fonts are divided by platforms. After that, you have to:"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "ul",
+        components: components
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "li",
+        components: components,
+        parentName: "ul"
+      }, "pass the ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "li"
+      }, "fontConfig"), " into ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "li"
+      }, "configureFonts"), " params object property called ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "li"
+      }, "config"), " "), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "li",
+        components: components,
+        parentName: "ul"
+      }, "set the params object property ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "li"
+      }, "isV3"), " to ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "li"
+      }, "false"), ". ")), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "p",
+        components: components
+      }, "The ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "fontConfig"), " object accepts ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "ios"), ", ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "android"), ", ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "macos"), ", ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "windows"), ", ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "web"), ", and ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "native"), ". Use these to override fonts on particular platforms."), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "p",
+        components: components
+      }, /*#__PURE__*/React.createElement("i", null, "Note:"), "At a minimum, you need to explicitly pass fonts for ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "android"), ", ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "ios"), ", and ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "web"), "."), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-js"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-js",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token keyword\">import</span> <span class=\"token operator\">*</span> <span class=\"token keyword\">as</span> React <span class=\"token keyword\">from</span> <span class=\"token string\">'react'</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword\">import</span> <span class=\"token punctuation\">{</span> configureFonts<span class=\"token punctuation\">,</span> MD2LightTHeme<span class=\"token punctuation\">,</span> Provider <span class=\"token keyword\">as</span> PaperProvider <span class=\"token punctuation\">}</span> <span class=\"token keyword\">from</span> <span class=\"token string\">'react-native-paper'</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword\">import</span> App <span class=\"token keyword\">from</span> <span class=\"token string\">'./src/App'</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword\">const</span> fontConfig <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span>\n  web<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n    regular<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n      fontFamily<span class=\"token punctuation\">:</span> <span class=\"token string\">'sans-serif'</span><span class=\"token punctuation\">,</span>\n      fontWeight<span class=\"token punctuation\">:</span> <span class=\"token string\">'normal'</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n    medium<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n      fontFamily<span class=\"token punctuation\">:</span> <span class=\"token string\">'sans-serif-medium'</span><span class=\"token punctuation\">,</span>\n      fontWeight<span class=\"token punctuation\">:</span> <span class=\"token string\">'normal'</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n    light<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n      fontFamily<span class=\"token punctuation\">:</span> <span class=\"token string\">'sans-serif-light'</span><span class=\"token punctuation\">,</span>\n      fontWeight<span class=\"token punctuation\">:</span> <span class=\"token string\">'normal'</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n    thin<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n      fontFamily<span class=\"token punctuation\">:</span> <span class=\"token string\">'sans-serif-thin'</span><span class=\"token punctuation\">,</span>\n      fontWeight<span class=\"token punctuation\">:</span> <span class=\"token string\">'normal'</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n  ios<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n    regular<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n      fontFamily<span class=\"token punctuation\">:</span> <span class=\"token string\">'sans-serif'</span><span class=\"token punctuation\">,</span>\n      fontWeight<span class=\"token punctuation\">:</span> <span class=\"token string\">'normal'</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n    medium<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n      fontFamily<span class=\"token punctuation\">:</span> <span class=\"token string\">'sans-serif-medium'</span><span class=\"token punctuation\">,</span>\n      fontWeight<span class=\"token punctuation\">:</span> <span class=\"token string\">'normal'</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n    light<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n      fontFamily<span class=\"token punctuation\">:</span> <span class=\"token string\">'sans-serif-light'</span><span class=\"token punctuation\">,</span>\n      fontWeight<span class=\"token punctuation\">:</span> <span class=\"token string\">'normal'</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n    thin<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n      fontFamily<span class=\"token punctuation\">:</span> <span class=\"token string\">'sans-serif-thin'</span><span class=\"token punctuation\">,</span>\n      fontWeight<span class=\"token punctuation\">:</span> <span class=\"token string\">'normal'</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n  android<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n    regular<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n      fontFamily<span class=\"token punctuation\">:</span> <span class=\"token string\">'sans-serif'</span><span class=\"token punctuation\">,</span>\n      fontWeight<span class=\"token punctuation\">:</span> <span class=\"token string\">'normal'</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n    medium<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n      fontFamily<span class=\"token punctuation\">:</span> <span class=\"token string\">'sans-serif-medium'</span><span class=\"token punctuation\">,</span>\n      fontWeight<span class=\"token punctuation\">:</span> <span class=\"token string\">'normal'</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n    light<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n      fontFamily<span class=\"token punctuation\">:</span> <span class=\"token string\">'sans-serif-light'</span><span class=\"token punctuation\">,</span>\n      fontWeight<span class=\"token punctuation\">:</span> <span class=\"token string\">'normal'</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n    thin<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n      fontFamily<span class=\"token punctuation\">:</span> <span class=\"token string\">'sans-serif-thin'</span><span class=\"token punctuation\">,</span>\n      fontWeight<span class=\"token punctuation\">:</span> <span class=\"token string\">'normal'</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword\">const</span> theme <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token operator\">...</span>MD2LightTheme<span class=\"token punctuation\">,</span>\n  fonts<span class=\"token punctuation\">:</span> <span class=\"token function\">configureFonts</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">{</span>config<span class=\"token punctuation\">:</span> fontConfig<span class=\"token punctuation\">,</span> isV3<span class=\"token punctuation\">:</span> <span class=\"token boolean\">false</span><span class=\"token punctuation\">}</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword\">export</span> <span class=\"token keyword\">default</span> <span class=\"token keyword\">function</span> <span class=\"token function\">Main</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&#x3C;</span><span class=\"token class-name\">PaperProvider</span></span> <span class=\"token attr-name\">theme</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>theme<span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">></span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&#x3C;</span><span class=\"token class-name\">App</span></span> <span class=\"token punctuation\">/></span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&#x3C;/</span><span class=\"token class-name\">PaperProvider</span></span><span class=\"token punctuation\">></span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      })), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "h3",
+        components: components
+      }, "Material Design 3"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "h4",
+        components: components
+      }, "Variants"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "p",
+        components: components
+      }, "In the latest version fonts in theme are structured based on the ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "variant"), " keys e.g. ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "displayLarge"), " or ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "bodyMedium"), " which are then used in ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "Text"), "'s component throughout the whole library."), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "p",
+        components: components
+      }, /*#__PURE__*/React.createElement("i", null, "Note:"), " The default ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "fontFamily"), " is different per particular platfrom:"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-js"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-js",
+          "dangerouslySetInnerHTML": {
+            "__html": "Platform<span class=\"token punctuation\">.</span><span class=\"token function\">select</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">{</span>\n  web<span class=\"token punctuation\">:</span> <span class=\"token string\">'Roboto, \"Helvetica Neue\", Helvetica, Arial, sans-serif'</span><span class=\"token punctuation\">,</span>\n  ios<span class=\"token punctuation\">:</span> <span class=\"token string\">'System'</span><span class=\"token punctuation\">,</span>\n  <span class=\"token keyword\">default</span><span class=\"token punctuation\">:</span> <span class=\"token string\">'sans-serif'</span><span class=\"token punctuation\">,</span> <span class=\"token comment\">// and 'sans-serif-medium' for `fontWeight:\"500\"`</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">,</span>\n"
+          }
+        }
+      })), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "ul",
+        components: components
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "li",
+        components: components,
+        parentName: "ul"
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "h4",
+        components: components,
+        parentName: "li"
+      }, "Display"))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flexDirection: 'row',
+          display: 'flex'
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1,
+          borderColor: 'darkgray',
+          borderRightWidth: '1px',
+          borderStyle: 'dotted'
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-json"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-json",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token property\">\"displaySmall\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token property\">\"fontFamily\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"FontFamily\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontSize\"</span><span class=\"token operator\">:</span> <span class=\"token number\">36</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontWeight\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"400\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"letterSpacing\"</span><span class=\"token operator\">:</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"lineHeight\"</span><span class=\"token operator\">:</span> <span class=\"token number\">44</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      }))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1,
+          borderColor: 'darkgray',
+          borderRightWidth: '1px',
+          borderStyle: 'dotted'
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-json"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-json",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token property\">\"displayMedium\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token property\">\"fontFamily\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"FontFamily\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontSize\"</span><span class=\"token operator\">:</span> <span class=\"token number\">45</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontWeight\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"400\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"letterSpacing\"</span><span class=\"token operator\">:</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"lineHeight\"</span><span class=\"token operator\">:</span> <span class=\"token number\">52</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      }))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-json"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-json",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token property\">\"displayLarge\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token property\">\"fontFamily\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"FontFamily\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontSize\"</span><span class=\"token operator\">:</span> <span class=\"token number\">57</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontWeight\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"400\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"letterSpacing\"</span><span class=\"token operator\">:</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"lineHeight\"</span><span class=\"token operator\">:</span> <span class=\"token number\">64</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      })))), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "ul",
+        components: components
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "li",
+        components: components,
+        parentName: "ul"
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "h4",
+        components: components,
+        parentName: "li"
+      }, "Headline"))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flexDirection: 'row',
+          display: 'flex'
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1,
+          borderColor: 'darkgray',
+          borderRightWidth: '1px',
+          borderStyle: 'dotted'
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-json"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-json",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token property\">\"headlineSmall\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token property\">\"fontFamily\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"FontFamily\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontSize\"</span><span class=\"token operator\">:</span> <span class=\"token number\">24</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontWeight\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"400\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"letterSpacing\"</span><span class=\"token operator\">:</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"lineHeight\"</span><span class=\"token operator\">:</span> <span class=\"token number\">32</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      }))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1,
+          borderColor: 'darkgray',
+          borderRightWidth: '1px',
+          borderStyle: 'dotted'
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-json"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-json",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token property\">\"headlineMedium\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token property\">\"fontFamily\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"FontFamily\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontSize\"</span><span class=\"token operator\">:</span> <span class=\"token number\">28</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontWeight\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"400\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"letterSpacing\"</span><span class=\"token operator\">:</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"lineHeight\"</span><span class=\"token operator\">:</span> <span class=\"token number\">36</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      }))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-json"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-json",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token property\">\"headlineLarge\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token property\">\"fontFamily\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"FontFamily\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontSize\"</span><span class=\"token operator\">:</span> <span class=\"token number\">32</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontWeight\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"400\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"letterSpacing\"</span><span class=\"token operator\">:</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"lineHeight\"</span><span class=\"token operator\">:</span> <span class=\"token number\">40</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      })))), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "ul",
+        components: components
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "li",
+        components: components,
+        parentName: "ul"
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "h4",
+        components: components,
+        parentName: "li"
+      }, "Title"))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flexDirection: 'row',
+          display: 'flex'
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1,
+          borderColor: 'darkgray',
+          borderRightWidth: '1px',
+          borderStyle: 'dotted'
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-json"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-json",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token property\">\"titleSmall\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token property\">\"fontFamily\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"FontFamily\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontSize\"</span><span class=\"token operator\">:</span> <span class=\"token number\">14</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontWeight\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"500\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"letterSpacing\"</span><span class=\"token operator\">:</span> <span class=\"token number\">0.1</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"lineHeight\"</span><span class=\"token operator\">:</span> <span class=\"token number\">20</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      }))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1,
+          borderColor: 'darkgray',
+          borderRightWidth: '1px',
+          borderStyle: 'dotted'
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-json"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-json",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token property\">\"titleMedium\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token property\">\"fontFamily\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"FontFamily\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontSize\"</span><span class=\"token operator\">:</span> <span class=\"token number\">16</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontWeight\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"500\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"letterSpacing\"</span><span class=\"token operator\">:</span> <span class=\"token number\">0.15</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"lineHeight\"</span><span class=\"token operator\">:</span> <span class=\"token number\">24</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      }))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-json"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-json",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token property\">\"titleLarge\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token property\">\"fontFamily\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"FontFamily\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontSize\"</span><span class=\"token operator\">:</span> <span class=\"token number\">22</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontWeight\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"400\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"letterSpacing\"</span><span class=\"token operator\">:</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"lineHeight\"</span><span class=\"token operator\">:</span> <span class=\"token number\">28</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      })))), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "ul",
+        components: components
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "li",
+        components: components,
+        parentName: "ul"
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "h4",
+        components: components,
+        parentName: "li"
+      }, "Label"))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flexDirection: 'row',
+          display: 'flex'
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1,
+          borderColor: 'darkgray',
+          borderRightWidth: '1px',
+          borderStyle: 'dotted'
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-json"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-json",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token property\">\"labelSmall\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token property\">\"fontFamily\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"FontFamily\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontSize\"</span><span class=\"token operator\">:</span> <span class=\"token number\">11</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontWeight\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"500\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"letterSpacing\"</span><span class=\"token operator\">:</span> <span class=\"token number\">0.5</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"lineHeight\"</span><span class=\"token operator\">:</span> <span class=\"token number\">16</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      }))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1,
+          borderColor: 'darkgray',
+          borderRightWidth: '1px',
+          borderStyle: 'dotted'
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-json"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-json",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token property\">\"labelMedium\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token property\">\"fontFamily\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"FontFamily\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontSize\"</span><span class=\"token operator\">:</span> <span class=\"token number\">12</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontWeight\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"500\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"letterSpacing\"</span><span class=\"token operator\">:</span> <span class=\"token number\">0.5</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"lineHeight\"</span><span class=\"token operator\">:</span> <span class=\"token number\">16</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      }))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-json"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-json",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token property\">\"labelLarge\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token property\">\"fontFamily\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"FontFamily\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontSize\"</span><span class=\"token operator\">:</span> <span class=\"token number\">14</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontWeight\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"500\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"letterSpacing\"</span><span class=\"token operator\">:</span> <span class=\"token number\">0.1</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"lineHeight\"</span><span class=\"token operator\">:</span> <span class=\"token number\">20</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      })))), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "ul",
+        components: components
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "li",
+        components: components,
+        parentName: "ul"
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "h4",
+        components: components,
+        parentName: "li"
+      }, "Body"))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flexDirection: 'row',
+          display: 'flex'
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1,
+          borderColor: 'darkgray',
+          borderRightWidth: '1px',
+          borderStyle: 'dotted'
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-json"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-json",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token property\">\"bodySmall\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token property\">\"fontFamily\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"FontFamily\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontSize\"</span><span class=\"token operator\">:</span> <span class=\"token number\">12</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontWeight\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"400\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"letterSpacing\"</span><span class=\"token operator\">:</span> <span class=\"token number\">0.4</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"lineHeight\"</span><span class=\"token operator\">:</span> <span class=\"token number\">16</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      }))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1,
+          borderColor: 'darkgray',
+          borderRightWidth: '1px',
+          borderStyle: 'dotted'
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-json"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-json",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token property\">\"bodyMedium\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token property\">\"fontFamily\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"FontFamily\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontSize\"</span><span class=\"token operator\">:</span> <span class=\"token number\">14</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontWeight\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"400\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"letterSpacing\"</span><span class=\"token operator\">:</span> <span class=\"token number\">0.25</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"lineHeight\"</span><span class=\"token operator\">:</span> <span class=\"token number\">20</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      }))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-json"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-json",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token property\">\"bodyLarge\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token property\">\"fontFamily\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"FontFamily\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontSize\"</span><span class=\"token operator\">:</span> <span class=\"token number\">16</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontWeight\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"400\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"letterSpacing\"</span><span class=\"token operator\">:</span> <span class=\"token number\">0.15</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"lineHeight\"</span><span class=\"token operator\">:</span> <span class=\"token number\">24</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      })))), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "p",
+        components: components
+      }, /*#__PURE__*/React.createElement("i", null, "Note:"), " If any component uses Paper's ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "Text"), " component, without specified ", /*#__PURE__*/React.createElement("b", null, "variant"), ", then ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "p"
+      }, "default"), " variant is applied:"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-json"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-json",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token property\">\"default\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token property\">\"fontFamily\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"FontFamily\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"fontWeight\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"400\"</span><span class=\"token punctuation\">,</span>\n  <span class=\"token property\">\"letterSpacing\"</span><span class=\"token operator\">:</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n"
+          }
+        }
+      })), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "h4",
+        components: components
+      }, "Using ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "h4"
+      }, "configureFonts"), " helper"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "ul",
+        components: components
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "li",
+        components: components,
+        parentName: "ul"
+      }, "If there is a need to create a custom font variant, prepare its config object including required all fonts properties. After that, defined ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "li"
+      }, "fontConfig"), " has to be passed under the ", /*#__PURE__*/React.createElement("b", null, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "li"
+      }, "variant")), " name as ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "li"
+      }, "config"), " into the params object:")), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-js"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-js",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token keyword\">import</span> <span class=\"token operator\">*</span> <span class=\"token keyword\">as</span> React <span class=\"token keyword\">from</span> <span class=\"token string\">'react'</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword\">import</span> <span class=\"token punctuation\">{</span> configureFonts<span class=\"token punctuation\">,</span> MD3LightTheme<span class=\"token punctuation\">,</span> Provider <span class=\"token keyword\">as</span> PaperProvider <span class=\"token punctuation\">}</span> <span class=\"token keyword\">from</span> <span class=\"token string\">'react-native-paper'</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword\">import</span> App <span class=\"token keyword\">from</span> <span class=\"token string\">'./src/App'</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword\">const</span> fontConfig <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span>\n  customVariant<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n    fontFamily<span class=\"token punctuation\">:</span> Platform<span class=\"token punctuation\">.</span><span class=\"token function\">select</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">{</span>\n      web<span class=\"token punctuation\">:</span> <span class=\"token string\">'Roboto, \"Helvetica Neue\", Helvetica, Arial, sans-serif'</span><span class=\"token punctuation\">,</span>\n      ios<span class=\"token punctuation\">:</span> <span class=\"token string\">'System'</span><span class=\"token punctuation\">,</span>\n      <span class=\"token keyword\">default</span><span class=\"token punctuation\">:</span> <span class=\"token string\">'sans-serif'</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">}</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">,</span>\n    fontWeight<span class=\"token punctuation\">:</span> <span class=\"token string\">'400'</span><span class=\"token punctuation\">,</span>\n    letterSpacing<span class=\"token punctuation\">:</span> <span class=\"token number\">0.5</span><span class=\"token punctuation\">,</span>\n    lineHeight<span class=\"token punctuation\">:</span> <span class=\"token number\">22</span><span class=\"token punctuation\">,</span>\n    fontSize<span class=\"token punctuation\">:</span> <span class=\"token number\">20</span><span class=\"token punctuation\">,</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword\">const</span> theme <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token operator\">...</span>MD3LightTheme<span class=\"token punctuation\">,</span>\n  fonts<span class=\"token punctuation\">:</span> <span class=\"token function\">configureFonts</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">{</span>config<span class=\"token punctuation\">:</span> fontConfig<span class=\"token punctuation\">}</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword\">export</span> <span class=\"token keyword\">default</span> <span class=\"token keyword\">function</span> <span class=\"token function\">Main</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&#x3C;</span><span class=\"token class-name\">PaperProvider</span></span> <span class=\"token attr-name\">theme</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>theme<span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">></span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&#x3C;</span><span class=\"token class-name\">App</span></span> <span class=\"token punctuation\">/></span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&#x3C;/</span><span class=\"token class-name\">PaperProvider</span></span><span class=\"token punctuation\">></span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      })), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "ul",
+        components: components
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "li",
+        components: components,
+        parentName: "ul"
+      }, "In order to override one of the available ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "li"
+      }, "variant"), "'s font properties, pass the modified ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "li"
+      }, "fontConfig"), " under specific ", /*#__PURE__*/React.createElement("b", null, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "li"
+      }, "variant")), " name as ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "li"
+      }, "config"), " into the params object:")), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-js"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-js",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token keyword\">import</span> <span class=\"token operator\">*</span> <span class=\"token keyword\">as</span> React <span class=\"token keyword\">from</span> <span class=\"token string\">'react'</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword\">import</span> <span class=\"token punctuation\">{</span> configureFonts<span class=\"token punctuation\">,</span> MD3LightTheme<span class=\"token punctuation\">,</span> Provider <span class=\"token keyword\">as</span> PaperProvider <span class=\"token punctuation\">}</span> <span class=\"token keyword\">from</span> <span class=\"token string\">'react-native-paper'</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword\">import</span> App <span class=\"token keyword\">from</span> <span class=\"token string\">'./src/App'</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword\">const</span> fontConfig <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span>\n  bodyLarge<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n    letterSpacing<span class=\"token punctuation\">:</span> <span class=\"token number\">0.5</span><span class=\"token punctuation\">,</span>\n    lineHeight<span class=\"token punctuation\">:</span> <span class=\"token number\">22</span><span class=\"token punctuation\">,</span>\n    fontSize<span class=\"token punctuation\">:</span> <span class=\"token number\">20</span><span class=\"token punctuation\">,</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword\">const</span> theme <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token operator\">...</span>MD3LightTheme<span class=\"token punctuation\">,</span>\n  fonts<span class=\"token punctuation\">:</span> <span class=\"token function\">configureFonts</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">{</span>config<span class=\"token punctuation\">:</span> fontConfig<span class=\"token punctuation\">}</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword\">export</span> <span class=\"token keyword\">default</span> <span class=\"token keyword\">function</span> <span class=\"token function\">Main</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&#x3C;</span><span class=\"token class-name\">PaperProvider</span></span> <span class=\"token attr-name\">theme</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>theme<span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">></span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&#x3C;</span><span class=\"token class-name\">App</span></span> <span class=\"token punctuation\">/></span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&#x3C;/</span><span class=\"token class-name\">PaperProvider</span></span><span class=\"token punctuation\">></span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      })), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "ul",
+        components: components
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "li",
+        components: components,
+        parentName: "ul"
+      }, "However, if you just want to override any font property e.g. ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "li"
+      }, "fontFamily"), " or ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "li"
+      }, "letterSpacing"), " for ", /*#__PURE__*/React.createElement("b", null, "all"), " variants, you can pass the ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "li"
+      }, "fontConfig"), " as a ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "inlineCode",
+        components: components,
+        parentName: "li"
+      }, "config"), " into the params object ", /*#__PURE__*/React.createElement("b", null, "without"), " specifying variant name:")), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "pre",
+        components: components,
+        props: {
+          "className": "language-js"
+        }
+      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "code",
+        components: components,
+        parentName: "pre",
+        props: {
+          "className": "language-js",
+          "dangerouslySetInnerHTML": {
+            "__html": "<span class=\"token keyword\">import</span> <span class=\"token operator\">*</span> <span class=\"token keyword\">as</span> React <span class=\"token keyword\">from</span> <span class=\"token string\">'react'</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword\">import</span> <span class=\"token punctuation\">{</span> configureFonts<span class=\"token punctuation\">,</span> MD3LightTheme<span class=\"token punctuation\">,</span> Provider <span class=\"token keyword\">as</span> PaperProvider <span class=\"token punctuation\">}</span> <span class=\"token keyword\">from</span> <span class=\"token string\">'react-native-paper'</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword\">import</span> App <span class=\"token keyword\">from</span> <span class=\"token string\">'./src/App'</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword\">const</span> fontConfig <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span>\n  fontFamily<span class=\"token punctuation\">:</span> <span class=\"token string\">'NotoSans'</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword\">const</span> theme <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token operator\">...</span>MD3LightTheme<span class=\"token punctuation\">,</span>\n  fonts<span class=\"token punctuation\">:</span> <span class=\"token function\">configureFonts</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">{</span>config<span class=\"token punctuation\">:</span> fontConfig<span class=\"token punctuation\">}</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword\">export</span> <span class=\"token keyword\">default</span> <span class=\"token keyword\">function</span> <span class=\"token function\">Main</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&#x3C;</span><span class=\"token class-name\">PaperProvider</span></span> <span class=\"token attr-name\">theme</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>theme<span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">></span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&#x3C;</span><span class=\"token class-name\">App</span></span> <span class=\"token punctuation\">/></span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&#x3C;/</span><span class=\"token class-name\">PaperProvider</span></span><span class=\"token punctuation\">></span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n"
+          }
+        }
+      })));
+    }
+  }]);
+
+  return MDXContent;
+}(React.Component);
+
+exports["default"] = MDXContent;
+MDXContent.isMDXComponent = true;;
+  }(
+    m,
+    m.exports,
+    function(name) {
+      return r[name];
+    },
+    "/home/circleci/react-native-paper/docs/pages/4.fonts.mdx",
+    "/home/circleci/react-native-paper/docs/pages"
+  ));
+
+  var meta = m.exports.meta || {};
+
+  return {
+    title: meta.title || "Fonts",
+    link: meta.link || "fonts",
+    description: meta.description,
+    type: "custom",
+    data: function MDXContent(props) {
+      return React.createElement(
+        Content,
+        { logo: 'images/sidebar-logo.svg' },
+        React.createElement(m.exports.default, props)
+      );
+    },
+  };
+}()),{"filepath":"pages/5.react-native-web.md","title":"Using on the Web","description":"","link":"using-on-the-web","data":"# Using on the Web\n\n## Pre-requisites\n\nMake sure that you have followed the getting started guide and have `react-native-paper` installed and configured before following this guide.\n\nWe're going to use [react-native-web](https://github.com/necolas/react-native-web) and [webpack](https://webpack.js.org/) to use React Native Paper on the web, so let's install them as well.\n\nTo install `react-native-web`, run:\n\n```sh\nyarn add react-native-web react-dom react-art\n```\n\n### Using CRA ([Create React App](https://github.com/facebook/create-react-app))\n\nInstall [`react-app-rewired`](https://github.com/timarney/react-app-rewired) to override `webpack` configuration:\n\n```sh\nyarn add --dev react-app-rewired\n```\n\n[Configure `babel-loader`](#2-configure-babel-loader) using a new file called `config-overrides.js`:\n\n```js\nmodule.exports = function override(config, env) {\n  config.module.rules.push({\n    test: /\\.js$/,\n    exclude: /node_modules[/\\\\](?!react-native-vector-icons)/,\n    use: {\n      loader: \"babel-loader\",\n      options: {\n        // Disable reading babel configuration\n        babelrc: false,\n        configFile: false,\n\n        // The configuration for compilation\n        presets: [\n          [\"@babel/preset-env\", { useBuiltIns: \"usage\" }],\n          \"@babel/preset-react\",\n          \"@babel/preset-flow\",\n          \"@babel/preset-typescript\"\n        ],\n        plugins: [\n          \"@babel/plugin-proposal-class-properties\",\n          \"@babel/plugin-proposal-object-rest-spread\"\n        ]\n      }\n    }\n  });\n\n  return config;\n};\n```\n\nChange your script in `package.json`:\n\n```diff\n/* package.json */\n\n  \"scripts\": {\n-   \"start\": \"react-scripts start\",\n+   \"start\": \"react-app-rewired start\",\n-   \"build\": \"react-scripts build\",\n+   \"build\": \"react-app-rewired build\",\n-   \"test\": \"react-scripts test --env=jsdom\",\n+   \"test\": \"react-app-rewired test --env=jsdom\"\n}\n```\n\n### Custom webpack setup\n\nTo install `webpack`, run:\n\n```sh\nyarn add --dev webpack webpack-cli webpack-dev-server\n```\n\nIf you don't have a webpack config in your project, copy the following to `webpack.config.js` get started:\n\n```js\nconst path = require('path');\n\nmodule.exports = {\n  mode: 'development',\n\n  // Path to the entry file, change it according to the path you have\n  entry: path.join(__dirname, 'App.js'),\n\n  // Path for the output files\n  output: {\n    path: path.join(__dirname, 'dist'),\n    filename: 'app.bundle.js',\n  },\n\n  // Enable source map support\n  devtool: 'source-map',\n\n  // Loaders and resolver config\n  module: {\n    rules: [\n\n    ],\n  },\n  resolve: {\n\n  },\n\n  // Development server config\n  devServer: {\n    contentBase: [path.join(__dirname, 'public')],\n    historyApiFallback: true,\n  },\n};\n```\n\nAlso create a folder named `public` and add the following file named `index.html`:\n\n```html\n<!doctype html>\n<head>\n  <meta charSet=\"utf-8\" />\n  <meta httpEquiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n\n  <meta name=\"viewport\" content=\"width=device-width,minimum-scale=1,initial-scale=1\" />\n\n  <title>App</title>\n\n  <style>\n    html, body, #root {\n      height: 100%;\n    }\n\n    #root {\n      display: flex;\n      flex-direction: column;\n    }\n  </style>\n</head>\n<body>\n  <div id=\"root\"></div>\n  <script src=\"app.bundle.js\"></script>\n</body>\n```\n\nNow we're ready to start configuring the project.\n\n## Configure webpack\n\n### 1. Alias `react-native` to `react-native-web`\n\nFirst, we have to tell webpack to use `react-native-web` instead of `react-native`. Add the following alias in your webpack config under `resolve`:\n\n```js\nalias: {\n  'react-native$': require.resolve('react-native-web'),\n}\n```\n\n### 2. Configure `babel-loader`\n\nNext, we want to tell `babel-loader` to compile `react-native-paper` and `react-native-vector-icons`. We would also want to disable reading the babel configuration files to prevent any conflicts.\n\nFirst install the required dependencies:\n\n```sh\nyarn add --dev babel-loader @babel/preset-env @babel/preset-react @babel/preset-flow @babel/preset-typescript @babel/plugin-proposal-class-properties @babel/plugin-proposal-object-rest-spread\n```\n\nNow, add the following in the `module.rules` array in your webpack config:\n\n```js\n{\n  test: /\\.js$/,\n  exclude: /node_modules[/\\\\](?!react-native-vector-icons)/,\n  use: {\n    loader: 'babel-loader',\n    options: {\n      // Disable reading babel configuration\n      babelrc: false,\n      configFile: false,\n\n      // The configuration for compilation\n      presets: [\n        ['@babel/preset-env', { useBuiltIns: 'usage' }],\n        '@babel/preset-react',\n        '@babel/preset-flow',\n        \"@babel/preset-typescript\"\n      ],\n      plugins: [\n        '@babel/plugin-proposal-class-properties',\n        '@babel/plugin-proposal-object-rest-spread'\n      ],\n    },\n  },\n},\n```\n\n### 3. Configure `file-loader`\n\n#### webpack < 5.0\n\nTo be able to import images and other assets using `require`, we need to configure `file-loader`. Let's install it:\n\n```sh\nyarn add --dev file-loader\n```\n\nTo configure it, add the following in the `module.rules` array in your webpack config:\n\n```js\n{\n  test: /\\.(jpg|png|woff|woff2|eot|ttf|svg)$/,\n  loader: 'file-loader',\n}\n```\n\n##### webpack >= 5.0\n\nUse `asset/resource`, since `file-loader` was deprecated in webpack v5.\n\n```js\n{\n  test: /\\.(jpg|png|woff|woff2|eot|ttf|svg)$/,\n  type: 'asset/resource'\n}\n```\n\n## Load the Material Community Icons\n\nIf you followed the getting started guide, you should have the following code in your root component:\n\n```js\n<PaperProvider>\n  <App />\n</PaperProvider>\n```\n\nNow we need tweak this section to load the Material Community Icons from the [`react-native-vector-icons`](https://github.com/oblador/react-native-vector-icons) library:\n\n```js\n<PaperProvider>\n  <React.Fragment>\n    {Platform.OS === 'web' ? (\n      <style type=\"text/css\">{`\n        @font-face {\n          font-family: 'MaterialCommunityIcons';\n          src: url(${require('react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf')}) format('truetype');\n        }\n      `}</style>\n    ) : null}\n    <App />\n  </React.Fragment>\n</PaperProvider>\n```\n\nRemember to import `Platform` from `react-native` at the top:\n\n```js\nimport { Platform } from 'react-native';\n```\n\nYou can also load these fonts using [`css-loader`](https://github.com/webpack-contrib/css-loader) if you prefer.\n\n## Load the Roboto fonts (optional)\n\nThe default theme in React Native Paper uses the Roboto font. You can add them to your project following [the instructions on its Google Fonts page](https://fonts.google.com/specimen/Roboto?selection.family=Roboto:100,300,400,500).\n\n## We're done!\n\nYou can run `webpack-dev-server` to run the webpack server and open your project in the browser. You can add the following script in your `package.json` under the `\"scripts\"` section to make it easier:\n\n```json\n\"web\": \"webpack-dev-server --open\"\n```\n\nNow you can run `yarn web` to run the project on web.\n","type":"md","dependencies":[]},{"filepath":"pages/6.recommended-libraries.md","title":"Recommended Libraries","description":"","link":"recommended-libraries","data":"# Recommended Libraries\n\nOur mission is to provide a full suite of well-integrated components built with Material Design in mind. However, many components already have better well maintained implementations.\n\nHere are some of the libraries we recommend:\n\n## Tabs\n\n[react-native-community/react-native-tab-view](https://github.com/react-native-community/react-native-tab-view)\nMaterial Design themed [swipeable tabs](https://material.io/design/components/tabs.html), maintained by [@satya164](https://twitter.com/satya164) and [@mosdnk](https://twitter.com/mosdnk).\n\n[react-native-paper-tabs](https://github.com/web-ridge/react-native-paper-tabs)\nMaterial Design themed [swipeable tabs](https://material.io/design/components/tabs.html) for React Native Paper, maintained by [@RichardLindhout](https://twitter.com/RichardLindhout)\n\n## Bottom sheet\n\n[osdnk/reanimated-bottom-sheet](https://github.com/osdnk/react-native-reanimated-bottom-sheet)\nAn implementation of the [bottom sheet behaviour](https://material.io/design/components/sheets-bottom.html), maintained by [@mosdnk](https://twitter.com/mosdnk).\n\n[gorhom/react-native-bottom-sheet](https://github.com/gorhom/react-native-bottom-sheet)\nAn implementation of the [bottom sheet behaviour](https://material.io/design/components/sheets-bottom.html), maintained by [@Gorhom](https://twitter.com/Gorhom).\n\n\n## Date Picker\n[web-ridge/react-native-paper-dates](https://github.com/web-ridge/react-native-paper-dates)\nMaterial Design themed [date picker](https://material.io/components/date-pickers), maintained by [@RichardLindhout](https://twitter.com/RichardLindhout)\n \n[react-native-community/react-native-datetimepicker](https://github.com/react-native-community/react-native-datetimepicker)\n\n## Time Picker\n[web-ridge/react-native-paper-dates](https://github.com/web-ridge/react-native-paper-dates)\nMaterial Design themed [time picker](https://material.io/components/time-pickers), maintained by [@RichardLindhout](https://twitter.com/RichardLindhout) \n","type":"md","dependencies":[]},(function() {
   var e = require("/home/circleci/react-native-paper/docs/pages/6.showcase.js");
   var c = typeof e.default === 'function' ? e.default : e;
   var m = e.meta || {};
