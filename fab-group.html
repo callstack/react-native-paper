@@ -95,7 +95,7 @@ To render the group above other components, you'll need to wrap it with the <a h
   style?: StyleProp&lt;ViewStyle&gt;;
   containerStyle?: StyleProp&lt;ViewStyle&gt;;
   labelStyle?: StyleProp&lt;TextStyle&gt;;
-  onPress: () =&gt; void;
+  onPress: (e: GestureResponderEvent) =&gt; void;
   size?: &#x27;small&#x27; | &#x27;medium&#x27;;
   testID?: string;
 }&gt;</code></code></div><div class="PropItem_p5pwgte MarkdownContent_m3ctz2y"><p>Action items to display in the form of a speed dial.
@@ -119,7 +119,7 @@ You can toggle it based on whether the speed dial is open to display a different
 </div></div><div class="PropInfo_p1eats2g"><div class="PropLabelWrapper_psi127e"><a name="accessibilityLabel" href="#accessibilityLabel" class="PropLabel_pwdtv5j"><code>accessibilityLabel</code></a></div><div class="PropItem_p5pwgte"><span>Type: </span><code><code>string</code></code></div><div class="PropItem_p5pwgte MarkdownContent_m3ctz2y"><p>Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.</p>
 </div></div><div class="PropInfo_p1eats2g"><div class="PropLabelWrapper_psi127e"><a name="color" href="#color" class="PropLabel_pwdtv5j"><code>color</code></a></div><div class="PropItem_p5pwgte"><span>Type: </span><code><code>string</code></code></div><div class="PropItem_p5pwgte MarkdownContent_m3ctz2y"><p>Custom color for the <code>FAB</code>.</p>
 </div></div><div class="PropInfo_p1eats2g"><div class="PropLabelWrapper_psi127e"><a name="backdropColor" href="#backdropColor" class="PropLabel_pwdtv5j"><code>backdropColor</code></a></div><div class="PropItem_p5pwgte"><span>Type: </span><code><code>string</code></code></div><div class="PropItem_p5pwgte MarkdownContent_m3ctz2y"><p>Custom backdrop color for opened speed dial background.</p>
-</div></div><div class="PropInfo_p1eats2g"><div class="PropLabelWrapper_psi127e"><a name="onPress" href="#onPress" class="PropLabel_pwdtv5j"><code>onPress</code></a></div><div class="PropItem_p5pwgte"><span>Type: </span><code><code>() =&gt; void</code></code></div><div class="PropItem_p5pwgte MarkdownContent_m3ctz2y"><p>Function to execute on pressing the <code>FAB</code>.</p>
+</div></div><div class="PropInfo_p1eats2g"><div class="PropLabelWrapper_psi127e"><a name="onPress" href="#onPress" class="PropLabel_pwdtv5j"><code>onPress</code></a></div><div class="PropItem_p5pwgte"><span>Type: </span><code><code>(e: GestureResponderEvent) =&gt; void</code></code></div><div class="PropItem_p5pwgte MarkdownContent_m3ctz2y"><p>Function to execute on pressing the <code>FAB</code>.</p>
 </div></div><div class="PropInfo_p1eats2g"><div class="PropLabelWrapper_psi127e"><a name="open" href="#open" class="PropLabel_pwdtv5j"><code>open</code> (required)</a></div><div class="PropItem_p5pwgte"><span>Type: </span><code><code>boolean</code></code></div><div class="PropItem_p5pwgte MarkdownContent_m3ctz2y"><p>Whether the speed dial is open.</p>
 </div></div><div class="PropInfo_p1eats2g"><div class="PropLabelWrapper_psi127e"><a name="onStateChange" href="#onStateChange" class="PropLabel_pwdtv5j"><code>onStateChange</code> (required)</a></div><div class="PropItem_p5pwgte"><span>Type: </span><code><code>(state: { open: boolean }) =&gt; void</code></code></div><div class="PropItem_p5pwgte MarkdownContent_m3ctz2y"><p>Callback which is called on opening and closing the speed dial.
 The open state needs to be updated when it's called, otherwise the change is dropped.</p>
