@@ -7,6 +7,7 @@ import type {
 import {
   Animated,
   Easing,
+  GestureResponderEvent,
   I18nManager,
   Platform,
   ScrollView,
@@ -68,7 +69,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   /**
    * Function to execute on long press.
    */

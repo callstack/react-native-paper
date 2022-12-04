@@ -1,5 +1,10 @@
 import * as React from 'react';
-import type { StyleProp, ViewStyle, View } from 'react-native';
+import type {
+  GestureResponderEvent,
+  StyleProp,
+  ViewStyle,
+  View,
+} from 'react-native';
 
 import type { $Omit } from './../../types';
 import AppbarAction from './AppbarAction';
@@ -28,7 +33,7 @@ export type Props = $Omit<
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
   ref?: React.RefObject<View>;
 };

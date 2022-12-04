@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp, ViewStyle, TextStyle } from 'react-native';
+import {
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+  GestureResponderEvent,
+} from 'react-native';
 
 import type { $RemoveChildren } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -17,7 +23,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
   /**
    * Text content style of the `DataTableCell`.

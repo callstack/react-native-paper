@@ -1,5 +1,11 @@
 import React from 'react';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import {
+  GestureResponderEvent,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native';
 
 import { useInternalTheme } from '../../../core/theming';
 import type { $Omit, ThemeProp } from '../../../types';
@@ -20,7 +26,7 @@ export type Props = $Omit<
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   /**
    * Whether the TextInput will focus after onPress.
    */
@@ -112,12 +118,16 @@ const TextInputIcon = ({
   const { style, isTextInputFocused, forceFocus, testID } =
     React.useContext(StyleContext);
 
-  const onPressWithFocusControl = React.useCallback(() => {
-    if (forceTextInputFocus && !isTextInputFocused) {
-      forceFocus();
-    }
-    onPress?.();
-  }, [forceTextInputFocus, forceFocus, isTextInputFocused, onPress]);
+  const onPressWithFocusControl = React.useCallback(
+    (e: GestureResponderEvent) => {
+      if (forceTextInputFocus && !isTextInputFocused) {
+        forceFocus();
+      }
+
+      onPress?.(e);
+    },
+    [forceTextInputFocus, forceFocus, isTextInputFocused, onPress]
+  );
 
   const theme = useInternalTheme();
 
