@@ -6,6 +6,7 @@ import {
   Easing,
   findNodeHandle,
   I18nManager,
+  LayoutChangeEvent,
   LayoutRectangle,
   NativeEventSubscription,
   Platform,
@@ -209,14 +210,10 @@ class Menu extends React.Component<Props, State> {
     typeof anchor?.x === 'number' &&
     typeof anchor?.y === 'number';
 
-  private measureMenuLayout = () =>
-    new Promise<LayoutRectangle>((resolve) => {
-      if (this.menu) {
-        this.menu.measureInWindow((x, y, width, height) => {
-          resolve({ x, y, width, height });
-        });
-      }
-    });
+  private onMenuLayout = (evt: LayoutChangeEvent) => {
+    const { width, height } = evt.nativeEvent.layout;
+    this.setState({ menuLayout: { width, height } });
+  };
 
   private measureAnchorLayout = () =>
     new Promise<LayoutRectangle>((resolve) => {
@@ -298,10 +295,7 @@ class Menu extends React.Component<Props, State> {
 
   private show = async () => {
     const windowLayout = Dimensions.get('window');
-    const [menuLayout, anchorLayout] = await Promise.all([
-      this.measureMenuLayout(),
-      this.measureAnchorLayout(),
-    ]);
+    const anchorLayout = await this.measureAnchorLayout();
 
     // When visible is true for first render
     // native views can be still not rendered and
@@ -312,8 +306,8 @@ class Menu extends React.Component<Props, State> {
     if (
       !windowLayout.width ||
       !windowLayout.height ||
-      !menuLayout.width ||
-      !menuLayout.height ||
+      !this.state.menuLayout.width ||
+      !this.state.menuLayout.height ||
       (!anchorLayout.width && !this.isCoordinate(this.props.anchor)) ||
       (!anchorLayout.height && !this.isCoordinate(this.props.anchor))
     ) {
@@ -329,10 +323,6 @@ class Menu extends React.Component<Props, State> {
           height: anchorLayout.height,
           width: anchorLayout.width,
         },
-        menuLayout: {
-          width: menuLayout.width,
-          height: menuLayout.height,
-        },
       }),
       () => {
         this.attachListeners();
@@ -340,7 +330,10 @@ class Menu extends React.Component<Props, State> {
         const { animation } = this.props.theme;
         Animated.parallel([
           Animated.timing(this.state.scaleAnimation, {
-            toValue: { x: menuLayout.width, y: menuLayout.height },
+            toValue: {
+              x: this.state.menuLayout.width,
+              y: this.state.menuLayout.height,
+            },
             duration: ANIMATION_DURATION * animation.scale,
             easing: EASING,
             useNativeDriver: true,
@@ -608,6 +601,7 @@ class Menu extends React.Component<Props, State> {
                 this.menu = ref;
               }}
               collapsable={false}
+              onLayout={this.onMenuLayout.bind(this)}
               accessibilityViewIsModal={visible}
               style={[styles.wrapper, positionStyle, style]}
               pointerEvents={visible ? 'box-none' : 'none'}

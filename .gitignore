@@ -64,3 +64,7 @@ CHANGELOG.md
 lib/
 
 .expo
+
+# New yarn stuff
+.yarn/
+.yarnrc.yml
