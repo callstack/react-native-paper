@@ -34,7 +34,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
   };
   /**
    * @supported Available in v5.x with theme version 3
-   * Icon to display when `onIconPress` is defined. Default will be close icon.
+   * Icon to display when `onIconPress` is defined. Default will be `close` icon.
    */
   icon?: IconSource;
   /**
@@ -148,7 +148,7 @@ const Snackbar = ({
   );
   const hideTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
 
-  const [hidden, setHidden] = React.useState<boolean>(!visible);
+  const [hidden, setHidden] = React.useState(!visible);
 
   const { scale } = theme.animation;
 
