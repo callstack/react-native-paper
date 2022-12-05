@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   Animated,
   Easing,
+  I18nManager,
   SafeAreaView,
   StyleProp,
   StyleSheet,
@@ -12,6 +13,9 @@ import {
 import { withInternalTheme } from '../core/theming';
 import type { InternalTheme } from '../types';
 import Button from './Button/Button';
+import type { IconSource } from './Icon';
+import IconButton from './IconButton/IconButton';
+import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
 import Text from './Typography/Text';
 
@@ -28,6 +32,21 @@ export type Props = React.ComponentProps<typeof Surface> & {
   action?: Omit<React.ComponentProps<typeof Button>, 'children'> & {
     label: string;
   };
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Icon to display when `onIconPress` is defined. Default will be `close` icon.
+   */
+  icon?: IconSource;
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Function to execute on icon button press. The icon button appears only when this prop is specified.
+   */
+  onIconPress?: () => void;
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Accessibility label for the icon button. This is read by the screen reader when the user taps the button.
+   */
+  iconAccessibilityLabel?: string;
   /**
    * The duration for which the Snackbar is shown.
    */
@@ -112,6 +131,9 @@ const DURATION_LONG = 10000;
 const Snackbar = ({
   visible,
   action,
+  icon,
+  onIconPress,
+  iconAccessibilityLabel = 'Close icon',
   duration = DURATION_MEDIUM,
   onDismiss,
   children,
@@ -124,9 +146,9 @@ const Snackbar = ({
   const { current: opacity } = React.useRef<Animated.Value>(
     new Animated.Value(0.0)
   );
-  const [hidden, setHidden] = React.useState<boolean>(!visible);
-
   const hideTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
+
+  const [hidden, setHidden] = React.useState(!visible);
 
   const { scale } = theme.animation;
 
@@ -191,23 +213,28 @@ const Snackbar = ({
     ...actionProps
   } = action || {};
 
-  const marginRight = action ? 0 : 16;
-  const textColor = theme.isV3
-    ? theme.colors.inversePrimary
-    : theme.colors.accent;
+  const buttonTextColor = isV3 ? colors.inversePrimary : colors.accent;
+  const textColor = isV3 ? colors.inverseOnSurface : colors?.surface;
+  const backgroundColor = isV3 ? colors.inverseSurface : colors?.onSurface;
+
+  const isIconButton = isV3 && onIconPress;
+
+  const marginLeft = action ? -12 : -16;
 
   const renderChildrenWithWrapper = () => {
-    const viewStyles = [
-      styles.content,
-      { marginRight, color: colors?.surface },
-    ];
-
     if (typeof children === 'string') {
-      return <Text style={viewStyles}>{children}</Text>;
+      return (
+        <Text
+          variant="bodyMedium"
+          style={[styles.content, { color: textColor }]}
+        >
+          {children}
+        </Text>
+      );
     }
 
     return (
-      <View style={viewStyles}>
+      <View style={styles.content}>
         {/* View is added to allow multiple lines support for Text component as children */}
         <View>{children}</View>
       </View>
@@ -227,6 +254,7 @@ const Snackbar = ({
             !isV3 && styles.elevation,
             styles.container,
             {
+              backgroundColor,
               borderRadius: roundness,
               opacity: opacity,
               transform: [
@@ -240,7 +268,6 @@ const Snackbar = ({
                 },
               ],
             },
-            { backgroundColor: colors?.onSurface },
             style,
           ] as StyleProp<ViewStyle>
         }
@@ -248,21 +275,50 @@ const Snackbar = ({
         {...rest}
       >
         {renderChildrenWithWrapper()}
-        {action ? (
-          <Button
-            onPress={(event) => {
-              onPressAction?.(event);
-              onDismiss();
-            }}
-            style={[styles.button, actionStyle]}
-            textColor={textColor}
-            compact
-            mode="text"
-            {...actionProps}
-          >
-            {actionLabel}
-          </Button>
-        ) : null}
+        {(action || isIconButton) && (
+          <View style={[styles.actionsContainer, { marginLeft }]}>
+            {action ? (
+              <Button
+                onPress={(event) => {
+                  onPressAction?.(event);
+                  onDismiss();
+                }}
+                style={[styles.button, actionStyle]}
+                textColor={buttonTextColor}
+                compact={!isV3}
+                mode="text"
+                {...actionProps}
+              >
+                {actionLabel}
+              </Button>
+            ) : null}
+            {isIconButton ? (
+              <IconButton
+                accessibilityRole="button"
+                borderless
+                onPress={onIconPress}
+                iconColor={theme.colors.inverseOnSurface}
+                icon={
+                  icon ||
+                  (({ size, color }) => {
+                    return (
+                      <MaterialCommunityIcon
+                        name="close"
+                        color={color}
+                        size={size}
+                        direction={
+                          I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'
+                        }
+                      />
+                    );
+                  })
+                }
+                accessibilityLabel={iconAccessibilityLabel}
+                style={styles.icon}
+              />
+            ) : null}
+          </View>
+        )}
       </Surface>
     </SafeAreaView>
   );
@@ -292,21 +348,32 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
     margin: 8,
     borderRadius: 4,
+    minHeight: 48,
   },
   content: {
-    marginLeft: 16,
+    marginHorizontal: 16,
     marginVertical: 14,
     flex: 1,
   },
+  actionsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    minHeight: 48,
+  },
   button: {
-    marginHorizontal: 8,
-    marginVertical: 6,
+    marginRight: 8,
+    marginLeft: 4,
   },
   elevation: {
     elevation: 6,
+  },
+  icon: {
+    width: 40,
+    height: 40,
+    margin: 0,
   },
 });
 
