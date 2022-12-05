@@ -94,7 +94,7 @@ const News = () => {
         </ScrollView>
         <View style={styles.cardContainer}>
           <Card style={styles.card} mode="contained">
-            <Card.Cover source={require('../assets/screenshots/players.jpg')} />
+            <Card.Cover source={require('../../assets/images/players.jpg')} />
             <Card.Title
               title="Winter transfer window"
               titleVariant="headlineMedium"
@@ -112,9 +112,7 @@ const News = () => {
             </Card.Actions>
           </Card>
           <Card style={styles.card} mode="contained">
-            <Card.Cover
-              source={require('../assets/screenshots/players-2.jpg')}
-            />
+            <Card.Cover source={require('../../assets/images/players-2.jpg')} />
             <Card.Title
               title="John Doe's injury"
               titleVariant="headlineMedium"

@@ -64,7 +64,7 @@ export default function PaperExample() {
   useKeepAwake();
 
   const [fontsLoaded] = useFonts({
-    NotoSans: require('./assets/fonts/NotoSans-Regular.ttf'),
+    NotoSans: require('../assets/fonts/NotoSans-Regular.ttf'),
   });
 
   const [isReady, setIsReady] = React.useState(false);
