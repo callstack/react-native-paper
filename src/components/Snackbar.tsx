@@ -3,12 +3,13 @@ import {
   Animated,
   Easing,
   I18nManager,
-  SafeAreaView,
   StyleProp,
   StyleSheet,
   View,
   ViewStyle,
 } from 'react-native';
+
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { withInternalTheme } from '../core/theming';
 import type { InternalTheme } from '../types';
@@ -143,6 +144,8 @@ const Snackbar = ({
   theme,
   ...rest
 }: Props) => {
+  const { bottom, right, left } = useSafeAreaInsets();
+
   const { current: opacity } = React.useRef<Animated.Value>(
     new Animated.Value(0.0)
   );
@@ -221,6 +224,11 @@ const Snackbar = ({
 
   const marginLeft = action ? -12 : -16;
 
+  const wrapperPaddings = {
+    paddingBottom: bottom,
+    paddingHorizontal: Math.max(left, right),
+  };
+
   const renderChildrenWithWrapper = () => {
     if (typeof children === 'string') {
       return (
@@ -242,9 +250,9 @@ const Snackbar = ({
   };
 
   return (
-    <SafeAreaView
+    <View
       pointerEvents="box-none"
-      style={[styles.wrapper, wrapperStyle]}
+      style={[styles.wrapper, wrapperPaddings, wrapperStyle]}
     >
       <Surface
         pointerEvents="box-none"
@@ -320,7 +328,7 @@ const Snackbar = ({
           </View>
         )}
       </Surface>
-    </SafeAreaView>
+    </View>
   );
 };
 
