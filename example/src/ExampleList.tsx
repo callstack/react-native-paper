@@ -32,20 +32,25 @@ import RadioButtonExample from './Examples/RadioButtonExample';
 import RadioButtonGroupExample from './Examples/RadioButtonGroupExample';
 import RadioButtonItemExample from './Examples/RadioButtonItemExample';
 import SearchbarExample from './Examples/SearchbarExample';
+import SegmentedButtonMultiselectRealCase from './Examples/SegmentedButtons/SegmentedButtonMultiselectRealCase';
+import SegmentedButtonRealCase from './Examples/SegmentedButtons/SegmentedButtonRealCase';
 import SegmentedButtonExample from './Examples/SegmentedButtonsExample';
 import SnackbarExample from './Examples/SnackbarExample';
 import SurfaceExample from './Examples/SurfaceExample';
 import SwitchExample from './Examples/SwitchExample';
+import TeamDetails from './Examples/TeamDetails';
+import TeamsList from './Examples/TeamsList';
 import TextExample from './Examples/TextExample';
 import TextInputExample from './Examples/TextInputExample';
 import ThemeExample from './Examples/ThemeExample';
+import ThemingWithReactNavigation from './Examples/ThemingWithReactNavigation';
 import ToggleButtonExample from './Examples/ToggleButtonExample';
 import TooltipExample from './Examples/TooltipExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
 
 import { useExampleTheme } from '.';
 
-export const examples: Record<
+export const mainExamples: Record<
   string,
   React.ComponentType<any> & { title: string }
 > = {
@@ -86,6 +91,26 @@ export const examples: Record<
   tooltipExample: TooltipExample,
   touchableRipple: TouchableRippleExample,
   theme: ThemeExample,
+  themingWithReactNavigation: ThemingWithReactNavigation,
+};
+
+export const nestedExamples: Record<
+  string,
+  React.ComponentType<any> & { title: string }
+> = {
+  themingWithReactNavigation: ThemingWithReactNavigation,
+  teamDetails: TeamDetails,
+  teamsList: TeamsList,
+  segmentedButtonRealCase: SegmentedButtonRealCase,
+  segmentedButtonMultiselectRealCase: SegmentedButtonMultiselectRealCase,
+};
+
+export const examples: Record<
+  string,
+  React.ComponentType<any> & { title: string }
+> = {
+  ...mainExamples,
+  ...nestedExamples,
 };
 
 type Props = {
@@ -94,11 +119,11 @@ type Props = {
 
 type Item = {
   id: string;
-  data: typeof examples[string];
+  data: typeof mainExamples[string];
 };
 
-const data = Object.keys(examples).map(
-  (id): Item => ({ id, data: examples[id] })
+const data = Object.keys(mainExamples).map(
+  (id): Item => ({ id, data: mainExamples[id] })
 );
 
 export default function ExampleList({ navigation }: Props) {
