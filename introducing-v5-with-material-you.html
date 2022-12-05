@@ -537,20 +537,6 @@
 <pre><code class="language-js"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">RadioButton.Item</span></span> 
   <span class="token attr-name">labelVariant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>titleLarge<span class="token punctuation">"</span></span>
 <span class="token punctuation">&gt;</span></span></code></pre>
-<h2 id="surface">
-          <a class="anchor" href="#surface">
-            <svg width="16" height="16">
-              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
-            </svg>
-          </a>
-        Surface</h2>
-<p><code>Surface</code> component received one new prop:</p>
-<ul>
-<li><code>elevation</code> - accepts values from <code>0</code> to <code>5</code> and applies background color and shadows to the <code>Surface</code> component. Supports both iOS and Android.</li>
-</ul>
-<p>Previously <code>elevation</code> was passed inside the <code>style</code> prop. Since it supported not only Android, but also iOS, we decided to extract it from <code>style</code> and create a separate <code>elevation</code> prop for that.</p>
-<pre><code class="language-diff"><span class="token deleted-sign deleted">- &lt;Surface style={{ elevation: 1 }} /&gt;
-</span><span class="token inserted-sign inserted">+ &lt;Surface elevation={1} /&gt;</span></code></pre>
 <h2 id="segmentedbuttons">
           <a class="anchor" href="#segmentedbuttons">
             <svg width="16" height="16">
@@ -584,6 +570,33 @@
       <span class="token punctuation">/&gt;</span></span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<h2 id="snackbar">
+          <a class="anchor" href="#snackbar">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Snackbar</h2>
+<p><code>Snackbar</code> due to the optional close affordance, in form of <code>IconButton</code> <i>(located on the right side of action button)</i>, received three new props:</p>
+<ul>
+<li><code>icon</code> - icon to display when <code>onIconPress</code> is defined. Default will be <code>close</code> icon.</li>
+<li><code>onIconPress</code> - function to execute on icon button press. The icon button appears only when this prop is specified.</li>
+<li><code>iconAccessibilityLabel</code> - accessibility label for the icon button.</li>
+</ul>
+<h2 id="surface">
+          <a class="anchor" href="#surface">
+            <svg width="16" height="16">
+              <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+            </svg>
+          </a>
+        Surface</h2>
+<p><code>Surface</code> component received one new prop:</p>
+<ul>
+<li><code>elevation</code> - accepts values from <code>0</code> to <code>5</code> and applies background color and shadows to the <code>Surface</code> component. Supports both iOS and Android.</li>
+</ul>
+<p>Previously <code>elevation</code> was passed inside the <code>style</code> prop. Since it supported not only Android, but also iOS, we decided to extract it from <code>style</code> and create a separate <code>elevation</code> prop for that.</p>
+<pre><code class="language-diff"><span class="token deleted-sign deleted">- &lt;Surface style={{ elevation: 1 }} /&gt;
+</span><span class="token inserted-sign inserted">+ &lt;Surface elevation={1} /&gt;</span></code></pre>
 <h2 id="textinputicon">
           <a class="anchor" href="#textinput-icon">
             <svg width="16" height="16">
