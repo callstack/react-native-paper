@@ -7,6 +7,10 @@ import { getTheme } from '../../core/theming';
 import FAB from '../FAB';
 import { getFABGroupColors } from '../FAB/utils';
 
+jest.mock('react-native-safe-area-context', () => ({
+  useSafeAreaInsets: () => ({ bottom: 34, left: 0, right: 0, top: 47 }),
+}));
+
 describe('getFABGroupColors - backdrop color', () => {
   it('should return custom color', () => {
     expect(

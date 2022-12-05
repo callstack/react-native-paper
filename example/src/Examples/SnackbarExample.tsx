@@ -38,64 +38,66 @@ const SnackbarExample = () => {
   };
 
   return (
-    <ScreenWrapper contentContainerStyle={styles.container}>
-      <List.Section title="Snackbar options">
-        <View style={styles.row}>
-          <Text>Action button</Text>
-          <Switch
-            value={showAction}
-            onValueChange={() =>
-              setOptions({ ...options, showAction: !showAction })
-            }
-          />
-        </View>
-        {theme.isV3 && (
+    <>
+      <ScreenWrapper contentContainerStyle={styles.container}>
+        <List.Section title="Snackbar options">
           <View style={styles.row}>
-            <Text>Close icon button</Text>
+            <Text>Action button</Text>
             <Switch
-              value={showCloseIcon}
+              value={showAction}
               onValueChange={() =>
-                setOptions({ ...options, showCloseIcon: !showCloseIcon })
+                setOptions({ ...options, showAction: !showAction })
               }
             />
           </View>
-        )}
-        <View style={styles.row}>
-          <Text>Longer message</Text>
-          <Switch
-            value={showLongerMessage}
-            onValueChange={() =>
-              setOptions({ ...options, showLongerMessage: !showLongerMessage })
-            }
-          />
-        </View>
-        <View style={styles.row}>
-          <Text>Longer action</Text>
-          <Switch
-            value={showLongerAction}
-            onValueChange={() =>
-              setOptions({
-                ...options,
-                showLongerMessage: true,
-                showCloseIcon: true,
-                showLongerAction: !showLongerAction,
-              })
-            }
-          />
-        </View>
-      </List.Section>
+          {theme.isV3 && (
+            <View style={styles.row}>
+              <Text>Close icon button</Text>
+              <Switch
+                value={showCloseIcon}
+                onValueChange={() =>
+                  setOptions({ ...options, showCloseIcon: !showCloseIcon })
+                }
+              />
+            </View>
+          )}
+          <View style={styles.row}>
+            <Text>Longer message</Text>
+            <Switch
+              value={showLongerMessage}
+              onValueChange={() =>
+                setOptions({
+                  ...options,
+                  showLongerMessage: !showLongerMessage,
+                })
+              }
+            />
+          </View>
+          <View style={styles.row}>
+            <Text>Longer action</Text>
+            <Switch
+              value={showLongerAction}
+              onValueChange={() =>
+                setOptions({
+                  ...options,
+                  showLongerAction: !showLongerAction,
+                })
+              }
+            />
+          </View>
+        </List.Section>
 
-      <View style={styles.wrapper}>
-        <Button
-          mode="outlined"
-          onPress={() =>
-            setOptions({ ...options, showSnackbar: !showSnackbar })
-          }
-        >
-          {showSnackbar ? 'Hide' : 'Show'}
-        </Button>
-      </View>
-
+        <View style={styles.wrapper}>
+          <Button
+            mode="outlined"
+            onPress={() =>
+              setOptions({ ...options, showSnackbar: !showSnackbar })
+            }
+          >
+            {showSnackbar ? 'Hide' : 'Show'}
+          </Button>
+        </View>
+      </ScreenWrapper>
       <Snackbar
         visible={showSnackbar}
         onDismiss={() => setOptions({ ...options, showSnackbar: false })}
@@ -110,7 +112,7 @@ const SnackbarExample = () => {
       >
         {showLongerMessage ? LONG_MESSAGE : SHORT_MESSAGE}
       </Snackbar>
-    </ScreenWrapper>
+    </>
   );
 };
 

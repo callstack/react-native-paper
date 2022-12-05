@@ -17,10 +17,7 @@ import {
   MD3Theme,
   useTheme,
 } from 'react-native-paper';
-import {
-  SafeAreaInsetsContext,
-  SafeAreaProvider,
-} from 'react-native-safe-area-context';
+import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 import { isWeb } from '../utils';
 import DrawerItems from './DrawerItems';
@@ -166,46 +163,44 @@ export default function PaperExample() {
 
   return (
     <PaperProvider theme={theme}>
-      <SafeAreaProvider>
-        <PreferencesContext.Provider value={preferences}>
-          <React.Fragment>
-            <NavigationContainer
-              initialState={initialState}
-              onStateChange={(state) =>
-                AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
-              }
-            >
-              {isWeb ? (
-                <App />
-              ) : (
-                <SafeAreaInsetsContext.Consumer>
-                  {(insets) => {
-                    const { left, right } = insets || { left: 0, right: 0 };
-                    const collapsedDrawerWidth = 80 + Math.max(left, right);
-                    return (
-                      <Drawer.Navigator
-                        screenOptions={{
-                          drawerStyle: collapsed && {
-                            width: collapsedDrawerWidth,
-                          },
-                        }}
-                        drawerContent={() => <DrawerContent />}
-                      >
-                        <Drawer.Screen
-                          name="Home"
-                          component={App}
-                          options={{ headerShown: false }}
-                        />
-                      </Drawer.Navigator>
-                    );
-                  }}
-                </SafeAreaInsetsContext.Consumer>
-              )}
-              <StatusBar style={!theme.isV3 || theme.dark ? 'light' : 'dark'} />
-            </NavigationContainer>
-          </React.Fragment>
-        </PreferencesContext.Provider>
-      </SafeAreaProvider>
+      <PreferencesContext.Provider value={preferences}>
+        <React.Fragment>
+          <NavigationContainer
+            initialState={initialState}
+            onStateChange={(state) =>
+              AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
+            }
+          >
+            {isWeb ? (
+              <App />
+            ) : (
+              <SafeAreaInsetsContext.Consumer>
+                {(insets) => {
+                  const { left, right } = insets || { left: 0, right: 0 };
+                  const collapsedDrawerWidth = 80 + Math.max(left, right);
+                  return (
+                    <Drawer.Navigator
+                      screenOptions={{
+                        drawerStyle: collapsed && {
+                          width: collapsedDrawerWidth,
+                        },
+                      }}
+                      drawerContent={() => <DrawerContent />}
+                    >
+                      <Drawer.Screen
+                        name="Home"
+                        component={App}
+                        options={{ headerShown: false }}
+                      />
+                    </Drawer.Navigator>
+                  );
+                }}
+              </SafeAreaInsetsContext.Consumer>
+            )}
+            <StatusBar style={!theme.isV3 || theme.dark ? 'light' : 'dark'} />
+          </NavigationContainer>
+        </React.Fragment>
+      </PreferencesContext.Provider>
     </PaperProvider>
   );
 }

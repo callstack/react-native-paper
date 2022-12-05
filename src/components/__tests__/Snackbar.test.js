@@ -32,6 +32,10 @@ jest.mock('react-native', () => {
   return RN;
 });
 
+jest.mock('react-native-safe-area-context', () => ({
+  useSafeAreaInsets: () => ({ bottom: 34, left: 0, right: 0, top: 47 }),
+}));
+
 it('renders snackbar with content', () => {
   const tree = renderer
     .create(

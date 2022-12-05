@@ -2,6 +2,7 @@ import React from 'react';
 import { Platform } from 'react-native';
 
 import { render } from '@testing-library/react-native';
+import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 import renderer from 'react-test-renderer';
 
 import Provider from '../../../core/Provider';
@@ -17,6 +18,8 @@ import { getAppbarColor, renderAppbarContent } from '../../Appbar/utils';
 import Menu from '../../Menu/Menu';
 import Searchbar from '../../Searchbar';
 import Tooltip from '../../Tooltip/Tooltip';
+
+jest.mock('react-native-safe-area-context', () => mockSafeAreaContext);
 
 describe('Appbar', () => {
   it('does not pass any additional props to Searchbar', () => {
