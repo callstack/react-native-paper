@@ -3,31 +3,15 @@ import { FlatList, StyleSheet, View } from 'react-native';
 
 import { Card, IconButton, SegmentedButtons } from 'react-native-paper';
 
+import { restaurantsData } from '../../../utils';
+
 const SegmentedButtonMultiselectRealCase = () => {
   const [value, setValue] = React.useState<string[]>([]);
 
-  const data = React.useMemo(() => {
-    return Array(10)
-      .fill([])
-      .map((_, i) => {
-        const pathToRestaurantCover =
-          i % 2 === 0
-            ? require('../../assets/screenshots/restaurant-1.jpg')
-            : require('../../assets/screenshots/restaurant-2.jpg');
-
-        const price = Math.ceil(Math.min((i + 1) / 2, 4));
-
-        return {
-          id: `${i}`,
-          name: `Restaurant no ${i}`,
-          price,
-          cover: pathToRestaurantCover,
-        };
-      });
-  }, []);
-
-  const filteredData = data.filter((item) =>
-    value.includes(item.price.toString())
+  const filteredData = React.useMemo(
+    () =>
+      restaurantsData.filter((item) => value.includes(item.price.toString())),
+    [value]
   );
 
   return (
@@ -65,7 +49,7 @@ const SegmentedButtonMultiselectRealCase = () => {
         style={styles.group}
       />
       <FlatList
-        data={value.length > 0 ? filteredData : data}
+        data={value.length > 0 ? filteredData : restaurantsData}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => {
           return (

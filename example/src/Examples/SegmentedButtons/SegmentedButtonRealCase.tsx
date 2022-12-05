@@ -3,44 +3,10 @@ import { FlatList, StyleSheet, View } from 'react-native';
 
 import { Card, IconButton, SegmentedButtons } from 'react-native-paper';
 
+import { songsData, albumsData } from '../../../utils';
+
 const SegmentedButtonRealCase = () => {
   const [value, setValue] = React.useState('songs');
-
-  const songsData = React.useMemo(() => {
-    return Array(10)
-      .fill([])
-      .map((_, i) => {
-        const pathToSongCover =
-          i % 2 === 0
-            ? require('../../assets/screenshots/song-1.jpg')
-            : require('../../assets/screenshots/song-2.jpg');
-
-        return {
-          id: `${i}`,
-          title: `Song title no ${i}`,
-          artist: `The artist no ${i}`,
-          cover: pathToSongCover,
-        };
-      });
-  }, []);
-
-  const albumsData = React.useMemo(() => {
-    return Array(10)
-      .fill([])
-      .map((_, i) => {
-        const pathToAlbumsCover =
-          i % 2 === 0
-            ? require('../../assets/screenshots/artist-1.jpg')
-            : require('../../assets/screenshots/artist-2.jpg');
-
-        return {
-          id: `${i}`,
-          title: `Album title no ${i}`,
-          artist: `The artist no ${i}`,
-          cover: pathToAlbumsCover,
-        };
-      });
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -112,7 +78,11 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
   },
-  group: { paddingHorizontal: 20, justifyContent: 'center' },
+  group: {
+    paddingHorizontal: 20,
+    justifyContent: 'center',
+    paddingBottom: 8,
+  },
 });
 
 SegmentedButtonRealCase.title = 'Music player';
