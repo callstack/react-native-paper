@@ -4,8 +4,11 @@ import {
   BackHandler,
   Dimensions,
   Easing,
+  EmitterSubscription,
   findNodeHandle,
   I18nManager,
+  Keyboard,
+  KeyboardEvent as RNKeyboardEvent,
   LayoutRectangle,
   NativeEventSubscription,
   Platform,
@@ -15,10 +18,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-  ViewStyle,
-  Keyboard,
-  KeyboardEvent as RNKeyboardEvent,
-  EmitterSubscription,
+  ViewStyle
 } from 'react-native';
 
 import color from 'color';
@@ -145,6 +145,11 @@ const WINDOW_LAYOUT = Dimensions.get('window');
  *
  * export default MyComponent;
  * ```
+ *
+ * ### Note
+ * When using `Menu` within a React Native's `Modal` component, you need to wrap all
+ * `Modal` contents within a `Provider` in order for the menu to show. This
+ * wrapping is not necessary if you use Paper's `Modal` instead.
  */
 class Menu extends React.Component<Props, State> {
   // @component ./MenuItem.tsx
