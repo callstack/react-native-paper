@@ -55,16 +55,19 @@ export default function Root() {
           title: 'Examples',
         }}
       />
-      {(Object.keys(examples) as Array<keyof typeof examples>).map((id) => (
-        <Stack.Screen
-          key={id}
-          name={id}
-          component={examples[id]}
-          options={{
-            title: examples[id].title,
-          }}
-        />
-      ))}
+      {(Object.keys(examples) as Array<keyof typeof examples>).map((id) => {
+        return (
+          <Stack.Screen
+            key={id}
+            name={id}
+            component={examples[id]}
+            options={{
+              title: examples[id].title,
+              headerShown: id !== 'themingWithReactNavigation',
+            }}
+          />
+        );
+      })}
     </Stack.Navigator>
   );
 }
