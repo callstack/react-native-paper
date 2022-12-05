@@ -18,7 +18,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-  ViewStyle
+  ViewStyle,
 } from 'react-native';
 
 import color from 'color';
