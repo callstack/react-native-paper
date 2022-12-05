@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { I18nManager, StyleSheet } from 'react-native';
+import { I18nManager } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -17,7 +17,10 @@ import {
   MD3Theme,
   useTheme,
 } from 'react-native-paper';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  SafeAreaInsetsContext,
+  SafeAreaProvider,
+} from 'react-native-safe-area-context';
 
 import { isWeb } from '../utils';
 import DrawerItems from './DrawerItems';
@@ -175,18 +178,28 @@ export default function PaperExample() {
               {isWeb ? (
                 <App />
               ) : (
-                <Drawer.Navigator
-                  screenOptions={{
-                    drawerStyle: collapsed && styles.collapsed,
+                <SafeAreaInsetsContext.Consumer>
+                  {(insets) => {
+                    const { left, right } = insets || { left: 0, right: 0 };
+                    const collapsedDrawerWidth = 80 + Math.max(left, right);
+                    return (
+                      <Drawer.Navigator
+                        screenOptions={{
+                          drawerStyle: collapsed && {
+                            width: collapsedDrawerWidth,
+                          },
+                        }}
+                        drawerContent={() => <DrawerContent />}
+                      >
+                        <Drawer.Screen
+                          name="Home"
+                          component={App}
+                          options={{ headerShown: false }}
+                        />
+                      </Drawer.Navigator>
+                    );
                   }}
-                  drawerContent={() => <DrawerContent />}
-                >
-                  <Drawer.Screen
-                    name="Home"
-                    component={App}
-                    options={{ headerShown: false }}
-                  />
-                </Drawer.Navigator>
+                </SafeAreaInsetsContext.Consumer>
               )}
               <StatusBar style={!theme.isV3 || theme.dark ? 'light' : 'dark'} />
             </NavigationContainer>
@@ -196,9 +209,3 @@ export default function PaperExample() {
     </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  collapsed: {
-    width: 80,
-  },
-});
