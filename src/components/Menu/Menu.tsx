@@ -147,7 +147,7 @@ const WINDOW_LAYOUT = Dimensions.get('window');
  * ```
  *
  * ### Note
- * When using Menu within a React Native `Modal`, you need to wrap all
+ * When using `Menu` within a React Native's `Modal` component, you need to wrap all
  * `Modal` contents within a `Provider` in order for the menu to show. This
  * wrapping is not necessary if you use Paper's `Modal` instead.
  */
