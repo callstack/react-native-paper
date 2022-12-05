@@ -42,10 +42,20 @@
             </svg>
           </a>
         Installation</h3>
-<p>Currently v5 is a release candidate, which means it won't be installed by default from the <code>npm</code>. In order to do that, there is a need to explicitly pass package version during installation:</p>
+<ul>
+<li>Currently <code>v5</code> is a release candidate, which means it won't be installed by default from the <code>npm</code>. In order to do that, there is a need to explicitly pass package version during installation:</li>
+</ul>
 <pre><code class="language-sh">yarn add react-native-paper@5.0.0-rc.10</code></pre>
 <p>or</p>
 <pre><code class="language-sh">npm install react-native-paper@5.0.0-rc.10</code></pre>
+<ul>
+<li>From <code>v5</code> there is a need to install <a href="https://github.com/th3rdwave/react-native-safe-area-context">react-native-safe-area-context</a> for handling safe area.</li>
+</ul>
+<pre><code class="language-sh">yarn add react-native-safe-area-context</code></pre>
+<p>or</p>
+<pre><code class="language-sh">npm install react-native-safe-area-context</code></pre>
+<p>Additionaly for <code>iOS</code> platform there is a requirement to link the native parts of the library:</p>
+<pre><code class="language-sh">npx pod-install</code></pre>
 <h2 id="theming">
           <a class="anchor" href="#theming">
             <svg width="16" height="16">

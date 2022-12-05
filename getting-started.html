@@ -40,11 +40,23 @@
         Installation</h2>
 <p>📍<i><b>Note:</b></i> The following documentation and installation steps are related to the <b>v5 release candidate</b>.
 If you are looking for the latest stable version documentation, please check the <a href="https://callstack.github.io/react-native-paper/4.0/index.html">v4 docs</a>.</p>
-<p>Open a Terminal in your project's folder and run:</p>
+<ul>
+<li>Open a Terminal in your project's folder and run:</li>
+</ul>
 <pre><code class="language-sh">yarn add react-native-paper@5.0.0-rc.10</code></pre>
 <p>or</p>
 <pre><code class="language-sh">npm install react-native-paper@5.0.0-rc.10</code></pre>
-<p>If you're on a vanilla React Native project, you also need to install and link <a href="https://github.com/oblador/react-native-vector-icons">react-native-vector-icons</a>.</p>
+<ul>
+<li>From <code>v5</code> there is a need to install <a href="https://github.com/th3rdwave/react-native-safe-area-context">react-native-safe-area-context</a> for handling safe area.</li>
+</ul>
+<pre><code class="language-sh">yarn add react-native-safe-area-context</code></pre>
+<p>or</p>
+<pre><code class="language-sh">npm install react-native-safe-area-context</code></pre>
+<p>Additionaly for <code>iOS</code> platform there is a requirement to link the native parts of the library:</p>
+<pre><code class="language-sh">npx pod-install</code></pre>
+<ul>
+<li>If you're on a vanilla React Native project, you also need to install and link <a href="https://github.com/oblador/react-native-vector-icons">react-native-vector-icons</a>.</li>
+</ul>
 <p>Specifically <code>MaterialCommunityIcons</code> icon pack needs to be included in the project, because some components use those internally (e.g. <code>AppBar.BackAction</code> on Android). </p>
 <pre><code class="language-sh">yarn add react-native-vector-icons</code></pre>
 <p>The library has specified dedicated steps for each platform. Please follow their <a href="https://github.com/oblador/react-native-vector-icons#installation">installation guide</a> in order to properly use icon fonts.</p>
