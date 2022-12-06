@@ -127,17 +127,22 @@ const data = Object.keys(mainExamples).map(
 );
 
 export default function ExampleList({ navigation }: Props) {
-  const renderItem = ({ item }: { item: Item }) => (
-    <List.Item
-      title={item.data.title}
-      onPress={() => navigation.navigate(item.id)}
-    />
-  );
-
   const keyExtractor = (item: { id: string }) => item.id;
 
-  const { colors } = useExampleTheme();
+  const { colors, isV3 } = useExampleTheme();
   const safeArea = useSafeAreaInsets();
+
+  const renderItem = ({ item }: { item: Item }) => {
+    const { data, id } = item;
+
+    if (!isV3 && data.title === mainExamples.themingWithReactNavigation.title) {
+      return null;
+    }
+
+    return (
+      <List.Item title={data.title} onPress={() => navigation.navigate(id)} />
+    );
+  };
 
   return (
     <FlatList
