@@ -199,6 +199,7 @@ exports[`correctly applies a component as the text label 1`] = `
           Array [
             Object {},
           ],
+          null,
         ]
       }
       testID="text-input-flat"
@@ -392,6 +393,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
           Array [
             Object {},
           ],
+          null,
         ]
       }
       testID="text-input-flat"
@@ -637,6 +639,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
             Array [
               Object {},
             ],
+            null,
           ]
         }
         testID="text-input-outlined"
@@ -831,6 +834,7 @@ exports[`correctly applies textAlign center 1`] = `
           Array [
             Object {},
           ],
+          null,
         ]
       }
       testID="text-input-flat"
@@ -1027,6 +1031,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "paddingLeft": 40,
             "paddingRight": 16,
           },
+          null,
         ]
       }
       testID="text-input-flat"
@@ -1414,6 +1419,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "paddingLeft": 16,
             "paddingRight": 40,
           },
+          null,
         ]
       }
       testID="text-input-flat"
