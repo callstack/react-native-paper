@@ -105,6 +105,10 @@ export type Props = {
    */
   theme: InternalTheme;
   /**
+   * Optional label for `FAB`.
+   */
+  label?: string;
+  /**
    * Pass down testID from Group props to FAB.
    */
   testID?: string;
@@ -180,6 +184,7 @@ const FABGroup = ({
   style,
   fabStyle,
   visible,
+  label,
   testID,
   onStateChange,
   color: colorProp,
@@ -423,6 +428,7 @@ const FABGroup = ({
           accessibilityState={{ expanded: open }}
           style={[styles.fab, fabStyle]}
           visible={visible}
+          label={label}
           testID={testID}
           variant={variant}
         />
