@@ -120,6 +120,10 @@ export type Props = React.ComponentProps<typeof Surface> & {
    * testID to be used on tests.
    */
   testID?: string;
+  /**
+   * Number of lines the text in the button should display.
+   */
+  numberOfLines?: number;
 };
 
 /**
@@ -185,6 +189,7 @@ const Button = ({
   labelStyle,
   testID,
   accessible,
+  numberOfLines,
   ...rest
 }: Props) => {
   const isMode = React.useCallback(
@@ -341,7 +346,7 @@ const Button = ({
           <Text
             variant="labelLarge"
             selectable={false}
-            numberOfLines={1}
+            numberOfLines={numberOfLines ?? 1}
             style={[
               styles.label,
               !isV3 && styles.md2Label,
