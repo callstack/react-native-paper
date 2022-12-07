@@ -4,8 +4,6 @@ import type {
   TextStyle,
   LayoutChangeEvent,
   ColorValue,
-  StyleProp,
-  ViewProps,
 } from 'react-native';
 
 import type { $Omit } from './../../types';
@@ -40,7 +38,6 @@ export type State = {
   labelLayout: { measured: boolean; width: number; height: number };
   leftLayout: { height: number | null; width: number | null };
   rightLayout: { height: number | null; width: number | null };
-  customInputStyle?: StyleProp<ViewProps>;
 };
 export type ChildTextInputProps = {
   parentState: State;
@@ -82,7 +79,6 @@ export type LabelProps = {
   roundness: number;
   maxFontSizeMultiplier?: number | undefined | null;
   testID?: string;
-  customInputStyle?: StyleProp<ViewProps>;
 };
 export type InputLabelProps = {
   parentState: State;
