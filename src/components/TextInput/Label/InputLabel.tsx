@@ -29,6 +29,7 @@ const InputLabel = (props: InputLabelProps) => {
     labelTranslationXOffset,
     maxFontSizeMultiplier,
     testID,
+    customInputStyle,
   } = props.labelProps;
 
   const labelTranslationX = {
@@ -138,6 +139,7 @@ const InputLabel = (props: InputLabelProps) => {
             color: textColor,
             opacity: placeholderOpacity,
           },
+          customInputStyle,
         ]}
         numberOfLines={1}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
