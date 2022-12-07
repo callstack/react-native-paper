@@ -56,7 +56,7 @@ export const getTheme = (isDark = false, isV3 = true) => {
 
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme(themes: {
-  reactNaivgationLight: NavigationTheme;
+  reactNavigationLight: NavigationTheme;
   materialLight?: MD3Theme;
 }): {
   LightTheme: NavigationTheme;
