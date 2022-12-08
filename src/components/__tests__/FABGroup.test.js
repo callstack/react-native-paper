@@ -154,3 +154,20 @@ describe('FABActions - labelStyle - containerStyle', () => {
     });
   });
 });
+
+it('correctly adds label prop', () => {
+  const { getByText } = render(
+    <FAB.Group
+      visible
+      open
+      label="Label test"
+      actions={[
+        {
+          label: 'testing',
+        },
+      ]}
+    />
+  );
+
+  expect(getByText('Label test')).toBeTruthy();
+});
