@@ -98,8 +98,6 @@ const ANIMATION_DURATION = 250;
 // From the 'Standard easing' section of https://material.io/design/motion/speed.html#easing
 const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 
-const WINDOW_LAYOUT = Dimensions.get('window');
-
 /**
  * Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
  *
@@ -441,7 +439,8 @@ class Menu extends React.Component<Props, State> {
       },
     ];
 
-    const windowLayout = { ...WINDOW_LAYOUT };
+    const windowLayout = Dimensions.get('window');
+
     windowLayout.height = windowLayout.height - this.keyboardHeight;
 
     // We need to translate menu while animating scale to imitate transform origin for scale animation
