@@ -47,7 +47,8 @@
   },
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.8",
-    "color": "^3.1.2"
+    "color": "^3.1.2",
+    "use-event-callback": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.6",

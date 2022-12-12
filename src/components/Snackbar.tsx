@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import useEventCallback from 'use-event-callback';
 
 import { withInternalTheme } from '../core/theming';
 import type { InternalTheme } from '../types';
@@ -155,6 +156,48 @@ const Snackbar = ({
 
   const { scale } = theme.animation;
 
+  const handleOnVisible = useEventCallback(() => {
+    // show
+    if (hideTimeout.current) clearTimeout(hideTimeout.current);
+    setHidden(false);
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration: 200 * scale,
+      easing: Easing.out(Easing.ease),
+      useNativeDriver: true,
+    }).start(({ finished }) => {
+      if (finished) {
+        const isInfinity =
+          duration === Number.POSITIVE_INFINITY ||
+          duration === Number.NEGATIVE_INFINITY;
+
+        if (!isInfinity) {
+          hideTimeout.current = setTimeout(
+            onDismiss,
+            duration
+          ) as unknown as NodeJS.Timeout;
+        }
+      }
+    });
+  });
+
+  const handleOnHidden = useEventCallback(() => {
+    // hide
+    if (hideTimeout.current) {
+      clearTimeout(hideTimeout.current);
+    }
+
+    Animated.timing(opacity, {
+      toValue: 0,
+      duration: 100 * scale,
+      useNativeDriver: true,
+    }).start(({ finished }) => {
+      if (finished) {
+        setHidden(true);
+      }
+    });
+  });
+
   React.useEffect(() => {
     return () => {
       if (hideTimeout.current) clearTimeout(hideTimeout.current);
@@ -163,45 +206,11 @@ const Snackbar = ({
 
   React.useLayoutEffect(() => {
     if (visible) {
-      // show
-      if (hideTimeout.current) clearTimeout(hideTimeout.current);
-      setHidden(false);
-      Animated.timing(opacity, {
-        toValue: 1,
-        duration: 200 * scale,
-        easing: Easing.out(Easing.ease),
-        useNativeDriver: true,
-      }).start(({ finished }) => {
-        if (finished) {
-          const isInfinity =
-            duration === Number.POSITIVE_INFINITY ||
-            duration === Number.NEGATIVE_INFINITY;
-
-          if (!isInfinity) {
-            hideTimeout.current = setTimeout(
-              onDismiss,
-              duration
-            ) as unknown as NodeJS.Timeout;
-          }
-        }
-      });
+      handleOnVisible();
     } else {
-      // hide
-      if (hideTimeout.current) {
-        clearTimeout(hideTimeout.current);
-      }
-
-      Animated.timing(opacity, {
-        toValue: 0,
-        duration: 100 * scale,
-        useNativeDriver: true,
-      }).start(({ finished }) => {
-        if (finished) {
-          setHidden(true);
-        }
-      });
+      handleOnHidden();
     }
-  }, [visible, duration, opacity, scale, onDismiss]);
+  }, [visible, handleOnVisible, handleOnHidden]);
 
   const { colors, roundness, isV3 } = theme;
 
