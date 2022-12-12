@@ -76,7 +76,6 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    */
   activeOutlineColor?: string;
   /**
-   * @supported Available in v5.x
    * Color of the text in the input.
    */
   textColor?: string;
@@ -144,14 +143,12 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    */
   testID?: string;
   /**
-   * @supported Available in v5.x
    * Pass style to override the default style of outlined wrapper.
    * Overrides style when mode is set to `outlined`
    * Example: `borderRadius`, `borderColor`
    */
   outlineStyle?: StyleProp<ViewStyle>;
   /**
-   * @supported Available in v5.x
    * Pass style to override the default style of underlined wrapper.
    * Overrides style when mode is set to `flat`
    * Example: `borderRadius`, `borderColor`

@@ -74,7 +74,6 @@ export type Props = {
    */
   labeled?: boolean;
   /**
-   * @supported Available in v5.x
    * Whether tabs should be spread across the entire width.
    */
   compact?: boolean;
@@ -195,7 +194,6 @@ export type Props = {
    */
   getLabelText?: (props: { route: Route }) => string | undefined;
   /**
-   * @supported Available in v5.x
    * Get lazy for the current screen. Uses true by default.
    */
   getLazy?: (props: { route: Route }) => boolean | undefined;
@@ -222,13 +220,11 @@ export type Props = {
    */
   sceneAnimationEnabled?: boolean;
   /**
-   * @supported Available in v5.x
    * The scene animation effect. Specify `'shifting'` for a different effect.
    * By default, 'opacity' will be used.
    */
   sceneAnimationType?: 'opacity' | 'shifting';
   /**
-   * @supported Available in v5.x
    * The scene animation Easing.
    */
   sceneAnimationEasing?: EasingFunction | undefined;

@@ -19,7 +19,6 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   children: React.ReactNode;
   /**
-   * @supported Available in v5.x.
    * Whether to show `Divider` at the end of the section. True by default.
    */
   showDivider?: boolean;
