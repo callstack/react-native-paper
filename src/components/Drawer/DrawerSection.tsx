@@ -18,6 +18,11 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * Content of the `Drawer.Section`.
    */
   children: React.ReactNode;
+  /**
+   * @supported Available in v5.x.
+   * Whether to show `Divider` at the end of the section. True by default.
+   */
+  showDivider?: boolean;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -61,7 +66,14 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * export default MyComponent;
  * ```
  */
-const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
+const DrawerSection = ({
+  children,
+  title,
+  theme,
+  style,
+  showDivider = true,
+  ...rest
+}: Props) => {
   const { isV3 } = theme;
   const titleColor = isV3
     ? theme.colors.onSurfaceVariant
@@ -91,10 +103,12 @@ const DrawerSection = ({ children, title, theme, style, ...rest }: Props) => {
         </View>
       )}
       {children}
-      <Divider
-        {...(isV3 && { horizontalInset: true, bold: true })}
-        style={[styles.divider, isV3 && styles.v3Divider]}
-      />
+      {showDivider && (
+        <Divider
+          {...(isV3 && { horizontalInset: true, bold: true })}
+          style={[styles.divider, isV3 && styles.v3Divider]}
+        />
+      )}
     </View>
   );
 };

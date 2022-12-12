@@ -10,6 +10,7 @@ import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
 import type { ThemeProp } from '../types';
 import { addEventListener } from '../utils/addEventListener';
+import SafeAreaProviderCompat from './SafeAreaProviderCompat';
 import { Provider as SettingsProvider, Settings } from './settings';
 import { defaultThemesByVersion, ThemeProvider } from './theming';
 
@@ -98,12 +99,14 @@ const Provider = (props: Props) => {
   const { children, settings } = props;
 
   return (
-    <PortalHost>
-      <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>
-        {/* @ts-expect-error check @callstack/react-theme-provider's children prop */}
-        <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
-      </SettingsProvider>
-    </PortalHost>
+    <SafeAreaProviderCompat>
+      <PortalHost>
+        <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>
+          {/* @ts-expect-error check @callstack/react-theme-provider's children prop */}
+          <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
+        </SettingsProvider>
+      </PortalHost>
+    </SafeAreaProviderCompat>
   );
 };
 

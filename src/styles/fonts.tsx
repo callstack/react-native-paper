@@ -66,9 +66,12 @@ type MD2FontsConfig = {
 
 type MD3FontsConfig =
   | {
-      [key in MD3TypescaleKey | string]: MD3Type;
+      [key in MD3TypescaleKey]: Partial<MD3Type>;
     }
-  | MD3Type;
+  | {
+      [key: string]: MD3Type;
+    }
+  | Partial<MD3Type>;
 
 function configureV2Fonts(config: MD2FontsConfig): Fonts {
   const fonts = Platform.select({ ...fontConfig, ...config }) as Fonts;
@@ -115,21 +118,17 @@ export default function configureFonts(params: {
 }): Fonts;
 // eslint-disable-next-line no-redeclare
 export default function configureFonts(params?: {
-  config?: MD3Type;
+  config?: Partial<MD3Type>;
   isV3?: true;
 }): MD3Typescale;
 // eslint-disable-next-line no-redeclare
 export default function configureFonts(params?: {
-  config?: {
-    [key in MD3TypescaleKey]: MD3Type;
-  };
+  config?: Partial<Record<MD3TypescaleKey, Partial<MD3Type>>>;
   isV3?: true;
 }): MD3Typescale;
 // eslint-disable-next-line no-redeclare
 export default function configureFonts(params: {
-  config: {
-    [key: string]: MD3Type;
-  };
+  config: Record<string, MD3Type>;
   isV3?: true;
 }): MD3Typescale & { [key: string]: MD3Type };
 // eslint-disable-next-line no-redeclare

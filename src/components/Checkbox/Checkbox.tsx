@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform } from 'react-native';
+import { GestureResponderEvent, Platform } from 'react-native';
 
 import { withInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';
@@ -18,7 +18,7 @@ export type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   /**
    * Custom color for unchecked checkbox.
    */

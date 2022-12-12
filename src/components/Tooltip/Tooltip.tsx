@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Dimensions, View, LayoutChangeEvent, StyleSheet } from 'react-native';
+import {
+  Dimensions,
+  View,
+  LayoutChangeEvent,
+  StyleSheet,
+  Platform,
+} from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import { addEventListener } from '../../utils/addEventListener';
@@ -60,6 +66,7 @@ const Tooltip = ({
 }: Props) => {
   const theme = useInternalTheme();
   const [visible, setVisible] = React.useState(false);
+
   const [measurement, setMeasurement] = React.useState({
     children: {},
     tooltip: {},
@@ -68,6 +75,9 @@ const Tooltip = ({
   const showTooltipTimer = React.useRef<NodeJS.Timeout>();
   const hideTooltipTimer = React.useRef<NodeJS.Timeout>();
   const childrenWrapperRef = React.useRef() as React.MutableRefObject<View>;
+  const touched = React.useRef(false);
+
+  const isWeb = Platform.OS === 'web';
 
   React.useEffect(() => {
     return () => {
@@ -106,13 +116,14 @@ const Tooltip = ({
       clearTimeout(hideTooltipTimer.current);
     }
 
-    showTooltipTimer.current = setTimeout(
-      () => setVisible(true),
-      enterTouchDelay
-    ) as unknown as NodeJS.Timeout;
+    showTooltipTimer.current = setTimeout(() => {
+      touched.current = true;
+      setVisible(true);
+    }, enterTouchDelay) as unknown as NodeJS.Timeout;
   };
 
   const handleTouchEnd = () => {
+    touched.current = false;
     if (showTooltipTimer.current) {
       clearTimeout(showTooltipTimer.current);
     }
@@ -121,6 +132,27 @@ const Tooltip = ({
       setVisible(false);
       setMeasurement({ children: {}, tooltip: {}, measured: false });
     }, leaveTouchDelay) as unknown as NodeJS.Timeout;
+  };
+
+  const mobilePressProps = {
+    onPress: React.useCallback(() => {
+      if (touched.current) {
+        return null;
+      } else {
+        return children.props.onPress?.();
+      }
+    }, [children.props]),
+  };
+
+  const webPressProps = {
+    onHoverIn: () => {
+      handleTouchStart();
+      children.props.onHoverIn?.();
+    },
+    onHoverOut: () => {
+      handleTouchEnd();
+      children.props.onHoverOut?.();
+    },
   };
 
   return (
@@ -159,7 +191,11 @@ const Tooltip = ({
         onTouchEnd={handleTouchEnd}
         onTouchCancel={handleTouchEnd}
       >
-        {React.cloneElement(children, { ...rest, ref: childrenWrapperRef })}
+        {React.cloneElement(children, {
+          ...rest,
+          ref: childrenWrapperRef,
+          ...(isWeb ? webPressProps : mobilePressProps),
+        })}
       </View>
     </>
   );

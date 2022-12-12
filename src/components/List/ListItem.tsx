@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   FlexAlignType,
+  GestureResponderEvent,
   NativeSyntheticEvent,
   StyleProp,
   StyleSheet,
@@ -67,7 +68,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   /**
    * @optional
    */

@@ -58,16 +58,23 @@ describe('getCardColors - background color', () => {
     ).toMatchObject({ backgroundColor: getTheme().colors.surfaceVariant });
   });
 
-  ['elevated', 'outlined'].forEach((mode) =>
-    it(`should return correct theme color, for theme version 3, ${mode} mode`, () => {
-      expect(
-        getCardColors({
-          theme: getTheme(),
-          mode,
-        })
-      ).toMatchObject({ backgroundColor: getTheme().colors.surface });
-    })
-  );
+  it('should return correct theme color, for theme version 3, outlined mode', () => {
+    expect(
+      getCardColors({
+        theme: getTheme(),
+        mode: 'outlined',
+      })
+    ).toMatchObject({ backgroundColor: getTheme().colors.surface });
+  });
+
+  it('should return undefined, for theme version 3, elevated mode', () => {
+    expect(
+      getCardColors({
+        theme: getTheme(),
+        mode: 'elevated',
+      })
+    ).toMatchObject({ backgroundColor: undefined });
+  });
 
   it('should return undefined, for theme version 2', () => {
     expect(

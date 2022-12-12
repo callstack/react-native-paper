@@ -158,7 +158,7 @@ const AppbarExample = ({ navigation }: Props) => {
   return (
     <>
       <ScreenWrapper
-        style={styles.container}
+        style={{ marginBottom: height + bottom }}
         contentContainerStyle={styles.contentContainer}
       >
         {theme.isV3 ? (
@@ -225,9 +225,6 @@ AppbarExample.title = 'Appbar';
 export default AppbarExample;
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: 56,
-  },
   contentContainer: {
     paddingVertical: 8,
   },

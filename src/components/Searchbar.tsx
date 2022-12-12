@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  GestureResponderEvent,
   I18nManager,
   Platform,
   StyleProp,
@@ -50,7 +51,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   /**
    * Callback to execute if we want the left icon to act as button.
    */
-  onIconPress?: () => void;
+  onIconPress?: (e: GestureResponderEvent) => void;
   /**
    * @supported Available in v5.x with theme version 3
    * Changes Searchbar shadow and background on iOS and Android.
@@ -214,7 +215,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
             styles.input,
             {
               color: textColor,
-              ...(!isV3 && theme.fonts.regular),
+              ...(theme.isV3 ? theme.fonts.default : theme.fonts.regular),
               ...Platform.select({ web: { outline: 'none' } }),
             },
             inputStyle,

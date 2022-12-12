@@ -11,6 +11,7 @@ import {
   Tooltip,
 } from 'react-native-paper';
 
+import { isWeb } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';
 
 type Props = {
@@ -23,7 +24,7 @@ const TooltipExample = ({ navigation }: Props) => {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       header: () => (
-        <Appbar.Header>
+        <Appbar.Header elevated>
           <Tooltip title="Go back">
             <Appbar.BackAction onPress={() => navigation.goBack()} />
           </Tooltip>
@@ -52,9 +53,12 @@ const TooltipExample = ({ navigation }: Props) => {
     <>
       <ScreenWrapper>
         <Banner visible>
-          A tooltip is displayed upon tapping and holding a screen element or
-          component. Continuously display the tooltip as long as the user
-          long-presses the element.
+          A tooltip is displayed upon
+          {!isWeb
+            ? ' tapping and holding a screen element or component'
+            : ' hovering over a screen element or component'}
+          . Continuously display the tooltip as long as the user long-presses or
+          hovers over the element.
         </Banner>
         <List.Section title="Toggle Buttons">
           <ToggleButton.Row

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  GestureResponderEvent,
   StyleProp,
   StyleSheet,
   TouchableWithoutFeedback,
@@ -50,7 +51,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   /**
    * Mode of the Card.
    * - `elevated` - Card with elevation.
@@ -191,7 +192,7 @@ const Card = ({
       Animated.timing(elevation, {
         toValue: isPressTypeIn ? (isV3 ? 2 : 8) : cardElevation,
         duration: animationDuration,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start();
     }
   };
@@ -226,7 +227,7 @@ const Card = ({
         {
           borderRadius,
         },
-        isV3 && { backgroundColor },
+        isV3 && !isMode('elevated') && { backgroundColor },
         !isV3 && isMode('outlined')
           ? styles.resetElevation
           : {

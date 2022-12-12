@@ -22,6 +22,8 @@ type Props = {
   toggleRTL: () => void;
   toggleThemeVersion: () => void;
   toggleCollapsed: () => void;
+  toggleCustomFont: () => void;
+  customFontLoaded: boolean;
   collapsed: boolean;
   isRTL: boolean;
   isDarkTheme: boolean;
@@ -59,24 +61,37 @@ const DrawerItemsData = [
 const DrawerCollapsedItemsData = [
   {
     label: 'Inbox',
-    icon: 'inbox',
+    focusedIcon: 'inbox',
+    unfocusedIcon: 'inbox-outline',
     key: 0,
     badge: 44,
   },
   {
     label: 'Starred',
-    icon: 'star',
+    focusedIcon: 'star',
+    unfocusedIcon: 'star-outline',
     key: 1,
   },
-  { label: 'Sent mail', icon: 'send', key: 2 },
+  {
+    label: 'Sent mail',
+    focusedIcon: 'send',
+    unfocusedIcon: 'send-outline',
+    key: 2,
+  },
   {
     label: 'A very long title that will be truncated',
-    icon: 'delete',
+    focusedIcon: 'delete',
+    unfocusedIcon: 'delete-outline',
     key: 3,
   },
-  { label: 'Full width', icon: 'arrow-all', key: 4 },
   {
-    icon: 'bell',
+    label: 'Full width',
+    focusedIcon: 'arrow-all',
+    key: 4,
+  },
+  {
+    focusedIcon: 'bell',
+    unfocusedIcon: 'bell-outline',
     key: 5,
     badge: true,
   },
@@ -87,6 +102,8 @@ const DrawerItems = ({
   toggleRTL,
   toggleThemeVersion,
   toggleCollapsed,
+  toggleCustomFont,
+  customFontLoaded,
   collapsed,
   isRTL,
   isDarkTheme,
@@ -128,7 +145,7 @@ const DrawerItems = ({
       ]}
     >
       {isV3 && collapsed && (
-        <Drawer.Section>
+        <Drawer.Section style={styles.collapsedSection}>
           {DrawerCollapsedItemsData.map((props, index) => (
             <Drawer.CollapsedItem
               {...props}
@@ -187,14 +204,30 @@ const DrawerItems = ({
             {isV3 && (
               <TouchableRipple onPress={toggleCollapsed}>
                 <View style={[styles.preference, isV3 && styles.v3Preference]}>
-                  <Text variant="labelLarge">Collapsed drawer</Text>
+                  <Text variant="labelLarge">Collapsed drawer *</Text>
                   <View pointerEvents="none">
                     <Switch value={collapsed} />
                   </View>
                 </View>
               </TouchableRipple>
             )}
+
+            {isV3 && (
+              <TouchableRipple onPress={toggleCustomFont}>
+                <View style={[styles.preference, isV3 && styles.v3Preference]}>
+                  <Text variant="labelLarge">Custom font *</Text>
+                  <View pointerEvents="none">
+                    <Switch value={customFontLoaded} />
+                  </View>
+                </View>
+              </TouchableRipple>
+            )}
           </Drawer.Section>
+          {isV3 && !collapsed && (
+            <Text variant="bodySmall" style={styles.annotation}>
+              * - available only for MD3
+            </Text>
+          )}
         </>
       )}
     </DrawerContentScrollView>
@@ -218,6 +251,12 @@ const styles = StyleSheet.create({
   },
   badge: {
     alignSelf: 'center',
+  },
+  collapsedSection: {
+    marginTop: 16,
+  },
+  annotation: {
+    marginHorizontal: 24,
   },
 });
 

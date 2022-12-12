@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  GestureResponderEvent,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -85,21 +86,22 @@ export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
+
   /**
    * @supported Available in v5.x
    * Function to execute as soon as the touchable element is pressed and invoked even before onPress.
    */
-  onPressIn?: () => void;
+  onPressIn?: (e: GestureResponderEvent) => void;
   /**
    * @supported Available in v5.x
    * Function to execute as soon as the touch is released even before onPress.
    */
-  onPressOut?: () => void;
+  onPressOut?: (e: GestureResponderEvent) => void;
   /**
    * Function to execute on long press.
    */
-  onLongPress?: () => void;
+  onLongPress?: (e: GestureResponderEvent) => void;
   /**
    * Style of button's inner content.
    * Use this prop to apply custom height and width and to set the icon on the right with `flexDirection: 'row-reverse'`.
@@ -206,8 +208,8 @@ const Button = ({
     elevation.setValue(isElevationEntitled ? initialElevation : 0);
   }, [isElevationEntitled, elevation, initialElevation]);
 
-  const handlePressIn = () => {
-    onPressIn?.();
+  const handlePressIn = (e: GestureResponderEvent) => {
+    onPressIn?.(e);
     if (isV3 ? isMode('elevated') : isMode('contained')) {
       const { scale } = animation;
       Animated.timing(elevation, {
@@ -218,8 +220,8 @@ const Button = ({
     }
   };
 
-  const handlePressOut = () => {
-    onPressOut?.();
+  const handlePressOut = (e: GestureResponderEvent) => {
+    onPressOut?.(e);
     if (isV3 ? isMode('elevated') : isMode('contained')) {
       const { scale } = animation;
       Animated.timing(elevation, {

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  GestureResponderEvent,
   NativeSyntheticEvent,
   Platform,
   StyleProp,
@@ -23,9 +24,17 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   label?: string;
   /**
-   * Icon to display for the `DrawerCollapsedItem`.
+   * Badge to show on the icon, can be `true` to show a dot, `string` or `number` to show text.
    */
-  icon?: IconSource;
+  badge?: string | number | boolean;
+  /**
+   * Icon to use as the focused destination icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
+   */
+  focusedIcon?: IconSource;
+  /**
+   * Icon to use as the unfocused destination icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
+   */
+  unfocusedIcon?: IconSource;
   /**
    * Whether to highlight the drawer item as active.
    */
@@ -33,7 +42,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Function to execute on press.
    */
-  onPress?: () => void;
+  onPress?: (e: GestureResponderEvent) => void;
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
@@ -43,10 +52,11 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * @optional
    */
   theme: InternalTheme;
+
   /**
-   * Badge to show on the icon, can be `true` to show a dot, `string` or `number` to show text.
+   * TestID used for testing purposes
    */
-  badge?: string | number | boolean;
+  testID?: string;
 };
 
 const badgeSize = 8;
@@ -71,7 +81,8 @@ const outlineHeight = 32;
  *
  * const MyComponent = () => (
  *    <Drawer.CollapsedItem
- *      icon="inbox"
+ *      focusedIcon="inbox"
+ *      unfocusedIcon="inbox-outline"
  *      label="Inbox"
  *    />
  * );
@@ -80,7 +91,8 @@ const outlineHeight = 32;
  * ```
  */
 const DrawerCollapsedItem = ({
-  icon,
+  focusedIcon,
+  unfocusedIcon,
   label,
   active,
   theme,
@@ -88,6 +100,7 @@ const DrawerCollapsedItem = ({
   onPress,
   accessibilityLabel,
   badge = false,
+  testID = 'drawer-collapsed-item',
   ...rest
 }: Props) => {
   const { isV3 } = theme;
@@ -145,6 +158,9 @@ const DrawerCollapsedItem = ({
     ...(isV3 ? theme.fonts.labelMedium : {}),
   };
 
+  const icon =
+    !active && unfocusedIcon !== undefined ? unfocusedIcon : focusedIcon;
+
   return (
     <View {...rest}>
       {/* eslint-disable-next-line react-native-a11y/has-accessibility-props */}
@@ -157,6 +173,7 @@ const DrawerCollapsedItem = ({
         accessibilityRole="button"
         accessibilityState={{ selected: active }}
         accessibilityLabel={accessibilityLabel}
+        testID={testID}
       >
         <View style={styles.wrapper}>
           <Animated.View
@@ -175,9 +192,13 @@ const DrawerCollapsedItem = ({
               },
               style,
             ]}
+            testID={`${testID}-outline`}
           />
 
-          <View style={[styles.icon, { top: iconPadding }]}>
+          <View
+            style={[styles.icon, { top: iconPadding }]}
+            testID={`${testID}-container`}
+          >
             {badge && (
               <View style={styles.badgeContainer}>
                 {typeof badge === 'boolean' ? (

@@ -238,8 +238,10 @@ adaptNavigationTheme(themes)
 
 Valid `themes` keys are:
 
-  * `light` () - React Navigation compliant light theme.
-  * `dark` () - React Navigation compliant dark theme.
+  * `reactNavigationLight` () - React Navigation compliant light theme.
+  * `reactNavigationDark` () - React Navigation compliant dark theme.
+  * `materialLight` () - React Native Paper compliant light theme.
+  * `materialDark` () - React Native Paper compliant dark theme.
 
 ```ts
 // App.tsx
@@ -247,7 +249,7 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider, MD3LightTheme, adaptNavigationTheme } from 'react-native-paper';
 const Stack = createStackNavigator();
-const { LightTheme } = adaptNavigationTheme({ light: DefaultTheme });
+const { LightTheme } = adaptNavigationTheme({ reactNavigationLight: DefaultTheme });
 export default function App() {
   return (
     <Provider theme={MD3LightTheme}>
