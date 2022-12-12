@@ -137,6 +137,7 @@ const config = {
             ToggleButtonGroup: 'ToggleButton/ToggleButtonGroup',
             ToggleButtonRow: 'ToggleButton/ToggleButtonRow',
           },
+          Tooltip: 'Tooltip/Tooltip',
           TouchableRipple: 'TouchableRipple/TouchableRipple',
           Typography: {
             Text: 'Typography/Text',

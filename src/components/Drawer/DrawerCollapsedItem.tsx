@@ -28,11 +28,13 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   badge?: string | number | boolean;
   /**
-   * Icon to use as the focused destination icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
+   * @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
+   * Icon to use as the focused destination icon, can be a string, an image source or a react component
    */
   focusedIcon?: IconSource;
   /**
-   * Icon to use as the unfocused destination icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
+   * @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
+   * Icon to use as the unfocused destination icon, can be a string, an image source or a react component
    */
   unfocusedIcon?: IconSource;
   /**

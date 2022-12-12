@@ -141,22 +141,37 @@ html[data-theme='light'] .gallery-dark {
   background-color: black;
   color: white;
   font-size: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 15px;
+  padding: 6px;
 }
 
 .badge code {
   background-color: rgba(0, 0, 0, 0.25);
 }
 
+[data-theme='dark'] .badge {
+  color: white
+}
+
 .badge-supported {
-  background-color: #6200ee;
+  color: rgba(98, 0, 238, 1);
+  background-color: rgba(98, 0, 238, 0.2);
+  border-color: rgba(98, 0, 238, 1);
 }
 
 .badge-deprecated {
-  background-color: #B00020;
+  color: rgba(176, 0, 32, 1);
+  background-color: rgba(176, 0, 32, 0.2);
+  border-color: rgba(176, 0, 32, 1);
+
 }
 
 .badge-renamed {
-  background-color: #006400;
+  color: rgba(0, 100, 0, 1);
+  background-color: rgba(0, 100, 0, 0.2);
+  border-color: rgba(0, 100, 0, 1);
 }
 
 .showcase-gallery {

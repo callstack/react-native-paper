@@ -6,7 +6,7 @@ React Native Paper v5 is all about adopting the new Material Design 3 <i>aka</i>
 
 Paper now supports both Material Design 2 and 3 through the configuration described in [Versioning](#versioning) and is compatible with a handful of API changes. 
 
-# Migration guide to Material You (5.0 RC)
+# Migration guide to Material You 5.0
 
 Version 5.0 brings support for the next Material Design iteration branded as Material You <i>(in fact being Material Design v3 or in short MD3)</i> into the `react-native-paper` library. All the components were refined according to the official [design kit on figma](https://www.figma.com/community/file/1035203688168086460) and adjusted in terms of visuals by changes in colors, typography and animations. 
 
@@ -14,15 +14,32 @@ Below you can find the most important information about the components whose API
 
 ### Installation
 
-Currently v5 is a release candidate, which means it won't be installed by default from the `npm`. In order to do that, there is a need to explicitly pass package version during installation:
+* The `v5` has been oficially released as a stable version, which means it will be installed by default from the `npm`. In order to do that, open a Terminal in your project's folder and run:
 
 ```sh
-yarn add react-native-paper@5.0.0-rc.8
+yarn add react-native-paper
 ```
 or
 ```sh
-npm install react-native-paper@5.0.0-rc.8
+npm install react-native-paper
 ```
+
+* From `v5` there is a need to install [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) for handling safe area.
+
+```sh
+yarn add react-native-safe-area-context
+```
+or
+```sh
+npm install react-native-safe-area-context
+```
+
+Additionaly for `iOS` platform there is a requirement to link the native parts of the library:
+
+```sh
+npx pod-install
+```
+
 ## Theming
 
 ### Versioning
@@ -49,7 +66,7 @@ Each accent and error colors has a group of related tones. The tones are mapped 
 
 📍<i>Note: Dynamic colors are not supported yet.</i>
 
-<img class="medium" src="migration/color-palette.png" />
+![color-palette](../../static/migration/color-palette.png)
 
 Colors theme structure should follow the default palette and contain the following properties:
 
@@ -105,6 +122,8 @@ theme: {
 
 A new way of approaching typography introduces one component `<Text>` which accepts prop `variant`. Variant defines appropriate text styles for type role and its size. The updated type scale organizes styles into five roles that are named to describe their purposes: <b>Display</b>, <b>Headline</b>, <b>Title</b>, <b>Label</b> and <b>Body</b> along with three display styles <i>large</i>, <i>medium</i>, and <i>small</i>. In total, there are fifteen variants that are MD3 compliant and are reflecting design typography tokens written in camel case. 
 
+Note: If any component uses Paper's `Text` component, without specified <b>variant</b>, then `default` variant is applied.
+
 ```js
 <Text variant="displayLarge">Display Large</Text>
 <Text variant="displayMedium">Display Medium</Text>
@@ -149,9 +168,39 @@ Take a look at the suggested replacement diff:
 
 👉 You can find more about color on [Material You website](https://m3.material.io/styles/typography/overview)
 
-# Components
+### Configure fonts
 
-## Appbar <i>(Top app bar)</i>
+The existing utility called `configureFonts` was adjusted to help users configure their theme fonts in both version, that's why that function, as of today, is going to accept the object with the follwing properties as an argument:
+
+```ts
+configureFonts(params)
+```
+
+<b>Parameters:</b>
+
+| NAME        | TYPE        | REQUIRED    |
+| ----------- | ----------- | ----------- |
+| params      | object      | No          |
+
+Valid `params` keys are:
+
+  * `config` ([MD2FontsConfig](https://github.com/callstack/react-native-paper/blob/main/src/styles/fonts.tsx#L63) | [MD3FontsConfig](https://github.com/callstack/react-native-paper/blob/main/src/styles/fonts.tsx#L67)) - fonts config object appropriate to the MD version
+  * `isV3` (boolean) - whether adjusting theme fonts for v3. Default it <b>true</b>.
+
+To use your current font config from <b>v2</b> and migrate to <b>v3</b> there are two requirements:
+* the font config previously passed directly into function has to be passed into the params object property called `config`
+* the params object property `isV3` has to be set to `false`
+
+```diff
+- configureFonts(fontConfig)
++ configureFonts({config: fontConfig, isV3: false})
+```
+
+📍Note: If you want to check how to use `configureFonts` on MD3, check the [Fonts](https://callstack.github.io/react-native-paper/fonts.html) guide.
+
+## Components
+
+### Appbar <i>(Top app bar)</i>
 
 `Appbar` and `Appbar.Header` in the latest version can be used in four various modes due to new prop `mode`:
 
@@ -182,7 +231,7 @@ It's worth noting that by default the theme version 3 `Appbar` and `Appbar.Heade
 </Appbar>
 ```
 
-### Appbar.Action
+#### Appbar.Action
 
 `Appbar.Action` received new prop `isLeading`, which defines whether it's the <b>leading</b> button and should be placed at the beginning of the `Appbar`.
 
@@ -190,7 +239,7 @@ It's worth noting that by default the theme version 3 `Appbar` and `Appbar.Heade
 <Appbar.Action isLeading icon="magnify" onPress={() => {}} />
 ```
 
-### Appbar.Content
+#### Appbar.Content
 
 New design guidelines indicate there is no <b>subtitle</b> in `Appbar.Content`, that's why there are two deprecations and the following props won't be supported anymore: `subtitle` and `subtitleStyle`.
 
@@ -199,7 +248,7 @@ New design guidelines indicate there is no <b>subtitle</b> in `Appbar.Content`, 
 + <Appbar.Content title="Title" />
 ```
 
-## Banner, Searchbar and Snackbar
+### Banner, Searchbar and Snackbar
 
 According to the updates in `Surface` on the top of which `Banner`, `Searchbar` and `Snackbar` are implemented, all three component received `elevation` prop to adjust its value.
 
@@ -208,7 +257,7 @@ According to the updates in `Surface` on the top of which `Banner`, `Searchbar` 
 + <Snackbar elevation={1}>Hello</Snackbar>
 ```
 
-## BottomNavigation <i>(Navigation bar)</i>
+### BottomNavigation <i>(Navigation bar)</i>
 
 For the sake of new animation of pill shape, indicating active destination, and assisting icon change from outlined to filled, there are three changes within `navigationState.routes` property items:
 
@@ -249,7 +298,7 @@ Two additional props that control the scene animation were introduced that contr
 
 On a final note, please be aware that `BottomNavigation` with theme version 3 doesn't have a shadow.
 
-## Button
+### Button
 
 `Button`'s property `mode` has been expanded with two additional options:
 * `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background,
@@ -282,7 +331,7 @@ The property `color` is deprecated, but in its place two new props called `butto
 
 Please be aware that along with theme version 3, by default text in the `Button` component isn't uppercased and `contained` button doesn't have any shadow <i>(use then `elevated`)</i>.
 
-## Card
+### Card
 
 The `Card` component's property `mode` has been expanded with one additional option called `contained`, which applies to the card's specified background color without any elevation and border.
 
@@ -290,7 +339,7 @@ The `Card` component's property `mode` has been expanded with one additional opt
 <Card mode="contained" />
 ```
 
-## Card.Title
+#### Card.Title
 
 Since there is no one right way to make a card, there is also no one right way for specifying a title and subtitle variant. Therefore two new props come in handy:
 
@@ -304,7 +353,8 @@ Since there is no one right way to make a card, there is also no one right way f
 />
 ```
 
-## Checkbox.Item
+### Checkbox
+#### Checkbox.Item
 
 `Checkbox.Item` similarly to `RadioButton.Item` has been expanded with the prop called `labelVariant`, which defines appropriate text styles for type role and its size.
 
@@ -314,7 +364,7 @@ Since there is no one right way to make a card, there is also no one right way f
 >
 ```
 
-## Chip
+### Chip
 
 To properly compose `Chip` component and adjust into required type, there are three new props that will come in handy:
 
@@ -329,8 +379,8 @@ To properly compose `Chip` component and adjust into required type, there are th
   <Chip icon="camera" selected showSelectedOverlay>Chip with selected overlay</Chip>
 </>
 ```
-
-## Dialog.Icon
+### Dialog
+#### Dialog.Icon
 
 `Dialog.Icon` is another freshly added component presenting an icon within a `Dialog`, placed at the top of the content.
 
@@ -343,7 +393,7 @@ To properly compose `Chip` component and adjust into required type, there are th
   </Dialog>
 </Portal>
 ```
-## Divider
+### Divider
 
 `Divider` component received two new props:
 
@@ -357,7 +407,8 @@ Additionally prop `inset` was renamed to `leftInset`.
 + <Divider leftInset />
 ```
 
-## Drawer.CollapsedItem <i>(Navigation rail)</i>
+### Drawer
+#### Drawer.CollapsedItem <i>(Navigation rail)</i>
 
 `Drawer.CollapsedItem` is a newly created side navigation component that can be used within `Drawer`, representing a destination in the form of an action item with an icon and optionally label.
 
@@ -366,17 +417,38 @@ Additionally prop `inset` was renamed to `leftInset`.
 ```js
 <Drawer.Section>
   <Drawer.CollapsedItem
-    icon="inbox"
+    focusedIcon="inbox"
+    unfocusedIcon="inbox-outline"
     label="Inbox"
   />
   <Drawer.CollapsedItem
-    icon="star"
+    focusedIcon="star"
+    unfocusedIcon="star-outline"
     label="Starred"
   />
 </Drawer.Section>
 ```
 
-## Floating Action Buttons
+#### Drawer.Section
+
+With the latest version, there is a possibility to specify whether `Drawer.Section` should have a separator, in form of `Divider` component, displayed at the end of the section. To adjust it, a new property called `showDivider` was introduced, which by default is `true`:
+
+```js
+<Drawer.Section showDivider={false}>
+  <Drawer.CollapsedItem
+    focusedIcon="inbox"
+    unfocusedIcon="inbox-outline"
+    label="Inbox"
+  />
+  <Drawer.CollapsedItem
+    focusedIcon="star"
+    unfocusedIcon="star-outline"
+    label="Starred"
+  />
+</Drawer.Section>
+```
+
+### FAB
 
 `FAB`, `AnimatedFAB` and `FAB.Group` in the latest version can be used with four variants and two modes, thanks to two new props:
 
@@ -394,7 +466,7 @@ Additionally prop `inset` was renamed to `leftInset`.
 <FAB mode="flat" />
 ```
 
-### FAB
+#### FAB
 
 Additionaly `FAB` may be applied in one of three available sizes, thanks to new prop `size`: 
 
@@ -419,7 +491,7 @@ Accordingly to introducing `size="small"`, prop `small` was deprecated.
 + <FAB size="small" />
 ```
 
-### FAB.Group
+#### FAB.Group
 
 There is also deprecation in one of the `actions` properties, namely `small` prop is deprecated and replaced in favour of the default `size="small"`.
 
@@ -435,7 +507,7 @@ Additionally, the action item property previously known as `labelStyle` was rena
 + <FAB.Group actions={[{ icon: "plus", containerStyle: styles.customStyle, labelStyle: styles.newLabelStyle }]} />
 ```
 
-## IconButton
+### IconButton
 
 `IconButton` received two new props:
 
@@ -458,7 +530,8 @@ At the same time, the `color` prop was renamed to `iconColor`.
 + <IconButton iconColor="red" />
 ```
 
-## Menu.Item
+### Menu
+#### Menu.Item
 
 `Menu.Item` received two new props:
 
@@ -476,7 +549,8 @@ At the same time, by analogy to the second new prop, the `icon` prop was renamed
 + <Menu.Item leadingIcon="redo" onPress={() => {}} title="Redo" />
 ```
 
-## RadioButton.Item
+### RadioButton
+##### RadioButton.Item
 
 `RadioButton.Item` has been expanded with the prop called `labelVariant`, which defines appropriate text styles for type role and its size.
 
@@ -486,21 +560,10 @@ At the same time, by analogy to the second new prop, the `icon` prop was renamed
 >
 ```
 
-## Surface
+### SegmentedButtons
 
-`Surface` component received one new prop:
-* `elevation` - accepts values from `0` to `5` and applies background color and shadows to the `Surface` component. Supports both iOS and Android.
-
-Previously `elevation` was passed inside the `style` prop. Since it supported not only Android, but also iOS, we decided to extract it from `style` and create a separate `elevation` prop for that.
-
-```diff
-- <Surface style={{ elevation: 1 }} />
-+ <Surface elevation={1} />
-```
-
-## SegmentedButtons
-
-`SegmentedButtons` is a completely new component introduced in the latest version. It allows people to select options, switch views, or sort elements. It supports single and multiselect select variant and provide a lot of customization options.
+`SegmentedButtons` is a completely new component introduced in the latest version. It allows people to select options, switch views, or sort elements. It supports single and multiselect select variant and provide a lot 
+of customization options.
 
 ![segmentedButtons](../../static/screenshots/segmentedbuttons.gif)
 
@@ -531,13 +594,47 @@ const MyComponent = () => {
 };
 ```
 
-## TextInput.Icon
+### Snackbar
+
+`Snackbar` due to the optional close affordance, in form of `IconButton` <i>(located on the right side of action button)</i>, received three new props:
+
+* `icon` - icon to display when `onIconPress` is defined. Default will be `close` icon.
+* `onIconPress` - function to execute on icon button press. The icon button appears only when this prop is specified.
+* `iconAccessibilityLabel` - accessibility label for the icon button.
+
+### Surface
+
+`Surface` component received one new prop:
+* `elevation` - accepts values from `0` to `5` and applies background color and shadows to the `Surface` component. Supports both iOS and Android.
+
+Previously `elevation` was passed inside the `style` prop. Since it supported not only Android, but also iOS, we decided to extract it from `style` and create a separate `elevation` prop for that.
+
+```diff
+- <Surface style={{ elevation: 1 }} />
++ <Surface elevation={1} />
+```
+
+### TextInput
+#### TextInput.Icon
 
 The property `name` was renamed to `icon`, since the scope and type of that prop is much wider than just the icon name – it accepts also the function which receives an object with color and size properties and 
 
 ```diff
 - <TextInput.Icon name="magnify" />
 + <TextInput.Icon icon="magnify" />
+```
+
+## Tooltip
+
+Component displayed upon tapping and holding a screen element or component used to present an informative text label identifying an element, such as a description of its function.
+
+![tooltip](../../static/screenshots/tooltips.gif)
+
+
+```js
+<Tooltip title="Selected Camera">
+  <IconButton icon="camera" selected size={24} onPress={() => {}} />
+</Tooltip>
 ```
 
 ## Credits
@@ -549,5 +646,7 @@ From this place I would like to thank:
 - [Daniel Szczepanik](https://github.com/Drakeoon) for his commitment, effort and collaborative work on adjusting components,
 - [Olimpia Zurek](https://github.com/OlimpiaZurek) for her contribution and help,
 - [Aleksandra Desmurs-Linczewska](https://github.com/p-syche), [Jan Jaworek](https://github.com/jaworek) and [Kewin Wereszczyński](https://github.com/kwereszczynski) for checking and testing changes as well as providing valuable feedback,
+- [Bruno Castro](https://github.com/brunohkbx) for creating a long-awaited `Tooltip` component,
+- [Muhammad Hur Ali](https://github.com/hurali97) for various bug fixes and `List` subcomponents adjustments,
 
 and, <i>last but not least</i>, [Satya Sahoo](https://github.com/satya164) for his mentoring during the process.
