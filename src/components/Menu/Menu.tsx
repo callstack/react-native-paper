@@ -12,6 +12,7 @@ import {
   LayoutRectangle,
   NativeEventSubscription,
   Platform,
+  ScaledSize,
   ScrollView,
   ScrollViewProps,
   StyleProp,
@@ -81,6 +82,8 @@ export type Props = {
 
 type Layout = $Omit<$Omit<LayoutRectangle, 'x'>, 'y'>;
 
+type WindowLayout = Omit<ScaledSize, 'scale' | 'fontScale'>;
+
 type State = {
   rendered: boolean;
   top: number;
@@ -89,6 +92,7 @@ type State = {
   anchorLayout: Layout;
   opacityAnimation: Animated.Value;
   scaleAnimation: Animated.ValueXY;
+  windowLayout: WindowLayout;
 };
 
 // Minimum padding between the edge of the screen and the menu
@@ -174,6 +178,7 @@ class Menu extends React.Component<Props, State> {
     anchorLayout: { width: 0, height: 0 },
     opacityAnimation: new Animated.Value(0),
     scaleAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
+    windowLayout: Dimensions.get('window'),
   };
 
   componentDidMount() {
@@ -184,6 +189,10 @@ class Menu extends React.Component<Props, State> {
     this.keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       this.keyboardDidHide
+    );
+    this.dimensionsWindowSubscription = Dimensions.addEventListener(
+      'change',
+      this.onWindowChangeHandler
     );
   }
 
@@ -197,15 +206,16 @@ class Menu extends React.Component<Props, State> {
     this.removeListeners();
     this.keyboardDidShowListener?.remove();
     this.keyboardDidHideListener?.remove();
+    this.dimensionsWindowSubscription?.remove();
   }
 
   private anchor?: View | null = null;
   private menu?: View | null = null;
   private backHandlerSubscription: NativeEventSubscription | undefined;
   private dimensionsSubscription: NativeEventSubscription | undefined;
+  private dimensionsWindowSubscription: NativeEventSubscription | undefined;
   private keyboardDidShowListener: EmitterSubscription | undefined;
   private keyboardDidHideListener: EmitterSubscription | undefined;
-  private keyboardHeight = 0;
 
   private isCoordinate = (anchor: any): anchor is { x: number; y: number } =>
     !React.isValidElement(anchor) &&
@@ -382,11 +392,30 @@ class Menu extends React.Component<Props, State> {
   };
 
   private keyboardDidShow = (e: RNKeyboardEvent) => {
-    this.keyboardHeight = e.endCoordinates.height;
+    const keyboardHeight = e.endCoordinates.height;
+    const windowLayout = Dimensions.get('window');
+
+    this.setState({
+      windowLayout: {
+        height: windowLayout.height - keyboardHeight,
+        width: windowLayout.width,
+      },
+    });
   };
 
   private keyboardDidHide = () => {
-    this.keyboardHeight = 0;
+    const height = Dimensions.get('window').height;
+
+    this.setState((state) => ({
+      windowLayout: {
+        width: state.windowLayout.width,
+        height,
+      },
+    }));
+  };
+
+  private onWindowChangeHandler = ({ window }: { window: WindowLayout }) => {
+    this.setState({ windowLayout: window });
   };
 
   render() {
@@ -439,15 +468,14 @@ class Menu extends React.Component<Props, State> {
       },
     ];
 
-    const windowLayout = Dimensions.get('window');
-
-    windowLayout.height = windowLayout.height - this.keyboardHeight;
-
     // We need to translate menu while animating scale to imitate transform origin for scale animation
     const positionTransforms = [];
 
     // Check if menu fits horizontally and if not align it to right.
-    if (left <= windowLayout.width - menuLayout.width - SCREEN_INDENT) {
+    if (
+      left <=
+      this.state.windowLayout.width - menuLayout.width - SCREEN_INDENT
+    ) {
       positionTransforms.push({
         translateX: scaleAnimation.x.interpolate({
           inputRange: [0, menuLayout.width],
@@ -471,8 +499,8 @@ class Menu extends React.Component<Props, State> {
 
       const right = left + menuLayout.width;
       // Check if menu position has enough space from right side
-      if (right > windowLayout.width - SCREEN_INDENT) {
-        left = windowLayout.width - SCREEN_INDENT - menuLayout.width;
+      if (right > this.state.windowLayout.width - SCREEN_INDENT) {
+        left = this.state.windowLayout.width - SCREEN_INDENT - menuLayout.width;
       }
     }
 
@@ -484,25 +512,28 @@ class Menu extends React.Component<Props, State> {
     if (
       // Check if the menu overflows from bottom side
       top >=
-        windowLayout.height -
+        this.state.windowLayout.height -
           menuLayout.height -
           SCREEN_INDENT -
           additionalVerticalValue &&
       // And bottom side of the screen has more space than top side
-      top <= windowLayout.height - top
+      top <= this.state.windowLayout.height - top
     ) {
       // Scrollable menu should be below the anchor (expands downwards)
       scrollableMenuHeight =
-        windowLayout.height - top - SCREEN_INDENT - additionalVerticalValue;
+        this.state.windowLayout.height -
+        top -
+        SCREEN_INDENT -
+        additionalVerticalValue;
     } else if (
       // Check if the menu overflows from bottom side
       top >=
-        windowLayout.height -
+        this.state.windowLayout.height -
           menuLayout.height -
           SCREEN_INDENT -
           additionalVerticalValue &&
       // And top side of the screen has more space than bottom side
-      top >= windowLayout.height - top &&
+      top >= this.state.windowLayout.height - top &&
       // And menu overflows from top side
       top <=
         menuLayout.height -
@@ -517,8 +548,8 @@ class Menu extends React.Component<Props, State> {
 
     // Scrollable menu max height
     scrollableMenuHeight =
-      scrollableMenuHeight > windowLayout.height - 2 * SCREEN_INDENT
-        ? windowLayout.height - 2 * SCREEN_INDENT
+      scrollableMenuHeight > this.state.windowLayout.height - 2 * SCREEN_INDENT
+        ? this.state.windowLayout.height - 2 * SCREEN_INDENT
         : scrollableMenuHeight;
 
     // Menu is typically positioned below the element that generates it
@@ -526,18 +557,18 @@ class Menu extends React.Component<Props, State> {
     if (
       // Check if menu fits vertically
       top <=
-        windowLayout.height -
+        this.state.windowLayout.height -
           menuLayout.height -
           SCREEN_INDENT -
           additionalVerticalValue ||
       // Or if the menu overflows from bottom side
       (top >=
-        windowLayout.height -
+        this.state.windowLayout.height -
           menuLayout.height -
           SCREEN_INDENT -
           additionalVerticalValue &&
         // And bottom side of the screen has more space than top side
-        top <= windowLayout.height - top)
+        top <= this.state.windowLayout.height - top)
     ) {
       positionTransforms.push({
         translateY: scaleAnimation.y.interpolate({
@@ -566,11 +597,12 @@ class Menu extends React.Component<Props, State> {
         additionalVerticalValue;
 
       // Check if menu position has enough space from bottom side
-      if (bottom > windowLayout.height - SCREEN_INDENT) {
+      if (bottom > this.state.windowLayout.height - SCREEN_INDENT) {
         top =
-          scrollableMenuHeight === windowLayout.height - 2 * SCREEN_INDENT
+          scrollableMenuHeight ===
+          this.state.windowLayout.height - 2 * SCREEN_INDENT
             ? -SCREEN_INDENT * 2
-            : windowLayout.height -
+            : this.state.windowLayout.height -
               menuLayout.height -
               SCREEN_INDENT -
               additionalVerticalValue;
