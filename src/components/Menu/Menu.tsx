@@ -82,8 +82,6 @@ export type Props = {
 
 type Layout = $Omit<$Omit<LayoutRectangle, 'x'>, 'y'>;
 
-type WindowLayout = Omit<ScaledSize, 'scale' | 'fontScale'>;
-
 type State = {
   rendered: boolean;
   top: number;
@@ -92,7 +90,7 @@ type State = {
   anchorLayout: Layout;
   opacityAnimation: Animated.Value;
   scaleAnimation: Animated.ValueXY;
-  windowLayout: WindowLayout;
+  windowLayout: Layout;
 };
 
 // Minimum padding between the edge of the screen and the menu
@@ -101,6 +99,8 @@ const SCREEN_INDENT = 8;
 const ANIMATION_DURATION = 250;
 // From the 'Standard easing' section of https://material.io/design/motion/speed.html#easing
 const EASING = Easing.bezier(0.4, 0, 0.2, 1);
+
+const WINDOW_LAYOUT = Dimensions.get('window');
 
 /**
  * Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
@@ -178,7 +178,10 @@ class Menu extends React.Component<Props, State> {
     anchorLayout: { width: 0, height: 0 },
     opacityAnimation: new Animated.Value(0),
     scaleAnimation: new Animated.ValueXY({ x: 0, y: 0 }),
-    windowLayout: Dimensions.get('window'),
+    windowLayout: {
+      width: WINDOW_LAYOUT.width,
+      height: WINDOW_LAYOUT.height,
+    },
   };
 
   componentDidMount() {
@@ -393,18 +396,18 @@ class Menu extends React.Component<Props, State> {
 
   private keyboardDidShow = (e: RNKeyboardEvent) => {
     const keyboardHeight = e.endCoordinates.height;
-    const windowLayout = Dimensions.get('window');
+    const { height, width } = Dimensions.get('window');
 
     this.setState({
       windowLayout: {
-        height: windowLayout.height - keyboardHeight,
-        width: windowLayout.width,
+        height: height - keyboardHeight,
+        width,
       },
     });
   };
 
   private keyboardDidHide = () => {
-    const height = Dimensions.get('window').height;
+    const { height } = Dimensions.get('window');
 
     this.setState((state) => ({
       windowLayout: {
@@ -414,8 +417,10 @@ class Menu extends React.Component<Props, State> {
     }));
   };
 
-  private onWindowChangeHandler = ({ window }: { window: WindowLayout }) => {
-    this.setState({ windowLayout: window });
+  private onWindowChangeHandler = ({ window }: { window: ScaledSize }) => {
+    this.setState({
+      windowLayout: { height: window.height, width: window.width },
+    });
   };
 
   render() {
