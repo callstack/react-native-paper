@@ -351,11 +351,16 @@ exports[`renders data table pagination 1`] = `
                   "overflow": "hidden",
                 },
                 false,
-                Object {
-                  "alignItems": "center",
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                },
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                  Object {
+                    "borderRadius": 20,
+                  },
+                ],
               ]
             }
           >
@@ -486,11 +491,16 @@ exports[`renders data table pagination 1`] = `
                   "overflow": "hidden",
                 },
                 false,
-                Object {
-                  "alignItems": "center",
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                },
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                  Object {
+                    "borderRadius": 20,
+                  },
+                ],
               ]
             }
           >
@@ -679,11 +689,16 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
                   "overflow": "hidden",
                 },
                 false,
-                Object {
-                  "alignItems": "center",
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                },
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                  Object {
+                    "borderRadius": 20,
+                  },
+                ],
               ]
             }
           >
@@ -814,11 +829,16 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
                   "overflow": "hidden",
                 },
                 false,
-                Object {
-                  "alignItems": "center",
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                },
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                  Object {
+                    "borderRadius": 20,
+                  },
+                ],
               ]
             }
           >
@@ -949,11 +969,16 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
                   "overflow": "hidden",
                 },
                 false,
-                Object {
-                  "alignItems": "center",
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                },
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                  Object {
+                    "borderRadius": 20,
+                  },
+                ],
               ]
             }
           >
@@ -1084,11 +1109,16 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
                   "overflow": "hidden",
                 },
                 false,
-                Object {
-                  "alignItems": "center",
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                },
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                  Object {
+                    "borderRadius": 20,
+                  },
+                ],
               ]
             }
           >
@@ -1277,11 +1307,16 @@ exports[`renders data table pagination with label 1`] = `
                   "overflow": "hidden",
                 },
                 false,
-                Object {
-                  "alignItems": "center",
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                },
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                  Object {
+                    "borderRadius": 20,
+                  },
+                ],
               ]
             }
           >
@@ -1412,11 +1447,16 @@ exports[`renders data table pagination with label 1`] = `
                   "overflow": "hidden",
                 },
                 false,
-                Object {
-                  "alignItems": "center",
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                },
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                  Object {
+                    "borderRadius": 20,
+                  },
+                ],
               ]
             }
           >
@@ -1849,11 +1889,16 @@ exports[`renders data table pagination with options select 1`] = `
                   "overflow": "hidden",
                 },
                 false,
-                Object {
-                  "alignItems": "center",
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                },
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                  Object {
+                    "borderRadius": 20,
+                  },
+                ],
               ]
             }
           >
@@ -1984,11 +2029,16 @@ exports[`renders data table pagination with options select 1`] = `
                   "overflow": "hidden",
                 },
                 false,
-                Object {
-                  "alignItems": "center",
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                },
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                  Object {
+                    "borderRadius": 20,
+                  },
+                ],
               ]
             }
           >
@@ -2119,11 +2169,16 @@ exports[`renders data table pagination with options select 1`] = `
                   "overflow": "hidden",
                 },
                 false,
-                Object {
-                  "alignItems": "center",
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                },
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                  Object {
+                    "borderRadius": 20,
+                  },
+                ],
               ]
             }
           >
@@ -2254,11 +2309,16 @@ exports[`renders data table pagination with options select 1`] = `
                   "overflow": "hidden",
                 },
                 false,
-                Object {
-                  "alignItems": "center",
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                },
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                  Object {
+                    "borderRadius": 20,
+                  },
+                ],
               ]
             }
           >

@@ -183,11 +183,16 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                           "overflow": "hidden",
                         },
                         false,
-                        Object {
-                          "alignItems": "center",
-                          "flexGrow": 1,
-                          "justifyContent": "center",
-                        },
+                        Array [
+                          Object {
+                            "alignItems": "center",
+                            "flexGrow": 1,
+                            "justifyContent": "center",
+                          },
+                          Object {
+                            "borderRadius": 20,
+                          },
+                        ],
                       ]
                     }
                   >
@@ -351,11 +356,16 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                             "overflow": "hidden",
                           },
                           false,
-                          Object {
-                            "alignItems": "center",
-                            "flexGrow": 1,
-                            "justifyContent": "center",
-                          },
+                          Array [
+                            Object {
+                              "alignItems": "center",
+                              "flexGrow": 1,
+                              "justifyContent": "center",
+                            },
+                            Object {
+                              "borderRadius": 20,
+                            },
+                          ],
                         ]
                       }
                     >
@@ -546,11 +556,16 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                     "overflow": "hidden",
                   },
                   false,
-                  Object {
-                    "alignItems": "center",
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                  },
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "flexGrow": 1,
+                      "justifyContent": "center",
+                    },
+                    Object {
+                      "borderRadius": 20,
+                    },
+                  ],
                 ]
               }
             >
@@ -790,11 +805,16 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                     "overflow": "hidden",
                   },
                   false,
-                  Object {
-                    "alignItems": "center",
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                  },
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "flexGrow": 1,
+                      "justifyContent": "center",
+                    },
+                    Object {
+                      "borderRadius": 20,
+                    },
+                  ],
                 ]
               }
             >
