@@ -232,7 +232,7 @@ const TextInput = React.forwardRef<TextInputHandles, Props>(
       error: errorProp = false,
       multiline = false,
       editable = true,
-      customInputStyle = null,
+      containerStyle,
       render = (props: RenderProps) => <NativeTextInput {...props} />,
       ...rest
     }: Props,
@@ -468,7 +468,7 @@ const TextInput = React.forwardRef<TextInputHandles, Props>(
           onLeftAffixLayoutChange={onLeftAffixLayoutChange}
           onRightAffixLayoutChange={onRightAffixLayoutChange}
           maxFontSizeMultiplier={maxFontSizeMultiplier}
-          customInputStyle={customInputStyle}
+          containerStyle={containerStyle}
         />
       );
     }
@@ -504,7 +504,7 @@ const TextInput = React.forwardRef<TextInputHandles, Props>(
         onLeftAffixLayoutChange={onLeftAffixLayoutChange}
         onRightAffixLayoutChange={onRightAffixLayoutChange}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
-        customInputStyle={customInputStyle}
+        containerStyle={containerStyle}
       />
     );
   }

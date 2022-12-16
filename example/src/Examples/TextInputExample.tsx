@@ -542,7 +542,7 @@ const TextInputExample = () => {
             onChangeText={(customStyleText) =>
               inputActionHandler('customStyleText', customStyleText)
             }
-            customInputStyle={{ paddingLeft: 50 }}
+            containerStyle={{ paddingLeft: 50 }}
           />
 
           <View style={styles.inputContainerStyle}>
