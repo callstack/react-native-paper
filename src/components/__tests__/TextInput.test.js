@@ -181,6 +181,19 @@ it('correctly applies a component as the text label', () => {
   expect(toJSON()).toMatchSnapshot();
 });
 
+it('correctly applies paddingLeft from containerStyleProp', () => {
+  const { toJSON } = render(
+    <TextInput
+      label="With padding"
+      placeholder="Type something"
+      value={'Some test value'}
+      containerStyle={{ paddingLeft: 20 }}
+    />
+  );
+
+  expect(toJSON()).toMatchSnapshot();
+});
+
 it('renders label with correct color when active', () => {
   const { getByTestId } = render(
     <TextInput
