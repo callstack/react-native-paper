@@ -73,7 +73,7 @@ const TextInputFlat = ({
   right,
   placeholderTextColor,
   testID = 'text-input-flat',
-  contentStyle: customContainerStyle,
+  contentStyle,
   ...rest
 }: ChildTextInputProps) => {
   const isAndroid = Platform.OS === 'android';
@@ -150,7 +150,7 @@ const TextInputFlat = ({
     theme,
   });
 
-  const contentStyle = {
+  const containerStyle = {
     backgroundColor,
     borderTopLeftRadius: theme.roundness,
     borderTopRightRadius: theme.roundness,
@@ -275,7 +275,7 @@ const TextInputFlat = ({
     roundness,
     maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
     testID,
-    customContainerStyle,
+    contentStyle,
   };
   const affixTopPosition = {
     [AdornmentSide.Left]: leftAffixTopPosition,
@@ -309,7 +309,7 @@ const TextInputFlat = ({
   }
 
   return (
-    <View style={[contentStyle, viewStyle]}>
+    <View style={[containerStyle, viewStyle]}>
       <Underline
         style={underlineStyle}
         hasActiveOutline={hasActiveOutline}
@@ -338,7 +338,7 @@ const TextInputFlat = ({
               dense ? styles.densePatchContainer : styles.patchContainer,
               {
                 backgroundColor:
-                  viewStyle.backgroundColor || contentStyle.backgroundColor,
+                  viewStyle.backgroundColor || containerStyle.backgroundColor,
                 left: paddingLeft,
                 right: paddingRight,
               },
@@ -382,7 +382,7 @@ const TextInputFlat = ({
             },
             Platform.OS === 'web' && { outline: 'none' },
             adornmentStyleAdjustmentForNativeInput,
-            customContainerStyle,
+            contentStyle,
           ],
         })}
       </View>
