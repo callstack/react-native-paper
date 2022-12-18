@@ -71,7 +71,6 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    */
   clearIcon?: IconSource;
   /**
-   * @supported Available in v5.x
    * Custom flag for replacing clear button with activity indicator.
    */
   loading?: Boolean;

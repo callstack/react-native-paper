@@ -43,7 +43,6 @@ export type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
    */
   elevated?: boolean;
   /**
-   * @supported Available in v5.x
    * Safe area insets for the Appbar. This can be used to avoid elements like the navigation bar on Android and bottom safe area on iOS.
    */
   safeAreaInsets?: {

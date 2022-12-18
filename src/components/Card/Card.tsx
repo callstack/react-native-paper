@@ -192,7 +192,7 @@ const Card = ({
       Animated.timing(elevation, {
         toValue: isPressTypeIn ? (isV3 ? 2 : 8) : cardElevation,
         duration: animationDuration,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start();
     }
   };

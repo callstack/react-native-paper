@@ -350,7 +350,14 @@ const FABGroup = ({
                 {it.label && (
                   <View>
                     <Card
+                      mode={isV3 ? 'contained' : 'elevated'}
+                      onPress={(e) => {
+                        it.onPress(e);
+                        close();
+                      }}
                       accessibilityHint={it.accessibilityHint}
+                      accessibilityLabel={accessibilityLabel}
+                      accessibilityRole="button"
                       style={
                         [
                           styles.containerStyle,
@@ -366,13 +373,6 @@ const FABGroup = ({
                           it.containerStyle,
                         ] as StyleProp<ViewStyle>
                       }
-                      onPress={(e) => {
-                        it.onPress(e);
-                        close();
-                      }}
-                      accessibilityLabel={accessibilityLabel}
-                      accessibilityRole="button"
-                      {...(isV3 && { elevation: 0 })}
                     >
                       <Text
                         variant="titleMedium"

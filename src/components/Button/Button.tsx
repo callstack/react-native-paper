@@ -46,12 +46,10 @@ export type Props = React.ComponentProps<typeof Surface> & {
    */
   color?: string;
   /**
-   * @supported Available in v5.x
    * Custom button's background color.
    */
   buttonColor?: string;
   /**
-   * @supported Available in v5.x
    * Custom button's text color.
    */
   textColor?: string;
@@ -87,14 +85,11 @@ export type Props = React.ComponentProps<typeof Surface> & {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
-
   /**
-   * @supported Available in v5.x
    * Function to execute as soon as the touchable element is pressed and invoked even before onPress.
    */
   onPressIn?: (e: GestureResponderEvent) => void;
   /**
-   * @supported Available in v5.x
    * Function to execute as soon as the touch is released even before onPress.
    */
   onPressOut?: (e: GestureResponderEvent) => void;

@@ -89,8 +89,6 @@ export type Props = $RemoveChildren<typeof Surface> & {
    */
   size?: FABSize;
   /**
-   * @supported Available in v5.x
-   *
    * Custom size for the `FAB`. This prop takes precedence over size prop
    */
   customSize?: number;

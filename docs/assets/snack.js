@@ -37,7 +37,7 @@ function appendSnackLink() {
         encodeURIComponent(window.location.href) +
         '&code=' +
         encodeURIComponent(pre.textContent) +
-        '&dependencies=react-native-paper%405.0.0,@expo/vector-icons%40%5E13.0.0';
+        '&dependencies=react-native-paper%405.0.0,@expo/vector-icons%40%5E13.0.0,react-native-safe-area-context';
 
       if (link.href === href) {
         return;
