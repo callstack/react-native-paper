@@ -80,6 +80,10 @@ export type Props = $RemoveChildren<typeof Surface> & {
    */
   onLongPress?: () => void;
   /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
+  /**
    * @supported Available in v5.x with theme version 3
    *
    * Size of the `FAB`.
@@ -162,6 +166,7 @@ const FAB = React.forwardRef<View, Props>(
       disabled,
       onPress,
       onLongPress,
+      delayLongPress,
       theme,
       style,
       visible = true,
@@ -259,6 +264,7 @@ const FAB = React.forwardRef<View, Props>(
           borderless
           onPress={onPress}
           onLongPress={onLongPress}
+          delayLongPress={delayLongPress}
           rippleColor={rippleColor}
           disabled={disabled}
           accessibilityLabel={accessibilityLabel}

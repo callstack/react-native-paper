@@ -75,6 +75,10 @@ export type Props = $RemoveChildren<typeof Surface> & {
    */
   onLongPress?: () => void;
   /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
+  /**
    * Whether icon should be translated to the end of extended `FAB` or be static and stay in the same place. The default value is `dynamic`.
    */
   iconMode?: AnimatedFABIconMode;
@@ -192,6 +196,7 @@ const AnimatedFAB = ({
   disabled,
   onPress,
   onLongPress,
+  delayLongPress,
   theme,
   style,
   visible = true,
@@ -403,6 +408,7 @@ const AnimatedFAB = ({
               borderless
               onPress={onPress}
               onLongPress={onLongPress}
+              delayLongPress={delayLongPress}
               rippleColor={rippleColor}
               disabled={disabled}
               accessibilityLabel={accessibilityLabel}

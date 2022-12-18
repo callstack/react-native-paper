@@ -49,6 +49,10 @@ export type Props = {
    */
   onLongPress?: (e: GestureResponderEvent) => void;
   /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
+  /**
    * Content of the section.
    */
   children: React.ReactNode;
@@ -151,6 +155,7 @@ const ListAccordion = ({
   testID,
   onPress,
   onLongPress,
+  delayLongPress,
   expanded: expandedProp,
   accessibilityLabel,
 }: Props) => {
@@ -197,6 +202,7 @@ const ListAccordion = ({
           style={[styles.container, style]}
           onPress={handlePress}
           onLongPress={onLongPress}
+          delayLongPress={delayLongPress}
           rippleColor={rippleColor}
           accessibilityRole="button"
           accessibilityState={{ expanded: isExpanded }}
