@@ -1739,7 +1739,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
             "letterSpacing": 0.15,
             "lineHeight": undefined,
             "opacity": 0,
-            "paddingLeft": 16,
+            "paddingLeft": 20,
             "paddingRight": 16,
             "position": "absolute",
             "textAlign": "left",
