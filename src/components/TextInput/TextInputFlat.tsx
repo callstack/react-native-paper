@@ -467,7 +467,6 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
   },
   input: {
-    flexGrow: 1,
     margin: 0,
   },
   inputFlat: {

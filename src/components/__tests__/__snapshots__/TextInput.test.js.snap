@@ -171,7 +171,6 @@ exports[`correctly applies a component as the text label 1`] = `
       style={
         Array [
           Object {
-            "flexGrow": 1,
             "margin": 0,
           },
           Object {
@@ -364,7 +363,6 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
       style={
         Array [
           Object {
-            "flexGrow": 1,
             "margin": 0,
           },
           Object {
@@ -611,7 +609,6 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
         style={
           Array [
             Object {
-              "flexGrow": 1,
               "margin": 0,
               "zIndex": 1,
             },
@@ -803,7 +800,6 @@ exports[`correctly applies textAlign center 1`] = `
       style={
         Array [
           Object {
-            "flexGrow": 1,
             "margin": 0,
           },
           Object {
@@ -996,7 +992,6 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
       style={
         Array [
           Object {
-            "flexGrow": 1,
             "margin": 0,
           },
           Object {
@@ -1383,7 +1378,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       style={
         Array [
           Object {
-            "flexGrow": 1,
             "margin": 0,
           },
           Object {
