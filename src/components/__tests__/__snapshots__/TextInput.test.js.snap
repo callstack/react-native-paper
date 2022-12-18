@@ -1621,7 +1621,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
 </View>
 `;
 
-exports[`correctly applies paddingLeft from containerStyleProp 1`] = `
+exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
 <View
   style={
     Array [

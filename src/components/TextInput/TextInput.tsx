@@ -147,7 +147,7 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    * Overrides input style
    * Example: `paddingLeft`, `backgroundColor`
    */
-  containerStyle?: StyleProp<ViewStyle>;
+  contentStyle?: StyleProp<ViewStyle>;
   /**
    * Pass style to override the default style of outlined wrapper.
    * Overrides style when mode is set to `outlined`
@@ -229,7 +229,7 @@ const TextInput = React.forwardRef<TextInputHandles, Props>(
       error: errorProp = false,
       multiline = false,
       editable = true,
-      containerStyle,
+      contentStyle,
       render = (props: RenderProps) => <NativeTextInput {...props} />,
       ...rest
     }: Props,
@@ -465,7 +465,7 @@ const TextInput = React.forwardRef<TextInputHandles, Props>(
           onLeftAffixLayoutChange={onLeftAffixLayoutChange}
           onRightAffixLayoutChange={onRightAffixLayoutChange}
           maxFontSizeMultiplier={maxFontSizeMultiplier}
-          containerStyle={containerStyle}
+          contentStyle={contentStyle}
         />
       );
     }
@@ -501,7 +501,7 @@ const TextInput = React.forwardRef<TextInputHandles, Props>(
         onLeftAffixLayoutChange={onLeftAffixLayoutChange}
         onRightAffixLayoutChange={onRightAffixLayoutChange}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
-        containerStyle={containerStyle}
+        contentStyle={contentStyle}
       />
     );
   }

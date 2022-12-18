@@ -71,7 +71,7 @@ const TextInputOutlined = ({
   right,
   placeholderTextColor,
   testID = 'text-input-outlined',
-  containerStyle,
+  contentStyle,
   ...rest
 }: ChildTextInputProps) => {
   const adornmentConfig = getAdornmentConfig({ left, right });
@@ -210,7 +210,7 @@ const TextInputOutlined = ({
     roundness,
     maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
     testID,
-    containerStyle,
+    contentStyle,
   };
 
   const minHeight = (height ||
@@ -356,7 +356,7 @@ const TextInputOutlined = ({
               },
               Platform.OS === 'web' && { outline: 'none' },
               adornmentStyleAdjustmentForNativeInput,
-              containerStyle,
+              contentStyle,
             ],
           } as RenderProps)}
         </View>

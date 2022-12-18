@@ -73,7 +73,7 @@ const TextInputFlat = ({
   right,
   placeholderTextColor,
   testID = 'text-input-flat',
-  containerStyle: customContainerStyle,
+  contentStyle: customContainerStyle,
   ...rest
 }: ChildTextInputProps) => {
   const isAndroid = Platform.OS === 'android';
@@ -150,7 +150,7 @@ const TextInputFlat = ({
     theme,
   });
 
-  const containerStyle = {
+  const contentStyle = {
     backgroundColor,
     borderTopLeftRadius: theme.roundness,
     borderTopRightRadius: theme.roundness,
@@ -309,7 +309,7 @@ const TextInputFlat = ({
   }
 
   return (
-    <View style={[containerStyle, viewStyle]}>
+    <View style={[contentStyle, viewStyle]}>
       <Underline
         style={underlineStyle}
         hasActiveOutline={hasActiveOutline}
@@ -338,7 +338,7 @@ const TextInputFlat = ({
               dense ? styles.densePatchContainer : styles.patchContainer,
               {
                 backgroundColor:
-                  viewStyle.backgroundColor || containerStyle.backgroundColor,
+                  viewStyle.backgroundColor || contentStyle.backgroundColor,
                 left: paddingLeft,
                 right: paddingRight,
               },

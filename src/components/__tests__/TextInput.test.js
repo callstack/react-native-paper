@@ -181,13 +181,13 @@ it('correctly applies a component as the text label', () => {
   expect(toJSON()).toMatchSnapshot();
 });
 
-it('correctly applies paddingLeft from containerStyleProp', () => {
+it('correctly applies paddingLeft from contentStyleProp', () => {
   const { toJSON } = render(
     <TextInput
       label="With padding"
       placeholder="Type something"
       value={'Some test value'}
-      containerStyle={{ paddingLeft: 20 }}
+      contentStyle={{ paddingLeft: 20 }}
     />
   );
 

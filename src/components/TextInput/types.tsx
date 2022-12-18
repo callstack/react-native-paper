@@ -40,7 +40,7 @@ export type State = {
   labelLayout: { measured: boolean; width: number; height: number };
   leftLayout: { height: number | null; width: number | null };
   rightLayout: { height: number | null; width: number | null };
-  containerStyle?: StyleProp<ViewProps>;
+  contentStyle?: StyleProp<ViewProps>;
 };
 export type ChildTextInputProps = {
   parentState: State;
@@ -82,7 +82,7 @@ export type LabelProps = {
   roundness: number;
   maxFontSizeMultiplier?: number | undefined | null;
   testID?: string;
-  containerStyle?: StyleProp<ViewProps>;
+  contentStyle?: StyleProp<ViewProps>;
 };
 export type InputLabelProps = {
   parentState: State;
