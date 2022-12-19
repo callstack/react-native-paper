@@ -2,8 +2,6 @@ import React from 'react';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet } from 'react-native';
 
-import color from 'color';
-
 import overlay from '../../styles/overlay';
 import { black, white } from '../../styles/themes/v2/colors';
 import type { InternalTheme } from '../../types';
@@ -35,10 +33,7 @@ export const getAppbarColor = (
   }
 
   if (elevated) {
-    return color(colors.surface)
-      .mix(color(colors.primary), 0.08)
-      .rgb()
-      .string();
+    return theme.colors.elevation.level2;
   }
 
   return colors.surface;

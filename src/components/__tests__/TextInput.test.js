@@ -26,6 +26,9 @@ const style = StyleSheet.create({
   lineHeight: {
     lineHeight: 22,
   },
+  contentStyle: {
+    paddingLeft: 20,
+  },
 });
 
 const affixTextValue = '/100';
@@ -187,7 +190,7 @@ it('correctly applies paddingLeft from contentStyleProp', () => {
       label="With padding"
       placeholder="Type something"
       value={'Some test value'}
-      contentStyle={{ paddingLeft: 20 }}
+      contentStyle={style.contentStyle}
     />
   );
 

@@ -264,7 +264,7 @@ Array [
               collapsable={false}
               style={
                 Object {
-                  "backgroundColor": "rgb(243, 237, 247)",
+                  "backgroundColor": "rgb(243, 237, 246)",
                   "borderRadius": 4,
                   "borderTopLeftRadius": 0,
                   "borderTopRightRadius": 0,
@@ -921,7 +921,7 @@ Array [
               collapsable={false}
               style={
                 Object {
-                  "backgroundColor": "rgb(243, 237, 247)",
+                  "backgroundColor": "rgb(243, 237, 246)",
                   "borderRadius": 4,
                   "opacity": 0,
                   "paddingVertical": 8,

@@ -22,8 +22,6 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
-
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 import { withInternalTheme } from '../../core/theming';
 import type { $Omit, InternalTheme } from '../../types';
@@ -661,10 +659,7 @@ class Menu extends React.Component<Props, State> {
                       styles.shadowMenuContainer,
                       shadowMenuContainerStyle,
                       theme.isV3 && {
-                        backgroundColor: color(theme.colors.surface)
-                          .mix(color(theme.colors.primary), 0.08)
-                          .rgb()
-                          .string(),
+                        backgroundColor: theme.colors.elevation.level2,
                       },
                       contentStyle,
                     ] as StyleProp<ViewStyle>
