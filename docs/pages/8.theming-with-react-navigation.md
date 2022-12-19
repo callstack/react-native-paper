@@ -40,8 +40,8 @@ import {
 } from '@react-navigation/native';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
-  light: NavigationDefaultTheme,
-  dark: NavigationDarkTheme,
+  reactNavigationLight: NavigationDefaultTheme,
+  reactNavigationDark: NavigationDarkTheme,
 });
 ```
 
@@ -159,8 +159,8 @@ import {
 import merge from 'deepmerge';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
-  light: NavigationDefaultTheme,
-  dark: NavigationDarkTheme,
+  reactNavigationLight: NavigationDefaultTheme,
+  reactNavigationDark: NavigationDarkTheme,
 });
 
 const CombinedDefaultTheme = merge(MD3DarkTheme, LightTheme);
@@ -194,8 +194,8 @@ const CombinedDarkTheme = {
 
 ```js
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
-  light: NavigationDefaultTheme,
-  dark: NavigationDarkTheme,
+  reactNavigationLight: NavigationDefaultTheme,
+  reactNavigationDark: NavigationDarkTheme,
 });
 
 const CombinedDefaultTheme = {
