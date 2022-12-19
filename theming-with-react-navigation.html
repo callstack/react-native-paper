@@ -73,8 +73,8 @@ But how to make them work together?</p>
 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/native'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> <span class="token punctuation">{</span> LightTheme<span class="token punctuation">,</span> DarkTheme <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">adaptNavigationTheme</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  light<span class="token punctuation">:</span> NavigationDefaultTheme<span class="token punctuation">,</span>
-  dark<span class="token punctuation">:</span> NavigationDarkTheme<span class="token punctuation">,</span>
+  reactNavigationLight<span class="token punctuation">:</span> NavigationDefaultTheme<span class="token punctuation">,</span>
+  reactNavigationDark<span class="token punctuation">:</span> NavigationDarkTheme<span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>Library exports also Material Design 3 themes in both modes:</p>
 <pre><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span>
@@ -186,8 +186,8 @@ For React Native Paper theme to work, we need to use <code>PaperProvider</code> 
 <span class="token keyword">import</span> merge <span class="token keyword">from</span> <span class="token string">'deepmerge'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> <span class="token punctuation">{</span> LightTheme<span class="token punctuation">,</span> DarkTheme <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">adaptNavigationTheme</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  light<span class="token punctuation">:</span> NavigationDefaultTheme<span class="token punctuation">,</span>
-  dark<span class="token punctuation">:</span> NavigationDarkTheme<span class="token punctuation">,</span>
+  reactNavigationLight<span class="token punctuation">:</span> NavigationDefaultTheme<span class="token punctuation">,</span>
+  reactNavigationDark<span class="token punctuation">:</span> NavigationDarkTheme<span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> CombinedDefaultTheme <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span>MD3DarkTheme<span class="token punctuation">,</span> LightTheme<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -224,8 +224,8 @@ For React Native Paper theme to work, we need to use <code>PaperProvider</code> 
           </a>
         Material Design 3</h3>
 <pre><code class="language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> LightTheme<span class="token punctuation">,</span> DarkTheme <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">adaptNavigationTheme</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  light<span class="token punctuation">:</span> NavigationDefaultTheme<span class="token punctuation">,</span>
-  dark<span class="token punctuation">:</span> NavigationDarkTheme<span class="token punctuation">,</span>
+  reactNavigationLight<span class="token punctuation">:</span> NavigationDefaultTheme<span class="token punctuation">,</span>
+  reactNavigationDark<span class="token punctuation">:</span> NavigationDarkTheme<span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> CombinedDefaultTheme <span class="token operator">=</span> <span class="token punctuation">{</span>
