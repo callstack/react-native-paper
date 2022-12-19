@@ -199,6 +199,7 @@ exports[`correctly applies a component as the text label 1`] = `
           Array [
             Object {},
           ],
+          undefined,
         ]
       }
       testID="text-input-flat"
@@ -392,6 +393,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
           Array [
             Object {},
           ],
+          undefined,
         ]
       }
       testID="text-input-flat"
@@ -637,6 +639,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
             Array [
               Object {},
             ],
+            undefined,
           ]
         }
         testID="text-input-outlined"
@@ -831,6 +834,7 @@ exports[`correctly applies textAlign center 1`] = `
           Array [
             Object {},
           ],
+          undefined,
         ]
       }
       testID="text-input-flat"
@@ -1027,6 +1031,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "paddingLeft": 40,
             "paddingRight": 16,
           },
+          undefined,
         ]
       }
       testID="text-input-flat"
@@ -1414,6 +1419,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "paddingLeft": 16,
             "paddingRight": 40,
           },
+          undefined,
         ]
       }
       testID="text-input-flat"
@@ -1614,3 +1620,200 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
   </View>
 </View>
 `;
+
+exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "rgba(231, 224, 236, 1)",
+        "borderTopLeftRadius": 4,
+        "borderTopRightRadius": 4,
+      },
+      Object {},
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      Object {
+        "backgroundColor": "rgba(28, 27, 31, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "transform": Array [
+          Object {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
+    }
+    testID="text-input-underline"
+  />
+  <View
+    style={
+      Array [
+        Object {
+          "paddingBottom": 0,
+          "paddingTop": 0,
+        },
+        Object {
+          "minHeight": 56,
+        },
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "opacity": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": Array [
+            Object {
+              "translateX": 4,
+            },
+          ],
+          "zIndex": 3,
+        }
+      }
+    >
+      <Text
+        collapsable={false}
+        maxFontSizeMultiplier={1.5}
+        numberOfLines={1}
+        onLayout={[Function]}
+        style={
+          Object {
+            "color": "rgba(103, 80, 164, 1)",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "left": 0,
+            "letterSpacing": 0.15,
+            "lineHeight": undefined,
+            "opacity": 0,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "position": "absolute",
+            "textAlign": "left",
+            "top": 30,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "translateY": -12,
+              },
+              Object {
+                "scale": 0.75,
+              },
+            ],
+            "writingDirection": "ltr",
+          }
+        }
+        testID="text-input-flat-label-active"
+      >
+        With padding
+      </Text>
+      <Text
+        collapsable={false}
+        maxFontSizeMultiplier={1.5}
+        numberOfLines={1}
+        style={
+          Object {
+            "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "left": 0,
+            "letterSpacing": 0.15,
+            "lineHeight": undefined,
+            "opacity": 0,
+            "paddingLeft": 20,
+            "paddingRight": 16,
+            "position": "absolute",
+            "textAlign": "left",
+            "top": 30,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+              Object {
+                "translateY": -12,
+              },
+              Object {
+                "scale": 0.75,
+              },
+            ],
+            "writingDirection": "ltr",
+          }
+        }
+        testID="text-input-flat-label-inactive"
+      >
+        With padding
+      </Text>
+    </View>
+    <TextInput
+      editable={true}
+      maxFontSizeMultiplier={1.5}
+      multiline={false}
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder=" "
+      placeholderTextColor="rgba(73, 69, 79, 1)"
+      selectionColor="rgba(103, 80, 164, 1)"
+      style={
+        Array [
+          Object {
+            "flexGrow": 1,
+            "margin": 0,
+          },
+          Object {
+            "paddingLeft": 16,
+            "paddingRight": 16,
+          },
+          Object {
+            "height": 56,
+          },
+          Object {
+            "paddingBottom": 4,
+            "paddingTop": 24,
+          },
+          Object {
+            "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "letterSpacing": 0.15,
+            "lineHeight": undefined,
+            "textAlign": "left",
+            "textAlignVertical": "center",
+          },
+          false,
+          Array [
+            Object {},
+          ],
+          Object {
+            "paddingLeft": 20,
+          },
+        ]
+      }
+      testID="text-input-flat"
+      underlineColorAndroid="transparent"
+      value="Some test value"
+    />
+  </View>
+</View>
+`;
+

@@ -32,6 +32,7 @@ const initialState: State = {
   outlinedLargeText: '',
   outlinedTextPassword: '',
   nameNoPadding: '',
+  customStyleText: '',
   nameRequired: '',
   flatDenseText: '',
   flatDense: '',
@@ -86,6 +87,7 @@ const TextInputExample = () => {
     outlinedLargeText,
     outlinedTextPassword,
     nameNoPadding,
+    customStyleText,
     nameRequired,
     flatDenseText,
     flatDense,
@@ -529,6 +531,18 @@ const TextInputExample = () => {
             onChangeText={(outlinedLongLabel) =>
               inputActionHandler('outlinedLongLabel', outlinedLongLabel)
             }
+          />
+
+          <TextInput
+            mode="flat"
+            style={styles.inputContainerStyle}
+            label="Custom style input"
+            placeholder="Input with custom padding"
+            value={customStyleText}
+            onChangeText={(customStyleText) =>
+              inputActionHandler('customStyleText', customStyleText)
+            }
+            contentStyle={{ paddingLeft: 50 }}
           />
 
           <View style={styles.inputContainerStyle}>
