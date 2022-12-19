@@ -90,6 +90,10 @@ export type Props = React.ComponentProps<typeof Surface> & {
    */
   onLongPress?: () => void;
   /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
+  /**
    * Function to execute on close button press. The close button appears only when this prop is specified.
    */
   onClose?: () => void;
@@ -150,6 +154,7 @@ const Chip = ({
   closeIconAccessibilityLabel = 'Close',
   onPress,
   onLongPress,
+  delayLongPress,
   onClose,
   closeIcon,
   textStyle,
@@ -259,9 +264,10 @@ const Chip = ({
         borderless
         style={[{ borderRadius }, styles.touchable]}
         onPress={onPress}
-        onLongPress={onLongPress}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
+        onLongPress={onLongPress}
+        delayLongPress={delayLongPress}
         underlayColor={underlayColor}
         disabled={disabled}
         accessibilityLabel={accessibilityLabel}

@@ -98,6 +98,10 @@ export type Props = React.ComponentProps<typeof Surface> & {
    */
   onLongPress?: (e: GestureResponderEvent) => void;
   /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
+  /**
    * Style of button's inner content.
    * Use this prop to apply custom height and width and to set the icon on the right with `flexDirection: 'row-reverse'`.
    */
@@ -173,6 +177,7 @@ const Button = ({
   onPressIn,
   onPressOut,
   onLongPress,
+  delayLongPress,
   style,
   theme,
   uppercase = !theme.isV3,
@@ -298,6 +303,7 @@ const Button = ({
         onLongPress={onLongPress}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
+        delayLongPress={delayLongPress}
         accessibilityLabel={accessibilityLabel}
         accessibilityHint={accessibilityHint}
         accessibilityRole="button"

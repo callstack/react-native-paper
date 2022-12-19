@@ -41,18 +41,6 @@ type Mode = 'elevated' | 'outlined' | 'contained';
 
 export type Props = React.ComponentProps<typeof Surface> & {
   /**
-   * Changes Card shadow and background on iOS and Android.
-   */
-  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
-  /**
-   * Function to execute on long press.
-   */
-  onLongPress?: () => void;
-  /**
-   * Function to execute on press.
-   */
-  onPress?: (e: GestureResponderEvent) => void;
-  /**
    * Mode of the Card.
    * - `elevated` - Card with elevation.
    * - `contained` - Card with without outline and elevation @supported Available in v5.x with theme version 3
@@ -63,6 +51,22 @@ export type Props = React.ComponentProps<typeof Surface> & {
    * Content of the `Card`.
    */
   children: React.ReactNode;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: () => void;
+  /**
+   * Function to execute on press.
+   */
+  onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
+  /**
+   * Changes Card shadow and background on iOS and Android.
+   */
+  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -124,6 +128,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
 const Card = ({
   elevation: cardElevation = 1,
   onLongPress,
+  delayLongPress,
   onPress,
   mode: cardMode = 'elevated',
   children,
@@ -256,6 +261,7 @@ const Card = ({
       <TouchableWithoutFeedback
         delayPressIn={0}
         disabled={!(onPress || onLongPress)}
+        delayLongPress={delayLongPress}
         onLongPress={onLongPress}
         onPress={onPress}
         onPressIn={onPress || onLongPress ? handlePressIn : undefined}
