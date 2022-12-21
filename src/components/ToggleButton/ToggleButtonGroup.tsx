@@ -1,26 +1,27 @@
 import * as React from 'react';
 
-export type Props<TData = string> = {
+export type Props<Value = string> = {
   /**
    * Function to execute on selection change.
    */
-  onValueChange: (value: TData) => void | null;
+  onValueChange: (value: Value) => void;
   /**
    * Value of the currently selected toggle button.
    */
-  value: TData | null;
+  value: Value | null;
   /**
    * React elements containing toggle buttons.
    */
   children: React.ReactNode;
 };
 
-type ToggleButtonContextType<TData = any> = {
-  value: TData | null;
-  onValueChange: (item: TData) => void | null;
+type ToggleButtonContextType<Value> = {
+  value: Value | null;
+  onValueChange: (item: Value) => void;
 };
 
 export const ToggleButtonGroupContext =
+  //@ts-ignore: so we avoid using `any` into the type
   React.createContext<ToggleButtonContextType>(null as any);
 
 /**
@@ -54,11 +55,11 @@ export const ToggleButtonGroupContext =
  * export default MyComponent;
  *```
  */
-const ToggleButtonGroup = <TData = string,>({
+const ToggleButtonGroup = <Value = string,>({
   value,
   onValueChange,
   children,
-}: Props<TData>) => (
+}: Props<Value>) => (
   <ToggleButtonGroupContext.Provider
     value={{
       value,
