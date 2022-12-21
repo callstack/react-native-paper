@@ -133,6 +133,7 @@ const ProgressBar = ({
      * We can only check if the prop is passed initially,
      * and we do early return.
      */
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fade, scale, indeterminate, timer, progress]);
 
   const stopAnimation = React.useCallback(() => {
