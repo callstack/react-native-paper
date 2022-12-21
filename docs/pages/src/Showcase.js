@@ -186,7 +186,7 @@ const data: Data[] = [
   },
 ];
 
-export default class Showcase extends React.Component<{}> {
+export default class Showcase extends React.Component {
   render() {
     return (
       <Container>
@@ -226,32 +226,32 @@ export default class Showcase extends React.Component<{}> {
                         {item.name}
                       </AppName>
                       <BadgeContainer>
-                        <a
+                        <Link
                           href={item.android || null}
                           target="_blank"
                           rel="noopener noreferrer"
-                          style={{ opacity: item.android ? 1 : 0.4 }}
+                          opaque={item.android}
                         >
                           <GooglePlayIcon color={tintColor} />
-                        </a>
+                        </Link>
                         <Separation />
-                        <a
+                        <Link
                           href={item.ios || null}
                           target="_blank"
                           rel="noopener noreferrer"
-                          style={{ opacity: item.ios ? 1 : 0.4 }}
+                          opaque={item.ios}
                         >
                           <IphoneIcon color={tintColor} />
-                        </a>
+                        </Link>
                         <Separation />
-                        <a
+                        <Link
                           href={item.github || null}
                           target="_blank"
                           rel="noopener noreferrer"
-                          style={{ opacity: item.github ? 1 : 0.4 }}
+                          opaque={item.github}
                         >
                           <GithubIcon color={tintColor} />
-                        </a>
+                        </Link>
                       </BadgeContainer>
                     </Info>
                   </ImageContainer>
@@ -333,4 +333,8 @@ const BadgeContainer = styled.div`
 
 const Separation = styled.div`
   margin: 0 10px;
+`;
+
+const Link = styled.a`
+  opacity: ${(props) => (props.opaque ? 1 : 0.4)};
 `;
