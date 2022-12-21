@@ -1,23 +1,23 @@
 import * as React from 'react';
 
-export type Props = {
+export type Props<TData = string> = {
   /**
    * Function to execute on selection change.
    */
-  onValueChange: (value: string) => void | null;
+  onValueChange: (value: TData) => void | null;
   /**
    * Value of the currently selected toggle button.
    */
-  value: string | null;
+  value: TData | null;
   /**
    * React elements containing toggle buttons.
    */
   children: React.ReactNode;
 };
 
-type ToggleButtonContextType = {
-  value: string | null;
-  onValueChange: (item: string) => void | null;
+type ToggleButtonContextType<TData = any> = {
+  value: TData | null;
+  onValueChange: (item: TData) => void | null;
 };
 
 export const ToggleButtonGroupContext =
@@ -54,7 +54,11 @@ export const ToggleButtonGroupContext =
  * export default MyComponent;
  *```
  */
-const ToggleButtonGroup = ({ value, onValueChange, children }: Props) => (
+const ToggleButtonGroup = <TData = string,>({
+  value,
+  onValueChange,
+  children,
+}: Props<TData>) => (
   <ToggleButtonGroupContext.Provider
     value={{
       value,
