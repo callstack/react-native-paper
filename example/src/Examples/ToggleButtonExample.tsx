@@ -6,7 +6,7 @@ import { ToggleButton, List } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
 type StatusState = 'checked' | 'unchecked';
-type Fruits = 'watermelon' | 'strawberries' | 'apple';
+type Fruits = 'watermelon' | 'strawberries';
 
 enum FontsEnum {
   NoFormat = 'no-format',
