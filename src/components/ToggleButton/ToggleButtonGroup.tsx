@@ -21,7 +21,7 @@ type ToggleButtonContextType<Value> = {
 };
 
 export const ToggleButtonGroupContext =
-  //@ts-ignore: so we avoid using `any` into the type
+  //@ts-ignore: so we avoid using `any`, TS can't ensure the type from Group to children
   React.createContext<ToggleButtonContextType>(null as any);
 
 /**
