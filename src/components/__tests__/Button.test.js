@@ -150,6 +150,60 @@ it('should execute onPressOut', () => {
   expect(onPressOutMock).toHaveBeenCalledTimes(1);
 });
 
+describe('button icon styles', () => {
+  it('should return correct icon styles for compact text button', () => {
+    const { getByTestId } = render(
+      <Button mode={'text'} compact icon="camera" testID="compact-button">
+        Compact text button
+      </Button>
+    );
+    expect(getByTestId('compact-button-icon-container')).toHaveStyle({
+      marginLeft: 6,
+      marginRight: 0,
+    });
+  });
+
+  [('outlined', 'contained', 'contained-tonal', 'elevated')].forEach((mode) =>
+    it(`should return correct icon styles for compact ${mode} button`, () => {
+      const { getByTestId } = render(
+        <Button mode={mode} compact icon="camera" testID="compact-button">
+          Compact {mode} button
+        </Button>
+      );
+      expect(getByTestId('compact-button-icon-container')).toHaveStyle({
+        marginLeft: 8,
+        marginRight: 0,
+      });
+    })
+  );
+
+  it('should return correct icon styles for text button', () => {
+    const { getByTestId } = render(
+      <Button mode={'text'} icon="camera" testID="compact-button">
+        text button
+      </Button>
+    );
+    expect(getByTestId('compact-button-icon-container')).toHaveStyle({
+      marginLeft: 12,
+      marginRight: -8,
+    });
+  });
+
+  ['outlined', 'contained', 'contained-tonal', 'elevated'].forEach((mode) =>
+    it(`should return correct icon styles for compact ${mode} button`, () => {
+      const { getByTestId } = render(
+        <Button mode={mode} icon="camera" testID="compact-button">
+          {mode} button
+        </Button>
+      );
+      expect(getByTestId('compact-button-icon-container')).toHaveStyle({
+        marginLeft: 16,
+        marginRight: -16,
+      });
+    })
+  );
+});
+
 describe('getButtonColors - background color', () => {
   const customButtonColor = '#111111';
 

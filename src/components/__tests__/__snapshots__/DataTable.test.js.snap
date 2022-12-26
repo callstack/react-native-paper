@@ -1643,6 +1643,7 @@ exports[`renders data table pagination with options select 1`] = `
                   },
                 ]
               }
+              testID="button"
             >
               <View
                 style={
@@ -1672,6 +1673,7 @@ exports[`renders data table pagination with options select 1`] = `
                       false,
                     ]
                   }
+                  testID="button-icon-container"
                 >
                   <Text
                     accessibilityElementsHidden={true}
