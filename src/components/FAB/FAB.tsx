@@ -205,12 +205,19 @@ const FAB = React.forwardRef<View, Props>(
 
     const IconComponent = animated ? CrossFadeIcon : Icon;
 
+    const fabStyle = getFabStyle({ customSize, size, theme });
+
+    const {
+      borderRadius = fabStyle.borderRadius,
+      backgroundColor: customBackgroundColor,
+    } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+
     const { backgroundColor, foregroundColor, rippleColor } = getFABColors({
       theme,
       variant,
       disabled,
       customColor,
-      style,
+      customBackgroundColor,
     });
 
     const isLargeSize = size === 'large';
@@ -219,16 +226,11 @@ const FAB = React.forwardRef<View, Props>(
     const loadingIndicatorSize = isLargeSize ? 24 : 18;
     const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
 
-    const fabStyle = getFabStyle({ customSize, size, theme });
     const extendedStyle = getExtendedFabStyle({ customSize, theme });
     const textStyle = {
       color: foregroundColor,
       ...font,
     };
-
-    const { borderRadius = fabStyle.borderRadius } = (StyleSheet.flatten(
-      style
-    ) || {}) as ViewStyle;
 
     const md3Elevation = isFlatMode || disabled ? 0 : 3;
 
