@@ -162,7 +162,7 @@ describe('getFABColors - background color', () => {
       getFABColors({
         theme: getTheme(),
         variant: 'primary',
-        style: { backgroundColor: 'purple' },
+        customBackgroundColor: 'purple',
       })
     ).toMatchObject({
       backgroundColor: 'purple',

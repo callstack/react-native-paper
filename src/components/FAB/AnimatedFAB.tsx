@@ -201,7 +201,7 @@ const AnimatedFAB = ({
   style,
   visible = true,
   uppercase = !theme.isV3,
-  testID,
+  testID = 'animated-fab',
   animateFrom = 'right',
   extended = false,
   iconMode = 'dynamic',
@@ -242,12 +242,15 @@ const AnimatedFAB = ({
     }
   }, [visible, scale, visibility]);
 
+  const { backgroundColor: customBackgroundColor, ...restStyle } =
+    (StyleSheet.flatten(style) || {}) as ViewStyle;
+
   const { backgroundColor, foregroundColor } = getFABColors({
     theme,
     variant,
     disabled,
     customColor,
-    style,
+    customBackgroundColor,
   });
 
   const rippleColor = color(foregroundColor).alpha(0.12).rgb().string();
@@ -314,6 +317,7 @@ const AnimatedFAB = ({
   return (
     <Surface
       {...rest}
+      testID={`${testID}-container`}
       style={
         [
           {
@@ -329,7 +333,7 @@ const AnimatedFAB = ({
             elevation: md2Elevation,
           },
           styles.container,
-          style,
+          restStyle,
         ] as StyleProp<ViewStyle>
       }
       {...(isV3 && { elevation: md3Elevation })}

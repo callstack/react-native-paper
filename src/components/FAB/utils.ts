@@ -1,10 +1,4 @@
-import {
-  Animated,
-  I18nManager,
-  StyleProp,
-  StyleSheet,
-  ViewStyle,
-} from 'react-native';
+import { Animated, ColorValue, I18nManager, ViewStyle } from 'react-native';
 
 import color from 'color';
 
@@ -167,11 +161,10 @@ const getBackgroundColor = ({
   theme,
   isVariant,
   disabled,
-  style,
-}: BaseProps & { style?: StyleProp<ViewStyle> }) => {
-  const { backgroundColor } = StyleSheet.flatten(style) || {};
-  if (backgroundColor && !disabled) {
-    return backgroundColor;
+  customBackgroundColor,
+}: BaseProps & { customBackgroundColor?: ColorValue }) => {
+  if (customBackgroundColor && !disabled) {
+    return customBackgroundColor;
   }
 
   if (theme.isV3) {
@@ -263,13 +256,13 @@ export const getFABColors = ({
   variant,
   disabled,
   customColor,
-  style,
+  customBackgroundColor,
 }: {
   theme: InternalTheme;
   variant: string;
   disabled?: boolean;
   customColor?: string;
-  style?: StyleProp<ViewStyle>;
+  customBackgroundColor?: ColorValue;
 }) => {
   const isVariant = (variantToCompare: Variant) => {
     return variant === variantToCompare;
@@ -279,7 +272,7 @@ export const getFABColors = ({
 
   const backgroundColor = getBackgroundColor({
     ...baseFABColorProps,
-    style,
+    customBackgroundColor,
   });
 
   const foregroundColor = getForegroundColor({

@@ -49,6 +49,7 @@ exports[`renders animated fab 1`] = `
           ],
         }
       }
+      testID="animated-fab-container"
     >
       <View
         collapsable={false}
@@ -174,6 +175,7 @@ exports[`renders animated fab 1`] = `
                   },
                 ]
               }
+              testID="animated-fab"
             >
               <View
                 style={
@@ -335,6 +337,7 @@ exports[`renders animated fab with label on the left 1`] = `
           ],
         }
       }
+      testID="animated-fab-container"
     >
       <View
         collapsable={false}
@@ -461,6 +464,7 @@ exports[`renders animated fab with label on the left 1`] = `
                   },
                 ]
               }
+              testID="animated-fab"
             >
               <View
                 style={
@@ -624,6 +628,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
           ],
         }
       }
+      testID="animated-fab-container"
     >
       <View
         collapsable={false}
@@ -750,6 +755,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
                   },
                 ]
               }
+              testID="animated-fab"
             >
               <View
                 style={
