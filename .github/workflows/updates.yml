@@ -5,6 +5,7 @@ on:
       - main
 jobs:
   publish:
+    if: ${{ (contains(github.event.pull_request.labels.*.name, 'example app')) }}
     name: Install and publish
     runs-on: ubuntu-latest
     steps:
