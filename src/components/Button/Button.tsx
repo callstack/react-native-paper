@@ -274,20 +274,17 @@ const Button = ({
     StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
       ? [
           styles.iconReverse,
-          isV3 &&
-            (compact ? styles.md3IconReverseCompact : styles.md3IconReverse),
+          isV3 && styles[`md3IconReverse${compact ? 'Compact' : ''}`],
           isV3 &&
             isMode('text') &&
-            (compact
-              ? styles.md3IconReverseTextModeCompact
-              : styles.md3IconReverseTextMode),
+            styles[`md3IconReverseTextMode${compact ? 'Compact' : ''}`],
         ]
       : [
           styles.icon,
-          isV3 && (compact ? styles.md3IconCompact : styles.md3Icon),
+          isV3 && styles[`md3Icon${compact ? 'Compact' : ''}`],
           isV3 &&
             isMode('text') &&
-            (compact ? styles.md3IconTextModeCompact : styles.md3IconTextMode),
+            styles[`md3IconTextMode${compact ? 'Compact' : ''}`],
         ];
 
   return (
@@ -394,6 +391,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
     marginLeft: -4,
   },
+  /* eslint-disable react-native/no-unused-styles */
   md3Icon: {
     marginLeft: 16,
     marginRight: -16,
@@ -426,6 +424,7 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     marginRight: 6,
   },
+  /* eslint-enable react-native/no-unused-styles */
   label: {
     textAlign: 'center',
     marginVertical: 9,
