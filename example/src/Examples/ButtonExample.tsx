@@ -285,6 +285,32 @@ const ButtonExample = () => {
           </Button>
         </View>
       </List.Section>
+      <List.Section title="Compact">
+        <View style={styles.row}>
+          {(
+            [
+              'text',
+              'outlined',
+              'contained',
+              'elevated',
+              'contained-tonal',
+            ] as const
+          ).map((mode) => {
+            return (
+              <Button
+                key={mode}
+                mode={mode}
+                compact
+                onPress={() => {}}
+                style={styles.button}
+                icon="camera"
+              >
+                Compact {mode}
+              </Button>
+            );
+          })}
+        </View>
+      </List.Section>
     </ScreenWrapper>
   );
 };

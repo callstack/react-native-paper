@@ -91,6 +91,7 @@ Array [
                   },
                 ]
               }
+              testID="button"
             >
               <View
                 style={
@@ -588,6 +589,7 @@ exports[`renders not visible menu 1`] = `
                 },
               ]
             }
+            testID="button"
           >
             <View
               style={
@@ -748,6 +750,7 @@ Array [
                   },
                 ]
               }
+              testID="button"
             >
               <View
                 style={

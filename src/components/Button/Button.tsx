@@ -183,7 +183,7 @@ const Button = ({
   uppercase = !theme.isV3,
   contentStyle,
   labelStyle,
-  testID,
+  testID = 'button',
   accessible,
   ...rest
 }: Props) => {
@@ -274,13 +274,17 @@ const Button = ({
     StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
       ? [
           styles.iconReverse,
-          isV3 && styles.md3IconReverse,
-          isV3 && isMode('text') && styles.md3IconReverseTextMode,
+          isV3 && styles[`md3IconReverse${compact ? 'Compact' : ''}`],
+          isV3 &&
+            isMode('text') &&
+            styles[`md3IconReverseTextMode${compact ? 'Compact' : ''}`],
         ]
       : [
           styles.icon,
-          isV3 && styles.md3Icon,
-          isV3 && isMode('text') && styles.md3IconTextMode,
+          isV3 && styles[`md3Icon${compact ? 'Compact' : ''}`],
+          isV3 &&
+            isMode('text') &&
+            styles[`md3IconTextMode${compact ? 'Compact' : ''}`],
         ];
 
   return (
@@ -316,7 +320,7 @@ const Button = ({
       >
         <View style={[styles.content, contentStyle]}>
           {icon && loading !== true ? (
-            <View style={iconStyle}>
+            <View style={iconStyle} testID={`${testID}-icon-container`}>
               <Icon
                 source={icon}
                 size={customLabelSize ?? iconSize}
@@ -387,22 +391,40 @@ const styles = StyleSheet.create({
     marginRight: 12,
     marginLeft: -4,
   },
+  /* eslint-disable react-native/no-unused-styles */
   md3Icon: {
     marginLeft: 16,
     marginRight: -16,
+  },
+  md3IconCompact: {
+    marginLeft: 8,
+    marginRight: 0,
   },
   md3IconReverse: {
     marginLeft: -16,
     marginRight: 16,
   },
+  md3IconReverseCompact: {
+    marginLeft: 0,
+    marginRight: 8,
+  },
   md3IconTextMode: {
     marginLeft: 12,
     marginRight: -8,
+  },
+  md3IconTextModeCompact: {
+    marginLeft: 6,
+    marginRight: 0,
   },
   md3IconReverseTextMode: {
     marginLeft: -8,
     marginRight: 12,
   },
+  md3IconReverseTextModeCompact: {
+    marginLeft: 0,
+    marginRight: 6,
+  },
+  /* eslint-enable react-native/no-unused-styles */
   label: {
     textAlign: 'center',
     marginVertical: 9,
