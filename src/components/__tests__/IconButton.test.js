@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 
+import { render } from '@testing-library/react-native';
 import color from 'color';
 import renderer from 'react-test-renderer';
 
@@ -7,6 +9,12 @@ import { getTheme } from '../../core/theming';
 import { pink500 } from '../../styles/themes/v2/colors';
 import IconButton from '../IconButton/IconButton.tsx';
 import { getIconButtonColor } from '../IconButton/utils';
+
+const styles = StyleSheet.create({
+  square: {
+    borderRadius: 0,
+  },
+});
 
 it('renders icon button by default', () => {
   const tree = renderer.create(<IconButton icon="camera" />).toJSON();
@@ -38,6 +46,20 @@ it('renders icon change animated', () => {
   const tree = renderer.create(<IconButton icon="camera" animated />).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('renders icon button with custom border radius', () => {
+  const { getByTestId } = render(
+    <IconButton
+      icon="camera"
+      testID="icon-button"
+      size={36}
+      onPress={() => {}}
+      style={styles.square}
+    />
+  );
+
+  expect(getByTestId('icon-button')).toHaveStyle({ borderRadius: 0 });
 });
 
 describe('getIconButtonColor - icon color', () => {

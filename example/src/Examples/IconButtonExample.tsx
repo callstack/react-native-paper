@@ -123,6 +123,14 @@ const ButtonExample = () => {
             iconColor={MD3Colors.tertiary50}
             onPress={() => {}}
           />
+          <IconButton
+            icon="eye"
+            mode="contained"
+            style={styles.square}
+            size={24}
+            iconColor={MD3Colors.tertiary50}
+            onPress={() => {}}
+          />
           <IconButton icon="camera" size={36} onPress={() => {}} />
           <IconButton
             icon="lock"
@@ -150,6 +158,9 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     paddingHorizontal: 12,
+  },
+  square: {
+    borderRadius: 0,
   },
 });
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 import color from 'color';
@@ -10,11 +11,32 @@ import Button from '../../Button/Button';
 import Card from '../../Card/Card';
 import { getCardColors, getCardCoverStyle } from '../../Card/utils';
 
+const styles = StyleSheet.create({
+  customBorderRadius: {
+    borderRadius: 32,
+  },
+});
+
 describe('Card', () => {
   it('renders an outlined card', () => {
     const tree = renderer.create(<Card mode="outlined" />).toJSON();
 
     expect(tree).toMatchSnapshot();
+  });
+
+  it('renders an outlined card with custom border radius and color', () => {
+    const { getByTestId } = render(
+      <Card
+        mode="outlined"
+        theme={{ colors: { outline: 'purple' } }}
+        style={styles.customBorderRadius}
+      />
+    );
+
+    expect(getByTestId('card-outline')).toHaveStyle({
+      borderRadius: 32,
+      borderColor: 'purple',
+    });
   });
 
   it('renders with a custom theme', () => {

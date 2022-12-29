@@ -99,7 +99,7 @@ exports[`renders disabled toggle button 1`] = `
                 "justifyContent": "center",
               },
               Object {
-                "borderRadius": 20,
+                "borderRadius": 4,
               },
             ],
           ]
@@ -240,7 +240,7 @@ exports[`renders toggle button 1`] = `
                 "justifyContent": "center",
               },
               Object {
-                "borderRadius": 20,
+                "borderRadius": 4,
               },
             ],
           ]
@@ -387,7 +387,7 @@ exports[`renders unchecked toggle button 1`] = `
                 "justifyContent": "center",
               },
               Object {
-                "borderRadius": 20,
+                "borderRadius": 4,
               },
             ],
           ]
