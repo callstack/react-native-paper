@@ -62,6 +62,7 @@ exports[`Card renders an outlined card 1`] = `
             },
           ]
         }
+        testID="card-outline"
       />
       <View
         accessibilityState={
@@ -83,6 +84,7 @@ exports[`Card renders an outlined card 1`] = `
             "flexShrink": 1,
           }
         }
+        testID="card"
       />
     </View>
   </View>

@@ -147,9 +147,14 @@ const IconButton = React.forwardRef<View, Props>(
 
     const buttonSize = isV3 ? size + 2 * PADDING : size * 1.5;
 
+    const {
+      borderWidth = isV3 && mode === 'outlined' && !selected ? 1 : 0,
+      borderRadius = buttonSize / 2,
+    } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+
     const borderStyles = {
-      borderWidth: isV3 && mode === 'outlined' && !selected ? 1 : 0,
-      borderRadius: buttonSize / 2,
+      borderWidth,
+      borderRadius,
       borderColor,
     };
 
@@ -177,10 +182,7 @@ const IconButton = React.forwardRef<View, Props>(
           onPress={onPress}
           rippleColor={rippleColor}
           accessibilityLabel={accessibilityLabel}
-          style={[
-            styles.touchable,
-            { borderRadius: borderStyles.borderRadius },
-          ]}
+          style={[styles.touchable, { borderRadius }]}
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
           accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
           accessibilityComponentType="button"

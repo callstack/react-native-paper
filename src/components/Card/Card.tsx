@@ -134,7 +134,7 @@ const Card = ({
   children,
   style,
   theme,
-  testID,
+  testID = 'card',
   accessible,
   ...rest
 }: (OutlinedCardProps | ElevatedCardProps | ContainedCardProps) & Props) => {
@@ -224,7 +224,9 @@ const Card = ({
     mode: cardMode,
   });
 
-  const borderRadius = (isV3 ? 3 : 1) * roundness;
+  const { borderRadius = (isV3 ? 3 : 1) * roundness } = (StyleSheet.flatten(
+    style
+  ) || {}) as ViewStyle;
 
   return (
     <Surface
@@ -249,6 +251,7 @@ const Card = ({
       {isMode('outlined') && (
         <View
           pointerEvents="none"
+          testID={`${testID}-outline`}
           style={[
             {
               borderRadius,
