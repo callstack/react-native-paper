@@ -34,13 +34,13 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Card, Title, Paragraph } from 'react-native-paper';
+ * import { Card, Text } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <Card>
  *     <Card.Content>
- *       <Title>Card title</Title>
- *       <Paragraph>Card content</Paragraph>
+ *       <Text variant="titleLarge">Card title</Text>
+ *       <Text variant="bodyMedium">Card content</Text>
  *     </Card.Content>
  *   </Card>
  * );

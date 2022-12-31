@@ -30,7 +30,7 @@ export type Props = React.ComponentPropsWithRef<typeof Title> & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Paragraph, Dialog, Portal } from 'react-native-paper';
+ * import { Dialog, Portal, Text } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -42,7 +42,7 @@ export type Props = React.ComponentPropsWithRef<typeof Title> & {
  *       <Dialog visible={visible} onDismiss={hideDialog}>
  *         <Dialog.Title>This is a title</Dialog.Title>
  *         <Dialog.Content>
- *           <Paragraph>This is simple dialog</Paragraph>
+ *           <Text variant="bodyMedium">This is simple dialog</Text>
  *         </Dialog.Content>
  *       </Dialog>
  *     </Portal>
