@@ -7,6 +7,7 @@ exports[`renders animated fab 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": "absolute",
       "right": undefined,
@@ -17,6 +18,7 @@ exports[`renders animated fab 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -295,6 +297,7 @@ exports[`renders animated fab with label on the left 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": "absolute",
       "right": undefined,
@@ -305,6 +308,7 @@ exports[`renders animated fab with label on the left 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -586,6 +590,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": "absolute",
       "right": undefined,
@@ -596,6 +601,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "start": undefined,
       "top": undefined,
     }
   }

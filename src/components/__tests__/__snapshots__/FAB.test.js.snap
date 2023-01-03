@@ -7,6 +7,7 @@ exports[`renders FAB with custom size prop 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -17,6 +18,7 @@ exports[`renders FAB with custom size prop 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -185,6 +187,7 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -195,6 +198,7 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -363,6 +367,7 @@ exports[`renders default FAB 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -373,6 +378,7 @@ exports[`renders default FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -541,6 +547,7 @@ exports[`renders disabled FAB 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -551,6 +558,7 @@ exports[`renders disabled FAB 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -719,6 +727,7 @@ exports[`renders extended FAB 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -729,6 +738,7 @@ exports[`renders extended FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -935,6 +945,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -945,6 +956,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -1150,6 +1162,7 @@ exports[`renders large FAB 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -1160,6 +1173,7 @@ exports[`renders large FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -1328,6 +1342,7 @@ exports[`renders loading FAB 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -1338,6 +1353,7 @@ exports[`renders loading FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -1631,6 +1647,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -1641,6 +1658,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -1934,6 +1952,7 @@ exports[`renders not visible FAB 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -1944,6 +1963,7 @@ exports[`renders not visible FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -2112,6 +2132,7 @@ exports[`renders small FAB 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -2122,6 +2143,7 @@ exports[`renders small FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -2290,6 +2312,7 @@ exports[`renders visible FAB 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -2300,6 +2323,7 @@ exports[`renders visible FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
+      "start": undefined,
       "top": undefined,
     }
   }

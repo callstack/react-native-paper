@@ -104,6 +104,7 @@ exports[`renders list item with custom description 1`] = `
               Object {
                 "alignSelf": undefined,
                 "bottom": undefined,
+                "end": undefined,
                 "left": undefined,
                 "position": undefined,
                 "right": undefined,
@@ -114,6 +115,7 @@ exports[`renders list item with custom description 1`] = `
                 },
                 "shadowOpacity": 0,
                 "shadowRadius": 0,
+                "start": undefined,
                 "top": undefined,
               }
             }

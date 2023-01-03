@@ -1290,6 +1290,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
         Object {
           "alignSelf": undefined,
           "bottom": undefined,
+          "end": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -1300,6 +1301,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "start": undefined,
           "top": undefined,
         }
       }
@@ -1644,6 +1646,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         Object {
           "alignSelf": undefined,
           "bottom": undefined,
+          "end": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -1654,6 +1657,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "start": undefined,
           "top": undefined,
         }
       }
