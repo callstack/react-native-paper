@@ -65,7 +65,7 @@ But how to make them work together?</p>
             </svg>
           </a>
         Material Design 3</h3>
-<p>From v5, React Native Paper theme colors structure is following the Material Design 3 <i>(known as Material You)</i> colors system, which differs significantly from both previous Paper's theme and React Navigation theme. </p>
+<p>From v5, React Native Paper theme colors structure is following the Material Design 3 <i>(known as Material You)</i> colors system, which differs significantly from both previous Paper's theme and React Navigation theme.</p>
 <p>However, to simplify adapting React Navigation theme colors, to use the ones from React Native Paper, it's worth using a utility called <code>adaptNavigationTheme</code> – it accepts navigation compliant themes in both modes and returns their equivalents adjusted to Material Design 3.</p>
 <pre><code class="language-ts"><span class="token keyword">import</span> <span class="token punctuation">{</span>
   DarkTheme <span class="token keyword">as</span> NavigationDarkTheme<span class="token punctuation">,</span>
@@ -96,8 +96,7 @@ For React Native Paper theme to work, we need to use <code>PaperProvider</code> 
 <span class="token keyword">import</span> <span class="token punctuation">{</span> TouchableOpacity <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span>
   Card<span class="token punctuation">,</span>
-  Title<span class="token punctuation">,</span>
-  Paragraph<span class="token punctuation">,</span>
+  Text<span class="token punctuation">,</span>
   List<span class="token punctuation">,</span>
   Provider <span class="token keyword">as</span> PaperProvider<span class="token punctuation">,</span>
 <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
@@ -115,8 +114,8 @@ For React Native Paper theme to work, we need to use <code>PaperProvider</code> 
   <span class="token punctuation">&gt;</span></span><span class="token plain-text">
     </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Card</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
       </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Card.Content</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
-        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Title</span></span><span class="token punctuation">&gt;</span></span><span class="token punctuation">{</span>title<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Title</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
-        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Paragraph</span></span><span class="token punctuation">&gt;</span></span><span class="token punctuation">{</span>content<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Paragraph</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>titleLarge<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token punctuation">{</span>title<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Text</span></span> <span class="token attr-name">variant</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>bodyMedium<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token punctuation">{</span>content<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Text</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
       </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Card.Content</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
     </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Card</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
   </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">TouchableOpacity</span></span><span class="token punctuation">&gt;</span></span>
