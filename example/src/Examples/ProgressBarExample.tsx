@@ -4,10 +4,10 @@ import { View, StyleSheet, Animated } from 'react-native';
 import {
   Button,
   ProgressBar,
-  Paragraph,
   MD2Colors,
   MD3Colors,
   ProgressBarProps,
+  Text,
 } from 'react-native-paper';
 
 import { useExampleTheme } from '..';
@@ -50,17 +50,17 @@ const ProgressBarExample = () => {
       <Button onPress={runCustomAnimation}>Toggle animation</Button>
 
       <View style={styles.row}>
-        <Paragraph>Default ProgressBar </Paragraph>
+        <Text variant="bodyMedium">Default ProgressBar</Text>
         <ProgressBar progress={progress} visible={visible} />
       </View>
 
       <View style={styles.row}>
-        <Paragraph>Indeterminate ProgressBar</Paragraph>
+        <Text variant="bodyMedium">Indeterminate ProgressBar</Text>
         <ProgressBar indeterminate visible={visible} />
       </View>
 
       <View style={styles.row}>
-        <Paragraph>ProgressBar with custom color</Paragraph>
+        <Text variant="bodyMedium">ProgressBar with custom color</Text>
         <ProgressBar
           progress={progress}
           visible={visible}
@@ -69,7 +69,7 @@ const ProgressBarExample = () => {
       </View>
 
       <View style={styles.row}>
-        <Paragraph>ProgressBar with custom background color</Paragraph>
+        <Text variant="bodyMedium">ProgressBar with custom background color</Text>
         <ProgressBar
           progress={progress}
           visible={visible}
@@ -81,7 +81,7 @@ const ProgressBarExample = () => {
       </View>
 
       <View style={styles.row}>
-        <Paragraph>ProgressBar with custom height</Paragraph>
+        <Text variant="bodyMedium">ProgressBar with custom height</Text>
         <ProgressBar
           progress={progress}
           visible={visible}
@@ -90,7 +90,7 @@ const ProgressBarExample = () => {
       </View>
 
       <View style={styles.row}>
-        <Paragraph>ProgressBar with animated value</Paragraph>
+        <Text variant="bodyMedium">ProgressBar with animated value</Text>
         <AnimatedProgressBar
           style={styles.progressBar}
           animatedValue={progressBarValue}

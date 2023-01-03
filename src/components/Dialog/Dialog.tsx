@@ -50,7 +50,7 @@ const DIALOG_ELEVATION: number = 24;
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { Button, Paragraph, Dialog, Portal, Provider } from 'react-native-paper';
+ * import { Button, Dialog, Portal, Provider, Text } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -67,7 +67,7 @@ const DIALOG_ELEVATION: number = 24;
  *           <Dialog visible={visible} onDismiss={hideDialog}>
  *             <Dialog.Title>Alert</Dialog.Title>
  *             <Dialog.Content>
- *               <Paragraph>This is simple dialog</Paragraph>
+ *               <Text variant="bodyMedium">This is simple dialog</Text>
  *             </Dialog.Content>
  *             <Dialog.Actions>
  *               <Button onPress={hideDialog}>Done</Button>

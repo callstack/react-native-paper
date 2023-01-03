@@ -7,7 +7,7 @@ import {
   List,
   MD2Colors,
   MD3Colors,
-  Paragraph,
+  Text,
   Switch,
 } from 'react-native-paper';
 
@@ -21,7 +21,7 @@ const BadgeExample = () => {
   return (
     <ScreenWrapper>
       <View style={[styles.row, styles.item]}>
-        <Paragraph style={styles.label}>Show badges</Paragraph>
+      <Text style={styles.label} variant="bodyMedium">Show badges</Text>
         <Switch
           value={visible}
           onValueChange={(visible) => setVisible(visible)}
