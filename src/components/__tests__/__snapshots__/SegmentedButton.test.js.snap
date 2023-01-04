@@ -250,14 +250,6 @@ exports[`renders checked segmented button with selected check 1`] = `
           ]
         }
       >
-        <View
-          collapsable={false}
-          style={
-            Object {
-              "marginRight": 0,
-            }
-          }
-        />
         <Text
           numberOfLines={1}
           selectable={false}
@@ -387,14 +379,6 @@ exports[`renders disabled segmented button 1`] = `
           ]
         }
       >
-        <View
-          collapsable={false}
-          style={
-            Object {
-              "marginRight": 0,
-            }
-          }
-        />
         <Text
           numberOfLines={1}
           selectable={false}
@@ -506,14 +490,6 @@ exports[`renders disabled segmented button 1`] = `
           ]
         }
       >
-        <View
-          collapsable={false}
-          style={
-            Object {
-              "marginRight": 0,
-            }
-          }
-        />
         <Text
           numberOfLines={1}
           selectable={false}
@@ -641,14 +617,6 @@ exports[`renders segmented button 1`] = `
           ]
         }
       >
-        <View
-          collapsable={false}
-          style={
-            Object {
-              "marginRight": 0,
-            }
-          }
-        />
         <Text
           numberOfLines={1}
           selectable={false}
@@ -760,14 +728,6 @@ exports[`renders segmented button 1`] = `
           ]
         }
       >
-        <View
-          collapsable={false}
-          style={
-            Object {
-              "marginRight": 0,
-            }
-          }
-        />
         <Text
           numberOfLines={1}
           selectable={false}

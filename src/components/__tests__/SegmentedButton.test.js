@@ -237,6 +237,139 @@ describe('getDisabledSegmentedButtonBorderWidth', () => {
   });
 });
 
+describe('should render icon when', () => {
+  it('icon prop is passed', () => {
+    const { getByTestId } = render(
+      <SegmentedButtons
+        value={'walk'}
+        buttons={[
+          {
+            icon: 'walk',
+            value: 'walk',
+            testID: 'walking-button',
+          },
+          {
+            icon: 'car',
+            value: 'drive',
+            testID: 'driving-button',
+          },
+        ]}
+        onValueChange={() => {}}
+      />
+    );
+
+    expect(getByTestId('walking-button-icon')).toBeTruthy();
+    expect(getByTestId('driving-button-icon')).toBeTruthy();
+  });
+
+  it('icon prop is passed along with label, no matter if button is checked', () => {
+    const { getByTestId } = render(
+      <SegmentedButtons
+        value={'walk'}
+        buttons={[
+          {
+            icon: 'walk',
+            value: 'walk',
+            label: 'Walking',
+            testID: 'walking-button',
+          },
+          {
+            icon: 'car',
+            value: 'drive',
+            label: 'Driving',
+            testID: 'driving-button',
+          },
+        ]}
+        onValueChange={() => {}}
+      />
+    );
+
+    expect(getByTestId('walking-button-icon')).toBeTruthy();
+    expect(getByTestId('driving-button-icon')).toBeTruthy();
+  });
+
+  it('icon prop is passed along with label, button is checked, showSelectedCheck is false', () => {
+    const { getByTestId } = render(
+      <SegmentedButtons
+        value={'walk'}
+        buttons={[
+          {
+            icon: 'walk',
+            value: 'walk',
+            label: 'Walking',
+            testID: 'walking-button',
+            showSelectedCheck: false,
+          },
+          {
+            icon: 'car',
+            value: 'drive',
+            label: 'Driving',
+            testID: 'driving-button',
+            showSelectedCheck: false,
+          },
+        ]}
+        onValueChange={() => {}}
+      />
+    );
+
+    expect(getByTestId('walking-button-icon')).toBeTruthy();
+    expect(getByTestId('driving-button-icon')).toBeTruthy();
+  });
+});
+
+describe('should not render icon when', () => {
+  it('icon prop is not passed', () => {
+    const { queryByTestId } = render(
+      <SegmentedButtons
+        value={'walk'}
+        buttons={[
+          {
+            value: 'walk',
+            testID: 'walking-button',
+          },
+          {
+            value: 'drive',
+            testID: 'driving-button',
+          },
+        ]}
+        onValueChange={() => {}}
+      />
+    );
+
+    expect(queryByTestId('walking-button-icon')).toBeNull();
+    expect(queryByTestId('driving-button-icon')).toBeNull();
+  });
+
+  it('icon prop is passed along with label, button is checked, showSelectedCheck is true', () => {
+    const { getByTestId, queryByTestId } = render(
+      <SegmentedButtons
+        value={'walk'}
+        buttons={[
+          {
+            icon: 'walk',
+            label: 'Walking',
+            value: 'walk',
+            testID: 'walking-button',
+            showSelectedCheck: true,
+          },
+          {
+            icon: 'car',
+            label: 'Driving',
+            value: 'drive',
+            testID: 'driving-button',
+            showSelectedCheck: true,
+          },
+        ]}
+        onValueChange={() => {}}
+      />
+    );
+
+    expect(queryByTestId('walking-button-icon')).toBeNull();
+    expect(getByTestId('walking-button-check-icon')).toBeTruthy();
+    expect(getByTestId('driving-button-icon')).toBeTruthy();
+  });
+});
+
 describe('should have `accessibilityState={ checked: true }` when selected', () => {
   it('should have two button selected', () => {
     const onValueChange = jest.fn();
