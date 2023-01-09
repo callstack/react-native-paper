@@ -7,6 +7,7 @@ exports[`activity indicator snapshot test 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -17,6 +18,7 @@ exports[`activity indicator snapshot test 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 3,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -52,6 +54,7 @@ exports[`activity indicator snapshot test 1`] = `
           Object {
             "alignSelf": undefined,
             "bottom": undefined,
+            "end": undefined,
             "left": undefined,
             "position": undefined,
             "right": undefined,
@@ -62,6 +65,7 @@ exports[`activity indicator snapshot test 1`] = `
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
+            "start": undefined,
             "top": undefined,
           }
         }
@@ -425,6 +429,7 @@ exports[`renders with placeholder 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -435,6 +440,7 @@ exports[`renders with placeholder 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 3,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -470,6 +476,7 @@ exports[`renders with placeholder 1`] = `
           Object {
             "alignSelf": undefined,
             "bottom": undefined,
+            "end": undefined,
             "left": undefined,
             "position": undefined,
             "right": undefined,
@@ -480,6 +487,7 @@ exports[`renders with placeholder 1`] = `
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
+            "start": undefined,
             "top": undefined,
           }
         }
@@ -643,6 +651,7 @@ exports[`renders with placeholder 1`] = `
             Object {
               "alignSelf": undefined,
               "bottom": undefined,
+              "end": undefined,
               "left": undefined,
               "position": undefined,
               "right": undefined,
@@ -653,6 +662,7 @@ exports[`renders with placeholder 1`] = `
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
+              "start": undefined,
               "top": undefined,
             }
           }
@@ -790,6 +800,7 @@ exports[`renders with text 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -800,6 +811,7 @@ exports[`renders with text 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 3,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -835,6 +847,7 @@ exports[`renders with text 1`] = `
           Object {
             "alignSelf": undefined,
             "bottom": undefined,
+            "end": undefined,
             "left": undefined,
             "position": undefined,
             "right": undefined,
@@ -845,6 +858,7 @@ exports[`renders with text 1`] = `
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
+            "start": undefined,
             "top": undefined,
           }
         }
@@ -1009,6 +1023,7 @@ exports[`renders with text 1`] = `
             Object {
               "alignSelf": undefined,
               "bottom": undefined,
+              "end": undefined,
               "left": undefined,
               "position": undefined,
               "right": undefined,
@@ -1019,6 +1034,7 @@ exports[`renders with text 1`] = `
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
+              "start": undefined,
               "top": undefined,
             }
           }

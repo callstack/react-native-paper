@@ -26,6 +26,7 @@ exports[`renders snackbar with Text as a child 1`] = `
       Object {
         "alignSelf": undefined,
         "bottom": undefined,
+        "end": undefined,
         "left": undefined,
         "position": undefined,
         "right": undefined,
@@ -36,6 +37,7 @@ exports[`renders snackbar with Text as a child 1`] = `
         },
         "shadowOpacity": 0.15,
         "shadowRadius": 6,
+        "start": undefined,
         "top": undefined,
       }
     }
@@ -120,6 +122,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
       Object {
         "alignSelf": undefined,
         "bottom": undefined,
+        "end": undefined,
         "left": undefined,
         "position": undefined,
         "right": undefined,
@@ -130,6 +133,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
         },
         "shadowOpacity": 0.15,
         "shadowRadius": 6,
+        "start": undefined,
         "top": undefined,
       }
     }
@@ -240,6 +244,7 @@ exports[`renders snackbar with action button 1`] = `
       Object {
         "alignSelf": undefined,
         "bottom": undefined,
+        "end": undefined,
         "left": undefined,
         "position": undefined,
         "right": undefined,
@@ -250,6 +255,7 @@ exports[`renders snackbar with action button 1`] = `
         },
         "shadowOpacity": 0.15,
         "shadowRadius": 6,
+        "start": undefined,
         "top": undefined,
       }
     }
@@ -342,6 +348,7 @@ exports[`renders snackbar with action button 1`] = `
               Object {
                 "alignSelf": undefined,
                 "bottom": undefined,
+                "end": undefined,
                 "left": undefined,
                 "position": undefined,
                 "right": undefined,
@@ -352,6 +359,7 @@ exports[`renders snackbar with action button 1`] = `
                 },
                 "shadowOpacity": 0,
                 "shadowRadius": 0,
+                "start": undefined,
                 "top": undefined,
               }
             }
@@ -511,6 +519,7 @@ exports[`renders snackbar with content 1`] = `
       Object {
         "alignSelf": undefined,
         "bottom": undefined,
+        "end": undefined,
         "left": undefined,
         "position": undefined,
         "right": undefined,
@@ -521,6 +530,7 @@ exports[`renders snackbar with content 1`] = `
         },
         "shadowOpacity": 0.15,
         "shadowRadius": 6,
+        "start": undefined,
         "top": undefined,
       }
     }

@@ -7,6 +7,7 @@ exports[`renders disabled icon button 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -17,6 +18,7 @@ exports[`renders disabled icon button 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -154,6 +156,7 @@ exports[`renders icon button by default 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -164,6 +167,7 @@ exports[`renders icon button by default 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -296,6 +300,7 @@ exports[`renders icon button with color 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -306,6 +311,7 @@ exports[`renders icon button with color 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -438,6 +444,7 @@ exports[`renders icon button with size 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -448,6 +455,7 @@ exports[`renders icon button with size 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
+      "start": undefined,
       "top": undefined,
     }
   }
@@ -580,6 +588,7 @@ exports[`renders icon change animated 1`] = `
     Object {
       "alignSelf": undefined,
       "bottom": undefined,
+      "end": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -590,6 +599,7 @@ exports[`renders icon change animated 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
+      "start": undefined,
       "top": undefined,
     }
   }

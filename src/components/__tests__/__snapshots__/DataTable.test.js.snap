@@ -270,6 +270,7 @@ exports[`renders data table pagination 1`] = `
         Object {
           "alignSelf": undefined,
           "bottom": undefined,
+          "end": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -280,6 +281,7 @@ exports[`renders data table pagination 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "start": undefined,
           "top": undefined,
         }
       }
@@ -410,6 +412,7 @@ exports[`renders data table pagination 1`] = `
         Object {
           "alignSelf": undefined,
           "bottom": undefined,
+          "end": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -420,6 +423,7 @@ exports[`renders data table pagination 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "start": undefined,
           "top": undefined,
         }
       }
@@ -608,6 +612,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
         Object {
           "alignSelf": undefined,
           "bottom": undefined,
+          "end": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -618,6 +623,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "start": undefined,
           "top": undefined,
         }
       }
@@ -748,6 +754,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
         Object {
           "alignSelf": undefined,
           "bottom": undefined,
+          "end": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -758,6 +765,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "start": undefined,
           "top": undefined,
         }
       }
@@ -888,6 +896,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
         Object {
           "alignSelf": undefined,
           "bottom": undefined,
+          "end": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -898,6 +907,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "start": undefined,
           "top": undefined,
         }
       }
@@ -1028,6 +1038,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
         Object {
           "alignSelf": undefined,
           "bottom": undefined,
+          "end": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -1038,6 +1049,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "start": undefined,
           "top": undefined,
         }
       }
@@ -1226,6 +1238,7 @@ exports[`renders data table pagination with label 1`] = `
         Object {
           "alignSelf": undefined,
           "bottom": undefined,
+          "end": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -1236,6 +1249,7 @@ exports[`renders data table pagination with label 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "start": undefined,
           "top": undefined,
         }
       }
@@ -1366,6 +1380,7 @@ exports[`renders data table pagination with label 1`] = `
         Object {
           "alignSelf": undefined,
           "bottom": undefined,
+          "end": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -1376,6 +1391,7 @@ exports[`renders data table pagination with label 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "start": undefined,
           "top": undefined,
         }
       }
@@ -1570,6 +1586,7 @@ exports[`renders data table pagination with options select 1`] = `
           Object {
             "alignSelf": undefined,
             "bottom": undefined,
+            "end": undefined,
             "left": undefined,
             "position": undefined,
             "right": undefined,
@@ -1580,6 +1597,7 @@ exports[`renders data table pagination with options select 1`] = `
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
+            "start": undefined,
             "top": undefined,
           }
         }
@@ -1810,6 +1828,7 @@ exports[`renders data table pagination with options select 1`] = `
         Object {
           "alignSelf": undefined,
           "bottom": undefined,
+          "end": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -1820,6 +1839,7 @@ exports[`renders data table pagination with options select 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "start": undefined,
           "top": undefined,
         }
       }
@@ -1950,6 +1970,7 @@ exports[`renders data table pagination with options select 1`] = `
         Object {
           "alignSelf": undefined,
           "bottom": undefined,
+          "end": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -1960,6 +1981,7 @@ exports[`renders data table pagination with options select 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "start": undefined,
           "top": undefined,
         }
       }
@@ -2090,6 +2112,7 @@ exports[`renders data table pagination with options select 1`] = `
         Object {
           "alignSelf": undefined,
           "bottom": undefined,
+          "end": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -2100,6 +2123,7 @@ exports[`renders data table pagination with options select 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "start": undefined,
           "top": undefined,
         }
       }
@@ -2230,6 +2254,7 @@ exports[`renders data table pagination with options select 1`] = `
         Object {
           "alignSelf": undefined,
           "bottom": undefined,
+          "end": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -2240,6 +2265,7 @@ exports[`renders data table pagination with options select 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "start": undefined,
           "top": undefined,
         }
       }

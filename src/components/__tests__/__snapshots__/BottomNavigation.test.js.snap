@@ -76,6 +76,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
       Object {
         "alignSelf": undefined,
         "bottom": 0,
+        "end": undefined,
         "left": 0,
         "position": undefined,
         "right": 0,
@@ -86,6 +87,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "start": undefined,
         "top": undefined,
       }
     }
@@ -820,6 +822,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
       Object {
         "alignSelf": undefined,
         "bottom": 0,
+        "end": undefined,
         "left": 0,
         "position": undefined,
         "right": 0,
@@ -830,6 +833,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "start": undefined,
         "top": undefined,
       }
     }
@@ -1717,6 +1721,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
       Object {
         "alignSelf": undefined,
         "bottom": 0,
+        "end": undefined,
         "left": 0,
         "position": undefined,
         "right": 0,
@@ -1727,6 +1732,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "start": undefined,
         "top": undefined,
       }
     }
@@ -3422,6 +3428,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
       Object {
         "alignSelf": undefined,
         "bottom": 0,
+        "end": undefined,
         "left": 0,
         "position": undefined,
         "right": 0,
@@ -3432,6 +3439,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "start": undefined,
         "top": undefined,
       }
     }
@@ -4908,6 +4916,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       Object {
         "alignSelf": undefined,
         "bottom": 0,
+        "end": undefined,
         "left": 0,
         "position": undefined,
         "right": 0,
@@ -4918,6 +4927,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "start": undefined,
         "top": undefined,
       }
     }
@@ -5580,6 +5590,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       Object {
         "alignSelf": undefined,
         "bottom": 0,
+        "end": undefined,
         "left": 0,
         "position": undefined,
         "right": 0,
@@ -5590,6 +5601,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "start": undefined,
         "top": undefined,
       }
     }
@@ -6556,6 +6568,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       Object {
         "alignSelf": undefined,
         "bottom": 0,
+        "end": undefined,
         "left": 0,
         "position": undefined,
         "right": 0,
@@ -6566,6 +6579,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "start": undefined,
         "top": undefined,
       }
     }
@@ -7646,6 +7660,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       Object {
         "alignSelf": undefined,
         "bottom": 0,
+        "end": undefined,
         "left": 0,
         "position": undefined,
         "right": 0,
@@ -7656,6 +7671,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "start": undefined,
         "top": undefined,
       }
     }
@@ -8613,6 +8629,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
       Object {
         "alignSelf": undefined,
         "bottom": 0,
+        "end": undefined,
         "left": 0,
         "position": undefined,
         "right": 0,
@@ -8623,6 +8640,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "start": undefined,
         "top": undefined,
       }
     }
@@ -9702,6 +9720,7 @@ exports[`renders shifting bottom navigation 1`] = `
       Object {
         "alignSelf": undefined,
         "bottom": 0,
+        "end": undefined,
         "left": 0,
         "position": undefined,
         "right": 0,
@@ -9712,6 +9731,7 @@ exports[`renders shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "start": undefined,
         "top": undefined,
       }
     }
