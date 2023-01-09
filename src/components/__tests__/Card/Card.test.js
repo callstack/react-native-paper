@@ -7,6 +7,7 @@ import renderer from 'react-test-renderer';
 
 import { getTheme } from '../../../core/theming';
 import { black, white } from '../../../styles/themes/v2/colors';
+import { MD3Colors } from '../../../styles/themes/v3/tokens';
 import Button from '../../Button/Button';
 import Card from '../../Card/Card';
 import { getCardColors, getCardCoverStyle } from '../../Card/utils';
@@ -36,6 +37,20 @@ describe('Card', () => {
     expect(getByTestId('card-outline')).toHaveStyle({
       borderRadius: 32,
       borderColor: 'purple',
+    });
+  });
+
+  it('renders an outlined card with custom border color', () => {
+    const { getByLabelText } = render(
+      <Card
+        mode="outlined"
+        accessibilityLabel="card"
+        style={{ borderColor: MD3Colors.error50 }}
+      />
+    );
+
+    expect(getByLabelText('card')).toHaveStyle({
+      borderColor: MD3Colors.error50,
     });
   });
 

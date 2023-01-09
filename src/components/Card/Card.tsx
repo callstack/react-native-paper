@@ -219,14 +219,15 @@ const Card = ({
   const computedElevation =
     dark && isAdaptiveMode ? elevationDarkAdaptive : elevation;
 
-  const { backgroundColor, borderColor } = getCardColors({
+  const { backgroundColor, borderColor: themedBorderColor } = getCardColors({
     theme,
     mode: cardMode,
   });
 
-  const { borderRadius = (isV3 ? 3 : 1) * roundness } = (StyleSheet.flatten(
-    style
-  ) || {}) as ViewStyle;
+  const {
+    borderRadius = (isV3 ? 3 : 1) * roundness,
+    borderColor = themedBorderColor,
+  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
   return (
     <Surface
