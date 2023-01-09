@@ -166,6 +166,7 @@ const Banner = ({
         useNativeDriver: false,
       }).start(onHideAnimationFinished);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible, position, scale]);
 
   const handleLayout = ({ nativeEvent }: NativeEvent) => {

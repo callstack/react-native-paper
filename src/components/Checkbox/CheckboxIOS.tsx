@@ -68,6 +68,7 @@ const CheckboxIOS = ({
   });
 
   const icon = indeterminate ? 'minus' : 'check';
+  const opacity = indeterminate || checked ? 1 : 0;
 
   return (
     <TouchableRipple
@@ -82,7 +83,7 @@ const CheckboxIOS = ({
       style={styles.container}
       testID={testID}
     >
-      <View style={{ opacity: indeterminate || checked ? 1 : 0 }}>
+      <View style={{ opacity }}>
         <MaterialCommunityIcon
           allowFontScaling={false}
           name={icon}
