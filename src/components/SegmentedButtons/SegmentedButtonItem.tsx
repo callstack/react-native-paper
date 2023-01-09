@@ -119,9 +119,12 @@ const SegmentedButtonItem = ({
   });
   const rippleColor = color(textColor).alpha(0.12).rgb().string();
 
+  const showIcon = !icon ? false : label && checked ? !showSelectedCheck : true;
+  const showCheckedIcon = checked && showSelectedCheck;
+
   const iconSize = isV3 ? 18 : 16;
   const iconStyle = {
-    marginRight: label ? 5 : checked && showSelectedCheck ? 3 : 0,
+    marginRight: label ? 5 : showCheckedIcon ? 3 : 0,
     ...(label && {
       transform: [
         {
@@ -146,7 +149,6 @@ const SegmentedButtonItem = ({
     borderRadius,
     ...segmentBorderRadius,
   };
-  const showIcon = icon && !label ? true : checked ? !showSelectedCheck : true;
   const labelTextStyle: TextStyle = {
     ...(!isV3
       ? {
@@ -171,7 +173,7 @@ const SegmentedButtonItem = ({
         style={rippleStyle}
       >
         <View style={[styles.content, { paddingVertical }]}>
-          {checked && showSelectedCheck ? (
+          {showCheckedIcon ? (
             <Animated.View
               testID={`${testID}-check-icon`}
               style={[iconStyle, { transform: [{ scale: checkScale }] }]}
@@ -180,7 +182,7 @@ const SegmentedButtonItem = ({
             </Animated.View>
           ) : null}
           {showIcon ? (
-            <Animated.View style={iconStyle}>
+            <Animated.View testID={`${testID}-icon`} style={iconStyle}>
               <Icon
                 source={icon}
                 size={iconSize}
