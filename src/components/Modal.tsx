@@ -204,6 +204,7 @@ function Modal({
 
   React.useEffect(() => {
     return removeListeners;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!rendered) return null;
@@ -270,6 +271,7 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
   },
+  // eslint-disable-next-line react-native/no-color-literals
   content: {
     backgroundColor: 'transparent',
     justifyContent: 'center',

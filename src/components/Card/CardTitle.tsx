@@ -154,14 +154,11 @@ const CardTitle = ({
   const TextComponent = React.memo(({ component, ...rest }: any) =>
     React.createElement(component, rest)
   );
+  const minHeight = subtitle || left || right ? 72 : 50;
+  const marginBottom = subtitle ? 0 : 2;
+
   return (
-    <View
-      style={[
-        styles.container,
-        { minHeight: subtitle || left || right ? 72 : 50 },
-        style,
-      ]}
-    >
+    <View style={[styles.container, { minHeight }, style]}>
       {left ? (
         <View style={[styles.left, leftStyle]}>
           {left({
@@ -174,11 +171,7 @@ const CardTitle = ({
         {title && (
           <TextComponent
             component={titleComponent}
-            style={[
-              styles.title,
-              { marginBottom: subtitle ? 0 : 2 },
-              titleStyle,
-            ]}
+            style={[styles.title, { marginBottom }, titleStyle]}
             numberOfLines={titleNumberOfLines}
             variant={titleVariant}
           >

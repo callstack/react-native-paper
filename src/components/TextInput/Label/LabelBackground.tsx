@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
     left: 10,
     width: 12,
   },
+  // eslint-disable-next-line react-native/no-color-literals
   outlinedLabel: {
     position: 'absolute',
     left: 18,
