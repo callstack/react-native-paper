@@ -645,24 +645,19 @@ const BottomNavigation = ({
 
   const textColor = isDark ? white : black;
 
-  const activeTintColor =
-    typeof activeColor !== 'undefined'
-      ? activeColor
-      : isV3
-      ? theme.colors.onSecondaryContainer
-      : textColor;
+  const activeTintColor = activeColor
+    ? activeColor
+    : isV3
+    ? theme.colors.onSecondaryContainer
+    : textColor;
 
-  const inactiveTintColor =
-    typeof inactiveColor !== 'undefined'
-      ? inactiveColor
-      : isV3
-      ? theme.colors.onSurfaceVariant
-      : color(textColor).alpha(0.5).rgb().string();
+  const inactiveTintColor = inactiveColor
+    ? inactiveColor
+    : isV3
+    ? theme.colors.onSurfaceVariant
+    : color(textColor).alpha(0.5).rgb().string();
 
-  const touchColor = color(activeColor || activeTintColor)
-    .alpha(0.12)
-    .rgb()
-    .string();
+  const touchColor = color(activeTintColor).alpha(0.12).rgb().string();
 
   const maxTabWidth = routes.length > 3 ? MIN_TAB_WIDTH : MAX_TAB_WIDTH;
   const maxTabBarWidth = maxTabWidth * routes.length;
@@ -743,7 +738,7 @@ const BottomNavigation = ({
                 style={[
                   styles.content,
                   {
-                    opacity: opacity,
+                    opacity,
                     transform: [{ translateX: left }, { translateY: top }],
                   },
                 ]}
@@ -888,17 +883,21 @@ const BottomNavigation = ({
 
               const badge = getBadge({ route });
 
-              const activeLabelColor = !isV3
+              const activeLabelColor = activeColor
                 ? activeTintColor
                 : focused
                 ? theme.colors.onSurface
-                : theme.colors.onSurfaceVariant;
+                : isV3
+                ? theme.colors.onSurfaceVariant
+                : textColor;
 
-              const inactiveLabelColor = !isV3
+              const inactiveLabelColor = inactiveColor
                 ? inactiveTintColor
                 : focused
                 ? theme.colors.onSurface
-                : theme.colors.onSurfaceVariant;
+                : isV3
+                ? theme.colors.onSurfaceVariant
+                : textColor;
 
               const badgeStyle = {
                 top: !isV3 ? -2 : typeof badge === 'boolean' ? 4 : 2,
