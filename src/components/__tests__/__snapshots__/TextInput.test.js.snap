@@ -1263,6 +1263,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
           },
         ]
       }
+      testID="left-affix-adornment-text"
     >
       /100
     </Text>
@@ -1817,6 +1818,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           },
         ]
       }
+      testID="right-affix-adornment-text"
     >
       /100
     </Text>
