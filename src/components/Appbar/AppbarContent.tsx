@@ -125,28 +125,32 @@ const AppbarContent = ({
         style={[styles.container, isV3 && modeContainerStyles[mode], style]}
         {...rest}
       >
-        <Text
-          {...(isV3 && { variant })}
-          ref={titleRef}
-          style={[
-            {
-              color: titleTextColor,
-              ...(isV3
-                ? theme.fonts[variant]
-                : Platform.OS === 'ios'
-                ? theme.fonts.regular
-                : theme.fonts.medium),
-            },
-            !isV3 && styles.title,
-            titleStyle,
-          ]}
-          numberOfLines={1}
-          accessible
-          // @ts-ignore Type '"heading"' is not assignable to type ...
-          accessibilityRole={Platform.OS === 'web' ? 'heading' : 'header'}
-        >
-          {title}
-        </Text>
+        {typeof title === 'string' ? (
+          <Text
+            {...(isV3 && { variant })}
+            ref={titleRef}
+            style={[
+              {
+                color: titleTextColor,
+                ...(isV3
+                  ? theme.fonts[variant]
+                  : Platform.OS === 'ios'
+                  ? theme.fonts.regular
+                  : theme.fonts.medium),
+              },
+              !isV3 && styles.title,
+              titleStyle,
+            ]}
+            numberOfLines={1}
+            accessible
+            // @ts-ignore Type '"heading"' is not assignable to type ...
+            accessibilityRole={Platform.OS === 'web' ? 'heading' : 'header'}
+          >
+            {title}
+          </Text>
+        ) : (
+          <View>{title}</View>
+        )}
         {!isV3 && subtitle ? (
           <Text
             style={[styles.subtitle, { color: subtitleColor }, subtitleStyle]}
