@@ -218,10 +218,28 @@ const Surface = React.forwardRef<View, Props>(
 
     const shadowColor = '#000';
 
-    const { position, alignSelf, top, left, right, bottom, start, end, ...restStyle } =
-      (StyleSheet.flatten(style) || {}) as ViewStyle;
+    const {
+      position,
+      alignSelf,
+      top,
+      left,
+      right,
+      bottom,
+      start,
+      end,
+      ...restStyle
+    } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
-    const absoluteStyles = { position, alignSelf, top, right, bottom, left, start, end };
+    const absoluteStyles = {
+      position,
+      alignSelf,
+      top,
+      right,
+      bottom,
+      left,
+      start,
+      end,
+    };
     const sharedStyle = [{ backgroundColor }, restStyle];
 
     if (isAnimatedValue(elevation)) {
