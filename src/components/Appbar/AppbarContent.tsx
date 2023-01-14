@@ -58,6 +58,10 @@ export type Props = $RemoveChildren<typeof View> & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 /**
@@ -92,6 +96,7 @@ const AppbarContent = ({
   title,
   mode = 'small',
   theme: themeOverrides,
+  testID = 'appbar-content',
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -123,6 +128,7 @@ const AppbarContent = ({
       <View
         pointerEvents="box-none"
         style={[styles.container, isV3 && modeContainerStyles[mode], style]}
+        testID={testID}
         {...rest}
       >
         {typeof title === 'string' ? (
@@ -145,11 +151,12 @@ const AppbarContent = ({
             accessible
             // @ts-ignore Type '"heading"' is not assignable to type ...
             accessibilityRole={Platform.OS === 'web' ? 'heading' : 'header'}
+            testID={`${testID}-title-text`}
           >
             {title}
           </Text>
         ) : (
-          <View>{title}</View>
+          title
         )}
         {!isV3 && subtitle ? (
           <Text
