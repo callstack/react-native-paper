@@ -52,6 +52,8 @@ export type Props = React.ComponentProps<typeof Surface> & {
   selected?: boolean;
   /**
    * Whether to style the chip color as selected.
+   * Note: With theme version 3 `selectedColor` doesn't apply to the `icon`.
+   *       If you want specify custom color for the `icon`, render your own `Icon` component.
    */
   selectedColor?: string;
   /**
