@@ -476,6 +476,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
+  // eslint-disable-next-line react-native/no-color-literals
   v3ContainerStyle: {
     backgroundColor: 'transparent',
     elevation: 0,

@@ -9,7 +9,7 @@ import { styled } from 'linaria/react';
 import ThemeIcon from '../../components/theme-icon';
 import Content from './components/Content';
 
-export default class Home extends React.Component<{}> {
+export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isDark: false };
@@ -73,10 +73,7 @@ export default class Home extends React.Component<{}> {
             </Button>
           </Buttons>
           <ThemeSwitch>
-            <Label
-              class="switch-wrap"
-              style={{ backgroundColor: isDark ? '#000' : '#6200ee' }}
-            >
+            <Label class="switch-wrap" isDark={isDark}>
               <Input
                 type="checkbox"
                 checked={isDark}
@@ -90,12 +87,7 @@ export default class Home extends React.Component<{}> {
             <Gallery>
               {screenshotsDark.map((image, i) => (
                 // eslint-disable-next-line react/no-array-index-key
-                <img
-                  style={{ boxShadow: ' 0 0 0 #fff' }}
-                  key={i}
-                  src={image}
-                  alt=""
-                />
+                <Screenshot key={i} src={image} alt="" />
               ))}
             </Gallery>
           ) : (
@@ -202,7 +194,8 @@ const Gallery = styled.div`
 
 const Label = styled.label`
   cursor: pointer  
-  background: #6200ee
+  background: ${PRIMARY_COLOR}
+  backgroundColor: ${(props) => (props.isDark ? '#000' : PRIMARY_COLOR)}
   padding: 3px 
   width: 33px 
   height: 20px 
@@ -237,6 +230,10 @@ const Switch = styled.div`
     grid-column: 2;
     transition: background 0.2s;
   }
+`;
+
+const Screenshot = styled.img`
+  box-shadow: ' 0 0 0 #fff';
 `;
 
 const screenshots = [

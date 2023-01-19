@@ -80,6 +80,7 @@ const RadioButtonIOS = ({
           disabled,
           customColor: rest.color,
         });
+        const opacity = checked ? 1 : 0;
 
         return (
           <TouchableRipple
@@ -104,7 +105,7 @@ const RadioButtonIOS = ({
             style={styles.container}
             testID={testID}
           >
-            <View style={{ opacity: checked ? 1 : 0 }}>
+            <View style={{ opacity }}>
               <MaterialCommunityIcon
                 allowFontScaling={false}
                 name="check"

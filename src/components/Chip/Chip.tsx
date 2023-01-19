@@ -441,6 +441,7 @@ const styles = StyleSheet.create({
   md3SelectedIcon: {
     paddingLeft: 4,
   },
+  // eslint-disable-next-line react-native/no-color-literals
   avatarSelected: {
     position: 'absolute',
     top: 4,

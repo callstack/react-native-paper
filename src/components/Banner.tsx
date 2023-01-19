@@ -166,6 +166,7 @@ const Banner = ({
         useNativeDriver: false,
       }).start(onHideAnimationFinished);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible, position, scale]);
 
   const handleLayout = ({ nativeEvent }: NativeEvent) => {
@@ -207,7 +208,7 @@ const Banner = ({
             !layout.measured && !visible
               ? // If we haven't measured banner's height yet and it's invisible,
                 // hide it with opacity: 0 so user doesn't see it
-                { opacity: 0 }
+                styles.transparent
               : null,
           ]}
         >
@@ -288,6 +289,9 @@ const styles = StyleSheet.create({
   },
   elevation: {
     elevation: 1,
+  },
+  transparent: {
+    opacity: 0,
   },
 });
 

@@ -96,7 +96,7 @@ const Icon = ({ source, color, size, theme, ...rest }: Props) => {
             width: size,
             height: size,
             tintColor: color,
-            resizeMode: 'contain',
+            resizeMode: `contain`,
           },
         ]}
         {...accessibilityProps}

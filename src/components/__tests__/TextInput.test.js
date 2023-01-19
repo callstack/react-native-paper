@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
 import { StyleSheet, Text, Platform, I18nManager } from 'react-native';
 

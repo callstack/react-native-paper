@@ -499,6 +499,7 @@ const styles = StyleSheet.create({
   disabled: {
     elevation: 0,
   },
+  // eslint-disable-next-line react-native/no-color-literals
   container: {
     position: 'absolute',
     backgroundColor: 'transparent',

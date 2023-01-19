@@ -542,7 +542,7 @@ const TextInputExample = () => {
             onChangeText={(customStyleText) =>
               inputActionHandler('customStyleText', customStyleText)
             }
-            contentStyle={{ paddingLeft: 50 }}
+            contentStyle={styles.inputContentStyle}
           />
 
           <View style={styles.inputContainerStyle}>
@@ -626,12 +626,16 @@ const styles = StyleSheet.create({
   inputContainerStyle: {
     margin: 8,
   },
+  inputContentStyle: {
+    paddingLeft: 50,
+  },
   fontSize: {
     fontSize: 32,
   },
   textArea: {
     height: 80,
   },
+  // eslint-disable-next-line react-native/no-color-literals
   noPaddingInput: {
     backgroundColor: 'transparent',
     paddingHorizontal: 0,
