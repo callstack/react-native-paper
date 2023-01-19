@@ -193,25 +193,25 @@ const Gallery = styled.div`
 `;
 
 const Label = styled.label`
-  cursor: pointer  
-  background: ${PRIMARY_COLOR}
-  backgroundColor: ${(props) => (props.isDark ? '#000' : PRIMARY_COLOR)}
-  padding: 3px 
-  width: 33px 
-  height: 20px 
-  border-radius: 33.5px 
-  display: grid
-  margin-right: 5px
+  cursor: pointer;
+  background: ${PRIMARY_COLOR};
+  backgroundcolor: ${(props) => (props.isDark ? '#000' : PRIMARY_COLOR)};
+  padding: 3px;
+  width: 33px;
+  height: 20px;
+  border-radius: 33.5px;
+  display: grid;
+  margin-right: 5px;
 `;
 const ThemeSwitch = styled.div`
   display: flex;
   flex-direction: row;
 `;
 const Input = styled.input`
-  position: absolute 
-  opacity: 0 
-  width: 0 
-  height: 0 
+  position: absolute; 
+  opacity: 0;
+  width: 0; 
+  height: 0; 
   &:checked + .switch {
     grid-template-columns: 1fr 1fr 0fr;
   }
