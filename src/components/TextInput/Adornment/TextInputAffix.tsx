@@ -11,8 +11,8 @@ import {
 
 import color from 'color';
 
-import { withInternalTheme } from '../../../core/theming';
-import type { InternalTheme } from '../../../types';
+import { useInternalTheme } from '../../../core/theming';
+import type { ThemeProp } from '../../../types';
 import { getConstants } from '../helpers';
 import { AdornmentSide } from './enums';
 
@@ -29,7 +29,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 type ContextState = {
@@ -114,7 +114,12 @@ const AffixAdornment: React.FunctionComponent<
  * ```
  */
 
-const TextInputAffix = ({ text, textStyle: labelStyle, theme }: Props) => {
+const TextInputAffix = ({
+  text,
+  textStyle: labelStyle,
+  theme: themeOverrides,
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { AFFIX_OFFSET } = getConstants(theme.isV3);
 
   const {
@@ -178,7 +183,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(TextInputAffix);
+export default TextInputAffix;
 
 // @component-docs ignore-next-line
 export { TextInputAffix, AffixAdornment };

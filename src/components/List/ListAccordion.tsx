@@ -10,8 +10,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -60,7 +60,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * Style that is passed to the wrapping TouchableRipple element.
    */
@@ -150,7 +150,7 @@ const ListAccordion = ({
   title,
   description,
   children,
-  theme,
+  theme: themeOverrides,
   titleStyle,
   descriptionStyle,
   titleNumberOfLines = 1,
@@ -165,6 +165,7 @@ const ListAccordion = ({
   accessibilityLabel,
   pointerEvents = 'none',
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
   );
@@ -325,4 +326,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(ListAccordion);
+export default ListAccordion;

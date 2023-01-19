@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 
 import color from 'color';
-import type { InternalTheme } from 'src/types';
+import type { ThemeProp } from 'src/types';
 
-import { useInternalTheme, withInternalTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import Button from '../Button/Button';
 import IconButton from '../IconButton/IconButton';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -40,7 +40,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> &
     /**
      * @optional
      */
-    theme: InternalTheme;
+    theme?: ThemeProp;
   };
 
 type PaginationDropdownProps = {
@@ -265,15 +265,16 @@ const DataTablePagination = ({
   numberOfPages,
   onPageChange,
   style,
-  theme,
   showFastPaginationControls = false,
   numberOfItemsPerPageList,
   numberOfItemsPerPage,
   onItemsPerPageChange,
   selectPageDropdownLabel,
   selectPageDropdownAccessibilityLabel,
+  theme: themeOverrides,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const labelColor = color(
     theme.isV3 ? theme.colors.onSurface : theme?.colors.text
   )
@@ -361,7 +362,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(DataTablePagination);
+export default DataTablePagination;
 
 // @component-docs ignore-next-line
 export { DataTablePagination };

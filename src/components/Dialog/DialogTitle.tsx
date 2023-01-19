@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { StyleProp, StyleSheet, TextStyle } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import Text from '../Typography/Text';
 import Title from '../Typography/v2/Title';
 
@@ -15,7 +15,7 @@ export type Props = React.ComponentPropsWithRef<typeof Title> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 /**
@@ -52,14 +52,20 @@ export type Props = React.ComponentPropsWithRef<typeof Title> & {
  * export default MyComponent;
  * ```
  */
-const DialogTitle = ({ children, theme, style, ...rest }: Props) => {
-  const { isV3 } = theme;
+const DialogTitle = ({
+  children,
+  theme: themeOverrides,
+  style,
+  ...rest
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+  const { isV3, colors, fonts } = theme;
 
   const TextComponent = isV3 ? Text : Title;
 
   const headerTextStyle = {
-    color: isV3 ? theme.colors.onSurface : theme.colors?.text,
-    ...(isV3 ? theme.fonts.headlineSmall : {}),
+    color: isV3 ? colors.onSurface : colors?.text,
+    ...(isV3 ? fonts.headlineSmall : {}),
   };
 
   return (
@@ -88,7 +94,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(DialogTitle);
+export default DialogTitle;
 
 // @component-docs ignore-next-line
 export { DialogTitle };

@@ -224,5 +224,4 @@ const styles = StyleSheet.create({
 
 export default SegmentedButtonItem;
 
-const SegmentedButtonWithTheme = SegmentedButtonItem;
-export { SegmentedButtonWithTheme as SegmentedButton };
+export { SegmentedButtonItem as SegmentedButton };

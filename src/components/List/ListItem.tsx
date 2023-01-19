@@ -13,12 +13,8 @@ import {
 
 import color from 'color';
 
-import { withInternalTheme } from '../../core/theming';
-import type {
-  $RemoveChildren,
-  EllipsizeProp,
-  InternalTheme,
-} from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { $RemoveChildren, EllipsizeProp, ThemeProp } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import { getLeftStyles, getRightStyles } from './utils';
@@ -72,7 +68,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * Style that is passed to the wrapping TouchableRipple element.
    */
@@ -142,7 +138,7 @@ const ListItem = ({
   title,
   description,
   onPress,
-  theme,
+  theme: themeOverrides,
   style,
   titleStyle,
   titleNumberOfLines = 1,
@@ -152,6 +148,7 @@ const ListItem = ({
   descriptionStyle,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const [alignToTop, setAlignToTop] = React.useState(false);
 
   const onDescriptionTextLayout = (
@@ -289,4 +286,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(ListItem);
+export default ListItem;

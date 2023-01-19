@@ -8,8 +8,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import { getTouchableRippleColors } from './utils';
 
 export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
@@ -54,7 +54,7 @@ export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 /**
@@ -96,9 +96,10 @@ const TouchableRipple = ({
   rippleColor,
   underlayColor: _underlayColor,
   children,
-  theme,
+  theme: themeOverrides,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const handlePressIn = (e: any) => {
     const { centered, onPressIn } = rest;
 
@@ -257,4 +258,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(TouchableRipple);
+export default TouchableRipple;

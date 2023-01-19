@@ -9,8 +9,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import Surface from '../Surface';
 import CardActions from './CardActions';
 import CardContent from './CardContent';
@@ -71,7 +71,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * Pass down testID from card props to touchable
    */
@@ -133,11 +133,12 @@ const Card = ({
   mode: cardMode = 'elevated',
   children,
   style,
-  theme,
+  theme: themeOverrides,
   testID = 'card',
   accessible,
   ...rest
 }: (OutlinedCardProps | ElevatedCardProps | ContainedCardProps) & Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const isMode = React.useCallback(
     (modeToCompare: Mode) => {
       return cardMode === modeToCompare;
@@ -314,4 +315,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(Card);
+export default Card;

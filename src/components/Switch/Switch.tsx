@@ -7,8 +7,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import { getSwitchColor } from './utils';
 
 const version = NativeModules.PlatformConstants
@@ -36,7 +36,7 @@ export type Props = React.ComponentPropsWithRef<typeof NativeSwitch> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 /**
@@ -82,9 +82,10 @@ const Switch = ({
   disabled,
   onValueChange,
   color,
-  theme,
+  theme: themeOverrides,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { checkedColor, onTintColor, thumbTintColor } = getSwitchColor({
     theme,
     disabled,
@@ -123,4 +124,4 @@ const Switch = ({
   );
 };
 
-export default withInternalTheme(Switch);
+export default Switch;

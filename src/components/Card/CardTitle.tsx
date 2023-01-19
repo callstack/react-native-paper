@@ -7,8 +7,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme, MD3TypescaleKey } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { MD3TypescaleKey, ThemeProp } from '../../types';
 import Text from '../Typography/Text';
 import Caption from '../Typography/v2/Caption';
 import Title from '../Typography/v2/Title';
@@ -100,7 +100,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 const LEFT_SIZE = 40;
@@ -143,8 +143,9 @@ const CardTitle = ({
   right,
   rightStyle,
   style,
-  theme,
+  theme: themeOverrides,
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const titleComponent = (props: any) =>
     theme.isV3 ? <Text {...props} /> : <Title {...props} />;
 
@@ -229,7 +230,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(CardTitle);
+export default CardTitle;
 
 // @component-docs ignore-next-line
 export { CardTitle };

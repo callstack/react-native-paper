@@ -8,7 +8,7 @@ import type {
   ViewProps,
 } from 'react-native';
 
-import type { $Omit } from './../../types';
+import type { $Omit, InternalTheme } from './../../types';
 import type { Props as TextInputProps } from './TextInput';
 
 export type TextInputLabelProp = string | React.ReactElement;
@@ -52,7 +52,8 @@ export type ChildTextInputProps = {
   onLayoutAnimatedText: (args: any) => void;
   onLeftAffixLayoutChange: (event: LayoutChangeEvent) => void;
   onRightAffixLayoutChange: (event: LayoutChangeEvent) => void;
-} & TextInputTypesWithoutMode;
+} & $Omit<TextInputTypesWithoutMode, 'theme'> & { theme: InternalTheme };
+
 export type LabelProps = {
   mode?: 'flat' | 'outlined';
   placeholderStyle: any;

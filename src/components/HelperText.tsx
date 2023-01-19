@@ -9,8 +9,8 @@ import {
 
 import color from 'color';
 
-import { withInternalTheme } from '../core/theming';
-import type { $Omit, InternalTheme } from '../types';
+import { useInternalTheme } from '../core/theming';
+import type { $Omit, ThemeProp } from '../types';
 import AnimatedText from './Typography/AnimatedText';
 
 export type Props = $Omit<
@@ -37,7 +37,7 @@ export type Props = $Omit<
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * TestID used for testing purposes
    */
@@ -83,11 +83,12 @@ const HelperText = ({
   style,
   type = 'info',
   visible = true,
-  theme,
+  theme: themeOverrides,
   onLayout,
   padding = 'normal',
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { current: shown } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
@@ -172,4 +173,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(HelperText);
+export default HelperText;
