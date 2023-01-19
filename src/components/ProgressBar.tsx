@@ -83,6 +83,8 @@ const ProgressBar = ({
     new Animated.Value(0)
   );
   const { current: fade } = React.useRef<Animated.Value>(new Animated.Value(0));
+  const passedAnimatedValue =
+    React.useRef<Props['animatedValue']>(animatedValue);
   const [width, setWidth] = React.useState<number>(0);
   const [prevWidth, setPrevWidth] = React.useState<number>(0);
 
@@ -90,6 +92,10 @@ const ProgressBar = ({
     React.useRef<Animated.CompositeAnimation | null>(null);
 
   const { scale } = theme.animation;
+
+  React.useEffect(() => {
+    passedAnimatedValue.current = animatedValue;
+  });
 
   const startAnimation = React.useCallback(() => {
     // Show progress bar
@@ -100,7 +106,17 @@ const ProgressBar = ({
       isInteraction: false,
     }).start();
 
-    if (animatedValue && animatedValue >= 0) {
+    /**
+     * We shouldn't add @param animatedValue to the
+     * deps array, to avoid the unnecessary loop.
+     * We can only check if the prop is passed initially,
+     * and we do early return.
+     */
+    const externalAnimation =
+      typeof passedAnimatedValue.current !== 'undefined' &&
+      passedAnimatedValue.current >= 0;
+
+    if (externalAnimation) {
       return;
     }
 
@@ -128,13 +144,6 @@ const ProgressBar = ({
         isInteraction: false,
       }).start();
     }
-    /**
-     * We shouldn't add @param animatedValue to the
-     * deps array, to avoid the unnecessary loop.
-     * We can only check if the prop is passed initially,
-     * and we do early return.
-     */
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fade, scale, indeterminate, timer, progress]);
 
   const stopAnimation = React.useCallback(() => {
