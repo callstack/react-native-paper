@@ -149,6 +149,18 @@ const Banner = ({
     measured: false,
   });
 
+  const showCallback = React.useRef<Props['onShowAnimationFinished']>(
+    onShowAnimationFinished
+  );
+  const hideCallback = React.useRef<Props['onHideAnimationFinished']>(
+    onHideAnimationFinished
+  );
+
+  React.useEffect(() => {
+    showCallback.current = onShowAnimationFinished;
+    hideCallback.current = onHideAnimationFinished;
+  });
+
   const { scale } = theme.animation;
 
   React.useEffect(() => {
@@ -158,14 +170,14 @@ const Banner = ({
         duration: 250 * scale,
         toValue: 1,
         useNativeDriver: false,
-      }).start(onShowAnimationFinished);
+      }).start(showCallback.current);
     } else {
       // hide
       Animated.timing(position, {
         duration: 200 * scale,
         toValue: 0,
         useNativeDriver: false,
-      }).start(onHideAnimationFinished);
+      }).start(hideCallback.current);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible, position, scale]);
