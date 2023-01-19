@@ -3,7 +3,6 @@ import {
   Animated,
   BackHandler,
   Easing,
-  NativeEventSubscription,
   StyleProp,
   StyleSheet,
   TouchableWithoutFeedback,
@@ -130,25 +129,7 @@ function Modal({
     setRendered(true);
   }
 
-  const handleBack = () => {
-    if (dismissable) {
-      hideModal();
-    }
-    return true;
-  };
-
-  const subscription = React.useRef<NativeEventSubscription | undefined>(
-    undefined
-  );
-
   const showModal = () => {
-    subscription.current?.remove();
-    subscription.current = addEventListener(
-      BackHandler,
-      'hardwareBackPress',
-      handleBack
-    );
-
     Animated.timing(opacity, {
       toValue: 1,
       duration: scale * DEFAULT_DURATION,
@@ -157,17 +138,7 @@ function Modal({
     }).start();
   };
 
-  const removeListeners = () => {
-    if (subscription.current?.remove) {
-      subscription.current?.remove();
-    } else {
-      BackHandler.removeEventListener('hardwareBackPress', handleBack);
-    }
-  };
-
   const hideModal = () => {
-    removeListeners();
-
     Animated.timing(opacity, {
       toValue: 0,
       duration: scale * DEFAULT_DURATION,
@@ -190,6 +161,27 @@ function Modal({
     });
   };
 
+  React.useEffect(() => {
+    if (!visible) {
+      return undefined;
+    }
+
+    const onHardwareBackPress = () => {
+      if (dismissable) {
+        hideModal();
+      }
+
+      return true;
+    };
+
+    const subscription = addEventListener(
+      BackHandler,
+      'hardwareBackPress',
+      onHardwareBackPress
+    );
+    return () => subscription.remove();
+  });
+
   const prevVisible = React.useRef<boolean | null>(null);
 
   React.useEffect(() => {
@@ -202,11 +194,6 @@ function Modal({
     }
     prevVisible.current = visible;
   });
-
-  React.useEffect(() => {
-    return removeListeners;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   if (!rendered) return null;
 
