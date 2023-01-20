@@ -95,6 +95,7 @@ jobs:
           name: Build package
           command: |
             yarn prepare
+            node ./scripts/typescript-output-lint
 
   build-docs:
     executor: default
