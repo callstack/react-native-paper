@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { GestureResponderEvent, Platform } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import RadioButtonIOS from './RadioButtonIOS';
 
@@ -34,7 +34,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * testID to be used on tests.
    */
@@ -91,13 +91,15 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const RadioButton = (props: Props) => {
+const RadioButton = ({ theme: themeOverrides, ...props }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+
   const Button = Platform.select({
     default: RadioButtonAndroid,
     ios: RadioButtonIOS,
   });
 
-  return <Button {...props} />;
+  return <Button {...props} theme={theme} />;
 };
 
-export default withInternalTheme(RadioButton);
+export default RadioButton;

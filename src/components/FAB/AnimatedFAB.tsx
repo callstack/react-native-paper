@@ -20,8 +20,8 @@ import {
 
 import color from 'color';
 
-import { withInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { $RemoveChildren, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import Surface from '../Surface';
@@ -100,7 +100,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   testID?: string;
 };
 
@@ -197,10 +197,10 @@ const AnimatedFAB = ({
   onPress,
   onLongPress,
   delayLongPress,
-  theme,
+  theme: themeOverrides,
   style,
   visible = true,
-  uppercase = !theme.isV3,
+  uppercase: uppercaseProp,
   testID = 'animated-fab',
   animateFrom = 'right',
   extended = false,
@@ -208,6 +208,8 @@ const AnimatedFAB = ({
   variant = 'primary',
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+  const uppercase: boolean = uppercaseProp || !theme.isV3;
   const isIOS = Platform.OS === 'ios';
   const isAnimatedFromRight = animateFrom === 'right';
   const isIconStatic = iconMode === 'static';
@@ -337,6 +339,7 @@ const AnimatedFAB = ({
         ] as StyleProp<ViewStyle>
       }
       {...(isV3 && { elevation: md3Elevation })}
+      theme={theme}
     >
       <Animated.View
         style={[
@@ -420,6 +423,7 @@ const AnimatedFAB = ({
               accessibilityState={newAccessibilityState}
               testID={testID}
               style={{ borderRadius }}
+              theme={theme}
             >
               <View
                 style={[
@@ -439,7 +443,7 @@ const AnimatedFAB = ({
         style={[styles.iconWrapper, combinedStyles.iconWrapper]}
         pointerEvents="none"
       >
-        <Icon source={icon} size={24} color={foregroundColor} />
+        <Icon source={icon} size={24} color={foregroundColor} theme={theme} />
       </Animated.View>
 
       <View pointerEvents="none">
@@ -460,7 +464,8 @@ const AnimatedFAB = ({
               opacity: animFAB.interpolate({
                 inputRange: propForDirection([distance, 0.7 * distance, 0]),
                 outputRange: propForDirection([1, 0, 0]),
-              }),
+              }) as unknown as number,
+              // TODO: check
               transform: [
                 {
                   translateX: animFAB.interpolate({
@@ -474,6 +479,7 @@ const AnimatedFAB = ({
             uppercase && styles.uppercaseLabel,
             textStyle,
           ]}
+          theme={theme}
         >
           {label}
         </AnimatedText>
@@ -533,4 +539,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(AnimatedFAB);
+export default AnimatedFAB;

@@ -12,8 +12,8 @@ import {
 
 import setColor from 'color';
 
-import { withInternalTheme } from '../core/theming';
-import type { InternalTheme } from '../types';
+import { useInternalTheme } from '../core/theming';
+import type { ThemeProp } from '../types';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -42,7 +42,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 const INDETERMINATE_DURATION = 2000;
@@ -74,10 +74,11 @@ const ProgressBar = ({
   style,
   progress = 0,
   visible = true,
-  theme,
+  theme: themeOverrides,
   animatedValue,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { current: timer } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
@@ -263,4 +264,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(ProgressBar);
+export default ProgressBar;

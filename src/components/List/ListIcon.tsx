@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import Icon, { IconSource } from '../Icon';
 
 export type Props = {
@@ -18,7 +18,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 const ICON_SIZE = 24;
@@ -48,14 +48,23 @@ const ICON_SIZE = 24;
  * export default MyComponent;
  * ```
  */
-const ListIcon = ({ icon, color: iconColor, style, theme }: Props) => (
-  <View
-    style={[theme.isV3 ? styles.itemV3 : styles.item, style]}
-    pointerEvents="box-none"
-  >
-    <Icon source={icon} size={ICON_SIZE} color={iconColor} />
-  </View>
-);
+const ListIcon = ({
+  icon,
+  color: iconColor,
+  style,
+  theme: themeOverrides,
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+
+  return (
+    <View
+      style={[theme.isV3 ? styles.itemV3 : styles.item, style]}
+      pointerEvents="box-none"
+    >
+      <Icon source={icon} size={ICON_SIZE} color={iconColor} theme={theme} />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   item: {
@@ -73,4 +82,4 @@ const styles = StyleSheet.create({
 
 ListIcon.displayName = 'List.Icon';
 
-export default withInternalTheme(ListIcon);
+export default ListIcon;

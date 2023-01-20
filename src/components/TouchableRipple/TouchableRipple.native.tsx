@@ -9,7 +9,7 @@ import {
   GestureResponderEvent,
 } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';
 import { getTouchableRippleColors } from './utils';
 
@@ -36,9 +36,10 @@ const TouchableRipple = ({
   rippleColor,
   underlayColor,
   children,
-  theme,
+  theme: themeOverrides,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const [showUnderlay, setShowUnderlay] = React.useState<boolean>(false);
 
   const disabled = disabledProp || !rest.onPress;
@@ -113,4 +114,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(TouchableRipple);
+export default TouchableRipple;

@@ -29,7 +29,7 @@ export function useTheme<T = MD3Theme>(overrides?: $DeepPartial<T>) {
 }
 
 export const useInternalTheme = (
-  themeOverrides?: $DeepPartial<InternalTheme>
+  themeOverrides: $DeepPartial<InternalTheme> | undefined
 ) => useAppTheme<InternalTheme>(themeOverrides);
 
 export const withInternalTheme = <Props extends { theme: InternalTheme }, C>(

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { GestureResponderEvent, StyleSheet, View } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, InternalTheme } from '../../types';
 import { getSelectionControlIOSColor } from '../Checkbox/utils';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -33,7 +33,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: InternalTheme;
   /**
    * testID to be used on tests.
    */
@@ -59,12 +59,14 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
 const RadioButtonIOS = ({
   disabled,
   onPress,
-  theme,
+  theme: themeOverrides,
   status,
   value,
   testID,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+
   return (
     <RadioButtonContext.Consumer>
       {(context?: RadioButtonContextType) => {
@@ -104,6 +106,7 @@ const RadioButtonIOS = ({
             accessibilityLiveRegion="polite"
             style={styles.container}
             testID={testID}
+            theme={theme}
           >
             <View style={{ opacity }}>
               <MaterialCommunityIcon
@@ -130,9 +133,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(RadioButtonIOS);
+export default RadioButtonIOS;
 
 // @component-docs ignore-next-line
-const RadioButtonIOSWithTheme = withInternalTheme(RadioButtonIOS);
-// @component-docs ignore-next-line
-export { RadioButtonIOSWithTheme as RadioButtonIOS };
+export { RadioButtonIOS };

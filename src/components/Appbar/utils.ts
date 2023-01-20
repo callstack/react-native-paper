@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 
 import overlay from '../../styles/overlay';
 import { black, white } from '../../styles/themes/v2/colors';
-import type { InternalTheme } from '../../types';
+import type { InternalTheme, ThemeProp } from '../../types';
 import Tooltip from '../Tooltip/Tooltip';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
@@ -47,6 +47,7 @@ type RenderAppbarContentProps = {
   renderOnly?: React.ComponentType<any>[];
   renderExcept?: React.ComponentType<any>[];
   mode?: AppbarModes;
+  theme?: ThemeProp;
 };
 
 export const DEFAULT_APPBAR_HEIGHT = 56;
@@ -74,6 +75,7 @@ export const renderAppbarContent = ({
   renderOnly,
   renderExcept,
   mode = 'small',
+  theme,
 }: RenderAppbarContentProps) => {
   return (
     React.Children.toArray(children as React.ReactNode | React.ReactNode[])
@@ -99,7 +101,9 @@ export const renderAppbarContent = ({
           color?: string;
           style?: StyleProp<ViewStyle>;
           mode?: AppbarModes;
+          theme?: ThemeProp;
         } = {
+          theme,
           color:
             typeof child.props.color !== 'undefined'
               ? child.props.color

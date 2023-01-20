@@ -9,9 +9,9 @@ import {
 
 import color from 'color';
 
-import { withInternalTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import { black, white } from '../../styles/themes/v2/colors';
-import type { InternalTheme } from '../../types';
+import type { ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
 import { ToggleButtonGroupContext } from './ToggleButtonGroup';
@@ -54,7 +54,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   ref?: React.RefObject<View>;
 };
 
@@ -97,7 +97,7 @@ const ToggleButton = React.forwardRef<View, Props>(
     {
       icon,
       size,
-      theme,
+      theme: themeOverrides,
       accessibilityLabel,
       disabled,
       style,
@@ -108,6 +108,7 @@ const ToggleButton = React.forwardRef<View, Props>(
     }: Props,
     ref
   ) => {
+    const theme = useInternalTheme(themeOverrides);
     const borderRadius = theme.roundness;
 
     return (
@@ -153,6 +154,7 @@ const ToggleButton = React.forwardRef<View, Props>(
                 style,
               ]}
               ref={ref}
+              theme={theme}
               {...rest}
             />
           );
@@ -170,9 +172,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(ToggleButton);
+export default ToggleButton;
 
 // @component-docs ignore-next-line
-const ToggleButtonWithTheme = withInternalTheme(ToggleButton);
-// @component-docs ignore-next-line
-export { ToggleButtonWithTheme as ToggleButton };
+export { ToggleButton };

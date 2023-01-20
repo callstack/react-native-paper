@@ -12,8 +12,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import Badge from '../Badge';
 import Icon, { IconSource } from '../Icon';
 import Text from '../Typography/Text';
@@ -51,7 +51,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 
   /**
    * TestID used for testing purposes
@@ -95,7 +95,7 @@ const DrawerCollapsedItem = ({
   unfocusedIcon,
   label,
   active,
-  theme,
+  theme: themeOverrides,
   style,
   onPress,
   accessibilityLabel,
@@ -103,6 +103,7 @@ const DrawerCollapsedItem = ({
   testID = 'drawer-collapsed-item',
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { isV3 } = theme;
   const { scale } = theme.animation;
 
@@ -269,4 +270,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(DrawerCollapsedItem);
+export default DrawerCollapsedItem;

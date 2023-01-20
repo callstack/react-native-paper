@@ -2,6 +2,7 @@ import * as React from 'react';
 import type { StyleProp, ViewStyle, View } from 'react-native';
 
 import color from 'color';
+import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../../core/theming';
 import { black } from '../../styles/themes/v2/colors';
@@ -41,6 +42,10 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
   isLeading?: boolean;
   style?: StyleProp<ViewStyle>;
   ref?: React.RefObject<View>;
+  /**
+   * @optional
+   */
+  theme?: ThemeProp;
 };
 
 /**
@@ -78,11 +83,12 @@ const AppbarAction = React.forwardRef<View, Props>(
       onPress,
       accessibilityLabel,
       isLeading,
+      theme: themeOverrides,
       ...rest
     }: Props,
     ref
   ) => {
-    const theme = useInternalTheme();
+    const theme = useInternalTheme(themeOverrides);
 
     const actionIconColor = iconColor
       ? iconColor

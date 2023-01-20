@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Image, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import { grey200 } from '../../styles/themes/v2/colors';
-import type { InternalTheme } from '../../types';
+import type { ThemeProp } from '../../types';
 import { getCardCoverStyle } from './utils';
 
 export type Props = React.ComponentPropsWithRef<typeof Image> & {
@@ -19,7 +19,7 @@ export type Props = React.ComponentPropsWithRef<typeof Image> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 /**
@@ -47,7 +47,14 @@ export type Props = React.ComponentPropsWithRef<typeof Image> & {
  *
  * @extends Image props https://reactnative.dev/docs/image#props
  */
-const CardCover = ({ index, total, style, theme, ...rest }: Props) => {
+const CardCover = ({
+  index,
+  total,
+  style,
+  theme: themeOverrides,
+  ...rest
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const coverStyle = getCardCoverStyle({ theme, index, total });
 
   return (
@@ -77,7 +84,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(CardCover);
+export default CardCover;
 
 // @component-docs ignore-next-line
 export { CardCover };

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { GestureResponderEvent, StyleSheet, View } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { $RemoveChildren, ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { getSelectionControlIOSColor } from './utils';
@@ -27,7 +27,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * testID to be used on tests.
    */
@@ -54,10 +54,11 @@ const CheckboxIOS = ({
   status,
   disabled,
   onPress,
-  theme,
+  theme: themeOverrides,
   testID,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const checked = status === 'checked';
   const indeterminate = status === 'indeterminate';
 
@@ -82,6 +83,7 @@ const CheckboxIOS = ({
       accessibilityLiveRegion="polite"
       style={styles.container}
       testID={testID}
+      theme={theme}
     >
       <View style={{ opacity }}>
         <MaterialCommunityIcon
@@ -105,9 +107,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(CheckboxIOS);
+export default CheckboxIOS;
 
 // @component-docs ignore-next-line
-const CheckboxIOSWithTheme = withInternalTheme(CheckboxIOS);
-// @component-docs ignore-next-line
-export { CheckboxIOSWithTheme as CheckboxIOS };
+export { CheckboxIOS };

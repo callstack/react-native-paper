@@ -6,6 +6,8 @@ import type {
   Animated,
 } from 'react-native';
 
+import type { ThemeProp } from 'src/types';
+
 import { getConstants } from '../helpers';
 import { AdornmentSide, AdornmentType, InputMode } from './enums';
 import TextInputAffix, { AffixAdornment } from './TextInputAffix';
@@ -130,6 +132,7 @@ export interface TextInputAdornmentProps {
   isTextInputFocused: boolean;
   paddingHorizontal?: number | string;
   maxFontSizeMultiplier?: number | undefined | null;
+  theme?: ThemeProp;
 }
 
 const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
@@ -144,6 +147,7 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
   forceFocus,
   paddingHorizontal,
   maxFontSizeMultiplier,
+  theme,
 }) => {
   if (adornmentConfig.length) {
     return (
@@ -166,6 +170,7 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
             return (
               <IconAdornment
                 {...commonProps}
+                theme={theme}
                 key={side}
                 icon={inputAdornmentComponent}
                 topPosition={topPosition[AdornmentType.Icon]}

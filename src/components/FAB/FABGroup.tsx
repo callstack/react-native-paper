@@ -12,8 +12,8 @@ import {
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import Card from '../Card/Card';
 import type { IconSource } from '../Icon';
 import Text from '../Typography/Text';
@@ -103,7 +103,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * Optional label for `FAB`.
    */
@@ -180,7 +180,7 @@ const FABGroup = ({
   open,
   onPress,
   accessibilityLabel,
-  theme,
+  theme: themeOverrides,
   style,
   fabStyle,
   visible,
@@ -191,6 +191,7 @@ const FABGroup = ({
   variant = 'primary',
   backdropColor: customBackdropColor,
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { current: backdrop } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
@@ -439,12 +440,10 @@ const FABGroup = ({
 
 FABGroup.displayName = 'FAB.Group';
 
-export default withInternalTheme(FABGroup);
+export default FABGroup;
 
 // @component-docs ignore-next-line
-const FABGroupWithTheme = withInternalTheme(FABGroup);
-// @component-docs ignore-next-line
-export { FABGroupWithTheme as FABGroup };
+export { FABGroup };
 
 const styles = StyleSheet.create({
   safeArea: {

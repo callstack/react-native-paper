@@ -14,10 +14,10 @@ import {
 import color from 'color';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { withInternalTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
 import { black, white } from '../../styles/themes/v2/colors';
-import type { InternalTheme } from '../../types';
+import type { ThemeProp } from '../../types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
@@ -259,7 +259,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * TestID used for testing purposes
    */
@@ -375,25 +375,28 @@ const BottomNavigation = ({
   barStyle,
   labeled = true,
   style,
-  theme,
   sceneAnimationEnabled = false,
   sceneAnimationType = 'opacity',
   sceneAnimationEasing,
   onTabPress,
   onIndexChange,
-  shifting = theme.isV3 ? false : navigationState.routes.length > 3,
+  shifting: shiftingProp,
   safeAreaInsets,
   labelMaxFontSizeMultiplier = 1,
-  compact = !theme.isV3,
+  compact: compactProp,
   testID = 'bottom-navigation',
+  theme: themeOverrides,
   getLazy = ({ route }: { route: Route }) => route.lazy,
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { bottom, left, right } = useSafeAreaInsets();
   const { scale } = theme.animation;
+  const compact = compactProp || !theme.isV3;
+  let shifting =
+    shiftingProp || (theme.isV3 ? false : navigationState.routes.length > 3);
 
   if (shifting && navigationState.routes.length < 2) {
     shifting = false;
-
     console.warn(
       'BottomNavigation needs at least 2 tabs to run shifting animation'
     );
@@ -1128,7 +1131,7 @@ BottomNavigation.SceneMap = (scenes: {
   );
 };
 
-export default withInternalTheme(BottomNavigation);
+export default BottomNavigation;
 
 const styles = StyleSheet.create({
   container: {

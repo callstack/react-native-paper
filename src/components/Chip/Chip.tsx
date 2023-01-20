@@ -12,9 +12,9 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
-import type { EllipsizeProp, InternalTheme } from '../../types';
+import type { EllipsizeProp, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -108,7 +108,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * Pass down testID from chip props to touchable for Detox tests.
    */
@@ -161,7 +161,7 @@ const Chip = ({
   closeIcon,
   textStyle,
   style,
-  theme,
+  theme: themeOverrides,
   testID,
   selectedColor,
   showSelectedOverlay = false,
@@ -170,6 +170,7 @@ const Chip = ({
   elevated = false,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { isV3 } = theme;
 
   const { current: elevation } = React.useRef<Animated.Value>(
@@ -261,6 +262,7 @@ const Chip = ({
       }
       {...(theme.isV3 && { elevation: elevationStyle })}
       {...rest}
+      theme={theme}
     >
       <TouchableRipple
         borderless
@@ -276,6 +278,7 @@ const Chip = ({
         accessibilityRole="button"
         accessibilityState={accessibilityState}
         testID={testID}
+        theme={theme}
       >
         <View
           style={[styles.content, isV3 && styles.md3Content, contentSpacings]}
@@ -320,6 +323,7 @@ const Chip = ({
                       : iconColor
                   }
                   size={18}
+                  theme={theme}
                 />
               ) : (
                 <MaterialCommunityIcon
@@ -460,4 +464,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(Chip);
+export default Chip;

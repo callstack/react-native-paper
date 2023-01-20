@@ -7,9 +7,9 @@ import {
   useWindowDimensions,
 } from 'react-native';
 
-import { withInternalTheme } from '../core/theming';
+import { useInternalTheme } from '../core/theming';
 import { black, white } from '../styles/themes/v2/colors';
-import type { InternalTheme } from '../types';
+import type { ThemeProp } from '../types';
 import getContrastingColor from '../utils/getContrastingColor';
 
 const defaultSize = 20;
@@ -32,7 +32,7 @@ export type Props = React.ComponentProps<typeof Animated.Text> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 /**
@@ -66,10 +66,11 @@ const Badge = ({
   children,
   size = defaultSize,
   style,
-  theme,
+  theme: themeOverrides,
   visible = true,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { current: opacity } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
@@ -136,7 +137,7 @@ const Badge = ({
   );
 };
 
-export default withInternalTheme(Badge);
+export default Badge;
 
 const styles = StyleSheet.create({
   container: {

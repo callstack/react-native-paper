@@ -126,11 +126,12 @@ const IconButton = React.forwardRef<View, Props>(
       animated = false,
       mode,
       style,
+      theme: themeOverrides,
       ...rest
     }: Props,
     ref
   ) => {
-    const theme = useInternalTheme();
+    const theme = useInternalTheme(themeOverrides);
     const { isV3 } = theme;
 
     const IconComponent = animated ? CrossFadeIcon : Icon;

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { GestureResponderEvent, Platform } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
 
@@ -30,7 +30,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * testID to be used on tests.
    */
@@ -80,16 +80,18 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const Checkbox = (props: Props) =>
-  Platform.OS === 'ios' ? (
-    <CheckboxIOS {...props} />
+const Checkbox = ({ theme: themeOverrides, ...props }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+  return Platform.OS === 'ios' ? (
+    <CheckboxIOS {...props} theme={theme} />
   ) : (
-    <CheckboxAndroid {...props} />
+    <CheckboxAndroid {...props} theme={theme} />
   );
+};
 
-export default withInternalTheme(Checkbox);
+export default Checkbox;
 
 // @component-docs ignore-next-line
-const CheckboxWithTheme = withInternalTheme(Checkbox);
+const CheckboxWithTheme = Checkbox;
 // @component-docs ignore-next-line
 export { CheckboxWithTheme as Checkbox };

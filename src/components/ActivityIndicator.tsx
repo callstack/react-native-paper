@@ -9,8 +9,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { withInternalTheme } from '../core/theming';
-import type { InternalTheme } from '../types';
+import { useInternalTheme } from '../core/theming';
+import type { ThemeProp } from '../types';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -33,7 +33,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 const DURATION = 2400;
@@ -64,9 +64,10 @@ const ActivityIndicator = ({
   hidesWhenStopped = true,
   size: indicatorSize = 'small',
   style,
-  theme,
+  theme: themeOverrides,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { current: timer } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
@@ -254,4 +255,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(ActivityIndicator);
+export default ActivityIndicator;
