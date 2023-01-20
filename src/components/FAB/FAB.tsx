@@ -11,6 +11,7 @@ import {
 
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
@@ -154,7 +155,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
  * export default MyComponent;
  * ```
  */
-const FAB = React.forwardRef<View, Props>(
+const FAB = forwardRef<View, Props>(
   (
     {
       icon,
