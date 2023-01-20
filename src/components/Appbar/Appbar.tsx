@@ -258,6 +258,7 @@ const Appbar = ({
         renderAppbarContent({
           children,
           isDark,
+          theme,
           isV3,
           shouldCenterContent: isV3CenterAlignedMode || shouldCenterContent,
         })}

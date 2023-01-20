@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
+import type { ThemeProp } from 'src/types';
+
 import { useInternalTheme } from '../../core/theming';
 import Icon, { IconSource } from '../Icon';
 
@@ -17,6 +19,10 @@ export type Props = {
    * Optional icon size.
    */
   size?: number;
+  /**
+   * @optional
+   */
+  theme?: ThemeProp;
 };
 
 /**
@@ -60,8 +66,13 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
-const DialogIcon = ({ size = 24, color, icon }: Props) => {
-  const theme = useInternalTheme();
+const DialogIcon = ({
+  size = 24,
+  color,
+  icon,
+  theme: themeOverrides,
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
 
   if (!theme.isV3) {
     return null;

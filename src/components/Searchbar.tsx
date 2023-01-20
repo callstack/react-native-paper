@@ -190,6 +190,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
           style,
         ]}
         {...(theme.isV3 && { elevation })}
+        theme={theme}
       >
         <IconButton
           accessibilityRole="button"
@@ -208,6 +209,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
               />
             ))
           }
+          theme={theme}
           accessibilityLabel={searchAccessibilityLabel}
         />
         <TextInput
@@ -266,6 +268,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
                 ))
               }
               accessibilityRole="button"
+              theme={theme}
             />
           </View>
         )}

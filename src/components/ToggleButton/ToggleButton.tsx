@@ -154,6 +154,7 @@ const ToggleButton = React.forwardRef<View, Props>(
                 style,
               ]}
               ref={ref}
+              theme={theme}
               {...rest}
             />
           );

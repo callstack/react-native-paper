@@ -61,7 +61,7 @@ const ListIcon = ({
       style={[theme.isV3 ? styles.itemV3 : styles.item, style]}
       pointerEvents="box-none"
     >
-      <Icon source={icon} size={ICON_SIZE} color={iconColor} />
+      <Icon source={icon} size={ICON_SIZE} color={iconColor} theme={theme} />
     </View>
   );
 };

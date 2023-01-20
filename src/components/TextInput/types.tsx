@@ -8,7 +8,7 @@ import type {
   ViewProps,
 } from 'react-native';
 
-import type { $Omit, InternalTheme } from './../../types';
+import type { $Omit, InternalTheme, ThemeProp } from './../../types';
 import type { Props as TextInputProps } from './TextInput';
 
 export type TextInputLabelProp = string | React.ReactElement;
@@ -84,6 +84,7 @@ export type LabelProps = {
   maxFontSizeMultiplier?: number | undefined | null;
   testID?: string;
   contentStyle?: StyleProp<ViewProps>;
+  theme?: ThemeProp;
 };
 export type InputLabelProps = {
   parentState: State;
@@ -97,4 +98,5 @@ export type LabelBackgroundProps = {
   labelStyle: any;
   parentState: State;
   maxFontSizeMultiplier?: number | undefined | null;
+  theme?: ThemeProp;
 };

@@ -319,6 +319,7 @@ const Button = ({
         rippleColor={rippleColor}
         style={touchableStyle}
         testID={testID}
+        theme={theme}
       >
         <View style={[styles.content, contentStyle]}>
           {icon && loading !== true ? (

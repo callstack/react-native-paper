@@ -11,6 +11,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import type { ThemeProp } from 'src/types';
+
 import { useInternalTheme } from '../../core/theming';
 import { AdornmentSide, AdornmentType, InputMode } from './Adornment/enums';
 import TextInputAdornment, {
@@ -276,6 +278,7 @@ const TextInputFlat = ({
     maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
     testID,
     contentStyle,
+    theme,
   };
   const affixTopPosition = {
     [AdornmentSide.Left]: leftAffixTopPosition,
@@ -318,6 +321,7 @@ const TextInputFlat = ({
         error={error}
         colors={colors}
         activeColor={activeColor}
+        theme={theme}
       />
       <View
         style={[
@@ -405,6 +409,7 @@ type UnderlineProps = {
   underlineColorCustom?: string;
   hasActiveOutline?: boolean;
   style?: StyleProp<ViewStyle>;
+  theme?: ThemeProp;
 };
 
 const Underline = ({
@@ -415,8 +420,9 @@ const Underline = ({
   underlineColorCustom,
   hasActiveOutline,
   style,
+  theme: themeOverrides,
 }: UnderlineProps) => {
-  const { isV3 } = useInternalTheme();
+  const { isV3 } = useInternalTheme(themeOverrides);
 
   let backgroundColor = parentState.focused
     ? activeColor

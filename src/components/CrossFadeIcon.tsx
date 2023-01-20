@@ -98,7 +98,7 @@ const CrossFadeIcon = ({
             },
           ]}
         >
-          <Icon source={previousIcon} size={size} color={color} />
+          <Icon source={previousIcon} size={size} color={color} theme={theme} />
         </Animated.View>
       ) : null}
       <Animated.View
@@ -110,7 +110,7 @@ const CrossFadeIcon = ({
           },
         ]}
       >
-        <Icon source={currentIcon} size={size} color={color} />
+        <Icon source={currentIcon} size={size} color={color} theme={theme} />
       </Animated.View>
     </View>
   );

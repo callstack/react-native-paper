@@ -124,6 +124,7 @@ const DrawerItem = ({
         accessibilityState={{ selected: active }}
         accessibilityLabel={accessibilityLabel}
         underlayColor={underlayColor}
+        theme={theme}
       >
         <View style={[styles.wrapper, isV3 && styles.v3Wrapper]}>
           <View style={styles.content}>

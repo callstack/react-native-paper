@@ -158,6 +158,7 @@ const CheckboxItem = ({
       onPress={onPress}
       testID={testID}
       disabled={disabled}
+      theme={theme}
     >
       <View
         style={[styles.container, style]}

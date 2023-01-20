@@ -242,6 +242,7 @@ const Banner = ({
                 mode="text"
                 style={styles.button}
                 textColor={theme.colors?.primary}
+                theme={theme}
                 {...others}
               >
                 {label}

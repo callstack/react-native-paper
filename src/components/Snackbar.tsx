@@ -267,6 +267,7 @@ const Snackbar = ({
       <Surface
         pointerEvents="box-none"
         accessibilityLiveRegion="polite"
+        theme={theme}
         style={
           [
             !isV3 && styles.elevation,
@@ -305,6 +306,7 @@ const Snackbar = ({
                 textColor={buttonTextColor}
                 compact={!isV3}
                 mode="text"
+                theme={theme}
                 {...actionProps}
               >
                 {actionLabel}
@@ -316,6 +318,7 @@ const Snackbar = ({
                 borderless
                 onPress={onIconPress}
                 iconColor={theme.colors.inverseOnSurface}
+                theme={theme}
                 icon={
                   icon ||
                   (({ size, color }) => {

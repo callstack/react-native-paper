@@ -70,7 +70,11 @@ const ListSection = ({
 
   return (
     <View {...viewProps} style={[styles.container, style]}>
-      {title ? <ListSubheader style={titleStyle}>{title}</ListSubheader> : null}
+      {title ? (
+        <ListSubheader style={titleStyle} theme={theme}>
+          {title}
+        </ListSubheader>
+      ) : null}
       {children}
     </View>
   );

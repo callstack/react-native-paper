@@ -107,6 +107,7 @@ const DrawerSection = ({
         <Divider
           {...(isV3 && { horizontalInset: true, bold: true })}
           style={[styles.divider, isV3 && styles.v3Divider]}
+          theme={theme}
         />
       )}
     </View>

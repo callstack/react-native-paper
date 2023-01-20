@@ -30,6 +30,7 @@ const InputLabel = (props: InputLabelProps) => {
     maxFontSizeMultiplier,
     testID,
     contentStyle,
+    theme,
   } = props.labelProps;
 
   const labelTranslationX = {
@@ -97,6 +98,7 @@ const InputLabel = (props: InputLabelProps) => {
       {labelBackground?.({
         parentState,
         labelStyle,
+        theme,
         labelProps: props.labelProps,
         maxFontSizeMultiplier: maxFontSizeMultiplier,
       })}

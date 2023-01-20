@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
+import type { ThemeProp } from 'src/types';
+
 import { useInternalTheme } from '../../core/theming';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
@@ -9,6 +11,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
+  theme?: ThemeProp;
 };
 
 /**
@@ -38,7 +41,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const CardActions = (props: Props) => {
-  const { isV3 } = useInternalTheme();
+  const { isV3 } = useInternalTheme(props.theme);
   const justifyContent = isV3 ? 'flex-end' : 'flex-start';
 
   return (

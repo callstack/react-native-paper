@@ -247,6 +247,7 @@ function Modal({
         testID={`${testID}-wrapper`}
       >
         <Surface
+          theme={theme}
           style={
             [
               { opacity },

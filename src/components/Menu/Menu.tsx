@@ -637,6 +637,7 @@ class Menu extends React.Component<Props, State> {
                     ] as StyleProp<ViewStyle>
                   }
                   {...(theme.isV3 && { elevation: 2 })}
+                  theme={theme}
                 >
                   {(scrollableMenuHeight && (
                     <ScrollView

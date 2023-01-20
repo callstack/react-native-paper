@@ -339,6 +339,7 @@ const AnimatedFAB = ({
         ] as StyleProp<ViewStyle>
       }
       {...(isV3 && { elevation: md3Elevation })}
+      theme={theme}
     >
       <Animated.View
         style={[
@@ -422,6 +423,7 @@ const AnimatedFAB = ({
               accessibilityState={newAccessibilityState}
               testID={testID}
               style={{ borderRadius }}
+              theme={theme}
             >
               <View
                 style={[
@@ -441,7 +443,7 @@ const AnimatedFAB = ({
         style={[styles.iconWrapper, combinedStyles.iconWrapper]}
         pointerEvents="none"
       >
-        <Icon source={icon} size={24} color={foregroundColor} />
+        <Icon source={icon} size={24} color={foregroundColor} theme={theme} />
       </Animated.View>
 
       <View pointerEvents="none">
@@ -477,6 +479,7 @@ const AnimatedFAB = ({
             uppercase && styles.uppercaseLabel,
             textStyle,
           ]}
+          theme={theme}
         >
           {label}
         </AnimatedText>

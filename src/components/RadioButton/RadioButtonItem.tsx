@@ -192,6 +192,7 @@ const RadioButtonItem = ({
             }}
             testID={testID}
             disabled={disabled}
+            theme={theme}
           >
             <View style={[styles.container, style]} pointerEvents="none">
               {isLeading && radioButton}

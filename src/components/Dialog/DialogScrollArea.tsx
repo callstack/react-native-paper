@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
+import type { ThemeProp } from 'src/types';
+
 import { useInternalTheme } from '../../core/theming';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
@@ -9,6 +11,10 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
+  /**
+   * @optional
+   */
+  theme?: ThemeProp;
 };
 
 /**
@@ -49,7 +55,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const DialogScrollArea = (props: Props) => {
-  const theme = useInternalTheme();
+  const theme = useInternalTheme(props.theme);
   const borderStyles = {
     borderColor: theme.isV3
       ? theme.colors.surfaceVariant

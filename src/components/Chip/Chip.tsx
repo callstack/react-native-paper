@@ -262,6 +262,7 @@ const Chip = ({
       }
       {...(theme.isV3 && { elevation: elevationStyle })}
       {...rest}
+      theme={theme}
     >
       <TouchableRipple
         borderless
@@ -277,6 +278,7 @@ const Chip = ({
         accessibilityRole="button"
         accessibilityState={accessibilityState}
         testID={testID}
+        theme={theme}
       >
         <View
           style={[styles.content, isV3 && styles.md3Content, contentSpacings]}
@@ -321,6 +323,7 @@ const Chip = ({
                       : iconColor
                   }
                   size={18}
+                  theme={theme}
                 />
               ) : (
                 <MaterialCommunityIcon

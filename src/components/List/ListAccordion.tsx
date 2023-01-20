@@ -215,6 +215,7 @@ const ListAccordion = ({
           accessibilityState={{ expanded: isExpanded }}
           accessibilityLabel={accessibilityLabel}
           testID={testID}
+          theme={theme}
           borderless
         >
           <View style={styles.row} pointerEvents={pointerEvents}>
@@ -283,6 +284,7 @@ const ListAccordion = ({
             ) {
               return React.cloneElement(child as React.ReactElement<any>, {
                 style: [styles.child, child.props.style],
+                theme,
               });
             }
 

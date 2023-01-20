@@ -222,6 +222,7 @@ const ListItem = ({
       {...rest}
       style={[theme.isV3 ? styles.containerV3 : styles.container, style]}
       onPress={onPress}
+      theme={theme}
     >
       <View style={theme.isV3 ? styles.rowV3 : styles.row}>
         {left

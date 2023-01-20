@@ -106,6 +106,7 @@ const RadioButtonIOS = ({
             accessibilityLiveRegion="polite"
             style={styles.container}
             testID={testID}
+            theme={theme}
           >
             <View style={{ opacity }}>
               <MaterialCommunityIcon
