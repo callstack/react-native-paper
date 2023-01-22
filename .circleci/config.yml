@@ -3,7 +3,7 @@ version: 2.1
 executors:
   default:
     docker:
-      - image: circleci/node:16
+      - image: cimg/node:16.18.0
     working_directory: ~/react-native-paper
 
 commands:
@@ -31,6 +31,7 @@ jobs:
           command: |
             yarn install --cwd example --frozen-lockfile
             yarn install --cwd docs --frozen-lockfile
+            yarn install --cwd docusaurus --frozen-lockfile
             yarn install --frozen-lockfile
       - save_cache:
           key: dependencies-{{ checksum "package.json" }}
@@ -65,6 +66,7 @@ jobs:
           name: Typecheck files
           command: |
             yarn typescript
+            yarn typescript:docusaurus
 
   unit-tests:
     executor: default

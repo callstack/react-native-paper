@@ -1,0 +1,376 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #2e8555;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+.screenshots {
+  display: flex;
+}
+
+.screenshots img,
+.screenshots figure {
+  max-width: 25%;
+}
+
+.screenshots figure>img {
+  max-width: 100%;
+}
+
+.gallery {
+  display: flex;
+  flex-direction: row;
+}
+
+.gallery img {
+  padding: 8px;
+  width: 33%;
+}
+
+
+html[data-theme='dark'] .gallery-dark,
+html[data-theme='light'] .gallery-light {
+  display: block;
+}
+
+html[data-theme='dark'] .gallery-light,
+html[data-theme='light'] .gallery-dark {
+  display: none;
+}
+
+.icons-list-container {
+  margin: 16px 0;
+}
+
+.icons-list-icon-container {
+  appearance: none;
+  border: 0;
+  background: 0;
+  outline: 0;
+  display: flex;
+  flex-direction: column;
+  width: 124px;
+  height: 124px;
+  align-items: center;
+  text-align: center;
+
+  @media (max-width: 680px) {
+    width: 96px;
+  }
+}
+
+.icons-list-icon {
+  display: block;
+  margin: 16px;
+  font-family: 'MaterialCommunityIcons';
+  font-size: 48px;
+  color: var(--theme-text-color);
+}
+
+.icons-list-icon-name {
+  display: block;
+  font-size: 12px;
+  color: var(--theme-text-color);
+}
+
+.icons-list-results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 24px 0;
+
+  &:last-child {
+    justify-content: flex-start;
+  }
+}
+
+.icons-list-searchbar {
+  box-sizing: border-box;
+  appearance: none;
+  border: 0;
+  display: block;
+  width: 100%;
+  padding: 12px;
+  font-size: 1em;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+  outline: 0;
+
+  &:focus,
+  &:hover {
+    background-color: #e7e7e7;
+  }
+
+  *:focus-visible {
+    outline: auto;
+  }
+}
+
+@font-face {
+  font-family: 'MaterialCommunityIcons';
+  src: url('../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf') format('truetype');
+}
+
+.badge {
+  background-color: black;
+  color: white;
+  font-size: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 15px;
+  padding: 6px;
+}
+
+.badge code {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+[data-theme='dark'] .badge {
+  color: white
+}
+
+.badge-supported {
+  color: rgba(98, 0, 238, 1);
+  background-color: rgba(98, 0, 238, 0.2);
+  border-color: rgba(98, 0, 238, 1);
+}
+
+.badge-deprecated {
+  color: rgba(176, 0, 32, 1);
+  background-color: rgba(176, 0, 32, 0.2);
+  border-color: rgba(176, 0, 32, 1);
+
+}
+
+.badge-renamed {
+  color: rgba(0, 100, 0, 1);
+  background-color: rgba(0, 100, 0, 0.2);
+  border-color: rgba(0, 100, 0, 1);
+}
+
+.showcase-gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+@media (max-width: 680px) {
+  .showcase-gallery {
+    justify-content: center;
+  }
+}
+
+.showcase-image-container {
+  overflow: hidden;
+  margin: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+@media (min-width: 420px) {
+  .showcase-image-container {
+    height: 528px;
+  }
+
+  .showcase-image-container:hover .showcase-info,
+  .showcase-image-container:focus .showcase-info {
+    transform: translateY(-48px);
+  }
+}
+
+
+.showcase-image {
+  display: block;
+  max-height: 480px;
+  width: auto;
+}
+
+@media (min-width: 420px) {
+  .showcase-image {
+    height: 480px;
+    width: 270px;
+  }
+}
+
+.showcase-info {
+  height: 96px;
+  padding: 12px;
+  transform: translateY(0);
+  transition: 150ms;
+}
+
+.showcase-app-name {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 12px;
+
+  width: 246px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.showcase-badge-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 16px;
+  padding-left: 3px;
+}
+
+.showcase-separation {
+  margin: 0 10px;
+}
+
+/* Switch.tsx */
+
+.react-switch-checkbox {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.react-switch-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 45px;
+  height: 25px;
+  background: grey;
+  border-radius: 100px;
+  position: relative;
+  transition: background-color .2s;
+}
+
+.react-switch-label .react-switch-button {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  transition: 0.2s;
+  background: #fff;
+  box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+}
+
+.react-switch-checkbox:checked+.react-switch-label .react-switch-button {
+  left: calc(100% - 2px);
+  transform: translateX(-100%);
+}
+
+.react-switch-label:active .react-switch-button {
+  width: 20px;
+}
+
+/* DynamicColorTheme.tsx */
+
+.gridColors {
+  display: grid;
+  margin-top: 20px;
+  grid-template-columns: 25% 25% 25% 25%;
+  height: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.gridParent {
+  display: grid;
+  grid-template-columns: 50% 40%;
+  column-gap: 15px;
+}
+
+.searchBar {
+  box-sizing: border-box;
+  appearance: none;
+  border: 0;
+  display: block;
+  width: 20%;
+  padding: 12px;
+  font-size: 1em;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  outline: 0;
+}
+
+@media only screen and (max-width: 1000px) {
+  .gridColors {
+    grid-template-columns: 50% 50%;
+  }
+
+  .gridParent {
+    grid-template-columns: 100%;
+  }
+
+  .searchBar {
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1200px) {
+  .gridColors {
+    grid-template-columns: 50% 50%;
+  }
+
+  .gridParent {
+    grid-template-columns: 60% 40%;
+  }
+
+  .searchBar {
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+  .gridColors {
+    grid-template-columns: 33.3% 33.3% 33.3%;
+  }
+
+  .gridParent {
+    grid-template-columns: 60% 40%;
+  }
+
+  .searchBar {
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 1400px) and (max-width: 1600px) {
+  .gridColors {
+    grid-template-columns: 25% 25% 25% 25%;
+  }
+
+  .gridParent {
+    grid-template-columns: 60% 40%;
+  }
+
+  .searchBar {
+    width: 40%;
+  }
+}
