@@ -4,6 +4,7 @@ import { Platform } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 
+import { MD3Colors } from '../../styles/themes/v3/tokens';
 import Surface from '../Surface';
 
 describe('Surface', () => {
@@ -17,7 +18,7 @@ describe('Surface', () => {
 
   describe('on iOS', () => {
     Platform.OS = 'ios';
-    const style = StyleSheet.create({
+    const styles = StyleSheet.create({
       absoluteStyles: {
         bottom: 10,
         end: 20,
@@ -28,40 +29,156 @@ describe('Surface', () => {
         top: 60,
         flex: 1,
       },
+      marginStyles: {
+        marginBottom: 20,
+        marginStart: 10,
+        marginEnd: 20,
+        marginTop: 10,
+      },
+      borderRadiusStyles: {
+        borderBottomLeftRadius: 10,
+        borderBottomEndRadius: 10,
+        borderTopStartRadius: 10,
+        borderTopRightRadius: 10,
+      },
+      innerLayerViewStyle: {
+        backgroundColor: MD3Colors.error100,
+      },
+      restStyle: {
+        padding: 10,
+        flexDirection: 'row',
+        alignContent: 'center',
+      },
     });
 
-    it('should not render absolute position properties on the bottom layer', () => {
-      const testID = 'surface-test-bottom-layer';
+    describe('outer layer', () => {
+      it('should not render rest style', () => {
+        const testID = 'surface-test';
 
-      const { getByTestId } = render(
-        <Surface testID={testID} style={style.absoluteStyles} />
-      );
+        const { getByTestId } = render(
+          <Surface testID={testID} style={styles.restStyle} />
+        );
 
-      expect(getByTestId(testID).props.style).toHaveProperty('flex');
-      expect(getByTestId(testID).props.style).toHaveProperty('backgroundColor');
-      expect(getByTestId(testID).props.style).not.toHaveProperty('bottom');
-      expect(getByTestId(testID).props.style).not.toHaveProperty('end');
-      expect(getByTestId(testID).props.style).not.toHaveProperty('left');
-      expect(getByTestId(testID).props.style).not.toHaveProperty('position');
-      expect(getByTestId(testID).props.style).not.toHaveProperty('right');
-      expect(getByTestId(testID).props.style).not.toHaveProperty('start');
-      expect(getByTestId(testID).props.style).not.toHaveProperty('top');
+        const style = getByTestId(`${testID}-outer-layer`).props.style;
+
+        expect(style).not.toHaveProperty('padding');
+        expect(style).not.toHaveProperty('flex-direciton');
+        expect(style).not.toHaveProperty('align-content');
+      });
+      it('should render absolute position properties on outer layer', () => {
+        const testID = 'surface-test';
+
+        const { container } = render(
+          <Surface testID={testID} style={styles.absoluteStyles} />
+        );
+
+        const style = container.props.style;
+
+        expect(style).toHaveProperty('bottom');
+        expect(style).toHaveProperty('end');
+        expect(style).toHaveProperty('left');
+        expect(style).toHaveProperty('position');
+        expect(style).toHaveProperty('right');
+        expect(style).toHaveProperty('start');
+        expect(style).toHaveProperty('top');
+      });
+
+      it('should render margin styles on outer layer', () => {
+        const testID = 'surface-test';
+
+        const { getByTestId } = render(
+          <Surface testID={testID} style={styles.marginStyles} />
+        );
+
+        expect(getByTestId(`${testID}-outer-layer`)).toHaveStyle(
+          styles.marginStyles
+        );
+      });
+
+      it('should render inner layer styles on outer layer', () => {
+        const testID = 'surface-test';
+        const combinedStyles = [
+          styles.backgroundColor,
+          styles.borderRadiusStyles,
+        ];
+
+        const { getByTestId } = render(
+          <Surface testID={testID} style={combinedStyles} />
+        );
+
+        expect(getByTestId(`${testID}-outer-layer`)).toHaveStyle(
+          combinedStyles
+        );
+      });
     });
 
-    it('should render absolute position properties on shadow layer 0', () => {
-      const testID = 'surface-test-shadow-layer-0';
+    describe('inner layer', () => {
+      it('should not render absolute position properties on the inner layer', () => {
+        const testID = 'surface-test';
 
-      const { container } = render(
-        <Surface testID={testID} style={style.absoluteStyles} />
-      );
+        const { getByTestId } = render(
+          <Surface testID={testID} style={styles.absoluteStyles} />
+        );
 
-      expect(container.props.style).toHaveProperty('bottom');
-      expect(container.props.style).toHaveProperty('end');
-      expect(container.props.style).toHaveProperty('left');
-      expect(container.props.style).toHaveProperty('position');
-      expect(container.props.style).toHaveProperty('right');
-      expect(container.props.style).toHaveProperty('start');
-      expect(container.props.style).toHaveProperty('top');
+        const style = getByTestId(`${testID}-inner-layer`).props.style;
+
+        expect(style).toHaveProperty('backgroundColor');
+        expect(style).not.toHaveProperty('bottom');
+        expect(style).not.toHaveProperty('end');
+        expect(style).not.toHaveProperty('left');
+        expect(style).not.toHaveProperty('position');
+        expect(style).not.toHaveProperty('right');
+        expect(style).not.toHaveProperty('start');
+        expect(style).not.toHaveProperty('top');
+      });
+
+      it('should not render margin styles on the inner layer', () => {
+        const testID = 'surface-test';
+
+        const { getByTestId } = render(
+          <Surface testID={testID} style={styles.marginStyles} />
+        );
+
+        const style = getByTestId(`${testID}-inner-layer`).props.style;
+
+        expect(style).not.toHaveProperty('marginBottom');
+        expect(style).not.toHaveProperty('marginStart');
+        expect(style).not.toHaveProperty('marginEnd');
+        expect(style).not.toHaveProperty('marginTop');
+      });
+
+      it('should render inner layer styles on the inner layer', () => {
+        const testID = 'surface-test';
+        const combinedStyles = [
+          styles.backgroundColor,
+          styles.borderRadiusStyles,
+        ];
+
+        const { getByTestId } = render(
+          <Surface testID={testID} style={combinedStyles} />
+        );
+
+        expect(getByTestId(`${testID}-inner-layer`)).toHaveStyle(
+          combinedStyles
+        );
+      });
+    });
+
+    describe('children wrapper', () => {
+      it('should render rest styles', () => {
+        const testID = 'surface-test';
+        const combinedStyles = [
+          styles.backgroundColor,
+          styles.borderRadiusStyles,
+          styles.restStyle,
+        ];
+
+        const { getByTestId } = render(
+          <Surface testID={testID} style={combinedStyles} />
+        );
+
+        expect(getByTestId(testID)).toHaveStyle(combinedStyles);
+      });
     });
   });
 });

@@ -269,9 +269,29 @@ exports[`renders data table pagination 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderRadius": 20,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
+          "margin": 6,
+          "marginBottom": undefined,
+          "marginEnd": undefined,
+          "marginHorizontal": undefined,
+          "marginLeft": undefined,
+          "marginRight": undefined,
+          "marginStart": undefined,
+          "marginTop": undefined,
+          "marginVertical": undefined,
           "position": undefined,
           "right": undefined,
           "shadowColor": "#000",
@@ -285,11 +305,23 @@ exports[`renders data table pagination 1`] = `
           "top": undefined,
         }
       }
+      testID="undefined-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "backgroundColor": "transparent",
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -299,18 +331,27 @@ exports[`renders data table pagination 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="undefined-inner-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
-              "margin": 6,
               "overflow": "hidden",
               "width": 40,
             }
@@ -411,9 +452,29 @@ exports[`renders data table pagination 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderRadius": 20,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
+          "margin": 6,
+          "marginBottom": undefined,
+          "marginEnd": undefined,
+          "marginHorizontal": undefined,
+          "marginLeft": undefined,
+          "marginRight": undefined,
+          "marginStart": undefined,
+          "marginTop": undefined,
+          "marginVertical": undefined,
           "position": undefined,
           "right": undefined,
           "shadowColor": "#000",
@@ -427,11 +488,23 @@ exports[`renders data table pagination 1`] = `
           "top": undefined,
         }
       }
+      testID="undefined-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "backgroundColor": "transparent",
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -441,18 +514,27 @@ exports[`renders data table pagination 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="undefined-inner-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
-              "margin": 6,
               "overflow": "hidden",
               "width": 40,
             }
@@ -611,9 +693,29 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderRadius": 20,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
+          "margin": 6,
+          "marginBottom": undefined,
+          "marginEnd": undefined,
+          "marginHorizontal": undefined,
+          "marginLeft": undefined,
+          "marginRight": undefined,
+          "marginStart": undefined,
+          "marginTop": undefined,
+          "marginVertical": undefined,
           "position": undefined,
           "right": undefined,
           "shadowColor": "#000",
@@ -627,11 +729,23 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           "top": undefined,
         }
       }
+      testID="undefined-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "backgroundColor": "transparent",
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -641,18 +755,27 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="undefined-inner-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
-              "margin": 6,
               "overflow": "hidden",
               "width": 40,
             }
@@ -753,9 +876,29 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderRadius": 20,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
+          "margin": 6,
+          "marginBottom": undefined,
+          "marginEnd": undefined,
+          "marginHorizontal": undefined,
+          "marginLeft": undefined,
+          "marginRight": undefined,
+          "marginStart": undefined,
+          "marginTop": undefined,
+          "marginVertical": undefined,
           "position": undefined,
           "right": undefined,
           "shadowColor": "#000",
@@ -769,11 +912,23 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           "top": undefined,
         }
       }
+      testID="undefined-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "backgroundColor": "transparent",
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -783,18 +938,27 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="undefined-inner-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
-              "margin": 6,
               "overflow": "hidden",
               "width": 40,
             }
@@ -895,9 +1059,29 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderRadius": 20,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
+          "margin": 6,
+          "marginBottom": undefined,
+          "marginEnd": undefined,
+          "marginHorizontal": undefined,
+          "marginLeft": undefined,
+          "marginRight": undefined,
+          "marginStart": undefined,
+          "marginTop": undefined,
+          "marginVertical": undefined,
           "position": undefined,
           "right": undefined,
           "shadowColor": "#000",
@@ -911,11 +1095,23 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           "top": undefined,
         }
       }
+      testID="undefined-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "backgroundColor": "transparent",
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -925,18 +1121,27 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="undefined-inner-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
-              "margin": 6,
               "overflow": "hidden",
               "width": 40,
             }
@@ -1037,9 +1242,29 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderRadius": 20,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
+          "margin": 6,
+          "marginBottom": undefined,
+          "marginEnd": undefined,
+          "marginHorizontal": undefined,
+          "marginLeft": undefined,
+          "marginRight": undefined,
+          "marginStart": undefined,
+          "marginTop": undefined,
+          "marginVertical": undefined,
           "position": undefined,
           "right": undefined,
           "shadowColor": "#000",
@@ -1053,11 +1278,23 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           "top": undefined,
         }
       }
+      testID="undefined-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "backgroundColor": "transparent",
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -1067,18 +1304,27 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="undefined-inner-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
-              "margin": 6,
               "overflow": "hidden",
               "width": 40,
             }
@@ -1237,9 +1483,29 @@ exports[`renders data table pagination with label 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderRadius": 20,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
+          "margin": 6,
+          "marginBottom": undefined,
+          "marginEnd": undefined,
+          "marginHorizontal": undefined,
+          "marginLeft": undefined,
+          "marginRight": undefined,
+          "marginStart": undefined,
+          "marginTop": undefined,
+          "marginVertical": undefined,
           "position": undefined,
           "right": undefined,
           "shadowColor": "#000",
@@ -1253,11 +1519,23 @@ exports[`renders data table pagination with label 1`] = `
           "top": undefined,
         }
       }
+      testID="undefined-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "backgroundColor": "transparent",
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -1267,18 +1545,27 @@ exports[`renders data table pagination with label 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="undefined-inner-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
-              "margin": 6,
               "overflow": "hidden",
               "width": 40,
             }
@@ -1379,9 +1666,29 @@ exports[`renders data table pagination with label 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderRadius": 20,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
+          "margin": 6,
+          "marginBottom": undefined,
+          "marginEnd": undefined,
+          "marginHorizontal": undefined,
+          "marginLeft": undefined,
+          "marginRight": undefined,
+          "marginStart": undefined,
+          "marginTop": undefined,
+          "marginVertical": undefined,
           "position": undefined,
           "right": undefined,
           "shadowColor": "#000",
@@ -1395,11 +1702,23 @@ exports[`renders data table pagination with label 1`] = `
           "top": undefined,
         }
       }
+      testID="undefined-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "backgroundColor": "transparent",
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -1409,18 +1728,27 @@ exports[`renders data table pagination with label 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="undefined-inner-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
-              "margin": 6,
               "overflow": "hidden",
               "width": 40,
             }
@@ -1585,9 +1913,29 @@ exports[`renders data table pagination with options select 1`] = `
         style={
           Object {
             "alignSelf": undefined,
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
             "bottom": undefined,
             "end": undefined,
+            "flex": undefined,
             "left": undefined,
+            "margin": undefined,
+            "marginBottom": undefined,
+            "marginEnd": undefined,
+            "marginHorizontal": undefined,
+            "marginLeft": undefined,
+            "marginRight": 16,
+            "marginStart": undefined,
+            "marginTop": undefined,
+            "marginVertical": undefined,
             "position": undefined,
             "right": undefined,
             "shadowColor": "#000",
@@ -1601,11 +1949,23 @@ exports[`renders data table pagination with options select 1`] = `
             "top": undefined,
           }
         }
+        testID="undefined-outer-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
+              "backgroundColor": "rgba(0, 0, 0, 0)",
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
+              "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
+              "flex": undefined,
               "shadowColor": "#000",
               "shadowOffset": Object {
                 "height": 0,
@@ -1615,17 +1975,26 @@ exports[`renders data table pagination with options select 1`] = `
               "shadowRadius": 0,
             }
           }
+          testID="undefined-inner-layer"
         >
           <View
             collapsable={false}
             style={
               Object {
                 "backgroundColor": "transparent",
+                "borderBottomEndRadius": undefined,
+                "borderBottomLeftRadius": undefined,
+                "borderBottomRightRadius": undefined,
+                "borderBottomStartRadius": undefined,
                 "borderColor": "rgba(121, 116, 126, 1)",
                 "borderRadius": 20,
                 "borderStyle": "solid",
+                "borderTopEndRadius": undefined,
+                "borderTopLeftRadius": undefined,
+                "borderTopRightRadius": undefined,
+                "borderTopStartRadius": undefined,
                 "borderWidth": 1,
-                "marginRight": 16,
+                "flex": undefined,
                 "minWidth": 64,
                 "textAlign": "center",
               }
@@ -1827,9 +2196,29 @@ exports[`renders data table pagination with options select 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderRadius": 20,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
+          "margin": 6,
+          "marginBottom": undefined,
+          "marginEnd": undefined,
+          "marginHorizontal": undefined,
+          "marginLeft": undefined,
+          "marginRight": undefined,
+          "marginStart": undefined,
+          "marginTop": undefined,
+          "marginVertical": undefined,
           "position": undefined,
           "right": undefined,
           "shadowColor": "#000",
@@ -1843,11 +2232,23 @@ exports[`renders data table pagination with options select 1`] = `
           "top": undefined,
         }
       }
+      testID="undefined-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "backgroundColor": "transparent",
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -1857,18 +2258,27 @@ exports[`renders data table pagination with options select 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="undefined-inner-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
-              "margin": 6,
               "overflow": "hidden",
               "width": 40,
             }
@@ -1969,9 +2379,29 @@ exports[`renders data table pagination with options select 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderRadius": 20,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
+          "margin": 6,
+          "marginBottom": undefined,
+          "marginEnd": undefined,
+          "marginHorizontal": undefined,
+          "marginLeft": undefined,
+          "marginRight": undefined,
+          "marginStart": undefined,
+          "marginTop": undefined,
+          "marginVertical": undefined,
           "position": undefined,
           "right": undefined,
           "shadowColor": "#000",
@@ -1985,11 +2415,23 @@ exports[`renders data table pagination with options select 1`] = `
           "top": undefined,
         }
       }
+      testID="undefined-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "backgroundColor": "transparent",
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -1999,18 +2441,27 @@ exports[`renders data table pagination with options select 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="undefined-inner-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
-              "margin": 6,
               "overflow": "hidden",
               "width": 40,
             }
@@ -2111,9 +2562,29 @@ exports[`renders data table pagination with options select 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderRadius": 20,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
+          "margin": 6,
+          "marginBottom": undefined,
+          "marginEnd": undefined,
+          "marginHorizontal": undefined,
+          "marginLeft": undefined,
+          "marginRight": undefined,
+          "marginStart": undefined,
+          "marginTop": undefined,
+          "marginVertical": undefined,
           "position": undefined,
           "right": undefined,
           "shadowColor": "#000",
@@ -2127,11 +2598,23 @@ exports[`renders data table pagination with options select 1`] = `
           "top": undefined,
         }
       }
+      testID="undefined-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "backgroundColor": "transparent",
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -2141,18 +2624,27 @@ exports[`renders data table pagination with options select 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="undefined-inner-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
-              "margin": 6,
               "overflow": "hidden",
               "width": 40,
             }
@@ -2253,9 +2745,29 @@ exports[`renders data table pagination with options select 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
+          "borderRadius": 20,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
+          "margin": 6,
+          "marginBottom": undefined,
+          "marginEnd": undefined,
+          "marginHorizontal": undefined,
+          "marginLeft": undefined,
+          "marginRight": undefined,
+          "marginStart": undefined,
+          "marginTop": undefined,
+          "marginVertical": undefined,
           "position": undefined,
           "right": undefined,
           "shadowColor": "#000",
@@ -2269,11 +2781,23 @@ exports[`renders data table pagination with options select 1`] = `
           "top": undefined,
         }
       }
+      testID="undefined-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "backgroundColor": "transparent",
+            "borderBottomEndRadius": undefined,
+            "borderBottomLeftRadius": undefined,
+            "borderBottomRightRadius": undefined,
+            "borderBottomStartRadius": undefined,
+            "borderRadius": 20,
+            "borderTopEndRadius": undefined,
+            "borderTopLeftRadius": undefined,
+            "borderTopRightRadius": undefined,
+            "borderTopStartRadius": undefined,
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -2283,18 +2807,27 @@ exports[`renders data table pagination with options select 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="undefined-inner-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
               "backgroundColor": undefined,
+              "borderBottomEndRadius": undefined,
+              "borderBottomLeftRadius": undefined,
+              "borderBottomRightRadius": undefined,
+              "borderBottomStartRadius": undefined,
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
+              "borderTopEndRadius": undefined,
+              "borderTopLeftRadius": undefined,
+              "borderTopRightRadius": undefined,
+              "borderTopStartRadius": undefined,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
-              "margin": 6,
               "overflow": "hidden",
               "width": 40,
             }

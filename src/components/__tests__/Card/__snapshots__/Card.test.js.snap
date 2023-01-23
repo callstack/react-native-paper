@@ -6,9 +6,29 @@ exports[`Card renders an outlined card 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderBottomEndRadius": undefined,
+      "borderBottomLeftRadius": undefined,
+      "borderBottomRightRadius": undefined,
+      "borderBottomStartRadius": undefined,
+      "borderRadius": 12,
+      "borderTopEndRadius": undefined,
+      "borderTopLeftRadius": undefined,
+      "borderTopRightRadius": undefined,
+      "borderTopStartRadius": undefined,
       "bottom": undefined,
       "end": undefined,
+      "flex": undefined,
       "left": undefined,
+      "margin": undefined,
+      "marginBottom": undefined,
+      "marginEnd": undefined,
+      "marginHorizontal": undefined,
+      "marginLeft": undefined,
+      "marginRight": undefined,
+      "marginStart": undefined,
+      "marginTop": undefined,
+      "marginVertical": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -22,11 +42,23 @@ exports[`Card renders an outlined card 1`] = `
       "top": undefined,
     }
   }
+  testID="undefined-outer-layer"
 >
   <View
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "transparent",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderRadius": 12,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+        "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -36,14 +68,24 @@ exports[`Card renders an outlined card 1`] = `
         "shadowRadius": 0,
       }
     }
+    testID="undefined-inner-layer"
   >
     <View
       collapsable={false}
       style={
         Object {
           "backgroundColor": "rgba(255, 251, 254, 1)",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
           "borderRadius": 12,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "elevation": 1,
+          "flex": undefined,
         }
       }
     >

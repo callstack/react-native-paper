@@ -227,8 +227,51 @@ const Surface = React.forwardRef<View, Props>(
       bottom,
       start,
       end,
+      margin,
+      marginBottom,
+      marginEnd,
+      marginHorizontal,
+      marginLeft,
+      marginRight,
+      marginStart,
+      marginTop,
+      marginVertical,
+      borderRadius,
+      borderBottomEndRadius,
+      borderBottomLeftRadius,
+      borderBottomRightRadius,
+      borderBottomStartRadius,
+      borderTopEndRadius,
+      borderTopLeftRadius,
+      borderTopRightRadius,
+      borderTopStartRadius,
+      flex,
       ...restStyle
     } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+
+    const marginStyles = {
+      margin,
+      marginBottom,
+      marginEnd,
+      marginHorizontal,
+      marginLeft,
+      marginRight,
+      marginStart,
+      marginTop,
+      marginVertical,
+    };
+
+    const borderRadiusStyles = {
+      borderRadius,
+      borderBottomEndRadius,
+      borderBottomLeftRadius,
+      borderBottomRightRadius,
+      borderBottomStartRadius,
+      borderTopEndRadius,
+      borderTopLeftRadius,
+      borderTopRightRadius,
+      borderTopStartRadius,
+    };
 
     const absoluteStyles = {
       position,
@@ -240,7 +283,23 @@ const Surface = React.forwardRef<View, Props>(
       start,
       end,
     };
-    const sharedStyle = [{ backgroundColor }, restStyle];
+
+    const sharedStyle = [
+      { backgroundColor, flex },
+      borderRadiusStyles,
+      restStyle,
+    ];
+
+    const innerLayerViewStyles = [
+      { backgroundColor, flex },
+      borderRadiusStyles,
+    ];
+
+    const outerLayerViewStyles = [
+      marginStyles,
+      absoluteStyles,
+      innerLayerViewStyles,
+    ];
 
     if (isAnimatedValue(elevation)) {
       const inputRange = [0, 1, 2, 3, 4, 5];
@@ -269,9 +328,13 @@ const Surface = React.forwardRef<View, Props>(
 
       return (
         <Animated.View
-          style={[getStyleForAnimatedShadowLayer(0), absoluteStyles]}
+          style={[getStyleForAnimatedShadowLayer(0), outerLayerViewStyles]}
+          testID={`${testID}-outer-layer`}
         >
-          <Animated.View style={getStyleForAnimatedShadowLayer(1)}>
+          <Animated.View
+            style={[getStyleForAnimatedShadowLayer(1), innerLayerViewStyles]}
+            testID={`${testID}-inner-layer`}
+          >
             <Animated.View {...props} testID={testID} style={sharedStyle}>
               {children}
             </Animated.View>
@@ -297,9 +360,13 @@ const Surface = React.forwardRef<View, Props>(
     return (
       <Animated.View
         ref={ref}
-        style={[getStyleForShadowLayer(0), absoluteStyles]}
+        style={[getStyleForShadowLayer(0), outerLayerViewStyles]}
+        testID={`${testID}-outer-layer`}
       >
-        <Animated.View style={getStyleForShadowLayer(1)}>
+        <Animated.View
+          style={[getStyleForShadowLayer(1), innerLayerViewStyles]}
+          testID={`${testID}-inner-layer`}
+        >
           <Animated.View {...props} testID={testID} style={sharedStyle}>
             {children}
           </Animated.View>

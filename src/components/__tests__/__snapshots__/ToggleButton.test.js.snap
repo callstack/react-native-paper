@@ -6,9 +6,29 @@ exports[`renders disabled toggle button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderBottomEndRadius": undefined,
+      "borderBottomLeftRadius": undefined,
+      "borderBottomRightRadius": undefined,
+      "borderBottomStartRadius": undefined,
+      "borderRadius": 4,
+      "borderTopEndRadius": undefined,
+      "borderTopLeftRadius": undefined,
+      "borderTopRightRadius": undefined,
+      "borderTopStartRadius": undefined,
       "bottom": undefined,
       "end": undefined,
+      "flex": undefined,
       "left": undefined,
+      "margin": 0,
+      "marginBottom": undefined,
+      "marginEnd": undefined,
+      "marginHorizontal": undefined,
+      "marginLeft": undefined,
+      "marginRight": undefined,
+      "marginStart": undefined,
+      "marginTop": undefined,
+      "marginVertical": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -22,11 +42,23 @@ exports[`renders disabled toggle button 1`] = `
       "top": undefined,
     }
   }
+  testID="undefined-outer-layer"
 >
   <View
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "transparent",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderRadius": 4,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+        "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -36,18 +68,27 @@ exports[`renders disabled toggle button 1`] = `
         "shadowRadius": 0,
       }
     }
+    testID="undefined-inner-layer"
   >
     <View
       collapsable={false}
       style={
         Object {
           "backgroundColor": "rgba(29, 25, 43, 0.12)",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
           "borderColor": "rgba(121, 116, 126, 1)",
           "borderRadius": 4,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "borderWidth": 0,
           "elevation": 0,
+          "flex": undefined,
           "height": 42,
-          "margin": 0,
           "overflow": "hidden",
           "width": 42,
         }
@@ -155,9 +196,29 @@ exports[`renders toggle button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderBottomEndRadius": undefined,
+      "borderBottomLeftRadius": undefined,
+      "borderBottomRightRadius": undefined,
+      "borderBottomStartRadius": undefined,
+      "borderRadius": 4,
+      "borderTopEndRadius": undefined,
+      "borderTopLeftRadius": undefined,
+      "borderTopRightRadius": undefined,
+      "borderTopStartRadius": undefined,
       "bottom": undefined,
       "end": undefined,
+      "flex": undefined,
       "left": undefined,
+      "margin": 0,
+      "marginBottom": undefined,
+      "marginEnd": undefined,
+      "marginHorizontal": undefined,
+      "marginLeft": undefined,
+      "marginRight": undefined,
+      "marginStart": undefined,
+      "marginTop": undefined,
+      "marginVertical": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -171,11 +232,23 @@ exports[`renders toggle button 1`] = `
       "top": undefined,
     }
   }
+  testID="undefined-outer-layer"
 >
   <View
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "transparent",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderRadius": 4,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+        "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -185,18 +258,27 @@ exports[`renders toggle button 1`] = `
         "shadowRadius": 0,
       }
     }
+    testID="undefined-inner-layer"
   >
     <View
       collapsable={false}
       style={
         Object {
           "backgroundColor": "rgba(29, 25, 43, 0.12)",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
           "borderColor": "rgba(121, 116, 126, 1)",
           "borderRadius": 4,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "borderWidth": 0,
           "elevation": 0,
+          "flex": undefined,
           "height": 42,
-          "margin": 0,
           "overflow": "hidden",
           "width": 42,
         }
@@ -298,9 +380,29 @@ exports[`renders unchecked toggle button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderBottomEndRadius": undefined,
+      "borderBottomLeftRadius": undefined,
+      "borderBottomRightRadius": undefined,
+      "borderBottomStartRadius": undefined,
+      "borderRadius": 4,
+      "borderTopEndRadius": undefined,
+      "borderTopLeftRadius": undefined,
+      "borderTopRightRadius": undefined,
+      "borderTopStartRadius": undefined,
       "bottom": undefined,
       "end": undefined,
+      "flex": undefined,
       "left": undefined,
+      "margin": 0,
+      "marginBottom": undefined,
+      "marginEnd": undefined,
+      "marginHorizontal": undefined,
+      "marginLeft": undefined,
+      "marginRight": undefined,
+      "marginStart": undefined,
+      "marginTop": undefined,
+      "marginVertical": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -314,11 +416,23 @@ exports[`renders unchecked toggle button 1`] = `
       "top": undefined,
     }
   }
+  testID="undefined-outer-layer"
 >
   <View
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "transparent",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderRadius": 4,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+        "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -328,18 +442,27 @@ exports[`renders unchecked toggle button 1`] = `
         "shadowRadius": 0,
       }
     }
+    testID="undefined-inner-layer"
   >
     <View
       collapsable={false}
       style={
         Object {
           "backgroundColor": "transparent",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
           "borderColor": "rgba(121, 116, 126, 1)",
           "borderRadius": 4,
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "borderWidth": 0,
           "elevation": 0,
+          "flex": undefined,
           "height": 42,
-          "margin": 0,
           "overflow": "hidden",
           "width": 42,
         }

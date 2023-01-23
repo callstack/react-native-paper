@@ -398,7 +398,7 @@ const FABGroup = ({
                       {
                         transform: [{ scale: scales[i] }],
                         opacity: opacities[i],
-                        backgroundColor: stackedFABBackgroundColor,
+                        backgroundColor: 'transparent',
                       },
                       isV3 && { transform: [{ translateY: translations[i] }] },
                       it.style,

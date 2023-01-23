@@ -6,9 +6,29 @@ exports[`renders chip with close button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderBottomEndRadius": undefined,
+      "borderBottomLeftRadius": undefined,
+      "borderBottomRightRadius": undefined,
+      "borderBottomStartRadius": undefined,
+      "borderRadius": 8,
+      "borderTopEndRadius": undefined,
+      "borderTopLeftRadius": undefined,
+      "borderTopRightRadius": undefined,
+      "borderTopStartRadius": undefined,
       "bottom": undefined,
       "end": undefined,
+      "flex": undefined,
       "left": undefined,
+      "margin": undefined,
+      "marginBottom": undefined,
+      "marginEnd": undefined,
+      "marginHorizontal": undefined,
+      "marginLeft": undefined,
+      "marginRight": undefined,
+      "marginStart": undefined,
+      "marginTop": undefined,
+      "marginVertical": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -22,11 +42,23 @@ exports[`renders chip with close button 1`] = `
       "top": undefined,
     }
   }
+  testID="undefined-outer-layer"
 >
   <View
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderRadius": 8,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+        "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -36,16 +68,26 @@ exports[`renders chip with close button 1`] = `
         "shadowRadius": 0,
       }
     }
+    testID="undefined-inner-layer"
   >
     <View
       collapsable={false}
       style={
         Object {
           "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
           "borderColor": "rgba(121, 116, 126, 1)",
           "borderRadius": 8,
           "borderStyle": "solid",
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "borderWidth": 0,
+          "flex": undefined,
           "flexDirection": "column",
         }
       }
@@ -291,9 +333,29 @@ exports[`renders chip with custom close button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderBottomEndRadius": undefined,
+      "borderBottomLeftRadius": undefined,
+      "borderBottomRightRadius": undefined,
+      "borderBottomStartRadius": undefined,
+      "borderRadius": 8,
+      "borderTopEndRadius": undefined,
+      "borderTopLeftRadius": undefined,
+      "borderTopRightRadius": undefined,
+      "borderTopStartRadius": undefined,
       "bottom": undefined,
       "end": undefined,
+      "flex": undefined,
       "left": undefined,
+      "margin": undefined,
+      "marginBottom": undefined,
+      "marginEnd": undefined,
+      "marginHorizontal": undefined,
+      "marginLeft": undefined,
+      "marginRight": undefined,
+      "marginStart": undefined,
+      "marginTop": undefined,
+      "marginVertical": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -307,11 +369,23 @@ exports[`renders chip with custom close button 1`] = `
       "top": undefined,
     }
   }
+  testID="undefined-outer-layer"
 >
   <View
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderRadius": 8,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+        "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -321,16 +395,26 @@ exports[`renders chip with custom close button 1`] = `
         "shadowRadius": 0,
       }
     }
+    testID="undefined-inner-layer"
   >
     <View
       collapsable={false}
       style={
         Object {
           "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
           "borderColor": "rgba(121, 116, 126, 1)",
           "borderRadius": 8,
           "borderStyle": "solid",
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "borderWidth": 0,
+          "flex": undefined,
           "flexDirection": "column",
         }
       }
@@ -576,9 +660,29 @@ exports[`renders chip with icon 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderBottomEndRadius": undefined,
+      "borderBottomLeftRadius": undefined,
+      "borderBottomRightRadius": undefined,
+      "borderBottomStartRadius": undefined,
+      "borderRadius": 8,
+      "borderTopEndRadius": undefined,
+      "borderTopLeftRadius": undefined,
+      "borderTopRightRadius": undefined,
+      "borderTopStartRadius": undefined,
       "bottom": undefined,
       "end": undefined,
+      "flex": undefined,
       "left": undefined,
+      "margin": undefined,
+      "marginBottom": undefined,
+      "marginEnd": undefined,
+      "marginHorizontal": undefined,
+      "marginLeft": undefined,
+      "marginRight": undefined,
+      "marginStart": undefined,
+      "marginTop": undefined,
+      "marginVertical": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -592,11 +696,23 @@ exports[`renders chip with icon 1`] = `
       "top": undefined,
     }
   }
+  testID="undefined-outer-layer"
 >
   <View
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderRadius": 8,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+        "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -606,16 +722,26 @@ exports[`renders chip with icon 1`] = `
         "shadowRadius": 0,
       }
     }
+    testID="undefined-inner-layer"
   >
     <View
       collapsable={false}
       style={
         Object {
           "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
           "borderColor": "rgba(121, 116, 126, 1)",
           "borderRadius": 8,
           "borderStyle": "solid",
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "borderWidth": 0,
+          "flex": undefined,
           "flexDirection": "column",
         }
       }
@@ -784,9 +910,29 @@ exports[`renders chip with onPress 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderBottomEndRadius": undefined,
+      "borderBottomLeftRadius": undefined,
+      "borderBottomRightRadius": undefined,
+      "borderBottomStartRadius": undefined,
+      "borderRadius": 8,
+      "borderTopEndRadius": undefined,
+      "borderTopLeftRadius": undefined,
+      "borderTopRightRadius": undefined,
+      "borderTopStartRadius": undefined,
       "bottom": undefined,
       "end": undefined,
+      "flex": undefined,
       "left": undefined,
+      "margin": undefined,
+      "marginBottom": undefined,
+      "marginEnd": undefined,
+      "marginHorizontal": undefined,
+      "marginLeft": undefined,
+      "marginRight": undefined,
+      "marginStart": undefined,
+      "marginTop": undefined,
+      "marginVertical": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -800,11 +946,23 @@ exports[`renders chip with onPress 1`] = `
       "top": undefined,
     }
   }
+  testID="undefined-outer-layer"
 >
   <View
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderRadius": 8,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+        "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -814,16 +972,26 @@ exports[`renders chip with onPress 1`] = `
         "shadowRadius": 0,
       }
     }
+    testID="undefined-inner-layer"
   >
     <View
       collapsable={false}
       style={
         Object {
           "backgroundColor": "rgba(232, 222, 248, 1)",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
           "borderColor": "rgba(121, 116, 126, 1)",
           "borderRadius": 8,
           "borderStyle": "solid",
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "borderWidth": 0,
+          "flex": undefined,
           "flexDirection": "column",
         }
       }
@@ -940,9 +1108,29 @@ exports[`renders outlined disabled chip 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderBottomEndRadius": undefined,
+      "borderBottomLeftRadius": undefined,
+      "borderBottomRightRadius": undefined,
+      "borderBottomStartRadius": undefined,
+      "borderRadius": 8,
+      "borderTopEndRadius": undefined,
+      "borderTopLeftRadius": undefined,
+      "borderTopRightRadius": undefined,
+      "borderTopStartRadius": undefined,
       "bottom": undefined,
       "end": undefined,
+      "flex": undefined,
       "left": undefined,
+      "margin": undefined,
+      "marginBottom": undefined,
+      "marginEnd": undefined,
+      "marginHorizontal": undefined,
+      "marginLeft": undefined,
+      "marginRight": undefined,
+      "marginStart": undefined,
+      "marginTop": undefined,
+      "marginVertical": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -956,11 +1144,23 @@ exports[`renders outlined disabled chip 1`] = `
       "top": undefined,
     }
   }
+  testID="undefined-outer-layer"
 >
   <View
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderRadius": 8,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+        "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -970,16 +1170,26 @@ exports[`renders outlined disabled chip 1`] = `
         "shadowRadius": 0,
       }
     }
+    testID="undefined-inner-layer"
   >
     <View
       collapsable={false}
       style={
         Object {
           "backgroundColor": "transparent",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
           "borderColor": "rgba(73, 69, 79, 0.12)",
           "borderRadius": 8,
           "borderStyle": "solid",
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "borderWidth": 1,
+          "flex": undefined,
           "flexDirection": "column",
         }
       }
@@ -1096,9 +1306,29 @@ exports[`renders selected chip 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderBottomEndRadius": undefined,
+      "borderBottomLeftRadius": undefined,
+      "borderBottomRightRadius": undefined,
+      "borderBottomStartRadius": undefined,
+      "borderRadius": 8,
+      "borderTopEndRadius": undefined,
+      "borderTopLeftRadius": undefined,
+      "borderTopRightRadius": undefined,
+      "borderTopStartRadius": undefined,
       "bottom": undefined,
       "end": undefined,
+      "flex": undefined,
       "left": undefined,
+      "margin": undefined,
+      "marginBottom": undefined,
+      "marginEnd": undefined,
+      "marginHorizontal": undefined,
+      "marginLeft": undefined,
+      "marginRight": undefined,
+      "marginStart": undefined,
+      "marginTop": undefined,
+      "marginVertical": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -1112,11 +1342,23 @@ exports[`renders selected chip 1`] = `
       "top": undefined,
     }
   }
+  testID="undefined-outer-layer"
 >
   <View
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderBottomEndRadius": undefined,
+        "borderBottomLeftRadius": undefined,
+        "borderBottomRightRadius": undefined,
+        "borderBottomStartRadius": undefined,
+        "borderRadius": 8,
+        "borderTopEndRadius": undefined,
+        "borderTopLeftRadius": undefined,
+        "borderTopRightRadius": undefined,
+        "borderTopStartRadius": undefined,
+        "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -1126,16 +1368,26 @@ exports[`renders selected chip 1`] = `
         "shadowRadius": 0,
       }
     }
+    testID="undefined-inner-layer"
   >
     <View
       collapsable={false}
       style={
         Object {
           "backgroundColor": "rgb(232, 222, 248)",
+          "borderBottomEndRadius": undefined,
+          "borderBottomLeftRadius": undefined,
+          "borderBottomRightRadius": undefined,
+          "borderBottomStartRadius": undefined,
           "borderColor": "rgba(121, 116, 126, 1)",
           "borderRadius": 8,
           "borderStyle": "solid",
+          "borderTopEndRadius": undefined,
+          "borderTopLeftRadius": undefined,
+          "borderTopRightRadius": undefined,
+          "borderTopStartRadius": undefined,
           "borderWidth": 0,
+          "flex": undefined,
           "flexDirection": "column",
         }
       }
