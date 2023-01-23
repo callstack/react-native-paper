@@ -105,6 +105,9 @@ var MDXContent = /*#__PURE__*/function (_React$Component) {
         name: "h1",
         components: components
       }, "Theming"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+        name: "p",
+        components: components
+      }, /*#__PURE__*/React.createElement("b", null, "Note:"), " To observe changes related to switching between light and dark mode in the app, ensure that the ", /*#__PURE__*/React.createElement("i", null, "\"Override force-dark\""), " feature in the ", /*#__PURE__*/React.createElement("i", null, "\"developer options\""), " settings on your Android device is ", /*#__PURE__*/React.createElement("b", null, "not overridden"), "."), /*#__PURE__*/React.createElement(_tag.MDXTag, {
         name: "h2",
         components: components
       }, "Applying a theme to the whole app"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
