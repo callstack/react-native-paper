@@ -28,6 +28,11 @@ import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
+import {
+  getActiveTintColor,
+  getInactiveTintColor,
+  getLabelColor,
+} from './utils';
 
 type Route = {
   key: string;
@@ -648,24 +653,18 @@ const BottomNavigation = ({
 
   const textColor = isDark ? white : black;
 
-  const activeTintColor =
-    typeof activeColor !== 'undefined'
-      ? activeColor
-      : isV3
-      ? theme.colors.onSecondaryContainer
-      : textColor;
+  const activeTintColor = getActiveTintColor({
+    activeColor,
+    defaultColor: textColor,
+    theme,
+  });
 
-  const inactiveTintColor =
-    typeof inactiveColor !== 'undefined'
-      ? inactiveColor
-      : isV3
-      ? theme.colors.onSurfaceVariant
-      : color(textColor).alpha(0.5).rgb().string();
-
-  const touchColor = color(activeColor || activeTintColor)
-    .alpha(0.12)
-    .rgb()
-    .string();
+  const inactiveTintColor = getInactiveTintColor({
+    inactiveColor,
+    defaultColor: textColor,
+    theme,
+  });
+  const touchColor = color(activeTintColor).alpha(0.12).rgb().string();
 
   const maxTabWidth = routes.length > 3 ? MIN_TAB_WIDTH : MAX_TAB_WIDTH;
   const maxTabBarWidth = maxTabWidth * routes.length;
@@ -746,7 +745,7 @@ const BottomNavigation = ({
                 style={[
                   styles.content,
                   {
-                    opacity: opacity,
+                    opacity,
                     transform: [{ translateX: left }, { translateY: top }],
                   },
                 ]}
@@ -891,17 +890,21 @@ const BottomNavigation = ({
 
               const badge = getBadge({ route });
 
-              const activeLabelColor = !isV3
-                ? activeTintColor
-                : focused
-                ? theme.colors.onSurface
-                : theme.colors.onSurfaceVariant;
+              const activeLabelColor = getLabelColor({
+                tintColor: activeTintColor,
+                hasColor: Boolean(activeColor),
+                focused,
+                defaultColor: textColor,
+                theme,
+              });
 
-              const inactiveLabelColor = !isV3
-                ? inactiveTintColor
-                : focused
-                ? theme.colors.onSurface
-                : theme.colors.onSurfaceVariant;
+              const inactiveLabelColor = getLabelColor({
+                tintColor: inactiveTintColor,
+                hasColor: Boolean(inactiveColor),
+                focused,
+                defaultColor: textColor,
+                theme,
+              });
 
               const badgeStyle = {
                 top: !isV3 ? -2 : typeof badge === 'boolean' ? 4 : 2,

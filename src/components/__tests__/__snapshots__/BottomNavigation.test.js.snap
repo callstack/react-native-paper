@@ -6889,7 +6889,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                               "textAlign": "center",
                             },
                             Object {
-                              "color": "rgba(28, 27, 31, 1)",
+                              "color": "#FBF7DB",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",
@@ -6943,7 +6943,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                               "textAlign": "center",
                             },
                             Object {
-                              "color": "rgba(28, 27, 31, 1)",
+                              "color": "#853D4B",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",
@@ -7197,7 +7197,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                               "textAlign": "center",
                             },
                             Object {
-                              "color": "rgba(73, 69, 79, 1)",
+                              "color": "#FBF7DB",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",
@@ -7251,7 +7251,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                               "textAlign": "center",
                             },
                             Object {
-                              "color": "rgba(73, 69, 79, 1)",
+                              "color": "#853D4B",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",
@@ -7505,7 +7505,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                               "textAlign": "center",
                             },
                             Object {
-                              "color": "rgba(73, 69, 79, 1)",
+                              "color": "#FBF7DB",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",
@@ -7559,7 +7559,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                               "textAlign": "center",
                             },
                             Object {
-                              "color": "rgba(73, 69, 79, 1)",
+                              "color": "#853D4B",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",
@@ -8008,7 +8008,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                               "textAlign": "center",
                             },
                             Object {
-                              "color": "rgba(28, 27, 31, 1)",
+                              "color": "#FBF7DB",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",
@@ -8268,7 +8268,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                               "textAlign": "center",
                             },
                             Object {
-                              "color": "rgba(73, 69, 79, 1)",
+                              "color": "#FBF7DB",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",
@@ -8528,7 +8528,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                               "textAlign": "center",
                             },
                             Object {
-                              "color": "rgba(73, 69, 79, 1)",
+                              "color": "#FBF7DB",
                               "fontFamily": "System",
                               "fontSize": 12,
                               "fontWeight": "500",

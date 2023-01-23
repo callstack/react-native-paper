@@ -2,11 +2,19 @@ import * as React from 'react';
 import { StyleSheet, Easing, Animated, Platform } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
+import color from 'color';
 import renderer from 'react-test-renderer';
 
+import { getTheme } from '../../core/theming';
 import { red300 } from '../../styles/themes/v2/colors';
+import { MD3Colors } from '../../styles/themes/v3/tokens';
 import BottomNavigation from '../BottomNavigation/BottomNavigation.tsx';
 import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRouteScreen.tsx';
+import {
+  getActiveTintColor,
+  getInactiveTintColor,
+  getLabelColor,
+} from '../BottomNavigation/utils';
 
 const styles = StyleSheet.create({
   labelColor: {
@@ -388,4 +396,64 @@ it('renders bottom navigation with getLazy', () => {
   expect(tree).toMatchSnapshot();
 
   expect(tree.queryByTestId('RouteScreen: 2')).toBeNull();
+});
+
+describe('getActiveTintColor', () => {
+  it.each`
+    activeColor  | defaultColor | useV3    | expected
+    ${'#FBF7DB'} | ${'#fff'}    | ${true}  | ${'#FBF7DB'}
+    ${undefined} | ${'#fff'}    | ${true}  | ${MD3Colors.secondary10}
+    ${undefined} | ${'#fff'}    | ${false} | ${'#fff'}
+  `(
+    'returns $expected when activeColor: $activeColor and useV3: $useV3',
+    ({ activeColor, defaultColor, useV3, expected }) => {
+      const theme = getTheme(false, useV3);
+      const color = getActiveTintColor({ activeColor, defaultColor, theme });
+      expect(color).toBe(expected);
+    }
+  );
+});
+
+describe('getInactiveTintColor', () => {
+  it.each`
+    inactiveColor | defaultColor | useV3    | expected
+    ${'#853D4B'}  | ${'#fff'}    | ${true}  | ${'#853D4B'}
+    ${undefined}  | ${'#fff'}    | ${true}  | ${MD3Colors.neutralVariant30}
+    ${undefined}  | ${'#fff'}    | ${false} | ${color('#fff').alpha(0.5).rgb().string()}
+  `(
+    'returns $expected when inactiveColor: $inactiveColor and useV3: $useV3',
+    ({ inactiveColor, defaultColor, useV3, expected }) => {
+      const theme = getTheme(false, useV3);
+      const color = getInactiveTintColor({
+        inactiveColor,
+        defaultColor,
+        theme,
+      });
+      expect(color).toBe(expected);
+    }
+  );
+});
+
+describe('getLabelColor', () => {
+  it.each`
+    tintColor    | focused  | defaultColor | useV3    | expected
+    ${'#FBF7DB'} | ${true}  | ${'#fff'}    | ${true}  | ${'#FBF7DB'}
+    ${'#853D4B'} | ${true}  | ${'#fff'}    | ${true}  | ${'#853D4B'}
+    ${undefined} | ${true}  | ${'#fff'}    | ${true}  | ${MD3Colors.neutral10}
+    ${undefined} | ${false} | ${'#fff'}    | ${true}  | ${MD3Colors.neutralVariant30}
+    ${undefined} | ${false} | ${'#fff'}    | ${false} | ${'#fff'}
+  `(
+    'returns $expected when tintColor: $tintColor, focused: $focused useV3: $useV3',
+    ({ tintColor, focused, defaultColor, useV3, expected }) => {
+      const theme = getTheme(false, useV3);
+      const color = getLabelColor({
+        tintColor,
+        hasColor: Boolean(tintColor),
+        focused,
+        defaultColor,
+        theme,
+      });
+      expect(color).toBe(expected);
+    }
+  );
 });
