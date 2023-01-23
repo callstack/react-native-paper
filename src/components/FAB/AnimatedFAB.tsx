@@ -91,7 +91,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
    */
   extended: boolean;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    *
    * Color mappings variant for combinations of container and icon colors.
    */

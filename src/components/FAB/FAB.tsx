@@ -23,13 +23,25 @@ type FABSize = 'small' | 'medium' | 'large';
 
 type FABMode = 'flat' | 'elevated';
 
+type IconOrLabel =
+  | {
+      icon: IconSource;
+      label?: string;
+    }
+  | {
+      icon?: IconSource;
+      label: string;
+    };
+
 export type Props = $RemoveChildren<typeof Surface> & {
+  // For `icon` and `label` props their types are duplicated due to the generation of documentation.
+  // Appropriate type for them is `IconOrLabel` contains the both union and intersection types.
   /**
-   * Icon to display for the `FAB`.
+   * Icon to display for the `FAB`. It's optional only if `label` is defined.
    */
-  icon: IconSource;
+  icon?: IconSource;
   /**
-   * Optional label for extended `FAB`.
+   * Optional label for extended `FAB`. It's optional only if `icon` is defined.
    */
   label?: string;
   /**
@@ -117,7 +129,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
   theme?: ThemeProp;
   testID?: string;
   ref?: React.RefObject<View>;
-};
+} & IconOrLabel;
 
 /**
  * A floating action button represents the primary action in an application.
