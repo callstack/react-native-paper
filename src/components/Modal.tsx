@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import useEventCallback from 'use-event-callback';
 import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../core/theming';
@@ -103,7 +104,7 @@ function Modal({
   dismissable = true,
   visible = false,
   overlayAccessibilityLabel = 'Close modal',
-  onDismiss,
+  onDismiss = () => {},
   children,
   contentContainerStyle,
   style,
@@ -117,6 +118,8 @@ function Modal({
     visibleRef.current = visible;
   });
 
+  const onDismissCallback = useEventCallback(onDismiss);
+
   const { scale } = theme.animation;
 
   const { top, bottom } = useSafeAreaInsets();
@@ -129,16 +132,16 @@ function Modal({
     setRendered(true);
   }
 
-  const showModal = () => {
+  const showModal = React.useCallback(() => {
     Animated.timing(opacity, {
       toValue: 1,
       duration: scale * DEFAULT_DURATION,
       easing: Easing.out(Easing.cubic),
       useNativeDriver: true,
     }).start();
-  };
+  }, [opacity, scale]);
 
-  const hideModal = () => {
+  const hideModal = React.useCallback(() => {
     Animated.timing(opacity, {
       toValue: 0,
       duration: scale * DEFAULT_DURATION,
@@ -149,8 +152,8 @@ function Modal({
         return;
       }
 
-      if (visible && onDismiss) {
-        onDismiss();
+      if (visible) {
+        onDismissCallback();
       }
 
       if (visibleRef.current) {
@@ -159,7 +162,7 @@ function Modal({
         setRendered(false);
       }
     });
-  };
+  }, [onDismissCallback, opacity, scale, showModal, visible]);
 
   React.useEffect(() => {
     if (!visible) {
@@ -180,7 +183,7 @@ function Modal({
       onHardwareBackPress
     );
     return () => subscription.remove();
-  });
+  }, [dismissable, hideModal, visible]);
 
   const prevVisible = React.useRef<boolean | null>(null);
 
@@ -234,6 +237,7 @@ function Modal({
         testID={`${testID}-wrapper`}
       >
         <Surface
+          testID={`${testID}-surface`}
           theme={theme}
           style={
             [

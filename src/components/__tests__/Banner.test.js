@@ -137,7 +137,7 @@ describe('animations', () => {
 
   describe('when component is rendered hidden', () => {
     // This behaviour is probably a bug. Needs triage before next version.
-    it('should fire onHideAnimationFinished on mount', () => {
+    it('will fire onHideAnimationFinished on mount', () => {
       renderer.create(
         <Banner
           onShowAnimationFinished={showCallback}
@@ -186,7 +186,7 @@ describe('animations', () => {
 
   describe('when component is rendered visible', () => {
     // This behaviour is probably a bug. Needs triage before next version.
-    it('should fire onShowAnimationFinished on mount', () => {
+    it('will fire onShowAnimationFinished on mount', () => {
       renderer.create(
         <Banner
           onShowAnimationFinished={showCallback}

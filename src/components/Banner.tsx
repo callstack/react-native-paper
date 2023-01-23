@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Animated, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
+import useEventCallback from 'use-event-callback';
+
 import { useInternalTheme } from '../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../types';
 import Button from './Button/Button';
@@ -149,17 +151,8 @@ const Banner = ({
     measured: false,
   });
 
-  const showCallback = React.useRef<Props['onShowAnimationFinished']>(
-    onShowAnimationFinished
-  );
-  const hideCallback = React.useRef<Props['onHideAnimationFinished']>(
-    onHideAnimationFinished
-  );
-
-  React.useEffect(() => {
-    showCallback.current = onShowAnimationFinished;
-    hideCallback.current = onHideAnimationFinished;
-  });
+  const showCallback = useEventCallback(onShowAnimationFinished);
+  const hideCallback = useEventCallback(onHideAnimationFinished);
 
   const { scale } = theme.animation;
 
@@ -170,14 +163,14 @@ const Banner = ({
         duration: 250 * scale,
         toValue: 1,
         useNativeDriver: false,
-      }).start(showCallback.current);
+      }).start(showCallback);
     } else {
       // hide
       Animated.timing(position, {
         duration: 200 * scale,
         toValue: 0,
         useNativeDriver: false,
-      }).start(hideCallback.current);
+      }).start(hideCallback);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible, position, scale]);
