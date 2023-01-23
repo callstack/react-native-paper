@@ -1801,7 +1801,7 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@react-native-async-storage/async-storage@~1.17.3":
+"@react-native-async-storage/async-storage@~1.17.10":
   version "1.17.11"
   resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.17.11.tgz#7ec329c1b9f610e344602e806b04d7c928a2341d"
   integrity sha512-bzs45n5HNcDq6mxXnSsOHysZWn1SbbebNxldBXCQs8dSvF8Aor9KCdpm+TpnnGweK3R6diqsT8lFhX77VX0NFw==
