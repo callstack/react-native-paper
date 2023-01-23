@@ -118,6 +118,7 @@ const TextInputAffix = ({
   text,
   textStyle: labelStyle,
   theme: themeOverrides,
+  onLayout: onTextLayout,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { AFFIX_OFFSET } = getConstants(theme.isV3);
@@ -167,6 +168,8 @@ const TextInputAffix = ({
       <Text
         maxFontSizeMultiplier={maxFontSizeMultiplier}
         style={[{ color: textColor }, textStyle, labelStyle]}
+        onLayout={onTextLayout}
+        testID={`${testID}-text`}
       >
         {text}
       </Text>
