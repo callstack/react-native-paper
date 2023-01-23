@@ -3,9 +3,9 @@ import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import color from 'color';
 
-import { withInternalTheme } from '../core/theming';
+import { useInternalTheme } from '../core/theming';
 import { black, white } from '../styles/themes/v2/colors';
-import type { $RemoveChildren, InternalTheme } from '../types';
+import type { $RemoveChildren, ThemeProp } from '../types';
 
 export type Props = $RemoveChildren<typeof View> & {
   /**
@@ -27,7 +27,7 @@ export type Props = $RemoveChildren<typeof View> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 /**
@@ -61,10 +61,11 @@ const Divider = ({
   leftInset,
   horizontalInset = false,
   style,
-  theme,
+  theme: themeOverrides,
   bold = false,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { dark: isDarkTheme, isV3 } = theme;
 
   const dividerColor = isV3
@@ -104,4 +105,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(Divider);
+export default Divider;

@@ -7,7 +7,9 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useTheme } from '../../core/theming';
+import type { ThemeProp } from 'src/types';
+
+import { useInternalTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 import SegmentedButtonItem from './SegmentedButtonItem';
 import { getDisabledSegmentedButtonStyle } from './utils';
@@ -72,6 +74,7 @@ export type Props = {
    */
   density?: 'regular' | 'small' | 'medium' | 'high';
   style?: StyleProp<ViewStyle>;
+  theme?: ThemeProp;
 } & ConditionalValue;
 
 /**
@@ -128,8 +131,10 @@ const SegmentedButtons = ({
   multiSelect,
   density,
   style,
+  theme: themeOverrides,
 }: Props) => {
-  const theme = useTheme();
+  const theme = useInternalTheme(themeOverrides);
+
   return (
     <View style={[styles.row, style]}>
       {buttons.map((item, i) => {
@@ -169,6 +174,7 @@ const SegmentedButtons = ({
             density={density}
             onPress={onPress}
             style={[item.style, disabledChildStyle]}
+            theme={theme}
           />
         );
       })}

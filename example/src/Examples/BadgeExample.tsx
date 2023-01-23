@@ -21,7 +21,9 @@ const BadgeExample = () => {
   return (
     <ScreenWrapper>
       <View style={[styles.row, styles.item]}>
-      <Text style={styles.label} variant="bodyMedium">Show badges</Text>
+        <Text style={styles.label} variant="bodyMedium">
+          Show badges
+        </Text>
         <Switch
           value={visible}
           onValueChange={(visible) => setVisible(visible)}

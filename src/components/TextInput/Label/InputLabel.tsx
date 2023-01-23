@@ -30,6 +30,7 @@ const InputLabel = (props: InputLabelProps) => {
     maxFontSizeMultiplier,
     testID,
     contentStyle,
+    theme,
   } = props.labelProps;
 
   const labelTranslationX = {
@@ -75,7 +76,13 @@ const InputLabel = (props: InputLabelProps) => {
   };
 
   const textColor = error && errorColor ? errorColor : placeholderColor;
-
+  // Hide the label in minimized state until we measure it's width
+  const opacity =
+    parentState.value || parentState.focused
+      ? parentState.labelLayout.measured
+        ? 1
+        : 0
+      : 1;
   return label ? (
     // Position colored placeholder and gray placeholder on top of each other and crossfade them
     // This gives the effect of animating the color, but allows us to use native driver
@@ -84,21 +91,14 @@ const InputLabel = (props: InputLabelProps) => {
       style={[
         StyleSheet.absoluteFill,
         styles.labelContainer,
-        {
-          opacity:
-            // Hide the label in minimized state until we measure it's width
-            parentState.value || parentState.focused
-              ? parentState.labelLayout.measured
-                ? 1
-                : 0
-              : 1,
-        },
+        { opacity },
         labelTranslationX,
       ]}
     >
       {labelBackground?.({
         parentState,
         labelStyle,
+        theme,
         labelProps: props.labelProps,
         maxFontSizeMultiplier: maxFontSizeMultiplier,
       })}

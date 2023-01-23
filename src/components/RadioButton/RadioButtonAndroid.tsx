@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, InternalTheme } from '../../types';
 import { getAndroidSelectionControlColor } from '../Checkbox/utils';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -36,7 +36,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: InternalTheme;
   /**
    * testID to be used on tests.
    */
@@ -64,12 +64,13 @@ const BORDER_WIDTH = 2;
 const RadioButtonAndroid = ({
   disabled,
   onPress,
-  theme,
+  theme: themeOverrides,
   value,
   status,
   testID,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { current: borderAnim } = React.useRef<Animated.Value>(
     new Animated.Value(BORDER_WIDTH)
   );
@@ -149,6 +150,7 @@ const RadioButtonAndroid = ({
             accessibilityLiveRegion="polite"
             style={styles.container}
             testID={testID}
+            theme={theme}
           >
             <Animated.View
               style={[
@@ -203,9 +205,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(RadioButtonAndroid);
+export default RadioButtonAndroid;
 
 // @component-docs ignore-next-line
-const RadioButtonAndroidWithTheme = withInternalTheme(RadioButtonAndroid);
-// @component-docs ignore-next-line
-export { RadioButtonAndroidWithTheme as RadioButtonAndroid };
+export { RadioButtonAndroid };

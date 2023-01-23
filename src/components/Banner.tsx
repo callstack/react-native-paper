@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Animated, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-import { withInternalTheme } from '../core/theming';
-import type { $RemoveChildren, InternalTheme } from '../types';
+import { useInternalTheme } from '../core/theming';
+import type { $RemoveChildren, ThemeProp } from '../types';
 import Button from './Button/Button';
 import Icon, { IconSource } from './Icon';
 import Surface from './Surface';
@@ -52,7 +52,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * @optional
    * Optional callback that will be called after the opening animation finished running normally
@@ -132,11 +132,12 @@ const Banner = ({
   contentStyle,
   elevation = 1,
   style,
-  theme,
+  theme: themeOverrides,
   onShowAnimationFinished = () => {},
   onHideAnimationFinished = () => {},
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { current: position } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
@@ -166,6 +167,7 @@ const Banner = ({
         useNativeDriver: false,
       }).start(onHideAnimationFinished);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible, position, scale]);
 
   const handleLayout = ({ nativeEvent }: NativeEvent) => {
@@ -207,7 +209,7 @@ const Banner = ({
             !layout.measured && !visible
               ? // If we haven't measured banner's height yet and it's invisible,
                 // hide it with opacity: 0 so user doesn't see it
-                { opacity: 0 }
+                styles.transparent
               : null,
           ]}
         >
@@ -240,6 +242,7 @@ const Banner = ({
                 mode="text"
                 style={styles.button}
                 textColor={theme.colors?.primary}
+                theme={theme}
                 {...others}
               >
                 {label}
@@ -289,6 +292,9 @@ const styles = StyleSheet.create({
   elevation: {
     elevation: 1,
   },
+  transparent: {
+    opacity: 0,
+  },
 });
 
-export default withInternalTheme(Banner);
+export default Banner;

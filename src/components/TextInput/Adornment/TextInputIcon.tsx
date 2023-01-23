@@ -62,9 +62,18 @@ const IconAdornment: React.FunctionComponent<
     icon: React.ReactNode;
     topPosition: number;
     side: 'left' | 'right';
+    theme?: ThemeProp;
   } & Omit<StyleContextType, 'style'>
-> = ({ icon, topPosition, side, isTextInputFocused, forceFocus, testID }) => {
-  const { isV3 } = useInternalTheme();
+> = ({
+  icon,
+  topPosition,
+  side,
+  isTextInputFocused,
+  forceFocus,
+  testID,
+  theme: themeOverrides,
+}) => {
+  const { isV3 } = useInternalTheme(themeOverrides);
   const { ICON_OFFSET } = getConstants(isV3);
 
   const style = {
@@ -113,6 +122,7 @@ const TextInputIcon = ({
   onPress,
   forceTextInputFocus,
   color,
+  theme: themeOverrides,
   ...rest
 }: Props) => {
   const { style, isTextInputFocused, forceFocus, testID } =
@@ -129,7 +139,7 @@ const TextInputIcon = ({
     [forceTextInputFocus, forceFocus, isTextInputFocused, onPress]
   );
 
-  const theme = useInternalTheme();
+  const theme = useInternalTheme(themeOverrides);
 
   let iconColor = color;
 
@@ -153,6 +163,7 @@ const TextInputIcon = ({
           typeof color === 'function' ? color(isTextInputFocused) : iconColor
         }
         testID={testID}
+        theme={themeOverrides}
         {...rest}
       />
     </View>

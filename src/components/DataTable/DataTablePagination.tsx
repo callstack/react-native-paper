@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 
 import color from 'color';
-import type { InternalTheme } from 'src/types';
+import type { ThemeProp } from 'src/types';
 
-import { useInternalTheme, withInternalTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import Button from '../Button/Button';
 import IconButton from '../IconButton/IconButton';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -40,7 +40,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> &
     /**
      * @optional
      */
-    theme: InternalTheme;
+    theme?: ThemeProp;
   };
 
 type PaginationDropdownProps = {
@@ -56,6 +56,10 @@ type PaginationDropdownProps = {
    * The function to set the number of rows per page.
    */
   onItemsPerPageChange?: (numberOfItemsPerPage: number) => void;
+  /**
+   * @optional
+   */
+  theme?: ThemeProp;
 };
 
 type PaginationControlsProps = {
@@ -75,6 +79,10 @@ type PaginationControlsProps = {
    * Whether to show fast forward and fast rewind buttons in pagination. False by default.
    */
   showFastPaginationControls?: boolean;
+  /**
+   * @optional
+   */
+  theme?: ThemeProp;
 };
 
 const PaginationControls = ({
@@ -82,8 +90,9 @@ const PaginationControls = ({
   numberOfPages,
   onPageChange,
   showFastPaginationControls,
+  theme: themeOverrides,
 }: PaginationControlsProps) => {
-  const theme = useInternalTheme();
+  const theme = useInternalTheme(themeOverrides);
 
   const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
 
@@ -103,6 +112,7 @@ const PaginationControls = ({
           disabled={page === 0}
           onPress={() => onPageChange(0)}
           accessibilityLabel="page-first"
+          theme={theme}
         />
       ) : null}
       <IconButton
@@ -118,6 +128,7 @@ const PaginationControls = ({
         disabled={page === 0}
         onPress={() => onPageChange(page - 1)}
         accessibilityLabel="chevron-left"
+        theme={theme}
       />
       <IconButton
         icon={({ size, color }) => (
@@ -132,6 +143,7 @@ const PaginationControls = ({
         disabled={numberOfPages === 0 || page === numberOfPages - 1}
         onPress={() => onPageChange(page + 1)}
         accessibilityLabel="chevron-right"
+        theme={theme}
       />
       {showFastPaginationControls ? (
         <IconButton
@@ -147,6 +159,7 @@ const PaginationControls = ({
           disabled={numberOfPages === 0 || page === numberOfPages - 1}
           onPress={() => onPageChange(numberOfPages - 1)}
           accessibilityLabel="page-last"
+          theme={theme}
         />
       ) : null}
     </>
@@ -157,14 +170,17 @@ const PaginationDropdown = ({
   numberOfItemsPerPageList,
   numberOfItemsPerPage,
   onItemsPerPageChange,
+  theme: themeOverrides,
 }: PaginationDropdownProps) => {
-  const { colors } = useInternalTheme();
+  const theme = useInternalTheme(themeOverrides);
+  const { colors } = theme;
   const [showSelect, toggleSelect] = React.useState<boolean>(false);
 
   return (
     <Menu
       visible={showSelect}
       onDismiss={() => toggleSelect(!showSelect)}
+      theme={theme}
       anchor={
         <Button
           mode="outlined"
@@ -172,6 +188,7 @@ const PaginationDropdown = ({
           style={styles.button}
           icon="menu-down"
           contentStyle={styles.contentStyle}
+          theme={theme}
         >
           {`${numberOfItemsPerPage}`}
         </Button>
@@ -190,6 +207,7 @@ const PaginationDropdown = ({
             toggleSelect(false);
           }}
           title={option}
+          theme={theme}
         />
       ))}
     </Menu>
@@ -265,15 +283,16 @@ const DataTablePagination = ({
   numberOfPages,
   onPageChange,
   style,
-  theme,
   showFastPaginationControls = false,
   numberOfItemsPerPageList,
   numberOfItemsPerPage,
   onItemsPerPageChange,
   selectPageDropdownLabel,
   selectPageDropdownAccessibilityLabel,
+  theme: themeOverrides,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const labelColor = color(
     theme.isV3 ? theme.colors.onSurface : theme?.colors.text
   )
@@ -308,6 +327,7 @@ const DataTablePagination = ({
               numberOfItemsPerPageList={numberOfItemsPerPageList}
               numberOfItemsPerPage={numberOfItemsPerPage}
               onItemsPerPageChange={onItemsPerPageChange}
+              theme={theme}
             />
           </View>
         )}
@@ -324,6 +344,7 @@ const DataTablePagination = ({
           onPageChange={onPageChange}
           page={page}
           numberOfPages={numberOfPages}
+          theme={theme}
         />
       </View>
     </View>
@@ -361,7 +382,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(DataTablePagination);
+export default DataTablePagination;
 
 // @component-docs ignore-next-line
 export { DataTablePagination };

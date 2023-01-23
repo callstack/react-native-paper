@@ -6,8 +6,8 @@ import {
   View,
 } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { $RemoveChildren, ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { getAndroidSelectionControlColor } from './utils';
@@ -36,7 +36,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * testID to be used on tests.
    */
@@ -64,12 +64,13 @@ const ANIMATION_DURATION = 100;
  */
 const CheckboxAndroid = ({
   status,
-  theme,
+  theme: themeOverrides,
   disabled,
   onPress,
   testID,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { current: scaleAnim } = React.useRef<Animated.Value>(
     new Animated.Value(1)
   );
@@ -139,6 +140,7 @@ const CheckboxAndroid = ({
       accessibilityLiveRegion="polite"
       style={styles.container}
       testID={testID}
+      theme={theme}
     >
       <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
         <MaterialCommunityIcon
@@ -181,9 +183,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(CheckboxAndroid);
+export default CheckboxAndroid;
 
 // @component-docs ignore-next-line
-const CheckboxAndroidWithTheme = withInternalTheme(CheckboxAndroid);
-// @component-docs ignore-next-line
-export { CheckboxAndroidWithTheme as CheckboxAndroid };
+export { CheckboxAndroid };

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleProp, StyleSheet, TextStyle } from 'react-native';
 
 import color from 'color';
-import type { InternalTheme } from 'src/types';
+import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../../core/theming';
 import Text from '../Typography/Text';
@@ -11,7 +11,7 @@ export type Props = React.ComponentProps<typeof Text> & {
   /**
    * @optional
    */
-  theme?: InternalTheme;
+  theme?: ThemeProp;
   /**
    * Style that is passed to Text element.
    */

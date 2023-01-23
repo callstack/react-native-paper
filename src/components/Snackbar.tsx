@@ -12,8 +12,8 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useEventCallback from 'use-event-callback';
 
-import { withInternalTheme } from '../core/theming';
-import type { InternalTheme } from '../types';
+import { useInternalTheme } from '../core/theming';
+import type { ThemeProp } from '../types';
 import Button from './Button/Button';
 import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
@@ -75,7 +75,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 const DURATION_SHORT = 4000;
@@ -142,9 +142,10 @@ const Snackbar = ({
   elevation = 2,
   wrapperStyle,
   style,
-  theme,
+  theme: themeOverrides,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { bottom, right, left } = useSafeAreaInsets();
 
   const { current: opacity } = React.useRef<Animated.Value>(
@@ -266,6 +267,7 @@ const Snackbar = ({
       <Surface
         pointerEvents="box-none"
         accessibilityLiveRegion="polite"
+        theme={theme}
         style={
           [
             !isV3 && styles.elevation,
@@ -304,6 +306,7 @@ const Snackbar = ({
                 textColor={buttonTextColor}
                 compact={!isV3}
                 mode="text"
+                theme={theme}
                 {...actionProps}
               >
                 {actionLabel}
@@ -315,6 +318,7 @@ const Snackbar = ({
                 borderless
                 onPress={onIconPress}
                 iconColor={theme.colors.inverseOnSurface}
+                theme={theme}
                 icon={
                   icon ||
                   (({ size, color }) => {
@@ -394,4 +398,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(Snackbar);
+export default Snackbar;

@@ -15,8 +15,8 @@ import {
 
 import color from 'color';
 
-import { withInternalTheme } from '../core/theming';
-import type { InternalTheme } from '../types';
+import { useInternalTheme } from '../core/theming';
+import type { ThemeProp } from '../types';
 import ActivityIndicator from './ActivityIndicator';
 import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
@@ -81,7 +81,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 type TextInputHandles = Pick<
@@ -132,7 +132,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
       searchAccessibilityLabel = 'search',
       elevation = 1,
       style,
-      theme,
+      theme: themeOverrides,
       value,
       loading = false,
       testID = 'search-bar',
@@ -140,6 +140,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
     }: Props,
     ref
   ) => {
+    const theme = useInternalTheme(themeOverrides);
     const root = React.useRef<TextInput>(null);
 
     React.useImperativeHandle(ref, () => {
@@ -189,6 +190,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
           style,
         ]}
         {...(theme.isV3 && { elevation })}
+        theme={theme}
       >
         <IconButton
           accessibilityRole="button"
@@ -207,6 +209,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
               />
             ))
           }
+          theme={theme}
           accessibilityLabel={searchAccessibilityLabel}
         />
         <TextInput
@@ -265,6 +268,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
                 ))
               }
               accessibilityRole="button"
+              theme={theme}
             />
           </View>
         )}
@@ -294,4 +298,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(Searchbar);
+export default Searchbar;

@@ -11,8 +11,8 @@ import {
 
 import color from 'color';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
@@ -114,7 +114,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * testID to be used on tests.
    */
@@ -179,14 +179,15 @@ const Button = ({
   onLongPress,
   delayLongPress,
   style,
-  theme,
-  uppercase = !theme.isV3,
+  theme: themeOverrides,
+  uppercase: uppercaseProp,
   contentStyle,
   labelStyle,
   testID = 'button',
   accessible,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const isMode = React.useCallback(
     (modeToCompare: ButtonMode) => {
       return mode === modeToCompare;
@@ -194,6 +195,7 @@ const Button = ({
     [mode]
   );
   const { roundness, isV3, animation } = theme;
+  const uppercase = uppercaseProp || !theme.isV3;
 
   const isElevationEntitled =
     !disabled && (isV3 ? isMode('elevated') : isMode('contained'));
@@ -317,6 +319,7 @@ const Button = ({
         rippleColor={rippleColor}
         style={touchableStyle}
         testID={testID}
+        theme={theme}
       >
         <View style={[styles.content, contentStyle]}>
           {icon && loading !== true ? (
@@ -451,4 +454,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(Button);
+export default Button;

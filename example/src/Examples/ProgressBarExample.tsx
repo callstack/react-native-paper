@@ -69,7 +69,9 @@ const ProgressBarExample = () => {
       </View>
 
       <View style={styles.row}>
-        <Text variant="bodyMedium">ProgressBar with custom background color</Text>
+        <Text variant="bodyMedium">
+          ProgressBar with custom background color
+        </Text>
         <ProgressBar
           progress={progress}
           visible={visible}

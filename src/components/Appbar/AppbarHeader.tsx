@@ -3,9 +3,9 @@ import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { withInternalTheme } from '../../core/theming';
+import { useInternalTheme } from '../../core/theming';
 import shadow from '../../styles/shadow';
-import type { InternalTheme } from '../../types';
+import type { ThemeProp } from '../../types';
 import { Appbar } from './Appbar';
 import {
   DEFAULT_APPBAR_HEIGHT,
@@ -47,7 +47,7 @@ export type Props = React.ComponentProps<typeof Appbar> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   style?: StyleProp<ViewStyle>;
 };
 
@@ -106,9 +106,11 @@ const AppbarHeader = ({
   dark,
   mode = Platform.OS === 'ios' ? 'center-aligned' : 'small',
   elevated = false,
+  theme: themeOverrides,
   ...rest
 }: Props) => {
-  const { isV3 } = rest.theme;
+  const theme = useInternalTheme(themeOverrides);
+  const { isV3 } = theme;
 
   const {
     height = isV3 ? modeAppbarHeight[mode] : DEFAULT_APPBAR_HEIGHT,
@@ -119,7 +121,7 @@ const AppbarHeader = ({
   }: ViewStyle = StyleSheet.flatten(style) || {};
 
   const backgroundColor = getAppbarColor(
-    rest.theme,
+    theme,
     elevation,
     customBackground,
     elevated
@@ -149,6 +151,7 @@ const AppbarHeader = ({
           mode,
         })}
         {...rest}
+        theme={theme}
       />
     </View>
   );
@@ -162,9 +165,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(AppbarHeader);
+export default AppbarHeader;
 
 // @component-docs ignore-next-line
-const AppbarHeaderWithTheme = withInternalTheme(AppbarHeader);
-// @component-docs ignore-next-line
-export { AppbarHeaderWithTheme as AppbarHeader };
+export { AppbarHeader };

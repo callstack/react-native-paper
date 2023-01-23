@@ -12,9 +12,9 @@ import {
 } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import type { InternalTheme } from 'src/types';
+import type { ThemeProp } from 'src/types';
 
-import { withInternalTheme } from '../core/theming';
+import { useInternalTheme } from '../core/theming';
 import { addEventListener } from '../utils/addEventListener';
 import useAnimatedValue from '../utils/useAnimatedValue';
 import Surface from './Surface';
@@ -52,7 +52,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * testID to be used on tests.
    */
@@ -108,9 +108,10 @@ function Modal({
   children,
   contentContainerStyle,
   style,
-  theme,
+  theme: themeOverrides,
   testID = 'modal',
 }: Props) {
+  const theme = useInternalTheme(themeOverrides);
   const visibleRef = React.useRef(visible);
 
   React.useEffect(() => {
@@ -204,6 +205,7 @@ function Modal({
 
   React.useEffect(() => {
     return removeListeners;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!rendered) return null;
@@ -245,6 +247,7 @@ function Modal({
         testID={`${testID}-wrapper`}
       >
         <Surface
+          theme={theme}
           style={
             [
               { opacity },
@@ -260,7 +263,7 @@ function Modal({
   );
 }
 
-export default withInternalTheme(Modal);
+export default Modal;
 
 const styles = StyleSheet.create({
   backdrop: {
@@ -270,6 +273,7 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
   },
+  // eslint-disable-next-line react-native/no-color-literals
   content: {
     backgroundColor: 'transparent',
     justifyContent: 'center',

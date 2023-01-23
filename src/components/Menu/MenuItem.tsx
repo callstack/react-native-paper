@@ -8,8 +8,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -60,7 +60,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * TestID used for testing purposes
    */
@@ -111,8 +111,9 @@ const MenuItem = ({
   testID,
   titleStyle,
   accessibilityLabel,
-  theme,
+  theme: themeOverrides,
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { titleColor, iconColor, underlayColor } = getMenuItemColor({
     theme,
     disabled,
@@ -229,4 +230,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(MenuItem);
+export default MenuItem;

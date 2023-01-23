@@ -9,8 +9,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { $RemoveChildren, ThemeProp } from '../../types';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
@@ -114,7 +114,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   testID?: string;
   ref?: React.RefObject<View>;
 };
@@ -167,10 +167,10 @@ const FAB = React.forwardRef<View, Props>(
       onPress,
       onLongPress,
       delayLongPress,
-      theme,
+      theme: themeOverrides,
       style,
       visible = true,
-      uppercase = !theme.isV3,
+      uppercase: uppercaseProp,
       loading,
       testID = 'fab',
       size = 'medium',
@@ -181,6 +181,8 @@ const FAB = React.forwardRef<View, Props>(
     }: Props,
     ref
   ) => {
+    const theme = useInternalTheme(themeOverrides);
+    const uppercase = uppercaseProp || !theme.isV3;
     const { current: visibility } = React.useRef<Animated.Value>(
       new Animated.Value(visible ? 1 : 0)
     );
@@ -335,9 +337,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(FAB);
+export default FAB;
 
 // @component-docs ignore-next-line
-const FABWithTheme = withInternalTheme(FAB);
-// @component-docs ignore-next-line
-export { FABWithTheme as FAB };
+export { FAB };

@@ -1,14 +1,8 @@
 import * as React from 'react';
-import {
-  Animated,
-  I18nManager,
-  StyleProp,
-  StyleSheet,
-  TextStyle,
-} from 'react-native';
+import { Animated, I18nManager, StyleSheet, TextStyle } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import { Font, InternalTheme, MD3TypescaleKey } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import { Font, ThemeProp, MD3TypescaleKey } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof Animated.Text> & {
   /**
@@ -26,11 +20,11 @@ type Props = React.ComponentPropsWithRef<typeof Animated.Text> & {
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
   variant?: keyof typeof MD3TypescaleKey;
-  style?: StyleProp<TextStyle>;
+  style?: TextStyle;
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 /**
@@ -38,7 +32,13 @@ type Props = React.ComponentPropsWithRef<typeof Animated.Text> & {
  *
  * @extends Text props https://reactnative.dev/docs/text#props
  */
-function AnimatedText({ style, theme, variant, ...rest }: Props) {
+function AnimatedText({
+  style,
+  theme: themeOverrides,
+  variant,
+  ...rest
+}: Props) {
+  const theme = useInternalTheme(themeOverrides);
   const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
 
   if (theme.isV3 && variant) {
@@ -105,4 +105,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(AnimatedText);
+export default AnimatedText;

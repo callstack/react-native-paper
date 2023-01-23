@@ -211,6 +211,7 @@ const TextInputOutlined = ({
     maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
     testID,
     contentStyle,
+    theme,
   };
 
   const minHeight = (height ||

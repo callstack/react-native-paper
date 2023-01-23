@@ -9,8 +9,8 @@ import {
 
 import color from 'color';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -44,7 +44,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 /**
@@ -76,13 +76,14 @@ const DrawerItem = ({
   icon,
   label,
   active,
-  theme,
+  theme: themeOverrides,
   style,
   onPress,
   accessibilityLabel,
   right,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { roundness, isV3 } = theme;
 
   const backgroundColor = active
@@ -123,6 +124,7 @@ const DrawerItem = ({
         accessibilityState={{ selected: active }}
         accessibilityLabel={accessibilityLabel}
         underlayColor={underlayColor}
+        theme={theme}
       >
         <View style={[styles.wrapper, isV3 && styles.v3Wrapper]}>
           <View style={styles.content}>
@@ -187,4 +189,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(DrawerItem);
+export default DrawerItem;

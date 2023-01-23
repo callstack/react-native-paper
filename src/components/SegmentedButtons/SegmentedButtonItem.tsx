@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import color from 'color';
+import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
@@ -68,6 +69,10 @@ export type Props = {
    * testID to be used on tests.
    */
   testID?: string;
+  /**
+   * @optional
+   */
+  theme?: ThemeProp;
 };
 
 const SegmentedButtonItem = ({
@@ -82,8 +87,9 @@ const SegmentedButtonItem = ({
   onPress,
   segment,
   density = 'regular',
+  theme: themeOverrides,
 }: Props) => {
-  const theme = useInternalTheme();
+  const theme = useInternalTheme(themeOverrides);
 
   const checkScale = React.useRef(new Animated.Value(0)).current;
 
@@ -171,6 +177,7 @@ const SegmentedButtonItem = ({
         rippleColor={rippleColor}
         testID={testID}
         style={rippleStyle}
+        theme={theme}
       >
         <View style={[styles.content, { paddingVertical }]}>
           {showCheckedIcon ? (
@@ -224,5 +231,4 @@ const styles = StyleSheet.create({
 
 export default SegmentedButtonItem;
 
-const SegmentedButtonWithTheme = SegmentedButtonItem;
-export { SegmentedButtonWithTheme as SegmentedButton };
+export { SegmentedButtonItem as SegmentedButton };

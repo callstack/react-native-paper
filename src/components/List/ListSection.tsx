@@ -7,8 +7,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import ListSubheader from './ListSubheader';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
@@ -23,7 +23,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * Style that is passed to Title element.
    */
@@ -62,13 +62,23 @@ const ListSection = ({
   title,
   titleStyle,
   style,
+  theme: themeOverrides,
   ...rest
-}: Props) => (
-  <View {...rest} style={[styles.container, style]}>
-    {title ? <ListSubheader style={titleStyle}>{title}</ListSubheader> : null}
-    {children}
-  </View>
-);
+}: Props) => {
+  const theme = useInternalTheme(themeOverrides);
+  const viewProps = { ...rest, theme };
+
+  return (
+    <View {...viewProps} style={[styles.container, style]}>
+      {title ? (
+        <ListSubheader style={titleStyle} theme={theme}>
+          {title}
+        </ListSubheader>
+      ) : null}
+      {children}
+    </View>
+  );
+};
 
 ListSection.displayName = 'List.Section';
 
@@ -78,4 +88,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(ListSection);
+export default ListSection;

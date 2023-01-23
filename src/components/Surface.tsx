@@ -11,7 +11,7 @@ import {
 import { useInternalTheme } from '../core/theming';
 import overlay, { isAnimatedValue } from '../styles/overlay';
 import shadow from '../styles/shadow';
-import type { InternalTheme, MD3Elevation } from '../types';
+import type { ThemeProp, MD3Elevation } from '../types';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -31,7 +31,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * @optional
    */
-  theme?: InternalTheme;
+  theme?: ThemeProp;
   /**
    * TestID used for testing purposes
    */
@@ -218,10 +218,28 @@ const Surface = React.forwardRef<View, Props>(
 
     const shadowColor = '#000';
 
-    const { position, alignSelf, top, left, right, bottom, start, end, ...restStyle } =
-      (StyleSheet.flatten(style) || {}) as ViewStyle;
+    const {
+      position,
+      alignSelf,
+      top,
+      left,
+      right,
+      bottom,
+      start,
+      end,
+      ...restStyle
+    } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
-    const absoluteStyles = { position, alignSelf, top, right, bottom, left, start, end };
+    const absoluteStyles = {
+      position,
+      alignSelf,
+      top,
+      right,
+      bottom,
+      left,
+      start,
+      end,
+    };
     const sharedStyle = [{ backgroundColor }, restStyle];
 
     if (isAnimatedValue(elevation)) {

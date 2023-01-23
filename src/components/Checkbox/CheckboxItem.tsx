@@ -8,8 +8,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme, MD3TypescaleKey } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp, MD3TypescaleKey } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import Checkbox from './Checkbox';
@@ -73,7 +73,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * testID to be used on tests.
    */
@@ -114,7 +114,7 @@ const CheckboxItem = ({
   label,
   onPress,
   labelStyle,
-  theme,
+  theme: themeOverrides,
   testID,
   mode,
   position = 'trailing',
@@ -123,6 +123,7 @@ const CheckboxItem = ({
   labelVariant = 'bodyLarge',
   ...props
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const checkboxProps = { ...props, status, theme, disabled };
   const isLeading = position === 'leading';
   let checkbox;
@@ -157,6 +158,7 @@ const CheckboxItem = ({
       onPress={onPress}
       testID={testID}
       disabled={disabled}
+      theme={theme}
     >
       <View
         style={[styles.container, style]}
@@ -183,12 +185,10 @@ const CheckboxItem = ({
 
 CheckboxItem.displayName = 'Checkbox.Item';
 
-export default withInternalTheme(CheckboxItem);
+export default CheckboxItem;
 
 // @component-docs ignore-next-line
-const CheckboxItemWithTheme = withInternalTheme(CheckboxItem);
-// @component-docs ignore-next-line
-export { CheckboxItemWithTheme as CheckboxItem };
+export { CheckboxItem };
 
 const styles = StyleSheet.create({
   container: {

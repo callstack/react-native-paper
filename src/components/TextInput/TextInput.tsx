@@ -8,8 +8,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import TextInputAffix, {
   Props as TextInputAffixProps,
 } from './Adornment/TextInputAffix';
@@ -137,7 +137,7 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   /**
    * testID to be used on tests.
    */
@@ -231,10 +231,12 @@ const TextInput = React.forwardRef<TextInputHandles, Props>(
       editable = true,
       contentStyle,
       render = (props: RenderProps) => <NativeTextInput {...props} />,
+      theme: themeOverrides,
       ...rest
     }: Props,
     ref
   ) => {
+    const theme = useInternalTheme(themeOverrides);
     const isControlled = rest.value !== undefined;
     const validInputValue = isControlled ? rest.value : rest.defaultValue;
 
@@ -282,7 +284,7 @@ const TextInput = React.forwardRef<TextInputHandles, Props>(
 
     const root = React.useRef<NativeTextInput | undefined | null>();
 
-    const { scale } = rest.theme.animation;
+    const { scale } = theme.animation;
 
     React.useImperativeHandle(ref, () => ({
       focus: () => root.current?.focus(),
@@ -443,6 +445,7 @@ const TextInput = React.forwardRef<TextInputHandles, Props>(
           editable={editable}
           render={render}
           {...rest}
+          theme={theme}
           value={value}
           parentState={{
             labeled,
@@ -479,6 +482,7 @@ const TextInput = React.forwardRef<TextInputHandles, Props>(
         editable={editable}
         render={render}
         {...rest}
+        theme={theme}
         value={value}
         parentState={{
           labeled,
@@ -513,4 +517,4 @@ TextInput.Icon = TextInputIcon;
 // @ts-ignore Types of property 'theme' are incompatible.
 TextInput.Affix = TextInputAffix;
 
-export default withInternalTheme(TextInput);
+export default TextInput;

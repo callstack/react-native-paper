@@ -3,8 +3,8 @@ import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import color from 'color';
 
-import { withInternalTheme } from '../../core/theming';
-import type { InternalTheme, MD3Elevation } from '../../types';
+import { useInternalTheme } from '../../core/theming';
+import type { MD3Elevation, ThemeProp } from '../../types';
 import Surface from '../Surface';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
@@ -54,7 +54,7 @@ export type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
   /**
    * @optional
    */
-  theme: InternalTheme;
+  theme?: ThemeProp;
   style?: StyleProp<ViewStyle>;
 };
 
@@ -152,12 +152,13 @@ const Appbar = ({
   children,
   dark,
   style,
-  theme,
   mode = 'small',
   elevated,
   safeAreaInsets,
+  theme: themeOverrides,
   ...rest
 }: Props) => {
+  const theme = useInternalTheme(themeOverrides);
   const { isV3 } = theme;
   const {
     backgroundColor: customBackground,
@@ -257,6 +258,7 @@ const Appbar = ({
         renderAppbarContent({
           children,
           isDark,
+          theme,
           isV3,
           shouldCenterContent: isV3CenterAlignedMode || shouldCenterContent,
         })}
@@ -348,9 +350,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(Appbar);
+export default Appbar;
 
 // @component-docs ignore-next-line
-const AppbarWithTheme = withInternalTheme(Appbar);
-// @component-docs ignore-next-line
-export { AppbarWithTheme as Appbar };
+export { Appbar };

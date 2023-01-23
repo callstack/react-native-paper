@@ -7,6 +7,8 @@ import {
   Platform,
 } from 'react-native';
 
+import type { ThemeProp } from 'src/types';
+
 import { useInternalTheme } from '../../core/theming';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
@@ -30,6 +32,10 @@ export type Props = {
    * Tooltip title
    */
   title: string;
+  /**
+   * @optional
+   */
+  theme?: ThemeProp;
 };
 
 /**
@@ -62,9 +68,10 @@ const Tooltip = ({
   enterTouchDelay = 500,
   leaveTouchDelay = 1500,
   title,
+  theme: themeOverrides,
   ...rest
 }: Props) => {
-  const theme = useInternalTheme();
+  const theme = useInternalTheme(themeOverrides);
   const [visible, setVisible] = React.useState(false);
 
   const [measurement, setMeasurement] = React.useState({
