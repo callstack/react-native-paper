@@ -692,6 +692,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             ],
           ]
         }
+        testID="appbar-content"
       >
         <Text
           accessibilityRole="header"
@@ -727,6 +728,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               ],
             ]
           }
+          testID="appbar-content-title-text"
         >
           Examples
         </Text>

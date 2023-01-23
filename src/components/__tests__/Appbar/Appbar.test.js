@@ -14,10 +14,15 @@ import AppbarAction from '../../Appbar/AppbarAction';
 import AppbarBackAction from '../../Appbar/AppbarBackAction';
 import AppbarContent from '../../Appbar/AppbarContent';
 import AppbarHeader from '../../Appbar/AppbarHeader';
-import { getAppbarColor, renderAppbarContent } from '../../Appbar/utils';
+import {
+  getAppbarColor,
+  modeTextVariant,
+  renderAppbarContent,
+} from '../../Appbar/utils';
 import Menu from '../../Menu/Menu';
 import Searchbar from '../../Searchbar';
 import Tooltip from '../../Tooltip/Tooltip';
+import Text from '../../Typography/Text';
 
 jest.mock('react-native-safe-area-context', () => mockSafeAreaContext);
 
@@ -269,6 +274,38 @@ describe('AppbarAction', () => {
 
       expect(appbarActionIcon.props.color).toBe('#ffffff');
     });
+  });
+});
+
+describe('AppbarContent', () => {
+  ['small', 'medium', 'large', 'center-aligned'].forEach((mode) =>
+    it(`should render text component with appropriate variant for ${mode} mode`, () => {
+      const { getByTestId } = render(
+        <Appbar mode={mode}>
+          <Appbar.Content title="Title" />
+        </Appbar>
+      );
+
+      expect(getByTestId('appbar-content-title-text')).toHaveStyle(
+        getTheme().fonts[modeTextVariant[mode]]
+      );
+    })
+  );
+
+  it('should render component passed to title', () => {
+    const { getByText } = render(
+      <Appbar>
+        <Appbar.Content
+          title={
+            <Text testID="title" variant="displaySmall">
+              Title
+            </Text>
+          }
+        />
+      </Appbar>
+    );
+
+    expect(getByText('Title')).toBeDefined();
   });
 });
 
