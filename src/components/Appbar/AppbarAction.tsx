@@ -6,6 +6,7 @@ import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../../core/theming';
 import { black } from '../../styles/themes/v2/colors';
+import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
 
@@ -73,7 +74,7 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
  * export default MyComponent;
  * ```
  */
-const AppbarAction = React.forwardRef<View, Props>(
+const AppbarAction = forwardRef<View, Props>(
   (
     {
       size = 24,

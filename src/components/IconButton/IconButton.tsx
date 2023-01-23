@@ -9,6 +9,7 @@ import {
 
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
@@ -112,7 +113,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  *
  * @extends TouchableRipple props https://callstack.github.io/react-native-paper/touchable-ripple.html
  */
-const IconButton = React.forwardRef<View, Props>(
+const IconButton = forwardRef<View, Props>(
   (
     {
       icon,

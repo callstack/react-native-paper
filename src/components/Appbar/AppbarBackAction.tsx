@@ -6,6 +6,7 @@ import type {
   View,
 } from 'react-native';
 
+import { forwardRef } from '../../utils/forwardRef';
 import type { $Omit } from './../../types';
 import AppbarAction from './AppbarAction';
 import AppbarBackIcon from './AppbarBackIcon';
@@ -60,7 +61,7 @@ export type Props = $Omit<
  * export default MyComponent;
  * ```
  */
-const AppbarBackAction = React.forwardRef<View, Props>(
+const AppbarBackAction = forwardRef<View, Props>(
   ({ accessibilityLabel = 'Back', ...rest }: Props, ref) => (
     <AppbarAction
       accessibilityLabel={accessibilityLabel}

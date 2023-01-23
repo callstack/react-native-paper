@@ -10,6 +10,7 @@ import {
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 import TextInputAffix, {
   Props as TextInputAffixProps,
 } from './Adornment/TextInputAffix';
@@ -220,7 +221,7 @@ type TextInputHandles = Pick<
  * @extends TextInput props https://reactnative.dev/docs/textinput#props
  */
 
-const TextInput = React.forwardRef<TextInputHandles, Props>(
+const TextInput = forwardRef<TextInputHandles, Props>(
   (
     {
       mode = 'flat',

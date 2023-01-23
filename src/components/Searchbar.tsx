@@ -17,6 +17,7 @@ import color from 'color';
 
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
+import { forwardRef } from '../utils/forwardRef';
 import ActivityIndicator from './ActivityIndicator';
 import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
@@ -119,7 +120,7 @@ type TextInputHandles = Pick<
 
  * ```
  */
-const Searchbar = React.forwardRef<TextInputHandles, Props>(
+const Searchbar = forwardRef<TextInputHandles, Props>(
   (
     {
       clearAccessibilityLabel = 'clear',
