@@ -18,17 +18,22 @@ import type { $RemoveChildren, MD3TypescaleKey, ThemeProp } from '../../types';
 import Text from '../Typography/Text';
 import { modeTextVariant } from './utils';
 
+type TitleString = {
+  title: string;
+  titleStyle?: StyleProp<TextStyle>;
+};
+
+type TitleElement = { title: React.ReactNode; titleStyle?: never };
+
 export type Props = $RemoveChildren<typeof View> & {
+  // For `title` and `titleStyle` props their types are duplicated due to the generation of documentation.
+  // Appropriate type for them are either `TitleString` or `TitleElement`, depends on `title` type.
   /**
-   * Custom color for the text.
-   */
-  color?: string;
-  /**
-   * Text for the title.
+   * Text or component for the title.
    */
   title: React.ReactNode;
   /**
-   * Style for the title.
+   * Style for the title, if `title` is a string.
    */
   titleStyle?: StyleProp<TextStyle>;
   /**
@@ -50,6 +55,10 @@ export type Props = $RemoveChildren<typeof View> & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * Custom color for the text.
+   */
+  color?: string;
+  /**
    * @internal
    */
   mode?: 'small' | 'medium' | 'large' | 'center-aligned';
@@ -62,7 +71,7 @@ export type Props = $RemoveChildren<typeof View> & {
    * testID to be used on tests.
    */
   testID?: string;
-};
+} & (TitleString | TitleElement);
 
 /**
  * A component used to display a title and optional subtitle in an appbar.
