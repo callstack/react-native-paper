@@ -4,11 +4,12 @@ import { StyleSheet } from 'react-native';
 import { render } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
 
+import { MD3Colors } from '../../styles/themes/v3/tokens';
 import AnimatedFAB from '../FAB/AnimatedFAB';
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: 'purple',
+    backgroundColor: MD3Colors.tertiary50,
   },
 });
 
