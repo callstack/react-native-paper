@@ -88,7 +88,7 @@ const getButtonBackgroundColor = ({
   return 'transparent';
 };
 
-const getButtonTextColor = ({
+export const getButtonTextColor = ({
   isMode,
   theme,
   disabled,

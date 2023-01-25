@@ -12,15 +12,17 @@ import {
 import color from 'color';
 
 // import { withInternalTheme } from '../../core/theming';
-import type { Font, InternalTheme } from '../../types';
+import type { Font } from '../../types';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
+import { useButtonTheme } from './useButtonTheme';
 import { useButtonThemeAnim } from './useButtonThemeAnim';
-import { ButtonMode, getButtonColors } from './utils';
-import { withButtonTheme } from './withButtonTheme';
+import type { ButtonMode } from './utils';
+
+// type ButtonMode = 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal';
 
 type DirectionOptions = {
   reverse: {
@@ -37,7 +39,7 @@ export type ButtonTheme = {
   elevation: {
     initial: number;
     active: number;
-    supportedMode: NonNullable<Props['mode']>;
+    supportedMode: ButtonMode;
   };
   borderRadius: number;
   iconSize: number;
@@ -59,21 +61,21 @@ export type ButtonTheme = {
     };
     buttonStyle: {
       backgroundColor: {
-        enabled: Record<NonNullable<Props['mode']>, string>;
-        disabled: Record<NonNullable<Props['mode']>, string>;
+        enabled: { [key in ButtonMode]?: string };
+        disabled: { [key in ButtonMode]?: string };
         default: string;
       };
       borderColor: {
         enabled: {
-          [key in NonNullable<Props['mode']>]: string;
+          [key in ButtonMode]?: string;
         };
         disabled: {
-          [key in NonNullable<Props['mode']>]: string;
+          [key in ButtonMode]?: string;
         };
         default: number;
       };
       borderWidth: {
-        [key in NonNullable<Props['mode']>]: number;
+        [key in ButtonMode]?: number;
       } & { default: number };
       textColor: {
         getTextColor: ({
@@ -101,7 +103,7 @@ export type Props = React.ComponentProps<Exclude<typeof Surface, 'theme'>> & {
    * - `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background. @supported Available in v5.x with theme version 3
    * - `contained-tonal` - button with a secondary background color, an alternative middle ground between contained and outlined buttons. @supported Available in v5.x with theme version 3
    */
-  mode?: 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal';
+  mode?: ButtonMode;
   /**
    * Whether the color is a dark color. A dark button will render light text and vice-versa. Only applicable for:
    *  * `contained` mode for theme version 2
@@ -251,14 +253,17 @@ const Button = ({
   onLongPress,
   delayLongPress,
   style,
-  theme,
-  uppercase = !theme.isV3,
+  theme: themeOverrides,
+  uppercase = !themeOverrides.isV3,
   contentStyle,
   labelStyle,
   testID = 'button',
   accessible,
   ...rest
 }: Props) => {
+  const buttonTheme = useButtonTheme({
+    theme: themeOverrides,
+  });
   const isMode = React.useCallback(
     (modeToCompare: ButtonMode) => {
       return mode === modeToCompare;
@@ -267,8 +272,8 @@ const Button = ({
   );
   const { elevationAnim, animatePressIn, animatePressOut } = useButtonThemeAnim(
     disabled,
-    isMode(theme.elevation.supportedMode),
-    theme
+    isMode(buttonTheme.elevation.supportedMode),
+    buttonTheme.elevation
   );
 
   const handlePressIn = (e: GestureResponderEvent) => {
@@ -281,10 +286,10 @@ const Button = ({
     animatePressOut();
   };
 
-  const borderRadius = theme.borderRadius;
-  const iconSize = theme.iconSize;
+  const borderRadius = buttonTheme.borderRadius;
+  const iconSize = buttonTheme.iconSize;
   const { backgroundColor, borderColor, borderWidth, textColor } =
-    theme.style.buttonStyle;
+    buttonTheme.style.buttonStyle;
 
   const disabledLabel = disabled ? 'disabled' : 'enabled';
   const backgroundColorStyle =
@@ -326,24 +331,28 @@ const Button = ({
 
   const textStyle = {
     color: textColorStyle,
-    ...theme.font,
+    ...buttonTheme.font,
   };
 
   const iconStyle =
     StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
       ? [
           styles.iconReverse,
-          theme.style.iconStyle.icon.reverse[compact ? 'compact' : 'normal'],
+          buttonTheme.style.iconStyle.icon.reverse[
+            compact ? 'compact' : 'normal'
+          ],
           isMode('text') &&
-            theme.style.iconStyle.textMode.reverse[
+            buttonTheme.style.iconStyle.textMode.reverse[
               compact ? 'compact' : 'normal'
             ],
         ]
       : [
           styles.icon,
-          theme.style.iconStyle.icon.forward[compact ? 'compact' : 'normal'],
+          buttonTheme.style.iconStyle.icon.forward[
+            compact ? 'compact' : 'normal'
+          ],
           isMode('text') &&
-            theme.style.iconStyle.textMode.forward[
+            buttonTheme.style.iconStyle.textMode.forward[
               compact ? 'compact' : 'normal'
             ],
         ];
@@ -357,10 +366,10 @@ const Button = ({
           compact && styles.compact,
           buttonStyle,
           style,
-          theme.style.surfaceStyle.getElevationStyle(elevationAnim),
+          buttonTheme.style.surfaceStyle.getElevationStyle(elevationAnim),
         ] as ViewStyle
       }
-      {...theme.style.surfaceStyle.getElevationProp(elevationAnim)}
+      {...buttonTheme.style.surfaceStyle.getElevationProp(elevationAnim)}
     >
       <TouchableRipple
         borderless
@@ -410,7 +419,7 @@ const Button = ({
             numberOfLines={1}
             style={[
               styles.label,
-              theme.style.textStyle.getTextLabel(
+              buttonTheme.style.textStyle.getTextLabel(
                 isMode('text'),
                 Boolean(icon || loading)
               ),
@@ -465,4 +474,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withButtonTheme(Button);
+export default Button;
