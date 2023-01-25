@@ -96,7 +96,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
    * Color mappings variant for combinations of container and icon colors.
    */
   variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
    */
