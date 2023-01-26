@@ -189,6 +189,12 @@ const config = {
             label: 'Docs',
           },
           {
+            type: 'doc',
+            docId: 'guides/showcase',
+            position: 'left',
+            label: 'Showcase',
+          },
+          {
             type: 'dropdown',
             label: 'v5.x',
             position: 'right',
