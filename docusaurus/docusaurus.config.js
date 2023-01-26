@@ -222,6 +222,11 @@ const config = {
             label: 'GitHub',
             position: 'right',
           },
+          {
+            href: 'https://twitter.com/rn_paper',
+            label: 'Twitter',
+            position: 'right',
+          },
         ],
         title,
       },
