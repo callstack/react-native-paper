@@ -183,9 +183,15 @@ const config = {
         },
         items: [
           {
+            type: 'doc',
+            docId: 'guides/getting-started',
+            position: 'left',
+            label: 'Docs',
+          },
+          {
             type: 'dropdown',
             label: 'v5.x',
-            position: 'left',
+            position: 'right',
             items: [
               {
                 label: 'v4.x',
@@ -204,12 +210,6 @@ const config = {
                 href: 'https://callstack.github.io/react-native-paper/1.0/index.html',
               },
             ],
-          },
-          {
-            type: 'doc',
-            docId: 'guides/getting-started',
-            position: 'right',
-            label: 'Docs',
           },
           {
             href: 'https://github.com/callstack/react-native-paper',
