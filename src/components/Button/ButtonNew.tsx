@@ -44,52 +44,51 @@ export type ButtonTheme = {
   borderRadius: number;
   iconSize: number;
   font: Font;
-  style: {
-    iconStyle: {
-      icon: DirectionOptions;
-      textMode: DirectionOptions;
+
+  iconStyle: {
+    icon: DirectionOptions;
+    textMode: DirectionOptions;
+  };
+  textStyle: {
+    getTextLabel: (
+      isTextMode: boolean,
+      hasIconOrLoading: boolean
+    ) => Record<string, number>;
+  };
+  surfaceStyle: {
+    getElevationStyle: (elevation: Animated.Value) => Record<string, number>;
+    getElevationProp: (elevation: Animated.Value) => Record<string, number>;
+  };
+  buttonStyle: {
+    backgroundColor: {
+      enabled: { [key in ButtonMode]?: string };
+      disabled: { [key in ButtonMode]?: string };
+      default: string;
     };
-    textStyle: {
-      getTextLabel: (
-        isTextMode: boolean,
-        hasIconOrLoading: boolean
-      ) => Record<string, number>;
+    borderColor: {
+      enabled: {
+        [key in ButtonMode]?: string;
+      };
+      disabled: {
+        [key in ButtonMode]?: string;
+      };
+      default: number;
     };
-    surfaceStyle: {
-      getElevationStyle: (elevation: Animated.Value) => Record<string, number>;
-      getElevationProp: (elevation: Animated.Value) => Record<string, number>;
-    };
-    buttonStyle: {
-      backgroundColor: {
-        enabled: { [key in ButtonMode]?: string };
-        disabled: { [key in ButtonMode]?: string };
-        default: string;
-      };
-      borderColor: {
-        enabled: {
-          [key in ButtonMode]?: string;
-        };
-        disabled: {
-          [key in ButtonMode]?: string;
-        };
-        default: number;
-      };
-      borderWidth: {
-        [key in ButtonMode]?: number;
-      } & { default: number };
-      textColor: {
-        getTextColor: ({
-          backgroundColor,
-          isMode,
-          disabled,
-          dark,
-        }: {
-          backgroundColor: string;
-          dark?: boolean;
-          disabled?: boolean;
-          isMode: (mode: ButtonMode) => boolean;
-        }) => string;
-      };
+    borderWidth: {
+      [key in ButtonMode]?: number;
+    } & { default: number };
+    textColor: {
+      getTextColor: ({
+        backgroundColor,
+        isMode,
+        disabled,
+        dark,
+      }: {
+        backgroundColor: string;
+        dark?: boolean;
+        disabled?: boolean;
+        isMode: (mode: ButtonMode) => boolean;
+      }) => string;
     };
   };
 };
@@ -188,7 +187,7 @@ export type Props = React.ComponentProps<Exclude<typeof Surface, 'theme'>> & {
   /**
    * @optional
    */
-  theme: ButtonTheme;
+  theme?: ButtonTheme;
   /**
    * testID to be used on tests.
    */
@@ -254,7 +253,7 @@ const Button = ({
   delayLongPress,
   style,
   theme: themeOverrides,
-  uppercase = !themeOverrides.isV3,
+  uppercase = false, //!themeOverrides.isV3,
   contentStyle,
   labelStyle,
   testID = 'button',
@@ -264,6 +263,7 @@ const Button = ({
   const buttonTheme = useButtonTheme({
     theme: themeOverrides,
   });
+
   const isMode = React.useCallback(
     (modeToCompare: ButtonMode) => {
       return mode === modeToCompare;
@@ -289,7 +289,7 @@ const Button = ({
   const borderRadius = buttonTheme.borderRadius;
   const iconSize = buttonTheme.iconSize;
   const { backgroundColor, borderColor, borderWidth, textColor } =
-    buttonTheme.style.buttonStyle;
+    buttonTheme.buttonStyle;
 
   const disabledLabel = disabled ? 'disabled' : 'enabled';
   const backgroundColorStyle =
@@ -338,21 +338,17 @@ const Button = ({
     StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
       ? [
           styles.iconReverse,
-          buttonTheme.style.iconStyle.icon.reverse[
-            compact ? 'compact' : 'normal'
-          ],
+          buttonTheme.iconStyle.icon.reverse[compact ? 'compact' : 'normal'],
           isMode('text') &&
-            buttonTheme.style.iconStyle.textMode.reverse[
+            buttonTheme.iconStyle.textMode.reverse[
               compact ? 'compact' : 'normal'
             ],
         ]
       : [
           styles.icon,
-          buttonTheme.style.iconStyle.icon.forward[
-            compact ? 'compact' : 'normal'
-          ],
+          buttonTheme.iconStyle.icon.forward[compact ? 'compact' : 'normal'],
           isMode('text') &&
-            buttonTheme.style.iconStyle.textMode.forward[
+            buttonTheme.iconStyle.textMode.forward[
               compact ? 'compact' : 'normal'
             ],
         ];
@@ -366,10 +362,10 @@ const Button = ({
           compact && styles.compact,
           buttonStyle,
           style,
-          buttonTheme.style.surfaceStyle.getElevationStyle(elevationAnim),
+          buttonTheme.surfaceStyle.getElevationStyle(elevationAnim),
         ] as ViewStyle
       }
-      {...buttonTheme.style.surfaceStyle.getElevationProp(elevationAnim)}
+      {...buttonTheme.surfaceStyle.getElevationProp(elevationAnim)}
     >
       <TouchableRipple
         borderless
@@ -419,7 +415,7 @@ const Button = ({
             numberOfLines={1}
             style={[
               styles.label,
-              buttonTheme.style.textStyle.getTextLabel(
+              buttonTheme.textStyle.getTextLabel(
                 isMode('text'),
                 Boolean(icon || loading)
               ),

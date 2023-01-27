@@ -2,6 +2,13 @@ import { StyleSheet } from 'react-native';
 
 import color from 'color';
 
+import {
+  black29,
+  buttonThemeLightV2,
+  buttonThemeDarkV2,
+  buttonThemeLightV3,
+  buttonThemeDarkV3,
+} from '../../core/themes-builder/buttonThemeBuilder';
 import { useInternalTheme } from '../../core/theming';
 import { black, white } from '../../styles/themes/v2/colors';
 import type { ThemeProp } from '../../types';
@@ -13,6 +20,17 @@ type UseButtonThemeProp = {
 };
 
 export const useButtonTheme = ({
+  theme: themeOverrides,
+}: Readonly<UseButtonThemeProp>) => {
+  const theme = useInternalTheme(themeOverrides);
+
+  if (theme.isV3) {
+    return theme.dark ? buttonThemeDarkV3 : buttonThemeLightV3;
+  }
+  return theme.dark ? buttonThemeDarkV2 : buttonThemeLightV2;
+};
+
+export const useButtonTheme2 = ({
   theme: themeOverrides,
 }: UseButtonThemeProp) => {
   const theme = useInternalTheme(themeOverrides);
