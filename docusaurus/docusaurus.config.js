@@ -218,6 +218,12 @@ const config = {
             ],
           },
           {
+            href: 'https://discord.gg/zwR2Cdh',
+            className: 'nav-link nav-discord-link',
+            'aria-label': 'Discord',
+            position: 'right',
+          },
+          {
             href: 'https://twitter.com/rn_paper',
             className: 'nav-link nav-twitter-link',
             'aria-label': 'Twitter',
