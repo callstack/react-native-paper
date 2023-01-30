@@ -1677,6 +1677,15 @@
     "@types/react" "*"
     prop-types "^15.6.2"
 
+"@docusaurus/remark-plugin-npm2yarn@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@docusaurus/remark-plugin-npm2yarn/-/remark-plugin-npm2yarn-2.2.0.tgz#12d433eda8986c475277dd7fb8624b10c8a976ea"
+  integrity sha512-CFiwzk+0QrlBjkcx4cNV8LQZHgo15aQ3piO0Iao0vGXLc7eupGigDLuE7q3Phc10ELweO+P2gRQTjlBqIQTC+Q==
+  dependencies:
+    npm-to-yarn "^1.0.1"
+    tslib "^2.4.0"
+    unist-util-visit "^2.0.3"
+
 "@docusaurus/theme-classic@2.1.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/theme-classic/-/theme-classic-2.1.0.tgz#d957a907ea8dd035c1cf911d0fbe91d8f24aef3f"
@@ -6930,6 +6939,11 @@ npm-run-path@^4.0.1:
   integrity sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==
   dependencies:
     path-key "^3.0.0"
+
+npm-to-yarn@^1.0.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/npm-to-yarn/-/npm-to-yarn-1.2.1.tgz#ee88854d03ac930510c28a621985d800b51e76e0"
+  integrity sha512-ci3GjP40SKgZL2OOVW6B1z/3LdLNBsEtJupkYC/NQ8/Y0grfZZNNsR5DQdoy7zgL+FsKIXtnxMgrDjoMoJ40zQ==
 
 nprogress@^0.2.0:
   version "0.2.0"
