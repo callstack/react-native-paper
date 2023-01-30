@@ -16,27 +16,19 @@ Below you can find the most important information about the components whose API
 
 * The `v5` has been oficially released as a stable version, which means it will be installed by default from the `npm`. In order to do that, open a Terminal in your project's folder and run:
 
-```sh
-yarn add react-native-paper
-```
-or
-```sh
+```bash npm2yarn
 npm install react-native-paper
 ```
 
 * From `v5` there is a need to install [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) for handling safe area.
 
-```sh
-yarn add react-native-safe-area-context
-```
-or
-```sh
+```bash npm2yarn
 npm install react-native-safe-area-context
 ```
 
 Additionaly for `iOS` platform there is a requirement to link the native parts of the library:
 
-```sh
+```bash
 npx pod-install
 ```
 
