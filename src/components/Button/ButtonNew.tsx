@@ -11,7 +11,6 @@ import {
 
 import color from 'color';
 
-// import { withInternalTheme } from '../../core/theming';
 import type { Font } from '../../types';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon, { IconSource } from '../Icon';
@@ -21,8 +20,6 @@ import Text from '../Typography/Text';
 import { useButtonTheme } from './useButtonTheme';
 import { useButtonThemeAnim } from './useButtonThemeAnim';
 import type { ButtonMode } from './utils';
-
-// type ButtonMode = 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal';
 
 type DirectionOptions = {
   reverse: {
@@ -286,7 +283,8 @@ const Button = ({
     animatePressOut();
   };
 
-  const borderRadius = buttonTheme.borderRadius;
+  const borderRadius =
+    buttonTheme.borderRadius * (themeOverrides?.roundness ?? 5);
   const iconSize = buttonTheme.iconSize;
   const { backgroundColor, borderColor, borderWidth, textColor } =
     buttonTheme.buttonStyle;

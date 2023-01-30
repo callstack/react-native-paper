@@ -3,11 +3,8 @@ import { StyleSheet } from 'react-native';
 import color from 'color';
 
 import {
-  black29,
-  buttonThemeLightV2,
-  buttonThemeDarkV2,
-  buttonThemeLightV3,
-  buttonThemeDarkV3,
+  getButtonThemeV3,
+  getButtonThemeV2,
 } from '../../core/themes-builder/buttonThemeBuilder';
 import { useInternalTheme } from '../../core/theming';
 import { black, white } from '../../styles/themes/v2/colors';
@@ -25,9 +22,9 @@ export const useButtonTheme = ({
   const theme = useInternalTheme(themeOverrides);
 
   if (theme.isV3) {
-    return theme.dark ? buttonThemeDarkV3 : buttonThemeLightV3;
+    return getButtonThemeV3(theme);
   }
-  return theme.dark ? buttonThemeDarkV2 : buttonThemeLightV2;
+  return getButtonThemeV2(theme);
 };
 
 export const useButtonTheme2 = ({
@@ -79,11 +76,11 @@ export const useButtonTheme2 = ({
 
       return styles.md3LabelText;
     },
-  } as ButtonTheme['style']['textStyle'];
+  } as ButtonTheme['textStyle'];
   const surfaceStyle = {
     getElevationStyle: (elevation) => (!isV3 ? { elevation } : {}),
     getElevationProp: (elevation) => (isV3 ? { elevation } : {}),
-  } as ButtonTheme['style']['surfaceStyle'];
+  } as ButtonTheme['surfaceStyle'];
 
   const backgroundColor = {
     enabled: isV3
@@ -106,7 +103,7 @@ export const useButtonTheme2 = ({
         }
       : {},
     default: 'transparent',
-  } as ButtonTheme['style']['buttonStyle']['backgroundColor'];
+  } as ButtonTheme['buttonStyle']['backgroundColor'];
   const outlineBorderColor = color(theme.dark ? white : black)
     .alpha(0.29)
     .rgb()
@@ -119,11 +116,11 @@ export const useButtonTheme2 = ({
       outlined: isV3 ? theme.colors.outline : outlineBorderColor,
     },
     default: 'transparent',
-  } as unknown as ButtonTheme['style']['buttonStyle']['borderColor'];
+  } as unknown as ButtonTheme['buttonStyle']['borderColor'];
   const borderWidth = {
     outlined: isV3 ? 1 : StyleSheet.hairlineWidth,
     default: 0,
-  } as unknown as ButtonTheme['style']['buttonStyle']['borderWidth'];
+  } as unknown as ButtonTheme['buttonStyle']['borderWidth'];
   const textColor = {
     getTextColor: ({ backgroundColor, isMode, disabled, dark }) =>
       getButtonTextColor({
@@ -133,10 +130,10 @@ export const useButtonTheme2 = ({
         dark,
         theme,
       }),
-  } as ButtonTheme['style']['buttonStyle']['textColor'];
+  } as ButtonTheme['buttonStyle']['textColor'];
 
   const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
-  const borderRadius = (isV3 ? 5 : 1) * roundness;
+  const borderRadius = isV3 ? 5 : 1;
   const iconSize = isV3 ? 18 : 16;
 
   const buttonTheme = {
@@ -144,12 +141,10 @@ export const useButtonTheme2 = ({
     font,
     borderRadius,
     iconSize,
-    style: {
-      iconStyle,
-      textStyle,
-      surfaceStyle,
-      buttonStyle: { backgroundColor, borderColor, borderWidth, textColor },
-    },
+    iconStyle,
+    textStyle,
+    surfaceStyle,
+    buttonStyle: { backgroundColor, borderColor, borderWidth, textColor },
   };
 
   return buttonTheme;

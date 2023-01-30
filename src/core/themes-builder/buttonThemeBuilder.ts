@@ -2,13 +2,8 @@ import { StyleSheet } from 'react-native';
 
 import color from 'color';
 
-import {
-  MD2DarkTheme,
-  MD2LightTheme,
-  MD3DarkTheme,
-  MD3LightTheme,
-} from '../../styles/themes';
 import { black, white } from '../../styles/themes/v2/colors';
+import type { MD2Theme, MD3Theme } from '../../types';
 
 // This should be into another file, is duplicated in Button and utils
 type ButtonMode =
@@ -26,9 +21,9 @@ const white32 = color(white).alpha(0.32).rgb().string();
 
 const black32 = color(black).alpha(0.32).rgb().string();
 
-const white12 = color(white).alpha(0.32).rgb().string();
+const white12 = color(white).alpha(0.12).rgb().string();
 
-const black12 = color(black).alpha(0.32).rgb().string();
+const black12 = color(black).alpha(0.12).rgb().string();
 
 const isDark = ({
   dark,
@@ -99,14 +94,19 @@ const styles = StyleSheet.create({
     marginRight: 6,
   },
 });
+export const getButtonThemeV3 = (theme: MD3Theme) =>
+  buttonThemeV3Builder(theme);
 
-export const buttonThemeLightV2 = {
+export const getButtonThemeV2 = (theme: MD2Theme) =>
+  buttonThemeV2Builder(theme);
+
+const buttonThemeV2Builder = (theme: MD2Theme) => ({
   elevation: {
     initial: 2,
     active: 8,
     supportedMode: 'contained' as ButtonMode,
   },
-  font: MD2LightTheme.fonts.medium,
+  font: theme.fonts.medium,
   borderRadius: 1,
   iconSize: 16,
 
@@ -144,17 +144,17 @@ export const buttonThemeLightV2 = {
   buttonStyle: {
     backgroundColor: {
       enabled: {
-        contained: white12,
+        contained: theme.dark ? white12 : black12,
       },
       disabled: {},
       default: 'transparent',
     },
     borderColor: {
       enabled: {
-        outlined: white29,
+        outlined: theme.dark ? white29 : black29,
       },
       disabled: {
-        outlined: white29,
+        outlined: theme.dark ? white29 : black29,
       },
       default: 'transparent',
     },
@@ -165,66 +165,28 @@ export const buttonThemeLightV2 = {
     textColor: {
       getTextColor: ({ backgroundColor, isMode, disabled, dark }) => {
         if (disabled) {
-          return white32;
+          return theme.dark ? white32 : black32;
         }
 
         if (isMode('contained')) {
           return isDark({ dark, backgroundColor }) ? white : black;
         }
 
-        return MD2LightTheme.colors.primary;
+        return theme.colors.primary;
       },
     },
   },
-};
+});
 
-export const buttonThemeDarkV2 = {
-  ...buttonThemeLightV2,
-
-  buttonStyle: {
-    ...buttonThemeLightV2.buttonStyle,
-    backgroundColor: {
-      enabled: {
-        contained: black12,
-      },
-      disabled: {},
-      default: 'transparent',
-    },
-    borderColor: {
-      enabled: {
-        outlined: black29,
-      },
-      disabled: {
-        outlined: black29,
-      },
-      default: 'transparent',
-    },
-    textColor: {
-      getTextColor: ({ backgroundColor, isMode, disabled, dark }) => {
-        if (disabled) {
-          return black32;
-        }
-
-        if (isMode('contained')) {
-          return isDark({ dark, backgroundColor }) ? white : black;
-        }
-
-        return MD2DarkTheme.colors.primary;
-      },
-    },
-  },
-};
-
-export const buttonThemeLightV3 = {
+const buttonThemeV3Builder = (theme: MD3Theme) => ({
   elevation: {
     initial: 1,
     active: 2,
     supportedMode: 'elevation' as ButtonMode,
   },
-  font: MD3LightTheme.fonts.labelLarge,
+  font: theme.fonts.labelLarge,
   borderRadius: 5,
   iconSize: 18,
-
   iconStyle: {
     icon: {
       reverse: {
@@ -262,28 +224,28 @@ export const buttonThemeLightV3 = {
   },
   surfaceStyle: {
     getElevationStyle: (elevation) => ({}),
-    getElevationProp: (elevation) => ({}),
+    getElevationProp: (elevation) => ({ elevation }),
   },
   buttonStyle: {
     backgroundColor: {
       enabled: {
-        elevated: MD3LightTheme.colors.surfaceDisabled,
-        contained: MD3LightTheme.colors.surfaceDisabled,
-        'contained-tonal': MD3LightTheme.colors.surfaceDisabled,
+        elevated: theme.colors.elevation.level1,
+        contained: theme.colors.primary,
+        'contained-tonal': theme.colors.secondaryContainer,
       },
       disabled: {
-        elevated: MD3LightTheme.colors.elevation.level1,
-        contained: MD3LightTheme.colors.primary,
-        'contained-tonal': MD3LightTheme.colors.secondaryContainer,
+        elevated: theme.colors.surfaceDisabled,
+        contained: theme.colors.surfaceDisabled,
+        'contained-tonal': theme.colors.surfaceDisabled,
       },
       default: 'transparent',
     },
     borderColor: {
       enabled: {
-        outlined: MD3LightTheme.colors.surfaceDisabled,
+        outlined: theme.colors.outline,
       },
       disabled: {
-        outlined: MD3LightTheme.colors.outline,
+        outlined: theme.colors.surfaceDisabled,
       },
       default: 'transparent',
     },
@@ -294,7 +256,7 @@ export const buttonThemeLightV3 = {
     textColor: {
       getTextColor: ({ backgroundColor, isMode, disabled, dark }) => {
         if (disabled) {
-          return MD3LightTheme.colors.onSurfaceDisabled;
+          return theme.colors.onSurfaceDisabled;
         }
 
         if (typeof dark === 'boolean') {
@@ -308,76 +270,18 @@ export const buttonThemeLightV3 = {
         }
 
         if (isMode('outlined') || isMode('text') || isMode('elevated')) {
-          return MD3LightTheme.colors.primary;
+          return theme.colors.primary;
         }
 
         if (isMode('contained')) {
-          return MD3LightTheme.colors.onPrimary;
+          return theme.colors.onPrimary;
         }
 
         if (isMode('contained-tonal')) {
-          return MD3LightTheme.colors.onSecondaryContainer;
+          return theme.colors.onSecondaryContainer;
         }
-        return MD3LightTheme.colors.primary;
+        return theme.colors.primary;
       },
     },
   },
-};
-
-export const buttonThemeDarkV3 = {
-  ...buttonThemeLightV3,
-  font: MD3DarkTheme.fonts.labelLarge,
-
-  backgroundColor: {
-    enabled: {
-      elevated: MD3DarkTheme.colors.surfaceDisabled,
-      contained: MD3DarkTheme.colors.surfaceDisabled,
-      'contained-tonal': MD3DarkTheme.colors.surfaceDisabled,
-    },
-    disabled: {
-      elevated: MD3DarkTheme.colors.elevation.level1,
-      contained: MD3DarkTheme.colors.primary,
-      'contained-tonal': MD3DarkTheme.colors.secondaryContainer,
-    },
-    default: 'transparent',
-  },
-  borderColor: {
-    enabled: {
-      outlined: MD3DarkTheme.colors.surfaceDisabled,
-    },
-    disabled: {
-      outlined: MD3DarkTheme.colors.outline,
-    },
-    default: 'transparent',
-  },
-  textColor: {
-    getTextColor: ({ backgroundColor, isMode, disabled, dark }) => {
-      if (disabled) {
-        return MD3DarkTheme.colors.onSurfaceDisabled;
-      }
-
-      if (typeof dark === 'boolean') {
-        if (
-          isMode('contained') ||
-          isMode('contained-tonal') ||
-          isMode('elevated')
-        ) {
-          return isDark({ dark, backgroundColor }) ? white : black;
-        }
-      }
-
-      if (isMode('outlined') || isMode('text') || isMode('elevated')) {
-        return MD3DarkTheme.colors.primary;
-      }
-
-      if (isMode('contained')) {
-        return MD3DarkTheme.colors.onPrimary;
-      }
-
-      if (isMode('contained-tonal')) {
-        return MD3DarkTheme.colors.onSecondaryContainer;
-      }
-      return MD3DarkTheme.colors.primary;
-    },
-  },
-};
+});
