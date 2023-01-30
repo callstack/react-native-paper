@@ -139,10 +139,9 @@ const BannerExample = () => {
 };
 
 export default function WithProvider() {
-  const colorMode = useColorMode();
-  colorMode.isDarkTheme;
+  const isDarkTheme = useColorMode().colorMode === 'dark';
   return (
-    <Provider theme={colorMode.isDarkTheme ? DarkTheme : DefaultTheme}>
+    <Provider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
       <BannerExample />
     </Provider>
   );
