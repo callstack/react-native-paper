@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 
 describe('Card', () => {
   it('renders an outlined card', () => {
-    const tree = renderer.create(<Card mode="outlined" />).toJSON();
+    const tree = renderer.create(<Card mode="outlined">{null}</Card>).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
@@ -31,7 +31,9 @@ describe('Card', () => {
         mode="outlined"
         theme={{ colors: { outline: 'purple' } }}
         style={styles.customBorderRadius}
-      />
+      >
+        {null}
+      </Card>
     );
 
     expect(getByTestId('card-outline')).toHaveStyle({
@@ -46,7 +48,9 @@ describe('Card', () => {
         mode="outlined"
         accessibilityLabel="card"
         style={{ borderColor: MD3Colors.error50 }}
-      />
+      >
+        {null}
+      </Card>
     );
 
     expect(getByLabelText('card')).toHaveStyle({
@@ -60,7 +64,9 @@ describe('Card', () => {
         mode="outlined"
         accessibilityLabel="card"
         theme={{ colors: { surface: '#0000FF' } }}
-      />
+      >
+        {null}
+      </Card>
     );
 
     expect(getByLabelText('card')).toHaveStyle({
@@ -92,7 +98,9 @@ describe('getCardColors - background color', () => {
         theme: getTheme(),
         mode: 'contained',
       })
-    ).toMatchObject({ backgroundColor: getTheme().colors.surfaceVariant });
+    ).toMatchObject({
+      backgroundColor: getTheme().colors.surfaceVariant,
+    });
   });
 
   it('should return correct theme color, for theme version 3, outlined mode', () => {
@@ -117,6 +125,7 @@ describe('getCardColors - background color', () => {
     expect(
       getCardColors({
         theme: getTheme(false, false),
+        mode: undefined as any,
       })
     ).toMatchObject({ backgroundColor: undefined });
   });
@@ -127,6 +136,7 @@ describe('getCardColors - border color', () => {
     expect(
       getCardColors({
         theme: getTheme(),
+        mode: undefined as any,
       })
     ).toMatchObject({ borderColor: getTheme().colors.outline });
   });
@@ -135,6 +145,7 @@ describe('getCardColors - border color', () => {
     expect(
       getCardColors({
         theme: getTheme(true, false),
+        mode: undefined as any,
       })
     ).toMatchObject({
       borderColor: color(white).alpha(0.12).rgb().string(),
@@ -145,6 +156,7 @@ describe('getCardColors - border color', () => {
     expect(
       getCardColors({
         theme: getTheme(false, false),
+        mode: undefined as any,
       })
     ).toMatchObject({
       borderColor: color(black).alpha(0.12).rgb().string(),

@@ -3,7 +3,7 @@ import { Image } from 'react-native';
 
 import renderer from 'react-test-renderer';
 
-import Banner from '../Banner.tsx';
+import Banner from '../Banner';
 
 it('renders hidden banner, without action buttons and without image', () => {
   const tree = renderer
@@ -55,7 +55,7 @@ it('renders visible banner, without action buttons and with image', () => {
     .create(
       <Banner
         visible
-        image={({ size }) => (
+        icon={({ size }) => (
           <Image
             source={{ uri: 'https://callstack.com/images/team/Satya.png' }}
             style={{ width: size, height: size }}
@@ -77,7 +77,7 @@ it('renders visible banner, with action buttons and with image', () => {
     .create(
       <Banner
         visible
-        image={({ size }) => (
+        icon={({ size }) => (
           <Image
             source={{ uri: 'https://callstack.com/images/team/Satya.png' }}
             style={{ width: size, height: size }}

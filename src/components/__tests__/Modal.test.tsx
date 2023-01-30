@@ -19,7 +19,9 @@ describe('Modal', () => {
             backdrop: 'transparent',
           },
         }}
-      />
+      >
+        {null}
+      </Modal>
     );
 
     expect(getByTestId('modal-backdrop')).toHaveStyle({
@@ -28,7 +30,11 @@ describe('Modal', () => {
   });
 
   it('should receive appropriate top and bottom insets', () => {
-    const { getByTestId } = render(<Modal visible={true} testID="modal" />);
+    const { getByTestId } = render(
+      <Modal visible={true} testID="modal">
+        {null}
+      </Modal>
+    );
 
     expect(getByTestId('modal-wrapper')).toHaveStyle({
       marginTop: 37,

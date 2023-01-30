@@ -64,6 +64,7 @@
     "@types/react-dom": "^18.0.8",
     "@types/react-native": "^0.70.6",
     "@types/react-native-vector-icons": "^6.4.1",
+    "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
     "all-contributors-cli": "^6.24.0",
@@ -99,8 +100,8 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
-    "react-native-vector-icons": "*",
-    "react-native-safe-area-context": "*"
+    "react-native-safe-area-context": "*",
+    "react-native-vector-icons": "*"
   },
   "husky": {
     "hooks": {
@@ -117,6 +118,9 @@
       "@testing-library/jest-native/extend-expect"
     ],
     "cacheDirectory": "./cache/jest",
+    "testPathIgnorePatterns": [
+      "\\.d\\.ts$"
+    ],
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",
       "<rootDir>/lib/"

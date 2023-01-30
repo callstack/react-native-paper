@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Animated, StyleSheet, Text, View } from 'react-native';
 
 import renderer from 'react-test-renderer';
 
 import { red200, white } from '../../styles/themes/v2/colors';
-import Snackbar from '../Snackbar.tsx';
+import Snackbar from '../Snackbar';
 
 const styles = StyleSheet.create({
   snackContent: {
@@ -22,12 +22,21 @@ const styles = StyleSheet.create({
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native');
 
-  RN.Animated.timing = (value, config) => ({
+  const timing: typeof Animated['timing'] = (value, config) => ({
     start: (callback) => {
-      value.setValue(config.toValue);
-      callback && callback({ finished: true });
+      value.setValue(config.toValue as any);
+      callback?.({ finished: true });
+    },
+    value,
+    config,
+    stop: () => {
+      throw new Error('Not implemented');
+    },
+    reset: () => {
+      throw new Error('Not implemented');
     },
   });
+  RN.Animated.timing = timing;
 
   return RN;
 });

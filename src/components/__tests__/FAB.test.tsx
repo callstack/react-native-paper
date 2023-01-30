@@ -146,7 +146,7 @@ it('renders FAB with custom border radius', () => {
   expect(getByTestId('fab-container')).toHaveStyle({ borderRadius: 0 });
 });
 
-['small', 'medium', 'large'].forEach((size) => {
+(['small', 'medium', 'large'] as const).forEach((size) => {
   it(`renders ${size} FAB with correct size and border radius`, () => {
     const { getByTestId } = render(
       <FAB onPress={() => {}} size={size} icon="plus" testID={`${size}-fab`} />
