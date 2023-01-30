@@ -122,8 +122,8 @@ Our goal here is to combine those two themes, so that we could control the theme
 
 To make things easier we can use [deepmerge](https://www.npmjs.com/package/deepmerge) package. With `yarn` we can install it like this
 
-```sh
-yarn add deepmerge
+```bash npm2yarn
+npm install deepmerge
 ```
 
 ### Material Design 2
