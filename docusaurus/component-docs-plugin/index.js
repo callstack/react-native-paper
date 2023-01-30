@@ -16,11 +16,7 @@ async function componentsPlugin(_, options) {
   }
 
   function createCategory(label, dir = '.') {
-    const categoryJSON = JSON.stringify(
-      { label, link: { type: 'generated-index', title: label } },
-      undefined,
-      2
-    );
+    const categoryJSON = JSON.stringify({ label }, undefined, 2);
     const docsCategoryDir = path.join(docsRootDir, dir);
     if (!fs.existsSync(docsCategoryDir)) {
       fs.mkdirSync(docsCategoryDir);
