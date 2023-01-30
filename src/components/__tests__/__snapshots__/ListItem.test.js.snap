@@ -146,6 +146,7 @@ exports[`renders list item with custom description 1`] = `
                     "flexDirection": "column",
                   }
                 }
+                testID="chip-container"
               >
                 <View
                   accessibilityRole="button"
@@ -183,6 +184,7 @@ exports[`renders list item with custom description 1`] = `
                       ],
                     ]
                   }
+                  testID="chip"
                 >
                   <View
                     style={
