@@ -758,6 +758,7 @@ const BottomNavigation = ({
       </View>
       <Surface
         {...(theme.isV3 && { elevation: 0 })}
+        testID={`${testID}-surface`}
         style={[
           !theme.isV3 && styles.elevation,
           styles.bar,

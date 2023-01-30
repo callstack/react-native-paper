@@ -115,6 +115,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -861,6 +862,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -1760,6 +1762,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -3467,6 +3470,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -4955,6 +4959,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -5641,6 +5646,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -6629,6 +6635,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -7720,6 +7727,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -8688,6 +8696,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -9779,6 +9788,7 @@ exports[`renders shifting bottom navigation 1`] = `
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
