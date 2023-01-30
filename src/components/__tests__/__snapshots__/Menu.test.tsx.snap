@@ -286,6 +286,7 @@ Array [
                   ],
                 }
               }
+              testID="menu-surface"
             >
               <View
                 accessibilityRole="menuitem"
@@ -951,6 +952,7 @@ Array [
                   ],
                 }
               }
+              testID="menu-surface"
             >
               <View
                 accessibilityRole="menuitem"
