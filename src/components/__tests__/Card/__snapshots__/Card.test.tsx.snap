@@ -46,6 +46,7 @@ exports[`Card renders an outlined card 1`] = `
           "elevation": 1,
         }
       }
+      testID="card-container"
     >
       <View
         pointerEvents="none"
