@@ -1,9 +1,8 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
-      "react-native-paper": ["../src"]
+      "react-native-paper": ["./src"]
     }
   }
 }
