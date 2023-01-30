@@ -1646,6 +1646,7 @@ exports[`renders data table pagination with options select 1`] = `
                 "textAlign": "center",
               }
             }
+            testID="button-container"
           >
             <View
               accessibilityRole="button"
