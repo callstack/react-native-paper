@@ -52,6 +52,7 @@ exports[`renders disabled icon button 1`] = `
           "width": 40,
         }
       }
+      testID="icon-button-container"
     >
       <View
         accessibilityComponentType="button"
@@ -106,6 +107,7 @@ exports[`renders disabled icon button 1`] = `
             ],
           ]
         }
+        testID="icon-button"
       >
         <Text
           accessibilityElementsHidden={true}
@@ -201,6 +203,7 @@ exports[`renders icon button by default 1`] = `
           "width": 40,
         }
       }
+      testID="icon-button-container"
     >
       <View
         accessibilityComponentType="button"
@@ -250,6 +253,7 @@ exports[`renders icon button by default 1`] = `
             ],
           ]
         }
+        testID="icon-button"
       >
         <Text
           accessibilityElementsHidden={true}
@@ -345,6 +349,7 @@ exports[`renders icon button with color 1`] = `
           "width": 40,
         }
       }
+      testID="icon-button-container"
     >
       <View
         accessibilityComponentType="button"
@@ -394,6 +399,7 @@ exports[`renders icon button with color 1`] = `
             ],
           ]
         }
+        testID="icon-button"
       >
         <Text
           accessibilityElementsHidden={true}
@@ -489,6 +495,7 @@ exports[`renders icon button with size 1`] = `
           "width": 46,
         }
       }
+      testID="icon-button-container"
     >
       <View
         accessibilityComponentType="button"
@@ -538,6 +545,7 @@ exports[`renders icon button with size 1`] = `
             ],
           ]
         }
+        testID="icon-button"
       >
         <Text
           accessibilityElementsHidden={true}
@@ -633,6 +641,7 @@ exports[`renders icon change animated 1`] = `
           "width": 40,
         }
       }
+      testID="icon-button-container"
     >
       <View
         accessibilityComponentType="button"
@@ -682,6 +691,7 @@ exports[`renders icon change animated 1`] = `
             ],
           ]
         }
+        testID="icon-button"
       >
         <View
           style={
