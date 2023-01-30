@@ -56,6 +56,10 @@ export type Props = {
    */
   theme?: ThemeProp;
   ref?: React.RefObject<View>;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 /**
