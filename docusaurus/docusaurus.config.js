@@ -183,9 +183,21 @@ const config = {
         },
         items: [
           {
+            type: 'doc',
+            docId: 'guides/getting-started',
+            position: 'left',
+            label: 'Docs',
+          },
+          {
+            type: 'doc',
+            docId: 'guides/showcase',
+            position: 'left',
+            label: 'Showcase',
+          },
+          {
             type: 'dropdown',
             label: 'v5.x',
-            position: 'left',
+            position: 'right',
             items: [
               {
                 label: 'v4.x',
@@ -206,14 +218,21 @@ const config = {
             ],
           },
           {
-            type: 'doc',
-            docId: 'guides/getting-started',
+            href: 'https://discord.gg/zwR2Cdh',
+            className: 'nav-link nav-discord-link',
+            'aria-label': 'Discord',
             position: 'right',
-            label: 'Docs',
+          },
+          {
+            href: 'https://twitter.com/rn_paper',
+            className: 'nav-link nav-twitter-link',
+            'aria-label': 'Twitter',
+            position: 'right',
           },
           {
             href: 'https://github.com/callstack/react-native-paper',
-            label: 'GitHub',
+            className: 'nav-link nav-github-link',
+            'aria-label': 'GitHub',
             position: 'right',
           },
         ],
