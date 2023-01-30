@@ -248,6 +248,7 @@ function Modal({
       >
         <Surface
           theme={theme}
+          testID={`${testID}-content-container`}
           style={[{ opacity }, styles.content, contentContainerStyle]}
         >
           {children}
