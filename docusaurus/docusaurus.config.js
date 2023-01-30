@@ -199,7 +199,7 @@ const config = {
           },
           {
             type: 'doc',
-            docId: 'guides/showcase',
+            docId: 'showcase',
             position: 'left',
             label: 'Showcase',
           },
