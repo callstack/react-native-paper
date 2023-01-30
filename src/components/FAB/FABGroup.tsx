@@ -364,21 +364,19 @@ const FABGroup = ({
                       accessibilityHint={it.accessibilityHint}
                       accessibilityLabel={accessibilityLabel}
                       accessibilityRole="button"
-                      style={
-                        [
-                          styles.containerStyle,
-                          {
-                            transform: [
-                              isV3
-                                ? { translateY: labelTranslations[i] }
-                                : { scale: scales[i] },
-                            ],
-                            opacity: opacities[i],
-                          },
-                          isV3 && styles.v3ContainerStyle,
-                          it.containerStyle,
-                        ] as StyleProp<ViewStyle>
-                      }
+                      style={[
+                        styles.containerStyle,
+                        {
+                          transform: [
+                            isV3
+                              ? { translateY: labelTranslations[i] }
+                              : { scale: scales[i] },
+                          ],
+                          opacity: opacities[i],
+                        },
+                        isV3 && styles.v3ContainerStyle,
+                        it.containerStyle,
+                      ]}
                     >
                       <Text
                         variant="titleMedium"
@@ -393,17 +391,15 @@ const FABGroup = ({
                   size={size}
                   icon={it.icon}
                   color={it.color}
-                  style={
-                    [
-                      {
-                        transform: [{ scale: scales[i] }],
-                        opacity: opacities[i],
-                        backgroundColor: stackedFABBackgroundColor,
-                      },
-                      isV3 && { transform: [{ translateY: translations[i] }] },
-                      it.style,
-                    ] as StyleProp<ViewStyle>
-                  }
+                  style={[
+                    {
+                      transform: [{ scale: scales[i] }],
+                      opacity: opacities[i],
+                      backgroundColor: stackedFABBackgroundColor,
+                    },
+                    isV3 && { transform: [{ translateY: translations[i] }] },
+                    it.style,
+                  ]}
                   onPress={(e) => {
                     it.onPress(e);
                     close();

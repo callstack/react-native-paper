@@ -255,24 +255,22 @@ const FAB = forwardRef<View, Props>(
       <Surface
         ref={ref}
         {...rest}
-        style={
-          [
-            {
-              borderRadius,
-              backgroundColor,
-              opacity: visibility,
-              transform: [
-                {
-                  scale: visibility,
-                },
-              ],
-            },
-            styles.container,
-            !isV3 && styles.elevated,
-            !isV3 && disabled && styles.disabled,
-            style,
-          ] as StyleProp<ViewStyle>
-        }
+        style={[
+          {
+            borderRadius,
+            backgroundColor,
+            opacity: visibility,
+            transform: [
+              {
+                scale: visibility,
+              },
+            ],
+          },
+          styles.container,
+          !isV3 && styles.elevated,
+          !isV3 && disabled && styles.disabled,
+          style,
+        ]}
         pointerEvents={visible ? 'auto' : 'none'}
         testID={`${testID}-container`}
         {...(isV3 && { elevation: md3Elevation })}

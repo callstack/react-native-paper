@@ -268,28 +268,26 @@ const Snackbar = ({
         pointerEvents="box-none"
         accessibilityLiveRegion="polite"
         theme={theme}
-        style={
-          [
-            !isV3 && styles.elevation,
-            styles.container,
-            {
-              backgroundColor,
-              borderRadius: roundness,
-              opacity: opacity,
-              transform: [
-                {
-                  scale: visible
-                    ? opacity.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0.9, 1],
-                      })
-                    : 1,
-                },
-              ],
-            },
-            style,
-          ] as StyleProp<ViewStyle>
-        }
+        style={[
+          !isV3 && styles.elevation,
+          styles.container,
+          {
+            backgroundColor,
+            borderRadius: roundness,
+            opacity: opacity,
+            transform: [
+              {
+                scale: visible
+                  ? opacity.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0.9, 1],
+                    })
+                  : 1,
+              },
+            ],
+          },
+          style,
+        ]}
         {...(isV3 && { elevation })}
         {...rest}
       >

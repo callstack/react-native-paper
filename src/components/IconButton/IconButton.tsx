@@ -163,19 +163,17 @@ const IconButton = forwardRef<View, Props>(
     return (
       <Surface
         ref={ref}
-        style={
-          [
-            {
-              backgroundColor,
-              width: buttonSize,
-              height: buttonSize,
-            },
-            styles.container,
-            borderStyles,
-            !isV3 && disabled && styles.disabled,
-            style,
-          ] as StyleProp<ViewStyle>
-        }
+        style={[
+          {
+            backgroundColor,
+            width: buttonSize,
+            height: buttonSize,
+          },
+          styles.container,
+          borderStyles,
+          !isV3 && disabled && styles.disabled,
+          style,
+        ]}
         {...(isV3 && { elevation: 0 })}
       >
         <TouchableRipple
