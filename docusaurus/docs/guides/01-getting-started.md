@@ -8,27 +8,19 @@ title: Getting Started
 
 * Open a Terminal in your project's folder and run:
 
-```sh
-yarn add react-native-paper
-```
-or
-```sh
+```bash npm2yarn
 npm install react-native-paper
 ```
 
 * From `v5` there is a need to install [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) for handling safe area.
 
-```sh
-yarn add react-native-safe-area-context
-```
-or
-```sh
+```bash npm2yarn
 npm install react-native-safe-area-context
 ```
 
 Additionaly for `iOS` platform there is a requirement to link the native parts of the library:
 
-```sh
+```bash
 npx pod-install
 ```
 
@@ -36,8 +28,8 @@ npx pod-install
 
 Specifically `MaterialCommunityIcons` icon pack needs to be included in the project, because some components use those internally (e.g. `AppBar.BackAction` on Android). 
 
-```sh
-yarn add react-native-vector-icons
+```bash npm2yarn
+npm install react-native-vector-icons
 ```
 
 The library has specified dedicated steps for each platform. Please follow their [installation guide](https://github.com/oblador/react-native-vector-icons#installation) in order to properly use icon fonts.

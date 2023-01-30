@@ -12,16 +12,16 @@ We're going to use [react-native-web](https://github.com/necolas/react-native-we
 
 To install `react-native-web`, run:
 
-```sh
-yarn add react-native-web react-dom react-art
+```bash npm2yarn
+npm install react-native-web react-dom react-art
 ```
 
 ### Using CRA ([Create React App](https://github.com/facebook/create-react-app))
 
 Install [`react-app-rewired`](https://github.com/timarney/react-app-rewired) to override `webpack` configuration:
 
-```sh
-yarn add --dev react-app-rewired
+```bash npm2yarn
+npm install --save-dev react-app-rewired
 ```
 
 [Configure `babel-loader`](#2-configure-babel-loader) using a new file called `config-overrides.js`:
@@ -76,8 +76,8 @@ Change your script in `package.json`:
 
 To install `webpack`, run:
 
-```sh
-yarn add --dev webpack webpack-cli webpack-dev-server
+```bash npm2yarn
+npm install --save-dev webpack webpack-cli webpack-dev-server
 ```
 
 If you don't have a webpack config in your project, copy the following to `webpack.config.js` get started:
@@ -167,8 +167,8 @@ Next, we want to tell `babel-loader` to compile `react-native-paper` and `react-
 
 First install the required dependencies:
 
-```sh
-yarn add --dev babel-loader @babel/preset-env @babel/preset-react @babel/preset-flow @babel/preset-typescript @babel/plugin-proposal-class-properties @babel/plugin-proposal-object-rest-spread
+```bash npm2yarn
+npm install --save-dev babel-loader @babel/preset-env @babel/preset-react @babel/preset-flow @babel/preset-typescript @babel/plugin-proposal-class-properties @babel/plugin-proposal-object-rest-spread
 ```
 
 Now, add the following in the `module.rules` array in your webpack config:
@@ -206,8 +206,8 @@ Now, add the following in the `module.rules` array in your webpack config:
 
 To be able to import images and other assets using `require`, we need to configure `file-loader`. Let's install it:
 
-```sh
-yarn add --dev file-loader
+```bash npm2yarn
+npm install --save-dev file-loader
 ```
 
 To configure it, add the following in the `module.rules` array in your webpack config:
