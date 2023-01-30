@@ -1,6 +1,6 @@
 import { useColorMode } from '@docusaurus/theme-common';
 import * as React from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import {
   Avatar,
   Button,
@@ -15,6 +15,19 @@ import {
   TextInput,
   useTheme,
 } from 'react-native-paper';
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 28,
+    borderWidth: 1,
+    borderRadius: 16,
+    marginTop: 16,
+    marginBottom: 32,
+  },
+  row: {
+    alignItems: 'flex-start',
+  },
+});
 
 const Stack: React.FC<
   React.PropsWithChildren<{
@@ -45,23 +58,17 @@ const BannerExample = () => {
 
   return (
     <View
-      style={{
-        padding: 28,
-        backgroundColor: theme.colors.surface,
-        borderWidth: 1,
-        borderColor: theme.colors.surfaceVariant,
-        borderRadius: 16,
-        marginTop: 16,
-        marginBottom: 32,
-      }}
+      style={[
+        styles.container,
+        {
+          backgroundColor: theme.colors.surface,
+          borderColor: theme.colors.surfaceVariant,
+        },
+      ]}
     >
       <Stack spacing={16}>
         <Stack direction="row" spacing={16}>
-          <Stack
-            direction="row"
-            spacing={8}
-            style={{ alignItems: 'flex-start' }}
-          >
+          <Stack direction="row" spacing={8} style={styles.row}>
             <Button loading onPress={() => {}}>
               Loading
             </Button>
@@ -72,11 +79,7 @@ const BannerExample = () => {
               Press me
             </Button>
           </Stack>
-          <Stack
-            direction="row"
-            spacing={8}
-            style={{ alignItems: 'flex-start' }}
-          >
+          <Stack direction="row" spacing={8} style={styles.row}>
             <FAB icon="plus" size="small" onPress={() => {}} />
             <FAB icon="plus" size="medium" onPress={() => {}} />
             <FAB icon="plus" size="large" onPress={() => {}} />
