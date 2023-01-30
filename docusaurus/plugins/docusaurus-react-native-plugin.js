@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 
 module.exports = function () {
@@ -23,7 +24,11 @@ module.exports = function () {
           }),
         ],
         resolve: {
-          alias: { 'react-native$': 'react-native-web' },
+          alias: {
+            react: path.resolve('node_modules/react'),
+            'react-native$': 'react-native-web',
+            'react-native-paper': path.resolve('../src'),
+          },
           extensions: ['.web.js'],
         },
       };
