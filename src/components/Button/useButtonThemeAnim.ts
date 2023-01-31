@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { Animated } from 'react-native';
 
+import type { ButtonTheme } from '../../core/themes-builder/button-builder/types';
 import { useInternalTheme } from '../../core/theming';
-import type { ButtonTheme } from './ButtonNew';
 
 export const useButtonThemeAnim = (
   disabled: boolean | undefined,
