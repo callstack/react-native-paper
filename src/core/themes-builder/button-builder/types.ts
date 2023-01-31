@@ -41,8 +41,12 @@ export type ButtonTheme = {
     ) => Record<string, number>;
   };
   surfaceStyle: {
-    getElevationStyle: (elevation: Animated.Value) => Record<string, number>;
-    getElevationProp: (elevation: Animated.Value) => Record<string, number>;
+    getElevationStyle: (
+      elevation: Animated.Value
+    ) => Record<string, Animated.Value>;
+    getElevationProp: (
+      elevation: Animated.Value
+    ) => Record<string, Animated.Value>;
   };
   buttonStyle: {
     backgroundColor: {
