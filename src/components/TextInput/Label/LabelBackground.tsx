@@ -21,10 +21,12 @@ const LabelBackground = ({
   theme: themeOverrides,
 }: LabelBackgroundProps) => {
   const hasFocus = hasActiveOutline || parentState.value;
-  const opacity = parentState.labeled.interpolate({
-    inputRange: [0, 1],
-    outputRange: [hasFocus ? 1 : 0, 0],
-  });
+  const opacity = hasFocus
+    ? parentState.labeled.interpolate({
+        inputRange: [0, 1],
+        outputRange: [1, 0],
+      })
+    : 0;
 
   const { isV3 } = useInternalTheme(themeOverrides);
 
