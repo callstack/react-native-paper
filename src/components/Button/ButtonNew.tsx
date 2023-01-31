@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  Animated,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
@@ -11,7 +10,10 @@ import {
 
 import color from 'color';
 
-import type { Font } from '../../types';
+import type {
+  ButtonMode,
+  ButtonTheme,
+} from '../../core/themes-builder/button-builder/types';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
@@ -19,76 +21,6 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import { useButtonTheme } from './useButtonTheme';
 import { useButtonThemeAnim } from './useButtonThemeAnim';
-import type { ButtonMode } from './utils';
-
-type DirectionOptions = {
-  reverse: {
-    compact: Record<string, number>;
-    normal: Record<string, number>;
-  };
-  forward: {
-    compact: Record<string, number>;
-    normal: Record<string, number>;
-  };
-};
-// move it to the right place
-export type ButtonTheme = {
-  elevation: {
-    initial: number;
-    active: number;
-    supportedMode: ButtonMode;
-  };
-  borderRadius: number;
-  iconSize: number;
-  font: Font;
-
-  iconStyle: {
-    icon: DirectionOptions;
-    textMode: DirectionOptions;
-  };
-  textStyle: {
-    getTextLabel: (
-      isTextMode: boolean,
-      hasIconOrLoading: boolean
-    ) => Record<string, number>;
-  };
-  surfaceStyle: {
-    getElevationStyle: (elevation: Animated.Value) => Record<string, number>;
-    getElevationProp: (elevation: Animated.Value) => Record<string, number>;
-  };
-  buttonStyle: {
-    backgroundColor: {
-      enabled: { [key in ButtonMode]?: string };
-      disabled: { [key in ButtonMode]?: string };
-      default: string;
-    };
-    borderColor: {
-      enabled: {
-        [key in ButtonMode]?: string;
-      };
-      disabled: {
-        [key in ButtonMode]?: string;
-      };
-      default: number;
-    };
-    borderWidth: {
-      [key in ButtonMode]?: number;
-    } & { default: number };
-    textColor: {
-      getTextColor: ({
-        backgroundColor,
-        isMode,
-        disabled,
-        dark,
-      }: {
-        backgroundColor: string;
-        dark?: boolean;
-        disabled?: boolean;
-        isMode: (mode: ButtonMode) => boolean;
-      }) => string;
-    };
-  };
-};
 
 export type Props = React.ComponentProps<Exclude<typeof Surface, 'theme'>> & {
   /**
