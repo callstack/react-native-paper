@@ -146,6 +146,36 @@ it('renders FAB with custom border radius', () => {
   expect(getByTestId('fab-container')).toHaveStyle({ borderRadius: 0 });
 });
 
+it('renders FAB without uppercase styling by default', () => {
+  const { getByTestId } = render(
+    <FAB onPress={() => {}} label="Add items" testID="fab" />
+  );
+
+  expect(getByTestId('fab-text')).not.toHaveStyle({
+    textTransform: 'uppercase',
+  });
+});
+
+it('renders FAB without uppercase styling if uppercase prop is falsy', () => {
+  const { getByTestId } = render(
+    <FAB onPress={() => {}} label="Add items" testID="fab" uppercase={false} />
+  );
+
+  expect(getByTestId('fab-text')).not.toHaveStyle({
+    textTransform: 'uppercase',
+  });
+});
+
+it('renders FAB with uppercase styling if uppercase prop is truthy', () => {
+  const { getByTestId } = render(
+    <FAB onPress={() => {}} label="Add items" testID="fab" uppercase />
+  );
+
+  expect(getByTestId('fab-text')).toHaveStyle({
+    textTransform: 'uppercase',
+  });
+});
+
 (['small', 'medium', 'large'] as const).forEach((size) => {
   it(`renders ${size} FAB with correct size and border radius`, () => {
     const { getByTestId } = render(

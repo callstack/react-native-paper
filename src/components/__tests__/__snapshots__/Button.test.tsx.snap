@@ -139,6 +139,7 @@ exports[`renders button with an accessibility hint 1`] = `
                 ],
               ]
             }
+            testID="button-text"
           >
             Button with accessibility hint
           </Text>
@@ -288,6 +289,7 @@ exports[`renders button with an accessibility label 1`] = `
                 ],
               ]
             }
+            testID="button-text"
           >
             Button with accessibility label
           </Text>
@@ -436,6 +438,7 @@ exports[`renders button with button color 1`] = `
                 ],
               ]
             }
+            testID="button-text"
           >
             Custom Button
           </Text>
@@ -584,6 +587,7 @@ exports[`renders button with color 1`] = `
                 ],
               ]
             }
+            testID="button-text"
           >
             Custom Button
           </Text>
@@ -732,6 +736,7 @@ exports[`renders button with custom testID 1`] = `
                 ],
               ]
             }
+            testID="custom:testID-text"
           >
             Button with custom testID
           </Text>
@@ -936,6 +941,7 @@ exports[`renders button with icon 1`] = `
                 ],
               ]
             }
+            testID="button-text"
           >
             Icon Button
           </Text>
@@ -1142,6 +1148,7 @@ exports[`renders button with icon in reverse order 1`] = `
                 ],
               ]
             }
+            testID="button-text"
           >
             Right Icon
           </Text>
@@ -1291,6 +1298,7 @@ exports[`renders contained contained with mode 1`] = `
                 ],
               ]
             }
+            testID="button-text"
           >
             Contained Button
           </Text>
@@ -1439,6 +1447,7 @@ exports[`renders disabled button 1`] = `
                 ],
               ]
             }
+            testID="button-text"
           >
             Disabled Button
           </Text>
@@ -1795,6 +1804,7 @@ exports[`renders loading button 1`] = `
                 ],
               ]
             }
+            testID="button-text"
           >
             Loading Button
           </Text>
@@ -1944,6 +1954,7 @@ exports[`renders outlined button with mode 1`] = `
                 ],
               ]
             }
+            testID="button-text"
           >
             Outlined Button
           </Text>
@@ -2092,6 +2103,7 @@ exports[`renders text button by default 1`] = `
                 ],
               ]
             }
+            testID="button-text"
           >
             Text Button
           </Text>
@@ -2240,6 +2252,7 @@ exports[`renders text button with mode 1`] = `
                 ],
               ]
             }
+            testID="button-text"
           >
             Text Button
           </Text>

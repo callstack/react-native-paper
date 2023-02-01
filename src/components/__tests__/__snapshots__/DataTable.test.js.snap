@@ -1791,6 +1791,7 @@ exports[`renders data table pagination with options select 1`] = `
                       ],
                     ]
                   }
+                  testID="button-text"
                 >
                   2
                 </Text>

@@ -209,7 +209,7 @@ const AnimatedFAB = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const uppercase: boolean = uppercaseProp || !theme.isV3;
+  const uppercase: boolean = uppercaseProp ?? !theme.isV3;
   const isIOS = Platform.OS === 'ios';
   const isAnimatedFromRight = animateFrom === 'right';
   const isIconStatic = iconMode === 'static';
@@ -478,6 +478,7 @@ const AnimatedFAB = ({
             textStyle,
           ]}
           theme={theme}
+          testID={`${testID}-text`}
         >
           {label}
         </AnimatedText>

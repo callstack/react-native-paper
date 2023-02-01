@@ -284,6 +284,7 @@ exports[`renders animated fab 1`] = `
               "writingDirection": "ltr",
             }
           }
+          testID="animated-fab-text"
         />
       </View>
     </View>
@@ -575,6 +576,7 @@ exports[`renders animated fab with label on the left 1`] = `
               "writingDirection": "ltr",
             }
           }
+          testID="animated-fab-text"
         >
           text
         </Text>
@@ -868,6 +870,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
               "writingDirection": "ltr",
             }
           }
+          testID="animated-fab-text"
         >
           text
         </Text>
