@@ -4,6 +4,7 @@
 const path = require('path');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const lightCodeTheme = require('prism-react-renderer/themes/github');
+const fs = require('fs');
 
 const title = 'React Native Paper';
 
@@ -162,6 +163,41 @@ const config = {
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
           remarkPlugins: [
             [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
+            () => {
+              return async (tree) => {
+                await import('unist-util-visit').then(({ visit }) => {
+                  visit(tree, 'code', (node, i, parent) => {
+                    if (node.lang === 'preview') {
+                      console.log('preview', node);
+                      node.type = 'jsx';
+                      const next = parent.children[i + 1];
+                      fs.writeFileSync(
+                        path.join(__dirname, 'src', 'components', 'preview.js'),
+                        next.value || ''
+                      );
+
+                      // import the component
+
+                      parent.children.push({
+                        type: 'import',
+                        value: `import Com from '@site/src/components/preview';`,
+                      });
+
+                      node.value = `
+                        <Com />
+                      `;
+                      node.children = undefined;
+
+                      // remove the next node
+                      parent.children.splice(i + 1, 2);
+
+                      console.log('preview', node);
+                    }
+                  });
+                });
+                return tree;
+              };
+            },
           ],
         },
         blog: {

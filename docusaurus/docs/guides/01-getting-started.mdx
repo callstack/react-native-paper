@@ -5,7 +5,9 @@ title: Getting Started
 # Getting Started
 
 ```js preview
-<Button />
+<Button icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
+  Press me
+</Button>
 ```
 
 ```js
@@ -14,9 +16,11 @@ import { Button } from 'react-native-paper';
 
 const MyComponent = () => (
   <Button icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
-    Press me
+    Doodle dome
   </Button>
 );
+
+export default MyComponent;
 ```
 
 ```tsx
@@ -25,9 +29,11 @@ import { Button } from 'react-native-paper';
 
 const MyComponent = () => (
   <Button icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
-    Press me
+    Google Play
   </Button>
 );
+
+export default MyComponent;
 ```
 
 ## Installation
@@ -184,4 +190,7 @@ export default function Main() {
 }
 ```
 
-<i>Note: For MD2 check the following [Material Design 2 default theme](https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v2/LightTheme.tsx).</i>
+<i>
+  Note: For MD2 check the following [Material Design 2 default
+  theme](https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v2/LightTheme.tsx).
+</i>
