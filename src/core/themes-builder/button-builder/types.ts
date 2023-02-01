@@ -35,6 +35,7 @@ export type ButtonTheme = {
     textMode: DirectionOptions;
   };
   textStyle: {
+    uppercase: boolean;
     getTextLabel: (
       isTextMode: boolean,
       hasIconOrLoading: boolean

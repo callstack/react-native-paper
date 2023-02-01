@@ -182,7 +182,7 @@ const Button = ({
   delayLongPress,
   style,
   theme: themeOverrides,
-  uppercase = false, //!themeOverrides.isV3,
+  uppercase: uppercaseProp,
   contentStyle,
   labelStyle,
   testID = 'button',
@@ -192,7 +192,7 @@ const Button = ({
   const buttonTheme = useButtonTheme({
     theme: themeOverrides,
   });
-
+  const uppercase = uppercaseProp ?? buttonTheme.textStyle.uppercase;
   const isMode = React.useCallback(
     (modeToCompare: ButtonMode) => {
       return mode === modeToCompare;
@@ -215,8 +215,7 @@ const Button = ({
     animatePressOut();
   };
 
-  const borderRadius =
-    buttonTheme.borderRadius * (themeOverrides?.roundness ?? 5);
+  const borderRadius = buttonTheme.borderRadius;
   const iconSize = buttonTheme.iconSize;
   const { backgroundColor, borderColor, borderWidth, textColor } =
     buttonTheme.buttonStyle;

@@ -126,6 +126,7 @@ const buttonThemeV2Builder = (theme: MD2Theme): ButtonTheme => ({
     },
   },
   textStyle: {
+    uppercase: true,
     getTextLabel: () => {
       return styles.md2Label;
     },
@@ -203,6 +204,7 @@ const buttonThemeV3Builder = (theme: MD3Theme): ButtonTheme => ({
     },
   },
   textStyle: {
+    uppercase: false,
     getTextLabel: (isTextMode, hasIconOrLoading) => {
       if (!isTextMode) {
         return styles.md3Label;
