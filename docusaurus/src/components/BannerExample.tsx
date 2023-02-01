@@ -18,14 +18,16 @@ import {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 28,
+    padding: 24,
     borderWidth: 1,
     borderRadius: 16,
     marginTop: 16,
     marginBottom: 32,
+    overflow: 'hidden',
   },
   row: {
     alignItems: 'flex-start',
+    flexWrap: 'wrap',
   },
 });
 
@@ -67,7 +69,7 @@ const BannerExample = () => {
       ]}
     >
       <Stack spacing={16}>
-        <Stack direction="row" spacing={16}>
+        <Stack direction="row" spacing={16} style={styles.row}>
           <Stack direction="row" spacing={8} style={styles.row}>
             <Button loading onPress={() => {}}>
               Loading
@@ -84,7 +86,7 @@ const BannerExample = () => {
             <FAB icon="plus" size="medium" onPress={() => {}} />
             <FAB icon="plus" size="large" onPress={() => {}} />
           </Stack>
-          <Stack direction="row" spacing={8}>
+          <Stack direction="row" spacing={8} style={styles.row}>
             <Avatar.Text label="XD" />
             <Avatar.Icon icon="folder" />
           </Stack>
@@ -105,7 +107,7 @@ const BannerExample = () => {
           <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
         </Stack>
 
-        <Stack direction="row" spacing={8}>
+        <Stack direction="row" spacing={8} style={styles.row}>
           <TextInput
             label="Email"
             value={text}
