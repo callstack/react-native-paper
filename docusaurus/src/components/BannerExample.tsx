@@ -69,27 +69,21 @@ const BannerExample = () => {
       ]}
     >
       <Stack spacing={16}>
-        <Stack direction="row" spacing={16} style={styles.row}>
-          <Stack direction="row" spacing={8} style={styles.row}>
-            <Button loading onPress={() => {}}>
-              Loading
-            </Button>
-            <Button mode="contained-tonal" icon="camera" onPress={() => {}}>
-              Icon
-            </Button>
-            <Button icon="camera" mode="contained" onPress={() => {}}>
-              Press me
-            </Button>
-          </Stack>
-          <Stack direction="row" spacing={8} style={styles.row}>
-            <FAB icon="plus" size="small" onPress={() => {}} />
-            <FAB icon="plus" size="medium" onPress={() => {}} />
-            <FAB icon="plus" size="large" onPress={() => {}} />
-          </Stack>
-          <Stack direction="row" spacing={8} style={styles.row}>
-            <Avatar.Text label="MD" />
-            <Avatar.Icon icon="folder" />
-          </Stack>
+        <Stack direction="row" spacing={8} style={styles.row}>
+          <Button loading onPress={() => {}}>
+            Loading
+          </Button>
+          <Button mode="contained-tonal" icon="camera" onPress={() => {}}>
+            Icon
+          </Button>
+          <Button icon="camera" mode="contained" onPress={() => {}}>
+            Press me
+          </Button>
+          <FAB icon="plus" size="small" onPress={() => {}} />
+          <FAB icon="plus" size="medium" onPress={() => {}} />
+          <FAB icon="plus" size="large" onPress={() => {}} />
+          <Avatar.Text label="MD" />
+          <Avatar.Icon icon="folder" />
         </Stack>
         <ProgressBar indeterminate />
         <Stack spacing={8}>
