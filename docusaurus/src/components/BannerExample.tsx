@@ -87,7 +87,7 @@ const BannerExample = () => {
             <FAB icon="plus" size="large" onPress={() => {}} />
           </Stack>
           <Stack direction="row" spacing={8} style={styles.row}>
-            <Avatar.Text label="XD" />
+            <Avatar.Text label="MD" />
             <Avatar.Icon icon="folder" />
           </Stack>
         </Stack>
