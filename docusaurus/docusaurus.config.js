@@ -146,6 +146,7 @@ const config = {
       },
     ],
     require('./plugins/docusaurus-react-native-plugin'),
+    require('./plugins/docusaurus-preview-plugin'),
   ],
 
   presets: [
