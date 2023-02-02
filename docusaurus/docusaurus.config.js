@@ -5,6 +5,7 @@ const path = require('path');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const fs = require('fs');
+const fsPromise = require('fs/promises');
 
 const title = 'React Native Paper';
 
@@ -163,48 +164,56 @@ const config = {
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
           remarkPlugins: [
             [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
-            () => async (tree) => {
-              const { visit } = await import('unist-util-visit');
-              visit(tree, 'code', (node, i, parent) => {
-                if (node.meta?.includes('preview')) {
-                  const componentName =
-                    'A' + node.position.start.line + node.position.start.offset;
+            () => {
+              let alreadyImported = false;
+              return async (tree) => {
+                const { visit } = await import('unist-util-visit');
 
-                  node.type = 'jsx';
-                  const jsNode = parent.children[i + 1];
+                const previewsDir = 'src/__previews__';
 
-                  const previewsDir = '/src/__previews__';
+                const previewsDirPath = path.join(__dirname, previewsDir);
 
-                  const previewsDirPath = path.join(__dirname, previewsDir);
+                if (!fs.existsSync(previewsDirPath))
+                  await fsPromise.mkdir(previewsDirPath);
 
-                  if (!fs.existsSync(previewsDirPath)) {
-                    fs.mkdirSync(previewsDirPath);
-                  }
+                tree.children.unshift({
+                  type: 'import',
+                  value: `import Preview from '@site/src/components/preview';`,
+                });
 
-                  fs.writeFileSync(
-                    path.join(previewsDirPath, componentName + '.js'),
-                    jsNode.value
-                  );
+                visit(tree, 'code', (node, i, parent) => {
+                  if (node.meta?.includes('preview')) {
+                    const componentName = `A${node.position.start.line}${node.position.start.offset}`;
 
-                  // import the component
+                    node.type = 'jsx';
+                    const jsNode = parent.children[i + 1];
 
-                  parent.children.push({
-                    type: 'import',
-                    value: `import ${componentName} from '@site/${previewsDir}/${componentName}';`,
-                  });
+                    fs.writeFileSync(
+                      path.join(previewsDirPath, componentName + '.js'),
+                      jsNode.value
+                    );
 
-                  node.value = `
+                    parent.children.push({
+                      type: 'import',
+                      value: `import ${componentName} from '@site/${previewsDir}/${componentName}';`,
+                    });
+
+                    node.value = `
+                      <Preview>
                         <${componentName} />
+                      </Preview>
                       `;
-                  node.children = undefined;
 
-                  const tsNode = parent.children[i + 2];
+                    const tsNode = parent.children[i + 2];
 
-                  // remove the next node
-                  parent.children.splice(i + 1, tsNode?.lang === 'tsx' ? 2 : 1);
-                }
-              });
-              return tree;
+                    parent.children.splice(
+                      i + 1,
+                      tsNode?.lang === 'tsx' ? 2 : 1
+                    );
+                  }
+                });
+                return tree;
+              };
             },
           ],
         },
