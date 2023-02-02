@@ -168,44 +168,46 @@ const config = {
                 await import('unist-util-visit').then(({ visit }) => {
                   visit(tree, 'code', (node, i, parent) => {
                     if (node.meta?.includes('preview')) {
-                      // create id random name from the node
-                      const id =
+                      const componentName =
                         'A' +
                         node.position.start.line +
                         node.position.start.offset;
 
-                      console.log(id);
-
                       node.type = 'jsx';
-                      const next = parent.children[i + 1];
+                      const jsNode = parent.children[i + 1];
 
-                      const previewsDirPath = '/src/__previews__';
+                      const previewsDir = '/src/__previews__';
 
-                      const previewsDir = path.join(__dirname, previewsDirPath);
+                      const previewsDirPath = path.join(__dirname, previewsDir);
 
-                      if (!fs.existsSync(previewsDir)) {
-                        fs.mkdirSync(previewsDir);
+                      if (!fs.existsSync(previewsDirPath)) {
+                        fs.mkdirSync(previewsDirPath);
                       }
 
                       fs.writeFileSync(
-                        path.join(previewsDir, id + '.js'),
-                        next.value
+                        path.join(previewsDirPath, componentName + '.js'),
+                        jsNode.value
                       );
 
                       // import the component
 
                       parent.children.push({
                         type: 'import',
-                        value: `import ${id} from '@site/${previewsDirPath}/${id}';`,
+                        value: `import ${componentName} from '@site/${previewsDir}/${componentName}';`,
                       });
 
                       node.value = `
-                        <${id} />
+                        <${componentName} />
                       `;
                       node.children = undefined;
 
+                      const tsNode = parent.children[i + 2];
+
                       // remove the next node
-                      parent.children.splice(i + 1, 2);
+                      parent.children.splice(
+                        i + 1,
+                        tsNode?.lang === 'tsx' ? 2 : 1
+                      );
                     }
                   });
                 });
