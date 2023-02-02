@@ -116,3 +116,208 @@ it('render visible banner, with custom theme', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+describe('animations', () => {
+  let showCallback, hideCallback;
+
+  beforeEach(() => {
+    showCallback = jest.fn();
+    hideCallback = jest.fn();
+  });
+
+  beforeAll(() => {
+    jest.useFakeTimers();
+  });
+
+  afterAll(() => {
+    jest.useRealTimers();
+    showCallback = undefined;
+    hideCallback = undefined;
+  });
+
+  describe('when component is rendered hidden', () => {
+    // This behaviour is probably a bug. Needs triage before next version.
+    it('will fire onHideAnimationFinished on mount', () => {
+      renderer.create(
+        <Banner
+          onShowAnimationFinished={showCallback}
+          onHideAnimationFinished={hideCallback}
+        >
+          Text
+        </Banner>
+      );
+
+      expect(showCallback).not.toHaveBeenCalled();
+      expect(hideCallback).not.toHaveBeenCalled();
+
+      jest.runAllTimers();
+      expect(showCallback).not.toHaveBeenCalled();
+      expect(hideCallback).toHaveBeenCalled();
+    });
+
+    it('should fire onShowAnimationFinished upon opening', () => {
+      const tree = renderer.create(
+        <Banner
+          onShowAnimationFinished={showCallback}
+          onHideAnimationFinished={hideCallback}
+        >
+          Text
+        </Banner>
+      );
+
+      jest.runAllTimers();
+      expect(showCallback).toHaveBeenCalledTimes(0);
+      expect(hideCallback).toHaveBeenCalledTimes(1);
+
+      tree.update(
+        <Banner
+          onShowAnimationFinished={showCallback}
+          onHideAnimationFinished={hideCallback}
+          visible
+        >
+          Text
+        </Banner>
+      );
+      jest.runAllTimers();
+      expect(showCallback).toHaveBeenCalledTimes(1);
+      expect(hideCallback).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('when component is rendered visible', () => {
+    // This behaviour is probably a bug. Needs triage before next version.
+    it('will fire onShowAnimationFinished on mount', () => {
+      renderer.create(
+        <Banner
+          onShowAnimationFinished={showCallback}
+          onHideAnimationFinished={hideCallback}
+          visible
+        >
+          Text
+        </Banner>
+      );
+
+      expect(showCallback).not.toHaveBeenCalled();
+      expect(hideCallback).not.toHaveBeenCalled();
+
+      jest.runAllTimers();
+      expect(showCallback).toHaveBeenCalled();
+      expect(hideCallback).not.toHaveBeenCalled();
+    });
+
+    it('should fire onHideAnimationFinished upon closing', () => {
+      const tree = renderer.create(
+        <Banner
+          onShowAnimationFinished={showCallback}
+          onHideAnimationFinished={hideCallback}
+          visible
+        >
+          Text
+        </Banner>
+      );
+
+      jest.runAllTimers();
+      expect(showCallback).toHaveBeenCalledTimes(1);
+      expect(hideCallback).toHaveBeenCalledTimes(0);
+
+      tree.update(
+        <Banner
+          onShowAnimationFinished={showCallback}
+          onHideAnimationFinished={hideCallback}
+        >
+          Text
+        </Banner>
+      );
+      jest.runAllTimers();
+      expect(showCallback).toHaveBeenCalledTimes(1);
+      expect(hideCallback).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('when the callbacks change while the component is mounted', () => {
+    it('should not cause another open/close animation', () => {
+      const tree = renderer.create(
+        <Banner
+          onShowAnimationFinished={showCallback}
+          onHideAnimationFinished={hideCallback}
+          visible
+        >
+          Text
+        </Banner>
+      );
+
+      jest.runAllTimers();
+      expect(showCallback).toHaveBeenCalledTimes(1);
+      expect(hideCallback).toHaveBeenCalledTimes(0);
+
+      const nextShowCallback = jest.fn();
+      const nextHideCallback = jest.fn();
+
+      tree.update(
+        <Banner
+          onShowAnimationFinished={nextShowCallback}
+          onHideAnimationFinished={nextHideCallback}
+          visible
+        >
+          Text
+        </Banner>
+      );
+
+      jest.runAllTimers();
+      expect(showCallback).toHaveBeenCalledTimes(1);
+      expect(hideCallback).toHaveBeenCalledTimes(0);
+      expect(nextShowCallback).toHaveBeenCalledTimes(0);
+      expect(nextHideCallback).toHaveBeenCalledTimes(0);
+    });
+
+    it('should use the new callbacks upon opening/closing', () => {
+      const tree = renderer.create(
+        <Banner
+          onShowAnimationFinished={showCallback}
+          onHideAnimationFinished={hideCallback}
+          visible
+        >
+          Text
+        </Banner>
+      );
+
+      jest.runAllTimers();
+      expect(showCallback).toHaveBeenCalledTimes(1);
+      expect(hideCallback).toHaveBeenCalledTimes(0);
+
+      const nextShowCallback = jest.fn();
+      const nextHideCallback = jest.fn();
+
+      tree.update(
+        <Banner
+          onShowAnimationFinished={nextShowCallback}
+          onHideAnimationFinished={nextHideCallback}
+          visible
+        >
+          Text
+        </Banner>
+      );
+
+      jest.runAllTimers();
+      expect(showCallback).toHaveBeenCalledTimes(1);
+      expect(hideCallback).toHaveBeenCalledTimes(0);
+      expect(nextShowCallback).toHaveBeenCalledTimes(0);
+      expect(nextHideCallback).toHaveBeenCalledTimes(0);
+
+      tree.update(
+        <Banner
+          onShowAnimationFinished={nextShowCallback}
+          onHideAnimationFinished={nextHideCallback}
+        >
+          Text
+        </Banner>
+      );
+
+      jest.runAllTimers();
+      expect(showCallback).toHaveBeenCalledTimes(1);
+      expect(hideCallback).toHaveBeenCalledTimes(0);
+      expect(nextShowCallback).toHaveBeenCalledTimes(0);
+      expect(nextHideCallback).toHaveBeenCalledTimes(1);
+    });
+  });
+});

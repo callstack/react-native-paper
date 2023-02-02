@@ -3,7 +3,6 @@ import {
   Animated,
   BackHandler,
   Easing,
-  NativeEventSubscription,
   StyleProp,
   StyleSheet,
   TouchableWithoutFeedback,
@@ -12,6 +11,7 @@ import {
 } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import useEventCallback from 'use-event-callback';
 import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../core/theming';
@@ -104,7 +104,7 @@ function Modal({
   dismissable = true,
   visible = false,
   overlayAccessibilityLabel = 'Close modal',
-  onDismiss,
+  onDismiss = () => {},
   children,
   contentContainerStyle,
   style,
@@ -118,6 +118,8 @@ function Modal({
     visibleRef.current = visible;
   });
 
+  const onDismissCallback = useEventCallback(onDismiss);
+
   const { scale } = theme.animation;
 
   const { top, bottom } = useSafeAreaInsets();
@@ -130,44 +132,16 @@ function Modal({
     setRendered(true);
   }
 
-  const handleBack = () => {
-    if (dismissable) {
-      hideModal();
-    }
-    return true;
-  };
-
-  const subscription = React.useRef<NativeEventSubscription | undefined>(
-    undefined
-  );
-
-  const showModal = () => {
-    subscription.current?.remove();
-    subscription.current = addEventListener(
-      BackHandler,
-      'hardwareBackPress',
-      handleBack
-    );
-
+  const showModal = React.useCallback(() => {
     Animated.timing(opacity, {
       toValue: 1,
       duration: scale * DEFAULT_DURATION,
       easing: Easing.out(Easing.cubic),
       useNativeDriver: true,
     }).start();
-  };
+  }, [opacity, scale]);
 
-  const removeListeners = () => {
-    if (subscription.current?.remove) {
-      subscription.current?.remove();
-    } else {
-      BackHandler.removeEventListener('hardwareBackPress', handleBack);
-    }
-  };
-
-  const hideModal = () => {
-    removeListeners();
-
+  const hideModal = React.useCallback(() => {
     Animated.timing(opacity, {
       toValue: 0,
       duration: scale * DEFAULT_DURATION,
@@ -178,8 +152,8 @@ function Modal({
         return;
       }
 
-      if (visible && onDismiss) {
-        onDismiss();
+      if (visible) {
+        onDismissCallback();
       }
 
       if (visibleRef.current) {
@@ -188,7 +162,28 @@ function Modal({
         setRendered(false);
       }
     });
-  };
+  }, [onDismissCallback, opacity, scale, showModal, visible]);
+
+  React.useEffect(() => {
+    if (!visible) {
+      return undefined;
+    }
+
+    const onHardwareBackPress = () => {
+      if (dismissable) {
+        hideModal();
+      }
+
+      return true;
+    };
+
+    const subscription = addEventListener(
+      BackHandler,
+      'hardwareBackPress',
+      onHardwareBackPress
+    );
+    return () => subscription.remove();
+  }, [dismissable, hideModal, visible]);
 
   const prevVisible = React.useRef<boolean | null>(null);
 
@@ -202,11 +197,6 @@ function Modal({
     }
     prevVisible.current = visible;
   });
-
-  React.useEffect(() => {
-    return removeListeners;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   if (!rendered) return null;
 
@@ -247,6 +237,7 @@ function Modal({
         testID={`${testID}-wrapper`}
       >
         <Surface
+          testID={`${testID}-surface`}
           theme={theme}
           style={
             [

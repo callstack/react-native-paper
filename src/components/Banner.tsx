@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Animated, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
+import useEventCallback from 'use-event-callback';
+
 import { useInternalTheme } from '../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../types';
 import Button from './Button/Button';
@@ -149,6 +151,9 @@ const Banner = ({
     measured: false,
   });
 
+  const showCallback = useEventCallback(onShowAnimationFinished);
+  const hideCallback = useEventCallback(onHideAnimationFinished);
+
   const { scale } = theme.animation;
 
   React.useEffect(() => {
@@ -158,14 +163,14 @@ const Banner = ({
         duration: 250 * scale,
         toValue: 1,
         useNativeDriver: false,
-      }).start(onShowAnimationFinished);
+      }).start(showCallback);
     } else {
       // hide
       Animated.timing(position, {
         duration: 200 * scale,
         toValue: 0,
         useNativeDriver: false,
-      }).start(onHideAnimationFinished);
+      }).start(hideCallback);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible, position, scale]);
