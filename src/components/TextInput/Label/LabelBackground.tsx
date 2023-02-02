@@ -11,7 +11,6 @@ const LabelBackground = ({
     placeholderStyle,
     baseLabelTranslateX,
     topPosition,
-    hasActiveOutline,
     label,
     backgroundColor,
     roundness,
@@ -20,13 +19,10 @@ const LabelBackground = ({
   maxFontSizeMultiplier,
   theme: themeOverrides,
 }: LabelBackgroundProps) => {
-  const hasFocus = hasActiveOutline || parentState.value;
-  const opacity = hasFocus
-    ? parentState.labeled.interpolate({
-        inputRange: [0, 1],
-        outputRange: [1, 0],
-      })
-    : 0;
+  const opacity = parentState.labeled.interpolate({
+    inputRange: [0, 0.6],
+    outputRange: [1, 0],
+  });
 
   const { isV3 } = useInternalTheme(themeOverrides);
 
@@ -57,45 +53,48 @@ const LabelBackground = ({
           2 * placeholderStyle.paddingHorizontal,
       };
 
-  return label
-    ? [
-        <Animated.View
-          key="labelBackground-view"
-          pointerEvents="none"
-          style={[
-            StyleSheet.absoluteFill,
-            styles.view,
-            {
-              backgroundColor,
-              maxHeight: Math.max(roundness / 3, 2),
-              opacity,
-              bottom: Math.max(roundness, 2),
-              transform: [labelTranslationX],
-            },
-          ]}
-        />,
-        <AnimatedText
-          key="labelBackground-text"
-          style={[
-            placeholderStyle,
-            labelStyle,
-            styles.outlinedLabel,
-            isV3 && styles.md3OutlinedLabel,
-            {
-              top: topPosition + 1,
-              backgroundColor,
-              opacity,
-              transform: labelTextTransform,
-            },
-            labelTextWidth,
-          ]}
-          numberOfLines={1}
-          maxFontSizeMultiplier={maxFontSizeMultiplier}
-        >
-          {label}
-        </AnimatedText>,
-      ]
-    : null;
+  const isRounded = roundness > 6;
+  const roundedEdgeCover = isRounded ? (
+    <Animated.View
+      key="labelBackground-view"
+      pointerEvents="none"
+      style={[
+        StyleSheet.absoluteFill,
+        styles.view,
+        {
+          backgroundColor,
+          maxHeight: Math.max(roundness / 3, 2),
+          bottom: Math.max(roundness, 2),
+          transform: [labelTranslationX],
+          opacity,
+        },
+      ]}
+    />
+  ) : null;
+
+  return [
+    roundedEdgeCover,
+    <AnimatedText
+      key="labelBackground-text"
+      style={[
+        placeholderStyle,
+        labelStyle,
+        styles.outlinedLabel,
+        isV3 && styles.md3OutlinedLabel,
+        {
+          top: topPosition + 1,
+          backgroundColor,
+          opacity,
+          transform: labelTextTransform,
+        },
+        labelTextWidth,
+      ]}
+      numberOfLines={1}
+      maxFontSizeMultiplier={maxFontSizeMultiplier}
+    >
+      {label}
+    </AnimatedText>,
+  ];
 };
 
 export default LabelBackground;
