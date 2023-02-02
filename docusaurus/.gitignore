@@ -21,3 +21,4 @@ yarn-error.log*
 
 # component-docs-plugin
 docs/components
+src/components/previews

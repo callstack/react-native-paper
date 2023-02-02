@@ -178,16 +178,28 @@ const config = {
 
                       node.type = 'jsx';
                       const next = parent.children[i + 1];
+
+                      const previewsDir = path.join(
+                        __dirname,
+                        'src',
+                        'components',
+                        'previews'
+                      );
+
+                      if (!fs.existsSync(previewsDir)) {
+                        fs.mkdirSync(previewsDir);
+                      }
+
                       fs.writeFileSync(
-                        path.join(__dirname, 'src', 'components', id + '.js'),
-                        next.value || ''
+                        path.join(previewsDir, id + '.js'),
+                        next.value
                       );
 
                       // import the component
 
                       parent.children.push({
                         type: 'import',
-                        value: `import ${id} from '@site/src/components/${id}';`,
+                        value: `import ${id} from '@site/src/components/previews/${id}';`,
                       });
 
                       node.value = `
