@@ -165,7 +165,6 @@ const config = {
           remarkPlugins: [
             [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
             () => {
-              let alreadyImported = false;
               return async (tree) => {
                 const { visit } = await import('unist-util-visit');
 
@@ -183,32 +182,68 @@ const config = {
 
                 visit(tree, 'code', (node, i, parent) => {
                   if (node.meta?.includes('preview')) {
-                    const componentName = `A${node.position.start.line}${node.position.start.offset}`;
+                    const nextNode = parent.children[i + 1];
 
-                    node.type = 'jsx';
-                    const jsNode = parent.children[i + 1];
+                    const componentName = `A${node.position.start.line}${node.position.start.offset}`;
 
                     fs.writeFileSync(
                       path.join(previewsDirPath, componentName + '.js'),
-                      jsNode.value
+                      node.value
                     );
 
-                    parent.children.push({
+                    parent.children.unshift({
                       type: 'import',
                       value: `import ${componentName} from '@site/${previewsDir}/${componentName}';`,
                     });
 
-                    node.value = `
-                      <Preview>
-                        <${componentName} />
-                      </Preview>
-                      `;
-
-                    const tsNode = parent.children[i + 2];
+                    const a = [
+                      // {
+                      //   type: 'jsx',
+                      //   value: `<Preview><${componentName} /></Preview>`,
+                      // },
+                      { type: 'jsx', value: '<Tabs>' },
+                      {
+                        type: 'jsx',
+                        value: '<TabItem value="js" label="JavaScript">',
+                      },
+                      {
+                        type: 'code',
+                        lang: 'js',
+                        value: 'const a = 1;',
+                      },
+                      { type: 'jsx', value: '</TabItem>' },
+                      { type: 'jsx', value: '</Tabs>' },
+                    ];
 
                     parent.children.splice(
                       i + 1,
-                      tsNode?.lang === 'tsx' ? 2 : 1
+                      nextNode?.lang === 'tsx' ? 2 : 1,
+                      {
+                        type: 'jsx',
+                        value: `<Preview><${componentName} /></Preview>`,
+                      },
+                      { type: 'jsx', value: '<Tabs>' },
+                      {
+                        type: 'jsx',
+                        value: '<TabItem value="js" label="JavaScript">',
+                      },
+                      {
+                        type: 'code',
+                        lang: 'js',
+                        value: node.value,
+                      },
+                      { type: 'jsx', value: '</TabItem>' },
+                      {
+                        type: 'jsx',
+                        value: '<TabItem value="ts" label="TypeScirpt">',
+                      },
+                      {
+                        type: 'code',
+                        lang: 'tsx',
+                        value: nextNode?.lang === 'tsx' ? nextNode.value : '',
+                      },
+                      { type: 'jsx', value: '</TabItem>' },
+                      { type: 'jsx', value: '</Tabs>' }
                     );
                   }
                 });
