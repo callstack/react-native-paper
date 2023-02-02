@@ -167,12 +167,19 @@ const config = {
               return async (tree) => {
                 await import('unist-util-visit').then(({ visit }) => {
                   visit(tree, 'code', (node, i, parent) => {
-                    if (node.lang === 'preview') {
-                      console.log('preview', node);
+                    if (node.meta?.includes('preview')) {
+                      // create id random name from the node
+                      const id =
+                        'A' +
+                        node.position.start.line +
+                        node.position.start.offset;
+
+                      console.log(id);
+
                       node.type = 'jsx';
                       const next = parent.children[i + 1];
                       fs.writeFileSync(
-                        path.join(__dirname, 'src', 'components', 'preview.js'),
+                        path.join(__dirname, 'src', 'components', id + '.js'),
                         next.value || ''
                       );
 
@@ -180,18 +187,16 @@ const config = {
 
                       parent.children.push({
                         type: 'import',
-                        value: `import Com from '@site/src/components/preview';`,
+                        value: `import ${id} from '@site/src/components/${id}';`,
                       });
 
                       node.value = `
-                        <Com />
+                        <${id} />
                       `;
                       node.children = undefined;
 
                       // remove the next node
                       parent.children.splice(i + 1, 2);
-
-                      console.log('preview', node);
                     }
                   });
                 });

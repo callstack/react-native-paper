@@ -194,3 +194,35 @@ export default function Main() {
   Note: For MD2 check the following [Material Design 2 default
   theme](https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v2/LightTheme.tsx).
 </i>
+
+```js preview
+<Button icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
+  Press me
+</Button>
+```
+
+```js
+import * as React from 'react';
+import { Button } from 'react-native-paper';
+
+const MyComponent = () => (
+  <Button icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
+    some new text here
+  </Button>
+);
+
+export default MyComponent;
+```
+
+```tsx
+import * as React from 'react';
+import { Button } from 'react-native-paper';
+
+const MyComponent = () => (
+  <Button icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
+    Another text some text her
+  </Button>
+);
+
+export default MyComponent;
+```
