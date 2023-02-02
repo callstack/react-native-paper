@@ -163,56 +163,48 @@ const config = {
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
           remarkPlugins: [
             [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
-            () => {
-              return async (tree) => {
-                await import('unist-util-visit').then(({ visit }) => {
-                  visit(tree, 'code', (node, i, parent) => {
-                    if (node.meta?.includes('preview')) {
-                      const componentName =
-                        'A' +
-                        node.position.start.line +
-                        node.position.start.offset;
+            () => async (tree) => {
+              const { visit } = await import('unist-util-visit');
+              visit(tree, 'code', (node, i, parent) => {
+                if (node.meta?.includes('preview')) {
+                  const componentName =
+                    'A' + node.position.start.line + node.position.start.offset;
 
-                      node.type = 'jsx';
-                      const jsNode = parent.children[i + 1];
+                  node.type = 'jsx';
+                  const jsNode = parent.children[i + 1];
 
-                      const previewsDir = '/src/__previews__';
+                  const previewsDir = '/src/__previews__';
 
-                      const previewsDirPath = path.join(__dirname, previewsDir);
+                  const previewsDirPath = path.join(__dirname, previewsDir);
 
-                      if (!fs.existsSync(previewsDirPath)) {
-                        fs.mkdirSync(previewsDirPath);
-                      }
+                  if (!fs.existsSync(previewsDirPath)) {
+                    fs.mkdirSync(previewsDirPath);
+                  }
 
-                      fs.writeFileSync(
-                        path.join(previewsDirPath, componentName + '.js'),
-                        jsNode.value
-                      );
+                  fs.writeFileSync(
+                    path.join(previewsDirPath, componentName + '.js'),
+                    jsNode.value
+                  );
 
-                      // import the component
+                  // import the component
 
-                      parent.children.push({
-                        type: 'import',
-                        value: `import ${componentName} from '@site/${previewsDir}/${componentName}';`,
-                      });
+                  parent.children.push({
+                    type: 'import',
+                    value: `import ${componentName} from '@site/${previewsDir}/${componentName}';`,
+                  });
 
-                      node.value = `
+                  node.value = `
                         <${componentName} />
                       `;
-                      node.children = undefined;
+                  node.children = undefined;
 
-                      const tsNode = parent.children[i + 2];
+                  const tsNode = parent.children[i + 2];
 
-                      // remove the next node
-                      parent.children.splice(
-                        i + 1,
-                        tsNode?.lang === 'tsx' ? 2 : 1
-                      );
-                    }
-                  });
-                });
-                return tree;
-              };
+                  // remove the next node
+                  parent.children.splice(i + 1, tsNode?.lang === 'tsx' ? 2 : 1);
+                }
+              });
+              return tree;
             },
           ],
         },
