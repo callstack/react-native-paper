@@ -11,7 +11,6 @@ const LabelBackground = ({
     placeholderStyle,
     baseLabelTranslateX,
     topPosition,
-    hasActiveOutline,
     label,
     backgroundColor,
     roundness,
@@ -20,13 +19,10 @@ const LabelBackground = ({
   maxFontSizeMultiplier,
   theme: themeOverrides,
 }: LabelBackgroundProps) => {
-  const hasFocus = hasActiveOutline || parentState.value;
-  const opacity = hasFocus
-    ? parentState.labeled.interpolate({
-        inputRange: [0, 1],
-        outputRange: [1, 0],
-      })
-    : 0;
+  const opacity = parentState.labeled.interpolate({
+    inputRange: [0, 0.6],
+    outputRange: [1, 0],
+  });
 
   const { isV3 } = useInternalTheme(themeOverrides);
 

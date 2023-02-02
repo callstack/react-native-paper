@@ -50,12 +50,10 @@ const InputLabel = (props: InputLabelProps) => {
     fontSize,
     lineHeight,
     fontWeight,
-    opacity: hasActiveOutline
-      ? parentState.labeled.interpolate({
-          inputRange: [0, 1],
-          outputRange: [1, 0],
-        })
-      : 0,
+    opacity: parentState.labeled.interpolate({
+      inputRange: [0, 1],
+      outputRange: [hasActiveOutline ? 1 : 0, 0],
+    }),
     transform: [
       {
         // Wiggle the label when there's an error
