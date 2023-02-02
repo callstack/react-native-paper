@@ -179,12 +179,9 @@ const config = {
                       node.type = 'jsx';
                       const next = parent.children[i + 1];
 
-                      const previewsDir = path.join(
-                        __dirname,
-                        'src',
-                        'components',
-                        'previews'
-                      );
+                      const previewsDirPath = '/src/__previews__';
+
+                      const previewsDir = path.join(__dirname, previewsDirPath);
 
                       if (!fs.existsSync(previewsDir)) {
                         fs.mkdirSync(previewsDir);
@@ -199,7 +196,7 @@ const config = {
 
                       parent.children.push({
                         type: 'import',
-                        value: `import ${id} from '@site/src/components/previews/${id}';`,
+                        value: `import ${id} from '@site/${previewsDirPath}/${id}';`,
                       });
 
                       node.value = `
