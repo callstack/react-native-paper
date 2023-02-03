@@ -292,6 +292,7 @@ const Button = ({
   return (
     <Surface
       {...rest}
+      testID={`${testID}-container`}
       style={
         [
           styles.button,

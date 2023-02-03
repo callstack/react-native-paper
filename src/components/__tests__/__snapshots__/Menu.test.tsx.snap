@@ -62,6 +62,7 @@ Array [
                 "minWidth": 64,
               }
             }
+            testID="button-container"
           >
             <View
               accessibilityRole="button"
@@ -564,6 +565,7 @@ exports[`renders not visible menu 1`] = `
               "minWidth": 64,
             }
           }
+          testID="button-container"
         >
           <View
             accessibilityRole="button"
@@ -727,6 +729,7 @@ Array [
                 "minWidth": 64,
               }
             }
+            testID="button-container"
           >
             <View
               accessibilityRole="button"

@@ -49,6 +49,7 @@ exports[`renders button with an accessibility hint 1`] = `
           "minWidth": 64,
         }
       }
+      testID="button-container"
     >
       <View
         accessibilityHint="hint"
@@ -197,6 +198,7 @@ exports[`renders button with an accessibility label 1`] = `
           "minWidth": 64,
         }
       }
+      testID="button-container"
     >
       <View
         accessibilityLabel="label"
@@ -345,6 +347,7 @@ exports[`renders button with button color 1`] = `
           "minWidth": 64,
         }
       }
+      testID="button-container"
     >
       <View
         accessibilityRole="button"
@@ -492,6 +495,7 @@ exports[`renders button with color 1`] = `
           "minWidth": 64,
         }
       }
+      testID="button-container"
     >
       <View
         accessibilityRole="button"
@@ -639,6 +643,7 @@ exports[`renders button with custom testID 1`] = `
           "minWidth": 64,
         }
       }
+      testID="custom:testID-container"
     >
       <View
         accessibilityRole="button"
@@ -786,6 +791,7 @@ exports[`renders button with icon 1`] = `
           "minWidth": 64,
         }
       }
+      testID="button-container"
     >
       <View
         accessibilityRole="button"
@@ -989,6 +995,7 @@ exports[`renders button with icon in reverse order 1`] = `
           "minWidth": 64,
         }
       }
+      testID="button-container"
     >
       <View
         accessibilityRole="button"
@@ -1194,6 +1201,7 @@ exports[`renders contained contained with mode 1`] = `
           "minWidth": 64,
         }
       }
+      testID="button-container"
     >
       <View
         accessibilityRole="button"
@@ -1342,6 +1350,7 @@ exports[`renders disabled button 1`] = `
           "minWidth": 64,
         }
       }
+      testID="button-container"
     >
       <View
         accessibilityRole="button"
@@ -1489,6 +1498,7 @@ exports[`renders loading button 1`] = `
           "minWidth": 64,
         }
       }
+      testID="button-container"
     >
       <View
         accessibilityRole="button"
@@ -1844,6 +1854,7 @@ exports[`renders outlined button with mode 1`] = `
           "minWidth": 64,
         }
       }
+      testID="button-container"
     >
       <View
         accessibilityRole="button"
@@ -1992,6 +2003,7 @@ exports[`renders text button by default 1`] = `
           "minWidth": 64,
         }
       }
+      testID="button-container"
     >
       <View
         accessibilityRole="button"
@@ -2139,6 +2151,7 @@ exports[`renders text button with mode 1`] = `
           "minWidth": 64,
         }
       }
+      testID="button-container"
     >
       <View
         accessibilityRole="button"
