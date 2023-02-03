@@ -89,7 +89,6 @@ exports[`renders disabled toggle button 1`] = `
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        onValueChange={[Function]}
         style={
           Array [
             false,
@@ -381,7 +380,6 @@ exports[`renders unchecked toggle button 1`] = `
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        onValueChange={[Function]}
         style={
           Array [
             false,

@@ -44,7 +44,7 @@ type RenderAppbarContentProps = {
   isDark: boolean;
   shouldCenterContent?: boolean;
   isV3: boolean;
-  renderOnly?: React.ComponentType<any>[];
+  renderOnly?: (React.ComponentType<any> | false)[];
   renderExcept?: React.ComponentType<any>[];
   mode?: AppbarModes;
   theme?: ThemeProp;
@@ -65,7 +65,7 @@ export const modeTextVariant = {
   medium: 'headlineSmall',
   large: 'headlineMedium',
   'center-aligned': 'titleLarge',
-};
+} as const;
 
 export const renderAppbarContent = ({
   children,

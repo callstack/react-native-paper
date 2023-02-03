@@ -19,13 +19,7 @@ it('renders toggle button', () => {
 it('renders disabled toggle button', () => {
   const tree = renderer
     .create(
-      <ToggleButton
-        disabled
-        value="toggle"
-        status="checked"
-        onValueChange={() => {}}
-        icon="heart"
-      />
+      <ToggleButton disabled value="toggle" status="checked" icon="heart" />
     )
     .toJSON();
 
@@ -34,14 +28,7 @@ it('renders disabled toggle button', () => {
 
 it('renders unchecked toggle button', () => {
   const tree = renderer
-    .create(
-      <ToggleButton
-        disabled
-        status="unchecked"
-        onValueChange={() => {}}
-        icon="heart"
-      />
-    )
+    .create(<ToggleButton disabled status="unchecked" icon="heart" />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

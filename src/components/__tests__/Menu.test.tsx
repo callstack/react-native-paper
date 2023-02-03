@@ -4,9 +4,9 @@ import { StyleSheet, View } from 'react-native';
 import { waitFor } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
 
-import Button from '../Button/Button.tsx';
-import Menu from '../Menu/Menu.tsx';
-import Portal from '../Portal/Portal.tsx';
+import Button from '../Button/Button';
+import Menu from '../Menu/Menu';
+import Portal from '../Portal/Portal';
 
 const styles = StyleSheet.create({
   contentStyle: {
@@ -74,7 +74,7 @@ it('renders menu with content styles', () => {
 });
 
 it('uses the default anchorPosition of top', async () => {
-  function makeMenu(visible) {
+  function makeMenu(visible: boolean) {
     return (
       <Portal.Host>
         <Menu
@@ -86,7 +86,6 @@ it('uses the default anchorPosition of top', async () => {
             </Button>
           }
           contentStyle={styles.contentStyle}
-          testID="menu"
         >
           <Menu.Item onPress={jest.fn()} title="Undo" />
           <Menu.Item onPress={jest.fn()} title="Redo" />
@@ -125,7 +124,7 @@ it('uses the default anchorPosition of top', async () => {
 });
 
 it('respects anchorPosition bottom', async () => {
-  function makeMenu(visible) {
+  function makeMenu(visible: boolean) {
     return (
       <Portal.Host>
         <Menu
@@ -138,7 +137,6 @@ it('respects anchorPosition bottom', async () => {
           }
           anchorPosition="bottom"
           contentStyle={styles.contentStyle}
-          testID="menu"
         >
           <Menu.Item onPress={jest.fn()} title="Undo" />
           <Menu.Item onPress={jest.fn()} title="Redo" />

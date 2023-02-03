@@ -110,6 +110,8 @@ describe('FABActions - labelStyle - containerStyle', () => {
       <FAB.Group
         visible
         open
+        icon=""
+        onStateChange={() => {}}
         actions={[
           {
             label: 'complete',
@@ -117,6 +119,8 @@ describe('FABActions - labelStyle - containerStyle', () => {
               fontSize: 24,
               fontWeight: '500',
             },
+            onPress() {},
+            icon: '',
           },
         ]}
       />
@@ -133,6 +137,8 @@ describe('FABActions - labelStyle - containerStyle', () => {
       <FAB.Group
         visible
         open
+        icon=""
+        onStateChange={() => {}}
         actions={[
           {
             label: 'remove',
@@ -142,6 +148,8 @@ describe('FABActions - labelStyle - containerStyle', () => {
               backgroundColor: '#687456',
               marginLeft: 16,
             },
+            onPress() {},
+            icon: '',
           },
         ]}
       />
@@ -161,9 +169,13 @@ it('correctly adds label prop', () => {
       visible
       open
       label="Label test"
+      icon=""
+      onStateChange={() => {}}
       actions={[
         {
           label: 'testing',
+          onPress() {},
+          icon: '',
         },
       ]}
     />

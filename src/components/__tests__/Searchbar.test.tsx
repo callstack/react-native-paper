@@ -3,10 +3,12 @@ import * as React from 'react';
 import { render } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
 
-import Searchbar from '../Searchbar.tsx';
+import Searchbar from '../Searchbar';
 
 it('renders with placeholder', () => {
-  const tree = renderer.create(<Searchbar placeholder="Search" />).toJSON();
+  const tree = renderer
+    .create(<Searchbar placeholder="Search" value="" />)
+    .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
@@ -20,19 +22,19 @@ it('renders with text', () => {
 });
 
 it('activity indicator snapshot test', () => {
-  const tree = renderer.create(<Searchbar loading={true} />).toJSON();
+  const tree = renderer.create(<Searchbar loading={true} value="" />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders with ActivityIndicator', () => {
-  const tree = render(<Searchbar loading={true} />);
+  const tree = render(<Searchbar loading={true} value="" />);
 
   expect(tree.getByTestId('activity-indicator')).toBeTruthy();
 });
 
 it('renders without ActivityIndicator', () => {
-  const { getByTestId } = render(<Searchbar loading={false} />);
+  const { getByTestId } = render(<Searchbar loading={false} value="" />);
 
   expect(() => getByTestId('activity-indicator')).toThrow();
 });

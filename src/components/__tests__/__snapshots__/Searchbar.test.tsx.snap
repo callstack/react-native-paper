@@ -218,6 +218,7 @@ exports[`activity indicator snapshot test 1`] = `
         }
         testID="search-bar"
         underlineColorAndroid="transparent"
+        value=""
       />
       <View
         accessibilityRole="progressbar"
@@ -640,6 +641,7 @@ exports[`renders with placeholder 1`] = `
         }
         testID="search-bar"
         underlineColorAndroid="transparent"
+        value=""
       />
       <View
         pointerEvents="none"

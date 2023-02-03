@@ -1,3 +1,5 @@
+/// <reference types="@testing-library/jest-native" />
+
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
@@ -15,7 +17,9 @@ const styles = StyleSheet.create({
 
 it('renders animated fab', () => {
   const tree = renderer
-    .create(<AnimatedFAB onPress={() => {}} icon="plus" />)
+    .create(
+      <AnimatedFAB onPress={() => {}} label="" extended={false} icon="plus" />
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -55,6 +59,7 @@ it('renders animated fab with only transparent container', () => {
       onPress={() => {}}
       icon="plus"
       testID="animated-fab"
+      extended={false}
       style={styles.background}
     />
   );

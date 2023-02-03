@@ -270,6 +270,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               }
               testID="search-bar"
               underlineColorAndroid="transparent"
+              value=""
             />
             <View
               pointerEvents="none"
