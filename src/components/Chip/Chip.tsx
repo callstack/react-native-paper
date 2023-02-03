@@ -162,7 +162,7 @@ const Chip = ({
   textStyle,
   style,
   theme: themeOverrides,
-  testID,
+  testID = 'chip',
   selectedColor,
   showSelectedOverlay = false,
   ellipsizeMode,
@@ -258,6 +258,7 @@ const Chip = ({
       ]}
       {...(theme.isV3 && { elevation: elevationStyle })}
       {...rest}
+      testID={`${testID}-container`}
       theme={theme}
     >
       <TouchableRipple
