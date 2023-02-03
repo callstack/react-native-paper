@@ -1,26 +1,55 @@
+import { useColorMode } from '@docusaurus/theme-common';
 import React from 'react';
-import { View } from 'react-native';
-import { useTheme } from 'react-native-paper';
+import { StyleSheet, View } from 'react-native';
+import {
+  MD3DarkTheme as DarkTheme,
+  MD3LightTheme as DefaultTheme,
+  Provider,
+  useTheme,
+} from 'react-native-paper';
 
-export default function Preview({ children }: { children: React.ReactNode }) {
+const styles = StyleSheet.create({
+  container: {
+    paddingVertical: 16,
+  },
+  contentContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 100,
+    padding: 16,
+    borderRadius: 8,
+    borderWidth: 1,
+  },
+});
+
+function Preview({ children }: { children: React.ReactNode }) {
   const theme = useTheme();
   return (
-    <View style={{ paddingVertical: 16 }}>
+    <View style={styles.container}>
       <View
-        style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: 8,
-          minHeight: 120,
-          elevation: 0,
-          borderRadius: 8,
-          borderWidth: 1,
-          backgroundColor: theme.colors.surface,
-          borderColor: theme.colors.surfaceVariant,
-        }}
+        style={[
+          styles.contentContainer,
+          {
+            backgroundColor: theme.colors.surface,
+            borderColor: theme.colors.surfaceVariant,
+          },
+        ]}
       >
         {children}
       </View>
     </View>
+  );
+}
+
+export default function PreviewProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const isDarkTheme = useColorMode().colorMode === 'dark';
+  return (
+    <Provider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
+      <Preview>{children}</Preview>
+    </Provider>
   );
 }
