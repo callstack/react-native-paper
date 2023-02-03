@@ -2,18 +2,10 @@ import React from 'react';
 import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-export default function Preview({
-  children,
-  jsCode,
-  tsCode,
-}: {
-  children: React.ReactNode;
-  jsCode: string;
-  tsCode?: string;
-}) {
+export default function Preview({ children }: { children: React.ReactNode }) {
   const theme = useTheme();
   return (
-    <>
+    <View style={{ paddingVertical: 16 }}>
       <View
         style={{
           alignItems: 'center',
@@ -29,6 +21,6 @@ export default function Preview({
       >
         {children}
       </View>
-    </>
+    </View>
   );
 }
