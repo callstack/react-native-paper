@@ -346,9 +346,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
         // More context:  The issue was also reproduced in react-native, using its own TextInput.
         // Workaround:    Set an empty space character in the default value.
 
-        if (placeholder !== ' ') {
-          setPlaceholder(' ');
-        }
+        setPlaceholder(' ');
       }
 
       return () => {
@@ -356,7 +354,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
           clearTimeout(timer.current);
         }
       };
-    }, [focused, placeholder, rest.label, rest.placeholder]);
+    }, [focused, rest.label, rest.placeholder]);
 
     React.useEffect(() => {
       labeled.stopAnimation();
