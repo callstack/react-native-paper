@@ -99,6 +99,7 @@ exports[`activity indicator snapshot test 1`] = `
                 "width": 40,
               }
             }
+            testID="icon-button-container"
           >
             <View
               accessibilityComponentType="button"
@@ -149,6 +150,7 @@ exports[`activity indicator snapshot test 1`] = `
                   ],
                 ]
               }
+              testID="icon-button"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -522,6 +524,7 @@ exports[`renders with placeholder 1`] = `
                 "width": 40,
               }
             }
+            testID="icon-button-container"
           >
             <View
               accessibilityComponentType="button"
@@ -572,6 +575,7 @@ exports[`renders with placeholder 1`] = `
                   ],
                 ]
               }
+              testID="icon-button"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -698,6 +702,7 @@ exports[`renders with placeholder 1`] = `
                   "width": 40,
                 }
               }
+              testID="icon-button-container"
             >
               <View
                 accessibilityComponentType="button"
@@ -748,6 +753,7 @@ exports[`renders with placeholder 1`] = `
                     ],
                   ]
                 }
+                testID="icon-button"
               >
                 <Text
                   accessibilityElementsHidden={true}
@@ -894,6 +900,7 @@ exports[`renders with text 1`] = `
                 "width": 40,
               }
             }
+            testID="icon-button-container"
           >
             <View
               accessibilityComponentType="button"
@@ -944,6 +951,7 @@ exports[`renders with text 1`] = `
                   ],
                 ]
               }
+              testID="icon-button"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -1070,6 +1078,7 @@ exports[`renders with text 1`] = `
                   "width": 40,
                 }
               }
+              testID="icon-button-container"
             >
               <View
                 accessibilityComponentType="button"
@@ -1120,6 +1129,7 @@ exports[`renders with text 1`] = `
                     ],
                   ]
                 }
+                testID="icon-button"
               >
                 <Text
                   accessibilityElementsHidden={true}

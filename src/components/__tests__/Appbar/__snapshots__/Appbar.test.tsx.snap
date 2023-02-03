@@ -151,6 +151,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                       "width": 40,
                     }
                   }
+                  testID="icon-button-container"
                 >
                   <View
                     accessibilityComponentType="button"
@@ -201,6 +202,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                         ],
                       ]
                     }
+                    testID="icon-button"
                   >
                     <Text
                       accessibilityElementsHidden={true}
@@ -327,6 +329,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                         "width": 40,
                       }
                     }
+                    testID="icon-button-container"
                   >
                     <View
                       accessibilityComponentType="button"
@@ -377,6 +380,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                           ],
                         ]
                       }
+                      testID="icon-button"
                     >
                       <Text
                         accessibilityElementsHidden={true}
@@ -531,6 +535,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                 "width": 40,
               }
             }
+            testID="icon-button-container"
           >
             <View
               accessibilityComponentType="button"
@@ -581,6 +586,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                   ],
                 ]
               }
+              testID="icon-button"
             >
               <View
                 style={
@@ -785,6 +791,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                 "width": 40,
               }
             }
+            testID="icon-button-container"
           >
             <View
               accessibilityComponentType="button"
@@ -834,6 +841,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                   ],
                 ]
               }
+              testID="icon-button"
             >
               <View
                 style={

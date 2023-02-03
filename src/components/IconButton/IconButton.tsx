@@ -128,6 +128,7 @@ const IconButton = forwardRef<View, Props>(
       mode,
       style,
       theme: themeOverrides,
+      testID = 'icon-button',
       ...rest
     }: Props,
     ref
@@ -163,6 +164,7 @@ const IconButton = forwardRef<View, Props>(
     return (
       <Surface
         ref={ref}
+        testID={`${testID}-container`}
         style={[
           {
             backgroundColor,
@@ -194,6 +196,7 @@ const IconButton = forwardRef<View, Props>(
               ? { top: 10, left: 10, bottom: 10, right: 10 }
               : { top: 6, left: 6, bottom: 6, right: 6 }
           }
+          testID={testID}
           {...rest}
         >
           <IconComponent color={iconColor} source={icon} size={size} />
