@@ -5,7 +5,11 @@
 
   "extends": "@callstack",
 
+  "plugins": ["eslint-plugin-local-rules"],
+
   "rules": {
+    "local-rules/no-import-react-forwardref": "error",
+
     "one-var": "off",
     "no-multi-assign": "off",
     "no-nested-ternary": "off",
