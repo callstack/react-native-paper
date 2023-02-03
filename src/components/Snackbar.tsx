@@ -13,7 +13,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useEventCallback from 'use-event-callback';
 
 import { useInternalTheme } from '../core/theming';
-import type { ThemeProp } from '../types';
+import type { $RemoveChildren, ThemeProp } from '../types';
 import Button from './Button/Button';
 import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
@@ -31,7 +31,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
    * - `label` - Label of the action button
    * - `onPress` - Callback that is called when action button is pressed.
    */
-  action?: Omit<React.ComponentProps<typeof Button>, 'children'> & {
+  action?: $RemoveChildren<typeof Button> & {
     label: string;
   };
   /**

@@ -37,7 +37,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
   actions?: Array<
     {
       label: string;
-    } & Omit<React.ComponentProps<typeof Button>, 'children'>
+    } & $RemoveChildren<typeof Button>
   >;
   /**
    * Style of banner's inner content.
