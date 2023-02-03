@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { StyleProp, ViewStyle, View } from 'react-native';
+import type { StyleProp, ViewStyle, View, Animated } from 'react-native';
 
 import color from 'color';
 import type { ThemeProp } from 'src/types';
@@ -41,7 +41,7 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
    * Whether it's the leading button.
    */
   isLeading?: boolean;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   ref?: React.RefObject<View>;
   /**
    * @optional

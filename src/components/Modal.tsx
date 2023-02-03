@@ -43,7 +43,7 @@ export type Props = {
   /**
    * Style for the content of the modal
    */
-  contentContainerStyle?: StyleProp<ViewStyle>;
+  contentContainerStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * Style for the wrapper of the modal.
    * Use this prop to change the default wrapper style or to override safe area insets with marginTop and marginBottom.

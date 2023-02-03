@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   EasingFunction,
   Platform,
   StyleProp,
@@ -255,7 +256,7 @@ export type Props = {
    * barStyle={{ backgroundColor: '#694fad' }}
    * ```
    */
-  barStyle?: StyleProp<ViewStyle>;
+  barStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * Specifies the largest possible scale a label font can reach.
    */
@@ -620,8 +621,11 @@ const BottomNavigation = ({
   const { routes } = navigationState;
   const { colors, dark: isDarkTheme, mode, isV3 } = theme;
 
-  const { backgroundColor: customBackground, elevation = 4 }: ViewStyle =
-    StyleSheet.flatten(barStyle) || {};
+  const { backgroundColor: customBackground, elevation = 4 } =
+    (StyleSheet.flatten(barStyle) || {}) as {
+      elevation?: number;
+      backgroundColor?: ColorValue;
+    };
 
   const approxBackgroundColor = customBackground
     ? customBackground

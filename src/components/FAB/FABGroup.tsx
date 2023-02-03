@@ -44,8 +44,8 @@ export type Props = {
     labelTextColor?: string;
     accessibilityLabel?: string;
     accessibilityHint?: string;
-    style?: StyleProp<ViewStyle>;
-    containerStyle?: StyleProp<ViewStyle>;
+    style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+    containerStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
     labelStyle?: StyleProp<TextStyle>;
     onPress: (e: GestureResponderEvent) => void;
     size?: 'small' | 'medium';
@@ -93,7 +93,7 @@ export type Props = {
   /**
    * Style for the FAB. It allows to pass the FAB button styles, such as backgroundColor.
    */
-  fabStyle?: StyleProp<ViewStyle>;
+  fabStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @supported Available in v5.x with theme version 3
    *
@@ -205,7 +205,7 @@ const FABGroup = ({
         label?: string;
         color?: string;
         accessibilityLabel?: string;
-        style?: StyleProp<ViewStyle>;
+        style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
         onPress: (e: GestureResponderEvent) => void;
         testID?: string;
       }[]

@@ -103,7 +103,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
    * Style of chip's text
    */
   textStyle?: StyleProp<TextStyle>;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
 
   /**
    * @optional

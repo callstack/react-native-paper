@@ -62,7 +62,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    * Set style of the TextInput component inside the searchbar
    */
   inputStyle?: StyleProp<TextStyle>;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * Custom color for icon, default will be derived from theme
    */

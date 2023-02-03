@@ -65,7 +65,7 @@ export type Props = {
   /**
    * Style of menu's inner content.
    */
-  contentStyle?: StyleProp<ViewStyle>;
+  contentStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional

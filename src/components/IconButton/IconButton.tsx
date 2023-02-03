@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ViewStyle,
   View,
+  Animated,
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
@@ -64,7 +65,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   ref?: React.RefObject<View>;
   /**
    * @optional
