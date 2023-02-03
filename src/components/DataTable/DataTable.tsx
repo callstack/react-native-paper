@@ -43,7 +43,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * const optionsPerPage = [2, 3, 4];
  *
  * const MyComponent = () => {
- *   const [page, setPage] = React.useState<number>(0);
+ *   const [page, setPage] = React.useState(0);
  *   const [itemsPerPage, setItemsPerPage] = React.useState(optionsPerPage[0]);
  *
  *   React.useEffect(() => {

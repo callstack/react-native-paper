@@ -60,6 +60,8 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * const MyComponent = () => (
  *   <Avatar.Text size={24} label="XD" />
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 const AvatarText = ({

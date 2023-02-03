@@ -75,7 +75,10 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * import { Avatar } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Avatar.Image size={24} source={require('../assets/avatar.png')} />
+ *   <Avatar.Image
+ *     size={24}
+ *     source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }}
+ *   />
  * );
  * export default MyComponent
  * ```

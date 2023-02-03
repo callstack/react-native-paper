@@ -46,6 +46,8 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * const MyComponent = () => (
  *   <Avatar.Icon size={24} icon="folder" />
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 const Avatar = ({
