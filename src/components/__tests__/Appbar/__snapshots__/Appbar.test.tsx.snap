@@ -99,6 +99,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                 "flexDirection": "row",
               }
             }
+            testID="search-bar-container"
           >
             <View
               collapsable={false}

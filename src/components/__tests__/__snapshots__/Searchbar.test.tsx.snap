@@ -47,6 +47,7 @@ exports[`activity indicator snapshot test 1`] = `
           "flexDirection": "row",
         }
       }
+      testID="search-bar-container"
     >
       <View
         collapsable={false}
@@ -472,6 +473,7 @@ exports[`renders with placeholder 1`] = `
           "flexDirection": "row",
         }
       }
+      testID="search-bar-container"
     >
       <View
         collapsable={false}
@@ -848,6 +850,7 @@ exports[`renders with text 1`] = `
           "flexDirection": "row",
         }
       }
+      testID="search-bar-container"
     >
       <View
         collapsable={false}

@@ -192,6 +192,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
         ]}
         {...(theme.isV3 && { elevation })}
         theme={theme}
+        testID={`${testID}-container`}
       >
         <IconButton
           accessibilityRole="button"
