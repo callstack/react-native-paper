@@ -54,6 +54,15 @@
     "react-native-a11y/has-valid-accessibility-descriptors": "off"
   },
 
+  "overrides": [
+    {
+      "files": ["*.test.js", "*.test.tsx"],
+      "rules": {
+        "local-rules/no-react-forwardref-usage": "off"
+      }
+    }
+  ],
+
   "settings": {
     "import/extensions": [".js", ".ts", ".tsx"],
     "import/parsers": {

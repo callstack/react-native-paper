@@ -1,5 +1,5 @@
-import {
-  forwardRef as reactForwardRef,
+import * as React from 'react';
+import type {
   ForwardRefRenderFunction,
   PropsWithoutRef,
   RefAttributes,
@@ -20,4 +20,4 @@ export type ForwarRefComponent<T, P = {}> = ForwardRefExoticComponent<
  */
 export const forwardRef: <T, P = {}>(
   render: ForwardRefRenderFunction<T, P>
-) => ForwarRefComponent<T, P> = reactForwardRef;
+) => ForwarRefComponent<T, P> = React.forwardRef;
