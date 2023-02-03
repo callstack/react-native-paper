@@ -1,7 +1,7 @@
 /// <reference types="@testing-library/jest-native" />
 
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
@@ -65,5 +65,33 @@ it('renders animated fab with only transparent container', () => {
   );
   expect(getByTestId('animated-fab-container')).toHaveStyle({
     backgroundColor: 'transparent',
+  });
+});
+
+it('animated value changes correctly', () => {
+  const value = new Animated.Value(1);
+  const { getByTestId } = render(
+    <AnimatedFAB
+      label="text"
+      icon="plus"
+      testID="animated-fab"
+      extended={false}
+      style={[{ transform: [{ scale: value }] }]}
+    />
+  );
+  expect(getByTestId('animated-fab-container')).toHaveStyle({
+    transform: [{ scale: 1 }],
+  });
+
+  Animated.timing(value, {
+    toValue: 1.5,
+    useNativeDriver: false,
+    duration: 200,
+  }).start();
+
+  jest.advanceTimersByTime(200);
+
+  expect(getByTestId('animated-fab-container')).toHaveStyle({
+    transform: [{ scale: 1.5 }],
   });
 });

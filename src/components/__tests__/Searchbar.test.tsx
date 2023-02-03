@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Animated } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
@@ -65,4 +66,30 @@ it('renders clear icon wrapper, which is never target of touch events, if search
   expect(getByTestId('search-bar-icon-wrapper').props.pointerEvents).toBe(
     'none'
   );
+});
+
+it('animated value changes correctly', () => {
+  const value = new Animated.Value(1);
+  const { getByTestId } = render(
+    <Searchbar
+      testID="search-bar"
+      value=""
+      style={[{ transform: [{ scale: value }] }]}
+    />
+  );
+  expect(getByTestId('search-bar-container')).toHaveStyle({
+    transform: [{ scale: 1 }],
+  });
+
+  Animated.timing(value, {
+    toValue: 1.5,
+    useNativeDriver: false,
+    duration: 200,
+  }).start();
+
+  jest.advanceTimersByTime(200);
+
+  expect(getByTestId('search-bar-container')).toHaveStyle({
+    transform: [{ scale: 1.5 }],
+  });
 });

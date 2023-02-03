@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { Animated } from 'react-native';
 
+import { render } from '@testing-library/react-native';
 import color from 'color';
 import renderer from 'react-test-renderer';
 
@@ -69,5 +71,33 @@ describe('getToggleButtonColor', () => {
     expect(getToggleButtonColor({ theme: getTheme(), checked: false })).toBe(
       'transparent'
     );
+  });
+});
+
+it('animated value changes correctly', () => {
+  const value = new Animated.Value(1);
+  const { getByTestId } = render(
+    <ToggleButton
+      disabled
+      status="unchecked"
+      icon="heart"
+      testID="toggle-button"
+      style={[{ transform: [{ scale: value }] }]}
+    />
+  );
+  expect(getByTestId('toggle-button-container')).toHaveStyle({
+    transform: [{ scale: 1 }],
+  });
+
+  Animated.timing(value, {
+    toValue: 1.5,
+    useNativeDriver: false,
+    duration: 200,
+  }).start();
+
+  jest.advanceTimersByTime(200);
+
+  expect(getByTestId('toggle-button-container')).toHaveStyle({
+    transform: [{ scale: 1.5 }],
   });
 });

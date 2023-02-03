@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
 
-import { waitFor } from '@testing-library/react-native';
+import { render, waitFor } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
 
 import Button from '../Button/Button';
@@ -166,5 +166,37 @@ it('respects anchorPosition bottom', async () => {
       },
       undefined,
     ]);
+  });
+});
+
+it('animated value changes correctly', () => {
+  const value = new Animated.Value(1);
+  const { getByTestId } = render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+        testID="menu"
+        contentStyle={[{ transform: [{ scale: value }] }]}
+      >
+        <Menu.Item onPress={jest.fn()} title="Test" />
+      </Menu>
+    </Portal.Host>
+  );
+  expect(getByTestId('menu-surface')).toHaveStyle({
+    transform: [{ scale: 1 }],
+  });
+
+  Animated.timing(value, {
+    toValue: 1.5,
+    useNativeDriver: false,
+    duration: 200,
+  }).start();
+
+  jest.advanceTimersByTime(200);
+
+  expect(getByTestId('menu-surface')).toHaveStyle({
+    transform: [{ scale: 1.5 }],
   });
 });

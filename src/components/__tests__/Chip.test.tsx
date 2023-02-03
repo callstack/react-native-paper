@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { Animated } from 'react-native';
 
+import { render } from '@testing-library/react-native';
 import color from 'color';
 import renderer from 'react-test-renderer';
 
@@ -740,5 +742,33 @@ describe('getChipColor - border color', () => {
     ).toMatchObject({
       borderColor: '#383838',
     });
+  });
+});
+
+it('animated value changes correctly', () => {
+  const value = new Animated.Value(1);
+  const { getByTestId } = render(
+    <Chip
+      onPress={() => {}}
+      testID="chip"
+      style={[{ transform: [{ scale: value }] }]}
+    >
+      Example Chip
+    </Chip>
+  );
+  expect(getByTestId('chip-container')).toHaveStyle({
+    transform: [{ scale: 1 }],
+  });
+
+  Animated.timing(value, {
+    toValue: 1.5,
+    useNativeDriver: false,
+    duration: 200,
+  }).start();
+
+  jest.advanceTimersByTime(200);
+
+  expect(getByTestId('chip-container')).toHaveStyle({
+    transform: [{ scale: 1.5 }],
   });
 });

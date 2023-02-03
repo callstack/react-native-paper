@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Image } from 'react-native';
+import { Animated, Image } from 'react-native';
 
+import { render } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
 
 import Banner from '../Banner';
@@ -323,6 +324,34 @@ describe('animations', () => {
       expect(hideCallback).toHaveBeenCalledTimes(0);
       expect(nextShowCallback).toHaveBeenCalledTimes(0);
       expect(nextHideCallback).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it('animated value changes correctly', () => {
+    const value = new Animated.Value(1);
+    const { getByTestId } = render(
+      <Banner
+        visible
+        testID="banner"
+        style={[{ transform: [{ scale: value }] }]}
+      >
+        Banner
+      </Banner>
+    );
+    expect(getByTestId('banner')).toHaveStyle({
+      transform: [{ scale: 1 }],
+    });
+
+    Animated.timing(value, {
+      toValue: 1.5,
+      useNativeDriver: false,
+      duration: 200,
+    }).start();
+
+    jest.runAllTimers();
+
+    expect(getByTestId('banner')).toHaveStyle({
+      transform: [{ scale: 1.5 }],
     });
   });
 });

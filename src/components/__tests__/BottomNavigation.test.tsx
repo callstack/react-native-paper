@@ -467,3 +467,31 @@ describe('getLabelColor', () => {
     }
   );
 });
+
+it('barStyle animated value changes correctly', () => {
+  const value = new Animated.Value(1);
+  const { getByTestId } = render(
+    <BottomNavigation
+      navigationState={createState(0, 1)}
+      onIndexChange={() => {}}
+      renderScene={({ route }) => route.title}
+      testID={'bottom-navigation'}
+      barStyle={[{ transform: [{ scale: value }] }]}
+    />
+  );
+  expect(getByTestId('bottom-navigation-surface')).toHaveStyle({
+    transform: [{ scale: 1 }],
+  });
+
+  Animated.timing(value, {
+    toValue: 1.5,
+    useNativeDriver: false,
+    duration: 200,
+  }).start();
+
+  jest.advanceTimersByTime(200);
+
+  expect(getByTestId('bottom-navigation-surface')).toHaveStyle({
+    transform: [{ scale: 1.5 }],
+  });
+});

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 import color from 'color';
@@ -337,5 +337,31 @@ describe('getIconButtonColor - ripple color', () => {
         .rgb()
         .string(),
     });
+  });
+});
+
+it('action animated value changes correctly', () => {
+  const value = new Animated.Value(1);
+  const { getByTestId } = render(
+    <IconButton
+      icon="menu"
+      style={[{ transform: [{ scale: value }] }]}
+      testID="icon-button"
+    />
+  );
+  expect(getByTestId('icon-button-container')).toHaveStyle({
+    transform: [{ scale: 1 }],
+  });
+
+  Animated.timing(value, {
+    toValue: 1.5,
+    useNativeDriver: false,
+    duration: 200,
+  }).start();
+
+  jest.advanceTimersByTime(200);
+
+  expect(getByTestId('icon-button-container')).toHaveStyle({
+    transform: [{ scale: 1.5 }],
   });
 });

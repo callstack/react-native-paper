@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Animated } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 import color from 'color';
@@ -182,4 +183,41 @@ it('correctly adds label prop', () => {
   );
 
   expect(getByText('Label test')).toBeTruthy();
+});
+
+it('animated value changes correctly', () => {
+  const value = new Animated.Value(1);
+  const { getByTestId } = render(
+    <FAB.Group
+      visible
+      open
+      label="Label test"
+      icon=""
+      onStateChange={() => {}}
+      testID="my-fab"
+      fabStyle={[{ transform: [{ scale: value }] }]}
+      actions={[
+        {
+          label: 'testing',
+          onPress() {},
+          icon: '',
+        },
+      ]}
+    />
+  );
+  expect(getByTestId('my-fab-container')).toHaveStyle({
+    transform: [{ scale: 1 }],
+  });
+
+  Animated.timing(value, {
+    toValue: 1.5,
+    useNativeDriver: false,
+    duration: 200,
+  }).start();
+
+  jest.advanceTimersByTime(200);
+
+  expect(getByTestId('my-fab-container')).toHaveStyle({
+    transform: [{ scale: 1.5 }],
+  });
 });

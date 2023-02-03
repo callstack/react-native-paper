@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  Animated,
   Text,
   BackHandler as RNBackHandler,
   BackHandlerStatic as RNBackHandlerStatic,
@@ -581,6 +582,34 @@ describe('Modal', () => {
 
         expect(queryByTestId('modal-backdrop')).toBe(null);
       });
+    });
+  });
+
+  it('animated value changes correctly', () => {
+    const value = new Animated.Value(1);
+    const { getByTestId } = render(
+      <Modal
+        visible={true}
+        testID="modal"
+        contentContainerStyle={[{ transform: [{ scale: value }] }]}
+      >
+        {null}
+      </Modal>
+    );
+    expect(getByTestId('modal-surface')).toHaveStyle({
+      transform: [{ scale: 1 }],
+    });
+
+    Animated.timing(value, {
+      toValue: 1.5,
+      useNativeDriver: false,
+      duration: 200,
+    }).start();
+
+    jest.runAllTimers();
+
+    expect(getByTestId('modal-surface')).toHaveStyle({
+      transform: [{ scale: 1.5 }],
     });
   });
 });
