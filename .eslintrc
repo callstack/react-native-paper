@@ -9,6 +9,7 @@
 
   "rules": {
     "local-rules/no-import-react-forwardref": "error",
+    "local-rules/no-react-forwardref-usage": "error",
 
     "one-var": "off",
     "no-multi-assign": "off",
