@@ -242,24 +242,20 @@ const Chip = ({
   };
   return (
     <Surface
-      style={
-        [
-          styles.container,
-          isV3 &&
-            (isOutlined ? styles.md3OutlineContainer : styles.md3FlatContainer),
-          !theme.isV3 && {
-            elevation: elevationStyle,
-          },
-          {
-            backgroundColor: selected
-              ? selectedBackgroundColor
-              : backgroundColor,
-            borderColor,
-            borderRadius,
-          },
-          style,
-        ] as StyleProp<ViewStyle>
-      }
+      style={[
+        styles.container,
+        isV3 &&
+          (isOutlined ? styles.md3OutlineContainer : styles.md3FlatContainer),
+        !theme.isV3 && {
+          elevation: elevationStyle,
+        },
+        {
+          backgroundColor: selected ? selectedBackgroundColor : backgroundColor,
+          borderColor,
+          borderRadius,
+        },
+        style,
+      ]}
       {...(theme.isV3 && { elevation: elevationStyle })}
       {...rest}
       theme={theme}

@@ -131,18 +131,16 @@ const AppbarHeader = ({
 
   return (
     <View
-      style={
-        [
-          {
-            backgroundColor,
-            zIndex,
-            elevation,
-            paddingTop: statusBarHeight ?? top,
-            paddingHorizontal: Math.max(left, right),
-          },
-          shadow(elevation),
-        ] as StyleProp<ViewStyle>
-      }
+      style={[
+        {
+          backgroundColor,
+          zIndex,
+          elevation,
+          paddingTop: statusBarHeight ?? top,
+          paddingHorizontal: Math.max(left, right),
+        },
+        shadow(elevation) as ViewStyle,
+      ]}
     >
       <Appbar
         style={[{ height, backgroundColor }, styles.appbar, restStyle]}

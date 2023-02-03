@@ -320,24 +320,22 @@ const AnimatedFAB = ({
     <Surface
       {...rest}
       testID={`${testID}-container`}
-      style={
-        [
-          {
-            opacity: visibility,
-            transform: [
-              {
-                scale: visibility,
-              },
-            ],
-            borderRadius,
-          },
-          !isV3 && {
-            elevation: md2Elevation,
-          },
-          styles.container,
-          restStyle,
-        ] as StyleProp<ViewStyle>
-      }
+      style={[
+        {
+          opacity: visibility,
+          transform: [
+            {
+              scale: visibility,
+            },
+          ],
+          borderRadius,
+        },
+        !isV3 && {
+          elevation: md2Elevation,
+        },
+        styles.container,
+        restStyle,
+      ]}
       {...(isV3 && { elevation: md3Elevation })}
       theme={theme}
     >

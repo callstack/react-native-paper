@@ -239,13 +239,7 @@ function Modal({
         <Surface
           testID={`${testID}-surface`}
           theme={theme}
-          style={
-            [
-              { opacity },
-              styles.content,
-              contentContainerStyle,
-            ] as StyleProp<ViewStyle>
-          }
+          style={[{ opacity }, styles.content, contentContainerStyle]}
         >
           {children}
         </Surface>

@@ -626,16 +626,14 @@ class Menu extends React.Component<Props, State> {
             >
               <Animated.View style={{ transform: positionTransforms }}>
                 <Surface
-                  style={
-                    [
-                      styles.shadowMenuContainer,
-                      shadowMenuContainerStyle,
-                      theme.isV3 && {
-                        backgroundColor: theme.colors.elevation.level2,
-                      },
-                      contentStyle,
-                    ] as StyleProp<ViewStyle>
-                  }
+                  style={[
+                    styles.shadowMenuContainer,
+                    shadowMenuContainerStyle,
+                    theme.isV3 && {
+                      backgroundColor: theme.colors.elevation.level2,
+                    },
+                    contentStyle,
+                  ]}
                   {...(theme.isV3 && { elevation: 2 })}
                   theme={theme}
                 >
