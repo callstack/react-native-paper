@@ -12,9 +12,9 @@ import {
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useEventCallback from 'use-event-callback';
-import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../core/theming';
+import type { ThemeProp } from '../types';
 import { addEventListener } from '../utils/addEventListener';
 import useAnimatedValue from '../utils/useAnimatedValue';
 import Surface from './Surface';
