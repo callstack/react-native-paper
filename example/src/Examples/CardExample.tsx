@@ -106,6 +106,20 @@ const CardExample = () => {
         </Card>
         <Card style={styles.card} mode={selectedMode}>
           <Card.Cover
+            source={require('../../assets/images/restaurant-1.jpg')}
+          />
+          <Card.Title title="Custom Button styles" />
+          <Card.Actions>
+            <Button style={styles.button} onPress={() => {}}>
+              Share
+            </Button>
+            <Button style={styles.button} onPress={() => {}}>
+              Explore
+            </Button>
+          </Card.Actions>
+        </Card>
+        <Card style={styles.card} mode={selectedMode}>
+          <Card.Cover
             source={require('../../assets/images/strawberries.jpg')}
           />
           <Card.Title
@@ -200,6 +214,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: 12,
     paddingHorizontal: 8,
+  },
+  button: {
+    borderRadius: 12,
   },
 });
 
