@@ -271,6 +271,7 @@ exports[`renders data table pagination 1`] = `
           "alignSelf": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -285,11 +286,13 @@ exports[`renders data table pagination 1`] = `
           "top": undefined,
         }
       }
+      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -299,6 +302,7 @@ exports[`renders data table pagination 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="icon-button-container-inner-layer"
       >
         <View
           collapsable={false}
@@ -309,6 +313,7 @@ exports[`renders data table pagination 1`] = `
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
               "margin": 6,
               "overflow": "hidden",
@@ -415,6 +420,7 @@ exports[`renders data table pagination 1`] = `
           "alignSelf": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -429,11 +435,13 @@ exports[`renders data table pagination 1`] = `
           "top": undefined,
         }
       }
+      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -443,6 +451,7 @@ exports[`renders data table pagination 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="icon-button-container-inner-layer"
       >
         <View
           collapsable={false}
@@ -453,6 +462,7 @@ exports[`renders data table pagination 1`] = `
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
               "margin": 6,
               "overflow": "hidden",
@@ -617,6 +627,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           "alignSelf": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -631,11 +642,13 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           "top": undefined,
         }
       }
+      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -645,6 +658,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="icon-button-container-inner-layer"
       >
         <View
           collapsable={false}
@@ -655,6 +669,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
               "margin": 6,
               "overflow": "hidden",
@@ -761,6 +776,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           "alignSelf": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -775,11 +791,13 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           "top": undefined,
         }
       }
+      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -789,6 +807,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="icon-button-container-inner-layer"
       >
         <View
           collapsable={false}
@@ -799,6 +818,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
               "margin": 6,
               "overflow": "hidden",
@@ -905,6 +925,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           "alignSelf": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -919,11 +940,13 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           "top": undefined,
         }
       }
+      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -933,6 +956,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="icon-button-container-inner-layer"
       >
         <View
           collapsable={false}
@@ -943,6 +967,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
               "margin": 6,
               "overflow": "hidden",
@@ -1049,6 +1074,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           "alignSelf": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -1063,11 +1089,13 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
           "top": undefined,
         }
       }
+      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -1077,6 +1105,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="icon-button-container-inner-layer"
       >
         <View
           collapsable={false}
@@ -1087,6 +1116,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
               "margin": 6,
               "overflow": "hidden",
@@ -1251,6 +1281,7 @@ exports[`renders data table pagination with label 1`] = `
           "alignSelf": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -1265,11 +1296,13 @@ exports[`renders data table pagination with label 1`] = `
           "top": undefined,
         }
       }
+      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -1279,6 +1312,7 @@ exports[`renders data table pagination with label 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="icon-button-container-inner-layer"
       >
         <View
           collapsable={false}
@@ -1289,6 +1323,7 @@ exports[`renders data table pagination with label 1`] = `
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
               "margin": 6,
               "overflow": "hidden",
@@ -1395,6 +1430,7 @@ exports[`renders data table pagination with label 1`] = `
           "alignSelf": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -1409,11 +1445,13 @@ exports[`renders data table pagination with label 1`] = `
           "top": undefined,
         }
       }
+      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -1423,6 +1461,7 @@ exports[`renders data table pagination with label 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="icon-button-container-inner-layer"
       >
         <View
           collapsable={false}
@@ -1433,6 +1472,7 @@ exports[`renders data table pagination with label 1`] = `
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
               "margin": 6,
               "overflow": "hidden",
@@ -1603,6 +1643,7 @@ exports[`renders data table pagination with options select 1`] = `
             "alignSelf": undefined,
             "bottom": undefined,
             "end": undefined,
+            "flex": undefined,
             "left": undefined,
             "position": undefined,
             "right": undefined,
@@ -1617,11 +1658,13 @@ exports[`renders data table pagination with options select 1`] = `
             "top": undefined,
           }
         }
+        testID="button-container-outer-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
+              "flex": undefined,
               "shadowColor": "#000",
               "shadowOffset": Object {
                 "height": 0,
@@ -1631,6 +1674,7 @@ exports[`renders data table pagination with options select 1`] = `
               "shadowRadius": 0,
             }
           }
+          testID="button-container-inner-layer"
         >
           <View
             collapsable={false}
@@ -1641,6 +1685,7 @@ exports[`renders data table pagination with options select 1`] = `
                 "borderRadius": 20,
                 "borderStyle": "solid",
                 "borderWidth": 1,
+                "flex": undefined,
                 "marginRight": 16,
                 "minWidth": 64,
                 "textAlign": "center",
@@ -1847,6 +1892,7 @@ exports[`renders data table pagination with options select 1`] = `
           "alignSelf": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -1861,11 +1907,13 @@ exports[`renders data table pagination with options select 1`] = `
           "top": undefined,
         }
       }
+      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -1875,6 +1923,7 @@ exports[`renders data table pagination with options select 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="icon-button-container-inner-layer"
       >
         <View
           collapsable={false}
@@ -1885,6 +1934,7 @@ exports[`renders data table pagination with options select 1`] = `
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
               "margin": 6,
               "overflow": "hidden",
@@ -1991,6 +2041,7 @@ exports[`renders data table pagination with options select 1`] = `
           "alignSelf": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -2005,11 +2056,13 @@ exports[`renders data table pagination with options select 1`] = `
           "top": undefined,
         }
       }
+      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -2019,6 +2072,7 @@ exports[`renders data table pagination with options select 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="icon-button-container-inner-layer"
       >
         <View
           collapsable={false}
@@ -2029,6 +2083,7 @@ exports[`renders data table pagination with options select 1`] = `
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
               "margin": 6,
               "overflow": "hidden",
@@ -2135,6 +2190,7 @@ exports[`renders data table pagination with options select 1`] = `
           "alignSelf": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -2149,11 +2205,13 @@ exports[`renders data table pagination with options select 1`] = `
           "top": undefined,
         }
       }
+      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -2163,6 +2221,7 @@ exports[`renders data table pagination with options select 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="icon-button-container-inner-layer"
       >
         <View
           collapsable={false}
@@ -2173,6 +2232,7 @@ exports[`renders data table pagination with options select 1`] = `
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
               "margin": 6,
               "overflow": "hidden",
@@ -2279,6 +2339,7 @@ exports[`renders data table pagination with options select 1`] = `
           "alignSelf": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -2293,11 +2354,13 @@ exports[`renders data table pagination with options select 1`] = `
           "top": undefined,
         }
       }
+      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -2307,6 +2370,7 @@ exports[`renders data table pagination with options select 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="icon-button-container-inner-layer"
       >
         <View
           collapsable={false}
@@ -2317,6 +2381,7 @@ exports[`renders data table pagination with options select 1`] = `
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
+              "flex": undefined,
               "height": 40,
               "margin": 6,
               "overflow": "hidden",

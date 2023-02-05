@@ -8,6 +8,7 @@ exports[`Card renders an outlined card 1`] = `
       "alignSelf": undefined,
       "bottom": undefined,
       "end": undefined,
+      "flex": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -22,11 +23,13 @@ exports[`Card renders an outlined card 1`] = `
       "top": undefined,
     }
   }
+  testID="card-container-outer-layer"
 >
   <View
     collapsable={false}
     style={
       Object {
+        "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -36,6 +39,7 @@ exports[`Card renders an outlined card 1`] = `
         "shadowRadius": 0,
       }
     }
+    testID="card-container-inner-layer"
   >
     <View
       collapsable={false}
@@ -44,6 +48,7 @@ exports[`Card renders an outlined card 1`] = `
           "backgroundColor": "rgba(255, 251, 254, 1)",
           "borderRadius": 12,
           "elevation": 1,
+          "flex": undefined,
         }
       }
       testID="card-container"

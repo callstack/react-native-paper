@@ -113,7 +113,7 @@ const Surface = forwardRef<View, Props>(
       children,
       theme: overridenTheme,
       style,
-      testID,
+      testID = 'surface',
       ...props
     }: Props,
     ref
@@ -228,6 +228,7 @@ const Surface = forwardRef<View, Props>(
       bottom,
       start,
       end,
+      flex,
       ...restStyle
     } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
@@ -241,7 +242,12 @@ const Surface = forwardRef<View, Props>(
       start,
       end,
     };
-    const sharedStyle = [{ backgroundColor }, restStyle];
+
+    const sharedStyle = [{ backgroundColor, flex }, restStyle];
+
+    const innerLayerViewStyles = [{ flex }];
+
+    const outerLayerViewStyles = [absoluteStyles, innerLayerViewStyles];
 
     if (isAnimatedValue(elevation)) {
       const inputRange = [0, 1, 2, 3, 4, 5];
@@ -270,9 +276,13 @@ const Surface = forwardRef<View, Props>(
 
       return (
         <Animated.View
-          style={[getStyleForAnimatedShadowLayer(0), absoluteStyles]}
+          style={[getStyleForAnimatedShadowLayer(0), outerLayerViewStyles]}
+          testID={`${testID}-outer-layer`}
         >
-          <Animated.View style={getStyleForAnimatedShadowLayer(1)}>
+          <Animated.View
+            style={[getStyleForAnimatedShadowLayer(1), innerLayerViewStyles]}
+            testID={`${testID}-inner-layer`}
+          >
             <Animated.View {...props} testID={testID} style={sharedStyle}>
               {children}
             </Animated.View>
@@ -298,9 +308,13 @@ const Surface = forwardRef<View, Props>(
     return (
       <Animated.View
         ref={ref}
-        style={[getStyleForShadowLayer(0), absoluteStyles]}
+        style={[getStyleForShadowLayer(0), outerLayerViewStyles]}
+        testID={`${testID}-outer-layer`}
       >
-        <Animated.View style={getStyleForShadowLayer(1)}>
+        <Animated.View
+          style={[getStyleForShadowLayer(1), innerLayerViewStyles]}
+          testID={`${testID}-inner-layer`}
+        >
           <Animated.View {...props} testID={testID} style={sharedStyle}>
             {children}
           </Animated.View>
