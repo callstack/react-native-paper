@@ -82,7 +82,7 @@ function configureV3Fonts(
   config: MD3FontsConfig
 ): MD3Typescale | (MD3Typescale & { [key: string]: MD3Type }) {
   if (!config) {
-    return typescale;
+    return typescale as MD3Typescale;
   }
 
   const isFlatConfig = Object.keys(config).every(

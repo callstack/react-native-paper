@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Animated, I18nManager, StyleSheet, TextStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import { Font, ThemeProp, MD3TypescaleKey } from '../../types';
+import type { ThemeProp, MD3TypescaleKey } from '../../types';
 
 type Props = React.ComponentPropsWithRef<typeof Animated.Text> & {
   /**
@@ -42,39 +42,24 @@ function AnimatedText({
   const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
 
   if (theme.isV3 && variant) {
-    const stylesByVariant = Object.keys(MD3TypescaleKey).reduce(
-      (acc, key) => {
-        const { fontSize, fontWeight, lineHeight, letterSpacing, fontFamily } =
-          theme.fonts[key as keyof typeof MD3TypescaleKey];
-
-        return {
-          ...acc,
-          [key]: {
-            fontFamily,
-            fontSize,
-            fontWeight,
-            lineHeight: lineHeight,
-            letterSpacing,
-            color: theme.colors.onSurface,
-          },
-        };
-      },
-      {} as {
-        [key in MD3TypescaleKey]: {
-          fontSize: number;
-          fontWeight: Font['fontWeight'];
-          lineHeight: number;
-          letterSpacing: number;
-        };
-      }
-    );
-
-    const styleForVariant = stylesByVariant[variant];
+    const font = theme.fonts[variant];
+    if (typeof font !== 'object') {
+      throw new Error(
+        `Variant ${variant} was not provided properly. Valid variants are ${Object.keys(
+          theme.fonts
+        ).join(', ')}.`
+      );
+    }
 
     return (
       <Animated.Text
         {...rest}
-        style={[styleForVariant, styles.text, { writingDirection }, style]}
+        style={[
+          { ...font, color: theme.colors.onSurface },
+          styles.text,
+          { writingDirection },
+          style,
+        ]}
       />
     );
   } else {

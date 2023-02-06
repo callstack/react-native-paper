@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import { Font, MD3TypescaleKey, ThemeProp } from '../../types';
+import type { MD3TypescaleKey, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 
 export type Props = React.ComponentProps<typeof NativeText> & {
@@ -92,39 +92,27 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
   }));
 
   if (theme.isV3 && variant) {
-    const stylesByVariant = Object.keys(MD3TypescaleKey).reduce(
-      (acc, key) => {
-        const { fontSize, fontWeight, lineHeight, letterSpacing, fontFamily } =
-          theme.fonts[key as keyof typeof MD3TypescaleKey];
-
-        return {
-          ...acc,
-          [key]: {
-            fontFamily,
-            fontSize,
-            fontWeight,
-            lineHeight,
-            letterSpacing,
-            color: theme.colors.onSurface,
-          },
-        };
-      },
-      {} as {
-        [key in MD3TypescaleKey]: {
-          fontSize: number;
-          fontWeight: Font['fontWeight'];
-          lineHeight: number;
-          letterSpacing: number;
-        };
-      }
-    );
-
-    const styleForVariant = stylesByVariant[variant];
+    const font = theme.fonts[variant];
+    if (typeof font !== 'object') {
+      throw new Error(
+        `Variant ${variant} was not provided properly. Valid variants are ${Object.keys(
+          theme.fonts
+        ).join(', ')}.`
+      );
+    }
 
     return (
       <NativeText
         ref={root}
-        style={[styleForVariant, styles.text, { writingDirection }, style]}
+        style={[
+          {
+            ...font,
+            color: theme.colors.onSurface,
+          },
+          styles.text,
+          { writingDirection },
+          style,
+        ]}
         {...rest}
       />
     );

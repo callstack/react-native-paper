@@ -1,10 +1,13 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 import {
   Caption,
+  configureFonts,
   Headline,
+  MD3LightTheme,
   Paragraph,
+  Provider,
   Subheading,
   Text,
   Title,
@@ -13,8 +16,35 @@ import {
 import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
+declare module 'react-native-paper' {
+  enum MD3TypescaleKey {
+    'customVariant' = 'customVariant',
+  }
+}
+
 const TextExample = () => {
   const { isV3 } = useExampleTheme();
+
+  const fontConfig = {
+    customVariant: {
+      fontFamily: Platform.select({
+        ios: 'Noteworthy',
+        default: 'serif',
+      }),
+      fontWeight: '400',
+      letterSpacing: Platform.select({
+        ios: 7,
+        default: 4.6,
+      }),
+      lineHeight: 54,
+      fontSize: 40,
+    },
+  } as const;
+
+  const theme = {
+    ...MD3LightTheme,
+    fonts: configureFonts({ config: fontConfig }),
+  };
   return (
     <ScreenWrapper>
       <View style={styles.container}>
@@ -79,6 +109,12 @@ const TextExample = () => {
             <Text style={styles.text} variant="bodySmall">
               Body Small
             </Text>
+
+            <Provider theme={theme}>
+              <Text style={styles.text} variant="customVariant">
+                Custom Variant
+              </Text>
+            </Provider>
           </>
         )}
       </View>

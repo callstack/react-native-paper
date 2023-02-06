@@ -149,4 +149,10 @@ export type { Props as SegmentedButtonsProps } from './components/SegmentedButto
 export type { Props as ListImageProps } from './components/List/ListImage';
 export type { Props as TooltipProps } from './components/Tooltip/Tooltip';
 
-export type { MD2Theme, MD3Theme, ThemeBase, MD3Elevation } from './types';
+export type {
+  MD2Theme,
+  MD3Theme,
+  ThemeBase,
+  MD3Elevation,
+  MD3TypescaleKey,
+} from './types';
