@@ -1,6 +1,14 @@
 import { useColorMode } from '@docusaurus/theme-common';
-import React from 'react';
+import * as React from 'react';
+import {
+  LiveEditor,
+  LiveError,
+  LivePreview,
+  LiveProvider,
+} from 'react-live-runner';
+import * as ReactNative from 'react-native';
 import { StyleSheet, View } from 'react-native';
+import * as ReactNativePaper from 'react-native-paper';
 import {
   MD3DarkTheme as DarkTheme,
   MD3LightTheme as DefaultTheme,
@@ -15,41 +23,53 @@ const styles = StyleSheet.create({
   contentContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    maxHeight: 480,
     minHeight: 100,
+    position: 'relative',
     padding: 16,
     borderRadius: 8,
     borderWidth: 1,
   },
 });
 
-function Preview({ children }: { children: React.ReactNode }) {
+function Preview({ jsCode }: { jsCode: string }) {
   const theme = useTheme();
+
   return (
-    <View style={styles.container}>
-      <View
-        style={[
-          styles.contentContainer,
-          {
-            backgroundColor: theme.colors.surface,
-            borderColor: theme.colors.surfaceVariant,
-          },
-        ]}
-      >
-        {children}
+    <LiveProvider
+      code={jsCode}
+      scope={{
+        import: {
+          react: React,
+          'react-native': ReactNative,
+          'react-native-paper': ReactNativePaper,
+        },
+      }}
+    >
+      <View style={styles.container}>
+        <View
+          style={[
+            styles.contentContainer,
+            {
+              backgroundColor: theme.colors.surface,
+              borderColor: theme.colors.surfaceVariant,
+            },
+          ]}
+        >
+          <LivePreview />
+        </View>
       </View>
-    </View>
+      <LiveEditor />
+      <LiveError />
+    </LiveProvider>
   );
 }
 
-export default function PreviewProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function PreviewProvider({ jsCode }: { jsCode: string }) {
   const isDarkTheme = useColorMode().colorMode === 'dark';
   return (
     <Provider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
-      <Preview>{children}</Preview>
+      <Preview jsCode={jsCode} />
     </Provider>
   );
 }

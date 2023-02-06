@@ -7,50 +7,18 @@ const previewsDirPath = path.join(__dirname, '..', previewsDir);
 
 const processNode = async (node, i, parent) => {
   const nextNode = parent.children[i + 1];
-  const hastTsNode = nextNode?.lang === 'tsx';
-
-  const componentName = `A${node.position.start.line}${node.position.start.offset}`;
-
-  fs.writeFileSync(
-    path.join(previewsDirPath, `${componentName}.js`),
-    node.value
-  );
+  const hasTsNode = nextNode?.lang === 'tsx';
 
   const nodesToInsert = [
     {
-      type: 'import',
-      value: `import ${componentName} from '@site/${previewsDir}/${componentName}';`,
-    },
-    {
       type: 'jsx',
-      value: `<Preview><${componentName} /></Preview>`,
+      value: `<Preview jsCode={\`${node.value.replaceAll('`', '\\`')}\`} />`,
     },
   ];
 
   node.meta = node.meta.replace('preview', '');
 
-  if (hastTsNode) {
-    nodesToInsert.push(
-      { type: 'jsx', value: '<Tabs groupId="previewLang">' },
-      {
-        type: 'jsx',
-        value: '<TabItem value="js" label="JavaScript">',
-      },
-      node,
-      { type: 'jsx', value: '</TabItem>' },
-      {
-        type: 'jsx',
-        value: '<TabItem value="ts" label="TypeScirpt">',
-      },
-      nextNode,
-      { type: 'jsx', value: '</TabItem>' },
-      { type: 'jsx', value: '</Tabs>' }
-    );
-  } else {
-    nodesToInsert.push(node);
-  }
-
-  parent.children.splice(i, nextNode?.lang === 'tsx' ? 2 : 1, ...nodesToInsert);
+  parent.children.splice(i, hasTsNode ? 2 : 1, ...nodesToInsert);
 };
 
 module.exports = () => {
