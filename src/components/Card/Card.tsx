@@ -280,10 +280,7 @@ const Card = ({
         testID={testID}
         accessible={accessible}
       >
-        <View
-          style={[styles.innerContainer, contentStyle]}
-          testID={`${testID}-inner-container`}
-        >
+        <View style={[styles.innerContainer, contentStyle]}>
           {React.Children.map(children, (child, index) =>
             React.isValidElement(child)
               ? React.cloneElement(child as React.ReactElement<any>, {
