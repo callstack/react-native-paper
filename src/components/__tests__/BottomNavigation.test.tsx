@@ -416,7 +416,7 @@ it('applies maxTabBarWidth styling if compact prop is truthy', () => {
       renderScene={({ route }) => route.title}
       getLazy={({ route }) => route.key === 'key-2'}
       shifting={false}
-      testId="bottom-navigation"
+      testID="bottom-navigation"
       compact
     />
   );
@@ -434,7 +434,7 @@ it('does not apply maxTabBarWidth styling if compact prop is falsy', () => {
       renderScene={({ route }) => route.title}
       getLazy={({ route }) => route.key === 'key-2'}
       shifting={false}
-      testId="bottom-navigation"
+      testID="bottom-navigation"
       compact={false}
     />
   );
@@ -451,7 +451,7 @@ it('displays ripple animation view if shifting is truthy', () => {
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
       getLazy={({ route }) => route.key === 'key-2'}
-      testId="bottom-navigation"
+      testID="bottom-navigation"
       shifting
     />
   );
@@ -466,7 +466,7 @@ it('does not display ripple animation view if shifting is falsy', () => {
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
       getLazy={({ route }) => route.key === 'key-2'}
-      testId="bottom-navigation"
+      testID="bottom-navigation"
       shifting={false}
     />
   );
