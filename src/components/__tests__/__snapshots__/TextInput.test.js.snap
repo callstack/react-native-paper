@@ -462,28 +462,6 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           }
         }
       >
-        <View
-          collapsable={false}
-          pointerEvents="none"
-          style={
-            Object {
-              "backgroundColor": "rgba(255, 251, 254, 1)",
-              "bottom": 4,
-              "left": 10,
-              "maxHeight": 2,
-              "opacity": 1,
-              "position": "absolute",
-              "right": 0,
-              "top": 6,
-              "transform": Array [
-                Object {
-                  "translateX": -3,
-                },
-              ],
-              "width": 12,
-            }
-          }
-        />
         <Text
           collapsable={false}
           maxFontSizeMultiplier={1.5}

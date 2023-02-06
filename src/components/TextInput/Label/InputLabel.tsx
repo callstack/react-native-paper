@@ -50,27 +50,40 @@ const InputLabel = (props: InputLabelProps) => {
     fontSize,
     lineHeight,
     fontWeight,
+    opacity: parentState.labeled.interpolate({
+      inputRange: [0, 1],
+      outputRange: [hasActiveOutline ? 1 : 0, 0],
+    }),
     transform: [
       {
         // Wiggle the label when there's an error
-        translateX: parentState.error.interpolate({
-          inputRange: [0, 0.5, 1],
-          outputRange: [0, parentState.value && error ? wiggleOffsetX : 0, 0],
-        }),
+        translateX:
+          parentState.value && error
+            ? parentState.error.interpolate({
+                inputRange: [0, 0.5, 1],
+                outputRange: [0, wiggleOffsetX, 0],
+              })
+            : 0,
       },
       {
         // Move label to top
-        translateY: parentState.labeled.interpolate({
-          inputRange: [0, 1],
-          outputRange: [baseLabelTranslateY, 0],
-        }),
+        translateY:
+          baseLabelTranslateY !== 0
+            ? parentState.labeled.interpolate({
+                inputRange: [0, 1],
+                outputRange: [baseLabelTranslateY, 0],
+              })
+            : 0,
       },
       {
         // Make label smaller
-        scale: parentState.labeled.interpolate({
-          inputRange: [0, 1],
-          outputRange: [labelScale, 1],
-        }),
+        scale:
+          labelScale !== 0
+            ? parentState.labeled.interpolate({
+                inputRange: [0, 1],
+                outputRange: [labelScale, 1],
+              })
+            : parentState.labeled,
       },
     ],
   };
@@ -83,7 +96,7 @@ const InputLabel = (props: InputLabelProps) => {
         ? 1
         : 0
       : 1;
-  return label ? (
+  return (
     // Position colored placeholder and gray placeholder on top of each other and crossfade them
     // This gives the effect of animating the color, but allows us to use native driver
     <Animated.View
@@ -114,10 +127,6 @@ const InputLabel = (props: InputLabelProps) => {
           paddingOffset || {},
           {
             color: activeColor,
-            opacity: parentState.labeled.interpolate({
-              inputRange: [0, 1],
-              outputRange: [hasActiveOutline ? 1 : 0, 0],
-            }),
           },
         ]}
         numberOfLines={1}
@@ -148,7 +157,7 @@ const InputLabel = (props: InputLabelProps) => {
         {label}
       </AnimatedText>
     </Animated.View>
-  ) : null;
+  );
 };
 
 const styles = StyleSheet.create({

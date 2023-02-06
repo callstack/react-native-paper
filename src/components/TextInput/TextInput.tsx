@@ -11,6 +11,7 @@ import {
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
+import { roundLayoutSize } from '../../utils/roundLayoutSize';
 import TextInputAffix, {
   Props as TextInputAffixProps,
 } from './Adornment/TextInputAffix';
@@ -344,6 +345,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
         // Root cause:    Placeholder initial value, which has length 0.
         // More context:  The issue was also reproduced in react-native, using its own TextInput.
         // Workaround:    Set an empty space character in the default value.
+
         setPlaceholder(' ');
       }
 
@@ -355,6 +357,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
     }, [focused, rest.label, rest.placeholder]);
 
     React.useEffect(() => {
+      labeled.stopAnimation();
       // The label should be minimized if the text input is focused, or has text
       // In minimized mode, the label moves up and becomes small
       // workaround for animated regression for react native > 0.61
@@ -369,29 +372,37 @@ const TextInput = forwardRef<TextInputHandles, Props>(
         }).start();
       } else {
         // restore label
-        {
-          Animated.timing(labeled, {
-            toValue: 1,
-            duration: FOCUS_ANIMATION_DURATION * scale,
-            // To prevent this - https://github.com/callstack/react-native-paper/issues/941
-            useNativeDriver: true,
-          }).start();
-        }
+        Animated.timing(labeled, {
+          toValue: 1,
+          duration: FOCUS_ANIMATION_DURATION * scale,
+          // To prevent this - https://github.com/callstack/react-native-paper/issues/941
+          useNativeDriver: true,
+        }).start();
       }
     }, [focused, value, labeled, scale]);
 
     const onLeftAffixLayoutChange = (event: LayoutChangeEvent) => {
-      setLeftLayout({
-        height: event.nativeEvent.layout.height,
-        width: event.nativeEvent.layout.width,
-      });
+      const height = roundLayoutSize(event.nativeEvent.layout.height);
+      const width = roundLayoutSize(event.nativeEvent.layout.width);
+
+      if (width !== leftLayout.width || height !== leftLayout.height) {
+        setLeftLayout({
+          width,
+          height,
+        });
+      }
     };
 
     const onRightAffixLayoutChange = (event: LayoutChangeEvent) => {
-      setRightLayout({
-        width: event.nativeEvent.layout.width,
-        height: event.nativeEvent.layout.height,
-      });
+      const width = roundLayoutSize(event.nativeEvent.layout.width);
+      const height = roundLayoutSize(event.nativeEvent.layout.height);
+
+      if (width !== rightLayout.width || height !== rightLayout.height) {
+        setRightLayout({
+          width,
+          height,
+        });
+      }
     };
 
     const handleFocus = (args: any) => {
@@ -426,11 +437,16 @@ const TextInput = forwardRef<TextInputHandles, Props>(
     };
 
     const handleLayoutAnimatedText = (e: LayoutChangeEvent) => {
-      setLabelLayout({
-        width: e.nativeEvent.layout.width,
-        height: e.nativeEvent.layout.height,
-        measured: true,
-      });
+      const width = roundLayoutSize(e.nativeEvent.layout.width);
+      const height = roundLayoutSize(e.nativeEvent.layout.height);
+
+      if (width !== labelLayout.width || height !== labelLayout.height) {
+        setLabelLayout({
+          width,
+          height,
+          measured: true,
+        });
+      }
     };
     const forceFocus = () => root.current?.focus();
 

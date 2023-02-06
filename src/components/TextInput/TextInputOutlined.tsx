@@ -33,7 +33,6 @@ import {
   calculatePadding,
   adjustPaddingOut,
   Padding,
-  interpolatePlaceholder,
   calculateOutlinedIconAndAffixTopPosition,
   getOutlinedInputColors,
   getConstants,
@@ -175,7 +174,7 @@ const TextInputOutlined = ({
     -labelHalfHeight - (topPosition + OUTLINE_MINIMIZED_LABEL_Y_OFFSET);
 
   const placeholderOpacity = hasActiveOutline
-    ? interpolatePlaceholder(parentState.labeled, hasActiveOutline)
+    ? parentState.labeled
     : parentState.labelLayout.measured
     ? 1
     : 0;
@@ -313,12 +312,14 @@ const TextInputOutlined = ({
             },
           ]}
         >
-          <InputLabel
-            parentState={parentState}
-            labelProps={labelProps}
-            labelBackground={LabelBackground}
-            maxFontSizeMultiplier={rest.maxFontSizeMultiplier}
-          />
+          {label ? (
+            <InputLabel
+              parentState={parentState}
+              labelProps={labelProps}
+              labelBackground={LabelBackground}
+              maxFontSizeMultiplier={rest.maxFontSizeMultiplier}
+            />
+          ) : null}
           {render?.({
             testID,
             ...rest,
