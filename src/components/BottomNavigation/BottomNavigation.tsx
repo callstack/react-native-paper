@@ -603,6 +603,7 @@ const BottomNavigation = ({
     }
 
     if (index !== navigationState.index) {
+      prevNavigationState.current = navigationState;
       onIndexChange(index);
     }
   };
@@ -613,6 +614,7 @@ const BottomNavigation = ({
         (route) => route.key === key
       );
 
+      prevNavigationState.current = navigationState;
       onIndexChange(index);
     },
     [navigationState.routes, onIndexChange]
@@ -694,6 +696,12 @@ const BottomNavigation = ({
           }
 
           const focused = navigationState.index === index;
+          const previouslyFocused =
+            prevNavigationState.current?.index === index;
+          const countAlphaOffscreen =
+            sceneAnimationEnabled && (focused || previouslyFocused);
+          const renderToHardwareTextureAndroid =
+            sceneAnimationEnabled && focused;
 
           const opacity = sceneAnimationEnabled
             ? tabsPositionAnims[index].interpolate({
@@ -743,9 +751,9 @@ const BottomNavigation = ({
             >
               <Animated.View
                 {...(Platform.OS === 'android' && {
-                  needsOffscreenAlphaCompositing: sceneAnimationEnabled,
+                  needsOffscreenAlphaCompositing: countAlphaOffscreen,
                 })}
-                renderToHardwareTextureAndroid={sceneAnimationEnabled}
+                renderToHardwareTextureAndroid={renderToHardwareTextureAndroid}
                 style={[
                   styles.content,
                   {
