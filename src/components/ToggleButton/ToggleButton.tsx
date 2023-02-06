@@ -13,6 +13,7 @@ import color from 'color';
 import { useInternalTheme } from '../../core/theming';
 import { black, white } from '../../styles/themes/v2/colors';
 import type { ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
 import { ToggleButtonGroupContext } from './ToggleButtonGroup';
@@ -97,7 +98,7 @@ export type Props = {
  *
  * ```
  */
-const ToggleButton = React.forwardRef<View, Props>(
+const ToggleButton = forwardRef<View, Props>(
   (
     {
       icon,

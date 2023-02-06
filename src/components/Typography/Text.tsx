@@ -9,6 +9,7 @@ import {
 
 import { useInternalTheme } from '../../core/theming';
 import { Font, MD3TypescaleKey, ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 
 export type Props = React.ComponentProps<typeof NativeText> & {
   /**
@@ -149,4 +150,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default React.forwardRef(Text);
+export default forwardRef(Text);

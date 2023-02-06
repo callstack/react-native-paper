@@ -12,6 +12,7 @@ import { useInternalTheme } from '../core/theming';
 import overlay, { isAnimatedValue } from '../styles/overlay';
 import shadow from '../styles/shadow';
 import type { ThemeProp, MD3Elevation } from '../types';
+import { forwardRef } from '../utils/forwardRef';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -39,7 +40,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   ref?: React.RefObject<View>;
 };
 
-const MD2Surface = React.forwardRef<View, Props>(
+const MD2Surface = forwardRef<View, Props>(
   ({ style, theme: overrideTheme, ...rest }: Omit<Props, 'elevation'>, ref) => {
     const { elevation = 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
     const { dark: isDarkTheme, mode, colors } = useInternalTheme(overrideTheme);
@@ -105,7 +106,7 @@ const MD2Surface = React.forwardRef<View, Props>(
  * });
  * ```
  */
-const Surface = React.forwardRef<View, Props>(
+const Surface = forwardRef<View, Props>(
   (
     {
       elevation = 1,
