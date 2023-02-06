@@ -2878,26 +2878,11 @@ var MDXContent = /*#__PURE__*/function (_React$Component) {
         name: "inlineCode",
         components: components,
         parentName: "h4"
-      }, "configureFonts"), " helper"), /*#__PURE__*/React.createElement(_tag.MDXTag, {
-        name: "ul",
-        components: components
-      }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
-        name: "li",
-        components: components,
-        parentName: "ul"
-      }, "If there is a need to create a custom font variant, prepare its config object including required all fonts properties. After that, defined ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
-        name: "inlineCode",
-        components: components,
-        parentName: "li"
-      }, "fontConfig"), " has to be passed under the ", /*#__PURE__*/React.createElement("b", null, /*#__PURE__*/React.createElement(_tag.MDXTag, {
-        name: "inlineCode",
-        components: components,
-        parentName: "li"
-      }, "variant")), " name as ", /*#__PURE__*/React.createElement(_tag.MDXTag, {
-        name: "inlineCode",
-        components: components,
-        parentName: "li"
-      }, "config"), " into the params object:")), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+      }, "configureFonts"), " helper"), /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: 'none'
+        }
+      }, "* If there is a need to create a custom font variant, prepare its config object including required all fonts properties. After that, defined `fontConfig` has to be passed under the ", /*#__PURE__*/React.createElement("b", null, "`variant`"), " name as `config` into the params object:", /*#__PURE__*/React.createElement(_tag.MDXTag, {
         name: "pre",
         components: components,
         props: {
@@ -2913,7 +2898,7 @@ var MDXContent = /*#__PURE__*/function (_React$Component) {
             "__html": "<span class=\"token keyword\">import</span> <span class=\"token operator\">*</span> <span class=\"token keyword\">as</span> React <span class=\"token keyword\">from</span> <span class=\"token string\">'react'</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword\">import</span> <span class=\"token punctuation\">{</span> configureFonts<span class=\"token punctuation\">,</span> MD3LightTheme<span class=\"token punctuation\">,</span> Provider <span class=\"token keyword\">as</span> PaperProvider <span class=\"token punctuation\">}</span> <span class=\"token keyword\">from</span> <span class=\"token string\">'react-native-paper'</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword\">import</span> App <span class=\"token keyword\">from</span> <span class=\"token string\">'./src/App'</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword\">const</span> fontConfig <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span>\n  customVariant<span class=\"token punctuation\">:</span> <span class=\"token punctuation\">{</span>\n    fontFamily<span class=\"token punctuation\">:</span> Platform<span class=\"token punctuation\">.</span><span class=\"token function\">select</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">{</span>\n      web<span class=\"token punctuation\">:</span> <span class=\"token string\">'Roboto, \"Helvetica Neue\", Helvetica, Arial, sans-serif'</span><span class=\"token punctuation\">,</span>\n      ios<span class=\"token punctuation\">:</span> <span class=\"token string\">'System'</span><span class=\"token punctuation\">,</span>\n      <span class=\"token keyword\">default</span><span class=\"token punctuation\">:</span> <span class=\"token string\">'sans-serif'</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">}</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">,</span>\n    fontWeight<span class=\"token punctuation\">:</span> <span class=\"token string\">'400'</span><span class=\"token punctuation\">,</span>\n    letterSpacing<span class=\"token punctuation\">:</span> <span class=\"token number\">0.5</span><span class=\"token punctuation\">,</span>\n    lineHeight<span class=\"token punctuation\">:</span> <span class=\"token number\">22</span><span class=\"token punctuation\">,</span>\n    fontSize<span class=\"token punctuation\">:</span> <span class=\"token number\">20</span><span class=\"token punctuation\">,</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword\">const</span> theme <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token operator\">...</span>MD3LightTheme<span class=\"token punctuation\">,</span>\n  fonts<span class=\"token punctuation\">:</span> <span class=\"token function\">configureFonts</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">{</span>config<span class=\"token punctuation\">:</span> fontConfig<span class=\"token punctuation\">}</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">,</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword\">export</span> <span class=\"token keyword\">default</span> <span class=\"token keyword\">function</span> <span class=\"token function\">Main</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&#x3C;</span><span class=\"token class-name\">PaperProvider</span></span> <span class=\"token attr-name\">theme</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>theme<span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">></span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&#x3C;</span><span class=\"token class-name\">App</span></span> <span class=\"token punctuation\">/></span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&#x3C;/</span><span class=\"token class-name\">PaperProvider</span></span><span class=\"token punctuation\">></span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n"
           }
         }
-      })), /*#__PURE__*/React.createElement(_tag.MDXTag, {
+      }))), /*#__PURE__*/React.createElement(_tag.MDXTag, {
         name: "ul",
         components: components
       }, /*#__PURE__*/React.createElement(_tag.MDXTag, {
