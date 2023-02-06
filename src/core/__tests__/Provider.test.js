@@ -96,6 +96,20 @@ describe('Provider', () => {
     );
   });
 
+  it('handles overriding animation with the custom one', () => {
+    const { getByTestId } = render(
+      createProvider({
+        ...MD3LightTheme,
+        animation: { defaultAnimationDuration: 250 },
+      })
+    );
+
+    expect(getByTestId('provider-child-view').props.theme).toStrictEqual({
+      ...MD3LightTheme,
+      animation: { scale: 1, defaultAnimationDuration: 250 },
+    });
+  });
+
   it('should set AccessibilityInfo listeners, if there is no theme', async () => {
     mockAppearance();
     mockAccessibilityInfo();
