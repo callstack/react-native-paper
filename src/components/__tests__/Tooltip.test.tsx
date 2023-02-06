@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { RefObject } from 'react';
 import { Dimensions, Text, View } from 'react-native';
 
 import {
@@ -25,14 +25,17 @@ jest.mock('react-native', () => {
   return RN;
 });
 
-const DummyComponent = React.forwardRef((props, ref) => (
-  <View {...props} ref={ref}>
+const DummyComponent = React.forwardRef<View>((props, ref) => (
+  <View {...props} ref={ref as RefObject<View>}>
     <Text>dummy component</Text>
   </View>
 ));
 
 describe('Tooltip', () => {
-  const setup = (propOverrides, measure = {}) => {
+  const setup = (
+    propOverrides?: Partial<React.ComponentProps<typeof Tooltip>>,
+    measure = {}
+  ) => {
     const defaultProps = {
       children: <DummyComponent />,
       title: 'some tooltip text',
@@ -40,8 +43,8 @@ describe('Tooltip', () => {
     };
 
     const { x, y, width, height, pageX, pageY } = {
-      x: null,
-      y: null,
+      x: 0,
+      y: 0,
       width: 80,
       height: 50,
       pageX: 220,
@@ -153,9 +156,12 @@ describe('Tooltip', () => {
     const TOOLTIP_HEIGHT = 100;
 
     beforeAll(() => {
-      jest
-        .spyOn(Dimensions, 'get')
-        .mockReturnValue({ width: LAYOUT_WIDTH, height: LAYOUT_HEIGHT });
+      jest.spyOn(Dimensions, 'get').mockReturnValue({
+        width: LAYOUT_WIDTH,
+        height: LAYOUT_HEIGHT,
+        scale: 2,
+        fontScale: 2,
+      });
     });
 
     describe('When it does not overflow', () => {

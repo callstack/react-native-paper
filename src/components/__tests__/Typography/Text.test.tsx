@@ -4,7 +4,7 @@ import { render } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
 
 import { tokens } from '../../../styles/themes/v3/tokens';
-import Text from '../../Typography/Text.tsx';
+import Text from '../../Typography/Text';
 
 const content = 'Something rendered as a child content';
 

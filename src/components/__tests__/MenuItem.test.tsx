@@ -5,7 +5,7 @@ import renderer from 'react-test-renderer';
 
 import { getTheme } from '../../core/theming';
 import { black, white } from '../../styles/themes/v2/colors';
-import Menu from '../Menu/Menu.tsx';
+import Menu from '../Menu/Menu';
 import { getMenuItemColor } from '../Menu/utils';
 
 describe('getMenuItemColor - title color', () => {

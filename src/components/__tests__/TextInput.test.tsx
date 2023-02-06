@@ -12,7 +12,7 @@ import {
   getFlatInputColors,
   getOutlinedInputColors,
 } from '../TextInput/helpers';
-import TextInput from '../TextInput/TextInput';
+import TextInput, { Props } from '../TextInput/TextInput';
 
 const style = StyleSheet.create({
   inputStyle: {
@@ -39,7 +39,6 @@ it('correctly renders left-side icon adornment, and right-side affix adornment',
       label="Flat input"
       placeholder="Type something"
       value={'Some test value'}
-      onChangeText={(text) => this.setState({ text })}
       left={
         <TextInput.Icon
           icon="heart"
@@ -65,7 +64,6 @@ it('correctly renders left-side affix adornment, and right-side icon adornment',
       label="Flat input"
       placeholder="Type something"
       value={'Some test value'}
-      onChangeText={(text) => this.setState({ text })}
       left={
         <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
       }
@@ -167,7 +165,6 @@ it('contains patch spacing for flat input when ios and multiline', () => {
       multiline
       placeholder="Type something"
       value={'Some test value'}
-      onChangeText={(text) => this.setState({ text })}
     />
   );
   expect(getByTestId('patch-container')).toBeTruthy();
@@ -204,7 +201,6 @@ it('renders label with correct color when active', () => {
       label="Flat input"
       placeholder="Type something"
       value={'Some test value'}
-      onChangeText={(text) => this.setState({ text })}
       testID={'text-input-flat'}
     />
   );
@@ -222,7 +218,6 @@ it('renders label with correct color when inactive', () => {
       label="Flat input"
       placeholder="Type something"
       value={'Some test value'}
-      onChangeText={(text) => this.setState({ text })}
       testID={'text-input'}
     />
   );
@@ -311,7 +306,7 @@ it('calls onLayout on right-side affix adornment', () => {
   expect(onLayoutMock).toHaveBeenCalledWith(nativeEventMock);
 });
 
-['outlined', 'flat'].forEach((mode) =>
+(['outlined', 'flat'] as const).forEach((mode) =>
   it(`renders ${mode} input with correct line height`, () => {
     const input = render(
       <TextInput
@@ -329,7 +324,7 @@ it('calls onLayout on right-side affix adornment', () => {
   })
 );
 
-['outlined', 'flat'].forEach((mode) =>
+(['outlined', 'flat'] as const).forEach((mode) =>
   it(`renders ${mode} input with passed textColor`, () => {
     const input = render(
       <TextInput
@@ -349,7 +344,10 @@ it('calls onLayout on right-side affix adornment', () => {
 );
 
 describe('maxFontSizeMultiplier', () => {
-  const createInput = (type, maxFontSizeMultiplier) => {
+  const createInput = (
+    type: Exclude<Props['mode'], undefined>,
+    maxFontSizeMultiplier?: Props['maxFontSizeMultiplier']
+  ) => {
     return (
       <TextInput mode={type} maxFontSizeMultiplier={maxFontSizeMultiplier} />
     );

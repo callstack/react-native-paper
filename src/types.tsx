@@ -120,6 +120,7 @@ export type ThemeBase = {
   roundness: number;
   animation: {
     scale: number;
+    defaultAnimationDuration?: number;
   };
 };
 

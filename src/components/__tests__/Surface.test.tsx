@@ -10,7 +10,9 @@ describe('Surface', () => {
   it('should properly render passed props', () => {
     const testID = 'surface-container';
     const { getByTestId } = render(
-      <Surface pointerEvents="box-none" testID={testID} />
+      <Surface pointerEvents="box-none" testID={testID}>
+        {null}
+      </Surface>
     );
     expect(getByTestId(testID).props.pointerEvents).toBe('box-none');
   });
@@ -43,7 +45,9 @@ describe('Surface', () => {
         const testID = 'surface-test';
 
         const { getByTestId } = render(
-          <Surface testID={testID} style={styles.restStyle} />
+          <Surface testID={testID} style={styles.restStyle}>
+            {null}
+          </Surface>
         );
 
         expect(getByTestId(`${testID}-outer-layer`)).not.toHaveStyle(
@@ -55,7 +59,9 @@ describe('Surface', () => {
         const testID = 'surface-test';
 
         const { getByTestId } = render(
-          <Surface testID={testID} style={styles.absoluteStyles} />
+          <Surface testID={testID} style={styles.absoluteStyles}>
+            {null}
+          </Surface>
         );
 
         expect(getByTestId(`${testID}-outer-layer`)).toHaveStyle(
@@ -67,7 +73,9 @@ describe('Surface', () => {
         const testID = 'surface-test';
 
         const { getByTestId } = render(
-          <Surface testID={testID} style={styles.innerLayerViewStyle} />
+          <Surface testID={testID} style={styles.innerLayerViewStyle}>
+            {null}
+          </Surface>
         );
 
         expect(getByTestId(`${testID}-outer-layer`)).toHaveStyle(
@@ -81,7 +89,9 @@ describe('Surface', () => {
         const testID = 'surface-test';
 
         const { getByTestId } = render(
-          <Surface testID={testID} style={styles.absoluteStyles} />
+          <Surface testID={testID} style={styles.absoluteStyles}>
+            {null}
+          </Surface>
         );
 
         expect(getByTestId(`${testID}-inner-layer`)).not.toHaveStyle(
@@ -93,7 +103,9 @@ describe('Surface', () => {
         const testID = 'surface-test';
 
         const { getByTestId } = render(
-          <Surface testID={testID} style={styles.innerLayerViewStyle} />
+          <Surface testID={testID} style={styles.innerLayerViewStyle}>
+            {null}
+          </Surface>
         );
 
         expect(getByTestId(`${testID}-inner-layer`)).toHaveStyle(
@@ -105,14 +117,12 @@ describe('Surface', () => {
     describe('children wrapper', () => {
       it('should render rest styles', () => {
         const testID = 'surface-test';
-        const combinedStyles = [
-          styles.backgroundColor,
-          styles.innerLayerViewStyle,
-          styles.restStyle,
-        ];
+        const combinedStyles = [styles.innerLayerViewStyle, styles.restStyle];
 
         const { getByTestId } = render(
-          <Surface testID={testID} style={combinedStyles} />
+          <Surface testID={testID} style={combinedStyles}>
+            {null}
+          </Surface>
         );
 
         expect(getByTestId(testID)).toHaveStyle(combinedStyles);

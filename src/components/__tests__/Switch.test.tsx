@@ -14,7 +14,7 @@ import {
   pink500,
   grey700,
 } from '../../styles/themes/v2/colors';
-import Switch from '../Switch/Switch.tsx';
+import Switch from '../Switch/Switch';
 import { getSwitchColor } from '../Switch/utils';
 
 it('renders on switch', () => {
