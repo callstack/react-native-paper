@@ -195,7 +195,7 @@ const Button = ({
     [mode]
   );
   const { roundness, isV3, animation } = theme;
-  const uppercase = uppercaseProp || !theme.isV3;
+  const uppercase = uppercaseProp ?? !theme.isV3;
 
   const isElevationEntitled =
     !disabled && (isV3 ? isMode('elevated') : isMode('contained'));
@@ -351,6 +351,7 @@ const Button = ({
             variant="labelLarge"
             selectable={false}
             numberOfLines={1}
+            testID={`${testID}-text`}
             style={[
               styles.label,
               !isV3 && styles.md2Label,

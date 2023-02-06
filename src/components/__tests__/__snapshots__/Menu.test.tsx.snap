@@ -152,6 +152,7 @@ Array [
                       ],
                     ]
                   }
+                  testID="button-text"
                 >
                   Open menu
                 </Text>
@@ -656,6 +657,7 @@ exports[`renders not visible menu 1`] = `
                     ],
                   ]
                 }
+                testID="button-text"
               >
                 Open menu
               </Text>
@@ -820,6 +822,7 @@ Array [
                       ],
                     ]
                   }
+                  testID="button-text"
                 >
                   Open menu
                 </Text>

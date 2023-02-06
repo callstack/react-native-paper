@@ -928,6 +928,7 @@ exports[`renders extended FAB 1`] = `
                 ],
               ]
             }
+            testID="fab-text"
           >
             Add items
           </Text>
@@ -1145,6 +1146,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
                 ],
               ]
             }
+            testID="fab-text"
           >
             Add items
           </Text>

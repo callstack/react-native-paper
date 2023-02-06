@@ -195,7 +195,7 @@ const FAB = forwardRef<View, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
-    const uppercase = uppercaseProp || !theme.isV3;
+    const uppercase = uppercaseProp ?? !theme.isV3;
     const { current: visibility } = React.useRef<Animated.Value>(
       new Animated.Value(visible ? 1 : 0)
     );
@@ -309,6 +309,7 @@ const FAB = forwardRef<View, Props>(
               <Text
                 variant="labelLarge"
                 selectable={false}
+                testID={`${testID}-text`}
                 style={[
                   styles.label,
                   uppercase && styles.uppercaseLabel,

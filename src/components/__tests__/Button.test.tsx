@@ -154,6 +154,32 @@ it('should execute onPressOut', () => {
   expect(onPressOutMock).toHaveBeenCalledTimes(1);
 });
 
+describe('button text styles', () => {
+  it('applies uppercase styles if uppercase prop is truthy', () => {
+    const { getByTestId } = render(
+      <Button testID="button" uppercase>
+        Test
+      </Button>
+    );
+
+    expect(getByTestId('button-text')).toHaveStyle({
+      textTransform: 'uppercase',
+    });
+  });
+
+  it('does not apply uppercase styles if uppercase prop is falsy', () => {
+    const { getByTestId } = render(
+      <Button testID="button" uppercase={false}>
+        Test
+      </Button>
+    );
+
+    expect(getByTestId('button-text')).not.toHaveStyle({
+      textTransform: 'uppercase',
+    });
+  });
+});
+
 describe('button icon styles', () => {
   it('should return correct icon styles for compact text button', () => {
     const { getByTestId } = render(

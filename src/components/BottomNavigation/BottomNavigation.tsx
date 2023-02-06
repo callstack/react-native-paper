@@ -397,9 +397,9 @@ const BottomNavigation = ({
   const theme = useInternalTheme(themeOverrides);
   const { bottom, left, right } = useSafeAreaInsets();
   const { scale } = theme.animation;
-  const compact = compactProp || !theme.isV3;
+  const compact = compactProp ?? !theme.isV3;
   let shifting =
-    shiftingProp || (theme.isV3 ? false : navigationState.routes.length > 3);
+    shiftingProp ?? (theme.isV3 ? false : navigationState.routes.length > 3);
 
   if (shifting && navigationState.routes.length < 2) {
     shifting = false;
@@ -817,6 +817,7 @@ const BottomNavigation = ({
               },
             ]}
             accessibilityRole={'tablist'}
+            testID={`${testID}-bar-content-wrapper`}
           >
             {shifting ? (
               <Animated.View
@@ -850,6 +851,7 @@ const BottomNavigation = ({
                     }),
                   },
                 ]}
+                testID={`${testID}-bar-content-ripple`}
               />
             ) : null}
             {routes.map((route, index) => {

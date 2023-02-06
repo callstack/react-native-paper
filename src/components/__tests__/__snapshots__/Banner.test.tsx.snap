@@ -263,6 +263,7 @@ exports[`render visible banner, with custom theme 1`] = `
                             ],
                           ]
                         }
+                        testID="button-text"
                       >
                         first
                       </Text>
@@ -706,6 +707,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                             ],
                           ]
                         }
+                        testID="button-text"
                       >
                         first
                       </Text>
@@ -985,6 +987,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                             ],
                           ]
                         }
+                        testID="button-text"
                       >
                         first
                       </Text>
@@ -1133,6 +1136,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                             ],
                           ]
                         }
+                        testID="button-text"
                       >
                         second
                       </Text>

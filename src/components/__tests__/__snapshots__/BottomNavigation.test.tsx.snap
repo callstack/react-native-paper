@@ -142,6 +142,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 false,
               ]
             }
+            testID="bottom-navigation-bar-content-wrapper"
           >
             <View
               accessibilityRole="button"
@@ -889,6 +890,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 false,
               ]
             }
+            testID="bottom-navigation-bar-content-wrapper"
           >
             <View
               collapsable={false}
@@ -910,6 +912,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   "width": 0,
                 }
               }
+              testID="bottom-navigation-bar-content-ripple"
             />
             <View
               accessibilityRole="button"
@@ -1789,6 +1792,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 false,
               ]
             }
+            testID="bottom-navigation-bar-content-wrapper"
           >
             <View
               accessibilityRole="button"
@@ -3497,6 +3501,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 false,
               ]
             }
+            testID="bottom-navigation-bar-content-wrapper"
           >
             <View
               collapsable={false}
@@ -3518,6 +3523,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   "width": 0,
                 }
               }
+              testID="bottom-navigation-bar-content-ripple"
             />
             <View
               accessibilityRole="button"
@@ -4986,6 +4992,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 false,
               ]
             }
+            testID="bottom-navigation-bar-content-wrapper"
           >
             <View
               accessibilityRole="button"
@@ -5673,6 +5680,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                 false,
               ]
             }
+            testID="bottom-navigation-bar-content-wrapper"
           >
             <View
               collapsable={false}
@@ -5694,6 +5702,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   "width": 0,
                 }
               }
+              testID="bottom-navigation-bar-content-ripple"
             />
             <View
               accessibilityRole="button"
@@ -6662,6 +6671,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 false,
               ]
             }
+            testID="bottom-navigation-bar-content-wrapper"
           >
             <View
               accessibilityRole="button"
@@ -7754,6 +7764,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 false,
               ]
             }
+            testID="bottom-navigation-bar-content-wrapper"
           >
             <View
               collapsable={false}
@@ -7775,6 +7786,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   "width": 0,
                 }
               }
+              testID="bottom-navigation-bar-content-ripple"
             />
             <View
               accessibilityRole="button"
@@ -8723,6 +8735,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 false,
               ]
             }
+            testID="bottom-navigation-bar-content-wrapper"
           >
             <View
               accessibilityRole="button"
@@ -9815,6 +9828,7 @@ exports[`renders shifting bottom navigation 1`] = `
                 false,
               ]
             }
+            testID="bottom-navigation-bar-content-wrapper"
           >
             <View
               collapsable={false}
@@ -9836,6 +9850,7 @@ exports[`renders shifting bottom navigation 1`] = `
                   "width": 0,
                 }
               }
+              testID="bottom-navigation-bar-content-ripple"
             />
             <View
               accessibilityRole="button"

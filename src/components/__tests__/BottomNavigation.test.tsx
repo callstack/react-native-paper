@@ -408,6 +408,72 @@ it('renders bottom navigation with getLazy', () => {
   expect(tree.queryByTestId('RouteScreen: 2')).toBeNull();
 });
 
+it('applies maxTabBarWidth styling if compact prop is truthy', () => {
+  const { getByTestId } = render(
+    <BottomNavigation
+      navigationState={createState(0, 5)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+      getLazy={({ route }) => route.key === 'key-2'}
+      shifting={false}
+      testId="bottom-navigation"
+      compact
+    />
+  );
+
+  expect(getByTestId('bottom-navigation-bar-content-wrapper')).toHaveStyle({
+    maxWidth: 480,
+  });
+});
+
+it('does not apply maxTabBarWidth styling if compact prop is falsy', () => {
+  const { getByTestId } = render(
+    <BottomNavigation
+      navigationState={createState(0, 5)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+      getLazy={({ route }) => route.key === 'key-2'}
+      shifting={false}
+      testId="bottom-navigation"
+      compact={false}
+    />
+  );
+
+  expect(getByTestId('bottom-navigation-bar-content-wrapper')).not.toHaveStyle({
+    maxWidth: 480,
+  });
+});
+
+it('displays ripple animation view if shifting is truthy', () => {
+  const { getByTestId } = render(
+    <BottomNavigation
+      navigationState={createState(0, 5)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+      getLazy={({ route }) => route.key === 'key-2'}
+      testId="bottom-navigation"
+      shifting
+    />
+  );
+
+  expect(getByTestId('bottom-navigation-bar-content-ripple')).toBeDefined();
+});
+
+it('does not display ripple animation view if shifting is falsy', () => {
+  const { queryByTestId } = render(
+    <BottomNavigation
+      navigationState={createState(0, 5)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+      getLazy={({ route }) => route.key === 'key-2'}
+      testId="bottom-navigation"
+      shifting={false}
+    />
+  );
+
+  expect(queryByTestId('bottom-navigation-bar-content-ripple')).toBeNull();
+});
+
 describe('getActiveTintColor', () => {
   it.each`
     activeColor  | defaultColor | useV3    | expected

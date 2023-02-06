@@ -95,3 +95,41 @@ it('animated value changes correctly', () => {
     transform: [{ scale: 1.5 }],
   });
 });
+
+it('renders FAB without uppercase styling if uppercase prop is falsy', () => {
+  const { getByTestId } = render(
+    <AnimatedFAB
+      label="text"
+      animateFrom="left"
+      onPress={() => {}}
+      icon="plus"
+      testID="animated-fab"
+      style={styles.background}
+      extended={false}
+      uppercase={false}
+    />
+  );
+
+  expect(getByTestId('animated-fab-text')).not.toHaveStyle({
+    textTransform: 'uppercase',
+  });
+});
+
+it('renders FAB with uppercase styling if uppercase prop is truthy', () => {
+  const { getByTestId } = render(
+    <AnimatedFAB
+      label="text"
+      animateFrom="left"
+      onPress={() => {}}
+      icon="plus"
+      testID="animated-fab"
+      style={styles.background}
+      extended={false}
+      uppercase
+    />
+  );
+
+  expect(getByTestId('animated-fab-text')).toHaveStyle({
+    textTransform: 'uppercase',
+  });
+});
