@@ -27,6 +27,7 @@ exports[`renders snackbar with Text as a child 1`] = `
         "alignSelf": undefined,
         "bottom": undefined,
         "end": undefined,
+        "flex": undefined,
         "left": undefined,
         "position": undefined,
         "right": undefined,
@@ -41,11 +42,13 @@ exports[`renders snackbar with Text as a child 1`] = `
         "top": undefined,
       }
     }
+    testID="surface-outer-layer"
   >
     <View
       collapsable={false}
       style={
         Object {
+          "flex": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 1,
@@ -55,6 +58,7 @@ exports[`renders snackbar with Text as a child 1`] = `
           "shadowRadius": 2,
         }
       }
+      testID="surface-inner-layer"
     >
       <View
         accessibilityLiveRegion="polite"
@@ -64,6 +68,7 @@ exports[`renders snackbar with Text as a child 1`] = `
           Object {
             "backgroundColor": "rgba(49, 48, 51, 1)",
             "borderRadius": 4,
+            "flex": undefined,
             "flexDirection": "row",
             "justifyContent": "space-between",
             "margin": 8,
@@ -76,6 +81,7 @@ exports[`renders snackbar with Text as a child 1`] = `
             ],
           }
         }
+        testID="surface"
       >
         <View
           style={
@@ -123,6 +129,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
         "alignSelf": undefined,
         "bottom": undefined,
         "end": undefined,
+        "flex": undefined,
         "left": undefined,
         "position": undefined,
         "right": undefined,
@@ -137,11 +144,13 @@ exports[`renders snackbar with View & Text as a child 1`] = `
         "top": undefined,
       }
     }
+    testID="surface-outer-layer"
   >
     <View
       collapsable={false}
       style={
         Object {
+          "flex": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 1,
@@ -151,6 +160,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
           "shadowRadius": 2,
         }
       }
+      testID="surface-inner-layer"
     >
       <View
         accessibilityLiveRegion="polite"
@@ -160,6 +170,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
           Object {
             "backgroundColor": "rgba(49, 48, 51, 1)",
             "borderRadius": 4,
+            "flex": undefined,
             "flexDirection": "row",
             "justifyContent": "space-between",
             "margin": 8,
@@ -172,6 +183,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
             ],
           }
         }
+        testID="surface"
       >
         <View
           style={
@@ -245,6 +257,7 @@ exports[`renders snackbar with action button 1`] = `
         "alignSelf": undefined,
         "bottom": undefined,
         "end": undefined,
+        "flex": undefined,
         "left": undefined,
         "position": undefined,
         "right": undefined,
@@ -259,11 +272,13 @@ exports[`renders snackbar with action button 1`] = `
         "top": undefined,
       }
     }
+    testID="surface-outer-layer"
   >
     <View
       collapsable={false}
       style={
         Object {
+          "flex": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 1,
@@ -273,6 +288,7 @@ exports[`renders snackbar with action button 1`] = `
           "shadowRadius": 2,
         }
       }
+      testID="surface-inner-layer"
     >
       <View
         accessibilityLiveRegion="polite"
@@ -282,6 +298,7 @@ exports[`renders snackbar with action button 1`] = `
           Object {
             "backgroundColor": "rgba(49, 48, 51, 1)",
             "borderRadius": 4,
+            "flex": undefined,
             "flexDirection": "row",
             "justifyContent": "space-between",
             "margin": 8,
@@ -294,6 +311,7 @@ exports[`renders snackbar with action button 1`] = `
             ],
           }
         }
+        testID="surface"
       >
         <Text
           style={
@@ -349,6 +367,7 @@ exports[`renders snackbar with action button 1`] = `
                 "alignSelf": undefined,
                 "bottom": undefined,
                 "end": undefined,
+                "flex": undefined,
                 "left": undefined,
                 "position": undefined,
                 "right": undefined,
@@ -363,11 +382,13 @@ exports[`renders snackbar with action button 1`] = `
                 "top": undefined,
               }
             }
+            testID="button-container-outer-layer"
           >
             <View
               collapsable={false}
               style={
                 Object {
+                  "flex": undefined,
                   "shadowColor": "#000",
                   "shadowOffset": Object {
                     "height": 0,
@@ -377,6 +398,7 @@ exports[`renders snackbar with action button 1`] = `
                   "shadowRadius": 0,
                 }
               }
+              testID="button-container-inner-layer"
             >
               <View
                 collapsable={false}
@@ -387,6 +409,7 @@ exports[`renders snackbar with action button 1`] = `
                     "borderRadius": 20,
                     "borderStyle": "solid",
                     "borderWidth": 0,
+                    "flex": undefined,
                     "marginLeft": 4,
                     "marginRight": 8,
                     "minWidth": 64,
@@ -522,6 +545,7 @@ exports[`renders snackbar with content 1`] = `
         "alignSelf": undefined,
         "bottom": undefined,
         "end": undefined,
+        "flex": undefined,
         "left": undefined,
         "position": undefined,
         "right": undefined,
@@ -536,11 +560,13 @@ exports[`renders snackbar with content 1`] = `
         "top": undefined,
       }
     }
+    testID="surface-outer-layer"
   >
     <View
       collapsable={false}
       style={
         Object {
+          "flex": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 1,
@@ -550,6 +576,7 @@ exports[`renders snackbar with content 1`] = `
           "shadowRadius": 2,
         }
       }
+      testID="surface-inner-layer"
     >
       <View
         accessibilityLiveRegion="polite"
@@ -559,6 +586,7 @@ exports[`renders snackbar with content 1`] = `
           Object {
             "backgroundColor": "rgba(49, 48, 51, 1)",
             "borderRadius": 4,
+            "flex": undefined,
             "flexDirection": "row",
             "justifyContent": "space-between",
             "margin": 8,
@@ -571,6 +599,7 @@ exports[`renders snackbar with content 1`] = `
             ],
           }
         }
+        testID="surface"
       >
         <Text
           style={

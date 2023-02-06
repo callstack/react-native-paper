@@ -105,6 +105,7 @@ exports[`renders list item with custom description 1`] = `
                 "alignSelf": undefined,
                 "bottom": undefined,
                 "end": undefined,
+                "flex": undefined,
                 "left": undefined,
                 "position": undefined,
                 "right": undefined,
@@ -119,11 +120,13 @@ exports[`renders list item with custom description 1`] = `
                 "top": undefined,
               }
             }
+            testID="chip-container-outer-layer"
           >
             <View
               collapsable={false}
               style={
                 Object {
+                  "flex": undefined,
                   "shadowColor": "#000",
                   "shadowOffset": Object {
                     "height": 0,
@@ -133,6 +136,7 @@ exports[`renders list item with custom description 1`] = `
                   "shadowRadius": 0,
                 }
               }
+              testID="chip-container-inner-layer"
             >
               <View
                 collapsable={false}
@@ -143,6 +147,7 @@ exports[`renders list item with custom description 1`] = `
                     "borderRadius": 8,
                     "borderStyle": "solid",
                     "borderWidth": 0,
+                    "flex": undefined,
                     "flexDirection": "column",
                   }
                 }

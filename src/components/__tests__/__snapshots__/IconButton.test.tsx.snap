@@ -8,6 +8,7 @@ exports[`renders disabled icon button 1`] = `
       "alignSelf": undefined,
       "bottom": undefined,
       "end": undefined,
+      "flex": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -22,11 +23,13 @@ exports[`renders disabled icon button 1`] = `
       "top": undefined,
     }
   }
+  testID="icon-button-container-outer-layer"
 >
   <View
     collapsable={false}
     style={
       Object {
+        "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -36,6 +39,7 @@ exports[`renders disabled icon button 1`] = `
         "shadowRadius": 0,
       }
     }
+    testID="icon-button-container-inner-layer"
   >
     <View
       collapsable={false}
@@ -46,6 +50,7 @@ exports[`renders disabled icon button 1`] = `
           "borderRadius": 20,
           "borderWidth": 0,
           "elevation": 0,
+          "flex": undefined,
           "height": 40,
           "margin": 6,
           "overflow": "hidden",
@@ -159,6 +164,7 @@ exports[`renders icon button by default 1`] = `
       "alignSelf": undefined,
       "bottom": undefined,
       "end": undefined,
+      "flex": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -173,11 +179,13 @@ exports[`renders icon button by default 1`] = `
       "top": undefined,
     }
   }
+  testID="icon-button-container-outer-layer"
 >
   <View
     collapsable={false}
     style={
       Object {
+        "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -187,6 +195,7 @@ exports[`renders icon button by default 1`] = `
         "shadowRadius": 0,
       }
     }
+    testID="icon-button-container-inner-layer"
   >
     <View
       collapsable={false}
@@ -197,6 +206,7 @@ exports[`renders icon button by default 1`] = `
           "borderRadius": 20,
           "borderWidth": 0,
           "elevation": 0,
+          "flex": undefined,
           "height": 40,
           "margin": 6,
           "overflow": "hidden",
@@ -305,6 +315,7 @@ exports[`renders icon button with color 1`] = `
       "alignSelf": undefined,
       "bottom": undefined,
       "end": undefined,
+      "flex": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -319,11 +330,13 @@ exports[`renders icon button with color 1`] = `
       "top": undefined,
     }
   }
+  testID="icon-button-container-outer-layer"
 >
   <View
     collapsable={false}
     style={
       Object {
+        "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -333,6 +346,7 @@ exports[`renders icon button with color 1`] = `
         "shadowRadius": 0,
       }
     }
+    testID="icon-button-container-inner-layer"
   >
     <View
       collapsable={false}
@@ -343,6 +357,7 @@ exports[`renders icon button with color 1`] = `
           "borderRadius": 20,
           "borderWidth": 0,
           "elevation": 0,
+          "flex": undefined,
           "height": 40,
           "margin": 6,
           "overflow": "hidden",
@@ -451,6 +466,7 @@ exports[`renders icon button with size 1`] = `
       "alignSelf": undefined,
       "bottom": undefined,
       "end": undefined,
+      "flex": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -465,11 +481,13 @@ exports[`renders icon button with size 1`] = `
       "top": undefined,
     }
   }
+  testID="icon-button-container-outer-layer"
 >
   <View
     collapsable={false}
     style={
       Object {
+        "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -479,6 +497,7 @@ exports[`renders icon button with size 1`] = `
         "shadowRadius": 0,
       }
     }
+    testID="icon-button-container-inner-layer"
   >
     <View
       collapsable={false}
@@ -489,6 +508,7 @@ exports[`renders icon button with size 1`] = `
           "borderRadius": 23,
           "borderWidth": 0,
           "elevation": 0,
+          "flex": undefined,
           "height": 46,
           "margin": 6,
           "overflow": "hidden",
@@ -597,6 +617,7 @@ exports[`renders icon change animated 1`] = `
       "alignSelf": undefined,
       "bottom": undefined,
       "end": undefined,
+      "flex": undefined,
       "left": undefined,
       "position": undefined,
       "right": undefined,
@@ -611,11 +632,13 @@ exports[`renders icon change animated 1`] = `
       "top": undefined,
     }
   }
+  testID="icon-button-container-outer-layer"
 >
   <View
     collapsable={false}
     style={
       Object {
+        "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -625,6 +648,7 @@ exports[`renders icon change animated 1`] = `
         "shadowRadius": 0,
       }
     }
+    testID="icon-button-container-inner-layer"
   >
     <View
       collapsable={false}
@@ -635,6 +659,7 @@ exports[`renders icon change animated 1`] = `
           "borderRadius": 20,
           "borderWidth": 0,
           "elevation": 0,
+          "flex": undefined,
           "height": 40,
           "margin": 6,
           "overflow": "hidden",

@@ -21,6 +21,7 @@ Array [
             "alignSelf": undefined,
             "bottom": undefined,
             "end": undefined,
+            "flex": undefined,
             "left": undefined,
             "position": undefined,
             "right": undefined,
@@ -35,11 +36,13 @@ Array [
             "top": undefined,
           }
         }
+        testID="button-container-outer-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
+              "flex": undefined,
               "shadowColor": "#000",
               "shadowOffset": Object {
                 "height": 0,
@@ -49,6 +52,7 @@ Array [
               "shadowRadius": 0,
             }
           }
+          testID="button-container-inner-layer"
         >
           <View
             collapsable={false}
@@ -59,6 +63,7 @@ Array [
                 "borderRadius": 20,
                 "borderStyle": "solid",
                 "borderWidth": 1,
+                "flex": undefined,
                 "minWidth": 64,
               }
             }
@@ -238,6 +243,7 @@ Array [
               "alignSelf": undefined,
               "bottom": undefined,
               "end": undefined,
+              "flex": undefined,
               "left": undefined,
               "position": undefined,
               "right": undefined,
@@ -252,11 +258,13 @@ Array [
               "top": undefined,
             }
           }
+          testID="menu-surface-outer-layer"
         >
           <View
             collapsable={false}
             style={
               Object {
+                "flex": undefined,
                 "shadowColor": "#000",
                 "shadowOffset": Object {
                   "height": 1,
@@ -266,6 +274,7 @@ Array [
                 "shadowRadius": 2,
               }
             }
+            testID="menu-surface-inner-layer"
           >
             <View
               collapsable={false}
@@ -275,6 +284,7 @@ Array [
                   "borderRadius": 4,
                   "borderTopLeftRadius": 0,
                   "borderTopRightRadius": 0,
+                  "flex": undefined,
                   "opacity": 0,
                   "paddingVertical": 8,
                   "transform": Array [
@@ -526,6 +536,7 @@ exports[`renders not visible menu 1`] = `
           "alignSelf": undefined,
           "bottom": undefined,
           "end": undefined,
+          "flex": undefined,
           "left": undefined,
           "position": undefined,
           "right": undefined,
@@ -540,11 +551,13 @@ exports[`renders not visible menu 1`] = `
           "top": undefined,
         }
       }
+      testID="button-container-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
+            "flex": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -554,6 +567,7 @@ exports[`renders not visible menu 1`] = `
             "shadowRadius": 0,
           }
         }
+        testID="button-container-inner-layer"
       >
         <View
           collapsable={false}
@@ -564,6 +578,7 @@ exports[`renders not visible menu 1`] = `
               "borderRadius": 20,
               "borderStyle": "solid",
               "borderWidth": 1,
+              "flex": undefined,
               "minWidth": 64,
             }
           }
@@ -691,6 +706,7 @@ Array [
             "alignSelf": undefined,
             "bottom": undefined,
             "end": undefined,
+            "flex": undefined,
             "left": undefined,
             "position": undefined,
             "right": undefined,
@@ -705,11 +721,13 @@ Array [
             "top": undefined,
           }
         }
+        testID="button-container-outer-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
+              "flex": undefined,
               "shadowColor": "#000",
               "shadowOffset": Object {
                 "height": 0,
@@ -719,6 +737,7 @@ Array [
               "shadowRadius": 0,
             }
           }
+          testID="button-container-inner-layer"
         >
           <View
             collapsable={false}
@@ -729,6 +748,7 @@ Array [
                 "borderRadius": 20,
                 "borderStyle": "solid",
                 "borderWidth": 1,
+                "flex": undefined,
                 "minWidth": 64,
               }
             }
@@ -908,6 +928,7 @@ Array [
               "alignSelf": undefined,
               "bottom": undefined,
               "end": undefined,
+              "flex": undefined,
               "left": undefined,
               "position": undefined,
               "right": undefined,
@@ -922,11 +943,13 @@ Array [
               "top": undefined,
             }
           }
+          testID="menu-surface-outer-layer"
         >
           <View
             collapsable={false}
             style={
               Object {
+                "flex": undefined,
                 "shadowColor": "#000",
                 "shadowOffset": Object {
                   "height": 1,
@@ -936,6 +959,7 @@ Array [
                 "shadowRadius": 2,
               }
             }
+            testID="menu-surface-inner-layer"
           >
             <View
               collapsable={false}
@@ -943,6 +967,7 @@ Array [
                 Object {
                   "backgroundColor": "rgb(243, 237, 246)",
                   "borderRadius": 4,
+                  "flex": undefined,
                   "opacity": 0,
                   "paddingVertical": 8,
                   "transform": Array [
