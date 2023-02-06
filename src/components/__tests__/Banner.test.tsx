@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { Image } from 'react-native';
+import { Animated, Image } from 'react-native';
 
+import { render } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
 
-import Banner from '../Banner.tsx';
+import Banner from '../Banner';
 
 it('renders hidden banner, without action buttons and without image', () => {
   const tree = renderer
@@ -55,7 +56,7 @@ it('renders visible banner, without action buttons and with image', () => {
     .create(
       <Banner
         visible
-        image={({ size }) => (
+        icon={({ size }) => (
           <Image
             source={{ uri: 'https://callstack.com/images/team/Satya.png' }}
             style={{ width: size, height: size }}
@@ -77,7 +78,7 @@ it('renders visible banner, with action buttons and with image', () => {
     .create(
       <Banner
         visible
-        image={({ size }) => (
+        icon={({ size }) => (
           <Image
             source={{ uri: 'https://callstack.com/images/team/Satya.png' }}
             style={{ width: size, height: size }}
@@ -118,7 +119,8 @@ it('render visible banner, with custom theme', () => {
 });
 
 describe('animations', () => {
-  let showCallback, hideCallback;
+  let showCallback: (() => void) | undefined,
+    hideCallback: (() => void) | undefined;
 
   beforeEach(() => {
     showCallback = jest.fn();
@@ -142,6 +144,7 @@ describe('animations', () => {
         <Banner
           onShowAnimationFinished={showCallback}
           onHideAnimationFinished={hideCallback}
+          visible={false}
         >
           Text
         </Banner>
@@ -160,6 +163,7 @@ describe('animations', () => {
         <Banner
           onShowAnimationFinished={showCallback}
           onHideAnimationFinished={hideCallback}
+          visible={false}
         >
           Text
         </Banner>
@@ -224,6 +228,7 @@ describe('animations', () => {
         <Banner
           onShowAnimationFinished={showCallback}
           onHideAnimationFinished={hideCallback}
+          visible={false}
         >
           Text
         </Banner>
@@ -308,6 +313,7 @@ describe('animations', () => {
         <Banner
           onShowAnimationFinished={nextShowCallback}
           onHideAnimationFinished={nextHideCallback}
+          visible={false}
         >
           Text
         </Banner>
@@ -318,6 +324,34 @@ describe('animations', () => {
       expect(hideCallback).toHaveBeenCalledTimes(0);
       expect(nextShowCallback).toHaveBeenCalledTimes(0);
       expect(nextHideCallback).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it('animated value changes correctly', () => {
+    const value = new Animated.Value(1);
+    const { getByTestId } = render(
+      <Banner
+        visible
+        testID="banner"
+        style={[{ transform: [{ scale: value }] }]}
+      >
+        Banner
+      </Banner>
+    );
+    expect(getByTestId('banner')).toHaveStyle({
+      transform: [{ scale: 1 }],
+    });
+
+    Animated.timing(value, {
+      toValue: 1.5,
+      useNativeDriver: false,
+      duration: 200,
+    }).start();
+
+    jest.runAllTimers();
+
+    expect(getByTestId('banner')).toHaveStyle({
+      transform: [{ scale: 1.5 }],
     });
   });
 });

@@ -172,6 +172,7 @@ exports[`render visible banner, with custom theme 1`] = `
                       "minWidth": "auto",
                     }
                   }
+                  testID="button-container"
                 >
                   <View
                     accessibilityRole="button"
@@ -459,7 +460,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
   >
     <View
       collapsable={false}
-      image={[Function]}
       style={
         Object {
           "backgroundColor": "rgb(247, 243, 249)",
@@ -503,6 +503,28 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
               }
             }
           >
+            <View
+              style={
+                Object {
+                  "margin": 8,
+                }
+              }
+            >
+              <Image
+                accessibilityIgnoresInvertColors={true}
+                source={
+                  Object {
+                    "uri": "https://callstack.com/images/team/Satya.png",
+                  }
+                }
+                style={
+                  Object {
+                    "height": 40,
+                    "width": 40,
+                  }
+                }
+              />
+            </View>
             <Text
               accessibilityLiveRegion="polite"
               accessibilityRole="alert"
@@ -593,6 +615,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                       "minWidth": "auto",
                     }
                   }
+                  testID="button-container"
                 >
                   <View
                     accessibilityRole="button"
@@ -871,6 +894,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                       "minWidth": "auto",
                     }
                   }
+                  testID="button-container"
                 >
                   <View
                     accessibilityRole="button"
@@ -1018,6 +1042,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                       "minWidth": "auto",
                     }
                   }
+                  testID="button-container"
                 >
                   <View
                     accessibilityRole="button"
@@ -1163,7 +1188,6 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
   >
     <View
       collapsable={false}
-      image={[Function]}
       style={
         Object {
           "backgroundColor": "rgb(247, 243, 249)",
@@ -1207,6 +1231,28 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
               }
             }
           >
+            <View
+              style={
+                Object {
+                  "margin": 8,
+                }
+              }
+            >
+              <Image
+                accessibilityIgnoresInvertColors={true}
+                source={
+                  Object {
+                    "uri": "https://callstack.com/images/team/Satya.png",
+                  }
+                }
+                style={
+                  Object {
+                    "height": 40,
+                    "width": 40,
+                  }
+                }
+              />
+            </View>
             <Text
               accessibilityLiveRegion="polite"
               accessibilityRole="alert"

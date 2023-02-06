@@ -8,8 +8,8 @@ import renderer from 'react-test-renderer';
 import { getTheme } from '../../core/theming';
 import { red300 } from '../../styles/themes/v2/colors';
 import { MD3Colors } from '../../styles/themes/v3/tokens';
-import BottomNavigation from '../BottomNavigation/BottomNavigation.tsx';
-import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRouteScreen.tsx';
+import BottomNavigation from '../BottomNavigation/BottomNavigation';
+import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRouteScreen';
 import {
   getActiveTintColor,
   getInactiveTintColor,
@@ -17,13 +17,18 @@ import {
 } from '../BottomNavigation/utils';
 
 const styles = StyleSheet.create({
-  labelColor: {
-    color: red300,
-  },
   backgroundColor: {
     backgroundColor: red300,
   },
 });
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      icon: { color: string; src: any };
+    }
+  }
+}
 
 // Make sure any animation finishes before checking the snapshot results
 jest.mock('react-native', () => {
@@ -38,14 +43,21 @@ jest.mock('react-native', () => {
     reset: () => jest.fn(),
   }));
 
-  RN.Animated.timing = (value, config) => ({
+  const timing: typeof Animated['timing'] = (value, config) => ({
     start: (callback) => {
-      value.setValue(config.toValue);
-      callback && callback({ finished: true });
+      value.setValue(config.toValue as any);
+      callback?.({ finished: true });
     },
     value,
     config,
+    stop: () => {
+      throw new Error('Not implemented');
+    },
+    reset: () => {
+      throw new Error('Not implemented');
+    },
   });
+  RN.Animated.timing = timing;
 
   RN.Animated.parallel = mock;
 
@@ -62,7 +74,7 @@ jest.mock('react-native-safe-area-context', () => ({
 
 const icons = ['magnify', 'camera', 'inbox', 'heart', 'shopping-music'];
 
-const createState = (index, length) => ({
+const createState = (index: number, length: number) => ({
   index,
   routes: Array.from({ length }, (_, i) => ({
     key: `key-${i}`,
@@ -215,10 +227,10 @@ it('renders custom icon and label in shifting bottom navigation', () => {
         onIndexChange={jest.fn()}
         renderScene={({ route }) => route.title}
         renderIcon={({ route, color }) => (
-          <icon color={color}>{route.icon}</icon>
+          <icon color={color} src={route.unfocusedIcon} />
         )}
         renderLabel={({ route, color }) => (
-          <text color={color}>{route.label}</text>
+          <text color={color}>{route.title}</text>
         )}
       />
     )
@@ -236,10 +248,10 @@ it('renders custom icon and label in non-shifting bottom navigation', () => {
         onIndexChange={jest.fn()}
         renderScene={({ route }) => route.title}
         renderIcon={({ route, color }) => (
-          <icon color={color}>{route.icon}</icon>
+          <icon color={color} src={route.unfocusedIcon} />
         )}
         renderLabel={({ route, color }) => (
-          <text color={color}>{route.label}</text>
+          <text color={color}>{route.title}</text>
         )}
       />
     )
@@ -258,7 +270,6 @@ it('renders custom icon and label with custom colors in shifting bottom navigati
         renderScene={({ route }) => route.title}
         activeColor="#FBF7DB"
         inactiveColor="#853D4B"
-        barStyle={styles.labelColor}
       />
     )
     .toJSON();
@@ -276,7 +287,6 @@ it('renders custom icon and label with custom colors in non-shifting bottom navi
         renderScene={({ route }) => route.title}
         activeColor="#FBF7DB"
         inactiveColor="#853D4B"
-        barStyle={styles.labelColor}
       />
     )
     .toJSON();
@@ -456,4 +466,32 @@ describe('getLabelColor', () => {
       expect(color).toBe(expected);
     }
   );
+});
+
+it('barStyle animated value changes correctly', () => {
+  const value = new Animated.Value(1);
+  const { getByTestId } = render(
+    <BottomNavigation
+      navigationState={createState(0, 1)}
+      onIndexChange={() => {}}
+      renderScene={({ route }) => route.title}
+      testID={'bottom-navigation'}
+      barStyle={[{ transform: [{ scale: value }] }]}
+    />
+  );
+  expect(getByTestId('bottom-navigation-surface')).toHaveStyle({
+    transform: [{ scale: 1 }],
+  });
+
+  Animated.timing(value, {
+    toValue: 1.5,
+    useNativeDriver: false,
+    duration: 200,
+  }).start();
+
+  jest.advanceTimersByTime(200);
+
+  expect(getByTestId('bottom-navigation-surface')).toHaveStyle({
+    transform: [{ scale: 1.5 }],
+  });
 });

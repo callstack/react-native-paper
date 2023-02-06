@@ -37,7 +37,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
   actions?: Array<
     {
       label: string;
-    } & Omit<React.ComponentProps<typeof Button>, 'children'>
+    } & $RemoveChildren<typeof Button>
   >;
   /**
    * Style of banner's inner content.
@@ -49,7 +49,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
    * Changes Banner shadow and background on iOS and Android.
    */
   elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   ref?: React.RefObject<View>;
   /**
    * @optional

@@ -52,6 +52,7 @@ exports[`renders disabled toggle button 1`] = `
           "width": 42,
         }
       }
+      testID="icon-button-container"
     >
       <View
         accessibilityComponentType="button"
@@ -89,7 +90,6 @@ exports[`renders disabled toggle button 1`] = `
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        onValueChange={[Function]}
         style={
           Array [
             false,
@@ -106,6 +106,7 @@ exports[`renders disabled toggle button 1`] = `
             ],
           ]
         }
+        testID="icon-button"
       >
         <Text
           accessibilityElementsHidden={true}
@@ -201,6 +202,7 @@ exports[`renders toggle button 1`] = `
           "width": 42,
         }
       }
+      testID="icon-button-container"
     >
       <View
         accessibilityComponentType="button"
@@ -249,6 +251,7 @@ exports[`renders toggle button 1`] = `
             ],
           ]
         }
+        testID="icon-button"
       >
         <Text
           accessibilityElementsHidden={true}
@@ -344,6 +347,7 @@ exports[`renders unchecked toggle button 1`] = `
           "width": 42,
         }
       }
+      testID="icon-button-container"
     >
       <View
         accessibilityComponentType="button"
@@ -381,7 +385,6 @@ exports[`renders unchecked toggle button 1`] = `
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        onValueChange={[Function]}
         style={
           Array [
             false,
@@ -398,6 +401,7 @@ exports[`renders unchecked toggle button 1`] = `
             ],
           ]
         }
+        testID="icon-button"
       >
         <Text
           accessibilityElementsHidden={true}

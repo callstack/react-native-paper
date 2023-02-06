@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ViewStyle,
   View,
+  Animated,
 } from 'react-native';
 
 import color from 'color';
@@ -50,12 +51,16 @@ export type Props = {
    * Status of button.
    */
   status?: 'checked' | 'unchecked';
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
    */
   theme?: ThemeProp;
   ref?: React.RefObject<View>;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 /**

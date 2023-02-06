@@ -47,6 +47,7 @@ exports[`activity indicator snapshot test 1`] = `
           "flexDirection": "row",
         }
       }
+      testID="search-bar-container"
     >
       <View
         collapsable={false}
@@ -99,6 +100,7 @@ exports[`activity indicator snapshot test 1`] = `
                 "width": 40,
               }
             }
+            testID="icon-button-container"
           >
             <View
               accessibilityComponentType="button"
@@ -149,6 +151,7 @@ exports[`activity indicator snapshot test 1`] = `
                   ],
                 ]
               }
+              testID="icon-button"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -218,6 +221,7 @@ exports[`activity indicator snapshot test 1`] = `
         }
         testID="search-bar"
         underlineColorAndroid="transparent"
+        value=""
       />
       <View
         accessibilityRole="progressbar"
@@ -469,6 +473,7 @@ exports[`renders with placeholder 1`] = `
           "flexDirection": "row",
         }
       }
+      testID="search-bar-container"
     >
       <View
         collapsable={false}
@@ -521,6 +526,7 @@ exports[`renders with placeholder 1`] = `
                 "width": 40,
               }
             }
+            testID="icon-button-container"
           >
             <View
               accessibilityComponentType="button"
@@ -571,6 +577,7 @@ exports[`renders with placeholder 1`] = `
                   ],
                 ]
               }
+              testID="icon-button"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -640,6 +647,7 @@ exports[`renders with placeholder 1`] = `
         }
         testID="search-bar"
         underlineColorAndroid="transparent"
+        value=""
       />
       <View
         pointerEvents="none"
@@ -696,6 +704,7 @@ exports[`renders with placeholder 1`] = `
                   "width": 40,
                 }
               }
+              testID="icon-button-container"
             >
               <View
                 accessibilityComponentType="button"
@@ -746,6 +755,7 @@ exports[`renders with placeholder 1`] = `
                     ],
                   ]
                 }
+                testID="icon-button"
               >
                 <Text
                   accessibilityElementsHidden={true}
@@ -840,6 +850,7 @@ exports[`renders with text 1`] = `
           "flexDirection": "row",
         }
       }
+      testID="search-bar-container"
     >
       <View
         collapsable={false}
@@ -892,6 +903,7 @@ exports[`renders with text 1`] = `
                 "width": 40,
               }
             }
+            testID="icon-button-container"
           >
             <View
               accessibilityComponentType="button"
@@ -942,6 +954,7 @@ exports[`renders with text 1`] = `
                   ],
                 ]
               }
+              testID="icon-button"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -1068,6 +1081,7 @@ exports[`renders with text 1`] = `
                   "width": 40,
                 }
               }
+              testID="icon-button-container"
             >
               <View
                 accessibilityComponentType="button"
@@ -1118,6 +1132,7 @@ exports[`renders with text 1`] = `
                     ],
                   ]
                 }
+                testID="icon-button"
               >
                 <Text
                   accessibilityElementsHidden={true}

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   EasingFunction,
   Platform,
   StyleProp,
@@ -255,7 +256,7 @@ export type Props = {
    * barStyle={{ backgroundColor: '#694fad' }}
    * ```
    */
-  barStyle?: StyleProp<ViewStyle>;
+  barStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * Specifies the largest possible scale a label font can reach.
    */
@@ -620,8 +621,11 @@ const BottomNavigation = ({
   const { routes } = navigationState;
   const { colors, dark: isDarkTheme, mode, isV3 } = theme;
 
-  const { backgroundColor: customBackground, elevation = 4 }: ViewStyle =
-    StyleSheet.flatten(barStyle) || {};
+  const { backgroundColor: customBackground, elevation = 4 } =
+    (StyleSheet.flatten(barStyle) || {}) as {
+      elevation?: number;
+      backgroundColor?: ColorValue;
+    };
 
   const approxBackgroundColor = customBackground
     ? customBackground
@@ -758,29 +762,28 @@ const BottomNavigation = ({
       </View>
       <Surface
         {...(theme.isV3 && { elevation: 0 })}
-        style={
-          [
-            !theme.isV3 && { elevation: 4 },
-            styles.bar,
-            keyboardHidesNavigationBar
-              ? {
-                  // When the keyboard is shown, slide down the navigation bar
-                  transform: [
-                    {
-                      translateY: visibleAnim.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [layout.height, 0],
-                      }),
-                    },
-                  ],
-                  // Absolutely position the navigation bar so that the content is below it
-                  // This is needed to avoid gap at bottom when the navigation bar is hidden
-                  position: keyboardVisible ? 'absolute' : null,
-                }
-              : null,
-            barStyle,
-          ] as StyleProp<ViewStyle>
-        }
+        testID={`${testID}-surface`}
+        style={[
+          !theme.isV3 && styles.elevation,
+          styles.bar,
+          keyboardHidesNavigationBar // eslint-disable-next-line react-native/no-inline-styles
+            ? {
+                // When the keyboard is shown, slide down the navigation bar
+                transform: [
+                  {
+                    translateY: visibleAnim.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [layout.height, 0],
+                    }),
+                  },
+                ],
+                // Absolutely position the navigation bar so that the content is below it
+                // This is needed to avoid gap at bottom when the navigation bar is hidden
+                position: keyboardVisible ? 'absolute' : undefined,
+              }
+            : null,
+          barStyle,
+        ]}
         pointerEvents={
           layout.measured
             ? keyboardHidesNavigationBar && keyboardVisible
@@ -1232,5 +1235,8 @@ const styles = StyleSheet.create({
     height: OUTLINE_WIDTH / 2,
     borderRadius: OUTLINE_WIDTH / 4,
     alignSelf: 'center',
+  },
+  elevation: {
+    elevation: 4,
   },
 });

@@ -148,6 +148,7 @@ exports[`renders animated fab 1`] = `
             }
           >
             <View
+              accessibilityLabel=""
               accessibilityRole="button"
               accessibilityState={
                 Object {

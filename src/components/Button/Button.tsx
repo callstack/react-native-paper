@@ -106,7 +106,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
    * Use this prop to apply custom height and width and to set the icon on the right with `flexDirection: 'row-reverse'`.
    */
   contentStyle?: StyleProp<ViewStyle>;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * Style for the button text.
    */
@@ -292,6 +292,7 @@ const Button = ({
   return (
     <Surface
       {...rest}
+      testID={`${testID}-container`}
       style={
         [
           styles.button,

@@ -115,6 +115,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -861,6 +862,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -1760,6 +1762,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -3467,6 +3470,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -4955,6 +4959,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -5146,7 +5151,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   >
                     <text
                       color="rgba(28, 27, 31, 1)"
-                    />
+                    >
+                      Route: 0
+                    </text>
                   </View>
                   <View
                     collapsable={false}
@@ -5163,7 +5170,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   >
                     <text
                       color="rgba(28, 27, 31, 1)"
-                    />
+                    >
+                      Route: 0
+                    </text>
                   </View>
                 </View>
               </View>
@@ -5315,7 +5324,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   >
                     <text
                       color="rgba(73, 69, 79, 1)"
-                    />
+                    >
+                      Route: 1
+                    </text>
                   </View>
                   <View
                     collapsable={false}
@@ -5332,7 +5343,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   >
                     <text
                       color="rgba(73, 69, 79, 1)"
-                    />
+                    >
+                      Route: 1
+                    </text>
                   </View>
                 </View>
               </View>
@@ -5484,7 +5497,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   >
                     <text
                       color="rgba(73, 69, 79, 1)"
-                    />
+                    >
+                      Route: 2
+                    </text>
                   </View>
                   <View
                     collapsable={false}
@@ -5501,7 +5516,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   >
                     <text
                       color="rgba(73, 69, 79, 1)"
-                    />
+                    >
+                      Route: 2
+                    </text>
                   </View>
                 </View>
               </View>
@@ -5629,6 +5646,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -5847,7 +5865,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   >
                     <text
                       color="rgba(28, 27, 31, 1)"
-                    />
+                    >
+                      Route: 0
+                    </text>
                   </View>
                 </View>
               </View>
@@ -6005,7 +6025,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   >
                     <text
                       color="rgba(73, 69, 79, 1)"
-                    />
+                    >
+                      Route: 1
+                    </text>
                   </View>
                 </View>
               </View>
@@ -6163,7 +6185,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   >
                     <text
                       color="rgba(73, 69, 79, 1)"
-                    />
+                    >
+                      Route: 2
+                    </text>
                   </View>
                 </View>
               </View>
@@ -6321,7 +6345,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   >
                     <text
                       color="rgba(73, 69, 79, 1)"
-                    />
+                    >
+                      Route: 3
+                    </text>
                   </View>
                 </View>
               </View>
@@ -6479,7 +6505,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   >
                     <text
                       color="rgba(73, 69, 79, 1)"
-                    />
+                    >
+                      Route: 4
+                    </text>
                   </View>
                 </View>
               </View>
@@ -6605,9 +6633,9 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         style={
           Object {
             "backgroundColor": "transparent",
-            "color": "#e57373",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -7697,9 +7725,9 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         style={
           Object {
             "backgroundColor": "transparent",
-            "color": "#e57373",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -8668,6 +8696,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}
@@ -9759,6 +9788,7 @@ exports[`renders shifting bottom navigation 1`] = `
             "backgroundColor": "transparent",
           }
         }
+        testID="bottom-navigation-surface"
       >
         <View
           collapsable={false}

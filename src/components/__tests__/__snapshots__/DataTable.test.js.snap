@@ -315,6 +315,7 @@ exports[`renders data table pagination 1`] = `
               "width": 40,
             }
           }
+          testID="icon-button-container"
         >
           <View
             accessibilityComponentType="button"
@@ -365,6 +366,7 @@ exports[`renders data table pagination 1`] = `
                 ],
               ]
             }
+            testID="icon-button"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -457,6 +459,7 @@ exports[`renders data table pagination 1`] = `
               "width": 40,
             }
           }
+          testID="icon-button-container"
         >
           <View
             accessibilityComponentType="button"
@@ -507,6 +510,7 @@ exports[`renders data table pagination 1`] = `
                 ],
               ]
             }
+            testID="icon-button"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -657,6 +661,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
               "width": 40,
             }
           }
+          testID="icon-button-container"
         >
           <View
             accessibilityComponentType="button"
@@ -707,6 +712,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
                 ],
               ]
             }
+            testID="icon-button"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -799,6 +805,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
               "width": 40,
             }
           }
+          testID="icon-button-container"
         >
           <View
             accessibilityComponentType="button"
@@ -849,6 +856,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
                 ],
               ]
             }
+            testID="icon-button"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -941,6 +949,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
               "width": 40,
             }
           }
+          testID="icon-button-container"
         >
           <View
             accessibilityComponentType="button"
@@ -991,6 +1000,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
                 ],
               ]
             }
+            testID="icon-button"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -1083,6 +1093,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
               "width": 40,
             }
           }
+          testID="icon-button-container"
         >
           <View
             accessibilityComponentType="button"
@@ -1133,6 +1144,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
                 ],
               ]
             }
+            testID="icon-button"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -1283,6 +1295,7 @@ exports[`renders data table pagination with label 1`] = `
               "width": 40,
             }
           }
+          testID="icon-button-container"
         >
           <View
             accessibilityComponentType="button"
@@ -1333,6 +1346,7 @@ exports[`renders data table pagination with label 1`] = `
                 ],
               ]
             }
+            testID="icon-button"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -1425,6 +1439,7 @@ exports[`renders data table pagination with label 1`] = `
               "width": 40,
             }
           }
+          testID="icon-button-container"
         >
           <View
             accessibilityComponentType="button"
@@ -1475,6 +1490,7 @@ exports[`renders data table pagination with label 1`] = `
                 ],
               ]
             }
+            testID="icon-button"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -1630,6 +1646,7 @@ exports[`renders data table pagination with options select 1`] = `
                 "textAlign": "center",
               }
             }
+            testID="button-container"
           >
             <View
               accessibilityRole="button"
@@ -1873,6 +1890,7 @@ exports[`renders data table pagination with options select 1`] = `
               "width": 40,
             }
           }
+          testID="icon-button-container"
         >
           <View
             accessibilityComponentType="button"
@@ -1923,6 +1941,7 @@ exports[`renders data table pagination with options select 1`] = `
                 ],
               ]
             }
+            testID="icon-button"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -2015,6 +2034,7 @@ exports[`renders data table pagination with options select 1`] = `
               "width": 40,
             }
           }
+          testID="icon-button-container"
         >
           <View
             accessibilityComponentType="button"
@@ -2065,6 +2085,7 @@ exports[`renders data table pagination with options select 1`] = `
                 ],
               ]
             }
+            testID="icon-button"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -2157,6 +2178,7 @@ exports[`renders data table pagination with options select 1`] = `
               "width": 40,
             }
           }
+          testID="icon-button-container"
         >
           <View
             accessibilityComponentType="button"
@@ -2207,6 +2229,7 @@ exports[`renders data table pagination with options select 1`] = `
                 ],
               ]
             }
+            testID="icon-button"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -2299,6 +2322,7 @@ exports[`renders data table pagination with options select 1`] = `
               "width": 40,
             }
           }
+          testID="icon-button-container"
         >
           <View
             accessibilityComponentType="button"
@@ -2349,6 +2373,7 @@ exports[`renders data table pagination with options select 1`] = `
                 ],
               ]
             }
+            testID="icon-button"
           >
             <Text
               accessibilityElementsHidden={true}

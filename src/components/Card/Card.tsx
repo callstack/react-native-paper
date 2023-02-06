@@ -67,7 +67,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
    * Changes Card shadow and background on iOS and Android.
    */
   elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
    */
@@ -248,6 +248,7 @@ const Card = ({
       {...(isV3 && {
         elevation: isMode('elevated') ? computedElevation : 0,
       })}
+      testID={`${testID}-container`}
       {...rest}
     >
       {isMode('outlined') && (

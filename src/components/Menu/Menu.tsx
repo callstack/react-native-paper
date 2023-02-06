@@ -65,7 +65,7 @@ export type Props = {
   /**
    * Style of menu's inner content.
    */
-  contentStyle?: StyleProp<ViewStyle>;
+  contentStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -75,6 +75,10 @@ export type Props = {
    * Inner ScrollView prop
    */
   keyboardShouldPersistTaps?: ScrollViewProps['keyboardShouldPersistTaps'];
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 type Layout = $Omit<$Omit<LayoutRectangle, 'x'>, 'y'>;
@@ -157,6 +161,7 @@ class Menu extends React.Component<Props, State> {
   static defaultProps = {
     statusBarHeight: APPROX_STATUSBAR_HEIGHT,
     overlayAccessibilityLabel: 'Close menu',
+    testID: 'menu',
   };
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
@@ -412,6 +417,7 @@ class Menu extends React.Component<Props, State> {
       onDismiss,
       overlayAccessibilityLabel,
       keyboardShouldPersistTaps,
+      testID,
     } = this.props;
 
     const {
@@ -626,17 +632,16 @@ class Menu extends React.Component<Props, State> {
             >
               <Animated.View style={{ transform: positionTransforms }}>
                 <Surface
-                  style={
-                    [
-                      styles.shadowMenuContainer,
-                      shadowMenuContainerStyle,
-                      theme.isV3 && {
-                        backgroundColor: theme.colors.elevation.level2,
-                      },
-                      contentStyle,
-                    ] as StyleProp<ViewStyle>
-                  }
+                  style={[
+                    styles.shadowMenuContainer,
+                    shadowMenuContainerStyle,
+                    theme.isV3 && {
+                      backgroundColor: theme.colors.elevation.level2,
+                    },
+                    contentStyle,
+                  ]}
                   {...(theme.isV3 && { elevation: 2 })}
+                  testID={`${testID}-surface`}
                   theme={theme}
                 >
                   {(scrollableMenuHeight && (

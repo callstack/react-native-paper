@@ -13,7 +13,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useEventCallback from 'use-event-callback';
 
 import { useInternalTheme } from '../core/theming';
-import type { ThemeProp } from '../types';
+import type { $RemoveChildren, ThemeProp } from '../types';
 import Button from './Button/Button';
 import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
@@ -31,7 +31,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
    * - `label` - Label of the action button
    * - `onPress` - Callback that is called when action button is pressed.
    */
-  action?: Omit<React.ComponentProps<typeof Button>, 'children'> & {
+  action?: $RemoveChildren<typeof Button> & {
     label: string;
   };
   /**
@@ -70,7 +70,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
    */
   elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
   wrapperStyle?: StyleProp<ViewStyle>;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   ref?: React.RefObject<View>;
   /**
    * @optional
@@ -268,28 +268,26 @@ const Snackbar = ({
         pointerEvents="box-none"
         accessibilityLiveRegion="polite"
         theme={theme}
-        style={
-          [
-            !isV3 && styles.elevation,
-            styles.container,
-            {
-              backgroundColor,
-              borderRadius: roundness,
-              opacity: opacity,
-              transform: [
-                {
-                  scale: visible
-                    ? opacity.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0.9, 1],
-                      })
-                    : 1,
-                },
-              ],
-            },
-            style,
-          ] as StyleProp<ViewStyle>
-        }
+        style={[
+          !isV3 && styles.elevation,
+          styles.container,
+          {
+            backgroundColor,
+            borderRadius: roundness,
+            opacity: opacity,
+            transform: [
+              {
+                scale: visible
+                  ? opacity.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0.9, 1],
+                    })
+                  : 1,
+              },
+            ],
+          },
+          style,
+        ]}
         {...(isV3 && { elevation })}
         {...rest}
       >

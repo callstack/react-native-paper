@@ -44,8 +44,8 @@ export type Props = {
     labelTextColor?: string;
     accessibilityLabel?: string;
     accessibilityHint?: string;
-    style?: StyleProp<ViewStyle>;
-    containerStyle?: StyleProp<ViewStyle>;
+    style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+    containerStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
     labelStyle?: StyleProp<TextStyle>;
     onPress: (e: GestureResponderEvent) => void;
     size?: 'small' | 'medium';
@@ -93,7 +93,7 @@ export type Props = {
   /**
    * Style for the FAB. It allows to pass the FAB button styles, such as backgroundColor.
    */
-  fabStyle?: StyleProp<ViewStyle>;
+  fabStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @supported Available in v5.x with theme version 3
    *
@@ -205,7 +205,7 @@ const FABGroup = ({
         label?: string;
         color?: string;
         accessibilityLabel?: string;
-        style?: StyleProp<ViewStyle>;
+        style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
         onPress: (e: GestureResponderEvent) => void;
         testID?: string;
       }[]
@@ -364,21 +364,19 @@ const FABGroup = ({
                       accessibilityHint={it.accessibilityHint}
                       accessibilityLabel={accessibilityLabel}
                       accessibilityRole="button"
-                      style={
-                        [
-                          styles.containerStyle,
-                          {
-                            transform: [
-                              isV3
-                                ? { translateY: labelTranslations[i] }
-                                : { scale: scales[i] },
-                            ],
-                            opacity: opacities[i],
-                          },
-                          isV3 && styles.v3ContainerStyle,
-                          it.containerStyle,
-                        ] as StyleProp<ViewStyle>
-                      }
+                      style={[
+                        styles.containerStyle,
+                        {
+                          transform: [
+                            isV3
+                              ? { translateY: labelTranslations[i] }
+                              : { scale: scales[i] },
+                          ],
+                          opacity: opacities[i],
+                        },
+                        isV3 && styles.v3ContainerStyle,
+                        it.containerStyle,
+                      ]}
                     >
                       <Text
                         variant="titleMedium"
@@ -393,17 +391,15 @@ const FABGroup = ({
                   size={size}
                   icon={it.icon}
                   color={it.color}
-                  style={
-                    [
-                      {
-                        transform: [{ scale: scales[i] }],
-                        opacity: opacities[i],
-                        backgroundColor: stackedFABBackgroundColor,
-                      },
-                      isV3 && { transform: [{ translateY: translations[i] }] },
-                      it.style,
-                    ] as StyleProp<ViewStyle>
-                  }
+                  style={[
+                    {
+                      transform: [{ scale: scales[i] }],
+                      opacity: opacities[i],
+                      backgroundColor: stackedFABBackgroundColor,
+                    },
+                    isV3 && { transform: [{ translateY: translations[i] }] },
+                    it.style,
+                  ]}
                   onPress={(e) => {
                     it.onPress(e);
                     close();

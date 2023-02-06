@@ -1336,6 +1336,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
               "width": 40,
             }
           }
+          testID="right-icon-adornment-container"
         >
           <View
             accessibilityComponentType="button"
@@ -1692,6 +1693,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
               "width": 40,
             }
           }
+          testID="left-icon-adornment-container"
         >
           <View
             accessibilityComponentType="button"

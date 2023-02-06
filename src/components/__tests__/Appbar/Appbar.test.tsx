@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Animated, Platform } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
@@ -17,7 +17,7 @@ import AppbarHeader from '../../Appbar/AppbarHeader';
 import {
   getAppbarColor,
   modeTextVariant,
-  renderAppbarContent,
+  renderAppbarContent as utilRenderAppbarContent,
 } from '../../Appbar/utils';
 import Menu from '../../Menu/Menu';
 import Searchbar from '../../Searchbar';
@@ -26,12 +26,16 @@ import Text from '../../Typography/Text';
 
 jest.mock('react-native-safe-area-context', () => mockSafeAreaContext);
 
+const renderAppbarContent = utilRenderAppbarContent as (
+  props: Parameters<typeof utilRenderAppbarContent>[0]
+) => { props: any }[];
+
 describe('Appbar', () => {
   it('does not pass any additional props to Searchbar', () => {
     const tree = renderer
       .create(
         <Appbar>
-          <Searchbar placeholder="Search" />
+          <Searchbar placeholder="Search" value="" />
         </Appbar>
       )
       .toJSON();
@@ -64,6 +68,7 @@ describe('renderAppbarContent', () => {
 
   it('should render all children types if renderOnly is not specified', () => {
     const result = renderAppbarContent({
+      isV3: false,
       children,
       isDark: false,
     });
@@ -73,12 +78,16 @@ describe('renderAppbarContent', () => {
 
   it('should render all children types except specified in renderExcept', () => {
     const result = renderAppbarContent({
+      isV3: false,
       children: [
         ...children,
         <Menu
           key={4}
           anchor={<Appbar.Action icon="menu" onPress={() => {}} />}
-        />,
+          visible={false}
+        >
+          {null}
+        </Menu>,
       ],
       isDark: false,
       renderExcept: [Appbar, AppbarHeader, AppbarBackAction, AppbarContent],
@@ -89,6 +98,7 @@ describe('renderAppbarContent', () => {
 
   it('should render only children types specifed in renderOnly', () => {
     const result = renderAppbarContent({
+      isV3: false,
       children,
       isDark: false,
       renderOnly: [AppbarAction],
@@ -99,6 +109,7 @@ describe('renderAppbarContent', () => {
 
   it('should render AppbarContent with correct mode', () => {
     const result = renderAppbarContent({
+      isV3: false,
       children,
       isDark: false,
       renderOnly: [AppbarContent],
@@ -237,7 +248,7 @@ describe('AppbarAction', () => {
   it('should render AppbarBackAction with custom color', () => {
     const { getByTestId } = render(
       <Appbar>
-        <Appbar.BackAction icon="menu" color="purple" testID="appbar-action" />
+        <Appbar.BackAction color="purple" testID="appbar-action" />
       </Appbar>
     );
     const appbarBackActionIcon = getByTestId('appbar-action').props.children[0];
@@ -278,7 +289,7 @@ describe('AppbarAction', () => {
 });
 
 describe('AppbarContent', () => {
-  ['small', 'medium', 'large', 'center-aligned'].forEach((mode) =>
+  (['small', 'medium', 'large', 'center-aligned'] as const).forEach((mode) =>
     it(`should render text component with appropriate variant for ${mode} mode`, () => {
       const { getByTestId } = render(
         <Appbar mode={mode}>
@@ -339,5 +350,115 @@ describe('getAppbarColors', () => {
     expect(getAppbarColor(getTheme(true, false), elevation)).toBe(
       overlay(elevation, '#121212')
     );
+  });
+});
+
+describe('animated value changes correctly', () => {
+  it('appbar animated value changes correctly', () => {
+    const value = new Animated.Value(1);
+    const { getByTestId } = render(
+      <Appbar testID="appbar" style={[{ transform: [{ scale: value }] }]}>
+        <Appbar.Action icon="menu" />
+      </Appbar>
+    );
+    expect(getByTestId('appbar')).toHaveStyle({
+      transform: [{ scale: 1 }],
+    });
+
+    Animated.timing(value, {
+      toValue: 1.5,
+      useNativeDriver: false,
+      duration: 200,
+    }).start();
+
+    jest.advanceTimersByTime(200);
+
+    expect(getByTestId('appbar')).toHaveStyle({
+      transform: [{ scale: 1.5 }],
+    });
+  });
+
+  it('action animated value changes correctly', () => {
+    const value = new Animated.Value(1);
+    const { getByTestId } = render(
+      <Appbar>
+        <Appbar.Action
+          icon="menu"
+          style={[{ transform: [{ scale: value }] }]}
+          testID="appbar-action"
+        />
+      </Appbar>
+    );
+    expect(getByTestId('appbar-action-container')).toHaveStyle({
+      transform: [{ scale: 1 }],
+    });
+
+    Animated.timing(value, {
+      toValue: 1.5,
+      useNativeDriver: false,
+      duration: 200,
+    }).start();
+
+    jest.advanceTimersByTime(200);
+
+    expect(getByTestId('appbar-action-container')).toHaveStyle({
+      transform: [{ scale: 1.5 }],
+    });
+  });
+
+  it('back action animated value changes correctly', () => {
+    const value = new Animated.Value(1);
+    const { getByTestId } = render(
+      <Appbar>
+        <Appbar.BackAction
+          style={[{ transform: [{ scale: value }] }]}
+          testID="appbar-back-action"
+        />
+      </Appbar>
+    );
+    expect(getByTestId('appbar-back-action-container')).toHaveStyle({
+      transform: [{ scale: 1 }],
+    });
+
+    Animated.timing(value, {
+      toValue: 1.5,
+      useNativeDriver: false,
+      duration: 200,
+    }).start();
+
+    jest.advanceTimersByTime(200);
+
+    expect(getByTestId('appbar-back-action-container')).toHaveStyle({
+      transform: [{ scale: 1.5 }],
+    });
+  });
+
+  it('header animated value changes correctly', () => {
+    const value = new Animated.Value(1);
+    const { getByTestId } = render(
+      <mockSafeAreaContext.SafeAreaProvider>
+        <Appbar.Header
+          style={[{ transform: [{ scale: value }] }]}
+          testID="appbar-header"
+        >
+          {null}
+        </Appbar.Header>
+      </mockSafeAreaContext.SafeAreaProvider>
+    );
+    expect(getByTestId('appbar-header')).toHaveStyle({
+      transform: [{ scale: 1 }],
+    });
+
+    Animated.timing(value, {
+      toValue: 1.5,
+      useNativeDriver: false,
+      duration: 200,
+    }).start();
+
+    jest.advanceTimersByTime(200);
+
+    expect(getByTestId('appbar-header')).toHaveStyle({
+      transform: [{ scale: 1.5 }],
+    });
   });
 });

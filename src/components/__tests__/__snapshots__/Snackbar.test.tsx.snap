@@ -392,6 +392,7 @@ exports[`renders snackbar with action button 1`] = `
                     "minWidth": 64,
                   }
                 }
+                testID="button-container"
               >
                 <View
                   accessibilityRole="button"

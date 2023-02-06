@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 import color from 'color';
@@ -7,7 +7,7 @@ import renderer from 'react-test-renderer';
 
 import { getTheme } from '../../core/theming';
 import { pink500 } from '../../styles/themes/v2/colors';
-import IconButton from '../IconButton/IconButton.tsx';
+import IconButton from '../IconButton/IconButton';
 import { getIconButtonColor } from '../IconButton/utils';
 
 const styles = StyleSheet.create({
@@ -198,7 +198,7 @@ describe('getIconButtonColor - background color', () => {
     });
   });
 
-  ['contained', 'contained-tonal'].forEach((mode) =>
+  (['contained', 'contained-tonal'] as const).forEach((mode) =>
     it(`should return correct disabled color, for theme version 3, ${mode} mode`, () => {
       expect(
         getIconButtonColor({
@@ -337,5 +337,31 @@ describe('getIconButtonColor - ripple color', () => {
         .rgb()
         .string(),
     });
+  });
+});
+
+it('action animated value changes correctly', () => {
+  const value = new Animated.Value(1);
+  const { getByTestId } = render(
+    <IconButton
+      icon="menu"
+      style={[{ transform: [{ scale: value }] }]}
+      testID="icon-button"
+    />
+  );
+  expect(getByTestId('icon-button-container')).toHaveStyle({
+    transform: [{ scale: 1 }],
+  });
+
+  Animated.timing(value, {
+    toValue: 1.5,
+    useNativeDriver: false,
+    duration: 200,
+  }).start();
+
+  jest.advanceTimersByTime(200);
+
+  expect(getByTestId('icon-button-container')).toHaveStyle({
+    transform: [{ scale: 1.5 }],
   });
 });

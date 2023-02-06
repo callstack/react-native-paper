@@ -96,7 +96,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
    * Color mappings variant for combinations of container and icon colors.
    */
   variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
    */
@@ -320,24 +320,22 @@ const AnimatedFAB = ({
     <Surface
       {...rest}
       testID={`${testID}-container`}
-      style={
-        [
-          {
-            opacity: visibility,
-            transform: [
-              {
-                scale: visibility,
-              },
-            ],
-            borderRadius,
-          },
-          !isV3 && {
-            elevation: md2Elevation,
-          },
-          styles.container,
-          restStyle,
-        ] as StyleProp<ViewStyle>
-      }
+      style={[
+        {
+          opacity: visibility,
+          transform: [
+            {
+              scale: visibility,
+            },
+          ],
+          borderRadius,
+        },
+        !isV3 && {
+          elevation: md2Elevation,
+        },
+        styles.container,
+        restStyle,
+      ]}
       {...(isV3 && { elevation: md3Elevation })}
       theme={theme}
     >

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 import color from 'color';
@@ -146,7 +146,7 @@ it('renders FAB with custom border radius', () => {
   expect(getByTestId('fab-container')).toHaveStyle({ borderRadius: 0 });
 });
 
-['small', 'medium', 'large'].forEach((size) => {
+(['small', 'medium', 'large'] as const).forEach((size) => {
   it(`renders ${size} FAB with correct size and border radius`, () => {
     const { getByTestId } = render(
       <FAB onPress={() => {}} size={size} icon="plus" testID={`${size}-fab`} />
@@ -367,5 +367,33 @@ describe('getFABColors - foreground color', () => {
         'rgba(0, 0, 0, .54)'
       ),
     });
+  });
+});
+
+it('animated value changes correctly', () => {
+  const value = new Animated.Value(1);
+  const { getByTestId } = render(
+    <FAB
+      size="small"
+      onPress={() => {}}
+      icon="plus"
+      testID="fab"
+      style={[{ transform: [{ scale: value }] }]}
+    />
+  );
+  expect(getByTestId('fab-container')).toHaveStyle({
+    transform: [{ scale: 1 }],
+  });
+
+  Animated.timing(value, {
+    toValue: 1.5,
+    useNativeDriver: false,
+    duration: 200,
+  }).start();
+
+  jest.advanceTimersByTime(200);
+
+  expect(getByTestId('fab-container')).toHaveStyle({
+    transform: [{ scale: 1.5 }],
   });
 });
