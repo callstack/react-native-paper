@@ -222,6 +222,8 @@ type TextInputHandles = Pick<
  * @extends TextInput props https://reactnative.dev/docs/textinput#props
  */
 
+const DefaultRenderer = (props: RenderProps) => <NativeTextInput {...props} />;
+
 const TextInput = forwardRef<TextInputHandles, Props>(
   (
     {
@@ -232,7 +234,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
       multiline = false,
       editable = true,
       contentStyle,
-      render = (props: RenderProps) => <NativeTextInput {...props} />,
+      render = DefaultRenderer,
       theme: themeOverrides,
       ...rest
     }: Props,
@@ -380,29 +382,35 @@ const TextInput = forwardRef<TextInputHandles, Props>(
       }
     }, [focused, value, labeled, scale]);
 
-    const onLeftAffixLayoutChange = (event: LayoutChangeEvent) => {
-      const height = roundLayoutSize(event.nativeEvent.layout.height);
-      const width = roundLayoutSize(event.nativeEvent.layout.width);
+    const onLeftAffixLayoutChange = React.useCallback(
+      (event: LayoutChangeEvent) => {
+        const height = roundLayoutSize(event.nativeEvent.layout.height);
+        const width = roundLayoutSize(event.nativeEvent.layout.width);
 
-      if (width !== leftLayout.width || height !== leftLayout.height) {
-        setLeftLayout({
-          width,
-          height,
-        });
-      }
-    };
+        if (width !== leftLayout.width || height !== leftLayout.height) {
+          setLeftLayout({
+            width,
+            height,
+          });
+        }
+      },
+      [leftLayout.height, leftLayout.width]
+    );
 
-    const onRightAffixLayoutChange = (event: LayoutChangeEvent) => {
-      const width = roundLayoutSize(event.nativeEvent.layout.width);
-      const height = roundLayoutSize(event.nativeEvent.layout.height);
+    const onRightAffixLayoutChange = React.useCallback(
+      (event: LayoutChangeEvent) => {
+        const width = roundLayoutSize(event.nativeEvent.layout.width);
+        const height = roundLayoutSize(event.nativeEvent.layout.height);
 
-      if (width !== rightLayout.width || height !== rightLayout.height) {
-        setRightLayout({
-          width,
-          height,
-        });
-      }
-    };
+        if (width !== rightLayout.width || height !== rightLayout.height) {
+          setRightLayout({
+            width,
+            height,
+          });
+        }
+      },
+      [rightLayout.height, rightLayout.width]
+    );
 
     const handleFocus = (args: any) => {
       if (disabled || !editable) {
@@ -435,19 +443,23 @@ const TextInput = forwardRef<TextInputHandles, Props>(
       rest.onChangeText?.(value);
     };
 
-    const handleLayoutAnimatedText = (e: LayoutChangeEvent) => {
-      const width = roundLayoutSize(e.nativeEvent.layout.width);
-      const height = roundLayoutSize(e.nativeEvent.layout.height);
+    const handleLayoutAnimatedText = React.useCallback(
+      (e: LayoutChangeEvent) => {
+        const width = roundLayoutSize(e.nativeEvent.layout.width);
+        const height = roundLayoutSize(e.nativeEvent.layout.height);
 
-      if (width !== labelLayout.width || height !== labelLayout.height) {
-        setLabelLayout({
-          width,
-          height,
-          measured: true,
-        });
-      }
-    };
-    const forceFocus = () => root.current?.focus();
+        if (width !== labelLayout.width || height !== labelLayout.height) {
+          setLabelLayout({
+            width,
+            height,
+            measured: true,
+          });
+        }
+      },
+      [labelLayout.height, labelLayout.width]
+    );
+
+    const forceFocus = React.useCallback(() => root.current?.focus(), []);
 
     const { maxFontSizeMultiplier = 1.5 } = rest;
 

@@ -6,20 +6,19 @@ import AnimatedText from '../../Typography/AnimatedText';
 import type { LabelBackgroundProps } from '../types';
 
 const LabelBackground = ({
-  parentState,
-  labelProps: {
-    placeholderStyle,
-    baseLabelTranslateX,
-    topPosition,
-    label,
-    backgroundColor,
-    roundness,
-  },
+  labeled,
+  labelLayoutWidth,
+  placeholderStyle,
+  baseLabelTranslateX,
+  topPosition,
+  label,
+  backgroundColor,
+  roundness,
   labelStyle,
   maxFontSizeMultiplier,
   theme: themeOverrides,
 }: LabelBackgroundProps) => {
-  const opacity = parentState.labeled.interpolate({
+  const opacity = labeled.interpolate({
     inputRange: [0, 0.6],
     outputRange: [1, 0],
   });
@@ -27,14 +26,14 @@ const LabelBackground = ({
   const { isV3 } = useInternalTheme(themeOverrides);
 
   const labelTranslationX = {
-    translateX: parentState.labeled.interpolate({
+    translateX: labeled.interpolate({
       inputRange: [0, 1],
       outputRange: [-baseLabelTranslateX, 0],
     }),
   };
 
   const labelTextScaleY = {
-    scaleY: parentState.labeled.interpolate({
+    scaleY: labeled.interpolate({
       inputRange: [0, 1],
       outputRange: [0.2, 1],
     }),
@@ -44,13 +43,10 @@ const LabelBackground = ({
 
   const labelTextWidth = isV3
     ? {
-        width:
-          parentState.labelLayout.width - placeholderStyle.paddingHorizontal,
+        width: labelLayoutWidth - placeholderStyle.paddingHorizontal,
       }
     : {
-        maxWidth:
-          parentState.labelLayout.width -
-          2 * placeholderStyle.paddingHorizontal,
+        maxWidth: labelLayoutWidth - 2 * placeholderStyle.paddingHorizontal,
       };
 
   const isRounded = roundness > 6;

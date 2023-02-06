@@ -189,7 +189,7 @@ const TextInputOutlined = ({
     label,
     onLayoutAnimatedText,
     placeholderOpacity,
-    error,
+    labelError: error,
     placeholderStyle,
     baseLabelTranslateY,
     baseLabelTranslateX,
@@ -211,6 +211,12 @@ const TextInputOutlined = ({
     testID,
     contentStyle,
     theme,
+    opacity:
+      parentState.value || parentState.focused
+        ? parentState.labelLayout.measured
+          ? 1
+          : 0
+        : 1,
   };
 
   const minHeight = (height ||
@@ -314,8 +320,13 @@ const TextInputOutlined = ({
         >
           {label ? (
             <InputLabel
-              parentState={parentState}
-              labelProps={labelProps}
+              labeled={parentState.labeled}
+              error={parentState.error}
+              focused={parentState.focused}
+              wiggle={Boolean(parentState.value && labelProps.labelError)}
+              labelLayoutMeasured={parentState.labelLayout.measured}
+              labelLayoutWidth={parentState.labelLayout.width}
+              {...labelProps}
               labelBackground={LabelBackground}
               maxFontSizeMultiplier={rest.maxFontSizeMultiplier}
             />
