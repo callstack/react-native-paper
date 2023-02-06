@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, StyleSheet } from 'react-native';
+import { Animated, StyleSheet, Text } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 import color from 'color';
@@ -15,6 +15,9 @@ import { getCardColors, getCardCoverStyle } from '../../Card/utils';
 const styles = StyleSheet.create({
   customBorderRadius: {
     borderRadius: 32,
+  },
+  contentStyle: {
+    flexDirection: 'column-reverse',
   },
 });
 
@@ -72,6 +75,16 @@ describe('Card', () => {
     expect(getByLabelText('card')).toHaveStyle({
       backgroundColor: '#0000FF',
     });
+  });
+
+  it('renders with a content style', () => {
+    const { getByTestId } = render(
+      <Card contentStyle={styles.contentStyle}>
+        <Text>Content</Text>
+      </Card>
+    );
+
+    expect(getByTestId('card')).toHaveStyle(styles.contentStyle);
   });
 });
 

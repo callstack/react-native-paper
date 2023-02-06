@@ -88,9 +88,12 @@ exports[`Card renders an outlined card 1`] = `
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
         style={
-          Object {
-            "flexShrink": 1,
-          }
+          Array [
+            Object {
+              "flexShrink": 1,
+            },
+            undefined,
+          ]
         }
         testID="card"
       />
