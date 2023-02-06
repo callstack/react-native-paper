@@ -89,6 +89,26 @@ describe('CardActions', () => {
       'contained'
     );
   });
+
+  it('renders button with custom styles', () => {
+    const { getByTestId } = render(
+      <Card>
+        <Card.Actions>
+          <Button
+            testID="card-actions-button"
+            mode="contained"
+            style={styles.customBorderRadius}
+          >
+            Agree
+          </Button>
+        </Card.Actions>
+      </Card>
+    );
+
+    expect(getByTestId('card-actions-button')).toHaveStyle({
+      borderRadius: 32,
+    });
+  });
 });
 
 describe('getCardColors - background color', () => {

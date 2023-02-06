@@ -56,7 +56,7 @@ const CardActions = (props: Props) => {
               mode:
                 child.props.mode ||
                 (isV3 && (i === 0 ? 'outlined' : 'contained')),
-              style: isV3 && styles.button,
+              style: [isV3 && styles.button, child.props.style],
             })
           : child;
       })}
