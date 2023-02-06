@@ -145,7 +145,6 @@ exports[`renders checked segmented button with selected check 1`] = `
           style={
             Array [
               Object {
-                "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "500",
@@ -156,6 +155,7 @@ exports[`renders checked segmented button with selected check 1`] = `
                 "textAlign": "left",
               },
               Object {
+                "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
               Array [
@@ -256,7 +256,6 @@ exports[`renders checked segmented button with selected check 1`] = `
           style={
             Array [
               Object {
-                "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "500",
@@ -267,6 +266,7 @@ exports[`renders checked segmented button with selected check 1`] = `
                 "textAlign": "left",
               },
               Object {
+                "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
               Array [
@@ -385,7 +385,6 @@ exports[`renders disabled segmented button 1`] = `
           style={
             Array [
               Object {
-                "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "500",
@@ -396,6 +395,7 @@ exports[`renders disabled segmented button 1`] = `
                 "textAlign": "left",
               },
               Object {
+                "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
               Array [
@@ -496,7 +496,6 @@ exports[`renders disabled segmented button 1`] = `
           style={
             Array [
               Object {
-                "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "500",
@@ -507,6 +506,7 @@ exports[`renders disabled segmented button 1`] = `
                 "textAlign": "left",
               },
               Object {
+                "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
               Array [
@@ -623,7 +623,6 @@ exports[`renders segmented button 1`] = `
           style={
             Array [
               Object {
-                "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "500",
@@ -634,6 +633,7 @@ exports[`renders segmented button 1`] = `
                 "textAlign": "left",
               },
               Object {
+                "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
               Array [
@@ -734,7 +734,6 @@ exports[`renders segmented button 1`] = `
           style={
             Array [
               Object {
-                "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "500",
@@ -745,6 +744,7 @@ exports[`renders segmented button 1`] = `
                 "textAlign": "left",
               },
               Object {
+                "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
               Array [

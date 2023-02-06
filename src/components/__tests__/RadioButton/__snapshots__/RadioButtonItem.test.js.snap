@@ -128,7 +128,6 @@ exports[`can render leading radio button control 1`] = `
       style={
         Array [
           Object {
-            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": "400",
@@ -139,6 +138,7 @@ exports[`can render leading radio button control 1`] = `
             "textAlign": "left",
           },
           Object {
+            "color": "rgba(28, 27, 31, 1)",
             "writingDirection": "ltr",
           },
           Array [
@@ -211,7 +211,6 @@ exports[`can render the Android radio button on different platforms 1`] = `
       style={
         Array [
           Object {
-            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": "400",
@@ -222,6 +221,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
             "textAlign": "left",
           },
           Object {
+            "color": "rgba(28, 27, 31, 1)",
             "writingDirection": "ltr",
           },
           Array [
@@ -341,7 +341,6 @@ exports[`can render the iOS radio button on different platforms 1`] = `
       style={
         Array [
           Object {
-            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": "400",
@@ -352,6 +351,7 @@ exports[`can render the iOS radio button on different platforms 1`] = `
             "textAlign": "left",
           },
           Object {
+            "color": "rgba(28, 27, 31, 1)",
             "writingDirection": "ltr",
           },
           Array [
@@ -503,7 +503,6 @@ exports[`renders unchecked 1`] = `
       style={
         Array [
           Object {
-            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": "400",
@@ -514,6 +513,7 @@ exports[`renders unchecked 1`] = `
             "textAlign": "left",
           },
           Object {
+            "color": "rgba(28, 27, 31, 1)",
             "writingDirection": "ltr",
           },
           Array [
