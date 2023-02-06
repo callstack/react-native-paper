@@ -195,7 +195,13 @@ const config = {
           },
           {
             type: 'doc',
-            docId: 'guides/showcase',
+            docId: 'components/ActivityIndicator',
+            position: 'left',
+            label: 'Components',
+          },
+          {
+            type: 'doc',
+            docId: 'showcase',
             position: 'left',
             label: 'Showcase',
           },
