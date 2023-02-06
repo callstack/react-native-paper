@@ -345,7 +345,6 @@ const TextInput = forwardRef<TextInputHandles, Props>(
         // Root cause:    Placeholder initial value, which has length 0.
         // More context:  The issue was also reproduced in react-native, using its own TextInput.
         // Workaround:    Set an empty space character in the default value.
-
         setPlaceholder(' ');
       }
 

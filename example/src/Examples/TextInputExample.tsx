@@ -537,7 +537,7 @@ const TextInputExample = () => {
             mode="flat"
             style={styles.inputContainerStyle}
             label="Custom style input"
-            placeholder="Input with custom padding"
+            placeholder="Input with custom style"
             value={customStyleText}
             onChangeText={(customStyleText) =>
               inputActionHandler('customStyleText', customStyleText)
@@ -628,6 +628,8 @@ const styles = StyleSheet.create({
   },
   inputContentStyle: {
     paddingLeft: 50,
+    fontWeight: 'bold',
+    fontStyle: 'italic',
   },
   fontSize: {
     fontSize: 32,
