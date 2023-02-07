@@ -2,6 +2,9 @@ node_modules/
 flow-typed/
 coverage/
 docs/dist/
+docs/build/
+docs/public/
+docs/static/
 web-build/
 testSetup.js
 
