@@ -13,9 +13,7 @@ module.exports = () => {
       const hasTsNode = nextNode?.lang === 'tsx';
 
       const jsCode = node.value.replaceAll('`', '\\`');
-      const tsCode = hasTsNode
-        ? nextNode.value.replaceAll('`', '\\`')
-        : undefined;
+      const tsCode = hasTsNode ? nextNode.value.replaceAll('`', '\\`') : '';
 
       parent.children.splice(i, hasTsNode ? 2 : 1, {
         type: 'jsx',
