@@ -21,3 +21,7 @@ yarn-error.log*
 
 # component-docs-plugin
 docs/components
+
+# legacy
+dist/
+.linaria-cache/
