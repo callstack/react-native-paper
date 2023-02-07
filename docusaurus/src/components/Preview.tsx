@@ -18,23 +18,12 @@ import {
   useTheme,
 } from 'react-native-paper';
 
-const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 16,
-  },
-  contentContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    maxHeight: 480,
-    minHeight: 100,
-    position: 'relative',
-    padding: 16,
-    borderRadius: 6,
-    borderWidth: 1,
-  },
-});
+interface Props {
+  jsCode: string;
+  tsCode?: string;
+}
 
-function Preview({ jsCode }: { jsCode: string }) {
+function Preview({ jsCode }: Props) {
   const theme = useTheme();
   const isDarkTheme = useColorMode().colorMode === 'dark';
 
@@ -50,38 +39,42 @@ function Preview({ jsCode }: { jsCode: string }) {
         },
       }}
     >
-      <View style={styles.container}>
-        <View
-          style={[
-            styles.contentContainer,
-            {
-              backgroundColor: theme.colors.surface,
-              borderColor: theme.colors.surfaceVariant,
-            },
-          ]}
-        >
-          <LivePreview />
-        </View>
+      <View
+        style={[
+          styles.preview,
+          {
+            backgroundColor: theme.colors.surface,
+            borderColor: theme.colors.surfaceVariant,
+          },
+        ]}
+      >
+        <LivePreview />
       </View>
-      <LiveEditor
-        padding={16}
-        style={{
-          borderRadius: 'var(--ifm-pre-border-radius)',
-          boxShadow: 'var(--ifm-global-shadow-lw)',
-          font: 'var(--ifm-code-font-size) / var(--ifm-pre-line-height) var(--ifm-font-family-monospace)',
-          marginBottom: 16,
-        }}
-      />
+
+      <LiveEditor padding={16} className="live-editor" />
       <LiveError style={{ marginBottom: 16 }} />
     </LiveProvider>
   );
 }
 
-export default function PreviewProvider({ jsCode }: { jsCode: string }) {
+const styles = StyleSheet.create({
+  preview: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 16,
+    maxHeight: 480,
+    minHeight: 100,
+    padding: 16,
+    borderRadius: 6,
+    borderWidth: 1,
+  },
+});
+
+export default function PreviewProvider(props: Props) {
   const isDarkTheme = useColorMode().colorMode === 'dark';
   return (
     <Provider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
-      <Preview jsCode={jsCode} />
+      <Preview {...props} />
     </Provider>
   );
 }

@@ -419,3 +419,11 @@ html[data-theme='light'] .gallery-dark {
     width: 40%;
   }
 }
+
+.live-editor {
+  border-radius: var(--ifm-pre-border-radius);
+  box-shadow: var(--ifm-global-shadow-lw);
+  font: var(--ifm-code-font-size) / var(--ifm-pre-line-height)
+    var(--ifm-font-family-monospace);
+  margin-bottom: 16px;
+}
