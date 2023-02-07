@@ -5,20 +5,19 @@ module.exports = () => {
     let needsImport = false;
 
     visit(tree, 'code', (node, i, parent) => {
-      if (node.meta?.includes('preview')) {
-        needsImport = true;
+      if (!node.meta?.includes('preview')) return;
 
-        const nextNode = parent.children[i + 1];
-        const hasTsNode = nextNode?.lang === 'tsx';
+      needsImport = true;
 
-        const jsCode = node.value.replaceAll('`', '\\`');
+      const nextNode = parent.children[i + 1];
+      const hasTsNode = nextNode?.lang === 'tsx';
 
-        const nodesToInsert = [
-          { type: 'jsx', value: `<Preview jsCode={\`${jsCode}\`} />` },
-        ];
+      const jsCode = node.value.replaceAll('`', '\\`');
 
-        parent.children.splice(i, hasTsNode ? 2 : 1, ...nodesToInsert);
-      }
+      parent.children.splice(i, hasTsNode ? 2 : 1, {
+        type: 'jsx',
+        value: `<Preview jsCode={\`${jsCode}\`} />`,
+      });
     });
 
     if (needsImport) {
