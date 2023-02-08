@@ -148,4 +148,5 @@ workflows:
       - deploy-docs:
           filters:
             branches:
-              only: main
+              only:
+                - main

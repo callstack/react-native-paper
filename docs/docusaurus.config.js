@@ -8,13 +8,23 @@ const lightCodeTheme = require('prism-react-renderer/themes/github');
 const { NODE_ENV, DOCUSAURUS_BASE_URL } = process.env;
 
 const title = 'React Native Paper';
+
 const url = 'https://callstack.github.io';
+
+/**
+ * There are 3 environments that we want to support:
+ * 1. Development - Docs should work on `http://localhost:3000/`
+ * 2. Production - Docs should work on `https://callstack.github.io/react-native-paper/
+ * 3. CI - CircleCI builds and stores preview artifacts.
+ *    Docs should work on `https://output.circle-artifacts.com/output/job/$CIRCLE_WORKFLOW_JOB_ID/artifacts/$CIRCLE_NODE_INDEX/`
+ *
+ * Both `baseUrl` and `publicUrl` work together to ensure assets and links work properly on every deployment
+ */
 const baseUrl =
-  DOCUSAURUS_BASE_URL || NODE_ENV === 'production'
-    ? '/react-native-paper/'
-    : '/';
+  DOCUSAURUS_BASE_URL ||
+  (NODE_ENV === 'development' ? '/' : '/react-native-paper/');
 const publicUrl =
-  NODE_ENV === 'production' ? `${url}${baseUrl}` : 'http://localhost:3000/';
+  NODE_ENV === 'development' ? 'http://localhost:3000/' : `${url}${baseUrl}`;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
