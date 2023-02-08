@@ -58,6 +58,20 @@ function Preview({ jsCode, tsCode }: Props) {
     navigator.clipboard.writeText(editor.value);
   }, [id]);
 
+  const handleOpenInExpo = React.useCallback(() => {
+    const editor = document.getElementById(id) as HTMLTextAreaElement;
+    const name = encodeURIComponent('React Native Paper Example');
+    const description = encodeURIComponent(
+      "An example from React Native Paper's documentation"
+    );
+    const dependencies = encodeURIComponent('react-native-paper');
+    const code = encodeURIComponent(editor.value);
+    window.open(
+      `https://snack.expo.io?name=${name}&description=${description}&dependencies=${dependencies}&code=${code}`,
+      '_blank'
+    );
+  }, []);
+
   return (
     <LiveProvider
       code={activeTab === 'js' ? jsCode : tsCode || jsCode}
@@ -104,12 +118,19 @@ function Preview({ jsCode, tsCode }: Props) {
           <IconButton
             icon={({ color }) => <ExpoLogo color={color} />}
             size={20}
-            onPress={() => {}}
+            onPress={handleOpenInExpo}
           />
           <IconButton icon="content-copy" size={20} onPress={handleCopy} />
         </View>
       </View>
-      <LiveEditor textareaId={id} padding={16} className="live-editor" />
+      <LiveEditor
+        textareaId={id}
+        className="live-editor"
+        padding={16}
+        tabSize={2}
+        insertSpaces
+        ignoreTabKey={false}
+      />
       <LiveError style={{ marginBottom: 16 }} />
     </LiveProvider>
   );
