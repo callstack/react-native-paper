@@ -5,15 +5,23 @@ const path = require('path');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 
+const { NODE_ENV, DOCUSAURUS_BASE_URL } = process.env;
+
 const title = 'React Native Paper';
-const baseUrl = process.env.DOCUSAURUS_BASE_URL || '/';
+const url = 'https://callstack.github.io';
+const baseUrl =
+  DOCUSAURUS_BASE_URL || NODE_ENV === 'production'
+    ? '/react-native-paper/'
+    : '/';
+const publicUrl =
+  NODE_ENV === 'production' ? `${url}${baseUrl}` : 'http://localhost:3000/';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title,
   staticDirectories: ['public', 'static'],
   tagline: 'Material Design for React Native',
-  url: 'https://reactnativepaper.com',
+  url,
   baseUrl,
   onBrokenLinks: 'log',
   onBrokenMarkdownLinks: 'log',
@@ -213,19 +221,19 @@ const config = {
             items: [
               {
                 label: 'v4.x',
-                href: 'http://localhost:3000/4.0/',
+                href: `${publicUrl}4.0/`,
               },
               {
                 label: 'v3.x',
-                href: 'http://localhost:3000/3.0/',
+                href: `${publicUrl}3.0/`,
               },
               {
                 label: 'v2.x',
-                href: 'http://localhost:3000/2.0/',
+                href: `${publicUrl}2.0/`,
               },
               {
                 label: 'v1.x',
-                href: 'http://localhost:3000/1.0/',
+                href: `${publicUrl}1.0/`,
               },
             ],
           },
