@@ -19,6 +19,12 @@ import {
   ToggleButton,
   useTheme,
 } from 'react-native-paper';
+import { v4 as uuidv4 } from 'uuid';
+
+const useUuid = () => {
+  const [id] = React.useState(uuidv4);
+  return id;
+};
 
 const ExpoLogo = ({ color }: { color: string }) => (
   <svg
@@ -44,6 +50,13 @@ function Preview({ jsCode, tsCode }: Props) {
   const isDarkTheme = useColorMode().colorMode === 'dark';
 
   const [activeTab, setActiveTab] = React.useState<'js' | 'ts'>('js');
+
+  const id = useUuid();
+
+  const handleCopy = React.useCallback(() => {
+    const editor = document.getElementById(id) as HTMLTextAreaElement;
+    navigator.clipboard.writeText(editor.value);
+  }, [id]);
 
   return (
     <LiveProvider
@@ -93,10 +106,10 @@ function Preview({ jsCode, tsCode }: Props) {
             size={20}
             onPress={() => {}}
           />
-          <IconButton icon="content-copy" size={20} onPress={() => {}} />
+          <IconButton icon="content-copy" size={20} onPress={handleCopy} />
         </View>
       </View>
-      <LiveEditor padding={16} className="live-editor" />
+      <LiveEditor textareaId={id} padding={16} className="live-editor" />
       <LiveError style={{ marginBottom: 16 }} />
     </LiveProvider>
   );
