@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 
 const title = 'React Native Paper';
-const baseUrl = process.env.CIRCLE_BUILD_URL || '/';
+const baseUrl = process.env.DOCUSAURUS_BASE_URL || '/';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
