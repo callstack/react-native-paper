@@ -124,10 +124,14 @@ const getSegmentedButtonBorderWidth = ({
 const getSegmentedButtonTextColor = ({
   theme,
   disabled,
+  checked,
 }: Omit<BaseProps, 'checked'>) => {
   if (theme.isV3) {
     if (disabled) {
       return theme.colors.onSurfaceDisabled;
+    }
+    if (checked) {
+      return theme.colors.onSecondaryContainer;
     }
     return theme.colors.onSurface;
   } else {
