@@ -36,6 +36,7 @@ import {
   calculateOutlinedIconAndAffixTopPosition,
   getOutlinedInputColors,
   getConstants,
+  getFontSizing,
 } from './helpers';
 import InputLabel from './Label/InputLabel';
 import LabelBackground from './Label/LabelBackground';
@@ -84,14 +85,19 @@ const TextInputOutlined = ({
 
   const {
     fontSize: fontSizeStyle,
+    lineHeight: lineHeightStyle,
     fontWeight,
-    lineHeight,
     height,
     backgroundColor = colors?.background,
     textAlign,
     ...viewStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
-  const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
+
+  const { fontSize, lineHeight } = getFontSizing(
+    fontSizeStyle,
+    lineHeightStyle,
+    multiline
+  );
 
   const {
     inputTextColor,

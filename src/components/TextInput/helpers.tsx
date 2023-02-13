@@ -6,6 +6,7 @@ import { AdornmentSide, AdornmentType } from './Adornment/enums';
 import type { AdornmentConfig } from './Adornment/types';
 import {
   ADORNMENT_SIZE,
+  MAXIMIZED_LABEL_FONT_SIZE,
   MD2_ADORNMENT_OFFSET,
   MD2_AFFIX_OFFSET,
   MD2_FLAT_INPUT_OFFSET,
@@ -590,5 +591,28 @@ export const getConstants = (isV3?: boolean) => {
     INPUT_PADDING_HORIZONTAL,
     ADORNMENT_OFFSET,
     OUTLINED_INPUT_OFFSET,
+  };
+};
+
+const approxLineHeight = (fontSize: number) => Math.round(fontSize * 1.4);
+
+export const getFontSizing = (
+  customSize?: number,
+  customLineHeight?: number,
+  multiline?: boolean
+) => {
+  const fontSize = customSize ?? MAXIMIZED_LABEL_FONT_SIZE;
+  let lineHeight = customLineHeight;
+
+  // Make sure line height is always specified for multiline inputs
+  // otherwise TextInput will hijack scroll events on iOS
+  // https://github.com/callstack/react-native-paper/issues/3665
+  if (multiline && !lineHeight) {
+    lineHeight = approxLineHeight(fontSize);
+  }
+
+  return {
+    fontSize,
+    lineHeight,
   };
 };

@@ -329,6 +329,37 @@ it('calls onLayout on right-side affix adornment', () => {
   })
 );
 
+it(`always applies line height to multiline flat TextInput`, () => {
+  const input = render(
+    <TextInput
+      mode="flat"
+      multiline
+      label="Flat input"
+      testID={`text-input-flat`}
+    />
+  );
+
+  expect(input.getByTestId(`text-input-flat`)).toHaveStyle({
+    lineHeight: 22,
+  });
+});
+
+it(`always applies line height to multiline outlined TextInput`, () => {
+  const input = render(
+    <TextInput
+      mode="outlined"
+      multiline
+      label="Outlined input"
+      testID={`text-input-outlined`}
+      style={{ fontSize: 40 }}
+    />
+  );
+
+  expect(input.getByTestId(`text-input-outlined`)).toHaveStyle({
+    lineHeight: 56,
+  });
+});
+
 ['outlined', 'flat'].forEach((mode) =>
   it(`renders ${mode} input with passed textColor`, () => {
     const input = render(

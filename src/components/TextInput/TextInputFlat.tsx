@@ -41,6 +41,7 @@ import {
   calculatePadding,
   getConstants,
   getFlatInputColors,
+  getFontSizing,
   Padding,
 } from './helpers';
 import InputLabel from './Label/InputLabel';
@@ -87,14 +88,19 @@ const TextInputFlat = ({
 
   const {
     fontSize: fontSizeStyle,
-    lineHeight,
+    lineHeight: lineHeightStyle,
     fontWeight,
     height,
     paddingHorizontal,
     textAlign,
     ...viewStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
-  const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
+
+  const { fontSize, lineHeight } = getFontSizing(
+    fontSizeStyle,
+    lineHeightStyle,
+    multiline
+  );
 
   const isPaddingHorizontalPassed =
     paddingHorizontal !== undefined && typeof paddingHorizontal === 'number';
