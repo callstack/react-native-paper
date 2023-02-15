@@ -53,6 +53,11 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    * Callback to execute if we want the left icon to act as button.
    */
   onIconPress?: (e: GestureResponderEvent) => void;
+
+  /**
+   * Callback to execute if we want to add custom behaviour to close icon button.
+   */
+  onClearIconPress?: (e: GestureResponderEvent) => void;
   /**
    * @supported Available in v5.x with theme version 3
    * Changes Searchbar shadow and background on iOS and Android.
@@ -129,6 +134,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       iconColor: customIconColor,
       inputStyle,
       onIconPress,
+      onClearIconPress,
       placeholder,
       searchAccessibilityLabel = 'search',
       elevation = 1,
@@ -170,9 +176,10 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       };
     });
 
-    const handleClearPress = () => {
+    const handleClearPress = (e: any) => {
       root.current?.clear();
       rest.onChangeText?.('');
+      onClearIconPress?.(e);
     };
 
     const { colors, roundness, dark, isV3 } = theme;
