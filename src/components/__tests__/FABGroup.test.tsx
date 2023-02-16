@@ -159,7 +159,6 @@ describe('FABActions - labelStyle - containerStyle', () => {
     expect(getByA11yHint('hint')).toHaveStyle({
       padding: 16,
       backgroundColor: '#687456',
-      marginLeft: 16,
     });
   });
 });

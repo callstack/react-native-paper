@@ -6,10 +6,15 @@ exports[`renders disabled toggle button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 4,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": 42,
       "left": undefined,
+      "margin": 0,
+      "opacity": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -21,6 +26,8 @@ exports[`renders disabled toggle button 1`] = `
       "shadowRadius": 0,
       "start": undefined,
       "top": undefined,
+      "transform": undefined,
+      "width": 42,
     }
   }
   testID="icon-button-container-outer-layer"
@@ -29,7 +36,10 @@ exports[`renders disabled toggle button 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "transparent",
+        "borderRadius": 4,
         "flex": undefined,
+        "height": 42,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -37,6 +47,7 @@ exports[`renders disabled toggle button 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "width": 42,
       }
     }
     testID="icon-button-container-inner-layer"
@@ -52,8 +63,9 @@ exports[`renders disabled toggle button 1`] = `
           "elevation": 0,
           "flex": undefined,
           "height": 42,
-          "margin": 0,
+          "opacity": undefined,
           "overflow": "hidden",
+          "transform": undefined,
           "width": 42,
         }
       }
@@ -161,10 +173,15 @@ exports[`renders toggle button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 4,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": 42,
       "left": undefined,
+      "margin": 0,
+      "opacity": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -176,6 +193,8 @@ exports[`renders toggle button 1`] = `
       "shadowRadius": 0,
       "start": undefined,
       "top": undefined,
+      "transform": undefined,
+      "width": 42,
     }
   }
   testID="icon-button-container-outer-layer"
@@ -184,7 +203,10 @@ exports[`renders toggle button 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "transparent",
+        "borderRadius": 4,
         "flex": undefined,
+        "height": 42,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -192,6 +214,7 @@ exports[`renders toggle button 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "width": 42,
       }
     }
     testID="icon-button-container-inner-layer"
@@ -207,8 +230,9 @@ exports[`renders toggle button 1`] = `
           "elevation": 0,
           "flex": undefined,
           "height": 42,
-          "margin": 0,
+          "opacity": undefined,
           "overflow": "hidden",
+          "transform": undefined,
           "width": 42,
         }
       }
@@ -311,10 +335,15 @@ exports[`renders unchecked toggle button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 4,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": 42,
       "left": undefined,
+      "margin": 0,
+      "opacity": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -326,6 +355,8 @@ exports[`renders unchecked toggle button 1`] = `
       "shadowRadius": 0,
       "start": undefined,
       "top": undefined,
+      "transform": undefined,
+      "width": 42,
     }
   }
   testID="icon-button-container-outer-layer"
@@ -334,7 +365,10 @@ exports[`renders unchecked toggle button 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "transparent",
+        "borderRadius": 4,
         "flex": undefined,
+        "height": 42,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -342,6 +376,7 @@ exports[`renders unchecked toggle button 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "width": 42,
       }
     }
     testID="icon-button-container-inner-layer"
@@ -357,8 +392,9 @@ exports[`renders unchecked toggle button 1`] = `
           "elevation": 0,
           "flex": undefined,
           "height": 42,
-          "margin": 0,
+          "opacity": undefined,
           "overflow": "hidden",
+          "transform": undefined,
           "width": 42,
         }
       }

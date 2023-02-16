@@ -6,10 +6,14 @@ exports[`renders chip with close button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderRadius": 8,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -21,6 +25,8 @@ exports[`renders chip with close button 1`] = `
       "shadowRadius": 0,
       "start": undefined,
       "top": undefined,
+      "transform": undefined,
+      "width": undefined,
     }
   }
   testID="chip-container-outer-layer"
@@ -29,7 +35,10 @@ exports[`renders chip with close button 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderRadius": 8,
         "flex": undefined,
+        "height": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -37,6 +46,7 @@ exports[`renders chip with close button 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "width": undefined,
       }
     }
     testID="chip-container-inner-layer"
@@ -52,6 +62,10 @@ exports[`renders chip with close button 1`] = `
           "borderWidth": 0,
           "flex": undefined,
           "flexDirection": "column",
+          "height": undefined,
+          "opacity": undefined,
+          "transform": undefined,
+          "width": undefined,
         }
       }
       testID="chip-container"
@@ -298,10 +312,14 @@ exports[`renders chip with custom close button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderRadius": 8,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -313,6 +331,8 @@ exports[`renders chip with custom close button 1`] = `
       "shadowRadius": 0,
       "start": undefined,
       "top": undefined,
+      "transform": undefined,
+      "width": undefined,
     }
   }
   testID="chip-container-outer-layer"
@@ -321,7 +341,10 @@ exports[`renders chip with custom close button 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderRadius": 8,
         "flex": undefined,
+        "height": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -329,6 +352,7 @@ exports[`renders chip with custom close button 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "width": undefined,
       }
     }
     testID="chip-container-inner-layer"
@@ -344,6 +368,10 @@ exports[`renders chip with custom close button 1`] = `
           "borderWidth": 0,
           "flex": undefined,
           "flexDirection": "column",
+          "height": undefined,
+          "opacity": undefined,
+          "transform": undefined,
+          "width": undefined,
         }
       }
       testID="chip-container"
@@ -590,10 +618,14 @@ exports[`renders chip with icon 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderRadius": 8,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -605,6 +637,8 @@ exports[`renders chip with icon 1`] = `
       "shadowRadius": 0,
       "start": undefined,
       "top": undefined,
+      "transform": undefined,
+      "width": undefined,
     }
   }
   testID="chip-container-outer-layer"
@@ -613,7 +647,10 @@ exports[`renders chip with icon 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderRadius": 8,
         "flex": undefined,
+        "height": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -621,6 +658,7 @@ exports[`renders chip with icon 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "width": undefined,
       }
     }
     testID="chip-container-inner-layer"
@@ -636,6 +674,10 @@ exports[`renders chip with icon 1`] = `
           "borderWidth": 0,
           "flex": undefined,
           "flexDirection": "column",
+          "height": undefined,
+          "opacity": undefined,
+          "transform": undefined,
+          "width": undefined,
         }
       }
       testID="chip-container"
@@ -805,10 +847,14 @@ exports[`renders chip with onPress 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderRadius": 8,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -820,6 +866,8 @@ exports[`renders chip with onPress 1`] = `
       "shadowRadius": 0,
       "start": undefined,
       "top": undefined,
+      "transform": undefined,
+      "width": undefined,
     }
   }
   testID="chip-container-outer-layer"
@@ -828,7 +876,10 @@ exports[`renders chip with onPress 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderRadius": 8,
         "flex": undefined,
+        "height": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -836,6 +887,7 @@ exports[`renders chip with onPress 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "width": undefined,
       }
     }
     testID="chip-container-inner-layer"
@@ -851,6 +903,10 @@ exports[`renders chip with onPress 1`] = `
           "borderWidth": 0,
           "flex": undefined,
           "flexDirection": "column",
+          "height": undefined,
+          "opacity": undefined,
+          "transform": undefined,
+          "width": undefined,
         }
       }
       testID="chip-container"
@@ -968,10 +1024,14 @@ exports[`renders outlined disabled chip 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderRadius": 8,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -983,6 +1043,8 @@ exports[`renders outlined disabled chip 1`] = `
       "shadowRadius": 0,
       "start": undefined,
       "top": undefined,
+      "transform": undefined,
+      "width": undefined,
     }
   }
   testID="chip-container-outer-layer"
@@ -991,7 +1053,10 @@ exports[`renders outlined disabled chip 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderRadius": 8,
         "flex": undefined,
+        "height": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -999,6 +1064,7 @@ exports[`renders outlined disabled chip 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "width": undefined,
       }
     }
     testID="chip-container-inner-layer"
@@ -1014,6 +1080,10 @@ exports[`renders outlined disabled chip 1`] = `
           "borderWidth": 1,
           "flex": undefined,
           "flexDirection": "column",
+          "height": undefined,
+          "opacity": undefined,
+          "transform": undefined,
+          "width": undefined,
         }
       }
       testID="chip-container"
@@ -1131,10 +1201,14 @@ exports[`renders selected chip 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderRadius": 8,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -1146,6 +1220,8 @@ exports[`renders selected chip 1`] = `
       "shadowRadius": 0,
       "start": undefined,
       "top": undefined,
+      "transform": undefined,
+      "width": undefined,
     }
   }
   testID="chip-container-outer-layer"
@@ -1154,7 +1230,10 @@ exports[`renders selected chip 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderRadius": 8,
         "flex": undefined,
+        "height": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -1162,6 +1241,7 @@ exports[`renders selected chip 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "width": undefined,
       }
     }
     testID="chip-container-inner-layer"
@@ -1177,6 +1257,10 @@ exports[`renders selected chip 1`] = `
           "borderWidth": 0,
           "flex": undefined,
           "flexDirection": "column",
+          "height": undefined,
+          "opacity": undefined,
+          "transform": undefined,
+          "width": undefined,
         }
       }
       testID="chip-container"

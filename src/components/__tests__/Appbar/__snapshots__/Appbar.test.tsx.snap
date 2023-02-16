@@ -6,10 +6,13 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": 64,
       "left": undefined,
+      "opacity": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -21,6 +24,8 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       "shadowRadius": 0,
       "start": undefined,
       "top": undefined,
+      "transform": undefined,
+      "width": undefined,
     }
   }
   testID="surface-outer-layer"
@@ -29,7 +34,9 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "transparent",
         "flex": undefined,
+        "height": 64,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -37,6 +44,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "width": undefined,
       }
     }
     testID="surface-inner-layer"
@@ -50,11 +58,14 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           "flex": undefined,
           "flexDirection": "row",
           "height": 64,
+          "opacity": undefined,
           "paddingBottom": undefined,
           "paddingHorizontal": 4,
           "paddingLeft": undefined,
           "paddingRight": undefined,
           "paddingTop": undefined,
+          "transform": undefined,
+          "width": undefined,
         }
       }
       testID="surface"
@@ -64,10 +75,14 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         style={
           Object {
             "alignSelf": undefined,
+            "backgroundColor": "rgb(247, 243, 249)",
+            "borderRadius": 4,
             "bottom": undefined,
             "end": undefined,
             "flex": undefined,
+            "height": undefined,
             "left": undefined,
+            "opacity": undefined,
             "position": undefined,
             "right": undefined,
             "shadowColor": "#000",
@@ -79,6 +94,8 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             "shadowRadius": 3,
             "start": undefined,
             "top": undefined,
+            "transform": undefined,
+            "width": undefined,
           }
         }
         testID="search-bar-container-outer-layer"
@@ -87,7 +104,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           collapsable={false}
           style={
             Object {
+              "backgroundColor": "rgb(247, 243, 249)",
+              "borderRadius": 4,
               "flex": undefined,
+              "height": undefined,
               "shadowColor": "#000",
               "shadowOffset": Object {
                 "height": 1,
@@ -95,6 +115,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               },
               "shadowOpacity": 0.3,
               "shadowRadius": 1,
+              "width": undefined,
             }
           }
           testID="search-bar-container-inner-layer"
@@ -108,6 +129,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                 "borderRadius": 4,
                 "flex": undefined,
                 "flexDirection": "row",
+                "height": undefined,
+                "opacity": undefined,
+                "transform": undefined,
+                "width": undefined,
               }
             }
             testID="search-bar-container"
@@ -117,10 +142,15 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               style={
                 Object {
                   "alignSelf": undefined,
+                  "backgroundColor": "transparent",
+                  "borderRadius": 20,
                   "bottom": undefined,
                   "end": undefined,
                   "flex": undefined,
+                  "height": 40,
                   "left": undefined,
+                  "margin": 6,
+                  "opacity": undefined,
                   "position": undefined,
                   "right": undefined,
                   "shadowColor": "#000",
@@ -132,6 +162,8 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                   "shadowRadius": 0,
                   "start": undefined,
                   "top": undefined,
+                  "transform": undefined,
+                  "width": 40,
                 }
               }
               testID="icon-button-container-outer-layer"
@@ -140,7 +172,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                 collapsable={false}
                 style={
                   Object {
+                    "backgroundColor": "transparent",
+                    "borderRadius": 20,
                     "flex": undefined,
+                    "height": 40,
                     "shadowColor": "#000",
                     "shadowOffset": Object {
                       "height": 0,
@@ -148,6 +183,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                     },
                     "shadowOpacity": 0,
                     "shadowRadius": 0,
+                    "width": 40,
                   }
                 }
                 testID="icon-button-container-inner-layer"
@@ -163,8 +199,9 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                       "elevation": 0,
                       "flex": undefined,
                       "height": 40,
-                      "margin": 6,
+                      "opacity": undefined,
                       "overflow": "hidden",
+                      "transform": undefined,
                       "width": 40,
                     }
                   }
@@ -300,10 +337,15 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                 style={
                   Object {
                     "alignSelf": undefined,
+                    "backgroundColor": "transparent",
+                    "borderRadius": 20,
                     "bottom": undefined,
                     "end": undefined,
                     "flex": undefined,
+                    "height": 40,
                     "left": undefined,
+                    "margin": 6,
+                    "opacity": undefined,
                     "position": undefined,
                     "right": undefined,
                     "shadowColor": "#000",
@@ -315,6 +357,8 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                     "shadowRadius": 0,
                     "start": undefined,
                     "top": undefined,
+                    "transform": undefined,
+                    "width": 40,
                   }
                 }
                 testID="icon-button-container-outer-layer"
@@ -323,7 +367,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                   collapsable={false}
                   style={
                     Object {
+                      "backgroundColor": "transparent",
+                      "borderRadius": 20,
                       "flex": undefined,
+                      "height": 40,
                       "shadowColor": "#000",
                       "shadowOffset": Object {
                         "height": 0,
@@ -331,6 +378,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                       },
                       "shadowOpacity": 0,
                       "shadowRadius": 0,
+                      "width": 40,
                     }
                   }
                   testID="icon-button-container-inner-layer"
@@ -346,8 +394,9 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                         "elevation": 0,
                         "flex": undefined,
                         "height": 40,
-                        "margin": 6,
+                        "opacity": undefined,
                         "overflow": "hidden",
+                        "transform": undefined,
                         "width": 40,
                       }
                     }
@@ -459,10 +508,13 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": 64,
       "left": undefined,
+      "opacity": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -474,6 +526,8 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       "shadowRadius": 0,
       "start": undefined,
       "top": undefined,
+      "transform": undefined,
+      "width": undefined,
     }
   }
   testID="surface-outer-layer"
@@ -482,7 +536,9 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "transparent",
         "flex": undefined,
+        "height": 64,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -490,6 +546,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
+        "width": undefined,
       }
     }
     testID="surface-inner-layer"
@@ -503,11 +560,14 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           "flex": undefined,
           "flexDirection": "row",
           "height": 64,
+          "opacity": undefined,
           "paddingBottom": undefined,
           "paddingHorizontal": 4,
           "paddingLeft": undefined,
           "paddingRight": undefined,
           "paddingTop": undefined,
+          "transform": undefined,
+          "width": undefined,
         }
       }
       testID="surface"
@@ -517,10 +577,15 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         style={
           Object {
             "alignSelf": undefined,
+            "backgroundColor": "transparent",
+            "borderRadius": 20,
             "bottom": undefined,
             "end": undefined,
             "flex": undefined,
+            "height": 40,
             "left": undefined,
+            "margin": 6,
+            "opacity": undefined,
             "position": undefined,
             "right": undefined,
             "shadowColor": "#000",
@@ -532,6 +597,8 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             "shadowRadius": 0,
             "start": undefined,
             "top": undefined,
+            "transform": undefined,
+            "width": 40,
           }
         }
         testID="icon-button-container-outer-layer"
@@ -540,7 +607,10 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           collapsable={false}
           style={
             Object {
+              "backgroundColor": "transparent",
+              "borderRadius": 20,
               "flex": undefined,
+              "height": 40,
               "shadowColor": "#000",
               "shadowOffset": Object {
                 "height": 0,
@@ -548,6 +618,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
+              "width": 40,
             }
           }
           testID="icon-button-container-inner-layer"
@@ -563,8 +634,9 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                 "elevation": 0,
                 "flex": undefined,
                 "height": 40,
-                "margin": 6,
+                "opacity": undefined,
                 "overflow": "hidden",
+                "transform": undefined,
                 "width": 40,
               }
             }
@@ -778,10 +850,15 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         style={
           Object {
             "alignSelf": undefined,
+            "backgroundColor": "transparent",
+            "borderRadius": 20,
             "bottom": undefined,
             "end": undefined,
             "flex": undefined,
+            "height": 40,
             "left": undefined,
+            "margin": 6,
+            "opacity": undefined,
             "position": undefined,
             "right": undefined,
             "shadowColor": "#000",
@@ -793,6 +870,8 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             "shadowRadius": 0,
             "start": undefined,
             "top": undefined,
+            "transform": undefined,
+            "width": 40,
           }
         }
         testID="icon-button-container-outer-layer"
@@ -801,7 +880,10 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           collapsable={false}
           style={
             Object {
+              "backgroundColor": "transparent",
+              "borderRadius": 20,
               "flex": undefined,
+              "height": 40,
               "shadowColor": "#000",
               "shadowOffset": Object {
                 "height": 0,
@@ -809,6 +891,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
+              "width": 40,
             }
           }
           testID="icon-button-container-inner-layer"
@@ -824,8 +907,9 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                 "elevation": 0,
                 "flex": undefined,
                 "height": 40,
-                "margin": 6,
+                "opacity": undefined,
                 "overflow": "hidden",
+                "transform": undefined,
                 "width": 40,
               }
             }

@@ -229,8 +229,26 @@ const Surface = forwardRef<View, Props>(
       start,
       end,
       flex,
+      width,
+      height,
+      transform,
+      opacity,
       ...restStyle
     } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+
+    // Extracts the border radius and margins so that they can be
+    // applied to the outside container and not on the inner one
+    const borderRadiusStyles = Object.fromEntries(
+      Object.entries(restStyle).filter(
+        ([key]) => key.startsWith('border') && key.endsWith('Radius')
+      )
+    );
+    const marginStyles = Object.fromEntries(
+      Object.entries(restStyle).filter(([key]) => key.startsWith('margin'))
+    );
+    const restStyleWithoutMargins = Object.fromEntries(
+      Object.entries(restStyle).filter(([key]) => !key.startsWith('margin'))
+    );
 
     const absoluteStyles = {
       position,
@@ -241,13 +259,36 @@ const Surface = forwardRef<View, Props>(
       left,
       start,
       end,
+      transform,
+      opacity,
     };
 
-    const sharedStyle = [{ backgroundColor, flex }, restStyle];
+    const sharedStyle = [
+      {
+        backgroundColor,
+        flex,
+        width,
+        height,
+        transform,
+        opacity,
+      },
+      restStyleWithoutMargins,
+    ];
 
-    const innerLayerViewStyles = [{ flex }];
+    const innerLayerViewStyles = [
+      {
+        flex,
+        width,
+        height,
+      },
+      borderRadiusStyles,
+    ];
 
-    const outerLayerViewStyles = [absoluteStyles, innerLayerViewStyles];
+    const outerLayerViewStyles = [
+      absoluteStyles,
+      innerLayerViewStyles,
+      marginStyles,
+    ];
 
     if (isAnimatedValue(elevation)) {
       const inputRange = [0, 1, 2, 3, 4, 5];
@@ -271,6 +312,7 @@ const Surface = forwardRef<View, Props>(
             inputRange,
             outputRange: iOSShadowOutputRanges[layer].shadowRadius,
           }),
+          backgroundColor,
         };
       };
 
@@ -302,6 +344,7 @@ const Surface = forwardRef<View, Props>(
           height: iOSShadowOutputRanges[layer].height[elevation],
         },
         shadowRadius: iOSShadowOutputRanges[layer].shadowRadius[elevation],
+        backgroundColor,
       };
     };
 

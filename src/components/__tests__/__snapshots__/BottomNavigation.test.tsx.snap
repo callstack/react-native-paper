@@ -75,10 +75,13 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -90,6 +93,8 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-surface-outer-layer"
@@ -98,7 +103,9 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
       collapsable={false}
       style={
         Object {
+          "backgroundColor": "transparent",
           "flex": undefined,
+          "height": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -106,6 +113,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "width": undefined,
         }
       }
       testID="bottom-navigation-surface-inner-layer"
@@ -118,6 +126,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           Object {
             "backgroundColor": "transparent",
             "flex": undefined,
+            "height": undefined,
+            "opacity": undefined,
+            "transform": undefined,
+            "width": undefined,
           }
         }
         testID="bottom-navigation-surface"
@@ -828,10 +840,13 @@ exports[`hides labels in shifting bottom navigation 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -843,6 +858,8 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-surface-outer-layer"
@@ -851,7 +868,9 @@ exports[`hides labels in shifting bottom navigation 1`] = `
       collapsable={false}
       style={
         Object {
+          "backgroundColor": "transparent",
           "flex": undefined,
+          "height": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -859,6 +878,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "width": undefined,
         }
       }
       testID="bottom-navigation-surface-inner-layer"
@@ -871,6 +891,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           Object {
             "backgroundColor": "transparent",
             "flex": undefined,
+            "height": undefined,
+            "opacity": undefined,
+            "transform": undefined,
+            "width": undefined,
           }
         }
         testID="bottom-navigation-surface"
@@ -1735,10 +1759,13 @@ exports[`renders bottom navigation with getLazy 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -1750,6 +1777,8 @@ exports[`renders bottom navigation with getLazy 1`] = `
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-surface-outer-layer"
@@ -1758,7 +1787,9 @@ exports[`renders bottom navigation with getLazy 1`] = `
       collapsable={false}
       style={
         Object {
+          "backgroundColor": "transparent",
           "flex": undefined,
+          "height": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -1766,6 +1797,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "width": undefined,
         }
       }
       testID="bottom-navigation-surface-inner-layer"
@@ -1778,6 +1810,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
           Object {
             "backgroundColor": "transparent",
             "flex": undefined,
+            "height": undefined,
+            "opacity": undefined,
+            "transform": undefined,
+            "width": undefined,
           }
         }
         testID="bottom-navigation-surface"
@@ -3449,10 +3485,13 @@ exports[`renders bottom navigation with scene animation 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -3464,6 +3503,8 @@ exports[`renders bottom navigation with scene animation 1`] = `
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-surface-outer-layer"
@@ -3472,7 +3513,9 @@ exports[`renders bottom navigation with scene animation 1`] = `
       collapsable={false}
       style={
         Object {
+          "backgroundColor": "transparent",
           "flex": undefined,
+          "height": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -3480,6 +3523,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "width": undefined,
         }
       }
       testID="bottom-navigation-surface-inner-layer"
@@ -3492,6 +3536,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
           Object {
             "backgroundColor": "transparent",
             "flex": undefined,
+            "height": undefined,
+            "opacity": undefined,
+            "transform": undefined,
+            "width": undefined,
           }
         }
         testID="bottom-navigation-surface"
@@ -4945,10 +4993,13 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -4960,6 +5011,8 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-surface-outer-layer"
@@ -4968,7 +5021,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       collapsable={false}
       style={
         Object {
+          "backgroundColor": "transparent",
           "flex": undefined,
+          "height": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -4976,6 +5031,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "width": undefined,
         }
       }
       testID="bottom-navigation-surface-inner-layer"
@@ -4988,6 +5044,10 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           Object {
             "backgroundColor": "transparent",
             "flex": undefined,
+            "height": undefined,
+            "opacity": undefined,
+            "transform": undefined,
+            "width": undefined,
           }
         }
         testID="bottom-navigation-surface"
@@ -5638,10 +5698,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -5653,6 +5716,8 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-surface-outer-layer"
@@ -5661,7 +5726,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       collapsable={false}
       style={
         Object {
+          "backgroundColor": "transparent",
           "flex": undefined,
+          "height": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -5669,6 +5736,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "width": undefined,
         }
       }
       testID="bottom-navigation-surface-inner-layer"
@@ -5681,6 +5749,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           Object {
             "backgroundColor": "transparent",
             "flex": undefined,
+            "height": undefined,
+            "opacity": undefined,
+            "transform": undefined,
+            "width": undefined,
           }
         }
         testID="bottom-navigation-surface"
@@ -6634,10 +6706,13 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -6649,6 +6724,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-surface-outer-layer"
@@ -6657,7 +6734,9 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       collapsable={false}
       style={
         Object {
+          "backgroundColor": "transparent",
           "flex": undefined,
+          "height": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -6665,6 +6744,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "width": undefined,
         }
       }
       testID="bottom-navigation-surface-inner-layer"
@@ -6677,6 +6757,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           Object {
             "backgroundColor": "transparent",
             "flex": undefined,
+            "height": undefined,
+            "opacity": undefined,
+            "transform": undefined,
+            "width": undefined,
           }
         }
         testID="bottom-navigation-surface"
@@ -7732,10 +7816,13 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -7747,6 +7834,8 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-surface-outer-layer"
@@ -7755,7 +7844,9 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       collapsable={false}
       style={
         Object {
+          "backgroundColor": "transparent",
           "flex": undefined,
+          "height": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -7763,6 +7854,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "width": undefined,
         }
       }
       testID="bottom-navigation-surface-inner-layer"
@@ -7775,6 +7867,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           Object {
             "backgroundColor": "transparent",
             "flex": undefined,
+            "height": undefined,
+            "opacity": undefined,
+            "transform": undefined,
+            "width": undefined,
           }
         }
         testID="bottom-navigation-surface"
@@ -8708,10 +8804,13 @@ exports[`renders non-shifting bottom navigation 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -8723,6 +8822,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-surface-outer-layer"
@@ -8731,7 +8832,9 @@ exports[`renders non-shifting bottom navigation 1`] = `
       collapsable={false}
       style={
         Object {
+          "backgroundColor": "transparent",
           "flex": undefined,
+          "height": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -8739,6 +8842,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "width": undefined,
         }
       }
       testID="bottom-navigation-surface-inner-layer"
@@ -8751,6 +8855,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
           Object {
             "backgroundColor": "transparent",
             "flex": undefined,
+            "height": undefined,
+            "opacity": undefined,
+            "transform": undefined,
+            "width": undefined,
           }
         }
         testID="bottom-navigation-surface"
@@ -9806,10 +9914,13 @@ exports[`renders shifting bottom navigation 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -9821,6 +9932,8 @@ exports[`renders shifting bottom navigation 1`] = `
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-surface-outer-layer"
@@ -9829,7 +9942,9 @@ exports[`renders shifting bottom navigation 1`] = `
       collapsable={false}
       style={
         Object {
+          "backgroundColor": "transparent",
           "flex": undefined,
+          "height": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -9837,6 +9952,7 @@ exports[`renders shifting bottom navigation 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
+          "width": undefined,
         }
       }
       testID="bottom-navigation-surface-inner-layer"
@@ -9849,6 +9965,10 @@ exports[`renders shifting bottom navigation 1`] = `
           Object {
             "backgroundColor": "transparent",
             "flex": undefined,
+            "height": undefined,
+            "opacity": undefined,
+            "transform": undefined,
+            "width": undefined,
           }
         }
         testID="bottom-navigation-surface"
