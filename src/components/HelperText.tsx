@@ -124,13 +124,13 @@ const HelperText = ({
 
   const { colors, dark } = theme;
 
-  const textColor =
-    type === 'error'
-      ? colors?.error
-      : color(theme.isV3 ? theme.colors.onSurface : theme?.colors?.text)
-          .alpha(dark ? 0.7 : 0.54)
-          .rgb()
-          .string();
+  const infoTextColor = theme.isV3
+    ? theme.colors.onSurfaceVariant
+    : color(theme?.colors?.text)
+        .alpha(dark ? 0.7 : 0.54)
+        .rgb()
+        .string();
+  const textColor = type === 'error' ? colors?.error : infoTextColor;
 
   return (
     <AnimatedText
