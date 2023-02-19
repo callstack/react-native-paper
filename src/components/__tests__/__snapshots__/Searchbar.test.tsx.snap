@@ -226,7 +226,7 @@ exports[`activity indicator snapshot test 1`] = `
               "fontSize": 16,
               "fontWeight": "400",
               "letterSpacing": 0.15,
-              "lineHeight": 24,
+              "lineHeight": 0,
             },
             Object {
               "minHeight": 56,
@@ -668,7 +668,7 @@ exports[`renders with placeholder 1`] = `
               "fontSize": 16,
               "fontWeight": "400",
               "letterSpacing": 0.15,
-              "lineHeight": 24,
+              "lineHeight": 0,
             },
             Object {
               "minHeight": 56,
@@ -1076,7 +1076,7 @@ exports[`renders with text 1`] = `
               "fontSize": 16,
               "fontWeight": "400",
               "letterSpacing": 0.15,
-              "lineHeight": 24,
+              "lineHeight": 0,
             },
             Object {
               "minHeight": 56,

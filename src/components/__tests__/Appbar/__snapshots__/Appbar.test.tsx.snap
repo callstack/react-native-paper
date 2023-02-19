@@ -284,7 +284,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                     "fontSize": 16,
                     "fontWeight": "400",
                     "letterSpacing": 0.15,
-                    "lineHeight": 24,
+                    "lineHeight": 0,
                   },
                   Object {
                     "minHeight": 56,

@@ -236,24 +236,35 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       onClearIconPress?.(e);
     };
 
-    const { colors, roundness, dark, isV3 } = theme;
-    const placeholderTextColor = theme.isV3
+    const { roundness, dark, isV3, fonts } = theme;
+
+    const placeholderTextColor = isV3
       ? theme.colors.onSurface
       : theme.colors?.placeholder;
-
     const textColor = isV3 ? theme.colors.onSurfaceVariant : theme.colors.text;
-
     const md2IconColor = dark
       ? textColor
       : color(textColor).alpha(0.54).rgb().string();
     const iconColor =
       customIconColor || (isV3 ? theme.colors.onSurfaceVariant : md2IconColor);
-
     const rippleColor = color(textColor).alpha(0.32).rgb().string();
 
-    const font = theme.isV3 ? theme.fonts.bodyLarge : theme.fonts.regular;
+    const font = isV3
+      ? {
+          ...fonts.bodyLarge,
+          lineHeight: Platform.select({
+            ios: 0,
+            default: fonts.bodyLarge.lineHeight,
+          }),
+        }
+      : theme.fonts.regular;
 
     const isBarMode = isV3 && mode === 'bar';
+    const shouldRenderTraileringIcon =
+      isBarMode &&
+      traileringIcon &&
+      !loading &&
+      (!value || right !== undefined);
 
     return (
       <Surface
@@ -304,7 +315,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
           ]}
           placeholder={placeholder || ''}
           placeholderTextColor={placeholderTextColor}
-          selectionColor={colors?.primary}
+          selectionColor={theme.colors?.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
           keyboardAppearance={dark ? 'dark' : 'light'}
@@ -354,10 +365,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             />
           </View>
         )}
-        {isBarMode &&
-        traileringIcon &&
-        !loading &&
-        (!value || right !== undefined) ? (
+        {shouldRenderTraileringIcon ? (
           <IconButton
             accessibilityRole="button"
             borderless

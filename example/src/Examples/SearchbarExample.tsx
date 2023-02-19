@@ -191,9 +191,9 @@ const SearchExample = ({ navigation }: Props) => {
               Keyboard.dismiss();
               navigation.goBack();
             }}
-            // onClearIconPress={() => {
-            //   Keyboard.dismiss();
-            // }}
+            onClearIconPress={() => {
+              Keyboard.dismiss();
+            }}
             icon={{ source: 'arrow-left', direction: 'auto' }}
             style={styles.searchbar}
           />
