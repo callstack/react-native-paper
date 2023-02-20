@@ -142,7 +142,7 @@ const BannerExample = () => {
 export default function WithProvider() {
   const isDarkTheme = useColorMode().colorMode === 'dark';
   return (
-    <BrowserOnly>
+    <BrowserOnly fallback={<ProgressBar indeterminate />}>
       {() => (
         <Provider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
           <BannerExample />
