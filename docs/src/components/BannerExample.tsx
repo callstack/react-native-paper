@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import { useColorMode } from '@docusaurus/theme-common';
 import {
   Avatar,
@@ -141,8 +142,12 @@ const BannerExample = () => {
 export default function WithProvider() {
   const isDarkTheme = useColorMode().colorMode === 'dark';
   return (
-    <Provider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
-      <BannerExample />
-    </Provider>
+    <BrowserOnly>
+      {() => (
+        <Provider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
+          <BannerExample />
+        </Provider>
+      )}
+    </BrowserOnly>
   );
 }
