@@ -2,12 +2,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import RedBox from 'redbox-react';
-import App from '/home/circleci/react-native-paper/docs/node_modules/component-docs/dist/templates/App.js';
+import App from '/Users/drakeoon/Desktop/Dev/projects/react-native-paper/docs/node_modules/component-docs/dist/templates/App.js';
 import data from './app.data';
-import '/home/circleci/react-native-paper/docs/node_modules/component-docs/dist/styles/reset.css';
-import '/home/circleci/react-native-paper/docs/node_modules/component-docs/dist/styles/globals.css';
+import '/Users/drakeoon/Desktop/Dev/projects/react-native-paper/docs/node_modules/component-docs/dist/styles/reset.css';
+import '/Users/drakeoon/Desktop/Dev/projects/react-native-paper/docs/node_modules/component-docs/dist/styles/globals.css';
 
-import '/home/circleci/react-native-paper/docs/assets/styles.css';
+import '/Users/drakeoon/Desktop/Dev/projects/react-native-paper/docs/assets/styles.css';
 
 const root = document.getElementById('root');
 const render = () => {

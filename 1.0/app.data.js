@@ -1,6 +1,6 @@
 module.exports = [
   (function() {
-  var e = require("/home/circleci/react-native-paper/docs/pages/0.index.js");
+  var e = require("/Users/drakeoon/Desktop/Dev/projects/react-native-paper/docs/pages/0.index.js");
   var c = e.__esModule ? e.default : e;
   var m = c.meta || {};
   return {
@@ -11,7 +11,7 @@ module.exports = [
      data: c
   };
 }()),(function() {
-  var e = require("/home/circleci/react-native-paper/docs/pages/1.showcase.js");
+  var e = require("/Users/drakeoon/Desktop/Dev/projects/react-native-paper/docs/pages/1.showcase.js");
   var c = e.__esModule ? e.default : e;
   var m = c.meta || {};
   return {
