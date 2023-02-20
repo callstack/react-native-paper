@@ -228,6 +228,10 @@ const DrawerItems = ({
               * - available only for MD3
             </Text>
           )}
+          <Text variant="bodySmall" style={styles.annotation}>
+            React Native Paper Version{' '}
+            {require('react-native-paper/package.json').version}
+          </Text>
         </>
       )}
     </DrawerContentScrollView>
@@ -257,6 +261,7 @@ const styles = StyleSheet.create({
   },
   annotation: {
     marginHorizontal: 24,
+    marginVertical: 6,
   },
 });
 

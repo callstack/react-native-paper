@@ -108,7 +108,7 @@ theme: {
 }
 ```
 
-👉 You can find more about color on [Material You website](https://m3.material.io/styles/color/the-color-system/key-colors-tones)
+👉 You can find more about color on the [Material You website](https://m3.material.io/styles/color/the-color-system/key-colors-tones)
 
 ## Typography
 
@@ -158,7 +158,7 @@ Take a look at the suggested replacement diff:
  ```
 
 
-👉 You can find more about color on [Material You website](https://m3.material.io/styles/typography/overview)
+👉 You can find more about typography on the [Material You website](https://m3.material.io/styles/typography/overview)
 
 ### Configure fonts
 

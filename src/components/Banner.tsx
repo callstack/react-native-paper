@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Animated, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
+import useEventCallback from 'use-event-callback';
+
 import { useInternalTheme } from '../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../types';
 import Button from './Button/Button';
@@ -35,7 +37,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
   actions?: Array<
     {
       label: string;
-    } & Omit<React.ComponentProps<typeof Button>, 'children'>
+    } & $RemoveChildren<typeof Button>
   >;
   /**
    * Style of banner's inner content.
@@ -47,7 +49,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
    * Changes Banner shadow and background on iOS and Android.
    */
   elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   ref?: React.RefObject<View>;
   /**
    * @optional
@@ -149,6 +151,9 @@ const Banner = ({
     measured: false,
   });
 
+  const showCallback = useEventCallback(onShowAnimationFinished);
+  const hideCallback = useEventCallback(onHideAnimationFinished);
+
   const { scale } = theme.animation;
 
   React.useEffect(() => {
@@ -158,14 +163,14 @@ const Banner = ({
         duration: 250 * scale,
         toValue: 1,
         useNativeDriver: false,
-      }).start(onShowAnimationFinished);
+      }).start(showCallback);
     } else {
       // hide
       Animated.timing(position, {
         duration: 200 * scale,
         toValue: 0,
         useNativeDriver: false,
-      }).start(onHideAnimationFinished);
+      }).start(hideCallback);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible, position, scale]);

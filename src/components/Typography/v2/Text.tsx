@@ -9,6 +9,7 @@ import {
 import type { MD2Theme } from 'src/types';
 
 import { useInternalTheme } from '../../../core/theming';
+import { forwardRef } from '../../../utils/forwardRef';
 
 type Props = React.ComponentProps<typeof NativeText> & {
   style?: StyleProp<TextStyle>;
@@ -58,4 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default React.forwardRef(Text);
+export default forwardRef(Text);

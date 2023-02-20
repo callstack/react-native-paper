@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   EasingFunction,
   Platform,
   StyleProp,
@@ -28,6 +29,11 @@ import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
+import {
+  getActiveTintColor,
+  getInactiveTintColor,
+  getLabelColor,
+} from './utils';
 
 type Route = {
   key: string;
@@ -250,7 +256,7 @@ export type Props = {
    * barStyle={{ backgroundColor: '#694fad' }}
    * ```
    */
-  barStyle?: StyleProp<ViewStyle>;
+  barStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * Specifies the largest possible scale a label font can reach.
    */
@@ -391,9 +397,9 @@ const BottomNavigation = ({
   const theme = useInternalTheme(themeOverrides);
   const { bottom, left, right } = useSafeAreaInsets();
   const { scale } = theme.animation;
-  const compact = compactProp || !theme.isV3;
+  const compact = compactProp ?? !theme.isV3;
   let shifting =
-    shiftingProp || (theme.isV3 ? false : navigationState.routes.length > 3);
+    shiftingProp ?? (theme.isV3 ? false : navigationState.routes.length > 3);
 
   if (shifting && navigationState.routes.length < 2) {
     shifting = false;
@@ -597,6 +603,7 @@ const BottomNavigation = ({
     }
 
     if (index !== navigationState.index) {
+      prevNavigationState.current = navigationState;
       onIndexChange(index);
     }
   };
@@ -607,6 +614,7 @@ const BottomNavigation = ({
         (route) => route.key === key
       );
 
+      prevNavigationState.current = navigationState;
       onIndexChange(index);
     },
     [navigationState.routes, onIndexChange]
@@ -615,8 +623,11 @@ const BottomNavigation = ({
   const { routes } = navigationState;
   const { colors, dark: isDarkTheme, mode, isV3 } = theme;
 
-  const { backgroundColor: customBackground, elevation = 4 }: ViewStyle =
-    StyleSheet.flatten(barStyle) || {};
+  const { backgroundColor: customBackground, elevation = 4 } =
+    (StyleSheet.flatten(barStyle) || {}) as {
+      elevation?: number;
+      backgroundColor?: ColorValue;
+    };
 
   const approxBackgroundColor = customBackground
     ? customBackground
@@ -648,24 +659,18 @@ const BottomNavigation = ({
 
   const textColor = isDark ? white : black;
 
-  const activeTintColor =
-    typeof activeColor !== 'undefined'
-      ? activeColor
-      : isV3
-      ? theme.colors.onSecondaryContainer
-      : textColor;
+  const activeTintColor = getActiveTintColor({
+    activeColor,
+    defaultColor: textColor,
+    theme,
+  });
 
-  const inactiveTintColor =
-    typeof inactiveColor !== 'undefined'
-      ? inactiveColor
-      : isV3
-      ? theme.colors.onSurfaceVariant
-      : color(textColor).alpha(0.5).rgb().string();
-
-  const touchColor = color(activeColor || activeTintColor)
-    .alpha(0.12)
-    .rgb()
-    .string();
+  const inactiveTintColor = getInactiveTintColor({
+    inactiveColor,
+    defaultColor: textColor,
+    theme,
+  });
+  const touchColor = color(activeTintColor).alpha(0.12).rgb().string();
 
   const maxTabWidth = routes.length > 3 ? MIN_TAB_WIDTH : MAX_TAB_WIDTH;
   const maxTabBarWidth = maxTabWidth * routes.length;
@@ -691,6 +696,12 @@ const BottomNavigation = ({
           }
 
           const focused = navigationState.index === index;
+          const previouslyFocused =
+            prevNavigationState.current?.index === index;
+          const countAlphaOffscreen =
+            sceneAnimationEnabled && (focused || previouslyFocused);
+          const renderToHardwareTextureAndroid =
+            sceneAnimationEnabled && focused;
 
           const opacity = sceneAnimationEnabled
             ? tabsPositionAnims[index].interpolate({
@@ -740,13 +751,13 @@ const BottomNavigation = ({
             >
               <Animated.View
                 {...(Platform.OS === 'android' && {
-                  needsOffscreenAlphaCompositing: sceneAnimationEnabled,
+                  needsOffscreenAlphaCompositing: countAlphaOffscreen,
                 })}
-                renderToHardwareTextureAndroid={sceneAnimationEnabled}
+                renderToHardwareTextureAndroid={renderToHardwareTextureAndroid}
                 style={[
                   styles.content,
                   {
-                    opacity: opacity,
+                    opacity,
                     transform: [{ translateX: left }, { translateY: top }],
                   },
                 ]}
@@ -759,29 +770,28 @@ const BottomNavigation = ({
       </View>
       <Surface
         {...(theme.isV3 && { elevation: 0 })}
-        style={
-          [
-            !theme.isV3 && { elevation: 4 },
-            styles.bar,
-            keyboardHidesNavigationBar
-              ? {
-                  // When the keyboard is shown, slide down the navigation bar
-                  transform: [
-                    {
-                      translateY: visibleAnim.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [layout.height, 0],
-                      }),
-                    },
-                  ],
-                  // Absolutely position the navigation bar so that the content is below it
-                  // This is needed to avoid gap at bottom when the navigation bar is hidden
-                  position: keyboardVisible ? 'absolute' : null,
-                }
-              : null,
-            barStyle,
-          ] as StyleProp<ViewStyle>
-        }
+        testID={`${testID}-surface`}
+        style={[
+          !theme.isV3 && styles.elevation,
+          styles.bar,
+          keyboardHidesNavigationBar // eslint-disable-next-line react-native/no-inline-styles
+            ? {
+                // When the keyboard is shown, slide down the navigation bar
+                transform: [
+                  {
+                    translateY: visibleAnim.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [layout.height, 0],
+                    }),
+                  },
+                ],
+                // Absolutely position the navigation bar so that the content is below it
+                // This is needed to avoid gap at bottom when the navigation bar is hidden
+                position: keyboardVisible ? 'absolute' : undefined,
+              }
+            : null,
+          barStyle,
+        ]}
         pointerEvents={
           layout.measured
             ? keyboardHidesNavigationBar && keyboardVisible
@@ -807,6 +817,7 @@ const BottomNavigation = ({
               },
             ]}
             accessibilityRole={'tablist'}
+            testID={`${testID}-bar-content-wrapper`}
           >
             {shifting ? (
               <Animated.View
@@ -840,6 +851,7 @@ const BottomNavigation = ({
                     }),
                   },
                 ]}
+                testID={`${testID}-bar-content-ripple`}
               />
             ) : null}
             {routes.map((route, index) => {
@@ -891,17 +903,21 @@ const BottomNavigation = ({
 
               const badge = getBadge({ route });
 
-              const activeLabelColor = !isV3
-                ? activeTintColor
-                : focused
-                ? theme.colors.onSurface
-                : theme.colors.onSurfaceVariant;
+              const activeLabelColor = getLabelColor({
+                tintColor: activeTintColor,
+                hasColor: Boolean(activeColor),
+                focused,
+                defaultColor: textColor,
+                theme,
+              });
 
-              const inactiveLabelColor = !isV3
-                ? inactiveTintColor
-                : focused
-                ? theme.colors.onSurface
-                : theme.colors.onSurfaceVariant;
+              const inactiveLabelColor = getLabelColor({
+                tintColor: inactiveTintColor,
+                hasColor: Boolean(inactiveColor),
+                focused,
+                defaultColor: textColor,
+                theme,
+              });
 
               const badgeStyle = {
                 top: !isV3 ? -2 : typeof badge === 'boolean' ? 4 : 2,
@@ -1229,5 +1245,8 @@ const styles = StyleSheet.create({
     height: OUTLINE_WIDTH / 2,
     borderRadius: OUTLINE_WIDTH / 4,
     alignSelf: 'center',
+  },
+  elevation: {
+    elevation: 4,
   },
 });

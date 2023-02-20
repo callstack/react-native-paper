@@ -51,16 +51,21 @@ const ToggleButtonExample = () => {
         </ToggleButton.Row>
       </List.Section>
       <List.Section title="Group & enums">
-        <ToggleButton.Group value={font} onValueChange={setFont}>
-          <ToggleButton
-            disabled
-            icon="format-italic"
-            value={FontsEnum.Italic}
-          />
-          <ToggleButton icon="format-bold" value={FontsEnum.Bold} />
-          <ToggleButton icon="format-underline" value={FontsEnum.Underline} />
-          <ToggleButton icon="format-color-text" value={FontsEnum.ColorText} />
-        </ToggleButton.Group>
+        <View style={styles.padding}>
+          <ToggleButton.Group value={font} onValueChange={setFont}>
+            <ToggleButton
+              disabled
+              icon="format-italic"
+              value={FontsEnum.Italic}
+            />
+            <ToggleButton icon="format-bold" value={FontsEnum.Bold} />
+            <ToggleButton icon="format-underline" value={FontsEnum.Underline} />
+            <ToggleButton
+              icon="format-color-text"
+              value={FontsEnum.ColorText}
+            />
+          </ToggleButton.Group>
+        </View>
       </List.Section>
       <List.Section title="Custom & union types">
         <View style={[styles.padding, styles.row]}>

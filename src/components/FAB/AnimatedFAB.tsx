@@ -91,12 +91,12 @@ export type Props = $RemoveChildren<typeof Surface> & {
    */
   extended: boolean;
   /**
-   * @supported Available in v3.x with theme version 3
+   * @supported Available in v5.x with theme version 3
    *
    * Color mappings variant for combinations of container and icon colors.
    */
   variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
    */
@@ -209,7 +209,7 @@ const AnimatedFAB = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const uppercase: boolean = uppercaseProp || !theme.isV3;
+  const uppercase: boolean = uppercaseProp ?? !theme.isV3;
   const isIOS = Platform.OS === 'ios';
   const isAnimatedFromRight = animateFrom === 'right';
   const isIconStatic = iconMode === 'static';
@@ -320,24 +320,22 @@ const AnimatedFAB = ({
     <Surface
       {...rest}
       testID={`${testID}-container`}
-      style={
-        [
-          {
-            opacity: visibility,
-            transform: [
-              {
-                scale: visibility,
-              },
-            ],
-            borderRadius,
-          },
-          !isV3 && {
-            elevation: md2Elevation,
-          },
-          styles.container,
-          restStyle,
-        ] as StyleProp<ViewStyle>
-      }
+      style={[
+        {
+          opacity: visibility,
+          transform: [
+            {
+              scale: visibility,
+            },
+          ],
+          borderRadius,
+        },
+        !isV3 && {
+          elevation: md2Elevation,
+        },
+        styles.container,
+        restStyle,
+      ]}
       {...(isV3 && { elevation: md3Elevation })}
       theme={theme}
     >
@@ -480,6 +478,7 @@ const AnimatedFAB = ({
             textStyle,
           ]}
           theme={theme}
+          testID={`${testID}-text`}
         >
           {label}
         </AnimatedText>

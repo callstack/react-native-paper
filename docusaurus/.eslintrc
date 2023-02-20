@@ -1,0 +1,15 @@
+{
+  "extends": "../.eslintrc",
+
+  "settings": {
+    "import/core-modules": ["react-native-paper"]
+  },
+
+  "rules": {
+    "react/prop-types": "off",
+    "import/no-unresolved": [
+      2,
+      {"ignore": ["^@docusaurus"]}
+    ]
+  }
+}

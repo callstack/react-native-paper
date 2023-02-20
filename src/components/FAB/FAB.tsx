@@ -11,6 +11,7 @@ import {
 
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
@@ -23,13 +24,25 @@ type FABSize = 'small' | 'medium' | 'large';
 
 type FABMode = 'flat' | 'elevated';
 
+type IconOrLabel =
+  | {
+      icon: IconSource;
+      label?: string;
+    }
+  | {
+      icon?: IconSource;
+      label: string;
+    };
+
 export type Props = $RemoveChildren<typeof Surface> & {
+  // For `icon` and `label` props their types are duplicated due to the generation of documentation.
+  // Appropriate type for them is `IconOrLabel` contains the both union and intersection types.
   /**
-   * Icon to display for the `FAB`.
+   * Icon to display for the `FAB`. It's optional only if `label` is defined.
    */
-  icon: IconSource;
+  icon?: IconSource;
   /**
-   * Optional label for extended `FAB`.
+   * Optional label for extended `FAB`. It's optional only if `icon` is defined.
    */
   label?: string;
   /**
@@ -110,14 +123,14 @@ export type Props = $RemoveChildren<typeof Surface> & {
    * Color mappings variant for combinations of container and icon colors.
    */
   variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
    */
   theme?: ThemeProp;
   testID?: string;
   ref?: React.RefObject<View>;
-};
+} & IconOrLabel;
 
 /**
  * A floating action button represents the primary action in an application.
@@ -154,7 +167,7 @@ export type Props = $RemoveChildren<typeof Surface> & {
  * export default MyComponent;
  * ```
  */
-const FAB = React.forwardRef<View, Props>(
+const FAB = forwardRef<View, Props>(
   (
     {
       icon,
@@ -182,7 +195,7 @@ const FAB = React.forwardRef<View, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
-    const uppercase = uppercaseProp || !theme.isV3;
+    const uppercase = uppercaseProp ?? !theme.isV3;
     const { current: visibility } = React.useRef<Animated.Value>(
       new Animated.Value(visible ? 1 : 0)
     );
@@ -242,24 +255,22 @@ const FAB = React.forwardRef<View, Props>(
       <Surface
         ref={ref}
         {...rest}
-        style={
-          [
-            {
-              borderRadius,
-              backgroundColor,
-              opacity: visibility,
-              transform: [
-                {
-                  scale: visibility,
-                },
-              ],
-            },
-            styles.container,
-            !isV3 && styles.elevated,
-            !isV3 && disabled && styles.disabled,
-            style,
-          ] as StyleProp<ViewStyle>
-        }
+        style={[
+          {
+            borderRadius,
+            backgroundColor,
+            opacity: visibility,
+            transform: [
+              {
+                scale: visibility,
+              },
+            ],
+          },
+          styles.container,
+          !isV3 && styles.elevated,
+          !isV3 && disabled && styles.disabled,
+          style,
+        ]}
         pointerEvents={visible ? 'auto' : 'none'}
         testID={`${testID}-container`}
         {...(isV3 && { elevation: md3Elevation })}
@@ -298,6 +309,7 @@ const FAB = React.forwardRef<View, Props>(
               <Text
                 variant="labelLarge"
                 selectable={false}
+                testID={`${testID}-text`}
                 style={[
                   styles.label,
                   uppercase && styles.uppercaseLabel,

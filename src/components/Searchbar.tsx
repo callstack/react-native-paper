@@ -17,6 +17,7 @@ import color from 'color';
 
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
+import { forwardRef } from '../utils/forwardRef';
 import ActivityIndicator from './ActivityIndicator';
 import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
@@ -61,7 +62,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    * Set style of the TextInput component inside the searchbar
    */
   inputStyle?: StyleProp<TextStyle>;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * Custom color for icon, default will be derived from theme
    */
@@ -119,7 +120,7 @@ type TextInputHandles = Pick<
 
  * ```
  */
-const Searchbar = React.forwardRef<TextInputHandles, Props>(
+const Searchbar = forwardRef<TextInputHandles, Props>(
   (
     {
       clearAccessibilityLabel = 'clear',
@@ -191,6 +192,7 @@ const Searchbar = React.forwardRef<TextInputHandles, Props>(
         ]}
         {...(theme.isV3 && { elevation })}
         theme={theme}
+        testID={`${testID}-container`}
       >
         <IconButton
           accessibilityRole="button"

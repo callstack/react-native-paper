@@ -106,7 +106,7 @@ export type Props = React.ComponentProps<typeof Surface> & {
    * Use this prop to apply custom height and width and to set the icon on the right with `flexDirection: 'row-reverse'`.
    */
   contentStyle?: StyleProp<ViewStyle>;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * Style for the button text.
    */
@@ -195,7 +195,7 @@ const Button = ({
     [mode]
   );
   const { roundness, isV3, animation } = theme;
-  const uppercase = uppercaseProp || !theme.isV3;
+  const uppercase = uppercaseProp ?? !theme.isV3;
 
   const isElevationEntitled =
     !disabled && (isV3 ? isMode('elevated') : isMode('contained'));
@@ -292,6 +292,7 @@ const Button = ({
   return (
     <Surface
       {...rest}
+      testID={`${testID}-container`}
       style={
         [
           styles.button,
@@ -350,6 +351,7 @@ const Button = ({
             variant="labelLarge"
             selectable={false}
             numberOfLines={1}
+            testID={`${testID}-text`}
             style={[
               styles.label,
               !isV3 && styles.md2Label,

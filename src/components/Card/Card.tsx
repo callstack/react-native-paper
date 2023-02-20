@@ -67,6 +67,10 @@ export type Props = React.ComponentProps<typeof Surface> & {
    * Changes Card shadow and background on iOS and Android.
    */
   elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+  /**
+   * Style of card's inner content.
+   */
+  contentStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -133,6 +137,7 @@ const Card = ({
   mode: cardMode = 'elevated',
   children,
   style,
+  contentStyle,
   theme: themeOverrides,
   testID = 'card',
   accessible,
@@ -248,6 +253,7 @@ const Card = ({
       {...(isV3 && {
         elevation: isMode('elevated') ? computedElevation : 0,
       })}
+      testID={`${testID}-container`}
       {...rest}
     >
       {isMode('outlined') && (
@@ -274,7 +280,7 @@ const Card = ({
         testID={testID}
         accessible={accessible}
       >
-        <View style={styles.innerContainer}>
+        <View style={[styles.innerContainer, contentStyle]}>
           {React.Children.map(children, (child, index) =>
             React.isValidElement(child)
               ? React.cloneElement(child as React.ReactElement<any>, {

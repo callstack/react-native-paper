@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import {
+  Animated,
+  Platform,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+  ColorValue,
+} from 'react-native';
 
 import color from 'color';
 
@@ -18,7 +26,10 @@ import {
   renderAppbarContent,
 } from './utils';
 
-export type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
+export type Props = Omit<
+  Partial<React.ComponentPropsWithRef<typeof View>>,
+  'style'
+> & {
   /**
    * Whether the background color is a dark color. A dark appbar will render light text and vice-versa.
    */
@@ -55,7 +66,7 @@ export type Props = Partial<React.ComponentPropsWithRef<typeof View>> & {
    * @optional
    */
   theme?: ThemeProp;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
 };
 
 /**
@@ -160,11 +171,15 @@ const Appbar = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { isV3 } = theme;
+  const flattenedStyle = StyleSheet.flatten(style);
   const {
     backgroundColor: customBackground,
     elevation = isV3 ? (elevated ? 2 : 0) : 4,
     ...restStyle
-  }: ViewStyle = StyleSheet.flatten(style) || {};
+  } = (flattenedStyle || {}) as Exclude<typeof flattenedStyle, number> & {
+    elevation?: number;
+    backgroundColor?: ColorValue;
+  };
 
   let isDark: boolean;
 

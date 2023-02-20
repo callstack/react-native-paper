@@ -289,6 +289,28 @@ it('correctly applies padding offset to input label on Android when LTR', () => 
   });
 });
 
+it('calls onLayout on right-side affix adornment', () => {
+  const onLayoutMock = jest.fn();
+  const nativeEventMock = {
+    nativeEvent: { layout: { height: 100 } },
+  };
+
+  const { getByTestId } = render(
+    <TextInput
+      label="Flat input"
+      placeholder="Type something"
+      value={'Some test value'}
+      right={<TextInput.Affix text={affixTextValue} onLayout={onLayoutMock} />}
+    />
+  );
+  fireEvent(
+    getByTestId('right-affix-adornment-text'),
+    'onLayout',
+    nativeEventMock
+  );
+  expect(onLayoutMock).toHaveBeenCalledWith(nativeEventMock);
+});
+
 ['outlined', 'flat'].forEach((mode) =>
   it(`renders ${mode} input with correct line height`, () => {
     const input = render(

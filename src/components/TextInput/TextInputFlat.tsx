@@ -41,7 +41,6 @@ import {
   calculatePadding,
   getConstants,
   getFlatInputColors,
-  interpolatePlaceholder,
   Padding,
 } from './helpers';
 import InputLabel from './Label/InputLabel';
@@ -218,7 +217,7 @@ const TextInputFlat = ({
     -labelHalfHeight - (topPosition + MINIMIZED_LABEL_Y_OFFSET);
 
   const placeholderOpacity = hasActiveOutline
-    ? interpolatePlaceholder(parentState.labeled, hasActiveOutline)
+    ? parentState.labeled
     : parentState.labelLayout.measured
     ? 1
     : 0;
@@ -349,7 +348,9 @@ const TextInputFlat = ({
             ]}
           />
         )}
-        <InputLabel parentState={parentState} labelProps={labelProps} />
+        {label ? (
+          <InputLabel parentState={parentState} labelProps={labelProps} />
+        ) : null}
         {render?.({
           testID,
           ...rest,

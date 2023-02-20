@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import {
+  Animated,
+  ColorValue,
+  Platform,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -48,7 +56,7 @@ export type Props = React.ComponentProps<typeof Appbar> & {
    * @optional
    */
   theme?: ThemeProp;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
 };
 
 /**
@@ -112,13 +120,19 @@ const AppbarHeader = ({
   const theme = useInternalTheme(themeOverrides);
   const { isV3 } = theme;
 
+  const flattenedStyle = StyleSheet.flatten(style);
   const {
     height = isV3 ? modeAppbarHeight[mode] : DEFAULT_APPBAR_HEIGHT,
     elevation = isV3 ? (elevated ? 2 : 0) : 4,
     backgroundColor: customBackground,
     zIndex = isV3 && elevated ? 1 : 0,
     ...restStyle
-  }: ViewStyle = StyleSheet.flatten(style) || {};
+  } = (flattenedStyle || {}) as Exclude<typeof flattenedStyle, number> & {
+    height?: number;
+    elevation?: number;
+    backgroundColor?: ColorValue;
+    zIndex?: number;
+  };
 
   const backgroundColor = getAppbarColor(
     theme,
@@ -131,18 +145,16 @@ const AppbarHeader = ({
 
   return (
     <View
-      style={
-        [
-          {
-            backgroundColor,
-            zIndex,
-            elevation,
-            paddingTop: statusBarHeight ?? top,
-            paddingHorizontal: Math.max(left, right),
-          },
-          shadow(elevation),
-        ] as StyleProp<ViewStyle>
-      }
+      style={[
+        {
+          backgroundColor,
+          zIndex,
+          elevation,
+          paddingTop: statusBarHeight ?? top,
+          paddingHorizontal: Math.max(left, right),
+        },
+        shadow(elevation) as ViewStyle,
+      ]}
     >
       <Appbar
         style={[{ height, backgroundColor }, styles.appbar, restStyle]}

@@ -5,10 +5,12 @@ import {
   StyleSheet,
   ViewStyle,
   View,
+  Animated,
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
@@ -63,7 +65,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   ref?: React.RefObject<View>;
   /**
    * @optional
@@ -112,7 +114,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  *
  * @extends TouchableRipple props https://callstack.github.io/react-native-paper/touchable-ripple.html
  */
-const IconButton = React.forwardRef<View, Props>(
+const IconButton = forwardRef<View, Props>(
   (
     {
       icon,
@@ -127,6 +129,7 @@ const IconButton = React.forwardRef<View, Props>(
       mode,
       style,
       theme: themeOverrides,
+      testID = 'icon-button',
       ...rest
     }: Props,
     ref
@@ -162,19 +165,18 @@ const IconButton = React.forwardRef<View, Props>(
     return (
       <Surface
         ref={ref}
-        style={
-          [
-            {
-              backgroundColor,
-              width: buttonSize,
-              height: buttonSize,
-            },
-            styles.container,
-            borderStyles,
-            !isV3 && disabled && styles.disabled,
-            style,
-          ] as StyleProp<ViewStyle>
-        }
+        testID={`${testID}-container`}
+        style={[
+          {
+            backgroundColor,
+            width: buttonSize,
+            height: buttonSize,
+          },
+          styles.container,
+          borderStyles,
+          !isV3 && disabled && styles.disabled,
+          style,
+        ]}
         {...(isV3 && { elevation: 0 })}
       >
         <TouchableRipple
@@ -195,6 +197,7 @@ const IconButton = React.forwardRef<View, Props>(
               ? { top: 10, left: 10, bottom: 10, right: 10 }
               : { top: 6, left: 6, bottom: 6, right: 6 }
           }
+          testID={testID}
           {...rest}
         >
           <IconComponent color={iconColor} source={icon} size={size} />

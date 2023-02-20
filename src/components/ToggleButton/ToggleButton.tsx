@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ViewStyle,
   View,
+  Animated,
 } from 'react-native';
 
 import color from 'color';
@@ -12,6 +13,7 @@ import color from 'color';
 import { useInternalTheme } from '../../core/theming';
 import { black, white } from '../../styles/themes/v2/colors';
 import type { ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
 import { ToggleButtonGroupContext } from './ToggleButtonGroup';
@@ -50,12 +52,16 @@ export type Props = {
    * Status of button.
    */
   status?: 'checked' | 'unchecked';
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
    */
   theme?: ThemeProp;
   ref?: React.RefObject<View>;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 /**
@@ -92,7 +98,7 @@ export type Props = {
  *
  * ```
  */
-const ToggleButton = React.forwardRef<View, Props>(
+const ToggleButton = forwardRef<View, Props>(
   (
     {
       icon,

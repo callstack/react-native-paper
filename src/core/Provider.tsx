@@ -86,6 +86,7 @@ const Provider = (props: Props) => {
       ...props.theme,
       version: themeVersion,
       animation: {
+        ...props.theme?.animation,
         scale: reduceMotionEnabled ? 0 : 1,
       },
     };

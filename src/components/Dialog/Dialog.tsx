@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Platform, StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import {
+  Animated,
+  Platform,
+  StyleProp,
+  StyleSheet,
+  ViewStyle,
+} from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
@@ -28,7 +34,7 @@ export type Props = {
    * Content of the `Dialog`.
    */
   children: React.ReactNode;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
    */
