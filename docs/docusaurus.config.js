@@ -272,16 +272,12 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
-    }),
-
-  themes: [
-    [
-      '@easyops-cn/docusaurus-search-local',
-      {
-        hashed: true,
+      algolia: {
+        appId: 'U16QMJNNW7',
+        apiKey: 'c32fdc9aa2bbfaa3d44481f5cbdb3c04',
+        indexName: 'crawler_React Native Paper Docs',
       },
-    ],
-  ],
+    }),
 };
 
 module.exports = config;
