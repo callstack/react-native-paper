@@ -31,7 +31,6 @@ jobs:
           command: |
             yarn install --cwd example --frozen-lockfile
             yarn install --cwd docs --frozen-lockfile
-            yarn install --cwd docusaurus --frozen-lockfile
             yarn install --frozen-lockfile
       - save_cache:
           key: dependencies-{{ checksum "package.json" }}
@@ -66,7 +65,6 @@ jobs:
           name: Typecheck files
           command: |
             yarn typescript
-            yarn typescript:docusaurus
 
   unit-tests:
     executor: default
@@ -106,10 +104,11 @@ jobs:
       - run:
           name: Build docs
           command: |
+            export DOCUSAURUS_BASE_URL="/output/job/$CIRCLE_WORKFLOW_JOB_ID/artifacts/$CIRCLE_NODE_INDEX/docs/"
             cd docs && yarn build && cd ..
             bash .circleci/comment-artifacts.sh
       - store_artifacts:
-          path: docs/dist
+          path: docs/build
           destination: docs
 
   deploy-docs:
@@ -150,4 +149,5 @@ workflows:
       - deploy-docs:
           filters:
             branches:
-              only: main
+              only:
+                - main

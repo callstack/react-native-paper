@@ -1,0 +1,566 @@
+---
+title: Theming
+---
+
+import DynamicColorTheme from '@site/src/components/DynamicColorTheme.tsx'
+
+# Theming
+
+<b>Note:</b> To observe changes related to switching between light and dark mode in the app, ensure that the <i>"Override force-dark"</i> feature in the <i>"developer options"</i> settings on your Android device is <b>not overridden</b>.
+
+## Applying a theme to the whole app
+
+To support custom themes, paper exports a `Provider` component. You need to wrap your root component with the provider to be able to support themes:
+
+```js
+import * as React from 'react';
+import { Provider as PaperProvider } from 'react-native-paper';
+import App from './src/App';
+
+export default function Main() {
+  return (
+    <PaperProvider>
+      <App />
+    </PaperProvider>
+  );
+}
+```
+
+By default React Native Paper will apply the [Material You theme (MD3)](https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v3/LightTheme.tsx) if no `theme` or `version` prop is passed to to the `Provider`.
+
+## Accessing theme properties
+
+Use the built-in `useTheme()` hook to get access to the theme's variables:
+
+```js
+import * as React from 'react';
+import { useTheme } from 'react-native-paper';
+
+export default function PaymentScreen() {
+  const theme = useTheme();
+
+  return <View style={{ backgroundColor: theme.colors.primary }} />;
+}
+```
+
+You can also use the `withTheme()` HOC exported from the library. If you wrap your component with the HOC, you'll receive the theme as a prop:
+
+```js
+import * as React from 'react';
+import { withTheme } from 'react-native-paper';
+
+function PaymentScreen({ theme }) {
+  return <View style={{ backgroundColor: theme.colors.primary }} />;
+}
+
+export default withTheme(PaymentScreen);
+```
+
+## Theme properties
+
+You can change the theme prop dynamically and all the components will automatically update to reflect the new theme.
+
+A theme usually contains the following properties:
+
+- `dark` (`boolean`): whether this is a dark theme or light theme.
+- `version`: specify which design system components should follow in the app
+  - 3 - new Material You (MD3)
+  - 2 - previous Material Design (MD2)
+- `mode` (`'adaptive' | 'exact'`): color mode for dark theme (See [Dark Theme](#dark-theme)).
+- `roundness` (`number`): roundness of common elements, such as buttons.
+- `colors` (`object`): various colors used throughout different elements.
+
+  > The primary key color is used to derive roles for key components across the UI, such as the FAB, prominent buttons, active states, as well as the tint of elevated surfaces.
+
+  - `primary`
+  - `onPrimary`
+  - `primaryContainer`
+  - `onPrimaryContainer`
+
+  > The secondary key color is used for less prominent components in the UI such as filter chips, while expanding the opportunity for color expression.
+
+  - `secondary`
+  - `onSecondary`
+  - `secondaryContainer`
+  - `onSecondaryContainer`
+
+  > The tertiary key color is used to derive the roles of contrasting accents that can be used to balance primary and secondary colors or bring heightened attention to an element.
+
+  > The tertiary color role is left for teams to use at their discretion and is intended to support broader color expression in products.
+
+  - `tertiary`
+  - `onTertiary`
+  - `tertiaryContainer`
+  - `onTertiaryContainer`
+
+  > The neutral key color is used to derive the roles of surface and background, as well as high emphasis text and icons.
+
+  - `background`
+  - `onBackground`
+  - `surface`
+  - `onSurface`
+
+  > The neutral variant key color is used to derive medium emphasis text and icons, surface variants, and component outlines.
+
+  - `surfaceVariant`
+  - `onSurfaceVariant`
+  - `outline`
+
+  > In addition to the accent and neutral key color, the color system includes a semantic color role for error
+
+  - `error`
+  - `onError`
+  - `errorContainer`
+  - `onErrorContainer`
+
+  > Surfaces at elevation levels 0-5 are tinted via color overlays based on the primary color, such as app bars or menus. The addition of a grade from 0-5 introduces tonal variation to the surface baseline.
+
+  - `elevation` (`object`)
+    - `level0` - transparent
+    - `level1` - 5% opacity
+    - `level2` - 8% opacity
+    - `level3` - 11% opacity
+    - `level4` - 12% opacity
+    - `level5` - 14% opacity
+
+  > Colors for disabled state
+
+  - `surfaceDisabled`
+  - `onSurfaceDisabled`
+
+  > These additional role mappings exist in a scheme and are mapped to components where needed.
+
+  - `shadow`
+  - `inverseOnSurface`
+  - `inverseSurface`
+  - `inversePrimary`
+  - `backdrop`
+
+- `fonts` (`object`): various fonts styling properties under the text variant key used in component.
+  - [`variant` e.g. `labelMedium`] (`object`):
+    - `fontFamily`
+    - `letterSpacing`
+    - `fontWeight`
+    - `lineHeight`
+    - `fontSize`
+- `animation` (`object`)
+  - `scale` - scale for all animations
+
+When creating a custom theme, you will need to provide all of these properties.
+
+If you don't use a custom theme, Paper will automatically turn animations on/off, depending on device settings.
+
+Otherwise, your custom theme will need to handle it manually, using React Native's [AccessibilityInfo API](https://reactnative.dev/docs/accessibilityinfo).
+
+## Extending the theme
+
+Keeping your own properties in the theme is fully supported by our library:
+
+```js
+import * as React from 'react';
+import {
+  MD3LightTheme as DefaultTheme,
+  Provider as PaperProvider,
+} from 'react-native-paper';
+import App from './src/App';
+
+const theme = {
+  ...DefaultTheme,
+  // Specify custom property
+  myOwnProperty: true,
+  // Specify custom property in nested object
+  colors: {
+    myOwnColor: '#BADA55',
+  },
+};
+
+export default function Main() {
+  return (
+    <PaperProvider theme={theme}>
+      <App />
+    </PaperProvider>
+  );
+}
+```
+
+## Creating dynamic theme colors
+
+Dynamic Color Themes allows for generating two color schemes lightScheme and darkScheme, based on the provided source color. 
+Created schemes are following the Material Design 3 color system and covering colors structure from the Paper theme. User may generate these schemes using the following tool:
+
+<DynamicColorTheme />
+
+<br />
+
+Passed source color into the util is translated into tones to automatically provide the range of tones that map to color roles. 
+
+![customColors](../../static/screenshots/custom-colors.png)
+
+*Source: [Material You Color System](https://m3.material.io/styles/color/the-color-system/custom-colors)*
+
+### Using schemes:
+
+Once we have copied the color schemes from the generated JSON above, we can use by passing it to the colors in `theme` object as below:
+
+```jsx
+import * as React from 'react';
+import {
+  MD3LightTheme as DefaultTheme,
+  Provider as PaperProvider,
+} from 'react-native-paper';
+import App from './src/App';
+
+const theme = {
+  ...DefaultTheme,
+  colors: yourGeneratedLightOrDarkScheme, // Copy it from the color codes scheme and then use it here
+};
+
+export default function Main() {
+  return (
+    <PaperProvider theme={theme}>
+      <App />
+    </PaperProvider>
+  );
+}
+```
+
+## Adapting React Navigation theme
+
+The `adaptNavigationTheme` function takes an existing React Navigation theme and returns a React Navigation theme using the colors from Material Design 3. This theme can be passed to `NavigationContainer` so that React Navigation's UI elements have the same color scheme as Paper.
+
+```ts
+adaptNavigationTheme(themes)
+```
+
+<b>Parameters:</b>
+
+| NAME        | TYPE        |
+| ----------- | ----------- |
+| themes      | object      |
+
+Valid `themes` keys are:
+
+  * `reactNavigationLight` () - React Navigation compliant light theme.
+  * `reactNavigationDark` () - React Navigation compliant dark theme.
+  * `materialLight` () - React Native Paper compliant light theme.
+  * `materialDark` () - React Native Paper compliant dark theme.
+
+```ts
+// App.tsx
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Provider, MD3LightTheme, adaptNavigationTheme } from 'react-native-paper';
+const Stack = createStackNavigator();
+const { LightTheme } = adaptNavigationTheme({ reactNavigationLight: DefaultTheme });
+export default function App() {
+  return (
+    <Provider theme={MD3LightTheme}>
+      <NavigationContainer theme={LightTheme}>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Details" component={DetailsScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+  );
+}
+```
+
+## TypeScript
+
+By default, TypeScript works well whenever you change the value of the built-in theme's properties. It gets more complicated when you want to extend the theme's properties or change their types. In order to fully support TypeScript, you will need to follow the guide that fits your use-case most accurately:
+
+There are two supported ways of overriding the theme:
+
+1. <b>Simple built-in theme overrides</b> - when you only customize the values and the whole theme schema remains the same
+2. <b>Advanced theme overrides</b> - when you <i>add new properties</i> or <i>change the built-in schema shape</i>
+
+📍<b>Warning</b>: TypeScript support for withTheme is currently limited to <b>Material You (MD3)</b> theme only. 
+<i>We are planning to provide a better support of handling custom theme overrides in future releases.</i>
+
+### Simple built-in theme overrides
+
+You can provide a `theme` prop with a theme object with the same properties as the default theme:
+
+```js
+import * as React from 'react';
+import { MD3LightTheme, Provider as PaperProvider } from 'react-native-paper';
+import App from './src/App';
+
+const theme = {
+  ...MD3LightTheme, // or MD3DarkTheme
+  roundness: 2,
+  colors: {
+    ...MD3LightTheme.colors,
+    primary: '#3498db',
+    secondary: '#f1c40f',
+    tertiary: '#a1b2c3',
+  },
+};
+
+export default function Main() {
+  return (
+    <PaperProvider theme={theme}>
+      <App />
+    </PaperProvider>
+  );
+}
+```
+
+### Advanced theme overrides
+
+If you need to modify the built-in theme schema by adding a new property or changing its type, you need to follow these steps:
+
+1. Pass your theme overrides to the Provider component
+
+```ts
+import * as React from 'react';
+import { MD3LightTheme, Provider as PaperProvider } from 'react-native-paper';
+import App from './src/App';
+
+const theme = {
+  ...MD3LightTheme,
+
+  // Specify a custom property
+  custom: 'property',
+
+  // Specify a custom property in nested object
+  colors: {
+    ...MD3LightTheme.colors,
+    brandPrimary: '#fefefe',
+    brandSecondary: 'red',
+  },
+};
+
+export default function Main() {
+  return (
+    <PaperProvider theme={theme}>
+      <App />
+    </PaperProvider>
+  );
+}
+```
+
+2. Create a typed `useAppTheme()` hook in your project
+
+```ts
+import * as React from 'react';
+import {
+  MD3LightTheme,
+  Provider as PaperProvider,
+  useTheme,
+} from 'react-native-paper';
+import App from './src/App';
+
+const theme = {
+  ...MD3LightTheme,
+
+  // Specify a custom property
+  custom: 'property',
+
+  // Specify a custom property in nested object
+  colors: {
+    ...MD3LightTheme.colors,
+    brandPrimary: '#fefefe',
+    brandSecondary: 'red',
+  },
+};
+
+export type AppTheme = typeof theme;
+
+export const useAppTheme = () => useTheme<AppTheme>();
+
+export default function Main() {
+  return (
+    <PaperProvider theme={theme}>
+      <App />
+    </PaperProvider>
+  );
+}
+```
+
+3. Start using the `useAppTheme()` hook across your components in the whole app
+
+```ts
+import * as React from 'react';
+import { useAppTheme } from './App';
+
+export default function HomeScreen() {
+  const {
+    colors: { brandPrimary },
+  } = useAppTheme();
+
+  return <View style={{ backgroundColor: brandPrimary }}>...</View>;
+}
+```
+
+## Material Design 2
+
+Using Material Design 2 is <b>fully supported in React Native Paper v5.x</b>.
+
+### Simple setup
+
+In order to use the Material Design 2 theme you can just pass `{ version: 2 }` to the PaperProvider theme prop:
+
+```js
+import * as React from 'react';
+import { Provider as PaperProvider } from 'react-native-paper';
+import App from './src/App';
+
+export default function Main() {
+  return (
+    <PaperProvider theme={{ version: 2 }}>
+      <App />
+    </PaperProvider>
+  );
+}
+```
+
+Specifying `{ version: 2 }` tells React Native Paper to use the built in Material Design 2 theme, so you don't have to fully extend it on your own.
+
+### Advanced setup
+
+As with any theme, you can also specify your custom properties within the Material Design 2 theme:
+
+```js
+import * as React from 'react';
+import { MD2LightTheme, Provider as PaperProvider } from 'react-native-paper';
+import App from './src/App';
+
+export default function Main() {
+  const theme = {
+    ...MD2LightTheme,
+
+    // Specify a custom property
+    custom: 'property',
+
+    // Specify a custom nested property
+    colors: {
+      ...MD2LightTheme.colors,
+      primary: '#fefefe',
+    },
+  };
+
+  return (
+    <PaperProvider theme={theme}>
+      <App />
+    </PaperProvider>
+  );
+}
+```
+
+### Typescript
+
+Due to the amount of changes in the theme's schema shape it falls into the [Advanced theme overrides](#advanced-theme-overrides) category. The steps are identical as with any advanced theme, just make sure to extend the built-in `MD2LightTheme` or `MD2DarkTheme` instead of `MD3LightTheme` or `MD3DarkTheme`.
+
+The final example for Material Design 2 would look like this:
+
+```ts
+import * as React from 'react';
+import {
+  MD2LightTheme,
+  Provider as PaperProvider,
+  useTheme,
+} from 'react-native-paper';
+import App from './src/App';
+
+const theme = {
+  // Extend Material Design 2 theme
+
+  ...MD2LightTheme, // or MD2DarkTheme
+
+  // Specify a custom property
+  myOwnProperty: true,
+
+  // Specify a custom nested property
+  colors: {
+    ...MD2LightTheme.colors,
+    myOwnColor: '#BADA55',
+  },
+};
+
+export type AppTheme = typeof theme;
+
+export const useAppTheme = () => useTheme<AppTheme>();
+
+export default function Main() {
+  return (
+    <PaperProvider theme={theme}>
+      <App />
+    </PaperProvider>
+  );
+}
+
+// App.tsx
+
+export default function App() {
+  const { theme } = useAppTheme();
+
+  return <View style={{ backgroundColor: theme.colors.primary }} />;
+}
+```
+
+### Migrating to Material You
+
+If you are migrating from Material Design 2 (4.x and lower) to Material You (5.x), please refer to our [Migration Guide](https://callstack.github.io/react-native-paper/introducing-v5-with-material-you.html)
+
+## Applying a theme to a paper component
+
+If you want to change the theme for a certain component from the library, you can directly pass the `theme` prop to the component. The theme passed as the prop is merged with the theme from the `Provider`:
+
+```js
+import * as React from 'react';
+import { Button } from 'react-native-paper';
+
+export default function ButtonExample() {
+  return (
+    <Button raised theme={{ roundness: 3 }}>
+      Press me
+    </Button>
+  );
+}
+```
+
+## Customizing all instances of a component
+
+Sometimes you want to style a component in a different way everywhere, but don't want to change the properties in the theme, so that other components are not affected. For example, say you want to change the font for all your buttons, but don't want to change `theme.fonts.labelLarge` because it affects other components.
+
+We don't have an API to do this, because you can already do it with components:
+
+```js
+import * as React from 'react';
+import { Button } from 'react-native-paper';
+
+export default function FancyButton(props) {
+  return (
+    <Button
+      theme={{ typescale: { labelLarge: { letterSpacing: 1 } } }}
+      {...props}
+    />
+  );
+}
+```
+
+Now you can use your `FancyButton` component everywhere instead of using `Button` from Paper.
+
+## Dark Theme
+
+Since 3.0 we adapt dark theme to follow [Material design guidelines](https://material.io/design/color/dark-theme.html). <br/>
+In contrast to light theme, dark theme by default uses `surface` colour instead of `primary` on large components like `AppBar` or `BottomNavigation`.<br/>
+The dark theme adds a white overlay with opacity depending on elevation of surfaces. It uses it for the better accentuation of surface elevation. Using only shadow is highly imperceptible on dark surfaces.
+
+We are aware that users often use dark theme in their own ways and may not want to use the default dark theme features from the guidelines.<br/>
+That's why if you are using dark theme you can switch between two dark theme `mode`s:
+
+- `exact` where everything is like it was before. `Appbar` and `BottomNavigation` will still use primary colour by default.<br/>
+- `adaptive` where we follow [Material design guidelines](https://material.io/design/color/dark-theme.html), the surface will use white overlay with opacity to show elevation, `Appbar` and `BottomNavigation` will use surface colour as a background.
+
+If you don't use a custom theme, Paper will automatically change between the default theme and the default dark theme, depending on device settings.
+
+Otherwise, your custom theme will need to handle it manually, using React Native's [Appearance API](https://reactnative.dev/docs/appearance).
+
+## Gotchas
+
+The `Provider` exposes the theme to the components via [React's context API](https://reactjs.org/docs/context.html), which means that the component must be in the same tree as the `Provider`. Some React Native components will render a different tree such as a `Modal`, in which case the components inside the `Modal` won't be able to access the theme. The work around is to get the theme using the `withTheme` HOC and pass it down to the components as props, or expose it again with the exported `ThemeProvider` component.
+
+The `Modal` component from the library already handles this edge case, so you won't need to do anything.
