@@ -1,8 +1,0 @@
-{
-  "extends": "../tsconfig.json",
-  "compilerOptions": {
-    "paths": {
-      "react-native-paper": ["./src"]
-    }
-  }
-}
