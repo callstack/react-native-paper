@@ -6,6 +6,10 @@
   },
 
   "rules": {
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "import/no-unresolved": [
+      2,
+      {"ignore": ["^@docusaurus"]}
+    ]
   }
 }
