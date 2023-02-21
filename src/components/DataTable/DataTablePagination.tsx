@@ -12,8 +12,8 @@ import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../../core/theming';
 import Button from '../Button/Button';
+import Icon from '../Icon';
 import IconButton from '../IconButton/IconButton';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Menu from '../Menu/Menu';
 import Text from '../Typography/Text';
 
@@ -101,8 +101,8 @@ const PaginationControls = ({
       {showFastPaginationControls ? (
         <IconButton
           icon={({ size, color }) => (
-            <MaterialCommunityIcon
-              name="page-first"
+            <Icon
+              source="page-first"
               color={color}
               size={size}
               direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
@@ -117,8 +117,8 @@ const PaginationControls = ({
       ) : null}
       <IconButton
         icon={({ size, color }) => (
-          <MaterialCommunityIcon
-            name="chevron-left"
+          <Icon
+            source="chevron-left"
             color={color}
             size={size}
             direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
@@ -132,8 +132,8 @@ const PaginationControls = ({
       />
       <IconButton
         icon={({ size, color }) => (
-          <MaterialCommunityIcon
-            name="chevron-right"
+          <Icon
+            source="chevron-right"
             color={color}
             size={size}
             direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
@@ -148,8 +148,8 @@ const PaginationControls = ({
       {showFastPaginationControls ? (
         <IconButton
           icon={({ size, color }) => (
-            <MaterialCommunityIcon
-              name="page-last"
+            <Icon
+              source="page-last"
               color={color}
               size={size}
               direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}

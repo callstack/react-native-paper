@@ -12,7 +12,7 @@ import {
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import { ListAccordionGroupContext } from './ListAccordionGroup';
@@ -262,8 +262,8 @@ const ListAccordion = ({
                   isExpanded: isExpanded,
                 })
               ) : (
-                <MaterialCommunityIcon
-                  name={isExpanded ? 'chevron-up' : 'chevron-down'}
+                <Icon
+                  source={isExpanded ? 'chevron-up' : 'chevron-down'}
                   color={theme.isV3 ? descriptionColor : titleColor}
                   size={24}
                   direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}

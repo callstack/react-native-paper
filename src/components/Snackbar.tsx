@@ -16,8 +16,8 @@ import { useInternalTheme } from '../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../types';
 import Button from './Button/Button';
 import type { IconSource } from './Icon';
+import Icon from './Icon';
 import IconButton from './IconButton/IconButton';
-import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
 import Text from './Typography/Text';
 
@@ -321,8 +321,8 @@ const Snackbar = ({
                   icon ||
                   (({ size, color }) => {
                     return (
-                      <MaterialCommunityIcon
-                        name="close"
+                      <Icon
+                        source="close"
                         color={color}
                         size={size}
                         direction={
