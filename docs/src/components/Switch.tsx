@@ -7,6 +7,7 @@ interface SwitchProps {
 }
 
 const Switch = ({ value, onValueChange, color }: SwitchProps) => {
+  const background = value ? color : 'none';
   return (
     <>
       <input
@@ -17,7 +18,7 @@ const Switch = ({ value, onValueChange, color }: SwitchProps) => {
         type="checkbox"
       />
       <label
-        style={{ background: value ? color : 'none' }}
+        style={{ background }}
         className="react-switch-label"
         htmlFor={`react-switch-new`}
       >

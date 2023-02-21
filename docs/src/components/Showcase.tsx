@@ -161,6 +161,8 @@ const data: Data[] = [
   },
 ];
 
+const getOpacity = (item?: string) => (item ? 1 : 0.4);
+
 export default function Showcase() {
   return (
     <div className="showcase-gallery">
@@ -187,7 +189,7 @@ export default function Showcase() {
                     href={item.android}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ opacity: item.android ? 1 : 0.4 }}
+                    style={{ opacity: getOpacity(item.android) }}
                   >
                     <GooglePlayIcon color={tintColor} />
                   </a>
@@ -196,7 +198,7 @@ export default function Showcase() {
                     href={item.ios}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ opacity: item.ios ? 1 : 0.4 }}
+                    style={{ opacity: getOpacity(item.ios) }}
                   >
                     <AppStoreIcon color={tintColor} />
                   </a>
@@ -205,7 +207,7 @@ export default function Showcase() {
                     href={item.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ opacity: item.github ? 1 : 0.4 }}
+                    style={{ opacity: getOpacity(item.github) }}
                   >
                     <GithubIcon color={tintColor} />
                   </a>

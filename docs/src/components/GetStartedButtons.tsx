@@ -22,16 +22,23 @@ const styles = StyleSheet.create({
   },
 });
 
+const noTextDecoration = {
+  textDecoration: 'none',
+};
+
+// Needed for ripple effect when pressing `Button`, however navigation is handled by `Link`
+const noop = () => {};
+
 const GetStartedButton = () => {
   return (
     <View style={styles.container}>
-      <Link to="docs/guides/getting-started" style={{ textDecoration: 'none' }}>
-        <Button mode="elevated" style={styles.button}>
+      <Link to="docs/guides/getting-started" style={noTextDecoration}>
+        <Button mode="contained" style={styles.button} onPress={noop}>
           Get started
         </Button>
       </Link>
       <Button
-        mode="elevated"
+        mode="outlined"
         onPress={() =>
           window.open(
             'https://snack.expo.dev/@react-native-paper/react-native-paper-example_v5'
