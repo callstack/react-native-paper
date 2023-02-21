@@ -51,15 +51,15 @@ const GetStartedButton = () => {
   );
 };
 
-export default function WithProvider() {
+const WithProvider = () => {
   const isDarkTheme = useColorMode().colorMode === 'dark';
   return (
-    <BrowserOnly>
-      {() => (
-        <Provider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
-          <GetStartedButton />
-        </Provider>
-      )}
-    </BrowserOnly>
+    <Provider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
+      <GetStartedButton />
+    </Provider>
   );
+};
+
+export default function ClientSideGetStarted() {
+  return <BrowserOnly>{() => <WithProvider />}</BrowserOnly>;
 }

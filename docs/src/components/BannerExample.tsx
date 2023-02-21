@@ -139,15 +139,19 @@ const BannerExample = () => {
   );
 };
 
-export default function WithProvider() {
+const WithProvider = () => {
   const isDarkTheme = useColorMode().colorMode === 'dark';
   return (
+    <Provider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
+      <BannerExample />
+    </Provider>
+  );
+};
+
+export default function ClientSideBannerExample() {
+  return (
     <BrowserOnly fallback={<ProgressBar indeterminate />}>
-      {() => (
-        <Provider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
-          <BannerExample />
-        </Provider>
-      )}
+      {() => <WithProvider />}
     </BrowserOnly>
   );
 }
