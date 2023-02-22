@@ -34,11 +34,13 @@ export type Props = {
   icon?: IconSource;
 
   /**
+   * @supported Available in v5.x with theme version 3
    * Custom color for unchecked Text and Icon.
    */
   uncheckedColor?: string;
 
   /**
+   * @supported Available in v5.x with theme version 3
    * Custom color for checked Text and Icon. 
    */
   checkedColor?: string;
