@@ -151,7 +151,7 @@ const Shimmer = () => {
         borderWidth: 1,
         borderColor: 'rgba(125, 82, 96, 0.4)',
         borderStyle: 'solid',
-        borderRadius: 40,
+        borderRadius: 16,
         alignContent: 'center',
         justifyContent: 'center',
         padding: 30,
