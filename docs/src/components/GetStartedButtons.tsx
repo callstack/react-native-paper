@@ -51,15 +51,57 @@ const GetStartedButton = () => {
   );
 };
 
-export default function WithProvider() {
+const Shimmer = () => {
+  /* Docusaurus won't call StyleSheet.create() server-side */
+  /* eslint-disable react-native/no-inline-styles, react-native/no-color-literals */
+
+  return (
+    <View
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingBottom: 18,
+      }}
+    >
+      <View
+        style={{
+          width: 121,
+          marginRight: 16,
+          borderWidth: 1,
+          borderColor: 'rgba(125, 82, 96, 0.4)',
+          borderStyle: 'solid',
+          borderRadius: 40,
+          height: 40,
+        }}
+      />
+      <View
+        style={{
+          width: 132,
+          borderWidth: 1,
+          borderColor: 'rgba(125, 82, 96, 0.4)',
+          borderStyle: 'solid',
+          borderRadius: 40,
+          height: 40,
+        }}
+      />
+    </View>
+  );
+};
+
+const ThemedGetStarted = () => {
   const isDarkTheme = useColorMode().colorMode === 'dark';
   return (
-    <BrowserOnly>
-      {() => (
-        <Provider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
-          <GetStartedButton />
-        </Provider>
-      )}
+    <Provider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
+      <GetStartedButton />
+    </Provider>
+  );
+};
+
+export default function ClientSideGetStarted() {
+  return (
+    <BrowserOnly fallback={<Shimmer />}>
+      {() => <ThemedGetStarted />}
     </BrowserOnly>
   );
 }
