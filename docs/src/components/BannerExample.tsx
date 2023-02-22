@@ -139,7 +139,30 @@ const BannerExample = () => {
   );
 };
 
-const WithProvider = () => {
+const Shimmer = () => {
+  /* Docusaurus won't call StyleSheet.create() server-side */
+  /* eslint-disable react-native/no-inline-styles, react-native/no-color-literals */
+
+  return (
+    <View
+      style={{
+        display: 'flex',
+        minHeight: 500,
+        borderWidth: 1,
+        borderColor: 'rgba(125, 82, 96, 0.4)',
+        borderStyle: 'solid',
+        borderRadius: 40,
+        alignContent: 'center',
+        justifyContent: 'center',
+        padding: 30,
+        marginTop: 36,
+        marginBottom: 32,
+      }}
+    />
+  );
+};
+
+const ThemedBannerExample = () => {
   const isDarkTheme = useColorMode().colorMode === 'dark';
   return (
     <Provider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
@@ -150,8 +173,8 @@ const WithProvider = () => {
 
 export default function ClientSideBannerExample() {
   return (
-    <BrowserOnly fallback={<ProgressBar indeterminate />}>
-      {() => <WithProvider />}
+    <BrowserOnly fallback={<Shimmer />}>
+      {() => <ThemedBannerExample />}
     </BrowserOnly>
   );
 }
