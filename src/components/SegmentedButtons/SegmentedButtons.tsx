@@ -52,6 +52,8 @@ export type Props = {
    * - `icon`: icon to display for the item
    * - `disabled`: whether the button is disabled
    * - `accessibilityLabel`: acccessibility label for the button. This is read by the screen reader when the user taps the button.
+   * - `checkedColor`: custom color for checked Text and Icon
+   * - `uncheckedColor`: custom color for unchecked Text and Icon
    * - `onPress`: callback that is called when button is pressed
    * - `label`: label text of the button
    * - `showSelectedCheck`: show optional check icon to indicate selected state
@@ -63,6 +65,8 @@ export type Props = {
     icon?: IconSource;
     disabled?: boolean;
     accessibilityLabel?: string;
+    checkedColor?: string;
+    uncheckedColor?: string;
     onPress?: (event: GestureResponderEvent) => void;
     label?: string;
     showSelectedCheck?: boolean;

@@ -32,6 +32,16 @@ export type Props = {
    * Icon to display for the `SegmentedButtonItem`.
    */
   icon?: IconSource;
+
+  /**
+   * Custom color for unchecked Text and Icon.
+   */
+  uncheckedColor?: string;
+
+  /**
+   * Custom color for checked Text and Icon. 
+   */
+  checkedColor?: string;
   /**
    * Whether the button is disabled.
    */
@@ -81,6 +91,8 @@ const SegmentedButtonItem = ({
   disabled,
   style,
   showSelectedCheck,
+  checkedColor,
+  uncheckedColor,
   icon,
   testID,
   label,
@@ -116,6 +128,8 @@ const SegmentedButtonItem = ({
       checked,
       theme,
       disabled,
+      checkedColor,
+      uncheckedColor
     });
 
   const borderRadius = (isV3 ? 5 : 1) * roundness;

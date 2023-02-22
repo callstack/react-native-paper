@@ -58,6 +58,38 @@ it('renders checked segmented button with selected check', () => {
 });
 
 describe('getSegmentedButtonColors', () => {
+  it.each`
+    theme                     | disabled | checked  | checkedColor | uncheckedColor | expected
+    ${getTheme()}             | ${false} | ${true}  | ${undefined} | ${undefined}   | ${getTheme().colors.onSecondaryContainer}
+    ${getTheme()}             | ${false} | ${false} | ${undefined} | ${undefined}   | ${getTheme().colors.onSurface}
+    ${getTheme()}             | ${true}  | ${true}  | ${undefined} | ${undefined}   | ${getTheme().colors.onSurfaceDisabled}
+    ${getTheme()}             | ${true}  | ${false} | ${undefined} | ${undefined}   | ${getTheme().colors.onSurfaceDisabled}
+    ${getTheme()}             | ${false} | ${true}  | ${'a125f5'}  | ${undefined}   | ${'a125f5'}
+    ${getTheme()}             | ${false} | ${false} | ${undefined} | ${'000'}       | ${'000'}
+    ${getTheme()}             | ${false} | ${false} | ${'a125f5'}  | ${'000'}       | ${'000'}
+    ${getTheme()}             | ${false} | ${false} | ${'a125f5'}  | ${undefined}   | ${getTheme().colors.onSurface}
+    ${getTheme()}             | ${false} | ${true}  | ${undefined} | ${'000'}       | ${getTheme().colors.onSecondaryContainer}
+    ${getTheme(false, false)} | ${false} | ${false} | ${undefined} | ${undefined}   | ${getTheme(false, false).colors.primary}
+    ${getTheme(false, false)} | ${false} | ${true}  | ${undefined} | ${undefined}   | ${getTheme(false, false).colors.primary}
+    ${getTheme(false, false)} | ${true}  | ${false} | ${undefined} | ${undefined}   | ${getTheme(false, false).colors.disabled}
+    ${getTheme(false, false)} | ${true}  | ${true}  | ${undefined} | ${undefined}   | ${getTheme(false, false).colors.disabled}
+    ${getTheme(false, false)} | ${false} | ${false} | ${'a125f5'}  | ${undefined}   | ${getTheme(false, false).colors.primary}
+    ${getTheme(false, false)} | ${false} | ${true}  | ${undefined} | ${'000'}       | ${getTheme(false, false).colors.primary}
+  `(
+    'returns $expected when disabled: $disabled, checked: $checked, checkedColor is $checkedColor and uncheckedColor is $uncheckedColor  and isV3: $theme.isV3',
+    ({ theme, disabled, checked, checkedColor, uncheckedColor, expected }) => {
+      expect(
+        getSegmentedButtonColors({
+          theme,
+          disabled,
+          checked,
+          checkedColor,
+          uncheckedColor,
+        })
+      ).toMatchObject({ textColor: expected });
+    }
+  );
+
   it('should return correct background color when checked and theme version 3', () => {
     expect(
       getSegmentedButtonColors({

@@ -111,7 +111,7 @@ exports[`renders checked segmented button with selected check 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 25, 43, 1)",
                   "fontSize": 18,
                 },
                 Array [
@@ -163,7 +163,7 @@ exports[`renders checked segmented button with selected check 1`] = `
                   "textAlign": "center",
                 },
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 25, 43, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -403,7 +403,7 @@ exports[`renders disabled segmented button 1`] = `
                   "textAlign": "center",
                 },
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 25, 43, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -641,7 +641,7 @@ exports[`renders segmented button 1`] = `
                   "textAlign": "center",
                 },
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 25, 43, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",

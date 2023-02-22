@@ -6,4 +6,4 @@ export { default as SegmentedButtonOnlyIconsWithCheck } from './SegmentedButtonO
 export { default as SegmentedButtonMultiselect } from './SegmentedButtonMultiselect';
 export { default as SegmentedButtonMultiselectIcons } from './SegmentedButtonMultiselectIcons';
 export { default as SegmentedButtonDisabled } from './SegmentedButtonDisabled';
-export { default as SegmentedButtonCustomTheme } from './SegmentedButtonCustomTheme';
+export { default as SegmentButtonCustomColorCheck } from './SegmentedButtonCustomColorCheck';
