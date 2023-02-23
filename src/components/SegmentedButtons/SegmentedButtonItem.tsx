@@ -41,7 +41,7 @@ export type Props = {
 
   /**
    * @supported Available in v5.x with theme version 3
-   * Custom color for checked Text and Icon. 
+   * Custom color for checked Text and Icon.
    */
   checkedColor?: string;
   /**
@@ -131,7 +131,7 @@ const SegmentedButtonItem = ({
       theme,
       disabled,
       checkedColor,
-      uncheckedColor
+      uncheckedColor,
     });
 
   const borderRadius = (isV3 ? 5 : 1) * roundness;
@@ -206,11 +206,7 @@ const SegmentedButtonItem = ({
           ) : null}
           {showIcon ? (
             <Animated.View testID={`${testID}-icon`} style={iconStyle}>
-              <Icon
-                source={icon}
-                size={iconSize}
-                color={textColor}
-              />
+              <Icon source={icon} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
           <Text

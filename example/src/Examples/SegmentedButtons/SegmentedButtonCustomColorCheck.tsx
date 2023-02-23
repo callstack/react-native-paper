@@ -8,11 +8,11 @@ const themeMock = {
     onSurface: '#a1f5f5',
     secondaryContainer: '#a1f5f5',
     onSecondaryContainer: '#000000',
-  }
-}
+  },
+};
 
 const SegmentButtonCustomColorCheck = () => {
-  const [themeValue, setThemeValue ] = React.useState('');
+  const [themeValue, setThemeValue] = React.useState('');
   const [colorValue, setColorValue] = React.useState('');
 
   return (
@@ -46,7 +46,7 @@ const SegmentButtonCustomColorCheck = () => {
         style={styles.group}
       />
       <List.Subheader>Via Props</List.Subheader>
-       <SegmentedButtons
+      <SegmentedButtons
         value={colorValue}
         onValueChange={setColorValue}
         theme={themeMock}

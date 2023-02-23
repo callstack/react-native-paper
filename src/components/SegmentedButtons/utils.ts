@@ -141,7 +141,7 @@ const getSegmentedButtonTextColor = ({
       return checkedColor ?? theme.colors.onSecondaryContainer;
     }
     return uncheckedColor ?? theme.colors.onSurface;
-  } 
+  }
 
   if (disabled) {
     return theme.colors.disabled;
@@ -166,7 +166,13 @@ export const getSegmentedButtonColors = ({
     disabled,
     checked,
   });
-  const textColor = getSegmentedButtonTextColor({ theme, disabled, checked, checkedColor, uncheckedColor });
+  const textColor = getSegmentedButtonTextColor({
+    theme,
+    disabled,
+    checked,
+    checkedColor,
+    uncheckedColor,
+  });
   const borderWidth = getSegmentedButtonBorderWidth({ theme });
 
   return { backgroundColor, borderColor, textColor, borderWidth };
