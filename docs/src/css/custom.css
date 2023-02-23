@@ -1,0 +1,421 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #21005d;
+  --ifm-color-primary-dark: #1e0054;
+  --ifm-color-primary-darker: #1c004f;
+  --ifm-color-primary-darkest: #170041;
+  --ifm-color-primary-light: #240066;
+  --ifm-color-primary-lighter: #26006b;
+  --ifm-color-primary-lightest: #2b0079;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #cfbcff;
+  --ifm-color-primary-dark: #af90ff;
+  --ifm-color-primary-darker: #9f7aff;
+  --ifm-color-primary-darkest: #7037ff;
+  --ifm-color-primary-light: #efe8ff;
+  --ifm-color-primary-lighter: #fffeff;
+  --ifm-color-primary-lightest: #ffffff;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+.nav-link {
+  position: relative;
+}
+.nav-link::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: transparent;
+  z-index: -1;
+  transition: background-color var(--ifm-transition-fast);
+}
+.nav-link:hover::before,
+.nav-link:active::before,
+.nav-link:focus::before {
+  background-color: var(--ifm-color-emphasis-200);
+}
+.nav-link:active::before {
+  background-color: var(--ifm-menu-color-background-active);
+}
+
+.nav-link::after {
+  content: '';
+  display: flex;
+  height: 1.5rem;
+  width: 1.5rem;
+  background-repeat: no-repeat;
+}
+html[data-theme='dark'] .nav-link::after {
+  filter: invert(1);
+}
+.nav-discord-link::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-7 -15 85 85'%3E%3Cpath d='M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z'%3E%3C/path%3E%3C/svg%3E");
+}
+.nav-twitter-link::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z'%3E%3C/path%3E%3C/svg%3E");
+}
+.nav-github-link::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 26 26'%3E%3Cpath d='M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.screenshots {
+  display: flex;
+}
+
+.screenshots img,
+.screenshots figure {
+  max-width: 25%;
+}
+
+.screenshots figure>img {
+  max-width: 100%;
+}
+
+.gallery {
+  display: flex;
+  flex-direction: row;
+}
+
+.gallery img {
+  padding: 8px;
+  width: 33%;
+}
+
+
+html[data-theme='dark'] .gallery-dark,
+html[data-theme='light'] .gallery-light {
+  display: block;
+}
+
+html[data-theme='dark'] .gallery-light,
+html[data-theme='light'] .gallery-dark {
+  display: none;
+}
+
+.icons-list-container {
+  margin: 16px 0;
+}
+
+.icons-list-icon-container {
+  appearance: none;
+  border: 0;
+  background: 0;
+  outline: 0;
+  display: flex;
+  flex-direction: column;
+  width: 124px;
+  height: 124px;
+  align-items: center;
+  text-align: center;
+
+  @media (max-width: 680px) {
+    width: 96px;
+  }
+}
+
+.icons-list-icon {
+  display: block;
+  margin: 16px;
+  font-family: 'MaterialCommunityIcons';
+  font-size: 48px;
+  color: var(--theme-text-color);
+}
+
+.icons-list-icon-name {
+  display: block;
+  font-size: 12px;
+  color: var(--theme-text-color);
+}
+
+.icons-list-results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 24px 0;
+
+  &:last-child {
+    justify-content: flex-start;
+  }
+}
+
+.icons-list-searchbar {
+  box-sizing: border-box;
+  appearance: none;
+  border: 0;
+  display: block;
+  width: 100%;
+  padding: 12px;
+  font-size: 1em;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+  outline: 0;
+
+  &:focus,
+  &:hover {
+    background-color: #e7e7e7;
+  }
+
+  *:focus-visible {
+    outline: auto;
+  }
+}
+
+@font-face {
+  font-family: 'MaterialCommunityIcons';
+  src: url('../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf') format('truetype');
+}
+
+.badge {
+  background-color: black;
+  color: white;
+  font-size: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 15px;
+  padding: 6px;
+}
+
+.badge code {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+[data-theme='dark'] .badge {
+  color: white
+}
+
+.badge-supported {
+  color: rgba(98, 0, 238, 1);
+  background-color: rgba(98, 0, 238, 0.2);
+  border-color: rgba(98, 0, 238, 1);
+}
+
+.badge-deprecated {
+  color: rgba(176, 0, 32, 1);
+  background-color: rgba(176, 0, 32, 0.2);
+  border-color: rgba(176, 0, 32, 1);
+
+}
+
+.badge-renamed {
+  color: rgba(0, 100, 0, 1);
+  background-color: rgba(0, 100, 0, 0.2);
+  border-color: rgba(0, 100, 0, 1);
+}
+
+.showcase-gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+@media (max-width: 680px) {
+  .showcase-gallery {
+    justify-content: center;
+  }
+}
+
+.showcase-image-container {
+  overflow: hidden;
+  margin: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+@media (min-width: 420px) {
+  .showcase-image-container {
+    height: 528px;
+  }
+
+  .showcase-image-container:hover .showcase-info,
+  .showcase-image-container:focus .showcase-info {
+    transform: translateY(-48px);
+  }
+}
+
+
+.showcase-image {
+  display: block;
+  max-height: 480px;
+  width: auto;
+}
+
+@media (min-width: 420px) {
+  .showcase-image {
+    height: 480px;
+    width: 270px;
+  }
+}
+
+.showcase-info {
+  height: 96px;
+  padding: 12px;
+  transform: translateY(0);
+  transition: 150ms;
+}
+
+.showcase-app-name {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 12px;
+
+  width: 246px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.showcase-badge-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 16px;
+  padding-left: 3px;
+}
+
+.showcase-separation {
+  margin: 0 10px;
+}
+
+/* Switch.tsx */
+
+.react-switch-checkbox {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.react-switch-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 45px;
+  height: 25px;
+  background: grey;
+  border-radius: 100px;
+  position: relative;
+  transition: background-color .2s;
+}
+
+.react-switch-label .react-switch-button {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  transition: 0.2s;
+  background: #fff;
+  box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+}
+
+.react-switch-checkbox:checked+.react-switch-label .react-switch-button {
+  left: calc(100% - 2px);
+  transform: translateX(-100%);
+}
+
+.react-switch-label:active .react-switch-button {
+  width: 20px;
+}
+
+/* DynamicColorTheme.tsx */
+
+.gridColors {
+  display: grid;
+  margin-top: 20px;
+  grid-template-columns: 25% 25% 25% 25%;
+  height: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.gridParent {
+  display: grid;
+  grid-template-columns: 50% 40%;
+  column-gap: 15px;
+}
+
+.searchBar {
+  box-sizing: border-box;
+  appearance: none;
+  border: 0;
+  display: block;
+  width: 20%;
+  padding: 12px;
+  font-size: 1em;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  outline: 0;
+}
+
+@media only screen and (max-width: 1000px) {
+  .gridColors {
+    grid-template-columns: 50% 50%;
+  }
+
+  .gridParent {
+    grid-template-columns: 100%;
+  }
+
+  .searchBar {
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1200px) {
+  .gridColors {
+    grid-template-columns: 50% 50%;
+  }
+
+  .gridParent {
+    grid-template-columns: 60% 40%;
+  }
+
+  .searchBar {
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+  .gridColors {
+    grid-template-columns: 33.3% 33.3% 33.3%;
+  }
+
+  .gridParent {
+    grid-template-columns: 60% 40%;
+  }
+
+  .searchBar {
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 1400px) and (max-width: 1600px) {
+  .gridColors {
+    grid-template-columns: 25% 25% 25% 25%;
+  }
+
+  .gridParent {
+    grid-template-columns: 60% 40%;
+  }
+
+  .searchBar {
+    width: 40%;
+  }
+}

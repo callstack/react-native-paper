@@ -3,7 +3,7 @@ version: 2.1
 executors:
   default:
     docker:
-      - image: circleci/node:16
+      - image: cimg/node:16.18.0
     working_directory: ~/react-native-paper
 
 commands:
@@ -104,10 +104,11 @@ jobs:
       - run:
           name: Build docs
           command: |
+            export DOCUSAURUS_BASE_URL="/output/job/$CIRCLE_WORKFLOW_JOB_ID/artifacts/$CIRCLE_NODE_INDEX/docs/"
             cd docs && yarn build && cd ..
             bash .circleci/comment-artifacts.sh
       - store_artifacts:
-          path: docs/dist
+          path: docs/build
           destination: docs
 
   deploy-docs:
@@ -148,4 +149,5 @@ workflows:
       - deploy-docs:
           filters:
             branches:
-              only: main
+              only:
+                - main

@@ -9,7 +9,14 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SOURCE_BRANCH="main"
 TARGET_BRANCH="gh-pages"
 
-cd $DIR/../docs
+git checkout $SOURCE_BRANCH
+
+cd $DIR/..
+
+# Install React Native Paper dependencies for examples
+yarn
+
+cd docs
 
 # Save some useful information
 REPO=`git config remote.origin.url`
@@ -25,34 +32,19 @@ cd ..
 
 # Clean existing dist/ contents
 rm -rf dist/**/* || :
-rm -f dist/*.{html,css,js,json,map} || :
+rm -f dist/*.{html,css,js,json,map,xml} || :
 rmdir dist/* || :
 
 # Run our build script.
 yarn
 yarn build
 
-# Build the docs for 1.0
-git checkout 1.0
-yarn
-yarn build
+# Move the built docs to cloned `gh-pages` directory
+cp -R build/. dist
 
-# Build the docs for 2.0
-git checkout 2.0
-yarn
-yarn build
+rm -rf build
 
-# Build the docs for 3.0
-git checkout 3.0
-yarn
-yarn build
-
-# Build the docs for 4.0
-git checkout 4.0
-yarn
-yarn build
-
-# Push the built docs
+# Change directory to the one using `gh-pages` branch
 cd dist
 
 # Configure git.
