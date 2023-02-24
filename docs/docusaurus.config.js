@@ -267,6 +267,7 @@ const config = {
           },
         ],
         title,
+        hideOnScroll: true,
       },
       prism: {
         theme: lightCodeTheme,
