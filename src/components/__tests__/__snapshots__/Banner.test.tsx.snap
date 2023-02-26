@@ -47,6 +47,7 @@ exports[`render visible banner, with custom theme 1`] = `
         Object {
           "backgroundColor": "rgb(247, 243, 249)",
           "flex": undefined,
+          "opacity": 1,
         }
       }
       testID="surface"
@@ -338,6 +339,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
         Object {
           "backgroundColor": "rgb(247, 243, 249)",
           "flex": undefined,
+          "opacity": 0,
         }
       }
       testID="surface"
@@ -486,6 +488,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
         Object {
           "backgroundColor": "rgb(247, 243, 249)",
           "flex": undefined,
+          "opacity": 1,
         }
       }
       testID="surface"
@@ -799,6 +802,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
         Object {
           "backgroundColor": "rgb(247, 243, 249)",
           "flex": undefined,
+          "opacity": 1,
         }
       }
       testID="surface"
@@ -1244,6 +1248,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
         Object {
           "backgroundColor": "rgb(247, 243, 249)",
           "flex": undefined,
+          "opacity": 1,
         }
       }
       testID="surface"
@@ -1402,6 +1407,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
         Object {
           "backgroundColor": "rgb(247, 243, 249)",
           "flex": undefined,
+          "opacity": 1,
         }
       }
       testID="surface"
