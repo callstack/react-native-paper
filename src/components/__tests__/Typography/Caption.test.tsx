@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import renderer from 'react-test-renderer';
 
 import { red500 } from '../../../styles/themes/v2/colors';
-import Caption from '../../Typography/v2/Caption.tsx';
+import Caption from '../../Typography/v2/Caption';
 
 const style = StyleSheet.create({
   caption: {

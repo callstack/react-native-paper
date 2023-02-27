@@ -3,7 +3,7 @@ import { Animated } from 'react-native';
 
 import { render, waitFor } from '@testing-library/react-native';
 
-import ProgressBar from '../ProgressBar.tsx';
+import ProgressBar, { Props } from '../ProgressBar';
 
 const layoutEvent = {
   nativeEvent: {
@@ -15,11 +15,7 @@ const layoutEvent = {
 
 const a11yRole = 'progressbar';
 
-class ClassProgressBar extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+class ClassProgressBar extends React.Component<Props> {
   render() {
     return <ProgressBar {...this.props} />;
   }

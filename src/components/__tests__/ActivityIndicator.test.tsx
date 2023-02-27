@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import renderer from 'react-test-renderer';
 
-import ActivityIndicator from '../ActivityIndicator.tsx';
+import ActivityIndicator from '../ActivityIndicator';
 
 it('renders indicator', () => {
   const tree = renderer.create(<ActivityIndicator animating />).toJSON();

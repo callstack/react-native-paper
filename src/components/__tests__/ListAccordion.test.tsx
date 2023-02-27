@@ -6,9 +6,9 @@ import renderer from 'react-test-renderer';
 
 import { getTheme } from '../../core/theming';
 import { red500 } from '../../styles/themes/v2/colors';
-import ListAccordion from '../List/ListAccordion.tsx';
-import ListIcon from '../List/ListIcon.tsx';
-import ListItem from '../List/ListItem.tsx';
+import ListAccordion from '../List/ListAccordion';
+import ListIcon from '../List/ListIcon';
+import ListItem from '../List/ListItem';
 import { getAccordionColors } from '../List/utils';
 
 const styles = StyleSheet.create({

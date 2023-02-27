@@ -80,7 +80,12 @@ it('should have `accessibilityState={ checked: false }` when `status="indetermin
 
 it('disables the row when the prop disabled is true', () => {
   const { getByLabelText } = render(
-    <Checkbox.Item accessibilityLabel="some checkbox" disabled />
+    <Checkbox.Item
+      status="unchecked"
+      label=""
+      accessibilityLabel="some checkbox"
+      disabled
+    />
   );
 
   const touchable = getByLabelText('some checkbox');
