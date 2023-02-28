@@ -5,7 +5,7 @@ import { fireEvent, render } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
 
 import { red500 } from '../../styles/themes/v2/colors';
-import * as Avatar from '../Avatar/Avatar.tsx';
+import * as Avatar from '../Avatar/Avatar';
 
 const styles = StyleSheet.create({
   bgColor: {
@@ -57,7 +57,7 @@ it('renders avatar with icon and custom background color', () => {
 
 it('renders avatar with image', () => {
   const tree = renderer
-    .create(<Avatar.Image source={{ src: 'avatar.png' }} />)
+    .create(<Avatar.Image source={{ uri: 'avatar.png' }} />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -70,6 +70,7 @@ describe('AvatarImage listener', () => {
     const { getByTestId } = render(
       <Avatar.Image
         testID={'avatar-image'}
+        source={{ uri: 'avatar.png' }}
         onError={onListenerMock}
         onLayout={onListenerMock}
         onLoad={onListenerMock}
@@ -86,6 +87,7 @@ describe('AvatarImage listener', () => {
     const { getByTestId } = render(
       <Avatar.Image
         testID={'avatar-image'}
+        source={{ uri: 'avatar.png' }}
         onError={onListenerMock}
         onLayout={onListenerMock}
         onLoad={onListenerMock}
@@ -102,6 +104,7 @@ describe('AvatarImage listener', () => {
     const { getByTestId } = render(
       <Avatar.Image
         testID={'avatar-image'}
+        source={{ uri: 'avatar.png' }}
         onError={onListenerMock}
         onLayout={onListenerMock}
         onLoad={onListenerMock}
@@ -118,6 +121,7 @@ describe('AvatarImage listener', () => {
     const { getByTestId } = render(
       <Avatar.Image
         testID={'avatar-image'}
+        source={{ uri: 'avatar.png' }}
         onError={onListenerMock}
         onLayout={onListenerMock}
         onLoad={onListenerMock}
@@ -134,6 +138,7 @@ describe('AvatarImage listener', () => {
     const { getByTestId } = render(
       <Avatar.Image
         testID={'avatar-image'}
+        source={{ uri: 'avatar.png' }}
         onError={onListenerMock}
         onLayout={onListenerMock}
         onLoad={onListenerMock}
@@ -150,6 +155,7 @@ describe('AvatarImage listener', () => {
     const { getByTestId } = render(
       <Avatar.Image
         testID={'avatar-image'}
+        source={{ uri: 'avatar.png' }}
         onError={onListenerMock}
         onLayout={onListenerMock}
         onLoad={onListenerMock}

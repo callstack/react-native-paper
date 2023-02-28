@@ -12,6 +12,7 @@ describe('getAndroidSelectionControlColor - ripple color', () => {
       getAndroidSelectionControlColor({
         theme: getTheme(),
         disabled: true,
+        checked: false,
       })
     ).toMatchObject({
       rippleColor: color(getTheme().colors.onSurface)
@@ -26,6 +27,7 @@ describe('getAndroidSelectionControlColor - ripple color', () => {
       getAndroidSelectionControlColor({
         theme: getTheme(false, false),
         disabled: true,
+        checked: false,
       })
     ).toMatchObject({
       rippleColor: color(getTheme(false, false).colors.text)
@@ -40,6 +42,7 @@ describe('getAndroidSelectionControlColor - ripple color', () => {
       getAndroidSelectionControlColor({
         theme: getTheme(),
         customColor: 'purple',
+        checked: false,
       })
     ).toMatchObject({
       rippleColor: color('purple').fade(0.32).rgb().string(),
@@ -50,6 +53,7 @@ describe('getAndroidSelectionControlColor - ripple color', () => {
     expect(
       getAndroidSelectionControlColor({
         theme: getTheme(),
+        checked: false,
       })
     ).toMatchObject({
       rippleColor: color(getTheme().colors.primary).fade(0.32).rgb().string(),
@@ -60,6 +64,7 @@ describe('getAndroidSelectionControlColor - ripple color', () => {
     expect(
       getAndroidSelectionControlColor({
         theme: getTheme(false, false),
+        checked: false,
       })
     ).toMatchObject({
       rippleColor: color(getTheme(false, false).colors.accent)
@@ -76,6 +81,7 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
       getAndroidSelectionControlColor({
         theme: getTheme(),
         disabled: true,
+        checked: false,
       })
     ).toMatchObject({
       selectionControlColor: getTheme().colors.onSurfaceDisabled,
@@ -87,6 +93,7 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
       getAndroidSelectionControlColor({
         theme: getTheme(false, false),
         disabled: true,
+        checked: false,
       })
     ).toMatchObject({
       selectionControlColor: getTheme(false, false).colors.text,
@@ -270,7 +277,6 @@ describe('getSelectionControlIOSColor - checked color', () => {
     expect(
       getSelectionControlIOSColor({
         theme: getTheme(),
-        checked: true,
         customColor: 'purple',
       })
     ).toMatchObject({
@@ -282,7 +288,6 @@ describe('getSelectionControlIOSColor - checked color', () => {
     expect(
       getSelectionControlIOSColor({
         theme: getTheme(),
-        checked: true,
       })
     ).toMatchObject({
       checkedColor: getTheme().colors.primary,
@@ -293,7 +298,6 @@ describe('getSelectionControlIOSColor - checked color', () => {
     expect(
       getSelectionControlIOSColor({
         theme: getTheme(false, false),
-        checked: true,
       })
     ).toMatchObject({
       checkedColor: getTheme(false, false).colors.accent,

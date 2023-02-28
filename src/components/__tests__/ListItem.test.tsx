@@ -6,8 +6,8 @@ import renderer from 'react-test-renderer';
 
 import { red500 } from '../../styles/themes/v2/colors';
 import Chip from '../Chip/Chip';
-import ListIcon from '../List/ListIcon.tsx';
-import ListItem from '../List/ListItem.tsx';
+import ListIcon from '../List/ListIcon';
+import ListItem from '../List/ListItem';
 
 const styles = StyleSheet.create({
   title: {

@@ -132,7 +132,7 @@ exports[`renders avatar with image 1`] = `
     accessibilityIgnoresInvertColors={true}
     source={
       Object {
-        "src": "avatar.png",
+        "uri": "avatar.png",
       }
     }
     style={

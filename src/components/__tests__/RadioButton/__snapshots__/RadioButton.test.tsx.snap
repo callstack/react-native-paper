@@ -253,7 +253,7 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
   accessibilityRole="radio"
   accessibilityState={
     Object {
-      "checked": false,
+      "checked": true,
       "disabled": false,
     }
   }
@@ -285,7 +285,7 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
   <View
     style={
       Object {
-        "opacity": 0,
+        "opacity": 1,
       }
     }
   >

@@ -12,7 +12,7 @@ describe('RadioButton', () => {
         const RN = jest.requireActual('react-native');
 
         RN.Platform = () => ({
-          select: (objs) => objs.default,
+          select: (objs: { default: object }) => objs.default,
         });
 
         return RN;
@@ -32,7 +32,7 @@ describe('RadioButton', () => {
         const RN = jest.requireActual('react-native');
 
         RN.Platform = () => ({
-          select: (objs) => objs.ios,
+          select: (objs: { ios: object }) => objs.ios,
         });
 
         return RN;
@@ -50,7 +50,9 @@ describe('RadioButton', () => {
     it('renders properly', () => {
       const tree = renderer
         .create(
-          <RadioButtonContext.Provider value="first" onValueChange={() => {}}>
+          <RadioButtonContext.Provider
+            value={{ value: 'first', onValueChange: () => {} }}
+          >
             <RadioButton value="first" />
           </RadioButtonContext.Provider>
         )

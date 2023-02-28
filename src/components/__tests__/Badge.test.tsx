@@ -3,7 +3,7 @@ import * as React from 'react';
 import renderer from 'react-test-renderer';
 
 import { red500 } from '../../styles/themes/v2/colors';
-import Badge from '../Badge.tsx';
+import Badge from '../Badge';
 
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native');
