@@ -349,3 +349,23 @@ Array [
   </Text>,
 ]
 `;
+
+exports[`renders v3 Text component with custom variant correctly 1`] = `
+Array [
+  Object {
+    "color": "rgba(28, 27, 31, 1)",
+    "fontFamily": "Montserrat-Regular",
+    "fontSize": 41,
+    "fontWeight": "400",
+    "letterSpacing": 0.51,
+    "lineHeight": 54.1,
+  },
+  Object {
+    "textAlign": "left",
+  },
+  Object {
+    "writingDirection": "ltr",
+  },
+  undefined,
+]
+`;
