@@ -19,6 +19,14 @@
 [![Sponsored by Callstack][callstack-badge]][callstack]
 
  <p align="center"><i>React Native Paper is the cross-platform UI kit library containing a collection of customizable and production-ready components, which by default are following and respecting the Google’s Material Design guidelines.</i></p>
+ 
+## Getting Started
+
+Refer to the [getting started guide](https://callstack.github.io/react-native-paper/docs/guides/getting-started) for instructions.
+
+## Documentation
+
+Check the components and their usage in our [documentation](https://callstack.github.io/react-native-paper).
 
 ## Features
 
@@ -31,14 +39,6 @@
 🧑‍💻 Run the [example app](https://snack.expo.dev/@react-native-paper/react-native-paper-example_v5) with [Expo](https://expo.dev/) to see it in action. The source code for the examples are under the [/example](/example) folder.
 
 📲 You can also try out components in our demo apps available in the both stores [Android](https://play.google.com/store/apps/details?id=com.callstack.reactnativepaperexample&hl=pl&gl=US) and [ iOS](https://apps.apple.com/app/react-native-paper/id1548934513).
-
-## Getting Started
-
-Refer to the [getting started guide](https://callstack.github.io/react-native-paper/getting-started.html) for instructions.
-
-## Documentation
-
-Check the components and their usage in our [documentation](https://callstack.github.io/react-native-paper/index.html).
 
 ## Contributing
 
