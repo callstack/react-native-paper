@@ -181,7 +181,6 @@ exports[`renders list section with custom title style 1`] = `
     style={
       Array [
         Object {
-          "color": "rgba(28, 27, 31, 1)",
           "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "400",
@@ -192,6 +191,7 @@ exports[`renders list section with custom title style 1`] = `
           "textAlign": "left",
         },
         Object {
+          "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
         Array [
@@ -682,7 +682,6 @@ exports[`renders list section with subheader 1`] = `
     style={
       Array [
         Object {
-          "color": "rgba(28, 27, 31, 1)",
           "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "400",
@@ -693,6 +692,7 @@ exports[`renders list section with subheader 1`] = `
           "textAlign": "left",
         },
         Object {
+          "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
         Array [

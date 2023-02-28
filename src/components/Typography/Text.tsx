@@ -109,12 +109,9 @@ const Text = (
       <NativeText
         ref={root}
         style={[
-          {
-            ...font,
-            color: theme.colors.onSurface,
-          },
+          font,
           styles.text,
-          { writingDirection },
+          { writingDirection, color: theme.colors.onSurface },
           style,
         ]}
         {...rest}

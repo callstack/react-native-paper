@@ -116,7 +116,6 @@ exports[`renders DrawerItem with icon 1`] = `
           style={
             Array [
               Object {
-                "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "500",
@@ -127,6 +126,7 @@ exports[`renders DrawerItem with icon 1`] = `
                 "textAlign": "left",
               },
               Object {
+                "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
               Array [
@@ -270,7 +270,6 @@ exports[`renders active DrawerItem 1`] = `
           style={
             Array [
               Object {
-                "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "500",
@@ -281,6 +280,7 @@ exports[`renders active DrawerItem 1`] = `
                 "textAlign": "left",
               },
               Object {
+                "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
               Array [
@@ -388,7 +388,6 @@ exports[`renders basic DrawerItem 1`] = `
           style={
             Array [
               Object {
-                "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "500",
@@ -399,6 +398,7 @@ exports[`renders basic DrawerItem 1`] = `
                 "textAlign": "left",
               },
               Object {
+                "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
               Array [

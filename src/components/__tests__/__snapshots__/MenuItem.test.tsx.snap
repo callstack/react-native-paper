@@ -121,7 +121,6 @@ Array [
           style={
             Array [
               Object {
-                "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontSize": 16,
                 "fontWeight": "400",
@@ -132,6 +131,7 @@ Array [
                 "textAlign": "left",
               },
               Object {
+                "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
               Array [
@@ -273,7 +273,6 @@ Array [
           style={
             Array [
               Object {
-                "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontSize": 16,
                 "fontWeight": "400",
@@ -284,6 +283,7 @@ Array [
                 "textAlign": "left",
               },
               Object {
+                "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
               Array [
@@ -425,7 +425,6 @@ Array [
           style={
             Array [
               Object {
-                "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontSize": 16,
                 "fontWeight": "400",
@@ -436,6 +435,7 @@ Array [
                 "textAlign": "left",
               },
               Object {
+                "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
               Array [
@@ -577,7 +577,6 @@ Array [
           style={
             Array [
               Object {
-                "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontSize": 16,
                 "fontWeight": "400",
@@ -588,6 +587,7 @@ Array [
                 "textAlign": "left",
               },
               Object {
+                "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
               Array [
@@ -681,7 +681,6 @@ Array [
           style={
             Array [
               Object {
-                "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontSize": 16,
                 "fontWeight": "400",
@@ -692,6 +691,7 @@ Array [
                 "textAlign": "left",
               },
               Object {
+                "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
               Array [

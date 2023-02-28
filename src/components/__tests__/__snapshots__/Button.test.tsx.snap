@@ -107,7 +107,6 @@ exports[`renders button with an accessibility hint 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -118,6 +117,7 @@ exports[`renders button with an accessibility hint 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -262,7 +262,6 @@ exports[`renders button with an accessibility label 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -273,6 +272,7 @@ exports[`renders button with an accessibility label 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -416,7 +416,6 @@ exports[`renders button with button color 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -427,6 +426,7 @@ exports[`renders button with button color 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -570,7 +570,6 @@ exports[`renders button with color 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -581,6 +580,7 @@ exports[`renders button with color 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -724,7 +724,6 @@ exports[`renders button with custom testID 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -735,6 +734,7 @@ exports[`renders button with custom testID 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -934,7 +934,6 @@ exports[`renders button with icon 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -945,6 +944,7 @@ exports[`renders button with icon 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -1146,7 +1146,6 @@ exports[`renders button with icon in reverse order 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -1157,6 +1156,7 @@ exports[`renders button with icon in reverse order 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -1300,7 +1300,6 @@ exports[`renders contained contained with mode 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -1311,6 +1310,7 @@ exports[`renders contained contained with mode 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -1455,7 +1455,6 @@ exports[`renders disabled button 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -1466,6 +1465,7 @@ exports[`renders disabled button 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -1817,7 +1817,6 @@ exports[`renders loading button 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -1828,6 +1827,7 @@ exports[`renders loading button 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -1971,7 +1971,6 @@ exports[`renders outlined button with mode 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -1982,6 +1981,7 @@ exports[`renders outlined button with mode 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -2126,7 +2126,6 @@ exports[`renders text button by default 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -2137,6 +2136,7 @@ exports[`renders text button by default 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -2280,7 +2280,6 @@ exports[`renders text button with mode 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -2291,6 +2290,7 @@ exports[`renders text button with mode 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
