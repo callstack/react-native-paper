@@ -5,9 +5,9 @@ import { List, SegmentedButtons } from 'react-native-paper';
 
 const themeMock = {
   colors: {
-    onSurface: '#a1f5f5',
-    secondaryContainer: '#a1f5f5',
-    onSecondaryContainer: '#000000',
+    onSurface: '#3700B3',
+    secondaryContainer: '#3700B3',
+    onSecondaryContainer: '#FFFFFF',
   },
 };
 
@@ -55,14 +55,14 @@ const SegmentButtonCustomColorCheck = () => {
             value: 'walk',
             icon: 'walk',
             label: 'Walking',
-            checkedColor: '#a125f5',
+            checkedColor: '#F9AA33',
             style: styles.button,
           },
           {
             value: 'train',
             icon: 'train',
             showSelectedCheck: true,
-            checkedColor: '#a125f5',
+            checkedColor: '#F9AA33',
             uncheckedColor: '#000000',
             label: 'Transit',
             style: styles.button,
@@ -70,7 +70,7 @@ const SegmentButtonCustomColorCheck = () => {
           {
             value: 'drive',
             icon: 'car',
-            checkedColor: '#a125f5',
+            checkedColor: '#F9AA33',
             label: 'Driving',
             style: styles.button,
           },
