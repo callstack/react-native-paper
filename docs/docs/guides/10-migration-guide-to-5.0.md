@@ -637,7 +637,7 @@ The update wouldn't happen without a group of great React Native experts I'm hap
 From this place I would like to thank:
 - [Daniel Szczepanik](https://github.com/Drakeoon) for his commitment, effort and collaborative work on adjusting components,
 - [Olimpia Zurek](https://github.com/OlimpiaZurek) for her contribution and help,
-- [Aleksandra Desmurs-Linczewska](https://github.com/p-syche), [Jan Jaworek](https://github.com/jaworek) and [Kewin Wereszczyński](https://github.com/kwereszczynski) for checking and testing changes as well as providing valuable feedback,
+- [Aleksandra Desmurs-Linczewska](https://github.com/p-syche), [Jan Jaworski](https://github.com/jaworek) and [Kewin Wereszczyński](https://github.com/kwereszczynski) for checking and testing changes as well as providing valuable feedback,
 - [Bruno Castro](https://github.com/brunohkbx) for creating a long-awaited `Tooltip` component,
 - [Muhammad Hur Ali](https://github.com/hurali97) for various bug fixes and `List` subcomponents adjustments,
 
