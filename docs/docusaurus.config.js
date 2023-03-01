@@ -58,7 +58,6 @@ const config = {
         libsRootDir: path.join(__dirname, '..', 'src', 'components'),
         pages: {
           ActivityIndicator: 'ActivityIndicator',
-          AnimatedFAB: 'FAB/AnimatedFAB',
           Appbar: {
             Appbar: 'Appbar/Appbar',
             AppbarAction: 'Appbar/AppbarAction',
@@ -73,8 +72,12 @@ const config = {
           },
           Badge: 'Badge',
           Banner: 'Banner',
-          BottomNavigation: 'BottomNavigation/BottomNavigation',
-          Button: 'Button/Button',
+          BottomNavigation: {
+            BottomNavigation: 'BottomNavigation/BottomNavigation',
+          },
+          Button: {
+            Button: 'Button/Button',
+          },
           Card: {
             Card: 'Card/Card',
             CardActions: 'Card/CardActions',
@@ -88,7 +91,9 @@ const config = {
             CheckboxIOS: 'Checkbox/CheckboxIOS',
             CheckboxItem: 'Checkbox/CheckboxItem',
           },
-          Chip: 'Chip/Chip',
+          Chip: {
+            Chip: 'Chip/Chip',
+          },
           DataTable: {
             DataTable: 'DataTable/DataTable',
             DataTableCell: 'DataTable/DataTableCell',
@@ -113,10 +118,13 @@ const config = {
           },
           FAB: {
             FAB: 'FAB/FAB',
+            AnimatedFAB: 'FAB/AnimatedFAB',
             FABGroup: 'FAB/FABGroup',
           },
           HelperText: 'HelperText',
-          IconButton: 'IconButton/IconButton',
+          IconButton: {
+            IconButton: 'IconButton/IconButton',
+          },
           List: {
             ListAccordion: 'List/ListAccordion',
             ListAccordionGroup: 'List/ListAccordionGroup',
@@ -143,10 +151,14 @@ const config = {
             RadioButtonItem: 'RadioButton/RadioButtonItem',
           },
           Searchbar: 'Searchbar',
-          SegmentedButtons: 'SegmentedButtons/SegmentedButtons',
+          SegmentedButtons: {
+            SegmentedButtons: 'SegmentedButtons/SegmentedButtons',
+          },
           Snackbar: 'Snackbar',
           Surface: 'Surface',
-          Switch: 'Switch/Switch',
+          Switch: {
+            Switch: 'Switch/Switch',
+          },
           TextInput: {
             TextInput: 'TextInput/TextInput',
             TextInputAffix: 'TextInput/Adornment/TextInputAffix',
@@ -157,8 +169,12 @@ const config = {
             ToggleButtonGroup: 'ToggleButton/ToggleButtonGroup',
             ToggleButtonRow: 'ToggleButton/ToggleButtonRow',
           },
-          Tooltip: 'Tooltip/Tooltip',
-          TouchableRipple: 'TouchableRipple/TouchableRipple',
+          Tooltip: {
+            Tooltip: 'Tooltip/Tooltip',
+          },
+          TouchableRipple: {
+            TouchableRipple: 'TouchableRipple/TouchableRipple',
+          },
           Typography: {
             Text: 'Typography/Text',
           },
@@ -175,20 +191,14 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/callstack/react-native-paper/tree/main/docs/',
+          editUrl: (params) =>
+            `https://github.com/callstack/react-native-paper/tree/main/src/${params.docPath.replace(
+              'mdx',
+              'tsx'
+            )}`,
           remarkPlugins: [
             [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
           ],
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/callstack/react-native-paper/tree/main/docs/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
