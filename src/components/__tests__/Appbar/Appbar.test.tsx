@@ -210,6 +210,29 @@ describe('renderAppbarContent', () => {
       expect.arrayContaining([expect.objectContaining(v2Spacing)])
     );
   });
+
+  it('Is recognized as a header when no onPress callback has been pressed', () => {
+    const { getByRole } = render(
+      <mockSafeAreaContext.SafeAreaProvider>
+        <Appbar.Header>
+          <Appbar.Content title="Accessible test" />
+        </Appbar.Header>
+      </mockSafeAreaContext.SafeAreaProvider>
+    );
+
+    expect(getByRole('text')).toBeTruthy();
+  });
+  it('Is recognized as a button when onPress callback has been pressed', () => {
+    const { getByRole } = render(
+      <mockSafeAreaContext.SafeAreaProvider>
+        <Appbar.Header>
+          <Appbar.Content title="Accessible test" onPress={() => {}} />
+        </Appbar.Header>
+      </mockSafeAreaContext.SafeAreaProvider>
+    );
+
+    expect(getByRole('button')).toBeTruthy();
+  });
 });
 
 describe('AppbarAction', () => {

@@ -130,7 +130,7 @@ const AppbarContent = ({
 
   return (
     <TouchableWithoutFeedback
-      accessibilityRole="button"
+      accessibilityRole={onPress ? 'button' : 'text'}
       onPress={onPress}
       disabled={!onPress}
     >
