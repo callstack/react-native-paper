@@ -32,7 +32,7 @@ const noop = () => {};
 const GetStartedButton = () => {
   return (
     <View style={styles.container}>
-      <Link to="docs/guides/getting-started" style={noTextDecoration}>
+      <Link to="/docs/guides/getting-started" style={noTextDecoration}>
         <Button mode="contained" style={styles.button} onPress={noop}>
           Get started
         </Button>
