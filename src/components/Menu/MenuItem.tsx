@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  AccessibilityState,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
@@ -69,6 +70,10 @@ export type Props = {
    * Accessibility label for the Touchable. This is read by the screen reader when the user taps the component.
    */
   accessibilityLabel?: string;
+  /**
+   * Accessibility state for the Touchable. This is read by the screen reader when the user taps the component.
+   */
+  accessibilityState?: AccessibilityState;
 };
 
 /**
@@ -111,6 +116,7 @@ const MenuItem = ({
   testID,
   titleStyle,
   accessibilityLabel,
+  accessibilityState,
   theme: themeOverrides,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -138,6 +144,8 @@ const MenuItem = ({
     ...(isV3 ? theme.fonts.bodyLarge : {}),
   };
 
+  const newAccessibilityState = { ...accessibilityState, disabled };
+
   return (
     <TouchableRipple
       style={[
@@ -151,7 +159,7 @@ const MenuItem = ({
       testID={testID}
       accessibilityLabel={accessibilityLabel}
       accessibilityRole="menuitem"
-      accessibilityState={{ disabled }}
+      accessibilityState={newAccessibilityState}
       underlayColor={underlayColor}
     >
       <View style={styles.row}>
