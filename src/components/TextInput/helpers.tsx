@@ -1,6 +1,5 @@
 import color from 'color';
 
-import { MD3LightTheme } from '../../styles/themes';
 import type { InternalTheme } from '../../types';
 import { AdornmentSide, AdornmentType } from './Adornment/enums';
 import type { AdornmentConfig } from './Adornment/types';
@@ -393,11 +392,7 @@ const getPlaceholderColor = ({ theme, disabled }: BaseProps) => {
 const getFlatBackgroundColor = ({ theme, disabled }: BaseProps) => {
   if (theme.isV3) {
     if (disabled) {
-      // @ts-ignore According to Figma for both themes the base color for disabled in `onSecondaryContainer`
-      return color(MD3LightTheme.colors.onSecondaryContainer)
-        .alpha(0.08)
-        .rgb()
-        .string();
+      return color(theme.colors.onSurface).alpha(0.04).rgb().string();
     } else {
       return theme.colors.surfaceVariant;
     }

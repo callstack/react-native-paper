@@ -133,6 +133,7 @@ export interface TextInputAdornmentProps {
   paddingHorizontal?: number | string;
   maxFontSizeMultiplier?: number | undefined | null;
   theme?: ThemeProp;
+  disabled?: boolean;
 }
 
 const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
@@ -148,6 +149,7 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
   paddingHorizontal,
   maxFontSizeMultiplier,
   theme,
+  disabled,
 }) => {
   if (adornmentConfig.length) {
     return (
@@ -165,6 +167,7 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
             testID: `${side}-${type}-adornment`,
             isTextInputFocused,
             paddingHorizontal,
+            disabled,
           };
           if (type === AdornmentType.Icon) {
             return (

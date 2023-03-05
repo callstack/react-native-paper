@@ -279,6 +279,7 @@ const TextInputOutlined = ({
     onAffixChange,
     isTextInputFocused: parentState.focused,
     maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
+    disabled,
   };
   if (adornmentConfig.length) {
     adornmentProps = {

@@ -22,6 +22,10 @@ export type Props = $Omit<
    */
   type: 'error' | 'info';
   /**
+   * Text content of the HelperText.
+   */
+  children: React.ReactNode;
+  /**
    * Whether to display the helper text.
    */
   visible?: boolean;
@@ -30,9 +34,9 @@ export type Props = $Omit<
    */
   padding?: 'none' | 'normal';
   /**
-   * Text content of the HelperText.
+   * Whether the text input tied with helper text is disabled.
    */
-  children: React.ReactNode;
+  disabled?: boolean;
   style?: StyleProp<TextStyle>;
   /**
    * @optional
@@ -86,6 +90,7 @@ const HelperText = ({
   theme: themeOverrides,
   onLayout,
   padding = 'normal',
+  disabled,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -122,15 +127,26 @@ const HelperText = ({
     textHeight = e.nativeEvent.layout.height;
   };
 
-  const { colors, dark } = theme;
+  const getTextColor = () => {
+    const { colors, dark } = theme;
 
-  const infoTextColor = theme.isV3
-    ? theme.colors.onSurfaceVariant
-    : color(theme?.colors?.text)
-        .alpha(dark ? 0.7 : 0.54)
-        .rgb()
-        .string();
-  const textColor = type === 'error' ? colors?.error : infoTextColor;
+    if (type === 'error') {
+      return colors?.error;
+    }
+
+    if (theme.isV3) {
+      if (disabled) {
+        return theme.colors.onSurfaceDisabled;
+      } else {
+        return theme.colors.onSurfaceVariant;
+      }
+    }
+
+    return color(theme?.colors?.text)
+      .alpha(dark ? 0.7 : 0.54)
+      .rgb()
+      .string();
+  };
 
   return (
     <AnimatedText
@@ -139,7 +155,7 @@ const HelperText = ({
         styles.text,
         padding !== 'none' ? styles.padding : {},
         {
-          color: textColor,
+          color: getTextColor(),
           opacity: shown,
           transform:
             visible && type === 'error'

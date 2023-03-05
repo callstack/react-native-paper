@@ -13,6 +13,7 @@ import type { IconSource } from '../../Icon';
 import IconButton from '../../IconButton/IconButton';
 import { ICON_SIZE } from '../constants';
 import { getConstants } from '../helpers';
+import { getIconColor } from './utils';
 
 export type Props = $Omit<
   React.ComponentProps<typeof IconButton>,
@@ -47,6 +48,7 @@ type StyleContextType = {
   isTextInputFocused: boolean;
   forceFocus: () => void;
   testID: string;
+  disabled?: boolean;
 };
 
 const StyleContext = React.createContext<StyleContextType>({
@@ -63,6 +65,7 @@ const IconAdornment: React.FunctionComponent<
     topPosition: number;
     side: 'left' | 'right';
     theme?: ThemeProp;
+    disabled?: boolean;
   } & Omit<StyleContextType, 'style'>
 > = ({
   icon,
@@ -72,6 +75,7 @@ const IconAdornment: React.FunctionComponent<
   forceFocus,
   testID,
   theme: themeOverrides,
+  disabled,
 }) => {
   const { isV3 } = useInternalTheme(themeOverrides);
   const { ICON_OFFSET } = getConstants(isV3);
@@ -80,7 +84,13 @@ const IconAdornment: React.FunctionComponent<
     top: topPosition,
     [side]: ICON_OFFSET,
   };
-  const contextState = { style, isTextInputFocused, forceFocus, testID };
+  const contextState = {
+    style,
+    isTextInputFocused,
+    forceFocus,
+    testID,
+    disabled,
+  };
 
   return (
     <StyleContext.Provider value={contextState}>{icon}</StyleContext.Provider>
@@ -125,7 +135,7 @@ const TextInputIcon = ({
   theme: themeOverrides,
   ...rest
 }: Props) => {
-  const { style, isTextInputFocused, forceFocus, testID } =
+  const { style, isTextInputFocused, forceFocus, testID, disabled } =
     React.useContext(StyleContext);
 
   const onPressWithFocusControl = React.useCallback(
@@ -141,16 +151,7 @@ const TextInputIcon = ({
 
   const theme = useInternalTheme(themeOverrides);
 
-  let iconColor = color;
-
-  if (theme.isV3) {
-    if (rest.disabled) {
-      iconColor = theme.colors.onSurface;
-    }
-    iconColor = theme.colors.onSurfaceVariant;
-  } else {
-    iconColor = theme.colors.text;
-  }
+  const iconColor = getIconColor({ theme, disabled });
 
   return (
     <View style={[styles.container, style]}>

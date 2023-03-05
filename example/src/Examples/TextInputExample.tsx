@@ -304,6 +304,22 @@ const TextInputExample = () => {
             value="Disabled flat input value"
           />
           <TextInput
+            style={styles.inputContainerStyle}
+            label="Flat input"
+            disabled
+            value="Disabled flat input with adornments"
+            left={
+              <TextInput.Icon
+                icon="magnify"
+                color={flatLeftIcon}
+                onPress={() => {
+                  changeIconColor('flatLeftIcon');
+                }}
+              />
+            }
+            right={<TextInput.Affix text="/100" />}
+          />
+          <TextInput
             mode="outlined"
             disabled
             style={styles.inputContainerStyle}
@@ -315,6 +331,23 @@ const TextInputExample = () => {
             style={styles.inputContainerStyle}
             label="Disabled outlined input"
             value="Disabled outlined input with value"
+          />
+          <TextInput
+            style={styles.inputContainerStyle}
+            label="Flat input"
+            disabled
+            mode="outlined"
+            value="Disabled flat input with adornments"
+            left={
+              <TextInput.Icon
+                icon="magnify"
+                color={flatLeftIcon}
+                onPress={() => {
+                  changeIconColor('flatLeftIcon');
+                }}
+              />
+            }
+            right={<TextInput.Affix text="/100" />}
           />
         </List.Section>
         <List.Section title="Dense inputs">

@@ -1227,7 +1227,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
       style={
         Array [
           Object {
-            "color": "rgba(28, 27, 31, 0.54)",
+            "color": "rgba(73, 69, 79, 1)",
           },
           Object {
             "fontFamily": "System",
@@ -1794,7 +1794,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       style={
         Array [
           Object {
-            "color": "rgba(28, 27, 31, 0.54)",
+            "color": "rgba(73, 69, 79, 1)",
           },
           Object {
             "fontFamily": "System",
