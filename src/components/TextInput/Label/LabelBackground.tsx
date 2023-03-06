@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
-import { useInternalTheme } from '../../../core/theming';
 import AnimatedText from '../../Typography/AnimatedText';
 import type { LabelBackgroundProps } from '../types';
 
@@ -16,14 +15,11 @@ const LabelBackground = ({
   roundness,
   labelStyle,
   maxFontSizeMultiplier,
-  theme: themeOverrides,
 }: LabelBackgroundProps) => {
   const opacity = labeled.interpolate({
     inputRange: [0, 0.6],
     outputRange: [1, 0],
   });
-
-  const { isV3 } = useInternalTheme(themeOverrides);
 
   const labelTranslationX = {
     translateX: labeled.interpolate({
@@ -40,14 +36,6 @@ const LabelBackground = ({
   };
 
   const labelTextTransform = [...labelStyle.transform, labelTextScaleY];
-
-  const labelTextWidth = isV3
-    ? {
-        width: labelLayoutWidth - placeholderStyle.paddingHorizontal,
-      }
-    : {
-        maxWidth: labelLayoutWidth - 2 * placeholderStyle.paddingHorizontal,
-      };
 
   const isRounded = roundness > 6;
   const roundedEdgeCover = isRounded ? (
@@ -76,14 +64,13 @@ const LabelBackground = ({
         placeholderStyle,
         labelStyle,
         styles.outlinedLabel,
-        isV3 && styles.md3OutlinedLabel,
         {
           top: topPosition + 1,
+          width: labelLayoutWidth - placeholderStyle.paddingHorizontal,
           backgroundColor,
           opacity,
           transform: labelTextTransform,
         },
-        labelTextWidth,
       ]}
       numberOfLines={1}
       maxFontSizeMultiplier={maxFontSizeMultiplier}
@@ -105,11 +92,8 @@ const styles = StyleSheet.create({
   // eslint-disable-next-line react-native/no-color-literals
   outlinedLabel: {
     position: 'absolute',
-    left: 18,
+    left: 8,
     paddingHorizontal: 0,
     color: 'transparent',
-  },
-  md3OutlinedLabel: {
-    left: 8,
   },
 });
