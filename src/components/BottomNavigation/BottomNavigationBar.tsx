@@ -281,8 +281,6 @@ const BottomNavigationBar = ({
     );
   }
 
-  const focusedKey = navigationState.routes[navigationState.index].key;
-
   /**
    * Visibility of the navigation bar, visible state is 1 and invisible is 0.
    */
@@ -313,16 +311,6 @@ const BottomNavigationBar = ({
    * Layout of the navigation bar. The width is used to determine the size and position of the ripple.
    */
   const [layout, onLayout] = useLayout();
-
-  /**
-   * List of loaded tabs, tabs will be loaded when navigated to.
-   */
-  const [loaded, setLoaded] = React.useState<string[]>([focusedKey]);
-
-  if (!loaded.includes(focusedKey)) {
-    // Set the current tab to be loaded if it was not loaded before
-    setLoaded((loaded) => [...loaded, focusedKey]);
-  }
 
   /**
    * Track whether the keyboard is visible to show and hide the navigation bar.
@@ -482,9 +470,6 @@ const BottomNavigationBar = ({
   const maxTabWidth = routes.length > 3 ? MIN_TAB_WIDTH : MAX_TAB_WIDTH;
   const maxTabBarWidth = maxTabWidth * routes.length;
 
-  const tabBarWidth = Math.min(layout.width, maxTabBarWidth);
-  const tabWidth = tabBarWidth / routes.length;
-
   const rippleSize = layout.width / 4;
 
   const insets = {
@@ -555,7 +540,9 @@ const BottomNavigationBar = ({
                   // We need to move it from the top to center of the navigation bar and from the left to the active tab.
                   top: (BAR_HEIGHT - rippleSize) / 2,
                   left:
-                    tabWidth * (navigationState.index + 0.5) - rippleSize / 2,
+                    (Math.min(layout.width, maxTabBarWidth) / routes.length) *
+                      (navigationState.index + 0.5) -
+                    rippleSize / 2,
                   height: rippleSize,
                   width: rippleSize,
                   borderRadius: rippleSize / 2,
