@@ -518,6 +518,7 @@ describe('getLabelColor', () => {
     ${undefined} | ${true}  | ${'#fff'}    | ${true}  | ${MD3Colors.neutral10}
     ${undefined} | ${false} | ${'#fff'}    | ${true}  | ${MD3Colors.neutralVariant30}
     ${undefined} | ${false} | ${'#fff'}    | ${false} | ${'#fff'}
+    ${undefined} | ${true}  | ${'#fff'}    | ${false} | ${'#fff'}
   `(
     'returns $expected when tintColor: $tintColor, focused: $focused useV3: $useV3',
     ({ tintColor, focused, defaultColor, useV3, expected }) => {

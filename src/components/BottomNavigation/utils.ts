@@ -59,11 +59,10 @@ export const getLabelColor = ({
     return tintColor;
   }
 
-  if (focused) {
-    return theme.colors.onSurface;
-  }
-
   if (theme.isV3) {
+    if (focused) {
+      return theme.colors.onSurface;
+    }
     return theme.colors.onSurfaceVariant;
   }
 
