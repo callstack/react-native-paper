@@ -11,6 +11,7 @@ import AppbarExample from './Examples/AppbarExample';
 import AvatarExample from './Examples/AvatarExample';
 import BadgeExample from './Examples/BadgeExample';
 import BannerExample from './Examples/BannerExample';
+import BottomNavigationBarExample from './Examples/BottomNavigationBarExample';
 import BottomNavigationExample from './Examples/BottomNavigationExample';
 import ButtonExample from './Examples/ButtonExample';
 import CardExample from './Examples/CardExample';
@@ -61,6 +62,7 @@ export const mainExamples: Record<
   avatar: AvatarExample,
   badge: BadgeExample,
   banner: BannerExample,
+  bottomNavigationBarExample: BottomNavigationBarExample,
   bottomNavigation: BottomNavigationExample,
   button: ButtonExample,
   card: CardExample,
