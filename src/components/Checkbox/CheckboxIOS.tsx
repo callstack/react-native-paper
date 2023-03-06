@@ -3,7 +3,7 @@ import { GestureResponderEvent, StyleSheet, View } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { getSelectionControlIOSColor } from './utils';
 
@@ -86,9 +86,9 @@ const CheckboxIOS = ({
       theme={theme}
     >
       <View style={{ opacity }}>
-        <MaterialCommunityIcon
+        <Icon
           allowFontScaling={false}
-          name={icon}
+          source={icon}
           size={24}
           color={checkedColor}
           direction="ltr"

@@ -17,7 +17,6 @@ import { white } from '../../styles/themes/v2/colors';
 import type { EllipsizeProp, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -323,8 +322,8 @@ const Chip = ({
                   theme={theme}
                 />
               ) : (
-                <MaterialCommunityIcon
-                  name="check"
+                <Icon
+                  source="check"
                   color={avatar ? white : iconColor}
                   size={18}
                   direction="ltr"
@@ -365,8 +364,8 @@ const Chip = ({
               {closeIcon ? (
                 <Icon source={closeIcon} color={iconColor} size={iconSize} />
               ) : (
-                <MaterialCommunityIcon
-                  name={isV3 ? 'close' : 'close-circle'}
+                <Icon
+                  source={isV3 ? 'close' : 'close-circle'}
                   size={iconSize}
                   color={iconColor}
                   direction="ltr"

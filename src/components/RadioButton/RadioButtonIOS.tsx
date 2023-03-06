@@ -4,7 +4,7 @@ import { GestureResponderEvent, StyleSheet, View } from 'react-native';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, InternalTheme } from '../../types';
 import { getSelectionControlIOSColor } from '../Checkbox/utils';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
@@ -109,9 +109,9 @@ const RadioButtonIOS = ({
             theme={theme}
           >
             <View style={{ opacity }}>
-              <MaterialCommunityIcon
+              <Icon
                 allowFontScaling={false}
-                name="check"
+                source="check"
                 size={24}
                 color={checkedColor}
                 direction="ltr"

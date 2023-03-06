@@ -20,8 +20,8 @@ import type { ThemeProp } from '../types';
 import { forwardRef } from '../utils/forwardRef';
 import ActivityIndicator from './ActivityIndicator';
 import type { IconSource } from './Icon';
+import Icon from './Icon';
 import IconButton from './IconButton/IconButton';
-import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
 
 export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
@@ -203,8 +203,8 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
           icon={
             icon ||
             (({ size, color }) => (
-              <MaterialCommunityIcon
-                name="magnify"
+              <Icon
+                source="magnify"
                 color={color}
                 size={size}
                 direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
@@ -261,8 +261,8 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
               icon={
                 clearIcon ||
                 (({ size, color }) => (
-                  <MaterialCommunityIcon
-                    name="close"
+                  <Icon
+                    source="close"
                     color={color}
                     size={size}
                     direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}

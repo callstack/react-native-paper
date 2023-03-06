@@ -24,8 +24,9 @@ type IconProps = {
 };
 
 type Props = IconProps & {
-  color?: string;
   source: any;
+  color?: string;
+  direction?: 'rtl' | 'ltr' | 'auto';
   /**
    * @optional
    */
@@ -72,17 +73,20 @@ const Icon = ({
   color,
   size,
   theme: themeOverrides,
+  direction: customDirection,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const direction =
-    typeof source === 'object' && source.direction && source.source
+    customDirection ||
+    (typeof source === 'object' && source.direction && source.source
       ? source.direction === 'auto'
         ? I18nManager.getConstants().isRTL
           ? 'rtl'
           : 'ltr'
         : source.direction
-      : null;
+      : null);
+
   const s =
     typeof source === 'object' && source.direction && source.source
       ? source.source

@@ -8,7 +8,7 @@ import {
 
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { getAndroidSelectionControlColor } from './utils';
 
@@ -143,9 +143,9 @@ const CheckboxAndroid = ({
       theme={theme}
     >
       <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
-        <MaterialCommunityIcon
+        <Icon
           allowFontScaling={false}
-          name={icon}
+          source={icon}
           size={24}
           color={selectionControlColor}
           direction="ltr"
