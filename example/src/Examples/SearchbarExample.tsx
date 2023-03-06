@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { Keyboard, StyleSheet } from 'react-native';
 
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { Caption, Searchbar, Text } from 'react-native-paper';
@@ -45,6 +45,10 @@ const SearchExample = ({ navigation }: Props) => {
         onChangeText={(query: string) => setThirdQuery(query)}
         value={thirdQuery}
         onIconPress={/* In real code, this will open the drawer */ () => {}}
+        onClearIconPress={
+          /* delete query text (default behavior) and dismiss keyboard */ () =>
+            Keyboard.dismiss()
+        }
         icon="menu"
         style={styles.searchbar}
       />
