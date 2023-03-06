@@ -6,7 +6,6 @@ import { fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
-import { MD3LightTheme } from '../../styles/themes';
 import { red500 } from '../../styles/themes/v2/colors';
 import {
   getFlatInputColors,
@@ -157,7 +156,7 @@ it('correctly applies focused state Outline TextInput', () => {
   expect(outline).toHaveStyle({ borderWidth: 2 });
 });
 
-it('contains patch spacing for flat input when ios and multiline', () => {
+it('contains patch spacing for flat input when ios, multiline and disabled', () => {
   Platform.OS = 'ios';
   const { getByTestId } = render(
     <TextInput
@@ -583,8 +582,8 @@ describe('getFlatInputColor - background color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      backgroundColor: color(MD3LightTheme.colors.onSecondaryContainer)
-        .alpha(0.08)
+      backgroundColor: color(getTheme().colors.onSurface)
+        .alpha(0.04)
         .rgb()
         .string(),
     });
@@ -594,8 +593,8 @@ describe('getFlatInputColor - background color', () => {
         theme: getTheme(true),
       })
     ).toMatchObject({
-      backgroundColor: color(MD3LightTheme.colors.onSecondaryContainer)
-        .alpha(0.08)
+      backgroundColor: color(getTheme(true).colors.onSurface)
+        .alpha(0.04)
         .rgb()
         .string(),
     });

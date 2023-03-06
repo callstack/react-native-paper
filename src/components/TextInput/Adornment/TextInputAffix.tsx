@@ -9,12 +9,11 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
-
 import { useInternalTheme } from '../../../core/theming';
 import type { ThemeProp } from '../../../types';
 import { getConstants } from '../helpers';
 import { AdornmentSide } from './enums';
+import { getTextColor } from './utils';
 
 export type Props = {
   /**
@@ -41,6 +40,7 @@ type ContextState = {
   paddingHorizontal?: number | string;
   maxFontSizeMultiplier?: number | undefined | null;
   testID?: string;
+  disabled?: boolean;
 };
 
 const AffixContext = React.createContext<ContextState>({
@@ -64,6 +64,7 @@ const AffixAdornment: React.FunctionComponent<
   paddingHorizontal,
   maxFontSizeMultiplier,
   testID,
+  disabled,
 }) => {
   return (
     <AffixContext.Provider
@@ -76,6 +77,7 @@ const AffixAdornment: React.FunctionComponent<
         paddingHorizontal,
         maxFontSizeMultiplier,
         testID,
+        disabled,
       }}
     >
       {affix}
@@ -132,14 +134,8 @@ const TextInputAffix = ({
     paddingHorizontal,
     maxFontSizeMultiplier,
     testID,
+    disabled,
   } = React.useContext(AffixContext);
-
-  const textColor = color(
-    theme.isV3 ? theme.colors.onSurface : theme.colors?.text
-  )
-    .alpha(theme.dark ? 0.7 : 0.54)
-    .rgb()
-    .string();
 
   const offset =
     typeof paddingHorizontal === 'number' ? paddingHorizontal : AFFIX_OFFSET;
@@ -148,6 +144,8 @@ const TextInputAffix = ({
     top: topPosition,
     [side]: offset,
   } as ViewStyle;
+
+  const textColor = getTextColor({ theme, disabled });
 
   return (
     <Animated.View

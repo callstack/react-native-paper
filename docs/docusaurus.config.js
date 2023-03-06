@@ -121,7 +121,7 @@ const config = {
             AnimatedFAB: 'FAB/AnimatedFAB',
             FABGroup: 'FAB/FABGroup',
           },
-          HelperText: 'HelperText',
+          HelperText: { HelperText: 'HelperText/HelperText' },
           IconButton: {
             IconButton: 'IconButton/IconButton',
           },
