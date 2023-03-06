@@ -62,7 +62,7 @@ export default function BottomNavigationBarExample() {
         component={HomeScreen}
         options={{
           tabBarIcon: ({ color, size }) => {
-            return <Icon name={'home'} size={size} color={color} />;
+            return <Icon name="home" size={size} color={color} />;
           },
         }}
       />
@@ -71,7 +71,7 @@ export default function BottomNavigationBarExample() {
         component={SettingsScreen}
         options={{
           tabBarIcon: ({ color, size }) => {
-            return <Icon name={'cog'} size={size} color={color} />;
+            return <Icon name="cog" size={size} color={color} />;
           },
         }}
       />
