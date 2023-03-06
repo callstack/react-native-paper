@@ -15,7 +15,6 @@ import useEventCallback from 'use-event-callback';
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import type { IconSource } from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -259,7 +258,6 @@ export type Props = {
   testID?: string;
 };
 
-const MIN_RIPPLE_SCALE = 0.001; // Minimum scale is not 0 due to bug with animation
 const FAR_FAR_AWAY = Platform.OS === 'web' ? 0 : 9999;
 
 const Touchable = ({
@@ -393,16 +391,6 @@ const BottomNavigation = ({
   const focusedKey = navigationState.routes[navigationState.index].key;
 
   /**
-   * Active state of individual tab items, active state is 1 and inactive state is 0.
-   */
-  const tabsAnims = useAnimatedValueArray(
-    navigationState.routes.map(
-      // focused === 1, unfocused === 0
-      (_, i) => (i === navigationState.index ? 1 : 0)
-    )
-  );
-
-  /**
    * Active state of individual tab item positions:
    * -1 if they're before the active tab, 0 if they're active, 1 if they're after the active tab
    */
@@ -425,17 +413,6 @@ const BottomNavigation = ({
   );
 
   /**
-   * Index of the currently active tab. Used for setting the background color.
-   * We don't use the color as an animated value directly, because `setValue` seems to be buggy with colors?.
-   */
-  const indexAnim = useAnimatedValue(navigationState.index);
-
-  /**
-   * Animation for the background color ripple, used to determine it's scale and opacity.
-   */
-  const rippleAnim = useAnimatedValue(MIN_RIPPLE_SCALE);
-
-  /**
    * List of loaded tabs, tabs will be loaded when navigated to.
    */
   const [loaded, setLoaded] = React.useState<string[]>([focusedKey]);
@@ -447,23 +424,7 @@ const BottomNavigation = ({
 
   const animateToIndex = React.useCallback(
     (index: number) => {
-      // Reset the ripple to avoid glitch if it's currently animating
-      rippleAnim.setValue(MIN_RIPPLE_SCALE);
-
       Animated.parallel([
-        Animated.timing(rippleAnim, {
-          toValue: 1,
-          duration: theme.isV3 || shifting ? 400 * scale : 0,
-          useNativeDriver: true,
-        }),
-        ...navigationState.routes.map((_, i) =>
-          Animated.timing(tabsAnims[i], {
-            toValue: i === index ? 1 : 0,
-            duration: theme.isV3 || shifting ? 150 * scale : 0,
-            useNativeDriver: true,
-            easing: sceneAnimationEasing,
-          })
-        ),
         ...navigationState.routes.map((_, i) =>
           Animated.timing(tabsPositionAnims[i], {
             toValue: i === index ? 0 : i >= index ? 1 : -1,
@@ -473,13 +434,6 @@ const BottomNavigation = ({
           })
         ),
       ]).start(({ finished }) => {
-        // Workaround a bug in native animations where this is reset after first animation
-        tabsAnims.map((tab, i) => tab.setValue(i === index ? 1 : 0));
-
-        // Update the index to change bar's background color and then hide the ripple
-        indexAnim.setValue(index);
-        rippleAnim.setValue(MIN_RIPPLE_SCALE);
-
         if (finished) {
           // Position all inactive screens offscreen to save memory usage
           // Only do it when animation has finished to avoid glitches mid-transition if switching fast
@@ -494,13 +448,10 @@ const BottomNavigation = ({
       });
     },
     [
-      indexAnim,
       shifting,
       navigationState.routes,
       offsetsAnims,
-      rippleAnim,
       scale,
-      tabsAnims,
       tabsPositionAnims,
       sceneAnimationEasing,
       theme,

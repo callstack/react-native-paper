@@ -307,28 +307,6 @@ const BottomNavigationBar = ({
   );
 
   /**
-   * Active state of individual tab item positions:
-   * -1 if they're before the active tab, 0 if they're active, 1 if they're after the active tab
-   */
-  const tabsPositionAnims = useAnimatedValueArray(
-    navigationState.routes.map((_, i) =>
-      i === navigationState.index ? 0 : i >= navigationState.index ? 1 : -1
-    )
-  );
-
-  /**
-   * The top offset for each tab item to position it offscreen.
-   * Placing items offscreen helps to save memory usage for inactive screens with removeClippedSubviews.
-   * We use animated values for this to prevent unnecessary re-renders.
-   */
-  const offsetsAnims = useAnimatedValueArray(
-    navigationState.routes.map(
-      // offscreen === 1, normal === 0
-      (_, i) => (i === navigationState.index ? 0 : 1)
-    )
-  );
-
-  /**
    * Index of the currently active tab. Used for setting the background color.
    * We don't use the color as an animated value directly, because `setValue` seems to be buggy with colors?.
    */
@@ -397,33 +375,13 @@ const BottomNavigationBar = ({
             easing: animationEasing,
           })
         ),
-        ...navigationState.routes.map((_, i) =>
-          Animated.timing(tabsPositionAnims[i], {
-            toValue: i === index ? 0 : i >= index ? 1 : -1,
-            duration: theme.isV3 || shifting ? 150 * scale : 0,
-            useNativeDriver: true,
-            easing: animationEasing,
-          })
-        ),
-      ]).start(({ finished }) => {
+      ]).start(() => {
         // Workaround a bug in native animations where this is reset after first animation
         tabsAnims.map((tab, i) => tab.setValue(i === index ? 1 : 0));
 
         // Update the index to change bar's background color and then hide the ripple
         indexAnim.setValue(index);
         rippleAnim.setValue(MIN_RIPPLE_SCALE);
-
-        if (finished) {
-          // Position all inactive screens offscreen to save memory usage
-          // Only do it when animation has finished to avoid glitches mid-transition if switching fast
-          offsetsAnims.forEach((offset, i) => {
-            if (i === index) {
-              offset.setValue(0);
-            } else {
-              offset.setValue(1);
-            }
-          });
-        }
       });
     },
     [
@@ -434,9 +392,7 @@ const BottomNavigationBar = ({
       navigationState.routes,
       tabsAnims,
       animationEasing,
-      tabsPositionAnims,
       indexAnim,
-      offsetsAnims,
     ]
   );
 
@@ -455,18 +411,8 @@ const BottomNavigationBar = ({
   const prevNavigationState = React.useRef<NavigationState>();
 
   React.useEffect(() => {
-    // Reset offsets of previous and current tabs before animation
-    offsetsAnims.forEach((offset, i) => {
-      if (
-        i === navigationState.index ||
-        i === prevNavigationState.current?.index
-      ) {
-        offset.setValue(0);
-      }
-    });
-
     animateToIndex(navigationState.index);
-  }, [navigationState.index, animateToIndex, offsetsAnims]);
+  }, [navigationState.index, animateToIndex]);
 
   const handleTabPress = (index: number) => {
     const event = {

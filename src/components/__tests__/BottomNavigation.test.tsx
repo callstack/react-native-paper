@@ -132,12 +132,18 @@ it('sceneAnimationEnabled matches animation requirements', () => {
   );
   fireEvent(tree.getByText('Route: 1'), 'onPress');
 
-  expect(Animated.parallel).toHaveBeenLastCalledWith(
+  expect(Animated.parallel).toHaveBeenNthCalledWith(
+    10,
     expect.arrayContaining([
       expect.objectContaining({
         // ripple
         config: expect.objectContaining({ toValue: 1, duration: 400 }),
       }),
+    ])
+  );
+  expect(Animated.parallel).toHaveBeenNthCalledWith(
+    12,
+    expect.arrayContaining([
       expect.objectContaining({
         // previous position anims, shifting to the left
         config: expect.objectContaining({
