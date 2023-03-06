@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { render } from '@testing-library/react-native';
 import color from 'color';
 import renderer from 'react-test-renderer';
 
@@ -169,4 +170,18 @@ it('renders menu item', () => {
     .toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('accepts different values for accessibilityState', () => {
+  const { getByTestId } = render(
+    <Menu.Item
+      accessibilityState={{ checked: true }}
+      title="Option 1"
+      testID="touchable"
+    />
+  );
+
+  expect(getByTestId('touchable').props.accessibilityState).toMatchObject({
+    checked: true,
+  });
 });
