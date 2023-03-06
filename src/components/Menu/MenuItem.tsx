@@ -53,6 +53,10 @@ export type Props = {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * Specifies the largest possible scale a title font can reach.
+   */
+  titleMaxFontSizeMultiplier?: number;
+  /**
    * @optional
    */
   style?: StyleProp<ViewStyle>;
@@ -113,11 +117,12 @@ const MenuItem = ({
   onPress,
   style,
   contentStyle,
-  testID,
+  testID = 'menu-item',
   titleStyle,
   accessibilityLabel,
   accessibilityState,
   theme: themeOverrides,
+  titleMaxFontSizeMultiplier = 1.5,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { titleColor, iconColor, underlayColor } = getMenuItemColor({
@@ -188,7 +193,9 @@ const MenuItem = ({
             variant="bodyLarge"
             selectable={false}
             numberOfLines={1}
+            testID={`${testID}-title`}
             style={[!isV3 && styles.title, titleTextStyle, titleStyle]}
+            maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
           >
             {title}
           </Text>

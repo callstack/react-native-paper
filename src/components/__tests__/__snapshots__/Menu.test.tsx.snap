@@ -337,6 +337,7 @@ Array [
                     ],
                   ]
                 }
+                testID="menu-item"
               >
                 <View
                   style={
@@ -365,6 +366,7 @@ Array [
                     }
                   >
                     <Text
+                      maxFontSizeMultiplier={1.5}
                       numberOfLines={1}
                       selectable={false}
                       style={
@@ -397,6 +399,7 @@ Array [
                           ],
                         ]
                       }
+                      testID="menu-item-title"
                     >
                       Undo
                     </Text>
@@ -441,6 +444,7 @@ Array [
                     ],
                   ]
                 }
+                testID="menu-item"
               >
                 <View
                   style={
@@ -469,6 +473,7 @@ Array [
                     }
                   >
                     <Text
+                      maxFontSizeMultiplier={1.5}
                       numberOfLines={1}
                       selectable={false}
                       style={
@@ -501,6 +506,7 @@ Array [
                           ],
                         ]
                       }
+                      testID="menu-item-title"
                     >
                       Redo
                     </Text>
@@ -1020,6 +1026,7 @@ Array [
                     ],
                   ]
                 }
+                testID="menu-item"
               >
                 <View
                   style={
@@ -1048,6 +1055,7 @@ Array [
                     }
                   >
                     <Text
+                      maxFontSizeMultiplier={1.5}
                       numberOfLines={1}
                       selectable={false}
                       style={
@@ -1080,6 +1088,7 @@ Array [
                           ],
                         ]
                       }
+                      testID="menu-item-title"
                     >
                       Undo
                     </Text>
@@ -1124,6 +1133,7 @@ Array [
                     ],
                   ]
                 }
+                testID="menu-item"
               >
                 <View
                   style={
@@ -1152,6 +1162,7 @@ Array [
                     }
                   >
                     <Text
+                      maxFontSizeMultiplier={1.5}
                       numberOfLines={1}
                       selectable={false}
                       style={
@@ -1184,6 +1195,7 @@ Array [
                           ],
                         ]
                       }
+                      testID="menu-item-title"
                     >
                       Redo
                     </Text>

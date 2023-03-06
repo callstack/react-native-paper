@@ -9,6 +9,65 @@ import { black, white } from '../../styles/themes/v2/colors';
 import Menu from '../Menu/Menu';
 import { getMenuItemColor } from '../Menu/utils';
 
+describe('Menu Item', () => {
+  it('renders menu item', () => {
+    const tree = renderer
+      .create(
+        <>
+          <Menu.Item leadingIcon="redo" onPress={() => {}} title="Redo" />
+          <Menu.Item leadingIcon="undo" onPress={() => {}} title="Undo" />
+          <Menu.Item
+            leadingIcon="content-cut"
+            onPress={() => {}}
+            title="Cut"
+            disabled
+          />
+          <Menu.Item
+            leadingIcon="content-copy"
+            onPress={() => {}}
+            title="Copy"
+            disabled
+          />
+          <Menu.Item onPress={() => {}} title="Paste" />
+        </>
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should have titleMaxFontSizeMultiplier passed to title', () => {
+    const labelMaxFontSizeMultiplier = 2;
+
+    const { getByTestId } = render(
+      <Menu.Item
+        titleMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+        leadingIcon="content-cut"
+        onPress={() => {}}
+        title="Cut"
+      />
+    );
+
+    expect(getByTestId('menu-item-title').props.maxFontSizeMultiplier).toBe(
+      labelMaxFontSizeMultiplier
+    );
+  });
+
+  it('accepts different values for accessibilityState', () => {
+    const { getByTestId } = render(
+      <Menu.Item
+        accessibilityState={{ checked: true }}
+        title="Option 1"
+        testID="touchable"
+      />
+    );
+
+    expect(getByTestId('touchable').props.accessibilityState).toMatchObject({
+      checked: true,
+    });
+  });
+});
+
 describe('getMenuItemColor - title color', () => {
   it('should return disabled color if disabled, for theme version 3', () => {
     expect(
@@ -143,45 +202,5 @@ describe('getMenuItemColor - underlay color', () => {
     ).toMatchObject({
       underlayColor: undefined,
     });
-  });
-});
-
-it('renders menu item', () => {
-  const tree = renderer
-    .create(
-      <>
-        <Menu.Item leadingIcon="redo" onPress={() => {}} title="Redo" />
-        <Menu.Item leadingIcon="undo" onPress={() => {}} title="Undo" />
-        <Menu.Item
-          leadingIcon="content-cut"
-          onPress={() => {}}
-          title="Cut"
-          disabled
-        />
-        <Menu.Item
-          leadingIcon="content-copy"
-          onPress={() => {}}
-          title="Copy"
-          disabled
-        />
-        <Menu.Item onPress={() => {}} title="Paste" />
-      </>
-    )
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it('accepts different values for accessibilityState', () => {
-  const { getByTestId } = render(
-    <Menu.Item
-      accessibilityState={{ checked: true }}
-      title="Option 1"
-      testID="touchable"
-    />
-  );
-
-  expect(getByTestId('touchable').props.accessibilityState).toMatchObject({
-    checked: true,
   });
 });

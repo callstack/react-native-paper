@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders menu item 1`] = `
+exports[`Menu Item renders menu item 1`] = `
 Array [
   <View
     accessibilityRole="menuitem"
@@ -40,6 +40,7 @@ Array [
         ],
       ]
     }
+    testID="menu-item"
   >
     <View
       style={
@@ -116,6 +117,7 @@ Array [
         }
       >
         <Text
+          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -148,6 +150,7 @@ Array [
               ],
             ]
           }
+          testID="menu-item-title"
         >
           Redo
         </Text>
@@ -192,6 +195,7 @@ Array [
         ],
       ]
     }
+    testID="menu-item"
   >
     <View
       style={
@@ -268,6 +272,7 @@ Array [
         }
       >
         <Text
+          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -300,6 +305,7 @@ Array [
               ],
             ]
           }
+          testID="menu-item-title"
         >
           Undo
         </Text>
@@ -344,6 +350,7 @@ Array [
         ],
       ]
     }
+    testID="menu-item"
   >
     <View
       style={
@@ -420,6 +427,7 @@ Array [
         }
       >
         <Text
+          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -452,6 +460,7 @@ Array [
               ],
             ]
           }
+          testID="menu-item-title"
         >
           Cut
         </Text>
@@ -496,6 +505,7 @@ Array [
         ],
       ]
     }
+    testID="menu-item"
   >
     <View
       style={
@@ -572,6 +582,7 @@ Array [
         }
       >
         <Text
+          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -604,6 +615,7 @@ Array [
               ],
             ]
           }
+          testID="menu-item-title"
         >
           Copy
         </Text>
@@ -648,6 +660,7 @@ Array [
         ],
       ]
     }
+    testID="menu-item"
   >
     <View
       style={
@@ -676,6 +689,7 @@ Array [
         }
       >
         <Text
+          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -708,6 +722,7 @@ Array [
               ],
             ]
           }
+          testID="menu-item-title"
         >
           Paste
         </Text>
