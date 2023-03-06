@@ -11,6 +11,11 @@ type BaseProps = {
   checked: boolean;
 };
 
+type SegmentedButtonProps = {
+  checkedColor?: string;
+  uncheckedColor?: string;
+} & BaseProps;
+
 const DEFAULT_PADDING = 9;
 
 export const getSegmentedButtonDensityPadding = ({
@@ -124,25 +129,34 @@ const getSegmentedButtonBorderWidth = ({
 const getSegmentedButtonTextColor = ({
   theme,
   disabled,
-}: Omit<BaseProps, 'checked'>) => {
+  checked,
+  checkedColor,
+  uncheckedColor,
+}: SegmentedButtonProps) => {
   if (theme.isV3) {
     if (disabled) {
       return theme.colors.onSurfaceDisabled;
     }
-    return theme.colors.onSurface;
-  } else {
-    if (disabled) {
-      return theme.colors.disabled;
+    if (checked) {
+      return checkedColor ?? theme.colors.onSecondaryContainer;
     }
-    return theme.colors.primary;
+    return uncheckedColor ?? theme.colors.onSurface;
   }
+
+  if (disabled) {
+    return theme.colors.disabled;
+  }
+  // Primary color is used for checked state too.
+  return theme.colors.primary;
 };
 
 export const getSegmentedButtonColors = ({
   theme,
   disabled,
   checked,
-}: BaseProps) => {
+  checkedColor,
+  uncheckedColor,
+}: SegmentedButtonProps) => {
   const backgroundColor = getSegmentedButtonBackgroundColor({
     theme,
     checked,
@@ -152,7 +166,13 @@ export const getSegmentedButtonColors = ({
     disabled,
     checked,
   });
-  const textColor = getSegmentedButtonTextColor({ theme, disabled });
+  const textColor = getSegmentedButtonTextColor({
+    theme,
+    disabled,
+    checked,
+    checkedColor,
+    uncheckedColor,
+  });
   const borderWidth = getSegmentedButtonBorderWidth({ theme });
 
   return { backgroundColor, borderColor, textColor, borderWidth };

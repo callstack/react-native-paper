@@ -13,6 +13,7 @@ import {
   SegmentedButtonOnlyIconsWithCheck,
   SegmentedButtonWithDensity,
   SegmentedButtonWithSelectedCheck,
+  SegmentButtonCustomColorCheck,
 } from './SegmentedButtons';
 
 type Props = {
@@ -45,6 +46,7 @@ const SegmentedButtonExample = ({ navigation }: Props) => {
       <SegmentedButtonOnlyIcons />
       <SegmentedButtonMultiselect />
       <SegmentedButtonMultiselectIcons />
+      <SegmentButtonCustomColorCheck />
       <SegmentedButtonDisabled />
     </ScreenWrapper>
   );

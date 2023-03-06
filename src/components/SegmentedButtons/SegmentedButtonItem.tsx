@@ -32,6 +32,18 @@ export type Props = {
    * Icon to display for the `SegmentedButtonItem`.
    */
   icon?: IconSource;
+
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Custom color for unchecked Text and Icon.
+   */
+  uncheckedColor?: string;
+
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Custom color for checked Text and Icon.
+   */
+  checkedColor?: string;
   /**
    * Whether the button is disabled.
    */
@@ -81,6 +93,8 @@ const SegmentedButtonItem = ({
   disabled,
   style,
   showSelectedCheck,
+  checkedColor,
+  uncheckedColor,
   icon,
   testID,
   label,
@@ -116,6 +130,8 @@ const SegmentedButtonItem = ({
       checked,
       theme,
       disabled,
+      checkedColor,
+      uncheckedColor,
     });
 
   const borderRadius = (isV3 ? 5 : 1) * roundness;
@@ -185,16 +201,12 @@ const SegmentedButtonItem = ({
               testID={`${testID}-check-icon`}
               style={[iconStyle, { transform: [{ scale: checkScale }] }]}
             >
-              <Icon source={'check'} size={iconSize} />
+              <Icon source={'check'} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
           {showIcon ? (
             <Animated.View testID={`${testID}-icon`} style={iconStyle}>
-              <Icon
-                source={icon}
-                size={iconSize}
-                color={disabled ? textColor : undefined}
-              />
+              <Icon source={icon} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
           <Text
