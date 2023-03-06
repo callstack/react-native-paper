@@ -7,11 +7,10 @@ import {
   TextStyle,
 } from 'react-native';
 
-import color from 'color';
-
-import { useInternalTheme } from '../core/theming';
-import type { $Omit, ThemeProp } from '../types';
-import AnimatedText from './Typography/AnimatedText';
+import { useInternalTheme } from '../../core/theming';
+import type { $Omit, ThemeProp } from '../../types';
+import AnimatedText from '../Typography/AnimatedText';
+import { getTextColor } from './utils';
 
 export type Props = $Omit<
   $Omit<React.ComponentPropsWithRef<typeof AnimatedText>, 'padding'>,
@@ -127,26 +126,7 @@ const HelperText = ({
     textHeight = e.nativeEvent.layout.height;
   };
 
-  const getTextColor = () => {
-    const { colors, dark } = theme;
-
-    if (type === 'error') {
-      return colors?.error;
-    }
-
-    if (theme.isV3) {
-      if (disabled) {
-        return theme.colors.onSurfaceDisabled;
-      } else {
-        return theme.colors.onSurfaceVariant;
-      }
-    }
-
-    return color(theme?.colors?.text)
-      .alpha(dark ? 0.7 : 0.54)
-      .rgb()
-      .string();
-  };
+  const textColor = getTextColor({ theme, disabled, type });
 
   return (
     <AnimatedText
@@ -155,7 +135,7 @@ const HelperText = ({
         styles.text,
         padding !== 'none' ? styles.padding : {},
         {
-          color: getTextColor(),
+          color: textColor,
           opacity: shown,
           transform:
             visible && type === 'error'
