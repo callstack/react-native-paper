@@ -27,5 +27,4 @@ export function getTextColor({ theme, disabled, type }: BaseProps) {
     .alpha(dark ? 0.7 : 0.54)
     .rgb()
     .string();
-
 }
