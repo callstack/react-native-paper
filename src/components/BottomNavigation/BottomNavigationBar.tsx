@@ -117,11 +117,6 @@ export type Props = {
    */
   navigationState: NavigationState;
   /**
-   * Callback which is called on tab change, receives the index of the new tab as argument.
-   * The navigation state needs to be updated when it's called, otherwise the change is dropped.
-   */
-  onIndexChange: (index: number) => void;
-  /**
    * Callback which returns a React Element to be used as tab icon.
    */
   renderIcon?: (props: {
@@ -259,7 +254,6 @@ const BottomNavigationBar = ({
   labeled = true,
   animationEasing,
   onTabPress,
-  onIndexChange,
   shifting: shiftingProp,
   safeAreaInsets,
   labelMaxFontSizeMultiplier = 1,
@@ -388,8 +382,6 @@ const BottomNavigationBar = ({
     onHide: handleKeyboardHide,
   });
 
-  const prevNavigationState = React.useRef<NavigationState>();
-
   React.useEffect(() => {
     animateToIndex(navigationState.index);
   }, [navigationState.index, animateToIndex]);
@@ -404,15 +396,6 @@ const BottomNavigationBar = ({
     };
 
     onTabPress?.(event);
-
-    if (event.defaultPrevented) {
-      return;
-    }
-
-    if (index !== navigationState.index) {
-      prevNavigationState.current = navigationState;
-      onIndexChange(index);
-    }
   };
 
   const { routes } = navigationState;

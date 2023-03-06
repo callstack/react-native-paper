@@ -452,6 +452,25 @@ const BottomNavigation = ({
     animateToIndex(navigationState.index);
   }, [navigationState.index, animateToIndex, offsetsAnims]);
 
+  const handleTabPress = useEventCallback(
+    (event: { route: Route } & TabPressEvent) => {
+      onTabPress?.(event);
+
+      if (event.defaultPrevented) {
+        return;
+      }
+
+      const index = navigationState.routes.findIndex(
+        (route) => event.route.key === route.key
+      );
+
+      if (index !== navigationState.index) {
+        prevNavigationState.current = navigationState;
+        onIndexChange(index);
+      }
+    }
+  );
+
   const jumpTo = useEventCallback((key: string) => {
     const index = navigationState.routes.findIndex(
       (route) => route.key === key
@@ -562,8 +581,7 @@ const BottomNavigation = ({
         style={barStyle}
         labeled={labeled}
         animationEasing={sceneAnimationEasing}
-        onTabPress={onTabPress}
-        onIndexChange={onIndexChange}
+        onTabPress={handleTabPress}
         shifting={shifting}
         safeAreaInsets={safeAreaInsets}
         labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}

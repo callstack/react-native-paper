@@ -2,7 +2,6 @@ import * as React from 'react';
 import { I18nManager, Platform, StyleSheet } from 'react-native';
 
 import {
-  CommonActions,
   Link,
   ParamListBase,
   Route,
@@ -37,15 +36,8 @@ export default function MaterialBottomTabView({
   return (
     <BottomNavigation
       {...rest}
+      onIndexChange={noop}
       navigationState={state}
-      onIndexChange={(index: number) => {
-        const route = state.routes[index];
-
-        navigation.dispatch({
-          ...CommonActions.navigate(route),
-          target: state.key,
-        });
-      }}
       renderScene={({ route }) => descriptors[route.key].render()}
       renderTouchable={
         Platform.OS === 'web'
@@ -126,6 +118,8 @@ export default function MaterialBottomTabView({
 
         if (event.defaultPrevented) {
           preventDefault();
+        } else {
+          navigation.navigate({ key: route.key, merge: true });
         }
       }}
     />
@@ -138,3 +132,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+function noop() {}
