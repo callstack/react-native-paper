@@ -156,6 +156,11 @@ const Banner = ({
 
   const { scale } = theme.animation;
 
+  const opacity = position.interpolate({
+    inputRange: [0, 0.1, 1],
+    outputRange: [0, 1, 1],
+  });
+
   React.useEffect(() => {
     if (visible) {
       // show
@@ -196,7 +201,7 @@ const Banner = ({
   return (
     <Surface
       {...rest}
-      style={[!theme.isV3 && styles.elevation, style]}
+      style={[!theme.isV3 && styles.elevation, { opacity }, style]}
       theme={theme}
       {...(theme.isV3 && { elevation })}
     >
