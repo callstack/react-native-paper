@@ -281,7 +281,6 @@ const TextInputFlat = ({
     maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
     testID,
     contentStyle,
-    theme,
     opacity:
       parentState.value || parentState.focused
         ? parentState.labelLayout.measured

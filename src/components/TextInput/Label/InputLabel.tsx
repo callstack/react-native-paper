@@ -38,7 +38,6 @@ const InputLabel = (props: InputLabelProps) => {
     labelTranslationXOffset,
     maxFontSizeMultiplier,
     testID,
-    theme,
   } = props;
 
   const paddingOffset =
@@ -118,7 +117,6 @@ const InputLabel = (props: InputLabelProps) => {
         labeled,
         labelLayoutWidth,
         labelStyle,
-        theme,
         placeholderStyle,
         baseLabelTranslateX,
         topPosition,
