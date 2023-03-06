@@ -5,7 +5,6 @@ import {
   Platform,
   StyleProp,
   StyleSheet,
-  TouchableWithoutFeedback,
   TouchableWithoutFeedbackProps,
   View,
   ViewStyle,
@@ -17,7 +16,6 @@ import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import type { IconSource } from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import BottomNavigationBar from './BottomNavigationBar';
 import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 
@@ -260,32 +258,6 @@ export type Props = {
 
 const FAR_FAR_AWAY = Platform.OS === 'web' ? 0 : 9999;
 
-const Touchable = ({
-  route: _0,
-  style,
-  children,
-  borderless,
-  centered,
-  rippleColor,
-  ...rest
-}: TouchableProps) =>
-  TouchableRipple.supported ? (
-    <TouchableRipple
-      {...rest}
-      disabled={rest.disabled || undefined}
-      borderless={borderless}
-      centered={centered}
-      rippleColor={rippleColor}
-      style={style}
-    >
-      {children}
-    </TouchableRipple>
-  ) : (
-    <TouchableWithoutFeedback {...rest}>
-      <View style={style}>{children}</View>
-    </TouchableWithoutFeedback>
-  );
-
 const SceneComponent = React.memo(({ component, ...rest }: any) =>
   React.createElement(component, rest)
 );
@@ -349,13 +321,12 @@ const BottomNavigation = ({
   renderScene,
   renderIcon,
   renderLabel,
-  renderTouchable = (props: TouchableProps) => <Touchable {...props} />,
-  getLabelText = ({ route }: { route: Route }) => route.title,
-  getBadge = ({ route }: { route: Route }) => route.badge,
-  getColor = ({ route }: { route: Route }) => route.color,
-  getAccessibilityLabel = ({ route }: { route: Route }) =>
-    route.accessibilityLabel,
-  getTestID = ({ route }: { route: Route }) => route.testID,
+  renderTouchable,
+  getLabelText,
+  getBadge,
+  getColor,
+  getAccessibilityLabel,
+  getTestID,
   activeColor,
   inactiveColor,
   keyboardHidesNavigationBar = Platform.OS === 'android',
