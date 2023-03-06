@@ -29,6 +29,7 @@ export { default as Badge } from './components/Badge';
 export { default as ActivityIndicator } from './components/ActivityIndicator';
 export { default as Banner } from './components/Banner';
 export { default as BottomNavigation } from './components/BottomNavigation/BottomNavigation';
+export { default as BottomNavigationBar } from './components/BottomNavigation/BottomNavigationBar';
 export { default as Button } from './components/Button/Button';
 export { default as Card } from './components/Card/Card';
 export { default as Checkbox } from './components/Checkbox';
