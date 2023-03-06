@@ -10,6 +10,7 @@
   "files": [
     "src",
     "lib",
+    "react-navigation",
     "babel.js"
   ],
   "sideEffects": false,
