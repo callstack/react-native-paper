@@ -700,7 +700,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         </View>
       </View>
       <View
-        accessibilityRole="button"
+        accessibilityRole="text"
         accessibilityState={
           Object {
             "disabled": true,
