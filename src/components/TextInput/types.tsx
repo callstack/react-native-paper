@@ -70,7 +70,8 @@ export type LabelProps = {
   fontWeight: TextStyle['fontWeight'];
   font: any;
   topPosition: number;
-  paddingOffset?: { paddingLeft: number; paddingRight: number } | null;
+  paddingLeft?: number;
+  paddingRight?: number;
   labelTranslationXOffset?: number;
   placeholderColor: string | null;
   backgroundColor?: ColorValue;
@@ -78,7 +79,7 @@ export type LabelProps = {
   hasActiveOutline?: boolean | null;
   activeColor: string;
   errorColor?: string;
-  error?: boolean | null;
+  labelError?: boolean | null;
   onLayoutAnimatedText: (args: any) => void;
   roundness: number;
   maxFontSizeMultiplier?: number | undefined | null;
@@ -87,16 +88,21 @@ export type LabelProps = {
   theme?: ThemeProp;
 };
 export type InputLabelProps = {
-  parentState: State;
-  labelProps: LabelProps;
+  labeled: Animated.Value;
+  error: Animated.Value;
+  focused: boolean;
+  wiggle: boolean;
+  opacity: number;
+  labelLayoutMeasured: boolean;
+  labelLayoutWidth: number;
   labelBackground?: any;
   maxFontSizeMultiplier?: number | undefined | null;
-};
+} & LabelProps;
 
 export type LabelBackgroundProps = {
-  labelProps: LabelProps;
   labelStyle: any;
-  parentState: State;
+  labeled: Animated.Value;
+  labelLayoutWidth: number;
   maxFontSizeMultiplier?: number | undefined | null;
   theme?: ThemeProp;
-};
+} & LabelProps;

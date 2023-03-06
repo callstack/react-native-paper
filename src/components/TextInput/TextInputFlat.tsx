@@ -252,7 +252,7 @@ const TextInputFlat = ({
     label,
     onLayoutAnimatedText,
     placeholderOpacity,
-    error,
+    labelError: error,
     placeholderStyle: styles.placeholder,
     baseLabelTranslateY,
     baseLabelTranslateX,
@@ -263,12 +263,16 @@ const TextInputFlat = ({
     labelScale,
     wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
     topPosition,
-    paddingOffset: isAndroid
-      ? {
-          paddingLeft: I18nManager.isRTL ? paddingRight : paddingLeft,
-          paddingRight: I18nManager.isRTL ? paddingLeft : paddingRight,
-        }
-      : { paddingRight, paddingLeft },
+    paddingLeft: isAndroid
+      ? I18nManager.isRTL
+        ? paddingRight
+        : paddingLeft
+      : paddingLeft,
+    paddingRight: isAndroid
+      ? I18nManager.isRTL
+        ? paddingLeft
+        : paddingRight
+      : paddingRight,
     hasActiveOutline,
     activeColor,
     placeholderColor,
@@ -278,7 +282,14 @@ const TextInputFlat = ({
     testID,
     contentStyle,
     theme,
+    opacity:
+      parentState.value || parentState.focused
+        ? parentState.labelLayout.measured
+          ? 1
+          : 0
+        : 1,
   };
+
   const affixTopPosition = {
     [AdornmentSide.Left]: leftAffixTopPosition,
     [AdornmentSide.Right]: rightAffixTopPosition,
@@ -349,7 +360,15 @@ const TextInputFlat = ({
           />
         )}
         {label ? (
-          <InputLabel parentState={parentState} labelProps={labelProps} />
+          <InputLabel
+            labeled={parentState.labeled}
+            error={parentState.error}
+            focused={parentState.focused}
+            wiggle={Boolean(parentState.value && labelProps.labelError)}
+            labelLayoutMeasured={parentState.labelLayout.measured}
+            labelLayoutWidth={parentState.labelLayout.width}
+            {...labelProps}
+          />
         ) : null}
         {render?.({
           testID,
