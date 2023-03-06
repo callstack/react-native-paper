@@ -924,7 +924,6 @@ exports[`renders extended FAB 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -935,6 +934,7 @@ exports[`renders extended FAB 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -1147,7 +1147,6 @@ exports[`renders extended FAB with custom size prop 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -1158,6 +1157,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [

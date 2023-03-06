@@ -393,7 +393,6 @@ Platform.select({
 
 #### Using `configureFonts` helper
 
-<div style={{display: 'none'}}>
 * If there is a need to create a custom font variant, prepare its config object including required all fonts properties. After that, defined `fontConfig` has to be passed under the <b>`variant`</b> name as `config` into the params object:
 
 ```js
@@ -428,7 +427,16 @@ export default function Main() {
   );
 }
 ```
-</div>
+
+If you're using TypeScript you will need to create a custom `Text` component which accepts your custom variants:
+
+```typescript
+import { customText } from 'react-native-paper'
+
+// Use this instead of importing `Text` from `react-native-paper`
+export const Text = customText<'customVariant'>()
+```
+
 
 * In order to override one of the available `variant`'s font properties, pass the modified `fontConfig` under specific <b>`variant`</b> name as `config` into the params object:
 

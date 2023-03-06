@@ -63,7 +63,7 @@ export {
   Subheading,
   Title,
 } from './components/Typography/v2';
-export { default as Text } from './components/Typography/Text';
+export { default as Text, customText } from './components/Typography/Text';
 
 // Types
 export type { Props as ActivityIndicatorProps } from './components/ActivityIndicator';
@@ -149,4 +149,10 @@ export type { Props as SegmentedButtonsProps } from './components/SegmentedButto
 export type { Props as ListImageProps } from './components/List/ListImage';
 export type { Props as TooltipProps } from './components/Tooltip/Tooltip';
 
-export type { MD2Theme, MD3Theme, ThemeBase, MD3Elevation } from './types';
+export type {
+  MD2Theme,
+  MD3Theme,
+  ThemeBase,
+  MD3Elevation,
+  MD3TypescaleKey,
+} from './types';

@@ -1798,7 +1798,6 @@ exports[`renders data table pagination with options select 1`] = `
                   style={
                     Array [
                       Object {
-                        "color": "rgba(28, 27, 31, 1)",
                         "fontFamily": "System",
                         "fontSize": 14,
                         "fontWeight": "500",
@@ -1809,6 +1808,7 @@ exports[`renders data table pagination with options select 1`] = `
                         "textAlign": "left",
                       },
                       Object {
+                        "color": "rgba(28, 27, 31, 1)",
                         "writingDirection": "ltr",
                       },
                       Array [

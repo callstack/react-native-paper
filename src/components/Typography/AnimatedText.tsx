@@ -2,9 +2,10 @@ import * as React from 'react';
 import { Animated, I18nManager, StyleSheet, TextStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import { Font, ThemeProp, MD3TypescaleKey } from '../../types';
+import type { ThemeProp } from '../../types';
+import type { VariantProp } from './types';
 
-type Props = React.ComponentPropsWithRef<typeof Animated.Text> & {
+type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
   /**
    * Variant defines appropriate text styles for type role and its size.
    * Available variants:
@@ -19,7 +20,7 @@ type Props = React.ComponentPropsWithRef<typeof Animated.Text> & {
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
-  variant?: keyof typeof MD3TypescaleKey;
+  variant?: VariantProp<T>;
   style?: TextStyle;
   /**
    * @optional
@@ -37,44 +38,29 @@ function AnimatedText({
   theme: themeOverrides,
   variant,
   ...rest
-}: Props) {
+}: Props<never>) {
   const theme = useInternalTheme(themeOverrides);
   const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
 
   if (theme.isV3 && variant) {
-    const stylesByVariant = Object.keys(MD3TypescaleKey).reduce(
-      (acc, key) => {
-        const { fontSize, fontWeight, lineHeight, letterSpacing, fontFamily } =
-          theme.fonts[key as keyof typeof MD3TypescaleKey];
-
-        return {
-          ...acc,
-          [key]: {
-            fontFamily,
-            fontSize,
-            fontWeight,
-            lineHeight: lineHeight,
-            letterSpacing,
-            color: theme.colors.onSurface,
-          },
-        };
-      },
-      {} as {
-        [key in MD3TypescaleKey]: {
-          fontSize: number;
-          fontWeight: Font['fontWeight'];
-          lineHeight: number;
-          letterSpacing: number;
-        };
-      }
-    );
-
-    const styleForVariant = stylesByVariant[variant];
+    const font = theme.fonts[variant];
+    if (typeof font !== 'object') {
+      throw new Error(
+        `Variant ${variant} was not provided properly. Valid variants are ${Object.keys(
+          theme.fonts
+        ).join(', ')}.`
+      );
+    }
 
     return (
       <Animated.Text
         {...rest}
-        style={[styleForVariant, styles.text, { writingDirection }, style]}
+        style={[
+          font,
+          styles.text,
+          { writingDirection, color: theme.colors.onSurface },
+          style,
+        ]}
       />
     );
   } else {
@@ -104,5 +90,8 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
 });
+
+export const customAnimatedText = <T,>() =>
+  AnimatedText as (props: Props<T>) => JSX.Element;
 
 export default AnimatedText;

@@ -3,8 +3,11 @@ import * as React from 'react';
 import { render } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
 
+import Provider from '../../../core/Provider';
+import configureFonts from '../../../styles/fonts';
+import { MD3LightTheme } from '../../../styles/themes';
 import { tokens } from '../../../styles/themes/v3/tokens';
-import Text from '../../Typography/Text';
+import Text, { customText } from '../../Typography/Text';
 
 const content = 'Something rendered as a child content';
 
@@ -48,4 +51,42 @@ it('renders v3 Text component without variant with default fontWeight and fontFa
     fontFamily: brandRegular,
     fontWeight: weightRegular,
   });
+});
+
+it('renders v3 Text component with custom variant correctly', () => {
+  const fontConfig = {
+    customVariant: {
+      fontFamily: 'Montserrat-Regular',
+      fontWeight: '400',
+      letterSpacing: 0.51,
+      lineHeight: 54.1,
+      fontSize: 41,
+    },
+  } as const;
+
+  const theme = {
+    ...MD3LightTheme,
+    fonts: configureFonts({ config: fontConfig }),
+  };
+  const Text = customText<'customVariant'>();
+  const { getByTestId } = render(
+    <Provider theme={theme}>
+      <Text testID="text-with-custom-variant" variant="customVariant">
+        {content}
+      </Text>
+    </Provider>
+  );
+
+  expect(getByTestId('text-with-custom-variant').props.style).toMatchSnapshot();
+});
+
+it('throws when custom variant not provided', () => {
+  jest.spyOn(console, 'error').mockImplementation(() => {});
+
+  const Text = customText<'myCustomVariant'>();
+  expect(() =>
+    render(<Text variant="myCustomVariant">{content}</Text>)
+  ).toThrow(/myCustomVariant was not provided/);
+
+  jest.clearAllMocks();
 });

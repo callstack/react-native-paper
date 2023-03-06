@@ -171,7 +171,6 @@ exports[`renders chip with close button 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -182,6 +181,7 @@ exports[`renders chip with close button 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -463,7 +463,6 @@ exports[`renders chip with custom close button 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -474,6 +473,7 @@ exports[`renders chip with custom close button 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -755,7 +755,6 @@ exports[`renders chip with icon 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -766,6 +765,7 @@ exports[`renders chip with icon 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -918,7 +918,6 @@ exports[`renders chip with onPress 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -929,6 +928,7 @@ exports[`renders chip with onPress 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -1081,7 +1081,6 @@ exports[`renders outlined disabled chip 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -1092,6 +1091,7 @@ exports[`renders outlined disabled chip 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [
@@ -1296,7 +1296,6 @@ exports[`renders selected chip 1`] = `
             style={
               Array [
                 Object {
-                  "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
@@ -1307,6 +1306,7 @@ exports[`renders selected chip 1`] = `
                   "textAlign": "left",
                 },
                 Object {
+                  "color": "rgba(28, 27, 31, 1)",
                   "writingDirection": "ltr",
                 },
                 Array [

@@ -8,10 +8,11 @@ import {
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import { Font, MD3TypescaleKey, ThemeProp } from '../../types';
+import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
+import type { VariantProp } from './types';
 
-export type Props = React.ComponentProps<typeof NativeText> & {
+export type Props<T> = React.ComponentProps<typeof NativeText> & {
   /**
    * @supported Available in v5.x with theme version 3
    *
@@ -28,11 +29,15 @@ export type Props = React.ComponentProps<typeof NativeText> & {
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
-  variant?: keyof typeof MD3TypescaleKey;
+  variant?: VariantProp<T>;
   children: React.ReactNode;
   theme?: ThemeProp;
   style?: StyleProp<TextStyle>;
 };
+
+export type TextRef = React.ForwardedRef<{
+  setNativeProps(args: Object): void;
+}>;
 
 // @component-group Typography
 
@@ -77,10 +82,9 @@ export type Props = React.ComponentProps<typeof NativeText> & {
  *
  * @extends Text props https://reactnative.dev/docs/text#props
  */
-
-const Text: React.ForwardRefRenderFunction<{}, Props> = (
-  { style, variant, theme: initialTheme, ...rest }: Props,
-  ref
+const Text = (
+  { style, variant, theme: initialTheme, ...rest }: Props<string>,
+  ref: TextRef
 ) => {
   const root = React.useRef<NativeText | null>(null);
   // FIXME: destructure it in TS 4.6+
@@ -92,39 +96,24 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
   }));
 
   if (theme.isV3 && variant) {
-    const stylesByVariant = Object.keys(MD3TypescaleKey).reduce(
-      (acc, key) => {
-        const { fontSize, fontWeight, lineHeight, letterSpacing, fontFamily } =
-          theme.fonts[key as keyof typeof MD3TypescaleKey];
-
-        return {
-          ...acc,
-          [key]: {
-            fontFamily,
-            fontSize,
-            fontWeight,
-            lineHeight,
-            letterSpacing,
-            color: theme.colors.onSurface,
-          },
-        };
-      },
-      {} as {
-        [key in MD3TypescaleKey]: {
-          fontSize: number;
-          fontWeight: Font['fontWeight'];
-          lineHeight: number;
-          letterSpacing: number;
-        };
-      }
-    );
-
-    const styleForVariant = stylesByVariant[variant];
+    const font = theme.fonts[variant];
+    if (typeof font !== 'object') {
+      throw new Error(
+        `Variant ${variant} was not provided properly. Valid variants are ${Object.keys(
+          theme.fonts
+        ).join(', ')}.`
+      );
+    }
 
     return (
       <NativeText
         ref={root}
-        style={[styleForVariant, styles.text, { writingDirection }, style]}
+        style={[
+          font,
+          styles.text,
+          { writingDirection, color: theme.colors.onSurface },
+          style,
+        ]}
         {...rest}
       />
     );
@@ -150,4 +139,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default forwardRef(Text);
+type TextComponent<T> = (
+  props: Props<T> & { ref?: React.RefObject<TextRef> }
+) => JSX.Element;
+
+const Component = forwardRef(Text) as TextComponent<never>;
+
+export const customText = <T,>() => Component as unknown as TextComponent<T>;
+
+export default Component;

@@ -2042,7 +2042,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -2053,6 +2052,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -2096,7 +2096,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -2107,6 +2106,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -2350,7 +2350,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -2361,6 +2360,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -2404,7 +2404,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -2415,6 +2414,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -2658,7 +2658,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -2669,6 +2668,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -2712,7 +2712,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -2723,6 +2722,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -2966,7 +2966,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -2977,6 +2976,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -3020,7 +3020,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -3031,6 +3030,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -3274,7 +3274,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -3285,6 +3284,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -3328,7 +3328,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -3339,6 +3338,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -3784,7 +3784,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -3795,6 +3794,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -4044,7 +4044,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -4055,6 +4054,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -4304,7 +4304,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -4315,6 +4314,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -4564,7 +4564,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -4575,6 +4574,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -4824,7 +4824,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -4835,6 +4834,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -6941,7 +6941,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -6952,6 +6951,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -6995,7 +6995,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -7006,6 +7005,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -7249,7 +7249,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -7260,6 +7259,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -7303,7 +7303,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -7314,6 +7313,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -7557,7 +7557,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -7568,6 +7567,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -7611,7 +7611,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -7622,6 +7621,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -8067,7 +8067,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -8078,6 +8077,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -8327,7 +8327,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -8338,6 +8337,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -8587,7 +8587,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -8598,6 +8597,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -9015,7 +9015,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -9026,6 +9025,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -9069,7 +9069,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -9080,6 +9079,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -9323,7 +9323,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -9334,6 +9333,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -9377,7 +9377,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -9388,6 +9387,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -9631,7 +9631,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -9642,6 +9641,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -9685,7 +9685,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -9696,6 +9695,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -10141,7 +10141,6 @@ exports[`renders shifting bottom navigation 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -10152,6 +10151,7 @@ exports[`renders shifting bottom navigation 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -10401,7 +10401,6 @@ exports[`renders shifting bottom navigation 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -10412,6 +10411,7 @@ exports[`renders shifting bottom navigation 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -10661,7 +10661,6 @@ exports[`renders shifting bottom navigation 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -10672,6 +10671,7 @@ exports[`renders shifting bottom navigation 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -10921,7 +10921,6 @@ exports[`renders shifting bottom navigation 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -10932,6 +10931,7 @@ exports[`renders shifting bottom navigation 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
@@ -11181,7 +11181,6 @@ exports[`renders shifting bottom navigation 1`] = `
                       style={
                         Array [
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
@@ -11192,6 +11191,7 @@ exports[`renders shifting bottom navigation 1`] = `
                             "textAlign": "left",
                           },
                           Object {
+                            "color": "rgba(28, 27, 31, 1)",
                             "writingDirection": "ltr",
                           },
                           Array [
