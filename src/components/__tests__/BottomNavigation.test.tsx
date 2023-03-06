@@ -452,6 +452,7 @@ it('displays ripple animation view if shifting is truthy', () => {
       renderScene={({ route }) => route.title}
       getLazy={({ route }) => route.key === 'key-2'}
       testID="bottom-navigation"
+      theme={{ isV3: false }}
       shifting
     />
   );

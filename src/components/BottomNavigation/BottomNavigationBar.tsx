@@ -607,7 +607,7 @@ const BottomNavigationBar = ({
           accessibilityRole={'tablist'}
           testID={`${testID}-bar-content-wrapper`}
         >
-          {shifting ? (
+          {shifting && !isV3 ? (
             <Animated.View
               pointerEvents="none"
               style={[

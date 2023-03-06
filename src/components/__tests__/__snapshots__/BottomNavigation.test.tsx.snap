@@ -903,28 +903,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             testID="bottom-navigation-bar-content-wrapper"
           >
             <View
-              collapsable={false}
-              pointerEvents="none"
-              style={
-                Object {
-                  "backgroundColor": undefined,
-                  "borderRadius": 0,
-                  "height": 0,
-                  "left": 0,
-                  "opacity": 0,
-                  "position": "absolute",
-                  "top": 28,
-                  "transform": Array [
-                    Object {
-                      "scale": 0.008,
-                    },
-                  ],
-                  "width": 0,
-                }
-              }
-              testID="bottom-navigation-bar-content-ripple"
-            />
-            <View
               accessibilityRole="button"
               accessibilityState={
                 Object {
@@ -3524,28 +3502,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
             testID="bottom-navigation-bar-content-wrapper"
           >
             <View
-              collapsable={false}
-              pointerEvents="none"
-              style={
-                Object {
-                  "backgroundColor": undefined,
-                  "borderRadius": 0,
-                  "height": 0,
-                  "left": 0,
-                  "opacity": 0,
-                  "position": "absolute",
-                  "top": 28,
-                  "transform": Array [
-                    Object {
-                      "scale": 0.008,
-                    },
-                  ],
-                  "width": 0,
-                }
-              }
-              testID="bottom-navigation-bar-content-ripple"
-            />
-            <View
               accessibilityRole="button"
               accessibilityState={
                 Object {
@@ -5713,28 +5669,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             testID="bottom-navigation-bar-content-wrapper"
           >
             <View
-              collapsable={false}
-              pointerEvents="none"
-              style={
-                Object {
-                  "backgroundColor": undefined,
-                  "borderRadius": 0,
-                  "height": 0,
-                  "left": 0,
-                  "opacity": 0,
-                  "position": "absolute",
-                  "top": 28,
-                  "transform": Array [
-                    Object {
-                      "scale": 0.008,
-                    },
-                  ],
-                  "width": 0,
-                }
-              }
-              testID="bottom-navigation-bar-content-ripple"
-            />
-            <View
               accessibilityRole="button"
               accessibilityState={
                 Object {
@@ -7807,28 +7741,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             testID="bottom-navigation-bar-content-wrapper"
           >
             <View
-              collapsable={false}
-              pointerEvents="none"
-              style={
-                Object {
-                  "backgroundColor": undefined,
-                  "borderRadius": 0,
-                  "height": 0,
-                  "left": 0,
-                  "opacity": 0,
-                  "position": "absolute",
-                  "top": 28,
-                  "transform": Array [
-                    Object {
-                      "scale": 0.008,
-                    },
-                  ],
-                  "width": 0,
-                }
-              }
-              testID="bottom-navigation-bar-content-ripple"
-            />
-            <View
               accessibilityRole="button"
               accessibilityState={
                 Object {
@@ -9880,28 +9792,6 @@ exports[`renders shifting bottom navigation 1`] = `
             }
             testID="bottom-navigation-bar-content-wrapper"
           >
-            <View
-              collapsable={false}
-              pointerEvents="none"
-              style={
-                Object {
-                  "backgroundColor": undefined,
-                  "borderRadius": 0,
-                  "height": 0,
-                  "left": 0,
-                  "opacity": 0,
-                  "position": "absolute",
-                  "top": 28,
-                  "transform": Array [
-                    Object {
-                      "scale": 0.008,
-                    },
-                  ],
-                  "width": 0,
-                }
-              }
-              testID="bottom-navigation-bar-content-ripple"
-            />
             <View
               accessibilityRole="button"
               accessibilityState={
