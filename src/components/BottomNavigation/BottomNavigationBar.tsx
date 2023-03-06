@@ -258,7 +258,7 @@ const BottomNavigationBar = ({
   safeAreaInsets,
   labelMaxFontSizeMultiplier = 1,
   compact: compactProp,
-  testID = 'bottom-navigation',
+  testID = 'bottom-navigation-bar',
   theme: themeOverrides,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -464,7 +464,7 @@ const BottomNavigationBar = ({
   return (
     <Surface
       {...(theme.isV3 && { elevation: 0 })}
-      testID={`${testID}-surface`}
+      testID={testID}
       style={[
         !theme.isV3 && styles.elevation,
         styles.bar,
@@ -497,7 +497,7 @@ const BottomNavigationBar = ({
     >
       <Animated.View
         style={[styles.barContent, { backgroundColor }]}
-        testID={`${testID}-bar-content`}
+        testID={`${testID}-content`}
       >
         <View
           style={[
@@ -511,7 +511,7 @@ const BottomNavigationBar = ({
             },
           ]}
           accessibilityRole={'tablist'}
-          testID={`${testID}-bar-content-wrapper`}
+          testID={`${testID}-content-wrapper`}
         >
           {shifting && !isV3 ? (
             <Animated.View
@@ -547,7 +547,7 @@ const BottomNavigationBar = ({
                   }),
                 },
               ]}
-              testID={`${testID}-bar-content-ripple`}
+              testID={`${testID}-content-ripple`}
             />
           ) : null}
           {routes.map((route, index) => {

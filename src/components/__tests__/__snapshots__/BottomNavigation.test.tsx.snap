@@ -92,7 +92,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         "top": undefined,
       }
     }
-    testID="bottom-navigation-surface-outer-layer"
+    testID="bottom-navigation-bar-outer-layer"
   >
     <View
       collapsable={false}
@@ -108,7 +108,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-surface-inner-layer"
+      testID="bottom-navigation-bar-inner-layer"
     >
       <View
         collapsable={false}
@@ -120,7 +120,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             "flex": undefined,
           }
         }
-        testID="bottom-navigation-surface"
+        testID="bottom-navigation-bar"
       >
         <View
           collapsable={false}
@@ -845,7 +845,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         "top": undefined,
       }
     }
-    testID="bottom-navigation-surface-outer-layer"
+    testID="bottom-navigation-bar-outer-layer"
   >
     <View
       collapsable={false}
@@ -861,7 +861,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-surface-inner-layer"
+      testID="bottom-navigation-bar-inner-layer"
     >
       <View
         collapsable={false}
@@ -873,7 +873,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             "flex": undefined,
           }
         }
-        testID="bottom-navigation-surface"
+        testID="bottom-navigation-bar"
       >
         <View
           collapsable={false}
@@ -1730,7 +1730,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
         "top": undefined,
       }
     }
-    testID="bottom-navigation-surface-outer-layer"
+    testID="bottom-navigation-bar-outer-layer"
   >
     <View
       collapsable={false}
@@ -1746,7 +1746,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-surface-inner-layer"
+      testID="bottom-navigation-bar-inner-layer"
     >
       <View
         collapsable={false}
@@ -1758,7 +1758,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
             "flex": undefined,
           }
         }
-        testID="bottom-navigation-surface"
+        testID="bottom-navigation-bar"
       >
         <View
           collapsable={false}
@@ -3444,7 +3444,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
         "top": undefined,
       }
     }
-    testID="bottom-navigation-surface-outer-layer"
+    testID="bottom-navigation-bar-outer-layer"
   >
     <View
       collapsable={false}
@@ -3460,7 +3460,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-surface-inner-layer"
+      testID="bottom-navigation-bar-inner-layer"
     >
       <View
         collapsable={false}
@@ -3472,7 +3472,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
             "flex": undefined,
           }
         }
-        testID="bottom-navigation-surface"
+        testID="bottom-navigation-bar"
       >
         <View
           collapsable={false}
@@ -4918,7 +4918,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         "top": undefined,
       }
     }
-    testID="bottom-navigation-surface-outer-layer"
+    testID="bottom-navigation-bar-outer-layer"
   >
     <View
       collapsable={false}
@@ -4934,7 +4934,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-surface-inner-layer"
+      testID="bottom-navigation-bar-inner-layer"
     >
       <View
         collapsable={false}
@@ -4946,7 +4946,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             "flex": undefined,
           }
         }
-        testID="bottom-navigation-surface"
+        testID="bottom-navigation-bar"
       >
         <View
           collapsable={false}
@@ -5611,7 +5611,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         "top": undefined,
       }
     }
-    testID="bottom-navigation-surface-outer-layer"
+    testID="bottom-navigation-bar-outer-layer"
   >
     <View
       collapsable={false}
@@ -5627,7 +5627,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-surface-inner-layer"
+      testID="bottom-navigation-bar-inner-layer"
     >
       <View
         collapsable={false}
@@ -5639,7 +5639,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             "flex": undefined,
           }
         }
-        testID="bottom-navigation-surface"
+        testID="bottom-navigation-bar"
       >
         <View
           collapsable={false}
@@ -6585,7 +6585,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         "top": undefined,
       }
     }
-    testID="bottom-navigation-surface-outer-layer"
+    testID="bottom-navigation-bar-outer-layer"
   >
     <View
       collapsable={false}
@@ -6601,7 +6601,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-surface-inner-layer"
+      testID="bottom-navigation-bar-inner-layer"
     >
       <View
         collapsable={false}
@@ -6613,7 +6613,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             "flex": undefined,
           }
         }
-        testID="bottom-navigation-surface"
+        testID="bottom-navigation-bar"
       >
         <View
           collapsable={false}
@@ -7683,7 +7683,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         "top": undefined,
       }
     }
-    testID="bottom-navigation-surface-outer-layer"
+    testID="bottom-navigation-bar-outer-layer"
   >
     <View
       collapsable={false}
@@ -7699,7 +7699,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-surface-inner-layer"
+      testID="bottom-navigation-bar-inner-layer"
     >
       <View
         collapsable={false}
@@ -7711,7 +7711,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             "flex": undefined,
           }
         }
-        testID="bottom-navigation-surface"
+        testID="bottom-navigation-bar"
       >
         <View
           collapsable={false}
@@ -8637,7 +8637,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
         "top": undefined,
       }
     }
-    testID="bottom-navigation-surface-outer-layer"
+    testID="bottom-navigation-bar-outer-layer"
   >
     <View
       collapsable={false}
@@ -8653,7 +8653,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-surface-inner-layer"
+      testID="bottom-navigation-bar-inner-layer"
     >
       <View
         collapsable={false}
@@ -8665,7 +8665,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
             "flex": undefined,
           }
         }
-        testID="bottom-navigation-surface"
+        testID="bottom-navigation-bar"
       >
         <View
           collapsable={false}
@@ -9735,7 +9735,7 @@ exports[`renders shifting bottom navigation 1`] = `
         "top": undefined,
       }
     }
-    testID="bottom-navigation-surface-outer-layer"
+    testID="bottom-navigation-bar-outer-layer"
   >
     <View
       collapsable={false}
@@ -9751,7 +9751,7 @@ exports[`renders shifting bottom navigation 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-surface-inner-layer"
+      testID="bottom-navigation-bar-inner-layer"
     >
       <View
         collapsable={false}
@@ -9763,7 +9763,7 @@ exports[`renders shifting bottom navigation 1`] = `
             "flex": undefined,
           }
         }
-        testID="bottom-navigation-surface"
+        testID="bottom-navigation-bar"
       >
         <View
           collapsable={false}

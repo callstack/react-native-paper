@@ -586,7 +586,7 @@ const BottomNavigation = ({
         safeAreaInsets={safeAreaInsets}
         labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
         compact={compact}
-        testID={testID}
+        testID={`${testID}-bar`}
         theme={theme}
       />
     </View>
