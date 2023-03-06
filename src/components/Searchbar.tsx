@@ -19,20 +19,17 @@ import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 import { forwardRef } from '../utils/forwardRef';
 import ActivityIndicator from './ActivityIndicator';
+import Divider from './Divider';
 import type { IconSource } from './Icon';
 import Icon from './Icon';
 import IconButton from './IconButton/IconButton';
 import Surface from './Surface';
 
+interface Style {
+  marginRight: number;
+}
+
 export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
-  /**
-   * Accessibility label for the button. This is read by the screen reader when the user taps the button.
-   */
-  clearAccessibilityLabel?: string;
-  /**
-   * Accessibility label for the button. This is read by the screen reader when the user taps the button.
-   */
-  searchAccessibilityLabel?: string;
   /**
    * Hint text shown when the input is empty.
    */
@@ -42,13 +39,22 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    */
   value: string;
   /**
+   * Callback that is called when the text input's text changes.
+   */
+  onChangeText?: (query: string) => void;
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Search layout mode, the default value is "bar".
+   */
+  mode?: 'bar' | 'view';
+  /**
    * Icon name for the left icon button (see `onIconPress`).
    */
   icon?: IconSource;
   /**
-   * Callback that is called when the text input's text changes.
+   * Custom color for icon, default will be derived from theme
    */
-  onChangeText?: (query: string) => void;
+  iconColor?: string;
   /**
    * Callback to execute if we want the left icon to act as button.
    */
@@ -59,6 +65,55 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    */
   onClearIconPress?: (e: GestureResponderEvent) => void;
   /**
+   * Accessibility label for the button. This is read by the screen reader when the user taps the button.
+   */
+  searchAccessibilityLabel?: string;
+  /**
+   * Custom icon for clear button, default will be icon close. It's visible when `loading` is set to `false`.
+   * In v5.x with theme version 3, `clearIcon` is visible only `right` prop is not defined.
+   */
+  clearIcon?: IconSource;
+  /**
+   * Accessibility label for the button. This is read by the screen reader when the user taps the button.
+   */
+  clearAccessibilityLabel?: string;
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Icon name for the right trailering icon button.
+   * Works only when `mode` is set to "bar". It won't be displayed if `loading` is set to `true`.
+   */
+  traileringIcon?: IconSource;
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Custom color for the right trailering icon, default will be derived from theme
+   */
+  traileringIconColor?: string;
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Callback to execute on the right trailering icon button press.
+   */
+  onTraileringIconPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Accessibility label for the right trailering icon button. This is read by the screen reader when the user taps the button.
+   */
+  traileringIconAccessibilityLabel?: string;
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Callback which returns a React element to display on the right side.
+   * Works only when `mode` is set to "bar".
+   */
+  right?: (props: {
+    color: string;
+    style: Style;
+    testID: string;
+  }) => React.ReactNode;
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Whether to show `Divider` at the bottom of the search.
+   * Works only when `mode` is set to "view". True by default.
+   */
+  showDivider?: boolean;
+  /**
    * @supported Available in v5.x with theme version 3
    * Changes Searchbar shadow and background on iOS and Android.
    */
@@ -68,14 +123,6 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    */
   inputStyle?: StyleProp<TextStyle>;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
-  /**
-   * Custom color for icon, default will be derived from theme
-   */
-  iconColor?: string;
-  /**
-   * Custom icon for clear button, default will be icon close
-   */
-  clearIcon?: IconSource;
   /**
    * Custom flag for replacing clear button with activity indicator.
    */
@@ -128,16 +175,23 @@ type TextInputHandles = Pick<
 const Searchbar = forwardRef<TextInputHandles, Props>(
   (
     {
-      clearAccessibilityLabel = 'clear',
-      clearIcon,
       icon,
       iconColor: customIconColor,
-      inputStyle,
       onIconPress,
-      onClearIconPress,
-      placeholder,
       searchAccessibilityLabel = 'search',
-      elevation = 1,
+      clearIcon,
+      clearAccessibilityLabel = 'clear',
+      onClearIconPress,
+      traileringIcon,
+      traileringIconColor,
+      traileringIconAccessibilityLabel,
+      onTraileringIconPress,
+      right,
+      mode = 'bar',
+      showDivider = true,
+      inputStyle,
+      placeholder,
+      elevation = 0,
       style,
       theme: themeOverrides,
       value,
@@ -182,24 +236,51 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       onClearIconPress?.(e);
     };
 
-    const { colors, roundness, dark, isV3 } = theme;
-    const textColor = isV3 ? theme.colors.onSurface : theme.colors.text;
+    const { roundness, dark, isV3, fonts } = theme;
+
+    const placeholderTextColor = isV3
+      ? theme.colors.onSurface
+      : theme.colors?.placeholder;
+    const textColor = isV3 ? theme.colors.onSurfaceVariant : theme.colors.text;
+    const md2IconColor = dark
+      ? textColor
+      : color(textColor).alpha(0.54).rgb().string();
     const iconColor =
-      customIconColor ||
-      (dark ? textColor : color(textColor).alpha(0.54).rgb().string());
+      customIconColor || (isV3 ? theme.colors.onSurfaceVariant : md2IconColor);
     const rippleColor = color(textColor).alpha(0.32).rgb().string();
+
+    const font = isV3
+      ? {
+          ...fonts.bodyLarge,
+          lineHeight: Platform.select({
+            ios: 0,
+            default: fonts.bodyLarge.lineHeight,
+          }),
+        }
+      : theme.fonts.regular;
+
+    const isBarMode = isV3 && mode === 'bar';
+    const shouldRenderTraileringIcon =
+      isBarMode &&
+      traileringIcon &&
+      !loading &&
+      (!value || right !== undefined);
 
     return (
       <Surface
         style={[
           { borderRadius: roundness },
           !isV3 && styles.elevation,
+          isV3 && {
+            backgroundColor: theme.colors.elevation.level3,
+            borderRadius: roundness * (isBarMode ? 7 : 0),
+          },
           styles.container,
           style,
         ]}
+        testID={`${testID}-container`}
         {...(theme.isV3 && { elevation })}
         theme={theme}
-        testID={`${testID}-container`}
       >
         <IconButton
           accessibilityRole="button"
@@ -226,16 +307,15 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             styles.input,
             {
               color: textColor,
-              ...(theme.isV3 ? theme.fonts.default : theme.fonts.regular),
+              ...font,
               ...Platform.select({ web: { outline: 'none' } }),
             },
+            isV3 && (isBarMode ? styles.barModeInput : styles.viewModeInput),
             inputStyle,
           ]}
           placeholder={placeholder || ''}
-          placeholderTextColor={
-            theme.isV3 ? theme.colors.onSurface : theme.colors?.placeholder
-          }
-          selectionColor={colors?.primary}
+          placeholderTextColor={placeholderTextColor}
+          selectionColor={theme.colors?.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
           keyboardAppearance={dark ? 'dark' : 'light'}
@@ -248,7 +328,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
         {loading ? (
           <ActivityIndicator
             testID="activity-indicator"
-            style={styles.loader}
+            style={isV3 ? styles.v3Loader : styles.loader}
           />
         ) : (
           // Clear icon should be always rendered within Searchbar – it's transparent,
@@ -258,6 +338,10 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
           <View
             pointerEvents={value ? 'auto' : 'none'}
             testID={`${testID}-icon-wrapper`}
+            style={[
+              isV3 && !value && styles.v3ClearIcon,
+              isV3 && right !== undefined && styles.v3ClearIconHidden,
+            ]}
           >
             <IconButton
               borderless
@@ -269,7 +353,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
                 clearIcon ||
                 (({ size, color }) => (
                   <Icon
-                    source="close"
+                    source={isV3 ? 'close' : 'close-circle-outline'}
                     color={color}
                     size={size}
                     direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
@@ -280,6 +364,31 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
               theme={theme}
             />
           </View>
+        )}
+        {shouldRenderTraileringIcon ? (
+          <IconButton
+            accessibilityRole="button"
+            borderless
+            onPress={onTraileringIconPress}
+            iconColor={traileringIconColor || theme.colors.onSurfaceVariant}
+            icon={traileringIcon}
+            accessibilityLabel={traileringIconAccessibilityLabel}
+            testID={`${testID}-trailering-icon`}
+          />
+        ) : null}
+        {isBarMode &&
+          right?.({ color: textColor, style: styles.rightStyle, testID })}
+        {isV3 && !isBarMode && showDivider && (
+          <Divider
+            bold
+            style={[
+              styles.divider,
+              {
+                backgroundColor: theme.colors.outline,
+              },
+            ]}
+            testID={`${testID}-divider`}
+          />
         )}
       </Surface>
     );
@@ -299,11 +408,38 @@ const styles = StyleSheet.create({
     textAlign: I18nManager.getConstants().isRTL ? 'right' : 'left',
     minWidth: 0,
   },
+  barModeInput: {
+    paddingLeft: 0,
+    minHeight: 56,
+  },
+  viewModeInput: {
+    paddingLeft: 0,
+    minHeight: 72,
+  },
   elevation: {
     elevation: 4,
   },
   loader: {
     margin: 10,
+  },
+  v3Loader: {
+    marginHorizontal: 16,
+  },
+  rightStyle: {
+    marginRight: 16,
+  },
+  v3ClearIcon: {
+    position: 'absolute',
+    right: 0,
+    marginLeft: 16,
+  },
+  v3ClearIconHidden: {
+    display: 'none',
+  },
+  divider: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
   },
 });
 

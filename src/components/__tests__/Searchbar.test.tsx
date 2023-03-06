@@ -4,6 +4,7 @@ import { Animated } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import renderer from 'react-test-renderer';
 
+import * as Avatar from '../Avatar/Avatar';
 import Searchbar from '../Searchbar';
 
 it('renders with placeholder', () => {
@@ -107,4 +108,91 @@ it('defines onClearIconPress action and checks if it is called when close button
 
   fireEvent(iconComponent, 'onPress');
   expect(onClearIconPressMock).toHaveBeenCalledTimes(1);
+});
+
+it('renders clear icon wrapper, with appropriate style for v3', () => {
+  const { getByTestId, update } = render(
+    <Searchbar testID="search-bar" value="" />
+  );
+
+  expect(getByTestId('search-bar-icon-wrapper')).toHaveStyle({
+    position: 'absolute',
+    right: 0,
+    marginLeft: 16,
+  });
+
+  update(
+    <Searchbar
+      testID="search-bar"
+      value=""
+      right={() => <Avatar.Text label="AB" size={30} />}
+    />
+  );
+
+  expect(getByTestId('search-bar-icon-wrapper')).toHaveStyle({
+    display: 'none',
+  });
+});
+
+it('renders trailering icon when mode is set to "bar"', () => {
+  const { getByTestId } = render(
+    <Searchbar
+      testID="search-bar"
+      value={''}
+      traileringIcon={'microphone'}
+      mode="bar"
+    />
+  );
+
+  expect(getByTestId('search-bar-trailering-icon')).toBeTruthy();
+});
+
+it('renders trailering icon with press functionality', () => {
+  const onTraileringIconPressMock = jest.fn();
+
+  const { getByTestId } = render(
+    <Searchbar
+      testID="search-bar"
+      value={''}
+      traileringIcon={'microphone'}
+      onTraileringIconPress={onTraileringIconPressMock}
+      mode="bar"
+    />
+  );
+
+  fireEvent(getByTestId('search-bar-trailering-icon'), 'onPress');
+  expect(onTraileringIconPressMock).toHaveBeenCalledTimes(1);
+});
+
+it('renders clear icon instead of trailering icon', () => {
+  const { getByTestId, update, queryByTestId } = render(
+    <Searchbar
+      testID="search-bar"
+      value={''}
+      traileringIcon={'microphone'}
+      mode="bar"
+    />
+  );
+
+  expect(getByTestId('search-bar-trailering-icon')).toBeTruthy();
+
+  update(
+    <Searchbar
+      testID="search-bar"
+      value={'test'}
+      traileringIcon={'microphone'}
+      mode="bar"
+    />
+  );
+
+  expect(queryByTestId('search-bar-trailering-icon')).toBeNull();
+  expect(getByTestId('search-bar-icon-wrapper')).toBeTruthy();
+});
+
+it('renders searchbar in "view" mode', () => {
+  const { getByTestId } = render(
+    <Searchbar testID="search-bar" value={''} mode="view" />
+  );
+
+  expect(getByTestId('search-bar-container')).toHaveStyle({ borderRadius: 0 });
 });

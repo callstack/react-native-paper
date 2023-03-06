@@ -46,6 +46,7 @@ export default function ScreenWrapper({
         <ScrollView
           {...rest}
           contentContainerStyle={contentContainerStyle}
+          keyboardShouldPersistTaps="always"
           alwaysBounceVertical={false}
           showsVerticalScrollIndicator={false}
           style={[containerStyle, style]}
