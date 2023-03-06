@@ -195,18 +195,10 @@ export type Props = {
     left?: number;
   };
   /**
-   * Style for the bottom navigation bar.  You can pass a custom background color here:
-   *
-   * ```js
-   * barStyle={{ backgroundColor: '#694fad' }}
-   * ```
-   */
-  barStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
-  /**
    * Specifies the largest possible scale a label font can reach.
    */
   labelMaxFontSizeMultiplier?: number;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
    */
@@ -263,7 +255,7 @@ const BottomNavigationBar = ({
   activeColor,
   inactiveColor,
   keyboardHidesNavigationBar = Platform.OS === 'android',
-  barStyle,
+  style,
   labeled = true,
   animationEasing,
   onTabPress,
@@ -439,7 +431,7 @@ const BottomNavigationBar = ({
   const { colors, dark: isDarkTheme, mode, isV3 } = theme;
 
   const { backgroundColor: customBackground, elevation = 4 } =
-    (StyleSheet.flatten(barStyle) || {}) as {
+    (StyleSheet.flatten(style) || {}) as {
       elevation?: number;
       backgroundColor?: ColorValue;
     };
@@ -524,7 +516,7 @@ const BottomNavigationBar = ({
               position: keyboardVisible ? 'absolute' : undefined,
             }
           : null,
-        barStyle,
+        style,
       ]}
       pointerEvents={
         layout.measured
