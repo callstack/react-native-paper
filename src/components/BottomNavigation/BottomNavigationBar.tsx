@@ -813,6 +813,8 @@ const BottomNavigationBar = ({
   );
 };
 
+BottomNavigationBar.displayName = 'BottomNavigation.Bar';
+
 export default BottomNavigationBar;
 
 const styles = StyleSheet.create({

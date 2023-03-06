@@ -620,6 +620,9 @@ BottomNavigation.SceneMap = (scenes: {
   );
 };
 
+// @component ./BottomNavigationBar.tsx
+BottomNavigation.Bar = BottomNavigationBar;
+
 export default BottomNavigation;
 
 const styles = StyleSheet.create({
