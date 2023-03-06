@@ -2,11 +2,9 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Text } from 'react-native-paper';
+import { Text, BottomNavigation } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function HomeScreen() {
@@ -25,12 +23,39 @@ function SettingsScreen() {
   );
 }
 
-const HomeTab = () => {
+export default function BottomNavigationBarExample() {
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
       }}
+      tabBar={({ navigation, state, descriptors, insets }) => (
+        <BottomNavigation.Bar
+          navigationState={state}
+          safeAreaInsets={insets}
+          onTabPress={({ route, preventDefault }) => {
+            const event = navigation.emit({
+              type: 'tabPress',
+              target: route.key,
+              canPreventDefault: true,
+            });
+
+            if (event.defaultPrevented) {
+              preventDefault();
+            } else {
+              navigation.navigate(route);
+            }
+          }}
+          renderIcon={({ route, focused, color }) =>
+            descriptors[route.key].options.tabBarIcon?.({
+              focused,
+              color,
+              size: 24,
+            }) || null
+          }
+          getLabelText={({ route }) => descriptors[route.key].route.name}
+        />
+      )}
     >
       <Tab.Screen
         name="Home"
@@ -52,15 +77,9 @@ const HomeTab = () => {
       />
     </Tab.Navigator>
   );
-};
-
-function ThemingWithReactNavigation() {
-  return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="React Navigation" component={HomeTab} />
-    </Stack.Navigator>
-  );
 }
+
+BottomNavigationBarExample.title = 'Bottom Navigation Bar';
 
 const styles = StyleSheet.create({
   container: {
@@ -69,7 +88,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-ThemingWithReactNavigation.title = 'Theming With React Navigation';
-
-export default ThemingWithReactNavigation;

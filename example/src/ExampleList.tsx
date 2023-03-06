@@ -11,6 +11,7 @@ import AppbarExample from './Examples/AppbarExample';
 import AvatarExample from './Examples/AvatarExample';
 import BadgeExample from './Examples/BadgeExample';
 import BannerExample from './Examples/BannerExample';
+import BottomNavigationBarExample from './Examples/BottomNavigationBarExample';
 import BottomNavigationExample from './Examples/BottomNavigationExample';
 import ButtonExample from './Examples/ButtonExample';
 import CardExample from './Examples/CardExample';
@@ -26,6 +27,7 @@ import ListAccordionExample from './Examples/ListAccordionExample';
 import ListAccordionExampleGroup from './Examples/ListAccordionGroupExample';
 import ListItemExample from './Examples/ListItemExample';
 import ListSectionExample from './Examples/ListSectionExample';
+import MaterialBottomTabNavigatorExample from './Examples/MaterialBottomTabNavigatorExample';
 import MenuExample from './Examples/MenuExample';
 import ProgressBarExample from './Examples/ProgressBarExample';
 import RadioButtonExample from './Examples/RadioButtonExample';
@@ -60,6 +62,7 @@ export const mainExamples: Record<
   avatar: AvatarExample,
   badge: BadgeExample,
   banner: BannerExample,
+  bottomNavigationBarExample: BottomNavigationBarExample,
   bottomNavigation: BottomNavigationExample,
   button: ButtonExample,
   card: CardExample,
@@ -75,6 +78,7 @@ export const mainExamples: Record<
   listAccordionGroup: ListAccordionExampleGroup,
   listSection: ListSectionExample,
   listItem: ListItemExample,
+  materialBottomTabNavigator: MaterialBottomTabNavigatorExample,
   menu: MenuExample,
   progressbar: ProgressBarExample,
   radio: RadioButtonExample,

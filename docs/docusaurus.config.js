@@ -74,6 +74,7 @@ const config = {
           Banner: 'Banner',
           BottomNavigation: {
             BottomNavigation: 'BottomNavigation/BottomNavigation',
+            BottomNavigationBar: 'BottomNavigation/BottomNavigationBar',
           },
           Button: {
             Button: 'Button/Button',

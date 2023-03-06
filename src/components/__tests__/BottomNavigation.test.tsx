@@ -132,12 +132,18 @@ it('sceneAnimationEnabled matches animation requirements', () => {
   );
   fireEvent(tree.getByText('Route: 1'), 'onPress');
 
-  expect(Animated.parallel).toHaveBeenLastCalledWith(
+  expect(Animated.parallel).toHaveBeenNthCalledWith(
+    10,
     expect.arrayContaining([
       expect.objectContaining({
         // ripple
         config: expect.objectContaining({ toValue: 1, duration: 400 }),
       }),
+    ])
+  );
+  expect(Animated.parallel).toHaveBeenNthCalledWith(
+    12,
+    expect.arrayContaining([
       expect.objectContaining({
         // previous position anims, shifting to the left
         config: expect.objectContaining({
@@ -452,6 +458,7 @@ it('displays ripple animation view if shifting is truthy', () => {
       renderScene={({ route }) => route.title}
       getLazy={({ route }) => route.key === 'key-2'}
       testID="bottom-navigation"
+      theme={{ isV3: false }}
       shifting
     />
   );
@@ -546,7 +553,7 @@ it('barStyle animated value changes correctly', () => {
       barStyle={[{ transform: [{ scale: value }] }]}
     />
   );
-  expect(getByTestId('bottom-navigation-surface')).toHaveStyle({
+  expect(getByTestId('bottom-navigation-bar')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -558,7 +565,7 @@ it('barStyle animated value changes correctly', () => {
 
   jest.advanceTimersByTime(200);
 
-  expect(getByTestId('bottom-navigation-surface')).toHaveStyle({
+  expect(getByTestId('bottom-navigation-bar')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });
