@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Text } from 'react-native';
+import { I18nManager, Platform, StyleSheet } from 'react-native';
 
 import {
   CommonActions,
@@ -11,6 +11,7 @@ import {
 } from '@react-navigation/native';
 
 import BottomNavigation from '../../components/BottomNavigation/BottomNavigation';
+import MaterialCommunityIcon from '../../components/MaterialCommunityIcon';
 import type {
   MaterialBottomTabDescriptorMap,
   MaterialBottomTabNavigationConfig,
@@ -24,64 +25,6 @@ type Props = MaterialBottomTabNavigationConfig & {
 };
 
 type Scene = { route: { key: string } };
-
-// Optionally require vector-icons referenced from react-native-paper:
-// https://github.com/callstack/react-native-paper/blob/4b26429c49053eaa4c3e0fae208639e01093fa87/src/components/MaterialCommunityIcon.tsx#L14
-let MaterialCommunityIcons: React.ComponentType<
-  React.ComponentProps<
-    typeof import('react-native-vector-icons/MaterialCommunityIcons').default
-  >
->;
-
-try {
-  // Optionally require vector-icons
-  MaterialCommunityIcons =
-    require('react-native-vector-icons/MaterialCommunityIcons').default;
-} catch (e: any) {
-  let isErrorLogged = false;
-
-  // Fallback component for icons
-  MaterialCommunityIcons = ({
-    name,
-    color,
-    size,
-    selectionColor: _0,
-    onLayout: _1,
-    ...rest
-  }) => {
-    if (!isErrorLogged) {
-      if (
-        !/(Cannot find module|Module not found|Cannot resolve module)/.test(
-          e.message
-        )
-      ) {
-        console.error(e);
-      }
-
-      console.warn(
-        `Tried to use the icon '${name}' in a component from '@react-navigation/material-bottom-tabs', but 'react-native-vector-icons/MaterialCommunityIcons' could not be loaded.`,
-        `To remove this warning, try installing 'react-native-vector-icons' or use another method to specify icon: https://reactnavigation.org/docs/material-bottom-tab-navigator/#tabbaricon.`
-      );
-
-      isErrorLogged = true;
-    }
-
-    return (
-      <Text
-        {...rest}
-        style={[
-          styles.icon,
-          {
-            color: typeof color !== 'number' ? color : undefined,
-            fontSize: size,
-          },
-        ]}
-      >
-        □
-      </Text>
-    );
-  };
-}
 
 export default function MaterialBottomTabView({
   state,
@@ -142,11 +85,11 @@ export default function MaterialBottomTabView({
 
         if (typeof options.tabBarIcon === 'string') {
           return (
-            <MaterialCommunityIcons
+            <MaterialCommunityIcon
+              direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
               name={options.tabBarIcon}
               color={color}
               size={24}
-              style={styles.icon}
             />
           );
         }
@@ -190,9 +133,6 @@ export default function MaterialBottomTabView({
 }
 
 const styles = StyleSheet.create({
-  icon: {
-    backgroundColor: 'transparent',
-  },
   touchable: {
     display: 'flex',
     justifyContent: 'center',
