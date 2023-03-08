@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
+//@ts-ignore
 import BrowserOnly from '@docusaurus/BrowserOnly';
+//@ts-ignore
 import { useColorMode } from '@docusaurus/theme-common';
 import {
   Avatar,
