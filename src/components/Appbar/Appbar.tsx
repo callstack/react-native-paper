@@ -75,7 +75,7 @@ export type Props = Omit<
  * The bottom bar usually provides access to a drawer and up to four actions.
  *
  * By default Appbar uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
- * See [Dark Theme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more informations
+ * See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more informations
  *
  * <div class="screenshots">
  *   <img class="small" src="screenshots/appbar.png" />

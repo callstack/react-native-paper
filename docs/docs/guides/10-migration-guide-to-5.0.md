@@ -48,7 +48,7 @@ theme: {
 }
 ```
 
-Read more about using Material Design 2 in our [Material Design 2 theming guide](https://callstack.github.io/react-native-paper/theming.html#material-design-2)
+Read more about using Material Design 2 in our [Material Design 2 theming guide](https://callstack.github.io/react-native-paper/docs/guides/theming#material-design-2)
 
 ### Colors
 
@@ -188,7 +188,7 @@ To use your current font config from <b>v2</b> and migrate to <b>v3</b> there ar
 + configureFonts({config: fontConfig, isV3: false})
 ```
 
-📍Note: If you want to check how to use `configureFonts` on MD3, check the [Fonts](https://callstack.github.io/react-native-paper/fonts.html) guide.
+📍Note: If you want to check how to use `configureFonts` on MD3, check the [Fonts](https://callstack.github.io/react-native-paper/docs/guides/fonts.html) guide.
 
 ## Components
 

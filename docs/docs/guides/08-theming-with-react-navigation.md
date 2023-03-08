@@ -245,7 +245,7 @@ We don't need to limit ourselves to the themes offered by the libraries in defau
 You can learn all about it their documentations:
 
 - [Theming in React Navigation](https://reactnavigation.org/docs/themes/)
-- [Theming in React Native Paper](https://callstack.github.io/react-native-paper/theming.html)
+- [Theming in React Native Paper](https://callstack.github.io/react-native-paper/docs/guides/theming)
 
 ## React Context for theme customization
 
@@ -309,7 +309,7 @@ export default function App() {
 }
 ```
 
-Now that the Context is available at every component, all we need to do is import it. Next thing is to provide the user with some UI element to control changing the theme. We will use `Paper`'s [Switch](https://callstack.github.io/react-native-paper/switch.html) for this purpose.
+Now that the Context is available at every component, all we need to do is import it. Next thing is to provide the user with some UI element to control changing the theme. We will use `Paper`'s [Switch](https://callstack.github.io/react-native-paper/docs/components/Switch) for this purpose.
 
 ```js
 import React from 'react';
@@ -349,6 +349,6 @@ React Native Paper components will automatically use provided theme thanks to th
 exposed by the library. You can see how it's done in the `Header` component code above.
 
 If light/dark themes are not enough for your use case, you can learn more about creating Material Design themes [here](https://material.io/design/material-theming/implementing-your-theme.html#color).
-On `main` branch of the example app, you will find implemented [Menu](https://callstack.github.io/react-native-paper/menu.html) component, which allows to choose a few custom themes. Inspecting code in `utils` and `Header` may give you some idea how to use your own themes with `Paper`, in addition to dedicated [docs](https://callstack.github.io/react-native-paper/menu.html).
+On `main` branch of the example app, you will find implemented [Menu](https://callstack.github.io/react-native-paper/docs/components/Menu) component, which allows to choose a few custom themes. Inspecting code in `utils` and `Header` may give you some idea how to use your own themes with `Paper`, in addition to dedicated [docs](https://callstack.github.io/react-native-paper/docs/components/Menu).
 
 Read more about integrating `Paper` with `React Navigation` in a brilliant [article](https://reactnavigation.org/blog/2020/01/29/using-react-navigation-5-with-react-native-paper/) by [@trensik](https://twitter.com/trensik)
