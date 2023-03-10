@@ -14,14 +14,15 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useInternalTheme } from '../../core/theming';
 import shadow from '../../styles/shadow';
 import type { ThemeProp } from '../../types';
-import { Appbar } from './Appbar';
+import Appbar from './Appbar';
+import type { AppbarProps } from './Appbar.props';
 import {
   DEFAULT_APPBAR_HEIGHT,
   getAppbarColor,
   modeAppbarHeight,
 } from './utils';
 
-export type Props = React.ComponentProps<typeof Appbar> & {
+export type Props = AppbarProps & {
   /**
    * Whether the background color is a dark color. A dark header will render light text and vice-versa.
    */

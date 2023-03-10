@@ -1,23 +1,15 @@
 import * as React from 'react';
-import {
-  Animated,
-  Platform,
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewStyle,
-  ColorValue,
-} from 'react-native';
+import { Platform, StyleSheet, View, ColorValue } from 'react-native';
 
 import color from 'color';
 
 import { useInternalTheme } from '../../core/theming';
-import type { MD3Elevation, ThemeProp } from '../../types';
+import type { MD3Elevation } from '../../types';
 import Surface from '../Surface';
+import type { AppbarProps } from './Appbar.props';
 import AppbarAction from './AppbarAction';
 import AppbarBackAction from './AppbarBackAction';
 import AppbarContent from './AppbarContent';
-import AppbarHeader from './AppbarHeader';
 import {
   AppbarModes,
   DEFAULT_APPBAR_HEIGHT,
@@ -25,49 +17,6 @@ import {
   modeAppbarHeight,
   renderAppbarContent,
 } from './utils';
-
-export type Props = Omit<
-  Partial<React.ComponentPropsWithRef<typeof View>>,
-  'style'
-> & {
-  /**
-   * Whether the background color is a dark color. A dark appbar will render light text and vice-versa.
-   */
-  dark?: boolean;
-  /**
-   * Content of the `Appbar`.
-   */
-  children: React.ReactNode;
-  /**
-   * @supported Available in v5.x with theme version 3
-   *
-   * Mode of the Appbar.
-   * - `small` - Appbar with default height (64).
-   * - `medium` - Appbar with medium height (112).
-   * - `large` - Appbar with large height (152).
-   * - `center-aligned` - Appbar with default height and center-aligned title.
-   */
-  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
-  /**
-   * @supported Available in v5.x with theme version 3
-   * Whether Appbar background should have the elevation along with primary color pigment.
-   */
-  elevated?: boolean;
-  /**
-   * Safe area insets for the Appbar. This can be used to avoid elements like the navigation bar on Android and bottom safe area on iOS.
-   */
-  safeAreaInsets?: {
-    bottom?: number;
-    top?: number;
-    left?: number;
-    right?: number;
-  };
-  /**
-   * @optional
-   */
-  theme?: ThemeProp;
-  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
-};
 
 /**
  * A component to display action items in a bar. It can be placed at the top or bottom.
@@ -167,8 +116,9 @@ const Appbar = ({
   elevated,
   safeAreaInsets,
   theme: themeOverrides,
+  renderExcept,
   ...rest
-}: Props) => {
+}: AppbarProps) => {
   const theme = useInternalTheme(themeOverrides);
   const { isV3 } = theme;
   const flattenedStyle = StyleSheet.flatten(style);
@@ -307,12 +257,8 @@ const Appbar = ({
                 children: filterAppbarActions(false),
                 isDark,
                 isV3,
-                renderExcept: [
-                  Appbar,
-                  AppbarBackAction,
-                  AppbarContent,
-                  AppbarHeader,
-                ],
+                renderExcept: [Appbar, AppbarBackAction, AppbarContent],
+                renderExceptDisplayName: ['Appbar.Header'],
                 mode,
               })}
             </View>

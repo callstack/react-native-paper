@@ -46,6 +46,7 @@ type RenderAppbarContentProps = {
   isV3: boolean;
   renderOnly?: (React.ComponentType<any> | false)[];
   renderExcept?: React.ComponentType<any>[];
+  renderExceptDisplayName?: string[]; // same as renderExcept but only applies to displayName (helping avoid require cycles)
   mode?: AppbarModes;
   theme?: ThemeProp;
 };
@@ -74,6 +75,7 @@ export const renderAppbarContent = ({
   isV3,
   renderOnly,
   renderExcept,
+  renderExceptDisplayName,
   mode = 'small',
   theme,
 }: RenderAppbarContentProps) => {
@@ -83,6 +85,12 @@ export const renderAppbarContent = ({
       .filter((child) =>
         // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
         renderExcept ? !renderExcept.includes(child.type) : child
+      )
+      .filter((child) =>
+        renderExceptDisplayName
+          ? // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
+            !renderExceptDisplayName?.includes(child.type.displayName)
+          : child
       )
       // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
       .filter((child) => (renderOnly ? renderOnly.includes(child.type) : child))
