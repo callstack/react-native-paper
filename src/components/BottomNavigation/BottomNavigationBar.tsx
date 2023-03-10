@@ -46,9 +46,9 @@ type Route = {
   lazy?: boolean;
 };
 
-type NavigationState = {
+type NavigationState<TRoute extends Route> = {
   index: number;
-  routes: Route[];
+  routes: TRoute[];
 };
 
 type TabPressEvent = {
@@ -56,16 +56,16 @@ type TabPressEvent = {
   preventDefault(): void;
 };
 
-type TouchableProps = TouchableWithoutFeedbackProps & {
+type TouchableProps<TRoute extends Route> = TouchableWithoutFeedbackProps & {
   key: string;
-  route: Route;
+  route: TRoute;
   children: React.ReactNode;
   borderless?: boolean;
   centered?: boolean;
   rippleColor?: string;
 };
 
-export type Props = {
+export type Props<TRoute extends Route> = {
   /**
    * Whether the shifting style is used, the active tab icon shifts up to show the label and the inactive tabs won't have a label.
    *
@@ -115,12 +115,12 @@ export type Props = {
    *
    * `BottomNavigation.Bar` is a controlled component, which means the `index` needs to be updated via the `onTabPress` callback.
    */
-  navigationState: NavigationState;
+  navigationState: NavigationState<TRoute>;
   /**
    * Callback which returns a React Element to be used as tab icon.
    */
   renderIcon?: (props: {
-    route: Route;
+    route: TRoute;
     focused: boolean;
     color: string;
   }) => React.ReactNode;
@@ -128,7 +128,7 @@ export type Props = {
    * Callback which React Element to be used as tab label.
    */
   renderLabel?: (props: {
-    route: Route;
+    route: TRoute;
     focused: boolean;
     color: string;
   }) => React.ReactNode;
@@ -136,32 +136,34 @@ export type Props = {
    * Callback which returns a React element to be used as the touchable for the tab item.
    * Renders a `TouchableRipple` on Android and `TouchableWithoutFeedback` with `View` on iOS.
    */
-  renderTouchable?: (props: TouchableProps) => React.ReactNode;
+  renderTouchable?: (props: TouchableProps<TRoute>) => React.ReactNode;
   /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
    * Uses `route.accessibilityLabel` by default.
    */
-  getAccessibilityLabel?: (props: { route: Route }) => string | undefined;
+  getAccessibilityLabel?: (props: { route: TRoute }) => string | undefined;
   /**
    * Get badge for the tab, uses `route.badge` by default.
    */
-  getBadge?: (props: { route: Route }) => boolean | number | string | undefined;
+  getBadge?: (props: {
+    route: TRoute;
+  }) => boolean | number | string | undefined;
   /**
    * Get color for the tab, uses `route.color` by default.
    */
-  getColor?: (props: { route: Route }) => string | undefined;
+  getColor?: (props: { route: TRoute }) => string | undefined;
   /**
    * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
    */
-  getLabelText?: (props: { route: Route }) => string | undefined;
+  getLabelText?: (props: { route: TRoute }) => string | undefined;
   /**
    * Get the id to locate this tab button in tests, uses `route.testID` by default.
    */
-  getTestID?: (props: { route: Route }) => string | undefined;
+  getTestID?: (props: { route: TRoute }) => string | undefined;
   /**
    * Function to execute on tab press. It receives the route for the pressed tab. Use this to update the navigation state.
    */
-  onTabPress: (props: { route: Route } & TabPressEvent) => void;
+  onTabPress: (props: { route: TRoute } & TabPressEvent) => void;
   /**
    * Custom color for icon and label in the active tab.
    */
@@ -210,7 +212,7 @@ const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
 const OUTLINE_WIDTH = 64;
 
-const Touchable = ({
+const Touchable = <TRoute extends Route>({
   route: _0,
   style,
   children,
@@ -218,7 +220,7 @@ const Touchable = ({
   centered,
   rippleColor,
   ...rest
-}: TouchableProps) =>
+}: TouchableProps<TRoute>) =>
   TouchableRipple.supported ? (
     <TouchableRipple
       {...rest}
@@ -274,7 +276,7 @@ const Touchable = ({
  *             if (event.defaultPrevented) {
  *               preventDefault();
  *             } else {
- *               navigation.navigate(route);
+ *               navigation.navigate(route.name, route.params);
  *             }
  *           }}
  *           renderIcon={({ route, focused, color }) => {
@@ -347,18 +349,37 @@ const Touchable = ({
  *   },
  * });
  * ```
+ *
+ * ## Usage with TypeScript
+ *
+ * Since the shape of individual route will be decided by the router being used,
+ * you can pass route type to `<BottomNavigation.Bar>` to ensure type safety for the API
+ *
+ * Example for React Navigation:
+ *
+ * ```tsx
+ * import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+ * import type { ParamListBase, Route } from '@react-navigation/native';
+ * import { BottomNavigation } from 'react-native-paper';
+ *
+ * // (...)
+ *
+ *  <BottomNavigation.Bar<Route<keyof ParamListBase>>
+ *    navigationState={state}
+ *    onTabPress={({ route }) => {}}
+ *  />
+ * ```
  */
-const BottomNavigationBar = ({
+const BottomNavigationBar = <TRoute extends Route = Route>({
   navigationState,
   renderIcon,
   renderLabel,
-  renderTouchable = (props: TouchableProps) => <Touchable {...props} />,
-  getLabelText = ({ route }: { route: Route }) => route.title,
-  getBadge = ({ route }: { route: Route }) => route.badge,
-  getColor = ({ route }: { route: Route }) => route.color,
-  getAccessibilityLabel = ({ route }: { route: Route }) =>
-    route.accessibilityLabel,
-  getTestID = ({ route }: { route: Route }) => route.testID,
+  renderTouchable = (props: TouchableProps<TRoute>) => <Touchable {...props} />,
+  getLabelText = ({ route }) => route.title,
+  getBadge = ({ route }) => route.badge,
+  getColor = ({ route }) => route.color,
+  getAccessibilityLabel = ({ route }) => route.accessibilityLabel,
+  getTestID = ({ route }) => route.testID,
   activeColor,
   inactiveColor,
   keyboardHidesNavigationBar = Platform.OS === 'android',
@@ -372,7 +393,7 @@ const BottomNavigationBar = ({
   compact: compactProp,
   testID = 'bottom-navigation-bar',
   theme: themeOverrides,
-}: Props) => {
+}: Props<TRoute>) => {
   const theme = useInternalTheme(themeOverrides);
   const { bottom, left, right } = useSafeAreaInsets();
   const { scale } = theme.animation;

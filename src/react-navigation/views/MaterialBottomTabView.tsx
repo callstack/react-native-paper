@@ -2,6 +2,7 @@ import * as React from 'react';
 import { I18nManager, Platform, StyleSheet } from 'react-native';
 
 import {
+  CommonActions,
   Link,
   ParamListBase,
   Route,
@@ -34,7 +35,7 @@ export default function MaterialBottomTabView({
   const buildLink = useLinkBuilder();
 
   return (
-    <BottomNavigation
+    <BottomNavigation<Route<keyof ParamListBase>>
       {...rest}
       onIndexChange={noop}
       navigationState={state}
@@ -119,7 +120,10 @@ export default function MaterialBottomTabView({
         if (event.defaultPrevented) {
           preventDefault();
         } else {
-          navigation.navigate({ key: route.key, merge: true });
+          navigation.dispatch({
+            ...CommonActions.navigate(route.name, route.params),
+            target: state.key,
+          });
         }
       }}
     />

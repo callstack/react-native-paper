@@ -79,6 +79,7 @@ const createState = (index: number, length: number) => ({
   routes: Array.from({ length }, (_, i) => ({
     key: `key-${i}`,
     focusedIcon: icons[i],
+    unfocusedIcon: undefined,
     title: `Route: ${i}`,
   })),
 });
@@ -568,4 +569,38 @@ it('barStyle animated value changes correctly', () => {
   expect(getByTestId('bottom-navigation-bar')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
+});
+
+it("allows customizing Route's type via generics", () => {
+  type CustomRoute = {
+    key: string;
+    customPropertyName: string;
+  };
+
+  type CustomState = {
+    index: number;
+    routes: CustomRoute[];
+  };
+
+  const state: CustomState = {
+    index: 0,
+    routes: [
+      { key: 'a', customPropertyName: 'First' },
+      { key: 'b', customPropertyName: 'Second' },
+    ],
+  };
+
+  const tree = renderer
+    .create(
+      <BottomNavigation<CustomRoute>
+        shifting
+        navigationState={state}
+        onIndexChange={jest.fn()}
+        getLabelText={({ route }) => route.customPropertyName}
+        renderScene={({ route }) => route.customPropertyName}
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
 });

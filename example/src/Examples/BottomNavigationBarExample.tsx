@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import type { ParamListBase, Route } from '@react-navigation/native';
 import { Text, BottomNavigation } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -30,7 +31,7 @@ export default function BottomNavigationBarExample() {
         headerShown: false,
       }}
       tabBar={({ navigation, state, descriptors, insets }) => (
-        <BottomNavigation.Bar
+        <BottomNavigation.Bar<Route<keyof ParamListBase>>
           navigationState={state}
           safeAreaInsets={insets}
           onTabPress={({ route, preventDefault }) => {
@@ -43,7 +44,7 @@ export default function BottomNavigationBarExample() {
             if (event.defaultPrevented) {
               preventDefault();
             } else {
-              navigation.navigate(route);
+              navigation.navigate(route.name);
             }
           }}
           renderIcon={({ route, focused, color }) =>
