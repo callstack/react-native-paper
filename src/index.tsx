@@ -68,7 +68,7 @@ export { default as Text, customText } from './components/Typography/Text';
 // Types
 export type { Props as ActivityIndicatorProps } from './components/ActivityIndicator';
 export type { Props as AnimatedFABProps } from './components/FAB/AnimatedFAB';
-export type { Props as AppbarProps } from './components/Appbar/Appbar';
+export type { AppbarProps } from './components/Appbar/Appbar.props';
 export type { Props as AppbarActionProps } from './components/Appbar/AppbarAction';
 export type { Props as AppbarBackActionProps } from './components/Appbar/AppbarBackAction';
 export type { Props as AppbarContentProps } from './components/Appbar/AppbarContent';
