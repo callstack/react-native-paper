@@ -1,4 +1,4 @@
-import type { ReactNode, ComponentPropsWithRef, ComponentType } from 'react';
+import type { ReactNode, ComponentPropsWithRef } from 'react';
 import type { Animated, StyleProp, View, ViewStyle } from 'react-native';
 
 import type { ThemeProp } from '../../types';
