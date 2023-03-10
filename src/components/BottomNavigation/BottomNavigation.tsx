@@ -598,7 +598,7 @@ const BottomNavigation = <TRoute extends Route = Route>({
  * Pure components are used to minimize re-rendering of the pages.
  * This drastically improves the animation performance.
  */
-BottomNavigation.SceneMap = <TRoute extends Route>(scenes: {
+BottomNavigation.SceneMap = <TRoute extends Route = Route>(scenes: {
   [key: string]: React.ComponentType<{
     route: TRoute;
     jumpTo: (key: string) => void;
