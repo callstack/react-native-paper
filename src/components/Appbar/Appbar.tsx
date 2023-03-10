@@ -116,7 +116,6 @@ const Appbar = ({
   elevated,
   safeAreaInsets,
   theme: themeOverrides,
-  renderExcept,
   ...rest
 }: AppbarProps) => {
   const theme = useInternalTheme(themeOverrides);
