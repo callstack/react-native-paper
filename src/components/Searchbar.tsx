@@ -21,8 +21,8 @@ import { forwardRef } from '../utils/forwardRef';
 import ActivityIndicator from './ActivityIndicator';
 import Divider from './Divider';
 import type { IconSource } from './Icon';
-import Icon from './Icon';
 import IconButton from './IconButton/IconButton';
+import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
 
 interface Style {
@@ -291,8 +291,8 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
           icon={
             icon ||
             (({ size, color }) => (
-              <Icon
-                source="magnify"
+              <MaterialCommunityIcon
+                name="magnify"
                 color={color}
                 size={size}
                 direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
@@ -352,8 +352,8 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
               icon={
                 clearIcon ||
                 (({ size, color }) => (
-                  <Icon
-                    source={isV3 ? 'close' : 'close-circle-outline'}
+                  <MaterialCommunityIcon
+                    name={isV3 ? 'close' : 'close-circle-outline'}
                     color={color}
                     size={size}
                     direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
