@@ -289,6 +289,15 @@ const config = {
         indexName: 'crawler_React Native Paper Docs',
       },
     }),
+
+  customFields: {
+    moreExamples: {
+      Portal: {
+        'Comprehensive Portal example':
+          'https://snack.expo.dev/@react-native-paper/comprehensive-portal-example',
+      },
+    },
+  },
 };
 
 module.exports = config;
