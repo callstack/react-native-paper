@@ -10,7 +10,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import useEventCallback from 'use-event-callback';
+import useLatestCallback from 'use-latest-callback';
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
@@ -450,7 +450,7 @@ const BottomNavigation = ({
     animateToIndex(navigationState.index);
   }, [navigationState.index, animateToIndex, offsetsAnims]);
 
-  const handleTabPress = useEventCallback(
+  const handleTabPress = useLatestCallback(
     (event: { route: Route } & TabPressEvent) => {
       onTabPress?.(event);
 
@@ -469,7 +469,7 @@ const BottomNavigation = ({
     }
   );
 
-  const jumpTo = useEventCallback((key: string) => {
+  const jumpTo = useLatestCallback((key: string) => {
     const index = navigationState.routes.findIndex(
       (route) => route.key === key
     );
