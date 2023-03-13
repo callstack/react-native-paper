@@ -270,7 +270,10 @@ TouchableRipple.supported = true;
 const styles = StyleSheet.create({
   touchable: {
     position: 'relative',
-    ...(Platform.OS === 'web' && { cursor: 'pointer' }),
+    ...(Platform.OS === 'web' && {
+      cursor: 'pointer',
+      transition: '150ms background-color',
+    }),
   },
   borderless: {
     overflow: 'hidden',
