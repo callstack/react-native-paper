@@ -3,6 +3,7 @@ import {
   AccessibilityState,
   Animated,
   GestureResponderEvent,
+  MouseEvent,
   StyleProp,
   StyleSheet,
   View,
@@ -89,13 +90,29 @@ export type Props = $RemoveChildren<typeof Surface> & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * Function to execute as soon as the touchable element is pressed and invoked even before onPress.
+   */
+  onPressIn?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute as soon as the touch is released even before onPress.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
+  /**
    * Function to execute on long press.
    */
-  onLongPress?: () => void;
+  onLongPress?: (e: GestureResponderEvent) => void;
   /**
    * The number of milliseconds a user must touch the element before executing `onLongPress`.
    */
   delayLongPress?: number;
+  /**
+   * Called when the hover is activated to provide visual feedback.
+   */
+  onHoverIn?: (e: MouseEvent) => void;
+  /**
+   * Called when the hover is deactivated to undo visual feedback.
+   */
+  onHoverOut?: (e: MouseEvent) => void;
   /**
    * @supported Available in v5.x with theme version 3
    *
@@ -179,6 +196,10 @@ const FAB = forwardRef<View, Props>(
       disabled,
       onPress,
       onLongPress,
+      onPressIn,
+      onPressOut,
+      onHoverOut,
+      onHoverIn,
       delayLongPress,
       theme: themeOverrides,
       style,
@@ -279,6 +300,10 @@ const FAB = forwardRef<View, Props>(
           borderless
           onPress={onPress}
           onLongPress={onLongPress}
+          onPressIn={onPressIn}
+          onPressOut={onPressOut}
+          onHoverOut={onHoverOut}
+          onHoverIn={onHoverIn}
           delayLongPress={delayLongPress}
           rippleColor={rippleColor}
           disabled={disabled}

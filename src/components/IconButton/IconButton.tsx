@@ -65,6 +65,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   ref?: React.RefObject<View>;
   /**
