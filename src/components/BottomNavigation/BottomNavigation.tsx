@@ -19,7 +19,7 @@ import type { IconSource } from '../Icon';
 import BottomNavigationBar from './BottomNavigationBar';
 import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 
-type Route = {
+type BaseRoute = {
   key: string;
   title?: string;
   focusedIcon?: IconSource;
@@ -31,9 +31,9 @@ type Route = {
   lazy?: boolean;
 };
 
-type NavigationState<TRoute extends Route> = {
+type NavigationState<Route extends BaseRoute> = {
   index: number;
-  routes: TRoute[];
+  routes: Route[];
 };
 
 type TabPressEvent = {
@@ -41,16 +41,16 @@ type TabPressEvent = {
   preventDefault(): void;
 };
 
-type TouchableProps<TRoute extends Route> = TouchableWithoutFeedbackProps & {
+type TouchableProps<Route extends BaseRoute> = TouchableWithoutFeedbackProps & {
   key: string;
-  route: TRoute;
+  route: Route;
   children: React.ReactNode;
   borderless?: boolean;
   centered?: boolean;
   rippleColor?: string;
 };
 
-export type Props<TRoute extends Route> = {
+export type Props<Route extends BaseRoute> = {
   /**
    * Whether the shifting style is used, the active tab icon shifts up to show the label and the inactive tabs won't have a label.
    *
@@ -100,7 +100,7 @@ export type Props<TRoute extends Route> = {
    *
    * `BottomNavigation` is a controlled component, which means the `index` needs to be updated via the `onIndexChange` callback.
    */
-  navigationState: NavigationState<TRoute>;
+  navigationState: NavigationState<Route>;
   /**
    * Callback which is called on tab change, receives the index of the new tab as argument.
    * The navigation state needs to be updated when it's called, otherwise the change is dropped.
@@ -142,14 +142,14 @@ export type Props<TRoute extends Route> = {
    * ```
    */
   renderScene: (props: {
-    route: TRoute;
+    route: Route;
     jumpTo: (key: string) => void;
   }) => React.ReactNode | null;
   /**
    * Callback which returns a React Element to be used as tab icon.
    */
   renderIcon?: (props: {
-    route: TRoute;
+    route: Route;
     focused: boolean;
     color: string;
   }) => React.ReactNode;
@@ -157,7 +157,7 @@ export type Props<TRoute extends Route> = {
    * Callback which React Element to be used as tab label.
    */
   renderLabel?: (props: {
-    route: TRoute;
+    route: Route;
     focused: boolean;
     color: string;
   }) => React.ReactNode;
@@ -165,38 +165,36 @@ export type Props<TRoute extends Route> = {
    * Callback which returns a React element to be used as the touchable for the tab item.
    * Renders a `TouchableRipple` on Android and `TouchableWithoutFeedback` with `View` on iOS.
    */
-  renderTouchable?: (props: TouchableProps<TRoute>) => React.ReactNode;
+  renderTouchable?: (props: TouchableProps<Route>) => React.ReactNode;
   /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
    * Uses `route.accessibilityLabel` by default.
    */
-  getAccessibilityLabel?: (props: { route: TRoute }) => string | undefined;
+  getAccessibilityLabel?: (props: { route: Route }) => string | undefined;
   /**
    * Get badge for the tab, uses `route.badge` by default.
    */
-  getBadge?: (props: {
-    route: TRoute;
-  }) => boolean | number | string | undefined;
+  getBadge?: (props: { route: Route }) => boolean | number | string | undefined;
   /**
    * Get color for the tab, uses `route.color` by default.
    */
-  getColor?: (props: { route: TRoute }) => string | undefined;
+  getColor?: (props: { route: Route }) => string | undefined;
   /**
    * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
    */
-  getLabelText?: (props: { route: TRoute }) => string | undefined;
+  getLabelText?: (props: { route: Route }) => string | undefined;
   /**
    * Get lazy for the current screen. Uses true by default.
    */
-  getLazy?: (props: { route: TRoute }) => boolean | undefined;
+  getLazy?: (props: { route: Route }) => boolean | undefined;
   /**
    * Get the id to locate this tab button in tests, uses `route.testID` by default.
    */
-  getTestID?: (props: { route: TRoute }) => string | undefined;
+  getTestID?: (props: { route: Route }) => string | undefined;
   /**
    * Function to execute on tab press. It receives the route for the pressed tab, useful for things like scroll to top.
    */
-  onTabPress?: (props: { route: TRoute } & TabPressEvent) => void;
+  onTabPress?: (props: { route: Route } & TabPressEvent) => void;
   /**
    * Custom color for icon and label in the active tab.
    */
@@ -316,7 +314,7 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  * export default MyComponent;
  * ```
  */
-const BottomNavigation = <TRoute extends Route = Route>({
+const BottomNavigation = <Route extends BaseRoute = BaseRoute>({
   navigationState,
   renderScene,
   renderIcon,
@@ -344,8 +342,8 @@ const BottomNavigation = <TRoute extends Route = Route>({
   compact: compactProp,
   testID = 'bottom-navigation',
   theme: themeOverrides,
-  getLazy = ({ route }: { route: TRoute }) => route.lazy,
-}: Props<TRoute>) => {
+  getLazy = ({ route }: { route: Route }) => route.lazy,
+}: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
   const { scale } = theme.animation;
   const compact = compactProp ?? !theme.isV3;
@@ -436,7 +434,7 @@ const BottomNavigation = <TRoute extends Route = Route>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const prevNavigationState = React.useRef<NavigationState<TRoute>>();
+  const prevNavigationState = React.useRef<NavigationState<Route>>();
 
   React.useEffect(() => {
     // Reset offsets of previous and current tabs before animation
@@ -453,7 +451,7 @@ const BottomNavigation = <TRoute extends Route = Route>({
   }, [navigationState.index, animateToIndex, offsetsAnims]);
 
   const handleTabPress = useEventCallback(
-    (event: { route: TRoute } & TabPressEvent) => {
+    (event: { route: Route } & TabPressEvent) => {
       onTabPress?.(event);
 
       if (event.defaultPrevented) {
@@ -598,9 +596,9 @@ const BottomNavigation = <TRoute extends Route = Route>({
  * Pure components are used to minimize re-rendering of the pages.
  * This drastically improves the animation performance.
  */
-BottomNavigation.SceneMap = <TRoute extends Route = Route>(scenes: {
+BottomNavigation.SceneMap = <Route extends BaseRoute = BaseRoute>(scenes: {
   [key: string]: React.ComponentType<{
-    route: TRoute;
+    route: Route;
     jumpTo: (key: string) => void;
   }>;
 }) => {
@@ -608,7 +606,7 @@ BottomNavigation.SceneMap = <TRoute extends Route = Route>(scenes: {
     route,
     jumpTo,
   }: {
-    route: TRoute;
+    route: Route;
     jumpTo: (key: string) => void;
   }) => (
     <SceneComponent

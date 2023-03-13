@@ -44,7 +44,7 @@ export default function BottomNavigationBarExample() {
             if (event.defaultPrevented) {
               preventDefault();
             } else {
-              navigation.navigate(route.name);
+              navigation.navigate(route);
             }
           }}
           renderIcon={({ route, focused, color }) =>

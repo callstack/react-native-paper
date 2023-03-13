@@ -34,7 +34,7 @@ import {
   getLabelColor,
 } from './utils';
 
-type Route = {
+type BaseRoute = {
   key: string;
   title?: string;
   focusedIcon?: IconSource;
@@ -46,9 +46,9 @@ type Route = {
   lazy?: boolean;
 };
 
-type NavigationState<TRoute extends Route> = {
+type NavigationState<Route extends BaseRoute> = {
   index: number;
-  routes: TRoute[];
+  routes: Route[];
 };
 
 type TabPressEvent = {
@@ -56,16 +56,16 @@ type TabPressEvent = {
   preventDefault(): void;
 };
 
-type TouchableProps<TRoute extends Route> = TouchableWithoutFeedbackProps & {
+type TouchableProps<Route extends BaseRoute> = TouchableWithoutFeedbackProps & {
   key: string;
-  route: TRoute;
+  route: Route;
   children: React.ReactNode;
   borderless?: boolean;
   centered?: boolean;
   rippleColor?: string;
 };
 
-export type Props<TRoute extends Route> = {
+export type Props<Route extends BaseRoute> = {
   /**
    * Whether the shifting style is used, the active tab icon shifts up to show the label and the inactive tabs won't have a label.
    *
@@ -115,12 +115,12 @@ export type Props<TRoute extends Route> = {
    *
    * `BottomNavigation.Bar` is a controlled component, which means the `index` needs to be updated via the `onTabPress` callback.
    */
-  navigationState: NavigationState<TRoute>;
+  navigationState: NavigationState<Route>;
   /**
    * Callback which returns a React Element to be used as tab icon.
    */
   renderIcon?: (props: {
-    route: TRoute;
+    route: Route;
     focused: boolean;
     color: string;
   }) => React.ReactNode;
@@ -128,7 +128,7 @@ export type Props<TRoute extends Route> = {
    * Callback which React Element to be used as tab label.
    */
   renderLabel?: (props: {
-    route: TRoute;
+    route: Route;
     focused: boolean;
     color: string;
   }) => React.ReactNode;
@@ -136,34 +136,32 @@ export type Props<TRoute extends Route> = {
    * Callback which returns a React element to be used as the touchable for the tab item.
    * Renders a `TouchableRipple` on Android and `TouchableWithoutFeedback` with `View` on iOS.
    */
-  renderTouchable?: (props: TouchableProps<TRoute>) => React.ReactNode;
+  renderTouchable?: (props: TouchableProps<Route>) => React.ReactNode;
   /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
    * Uses `route.accessibilityLabel` by default.
    */
-  getAccessibilityLabel?: (props: { route: TRoute }) => string | undefined;
+  getAccessibilityLabel?: (props: { route: Route }) => string | undefined;
   /**
    * Get badge for the tab, uses `route.badge` by default.
    */
-  getBadge?: (props: {
-    route: TRoute;
-  }) => boolean | number | string | undefined;
+  getBadge?: (props: { route: Route }) => boolean | number | string | undefined;
   /**
    * Get color for the tab, uses `route.color` by default.
    */
-  getColor?: (props: { route: TRoute }) => string | undefined;
+  getColor?: (props: { route: Route }) => string | undefined;
   /**
    * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
    */
-  getLabelText?: (props: { route: TRoute }) => string | undefined;
+  getLabelText?: (props: { route: Route }) => string | undefined;
   /**
    * Get the id to locate this tab button in tests, uses `route.testID` by default.
    */
-  getTestID?: (props: { route: TRoute }) => string | undefined;
+  getTestID?: (props: { route: Route }) => string | undefined;
   /**
    * Function to execute on tab press. It receives the route for the pressed tab. Use this to update the navigation state.
    */
-  onTabPress: (props: { route: TRoute } & TabPressEvent) => void;
+  onTabPress: (props: { route: Route } & TabPressEvent) => void;
   /**
    * Custom color for icon and label in the active tab.
    */
@@ -212,7 +210,7 @@ const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
 const OUTLINE_WIDTH = 64;
 
-const Touchable = <TRoute extends Route>({
+const Touchable = <Route extends BaseRoute>({
   route: _0,
   style,
   children,
@@ -220,7 +218,7 @@ const Touchable = <TRoute extends Route>({
   centered,
   rippleColor,
   ...rest
-}: TouchableProps<TRoute>) =>
+}: TouchableProps<Route>) =>
   TouchableRipple.supported ? (
     <TouchableRipple
       {...rest}
@@ -276,7 +274,7 @@ const Touchable = <TRoute extends Route>({
  *             if (event.defaultPrevented) {
  *               preventDefault();
  *             } else {
- *               navigation.navigate(route.name, route.params);
+ *               navigation.navigate(route);
  *             }
  *           }}
  *           renderIcon={({ route, focused, color }) => {
@@ -370,11 +368,11 @@ const Touchable = <TRoute extends Route>({
  *  />
  * ```
  */
-const BottomNavigationBar = <TRoute extends Route = Route>({
+const BottomNavigationBar = <Route extends BaseRoute = BaseRoute>({
   navigationState,
   renderIcon,
   renderLabel,
-  renderTouchable = (props: TouchableProps<TRoute>) => <Touchable {...props} />,
+  renderTouchable = (props: TouchableProps<Route>) => <Touchable {...props} />,
   getLabelText = ({ route }) => route.title,
   getBadge = ({ route }) => route.badge,
   getColor = ({ route }) => route.color,
@@ -393,7 +391,7 @@ const BottomNavigationBar = <TRoute extends Route = Route>({
   compact: compactProp,
   testID = 'bottom-navigation-bar',
   theme: themeOverrides,
-}: Props<TRoute>) => {
+}: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
   const { bottom, left, right } = useSafeAreaInsets();
   const { scale } = theme.animation;
