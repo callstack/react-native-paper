@@ -368,7 +368,7 @@ const Touchable = <Route extends BaseRoute>({
  *  />
  * ```
  */
-const BottomNavigationBar = <Route extends BaseRoute = BaseRoute>({
+const BottomNavigationBar = <Route extends BaseRoute>({
   navigationState,
   renderIcon,
   renderLabel,

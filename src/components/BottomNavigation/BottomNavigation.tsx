@@ -314,7 +314,7 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  * export default MyComponent;
  * ```
  */
-const BottomNavigation = <Route extends BaseRoute = BaseRoute>({
+const BottomNavigation = <Route extends BaseRoute>({
   navigationState,
   renderScene,
   renderIcon,

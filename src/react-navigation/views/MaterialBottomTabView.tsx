@@ -24,8 +24,6 @@ type Props = MaterialBottomTabNavigationConfig & {
   descriptors: MaterialBottomTabDescriptorMap;
 };
 
-type Scene = { route: { key: string } };
-
 export default function MaterialBottomTabView({
   state,
   navigation,
@@ -93,7 +91,7 @@ export default function MaterialBottomTabView({
 
         return null;
       }}
-      getLabelText={({ route }: Scene) => {
+      getLabelText={({ route }) => {
         const { options } = descriptors[route.key];
 
         return options.tabBarLabel !== undefined
