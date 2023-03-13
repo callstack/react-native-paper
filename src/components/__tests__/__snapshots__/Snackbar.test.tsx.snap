@@ -28,7 +28,10 @@ exports[`renders snackbar with Text as a child 1`] = `
         "bottom": undefined,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": undefined,
+        "margin": 8,
+        "opacity": 1,
         "position": undefined,
         "right": undefined,
         "shadowColor": "#000",
@@ -40,6 +43,12 @@ exports[`renders snackbar with Text as a child 1`] = `
         "shadowRadius": 6,
         "start": undefined,
         "top": undefined,
+        "transform": Array [
+          Object {
+            "scale": 1,
+          },
+        ],
+        "width": undefined,
       }
     }
     testID="surface-outer-layer"
@@ -58,7 +67,7 @@ exports[`renders snackbar with Text as a child 1`] = `
           "shadowRadius": 2,
         }
       }
-      testID="surface-inner-layer"
+      testID="surface-middle-layer"
     >
       <View
         accessibilityLiveRegion="polite"
@@ -71,14 +80,7 @@ exports[`renders snackbar with Text as a child 1`] = `
             "flex": undefined,
             "flexDirection": "row",
             "justifyContent": "space-between",
-            "margin": 8,
             "minHeight": 48,
-            "opacity": 1,
-            "transform": Array [
-              Object {
-                "scale": 1,
-              },
-            ],
           }
         }
         testID="surface"
@@ -130,7 +132,10 @@ exports[`renders snackbar with View & Text as a child 1`] = `
         "bottom": undefined,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": undefined,
+        "margin": 8,
+        "opacity": 1,
         "position": undefined,
         "right": undefined,
         "shadowColor": "#000",
@@ -142,6 +147,12 @@ exports[`renders snackbar with View & Text as a child 1`] = `
         "shadowRadius": 6,
         "start": undefined,
         "top": undefined,
+        "transform": Array [
+          Object {
+            "scale": 1,
+          },
+        ],
+        "width": undefined,
       }
     }
     testID="surface-outer-layer"
@@ -160,7 +171,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
           "shadowRadius": 2,
         }
       }
-      testID="surface-inner-layer"
+      testID="surface-middle-layer"
     >
       <View
         accessibilityLiveRegion="polite"
@@ -173,14 +184,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
             "flex": undefined,
             "flexDirection": "row",
             "justifyContent": "space-between",
-            "margin": 8,
             "minHeight": 48,
-            "opacity": 1,
-            "transform": Array [
-              Object {
-                "scale": 1,
-              },
-            ],
           }
         }
         testID="surface"
@@ -258,7 +262,10 @@ exports[`renders snackbar with action button 1`] = `
         "bottom": undefined,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": undefined,
+        "margin": 8,
+        "opacity": 1,
         "position": undefined,
         "right": undefined,
         "shadowColor": "#000",
@@ -270,6 +277,12 @@ exports[`renders snackbar with action button 1`] = `
         "shadowRadius": 6,
         "start": undefined,
         "top": undefined,
+        "transform": Array [
+          Object {
+            "scale": 1,
+          },
+        ],
+        "width": undefined,
       }
     }
     testID="surface-outer-layer"
@@ -288,7 +301,7 @@ exports[`renders snackbar with action button 1`] = `
           "shadowRadius": 2,
         }
       }
-      testID="surface-inner-layer"
+      testID="surface-middle-layer"
     >
       <View
         accessibilityLiveRegion="polite"
@@ -301,14 +314,7 @@ exports[`renders snackbar with action button 1`] = `
             "flex": undefined,
             "flexDirection": "row",
             "justifyContent": "space-between",
-            "margin": 8,
             "minHeight": 48,
-            "opacity": 1,
-            "transform": Array [
-              Object {
-                "scale": 1,
-              },
-            ],
           }
         }
         testID="surface"
@@ -368,7 +374,11 @@ exports[`renders snackbar with action button 1`] = `
                 "bottom": undefined,
                 "end": undefined,
                 "flex": undefined,
+                "height": undefined,
                 "left": undefined,
+                "marginLeft": 4,
+                "marginRight": 8,
+                "opacity": undefined,
                 "position": undefined,
                 "right": undefined,
                 "shadowColor": "#000",
@@ -380,6 +390,8 @@ exports[`renders snackbar with action button 1`] = `
                 "shadowRadius": 0,
                 "start": undefined,
                 "top": undefined,
+                "transform": undefined,
+                "width": undefined,
               }
             }
             testID="button-container-outer-layer"
@@ -398,7 +410,7 @@ exports[`renders snackbar with action button 1`] = `
                   "shadowRadius": 0,
                 }
               }
-              testID="button-container-inner-layer"
+              testID="button-container-middle-layer"
             >
               <View
                 collapsable={false}
@@ -410,8 +422,6 @@ exports[`renders snackbar with action button 1`] = `
                     "borderStyle": "solid",
                     "borderWidth": 0,
                     "flex": undefined,
-                    "marginLeft": 4,
-                    "marginRight": 8,
                     "minWidth": 64,
                   }
                 }
@@ -546,7 +556,10 @@ exports[`renders snackbar with content 1`] = `
         "bottom": undefined,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": undefined,
+        "margin": 8,
+        "opacity": 1,
         "position": undefined,
         "right": undefined,
         "shadowColor": "#000",
@@ -558,6 +571,12 @@ exports[`renders snackbar with content 1`] = `
         "shadowRadius": 6,
         "start": undefined,
         "top": undefined,
+        "transform": Array [
+          Object {
+            "scale": 1,
+          },
+        ],
+        "width": undefined,
       }
     }
     testID="surface-outer-layer"
@@ -576,7 +595,7 @@ exports[`renders snackbar with content 1`] = `
           "shadowRadius": 2,
         }
       }
-      testID="surface-inner-layer"
+      testID="surface-middle-layer"
     >
       <View
         accessibilityLiveRegion="polite"
@@ -589,14 +608,7 @@ exports[`renders snackbar with content 1`] = `
             "flex": undefined,
             "flexDirection": "row",
             "justifyContent": "space-between",
-            "margin": 8,
             "minHeight": 48,
-            "opacity": 1,
-            "transform": Array [
-              Object {
-                "scale": 1,
-              },
-            ],
           }
         }
         testID="surface"

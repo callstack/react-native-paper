@@ -9,7 +9,9 @@ exports[`renders animated fab 1`] = `
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": 1,
       "position": "absolute",
       "right": undefined,
       "shadowColor": "#000",
@@ -21,6 +23,12 @@ exports[`renders animated fab 1`] = `
       "shadowRadius": 8,
       "start": undefined,
       "top": undefined,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
+      "width": undefined,
     }
   }
   testID="animated-fab-container-outer-layer"
@@ -39,7 +47,7 @@ exports[`renders animated fab 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="animated-fab-container-inner-layer"
+    testID="animated-fab-container-middle-layer"
   >
     <View
       collapsable={false}
@@ -48,12 +56,6 @@ exports[`renders animated fab 1`] = `
           "backgroundColor": "transparent",
           "borderRadius": 16,
           "flex": undefined,
-          "opacity": 1,
-          "transform": Array [
-            Object {
-              "scale": 1,
-            },
-          ],
         }
       }
       testID="animated-fab-container"
@@ -306,7 +308,9 @@ exports[`renders animated fab with label on the left 1`] = `
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": 1,
       "position": "absolute",
       "right": undefined,
       "shadowColor": "#000",
@@ -318,6 +322,12 @@ exports[`renders animated fab with label on the left 1`] = `
       "shadowRadius": 8,
       "start": undefined,
       "top": undefined,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
+      "width": undefined,
     }
   }
   testID="animated-fab-container-outer-layer"
@@ -336,7 +346,7 @@ exports[`renders animated fab with label on the left 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="animated-fab-container-inner-layer"
+    testID="animated-fab-container-middle-layer"
   >
     <View
       collapsable={false}
@@ -345,12 +355,6 @@ exports[`renders animated fab with label on the left 1`] = `
           "backgroundColor": "transparent",
           "borderRadius": 16,
           "flex": undefined,
-          "opacity": 1,
-          "transform": Array [
-            Object {
-              "scale": 1,
-            },
-          ],
         }
       }
       testID="animated-fab-container"
@@ -605,7 +609,9 @@ exports[`renders animated fab with label on the right by default 1`] = `
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": 1,
       "position": "absolute",
       "right": undefined,
       "shadowColor": "#000",
@@ -617,6 +623,12 @@ exports[`renders animated fab with label on the right by default 1`] = `
       "shadowRadius": 8,
       "start": undefined,
       "top": undefined,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
+      "width": undefined,
     }
   }
   testID="animated-fab-container-outer-layer"
@@ -635,7 +647,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="animated-fab-container-inner-layer"
+    testID="animated-fab-container-middle-layer"
   >
     <View
       collapsable={false}
@@ -644,12 +656,6 @@ exports[`renders animated fab with label on the right by default 1`] = `
           "backgroundColor": "transparent",
           "borderRadius": 16,
           "flex": undefined,
-          "opacity": 1,
-          "transform": Array [
-            Object {
-              "scale": 1,
-            },
-          ],
         }
       }
       testID="animated-fab-container"

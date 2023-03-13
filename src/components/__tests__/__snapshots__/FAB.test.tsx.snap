@@ -9,7 +9,9 @@ exports[`renders FAB with custom size prop 1`] = `
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": 1,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -21,6 +23,12 @@ exports[`renders FAB with custom size prop 1`] = `
       "shadowRadius": 8,
       "start": undefined,
       "top": undefined,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
+      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -39,7 +47,7 @@ exports[`renders FAB with custom size prop 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-inner-layer"
+    testID="fab-container-middle-layer"
   >
     <View
       collapsable={false}
@@ -49,13 +57,7 @@ exports[`renders FAB with custom size prop 1`] = `
           "backgroundColor": "rgba(234, 221, 255, 1)",
           "borderRadius": 25,
           "flex": undefined,
-          "opacity": 1,
           "overflow": "hidden",
-          "transform": Array [
-            Object {
-              "scale": 1,
-            },
-          ],
         }
       }
       testID="fab-container"
@@ -194,7 +196,9 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": 1,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -206,6 +210,12 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
       "shadowRadius": 8,
       "start": undefined,
       "top": undefined,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
+      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -224,7 +234,7 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-inner-layer"
+    testID="fab-container-middle-layer"
   >
     <View
       collapsable={false}
@@ -234,13 +244,7 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
           "backgroundColor": "rgba(234, 221, 255, 1)",
           "borderRadius": 16,
           "flex": undefined,
-          "opacity": 1,
           "overflow": "hidden",
-          "transform": Array [
-            Object {
-              "scale": 1,
-            },
-          ],
         }
       }
       testID="fab-container"
@@ -379,7 +383,9 @@ exports[`renders default FAB 1`] = `
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": 1,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -391,6 +397,12 @@ exports[`renders default FAB 1`] = `
       "shadowRadius": 8,
       "start": undefined,
       "top": undefined,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
+      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -409,7 +421,7 @@ exports[`renders default FAB 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-inner-layer"
+    testID="fab-container-middle-layer"
   >
     <View
       collapsable={false}
@@ -419,13 +431,7 @@ exports[`renders default FAB 1`] = `
           "backgroundColor": "rgba(234, 221, 255, 1)",
           "borderRadius": 16,
           "flex": undefined,
-          "opacity": 1,
           "overflow": "hidden",
-          "transform": Array [
-            Object {
-              "scale": 1,
-            },
-          ],
         }
       }
       testID="fab-container"
@@ -564,7 +570,9 @@ exports[`renders disabled FAB 1`] = `
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": 1,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -576,6 +584,12 @@ exports[`renders disabled FAB 1`] = `
       "shadowRadius": 0,
       "start": undefined,
       "top": undefined,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
+      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -594,7 +608,7 @@ exports[`renders disabled FAB 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="fab-container-inner-layer"
+    testID="fab-container-middle-layer"
   >
     <View
       collapsable={false}
@@ -604,13 +618,7 @@ exports[`renders disabled FAB 1`] = `
           "backgroundColor": "rgba(28, 27, 31, 0.12)",
           "borderRadius": 16,
           "flex": undefined,
-          "opacity": 1,
           "overflow": "hidden",
-          "transform": Array [
-            Object {
-              "scale": 1,
-            },
-          ],
         }
       }
       testID="fab-container"
@@ -749,7 +757,9 @@ exports[`renders extended FAB 1`] = `
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": 1,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -761,6 +771,12 @@ exports[`renders extended FAB 1`] = `
       "shadowRadius": 8,
       "start": undefined,
       "top": undefined,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
+      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -779,7 +795,7 @@ exports[`renders extended FAB 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-inner-layer"
+    testID="fab-container-middle-layer"
   >
     <View
       collapsable={false}
@@ -789,13 +805,7 @@ exports[`renders extended FAB 1`] = `
           "backgroundColor": "rgba(234, 221, 255, 1)",
           "borderRadius": 16,
           "flex": undefined,
-          "opacity": 1,
           "overflow": "hidden",
-          "transform": Array [
-            Object {
-              "scale": 1,
-            },
-          ],
         }
       }
       testID="fab-container"
@@ -973,7 +983,9 @@ exports[`renders extended FAB with custom size prop 1`] = `
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": 1,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -985,6 +997,12 @@ exports[`renders extended FAB with custom size prop 1`] = `
       "shadowRadius": 8,
       "start": undefined,
       "top": undefined,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
+      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -1003,7 +1021,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-inner-layer"
+    testID="fab-container-middle-layer"
   >
     <View
       collapsable={false}
@@ -1013,13 +1031,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
           "backgroundColor": "rgba(234, 221, 255, 1)",
           "borderRadius": 25,
           "flex": undefined,
-          "opacity": 1,
           "overflow": "hidden",
-          "transform": Array [
-            Object {
-              "scale": 1,
-            },
-          ],
         }
       }
       testID="fab-container"
@@ -1196,7 +1208,9 @@ exports[`renders large FAB 1`] = `
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": 1,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -1208,6 +1222,12 @@ exports[`renders large FAB 1`] = `
       "shadowRadius": 8,
       "start": undefined,
       "top": undefined,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
+      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -1226,7 +1246,7 @@ exports[`renders large FAB 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-inner-layer"
+    testID="fab-container-middle-layer"
   >
     <View
       collapsable={false}
@@ -1236,13 +1256,7 @@ exports[`renders large FAB 1`] = `
           "backgroundColor": "rgba(234, 221, 255, 1)",
           "borderRadius": 28,
           "flex": undefined,
-          "opacity": 1,
           "overflow": "hidden",
-          "transform": Array [
-            Object {
-              "scale": 1,
-            },
-          ],
         }
       }
       testID="fab-container"
@@ -1381,7 +1395,9 @@ exports[`renders loading FAB 1`] = `
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": 1,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -1393,6 +1409,12 @@ exports[`renders loading FAB 1`] = `
       "shadowRadius": 8,
       "start": undefined,
       "top": undefined,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
+      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -1411,7 +1433,7 @@ exports[`renders loading FAB 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-inner-layer"
+    testID="fab-container-middle-layer"
   >
     <View
       collapsable={false}
@@ -1421,13 +1443,7 @@ exports[`renders loading FAB 1`] = `
           "backgroundColor": "rgba(234, 221, 255, 1)",
           "borderRadius": 16,
           "flex": undefined,
-          "opacity": 1,
           "overflow": "hidden",
-          "transform": Array [
-            Object {
-              "scale": 1,
-            },
-          ],
         }
       }
       testID="fab-container"
@@ -1691,7 +1707,9 @@ exports[`renders loading FAB with custom size prop 1`] = `
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": 1,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -1703,6 +1721,12 @@ exports[`renders loading FAB with custom size prop 1`] = `
       "shadowRadius": 8,
       "start": undefined,
       "top": undefined,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
+      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -1721,7 +1745,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-inner-layer"
+    testID="fab-container-middle-layer"
   >
     <View
       collapsable={false}
@@ -1731,13 +1755,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
           "backgroundColor": "rgba(234, 221, 255, 1)",
           "borderRadius": 25,
           "flex": undefined,
-          "opacity": 1,
           "overflow": "hidden",
-          "transform": Array [
-            Object {
-              "scale": 1,
-            },
-          ],
         }
       }
       testID="fab-container"
@@ -2001,7 +2019,9 @@ exports[`renders not visible FAB 1`] = `
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": 1,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -2013,6 +2033,12 @@ exports[`renders not visible FAB 1`] = `
       "shadowRadius": 8,
       "start": undefined,
       "top": undefined,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
+      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -2031,7 +2057,7 @@ exports[`renders not visible FAB 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-inner-layer"
+    testID="fab-container-middle-layer"
   >
     <View
       collapsable={false}
@@ -2041,13 +2067,7 @@ exports[`renders not visible FAB 1`] = `
           "backgroundColor": "rgba(234, 221, 255, 1)",
           "borderRadius": 16,
           "flex": undefined,
-          "opacity": 1,
           "overflow": "hidden",
-          "transform": Array [
-            Object {
-              "scale": 1,
-            },
-          ],
         }
       }
       testID="fab-container"
@@ -2186,7 +2206,9 @@ exports[`renders small FAB 1`] = `
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": 1,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -2198,6 +2220,12 @@ exports[`renders small FAB 1`] = `
       "shadowRadius": 8,
       "start": undefined,
       "top": undefined,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
+      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -2216,7 +2244,7 @@ exports[`renders small FAB 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-inner-layer"
+    testID="fab-container-middle-layer"
   >
     <View
       collapsable={false}
@@ -2226,13 +2254,7 @@ exports[`renders small FAB 1`] = `
           "backgroundColor": "rgba(234, 221, 255, 1)",
           "borderRadius": 12,
           "flex": undefined,
-          "opacity": 1,
           "overflow": "hidden",
-          "transform": Array [
-            Object {
-              "scale": 1,
-            },
-          ],
         }
       }
       testID="fab-container"
@@ -2371,7 +2393,9 @@ exports[`renders visible FAB 1`] = `
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": 0,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -2383,6 +2407,12 @@ exports[`renders visible FAB 1`] = `
       "shadowRadius": 8,
       "start": undefined,
       "top": undefined,
+      "transform": Array [
+        Object {
+          "scale": 0,
+        },
+      ],
+      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -2401,7 +2431,7 @@ exports[`renders visible FAB 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-inner-layer"
+    testID="fab-container-middle-layer"
   >
     <View
       collapsable={false}
@@ -2411,13 +2441,7 @@ exports[`renders visible FAB 1`] = `
           "backgroundColor": "rgba(234, 221, 255, 1)",
           "borderRadius": 16,
           "flex": undefined,
-          "opacity": 0,
           "overflow": "hidden",
-          "transform": Array [
-            Object {
-              "scale": 0,
-            },
-          ],
         }
       }
       testID="fab-container"

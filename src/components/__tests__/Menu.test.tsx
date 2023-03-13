@@ -184,7 +184,7 @@ it('animated value changes correctly', () => {
       </Menu>
     </Portal.Host>
   );
-  expect(getByTestId('menu-surface')).toHaveStyle({
+  expect(getByTestId('menu-surface-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -196,7 +196,7 @@ it('animated value changes correctly', () => {
 
   jest.advanceTimersByTime(200);
 
-  expect(getByTestId('menu-surface')).toHaveStyle({
+  expect(getByTestId('menu-surface-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });

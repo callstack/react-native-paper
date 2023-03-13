@@ -78,7 +78,9 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -90,6 +92,8 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -108,7 +112,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-bar-inner-layer"
+      testID="bottom-navigation-bar-middle-layer"
     >
       <View
         collapsable={false}
@@ -831,7 +835,9 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -843,6 +849,8 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -861,7 +869,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-bar-inner-layer"
+      testID="bottom-navigation-bar-middle-layer"
     >
       <View
         collapsable={false}
@@ -1716,7 +1724,9 @@ exports[`renders bottom navigation with getLazy 1`] = `
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -1728,6 +1738,8 @@ exports[`renders bottom navigation with getLazy 1`] = `
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -1746,7 +1758,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-bar-inner-layer"
+      testID="bottom-navigation-bar-middle-layer"
     >
       <View
         collapsable={false}
@@ -3430,7 +3442,9 @@ exports[`renders bottom navigation with scene animation 1`] = `
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -3442,6 +3456,8 @@ exports[`renders bottom navigation with scene animation 1`] = `
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -3460,7 +3476,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-bar-inner-layer"
+      testID="bottom-navigation-bar-middle-layer"
     >
       <View
         collapsable={false}
@@ -4904,7 +4920,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -4916,6 +4934,8 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -4934,7 +4954,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-bar-inner-layer"
+      testID="bottom-navigation-bar-middle-layer"
     >
       <View
         collapsable={false}
@@ -5597,7 +5617,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -5609,6 +5631,8 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -5627,7 +5651,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-bar-inner-layer"
+      testID="bottom-navigation-bar-middle-layer"
     >
       <View
         collapsable={false}
@@ -6571,7 +6595,9 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -6583,6 +6609,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -6601,7 +6629,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-bar-inner-layer"
+      testID="bottom-navigation-bar-middle-layer"
     >
       <View
         collapsable={false}
@@ -7669,7 +7697,9 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -7681,6 +7711,8 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -7699,7 +7731,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-bar-inner-layer"
+      testID="bottom-navigation-bar-middle-layer"
     >
       <View
         collapsable={false}
@@ -8623,7 +8655,9 @@ exports[`renders non-shifting bottom navigation 1`] = `
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -8635,6 +8669,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -8653,7 +8689,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-bar-inner-layer"
+      testID="bottom-navigation-bar-middle-layer"
     >
       <View
         collapsable={false}
@@ -9721,7 +9757,9 @@ exports[`renders shifting bottom navigation 1`] = `
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
+        "height": undefined,
         "left": 0,
+        "opacity": undefined,
         "position": undefined,
         "right": 0,
         "shadowColor": "#000",
@@ -9733,6 +9771,8 @@ exports[`renders shifting bottom navigation 1`] = `
         "shadowRadius": 0,
         "start": undefined,
         "top": undefined,
+        "transform": undefined,
+        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -9751,7 +9791,7 @@ exports[`renders shifting bottom navigation 1`] = `
           "shadowRadius": 0,
         }
       }
-      testID="bottom-navigation-bar-inner-layer"
+      testID="bottom-navigation-bar-middle-layer"
     >
       <View
         collapsable={false}

@@ -9,7 +9,9 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": 64,
       "left": undefined,
+      "opacity": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -21,6 +23,8 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       "shadowRadius": 0,
       "start": undefined,
       "top": undefined,
+      "transform": undefined,
+      "width": undefined,
     }
   }
   testID="surface-outer-layer"
@@ -29,7 +33,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
     collapsable={false}
     style={
       Object {
-        "flex": undefined,
+        "flex": 1,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -39,7 +43,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="surface-inner-layer"
+    testID="surface-middle-layer"
   >
     <View
       collapsable={false}
@@ -47,9 +51,8 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         Object {
           "alignItems": "center",
           "backgroundColor": "rgba(255, 251, 254, 1)",
-          "flex": undefined,
+          "flex": 1,
           "flexDirection": "row",
-          "height": 64,
           "paddingBottom": undefined,
           "paddingHorizontal": 4,
           "paddingLeft": undefined,
@@ -67,7 +70,9 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             "bottom": undefined,
             "end": undefined,
             "flex": undefined,
+            "height": undefined,
             "left": undefined,
+            "opacity": undefined,
             "position": undefined,
             "right": undefined,
             "shadowColor": "#000",
@@ -79,6 +84,8 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             "shadowRadius": 0,
             "start": undefined,
             "top": undefined,
+            "transform": undefined,
+            "width": undefined,
           }
         }
         testID="search-bar-container-outer-layer"
@@ -97,7 +104,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               "shadowRadius": 0,
             }
           }
-          testID="search-bar-container-inner-layer"
+          testID="search-bar-container-middle-layer"
         >
           <View
             collapsable={false}
@@ -120,7 +127,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                   "bottom": undefined,
                   "end": undefined,
                   "flex": undefined,
+                  "height": 40,
                   "left": undefined,
+                  "margin": 6,
+                  "opacity": undefined,
                   "position": undefined,
                   "right": undefined,
                   "shadowColor": "#000",
@@ -132,6 +142,8 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                   "shadowRadius": 0,
                   "start": undefined,
                   "top": undefined,
+                  "transform": undefined,
+                  "width": 40,
                 }
               }
               testID="icon-button-container-outer-layer"
@@ -140,7 +152,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                 collapsable={false}
                 style={
                   Object {
-                    "flex": undefined,
+                    "flex": 1,
                     "shadowColor": "#000",
                     "shadowOffset": Object {
                       "height": 0,
@@ -150,22 +162,19 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                     "shadowRadius": 0,
                   }
                 }
-                testID="icon-button-container-inner-layer"
+                testID="icon-button-container-middle-layer"
               >
                 <View
                   collapsable={false}
                   style={
                     Object {
-                      "backgroundColor": undefined,
+                      "backgroundColor": "transparent",
                       "borderColor": "rgba(121, 116, 126, 1)",
                       "borderRadius": 20,
                       "borderWidth": 0,
                       "elevation": 0,
-                      "flex": undefined,
-                      "height": 40,
-                      "margin": 6,
+                      "flex": 1,
                       "overflow": "hidden",
-                      "width": 40,
                     }
                   }
                   testID="icon-button-container"
@@ -319,7 +328,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                     "bottom": undefined,
                     "end": undefined,
                     "flex": undefined,
+                    "height": 40,
                     "left": undefined,
+                    "margin": 6,
+                    "opacity": undefined,
                     "position": undefined,
                     "right": undefined,
                     "shadowColor": "#000",
@@ -331,6 +343,8 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                     "shadowRadius": 0,
                     "start": undefined,
                     "top": undefined,
+                    "transform": undefined,
+                    "width": 40,
                   }
                 }
                 testID="icon-button-container-outer-layer"
@@ -339,7 +353,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                   collapsable={false}
                   style={
                     Object {
-                      "flex": undefined,
+                      "flex": 1,
                       "shadowColor": "#000",
                       "shadowOffset": Object {
                         "height": 0,
@@ -349,22 +363,19 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                       "shadowRadius": 0,
                     }
                   }
-                  testID="icon-button-container-inner-layer"
+                  testID="icon-button-container-middle-layer"
                 >
                   <View
                     collapsable={false}
                     style={
                       Object {
-                        "backgroundColor": undefined,
+                        "backgroundColor": "transparent",
                         "borderColor": "rgba(121, 116, 126, 1)",
                         "borderRadius": 20,
                         "borderWidth": 0,
                         "elevation": 0,
-                        "flex": undefined,
-                        "height": 40,
-                        "margin": 6,
+                        "flex": 1,
                         "overflow": "hidden",
-                        "width": 40,
                       }
                     }
                     testID="icon-button-container"
@@ -478,7 +489,9 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": 64,
       "left": undefined,
+      "opacity": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -490,6 +503,8 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       "shadowRadius": 0,
       "start": undefined,
       "top": undefined,
+      "transform": undefined,
+      "width": undefined,
     }
   }
   testID="surface-outer-layer"
@@ -498,7 +513,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
     collapsable={false}
     style={
       Object {
-        "flex": undefined,
+        "flex": 1,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -508,7 +523,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         "shadowRadius": 0,
       }
     }
-    testID="surface-inner-layer"
+    testID="surface-middle-layer"
   >
     <View
       collapsable={false}
@@ -516,9 +531,8 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         Object {
           "alignItems": "center",
           "backgroundColor": "rgba(255, 251, 254, 1)",
-          "flex": undefined,
+          "flex": 1,
           "flexDirection": "row",
-          "height": 64,
           "paddingBottom": undefined,
           "paddingHorizontal": 4,
           "paddingLeft": undefined,
@@ -536,7 +550,10 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             "bottom": undefined,
             "end": undefined,
             "flex": undefined,
+            "height": 40,
             "left": undefined,
+            "margin": 6,
+            "opacity": undefined,
             "position": undefined,
             "right": undefined,
             "shadowColor": "#000",
@@ -548,6 +565,8 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             "shadowRadius": 0,
             "start": undefined,
             "top": undefined,
+            "transform": undefined,
+            "width": 40,
           }
         }
         testID="icon-button-container-outer-layer"
@@ -556,7 +575,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           collapsable={false}
           style={
             Object {
-              "flex": undefined,
+              "flex": 1,
               "shadowColor": "#000",
               "shadowOffset": Object {
                 "height": 0,
@@ -566,22 +585,19 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               "shadowRadius": 0,
             }
           }
-          testID="icon-button-container-inner-layer"
+          testID="icon-button-container-middle-layer"
         >
           <View
             collapsable={false}
             style={
               Object {
-                "backgroundColor": undefined,
+                "backgroundColor": "transparent",
                 "borderColor": "rgba(121, 116, 126, 1)",
                 "borderRadius": 20,
                 "borderWidth": 0,
                 "elevation": 0,
-                "flex": undefined,
-                "height": 40,
-                "margin": 6,
+                "flex": 1,
                 "overflow": "hidden",
-                "width": 40,
               }
             }
             testID="icon-button-container"
@@ -797,7 +813,10 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             "bottom": undefined,
             "end": undefined,
             "flex": undefined,
+            "height": 40,
             "left": undefined,
+            "margin": 6,
+            "opacity": undefined,
             "position": undefined,
             "right": undefined,
             "shadowColor": "#000",
@@ -809,6 +828,8 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             "shadowRadius": 0,
             "start": undefined,
             "top": undefined,
+            "transform": undefined,
+            "width": 40,
           }
         }
         testID="icon-button-container-outer-layer"
@@ -817,7 +838,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           collapsable={false}
           style={
             Object {
-              "flex": undefined,
+              "flex": 1,
               "shadowColor": "#000",
               "shadowOffset": Object {
                 "height": 0,
@@ -827,22 +848,19 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               "shadowRadius": 0,
             }
           }
-          testID="icon-button-container-inner-layer"
+          testID="icon-button-container-middle-layer"
         >
           <View
             collapsable={false}
             style={
               Object {
-                "backgroundColor": undefined,
+                "backgroundColor": "transparent",
                 "borderColor": "rgba(121, 116, 126, 1)",
                 "borderRadius": 20,
                 "borderWidth": 0,
                 "elevation": 0,
-                "flex": undefined,
-                "height": 40,
-                "margin": 6,
+                "flex": 1,
                 "overflow": "hidden",
-                "width": 40,
               }
             }
             testID="icon-button-container"

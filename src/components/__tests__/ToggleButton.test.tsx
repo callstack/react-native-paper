@@ -85,7 +85,7 @@ it('animated value changes correctly', () => {
       style={[{ transform: [{ scale: value }] }]}
     />
   );
-  expect(getByTestId('toggle-button-container')).toHaveStyle({
+  expect(getByTestId('toggle-button-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -97,7 +97,7 @@ it('animated value changes correctly', () => {
 
   jest.advanceTimersByTime(200);
 
-  expect(getByTestId('toggle-button-container')).toHaveStyle({
+  expect(getByTestId('toggle-button-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });

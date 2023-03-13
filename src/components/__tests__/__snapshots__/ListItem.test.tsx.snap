@@ -106,7 +106,9 @@ exports[`renders list item with custom description 1`] = `
                 "bottom": undefined,
                 "end": undefined,
                 "flex": undefined,
+                "height": undefined,
                 "left": undefined,
+                "opacity": undefined,
                 "position": undefined,
                 "right": undefined,
                 "shadowColor": "#000",
@@ -118,6 +120,8 @@ exports[`renders list item with custom description 1`] = `
                 "shadowRadius": 0,
                 "start": undefined,
                 "top": undefined,
+                "transform": undefined,
+                "width": undefined,
               }
             }
             testID="chip-container-outer-layer"
@@ -136,7 +140,7 @@ exports[`renders list item with custom description 1`] = `
                   "shadowRadius": 0,
                 }
               }
-              testID="chip-container-inner-layer"
+              testID="chip-container-middle-layer"
             >
               <View
                 collapsable={false}

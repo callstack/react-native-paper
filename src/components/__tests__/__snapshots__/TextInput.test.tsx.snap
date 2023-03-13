@@ -1271,7 +1271,10 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
+          "height": 40,
           "left": undefined,
+          "margin": 0,
+          "opacity": undefined,
           "position": undefined,
           "right": undefined,
           "shadowColor": "#000",
@@ -1283,6 +1286,8 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
           "shadowRadius": 0,
           "start": undefined,
           "top": undefined,
+          "transform": undefined,
+          "width": 40,
         }
       }
       testID="right-icon-adornment-container-outer-layer"
@@ -1291,7 +1296,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
         collapsable={false}
         style={
           Object {
-            "flex": undefined,
+            "flex": 1,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -1301,22 +1306,19 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "shadowRadius": 0,
           }
         }
-        testID="right-icon-adornment-container-inner-layer"
+        testID="right-icon-adornment-container-middle-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
-              "backgroundColor": undefined,
+              "backgroundColor": "transparent",
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
-              "flex": undefined,
-              "height": 40,
-              "margin": 0,
+              "flex": 1,
               "overflow": "hidden",
-              "width": 40,
             }
           }
           testID="right-icon-adornment-container"
@@ -1633,7 +1635,10 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
+          "height": 40,
           "left": undefined,
+          "margin": 0,
+          "opacity": undefined,
           "position": undefined,
           "right": undefined,
           "shadowColor": "#000",
@@ -1645,6 +1650,8 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           "shadowRadius": 0,
           "start": undefined,
           "top": undefined,
+          "transform": undefined,
+          "width": 40,
         }
       }
       testID="left-icon-adornment-container-outer-layer"
@@ -1653,7 +1660,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         collapsable={false}
         style={
           Object {
-            "flex": undefined,
+            "flex": 1,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -1663,22 +1670,19 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "shadowRadius": 0,
           }
         }
-        testID="left-icon-adornment-container-inner-layer"
+        testID="left-icon-adornment-container-middle-layer"
       >
         <View
           collapsable={false}
           style={
             Object {
-              "backgroundColor": undefined,
+              "backgroundColor": "transparent",
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
               "borderWidth": 0,
               "elevation": 0,
-              "flex": undefined,
-              "height": 40,
-              "margin": 0,
+              "flex": 1,
               "overflow": "hidden",
-              "width": 40,
             }
           }
           testID="left-icon-adornment-container"

@@ -22,7 +22,9 @@ Array [
             "bottom": undefined,
             "end": undefined,
             "flex": undefined,
+            "height": undefined,
             "left": undefined,
+            "opacity": undefined,
             "position": undefined,
             "right": undefined,
             "shadowColor": "#000",
@@ -34,6 +36,8 @@ Array [
             "shadowRadius": 0,
             "start": undefined,
             "top": undefined,
+            "transform": undefined,
+            "width": undefined,
           }
         }
         testID="button-container-outer-layer"
@@ -52,7 +56,7 @@ Array [
               "shadowRadius": 0,
             }
           }
-          testID="button-container-inner-layer"
+          testID="button-container-middle-layer"
         >
           <View
             collapsable={false}
@@ -244,7 +248,9 @@ Array [
               "bottom": undefined,
               "end": undefined,
               "flex": undefined,
+              "height": undefined,
               "left": undefined,
+              "opacity": 0,
               "position": undefined,
               "right": undefined,
               "shadowColor": "#000",
@@ -256,6 +262,15 @@ Array [
               "shadowRadius": 6,
               "start": undefined,
               "top": undefined,
+              "transform": Array [
+                Object {
+                  "scaleX": 0,
+                },
+                Object {
+                  "scaleY": 0,
+                },
+              ],
+              "width": undefined,
             }
           }
           testID="menu-surface-outer-layer"
@@ -274,7 +289,7 @@ Array [
                 "shadowRadius": 2,
               }
             }
-            testID="menu-surface-inner-layer"
+            testID="menu-surface-middle-layer"
           >
             <View
               collapsable={false}
@@ -285,16 +300,7 @@ Array [
                   "borderTopLeftRadius": 0,
                   "borderTopRightRadius": 0,
                   "flex": undefined,
-                  "opacity": 0,
                   "paddingVertical": 8,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 0,
-                    },
-                    Object {
-                      "scaleY": 0,
-                    },
-                  ],
                 }
               }
               testID="menu-surface"
@@ -543,7 +549,9 @@ exports[`renders not visible menu 1`] = `
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
+          "height": undefined,
           "left": undefined,
+          "opacity": undefined,
           "position": undefined,
           "right": undefined,
           "shadowColor": "#000",
@@ -555,6 +563,8 @@ exports[`renders not visible menu 1`] = `
           "shadowRadius": 0,
           "start": undefined,
           "top": undefined,
+          "transform": undefined,
+          "width": undefined,
         }
       }
       testID="button-container-outer-layer"
@@ -573,7 +583,7 @@ exports[`renders not visible menu 1`] = `
             "shadowRadius": 0,
           }
         }
-        testID="button-container-inner-layer"
+        testID="button-container-middle-layer"
       >
         <View
           collapsable={false}
@@ -713,7 +723,9 @@ Array [
             "bottom": undefined,
             "end": undefined,
             "flex": undefined,
+            "height": undefined,
             "left": undefined,
+            "opacity": undefined,
             "position": undefined,
             "right": undefined,
             "shadowColor": "#000",
@@ -725,6 +737,8 @@ Array [
             "shadowRadius": 0,
             "start": undefined,
             "top": undefined,
+            "transform": undefined,
+            "width": undefined,
           }
         }
         testID="button-container-outer-layer"
@@ -743,7 +757,7 @@ Array [
               "shadowRadius": 0,
             }
           }
-          testID="button-container-inner-layer"
+          testID="button-container-middle-layer"
         >
           <View
             collapsable={false}
@@ -935,7 +949,9 @@ Array [
               "bottom": undefined,
               "end": undefined,
               "flex": undefined,
+              "height": undefined,
               "left": undefined,
+              "opacity": 0,
               "position": undefined,
               "right": undefined,
               "shadowColor": "#000",
@@ -947,6 +963,15 @@ Array [
               "shadowRadius": 6,
               "start": undefined,
               "top": undefined,
+              "transform": Array [
+                Object {
+                  "scaleX": 0,
+                },
+                Object {
+                  "scaleY": 0,
+                },
+              ],
+              "width": undefined,
             }
           }
           testID="menu-surface-outer-layer"
@@ -965,7 +990,7 @@ Array [
                 "shadowRadius": 2,
               }
             }
-            testID="menu-surface-inner-layer"
+            testID="menu-surface-middle-layer"
           >
             <View
               collapsable={false}
@@ -974,16 +999,7 @@ Array [
                   "backgroundColor": "rgb(243, 237, 246)",
                   "borderRadius": 4,
                   "flex": undefined,
-                  "opacity": 0,
                   "paddingVertical": 8,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 0,
-                    },
-                    Object {
-                      "scaleY": 0,
-                    },
-                  ],
                 }
               }
               testID="menu-surface"

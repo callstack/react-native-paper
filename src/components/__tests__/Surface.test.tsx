@@ -28,10 +28,9 @@ describe('Surface', () => {
         right: 40,
         start: 50,
         top: 60,
-        flex: 1,
       },
       innerLayerViewStyle: {
-        flex: 1,
+        padding: 13,
       },
       restStyle: {
         padding: 10,
@@ -69,23 +68,7 @@ describe('Surface', () => {
         );
       });
 
-      it('should render inner layer styles on outer layer', () => {
-        const testID = 'surface-test';
-
-        const { getByTestId } = render(
-          <Surface testID={testID} style={styles.innerLayerViewStyle}>
-            {null}
-          </Surface>
-        );
-
-        expect(getByTestId(`${testID}-outer-layer`)).toHaveStyle(
-          styles.innerLayerViewStyle
-        );
-      });
-    });
-
-    describe('inner layer', () => {
-      it('should not render absolute position properties on the inner layer', () => {
+      it('should render absolute position properties on the outer layer', () => {
         const testID = 'surface-test';
 
         const { getByTestId } = render(
@@ -94,9 +77,28 @@ describe('Surface', () => {
           </Surface>
         );
 
-        expect(getByTestId(`${testID}-inner-layer`)).not.toHaveStyle(
+        expect(getByTestId(`${testID}-outer-layer`)).toHaveStyle(
           styles.absoluteStyles
         );
+      });
+    });
+
+    describe('inner layer', () => {
+      it('applies backgroundColor to inner layer only', () => {
+        const backgroundColor = 'rgb(1,2,3)';
+        const { getByTestId } = render(
+          <Surface
+            testID="surface-test"
+            theme={{ colors: { elevation: { level1: backgroundColor } } }}
+          >
+            {null}
+          </Surface>
+        );
+
+        const style = { backgroundColor };
+        expect(getByTestId('surface-test-outer-layer')).not.toHaveStyle(style);
+        expect(getByTestId('surface-test-middle-layer')).not.toHaveStyle(style);
+        expect(getByTestId('surface-test')).toHaveStyle(style);
       });
 
       it('should render inner layer styles on the inner layer', () => {
@@ -108,9 +110,7 @@ describe('Surface', () => {
           </Surface>
         );
 
-        expect(getByTestId(`${testID}-inner-layer`)).toHaveStyle(
-          styles.innerLayerViewStyle
-        );
+        expect(getByTestId(testID)).toHaveStyle(styles.innerLayerViewStyle);
       });
     });
 

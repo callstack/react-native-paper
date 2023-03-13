@@ -553,7 +553,7 @@ it('barStyle animated value changes correctly', () => {
       barStyle={[{ transform: [{ scale: value }] }]}
     />
   );
-  expect(getByTestId('bottom-navigation-bar')).toHaveStyle({
+  expect(getByTestId('bottom-navigation-bar-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -565,7 +565,7 @@ it('barStyle animated value changes correctly', () => {
 
   jest.advanceTimersByTime(200);
 
-  expect(getByTestId('bottom-navigation-bar')).toHaveStyle({
+  expect(getByTestId('bottom-navigation-bar-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });
