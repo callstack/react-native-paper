@@ -313,6 +313,42 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  *
  * export default MyComponent;
  * ```
+ *
+ * ## Usage with TypeScript
+ *
+ * If you use non-standard object for your route, please pass route type to `<BottomNavigation>` to ensure type safety for the API.
+ *
+ * ```tsx
+ * type RouteShape = {
+ *   key: string;
+ *   customLabel: string;
+ * };
+ *
+ * const AlbumsRoute = () => <Text>Albums</Text>;
+ * const RecentsRoute = () => <Text>Recents</Text>;
+ *
+ * const MyComponent = () => {
+ *   const [index, setIndex] = React.useState(0);
+ *   const [routes] = React.useState<RouteShape[]>([
+ *     { key: 'albums', customLabel: 'Albums' },
+ *     { key: 'recents', customLabel: 'Recents' },
+ *   ]);
+ *
+ *   const renderScene = BottomNavigation.SceneMap({
+ *     albums: AlbumsRoute,
+ *     recents: RecentsRoute,
+ *   });
+ *
+ *   return (
+ *     <BottomNavigation<RouteShape>
+ *       navigationState={{ index, routes }}
+ *       onIndexChange={setIndex}
+ *       renderScene={renderScene}
+ *       getLabelText={({ route }) => route.customLabel}
+ *     />
+ *   );
+ * };
+ * ```
  */
 const BottomNavigation = <Route extends BaseRoute>({
   navigationState,
@@ -563,7 +599,7 @@ const BottomNavigation = <Route extends BaseRoute>({
           );
         })}
       </View>
-      <BottomNavigationBar
+      <BottomNavigationBar<Route>
         navigationState={navigationState}
         renderIcon={renderIcon}
         renderLabel={renderLabel}
@@ -596,7 +632,7 @@ const BottomNavigation = <Route extends BaseRoute>({
  * Pure components are used to minimize re-rendering of the pages.
  * This drastically improves the animation performance.
  */
-BottomNavigation.SceneMap = <Route extends BaseRoute = BaseRoute>(scenes: {
+BottomNavigation.SceneMap = <Route extends BaseRoute>(scenes: {
   [key: string]: React.ComponentType<{
     route: Route;
     jumpTo: (key: string) => void;
