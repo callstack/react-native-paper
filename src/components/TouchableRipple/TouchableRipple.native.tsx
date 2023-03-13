@@ -10,22 +10,24 @@ import {
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import type { InternalTheme } from '../../types';
+import type { ThemeProp } from '../../types';
 import { getTouchableRippleColors } from './utils';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
 
-type Props = React.ComponentProps<typeof Pressable> & {
+export type Props = React.ComponentProps<typeof Pressable> & {
   borderless?: boolean;
   background?: PressableAndroidRippleConfig;
+  centered?: boolean;
   disabled?: boolean;
   onPress?: (e: GestureResponderEvent) => void | null;
+  onLongPress?: (e: GestureResponderEvent) => void;
   rippleColor?: string;
   underlayColor?: string;
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
-  theme: InternalTheme;
+  theme?: ThemeProp;
 };
 
 const TouchableRipple = ({
