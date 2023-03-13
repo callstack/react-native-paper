@@ -6,6 +6,8 @@ exports[`renders animated fab 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 16,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -295,6 +297,8 @@ exports[`renders animated fab with label on the left 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 16,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -586,6 +590,8 @@ exports[`renders animated fab with label on the right by default 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 16,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,

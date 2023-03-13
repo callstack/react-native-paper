@@ -6,6 +6,8 @@ exports[`Card renders an outlined card 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(255, 251, 254, 1)",
+      "borderRadius": 12,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,

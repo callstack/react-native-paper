@@ -6,6 +6,7 @@ exports[`render visible banner, with custom theme 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgb(247, 243, 249)",
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -129,6 +130,8 @@ exports[`render visible banner, with custom theme 1`] = `
             style={
               Object {
                 "alignSelf": undefined,
+                "backgroundColor": "transparent",
+                "borderRadius": 20,
                 "bottom": undefined,
                 "end": undefined,
                 "flex": undefined,
@@ -285,6 +288,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgb(247, 243, 249)",
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -427,6 +431,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgb(247, 243, 249)",
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -572,6 +577,8 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
             style={
               Object {
                 "alignSelf": undefined,
+                "backgroundColor": "transparent",
+                "borderRadius": 20,
                 "bottom": undefined,
                 "end": undefined,
                 "flex": undefined,
@@ -728,6 +735,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgb(247, 243, 249)",
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -851,6 +859,8 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             style={
               Object {
                 "alignSelf": undefined,
+                "backgroundColor": "transparent",
+                "borderRadius": 20,
                 "bottom": undefined,
                 "end": undefined,
                 "flex": undefined,
@@ -999,6 +1009,8 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             style={
               Object {
                 "alignSelf": undefined,
+                "backgroundColor": "transparent",
+                "borderRadius": 20,
                 "bottom": undefined,
                 "end": undefined,
                 "flex": undefined,
@@ -1155,6 +1167,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgb(247, 243, 249)",
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -1307,6 +1320,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgb(247, 243, 249)",
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,

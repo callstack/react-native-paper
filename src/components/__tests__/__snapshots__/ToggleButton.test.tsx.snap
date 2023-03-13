@@ -6,6 +6,8 @@ exports[`renders disabled toggle button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(29, 25, 43, 0.12)",
+      "borderRadius": 4,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -153,6 +155,8 @@ exports[`renders toggle button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(29, 25, 43, 0.12)",
+      "borderRadius": 4,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -295,6 +299,8 @@ exports[`renders unchecked toggle button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 4,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,

@@ -19,6 +19,8 @@ Array [
         style={
           Object {
             "alignSelf": undefined,
+            "backgroundColor": "transparent",
+            "borderRadius": 20,
             "bottom": undefined,
             "end": undefined,
             "flex": undefined,
@@ -235,6 +237,10 @@ Array [
           style={
             Object {
               "alignSelf": undefined,
+              "backgroundColor": "rgb(243, 237, 246)",
+              "borderRadius": 4,
+              "borderTopLeftRadius": 0,
+              "borderTopRightRadius": 0,
               "bottom": undefined,
               "end": undefined,
               "flex": undefined,
@@ -526,6 +532,8 @@ exports[`renders not visible menu 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -690,6 +698,8 @@ Array [
         style={
           Object {
             "alignSelf": undefined,
+            "backgroundColor": "transparent",
+            "borderRadius": 20,
             "bottom": undefined,
             "end": undefined,
             "flex": undefined,
@@ -906,6 +916,8 @@ Array [
           style={
             Object {
               "alignSelf": undefined,
+              "backgroundColor": "rgb(243, 237, 246)",
+              "borderRadius": 4,
               "bottom": undefined,
               "end": undefined,
               "flex": undefined,

@@ -6,6 +6,8 @@ exports[`renders disabled icon button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -154,6 +156,8 @@ exports[`renders icon button by default 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -297,6 +301,8 @@ exports[`renders icon button with color 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -440,6 +446,8 @@ exports[`renders icon button with size 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 23,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -583,6 +591,8 @@ exports[`renders icon change animated 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,

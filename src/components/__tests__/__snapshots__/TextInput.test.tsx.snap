@@ -1268,6 +1268,8 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -1622,6 +1624,8 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,

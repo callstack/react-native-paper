@@ -269,6 +269,8 @@ exports[`renders data table pagination 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -410,6 +412,8 @@ exports[`renders data table pagination 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -609,6 +613,8 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -750,6 +756,8 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -891,6 +899,8 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -1032,6 +1042,8 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -1231,6 +1243,8 @@ exports[`renders data table pagination with label 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -1372,6 +1386,8 @@ exports[`renders data table pagination with label 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -1577,6 +1593,8 @@ exports[`renders data table pagination with options select 1`] = `
         style={
           Object {
             "alignSelf": undefined,
+            "backgroundColor": "transparent",
+            "borderRadius": 20,
             "bottom": undefined,
             "end": undefined,
             "flex": undefined,
@@ -1820,6 +1838,8 @@ exports[`renders data table pagination with options select 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -1961,6 +1981,8 @@ exports[`renders data table pagination with options select 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -2102,6 +2124,8 @@ exports[`renders data table pagination with options select 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -2243,6 +2267,8 @@ exports[`renders data table pagination with options select 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,

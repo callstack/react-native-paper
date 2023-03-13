@@ -75,21 +75,16 @@ describe('Surface', () => {
     });
 
     it.each`
-      property                     | value
-      ${'padding'}                 | ${12}
-      ${'paddingLeft'}             | ${12.1}
-      ${'paddingRight'}            | ${12.2}
-      ${'paddingTop'}              | ${12.3}
-      ${'paddingBottom'}           | ${12.4}
-      ${'paddingHorizontal'}       | ${12.5}
-      ${'paddingVertical'}         | ${12.6}
-      ${'borderWidth'}             | ${2}
-      ${'borderColor'}             | ${'black'}
-      ${'borderRadius'}            | ${3}
-      ${'borderTopLeftRadius'}     | ${1}
-      ${'borderTopRightRadius'}    | ${2}
-      ${'borderBottomLeftRadius'}  | ${3}
-      ${'borderBottomRightRadius'} | ${4}
+      property               | value
+      ${'padding'}           | ${12}
+      ${'paddingLeft'}       | ${12.1}
+      ${'paddingRight'}      | ${12.2}
+      ${'paddingTop'}        | ${12.3}
+      ${'paddingBottom'}     | ${12.4}
+      ${'paddingHorizontal'} | ${12.5}
+      ${'paddingVertical'}   | ${12.6}
+      ${'borderWidth'}       | ${2}
+      ${'borderColor'}       | ${'black'}
     `('applies $property to inner layer only', ({ property, value }) => {
       const style = { [property]: value };
 
@@ -100,6 +95,27 @@ describe('Surface', () => {
       );
 
       expect(getByTestId('surface-test-outer-layer')).not.toHaveStyle(style);
+      expect(getByTestId('surface-test')).toHaveStyle(style);
+    });
+
+    it.each`
+      property                     | value
+      ${'borderRadius'}            | ${3}
+      ${'borderTopLeftRadius'}     | ${1}
+      ${'borderTopRightRadius'}    | ${2}
+      ${'borderBottomLeftRadius'}  | ${3}
+      ${'borderBottomRightRadius'} | ${4}
+      ${'backgroundColor'}         | ${'rgb(4, 5, 6)'}
+    `('applies $property to every layer', ({ property, value }) => {
+      const style = { [property]: value };
+
+      const { getByTestId } = render(
+        <Surface testID="surface-test" style={style}>
+          {null}
+        </Surface>
+      );
+
+      expect(getByTestId('surface-test-outer-layer')).toHaveStyle(style);
       expect(getByTestId('surface-test')).toHaveStyle(style);
     });
 
@@ -148,22 +164,6 @@ describe('Surface', () => {
     });
 
     describe('inner layer', () => {
-      it('applies backgroundColor to inner layer only', () => {
-        const backgroundColor = 'rgb(1,2,3)';
-        const { getByTestId } = render(
-          <Surface
-            testID="surface-test"
-            theme={{ colors: { elevation: { level1: backgroundColor } } }}
-          >
-            {null}
-          </Surface>
-        );
-
-        const style = { backgroundColor };
-        expect(getByTestId('surface-test-outer-layer')).not.toHaveStyle(style);
-        expect(getByTestId('surface-test')).toHaveStyle(style);
-      });
-
       it('should render inner layer styles on the inner layer', () => {
         const testID = 'surface-test';
 
@@ -175,6 +175,22 @@ describe('Surface', () => {
 
         expect(getByTestId(testID)).toHaveStyle(styles.innerLayerViewStyle);
       });
+    });
+
+    it('applies backgroundColor to every layer', () => {
+      const backgroundColor = 'rgb(1, 2, 3)';
+      const { getByTestId } = render(
+        <Surface
+          testID="surface-test"
+          theme={{ colors: { elevation: { level1: backgroundColor } } }}
+        >
+          {null}
+        </Surface>
+      );
+
+      const style = { backgroundColor };
+      expect(getByTestId('surface-test-outer-layer')).toHaveStyle(style);
+      expect(getByTestId('surface-test')).toHaveStyle(style);
     });
 
     describe('children wrapper', () => {

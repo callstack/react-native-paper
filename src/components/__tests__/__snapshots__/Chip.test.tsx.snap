@@ -6,6 +6,8 @@ exports[`renders chip with close button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(232, 222, 248, 1)",
+      "borderRadius": 8,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -292,6 +294,8 @@ exports[`renders chip with custom close button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(232, 222, 248, 1)",
+      "borderRadius": 8,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -578,6 +582,8 @@ exports[`renders chip with icon 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(232, 222, 248, 1)",
+      "borderRadius": 8,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -787,6 +793,8 @@ exports[`renders chip with onPress 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(232, 222, 248, 1)",
+      "borderRadius": 8,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -944,6 +952,8 @@ exports[`renders outlined disabled chip 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 8,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -1101,6 +1111,8 @@ exports[`renders selected chip 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgb(232, 222, 248)",
+      "borderRadius": 8,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,

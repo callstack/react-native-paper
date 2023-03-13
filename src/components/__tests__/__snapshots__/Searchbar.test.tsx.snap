@@ -6,6 +6,8 @@ exports[`activity indicator snapshot test 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgb(238, 232, 244)",
+      "borderRadius": 28,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -54,6 +56,8 @@ exports[`activity indicator snapshot test 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -434,6 +438,8 @@ exports[`renders with placeholder 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgb(238, 232, 244)",
+      "borderRadius": 28,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -482,6 +488,8 @@ exports[`renders with placeholder 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -673,6 +681,8 @@ exports[`renders with placeholder 1`] = `
         style={
           Object {
             "alignSelf": undefined,
+            "backgroundColor": "transparent",
+            "borderRadius": 20,
             "bottom": undefined,
             "end": undefined,
             "flex": undefined,
@@ -820,6 +830,8 @@ exports[`renders with text 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgb(238, 232, 244)",
+      "borderRadius": 28,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -868,6 +880,8 @@ exports[`renders with text 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -1055,6 +1069,8 @@ exports[`renders with text 1`] = `
         style={
           Object {
             "alignSelf": undefined,
+            "backgroundColor": "transparent",
+            "borderRadius": 20,
             "bottom": undefined,
             "end": undefined,
             "flex": undefined,

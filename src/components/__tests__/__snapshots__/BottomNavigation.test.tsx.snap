@@ -75,6 +75,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
@@ -822,6 +823,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
@@ -1701,6 +1703,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
@@ -3409,6 +3412,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
@@ -4877,6 +4881,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
@@ -5564,6 +5569,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
@@ -6532,6 +6538,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
@@ -7624,6 +7631,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
@@ -8572,6 +8580,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,
@@ -9664,6 +9673,7 @@ exports[`renders shifting bottom navigation 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "transparent",
         "bottom": 0,
         "end": undefined,
         "flex": undefined,

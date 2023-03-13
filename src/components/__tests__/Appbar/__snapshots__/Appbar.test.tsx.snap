@@ -6,6 +6,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(255, 251, 254, 1)",
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -58,6 +59,8 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "rgb(238, 232, 244)",
+          "borderRadius": 28,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -106,6 +109,8 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           style={
             Object {
               "alignSelf": undefined,
+              "backgroundColor": "transparent",
+              "borderRadius": 20,
               "bottom": undefined,
               "end": undefined,
               "flex": undefined,
@@ -297,6 +302,8 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             style={
               Object {
                 "alignSelf": undefined,
+                "backgroundColor": "transparent",
+                "borderRadius": 20,
                 "bottom": undefined,
                 "end": undefined,
                 "flex": undefined,
@@ -446,6 +453,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(255, 251, 254, 1)",
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -498,6 +506,8 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
@@ -751,6 +761,8 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,

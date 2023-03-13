@@ -25,6 +25,8 @@ exports[`renders snackbar with Text as a child 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "rgba(49, 48, 51, 1)",
+        "borderRadius": 4,
         "bottom": undefined,
         "end": undefined,
         "flex": undefined,
@@ -119,6 +121,8 @@ exports[`renders snackbar with View & Text as a child 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "rgba(49, 48, 51, 1)",
+        "borderRadius": 4,
         "bottom": undefined,
         "end": undefined,
         "flex": undefined,
@@ -239,6 +243,8 @@ exports[`renders snackbar with action button 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "rgba(49, 48, 51, 1)",
+        "borderRadius": 4,
         "bottom": undefined,
         "end": undefined,
         "flex": undefined,
@@ -342,6 +348,8 @@ exports[`renders snackbar with action button 1`] = `
           style={
             Object {
               "alignSelf": undefined,
+              "backgroundColor": "transparent",
+              "borderRadius": 20,
               "bottom": undefined,
               "end": undefined,
               "flex": undefined,
@@ -513,6 +521,8 @@ exports[`renders snackbar with content 1`] = `
     style={
       Object {
         "alignSelf": undefined,
+        "backgroundColor": "rgba(49, 48, 51, 1)",
+        "borderRadius": 4,
         "bottom": undefined,
         "end": undefined,
         "flex": undefined,

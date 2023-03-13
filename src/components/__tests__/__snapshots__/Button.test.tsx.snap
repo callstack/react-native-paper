@@ -6,6 +6,8 @@ exports[`renders button with an accessibility hint 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -155,6 +157,8 @@ exports[`renders button with an accessibility label 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -304,6 +308,8 @@ exports[`renders button with button color 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "#e91e63",
+      "borderRadius": 20,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -452,6 +458,8 @@ exports[`renders button with color 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -600,6 +608,8 @@ exports[`renders button with custom testID 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -748,6 +758,8 @@ exports[`renders button with icon 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -952,6 +964,8 @@ exports[`renders button with icon in reverse order 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -1158,6 +1172,8 @@ exports[`renders contained contained with mode 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgba(103, 80, 164, 1)",
+      "borderRadius": 20,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -1307,6 +1323,8 @@ exports[`renders disabled button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -1455,6 +1473,8 @@ exports[`renders loading button 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -1811,6 +1831,8 @@ exports[`renders outlined button with mode 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -1960,6 +1982,8 @@ exports[`renders text button by default 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
@@ -2108,6 +2132,8 @@ exports[`renders text button with mode 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,

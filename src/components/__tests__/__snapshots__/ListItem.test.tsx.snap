@@ -103,6 +103,8 @@ exports[`renders list item with custom description 1`] = `
             style={
               Object {
                 "alignSelf": undefined,
+                "backgroundColor": "rgba(232, 222, 248, 1)",
+                "borderRadius": 8,
                 "bottom": undefined,
                 "end": undefined,
                 "flex": undefined,
