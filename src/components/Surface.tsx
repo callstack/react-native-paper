@@ -145,8 +145,10 @@ const SurfaceIOS = forwardRef<
       ...restStyle
     } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
-    const [filteredStyles, marginStyles] = splitStyles(restStyle, (style) =>
-      style.startsWith('margin')
+    const [filteredStyles, marginStyles, borderRadiusStyles] = splitStyles(
+      restStyle,
+      (style) => style.startsWith('margin'),
+      (style) => style.startsWith('border') && style.endsWith('Radius')
     );
 
     if (
@@ -159,9 +161,12 @@ const SurfaceIOS = forwardRef<
       );
     }
 
+    const bgColor = backgroundColorStyle || backgroundColor;
+
     const outerLayerViewStyles = {
       ...getStyleForShadowLayer(elevation, 0),
       ...marginStyles,
+      ...borderRadiusStyles,
       position,
       alignSelf,
       top,
@@ -175,13 +180,15 @@ const SurfaceIOS = forwardRef<
       height,
       transform,
       opacity,
+      backgroundColor: bgColor,
     };
 
     const innerLayerViewStyles = {
       ...getStyleForShadowLayer(elevation, 1),
       ...filteredStyles,
+      ...borderRadiusStyles,
       flex: height ? 1 : undefined,
-      backgroundColor: backgroundColorStyle || backgroundColor,
+      backgroundColor: bgColor,
     };
 
     return [outerLayerViewStyles, innerLayerViewStyles];
