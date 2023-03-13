@@ -130,7 +130,13 @@ exports[`renders list item with custom description 1`] = `
               collapsable={false}
               style={
                 Object {
+                  "backgroundColor": "rgba(232, 222, 248, 1)",
+                  "borderColor": "rgba(121, 116, 126, 1)",
+                  "borderRadius": 8,
+                  "borderStyle": "solid",
+                  "borderWidth": 0,
                   "flex": undefined,
+                  "flexDirection": "column",
                   "shadowColor": "#000",
                   "shadowOffset": Object {
                     "height": 0,
@@ -140,138 +146,143 @@ exports[`renders list item with custom description 1`] = `
                   "shadowRadius": 0,
                 }
               }
-              testID="chip-container-middle-layer"
+              testID="chip-container"
             >
               <View
-                collapsable={false}
-                style={
+                accessibilityRole="button"
+                accessibilityState={
                   Object {
-                    "backgroundColor": "rgba(232, 222, 248, 1)",
-                    "borderColor": "rgba(121, 116, 126, 1)",
-                    "borderRadius": 8,
-                    "borderStyle": "solid",
-                    "borderWidth": 0,
-                    "flex": undefined,
-                    "flexDirection": "column",
+                    "disabled": false,
+                    "selected": false,
                   }
                 }
-                testID="chip-container"
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Array [
+                    Object {
+                      "overflow": "hidden",
+                    },
+                    false,
+                    Array [
+                      Object {
+                        "borderRadius": 8,
+                      },
+                      Object {
+                        "flexGrow": 1,
+                      },
+                    ],
+                  ]
+                }
+                testID="chip"
               >
                 <View
-                  accessibilityRole="button"
-                  accessibilityState={
-                    Object {
-                      "disabled": false,
-                      "selected": false,
-                    }
-                  }
-                  accessible={true}
-                  collapsable={false}
-                  focusable={true}
-                  onBlur={[Function]}
-                  onClick={[Function]}
-                  onFocus={[Function]}
-                  onResponderGrant={[Function]}
-                  onResponderMove={[Function]}
-                  onResponderRelease={[Function]}
-                  onResponderTerminate={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
                   style={
                     Array [
                       Object {
-                        "overflow": "hidden",
+                        "alignItems": "center",
+                        "flexDirection": "row",
+                        "flexGrow": 1,
+                        "paddingLeft": 4,
+                        "position": "relative",
                       },
-                      false,
-                      Array [
-                        Object {
-                          "borderRadius": 8,
-                        },
-                        Object {
-                          "flexGrow": 1,
-                        },
-                      ],
+                      Object {
+                        "paddingLeft": 0,
+                      },
+                      Object {
+                        "paddingRight": 0,
+                      },
                     ]
                   }
-                  testID="chip"
                 >
                   <View
                     style={
                       Array [
                         Object {
-                          "alignItems": "center",
-                          "flexDirection": "row",
-                          "flexGrow": 1,
-                          "paddingLeft": 4,
-                          "position": "relative",
+                          "alignSelf": "center",
+                          "padding": 4,
                         },
                         Object {
-                          "paddingLeft": 0,
-                        },
-                        Object {
+                          "paddingLeft": 8,
                           "paddingRight": 0,
                         },
+                        null,
                       ]
                     }
                   >
-                    <View
-                      style={
-                        Array [
-                          Object {
-                            "alignSelf": "center",
-                            "padding": 4,
-                          },
-                          Object {
-                            "paddingLeft": 8,
-                            "paddingRight": 0,
-                          },
-                          null,
-                        ]
-                      }
-                    >
-                      <Text
-                        accessibilityElementsHidden={true}
-                        allowFontScaling={false}
-                        importantForAccessibility="no-hide-descendants"
-                        pointerEvents="none"
-                        selectable={false}
-                        style={
-                          Array [
-                            Object {
-                              "color": "rgba(103, 80, 164, 1)",
-                              "fontSize": 18,
-                            },
-                            Array [
-                              Object {
-                                "lineHeight": 18,
-                                "transform": Array [
-                                  Object {
-                                    "scaleX": 1,
-                                  },
-                                ],
-                              },
-                              Object {
-                                "backgroundColor": "transparent",
-                              },
-                            ],
-                            Object {
-                              "fontFamily": "Material Design Icons",
-                              "fontStyle": "normal",
-                              "fontWeight": "normal",
-                            },
-                            Object {},
-                          ]
-                        }
-                      >
-                        󰈦
-                      </Text>
-                    </View>
                     <Text
-                      numberOfLines={1}
+                      accessibilityElementsHidden={true}
+                      allowFontScaling={false}
+                      importantForAccessibility="no-hide-descendants"
+                      pointerEvents="none"
                       selectable={false}
                       style={
                         Array [
                           Object {
+                            "color": "rgba(103, 80, 164, 1)",
+                            "fontSize": 18,
+                          },
+                          Array [
+                            Object {
+                              "lineHeight": 18,
+                              "transform": Array [
+                                Object {
+                                  "scaleX": 1,
+                                },
+                              ],
+                            },
+                            Object {
+                              "backgroundColor": "transparent",
+                            },
+                          ],
+                          Object {
+                            "fontFamily": "Material Design Icons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
+                        ]
+                      }
+                    >
+                      󰈦
+                    </Text>
+                  </View>
+                  <Text
+                    numberOfLines={1}
+                    selectable={false}
+                    style={
+                      Array [
+                        Object {
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        Object {
+                          "textAlign": "left",
+                        },
+                        Object {
+                          "color": "rgba(28, 27, 31, 1)",
+                          "writingDirection": "ltr",
+                        },
+                        Array [
+                          Object {
+                            "marginVertical": 6,
+                            "textAlignVertical": "center",
+                          },
+                          Object {
+                            "color": "rgba(29, 25, 43, 1)",
                             "fontFamily": "System",
                             "fontSize": 14,
                             "fontWeight": "500",
@@ -279,37 +290,16 @@ exports[`renders list item with custom description 1`] = `
                             "lineHeight": 20,
                           },
                           Object {
-                            "textAlign": "left",
+                            "marginLeft": 8,
+                            "marginRight": 16,
                           },
-                          Object {
-                            "color": "rgba(28, 27, 31, 1)",
-                            "writingDirection": "ltr",
-                          },
-                          Array [
-                            Object {
-                              "marginVertical": 6,
-                              "textAlignVertical": "center",
-                            },
-                            Object {
-                              "color": "rgba(29, 25, 43, 1)",
-                              "fontFamily": "System",
-                              "fontSize": 14,
-                              "fontWeight": "500",
-                              "letterSpacing": 0.1,
-                              "lineHeight": 20,
-                            },
-                            Object {
-                              "marginLeft": 8,
-                              "marginRight": 16,
-                            },
-                            undefined,
-                          ],
-                        ]
-                      }
-                    >
-                      DOCS.pdf
-                    </Text>
-                  </View>
+                          undefined,
+                        ],
+                      ]
+                    }
+                  >
+                    DOCS.pdf
+                  </Text>
                 </View>
               </View>
             </View>

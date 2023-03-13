@@ -54,10 +54,17 @@ exports[`renders snackbar with Text as a child 1`] = `
     testID="surface-outer-layer"
   >
     <View
+      accessibilityLiveRegion="polite"
       collapsable={false}
+      pointerEvents="box-none"
       style={
         Object {
+          "backgroundColor": "rgba(49, 48, 51, 1)",
+          "borderRadius": 4,
           "flex": undefined,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "minHeight": 48,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 1,
@@ -67,38 +74,21 @@ exports[`renders snackbar with Text as a child 1`] = `
           "shadowRadius": 2,
         }
       }
-      testID="surface-middle-layer"
+      testID="surface"
     >
       <View
-        accessibilityLiveRegion="polite"
-        collapsable={false}
-        pointerEvents="box-none"
         style={
           Object {
-            "backgroundColor": "rgba(49, 48, 51, 1)",
-            "borderRadius": 4,
-            "flex": undefined,
-            "flexDirection": "row",
-            "justifyContent": "space-between",
-            "minHeight": 48,
+            "flex": 1,
+            "marginHorizontal": 16,
+            "marginVertical": 14,
           }
         }
-        testID="surface"
       >
-        <View
-          style={
-            Object {
-              "flex": 1,
-              "marginHorizontal": 16,
-              "marginVertical": 14,
-            }
-          }
-        >
-          <View>
-            <Text>
-              Snackbar content
-            </Text>
-          </View>
+        <View>
+          <Text>
+            Snackbar content
+          </Text>
         </View>
       </View>
     </View>
@@ -158,10 +148,17 @@ exports[`renders snackbar with View & Text as a child 1`] = `
     testID="surface-outer-layer"
   >
     <View
+      accessibilityLiveRegion="polite"
       collapsable={false}
+      pointerEvents="box-none"
       style={
         Object {
+          "backgroundColor": "rgba(49, 48, 51, 1)",
+          "borderRadius": 4,
           "flex": undefined,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "minHeight": 48,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 1,
@@ -171,63 +168,46 @@ exports[`renders snackbar with View & Text as a child 1`] = `
           "shadowRadius": 2,
         }
       }
-      testID="surface-middle-layer"
+      testID="surface"
     >
       <View
-        accessibilityLiveRegion="polite"
-        collapsable={false}
-        pointerEvents="box-none"
         style={
           Object {
-            "backgroundColor": "rgba(49, 48, 51, 1)",
-            "borderRadius": 4,
-            "flex": undefined,
-            "flexDirection": "row",
-            "justifyContent": "space-between",
-            "minHeight": 48,
+            "flex": 1,
+            "marginHorizontal": 16,
+            "marginVertical": 14,
           }
         }
-        testID="surface"
       >
-        <View
-          style={
-            Object {
-              "flex": 1,
-              "marginHorizontal": 16,
-              "marginVertical": 14,
+        <View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+              }
             }
-          }
-        >
-          <View>
+          >
             <View
               style={
                 Object {
-                  "alignItems": "center",
-                  "flexDirection": "row",
+                  "backgroundColor": "#ef9a9a",
+                  "padding": 15,
+                }
+              }
+            />
+            <Text
+              style={
+                Object {
+                  "color": "#ffffff",
+                  "flexShrink": 1,
+                  "flexWrap": "wrap",
+                  "marginLeft": 10,
                 }
               }
             >
-              <View
-                style={
-                  Object {
-                    "backgroundColor": "#ef9a9a",
-                    "padding": 15,
-                  }
-                }
-              />
-              <Text
-                style={
-                  Object {
-                    "color": "#ffffff",
-                    "flexShrink": 1,
-                    "flexWrap": "wrap",
-                    "marginLeft": 10,
-                  }
-                }
-              >
-                Error Message which is veryyyyyyyyyyyy longggggggg Error Message which is veryyyyyyyyyyyy longggggggg
-              </Text>
-            </View>
+              Error Message which is veryyyyyyyyyyyy longggggggg Error Message which is veryyyyyyyyyyyy longggggggg
+            </Text>
           </View>
         </View>
       </View>
@@ -288,10 +268,17 @@ exports[`renders snackbar with action button 1`] = `
     testID="surface-outer-layer"
   >
     <View
+      accessibilityLiveRegion="polite"
       collapsable={false}
+      pointerEvents="box-none"
       style={
         Object {
+          "backgroundColor": "rgba(49, 48, 51, 1)",
+          "borderRadius": 4,
           "flex": undefined,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "minHeight": 48,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 1,
@@ -301,86 +288,96 @@ exports[`renders snackbar with action button 1`] = `
           "shadowRadius": 2,
         }
       }
-      testID="surface-middle-layer"
+      testID="surface"
     >
-      <View
-        accessibilityLiveRegion="polite"
-        collapsable={false}
-        pointerEvents="box-none"
+      <Text
         style={
-          Object {
-            "backgroundColor": "rgba(49, 48, 51, 1)",
-            "borderRadius": 4,
-            "flex": undefined,
-            "flexDirection": "row",
-            "justifyContent": "space-between",
-            "minHeight": 48,
-          }
+          Array [
+            Object {
+              "fontFamily": "System",
+              "fontSize": 14,
+              "fontWeight": "400",
+              "letterSpacing": 0.25,
+              "lineHeight": 20,
+            },
+            Object {
+              "textAlign": "left",
+            },
+            Object {
+              "color": "rgba(28, 27, 31, 1)",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "flex": 1,
+                "marginHorizontal": 16,
+                "marginVertical": 14,
+              },
+              Object {
+                "color": "rgba(244, 239, 244, 1)",
+              },
+            ],
+          ]
         }
-        testID="surface"
       >
-        <Text
-          style={
-            Array [
-              Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "400",
-                "letterSpacing": 0.25,
-                "lineHeight": 20,
-              },
-              Object {
-                "textAlign": "left",
-              },
-              Object {
-                "color": "rgba(28, 27, 31, 1)",
-                "writingDirection": "ltr",
-              },
-              Array [
-                Object {
-                  "flex": 1,
-                  "marginHorizontal": 16,
-                  "marginVertical": 14,
-                },
-                Object {
-                  "color": "rgba(244, 239, 244, 1)",
-                },
-              ],
-            ]
-          }
-        >
-          Snackbar content
-        </Text>
+        Snackbar content
+      </Text>
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "flex-end",
+              "minHeight": 48,
+            },
+            Object {
+              "marginLeft": -12,
+            },
+          ]
+        }
+      >
         <View
+          collapsable={false}
           style={
-            Array [
-              Object {
-                "alignItems": "center",
-                "flexDirection": "row",
-                "justifyContent": "flex-end",
-                "minHeight": 48,
+            Object {
+              "alignSelf": undefined,
+              "bottom": undefined,
+              "end": undefined,
+              "flex": undefined,
+              "height": undefined,
+              "left": undefined,
+              "marginLeft": 4,
+              "marginRight": 8,
+              "opacity": undefined,
+              "position": undefined,
+              "right": undefined,
+              "shadowColor": "#000",
+              "shadowOffset": Object {
+                "height": 0,
+                "width": 0,
               },
-              Object {
-                "marginLeft": -12,
-              },
-            ]
+              "shadowOpacity": 0,
+              "shadowRadius": 0,
+              "start": undefined,
+              "top": undefined,
+              "transform": undefined,
+              "width": undefined,
+            }
           }
+          testID="button-container-outer-layer"
         >
           <View
             collapsable={false}
             style={
               Object {
-                "alignSelf": undefined,
-                "bottom": undefined,
-                "end": undefined,
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderRadius": 20,
+                "borderStyle": "solid",
+                "borderWidth": 0,
                 "flex": undefined,
-                "height": undefined,
-                "left": undefined,
-                "marginLeft": 4,
-                "marginRight": 8,
-                "opacity": undefined,
-                "position": undefined,
-                "right": undefined,
+                "minWidth": 64,
                 "shadowColor": "#000",
                 "shadowOffset": Object {
                   "height": 0,
@@ -388,138 +385,101 @@ exports[`renders snackbar with action button 1`] = `
                 },
                 "shadowOpacity": 0,
                 "shadowRadius": 0,
-                "start": undefined,
-                "top": undefined,
-                "transform": undefined,
-                "width": undefined,
               }
             }
-            testID="button-container-outer-layer"
+            testID="button-container"
           >
             <View
-              collapsable={false}
-              style={
+              accessibilityRole="button"
+              accessibilityState={
                 Object {
-                  "flex": undefined,
-                  "shadowColor": "#000",
-                  "shadowOffset": Object {
-                    "height": 0,
-                    "width": 0,
-                  },
-                  "shadowOpacity": 0,
-                  "shadowRadius": 0,
+                  "disabled": false,
                 }
               }
-              testID="button-container-middle-layer"
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "overflow": "hidden",
+                  },
+                  false,
+                  Object {
+                    "borderRadius": 20,
+                  },
+                ]
+              }
+              testID="button"
             >
               <View
-                collapsable={false}
                 style={
-                  Object {
-                    "backgroundColor": "transparent",
-                    "borderColor": "transparent",
-                    "borderRadius": 20,
-                    "borderStyle": "solid",
-                    "borderWidth": 0,
-                    "flex": undefined,
-                    "minWidth": 64,
-                  }
-                }
-                testID="button-container"
-              >
-                <View
-                  accessibilityRole="button"
-                  accessibilityState={
+                  Array [
                     Object {
-                      "disabled": false,
-                    }
-                  }
-                  accessible={true}
-                  collapsable={false}
-                  focusable={true}
-                  onBlur={[Function]}
-                  onClick={[Function]}
-                  onFocus={[Function]}
-                  onResponderGrant={[Function]}
-                  onResponderMove={[Function]}
-                  onResponderRelease={[Function]}
-                  onResponderTerminate={[Function]}
-                  onResponderTerminationRequest={[Function]}
-                  onStartShouldSetResponder={[Function]}
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "center",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  numberOfLines={1}
+                  selectable={false}
                   style={
                     Array [
                       Object {
-                        "overflow": "hidden",
+                        "fontFamily": "System",
+                        "fontSize": 14,
+                        "fontWeight": "500",
+                        "letterSpacing": 0.1,
+                        "lineHeight": 20,
                       },
-                      false,
                       Object {
-                        "borderRadius": 20,
+                        "textAlign": "left",
                       },
-                    ]
-                  }
-                  testID="button"
-                >
-                  <View
-                    style={
+                      Object {
+                        "color": "rgba(28, 27, 31, 1)",
+                        "writingDirection": "ltr",
+                      },
                       Array [
                         Object {
-                          "alignItems": "center",
-                          "flexDirection": "row",
-                          "justifyContent": "center",
+                          "marginHorizontal": 16,
+                          "marginVertical": 9,
+                          "textAlign": "center",
+                        },
+                        false,
+                        Object {
+                          "marginHorizontal": 12,
+                        },
+                        false,
+                        false,
+                        Object {
+                          "color": "rgba(208, 188, 255, 1)",
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
                         },
                         undefined,
-                      ]
-                    }
-                  >
-                    <Text
-                      numberOfLines={1}
-                      selectable={false}
-                      style={
-                        Array [
-                          Object {
-                            "fontFamily": "System",
-                            "fontSize": 14,
-                            "fontWeight": "500",
-                            "letterSpacing": 0.1,
-                            "lineHeight": 20,
-                          },
-                          Object {
-                            "textAlign": "left",
-                          },
-                          Object {
-                            "color": "rgba(28, 27, 31, 1)",
-                            "writingDirection": "ltr",
-                          },
-                          Array [
-                            Object {
-                              "marginHorizontal": 16,
-                              "marginVertical": 9,
-                              "textAlign": "center",
-                            },
-                            false,
-                            Object {
-                              "marginHorizontal": 12,
-                            },
-                            false,
-                            false,
-                            Object {
-                              "color": "rgba(208, 188, 255, 1)",
-                              "fontFamily": "System",
-                              "fontSize": 14,
-                              "fontWeight": "500",
-                              "letterSpacing": 0.1,
-                              "lineHeight": 20,
-                            },
-                            undefined,
-                          ],
-                        ]
-                      }
-                      testID="button-text"
-                    >
-                      Undo
-                    </Text>
-                  </View>
-                </View>
+                      ],
+                    ]
+                  }
+                  testID="button-text"
+                >
+                  Undo
+                </Text>
               </View>
             </View>
           </View>
@@ -582,10 +542,17 @@ exports[`renders snackbar with content 1`] = `
     testID="surface-outer-layer"
   >
     <View
+      accessibilityLiveRegion="polite"
       collapsable={false}
+      pointerEvents="box-none"
       style={
         Object {
+          "backgroundColor": "rgba(49, 48, 51, 1)",
+          "borderRadius": 4,
           "flex": undefined,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "minHeight": 48,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 1,
@@ -595,57 +562,40 @@ exports[`renders snackbar with content 1`] = `
           "shadowRadius": 2,
         }
       }
-      testID="surface-middle-layer"
+      testID="surface"
     >
-      <View
-        accessibilityLiveRegion="polite"
-        collapsable={false}
-        pointerEvents="box-none"
+      <Text
         style={
-          Object {
-            "backgroundColor": "rgba(49, 48, 51, 1)",
-            "borderRadius": 4,
-            "flex": undefined,
-            "flexDirection": "row",
-            "justifyContent": "space-between",
-            "minHeight": 48,
-          }
-        }
-        testID="surface"
-      >
-        <Text
-          style={
+          Array [
+            Object {
+              "fontFamily": "System",
+              "fontSize": 14,
+              "fontWeight": "400",
+              "letterSpacing": 0.25,
+              "lineHeight": 20,
+            },
+            Object {
+              "textAlign": "left",
+            },
+            Object {
+              "color": "rgba(28, 27, 31, 1)",
+              "writingDirection": "ltr",
+            },
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "400",
-                "letterSpacing": 0.25,
-                "lineHeight": 20,
+                "flex": 1,
+                "marginHorizontal": 16,
+                "marginVertical": 14,
               },
               Object {
-                "textAlign": "left",
+                "color": "rgba(244, 239, 244, 1)",
               },
-              Object {
-                "color": "rgba(28, 27, 31, 1)",
-                "writingDirection": "ltr",
-              },
-              Array [
-                Object {
-                  "flex": 1,
-                  "marginHorizontal": 16,
-                  "marginVertical": 14,
-                },
-                Object {
-                  "color": "rgba(244, 239, 244, 1)",
-                },
-              ],
-            ]
-          }
-        >
-          Snackbar content
-        </Text>
-      </View>
+            ],
+          ]
+        }
+      >
+        Snackbar content
+      </Text>
     </View>
   </View>
 </View>

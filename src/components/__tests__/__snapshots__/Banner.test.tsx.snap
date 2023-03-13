@@ -33,6 +33,7 @@ exports[`render visible banner, with custom theme 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgb(247, 243, 249)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -43,110 +44,126 @@ exports[`render visible banner, with custom theme 1`] = `
         "shadowRadius": 1,
       }
     }
-    testID="surface-middle-layer"
+    testID="surface"
   >
     <View
-      collapsable={false}
       style={
-        Object {
-          "backgroundColor": "rgb(247, 243, 249)",
-          "flex": undefined,
-        }
+        Array [
+          Object {
+            "alignSelf": "center",
+            "maxWidth": 960,
+            "overflow": "hidden",
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
-      testID="surface"
     >
       <View
+        collapsable={false}
         style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "maxWidth": 960,
-              "overflow": "hidden",
-              "width": "100%",
-            },
-            undefined,
-          ]
+          Object {
+            "height": 0,
+          }
         }
+      />
+      <View
+        collapsable={false}
+        onLayout={[Function]}
+        style={Object {}}
       >
         <View
-          collapsable={false}
           style={
             Object {
-              "height": 0,
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "marginBottom": 0,
+              "marginHorizontal": 8,
+              "marginTop": 16,
             }
           }
-        />
-        <View
-          collapsable={false}
-          onLayout={[Function]}
-          style={Object {}}
         >
-          <View
+          <Text
+            accessibilityLiveRegion="polite"
+            accessibilityRole="alert"
             style={
-              Object {
-                "flexDirection": "row",
-                "justifyContent": "flex-start",
-                "marginBottom": 0,
-                "marginHorizontal": 8,
-                "marginTop": 16,
-              }
-            }
-          >
-            <Text
-              accessibilityLiveRegion="polite"
-              accessibilityRole="alert"
-              style={
+              Array [
+                Object {
+                  "textAlign": "left",
+                },
+                Object {
+                  "color": "rgba(28, 27, 31, 1)",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
+                  "letterSpacing": 0,
+                },
+                Object {
+                  "writingDirection": "ltr",
+                },
                 Array [
                   Object {
-                    "textAlign": "left",
+                    "flex": 1,
+                    "margin": 8,
                   },
                   Object {
                     "color": "rgba(28, 27, 31, 1)",
-                    "fontFamily": "System",
-                    "fontWeight": "400",
-                    "letterSpacing": 0,
                   },
-                  Object {
-                    "writingDirection": "ltr",
-                  },
-                  Array [
-                    Object {
-                      "flex": 1,
-                      "margin": 8,
-                    },
-                    Object {
-                      "color": "rgba(28, 27, 31, 1)",
-                    },
-                  ],
-                ]
-              }
-            >
-              Custom theme
-            </Text>
-          </View>
+                ],
+              ]
+            }
+          >
+            Custom theme
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "flex-end",
+              "margin": 4,
+            }
+          }
+        >
           <View
+            collapsable={false}
             style={
               Object {
-                "flexDirection": "row",
-                "justifyContent": "flex-end",
+                "alignSelf": undefined,
+                "bottom": undefined,
+                "end": undefined,
+                "flex": undefined,
+                "height": undefined,
+                "left": undefined,
                 "margin": 4,
+                "opacity": undefined,
+                "position": undefined,
+                "right": undefined,
+                "shadowColor": "#000",
+                "shadowOffset": Object {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
+                "start": undefined,
+                "top": undefined,
+                "transform": undefined,
+                "width": undefined,
               }
             }
+            testID="button-container-outer-layer"
           >
             <View
               collapsable={false}
               style={
                 Object {
-                  "alignSelf": undefined,
-                  "bottom": undefined,
-                  "end": undefined,
+                  "backgroundColor": "transparent",
+                  "borderColor": "transparent",
+                  "borderRadius": 20,
+                  "borderStyle": "solid",
+                  "borderWidth": 0,
                   "flex": undefined,
-                  "height": undefined,
-                  "left": undefined,
-                  "margin": 4,
-                  "opacity": undefined,
-                  "position": undefined,
-                  "right": undefined,
+                  "minWidth": "auto",
                   "shadowColor": "#000",
                   "shadowOffset": Object {
                     "height": 0,
@@ -154,140 +171,103 @@ exports[`render visible banner, with custom theme 1`] = `
                   },
                   "shadowOpacity": 0,
                   "shadowRadius": 0,
-                  "start": undefined,
-                  "top": undefined,
-                  "transform": undefined,
-                  "width": undefined,
                 }
               }
-              testID="button-container-outer-layer"
+              testID="button-container"
             >
               <View
-                collapsable={false}
-                style={
+                accessibilityRole="button"
+                accessibilityState={
                   Object {
-                    "flex": undefined,
-                    "shadowColor": "#000",
-                    "shadowOffset": Object {
-                      "height": 0,
-                      "width": 0,
-                    },
-                    "shadowOpacity": 0,
-                    "shadowRadius": 0,
+                    "disabled": false,
                   }
                 }
-                testID="button-container-middle-layer"
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Array [
+                    Object {
+                      "overflow": "hidden",
+                    },
+                    false,
+                    Object {
+                      "borderRadius": 20,
+                    },
+                  ]
+                }
+                testID="button"
               >
                 <View
-                  collapsable={false}
                   style={
-                    Object {
-                      "backgroundColor": "transparent",
-                      "borderColor": "transparent",
-                      "borderRadius": 20,
-                      "borderStyle": "solid",
-                      "borderWidth": 0,
-                      "flex": undefined,
-                      "minWidth": "auto",
-                    }
-                  }
-                  testID="button-container"
-                >
-                  <View
-                    accessibilityRole="button"
-                    accessibilityState={
+                    Array [
                       Object {
-                        "disabled": false,
-                      }
-                    }
-                    accessible={true}
-                    collapsable={false}
-                    focusable={true}
-                    onBlur={[Function]}
-                    onClick={[Function]}
-                    onFocus={[Function]}
-                    onResponderGrant={[Function]}
-                    onResponderMove={[Function]}
-                    onResponderRelease={[Function]}
-                    onResponderTerminate={[Function]}
-                    onResponderTerminationRequest={[Function]}
-                    onStartShouldSetResponder={[Function]}
+                        "alignItems": "center",
+                        "flexDirection": "row",
+                        "justifyContent": "center",
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  <Text
+                    numberOfLines={1}
+                    selectable={false}
                     style={
                       Array [
                         Object {
-                          "overflow": "hidden",
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
                         },
-                        false,
                         Object {
-                          "borderRadius": 20,
+                          "textAlign": "left",
                         },
-                      ]
-                    }
-                    testID="button"
-                  >
-                    <View
-                      style={
+                        Object {
+                          "color": "rgba(28, 27, 31, 1)",
+                          "writingDirection": "ltr",
+                        },
                         Array [
                           Object {
-                            "alignItems": "center",
-                            "flexDirection": "row",
-                            "justifyContent": "center",
+                            "marginHorizontal": 16,
+                            "marginVertical": 9,
+                            "textAlign": "center",
+                          },
+                          false,
+                          Object {
+                            "marginHorizontal": 12,
+                          },
+                          Object {
+                            "marginHorizontal": 8,
+                          },
+                          false,
+                          Object {
+                            "color": "#043",
+                            "fontFamily": "System",
+                            "fontSize": 14,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.1,
+                            "lineHeight": 20,
                           },
                           undefined,
-                        ]
-                      }
-                    >
-                      <Text
-                        numberOfLines={1}
-                        selectable={false}
-                        style={
-                          Array [
-                            Object {
-                              "fontFamily": "System",
-                              "fontSize": 14,
-                              "fontWeight": "500",
-                              "letterSpacing": 0.1,
-                              "lineHeight": 20,
-                            },
-                            Object {
-                              "textAlign": "left",
-                            },
-                            Object {
-                              "color": "rgba(28, 27, 31, 1)",
-                              "writingDirection": "ltr",
-                            },
-                            Array [
-                              Object {
-                                "marginHorizontal": 16,
-                                "marginVertical": 9,
-                                "textAlign": "center",
-                              },
-                              false,
-                              Object {
-                                "marginHorizontal": 12,
-                              },
-                              Object {
-                                "marginHorizontal": 8,
-                              },
-                              false,
-                              Object {
-                                "color": "#043",
-                                "fontFamily": "System",
-                                "fontSize": 14,
-                                "fontWeight": "500",
-                                "letterSpacing": 0.1,
-                                "lineHeight": 20,
-                              },
-                              undefined,
-                            ],
-                          ]
-                        }
-                        testID="button-text"
-                      >
-                        first
-                      </Text>
-                    </View>
-                  </View>
+                        ],
+                      ]
+                    }
+                    testID="button-text"
+                  >
+                    first
+                  </Text>
                 </View>
               </View>
             </View>
@@ -332,6 +312,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgb(247, 243, 249)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -342,109 +323,98 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
         "shadowRadius": 1,
       }
     }
-    testID="surface-middle-layer"
+    testID="surface"
   >
     <View
-      collapsable={false}
       style={
-        Object {
-          "backgroundColor": "rgb(247, 243, 249)",
-          "flex": undefined,
-        }
+        Array [
+          Object {
+            "alignSelf": "center",
+            "maxWidth": 960,
+            "overflow": "hidden",
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
-      testID="surface"
     >
       <View
+        collapsable={false}
         style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "maxWidth": 960,
-              "overflow": "hidden",
-              "width": "100%",
-            },
-            undefined,
-          ]
+          Object {
+            "height": 0,
+          }
+        }
+      />
+      <View
+        collapsable={false}
+        onLayout={[Function]}
+        style={
+          Object {
+            "opacity": 0,
+            "position": "absolute",
+            "top": 0,
+            "transform": Array [
+              Object {
+                "translateY": -0,
+              },
+            ],
+            "width": "100%",
+          }
         }
       >
         <View
-          collapsable={false}
           style={
             Object {
-              "height": 0,
-            }
-          }
-        />
-        <View
-          collapsable={false}
-          onLayout={[Function]}
-          style={
-            Object {
-              "opacity": 0,
-              "position": "absolute",
-              "top": 0,
-              "transform": Array [
-                Object {
-                  "translateY": -0,
-                },
-              ],
-              "width": "100%",
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "marginBottom": 0,
+              "marginHorizontal": 8,
+              "marginTop": 16,
             }
           }
         >
-          <View
+          <Text
+            accessibilityLiveRegion="none"
+            accessibilityRole="alert"
             style={
-              Object {
-                "flexDirection": "row",
-                "justifyContent": "flex-start",
-                "marginBottom": 0,
-                "marginHorizontal": 8,
-                "marginTop": 16,
-              }
-            }
-          >
-            <Text
-              accessibilityLiveRegion="none"
-              accessibilityRole="alert"
-              style={
+              Array [
+                Object {
+                  "textAlign": "left",
+                },
+                Object {
+                  "color": "rgba(28, 27, 31, 1)",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
+                  "letterSpacing": 0,
+                },
+                Object {
+                  "writingDirection": "ltr",
+                },
                 Array [
                   Object {
-                    "textAlign": "left",
+                    "flex": 1,
+                    "margin": 8,
                   },
                   Object {
                     "color": "rgba(28, 27, 31, 1)",
-                    "fontFamily": "System",
-                    "fontWeight": "400",
-                    "letterSpacing": 0,
                   },
-                  Object {
-                    "writingDirection": "ltr",
-                  },
-                  Array [
-                    Object {
-                      "flex": 1,
-                      "margin": 8,
-                    },
-                    Object {
-                      "color": "rgba(28, 27, 31, 1)",
-                    },
-                  ],
-                ]
-              }
-            >
-              Two line text string with two actions. One to two lines is preferable on mobile.
-            </Text>
-          </View>
-          <View
-            style={
-              Object {
-                "flexDirection": "row",
-                "justifyContent": "flex-end",
-                "margin": 4,
-              }
+                ],
+              ]
             }
-          />
+          >
+            Two line text string with two actions. One to two lines is preferable on mobile.
+          </Text>
         </View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "flex-end",
+              "margin": 4,
+            }
+          }
+        />
       </View>
     </View>
   </View>
@@ -484,6 +454,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgb(247, 243, 249)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -494,132 +465,148 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
         "shadowRadius": 1,
       }
     }
-    testID="surface-middle-layer"
+    testID="surface"
   >
     <View
-      collapsable={false}
       style={
-        Object {
-          "backgroundColor": "rgb(247, 243, 249)",
-          "flex": undefined,
-        }
+        Array [
+          Object {
+            "alignSelf": "center",
+            "maxWidth": 960,
+            "overflow": "hidden",
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
-      testID="surface"
     >
       <View
+        collapsable={false}
         style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "maxWidth": 960,
-              "overflow": "hidden",
-              "width": "100%",
-            },
-            undefined,
-          ]
+          Object {
+            "height": 0,
+          }
         }
+      />
+      <View
+        collapsable={false}
+        onLayout={[Function]}
+        style={Object {}}
       >
         <View
-          collapsable={false}
           style={
             Object {
-              "height": 0,
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "marginBottom": 0,
+              "marginHorizontal": 8,
+              "marginTop": 16,
             }
           }
-        />
-        <View
-          collapsable={false}
-          onLayout={[Function]}
-          style={Object {}}
         >
           <View
             style={
               Object {
-                "flexDirection": "row",
-                "justifyContent": "flex-start",
-                "marginBottom": 0,
-                "marginHorizontal": 8,
-                "marginTop": 16,
+                "margin": 8,
               }
             }
           >
-            <View
-              style={
+            <Image
+              accessibilityIgnoresInvertColors={true}
+              source={
                 Object {
-                  "margin": 8,
+                  "uri": "https://callstack.com/images/team/Satya.png",
                 }
               }
-            >
-              <Image
-                accessibilityIgnoresInvertColors={true}
-                source={
-                  Object {
-                    "uri": "https://callstack.com/images/team/Satya.png",
-                  }
-                }
-                style={
-                  Object {
-                    "height": 40,
-                    "width": 40,
-                  }
-                }
-              />
-            </View>
-            <Text
-              accessibilityLiveRegion="polite"
-              accessibilityRole="alert"
               style={
+                Object {
+                  "height": 40,
+                  "width": 40,
+                }
+              }
+            />
+          </View>
+          <Text
+            accessibilityLiveRegion="polite"
+            accessibilityRole="alert"
+            style={
+              Array [
+                Object {
+                  "textAlign": "left",
+                },
+                Object {
+                  "color": "rgba(28, 27, 31, 1)",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
+                  "letterSpacing": 0,
+                },
+                Object {
+                  "writingDirection": "ltr",
+                },
                 Array [
                   Object {
-                    "textAlign": "left",
+                    "flex": 1,
+                    "margin": 8,
                   },
                   Object {
                     "color": "rgba(28, 27, 31, 1)",
-                    "fontFamily": "System",
-                    "fontWeight": "400",
-                    "letterSpacing": 0,
                   },
-                  Object {
-                    "writingDirection": "ltr",
-                  },
-                  Array [
-                    Object {
-                      "flex": 1,
-                      "margin": 8,
-                    },
-                    Object {
-                      "color": "rgba(28, 27, 31, 1)",
-                    },
-                  ],
-                ]
-              }
-            >
-              Two line text string with two actions. One to two lines is preferable on mobile.
-            </Text>
-          </View>
+                ],
+              ]
+            }
+          >
+            Two line text string with two actions. One to two lines is preferable on mobile.
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "flex-end",
+              "margin": 4,
+            }
+          }
+        >
           <View
+            collapsable={false}
             style={
               Object {
-                "flexDirection": "row",
-                "justifyContent": "flex-end",
+                "alignSelf": undefined,
+                "bottom": undefined,
+                "end": undefined,
+                "flex": undefined,
+                "height": undefined,
+                "left": undefined,
                 "margin": 4,
+                "opacity": undefined,
+                "position": undefined,
+                "right": undefined,
+                "shadowColor": "#000",
+                "shadowOffset": Object {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
+                "start": undefined,
+                "top": undefined,
+                "transform": undefined,
+                "width": undefined,
               }
             }
+            testID="button-container-outer-layer"
           >
             <View
               collapsable={false}
               style={
                 Object {
-                  "alignSelf": undefined,
-                  "bottom": undefined,
-                  "end": undefined,
+                  "backgroundColor": "transparent",
+                  "borderColor": "transparent",
+                  "borderRadius": 20,
+                  "borderStyle": "solid",
+                  "borderWidth": 0,
                   "flex": undefined,
-                  "height": undefined,
-                  "left": undefined,
-                  "margin": 4,
-                  "opacity": undefined,
-                  "position": undefined,
-                  "right": undefined,
+                  "minWidth": "auto",
                   "shadowColor": "#000",
                   "shadowOffset": Object {
                     "height": 0,
@@ -627,140 +614,103 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                   },
                   "shadowOpacity": 0,
                   "shadowRadius": 0,
-                  "start": undefined,
-                  "top": undefined,
-                  "transform": undefined,
-                  "width": undefined,
                 }
               }
-              testID="button-container-outer-layer"
+              testID="button-container"
             >
               <View
-                collapsable={false}
-                style={
+                accessibilityRole="button"
+                accessibilityState={
                   Object {
-                    "flex": undefined,
-                    "shadowColor": "#000",
-                    "shadowOffset": Object {
-                      "height": 0,
-                      "width": 0,
-                    },
-                    "shadowOpacity": 0,
-                    "shadowRadius": 0,
+                    "disabled": false,
                   }
                 }
-                testID="button-container-middle-layer"
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Array [
+                    Object {
+                      "overflow": "hidden",
+                    },
+                    false,
+                    Object {
+                      "borderRadius": 20,
+                    },
+                  ]
+                }
+                testID="button"
               >
                 <View
-                  collapsable={false}
                   style={
-                    Object {
-                      "backgroundColor": "transparent",
-                      "borderColor": "transparent",
-                      "borderRadius": 20,
-                      "borderStyle": "solid",
-                      "borderWidth": 0,
-                      "flex": undefined,
-                      "minWidth": "auto",
-                    }
-                  }
-                  testID="button-container"
-                >
-                  <View
-                    accessibilityRole="button"
-                    accessibilityState={
+                    Array [
                       Object {
-                        "disabled": false,
-                      }
-                    }
-                    accessible={true}
-                    collapsable={false}
-                    focusable={true}
-                    onBlur={[Function]}
-                    onClick={[Function]}
-                    onFocus={[Function]}
-                    onResponderGrant={[Function]}
-                    onResponderMove={[Function]}
-                    onResponderRelease={[Function]}
-                    onResponderTerminate={[Function]}
-                    onResponderTerminationRequest={[Function]}
-                    onStartShouldSetResponder={[Function]}
+                        "alignItems": "center",
+                        "flexDirection": "row",
+                        "justifyContent": "center",
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  <Text
+                    numberOfLines={1}
+                    selectable={false}
                     style={
                       Array [
                         Object {
-                          "overflow": "hidden",
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
                         },
-                        false,
                         Object {
-                          "borderRadius": 20,
+                          "textAlign": "left",
                         },
-                      ]
-                    }
-                    testID="button"
-                  >
-                    <View
-                      style={
+                        Object {
+                          "color": "rgba(28, 27, 31, 1)",
+                          "writingDirection": "ltr",
+                        },
                         Array [
                           Object {
-                            "alignItems": "center",
-                            "flexDirection": "row",
-                            "justifyContent": "center",
+                            "marginHorizontal": 16,
+                            "marginVertical": 9,
+                            "textAlign": "center",
+                          },
+                          false,
+                          Object {
+                            "marginHorizontal": 12,
+                          },
+                          Object {
+                            "marginHorizontal": 8,
+                          },
+                          false,
+                          Object {
+                            "color": "rgba(103, 80, 164, 1)",
+                            "fontFamily": "System",
+                            "fontSize": 14,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.1,
+                            "lineHeight": 20,
                           },
                           undefined,
-                        ]
-                      }
-                    >
-                      <Text
-                        numberOfLines={1}
-                        selectable={false}
-                        style={
-                          Array [
-                            Object {
-                              "fontFamily": "System",
-                              "fontSize": 14,
-                              "fontWeight": "500",
-                              "letterSpacing": 0.1,
-                              "lineHeight": 20,
-                            },
-                            Object {
-                              "textAlign": "left",
-                            },
-                            Object {
-                              "color": "rgba(28, 27, 31, 1)",
-                              "writingDirection": "ltr",
-                            },
-                            Array [
-                              Object {
-                                "marginHorizontal": 16,
-                                "marginVertical": 9,
-                                "textAlign": "center",
-                              },
-                              false,
-                              Object {
-                                "marginHorizontal": 12,
-                              },
-                              Object {
-                                "marginHorizontal": 8,
-                              },
-                              false,
-                              Object {
-                                "color": "rgba(103, 80, 164, 1)",
-                                "fontFamily": "System",
-                                "fontSize": 14,
-                                "fontWeight": "500",
-                                "letterSpacing": 0.1,
-                                "lineHeight": 20,
-                              },
-                              undefined,
-                            ],
-                          ]
-                        }
-                        testID="button-text"
-                      >
-                        first
-                      </Text>
-                    </View>
-                  </View>
+                        ],
+                      ]
+                    }
+                    testID="button-text"
+                  >
+                    first
+                  </Text>
                 </View>
               </View>
             </View>
@@ -805,6 +755,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgb(247, 243, 249)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -815,110 +766,126 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
         "shadowRadius": 1,
       }
     }
-    testID="surface-middle-layer"
+    testID="surface"
   >
     <View
-      collapsable={false}
       style={
-        Object {
-          "backgroundColor": "rgb(247, 243, 249)",
-          "flex": undefined,
-        }
+        Array [
+          Object {
+            "alignSelf": "center",
+            "maxWidth": 960,
+            "overflow": "hidden",
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
-      testID="surface"
     >
       <View
+        collapsable={false}
         style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "maxWidth": 960,
-              "overflow": "hidden",
-              "width": "100%",
-            },
-            undefined,
-          ]
+          Object {
+            "height": 0,
+          }
         }
+      />
+      <View
+        collapsable={false}
+        onLayout={[Function]}
+        style={Object {}}
       >
         <View
-          collapsable={false}
           style={
             Object {
-              "height": 0,
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "marginBottom": 0,
+              "marginHorizontal": 8,
+              "marginTop": 16,
             }
           }
-        />
-        <View
-          collapsable={false}
-          onLayout={[Function]}
-          style={Object {}}
         >
-          <View
+          <Text
+            accessibilityLiveRegion="polite"
+            accessibilityRole="alert"
             style={
-              Object {
-                "flexDirection": "row",
-                "justifyContent": "flex-start",
-                "marginBottom": 0,
-                "marginHorizontal": 8,
-                "marginTop": 16,
-              }
-            }
-          >
-            <Text
-              accessibilityLiveRegion="polite"
-              accessibilityRole="alert"
-              style={
+              Array [
+                Object {
+                  "textAlign": "left",
+                },
+                Object {
+                  "color": "rgba(28, 27, 31, 1)",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
+                  "letterSpacing": 0,
+                },
+                Object {
+                  "writingDirection": "ltr",
+                },
                 Array [
                   Object {
-                    "textAlign": "left",
+                    "flex": 1,
+                    "margin": 8,
                   },
                   Object {
                     "color": "rgba(28, 27, 31, 1)",
-                    "fontFamily": "System",
-                    "fontWeight": "400",
-                    "letterSpacing": 0,
                   },
-                  Object {
-                    "writingDirection": "ltr",
-                  },
-                  Array [
-                    Object {
-                      "flex": 1,
-                      "margin": 8,
-                    },
-                    Object {
-                      "color": "rgba(28, 27, 31, 1)",
-                    },
-                  ],
-                ]
-              }
-            >
-              Two line text string with two actions. One to two lines is preferable on mobile.
-            </Text>
-          </View>
+                ],
+              ]
+            }
+          >
+            Two line text string with two actions. One to two lines is preferable on mobile.
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "flex-end",
+              "margin": 4,
+            }
+          }
+        >
           <View
+            collapsable={false}
             style={
               Object {
-                "flexDirection": "row",
-                "justifyContent": "flex-end",
+                "alignSelf": undefined,
+                "bottom": undefined,
+                "end": undefined,
+                "flex": undefined,
+                "height": undefined,
+                "left": undefined,
                 "margin": 4,
+                "opacity": undefined,
+                "position": undefined,
+                "right": undefined,
+                "shadowColor": "#000",
+                "shadowOffset": Object {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
+                "start": undefined,
+                "top": undefined,
+                "transform": undefined,
+                "width": undefined,
               }
             }
+            testID="button-container-outer-layer"
           >
             <View
               collapsable={false}
               style={
                 Object {
-                  "alignSelf": undefined,
-                  "bottom": undefined,
-                  "end": undefined,
+                  "backgroundColor": "transparent",
+                  "borderColor": "transparent",
+                  "borderRadius": 20,
+                  "borderStyle": "solid",
+                  "borderWidth": 0,
                   "flex": undefined,
-                  "height": undefined,
-                  "left": undefined,
-                  "margin": 4,
-                  "opacity": undefined,
-                  "position": undefined,
-                  "right": undefined,
+                  "minWidth": "auto",
                   "shadowColor": "#000",
                   "shadowOffset": Object {
                     "height": 0,
@@ -926,157 +893,147 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   },
                   "shadowOpacity": 0,
                   "shadowRadius": 0,
-                  "start": undefined,
-                  "top": undefined,
-                  "transform": undefined,
-                  "width": undefined,
                 }
               }
-              testID="button-container-outer-layer"
+              testID="button-container"
             >
               <View
-                collapsable={false}
-                style={
+                accessibilityRole="button"
+                accessibilityState={
                   Object {
-                    "flex": undefined,
-                    "shadowColor": "#000",
-                    "shadowOffset": Object {
-                      "height": 0,
-                      "width": 0,
-                    },
-                    "shadowOpacity": 0,
-                    "shadowRadius": 0,
+                    "disabled": false,
                   }
                 }
-                testID="button-container-middle-layer"
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Array [
+                    Object {
+                      "overflow": "hidden",
+                    },
+                    false,
+                    Object {
+                      "borderRadius": 20,
+                    },
+                  ]
+                }
+                testID="button"
               >
                 <View
-                  collapsable={false}
                   style={
-                    Object {
-                      "backgroundColor": "transparent",
-                      "borderColor": "transparent",
-                      "borderRadius": 20,
-                      "borderStyle": "solid",
-                      "borderWidth": 0,
-                      "flex": undefined,
-                      "minWidth": "auto",
-                    }
-                  }
-                  testID="button-container"
-                >
-                  <View
-                    accessibilityRole="button"
-                    accessibilityState={
+                    Array [
                       Object {
-                        "disabled": false,
-                      }
-                    }
-                    accessible={true}
-                    collapsable={false}
-                    focusable={true}
-                    onBlur={[Function]}
-                    onClick={[Function]}
-                    onFocus={[Function]}
-                    onResponderGrant={[Function]}
-                    onResponderMove={[Function]}
-                    onResponderRelease={[Function]}
-                    onResponderTerminate={[Function]}
-                    onResponderTerminationRequest={[Function]}
-                    onStartShouldSetResponder={[Function]}
+                        "alignItems": "center",
+                        "flexDirection": "row",
+                        "justifyContent": "center",
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  <Text
+                    numberOfLines={1}
+                    selectable={false}
                     style={
                       Array [
                         Object {
-                          "overflow": "hidden",
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
                         },
-                        false,
                         Object {
-                          "borderRadius": 20,
+                          "textAlign": "left",
                         },
-                      ]
-                    }
-                    testID="button"
-                  >
-                    <View
-                      style={
+                        Object {
+                          "color": "rgba(28, 27, 31, 1)",
+                          "writingDirection": "ltr",
+                        },
                         Array [
                           Object {
-                            "alignItems": "center",
-                            "flexDirection": "row",
-                            "justifyContent": "center",
+                            "marginHorizontal": 16,
+                            "marginVertical": 9,
+                            "textAlign": "center",
+                          },
+                          false,
+                          Object {
+                            "marginHorizontal": 12,
+                          },
+                          Object {
+                            "marginHorizontal": 8,
+                          },
+                          false,
+                          Object {
+                            "color": "rgba(103, 80, 164, 1)",
+                            "fontFamily": "System",
+                            "fontSize": 14,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.1,
+                            "lineHeight": 20,
                           },
                           undefined,
-                        ]
-                      }
-                    >
-                      <Text
-                        numberOfLines={1}
-                        selectable={false}
-                        style={
-                          Array [
-                            Object {
-                              "fontFamily": "System",
-                              "fontSize": 14,
-                              "fontWeight": "500",
-                              "letterSpacing": 0.1,
-                              "lineHeight": 20,
-                            },
-                            Object {
-                              "textAlign": "left",
-                            },
-                            Object {
-                              "color": "rgba(28, 27, 31, 1)",
-                              "writingDirection": "ltr",
-                            },
-                            Array [
-                              Object {
-                                "marginHorizontal": 16,
-                                "marginVertical": 9,
-                                "textAlign": "center",
-                              },
-                              false,
-                              Object {
-                                "marginHorizontal": 12,
-                              },
-                              Object {
-                                "marginHorizontal": 8,
-                              },
-                              false,
-                              Object {
-                                "color": "rgba(103, 80, 164, 1)",
-                                "fontFamily": "System",
-                                "fontSize": 14,
-                                "fontWeight": "500",
-                                "letterSpacing": 0.1,
-                                "lineHeight": 20,
-                              },
-                              undefined,
-                            ],
-                          ]
-                        }
-                        testID="button-text"
-                      >
-                        first
-                      </Text>
-                    </View>
-                  </View>
+                        ],
+                      ]
+                    }
+                    testID="button-text"
+                  >
+                    first
+                  </Text>
                 </View>
               </View>
             </View>
+          </View>
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "alignSelf": undefined,
+                "bottom": undefined,
+                "end": undefined,
+                "flex": undefined,
+                "height": undefined,
+                "left": undefined,
+                "margin": 4,
+                "opacity": undefined,
+                "position": undefined,
+                "right": undefined,
+                "shadowColor": "#000",
+                "shadowOffset": Object {
+                  "height": 0,
+                  "width": 0,
+                },
+                "shadowOpacity": 0,
+                "shadowRadius": 0,
+                "start": undefined,
+                "top": undefined,
+                "transform": undefined,
+                "width": undefined,
+              }
+            }
+            testID="button-container-outer-layer"
+          >
             <View
               collapsable={false}
               style={
                 Object {
-                  "alignSelf": undefined,
-                  "bottom": undefined,
-                  "end": undefined,
+                  "backgroundColor": "transparent",
+                  "borderColor": "transparent",
+                  "borderRadius": 20,
+                  "borderStyle": "solid",
+                  "borderWidth": 0,
                   "flex": undefined,
-                  "height": undefined,
-                  "left": undefined,
-                  "margin": 4,
-                  "opacity": undefined,
-                  "position": undefined,
-                  "right": undefined,
+                  "minWidth": "auto",
                   "shadowColor": "#000",
                   "shadowOffset": Object {
                     "height": 0,
@@ -1084,140 +1041,103 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   },
                   "shadowOpacity": 0,
                   "shadowRadius": 0,
-                  "start": undefined,
-                  "top": undefined,
-                  "transform": undefined,
-                  "width": undefined,
                 }
               }
-              testID="button-container-outer-layer"
+              testID="button-container"
             >
               <View
-                collapsable={false}
-                style={
+                accessibilityRole="button"
+                accessibilityState={
                   Object {
-                    "flex": undefined,
-                    "shadowColor": "#000",
-                    "shadowOffset": Object {
-                      "height": 0,
-                      "width": 0,
-                    },
-                    "shadowOpacity": 0,
-                    "shadowRadius": 0,
+                    "disabled": false,
                   }
                 }
-                testID="button-container-middle-layer"
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Array [
+                    Object {
+                      "overflow": "hidden",
+                    },
+                    false,
+                    Object {
+                      "borderRadius": 20,
+                    },
+                  ]
+                }
+                testID="button"
               >
                 <View
-                  collapsable={false}
                   style={
-                    Object {
-                      "backgroundColor": "transparent",
-                      "borderColor": "transparent",
-                      "borderRadius": 20,
-                      "borderStyle": "solid",
-                      "borderWidth": 0,
-                      "flex": undefined,
-                      "minWidth": "auto",
-                    }
-                  }
-                  testID="button-container"
-                >
-                  <View
-                    accessibilityRole="button"
-                    accessibilityState={
+                    Array [
                       Object {
-                        "disabled": false,
-                      }
-                    }
-                    accessible={true}
-                    collapsable={false}
-                    focusable={true}
-                    onBlur={[Function]}
-                    onClick={[Function]}
-                    onFocus={[Function]}
-                    onResponderGrant={[Function]}
-                    onResponderMove={[Function]}
-                    onResponderRelease={[Function]}
-                    onResponderTerminate={[Function]}
-                    onResponderTerminationRequest={[Function]}
-                    onStartShouldSetResponder={[Function]}
+                        "alignItems": "center",
+                        "flexDirection": "row",
+                        "justifyContent": "center",
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  <Text
+                    numberOfLines={1}
+                    selectable={false}
                     style={
                       Array [
                         Object {
-                          "overflow": "hidden",
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
                         },
-                        false,
                         Object {
-                          "borderRadius": 20,
+                          "textAlign": "left",
                         },
-                      ]
-                    }
-                    testID="button"
-                  >
-                    <View
-                      style={
+                        Object {
+                          "color": "rgba(28, 27, 31, 1)",
+                          "writingDirection": "ltr",
+                        },
                         Array [
                           Object {
-                            "alignItems": "center",
-                            "flexDirection": "row",
-                            "justifyContent": "center",
+                            "marginHorizontal": 16,
+                            "marginVertical": 9,
+                            "textAlign": "center",
+                          },
+                          false,
+                          Object {
+                            "marginHorizontal": 12,
+                          },
+                          Object {
+                            "marginHorizontal": 8,
+                          },
+                          false,
+                          Object {
+                            "color": "rgba(103, 80, 164, 1)",
+                            "fontFamily": "System",
+                            "fontSize": 14,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.1,
+                            "lineHeight": 20,
                           },
                           undefined,
-                        ]
-                      }
-                    >
-                      <Text
-                        numberOfLines={1}
-                        selectable={false}
-                        style={
-                          Array [
-                            Object {
-                              "fontFamily": "System",
-                              "fontSize": 14,
-                              "fontWeight": "500",
-                              "letterSpacing": 0.1,
-                              "lineHeight": 20,
-                            },
-                            Object {
-                              "textAlign": "left",
-                            },
-                            Object {
-                              "color": "rgba(28, 27, 31, 1)",
-                              "writingDirection": "ltr",
-                            },
-                            Array [
-                              Object {
-                                "marginHorizontal": 16,
-                                "marginVertical": 9,
-                                "textAlign": "center",
-                              },
-                              false,
-                              Object {
-                                "marginHorizontal": 12,
-                              },
-                              Object {
-                                "marginHorizontal": 8,
-                              },
-                              false,
-                              Object {
-                                "color": "rgba(103, 80, 164, 1)",
-                                "fontFamily": "System",
-                                "fontSize": 14,
-                                "fontWeight": "500",
-                                "letterSpacing": 0.1,
-                                "lineHeight": 20,
-                              },
-                              undefined,
-                            ],
-                          ]
-                        }
-                        testID="button-text"
-                      >
-                        second
-                      </Text>
-                    </View>
-                  </View>
+                        ],
+                      ]
+                    }
+                    testID="button-text"
+                  >
+                    second
+                  </Text>
                 </View>
               </View>
             </View>
@@ -1262,6 +1182,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgb(247, 243, 249)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -1272,119 +1193,108 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
         "shadowRadius": 1,
       }
     }
-    testID="surface-middle-layer"
+    testID="surface"
   >
     <View
-      collapsable={false}
       style={
-        Object {
-          "backgroundColor": "rgb(247, 243, 249)",
-          "flex": undefined,
-        }
+        Array [
+          Object {
+            "alignSelf": "center",
+            "maxWidth": 960,
+            "overflow": "hidden",
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
-      testID="surface"
     >
       <View
+        collapsable={false}
         style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "maxWidth": 960,
-              "overflow": "hidden",
-              "width": "100%",
-            },
-            undefined,
-          ]
+          Object {
+            "height": 0,
+          }
         }
+      />
+      <View
+        collapsable={false}
+        onLayout={[Function]}
+        style={Object {}}
       >
         <View
-          collapsable={false}
           style={
             Object {
-              "height": 0,
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "marginBottom": 0,
+              "marginHorizontal": 8,
+              "marginTop": 16,
             }
           }
-        />
-        <View
-          collapsable={false}
-          onLayout={[Function]}
-          style={Object {}}
         >
           <View
             style={
               Object {
-                "flexDirection": "row",
-                "justifyContent": "flex-start",
-                "marginBottom": 0,
-                "marginHorizontal": 8,
-                "marginTop": 16,
+                "margin": 8,
               }
             }
           >
-            <View
-              style={
+            <Image
+              accessibilityIgnoresInvertColors={true}
+              source={
                 Object {
-                  "margin": 8,
+                  "uri": "https://callstack.com/images/team/Satya.png",
                 }
               }
-            >
-              <Image
-                accessibilityIgnoresInvertColors={true}
-                source={
-                  Object {
-                    "uri": "https://callstack.com/images/team/Satya.png",
-                  }
-                }
-                style={
-                  Object {
-                    "height": 40,
-                    "width": 40,
-                  }
-                }
-              />
-            </View>
-            <Text
-              accessibilityLiveRegion="polite"
-              accessibilityRole="alert"
               style={
+                Object {
+                  "height": 40,
+                  "width": 40,
+                }
+              }
+            />
+          </View>
+          <Text
+            accessibilityLiveRegion="polite"
+            accessibilityRole="alert"
+            style={
+              Array [
+                Object {
+                  "textAlign": "left",
+                },
+                Object {
+                  "color": "rgba(28, 27, 31, 1)",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
+                  "letterSpacing": 0,
+                },
+                Object {
+                  "writingDirection": "ltr",
+                },
                 Array [
                   Object {
-                    "textAlign": "left",
+                    "flex": 1,
+                    "margin": 8,
                   },
                   Object {
                     "color": "rgba(28, 27, 31, 1)",
-                    "fontFamily": "System",
-                    "fontWeight": "400",
-                    "letterSpacing": 0,
                   },
-                  Object {
-                    "writingDirection": "ltr",
-                  },
-                  Array [
-                    Object {
-                      "flex": 1,
-                      "margin": 8,
-                    },
-                    Object {
-                      "color": "rgba(28, 27, 31, 1)",
-                    },
-                  ],
-                ]
-              }
-            >
-              Two line text string with two actions. One to two lines is preferable on mobile.
-            </Text>
-          </View>
-          <View
-            style={
-              Object {
-                "flexDirection": "row",
-                "justifyContent": "flex-end",
-                "margin": 4,
-              }
+                ],
+              ]
             }
-          />
+          >
+            Two line text string with two actions. One to two lines is preferable on mobile.
+          </Text>
         </View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "flex-end",
+              "margin": 4,
+            }
+          }
+        />
       </View>
     </View>
   </View>
@@ -1424,6 +1334,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgb(247, 243, 249)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -1434,97 +1345,86 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
         "shadowRadius": 1,
       }
     }
-    testID="surface-middle-layer"
+    testID="surface"
   >
     <View
-      collapsable={false}
       style={
-        Object {
-          "backgroundColor": "rgb(247, 243, 249)",
-          "flex": undefined,
-        }
+        Array [
+          Object {
+            "alignSelf": "center",
+            "maxWidth": 960,
+            "overflow": "hidden",
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
-      testID="surface"
     >
       <View
+        collapsable={false}
         style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "maxWidth": 960,
-              "overflow": "hidden",
-              "width": "100%",
-            },
-            undefined,
-          ]
+          Object {
+            "height": 0,
+          }
         }
+      />
+      <View
+        collapsable={false}
+        onLayout={[Function]}
+        style={Object {}}
       >
         <View
-          collapsable={false}
           style={
             Object {
-              "height": 0,
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+              "marginBottom": 0,
+              "marginHorizontal": 8,
+              "marginTop": 16,
             }
           }
-        />
-        <View
-          collapsable={false}
-          onLayout={[Function]}
-          style={Object {}}
         >
-          <View
+          <Text
+            accessibilityLiveRegion="polite"
+            accessibilityRole="alert"
             style={
-              Object {
-                "flexDirection": "row",
-                "justifyContent": "flex-start",
-                "marginBottom": 0,
-                "marginHorizontal": 8,
-                "marginTop": 16,
-              }
-            }
-          >
-            <Text
-              accessibilityLiveRegion="polite"
-              accessibilityRole="alert"
-              style={
+              Array [
+                Object {
+                  "textAlign": "left",
+                },
+                Object {
+                  "color": "rgba(28, 27, 31, 1)",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
+                  "letterSpacing": 0,
+                },
+                Object {
+                  "writingDirection": "ltr",
+                },
                 Array [
                   Object {
-                    "textAlign": "left",
+                    "flex": 1,
+                    "margin": 8,
                   },
                   Object {
                     "color": "rgba(28, 27, 31, 1)",
-                    "fontFamily": "System",
-                    "fontWeight": "400",
-                    "letterSpacing": 0,
                   },
-                  Object {
-                    "writingDirection": "ltr",
-                  },
-                  Array [
-                    Object {
-                      "flex": 1,
-                      "margin": 8,
-                    },
-                    Object {
-                      "color": "rgba(28, 27, 31, 1)",
-                    },
-                  ],
-                ]
-              }
-            >
-              Two line text string with two actions. One to two lines is preferable on mobile.
-            </Text>
-          </View>
-          <View
-            style={
-              Object {
-                "flexDirection": "row",
-                "justifyContent": "flex-end",
-                "margin": 4,
-              }
+                ],
+              ]
             }
-          />
+          >
+            Two line text string with two actions. One to two lines is preferable on mobile.
+          </Text>
         </View>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "flex-end",
+              "margin": 4,
+            }
+          }
+        />
       </View>
     </View>
   </View>

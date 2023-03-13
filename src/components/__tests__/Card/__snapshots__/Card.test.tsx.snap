@@ -33,6 +33,9 @@ exports[`Card renders an outlined card 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "rgba(255, 251, 254, 1)",
+        "borderRadius": 12,
+        "elevation": 1,
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -43,65 +46,52 @@ exports[`Card renders an outlined card 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="card-container-middle-layer"
+    testID="card-container"
   >
     <View
-      collapsable={false}
+      pointerEvents="none"
       style={
+        Array [
+          Object {
+            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderRadius": 12,
+          },
+          Object {
+            "borderWidth": 1,
+            "height": "100%",
+            "position": "absolute",
+            "width": "100%",
+            "zIndex": 2,
+          },
+        ]
+      }
+      testID="card-outline"
+    />
+    <View
+      accessibilityState={
         Object {
-          "backgroundColor": "rgba(255, 251, 254, 1)",
-          "borderRadius": 12,
-          "elevation": 1,
-          "flex": undefined,
+          "disabled": true,
         }
       }
-      testID="card-container"
-    >
-      <View
-        pointerEvents="none"
-        style={
-          Array [
-            Object {
-              "borderColor": "rgba(121, 116, 126, 1)",
-              "borderRadius": 12,
-            },
-            Object {
-              "borderWidth": 1,
-              "height": "100%",
-              "position": "absolute",
-              "width": "100%",
-              "zIndex": 2,
-            },
-          ]
-        }
-        testID="card-outline"
-      />
-      <View
-        accessibilityState={
+      accessible={true}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
           Object {
-            "disabled": true,
-          }
-        }
-        accessible={true}
-        focusable={false}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          Array [
-            Object {
-              "flexShrink": 1,
-            },
-            undefined,
-          ]
-        }
-        testID="card"
-      />
-    </View>
+            "flexShrink": 1,
+          },
+          undefined,
+        ]
+      }
+      testID="card"
+    />
   </View>
 </View>
 `;

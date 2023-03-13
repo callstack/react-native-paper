@@ -34,7 +34,13 @@ exports[`renders disabled icon button 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "transparent",
+        "borderColor": "rgba(28, 27, 31, 0.12)",
+        "borderRadius": 20,
+        "borderWidth": 0,
+        "elevation": 0,
         "flex": 1,
+        "overflow": "hidden",
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -44,115 +50,99 @@ exports[`renders disabled icon button 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="icon-button-container-middle-layer"
+    testID="icon-button-container"
   >
     <View
-      collapsable={false}
-      style={
+      accessibilityComponentType="button"
+      accessibilityRole="button"
+      accessibilityState={
         Object {
-          "backgroundColor": "transparent",
-          "borderColor": "rgba(28, 27, 31, 0.12)",
-          "borderRadius": 20,
-          "borderWidth": 0,
-          "elevation": 0,
-          "flex": 1,
-          "overflow": "hidden",
+          "disabled": true,
         }
       }
-      testID="icon-button-container"
-    >
-      <View
-        accessibilityComponentType="button"
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": true,
-          }
+      accessibilityTraits={
+        Array [
+          "button",
+          "disabled",
+        ]
+      }
+      accessible={true}
+      centered={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        Object {
+          "bottom": 6,
+          "left": 6,
+          "right": 6,
+          "top": 6,
         }
-        accessibilityTraits={
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
           Array [
-            "button",
-            "disabled",
-          ]
-        }
-        accessible={true}
-        centered={true}
-        collapsable={false}
-        focusable={true}
-        hitSlop={
-          Object {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
-          }
-        }
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+            Object {
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
+            },
+            Object {
+              "borderRadius": 20,
+            },
+          ],
+        ]
+      }
+      testID="icon-button"
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        allowFontScaling={false}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
-              "overflow": "hidden",
+              "color": "rgba(28, 27, 31, 0.38)",
+              "fontSize": 24,
             },
-            false,
             Array [
               Object {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
+                "lineHeight": 24,
+                "transform": Array [
+                  Object {
+                    "scaleX": 1,
+                  },
+                ],
               },
               Object {
-                "borderRadius": 20,
+                "backgroundColor": "transparent",
               },
             ],
+            Object {
+              "fontFamily": "Material Design Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
           ]
         }
-        testID="icon-button"
       >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
-          style={
-            Array [
-              Object {
-                "color": "rgba(28, 27, 31, 0.38)",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "lineHeight": 24,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
-            ]
-          }
-        >
-          󰄀
-        </Text>
-      </View>
+        󰄀
+      </Text>
     </View>
   </View>
 </View>
@@ -192,7 +182,13 @@ exports[`renders icon button by default 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "transparent",
+        "borderColor": "rgba(121, 116, 126, 1)",
+        "borderRadius": 20,
+        "borderWidth": 0,
+        "elevation": 0,
         "flex": 1,
+        "overflow": "hidden",
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -202,110 +198,94 @@ exports[`renders icon button by default 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="icon-button-container-middle-layer"
+    testID="icon-button-container"
   >
     <View
-      collapsable={false}
-      style={
+      accessibilityComponentType="button"
+      accessibilityRole="button"
+      accessibilityState={
         Object {
-          "backgroundColor": "transparent",
-          "borderColor": "rgba(121, 116, 126, 1)",
-          "borderRadius": 20,
-          "borderWidth": 0,
-          "elevation": 0,
-          "flex": 1,
-          "overflow": "hidden",
+          "disabled": true,
         }
       }
-      testID="icon-button-container"
+      accessibilityTraits="button"
+      accessible={true}
+      centered={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        Object {
+          "bottom": 6,
+          "left": 6,
+          "right": 6,
+          "top": 6,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
+          Array [
+            Object {
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
+            },
+            Object {
+              "borderRadius": 20,
+            },
+          ],
+        ]
+      }
+      testID="icon-button"
     >
-      <View
-        accessibilityComponentType="button"
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": true,
-          }
-        }
-        accessibilityTraits="button"
-        accessible={true}
-        centered={true}
-        collapsable={false}
-        focusable={true}
-        hitSlop={
-          Object {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
-          }
-        }
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+      <Text
+        accessibilityElementsHidden={true}
+        allowFontScaling={false}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
-              "overflow": "hidden",
+              "color": "rgba(73, 69, 79, 1)",
+              "fontSize": 24,
             },
-            false,
             Array [
               Object {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
+                "lineHeight": 24,
+                "transform": Array [
+                  Object {
+                    "scaleX": 1,
+                  },
+                ],
               },
               Object {
-                "borderRadius": 20,
+                "backgroundColor": "transparent",
               },
             ],
+            Object {
+              "fontFamily": "Material Design Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
           ]
         }
-        testID="icon-button"
       >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
-          style={
-            Array [
-              Object {
-                "color": "rgba(73, 69, 79, 1)",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "lineHeight": 24,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
-            ]
-          }
-        >
-          󰄀
-        </Text>
-      </View>
+        󰄀
+      </Text>
     </View>
   </View>
 </View>
@@ -345,7 +325,13 @@ exports[`renders icon button with color 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "transparent",
+        "borderColor": "rgba(121, 116, 126, 1)",
+        "borderRadius": 20,
+        "borderWidth": 0,
+        "elevation": 0,
         "flex": 1,
+        "overflow": "hidden",
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -355,110 +341,94 @@ exports[`renders icon button with color 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="icon-button-container-middle-layer"
+    testID="icon-button-container"
   >
     <View
-      collapsable={false}
-      style={
+      accessibilityComponentType="button"
+      accessibilityRole="button"
+      accessibilityState={
         Object {
-          "backgroundColor": "transparent",
-          "borderColor": "rgba(121, 116, 126, 1)",
-          "borderRadius": 20,
-          "borderWidth": 0,
-          "elevation": 0,
-          "flex": 1,
-          "overflow": "hidden",
+          "disabled": true,
         }
       }
-      testID="icon-button-container"
+      accessibilityTraits="button"
+      accessible={true}
+      centered={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        Object {
+          "bottom": 6,
+          "left": 6,
+          "right": 6,
+          "top": 6,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
+          Array [
+            Object {
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
+            },
+            Object {
+              "borderRadius": 20,
+            },
+          ],
+        ]
+      }
+      testID="icon-button"
     >
-      <View
-        accessibilityComponentType="button"
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": true,
-          }
-        }
-        accessibilityTraits="button"
-        accessible={true}
-        centered={true}
-        collapsable={false}
-        focusable={true}
-        hitSlop={
-          Object {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
-          }
-        }
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+      <Text
+        accessibilityElementsHidden={true}
+        allowFontScaling={false}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
-              "overflow": "hidden",
+              "color": "#e91e63",
+              "fontSize": 24,
             },
-            false,
             Array [
               Object {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
+                "lineHeight": 24,
+                "transform": Array [
+                  Object {
+                    "scaleX": 1,
+                  },
+                ],
               },
               Object {
-                "borderRadius": 20,
+                "backgroundColor": "transparent",
               },
             ],
+            Object {
+              "fontFamily": "Material Design Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
           ]
         }
-        testID="icon-button"
       >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
-          style={
-            Array [
-              Object {
-                "color": "#e91e63",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "lineHeight": 24,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
-            ]
-          }
-        >
-          󰄀
-        </Text>
-      </View>
+        󰄀
+      </Text>
     </View>
   </View>
 </View>
@@ -498,7 +468,13 @@ exports[`renders icon button with size 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "transparent",
+        "borderColor": "rgba(121, 116, 126, 1)",
+        "borderRadius": 23,
+        "borderWidth": 0,
+        "elevation": 0,
         "flex": 1,
+        "overflow": "hidden",
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -508,110 +484,94 @@ exports[`renders icon button with size 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="icon-button-container-middle-layer"
+    testID="icon-button-container"
   >
     <View
-      collapsable={false}
-      style={
+      accessibilityComponentType="button"
+      accessibilityRole="button"
+      accessibilityState={
         Object {
-          "backgroundColor": "transparent",
-          "borderColor": "rgba(121, 116, 126, 1)",
-          "borderRadius": 23,
-          "borderWidth": 0,
-          "elevation": 0,
-          "flex": 1,
-          "overflow": "hidden",
+          "disabled": true,
         }
       }
-      testID="icon-button-container"
+      accessibilityTraits="button"
+      accessible={true}
+      centered={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        Object {
+          "bottom": 6,
+          "left": 6,
+          "right": 6,
+          "top": 6,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
+          Array [
+            Object {
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
+            },
+            Object {
+              "borderRadius": 23,
+            },
+          ],
+        ]
+      }
+      testID="icon-button"
     >
-      <View
-        accessibilityComponentType="button"
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": true,
-          }
-        }
-        accessibilityTraits="button"
-        accessible={true}
-        centered={true}
-        collapsable={false}
-        focusable={true}
-        hitSlop={
-          Object {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
-          }
-        }
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+      <Text
+        accessibilityElementsHidden={true}
+        allowFontScaling={false}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
         style={
           Array [
             Object {
-              "overflow": "hidden",
+              "color": "rgba(73, 69, 79, 1)",
+              "fontSize": 30,
             },
-            false,
             Array [
               Object {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
+                "lineHeight": 30,
+                "transform": Array [
+                  Object {
+                    "scaleX": 1,
+                  },
+                ],
               },
               Object {
-                "borderRadius": 23,
+                "backgroundColor": "transparent",
               },
             ],
+            Object {
+              "fontFamily": "Material Design Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
           ]
         }
-        testID="icon-button"
       >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
-          style={
-            Array [
-              Object {
-                "color": "rgba(73, 69, 79, 1)",
-                "fontSize": 30,
-              },
-              Array [
-                Object {
-                  "lineHeight": 30,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              Object {},
-            ]
-          }
-        >
-          󰄀
-        </Text>
-      </View>
+        󰄀
+      </Text>
     </View>
   </View>
 </View>
@@ -651,7 +611,13 @@ exports[`renders icon change animated 1`] = `
     collapsable={false}
     style={
       Object {
+        "backgroundColor": "transparent",
+        "borderColor": "rgba(121, 116, 126, 1)",
+        "borderRadius": 20,
+        "borderWidth": 0,
+        "elevation": 0,
         "flex": 1,
+        "overflow": "hidden",
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -661,142 +627,126 @@ exports[`renders icon change animated 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="icon-button-container-middle-layer"
+    testID="icon-button-container"
   >
     <View
-      collapsable={false}
-      style={
+      accessibilityComponentType="button"
+      accessibilityRole="button"
+      accessibilityState={
         Object {
-          "backgroundColor": "transparent",
-          "borderColor": "rgba(121, 116, 126, 1)",
-          "borderRadius": 20,
-          "borderWidth": 0,
-          "elevation": 0,
-          "flex": 1,
-          "overflow": "hidden",
+          "disabled": true,
         }
       }
-      testID="icon-button-container"
+      accessibilityTraits="button"
+      accessible={true}
+      centered={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        Object {
+          "bottom": 6,
+          "left": 6,
+          "right": 6,
+          "top": 6,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
+          Array [
+            Object {
+              "alignItems": "center",
+              "flexGrow": 1,
+              "justifyContent": "center",
+            },
+            Object {
+              "borderRadius": 20,
+            },
+          ],
+        ]
+      }
+      testID="icon-button"
     >
       <View
-        accessibilityComponentType="button"
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": true,
-          }
-        }
-        accessibilityTraits="button"
-        accessible={true}
-        centered={true}
-        collapsable={false}
-        focusable={true}
-        hitSlop={
-          Object {
-            "bottom": 6,
-            "left": 6,
-            "right": 6,
-            "top": 6,
-          }
-        }
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
         style={
           Array [
             Object {
-              "overflow": "hidden",
+              "alignItems": "center",
+              "justifyContent": "center",
             },
-            false,
-            Array [
-              Object {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
-              Object {
-                "borderRadius": 20,
-              },
-            ],
+            Object {
+              "height": 24,
+              "width": 24,
+            },
           ]
         }
-        testID="icon-button"
       >
         <View
+          collapsable={false}
           style={
-            Array [
-              Object {
-                "alignItems": "center",
-                "justifyContent": "center",
-              },
-              Object {
-                "height": 24,
-                "width": 24,
-              },
-            ]
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "opacity": 1,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+              "transform": Array [
+                Object {
+                  "rotate": "0deg",
+                },
+              ],
+            }
           }
         >
-          <View
-            collapsable={false}
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
             style={
-              Object {
-                "bottom": 0,
-                "left": 0,
-                "opacity": 1,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-                "transform": Array [
-                  Object {
-                    "rotate": "0deg",
-                  },
-                ],
-              }
-            }
-          >
-            <Text
-              accessibilityElementsHidden={true}
-              allowFontScaling={false}
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              selectable={false}
-              style={
+              Array [
+                Object {
+                  "color": "rgba(73, 69, 79, 1)",
+                  "fontSize": 24,
+                },
                 Array [
                   Object {
-                    "color": "rgba(73, 69, 79, 1)",
-                    "fontSize": 24,
+                    "lineHeight": 24,
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
                   },
-                  Array [
-                    Object {
-                      "lineHeight": 24,
-                      "transform": Array [
-                        Object {
-                          "scaleX": 1,
-                        },
-                      ],
-                    },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
-                  ],
                   Object {
-                    "fontFamily": "Material Design Icons",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
+                    "backgroundColor": "transparent",
                   },
-                  Object {},
-                ]
-              }
-            >
-              󰄀
-            </Text>
-          </View>
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
+              ]
+            }
+          >
+            󰄀
+          </Text>
         </View>
       </View>
     </View>

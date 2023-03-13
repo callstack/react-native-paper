@@ -71,21 +71,25 @@ describe('Surface', () => {
       );
 
       expect(getByTestId('surface-test-outer-layer')).toHaveStyle(style);
-      expect(getByTestId('surface-test-middle-layer')).not.toHaveStyle(style);
       expect(getByTestId('surface-test')).not.toHaveStyle(style);
     });
 
     it.each`
-      property               | value
-      ${'padding'}           | ${12}
-      ${'paddingLeft'}       | ${12.1}
-      ${'paddingRight'}      | ${12.2}
-      ${'paddingTop'}        | ${12.3}
-      ${'paddingBottom'}     | ${12.4}
-      ${'paddingHorizontal'} | ${12.5}
-      ${'paddingVertical'}   | ${12.6}
-      ${'borderWidth'}       | ${2}
-      ${'borderColor'}       | ${'black'}
+      property                     | value
+      ${'padding'}                 | ${12}
+      ${'paddingLeft'}             | ${12.1}
+      ${'paddingRight'}            | ${12.2}
+      ${'paddingTop'}              | ${12.3}
+      ${'paddingBottom'}           | ${12.4}
+      ${'paddingHorizontal'}       | ${12.5}
+      ${'paddingVertical'}         | ${12.6}
+      ${'borderWidth'}             | ${2}
+      ${'borderColor'}             | ${'black'}
+      ${'borderRadius'}            | ${3}
+      ${'borderTopLeftRadius'}     | ${1}
+      ${'borderTopRightRadius'}    | ${2}
+      ${'borderBottomLeftRadius'}  | ${3}
+      ${'borderBottomRightRadius'} | ${4}
     `('applies $property to inner layer only', ({ property, value }) => {
       const style = { [property]: value };
 
@@ -96,28 +100,6 @@ describe('Surface', () => {
       );
 
       expect(getByTestId('surface-test-outer-layer')).not.toHaveStyle(style);
-      expect(getByTestId('surface-test-middle-layer')).not.toHaveStyle(style);
-      expect(getByTestId('surface-test')).toHaveStyle(style);
-    });
-
-    it.each`
-      property                     | value
-      ${'borderRadius'}            | ${3}
-      ${'borderTopLeftRadius'}     | ${1}
-      ${'borderTopRightRadius'}    | ${2}
-      ${'borderBottomLeftRadius'}  | ${3}
-      ${'borderBottomRightRadius'} | ${4}
-    `('applies $property to inner layer', ({ property, value }) => {
-      const style = { [property]: value };
-
-      const { getByTestId } = render(
-        <Surface testID="surface-test" style={style}>
-          {null}
-        </Surface>
-      );
-
-      expect(getByTestId('surface-test-outer-layer')).not.toHaveStyle(style);
-      expect(getByTestId('surface-test-middle-layer')).not.toHaveStyle(style);
       expect(getByTestId('surface-test')).toHaveStyle(style);
     });
 
@@ -179,7 +161,6 @@ describe('Surface', () => {
 
         const style = { backgroundColor };
         expect(getByTestId('surface-test-outer-layer')).not.toHaveStyle(style);
-        expect(getByTestId('surface-test-middle-layer')).not.toHaveStyle(style);
         expect(getByTestId('surface-test')).toHaveStyle(style);
       });
 

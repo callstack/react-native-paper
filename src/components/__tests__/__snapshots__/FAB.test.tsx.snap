@@ -35,8 +35,11 @@ exports[`renders FAB with custom size prop 1`] = `
 >
   <View
     collapsable={false}
+    pointerEvents="auto"
     style={
       Object {
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 25,
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -47,138 +50,126 @@ exports[`renders FAB with custom size prop 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-middle-layer"
+    testID="fab-container"
   >
     <View
-      collapsable={false}
-      pointerEvents="auto"
-      style={
+      accessibilityRole="button"
+      accessibilityState={
         Object {
-          "backgroundColor": "rgba(234, 221, 255, 1)",
-          "borderRadius": 25,
-          "flex": undefined,
-          "overflow": "hidden",
+          "disabled": false,
         }
       }
-      testID="fab-container"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
+          Object {
+            "borderRadius": 25,
+          },
+        ]
+      }
+      testID="fab"
     >
       <View
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": false,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        pointerEvents="none"
         style={
           Array [
             Object {
-              "overflow": "hidden",
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
             },
-            false,
-            undefined,
+            Object {
+              "borderRadius": 25,
+              "height": 100,
+              "width": 100,
+            },
           ]
         }
-        testID="fab"
+        testID="fab-content"
       >
         <View
-          pointerEvents="none"
           style={
             Array [
               Object {
                 "alignItems": "center",
-                "flexDirection": "row",
                 "justifyContent": "center",
               },
               Object {
-                "borderRadius": 25,
-                "height": 100,
-                "width": 100,
+                "height": 50,
+                "width": 50,
               },
             ]
           }
-          testID="fab-content"
         >
           <View
+            collapsable={false}
             style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "justifyContent": "center",
-                },
-                Object {
-                  "height": 50,
-                  "width": 50,
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": Array [
+                  Object {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
           >
-            <View
-              collapsable={false}
+            <Text
+              accessibilityElementsHidden={true}
+              allowFontScaling={false}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
               style={
-                Object {
-                  "bottom": 0,
-                  "left": 0,
-                  "opacity": 1,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                  "transform": Array [
-                    Object {
-                      "rotate": "0deg",
-                    },
-                  ],
-                }
-              }
-            >
-              <Text
-                accessibilityElementsHidden={true}
-                allowFontScaling={false}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
-                style={
+                Array [
+                  Object {
+                    "color": "rgba(33, 0, 93, 1)",
+                    "fontSize": 50,
+                  },
                   Array [
                     Object {
-                      "color": "rgba(33, 0, 93, 1)",
-                      "fontSize": 50,
+                      "lineHeight": 50,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
                     },
-                    Array [
-                      Object {
-                        "lineHeight": 50,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      Object {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
                     Object {
-                      "fontFamily": "Material Design Icons",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
+                      "backgroundColor": "transparent",
                     },
-                    Object {},
-                  ]
-                }
-              >
-                󰐕
-              </Text>
-            </View>
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰐕
+            </Text>
           </View>
         </View>
       </View>
@@ -222,8 +213,11 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
 >
   <View
     collapsable={false}
+    pointerEvents="auto"
     style={
       Object {
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -234,138 +228,126 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-middle-layer"
+    testID="fab-container"
   >
     <View
-      collapsable={false}
-      pointerEvents="auto"
-      style={
+      accessibilityRole="button"
+      accessibilityState={
         Object {
-          "backgroundColor": "rgba(234, 221, 255, 1)",
-          "borderRadius": 16,
-          "flex": undefined,
-          "overflow": "hidden",
+          "disabled": false,
         }
       }
-      testID="fab-container"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
+          Object {
+            "borderRadius": 16,
+          },
+        ]
+      }
+      testID="fab"
     >
       <View
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": false,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        pointerEvents="none"
         style={
           Array [
             Object {
-              "overflow": "hidden",
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
             },
-            false,
-            undefined,
+            Object {
+              "borderRadius": 16,
+              "height": 56,
+              "width": 56,
+            },
           ]
         }
-        testID="fab"
+        testID="fab-content"
       >
         <View
-          pointerEvents="none"
           style={
             Array [
               Object {
                 "alignItems": "center",
-                "flexDirection": "row",
                 "justifyContent": "center",
               },
               Object {
-                "borderRadius": 16,
-                "height": 56,
-                "width": 56,
+                "height": 24,
+                "width": 24,
               },
             ]
           }
-          testID="fab-content"
         >
           <View
+            collapsable={false}
             style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "justifyContent": "center",
-                },
-                Object {
-                  "height": 24,
-                  "width": 24,
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": Array [
+                  Object {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
           >
-            <View
-              collapsable={false}
+            <Text
+              accessibilityElementsHidden={true}
+              allowFontScaling={false}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
               style={
-                Object {
-                  "bottom": 0,
-                  "left": 0,
-                  "opacity": 1,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                  "transform": Array [
-                    Object {
-                      "rotate": "0deg",
-                    },
-                  ],
-                }
-              }
-            >
-              <Text
-                accessibilityElementsHidden={true}
-                allowFontScaling={false}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
-                style={
+                Array [
+                  Object {
+                    "color": "#AA0114",
+                    "fontSize": 24,
+                  },
                   Array [
                     Object {
-                      "color": "#AA0114",
-                      "fontSize": 24,
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
                     },
-                    Array [
-                      Object {
-                        "lineHeight": 24,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      Object {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
                     Object {
-                      "fontFamily": "Material Design Icons",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
+                      "backgroundColor": "transparent",
                     },
-                    Object {},
-                  ]
-                }
-              >
-                󰐕
-              </Text>
-            </View>
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰐕
+            </Text>
           </View>
         </View>
       </View>
@@ -409,8 +391,11 @@ exports[`renders default FAB 1`] = `
 >
   <View
     collapsable={false}
+    pointerEvents="auto"
     style={
       Object {
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -421,138 +406,126 @@ exports[`renders default FAB 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-middle-layer"
+    testID="fab-container"
   >
     <View
-      collapsable={false}
-      pointerEvents="auto"
-      style={
+      accessibilityRole="button"
+      accessibilityState={
         Object {
-          "backgroundColor": "rgba(234, 221, 255, 1)",
-          "borderRadius": 16,
-          "flex": undefined,
-          "overflow": "hidden",
+          "disabled": false,
         }
       }
-      testID="fab-container"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
+          Object {
+            "borderRadius": 16,
+          },
+        ]
+      }
+      testID="fab"
     >
       <View
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": false,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        pointerEvents="none"
         style={
           Array [
             Object {
-              "overflow": "hidden",
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
             },
-            false,
-            undefined,
+            Object {
+              "borderRadius": 16,
+              "height": 56,
+              "width": 56,
+            },
           ]
         }
-        testID="fab"
+        testID="fab-content"
       >
         <View
-          pointerEvents="none"
           style={
             Array [
               Object {
                 "alignItems": "center",
-                "flexDirection": "row",
                 "justifyContent": "center",
               },
               Object {
-                "borderRadius": 16,
-                "height": 56,
-                "width": 56,
+                "height": 24,
+                "width": 24,
               },
             ]
           }
-          testID="fab-content"
         >
           <View
+            collapsable={false}
             style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "justifyContent": "center",
-                },
-                Object {
-                  "height": 24,
-                  "width": 24,
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": Array [
+                  Object {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
           >
-            <View
-              collapsable={false}
+            <Text
+              accessibilityElementsHidden={true}
+              allowFontScaling={false}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
               style={
-                Object {
-                  "bottom": 0,
-                  "left": 0,
-                  "opacity": 1,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                  "transform": Array [
-                    Object {
-                      "rotate": "0deg",
-                    },
-                  ],
-                }
-              }
-            >
-              <Text
-                accessibilityElementsHidden={true}
-                allowFontScaling={false}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
-                style={
+                Array [
+                  Object {
+                    "color": "rgba(33, 0, 93, 1)",
+                    "fontSize": 24,
+                  },
                   Array [
                     Object {
-                      "color": "rgba(33, 0, 93, 1)",
-                      "fontSize": 24,
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
                     },
-                    Array [
-                      Object {
-                        "lineHeight": 24,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      Object {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
                     Object {
-                      "fontFamily": "Material Design Icons",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
+                      "backgroundColor": "transparent",
                     },
-                    Object {},
-                  ]
-                }
-              >
-                󰐕
-              </Text>
-            </View>
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰐕
+            </Text>
           </View>
         </View>
       </View>
@@ -596,8 +569,11 @@ exports[`renders disabled FAB 1`] = `
 >
   <View
     collapsable={false}
+    pointerEvents="auto"
     style={
       Object {
+        "backgroundColor": "rgba(28, 27, 31, 0.12)",
+        "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -608,138 +584,126 @@ exports[`renders disabled FAB 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="fab-container-middle-layer"
+    testID="fab-container"
   >
     <View
-      collapsable={false}
-      pointerEvents="auto"
-      style={
+      accessibilityRole="button"
+      accessibilityState={
         Object {
-          "backgroundColor": "rgba(28, 27, 31, 0.12)",
-          "borderRadius": 16,
-          "flex": undefined,
-          "overflow": "hidden",
+          "disabled": true,
         }
       }
-      testID="fab-container"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
+          Object {
+            "borderRadius": 16,
+          },
+        ]
+      }
+      testID="fab"
     >
       <View
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": true,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        pointerEvents="none"
         style={
           Array [
             Object {
-              "overflow": "hidden",
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
             },
-            false,
-            undefined,
+            Object {
+              "borderRadius": 16,
+              "height": 56,
+              "width": 56,
+            },
           ]
         }
-        testID="fab"
+        testID="fab-content"
       >
         <View
-          pointerEvents="none"
           style={
             Array [
               Object {
                 "alignItems": "center",
-                "flexDirection": "row",
                 "justifyContent": "center",
               },
               Object {
-                "borderRadius": 16,
-                "height": 56,
-                "width": 56,
+                "height": 24,
+                "width": 24,
               },
             ]
           }
-          testID="fab-content"
         >
           <View
+            collapsable={false}
             style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "justifyContent": "center",
-                },
-                Object {
-                  "height": 24,
-                  "width": 24,
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": Array [
+                  Object {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
           >
-            <View
-              collapsable={false}
+            <Text
+              accessibilityElementsHidden={true}
+              allowFontScaling={false}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
               style={
-                Object {
-                  "bottom": 0,
-                  "left": 0,
-                  "opacity": 1,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                  "transform": Array [
-                    Object {
-                      "rotate": "0deg",
-                    },
-                  ],
-                }
-              }
-            >
-              <Text
-                accessibilityElementsHidden={true}
-                allowFontScaling={false}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
-                style={
+                Array [
+                  Object {
+                    "color": "rgba(28, 27, 31, 0.38)",
+                    "fontSize": 24,
+                  },
                   Array [
                     Object {
-                      "color": "rgba(28, 27, 31, 0.38)",
-                      "fontSize": 24,
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
                     },
-                    Array [
-                      Object {
-                        "lineHeight": 24,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      Object {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
                     Object {
-                      "fontFamily": "Material Design Icons",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
+                      "backgroundColor": "transparent",
                     },
-                    Object {},
-                  ]
-                }
-              >
-                󰐕
-              </Text>
-            </View>
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰐕
+            </Text>
           </View>
         </View>
       </View>
@@ -783,8 +747,11 @@ exports[`renders extended FAB 1`] = `
 >
   <View
     collapsable={false}
+    pointerEvents="auto"
     style={
       Object {
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -795,179 +762,167 @@ exports[`renders extended FAB 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-middle-layer"
+    testID="fab-container"
   >
     <View
-      collapsable={false}
-      pointerEvents="auto"
-      style={
+      accessibilityLabel="Add items"
+      accessibilityRole="button"
+      accessibilityState={
         Object {
-          "backgroundColor": "rgba(234, 221, 255, 1)",
-          "borderRadius": 16,
-          "flex": undefined,
-          "overflow": "hidden",
+          "disabled": false,
         }
       }
-      testID="fab-container"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
+          Object {
+            "borderRadius": 16,
+          },
+        ]
+      }
+      testID="fab"
     >
       <View
-        accessibilityLabel="Add items"
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": false,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        pointerEvents="none"
         style={
           Array [
             Object {
-              "overflow": "hidden",
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
             },
-            false,
-            undefined,
+            Object {
+              "borderRadius": 16,
+              "height": 56,
+              "paddingHorizontal": 16,
+            },
           ]
         }
-        testID="fab"
+        testID="fab-content"
       >
         <View
-          pointerEvents="none"
           style={
             Array [
               Object {
                 "alignItems": "center",
-                "flexDirection": "row",
                 "justifyContent": "center",
               },
               Object {
-                "borderRadius": 16,
-                "height": 56,
-                "paddingHorizontal": 16,
+                "height": 24,
+                "width": 24,
               },
             ]
           }
-          testID="fab-content"
         >
           <View
+            collapsable={false}
             style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "justifyContent": "center",
-                },
-                Object {
-                  "height": 24,
-                  "width": 24,
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": Array [
+                  Object {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
           >
-            <View
-              collapsable={false}
+            <Text
+              accessibilityElementsHidden={true}
+              allowFontScaling={false}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
               style={
-                Object {
-                  "bottom": 0,
-                  "left": 0,
-                  "opacity": 1,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                  "transform": Array [
-                    Object {
-                      "rotate": "0deg",
-                    },
-                  ],
-                }
-              }
-            >
-              <Text
-                accessibilityElementsHidden={true}
-                allowFontScaling={false}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
-                style={
+                Array [
+                  Object {
+                    "color": "rgba(33, 0, 93, 1)",
+                    "fontSize": 24,
+                  },
                   Array [
                     Object {
-                      "color": "rgba(33, 0, 93, 1)",
-                      "fontSize": 24,
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
                     },
-                    Array [
-                      Object {
-                        "lineHeight": 24,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      Object {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
                     Object {
-                      "fontFamily": "Material Design Icons",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
+                      "backgroundColor": "transparent",
                     },
-                    Object {},
-                  ]
-                }
-              >
-                󰐕
-              </Text>
-            </View>
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰐕
+            </Text>
           </View>
-          <Text
-            selectable={false}
-            style={
+        </View>
+        <Text
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "fontFamily": "System",
+                "fontSize": 14,
+                "fontWeight": "500",
+                "letterSpacing": 0.1,
+                "lineHeight": 20,
+              },
+              Object {
+                "textAlign": "left",
+              },
+              Object {
+                "color": "rgba(28, 27, 31, 1)",
+                "writingDirection": "ltr",
+              },
               Array [
                 Object {
+                  "marginHorizontal": 8,
+                },
+                false,
+                Object {
+                  "color": "rgba(33, 0, 93, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Object {
-                  "textAlign": "left",
-                },
-                Object {
-                  "color": "rgba(28, 27, 31, 1)",
-                  "writingDirection": "ltr",
-                },
-                Array [
-                  Object {
-                    "marginHorizontal": 8,
-                  },
-                  false,
-                  Object {
-                    "color": "rgba(33, 0, 93, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                ],
-              ]
-            }
-            testID="fab-text"
-          >
-            Add items
-          </Text>
-        </View>
+              ],
+            ]
+          }
+          testID="fab-text"
+        >
+          Add items
+        </Text>
       </View>
     </View>
   </View>
@@ -1009,8 +964,11 @@ exports[`renders extended FAB with custom size prop 1`] = `
 >
   <View
     collapsable={false}
+    pointerEvents="auto"
     style={
       Object {
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 25,
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -1021,178 +979,166 @@ exports[`renders extended FAB with custom size prop 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-middle-layer"
+    testID="fab-container"
   >
     <View
-      collapsable={false}
-      pointerEvents="auto"
-      style={
+      accessibilityLabel="Add items"
+      accessibilityRole="button"
+      accessibilityState={
         Object {
-          "backgroundColor": "rgba(234, 221, 255, 1)",
-          "borderRadius": 25,
-          "flex": undefined,
-          "overflow": "hidden",
+          "disabled": false,
         }
       }
-      testID="fab-container"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
+          Object {
+            "borderRadius": 25,
+          },
+        ]
+      }
+      testID="fab"
     >
       <View
-        accessibilityLabel="Add items"
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": false,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        pointerEvents="none"
         style={
           Array [
             Object {
-              "overflow": "hidden",
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
             },
-            false,
-            undefined,
+            Object {
+              "height": 100,
+              "paddingHorizontal": 16,
+            },
           ]
         }
-        testID="fab"
+        testID="fab-content"
       >
         <View
-          pointerEvents="none"
           style={
             Array [
               Object {
                 "alignItems": "center",
-                "flexDirection": "row",
                 "justifyContent": "center",
               },
               Object {
-                "height": 100,
-                "paddingHorizontal": 16,
+                "height": 50,
+                "width": 50,
               },
             ]
           }
-          testID="fab-content"
         >
           <View
+            collapsable={false}
             style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "justifyContent": "center",
-                },
-                Object {
-                  "height": 50,
-                  "width": 50,
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": Array [
+                  Object {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
           >
-            <View
-              collapsable={false}
+            <Text
+              accessibilityElementsHidden={true}
+              allowFontScaling={false}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
               style={
-                Object {
-                  "bottom": 0,
-                  "left": 0,
-                  "opacity": 1,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                  "transform": Array [
-                    Object {
-                      "rotate": "0deg",
-                    },
-                  ],
-                }
-              }
-            >
-              <Text
-                accessibilityElementsHidden={true}
-                allowFontScaling={false}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
-                style={
+                Array [
+                  Object {
+                    "color": "rgba(33, 0, 93, 1)",
+                    "fontSize": 50,
+                  },
                   Array [
                     Object {
-                      "color": "rgba(33, 0, 93, 1)",
-                      "fontSize": 50,
+                      "lineHeight": 50,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
                     },
-                    Array [
-                      Object {
-                        "lineHeight": 50,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      Object {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
                     Object {
-                      "fontFamily": "Material Design Icons",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
+                      "backgroundColor": "transparent",
                     },
-                    Object {},
-                  ]
-                }
-              >
-                󰐕
-              </Text>
-            </View>
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰐕
+            </Text>
           </View>
-          <Text
-            selectable={false}
-            style={
+        </View>
+        <Text
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "fontFamily": "System",
+                "fontSize": 14,
+                "fontWeight": "500",
+                "letterSpacing": 0.1,
+                "lineHeight": 20,
+              },
+              Object {
+                "textAlign": "left",
+              },
+              Object {
+                "color": "rgba(28, 27, 31, 1)",
+                "writingDirection": "ltr",
+              },
               Array [
                 Object {
+                  "marginHorizontal": 8,
+                },
+                false,
+                Object {
+                  "color": "rgba(33, 0, 93, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Object {
-                  "textAlign": "left",
-                },
-                Object {
-                  "color": "rgba(28, 27, 31, 1)",
-                  "writingDirection": "ltr",
-                },
-                Array [
-                  Object {
-                    "marginHorizontal": 8,
-                  },
-                  false,
-                  Object {
-                    "color": "rgba(33, 0, 93, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                ],
-              ]
-            }
-            testID="fab-text"
-          >
-            Add items
-          </Text>
-        </View>
+              ],
+            ]
+          }
+          testID="fab-text"
+        >
+          Add items
+        </Text>
       </View>
     </View>
   </View>
@@ -1234,8 +1180,11 @@ exports[`renders large FAB 1`] = `
 >
   <View
     collapsable={false}
+    pointerEvents="auto"
     style={
       Object {
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 28,
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -1246,138 +1195,126 @@ exports[`renders large FAB 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-middle-layer"
+    testID="fab-container"
   >
     <View
-      collapsable={false}
-      pointerEvents="auto"
-      style={
+      accessibilityRole="button"
+      accessibilityState={
         Object {
-          "backgroundColor": "rgba(234, 221, 255, 1)",
-          "borderRadius": 28,
-          "flex": undefined,
-          "overflow": "hidden",
+          "disabled": false,
         }
       }
-      testID="fab-container"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
+          Object {
+            "borderRadius": 28,
+          },
+        ]
+      }
+      testID="fab"
     >
       <View
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": false,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        pointerEvents="none"
         style={
           Array [
             Object {
-              "overflow": "hidden",
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
             },
-            false,
-            undefined,
+            Object {
+              "borderRadius": 28,
+              "height": 96,
+              "width": 96,
+            },
           ]
         }
-        testID="fab"
+        testID="fab-content"
       >
         <View
-          pointerEvents="none"
           style={
             Array [
               Object {
                 "alignItems": "center",
-                "flexDirection": "row",
                 "justifyContent": "center",
               },
               Object {
-                "borderRadius": 28,
-                "height": 96,
-                "width": 96,
+                "height": 36,
+                "width": 36,
               },
             ]
           }
-          testID="fab-content"
         >
           <View
+            collapsable={false}
             style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "justifyContent": "center",
-                },
-                Object {
-                  "height": 36,
-                  "width": 36,
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": Array [
+                  Object {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
           >
-            <View
-              collapsable={false}
+            <Text
+              accessibilityElementsHidden={true}
+              allowFontScaling={false}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
               style={
-                Object {
-                  "bottom": 0,
-                  "left": 0,
-                  "opacity": 1,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                  "transform": Array [
-                    Object {
-                      "rotate": "0deg",
-                    },
-                  ],
-                }
-              }
-            >
-              <Text
-                accessibilityElementsHidden={true}
-                allowFontScaling={false}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
-                style={
+                Array [
+                  Object {
+                    "color": "rgba(33, 0, 93, 1)",
+                    "fontSize": 36,
+                  },
                   Array [
                     Object {
-                      "color": "rgba(33, 0, 93, 1)",
-                      "fontSize": 36,
+                      "lineHeight": 36,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
                     },
-                    Array [
-                      Object {
-                        "lineHeight": 36,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      Object {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
                     Object {
-                      "fontFamily": "Material Design Icons",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
+                      "backgroundColor": "transparent",
                     },
-                    Object {},
-                  ]
-                }
-              >
-                󰐕
-              </Text>
-            </View>
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰐕
+            </Text>
           </View>
         </View>
       </View>
@@ -1421,8 +1358,11 @@ exports[`renders loading FAB 1`] = `
 >
   <View
     collapsable={false}
+    pointerEvents="auto"
     style={
       Object {
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -1433,94 +1373,97 @@ exports[`renders loading FAB 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-middle-layer"
+    testID="fab-container"
   >
     <View
-      collapsable={false}
-      pointerEvents="auto"
-      style={
+      accessibilityRole="button"
+      accessibilityState={
         Object {
-          "backgroundColor": "rgba(234, 221, 255, 1)",
-          "borderRadius": 16,
-          "flex": undefined,
-          "overflow": "hidden",
+          "disabled": false,
         }
       }
-      testID="fab-container"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
+          Object {
+            "borderRadius": 16,
+          },
+        ]
+      }
+      testID="fab"
     >
       <View
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": false,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        pointerEvents="none"
         style={
           Array [
             Object {
-              "overflow": "hidden",
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
             },
-            false,
-            undefined,
+            Object {
+              "borderRadius": 16,
+              "height": 56,
+              "width": 56,
+            },
           ]
         }
-        testID="fab"
+        testID="fab-content"
       >
         <View
-          pointerEvents="none"
+          accessibilityRole="progressbar"
+          accessibilityState={
+            Object {
+              "busy": true,
+            }
+          }
+          accessible={true}
           style={
             Array [
               Object {
                 "alignItems": "center",
-                "flexDirection": "row",
                 "justifyContent": "center",
               },
-              Object {
-                "borderRadius": 16,
-                "height": 56,
-                "width": 56,
-              },
+              undefined,
             ]
           }
-          testID="fab-content"
         >
           <View
-            accessibilityRole="progressbar"
-            accessibilityState={
-              Object {
-                "busy": true,
-              }
-            }
-            accessible={true}
+            collapsable={false}
             style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "justifyContent": "center",
-                },
-                undefined,
-              ]
+              Object {
+                "height": 18,
+                "opacity": 1,
+                "width": 18,
+              }
             }
           >
             <View
               collapsable={false}
               style={
                 Object {
-                  "height": 18,
-                  "opacity": 1,
-                  "width": 18,
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
                 }
               }
             >
@@ -1528,13 +1471,13 @@ exports[`renders loading FAB 1`] = `
                 collapsable={false}
                 style={
                   Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "justifyContent": "center",
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
+                    "height": 18,
+                    "transform": Array [
+                      Object {
+                        "rotate": "45deg",
+                      },
+                    ],
+                    "width": 18,
                   }
                 }
               >
@@ -1542,12 +1485,8 @@ exports[`renders loading FAB 1`] = `
                   collapsable={false}
                   style={
                     Object {
-                      "height": 18,
-                      "transform": Array [
-                        Object {
-                          "rotate": "45deg",
-                        },
-                      ],
+                      "height": 9,
+                      "overflow": "hidden",
                       "width": 18,
                     }
                   }
@@ -1556,8 +1495,15 @@ exports[`renders loading FAB 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "height": 9,
-                        "overflow": "hidden",
+                        "height": 18,
+                        "transform": Array [
+                          Object {
+                            "translateY": 0,
+                          },
+                          Object {
+                            "rotate": "-165deg",
+                          },
+                        ],
                         "width": 18,
                       }
                     }
@@ -1566,15 +1512,8 @@ exports[`renders loading FAB 1`] = `
                       collapsable={false}
                       style={
                         Object {
-                          "height": 18,
-                          "transform": Array [
-                            Object {
-                              "translateY": 0,
-                            },
-                            Object {
-                              "rotate": "-165deg",
-                            },
-                          ],
+                          "height": 9,
+                          "overflow": "hidden",
                           "width": 18,
                         }
                       }
@@ -1583,40 +1522,44 @@ exports[`renders loading FAB 1`] = `
                         collapsable={false}
                         style={
                           Object {
-                            "height": 9,
-                            "overflow": "hidden",
+                            "borderColor": "rgba(33, 0, 93, 1)",
+                            "borderRadius": 9,
+                            "borderWidth": 1.8,
+                            "height": 18,
                             "width": 18,
                           }
                         }
-                      >
-                        <View
-                          collapsable={false}
-                          style={
-                            Object {
-                              "borderColor": "rgba(33, 0, 93, 1)",
-                              "borderRadius": 9,
-                              "borderWidth": 1.8,
-                              "height": 18,
-                              "width": 18,
-                            }
-                          }
-                        />
-                      </View>
+                      />
                     </View>
                   </View>
                 </View>
               </View>
+            </View>
+            <View
+              collapsable={false}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
               <View
                 collapsable={false}
                 style={
                   Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "justifyContent": "center",
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
+                    "height": 18,
+                    "transform": Array [
+                      Object {
+                        "rotate": "45deg",
+                      },
+                    ],
+                    "width": 18,
                   }
                 }
               >
@@ -1624,12 +1567,9 @@ exports[`renders loading FAB 1`] = `
                   collapsable={false}
                   style={
                     Object {
-                      "height": 18,
-                      "transform": Array [
-                        Object {
-                          "rotate": "45deg",
-                        },
-                      ],
+                      "height": 9,
+                      "overflow": "hidden",
+                      "top": 9,
                       "width": 18,
                     }
                   }
@@ -1638,9 +1578,15 @@ exports[`renders loading FAB 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "height": 9,
-                        "overflow": "hidden",
-                        "top": 9,
+                        "height": 18,
+                        "transform": Array [
+                          Object {
+                            "translateY": -9,
+                          },
+                          Object {
+                            "rotate": "345deg",
+                          },
+                        ],
                         "width": 18,
                       }
                     }
@@ -1649,15 +1595,8 @@ exports[`renders loading FAB 1`] = `
                       collapsable={false}
                       style={
                         Object {
-                          "height": 18,
-                          "transform": Array [
-                            Object {
-                              "translateY": -9,
-                            },
-                            Object {
-                              "rotate": "345deg",
-                            },
-                          ],
+                          "height": 9,
+                          "overflow": "hidden",
                           "width": 18,
                         }
                       }
@@ -1666,25 +1605,14 @@ exports[`renders loading FAB 1`] = `
                         collapsable={false}
                         style={
                           Object {
-                            "height": 9,
-                            "overflow": "hidden",
+                            "borderColor": "rgba(33, 0, 93, 1)",
+                            "borderRadius": 9,
+                            "borderWidth": 1.8,
+                            "height": 18,
                             "width": 18,
                           }
                         }
-                      >
-                        <View
-                          collapsable={false}
-                          style={
-                            Object {
-                              "borderColor": "rgba(33, 0, 93, 1)",
-                              "borderRadius": 9,
-                              "borderWidth": 1.8,
-                              "height": 18,
-                              "width": 18,
-                            }
-                          }
-                        />
-                      </View>
+                      />
                     </View>
                   </View>
                 </View>
@@ -1733,8 +1661,11 @@ exports[`renders loading FAB with custom size prop 1`] = `
 >
   <View
     collapsable={false}
+    pointerEvents="auto"
     style={
       Object {
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 25,
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -1745,94 +1676,97 @@ exports[`renders loading FAB with custom size prop 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-middle-layer"
+    testID="fab-container"
   >
     <View
-      collapsable={false}
-      pointerEvents="auto"
-      style={
+      accessibilityRole="button"
+      accessibilityState={
         Object {
-          "backgroundColor": "rgba(234, 221, 255, 1)",
-          "borderRadius": 25,
-          "flex": undefined,
-          "overflow": "hidden",
+          "disabled": false,
         }
       }
-      testID="fab-container"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
+          Object {
+            "borderRadius": 25,
+          },
+        ]
+      }
+      testID="fab"
     >
       <View
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": false,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        pointerEvents="none"
         style={
           Array [
             Object {
-              "overflow": "hidden",
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
             },
-            false,
-            undefined,
+            Object {
+              "borderRadius": 25,
+              "height": 100,
+              "width": 100,
+            },
           ]
         }
-        testID="fab"
+        testID="fab-content"
       >
         <View
-          pointerEvents="none"
+          accessibilityRole="progressbar"
+          accessibilityState={
+            Object {
+              "busy": true,
+            }
+          }
+          accessible={true}
           style={
             Array [
               Object {
                 "alignItems": "center",
-                "flexDirection": "row",
                 "justifyContent": "center",
               },
-              Object {
-                "borderRadius": 25,
-                "height": 100,
-                "width": 100,
-              },
+              undefined,
             ]
           }
-          testID="fab-content"
         >
           <View
-            accessibilityRole="progressbar"
-            accessibilityState={
-              Object {
-                "busy": true,
-              }
-            }
-            accessible={true}
+            collapsable={false}
             style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "justifyContent": "center",
-                },
-                undefined,
-              ]
+              Object {
+                "height": 50,
+                "opacity": 1,
+                "width": 50,
+              }
             }
           >
             <View
               collapsable={false}
               style={
                 Object {
-                  "height": 50,
-                  "opacity": 1,
-                  "width": 50,
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
                 }
               }
             >
@@ -1840,13 +1774,13 @@ exports[`renders loading FAB with custom size prop 1`] = `
                 collapsable={false}
                 style={
                   Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "justifyContent": "center",
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
+                    "height": 50,
+                    "transform": Array [
+                      Object {
+                        "rotate": "45deg",
+                      },
+                    ],
+                    "width": 50,
                   }
                 }
               >
@@ -1854,12 +1788,8 @@ exports[`renders loading FAB with custom size prop 1`] = `
                   collapsable={false}
                   style={
                     Object {
-                      "height": 50,
-                      "transform": Array [
-                        Object {
-                          "rotate": "45deg",
-                        },
-                      ],
+                      "height": 25,
+                      "overflow": "hidden",
                       "width": 50,
                     }
                   }
@@ -1868,8 +1798,15 @@ exports[`renders loading FAB with custom size prop 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "height": 25,
-                        "overflow": "hidden",
+                        "height": 50,
+                        "transform": Array [
+                          Object {
+                            "translateY": 0,
+                          },
+                          Object {
+                            "rotate": "-165deg",
+                          },
+                        ],
                         "width": 50,
                       }
                     }
@@ -1878,15 +1815,8 @@ exports[`renders loading FAB with custom size prop 1`] = `
                       collapsable={false}
                       style={
                         Object {
-                          "height": 50,
-                          "transform": Array [
-                            Object {
-                              "translateY": 0,
-                            },
-                            Object {
-                              "rotate": "-165deg",
-                            },
-                          ],
+                          "height": 25,
+                          "overflow": "hidden",
                           "width": 50,
                         }
                       }
@@ -1895,40 +1825,44 @@ exports[`renders loading FAB with custom size prop 1`] = `
                         collapsable={false}
                         style={
                           Object {
-                            "height": 25,
-                            "overflow": "hidden",
+                            "borderColor": "rgba(33, 0, 93, 1)",
+                            "borderRadius": 25,
+                            "borderWidth": 5,
+                            "height": 50,
                             "width": 50,
                           }
                         }
-                      >
-                        <View
-                          collapsable={false}
-                          style={
-                            Object {
-                              "borderColor": "rgba(33, 0, 93, 1)",
-                              "borderRadius": 25,
-                              "borderWidth": 5,
-                              "height": 50,
-                              "width": 50,
-                            }
-                          }
-                        />
-                      </View>
+                      />
                     </View>
                   </View>
                 </View>
               </View>
+            </View>
+            <View
+              collapsable={false}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            >
               <View
                 collapsable={false}
                 style={
                   Object {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "justifyContent": "center",
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
+                    "height": 50,
+                    "transform": Array [
+                      Object {
+                        "rotate": "45deg",
+                      },
+                    ],
+                    "width": 50,
                   }
                 }
               >
@@ -1936,12 +1870,9 @@ exports[`renders loading FAB with custom size prop 1`] = `
                   collapsable={false}
                   style={
                     Object {
-                      "height": 50,
-                      "transform": Array [
-                        Object {
-                          "rotate": "45deg",
-                        },
-                      ],
+                      "height": 25,
+                      "overflow": "hidden",
+                      "top": 25,
                       "width": 50,
                     }
                   }
@@ -1950,9 +1881,15 @@ exports[`renders loading FAB with custom size prop 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "height": 25,
-                        "overflow": "hidden",
-                        "top": 25,
+                        "height": 50,
+                        "transform": Array [
+                          Object {
+                            "translateY": -25,
+                          },
+                          Object {
+                            "rotate": "345deg",
+                          },
+                        ],
                         "width": 50,
                       }
                     }
@@ -1961,15 +1898,8 @@ exports[`renders loading FAB with custom size prop 1`] = `
                       collapsable={false}
                       style={
                         Object {
-                          "height": 50,
-                          "transform": Array [
-                            Object {
-                              "translateY": -25,
-                            },
-                            Object {
-                              "rotate": "345deg",
-                            },
-                          ],
+                          "height": 25,
+                          "overflow": "hidden",
                           "width": 50,
                         }
                       }
@@ -1978,25 +1908,14 @@ exports[`renders loading FAB with custom size prop 1`] = `
                         collapsable={false}
                         style={
                           Object {
-                            "height": 25,
-                            "overflow": "hidden",
+                            "borderColor": "rgba(33, 0, 93, 1)",
+                            "borderRadius": 25,
+                            "borderWidth": 5,
+                            "height": 50,
                             "width": 50,
                           }
                         }
-                      >
-                        <View
-                          collapsable={false}
-                          style={
-                            Object {
-                              "borderColor": "rgba(33, 0, 93, 1)",
-                              "borderRadius": 25,
-                              "borderWidth": 5,
-                              "height": 50,
-                              "width": 50,
-                            }
-                          }
-                        />
-                      </View>
+                      />
                     </View>
                   </View>
                 </View>
@@ -2045,8 +1964,11 @@ exports[`renders not visible FAB 1`] = `
 >
   <View
     collapsable={false}
+    pointerEvents="none"
     style={
       Object {
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -2057,138 +1979,126 @@ exports[`renders not visible FAB 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-middle-layer"
+    testID="fab-container"
   >
     <View
-      collapsable={false}
-      pointerEvents="none"
-      style={
+      accessibilityRole="button"
+      accessibilityState={
         Object {
-          "backgroundColor": "rgba(234, 221, 255, 1)",
-          "borderRadius": 16,
-          "flex": undefined,
-          "overflow": "hidden",
+          "disabled": false,
         }
       }
-      testID="fab-container"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
+          Object {
+            "borderRadius": 16,
+          },
+        ]
+      }
+      testID="fab"
     >
       <View
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": false,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        pointerEvents="none"
         style={
           Array [
             Object {
-              "overflow": "hidden",
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
             },
-            false,
-            undefined,
+            Object {
+              "borderRadius": 16,
+              "height": 56,
+              "width": 56,
+            },
           ]
         }
-        testID="fab"
+        testID="fab-content"
       >
         <View
-          pointerEvents="none"
           style={
             Array [
               Object {
                 "alignItems": "center",
-                "flexDirection": "row",
                 "justifyContent": "center",
               },
               Object {
-                "borderRadius": 16,
-                "height": 56,
-                "width": 56,
+                "height": 24,
+                "width": 24,
               },
             ]
           }
-          testID="fab-content"
         >
           <View
+            collapsable={false}
             style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "justifyContent": "center",
-                },
-                Object {
-                  "height": 24,
-                  "width": 24,
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": Array [
+                  Object {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
           >
-            <View
-              collapsable={false}
+            <Text
+              accessibilityElementsHidden={true}
+              allowFontScaling={false}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
               style={
-                Object {
-                  "bottom": 0,
-                  "left": 0,
-                  "opacity": 1,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                  "transform": Array [
-                    Object {
-                      "rotate": "0deg",
-                    },
-                  ],
-                }
-              }
-            >
-              <Text
-                accessibilityElementsHidden={true}
-                allowFontScaling={false}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
-                style={
+                Array [
+                  Object {
+                    "color": "rgba(33, 0, 93, 1)",
+                    "fontSize": 24,
+                  },
                   Array [
                     Object {
-                      "color": "rgba(33, 0, 93, 1)",
-                      "fontSize": 24,
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
                     },
-                    Array [
-                      Object {
-                        "lineHeight": 24,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      Object {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
                     Object {
-                      "fontFamily": "Material Design Icons",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
+                      "backgroundColor": "transparent",
                     },
-                    Object {},
-                  ]
-                }
-              >
-                󰐕
-              </Text>
-            </View>
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰐕
+            </Text>
           </View>
         </View>
       </View>
@@ -2232,8 +2142,11 @@ exports[`renders small FAB 1`] = `
 >
   <View
     collapsable={false}
+    pointerEvents="auto"
     style={
       Object {
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 12,
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -2244,138 +2157,126 @@ exports[`renders small FAB 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-middle-layer"
+    testID="fab-container"
   >
     <View
-      collapsable={false}
-      pointerEvents="auto"
-      style={
+      accessibilityRole="button"
+      accessibilityState={
         Object {
-          "backgroundColor": "rgba(234, 221, 255, 1)",
-          "borderRadius": 12,
-          "flex": undefined,
-          "overflow": "hidden",
+          "disabled": false,
         }
       }
-      testID="fab-container"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
+          Object {
+            "borderRadius": 12,
+          },
+        ]
+      }
+      testID="fab"
     >
       <View
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": false,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        pointerEvents="none"
         style={
           Array [
             Object {
-              "overflow": "hidden",
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
             },
-            false,
-            undefined,
+            Object {
+              "borderRadius": 12,
+              "height": 40,
+              "width": 40,
+            },
           ]
         }
-        testID="fab"
+        testID="fab-content"
       >
         <View
-          pointerEvents="none"
           style={
             Array [
               Object {
                 "alignItems": "center",
-                "flexDirection": "row",
                 "justifyContent": "center",
               },
               Object {
-                "borderRadius": 12,
-                "height": 40,
-                "width": 40,
+                "height": 24,
+                "width": 24,
               },
             ]
           }
-          testID="fab-content"
         >
           <View
+            collapsable={false}
             style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "justifyContent": "center",
-                },
-                Object {
-                  "height": 24,
-                  "width": 24,
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": Array [
+                  Object {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
           >
-            <View
-              collapsable={false}
+            <Text
+              accessibilityElementsHidden={true}
+              allowFontScaling={false}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
               style={
-                Object {
-                  "bottom": 0,
-                  "left": 0,
-                  "opacity": 1,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                  "transform": Array [
-                    Object {
-                      "rotate": "0deg",
-                    },
-                  ],
-                }
-              }
-            >
-              <Text
-                accessibilityElementsHidden={true}
-                allowFontScaling={false}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
-                style={
+                Array [
+                  Object {
+                    "color": "rgba(33, 0, 93, 1)",
+                    "fontSize": 24,
+                  },
                   Array [
                     Object {
-                      "color": "rgba(33, 0, 93, 1)",
-                      "fontSize": 24,
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
                     },
-                    Array [
-                      Object {
-                        "lineHeight": 24,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      Object {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
                     Object {
-                      "fontFamily": "Material Design Icons",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
+                      "backgroundColor": "transparent",
                     },
-                    Object {},
-                  ]
-                }
-              >
-                󰐕
-              </Text>
-            </View>
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰐕
+            </Text>
           </View>
         </View>
       </View>
@@ -2419,8 +2320,11 @@ exports[`renders visible FAB 1`] = `
 >
   <View
     collapsable={false}
+    pointerEvents="auto"
     style={
       Object {
+        "backgroundColor": "rgba(234, 221, 255, 1)",
+        "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -2431,138 +2335,126 @@ exports[`renders visible FAB 1`] = `
         "shadowRadius": 3,
       }
     }
-    testID="fab-container-middle-layer"
+    testID="fab-container"
   >
     <View
-      collapsable={false}
-      pointerEvents="auto"
-      style={
+      accessibilityRole="button"
+      accessibilityState={
         Object {
-          "backgroundColor": "rgba(234, 221, 255, 1)",
-          "borderRadius": 16,
-          "flex": undefined,
-          "overflow": "hidden",
+          "disabled": false,
         }
       }
-      testID="fab-container"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          false,
+          Object {
+            "borderRadius": 16,
+          },
+        ]
+      }
+      testID="fab"
     >
       <View
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": false,
-          }
-        }
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        pointerEvents="none"
         style={
           Array [
             Object {
-              "overflow": "hidden",
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
             },
-            false,
-            undefined,
+            Object {
+              "borderRadius": 16,
+              "height": 56,
+              "width": 56,
+            },
           ]
         }
-        testID="fab"
+        testID="fab-content"
       >
         <View
-          pointerEvents="none"
           style={
             Array [
               Object {
                 "alignItems": "center",
-                "flexDirection": "row",
                 "justifyContent": "center",
               },
               Object {
-                "borderRadius": 16,
-                "height": 56,
-                "width": 56,
+                "height": 24,
+                "width": 24,
               },
             ]
           }
-          testID="fab-content"
         >
           <View
+            collapsable={false}
             style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "justifyContent": "center",
-                },
-                Object {
-                  "height": 24,
-                  "width": 24,
-                },
-              ]
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": Array [
+                  Object {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
           >
-            <View
-              collapsable={false}
+            <Text
+              accessibilityElementsHidden={true}
+              allowFontScaling={false}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
               style={
-                Object {
-                  "bottom": 0,
-                  "left": 0,
-                  "opacity": 1,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                  "transform": Array [
-                    Object {
-                      "rotate": "0deg",
-                    },
-                  ],
-                }
-              }
-            >
-              <Text
-                accessibilityElementsHidden={true}
-                allowFontScaling={false}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
-                style={
+                Array [
+                  Object {
+                    "color": "rgba(33, 0, 93, 1)",
+                    "fontSize": 24,
+                  },
                   Array [
                     Object {
-                      "color": "rgba(33, 0, 93, 1)",
-                      "fontSize": 24,
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
                     },
-                    Array [
-                      Object {
-                        "lineHeight": 24,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      Object {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
                     Object {
-                      "fontFamily": "Material Design Icons",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
+                      "backgroundColor": "transparent",
                     },
-                    Object {},
-                  ]
-                }
-              >
-                󰐕
-              </Text>
-            </View>
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰐕
+            </Text>
           </View>
         </View>
       </View>
