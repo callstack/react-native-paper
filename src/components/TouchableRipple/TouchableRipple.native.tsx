@@ -5,18 +5,19 @@ import {
   Platform,
   ViewStyle,
   StyleSheet,
-  Pressable,
   GestureResponderEvent,
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import type { InternalTheme } from '../../types';
+import type { PressableProps } from './Pressable';
+import { Pressable } from './Pressable';
 import { getTouchableRippleColors } from './utils';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
 
-type Props = React.ComponentProps<typeof Pressable> & {
+type Props = PressableProps & {
   borderless?: boolean;
   background?: PressableAndroidRippleConfig;
   disabled?: boolean;

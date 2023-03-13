@@ -2,17 +2,20 @@ import * as React from 'react';
 import {
   GestureResponderEvent,
   Platform,
-  Pressable,
   StyleProp,
   StyleSheet,
   ViewStyle,
 } from 'react-native';
 
+import Color from 'color';
+
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
+import type { PressableProps, PressableStateCallbackType } from './Pressable';
+import { Pressable } from './Pressable';
 import { getTouchableRippleColors } from './utils';
 
-export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
+export type Props = PressableProps & {
   /**
    * Whether to render the ripple outside the view bounds.
    */
@@ -49,8 +52,13 @@ export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
   /**
    * Content of the `TouchableRipple`.
    */
-  children: React.ReactNode;
-  style?: StyleProp<ViewStyle>;
+  children:
+    | ((state: PressableStateCallbackType) => React.ReactNode)
+    | React.ReactNode;
+  style?:
+    | StyleProp<ViewStyle>
+    | ((state: PressableStateCallbackType) => StyleProp<ViewStyle>)
+    | undefined;
   /**
    * @optional
    */
@@ -100,15 +108,15 @@ const TouchableRipple = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { calculatedRippleColor } = getTouchableRippleColors({
+    theme,
+    rippleColor,
+  });
+  const hoverColor = Color(calculatedRippleColor).fade(0.5).rgb().string();
   const handlePressIn = (e: any) => {
     const { centered, onPressIn } = rest;
 
     onPressIn?.(e);
-
-    const { calculatedRippleColor } = getTouchableRippleColors({
-      theme,
-      rippleColor,
-    });
 
     const button = e.currentTarget;
     const style = window.getComputedStyle(button);
@@ -236,9 +244,20 @@ const TouchableRipple = ({
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
       disabled={disabled}
-      style={[styles.touchable, borderless && styles.borderless, style]}
+      style={(state) => [
+        styles.touchable,
+        borderless && styles.borderless,
+        // focused state is not ready yet: https://github.com/necolas/react-native-web/issues/1849
+        // state.focused && { backgroundColor: ___ },
+        state.hovered && { backgroundColor: hoverColor },
+        typeof style === 'function' ? style(state) : style,
+      ]}
     >
-      {React.Children.only(children)}
+      {(state) =>
+        React.Children.only(
+          typeof children === 'function' ? children(state) : children
+        )
+      }
     </Pressable>
   );
 };
