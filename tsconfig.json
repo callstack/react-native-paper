@@ -16,6 +16,7 @@
       "esnext",
       "dom"
     ],
+    "moduleSuffixes": [".ios", ".native", ".android", ""],
     "module": "esnext",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,

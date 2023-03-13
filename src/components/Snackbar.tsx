@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import useEventCallback from 'use-event-callback';
+import useLatestCallback from 'use-latest-callback';
 
 import { useInternalTheme } from '../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../types';
@@ -157,7 +157,7 @@ const Snackbar = ({
 
   const { scale } = theme.animation;
 
-  const handleOnVisible = useEventCallback(() => {
+  const handleOnVisible = useLatestCallback(() => {
     // show
     if (hideTimeout.current) clearTimeout(hideTimeout.current);
     setHidden(false);
@@ -182,7 +182,7 @@ const Snackbar = ({
     });
   });
 
-  const handleOnHidden = useEventCallback(() => {
+  const handleOnHidden = useLatestCallback(() => {
     // hide
     if (hideTimeout.current) {
       clearTimeout(hideTimeout.current);
