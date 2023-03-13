@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import useEventCallback from 'use-event-callback';
+import useLatestCallback from 'use-latest-callback';
 
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
@@ -118,7 +118,7 @@ function Modal({
     visibleRef.current = visible;
   });
 
-  const onDismissCallback = useEventCallback(onDismiss);
+  const onDismissCallback = useLatestCallback(onDismiss);
 
   const { scale } = theme.animation;
 
