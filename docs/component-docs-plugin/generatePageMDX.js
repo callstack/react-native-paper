@@ -1,6 +1,34 @@
 const config = require('../docusaurus.config');
 
-const { baseUrl } = config;
+const { baseUrl, customFields } = config;
+
+function generateMoreExamples(componentName) {
+  const componentMoreExamples = customFields.moreExamples[componentName];
+
+  if (!componentMoreExamples) {
+    return `<span />`;
+  }
+
+  const links = Object.entries(componentMoreExamples)
+    .map(([key, value]) => {
+      return `
+    <li key="${key}">
+      <a href="${value}">${key}</a>
+    </li>
+    `;
+    })
+    .join('');
+
+  return `
+  ## More Examples
+  <details>
+    <summary>Toggle to grab more examples</summary>
+    <ul>
+      ${links}
+    </ul>
+  </details>
+  `;
+}
 
 function generatePageMDX(doc, link) {
   const description = doc.description
@@ -16,6 +44,8 @@ title: ${doc.title}
 import PropTable from '@site/src/components/PropTable.tsx';
 
 ${description}
+
+${generateMoreExamples(doc.title)}
 
 ## Props
 
