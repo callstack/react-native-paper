@@ -32,7 +32,7 @@ Check the components and their usage in our [documentation](https://callstack.gi
 
 - Follows [material design guidelines](https://m3.material.io/get-started/)
 - Works on both iOS and Android following [platform adaptation guidelines](https://material.io/design/platform-guidance/cross-platform-adaptation.html)
-- Full [theming support](https://callstack.github.io/react-native-paper/theming.html)
+- Full [theming support](https://callstack.github.io/react-native-paper/docs/guides/theming)
 
 ## Try it out
 
