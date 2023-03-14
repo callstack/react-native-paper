@@ -196,11 +196,6 @@ exports[`allows customizing Route's type via generics 1`] = `
                       "marginBottom": 4,
                       "marginHorizontal": 12,
                       "marginTop": 0,
-                      "transform": Array [
-                        Object {
-                          "translateY": 0,
-                        },
-                      ],
                       "width": 32,
                     }
                   }
@@ -302,7 +297,6 @@ exports[`allows customizing Route's type via generics 1`] = `
                       Object {
                         "bottom": 0,
                         "left": 0,
-                        "opacity": 1,
                         "position": "absolute",
                         "right": 0,
                         "top": 0,
@@ -311,6 +305,60 @@ exports[`allows customizing Route's type via generics 1`] = `
                   >
                     <Text
                       maxFontSizeMultiplier={1}
+                      style={
+                        Array [
+                          Object {
+                            "fontFamily": "System",
+                            "fontSize": 12,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.5,
+                            "lineHeight": 16,
+                          },
+                          Object {
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "color": "rgba(28, 27, 31, 1)",
+                            "writingDirection": "ltr",
+                          },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
+                        ]
+                      }
+                    >
+                      First
+                    </Text>
+                  </View>
+                  <View
+                    collapsable={false}
+                    style={
+                      Object {
+                        "bottom": 0,
+                        "left": 0,
+                        "opacity": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      }
+                    }
+                  >
+                    <Text
+                      maxFontSizeMultiplier={1}
+                      selectable={false}
                       style={
                         Array [
                           Object {
@@ -399,11 +447,6 @@ exports[`allows customizing Route's type via generics 1`] = `
                       "marginBottom": 4,
                       "marginHorizontal": 12,
                       "marginTop": 0,
-                      "transform": Array [
-                        Object {
-                          "translateY": 7,
-                        },
-                      ],
                       "width": 32,
                     }
                   }
@@ -488,7 +531,6 @@ exports[`allows customizing Route's type via generics 1`] = `
                       Object {
                         "bottom": 0,
                         "left": 0,
-                        "opacity": 0,
                         "position": "absolute",
                         "right": 0,
                         "top": 0,
@@ -497,6 +539,60 @@ exports[`allows customizing Route's type via generics 1`] = `
                   >
                     <Text
                       maxFontSizeMultiplier={1}
+                      style={
+                        Array [
+                          Object {
+                            "fontFamily": "System",
+                            "fontSize": 12,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.5,
+                            "lineHeight": 16,
+                          },
+                          Object {
+                            "textAlign": "left",
+                          },
+                          Object {
+                            "color": "rgba(28, 27, 31, 1)",
+                            "writingDirection": "ltr",
+                          },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
+                        ]
+                      }
+                    >
+                      Second
+                    </Text>
+                  </View>
+                  <View
+                    collapsable={false}
+                    style={
+                      Object {
+                        "bottom": 0,
+                        "left": 0,
+                        "opacity": 1,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      }
+                    }
+                  >
+                    <Text
+                      maxFontSizeMultiplier={1}
+                      selectable={false}
                       style={
                         Array [
                           Object {

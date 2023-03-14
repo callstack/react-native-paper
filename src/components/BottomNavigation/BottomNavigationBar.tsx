@@ -350,26 +350,6 @@ const Touchable = <Route extends BaseRoute>({
  *   },
  * });
  * ```
- *
- * ## Usage with TypeScript
- *
- * Since the shape of individual route will be decided by the router being used,
- * you can pass route type to `<BottomNavigation.Bar>` to ensure type safety for the API
- *
- * Example for React Navigation:
- *
- * ```tsx
- * import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
- * import type { ParamListBase, Route } from '@react-navigation/native';
- * import { BottomNavigation } from 'react-native-paper';
- *
- * // (...)
- *
- *  <BottomNavigation.Bar<Route<keyof ParamListBase>>
- *    navigationState={state}
- *    onTabPress={({ route }) => {}}
- *  />
- * ```
  */
 const BottomNavigationBar = <Route extends BaseRoute>({
   navigationState,

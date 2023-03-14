@@ -593,7 +593,6 @@ it("allows customizing Route's type via generics", () => {
   const tree = renderer
     .create(
       <BottomNavigation
-        shifting
         navigationState={state}
         onIndexChange={jest.fn()}
         getLabelText={({ route }) => route.customPropertyName}

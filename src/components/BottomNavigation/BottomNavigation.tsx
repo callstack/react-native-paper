@@ -263,10 +263,10 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
 );
 
 /**
- * Bottom navigation provides quick navigation between top-level views of an app with a bottom navigation bar.
+ * BottomNavigation provides quick navigation between top-level views of an app with a bottom navigation bar.
  * It is primarily designed for use on mobile. If you want to use the navigation bar only see [`BottomNavigation.Bar`](BottomNavigationBar).
  *
- * By default Bottom navigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
+ * By default BottomNavigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
  * See [Dark InternalTheme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more information.
  *
  * <div class="screenshots">
@@ -316,7 +316,8 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  *
  * ## Usage with TypeScript
  *
- * If you use non-standard object for your route, please pass route type to `<BottomNavigation>` to ensure type safety for the API.
+ * BottomNavigation will try to infer your route shape in callbacks, but when that's not possible (e.g. you spread props
+ * over BottomNavigation component) you can pass route type to `<BottomNavigation>` to ensure type safety for the API.
  *
  * ```tsx
  * type RouteShape = {
@@ -327,7 +328,7 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  * const AlbumsRoute = () => <Text>Albums</Text>;
  * const RecentsRoute = () => <Text>Recents</Text>;
  *
- * const MyComponent = () => {
+ * const MyComponent = (props) => {
  *   const [index, setIndex] = React.useState(0);
  *   const [routes] = React.useState<RouteShape[]>([
  *     { key: 'albums', customLabel: 'Albums' },
@@ -341,6 +342,7 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  *
  *   return (
  *     <BottomNavigation<RouteShape>
+ *       {...props}
  *       navigationState={{ index, routes }}
  *       onIndexChange={setIndex}
  *       renderScene={renderScene}
@@ -599,7 +601,7 @@ const BottomNavigation = <Route extends BaseRoute>({
           );
         })}
       </View>
-      <BottomNavigationBar<Route>
+      <BottomNavigationBar
         navigationState={navigationState}
         renderIcon={renderIcon}
         renderLabel={renderLabel}

@@ -33,8 +33,8 @@ export default function MaterialBottomTabView({
   const buildLink = useLinkBuilder();
 
   return (
-    <BottomNavigation<Route<keyof ParamListBase>>
-      {...rest}
+    <BottomNavigation
+      {...(rest as {})} /* This casting allows TS to infer Route type from the passed state prop */
       onIndexChange={noop}
       navigationState={state}
       renderScene={({ route }) => descriptors[route.key].render()}
