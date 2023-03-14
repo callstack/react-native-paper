@@ -274,7 +274,10 @@ const Touchable = <Route extends BaseRoute>({
  *             if (event.defaultPrevented) {
  *               preventDefault();
  *             } else {
- *               navigation.navigate(route);
+ *              navigation.dispatch({
+ *                 ...CommonActions.navigate(route.name, route.params),
+ *                 target: state.key,
+ *               });
  *             }
  *           }}
  *           renderIcon={({ route, focused, color }) => {
