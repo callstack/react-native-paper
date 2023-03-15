@@ -313,44 +313,6 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  *
  * export default MyComponent;
  * ```
- *
- * ## Usage with TypeScript
- *
- * BottomNavigation will try to infer your route shape in callbacks, but when that's not possible (e.g. you spread props
- * over BottomNavigation component) you can pass route type to `<BottomNavigation>` to ensure type safety for the API.
- *
- * ```tsx
- * type RouteShape = {
- *   key: string;
- *   customLabel: string;
- * };
- *
- * const AlbumsRoute = () => <Text>Albums</Text>;
- * const RecentsRoute = () => <Text>Recents</Text>;
- *
- * const MyComponent = (props) => {
- *   const [index, setIndex] = React.useState(0);
- *   const [routes] = React.useState<RouteShape[]>([
- *     { key: 'albums', customLabel: 'Albums' },
- *     { key: 'recents', customLabel: 'Recents' },
- *   ]);
- *
- *   const renderScene = BottomNavigation.SceneMap({
- *     albums: AlbumsRoute,
- *     recents: RecentsRoute,
- *   });
- *
- *   return (
- *     <BottomNavigation<RouteShape>
- *       {...props}
- *       navigationState={{ index, routes }}
- *       onIndexChange={setIndex}
- *       renderScene={renderScene}
- *       getLabelText={({ route }) => route.customLabel}
- *     />
- *   );
- * };
- * ```
  */
 const BottomNavigation = <Route extends BaseRoute>({
   navigationState,
