@@ -69,7 +69,9 @@ module.exports = function(api) {
 
 The plugin only works if you are importing the library using ES2015 import statements and not with `require`.
 
-**Note:** The above examples are for the latest `react-native` using Babel 7. If you have `react-native <= 0.55`, you'll have a `.babelrc` file instead of a `babel.config.js` file and the content of the file will be different.
+:::note
+The above examples are for the latest `react-native` using Babel 7. If you have `react-native <= 0.55`, you'll have a `.babelrc` file instead of a `babel.config.js` file and the content of the file will be different.
+:::
 
 If you're using Flow for typechecking your code, you need to add the following under the `[options]` section in your `.flowconfig`:
 
@@ -155,4 +157,6 @@ export default function Main() {
 }
 ```
 
-<i>Note: For MD2 check the following [Material Design 2 default theme](https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v2/LightTheme.tsx).</i>
+:::note
+For MD2 check the following [Material Design 2 default theme](https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v2/LightTheme.tsx).
+:::

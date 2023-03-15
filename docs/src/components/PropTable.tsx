@@ -7,8 +7,10 @@ import useDoc from '@site/component-docs-plugin/useDocs';
 import Markdown from './Markdown';
 
 const typeDefinitions = {
-  IconSource: '/docs/icons',
-  Theme: '/docs/theming#theme-properties',
+  IconSource:
+    'https://github.com/callstack/react-native-paper/blob/main/src/components/Icon.tsx#L16',
+  ThemeProp:
+    'https://callstack.github.io/react-native-paper/docs/guides/theming#theme-properties',
   AccessibilityState:
     'https://reactnative.dev/docs/accessibility#accessibilitystate',
   'StyleProp<ViewStyle>': 'https://reactnative.dev/docs/view-style-props',
@@ -17,12 +19,45 @@ const typeDefinitions = {
 
 const ANNOTATION_OPTIONAL = '@optional';
 const ANNOTATION_INTERNAL = '@internal';
+const ANNOTATION_EXTENDS = '@extends';
 
 const renderBadge = (annotation: string) => {
   const [annotType, ...annotLabel] = annotation.split(' ');
 
   // eslint-disable-next-line prettier/prettier
   return `<span class="badge badge-${annotType.replace('@', '')} ">${annotLabel.join(' ')}</span>`;
+};
+
+const renderExtendsLink = (description: string) => {
+  const extendsAttributes: { name: string; link?: string }[] = [];
+  description
+    .split('\n')
+    .filter((line: string) => {
+      if (line.startsWith(ANNOTATION_EXTENDS)) {
+        const parts = line.split(' ').slice(1);
+        const link = parts.pop();
+        extendsAttributes.push({
+          name: parts.join(' '),
+          link,
+        });
+        return false;
+      }
+      return true;
+    })
+    .join('\n');
+
+  if (extendsAttributes.length === 0) {
+    return null;
+  }
+
+  return extendsAttributes.map((prop) => (
+    <a key={prop.name} href={prop.link}>
+      <code>
+        ...
+        {prop.name}
+      </code>
+    </a>
+  ));
 };
 
 export default function PropTable({ link }: { link: string }) {
@@ -96,7 +131,13 @@ export default function PropTable({ link }: { link: string }) {
               {tsTypeLink ? (
                 <a
                   href={tsTypeLink}
-                  target={tsTypeLink.startsWith('/') ? '_self' : '_blank'}
+                  target={
+                    tsTypeLink.startsWith(
+                      'https://callstack.github.io/react-native-paper'
+                    )
+                      ? '_self'
+                      : '_blank'
+                  }
                   rel="noreferrer"
                 >
                   <code>{tsType}</code>
@@ -114,6 +155,7 @@ export default function PropTable({ link }: { link: string }) {
           </div>
         );
       })}
+      {renderExtendsLink(doc.description)}
     </div>
   );
 }

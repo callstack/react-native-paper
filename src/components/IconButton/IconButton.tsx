@@ -68,6 +68,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   ref?: React.RefObject<View>;
   /**
+   * TestID used for testing purposes
+   */
+  testID?: string;
+  /**
    * @optional
    */
   theme?: ThemeProp;

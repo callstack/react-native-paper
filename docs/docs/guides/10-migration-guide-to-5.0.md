@@ -56,7 +56,9 @@ New theme introduces a new color palette along with new namings reflecting desig
 
 Each accent and error colors has a group of related tones. The tones are mapped to roles that create contrast and visual interest when applied to elements in the UI.
 
-📍<i>Note: Dynamic colors are not supported yet.</i>
+:::note
+Dynamic colors are not supported yet
+:::
 
 ![color-palette](../../static/migration/color-palette.png)
 
@@ -114,7 +116,9 @@ theme: {
 
 A new way of approaching typography introduces one component `<Text>` which accepts prop `variant`. Variant defines appropriate text styles for type role and its size. The updated type scale organizes styles into five roles that are named to describe their purposes: <b>Display</b>, <b>Headline</b>, <b>Title</b>, <b>Label</b> and <b>Body</b> along with three display styles <i>large</i>, <i>medium</i>, and <i>small</i>. In total, there are fifteen variants that are MD3 compliant and are reflecting design typography tokens written in camel case. 
 
-Note: If any component uses Paper's `Text` component, without specified <b>variant</b>, then `default` variant is applied.
+:::info
+If any component uses Paper's `Text` component, without specified <b>variant</b>, then `default` variant is applied.
+:::
 
 ```js
 <Text variant="displayLarge">Display Large</Text>
@@ -188,7 +192,9 @@ To use your current font config from <b>v2</b> and migrate to <b>v3</b> there ar
 + configureFonts({config: fontConfig, isV3: false})
 ```
 
-📍Note: If you want to check how to use `configureFonts` on MD3, check the [Fonts](https://callstack.github.io/react-native-paper/docs/guides/fonts.html) guide.
+:::tip
+If you want to check how to use `configureFonts` on MD3, check the [Fonts](https://callstack.github.io/react-native-paper/docs/guides/fonts.html) guide.
+:::
 
 ## Components
 
@@ -257,7 +263,9 @@ For the sake of new animation of pill shape, indicating active destination, and 
 * `icon` is renamed to `focusedIcon`, as the name implies, with theme version 3 it's the outline icon used as focused tab icon and with theme version 2 it's a default icon,
 * `unfocusedIcon` <i>(optional)</i> is the filled icon used as the unfocused tab icon, compatible with theme version 3.
 
-📍<i>Note: `unfocusedIcon` is optional, if you can't find outline icon equivalent, omit that prop, so `focusedIcon` will be displayed in both active and inactive state</i>
+:::info
+`unfocusedIcon` is optional, if you can't find outline icon equivalent, omit that prop, so `focusedIcon` will be displayed in both active and inactive state.
+:::
 
 ```diff
 routes: [
@@ -376,7 +384,9 @@ To properly compose `Chip` component and adjust into required type, there are th
 
 `Dialog.Icon` is another freshly added component presenting an icon within a `Dialog`, placed at the top of the content.
 
-📍<i>Note: It's working only with theme version 3.</i>
+:::caution
+It's working only with theme version 3.
+:::
 
 ```js
 <Portal>
@@ -404,7 +414,9 @@ Additionally prop `inset` was renamed to `leftInset`.
 
 `Drawer.CollapsedItem` is a newly created side navigation component that can be used within `Drawer`, representing a destination in the form of an action item with an icon and optionally label.
 
-📍<i>Note: It's working only with theme version 3.</i>
+:::caution
+It's working only with theme version 3.
+:::
 
 ```js
 <Drawer.Section>
