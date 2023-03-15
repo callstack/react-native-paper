@@ -170,7 +170,7 @@ For React Native Paper theme to work, we need to use <code>PaperProvider</code> 
 You can learn all about it their documentations:</p>
 <ul>
 <li><a href="https://reactnavigation.org/docs/themes/">Theming in React Navigation</a></li>
-<li><a href="https://callstack.github.io/react-native-paper/theming.html">Theming in React Native Paper</a></li>
+<li><a href="https://callstack.github.io/react-native-paper/4.0/theming">Theming in React Native Paper</a></li>
 </ul>
 <h2 id="react-context-for-theme-customization">
           <a class="anchor" href="#react-context-for-theme-customization">
@@ -242,7 +242,7 @@ You can learn all about it their documentations:</p>
     </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">PreferencesContext.Provider</span></span><span class="token punctuation">&gt;</span></span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<p>Now that the Context is available at every component, all we need to do is import it. Next thing is to provide the user with some UI element to control changing the theme. We will use <code>Paper</code>'s <a href="https://callstack.github.io/react-native-paper/switch.html">Switch</a> for this purpose.</p>
+<p>Now that the Context is available at every component, all we need to do is import it. Next thing is to provide the user with some UI element to control changing the theme. We will use <code>Paper</code>'s <a href="https://callstack.github.io/react-native-paper/4.0/switch">Switch</a> for this purpose.</p>
 <pre><code class="language-js"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> useTheme<span class="token punctuation">,</span> Appbar<span class="token punctuation">,</span> TouchableRipple<span class="token punctuation">,</span> Switch <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-paper'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> PreferencesContext <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./PreferencesContext'</span><span class="token punctuation">;</span>
@@ -276,7 +276,7 @@ You can learn all about it their documentations:</p>
 <p>React Native Paper components will automatically use provided theme thanks to the <code>PaperProvider</code> that is wrapped around the entry point of our application, but we can also access theme values manually with <code>useTheme</code> hook,
 exposed by the library. You can see how it's done in the <code>Header</code> component code above.</p>
 <p>If light/dark themes are not enough for your use case, you can learn more about creating Material Design themes <a href="https://material.io/design/material-theming/implementing-your-theme.html#color">here</a>.
-On <code>main</code> branch of the example app, you will find implemented <a href="https://callstack.github.io/react-native-paper/menu.html">Menu</a> component, which allows to choose a few custom themes. Inspecting code in <code>utils</code> and <code>Header</code> may give you some idea how to use your own themes with <code>Paper</code>, in addition to dedicated <a href="https://callstack.github.io/react-native-paper/menu.html">docs</a>.</p>
+On <code>main</code> branch of the example app, you will find implemented <a href="https://callstack.github.io/react-native-paper/4.0/menu">Menu</a> component, which allows to choose a few custom themes. Inspecting code in <code>utils</code> and <code>Header</code> may give you some idea how to use your own themes with <code>Paper</code>, in addition to dedicated <a href="https://callstack.github.io/react-native-paper/4.0/menu">docs</a>.</p>
 <p>Read more about integrating <code>Paper</code> with <code>React Navigation</code> in a brilliant <a href="https://reactnavigation.org/blog/2020/01/29/using-react-navigation-5-with-react-native-paper/">article</a> by <a href="https://twitter.com/trensik">@trensik</a></p>
 </div></div></main></div></div>
     <style type="text/css">

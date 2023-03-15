@@ -15,7 +15,7 @@ import color from 'color';
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import Icon from '../Icon';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 
 export type Props = React.ComponentPropsWithRef<
@@ -120,8 +120,8 @@ const DataTableTitle = ({
 
   const icon = sortDirection ? (
     <Animated.View style={[styles.icon, { transform: [{ rotate: spin }] }]}>
-      <Icon
-        source="arrow-up"
+      <MaterialCommunityIcon
+        name="arrow-up"
         size={16}
         color={textColor}
         direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}

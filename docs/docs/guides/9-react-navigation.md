@@ -11,7 +11,7 @@ title: Integrate AppBar with react-navigation
  
 We assume that you have already installed the mentioned libraries above, otherwise please check out the guides below.
  
- [React Native Paper - Getting Started](https://callstack.github.io/react-native-paper/getting-started.html)
+ [React Native Paper - Getting Started](https://callstack.github.io/react-native-paper/docs/guides/getting-started)
  
  [React Navigation - Getting Started](https://reactnavigation.org/docs/getting-started/)
 

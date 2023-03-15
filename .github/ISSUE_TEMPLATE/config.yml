@@ -1,10 +1,10 @@
 blank_issues_enabled: false
 contact_links:
   - name: Getting Started
-    url: https://callstack.github.io/react-native-paper/getting-started.html
+    url: https://callstack.github.io/react-native-paper/docs/guides/getting-started
     about: Read how to get started with react-native-paper.
   - name: Documentation
-    url: https://callstack.github.io/react-native-paper/index.html
+    url: https://callstack.github.io/react-native-paper
     about: Read the official documentation.
   - name: Example
     url: https://snack.expo.dev/@react-native-paper/react-native-paper-example_v5

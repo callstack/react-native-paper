@@ -130,7 +130,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  * export default MyComponent;
  * ```
  *
- * @extends TouchableRipple props https://callstack.github.io/react-native-paper/touchable-ripple.html
+ * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
 const ListItem = ({
   left,

@@ -10,7 +10,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import useEventCallback from 'use-event-callback';
+import useLatestCallback from 'use-latest-callback';
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
@@ -267,7 +267,7 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  * It is primarily designed for use on mobile. If you want to use the navigation bar only see [`BottomNavigation.Bar`](BottomNavigationBar).
  *
  * By default BottomNavigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
- * See [Dark InternalTheme](https://callstack.github.io/react-native-paper/theming.html#dark-theme) for more information.
+ * See [Dark InternalTheme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.
  *
  * <div class="screenshots">
  *   <img class="small" src="screenshots/bottom-navigation.gif" />
@@ -488,7 +488,7 @@ const BottomNavigation = <Route extends BaseRoute>({
     animateToIndex(navigationState.index);
   }, [navigationState.index, animateToIndex, offsetsAnims]);
 
-  const handleTabPress = useEventCallback(
+  const handleTabPress = useLatestCallback(
     (event: { route: Route } & TabPressEvent) => {
       onTabPress?.(event);
 
@@ -507,7 +507,7 @@ const BottomNavigation = <Route extends BaseRoute>({
     }
   );
 
-  const jumpTo = useEventCallback((key: string) => {
+  const jumpTo = useLatestCallback((key: string) => {
     const index = navigationState.routes.findIndex(
       (route) => route.key === key
     );
