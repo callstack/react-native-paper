@@ -5,11 +5,7 @@ import {
   useLinkTools,
 } from '@react-navigation/native';
 
-function useV6Link() {
-  return useLinkBuilder();
-}
-
-function useV7Link() {
+function useV7LinkBuilder() {
   const tools = useLinkTools();
   return tools.buildHref;
 }
@@ -19,5 +15,10 @@ type NavigationLink = () => (
   params?: object
 ) => string | undefined;
 
+/**
+ * In React Navigation 7 `useLinkBuilder` was superseded by `useLinkTools`
+ * https://reactnavigation.org/docs/7.x/upgrading-from-6.x/#the-uselinkto-and-uselinkbuilder-hooks-are-merged-into-uselinktools
+ **/
+
 export const useNavigationLink: NavigationLink =
-  typeof useLinkTools !== 'undefined' ? useV7Link : useV6Link;
+  typeof useLinkTools !== 'undefined' ? useV7LinkBuilder : useLinkBuilder;
