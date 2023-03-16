@@ -163,6 +163,10 @@ export type Props = {
    */
   onTabPress: (props: { route: Route } & TabPressEvent) => void;
   /**
+   * Function to execute on tab long press. It receives the route for the pressed tab
+   */
+  onTabLongPress?: (props: { route: Route } & TabPressEvent) => void;
+  /**
    * Custom color for icon and label in the active tab.
    */
   activeColor?: string;
@@ -366,6 +370,7 @@ const BottomNavigationBar = ({
   labeled = true,
   animationEasing,
   onTabPress,
+  onTabLongPress,
   shifting: shiftingProp,
   safeAreaInsets,
   labelMaxFontSizeMultiplier = 1,
@@ -508,6 +513,18 @@ const BottomNavigationBar = ({
     };
 
     onTabPress(event);
+  };
+
+  const handleTabLongPress = (index: number) => {
+    const event = {
+      route: navigationState.routes[index],
+      defaultPrevented: false,
+      preventDefault: () => {
+        event.defaultPrevented = true;
+      },
+    };
+
+    onTabLongPress?.(event);
   };
 
   const { routes } = navigationState;
@@ -746,6 +763,7 @@ const BottomNavigationBar = ({
               centered: true,
               rippleColor: isV3 ? 'transparent' : touchColor,
               onPress: () => handleTabPress(index),
+              onLongPress: () => handleTabLongPress(index),
               testID: getTestID({ route }),
               accessibilityLabel: getAccessibilityLabel({ route }),
               accessibilityRole: Platform.OS === 'ios' ? 'button' : 'tab',

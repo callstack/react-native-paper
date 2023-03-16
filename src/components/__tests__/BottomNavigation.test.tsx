@@ -190,6 +190,24 @@ it('calls onIndexChange', () => {
   expect(onIndexChange).toHaveBeenCalledTimes(1);
 });
 
+it('calls onTabLongPress', () => {
+  const onTabLongPress = jest.fn();
+  const onIndexChange = jest.fn();
+
+  const tree = render(
+    <BottomNavigation
+      shifting
+      onIndexChange={onIndexChange}
+      onTabLongPress={onTabLongPress}
+      navigationState={createState(0, 5)}
+      renderScene={({ route }) => route.title}
+    />
+  );
+  fireEvent(tree.getByText('Route: 1'), 'onLongPress');
+  expect(onTabLongPress).toHaveBeenCalled();
+  expect(onTabLongPress).toHaveBeenCalledTimes(1);
+});
+
 it('renders non-shifting bottom navigation', () => {
   const tree = renderer
     .create(
