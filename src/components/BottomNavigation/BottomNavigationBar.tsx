@@ -503,7 +503,7 @@ const BottomNavigationBar = ({
     animateToIndex(navigationState.index);
   }, [navigationState.index, animateToIndex]);
 
-  const handleTabPress = (index: number) => {
+  const eventForIndex = (index: number) => {
     const event = {
       route: navigationState.routes[index],
       defaultPrevented: false,
@@ -512,19 +512,7 @@ const BottomNavigationBar = ({
       },
     };
 
-    onTabPress(event);
-  };
-
-  const handleTabLongPress = (index: number) => {
-    const event = {
-      route: navigationState.routes[index],
-      defaultPrevented: false,
-      preventDefault: () => {
-        event.defaultPrevented = true;
-      },
-    };
-
-    onTabLongPress?.(event);
+    return event;
   };
 
   const { routes } = navigationState;
@@ -762,8 +750,8 @@ const BottomNavigationBar = ({
               borderless: true,
               centered: true,
               rippleColor: isV3 ? 'transparent' : touchColor,
-              onPress: () => handleTabPress(index),
-              onLongPress: () => handleTabLongPress(index),
+              onPress: () => onTabPress(eventForIndex(index)),
+              onLongPress: () => onTabLongPress?.(eventForIndex(index)),
               testID: getTestID({ route }),
               accessibilityLabel: getAccessibilityLabel({ route }),
               accessibilityRole: Platform.OS === 'ios' ? 'button' : 'tab',

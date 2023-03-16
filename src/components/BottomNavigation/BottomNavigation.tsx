@@ -474,12 +474,6 @@ const BottomNavigation = ({
     }
   );
 
-  const handleTabLongPress = useLatestCallback(
-    (event: { route: Route } & TabPressEvent) => {
-      onTabLongPress?.(event);
-    }
-  );
-
   const jumpTo = useLatestCallback((key: string) => {
     const index = navigationState.routes.findIndex(
       (route) => route.key === key
@@ -591,7 +585,7 @@ const BottomNavigation = ({
         labeled={labeled}
         animationEasing={sceneAnimationEasing}
         onTabPress={handleTabPress}
-        onTabLongPress={handleTabLongPress}
+        onTabLongPress={onTabLongPress}
         shifting={shifting}
         safeAreaInsets={safeAreaInsets}
         labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}

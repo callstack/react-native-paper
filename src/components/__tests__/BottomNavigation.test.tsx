@@ -190,6 +190,33 @@ it('calls onIndexChange', () => {
   expect(onIndexChange).toHaveBeenCalledTimes(1);
 });
 
+it('calls onTabPress', () => {
+  const onTabPress = jest.fn();
+  const onIndexChange = jest.fn();
+
+  const tree = render(
+    <BottomNavigation
+      shifting
+      onTabPress={onTabPress}
+      onIndexChange={onIndexChange}
+      navigationState={createState(0, 5)}
+      renderScene={({ route }) => route.title}
+    />
+  );
+  fireEvent(tree.getByText('Route: 1'), 'onPress');
+  expect(onTabPress).toHaveBeenCalled();
+  expect(onTabPress).toHaveBeenCalledTimes(1);
+  expect(onTabPress).toHaveBeenLastCalledWith(
+    expect.objectContaining({
+      route: expect.objectContaining({
+        key: 'key-1',
+      }),
+      defaultPrevented: expect.any(Boolean),
+      preventDefault: expect.any(Function),
+    })
+  );
+});
+
 it('calls onTabLongPress', () => {
   const onTabLongPress = jest.fn();
   const onIndexChange = jest.fn();
@@ -203,9 +230,18 @@ it('calls onTabLongPress', () => {
       renderScene={({ route }) => route.title}
     />
   );
-  fireEvent(tree.getByText('Route: 1'), 'onLongPress');
+  fireEvent(tree.getByText('Route: 2'), 'onLongPress');
   expect(onTabLongPress).toHaveBeenCalled();
   expect(onTabLongPress).toHaveBeenCalledTimes(1);
+  expect(onTabLongPress).toHaveBeenLastCalledWith(
+    expect.objectContaining({
+      route: expect.objectContaining({
+        key: 'key-2',
+      }),
+      defaultPrevented: expect.any(Boolean),
+      preventDefault: expect.any(Function),
+    })
+  );
 });
 
 it('renders non-shifting bottom navigation', () => {
