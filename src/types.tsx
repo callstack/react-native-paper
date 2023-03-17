@@ -200,15 +200,3 @@ export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<
 >;
 
 export type EllipsizeProp = 'head' | 'middle' | 'tail' | 'clip';
-
-export type NavigationTheme = {
-  dark: boolean;
-  colors: {
-    primary: string;
-    background: string;
-    card: string;
-    text: string;
-    border: string;
-    notification: string;
-  };
-};

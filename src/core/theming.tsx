@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react';
 
 import { $DeepPartial, createTheming } from '@callstack/react-theme-provider';
+import type { Theme as ReactNavigationTheme } from '@react-navigation/native';
 import color from 'color';
 
 import {
@@ -9,12 +10,7 @@ import {
   MD3DarkTheme,
   MD3LightTheme,
 } from '../styles/themes';
-import type {
-  InternalTheme,
-  MD3Theme,
-  MD3AndroidColors,
-  NavigationTheme,
-} from '../types';
+import type { InternalTheme, MD3Theme, MD3AndroidColors } from '../types';
 
 export const DefaultTheme = MD3LightTheme;
 
@@ -64,25 +60,25 @@ export const getTheme = <
 
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme(themes: {
-  reactNavigationLight: NavigationTheme;
+  reactNavigationLight: ReactNavigationTheme;
   materialLight?: MD3Theme;
 }): {
-  LightTheme: NavigationTheme;
+  LightTheme: ReactNavigationTheme;
 };
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme(themes: {
-  reactNavigationDark: NavigationTheme;
+  reactNavigationDark: ReactNavigationTheme;
   materialDark?: MD3Theme;
 }): {
-  DarkTheme: NavigationTheme;
+  DarkTheme: ReactNavigationTheme;
 };
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme(themes: {
-  reactNavigationLight: NavigationTheme;
-  reactNavigationDark: NavigationTheme;
+  reactNavigationLight: ReactNavigationTheme;
+  reactNavigationDark: ReactNavigationTheme;
   materialLight?: MD3Theme;
   materialDark?: MD3Theme;
-}): { LightTheme: NavigationTheme; DarkTheme: NavigationTheme };
+}): { LightTheme: ReactNavigationTheme; DarkTheme: ReactNavigationTheme };
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme(themes: any) {
   const {
@@ -93,7 +89,7 @@ export function adaptNavigationTheme(themes: any) {
   } = themes;
 
   const getAdaptedTheme = (
-    navigationTheme: NavigationTheme,
+    navigationTheme: ReactNavigationTheme,
     MD3Theme: MD3Theme
   ) => {
     return {
@@ -106,6 +102,25 @@ export function adaptNavigationTheme(themes: any) {
         text: MD3Theme.colors.onSurface,
         border: MD3Theme.colors.outline,
         notification: MD3Theme.colors.error,
+      },
+      fonts: {
+        ...navigationTheme.fonts,
+        regular: {
+          fontFamily: MD3Theme.fonts.displayMedium.fontFamily,
+          fontWeight: MD3Theme.fonts.displayMedium.fontWeight,
+        },
+        medium: {
+          fontFamily: MD3Theme.fonts.titleMedium.fontFamily,
+          fontWeight: MD3Theme.fonts.titleMedium.fontWeight,
+        },
+        bold: {
+          fontFamily: MD3Theme.fonts.titleMedium.fontFamily,
+          fontWeight: MD3Theme.fonts.titleMedium.fontWeight,
+        },
+        heavy: {
+          fontFamily: MD3Theme.fonts.titleMedium.fontFamily,
+          fontWeight: MD3Theme.fonts.titleMedium.fontWeight,
+        },
       },
     };
   };

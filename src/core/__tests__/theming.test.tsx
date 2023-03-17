@@ -1,6 +1,25 @@
 import { MD3DarkTheme, MD3LightTheme } from '../../styles/themes';
 import { adaptNavigationTheme } from '../theming';
 
+const NavigationFonts = {
+  regular: {
+    fontFamily: 'system-ui',
+    fontWeight: '400',
+  },
+  medium: {
+    fontFamily: 'system-ui',
+    fontWeight: '500',
+  },
+  bold: {
+    fontFamily: 'system-ui',
+    fontWeight: '600',
+  },
+  heavy: {
+    fontFamily: 'system-ui',
+    fontWeight: '700',
+  },
+};
+
 const NavigationLightTheme = {
   dark: false,
   colors: {
@@ -11,6 +30,7 @@ const NavigationLightTheme = {
     border: 'rgb(216, 216, 216)',
     notification: 'rgb(255, 59, 48)',
   },
+  fonts: NavigationFonts,
 };
 
 const NavigationDarkTheme = {
@@ -23,6 +43,7 @@ const NavigationDarkTheme = {
     border: 'rgb(39, 39, 41)',
     notification: 'rgb(255, 69, 58)',
   },
+  fonts: NavigationFonts,
 };
 
 const NavigationCustomLightTheme = {

@@ -6,8 +6,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
   InitialState,
   NavigationContainer,
-  DarkTheme as NavigationDarkTheme,
-  DefaultTheme as NavigationDefaultTheme,
+  Theme as ReactNavigationTheme,
 } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { useKeepAwake } from 'expo-keep-awake';
@@ -22,14 +21,13 @@ import {
   MD2Theme,
   MD3Theme,
   useTheme,
-  adaptNavigationTheme,
-  configureFonts,
 } from 'react-native-paper';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 import { isWeb } from '../utils';
 import DrawerItems from './DrawerItems';
 import App from './RootNavigator';
+import { getCombinedTheme } from './themeSwitcher';
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
@@ -64,7 +62,7 @@ export default function PaperExample() {
   useKeepAwake();
 
   const [fontsLoaded] = useFonts({
-    NotoSans: require('../assets/fonts/NotoSans-Regular.ttf'),
+    Comfortaa: require('../assets/fonts/Comfortaa.ttf'),
   });
 
   const [isReady, setIsReady] = React.useState(false);
@@ -181,45 +179,20 @@ export default function PaperExample() {
     return null;
   }
 
-  const { LightTheme, DarkTheme } = adaptNavigationTheme({
-    reactNavigationLight: NavigationDefaultTheme,
-    reactNavigationDark: NavigationDarkTheme,
+  const customTheme = getCombinedTheme({
+    isDarkMode,
+    isV3: themeVersion === 3,
+    overrides: customFontLoaded
+      ? { fonts: { fontFamily: 'Comfortaa' } }
+      : undefined,
   });
 
-  const CombinedDefaultTheme = {
-    ...MD3LightTheme,
-    ...LightTheme,
-    colors: {
-      ...MD3LightTheme.colors,
-      ...LightTheme.colors,
-    },
-  };
-
-  const CombinedDarkTheme = {
-    ...MD3DarkTheme,
-    ...DarkTheme,
-    colors: {
-      ...MD3DarkTheme.colors,
-      ...DarkTheme.colors,
-    },
-  };
-
-  const combinedTheme = isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme;
-  const configuredFontTheme = {
-    ...combinedTheme,
-    fonts: configureFonts({
-      config: {
-        fontFamily: 'NotoSans',
-      },
-    }),
-  };
-
   return (
-    <PaperProvider theme={customFontLoaded ? configuredFontTheme : theme}>
+    <PaperProvider theme={customTheme}>
       <PreferencesContext.Provider value={preferences}>
         <React.Fragment>
           <NavigationContainer
-            theme={combinedTheme}
+            theme={customTheme as ReactNavigationTheme}
             initialState={initialState}
             onStateChange={(state) =>
               AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
