@@ -125,10 +125,15 @@ const Tooltip = ({
       clearTimeout(hideTooltipTimer.current);
     }
 
-    showTooltipTimer.current = setTimeout(() => {
+    if (isWeb) {
+      showTooltipTimer.current = setTimeout(() => {
+        touched.current = true;
+        setVisible(true);
+      }, enterTouchDelay) as unknown as NodeJS.Timeout;
+    } else {
       touched.current = true;
       setVisible(true);
-    }, enterTouchDelay) as unknown as NodeJS.Timeout;
+    }
   };
 
   const handleTouchEnd = () => {
