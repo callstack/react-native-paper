@@ -296,10 +296,6 @@ const config = {
         'Comprehensive Portal example':
           'https://snack.expo.dev/@react-native-paper/comprehensive-portal-example',
       },
-      BottomNavigation: {
-        'Usage with Typescript':
-          'https://snack.expo.dev/@react-native-paper/bottomnavigation---usage-with-typescript',
-      },
     },
   },
 };

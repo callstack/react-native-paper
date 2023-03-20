@@ -114,5 +114,6 @@ export type MaterialBottomTabNavigationConfig = Partial<
     | 'getColor'
     | 'getLabelText'
     | 'getTestID'
+    | 'getLazy'
   >
 >;
