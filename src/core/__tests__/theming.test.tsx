@@ -1,7 +1,15 @@
+import type { Theme as ReactNavigationTheme } from '@react-navigation/native';
+
 import { MD3DarkTheme, MD3LightTheme } from '../../styles/themes';
+import { typescale } from '../../styles/themes/v3/tokens';
 import { adaptNavigationTheme } from '../theming';
 
-const NavigationFonts = {
+jest.mock('react-native/Libraries/Utilities/Platform', () => ({
+  OS: 'ios',
+  select: (o: any) => o['ios'],
+}));
+
+const NavigationFonts: ReactNavigationTheme['fonts'] = {
   regular: {
     fontFamily: 'system-ui',
     fontWeight: '400',
@@ -17,6 +25,25 @@ const NavigationFonts = {
   heavy: {
     fontFamily: 'system-ui',
     fontWeight: '700',
+  },
+};
+
+const TypescaleFonts = {
+  regular: {
+    fontFamily: typescale.bodyMedium.fontFamily,
+    fontWeight: typescale.bodyMedium.fontWeight,
+  },
+  medium: {
+    fontFamily: typescale.headlineMedium.fontFamily,
+    fontWeight: typescale.headlineMedium.fontWeight,
+  },
+  heavy: {
+    fontFamily: typescale.headlineMedium.fontFamily,
+    fontWeight: typescale.headlineMedium.fontWeight,
+  },
+  bold: {
+    fontFamily: typescale.headlineMedium.fontFamily,
+    fontWeight: typescale.headlineMedium.fontWeight,
   },
 };
 
@@ -58,6 +85,7 @@ const NavigationCustomLightTheme = {
     border: 'rgb(199, 199, 204)',
     notification: 'rgb(255, 69, 58)',
   },
+  fonts: NavigationFonts,
 };
 
 const AppCustomLightTheme = {
@@ -95,6 +123,7 @@ describe('adaptNavigationTheme', () => {
           border: MD3LightTheme.colors.outline,
           notification: MD3LightTheme.colors.error,
         },
+        fonts: TypescaleFonts,
       },
       DarkTheme: {
         ...NavigationDarkTheme,
@@ -107,6 +136,7 @@ describe('adaptNavigationTheme', () => {
           border: MD3DarkTheme.colors.outline,
           notification: MD3DarkTheme.colors.error,
         },
+        fonts: TypescaleFonts,
       },
     });
   });
@@ -129,6 +159,7 @@ describe('adaptNavigationTheme', () => {
         border: colors.outline,
         notification: colors.error,
       },
+      fonts: TypescaleFonts,
     });
   });
 
@@ -150,6 +181,7 @@ describe('adaptNavigationTheme', () => {
         border: colors.outline,
         notification: colors.error,
       },
+      fonts: TypescaleFonts,
     });
   });
 
@@ -173,6 +205,7 @@ describe('adaptNavigationTheme', () => {
         secondary: 'rgb(150,45,85)',
         tertiary: 'rgb(105,45,85)',
       },
+      fonts: TypescaleFonts,
     });
   });
 
@@ -195,6 +228,7 @@ describe('adaptNavigationTheme', () => {
         border: colors.outline,
         notification: colors.error,
       },
+      fonts: TypescaleFonts,
     });
   });
 
@@ -217,6 +251,7 @@ describe('adaptNavigationTheme', () => {
         border: colors.outline,
         notification: colors.error,
       },
+      fonts: TypescaleFonts,
     });
   });
 });

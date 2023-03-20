@@ -3,23 +3,15 @@ import { I18nManager } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import {
-  InitialState,
-  NavigationContainer,
-  Theme as ReactNavigationTheme,
-} from '@react-navigation/native';
+import { InitialState, NavigationContainer } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { useKeepAwake } from 'expo-keep-awake';
 import { StatusBar } from 'expo-status-bar';
 import * as Updates from 'expo-updates';
 import {
-  Provider as PaperProvider,
-  MD3DarkTheme,
-  MD3LightTheme,
-  MD2DarkTheme,
-  MD2LightTheme,
   MD2Theme,
   MD3Theme,
+  Provider as PaperProvider,
   useTheme,
 } from 'react-native-paper';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
@@ -27,7 +19,7 @@ import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 import { isWeb } from '../utils';
 import DrawerItems from './DrawerItems';
 import App from './RootNavigator';
-import { getCombinedTheme } from './themeSwitcher';
+import { getTheme } from './theme';
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
@@ -80,16 +72,11 @@ export default function PaperExample() {
 
   const themeMode = isDarkMode ? 'dark' : 'light';
 
-  const theme = {
-    2: {
-      light: MD2LightTheme,
-      dark: MD2DarkTheme,
-    },
-    3: {
-      light: MD3LightTheme,
-      dark: MD3DarkTheme,
-    },
-  }[themeVersion][themeMode];
+  const { navigationTheme, theme } = getTheme(
+    themeVersion,
+    isDarkMode,
+    customFontLoaded ? 'Comfortaa' : undefined
+  );
 
   React.useEffect(() => {
     const restoreState = async () => {
@@ -179,20 +166,12 @@ export default function PaperExample() {
     return null;
   }
 
-  const customTheme = getCombinedTheme({
-    isDarkMode,
-    isV3: themeVersion === 3,
-    overrides: customFontLoaded
-      ? { fonts: { fontFamily: 'Comfortaa' } }
-      : undefined,
-  });
-
   return (
-    <PaperProvider theme={customTheme}>
+    <PaperProvider theme={theme}>
       <PreferencesContext.Provider value={preferences}>
         <React.Fragment>
           <NavigationContainer
-            theme={customTheme as ReactNavigationTheme}
+            theme={navigationTheme}
             initialState={initialState}
             onStateChange={(state) =>
               AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))

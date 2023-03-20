@@ -106,20 +106,20 @@ export function adaptNavigationTheme(themes: any) {
       fonts: {
         ...navigationTheme.fonts,
         regular: {
-          fontFamily: MD3Theme.fonts.displayMedium.fontFamily,
-          fontWeight: MD3Theme.fonts.displayMedium.fontWeight,
+          fontFamily: MD3Theme.fonts.bodyMedium.fontFamily,
+          fontWeight: MD3Theme.fonts.bodyMedium.fontWeight,
         },
         medium: {
-          fontFamily: MD3Theme.fonts.titleMedium.fontFamily,
-          fontWeight: MD3Theme.fonts.titleMedium.fontWeight,
+          fontFamily: MD3Theme.fonts.headlineMedium.fontFamily,
+          fontWeight: MD3Theme.fonts.headlineMedium.fontWeight,
         },
         bold: {
-          fontFamily: MD3Theme.fonts.titleMedium.fontFamily,
-          fontWeight: MD3Theme.fonts.titleMedium.fontWeight,
+          fontFamily: MD3Theme.fonts.headlineMedium.fontFamily,
+          fontWeight: MD3Theme.fonts.headlineMedium.fontWeight,
         },
         heavy: {
-          fontFamily: MD3Theme.fonts.titleMedium.fontFamily,
-          fontWeight: MD3Theme.fonts.titleMedium.fontWeight,
+          fontFamily: MD3Theme.fonts.headlineMedium.fontFamily,
+          fontWeight: MD3Theme.fonts.headlineMedium.fontWeight,
         },
       },
     };
