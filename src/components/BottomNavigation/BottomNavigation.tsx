@@ -19,7 +19,7 @@ import type { IconSource } from '../Icon';
 import BottomNavigationBar from './BottomNavigationBar';
 import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 
-type Route = {
+type BaseRoute = {
   key: string;
   title?: string;
   focusedIcon?: IconSource;
@@ -31,7 +31,7 @@ type Route = {
   lazy?: boolean;
 };
 
-type NavigationState = {
+type NavigationState<Route extends BaseRoute> = {
   index: number;
   routes: Route[];
 };
@@ -41,7 +41,7 @@ type TabPressEvent = {
   preventDefault(): void;
 };
 
-type TouchableProps = TouchableWithoutFeedbackProps & {
+type TouchableProps<Route extends BaseRoute> = TouchableWithoutFeedbackProps & {
   key: string;
   route: Route;
   children: React.ReactNode;
@@ -50,7 +50,7 @@ type TouchableProps = TouchableWithoutFeedbackProps & {
   rippleColor?: string;
 };
 
-export type Props = {
+export type Props<Route extends BaseRoute> = {
   /**
    * Whether the shifting style is used, the active tab icon shifts up to show the label and the inactive tabs won't have a label.
    *
@@ -100,7 +100,7 @@ export type Props = {
    *
    * `BottomNavigation` is a controlled component, which means the `index` needs to be updated via the `onIndexChange` callback.
    */
-  navigationState: NavigationState;
+  navigationState: NavigationState<Route>;
   /**
    * Callback which is called on tab change, receives the index of the new tab as argument.
    * The navigation state needs to be updated when it's called, otherwise the change is dropped.
@@ -165,7 +165,7 @@ export type Props = {
    * Callback which returns a React element to be used as the touchable for the tab item.
    * Renders a `TouchableRipple` on Android and `TouchableWithoutFeedback` with `View` on iOS.
    */
-  renderTouchable?: (props: TouchableProps) => React.ReactNode;
+  renderTouchable?: (props: TouchableProps<Route>) => React.ReactNode;
   /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
    * Uses `route.accessibilityLabel` by default.
@@ -267,10 +267,10 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
 );
 
 /**
- * Bottom navigation provides quick navigation between top-level views of an app with a bottom navigation bar.
+ * BottomNavigation provides quick navigation between top-level views of an app with a bottom navigation bar.
  * It is primarily designed for use on mobile. If you want to use the navigation bar only see [`BottomNavigation.Bar`](BottomNavigationBar).
  *
- * By default Bottom navigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
+ * By default BottomNavigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
  * See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.
  *
  * <div class="screenshots">
@@ -318,7 +318,7 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  * export default MyComponent;
  * ```
  */
-const BottomNavigation = ({
+const BottomNavigation = <Route extends BaseRoute>({
   navigationState,
   renderScene,
   renderIcon,
@@ -348,7 +348,7 @@ const BottomNavigation = ({
   testID = 'bottom-navigation',
   theme: themeOverrides,
   getLazy = ({ route }: { route: Route }) => route.lazy,
-}: Props) => {
+}: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
   const { scale } = theme.animation;
   const compact = compactProp ?? !theme.isV3;
@@ -439,7 +439,7 @@ const BottomNavigation = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const prevNavigationState = React.useRef<NavigationState>();
+  const prevNavigationState = React.useRef<NavigationState<Route>>();
 
   React.useEffect(() => {
     // Reset offsets of previous and current tabs before animation
@@ -602,7 +602,7 @@ const BottomNavigation = ({
  * Pure components are used to minimize re-rendering of the pages.
  * This drastically improves the animation performance.
  */
-BottomNavigation.SceneMap = (scenes: {
+BottomNavigation.SceneMap = <Route extends BaseRoute>(scenes: {
   [key: string]: React.ComponentType<{
     route: Route;
     jumpTo: (key: string) => void;

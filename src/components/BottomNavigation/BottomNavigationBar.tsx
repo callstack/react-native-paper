@@ -34,7 +34,7 @@ import {
   getLabelColor,
 } from './utils';
 
-type Route = {
+type BaseRoute = {
   key: string;
   title?: string;
   focusedIcon?: IconSource;
@@ -46,7 +46,7 @@ type Route = {
   lazy?: boolean;
 };
 
-type NavigationState = {
+type NavigationState<Route extends BaseRoute> = {
   index: number;
   routes: Route[];
 };
@@ -56,7 +56,7 @@ type TabPressEvent = {
   preventDefault(): void;
 };
 
-type TouchableProps = TouchableWithoutFeedbackProps & {
+type TouchableProps<Route extends BaseRoute> = TouchableWithoutFeedbackProps & {
   key: string;
   route: Route;
   children: React.ReactNode;
@@ -65,7 +65,7 @@ type TouchableProps = TouchableWithoutFeedbackProps & {
   rippleColor?: string;
 };
 
-export type Props = {
+export type Props<Route extends BaseRoute> = {
   /**
    * Whether the shifting style is used, the active tab icon shifts up to show the label and the inactive tabs won't have a label.
    *
@@ -115,7 +115,7 @@ export type Props = {
    *
    * `BottomNavigation.Bar` is a controlled component, which means the `index` needs to be updated via the `onTabPress` callback.
    */
-  navigationState: NavigationState;
+  navigationState: NavigationState<Route>;
   /**
    * Callback which returns a React Element to be used as tab icon.
    */
@@ -136,7 +136,7 @@ export type Props = {
    * Callback which returns a React element to be used as the touchable for the tab item.
    * Renders a `TouchableRipple` on Android and `TouchableWithoutFeedback` with `View` on iOS.
    */
-  renderTouchable?: (props: TouchableProps) => React.ReactNode;
+  renderTouchable?: (props: TouchableProps<Route>) => React.ReactNode;
   /**
    * Get accessibility label for the tab button. This is read by the screen reader when the user taps the tab.
    * Uses `route.accessibilityLabel` by default.
@@ -214,7 +214,7 @@ const MAX_TAB_WIDTH = 168;
 const BAR_HEIGHT = 56;
 const OUTLINE_WIDTH = 64;
 
-const Touchable = ({
+const Touchable = <Route extends BaseRoute>({
   route: _0,
   style,
   children,
@@ -222,7 +222,7 @@ const Touchable = ({
   centered,
   rippleColor,
   ...rest
-}: TouchableProps) =>
+}: TouchableProps<Route>) =>
   TouchableRipple.supported ? (
     <TouchableRipple
       {...rest}
@@ -278,7 +278,10 @@ const Touchable = ({
  *             if (event.defaultPrevented) {
  *               preventDefault();
  *             } else {
- *               navigation.navigate(route);
+ *              navigation.dispatch({
+ *                 ...CommonActions.navigate(route.name, route.params),
+ *                 target: state.key,
+ *               });
  *             }
  *           }}
  *           renderIcon={({ route, focused, color }) => {
@@ -352,11 +355,11 @@ const Touchable = ({
  * });
  * ```
  */
-const BottomNavigationBar = ({
+const BottomNavigationBar = <Route extends BaseRoute>({
   navigationState,
   renderIcon,
   renderLabel,
-  renderTouchable = (props: TouchableProps) => <Touchable {...props} />,
+  renderTouchable = (props: TouchableProps<Route>) => <Touchable {...props} />,
   getLabelText = ({ route }: { route: Route }) => route.title,
   getBadge = ({ route }: { route: Route }) => route.badge,
   getColor = ({ route }: { route: Route }) => route.color,
@@ -377,7 +380,7 @@ const BottomNavigationBar = ({
   compact: compactProp,
   testID = 'bottom-navigation-bar',
   theme: themeOverrides,
-}: Props) => {
+}: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
   const { bottom, left, right } = useSafeAreaInsets();
   const { scale } = theme.animation;
