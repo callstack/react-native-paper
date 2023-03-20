@@ -20,7 +20,9 @@ The easiest way to install custom fonts to your RN project is do as follows:
       ],
   ```
 
-  Note: `fonts` is a folder with `.ttf` files
+:::note
+`fonts` is a folder with `.ttf` files
+:::
 
   2. Place your font files in your assets directory.
 
@@ -56,7 +58,9 @@ To create a custom font, prepare a `fontConfig` object where fonts are divided b
 
 The `fontConfig` object accepts `ios`, `android`, `macos`, `windows`, `web`, and `native`. Use these to override fonts on particular platforms.
 
-Note: At a minimum, you need to explicitly pass fonts for `android`, `ios`, and `web`.
+:::info
+At a minimum, you need to explicitly pass fonts for `android`, `ios`, and `web`.
+:::
 
 ```js
 import * as React from 'react';
@@ -140,7 +144,8 @@ export default function Main() {
 
 In the latest version fonts in theme are structured based on the `variant` keys e.g. `displayLarge` or `bodyMedium` which are then used in `Text`'s component throughout the whole library.
 
-Note: The default `fontFamily` is different per particular platfrom:
+:::info
+The default `fontFamily` is different per particular platfrom:
 
 ```js
 Platform.select({
@@ -149,7 +154,7 @@ Platform.select({
   default: 'sans-serif', // and 'sans-serif-medium' for `fontWeight:"500"`
 }),
 ```
-
+:::
 
 * #### Display
 
@@ -381,7 +386,8 @@ Platform.select({
   </div>
 </div>
 
-<i>Note:</i> If any component uses Paper's `Text` component, without specified <b>variant</b>, then `default` variant is applied:
+:::info
+If any component uses Paper's `Text` component, without specified <b>variant</b>, then `default` variant is applied:
 
 ```json
 "default": {
@@ -390,6 +396,7 @@ Platform.select({
   "letterSpacing": 0,
 },
 ```
+:::
 
 #### Using `configureFonts` helper
 

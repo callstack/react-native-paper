@@ -177,6 +177,8 @@ type TextInputHandles = Pick<
   'focus' | 'clear' | 'blur' | 'isFocused' | 'setNativeProps'
 >;
 
+const DefaultRenderer = (props: RenderProps) => <NativeTextInput {...props} />;
+
 /**
  * A component to allow users to input text.
  *
@@ -221,9 +223,6 @@ type TextInputHandles = Pick<
  *
  * @extends TextInput props https://reactnative.dev/docs/textinput#props
  */
-
-const DefaultRenderer = (props: RenderProps) => <NativeTextInput {...props} />;
-
 const TextInput = forwardRef<TextInputHandles, Props>(
   (
     {

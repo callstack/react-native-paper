@@ -63,7 +63,7 @@ const DEFAULT_DURATION = 220;
 
 /**
  * The Modal component is a simple way to present content above an enclosing view.
- * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
+ * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](./Portal) component.
  *
  * <div class="screenshots">
  *   <figure>

@@ -45,7 +45,7 @@ const DIALOG_ELEVATION: number = 24;
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
- * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
+ * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](../../Portal) component.
  *
  *  <div class="screenshots">
  *   <img class="small" src="screenshots/dialog-1.png" />

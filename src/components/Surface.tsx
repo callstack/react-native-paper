@@ -210,7 +210,7 @@ const SurfaceIOS = forwardRef<
 /**
  * Surface is a basic container that can give depth to an element with elevation shadow.
  * On dark theme with `adaptive` mode, surface is constructed by also placing a semi-transparent white overlay over a component surface.
- * See [Dark InternalTheme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.
+ * See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.
  * Overlay and shadow can be applied by specifying the `elevation` property both on Android and iOS.
  *
  * <div class="screenshots">

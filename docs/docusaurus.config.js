@@ -192,11 +192,15 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: (params) =>
-            `https://github.com/callstack/react-native-paper/tree/main/src/${params.docPath.replace(
-              'mdx',
-              'tsx'
-            )}`,
+          editUrl: (params) => {
+            const urlToMain =
+              'https://github.com/callstack/react-native-paper/tree/main';
+            if (params.docPath.includes('guides')) {
+              return `${urlToMain}/docs/docs/${params.docPath}`;
+            }
+            return `${urlToMain}/src/${params.docPath.replace('mdx', 'tsx')}`;
+          },
+
           remarkPlugins: [
             [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
           ],
