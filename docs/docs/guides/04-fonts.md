@@ -138,6 +138,10 @@ export default function Main() {
 }
 ```
 
+:::tip
+If you're using TypeScript use `as const` when defining `fontConfig`.
+:::
+
 ### Material Design 3
 
 #### Variants
