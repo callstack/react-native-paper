@@ -58,7 +58,7 @@ export default function MaterialBottomTabView({
       });
 
       if (event.defaultPrevented) {
-        preventDefault();
+        return preventDefault();
       }
 
       callback?.(route);
