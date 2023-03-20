@@ -253,7 +253,7 @@ it('animated value changes correctly', () => {
       {null}
     </Card>
   );
-  expect(getByTestId('card-container')).toHaveStyle({
+  expect(getByTestId('card-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -265,7 +265,7 @@ it('animated value changes correctly', () => {
 
   jest.advanceTimersByTime(200);
 
-  expect(getByTestId('card-container')).toHaveStyle({
+  expect(getByTestId('card-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });

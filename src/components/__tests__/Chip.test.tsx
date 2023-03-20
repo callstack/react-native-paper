@@ -756,7 +756,7 @@ it('animated value changes correctly', () => {
       Example Chip
     </Chip>
   );
-  expect(getByTestId('chip-container')).toHaveStyle({
+  expect(getByTestId('chip-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -768,7 +768,7 @@ it('animated value changes correctly', () => {
 
   jest.advanceTimersByTime(200);
 
-  expect(getByTestId('chip-container')).toHaveStyle({
+  expect(getByTestId('chip-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });

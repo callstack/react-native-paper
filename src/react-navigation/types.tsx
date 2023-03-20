@@ -106,6 +106,7 @@ export type MaterialBottomTabNavigationConfig = Partial<
     | 'navigationState'
     | 'onIndexChange'
     | 'onTabPress'
+    | 'onTabLongPress'
     | 'renderScene'
     | 'renderLabel'
     | 'renderIcon'
@@ -114,5 +115,6 @@ export type MaterialBottomTabNavigationConfig = Partial<
     | 'getColor'
     | 'getLabelText'
     | 'getTestID'
+    | 'getLazy'
   >
 >;

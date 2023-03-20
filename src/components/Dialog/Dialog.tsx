@@ -39,13 +39,17 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 const DIALOG_ELEVATION: number = 24;
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
- * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
+ * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](../../Portal) component.
  *
  *  <div class="screenshots">
  *   <img class="small" src="screenshots/dialog-1.png" />
@@ -95,6 +99,7 @@ const Dialog = ({
   visible = false,
   style,
   theme: themeOverrides,
+  testID,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { isV3, dark, mode, colors, roundness } = theme;
@@ -122,6 +127,7 @@ const Dialog = ({
         style,
       ]}
       theme={theme}
+      testID={testID}
     >
       {React.Children.toArray(children)
         .filter((child) => child != null && typeof child !== 'boolean')

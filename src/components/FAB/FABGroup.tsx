@@ -116,7 +116,7 @@ export type Props = {
 
 /**
  * A component to display a stack of FABs with related actions in a speed dial.
- * To render the group above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
+ * To render the group above other components, you'll need to wrap it with the [`Portal`](../Portal) component.
  *
  * <div class="screenshots">
  *   <img class="small" src="screenshots/fab-group.gif" />

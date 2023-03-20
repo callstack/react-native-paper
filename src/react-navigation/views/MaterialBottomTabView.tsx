@@ -2,15 +2,16 @@ import * as React from 'react';
 import { I18nManager, Platform, StyleSheet } from 'react-native';
 
 import {
+  CommonActions,
   Link,
   ParamListBase,
   Route,
   TabNavigationState,
-  useLinkBuilder,
 } from '@react-navigation/native';
 
 import BottomNavigation from '../../components/BottomNavigation/BottomNavigation';
 import MaterialCommunityIcon from '../../components/MaterialCommunityIcon';
+import { useNavigationLink } from '../adapter';
 import type {
   MaterialBottomTabDescriptorMap,
   MaterialBottomTabNavigationConfig,
@@ -23,15 +24,13 @@ type Props = MaterialBottomTabNavigationConfig & {
   descriptors: MaterialBottomTabDescriptorMap;
 };
 
-type Scene = { route: { key: string } };
-
 export default function MaterialBottomTabView({
   state,
   navigation,
   descriptors,
   ...rest
 }: Props) {
-  const buildLink = useLinkBuilder();
+  const buildLink = useNavigationLink();
 
   return (
     <BottomNavigation
@@ -92,7 +91,7 @@ export default function MaterialBottomTabView({
 
         return null;
       }}
-      getLabelText={({ route }: Scene) => {
+      getLabelText={({ route }) => {
         const { options } = descriptors[route.key];
 
         return options.tabBarLabel !== undefined
@@ -119,7 +118,10 @@ export default function MaterialBottomTabView({
         if (event.defaultPrevented) {
           preventDefault();
         } else {
-          navigation.navigate({ key: route.key, merge: true });
+          navigation.dispatch({
+            ...CommonActions.navigate(route.name, route.params),
+            target: state.key,
+          });
         }
       }}
     />

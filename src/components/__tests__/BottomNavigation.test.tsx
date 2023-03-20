@@ -79,6 +79,7 @@ const createState = (index: number, length: number) => ({
   routes: Array.from({ length }, (_, i) => ({
     key: `key-${i}`,
     focusedIcon: icons[i],
+    unfocusedIcon: undefined,
     title: `Route: ${i}`,
   })),
 });
@@ -188,6 +189,60 @@ it('calls onIndexChange', () => {
 
   fireEvent(tree.getByText('Route: 1'), 'onPress');
   expect(onIndexChange).toHaveBeenCalledTimes(1);
+});
+
+it('calls onTabPress', () => {
+  const onTabPress = jest.fn();
+  const onIndexChange = jest.fn();
+
+  const tree = render(
+    <BottomNavigation
+      shifting
+      onTabPress={onTabPress}
+      onIndexChange={onIndexChange}
+      navigationState={createState(0, 5)}
+      renderScene={({ route }) => route.title}
+    />
+  );
+  fireEvent(tree.getByText('Route: 1'), 'onPress');
+  expect(onTabPress).toHaveBeenCalled();
+  expect(onTabPress).toHaveBeenCalledTimes(1);
+  expect(onTabPress).toHaveBeenLastCalledWith(
+    expect.objectContaining({
+      route: expect.objectContaining({
+        key: 'key-1',
+      }),
+      defaultPrevented: expect.any(Boolean),
+      preventDefault: expect.any(Function),
+    })
+  );
+});
+
+it('calls onTabLongPress', () => {
+  const onTabLongPress = jest.fn();
+  const onIndexChange = jest.fn();
+
+  const tree = render(
+    <BottomNavigation
+      shifting
+      onIndexChange={onIndexChange}
+      onTabLongPress={onTabLongPress}
+      navigationState={createState(0, 5)}
+      renderScene={({ route }) => route.title}
+    />
+  );
+  fireEvent(tree.getByText('Route: 2'), 'onLongPress');
+  expect(onTabLongPress).toHaveBeenCalled();
+  expect(onTabLongPress).toHaveBeenCalledTimes(1);
+  expect(onTabLongPress).toHaveBeenLastCalledWith(
+    expect.objectContaining({
+      route: expect.objectContaining({
+        key: 'key-2',
+      }),
+      defaultPrevented: expect.any(Boolean),
+      preventDefault: expect.any(Function),
+    })
+  );
 });
 
 it('renders non-shifting bottom navigation', () => {
@@ -553,7 +608,7 @@ it('barStyle animated value changes correctly', () => {
       barStyle={[{ transform: [{ scale: value }] }]}
     />
   );
-  expect(getByTestId('bottom-navigation-bar')).toHaveStyle({
+  expect(getByTestId('bottom-navigation-bar-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -565,7 +620,40 @@ it('barStyle animated value changes correctly', () => {
 
   jest.advanceTimersByTime(200);
 
-  expect(getByTestId('bottom-navigation-bar')).toHaveStyle({
+  expect(getByTestId('bottom-navigation-bar-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
+});
+
+it("allows customizing Route's type via generics", () => {
+  type CustomRoute = {
+    key: string;
+    customPropertyName: string;
+  };
+
+  type CustomState = {
+    index: number;
+    routes: CustomRoute[];
+  };
+
+  const state: CustomState = {
+    index: 0,
+    routes: [
+      { key: 'a', customPropertyName: 'First' },
+      { key: 'b', customPropertyName: 'Second' },
+    ],
+  };
+
+  const tree = renderer
+    .create(
+      <BottomNavigation
+        navigationState={state}
+        onIndexChange={jest.fn()}
+        getLabelText={({ route }) => route.customPropertyName}
+        renderScene={({ route }) => route.customPropertyName}
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
 });
