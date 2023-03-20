@@ -196,6 +196,10 @@ export type Props = {
    */
   onTabPress?: (props: { route: Route } & TabPressEvent) => void;
   /**
+   * Function to execute on tab long press. It receives the route for the pressed tab, useful for things like custom action when longed pressed.
+   */
+  onTabLongPress?: (props: { route: Route } & TabPressEvent) => void;
+  /**
    * Custom color for icon and label in the active tab.
    */
   activeColor?: string;
@@ -335,6 +339,7 @@ const BottomNavigation = ({
   sceneAnimationType = 'opacity',
   sceneAnimationEasing,
   onTabPress,
+  onTabLongPress,
   onIndexChange,
   shifting: shiftingProp,
   safeAreaInsets,
@@ -580,6 +585,7 @@ const BottomNavigation = ({
         labeled={labeled}
         animationEasing={sceneAnimationEasing}
         onTabPress={handleTabPress}
+        onTabLongPress={onTabLongPress}
         shifting={shifting}
         safeAreaInsets={safeAreaInsets}
         labelMaxFontSizeMultiplier={labelMaxFontSizeMultiplier}
