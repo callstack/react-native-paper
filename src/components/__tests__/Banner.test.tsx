@@ -338,7 +338,7 @@ describe('animations', () => {
         Banner
       </Banner>
     );
-    expect(getByTestId('banner')).toHaveStyle({
+    expect(getByTestId('banner-outer-layer')).toHaveStyle({
       transform: [{ scale: 1 }],
     });
 
@@ -350,7 +350,7 @@ describe('animations', () => {
 
     jest.runAllTimers();
 
-    expect(getByTestId('banner')).toHaveStyle({
+    expect(getByTestId('banner-outer-layer')).toHaveStyle({
       transform: [{ scale: 1.5 }],
     });
   });

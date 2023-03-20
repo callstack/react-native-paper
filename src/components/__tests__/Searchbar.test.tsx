@@ -78,7 +78,7 @@ it('animated value changes correctly', () => {
       style={[{ transform: [{ scale: value }] }]}
     />
   );
-  expect(getByTestId('search-bar-container')).toHaveStyle({
+  expect(getByTestId('search-bar-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -90,7 +90,7 @@ it('animated value changes correctly', () => {
 
   jest.advanceTimersByTime(200);
 
-  expect(getByTestId('search-bar-container')).toHaveStyle({
+  expect(getByTestId('search-bar-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });

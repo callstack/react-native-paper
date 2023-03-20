@@ -349,7 +349,7 @@ it('action animated value changes correctly', () => {
       testID="icon-button"
     />
   );
-  expect(getByTestId('icon-button-container')).toHaveStyle({
+  expect(getByTestId('icon-button-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -361,7 +361,7 @@ it('action animated value changes correctly', () => {
 
   jest.advanceTimersByTime(200);
 
-  expect(getByTestId('icon-button-container')).toHaveStyle({
+  expect(getByTestId('icon-button-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });

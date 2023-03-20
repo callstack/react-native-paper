@@ -159,7 +159,6 @@ describe('FABActions - labelStyle - containerStyle', () => {
     expect(getByA11yHint('hint')).toHaveStyle({
       padding: 16,
       backgroundColor: '#687456',
-      marginLeft: 16,
     });
   });
 });
@@ -205,7 +204,7 @@ it('animated value changes correctly', () => {
       ]}
     />
   );
-  expect(getByTestId('my-fab-container')).toHaveStyle({
+  expect(getByTestId('my-fab-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -217,7 +216,7 @@ it('animated value changes correctly', () => {
 
   jest.advanceTimersByTime(200);
 
-  expect(getByTestId('my-fab-container')).toHaveStyle({
+  expect(getByTestId('my-fab-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });

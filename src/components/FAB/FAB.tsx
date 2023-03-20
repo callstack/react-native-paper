@@ -266,7 +266,6 @@ const FAB = forwardRef<View, Props>(
               },
             ],
           },
-          styles.container,
           !isV3 && styles.elevated,
           !isV3 && disabled && styles.disabled,
           style,
@@ -286,6 +285,7 @@ const FAB = forwardRef<View, Props>(
           accessibilityRole="button"
           accessibilityState={newAccessibilityState}
           testID={testID}
+          style={{ borderRadius }}
         >
           <View
             style={[styles.content, label ? extendedStyle : fabStyle]}
@@ -329,9 +329,6 @@ const FAB = forwardRef<View, Props>(
 const styles = StyleSheet.create({
   elevated: {
     elevation: 6,
-  },
-  container: {
-    overflow: 'hidden',
   },
   content: {
     flexDirection: 'row',

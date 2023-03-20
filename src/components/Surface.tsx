@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   Animated,
   Platform,
+  ShadowStyleIOS,
   StyleProp,
   StyleSheet,
   View,
@@ -13,6 +14,9 @@ import overlay, { isAnimatedValue } from '../styles/overlay';
 import shadow from '../styles/shadow';
 import type { ThemeProp, MD3Elevation } from '../types';
 import { forwardRef } from '../utils/forwardRef';
+import { splitStyles } from '../utils/splitStyles';
+
+type Elevation = 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -28,7 +32,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * Note: In version 2 the `elevation` prop was accepted via `style` prop i.e. `style={{ elevation: 4 }}`.
    * It's no longer supported with theme version 3 and you should use `elevation` property instead.
    */
-  elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+  elevation?: Elevation;
   /**
    * @optional
    */
@@ -63,6 +67,145 @@ const MD2Surface = forwardRef<View, Props>(
     );
   }
 );
+
+const shadowColor = '#000';
+const iOSShadowOutputRanges = [
+  {
+    shadowOpacity: 0.15,
+    height: [0, 1, 2, 4, 6, 8],
+    shadowRadius: [0, 3, 6, 8, 10, 12],
+  },
+  {
+    shadowOpacity: 0.3,
+    height: [0, 1, 1, 1, 2, 4],
+    shadowRadius: [0, 1, 2, 3, 3, 4],
+  },
+];
+const inputRange = [0, 1, 2, 3, 4, 5];
+function getStyleForShadowLayer(
+  elevation: Elevation,
+  layer: 0 | 1
+): Animated.WithAnimatedValue<ShadowStyleIOS> {
+  if (isAnimatedValue(elevation)) {
+    return {
+      shadowColor,
+      shadowOpacity: elevation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, iOSShadowOutputRanges[layer].shadowOpacity],
+        extrapolate: 'clamp',
+      }),
+      shadowOffset: {
+        width: 0,
+        height: elevation.interpolate({
+          inputRange,
+          outputRange: iOSShadowOutputRanges[layer].height,
+        }),
+      },
+      shadowRadius: elevation.interpolate({
+        inputRange,
+        outputRange: iOSShadowOutputRanges[layer].shadowRadius,
+      }),
+    };
+  }
+
+  return {
+    shadowColor,
+    shadowOpacity: elevation ? iOSShadowOutputRanges[layer].shadowOpacity : 0,
+    shadowOffset: {
+      width: 0,
+      height: iOSShadowOutputRanges[layer].height[elevation],
+    },
+    shadowRadius: iOSShadowOutputRanges[layer].shadowRadius[elevation],
+  };
+}
+
+const SurfaceIOS = forwardRef<
+  View,
+  Omit<Props, 'elevation'> & {
+    elevation: Elevation;
+    backgroundColor?: string | Animated.AnimatedInterpolation<string | number>;
+  }
+>(({ elevation, style, backgroundColor, testID, children, ...props }, ref) => {
+  const [outerLayerViewStyles, innerLayerViewStyles] = React.useMemo(() => {
+    const {
+      position,
+      alignSelf,
+      top,
+      left,
+      right,
+      bottom,
+      start,
+      end,
+      flex,
+      backgroundColor: backgroundColorStyle,
+      width,
+      height,
+      transform,
+      opacity,
+      ...restStyle
+    } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+
+    const [filteredStyles, marginStyles, borderRadiusStyles] = splitStyles(
+      restStyle,
+      (style) => style.startsWith('margin'),
+      (style) => style.startsWith('border') && style.endsWith('Radius')
+    );
+
+    if (
+      process.env.NODE_ENV !== 'production' &&
+      filteredStyles.overflow === 'hidden' &&
+      elevation !== 0
+    ) {
+      console.warn(
+        'When setting overflow to hidden on Surface the shadow will not be displayed correctly. Wrap the content of your component in a separate View with the overflow style.'
+      );
+    }
+
+    const bgColor = backgroundColorStyle || backgroundColor;
+
+    const outerLayerViewStyles = {
+      ...getStyleForShadowLayer(elevation, 0),
+      ...marginStyles,
+      ...borderRadiusStyles,
+      position,
+      alignSelf,
+      top,
+      right,
+      bottom,
+      left,
+      start,
+      end,
+      flex,
+      width,
+      height,
+      transform,
+      opacity,
+      backgroundColor: bgColor,
+    };
+
+    const innerLayerViewStyles = {
+      ...getStyleForShadowLayer(elevation, 1),
+      ...filteredStyles,
+      ...borderRadiusStyles,
+      flex: height ? 1 : undefined,
+      backgroundColor: bgColor,
+    };
+
+    return [outerLayerViewStyles, innerLayerViewStyles];
+  }, [style, elevation, backgroundColor]);
+
+  return (
+    <Animated.View
+      ref={ref}
+      style={outerLayerViewStyles}
+      testID={`${testID}-outer-layer`}
+    >
+      <Animated.View {...props} style={innerLayerViewStyles} testID={testID}>
+        {children}
+      </Animated.View>
+    </Animated.View>
+  );
+});
 
 /**
  * Surface is a basic container that can give depth to an element with elevation shadow.
@@ -204,122 +347,16 @@ const Surface = forwardRef<View, Props>(
       );
     }
 
-    const iOSShadowOutputRanges = [
-      {
-        shadowOpacity: 0.15,
-        height: [0, 1, 2, 4, 6, 8],
-        shadowRadius: [0, 3, 6, 8, 10, 12],
-      },
-      {
-        shadowOpacity: 0.3,
-        height: [0, 1, 1, 1, 2, 4],
-        shadowRadius: [0, 1, 2, 3, 3, 4],
-      },
-    ];
-
-    const shadowColor = '#000';
-
-    const {
-      position,
-      alignSelf,
-      top,
-      left,
-      right,
-      bottom,
-      start,
-      end,
-      flex,
-      ...restStyle
-    } = (StyleSheet.flatten(style) || {}) as ViewStyle;
-
-    const absoluteStyles = {
-      position,
-      alignSelf,
-      top,
-      right,
-      bottom,
-      left,
-      start,
-      end,
-    };
-
-    const sharedStyle = [{ backgroundColor, flex }, restStyle];
-
-    const innerLayerViewStyles = [{ flex }];
-
-    const outerLayerViewStyles = [absoluteStyles, innerLayerViewStyles];
-
-    if (isAnimatedValue(elevation)) {
-      const inputRange = [0, 1, 2, 3, 4, 5];
-
-      const getStyleForAnimatedShadowLayer = (layer: 0 | 1) => {
-        return {
-          shadowColor,
-          shadowOpacity: elevation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, iOSShadowOutputRanges[layer].shadowOpacity],
-            extrapolate: 'clamp',
-          }),
-          shadowOffset: {
-            width: 0,
-            height: elevation.interpolate({
-              inputRange,
-              outputRange: iOSShadowOutputRanges[layer].height,
-            }),
-          },
-          shadowRadius: elevation.interpolate({
-            inputRange,
-            outputRange: iOSShadowOutputRanges[layer].shadowRadius,
-          }),
-        };
-      };
-
-      return (
-        <Animated.View
-          style={[getStyleForAnimatedShadowLayer(0), outerLayerViewStyles]}
-          testID={`${testID}-outer-layer`}
-        >
-          <Animated.View
-            style={[getStyleForAnimatedShadowLayer(1), innerLayerViewStyles]}
-            testID={`${testID}-inner-layer`}
-          >
-            <Animated.View {...props} testID={testID} style={sharedStyle}>
-              {children}
-            </Animated.View>
-          </Animated.View>
-        </Animated.View>
-      );
-    }
-
-    const getStyleForShadowLayer = (layer: 0 | 1) => {
-      return {
-        shadowColor,
-        shadowOpacity: elevation
-          ? iOSShadowOutputRanges[layer].shadowOpacity
-          : 0,
-        shadowOffset: {
-          width: 0,
-          height: iOSShadowOutputRanges[layer].height[elevation],
-        },
-        shadowRadius: iOSShadowOutputRanges[layer].shadowRadius[elevation],
-      };
-    };
-
     return (
-      <Animated.View
-        ref={ref}
-        style={[getStyleForShadowLayer(0), outerLayerViewStyles]}
-        testID={`${testID}-outer-layer`}
+      <SurfaceIOS
+        {...props}
+        elevation={elevation}
+        backgroundColor={backgroundColor}
+        style={style}
+        testID={testID}
       >
-        <Animated.View
-          style={[getStyleForShadowLayer(1), innerLayerViewStyles]}
-          testID={`${testID}-inner-layer`}
-        >
-          <Animated.View {...props} testID={testID} style={sharedStyle}>
-            {children}
-          </Animated.View>
-        </Animated.View>
-      </Animated.View>
+        {children}
+      </SurfaceIOS>
     );
   }
 );

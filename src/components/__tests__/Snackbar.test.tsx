@@ -128,7 +128,7 @@ it('animated value changes correctly', () => {
       Snackbar content
     </Snackbar>
   );
-  expect(getByTestId('snack-bar')).toHaveStyle({
+  expect(getByTestId('snack-bar-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -140,7 +140,7 @@ it('animated value changes correctly', () => {
 
   jest.advanceTimersByTime(200);
 
-  expect(getByTestId('snack-bar')).toHaveStyle({
+  expect(getByTestId('snack-bar-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });

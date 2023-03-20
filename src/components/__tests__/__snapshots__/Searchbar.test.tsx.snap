@@ -6,10 +6,14 @@ exports[`activity indicator snapshot test 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgb(238, 232, 244)",
+      "borderRadius": 28,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -21,6 +25,8 @@ exports[`activity indicator snapshot test 1`] = `
       "shadowRadius": 0,
       "start": undefined,
       "top": undefined,
+      "transform": undefined,
+      "width": undefined,
     }
   }
   testID="search-bar-container-outer-layer"
@@ -29,7 +35,11 @@ exports[`activity indicator snapshot test 1`] = `
     collapsable={false}
     style={
       Object {
+        "alignItems": "center",
+        "backgroundColor": "rgb(238, 232, 244)",
+        "borderRadius": 28,
         "flex": undefined,
+        "flexDirection": "row",
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -39,32 +49,50 @@ exports[`activity indicator snapshot test 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="search-bar-container-inner-layer"
+    testID="search-bar-container"
   >
     <View
       collapsable={false}
       style={
         Object {
-          "alignItems": "center",
-          "backgroundColor": "rgb(238, 232, 244)",
-          "borderRadius": 28,
+          "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
+          "bottom": undefined,
+          "end": undefined,
           "flex": undefined,
-          "flexDirection": "row",
+          "height": 40,
+          "left": undefined,
+          "margin": 6,
+          "opacity": undefined,
+          "position": undefined,
+          "right": undefined,
+          "shadowColor": "#000",
+          "shadowOffset": Object {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+          "start": undefined,
+          "top": undefined,
+          "transform": undefined,
+          "width": 40,
         }
       }
-      testID="search-bar-container"
+      testID="icon-button-container-outer-layer"
     >
       <View
         collapsable={false}
         style={
           Object {
-            "alignSelf": undefined,
-            "bottom": undefined,
-            "end": undefined,
-            "flex": undefined,
-            "left": undefined,
-            "position": undefined,
-            "right": undefined,
+            "backgroundColor": "transparent",
+            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderRadius": 20,
+            "borderWidth": 0,
+            "elevation": 0,
+            "flex": 1,
+            "overflow": "hidden",
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -72,201 +100,178 @@ exports[`activity indicator snapshot test 1`] = `
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-            "start": undefined,
-            "top": undefined,
           }
         }
-        testID="icon-button-container-outer-layer"
+        testID="icon-button-container"
       >
         <View
-          collapsable={false}
-          style={
+          accessibilityComponentType="button"
+          accessibilityLabel="search"
+          accessibilityRole="button"
+          accessibilityState={
             Object {
-              "flex": undefined,
-              "shadowColor": "#000",
-              "shadowOffset": Object {
-                "height": 0,
-                "width": 0,
-              },
-              "shadowOpacity": 0,
-              "shadowRadius": 0,
+              "disabled": true,
             }
           }
-          testID="icon-button-container-inner-layer"
-        >
-          <View
-            collapsable={false}
-            style={
-              Object {
-                "backgroundColor": undefined,
-                "borderColor": "rgba(121, 116, 126, 1)",
-                "borderRadius": 20,
-                "borderWidth": 0,
-                "elevation": 0,
-                "flex": undefined,
-                "height": 40,
-                "margin": 6,
-                "overflow": "hidden",
-                "width": 40,
-              }
+          accessibilityTraits="button"
+          accessible={true}
+          centered={true}
+          collapsable={false}
+          focusable={true}
+          hitSlop={
+            Object {
+              "bottom": 6,
+              "left": 6,
+              "right": 6,
+              "top": 6,
             }
-            testID="icon-button-container"
-          >
-            <View
-              accessibilityComponentType="button"
-              accessibilityLabel="search"
-              accessibilityRole="button"
-              accessibilityState={
+          }
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "overflow": "hidden",
+              },
+              false,
+              Array [
                 Object {
-                  "disabled": true,
-                }
-              }
-              accessibilityTraits="button"
-              accessible={true}
-              centered={true}
-              collapsable={false}
-              focusable={true}
-              hitSlop={
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
                 Object {
-                  "bottom": 6,
-                  "left": 6,
-                  "right": 6,
-                  "top": 6,
-                }
-              }
-              onBlur={[Function]}
-              onClick={[Function]}
-              onFocus={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-              style={
+                  "borderRadius": 20,
+                },
+              ],
+            ]
+          }
+          testID="icon-button"
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "rgba(73, 69, 79, 1)",
+                  "fontSize": 24,
+                },
                 Array [
                   Object {
-                    "overflow": "hidden",
-                  },
-                  false,
-                  Array [
-                    Object {
-                      "alignItems": "center",
-                      "flexGrow": 1,
-                      "justifyContent": "center",
-                    },
-                    Object {
-                      "borderRadius": 20,
-                    },
-                  ],
-                ]
-              }
-              testID="icon-button"
-            >
-              <Text
-                accessibilityElementsHidden={true}
-                allowFontScaling={false}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
-                style={
-                  Array [
-                    Object {
-                      "color": "rgba(73, 69, 79, 1)",
-                      "fontSize": 24,
-                    },
-                    Array [
+                    "lineHeight": 24,
+                    "transform": Array [
                       Object {
-                        "lineHeight": 24,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      Object {
-                        "backgroundColor": "transparent",
+                        "scaleX": 1,
                       },
                     ],
-                    Object {
-                      "fontFamily": "Material Design Icons",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
-                    },
-                    Object {},
-                  ]
-                }
-              >
-                󰍉
-              </Text>
-            </View>
-          </View>
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
+              ]
+            }
+          >
+            󰍉
+          </Text>
         </View>
       </View>
-      <TextInput
-        accessibilityRole="search"
-        keyboardAppearance="light"
-        placeholder=""
-        placeholderTextColor="rgba(28, 27, 31, 1)"
-        returnKeyType="search"
-        selectionColor="rgba(103, 80, 164, 1)"
-        style={
-          Array [
-            Object {
-              "alignSelf": "stretch",
-              "flex": 1,
-              "fontSize": 18,
-              "minWidth": 0,
-              "paddingLeft": 8,
-              "textAlign": "left",
-            },
-            Object {
-              "color": "rgba(73, 69, 79, 1)",
-              "fontFamily": "System",
-              "fontSize": 16,
-              "fontWeight": "400",
-              "letterSpacing": 0.15,
-              "lineHeight": 0,
-            },
-            Object {
-              "minHeight": 56,
-              "paddingLeft": 0,
-            },
-            undefined,
-          ]
-        }
-        testID="search-bar"
-        underlineColorAndroid="transparent"
-        value=""
-      />
-      <View
-        accessibilityRole="progressbar"
-        accessibilityState={
+    </View>
+    <TextInput
+      accessibilityRole="search"
+      keyboardAppearance="light"
+      placeholder=""
+      placeholderTextColor="rgba(28, 27, 31, 1)"
+      returnKeyType="search"
+      selectionColor="rgba(103, 80, 164, 1)"
+      style={
+        Array [
           Object {
-            "busy": true,
+            "alignSelf": "stretch",
+            "flex": 1,
+            "fontSize": 18,
+            "minWidth": 0,
+            "paddingLeft": 8,
+            "textAlign": "left",
+          },
+          Object {
+            "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "400",
+            "letterSpacing": 0.15,
+            "lineHeight": 0,
+          },
+          Object {
+            "minHeight": 56,
+            "paddingLeft": 0,
+          },
+          undefined,
+        ]
+      }
+      testID="search-bar"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <View
+      accessibilityRole="progressbar"
+      accessibilityState={
+        Object {
+          "busy": true,
+        }
+      }
+      accessible={true}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "marginHorizontal": 16,
+          },
+        ]
+      }
+      testID="activity-indicator"
+    >
+      <View
+        collapsable={false}
+        style={
+          Object {
+            "height": 24,
+            "opacity": 1,
+            "width": 24,
           }
         }
-        accessible={true}
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-            },
-            Object {
-              "marginHorizontal": 16,
-            },
-          ]
-        }
-        testID="activity-indicator"
       >
         <View
           collapsable={false}
           style={
             Object {
-              "height": 24,
-              "opacity": 1,
-              "width": 24,
+              "alignItems": "center",
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
             }
           }
         >
@@ -274,13 +279,13 @@ exports[`activity indicator snapshot test 1`] = `
             collapsable={false}
             style={
               Object {
-                "alignItems": "center",
-                "bottom": 0,
-                "justifyContent": "center",
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
+                "height": 24,
+                "transform": Array [
+                  Object {
+                    "rotate": "45deg",
+                  },
+                ],
+                "width": 24,
               }
             }
           >
@@ -288,12 +293,8 @@ exports[`activity indicator snapshot test 1`] = `
               collapsable={false}
               style={
                 Object {
-                  "height": 24,
-                  "transform": Array [
-                    Object {
-                      "rotate": "45deg",
-                    },
-                  ],
+                  "height": 12,
+                  "overflow": "hidden",
                   "width": 24,
                 }
               }
@@ -302,8 +303,15 @@ exports[`activity indicator snapshot test 1`] = `
                 collapsable={false}
                 style={
                   Object {
-                    "height": 12,
-                    "overflow": "hidden",
+                    "height": 24,
+                    "transform": Array [
+                      Object {
+                        "translateY": 0,
+                      },
+                      Object {
+                        "rotate": "-165deg",
+                      },
+                    ],
                     "width": 24,
                   }
                 }
@@ -312,15 +320,8 @@ exports[`activity indicator snapshot test 1`] = `
                   collapsable={false}
                   style={
                     Object {
-                      "height": 24,
-                      "transform": Array [
-                        Object {
-                          "translateY": 0,
-                        },
-                        Object {
-                          "rotate": "-165deg",
-                        },
-                      ],
+                      "height": 12,
+                      "overflow": "hidden",
                       "width": 24,
                     }
                   }
@@ -329,40 +330,44 @@ exports[`activity indicator snapshot test 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "height": 12,
-                        "overflow": "hidden",
+                        "borderColor": "rgba(103, 80, 164, 1)",
+                        "borderRadius": 12,
+                        "borderWidth": 2.4,
+                        "height": 24,
                         "width": 24,
                       }
                     }
-                  >
-                    <View
-                      collapsable={false}
-                      style={
-                        Object {
-                          "borderColor": "rgba(103, 80, 164, 1)",
-                          "borderRadius": 12,
-                          "borderWidth": 2.4,
-                          "height": 24,
-                          "width": 24,
-                        }
-                      }
-                    />
-                  </View>
+                  />
                 </View>
               </View>
             </View>
           </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            Object {
+              "alignItems": "center",
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        >
           <View
             collapsable={false}
             style={
               Object {
-                "alignItems": "center",
-                "bottom": 0,
-                "justifyContent": "center",
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
+                "height": 24,
+                "transform": Array [
+                  Object {
+                    "rotate": "45deg",
+                  },
+                ],
+                "width": 24,
               }
             }
           >
@@ -370,12 +375,9 @@ exports[`activity indicator snapshot test 1`] = `
               collapsable={false}
               style={
                 Object {
-                  "height": 24,
-                  "transform": Array [
-                    Object {
-                      "rotate": "45deg",
-                    },
-                  ],
+                  "height": 12,
+                  "overflow": "hidden",
+                  "top": 12,
                   "width": 24,
                 }
               }
@@ -384,9 +386,15 @@ exports[`activity indicator snapshot test 1`] = `
                 collapsable={false}
                 style={
                   Object {
-                    "height": 12,
-                    "overflow": "hidden",
-                    "top": 12,
+                    "height": 24,
+                    "transform": Array [
+                      Object {
+                        "translateY": -12,
+                      },
+                      Object {
+                        "rotate": "345deg",
+                      },
+                    ],
                     "width": 24,
                   }
                 }
@@ -395,15 +403,8 @@ exports[`activity indicator snapshot test 1`] = `
                   collapsable={false}
                   style={
                     Object {
-                      "height": 24,
-                      "transform": Array [
-                        Object {
-                          "translateY": -12,
-                        },
-                        Object {
-                          "rotate": "345deg",
-                        },
-                      ],
+                      "height": 12,
+                      "overflow": "hidden",
                       "width": 24,
                     }
                   }
@@ -412,25 +413,14 @@ exports[`activity indicator snapshot test 1`] = `
                     collapsable={false}
                     style={
                       Object {
-                        "height": 12,
-                        "overflow": "hidden",
+                        "borderColor": "rgba(103, 80, 164, 1)",
+                        "borderRadius": 12,
+                        "borderWidth": 2.4,
+                        "height": 24,
                         "width": 24,
                       }
                     }
-                  >
-                    <View
-                      collapsable={false}
-                      style={
-                        Object {
-                          "borderColor": "rgba(103, 80, 164, 1)",
-                          "borderRadius": 12,
-                          "borderWidth": 2.4,
-                          "height": 24,
-                          "width": 24,
-                        }
-                      }
-                    />
-                  </View>
+                  />
                 </View>
               </View>
             </View>
@@ -448,10 +438,14 @@ exports[`renders with placeholder 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgb(238, 232, 244)",
+      "borderRadius": 28,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -463,6 +457,8 @@ exports[`renders with placeholder 1`] = `
       "shadowRadius": 0,
       "start": undefined,
       "top": undefined,
+      "transform": undefined,
+      "width": undefined,
     }
   }
   testID="search-bar-container-outer-layer"
@@ -471,7 +467,11 @@ exports[`renders with placeholder 1`] = `
     collapsable={false}
     style={
       Object {
+        "alignItems": "center",
+        "backgroundColor": "rgb(238, 232, 244)",
+        "borderRadius": 28,
         "flex": undefined,
+        "flexDirection": "row",
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -481,30 +481,215 @@ exports[`renders with placeholder 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="search-bar-container-inner-layer"
+    testID="search-bar-container"
   >
     <View
       collapsable={false}
       style={
         Object {
-          "alignItems": "center",
-          "backgroundColor": "rgb(238, 232, 244)",
-          "borderRadius": 28,
+          "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
+          "bottom": undefined,
+          "end": undefined,
           "flex": undefined,
-          "flexDirection": "row",
+          "height": 40,
+          "left": undefined,
+          "margin": 6,
+          "opacity": undefined,
+          "position": undefined,
+          "right": undefined,
+          "shadowColor": "#000",
+          "shadowOffset": Object {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+          "start": undefined,
+          "top": undefined,
+          "transform": undefined,
+          "width": 40,
         }
       }
-      testID="search-bar-container"
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        collapsable={false}
+        style={
+          Object {
+            "backgroundColor": "transparent",
+            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderRadius": 20,
+            "borderWidth": 0,
+            "elevation": 0,
+            "flex": 1,
+            "overflow": "hidden",
+            "shadowColor": "#000",
+            "shadowOffset": Object {
+              "height": 0,
+              "width": 0,
+            },
+            "shadowOpacity": 0,
+            "shadowRadius": 0,
+          }
+        }
+        testID="icon-button-container"
+      >
+        <View
+          accessibilityComponentType="button"
+          accessibilityLabel="search"
+          accessibilityRole="button"
+          accessibilityState={
+            Object {
+              "disabled": true,
+            }
+          }
+          accessibilityTraits="button"
+          accessible={true}
+          centered={true}
+          collapsable={false}
+          focusable={true}
+          hitSlop={
+            Object {
+              "bottom": 6,
+              "left": 6,
+              "right": 6,
+              "top": 6,
+            }
+          }
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "overflow": "hidden",
+              },
+              false,
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                Object {
+                  "borderRadius": 20,
+                },
+              ],
+            ]
+          }
+          testID="icon-button"
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "rgba(73, 69, 79, 1)",
+                  "fontSize": 24,
+                },
+                Array [
+                  Object {
+                    "lineHeight": 24,
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
+              ]
+            }
+          >
+            󰍉
+          </Text>
+        </View>
+      </View>
+    </View>
+    <TextInput
+      accessibilityRole="search"
+      keyboardAppearance="light"
+      placeholder="Search"
+      placeholderTextColor="rgba(28, 27, 31, 1)"
+      returnKeyType="search"
+      selectionColor="rgba(103, 80, 164, 1)"
+      style={
+        Array [
+          Object {
+            "alignSelf": "stretch",
+            "flex": 1,
+            "fontSize": 18,
+            "minWidth": 0,
+            "paddingLeft": 8,
+            "textAlign": "left",
+          },
+          Object {
+            "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "400",
+            "letterSpacing": 0.15,
+            "lineHeight": 0,
+          },
+          Object {
+            "minHeight": 56,
+            "paddingLeft": 0,
+          },
+          undefined,
+        ]
+      }
+      testID="search-bar"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <View
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "marginLeft": 16,
+            "position": "absolute",
+            "right": 0,
+          },
+          false,
+        ]
+      }
+      testID="search-bar-icon-wrapper"
     >
       <View
         collapsable={false}
         style={
           Object {
             "alignSelf": undefined,
+            "backgroundColor": "transparent",
+            "borderRadius": 20,
             "bottom": undefined,
             "end": undefined,
             "flex": undefined,
+            "height": 40,
             "left": undefined,
+            "margin": 6,
+            "opacity": undefined,
             "position": undefined,
             "right": undefined,
             "shadowColor": "#000",
@@ -516,6 +701,8 @@ exports[`renders with placeholder 1`] = `
             "shadowRadius": 0,
             "start": undefined,
             "top": undefined,
+            "transform": undefined,
+            "width": 40,
           }
         }
         testID="icon-button-container-outer-layer"
@@ -524,7 +711,13 @@ exports[`renders with placeholder 1`] = `
           collapsable={false}
           style={
             Object {
-              "flex": undefined,
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(121, 116, 126, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+              "elevation": 0,
+              "flex": 1,
+              "overflow": "hidden",
               "shadowColor": "#000",
               "shadowOffset": Object {
                 "height": 0,
@@ -534,314 +727,95 @@ exports[`renders with placeholder 1`] = `
               "shadowRadius": 0,
             }
           }
-          testID="icon-button-container-inner-layer"
+          testID="icon-button-container"
         >
           <View
-            collapsable={false}
-            style={
+            accessibilityComponentType="button"
+            accessibilityLabel="clear"
+            accessibilityRole="button"
+            accessibilityState={
               Object {
-                "backgroundColor": undefined,
-                "borderColor": "rgba(121, 116, 126, 1)",
-                "borderRadius": 20,
-                "borderWidth": 0,
-                "elevation": 0,
-                "flex": undefined,
-                "height": 40,
-                "margin": 6,
-                "overflow": "hidden",
-                "width": 40,
+                "disabled": false,
               }
             }
-            testID="icon-button-container"
+            accessibilityTraits="button"
+            accessible={true}
+            centered={true}
+            collapsable={false}
+            focusable={true}
+            hitSlop={
+              Object {
+                "bottom": 6,
+                "left": 6,
+                "right": 6,
+                "top": 6,
+              }
+            }
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Array [
+                Object {
+                  "overflow": "hidden",
+                },
+                false,
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                  Object {
+                    "borderRadius": 20,
+                  },
+                ],
+              ]
+            }
+            testID="icon-button"
           >
-            <View
-              accessibilityComponentType="button"
-              accessibilityLabel="search"
-              accessibilityRole="button"
-              accessibilityState={
-                Object {
-                  "disabled": true,
-                }
-              }
-              accessibilityTraits="button"
-              accessible={true}
-              centered={true}
-              collapsable={false}
-              focusable={true}
-              hitSlop={
-                Object {
-                  "bottom": 6,
-                  "left": 6,
-                  "right": 6,
-                  "top": 6,
-                }
-              }
-              onBlur={[Function]}
-              onClick={[Function]}
-              onFocus={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
+            <Text
+              accessibilityElementsHidden={true}
+              allowFontScaling={false}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
               style={
                 Array [
                   Object {
-                    "overflow": "hidden",
+                    "color": "rgba(255, 255, 255, 0)",
+                    "fontSize": 24,
                   },
-                  false,
                   Array [
                     Object {
-                      "alignItems": "center",
-                      "flexGrow": 1,
-                      "justifyContent": "center",
-                    },
-                    Object {
-                      "borderRadius": 20,
-                    },
-                  ],
-                ]
-              }
-              testID="icon-button"
-            >
-              <Text
-                accessibilityElementsHidden={true}
-                allowFontScaling={false}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
-                style={
-                  Array [
-                    Object {
-                      "color": "rgba(73, 69, 79, 1)",
-                      "fontSize": 24,
-                    },
-                    Array [
-                      Object {
-                        "lineHeight": 24,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      Object {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
-                    Object {
-                      "fontFamily": "Material Design Icons",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
-                    },
-                    Object {},
-                  ]
-                }
-              >
-                󰍉
-              </Text>
-            </View>
-          </View>
-        </View>
-      </View>
-      <TextInput
-        accessibilityRole="search"
-        keyboardAppearance="light"
-        placeholder="Search"
-        placeholderTextColor="rgba(28, 27, 31, 1)"
-        returnKeyType="search"
-        selectionColor="rgba(103, 80, 164, 1)"
-        style={
-          Array [
-            Object {
-              "alignSelf": "stretch",
-              "flex": 1,
-              "fontSize": 18,
-              "minWidth": 0,
-              "paddingLeft": 8,
-              "textAlign": "left",
-            },
-            Object {
-              "color": "rgba(73, 69, 79, 1)",
-              "fontFamily": "System",
-              "fontSize": 16,
-              "fontWeight": "400",
-              "letterSpacing": 0.15,
-              "lineHeight": 0,
-            },
-            Object {
-              "minHeight": 56,
-              "paddingLeft": 0,
-            },
-            undefined,
-          ]
-        }
-        testID="search-bar"
-        underlineColorAndroid="transparent"
-        value=""
-      />
-      <View
-        pointerEvents="none"
-        style={
-          Array [
-            Object {
-              "marginLeft": 16,
-              "position": "absolute",
-              "right": 0,
-            },
-            false,
-          ]
-        }
-        testID="search-bar-icon-wrapper"
-      >
-        <View
-          collapsable={false}
-          style={
-            Object {
-              "alignSelf": undefined,
-              "bottom": undefined,
-              "end": undefined,
-              "flex": undefined,
-              "left": undefined,
-              "position": undefined,
-              "right": undefined,
-              "shadowColor": "#000",
-              "shadowOffset": Object {
-                "height": 0,
-                "width": 0,
-              },
-              "shadowOpacity": 0,
-              "shadowRadius": 0,
-              "start": undefined,
-              "top": undefined,
-            }
-          }
-          testID="icon-button-container-outer-layer"
-        >
-          <View
-            collapsable={false}
-            style={
-              Object {
-                "flex": undefined,
-                "shadowColor": "#000",
-                "shadowOffset": Object {
-                  "height": 0,
-                  "width": 0,
-                },
-                "shadowOpacity": 0,
-                "shadowRadius": 0,
-              }
-            }
-            testID="icon-button-container-inner-layer"
-          >
-            <View
-              collapsable={false}
-              style={
-                Object {
-                  "backgroundColor": undefined,
-                  "borderColor": "rgba(121, 116, 126, 1)",
-                  "borderRadius": 20,
-                  "borderWidth": 0,
-                  "elevation": 0,
-                  "flex": undefined,
-                  "height": 40,
-                  "margin": 6,
-                  "overflow": "hidden",
-                  "width": 40,
-                }
-              }
-              testID="icon-button-container"
-            >
-              <View
-                accessibilityComponentType="button"
-                accessibilityLabel="clear"
-                accessibilityRole="button"
-                accessibilityState={
-                  Object {
-                    "disabled": false,
-                  }
-                }
-                accessibilityTraits="button"
-                accessible={true}
-                centered={true}
-                collapsable={false}
-                focusable={true}
-                hitSlop={
-                  Object {
-                    "bottom": 6,
-                    "left": 6,
-                    "right": 6,
-                    "top": 6,
-                  }
-                }
-                onBlur={[Function]}
-                onClick={[Function]}
-                onFocus={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
-                style={
-                  Array [
-                    Object {
-                      "overflow": "hidden",
-                    },
-                    false,
-                    Array [
-                      Object {
-                        "alignItems": "center",
-                        "flexGrow": 1,
-                        "justifyContent": "center",
-                      },
-                      Object {
-                        "borderRadius": 20,
-                      },
-                    ],
-                  ]
-                }
-                testID="icon-button"
-              >
-                <Text
-                  accessibilityElementsHidden={true}
-                  allowFontScaling={false}
-                  importantForAccessibility="no-hide-descendants"
-                  pointerEvents="none"
-                  selectable={false}
-                  style={
-                    Array [
-                      Object {
-                        "color": "rgba(255, 255, 255, 0)",
-                        "fontSize": 24,
-                      },
-                      Array [
+                      "lineHeight": 24,
+                      "transform": Array [
                         Object {
-                          "lineHeight": 24,
-                          "transform": Array [
-                            Object {
-                              "scaleX": 1,
-                            },
-                          ],
-                        },
-                        Object {
-                          "backgroundColor": "transparent",
+                          "scaleX": 1,
                         },
                       ],
-                      Object {
-                        "fontFamily": "Material Design Icons",
-                        "fontStyle": "normal",
-                        "fontWeight": "normal",
-                      },
-                      Object {},
-                    ]
-                  }
-                >
-                  󰅖
-                </Text>
-              </View>
-            </View>
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰅖
+            </Text>
           </View>
         </View>
       </View>
@@ -856,10 +830,14 @@ exports[`renders with text 1`] = `
   style={
     Object {
       "alignSelf": undefined,
+      "backgroundColor": "rgb(238, 232, 244)",
+      "borderRadius": 28,
       "bottom": undefined,
       "end": undefined,
       "flex": undefined,
+      "height": undefined,
       "left": undefined,
+      "opacity": undefined,
       "position": undefined,
       "right": undefined,
       "shadowColor": "#000",
@@ -871,6 +849,8 @@ exports[`renders with text 1`] = `
       "shadowRadius": 0,
       "start": undefined,
       "top": undefined,
+      "transform": undefined,
+      "width": undefined,
     }
   }
   testID="search-bar-container-outer-layer"
@@ -879,7 +859,11 @@ exports[`renders with text 1`] = `
     collapsable={false}
     style={
       Object {
+        "alignItems": "center",
+        "backgroundColor": "rgb(238, 232, 244)",
+        "borderRadius": 28,
         "flex": undefined,
+        "flexDirection": "row",
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 0,
@@ -889,30 +873,211 @@ exports[`renders with text 1`] = `
         "shadowRadius": 0,
       }
     }
-    testID="search-bar-container-inner-layer"
+    testID="search-bar-container"
   >
     <View
       collapsable={false}
       style={
         Object {
-          "alignItems": "center",
-          "backgroundColor": "rgb(238, 232, 244)",
-          "borderRadius": 28,
+          "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
+          "bottom": undefined,
+          "end": undefined,
           "flex": undefined,
-          "flexDirection": "row",
+          "height": 40,
+          "left": undefined,
+          "margin": 6,
+          "opacity": undefined,
+          "position": undefined,
+          "right": undefined,
+          "shadowColor": "#000",
+          "shadowOffset": Object {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0,
+          "shadowRadius": 0,
+          "start": undefined,
+          "top": undefined,
+          "transform": undefined,
+          "width": 40,
         }
       }
-      testID="search-bar-container"
+      testID="icon-button-container-outer-layer"
+    >
+      <View
+        collapsable={false}
+        style={
+          Object {
+            "backgroundColor": "transparent",
+            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderRadius": 20,
+            "borderWidth": 0,
+            "elevation": 0,
+            "flex": 1,
+            "overflow": "hidden",
+            "shadowColor": "#000",
+            "shadowOffset": Object {
+              "height": 0,
+              "width": 0,
+            },
+            "shadowOpacity": 0,
+            "shadowRadius": 0,
+          }
+        }
+        testID="icon-button-container"
+      >
+        <View
+          accessibilityComponentType="button"
+          accessibilityLabel="search"
+          accessibilityRole="button"
+          accessibilityState={
+            Object {
+              "disabled": true,
+            }
+          }
+          accessibilityTraits="button"
+          accessible={true}
+          centered={true}
+          collapsable={false}
+          focusable={true}
+          hitSlop={
+            Object {
+              "bottom": 6,
+              "left": 6,
+              "right": 6,
+              "top": 6,
+            }
+          }
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "overflow": "hidden",
+              },
+              false,
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                Object {
+                  "borderRadius": 20,
+                },
+              ],
+            ]
+          }
+          testID="icon-button"
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "rgba(73, 69, 79, 1)",
+                  "fontSize": 24,
+                },
+                Array [
+                  Object {
+                    "lineHeight": 24,
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
+              ]
+            }
+          >
+            󰍉
+          </Text>
+        </View>
+      </View>
+    </View>
+    <TextInput
+      accessibilityRole="search"
+      keyboardAppearance="light"
+      placeholder="Search"
+      placeholderTextColor="rgba(28, 27, 31, 1)"
+      returnKeyType="search"
+      selectionColor="rgba(103, 80, 164, 1)"
+      style={
+        Array [
+          Object {
+            "alignSelf": "stretch",
+            "flex": 1,
+            "fontSize": 18,
+            "minWidth": 0,
+            "paddingLeft": 8,
+            "textAlign": "left",
+          },
+          Object {
+            "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": "400",
+            "letterSpacing": 0.15,
+            "lineHeight": 0,
+          },
+          Object {
+            "minHeight": 56,
+            "paddingLeft": 0,
+          },
+          undefined,
+        ]
+      }
+      testID="search-bar"
+      underlineColorAndroid="transparent"
+      value="query"
+    />
+    <View
+      pointerEvents="auto"
+      style={
+        Array [
+          false,
+          false,
+        ]
+      }
+      testID="search-bar-icon-wrapper"
     >
       <View
         collapsable={false}
         style={
           Object {
             "alignSelf": undefined,
+            "backgroundColor": "transparent",
+            "borderRadius": 20,
             "bottom": undefined,
             "end": undefined,
             "flex": undefined,
+            "height": 40,
             "left": undefined,
+            "margin": 6,
+            "opacity": undefined,
             "position": undefined,
             "right": undefined,
             "shadowColor": "#000",
@@ -924,6 +1089,8 @@ exports[`renders with text 1`] = `
             "shadowRadius": 0,
             "start": undefined,
             "top": undefined,
+            "transform": undefined,
+            "width": 40,
           }
         }
         testID="icon-button-container-outer-layer"
@@ -932,7 +1099,13 @@ exports[`renders with text 1`] = `
           collapsable={false}
           style={
             Object {
-              "flex": undefined,
+              "backgroundColor": "transparent",
+              "borderColor": "rgba(121, 116, 126, 1)",
+              "borderRadius": 20,
+              "borderWidth": 0,
+              "elevation": 0,
+              "flex": 1,
+              "overflow": "hidden",
               "shadowColor": "#000",
               "shadowOffset": Object {
                 "height": 0,
@@ -942,310 +1115,95 @@ exports[`renders with text 1`] = `
               "shadowRadius": 0,
             }
           }
-          testID="icon-button-container-inner-layer"
+          testID="icon-button-container"
         >
           <View
-            collapsable={false}
-            style={
+            accessibilityComponentType="button"
+            accessibilityLabel="clear"
+            accessibilityRole="button"
+            accessibilityState={
               Object {
-                "backgroundColor": undefined,
-                "borderColor": "rgba(121, 116, 126, 1)",
-                "borderRadius": 20,
-                "borderWidth": 0,
-                "elevation": 0,
-                "flex": undefined,
-                "height": 40,
-                "margin": 6,
-                "overflow": "hidden",
-                "width": 40,
+                "disabled": false,
               }
             }
-            testID="icon-button-container"
+            accessibilityTraits="button"
+            accessible={true}
+            centered={true}
+            collapsable={false}
+            focusable={true}
+            hitSlop={
+              Object {
+                "bottom": 6,
+                "left": 6,
+                "right": 6,
+                "top": 6,
+              }
+            }
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Array [
+                Object {
+                  "overflow": "hidden",
+                },
+                false,
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                  Object {
+                    "borderRadius": 20,
+                  },
+                ],
+              ]
+            }
+            testID="icon-button"
           >
-            <View
-              accessibilityComponentType="button"
-              accessibilityLabel="search"
-              accessibilityRole="button"
-              accessibilityState={
-                Object {
-                  "disabled": true,
-                }
-              }
-              accessibilityTraits="button"
-              accessible={true}
-              centered={true}
-              collapsable={false}
-              focusable={true}
-              hitSlop={
-                Object {
-                  "bottom": 6,
-                  "left": 6,
-                  "right": 6,
-                  "top": 6,
-                }
-              }
-              onBlur={[Function]}
-              onClick={[Function]}
-              onFocus={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
+            <Text
+              accessibilityElementsHidden={true}
+              allowFontScaling={false}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
               style={
                 Array [
                   Object {
-                    "overflow": "hidden",
+                    "color": "rgba(73, 69, 79, 1)",
+                    "fontSize": 24,
                   },
-                  false,
                   Array [
                     Object {
-                      "alignItems": "center",
-                      "flexGrow": 1,
-                      "justifyContent": "center",
-                    },
-                    Object {
-                      "borderRadius": 20,
-                    },
-                  ],
-                ]
-              }
-              testID="icon-button"
-            >
-              <Text
-                accessibilityElementsHidden={true}
-                allowFontScaling={false}
-                importantForAccessibility="no-hide-descendants"
-                pointerEvents="none"
-                selectable={false}
-                style={
-                  Array [
-                    Object {
-                      "color": "rgba(73, 69, 79, 1)",
-                      "fontSize": 24,
-                    },
-                    Array [
-                      Object {
-                        "lineHeight": 24,
-                        "transform": Array [
-                          Object {
-                            "scaleX": 1,
-                          },
-                        ],
-                      },
-                      Object {
-                        "backgroundColor": "transparent",
-                      },
-                    ],
-                    Object {
-                      "fontFamily": "Material Design Icons",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
-                    },
-                    Object {},
-                  ]
-                }
-              >
-                󰍉
-              </Text>
-            </View>
-          </View>
-        </View>
-      </View>
-      <TextInput
-        accessibilityRole="search"
-        keyboardAppearance="light"
-        placeholder="Search"
-        placeholderTextColor="rgba(28, 27, 31, 1)"
-        returnKeyType="search"
-        selectionColor="rgba(103, 80, 164, 1)"
-        style={
-          Array [
-            Object {
-              "alignSelf": "stretch",
-              "flex": 1,
-              "fontSize": 18,
-              "minWidth": 0,
-              "paddingLeft": 8,
-              "textAlign": "left",
-            },
-            Object {
-              "color": "rgba(73, 69, 79, 1)",
-              "fontFamily": "System",
-              "fontSize": 16,
-              "fontWeight": "400",
-              "letterSpacing": 0.15,
-              "lineHeight": 0,
-            },
-            Object {
-              "minHeight": 56,
-              "paddingLeft": 0,
-            },
-            undefined,
-          ]
-        }
-        testID="search-bar"
-        underlineColorAndroid="transparent"
-        value="query"
-      />
-      <View
-        pointerEvents="auto"
-        style={
-          Array [
-            false,
-            false,
-          ]
-        }
-        testID="search-bar-icon-wrapper"
-      >
-        <View
-          collapsable={false}
-          style={
-            Object {
-              "alignSelf": undefined,
-              "bottom": undefined,
-              "end": undefined,
-              "flex": undefined,
-              "left": undefined,
-              "position": undefined,
-              "right": undefined,
-              "shadowColor": "#000",
-              "shadowOffset": Object {
-                "height": 0,
-                "width": 0,
-              },
-              "shadowOpacity": 0,
-              "shadowRadius": 0,
-              "start": undefined,
-              "top": undefined,
-            }
-          }
-          testID="icon-button-container-outer-layer"
-        >
-          <View
-            collapsable={false}
-            style={
-              Object {
-                "flex": undefined,
-                "shadowColor": "#000",
-                "shadowOffset": Object {
-                  "height": 0,
-                  "width": 0,
-                },
-                "shadowOpacity": 0,
-                "shadowRadius": 0,
-              }
-            }
-            testID="icon-button-container-inner-layer"
-          >
-            <View
-              collapsable={false}
-              style={
-                Object {
-                  "backgroundColor": undefined,
-                  "borderColor": "rgba(121, 116, 126, 1)",
-                  "borderRadius": 20,
-                  "borderWidth": 0,
-                  "elevation": 0,
-                  "flex": undefined,
-                  "height": 40,
-                  "margin": 6,
-                  "overflow": "hidden",
-                  "width": 40,
-                }
-              }
-              testID="icon-button-container"
-            >
-              <View
-                accessibilityComponentType="button"
-                accessibilityLabel="clear"
-                accessibilityRole="button"
-                accessibilityState={
-                  Object {
-                    "disabled": false,
-                  }
-                }
-                accessibilityTraits="button"
-                accessible={true}
-                centered={true}
-                collapsable={false}
-                focusable={true}
-                hitSlop={
-                  Object {
-                    "bottom": 6,
-                    "left": 6,
-                    "right": 6,
-                    "top": 6,
-                  }
-                }
-                onBlur={[Function]}
-                onClick={[Function]}
-                onFocus={[Function]}
-                onResponderGrant={[Function]}
-                onResponderMove={[Function]}
-                onResponderRelease={[Function]}
-                onResponderTerminate={[Function]}
-                onResponderTerminationRequest={[Function]}
-                onStartShouldSetResponder={[Function]}
-                style={
-                  Array [
-                    Object {
-                      "overflow": "hidden",
-                    },
-                    false,
-                    Array [
-                      Object {
-                        "alignItems": "center",
-                        "flexGrow": 1,
-                        "justifyContent": "center",
-                      },
-                      Object {
-                        "borderRadius": 20,
-                      },
-                    ],
-                  ]
-                }
-                testID="icon-button"
-              >
-                <Text
-                  accessibilityElementsHidden={true}
-                  allowFontScaling={false}
-                  importantForAccessibility="no-hide-descendants"
-                  pointerEvents="none"
-                  selectable={false}
-                  style={
-                    Array [
-                      Object {
-                        "color": "rgba(73, 69, 79, 1)",
-                        "fontSize": 24,
-                      },
-                      Array [
+                      "lineHeight": 24,
+                      "transform": Array [
                         Object {
-                          "lineHeight": 24,
-                          "transform": Array [
-                            Object {
-                              "scaleX": 1,
-                            },
-                          ],
-                        },
-                        Object {
-                          "backgroundColor": "transparent",
+                          "scaleX": 1,
                         },
                       ],
-                      Object {
-                        "fontFamily": "Material Design Icons",
-                        "fontStyle": "normal",
-                        "fontWeight": "normal",
-                      },
-                      Object {},
-                    ]
-                  }
-                >
-                  󰅖
-                </Text>
-              </View>
-            </View>
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰅖
+            </Text>
           </View>
         </View>
       </View>
