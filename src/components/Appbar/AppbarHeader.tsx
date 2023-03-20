@@ -153,6 +153,7 @@ const AppbarHeader = ({
           paddingTop: statusBarHeight ?? top,
           paddingHorizontal: Math.max(left, right),
         },
+        restStyle,
         shadow(elevation) as ViewStyle,
       ]}
     >
