@@ -488,4 +488,17 @@ describe('animated value changes correctly', () => {
       transform: [{ scale: 1.5 }],
     });
   });
+
+  it('header bottom border radius applied correctly', () => {
+    const style = { borderBottomLeftRadius: 16, borderBottomRightRadius: 16 };
+
+    const { getByTestId } = render(
+      <mockSafeAreaContext.SafeAreaProvider>
+        <Appbar.Header style={style} testID="appbar-header">
+          {null}
+        </Appbar.Header>
+      </mockSafeAreaContext.SafeAreaProvider>
+    );
+    expect(getByTestId('appbar-header-root-layer')).toHaveStyle(style);
+  });
 });

@@ -115,6 +115,7 @@ const AppbarHeader = ({
   mode = Platform.OS === 'ios' ? 'center-aligned' : 'small',
   elevated = false,
   theme: themeOverrides,
+  testID = 'appbar-header',
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -145,6 +146,7 @@ const AppbarHeader = ({
 
   return (
     <View
+      testID={`${testID}-root-layer`}
       style={[
         {
           backgroundColor,
@@ -158,6 +160,7 @@ const AppbarHeader = ({
       ]}
     >
       <Appbar
+        testID={testID}
         style={[{ height, backgroundColor }, styles.appbar, restStyle]}
         dark={dark}
         {...(isV3 && {
