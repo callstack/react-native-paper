@@ -1268,10 +1268,15 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
+          "height": 40,
           "left": undefined,
+          "margin": 0,
+          "opacity": undefined,
           "position": undefined,
           "right": undefined,
           "shadowColor": "#000",
@@ -1283,6 +1288,8 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
           "shadowRadius": 0,
           "start": undefined,
           "top": undefined,
+          "transform": undefined,
+          "width": 40,
         }
       }
       testID="right-icon-adornment-container-outer-layer"
@@ -1291,7 +1298,13 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
         collapsable={false}
         style={
           Object {
-            "flex": undefined,
+            "backgroundColor": "transparent",
+            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderRadius": 20,
+            "borderWidth": 0,
+            "elevation": 0,
+            "flex": 1,
+            "overflow": "hidden",
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -1301,113 +1314,94 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "shadowRadius": 0,
           }
         }
-        testID="right-icon-adornment-container-inner-layer"
+        testID="right-icon-adornment-container"
       >
         <View
-          collapsable={false}
-          style={
+          accessibilityComponentType="button"
+          accessibilityRole="button"
+          accessibilityState={
             Object {
-              "backgroundColor": undefined,
-              "borderColor": "rgba(121, 116, 126, 1)",
-              "borderRadius": 20,
-              "borderWidth": 0,
-              "elevation": 0,
-              "flex": undefined,
-              "height": 40,
-              "margin": 0,
-              "overflow": "hidden",
-              "width": 40,
+              "disabled": false,
             }
           }
-          testID="right-icon-adornment-container"
+          accessibilityTraits="button"
+          accessible={true}
+          centered={true}
+          collapsable={false}
+          focusable={true}
+          hitSlop={
+            Object {
+              "bottom": 6,
+              "left": 6,
+              "right": 6,
+              "top": 6,
+            }
+          }
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "overflow": "hidden",
+              },
+              false,
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                Object {
+                  "borderRadius": 20,
+                },
+              ],
+            ]
+          }
+          testID="right-icon-adornment"
         >
-          <View
-            accessibilityComponentType="button"
-            accessibilityRole="button"
-            accessibilityState={
-              Object {
-                "disabled": false,
-              }
-            }
-            accessibilityTraits="button"
-            accessible={true}
-            centered={true}
-            collapsable={false}
-            focusable={true}
-            hitSlop={
-              Object {
-                "bottom": 6,
-                "left": 6,
-                "right": 6,
-                "top": 6,
-              }
-            }
-            onBlur={[Function]}
-            onClick={[Function]}
-            onFocus={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
             style={
               Array [
                 Object {
-                  "overflow": "hidden",
+                  "color": "rgba(73, 69, 79, 1)",
+                  "fontSize": 24,
                 },
-                false,
                 Array [
                   Object {
-                    "alignItems": "center",
-                    "flexGrow": 1,
-                    "justifyContent": "center",
+                    "lineHeight": 24,
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
                   },
                   Object {
-                    "borderRadius": 20,
+                    "backgroundColor": "transparent",
                   },
                 ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
               ]
             }
-            testID="right-icon-adornment"
           >
-            <Text
-              accessibilityElementsHidden={true}
-              allowFontScaling={false}
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              selectable={false}
-              style={
-                Array [
-                  Object {
-                    "color": "rgba(73, 69, 79, 1)",
-                    "fontSize": 24,
-                  },
-                  Array [
-                    Object {
-                      "lineHeight": 24,
-                      "transform": Array [
-                        Object {
-                          "scaleX": 1,
-                        },
-                      ],
-                    },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
-                  ],
-                  Object {
-                    "fontFamily": "Material Design Icons",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  Object {},
-                ]
-              }
-            >
-              󰋑
-            </Text>
-          </View>
+            󰋑
+          </Text>
         </View>
       </View>
     </View>
@@ -1630,10 +1624,15 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       style={
         Object {
           "alignSelf": undefined,
+          "backgroundColor": "transparent",
+          "borderRadius": 20,
           "bottom": undefined,
           "end": undefined,
           "flex": undefined,
+          "height": 40,
           "left": undefined,
+          "margin": 0,
+          "opacity": undefined,
           "position": undefined,
           "right": undefined,
           "shadowColor": "#000",
@@ -1645,6 +1644,8 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           "shadowRadius": 0,
           "start": undefined,
           "top": undefined,
+          "transform": undefined,
+          "width": 40,
         }
       }
       testID="left-icon-adornment-container-outer-layer"
@@ -1653,7 +1654,13 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         collapsable={false}
         style={
           Object {
-            "flex": undefined,
+            "backgroundColor": "transparent",
+            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderRadius": 20,
+            "borderWidth": 0,
+            "elevation": 0,
+            "flex": 1,
+            "overflow": "hidden",
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -1663,113 +1670,94 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "shadowRadius": 0,
           }
         }
-        testID="left-icon-adornment-container-inner-layer"
+        testID="left-icon-adornment-container"
       >
         <View
-          collapsable={false}
-          style={
+          accessibilityComponentType="button"
+          accessibilityRole="button"
+          accessibilityState={
             Object {
-              "backgroundColor": undefined,
-              "borderColor": "rgba(121, 116, 126, 1)",
-              "borderRadius": 20,
-              "borderWidth": 0,
-              "elevation": 0,
-              "flex": undefined,
-              "height": 40,
-              "margin": 0,
-              "overflow": "hidden",
-              "width": 40,
+              "disabled": false,
             }
           }
-          testID="left-icon-adornment-container"
+          accessibilityTraits="button"
+          accessible={true}
+          centered={true}
+          collapsable={false}
+          focusable={true}
+          hitSlop={
+            Object {
+              "bottom": 6,
+              "left": 6,
+              "right": 6,
+              "top": 6,
+            }
+          }
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "overflow": "hidden",
+              },
+              false,
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                Object {
+                  "borderRadius": 20,
+                },
+              ],
+            ]
+          }
+          testID="left-icon-adornment"
         >
-          <View
-            accessibilityComponentType="button"
-            accessibilityRole="button"
-            accessibilityState={
-              Object {
-                "disabled": false,
-              }
-            }
-            accessibilityTraits="button"
-            accessible={true}
-            centered={true}
-            collapsable={false}
-            focusable={true}
-            hitSlop={
-              Object {
-                "bottom": 6,
-                "left": 6,
-                "right": 6,
-                "top": 6,
-              }
-            }
-            onBlur={[Function]}
-            onClick={[Function]}
-            onFocus={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
             style={
               Array [
                 Object {
-                  "overflow": "hidden",
+                  "color": "rgba(73, 69, 79, 1)",
+                  "fontSize": 24,
                 },
-                false,
                 Array [
                   Object {
-                    "alignItems": "center",
-                    "flexGrow": 1,
-                    "justifyContent": "center",
+                    "lineHeight": 24,
+                    "transform": Array [
+                      Object {
+                        "scaleX": 1,
+                      },
+                    ],
                   },
                   Object {
-                    "borderRadius": 20,
+                    "backgroundColor": "transparent",
                   },
                 ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
               ]
             }
-            testID="left-icon-adornment"
           >
-            <Text
-              accessibilityElementsHidden={true}
-              allowFontScaling={false}
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              selectable={false}
-              style={
-                Array [
-                  Object {
-                    "color": "rgba(73, 69, 79, 1)",
-                    "fontSize": 24,
-                  },
-                  Array [
-                    Object {
-                      "lineHeight": 24,
-                      "transform": Array [
-                        Object {
-                          "scaleX": 1,
-                        },
-                      ],
-                    },
-                    Object {
-                      "backgroundColor": "transparent",
-                    },
-                  ],
-                  Object {
-                    "fontFamily": "Material Design Icons",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  Object {},
-                ]
-              }
-            >
-              󰋑
-            </Text>
-          </View>
+            󰋑
+          </Text>
         </View>
       </View>
     </View>

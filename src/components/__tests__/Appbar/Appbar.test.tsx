@@ -384,7 +384,7 @@ describe('animated value changes correctly', () => {
         <Appbar.Action icon="menu" />
       </Appbar>
     );
-    expect(getByTestId('appbar')).toHaveStyle({
+    expect(getByTestId('appbar-outer-layer')).toHaveStyle({
       transform: [{ scale: 1 }],
     });
 
@@ -396,7 +396,7 @@ describe('animated value changes correctly', () => {
 
     jest.advanceTimersByTime(200);
 
-    expect(getByTestId('appbar')).toHaveStyle({
+    expect(getByTestId('appbar-outer-layer')).toHaveStyle({
       transform: [{ scale: 1.5 }],
     });
   });
@@ -412,7 +412,7 @@ describe('animated value changes correctly', () => {
         />
       </Appbar>
     );
-    expect(getByTestId('appbar-action-container')).toHaveStyle({
+    expect(getByTestId('appbar-action-container-outer-layer')).toHaveStyle({
       transform: [{ scale: 1 }],
     });
 
@@ -424,7 +424,7 @@ describe('animated value changes correctly', () => {
 
     jest.advanceTimersByTime(200);
 
-    expect(getByTestId('appbar-action-container')).toHaveStyle({
+    expect(getByTestId('appbar-action-container-outer-layer')).toHaveStyle({
       transform: [{ scale: 1.5 }],
     });
   });
@@ -439,9 +439,11 @@ describe('animated value changes correctly', () => {
         />
       </Appbar>
     );
-    expect(getByTestId('appbar-back-action-container')).toHaveStyle({
-      transform: [{ scale: 1 }],
-    });
+    expect(getByTestId('appbar-back-action-container-outer-layer')).toHaveStyle(
+      {
+        transform: [{ scale: 1 }],
+      }
+    );
 
     Animated.timing(value, {
       toValue: 1.5,
@@ -451,9 +453,11 @@ describe('animated value changes correctly', () => {
 
     jest.advanceTimersByTime(200);
 
-    expect(getByTestId('appbar-back-action-container')).toHaveStyle({
-      transform: [{ scale: 1.5 }],
-    });
+    expect(getByTestId('appbar-back-action-container-outer-layer')).toHaveStyle(
+      {
+        transform: [{ scale: 1.5 }],
+      }
+    );
   });
 
   it('header animated value changes correctly', () => {
@@ -468,7 +472,7 @@ describe('animated value changes correctly', () => {
         </Appbar.Header>
       </mockSafeAreaContext.SafeAreaProvider>
     );
-    expect(getByTestId('appbar-header')).toHaveStyle({
+    expect(getByTestId('appbar-header-outer-layer')).toHaveStyle({
       transform: [{ scale: 1 }],
     });
 
@@ -480,7 +484,7 @@ describe('animated value changes correctly', () => {
 
     jest.advanceTimersByTime(200);
 
-    expect(getByTestId('appbar-header')).toHaveStyle({
+    expect(getByTestId('appbar-header-outer-layer')).toHaveStyle({
       transform: [{ scale: 1.5 }],
     });
   });

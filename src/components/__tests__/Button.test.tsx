@@ -851,7 +851,7 @@ it('animated value changes correctly', () => {
       Compact button
     </Button>
   );
-  expect(getByTestId('button-container')).toHaveStyle({
+  expect(getByTestId('button-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -863,7 +863,7 @@ it('animated value changes correctly', () => {
 
   jest.advanceTimersByTime(200);
 
-  expect(getByTestId('button-container')).toHaveStyle({
+  expect(getByTestId('button-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });

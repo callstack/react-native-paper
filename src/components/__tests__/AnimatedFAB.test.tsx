@@ -79,7 +79,7 @@ it('animated value changes correctly', () => {
       style={[{ transform: [{ scale: value }] }]}
     />
   );
-  expect(getByTestId('animated-fab-container')).toHaveStyle({
+  expect(getByTestId('animated-fab-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -91,7 +91,7 @@ it('animated value changes correctly', () => {
 
   jest.advanceTimersByTime(200);
 
-  expect(getByTestId('animated-fab-container')).toHaveStyle({
+  expect(getByTestId('animated-fab-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });

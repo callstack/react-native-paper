@@ -6,7 +6,9 @@ import DynamicColorTheme from '@site/src/components/DynamicColorTheme.tsx'
 
 # Theming
 
-<b>Note:</b> To observe changes related to switching between light and dark mode in the app, ensure that the <i>"Override force-dark"</i> feature in the <i>"developer options"</i> settings on your Android device is <b>not overridden</b>.
+:::note
+To observe changes related to switching between light and dark mode in the app, ensure that the <i>"Override force-dark"</i> feature in the <i>"developer options"</i> settings on your Android device is <b>not overridden</b>.
+:::
 
 ## Applying a theme to the whole app
 
@@ -275,8 +277,10 @@ There are two supported ways of overriding the theme:
 1. <b>Simple built-in theme overrides</b> - when you only customize the values and the whole theme schema remains the same
 2. <b>Advanced theme overrides</b> - when you <i>add new properties</i> or <i>change the built-in schema shape</i>
 
-📍<b>Warning</b>: TypeScript support for withTheme is currently limited to <b>Material You (MD3)</b> theme only. 
+:::caution
+TypeScript support for `withTheme` is currently limited to <b>Material You (MD3)</b> theme only. 
 <i>We are planning to provide a better support of handling custom theme overrides in future releases.</i>
+:::
 
 ### Simple built-in theme overrides
 

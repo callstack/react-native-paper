@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import { MD3Elevation, Surface, Text } from 'react-native-paper';
+import { MD3Elevation, Surface, Text, MD3Colors } from 'react-native-paper';
 
 import { useExampleTheme } from '..';
 import { isWeb } from '../../utils';
@@ -31,6 +31,23 @@ const SurfaceExample = () => {
           </Text>
         </Surface>
       ))}
+
+      <View style={styles.horizontalSurfacesContainer}>
+        <Surface style={styles.horizontalSurface}>
+          <Text style={styles.centerText}>Left</Text>
+        </Surface>
+        <Surface style={styles.horizontalSurface}>
+          <Text style={styles.centerText}>Right</Text>
+        </Surface>
+      </View>
+      <View style={styles.verticalSurfacesContainer}>
+        <Surface style={styles.verticalSurface}>
+          <Text style={styles.centerText}>Top</Text>
+        </Surface>
+        <Surface style={styles.verticalSurface}>
+          <Text style={styles.centerText}>Bottom</Text>
+        </Surface>
+      </View>
     </ScreenWrapper>
   );
 };
@@ -60,6 +77,37 @@ const styles = StyleSheet.create({
     width: 200,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  horizontalSurfacesContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginBottom: 20,
+    borderColor: MD3Colors.tertiary50,
+    padding: 10,
+    borderWidth: 1,
+  },
+  horizontalSurface: {
+    width: '48%',
+  },
+
+  verticalSurfacesContainer: {
+    height: 400,
+    justifyContent: 'space-between',
+    width: '100%',
+    marginBottom: 100,
+    borderColor: MD3Colors.tertiary50,
+    padding: 10,
+    borderWidth: 1,
+  },
+  verticalSurface: {
+    height: '48%',
+    justifyContent: 'center',
+  },
+
+  centerText: {
+    textAlign: 'center',
   },
 });
 
