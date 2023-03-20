@@ -106,6 +106,7 @@ export type MaterialBottomTabNavigationConfig = Partial<
     | 'navigationState'
     | 'onIndexChange'
     | 'onTabPress'
+    | 'onTabLongPress'
     | 'renderScene'
     | 'renderLabel'
     | 'renderIcon'
