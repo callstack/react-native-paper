@@ -20,6 +20,7 @@ import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
 import Text from './Typography/Text';
+const {width} = Dimensions.get('window');
 
 export type Props = React.ComponentProps<typeof Surface> & {
   /**
@@ -362,7 +363,8 @@ const styles = StyleSheet.create({
   wrapper: {
     position: 'absolute',
     bottom: 0,
-    width: '100%',
+    width: width,
+    paddingHorizontal: 16,
   },
   container: {
     flexDirection: 'row',
