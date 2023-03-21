@@ -78,7 +78,6 @@ DataTableHeader.displayName = 'DataTable.Header';
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
-    height: 48,
     paddingHorizontal: 16,
     borderBottomWidth: StyleSheet.hairlineWidth * 2,
   },
