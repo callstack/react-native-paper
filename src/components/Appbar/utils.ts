@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Animated } from 'react-native';
 
 import overlay from '../../styles/overlay';
 import { black, white } from '../../styles/themes/v2/colors';
@@ -37,6 +37,44 @@ export const getAppbarColor = (
   }
 
   return colors.surface;
+};
+
+export const getAppbarBorders = (
+  style:
+    | Animated.Value
+    | Animated.AnimatedInterpolation<string | number>
+    | Animated.WithAnimatedObject<ViewStyle>
+) => {
+  const {
+    borderRadius,
+    borderTopLeftRadius,
+    borderTopRightRadius,
+    borderBottomRightRadius,
+    borderBottomLeftRadius,
+  } = (style || {}) as Exclude<typeof style, number> & {
+    borderRadius?: number;
+    borderTopLeftRadius?: number;
+    borderTopRightRadius?: number;
+    borderBottomRightRadius?: number;
+    borderBottomLeftRadius?: number;
+  };
+
+  const properties = {
+    borderRadius,
+    borderTopLeftRadius,
+    borderTopRightRadius,
+    borderBottomRightRadius,
+    borderBottomLeftRadius,
+  };
+
+  const borders = Object.entries(properties)
+    .filter(([_, value]) => value)
+    .reduce<Record<string, typeof borderRadius>>((acc, [key, value]) => {
+      acc[key] = value;
+      return acc;
+    }, {});
+
+  return borders;
 };
 
 type RenderAppbarContentProps = {
