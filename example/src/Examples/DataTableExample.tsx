@@ -83,7 +83,9 @@ const DataTableExample = () => {
             >
               Dessert
             </DataTable.Title>
-            <DataTable.Title numeric>Calories</DataTable.Title>
+            <DataTable.Title numberOfLines={2} numeric>
+              Calories per piece
+            </DataTable.Title>
             <DataTable.Title numeric>Fat (g)</DataTable.Title>
           </DataTable.Header>
 
