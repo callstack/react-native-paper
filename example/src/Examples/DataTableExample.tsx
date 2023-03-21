@@ -60,9 +60,9 @@ const DataTableExample = () => {
   const sortedItems = items
     .slice()
     .sort((item1, item2) =>
-      (sortAscending ? item1.name < item2.name : item2.name < item1.name)
-        ? 1
-        : -1
+      sortAscending
+        ? item1.name.localeCompare(item2.name)
+        : item2.name.localeCompare(item1.name)
     );
   const from = page * itemsPerPage;
   const to = Math.min((page + 1) * itemsPerPage, items.length);
