@@ -1,15 +1,10 @@
 import * as React from 'react';
-import {
-  I18nManager,
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import color from 'color';
 import type { ThemeProp } from 'src/types';
 
+import { useLocaleDirection } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import Button from '../Button/Button';
 import IconButton from '../IconButton/IconButton';
@@ -93,6 +88,7 @@ const PaginationControls = ({
   theme: themeOverrides,
 }: PaginationControlsProps) => {
   const theme = useInternalTheme(themeOverrides);
+  const direction = useLocaleDirection();
 
   const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
 
@@ -105,7 +101,7 @@ const PaginationControls = ({
               name="page-first"
               color={color}
               size={size}
-              direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+              direction={direction}
             />
           )}
           iconColor={textColor}
@@ -121,7 +117,7 @@ const PaginationControls = ({
             name="chevron-left"
             color={color}
             size={size}
-            direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+            direction={direction}
           />
         )}
         iconColor={textColor}
@@ -136,7 +132,7 @@ const PaginationControls = ({
             name="chevron-right"
             color={color}
             size={size}
-            direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+            direction={direction}
           />
         )}
         iconColor={textColor}
@@ -152,7 +148,7 @@ const PaginationControls = ({
               name="page-last"
               color={color}
               size={size}
-              direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+              direction={direction}
             />
           )}
           iconColor={textColor}
@@ -358,7 +354,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 16,
+    paddingStart: 16,
     flexWrap: 'wrap',
   },
   optionsContainer: {
@@ -368,11 +364,11 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 12,
-    marginRight: 16,
+    marginEnd: 16,
   },
   button: {
     textAlign: 'center',
-    marginRight: 16,
+    marginEnd: 16,
   },
   iconsContainer: {
     flexDirection: 'row',

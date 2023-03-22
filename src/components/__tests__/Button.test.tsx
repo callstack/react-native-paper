@@ -173,8 +173,8 @@ describe('button icon styles', () => {
       </Button>
     );
     expect(getByTestId('compact-button-icon-container')).toHaveStyle({
-      marginLeft: 6,
-      marginRight: 0,
+      marginStart: 6,
+      marginEnd: 0,
     });
   });
 
@@ -187,8 +187,8 @@ describe('button icon styles', () => {
           </Button>
         );
         expect(getByTestId('compact-button-icon-container')).toHaveStyle({
-          marginLeft: 8,
-          marginRight: 0,
+          marginStart: 8,
+          marginEnd: 0,
         });
       })
   );
@@ -200,8 +200,8 @@ describe('button icon styles', () => {
       </Button>
     );
     expect(getByTestId('compact-button-icon-container')).toHaveStyle({
-      marginLeft: 12,
-      marginRight: -8,
+      marginStart: 12,
+      marginEnd: -8,
     });
   });
 
@@ -214,8 +214,8 @@ describe('button icon styles', () => {
           </Button>
         );
         expect(getByTestId('compact-button-icon-container')).toHaveStyle({
-          marginLeft: 16,
-          marginRight: -16,
+          marginStart: 16,
+          marginEnd: -16,
         });
       })
   );

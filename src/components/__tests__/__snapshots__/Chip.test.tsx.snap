@@ -98,14 +98,14 @@ exports[`renders chip with close button 1`] = `
               "alignItems": "center",
               "flexDirection": "row",
               "flexGrow": 1,
-              "paddingLeft": 4,
+              "paddingStart": 4,
               "position": "relative",
             },
             Object {
-              "paddingLeft": 0,
+              "paddingStart": 0,
             },
             Object {
-              "paddingRight": 34,
+              "paddingEnd": 34,
             },
           ]
         }
@@ -118,8 +118,8 @@ exports[`renders chip with close button 1`] = `
                 "padding": 4,
               },
               Object {
-                "paddingLeft": 8,
-                "paddingRight": 0,
+                "paddingEnd": 0,
+                "paddingStart": 8,
               },
               null,
             ]
@@ -195,8 +195,8 @@ exports[`renders chip with close button 1`] = `
                   "lineHeight": 20,
                 },
                 Object {
-                  "marginLeft": 8,
-                  "marginRight": 0,
+                  "marginEnd": 0,
+                  "marginStart": 8,
                 },
                 undefined,
               ],
@@ -211,10 +211,10 @@ exports[`renders chip with close button 1`] = `
       style={
         Object {
           "alignItems": "center",
+          "end": 0,
           "height": "100%",
           "justifyContent": "center",
           "position": "absolute",
-          "right": 0,
         }
       }
     >
@@ -237,10 +237,10 @@ exports[`renders chip with close button 1`] = `
               "padding": 4,
             },
             Object {
-              "marginRight": 4,
+              "marginEnd": 4,
             },
             Object {
-              "marginRight": 8,
+              "marginEnd": 8,
               "padding": 0,
             },
           ]
@@ -386,14 +386,14 @@ exports[`renders chip with custom close button 1`] = `
               "alignItems": "center",
               "flexDirection": "row",
               "flexGrow": 1,
-              "paddingLeft": 4,
+              "paddingStart": 4,
               "position": "relative",
             },
             Object {
-              "paddingLeft": 0,
+              "paddingStart": 0,
             },
             Object {
-              "paddingRight": 34,
+              "paddingEnd": 34,
             },
           ]
         }
@@ -406,8 +406,8 @@ exports[`renders chip with custom close button 1`] = `
                 "padding": 4,
               },
               Object {
-                "paddingLeft": 8,
-                "paddingRight": 0,
+                "paddingEnd": 0,
+                "paddingStart": 8,
               },
               null,
             ]
@@ -483,8 +483,8 @@ exports[`renders chip with custom close button 1`] = `
                   "lineHeight": 20,
                 },
                 Object {
-                  "marginLeft": 8,
-                  "marginRight": 0,
+                  "marginEnd": 0,
+                  "marginStart": 8,
                 },
                 undefined,
               ],
@@ -499,10 +499,10 @@ exports[`renders chip with custom close button 1`] = `
       style={
         Object {
           "alignItems": "center",
+          "end": 0,
           "height": "100%",
           "justifyContent": "center",
           "position": "absolute",
-          "right": 0,
         }
       }
     >
@@ -525,10 +525,10 @@ exports[`renders chip with custom close button 1`] = `
               "padding": 4,
             },
             Object {
-              "marginRight": 4,
+              "marginEnd": 4,
             },
             Object {
-              "marginRight": 8,
+              "marginEnd": 8,
               "padding": 0,
             },
           ]
@@ -674,14 +674,14 @@ exports[`renders chip with icon 1`] = `
               "alignItems": "center",
               "flexDirection": "row",
               "flexGrow": 1,
-              "paddingLeft": 4,
+              "paddingStart": 4,
               "position": "relative",
             },
             Object {
-              "paddingLeft": 0,
+              "paddingStart": 0,
             },
             Object {
-              "paddingRight": 0,
+              "paddingEnd": 0,
             },
           ]
         }
@@ -694,8 +694,8 @@ exports[`renders chip with icon 1`] = `
                 "padding": 4,
               },
               Object {
-                "paddingLeft": 8,
-                "paddingRight": 0,
+                "paddingEnd": 0,
+                "paddingStart": 8,
               },
               null,
             ]
@@ -771,8 +771,8 @@ exports[`renders chip with icon 1`] = `
                   "lineHeight": 20,
                 },
                 Object {
-                  "marginLeft": 8,
-                  "marginRight": 16,
+                  "marginEnd": 16,
+                  "marginStart": 8,
                 },
                 undefined,
               ],
@@ -885,14 +885,14 @@ exports[`renders chip with onPress 1`] = `
               "alignItems": "center",
               "flexDirection": "row",
               "flexGrow": 1,
-              "paddingLeft": 4,
+              "paddingStart": 4,
               "position": "relative",
             },
             Object {
-              "paddingLeft": 0,
+              "paddingStart": 0,
             },
             Object {
-              "paddingRight": 0,
+              "paddingEnd": 0,
             },
           ]
         }
@@ -930,8 +930,8 @@ exports[`renders chip with onPress 1`] = `
                   "lineHeight": 20,
                 },
                 Object {
-                  "marginLeft": 16,
-                  "marginRight": 16,
+                  "marginEnd": 16,
+                  "marginStart": 16,
                 },
                 undefined,
               ],
@@ -1044,14 +1044,14 @@ exports[`renders outlined disabled chip 1`] = `
               "alignItems": "center",
               "flexDirection": "row",
               "flexGrow": 1,
-              "paddingLeft": 4,
+              "paddingStart": 4,
               "position": "relative",
             },
             Object {
-              "paddingLeft": 0,
+              "paddingStart": 0,
             },
             Object {
-              "paddingRight": 0,
+              "paddingEnd": 0,
             },
           ]
         }
@@ -1089,8 +1089,8 @@ exports[`renders outlined disabled chip 1`] = `
                   "lineHeight": 20,
                 },
                 Object {
-                  "marginLeft": 16,
-                  "marginRight": 16,
+                  "marginEnd": 16,
+                  "marginStart": 16,
                 },
                 undefined,
               ],
@@ -1203,14 +1203,14 @@ exports[`renders selected chip 1`] = `
               "alignItems": "center",
               "flexDirection": "row",
               "flexGrow": 1,
-              "paddingLeft": 4,
+              "paddingStart": 4,
               "position": "relative",
             },
             Object {
-              "paddingLeft": 0,
+              "paddingStart": 0,
             },
             Object {
-              "paddingRight": 0,
+              "paddingEnd": 0,
             },
           ]
         }
@@ -1223,8 +1223,8 @@ exports[`renders selected chip 1`] = `
                 "padding": 4,
               },
               Object {
-                "paddingLeft": 8,
-                "paddingRight": 0,
+                "paddingEnd": 0,
+                "paddingStart": 8,
               },
               null,
             ]
@@ -1300,8 +1300,8 @@ exports[`renders selected chip 1`] = `
                   "lineHeight": 20,
                 },
                 Object {
-                  "marginLeft": 8,
-                  "marginRight": 16,
+                  "marginEnd": 16,
+                  "marginStart": 8,
                 },
                 undefined,
               ],

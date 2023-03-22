@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   score: {
-    marginRight: 16,
+    marginEnd: 16,
   },
   fab: {
     position: 'absolute',
@@ -282,10 +282,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   chipsContent: {
-    paddingLeft: 8,
+    paddingStart: 8,
     paddingVertical: 8,
   },
   chip: {
-    marginRight: 8,
+    marginEnd: 8,
   },
 });

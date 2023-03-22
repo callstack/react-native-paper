@@ -3,13 +3,18 @@ import {
   AccessibilityInfo,
   Appearance,
   ColorSchemeName,
+  I18nManager,
   NativeEventSubscription,
+  Platform,
+  StyleSheet,
+  View,
 } from 'react-native';
 
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
 import type { ThemeProp } from '../types';
 import { addEventListener } from '../utils/addEventListener';
+import { Direction, LocalizationProvider } from './Localization';
 import SafeAreaProviderCompat from './SafeAreaProviderCompat';
 import { Provider as SettingsProvider, Settings } from './settings';
 import { defaultThemesByVersion, ThemeProvider } from './theming';
@@ -18,6 +23,7 @@ export type Props = {
   children: React.ReactNode;
   theme?: ThemeProp;
   settings?: Settings;
+  direction?: Direction;
 };
 
 const Provider = (props: Props) => {
@@ -76,6 +82,12 @@ const Provider = (props: Props) => {
     };
   }, [props.theme, isOnlyVersionInTheme]);
 
+  React.useEffect(() => {
+    if (props.direction && Platform.OS !== 'web') {
+      I18nManager.forceRTL(props.direction === 'rtl');
+    }
+  }, [props.direction]);
+
   const getTheme = () => {
     const themeVersion = props.theme?.version || 3;
     const scheme = colorScheme || 'light';
@@ -97,18 +109,36 @@ const Provider = (props: Props) => {
     };
   };
 
-  const { children, settings } = props;
+  const {
+    children,
+    settings,
+    direction = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr',
+  } = props;
 
   return (
     <SafeAreaProviderCompat>
       <PortalHost>
-        <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>
-          {/* @ts-expect-error check @callstack/react-theme-provider's children prop */}
-          <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
-        </SettingsProvider>
+        <LocalizationProvider value={direction}>
+          <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>
+            {/* @ts-expect-error check @callstack/react-theme-provider's children prop */}
+            <ThemeProvider theme={getTheme()}>
+              {
+                <View style={styles.container} {...{ dir: direction }}>
+                  {children}
+                </View>
+              }
+            </ThemeProvider>
+          </SettingsProvider>
+        </LocalizationProvider>
       </PortalHost>
     </SafeAreaProviderCompat>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default Provider;

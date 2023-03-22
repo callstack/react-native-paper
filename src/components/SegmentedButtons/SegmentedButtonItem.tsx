@@ -146,7 +146,7 @@ const SegmentedButtonItem = ({
 
   const iconSize = isV3 ? 18 : 16;
   const iconStyle = {
-    marginRight: label ? 5 : showCheckedIcon ? 3 : 0,
+    marginEnd: label ? 5 : showCheckedIcon ? 3 : 0,
     ...(label && {
       transform: [
         {

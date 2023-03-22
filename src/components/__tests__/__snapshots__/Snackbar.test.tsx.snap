@@ -206,7 +206,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
                   "color": "#ffffff",
                   "flexShrink": 1,
                   "flexWrap": "wrap",
-                  "marginLeft": 10,
+                  "marginStart": 10,
                 }
               }
             >
@@ -338,7 +338,7 @@ exports[`renders snackbar with action button 1`] = `
               "minHeight": 48,
             },
             Object {
-              "marginLeft": -12,
+              "marginStart": -12,
             },
           ]
         }
@@ -355,8 +355,8 @@ exports[`renders snackbar with action button 1`] = `
               "flex": undefined,
               "height": undefined,
               "left": undefined,
-              "marginLeft": 4,
-              "marginRight": 8,
+              "marginEnd": 8,
+              "marginStart": 4,
               "opacity": undefined,
               "position": undefined,
               "right": undefined,

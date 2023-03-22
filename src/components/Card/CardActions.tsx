@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   button: {
-    marginLeft: 8,
+    marginStart: 8,
   },
 });
 

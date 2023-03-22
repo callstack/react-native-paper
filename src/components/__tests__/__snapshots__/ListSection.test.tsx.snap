@@ -240,7 +240,7 @@ exports[`renders list section with custom title style 1`] = `
         false,
         Array [
           Object {
-            "paddingRight": 24,
+            "paddingEnd": 24,
             "paddingVertical": 8,
           },
           undefined,
@@ -266,8 +266,8 @@ exports[`renders list section with custom title style 1`] = `
             },
             Object {
               "alignSelf": "center",
-              "marginLeft": 16,
-              "marginRight": 0,
+              "marginEnd": 0,
+              "marginStart": 16,
               "marginVertical": 0,
             },
           ]
@@ -314,7 +314,7 @@ exports[`renders list section with custom title style 1`] = `
         style={
           Array [
             Object {
-              "paddingLeft": 16,
+              "paddingStart": 16,
             },
             Object {
               "flex": 1,
@@ -381,7 +381,7 @@ exports[`renders list section with custom title style 1`] = `
         false,
         Array [
           Object {
-            "paddingRight": 24,
+            "paddingEnd": 24,
             "paddingVertical": 8,
           },
           undefined,
@@ -407,8 +407,8 @@ exports[`renders list section with custom title style 1`] = `
             },
             Object {
               "alignSelf": "center",
-              "marginLeft": 16,
-              "marginRight": 0,
+              "marginEnd": 0,
+              "marginStart": 16,
               "marginVertical": 0,
             },
           ]
@@ -455,7 +455,7 @@ exports[`renders list section with custom title style 1`] = `
         style={
           Array [
             Object {
-              "paddingLeft": 16,
+              "paddingStart": 16,
             },
             Object {
               "flex": 1,
@@ -739,7 +739,7 @@ exports[`renders list section with subheader 1`] = `
         false,
         Array [
           Object {
-            "paddingRight": 24,
+            "paddingEnd": 24,
             "paddingVertical": 8,
           },
           undefined,
@@ -765,8 +765,8 @@ exports[`renders list section with subheader 1`] = `
             },
             Object {
               "alignSelf": "center",
-              "marginLeft": 16,
-              "marginRight": 0,
+              "marginEnd": 0,
+              "marginStart": 16,
               "marginVertical": 0,
             },
           ]
@@ -813,7 +813,7 @@ exports[`renders list section with subheader 1`] = `
         style={
           Array [
             Object {
-              "paddingLeft": 16,
+              "paddingStart": 16,
             },
             Object {
               "flex": 1,
@@ -880,7 +880,7 @@ exports[`renders list section with subheader 1`] = `
         false,
         Array [
           Object {
-            "paddingRight": 24,
+            "paddingEnd": 24,
             "paddingVertical": 8,
           },
           undefined,
@@ -906,8 +906,8 @@ exports[`renders list section with subheader 1`] = `
             },
             Object {
               "alignSelf": "center",
-              "marginLeft": 16,
-              "marginRight": 0,
+              "marginEnd": 0,
+              "marginStart": 16,
               "marginVertical": 0,
             },
           ]
@@ -954,7 +954,7 @@ exports[`renders list section with subheader 1`] = `
         style={
           Array [
             Object {
-              "paddingLeft": 16,
+              "paddingStart": 16,
             },
             Object {
               "flex": 1,
@@ -1200,7 +1200,7 @@ exports[`renders list section without subheader 1`] = `
         false,
         Array [
           Object {
-            "paddingRight": 24,
+            "paddingEnd": 24,
             "paddingVertical": 8,
           },
           undefined,
@@ -1226,8 +1226,8 @@ exports[`renders list section without subheader 1`] = `
             },
             Object {
               "alignSelf": "center",
-              "marginLeft": 16,
-              "marginRight": 0,
+              "marginEnd": 0,
+              "marginStart": 16,
               "marginVertical": 0,
             },
           ]
@@ -1274,7 +1274,7 @@ exports[`renders list section without subheader 1`] = `
         style={
           Array [
             Object {
-              "paddingLeft": 16,
+              "paddingStart": 16,
             },
             Object {
               "flex": 1,
@@ -1341,7 +1341,7 @@ exports[`renders list section without subheader 1`] = `
         false,
         Array [
           Object {
-            "paddingRight": 24,
+            "paddingEnd": 24,
             "paddingVertical": 8,
           },
           undefined,
@@ -1367,8 +1367,8 @@ exports[`renders list section without subheader 1`] = `
             },
             Object {
               "alignSelf": "center",
-              "marginLeft": 16,
-              "marginRight": 0,
+              "marginEnd": 0,
+              "marginStart": 16,
               "marginVertical": 0,
             },
           ]
@@ -1415,7 +1415,7 @@ exports[`renders list section without subheader 1`] = `
         style={
           Array [
             Object {
-              "paddingLeft": 16,
+              "paddingStart": 16,
             },
             Object {
               "flex": 1,

@@ -6,7 +6,6 @@ import {
   Easing,
   EmitterSubscription,
   findNodeHandle,
-  I18nManager,
   Keyboard,
   KeyboardEvent as RNKeyboardEvent,
   LayoutRectangle,
@@ -22,6 +21,7 @@ import {
 } from 'react-native';
 
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
+import { Direction, withLocaleDirection } from '../../core/Localization';
 import { withInternalTheme } from '../../core/theming';
 import type { $Omit, InternalTheme } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
@@ -79,6 +79,10 @@ export type Props = {
    * testID to be used on tests.
    */
   testID?: string;
+  /**
+   * Indicates the text direction
+   */
+  direction: Direction;
 };
 
 type Layout = $Omit<$Omit<LayoutRectangle, 'x'>, 'y'>;
@@ -155,9 +159,6 @@ const WINDOW_LAYOUT = Dimensions.get('window');
  * wrapping is not necessary if you use Paper's `Modal` instead.
  */
 class Menu extends React.Component<Props, State> {
-  // @component ./MenuItem.tsx
-  static Item = MenuItem;
-
   static defaultProps = {
     statusBarHeight: APPROX_STATUSBAR_HEIGHT,
     overlayAccessibilityLabel: 'Close menu',
@@ -418,6 +419,7 @@ class Menu extends React.Component<Props, State> {
       overlayAccessibilityLabel,
       keyboardShouldPersistTaps,
       testID,
+      direction,
     } = this.props;
 
     const {
@@ -457,7 +459,14 @@ class Menu extends React.Component<Props, State> {
     ];
 
     // We need to translate menu while animating scale to imitate transform origin for scale animation
-    const positionTransforms = [];
+    const positionTransforms: (
+      | {
+          translateX: Animated.AnimatedInterpolation<string | number>;
+        }
+      | {
+          translateY: Animated.AnimatedInterpolation<string | number>;
+        }
+    )[] = [];
 
     // Check if menu fits horizontally and if not align it to right.
     if (left <= windowLayout.width - menuLayout.width - SCREEN_INDENT) {
@@ -598,10 +607,10 @@ class Menu extends React.Component<Props, State> {
       ...(scrollableMenuHeight ? { height: scrollableMenuHeight } : {}),
     };
 
-    const positionStyle = {
+    const positionStyle = (isRTL: boolean) => ({
       top: this.isCoordinate(anchor) ? top : top + additionalVerticalValue,
-      ...(I18nManager.getConstants().isRTL ? { right: left } : { left }),
-    };
+      ...(isRTL ? { right: left } : { left }),
+    });
 
     return (
       <View
@@ -626,7 +635,11 @@ class Menu extends React.Component<Props, State> {
               }}
               collapsable={false}
               accessibilityViewIsModal={visible}
-              style={[styles.wrapper, positionStyle, style]}
+              style={[
+                styles.wrapper,
+                positionStyle(direction === 'rtl'),
+                style,
+              ]}
               pointerEvents={visible ? 'box-none' : 'none'}
               onAccessibilityEscape={onDismiss}
               testID={`${testID}-view`}
@@ -672,4 +685,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(Menu);
+export default Object.assign(withInternalTheme(withLocaleDirection(Menu)), {
+  // @component ./MenuItem.tsx
+  Item: MenuItem,
+});

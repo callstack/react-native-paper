@@ -80,8 +80,8 @@ describe('DialogActions', () => {
       paddingBottom: 24,
       paddingHorizontal: 24,
     });
-    expect(dialogActionButtons[0]).toHaveStyle({ marginRight: 8 });
-    expect(dialogActionButtons[1]).toHaveStyle({ marginRight: 0 });
+    expect(dialogActionButtons[0]).toHaveStyle({ marginEnd: 8 });
+    expect(dialogActionButtons[1]).toHaveStyle({ marginEnd: 0 });
   });
 
   it('should apply custom styles', () => {

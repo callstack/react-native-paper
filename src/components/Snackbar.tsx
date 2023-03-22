@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Animated,
   Easing,
-  I18nManager,
   StyleProp,
   StyleSheet,
   View,
@@ -12,6 +11,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useLatestCallback from 'use-latest-callback';
 
+import { useLocaleDirection } from '../core/Localization';
 import { useInternalTheme } from '../core/theming';
 import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
 import Button from './Button/Button';
@@ -146,6 +146,7 @@ const Snackbar = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const direction = useLocaleDirection();
   const { bottom, right, left } = useSafeAreaInsets();
 
   const { current: opacity } = React.useRef<Animated.Value>(
@@ -232,7 +233,7 @@ const Snackbar = ({
 
   const isIconButton = isV3 && onIconPress;
 
-  const marginLeft = action ? -12 : -16;
+  const marginStart = action ? -12 : -16;
 
   const wrapperPaddings = {
     paddingBottom: bottom,
@@ -293,7 +294,7 @@ const Snackbar = ({
       >
         {renderChildrenWithWrapper()}
         {(action || isIconButton) && (
-          <View style={[styles.actionsContainer, { marginLeft }]}>
+          <View style={[styles.actionsContainer, { marginStart }]}>
             {action ? (
               <Button
                 onPress={(event) => {
@@ -325,9 +326,7 @@ const Snackbar = ({
                         name="close"
                         color={color}
                         size={size}
-                        direction={
-                          I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'
-                        }
+                        direction={direction}
                       />
                     );
                   })
@@ -383,8 +382,8 @@ const styles = StyleSheet.create({
     minHeight: 48,
   },
   button: {
-    marginRight: 8,
-    marginLeft: 4,
+    marginEnd: 8,
+    marginStart: 4,
   },
   elevation: {
     elevation: 6,

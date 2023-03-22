@@ -194,12 +194,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingLeft: 16,
+    paddingStart: 16,
   },
 
   left: {
     justifyContent: 'center',
-    marginRight: 16,
+    marginEnd: 16,
     height: LEFT_SIZE,
     width: LEFT_SIZE,
   },
@@ -212,13 +212,13 @@ const styles = StyleSheet.create({
 
   title: {
     minHeight: 30,
-    paddingRight: 16,
+    paddingEnd: 16,
   },
 
   subtitle: {
     minHeight: 20,
     marginVertical: 0,
-    paddingRight: 16,
+    paddingEnd: 16,
   },
 });
 

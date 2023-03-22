@@ -238,10 +238,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   md3LeadingIcon: {
-    marginLeft: 12,
+    marginStart: 12,
   },
   md3WithoutLeadingIcon: {
-    marginLeft: 4,
+    marginStart: 4,
   },
 });
 

@@ -147,11 +147,9 @@ export default function PaperExample() {
         // ignore error
       }
 
-      if (I18nManager.getConstants().isRTL !== rtl) {
+      if (!isWeb && I18nManager.getConstants().isRTL !== rtl) {
         I18nManager.forceRTL(rtl);
-        if (!isWeb) {
-          Updates.reloadAsync();
-        }
+        Updates.reloadAsync();
       }
     };
 
@@ -215,7 +213,10 @@ export default function PaperExample() {
   };
 
   return (
-    <PaperProvider theme={customFontLoaded ? configuredFontTheme : theme}>
+    <PaperProvider
+      theme={customFontLoaded ? configuredFontTheme : theme}
+      direction={rtl ? 'rtl' : 'ltr'}
+    >
       <PreferencesContext.Provider value={preferences}>
         <React.Fragment>
           <NavigationContainer

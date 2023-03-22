@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  I18nManager,
   LayoutChangeEvent,
   Platform,
   StyleProp,
@@ -12,6 +11,7 @@ import {
 
 import setColor from 'color';
 
+import { useLocaleDirection } from '../core/Localization';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 
@@ -47,7 +47,6 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
 
 const INDETERMINATE_DURATION = 2000;
 const INDETERMINATE_MAX_WIDTH = 0.6;
-const { isRTL } = I18nManager;
 
 /**
  * Progress bar is an indicator used to present progress of some activity in the app.
@@ -78,6 +77,7 @@ const ProgressBar = ({
   animatedValue,
   ...rest
 }: Props) => {
+  const direction = useLocaleDirection();
   const theme = useInternalTheme(themeOverrides);
   const { current: timer } = React.useRef<Animated.Value>(
     new Animated.Value(0)
@@ -220,17 +220,20 @@ const ProgressBar = ({
                         ? {
                             inputRange: [0, 0.5, 1],
                             outputRange: [
-                              (isRTL ? 1 : -1) * 0.5 * width,
-                              (isRTL ? 1 : -1) *
+                              (direction === 'rtl' ? 1 : -1) * 0.5 * width,
+                              (direction === 'rtl' ? 1 : -1) *
                                 0.5 *
                                 INDETERMINATE_MAX_WIDTH *
                                 width,
-                              (isRTL ? -1 : 1) * 0.7 * width,
+                              (direction === 'rtl' ? -1 : 1) * 0.7 * width,
                             ],
                           }
                         : {
                             inputRange: [0, 1],
-                            outputRange: [(isRTL ? 1 : -1) * 0.5 * width, 0],
+                            outputRange: [
+                              (direction === 'rtl' ? 1 : -1) * 0.5 * width,
+                              0,
+                            ],
                           }
                     ),
                   },

@@ -70,8 +70,8 @@ export type LabelProps = {
   fontWeight: TextStyle['fontWeight'];
   font: any;
   topPosition: number;
-  paddingLeft?: number;
-  paddingRight?: number;
+  paddingStart?: number;
+  paddingEnd?: number;
   labelTranslationXOffset?: number;
   placeholderColor: string | null;
   backgroundColor?: ColorValue;

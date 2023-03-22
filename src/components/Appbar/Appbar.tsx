@@ -249,8 +249,8 @@ const Appbar = ({
   const insets = {
     paddingBottom: safeAreaInsets?.bottom,
     paddingTop: safeAreaInsets?.top,
-    paddingLeft: safeAreaInsets?.left,
-    paddingRight: safeAreaInsets?.right,
+    paddingStart: safeAreaInsets?.left,
+    paddingEnd: safeAreaInsets?.right,
   };
 
   return (
