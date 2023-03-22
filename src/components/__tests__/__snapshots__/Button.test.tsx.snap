@@ -853,16 +853,16 @@ exports[`renders button with icon 1`] = `
           style={
             Array [
               Object {
-                "marginLeft": 12,
-                "marginRight": -4,
+                "marginEnd": -4,
+                "marginStart": 12,
               },
               Object {
-                "marginLeft": 16,
-                "marginRight": -16,
+                "marginEnd": -16,
+                "marginStart": 16,
               },
               Object {
-                "marginLeft": 12,
-                "marginRight": -8,
+                "marginEnd": -8,
+                "marginStart": 12,
               },
             ]
           }
@@ -1061,16 +1061,16 @@ exports[`renders button with icon in reverse order 1`] = `
           style={
             Array [
               Object {
-                "marginLeft": -4,
-                "marginRight": 12,
+                "marginEnd": 12,
+                "marginStart": -4,
               },
               Object {
-                "marginLeft": -16,
-                "marginRight": 16,
+                "marginEnd": 16,
+                "marginStart": -16,
               },
               Object {
-                "marginLeft": -8,
-                "marginRight": 12,
+                "marginEnd": 12,
+                "marginStart": -8,
               },
             ]
           }
@@ -1580,16 +1580,16 @@ exports[`renders loading button 1`] = `
               },
               Array [
                 Object {
-                  "marginLeft": 12,
-                  "marginRight": -4,
+                  "marginEnd": -4,
+                  "marginStart": 12,
                 },
                 Object {
-                  "marginLeft": 16,
-                  "marginRight": -16,
+                  "marginEnd": -16,
+                  "marginStart": 16,
                 },
                 Object {
-                  "marginLeft": 12,
-                  "marginRight": -8,
+                  "marginEnd": -8,
+                  "marginStart": 12,
                 },
               ],
             ]

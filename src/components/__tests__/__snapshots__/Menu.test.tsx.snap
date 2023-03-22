@@ -352,7 +352,7 @@ Array [
                         "minWidth": 100,
                       },
                       Object {
-                        "marginLeft": 4,
+                        "marginStart": 4,
                       },
                       undefined,
                     ]
@@ -459,7 +459,7 @@ Array [
                         "minWidth": 100,
                       },
                       Object {
-                        "marginLeft": 4,
+                        "marginStart": 4,
                       },
                       undefined,
                     ]
@@ -1027,7 +1027,7 @@ Array [
                         "minWidth": 100,
                       },
                       Object {
-                        "marginLeft": 4,
+                        "marginStart": 4,
                       },
                       undefined,
                     ]
@@ -1134,7 +1134,7 @@ Array [
                         "minWidth": 100,
                       },
                       Object {
-                        "marginLeft": 4,
+                        "marginStart": 4,
                       },
                       undefined,
                     ]

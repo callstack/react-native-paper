@@ -7,7 +7,7 @@ describe('splitStyles', () => {
     backgroundColor: 'red',
     marginTop: 1,
     marginBottom: 2,
-    marginLeft: 3,
+    marginStart: 3,
     padding: 4,
     borderTopLeftRadius: 5,
     borderTopRightRadius: 6,

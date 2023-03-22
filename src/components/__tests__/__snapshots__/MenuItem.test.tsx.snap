@@ -110,7 +110,7 @@ Array [
               "minWidth": 100,
             },
             Object {
-              "marginLeft": 12,
+              "marginStart": 12,
             },
             undefined,
           ]
@@ -265,7 +265,7 @@ Array [
               "minWidth": 100,
             },
             Object {
-              "marginLeft": 12,
+              "marginStart": 12,
             },
             undefined,
           ]
@@ -420,7 +420,7 @@ Array [
               "minWidth": 100,
             },
             Object {
-              "marginLeft": 12,
+              "marginStart": 12,
             },
             undefined,
           ]
@@ -575,7 +575,7 @@ Array [
               "minWidth": 100,
             },
             Object {
-              "marginLeft": 12,
+              "marginStart": 12,
             },
             undefined,
           ]
@@ -682,7 +682,7 @@ Array [
               "minWidth": 100,
             },
             Object {
-              "marginLeft": 4,
+              "marginStart": 4,
             },
             undefined,
           ]

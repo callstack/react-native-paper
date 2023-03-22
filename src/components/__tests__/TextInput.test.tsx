@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import { StyleSheet, Text, Platform, I18nManager } from 'react-native';
+import { StyleSheet, Text, Platform } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
@@ -27,7 +27,7 @@ const style = StyleSheet.create({
     lineHeight: 22,
   },
   contentStyle: {
-    paddingLeft: 20,
+    paddingStart: 20,
   },
 });
 
@@ -181,7 +181,7 @@ it('correctly applies a component as the text label', () => {
   expect(toJSON()).toMatchSnapshot();
 });
 
-it('correctly applies paddingLeft from contentStyleProp', () => {
+it('correctly applies paddingStart from contentStyleProp', () => {
   const { toJSON } = render(
     <TextInput
       label="With padding"
@@ -232,55 +232,6 @@ it('renders input placeholder initially with an empty space character', () => {
   );
 
   expect(getByTestId('text-input').props.placeholder).toBe(' ');
-});
-
-it('correctly applies padding offset to input label on Android when RTL', () => {
-  Platform.OS = 'android';
-  I18nManager.isRTL = true;
-
-  const { getByTestId } = render(
-    <TextInput
-      label="Flat input"
-      mode="flat"
-      testID="text-input-flat"
-      left={
-        <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
-      }
-      right={
-        <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
-      }
-    />
-  );
-
-  expect(getByTestId('text-input-flat-label-active')).toHaveStyle({
-    paddingLeft: 56,
-    paddingRight: 16,
-  });
-
-  I18nManager.isRTL = false;
-});
-
-it('correctly applies padding offset to input label on Android when LTR', () => {
-  Platform.OS = 'android';
-
-  const { getByTestId } = render(
-    <TextInput
-      label="Flat input"
-      mode="flat"
-      testID="text-input-flat"
-      left={
-        <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
-      }
-      right={
-        <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
-      }
-    />
-  );
-
-  expect(getByTestId('text-input-flat-label-active')).toHaveStyle({
-    paddingLeft: 16,
-    paddingRight: 56,
-  });
 });
 
 it('calls onLayout on right-side affix adornment', () => {

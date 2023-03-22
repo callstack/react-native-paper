@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Animated,
   GestureResponderEvent,
-  I18nManager,
   Platform,
   StyleProp,
   StyleSheet,
@@ -15,6 +14,7 @@ import {
 
 import color from 'color';
 
+import { useLocaleDirection } from '../core/Localization';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 import { forwardRef } from '../utils/forwardRef';
@@ -26,7 +26,7 @@ import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
 
 interface Style {
-  marginRight: number;
+  marginEnd: number;
 }
 
 export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
@@ -202,6 +202,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
+    const direction = useLocaleDirection();
     const root = React.useRef<TextInput>(null);
 
     React.useImperativeHandle(ref, () => {
@@ -295,7 +296,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
                 name="magnify"
                 color={color}
                 size={size}
-                direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                direction={direction}
               />
             ))
           }
@@ -305,7 +306,9 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
         <TextInput
           style={[
             styles.input,
+            // eslint-disable-next-line react-native/no-inline-styles
             {
+              textAlign: direction === 'rtl' ? 'right' : 'left',
               color: textColor,
               ...font,
               ...Platform.select({ web: { outline: 'none' } }),
@@ -356,7 +359,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
                     name={isV3 ? 'close' : 'close-circle-outline'}
                     color={color}
                     size={size}
-                    direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                    direction={direction}
                   />
                 ))
               }
@@ -403,17 +406,16 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 18,
-    paddingLeft: 8,
+    paddingStart: 8,
     alignSelf: 'stretch',
-    textAlign: I18nManager.getConstants().isRTL ? 'right' : 'left',
     minWidth: 0,
   },
   barModeInput: {
-    paddingLeft: 0,
+    paddingStart: 0,
     minHeight: 56,
   },
   viewModeInput: {
-    paddingLeft: 0,
+    paddingStart: 0,
     minHeight: 72,
   },
   elevation: {
@@ -426,12 +428,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   rightStyle: {
-    marginRight: 16,
+    marginEnd: 16,
   },
   v3ClearIcon: {
     position: 'absolute',
     right: 0,
-    marginLeft: 16,
+    marginStart: 16,
   },
   v3ClearIconHidden: {
     display: 'none',

@@ -3,7 +3,6 @@ import {
   View,
   TextInput as NativeTextInput,
   StyleSheet,
-  I18nManager,
   Platform,
   TextStyle,
   ColorValue,
@@ -11,6 +10,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { useLocaleDirection } from '../../core/Localization';
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
 import TextInputAdornment, {
   getAdornmentConfig,
@@ -73,6 +73,8 @@ const TextInputOutlined = ({
   contentStyle,
   ...rest
 }: ChildTextInputProps) => {
+  const direction = useLocaleDirection();
+
   const adornmentConfig = getAdornmentConfig({ left, right });
 
   const { colors, isV3, roundness } = theme;
@@ -117,7 +119,7 @@ const TextInputOutlined = ({
   const labelHalfHeight = labelHeight / 2;
 
   const baseLabelTranslateX =
-    (I18nManager.getConstants().isRTL ? 1 : -1) *
+    (direction === 'rtl' ? -1 : 1) *
     (labelHalfWidth -
       (labelScale * labelWidth) / 2 -
       (fontSize - MINIMIZED_LABEL_FONT_SIZE) * labelScale);
@@ -129,7 +131,7 @@ const TextInputOutlined = ({
   );
   if (isAdornmentLeftIcon) {
     labelTranslationXOffset =
-      (I18nManager.getConstants().isRTL ? -1 : 1) *
+      (direction === 'rtl' ? -1 : 1) *
       (ADORNMENT_SIZE + ADORNMENT_OFFSET - (isV3 ? 0 : 8));
   }
 
@@ -181,7 +183,7 @@ const TextInputOutlined = ({
 
   const placeholderStyle = {
     position: 'absolute',
-    left: 0,
+    start: 0,
     paddingHorizontal: INPUT_PADDING_HORIZONTAL,
   };
 
@@ -362,7 +364,7 @@ const TextInputOutlined = ({
                 textAlignVertical: multiline ? 'top' : 'center',
                 textAlign: textAlign
                   ? textAlign
-                  : I18nManager.getConstants().isRTL
+                  : direction === 'rtl'
                   ? 'right'
                   : 'left',
                 paddingHorizontal: INPUT_PADDING_HORIZONTAL,

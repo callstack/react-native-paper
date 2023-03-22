@@ -118,7 +118,7 @@ it('renders clear icon wrapper, with appropriate style for v3', () => {
   expect(getByTestId('search-bar-icon-wrapper')).toHaveStyle({
     position: 'absolute',
     right: 0,
-    marginLeft: 16,
+    marginStart: 16,
   });
 
   update(

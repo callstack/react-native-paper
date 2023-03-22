@@ -195,11 +195,11 @@ describe('renderAppbarContent', () => {
       });
 
     const v2Spacing = {
-      marginLeft: 8,
+      marginStart: 8,
     };
 
     const v3Spacing = {
-      marginLeft: 12,
+      marginStart: 12,
     };
 
     expect(renderResult()[0].props.style).toEqual(

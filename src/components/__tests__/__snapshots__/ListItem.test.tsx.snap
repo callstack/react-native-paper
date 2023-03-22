@@ -25,7 +25,7 @@ exports[`renders list item with custom description 1`] = `
       false,
       Array [
         Object {
-          "paddingRight": 24,
+          "paddingEnd": 24,
           "paddingVertical": 8,
         },
         undefined,
@@ -45,7 +45,7 @@ exports[`renders list item with custom description 1`] = `
       style={
         Array [
           Object {
-            "paddingLeft": 16,
+            "paddingStart": 16,
           },
           Object {
             "flex": 1,
@@ -195,14 +195,14 @@ exports[`renders list item with custom description 1`] = `
                         "alignItems": "center",
                         "flexDirection": "row",
                         "flexGrow": 1,
-                        "paddingLeft": 4,
+                        "paddingStart": 4,
                         "position": "relative",
                       },
                       Object {
-                        "paddingLeft": 0,
+                        "paddingStart": 0,
                       },
                       Object {
-                        "paddingRight": 0,
+                        "paddingEnd": 0,
                       },
                     ]
                   }
@@ -215,8 +215,8 @@ exports[`renders list item with custom description 1`] = `
                           "padding": 4,
                         },
                         Object {
-                          "paddingLeft": 8,
-                          "paddingRight": 0,
+                          "paddingEnd": 0,
+                          "paddingStart": 8,
                         },
                         null,
                       ]
@@ -292,8 +292,8 @@ exports[`renders list item with custom description 1`] = `
                             "lineHeight": 20,
                           },
                           Object {
-                            "marginLeft": 8,
-                            "marginRight": 16,
+                            "marginEnd": 16,
+                            "marginStart": 8,
                           },
                           undefined,
                         ],
@@ -338,7 +338,7 @@ exports[`renders list item with custom title and description styles 1`] = `
       false,
       Array [
         Object {
-          "paddingRight": 24,
+          "paddingEnd": 24,
           "paddingVertical": 8,
         },
         undefined,
@@ -358,7 +358,7 @@ exports[`renders list item with custom title and description styles 1`] = `
       style={
         Array [
           Object {
-            "paddingLeft": 16,
+            "paddingStart": 16,
           },
           Object {
             "flex": 1,
@@ -464,7 +464,7 @@ exports[`renders list item with left and right items 1`] = `
       false,
       Array [
         Object {
-          "paddingRight": 24,
+          "paddingEnd": 24,
           "paddingVertical": 8,
         },
         undefined,
@@ -487,7 +487,7 @@ exports[`renders list item with left and right items 1`] = `
       style={
         Array [
           Object {
-            "paddingLeft": 16,
+            "paddingStart": 16,
           },
           Object {
             "flex": 1,
@@ -570,8 +570,8 @@ exports[`renders list item with left and right items 1`] = `
           },
           Object {
             "alignSelf": "center",
-            "marginLeft": 16,
-            "marginRight": 0,
+            "marginEnd": 0,
+            "marginStart": 16,
           },
         ]
       }
@@ -642,7 +642,7 @@ exports[`renders list item with left item 1`] = `
       false,
       Array [
         Object {
-          "paddingRight": 24,
+          "paddingEnd": 24,
           "paddingVertical": 8,
         },
         undefined,
@@ -668,8 +668,8 @@ exports[`renders list item with left item 1`] = `
           },
           Object {
             "alignSelf": "center",
-            "marginLeft": 16,
-            "marginRight": 0,
+            "marginEnd": 0,
+            "marginStart": 16,
             "marginVertical": 0,
           },
         ]
@@ -716,7 +716,7 @@ exports[`renders list item with left item 1`] = `
       style={
         Array [
           Object {
-            "paddingLeft": 16,
+            "paddingStart": 16,
           },
           Object {
             "flex": 1,
@@ -786,7 +786,7 @@ exports[`renders list item with right item 1`] = `
       false,
       Array [
         Object {
-          "paddingRight": 24,
+          "paddingEnd": 24,
           "paddingVertical": 8,
         },
         undefined,
@@ -806,7 +806,7 @@ exports[`renders list item with right item 1`] = `
       style={
         Array [
           Object {
-            "paddingLeft": 16,
+            "paddingStart": 16,
           },
           Object {
             "flex": 1,
@@ -879,7 +879,7 @@ exports[`renders list item with title and description 1`] = `
       false,
       Array [
         Object {
-          "paddingRight": 24,
+          "paddingEnd": 24,
           "paddingVertical": 8,
         },
         undefined,
@@ -899,7 +899,7 @@ exports[`renders list item with title and description 1`] = `
       style={
         Array [
           Object {
-            "paddingLeft": 16,
+            "paddingStart": 16,
           },
           Object {
             "flex": 1,
@@ -1001,7 +1001,7 @@ exports[`renders with a description with typeof number 1`] = `
       false,
       Array [
         Object {
-          "paddingRight": 24,
+          "paddingEnd": 24,
           "paddingVertical": 8,
         },
         undefined,
@@ -1021,7 +1021,7 @@ exports[`renders with a description with typeof number 1`] = `
       style={
         Array [
           Object {
-            "paddingLeft": 16,
+            "paddingStart": 16,
           },
           Object {
             "flex": 1,

@@ -106,6 +106,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   text: {
-    paddingLeft: 8,
+    paddingStart: 8,
   },
 });

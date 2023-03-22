@@ -46,8 +46,8 @@ describe('Surface', () => {
       ${'width'}            | ${'42%'}
       ${'height'}           | ${'32.5%'}
       ${'margin'}           | ${13}
-      ${'marginLeft'}       | ${13.1}
-      ${'marginRight'}      | ${13.2}
+      ${'marginStart'}      | ${13.1}
+      ${'marginEnd'}        | ${13.2}
       ${'marginTop'}        | ${13.3}
       ${'marginBottom'}     | ${13.4}
       ${'marginHorizontal'} | ${13.5}
@@ -77,8 +77,8 @@ describe('Surface', () => {
     it.each`
       property               | value
       ${'padding'}           | ${12}
-      ${'paddingLeft'}       | ${12.1}
-      ${'paddingRight'}      | ${12.2}
+      ${'paddingStart'}      | ${12.1}
+      ${'paddingEnd'}        | ${12.2}
       ${'paddingTop'}        | ${12.3}
       ${'paddingBottom'}     | ${12.4}
       ${'paddingHorizontal'} | ${12.5}

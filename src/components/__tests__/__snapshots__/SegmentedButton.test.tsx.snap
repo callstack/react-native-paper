@@ -92,7 +92,7 @@ exports[`renders checked segmented button with selected check 1`] = `
           collapsable={false}
           style={
             Object {
-              "marginRight": 3,
+              "marginEnd": 3,
               "transform": Array [
                 Object {
                   "scale": 0,

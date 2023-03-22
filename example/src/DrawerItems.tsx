@@ -117,8 +117,8 @@ const DrawerItems = ({
 
   const _handleToggleRTL = () => {
     toggleRTL();
-    I18nManager.forceRTL(!isRTL);
-    if (isWeb) {
+    if (!isWeb) {
+      I18nManager.forceRTL(!isRTL);
       Updates.reloadAsync();
     }
   };

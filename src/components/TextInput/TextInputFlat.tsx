@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  I18nManager,
   Platform,
   StyleProp,
   StyleSheet,
@@ -13,6 +12,7 @@ import {
 
 import type { ThemeProp } from 'src/types';
 
+import { useLocaleDirection } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import { AdornmentSide, AdornmentType, InputMode } from './Adornment/enums';
 import TextInputAdornment, {
@@ -77,6 +77,7 @@ const TextInputFlat = ({
   contentStyle,
   ...rest
 }: ChildTextInputProps) => {
+  const direction = useLocaleDirection();
   const isAndroid = Platform.OS === 'android';
   const { colors, isV3, roundness } = theme;
   const font = isV3 ? theme.fonts.bodyLarge : theme.fonts.regular;
@@ -104,14 +105,14 @@ const TextInputFlat = ({
     right,
   });
 
-  let { paddingLeft, paddingRight } = calculateFlatInputHorizontalPadding({
+  let { paddingStart, paddingEnd } = calculateFlatInputHorizontalPadding({
     adornmentConfig,
     isV3,
   });
 
   if (isPaddingHorizontalPassed) {
-    paddingLeft = paddingHorizontal as number;
-    paddingRight = paddingHorizontal as number;
+    paddingStart = paddingHorizontal as number;
+    paddingEnd = paddingHorizontal as number;
   }
 
   const { leftLayout, rightLayout } = parentState;
@@ -166,11 +167,9 @@ const TextInputFlat = ({
   const labelHalfHeight = labelHeight / 2;
 
   const baseLabelTranslateX =
-    (I18nManager.getConstants().isRTL ? 1 : -1) *
+    (direction === 'rtl' ? 1 : -1) *
       (labelHalfWidth - (labelScale * labelWidth) / 2) +
-    (1 - labelScale) *
-      (I18nManager.getConstants().isRTL ? -1 : 1) *
-      paddingLeft;
+    (1 - labelScale) * (direction === 'rtl' ? -1 : 1) * paddingStart;
 
   const minInputHeight = dense
     ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) - LABEL_PADDING_TOP_DENSE
@@ -263,16 +262,8 @@ const TextInputFlat = ({
     labelScale,
     wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
     topPosition,
-    paddingLeft: isAndroid
-      ? I18nManager.isRTL
-        ? paddingRight
-        : paddingLeft
-      : paddingLeft,
-    paddingRight: isAndroid
-      ? I18nManager.isRTL
-        ? paddingLeft
-        : paddingRight
-      : paddingRight,
+    paddingStart,
+    paddingEnd,
     hasActiveOutline,
     activeColor,
     placeholderColor,
@@ -353,8 +344,8 @@ const TextInputFlat = ({
               {
                 backgroundColor:
                   viewStyle.backgroundColor || containerStyle.backgroundColor,
-                left: paddingLeft,
-                right: paddingRight,
+                start: paddingStart,
+                end: paddingEnd,
               },
             ]}
           />
@@ -388,7 +379,7 @@ const TextInputFlat = ({
           multiline,
           style: [
             styles.input,
-            { paddingLeft, paddingRight },
+            { paddingStart: paddingStart, paddingEnd: paddingEnd },
             !multiline || (multiline && height) ? { height: flatHeight } : {},
             paddingFlat,
             {
@@ -400,7 +391,7 @@ const TextInputFlat = ({
               textAlignVertical: multiline ? 'top' : 'center',
               textAlign: textAlign
                 ? textAlign
-                : I18nManager.getConstants().isRTL
+                : direction === 'rtl'
                 ? 'right'
                 : 'left',
             },
@@ -478,7 +469,7 @@ const Underline = ({
 const styles = StyleSheet.create({
   placeholder: {
     position: 'absolute',
-    left: 0,
+    start: 0,
   },
   underline: {
     position: 'absolute',

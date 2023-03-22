@@ -38,8 +38,8 @@ type Description =
     }) => React.ReactNode);
 
 interface Style {
-  marginLeft?: number;
-  marginRight?: number;
+  marginStart?: number;
+  marginEnd?: number;
   marginVertical?: number;
   alignSelf?: FlexAlignType;
 }
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
   },
   containerV3: {
     paddingVertical: 8,
-    paddingRight: 24,
+    paddingEnd: 24,
   },
   row: {
     flexDirection: 'row',
@@ -276,10 +276,10 @@ const styles = StyleSheet.create({
   },
   item: {
     marginVertical: 6,
-    paddingLeft: 8,
+    paddingStart: 8,
   },
   itemV3: {
-    paddingLeft: 16,
+    paddingStart: 16,
   },
   content: {
     flex: 1,

@@ -134,9 +134,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   v2Spacing: {
-    marginLeft: 8,
+    marginStart: 8,
   },
   v3Spacing: {
-    marginLeft: 12,
+    marginStart: 12,
   },
 });

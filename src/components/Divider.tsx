@@ -91,14 +91,14 @@ const Divider = ({
 
 const styles = StyleSheet.create({
   leftInset: {
-    marginLeft: 72,
+    marginStart: 72,
   },
   v3LeftInset: {
-    marginLeft: 16,
+    marginStart: 16,
   },
   horizontalInset: {
-    marginLeft: 16,
-    marginRight: 16,
+    marginStart: 16,
+    marginEnd: 16,
   },
   bold: {
     height: 1,

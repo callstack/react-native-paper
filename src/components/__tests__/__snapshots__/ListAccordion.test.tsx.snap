@@ -172,7 +172,7 @@ exports[`renders expanded accordion 1`] = `
         false,
         Array [
           Object {
-            "paddingRight": 24,
+            "paddingEnd": 24,
             "paddingVertical": 8,
           },
           undefined,
@@ -192,7 +192,7 @@ exports[`renders expanded accordion 1`] = `
         style={
           Array [
             Object {
-              "paddingLeft": 16,
+              "paddingStart": 16,
             },
             Object {
               "flex": 1,

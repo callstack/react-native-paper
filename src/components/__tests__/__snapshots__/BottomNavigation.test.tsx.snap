@@ -245,8 +245,8 @@ exports[`allows customizing Route's type via generics 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -479,8 +479,8 @@ exports[`allows customizing Route's type via generics 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -957,8 +957,8 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -1150,8 +1150,8 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -1343,8 +1343,8 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -1705,8 +1705,8 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -1898,8 +1898,8 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -2091,8 +2091,8 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -2584,8 +2584,8 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -2892,8 +2892,8 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -3200,8 +3200,8 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -3508,8 +3508,8 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -3816,8 +3816,8 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -4298,8 +4298,8 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -4558,8 +4558,8 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -4818,8 +4818,8 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -5078,8 +5078,8 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -5338,8 +5338,8 @@ exports[`renders bottom navigation with scene animation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -5696,8 +5696,8 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -5869,8 +5869,8 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -6042,8 +6042,8 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -6389,8 +6389,8 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -6549,8 +6549,8 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -6709,8 +6709,8 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -6869,8 +6869,8 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -7029,8 +7029,8 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -7419,8 +7419,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -7727,8 +7727,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -8035,8 +8035,8 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -8517,8 +8517,8 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -8777,8 +8777,8 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -9037,8 +9037,8 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -9461,8 +9461,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -9769,8 +9769,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -10077,8 +10077,8 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -10559,8 +10559,8 @@ exports[`renders shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -10819,8 +10819,8 @@ exports[`renders shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -11079,8 +11079,8 @@ exports[`renders shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -11339,8 +11339,8 @@ exports[`renders shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,
@@ -11599,8 +11599,8 @@ exports[`renders shifting bottom navigation 1`] = `
                   style={
                     Array [
                       Object {
-                        "left": 0,
                         "position": "absolute",
+                        "start": 0,
                       },
                       Object {
                         "right": 0,

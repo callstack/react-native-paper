@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { Platform, I18nManager, View, Image, StyleSheet } from 'react-native';
+import { Platform, View, Image, StyleSheet } from 'react-native';
 
+import { useLocaleDirection } from '../../core/Localization';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 
 const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
+  const direction = useLocaleDirection();
   const iosIconSize = size - 3;
 
   return Platform.OS === 'ios' ? (
@@ -13,7 +15,7 @@ const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
         {
           width: size,
           height: size,
-          transform: [{ scaleX: I18nManager.getConstants().isRTL ? -1 : 1 }],
+          transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
         },
       ]}
     >
@@ -31,7 +33,7 @@ const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
       name="arrow-left"
       color={color}
       size={size}
-      direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+      direction={direction}
     />
   );
 };

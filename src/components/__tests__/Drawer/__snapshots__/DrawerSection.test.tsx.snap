@@ -21,8 +21,8 @@ exports[`DrawerSection renders properly 1`] = `
         },
         undefined,
         Object {
-          "marginLeft": 16,
-          "marginRight": 16,
+          "marginEnd": 16,
+          "marginStart": 16,
         },
         Object {
           "height": 1,

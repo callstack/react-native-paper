@@ -230,11 +230,11 @@ const Chip = ({
   const elevationStyle = isV3 || Platform.OS === 'android' ? elevation : 0;
   const multiplier = isV3 ? (compact ? 1.5 : 2) : 1;
   const labelSpacings = {
-    marginRight: onClose ? 0 : 8 * multiplier,
-    marginLeft: avatar || icon || selected ? 4 * multiplier : 8 * multiplier,
+    marginEnd: onClose ? 0 : 8 * multiplier,
+    marginStart: avatar || icon || selected ? 4 * multiplier : 8 * multiplier,
   };
   const contentSpacings = {
-    paddingRight: isV3 ? (onClose ? 34 : 0) : onClose ? 32 : 4,
+    paddingEnd: isV3 ? (onClose ? 34 : 0) : onClose ? 32 : 4,
   };
   const labelTextStyle = {
     color: textColor,
@@ -395,26 +395,26 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 4,
+    paddingStart: 4,
     position: 'relative',
     flexGrow: 1,
   },
   md3Content: {
-    paddingLeft: 0,
+    paddingStart: 0,
   },
   icon: {
     padding: 4,
     alignSelf: 'center',
   },
   md3Icon: {
-    paddingLeft: 8,
-    paddingRight: 0,
+    paddingStart: 8,
+    paddingEnd: 0,
   },
   closeIcon: {
-    marginRight: 4,
+    marginEnd: 4,
   },
   md3CloseIcon: {
-    marginRight: 8,
+    marginEnd: 8,
     padding: 0,
   },
   labelText: {
@@ -433,25 +433,25 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   avatarWrapper: {
-    marginRight: 4,
+    marginEnd: 4,
   },
   md3AvatarWrapper: {
-    marginLeft: 4,
-    marginRight: 0,
+    marginStart: 4,
+    marginEnd: 0,
   },
   md3SelectedIcon: {
-    paddingLeft: 4,
+    paddingStart: 4,
   },
   // eslint-disable-next-line react-native/no-color-literals
   avatarSelected: {
     position: 'absolute',
     top: 4,
-    left: 4,
+    start: 4,
     backgroundColor: 'rgba(0, 0, 0, .29)',
   },
   closeButtonStyle: {
     position: 'absolute',
-    right: 0,
+    end: 0,
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',

@@ -222,7 +222,7 @@ exports[`renders data table pagination 1`] = `
         "flexDirection": "row",
         "flexWrap": "wrap",
         "justifyContent": "flex-end",
-        "paddingLeft": 16,
+        "paddingStart": 16,
       },
       undefined,
     ]
@@ -248,7 +248,7 @@ exports[`renders data table pagination 1`] = `
         Array [
           Object {
             "fontSize": 12,
-            "marginRight": 16,
+            "marginEnd": 16,
           },
           Object {
             "color": "rgba(28, 27, 31, 0.6)",
@@ -564,7 +564,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
         "flexDirection": "row",
         "flexWrap": "wrap",
         "justifyContent": "flex-end",
-        "paddingLeft": 16,
+        "paddingStart": 16,
       },
       undefined,
     ]
@@ -590,7 +590,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
         Array [
           Object {
             "fontSize": 12,
-            "marginRight": 16,
+            "marginEnd": 16,
           },
           Object {
             "color": "rgba(28, 27, 31, 0.6)",
@@ -1194,7 +1194,7 @@ exports[`renders data table pagination with label 1`] = `
         "flexDirection": "row",
         "flexWrap": "wrap",
         "justifyContent": "flex-end",
-        "paddingLeft": 16,
+        "paddingStart": 16,
       },
       undefined,
     ]
@@ -1220,7 +1220,7 @@ exports[`renders data table pagination with label 1`] = `
         Array [
           Object {
             "fontSize": 12,
-            "marginRight": 16,
+            "marginEnd": 16,
           },
           Object {
             "color": "rgba(28, 27, 31, 0.6)",
@@ -1538,7 +1538,7 @@ exports[`renders data table pagination with options select 1`] = `
         "flexDirection": "row",
         "flexWrap": "wrap",
         "justifyContent": "flex-end",
-        "paddingLeft": 16,
+        "paddingStart": 16,
       },
       undefined,
     ]
@@ -1574,7 +1574,7 @@ exports[`renders data table pagination with options select 1`] = `
           Array [
             Object {
               "fontSize": 12,
-              "marginRight": 16,
+              "marginEnd": 16,
             },
             Object {
               "color": "rgba(28, 27, 31, 0.6)",
@@ -1600,7 +1600,7 @@ exports[`renders data table pagination with options select 1`] = `
             "flex": undefined,
             "height": undefined,
             "left": undefined,
-            "marginRight": 16,
+            "marginEnd": 16,
             "opacity": undefined,
             "position": undefined,
             "right": undefined,
@@ -1692,12 +1692,12 @@ exports[`renders data table pagination with options select 1`] = `
                 style={
                   Array [
                     Object {
-                      "marginLeft": -4,
-                      "marginRight": 12,
+                      "marginEnd": 12,
+                      "marginStart": -4,
                     },
                     Object {
-                      "marginLeft": -16,
-                      "marginRight": 16,
+                      "marginEnd": 16,
+                      "marginStart": -16,
                     },
                     false,
                   ]
@@ -1815,7 +1815,7 @@ exports[`renders data table pagination with options select 1`] = `
         Array [
           Object {
             "fontSize": 12,
-            "marginRight": 16,
+            "marginEnd": 16,
           },
           Object {
             "color": "rgba(28, 27, 31, 0.6)",
@@ -2517,7 +2517,7 @@ exports[`renders data table title with press handler 1`] = `
           },
           Object {},
           Object {
-            "marginLeft": 8,
+            "marginStart": 8,
           },
           undefined,
         ],
@@ -2637,7 +2637,7 @@ exports[`renders data table title with sort icon 1`] = `
           },
           Object {},
           Object {
-            "marginLeft": 8,
+            "marginStart": 8,
           },
           undefined,
         ],
