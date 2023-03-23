@@ -228,8 +228,13 @@ export default function Main() {
 
 ### Sync dynamic colors with system colors
 
-[`pchmn/expo-material3-theme`](https://github.com/pchmn/expo-material3-theme) library allows you to retrieve the Material 3 system colors from Android 12+ devices and sync them with your dynamic theme. If user changes the system colors, the theme will be updated automatically. For devices not compatible the library will fallback to a default theme.
-Follow [installation instructions](https://github.com/pchmn/expo-material3-theme#installation), then use it like this:
+Using [`pchmn/expo-material3-theme`](https://github.com/pchmn/expo-material3-theme) library you can easily access the Material 3 system colors from Android 12+ devices and seamlessly integrate them into your dynamic theme. Any changes made by the user to the system colors will be automatically reflected in the theme.
+
+:::info
+In case of incompatible devices, the library will revert to a default theme.
+:::
+
+To get started, follow the [installation instructions](https://github.com/pchmn/expo-material3-theme#installation) and check the following code:
 
 ```tsx
 import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
