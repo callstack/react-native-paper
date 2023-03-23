@@ -170,7 +170,7 @@ export type MD3Type = {
   fontWeight: Font['fontWeight'];
   lineHeight: number;
   fontSize: number;
-  fontStyle?: 'normal' | 'italic' | undefined;
+  fontStyle?: Font['fontStyle'];
 };
 
 export type MD3Typescale =
