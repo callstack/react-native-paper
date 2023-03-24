@@ -75,68 +75,42 @@ const style = StyleSheet.create({
 
 Once we have finished implementing the components, we can run the app and check how Stack looks like.
 
-![navigationAppBar1](../../static/screenshots/react-navigation-appBar1.png)
+<img src="../../screenshots/react-navigation-appBar1.png" width="300" />
 
 To navigate from `HomeScreen` to `DetailsScreen` we can use the navigation object provided by `Stack.Screen` component. Every component rendered by `Stack.Screen` has an access to the navigation object via props. Let's modify our `HomeScreen` component:
 
 ```js
+import { Button } from 'react-native-paper';
+
 function HomeScreen({ navigation }) {
   return (
     <View style={style.container}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to details"
-        onPress={() => navigation.navigate('Details')}
-      />
+      <Button mode="contained" onPress={() => navigation.navigate('Details')}>
+        Go to details
+      </Button>
     </View>
   );
 }
+
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 ```
 
 Our result:
 
-![navigationAppBar2](../../static/screenshots/react-navigation-appBar2.gif)
+<img src="../../screenshots/react-navigation-appBar2.gif" width="300" />
 
 As you can see, we can already navigate between two screens. In the next steps, we will show you how to use Paper's `AppBar` instead of the default header.
 
-### Adding AppBar
+### Adding `AppBar`
 
 We can customize Stack's header by passing custom component:
-
-```js
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          header: CustomNavigationBar,
-        }}>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
-```
-
-Now we will implement `CustomNavigationBar` using `AppBar` component:
-
-```js
-import { Appbar } from 'react-native-paper';
-
-function CustomNavigationBar() {
-  return (
-    <Appbar.Header>
-      <Appbar.Content title="My awesome app" />
-    </Appbar.Header>
-  );
-}
-```
-
-Current implementation of the `CustomNavigationBar` is simple - we just render a title inside of it. You may notice there is no way to go back to the previous screen, because the back button is not visible in the header. Let's add it now and let's make sure it's visible on all Stack's screens except `Home` screen.
-
-Firstly, pass navigation props to `CustomNavigationBar`:
 
 ```js
 export default function App() {
@@ -155,49 +129,142 @@ export default function App() {
 }
 ```
 
-Secondly, we check if the navigation bar receives a `back` prop. If it has, it means there is another screen on the stack beneath the current screen and we should render the back arrow button in such a case. (The `back` prop is sent in React Navigation 6.x; in 5.x a prop named `previous` is sent and can be checked for instead.)
+Now we will implement `CustomNavigationBar` using `AppBar` component:
 
 ```js
-function CustomNavigationBar({ navigation, back }) {
+import { Appbar } from 'react-native-paper';
+
+export default function CustomNavigationBar() {
   return (
     <Appbar.Header>
-      {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
       <Appbar.Content title="My awesome app" />
     </Appbar.Header>
   );
 }
 ```
 
-![navigationAppBar3](../../static/screenshots/react-navigation-appBar3.gif)
-
-
-Another interesting pattern that can be implemented with `react-native-paper` and `react-navigation` is a "hamburger menu". Thanks to the `Menu` component we can add a nice looking pop-up to our `Appbar`. To implement this feature we need to make a couple of changes in `CustomNavigationBar`:
-- Render a `Menu` component
-- Pass `Appbar.Action` to the anchor prop
-- Add a state to control `Menu` visibility
-
-We also want the menu to appear only on `HomeScreen`, which means we will render it conditionally based on the `back` prop.
+Current implementation of the `CustomNavigationBar` is simple - we just render a title inside of it, however it's hardcoded "My awesome app" text, so let's adjust it.
+To automatically get the correct `title` for the screen, we're going to take the advantage of `getHeaderTitle` helper available in `@react-navigation/elements` in the following way:
 
 ```js
-function CustomNavigationBar({ navigation, back }) {
-  const [visible, setVisible] = React.useState(false);
-  const openMenu = () => setVisible(true);
-  const closeMenu = () => setVisible(false);
+import { Appbar } from 'react-native-paper';
+import { getHeaderTitle } from '@react-navigation/elements';
+
+export default function CustomNavigationBar({ route, options }) {
+  const title = getHeaderTitle(options, route.name);
+
+  return (
+    <Appbar.Header>
+      <Appbar.Content title={title} />
+    </Appbar.Header>
+  );
+}
+```
+
+You may notice there is no way to go back to the previous screen, because the back button is not visible in the header. Let's add it now and let's make sure it's visible on all Stack's screens except `Home` screen.
+
+In order to achieve it, we firstly check, if the navigation bar receives a `back` prop. If it has, it means there is another screen on the stack beneath the current screen and we should render the back arrow button in such a case.
+
+```js
+import { Appbar } from 'react-native-paper';
+import { getHeaderTitle } from '@react-navigation/elements';
+
+export default function CustomNavigationBar({ navigation, route, options, back }) {
+  const title = getHeaderTitle(options, route.name);
 
   return (
     <Appbar.Header>
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title="My awesome app" />
+      <Appbar.Content title={title} />
+    </Appbar.Header>
+  );
+}
+```
+
+<img src="../../screenshots/react-navigation-appBar3.gif" width="300" />
+
+### Adding more items to `Appbar`
+
+Another interesting pattern that can be implemented with `react-native-paper` and `react-navigation` is a "menu" button. Thanks to the `Menu` component we can add a nice looking pop-up to our `Appbar`. To implement this feature we need to make a couple of changes in `CustomNavigationBar`:
+- Render a `Menu` component
+- Pass `Appbar.Action` to the anchor prop
+- Add a state to control `Menu` visibility
+
+:::note
+To have properly working `Menu` component, remember to wrap your root component with the Paper's `Provider`:
+
+```js
+import { Provider } from 'react-native-paper';
+
+// ...
+
+<Provider>
+  <NavigationContainer>
+    <Stack.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        header: (props) => <CustomNavigationBar {...props} />,
+      }}>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Details" component={DetailsScreen} />
+    </Stack.Navigator>
+  </NavigationContainer>
+</Provider>
+```
+:::
+
+We also want the menu to appear only on `HomeScreen`, which means we will render it conditionally based on the `back` prop.
+
+```js
+import React from 'react';
+import { Appbar, Menu } from 'react-native-paper';
+import { getHeaderTitle } from '@react-navigation/elements';
+
+export default function CustomNavigationBar({
+  navigation,
+  route,
+  options,
+  back,
+}) {
+  const [visible, setVisible] = React.useState(false);
+  const openMenu = () => setVisible(true);
+  const closeMenu = () => setVisible(false);
+
+  const title = getHeaderTitle(options, route.name);
+
+  return (
+    <Appbar.Header>
+      {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
+      <Appbar.Content title={title} />
       {!back ? (
         <Menu
           visible={visible}
           onDismiss={closeMenu}
           anchor={
-            <Appbar.Action icon="menu" color="white" onPress={openMenu} />
+            <Appbar.Action
+              icon="dots-vertical"
+              onPress={openMenu}
+            />
           }>
-          <Menu.Item onPress={() => {console.log('Option 1 was pressed')}} title="Option 1" />
-          <Menu.Item onPress={() => {console.log('Option 2 was pressed')}} title="Option 2" />
-          <Menu.Item onPress={() => {console.log('Option 3 was pressed')}} title="Option 3" disabled />
+          <Menu.Item
+            onPress={() => {
+              console.log('Option 1 was pressed');
+            }}
+            title="Option 1"
+          />
+          <Menu.Item
+            onPress={() => {
+              console.log('Option 2 was pressed');
+            }}
+            title="Option 2"
+          />
+          <Menu.Item
+            onPress={() => {
+              console.log('Option 3 was pressed');
+            }}
+            title="Option 3"
+            disabled
+          />
         </Menu>
       ) : null}
     </Appbar.Header>
@@ -207,6 +274,8 @@ function CustomNavigationBar({ navigation, back }) {
 
 Final result:
 
-![navigationAppBar4](../../static/screenshots/react-navigation-appBar4.gif)
+<img src="../../screenshots/react-navigation-appBar4.gif" width="300" />
 
-That's all we need! We have app bar that contains everything we need to navigate through screens and access an additional menu on the main screen. As you can see, with Material design `Appbar` provided by `react-native-paper` used together with `react-navigation` we can easily create an app that looks and works great.
+That's all we need! We have app bar that contains everything we need to navigate through screens and access an additional menu on the main screen. As you can see, with Material design `Appbar` provided by `react-native-paper` used together with `react-navigation` we can easily create an app that looks and works great. 
+
+Grab the Expo [snack](https://snack.expo.dev/@react-native-paper/integrate-appbar-with-react-navigation) if you want to check the whole code!
