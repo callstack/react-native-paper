@@ -162,7 +162,7 @@ export default function CustomNavigationBar({ route, options }) {
 
 You may notice there is no way to go back to the previous screen, because the back button is not visible in the header. Let's add it now and let's make sure it's visible on all Stack's screens except `Home` screen.
 
-In order to achieve it, we firstly check, if the navigation bar receives a `back` prop. If it has, it means there is another screen on the stack beneath the current screen and we should render the back arrow button in such a case. (The `back` prop is sent in React Navigation 6.x; in 5.x a prop named `previous` is sent and can be checked for instead.)
+In order to achieve it, we firstly check, if the navigation bar receives a `back` prop. If it has, it means there is another screen on the stack beneath the current screen and we should render the back arrow button in such a case.
 
 ```js
 import { Appbar } from 'react-native-paper';
