@@ -509,56 +509,19 @@ export default function Main() {
 Although React Native Paper supports `fontWeight` and `fontStyle` properties, there are multiple limitations to custom 
 fonts in React Native. Using custom [variable fonts](https://fonts.google.com/knowledge/introducing_type/introducing_variable_fonts) 
 is especially problematic, with some platforms failing to render variants entirely. To ensure correct typography in your
-app, we suggest installing each font variant as separate file. 
+app, we suggest installing each font variant as a separate file. Below you'll find example on how to set up React Native Paper 
+theme with custom fonts. 
 
-Example on how to use multiple fonts across the app:
-
-```tsx
-import * as React from 'react';
-import { configureFonts, MD3LightTheme, Provider as PaperProvider } from 'react-native-paper';
-import App from './src/App';
-
-
-const Text = customText<'bold' | 'italic' | 'boldItalic'>();
-
-const baseFont = {
-  fontFamily: 'Inter',
-} as const;
-
-const baseVariants = configureFonts({ config: baseFont });
-
-const customVariants = {
-  bold: {
-    ...baseVariants.bodyMedium,
-    fontFamily: 'Inter-Bold',
-  },
-  italic: {
-    ...baseVariants.bodyMedium,
-    fontFamily: 'Inter-Italic',
-  },
-  boldItalic: {
-    ...baseVariants.bodyMedium,
-    fontFamily: 'Inter-BoldItalic',
-  },
-} as const;
-
-const fonts = configureFonts({
-  config: {
-    ...baseVariants,
-    ...customVariants,
-  },
-});
-
-export default function Main() {
-  return (
-    <PaperProvider theme={theme}>
-      <Text>
-        This text is using <Text variant="italic">Inter font</Text>
-      </Text>
-    </PaperProvider>
-  );
-}
-```
-
-If you decide to use a variable font instead, please test it on all platforms and make sure it renders correctly.
-Please refer to our **Typography: Variable fonts** section in the Example app for comparison.
+Should you decide to use a variable font anyway, second example will show you how to test if the font is rendered correctly in React Native on all platforms.
+ 
+<details>
+  <summary>Variable fonts examples</summary>
+  <ul>
+    <li>
+      <a href="https://snack.expo.dev/@react-native-paper/font-styles-variants">How to apply custom fonts with variants</a>
+    </li>
+    <li>
+      <a href="https://snack.expo.dev/@react-native-paper/typography-tester">How to test variable fonts in React Native</a>
+    </li>
+  </ul>
+</details>
