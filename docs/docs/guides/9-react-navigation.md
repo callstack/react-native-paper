@@ -1,5 +1,5 @@
 ---
-title: Integrate AppBar with react-navigation
+title: Integrate AppBar with React Navigation
 ---
 
 # Integrate AppBar with react-navigation
