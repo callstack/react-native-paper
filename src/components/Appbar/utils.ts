@@ -67,12 +67,13 @@ export const getAppbarBorders = (
     borderBottomLeftRadius,
   };
 
-  const borders = Object.entries(properties)
-    .filter(([_, value]) => value)
-    .reduce<Record<string, typeof borderRadius>>((acc, [key, value]) => {
-      acc[key] = value;
-      return acc;
-    }, {});
+  const borders: Record<string, typeof borderRadius> = {};
+
+  for (const [key, value] of Object.entries(properties)) {
+    if (value) {
+      borders[key] = value;
+    }
+  }
 
   return borders;
 };
