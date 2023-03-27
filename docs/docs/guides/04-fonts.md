@@ -502,3 +502,26 @@ export default function Main() {
   );
 }
 ```
+
+
+## Variable fonts
+
+Although React Native Paper supports `fontWeight` and `fontStyle` properties, there are multiple limitations to custom 
+fonts in React Native. Using custom [variable fonts](https://fonts.google.com/knowledge/introducing_type/introducing_variable_fonts) 
+is especially problematic, with some platforms failing to render variants entirely. To ensure correct typography in your
+app, we suggest installing each font variant as a separate file. Below you'll find example on how to set up React Native Paper 
+theme with custom fonts. 
+
+Should you decide to use a variable font anyway, second example will show you how to test if the font is rendered correctly in React Native on all platforms.
+ 
+<details>
+  <summary>Variable fonts examples</summary>
+  <ul>
+    <li>
+      <a href="https://snack.expo.dev/@react-native-paper/font-styles-variants">How to apply custom fonts with variants</a>
+    </li>
+    <li>
+      <a href="https://snack.expo.dev/@react-native-paper/typography-tester">How to test variable fonts in React Native</a>
+    </li>
+  </ul>
+</details>
