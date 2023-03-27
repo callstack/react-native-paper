@@ -16,26 +16,12 @@ import type {
   MaterialBottomTabDescriptorMap,
   MaterialBottomTabNavigationConfig,
   MaterialBottomTabNavigationHelpers,
-  MaterialBottomTabNavigationEventMap,
 } from '../types';
 
 type Props = MaterialBottomTabNavigationConfig & {
   state: TabNavigationState<ParamListBase>;
   navigation: MaterialBottomTabNavigationHelpers;
   descriptors: MaterialBottomTabDescriptorMap;
-};
-
-type EventHandler = React.ComponentProps<typeof BottomNavigation>[
-  | 'onTabPress'
-  | 'onTabLongPress'];
-
-type EventHandlerArgument = Parameters<NonNullable<EventHandler>>[0];
-
-type EventHandlerCallback = EventHandlerArgument & {
-  route: EventHandlerArgument['route'] & {
-    name: string;
-    params?: object;
-  };
 };
 
 export default function MaterialBottomTabView({
@@ -45,25 +31,6 @@ export default function MaterialBottomTabView({
   ...rest
 }: Props) {
   const buildLink = useNavigationLink();
-
-  const eventHandlerCallback = (
-    type: keyof MaterialBottomTabNavigationEventMap,
-    callback?: (route: EventHandlerCallback['route']) => void
-  ) => {
-    return ({ route, preventDefault }: EventHandlerCallback) => {
-      const event = navigation.emit({
-        type,
-        target: route.key,
-        canPreventDefault: true,
-      });
-
-      if (event.defaultPrevented) {
-        return preventDefault();
-      }
-
-      callback?.(route);
-    };
-  };
 
   return (
     <BottomNavigation
@@ -141,13 +108,25 @@ export default function MaterialBottomTabView({
       getTestID={({ route }) =>
         descriptors[route.key].options.tabBarButtonTestID
       }
-      onTabLongPress={eventHandlerCallback('onTabLongPress')}
-      onTabPress={eventHandlerCallback('tabPress', (route) => {
-        navigation.dispatch({
-          ...CommonActions.navigate(route.name, route.params),
-          target: state.key,
+      onTabPress={({ route, preventDefault }) => {
+        const event = navigation.emit({
+          type: 'tabPress',
+          target: route.key,
+          canPreventDefault: true,
         });
-      })}
+
+        if (event.defaultPrevented) {
+          preventDefault();
+        } else {
+          navigation.dispatch({
+            ...CommonActions.navigate(route.name, route.params),
+            target: state.key,
+          });
+        }
+      }}
+      onTabLongPress={({ route }) =>
+        navigation.emit({ type: 'tabLongPress', target: route.key })
+      }
     />
   );
 }

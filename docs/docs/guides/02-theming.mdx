@@ -200,7 +200,7 @@ Passed source color into the util is translated into tones to automatically prov
 
 *Source: [Material You Color System](https://m3.material.io/styles/color/the-color-system/custom-colors)*
 
-### Using schemes:
+### Using schemes
 
 Once we have copied the color schemes from the generated JSON above, we can use by passing it to the colors in `theme` object as below:
 
@@ -220,6 +220,43 @@ const theme = {
 export default function Main() {
   return (
     <PaperProvider theme={theme}>
+      <App />
+    </PaperProvider>
+  );
+}
+```
+
+### Sync dynamic colors with system colors
+
+Using [`pchmn/expo-material3-theme`](https://github.com/pchmn/expo-material3-theme) library you can easily access the Material 3 system colors from Android 12+ devices and seamlessly integrate them into your dynamic theme. Any changes made by the user to the system colors will be automatically reflected in the theme.
+
+:::info
+In case of incompatible devices, the library will revert to a default theme.
+:::
+
+To get started, follow the [installation instructions](https://github.com/pchmn/expo-material3-theme#installation) and check the following code:
+
+```tsx
+import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
+import { useColorScheme } from 'react-native';
+import {
+  MD3DarkTheme,
+  MD3LightTheme,
+  Provider as PaperProvider,
+} from 'react-native-paper';
+import App from './src/App';
+
+export default function Main() {
+  const colorScheme = useColorScheme();
+  const { theme } = useMaterial3Theme();
+
+  const paperTheme =
+    colorScheme === 'dark'
+      ? { ...MD3DarkTheme, colors: theme.dark }
+      : { ...MD3LightTheme, colors: theme.light };
+
+  return (
+    <PaperProvider theme={paperTheme}>
       <App />
     </PaperProvider>
   );
