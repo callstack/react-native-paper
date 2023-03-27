@@ -12,6 +12,14 @@ import AppbarContent from './AppbarContent';
 
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 
+const borderStyleProperties = [
+  'borderRadius',
+  'borderTopLeftRadius',
+  'borderTopRightRadius',
+  'borderBottomRightRadius',
+  'borderBottomLeftRadius',
+];
+
 export const getAppbarColor = (
   theme: InternalTheme,
   elevation: number,
@@ -45,33 +53,12 @@ export const getAppbarBorders = (
     | Animated.AnimatedInterpolation<string | number>
     | Animated.WithAnimatedObject<ViewStyle>
 ) => {
-  const {
-    borderRadius,
-    borderTopLeftRadius,
-    borderTopRightRadius,
-    borderBottomRightRadius,
-    borderBottomLeftRadius,
-  } = (style || {}) as Exclude<typeof style, number> & {
-    borderRadius?: number;
-    borderTopLeftRadius?: number;
-    borderTopRightRadius?: number;
-    borderBottomRightRadius?: number;
-    borderBottomLeftRadius?: number;
-  };
+  const borders: Record<string, number> = {};
 
-  const properties = {
-    borderRadius,
-    borderTopLeftRadius,
-    borderTopRightRadius,
-    borderBottomRightRadius,
-    borderBottomLeftRadius,
-  };
-
-  const borders: Record<string, typeof borderRadius> = {};
-
-  for (const [key, value] of Object.entries(properties)) {
+  for (const property of borderStyleProperties) {
+    const value = style[property as keyof typeof style];
     if (value) {
-      borders[key] = value;
+      borders[property] = value;
     }
   }
 
