@@ -350,6 +350,7 @@ const Surface = forwardRef<View, Props>(
     return (
       <SurfaceIOS
         {...props}
+        ref={ref}
         elevation={elevation}
         backgroundColor={backgroundColor}
         style={style}
