@@ -608,7 +608,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "lineHeight": undefined,
               "paddingHorizontal": 16,
               "textAlign": "left",
-              "textAlignVertical": "top",
+              "textAlignVertical": "center",
             },
             false,
             Array [
