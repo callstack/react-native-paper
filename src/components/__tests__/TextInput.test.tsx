@@ -1071,5 +1071,5 @@ describe('outlineStyle - underlineStyle', () => {
       borderRadius: 16,
       borderWidth: 6,
     });
-  }); 
+  });
 });
