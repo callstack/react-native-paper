@@ -22,6 +22,7 @@ const style = StyleSheet.create({
   },
   height: {
     height: 100,
+    textAlignVertical: "center",
   },
   lineHeight: {
     lineHeight: 22,
