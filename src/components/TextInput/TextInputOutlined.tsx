@@ -359,7 +359,7 @@ const TextInputOutlined = ({
                 lineHeight,
                 fontWeight,
                 color: inputTextColor,
-                textAlignVertical: multiline ? 'top' : 'center',
+                textAlignVertical: multiline ? 'center' : 'center',
                 textAlign: textAlign
                   ? textAlign
                   : I18nManager.getConstants().isRTL
