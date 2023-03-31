@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  AccessibilityRole,
   GestureResponderEvent,
   Platform,
   StyleProp,
@@ -55,6 +56,10 @@ export type Props = $RemoveChildren<typeof View> & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * If true, disable all interactions for this component.
+   */
+  disabled?: boolean;
+  /**
    * Custom color for the text.
    */
   color?: string;
@@ -99,6 +104,7 @@ const AppbarContent = ({
   subtitle,
   subtitleStyle,
   onPress,
+  disabled,
   style,
   titleRef,
   titleStyle,
@@ -128,56 +134,75 @@ const AppbarContent = ({
 
   const variant = modeTextVariant[mode] as MD3TypescaleKey;
 
-  return (
-    <TouchableWithoutFeedback
-      accessibilityRole={onPress ? 'button' : 'text'}
-      onPress={onPress}
-      disabled={!onPress}
+  const content = (
+    <View
+      pointerEvents="box-none"
+      style={[styles.container, isV3 && modeContainerStyles[mode], style]}
+      testID={testID}
+      {...rest}
     >
-      <View
-        pointerEvents="box-none"
-        style={[styles.container, isV3 && modeContainerStyles[mode], style]}
-        testID={testID}
-        {...rest}
-      >
-        {typeof title === 'string' ? (
-          <Text
-            {...(isV3 && { variant })}
-            ref={titleRef}
-            style={[
-              {
-                color: titleTextColor,
-                ...(isV3
-                  ? theme.fonts[variant]
-                  : Platform.OS === 'ios'
-                  ? theme.fonts.regular
-                  : theme.fonts.medium),
-              },
-              !isV3 && styles.title,
-              titleStyle,
-            ]}
-            numberOfLines={1}
-            accessible
-            // @ts-ignore Type '"heading"' is not assignable to type ...
-            accessibilityRole={Platform.OS === 'web' ? 'heading' : 'header'}
-            testID={`${testID}-title-text`}
-          >
-            {title}
-          </Text>
-        ) : (
-          title
-        )}
-        {!isV3 && subtitle ? (
-          <Text
-            style={[styles.subtitle, { color: subtitleColor }, subtitleStyle]}
-            numberOfLines={1}
-          >
-            {subtitle}
-          </Text>
-        ) : null}
-      </View>
-    </TouchableWithoutFeedback>
+      {typeof title === 'string' ? (
+        <Text
+          {...(isV3 && { variant })}
+          ref={titleRef}
+          style={[
+            {
+              color: titleTextColor,
+              ...(isV3
+                ? theme.fonts[variant]
+                : Platform.OS === 'ios'
+                ? theme.fonts.regular
+                : theme.fonts.medium),
+            },
+            !isV3 && styles.title,
+            titleStyle,
+          ]}
+          numberOfLines={1}
+          accessible
+          accessibilityRole={
+            onPress
+              ? 'none'
+              : Platform.OS === 'web'
+              ? ('heading' as 'header')
+              : 'header'
+          }
+          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
+          accessibilityTraits="header"
+          testID={`${testID}-title-text`}
+        >
+          {title}
+        </Text>
+      ) : (
+        title
+      )}
+      {!isV3 && subtitle ? (
+        <Text
+          style={[styles.subtitle, { color: subtitleColor }, subtitleStyle]}
+          numberOfLines={1}
+        >
+          {subtitle}
+        </Text>
+      ) : null}
+    </View>
   );
+
+  if (onPress) {
+    return (
+      // eslint-disable-next-line react-native-a11y/has-accessibility-props
+      <TouchableWithoutFeedback
+        accessibilityRole={touchableRole}
+        // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
+        accessibilityTraits={touchableRole}
+        accessibilityComponentType="button"
+        onPress={onPress}
+        disabled={disabled}
+      >
+        {content}
+      </TouchableWithoutFeedback>
+    );
+  }
+
+  return content;
 };
 
 AppbarContent.displayName = 'Appbar.Content';
@@ -207,6 +232,12 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: Platform.OS === 'ios' ? 11 : 14,
   },
+});
+
+const iosTouchableRole: readonly AccessibilityRole[] = ['button', 'header'];
+const touchableRole: AccessibilityRole = Platform.select({
+  ios: iosTouchableRole as unknown as 'button',
+  default: iosTouchableRole[0],
 });
 
 export default AppbarContent;

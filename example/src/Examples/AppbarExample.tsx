@@ -8,6 +8,7 @@ import {
   List,
   Paragraph,
   RadioButton,
+  Snackbar,
   Switch,
   Text,
 } from 'react-native-paper';
@@ -36,6 +37,7 @@ const AppbarExample = ({ navigation }: Props) => {
   const [appbarMode, setAppbarMode] = React.useState<AppbarModes>('small');
   const [showCalendarIcon, setShowCalendarIcon] = React.useState(false);
   const [showElevated, setShowElevated] = React.useState(false);
+  const [showSnackbar, setShowSnackbar] = React.useState(false);
 
   const theme = useExampleTheme();
   const { bottom, left, right } = useSafeAreaInsets();
@@ -60,6 +62,7 @@ const AppbarExample = ({ navigation }: Props) => {
           <Appbar.Content
             title="Title"
             subtitle={showSubtitle ? 'Subtitle' : null}
+            onPress={() => setShowSnackbar(true)}
           />
           {isCenterAlignedMode
             ? false
@@ -216,6 +219,13 @@ const AppbarExample = ({ navigation }: Props) => {
         {theme.isV3 && renderFAB()}
       </Appbar>
       {!theme.isV3 && renderFAB()}
+      <Snackbar
+        visible={showSnackbar}
+        onDismiss={() => setShowSnackbar(false)}
+        duration={Snackbar.DURATION_SHORT}
+      >
+        Heading pressed
+      </Snackbar>
     </>
   );
 };
