@@ -105,6 +105,7 @@ const AppbarContent = ({
   titleRef,
   titleStyle,
   title,
+  titleMaxFontSizeMultiplier,
   mode = 'small',
   theme: themeOverrides,
   testID = 'appbar-content',
@@ -165,6 +166,7 @@ const AppbarContent = ({
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
           accessibilityTraits="header"
           testID={`${testID}-title-text`}
+          maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
         >
           {title}
         </Text>

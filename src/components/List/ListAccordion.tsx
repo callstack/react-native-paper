@@ -167,6 +167,8 @@ const ListAccordion = ({
   expanded: expandedProp,
   accessibilityLabel,
   pointerEvents = 'none',
+  titleMaxFontSizeMultiplier,
+  descriptionMaxFontSizeMultiplier,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const [expanded, setExpanded] = React.useState<boolean>(
@@ -256,6 +258,7 @@ const ListAccordion = ({
                   },
                   titleStyle,
                 ]}
+                maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
               >
                 {title}
               </Text>
@@ -271,6 +274,7 @@ const ListAccordion = ({
                     descriptionStyle,
                   ]}
                   onTextLayout={onDescriptionTextLayout}
+                  maxFontSizeMultiplier={descriptionMaxFontSizeMultiplier}
                 >
                   {description}
                 </Text>

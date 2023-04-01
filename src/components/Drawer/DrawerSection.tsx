@@ -65,6 +65,7 @@ const DrawerSection = ({
   theme: themeOverrides,
   style,
   showDivider = true,
+  titleMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -90,6 +91,7 @@ const DrawerSection = ({
                   ...font,
                 },
               ]}
+              maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
             >
               {title}
             </Text>

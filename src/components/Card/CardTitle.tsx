@@ -130,10 +130,12 @@ const CardTitle = ({
   titleStyle,
   titleNumberOfLines = 1,
   titleVariant = 'bodyLarge',
+  titleMaxFontSizeMultiplier,
   subtitle,
   subtitleStyle,
   subtitleNumberOfLines = 1,
   subtitleVariant = 'bodyMedium',
+  subtitleMaxFontSizeMultiplier,
   left,
   leftStyle,
   right,
@@ -164,6 +166,7 @@ const CardTitle = ({
             style={[styles.title, { marginBottom }, titleStyle]}
             numberOfLines={titleNumberOfLines}
             variant={titleVariant}
+            maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
           >
             {title}
           </TitleComponent>
@@ -173,6 +176,7 @@ const CardTitle = ({
             style={[styles.subtitle, subtitleStyle]}
             numberOfLines={subtitleNumberOfLines}
             variant={subtitleVariant}
+            maxFontSizeMultiplier={subtitleMaxFontSizeMultiplier}
           >
             {subtitle}
           </SubtitleComponent>

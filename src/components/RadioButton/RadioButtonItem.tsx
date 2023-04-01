@@ -133,6 +133,7 @@ const RadioButtonItem = ({
   mode,
   position = 'trailing',
   labelVariant = 'bodyLarge',
+  labelMaxFontSizeMultiplier,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const radioButtonProps = {
@@ -204,6 +205,7 @@ const RadioButtonItem = ({
                   computedStyle,
                   labelStyle,
                 ]}
+                maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
               >
                 {label}
               </Text>

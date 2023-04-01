@@ -193,6 +193,7 @@ const FAB = forwardRef<View, Props>(
       customSize,
       mode = 'elevated',
       variant = 'primary',
+      labelMaxFontSizeMultiplier,
       ...rest
     }: Props,
     ref
@@ -320,6 +321,7 @@ const FAB = forwardRef<View, Props>(
                   uppercase && styles.uppercaseLabel,
                   textStyle,
                 ]}
+                maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
               >
                 {label}
               </Text>

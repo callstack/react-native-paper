@@ -151,6 +151,7 @@ const Snackbar = ({
   wrapperStyle,
   style,
   theme: themeOverrides,
+  maxFontSizeMultiplier,
   rippleColor,
   testID,
   ...rest
@@ -256,6 +257,7 @@ const Snackbar = ({
         <Text
           variant="bodyMedium"
           style={[styles.content, { color: textColor }]}
+          maxFontSizeMultiplier={maxFontSizeMultiplier}
         >
           {children}
         </Text>

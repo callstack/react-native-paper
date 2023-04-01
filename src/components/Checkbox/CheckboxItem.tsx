@@ -181,6 +181,7 @@ const CheckboxItem = ({
             computedStyle,
             labelStyle,
           ]}
+          maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
         >
           {label}
         </Text>

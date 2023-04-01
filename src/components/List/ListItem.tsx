@@ -132,6 +132,8 @@ const ListItem = ({
   titleEllipsizeMode,
   descriptionEllipsizeMode,
   descriptionStyle,
+  descriptionMaxFontSizeMultiplier,
+  titleMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -169,6 +171,7 @@ const ListItem = ({
           descriptionStyle,
         ]}
         onTextLayout={onDescriptionTextLayout}
+        maxFontSizeMultiplier={descriptionMaxFontSizeMultiplier}
       >
         {description}
       </Text>
@@ -193,6 +196,7 @@ const ListItem = ({
         ellipsizeMode={titleEllipsizeMode}
         numberOfLines={titleNumberOfLines}
         style={[styles.title, { color: titleColor }, titleStyle]}
+        maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
       >
         {title}
       </Text>
