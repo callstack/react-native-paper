@@ -176,7 +176,7 @@ const config = {
           TouchableRipple: {
             TouchableRipple: 'TouchableRipple/TouchableRipple',
           },
-          Typography: {
+          Text: {
             Text: 'Typography/Text',
           },
         },
