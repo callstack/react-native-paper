@@ -17,6 +17,7 @@ import AppbarHeader from '../../Appbar/AppbarHeader';
 import {
   getAppbarColor,
   modeTextVariant,
+  getAppbarBorders,
   renderAppbarContent as utilRenderAppbarContent,
 } from '../../Appbar/utils';
 import Menu from '../../Menu/Menu';
@@ -486,6 +487,32 @@ describe('animated value changes correctly', () => {
 
     expect(getByTestId('appbar-header-outer-layer')).toHaveStyle({
       transform: [{ scale: 1.5 }],
+    });
+  });
+
+  it('header bottom border radius applied correctly', () => {
+    const style = { borderBottomLeftRadius: 16, borderBottomRightRadius: 16 };
+
+    const { getByTestId } = render(
+      <mockSafeAreaContext.SafeAreaProvider>
+        <Appbar.Header style={style} testID="appbar-header">
+          {null}
+        </Appbar.Header>
+      </mockSafeAreaContext.SafeAreaProvider>
+    );
+    expect(getByTestId('appbar-header-root-layer')).toHaveStyle(style);
+  });
+
+  describe('getAppbarBorders', () => {
+    const style = { borderRadius: 10, height: 60, top: 13 };
+
+    it('should return only border radius styles', () => {
+      expect(getAppbarBorders(style)).toEqual({ borderRadius: 10 });
+    });
+
+    it('should return empty object if no borders are passed', () => {
+      const style = { height: 60, top: 13 };
+      expect(getAppbarBorders(style)).toEqual({});
     });
   });
 });
