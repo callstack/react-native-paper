@@ -29,10 +29,19 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * Changes shadows and background on iOS and Android.
    * Used to create UI hierarchy between components.
    *
+   * Note: If `mode` is set to `flat`, Surface doesn't have a shadow.
+   *
    * Note: In version 2 the `elevation` prop was accepted via `style` prop i.e. `style={{ elevation: 4 }}`.
    * It's no longer supported with theme version 3 and you should use `elevation` property instead.
    */
   elevation?: Elevation;
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Mode of the Surface.
+   * - `elevated` - Surface with a shadow and background color corresponding to set `elevation` value.
+   * - `flat` - Surface without a shadow, with the background color corresponding to set `elevation` value.
+   */
+  mode?: 'flat' | 'elevated';
   /**
    * @optional
    */
@@ -125,87 +134,102 @@ const SurfaceIOS = forwardRef<
     elevation: Elevation;
     backgroundColor?: string | Animated.AnimatedInterpolation<string | number>;
   }
->(({ elevation, style, backgroundColor, testID, children, ...props }, ref) => {
-  const [outerLayerViewStyles, innerLayerViewStyles] = React.useMemo(() => {
-    const {
-      position,
-      alignSelf,
-      top,
-      left,
-      right,
-      bottom,
-      start,
-      end,
-      flex,
-      backgroundColor: backgroundColorStyle,
-      width,
-      height,
-      transform,
-      opacity,
-      ...restStyle
-    } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+>(
+  (
+    {
+      elevation,
+      style,
+      backgroundColor,
+      testID,
+      children,
+      mode = 'elevated',
+      ...props
+    },
+    ref
+  ) => {
+    const [outerLayerViewStyles, innerLayerViewStyles] = React.useMemo(() => {
+      const {
+        position,
+        alignSelf,
+        top,
+        left,
+        right,
+        bottom,
+        start,
+        end,
+        flex,
+        backgroundColor: backgroundColorStyle,
+        width,
+        height,
+        transform,
+        opacity,
+        ...restStyle
+      } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
-    const [filteredStyles, marginStyles, borderRadiusStyles] = splitStyles(
-      restStyle,
-      (style) => style.startsWith('margin'),
-      (style) => style.startsWith('border') && style.endsWith('Radius')
-    );
-
-    if (
-      process.env.NODE_ENV !== 'production' &&
-      filteredStyles.overflow === 'hidden' &&
-      elevation !== 0
-    ) {
-      console.warn(
-        'When setting overflow to hidden on Surface the shadow will not be displayed correctly. Wrap the content of your component in a separate View with the overflow style.'
+      const [filteredStyles, marginStyles, borderRadiusStyles] = splitStyles(
+        restStyle,
+        (style) => style.startsWith('margin'),
+        (style) => style.startsWith('border') && style.endsWith('Radius')
       );
-    }
 
-    const bgColor = backgroundColorStyle || backgroundColor;
+      if (
+        process.env.NODE_ENV !== 'production' &&
+        filteredStyles.overflow === 'hidden' &&
+        elevation !== 0
+      ) {
+        console.warn(
+          'When setting overflow to hidden on Surface the shadow will not be displayed correctly. Wrap the content of your component in a separate View with the overflow style.'
+        );
+      }
 
-    const outerLayerViewStyles = {
-      ...getStyleForShadowLayer(elevation, 0),
-      ...marginStyles,
-      ...borderRadiusStyles,
-      position,
-      alignSelf,
-      top,
-      right,
-      bottom,
-      left,
-      start,
-      end,
-      flex,
-      width,
-      height,
-      transform,
-      opacity,
-      backgroundColor: bgColor,
-    };
+      const bgColor = backgroundColorStyle || backgroundColor;
 
-    const innerLayerViewStyles = {
-      ...getStyleForShadowLayer(elevation, 1),
-      ...filteredStyles,
-      ...borderRadiusStyles,
-      flex: height ? 1 : undefined,
-      backgroundColor: bgColor,
-    };
+      const isElevated = mode === 'elevated';
 
-    return [outerLayerViewStyles, innerLayerViewStyles];
-  }, [style, elevation, backgroundColor]);
+      const outerLayerViewStyles = {
+        ...(isElevated && getStyleForShadowLayer(elevation, 0)),
+        ...marginStyles,
+        ...borderRadiusStyles,
+        position,
+        alignSelf,
+        top,
+        right,
+        bottom,
+        left,
+        start,
+        end,
+        flex,
+        width,
+        height,
+        transform,
+        opacity,
+        backgroundColor: bgColor,
+      };
 
-  return (
-    <Animated.View
-      ref={ref}
-      style={outerLayerViewStyles}
-      testID={`${testID}-outer-layer`}
-    >
-      <Animated.View {...props} style={innerLayerViewStyles} testID={testID}>
-        {children}
+      const innerLayerViewStyles = {
+        ...(isElevated && getStyleForShadowLayer(elevation, 1)),
+        ...filteredStyles,
+        ...borderRadiusStyles,
+        flex: height ? 1 : undefined,
+        backgroundColor: bgColor,
+      };
+
+      return [outerLayerViewStyles, innerLayerViewStyles];
+    }, [style, elevation, backgroundColor, mode]);
+
+    return (
+      <Animated.View
+        ref={ref}
+        style={outerLayerViewStyles}
+        testID={`${testID}-outer-layer`}
+      >
+        <Animated.View {...props} style={innerLayerViewStyles} testID={testID}>
+          {children}
+        </Animated.View>
       </Animated.View>
-    </Animated.View>
-  );
-});
+    );
+  }
+);
 
 /**
  * Surface is a basic container that can give depth to an element with elevation shadow.
@@ -257,6 +281,7 @@ const Surface = forwardRef<View, Props>(
       theme: overridenTheme,
       style,
       testID = 'surface',
+      mode = 'elevated',
       ...props
     }: Props,
     ref
@@ -287,6 +312,8 @@ const Surface = forwardRef<View, Props>(
       return colors.elevation?.[`level${elevation}`];
     })();
 
+    const isElevated = mode === 'elevated';
+
     if (Platform.OS === 'web') {
       return (
         <Animated.View
@@ -295,7 +322,7 @@ const Surface = forwardRef<View, Props>(
           testID={testID}
           style={[
             { backgroundColor },
-            elevation ? shadow(elevation, theme.isV3) : null,
+            elevation && isElevated ? shadow(elevation, theme.isV3) : null,
             style,
           ]}
         >
@@ -337,7 +364,7 @@ const Surface = forwardRef<View, Props>(
             },
             outerLayerStyles,
             sharedStyle,
-            {
+            isElevated && {
               elevation: getElevationAndroid(),
             },
           ]}
@@ -355,6 +382,7 @@ const Surface = forwardRef<View, Props>(
         backgroundColor={backgroundColor}
         style={style}
         testID={testID}
+        mode={mode}
       >
         {children}
       </SurfaceIOS>

@@ -14,7 +14,7 @@ import {
 
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
-import type { EllipsizeProp, ThemeProp } from '../../types';
+import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -23,7 +23,7 @@ import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import { getChipColors } from './helpers';
 
-export type Props = React.ComponentProps<typeof Surface> & {
+export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Mode of the chip.
    * - `flat` - flat chip without outline.

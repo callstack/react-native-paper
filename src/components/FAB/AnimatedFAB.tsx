@@ -21,7 +21,7 @@ import {
 import color from 'color';
 
 import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
+import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import Surface from '../Surface';
@@ -32,7 +32,7 @@ import { getCombinedStyles, getFABColors } from './utils';
 export type AnimatedFABIconMode = 'static' | 'dynamic';
 export type AnimatedFABAnimateFrom = 'left' | 'right';
 
-export type Props = $RemoveChildren<typeof Surface> & {
+export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
   /**
    * Icon to display for the `FAB`.
    */
