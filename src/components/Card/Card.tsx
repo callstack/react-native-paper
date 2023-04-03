@@ -9,6 +9,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import useLatestCallback from 'use-latest-callback';
+
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import Surface from '../Surface';
@@ -59,6 +61,10 @@ export type Props = React.ComponentProps<typeof Surface> & {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * If true, disable all interactions for this component.
+   */
+  disabled?: boolean;
   /**
    * The number of milliseconds a user must touch the element before executing `onLongPress`.
    */
@@ -141,6 +147,7 @@ const Card = ({
   theme: themeOverrides,
   testID = 'card',
   accessible,
+  disabled,
   ...rest
 }: (OutlinedCardProps | ElevatedCardProps | ContainedCardProps) & Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -208,13 +215,13 @@ const Card = ({
     }
   };
 
-  const handlePressIn = () => {
+  const handlePressIn = useLatestCallback(() => {
     runElevationAnimation('in');
-  };
+  });
 
-  const handlePressOut = () => {
+  const handlePressOut = useLatestCallback(() => {
     runElevationAnimation('out');
-  };
+  });
 
   const total = React.Children.count(children);
   const siblings = React.Children.map(children, (child) =>
@@ -234,6 +241,24 @@ const Card = ({
     borderRadius = (isV3 ? 3 : 1) * roundness,
     borderColor = themedBorderColor,
   } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+
+  const content = (
+    <View
+      style={[styles.innerContainer, contentStyle]}
+      testID={testID}
+      accessible={accessible}
+    >
+      {React.Children.map(children, (child, index) =>
+        React.isValidElement(child)
+          ? React.cloneElement(child as React.ReactElement<any>, {
+              index,
+              total,
+              siblings,
+            })
+          : child
+      )}
+    </View>
+  );
 
   return (
     <Surface
@@ -269,29 +294,22 @@ const Card = ({
           ]}
         />
       )}
-      <TouchableWithoutFeedback
-        delayPressIn={0}
-        disabled={!(onPress || onLongPress)}
-        delayLongPress={delayLongPress}
-        onLongPress={onLongPress}
-        onPress={onPress}
-        onPressIn={onPress || onLongPress ? handlePressIn : undefined}
-        onPressOut={onPress || onLongPress ? handlePressOut : undefined}
-        testID={testID}
-        accessible={accessible}
-      >
-        <View style={[styles.innerContainer, contentStyle]}>
-          {React.Children.map(children, (child, index) =>
-            React.isValidElement(child)
-              ? React.cloneElement(child as React.ReactElement<any>, {
-                  index,
-                  total,
-                  siblings,
-                })
-              : child
-          )}
-        </View>
-      </TouchableWithoutFeedback>
+
+      {onPress || onLongPress ? (
+        <TouchableWithoutFeedback
+          delayPressIn={0}
+          disabled={disabled}
+          delayLongPress={delayLongPress}
+          onLongPress={onLongPress}
+          onPress={onPress}
+          onPressIn={handlePressIn}
+          onPressOut={handlePressOut}
+        >
+          {content}
+        </TouchableWithoutFeedback>
+      ) : (
+        content
+      )}
     </Surface>
   );
 };

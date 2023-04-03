@@ -86,6 +86,27 @@ describe('Card', () => {
 
     expect(getByTestId('card')).toHaveStyle(styles.contentStyle);
   });
+
+  it('does not render a disabled accessibility state', () => {
+    const { getByTestId } = render(<Card>{null}</Card>);
+
+    expect(
+      getByTestId('card').props.accessibilityState || {}
+    ).not.toMatchObject({
+      disabled: true,
+    });
+  });
+  it('does render a disabled accessibility state', () => {
+    const { getByTestId } = render(
+      <Card onPress={() => {}} disabled>
+        {null}
+      </Card>
+    );
+
+    expect(getByTestId('card').props.accessibilityState).toMatchObject({
+      disabled: true,
+    });
+  });
 });
 
 describe('CardActions', () => {

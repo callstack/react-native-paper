@@ -683,21 +683,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       </View>
     </View>
     <View
-      accessibilityRole="text"
-      accessibilityState={
-        Object {
-          "disabled": true,
-        }
-      }
-      accessible={true}
-      focusable={false}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       pointerEvents="box-none"
       style={
         Array [
@@ -719,6 +704,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
     >
       <Text
         accessibilityRole="header"
+        accessibilityTraits="header"
         accessible={true}
         numberOfLines={1}
         style={
