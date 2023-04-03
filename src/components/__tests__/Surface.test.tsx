@@ -4,6 +4,7 @@ import { Platform } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 
+import { getTheme } from '../../core/theming';
 import Surface from '../Surface';
 
 describe('Surface', () => {
@@ -37,6 +38,35 @@ describe('Surface', () => {
         flexDirection: 'row',
         alignContent: 'center',
       },
+    });
+
+    it('should render Surface with appropriate bg color but without shadow, if mode is set to "flat"', () => {
+      const { getByTestId } = render(
+        <Surface
+          mode="flat"
+          elevation={5}
+          pointerEvents="box-none"
+          testID={'surface-test'}
+        >
+          {null}
+        </Surface>
+      );
+
+      expect(getByTestId('surface-test')).not.toHaveStyle({
+        shadowColor: '#000',
+        shadowOpacity: 0.3,
+        shadowOffset: { width: 0, height: 4 },
+        shadowRadius: 4,
+      });
+      expect(getByTestId('surface-test-outer-layer')).not.toHaveStyle({
+        shadowColor: '#000',
+        shadowOpacity: 0.15,
+        shadowOffset: { width: 0, height: 8 },
+        shadowRadius: 12,
+      });
+      expect(getByTestId('surface-test')).toHaveStyle({
+        backgroundColor: getTheme().colors.elevation.level5,
+      });
     });
 
     it.each`
@@ -205,6 +235,28 @@ describe('Surface', () => {
         );
 
         expect(getByTestId(testID)).toHaveStyle(combinedStyles);
+      });
+    });
+  });
+
+  describe('on Android', () => {
+    it('should render Surface with appropriate bg color but without shadow, if mode is set to "flat"', () => {
+      Platform.OS = 'android';
+      const testID = 'surface-container';
+      const { getByTestId } = render(
+        <Surface
+          mode="flat"
+          elevation={5}
+          pointerEvents="box-none"
+          testID={testID}
+        >
+          {null}
+        </Surface>
+      );
+
+      expect(getByTestId(testID)).not.toHaveStyle({ elevation: 5 });
+      expect(getByTestId(testID)).toHaveStyle({
+        backgroundColor: getTheme().colors.elevation.level5,
       });
     });
   });
