@@ -118,7 +118,7 @@ const ListSectionExample = () => {
               <View
                 style={[styles.container, styles.row, styles.additionalPadding]}
               >
-                <Chip icon="file-pdf" onPress={() => {}}>
+                <Chip icon="file-pdf-box" onPress={() => {}}>
                   DOCS.pdf
                 </Chip>
               </View>
