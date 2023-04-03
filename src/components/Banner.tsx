@@ -4,7 +4,7 @@ import { Animated, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import useLatestCallback from 'use-latest-callback';
 
 import { useInternalTheme } from '../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../types';
+import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
 import Button from './Button/Button';
 import Icon, { IconSource } from './Icon';
 import Surface from './Surface';
@@ -12,7 +12,7 @@ import Text from './Typography/Text';
 
 const DEFAULT_MAX_WIDTH = 960;
 
-export type Props = $RemoveChildren<typeof Surface> & {
+export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
   /**
    * Whether banner is currently visible.
    */

@@ -12,7 +12,7 @@ import {
 import useLatestCallback from 'use-latest-callback';
 
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { $Omit, ThemeProp } from '../../types';
 import Surface from '../Surface';
 import CardActions from './CardActions';
 import CardContent from './CardContent';
@@ -41,7 +41,7 @@ type HandlePressType = 'in' | 'out';
 
 type Mode = 'elevated' | 'outlined' | 'contained';
 
-export type Props = React.ComponentProps<typeof Surface> & {
+export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Mode of the Card.
    * - `elevated` - Card with elevation.
