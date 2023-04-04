@@ -126,6 +126,7 @@ exports[`can render leading checkbox control 1`] = `
       </View>
     </View>
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         Array [
           Object {
@@ -156,6 +157,7 @@ exports[`can render leading checkbox control 1`] = `
           ],
         ]
       }
+      testID="undefined-text"
     >
       Default with leading control
     </Text>
@@ -210,6 +212,7 @@ exports[`can render the Android checkbox on different platforms 1`] = `
     }
   >
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         Array [
           Object {
@@ -240,6 +243,7 @@ exports[`can render the Android checkbox on different platforms 1`] = `
           ],
         ]
       }
+      testID="undefined-text"
     >
       iOS Checkbox
     </Text>
@@ -409,6 +413,7 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
     }
   >
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         Array [
           Object {
@@ -439,6 +444,7 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
           ],
         ]
       }
+      testID="undefined-text"
     >
       iOS Checkbox
     </Text>
@@ -572,6 +578,7 @@ exports[`renders unchecked 1`] = `
     }
   >
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         Array [
           Object {
@@ -602,6 +609,7 @@ exports[`renders unchecked 1`] = `
           ],
         ]
       }
+      testID="undefined-text"
     >
       Unchecked Button
     </Text>
