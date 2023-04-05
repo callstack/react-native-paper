@@ -226,6 +226,156 @@ html[data-theme='light'] .gallery-dark {
   min-width: 0;
 }
 
+.color-picker {
+  display: table;
+  width: 100%;
+  overflow: visible;
+  padding: 0;
+}
+
+.color-picker-cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.2);
+  z-index: 1;
+}
+
+.color-picker-anchor {
+  position: relative;
+  display: inline-block;
+}
+
+.color-picker-popup {
+  position: absolute;
+  z-index: 3;
+  top: 36px;
+}
+
+.color-picker td {
+  padding: 8px;
+}
+
+.color-picker-button-col {
+  width: 168px;
+}
+
+.color-picker-button {
+  border: none;
+  border-radius: 4px;
+  padding: 6px 22px;
+  cursor: pointer;
+  width: 168px;
+  font-family: monospace;
+  font-size: 16px;
+}
+
+.color-picker-button-additional {
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 22px;
+  cursor: pointer;
+  width: 130px;
+  font-family: monospace;
+  font-size: 16px;
+}
+
+.color-picker-button-cancel {
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 2px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 32px;
+  margin-left: 6px;
+}
+
+.color-picker-preview {
+  padding: 16px;
+  border-radius: 8px;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.color-picker-preview-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 1.4rem;
+}
+
+.color-picker-action-button {
+  padding: 2px 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.color-picker-name-input {
+  padding: 4px 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  margin-left: 6px;
+}
+
+.color-picker-schema-copy-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.color-picker-schema-copy-header h4 {
+  margin-bottom: 12px;
+}
+
+.color-picker-themes {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 20px;
+  margin-top: 20px;
+
+}
+.color-picker-themes > div {
+  flex: 1 0 300px;
+  font-size: 11px;
+  position: relative;
+}
+.color-picker-themes pre {
+  height: 300px;
+  overflow: scroll;
+}
+
+.color-picker-preview-header > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.color-picker-preview-header p {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.color-picker-preview-box {
+  padding: 6px 6px 18px 6px;
+  font-size: 12px;
+  display:block;
+}
+
+.color-picker-button:hover, .color-picker-button:focus,
+.color-picker-button-additional:hover, .color-picker-button-additional:focus,
+.color-picker-button-cancel:hover, .color-picker-button-cancel:focus{
+  opacity: 0.8;
+}
+
+
 @media (max-width: 680px) {
   .showcase-gallery {
     justify-content: center;
@@ -337,85 +487,21 @@ html[data-theme='light'] .gallery-dark {
 
 /* DynamicColorTheme.tsx */
 
-.gridColors {
+.color-picker-grid-column {
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
   margin-top: 20px;
-  grid-template-columns: 25% 25% 25% 25%;
+  gap: 6px;
   height: 100%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
-
-.gridParent {
-  display: grid;
-  grid-template-columns: 50% 40%;
-  column-gap: 15px;
-}
-
-.searchBar {
-  box-sizing: border-box;
-  appearance: none;
-  border: 0;
-  display: block;
-  width: 20%;
-  padding: 12px;
-  font-size: 1em;
-  background-color: #f0f0f0;
-  border-radius: 3px;
-  outline: 0;
-}
-
-@media only screen and (max-width: 1000px) {
-  .gridColors {
-    grid-template-columns: 50% 50%;
-  }
-
-  .gridParent {
-    grid-template-columns: 100%;
-  }
-
-  .searchBar {
-    width: 40%;
+@media only screen and (min-width: 997px) and (max-width: 1280px) {
+  .color-picker-grid-column {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media only screen and (min-width: 1000px) and (max-width: 1200px) {
-  .gridColors {
-    grid-template-columns: 50% 50%;
-  }
-
-  .gridParent {
-    grid-template-columns: 60% 40%;
-  }
-
-  .searchBar {
-    width: 40%;
-  }
-}
-
-@media only screen and (min-width: 1200px) and (max-width: 1400px) {
-  .gridColors {
-    grid-template-columns: 33.3% 33.3% 33.3%;
-  }
-
-  .gridParent {
-    grid-template-columns: 60% 40%;
-  }
-
-  .searchBar {
-    width: 40%;
-  }
-}
-
-@media only screen and (min-width: 1400px) and (max-width: 1600px) {
-  .gridColors {
-    grid-template-columns: 25% 25% 25% 25%;
-  }
-
-  .gridParent {
-    grid-template-columns: 60% 40%;
-  }
-
-  .searchBar {
-    width: 40%;
+@media only screen and (max-width: 600px) {
+  .color-picker-grid-column {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
