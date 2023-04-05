@@ -2,29 +2,26 @@ import * as React from 'react';
 import { Animated } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
-import renderer from 'react-test-renderer';
 
 import * as Avatar from '../Avatar/Avatar';
 import Searchbar from '../Searchbar';
 
 it('renders with placeholder', () => {
-  const tree = renderer
-    .create(<Searchbar placeholder="Search" value="" />)
-    .toJSON();
+  const tree = render(<Searchbar placeholder="Search" value="" />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders with text', () => {
-  const tree = renderer
-    .create(<Searchbar placeholder="Search" value="query" />)
-    .toJSON();
+  const tree = render(
+    <Searchbar placeholder="Search" value="query" />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('activity indicator snapshot test', () => {
-  const tree = renderer.create(<Searchbar loading={true} value="" />).toJSON();
+  const tree = render(<Searchbar loading={true} value="" />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

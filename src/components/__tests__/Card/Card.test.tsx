@@ -3,7 +3,6 @@ import { Animated, StyleSheet, Text } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 import color from 'color';
-import renderer from 'react-test-renderer';
 
 import { getTheme } from '../../../core/theming';
 import { black, white } from '../../../styles/themes/v2/colors';
@@ -23,7 +22,7 @@ const styles = StyleSheet.create({
 
 describe('Card', () => {
   it('renders an outlined card', () => {
-    const tree = renderer.create(<Card mode="outlined">{null}</Card>).toJSON();
+    const tree = render(<Card mode="outlined">{null}</Card>).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

@@ -216,6 +216,7 @@ Array [
           undefined,
         ]
       }
+      testID="menu-view"
     >
       <View
         collapsable={false}
@@ -895,6 +896,7 @@ Array [
           undefined,
         ]
       }
+      testID="menu-view"
     >
       <View
         collapsable={false}

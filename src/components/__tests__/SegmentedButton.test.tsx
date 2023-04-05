@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { render } from '@testing-library/react-native';
 import color from 'color';
-import renderer from 'react-test-renderer';
 
 import { getTheme } from '../../core/theming';
 import { black } from '../../styles/themes/v2/colors';
@@ -13,46 +12,40 @@ import {
 } from '../SegmentedButtons/utils';
 
 it('renders segmented button', () => {
-  const tree = renderer
-    .create(
-      <SegmentedButtons
-        onValueChange={() => {}}
-        value={'walk'}
-        buttons={[{ value: 'walk' }, { value: 'ride' }]}
-      />
-    )
-    .toJSON();
+  const tree = render(
+    <SegmentedButtons
+      onValueChange={() => {}}
+      value={'walk'}
+      buttons={[{ value: 'walk' }, { value: 'ride' }]}
+    />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders disabled segmented button', () => {
-  const tree = renderer
-    .create(
-      <SegmentedButtons
-        onValueChange={() => {}}
-        value={'walk'}
-        buttons={[{ value: 'walk' }, { value: 'ride', disabled: true }]}
-      />
-    )
-    .toJSON();
+  const tree = render(
+    <SegmentedButtons
+      onValueChange={() => {}}
+      value={'walk'}
+      buttons={[{ value: 'walk' }, { value: 'ride', disabled: true }]}
+    />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders checked segmented button with selected check', () => {
-  const tree = renderer
-    .create(
-      <SegmentedButtons
-        onValueChange={() => {}}
-        value={'walk'}
-        buttons={[
-          { value: 'walk', showSelectedCheck: true },
-          { value: 'ride', disabled: true },
-        ]}
-      />
-    )
-    .toJSON();
+  const tree = render(
+    <SegmentedButtons
+      onValueChange={() => {}}
+      value={'walk'}
+      buttons={[
+        { value: 'walk', showSelectedCheck: true },
+        { value: 'ride', disabled: true },
+      ]}
+    />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

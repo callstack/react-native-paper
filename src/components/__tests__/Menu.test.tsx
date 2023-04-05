@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 
-import { render, waitFor } from '@testing-library/react-native';
-import renderer from 'react-test-renderer';
+import { render, waitFor, screen } from '@testing-library/react-native';
 
 import Button from '../Button/Button';
 import Menu from '../Menu/Menu';
@@ -16,59 +15,53 @@ const styles = StyleSheet.create({
 });
 
 it('renders visible menu', () => {
-  const tree = renderer
-    .create(
-      <Portal.Host>
-        <Menu
-          visible
-          onDismiss={jest.fn()}
-          anchor={<Button mode="outlined">Open menu</Button>}
-        >
-          <Menu.Item onPress={jest.fn()} title="Undo" />
-          <Menu.Item onPress={jest.fn()} title="Redo" />
-        </Menu>
-      </Portal.Host>
-    )
-    .toJSON();
+  const tree = render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+        <Menu.Item onPress={jest.fn()} title="Redo" />
+      </Menu>
+    </Portal.Host>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders not visible menu', () => {
-  const tree = renderer
-    .create(
-      <Portal.Host>
-        <Menu
-          visible={false}
-          onDismiss={jest.fn()}
-          anchor={<Button mode="outlined">Open menu</Button>}
-        >
-          <Menu.Item onPress={jest.fn()} title="Undo" />
-          <Menu.Item onPress={jest.fn()} title="Redo" />
-        </Menu>
-      </Portal.Host>
-    )
-    .toJSON();
+  const tree = render(
+    <Portal.Host>
+      <Menu
+        visible={false}
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+        <Menu.Item onPress={jest.fn()} title="Redo" />
+      </Menu>
+    </Portal.Host>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders menu with content styles', () => {
-  const tree = renderer
-    .create(
-      <Portal.Host>
-        <Menu
-          visible
-          onDismiss={jest.fn()}
-          anchor={<Button mode="outlined">Open menu</Button>}
-          contentStyle={styles.contentStyle}
-        >
-          <Menu.Item onPress={jest.fn()} title="Undo" />
-          <Menu.Item onPress={jest.fn()} title="Redo" />
-        </Menu>
-      </Portal.Host>
-    )
-    .toJSON();
+  const tree = render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+        contentStyle={styles.contentStyle}
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+        <Menu.Item onPress={jest.fn()} title="Redo" />
+      </Menu>
+    </Portal.Host>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
@@ -94,7 +87,7 @@ it('uses the default anchorPosition of top', async () => {
     );
   }
 
-  const tree = renderer.create(makeMenu(false));
+  render(makeMenu(false));
 
   jest
     .spyOn(View.prototype, 'measureInWindow')
@@ -104,22 +97,15 @@ it('uses the default anchorPosition of top', async () => {
   // componentDidUpdate isn't called by default in jest. Forcing the update
   // than triggers measureInWindow, which is how Menu decides where to show
   // itself.
-  tree.update(makeMenu(true));
+  screen.update(makeMenu(true));
 
-  // If someone has a better way to verify the location of a child on the
-  // screen, please by all means let me know.
   await waitFor(() => {
-    const menu = tree.root.findByProps({ accessibilityViewIsModal: true });
-    expect(menu).toHaveProperty('_fiber.pendingProps.style', [
-      {
-        position: 'absolute',
-      },
-      {
-        left: 100,
-        top: 100,
-      },
-      undefined,
-    ]);
+    const menu = screen.getByTestId('menu-view');
+    expect(menu).toHaveStyle({
+      position: 'absolute',
+      left: 100,
+      top: 100,
+    });
   });
 });
 
@@ -145,27 +131,21 @@ it('respects anchorPosition bottom', async () => {
     );
   }
 
-  const tree = renderer.create(makeMenu(false));
+  render(makeMenu(false));
 
   jest
     .spyOn(View.prototype, 'measureInWindow')
     .mockImplementation((fn) => fn(100, 100, 80, 32));
 
-  // See note from previous test about this update.
-  tree.update(makeMenu(true));
+  screen.update(makeMenu(true));
 
   await waitFor(() => {
-    const menu = tree.root.findByProps({ accessibilityViewIsModal: true });
-    expect(menu).toHaveProperty('_fiber.pendingProps.style', [
-      {
-        position: 'absolute',
-      },
-      {
-        left: 100,
-        top: 132,
-      },
-      undefined,
-    ]);
+    const menu = screen.getByTestId('menu-view');
+    expect(menu).toHaveStyle({
+      position: 'absolute',
+      left: 100,
+      top: 132,
+    });
   });
 });
 

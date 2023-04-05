@@ -1,18 +1,16 @@
 import React from 'react';
 
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react-native';
 
 import RadioButton from '../../RadioButton';
 
 describe('RadioButtonGroup', () => {
   it('renders properly', () => {
-    const tree = renderer
-      .create(
-        <RadioButton.Group value="first" onValueChange={() => {}}>
-          <RadioButton value="first" />
-        </RadioButton.Group>
-      )
-      .toJSON();
+    const tree = render(
+      <RadioButton.Group value="first" onValueChange={() => {}}>
+        <RadioButton value="first" />
+      </RadioButton.Group>
+    ).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

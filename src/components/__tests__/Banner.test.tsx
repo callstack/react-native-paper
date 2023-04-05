@@ -2,118 +2,105 @@ import * as React from 'react';
 import { Animated, Image } from 'react-native';
 
 import { render } from '@testing-library/react-native';
-import renderer from 'react-test-renderer';
 
 import Banner from '../Banner';
 
 it('renders hidden banner, without action buttons and without image', () => {
-  const tree = renderer
-    .create(
-      <Banner visible={false}>
-        Two line text string with two actions. One to two lines is preferable on
-        mobile.
-      </Banner>
-    )
-    .toJSON();
+  const tree = render(
+    <Banner visible={false}>
+      Two line text string with two actions. One to two lines is preferable on
+      mobile.
+    </Banner>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders visible banner, without action buttons and without image', () => {
-  const tree = renderer
-    .create(
-      <Banner visible>
-        Two line text string with two actions. One to two lines is preferable on
-        mobile.
-      </Banner>
-    )
-    .toJSON();
+  const tree = render(
+    <Banner visible>
+      Two line text string with two actions. One to two lines is preferable on
+      mobile.
+    </Banner>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders visible banner, with action buttons and without image', () => {
-  const tree = renderer
-    .create(
-      <Banner
-        visible
-        actions={[
-          { label: 'first', onPress: () => {} },
-          { label: 'second', onPress: () => {} },
-        ]}
-      >
-        Two line text string with two actions. One to two lines is preferable on
-        mobile.
-      </Banner>
-    )
-    .toJSON();
+  const tree = render(
+    <Banner
+      visible
+      actions={[
+        { label: 'first', onPress: () => {} },
+        { label: 'second', onPress: () => {} },
+      ]}
+    >
+      Two line text string with two actions. One to two lines is preferable on
+      mobile.
+    </Banner>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders visible banner, without action buttons and with image', () => {
-  const tree = renderer
-    .create(
-      <Banner
-        visible
-        icon={({ size }) => (
-          <Image
-            source={{ uri: 'https://callstack.com/images/team/Satya.png' }}
-            style={{ width: size, height: size }}
-            accessibilityIgnoresInvertColors
-          />
-        )}
-      >
-        Two line text string with two actions. One to two lines is preferable on
-        mobile.
-      </Banner>
-    )
-    .toJSON();
+  const tree = render(
+    <Banner
+      visible
+      icon={({ size }) => (
+        <Image
+          source={{ uri: 'https://callstack.com/images/team/Satya.png' }}
+          style={{ width: size, height: size }}
+          accessibilityIgnoresInvertColors
+        />
+      )}
+    >
+      Two line text string with two actions. One to two lines is preferable on
+      mobile.
+    </Banner>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders visible banner, with action buttons and with image', () => {
-  const tree = renderer
-    .create(
-      <Banner
-        visible
-        icon={({ size }) => (
-          <Image
-            source={{ uri: 'https://callstack.com/images/team/Satya.png' }}
-            style={{ width: size, height: size }}
-            accessibilityIgnoresInvertColors
-          />
-        )}
-        actions={[{ label: 'first', onPress: () => {} }]}
-      >
-        Two line text string with two actions. One to two lines is preferable on
-        mobile.
-      </Banner>
-    )
-    .toJSON();
+  const tree = render(
+    <Banner
+      visible
+      icon={({ size }) => (
+        <Image
+          source={{ uri: 'https://callstack.com/images/team/Satya.png' }}
+          style={{ width: size, height: size }}
+          accessibilityIgnoresInvertColors
+        />
+      )}
+      actions={[{ label: 'first', onPress: () => {} }]}
+    >
+      Two line text string with two actions. One to two lines is preferable on
+      mobile.
+    </Banner>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('render visible banner, with custom theme', () => {
-  const tree = renderer
-    .create(
-      <Banner
-        visible
-        theme={{
-          colors: {
-            text: '#00f',
-            surface: '#ccc',
-            primary: '#043',
-          },
-        }}
-        actions={[{ label: 'first', onPress: () => {} }]}
-      >
-        Custom theme
-      </Banner>
-    )
-    .toJSON();
+  const tree = render(
+    <Banner
+      visible
+      theme={{
+        colors: {
+          text: '#00f',
+          surface: '#ccc',
+          primary: '#043',
+        },
+      }}
+      actions={[{ label: 'first', onPress: () => {} }]}
+    >
+      Custom theme
+    </Banner>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
@@ -140,7 +127,7 @@ describe('animations', () => {
   describe('when component is rendered hidden', () => {
     // This behaviour is probably a bug. Needs triage before next version.
     it('will fire onHideAnimationFinished on mount', () => {
-      renderer.create(
+      render(
         <Banner
           onShowAnimationFinished={showCallback}
           onHideAnimationFinished={hideCallback}
@@ -159,7 +146,7 @@ describe('animations', () => {
     });
 
     it('should fire onShowAnimationFinished upon opening', () => {
-      const tree = renderer.create(
+      const tree = render(
         <Banner
           onShowAnimationFinished={showCallback}
           onHideAnimationFinished={hideCallback}
@@ -191,7 +178,7 @@ describe('animations', () => {
   describe('when component is rendered visible', () => {
     // This behaviour is probably a bug. Needs triage before next version.
     it('will fire onShowAnimationFinished on mount', () => {
-      renderer.create(
+      render(
         <Banner
           onShowAnimationFinished={showCallback}
           onHideAnimationFinished={hideCallback}
@@ -210,7 +197,7 @@ describe('animations', () => {
     });
 
     it('should fire onHideAnimationFinished upon closing', () => {
-      const tree = renderer.create(
+      const tree = render(
         <Banner
           onShowAnimationFinished={showCallback}
           onHideAnimationFinished={hideCallback}
@@ -241,7 +228,7 @@ describe('animations', () => {
 
   describe('when the callbacks change while the component is mounted', () => {
     it('should not cause another open/close animation', () => {
-      const tree = renderer.create(
+      const tree = render(
         <Banner
           onShowAnimationFinished={showCallback}
           onHideAnimationFinished={hideCallback}
@@ -276,7 +263,7 @@ describe('animations', () => {
     });
 
     it('should use the new callbacks upon opening/closing', () => {
-      const tree = renderer.create(
+      const tree = render(
         <Banner
           onShowAnimationFinished={showCallback}
           onHideAnimationFinished={hideCallback}

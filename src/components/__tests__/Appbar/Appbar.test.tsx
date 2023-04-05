@@ -3,7 +3,6 @@ import { Animated, Platform } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
-import renderer from 'react-test-renderer';
 
 import Provider from '../../../core/Provider';
 import { getTheme } from '../../../core/theming';
@@ -33,27 +32,23 @@ const renderAppbarContent = utilRenderAppbarContent as (
 
 describe('Appbar', () => {
   it('does not pass any additional props to Searchbar', () => {
-    const tree = renderer
-      .create(
-        <Appbar>
-          <Searchbar placeholder="Search" value="" />
-        </Appbar>
-      )
-      .toJSON();
+    const tree = render(
+      <Appbar>
+        <Searchbar placeholder="Search" value="" />
+      </Appbar>
+    ).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
   it('passes additional props to AppbarBackAction, AppbarContent and AppbarAction', () => {
-    const tree = renderer
-      .create(
-        <Appbar>
-          <Appbar.BackAction onPress={() => {}} />
-          <Appbar.Content title="Examples" />
-          <Appbar.Action icon="menu" onPress={() => {}} />
-        </Appbar>
-      )
-      .toJSON();
+    const tree = render(
+      <Appbar>
+        <Appbar.BackAction onPress={() => {}} />
+        <Appbar.Content title="Examples" />
+        <Appbar.Action icon="menu" onPress={() => {}} />
+      </Appbar>
+    ).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

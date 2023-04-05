@@ -1,6 +1,6 @@
 import React from 'react';
 
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react-native';
 
 import RadioButton from '../../RadioButton';
 import { RadioButtonContext } from '../../RadioButton/RadioButtonGroup';
@@ -20,7 +20,7 @@ describe('RadioButton', () => {
     });
 
     it('renders properly', () => {
-      const tree = renderer.create(<RadioButton value="first" />).toJSON();
+      const tree = render(<RadioButton value="first" />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
@@ -40,7 +40,7 @@ describe('RadioButton', () => {
     });
 
     it('renders properly', () => {
-      const tree = renderer.create(<RadioButton value="first" />).toJSON();
+      const tree = render(<RadioButton value="first" />).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
@@ -48,15 +48,13 @@ describe('RadioButton', () => {
 
   describe('when RadioButton is wrapped by RadioButtonContext.Provider', () => {
     it('renders properly', () => {
-      const tree = renderer
-        .create(
-          <RadioButtonContext.Provider
-            value={{ value: 'first', onValueChange: () => {} }}
-          >
-            <RadioButton value="first" />
-          </RadioButtonContext.Provider>
-        )
-        .toJSON();
+      const tree = render(
+        <RadioButtonContext.Provider
+          value={{ value: 'first', onValueChange: () => {} }}
+        >
+          <RadioButton value="first" />
+        </RadioButtonContext.Provider>
+      ).toJSON();
 
       expect(tree).toMatchSnapshot();
     });
@@ -64,9 +62,9 @@ describe('RadioButton', () => {
 
   describe('RadioButton with custom testID', () => {
     it('renders properly', () => {
-      const tree = renderer
-        .create(<RadioButton value="first" testID={'custom:testID'} />)
-        .toJSON();
+      const tree = render(
+        <RadioButton value="first" testID={'custom:testID'} />
+      ).toJSON();
 
       expect(tree).toMatchSnapshot();
     });

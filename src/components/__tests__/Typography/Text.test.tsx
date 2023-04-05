@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { render } from '@testing-library/react-native';
-import renderer from 'react-test-renderer';
 
 import Provider from '../../../core/Provider';
 import configureFonts from '../../../styles/fonts';
@@ -36,7 +35,7 @@ it('renders every variant of Text with children as content', () => {
     </>
   );
 
-  const tree = renderer.create(variants).toJSON();
+  const tree = render(variants).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
