@@ -3,7 +3,6 @@ import { Animated } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 import color from 'color';
-import renderer from 'react-test-renderer';
 
 import { getTheme } from '../../core/theming';
 import { black, white } from '../../styles/themes/v2/colors';
@@ -11,59 +10,49 @@ import Chip from '../Chip/Chip';
 import { getChipColors } from '../Chip/helpers';
 
 it('renders chip with onPress', () => {
-  const tree = renderer
-    .create(<Chip onPress={() => {}}>Example Chip</Chip>)
-    .toJSON();
+  const tree = render(<Chip onPress={() => {}}>Example Chip</Chip>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders chip with icon', () => {
-  const tree = renderer
-    .create(<Chip icon="information">Example Chip</Chip>)
-    .toJSON();
+  const tree = render(<Chip icon="information">Example Chip</Chip>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders chip with close button', () => {
-  const tree = renderer
-    .create(
-      <Chip icon="information" onClose={() => {}}>
-        Example Chip
-      </Chip>
-    )
-    .toJSON();
+  const tree = render(
+    <Chip icon="information" onClose={() => {}}>
+      Example Chip
+    </Chip>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders chip with custom close button', () => {
-  const tree = renderer
-    .create(
-      <Chip icon="information" onClose={() => {}} closeIcon="arrow-down">
-        Example Chip
-      </Chip>
-    )
-    .toJSON();
+  const tree = render(
+    <Chip icon="information" onClose={() => {}} closeIcon="arrow-down">
+      Example Chip
+    </Chip>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders outlined disabled chip', () => {
-  const tree = renderer
-    .create(
-      <Chip mode="outlined" disabled>
-        Example Chip
-      </Chip>
-    )
-    .toJSON();
+  const tree = render(
+    <Chip mode="outlined" disabled>
+      Example Chip
+    </Chip>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders selected chip', () => {
-  const tree = renderer.create(<Chip selected>Example Chip</Chip>).toJSON();
+  const tree = render(<Chip selected>Example Chip</Chip>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

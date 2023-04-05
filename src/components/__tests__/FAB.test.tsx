@@ -3,7 +3,6 @@ import { Animated, StyleSheet } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 import color from 'color';
-import renderer from 'react-test-renderer';
 
 import { getTheme } from '../../core/theming';
 import { black, white } from '../../styles/themes/v2/colors';
@@ -33,98 +32,90 @@ const styles = StyleSheet.create({
 });
 
 it('renders default FAB', () => {
-  const tree = renderer.create(<FAB onPress={() => {}} icon="plus" />).toJSON();
+  const tree = render(<FAB onPress={() => {}} icon="plus" />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders small FAB', () => {
-  const tree = renderer
-    .create(<FAB size="small" onPress={() => {}} icon="plus" />)
-    .toJSON();
+  const tree = render(
+    <FAB size="small" onPress={() => {}} icon="plus" />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders large FAB', () => {
-  const tree = renderer
-    .create(<FAB size="large" onPress={() => {}} icon="plus" />)
-    .toJSON();
+  const tree = render(
+    <FAB size="large" onPress={() => {}} icon="plus" />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders FAB with custom size prop', () => {
-  const tree = renderer
-    .create(<FAB customSize={100} onPress={() => {}} icon="plus" />)
-    .toJSON();
+  const tree = render(
+    <FAB customSize={100} onPress={() => {}} icon="plus" />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders extended FAB', () => {
-  const tree = renderer
-    .create(<FAB onPress={() => {}} icon="plus" label="Add items" />)
-    .toJSON();
+  const tree = render(
+    <FAB onPress={() => {}} icon="plus" label="Add items" />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders extended FAB with custom size prop', () => {
-  const tree = renderer
-    .create(
-      <FAB customSize={100} onPress={() => {}} icon="plus" label="Add items" />
-    )
-    .toJSON();
+  const tree = render(
+    <FAB customSize={100} onPress={() => {}} icon="plus" label="Add items" />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders loading FAB', () => {
-  const tree = renderer
-    .create(<FAB onPress={() => {}} icon="plus" loading={true} />)
-    .toJSON();
+  const tree = render(
+    <FAB onPress={() => {}} icon="plus" loading={true} />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders loading FAB with custom size prop', () => {
-  const tree = renderer
-    .create(
-      <FAB customSize={100} onPress={() => {}} icon="plus" loading={true} />
-    )
-    .toJSON();
+  const tree = render(
+    <FAB customSize={100} onPress={() => {}} icon="plus" loading={true} />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders disabled FAB', () => {
-  const tree = renderer
-    .create(<FAB onPress={() => {}} icon="plus" disabled />)
-    .toJSON();
+  const tree = render(<FAB onPress={() => {}} icon="plus" disabled />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders custom color for the icon and label of the FAB', () => {
-  const tree = renderer
-    .create(<FAB onPress={() => {}} icon="plus" color="#AA0114" />)
-    .toJSON();
+  const tree = render(
+    <FAB onPress={() => {}} icon="plus" color="#AA0114" />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders not visible FAB', () => {
-  const { update, toJSON } = renderer.create(
-    <FAB onPress={() => {}} icon="plus" />
-  );
+  const { update, toJSON } = render(<FAB onPress={() => {}} icon="plus" />);
   update(<FAB onPress={() => {}} icon="plus" visible={false} />);
 
   expect(toJSON()).toMatchSnapshot();
 });
 
 it('renders visible FAB', () => {
-  const { update, toJSON } = renderer.create(
+  const { update, toJSON } = render(
     <FAB onPress={() => {}} icon="plus" visible={false} />
   );
 

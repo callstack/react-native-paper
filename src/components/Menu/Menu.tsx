@@ -629,6 +629,7 @@ class Menu extends React.Component<Props, State> {
               style={[styles.wrapper, positionStyle, style]}
               pointerEvents={visible ? 'box-none' : 'none'}
               onAccessibilityEscape={onDismiss}
+              testID={`${testID}-view`}
             >
               <Animated.View style={{ transform: positionTransforms }}>
                 <Surface
