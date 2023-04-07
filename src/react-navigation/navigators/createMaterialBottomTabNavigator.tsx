@@ -27,6 +27,7 @@ export type MaterialBottomTabNavigatorProps = DefaultNavigatorOptions<
   TabRouterOptions &
   MaterialBottomTabNavigationConfig;
 
+// This is just Docusaurus can parse the type and show it in the docs
 export type Props = {
   /**
    * Event which fires on tapping on the tab in the tab bar.
@@ -80,7 +81,7 @@ export type Props = {
 /**
  * A material-design themed tab bar on the bottom of the screen that lets you switch between different routes with animation. Routes are lazily initialized - their screen components are not mounted until they are first focused.
  *
- * This wraps the [React Navigation's Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/).
+ * This is a convenient wrapper which provides prebuilt [React Navigation's Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/) integration so users can easily import it and use and don’t want to deal with setting up a custom tab bar.
  *
  *  <div class="screenshots">
  *   <img class="medium" src="screenshots/material-bottom-tabs.gif" />
