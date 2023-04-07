@@ -85,16 +85,14 @@ it('renders disabled button if there is no touch handler passed', () => {
 
 it('renders active button if only onLongPress handler is passed', () => {
   const { getByTestId } = render(
-    <Button onLongPress={() => {}} testID="disabled-button">
-      Disabled button
+    <Button onLongPress={() => {}} testID="active-button">
+      Active button
     </Button>
   );
 
-  expect(getByTestId('disabled-button').props.accessibilityState).toMatchObject(
-    {
-      disabled: false,
-    }
-  );
+  expect(getByTestId('active-button').props.accessibilityState).toMatchObject({
+    disabled: false,
+  });
 });
 
 it('renders button with color', () => {

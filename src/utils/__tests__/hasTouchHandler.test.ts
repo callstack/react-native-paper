@@ -15,8 +15,22 @@ describe('hasTouchHandler', () => {
     }
   );
 
-  it('should return false if touchableEventObject does not contain any touchable events', () => {
-    const result = hasTouchHandler({});
+  it('should return true if two touchable events are passed, but one is undefined', () => {
+    const result = hasTouchHandler({
+      onPress: jest.fn(),
+      onLongPress: undefined,
+    });
+
+    expect(result).toBe(true);
+  });
+
+  it('should return false if touchable events are undefined', () => {
+    const result = hasTouchHandler({
+      onPress: undefined,
+      onLongPress: undefined,
+      onPressIn: undefined,
+      onPressOut: undefined,
+    });
 
     expect(result).toBe(false);
   });

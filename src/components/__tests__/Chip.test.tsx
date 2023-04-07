@@ -57,6 +57,28 @@ it('renders selected chip', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('renders disabled chip if there is no touch handler passed', () => {
+  const { getByTestId } = render(
+    <Chip testID="disabled-chip">Disabled chip</Chip>
+  );
+
+  expect(getByTestId('disabled-chip').props.accessibilityState).toMatchObject({
+    disabled: true,
+  });
+});
+
+it('renders active chip if only onLongPress handler is passed', () => {
+  const { getByTestId } = render(
+    <Chip onLongPress={() => {}} testID="active-chip">
+      Active chip
+    </Chip>
+  );
+
+  expect(getByTestId('active-chip').props.accessibilityState).toMatchObject({
+    disabled: false,
+  });
+});
+
 describe('getChipColors - text color', () => {
   it('should return correct disabled color, for theme version 3', () => {
     expect(

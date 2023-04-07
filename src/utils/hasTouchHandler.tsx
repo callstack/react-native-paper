@@ -1,25 +1,20 @@
 import type { GestureResponderEvent } from 'react-native';
 
-type TouchableEventObject = {
-  onPress?: ((event: GestureResponderEvent) => void) | undefined;
-  onPressIn?: ((event: GestureResponderEvent) => void) | undefined;
-  onPressOut?: ((event: GestureResponderEvent) => void) | undefined;
-  onLongPress?: ((event: GestureResponderEvent) => void) | undefined;
-};
+const touchableEvents = [
+  'onPress',
+  'onLongPress',
+  'onPressIn',
+  'onPressOut',
+] as const;
 
-const hasTouchHandler = (
+type TouchableEventObject = Partial<
+  Record<typeof touchableEvents[number], (event: GestureResponderEvent) => void>
+>;
+
+export default function hasTouchHandler(
   touchableEventObject: TouchableEventObject
-): boolean => {
-  const touchableEvents: Array<keyof TouchableEventObject> = [
-    'onPress',
-    'onLongPress',
-    'onPressIn',
-    'onPressOut',
-  ];
-
+) {
   return touchableEvents.some((event) => {
-    return touchableEventObject[event] !== undefined;
+    return Boolean(touchableEventObject[event]);
   });
-};
-
-export default hasTouchHandler;
+}
