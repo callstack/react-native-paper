@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   Animated,
   GestureResponderEvent,
+  MouseEvent,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -102,6 +103,14 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   delayLongPress?: number;
   /**
+   * Called when the hover is activated to provide visual feedback.
+   */
+  onHoverIn?: (e: MouseEvent) => void;
+  /**
+   * Called when the hover is deactivated to undo visual feedback.
+   */
+  onHoverOut?: (e: MouseEvent) => void;
+  /**
    * Style of button's inner content.
    * Use this prop to apply custom height and width and to set the icon on the right with `flexDirection: 'row-reverse'`.
    */
@@ -176,6 +185,8 @@ const Button = ({
   onPress,
   onPressIn,
   onPressOut,
+  onHoverOut,
+  onHoverIn,
   onLongPress,
   delayLongPress,
   style,
@@ -310,6 +321,8 @@ const Button = ({
         onLongPress={onLongPress}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
+        onHoverIn={onHoverIn}
+        onHoverOut={onHoverOut}
         delayLongPress={delayLongPress}
         accessibilityLabel={accessibilityLabel}
         accessibilityHint={accessibilityHint}
