@@ -2165,7 +2165,7 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@material/material-color-utilities@^0.2.0":
+"@material/material-color-utilities@0.2.4":
   version "0.2.4"
   resolved "https://registry.yarnpkg.com/@material/material-color-utilities/-/material-color-utilities-0.2.4.tgz#30f22a991f500d289fa16536f76f93228207020d"
   integrity sha512-UsJO907S9/5Tf19KwGjEFggswGyCO/WYKBzfDNr8TN9V+7snfC2zV8pN0WXdqt+IS7EvDDZp0rpMXptSPSiKVw==
