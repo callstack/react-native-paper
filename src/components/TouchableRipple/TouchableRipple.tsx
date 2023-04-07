@@ -10,7 +10,7 @@ import {
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import useIsTouchableEvent from '../../utils/useIsTouchableEvent';
+import hasTouchHandler from '../../utils/hasTouchHandler';
 import { getTouchableRippleColors } from './utils';
 
 export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
@@ -239,14 +239,14 @@ const TouchableRipple = ({
     });
   };
 
-  const isTouchableEvent = useIsTouchableEvent({
+  const hasPassedTouchHandler = hasTouchHandler({
     onPress,
     onLongPress,
     onPressIn,
     onPressOut,
   });
 
-  const disabled = disabledProp || !isTouchableEvent;
+  const disabled = disabledProp || !hasPassedTouchHandler;
 
   return (
     <Pressable

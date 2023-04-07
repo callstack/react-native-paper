@@ -13,7 +13,7 @@ import useLatestCallback from 'use-latest-callback';
 
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
-import useIsTouchableEvent from '../../utils/useIsTouchableEvent';
+import hasTouchHandler from '../../utils/hasTouchHandler';
 import Surface from '../Surface';
 import CardActions from './CardActions';
 import CardContent from './CardContent';
@@ -159,7 +159,7 @@ const Card = ({
     [cardMode]
   );
 
-  const isTouchableEvent = useIsTouchableEvent({
+  const hasPassedTouchHandler = hasTouchHandler({
     onPress,
     onLongPress,
   });
@@ -301,7 +301,7 @@ const Card = ({
         />
       )}
 
-      {isTouchableEvent ? (
+      {hasPassedTouchHandler ? (
         <TouchableWithoutFeedback
           delayPressIn={0}
           disabled={disabled}

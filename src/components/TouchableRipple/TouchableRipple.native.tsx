@@ -11,7 +11,7 @@ import {
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import useIsTouchableEvent from '../../utils/useIsTouchableEvent';
+import hasTouchHandler from '../../utils/hasTouchHandler';
 import { getTouchableRippleColors } from './utils';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
@@ -49,14 +49,14 @@ const TouchableRipple = ({
 
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;
 
-  const isTouchableEvent = useIsTouchableEvent({
+  const hasPassedTouchHandler = hasTouchHandler({
     onPress,
     onLongPress,
     onPressIn,
     onPressOut,
   });
 
-  const disabled = disabledProp || !isTouchableEvent;
+  const disabled = disabledProp || !hasPassedTouchHandler;
 
   const { calculatedRippleColor, calculatedUnderlayColor } =
     getTouchableRippleColors({

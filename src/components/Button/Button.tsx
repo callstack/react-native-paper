@@ -13,7 +13,7 @@ import color from 'color';
 
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
-import useIsTouchableEvent from '../../utils/useIsTouchableEvent';
+import hasTouchHandler from '../../utils/hasTouchHandler';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
@@ -198,7 +198,7 @@ const Button = ({
   const { roundness, isV3, animation } = theme;
   const uppercase = uppercaseProp ?? !theme.isV3;
 
-  const isTouchableEvent = useIsTouchableEvent({
+  const hasPassedTouchHandler = hasTouchHandler({
     onPress,
     onPressIn,
     onPressOut,
@@ -316,8 +316,8 @@ const Button = ({
         borderless
         onPress={onPress}
         onLongPress={onLongPress}
-        onPressIn={isTouchableEvent ? handlePressIn : undefined}
-        onPressOut={isTouchableEvent ? handlePressOut : undefined}
+        onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
+        onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
         delayLongPress={delayLongPress}
         accessibilityLabel={accessibilityLabel}
         accessibilityHint={accessibilityHint}
