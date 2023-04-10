@@ -38,7 +38,7 @@ jobs:
 
       - name: Publish Expo app
         working-directory: ./example
-        run: CI=1 eas update --branch=pr-${{ github.event.number }} --message="$(git log -1 --pretty=%B)"
+        run: CI=1 rm -rf android && eas update --branch=pr-${{ github.event.number }} --message="$(git log -1 --pretty=%B)"
 
       - name: Get expo config
         working-directory: ./example
