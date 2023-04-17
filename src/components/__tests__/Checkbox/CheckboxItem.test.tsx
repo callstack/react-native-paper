@@ -87,3 +87,11 @@ it('disables the row when the prop disabled is true', () => {
     accessibilityState: { disabled: true },
   });
 });
+
+it('should have maxFontSizeMultiplier set to 1.5 by default', () => {
+  const { getByTestId } = render(
+    <Checkbox.Item label="" testID="checkbox-item" status="unchecked" />
+  );
+  const checkboxItemText = getByTestId('checkbox-item-text');
+  expect(checkboxItemText.props.maxFontSizeMultiplier).toBe(1.5);
+});
