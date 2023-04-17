@@ -11,6 +11,7 @@ import {
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
+import hasTouchHandler from '../../utils/hasTouchHandler';
 import { getTouchableRippleColors } from './utils';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
@@ -23,6 +24,8 @@ export type Props = React.ComponentProps<typeof Pressable> & {
   disabled?: boolean;
   onPress?: (e: GestureResponderEvent) => void | null;
   onLongPress?: (e: GestureResponderEvent) => void;
+  onPressIn?: (e: GestureResponderEvent) => void;
+  onPressOut?: (e: GestureResponderEvent) => void;
   rippleColor?: string;
   underlayColor?: string;
   children: React.ReactNode;
@@ -44,7 +47,17 @@ const TouchableRipple = ({
   const theme = useInternalTheme(themeOverrides);
   const [showUnderlay, setShowUnderlay] = React.useState<boolean>(false);
 
-  const disabled = disabledProp || !rest.onPress;
+  const { onPress, onLongPress, onPressIn, onPressOut } = rest;
+
+  const hasPassedTouchHandler = hasTouchHandler({
+    onPress,
+    onLongPress,
+    onPressIn,
+    onPressOut,
+  });
+
+  const disabled = disabledProp || !hasPassedTouchHandler;
+
   const { calculatedRippleColor, calculatedUnderlayColor } =
     getTouchableRippleColors({
       theme,
@@ -61,12 +74,12 @@ const TouchableRipple = ({
 
   const handlePressIn = (e: GestureResponderEvent) => {
     setShowUnderlay(true);
-    rest.onPressIn?.(e);
+    onPressIn?.(e);
   };
 
   const handlePressOut = (e: GestureResponderEvent) => {
     setShowUnderlay(false);
-    rest.onPressOut?.(e);
+    onPressOut?.(e);
   };
 
   if (TouchableRipple.supported) {

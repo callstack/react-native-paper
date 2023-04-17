@@ -10,6 +10,7 @@ import {
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
+import hasTouchHandler from '../../utils/hasTouchHandler';
 import { getTouchableRippleColors } from './utils';
 
 export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
@@ -38,6 +39,14 @@ export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
    * Function to execute on long press.
    */
   onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute immediately when a touch is engaged, before `onPressOut` and `onPress`.
+   */
+  onPressIn?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute when a touch is released.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
   /**
    * Color of the ripple effect (Android >= 5.0 and Web).
    */
@@ -100,8 +109,10 @@ const TouchableRipple = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { onPress, onLongPress, onPressIn, onPressOut } = rest;
+
   const handlePressIn = (e: any) => {
-    const { centered, onPressIn } = rest;
+    const { centered } = rest;
 
     onPressIn?.(e);
 
@@ -199,7 +210,7 @@ const TouchableRipple = ({
   };
 
   const handlePressOut = (e: any) => {
-    rest.onPressOut?.(e);
+    onPressOut?.(e);
 
     const containers = e.currentTarget.querySelectorAll(
       '[data-paper-ripple]'
@@ -228,7 +239,14 @@ const TouchableRipple = ({
     });
   };
 
-  const disabled = disabledProp || !rest.onPress;
+  const hasPassedTouchHandler = hasTouchHandler({
+    onPress,
+    onLongPress,
+    onPressIn,
+    onPressOut,
+  });
+
+  const disabled = disabledProp || !hasPassedTouchHandler;
 
   return (
     <Pressable

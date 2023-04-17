@@ -15,6 +15,7 @@ import {
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
+import hasTouchHandler from '../../utils/hasTouchHandler';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -177,6 +178,8 @@ const Chip = ({
     new Animated.Value(isV3 && elevated ? 1 : 0)
   );
 
+  const hasPassedTouchHandler = hasTouchHandler({ onPress, onLongPress });
+
   const isOutlined = mode === 'outlined';
 
   const handlePressIn = () => {
@@ -265,8 +268,8 @@ const Chip = ({
         borderless
         style={[{ borderRadius }, styles.touchable]}
         onPress={onPress}
-        onPressIn={handlePressIn}
-        onPressOut={handlePressOut}
+        onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
+        onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
         onLongPress={onLongPress}
         delayLongPress={delayLongPress}
         underlayColor={underlayColor}

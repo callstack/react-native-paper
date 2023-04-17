@@ -13,6 +13,7 @@ import useLatestCallback from 'use-latest-callback';
 
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
+import hasTouchHandler from '../../utils/hasTouchHandler';
 import Surface from '../Surface';
 import CardActions from './CardActions';
 import CardContent from './CardContent';
@@ -158,6 +159,11 @@ const Card = ({
     [cardMode]
   );
 
+  const hasPassedTouchHandler = hasTouchHandler({
+    onPress,
+    onLongPress,
+  });
+
   // Default animated value
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(cardElevation)
@@ -295,7 +301,7 @@ const Card = ({
         />
       )}
 
-      {onPress || onLongPress ? (
+      {hasPassedTouchHandler ? (
         <TouchableWithoutFeedback
           delayPressIn={0}
           disabled={disabled}
