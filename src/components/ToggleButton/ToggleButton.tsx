@@ -31,7 +31,7 @@ export type Props = {
   /**
    * Custom text color for button.
    */
-  color?: string;
+  iconColor?: string;
   /**
    * Whether the button is disabled.
    */
