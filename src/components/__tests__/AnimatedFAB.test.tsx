@@ -126,3 +126,21 @@ it('renders FAB with uppercase styling if uppercase prop is truthy', () => {
     textTransform: 'uppercase',
   });
 });
+
+it('renders correct elevation value for shadow views', () => {
+  const { getByTestId } = render(
+    <AnimatedFAB
+      extended
+      label="text"
+      animateFrom="left"
+      onPress={() => {}}
+      icon="plus"
+      testID="animated-fab"
+    />
+  );
+
+  expect(getByTestId('animated-fab-shadow')).toHaveStyle({ elevation: 3 });
+  expect(getByTestId('animated-fab-extended-shadow')).toHaveStyle({
+    elevation: 3,
+  });
+});

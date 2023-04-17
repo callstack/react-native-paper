@@ -314,6 +314,12 @@ const AnimatedFAB = ({
   const md2Elevation = disabled || !isIOS ? 0 : 6;
   const md3Elevation = disabled || !isIOS ? 0 : 3;
 
+  const shadowStyle = isV3 ? styles.v3Shadow : styles.shadow;
+  const baseStyle = [
+    StyleSheet.absoluteFill,
+    disabled ? styles.disabled : shadowStyle,
+  ];
+
   const newAccessibilityState = { ...accessibilityState, disabled };
 
   return (
@@ -359,8 +365,7 @@ const AnimatedFAB = ({
           <Animated.View
             pointerEvents="none"
             style={[
-              StyleSheet.absoluteFill,
-              disabled ? styles.disabled : styles.shadow,
+              baseStyle,
               {
                 width: extendedWidth,
                 opacity: animFAB.interpolate({
@@ -370,12 +375,12 @@ const AnimatedFAB = ({
                 borderRadius,
               },
             ]}
+            testID={`${testID}-extended-shadow`}
           />
           <Animated.View
             pointerEvents="none"
             style={[
-              StyleSheet.absoluteFill,
-              disabled ? styles.disabled : styles.shadow,
+              baseStyle,
               {
                 opacity: animFAB.interpolate({
                   inputRange: propForDirection([distance, 0.9 * distance, 0]),
@@ -392,6 +397,7 @@ const AnimatedFAB = ({
               },
               combinedStyles.absoluteFill,
             ]}
+            testID={`${testID}-shadow`}
           />
         </View>
         <Animated.View
@@ -518,6 +524,9 @@ const styles = StyleSheet.create({
   },
   shadow: {
     elevation: 6,
+  },
+  v3Shadow: {
+    elevation: 3,
   },
   iconWrapper: {
     alignItems: 'center',
