@@ -1,0 +1,15 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc show_button_message_when_1st_3rd_and_4th_toggle_is_on
+---
+- runFlow: /Users/martagorecka/paper/react-native-paper/paper tests/snackbar/snackbar_tab_is_active.yaml
+- assertVisible: "1"
+- tapOn:
+    text: "0"
+    index: 1
+- tapOn:
+    text: "0"
+    index: 1
+- tapOn: "Show"
+- assertVisible: "Snackbar with longer message which does not fit in one line Toggle\
+    \ Theme"
+- assertVisible: "Toggle Theme"

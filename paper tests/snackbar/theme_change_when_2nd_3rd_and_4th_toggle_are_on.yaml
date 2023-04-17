@@ -1,0 +1,8 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc theme_change_when_2nd_3rd_and_4th_toggle_are_on
+---
+- runFlow: paper tests/snackbar/show_button_message_when_2nd_3rd_and_4th_toggle_are_on.yaml
+- tapOn: "Toggle Theme"
+- tapOn: "Show"
+- tapOn: "Toggle Theme"
+- clearState

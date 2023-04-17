@@ -1,0 +1,29 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc3 Longer message toggle can be switched On and Off
+---
+- runFlow: /Users/martagorecka/paper/react-native-paper/paper tests/snackbar/snackbar_tab_is_active.yaml
+- assertVisible:
+    text: "0"
+    index: 1
+- tapOn:
+    text: "0"
+    index: 1
+- assertVisible:
+    text: "1"
+    index: 1
+- assertNotVisible:
+    text: "0"
+    index: 1
+- tapOn:
+    text: "1"
+    index: 1
+- assertVisible:
+    text: "1"
+    index: 1
+- assertVisible:
+    text: "0"
+    index: 1
+- assertNotVisible:
+    text: "1"
+    index: 1  
+- clearState

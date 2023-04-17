@@ -1,0 +1,11 @@
+appId: com.callstack.reactnativepaperexample
+# tc snackbar_tab_is_active
+---
+- openLink: exp://192.168.1.9:19000
+- scrollUntilVisible:
+    element:
+      text: "Snackbar"
+    direction: DOWN
+- tapOn: "Snackbar"
+- assertVisible: Snackbar options
+- assertVisible: "Show"

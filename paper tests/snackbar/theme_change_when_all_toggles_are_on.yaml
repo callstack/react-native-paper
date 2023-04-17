@@ -1,0 +1,18 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc Theme_change_when_all_toggles_are_on
+---
+- runFlow: paper tests/snackbar/show_button_message_when_all_toggles_are_on.yaml
+- tapOn: "Toggle Theme"
+- assertVisible: "Show"
+- tapOn: "Show"
+- assertVisible: "Snackbar with longer message which does not fit in one line Toggle\
+    \ Theme Close icon"
+- assertVisible: "Hide"
+- tapOn: "Toggle Theme"
+- assertVisible: "Show"
+- assertVisible: "Hide"
+- assertVisible: "Snackbar with longer message which does not fit in one line Toggle\
+    \ Theme Close icon"
+- tapOn: "Toggle Theme"
+- assertVisible: "Show"
+- clearState

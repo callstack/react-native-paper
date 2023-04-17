@@ -1,0 +1,17 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc x_button_cancel_action_and_make_toast_message_dissapear
+---
+- runFlow: /Users/martagorecka/paper/react-native-paper/paper tests/snackbar/snackbar_tab_is_active.yaml
+- assertVisible: "1"
+- tapOn:
+    text: "0"
+    index: 0
+- tapOn:
+    text: "0"
+    index: 0
+- tapOn: "Show"
+- assertVisible: "Snackbar with longer message which does not fit in one line Action\
+    \ Close icon"
+- tapOn: "Close icon"
+- assertNotVisible: "Snackbar with longer message which does not fit in one line Action\
+    \ Close icon"    

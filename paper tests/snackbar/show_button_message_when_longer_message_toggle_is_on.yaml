@@ -1,0 +1,11 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc Show button message when Longer action button toggle is On
+---
+- runFlow: /Users/martagorecka/paper/react-native-paper/paper tests/snackbar/snackbar_tab_is_active.yaml
+- assertVisible: "1"
+- tapOn: "1"
+- tapOn:
+    text: "0"
+    index: 2
+- tapOn: "Show"
+- assertVisible: "Snackbar with longer message which does not fit in one line"

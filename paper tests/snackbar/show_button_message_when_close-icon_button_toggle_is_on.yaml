@@ -1,0 +1,12 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc Show button message when 1 and 2 toggles are On
+---
+- runFlow: /Users/martagorecka/paper/react-native-paper/paper tests/snackbar/snackbar_tab_is_active.yaml
+- assertVisible: "1"
+- tapOn: "1"
+- tapOn:
+    text: "0"
+    index: 1
+- tapOn: "Show"
+- assertVisible: "Single-line snackbar Close icon"
+- assertVisible: "Close icon"

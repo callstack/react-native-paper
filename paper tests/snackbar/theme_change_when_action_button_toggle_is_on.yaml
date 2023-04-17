@@ -1,0 +1,12 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc theme_change_when_action_button_toggle_is_on
+---
+- runFlow: paper tests/snackbar/show_button_when_action_toggle_is_on.yaml
+- tapOn: "Action"
+- assertVisible:
+    id: "button"
+- tapOn: "Show"
+- assertVisible: "Single-line snackbar Action"
+- tapOn: "Action"
+- assertVisible: "Show"
+-clearState

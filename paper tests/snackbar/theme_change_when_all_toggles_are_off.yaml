@@ -1,0 +1,21 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc theme_change_when_all_toggles_are_off
+---
+- runFlow: /Users/martagorecka/paper/react-native-paper/paper tests/snackbar/toggle.yaml
+- assertVisible:
+    text: "0"
+    index: 0
+- assertVisible:
+    text: "0"
+    index: 1
+- assertVisible:
+    text: "0"
+    index: 2
+- assertVisible:
+    text: "0"
+    index: 3
+- tapOn:
+    id: "button"
+- assertVisible: "Single-line snackbar"
+- assertVisible: "Hide"
+- clearState
