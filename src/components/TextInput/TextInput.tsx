@@ -149,7 +149,7 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    * Overrides input style
    * Example: `paddingLeft`, `backgroundColor`
    */
-  contentStyle?: StyleProp<ViewStyle>;
+  contentStyle?: StyleProp<TextStyle>;
   /**
    * Pass style to override the default style of outlined wrapper.
    * Overrides style when mode is set to `outlined`
