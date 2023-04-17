@@ -207,9 +207,13 @@ describe('configureFonts', () => {
           bodyLarge: {
             fontFamily: 'NotoSans',
             fontSize: 18,
+            fontStyle: 'italic',
           },
           headlineMedium: {
             fontSize: 30,
+          },
+          bodySmall: {
+            fontStyle: 'italic',
           },
         },
       })
@@ -219,6 +223,7 @@ describe('configureFonts', () => {
         fontFamily: 'NotoSans',
         letterSpacing: 0.15,
         fontWeight: '400',
+        fontStyle: 'italic',
         lineHeight: 24,
         fontSize: 18,
       },
@@ -228,6 +233,14 @@ describe('configureFonts', () => {
         fontWeight: '400',
         lineHeight: 36,
         fontSize: 30,
+      },
+      bodySmall: {
+        fontFamily: 'System',
+        fontWeight: '400',
+        fontStyle: 'italic',
+        letterSpacing: 0.4,
+        lineHeight: 16,
+        fontSize: 12,
       },
     });
   });
@@ -240,6 +253,7 @@ describe('configureFonts', () => {
             fontFamily: 'NotoSans',
             letterSpacing: 0,
             fontWeight: '400',
+            fontStyle: 'italic',
             lineHeight: 64,
             fontSize: 57,
           },
@@ -251,6 +265,7 @@ describe('configureFonts', () => {
         fontFamily: 'NotoSans',
         letterSpacing: 0,
         fontWeight: '400',
+        fontStyle: 'italic',
         lineHeight: 64,
         fontSize: 57,
       },

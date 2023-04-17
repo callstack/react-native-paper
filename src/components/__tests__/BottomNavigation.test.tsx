@@ -3,7 +3,6 @@ import { StyleSheet, Easing, Animated, Platform } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
-import renderer from 'react-test-renderer';
 
 import { getTheme } from '../../core/theming';
 import { red300 } from '../../styles/themes/v2/colors';
@@ -85,34 +84,30 @@ const createState = (index: number, length: number) => ({
 });
 
 it('renders shifting bottom navigation', () => {
-  const tree = renderer
-    .create(
-      <BottomNavigation
-        shifting
-        navigationState={createState(0, 5)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-      />
-    )
-    .toJSON();
+  const tree = render(
+    <BottomNavigation
+      shifting
+      navigationState={createState(0, 5)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+    />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders bottom navigation with scene animation', () => {
-  const tree = renderer
-    .create(
-      <BottomNavigation
-        shifting
-        sceneAnimationEnabled
-        sceneAnimationType="shifting"
-        sceneAnimationEasing={Easing.ease}
-        navigationState={createState(0, 5)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-      />
-    )
-    .toJSON();
+  const tree = render(
+    <BottomNavigation
+      shifting
+      sceneAnimationEnabled
+      sceneAnimationType="shifting"
+      sceneAnimationEasing={Easing.ease}
+      navigationState={createState(0, 5)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+    />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
@@ -246,16 +241,14 @@ it('calls onTabLongPress', () => {
 });
 
 it('renders non-shifting bottom navigation', () => {
-  const tree = renderer
-    .create(
-      <BottomNavigation
-        shifting={false}
-        navigationState={createState(0, 3)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-      />
-    )
-    .toJSON();
+  const tree = render(
+    <BottomNavigation
+      shifting={false}
+      navigationState={createState(0, 3)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+    />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
@@ -280,109 +273,97 @@ it('does not crash when shifting is true and the number of tabs in the navigatio
 });
 
 it('renders custom icon and label in shifting bottom navigation', () => {
-  const tree = renderer
-    .create(
-      <BottomNavigation
-        shifting
-        navigationState={createState(0, 5)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-        renderIcon={({ route, color }) => (
-          <icon color={color} src={route.unfocusedIcon} />
-        )}
-        renderLabel={({ route, color }) => (
-          <text color={color}>{route.title}</text>
-        )}
-      />
-    )
-    .toJSON();
+  const tree = render(
+    <BottomNavigation
+      shifting
+      navigationState={createState(0, 5)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+      renderIcon={({ route, color }) => (
+        <icon color={color} src={route.unfocusedIcon} />
+      )}
+      renderLabel={({ route, color }) => (
+        <text color={color}>{route.title}</text>
+      )}
+    />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders custom icon and label in non-shifting bottom navigation', () => {
-  const tree = renderer
-    .create(
-      <BottomNavigation
-        shifting={false}
-        navigationState={createState(0, 3)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-        renderIcon={({ route, color }) => (
-          <icon color={color} src={route.unfocusedIcon} />
-        )}
-        renderLabel={({ route, color }) => (
-          <text color={color}>{route.title}</text>
-        )}
-      />
-    )
-    .toJSON();
+  const tree = render(
+    <BottomNavigation
+      shifting={false}
+      navigationState={createState(0, 3)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+      renderIcon={({ route, color }) => (
+        <icon color={color} src={route.unfocusedIcon} />
+      )}
+      renderLabel={({ route, color }) => (
+        <text color={color}>{route.title}</text>
+      )}
+    />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders custom icon and label with custom colors in shifting bottom navigation', () => {
-  const tree = renderer
-    .create(
-      <BottomNavigation
-        shifting
-        navigationState={createState(0, 3)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-        activeColor="#FBF7DB"
-        inactiveColor="#853D4B"
-      />
-    )
-    .toJSON();
+  const tree = render(
+    <BottomNavigation
+      shifting
+      navigationState={createState(0, 3)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+      activeColor="#FBF7DB"
+      inactiveColor="#853D4B"
+    />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders custom icon and label with custom colors in non-shifting bottom navigation', () => {
-  const tree = renderer
-    .create(
-      <BottomNavigation
-        shifting={false}
-        navigationState={createState(0, 3)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-        activeColor="#FBF7DB"
-        inactiveColor="#853D4B"
-      />
-    )
-    .toJSON();
+  const tree = render(
+    <BottomNavigation
+      shifting={false}
+      navigationState={createState(0, 3)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+      activeColor="#FBF7DB"
+      inactiveColor="#853D4B"
+    />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('hides labels in shifting bottom navigation', () => {
-  const tree = renderer
-    .create(
-      <BottomNavigation
-        shifting
-        labeled={false}
-        navigationState={createState(0, 3)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-      />
-    )
-    .toJSON();
+  const tree = render(
+    <BottomNavigation
+      shifting
+      labeled={false}
+      navigationState={createState(0, 3)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+    />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('hides labels in non-shifting bottom navigation', () => {
-  const tree = renderer
-    .create(
-      <BottomNavigation
-        shifting={false}
-        labeled={false}
-        navigationState={createState(0, 3)}
-        onIndexChange={jest.fn()}
-        renderScene={({ route }) => route.title}
-      />
-    )
-    .toJSON();
+  const tree = render(
+    <BottomNavigation
+      shifting={false}
+      labeled={false}
+      navigationState={createState(0, 3)}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+    />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
@@ -644,16 +625,14 @@ it("allows customizing Route's type via generics", () => {
     ],
   };
 
-  const tree = renderer
-    .create(
-      <BottomNavigation
-        navigationState={state}
-        onIndexChange={jest.fn()}
-        getLabelText={({ route }) => route.customPropertyName}
-        renderScene={({ route }) => route.customPropertyName}
-      />
-    )
-    .toJSON();
+  const tree = render(
+    <BottomNavigation
+      navigationState={state}
+      onIndexChange={jest.fn()}
+      getLabelText={({ route }) => route.customPropertyName}
+      renderScene={({ route }) => route.customPropertyName}
+    />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

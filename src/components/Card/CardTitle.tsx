@@ -122,7 +122,7 @@ const LEFT_SIZE = 40;
  *     title="Card Title"
  *     subtitle="Card Subtitle"
  *     left={(props) => <Avatar.Icon {...props} icon="folder" />}
- *     right={(props) => <IconButton {...props} icon="more-vert" onPress={() => {}} />}
+ *     right={(props) => <IconButton {...props} icon="dots-vertical" onPress={() => {}} />}
  *   />
  * );
  *
@@ -146,15 +146,9 @@ const CardTitle = ({
   theme: themeOverrides,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const titleComponent = (props: any) =>
-    theme.isV3 ? <Text {...props} /> : <Title {...props} />;
+  const TitleComponent = theme.isV3 ? Text : Title;
+  const SubtitleComponent = theme.isV3 ? Text : Caption;
 
-  const subtitleComponent = (props: any) =>
-    theme.isV3 ? <Text {...props} /> : <Caption {...props} />;
-
-  const TextComponent = React.memo(({ component, ...rest }: any) =>
-    React.createElement(component, rest)
-  );
   const minHeight = subtitle || left || right ? 72 : 50;
   const marginBottom = subtitle ? 0 : 2;
 
@@ -170,24 +164,22 @@ const CardTitle = ({
 
       <View style={[styles.titles]}>
         {title && (
-          <TextComponent
-            component={titleComponent}
+          <TitleComponent
             style={[styles.title, { marginBottom }, titleStyle]}
             numberOfLines={titleNumberOfLines}
             variant={titleVariant}
           >
             {title}
-          </TextComponent>
+          </TitleComponent>
         )}
         {subtitle && (
-          <TextComponent
-            component={subtitleComponent}
+          <SubtitleComponent
             style={[styles.subtitle, subtitleStyle]}
             numberOfLines={subtitleNumberOfLines}
             variant={subtitleVariant}
           >
             {subtitle}
-          </TextComponent>
+          </SubtitleComponent>
         )}
       </View>
       <View style={rightStyle}>{right ? right({ size: 24 }) : null}</View>

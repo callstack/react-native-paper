@@ -67,7 +67,6 @@ exports[`renders data table header 1`] = `
       Object {
         "borderBottomWidth": 1,
         "flexDirection": "row",
-        "height": 48,
         "paddingHorizontal": 16,
       },
       Object {

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
+import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
@@ -34,7 +34,7 @@ type IconOrLabel =
       label: string;
     };
 
-export type Props = $RemoveChildren<typeof Surface> & {
+export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
   // For `icon` and `label` props their types are duplicated due to the generation of documentation.
   // Appropriate type for them is `IconOrLabel` contains the both union and intersection types.
   /**

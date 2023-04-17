@@ -29,7 +29,7 @@ export function splitStyles<Tuple extends FiltersArray>(
 
   // `Object.entries` will be used to iterate over the styles and `Object.fromEntries` will be called before returning
   // Entries which match the given filters will be temporarily stored in `newStyles`
-  const newStyles = filters.map(returnEmptyArray<Entry>);
+  const newStyles = filters.map(() => [] as Entry[]);
 
   // Entries which match no filter
   const rest: Entry[] = [];
@@ -57,8 +57,4 @@ export function splitStyles<Tuple extends FiltersArray>(
     ViewStyle,
     ...MappedTuple<Tuple>
   ];
-}
-
-function returnEmptyArray<SomeArray>() {
-  return [] as SomeArray[];
 }

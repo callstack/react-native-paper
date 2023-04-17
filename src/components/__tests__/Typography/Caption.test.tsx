@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react-native';
 
 import { red500 } from '../../../styles/themes/v2/colors';
 import Caption from '../../Typography/v2/Caption';
@@ -14,15 +14,15 @@ const style = StyleSheet.create({
 });
 
 it('renders caption with children as content', () => {
-  const tree = renderer.create(<Caption>Caption content</Caption>).toJSON();
+  const tree = render(<Caption>Caption content</Caption>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders caption applying style', () => {
-  const tree = renderer
-    .create(<Caption style={style.caption}>Big and red caption</Caption>)
-    .toJSON();
+  const tree = render(
+    <Caption style={style.caption}>Big and red caption</Caption>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

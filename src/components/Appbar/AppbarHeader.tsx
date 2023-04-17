@@ -19,6 +19,7 @@ import {
   DEFAULT_APPBAR_HEIGHT,
   getAppbarColor,
   modeAppbarHeight,
+  getAppbarBorders,
 } from './utils';
 
 export type Props = React.ComponentProps<typeof Appbar> & {
@@ -115,6 +116,7 @@ const AppbarHeader = ({
   mode = Platform.OS === 'ios' ? 'center-aligned' : 'small',
   elevated = false,
   theme: themeOverrides,
+  testID = 'appbar-header',
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -134,6 +136,8 @@ const AppbarHeader = ({
     zIndex?: number;
   };
 
+  const borderRadius = getAppbarBorders(restStyle);
+
   const backgroundColor = getAppbarColor(
     theme,
     elevation,
@@ -145,6 +149,7 @@ const AppbarHeader = ({
 
   return (
     <View
+      testID={`${testID}-root-layer`}
       style={[
         {
           backgroundColor,
@@ -153,10 +158,12 @@ const AppbarHeader = ({
           paddingTop: statusBarHeight ?? top,
           paddingHorizontal: Math.max(left, right),
         },
+        borderRadius,
         shadow(elevation) as ViewStyle,
       ]}
     >
       <Appbar
+        testID={testID}
         style={[{ height, backgroundColor }, styles.appbar, restStyle]}
         dark={dark}
         {...(isV3 && {

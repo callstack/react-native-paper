@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { render } from '@testing-library/react-native';
 import color from 'color';
-import renderer from 'react-test-renderer';
 
 import { getTheme } from '../../core/theming';
 import { black, white } from '../../styles/themes/v2/colors';
@@ -11,27 +10,25 @@ import { getMenuItemColor } from '../Menu/utils';
 
 describe('Menu Item', () => {
   it('renders menu item', () => {
-    const tree = renderer
-      .create(
-        <>
-          <Menu.Item leadingIcon="redo" onPress={() => {}} title="Redo" />
-          <Menu.Item leadingIcon="undo" onPress={() => {}} title="Undo" />
-          <Menu.Item
-            leadingIcon="content-cut"
-            onPress={() => {}}
-            title="Cut"
-            disabled
-          />
-          <Menu.Item
-            leadingIcon="content-copy"
-            onPress={() => {}}
-            title="Copy"
-            disabled
-          />
-          <Menu.Item onPress={() => {}} title="Paste" />
-        </>
-      )
-      .toJSON();
+    const tree = render(
+      <>
+        <Menu.Item leadingIcon="redo" onPress={() => {}} title="Redo" />
+        <Menu.Item leadingIcon="undo" onPress={() => {}} title="Undo" />
+        <Menu.Item
+          leadingIcon="content-cut"
+          onPress={() => {}}
+          title="Cut"
+          disabled
+        />
+        <Menu.Item
+          leadingIcon="content-copy"
+          onPress={() => {}}
+          title="Copy"
+          disabled
+        />
+        <Menu.Item onPress={() => {}} title="Paste" />
+      </>
+    ).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

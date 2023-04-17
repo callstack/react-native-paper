@@ -1,31 +1,31 @@
 import * as React from 'react';
 
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react-native';
 
 import ActivityIndicator from '../ActivityIndicator';
 
 it('renders indicator', () => {
-  const tree = renderer.create(<ActivityIndicator animating />).toJSON();
+  const tree = render(<ActivityIndicator animating />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders hidden indicator', () => {
-  const tree = renderer
-    .create(<ActivityIndicator animating={false} hidesWhenStopped />)
-    .toJSON();
+  const tree = render(
+    <ActivityIndicator animating={false} hidesWhenStopped />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders large indicator', () => {
-  const tree = renderer.create(<ActivityIndicator size="large" />).toJSON();
+  const tree = render(<ActivityIndicator size="large" />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders colored indicator', () => {
-  const tree = renderer.create(<ActivityIndicator color="#FF0000" />).toJSON();
+  const tree = render(<ActivityIndicator color="#FF0000" />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

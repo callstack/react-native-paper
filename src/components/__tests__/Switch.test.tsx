@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
 
+import { render } from '@testing-library/react-native';
 import color from 'color';
-import renderer from 'react-test-renderer';
 
 import { getTheme } from '../../core/theming';
 import {
@@ -18,25 +18,25 @@ import Switch from '../Switch/Switch';
 import { getSwitchColor } from '../Switch/utils';
 
 it('renders on switch', () => {
-  const tree = renderer.create(<Switch value />).toJSON();
+  const tree = render(<Switch value />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders off switch', () => {
-  const tree = renderer.create(<Switch value={false} />).toJSON();
+  const tree = render(<Switch value={false} />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders disabled switch', () => {
-  const tree = renderer.create(<Switch disabled value />).toJSON();
+  const tree = render(<Switch disabled value />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 it('renders switch with color', () => {
-  const tree = renderer.create(<Switch value color={pink500} />).toJSON();
+  const tree = render(<Switch value color={pink500} />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

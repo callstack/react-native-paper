@@ -3,7 +3,6 @@ import { Animated, Platform } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
-import renderer from 'react-test-renderer';
 
 import Provider from '../../../core/Provider';
 import { getTheme } from '../../../core/theming';
@@ -17,6 +16,7 @@ import AppbarHeader from '../../Appbar/AppbarHeader';
 import {
   getAppbarColor,
   modeTextVariant,
+  getAppbarBorders,
   renderAppbarContent as utilRenderAppbarContent,
 } from '../../Appbar/utils';
 import Menu from '../../Menu/Menu';
@@ -32,27 +32,23 @@ const renderAppbarContent = utilRenderAppbarContent as (
 
 describe('Appbar', () => {
   it('does not pass any additional props to Searchbar', () => {
-    const tree = renderer
-      .create(
-        <Appbar>
-          <Searchbar placeholder="Search" value="" />
-        </Appbar>
-      )
-      .toJSON();
+    const tree = render(
+      <Appbar>
+        <Searchbar placeholder="Search" value="" />
+      </Appbar>
+    ).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
   it('passes additional props to AppbarBackAction, AppbarContent and AppbarAction', () => {
-    const tree = renderer
-      .create(
-        <Appbar>
-          <Appbar.BackAction onPress={() => {}} />
-          <Appbar.Content title="Examples" />
-          <Appbar.Action icon="menu" onPress={() => {}} />
-        </Appbar>
-      )
-      .toJSON();
+    const tree = render(
+      <Appbar>
+        <Appbar.BackAction onPress={() => {}} />
+        <Appbar.Content title="Examples" />
+        <Appbar.Action icon="menu" onPress={() => {}} />
+      </Appbar>
+    ).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
@@ -220,10 +216,10 @@ describe('renderAppbarContent', () => {
       </mockSafeAreaContext.SafeAreaProvider>
     );
 
-    expect(getByRole('text')).toBeTruthy();
+    expect(getByRole('header')).toBeTruthy();
   });
-  it('Is recognized as a button when onPress callback has been pressed', () => {
-    const { getByRole } = render(
+  it('is recognized as a button when onPress callback has been passed', () => {
+    const { getByTestId } = render(
       <mockSafeAreaContext.SafeAreaProvider>
         <Appbar.Header>
           <Appbar.Content title="Accessible test" onPress={() => {}} />
@@ -231,7 +227,36 @@ describe('renderAppbarContent', () => {
       </mockSafeAreaContext.SafeAreaProvider>
     );
 
-    expect(getByRole('button')).toBeTruthy();
+    expect(getByTestId('appbar-content').props.accessibilityRole).toEqual([
+      'button',
+      'header',
+    ]);
+    expect(
+      getByTestId('appbar-content').props.accessibilityState || {}
+    ).not.toMatchObject({ disabled: true });
+    expect(
+      getByTestId('appbar-content-title-text').props.accessibilityRole
+    ).toEqual('none');
+  });
+  it('is recognized as a disabled button when onPress and disabled is passed', () => {
+    const { getByTestId } = render(
+      <mockSafeAreaContext.SafeAreaProvider>
+        <Appbar.Header>
+          <Appbar.Content title="Accessible test" onPress={() => {}} disabled />
+        </Appbar.Header>
+      </mockSafeAreaContext.SafeAreaProvider>
+    );
+
+    expect(getByTestId('appbar-content').props.accessibilityRole).toEqual([
+      'button',
+      'header',
+    ]);
+    expect(
+      getByTestId('appbar-content').props.accessibilityState
+    ).toMatchObject({ disabled: true });
+    expect(
+      getByTestId('appbar-content-title-text').props.accessibilityRole
+    ).toEqual('none');
   });
 });
 
@@ -486,6 +511,32 @@ describe('animated value changes correctly', () => {
 
     expect(getByTestId('appbar-header-outer-layer')).toHaveStyle({
       transform: [{ scale: 1.5 }],
+    });
+  });
+
+  it('header bottom border radius applied correctly', () => {
+    const style = { borderBottomLeftRadius: 16, borderBottomRightRadius: 16 };
+
+    const { getByTestId } = render(
+      <mockSafeAreaContext.SafeAreaProvider>
+        <Appbar.Header style={style} testID="appbar-header">
+          {null}
+        </Appbar.Header>
+      </mockSafeAreaContext.SafeAreaProvider>
+    );
+    expect(getByTestId('appbar-header-root-layer')).toHaveStyle(style);
+  });
+
+  describe('getAppbarBorders', () => {
+    const style = { borderRadius: 10, height: 60, top: 13 };
+
+    it('should return only border radius styles', () => {
+      expect(getAppbarBorders(style)).toEqual({ borderRadius: 10 });
+    });
+
+    it('should return empty object if no borders are passed', () => {
+      const style = { height: 60, top: 13 };
+      expect(getAppbarBorders(style)).toEqual({});
     });
   });
 });

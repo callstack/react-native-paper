@@ -140,8 +140,8 @@ import {
 } from 'react-native-paper';
 import merge from 'deepmerge';
 
-const CombinedDefaultTheme = merge(MD2DarkTheme, NavigationDefaultTheme);
-const CombinedDarkTheme = merge(MD2LightTheme, NavigationDarkTheme);
+const CombinedDefaultTheme = merge(MD2LightTheme, NavigationDefaultTheme);
+const CombinedDarkTheme = merge(MD2DarkTheme, NavigationDarkTheme);
 ```
 
 ### Material Design 3
@@ -163,8 +163,8 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationDark: NavigationDarkTheme,
 });
 
-const CombinedDefaultTheme = merge(MD3DarkTheme, LightTheme);
-const CombinedDarkTheme = merge(MD3LightTheme, DarkTheme);
+const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
+const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
 ```
 
 Alternatively, we could merge those themes using vanilla JavaScript:

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Animated } from 'react-native';
 
 import overlay from '../../styles/overlay';
 import { black, white } from '../../styles/themes/v2/colors';
@@ -11,6 +11,14 @@ import AppbarBackAction from './AppbarBackAction';
 import AppbarContent from './AppbarContent';
 
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
+
+const borderStyleProperties = [
+  'borderRadius',
+  'borderTopLeftRadius',
+  'borderTopRightRadius',
+  'borderBottomRightRadius',
+  'borderBottomLeftRadius',
+];
 
 export const getAppbarColor = (
   theme: InternalTheme,
@@ -37,6 +45,24 @@ export const getAppbarColor = (
   }
 
   return colors.surface;
+};
+
+export const getAppbarBorders = (
+  style:
+    | Animated.Value
+    | Animated.AnimatedInterpolation<string | number>
+    | Animated.WithAnimatedObject<ViewStyle>
+) => {
+  const borders: Record<string, number> = {};
+
+  for (const property of borderStyleProperties) {
+    const value = style[property as keyof typeof style];
+    if (value) {
+      borders[property] = value;
+    }
+  }
+
+  return borders;
 };
 
 type RenderAppbarContentProps = {

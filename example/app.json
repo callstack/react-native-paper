@@ -4,7 +4,7 @@
     "description": "Example app for React Native Paper: https://callstack.github.io/react-native-paper/",
     "slug": "react-native-paper-example",
     "privacy": "public",
-    "version": "3.3.0",
+    "version": "3.4.0",
     "entryPoint": "App.js",
     "orientation": "default",
     "primaryColor": "#6200EE",
@@ -22,11 +22,11 @@
     "owner": "react-native-paper",
     "ios": {
       "bundleIdentifier": "com.callstack.reactnativepaperexample",
-      "buildNumber": "14.0.0"
+      "buildNumber": "15.0.0"
     },
     "android": {
       "package": "com.callstack.reactnativepaperexample",
-      "versionCode": 17,
+      "versionCode": 18,
       "permissions": [
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
