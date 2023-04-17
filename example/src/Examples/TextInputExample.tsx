@@ -215,7 +215,7 @@ const TextInputExample = () => {
             secureTextEntry={flatTextSecureEntry}
             right={
               <TextInput.Icon
-                icon={flatTextSecureEntry ? 'eye' : 'eye-off'}
+                icon={flatTextSecureEntry ? 'eye-off' : 'eye'}
                 onPress={() =>
                   dispatch({
                     type: 'flatTextSecureEntry',
@@ -280,7 +280,7 @@ const TextInputExample = () => {
             secureTextEntry={outlineTextSecureEntry}
             right={
               <TextInput.Icon
-                icon={outlineTextSecureEntry ? 'eye' : 'eye-off'}
+                icon={outlineTextSecureEntry ? 'eye-off' : 'eye'}
                 onPress={() =>
                   dispatch({
                     type: 'outlineTextSecureEntry',
