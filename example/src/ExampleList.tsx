@@ -144,7 +144,11 @@ export default function ExampleList({ navigation }: Props) {
     }
 
     return (
-      <List.Item title={data.title} onPress={() => navigation.navigate(id)} />
+      <List.Item
+        unstable_pressDelay={65}
+        title={data.title}
+        onPress={() => navigation.navigate(id)}
+      />
     );
   };
 

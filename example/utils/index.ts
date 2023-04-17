@@ -50,10 +50,9 @@ export function inputReducer<T extends keyof State>(
 ) {
   switch (action.type) {
     case action.type:
-      state[action.type] = action.payload;
-      return { ...state };
+      return { ...state, [action.type]: action.payload };
     default:
-      return { ...state };
+      return state;
   }
 }
 
