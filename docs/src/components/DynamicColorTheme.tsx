@@ -1,6 +1,7 @@
 import React, { useState, ReactNode } from 'react';
 
 import Color from 'color';
+//@ts-ignore
 import { BlockPicker } from 'react-color';
 
 import {
@@ -75,6 +76,7 @@ const ColorPicker = ({ color, setColor, additional }: ColorPickerProps) => {
           <div className="color-picker-popup">
             <BlockPicker
               color={color}
+              //@ts-ignore
               onChangeComplete={(change) => setColor(change.hex)}
               colors={colorPalette}
             />
@@ -344,8 +346,11 @@ const DynamicColorTheme = () => {
       <div
         className="color-picker-preview"
         style={{
+          //@ts-ignore
           background: themes[darkMode].background,
+          //@ts-ignore
           color: themes[darkMode].onBackground,
+          //@ts-ignore
           borderColor: themes[darkMode].outlineVariant,
         }}
       >

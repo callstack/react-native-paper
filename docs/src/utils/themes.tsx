@@ -1,6 +1,7 @@
 import {
   argbFromHex,
   themeFromSourceColor,
+  //@ts-ignore
 } from '@material/material-color-utilities';
 import camelCase from 'camelcase';
 import Color from 'color';
@@ -48,14 +49,17 @@ const argbThemeFromColor = (
 
 const argbThemeToHexTheme = (theme: ARGBTheme) => {
   return Object.fromEntries(
+    //@ts-ignore
     Object.entries(theme).map(([key, value]) => [key, Color(value).hex()])
   ) as CSSTheme;
 };
 
 const argbThemeToRgbTheme = (theme: ARGBTheme) => {
   return Object.fromEntries(
+    //@ts-ignore
     Object.entries(theme).map(([key, value]) => [
       key,
+      //@ts-ignore
       Color(value).rgb().string(),
     ])
   ) as CSSTheme;
