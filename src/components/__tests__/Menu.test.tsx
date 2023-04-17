@@ -115,7 +115,7 @@ it('uses the default anchorPosition of top', async () => {
         position: 'absolute',
       },
       {
-        left: 100,
+        end: 100,
         top: 100,
       },
       undefined,
@@ -161,7 +161,7 @@ it('respects anchorPosition bottom', async () => {
         position: 'absolute',
       },
       {
-        left: 100,
+        end: 100,
         top: 132,
       },
       undefined,

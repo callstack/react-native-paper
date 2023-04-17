@@ -8,6 +8,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { useRTLOverwrite } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { InternalTheme, MD3TypescaleKey } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -158,7 +159,13 @@ const RadioButtonItem = ({
   const disabledTextColor = theme.isV3
     ? theme.colors.onSurfaceDisabled
     : theme.colors.disabled;
-  const textAlign = isLeading ? 'right' : 'left';
+
+  const overwriteRTL = useRTLOverwrite();
+  let textAlign = isLeading ? 'right' : 'left';
+
+  if (overwriteRTL) {
+    textAlign = isLeading ? 'left' : 'right';
+  }
 
   const computedStyle = {
     color: disabled ? disabledTextColor : textColor,

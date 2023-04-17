@@ -19,7 +19,7 @@ import {
 
 import color from 'color';
 
-import { useLocaleDirection } from '../../core/Localization';
+import { useLocaleDirection, useRTLOverwrite } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
@@ -211,7 +211,11 @@ const AnimatedFAB = ({
   const direction = useLocaleDirection();
   const uppercase: boolean = uppercaseProp ?? !theme.isV3;
   const isIOS = Platform.OS === 'ios';
-  const isAnimatedFromRight = animateFrom === 'right';
+  const overwriteRTL = useRTLOverwrite();
+  const isAnimatedFromRight = overwriteRTL
+    ? animateFrom !== 'right'
+    : animateFrom === 'right';
+
   const isIconStatic = iconMode === 'static';
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)

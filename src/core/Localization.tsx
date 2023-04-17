@@ -1,37 +1,48 @@
-import React, { createContext, useContext } from 'react';
-import { I18nManager } from 'react-native';
+import { createContext, useContext } from 'react';
+import { Platform } from 'react-native';
 
 type Direction = 'rtl' | 'ltr';
 
-type LocaleDirectionComponent<Props> = React.ComponentType<
-  Omit<Props, 'direction'>
->;
+// type LocaleDirectionComponent<Props> = React.ComponentType<
+//   Omit<Props, 'direction'>
+// >;
 
-const context = createContext<Direction>(
-  I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'
-);
+const defaultDirection: Direction = 'ltr';
+const context = createContext<Direction>(defaultDirection);
 
 const useLocaleDirection = (): Direction => {
   return useContext(context);
 };
 
-const withLocaleDirection = <Props extends Record<string, any>>(
-  WrappedComponent: React.ComponentType<Props>
-): LocaleDirectionComponent<Props> => {
-  const displayName =
-    WrappedComponent.displayName || WrappedComponent.name || 'Component';
+// const withLocaleDirection = <Props extends Record<string, any>>(
+//   WrappedComponent: React.ComponentType<Props>
+// ): LocaleDirectionComponent<Props> => {
+//   const displayName =
+//     WrappedComponent.displayName || WrappedComponent.name || 'Component';
+//
+//   const Component = (props: Props) => {
+//     const direction = useLocaleDirection();
+//
+//     return <WrappedComponent {...props} direction={direction} />;
+//   };
+//
+//   Component.displayName = `withLocaleDirection(${displayName})`;
+//
+//   return Component as LocaleDirectionComponent<Props>;
+// };
 
-  const Component = (props: Props) => {
-    const direction = useLocaleDirection();
+const isWeb = Platform.OS === 'web';
 
-    return <WrappedComponent {...props} direction={direction} />;
-  };
+// Since I18nManager is mocked in react-native-web (https://github.com/necolas/react-native-web/releases/tag/0.18.0)
+// we have to rely on default react-native-web positioning for RTL languages.
+// Most of the time this works out of the box, but in few specific cases
+// we need to overwrite right/left ourselves.
 
-  Component.displayName = `withLocaleDirection(${displayName})`;
-
-  return Component as LocaleDirectionComponent<Props>;
+const useRTLOverwrite = () => {
+  const direction = useLocaleDirection();
+  return isWeb && direction === 'rtl';
 };
 
 export const { Provider: LocalizationProvider } = context;
 
-export { Direction, useLocaleDirection, withLocaleDirection };
+export { Direction, useLocaleDirection, useRTLOverwrite };

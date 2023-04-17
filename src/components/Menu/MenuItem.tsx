@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   AccessibilityState,
   GestureResponderEvent,
+  Platform,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -20,6 +21,9 @@ import {
   MAX_WIDTH,
   MIN_WIDTH,
 } from './utils';
+
+const iconMarginKey =
+  Platform.OS === 'web' ? 'marginInlineStart' : 'marginStart';
 
 export type Props = {
   /**
@@ -150,6 +154,9 @@ const MenuItem = ({
   };
 
   const newAccessibilityState = { ...accessibilityState, disabled };
+  const iconMargin = {
+    [iconMarginKey]: leadingIcon ? 22 : 4,
+  };
 
   return (
     <TouchableRipple
@@ -167,7 +174,7 @@ const MenuItem = ({
       accessibilityState={newAccessibilityState}
       underlayColor={underlayColor}
     >
-      <View style={styles.row}>
+      <View style={[styles.row]}>
         {leadingIcon ? (
           <View
             style={[!isV3 && styles.item, { width: iconWidth }]}
@@ -181,10 +188,7 @@ const MenuItem = ({
             !isV3 && styles.item,
             styles.content,
             { minWidth, maxWidth },
-            isV3 &&
-              (leadingIcon
-                ? styles.md3LeadingIcon
-                : styles.md3WithoutLeadingIcon),
+            isV3 && iconMargin,
             contentStyle,
           ]}
           pointerEvents="none"
@@ -236,12 +240,6 @@ const styles = StyleSheet.create({
   },
   content: {
     justifyContent: 'center',
-  },
-  md3LeadingIcon: {
-    marginStart: 12,
-  },
-  md3WithoutLeadingIcon: {
-    marginStart: 4,
   },
 });
 

@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { I18nManager, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { DrawerContentScrollView } from '@react-navigation/drawer';
-import * as Updates from 'expo-updates';
 import {
   Badge,
   Drawer,
@@ -12,8 +11,6 @@ import {
   Text,
   TouchableRipple,
 } from 'react-native-paper';
-
-import { isWeb } from '../utils';
 
 import { PreferencesContext, useExampleTheme } from './';
 
@@ -115,14 +112,6 @@ const DrawerItems = ({
 
   const { isV3, colors } = useExampleTheme();
 
-  const _handleToggleRTL = () => {
-    toggleRTL();
-    if (!isWeb) {
-      I18nManager.forceRTL(!isRTL);
-      Updates.reloadAsync();
-    }
-  };
-
   const coloredLabelTheme = {
     colors: isV3
       ? {
@@ -183,7 +172,7 @@ const DrawerItems = ({
               </View>
             </TouchableRipple>
 
-            <TouchableRipple onPress={_handleToggleRTL}>
+            <TouchableRipple onPress={toggleRTL}>
               <View style={[styles.preference, isV3 && styles.v3Preference]}>
                 <Text variant="labelLarge">RTL</Text>
                 <View pointerEvents="none">

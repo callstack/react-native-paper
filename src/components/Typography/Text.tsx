@@ -90,8 +90,7 @@ const Text = (
   const root = React.useRef<NativeText | null>(null);
   // FIXME: destructure it in TS 4.6+
   const theme = useInternalTheme(initialTheme);
-  const direction = useLocaleDirection();
-  const writingDirection = direction;
+  const writingDirection = useLocaleDirection();
   const isWeb = Platform.OS === 'web';
 
   React.useImperativeHandle(ref, () => ({

@@ -210,7 +210,7 @@ Array [
             "position": "absolute",
           },
           Object {
-            "left": 8,
+            "end": 8,
             "top": 8,
           },
           undefined,
@@ -334,9 +334,11 @@ Array [
             >
               <View
                 style={
-                  Object {
-                    "flexDirection": "row",
-                  }
+                  Array [
+                    Object {
+                      "flexDirection": "row",
+                    },
+                  ]
                 }
               >
                 <View
@@ -441,9 +443,11 @@ Array [
             >
               <View
                 style={
-                  Object {
-                    "flexDirection": "row",
-                  }
+                  Array [
+                    Object {
+                      "flexDirection": "row",
+                    },
+                  ]
                 }
               >
                 <View
@@ -889,7 +893,7 @@ Array [
             "position": "absolute",
           },
           Object {
-            "left": 8,
+            "end": 8,
             "top": 8,
           },
           undefined,
@@ -1009,9 +1013,11 @@ Array [
             >
               <View
                 style={
-                  Object {
-                    "flexDirection": "row",
-                  }
+                  Array [
+                    Object {
+                      "flexDirection": "row",
+                    },
+                  ]
                 }
               >
                 <View
@@ -1116,9 +1122,11 @@ Array [
             >
               <View
                 style={
-                  Object {
-                    "flexDirection": "row",
-                  }
+                  Array [
+                    Object {
+                      "flexDirection": "row",
+                    },
+                  ]
                 }
               >
                 <View

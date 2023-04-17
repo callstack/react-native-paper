@@ -44,9 +44,11 @@ Array [
   >
     <View
       style={
-        Object {
-          "flexDirection": "row",
-        }
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+        ]
       }
     >
       <View
@@ -110,7 +112,7 @@ Array [
               "minWidth": 100,
             },
             Object {
-              "marginStart": 12,
+              "marginStart": 22,
             },
             undefined,
           ]
@@ -199,9 +201,11 @@ Array [
   >
     <View
       style={
-        Object {
-          "flexDirection": "row",
-        }
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+        ]
       }
     >
       <View
@@ -265,7 +269,7 @@ Array [
               "minWidth": 100,
             },
             Object {
-              "marginStart": 12,
+              "marginStart": 22,
             },
             undefined,
           ]
@@ -354,9 +358,11 @@ Array [
   >
     <View
       style={
-        Object {
-          "flexDirection": "row",
-        }
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+        ]
       }
     >
       <View
@@ -420,7 +426,7 @@ Array [
               "minWidth": 100,
             },
             Object {
-              "marginStart": 12,
+              "marginStart": 22,
             },
             undefined,
           ]
@@ -509,9 +515,11 @@ Array [
   >
     <View
       style={
-        Object {
-          "flexDirection": "row",
-        }
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+        ]
       }
     >
       <View
@@ -575,7 +583,7 @@ Array [
               "minWidth": 100,
             },
             Object {
-              "marginStart": 12,
+              "marginStart": 22,
             },
             undefined,
           ]
@@ -664,9 +672,11 @@ Array [
   >
     <View
       style={
-        Object {
-          "flexDirection": "row",
-        }
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+        ]
       }
     >
       <View

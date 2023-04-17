@@ -41,9 +41,7 @@ function AnimatedText({
   ...rest
 }: Props<never>) {
   const theme = useInternalTheme(themeOverrides);
-  const direction = useLocaleDirection();
-
-  const writingDirection = direction;
+  const writingDirection = useLocaleDirection();
 
   if (theme.isV3 && variant) {
     const font = theme.fonts[variant];
