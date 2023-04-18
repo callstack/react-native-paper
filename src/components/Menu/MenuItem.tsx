@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   AccessibilityState,
   GestureResponderEvent,
-  Platform,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -10,6 +9,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import Icon, { IconSource } from '../Icon';
@@ -21,9 +21,6 @@ import {
   MAX_WIDTH,
   MIN_WIDTH,
 } from './utils';
-
-const iconMarginKey =
-  Platform.OS === 'web' ? 'marginInlineStart' : 'marginStart';
 
 export type Props = {
   /**
@@ -129,6 +126,7 @@ const MenuItem = ({
   titleMaxFontSizeMultiplier = 1.5,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { localeProps } = useLocale();
   const { titleColor, iconColor, underlayColor } = getMenuItemColor({
     theme,
     disabled,
@@ -155,7 +153,7 @@ const MenuItem = ({
 
   const newAccessibilityState = { ...accessibilityState, disabled };
   const iconMargin = {
-    [iconMarginKey]: leadingIcon ? 22 : 4,
+    marginStart: leadingIcon ? 22 : 4,
   };
 
   return (
@@ -192,6 +190,7 @@ const MenuItem = ({
             contentStyle,
           ]}
           pointerEvents="none"
+          {...localeProps}
         >
           <Text
             variant="bodyLarge"

@@ -8,7 +8,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useRTLOverwrite } from '../../core/Localization';
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { InternalTheme, MD3TypescaleKey } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -143,6 +143,7 @@ const RadioButtonItem = ({
   labelVariant = 'bodyLarge',
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { overwriteRTL } = useLocale();
   const radioButtonProps = { value, disabled, status, color, uncheckedColor };
   const isLeading = position === 'leading';
   let radioButton: any;
@@ -160,7 +161,6 @@ const RadioButtonItem = ({
     ? theme.colors.onSurfaceDisabled
     : theme.colors.disabled;
 
-  const overwriteRTL = useRTLOverwrite();
   let textAlign = isLeading ? 'right' : 'left';
 
   if (overwriteRTL) {

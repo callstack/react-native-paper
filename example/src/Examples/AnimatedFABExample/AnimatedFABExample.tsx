@@ -12,6 +12,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { useExampleTheme } from '../..';
+import { useLocale } from '../../../../src/core/Localization';
 import { animatedFABExampleData } from '../../../utils';
 import CustomFAB from './CustomFAB';
 import CustomFABControls, {
@@ -33,6 +34,7 @@ type Item = {
 
 const AnimatedFABExample = () => {
   const { colors, isV3 } = useExampleTheme();
+  const { localeProps } = useLocale();
 
   const isIOS = Platform.OS === 'ios';
 
@@ -155,6 +157,7 @@ const AnimatedFABExample = () => {
         ]}
         contentContainerStyle={styles.container}
         onScroll={onScroll}
+        {...localeProps}
       />
 
       <CustomFAB

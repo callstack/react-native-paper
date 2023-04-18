@@ -4,7 +4,7 @@ import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import color from 'color';
 import type { ThemeProp } from 'src/types';
 
-import { useLocaleDirection } from '../../core/Localization';
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import Button from '../Button/Button';
 import IconButton from '../IconButton/IconButton';
@@ -88,7 +88,7 @@ const PaginationControls = ({
   theme: themeOverrides,
 }: PaginationControlsProps) => {
   const theme = useInternalTheme(themeOverrides);
-  const direction = useLocaleDirection();
+  const { direction } = useLocale();
 
   const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
 

@@ -18,6 +18,7 @@ import type { $RemoveChildren, EllipsizeProp, ThemeProp } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import { getLeftStyles, getRightStyles } from './utils';
+import { useLocale } from '../../core/Localization';
 
 type Title =
   | React.ReactNode
@@ -149,6 +150,7 @@ const ListItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { localeProps } = useLocale();
   const [alignToTop, setAlignToTop] = React.useState(false);
 
   const onDescriptionTextLayout = (
@@ -223,8 +225,9 @@ const ListItem = ({
       style={[theme.isV3 ? styles.containerV3 : styles.container, style]}
       onPress={onPress}
       theme={theme}
+      {...localeProps}
     >
-      <View style={theme.isV3 ? styles.rowV3 : styles.row}>
+      <View style={[theme.isV3 ? styles.rowV3 : styles.row]}>
         {left
           ? left({
               color: descriptionColor,

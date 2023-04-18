@@ -18,6 +18,7 @@ import { white } from '../../styles/themes/v2/colors';
 import type { $RemoveChildren, MD3TypescaleKey, ThemeProp } from '../../types';
 import Text, { TextRef } from '../Typography/Text';
 import { modeTextVariant } from './utils';
+import { useLocale } from '../../core/Localization';
 
 type TitleString = {
   title: string;
@@ -115,6 +116,7 @@ const AppbarContent = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { localeProps } = useLocale();
   const { isV3, colors } = theme;
 
   const titleTextColor = titleColor
@@ -140,6 +142,7 @@ const AppbarContent = ({
       style={[styles.container, isV3 && modeContainerStyles[mode], style]}
       testID={testID}
       {...rest}
+      {...localeProps}
     >
       {typeof title === 'string' ? (
         <Text

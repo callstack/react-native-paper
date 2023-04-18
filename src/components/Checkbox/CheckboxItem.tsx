@@ -8,7 +8,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useRTLOverwrite } from '../../core/Localization';
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp, MD3TypescaleKey } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -127,7 +127,7 @@ const CheckboxItem = ({
   const theme = useInternalTheme(themeOverrides);
   const checkboxProps = { ...props, status, theme, disabled };
   const isLeading = position === 'leading';
-  const overwriteRTL = useRTLOverwrite();
+  const { overwriteRTL } = useLocale();
   let checkbox;
 
   if (mode === 'android') {

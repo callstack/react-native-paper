@@ -11,7 +11,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useLatestCallback from 'use-latest-callback';
 
-import { useLocaleDirection } from '../core/Localization';
+import { useLocale } from '../core/Localization';
 import { useInternalTheme } from '../core/theming';
 import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
 import Button from './Button/Button';
@@ -146,7 +146,7 @@ const Snackbar = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const direction = useLocaleDirection();
+  const { direction, localeProps } = useLocale();
   const { bottom, right, left } = useSafeAreaInsets();
 
   const { current: opacity } = React.useRef<Animated.Value>(
@@ -290,6 +290,7 @@ const Snackbar = ({
           style,
         ]}
         {...(isV3 && { elevation })}
+        {...localeProps}
         {...rest}
       >
         {renderChildrenWithWrapper()}

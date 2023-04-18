@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
 
-import { useRTLOverwrite } from '../../core/Localization';
+import { useLocale } from '../../core/Localization';
 import ToggleButton from './ToggleButton';
 import ToggleButtonGroup from './ToggleButtonGroup';
 
 const useBorderPositions = () => {
-  const overwriteRTL = useRTLOverwrite();
+  const { overwriteRTL } = useLocale();
 
   return (index: number, count: number) => {
     const first = index === 0;

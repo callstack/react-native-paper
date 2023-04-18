@@ -23,6 +23,7 @@ import {
 } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useLocale } from '../../../src/core/Localization';
 import { colorThemes, teamResultsData } from '../../utils';
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -180,6 +181,7 @@ const Results = () => {
 const ThemeBasedOnSourceColor = ({ navigation, route }: Props) => {
   const insets = useSafeAreaInsets();
   const [index, setIndex] = React.useState(0);
+  const { direction } = useLocale();
 
   const { params } = route;
   const { sourceColor, headerTitle, darkMode } = params;
@@ -217,7 +219,7 @@ const ThemeBasedOnSourceColor = ({ navigation, route }: Props) => {
   const colorScheme = darkMode ? 'dark' : systemColorScheme;
 
   return (
-    <Provider theme={theme[colorScheme]}>
+    <Provider theme={theme[colorScheme]} direction={direction}>
       <View style={styles.screen}>
         <Appbar.Header elevated>
           <Appbar.BackAction onPress={() => navigation.goBack()} />

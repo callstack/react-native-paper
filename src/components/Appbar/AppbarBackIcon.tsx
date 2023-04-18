@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Platform, View, Image, StyleSheet } from 'react-native';
 
-import { useLocaleDirection } from '../../core/Localization';
+import { useLocale } from '../../core/Localization';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 
 const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
-  const direction = useLocaleDirection();
+  const { direction } = useLocale();
   const iosIconSize = size - 3;
 
   return Platform.OS === 'ios' ? (

@@ -58,7 +58,7 @@ export const getDisabledSegmentedButtonStyle = ({
   return {};
 };
 
-const defaultCSSBorders = {
+const ltrCSSBorders = {
   topEndRadius: 'borderTopRightRadius',
   bottomEndRadius: 'borderBottomRightRadius',
   endWidth: 'borderRightWidth',
@@ -83,7 +83,7 @@ export const getSegmentedButtonBorderRadius = ({
   segment?: 'first' | 'last';
   overwriteRTL?: boolean;
 }): ViewStyle => {
-  const cssBorders = overwriteRTL ? rtlCSSBorders : defaultCSSBorders;
+  const cssBorders = overwriteRTL ? rtlCSSBorders : ltrCSSBorders;
 
   if (segment === 'first') {
     return {

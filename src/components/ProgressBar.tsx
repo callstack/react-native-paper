@@ -11,7 +11,7 @@ import {
 
 import setColor from 'color';
 
-import { useLocaleDirection } from '../core/Localization';
+import { useLocale } from '../core/Localization';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 
@@ -77,7 +77,7 @@ const ProgressBar = ({
   animatedValue,
   ...rest
 }: Props) => {
-  const direction = useLocaleDirection();
+  const { direction } = useLocale();
   const theme = useInternalTheme(themeOverrides);
   const { current: timer } = React.useRef<Animated.Value>(
     new Animated.Value(0)

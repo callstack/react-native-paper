@@ -12,7 +12,7 @@ import {
 
 import color from 'color';
 
-import { useLocaleDirection } from '../../core/Localization';
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -97,7 +97,7 @@ const DataTableTitle = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const direction = useLocaleDirection();
+  const { direction } = useLocale();
   const { current: spinAnim } = React.useRef<Animated.Value>(
     new Animated.Value(sortDirection === 'ascending' ? 0 : 1)
   );

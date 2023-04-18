@@ -12,7 +12,7 @@ import {
 import color from 'color';
 import type { ThemeProp } from 'src/types';
 
-import { useRTLOverwrite } from '../../core/Localization';
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
@@ -105,7 +105,7 @@ const SegmentedButtonItem = ({
   theme: themeOverrides,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const overwriteRTL = useRTLOverwrite();
+  const { overwriteRTL } = useLocale();
 
   const checkScale = React.useRef(new Animated.Value(0)).current;
 

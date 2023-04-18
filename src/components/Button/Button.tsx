@@ -19,6 +19,7 @@ import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import { ButtonMode, getButtonColors } from './utils';
+import { useLocale } from '../../core/Localization';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
@@ -188,6 +189,7 @@ const Button = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { localeProps } = useLocale();
   const isMode = React.useCallback(
     (modeToCompare: ButtonMode) => {
       return mode === modeToCompare;
@@ -303,6 +305,7 @@ const Button = ({
         ] as ViewStyle
       }
       {...(isV3 && { elevation: elevation })}
+      {...localeProps}
     >
       <TouchableRipple
         borderless
