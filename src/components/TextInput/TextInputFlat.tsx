@@ -12,7 +12,7 @@ import {
 
 import type { ThemeProp } from 'src/types';
 
-import { useLocaleDirection } from '../../core/Localization';
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import { AdornmentSide, AdornmentType, InputMode } from './Adornment/enums';
 import TextInputAdornment, {
@@ -77,7 +77,7 @@ const TextInputFlat = ({
   contentStyle,
   ...rest
 }: ChildTextInputProps) => {
-  const direction = useLocaleDirection();
+  const { direction } = useLocale();
   const isAndroid = Platform.OS === 'android';
   const { colors, isV3, roundness } = theme;
   const font = isV3 ? theme.fonts.bodyLarge : theme.fonts.regular;

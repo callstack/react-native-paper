@@ -9,7 +9,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useLocaleDirection } from '../../core/Localization';
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -166,7 +166,7 @@ const ListAccordion = ({
   pointerEvents = 'none',
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const direction = useLocaleDirection();
+  const { direction } = useLocale();
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
   );

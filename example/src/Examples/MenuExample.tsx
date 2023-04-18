@@ -185,7 +185,10 @@ const styles = StyleSheet.create({
   md3Divider: {
     marginVertical: 8,
   },
-  bottomMenu: { width: '40%' },
+  bottomMenu: {
+    width: '50%',
+    paddingStart: 20,
+  },
   contentContainer: {
     justifyContent: 'space-between',
     flex: 1,

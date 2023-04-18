@@ -12,6 +12,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
@@ -171,6 +172,7 @@ const Chip = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction, localeProps } = useLocale();
   const { isV3 } = theme;
 
   const { current: elevation } = React.useRef<Animated.Value>(
@@ -260,6 +262,8 @@ const Chip = ({
       {...rest}
       testID={`${testID}-container`}
       theme={theme}
+      // @ts-ignore
+      dir="rtl"
     >
       <TouchableRipple
         borderless
@@ -276,6 +280,7 @@ const Chip = ({
         accessibilityState={accessibilityState}
         testID={testID}
         theme={theme}
+        {...localeProps}
       >
         <View
           style={[styles.content, isV3 && styles.md3Content, contentSpacings]}
@@ -327,7 +332,7 @@ const Chip = ({
                   name="check"
                   color={avatar ? white : iconColor}
                   size={18}
-                  direction="ltr"
+                  direction={direction}
                 />
               )}
             </View>
@@ -369,7 +374,7 @@ const Chip = ({
                   name={isV3 ? 'close' : 'close-circle'}
                   size={iconSize}
                   color={iconColor}
-                  direction="ltr"
+                  direction={direction}
                 />
               )}
             </View>

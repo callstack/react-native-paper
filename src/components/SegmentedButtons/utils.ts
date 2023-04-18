@@ -58,28 +58,48 @@ export const getDisabledSegmentedButtonStyle = ({
   return {};
 };
 
+const ltrCSSBorders = {
+  topEndRadius: 'borderTopRightRadius',
+  bottomEndRadius: 'borderBottomRightRadius',
+  endWidth: 'borderRightWidth',
+  topStartRadius: 'borderTopLeftRadius',
+  bottomStartRadius: 'borderBottomLeftRadius',
+};
+
+const rtlCSSBorders = {
+  topEndRadius: 'borderTopLeftRadius',
+  bottomEndRadius: 'borderBottomLeftRadius',
+  endWidth: 'borderLeftWidth',
+  topStartRadius: 'borderTopRightRadius',
+  bottomStartRadius: 'borderBottomRightRadius',
+};
+
 export const getSegmentedButtonBorderRadius = ({
   segment,
   theme,
+  overwriteRTL,
 }: {
   theme: InternalTheme;
   segment?: 'first' | 'last';
+  overwriteRTL?: boolean;
 }): ViewStyle => {
+  const cssBorders = overwriteRTL ? rtlCSSBorders : ltrCSSBorders;
+
   if (segment === 'first') {
     return {
-      borderTopRightRadius: 0,
-      borderBottomRightRadius: 0,
-      ...(theme.isV3 && { borderRightWidth: 0 }),
+      [cssBorders.topEndRadius]: 0,
+      [cssBorders.bottomEndRadius]: 0,
+      ...(theme.isV3 && { [cssBorders.endWidth]: 0 }),
     };
   } else if (segment === 'last') {
     return {
-      borderTopLeftRadius: 0,
-      borderBottomLeftRadius: 0,
+      [cssBorders.topStartRadius]: 0,
+      [cssBorders.bottomStartRadius]: 0,
     };
   } else {
     return {
       borderRadius: 0,
-      ...(theme.isV3 && { borderRightWidth: 0 }),
+      ...(theme.isV3 && { [cssBorders.endWidth]: 0 }),
     };
   }
 };

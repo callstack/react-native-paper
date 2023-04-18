@@ -1,5 +1,7 @@
 import { Dimensions, LayoutRectangle } from 'react-native';
 
+import type { Direction } from '../../core/Localization';
+
 type ChildrenMeasurement = {
   width: number;
   height: number;
@@ -71,15 +73,23 @@ const getTooltipYPosition = (
   return childrenY + childrenHeight;
 };
 
-export const getTooltipPosition = ({
-  children,
-  tooltip,
-  measured,
-}: Measurement): {} | { left: number; top: number } => {
+export const getTooltipPosition = (
+  { children, tooltip, measured }: Measurement,
+  direction?: Direction
+): {} | { left: number; top: number } => {
   if (!measured) return {};
+
+  if (direction === 'rtl') {
+    return {
+      right: getTooltipXPosition(children, tooltip),
+      top: getTooltipYPosition(children, tooltip),
+      alignSelf: 'flex-end',
+    };
+  }
 
   return {
     left: getTooltipXPosition(children, tooltip),
     top: getTooltipYPosition(children, tooltip),
+    alignSelf: 'flex-start',
   };
 };

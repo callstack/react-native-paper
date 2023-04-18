@@ -7,6 +7,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { getSwitchColor } from './utils';
@@ -86,6 +87,7 @@ const Switch = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { localeProps } = useLocale();
   const { checkedColor, onTintColor, thumbTintColor } = getSwitchColor({
     theme,
     disabled,
@@ -119,6 +121,7 @@ const Switch = ({
       disabled={disabled}
       onValueChange={disabled ? undefined : onValueChange}
       {...props}
+      {...localeProps}
       {...rest}
     />
   );

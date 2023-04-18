@@ -19,7 +19,7 @@ import {
 
 import color from 'color';
 
-import { useLocaleDirection } from '../../core/Localization';
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
@@ -208,7 +208,7 @@ const AnimatedFAB = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const direction = useLocaleDirection();
+  const { direction } = useLocale();
   const uppercase: boolean = uppercaseProp ?? !theme.isV3;
   const isIOS = Platform.OS === 'ios';
   const isAnimatedFromRight = animateFrom === 'right';

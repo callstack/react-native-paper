@@ -7,7 +7,7 @@ import {
   TextStyle,
 } from 'react-native';
 
-import { useLocaleDirection } from '../../core/Localization';
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
@@ -90,8 +90,7 @@ const Text = (
   const root = React.useRef<NativeText | null>(null);
   // FIXME: destructure it in TS 4.6+
   const theme = useInternalTheme(initialTheme);
-  const direction = useLocaleDirection();
-  const writingDirection = direction;
+  const { direction: writingDirection } = useLocale();
   const isWeb = Platform.OS === 'web';
 
   React.useImperativeHandle(ref, () => ({

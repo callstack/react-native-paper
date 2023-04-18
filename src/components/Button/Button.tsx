@@ -11,6 +11,7 @@ import {
 
 import color from 'color';
 
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
 import ActivityIndicator from '../ActivityIndicator';
@@ -188,6 +189,7 @@ const Button = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { localeProps } = useLocale();
   const isMode = React.useCallback(
     (modeToCompare: ButtonMode) => {
       return mode === modeToCompare;
@@ -303,6 +305,7 @@ const Button = ({
         ] as ViewStyle
       }
       {...(isV3 && { elevation: elevation })}
+      {...localeProps}
     >
       <TouchableRipple
         borderless

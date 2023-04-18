@@ -9,6 +9,7 @@ import {
 
 import type { ThemeProp } from 'src/types';
 
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 import SegmentedButtonItem from './SegmentedButtonItem';
@@ -138,9 +139,10 @@ const SegmentedButtons = ({
   theme: themeOverrides,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { localeProps } = useLocale();
 
   return (
-    <View style={[styles.row, style]}>
+    <View style={[styles.row, style]} {...localeProps}>
       {buttons.map((item, i) => {
         const disabledChildStyle = getDisabledSegmentedButtonStyle({
           theme,

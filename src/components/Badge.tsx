@@ -7,6 +7,7 @@ import {
   useWindowDimensions,
 } from 'react-native';
 
+import { useLocale } from '../core/Localization';
 import { useInternalTheme } from '../core/theming';
 import { black, white } from '../styles/themes/v2/colors';
 import type { ThemeProp } from '../types';
@@ -71,6 +72,7 @@ const Badge = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { localeProps } = useLocale();
   const { current: opacity } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
@@ -130,6 +132,7 @@ const Badge = ({
         styles.container,
         restStyle,
       ]}
+      {...localeProps}
       {...rest}
     >
       {children}

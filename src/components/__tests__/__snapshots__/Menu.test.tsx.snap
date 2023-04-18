@@ -210,7 +210,7 @@ Array [
             "position": "absolute",
           },
           Object {
-            "left": 8,
+            "start": 8,
             "top": 8,
           },
           undefined,
@@ -890,7 +890,7 @@ Array [
             "position": "absolute",
           },
           Object {
-            "left": 8,
+            "start": 8,
             "top": 8,
           },
           undefined,

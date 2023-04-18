@@ -1,8 +1,8 @@
 ---
-title: Using on the Web
+title: Usage on the Web
 ---
 
-# Using on the Web
+# Usage on the Web
 
 ## Pre-requisites
 
@@ -269,6 +269,19 @@ You can also load these fonts using [`css-loader`](https://github.com/webpack-co
 ## Load the Roboto fonts (optional)
 
 The default theme in React Native Paper uses the Roboto font. You can add them to your project following [the instructions on its Google Fonts page](https://fonts.google.com/specimen/Roboto?selection.family=Roboto:100,300,400,500).
+
+## RTL support for Web
+Since `react-native-web` does not support `I18nManager`, in order to support RTL layouts you have to define text direction manually:
+
+```jsx
+export default function Main() {
+  return ( 
+    <PaperProvider direction="rtl">
+      <App />
+    </PaperProvider> 
+  );
+}
+```
 
 ## We're done!
 

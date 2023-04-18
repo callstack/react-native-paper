@@ -12,6 +12,7 @@ import {
 import color from 'color';
 import type { ThemeProp } from 'src/types';
 
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
@@ -104,6 +105,7 @@ const SegmentedButtonItem = ({
   theme: themeOverrides,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { overwriteRTL } = useLocale();
 
   const checkScale = React.useRef(new Animated.Value(0)).current;
 
@@ -138,6 +140,7 @@ const SegmentedButtonItem = ({
   const segmentBorderRadius = getSegmentedButtonBorderRadius({
     theme,
     segment,
+    overwriteRTL,
   });
   const rippleColor = color(textColor).alpha(0.12).rgb().string();
 

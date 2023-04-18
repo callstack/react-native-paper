@@ -11,7 +11,7 @@ import {
 
 import BottomNavigation from '../../components/BottomNavigation/BottomNavigation';
 import MaterialCommunityIcon from '../../components/MaterialCommunityIcon';
-import { useLocaleDirection } from '../../core/Localization';
+import { useLocale } from '../../core/Localization';
 import { useNavigationLink } from '../adapter';
 import type {
   MaterialBottomTabDescriptorMap,
@@ -32,7 +32,7 @@ export default function MaterialBottomTabView({
   ...rest
 }: Props) {
   const buildLink = useNavigationLink();
-  const direction = useLocaleDirection();
+  const { direction } = useLocale();
 
   return (
     <BottomNavigation

@@ -33,6 +33,7 @@ exports[`renders chip with close button 1`] = `
 >
   <View
     collapsable={false}
+    dir="rtl"
     style={
       Object {
         "backgroundColor": "rgba(232, 222, 248, 1)",
@@ -321,6 +322,7 @@ exports[`renders chip with custom close button 1`] = `
 >
   <View
     collapsable={false}
+    dir="rtl"
     style={
       Object {
         "backgroundColor": "rgba(232, 222, 248, 1)",
@@ -609,6 +611,7 @@ exports[`renders chip with icon 1`] = `
 >
   <View
     collapsable={false}
+    dir="rtl"
     style={
       Object {
         "backgroundColor": "rgba(232, 222, 248, 1)",
@@ -820,6 +823,7 @@ exports[`renders chip with onPress 1`] = `
 >
   <View
     collapsable={false}
+    dir="rtl"
     style={
       Object {
         "backgroundColor": "rgba(232, 222, 248, 1)",
@@ -979,6 +983,7 @@ exports[`renders outlined disabled chip 1`] = `
 >
   <View
     collapsable={false}
+    dir="rtl"
     style={
       Object {
         "backgroundColor": "transparent",
@@ -1138,6 +1143,7 @@ exports[`renders selected chip 1`] = `
 >
   <View
     collapsable={false}
+    dir="rtl"
     style={
       Object {
         "backgroundColor": "rgb(232, 222, 248)",

@@ -10,7 +10,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useLocaleDirection } from '../../core/Localization';
+import { useLocale } from '../../core/Localization';
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
 import TextInputAdornment, {
   getAdornmentConfig,
@@ -73,7 +73,7 @@ const TextInputOutlined = ({
   contentStyle,
   ...rest
 }: ChildTextInputProps) => {
-  const direction = useLocaleDirection();
+  const { direction } = useLocale();
 
   const adornmentConfig = getAdornmentConfig({ left, right });
 

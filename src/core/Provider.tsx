@@ -6,8 +6,6 @@ import {
   I18nManager,
   NativeEventSubscription,
   Platform,
-  StyleSheet,
-  View,
 } from 'react-native';
 
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
@@ -83,8 +81,21 @@ const Provider = (props: Props) => {
   }, [props.theme, isOnlyVersionInTheme]);
 
   React.useEffect(() => {
-    if (props.direction && Platform.OS !== 'web') {
-      I18nManager.forceRTL(props.direction === 'rtl');
+    if (!props.direction || !['rtl', 'ltr'].includes(props.direction)) {
+      return;
+    }
+
+    const isRTL = props.direction === 'rtl';
+
+    if (Platform.OS === 'web') {
+      const htmlDir = document.documentElement.getAttribute('dir');
+      if (isRTL && htmlDir !== 'rtl') {
+        document.documentElement.setAttribute('dir', 'rtl');
+      }
+    } else {
+      if (isRTL && !I18nManager.isRTL) {
+        I18nManager.forceRTL(isRTL);
+      }
     }
   }, [props.direction]);
 
@@ -117,28 +128,16 @@ const Provider = (props: Props) => {
 
   return (
     <SafeAreaProviderCompat>
-      <PortalHost>
-        <LocalizationProvider value={direction}>
+      <LocalizationProvider value={direction}>
+        <PortalHost>
           <SettingsProvider value={settings || { icon: MaterialCommunityIcon }}>
             {/* @ts-expect-error check @callstack/react-theme-provider's children prop */}
-            <ThemeProvider theme={getTheme()}>
-              {
-                <View style={styles.container} {...{ dir: direction }}>
-                  {children}
-                </View>
-              }
-            </ThemeProvider>
+            <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
           </SettingsProvider>
-        </LocalizationProvider>
-      </PortalHost>
+        </PortalHost>
+      </LocalizationProvider>
     </SafeAreaProviderCompat>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default Provider;

@@ -250,10 +250,12 @@ exports[`renders list section with custom title style 1`] = `
   >
     <View
       style={
-        Object {
-          "flexDirection": "row",
-          "marginVertical": 6,
-        }
+        Array [
+          Object {
+            "flexDirection": "row",
+            "marginVertical": 6,
+          },
+        ]
       }
     >
       <View
@@ -391,10 +393,12 @@ exports[`renders list section with custom title style 1`] = `
   >
     <View
       style={
-        Object {
-          "flexDirection": "row",
-          "marginVertical": 6,
-        }
+        Array [
+          Object {
+            "flexDirection": "row",
+            "marginVertical": 6,
+          },
+        ]
       }
     >
       <View
@@ -749,10 +753,12 @@ exports[`renders list section with subheader 1`] = `
   >
     <View
       style={
-        Object {
-          "flexDirection": "row",
-          "marginVertical": 6,
-        }
+        Array [
+          Object {
+            "flexDirection": "row",
+            "marginVertical": 6,
+          },
+        ]
       }
     >
       <View
@@ -890,10 +896,12 @@ exports[`renders list section with subheader 1`] = `
   >
     <View
       style={
-        Object {
-          "flexDirection": "row",
-          "marginVertical": 6,
-        }
+        Array [
+          Object {
+            "flexDirection": "row",
+            "marginVertical": 6,
+          },
+        ]
       }
     >
       <View
@@ -1210,10 +1218,12 @@ exports[`renders list section without subheader 1`] = `
   >
     <View
       style={
-        Object {
-          "flexDirection": "row",
-          "marginVertical": 6,
-        }
+        Array [
+          Object {
+            "flexDirection": "row",
+            "marginVertical": 6,
+          },
+        ]
       }
     >
       <View
@@ -1351,10 +1361,12 @@ exports[`renders list section without subheader 1`] = `
   >
     <View
       style={
-        Object {
-          "flexDirection": "row",
-          "marginVertical": 6,
-        }
+        Array [
+          Object {
+            "flexDirection": "row",
+            "marginVertical": 6,
+          },
+        ]
       }
     >
       <View

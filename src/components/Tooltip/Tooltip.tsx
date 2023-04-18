@@ -9,6 +9,7 @@ import {
 
 import type { ThemeProp } from 'src/types';
 
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
@@ -72,6 +73,7 @@ const Tooltip = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   const [visible, setVisible] = React.useState(false);
 
   const [measurement, setMeasurement] = React.useState({
@@ -174,7 +176,7 @@ const Tooltip = ({
                 backgroundColor: theme.isV3
                   ? theme.colors.onSurface
                   : theme.colors.tooltip,
-                ...getTooltipPosition(measurement as Measurement),
+                ...getTooltipPosition(measurement as Measurement, direction),
                 borderRadius: theme.roundness,
                 ...(measurement.measured ? styles.visible : styles.hidden),
               },
@@ -210,7 +212,6 @@ const Tooltip = ({
 
 const styles = StyleSheet.create({
   tooltip: {
-    alignSelf: 'flex-start',
     justifyContent: 'center',
     paddingHorizontal: 16,
     height: 32,

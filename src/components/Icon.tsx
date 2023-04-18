@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Image, ImageSourcePropType, Platform } from 'react-native';
 
-import { useLocaleDirection } from '../core/Localization';
+import { useLocale } from '../core/Localization';
 import { Consumer as SettingsConsumer } from '../core/settings';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
@@ -71,7 +71,7 @@ const Icon = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const localeDirection = useLocaleDirection();
+  const { direction: localeDirection } = useLocale();
   const direction =
     typeof source === 'object' && source.direction && source.source
       ? source.direction === 'auto'

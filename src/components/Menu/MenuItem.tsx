@@ -9,6 +9,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import Icon, { IconSource } from '../Icon';
@@ -125,6 +126,7 @@ const MenuItem = ({
   titleMaxFontSizeMultiplier = 1.5,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { localeProps } = useLocale();
   const { titleColor, iconColor, underlayColor } = getMenuItemColor({
     theme,
     disabled,
@@ -188,6 +190,7 @@ const MenuItem = ({
             contentStyle,
           ]}
           pointerEvents="none"
+          {...localeProps}
         >
           <Text
             variant="bodyLarge"

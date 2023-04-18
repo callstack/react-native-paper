@@ -182,10 +182,12 @@ exports[`renders expanded accordion 1`] = `
   >
     <View
       style={
-        Object {
-          "flexDirection": "row",
-          "marginVertical": 6,
-        }
+        Array [
+          Object {
+            "flexDirection": "row",
+            "marginVertical": 6,
+          },
+        ]
       }
     >
       <View

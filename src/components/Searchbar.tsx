@@ -14,7 +14,7 @@ import {
 
 import color from 'color';
 
-import { useLocaleDirection } from '../core/Localization';
+import { useLocale } from '../core/Localization';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 import { forwardRef } from '../utils/forwardRef';
@@ -202,7 +202,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
-    const direction = useLocaleDirection();
+    const { direction, localeProps } = useLocale();
     const root = React.useRef<TextInput>(null);
 
     React.useImperativeHandle(ref, () => {
@@ -282,6 +282,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
         testID={`${testID}-container`}
         {...(theme.isV3 && { elevation })}
         theme={theme}
+        {...localeProps}
       >
         <IconButton
           accessibilityRole="button"

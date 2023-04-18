@@ -103,7 +103,6 @@ it('uses the default anchorPosition of top', async () => {
     const menu = screen.getByTestId('menu-view');
     expect(menu).toHaveStyle({
       position: 'absolute',
-      left: 100,
       top: 100,
     });
   });
@@ -143,7 +142,6 @@ it('respects anchorPosition bottom', async () => {
     const menu = screen.getByTestId('menu-view');
     expect(menu).toHaveStyle({
       position: 'absolute',
-      left: 100,
       top: 132,
     });
   });
