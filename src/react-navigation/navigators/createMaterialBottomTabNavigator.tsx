@@ -147,5 +147,7 @@ export default createNavigatorFactory<
   TabNavigationState<ParamListBase>,
   MaterialBottomTabNavigationOptions,
   MaterialBottomTabNavigationEventMap,
-  typeof MaterialBottomTabNavigator
->(MaterialBottomTabNavigator);
+  React.ComponentType<MaterialBottomTabNavigatorProps> /** Hack to sutisfies TS given the Prop type created for Docusaurus */
+>(
+  MaterialBottomTabNavigator as React.ComponentType<MaterialBottomTabNavigatorProps>
+);
