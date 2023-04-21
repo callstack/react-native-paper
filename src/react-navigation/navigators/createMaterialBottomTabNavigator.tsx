@@ -92,16 +92,16 @@ export type Props = {
  * import * as React from 'react';
  * import { createMaterialBottomTabNavigator } from 'react-native-paper';
  *
- *  const Tab = createMaterialBottomTabNavigator();
+ * const Tab = createMaterialBottomTabNavigator();
  *
- *  function MyTabs() {
- *    return (
- *      <Tab.Navigator>
- *        <Tab.Screen name="Home" component={HomeScreen} />
- *        <Tab.Screen name="Settings" component={SettingsScreen} />
- *      </Tab.Navigator>
- *    );
- *  }
+ * function MyTabs() {
+ *   return (
+ *     <Tab.Navigator>
+ *       <Tab.Screen name="Home" component={HomeScreen} />
+ *       <Tab.Screen name="Settings" component={SettingsScreen} />
+ *     </Tab.Navigator>
+ *   );
+ * }
  * export default MyTabs;
  * ```
  */
