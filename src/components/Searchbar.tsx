@@ -79,24 +79,24 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   clearAccessibilityLabel?: string;
   /**
    * @supported Available in v5.x with theme version 3
-   * Icon name for the right trailering icon button.
+   * Icon name for the right trailing icon button.
    * Works only when `mode` is set to "bar". It won't be displayed if `loading` is set to `true`.
    */
-  traileringIcon?: IconSource;
+  trailingIcon?: IconSource;
   /**
    * @supported Available in v5.x with theme version 3
-   * Custom color for the right trailering icon, default will be derived from theme
+   * Custom color for the right trailing icon, default will be derived from theme
    */
-  traileringIconColor?: string;
+  trailingIconColor?: string;
   /**
    * @supported Available in v5.x with theme version 3
-   * Callback to execute on the right trailering icon button press.
+   * Callback to execute on the right trailing icon button press.
    */
-  onTraileringIconPress?: (e: GestureResponderEvent) => void;
+  onTrailingIconPress?: (e: GestureResponderEvent) => void;
   /**
-   * Accessibility label for the right trailering icon button. This is read by the screen reader when the user taps the button.
+   * Accessibility label for the right trailing icon button. This is read by the screen reader when the user taps the button.
    */
-  traileringIconAccessibilityLabel?: string;
+  trailingIconAccessibilityLabel?: string;
   /**
    * @supported Available in v5.x with theme version 3
    * Callback which returns a React element to display on the right side.
@@ -182,10 +182,10 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       clearIcon,
       clearAccessibilityLabel = 'clear',
       onClearIconPress,
-      traileringIcon,
-      traileringIconColor,
-      traileringIconAccessibilityLabel,
-      onTraileringIconPress,
+      trailingIcon,
+      trailingIconColor,
+      trailingIconAccessibilityLabel,
+      onTrailingIconPress,
       right,
       mode = 'bar',
       showDivider = true,
@@ -260,9 +260,9 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       : theme.fonts.regular;
 
     const isBarMode = isV3 && mode === 'bar';
-    const shouldRenderTraileringIcon =
+    const shouldRenderTrailingIcon =
       isBarMode &&
-      traileringIcon &&
+      trailingIcon &&
       !loading &&
       (!value || right !== undefined);
 
@@ -365,15 +365,15 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             />
           </View>
         )}
-        {shouldRenderTraileringIcon ? (
+        {shouldRenderTrailingIcon ? (
           <IconButton
             accessibilityRole="button"
             borderless
-            onPress={onTraileringIconPress}
-            iconColor={traileringIconColor || theme.colors.onSurfaceVariant}
-            icon={traileringIcon}
-            accessibilityLabel={traileringIconAccessibilityLabel}
-            testID={`${testID}-trailering-icon`}
+            onPress={onTrailingIconPress}
+            iconColor={trailingIconColor || theme.colors.onSurfaceVariant}
+            icon={trailingIcon}
+            accessibilityLabel={trailingIconAccessibilityLabel}
+            testID={`${testID}-trailing-icon`}
           />
         ) : null}
         {isBarMode &&
