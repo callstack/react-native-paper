@@ -131,58 +131,58 @@ it('renders clear icon wrapper, with appropriate style for v3', () => {
   });
 });
 
-it('renders trailering icon when mode is set to "bar"', () => {
+it('renders trailing icon when mode is set to "bar"', () => {
   const { getByTestId } = render(
     <Searchbar
       testID="search-bar"
       value={''}
-      traileringIcon={'microphone'}
+      trailingIcon={'microphone'}
       mode="bar"
     />
   );
 
-  expect(getByTestId('search-bar-trailering-icon')).toBeTruthy();
+  expect(getByTestId('search-bar-trailing-icon')).toBeTruthy();
 });
 
-it('renders trailering icon with press functionality', () => {
-  const onTraileringIconPressMock = jest.fn();
+it('renders trailing icon with press functionality', () => {
+  const onTrailingIconPressMock = jest.fn();
 
   const { getByTestId } = render(
     <Searchbar
       testID="search-bar"
       value={''}
-      traileringIcon={'microphone'}
-      onTraileringIconPress={onTraileringIconPressMock}
+      trailingIcon={'microphone'}
+      onTrailingIconPress={onTrailingIconPressMock}
       mode="bar"
     />
   );
 
-  fireEvent(getByTestId('search-bar-trailering-icon'), 'onPress');
-  expect(onTraileringIconPressMock).toHaveBeenCalledTimes(1);
+  fireEvent(getByTestId('search-bar-trailing-icon'), 'onPress');
+  expect(onTrailingIconPressMock).toHaveBeenCalledTimes(1);
 });
 
-it('renders clear icon instead of trailering icon', () => {
+it('renders clear icon instead of trailing icon', () => {
   const { getByTestId, update, queryByTestId } = render(
     <Searchbar
       testID="search-bar"
       value={''}
-      traileringIcon={'microphone'}
+      trailingIcon={'microphone'}
       mode="bar"
     />
   );
 
-  expect(getByTestId('search-bar-trailering-icon')).toBeTruthy();
+  expect(getByTestId('search-bar-trailing-icon')).toBeTruthy();
 
   update(
     <Searchbar
       testID="search-bar"
       value={'test'}
-      traileringIcon={'microphone'}
+      trailingIcon={'microphone'}
       mode="bar"
     />
   );
 
-  expect(queryByTestId('search-bar-trailering-icon')).toBeNull();
+  expect(queryByTestId('search-bar-trailing-icon')).toBeNull();
   expect(getByTestId('search-bar-icon-wrapper')).toBeTruthy();
 });
 
