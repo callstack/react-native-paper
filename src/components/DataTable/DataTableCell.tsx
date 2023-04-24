@@ -60,6 +60,8 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  *
  * If you want to support multiline text, please use View instead, as multiline text doesn't comply with
  * MD Guidelines (https://github.com/callstack/react-native-paper/issues/2381).
+ *
+ * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
 
 const DataTableCell = ({

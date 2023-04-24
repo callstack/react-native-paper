@@ -158,6 +158,7 @@ const ListAccordion = ({
   descriptionStyle,
   titleNumberOfLines = 1,
   descriptionNumberOfLines = 2,
+  rippleColor: customRippleColor,
   style,
   id,
   testID,
@@ -210,6 +211,7 @@ const ListAccordion = ({
     getAccordionColors({
       theme,
       isExpanded,
+      customRippleColor,
     });
 
   const handlePress =

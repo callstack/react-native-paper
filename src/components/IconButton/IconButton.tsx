@@ -124,6 +124,7 @@ const IconButton = forwardRef<View, Props>(
       icon,
       iconColor: customIconColor,
       containerColor: customContainerColor,
+      rippleColor: customRippleColor,
       size = 24,
       accessibilityLabel,
       disabled,
@@ -151,6 +152,7 @@ const IconButton = forwardRef<View, Props>(
         mode,
         customIconColor,
         customContainerColor,
+        customRippleColor,
       });
 
     const buttonSize = isV3 ? size + 2 * PADDING : size * 1.5;

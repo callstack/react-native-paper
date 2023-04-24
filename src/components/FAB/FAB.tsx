@@ -176,6 +176,7 @@ const FAB = forwardRef<View, Props>(
       accessibilityState,
       animated = true,
       color: customColor,
+      rippleColor: customRippleColor,
       disabled,
       onPress,
       onLongPress,
@@ -233,6 +234,7 @@ const FAB = forwardRef<View, Props>(
       disabled,
       customColor,
       customBackgroundColor,
+      customRippleColor,
     });
 
     const isLargeSize = size === 'large';

@@ -77,6 +77,7 @@ const DrawerItem = ({
   label,
   active,
   theme: themeOverrides,
+  rippleColor: customRippleColor,
   style,
   onPress,
   accessibilityLabel,
@@ -101,11 +102,8 @@ const DrawerItem = ({
 
   const labelMargin = icon ? (isV3 ? 12 : 32) : 0;
   const borderRadius = (isV3 ? 7 : 1) * roundness;
-  const underlayColor = isV3
-    ? color(backgroundColor)
-        .mix(color(theme.colors.onSecondaryContainer), 0.16)
-        .rgb()
-        .toString()
+  const rippleColor = isV3
+    ? color(contentColor).alpha(0.12).rgb().string()
     : undefined;
   const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
 
@@ -123,7 +121,7 @@ const DrawerItem = ({
         accessibilityRole="button"
         accessibilityState={{ selected: active }}
         accessibilityLabel={accessibilityLabel}
-        underlayColor={underlayColor}
+        rippleColor={customRippleColor || rippleColor}
         theme={theme}
       >
         <View style={[styles.wrapper, isV3 && styles.v3Wrapper]}>

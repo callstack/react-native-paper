@@ -171,6 +171,7 @@ const Button = ({
   icon,
   buttonColor: customButtonColor,
   textColor: customTextColor,
+  rippleColor: customRippleColor,
   children,
   accessibilityLabel,
   accessibilityHint,
@@ -255,7 +256,8 @@ const Button = ({
       dark,
     });
 
-  const rippleColor = color(textColor).alpha(0.12).rgb().string();
+  const rippleColor =
+    customRippleColor || color(textColor).alpha(0.12).rgb().string();
 
   const buttonStyle = {
     backgroundColor,

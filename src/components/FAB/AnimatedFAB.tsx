@@ -193,6 +193,7 @@ const AnimatedFAB = ({
   accessibilityLabel = label,
   accessibilityState,
   color: customColor,
+  rippleColor: customRippleColor,
   disabled,
   onPress,
   onLongPress,
@@ -255,7 +256,8 @@ const AnimatedFAB = ({
     customBackgroundColor,
   });
 
-  const rippleColor = color(foregroundColor).alpha(0.12).rgb().string();
+  const rippleColor =
+    customRippleColor || color(foregroundColor).alpha(0.12).rgb().string();
 
   const extendedWidth = textWidth + SIZE + borderRadius;
 

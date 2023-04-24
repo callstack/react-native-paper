@@ -10,6 +10,7 @@ import {
   View,
 } from 'react-native';
 
+import { Consumer as SettingsConsumer } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
@@ -101,7 +102,7 @@ const TouchableRipple = ({
     >
       {({ pressed }) => (
         <>
-          {pressed && (
+          {pressed && rippleEffectEnabled && (
             <View
               testID="touchable-ripple-underlay"
               style={[

@@ -165,6 +165,7 @@ const Chip = ({
   theme: themeOverrides,
   testID = 'chip',
   selectedColor,
+  rippleColor: customRippleColor,
   showSelectedOverlay = false,
   ellipsizeMode,
   compact,
@@ -213,7 +214,7 @@ const Chip = ({
     borderColor,
     textColor,
     iconColor,
-    underlayColor,
+    rippleColor,
     selectedBackgroundColor,
     backgroundColor,
   } = getChipColors({
@@ -223,6 +224,7 @@ const Chip = ({
     showSelectedOverlay,
     customBackgroundColor,
     disabled,
+    customRippleColor,
   });
 
   const accessibilityState: AccessibilityState = {
@@ -272,7 +274,7 @@ const Chip = ({
         onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
         onLongPress={onLongPress}
         delayLongPress={delayLongPress}
-        underlayColor={underlayColor}
+        rippleColor={rippleColor}
         disabled={disabled}
         accessibilityLabel={accessibilityLabel}
         accessibilityRole="button"
