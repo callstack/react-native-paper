@@ -1,0 +1,20 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc2 Action toggle can be switched On and Off
+---
+- runFlow: snackbar_enter.yaml
+- assertVisible: "1"
+- tapOn: "1"
+- assertVisible:
+    text: "0"
+    index: 0
+- tapOn:
+    text: "0"
+    index: 0
+- assertVisible: "1"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP
+- clearState

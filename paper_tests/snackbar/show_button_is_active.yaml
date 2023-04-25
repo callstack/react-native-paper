@@ -1,0 +1,17 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc5 Show button is active
+---
+- runFlow: snackbar_enter.yaml
+- assertVisible:
+    id: "button"
+- tapOn:
+    id: "button"
+- assertVisible: "Single-line snackbar Action"
+- assertVisible: "Hide"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP
+- clearState

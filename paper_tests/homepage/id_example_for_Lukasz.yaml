@@ -1,0 +1,19 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc2 Input text with more than 100 characters "Flat input" field (101)
+---
+- clearState: "com.callstack.reactnativepaperexample"
+- openLink: exp://192.168.1.9:19000
+- scrollUntilVisible:
+    element:
+      text: "Snackbar"
+    direction: DOWN
+# - repeat:
+#     times: 3
+#     commands:
+#       - swipe:
+#           start: "68%,75%"
+#           end: "82%,22%"
+#           duration: 620
+- tapOn: "Snackbar"
+- clearState
+- stopApp: "com.callstack.reactnativepaperexample"

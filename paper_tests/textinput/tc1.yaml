@@ -1,0 +1,18 @@
+appId: com.callstack.reactnativepaperexample
+# tc1 Input text with less than 100 characters "Flat input" field 
+---
+# - openLink: exp://192.168.1.6:19000
+- openLink: exp://192.168.96.11:19000 
+- repeat:
+    times: 3
+    commands:
+      - swipe:
+          start: "68%,75%"
+          end: "82%,22%"
+          duration: 620
+- tapOn: TextInput
+- tapOn:
+    id: "text-input-flat"
+    index: 0
+- inputText: "Hello, Maestro!"
+# idb file rm --application {bundle id}/

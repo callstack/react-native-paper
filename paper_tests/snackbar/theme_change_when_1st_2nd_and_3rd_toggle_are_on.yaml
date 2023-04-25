@@ -1,0 +1,27 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc theme_change_when_1st_2nd_and_3rd_toggle_are_on
+---
+- runFlow: snackbar_enter.yaml
+- assertVisible: "1"
+- tapOn:
+    text: "0"
+    index: 0
+- tapOn:
+    text: "0"
+    index: 0
+- tapOn: "Show"
+- assertVisible: "Snackbar with longer message which does not fit in one line Action\
+    \ Close icon"
+- tapOn: "Show"
+- tapOn: "Action"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP
+- tapOn:
+    id: "icon-button"
+- tapOn: "Dark Theme"
+- tapOn:
+    id: "SBSwitcherWindow:Main"

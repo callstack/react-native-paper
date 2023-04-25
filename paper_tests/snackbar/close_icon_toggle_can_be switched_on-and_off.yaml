@@ -1,0 +1,35 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc2 Close icon toggle can be switched On and Off
+---
+- runFlow: snackbar_enter.yaml
+- assertVisible:
+    text: "0"
+    index: 0
+- tapOn:
+    text: "0"
+    index: 0
+- assertVisible:
+    text: "1"
+    index: 1
+- tapOn:
+    text: "1"
+    index: 1
+- assertVisible:
+    text: "0"
+    index: 0
+- tapOn:
+    text: "0"
+    index: 0
+- assertVisible:
+    text: "0"
+    index: 0
+- assertNotVisible:
+    text: "1"
+    index: 1
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP
+- clearState

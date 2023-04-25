@@ -1,0 +1,17 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc Show button message when Longer action button toggle is On
+---
+- runFlow: snackbar_enter.yaml
+- assertVisible: "1"
+- tapOn: "1"
+- tapOn:
+    text: "0"
+    index: 2
+- tapOn: "Show"
+- assertVisible: "Snackbar with longer message which does not fit in one line"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP

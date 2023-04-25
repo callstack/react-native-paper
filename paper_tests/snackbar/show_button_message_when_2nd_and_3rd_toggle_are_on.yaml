@@ -1,0 +1,25 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc Show button message when 2nd and 3rd toggles are On
+---
+- runFlow: snackbar_enter.yaml
+- assertVisible: "1"
+- tapOn: "1"
+- assertVisible:
+    text: "0"
+    index: 0
+- tapOn:
+    text: "0"
+    index: 1
+- tapOn:
+    text: "0"
+    index: 1
+- tapOn: "Show"
+- assertVisible: "Snackbar with longer message which does not fit in one line Close\
+    \ icon"
+- assertVisible: "Close icon"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP

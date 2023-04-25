@@ -1,0 +1,22 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc theme_change_when_1st_2nd_and_4th_toggle_are_on
+---
+- runFlow: snackbar_enter.yaml
+- assertVisible: "1"
+- tapOn:
+    text: "0"
+    index: 0
+- tapOn:
+    text: "0"
+    index: 1
+- tapOn: "Show"
+- assertVisible: "Single-line snackbar Toggle Theme Close icon"
+- tapOn: "Toggle Theme"
+- tapOn: "Show"
+- tapOn: "Toggle Theme"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP

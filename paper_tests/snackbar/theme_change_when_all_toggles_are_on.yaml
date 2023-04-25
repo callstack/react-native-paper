@@ -1,0 +1,28 @@
+appId: "com.callstack.reactnativepaperexampl"
+# tc Theme_change_when_all_toggles_are_on
+---
+- runFlow: snackbar_enter.yaml
+- assertVisible: "1"
+- tapOn:
+    text: "0"
+    index: 0
+- tapOn:
+    text: "0"
+    index: 0
+- tapOn: "0"
+- tapOn: "Show"
+- assertVisible: "Snackbar with longer message which does not fit in one line Toggle\
+    \ Theme Close icon"
+- assertVisible: "Hide"
+- tapOn: "Toggle Theme"
+- tapOn: "Show"
+- assertVisible: "Snackbar with longer message which does not fit in one line Toggle\
+    \ Theme Close icon"
+- tapOn: "Toggle Theme"
+- assertVisible: "Show"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP
