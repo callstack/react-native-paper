@@ -74,7 +74,7 @@ describe('Tooltip', () => {
         wrapper: { getByText, unmount },
       } = setup({ enterTouchDelay: 5000 });
 
-      fireEvent(getByText('dummy component'), 'touchStart');
+      fireEvent(getByText('dummy component'), 'onLongPress');
 
       unmount();
 
@@ -86,7 +86,7 @@ describe('Tooltip', () => {
         wrapper: { getByText, unmount },
       } = setup({ enterTouchDelay: 5000 });
 
-      fireEvent(getByText('dummy component'), 'touchEnd');
+      fireEvent(getByText('dummy component'), 'onPressOut');
 
       unmount();
 
@@ -98,7 +98,7 @@ describe('Tooltip', () => {
         wrapper: { getByText, findByText, unmount },
       } = setup();
 
-      fireEvent(getByText('dummy component'), 'touchStart');
+      fireEvent(getByText('dummy component'), 'onLongPress');
 
       await findByText('some tooltip text');
 
@@ -108,7 +108,7 @@ describe('Tooltip', () => {
     });
   });
 
-  describe('touchStart', () => {
+  describe('onLongPress', () => {
     beforeAll(() => jest.spyOn(global, 'clearTimeout'));
     afterEach(() => jest.clearAllMocks());
 
@@ -119,17 +119,20 @@ describe('Tooltip', () => {
         wrapper: { getByText },
       } = setup();
 
-      fireEvent(getByText('dummy component'), 'touchStart');
-      fireEvent(getByText('dummy component'), 'touchEnd');
-      fireEvent(getByText('dummy component'), 'touchStart');
+      fireEvent(getByText('dummy component'), 'onLongPress');
+      fireEvent(getByText('dummy component'), 'onPressOut');
+      fireEvent(getByText('dummy component'), 'onLongPress');
 
       expect(global.clearTimeout).toHaveBeenCalledTimes(2);
     });
   });
 
   describe.each([
-    ['touchEnd', 'hides the tooltip when the user stop pressing the component'],
-    ['touchCancel', 'hides the tooltip when the user cancel the touch action'],
+    [
+      'onPressOut',
+      'hides the tooltip when the user stop pressing the component',
+    ],
+    ['onPressOut', 'hides the tooltip when the user cancel the touch action'],
   ])('%s', (eventName, testDescription) => {
     // eslint-disable-next-line jest/valid-title
     it(testDescription, async () => {
@@ -137,7 +140,7 @@ describe('Tooltip', () => {
         wrapper: { queryByText, getByText, findByText },
       } = setup({ enterTouchDelay: 50, leaveTouchDelay: 0 });
 
-      fireEvent(getByText('dummy component'), 'touchStart');
+      fireEvent(getByText('dummy component'), 'onLongPress');
 
       await findByText('some tooltip text');
 
@@ -170,7 +173,7 @@ describe('Tooltip', () => {
           wrapper: { getByText, getByTestId, findByText },
         } = setup();
 
-        fireEvent(getByText('dummy component'), 'touchStart');
+        fireEvent(getByText('dummy component'), 'onLongPress');
 
         fireEvent(await findByText('some tooltip text'), 'layout', {
           nativeEvent: {
@@ -191,18 +194,21 @@ describe('Tooltip', () => {
     describe('When it overflows to left', () => {
       it('renders the tooltip with the right placement', async () => {
         const {
-          wrapper: { getByText, getByTestId, findByText },
+          wrapper: { getByText, findByTestId, findByText },
         } = setup({}, { pageX: 0 }); // Component starting at the starting 0 X coord
 
-        fireEvent(getByText('dummy component'), 'touchStart');
+        fireEvent(getByText('dummy component'), 'onLongPress');
 
         fireEvent(await findByText('some tooltip text'), 'layout', {
           nativeEvent: {
             layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
           },
         });
+        const tooltipContainer = await findByTestId('tooltip-container');
 
-        expect(getByTestId('tooltip-container').props.style).toMatchObject([
+        // expect to partial match the style object
+        expect;
+        expect(tooltipContainer.props.style).toMatchObject([
           {},
           {
             left: 0, // Tooltip renders starting from children's x coord
@@ -218,7 +224,7 @@ describe('Tooltip', () => {
           wrapper: { getByText, getByTestId, findByText },
         } = setup({}, { pageX: 900, width: 150 }); // Component close to the screen limit
 
-        fireEvent(getByText('dummy component'), 'touchStart');
+        fireEvent(getByText('dummy component'), 'onLongPress');
 
         fireEvent(await findByText('some tooltip text'), 'layout', {
           nativeEvent: {
@@ -242,7 +248,7 @@ describe('Tooltip', () => {
           wrapper: { getByText, getByTestId, findByText },
         } = setup({}, { pageY: 600, height: 50 });
 
-        fireEvent(getByText('dummy component'), 'touchStart');
+        fireEvent(getByText('dummy component'), 'onLongPress');
 
         fireEvent(await findByText('some tooltip text'), 'layout', {
           nativeEvent: {

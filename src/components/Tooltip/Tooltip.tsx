@@ -5,6 +5,8 @@ import {
   LayoutChangeEvent,
   StyleSheet,
   Platform,
+  Pressable,
+  ViewStyle,
 } from 'react-native';
 
 import type { ThemeProp } from 'src/types';
@@ -149,6 +151,9 @@ const Tooltip = ({
         return children.props.onPress?.();
       }
     }, [children.props]),
+    onLongPress: () => handleTouchStart(),
+    onPressOut: () => handleTouchEnd(),
+    delayLongPress: enterTouchDelay,
   };
 
   const webPressProps = {
@@ -193,17 +198,17 @@ const Tooltip = ({
           </View>
         </Portal>
       )}
-      <View
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        onTouchCancel={handleTouchEnd}
+      {/* Need the xxPressProps in both places */}
+      <Pressable
+        ref={childrenWrapperRef}
+        style={styles.pressContainer}
+        {...(isWeb ? webPressProps : mobilePressProps)}
       >
         {React.cloneElement(children, {
           ...rest,
-          ref: childrenWrapperRef,
           ...(isWeb ? webPressProps : mobilePressProps),
         })}
-      </View>
+      </Pressable>
     </>
   );
 };
@@ -222,6 +227,10 @@ const styles = StyleSheet.create({
   hidden: {
     opacity: 0,
   },
+  pressContainer: {
+    cursor: 'default',
+    alignSelf: 'flex-start',
+  } as ViewStyle,
 });
 
 export default Tooltip;
