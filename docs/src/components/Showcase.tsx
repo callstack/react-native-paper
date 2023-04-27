@@ -29,7 +29,8 @@ const data: Data[] = [
     color: '#696AC3',
     name: 'Weather Forecast',
     image: '../showcase/weatherforecast.png',
-    android: 'https://play.google.com/store/apps/details?id=com.rehankhalil462.WeatherApp',
+    android: 
+      'https://play.google.com/store/apps/details?id=com.rehankhalil462.WeatherApp',
   },
   {
     color: '#696AC3',
