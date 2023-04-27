@@ -2,9 +2,11 @@ import * as React from 'react';
 import {
   GestureResponderEvent,
   I18nManager,
+  NativeSyntheticEvent,
   StyleProp,
   StyleSheet,
   TextStyle,
+  TextLayoutEventData,
   View,
   ViewProps,
   ViewStyle,
@@ -16,7 +18,7 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import { ListAccordionGroupContext } from './ListAccordionGroup';
-import { getAccordionColors } from './utils';
+import { getAccordionColors, getLeftStyles } from './utils';
 
 export type Props = {
   /**
@@ -30,7 +32,7 @@ export type Props = {
   /**
    * Callback which returns a React element to display on the left side.
    */
-  left?: (props: { color: string }) => React.ReactNode;
+  left?: (props: { color: string; style: Style }) => React.ReactNode;
   /**
    * Callback which returns a React element to display on the right side.
    */
@@ -169,6 +171,17 @@ const ListAccordion = ({
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
   );
+  const [alignToTop, setAlignToTop] = React.useState(false);
+
+  const onDescriptionTextLayout = (
+    event: NativeSyntheticEvent<TextLayoutEventData>
+  ) => {
+    if (!theme.isV3) {
+      return;
+    }
+    const { nativeEvent } = event;
+    setAlignToTop(nativeEvent.lines.length >= 2);
+  };
 
   const handlePressAction = (e: GestureResponderEvent) => {
     onPress?.(e);
@@ -206,7 +219,7 @@ const ListAccordion = ({
     <View>
       <View style={{ backgroundColor: theme?.colors?.background }}>
         <TouchableRipple
-          style={[styles.container, style]}
+          style={[theme.isV3 ? styles.containerV3 : styles.container, style]}
           onPress={handlePress}
           onLongPress={onLongPress}
           delayLongPress={delayLongPress}
@@ -222,6 +235,7 @@ const ListAccordion = ({
             {left
               ? left({
                   color: isExpanded ? theme.colors?.primary : descriptionColor,
+                  style: getLeftStyles(alignToTop, description, theme.isV3),
                 })
               : null}
             <View style={[styles.item, styles.content]}>
@@ -249,6 +263,7 @@ const ListAccordion = ({
                     },
                     descriptionStyle,
                   ]}
+                  onTextLayout={onDescriptionTextLayout}
                 >
                   {description}
                 </Text>
@@ -300,6 +315,10 @@ ListAccordion.displayName = 'List.Accordion';
 const styles = StyleSheet.create({
   container: {
     padding: 8,
+  },
+  containerV3: {
+    paddingVertical: 8,
+    paddingRight: 24,
   },
   row: {
     flexDirection: 'row',
