@@ -11,11 +11,11 @@ type DataObject = {
   [key: string]: string | DataObject;
 };
 
-const getUniqueNestedKeys = (data: DataObject) => {
-  let keys: string[] = [];
+const getUniqueNestedKeys = (data: DataObject): string[] => {
+  const keys: string[] = [];
 
   const traverseObject = (obj: DataObject) => {
-    for (let [key, value] of Object.entries(obj)) {
+    for (const [key, value] of Object.entries(obj)) {
       if (typeof value === 'object') {
         traverseObject(value);
       } else {
@@ -29,39 +29,53 @@ const getUniqueNestedKeys = (data: DataObject) => {
   return [...new Set(keys)];
 };
 
-function getNestingLevel(obj: DataObject) {
+const getNestingLevel = (obj: DataObject): number => {
   let maxNestedLevel = 0;
+
   for (const key in obj) {
     if (typeof obj[key] === 'object') {
       const nestedLevel = getNestingLevel(obj[key] as DataObject) + 1;
-      if (nestedLevel > maxNestedLevel) {
-        maxNestedLevel = nestedLevel;
-      }
+      maxNestedLevel = Math.max(maxNestedLevel, nestedLevel);
     }
   }
-  return maxNestedLevel;
-}
 
-export default function ThemeColorsTable({
+  return maxNestedLevel;
+};
+
+const getTableHeader = (keys: string[]): JSX.Element[] => {
+  return keys.map((key) => <th key={key}>{key}</th>);
+};
+
+const getTableCell = (keys: string[], modes: DataObject): JSX.Element[] => {
+  return keys.map((key) => {
+    const value = modes[key];
+    if (typeof value === 'string') {
+      return <td key={key}>{value || ''}</td>;
+    }
+    return <td key={key} />;
+  });
+};
+
+const ThemeColorsTable = ({
   data,
   componentName,
 }: {
-  data: DataObject | undefined;
+  data?: DataObject;
   componentName: string;
-}) {
+}): JSX.Element | null => {
   if (!data) {
     return null;
   }
-  const uniqueKeys = getUniqueNestedKeys(data);
 
-  if (getNestingLevel(data) === 1) {
+  const uniqueKeys = getUniqueNestedKeys(data);
+  const nestingLevel = getNestingLevel(data);
+
+  if (nestingLevel === 1) {
     const rows = Object.keys(data).map((mode) => {
       return (
         <tr key={`${mode}`}>
           <td>{mode}</td>
-          {uniqueKeys.map((key) => {
-            return <td key={key}>{data[mode][key] || ''}</td>;
-          })}
+          {getTableCell(uniqueKeys, data[mode] as DataObject)}
         </tr>
       );
     });
@@ -71,9 +85,7 @@ export default function ThemeColorsTable({
         <thead>
           <tr>
             <th>mode</th>
-            {uniqueKeys.map((key) => (
-              <th key={key}>{key}</th>
-            ))}
+            {getTableHeader(uniqueKeys)}
           </tr>
         </thead>
         <tbody>{rows}</tbody>
@@ -82,27 +94,22 @@ export default function ThemeColorsTable({
   }
 
   const tableElements = Object.keys(data).map((key) => {
-    const modes = data[key];
+    const modes = data[key] as DataObject;
     const rows = Object.keys(modes).map((mode) => {
       return (
         <tr key={`${key}-${mode}`}>
           <td>{mode}</td>
-          {uniqueKeys.map((key) => {
-            return <td key={key}>{modes[mode][key] || ''}</td>;
-          })}
+          {getTableCell(uniqueKeys, modes[mode] as DataObject)}
         </tr>
       );
     });
-
     return (
       <TabItem label={key} value={key} key={key}>
         <table>
           <thead>
             <tr>
               <th>mode</th>
-              {uniqueKeys.map((key) => (
-                <th key={key}>{key}</th>
-              ))}
+              {getTableHeader(uniqueKeys)}
             </tr>
           </thead>
           <tbody>{rows}</tbody>
@@ -130,4 +137,6 @@ export default function ThemeColorsTable({
       </Admonition>
     </>
   );
-}
+};
+
+export default ThemeColorsTable;
