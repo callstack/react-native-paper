@@ -25,11 +25,11 @@ const data: Data[] = [
     ios: 'https://apps.apple.com/app/react-native-paper/id1548934513',
     github: 'https://github.com/callstack/react-native-paper/tree/main/example',
   },
- {
+  {
     color: '#696AC3',
     name: 'Weather Forecast',
     image: '../showcase/weatherforecast.png',
-    android: 'https://play.google.com/store/apps/details?id=com.rehankhalil462.WeatherApp'
+    android: 'https://play.google.com/store/apps/details?id=com.rehankhalil462.WeatherApp',
   },
   {
     color: '#696AC3',
