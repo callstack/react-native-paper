@@ -496,7 +496,12 @@ const AnimatedFAB = ({
         // proper text measurements there is a need to additionaly render that text, but
         // wrapped in absolutely positioned `ScrollView` which height is 0.
         <ScrollView style={styles.textPlaceholderContainer}>
-          <Text onTextLayout={onTextLayout}>{label}</Text>
+          <Text
+            onTextLayout={onTextLayout}
+            style={[uppercase && styles.uppercaseLabel, textStyle]}
+          >
+            {label}
+          </Text>
         </ScrollView>
       )}
     </Surface>
