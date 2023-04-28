@@ -19,7 +19,7 @@ const data: Data[] = [
   {
     color: '#6200EE',
     name: 'Paper Example App',
-    image: '../showcase/paper.png',
+    image: '/react-native-paper/showcase/paper.png',
     android:
       'https://play.google.com/store/apps/details?id=com.callstack.reactnativepaperexample',
     ios: 'https://apps.apple.com/app/react-native-paper/id1548934513',
@@ -28,25 +28,25 @@ const data: Data[] = [
   {
     color: '#696AC3',
     name: 'Weather Forecast ',
-    image: '../showcase/weatherforecast.png',
+    image: '/react-native-paper/showcase/weatherforecast.png',
     android:
       'https://play.google.com/store/apps/details?id=com.rehankhalil462.WeatherApp',
   },
   {
     color: '#696AC3',
     name: 'YumMeals',
-    image: '../showcase/yummeals.png',
+    image: '/react-native-paper/showcase/yummeals.png',
     github: 'https://github.com/BernStrom/YumMeals',
   },
   {
     color: '#673AB7',
     name: 'Showman',
-    image: '../showcase/showman.png',
+    image: '/react-native-paper/showcase/showman.png',
   },
   {
     color: '#F73942',
     name: 'AppnGO',
-    image: '../showcase/appngo.png',
+    image: '/react-native-paper/showcase/appngo.png',
     android:
       'https://play.google.com/store/apps/details?id=com.helsedesign.appngo',
     ios: 'https://itunes.apple.com/us/app/appngo/id1439585129',
@@ -54,13 +54,13 @@ const data: Data[] = [
   {
     color: '#fff',
     name: 'Dark Hacker News',
-    image: '../showcase/darkhackernews.png',
+    image: '/react-native-paper/showcase/darkhackernews.png',
     ios: 'https://itunes.apple.com/us/app/dark-hacker-news/id1459946382?mt=8',
   },
   {
     color: '#0ba360',
     name: 'PandaDeals',
-    image: '../showcase/pandadeals.png',
+    image: '/react-native-paper/showcase/pandadeals.png',
     android:
       'https://play.google.com/store/apps/details?id=com.mattkoboski.couponsapp',
     ios: 'https://apps.apple.com/pl/app/pandadeals/id1468755918',
@@ -68,7 +68,7 @@ const data: Data[] = [
   {
     color: '#A11E1E',
     name: 'RaceCalendar',
-    image: '../showcase/racecalendar.png',
+    image: '/react-native-paper/showcase/racecalendar.png',
     android:
       'https://play.google.com/store/apps/details?id=in.micy.racecalendar',
     ios: 'https://apps.apple.com/us/app/race-calendar/id1481539104',
@@ -76,27 +76,27 @@ const data: Data[] = [
   {
     color: '#4439A1',
     name: 'Unicore',
-    image: '../showcase/unicore.png',
+    image: '/react-native-paper/showcase/unicore.png',
     android: 'https://play.google.com/store/apps/details?id=com.atude.mywam',
   },
   {
     color: '#19402E',
     name: 'TracksNZ',
-    image: '../showcase/tracksnz.png',
+    image: '/react-native-paper/showcase/tracksnz.png',
     android: 'https://play.google.com/store/apps/details?id=in.micy.tracksnz',
     ios: 'https://apps.apple.com/nz/app/tracks-nz/id1488245855',
   },
   {
     color: '#b985fc',
     name: 'Astrale',
-    image: '../showcase/astrale.png',
+    image: '/react-native-paper/showcase/astrale.png',
     github: 'https://github.com/jvidalv/astrale',
     android: 'https://play.google.com/store/apps/details?id=josep.astrale',
   },
   {
     color: '#29337a',
     name: 'Lyra Collect',
-    image: '../showcase/lyracollect.png',
+    image: '/react-native-paper/showcase/lyracollect.png',
     android:
       'https://play.google.com/store/apps/details?id=com.lyra.lyracollect',
     ios: 'https://apps.apple.com/fr/app/lyra-collect/id1469527737',
@@ -104,14 +104,14 @@ const data: Data[] = [
   {
     color: '#673AB7',
     name: 'Rozy - Stay connected',
-    image: '../showcase/rozy.png',
+    image: '/react-native-paper/showcase/rozy.png',
     ios: 'https://apps.apple.com/us/app/rozy/id1511264722',
     android: 'https://play.google.com/store/apps/details?id=com.rozy_app.rozy',
   },
   {
     color: '#CC0E00',
     name: 'Zoomapto - Find Nearby Restaurants',
-    image: '../showcase/zoomapto.png',
+    image: '/react-native-paper/showcase/zoomapto.png',
     github: 'https://github.com/frederic11/Zoomapto',
     android:
       'https://play.google.com/store/apps/details?id=com.frederictech.zoomapto',
@@ -119,7 +119,7 @@ const data: Data[] = [
   {
     color: '#1DE9B6',
     name: 'Groovy - Build Habits Together',
-    image: '../showcase/groovy.png',
+    image: '/react-native-paper/showcase/groovy.png',
     ios: 'https://apps.apple.com/us/app/groovy-set-your-goals/id1562352498',
     android:
       'https://play.google.com/store/apps/details?id=com.gabrieldierks.groovy',
@@ -127,7 +127,7 @@ const data: Data[] = [
   {
     color: '#673AB7',
     name: 'Vibemap - Find Your Vibe',
-    image: '../showcase/vibemap.png',
+    image: '/react-native-paper/showcase/vibemap.png',
     ios: 'https://apps.apple.com/us/app/vibemap/id1496385897#?platform=iphone',
     android:
       'https://play.google.com/store/apps/details?id=com.vibemap.hotspots',
@@ -135,19 +135,19 @@ const data: Data[] = [
   {
     color: '#6200EE',
     name: 'Clutch - Transmission Remote',
-    image: '../showcase/clutch.png',
+    image: '/react-native-paper/showcase/clutch.png',
     android: 'https://play.google.com/store/apps/details?id=eu.tmdpw.clutch',
   },
   {
     color: '#111827',
     name: 'Quakemap',
-    image: '../showcase/quakemap.png',
+    image: '/react-native-paper/showcase/quakemap.png',
     android: 'https://play.google.com/store/apps/details?id=com.sal.quakemap',
   },
   {
     color: '#5222d0',
     name: 'Homework Helper - Find HW Answers',
-    image: '../showcase/homeworkhelper.png',
+    image: '/react-native-paper/showcase/homeworkhelper.png',
     ios: 'https://apps.apple.com/app/homework-helper-app/id1632652122',
     android:
       'https://play.google.com/store/apps/details?id=com.kylehoell.homeworkhelper',
@@ -155,7 +155,7 @@ const data: Data[] = [
   {
     color: '#E1352F',
     name: 'CrazyThursday',
-    image: '../showcase/crazythursday.jpg',
+    image: '/react-native-paper/showcase/crazythursday.jpg',
     github: 'https://github.com/shensven/Crazy-Thursday',
     android:
       'https://play.google.com/store/apps/details?id=com.shensven.crazythursday',
@@ -163,7 +163,7 @@ const data: Data[] = [
   {
     color: '#566193',
     name: 'Moon Meet',
-    image: '../showcase/moonmeet.png',
+    image: '/react-native-paper/showcase/moonmeet.png',
     github: 'https://github.com/MoonMeet/MoonMeet-CrossPlatform',
   },
 ];
