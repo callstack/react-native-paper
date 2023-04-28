@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { FlexAlignType, StyleSheet } from 'react-native';
 
 import color from 'color';
 import type { EllipsizeProp, InternalTheme } from 'src/types';
@@ -11,6 +11,13 @@ type Description =
       color: string;
       fontSize: number;
     }) => React.ReactNode);
+
+export type Style = {
+  marginLeft?: number;
+  marginRight?: number;
+  marginVertical?: number;
+  alignSelf?: FlexAlignType;
+};
 
 export const getLeftStyles = (
   alignToTop: boolean,

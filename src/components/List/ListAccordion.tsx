@@ -18,6 +18,7 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import { ListAccordionGroupContext } from './ListAccordionGroup';
+import type { Style } from './utils';
 import { getAccordionColors, getLeftStyles } from './utils';
 
 export type Props = {
@@ -231,14 +232,19 @@ const ListAccordion = ({
           theme={theme}
           borderless
         >
-          <View style={styles.row} pointerEvents={pointerEvents}>
+          <View
+            style={theme.isV3 ? styles.rowV3 : styles.row}
+            pointerEvents={pointerEvents}
+          >
             {left
               ? left({
                   color: isExpanded ? theme.colors?.primary : descriptionColor,
                   style: getLeftStyles(alignToTop, description, theme.isV3),
                 })
               : null}
-            <View style={[styles.item, styles.content]}>
+            <View
+              style={[theme.isV3 ? styles.itemV3 : styles.item, styles.content]}
+            >
               <Text
                 selectable={false}
                 numberOfLines={titleNumberOfLines}
@@ -298,7 +304,10 @@ const ListAccordion = ({
               !child.props.right
             ) {
               return React.cloneElement(child as React.ReactElement<any>, {
-                style: [styles.child, child.props.style],
+                style: [
+                  theme.isV3 ? styles.childV3 : styles.child,
+                  child.props.style,
+                ],
                 theme,
               });
             }
@@ -324,6 +333,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  rowV3: {
+    flexDirection: 'row',
+    marginVertical: 6,
+  },
   multiline: {
     height: 40,
     alignItems: 'center',
@@ -336,10 +349,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   item: {
-    margin: 8,
+    marginVertical: 6,
+    paddingLeft: 8,
+  },
+  itemV3: {
+    paddingLeft: 16,
   },
   child: {
     paddingLeft: 64,
+  },
+  childV3: {
+    paddingLeft: 40,
   },
   content: {
     flex: 1,

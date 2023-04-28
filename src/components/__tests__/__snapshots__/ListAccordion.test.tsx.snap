@@ -37,7 +37,8 @@ exports[`renders expanded accordion 1`] = `
           false,
           Array [
             Object {
-              "padding": 8,
+              "paddingRight": 24,
+              "paddingVertical": 8,
             },
             undefined,
           ],
@@ -48,8 +49,8 @@ exports[`renders expanded accordion 1`] = `
         pointerEvents="none"
         style={
           Object {
-            "alignItems": "center",
             "flexDirection": "row",
+            "marginVertical": 6,
           }
         }
       >
@@ -57,7 +58,7 @@ exports[`renders expanded accordion 1`] = `
           style={
             Array [
               Object {
-                "margin": 8,
+                "paddingLeft": 16,
               },
               Object {
                 "flex": 1,
@@ -102,7 +103,8 @@ exports[`renders expanded accordion 1`] = `
           style={
             Array [
               Object {
-                "margin": 8,
+                "marginVertical": 6,
+                "paddingLeft": 8,
               },
               undefined,
             ]
@@ -275,7 +277,8 @@ exports[`renders list accordion with children 1`] = `
           false,
           Array [
             Object {
-              "padding": 8,
+              "paddingRight": 24,
+              "paddingVertical": 8,
             },
             undefined,
           ],
@@ -286,8 +289,8 @@ exports[`renders list accordion with children 1`] = `
         pointerEvents="none"
         style={
           Object {
-            "alignItems": "center",
             "flexDirection": "row",
+            "marginVertical": 6,
           }
         }
       >
@@ -299,7 +302,12 @@ exports[`renders list accordion with children 1`] = `
                 "alignItems": "center",
                 "justifyContent": "center",
               },
-              undefined,
+              Object {
+                "alignSelf": "center",
+                "marginLeft": 16,
+                "marginRight": 0,
+                "marginVertical": 0,
+              },
             ]
           }
         >
@@ -344,7 +352,7 @@ exports[`renders list accordion with children 1`] = `
           style={
             Array [
               Object {
-                "margin": 8,
+                "paddingLeft": 16,
               },
               Object {
                 "flex": 1,
@@ -389,7 +397,8 @@ exports[`renders list accordion with children 1`] = `
           style={
             Array [
               Object {
-                "margin": 8,
+                "marginVertical": 6,
+                "paddingLeft": 8,
               },
               undefined,
             ]
@@ -475,7 +484,8 @@ exports[`renders list accordion with custom title and description styles 1`] = `
           false,
           Array [
             Object {
-              "padding": 8,
+              "paddingRight": 24,
+              "paddingVertical": 8,
             },
             undefined,
           ],
@@ -486,8 +496,8 @@ exports[`renders list accordion with custom title and description styles 1`] = `
         pointerEvents="none"
         style={
           Object {
-            "alignItems": "center",
             "flexDirection": "row",
+            "marginVertical": 6,
           }
         }
       >
@@ -495,7 +505,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
           style={
             Array [
               Object {
-                "margin": 8,
+                "paddingLeft": 16,
               },
               Object {
                 "flex": 1,
@@ -539,6 +549,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
           </Text>
           <Text
             numberOfLines={2}
+            onTextLayout={[Function]}
             selectable={false}
             style={
               Array [
@@ -575,7 +586,8 @@ exports[`renders list accordion with custom title and description styles 1`] = `
           style={
             Array [
               Object {
-                "margin": 8,
+                "marginVertical": 6,
+                "paddingLeft": 8,
               },
               Object {
                 "alignItems": "center",
@@ -665,7 +677,8 @@ exports[`renders list accordion with left items 1`] = `
           false,
           Array [
             Object {
-              "padding": 8,
+              "paddingRight": 24,
+              "paddingVertical": 8,
             },
             undefined,
           ],
@@ -676,8 +689,8 @@ exports[`renders list accordion with left items 1`] = `
         pointerEvents="none"
         style={
           Object {
-            "alignItems": "center",
             "flexDirection": "row",
+            "marginVertical": 6,
           }
         }
       >
@@ -689,7 +702,12 @@ exports[`renders list accordion with left items 1`] = `
                 "alignItems": "center",
                 "justifyContent": "center",
               },
-              undefined,
+              Object {
+                "alignSelf": "center",
+                "marginLeft": 16,
+                "marginRight": 0,
+                "marginVertical": 0,
+              },
             ]
           }
         >
@@ -734,7 +752,7 @@ exports[`renders list accordion with left items 1`] = `
           style={
             Array [
               Object {
-                "margin": 8,
+                "paddingLeft": 16,
               },
               Object {
                 "flex": 1,
@@ -779,7 +797,8 @@ exports[`renders list accordion with left items 1`] = `
           style={
             Array [
               Object {
-                "margin": 8,
+                "marginVertical": 6,
+                "paddingLeft": 8,
               },
               undefined,
             ]
@@ -865,7 +884,8 @@ exports[`renders multiline list accordion 1`] = `
           false,
           Array [
             Object {
-              "padding": 8,
+              "paddingRight": 24,
+              "paddingVertical": 8,
             },
             undefined,
           ],
@@ -876,8 +896,8 @@ exports[`renders multiline list accordion 1`] = `
         pointerEvents="none"
         style={
           Object {
-            "alignItems": "center",
             "flexDirection": "row",
+            "marginVertical": 6,
           }
         }
       >
@@ -885,7 +905,7 @@ exports[`renders multiline list accordion 1`] = `
           style={
             Array [
               Object {
-                "margin": 8,
+                "paddingLeft": 16,
               },
               Object {
                 "flex": 1,
@@ -927,6 +947,7 @@ exports[`renders multiline list accordion 1`] = `
           </Text>
           <Text
             numberOfLines={2}
+            onTextLayout={[Function]}
             selectable={false}
             style={
               Array [
@@ -961,7 +982,8 @@ exports[`renders multiline list accordion 1`] = `
           style={
             Array [
               Object {
-                "margin": 8,
+                "marginVertical": 6,
+                "paddingLeft": 8,
               },
               Object {
                 "alignItems": "center",
