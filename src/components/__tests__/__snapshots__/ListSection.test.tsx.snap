@@ -253,6 +253,7 @@ exports[`renders list section with custom title style 1`] = `
         Object {
           "flexDirection": "row",
           "marginVertical": 6,
+          "width": "100%",
         }
       }
     >
@@ -394,6 +395,7 @@ exports[`renders list section with custom title style 1`] = `
         Object {
           "flexDirection": "row",
           "marginVertical": 6,
+          "width": "100%",
         }
       }
     >
@@ -752,6 +754,7 @@ exports[`renders list section with subheader 1`] = `
         Object {
           "flexDirection": "row",
           "marginVertical": 6,
+          "width": "100%",
         }
       }
     >
@@ -893,6 +896,7 @@ exports[`renders list section with subheader 1`] = `
         Object {
           "flexDirection": "row",
           "marginVertical": 6,
+          "width": "100%",
         }
       }
     >
@@ -1213,6 +1217,7 @@ exports[`renders list section without subheader 1`] = `
         Object {
           "flexDirection": "row",
           "marginVertical": 6,
+          "width": "100%",
         }
       }
     >
@@ -1354,6 +1359,7 @@ exports[`renders list section without subheader 1`] = `
         Object {
           "flexDirection": "row",
           "marginVertical": 6,
+          "width": "100%",
         }
       }
     >
