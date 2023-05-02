@@ -75,22 +75,28 @@ const TouchableRipple = ({
 
   if (TouchableRipple.supported) {
     return (
-      <Pressable
-        {...rest}
-        disabled={disabled}
-        style={[borderless && styles.overflowHidden, style]}
-        android_ripple={
-          background != null
-            ? background
-            : {
+      <SettingsConsumer>
+        {({ rippleEffectEnabled }) => {
+          const androidRipple = rippleEffectEnabled
+            ? background ?? {
                 color: calculatedRippleColor,
                 borderless,
                 foreground: useForeground,
               }
-        }
-      >
-        {React.Children.only(children)}
-      </Pressable>
+            : undefined;
+
+          return (
+            <Pressable
+              {...rest}
+              disabled={disabled}
+              style={[borderless && styles.overflowHidden, style]}
+              android_ripple={androidRipple}
+            >
+              {React.Children.only(children)}
+            </Pressable>
+          );
+        }}
+      </SettingsConsumer>
     );
   }
 

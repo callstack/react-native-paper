@@ -103,12 +103,11 @@ const PaperProvider = (props: Props) => {
     <SafeAreaProviderCompat>
       <PortalHost>
         <SettingsProvider
-          value={
-            settings || {
-              icon: MaterialCommunityIcon,
-              disableRippleEffect: false,
-            }
-          }
+          value={{
+            icon: MaterialCommunityIcon,
+            rippleEffectEnabled: true,
+            ...settings,
+          }}
         >
           {/* @ts-expect-error check @callstack/react-theme-provider's children prop */}
           <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>

@@ -23,7 +23,9 @@ type Props = {
   toggleThemeVersion: () => void;
   toggleCollapsed: () => void;
   toggleCustomFont: () => void;
+  toggleRippleEffect: () => void;
   customFontLoaded: boolean;
+  rippleEffectEnabled: boolean;
   collapsed: boolean;
   isRTL: boolean;
   isDarkTheme: boolean;
@@ -103,7 +105,9 @@ const DrawerItems = ({
   toggleThemeVersion,
   toggleCollapsed,
   toggleCustomFont,
+  toggleRippleEffect,
   customFontLoaded,
+  rippleEffectEnabled,
   collapsed,
   isRTL,
   isDarkTheme,
@@ -218,6 +222,17 @@ const DrawerItems = ({
                   <Text variant="labelLarge">Custom font *</Text>
                   <View pointerEvents="none">
                     <Switch value={customFontLoaded} />
+                  </View>
+                </View>
+              </TouchableRipple>
+            )}
+
+            {isV3 && (
+              <TouchableRipple onPress={toggleRippleEffect}>
+                <View style={[styles.preference, isV3 && styles.v3Preference]}>
+                  <Text variant="labelLarge">Ripple effect *</Text>
+                  <View pointerEvents="none">
+                    <Switch value={rippleEffectEnabled} />
                   </View>
                 </View>
               </TouchableRipple>

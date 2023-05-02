@@ -48,6 +48,8 @@ const DrawerContent = () => {
           toggleThemeVersion={preferences.toggleThemeVersion}
           toggleCollapsed={preferences.toggleCollapsed}
           toggleCustomFont={preferences.toggleCustomFont}
+          toggleRippleEffect={preferences.toggleRippleEffect}
+          rippleEffectEnabled={preferences.rippleEffectEnabled}
           customFontLoaded={preferences.customFontLoaded}
           collapsed={preferences.collapsed}
           isRTL={preferences.rtl}
@@ -79,6 +81,7 @@ export default function PaperExample() {
   );
   const [collapsed, setCollapsed] = React.useState(false);
   const [customFontLoaded, setCustomFont] = React.useState(false);
+  const [rippleEffectEnabled, setRippleEffectEnabled] = React.useState(true);
 
   const themeMode = isDarkMode ? 'dark' : 'light';
 
@@ -164,17 +167,20 @@ export default function PaperExample() {
       toggleRtl: () => setRtl((rtl) => !rtl),
       toggleCollapsed: () => setCollapsed(!collapsed),
       toggleCustomFont: () => setCustomFont(!customFontLoaded),
+      toggleRippleEffect: () => setRippleEffectEnabled(!rippleEffectEnabled),
       toggleThemeVersion: () => {
         setCustomFont(false);
         setCollapsed(false);
         setThemeVersion((oldThemeVersion) => (oldThemeVersion === 2 ? 3 : 2));
+        setRippleEffectEnabled(true);
       },
+      rippleEffectEnabled,
       customFontLoaded,
       collapsed,
       rtl,
       theme,
     }),
-    [rtl, theme, collapsed, customFontLoaded]
+    [rtl, theme, collapsed, customFontLoaded, rippleEffectEnabled]
   );
 
   if (!isReady && !fontsLoaded) {
@@ -215,7 +221,10 @@ export default function PaperExample() {
   };
 
   return (
-    <PaperProvider theme={customFontLoaded ? configuredFontTheme : theme}>
+    <PaperProvider
+      settings={{ rippleEffectEnabled: preferences.rippleEffectEnabled }}
+      theme={customFontLoaded ? configuredFontTheme : theme}
+    >
       <PreferencesContext.Provider value={preferences}>
         <React.Fragment>
           <NavigationContainer
