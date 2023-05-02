@@ -1,5 +1,11 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  Platform,
+  BackHandler as RNBackHandler,
+  BackHandlerStatic as RNBackHandlerStatic,
+} from 'react-native';
 
 import { act, fireEvent, render } from '@testing-library/react-native';
 
@@ -9,6 +15,17 @@ import Button from '../Button/Button';
 jest.mock('react-native-safe-area-context', () => ({
   useSafeAreaInsets: () => ({ bottom: 44, left: 0, right: 0, top: 37 }),
 }));
+
+jest.mock('react-native/Libraries/Utilities/BackHandler', () =>
+  // eslint-disable-next-line jest/no-mocks-import
+  require('react-native/Libraries/Utilities/__mocks__/BackHandler')
+);
+
+interface BackHandlerStatic extends RNBackHandlerStatic {
+  mockPressBack(): void;
+}
+
+const BackHandler = RNBackHandler as BackHandlerStatic;
 
 describe('Dialog', () => {
   it('should render passed children', () => {
@@ -32,6 +49,51 @@ describe('Dialog', () => {
     fireEvent.press(getByTestId('dialog-backdrop'));
 
     act(() => {
+      jest.runAllTimers();
+    });
+    expect(onDismiss).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not call onDismiss when dismissable is false', () => {
+    const onDismiss = jest.fn();
+    const { getByTestId } = render(
+      <Dialog visible onDismiss={onDismiss} dismissable={false} testID="dialog">
+        <Text>This is simple dialog</Text>
+      </Dialog>
+    );
+
+    fireEvent.press(getByTestId('dialog-backdrop'));
+
+    act(() => {
+      jest.runAllTimers();
+    });
+    expect(onDismiss).toHaveBeenCalledTimes(0);
+  });
+
+  it('should call onDismiss on Android back button when dismissable is false but dismissableBackButton is true', () => {
+    Platform.OS = 'android';
+    const onDismiss = jest.fn();
+    const { getByTestId } = render(
+      <Dialog
+        visible
+        onDismiss={onDismiss}
+        dismissable={false}
+        dismissableBackButton
+        testID="dialog"
+      >
+        <Text>This is simple dialog</Text>
+      </Dialog>
+    );
+
+    fireEvent.press(getByTestId('dialog-backdrop'));
+
+    act(() => {
+      jest.runAllTimers();
+    });
+    expect(onDismiss).toHaveBeenCalledTimes(0);
+
+    act(() => {
+      BackHandler.mockPressBack();
       jest.runAllTimers();
     });
     expect(onDismiss).toHaveBeenCalledTimes(1);

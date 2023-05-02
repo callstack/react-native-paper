@@ -23,6 +23,10 @@ export type Props = {
    */
   dismissable?: boolean;
   /**
+   * Determines whether clicking Android hardware back button dismiss dialog.
+   */
+  dismissableBackButton?: boolean;
+  /**
    * Callback that is called when the user dismisses the dialog.
    */
   onDismiss?: () => void;
@@ -95,6 +99,7 @@ const DIALOG_ELEVATION: number = 24;
 const Dialog = ({
   children,
   dismissable = true,
+  dismissableBackButton = dismissable,
   onDismiss,
   visible = false,
   style,
@@ -116,6 +121,7 @@ const Dialog = ({
   return (
     <Modal
       dismissable={dismissable}
+      dismissableBackButton={dismissableBackButton}
       onDismiss={onDismiss}
       visible={visible}
       contentContainerStyle={[
