@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   AccessibilityState,
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
@@ -62,6 +63,10 @@ export type Props = {
   style?: StyleProp<ViewStyle>;
   contentStyle?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * @optional
    */

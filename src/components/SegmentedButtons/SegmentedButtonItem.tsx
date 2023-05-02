@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
@@ -42,6 +43,10 @@ export type Props = {
    * Custom color for checked Text and Icon.
    */
   checkedColor?: string;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * Whether the button is disabled.
    */

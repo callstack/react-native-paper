@@ -6,6 +6,7 @@ import {
   ViewStyle,
   View,
   Animated,
+  ColorValue,
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
@@ -40,6 +41,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Background color of the icon container.
    */
   containerColor?: string;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * @supported Available in v5.x with theme version 3
    * Whether icon button is selected. A selected button receives alternative combination of icon and container colors.

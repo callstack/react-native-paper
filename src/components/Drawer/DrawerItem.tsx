@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
@@ -40,6 +41,10 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * Callback which returns a React element to display on the right side. For instance a Badge.
    */
   right?: (props: { color: string }) => React.ReactNode;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional

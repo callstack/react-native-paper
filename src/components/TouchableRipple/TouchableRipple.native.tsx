@@ -8,9 +8,9 @@ import {
   Pressable,
   GestureResponderEvent,
   View,
+  ColorValue,
 } from 'react-native';
 
-import { Consumer as SettingsConsumer } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
@@ -28,7 +28,7 @@ export type Props = React.ComponentProps<typeof Pressable> & {
   onLongPress?: (e: GestureResponderEvent) => void;
   onPressIn?: (e: GestureResponderEvent) => void;
   onPressOut?: (e: GestureResponderEvent) => void;
-  rippleColor?: string;
+  rippleColor?: ColorValue;
   underlayColor?: string;
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;

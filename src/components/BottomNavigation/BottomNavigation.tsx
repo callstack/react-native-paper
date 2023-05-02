@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   EasingFunction,
   Platform,
   StyleProp,
@@ -47,7 +48,7 @@ type TouchableProps<Route extends BaseRoute> = TouchableWithoutFeedbackProps & {
   children: React.ReactNode;
   borderless?: boolean;
   centered?: boolean;
-  rippleColor?: string;
+  rippleColor?: ColorValue;
 };
 
 export type Props<Route extends BaseRoute> = {

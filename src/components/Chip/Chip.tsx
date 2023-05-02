@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   AccessibilityState,
   Animated,
+  ColorValue,
   GestureResponderEvent,
   Platform,
   StyleProp,
@@ -63,6 +64,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   showSelectedOverlay?: boolean;
   /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
+  /**
    * Whether the chip is disabled. A disabled chip is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
@@ -105,7 +110,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   textStyle?: StyleProp<TextStyle>;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
-
   /**
    * @optional
    */

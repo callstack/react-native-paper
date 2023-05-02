@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   AccessibilityState,
   Animated,
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
@@ -72,6 +73,10 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * Custom color for the icon and label of the `FAB`.
    */
   color?: string;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */

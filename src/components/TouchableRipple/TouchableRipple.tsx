@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  ColorValue,
   GestureResponderEvent,
   Platform,
   Pressable,
@@ -50,7 +51,7 @@ export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
   /**
    * Color of the ripple effect (Android >= 5.0 and Web).
    */
-  rippleColor?: string;
+  rippleColor?: ColorValue;
   /**
    * Color of the underlay for the highlight effect (Android < 5.0 and iOS).
    */

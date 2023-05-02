@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  ColorValue,
   GestureResponderEvent,
   I18nManager,
   NativeSyntheticEvent,
@@ -76,6 +77,10 @@ export type Props = {
    * Style that is passed to Description element.
    */
   descriptionStyle?: StyleProp<TextStyle>;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * Truncate Title text such that the total number of lines does not
    * exceed this number.
