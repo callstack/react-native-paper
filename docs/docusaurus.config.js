@@ -75,8 +75,6 @@ const config = {
           BottomNavigation: {
             BottomNavigation: 'BottomNavigation/BottomNavigation',
             BottomNavigationBar: 'BottomNavigation/BottomNavigationBar',
-            createMaterialBottomTabNavigator:
-              '../react-navigation/navigators/createMaterialBottomTabNavigator',
           },
           Button: {
             Button: 'Button/Button',
