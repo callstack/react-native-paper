@@ -78,7 +78,6 @@ exports[`renders chip with close button 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Array [
             Object {
               "borderRadius": 8,
@@ -366,7 +365,6 @@ exports[`renders chip with custom close button 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Array [
             Object {
               "borderRadius": 8,
@@ -654,7 +652,6 @@ exports[`renders chip with icon 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Array [
             Object {
               "borderRadius": 8,
@@ -865,7 +862,6 @@ exports[`renders chip with onPress 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Array [
             Object {
               "borderRadius": 8,
@@ -1024,7 +1020,6 @@ exports[`renders outlined disabled chip 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Array [
             Object {
               "borderRadius": 8,
@@ -1183,7 +1178,6 @@ exports[`renders selected chip 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Array [
             Object {
               "borderRadius": 8,

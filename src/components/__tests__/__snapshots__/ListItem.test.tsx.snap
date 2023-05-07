@@ -22,7 +22,6 @@ exports[`renders list item with custom description 1`] = `
   style={
     Array [
       false,
-      false,
       Array [
         Object {
           "paddingRight": 24,
@@ -175,7 +174,6 @@ exports[`renders list item with custom description 1`] = `
                     Object {
                       "overflow": "hidden",
                     },
-                    false,
                     Array [
                       Object {
                         "borderRadius": 8,
@@ -335,7 +333,6 @@ exports[`renders list item with custom title and description styles 1`] = `
   style={
     Array [
       false,
-      false,
       Array [
         Object {
           "paddingRight": 24,
@@ -460,7 +457,6 @@ exports[`renders list item with left and right items 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
-      false,
       false,
       Array [
         Object {
@@ -639,7 +635,6 @@ exports[`renders list item with left item 1`] = `
   style={
     Array [
       false,
-      false,
       Array [
         Object {
           "paddingRight": 24,
@@ -783,7 +778,6 @@ exports[`renders list item with right item 1`] = `
   style={
     Array [
       false,
-      false,
       Array [
         Object {
           "paddingRight": 24,
@@ -875,7 +869,6 @@ exports[`renders list item with title and description 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
-      false,
       false,
       Array [
         Object {
@@ -997,7 +990,6 @@ exports[`renders with a description with typeof number 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
-      false,
       false,
       Array [
         Object {

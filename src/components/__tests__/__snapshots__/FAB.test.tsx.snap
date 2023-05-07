@@ -78,7 +78,6 @@ exports[`renders FAB with custom size prop 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderRadius": 25,
           },
@@ -135,6 +134,7 @@ exports[`renders FAB with custom size prop 1`] = `
                 ],
               }
             }
+            testID="cross-fade-icon-current"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -258,7 +258,6 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderRadius": 16,
           },
@@ -315,6 +314,7 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
                 ],
               }
             }
+            testID="cross-fade-icon-current"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -438,7 +438,6 @@ exports[`renders default FAB 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderRadius": 16,
           },
@@ -495,6 +494,7 @@ exports[`renders default FAB 1`] = `
                 ],
               }
             }
+            testID="cross-fade-icon-current"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -618,7 +618,6 @@ exports[`renders disabled FAB 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderRadius": 16,
           },
@@ -675,6 +674,7 @@ exports[`renders disabled FAB 1`] = `
                 ],
               }
             }
+            testID="cross-fade-icon-current"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -799,7 +799,6 @@ exports[`renders extended FAB 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderRadius": 16,
           },
@@ -856,6 +855,7 @@ exports[`renders extended FAB 1`] = `
                 ],
               }
             }
+            testID="cross-fade-icon-current"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -1018,7 +1018,6 @@ exports[`renders extended FAB with custom size prop 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderRadius": 25,
           },
@@ -1074,6 +1073,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
                 ],
               }
             }
+            testID="cross-fade-icon-current"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -1235,7 +1235,6 @@ exports[`renders large FAB 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderRadius": 28,
           },
@@ -1292,6 +1291,7 @@ exports[`renders large FAB 1`] = `
                 ],
               }
             }
+            testID="cross-fade-icon-current"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -1415,7 +1415,6 @@ exports[`renders loading FAB 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderRadius": 16,
           },
@@ -1720,7 +1719,6 @@ exports[`renders loading FAB with custom size prop 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderRadius": 25,
           },
@@ -2025,7 +2023,6 @@ exports[`renders not visible FAB 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderRadius": 16,
           },
@@ -2082,6 +2079,7 @@ exports[`renders not visible FAB 1`] = `
                 ],
               }
             }
+            testID="cross-fade-icon-current"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -2205,7 +2203,6 @@ exports[`renders small FAB 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderRadius": 12,
           },
@@ -2262,6 +2259,7 @@ exports[`renders small FAB 1`] = `
                 ],
               }
             }
+            testID="cross-fade-icon-current"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -2385,7 +2383,6 @@ exports[`renders visible FAB 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderRadius": 16,
           },
@@ -2442,6 +2439,7 @@ exports[`renders visible FAB 1`] = `
                 ],
               }
             }
+            testID="cross-fade-icon-current"
           >
             <Text
               accessibilityElementsHidden={true}

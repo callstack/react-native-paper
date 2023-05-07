@@ -62,7 +62,6 @@ exports[`renders checked segmented button with selected check 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderBottomRightRadius": 0,
             "borderRadius": 20,
@@ -225,7 +224,6 @@ exports[`renders checked segmented button with selected check 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderBottomLeftRadius": 0,
             "borderRadius": 20,
@@ -353,7 +351,6 @@ exports[`renders disabled segmented button 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderBottomRightRadius": 0,
             "borderRadius": 20,
@@ -465,7 +462,6 @@ exports[`renders disabled segmented button 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderBottomLeftRadius": 0,
             "borderRadius": 20,
@@ -591,7 +587,6 @@ exports[`renders segmented button 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderBottomRightRadius": 0,
             "borderRadius": 20,
@@ -703,7 +698,6 @@ exports[`renders segmented button 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderBottomLeftRadius": 0,
             "borderRadius": 20,

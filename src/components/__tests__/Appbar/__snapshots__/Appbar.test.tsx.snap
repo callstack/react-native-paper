@@ -193,7 +193,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                   Object {
                     "overflow": "hidden",
                   },
-                  false,
                   Array [
                     Object {
                       "alignItems": "center",
@@ -386,7 +385,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                     Object {
                       "overflow": "hidden",
                     },
-                    false,
                     Array [
                       Object {
                         "alignItems": "center",
@@ -590,7 +588,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -636,6 +633,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                   ],
                 }
               }
+              testID="cross-fade-icon-current"
             >
               <View
                 style={
@@ -830,7 +828,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -876,6 +873,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                   ],
                 }
               }
+              testID="cross-fade-icon-current"
             >
               <Text
                 accessibilityElementsHidden={true}

@@ -22,7 +22,6 @@ exports[`renders data table cell 1`] = `
   style={
     Array [
       false,
-      false,
       Array [
         Object {
           "alignItems": "center",
@@ -352,7 +351,6 @@ exports[`renders data table pagination 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -495,7 +493,6 @@ exports[`renders data table pagination 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -696,7 +693,6 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -839,7 +835,6 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -982,7 +977,6 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -1125,7 +1119,6 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -1326,7 +1319,6 @@ exports[`renders data table pagination with label 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -1469,7 +1461,6 @@ exports[`renders data table pagination with label 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -1665,7 +1656,6 @@ exports[`renders data table pagination with options select 1`] = `
                 Object {
                   "overflow": "hidden",
                 },
-                false,
                 Object {
                   "borderRadius": 20,
                 },
@@ -1921,7 +1911,6 @@ exports[`renders data table pagination with options select 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -2064,7 +2053,6 @@ exports[`renders data table pagination with options select 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -2207,7 +2195,6 @@ exports[`renders data table pagination with options select 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -2350,7 +2337,6 @@ exports[`renders data table pagination with options select 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -2669,7 +2655,6 @@ exports[`renders right aligned data table cell 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Array [
-      false,
       false,
       Array [
         Object {

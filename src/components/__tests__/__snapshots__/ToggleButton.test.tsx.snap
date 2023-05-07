@@ -93,7 +93,6 @@ exports[`renders disabled toggle button 1`] = `
       style={
         Array [
           false,
-          false,
           Array [
             Object {
               "alignItems": "center",
@@ -236,7 +235,6 @@ exports[`renders toggle button 1`] = `
       onStartShouldSetResponder={[Function]}
       style={
         Array [
-          false,
           false,
           Array [
             Object {
@@ -385,7 +383,6 @@ exports[`renders unchecked toggle button 1`] = `
       onStartShouldSetResponder={[Function]}
       style={
         Array [
-          false,
           false,
           Array [
             Object {

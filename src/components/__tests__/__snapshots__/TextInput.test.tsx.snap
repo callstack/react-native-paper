@@ -1351,7 +1351,6 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -1707,7 +1706,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",

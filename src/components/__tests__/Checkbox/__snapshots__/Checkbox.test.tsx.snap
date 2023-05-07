@@ -27,7 +27,6 @@ exports[`renders Checkbox with custom testID 1`] = `
       Object {
         "overflow": "hidden",
       },
-      false,
       Object {
         "borderRadius": 18,
         "padding": 6,
@@ -111,7 +110,6 @@ exports[`renders checked Checkbox with color 1`] = `
       Object {
         "overflow": "hidden",
       },
-      false,
       Object {
         "borderRadius": 18,
         "padding": 6,
@@ -193,7 +191,6 @@ exports[`renders checked Checkbox with onPress 1`] = `
       Object {
         "overflow": "hidden",
       },
-      false,
       Object {
         "borderRadius": 18,
         "padding": 6,
@@ -275,7 +272,6 @@ exports[`renders indeterminate Checkbox 1`] = `
       Object {
         "overflow": "hidden",
       },
-      false,
       Object {
         "borderRadius": 18,
         "padding": 6,
@@ -358,7 +354,6 @@ exports[`renders indeterminate Checkbox with color 1`] = `
       Object {
         "overflow": "hidden",
       },
-      false,
       Object {
         "borderRadius": 18,
         "padding": 6,
@@ -441,7 +436,6 @@ exports[`renders unchecked Checkbox with color 1`] = `
       Object {
         "overflow": "hidden",
       },
-      false,
       Object {
         "borderRadius": 18,
         "padding": 6,
@@ -523,7 +517,6 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
       Object {
         "overflow": "hidden",
       },
-      false,
       Object {
         "borderRadius": 18,
         "padding": 6,

@@ -30,7 +30,6 @@ exports[`RadioButtonGroup renders properly 1`] = `
         Object {
           "overflow": "hidden",
         },
-        false,
         Object {
           "borderRadius": 18,
           "padding": 6,
