@@ -34,6 +34,8 @@ export type Props = {
    * - `containerStyle`: pass additional styles for the fab item label container, for example, `backgroundColor` @supported Available in 5.x
    * - `labelStyle`: pass additional styles for the fab item label, for example, `fontSize`
    * - `onPress`: callback that is called when `FAB` is pressed (required)
+   * - `onLongPress`: callback that is called when `FAB` is long pressed
+   * - `toggleStackOnLongPress`: callback that is called when `FAB` is long pressed
    * - `size`: size of action item. Defaults to `small`. @supported Available in v5.x
    * - `testID`: testID to be used on tests
    */
@@ -72,6 +74,14 @@ export type Props = {
    * Function to execute on pressing the `FAB`.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute on long pressing the `FAB`.
+   */
+  onLongPress?: () => void;
+  /**
+   * Makes actions stack appear on long press instead of on press.
+   */
+  toggleStackOnLongPress?: boolean;
   /**
    * Whether the speed dial is open.
    */
@@ -179,6 +189,8 @@ const FABGroup = ({
   icon,
   open,
   onPress,
+  onLongPress,
+  toggleStackOnLongPress,
   accessibilityLabel,
   theme: themeOverrides,
   style,
@@ -416,8 +428,19 @@ const FABGroup = ({
         <FAB
           onPress={(e) => {
             onPress?.(e);
-            toggle();
+            if (!toggleStackOnLongPress || open) {
+              toggle();
+            }
           }}
+          onLongPress={() => {
+            if (!open) {
+              onLongPress?.();
+              if (toggleStackOnLongPress) {
+                toggle();
+              }
+            }
+          }}
+          delayLongPress={200}
           icon={icon}
           color={colorProp}
           accessibilityLabel={accessibilityLabel}
