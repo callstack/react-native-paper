@@ -133,7 +133,7 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
 } & IconOrLabel;
 
 /**
- * A floating action button represents the primary action in an application.
+ * A floating action button represents the primary action on a screen. It appears in front of all screen content.
  * <div class="screenshots">
  *   <img class="small" src="screenshots/fab-1.png" />
  *   <img class="small" src="screenshots/fab-2.png" />
