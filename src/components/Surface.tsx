@@ -77,7 +77,23 @@ const MD2Surface = forwardRef<View, Props>(
   }
 );
 
-const flexProperties = ['flex', 'flexShrink', 'flexGrow'];
+const outerLayerStyleProperties: (keyof ViewStyle)[] = [
+  'position',
+  'alignSelf',
+  'top',
+  'right',
+  'bottom',
+  'left',
+  'start',
+  'end',
+  'flex',
+  'flexShrink',
+  'flexGrow',
+  'width',
+  'height',
+  'transform',
+  'opacity',
+];
 
 const shadowColor = '#000';
 const iOSShadowOutputRanges = [
@@ -150,29 +166,14 @@ const SurfaceIOS = forwardRef<
     ref
   ) => {
     const [outerLayerViewStyles, innerLayerViewStyles] = React.useMemo(() => {
-      const {
-        position,
-        alignSelf,
-        top,
-        left,
-        right,
-        bottom,
-        start,
-        end,
-        flex,
-        backgroundColor: backgroundColorStyle,
-        width,
-        height,
-        transform,
-        opacity,
-        ...restStyle
-      } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+      const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
       const [filteredStyles, outerLayerStyles, borderRadiusStyles] =
         splitStyles(
-          restStyle,
+          flattenedStyles,
           (style) =>
-            flexProperties.includes(style) || style.startsWith('margin'),
+            outerLayerStyleProperties.includes(style) ||
+            style.startsWith('margin'),
           (style) => style.startsWith('border') && style.endsWith('Radius')
         );
 
@@ -186,7 +187,7 @@ const SurfaceIOS = forwardRef<
         );
       }
 
-      const bgColor = backgroundColorStyle || backgroundColor;
+      const bgColor = flattenedStyles.backgroundColor || backgroundColor;
 
       const isElevated = mode === 'elevated';
 
@@ -194,19 +195,6 @@ const SurfaceIOS = forwardRef<
         ...(isElevated && getStyleForShadowLayer(elevation, 0)),
         ...outerLayerStyles,
         ...borderRadiusStyles,
-        position,
-        alignSelf,
-        top,
-        right,
-        bottom,
-        left,
-        start,
-        end,
-        flex,
-        width,
-        height,
-        transform,
-        opacity,
         backgroundColor: bgColor,
       };
 
@@ -214,7 +202,7 @@ const SurfaceIOS = forwardRef<
         ...(isElevated && getStyleForShadowLayer(elevation, 1)),
         ...filteredStyles,
         ...borderRadiusStyles,
-        flex: height ? 1 : undefined,
+        flex: flattenedStyles.height ? 1 : undefined,
         backgroundColor: bgColor,
       };
 

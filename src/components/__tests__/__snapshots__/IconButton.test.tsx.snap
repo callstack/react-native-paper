@@ -5,18 +5,10 @@ exports[`renders disabled icon button 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "transparent",
       "borderRadius": 20,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
       "height": 40,
-      "left": undefined,
       "margin": 6,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 0,
@@ -24,9 +16,6 @@ exports[`renders disabled icon button 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
       "width": 40,
     }
   }
@@ -155,18 +144,10 @@ exports[`renders icon button by default 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "transparent",
       "borderRadius": 20,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
       "height": 40,
-      "left": undefined,
       "margin": 6,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 0,
@@ -174,9 +155,6 @@ exports[`renders icon button by default 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
       "width": 40,
     }
   }
@@ -300,18 +278,10 @@ exports[`renders icon button with color 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "transparent",
       "borderRadius": 20,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
       "height": 40,
-      "left": undefined,
       "margin": 6,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 0,
@@ -319,9 +289,6 @@ exports[`renders icon button with color 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
       "width": 40,
     }
   }
@@ -445,18 +412,10 @@ exports[`renders icon button with size 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "transparent",
       "borderRadius": 23,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
       "height": 46,
-      "left": undefined,
       "margin": 6,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 0,
@@ -464,9 +423,6 @@ exports[`renders icon button with size 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
       "width": 46,
     }
   }
@@ -590,18 +546,10 @@ exports[`renders icon change animated 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "transparent",
       "borderRadius": 20,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
       "height": 40,
-      "left": undefined,
       "margin": 6,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 0,
@@ -609,9 +557,6 @@ exports[`renders icon change animated 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
       "width": 40,
     }
   }
