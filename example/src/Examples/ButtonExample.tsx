@@ -284,6 +284,25 @@ const ButtonExample = () => {
             Custom Font
           </Button>
         </View>
+
+        <View style={styles.row}>
+          <Button
+            mode="contained"
+            onPress={() => {}}
+            style={styles.flexGrow1Button}
+          >
+            flex-grow: 1
+          </Button>
+        </View>
+        <View style={styles.row}>
+          <Button
+            mode="contained"
+            onPress={() => {}}
+            style={styles.width100PercentButton}
+          >
+            width: 100%
+          </Button>
+        </View>
       </List.Section>
       <List.Section title="Compact">
         <View style={styles.row}>
@@ -336,6 +355,14 @@ const styles = StyleSheet.create({
   fontStyles: {
     fontWeight: '800',
     fontSize: 24,
+  },
+  flexGrow1Button: {
+    flexGrow: 1,
+    marginTop: 10,
+  },
+  width100PercentButton: {
+    width: '100%',
+    marginTop: 10,
   },
 });
 

@@ -77,6 +77,8 @@ const MD2Surface = forwardRef<View, Props>(
   }
 );
 
+const flexProperties = ['flex', 'flexShrink', 'flexGrow'];
+
 const shadowColor = '#000';
 const iOSShadowOutputRanges = [
   {
@@ -166,11 +168,13 @@ const SurfaceIOS = forwardRef<
         ...restStyle
       } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
-      const [filteredStyles, marginStyles, borderRadiusStyles] = splitStyles(
-        restStyle,
-        (style) => style.startsWith('margin'),
-        (style) => style.startsWith('border') && style.endsWith('Radius')
-      );
+      const [filteredStyles, outerLayerStyles, borderRadiusStyles] =
+        splitStyles(
+          restStyle,
+          (style) =>
+            flexProperties.includes(style) || style.startsWith('margin'),
+          (style) => style.startsWith('border') && style.endsWith('Radius')
+        );
 
       if (
         process.env.NODE_ENV !== 'production' &&
@@ -188,7 +192,7 @@ const SurfaceIOS = forwardRef<
 
       const outerLayerViewStyles = {
         ...(isElevated && getStyleForShadowLayer(elevation, 0)),
-        ...marginStyles,
+        ...outerLayerStyles,
         ...borderRadiusStyles,
         position,
         alignSelf,
