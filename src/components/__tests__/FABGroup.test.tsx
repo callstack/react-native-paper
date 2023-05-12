@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Animated } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { act, fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
@@ -218,5 +218,113 @@ it('animated value changes correctly', () => {
 
   expect(getByTestId('my-fab-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
+  });
+});
+
+describe('Toggle Stack visibility', () => {
+  it('toggles stack visibility on press', () => {
+    const onStateChange = jest.fn();
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open={false}
+        label="Stack test"
+        icon=""
+        onStateChange={onStateChange}
+        actions={[
+          {
+            label: 'testing',
+            onPress() {},
+            icon: '',
+          },
+        ]}
+      />
+    );
+
+    act(() => {
+      fireEvent(getByText('Stack test'), 'onPress');
+    });
+
+    expect(onStateChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not toggle stack visibility on long press', () => {
+    const onStateChange = jest.fn();
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open={false}
+        label="Stack test"
+        icon=""
+        onStateChange={onStateChange}
+        actions={[
+          {
+            label: 'testing',
+            onPress() {},
+            icon: '',
+          },
+        ]}
+      />
+    );
+
+    act(() => {
+      fireEvent(getByText('Stack test'), 'onLongPress');
+    });
+
+    expect(onStateChange).toHaveBeenCalledTimes(0);
+  });
+
+  it('toggles stack visibility on long press with toggleStackOnLongPress prop', () => {
+    const onStateChange = jest.fn();
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open={false}
+        toggleStackOnLongPress
+        label="Stack test"
+        icon=""
+        onStateChange={onStateChange}
+        actions={[
+          {
+            label: 'testing',
+            onPress() {},
+            icon: '',
+          },
+        ]}
+      />
+    );
+
+    act(() => {
+      fireEvent(getByText('Stack test'), 'onLongPress');
+    });
+
+    expect(onStateChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not toggle stack visibility on press with toggleStackOnLongPress prop', () => {
+    const onStateChange = jest.fn();
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open={false}
+        toggleStackOnLongPress
+        label="Stack test"
+        icon=""
+        onStateChange={onStateChange}
+        actions={[
+          {
+            label: 'testing',
+            onPress() {},
+            icon: '',
+          },
+        ]}
+      />
+    );
+
+    act(() => {
+      fireEvent(getByText('Stack test'), 'onPress');
+    });
+
+    expect(onStateChange).toHaveBeenCalledTimes(0);
   });
 });
