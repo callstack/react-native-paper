@@ -4,10 +4,10 @@ import { Animated, StyleSheet } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
 
-import { getTheme } from '../../core/theming';
-import { pink500, black, white } from '../../styles/themes/v2/colors';
-import Button from '../Button/Button';
-import { getButtonColors } from '../Button/utils';
+import { getTheme } from '../../../core/theming';
+import { pink500, black, white } from '../../../styles/themes/v2/colors';
+import Button from '../../Button/Button';
+import { getButtonColors } from '../../Button/utils';
 
 const styles = StyleSheet.create({
   flexing: {
