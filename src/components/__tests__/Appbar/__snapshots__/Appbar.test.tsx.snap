@@ -5,16 +5,8 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgba(255, 251, 254, 1)",
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
       "height": 64,
-      "left": undefined,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 0,
@@ -22,10 +14,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
-      "width": undefined,
     }
   }
   testID="surface-outer-layer"
@@ -58,17 +46,8 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       collapsable={false}
       style={
         Object {
-          "alignSelf": undefined,
           "backgroundColor": "rgb(238, 232, 244)",
           "borderRadius": 28,
-          "bottom": undefined,
-          "end": undefined,
-          "flex": undefined,
-          "height": undefined,
-          "left": undefined,
-          "opacity": undefined,
-          "position": undefined,
-          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -76,10 +55,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
-          "start": undefined,
-          "top": undefined,
-          "transform": undefined,
-          "width": undefined,
         }
       }
       testID="search-bar-container-outer-layer"
@@ -108,18 +83,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           collapsable={false}
           style={
             Object {
-              "alignSelf": undefined,
               "backgroundColor": "transparent",
               "borderRadius": 20,
-              "bottom": undefined,
-              "end": undefined,
-              "flex": undefined,
               "height": 40,
-              "left": undefined,
               "margin": 6,
-              "opacity": undefined,
-              "position": undefined,
-              "right": undefined,
               "shadowColor": "#000",
               "shadowOffset": Object {
                 "height": 0,
@@ -127,9 +94,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
-              "start": undefined,
-              "top": undefined,
-              "transform": undefined,
               "width": 40,
             }
           }
@@ -301,18 +265,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             collapsable={false}
             style={
               Object {
-                "alignSelf": undefined,
                 "backgroundColor": "transparent",
                 "borderRadius": 20,
-                "bottom": undefined,
-                "end": undefined,
-                "flex": undefined,
                 "height": 40,
-                "left": undefined,
                 "margin": 6,
-                "opacity": undefined,
-                "position": undefined,
-                "right": undefined,
                 "shadowColor": "#000",
                 "shadowOffset": Object {
                   "height": 0,
@@ -320,9 +276,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                 },
                 "shadowOpacity": 0,
                 "shadowRadius": 0,
-                "start": undefined,
-                "top": undefined,
-                "transform": undefined,
                 "width": 40,
               }
             }
@@ -452,16 +405,8 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgba(255, 251, 254, 1)",
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
       "height": 64,
-      "left": undefined,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 0,
@@ -469,10 +414,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
-      "width": undefined,
     }
   }
   testID="surface-outer-layer"
@@ -505,18 +446,10 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       collapsable={false}
       style={
         Object {
-          "alignSelf": undefined,
           "backgroundColor": "transparent",
           "borderRadius": 20,
-          "bottom": undefined,
-          "end": undefined,
-          "flex": undefined,
           "height": 40,
-          "left": undefined,
           "margin": 6,
-          "opacity": undefined,
-          "position": undefined,
-          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -524,9 +457,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
-          "start": undefined,
-          "top": undefined,
-          "transform": undefined,
           "width": 40,
         }
       }
@@ -746,18 +676,10 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       collapsable={false}
       style={
         Object {
-          "alignSelf": undefined,
           "backgroundColor": "transparent",
           "borderRadius": 20,
-          "bottom": undefined,
-          "end": undefined,
-          "flex": undefined,
           "height": 40,
-          "left": undefined,
           "margin": 6,
-          "opacity": undefined,
-          "position": undefined,
-          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -765,9 +687,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
-          "start": undefined,
-          "top": undefined,
-          "transform": undefined,
           "width": 40,
         }
       }

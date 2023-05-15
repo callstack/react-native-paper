@@ -1,13 +1,13 @@
 import type { ViewStyle } from 'react-native';
 
-type FiltersArray = readonly ((style: string) => boolean)[];
+type FiltersArray = readonly ((style: keyof ViewStyle) => boolean)[];
 
 type MappedTuple<Tuple extends FiltersArray> = {
   [Index in keyof Tuple]: ViewStyle;
 } & { length: Tuple['length'] };
 
 type Style = ViewStyle[keyof ViewStyle];
-type Entry = [string, Style];
+type Entry = [keyof ViewStyle, Style];
 
 /**
  * Utility function to extract styles in separate objects

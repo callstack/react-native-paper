@@ -5,17 +5,9 @@ exports[`renders FAB with custom size prop 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 25,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -23,14 +15,11 @@ exports[`renders FAB with custom size prop 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "start": undefined,
-      "top": undefined,
       "transform": Array [
         Object {
           "scale": 1,
         },
       ],
-      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -185,17 +174,9 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -203,14 +184,11 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "start": undefined,
-      "top": undefined,
       "transform": Array [
         Object {
           "scale": 1,
         },
       ],
-      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -365,17 +343,9 @@ exports[`renders default FAB 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -383,14 +353,11 @@ exports[`renders default FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "start": undefined,
-      "top": undefined,
       "transform": Array [
         Object {
           "scale": 1,
         },
       ],
-      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -545,17 +512,9 @@ exports[`renders disabled FAB 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgba(28, 27, 31, 0.12)",
       "borderRadius": 16,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 0,
@@ -563,14 +522,11 @@ exports[`renders disabled FAB 1`] = `
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
       "transform": Array [
         Object {
           "scale": 1,
         },
       ],
-      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -725,17 +681,9 @@ exports[`renders extended FAB 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -743,14 +691,11 @@ exports[`renders extended FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "start": undefined,
-      "top": undefined,
       "transform": Array [
         Object {
           "scale": 1,
         },
       ],
-      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -944,17 +889,9 @@ exports[`renders extended FAB with custom size prop 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 25,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -962,14 +899,11 @@ exports[`renders extended FAB with custom size prop 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "start": undefined,
-      "top": undefined,
       "transform": Array [
         Object {
           "scale": 1,
         },
       ],
-      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -1162,17 +1096,9 @@ exports[`renders large FAB 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 28,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -1180,14 +1106,11 @@ exports[`renders large FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "start": undefined,
-      "top": undefined,
       "transform": Array [
         Object {
           "scale": 1,
         },
       ],
-      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -1342,17 +1265,9 @@ exports[`renders loading FAB 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -1360,14 +1275,11 @@ exports[`renders loading FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "start": undefined,
-      "top": undefined,
       "transform": Array [
         Object {
           "scale": 1,
         },
       ],
-      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -1647,17 +1559,9 @@ exports[`renders loading FAB with custom size prop 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 25,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -1665,14 +1569,11 @@ exports[`renders loading FAB with custom size prop 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "start": undefined,
-      "top": undefined,
       "transform": Array [
         Object {
           "scale": 1,
         },
       ],
-      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -1952,17 +1853,9 @@ exports[`renders not visible FAB 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -1970,14 +1863,11 @@ exports[`renders not visible FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "start": undefined,
-      "top": undefined,
       "transform": Array [
         Object {
           "scale": 1,
         },
       ],
-      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -2132,17 +2022,9 @@ exports[`renders small FAB 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 12,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -2150,14 +2032,11 @@ exports[`renders small FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "start": undefined,
-      "top": undefined,
       "transform": Array [
         Object {
           "scale": 1,
         },
       ],
-      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
@@ -2312,17 +2191,9 @@ exports[`renders visible FAB 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 0,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -2330,14 +2201,11 @@ exports[`renders visible FAB 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "start": undefined,
-      "top": undefined,
       "transform": Array [
         Object {
           "scale": 0,
         },
       ],
-      "width": undefined,
     }
   }
   testID="fab-container-outer-layer"
