@@ -14,7 +14,7 @@ import { useKeepAwake } from 'expo-keep-awake';
 import { StatusBar } from 'expo-status-bar';
 import * as Updates from 'expo-updates';
 import {
-  Provider as PaperProvider,
+  PaperProvider,
   MD3DarkTheme,
   MD3LightTheme,
   MD2DarkTheme,

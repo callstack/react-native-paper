@@ -19,7 +19,7 @@ import {
   Divider,
   IconButton,
   FAB,
-  Provider,
+  PaperProvider,
 } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -217,7 +217,7 @@ const ThemeBasedOnSourceColor = ({ navigation, route }: Props) => {
   const colorScheme = darkMode ? 'dark' : systemColorScheme;
 
   return (
-    <Provider theme={theme[colorScheme]}>
+    <PaperProvider theme={theme[colorScheme]}>
       <View style={styles.screen}>
         <Appbar.Header elevated>
           <Appbar.BackAction onPress={() => navigation.goBack()} />
@@ -239,7 +239,7 @@ const ThemeBasedOnSourceColor = ({ navigation, route }: Props) => {
           getLazy={({ route }) => route.key !== 'album'}
         />
       </View>
-    </Provider>
+    </PaperProvider>
   );
 };
 

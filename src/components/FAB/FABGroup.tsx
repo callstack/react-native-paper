@@ -125,7 +125,7 @@ export type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { FAB, Portal, Provider } from 'react-native-paper';
+ * import { FAB, Portal, PaperProvider } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [state, setState] = React.useState({ open: false });
@@ -135,7 +135,7 @@ export type Props = {
  *   const { open } = state;
  *
  *   return (
- *     <Provider>
+ *     <PaperProvider>
  *       <Portal>
  *         <FAB.Group
  *           open={open}
@@ -167,7 +167,7 @@ export type Props = {
  *           }}
  *         />
  *       </Portal>
- *     </Provider>
+ *     </PaperProvider>
  *   );
  * };
  *

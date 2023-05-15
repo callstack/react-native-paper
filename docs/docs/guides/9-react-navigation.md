@@ -191,14 +191,14 @@ Another interesting pattern that can be implemented with `react-native-paper` an
 - Add a state to control `Menu` visibility
 
 :::note
-To have properly working `Menu` component, remember to wrap your root component with the Paper's `Provider`:
+To have properly working `Menu` component, remember to wrap your root component with the `PaperProvider`:
 
 ```js
-import { Provider } from 'react-native-paper';
+import { PaperProvider } from 'react-native-paper';
 
 // ...
 
-<Provider>
+<PaperProvider>
   <NavigationContainer>
     <Stack.Navigator
       initialRouteName="Home"
@@ -209,7 +209,7 @@ import { Provider } from 'react-native-paper';
       <Stack.Screen name="Details" component={DetailsScreen} />
     </Stack.Navigator>
   </NavigationContainer>
-</Provider>
+</PaperProvider>
 ```
 :::
 

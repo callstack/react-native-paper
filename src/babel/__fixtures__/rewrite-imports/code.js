@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import {
-  Provider as PaperProvider,
+  PaperProvider,
   BottomNavigation,
   Button,
   FAB,

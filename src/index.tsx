@@ -10,7 +10,8 @@ export {
 
 export * from './styles/themes';
 
-export { default as Provider } from './core/Provider';
+export { default as Provider } from './core/PaperProvider';
+export { default as PaperProvider } from './core/PaperProvider';
 export { default as shadow } from './styles/shadow';
 export { default as overlay } from './styles/overlay';
 export { default as configureFonts } from './styles/fonts';
@@ -122,7 +123,7 @@ export type { Props as ModalProps } from './components/Modal';
 export type { Props as PortalProps } from './components/Portal/Portal';
 export type { Props as PortalHostProps } from './components/Portal/PortalHost';
 export type { Props as ProgressBarProps } from './components/ProgressBar';
-export type { Props as ProviderProps } from './core/Provider';
+export type { Props as ProviderProps } from './core/PaperProvider';
 export type { Props as RadioButtonProps } from './components/RadioButton/RadioButton';
 export type { Props as RadioButtonAndroidProps } from './components/RadioButton/RadioButtonAndroid';
 export type { Props as RadioButtonGroupProps } from './components/RadioButton/RadioButtonGroup';

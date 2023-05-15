@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { render } from '@testing-library/react-native';
 
-import Provider from '../../../core/Provider';
+import PaperProvider from '../../../core/PaperProvider';
 import configureFonts from '../../../styles/fonts';
 import { MD3LightTheme } from '../../../styles/themes';
 import { tokens } from '../../../styles/themes/v3/tokens';
@@ -69,11 +69,11 @@ it('renders v3 Text component with custom variant correctly', () => {
   };
   const Text = customText<'customVariant'>();
   const { getByTestId } = render(
-    <Provider theme={theme}>
+    <PaperProvider theme={theme}>
       <Text testID="text-with-custom-variant" variant="customVariant">
         {content}
       </Text>
-    </Provider>
+    </PaperProvider>
   );
 
   expect(getByTestId('text-with-custom-variant').props.style).toMatchSnapshot();

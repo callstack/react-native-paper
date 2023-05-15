@@ -60,7 +60,7 @@ const DIALOG_ELEVATION: number = 24;
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { Button, Dialog, Portal, Provider, Text } from 'react-native-paper';
+ * import { Button, Dialog, Portal, PaperProvider, Text } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -70,7 +70,7 @@ const DIALOG_ELEVATION: number = 24;
  *   const hideDialog = () => setVisible(false);
  *
  *   return (
- *     <Provider>
+ *     <PaperProvider>
  *       <View>
  *         <Button onPress={showDialog}>Show Dialog</Button>
  *         <Portal>
@@ -85,7 +85,7 @@ const DIALOG_ELEVATION: number = 24;
  *           </Dialog>
  *         </Portal>
  *       </View>
- *     </Provider>
+ *     </PaperProvider>
  *   );
  * };
  *

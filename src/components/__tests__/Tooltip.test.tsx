@@ -8,7 +8,7 @@ import {
 } from '@testing-library/react-native';
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 
-import Provider from '../../core/Provider';
+import PaperProvider from '../../core/PaperProvider';
 import Tooltip from '../Tooltip/Tooltip';
 
 const mockedRemoveEventListener = jest.fn();
@@ -57,9 +57,9 @@ describe('Tooltip', () => {
       .mockImplementation((cb) => cb(x, y, width, height, pageX, pageY));
 
     const wrapper = render(
-      <Provider>
+      <PaperProvider>
         <Tooltip {...defaultProps} />
-      </Provider>
+      </PaperProvider>
     );
 
     return { wrapper };
