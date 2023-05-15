@@ -11,7 +11,7 @@ import {
   MD3DarkTheme,
 } from '../../styles/themes';
 import type { ThemeProp } from '../../types';
-import Provider from '../Provider';
+import PaperProvider from '../PaperProvider';
 import { useTheme } from '../theming';
 
 jest.mock('react-native-safe-area-context', () => mockSafeAreaContext);
@@ -94,16 +94,16 @@ const FakeChild = () => {
 
 const createProvider = (theme?: ThemeProp) => {
   return (
-    <Provider theme={theme}>
+    <PaperProvider theme={theme}>
       <FakeChild />
-    </Provider>
+    </PaperProvider>
   );
 };
 
 const ExtendedLightTheme = { ...MD3LightTheme, isV3: true } as ThemeProp;
 const ExtendedDarkTheme = { ...MD3DarkTheme, isV3: true } as ThemeProp;
 
-describe('Provider', () => {
+describe('PaperProvider', () => {
   beforeEach(() => {
     jest.resetModules();
   });

@@ -74,7 +74,7 @@ const DEFAULT_DURATION = 220;
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
+ * import { Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -84,7 +84,7 @@ const DEFAULT_DURATION = 220;
  *   const containerStyle = {backgroundColor: 'white', padding: 20};
  *
  *   return (
- *     <Provider>
+ *     <PaperProvider>
  *       <Portal>
  *         <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
  *           <Text>Example Modal.  Click outside this area to dismiss.</Text>
@@ -93,7 +93,7 @@ const DEFAULT_DURATION = 220;
  *       <Button style={{marginTop: 30}} onPress={showModal}>
  *         Show
  *       </Button>
- *     </Provider>
+ *     </PaperProvider>
  *   );
  * };
  *

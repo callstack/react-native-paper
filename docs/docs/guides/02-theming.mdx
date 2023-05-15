@@ -12,11 +12,11 @@ To observe changes related to switching between light and dark mode in the app, 
 
 ## Applying a theme to the whole app
 
-To support custom themes, paper exports a `Provider` component. You need to wrap your root component with the provider to be able to support themes:
+To support custom themes, paper exports a `PaperProvider` component. You need to wrap your root component with the provider to be able to support themes:
 
 ```js
 import * as React from 'react';
-import { Provider as PaperProvider } from 'react-native-paper';
+import { PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 export default function Main() {
@@ -28,7 +28,7 @@ export default function Main() {
 }
 ```
 
-By default React Native Paper will apply the [Material You theme (MD3)](https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v3/LightTheme.tsx) if no `theme` or `version` prop is passed to to the `Provider`.
+By default React Native Paper will apply the [Material You theme (MD3)](https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v3/LightTheme.tsx) if no `theme` or `version` prop is passed to to the `PaperProvider`.
 
 ## Accessing theme properties
 
@@ -162,7 +162,7 @@ Keeping your own properties in the theme is fully supported by our library:
 import * as React from 'react';
 import {
   MD3LightTheme as DefaultTheme,
-  Provider as PaperProvider,
+  PaperProvider,
 } from 'react-native-paper';
 import App from './src/App';
 
@@ -208,7 +208,7 @@ Once we have copied the color schemes from the generated JSON above, we can use 
 import * as React from 'react';
 import {
   MD3LightTheme as DefaultTheme,
-  Provider as PaperProvider,
+  PaperProvider,
 } from 'react-native-paper';
 import App from './src/App';
 
@@ -242,7 +242,7 @@ import { useColorScheme } from 'react-native';
 import {
   MD3DarkTheme,
   MD3LightTheme,
-  Provider as PaperProvider,
+  PaperProvider,
 } from 'react-native-paper';
 import App from './src/App';
 
@@ -288,19 +288,19 @@ Valid `themes` keys are:
 // App.tsx
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Provider, MD3LightTheme, adaptNavigationTheme } from 'react-native-paper';
+import { PaperProvider, MD3LightTheme, adaptNavigationTheme } from 'react-native-paper';
 const Stack = createStackNavigator();
 const { LightTheme } = adaptNavigationTheme({ reactNavigationLight: DefaultTheme });
 export default function App() {
   return (
-    <Provider theme={MD3LightTheme}>
+    <PaperProvider theme={MD3LightTheme}>
       <NavigationContainer theme={LightTheme}>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Details" component={DetailsScreen} />
         </Stack.Navigator>
       </NavigationContainer>
-    </Provider>
+    </PaperProvider>
   );
 }
 ```
@@ -325,7 +325,7 @@ You can provide a `theme` prop with a theme object with the same properties as t
 
 ```js
 import * as React from 'react';
-import { MD3LightTheme, Provider as PaperProvider } from 'react-native-paper';
+import { MD3LightTheme, PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 const theme = {
@@ -352,11 +352,11 @@ export default function Main() {
 
 If you need to modify the built-in theme schema by adding a new property or changing its type, you need to follow these steps:
 
-1. Pass your theme overrides to the Provider component
+1. Pass your theme overrides to the PaperProvider component
 
 ```ts
 import * as React from 'react';
-import { MD3LightTheme, Provider as PaperProvider } from 'react-native-paper';
+import { MD3LightTheme, PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 const theme = {
@@ -388,7 +388,7 @@ export default function Main() {
 import * as React from 'react';
 import {
   MD3LightTheme,
-  Provider as PaperProvider,
+  PaperProvider,
   useTheme,
 } from 'react-native-paper';
 import App from './src/App';
@@ -445,7 +445,7 @@ In order to use the Material Design 2 theme you can just pass `{ version: 2 }` t
 
 ```js
 import * as React from 'react';
-import { Provider as PaperProvider } from 'react-native-paper';
+import { PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 export default function Main() {
@@ -465,7 +465,7 @@ As with any theme, you can also specify your custom properties within the Materi
 
 ```js
 import * as React from 'react';
-import { MD2LightTheme, Provider as PaperProvider } from 'react-native-paper';
+import { MD2LightTheme, PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 export default function Main() {
@@ -500,7 +500,7 @@ The final example for Material Design 2 would look like this:
 import * as React from 'react';
 import {
   MD2LightTheme,
-  Provider as PaperProvider,
+  PaperProvider,
   useTheme,
 } from 'react-native-paper';
 import App from './src/App';
@@ -547,7 +547,7 @@ If you are migrating from Material Design 2 (4.x and lower) to Material You (5.x
 
 ## Applying a theme to a paper component
 
-If you want to change the theme for a certain component from the library, you can directly pass the `theme` prop to the component. The theme passed as the prop is merged with the theme from the `Provider`:
+If you want to change the theme for a certain component from the library, you can directly pass the `theme` prop to the component. The theme passed as the prop is merged with the theme from the `PaperProvider`:
 
 ```js
 import * as React from 'react';
@@ -602,6 +602,6 @@ Otherwise, your custom theme will need to handle it manually, using React Native
 
 ## Gotchas
 
-The `Provider` exposes the theme to the components via [React's context API](https://reactjs.org/docs/context.html), which means that the component must be in the same tree as the `Provider`. Some React Native components will render a different tree such as a `Modal`, in which case the components inside the `Modal` won't be able to access the theme. The work around is to get the theme using the `withTheme` HOC and pass it down to the components as props, or expose it again with the exported `ThemeProvider` component.
+The `PaperProvider` exposes the theme to the components via [React's context API](https://reactjs.org/docs/context.html), which means that the component must be in the same tree as the `PaperProvider`. Some React Native components will render a different tree such as a `Modal`, in which case the components inside the `Modal` won't be able to access the theme. The work around is to get the theme using the `withTheme` HOC and pass it down to the components as props, or expose it again with the exported `ThemeProvider` component.
 
 The `Modal` component from the library already handles this edge case, so you won't need to do anything.

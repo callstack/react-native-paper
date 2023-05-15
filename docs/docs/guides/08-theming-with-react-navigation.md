@@ -69,7 +69,7 @@ import {
   Title,
   Paragraph,
   List,
-  Provider as PaperProvider,
+  PaperProvider,
 } from 'react-native-paper';
 
 const Stack = createStackNavigator();

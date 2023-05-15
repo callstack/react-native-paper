@@ -20,7 +20,7 @@ export type Props = {
   settings?: Settings;
 };
 
-const Provider = (props: Props) => {
+const PaperProvider = (props: Props) => {
   const isOnlyVersionInTheme =
     props.theme && Object.keys(props.theme).length === 1 && props.theme.version;
 
@@ -111,4 +111,4 @@ const Provider = (props: Props) => {
   );
 };
 
-export default Provider;
+export default PaperProvider;

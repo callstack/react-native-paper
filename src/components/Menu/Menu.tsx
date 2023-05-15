@@ -115,7 +115,7 @@ const WINDOW_LAYOUT = Dimensions.get('window');
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { Button, Menu, Divider, Provider } from 'react-native-paper';
+ * import { Button, Menu, Divider, PaperProvider } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -125,7 +125,7 @@ const WINDOW_LAYOUT = Dimensions.get('window');
  *   const closeMenu = () => setVisible(false);
  *
  *   return (
- *     <Provider>
+ *     <PaperProvider>
  *       <View
  *         style={{
  *           paddingTop: 50,
@@ -142,7 +142,7 @@ const WINDOW_LAYOUT = Dimensions.get('window');
  *           <Menu.Item onPress={() => {}} title="Item 3" />
  *         </Menu>
  *       </View>
- *     </Provider>
+ *     </PaperProvider>
  *   );
  * };
  *
@@ -151,7 +151,7 @@ const WINDOW_LAYOUT = Dimensions.get('window');
  *
  * ### Note
  * When using `Menu` within a React Native's `Modal` component, you need to wrap all
- * `Modal` contents within a `Provider` in order for the menu to show. This
+ * `Modal` contents within a `PaperProvider` in order for the menu to show. This
  * wrapping is not necessary if you use Paper's `Modal` instead.
  */
 class Menu extends React.Component<Props, State> {

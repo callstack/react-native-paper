@@ -4,7 +4,7 @@ import { Button, Text, View } from 'react-native';
 import { NavigationContainer, ParamListBase } from '@react-navigation/native';
 import { fireEvent, render } from '@testing-library/react-native';
 
-import Provider from '../../core/Provider';
+import PaperProvider from '../../core/PaperProvider';
 import {
   createMaterialBottomTabNavigator,
   MaterialBottomTabScreenProps,
@@ -26,12 +26,12 @@ it('renders a material bottom tab navigator with screens', async () => {
 
   const { findByText, queryByText } = render(
     <NavigationContainer>
-      <Provider>
+      <PaperProvider>
         <Tab.Navigator>
           <Tab.Screen name="A" component={Test} />
           <Tab.Screen name="B" component={Test} />
         </Tab.Navigator>
-      </Provider>
+      </PaperProvider>
     </NavigationContainer>
   );
 
