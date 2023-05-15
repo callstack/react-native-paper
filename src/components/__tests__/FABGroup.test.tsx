@@ -327,4 +327,61 @@ describe('Toggle Stack visibility', () => {
 
     expect(onStateChange).toHaveBeenCalledTimes(0);
   });
+
+  it('does not trigger onLongPress when stack is opened', () => {
+    const onStateChange = jest.fn();
+    const onLongPress = jest.fn();
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open={true}
+        label="Stack test"
+        icon=""
+        onStateChange={onStateChange}
+        onLongPress={onLongPress}
+        actions={[
+          {
+            label: 'testing',
+            onPress() {},
+            icon: '',
+          },
+        ]}
+      />
+    );
+
+    act(() => {
+      fireEvent(getByText('Stack test'), 'onLongPress');
+    });
+
+    expect(onLongPress).toHaveBeenCalledTimes(0);
+  });
+
+  it('does trigger onLongPress when stack is opened and enableLongPressWhenStackOpened is true', () => {
+    const onStateChange = jest.fn();
+    const onLongPress = jest.fn();
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open={true}
+        enableLongPressWhenStackOpened
+        label="Stack test"
+        icon=""
+        onStateChange={onStateChange}
+        onLongPress={onLongPress}
+        actions={[
+          {
+            label: 'testing',
+            onPress() {},
+            icon: '',
+          },
+        ]}
+      />
+    );
+
+    act(() => {
+      fireEvent(getByText('Stack test'), 'onLongPress');
+    });
+
+    expect(onLongPress).toHaveBeenCalledTimes(1);
+  });
 });

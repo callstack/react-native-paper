@@ -168,6 +168,7 @@ const FABExample = () => {
                 },
               },
             ]}
+            enableLongPressWhenStackOpened
             onStateChange={({ open }: { open: boolean }) => setOpen(open)}
             onPress={() => {
               if (toggleStackOnLongPress) {
@@ -179,7 +180,7 @@ const FABExample = () => {
               }
             }}
             onLongPress={() => {
-              if (!toggleStackOnLongPress) {
+              if (!toggleStackOnLongPress || open) {
                 isWeb
                   ? alert('Fab is Long Pressed')
                   : Alert.alert('Fab is Long Pressed');

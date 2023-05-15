@@ -83,6 +83,14 @@ export type Props = {
    */
   toggleStackOnLongPress?: boolean;
   /**
+   * Changes the delay for long press reaction.
+   */
+  delayLongPress?: number;
+  /**
+   * Allows for onLongPress when stack is opened.
+   */
+  enableLongPressWhenStackOpened?: boolean;
+  /**
    * Whether the speed dial is open.
    */
   open: boolean;
@@ -200,7 +208,9 @@ const FABGroup = ({
   testID,
   onStateChange,
   color: colorProp,
+  delayLongPress = 200,
   variant = 'primary',
+  enableLongPressWhenStackOpened = false,
   backdropColor: customBackdropColor,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -433,14 +443,14 @@ const FABGroup = ({
             }
           }}
           onLongPress={() => {
-            if (!open) {
+            if (!open || enableLongPressWhenStackOpened) {
               onLongPress?.();
               if (toggleStackOnLongPress) {
                 toggle();
               }
             }
           }}
-          delayLongPress={200}
+          delayLongPress={delayLongPress}
           icon={icon}
           color={colorProp}
           accessibilityLabel={accessibilityLabel}
