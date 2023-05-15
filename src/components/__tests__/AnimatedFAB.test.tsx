@@ -3,7 +3,8 @@
 import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { fireEvent, render } from '@testing-library/react-native';
+import { act } from 'react-test-renderer';
 
 import { MD3Colors } from '../../styles/themes/v3/tokens';
 import AnimatedFAB from '../FAB/AnimatedFAB';
@@ -142,5 +143,38 @@ it('renders correct elevation value for shadow views', () => {
   expect(getByTestId('animated-fab-shadow')).toHaveStyle({ elevation: 3 });
   expect(getByTestId('animated-fab-extended-shadow')).toHaveStyle({
     elevation: 3,
+  });
+});
+
+describe('AnimatedFAB events', () => {
+  it('onPress passes event', () => {
+    const onPress = jest.fn();
+    const { getByTestId } = render(
+      <AnimatedFAB extended icon="plus" onPress={onPress} label="Add items" />
+    );
+
+    act(() => {
+      fireEvent(getByTestId('animated-fab'), 'onPress', { key: 'value' });
+    });
+
+    expect(onPress).toHaveBeenCalledWith({ key: 'value' });
+  });
+
+  it('onLongPress passes event', () => {
+    const onLongPress = jest.fn();
+    const { getByTestId } = render(
+      <AnimatedFAB
+        extended
+        icon="plus"
+        onLongPress={onLongPress}
+        label="Add items"
+      />
+    );
+
+    act(() => {
+      fireEvent(getByTestId('animated-fab'), 'onLongPress', { key: 'value' });
+    });
+
+    expect(onLongPress).toHaveBeenCalledWith({ key: 'value' });
   });
 });
