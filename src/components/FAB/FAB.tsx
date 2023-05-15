@@ -96,7 +96,7 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
   /**
    * Function to execute on long press.
    */
-  onLongPress?: () => void;
+  onLongPress?: (e: GestureResponderEvent) => void;
   /**
    * The number of milliseconds a user must touch the element before executing `onLongPress`.
    */

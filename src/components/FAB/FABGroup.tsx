@@ -77,7 +77,7 @@ export type Props = {
   /**
    * Function to execute on long pressing the `FAB`.
    */
-  onLongPress?: () => void;
+  onLongPress?: (e: GestureResponderEvent) => void;
   /**
    * Makes actions stack appear on long press instead of on press.
    */
@@ -442,9 +442,9 @@ const FABGroup = ({
               toggle();
             }
           }}
-          onLongPress={() => {
+          onLongPress={(e) => {
             if (!open || enableLongPressWhenStackOpened) {
-              onLongPress?.();
+              onLongPress?.(e);
               if (toggleStackOnLongPress) {
                 toggle();
               }
