@@ -177,14 +177,14 @@ describe('getMenuItemColor - icon color', () => {
   });
 });
 
-describe('getMenuItemColor - underlay color', () => {
+describe('getMenuItemColor - ripple color', () => {
   it('should return correct theme color, for theme version 3', () => {
     expect(
       getMenuItemColor({
         theme: getTheme(),
       })
     ).toMatchObject({
-      underlayColor: color(getTheme().colors.primary)
+      rippleColor: color(getTheme().colors.onSurfaceVariant)
         .alpha(0.12)
         .rgb()
         .string(),
@@ -197,7 +197,7 @@ describe('getMenuItemColor - underlay color', () => {
         theme: getTheme(false, false),
       })
     ).toMatchObject({
-      underlayColor: undefined,
+      rippleColor: undefined,
     });
   });
 });

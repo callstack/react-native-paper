@@ -10,7 +10,7 @@ import ScreenWrapper from '../ScreenWrapper';
 const ChipExample = () => {
   const [visible, setVisible] = React.useState<boolean>(false);
   const { isV3 } = useExampleTheme();
-  const customColor = isV3 ? MD3Colors.secondary20 : MD2Colors.purple900;
+  const customColor = isV3 ? MD3Colors.error50 : MD2Colors.purple900;
 
   return (
     <>

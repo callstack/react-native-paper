@@ -62,7 +62,7 @@ type TouchableProps<Route extends BaseRoute> = TouchableWithoutFeedbackProps & {
   children: React.ReactNode;
   borderless?: boolean;
   centered?: boolean;
-  rippleColor?: string;
+  rippleColor?: ColorValue;
 };
 
 export type Props<Route extends BaseRoute> = {

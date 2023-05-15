@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   AccessibilityState,
   Animated,
+  ColorValue,
   GestureResponderEvent,
   Platform,
   StyleProp,
@@ -63,6 +64,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   showSelectedOverlay?: boolean;
   /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
+  /**
    * Whether the chip is disabled. A disabled chip is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
@@ -105,7 +110,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   textStyle?: StyleProp<TextStyle>;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
-
   /**
    * @optional
    */
@@ -165,6 +169,7 @@ const Chip = ({
   theme: themeOverrides,
   testID = 'chip',
   selectedColor,
+  rippleColor: customRippleColor,
   showSelectedOverlay = false,
   ellipsizeMode,
   compact,
@@ -213,7 +218,7 @@ const Chip = ({
     borderColor,
     textColor,
     iconColor,
-    underlayColor,
+    rippleColor,
     selectedBackgroundColor,
     backgroundColor,
   } = getChipColors({
@@ -223,6 +228,7 @@ const Chip = ({
     showSelectedOverlay,
     customBackgroundColor,
     disabled,
+    customRippleColor,
   });
 
   const accessibilityState: AccessibilityState = {
@@ -272,7 +278,7 @@ const Chip = ({
         onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
         onLongPress={onLongPress}
         delayLongPress={delayLongPress}
-        underlayColor={underlayColor}
+        rippleColor={rippleColor}
         disabled={disabled}
         accessibilityLabel={accessibilityLabel}
         accessibilityRole="button"

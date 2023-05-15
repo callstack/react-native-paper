@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { I18nManager, StyleSheet, View } from 'react-native';
+import { I18nManager, StyleSheet, View, Platform } from 'react-native';
 
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import * as Updates from 'expo-updates';
@@ -23,7 +23,9 @@ type Props = {
   toggleThemeVersion: () => void;
   toggleCollapsed: () => void;
   toggleCustomFont: () => void;
+  toggleRippleEffect: () => void;
   customFontLoaded: boolean;
+  rippleEffectEnabled: boolean;
   collapsed: boolean;
   isRTL: boolean;
   isDarkTheme: boolean;
@@ -103,7 +105,9 @@ const DrawerItems = ({
   toggleThemeVersion,
   toggleCollapsed,
   toggleCustomFont,
+  toggleRippleEffect,
   customFontLoaded,
+  rippleEffectEnabled,
   collapsed,
   isRTL,
   isDarkTheme,
@@ -114,6 +118,8 @@ const DrawerItems = ({
   const _setDrawerItem = (index: number) => setDrawerItemIndex(index);
 
   const { isV3, colors } = useExampleTheme();
+
+  const isIOS = Platform.OS === 'ios';
 
   const _handleToggleRTL = () => {
     toggleRTL();
@@ -222,6 +228,17 @@ const DrawerItems = ({
                 </View>
               </TouchableRipple>
             )}
+
+            <TouchableRipple onPress={toggleRippleEffect}>
+              <View style={[styles.preference, isV3 && styles.v3Preference]}>
+                <Text variant="labelLarge">
+                  {isIOS ? 'Highlight' : 'Ripple'} effect *
+                </Text>
+                <View pointerEvents="none">
+                  <Switch value={rippleEffectEnabled} />
+                </View>
+              </View>
+            </TouchableRipple>
           </Drawer.Section>
           {isV3 && !collapsed && (
             <Text variant="bodySmall" style={styles.annotation}>

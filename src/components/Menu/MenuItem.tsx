@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   AccessibilityState,
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
@@ -63,6 +64,10 @@ export type Props = {
   contentStyle?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
   /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -117,17 +122,19 @@ const MenuItem = ({
   onPress,
   style,
   contentStyle,
-  testID = 'menu-item',
   titleStyle,
+  rippleColor: customRippleColor,
+  testID = 'menu-item',
   accessibilityLabel,
   accessibilityState,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier = 1.5,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { titleColor, iconColor, underlayColor } = getMenuItemColor({
+  const { titleColor, iconColor, rippleColor } = getMenuItemColor({
     theme,
     disabled,
+    customRippleColor,
   });
   const { isV3 } = theme;
 
@@ -165,7 +172,7 @@ const MenuItem = ({
       accessibilityLabel={accessibilityLabel}
       accessibilityRole="menuitem"
       accessibilityState={newAccessibilityState}
-      underlayColor={underlayColor}
+      rippleColor={rippleColor}
     >
       <View style={styles.row}>
         {leadingIcon ? (

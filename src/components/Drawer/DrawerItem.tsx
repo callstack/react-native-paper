@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
@@ -40,6 +41,10 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * Callback which returns a React element to display on the right side. For instance a Badge.
    */
   right?: (props: { color: string }) => React.ReactNode;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -77,6 +82,7 @@ const DrawerItem = ({
   label,
   active,
   theme: themeOverrides,
+  rippleColor: customRippleColor,
   style,
   onPress,
   accessibilityLabel,
@@ -101,11 +107,8 @@ const DrawerItem = ({
 
   const labelMargin = icon ? (isV3 ? 12 : 32) : 0;
   const borderRadius = (isV3 ? 7 : 1) * roundness;
-  const underlayColor = isV3
-    ? color(backgroundColor)
-        .mix(color(theme.colors.onSecondaryContainer), 0.16)
-        .rgb()
-        .toString()
+  const rippleColor = isV3
+    ? color(contentColor).alpha(0.12).rgb().string()
     : undefined;
   const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
 
@@ -123,7 +126,7 @@ const DrawerItem = ({
         accessibilityRole="button"
         accessibilityState={{ selected: active }}
         accessibilityLabel={accessibilityLabel}
-        underlayColor={underlayColor}
+        rippleColor={customRippleColor || rippleColor}
         theme={theme}
       >
         <View style={[styles.wrapper, isV3 && styles.v3Wrapper]}>

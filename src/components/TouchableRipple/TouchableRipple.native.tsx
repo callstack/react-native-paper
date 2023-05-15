@@ -8,8 +8,10 @@ import {
   Pressable,
   GestureResponderEvent,
   View,
+  ColorValue,
 } from 'react-native';
 
+import { Settings, SettingsContext } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
@@ -27,7 +29,7 @@ export type Props = React.ComponentProps<typeof Pressable> & {
   onLongPress?: (e: GestureResponderEvent) => void;
   onPressIn?: (e: GestureResponderEvent) => void;
   onPressOut?: (e: GestureResponderEvent) => void;
-  rippleColor?: string;
+  rippleColor?: ColorValue;
   underlayColor?: string;
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
@@ -46,6 +48,7 @@ const TouchableRipple = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;
 
@@ -73,20 +76,20 @@ const TouchableRipple = ({
     borderless;
 
   if (TouchableRipple.supported) {
+    const androidRipple = rippleEffectEnabled
+      ? background ?? {
+          color: calculatedRippleColor,
+          borderless,
+          foreground: useForeground,
+        }
+      : undefined;
+
     return (
       <Pressable
         {...rest}
         disabled={disabled}
         style={[borderless && styles.overflowHidden, style]}
-        android_ripple={
-          background != null
-            ? background
-            : {
-                color: calculatedRippleColor,
-                borderless,
-                foreground: useForeground,
-              }
-        }
+        android_ripple={androidRipple}
       >
         {React.Children.only(children)}
       </Pressable>
@@ -101,7 +104,7 @@ const TouchableRipple = ({
     >
       {({ pressed }) => (
         <>
-          {pressed && (
+          {pressed && rippleEffectEnabled && (
             <View
               testID="touchable-ripple-underlay"
               style={[

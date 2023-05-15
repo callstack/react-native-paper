@@ -257,12 +257,14 @@ export const getFABColors = ({
   disabled,
   customColor,
   customBackgroundColor,
+  customRippleColor,
 }: {
   theme: InternalTheme;
   variant: string;
   disabled?: boolean;
   customColor?: string;
   customBackgroundColor?: ColorValue;
+  customRippleColor?: ColorValue;
 }) => {
   const isVariant = (variantToCompare: Variant) => {
     return variant === variantToCompare;
@@ -284,7 +286,8 @@ export const getFABColors = ({
   return {
     backgroundColor,
     foregroundColor,
-    rippleColor: color(foregroundColor).alpha(0.12).rgb().string(),
+    rippleColor:
+      customRippleColor || color(foregroundColor).alpha(0.12).rgb().string(),
   };
 };
 

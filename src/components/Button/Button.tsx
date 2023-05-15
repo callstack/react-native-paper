@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
@@ -54,6 +55,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Custom button's text color.
    */
   textColor?: string;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * Whether to show a loading indicator.
    */
@@ -171,6 +176,7 @@ const Button = ({
   icon,
   buttonColor: customButtonColor,
   textColor: customTextColor,
+  rippleColor: customRippleColor,
   children,
   accessibilityLabel,
   accessibilityHint,
@@ -255,7 +261,8 @@ const Button = ({
       dark,
     });
 
-  const rippleColor = color(textColor).alpha(0.12).rgb().string();
+  const rippleColor =
+    customRippleColor || color(textColor).alpha(0.12).rgb().string();
 
   const buttonStyle = {
     backgroundColor,
