@@ -221,6 +221,62 @@ it('animated value changes correctly', () => {
   });
 });
 
+describe('FAB.Group events', () => {
+  it('onPress passes event', () => {
+    const onPress = jest.fn();
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open={false}
+        label="Stack test"
+        icon=""
+        onStateChange={jest.fn()}
+        onPress={onPress}
+        actions={[
+          {
+            label: 'testing',
+            onPress() {},
+            icon: '',
+          },
+        ]}
+      />
+    );
+
+    act(() => {
+      fireEvent(getByText('Stack test'), 'onPress', { key: 'value' });
+    });
+
+    expect(onPress).toHaveBeenCalledWith({ key: 'value' });
+  });
+
+  it('onLongPress passes event', () => {
+    const onLongPress = jest.fn();
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open={false}
+        label="Stack test"
+        icon=""
+        onStateChange={jest.fn()}
+        onLongPress={onLongPress}
+        actions={[
+          {
+            label: 'testing',
+            onPress() {},
+            icon: '',
+          },
+        ]}
+      />
+    );
+
+    act(() => {
+      fireEvent(getByText('Stack test'), 'onLongPress', { key: 'value' });
+    });
+
+    expect(onLongPress).toHaveBeenCalledWith({ key: 'value' });
+  });
+});
+
 describe('Toggle Stack visibility', () => {
   it('toggles stack visibility on press', () => {
     const onStateChange = jest.fn();
