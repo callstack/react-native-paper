@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 import { Button } from 'react-native-paper';
 
@@ -7,6 +7,7 @@ import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 import {
   DialogWithCustomColors,
+  DialogWithDismissableBackButton,
   DialogWithIcon,
   DialogWithLoadingIndicator,
   DialogWithLongText,
@@ -73,6 +74,15 @@ const DialogExample = () => {
           With icon
         </Button>
       )}
+      {Platform.OS === 'android' && (
+        <Button
+          mode="outlined"
+          onPress={_toggleDialog('dialog7')}
+          style={styles.button}
+        >
+          Dismissable back button
+        </Button>
+      )}
       <DialogWithLongText
         visible={_getVisible('dialog1')}
         close={_toggleDialog('dialog1')}
@@ -99,6 +109,10 @@ const DialogExample = () => {
           close={_toggleDialog('dialog6')}
         />
       )}
+      <DialogWithDismissableBackButton
+        visible={_getVisible('dialog7')}
+        close={_toggleDialog('dialog7')}
+      />
     </ScreenWrapper>
   );
 };

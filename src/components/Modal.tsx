@@ -25,6 +25,10 @@ export type Props = {
    */
   dismissable?: boolean;
   /**
+   * Determines whether clicking Android hardware back button dismiss dialog.
+   */
+  dismissableBackButton?: boolean;
+  /**
    * Callback that is called when the user dismisses the modal.
    */
   onDismiss?: () => void;
@@ -102,6 +106,7 @@ const DEFAULT_DURATION = 220;
  */
 function Modal({
   dismissable = true,
+  dismissableBackButton = dismissable,
   visible = false,
   overlayAccessibilityLabel = 'Close modal',
   onDismiss = () => {},
@@ -170,7 +175,7 @@ function Modal({
     }
 
     const onHardwareBackPress = () => {
-      if (dismissable) {
+      if (dismissable || dismissableBackButton) {
         hideModal();
       }
 
@@ -183,7 +188,7 @@ function Modal({
       onHardwareBackPress
     );
     return () => subscription.remove();
-  }, [dismissable, hideModal, visible]);
+  }, [dismissable, dismissableBackButton, hideModal, visible]);
 
   const prevVisible = React.useRef<boolean | null>(null);
 
