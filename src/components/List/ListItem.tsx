@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  FlexAlignType,
   GestureResponderEvent,
   NativeSyntheticEvent,
   StyleProp,
@@ -17,7 +16,7 @@ import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, EllipsizeProp, ThemeProp } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { getLeftStyles, getRightStyles } from './utils';
+import { Style, getLeftStyles, getRightStyles } from './utils';
 
 type Title =
   | React.ReactNode
@@ -36,13 +35,6 @@ type Description =
       color: string;
       fontSize: number;
     }) => React.ReactNode);
-
-interface Style {
-  marginLeft?: number;
-  marginRight?: number;
-  marginVertical?: number;
-  alignSelf?: FlexAlignType;
-}
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
