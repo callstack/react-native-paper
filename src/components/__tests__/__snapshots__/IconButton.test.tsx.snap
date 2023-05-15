@@ -83,7 +83,6 @@ exports[`renders disabled icon button 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Array [
             Object {
               "alignItems": "center",
@@ -217,7 +216,6 @@ exports[`renders icon button by default 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Array [
             Object {
               "alignItems": "center",
@@ -351,7 +349,6 @@ exports[`renders icon button with color 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Array [
             Object {
               "alignItems": "center",
@@ -485,7 +482,6 @@ exports[`renders icon button with size 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Array [
             Object {
               "alignItems": "center",
@@ -619,7 +615,6 @@ exports[`renders icon change animated 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Array [
             Object {
               "alignItems": "center",
@@ -665,6 +660,7 @@ exports[`renders icon change animated 1`] = `
               ],
             }
           }
+          testID="cross-fade-icon-current"
         >
           <Text
             accessibilityElementsHidden={true}

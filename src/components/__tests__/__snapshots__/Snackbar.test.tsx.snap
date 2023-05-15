@@ -375,7 +375,6 @@ exports[`renders snackbar with action button 1`] = `
                   Object {
                     "overflow": "hidden",
                   },
-                  false,
                   Object {
                     "borderRadius": 20,
                   },

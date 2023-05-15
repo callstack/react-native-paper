@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Pressable,
   GestureResponderEvent,
+  View,
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
@@ -45,7 +46,6 @@ const TouchableRipple = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const [showUnderlay, setShowUnderlay] = React.useState<boolean>(false);
 
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;
 
@@ -72,16 +72,6 @@ const TouchableRipple = ({
     Platform.Version >= ANDROID_VERSION_PIE &&
     borderless;
 
-  const handlePressIn = (e: GestureResponderEvent) => {
-    setShowUnderlay(true);
-    onPressIn?.(e);
-  };
-
-  const handlePressOut = (e: GestureResponderEvent) => {
-    setShowUnderlay(false);
-    onPressOut?.(e);
-  };
-
   if (TouchableRipple.supported) {
     return (
       <Pressable
@@ -107,15 +97,22 @@ const TouchableRipple = ({
     <Pressable
       {...rest}
       disabled={disabled}
-      style={[
-        borderless && styles.overflowHidden,
-        showUnderlay && { backgroundColor: calculatedUnderlayColor },
-        style,
-      ]}
-      onPressIn={handlePressIn}
-      onPressOut={handlePressOut}
+      style={[borderless && styles.overflowHidden, style]}
     >
-      {React.Children.only(children)}
+      {({ pressed }) => (
+        <>
+          {pressed && (
+            <View
+              testID="touchable-ripple-underlay"
+              style={[
+                styles.underlay,
+                { backgroundColor: calculatedUnderlayColor },
+              ]}
+            />
+          )}
+          {React.Children.only(children)}
+        </>
+      )}
     </Pressable>
   );
 };
@@ -126,6 +123,10 @@ TouchableRipple.supported =
 const styles = StyleSheet.create({
   overflowHidden: {
     overflow: 'hidden',
+  },
+  underlay: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 2,
   },
 });
 

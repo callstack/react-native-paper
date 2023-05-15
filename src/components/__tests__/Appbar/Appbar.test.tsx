@@ -267,7 +267,8 @@ describe('AppbarAction', () => {
         <Appbar.Action icon="menu" testID="appbar-action" />
       </Appbar>
     );
-    const appbarActionIcon = getByTestId('appbar-action').props.children[0];
+    const appbarActionIcon = getByTestId('cross-fade-icon-current').props
+      .children;
     expect(appbarActionIcon.props.color).toBe(
       getTheme().colors.onSurfaceVariant
     );
@@ -279,7 +280,8 @@ describe('AppbarAction', () => {
         <Appbar.Action icon="menu" testID="appbar-action" isLeading />
       </Appbar>
     );
-    const appbarActionIcon = getByTestId('appbar-action').props.children[0];
+    const appbarActionIcon = getByTestId('cross-fade-icon-current').props
+      .children;
     expect(appbarActionIcon.props.color).toBe(getTheme().colors.onSurface);
   });
 
@@ -289,7 +291,8 @@ describe('AppbarAction', () => {
         <Appbar.Action icon="menu" color="purple" testID="appbar-action" />
       </Appbar>
     );
-    const appbarActionIcon = getByTestId('appbar-action').props.children[0];
+    const appbarActionIcon = getByTestId('cross-fade-icon-current').props
+      .children;
     expect(appbarActionIcon.props.color).toBe('purple');
   });
 
@@ -299,7 +302,8 @@ describe('AppbarAction', () => {
         <Appbar.BackAction color="purple" testID="appbar-action" />
       </Appbar>
     );
-    const appbarBackActionIcon = getByTestId('appbar-action').props.children[0];
+    const appbarBackActionIcon = getByTestId('cross-fade-icon-current').props
+      .children;
     expect(appbarBackActionIcon.props.color).toBe('purple');
   });
 
@@ -313,7 +317,8 @@ describe('AppbarAction', () => {
         </Appbar>
       );
 
-      const appbarActionIcon = getByTestId('appbar-action').props.children[0];
+      const appbarActionIcon = getByTestId('cross-fade-icon-current').props
+        .children;
 
       expect(appbarActionIcon.props.color).toBe('#ffffff');
     });
@@ -329,7 +334,8 @@ describe('AppbarAction', () => {
         </PaperProvider>
       );
 
-      const appbarActionIcon = getByTestId('appbar-action').props.children[0];
+      const appbarActionIcon = getByTestId('cross-fade-icon-current').props
+        .children;
 
       expect(appbarActionIcon.props.color).toBe('#ffffff');
     });

@@ -116,7 +116,6 @@ exports[`activity indicator snapshot test 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -524,7 +523,6 @@ exports[`renders with placeholder 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -706,7 +704,6 @@ exports[`renders with placeholder 1`] = `
                 Object {
                   "overflow": "hidden",
                 },
-                false,
                 Array [
                   Object {
                     "alignItems": "center",
@@ -881,7 +878,6 @@ exports[`renders with text 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              false,
               Array [
                 Object {
                   "alignItems": "center",
@@ -1059,7 +1055,6 @@ exports[`renders with text 1`] = `
                 Object {
                   "overflow": "hidden",
                 },
-                false,
                 Array [
                   Object {
                     "alignItems": "center",

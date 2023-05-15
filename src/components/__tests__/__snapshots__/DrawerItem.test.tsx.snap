@@ -27,7 +27,6 @@ exports[`renders DrawerItem with icon 1`] = `
         Object {
           "overflow": "hidden",
         },
-        false,
         Array [
           Object {
             "marginHorizontal": 10,
@@ -181,7 +180,6 @@ exports[`renders active DrawerItem 1`] = `
         Object {
           "overflow": "hidden",
         },
-        false,
         Array [
           Object {
             "marginHorizontal": 10,
@@ -335,7 +333,6 @@ exports[`renders basic DrawerItem 1`] = `
         Object {
           "overflow": "hidden",
         },
-        false,
         Array [
           Object {
             "marginHorizontal": 10,

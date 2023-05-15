@@ -237,7 +237,6 @@ exports[`renders list section with custom title style 1`] = `
     style={
       Array [
         false,
-        false,
         Array [
           Object {
             "paddingRight": 24,
@@ -377,7 +376,6 @@ exports[`renders list section with custom title style 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
-        false,
         false,
         Array [
           Object {
@@ -736,7 +734,6 @@ exports[`renders list section with subheader 1`] = `
     style={
       Array [
         false,
-        false,
         Array [
           Object {
             "paddingRight": 24,
@@ -876,7 +873,6 @@ exports[`renders list section with subheader 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
-        false,
         false,
         Array [
           Object {
@@ -1197,7 +1193,6 @@ exports[`renders list section without subheader 1`] = `
     style={
       Array [
         false,
-        false,
         Array [
           Object {
             "paddingRight": 24,
@@ -1337,7 +1332,6 @@ exports[`renders list section without subheader 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
-        false,
         false,
         Array [
           Object {

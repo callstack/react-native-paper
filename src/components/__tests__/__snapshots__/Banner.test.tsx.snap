@@ -177,7 +177,6 @@ exports[`render visible banner, with custom theme 1`] = `
                     Object {
                       "overflow": "hidden",
                     },
-                    false,
                     Object {
                       "borderRadius": 20,
                     },
@@ -587,7 +586,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                     Object {
                       "overflow": "hidden",
                     },
-                    false,
                     Object {
                       "borderRadius": 20,
                     },
@@ -844,7 +842,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                     Object {
                       "overflow": "hidden",
                     },
-                    false,
                     Object {
                       "borderRadius": 20,
                     },
@@ -981,7 +978,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                     Object {
                       "overflow": "hidden",
                     },
-                    false,
                     Object {
                       "borderRadius": 20,
                     },

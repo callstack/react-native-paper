@@ -24,7 +24,6 @@ Array [
     style={
       Array [
         false,
-        false,
         Array [
           Object {
             "height": 48,
@@ -178,7 +177,6 @@ Array [
     onStartShouldSetResponder={[Function]}
     style={
       Array [
-        false,
         false,
         Array [
           Object {
@@ -334,7 +332,6 @@ Array [
     style={
       Array [
         false,
-        false,
         Array [
           Object {
             "height": 48,
@@ -489,7 +486,6 @@ Array [
     style={
       Array [
         false,
-        false,
         Array [
           Object {
             "height": 48,
@@ -643,7 +639,6 @@ Array [
     onStartShouldSetResponder={[Function]}
     style={
       Array [
-        false,
         false,
         Array [
           Object {

@@ -19,6 +19,10 @@ type Props = {
    */
   size: number;
   /**
+   * TestID used for testing purposes
+   */
+  testID?: string;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -29,6 +33,7 @@ const CrossFadeIcon = ({
   size,
   source,
   theme: themeOverrides,
+  testID = 'cross-fade-icon',
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const [currentIcon, setCurrentIcon] = React.useState<IconSource>(
@@ -97,6 +102,7 @@ const CrossFadeIcon = ({
               transform: [{ rotate: rotatePrev }],
             },
           ]}
+          testID={`${testID}-previous`}
         >
           <Icon source={previousIcon} size={size} color={color} theme={theme} />
         </Animated.View>
@@ -109,6 +115,7 @@ const CrossFadeIcon = ({
             transform: [{ rotate: rotateNext }],
           },
         ]}
+        testID={`${testID}-current`}
       >
         <Icon source={currentIcon} size={size} color={color} theme={theme} />
       </Animated.View>

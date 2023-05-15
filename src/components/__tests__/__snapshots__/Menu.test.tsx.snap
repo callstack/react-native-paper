@@ -77,7 +77,6 @@ Array [
                 Object {
                   "overflow": "hidden",
                 },
-                false,
                 Object {
                   "borderRadius": 20,
                 },
@@ -291,7 +290,6 @@ Array [
               style={
                 Array [
                   false,
-                  false,
                   Array [
                     Object {
                       "height": 48,
@@ -397,7 +395,6 @@ Array [
               onStartShouldSetResponder={[Function]}
               style={
                 Array [
-                  false,
                   false,
                   Array [
                     Object {
@@ -567,7 +564,6 @@ exports[`renders not visible menu 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              false,
               Object {
                 "borderRadius": 20,
               },
@@ -720,7 +716,6 @@ Array [
                 Object {
                   "overflow": "hidden",
                 },
-                false,
                 Object {
                   "borderRadius": 20,
                 },
@@ -930,7 +925,6 @@ Array [
               style={
                 Array [
                   false,
-                  false,
                   Array [
                     Object {
                       "height": 48,
@@ -1036,7 +1030,6 @@ Array [
               onStartShouldSetResponder={[Function]}
               style={
                 Array [
-                  false,
                   false,
                   Array [
                     Object {
