@@ -236,6 +236,10 @@ const getRippleColor = ({
   selectedColor?: string;
   customRippleColor?: ColorValue;
 }) => {
+  if (customRippleColor) {
+    return customRippleColor;
+  }
+
   const isSelectedColor = selectedColor !== undefined;
   const textColor = getTextColor({
     theme,
@@ -243,10 +247,6 @@ const getRippleColor = ({
     selectedColor,
     isOutlined,
   });
-
-  if (customRippleColor) {
-    return customRippleColor;
-  }
 
   if (theme.isV3) {
     if (isSelectedColor) {

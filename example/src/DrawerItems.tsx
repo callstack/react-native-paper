@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { I18nManager, StyleSheet, View } from 'react-native';
+import { I18nManager, StyleSheet, View, Platform } from 'react-native';
 
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import * as Updates from 'expo-updates';
@@ -119,6 +119,8 @@ const DrawerItems = ({
 
   const { isV3, colors } = useExampleTheme();
 
+  const isIOS = Platform.OS === 'ios';
+
   const _handleToggleRTL = () => {
     toggleRTL();
     I18nManager.forceRTL(!isRTL);
@@ -230,7 +232,9 @@ const DrawerItems = ({
             {isV3 && (
               <TouchableRipple onPress={toggleRippleEffect}>
                 <View style={[styles.preference, isV3 && styles.v3Preference]}>
-                  <Text variant="labelLarge">Ripple effect *</Text>
+                  <Text variant="labelLarge">
+                    {isIOS ? 'Highlight' : 'Ripple'} effect *
+                  </Text>
                   <View pointerEvents="none">
                     <Switch value={rippleEffectEnabled} />
                   </View>
