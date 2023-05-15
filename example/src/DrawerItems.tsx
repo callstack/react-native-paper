@@ -229,18 +229,16 @@ const DrawerItems = ({
               </TouchableRipple>
             )}
 
-            {isV3 && (
-              <TouchableRipple onPress={toggleRippleEffect}>
-                <View style={[styles.preference, isV3 && styles.v3Preference]}>
-                  <Text variant="labelLarge">
-                    {isIOS ? 'Highlight' : 'Ripple'} effect *
-                  </Text>
-                  <View pointerEvents="none">
-                    <Switch value={rippleEffectEnabled} />
-                  </View>
+            <TouchableRipple onPress={toggleRippleEffect}>
+              <View style={[styles.preference, isV3 && styles.v3Preference]}>
+                <Text variant="labelLarge">
+                  {isIOS ? 'Highlight' : 'Ripple'} effect *
+                </Text>
+                <View pointerEvents="none">
+                  <Switch value={rippleEffectEnabled} />
                 </View>
-              </TouchableRipple>
-            )}
+              </View>
+            </TouchableRipple>
           </Drawer.Section>
           {isV3 && !collapsed && (
             <Text variant="bodySmall" style={styles.annotation}>

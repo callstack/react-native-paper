@@ -26,19 +26,19 @@ The `rippleColor` prop is available for every pressable component which allows y
 
 ## Disable ripple effect in all components
 
-To disable the ripple effect in *all* of Paper's components, you need to customize the `Provider`  that is likely wrapping your root component. To do this, simply pass `rippleEffectEnabled: false` to the `settings` object prop within the mentioned `Provider`.
+To disable the ripple effect in **all** of Paper's components set `rippleEffectEnabled: false` on the `settings` prop of `PaperProvider`.
 
 ```
-import { Provider } from 'react-native-paper';
+import { Provider as PaperProvider } from 'react-native-paper';
 // ...
 
-<Provider
+<PaperProvider
   settings={{
     rippleEffectEnabled: false
   }}
 >
   // ...
-</Provider>
+</PaperProvider>
 ```
 
 
