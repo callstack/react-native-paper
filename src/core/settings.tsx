@@ -9,7 +9,9 @@ export type Settings = {
   rippleEffectEnabled?: boolean;
 };
 
-export const { Provider, Consumer } = React.createContext<Settings>({
+export const SettingsContext = React.createContext<Settings>({
   icon: MaterialCommunityIcon,
   rippleEffectEnabled: true,
 });
+
+export const { Provider, Consumer } = SettingsContext;

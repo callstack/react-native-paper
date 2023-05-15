@@ -9,7 +9,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { Consumer as SettingsConsumer } from '../../core/settings';
+import { Settings, SettingsContext } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
@@ -111,10 +111,12 @@ const TouchableRipple = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
+
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;
 
   const handlePressIn = React.useCallback(
-    (e: any, rippleEffectEnabled?: boolean) => {
+    (e: any) => {
       onPressIn?.(e);
 
       if (rippleEffectEnabled) {
@@ -213,11 +215,11 @@ const TouchableRipple = ({
         });
       }
     },
-    [onPressIn, rest, rippleColor, theme]
+    [onPressIn, rest, rippleColor, theme, rippleEffectEnabled]
   );
 
   const handlePressOut = React.useCallback(
-    (e: any, rippleEffectEnabled?: boolean) => {
+    (e: any) => {
       onPressOut?.(e);
 
       if (rippleEffectEnabled) {
@@ -248,7 +250,7 @@ const TouchableRipple = ({
         });
       }
     },
-    [onPressOut]
+    [onPressOut, rippleEffectEnabled]
   );
 
   const hasPassedTouchHandler = hasTouchHandler({
@@ -261,21 +263,15 @@ const TouchableRipple = ({
   const disabled = disabledProp || !hasPassedTouchHandler;
 
   return (
-    <SettingsConsumer>
-      {({ rippleEffectEnabled }) => {
-        return (
-          <Pressable
-            {...rest}
-            onPressIn={(e) => handlePressIn(e, rippleEffectEnabled)}
-            onPressOut={(e) => handlePressOut(e, rippleEffectEnabled)}
-            disabled={disabled}
-            style={[styles.touchable, borderless && styles.borderless, style]}
-          >
-            {React.Children.only(children)}
-          </Pressable>
-        );
-      }}
-    </SettingsConsumer>
+    <Pressable
+      {...rest}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+      disabled={disabled}
+      style={[styles.touchable, borderless && styles.borderless, style]}
+    >
+      {React.Children.only(children)}
+    </Pressable>
   );
 };
 

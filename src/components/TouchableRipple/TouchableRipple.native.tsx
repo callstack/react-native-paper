@@ -11,6 +11,7 @@ import {
   ColorValue,
 } from 'react-native';
 
+import { Settings, SettingsContext } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
@@ -47,6 +48,7 @@ const TouchableRipple = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;
 
@@ -74,29 +76,23 @@ const TouchableRipple = ({
     borderless;
 
   if (TouchableRipple.supported) {
-    return (
-      <SettingsConsumer>
-        {({ rippleEffectEnabled }) => {
-          const androidRipple = rippleEffectEnabled
-            ? background ?? {
-                color: calculatedRippleColor,
-                borderless,
-                foreground: useForeground,
-              }
-            : undefined;
+    const androidRipple = rippleEffectEnabled
+      ? background ?? {
+          color: calculatedRippleColor,
+          borderless,
+          foreground: useForeground,
+        }
+      : undefined;
 
-          return (
-            <Pressable
-              {...rest}
-              disabled={disabled}
-              style={[borderless && styles.overflowHidden, style]}
-              android_ripple={androidRipple}
-            >
-              {React.Children.only(children)}
-            </Pressable>
-          );
-        }}
-      </SettingsConsumer>
+    return (
+      <Pressable
+        {...rest}
+        disabled={disabled}
+        style={[borderless && styles.overflowHidden, style]}
+        android_ripple={androidRipple}
+      >
+        {React.Children.only(children)}
+      </Pressable>
     );
   }
 
