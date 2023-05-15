@@ -183,6 +183,7 @@ exports[`renders expanded accordion 1`] = `
         Object {
           "flexDirection": "row",
           "marginVertical": 6,
+          "width": "100%",
         }
       }
     >

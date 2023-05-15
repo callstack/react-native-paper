@@ -262,9 +262,11 @@ const styles = StyleSheet.create({
     paddingRight: 24,
   },
   row: {
+    width: '100%',
     flexDirection: 'row',
   },
   rowV3: {
+    width: '100%',
     flexDirection: 'row',
     marginVertical: 6,
   },
