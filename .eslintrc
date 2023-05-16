@@ -51,7 +51,11 @@
     "react-native/no-unused-styles": "error",
     "react-native/split-platform-components": "off",
     "react-native/no-raw-text": "off",
-    "react-native-a11y/has-valid-accessibility-descriptors": "off"
+    "react-native-a11y/has-valid-accessibility-descriptors": "off",
+    "jest/expect-expect": [
+      "error",
+      { "assertFunctionNames": ["expect", "measurePerformance"] }
+    ]
   },
 
   "overrides": [
