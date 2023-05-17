@@ -4,7 +4,6 @@ import { Platform, StyleSheet } from 'react-native';
 import type { StackNavigationProp } from '@react-navigation/stack';
 import {
   Appbar,
-  Avatar,
   Banner,
   FAB,
   List,
@@ -35,9 +34,6 @@ const TooltipExample = ({ navigation }: Props) => {
           </Tooltip>
           <Tooltip title="Search">
             <Appbar.Action icon="magnify" onPress={() => {}} />
-          </Tooltip>
-          <Tooltip title="Username">
-            <Avatar.Text size={24} label="U" />
           </Tooltip>
           <Tooltip title="More options">
             <Appbar.Action icon={MORE_ICON} onPress={() => {}} />
@@ -90,7 +86,7 @@ const styles = StyleSheet.create({
   fab: {
     position: 'absolute',
     margin: 16,
-    right: 0,
+    left: 10,
     bottom: 0,
   },
   toggleButtonRow: {
