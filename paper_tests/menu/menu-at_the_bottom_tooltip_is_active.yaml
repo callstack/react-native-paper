@@ -1,0 +1,32 @@
+appId: com.callstack.reactnativepaperexample
+# tc Menu-at the bottom tooltip is active
+---
+- openLink: exp://192.168.1.3:19000
+- scrollUntilVisible:
+    element:
+      text: "Menu"
+    direction: DOWN
+- tapOn: "Menu"
+- assertVisible:
+    id: "button"
+    index: 1
+- tapOn:
+    id: "button"
+    index: 1
+- assertVisible:
+    id: "menu-item"
+    index: 0
+- assertVisible:
+    id: "menu-item"
+    index: 1
+- assertVisible:
+    id: "button"
+    index: 1
+- tapOn: "Menu with icons Contextual menu List item Long press me to open contextual\
+    \ menu Menu at bottom"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP

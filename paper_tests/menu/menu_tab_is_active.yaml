@@ -1,0 +1,16 @@
+appId: com.callstack.reactnativepaperexample
+# tc Menu tab is active
+---
+- openLink: exp://192.168.1.3:19000
+- scrollUntilVisible:
+    element:
+      text: "Menu"
+    direction: DOWN
+- tapOn: "Menu"
+- assertVisible: "Menu with icons"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP

@@ -1,0 +1,21 @@
+appId: com.callstack.reactnativepaperexample
+# tc4 Mixed cases text input into the "Input with text align center" field >100 characters (116)
+# field won't allow to input more than 100 characters (116)
+---
+- openLink: exp://192.168.1.3:19000
+- scrollUntilVisible:
+    element:
+      text: "TextInput"
+    direction: DOWN
+- tapOn: "TextInput"
+- tapOn:
+    id: "text-input-flat"
+    index: 1
+- assertVisible: "Type something"
+- inputText: "Hello, Maestro!1 2 3# Icing caramels shortbread dragée cake marshmallow jelly-o shortbread powder. marshmallow jelly"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP
