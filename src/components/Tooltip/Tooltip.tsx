@@ -12,7 +12,6 @@ import {
 import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../../core/theming';
-import useAppBarHeight from '../../react-navigation/useAppBarHeight';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Text from '../Typography/Text';
@@ -74,7 +73,6 @@ const Tooltip = ({
   theme: themeOverrides,
   ...rest
 }: Props) => {
-  const headerHeight = useAppBarHeight();
   const theme = useInternalTheme(themeOverrides);
   const [visible, setVisible] = React.useState(false);
 
@@ -186,11 +184,7 @@ const Tooltip = ({
                 backgroundColor: theme.isV3
                   ? theme.colors.onSurface
                   : theme.colors.tooltip,
-                ...getTooltipPosition(
-                  measurement as Measurement,
-                  children,
-                  headerHeight
-                ),
+                ...getTooltipPosition(measurement as Measurement, children),
                 borderRadius: theme.roundness,
                 ...(measurement.measured ? styles.visible : styles.hidden),
               },

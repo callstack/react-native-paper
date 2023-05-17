@@ -71,10 +71,9 @@ const getTooltipXPosition = (
 
 const getTooltipYPosition = (
   { pageY: childrenY, height: childrenHeight }: ChildrenMeasurement,
-  { height: tooltipHeight }: TooltipLayout,
-  headerHeight: number = 0
+  { height: tooltipHeight }: TooltipLayout
 ): number => {
-  if (overflowBottom(childrenY, childrenHeight, tooltipHeight, headerHeight))
+  if (overflowBottom(childrenY, childrenHeight, tooltipHeight))
     return childrenY - tooltipHeight;
 
   return childrenY + childrenHeight;
@@ -118,8 +117,7 @@ export const getTooltipPosition = (
   { children, tooltip, measured }: Measurement,
   component: React.ReactElement<{
     style: ViewStyle | Array<ViewStyle> | undefined | null;
-  }>,
-  headerHeight: number = 0
+  }>
 ): {} | { left: number; top: number } => {
   if (!measured) return {};
   let measures = children;
@@ -129,6 +127,6 @@ export const getTooltipPosition = (
 
   return {
     left: getTooltipXPosition(measures, tooltip),
-    top: getTooltipYPosition(measures, tooltip, headerHeight),
+    top: getTooltipYPosition(measures, tooltip),
   };
 };
