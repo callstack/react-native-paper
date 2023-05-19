@@ -1,0 +1,32 @@
+appId: com.callstack.reactnativepaperexample
+# tc "Disabled inputs" fields are visible
+---
+- openLink: exp://192.168.1.3:19000
+- repeat:
+    times: 3
+    commands:
+      - swipe:
+          start: "68%,75%"
+          end: "82%,22%"
+          duration: 620
+- tapOn: "TextInput"
+- scrollUntilVisible:
+    element:
+      text: "Disabled flat input with adornments"
+    direction: DOWN
+- assertVisible: "Disabled inputs"
+- assertVisible: "Disabled flat input with value Disabled flat input with value"
+- assertVisible:
+    text: "Disabled flat input with adornments"
+    index: 0
+- assertVisible:
+    id: "text-input-outlined"
+    index: 3
+- assertVisible: "Disabled outlined input with value"
+- assertVisible: "Disabled flat input with adornments"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP

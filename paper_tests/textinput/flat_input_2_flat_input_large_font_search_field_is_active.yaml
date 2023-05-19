@@ -1,0 +1,24 @@
+appId: com.callstack.reactnativepaperexample
+# tc "Flat input large font" search field is active
+---
+- openLink: exp://192.168.1.3:19000
+- repeat:
+    times: 3
+    commands:
+      - swipe:
+          start: "68%,75%"
+          end: "82%,22%"
+          duration: 620
+- tapOn: "TextInput"
+- tapOn:
+    id: "text-input-flat"
+    index: 2
+- assertVisible: "#"
+- inputText: "lorem ipsum"
+- assertVisible: "lorem ipsum"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP

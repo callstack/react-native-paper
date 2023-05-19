@@ -1,0 +1,33 @@
+appId: com.callstack.reactnativepaperexample
+# tc "Dense flat input" field is active
+---
+- openLink: exp://192.168.1.3:19000
+- repeat:
+    times: 3
+    commands:
+      - swipe:
+          start: "68%,75%"
+          end: "82%,22%"
+          duration: 620
+- tapOn: "TextInput"
+- scrollUntilVisible:
+    element:
+      text: "Dense flat input Dense flat input"
+    direction: DOWN
+- assertVisible:
+    id: "text-input-flat"
+    index: 0
+- assertVisible:
+    id: "right-icon-adornment"
+- tapOn:
+    id: "text-input-flat"
+    index: 3
+- assertVisible: "Type something"
+- inputText: "@#$%^^&**(((AAAAA éééé  123456"
+- assertVisible: "@#$%^^&**(((AAAAA éééé  123456"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP

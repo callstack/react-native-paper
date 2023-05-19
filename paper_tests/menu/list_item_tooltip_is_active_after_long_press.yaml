@@ -1,0 +1,26 @@
+appId: com.callstack.reactnativepaperexample
+# tc List item tooltip is active after long press
+---
+- openLink: exp://192.168.1.3:19000
+- scrollUntilVisible:
+    element: "Menu"
+    direction: DOWN
+- tapOn: "Menu"
+- longPressOn: "List item Long press me to open contextual menu"
+- assertVisible:
+    id: "menu-surface"
+- assertVisible:
+    text: "menu item"
+    index: 0
+- assertVisible:
+    text: "menu item"
+    index: 1
+- tapOn:
+    id: "appbar-content-title-text"
+- tapOn:
+    id: "icon-button"
+    index: 0
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP

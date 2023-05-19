@@ -1,0 +1,32 @@
+appId: com.callstack.reactnativepaperexample
+# tc Input with helper text and character counter' field is active, incorrect data provided,special cases
+---
+- openLink: exp://192.168.1.3:19000
+- repeat:
+    times: 3
+    commands:
+      - swipe:
+          start: "68%,75%"
+          end: "82%,22%"
+          duration: 620
+- tapOn: "TextInput"
+- scrollUntilVisible:
+    element:
+      text: "Input with helper text and character counter"
+    direction: DOWN
+- assertVisible:
+    id: "text-input-flat"
+# - assertVisible: "Input with helper text and character counter"
+- assertVisible: "0 / 20"
+- tapOn:
+    id: "text-input-flat"
+- assertVisible: "Enter username, only letters"
+- inputText: "arnold_"
+- assertVisible: "Error: Numbers and special characters are not allowed"
+- assertVisible: "7 / 20"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP

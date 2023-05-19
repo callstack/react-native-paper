@@ -1,0 +1,32 @@
+appId: com.callstack.reactnativepaperexample
+# tc "Outlined input text area" field is active
+---
+- openLink: exp://192.168.1.3:19000
+- repeat:
+    times: 3
+    commands:
+      - swipe:
+          start: "68%,75%"
+          end: "82%,22%"
+          duration: 620
+- tapOn: "TextInput"
+- scrollUntilVisible:
+    element:
+      text: "Outlined input text area"
+    direction: DOWN
+- assertVisible:
+    id: "text-input-outlined"
+    index: 1
+# - assertVisible: "Outlined input text area"
+- tapOn:
+    id: "text-input-outlined"
+    index: 1
+- assertVisible: "Type something"
+- inputText: "@#$%^^&**(((AAAAA" éééé  123"
+- assertVisible: "@#$%^^&**(((AAAAA" éééé  123"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP
