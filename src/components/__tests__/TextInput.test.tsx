@@ -107,6 +107,19 @@ it('correctly applies textAlign center', () => {
   expect(toJSON()).toMatchSnapshot();
 });
 
+it('correctly applies cursorColor prop', () => {
+  const { toJSON } = render(
+    <TextInput
+      label="Flat input"
+      placeholder="Type something"
+      value={'Some test value'}
+      cursorColor={red500 as string}
+    />
+  );
+
+  expect(toJSON()).toMatchSnapshot();
+});
+
 it('correctly applies height to multiline Outline TextInput', () => {
   const { toJSON } = render(
     <TextInput
