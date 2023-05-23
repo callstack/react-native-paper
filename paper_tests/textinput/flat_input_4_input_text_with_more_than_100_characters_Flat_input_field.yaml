@@ -1,7 +1,7 @@
 appId: com.callstack.reactnativepaperexample
 # tc "Flat input" field won't allow to input more than 100 characters (116), test should fail
 ---
-- openLink: exp://192.168.1.3:19000
+- openLink: exp://192.168.1.7:19000
 - repeat:
     times: 3
     commands:

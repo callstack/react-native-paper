@@ -1,0 +1,34 @@
+appId: com.callstack.reactnativepaperexample
+# tc "Input with no padding" field is active, negative data entered
+---
+- openLink: exp://192.168.1.7:19000
+- repeat:
+    times: 3
+    commands:
+      - swipe:
+          start: "68%,75%"
+          end: "82%,22%"
+          duration: 620
+- tapOn: "TextInput"
+- repeat:
+    times: 6
+    commands:
+      - swipe:
+          start: "68%,75%"
+          end: "82%,22%"
+          duration: 620
+- assertVisible: "Input with no padding Input with no padding"
+- tapOn: "Input with no padding Input with no padding"
+- assertVisible: "Enter username, only letters"
+- inputText: "&"
+- assertVisible: "&"
+- assertVisible: "Error: Only letters are allowed"
+- eraseText: "&"
+- inputText: "%"
+- assertVisible: "%""
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP

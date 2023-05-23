@@ -1,5 +1,5 @@
 appId: com.callstack.reactnativepaperexample
-# tc3 Input text with special characters into "Input with text align center" field
+# tc "Outlined text input with error" field is active, all singns including whitespace are acceptable 
 ---
 - openLink: exp://192.168.1.7:19000
 - repeat:
@@ -11,16 +11,16 @@ appId: com.callstack.reactnativepaperexample
           duration: 620
 - tapOn: "TextInput"
 - repeat:
-    times: 7
+    times: 6
     commands:
       - swipe:
-          start: 68%,75%
-          end: 82%,22%
+          start: "68%,75%"
+          end: "82%,22%"
           duration: 620
-- tapOn:
-    id: "text-input-flat-label-inactive"
-    index: 3
-- inputText: "Kjkń∂ķ†ńķ∂ī†∆ī®∆Żźęłó∑ąę†1465461561684-15ßßß@!!!%^&"
+- assertVisible: "Outlined text input with error"
+- tapOn: "Outlined text input with error"
+- inputText: "@#$%^^&**(((AAAAA éééé Ń 123456 Tony Stark"
+- assertVisible: "@#$%^^&**(((AAAAA éééé Ń 123456 Tony Stark"
 - tapOn:
     id: "icon-button"
 - scrollUntilVisible:

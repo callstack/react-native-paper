@@ -1,0 +1,30 @@
+appId: com.callstack.reactnativepaperexample
+# tc "Outlined with super long label which is truncating at some point field is active, all singns including whitespace are acceptable, text is truncated 
+---
+- openLink: exp://192.168.1.7:19000
+- repeat:
+    times: 3
+    commands:
+      - swipe:
+          start: "68%,75%"
+          end: "82%,22%"
+          duration: 620
+- tapOn: "TextInput"
+- repeat:
+    times: 6
+    commands:
+      - swipe:
+          start: "68%,75%"
+          end: "82%,22%"
+          duration: 620
+- assertVisible: "Outlined with super long label which is truncating at some point"
+- tapOn: "Outlined with super long label which is truncating at some point"
+- assertVisible: "Type something"
+- inputText: " Lollipop gummi bears gingerbread pudding tiramisu pudding sugar plum dragée. Tootsie roll topping shortbread sweet jelly powder. Cake jujubes gingerbread cotton candy cotton candy marzipan lemon drops."
+- assertVisible: " Lollipop gummi bears gingerbread pudding tiramisu pudding sugar plum dragée. Tootsie roll topping shortbread sweet jelly powder. Cake jujubes gingerbread cotton candy cotton candy marzipan lemon drops."
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP
