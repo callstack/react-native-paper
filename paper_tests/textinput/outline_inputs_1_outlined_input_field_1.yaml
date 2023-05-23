@@ -1,8 +1,7 @@
 appId: com.callstack.reactnativepaperexample
-# tc "Outlined input" field intput cannot be longer than 100 characters
-# this tc is designed to fail,then its result will pass
+# tc "Outlined input" field is active
 ---
-- openLink: exp://192.168.1.3:19000
+- openLink: exp://192.168.1.7:19000
 - repeat:
     times: 3
     commands:
@@ -18,8 +17,8 @@ appId: com.callstack.reactnativepaperexample
     id: "text-input-outlined"
     index: 0
 - assertVisible: "Type something"
-- inputText: "Icing caramels shortbre@d dragée 1!cake marshmallow jelly-o shortbread powder. Shortbread sesame snaps muffin marzipan"
-- assertVisible: "Icing caramels shortbre@d dragée 1!cake marshmallow jelly-o shortbread powder. Shortbread sesame snaps muffin marzipan"
+- inputText: "Icing caramels shortbread dragée cake"
+- assertVisible: "Icing caramels shortbread dragée cake"
 - tapOn:
     id: "icon-button"
 - scrollUntilVisible:

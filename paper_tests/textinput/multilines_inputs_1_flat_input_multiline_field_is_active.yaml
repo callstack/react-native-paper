@@ -1,7 +1,7 @@
 appId: com.callstack.reactnativepaperexample
 # tc "Flat input multiline" field is active
 ---
-- openLink: exp://192.168.1.3:19000
+- openLink: exp://192.168.1.7:19000
 - repeat:
     times: 3
     commands:
@@ -18,9 +18,10 @@ appId: com.callstack.reactnativepaperexample
 - assertVisible:
     id: "text-input-flat"
 - assertVisible: "Flat input multiline"
-- tapOn:
-    id: "text-input-flat"
-    index: 0
+# - tapOn:
+#     id: "text-input-flat"
+#     index: 0
+- tapOn: "Flat input multiline Flat input multiline"
 - assertVisible: "Type something"
 - inputText: "@#$%^^&**(((AAAAA éééé  123456@#$%^^&**(((AAAAA éééé  123456@#$%^^&**(((AAAAA éééé  123456"
 - assertVisible: "@#$%^^&**(((AAAAA éééé  123456@#$%^^&**(((AAAAA éééé  123456@#$%^^&**(((AAAAA éééé  123456"

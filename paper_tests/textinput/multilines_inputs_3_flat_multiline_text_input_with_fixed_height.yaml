@@ -1,0 +1,33 @@
+appId: com.callstack.reactnativepaperexample
+# tc "Flat multiline text input with fixed height" field is active
+---
+- openLink: exp://192.168.1.7:19000
+- repeat:
+    times: 3
+    commands:
+      - swipe:
+          start: "68%,75%"
+          end: "82%,22%"
+          duration: 620
+- tapOn: "TextInput"
+- scrollUntilVisible:
+    element:
+      text: "Flat multiline text input with fixed height"
+    direction: DOWN
+# - assertVisible: "Flat multiline text input with fixed height"
+- assertVisible:
+    id: "text-input-flat"
+- assertVisible:
+    id: "text-input-flat-label-inactive"
+    index: 2
+- tapOn:
+    id: "text-input-flat-label-inactive"
+    index: 2
+- inputText: "@#$%^^&**(((AAAAA éééé  123 abc Icing caramels shortbread dragée cake marshmallow jelly-o shortbread powder. marshmallow jelly"
+- assertVisible: "@#$%^^&**(((AAAAA éééé  123 abc Icing caramels shortbread dragée cake marshmallow jelly-o shortbread powder. marshmallow jelly"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP

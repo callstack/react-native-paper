@@ -1,0 +1,38 @@
+appId: com.callstack.reactnativepaperexample
+# tc "Input with helper text" field is active,correct data provided
+---
+- openLink: exp://192.168.1.7:19000
+- repeat:
+    times: 3
+    commands:
+      - swipe:
+          start: "68%,75%"
+          end: "82%,22%"
+          duration: 620
+- tapOn: "TextInput"
+# - scrollUntilVisible:
+#     element:
+#       text: "Input with helper text"
+#     direction: DOWN
+# - assertVisible:
+#     id: "text-input-flat"
+# - tapOn:
+#     id: "text-input-outlined"
+#     index: 0
+- repeat:
+    times: 5
+    commands:
+      - swipe:
+          start: "68%,75%"
+          end: "82%,22%"
+          duration: 620
+- tapOn: "Input with helper text Input with helper text"
+- assertVisible: "Enter username, only letters"
+- inputText: "TonyStark"
+- assertVisible: "TonyStark"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element:
+      text: "Animated Floating Action Button"
+    direction: UP

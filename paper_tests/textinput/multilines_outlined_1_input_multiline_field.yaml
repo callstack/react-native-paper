@@ -1,7 +1,7 @@
 appId: com.callstack.reactnativepaperexample
-# tc "Outlined input text area" field is active
+# tc "Outlined input multiline" field is active
 ---
-- openLink: exp://192.168.1.3:19000
+- openLink: exp://192.168.1.7:19000
 - repeat:
     times: 3
     commands:
@@ -12,18 +12,18 @@ appId: com.callstack.reactnativepaperexample
 - tapOn: "TextInput"
 - scrollUntilVisible:
     element:
-      text: "Outlined input text area"
+      text: "Outlined input multiline"
     direction: DOWN
 - assertVisible:
     id: "text-input-outlined"
-    index: 1
-# - assertVisible: "Outlined input text area"
+    index: 0
+# - assertVisible: "Outlined input multiline"
 - tapOn:
     id: "text-input-outlined"
-    index: 1
+    index: 0
 - assertVisible: "Type something"
-- inputText: "@#$%^^&**(((AAAAA" éééé  123"
-- assertVisible: "@#$%^^&**(((AAAAA" éééé  123"
+- inputText: "@#$%^^&**(((AAAAA éééé  123 abc Icing caramels shortbread dragée cake marshmallow jelly-o shortbread powder. marshmallow jelly"
+- assertVisible: "@#$%^^&**(((AAAAA éééé  123 abc Icing caramels shortbread dragée cake marshmallow jelly-o shortbread powder. marshmallow jelly"
 - tapOn:
     id: "icon-button"
 - scrollUntilVisible:

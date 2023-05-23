@@ -1,7 +1,7 @@
 appId: com.callstack.reactnativepaperexample
 # tc "Input with helper text" field is active, incorrect data provided -special cases
 ---
-- openLink: exp://192.168.1.3:19000
+- openLink: exp://192.168.1.7:19000
 - repeat:
     times: 3
     commands:
@@ -10,16 +10,24 @@ appId: com.callstack.reactnativepaperexample
           end: "82%,22%"
           duration: 620
 - tapOn: "TextInput"
-- scrollUntilVisible:
-    element:
-      text: "Input with helper text"
-    direction: DOWN
+# - scrollUntilVisible:
+#     element:
+#       text: "Input with helper text"
+#     direction: DOWN
+- repeat:
+    times: 5
+    commands:
+      - swipe:
+          start: "68%,75%"
+          end: "82%,22%"
+          duration: 620
 - assertVisible:
     id: "text-input-flat"
 # - assertVisible: "Input with helper text"
-- tapOn:
-    id: "text-input-outlined"
-    index: 0
+# - tapOn:
+#     id: "text-input-outlined"
+#     index: 0
+- tapOn: "Input with helper text Input with helper text"
 - assertVisible: "Enter username, only letters"
 - inputText: "@"
 - assertVisible: "Error: Only letters are allowed"
