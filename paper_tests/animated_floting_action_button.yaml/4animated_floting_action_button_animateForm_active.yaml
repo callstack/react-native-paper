@@ -1,0 +1,13 @@
+appId: com.callstack.reactnativepaperexample
+# tc animateForm can be switched between left and right (changes its position)
+---
+- openLink: exp://192.168.1.7:19000
+- tapOn: "Animated Floating Action Button"
+- assertVisible: "iconMode"
+
+- assertVisible:
+    id: "animated-fab-container"
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"
+- assertVisible: "Examples"

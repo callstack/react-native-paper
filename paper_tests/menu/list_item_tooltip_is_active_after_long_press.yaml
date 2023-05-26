@@ -1,7 +1,7 @@
 appId: com.callstack.reactnativepaperexample
 # tc List item tooltip is active after long press
 ---
-- openLink: exp://192.168.1.3:19000
+- openLink: exp://192.168.1.7:19000
 - scrollUntilVisible:
     element: "Menu"
     direction: DOWN

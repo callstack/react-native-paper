@@ -1,0 +1,25 @@
+appId: com.callstack.reactnativepaperexample
+# tc All alements Animated Floating Action Button screen are visible
+---
+- openLink: exp://192.168.1.7:19000
+- tapOn: "Animated Floating Action Button"
+- assertVisible: "Animated Floating Action Button"
+- assertVisible: "iconMode"
+- assertVisible: "static \U000f012c"
+- assertVisible: "dynamic \U000f012c"
+- assertVisible: "iconMode static \U000f012c dynamic \U000f012c Vertical scroll bar,
+     1 page Horizontal scroll bar, 1 page"
+- assertVisible: "animateFrom"
+- assertVisible: "left \U000f012c"
+- assertVisible: "right \U000f012c"
+- assertVisible:
+    id: "icon-button"
+- assertVisible: "Hermann, Pfannel & Schumm"
+- assertVisible: "29.1.2021"
+- assertVisible: "\U000f04d2"
+- assertVisible:
+    id: "animated-fab-container"
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"
+- assertVisible: "Examples"

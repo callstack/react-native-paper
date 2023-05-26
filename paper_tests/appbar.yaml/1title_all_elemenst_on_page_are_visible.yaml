@@ -1,0 +1,36 @@
+appId: com.callstack.reactnativepaperexample
+# tc  Title page elements are visible
+---
+- openLink: exp://192.168.1.7:19000
+- tapOn: "Appbar"
+- assertVisible:
+    id: "appbar-header"
+- assertVisible: "Default options"
+- assertVisible: "Left icon"
+- assertVisible: "Search icon"
+- assertVisible: "More icon"
+- assertVisible: "Calendar icon"
+- assertVisible: "Custom Color"
+- assertVisible: "Exact Dark Theme"
+- assertVisible: "Elevated"
+- assertVisible: "Appbar Modes"
+- assertVisible: "Small (default) \U000f012c"
+- assertVisible: "Medium \U000f012c"
+- assertVisible: "Large \U000f012c"
+- assertVisible:
+    id: "icon-button"
+    index: 3
+- assertVisible:
+    id: "icon-button"
+    index: 4
+- assertVisible:
+    id: "icon-button"
+    index: 5
+- assertVisible:
+    id: "icon-button"
+    index: 6
+- assertVisible:
+    id: "fab-content"
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"

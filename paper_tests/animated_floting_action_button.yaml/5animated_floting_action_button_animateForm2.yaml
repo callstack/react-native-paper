@@ -1,0 +1,33 @@
+appId: com.callstack.reactnativepaperexample
+# tc Switching between iconMode and animateForm changes the Animated floating button possition
+---
+- openLink: exp://192.168.1.7:19000
+- tapOn: "Animated Floating Action Button"
+- assertVisible: "iconMode"
+- assertVisible: "static \U000f012c"
+- tapOn: "dynamic \U000f012c"
+- assertVisible: "right \U000f012c"
+- tapOn:
+    point: "76%,95%"
+- tapOn:
+    point: "63%,95%"
+- tapOn: "left \U000f012c"
+- tapOn:
+    point: "36%,95%"
+- tapOn: "right \U000f012c"
+- tapOn:
+    point: "63%,95%"
+- tapOn:
+    point: "76%,95%"
+- tapOn: "left \U000f012c"
+- tapOn:
+    point: "24%,95%"
+- tapOn: "right \U000f012c"
+- tapOn:
+    point: "76%,95%"
+- assertVisible:
+    id: "animated-fab-container"
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"
+- assertVisible: "Examples"

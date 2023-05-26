@@ -1,0 +1,17 @@
+appId: com.callstack.reactnativepaperexample
+# tc  Custom color toggle makes the header color yelow/it is not possible to chack this with
+---
+- openLink: exp://192.168.1.7:19000
+- tapOn: "Appbar"
+- assertVisible: "Custom color"
+- assertVisible:
+    text: "0"
+    index: 1
+- tapOn:
+    point: "89%,51%" #this will go only locally; it is a bad solution but sinnce toggles don't have their id's it's the only solution
+- tapOn:
+    point: "89%,51%" #this will go only locally;
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"
+- assertVisible: "Examples"

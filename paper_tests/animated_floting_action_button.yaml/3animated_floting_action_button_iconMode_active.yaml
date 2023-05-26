@@ -1,0 +1,27 @@
+appId: com.callstack.reactnativepaperexample
+# tc iconMode can be switched between static and dynamic, + changes its position
+---
+- openLink: exp://192.168.1.7:19000
+- tapOn: "Animated Floating Action Button"
+- assertVisible: "Animated Floating Action Button"
+- assertVisible: "iconMode"
+- assertVisible: "static \U000f012c"
+- assertVisible:
+    id: "animated-fab-container-outer-layer"
+- tapOn: "dynamic \U000f012c"
+- tapOn:
+    point: "76%,95%"
+- tapOn:
+    point: "89%,95%"
+- tapOn: "dynamic \U000f012c"
+- tapOn:
+    point: "63%,95%"
+- tapOn: "static \U000f012c"
+- tapOn:
+    point: "89%,95%"
+- assertVisible:
+    id: "animated-fab-container"
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"
+- assertVisible: "Examples"

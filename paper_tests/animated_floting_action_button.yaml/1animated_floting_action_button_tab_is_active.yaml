@@ -1,0 +1,10 @@
+appId: com.callstack.reactnativepaperexample
+# tc Animated Floating Action Button tab is active
+---
+- openLink: exp://192.168.1.7:19000
+- tapOn: "Animated Floating Action Button"
+- assertVisible: "Animated Floating Action Button"
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"
+- assertVisible: "Examples"
