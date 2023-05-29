@@ -99,7 +99,11 @@ const ThemeColorsTable = ({
   componentName: string;
 }): JSX.Element | null => {
   if (!data) {
-    return null;
+    return (
+      <p>
+        🚧 <i>Theme colors will be added soon</i> 🚧
+      </p>
+    );
   }
 
   const uniqueKeys = getUniqueNestedKeys(data);
