@@ -37,12 +37,15 @@ function generatePageMDX(doc, link) {
     .replace(/src="screenshots/g, `src="${baseUrl}screenshots`)
     .replace(/@extends.+$/, '');
 
+  const data = JSON.stringify(customFields.themeColors[doc.title]);
+
   const mdx = `
 ---
 title: ${doc.title}
 ---
 
 import PropTable from '@site/src/components/PropTable.tsx';
+import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
 
 ${description}
 
@@ -51,6 +54,10 @@ ${generateMoreExamples(doc.title)}
 ## Props
 
 <PropTable link="${link}" />
+
+## Theme colors
+
+<ThemeColorsTable data={${data}} componentName="${doc.title}" />
 `;
 
   return mdx.slice(1);

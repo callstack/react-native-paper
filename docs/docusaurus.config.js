@@ -5,6 +5,8 @@ const path = require('path');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 
+const { themeColors } = require('./src/data/themeColors.js');
+
 const { NODE_ENV, DOCUSAURUS_BASE_URL } = process.env;
 
 const title = 'React Native Paper';
@@ -301,6 +303,7 @@ const config = {
           'https://snack.expo.dev/@react-native-paper/comprehensive-portal-example',
       },
     },
+    themeColors,
   },
 };
 
