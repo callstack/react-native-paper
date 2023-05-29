@@ -50,7 +50,7 @@ export type Props = {
    */
   style?: StyleProp<ViewStyle>;
   /**
-   * Specifies the largest possible scale a title font can reach.
+   * Specifies the largest possible scale a label font can reach.
    */
   labelMaxFontSizeMultiplier?: number;
   /**
@@ -181,7 +181,6 @@ const CheckboxItem = ({
             computedStyle,
             labelStyle,
           ]}
-          maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
         >
           {label}
         </Text>

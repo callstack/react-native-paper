@@ -159,6 +159,7 @@ exports[`renders chip with close button 1`] = `
           </Text>
         </View>
         <Text
+          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -454,6 +455,7 @@ exports[`renders chip with custom close button 1`] = `
           </Text>
         </View>
         <Text
+          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -749,6 +751,7 @@ exports[`renders chip with icon 1`] = `
           </Text>
         </View>
         <Text
+          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -906,6 +909,7 @@ exports[`renders chip with onPress 1`] = `
         }
       >
         <Text
+          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -1063,6 +1067,7 @@ exports[`renders outlined disabled chip 1`] = `
         }
       >
         <Text
+          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -1272,6 +1277,7 @@ exports[`renders selected chip 1`] = `
           </Text>
         </View>
         <Text
+          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={

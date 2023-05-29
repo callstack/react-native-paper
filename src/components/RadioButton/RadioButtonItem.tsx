@@ -77,6 +77,10 @@ export type Props = {
    */
   labelVariant?: keyof typeof MD3TypescaleKey;
   /**
+   * Specifies the largest possible scale a label font can reach.
+   */
+  labelMaxFontSizeMultiplier?: number;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -133,7 +137,7 @@ const RadioButtonItem = ({
   mode,
   position = 'trailing',
   labelVariant = 'bodyLarge',
-  labelMaxFontSizeMultiplier,
+  labelMaxFontSizeMultiplier = 1.5,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const radioButtonProps = {

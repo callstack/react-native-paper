@@ -264,6 +264,7 @@ exports[`renders snackbar with action button 1`] = `
       testID="surface"
     >
       <Text
+        maxFontSizeMultiplier={1.5}
         style={
           [
             {
@@ -409,6 +410,7 @@ exports[`renders snackbar with action button 1`] = `
                 }
               >
                 <Text
+                  maxFontSizeMultiplier={1.5}
                   numberOfLines={1}
                   selectable={false}
                   style={
@@ -533,6 +535,7 @@ exports[`renders snackbar with content 1`] = `
       testID="surface"
     >
       <Text
+        maxFontSizeMultiplier={1.5}
         style={
           [
             {

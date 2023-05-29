@@ -50,6 +50,10 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * Changes Banner shadow and background on iOS and Android.
    */
   elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+  /**
+   * Specifies the largest possible scale a text font can reach.
+   */
+  maxFontSizeMultiplier?: number;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   ref?: React.RefObject<View>;
   /**
@@ -123,7 +127,7 @@ const Banner = ({
   theme: themeOverrides,
   onShowAnimationFinished = () => {},
   onHideAnimationFinished = () => {},
-  maxFontSizeMultiplier,
+  maxFontSizeMultiplier = 1.5,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);

@@ -96,6 +96,14 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * @internal
    */
   total?: number;
+  /**
+   * Specifies the largest possible scale a title font can reach.
+   */
+  titleMaxFontSizeMultiplier?: number;
+  /**
+   * Specifies the largest possible scale a subtitle font can reach.
+   */
+  subtitleMaxFontSizeMultiplier?: number;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -130,12 +138,12 @@ const CardTitle = ({
   titleStyle,
   titleNumberOfLines = 1,
   titleVariant = 'bodyLarge',
-  titleMaxFontSizeMultiplier,
+  titleMaxFontSizeMultiplier = 1.5,
   subtitle,
   subtitleStyle,
   subtitleNumberOfLines = 1,
   subtitleVariant = 'bodyMedium',
-  subtitleMaxFontSizeMultiplier,
+  subtitleMaxFontSizeMultiplier = 1.5,
   left,
   leftStyle,
   right,

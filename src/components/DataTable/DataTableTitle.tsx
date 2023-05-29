@@ -47,6 +47,10 @@ export type Props = React.ComponentPropsWithRef<
    */
   textStyle?: StyleProp<TextStyle>;
   /**
+   * Specifies the largest possible scale a text font can reach.
+   */
+  maxFontSizeMultiplier?: number;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -87,7 +91,7 @@ const DataTableTitle = ({
   style,
   theme: themeOverrides,
   numberOfLines = 1,
-  maxFontSizeMultiplier,
+  maxFontSizeMultiplier = 1.5,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);

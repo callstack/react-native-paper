@@ -145,6 +145,7 @@ exports[`can render leading radio button control 1`] = `
       </View>
     </View>
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         [
           {
@@ -240,6 +241,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
     }
   >
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         [
           {
@@ -392,6 +394,7 @@ exports[`can render the iOS radio button on different platforms 1`] = `
     }
   >
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         [
           {
@@ -576,6 +579,7 @@ exports[`renders unchecked 1`] = `
     }
   >
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         [
           {

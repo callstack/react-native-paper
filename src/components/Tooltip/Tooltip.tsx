@@ -35,6 +35,10 @@ export type Props = {
    */
   title: string;
   /**
+   * Specifies the largest possible scale a title font can reach.
+   */
+  titleMaxFontSizeMultiplier?: number;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -65,7 +69,7 @@ const Tooltip = ({
   leaveTouchDelay = 1500,
   title,
   theme: themeOverrides,
-  titleMaxFontSizeMultiplier,
+  titleMaxFontSizeMultiplier = 1.5,
   ...rest
 }: Props) => {
   const isWeb = Platform.OS === 'web';

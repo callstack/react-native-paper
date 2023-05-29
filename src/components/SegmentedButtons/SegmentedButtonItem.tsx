@@ -79,6 +79,10 @@ export type Props = {
    * Density is applied to the height, to allow usage in denser UIs.
    */
   density?: 'regular' | 'small' | 'medium' | 'high';
+  /**
+   * Specifies the largest possible scale a label font can reach.
+   */
+  labelMaxFontSizeMultiplier?: number;
   style?: StyleProp<ViewStyle>;
   /**
    * Style for the button label.
@@ -111,7 +115,7 @@ const SegmentedButtonItem = ({
   segment,
   density = 'regular',
   theme: themeOverrides,
-  labelMaxFontSizeMultiplier,
+  labelMaxFontSizeMultiplier = 1.5,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 

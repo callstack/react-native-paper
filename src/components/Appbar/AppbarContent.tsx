@@ -64,6 +64,10 @@ export type Props = $RemoveChildren<typeof View> & {
    */
   color?: string;
   /**
+   * Specifies the largest possible scale a title font can reach.
+   */
+  titleMaxFontSizeMultiplier?: number;
+  /**
    * @internal
    */
   mode?: 'small' | 'medium' | 'large' | 'center-aligned';
@@ -105,7 +109,7 @@ const AppbarContent = ({
   titleRef,
   titleStyle,
   title,
-  titleMaxFontSizeMultiplier,
+  titleMaxFontSizeMultiplier = 1.5,
   mode = 'small',
   theme: themeOverrides,
   testID = 'appbar-content',

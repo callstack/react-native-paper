@@ -165,6 +165,7 @@ exports[`renders avatar with text 1`] = `
   }
 >
   <Text
+    maxFontSizeMultiplier={1.5}
     numberOfLines={1}
     style={
       [
@@ -219,6 +220,7 @@ exports[`renders avatar with text and custom background color 1`] = `
   }
 >
   <Text
+    maxFontSizeMultiplier={1.5}
     numberOfLines={1}
     style={
       [
@@ -273,6 +275,7 @@ exports[`renders avatar with text and custom colors 1`] = `
   }
 >
   <Text
+    maxFontSizeMultiplier={1.5}
     numberOfLines={1}
     style={
       [
@@ -327,6 +330,7 @@ exports[`renders avatar with text and custom size 1`] = `
   }
 >
   <Text
+    maxFontSizeMultiplier={1.5}
     numberOfLines={1}
     style={
       [
