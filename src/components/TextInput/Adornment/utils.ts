@@ -20,7 +20,22 @@ export function getTextColor({ theme, disabled }: BaseProps) {
     .string();
 }
 
-export function getIconColor({ theme, disabled }: BaseProps) {
+export function getIconColor({
+  theme,
+  isTextInputFocused,
+  disabled,
+  customColor,
+}: BaseProps & {
+  isTextInputFocused: boolean;
+  customColor?: ((isTextInputFocused: boolean) => string | undefined) | string;
+}) {
+  if (typeof customColor === 'function') {
+    return customColor(isTextInputFocused);
+  }
+  if (customColor) {
+    return customColor;
+  }
+
   if (!theme.isV3) {
     return theme.colors.text;
   }

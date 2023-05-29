@@ -131,7 +131,7 @@ const TextInputIcon = ({
   icon,
   onPress,
   forceTextInputFocus,
-  color,
+  color: customColor,
   theme: themeOverrides,
   ...rest
 }: Props) => {
@@ -151,7 +151,12 @@ const TextInputIcon = ({
 
   const theme = useInternalTheme(themeOverrides);
 
-  const iconColor = getIconColor({ theme, disabled });
+  const iconColor = getIconColor({
+    theme,
+    disabled,
+    isTextInputFocused,
+    customColor,
+  });
 
   return (
     <View style={[styles.container, style]}>
@@ -160,9 +165,7 @@ const TextInputIcon = ({
         style={styles.iconButton}
         size={ICON_SIZE}
         onPress={onPressWithFocusControl}
-        iconColor={
-          typeof color === 'function' ? color(isTextInputFocused) : iconColor
-        }
+        iconColor={iconColor}
         testID={testID}
         theme={themeOverrides}
         {...rest}
