@@ -197,9 +197,26 @@ const config = {
           editUrl: (params) => {
             const urlToMain =
               'https://github.com/callstack/react-native-paper/tree/main';
+
             if (params.docPath.includes('guides')) {
               return `${urlToMain}/docs/docs/${params.docPath}`;
             }
+
+            const customUrls = {
+              TextInputAffix:
+                'src/components/TextInput/Adornment/TextInputAffix.tsx',
+              TextInputIcon:
+                'src/components/TextInput/Adornment/TextInputIcon.tsx',
+              Text: 'src/components/Typography/Text.tsx',
+            };
+
+            const customUrlComponent =
+              params.docPath.match(/\/?([^/]+)\.mdx$/)[1];
+
+            if (customUrls[customUrlComponent]) {
+              return `${urlToMain}/${customUrls[customUrlComponent]}`;
+            }
+
             return `${urlToMain}/src/${params.docPath.replace('mdx', 'tsx')}`;
           },
 
