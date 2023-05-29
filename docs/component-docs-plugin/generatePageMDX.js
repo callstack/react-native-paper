@@ -47,10 +47,6 @@ title: ${doc.title}
 import PropTable from '@site/src/components/PropTable.tsx';
 import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
 
-## Theme colors
-
-<ThemeColorsTable data={${data}} componentName="${doc.title}" />
-
 ${description}
 
 ${generateMoreExamples(doc.title)}
@@ -58,6 +54,10 @@ ${generateMoreExamples(doc.title)}
 ## Props
 
 <PropTable link="${link}" />
+
+## Theme colors
+
+<ThemeColorsTable data={${data}} componentName="${doc.title}" />
 `;
 
   return mdx.slice(1);
