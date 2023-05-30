@@ -1,17 +1,17 @@
 appId: com.callstack.reactnativepaperexample
 # tc  Search icon toggle makes the magnifier disappear when Off
 ---
-- openLink: exp://192.168.1.7:19000
+- openLink: exp://192.168.1.9:19000
 - tapOn: "Appbar"
 - assertVisible:
     text: "1"
-    index: 2
+    index: 1
 - assertVisible: "\U000f01d8"
 - tapOn:
-    point: "89%,34%" #this will go only locally; it is a bad solution but sinnce toggles don't have their id's it's the only solution
-- assertNotVisible: "\U000f01d8"
+    point: "89%,29%" #this will go only locally; it is a bad solution but sinnce toggles don't have their id's it's the only solution
+- assertVisible: "\U000f01d8"
 - tapOn:
-    point: "89%,34%" #this will go only locally;
+    point: "89%,29%" #this will go only locally;
 - assertVisible: "\U000f01d8"
 - assertVisible: "Back"
 - tapOn:

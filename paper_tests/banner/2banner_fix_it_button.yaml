@@ -1,0 +1,15 @@
+appId: com.callstack.reactnativepaperexample
+# tc Fix it button hide top screen banner
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Banner"
+- assertVisible:
+    id: "surface-outer-layer"
+- tapOn:
+    id: "button"
+    index: 1
+- assertNotVisible:
+    id: "surface-outer-layer"
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"

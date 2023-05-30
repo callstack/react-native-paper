@@ -1,0 +1,15 @@
+appId: com.callstack.reactnativepaperexample
+# tc Home and Settings buttons are active
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Bottom Navigation Bar"
+- assertVisible: "Home!"
+- tapOn: "\U000f0493 \U000f0493 Settings Settings"
+- assertNotVisible: "Home!"
+- assertVisible: "Settings!"
+- tapOn: "\U000f02dc \U000f02dc Home Home"
+- assertNotVisible: "Settings!"
+- assertVisible: "Home!"
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"

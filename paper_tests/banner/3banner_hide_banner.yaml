@@ -1,0 +1,26 @@
+appId: com.callstack.reactnativepaperexample
+# tc Hide banner button is sctive, it can hide and show the top screen banner(surface)
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Banner"
+- assertVisible:
+    id: "surface-outer-layer"
+- tapOn:
+    id: "button"
+    index: 1
+- assertNotVisible:
+    id: "surface-outer-layer"
+- assertVisible: "\U000f0208 Show banner"
+- tapOn: "Show banner"
+- assertVisible:
+    id: "surface-outer-layer"
+- assertVisible: "\U000f0208 Hide banner"
+- tapOn:
+    id: "button"
+    index: 1
+- assertNotVisible:
+    id: "surface-outer-layer"
+- assertVisible: "\U000f0208 Show banner"
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"

@@ -1,7 +1,7 @@
 appId: com.callstack.reactnativepaperexample
 # tc  Title page elements are visible
 ---
-- openLink: exp://192.168.1.7:19000
+- openLink: exp://192.168.1.9:19000
 - tapOn: "Appbar"
 - assertVisible:
     id: "appbar-header"
@@ -31,6 +31,21 @@ appId: com.callstack.reactnativepaperexample
     index: 6
 - assertVisible:
     id: "fab-content"
+- tapOn:
+    text: "radio button, not checked"
+    index: 1
+- assertVisible: "radio button, checked"
+- tapOn:
+    text: "radio button, not checked"
+    index: 1
+- assertVisible: "radio button, checked"
+- tapOn:
+    text: "radio button, not checked"
+    index: 0
+- assertVisible: "radio button, checked"
+- assertVisible:
+    text: "radio button, not checked"
+    index: 2
 - assertVisible: "Back"
 - tapOn:
     id: "icon-button"

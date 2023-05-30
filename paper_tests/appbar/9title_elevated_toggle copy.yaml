@@ -1,0 +1,17 @@
+appId: com.callstack.reactnativepaperexample
+# tc  Elevated toggle makes the header color is changed/it is not possible to chack this with maestro
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Appbar"
+- assertVisible: "Elevated"
+- tapOn:
+    text: "0"
+    index: 3
+- tapOn:
+    point: "89%,57%" #this will go only locally; it is a bad solution but sinnce toggles don't have their id's it's the only solution
+- tapOn:
+    point: "89%,57%" #this will go only locally;
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"
+- assertVisible: "Examples"

@@ -1,0 +1,51 @@
+appId: com.callstack.reactnativepaperexample
+# tc Checkboxes can be unchacked
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Checkbox Item"
+- assertVisible:
+    id: "icon-button"
+- assertVisible: "Checkbox Item"
+- assertVisible:
+    text: "checkbox, checked"
+    index: 0
+- tapOn:
+    text: "checkbox, checked"
+    index: 0
+- assertVisible: "checkbox, not checked"
+- assertVisible:
+    text: "checkbox, checked"
+    index: 0
+- tapOn:
+    text: "checkbox, checked"
+    index: 0
+- assertVisible:
+    text: "checkbox, not checked"
+    index: 1
+- assertVisible:
+    text: "checkbox, checked"
+    index: 0
+- tapOn:
+    text: "checkbox, checked"
+    index: 0
+- assertVisible:
+    text: "checkbox, not checked"
+    index: 2
+- assertVisible:
+    text: "checkbox, checked"
+    index: 0
+- tapOn:
+    text: "checkbox, checked"
+    index: 0
+- assertVisible:
+    text: "checkbox, not checked"
+    index: 3
+- assertVisible:
+    text: "checkbox, checked"
+    index: 1
+- tapOn:
+    text: "checkbox, checked"
+    index: 1
+- assertVisible:
+    text: "checkbox, not checked"
+    index: 4

@@ -1,0 +1,31 @@
+appId: com.callstack.reactnativepaperexample
+# tc Bottom Navigation dropdown elements are active
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Bottom Navigation"
+- tapOn:
+    id: "icon-button"
+    index: 1
+- assertVisible:
+    id: "menu-item"
+    index: 0
+- assertVisible:
+    id: "icon-button"
+    index: 1
+- assertVisible:
+    id: "menu-item"
+    index: 1
+- assertVisible: "Scene animation: shifting"
+- tapOn:
+    id: "menu-item"
+    index: 1
+- tapOn:
+    id: "icon-button"
+    index: 1
+- assertVisible: "Scene animation: opacity"
+- tapOn:
+    id: "menu-item"
+    index: 2
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"

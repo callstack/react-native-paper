@@ -1,0 +1,21 @@
+appId: com.callstack.reactnativepaperexample
+# tc Bottom Navigation tab -page elements are visible
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Bottom Navigation"
+- assertVisible:
+    id: "icon-button"
+    index: 0
+- assertVisible:
+    id: "appbar-content-title-text"
+- assertVisible:
+    id: "icon-button"
+    index: 1
+- assertVisible:
+    id: "RouteScreen: 0"
+- assertVisible: "\U000f02ea \U000f02ea Album Album"
+- assertVisible: "\U000f0687 \U000f1274 Library Library"
+- assertVisible: "\U000f02d1 \U000f02d5 Favorites Favorites"
+- assertVisible: "\U000f049a \U000f11d5 Purchased Purchased"
+- tapOn:
+    id: "icon-button"

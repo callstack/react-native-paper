@@ -1,7 +1,7 @@
 appId: com.callstack.reactnativepaperexample
 # tc  Left icon toggle makes back arrow disappear when Off
 ---
-- openLink: exp://192.168.1.7:19000
+- openLink: exp://192.168.1.9:19000
 - tapOn: "Appbar"
 - assertVisible:
     text: "1"

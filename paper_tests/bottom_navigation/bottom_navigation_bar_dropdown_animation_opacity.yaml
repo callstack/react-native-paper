@@ -1,0 +1,22 @@
+appId: com.callstack.reactnativepaperexample
+# tc Bottom Navigation, animation is changed when the opacity mode is selected
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Bottom Navigation"
+- tapOn:
+    id: "icon-button"
+    index: 1
+- assertVisible:
+    id: "menu-item"
+    index: 2
+- tapOn:
+    id: "menu-item"
+    index: 2
+- tapOn: "\U000f02d1 \U000f02d5 Favorites Favorites"
+- tapOn: "\U000f049a \U000f11d5 Purchased Purchased"
+- tapOn: "\U000f02ea \U000f02ea Album Album"
+- tapOn: "\U000f0687 \U000f1274 Library Library"
+# either maestro or page elements won't allow to measure animation while switching between screens
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"

@@ -1,0 +1,57 @@
+appId: com.callstack.reactnativepaperexample
+# tc  Appbar Modes can be switched between small, medium, large, center-aligned
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Appbar"
+- assertVisible: "Small (default) \U000f012c"
+- assertVisible: "radio button, checked"
+- assertVisible: "Medium \U000f012c"
+- assertVisible: "Large \U000f012c"
+- assertVisible: "Center-aligned \U000f012c"
+- tapOn:
+    text: "radio button, not checked"
+    index: 0
+- assertNotVisible: 
+    text: "Large \U000f012c"
+    enabled: "false"
+- tapOn:
+    text: "radio button, not checked"
+    index: 0
+- assertVisible: "Large \U000f012c"
+- assertVisible:
+    text: "radio button, not checked"
+    index: 0
+- tapOn:
+    text: "radio button, not checked"
+    index: 1
+- swipe:
+    start: "62%,80%"
+    end: "73%,31%"
+    duration: 445
+- assertVisible: "Large \U000f012c"
+- assertVisible: "Center-aligned \U000f012c"
+- tapOn:
+    text: "radio button, not checked"
+    index: 2
+- assertNotVisible: 
+    text: "Default options"
+    enabled: "false"
+- tapOn:
+    text: "radio button, not checked"
+    index: 1
+- assertVisible: "radio button, checked"
+- tapOn:
+    text: "radio button, not checked"
+    index: 1
+- assertVisible: "radio button, checked"
+- tapOn:
+    text: "radio button, not checked"
+    index: 0
+- assertVisible: "radio button, checked"
+- assertVisible:
+    text: "radio button, not checked"
+    index: 2
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"
+- assertVisible: "Examples"

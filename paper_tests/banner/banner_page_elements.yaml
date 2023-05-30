@@ -1,0 +1,26 @@
+appId: com.callstack.reactnativepaperexample
+# tc Banner tab is active, its elements are visible
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Banner"
+- assertVisible:
+    id: "icon-button"
+- assertVisible:
+    id: "appbar-content"
+- assertVisible:
+    id: "icon-button"
+- assertVisible: "Two line text string with two actions. One to two lines is preferable on mobile."
+- assertVisible:
+    id: "button"
+    index: 0
+- assertVisible:
+    id: "button"
+    index: 1
+- assertVisible:
+    id: "fab-content"
+- assertVisible: "\U000f0208"
+- assertVisible:
+    id: "fab-text"
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"

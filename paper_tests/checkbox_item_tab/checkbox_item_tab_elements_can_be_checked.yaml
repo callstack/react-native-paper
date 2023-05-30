@@ -1,0 +1,36 @@
+appId: com.callstack.reactnativepaperexample
+# tc Checkboxes can be chacked
+---
+- openLink: exp://192.168.1.9:19000
+- runFlow: checkbox_item_tab_elements_can_be_unchecked.yaml
+- tapOn:
+    id: "appbar-header"
+- assertVisible:
+    text: "checkbox, checked"
+    index: 0
+- tapOn:
+    text: "checkbox, not checked"
+    index: 0
+- assertVisible:
+    text: "checkbox, checked"
+    index: 1
+- tapOn:
+    text: "checkbox, not checked"
+    index: 0
+- assertVisible:
+    text: "checkbox, checked"
+    index: 2
+- tapOn:
+    text: "checkbox, not checked"
+    index: 0
+- assertVisible:
+    text: "checkbox, checked"
+    index: 3
+# - tapOn: "checkbox, not checked"
+- tapOn: "Default with titleLarge title variant"
+- assertVisible:
+    text: "checkbox, checked"
+    index: 4
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"

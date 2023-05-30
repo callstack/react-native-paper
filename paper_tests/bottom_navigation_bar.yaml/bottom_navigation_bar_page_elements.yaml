@@ -1,0 +1,15 @@
+appId: com.callstack.reactnativepaperexample
+# tc Bottom Navigation Bar -page elements are visible
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Bottom Navigation Bar"
+- assertVisible:
+    id: "icon-button"
+- assertVisible:
+    id: "appbar-content-title-text"
+- assertVisible: "Home!"
+- assertVisible: "\U000f02dc \U000f02dc Home Home"
+- assertVisible: "\U000f0493 \U000f0493 Settings Settings"
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"
