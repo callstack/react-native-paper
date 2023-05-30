@@ -30,6 +30,17 @@ function generateMoreExamples(componentName) {
   `;
 }
 
+function generateThemeColors(componentName, data) {
+  if (!data) {
+    return null;
+  }
+  return `
+  ## Theme colors
+
+  <ThemeColorsTable data={${data}} componentName="${componentName}" />
+  `;
+}
+
 function generatePageMDX(doc, link) {
   const description = doc.description
     .replace(/<\/br>/g, '')
@@ -55,9 +66,7 @@ ${generateMoreExamples(doc.title)}
 
 <PropTable link="${link}" />
 
-## Theme colors
-
-<ThemeColorsTable data={${data}} componentName="${doc.title}" />
+${generateThemeColors(doc.title, data)}
 `;
 
   return mdx.slice(1);

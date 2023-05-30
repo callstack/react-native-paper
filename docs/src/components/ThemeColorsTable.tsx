@@ -95,17 +95,9 @@ const ThemeColorsTable = ({
   data,
   componentName,
 }: {
-  data?: DataObject;
+  data: DataObject;
   componentName: string;
 }): JSX.Element | null => {
-  if (!data) {
-    return (
-      <p>
-        🚧 <i>Theme colors will be added soon</i> 🚧
-      </p>
-    );
-  }
-
   const uniqueKeys = getUniqueNestedKeys(data);
   const nestingLevel = getMaxNestedLevel(data);
   const isFlatTable = nestingLevel === 1;
