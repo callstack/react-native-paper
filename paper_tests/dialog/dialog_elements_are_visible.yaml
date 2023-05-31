@@ -1,0 +1,27 @@
+appId: com.callstack.reactnativepaperexample
+# tc Dialog -page elements are visible
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Dialog"
+- assertVisible:
+    id: "button"
+    index: 0
+- assertVisible:
+    id: "button"
+    index: 1
+- assertVisible:
+    id: "button"
+    index: 2
+- assertVisible:
+    id: "button"
+    index: 3
+- assertVisible:
+    id: "button"
+    index: 4
+- assertVisible:
+    id: "button"
+    index: 5
+- tapOn:
+    id: "icon-button"
+- assertVisible:
+    id: "appbar-content-title-text"

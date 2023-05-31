@@ -1,0 +1,38 @@
+appId: com.callstack.reactnativepaperexample
+# tc Number rows per page can be changed
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Data Table"
+- assertVisible: "\U000f035d 2"
+- assertNotVisible: "Frozen yogurt 159 6"
+- tapOn: "\U000f035d 2"
+- assertVisible:
+    id: "menu-surface"
+- tapOn:
+    id: "menu-item"
+    index: 1
+- assertVisible: "\U000f035d 3"
+- assertVisible: "Frozen yogurt 159 6"
+- tapOn:
+    id: "button"
+- assertVisible:
+    id: "menu-surface"
+- tapOn:
+    id: "menu-item"
+    index: 2
+- assertVisible: "\U000f035d 4"
+- assertVisible: "Gingerbread 305 3.7"
+- tapOn:
+    id: "button"
+- assertVisible:
+    id: "menu-surface"
+- tapOn:
+    id: "menu-item"
+    index: 3
+- assertVisible: "\U000f035d 200"
+- assertVisible: "Ice cream sandwich 237 9"
+- assertVisible: "Jelly Bean 375 0"
+- tapOn:
+    id: "icon-button"
+- assertVisible:
+    id: "appbar-content-title-text"

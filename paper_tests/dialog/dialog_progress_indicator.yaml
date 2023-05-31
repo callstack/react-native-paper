@@ -1,0 +1,18 @@
+appId: com.callstack.reactnativepaperexample
+# tc Progress indicator pop up visible when tab is tapped
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Dialog"
+- assertVisible: "Progress indicator"
+- tapOn:
+    id: "button"
+    index: 2
+- assertVisible: "Progress Dialog"
+- assertVisible: "Loading....."
+- tapOn:
+    id: "icon-button"
+- assertNotVisible: "Progress Dialog"
+- tapOn:
+    id: "icon-button"
+- assertVisible:
+    id: "appbar-content-title-text"

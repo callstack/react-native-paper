@@ -1,0 +1,25 @@
+appId: com.callstack.reactnativepaperexample
+# tc Radio buttons pop up visible when tab is tapped
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Dialog"
+- assertVisible: "Radio buttons"
+- tapOn:
+    id: "button"
+    index: 1
+- assertVisible:
+    id: "modal-surface"
+- assertVisible: "Choose an option"
+- assertVisible: "\U000f012c Option 1"
+- assertVisible: "\U000f012c Option 2"
+- assertVisible: "\U000f012c Option 3"
+- tapOn: "\U000f012c Option 2"
+- tapOn:
+    id: "button"
+    index: 6
+- assertNotVisible:
+    id: "modal-surface"
+- tapOn:
+    id: "icon-button"
+- assertVisible:
+    id: "appbar-content-title-text"

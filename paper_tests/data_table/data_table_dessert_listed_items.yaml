@@ -1,0 +1,17 @@
+appId: com.callstack.reactnativepaperexample
+# tc Tapping to Dessert changes desserts list content 
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Data Table"
+- assertVisible: "Cupcake 356 16"
+- assertVisible: "Eclair 262 16"
+- tapOn: "\U000f005d Dessert"
+- assertVisible: "Jelly Bean 375 0"
+- assertVisible: "Ice cream sandwich 237 9"
+- tapOn: "\U000f005d Dessert"
+- assertVisible: "Cupcake 356 16"
+- assertVisible: "Eclair 262 16"
+- tapOn:
+    id: "icon-button"
+- assertVisible:
+    id: "appbar-content-title-text"

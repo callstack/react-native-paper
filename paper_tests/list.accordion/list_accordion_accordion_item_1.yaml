@@ -1,0 +1,24 @@
+appId: com.callstack.reactnativepaperexample
+# tc Accordion item 1 is expandable
+---
+- openLink: exp://192.168.1.9:19000
+- scrollUntilVisible:
+    element: "List.Accordion"
+    direction: DOWN
+- tapOn: "List.Accordion"
+- assertVisible: "\U000f04ce Accordion item 1 \U000f0140"
+- tapOn:
+    text: "collapsed"
+    index: 2
+- assertVisible: "\U000f0513 List item 1"
+- assertVisible: "\U000f0511 List item 2"
+- tapOn:
+    text: "expanded"
+    index: 1
+- assertNotVisible: "\U000f0513 List item 1"
+- assertNotVisible: "\U000f0511 List item 2"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

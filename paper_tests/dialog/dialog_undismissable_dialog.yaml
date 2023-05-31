@@ -1,0 +1,25 @@
+appId: com.callstack.reactnativepaperexample
+# tc Undismissable dialog pop up visible when tab is tapped
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Dialog"
+- assertVisible: "Undismissable Dialog"
+- tapOn:
+    id: "button"
+    index: 3
+- assertVisible: "Alert"
+- assertVisible: "This is an undismissable dialog!!"
+- assertVisible:
+    id: "button"
+    index: 6
+- assertVisible:
+    id: "button"
+    index: 7
+- tapOn:
+    id: "button"
+    index: 7
+- assertNotVisible: "Alert"
+- tapOn:
+    id: "icon-button"
+- assertVisible:
+    id: "appbar-content-title-text"

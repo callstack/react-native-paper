@@ -1,0 +1,19 @@
+appId: com.callstack.reactnativepaperexample
+# tc Custom colors pop up visible when tab is tapped
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Dialog"
+- assertVisible: "Custom colors"
+- tapOn:
+    id: "button"
+    index: 4
+- assertVisible: "Alert"
+- assertVisible: "This is a dialog with custom colors"
+- tapOn:
+    id: "button"
+    index: 6
+- assertNotVisible: "Alert"
+- tapOn:
+    id: "icon-button"
+- assertVisible:
+    id: "appbar-content-title-text"

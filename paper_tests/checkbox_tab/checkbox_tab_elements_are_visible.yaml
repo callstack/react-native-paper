@@ -1,0 +1,16 @@
+appId: com.callstack.reactnativepaperexample
+# tc Checkbox Item -page elements are visible
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Checkbox"
+- assertVisible: "Back"
+- assertVisible: "Checkbox"
+- assertVisible: "Normal \U000f012c"
+- assertVisible: "Custom \U000f012c"
+- assertVisible: "Indeterminate \U000f0374"
+- assertVisible: "Checked (Disabled) \U000f012c"
+- assertVisible: "Unchecked (Disabled) \U000f012c"
+- assertVisible: "Indeterminate (Disabled) \U000f0374"
+- assertVisible: "Back"
+- tapOn:
+    id: "icon-button"

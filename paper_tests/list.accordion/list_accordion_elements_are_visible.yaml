@@ -1,0 +1,31 @@
+appId: com.callstack.reactnativepaperexample
+# tc List.Accordion -page elements are visible
+---
+- openLink: exp://192.168.1.9:19000
+- scrollUntilVisible:
+    element: "List.Accordion"
+    direction: DOWN
+- tapOn: "List.Accordion"
+- assertVisible:
+    id: "icon-button"
+- assertVisible:
+    id: "appbar-content-title-text"
+- assertVisible: "Expandable list item"
+- assertVisible:
+    text: "collapsed"
+    index: 0
+- assertVisible: "\U000f024b Start expanded \U000f0143"
+- assertVisible: "List item 1"
+- assertVisible: "Expandable & multiline list item"
+- assertVisible:
+    text: "collapsed"
+    index: 1
+- assertVisible: "Expandable list with icons"
+- assertVisible:
+    text: "collapsed"
+    index: 2
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

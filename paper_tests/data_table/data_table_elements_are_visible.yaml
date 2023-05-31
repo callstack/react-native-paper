@@ -1,0 +1,35 @@
+appId: com.callstack.reactnativepaperexample
+# tc Data table -page elements are visible
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Data Table"
+- assertVisible:
+    id: "icon-button"
+    index: 0
+- assertVisible:
+    id: "appbar-content-title-text"
+- assertVisible: "\U000f005d Dessert"
+- assertVisible: "Calories per piece"
+- assertVisible: "Fat (g)"
+- assertVisible: "Cupcake 356 16"
+- assertVisible: "Eclair 262 16"
+- assertVisible: "selectPageDropdownLabel"
+- assertVisible:
+    id: "button"
+- assertVisible: "label"
+- assertVisible:
+    id: "icon-button"
+    index: 1
+- assertVisible:
+    id: "icon-button"
+    index: 2
+- assertVisible:
+    id: "icon-button"
+    index: 3
+- assertVisible:
+    id: "icon-button"
+    index: 4
+- tapOn:
+    id: "icon-button"
+- assertVisible:
+    id: "appbar-content-title-text"

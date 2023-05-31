@@ -1,0 +1,26 @@
+appId: com.callstack.reactnativepaperexample
+# tc Expandable list item - items on the list can be expanded and collapsed correctly
+---
+- openLink: exp://192.168.1.9:19000
+- scrollUntilVisible:
+    element: "List.Accordion"
+    direction: DOWN
+- tapOn: "List.Accordion"
+- assertVisible: "Expandable list item Describes the expandable list item \U000f0140"
+- tapOn:
+    text: "collapsed"
+    index: 1
+- assertVisible: "List item 1"
+- assertVisible: "List item 2"
+- assertVisible:
+    text: "expanded"
+    index: 1
+- tapOn:
+    text: "expanded"
+    index: 1
+- assertNotVisible: "List item 2"  
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

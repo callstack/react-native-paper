@@ -1,0 +1,31 @@
+appId: com.callstack.reactnativepaperexample
+# tc Dialog with icon pop up visible when tab is tapped
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Dialog"
+- assertVisible: "With icon"
+- tapOn:
+    id: "button"
+    index: 5
+- assertVisible: "\U000f0026"
+- assertVisible: "Dialog with Icon"
+- assertVisible: "This is a dialog with new component called DialogIcon. When icon\
+    \ is displayed you should center the header."
+- assertVisible: "Disagree"
+- assertVisible: "Agree"
+- tapOn:
+    id: "button"
+    index: 6
+- assertNotVisible: "Dialog with Icon"
+- tapOn:
+    id: "button"
+    index: 5
+- assertVisible: "Dialog with Icon"
+- tapOn:
+    id: "button"
+    index: 7
+- assertNotVisible: "Dialog with Icon"
+- tapOn:
+    id: "icon-button"
+- assertVisible:
+    id: "appbar-content-title-text"

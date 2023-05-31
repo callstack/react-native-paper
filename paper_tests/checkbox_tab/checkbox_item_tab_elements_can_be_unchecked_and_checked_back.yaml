@@ -1,0 +1,15 @@
+appId: com.callstack.reactnativepaperexample
+# tc Checkboxes can be unchacked and checked back
+---
+- openLink: exp://192.168.1.9:19000
+- tapOn: "Checkbox"
+- tapOn: "Normal \U000f012c"
+- tapOn: "Custom \U000f012c"
+- tapOn: "Indeterminate \U000f0374"
+- tapOn: "Normal \U000f012c"
+- tapOn: "Custom \U000f012c"
+- tapOn: "Indeterminate \U000f012c"
+- tapOn:
+    id: "icon-button"
+- assertVisible:
+    id: "appbar-content-title-text"
