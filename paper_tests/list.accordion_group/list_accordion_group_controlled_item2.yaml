@@ -1,0 +1,19 @@
+appId: com.callstack.reactnativepaperexample
+# tc List.AccordionGroup controlled item folder 2 is expandable
+---
+- openLink: exp://192.168.1.9:19000
+- scrollUntilVisible:
+    element: "List.AccordionGroup"
+    direction: DOWN
+- tapOn: "List.AccordionGroup"
+- tapOn:
+    text: "collapsed"
+    index: 4
+- assertVisible: "List item 1"
+- tapOn: "expanded"
+- assertNotVisible: "List item 1"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

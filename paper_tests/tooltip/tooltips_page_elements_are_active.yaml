@@ -1,0 +1,32 @@
+appId: com.callstack.reactnativepaperexample
+# tc Material Bottom Tab Navigator -page elements are active
+---
+- openLink: exp://192.168.1.9:19000
+- scrollUntilVisible:
+    element: "Tooltip"
+    direction: DOWN
+- tapOn: "Tooltip"
+- longPressOn:
+    id: "icon-button"
+    index: 1
+- assertVisible: "Print ⌘ + P"
+- longPressOn:
+    id: "icon-button"
+    index: 2
+- assertVisible: "Search"
+- longPressOn:
+    id: "icon-button"
+    index: 3
+- assertVisible: "More options"
+- longPressOn:
+    id: "icon-button"
+    index: 5
+- assertVisible: "Align center"
+- longPressOn: 
+    point: "50%,57%"
+- assertVisible: "Press Me"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

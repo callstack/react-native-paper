@@ -1,0 +1,25 @@
+appId: com.callstack.reactnativepaperexample
+# tc Material Bottom Tab Navigator -page elements are active
+---
+- openLink: exp://192.168.1.9:19000
+- scrollUntilVisible:
+    element: "Theme"
+    direction: DOWN
+- tapOn: "Theme"
+- tapOn: "Themed Sport App Go to the example \U000f0054"
+- assertVisible:
+    id: "icon-button"
+- assertVisible:
+    id: "appbar-content-title-text"
+- assertVisible: "Team MP G PTS"
+- assertVisible: "Team Paper 16 100 48"
+# - tapOn:
+#     id: "icon-button"
+- repeat:
+    times: 2
+    commands:
+      - tapOn:
+          id: "icon-button"  
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

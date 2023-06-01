@@ -1,0 +1,22 @@
+appId: com.callstack.reactnativepaperexample
+# tc Material Bottom Tab Navigator -page elements are visible
+---
+- openLink: exp://192.168.1.9:19000
+- scrollUntilVisible:
+    element: "Theme"
+    direction: DOWN
+- tapOn: "Theme"
+- assertVisible:
+    id: "icon-button"
+- assertVisible:
+    id: "appbar-content-title-text"
+- assertVisible: "React Native Paper automatically adapts theme based on system preferences.\
+    \ Please change system theme to dark/light to see the effect"
+- assertVisible: "Theme based on the source color"
+- assertVisible:
+    id: "appbar-header-outer-layer"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

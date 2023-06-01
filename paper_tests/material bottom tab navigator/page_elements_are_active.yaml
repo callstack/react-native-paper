@@ -1,0 +1,19 @@
+appId: com.callstack.reactnativepaperexample
+# tc Material Bottom Tab Navigator -page elements are active
+---
+- openLink: exp://192.168.1.9:19000
+- scrollUntilVisible:
+    element: "Material Bottom Tab Navigator"
+    direction: DOWN
+- tapOn: "Material Bottom Tab Navigator"
+- tapOn: "\U000f0004 \U000f0004 Profile Profile"
+- assertVisible: "Profile!"
+- tapOn: "\U000f009a \U000f009a Updates Updates"
+- assertVisible: "Notifications!"
+- tapOn: "\U000f02dc \U000f02dc Home Home"
+- assertVisible: "Feed!"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

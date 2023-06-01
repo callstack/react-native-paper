@@ -1,0 +1,38 @@
+appId: com.callstack.reactnativepaperexample
+# tc Material Bottom Tab Navigator -page elements are visible
+---
+- openLink: exp://192.168.1.9:19000
+- scrollUntilVisible:
+    element: "Tooltip"
+    direction: DOWN
+- tapOn: "Tooltip"
+- assertVisible:
+    id: "icon-button"
+    index: 0
+- assertVisible:
+    id: "appbar-content-title-text"
+- assertVisible:
+    id: "icon-button"
+    index: 1
+- assertVisible:
+    id: "icon-button"
+    index: 2
+- assertVisible:
+    id: "icon-button"
+    index: 3
+- assertVisible: "A tooltip is displayed upon tapping and holding a screen element\
+    \ or component. Continuously display the tooltip as long as the user long-presses\
+    \ or hovers over the element."
+- assertVisible: "Toggle Buttons"
+- assertVisible:
+    id: "icon-button"
+    index: 4
+- assertVisible:
+    id: "icon-button"
+    index: 5
+# [+] button is not separated on the layout so it cannot be selected to be pressed
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP
