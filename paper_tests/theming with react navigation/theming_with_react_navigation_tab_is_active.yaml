@@ -1,0 +1,12 @@
+appId: com.callstack.reactnativepaperexample
+# tc Theming With React Navigation is active
+---
+- openLink: exp://192.168.1.9:19000
+- scrollUntilVisible:
+    element: "Theming With React Navigation"
+    direction: DOWN
+- tapOn: "Theming With React Navigation"
+- tapOn: "Examples, back"
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

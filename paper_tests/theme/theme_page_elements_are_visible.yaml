@@ -1,5 +1,5 @@
 appId: com.callstack.reactnativepaperexample
-# tc Material Bottom Tab Navigator -page elements are visible
+# tc Theme page elements are visible
 ---
 - openLink: exp://192.168.1.9:19000
 - scrollUntilVisible:
@@ -10,8 +10,7 @@ appId: com.callstack.reactnativepaperexample
     id: "icon-button"
 - assertVisible:
     id: "appbar-content-title-text"
-- assertVisible: "React Native Paper automatically adapts theme based on system preferences.\
-    \ Please change system theme to dark/light to see the effect"
+- assertVisible: "React Native Paper automatically adapts theme based on system preferences. Please change system theme to dark/light to see the effect"
 - assertVisible: "Theme based on the source color"
 - assertVisible:
     id: "appbar-header-outer-layer"

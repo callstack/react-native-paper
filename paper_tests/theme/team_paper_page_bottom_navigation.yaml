@@ -1,5 +1,5 @@
 appId: com.callstack.reactnativepaperexample
-# tc Team page elements are visible
+# tc Team page bottom bar elements are active
 ---
 - openLink: exp://192.168.1.9:19000
 - scrollUntilVisible:
@@ -7,14 +7,12 @@ appId: com.callstack.reactnativepaperexample
     direction: DOWN
 - tapOn: "Theme"
 - tapOn: "Themed Sport App Go to the example \U000f0054"
-- assertVisible:
-    id: "icon-button"
-- assertVisible:
-    id: "appbar-content-title-text"
-- assertVisible: "Team MP G PTS"
-- assertVisible: "Team Paper 16 100 48"
+- tapOn: "Team Paper 16 100 48"
+- tapOn: "\U000f0849 \U000f0b58 Roster Roster"
+- tapOn: "\U000f0834 \U000f0834 Results Results"
+- tapOn: "\U000f1001 \U000f1004 News News"
 - repeat:
-    times: 2
+    times: 3
     commands:
       - tapOn:
           id: "icon-button"  

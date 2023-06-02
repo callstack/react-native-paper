@@ -1,0 +1,17 @@
+appId: com.callstack.reactnativepaperexample
+# tc All the React Navigation page elements are visible
+---
+- openLink: exp://192.168.1.9:19000
+- scrollUntilVisible:
+    element: "Theming With React Navigation"
+    direction: DOWN
+- tapOn: "Theming With React Navigation"
+- assertVisible: "Examples, back"
+- assertVisible: "React Navigation"
+- assertVisible: "Home!"
+- assertVisible: "Home, tab, 1 of 2"
+- assertVisible: "Settings, tab, 2 of 2"
+- tapOn: "Examples, back"
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

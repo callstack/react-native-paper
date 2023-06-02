@@ -1,0 +1,55 @@
+appId: com.callstack.reactnativepaperexample
+# tc Team -page elements are visible
+---
+- openLink: exp://192.168.1.9:19000
+- scrollUntilVisible:
+    element: "Theme"
+    direction: DOWN
+- tapOn: "Theme"
+- tapOn: "Themed Sport App Go to the example \U000f0054"
+- tapOn: "Team Paper 16 100 48"
+- assertVisible:
+    id: "icon-button"
+- assertVisible: "Team Paper"
+- assertVisible:
+    id: "chip"
+    index: 0
+- assertVisible:
+    id: "chip"
+    index: 1
+- assertVisible:
+    id: "chip"
+    index: 2
+- assertVisible:
+    id: "chip"
+    index: 3
+- swipe:
+    start: "92%,16%"
+    end: "32%,17%"
+    duration: 519
+- assertVisible: "League"
+- assertVisible: "Winter transfer window"
+- assertVisible: "Which soccer players are switching teams? From the Premier League, La Liga and beyond, here is a list of players on the move this summer."
+- assertVisible:
+    id: "button"
+    index: 0
+- assertVisible:
+    id: "button"
+    index: 1
+- assertVisible:
+    id: "fab-content"
+- scrollUntilVisible:
+    element: "Share"
+    direction: DOWN
+- assertVisible: "Read more"  
+- assertVisible: "\U000f1001 \U000f1004 News News"
+- assertVisible: "\U000f0834 \U000f0834 Results Results"
+- assertVisible: "\U000f0849 \U000f0b58 Roster Roster"
+- repeat:
+    times: 3
+    commands:
+      - tapOn:
+          id: "icon-button"  
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

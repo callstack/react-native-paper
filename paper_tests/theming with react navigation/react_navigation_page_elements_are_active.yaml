@@ -1,0 +1,16 @@
+appId: com.callstack.reactnativepaperexample
+# tc Home and Settings buttons are active
+---
+- openLink: exp://192.168.1.9:19000
+- scrollUntilVisible:
+    element: "Theming With React Navigation"
+    direction: DOWN
+- tapOn: "Theming With React Navigation"
+- tapOn: "Settings, tab, 2 of 2"
+- assertVisible: "Settings!"
+- tapOn: "Home, tab, 1 of 2"
+- assertVisible: "Home!"
+- tapOn: "Examples, back"
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP
