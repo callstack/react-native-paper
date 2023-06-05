@@ -22,7 +22,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
 /**
  * A component to display title in table header.
  *
- * <div class="screenshots">
+ * <div class="screenshots-full-width">
  *   <figure>
  *     <img class="medium" src="screenshots/data-table-header.png" />
  *   </figure>
