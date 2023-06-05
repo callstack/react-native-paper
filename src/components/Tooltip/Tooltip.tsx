@@ -234,7 +234,6 @@ const styles = StyleSheet.create({
   },
   pressContainer: {
     cursor: 'default',
-    alignSelf: 'flex-start',
   } as ViewStyle,
 });
 
