@@ -1,0 +1,41 @@
+appId: com.callstack.reactnativepaperexample
+# tc Floating action button page elements are visible
+---
+- openLink: exp://192.168.1.15:19000
+- scrollUntilVisible:
+    element: "Floating Action Button"
+    direction: DOWN
+- tapOn: "Floating Action Button"
+- scrollUntilVisible:
+    element: "Loading FAB"
+    direction: DOWN
+- tapOn:
+    id: "fab-content"
+    index: 15
+- assertVisible:
+    id: "fab-content"
+    index: 11
+- assertVisible: "Star Star"
+- assertVisible:
+    id: "fab-content"
+    index: 13
+- assertVisible: "Email Email"
+- assertVisible:
+    id: "fab-content"
+    index: 15
+- assertVisible: "Remind Remind"
+- assertVisible:
+    id: "fab-content"
+    index: 17
+- assertVisible:
+    id: "fab-content"
+    index: 19
+- tapOn:
+    id: "fab-content"
+    index: 17
+- assertNotVisible: "\U000f04ce"
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

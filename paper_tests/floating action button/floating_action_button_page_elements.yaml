@@ -1,0 +1,60 @@
+appId: com.callstack.reactnativepaperexample
+# tc Floating action button page elements are visible
+---
+- openLink: exp://192.168.1.15:19000
+- scrollUntilVisible:
+    element: "Floating Action Button"
+    direction: DOWN
+- tapOn: "Floating Action Button"
+- assertVisible:
+    id: "icon-button"
+- assertVisible:
+    id: "appbar-content-title-text"
+- assertVisible:
+    id: "fab-content"
+    index: 0
+- assertVisible: "\U000f03eb primary"
+- assertVisible: "\U000f03eb secondary"
+- assertVisible: "\U000f03eb tertiary"
+- assertVisible: "\U000f03eb surface"
+- assertVisible: "\U000f03eb small"
+- assertVisible: "\U000f03eb medium"
+- assertVisible: "\U000f03eb large"
+- assertVisible: "\U000f03eb flat"
+- assertVisible: "\U000f03eb elevated"
+- assertVisible:
+    id: "fab-content"
+    index: 10
+- assertVisible:
+    id: "fab-content"
+    index: 11
+- assertVisible:
+    id: "fab-content"
+    index: 11
+- assertVisible:
+    id: "fab-content"
+    index: 12
+- assertVisible:
+    id: "fab-content"
+    index: 14
+- assertVisible:
+    id: "fab-content"
+    index: 13
+- swipe:
+    start: "52%,76%"
+    end: "54%,37%"
+    duration: 360
+- assertVisible:
+    id: "fab-content"
+    index: 14
+- assertVisible:
+    id: "fab-content"
+    index: 16
+- assertVisible:
+    id: "fab-content"
+    index: 15
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

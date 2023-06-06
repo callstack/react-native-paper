@@ -1,0 +1,44 @@
+appId: com.callstack.reactnativepaperexample
+# tc FBar mode section is active
+---
+- openLink: exp://192.168.1.15:19000
+- scrollUntilVisible:
+    element: "Searchbar"
+    direction: DOWN
+- tapOn: "Searchbar"
+- tapOn:
+    id: "search-bar"
+    index: 0
+- assertVisible: "Search"
+- inputText: "Paper" 
+- tapOn:
+    id: "search-bar"
+    index: 1
+- assertVisible: "Trailering icon"
+- inputText: "Paper 1"
+- tapOn:
+    id: "search-bar"
+    index: 2
+- assertVisible: "Trailering icon with right item"
+- inputText: "Paper ę@1"
+- tapOn:
+    id: "search-bar"
+    index: 4
+- assertVisible: "Right item"
+- inputText: "744111111151616465465161313135+95+959594656686523265698652323268"
+- assertVisible: "744111111151616465465161313135+95+959594656686523265698652323268"
+- tapOn:
+    id: "search-bar"
+    index: 6
+- assertVisible: "Loading"
+- assertVisible:
+    text: "busy"
+    index: 0
+- inputText: "&^%$#@!£@!#%^&*(&^%^$%#@aaę"
+- assertVisible: "&^%$#@!£@!#%^&*(&^%^$%#@aaę"
+- tapOn:
+    id: "icon-button"
+    index: 0
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

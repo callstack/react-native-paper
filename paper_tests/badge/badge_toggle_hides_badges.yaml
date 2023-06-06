@@ -1,0 +1,17 @@
+appId: com.callstack.reactnativepaperexample
+# tc Badges are hidden when "Show badge" toggle is Off
+---
+- openLink: exp://192.168.1.15:19000
+- tapOn: "Badge"
+- assertVisible: "1"
+- assertVisible: "12"
+- assertVisible: "999+"
+- tapOn: "1"
+- assertVisible: "0"
+- assertNotVisible: "12"
+- assertNotVisible: "999+"
+- tapOn:
+    id: "icon-button"
+    index: 0
+- assertVisible:
+    id: "appbar-content"

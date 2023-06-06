@@ -1,0 +1,42 @@
+appId: com.callstack.reactnativepaperexample
+# tc Page view section is active
+---
+- openLink: exp://192.168.1.15:19000
+- scrollUntilVisible:
+    element: "Searchbar"
+    direction: DOWN
+- tapOn: "Searchbar"
+- tapOn:
+    id: "search-bar"
+    index: 7
+- assertVisible: "Search"
+- inputText: "&^%$#@!£@!#%^&*(&^%^$%#@aaębPaper ę@1"
+- assertVisible: "&^%$#@!£@!#%^&*(&^%^$%#@aaębPaper ę@1"
+# - tapOn:
+#     id: "search-bar"
+#     index: 8
+# - assertVisible: "Search without bottom line"
+- tapOn:
+    id: "icon-button"
+    index: 9
+- tapOn: "Search without bottom line"
+- inputText: "Paper ę@1"
+- assertVisible: "Paper ę@1"
+# - tapOn:
+#     id: "search-bar"
+#     index: 9
+# - assertVisible: "Loading"
+- tapOn:
+    id: "icon-button"
+    index: 11
+- tapOn:
+    id: "search-bar"
+    index: 9
+- inputText: "744111111151616465465161313135+95+959594656686523265698652323268"
+- assertVisible: "744111111151616465465161313135+95+959594656686523265698652323268"
+- tapOn:
+    id: "icon-button"
+    index: 0
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

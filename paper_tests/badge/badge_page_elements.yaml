@@ -1,0 +1,33 @@
+appId: com.callstack.reactnativepaperexample
+# tc Badge tab is active, its elements are visible
+---
+- openLink: exp://192.168.1.15:19000
+- tapOn: "Badge"
+- assertVisible:
+    id: "icon-button"
+    index: 0
+- assertVisible:
+    id: "appbar-content-title-text"
+- assertVisible: "Show badges"
+- assertVisible: "1"
+- assertVisible: "Text"
+- assertVisible:
+    id: "icon-button"
+    index: 1
+- assertVisible: "12"
+- assertVisible:
+    id: "icon-button"
+    index: 2
+- assertVisible: "999+"
+- assertVisible: "Dot"
+- assertVisible:
+    id: "icon-button"
+    index: 3
+- assertVisible:
+    id: "icon-button"
+    index: 4
+- tapOn:
+    id: "icon-button"
+    index: 0
+- assertVisible:
+    id: "appbar-content"

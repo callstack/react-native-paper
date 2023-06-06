@@ -1,0 +1,56 @@
+appId: com.callstack.reactnativepaperexample
+# tc Floating action button page elements are visible
+---
+- openLink: exp://192.168.1.15:19000
+- scrollUntilVisible:
+    element: "Searchbar"
+    direction: DOWN
+- tapOn: "Searchbar"
+- assertVisible:
+    id: "icon-button"
+    index: 0
+- assertVisible:
+    id: "appbar-content-title-text"
+- assertVisible: "Bar mode"
+- assertVisible:
+    id: "search-bar-container"
+    index: 1
+- assertVisible:
+    id: "search-bar-container"
+    index: 2
+- assertVisible:
+    id: "search-bar-container"
+    index: 3
+- assertVisible:
+    id: "search-bar-container"
+    index: 4
+- assertVisible: "View mode"
+- assertVisible:
+    id: "search-bar-container"
+    index: 5
+- assertVisible:
+    id: "search-bar-container"
+    index: 6
+- assertVisible:
+    id: "search-bar-container"
+    index: 7
+- swipe:
+    start: "65%,86%"
+    end: "73%,40%"
+    duration: 376
+- assertVisible: "Clickable icon"
+- assertVisible:
+    id: "search-bar-container"
+    index: 8
+- assertVisible:
+    id: "search-bar-container"
+    index: 9
+- assertVisible:
+    id: "search-bar-container"
+    index: 10
+- tapOn:
+    id: "icon-button"
+    index: 4
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP
