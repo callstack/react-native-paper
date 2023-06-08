@@ -42,7 +42,7 @@ export type Props = React.ComponentProps<typeof Appbar> & {
    * @supported Available in v5.x with theme version 3
    *
    * Mode of the Appbar.
-   * - `small` - Appbar with default height (56).
+   * - `small` - Appbar with default height (64).
    * - `medium` - Appbar with medium height (112).
    * - `large` - Appbar with large height (152).
    * - `center-aligned` - Appbar with default height and center-aligned title.
