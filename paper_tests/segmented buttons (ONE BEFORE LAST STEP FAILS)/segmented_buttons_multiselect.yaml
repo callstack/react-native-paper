@@ -1,0 +1,42 @@
+appId: com.callstack.reactnativepaperexample
+# tc Multiselect select page elements are visible, no $ is chcecked
+---
+- openLink: exp://192.168.1.7:19000
+- scrollUntilVisible:
+    element: "Segmented Buttons"
+    direction: DOWN
+- tapOn: "Segmented Buttons"
+- tapOn: "Multiselect select Go to the example \U000f0054"
+- assertVisible:
+    id: "icon-button"
+    index: 0
+- assertVisible:
+    id: "appbar-content-title-text"
+- assertVisible:
+    text: "not checked"
+    index: 0
+- assertVisible:
+    text: "not checked"
+    index: 1
+- assertVisible:
+    text: "not checked"
+    index: 2
+- assertVisible:
+    text: "not checked"
+    index: 3
+- assertVisible: "Restaurant no 0 $ \U000f00c3"
+- assertVisible: "Restaurant no 2 $$ \U000f00c3"
+- assertVisible: "Restaurant no 4 $$$ \U000f00c3"
+- assertVisible: "Restaurant no 6 $$$$ \U000f00c3"
+- scrollUntilVisible:
+    element: "Restaurant no 9"
+    direction: DOWN
+- assertVisible: "Restaurant no 9 $$$$ \U000f00c3"
+- tapOn:
+    id: "icon-button"
+    index: 1
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

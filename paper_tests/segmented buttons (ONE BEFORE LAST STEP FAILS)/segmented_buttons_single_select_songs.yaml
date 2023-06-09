@@ -1,0 +1,28 @@
+appId: com.callstack.reactnativepaperexample
+# tc Songs list elements are visible
+---
+- openLink: exp://192.168.1.7:19000
+- scrollUntilVisible:
+    element: "Segmented Buttons"
+    direction: DOWN
+- tapOn: "Segmented Buttons"
+- tapOn:
+    id: "appbar-header"
+- assertVisible:
+    id: "icon-button"
+    index: 0
+- assertVisible:
+    id: "appbar-content-title-text"
+- assertVisible: "\U000f012c Songs"
+- assertVisible: "Song title no 0 The artist no 1 \U000f00c3"
+- scrollUntilVisible:
+    element: "Song title no 9"
+    direction: DOWN
+- tapOn:
+    id: "icon-button"
+    index: 1
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

@@ -1,5 +1,5 @@
 appId: com.callstack.reactnativepaperexample
-# tc Floating action button page elements are visible
+# tc Searchbar page elements are visible
 ---
 - openLink: exp://192.168.1.15:19000
 - scrollUntilVisible:

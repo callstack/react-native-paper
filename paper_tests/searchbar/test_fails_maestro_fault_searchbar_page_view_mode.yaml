@@ -6,37 +6,34 @@ appId: com.callstack.reactnativepaperexample
     element: "Searchbar"
     direction: DOWN
 - tapOn: "Searchbar"
+- scrollUntilVisible:
+    element: "View mode"
+    direction: DOWN
 - tapOn:
     id: "search-bar"
     index: 7
 - assertVisible: "Search"
-- inputText: "&^%$#@!£@!#%^&*(&^%^$%#@aaębPaper ę@1"
-- assertVisible: "&^%$#@!£@!#%^&*(&^%^$%#@aaębPaper ę@1"
+- inputText: "&^%$#@!£@!#%^&*(&^%^$%#@aaę"
+- assertVisible: "&^%$#@!£@!#%^&*(&^%^$%#@aaę"
 # - tapOn:
-#     id: "search-bar"
-#     index: 8
-# - assertVisible: "Search without bottom line"
-- tapOn:
-    id: "icon-button"
-    index: 9
-- tapOn: "Search without bottom line"
-- inputText: "Paper ę@1"
-- assertVisible: "Paper ę@1"
-# - tapOn:
-#     id: "search-bar"
+#     id: "icon-button"
 #     index: 9
-# - assertVisible: "Loading"
 - tapOn:
-    id: "icon-button"
-    index: 11
+    id: "search-bar"
+    index: 8
+- assertVisible: "Search without bottom line"
+- tapOn:
+    id: "search-bar"
+    index: 8
+- inputText: "Paperę@1"
+- assertVisible: "Paperę@1"
 - tapOn:
     id: "search-bar"
     index: 9
+- assertVisible: "Loading"
 - inputText: "744111111151616465465161313135+95+959594656686523265698652323268"
 - assertVisible: "744111111151616465465161313135+95+959594656686523265698652323268"
-- tapOn:
-    id: "icon-button"
-    index: 0
+- tapOn: "Back"
 - scrollUntilVisible:
     element: "Animated Floating Action Button"
     direction: UP

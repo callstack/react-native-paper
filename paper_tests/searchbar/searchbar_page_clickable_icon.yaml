@@ -1,5 +1,5 @@
 appId: com.callstack.reactnativepaperexample
-# tc Floating action button page elements are visible
+# tc Clickable icon section is active
 ---
 - openLink: exp://192.168.1.15:19000
 - scrollUntilVisible:

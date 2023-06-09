@@ -1,0 +1,112 @@
+appId: com.callstack.reactnativepaperexample
+# tc Segmented Buttons page elements are visible
+---
+- openLink: exp://192.168.1.7:19000
+- scrollUntilVisible:
+    element: "Segmented Buttons"
+    direction: DOWN
+- tapOn: "Segmented Buttons"
+- assertVisible:
+    id: "icon-button"
+- assertVisible:
+    id: "appbar-content-title-text"
+- assertVisible: "Segmented Button Example Usage"
+- tapOn:
+    id: "appbar-header-outer-layer"
+- tapOn:
+    id: "appbar-header-outer-layer"
+- assertVisible: "Segmented Button"
+- assertVisible:
+    text: "not checked"
+    index: 0
+- assertVisible:
+    text: "not checked"
+    index: 1
+- assertVisible:
+    text: "not checked"
+    index: 2
+- assertVisible: "Segmented Button - show selected check"
+- assertVisible:
+    text: "not checked"
+    index: 3
+- assertVisible:
+    text: "not checked"
+    index: 4
+- assertVisible:
+    text: "not checked"
+    index: 5
+- assertVisible: "Segmented Button - icons + show selected check"
+- assertVisible:
+    text: "not checked"
+    index: 6
+- assertVisible:
+    text: "not checked"
+    index: 7
+- assertVisible:
+    text: "not checked"
+    index: 8
+- assertVisible: "Segmented Button - only labels + density"
+- assertVisible:
+    text: "not checked"
+    index: 9
+- assertVisible:
+    text: "not checked"
+    index: 10
+- assertVisible:
+    text: "not checked"
+    index: 11
+- assertVisible: "Segmented Button - only icons"
+- swipe:
+    start: "68%,86%"
+    end: "71%,37%"
+    duration: 355
+- assertVisible: "Segmented Button - multiselect"
+- assertVisible:
+    text: "not checked"
+    index: 15
+- assertVisible:
+    text: "not checked"
+    index: 16
+- assertVisible:
+    text: "not checked"
+    index: 17
+- assertVisible: "Segmented Button - Custom Colors"
+- assertVisible: "Via Theme"
+- assertVisible:
+    text: "not checked"
+    index: 23
+- assertVisible:
+    text: "not checked"
+    index: 24
+- assertVisible:
+    text: "not checked"
+    index: 25
+- assertVisible: "Via Props"
+- assertVisible:
+    text: "not checked"
+    index: 26
+- assertVisible:
+    text: "not checked"
+    index: 27
+- assertVisible:
+    text: "not checked"
+    index: 28
+- swipe:
+    start: "68%,92%"
+    end: "85%,48%"
+    duration: 451
+- assertVisible: "Segmented Button - disabled"
+- assertVisible:
+    text: "not checked"
+    index: 23
+- assertVisible:
+    text: "not checked"
+    index: 24
+- assertVisible:
+    text: "not checked"
+    index: 25
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP

@@ -1,0 +1,24 @@
+appId: com.callstack.reactnativepaperexample
+# tc Multiselect select filter works correctly, only $$$ selected
+---
+- openLink: exp://192.168.1.7:19000
+- scrollUntilVisible:
+    element: "Segmented Buttons"
+    direction: DOWN
+- tapOn: "Segmented Buttons"
+- tapOn: "Multiselect select Go to the example \U000f0054"
+- tapOn:
+    text: "not checked"
+    index: 2
+- assertVisible: "Restaurant no 4 $$$ \U000f00c3"
+- assertVisible: "Restaurant no 5 $$$ \U000f00c3"
+- assertNotVisible: "Restaurant no 3 $$ \U000f00c3"
+- assertNotVisible: "Restaurant no 0 $ \U000f00c3"
+- tapOn:
+    id: "icon-button"
+    index: 1
+- tapOn:
+    id: "icon-button"
+- scrollUntilVisible:
+    element: "Animated Floating Action Button"
+    direction: UP
