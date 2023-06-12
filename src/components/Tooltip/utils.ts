@@ -40,14 +40,11 @@ const overflowRight = (center: number, tooltipWidth: number): boolean => {
 const overflowBottom = (
   childrenY: number,
   childrenHeight: number,
-  tooltipHeight: number,
-  headerHeight: number = 0
+  tooltipHeight: number
 ): boolean => {
   const { height: layoutHeight } = Dimensions.get('window');
 
-  return (
-    childrenY + childrenHeight + tooltipHeight > layoutHeight - headerHeight
-  );
+  return childrenY + childrenHeight + tooltipHeight > layoutHeight;
 };
 
 const getTooltipXPosition = (

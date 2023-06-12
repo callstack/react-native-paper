@@ -122,7 +122,3 @@ export type MaterialBottomTabNavigationConfig = Partial<
     | 'getLazy'
   >
 >;
-
-export type NavigationParams = {
-  params?: { headerHeight?: number };
-};
