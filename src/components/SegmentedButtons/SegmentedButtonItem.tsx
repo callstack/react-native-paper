@@ -81,6 +81,10 @@ export type Props = {
   density?: 'regular' | 'small' | 'medium' | 'high';
   style?: StyleProp<ViewStyle>;
   /**
+   * Allows you to customize the style of the label associated with a SegmentedButton.
+   */
+  labelStyle?: StyleProp<TextStyle>;
+  /**
    * testID to be used on tests.
    */
   testID?: string;
@@ -95,6 +99,7 @@ const SegmentedButtonItem = ({
   accessibilityLabel,
   disabled,
   style,
+  labelStyle,
   showSelectedCheck,
   checkedColor,
   uncheckedColor,
@@ -216,9 +221,10 @@ const SegmentedButtonItem = ({
           ) : null}
           <Text
             variant="labelLarge"
-            style={[styles.label, labelTextStyle]}
+            style={[styles.label, labelTextStyle, labelStyle]}
             selectable={false}
             numberOfLines={1}
+            testID={testID ? `${testID}-label` : undefined}
           >
             {label}
           </Text>
