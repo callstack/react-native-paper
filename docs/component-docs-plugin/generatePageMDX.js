@@ -32,7 +32,7 @@ function generateMoreExamples(componentName) {
 
 function generateThemeColors(componentName, data) {
   if (!data) {
-    return null;
+    return `<span />`;
   }
   return `
   ## Theme colors
