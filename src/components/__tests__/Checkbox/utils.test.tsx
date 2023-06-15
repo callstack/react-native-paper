@@ -96,7 +96,7 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
         checked: false,
       })
     ).toMatchObject({
-      selectionControlColor: getTheme(false, false).colors.text,
+      selectionControlColor: getTheme(false, false).colors.disabled,
     });
   });
 
