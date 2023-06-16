@@ -33,7 +33,7 @@ const SnackbarExample = () => {
   const action = {
     label: showLongerAction ? 'Toggle Theme' : 'Action',
     onPress: () => {
-      preferences.toggleTheme();
+      preferences?.toggleTheme();
     },
   };
 
