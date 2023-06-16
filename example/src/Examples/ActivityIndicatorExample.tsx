@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import {
   ActivityIndicator,
   FAB,
+  List,
   MD2Colors,
   MD3Colors,
 } from 'react-native-paper';
@@ -25,24 +26,33 @@ const ActivityIndicatorExample = () => {
         />
       </View>
 
-      <View style={styles.row}>
-        <ActivityIndicator animating={animating} />
-      </View>
-
-      <View style={styles.row}>
+      <List.Section title="Default">
         <ActivityIndicator animating={animating} hidesWhenStopped={false} />
-      </View>
+      </List.Section>
 
-      <View style={styles.row}>
-        <ActivityIndicator animating={animating} size="large" />
-      </View>
+      <List.Section title="Large">
+        <ActivityIndicator
+          animating={animating}
+          size="large"
+          hidesWhenStopped={false}
+        />
+      </List.Section>
 
-      <View style={styles.row}>
+      <List.Section title="Custom size">
+        <ActivityIndicator
+          animating={animating}
+          size={100}
+          hidesWhenStopped={false}
+        />
+      </List.Section>
+
+      <List.Section title="Custom color">
         <ActivityIndicator
           animating={animating}
           color={isV3 ? MD3Colors.error20 : MD2Colors.red500}
+          hidesWhenStopped={false}
         />
-      </View>
+      </List.Section>
     </ScreenWrapper>
   );
 };
