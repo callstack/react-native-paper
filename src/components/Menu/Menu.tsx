@@ -603,6 +603,8 @@ class Menu extends React.Component<Props, State> {
       ...(I18nManager.getConstants().isRTL ? { right: left } : { left }),
     };
 
+    const pointerEvents = visible ? 'box-none' : 'none';
+
     return (
       <View
         ref={(ref) => {
@@ -627,12 +629,18 @@ class Menu extends React.Component<Props, State> {
               collapsable={false}
               accessibilityViewIsModal={visible}
               style={[styles.wrapper, positionStyle, style]}
-              pointerEvents={visible ? 'box-none' : 'none'}
+              pointerEvents={pointerEvents}
               onAccessibilityEscape={onDismiss}
               testID={`${testID}-view`}
             >
-              <Animated.View style={{ transform: positionTransforms }}>
+              <Animated.View
+                pointerEvents={pointerEvents}
+                style={{
+                  transform: positionTransforms,
+                }}
+              >
                 <Surface
+                  pointerEvents={pointerEvents}
                   style={[
                     styles.shadowMenuContainer,
                     shadowMenuContainerStyle,
