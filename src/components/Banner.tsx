@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Animated, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import type { LayoutChangeEvent } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
 
@@ -65,17 +66,6 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * Optional callback that will be called after the closing animation finished running normally
    */
   onHideAnimationFinished?: Animated.EndCallback;
-};
-
-type NativeEvent = {
-  nativeEvent: {
-    layout: {
-      x: number;
-      y: number;
-      width: number;
-      height: number;
-    };
-  };
 };
 
 /**
@@ -180,7 +170,7 @@ const Banner = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible, position, scale]);
 
-  const handleLayout = ({ nativeEvent }: NativeEvent) => {
+  const handleLayout = ({ nativeEvent }: LayoutChangeEvent) => {
     const { height } = nativeEvent.layout;
     setLayout({ height, measured: true });
   };
