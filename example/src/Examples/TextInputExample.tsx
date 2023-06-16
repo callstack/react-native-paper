@@ -628,7 +628,6 @@ const TextInputExample = () => {
               <TextInput
                 label="Input with text align center"
                 style={styles.centeredText}
-                activeUnderlineColor="transparent"
               />
             </View>
             <View style={styles.inputContainerStyle}>
@@ -697,6 +696,24 @@ const TextInputExample = () => {
                 />
               </View>
             ) : null}
+            <View style={styles.row}>
+              <TextInput
+                mode="outlined"
+                label="CVV"
+                placeholder="CVV"
+                keyboardType="phone-pad"
+                maxLength={3}
+              />
+            </View>
+            <View style={styles.row}>
+              <TextInput
+                mode="flat"
+                label="CVV"
+                placeholder="CVV"
+                keyboardType="phone-pad"
+                maxLength={3}
+              />
+            </View>
           </List.Accordion>
         </List.AccordionGroup>
       </ScreenWrapper>
@@ -744,6 +761,11 @@ const styles = StyleSheet.create({
   },
   fixedHeight: {
     height: 100,
+  },
+  row: {
+    margin: 8,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
   },
 });
 

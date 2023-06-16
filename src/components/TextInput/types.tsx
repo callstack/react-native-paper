@@ -8,6 +8,8 @@ import type {
   StyleProp,
   ViewProps,
   ViewStyle,
+  NativeSyntheticEvent,
+  TextLayoutEventData,
 } from 'react-native';
 
 import type { $Omit, InternalTheme, ThemeProp } from './../../types';
@@ -70,6 +72,7 @@ export type State = {
   focused: boolean;
   placeholder?: string;
   value?: string;
+  labelTextLayout: { width: number };
   labelLayout: { measured: boolean; width: number; height: number };
   leftLayout: { height: number | null; width: number | null };
   rightLayout: { height: number | null; width: number | null };
@@ -83,6 +86,7 @@ export type ChildTextInputProps = {
   forceFocus: () => void;
   onChangeText?: (value: string) => void;
   onLayoutAnimatedText: (args: any) => void;
+  onLabelTextLayout: (event: NativeSyntheticEvent<TextLayoutEventData>) => void;
   onLeftAffixLayoutChange: (event: LayoutChangeEvent) => void;
   onRightAffixLayoutChange: (event: LayoutChangeEvent) => void;
 } & $Omit<TextInputTypesWithoutMode, 'theme'> & { theme: InternalTheme };
@@ -114,6 +118,7 @@ export type LabelProps = {
   errorColor?: string;
   labelError?: boolean | null;
   onLayoutAnimatedText: (args: any) => void;
+  onLabelTextLayout: (event: NativeSyntheticEvent<TextLayoutEventData>) => void;
   roundness: number;
   maxFontSizeMultiplier?: number | undefined | null;
   testID?: string;

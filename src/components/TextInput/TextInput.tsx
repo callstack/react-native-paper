@@ -6,6 +6,8 @@ import {
   TextInput as NativeTextInput,
   TextStyle,
   ViewStyle,
+  NativeSyntheticEvent,
+  TextLayoutEventData,
 } from 'react-native';
 
 import TextInputAffix, {
@@ -248,6 +250,10 @@ const TextInput = forwardRef<TextInputHandles, Props>(
     // Use value from props instead of local state when input is controlled
     const value = isControlled ? rest.value : uncontrolledValue;
 
+    const [labelTextLayout, setLabelTextLayout] = React.useState({
+      width: 33,
+    });
+
     const [labelLayout, setLabelLayout] = React.useState<{
       measured: boolean;
       width: number;
@@ -447,6 +453,13 @@ const TextInput = forwardRef<TextInputHandles, Props>(
       [labelLayout.height, labelLayout.width]
     );
 
+    const handleLabelTextLayout = React.useCallback(
+      ({ nativeEvent }: NativeSyntheticEvent<TextLayoutEventData>) => {
+        setLabelTextLayout({ width: Math.ceil(nativeEvent.lines[0].width) });
+      },
+      []
+    );
+
     const forceFocus = React.useCallback(() => root.current?.focus(), []);
 
     const { maxFontSizeMultiplier = 1.5 } = rest;
@@ -469,6 +482,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
             focused,
             placeholder,
             value,
+            labelTextLayout,
             labelLayout,
             leftLayout,
             rightLayout,
@@ -481,6 +495,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
           onBlur={handleBlur}
           onChangeText={handleChangeText}
           onLayoutAnimatedText={handleLayoutAnimatedText}
+          onLabelTextLayout={handleLabelTextLayout}
           onLeftAffixLayoutChange={onLeftAffixLayoutChange}
           onRightAffixLayoutChange={onRightAffixLayoutChange}
           maxFontSizeMultiplier={maxFontSizeMultiplier}
@@ -506,6 +521,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
           focused,
           placeholder,
           value,
+          labelTextLayout,
           labelLayout,
           leftLayout,
           rightLayout,
@@ -518,6 +534,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
         onBlur={handleBlur}
         onChangeText={handleChangeText}
         onLayoutAnimatedText={handleLayoutAnimatedText}
+        onLabelTextLayout={handleLabelTextLayout}
         onLeftAffixLayoutChange={onLeftAffixLayoutChange}
         onRightAffixLayoutChange={onRightAffixLayoutChange}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
