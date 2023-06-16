@@ -145,8 +145,8 @@ android {
         applicationId 'com.callstack.reactnativepaperexample'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 18
-        versionName "3.4.0"
+        versionCode 21
+        versionName "3.7.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
         if (isNewArchitectureEnabled()) {
