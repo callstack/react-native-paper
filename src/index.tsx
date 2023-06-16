@@ -55,7 +55,6 @@ export { default as TextInput } from './components/TextInput/TextInput';
 export { default as ToggleButton } from './components/ToggleButton';
 export { default as SegmentedButtons } from './components/SegmentedButtons/SegmentedButtons';
 export { default as Tooltip } from './components/Tooltip/Tooltip';
-export { createMaterialBottomTabNavigator } from './react-navigation';
 
 export {
   Caption,

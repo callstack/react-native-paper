@@ -82,6 +82,9 @@ export type Props = {
  * A material-design themed tab bar on the bottom of the screen that lets you switch between different routes with animation. Routes are lazily initialized - their screen components are not mounted until they are first focused.
  *
  * This is a convenient wrapper which provides prebuilt [React Navigation's Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/) integration so users can easily import it and use and don’t want to deal with setting up a custom tab bar.
+ * :::info
+ * To use `createMaterialBottomTabNavigator` ensure that you have installed [`@react-navigation/native` and its dependencies (follow this guide)](https://reactnavigation.org/docs/getting-started),
+ * :::
  *
  *  <div class="screenshots">
  *   <img class="medium" src="screenshots/material-bottom-tabs.gif" />
@@ -90,7 +93,7 @@ export type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { createMaterialBottomTabNavigator } from 'react-native-paper';
+ * import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
  *
  * const Tab = createMaterialBottomTabNavigator();
  *
@@ -103,6 +106,7 @@ export type Props = {
  *   );
  * }
  * export default MyTabs;
+ *
  * ```
  */
 function MaterialBottomTabNavigator({
