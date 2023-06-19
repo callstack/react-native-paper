@@ -628,6 +628,7 @@ const TextInputExample = () => {
               <TextInput
                 label="Input with text align center"
                 style={styles.centeredText}
+                activeUnderlineColor="transparent"
               />
             </View>
             <View style={styles.inputContainerStyle}>
