@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { I18nManager } from 'react-native';
 
+import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
@@ -10,8 +12,10 @@ import {
 } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { useKeepAwake } from 'expo-keep-awake';
+import { StatusBar } from 'expo-status-bar';
+import * as Updates from 'expo-updates';
 import {
-  PaperProvider,
+  Provider as PaperProvider,
   MD3DarkTheme,
   MD3LightTheme,
   MD2DarkTheme,
@@ -24,6 +28,7 @@ import {
 } from 'react-native-paper';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
+import { deviceColorsSupported } from '../utils';
 import DrawerItems from './DrawerItems';
 import App from './RootNavigator';
 
@@ -31,7 +36,9 @@ const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
 
 export const PreferencesContext = React.createContext<{
+  toggleShouldUseDeviceColors?: () => void;
   toggleTheme: () => void;
+  toggleRtl: () => void;
   toggleThemeVersion: () => void;
   toggleCollapsed: () => void;
   toggleCustomFont: () => void;
@@ -39,7 +46,9 @@ export const PreferencesContext = React.createContext<{
   customFontLoaded: boolean;
   rippleEffectEnabled: boolean;
   collapsed: boolean;
+  rtl: boolean;
   theme: MD2Theme | MD3Theme;
+  shouldUseDeviceColors?: boolean;
 } | null>(null);
 
 export const useExampleTheme = () => useTheme<MD2Theme | MD3Theme>();
@@ -58,19 +67,31 @@ export default function PaperExample() {
     InitialState | undefined
   >();
 
+  const [shouldUseDeviceColors, setShouldUseDeviceColors] =
+    React.useState(true);
   const [isDarkMode, setIsDarkMode] = React.useState(false);
   const [themeVersion, setThemeVersion] = React.useState<2 | 3>(3);
+  const [rtl, setRtl] = React.useState<boolean>(
+    I18nManager.getConstants().isRTL
+  );
   const [collapsed, setCollapsed] = React.useState(false);
   const [customFontLoaded, setCustomFont] = React.useState(false);
   const [rippleEffectEnabled, setRippleEffectEnabled] = React.useState(true);
 
+  const { theme: mdTheme } = useMaterial3Theme();
   const theme = React.useMemo(() => {
     if (themeVersion === 2) {
       return isDarkMode ? MD2DarkTheme : MD2LightTheme;
     }
 
-    return isDarkMode ? MD3DarkTheme : MD3LightTheme;
-  }, [isDarkMode, themeVersion]);
+    if (!deviceColorsSupported || !shouldUseDeviceColors) {
+      return isDarkMode ? MD3DarkTheme : MD3LightTheme;
+    }
+
+    return isDarkMode
+      ? { ...MD3DarkTheme, colors: mdTheme.dark }
+      : { ...MD3LightTheme, colors: mdTheme.light };
+  }, [isDarkMode, mdTheme, shouldUseDeviceColors, themeVersion]);
 
   React.useEffect(() => {
     const restoreState = async () => {
@@ -99,6 +120,10 @@ export default function PaperExample() {
 
         if (preferences) {
           setIsDarkMode(preferences.theme === 'dark');
+
+          if (typeof preferences.rtl === 'boolean') {
+            setRtl(preferences.rtl);
+          }
         }
       } catch (e) {
         // ignore error
@@ -115,19 +140,28 @@ export default function PaperExample() {
           PREFERENCES_KEY,
           JSON.stringify({
             theme: isDarkMode ? 'dark' : 'light',
+            rtl,
           })
         );
       } catch (e) {
         // ignore error
       }
+
+      if (I18nManager.getConstants().isRTL !== rtl) {
+        I18nManager.forceRTL(rtl);
+        Updates.reloadAsync();
+      }
     };
 
     savePrefs();
-  }, [isDarkMode]);
+  }, [rtl, isDarkMode]);
 
   const preferences = React.useMemo(
     () => ({
+      toggleShouldUseDeviceColors: () =>
+        setShouldUseDeviceColors((oldValue) => !oldValue),
       toggleTheme: () => setIsDarkMode((oldValue) => !oldValue),
+      toggleRtl: () => setRtl((rtl) => !rtl),
       toggleCollapsed: () => setCollapsed(!collapsed),
       toggleCustomFont: () => setCustomFont(!customFontLoaded),
       toggleRippleEffect: () => setRippleEffectEnabled(!rippleEffectEnabled),
@@ -140,9 +174,18 @@ export default function PaperExample() {
       customFontLoaded,
       rippleEffectEnabled,
       collapsed,
+      rtl,
       theme,
+      shouldUseDeviceColors,
     }),
-    [theme, collapsed, customFontLoaded, rippleEffectEnabled]
+    [
+      rtl,
+      theme,
+      collapsed,
+      customFontLoaded,
+      shouldUseDeviceColors,
+      rippleEffectEnabled,
+    ]
   );
 
   if (!isReady && !fontsLoaded) {
@@ -218,6 +261,7 @@ export default function PaperExample() {
                 );
               }}
             </SafeAreaInsetsContext.Consumer>
+            <StatusBar style={!theme.isV3 || theme.dark ? 'light' : 'dark'} />
           </NavigationContainer>
         </React.Fragment>
       </PreferencesContext.Provider>

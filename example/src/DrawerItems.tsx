@@ -190,14 +190,16 @@ function DrawerItems() {
               </View>
             </TouchableRipple>
 
-            <TouchableRipple onPress={_handleToggleRTL}>
-              <View style={[styles.preference, isV3 && styles.v3Preference]}>
-                <Text variant="labelLarge">RTL</Text>
-                <View pointerEvents="none">
-                  <Switch value={isRTL} />
+            {!isWeb && (
+              <TouchableRipple onPress={_handleToggleRTL}>
+                <View style={[styles.preference, isV3 && styles.v3Preference]}>
+                  <Text variant="labelLarge">RTL</Text>
+                  <View pointerEvents="none">
+                    <Switch value={isRTL} />
+                  </View>
                 </View>
-              </View>
-            </TouchableRipple>
+              </TouchableRipple>
+            )}
 
             <TouchableRipple onPress={toggleThemeVersion}>
               <View style={[styles.preference, isV3 && styles.v3Preference]}>
