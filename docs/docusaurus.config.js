@@ -319,7 +319,11 @@ const config = {
     moreExamples: {
       Portal: {
         'Comprehensive Portal example':
-          'https://snack.expo.dev/@react-native-paper/comprehensive-portal-example',
+          'https://snack.expo.dev/@react-native-paper/more-examples---comprehensive-portal-example',
+      },
+      Snackbar: {
+        'Snackbar rendered regardless of the parent positioning':
+          'https://snack.expo.dev/@react-native-paper/more-examples---snackbar-rendered-regardless-of-the-parent-positioning',
       },
     },
     themeColors,
