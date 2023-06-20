@@ -4,6 +4,41 @@ const themeColors = {
       borderColor: 'theme.colors.primary',
     },
   },
+  Appbar: {
+    default: {
+      backgroundColor: 'theme.colors.surface',
+    },
+    elevated: {
+      backgroundColor: 'theme.colors.elevation.level2',
+    },
+  },
+  'Appbar.Action': {
+    'leading icon': {
+      iconColor: 'theme.colors.onSurface',
+    },
+    'not leading icon': {
+      iconColor: 'theme.colors.onSurfaceVariant',
+    },
+  },
+  'Appbar.Content': {
+    '-': {
+      textColor: 'theme.colors.onSurface',
+    },
+  },
+  'Appbar.Header': {
+    default: {
+      backgroundColor: 'theme.colors.surface',
+    },
+    elevated: {
+      backgroundColor: 'theme.colors.elevation.level2',
+    },
+  },
+  Banner: {
+    '-': {
+      textColor: 'theme.colors.onSurface',
+      'action textColor': 'theme.colors.primary',
+    },
+  },
   Badge: {
     '-': {
       backgroundColor: 'theme.colors.error',
@@ -111,6 +146,61 @@ const themeColors = {
       titleColor: 'theme.colors.onSurfaceVariant',
     },
   },
+  FAB: {
+    disabled: {
+      backgroundColor: 'theme.colors.surfaceDisabled',
+      'textColor/iconColor': 'theme.colors.onSurfaceDisabled',
+    },
+    primary: {
+      backgroundColor: 'theme.colors.primaryContainer',
+      'textColor/iconColor': 'theme.colors.onPrimaryContainer',
+    },
+    secondary: {
+      backgroundColor: 'theme.colors.secondaryContainer',
+      'textColor/iconColor': 'theme.colors.onSecondaryContainer',
+    },
+    tertiary: {
+      backgroundColor: 'theme.colors.tertiaryContainer',
+      'textColor/iconColor': 'theme.colors.onTertiaryContainer',
+    },
+    surface: {
+      backgroundColor: 'theme.colors.elevarion.level3',
+      'textColor/iconColor': 'theme.colors.primary',
+    },
+  },
+  AnimatedFAB: {
+    disabled: {
+      backgroundColor: 'theme.colors.surfaceDisabled',
+      'textColor/iconColor': 'theme.colors.onSurfaceDisabled',
+    },
+    primary: {
+      backgroundColor: 'theme.colors.primaryContainer',
+      'textColor/iconColor': 'theme.colors.onPrimaryContainer',
+    },
+    secondary: {
+      backgroundColor: 'theme.colors.secondaryContainer',
+      'textColor/iconColor': 'theme.colors.onSecondaryContainer',
+    },
+    tertiary: {
+      backgroundColor: 'theme.colors.tertiaryContainer',
+      'textColor/iconColor': 'theme.colors.onTertiaryContainer',
+    },
+    surface: {
+      backgroundColor: 'theme.colors.elevarion.level3',
+      'textColor/iconColor': 'theme.colors.primary',
+    },
+  },
+  HelperText: {
+    disabled: {
+      textColor: 'theme.colors.onSurfaceDisabled',
+    },
+    defualt: {
+      textColor: 'theme.colors.onSurfaceVariant',
+    },
+    error: {
+      textColor: 'theme.colors.error',
+    },
+  },
   IconButton: {
     selected: {
       default: {
@@ -165,6 +255,21 @@ const themeColors = {
       },
     },
   },
+  Menu: {
+    '-': {
+      backgroundColor: 'theme.colors.elevation.level2',
+    },
+  },
+  'Menu.Item': {
+    default: {
+      textColor: 'theme.colors.onSurface',
+      iconColor: 'theme.colors.onSurfaceVariant',
+    },
+    disabled: {
+      textColor: 'theme.colors.onSurfaceDisabled',
+      iconColor: 'theme.colors.onSurfaceDisabled',
+    },
+  },
   Modal: {
     '-': {
       backgroundColor: 'theme.colors.backdrop',
@@ -187,9 +292,33 @@ const themeColors = {
       dividerColor: 'theme.colors.outline',
     },
   },
+  SegmentedButtons: {
+    checked: {
+      backgroundColor: 'theme.colors.secondaryContainer',
+      textColor: 'theme.colors.onSecondaryContainer',
+      borderColor: 'theme.colors.primary',
+    },
+    unchecked: {
+      backgroundColor: 'theme.colors.primary + 12% transparency',
+      textColor: 'theme.colors.onSurface',
+      borderColor: 'theme.colors.outline',
+    },
+    disabled: {
+      borderColor: 'theme.colors.surfaceDisabled',
+      textColor: 'theme.colors.onSurfaceDisabled',
+    },
+  },
   Snackbar: {
     '-': {
       iconColor: 'theme.colors.inverseOnSurface',
+    },
+  },
+  Surface: {
+    flat: {
+      backgroundColor: 'theme.colors.elevation[elevation]',
+    },
+    elevated: {
+      backgroundColor: 'theme.colors.elevation[elevation]',
     },
   },
   Text: {
