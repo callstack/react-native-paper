@@ -2,6 +2,34 @@ const config = require('../docusaurus.config');
 
 const { baseUrl, customFields } = config;
 
+function generateKnownIssues(componentName) {
+  const componentKnownIssues = customFields.knownIssues[componentName];
+
+  if (!componentKnownIssues) {
+    return `<span />`;
+  }
+
+  const issues = Object.entries(componentKnownIssues)
+    .map(([key, value]) => {
+      return `
+        <li key="${key}">
+          <a href="${value}">${key}</a>
+        </li>
+    `;
+    })
+    .join('');
+
+  return `
+  ## Known Issues
+
+  <details>
+    <ul>
+      ${issues}
+    </ul>
+  </details>
+  `;
+}
+
 function generateMoreExamples(componentName) {
   const componentMoreExamples = customFields.moreExamples[componentName];
 
@@ -12,9 +40,9 @@ function generateMoreExamples(componentName) {
   const links = Object.entries(componentMoreExamples)
     .map(([key, value]) => {
       return `
-    <li key="${key}">
-      <a href="${value}">${key}</a>
-    </li>
+        <li key="${key}">
+          <a href="${value}">${key}</a>
+        </li>
     `;
     })
     .join('');
@@ -67,6 +95,8 @@ ${generateMoreExamples(doc.title)}
 <PropTable link="${link}" />
 
 ${generateThemeColors(doc.title, data)}
+
+${generateKnownIssues(doc.title)}
 `;
 
   return mdx.slice(1);

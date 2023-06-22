@@ -326,6 +326,14 @@ const config = {
           'https://snack.expo.dev/@react-native-paper/more-examples---snackbar-rendered-regardless-of-the-parent-positioning',
       },
     },
+    knownIssues: {
+      TextInput: {
+        'Outline overlaps label':
+          'https://github.com/callstack/react-native-paper/issues/3759#issuecomment-1601235262',
+        'Long text wraps to a second line':
+          'https://github.com/callstack/react-native-paper/issues/2581#issuecomment-790251987',
+      },
+    },
     themeColors,
   },
 };
