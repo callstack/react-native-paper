@@ -79,6 +79,29 @@ it('renders v3 Text component with custom variant correctly', () => {
   expect(getByTestId('text-with-custom-variant').props.style).toMatchSnapshot();
 });
 
+it("nested text with variant should override parent's variant", () => {
+  const { getByTestId } = render(
+    <Text testID="parent-text" variant="bodySmall">
+      <Text variant="displayLarge">Test</Text>
+    </Text>
+  );
+
+  expect(getByTestId('parent-text')).toHaveStyle(
+    MD3LightTheme.fonts.displayLarge
+  );
+});
+
+it("nested text without variant, but with styles, should override parent's styles", () => {
+  const customStyle = { fontSize: 50, lineHeight: 70 };
+  const { getByTestId } = render(
+    <Text testID="parent-text" variant="bodySmall">
+      <Text style={customStyle}>Test</Text>
+    </Text>
+  );
+
+  expect(getByTestId('parent-text')).toHaveStyle(customStyle);
+});
+
 it('throws when custom variant not provided', () => {
   jest.spyOn(console, 'error').mockImplementation(() => {});
 
