@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
-import { Button, List } from 'react-native-paper';
+import { Button, List, Text } from 'react-native-paper';
 
 import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
@@ -282,6 +282,9 @@ const ButtonExample = () => {
             labelStyle={[styles.fontStyles, theme.isV3 && styles.md3FontStyles]}
           >
             Custom Font
+          </Button>
+          <Button mode="outlined" onPress={() => {}} style={styles.button}>
+            <Text variant="titleLarge">Custom text</Text>
           </Button>
         </View>
 
