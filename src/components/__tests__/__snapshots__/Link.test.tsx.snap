@@ -1,0 +1,705 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders link 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      Object {
+        "alignSelf": "flex-start",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "fontFamily": "System",
+          "fontSize": 14,
+          "fontWeight": "400",
+          "letterSpacing": 0.25,
+          "lineHeight": 20,
+        },
+        Object {
+          "textAlign": "left",
+        },
+        Object {
+          "color": "rgba(28, 27, 31, 1)",
+          "writingDirection": "ltr",
+        },
+        Array [
+          false,
+          Object {},
+        ],
+      ]
+    }
+  >
+    React native paper
+  </Text>
+</View>
+`;
+
+exports[`renders link in different size (bodyLarge) 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      Object {
+        "alignSelf": "flex-start",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "fontFamily": "System",
+          "fontSize": 16,
+          "fontWeight": "400",
+          "letterSpacing": 0.15,
+          "lineHeight": 24,
+        },
+        Object {
+          "textAlign": "left",
+        },
+        Object {
+          "color": "rgba(28, 27, 31, 1)",
+          "writingDirection": "ltr",
+        },
+        Array [
+          false,
+          Object {},
+        ],
+      ]
+    }
+  >
+    React native paper
+  </Text>
+</View>
+`;
+
+exports[`renders link in different size (bodyMedium) 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      Object {
+        "alignSelf": "flex-start",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "fontFamily": "System",
+          "fontSize": 14,
+          "fontWeight": "400",
+          "letterSpacing": 0.25,
+          "lineHeight": 20,
+        },
+        Object {
+          "textAlign": "left",
+        },
+        Object {
+          "color": "rgba(28, 27, 31, 1)",
+          "writingDirection": "ltr",
+        },
+        Array [
+          false,
+          Object {},
+        ],
+      ]
+    }
+  >
+    React native paper
+  </Text>
+</View>
+`;
+
+exports[`renders link in different size (bodySmall) 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      Object {
+        "alignSelf": "flex-start",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "fontFamily": "System",
+          "fontSize": 12,
+          "fontWeight": "400",
+          "letterSpacing": 0.4,
+          "lineHeight": 16,
+        },
+        Object {
+          "textAlign": "left",
+        },
+        Object {
+          "color": "rgba(28, 27, 31, 1)",
+          "writingDirection": "ltr",
+        },
+        Array [
+          false,
+          Object {},
+        ],
+      ]
+    }
+  >
+    React native paper
+  </Text>
+</View>
+`;
+
+exports[`renders link in different size (displayLarge) 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      Object {
+        "alignSelf": "flex-start",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "fontFamily": "System",
+          "fontSize": 57,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 64,
+        },
+        Object {
+          "textAlign": "left",
+        },
+        Object {
+          "color": "rgba(28, 27, 31, 1)",
+          "writingDirection": "ltr",
+        },
+        Array [
+          false,
+          Object {},
+        ],
+      ]
+    }
+  >
+    React native paper
+  </Text>
+</View>
+`;
+
+exports[`renders link in different size (displayMedium) 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      Object {
+        "alignSelf": "flex-start",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "fontFamily": "System",
+          "fontSize": 45,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 52,
+        },
+        Object {
+          "textAlign": "left",
+        },
+        Object {
+          "color": "rgba(28, 27, 31, 1)",
+          "writingDirection": "ltr",
+        },
+        Array [
+          false,
+          Object {},
+        ],
+      ]
+    }
+  >
+    React native paper
+  </Text>
+</View>
+`;
+
+exports[`renders link in different size (displaySmall) 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      Object {
+        "alignSelf": "flex-start",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "fontFamily": "System",
+          "fontSize": 36,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 44,
+        },
+        Object {
+          "textAlign": "left",
+        },
+        Object {
+          "color": "rgba(28, 27, 31, 1)",
+          "writingDirection": "ltr",
+        },
+        Array [
+          false,
+          Object {},
+        ],
+      ]
+    }
+  >
+    React native paper
+  </Text>
+</View>
+`;
+
+exports[`renders link in different size (titleLarge) 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      Object {
+        "alignSelf": "flex-start",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "fontFamily": "System",
+          "fontSize": 22,
+          "fontWeight": "400",
+          "letterSpacing": 0,
+          "lineHeight": 28,
+        },
+        Object {
+          "textAlign": "left",
+        },
+        Object {
+          "color": "rgba(28, 27, 31, 1)",
+          "writingDirection": "ltr",
+        },
+        Array [
+          false,
+          Object {},
+        ],
+      ]
+    }
+  >
+    React native paper
+  </Text>
+</View>
+`;
+
+exports[`renders link in different size (titleMedium) 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      Object {
+        "alignSelf": "flex-start",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "fontFamily": "System",
+          "fontSize": 16,
+          "fontWeight": "500",
+          "letterSpacing": 0.15,
+          "lineHeight": 24,
+        },
+        Object {
+          "textAlign": "left",
+        },
+        Object {
+          "color": "rgba(28, 27, 31, 1)",
+          "writingDirection": "ltr",
+        },
+        Array [
+          false,
+          Object {},
+        ],
+      ]
+    }
+  >
+    React native paper
+  </Text>
+</View>
+`;
+
+exports[`renders link in different size (titleSmall) 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      Object {
+        "alignSelf": "flex-start",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "fontFamily": "System",
+          "fontSize": 14,
+          "fontWeight": "500",
+          "letterSpacing": 0.1,
+          "lineHeight": 20,
+        },
+        Object {
+          "textAlign": "left",
+        },
+        Object {
+          "color": "rgba(28, 27, 31, 1)",
+          "writingDirection": "ltr",
+        },
+        Array [
+          false,
+          Object {},
+        ],
+      ]
+    }
+  >
+    React native paper
+  </Text>
+</View>
+`;
+
+exports[`renders link to the center 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      Object {
+        "alignSelf": "center",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "fontFamily": "System",
+          "fontSize": 14,
+          "fontWeight": "400",
+          "letterSpacing": 0.25,
+          "lineHeight": 20,
+        },
+        Object {
+          "textAlign": "left",
+        },
+        Object {
+          "color": "rgba(28, 27, 31, 1)",
+          "writingDirection": "ltr",
+        },
+        Array [
+          false,
+          Object {},
+        ],
+      ]
+    }
+  >
+    React native paper
+  </Text>
+</View>
+`;
+
+exports[`renders link to the right 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      Object {
+        "alignSelf": "flex-end",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "fontFamily": "System",
+          "fontSize": 14,
+          "fontWeight": "400",
+          "letterSpacing": 0.25,
+          "lineHeight": 20,
+        },
+        Object {
+          "textAlign": "left",
+        },
+        Object {
+          "color": "rgba(28, 27, 31, 1)",
+          "writingDirection": "ltr",
+        },
+        Array [
+          false,
+          Object {},
+        ],
+      ]
+    }
+  >
+    React native paper
+  </Text>
+</View>
+`;
+
+exports[`renders link with underline 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      Object {
+        "alignSelf": "flex-start",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "fontFamily": "System",
+          "fontSize": 14,
+          "fontWeight": "400",
+          "letterSpacing": 0.25,
+          "lineHeight": 20,
+        },
+        Object {
+          "textAlign": "left",
+        },
+        Object {
+          "color": "rgba(28, 27, 31, 1)",
+          "writingDirection": "ltr",
+        },
+        Array [
+          Object {
+            "textDecorationLine": "underline",
+          },
+          Object {},
+        ],
+      ]
+    }
+  >
+    React native paper
+  </Text>
+</View>
+`;
