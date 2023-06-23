@@ -267,13 +267,6 @@ exports[`renders snackbar with action button 1`] = `
         style={
           Array [
             Object {
-              "fontFamily": "System",
-              "fontSize": 14,
-              "fontWeight": "400",
-              "letterSpacing": 0.25,
-              "lineHeight": 20,
-            },
-            Object {
               "textAlign": "left",
             },
             Object {
@@ -282,13 +275,22 @@ exports[`renders snackbar with action button 1`] = `
             },
             Array [
               Object {
-                "flex": 1,
-                "marginHorizontal": 16,
-                "marginVertical": 14,
+                "fontFamily": "System",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "letterSpacing": 0.25,
+                "lineHeight": 20,
               },
-              Object {
-                "color": "rgba(244, 239, 244, 1)",
-              },
+              Array [
+                Object {
+                  "flex": 1,
+                  "marginHorizontal": 16,
+                  "marginVertical": 14,
+                },
+                Object {
+                  "color": "rgba(244, 239, 244, 1)",
+                },
+              ],
             ],
           ]
         }
@@ -400,13 +402,6 @@ exports[`renders snackbar with action button 1`] = `
                   style={
                     Array [
                       Object {
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                      },
-                      Object {
                         "textAlign": "left",
                       },
                       Object {
@@ -415,25 +410,34 @@ exports[`renders snackbar with action button 1`] = `
                       },
                       Array [
                         Object {
-                          "marginHorizontal": 16,
-                          "marginVertical": 9,
-                          "textAlign": "center",
-                        },
-                        false,
-                        Object {
-                          "marginHorizontal": 12,
-                        },
-                        false,
-                        false,
-                        Object {
-                          "color": "rgba(208, 188, 255, 1)",
                           "fontFamily": "System",
                           "fontSize": 14,
                           "fontWeight": "500",
                           "letterSpacing": 0.1,
                           "lineHeight": 20,
                         },
-                        undefined,
+                        Array [
+                          Object {
+                            "marginHorizontal": 16,
+                            "marginVertical": 9,
+                            "textAlign": "center",
+                          },
+                          false,
+                          Object {
+                            "marginHorizontal": 12,
+                          },
+                          false,
+                          false,
+                          Object {
+                            "color": "rgba(208, 188, 255, 1)",
+                            "fontFamily": "System",
+                            "fontSize": 14,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.1,
+                            "lineHeight": 20,
+                          },
+                          undefined,
+                        ],
                       ],
                     ]
                   }
@@ -520,13 +524,6 @@ exports[`renders snackbar with content 1`] = `
         style={
           Array [
             Object {
-              "fontFamily": "System",
-              "fontSize": 14,
-              "fontWeight": "400",
-              "letterSpacing": 0.25,
-              "lineHeight": 20,
-            },
-            Object {
               "textAlign": "left",
             },
             Object {
@@ -535,13 +532,22 @@ exports[`renders snackbar with content 1`] = `
             },
             Array [
               Object {
-                "flex": 1,
-                "marginHorizontal": 16,
-                "marginVertical": 14,
+                "fontFamily": "System",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "letterSpacing": 0.25,
+                "lineHeight": 20,
               },
-              Object {
-                "color": "rgba(244, 239, 244, 1)",
-              },
+              Array [
+                Object {
+                  "flex": 1,
+                  "marginHorizontal": 16,
+                  "marginVertical": 14,
+                },
+                Object {
+                  "color": "rgba(244, 239, 244, 1)",
+                },
+              ],
             ],
           ]
         }

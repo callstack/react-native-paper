@@ -251,13 +251,6 @@ exports[`renders list item with custom description 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 14,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.1,
-                          "lineHeight": 20,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -266,22 +259,31 @@ exports[`renders list item with custom description 1`] = `
                         },
                         Array [
                           Object {
-                            "marginVertical": 6,
-                            "textAlignVertical": "center",
-                          },
-                          Object {
-                            "color": "rgba(29, 25, 43, 1)",
                             "fontFamily": "System",
                             "fontSize": 14,
                             "fontWeight": "500",
                             "letterSpacing": 0.1,
                             "lineHeight": 20,
                           },
-                          Object {
-                            "marginLeft": 8,
-                            "marginRight": 16,
-                          },
-                          undefined,
+                          Array [
+                            Object {
+                              "marginVertical": 6,
+                              "textAlignVertical": "center",
+                            },
+                            Object {
+                              "color": "rgba(29, 25, 43, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
+                            },
+                            Object {
+                              "marginLeft": 8,
+                              "marginRight": 16,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }

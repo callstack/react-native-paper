@@ -154,13 +154,6 @@ exports[`renders chip with close button 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -169,22 +162,31 @@ exports[`renders chip with close button 1`] = `
               },
               Array [
                 Object {
-                  "marginVertical": 6,
-                  "textAlignVertical": "center",
-                },
-                Object {
-                  "color": "rgba(29, 25, 43, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Object {
-                  "marginLeft": 8,
-                  "marginRight": 0,
-                },
-                undefined,
+                Array [
+                  Object {
+                    "marginVertical": 6,
+                    "textAlignVertical": "center",
+                  },
+                  Object {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  Object {
+                    "marginLeft": 8,
+                    "marginRight": 0,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -428,13 +430,6 @@ exports[`renders chip with custom close button 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -443,22 +438,31 @@ exports[`renders chip with custom close button 1`] = `
               },
               Array [
                 Object {
-                  "marginVertical": 6,
-                  "textAlignVertical": "center",
-                },
-                Object {
-                  "color": "rgba(29, 25, 43, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Object {
-                  "marginLeft": 8,
-                  "marginRight": 0,
-                },
-                undefined,
+                Array [
+                  Object {
+                    "marginVertical": 6,
+                    "textAlignVertical": "center",
+                  },
+                  Object {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  Object {
+                    "marginLeft": 8,
+                    "marginRight": 0,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -702,13 +706,6 @@ exports[`renders chip with icon 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -717,22 +714,31 @@ exports[`renders chip with icon 1`] = `
               },
               Array [
                 Object {
-                  "marginVertical": 6,
-                  "textAlignVertical": "center",
-                },
-                Object {
-                  "color": "rgba(29, 25, 43, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Object {
-                  "marginLeft": 8,
-                  "marginRight": 16,
-                },
-                undefined,
+                Array [
+                  Object {
+                    "marginVertical": 6,
+                    "textAlignVertical": "center",
+                  },
+                  Object {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  Object {
+                    "marginLeft": 8,
+                    "marginRight": 16,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -847,13 +853,6 @@ exports[`renders chip with onPress 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -862,22 +861,31 @@ exports[`renders chip with onPress 1`] = `
               },
               Array [
                 Object {
-                  "marginVertical": 6,
-                  "textAlignVertical": "center",
-                },
-                Object {
-                  "color": "rgba(29, 25, 43, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Object {
-                  "marginLeft": 16,
-                  "marginRight": 16,
-                },
-                undefined,
+                Array [
+                  Object {
+                    "marginVertical": 6,
+                    "textAlignVertical": "center",
+                  },
+                  Object {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  Object {
+                    "marginLeft": 16,
+                    "marginRight": 16,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -992,13 +1000,6 @@ exports[`renders outlined disabled chip 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -1007,22 +1008,31 @@ exports[`renders outlined disabled chip 1`] = `
               },
               Array [
                 Object {
-                  "marginVertical": 6,
-                  "textAlignVertical": "center",
-                },
-                Object {
-                  "color": "rgba(28, 27, 31, 0.38)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Object {
-                  "marginLeft": 16,
-                  "marginRight": 16,
-                },
-                undefined,
+                Array [
+                  Object {
+                    "marginVertical": 6,
+                    "textAlignVertical": "center",
+                  },
+                  Object {
+                    "color": "rgba(28, 27, 31, 0.38)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  Object {
+                    "marginLeft": 16,
+                    "marginRight": 16,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -1189,13 +1199,6 @@ exports[`renders selected chip 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -1204,22 +1207,31 @@ exports[`renders selected chip 1`] = `
               },
               Array [
                 Object {
-                  "marginVertical": 6,
-                  "textAlignVertical": "center",
-                },
-                Object {
-                  "color": "rgba(29, 25, 43, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Object {
-                  "marginLeft": 8,
-                  "marginRight": 16,
-                },
-                undefined,
+                Array [
+                  Object {
+                    "marginVertical": 6,
+                    "textAlignVertical": "center",
+                  },
+                  Object {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  Object {
+                    "marginLeft": 8,
+                    "marginRight": 16,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }

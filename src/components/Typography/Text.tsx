@@ -96,7 +96,8 @@ const Text = (
   }));
 
   if (theme.isV3 && variant) {
-    let textStyle = [theme.fonts[variant], style];
+    let font = theme.fonts[variant];
+    let textStyle = [font, style];
 
     if (
       rest.children &&
@@ -116,10 +117,8 @@ const Text = (
       // Solution:  To address the following scenario, the code below overrides the `variant`
       //            specified in a parent in favor of children's variant:
       if (props.variant) {
-        textStyle = [
-          style,
-          theme.fonts[props.variant as VariantProp<typeof props.variant>],
-        ];
+        font = theme.fonts[props.variant as VariantProp<typeof props.variant>];
+        textStyle = [style, font];
       }
 
       // Case two:  Nested `Text` has specified `styles` which intefere
@@ -134,7 +133,7 @@ const Text = (
       }
     }
 
-    if (typeof textStyle !== 'object') {
+    if (typeof font !== 'object') {
       throw new Error(
         `Variant ${variant} was not provided properly. Valid variants are ${Object.keys(
           theme.fonts

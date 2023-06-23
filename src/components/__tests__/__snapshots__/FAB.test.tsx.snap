@@ -845,13 +845,6 @@ exports[`renders extended FAB 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -860,17 +853,26 @@ exports[`renders extended FAB 1`] = `
               },
               Array [
                 Object {
-                  "marginHorizontal": 8,
-                },
-                false,
-                Object {
-                  "color": "rgba(33, 0, 93, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
+                Array [
+                  Object {
+                    "marginHorizontal": 8,
+                  },
+                  false,
+                  Object {
+                    "color": "rgba(33, 0, 93, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                ],
               ],
             ]
           }
@@ -1052,13 +1054,6 @@ exports[`renders extended FAB with custom size prop 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -1067,17 +1062,26 @@ exports[`renders extended FAB with custom size prop 1`] = `
               },
               Array [
                 Object {
-                  "marginHorizontal": 8,
-                },
-                false,
-                Object {
-                  "color": "rgba(33, 0, 93, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
+                Array [
+                  Object {
+                    "marginHorizontal": 8,
+                  },
+                  false,
+                  Object {
+                    "color": "rgba(33, 0, 93, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                ],
               ],
             ]
           }

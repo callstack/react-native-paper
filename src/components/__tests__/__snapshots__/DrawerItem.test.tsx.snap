@@ -115,13 +115,6 @@ exports[`renders DrawerItem with icon 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -130,17 +123,26 @@ exports[`renders DrawerItem with icon 1`] = `
               },
               Array [
                 Object {
-                  "marginRight": 32,
-                },
-                Object {
-                  "color": "rgba(73, 69, 79, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
-                  "marginLeft": 12,
                 },
+                Array [
+                  Object {
+                    "marginRight": 32,
+                  },
+                  Object {
+                    "color": "rgba(73, 69, 79, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                    "marginLeft": 12,
+                  },
+                ],
               ],
             ]
           }
@@ -268,13 +270,6 @@ exports[`renders active DrawerItem 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -283,17 +278,26 @@ exports[`renders active DrawerItem 1`] = `
               },
               Array [
                 Object {
-                  "marginRight": 32,
-                },
-                Object {
-                  "color": "rgba(29, 25, 43, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
-                  "marginLeft": 12,
                 },
+                Array [
+                  Object {
+                    "marginRight": 32,
+                  },
+                  Object {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                    "marginLeft": 12,
+                  },
+                ],
               ],
             ]
           }
@@ -385,13 +389,6 @@ exports[`renders basic DrawerItem 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -400,17 +397,26 @@ exports[`renders basic DrawerItem 1`] = `
               },
               Array [
                 Object {
-                  "marginRight": 32,
-                },
-                Object {
-                  "color": "rgba(73, 69, 79, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
-                  "marginLeft": 0,
                 },
+                Array [
+                  Object {
+                    "marginRight": 32,
+                  },
+                  Object {
+                    "color": "rgba(73, 69, 79, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                    "marginLeft": 0,
+                  },
+                ],
               ],
             ]
           }

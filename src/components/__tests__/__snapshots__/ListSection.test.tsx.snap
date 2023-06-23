@@ -181,13 +181,6 @@ exports[`renders list section with custom title style 1`] = `
     style={
       Array [
         Object {
-          "fontFamily": "System",
-          "fontSize": 14,
-          "fontWeight": "400",
-          "letterSpacing": 0.25,
-          "lineHeight": 20,
-        },
-        Object {
           "textAlign": "left",
         },
         Object {
@@ -196,20 +189,29 @@ exports[`renders list section with custom title style 1`] = `
         },
         Array [
           Object {
-            "paddingHorizontal": 16,
-            "paddingVertical": 13,
-          },
-          Object {
-            "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 14,
             "fontWeight": "400",
             "letterSpacing": 0.25,
             "lineHeight": 20,
           },
-          Object {
-            "color": "#f44336",
-          },
+          Array [
+            Object {
+              "paddingHorizontal": 16,
+              "paddingVertical": 13,
+            },
+            Object {
+              "color": "rgba(73, 69, 79, 1)",
+              "fontFamily": "System",
+              "fontSize": 14,
+              "fontWeight": "400",
+              "letterSpacing": 0.25,
+              "lineHeight": 20,
+            },
+            Object {
+              "color": "#f44336",
+            },
+          ],
         ],
       ]
     }
@@ -682,13 +684,6 @@ exports[`renders list section with subheader 1`] = `
     style={
       Array [
         Object {
-          "fontFamily": "System",
-          "fontSize": 14,
-          "fontWeight": "400",
-          "letterSpacing": 0.25,
-          "lineHeight": 20,
-        },
-        Object {
           "textAlign": "left",
         },
         Object {
@@ -697,18 +692,27 @@ exports[`renders list section with subheader 1`] = `
         },
         Array [
           Object {
-            "paddingHorizontal": 16,
-            "paddingVertical": 13,
-          },
-          Object {
-            "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 14,
             "fontWeight": "400",
             "letterSpacing": 0.25,
             "lineHeight": 20,
           },
-          undefined,
+          Array [
+            Object {
+              "paddingHorizontal": 16,
+              "paddingVertical": 13,
+            },
+            Object {
+              "color": "rgba(73, 69, 79, 1)",
+              "fontFamily": "System",
+              "fontSize": 14,
+              "fontWeight": "400",
+              "letterSpacing": 0.25,
+              "lineHeight": 20,
+            },
+            undefined,
+          ],
         ],
       ]
     }
