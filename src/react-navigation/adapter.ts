@@ -1,19 +1,14 @@
-import {
-  // @ts-ignore: this hook is not available in React Navigation v7
-  useLinkBuilder,
-  // @ts-ignore: this hook is not available in React Navigation v6
-  useLinkTools,
-} from '@react-navigation/native';
-
-function useV7LinkBuilder() {
-  const tools = useLinkTools();
-  return tools.buildHref;
-}
+const module = require('@react-navigation/native');
 
 type NavigationLink = () => (
   name: string,
   params?: object
 ) => string | undefined;
+
+function useV7LinkBuilder() {
+  const tools = module.useLinkTools();
+  return tools.buildHref;
+}
 
 /**
  * In React Navigation 7 `useLinkBuilder` was superseded by `useLinkTools`
@@ -21,4 +16,4 @@ type NavigationLink = () => (
  **/
 
 export const useNavigationLink: NavigationLink =
-  typeof useLinkTools !== 'undefined' ? useV7LinkBuilder : useLinkBuilder;
+  'useLinkTools' in module ? useV7LinkBuilder : module.useLinkBuilder;
