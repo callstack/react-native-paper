@@ -109,7 +109,6 @@ const PaperProvider = (props: Props) => {
             ...settings,
           }}
         >
-          {/* @ts-expect-error check @callstack/react-theme-provider's children prop */}
           <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
         </SettingsProvider>
       </PortalHost>
