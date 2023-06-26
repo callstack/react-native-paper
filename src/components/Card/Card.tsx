@@ -63,13 +63,21 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
-   * If true, disable all interactions for this component.
+   * Function to execute as soon as the touchable element is pressed and invoked even before onPress.
    */
-  disabled?: boolean;
+  onPressIn?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute as soon as the touch is released even before onPress.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
   /**
    * The number of milliseconds a user must touch the element before executing `onLongPress`.
    */
   delayLongPress?: number;
+  /**
+   * If true, disable all interactions for this component.
+   */
+  disabled?: boolean;
   /**
    * Changes Card shadow and background on iOS and Android.
    */
@@ -138,9 +146,11 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
  */
 const Card = ({
   elevation: cardElevation = 1,
-  onLongPress,
   delayLongPress,
   onPress,
+  onLongPress,
+  onPressOut,
+  onPressIn,
   mode: cardMode = 'elevated',
   children,
   style,
@@ -162,6 +172,8 @@ const Card = ({
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
     onLongPress,
+    onPressIn,
+    onPressOut,
   });
 
   // Default animated value
@@ -221,11 +233,13 @@ const Card = ({
     }
   };
 
-  const handlePressIn = useLatestCallback(() => {
+  const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
+    onPressIn?.(e);
     runElevationAnimation('in');
   });
 
-  const handlePressOut = useLatestCallback(() => {
+  const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
+    onPressOut?.(e);
     runElevationAnimation('out');
   });
 
