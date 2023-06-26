@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 import type { StackNavigationProp } from '@react-navigation/stack';
 import {
   Appbar,
+  Avatar,
   Banner,
   FAB,
   List,
@@ -43,12 +44,6 @@ const TooltipExample = ({ navigation }: Props) => {
     });
   });
 
-  const renderFAB = () => {
-    return (
-      <FAB size="medium" icon="plus" onPress={() => {}} style={[styles.fab]} />
-    );
-  };
-
   return (
     <>
       <ScreenWrapper>
@@ -72,8 +67,19 @@ const TooltipExample = ({ navigation }: Props) => {
             </Tooltip>
           </ToggleButton.Row>
         </List.Section>
+
+        <View style={styles.avatarContainer}>
+          <Tooltip title="Username">
+            <Avatar.Text label="U" />
+          </Tooltip>
+        </View>
       </ScreenWrapper>
-      <Tooltip title="Press Me">{renderFAB()}</Tooltip>
+
+      <View style={styles.fabContainer}>
+        <Tooltip title="Press Me">
+          <FAB size="medium" icon="plus" onPress={() => {}} />
+        </Tooltip>
+      </View>
     </>
   );
 };
@@ -83,10 +89,14 @@ TooltipExample.title = 'Tooltip';
 export default TooltipExample;
 
 const styles = StyleSheet.create({
-  fab: {
-    position: 'absolute',
+  avatarContainer: {
+    margin: 16,
+    width: 64,
+  },
+  fabContainer: {
     margin: 16,
     right: 0,
+    position: 'absolute',
     bottom: 0,
   },
   toggleButtonRow: {

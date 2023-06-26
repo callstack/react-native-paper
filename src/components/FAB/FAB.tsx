@@ -293,6 +293,7 @@ const FAB = forwardRef<View, Props>(
           accessibilityState={newAccessibilityState}
           testID={testID}
           style={{ borderRadius }}
+          {...rest}
         >
           <View
             style={[styles.content, label ? extendedStyle : fabStyle]}

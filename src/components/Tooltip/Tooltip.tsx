@@ -125,10 +125,15 @@ const Tooltip = ({
       clearTimeout(hideTooltipTimer.current);
     }
 
-    showTooltipTimer.current = setTimeout(() => {
+    if (isWeb) {
+      showTooltipTimer.current = setTimeout(() => {
+        touched.current = true;
+        setVisible(true);
+      }, enterTouchDelay) as unknown as NodeJS.Timeout;
+    } else {
       touched.current = true;
       setVisible(true);
-    }, enterTouchDelay) as unknown as NodeJS.Timeout;
+    }
   };
 
   const handleTouchEnd = () => {
@@ -179,7 +184,7 @@ const Tooltip = ({
                 backgroundColor: theme.isV3
                   ? theme.colors.onSurface
                   : theme.colors.tooltip,
-                ...getTooltipPosition(measurement as Measurement),
+                ...getTooltipPosition(measurement as Measurement, children),
                 borderRadius: theme.roundness,
                 ...(measurement.measured ? styles.visible : styles.hidden),
               },
@@ -229,7 +234,6 @@ const styles = StyleSheet.create({
   },
   pressContainer: {
     cursor: 'default',
-    alignSelf: 'flex-start',
   } as ViewStyle,
 });
 
