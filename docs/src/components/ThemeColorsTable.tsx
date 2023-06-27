@@ -44,15 +44,21 @@ const FlatTable = ({
   });
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>mode</th>
-          {getTableHeader(uniqueKeys)}
-        </tr>
-      </thead>
-      <tbody>{rows}</tbody>
-    </table>
+    <>
+      <Admonition type="info">
+        The table below outlines the theme colors, specifically for MD3{' '}
+        <i>(theme version 3)</i> at the moment.
+      </Admonition>
+      <table>
+        <thead>
+          <tr>
+            <th>mode</th>
+            {getTableHeader(uniqueKeys)}
+          </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </table>
+    </>
   );
 };
 
@@ -88,7 +94,15 @@ const TabbedTable = ({
     );
   });
 
-  return <Tabs>{tabTableContent}</Tabs>;
+  return (
+    <>
+      <Admonition type="info">
+        The table below outlines the theme colors, specifically for MD3{' '}
+        <i>(theme version 3)</i> at the moment.
+      </Admonition>
+      <Tabs>{tabTableContent}</Tabs>
+    </>
+  );
 };
 
 const ThemeColorsTable = ({

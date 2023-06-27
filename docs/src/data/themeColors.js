@@ -294,18 +294,24 @@ const themeColors = {
   },
   SegmentedButtons: {
     checked: {
-      backgroundColor: 'theme.colors.secondaryContainer',
-      textColor: 'theme.colors.onSecondaryContainer',
-      borderColor: 'theme.colors.primary',
+      '-': {
+        backgroundColor: 'theme.colors.secondaryContainer',
+        textColor: 'theme.colors.onSecondaryContainer',
+        borderColor: 'theme.colors.primary',
+      },
     },
     unchecked: {
-      backgroundColor: 'theme.colors.primary + 12% transparency',
-      textColor: 'theme.colors.onSurface',
-      borderColor: 'theme.colors.outline',
+      '-': {
+        backgroundColor: 'theme.colors.primary + 12% transparency',
+        textColor: 'theme.colors.onSurface',
+        borderColor: 'theme.colors.outline',
+      },
     },
     disabled: {
-      borderColor: 'theme.colors.surfaceDisabled',
-      textColor: 'theme.colors.onSurfaceDisabled',
+      '-': {
+        borderColor: 'theme.colors.surfaceDisabled',
+        textColor: 'theme.colors.onSurfaceDisabled',
+      },
     },
   },
   Snackbar: {
