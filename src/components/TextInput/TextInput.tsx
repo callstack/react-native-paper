@@ -62,6 +62,10 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    */
   selectionColor?: string;
   /**
+   * Cursor (or "caret") color of the input - Android.
+   */
+  cursorColor?: string;
+  /**
    * Inactive underline color of the input.
    */
   underlineColor?: string;
