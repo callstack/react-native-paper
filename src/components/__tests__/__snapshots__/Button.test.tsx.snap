@@ -90,13 +90,6 @@ exports[`renders button with an accessibility hint 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -105,25 +98,34 @@ exports[`renders button with an accessibility hint 1`] = `
               },
               Array [
                 Object {
-                  "marginHorizontal": 16,
-                  "marginVertical": 9,
-                  "textAlign": "center",
-                },
-                false,
-                Object {
-                  "marginHorizontal": 12,
-                },
-                undefined,
-                false,
-                Object {
-                  "color": "rgba(103, 80, 164, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                undefined,
+                Array [
+                  Object {
+                    "marginHorizontal": 16,
+                    "marginVertical": 9,
+                    "textAlign": "center",
+                  },
+                  false,
+                  Object {
+                    "marginHorizontal": 12,
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "color": "rgba(103, 80, 164, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -227,13 +229,6 @@ exports[`renders button with an accessibility label 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -242,25 +237,34 @@ exports[`renders button with an accessibility label 1`] = `
               },
               Array [
                 Object {
-                  "marginHorizontal": 16,
-                  "marginVertical": 9,
-                  "textAlign": "center",
-                },
-                false,
-                Object {
-                  "marginHorizontal": 12,
-                },
-                undefined,
-                false,
-                Object {
-                  "color": "rgba(103, 80, 164, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                undefined,
+                Array [
+                  Object {
+                    "marginHorizontal": 16,
+                    "marginVertical": 9,
+                    "textAlign": "center",
+                  },
+                  false,
+                  Object {
+                    "marginHorizontal": 12,
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "color": "rgba(103, 80, 164, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -363,13 +367,6 @@ exports[`renders button with button color 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -378,25 +375,34 @@ exports[`renders button with button color 1`] = `
               },
               Array [
                 Object {
-                  "marginHorizontal": 16,
-                  "marginVertical": 9,
-                  "textAlign": "center",
-                },
-                false,
-                Object {
-                  "marginHorizontal": 12,
-                },
-                undefined,
-                false,
-                Object {
-                  "color": "rgba(103, 80, 164, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                undefined,
+                Array [
+                  Object {
+                    "marginHorizontal": 16,
+                    "marginVertical": 9,
+                    "textAlign": "center",
+                  },
+                  false,
+                  Object {
+                    "marginHorizontal": 12,
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "color": "rgba(103, 80, 164, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -499,13 +505,6 @@ exports[`renders button with color 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -514,25 +513,34 @@ exports[`renders button with color 1`] = `
               },
               Array [
                 Object {
-                  "marginHorizontal": 16,
-                  "marginVertical": 9,
-                  "textAlign": "center",
-                },
-                false,
-                Object {
-                  "marginHorizontal": 12,
-                },
-                undefined,
-                false,
-                Object {
-                  "color": "#e91e63",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                undefined,
+                Array [
+                  Object {
+                    "marginHorizontal": 16,
+                    "marginVertical": 9,
+                    "textAlign": "center",
+                  },
+                  false,
+                  Object {
+                    "marginHorizontal": 12,
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "color": "#e91e63",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -635,13 +643,6 @@ exports[`renders button with custom testID 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -650,25 +651,34 @@ exports[`renders button with custom testID 1`] = `
               },
               Array [
                 Object {
-                  "marginHorizontal": 16,
-                  "marginVertical": 9,
-                  "textAlign": "center",
-                },
-                false,
-                Object {
-                  "marginHorizontal": 12,
-                },
-                undefined,
-                false,
-                Object {
-                  "color": "rgba(103, 80, 164, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                undefined,
+                Array [
+                  Object {
+                    "marginHorizontal": 16,
+                    "marginVertical": 9,
+                    "textAlign": "center",
+                  },
+                  false,
+                  Object {
+                    "marginHorizontal": 12,
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "color": "rgba(103, 80, 164, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -827,13 +837,6 @@ exports[`renders button with icon 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -842,25 +845,34 @@ exports[`renders button with icon 1`] = `
               },
               Array [
                 Object {
-                  "marginHorizontal": 16,
-                  "marginVertical": 9,
-                  "textAlign": "center",
-                },
-                false,
-                Object {
-                  "marginHorizontal": 16,
-                },
-                undefined,
-                false,
-                Object {
-                  "color": "rgba(103, 80, 164, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                undefined,
+                Array [
+                  Object {
+                    "marginHorizontal": 16,
+                    "marginVertical": 9,
+                    "textAlign": "center",
+                  },
+                  false,
+                  Object {
+                    "marginHorizontal": 16,
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "color": "rgba(103, 80, 164, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -1021,13 +1033,6 @@ exports[`renders button with icon in reverse order 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -1036,25 +1041,34 @@ exports[`renders button with icon in reverse order 1`] = `
               },
               Array [
                 Object {
-                  "marginHorizontal": 16,
-                  "marginVertical": 9,
-                  "textAlign": "center",
-                },
-                false,
-                Object {
-                  "marginHorizontal": 16,
-                },
-                undefined,
-                false,
-                Object {
-                  "color": "rgba(103, 80, 164, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                undefined,
+                Array [
+                  Object {
+                    "marginHorizontal": 16,
+                    "marginVertical": 9,
+                    "textAlign": "center",
+                  },
+                  false,
+                  Object {
+                    "marginHorizontal": 16,
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "color": "rgba(103, 80, 164, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -1157,13 +1171,6 @@ exports[`renders contained contained with mode 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -1172,26 +1179,35 @@ exports[`renders contained contained with mode 1`] = `
               },
               Array [
                 Object {
-                  "marginHorizontal": 16,
-                  "marginVertical": 9,
-                  "textAlign": "center",
-                },
-                false,
-                Object {
-                  "marginHorizontal": 24,
-                  "marginVertical": 10,
-                },
-                undefined,
-                false,
-                Object {
-                  "color": "rgba(255, 255, 255, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                undefined,
+                Array [
+                  Object {
+                    "marginHorizontal": 16,
+                    "marginVertical": 9,
+                    "textAlign": "center",
+                  },
+                  false,
+                  Object {
+                    "marginHorizontal": 24,
+                    "marginVertical": 10,
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "color": "rgba(255, 255, 255, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -1294,13 +1310,6 @@ exports[`renders disabled button 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -1309,25 +1318,34 @@ exports[`renders disabled button 1`] = `
               },
               Array [
                 Object {
-                  "marginHorizontal": 16,
-                  "marginVertical": 9,
-                  "textAlign": "center",
-                },
-                false,
-                Object {
-                  "marginHorizontal": 12,
-                },
-                undefined,
-                false,
-                Object {
-                  "color": "rgba(28, 27, 31, 0.38)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                undefined,
+                Array [
+                  Object {
+                    "marginHorizontal": 16,
+                    "marginVertical": 9,
+                    "textAlign": "center",
+                  },
+                  false,
+                  Object {
+                    "marginHorizontal": 12,
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "color": "rgba(28, 27, 31, 0.38)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -1638,13 +1656,6 @@ exports[`renders loading button 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -1653,25 +1664,34 @@ exports[`renders loading button 1`] = `
               },
               Array [
                 Object {
-                  "marginHorizontal": 16,
-                  "marginVertical": 9,
-                  "textAlign": "center",
-                },
-                false,
-                Object {
-                  "marginHorizontal": 16,
-                },
-                undefined,
-                false,
-                Object {
-                  "color": "rgba(103, 80, 164, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                undefined,
+                Array [
+                  Object {
+                    "marginHorizontal": 16,
+                    "marginVertical": 9,
+                    "textAlign": "center",
+                  },
+                  false,
+                  Object {
+                    "marginHorizontal": 16,
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "color": "rgba(103, 80, 164, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -1774,13 +1794,6 @@ exports[`renders outlined button with mode 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -1789,26 +1802,35 @@ exports[`renders outlined button with mode 1`] = `
               },
               Array [
                 Object {
-                  "marginHorizontal": 16,
-                  "marginVertical": 9,
-                  "textAlign": "center",
-                },
-                false,
-                Object {
-                  "marginHorizontal": 24,
-                  "marginVertical": 10,
-                },
-                undefined,
-                false,
-                Object {
-                  "color": "rgba(103, 80, 164, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                undefined,
+                Array [
+                  Object {
+                    "marginHorizontal": 16,
+                    "marginVertical": 9,
+                    "textAlign": "center",
+                  },
+                  false,
+                  Object {
+                    "marginHorizontal": 24,
+                    "marginVertical": 10,
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "color": "rgba(103, 80, 164, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -1911,13 +1933,6 @@ exports[`renders text button by default 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -1926,25 +1941,34 @@ exports[`renders text button by default 1`] = `
               },
               Array [
                 Object {
-                  "marginHorizontal": 16,
-                  "marginVertical": 9,
-                  "textAlign": "center",
-                },
-                false,
-                Object {
-                  "marginHorizontal": 12,
-                },
-                undefined,
-                false,
-                Object {
-                  "color": "rgba(103, 80, 164, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                undefined,
+                Array [
+                  Object {
+                    "marginHorizontal": 16,
+                    "marginVertical": 9,
+                    "textAlign": "center",
+                  },
+                  false,
+                  Object {
+                    "marginHorizontal": 12,
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "color": "rgba(103, 80, 164, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -2047,13 +2071,6 @@ exports[`renders text button with mode 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -2062,25 +2079,34 @@ exports[`renders text button with mode 1`] = `
               },
               Array [
                 Object {
-                  "marginHorizontal": 16,
-                  "marginVertical": 9,
-                  "textAlign": "center",
-                },
-                false,
-                Object {
-                  "marginHorizontal": 12,
-                },
-                undefined,
-                false,
-                Object {
-                  "color": "rgba(103, 80, 164, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                undefined,
+                Array [
+                  Object {
+                    "marginHorizontal": 16,
+                    "marginVertical": 9,
+                    "textAlign": "center",
+                  },
+                  false,
+                  Object {
+                    "marginHorizontal": 12,
+                  },
+                  undefined,
+                  false,
+                  Object {
+                    "color": "rgba(103, 80, 164, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }

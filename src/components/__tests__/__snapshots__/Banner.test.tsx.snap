@@ -202,13 +202,6 @@ exports[`render visible banner, with custom theme 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 14,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.1,
-                          "lineHeight": 20,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -217,27 +210,36 @@ exports[`render visible banner, with custom theme 1`] = `
                         },
                         Array [
                           Object {
-                            "marginHorizontal": 16,
-                            "marginVertical": 9,
-                            "textAlign": "center",
-                          },
-                          false,
-                          Object {
-                            "marginHorizontal": 12,
-                          },
-                          Object {
-                            "marginHorizontal": 8,
-                          },
-                          false,
-                          Object {
-                            "color": "#043",
                             "fontFamily": "System",
                             "fontSize": 14,
                             "fontWeight": "500",
                             "letterSpacing": 0.1,
                             "lineHeight": 20,
                           },
-                          undefined,
+                          Array [
+                            Object {
+                              "marginHorizontal": 16,
+                              "marginVertical": 9,
+                              "textAlign": "center",
+                            },
+                            false,
+                            Object {
+                              "marginHorizontal": 12,
+                            },
+                            Object {
+                              "marginHorizontal": 8,
+                            },
+                            false,
+                            Object {
+                              "color": "#043",
+                              "fontFamily": "System",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }
@@ -611,13 +613,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 14,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.1,
-                          "lineHeight": 20,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -626,27 +621,36 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                         },
                         Array [
                           Object {
-                            "marginHorizontal": 16,
-                            "marginVertical": 9,
-                            "textAlign": "center",
-                          },
-                          false,
-                          Object {
-                            "marginHorizontal": 12,
-                          },
-                          Object {
-                            "marginHorizontal": 8,
-                          },
-                          false,
-                          Object {
-                            "color": "rgba(103, 80, 164, 1)",
                             "fontFamily": "System",
                             "fontSize": 14,
                             "fontWeight": "500",
                             "letterSpacing": 0.1,
                             "lineHeight": 20,
                           },
-                          undefined,
+                          Array [
+                            Object {
+                              "marginHorizontal": 16,
+                              "marginVertical": 9,
+                              "textAlign": "center",
+                            },
+                            false,
+                            Object {
+                              "marginHorizontal": 12,
+                            },
+                            Object {
+                              "marginHorizontal": 8,
+                            },
+                            false,
+                            Object {
+                              "color": "rgba(103, 80, 164, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }
@@ -867,13 +871,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 14,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.1,
-                          "lineHeight": 20,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -882,27 +879,36 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                         },
                         Array [
                           Object {
-                            "marginHorizontal": 16,
-                            "marginVertical": 9,
-                            "textAlign": "center",
-                          },
-                          false,
-                          Object {
-                            "marginHorizontal": 12,
-                          },
-                          Object {
-                            "marginHorizontal": 8,
-                          },
-                          false,
-                          Object {
-                            "color": "rgba(103, 80, 164, 1)",
                             "fontFamily": "System",
                             "fontSize": 14,
                             "fontWeight": "500",
                             "letterSpacing": 0.1,
                             "lineHeight": 20,
                           },
-                          undefined,
+                          Array [
+                            Object {
+                              "marginHorizontal": 16,
+                              "marginVertical": 9,
+                              "textAlign": "center",
+                            },
+                            false,
+                            Object {
+                              "marginHorizontal": 12,
+                            },
+                            Object {
+                              "marginHorizontal": 8,
+                            },
+                            false,
+                            Object {
+                              "color": "rgba(103, 80, 164, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }
@@ -1003,13 +1009,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 14,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.1,
-                          "lineHeight": 20,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -1018,27 +1017,36 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                         },
                         Array [
                           Object {
-                            "marginHorizontal": 16,
-                            "marginVertical": 9,
-                            "textAlign": "center",
-                          },
-                          false,
-                          Object {
-                            "marginHorizontal": 12,
-                          },
-                          Object {
-                            "marginHorizontal": 8,
-                          },
-                          false,
-                          Object {
-                            "color": "rgba(103, 80, 164, 1)",
                             "fontFamily": "System",
                             "fontSize": 14,
                             "fontWeight": "500",
                             "letterSpacing": 0.1,
                             "lineHeight": 20,
                           },
-                          undefined,
+                          Array [
+                            Object {
+                              "marginHorizontal": 16,
+                              "marginVertical": 9,
+                              "textAlign": "center",
+                            },
+                            false,
+                            Object {
+                              "marginHorizontal": 12,
+                            },
+                            Object {
+                              "marginHorizontal": 8,
+                            },
+                            false,
+                            Object {
+                              "color": "rgba(103, 80, 164, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }

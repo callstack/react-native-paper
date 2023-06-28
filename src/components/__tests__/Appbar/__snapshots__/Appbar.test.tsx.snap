@@ -638,13 +638,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         style={
           Array [
             Object {
-              "fontFamily": "System",
-              "fontSize": 22,
-              "fontWeight": "400",
-              "letterSpacing": 0,
-              "lineHeight": 28,
-            },
-            Object {
               "textAlign": "left",
             },
             Object {
@@ -653,15 +646,24 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             },
             Array [
               Object {
-                "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontSize": 22,
                 "fontWeight": "400",
                 "letterSpacing": 0,
                 "lineHeight": 28,
               },
-              false,
-              undefined,
+              Array [
+                Object {
+                  "color": "rgba(28, 27, 31, 1)",
+                  "fontFamily": "System",
+                  "fontSize": 22,
+                  "fontWeight": "400",
+                  "letterSpacing": 0,
+                  "lineHeight": 28,
+                },
+                false,
+                undefined,
+              ],
             ],
           ]
         }
