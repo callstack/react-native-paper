@@ -13,6 +13,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import useLatestCallback from 'use-latest-callback';
+
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
@@ -84,6 +86,26 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * Function to execute on long press.
+   */
+  onLongPress?: () => void;
+  /**
+   * Function to execute as soon as the touchable element is pressed and invoked even before onPress.
+   */
+  onPressIn?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute as soon as the touch is released even before onPress.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute on close button press. The close button appears only when this prop is specified.
+   */
+  onClose?: () => void;
+  /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
+  /**
    * @supported Available in v5.x with theme version 3
    * Sets smaller horizontal paddings `12dp` around label, when there is only label.
    */
@@ -93,18 +115,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Whether chip should have the elevation.
    */
   elevated?: boolean;
-  /**
-   * Function to execute on long press.
-   */
-  onLongPress?: () => void;
-  /**
-   * The number of milliseconds a user must touch the element before executing `onLongPress`.
-   */
-  delayLongPress?: number;
-  /**
-   * Function to execute on close button press. The close button appears only when this prop is specified.
-   */
-  onClose?: () => void;
   /**
    * Style of chip's text
    */
@@ -161,6 +171,8 @@ const Chip = ({
   closeIconAccessibilityLabel = 'Close',
   onPress,
   onLongPress,
+  onPressOut,
+  onPressIn,
   delayLongPress,
   onClose,
   closeIcon,
@@ -183,27 +195,34 @@ const Chip = ({
     new Animated.Value(isV3 && elevated ? 1 : 0)
   );
 
-  const hasPassedTouchHandler = hasTouchHandler({ onPress, onLongPress });
+  const hasPassedTouchHandler = hasTouchHandler({
+    onPress,
+    onLongPress,
+    onPressIn,
+    onPressOut,
+  });
 
   const isOutlined = mode === 'outlined';
 
-  const handlePressIn = () => {
+  const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
     const { scale } = theme.animation;
+    onPressIn?.(e);
     Animated.timing(elevation, {
       toValue: isV3 ? (elevated ? 2 : 0) : 4,
       duration: 200 * scale,
       useNativeDriver: true,
     }).start();
-  };
+  });
 
-  const handlePressOut = () => {
+  const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
     const { scale } = theme.animation;
+    onPressOut?.(e);
     Animated.timing(elevation, {
       toValue: isV3 && elevated ? 1 : 0,
       duration: 150 * scale,
       useNativeDriver: true,
     }).start();
-  };
+  });
 
   const opacity = isV3 ? 0.38 : 0.26;
   const defaultBorderRadius = isV3 ? 8 : 16;
@@ -274,9 +293,9 @@ const Chip = ({
         borderless
         style={[{ borderRadius }, styles.touchable]}
         onPress={onPress}
+        onLongPress={onLongPress}
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
         onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
-        onLongPress={onLongPress}
         delayLongPress={delayLongPress}
         rippleColor={rippleColor}
         disabled={disabled}

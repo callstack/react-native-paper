@@ -1,15 +1,17 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View, Image } from 'react-native';
 
 import type { StackNavigationProp } from '@react-navigation/stack';
 import {
   Appbar,
   Avatar,
   Banner,
+  Chip,
   FAB,
   List,
   ToggleButton,
   Tooltip,
+  Card,
 } from 'react-native-paper';
 
 import { isWeb } from '../../utils';
@@ -67,14 +69,44 @@ const TooltipExample = ({ navigation }: Props) => {
             </Tooltip>
           </ToggleButton.Row>
         </List.Section>
-
-        <View style={styles.avatarContainer}>
-          <Tooltip title="Username">
-            <Avatar.Text label="U" />
+        <List.Section title="Avatar">
+          <View style={styles.avatarContainer}>
+            <Tooltip title="Username">
+              <Avatar.Text label="U" />
+            </Tooltip>
+          </View>
+        </List.Section>
+        <List.Section title="Chip">
+          <View style={styles.chipContainer}>
+            <Tooltip title="Copied">
+              <Chip
+                mode="outlined"
+                avatar={
+                  <Image
+                    source={require('../../assets/images/avatar.png')}
+                    accessibilityIgnoresInvertColors
+                  />
+                }
+              >
+                John Doe
+              </Chip>
+            </Tooltip>
+          </View>
+        </List.Section>
+        <List.Section title="Card">
+          <Tooltip title="Cafeteria, 1st floor">
+            <Card style={styles.cardContainer}>
+              <Card.Title
+                title="Lunch break"
+                subtitle="1:00-2:00 PM"
+                left={(props) => (
+                  <Avatar.Icon {...props} icon="food-fork-drink" />
+                )}
+              />
+            </Card>
           </Tooltip>
-        </View>
+        </List.Section>
       </ScreenWrapper>
-
       <View style={styles.fabContainer}>
         <Tooltip title="Press Me">
           <FAB size="medium" icon="plus" onPress={() => {}} />
@@ -90,14 +122,22 @@ export default TooltipExample;
 
 const styles = StyleSheet.create({
   avatarContainer: {
-    margin: 16,
+    marginHorizontal: 16,
     width: 64,
+  },
+  chipContainer: {
+    marginHorizontal: 16,
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   fabContainer: {
     margin: 16,
     right: 0,
     position: 'absolute',
     bottom: 0,
+  },
+  cardContainer: {
+    margin: 16,
   },
   toggleButtonRow: {
     paddingHorizontal: 16,
