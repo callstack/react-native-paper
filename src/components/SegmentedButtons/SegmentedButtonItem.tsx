@@ -81,7 +81,7 @@ export type Props = {
   density?: 'regular' | 'small' | 'medium' | 'high';
   style?: StyleProp<ViewStyle>;
   /**
-   * Allows you to customize the style of the label associated with a SegmentedButton.
+   * Style for the button label.
    */
   labelStyle?: StyleProp<TextStyle>;
   /**
