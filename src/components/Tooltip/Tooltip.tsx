@@ -73,6 +73,8 @@ const Tooltip = ({
   theme: themeOverrides,
   ...rest
 }: Props) => {
+  const isWeb = Platform.OS === 'web';
+
   const theme = useInternalTheme(themeOverrides);
   const [visible, setVisible] = React.useState(false);
 
@@ -85,8 +87,6 @@ const Tooltip = ({
   const hideTooltipTimer = React.useRef<NodeJS.Timeout>();
   const childrenWrapperRef = React.useRef() as React.MutableRefObject<View>;
   const touched = React.useRef(false);
-
-  const isWeb = Platform.OS === 'web';
 
   React.useEffect(() => {
     return () => {
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     opacity: 0,
   },
   pressContainer: {
-    cursor: 'default',
+    ...(Platform.OS === 'web' && { cursor: 'default' }),
   } as ViewStyle,
 });
 
