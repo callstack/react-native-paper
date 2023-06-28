@@ -78,7 +78,7 @@ const getAndroidControlColor = ({
     if (theme.isV3) {
       return theme.colors.onSurfaceDisabled;
     }
-    return theme.colors.text;
+    return theme.colors.disabled;
   }
 
   if (checked) {
