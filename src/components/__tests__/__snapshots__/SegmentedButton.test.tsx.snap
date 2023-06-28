@@ -169,6 +169,7 @@ exports[`renders checked segmented button with selected check 1`] = `
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
+                undefined,
               ],
             ]
           }
@@ -279,6 +280,7 @@ exports[`renders checked segmented button with selected check 1`] = `
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
+                undefined,
               ],
             ]
           }
@@ -407,6 +409,7 @@ exports[`renders disabled segmented button 1`] = `
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
+                undefined,
               ],
             ]
           }
@@ -517,6 +520,7 @@ exports[`renders disabled segmented button 1`] = `
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
+                undefined,
               ],
             ]
           }
@@ -643,6 +647,7 @@ exports[`renders segmented button 1`] = `
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
+                undefined,
               ],
             ]
           }
@@ -753,6 +758,7 @@ exports[`renders segmented button 1`] = `
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
+                undefined,
               ],
             ]
           }

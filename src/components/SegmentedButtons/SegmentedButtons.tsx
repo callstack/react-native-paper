@@ -3,6 +3,7 @@ import {
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
+  TextStyle,
   View,
   ViewStyle,
 } from 'react-native';
@@ -71,6 +72,7 @@ export type Props = {
     label?: string;
     showSelectedCheck?: boolean;
     style?: StyleProp<ViewStyle>;
+    labelStyle?: StyleProp<TextStyle>;
     testID?: string;
   }[];
   /**
@@ -178,6 +180,7 @@ const SegmentedButtons = ({
             density={density}
             onPress={onPress}
             style={[item.style, disabledChildStyle]}
+            labelStyle={item.labelStyle}
             theme={theme}
           />
         );
