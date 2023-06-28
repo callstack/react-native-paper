@@ -224,7 +224,7 @@ const SegmentedButtonItem = ({
             style={[styles.label, labelTextStyle, labelStyle]}
             selectable={false}
             numberOfLines={1}
-            testID={testID ? `${testID}-label` : undefined}
+            testID={`${testID}-label`}
           >
             {label}
           </Text>
