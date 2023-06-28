@@ -173,6 +173,7 @@ exports[`renders checked segmented button with selected check 1`] = `
               ],
             ]
           }
+          testID="undefined-label"
         />
       </View>
     </View>
@@ -284,6 +285,7 @@ exports[`renders checked segmented button with selected check 1`] = `
               ],
             ]
           }
+          testID="undefined-label"
         />
       </View>
     </View>
@@ -413,6 +415,7 @@ exports[`renders disabled segmented button 1`] = `
               ],
             ]
           }
+          testID="undefined-label"
         />
       </View>
     </View>
@@ -524,6 +527,7 @@ exports[`renders disabled segmented button 1`] = `
               ],
             ]
           }
+          testID="undefined-label"
         />
       </View>
     </View>
@@ -651,6 +655,7 @@ exports[`renders segmented button 1`] = `
               ],
             ]
           }
+          testID="undefined-label"
         />
       </View>
     </View>
@@ -762,6 +767,7 @@ exports[`renders segmented button 1`] = `
               ],
             ]
           }
+          testID="undefined-label"
         />
       </View>
     </View>
