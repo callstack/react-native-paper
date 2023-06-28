@@ -17,7 +17,7 @@ import { getIconColor } from './utils';
 
 export type Props = $Omit<
   React.ComponentProps<typeof IconButton>,
-  'icon' | 'theme' | 'color'
+  'icon' | 'theme' | 'color' | 'iconColor'
 > & {
   /**
    * @renamed Renamed from 'name' to 'icon` in v5.x
