@@ -206,6 +206,7 @@ Array [
     >
       <View
         collapsable={false}
+        pointerEvents="box-none"
         style={
           Object {
             "transform": Array [
@@ -249,6 +250,7 @@ Array [
         >
           <View
             collapsable={false}
+            pointerEvents="box-none"
             style={
               Object {
                 "backgroundColor": "rgb(243, 237, 246)",
@@ -845,6 +847,7 @@ Array [
     >
       <View
         collapsable={false}
+        pointerEvents="box-none"
         style={
           Object {
             "transform": Array [
@@ -886,6 +889,7 @@ Array [
         >
           <View
             collapsable={false}
+            pointerEvents="box-none"
             style={
               Object {
                 "backgroundColor": "rgb(243, 237, 246)",
