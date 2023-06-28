@@ -203,7 +203,7 @@ const ListAccordion = ({
   const expandedInternal = expandedProp !== undefined ? expandedProp : expanded;
 
   const groupContext = React.useContext(ListAccordionGroupContext);
-  if (groupContext !== null && !id) {
+  if (groupContext !== null && (id === undefined || id === null || id === '')) {
     throw new Error(
       'List.Accordion is used inside a List.AccordionGroup without specifying an id prop.'
     );
