@@ -307,9 +307,11 @@ const Surface = forwardRef<View, Props>(
     const isElevated = mode === 'elevated';
 
     if (Platform.OS === 'web') {
+      const { pointerEvents = 'auto' } = props;
       return (
         <Animated.View
           {...props}
+          pointerEvents={pointerEvents}
           ref={ref}
           testID={testID}
           style={[

@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { Text, View } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { fireEvent, render } from '@testing-library/react-native';
 
 import { red500 } from '../../styles/themes/v2/colors';
 import Chip from '../Chip/Chip';
+import IconButton from '../IconButton/IconButton';
 import ListIcon from '../List/ListIcon';
 import ListItem from '../List/ListItem';
 
@@ -109,4 +110,20 @@ it('renders with a description with typeof number', () => {
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('calling onPress on ListItem right component', () => {
+  Platform.OS = 'web';
+  const onPress = jest.fn();
+
+  const { getByTestId } = render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      right={() => <IconButton icon="pencil" onPress={onPress} />}
+    />
+  );
+
+  fireEvent(getByTestId('icon-button'), 'onPress');
+  expect(onPress).toHaveBeenCalledTimes(1);
 });
