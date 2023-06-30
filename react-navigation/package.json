@@ -2,5 +2,5 @@
   "main": "../lib/commonjs/react-navigation/index",
   "module": "../lib/module/react-navigation/index",
   "react-native": "../src/react-navigation/index",
-  "types": "../lib/typescript/react-navigation/index"
+  "types": "../lib/typescript/src/react-navigation/index"
 }
