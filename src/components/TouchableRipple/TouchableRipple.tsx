@@ -73,12 +73,6 @@ export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
  * Provides a material "ink ripple" interaction effect for supported platforms (>= Android Lollipop).
  * On unsupported platforms, it falls back to a highlight effect.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/touchable-ripple.gif" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

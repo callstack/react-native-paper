@@ -100,12 +100,6 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
 /**
  * A component to show tiles inside a List.
  *
- * <div class="screenshots">
- *   <img class="medium" src="screenshots/list-item-1.png" />
- *   <img class="medium" src="screenshots/list-item-2.png" />
- *   <img class="medium" src="screenshots/list-item-3.png" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

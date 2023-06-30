@@ -21,12 +21,6 @@ export type Props = React.ComponentPropsWithRef<typeof Title> & {
 /**
  * A component to show a title in a Dialog.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/dialog-title.png" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

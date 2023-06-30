@@ -86,9 +86,6 @@ const DURATION_LONG = 10000;
  * Snackbars provide brief feedback about an operation through a message rendered at the bottom of the container in which it's wrapped.
  *
  * Note: To display it as a popup, regardless of the parent's position, wrap it with a `Portal` component – refer to the example in the "More Examples` section.
- * <div class="screenshots">
- *   <img class="small" src="screenshots/snackbar.gif" />
- * </div>
  *
  * ## Usage
  * ```js

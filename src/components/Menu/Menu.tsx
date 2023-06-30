@@ -106,11 +106,6 @@ const WINDOW_LAYOUT = Dimensions.get('window');
 /**
  * Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
  *
- *  <div class="screenshots">
- *   <img class="small" src="screenshots/menu-1.png" />
- *   <img class="small" src="screenshots/menu-2.png" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

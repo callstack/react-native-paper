@@ -26,12 +26,6 @@ const ICON_SIZE = 24;
 /**
  * A component to show an icon in a list item.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/list-icon.png" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

@@ -85,25 +85,6 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
 /**
  * An icon button is a button which displays only an icon without a label.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/icon-button-1.png" />
- *     <figcaption>Default icon button</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/icon-button-2.png" />
- *     <figcaption>Contained icon button</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/icon-button-3.png" />
- *     <figcaption>Contained-tonal icon button</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/icon-button-4.png" />
- *     <figcaption>Outlined icon button</figcaption>
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

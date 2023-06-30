@@ -28,10 +28,6 @@ export const ListAccordionGroupContext =
  * List.AccordionGroup can be a controlled or uncontrolled component. The example shows the uncontrolled version.
  * At most one Accordion can be expanded at a given time.
  *
- * <div class="screenshots">
- *   <img class="medium" src="screenshots/list-accordion-group.png" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

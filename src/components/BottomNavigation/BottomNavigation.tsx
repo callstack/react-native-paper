@@ -274,10 +274,6 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  * By default BottomNavigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
  * See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.
  *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/bottom-navigation.gif" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

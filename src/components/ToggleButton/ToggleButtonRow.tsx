@@ -23,12 +23,6 @@ export type Props = {
 /**
  * Toggle button row renders a group of toggle buttons in a row.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/toggle-button-row.gif" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

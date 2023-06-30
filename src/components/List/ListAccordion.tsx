@@ -112,12 +112,6 @@ export type Props = {
 /**
  * A component used to display an expandable list item.
  *
- * <div class="screenshots">
- *   <img class="medium" src="screenshots/list-accordion-1.png" />
- *   <img class="medium" src="screenshots/list-accordion-2.png" />
- *   <img class="medium" src="screenshots/list-accordion-3.png" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

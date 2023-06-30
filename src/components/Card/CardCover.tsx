@@ -25,12 +25,6 @@ export type Props = React.ComponentPropsWithRef<typeof Image> & {
 /**
  * A component to show a cover image inside a Card.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/card-cover.png" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

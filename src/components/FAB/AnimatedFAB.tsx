@@ -115,10 +115,6 @@ const SCALE = 0.9;
 /**
  * An animated, extending horizontally floating action button represents the primary action in an application.
  *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/animated-fab.gif" />
- * </div>
- *
  * ## Usage
  * ```js
  * import React from 'react';

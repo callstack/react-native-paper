@@ -186,25 +186,6 @@ const DefaultRenderer = (props: RenderProps) => <NativeTextInput {...props} />;
 /**
  * A component to allow users to input text.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img src="screenshots/textinput-flat.focused.png" />
- *     <figcaption>Flat (focused)</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/textinput-flat.disabled.png" />
- *     <figcaption>Flat (disabled)</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/textinput-outlined.focused.png" />
- *     <figcaption>Outlined (focused)</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/textinput-outlined.disabled.png" />
- *     <figcaption>Outlined (disabled)</figcaption>
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

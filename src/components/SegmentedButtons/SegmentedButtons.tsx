@@ -86,10 +86,6 @@ export type Props = {
 /**
  * Segmented buttons can be used to select options, switch views or sort elements.</br>
  *
- * <div class="screenshots">
- *   <img class="medium" src="screenshots/segmented-button.png" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

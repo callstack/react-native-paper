@@ -46,12 +46,6 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
 /**
  * Avatars can be used to represent people in a graphical way.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/avatar-text.png" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

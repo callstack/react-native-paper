@@ -28,13 +28,6 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
 /**
  * Data tables allow displaying sets of data.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="large" src="screenshots/data-table.png" />
- *     <figcaption>Data table</figcaption>
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

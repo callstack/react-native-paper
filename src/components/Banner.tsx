@@ -71,10 +71,6 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
 /**
  * Banner displays a prominent message and related actions.
  *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/banner.gif" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
