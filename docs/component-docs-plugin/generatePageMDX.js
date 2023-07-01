@@ -75,7 +75,7 @@ function generateScreenshots(componentName, screenshotData) {
   }
 
   return `
-  <ScreenshotTabs screenshotData={${screenshotData}} componentName="${componentName}" baseUrl="${baseUrl}"/>
+  <ScreenshotTabs screenshotData={${screenshotData}} baseUrl="${baseUrl}"/>
   `;
 }
 

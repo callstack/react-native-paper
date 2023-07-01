@@ -12,41 +12,28 @@ type ScreenshotTabsProps = {
   baseUrl: string;
 };
 
+const getClassName = (value: string) =>
+  value.endsWith('.gif')
+    ? 'gifScreenshot'
+    : `tabScreenshot${value.includes('full-width') ? 'full-width' : ''}`;
+
 const ScreenshotTabs: React.FC<ScreenshotTabsProps> = ({
   screenshotData,
   baseUrl,
 }) => {
-  const getScreenshotElement = (key: string, value: string): JSX.Element => (
-    <TabItem key={key} value={key} label={key} default>
-      <img
-        src={`${baseUrl}${value}`}
-        className={
-          value.endsWith('.gif')
-            ? 'gifScreenshot'
-            : `tabScreenshot${value.includes('full-width') ? 'full-width' : ''}`
-        }
-      />
-    </TabItem>
+  const renderScreenhot = (src: string): JSX.Element => (
+    <img src={`${baseUrl}${src}`} className={getClassName(src)} />
   );
 
   if (typeof screenshotData === 'string') {
-    return (
-      <img
-        src={`${baseUrl}${screenshotData}`}
-        className={
-          screenshotData.endsWith('.gif')
-            ? 'gifScreenshot'
-            : `tabScreenshot${
-                screenshotData.includes('full-width') ? 'full-width' : ''
-              }`
-        }
-      />
-    );
+    return renderScreenhot(screenshotData);
   }
 
-  const screenshots = Object.entries(screenshotData).map(([key, value]) =>
-    getScreenshotElement(key, value as string)
-  );
+  const screenshots = Object.entries(screenshotData).map(([key, value]) => (
+    <TabItem key={key} value={key} label={key} default>
+      {renderScreenhot(value as string)}
+    </TabItem>
+  ));
 
   return <Tabs>{screenshots}</Tabs>;
 };
