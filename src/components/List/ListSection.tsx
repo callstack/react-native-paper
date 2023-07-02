@@ -34,10 +34,6 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
 /**
  * A component used to group list items.
  *
- * <div class="screenshots">
- *   <img src="screenshots/list-section.png" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

@@ -5,6 +5,7 @@ const path = require('path');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 
+const { screenshots } = require('./src/data/screenshots.js');
 const { themeColors } = require('./src/data/themeColors.js');
 
 const { NODE_ENV, DOCUSAURUS_BASE_URL } = process.env;
@@ -335,6 +336,7 @@ const config = {
       },
     },
     themeColors,
+    screenshots,
   },
 };
 

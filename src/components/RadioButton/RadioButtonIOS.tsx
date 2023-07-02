@@ -44,17 +44,6 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  * Radio buttons allow the selection a single option from a set.
  * This component follows platform guidelines for iOS, but can be used
  * on any platform.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img src="screenshots/radio-enabled.ios.png" />
- *     <figcaption>Enabled</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/radio-disabled.ios.png" />
- *     <figcaption>Disabled</figcaption>
- *   </figure>
- * </div>
  */
 const RadioButtonIOS = ({
   disabled,

@@ -137,17 +137,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
 /**
  * Chips can be used to display entities in small blocks.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/chip-1.png" />
- *     <figcaption>Flat chip</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/chip-2.png" />
- *     <figcaption>Outlined chip</figcaption>
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

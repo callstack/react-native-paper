@@ -44,10 +44,6 @@ export type TextRef = React.ForwardedRef<{
 /**
  * Typography component showing styles complied with passed `variant` prop and supported by the type system.
  *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/typography.png" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

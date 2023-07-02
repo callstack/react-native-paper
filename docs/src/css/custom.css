@@ -79,8 +79,13 @@ html[data-theme='dark'] .nav-link::after {
 }
 
 .screenshots img,
-.screenshots figure {
-  max-width: 25%;
+
+.tabScreenshot {
+  max-width: 45%;
+}
+
+.gifScreenshot {
+  max-width: 40%;
 }
 
 .screenshots figure>img {

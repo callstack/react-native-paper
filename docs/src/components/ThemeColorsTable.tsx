@@ -28,17 +28,17 @@ const getTableCell = (keys: string[], modes: DataObject): JSX.Element[] => {
 };
 
 const FlatTable = ({
-  data,
+  themeColorsData,
   uniqueKeys,
 }: {
-  data: DataObject;
+  themeColorsData: DataObject;
   uniqueKeys: string[];
 }): JSX.Element => {
-  const rows = Object.keys(data).map((mode) => {
+  const rows = Object.keys(themeColorsData).map((mode) => {
     return (
       <tr key={`${mode}`}>
         <td>{mode}</td>
-        {getTableCell(uniqueKeys, data[mode] as DataObject)}
+        {getTableCell(uniqueKeys, themeColorsData[mode] as DataObject)}
       </tr>
     );
   });
@@ -63,14 +63,14 @@ const FlatTable = ({
 };
 
 const TabbedTable = ({
-  data,
+  themeColorsData,
   uniqueKeys,
 }: {
-  data: DataObject;
+  themeColorsData: DataObject;
   uniqueKeys: string[];
 }): JSX.Element => {
-  const tabTableContent = Object.keys(data).map((key) => {
-    const modes = data[key] as DataObject;
+  const tabTableContent = Object.keys(themeColorsData).map((key) => {
+    const modes = themeColorsData[key] as DataObject;
     const rows = Object.keys(modes).map((mode) => {
       return (
         <tr key={`${key}-${mode}`}>
@@ -106,21 +106,21 @@ const TabbedTable = ({
 };
 
 const ThemeColorsTable = ({
-  data,
+  themeColorsData,
   componentName,
 }: {
-  data: DataObject;
+  themeColorsData: DataObject;
   componentName: string;
 }): JSX.Element | null => {
-  const uniqueKeys = getUniqueNestedKeys(data);
-  const nestingLevel = getMaxNestedLevel(data);
+  const uniqueKeys = getUniqueNestedKeys(themeColorsData);
+  const nestingLevel = getMaxNestedLevel(themeColorsData);
   const isFlatTable = nestingLevel === 1;
 
   const Table = isFlatTable ? FlatTable : TabbedTable;
 
   return (
     <>
-      <Table data={data} uniqueKeys={uniqueKeys} />
+      <Table themeColorsData={themeColorsData} uniqueKeys={uniqueKeys} />
       <Admonition type="tip">
         <p>
           If a dedicated prop for a specific color is not available or the{' '}

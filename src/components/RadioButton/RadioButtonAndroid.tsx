@@ -49,17 +49,6 @@ const BORDER_WIDTH = 2;
  * Radio buttons allow the selection a single option from a set.
  * This component follows platform guidelines for Android, but can be used
  * on any platform.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img src="screenshots/radio-enabled.android.png" />
- *     <figcaption>Enabled</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/radio-disabled.android.png" />
- *     <figcaption>Disabled</figcaption>
- *   </figure>
- * </div>
  */
 const RadioButtonAndroid = ({
   disabled,

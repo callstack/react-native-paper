@@ -104,21 +104,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
 /**
  * A card is a sheet of material that serves as an entry point to more detailed information.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img src="screenshots/card-1.png" />
- *     <figcaption>Elevated card</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/card-2.png" />
- *     <figcaption>Outlined card</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/card-3.png" />
- *     <figcaption>Contained card</figcaption>
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

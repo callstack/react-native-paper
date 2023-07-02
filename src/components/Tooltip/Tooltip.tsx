@@ -45,12 +45,6 @@ export type Props = {
  *
  * Plain tooltips, when activated, display a text label identifying an element, such as a description of its function. Tooltips should include only short, descriptive text and avoid restating visible UI text.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/tooltip.png" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

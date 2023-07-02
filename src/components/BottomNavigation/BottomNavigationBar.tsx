@@ -243,10 +243,6 @@ const Touchable = <Route extends BaseRoute>({
 /**
  * A navigation bar which can easily be integrated with [React Navigation's Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/).
  *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/bottom-navigation-tabs.jpg" />
- * </div>
- *
  * ## Usage
  * ```js
  * import React from 'react';

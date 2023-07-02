@@ -77,10 +77,6 @@ export type Props = Omit<
  * By default Appbar uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
  * See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more informations
  *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/appbar.png" />
- * </div>
- *
  * ## Usage
  * ### Top bar
  * ```js

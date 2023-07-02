@@ -100,12 +100,6 @@ const IconAdornment: React.FunctionComponent<
 /**
  * A component to render a leading / trailing icon in the TextInput
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/textinput-flat.icon.png" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

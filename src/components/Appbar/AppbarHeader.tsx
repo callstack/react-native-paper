@@ -64,25 +64,6 @@ export type Props = React.ComponentProps<typeof Appbar> & {
  * A component to use as a header at the top of the screen.
  * It can contain the screen title, controls such as navigation buttons, menu button etc.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/appbar-small.png" />
- *     <figcaption>small</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/appbar-medium.png" />
- *     <figcaption>medium</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/appbar-large.png" />
- *     <figcaption>large</figcaption>
- *   </figure>
- *  <figure>
- *     <img class="small" src="screenshots/appbar-center-aligned.png" />
- *     <figcaption>center-aligned</figcaption>
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

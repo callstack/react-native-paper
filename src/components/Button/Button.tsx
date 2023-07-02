@@ -130,29 +130,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
 /**
  * A button is component that the user can press to trigger an action.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img src="screenshots/button-1.png" />
- *     <figcaption>Text button</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/button-2.png" />
- *     <figcaption>Outlined button</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/button-3.png" />
- *     <figcaption>Contained button</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/button-4.png" />
- *     <figcaption>Elevated button</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/button-5.png" />
- *     <figcaption>Contained-tonal button</figcaption>
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

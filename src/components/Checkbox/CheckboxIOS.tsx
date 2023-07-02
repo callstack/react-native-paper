@@ -38,17 +38,6 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  * Checkboxes allow the selection of multiple options from a set.
  * This component follows platform guidelines for iOS, but can be used
  * on any platform.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img src="screenshots/checkbox-enabled.ios.png" />
- *     <figcaption>Enabled</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/checkbox-disabled.ios.png" />
- *     <figcaption>Disabled</figcaption>
- *   </figure>
- * </div>
  */
 const CheckboxIOS = ({
   status,

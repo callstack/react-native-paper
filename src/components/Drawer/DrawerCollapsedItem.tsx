@@ -71,12 +71,6 @@ const outlineHeight = 32;
  *
  * Collapsed component used to show an action item with an icon and optionally label in a navigation drawer.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/drawer-collapsed.png" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

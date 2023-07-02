@@ -88,12 +88,6 @@ export type Props = {
 /**
  * A component to show a single list item inside a Menu.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/menu-item.png" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
