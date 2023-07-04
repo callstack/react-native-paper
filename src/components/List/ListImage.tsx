@@ -23,12 +23,6 @@ export type Props = {
 /**
  * A component to show image in a list item.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/list-image.png" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

@@ -106,16 +106,11 @@ const WINDOW_LAYOUT = Dimensions.get('window');
 /**
  * Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
  *
- *  <div class="screenshots">
- *   <img class="small" src="screenshots/menu-1.png" />
- *   <img class="small" src="screenshots/menu-2.png" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { Button, Menu, Divider, Provider } from 'react-native-paper';
+ * import { Button, Menu, Divider, PaperProvider } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -125,7 +120,7 @@ const WINDOW_LAYOUT = Dimensions.get('window');
  *   const closeMenu = () => setVisible(false);
  *
  *   return (
- *     <Provider>
+ *     <PaperProvider>
  *       <View
  *         style={{
  *           paddingTop: 50,
@@ -142,7 +137,7 @@ const WINDOW_LAYOUT = Dimensions.get('window');
  *           <Menu.Item onPress={() => {}} title="Item 3" />
  *         </Menu>
  *       </View>
- *     </Provider>
+ *     </PaperProvider>
  *   );
  * };
  *
@@ -151,7 +146,7 @@ const WINDOW_LAYOUT = Dimensions.get('window');
  *
  * ### Note
  * When using `Menu` within a React Native's `Modal` component, you need to wrap all
- * `Modal` contents within a `Provider` in order for the menu to show. This
+ * `Modal` contents within a `PaperProvider` in order for the menu to show. This
  * wrapping is not necessary if you use Paper's `Modal` instead.
  */
 class Menu extends React.Component<Props, State> {
@@ -606,6 +601,8 @@ class Menu extends React.Component<Props, State> {
       ...(I18nManager.getConstants().isRTL ? { end: left } : { start: left }),
     };
 
+    const pointerEvents = visible ? 'box-none' : 'none';
+
     return (
       <View
         ref={(ref) => {
@@ -630,12 +627,18 @@ class Menu extends React.Component<Props, State> {
               collapsable={false}
               accessibilityViewIsModal={visible}
               style={[styles.wrapper, positionStyle, style]}
-              pointerEvents={visible ? 'box-none' : 'none'}
+              pointerEvents={pointerEvents}
               onAccessibilityEscape={onDismiss}
               testID={`${testID}-view`}
             >
-              <Animated.View style={{ transform: positionTransforms }}>
+              <Animated.View
+                pointerEvents={pointerEvents}
+                style={{
+                  transform: positionTransforms,
+                }}
+              >
                 <Surface
+                  pointerEvents={pointerEvents}
                   style={[
                     styles.shadowMenuContainer,
                     shadowMenuContainerStyle,

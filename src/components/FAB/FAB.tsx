@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   AccessibilityState,
   Animated,
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
@@ -73,6 +74,10 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    */
   color?: string;
   /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
+  /**
    * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
@@ -91,7 +96,7 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
   /**
    * Function to execute on long press.
    */
-  onLongPress?: () => void;
+  onLongPress?: (e: GestureResponderEvent) => void;
   /**
    * The number of milliseconds a user must touch the element before executing `onLongPress`.
    */
@@ -133,13 +138,7 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
 } & IconOrLabel;
 
 /**
- * A floating action button represents the primary action in an application.
- * <div class="screenshots">
- *   <img class="small" src="screenshots/fab-1.png" />
- *   <img class="small" src="screenshots/fab-2.png" />
- *   <img class="small" src="screenshots/fab-3.png" />
- *   <img class="small" src="screenshots/fab-4.png" />
- * </div>
+ * A floating action button represents the primary action on a screen. It appears in front of all screen content.
  *
  * ## Usage
  * ```js
@@ -176,6 +175,7 @@ const FAB = forwardRef<View, Props>(
       accessibilityState,
       animated = true,
       color: customColor,
+      rippleColor: customRippleColor,
       disabled,
       onPress,
       onLongPress,
@@ -233,6 +233,7 @@ const FAB = forwardRef<View, Props>(
       disabled,
       customColor,
       customBackgroundColor,
+      customRippleColor,
     });
 
     const isLargeSize = size === 'large';
@@ -286,6 +287,7 @@ const FAB = forwardRef<View, Props>(
           accessibilityState={newAccessibilityState}
           testID={testID}
           style={{ borderRadius }}
+          {...rest}
         >
           <View
             style={[styles.content, label ? extendedStyle : fabStyle]}

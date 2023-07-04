@@ -25,6 +25,10 @@ export type Props = {
    */
   dismissable?: boolean;
   /**
+   * Determines whether clicking Android hardware back button dismiss dialog.
+   */
+  dismissableBackButton?: boolean;
+  /**
    * Callback that is called when the user dismisses the modal.
    */
   onDismiss?: () => void;
@@ -65,16 +69,10 @@ const DEFAULT_DURATION = 220;
  * The Modal component is a simple way to present content above an enclosing view.
  * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](./Portal) component.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/modal.gif" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
+ * import { Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -84,7 +82,7 @@ const DEFAULT_DURATION = 220;
  *   const containerStyle = {backgroundColor: 'white', padding: 20};
  *
  *   return (
- *     <Provider>
+ *     <PaperProvider>
  *       <Portal>
  *         <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
  *           <Text>Example Modal.  Click outside this area to dismiss.</Text>
@@ -93,7 +91,7 @@ const DEFAULT_DURATION = 220;
  *       <Button style={{marginTop: 30}} onPress={showModal}>
  *         Show
  *       </Button>
- *     </Provider>
+ *     </PaperProvider>
  *   );
  * };
  *
@@ -102,6 +100,7 @@ const DEFAULT_DURATION = 220;
  */
 function Modal({
   dismissable = true,
+  dismissableBackButton = dismissable,
   visible = false,
   overlayAccessibilityLabel = 'Close modal',
   onDismiss = () => {},
@@ -170,7 +169,7 @@ function Modal({
     }
 
     const onHardwareBackPress = () => {
-      if (dismissable) {
+      if (dismissable || dismissableBackButton) {
         hideModal();
       }
 
@@ -183,7 +182,7 @@ function Modal({
       onHardwareBackPress
     );
     return () => subscription.remove();
-  }, [dismissable, hideModal, visible]);
+  }, [dismissable, dismissableBackButton, hideModal, visible]);
 
   const prevVisible = React.useRef<boolean | null>(null);
 

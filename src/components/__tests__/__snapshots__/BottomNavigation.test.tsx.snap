@@ -74,15 +74,9 @@ exports[`allows customizing Route's type via generics 1`] = `
     collapsable={false}
     style={
       Object {
-        "alignSelf": undefined,
         "backgroundColor": "transparent",
         "bottom": 0,
-        "end": undefined,
-        "flex": undefined,
-        "height": undefined,
         "left": 0,
-        "opacity": undefined,
-        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -91,10 +85,6 @@ exports[`allows customizing Route's type via generics 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-        "start": undefined,
-        "top": undefined,
-        "transform": undefined,
-        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -304,13 +294,6 @@ exports[`allows customizing Route's type via generics 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -319,19 +302,28 @@ exports[`allows customizing Route's type via generics 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -358,13 +350,6 @@ exports[`allows customizing Route's type via generics 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -373,19 +358,28 @@ exports[`allows customizing Route's type via generics 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -538,13 +532,6 @@ exports[`allows customizing Route's type via generics 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -553,19 +540,28 @@ exports[`allows customizing Route's type via generics 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -592,13 +588,6 @@ exports[`allows customizing Route's type via generics 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -607,19 +596,28 @@ exports[`allows customizing Route's type via generics 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -711,15 +709,9 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
     collapsable={false}
     style={
       Object {
-        "alignSelf": undefined,
         "backgroundColor": "transparent",
         "bottom": 0,
-        "end": undefined,
-        "flex": undefined,
-        "height": undefined,
         "left": 0,
-        "opacity": undefined,
-        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -728,10 +720,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-        "start": undefined,
-        "top": undefined,
-        "transform": undefined,
-        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -1459,15 +1447,9 @@ exports[`hides labels in shifting bottom navigation 1`] = `
     collapsable={false}
     style={
       Object {
-        "alignSelf": undefined,
         "backgroundColor": "transparent",
         "bottom": 0,
-        "end": undefined,
-        "flex": undefined,
-        "height": undefined,
         "left": 0,
-        "opacity": undefined,
-        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -1476,10 +1458,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-        "start": undefined,
-        "top": undefined,
-        "transform": undefined,
-        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -2339,15 +2317,9 @@ exports[`renders bottom navigation with getLazy 1`] = `
     collapsable={false}
     style={
       Object {
-        "alignSelf": undefined,
         "backgroundColor": "transparent",
         "bottom": 0,
-        "end": undefined,
-        "flex": undefined,
-        "height": undefined,
         "left": 0,
-        "opacity": undefined,
-        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -2356,10 +2328,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-        "start": undefined,
-        "top": undefined,
-        "transform": undefined,
-        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -2643,13 +2611,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -2658,19 +2619,28 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -2697,13 +2667,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -2712,19 +2675,28 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -2951,13 +2923,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -2966,19 +2931,28 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -3005,13 +2979,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -3020,19 +2987,28 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -3259,13 +3235,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -3274,19 +3243,28 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -3313,13 +3291,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -3328,19 +3299,28 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -3567,13 +3547,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -3582,19 +3555,28 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -3621,13 +3603,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -3636,19 +3611,28 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -3875,13 +3859,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -3890,19 +3867,28 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -3929,13 +3915,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -3944,19 +3923,28 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -4048,15 +4036,9 @@ exports[`renders bottom navigation with scene animation 1`] = `
     collapsable={false}
     style={
       Object {
-        "alignSelf": undefined,
         "backgroundColor": "transparent",
         "bottom": 0,
-        "end": undefined,
-        "flex": undefined,
-        "height": undefined,
         "left": 0,
-        "opacity": undefined,
-        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -4065,10 +4047,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-        "start": undefined,
-        "top": undefined,
-        "transform": undefined,
-        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -4358,13 +4336,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -4373,19 +4344,28 @@ exports[`renders bottom navigation with scene animation 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -4618,13 +4598,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -4633,19 +4606,28 @@ exports[`renders bottom navigation with scene animation 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -4878,13 +4860,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -4893,19 +4868,28 @@ exports[`renders bottom navigation with scene animation 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -5138,13 +5122,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -5153,19 +5130,28 @@ exports[`renders bottom navigation with scene animation 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -5398,13 +5384,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -5413,19 +5392,28 @@ exports[`renders bottom navigation with scene animation 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -5517,15 +5505,9 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
     collapsable={false}
     style={
       Object {
-        "alignSelf": undefined,
         "backgroundColor": "transparent",
         "bottom": 0,
-        "end": undefined,
-        "flex": undefined,
-        "height": undefined,
         "left": 0,
-        "opacity": undefined,
-        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -5534,10 +5516,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-        "start": undefined,
-        "top": undefined,
-        "transform": undefined,
-        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -6205,15 +6183,9 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
     collapsable={false}
     style={
       Object {
-        "alignSelf": undefined,
         "backgroundColor": "transparent",
         "bottom": 0,
-        "end": undefined,
-        "flex": undefined,
-        "height": undefined,
         "left": 0,
-        "opacity": undefined,
-        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -6222,10 +6194,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-        "start": undefined,
-        "top": undefined,
-        "transform": undefined,
-        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -7174,15 +7142,9 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
     collapsable={false}
     style={
       Object {
-        "alignSelf": undefined,
         "backgroundColor": "transparent",
         "bottom": 0,
-        "end": undefined,
-        "flex": undefined,
-        "height": undefined,
         "left": 0,
-        "opacity": undefined,
-        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -7191,10 +7153,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-        "start": undefined,
-        "top": undefined,
-        "transform": undefined,
-        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -7478,13 +7436,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -7493,19 +7444,28 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "#FBF7DB",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "#FBF7DB",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -7532,13 +7492,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -7547,19 +7500,28 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "#853D4B",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "#853D4B",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -7786,13 +7748,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -7801,19 +7756,28 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "#FBF7DB",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "#FBF7DB",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -7840,13 +7804,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -7855,19 +7812,28 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "#853D4B",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "#853D4B",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -8094,13 +8060,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -8109,19 +8068,28 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "#FBF7DB",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "#FBF7DB",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -8148,13 +8116,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -8163,19 +8124,28 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "#853D4B",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "#853D4B",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -8267,15 +8237,9 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
     collapsable={false}
     style={
       Object {
-        "alignSelf": undefined,
         "backgroundColor": "transparent",
         "bottom": 0,
-        "end": undefined,
-        "flex": undefined,
-        "height": undefined,
         "left": 0,
-        "opacity": undefined,
-        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -8284,10 +8248,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-        "start": undefined,
-        "top": undefined,
-        "transform": undefined,
-        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -8577,13 +8537,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -8592,19 +8545,28 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "#FBF7DB",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "#FBF7DB",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -8837,13 +8799,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -8852,19 +8807,28 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "#FBF7DB",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "#FBF7DB",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -9097,13 +9061,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -9112,19 +9069,28 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "#FBF7DB",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "#FBF7DB",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -9216,15 +9182,9 @@ exports[`renders non-shifting bottom navigation 1`] = `
     collapsable={false}
     style={
       Object {
-        "alignSelf": undefined,
         "backgroundColor": "transparent",
         "bottom": 0,
-        "end": undefined,
-        "flex": undefined,
-        "height": undefined,
         "left": 0,
-        "opacity": undefined,
-        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -9233,10 +9193,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-        "start": undefined,
-        "top": undefined,
-        "transform": undefined,
-        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -9520,13 +9476,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -9535,19 +9484,28 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -9574,13 +9532,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -9589,19 +9540,28 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -9828,13 +9788,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -9843,19 +9796,28 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -9882,13 +9844,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -9897,19 +9852,28 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -10136,13 +10100,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -10151,19 +10108,28 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -10190,13 +10156,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -10205,19 +10164,28 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -10309,15 +10277,9 @@ exports[`renders shifting bottom navigation 1`] = `
     collapsable={false}
     style={
       Object {
-        "alignSelf": undefined,
         "backgroundColor": "transparent",
         "bottom": 0,
-        "end": undefined,
-        "flex": undefined,
-        "height": undefined,
         "left": 0,
-        "opacity": undefined,
-        "position": undefined,
         "right": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
@@ -10326,10 +10288,6 @@ exports[`renders shifting bottom navigation 1`] = `
         },
         "shadowOpacity": 0,
         "shadowRadius": 0,
-        "start": undefined,
-        "top": undefined,
-        "transform": undefined,
-        "width": undefined,
       }
     }
     testID="bottom-navigation-bar-outer-layer"
@@ -10619,13 +10577,6 @@ exports[`renders shifting bottom navigation 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -10634,19 +10585,28 @@ exports[`renders shifting bottom navigation 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -10879,13 +10839,6 @@ exports[`renders shifting bottom navigation 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -10894,19 +10847,28 @@ exports[`renders shifting bottom navigation 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -11139,13 +11101,6 @@ exports[`renders shifting bottom navigation 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -11154,19 +11109,28 @@ exports[`renders shifting bottom navigation 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -11399,13 +11363,6 @@ exports[`renders shifting bottom navigation 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -11414,19 +11371,28 @@ exports[`renders shifting bottom navigation 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }
@@ -11659,13 +11625,6 @@ exports[`renders shifting bottom navigation 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 12,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.5,
-                          "lineHeight": 16,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -11674,19 +11633,28 @@ exports[`renders shifting bottom navigation 1`] = `
                         },
                         Array [
                           Object {
-                            "backgroundColor": "transparent",
-                            "fontSize": 12,
-                            "height": 56,
-                            "textAlign": "center",
-                          },
-                          Object {
-                            "color": "rgba(73, 69, 79, 1)",
                             "fontFamily": "System",
                             "fontSize": 12,
                             "fontWeight": "500",
                             "letterSpacing": 0.5,
                             "lineHeight": 16,
                           },
+                          Array [
+                            Object {
+                              "backgroundColor": "transparent",
+                              "fontSize": 12,
+                              "height": 56,
+                              "textAlign": "center",
+                            },
+                            Object {
+                              "color": "rgba(73, 69, 79, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 12,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.5,
+                              "lineHeight": 16,
+                            },
+                          ],
                         ],
                       ]
                     }

@@ -11,7 +11,7 @@ import {
   Button,
   MD3DarkTheme as DarkTheme,
   MD3LightTheme as DefaultTheme,
-  Provider,
+  PaperProvider,
 } from 'react-native-paper';
 
 const styles = StyleSheet.create({
@@ -95,9 +95,9 @@ const Shimmer = () => {
 const ThemedGetStarted = () => {
   const isDarkTheme = useColorMode().colorMode === 'dark';
   return (
-    <Provider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
+    <PaperProvider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
       <GetStartedButton />
-    </Provider>
+    </PaperProvider>
   );
 };
 

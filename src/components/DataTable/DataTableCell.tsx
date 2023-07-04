@@ -34,13 +34,6 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
 /**
  * A component to show a single cell inside of a table.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/data-table-row-cell.png" />
- *   </figure>
- * </div>
- *
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -60,6 +53,8 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  *
  * If you want to support multiline text, please use View instead, as multiline text doesn't comply with
  * MD Guidelines (https://github.com/callstack/react-native-paper/issues/2381).
+ *
+ * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
 
 const DataTableCell = ({

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
@@ -14,6 +15,7 @@ import color from 'color';
 import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
+import hasTouchHandler from '../../utils/hasTouchHandler';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
@@ -54,6 +56,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Custom button's text color.
    */
   textColor?: string;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * Whether to show a loading indicator.
    */
@@ -125,29 +131,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
 /**
  * A button is component that the user can press to trigger an action.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img src="screenshots/button-1.png" />
- *     <figcaption>Text button</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/button-2.png" />
- *     <figcaption>Outlined button</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/button-3.png" />
- *     <figcaption>Contained button</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/button-4.png" />
- *     <figcaption>Elevated button</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/button-5.png" />
- *     <figcaption>Contained-tonal button</figcaption>
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -171,6 +154,7 @@ const Button = ({
   icon,
   buttonColor: customButtonColor,
   textColor: customTextColor,
+  rippleColor: customRippleColor,
   children,
   accessibilityLabel,
   accessibilityHint,
@@ -198,6 +182,13 @@ const Button = ({
   );
   const { roundness, isV3, animation } = theme;
   const uppercase = uppercaseProp ?? !theme.isV3;
+
+  const hasPassedTouchHandler = hasTouchHandler({
+    onPress,
+    onPressIn,
+    onPressOut,
+    onLongPress,
+  });
 
   const isElevationEntitled =
     !disabled && (isV3 ? isMode('elevated') : isMode('contained'));
@@ -249,7 +240,8 @@ const Button = ({
       dark,
     });
 
-  const rippleColor = color(textColor).alpha(0.12).rgb().string();
+  const rippleColor =
+    customRippleColor || color(textColor).alpha(0.12).rgb().string();
 
   const buttonStyle = {
     backgroundColor,
@@ -311,8 +303,8 @@ const Button = ({
         borderless
         onPress={onPress}
         onLongPress={onLongPress}
-        onPressIn={handlePressIn}
-        onPressOut={handlePressOut}
+        onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
+        onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
         delayLongPress={delayLongPress}
         accessibilityLabel={accessibilityLabel}
         accessibilityHint={accessibilityHint}

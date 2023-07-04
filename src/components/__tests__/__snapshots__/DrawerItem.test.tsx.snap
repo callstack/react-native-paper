@@ -27,7 +27,6 @@ exports[`renders DrawerItem with icon 1`] = `
         Object {
           "overflow": "hidden",
         },
-        false,
         Array [
           Object {
             "marginHorizontal": 10,
@@ -116,13 +115,6 @@ exports[`renders DrawerItem with icon 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -131,17 +123,26 @@ exports[`renders DrawerItem with icon 1`] = `
               },
               Array [
                 Object {
-                  "marginEnd": 32,
-                },
-                Object {
-                  "color": "rgba(73, 69, 79, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
-                  "marginStart": 12,
                 },
+                Array [
+                  Object {
+                    "marginEnd": 32,
+                  },
+                  Object {
+                    "color": "rgba(73, 69, 79, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                    "marginStart": 12,
+                  },
+                ],
               ],
             ]
           }
@@ -181,7 +182,6 @@ exports[`renders active DrawerItem 1`] = `
         Object {
           "overflow": "hidden",
         },
-        false,
         Array [
           Object {
             "marginHorizontal": 10,
@@ -270,13 +270,6 @@ exports[`renders active DrawerItem 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -285,17 +278,26 @@ exports[`renders active DrawerItem 1`] = `
               },
               Array [
                 Object {
-                  "marginEnd": 32,
-                },
-                Object {
-                  "color": "rgba(29, 25, 43, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
-                  "marginStart": 12,
                 },
+                Array [
+                  Object {
+                    "marginEnd": 32,
+                  },
+                  Object {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                    "marginStart": 12,
+                  },
+                ],
               ],
             ]
           }
@@ -335,7 +337,6 @@ exports[`renders basic DrawerItem 1`] = `
         Object {
           "overflow": "hidden",
         },
-        false,
         Array [
           Object {
             "marginHorizontal": 10,
@@ -388,13 +389,6 @@ exports[`renders basic DrawerItem 1`] = `
           style={
             Array [
               Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
                 "textAlign": "left",
               },
               Object {
@@ -403,17 +397,26 @@ exports[`renders basic DrawerItem 1`] = `
               },
               Array [
                 Object {
-                  "marginEnd": 32,
-                },
-                Object {
-                  "color": "rgba(73, 69, 79, 1)",
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
-                  "marginStart": 0,
                 },
+                Array [
+                  Object {
+                    "marginEnd": 32,
+                  },
+                  Object {
+                    "color": "rgba(73, 69, 79, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                    "marginStart": 0,
+                  },
+                ],
               ],
             ]
           }

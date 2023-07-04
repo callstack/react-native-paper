@@ -6,6 +6,7 @@ import {
   ViewStyle,
   View,
   Animated,
+  ColorValue,
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
@@ -40,6 +41,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Background color of the icon container.
    */
   containerColor?: string;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * @supported Available in v5.x with theme version 3
    * Whether icon button is selected. A selected button receives alternative combination of icon and container colors.
@@ -80,25 +85,6 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
 /**
  * An icon button is a button which displays only an icon without a label.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/icon-button-1.png" />
- *     <figcaption>Default icon button</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/icon-button-2.png" />
- *     <figcaption>Contained icon button</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/icon-button-3.png" />
- *     <figcaption>Contained-tonal icon button</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/icon-button-4.png" />
- *     <figcaption>Outlined icon button</figcaption>
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -124,6 +110,7 @@ const IconButton = forwardRef<View, Props>(
       icon,
       iconColor: customIconColor,
       containerColor: customContainerColor,
+      rippleColor: customRippleColor,
       size = 24,
       accessibilityLabel,
       disabled,
@@ -151,6 +138,7 @@ const IconButton = forwardRef<View, Props>(
         mode,
         customIconColor,
         customContainerColor,
+        customRippleColor,
       });
 
     const buttonSize = isV3 ? size + 2 * PADDING : size * 1.5;

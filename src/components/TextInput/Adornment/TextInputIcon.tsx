@@ -17,7 +17,7 @@ import { getIconColor } from './utils';
 
 export type Props = $Omit<
   React.ComponentProps<typeof IconButton>,
-  'icon' | 'theme' | 'color'
+  'icon' | 'theme' | 'color' | 'iconColor'
 > & {
   /**
    * @renamed Renamed from 'name' to 'icon` in v5.x
@@ -100,12 +100,6 @@ const IconAdornment: React.FunctionComponent<
 /**
  * A component to render a leading / trailing icon in the TextInput
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/textinput-flat.icon.png" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -131,7 +125,7 @@ const TextInputIcon = ({
   icon,
   onPress,
   forceTextInputFocus,
-  color,
+  color: customColor,
   theme: themeOverrides,
   ...rest
 }: Props) => {
@@ -151,7 +145,12 @@ const TextInputIcon = ({
 
   const theme = useInternalTheme(themeOverrides);
 
-  const iconColor = getIconColor({ theme, disabled });
+  const iconColor = getIconColor({
+    theme,
+    disabled,
+    isTextInputFocused,
+    customColor,
+  });
 
   return (
     <View style={[styles.container, style]}>
@@ -160,9 +159,7 @@ const TextInputIcon = ({
         style={styles.iconButton}
         size={ICON_SIZE}
         onPress={onPressWithFocusControl}
-        iconColor={
-          typeof color === 'function' ? color(isTextInputFocused) : iconColor
-        }
+        iconColor={iconColor}
         testID={testID}
         theme={themeOverrides}
         {...rest}

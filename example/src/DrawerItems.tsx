@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Platform } from 'react-native';
 
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import {
@@ -12,19 +12,8 @@ import {
   TouchableRipple,
 } from 'react-native-paper';
 
+import { deviceColorsSupported, isWeb } from '../utils';
 import { PreferencesContext, useExampleTheme } from './';
-
-type Props = {
-  toggleTheme: () => void;
-  toggleRTL: () => void;
-  toggleThemeVersion: () => void;
-  toggleCollapsed: () => void;
-  toggleCustomFont: () => void;
-  customFontLoaded: boolean;
-  collapsed: boolean;
-  isRTL: boolean;
-  isDarkTheme: boolean;
-};
 
 const DrawerItemsData = [
   {
@@ -94,23 +83,32 @@ const DrawerCollapsedItemsData = [
   },
 ];
 
-const DrawerItems = ({
-  toggleTheme,
-  toggleRTL,
-  toggleThemeVersion,
-  toggleCollapsed,
-  toggleCustomFont,
-  customFontLoaded,
-  collapsed,
-  isRTL,
-  isDarkTheme,
-}: Props) => {
+function DrawerItems() {
   const [drawerItemIndex, setDrawerItemIndex] = React.useState<number>(0);
   const preferences = React.useContext(PreferencesContext);
 
   const _setDrawerItem = (index: number) => setDrawerItemIndex(index);
 
   const { isV3, colors } = useExampleTheme();
+  const isIOS = Platform.OS === 'ios';
+
+  if (!preferences) throw new Error('PreferencesContext not provided');
+
+  const {
+    toggleShouldUseDeviceColors,
+    toggleTheme,
+    toggleRtl: toggleRTL,
+    toggleThemeVersion,
+    toggleCollapsed,
+    toggleCustomFont,
+    toggleRippleEffect,
+    customFontLoaded,
+    rippleEffectEnabled,
+    collapsed,
+    rtl: isRTL,
+    theme: { dark: isDarkTheme },
+    shouldUseDeviceColors,
+  } = preferences;
 
   const coloredLabelTheme = {
     colors: isV3
@@ -142,7 +140,7 @@ const DrawerItems = ({
               active={drawerItemIndex === index}
               onPress={() => {
                 _setDrawerItem(index);
-                index === 4 && preferences.toggleCollapsed();
+                index === 4 && toggleCollapsed();
               }}
             />
           ))}
@@ -163,6 +161,16 @@ const DrawerItems = ({
           </Drawer.Section>
 
           <Drawer.Section title="Preferences">
+            {deviceColorsSupported && isV3 ? (
+              <TouchableRipple onPress={toggleShouldUseDeviceColors}>
+                <View style={[styles.preference, isV3 && styles.v3Preference]}>
+                  <Text variant="labelLarge">Use device colors *</Text>
+                  <View pointerEvents="none">
+                    <Switch value={shouldUseDeviceColors} />
+                  </View>
+                </View>
+              </TouchableRipple>
+            ) : null}
             <TouchableRipple onPress={toggleTheme}>
               <View style={[styles.preference, isV3 && styles.v3Preference]}>
                 <Text variant="labelLarge">Dark Theme</Text>
@@ -211,6 +219,17 @@ const DrawerItems = ({
                 </View>
               </TouchableRipple>
             )}
+
+            <TouchableRipple onPress={toggleRippleEffect}>
+              <View style={[styles.preference, isV3 && styles.v3Preference]}>
+                <Text variant="labelLarge">
+                  {isIOS ? 'Highlight' : 'Ripple'} effect *
+                </Text>
+                <View pointerEvents="none">
+                  <Switch value={rippleEffectEnabled} />
+                </View>
+              </View>
+            </TouchableRipple>
           </Drawer.Section>
           {isV3 && !collapsed && (
             <Text variant="bodySmall" style={styles.annotation}>
@@ -225,7 +244,7 @@ const DrawerItems = ({
       )}
     </DrawerContentScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   drawerContent: {

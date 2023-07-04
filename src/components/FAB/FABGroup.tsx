@@ -34,6 +34,8 @@ export type Props = {
    * - `containerStyle`: pass additional styles for the fab item label container, for example, `backgroundColor` @supported Available in 5.x
    * - `labelStyle`: pass additional styles for the fab item label, for example, `fontSize`
    * - `onPress`: callback that is called when `FAB` is pressed (required)
+   * - `onLongPress`: callback that is called when `FAB` is long pressed
+   * - `toggleStackOnLongPress`: callback that is called when `FAB` is long pressed
    * - `size`: size of action item. Defaults to `small`. @supported Available in v5.x
    * - `testID`: testID to be used on tests
    */
@@ -72,6 +74,22 @@ export type Props = {
    * Function to execute on pressing the `FAB`.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute on long pressing the `FAB`.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Makes actions stack appear on long press instead of on press.
+   */
+  toggleStackOnLongPress?: boolean;
+  /**
+   * Changes the delay for long press reaction.
+   */
+  delayLongPress?: number;
+  /**
+   * Allows for onLongPress when stack is opened.
+   */
+  enableLongPressWhenStackOpened?: boolean;
   /**
    * Whether the speed dial is open.
    */
@@ -118,14 +136,10 @@ export type Props = {
  * A component to display a stack of FABs with related actions in a speed dial.
  * To render the group above other components, you'll need to wrap it with the [`Portal`](../Portal) component.
  *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/fab-group.gif" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { FAB, Portal, Provider } from 'react-native-paper';
+ * import { FAB, Portal, PaperProvider } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [state, setState] = React.useState({ open: false });
@@ -135,7 +149,7 @@ export type Props = {
  *   const { open } = state;
  *
  *   return (
- *     <Provider>
+ *     <PaperProvider>
  *       <Portal>
  *         <FAB.Group
  *           open={open}
@@ -167,7 +181,7 @@ export type Props = {
  *           }}
  *         />
  *       </Portal>
- *     </Provider>
+ *     </PaperProvider>
  *   );
  * };
  *
@@ -179,6 +193,8 @@ const FABGroup = ({
   icon,
   open,
   onPress,
+  onLongPress,
+  toggleStackOnLongPress,
   accessibilityLabel,
   theme: themeOverrides,
   style,
@@ -188,7 +204,9 @@ const FABGroup = ({
   testID,
   onStateChange,
   color: colorProp,
+  delayLongPress = 200,
   variant = 'primary',
+  enableLongPressWhenStackOpened = false,
   backdropColor: customBackdropColor,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -416,8 +434,19 @@ const FABGroup = ({
         <FAB
           onPress={(e) => {
             onPress?.(e);
-            toggle();
+            if (!toggleStackOnLongPress || open) {
+              toggle();
+            }
           }}
+          onLongPress={(e) => {
+            if (!open || enableLongPressWhenStackOpened) {
+              onLongPress?.(e);
+              if (toggleStackOnLongPress) {
+                toggle();
+              }
+            }
+          }}
+          delayLongPress={delayLongPress}
           icon={icon}
           color={colorProp}
           accessibilityLabel={accessibilityLabel}

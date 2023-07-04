@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  FlexAlignType,
   GestureResponderEvent,
   NativeSyntheticEvent,
   StyleProp,
@@ -18,7 +17,7 @@ import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, EllipsizeProp, ThemeProp } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { getLeftStyles, getRightStyles } from './utils';
+import { Style, getLeftStyles, getRightStyles } from './utils';
 
 type Title =
   | React.ReactNode
@@ -37,13 +36,6 @@ type Description =
       color: string;
       fontSize: number;
     }) => React.ReactNode);
-
-interface Style {
-  marginStart?: number;
-  marginEnd?: number;
-  marginVertical?: number;
-  alignSelf?: FlexAlignType;
-}
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -108,12 +100,6 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
 
 /**
  * A component to show tiles inside a List.
- *
- * <div class="screenshots">
- *   <img class="medium" src="screenshots/list-item-1.png" />
- *   <img class="medium" src="screenshots/list-item-2.png" />
- *   <img class="medium" src="screenshots/list-item-3.png" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -265,9 +251,11 @@ const styles = StyleSheet.create({
     paddingEnd: 24,
   },
   row: {
+    width: '100%',
     flexDirection: 'row',
   },
   rowV3: {
+    width: '100%',
     flexDirection: 'row',
     marginVertical: 6,
   },

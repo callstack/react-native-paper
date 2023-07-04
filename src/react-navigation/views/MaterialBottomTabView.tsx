@@ -7,12 +7,12 @@ import {
   ParamListBase,
   Route,
   TabNavigationState,
+  useLinkBuilder,
 } from '@react-navigation/native';
 
 import BottomNavigation from '../../components/BottomNavigation/BottomNavigation';
 import MaterialCommunityIcon from '../../components/MaterialCommunityIcon';
 import { useLocale } from '../../core/Localization';
-import { useNavigationLink } from '../adapter';
 import type {
   MaterialBottomTabDescriptorMap,
   MaterialBottomTabNavigationConfig,
@@ -24,15 +24,14 @@ type Props = MaterialBottomTabNavigationConfig & {
   navigation: MaterialBottomTabNavigationHelpers;
   descriptors: MaterialBottomTabDescriptorMap;
 };
-
 export default function MaterialBottomTabView({
   state,
   navigation,
   descriptors,
   ...rest
 }: Props) {
-  const buildLink = useNavigationLink();
   const { direction } = useLocale();
+  const buildLink = useLinkBuilder();
 
   return (
     <BottomNavigation

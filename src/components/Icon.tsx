@@ -112,7 +112,7 @@ const Icon = ({
     return (
       <SettingsConsumer>
         {({ icon }) => {
-          return icon({
+          return icon?.({
             name: s,
             color: iconColor,
             size,

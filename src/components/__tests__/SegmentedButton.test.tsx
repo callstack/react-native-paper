@@ -439,3 +439,49 @@ describe('should have `accessibilityState={ checked: true }` when selected', () 
     expect(getByTestId('walking-check-icon')).toBeDefined();
   });
 });
+
+describe('labelStyle is handled', () => {
+  it('when labelStyle is given', () => {
+    const { getByTestId } = render(
+      <SegmentedButtons
+        value={'walk'}
+        buttons={[
+          {
+            label: 'Walking',
+            value: 'walk',
+            testID: 'walking-button',
+            labelStyle: { fontSize: 10 },
+          },
+          {
+            label: 'Driving',
+            value: 'drive',
+            testID: 'driving-button',
+            labelStyle: { fontSize: 12 },
+          },
+        ]}
+        onValueChange={() => {}}
+      />
+    );
+
+    expect(getByTestId('walking-button-label')).toHaveStyle({ fontSize: 10 });
+    expect(getByTestId('driving-button-label')).toHaveStyle({ fontSize: 12 });
+  });
+
+  it('when labelStyle is omitted', () => {
+    const { getByTestId } = render(
+      <SegmentedButtons
+        value={'walk'}
+        buttons={[
+          {
+            label: 'Walking',
+            value: 'walk',
+            testID: 'walking-button',
+          },
+        ]}
+        onValueChange={() => {}}
+      />
+    );
+
+    expect(getByTestId('walking-button-label')).toHaveStyle({ fontSize: 14 });
+  });
+});

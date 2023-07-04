@@ -50,10 +50,6 @@ export type Props = $Omit<
 /**
  * Helper text is used in conjuction with input elements to provide additional hints for the user.
  *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/helper-text.gif" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

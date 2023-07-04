@@ -18,17 +18,8 @@ Array [
         collapsable={false}
         style={
           Object {
-            "alignSelf": undefined,
             "backgroundColor": "transparent",
             "borderRadius": 20,
-            "bottom": undefined,
-            "end": undefined,
-            "flex": undefined,
-            "height": undefined,
-            "left": undefined,
-            "opacity": undefined,
-            "position": undefined,
-            "right": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -36,10 +27,6 @@ Array [
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-            "start": undefined,
-            "top": undefined,
-            "transform": undefined,
-            "width": undefined,
           }
         }
         testID="button-container-outer-layer"
@@ -90,7 +77,6 @@ Array [
                 Object {
                   "overflow": "hidden",
                 },
-                false,
                 Object {
                   "borderRadius": 20,
                 },
@@ -116,13 +102,6 @@ Array [
                 style={
                   Array [
                     Object {
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "500",
-                      "letterSpacing": 0.1,
-                      "lineHeight": 20,
-                    },
-                    Object {
                       "textAlign": "left",
                     },
                     Object {
@@ -131,26 +110,35 @@ Array [
                     },
                     Array [
                       Object {
-                        "marginHorizontal": 16,
-                        "marginVertical": 9,
-                        "textAlign": "center",
-                      },
-                      false,
-                      Object {
-                        "marginHorizontal": 24,
-                        "marginVertical": 10,
-                      },
-                      undefined,
-                      false,
-                      Object {
-                        "color": "rgba(103, 80, 164, 1)",
                         "fontFamily": "System",
                         "fontSize": 14,
                         "fontWeight": "500",
                         "letterSpacing": 0.1,
                         "lineHeight": 20,
                       },
-                      undefined,
+                      Array [
+                        Object {
+                          "marginHorizontal": 16,
+                          "marginVertical": 9,
+                          "textAlign": "center",
+                        },
+                        false,
+                        Object {
+                          "marginHorizontal": 24,
+                          "marginVertical": 10,
+                        },
+                        undefined,
+                        false,
+                        Object {
+                          "color": "rgba(103, 80, 164, 1)",
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        undefined,
+                      ],
                     ],
                   ]
                 }
@@ -220,6 +208,7 @@ Array [
     >
       <View
         collapsable={false}
+        pointerEvents="box-none"
         style={
           Object {
             "transform": Array [
@@ -237,19 +226,11 @@ Array [
           collapsable={false}
           style={
             Object {
-              "alignSelf": undefined,
               "backgroundColor": "rgb(243, 237, 246)",
               "borderRadius": 4,
               "borderTopLeftRadius": 0,
               "borderTopRightRadius": 0,
-              "bottom": undefined,
-              "end": undefined,
-              "flex": undefined,
-              "height": undefined,
-              "left": undefined,
               "opacity": 0,
-              "position": undefined,
-              "right": undefined,
               "shadowColor": "#000",
               "shadowOffset": Object {
                 "height": 2,
@@ -257,8 +238,6 @@ Array [
               },
               "shadowOpacity": 0.15,
               "shadowRadius": 6,
-              "start": undefined,
-              "top": undefined,
               "transform": Array [
                 Object {
                   "scaleX": 0,
@@ -267,13 +246,13 @@ Array [
                   "scaleY": 0,
                 },
               ],
-              "width": undefined,
             }
           }
           testID="menu-surface-outer-layer"
         >
           <View
             collapsable={false}
+            pointerEvents="box-none"
             style={
               Object {
                 "backgroundColor": "rgb(243, 237, 246)",
@@ -315,7 +294,6 @@ Array [
               style={
                 Array [
                   false,
-                  false,
                   Array [
                     Object {
                       "height": 48,
@@ -366,13 +344,6 @@ Array [
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 16,
-                          "fontWeight": "400",
-                          "letterSpacing": 0.15,
-                          "lineHeight": 24,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -380,16 +351,25 @@ Array [
                           "writingDirection": "ltr",
                         },
                         Array [
-                          false,
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 16,
                             "fontWeight": "400",
                             "letterSpacing": 0.15,
                             "lineHeight": 24,
                           },
-                          undefined,
+                          Array [
+                            false,
+                            Object {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 16,
+                              "fontWeight": "400",
+                              "letterSpacing": 0.15,
+                              "lineHeight": 24,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }
@@ -422,7 +402,6 @@ Array [
               style={
                 Array [
                   false,
-                  false,
                   Array [
                     Object {
                       "height": 48,
@@ -473,13 +452,6 @@ Array [
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 16,
-                          "fontWeight": "400",
-                          "letterSpacing": 0.15,
-                          "lineHeight": 24,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -487,16 +459,25 @@ Array [
                           "writingDirection": "ltr",
                         },
                         Array [
-                          false,
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 16,
                             "fontWeight": "400",
                             "letterSpacing": 0.15,
                             "lineHeight": 24,
                           },
-                          undefined,
+                          Array [
+                            false,
+                            Object {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 16,
+                              "fontWeight": "400",
+                              "letterSpacing": 0.15,
+                              "lineHeight": 24,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }
@@ -532,17 +513,8 @@ exports[`renders not visible menu 1`] = `
       collapsable={false}
       style={
         Object {
-          "alignSelf": undefined,
           "backgroundColor": "transparent",
           "borderRadius": 20,
-          "bottom": undefined,
-          "end": undefined,
-          "flex": undefined,
-          "height": undefined,
-          "left": undefined,
-          "opacity": undefined,
-          "position": undefined,
-          "right": undefined,
           "shadowColor": "#000",
           "shadowOffset": Object {
             "height": 0,
@@ -550,10 +522,6 @@ exports[`renders not visible menu 1`] = `
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
-          "start": undefined,
-          "top": undefined,
-          "transform": undefined,
-          "width": undefined,
         }
       }
       testID="button-container-outer-layer"
@@ -604,7 +572,6 @@ exports[`renders not visible menu 1`] = `
               Object {
                 "overflow": "hidden",
               },
-              false,
               Object {
                 "borderRadius": 20,
               },
@@ -630,13 +597,6 @@ exports[`renders not visible menu 1`] = `
               style={
                 Array [
                   Object {
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  Object {
                     "textAlign": "left",
                   },
                   Object {
@@ -645,26 +605,35 @@ exports[`renders not visible menu 1`] = `
                   },
                   Array [
                     Object {
-                      "marginHorizontal": 16,
-                      "marginVertical": 9,
-                      "textAlign": "center",
-                    },
-                    false,
-                    Object {
-                      "marginHorizontal": 24,
-                      "marginVertical": 10,
-                    },
-                    undefined,
-                    false,
-                    Object {
-                      "color": "rgba(103, 80, 164, 1)",
                       "fontFamily": "System",
                       "fontSize": 14,
                       "fontWeight": "500",
                       "letterSpacing": 0.1,
                       "lineHeight": 20,
                     },
-                    undefined,
+                    Array [
+                      Object {
+                        "marginHorizontal": 16,
+                        "marginVertical": 9,
+                        "textAlign": "center",
+                      },
+                      false,
+                      Object {
+                        "marginHorizontal": 24,
+                        "marginVertical": 10,
+                      },
+                      undefined,
+                      false,
+                      Object {
+                        "color": "rgba(103, 80, 164, 1)",
+                        "fontFamily": "System",
+                        "fontSize": 14,
+                        "fontWeight": "500",
+                        "letterSpacing": 0.1,
+                        "lineHeight": 20,
+                      },
+                      undefined,
+                    ],
                   ],
                 ]
               }
@@ -698,17 +667,8 @@ Array [
         collapsable={false}
         style={
           Object {
-            "alignSelf": undefined,
             "backgroundColor": "transparent",
             "borderRadius": 20,
-            "bottom": undefined,
-            "end": undefined,
-            "flex": undefined,
-            "height": undefined,
-            "left": undefined,
-            "opacity": undefined,
-            "position": undefined,
-            "right": undefined,
             "shadowColor": "#000",
             "shadowOffset": Object {
               "height": 0,
@@ -716,10 +676,6 @@ Array [
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-            "start": undefined,
-            "top": undefined,
-            "transform": undefined,
-            "width": undefined,
           }
         }
         testID="button-container-outer-layer"
@@ -770,7 +726,6 @@ Array [
                 Object {
                   "overflow": "hidden",
                 },
-                false,
                 Object {
                   "borderRadius": 20,
                 },
@@ -796,13 +751,6 @@ Array [
                 style={
                   Array [
                     Object {
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "500",
-                      "letterSpacing": 0.1,
-                      "lineHeight": 20,
-                    },
-                    Object {
                       "textAlign": "left",
                     },
                     Object {
@@ -811,26 +759,35 @@ Array [
                     },
                     Array [
                       Object {
-                        "marginHorizontal": 16,
-                        "marginVertical": 9,
-                        "textAlign": "center",
-                      },
-                      false,
-                      Object {
-                        "marginHorizontal": 24,
-                        "marginVertical": 10,
-                      },
-                      undefined,
-                      false,
-                      Object {
-                        "color": "rgba(103, 80, 164, 1)",
                         "fontFamily": "System",
                         "fontSize": 14,
                         "fontWeight": "500",
                         "letterSpacing": 0.1,
                         "lineHeight": 20,
                       },
-                      undefined,
+                      Array [
+                        Object {
+                          "marginHorizontal": 16,
+                          "marginVertical": 9,
+                          "textAlign": "center",
+                        },
+                        false,
+                        Object {
+                          "marginHorizontal": 24,
+                          "marginVertical": 10,
+                        },
+                        undefined,
+                        false,
+                        Object {
+                          "color": "rgba(103, 80, 164, 1)",
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        undefined,
+                      ],
                     ],
                   ]
                 }
@@ -900,6 +857,7 @@ Array [
     >
       <View
         collapsable={false}
+        pointerEvents="box-none"
         style={
           Object {
             "transform": Array [
@@ -917,17 +875,9 @@ Array [
           collapsable={false}
           style={
             Object {
-              "alignSelf": undefined,
               "backgroundColor": "rgb(243, 237, 246)",
               "borderRadius": 4,
-              "bottom": undefined,
-              "end": undefined,
-              "flex": undefined,
-              "height": undefined,
-              "left": undefined,
               "opacity": 0,
-              "position": undefined,
-              "right": undefined,
               "shadowColor": "#000",
               "shadowOffset": Object {
                 "height": 2,
@@ -935,8 +885,6 @@ Array [
               },
               "shadowOpacity": 0.15,
               "shadowRadius": 6,
-              "start": undefined,
-              "top": undefined,
               "transform": Array [
                 Object {
                   "scaleX": 0,
@@ -945,13 +893,13 @@ Array [
                   "scaleY": 0,
                 },
               ],
-              "width": undefined,
             }
           }
           testID="menu-surface-outer-layer"
         >
           <View
             collapsable={false}
+            pointerEvents="box-none"
             style={
               Object {
                 "backgroundColor": "rgb(243, 237, 246)",
@@ -991,7 +939,6 @@ Array [
               style={
                 Array [
                   false,
-                  false,
                   Array [
                     Object {
                       "height": 48,
@@ -1042,13 +989,6 @@ Array [
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 16,
-                          "fontWeight": "400",
-                          "letterSpacing": 0.15,
-                          "lineHeight": 24,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -1056,16 +996,25 @@ Array [
                           "writingDirection": "ltr",
                         },
                         Array [
-                          false,
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 16,
                             "fontWeight": "400",
                             "letterSpacing": 0.15,
                             "lineHeight": 24,
                           },
-                          undefined,
+                          Array [
+                            false,
+                            Object {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 16,
+                              "fontWeight": "400",
+                              "letterSpacing": 0.15,
+                              "lineHeight": 24,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }
@@ -1098,7 +1047,6 @@ Array [
               style={
                 Array [
                   false,
-                  false,
                   Array [
                     Object {
                       "height": 48,
@@ -1149,13 +1097,6 @@ Array [
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 16,
-                          "fontWeight": "400",
-                          "letterSpacing": 0.15,
-                          "lineHeight": 24,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -1163,16 +1104,25 @@ Array [
                           "writingDirection": "ltr",
                         },
                         Array [
-                          false,
                           Object {
-                            "color": "rgba(28, 27, 31, 1)",
                             "fontFamily": "System",
                             "fontSize": 16,
                             "fontWeight": "400",
                             "letterSpacing": 0.15,
                             "lineHeight": 24,
                           },
-                          undefined,
+                          Array [
+                            false,
+                            Object {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 16,
+                              "fontWeight": "400",
+                              "letterSpacing": 0.15,
+                              "lineHeight": 24,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }

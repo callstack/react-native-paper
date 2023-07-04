@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
@@ -33,18 +34,20 @@ export type Props = {
    * Icon to display for the `SegmentedButtonItem`.
    */
   icon?: IconSource;
-
   /**
    * @supported Available in v5.x with theme version 3
    * Custom color for unchecked Text and Icon.
    */
   uncheckedColor?: string;
-
   /**
    * @supported Available in v5.x with theme version 3
    * Custom color for checked Text and Icon.
    */
   checkedColor?: string;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * Whether the button is disabled.
    */
@@ -79,6 +82,10 @@ export type Props = {
   density?: 'regular' | 'small' | 'medium' | 'high';
   style?: StyleProp<ViewStyle>;
   /**
+   * Style for the button label.
+   */
+  labelStyle?: StyleProp<TextStyle>;
+  /**
    * testID to be used on tests.
    */
   testID?: string;
@@ -93,9 +100,11 @@ const SegmentedButtonItem = ({
   accessibilityLabel,
   disabled,
   style,
+  labelStyle,
   showSelectedCheck,
   checkedColor,
   uncheckedColor,
+  rippleColor: customRippleColor,
   icon,
   testID,
   label,
@@ -142,7 +151,8 @@ const SegmentedButtonItem = ({
     segment,
     overwriteRTL,
   });
-  const rippleColor = color(textColor).alpha(0.12).rgb().string();
+  const rippleColor =
+    customRippleColor || color(textColor).alpha(0.12).rgb().string();
 
   const showIcon = !icon ? false : label && checked ? !showSelectedCheck : true;
   const showCheckedIcon = checked && showSelectedCheck;
@@ -214,9 +224,10 @@ const SegmentedButtonItem = ({
           ) : null}
           <Text
             variant="labelLarge"
-            style={[styles.label, labelTextStyle]}
+            style={[styles.label, labelTextStyle, labelStyle]}
             selectable={false}
             numberOfLines={1}
+            testID={`${testID}-label`}
           >
             {label}
           </Text>

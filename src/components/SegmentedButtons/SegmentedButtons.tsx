@@ -3,6 +3,7 @@ import {
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
+  TextStyle,
   View,
   ViewStyle,
 } from 'react-native';
@@ -72,6 +73,7 @@ export type Props = {
     label?: string;
     showSelectedCheck?: boolean;
     style?: StyleProp<ViewStyle>;
+    labelStyle?: StyleProp<TextStyle>;
     testID?: string;
   }[];
   /**
@@ -84,10 +86,6 @@ export type Props = {
 
 /**
  * Segmented buttons can be used to select options, switch views or sort elements.</br>
- *
- * <div class="screenshots">
- *   <img class="medium" src="screenshots/segmented-button.png" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -180,6 +178,7 @@ const SegmentedButtons = ({
             density={density}
             onPress={onPress}
             style={[item.style, disabledChildStyle]}
+            labelStyle={item.labelStyle}
             theme={theme}
           />
         );

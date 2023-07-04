@@ -51,9 +51,6 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
 
 /**
  * A component used to display an action item in the appbar.
- * <div class="screenshots">
- *   <img class="small" src="screenshots/appbar-action-android.png" />
- * </div>
  *
  * ## Usage
  * ```js

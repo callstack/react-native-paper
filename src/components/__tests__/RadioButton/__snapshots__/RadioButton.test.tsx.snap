@@ -27,7 +27,6 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
       Object {
         "overflow": "hidden",
       },
-      false,
       Object {
         "borderRadius": 18,
         "padding": 6,
@@ -110,7 +109,6 @@ exports[`RadioButton on default platform renders properly 1`] = `
       Object {
         "overflow": "hidden",
       },
-      false,
       Object {
         "borderRadius": 18,
         "padding": 6,
@@ -192,7 +190,6 @@ exports[`RadioButton on ios platform renders properly 1`] = `
       Object {
         "overflow": "hidden",
       },
-      false,
       Object {
         "borderRadius": 18,
         "padding": 6,
@@ -274,7 +271,6 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
       Object {
         "overflow": "hidden",
       },
-      false,
       Object {
         "borderRadius": 18,
         "padding": 6,

@@ -25,7 +25,6 @@ exports[`can render leading checkbox control 1`] = `
   style={
     Array [
       false,
-      false,
       undefined,
     ]
   }
@@ -72,7 +71,6 @@ exports[`can render leading checkbox control 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderRadius": 18,
             "padding": 6,
@@ -126,15 +124,9 @@ exports[`can render leading checkbox control 1`] = `
       </View>
     </View>
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         Array [
-          Object {
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": "400",
-            "letterSpacing": 0.15,
-            "lineHeight": 24,
-          },
           Object {
             "textAlign": "left",
           },
@@ -144,18 +136,28 @@ exports[`can render leading checkbox control 1`] = `
           },
           Array [
             Object {
-              "flexGrow": 1,
-              "flexShrink": 1,
+              "fontFamily": "System",
+              "fontSize": 16,
+              "fontWeight": "400",
+              "letterSpacing": 0.15,
+              "lineHeight": 24,
             },
-            false,
-            Object {
-              "color": "rgba(28, 27, 31, 1)",
-              "textAlign": "right",
-            },
-            undefined,
+            Array [
+              Object {
+                "flexGrow": 1,
+                "flexShrink": 1,
+              },
+              false,
+              Object {
+                "color": "rgba(28, 27, 31, 1)",
+                "textAlign": "right",
+              },
+              undefined,
+            ],
           ],
         ]
       }
+      testID="undefined-text"
     >
       Default with leading control
     </Text>
@@ -188,7 +190,6 @@ exports[`can render the Android checkbox on different platforms 1`] = `
   style={
     Array [
       false,
-      false,
       undefined,
     ]
   }
@@ -210,15 +211,9 @@ exports[`can render the Android checkbox on different platforms 1`] = `
     }
   >
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         Array [
-          Object {
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": "400",
-            "letterSpacing": 0.15,
-            "lineHeight": 24,
-          },
           Object {
             "textAlign": "left",
           },
@@ -228,18 +223,28 @@ exports[`can render the Android checkbox on different platforms 1`] = `
           },
           Array [
             Object {
-              "flexGrow": 1,
-              "flexShrink": 1,
+              "fontFamily": "System",
+              "fontSize": 16,
+              "fontWeight": "400",
+              "letterSpacing": 0.15,
+              "lineHeight": 24,
             },
-            false,
-            Object {
-              "color": "rgba(28, 27, 31, 1)",
-              "textAlign": "left",
-            },
-            undefined,
+            Array [
+              Object {
+                "flexGrow": 1,
+                "flexShrink": 1,
+              },
+              false,
+              Object {
+                "color": "rgba(28, 27, 31, 1)",
+                "textAlign": "left",
+              },
+              undefined,
+            ],
           ],
         ]
       }
+      testID="undefined-text"
     >
       iOS Checkbox
     </Text>
@@ -269,7 +274,6 @@ exports[`can render the Android checkbox on different platforms 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderRadius": 18,
             "height": 36,
@@ -387,7 +391,6 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
   style={
     Array [
       false,
-      false,
       undefined,
     ]
   }
@@ -409,15 +412,9 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
     }
   >
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         Array [
-          Object {
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": "400",
-            "letterSpacing": 0.15,
-            "lineHeight": 24,
-          },
           Object {
             "textAlign": "left",
           },
@@ -427,18 +424,28 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
           },
           Array [
             Object {
-              "flexGrow": 1,
-              "flexShrink": 1,
+              "fontFamily": "System",
+              "fontSize": 16,
+              "fontWeight": "400",
+              "letterSpacing": 0.15,
+              "lineHeight": 24,
             },
-            false,
-            Object {
-              "color": "rgba(28, 27, 31, 1)",
-              "textAlign": "left",
-            },
-            undefined,
+            Array [
+              Object {
+                "flexGrow": 1,
+                "flexShrink": 1,
+              },
+              false,
+              Object {
+                "color": "rgba(28, 27, 31, 1)",
+                "textAlign": "left",
+              },
+              undefined,
+            ],
           ],
         ]
       }
+      testID="undefined-text"
     >
       iOS Checkbox
     </Text>
@@ -468,7 +475,6 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderRadius": 18,
             "padding": 6,
@@ -550,7 +556,6 @@ exports[`renders unchecked 1`] = `
   style={
     Array [
       false,
-      false,
       undefined,
     ]
   }
@@ -572,15 +577,9 @@ exports[`renders unchecked 1`] = `
     }
   >
     <Text
+      maxFontSizeMultiplier={1.5}
       style={
         Array [
-          Object {
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": "400",
-            "letterSpacing": 0.15,
-            "lineHeight": 24,
-          },
           Object {
             "textAlign": "left",
           },
@@ -590,18 +589,28 @@ exports[`renders unchecked 1`] = `
           },
           Array [
             Object {
-              "flexGrow": 1,
-              "flexShrink": 1,
+              "fontFamily": "System",
+              "fontSize": 16,
+              "fontWeight": "400",
+              "letterSpacing": 0.15,
+              "lineHeight": 24,
             },
-            false,
-            Object {
-              "color": "rgba(28, 27, 31, 1)",
-              "textAlign": "left",
-            },
-            undefined,
+            Array [
+              Object {
+                "flexGrow": 1,
+                "flexShrink": 1,
+              },
+              false,
+              Object {
+                "color": "rgba(28, 27, 31, 1)",
+                "textAlign": "left",
+              },
+              undefined,
+            ],
           ],
         ]
       }
+      testID="undefined-text"
     >
       Unchecked Button
     </Text>
@@ -631,7 +640,6 @@ exports[`renders unchecked 1`] = `
           Object {
             "overflow": "hidden",
           },
-          false,
           Object {
             "borderRadius": 18,
             "padding": 6,

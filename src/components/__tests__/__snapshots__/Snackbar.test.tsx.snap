@@ -24,18 +24,10 @@ exports[`renders snackbar with Text as a child 1`] = `
     collapsable={false}
     style={
       Object {
-        "alignSelf": undefined,
         "backgroundColor": "rgba(49, 48, 51, 1)",
         "borderRadius": 4,
-        "bottom": undefined,
-        "end": undefined,
-        "flex": undefined,
-        "height": undefined,
-        "left": undefined,
         "margin": 8,
         "opacity": 1,
-        "position": undefined,
-        "right": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 2,
@@ -43,14 +35,11 @@ exports[`renders snackbar with Text as a child 1`] = `
         },
         "shadowOpacity": 0.15,
         "shadowRadius": 6,
-        "start": undefined,
-        "top": undefined,
         "transform": Array [
           Object {
             "scale": 1,
           },
         ],
-        "width": undefined,
       }
     }
     testID="surface-outer-layer"
@@ -120,18 +109,10 @@ exports[`renders snackbar with View & Text as a child 1`] = `
     collapsable={false}
     style={
       Object {
-        "alignSelf": undefined,
         "backgroundColor": "rgba(49, 48, 51, 1)",
         "borderRadius": 4,
-        "bottom": undefined,
-        "end": undefined,
-        "flex": undefined,
-        "height": undefined,
-        "left": undefined,
         "margin": 8,
         "opacity": 1,
-        "position": undefined,
-        "right": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 2,
@@ -139,14 +120,11 @@ exports[`renders snackbar with View & Text as a child 1`] = `
         },
         "shadowOpacity": 0.15,
         "shadowRadius": 6,
-        "start": undefined,
-        "top": undefined,
         "transform": Array [
           Object {
             "scale": 1,
           },
         ],
-        "width": undefined,
       }
     }
     testID="surface-outer-layer"
@@ -242,18 +220,10 @@ exports[`renders snackbar with action button 1`] = `
     collapsable={false}
     style={
       Object {
-        "alignSelf": undefined,
         "backgroundColor": "rgba(49, 48, 51, 1)",
         "borderRadius": 4,
-        "bottom": undefined,
-        "end": undefined,
-        "flex": undefined,
-        "height": undefined,
-        "left": undefined,
         "margin": 8,
         "opacity": 1,
-        "position": undefined,
-        "right": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 2,
@@ -261,14 +231,11 @@ exports[`renders snackbar with action button 1`] = `
         },
         "shadowOpacity": 0.15,
         "shadowRadius": 6,
-        "start": undefined,
-        "top": undefined,
         "transform": Array [
           Object {
             "scale": 1,
           },
         ],
-        "width": undefined,
       }
     }
     testID="surface-outer-layer"
@@ -300,13 +267,6 @@ exports[`renders snackbar with action button 1`] = `
         style={
           Array [
             Object {
-              "fontFamily": "System",
-              "fontSize": 14,
-              "fontWeight": "400",
-              "letterSpacing": 0.25,
-              "lineHeight": 20,
-            },
-            Object {
               "textAlign": "left",
             },
             Object {
@@ -315,13 +275,22 @@ exports[`renders snackbar with action button 1`] = `
             },
             Array [
               Object {
-                "flex": 1,
-                "marginHorizontal": 16,
-                "marginVertical": 14,
+                "fontFamily": "System",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "letterSpacing": 0.25,
+                "lineHeight": 20,
               },
-              Object {
-                "color": "rgba(244, 239, 244, 1)",
-              },
+              Array [
+                Object {
+                  "flex": 1,
+                  "marginHorizontal": 16,
+                  "marginVertical": 14,
+                },
+                Object {
+                  "color": "rgba(244, 239, 244, 1)",
+                },
+              ],
             ],
           ]
         }
@@ -347,19 +316,10 @@ exports[`renders snackbar with action button 1`] = `
           collapsable={false}
           style={
             Object {
-              "alignSelf": undefined,
               "backgroundColor": "transparent",
               "borderRadius": 20,
-              "bottom": undefined,
-              "end": undefined,
-              "flex": undefined,
-              "height": undefined,
-              "left": undefined,
               "marginEnd": 8,
               "marginStart": 4,
-              "opacity": undefined,
-              "position": undefined,
-              "right": undefined,
               "shadowColor": "#000",
               "shadowOffset": Object {
                 "height": 0,
@@ -367,10 +327,6 @@ exports[`renders snackbar with action button 1`] = `
               },
               "shadowOpacity": 0,
               "shadowRadius": 0,
-              "start": undefined,
-              "top": undefined,
-              "transform": undefined,
-              "width": undefined,
             }
           }
           testID="button-container-outer-layer"
@@ -421,7 +377,6 @@ exports[`renders snackbar with action button 1`] = `
                   Object {
                     "overflow": "hidden",
                   },
-                  false,
                   Object {
                     "borderRadius": 20,
                   },
@@ -447,13 +402,6 @@ exports[`renders snackbar with action button 1`] = `
                   style={
                     Array [
                       Object {
-                        "fontFamily": "System",
-                        "fontSize": 14,
-                        "fontWeight": "500",
-                        "letterSpacing": 0.1,
-                        "lineHeight": 20,
-                      },
-                      Object {
                         "textAlign": "left",
                       },
                       Object {
@@ -462,25 +410,34 @@ exports[`renders snackbar with action button 1`] = `
                       },
                       Array [
                         Object {
-                          "marginHorizontal": 16,
-                          "marginVertical": 9,
-                          "textAlign": "center",
-                        },
-                        false,
-                        Object {
-                          "marginHorizontal": 12,
-                        },
-                        false,
-                        false,
-                        Object {
-                          "color": "rgba(208, 188, 255, 1)",
                           "fontFamily": "System",
                           "fontSize": 14,
                           "fontWeight": "500",
                           "letterSpacing": 0.1,
                           "lineHeight": 20,
                         },
-                        undefined,
+                        Array [
+                          Object {
+                            "marginHorizontal": 16,
+                            "marginVertical": 9,
+                            "textAlign": "center",
+                          },
+                          false,
+                          Object {
+                            "marginHorizontal": 12,
+                          },
+                          false,
+                          false,
+                          Object {
+                            "color": "rgba(208, 188, 255, 1)",
+                            "fontFamily": "System",
+                            "fontSize": 14,
+                            "fontWeight": "500",
+                            "letterSpacing": 0.1,
+                            "lineHeight": 20,
+                          },
+                          undefined,
+                        ],
                       ],
                     ]
                   }
@@ -520,18 +477,10 @@ exports[`renders snackbar with content 1`] = `
     collapsable={false}
     style={
       Object {
-        "alignSelf": undefined,
         "backgroundColor": "rgba(49, 48, 51, 1)",
         "borderRadius": 4,
-        "bottom": undefined,
-        "end": undefined,
-        "flex": undefined,
-        "height": undefined,
-        "left": undefined,
         "margin": 8,
         "opacity": 1,
-        "position": undefined,
-        "right": undefined,
         "shadowColor": "#000",
         "shadowOffset": Object {
           "height": 2,
@@ -539,14 +488,11 @@ exports[`renders snackbar with content 1`] = `
         },
         "shadowOpacity": 0.15,
         "shadowRadius": 6,
-        "start": undefined,
-        "top": undefined,
         "transform": Array [
           Object {
             "scale": 1,
           },
         ],
-        "width": undefined,
       }
     }
     testID="surface-outer-layer"
@@ -578,13 +524,6 @@ exports[`renders snackbar with content 1`] = `
         style={
           Array [
             Object {
-              "fontFamily": "System",
-              "fontSize": 14,
-              "fontWeight": "400",
-              "letterSpacing": 0.25,
-              "lineHeight": 20,
-            },
-            Object {
               "textAlign": "left",
             },
             Object {
@@ -593,13 +532,22 @@ exports[`renders snackbar with content 1`] = `
             },
             Array [
               Object {
-                "flex": 1,
-                "marginHorizontal": 16,
-                "marginVertical": 14,
+                "fontFamily": "System",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "letterSpacing": 0.25,
+                "lineHeight": 20,
               },
-              Object {
-                "color": "rgba(244, 239, 244, 1)",
-              },
+              Array [
+                Object {
+                  "flex": 1,
+                  "marginHorizontal": 16,
+                  "marginVertical": 14,
+                },
+                Object {
+                  "color": "rgba(244, 239, 244, 1)",
+                },
+              ],
             ],
           ]
         }

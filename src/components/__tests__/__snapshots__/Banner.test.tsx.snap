@@ -5,16 +5,8 @@ exports[`render visible banner, with custom theme 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgb(247, 243, 249)",
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 1,
@@ -22,10 +14,6 @@ exports[`render visible banner, with custom theme 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 3,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
-      "width": undefined,
     }
   }
   testID="surface-outer-layer"
@@ -129,18 +117,9 @@ exports[`render visible banner, with custom theme 1`] = `
             collapsable={false}
             style={
               Object {
-                "alignSelf": undefined,
                 "backgroundColor": "transparent",
                 "borderRadius": 20,
-                "bottom": undefined,
-                "end": undefined,
-                "flex": undefined,
-                "height": undefined,
-                "left": undefined,
                 "margin": 4,
-                "opacity": undefined,
-                "position": undefined,
-                "right": undefined,
                 "shadowColor": "#000",
                 "shadowOffset": Object {
                   "height": 0,
@@ -148,10 +127,6 @@ exports[`render visible banner, with custom theme 1`] = `
                 },
                 "shadowOpacity": 0,
                 "shadowRadius": 0,
-                "start": undefined,
-                "top": undefined,
-                "transform": undefined,
-                "width": undefined,
               }
             }
             testID="button-container-outer-layer"
@@ -202,7 +177,6 @@ exports[`render visible banner, with custom theme 1`] = `
                     Object {
                       "overflow": "hidden",
                     },
-                    false,
                     Object {
                       "borderRadius": 20,
                     },
@@ -228,13 +202,6 @@ exports[`render visible banner, with custom theme 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 14,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.1,
-                          "lineHeight": 20,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -243,27 +210,36 @@ exports[`render visible banner, with custom theme 1`] = `
                         },
                         Array [
                           Object {
-                            "marginHorizontal": 16,
-                            "marginVertical": 9,
-                            "textAlign": "center",
-                          },
-                          false,
-                          Object {
-                            "marginHorizontal": 12,
-                          },
-                          Object {
-                            "marginHorizontal": 8,
-                          },
-                          false,
-                          Object {
-                            "color": "#043",
                             "fontFamily": "System",
                             "fontSize": 14,
                             "fontWeight": "500",
                             "letterSpacing": 0.1,
                             "lineHeight": 20,
                           },
-                          undefined,
+                          Array [
+                            Object {
+                              "marginHorizontal": 16,
+                              "marginVertical": 9,
+                              "textAlign": "center",
+                            },
+                            false,
+                            Object {
+                              "marginHorizontal": 12,
+                            },
+                            Object {
+                              "marginHorizontal": 8,
+                            },
+                            false,
+                            Object {
+                              "color": "#043",
+                              "fontFamily": "System",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }
@@ -287,16 +263,8 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgb(247, 243, 249)",
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 0,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 1,
@@ -304,10 +272,6 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 3,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
-      "width": undefined,
     }
   }
   testID="surface-outer-layer"
@@ -430,16 +394,8 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgb(247, 243, 249)",
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 1,
@@ -447,10 +403,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 3,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
-      "width": undefined,
     }
   }
   testID="surface-outer-layer"
@@ -576,18 +528,9 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
             collapsable={false}
             style={
               Object {
-                "alignSelf": undefined,
                 "backgroundColor": "transparent",
                 "borderRadius": 20,
-                "bottom": undefined,
-                "end": undefined,
-                "flex": undefined,
-                "height": undefined,
-                "left": undefined,
                 "margin": 4,
-                "opacity": undefined,
-                "position": undefined,
-                "right": undefined,
                 "shadowColor": "#000",
                 "shadowOffset": Object {
                   "height": 0,
@@ -595,10 +538,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                 },
                 "shadowOpacity": 0,
                 "shadowRadius": 0,
-                "start": undefined,
-                "top": undefined,
-                "transform": undefined,
-                "width": undefined,
               }
             }
             testID="button-container-outer-layer"
@@ -649,7 +588,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                     Object {
                       "overflow": "hidden",
                     },
-                    false,
                     Object {
                       "borderRadius": 20,
                     },
@@ -675,13 +613,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 14,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.1,
-                          "lineHeight": 20,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -690,27 +621,36 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                         },
                         Array [
                           Object {
-                            "marginHorizontal": 16,
-                            "marginVertical": 9,
-                            "textAlign": "center",
-                          },
-                          false,
-                          Object {
-                            "marginHorizontal": 12,
-                          },
-                          Object {
-                            "marginHorizontal": 8,
-                          },
-                          false,
-                          Object {
-                            "color": "rgba(103, 80, 164, 1)",
                             "fontFamily": "System",
                             "fontSize": 14,
                             "fontWeight": "500",
                             "letterSpacing": 0.1,
                             "lineHeight": 20,
                           },
-                          undefined,
+                          Array [
+                            Object {
+                              "marginHorizontal": 16,
+                              "marginVertical": 9,
+                              "textAlign": "center",
+                            },
+                            false,
+                            Object {
+                              "marginHorizontal": 12,
+                            },
+                            Object {
+                              "marginHorizontal": 8,
+                            },
+                            false,
+                            Object {
+                              "color": "rgba(103, 80, 164, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }
@@ -734,16 +674,8 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgb(247, 243, 249)",
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 1,
@@ -751,10 +683,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 3,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
-      "width": undefined,
     }
   }
   testID="surface-outer-layer"
@@ -858,18 +786,9 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             collapsable={false}
             style={
               Object {
-                "alignSelf": undefined,
                 "backgroundColor": "transparent",
                 "borderRadius": 20,
-                "bottom": undefined,
-                "end": undefined,
-                "flex": undefined,
-                "height": undefined,
-                "left": undefined,
                 "margin": 4,
-                "opacity": undefined,
-                "position": undefined,
-                "right": undefined,
                 "shadowColor": "#000",
                 "shadowOffset": Object {
                   "height": 0,
@@ -877,10 +796,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 },
                 "shadowOpacity": 0,
                 "shadowRadius": 0,
-                "start": undefined,
-                "top": undefined,
-                "transform": undefined,
-                "width": undefined,
               }
             }
             testID="button-container-outer-layer"
@@ -931,7 +846,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                     Object {
                       "overflow": "hidden",
                     },
-                    false,
                     Object {
                       "borderRadius": 20,
                     },
@@ -957,13 +871,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 14,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.1,
-                          "lineHeight": 20,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -972,27 +879,36 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                         },
                         Array [
                           Object {
-                            "marginHorizontal": 16,
-                            "marginVertical": 9,
-                            "textAlign": "center",
-                          },
-                          false,
-                          Object {
-                            "marginHorizontal": 12,
-                          },
-                          Object {
-                            "marginHorizontal": 8,
-                          },
-                          false,
-                          Object {
-                            "color": "rgba(103, 80, 164, 1)",
                             "fontFamily": "System",
                             "fontSize": 14,
                             "fontWeight": "500",
                             "letterSpacing": 0.1,
                             "lineHeight": 20,
                           },
-                          undefined,
+                          Array [
+                            Object {
+                              "marginHorizontal": 16,
+                              "marginVertical": 9,
+                              "textAlign": "center",
+                            },
+                            false,
+                            Object {
+                              "marginHorizontal": 12,
+                            },
+                            Object {
+                              "marginHorizontal": 8,
+                            },
+                            false,
+                            Object {
+                              "color": "rgba(103, 80, 164, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }
@@ -1008,18 +924,9 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             collapsable={false}
             style={
               Object {
-                "alignSelf": undefined,
                 "backgroundColor": "transparent",
                 "borderRadius": 20,
-                "bottom": undefined,
-                "end": undefined,
-                "flex": undefined,
-                "height": undefined,
-                "left": undefined,
                 "margin": 4,
-                "opacity": undefined,
-                "position": undefined,
-                "right": undefined,
                 "shadowColor": "#000",
                 "shadowOffset": Object {
                   "height": 0,
@@ -1027,10 +934,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 },
                 "shadowOpacity": 0,
                 "shadowRadius": 0,
-                "start": undefined,
-                "top": undefined,
-                "transform": undefined,
-                "width": undefined,
               }
             }
             testID="button-container-outer-layer"
@@ -1081,7 +984,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                     Object {
                       "overflow": "hidden",
                     },
-                    false,
                     Object {
                       "borderRadius": 20,
                     },
@@ -1107,13 +1009,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                     style={
                       Array [
                         Object {
-                          "fontFamily": "System",
-                          "fontSize": 14,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.1,
-                          "lineHeight": 20,
-                        },
-                        Object {
                           "textAlign": "left",
                         },
                         Object {
@@ -1122,27 +1017,36 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                         },
                         Array [
                           Object {
-                            "marginHorizontal": 16,
-                            "marginVertical": 9,
-                            "textAlign": "center",
-                          },
-                          false,
-                          Object {
-                            "marginHorizontal": 12,
-                          },
-                          Object {
-                            "marginHorizontal": 8,
-                          },
-                          false,
-                          Object {
-                            "color": "rgba(103, 80, 164, 1)",
                             "fontFamily": "System",
                             "fontSize": 14,
                             "fontWeight": "500",
                             "letterSpacing": 0.1,
                             "lineHeight": 20,
                           },
-                          undefined,
+                          Array [
+                            Object {
+                              "marginHorizontal": 16,
+                              "marginVertical": 9,
+                              "textAlign": "center",
+                            },
+                            false,
+                            Object {
+                              "marginHorizontal": 12,
+                            },
+                            Object {
+                              "marginHorizontal": 8,
+                            },
+                            false,
+                            Object {
+                              "color": "rgba(103, 80, 164, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }
@@ -1166,16 +1070,8 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgb(247, 243, 249)",
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 1,
@@ -1183,10 +1079,6 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 3,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
-      "width": undefined,
     }
   }
   testID="surface-outer-layer"
@@ -1319,16 +1211,8 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "rgb(247, 243, 249)",
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 1,
@@ -1336,10 +1220,6 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 3,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
-      "width": undefined,
     }
   }
   testID="surface-outer-layer"

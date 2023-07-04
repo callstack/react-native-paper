@@ -213,13 +213,6 @@ const PaginationDropdown = ({
 /**
  * A component to show pagination for data table.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/data-table-pagination.png" />
- *   </figure>
- * </div>
- *
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

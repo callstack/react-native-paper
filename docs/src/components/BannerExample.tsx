@@ -12,7 +12,7 @@ import {
   MD3DarkTheme as DarkTheme,
   MD3LightTheme as DefaultTheme,
   ProgressBar,
-  Provider,
+  PaperProvider,
   RadioButton,
   Switch,
   Text,
@@ -167,9 +167,9 @@ const Shimmer = () => {
 const ThemedBannerExample = () => {
   const isDarkTheme = useColorMode().colorMode === 'dark';
   return (
-    <Provider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
+    <PaperProvider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
       <BannerExample />
-    </Provider>
+    </PaperProvider>
   );
 };
 

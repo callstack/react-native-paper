@@ -1,4 +1,4 @@
-import { Dimensions, LayoutRectangle } from 'react-native';
+import { Dimensions, LayoutRectangle, ViewStyle } from 'react-native';
 
 import type { Direction } from '../../core/Localization';
 
@@ -53,7 +53,12 @@ const getTooltipXPosition = (
   { pageX: childrenX, width: childrenWidth }: ChildrenMeasurement,
   { width: tooltipWidth }: TooltipLayout
 ): number => {
-  const center = childrenX + (childrenWidth - tooltipWidth) / 2;
+  // when the children use position absolute the childrenWidth is measured as 0,
+  // so it's best to anchor the tooltip at the start of the children
+  const center =
+    childrenWidth > 0
+      ? childrenX + (childrenWidth - tooltipWidth) / 2
+      : childrenX;
 
   if (overflowLeft(center)) return childrenX;
 
@@ -73,23 +78,64 @@ const getTooltipYPosition = (
   return childrenY + childrenHeight;
 };
 
+const getChildrenMeasures = (
+  style: ViewStyle | Array<ViewStyle>,
+  measures: ChildrenMeasurement
+): ChildrenMeasurement => {
+  const { position, top, bottom, left, right } = Array.isArray(style)
+    ? style.reduce((acc, current) => ({ ...acc, ...current }))
+    : style;
+
+  if (position === 'absolute') {
+    let pageX = 0;
+    let pageY = measures.pageY;
+    let height = 0;
+    let width = 0;
+    if (typeof left === 'number') {
+      pageX = left;
+      width = 0;
+    }
+    if (typeof right === 'number') {
+      pageX = measures.width - right;
+      width = 0;
+    }
+    if (typeof top === 'number') {
+      pageY = pageY + top;
+    }
+    if (typeof bottom === 'number') {
+      pageY = pageY - bottom;
+    }
+
+    return { pageX, pageY, width, height };
+  }
+
+  return measures;
+};
+
 export const getTooltipPosition = (
   { children, tooltip, measured }: Measurement,
-  direction?: Direction
+  component: React.ReactElement<{
+    style: ViewStyle | Array<ViewStyle> | undefined | null;
+  }>,
+  direction: Direction
 ): {} | { left: number; top: number } => {
   if (!measured) return {};
+  let measures = children;
+  if (component.props.style) {
+    measures = getChildrenMeasures(component.props.style, children);
+  }
 
   if (direction === 'rtl') {
     return {
-      right: getTooltipXPosition(children, tooltip),
-      top: getTooltipYPosition(children, tooltip),
+      right: getTooltipXPosition(measures, tooltip),
+      top: getTooltipYPosition(measures, tooltip),
       alignSelf: 'flex-end',
     };
   }
 
   return {
-    left: getTooltipXPosition(children, tooltip),
-    top: getTooltipYPosition(children, tooltip),
+    left: getTooltipXPosition(measures, tooltip),
+    top: getTooltipYPosition(measures, tooltip),
     alignSelf: 'flex-start',
   };
 };

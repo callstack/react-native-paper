@@ -5,6 +5,8 @@ import {
   LayoutChangeEvent,
   StyleSheet,
   Platform,
+  Pressable,
+  ViewStyle,
 } from 'react-native';
 
 import type { ThemeProp } from 'src/types';
@@ -44,12 +46,6 @@ export type Props = {
  *
  * Plain tooltips, when activated, display a text label identifying an element, such as a description of its function. Tooltips should include only short, descriptive text and avoid restating visible UI text.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/tooltip.png" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -72,6 +68,8 @@ const Tooltip = ({
   theme: themeOverrides,
   ...rest
 }: Props) => {
+  const isWeb = Platform.OS === 'web';
+
   const theme = useInternalTheme(themeOverrides);
   const { direction } = useLocale();
   const [visible, setVisible] = React.useState(false);
@@ -85,8 +83,6 @@ const Tooltip = ({
   const hideTooltipTimer = React.useRef<NodeJS.Timeout>();
   const childrenWrapperRef = React.useRef() as React.MutableRefObject<View>;
   const touched = React.useRef(false);
-
-  const isWeb = Platform.OS === 'web';
 
   React.useEffect(() => {
     return () => {
@@ -125,10 +121,15 @@ const Tooltip = ({
       clearTimeout(hideTooltipTimer.current);
     }
 
-    showTooltipTimer.current = setTimeout(() => {
+    if (isWeb) {
+      showTooltipTimer.current = setTimeout(() => {
+        touched.current = true;
+        setVisible(true);
+      }, enterTouchDelay) as unknown as NodeJS.Timeout;
+    } else {
       touched.current = true;
       setVisible(true);
-    }, enterTouchDelay) as unknown as NodeJS.Timeout;
+    }
   };
 
   const handleTouchEnd = () => {
@@ -151,6 +152,9 @@ const Tooltip = ({
         return children.props.onPress?.();
       }
     }, [children.props]),
+    onLongPress: () => handleTouchStart(),
+    onPressOut: () => handleTouchEnd(),
+    delayLongPress: enterTouchDelay,
   };
 
   const webPressProps = {
@@ -176,7 +180,11 @@ const Tooltip = ({
                 backgroundColor: theme.isV3
                   ? theme.colors.onSurface
                   : theme.colors.tooltip,
-                ...getTooltipPosition(measurement as Measurement, direction),
+                ...getTooltipPosition(
+                  measurement as Measurement,
+                  children,
+                  direction
+                ),
                 borderRadius: theme.roundness,
                 ...(measurement.measured ? styles.visible : styles.hidden),
               },
@@ -195,17 +203,17 @@ const Tooltip = ({
           </View>
         </Portal>
       )}
-      <View
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        onTouchCancel={handleTouchEnd}
+      {/* Need the xxPressProps in both places */}
+      <Pressable
+        ref={childrenWrapperRef}
+        style={styles.pressContainer}
+        {...(isWeb ? webPressProps : mobilePressProps)}
       >
         {React.cloneElement(children, {
           ...rest,
-          ref: childrenWrapperRef,
           ...(isWeb ? webPressProps : mobilePressProps),
         })}
-      </View>
+      </Pressable>
     </>
   );
 };
@@ -223,6 +231,9 @@ const styles = StyleSheet.create({
   hidden: {
     opacity: 0,
   },
+  pressContainer: {
+    ...(Platform.OS === 'web' && { cursor: 'default' }),
+  } as ViewStyle,
 });
 
 export default Tooltip;

@@ -55,13 +55,6 @@ export type Props = React.ComponentPropsWithRef<
 /**
  * A component to display title in table header.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/data-table-header.png" />
- *   </figure>
- * </div>
- *
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

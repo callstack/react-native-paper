@@ -23,6 +23,10 @@ export type Props = {
    */
   dismissable?: boolean;
   /**
+   * Determines whether clicking Android hardware back button dismiss dialog.
+   */
+  dismissableBackButton?: boolean;
+  /**
    * Callback that is called when the user dismisses the dialog.
    */
   onDismiss?: () => void;
@@ -51,16 +55,11 @@ const DIALOG_ELEVATION: number = 24;
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
  * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](../../Portal) component.
  *
- *  <div class="screenshots">
- *   <img class="small" src="screenshots/dialog-1.png" />
- *   <img class="small" src="screenshots/dialog-2.png" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { Button, Dialog, Portal, Provider, Text } from 'react-native-paper';
+ * import { Button, Dialog, Portal, PaperProvider, Text } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -70,7 +69,7 @@ const DIALOG_ELEVATION: number = 24;
  *   const hideDialog = () => setVisible(false);
  *
  *   return (
- *     <Provider>
+ *     <PaperProvider>
  *       <View>
  *         <Button onPress={showDialog}>Show Dialog</Button>
  *         <Portal>
@@ -85,7 +84,7 @@ const DIALOG_ELEVATION: number = 24;
  *           </Dialog>
  *         </Portal>
  *       </View>
- *     </Provider>
+ *     </PaperProvider>
  *   );
  * };
  *
@@ -95,6 +94,7 @@ const DIALOG_ELEVATION: number = 24;
 const Dialog = ({
   children,
   dismissable = true,
+  dismissableBackButton = dismissable,
   onDismiss,
   visible = false,
   style,
@@ -116,6 +116,7 @@ const Dialog = ({
   return (
     <Modal
       dismissable={dismissable}
+      dismissableBackButton={dismissableBackButton}
       onDismiss={onDismiss}
       visible={visible}
       contentContainerStyle={[

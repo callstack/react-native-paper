@@ -32,6 +32,7 @@ const SegmentedButtonRealCase = () => {
       <FlatList
         data={value === 'songs' ? songsData : albumsData}
         keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.contentContainer}
         renderItem={({ item }) => {
           return (
             <Card mode="contained" style={styles.card}>
@@ -56,6 +57,10 @@ const SegmentedButtonRealCase = () => {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 16,
+    flex: 1,
+  },
+  contentContainer: {
+    paddingBottom: 16,
   },
   card: {
     marginHorizontal: 16,

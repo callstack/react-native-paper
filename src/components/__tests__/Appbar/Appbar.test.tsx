@@ -4,7 +4,7 @@ import { Animated, Platform } from 'react-native';
 import { render } from '@testing-library/react-native';
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 
-import Provider from '../../../core/Provider';
+import PaperProvider from '../../../core/PaperProvider';
 import { getTheme } from '../../../core/theming';
 import overlay from '../../../styles/overlay';
 import { tokens } from '../../../styles/themes/v3/tokens';
@@ -267,7 +267,8 @@ describe('AppbarAction', () => {
         <Appbar.Action icon="menu" testID="appbar-action" />
       </Appbar>
     );
-    const appbarActionIcon = getByTestId('appbar-action').props.children[0];
+    const appbarActionIcon = getByTestId('cross-fade-icon-current').props
+      .children;
     expect(appbarActionIcon.props.color).toBe(
       getTheme().colors.onSurfaceVariant
     );
@@ -279,7 +280,8 @@ describe('AppbarAction', () => {
         <Appbar.Action icon="menu" testID="appbar-action" isLeading />
       </Appbar>
     );
-    const appbarActionIcon = getByTestId('appbar-action').props.children[0];
+    const appbarActionIcon = getByTestId('cross-fade-icon-current').props
+      .children;
     expect(appbarActionIcon.props.color).toBe(getTheme().colors.onSurface);
   });
 
@@ -289,7 +291,8 @@ describe('AppbarAction', () => {
         <Appbar.Action icon="menu" color="purple" testID="appbar-action" />
       </Appbar>
     );
-    const appbarActionIcon = getByTestId('appbar-action').props.children[0];
+    const appbarActionIcon = getByTestId('cross-fade-icon-current').props
+      .children;
     expect(appbarActionIcon.props.color).toBe('purple');
   });
 
@@ -299,7 +302,8 @@ describe('AppbarAction', () => {
         <Appbar.BackAction color="purple" testID="appbar-action" />
       </Appbar>
     );
-    const appbarBackActionIcon = getByTestId('appbar-action').props.children[0];
+    const appbarBackActionIcon = getByTestId('cross-fade-icon-current').props
+      .children;
     expect(appbarBackActionIcon.props.color).toBe('purple');
   });
 
@@ -313,23 +317,25 @@ describe('AppbarAction', () => {
         </Appbar>
       );
 
-      const appbarActionIcon = getByTestId('appbar-action').props.children[0];
+      const appbarActionIcon = getByTestId('cross-fade-icon-current').props
+        .children;
 
       expect(appbarActionIcon.props.color).toBe('#ffffff');
     });
 
     it('should be rendered with the right color when no color is passed but is wrapped by a Tooltip', () => {
       const { getByTestId } = render(
-        <Provider>
+        <PaperProvider>
           <Appbar theme={theme}>
             <Tooltip title="Menu">
               <Appbar.Action icon="menu" testID="appbar-action" />
             </Tooltip>
           </Appbar>
-        </Provider>
+        </PaperProvider>
       );
 
-      const appbarActionIcon = getByTestId('appbar-action').props.children[0];
+      const appbarActionIcon = getByTestId('cross-fade-icon-current').props
+        .children;
 
       expect(appbarActionIcon.props.color).toBe('#ffffff');
     });

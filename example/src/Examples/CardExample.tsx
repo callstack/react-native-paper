@@ -175,7 +175,7 @@ const CardExample = () => {
         <Card
           style={styles.card}
           onPress={() => {
-            preferences.toggleTheme();
+            preferences?.toggleTheme();
           }}
           mode={selectedMode}
         >

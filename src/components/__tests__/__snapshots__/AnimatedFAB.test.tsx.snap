@@ -5,17 +5,10 @@ exports[`renders animated fab 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "transparent",
       "borderRadius": 16,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
       "position": "absolute",
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -23,14 +16,11 @@ exports[`renders animated fab 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "start": undefined,
-      "top": undefined,
       "transform": Array [
         Object {
           "scale": 1,
         },
       ],
-      "width": undefined,
     }
   }
   testID="animated-fab-container-outer-layer"
@@ -85,7 +75,7 @@ exports[`renders animated fab 1`] = `
             Object {
               "borderRadius": 16,
               "bottom": 0,
-              "elevation": 6,
+              "elevation": 3,
               "left": 0,
               "opacity": 0,
               "position": "absolute",
@@ -94,6 +84,7 @@ exports[`renders animated fab 1`] = `
               "width": 72,
             }
           }
+          testID="animated-fab-extended-shadow"
         />
         <View
           collapsable={false}
@@ -102,7 +93,7 @@ exports[`renders animated fab 1`] = `
             Object {
               "borderRadius": 16,
               "bottom": 0,
-              "elevation": 6,
+              "elevation": 3,
               "left": 0,
               "opacity": 1,
               "position": "absolute",
@@ -116,6 +107,7 @@ exports[`renders animated fab 1`] = `
               "width": 56,
             }
           }
+          testID="animated-fab-shadow"
         />
       </View>
       <View
@@ -172,7 +164,6 @@ exports[`renders animated fab 1`] = `
                 Object {
                   "overflow": "hidden",
                 },
-                false,
                 Object {
                   "borderRadius": 16,
                 },
@@ -296,17 +287,10 @@ exports[`renders animated fab with label on the left 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "transparent",
       "borderRadius": 16,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
       "position": "absolute",
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -314,14 +298,11 @@ exports[`renders animated fab with label on the left 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "start": undefined,
-      "top": undefined,
       "transform": Array [
         Object {
           "scale": 1,
         },
       ],
-      "width": undefined,
     }
   }
   testID="animated-fab-container-outer-layer"
@@ -376,7 +357,7 @@ exports[`renders animated fab with label on the left 1`] = `
             Object {
               "borderRadius": 16,
               "bottom": 0,
-              "elevation": 6,
+              "elevation": 3,
               "left": 0,
               "opacity": 0,
               "position": "absolute",
@@ -385,6 +366,7 @@ exports[`renders animated fab with label on the left 1`] = `
               "width": 72,
             }
           }
+          testID="animated-fab-extended-shadow"
         />
         <View
           collapsable={false}
@@ -393,7 +375,7 @@ exports[`renders animated fab with label on the left 1`] = `
             Object {
               "borderRadius": 16,
               "bottom": 0,
-              "elevation": 6,
+              "elevation": 3,
               "left": 0,
               "opacity": 1,
               "position": "absolute",
@@ -407,6 +389,7 @@ exports[`renders animated fab with label on the left 1`] = `
               "width": 56,
             }
           }
+          testID="animated-fab-shadow"
         />
       </View>
       <View
@@ -463,7 +446,6 @@ exports[`renders animated fab with label on the left 1`] = `
                 Object {
                   "overflow": "hidden",
                 },
-                false,
                 Object {
                   "borderRadius": 16,
                 },
@@ -589,17 +571,10 @@ exports[`renders animated fab with label on the right by default 1`] = `
   collapsable={false}
   style={
     Object {
-      "alignSelf": undefined,
       "backgroundColor": "transparent",
       "borderRadius": 16,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
       "position": "absolute",
-      "right": undefined,
       "shadowColor": "#000",
       "shadowOffset": Object {
         "height": 4,
@@ -607,14 +582,11 @@ exports[`renders animated fab with label on the right by default 1`] = `
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "start": undefined,
-      "top": undefined,
       "transform": Array [
         Object {
           "scale": 1,
         },
       ],
-      "width": undefined,
     }
   }
   testID="animated-fab-container-outer-layer"
@@ -669,7 +641,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
             Object {
               "borderRadius": 16,
               "bottom": 0,
-              "elevation": 6,
+              "elevation": 3,
               "left": 0,
               "opacity": 0,
               "position": "absolute",
@@ -678,6 +650,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
               "width": 72,
             }
           }
+          testID="animated-fab-extended-shadow"
         />
         <View
           collapsable={false}
@@ -686,7 +659,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
             Object {
               "borderRadius": 16,
               "bottom": 0,
-              "elevation": 6,
+              "elevation": 3,
               "left": 0,
               "opacity": 1,
               "position": "absolute",
@@ -700,6 +673,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
               "width": 56,
             }
           }
+          testID="animated-fab-shadow"
         />
       </View>
       <View
@@ -756,7 +730,6 @@ exports[`renders animated fab with label on the right by default 1`] = `
                 Object {
                   "overflow": "hidden",
                 },
-                false,
                 Object {
                   "borderRadius": 16,
                 },

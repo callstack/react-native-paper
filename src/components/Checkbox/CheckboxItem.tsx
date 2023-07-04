@@ -51,6 +51,10 @@ export type Props = {
    */
   style?: StyleProp<ViewStyle>;
   /**
+   * Specifies the largest possible scale a title font can reach.
+   */
+  labelMaxFontSizeMultiplier?: number;
+  /**
    * Style that is passed to Label element.
    */
   labelStyle?: StyleProp<TextStyle>;
@@ -122,6 +126,7 @@ const CheckboxItem = ({
   accessibilityLabel = label,
   disabled,
   labelVariant = 'bodyLarge',
+  labelMaxFontSizeMultiplier = 1.5,
   ...props
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -175,6 +180,8 @@ const CheckboxItem = ({
         {isLeading && checkbox}
         <Text
           variant={labelVariant}
+          testID={`${testID}-text`}
+          maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
           style={[
             styles.label,
             !theme.isV3 && styles.font,

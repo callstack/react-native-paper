@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   AccessibilityState,
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
@@ -64,6 +65,10 @@ export type Props = {
   contentStyle?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
   /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -83,12 +88,6 @@ export type Props = {
 
 /**
  * A component to show a single list item inside a Menu.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/menu-item.png" />
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js
@@ -118,8 +117,9 @@ const MenuItem = ({
   onPress,
   style,
   contentStyle,
-  testID = 'menu-item',
   titleStyle,
+  rippleColor: customRippleColor,
+  testID = 'menu-item',
   accessibilityLabel,
   accessibilityState,
   theme: themeOverrides,
@@ -127,9 +127,10 @@ const MenuItem = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { localeProps } = useLocale();
-  const { titleColor, iconColor, underlayColor } = getMenuItemColor({
+  const { titleColor, iconColor, rippleColor } = getMenuItemColor({
     theme,
     disabled,
+    customRippleColor,
   });
   const { isV3 } = theme;
 
@@ -167,7 +168,7 @@ const MenuItem = ({
       accessibilityLabel={accessibilityLabel}
       accessibilityRole="menuitem"
       accessibilityState={newAccessibilityState}
-      underlayColor={underlayColor}
+      rippleColor={rippleColor}
     >
       <View style={styles.row}>
         {leadingIcon ? (

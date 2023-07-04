@@ -20,6 +20,7 @@ export type RenderProps = {
   placeholderTextColor?: ColorValue;
   editable?: boolean;
   selectionColor?: string;
+  cursorColor?: string;
   onFocus?: (args: any) => void;
   onBlur?: (args: any) => void;
   underlineColorAndroid?: string;

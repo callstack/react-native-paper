@@ -51,10 +51,6 @@ const INDETERMINATE_MAX_WIDTH = 0.6;
 /**
  * Progress bar is an indicator used to present progress of some activity in the app.
  *
- * <div class="screenshots">
- *   <img src="screenshots/progress-bar.png" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
-import { Button, List } from 'react-native-paper';
+import { Button, List, Text } from 'react-native-paper';
 
 import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
@@ -283,6 +283,28 @@ const ButtonExample = () => {
           >
             Custom Font
           </Button>
+          <Button mode="outlined" onPress={() => {}} style={styles.button}>
+            <Text variant="titleLarge">Custom text</Text>
+          </Button>
+        </View>
+
+        <View style={styles.row}>
+          <Button
+            mode="contained"
+            onPress={() => {}}
+            style={styles.flexGrow1Button}
+          >
+            flex-grow: 1
+          </Button>
+        </View>
+        <View style={styles.row}>
+          <Button
+            mode="contained"
+            onPress={() => {}}
+            style={styles.width100PercentButton}
+          >
+            width: 100%
+          </Button>
         </View>
       </List.Section>
       <List.Section title="Compact">
@@ -336,6 +358,14 @@ const styles = StyleSheet.create({
   fontStyles: {
     fontWeight: '800',
     fontSize: 24,
+  },
+  flexGrow1Button: {
+    flexGrow: 1,
+    marginTop: 10,
+  },
+  width100PercentButton: {
+    width: '100%',
+    marginTop: 10,
   },
 });
 

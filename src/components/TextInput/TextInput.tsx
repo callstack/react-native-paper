@@ -62,6 +62,10 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    */
   selectionColor?: string;
   /**
+   * Cursor (or "caret") color of the input - Android.
+   */
+  cursorColor?: string;
+  /**
    * Inactive underline color of the input.
    */
   underlineColor?: string;
@@ -149,7 +153,7 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    * Overrides input style
    * Example: `paddingStart`, `backgroundColor`
    */
-  contentStyle?: StyleProp<ViewStyle>;
+  contentStyle?: StyleProp<TextStyle>;
   /**
    * Pass style to override the default style of outlined wrapper.
    * Overrides style when mode is set to `outlined`
@@ -181,25 +185,6 @@ const DefaultRenderer = (props: RenderProps) => <NativeTextInput {...props} />;
 
 /**
  * A component to allow users to input text.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img src="screenshots/textinput-flat.focused.png" />
- *     <figcaption>Flat (focused)</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/textinput-flat.disabled.png" />
- *     <figcaption>Flat (disabled)</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/textinput-outlined.focused.png" />
- *     <figcaption>Outlined (focused)</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/textinput-outlined.disabled.png" />
- *     <figcaption>Outlined (disabled)</figcaption>
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js

@@ -38,13 +38,6 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
 /**
  * A component to show a single row inside of a table.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/data-table-row-cell.png" />
- *   </figure>
- * </div>
- *
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -61,8 +54,9 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  *
  * export default MyComponent;
  * ```
+ *
+ * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
-
 const DataTableRow = ({
   onPress,
   style,

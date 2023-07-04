@@ -8,11 +8,13 @@
     "eas-build-pre-install": "cd .. && yarn",
     "start": "EXPO_NO_TYPESCRIPT_SETUP=1 expo start",
     "android": "EXPO_NO_TYPESCRIPT_SETUP=1 expo start --android",
+    "android:native": "EXPO_NO_TYPESCRIPT_SETUP=1 expo run:android",
     "ios": "EXPO_NO_TYPESCRIPT_SETUP=1 expo start --ios",
     "web": "EXPO_NO_TYPESCRIPT_SETUP=1 expo start --web"
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
+    "@pchmn/expo-material3-theme": "^1.0.1",
     "@react-native-async-storage/async-storage": "~1.17.10",
     "@react-native-masked-view/masked-view": "0.2.8",
     "@react-navigation/bottom-tabs": "^6.5.3",
@@ -20,6 +22,7 @@
     "@react-navigation/native": "^6.1.2",
     "@react-navigation/stack": "^6.3.11",
     "expo": "^47.0.0",
+    "expo-dev-client": "~2.0.1",
     "expo-font": "~11.0.1",
     "expo-keep-awake": "~11.0.1",
     "expo-splash-screen": "~0.17.5",
@@ -28,7 +31,7 @@
     "file-loader": "^6.2.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "react-native": "0.70.5",
+    "react-native": "0.70.8",
     "react-native-gesture-handler": "~2.8.0",
     "react-native-reanimated": "~2.12.0",
     "react-native-safe-area-context": "4.4.1",
@@ -38,6 +41,7 @@
     "typeface-roboto": "^1.1.13"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.9",
     "babel-plugin-module-resolver": "^5.0.0",
     "babel-preset-expo": "~9.2.1",
     "expo-cli": "^6.1.0"

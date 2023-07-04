@@ -280,7 +280,7 @@ const TextInputExample = () => {
             secureTextEntry={outlineTextSecureEntry}
             right={
               <TextInput.Icon
-                icon={outlineTextSecureEntry ? 'eye' : 'eye-off'}
+                icon={outlineTextSecureEntry ? 'eye-off' : 'eye'}
                 onPress={() =>
                   dispatch({
                     type: 'outlineTextSecureEntry',

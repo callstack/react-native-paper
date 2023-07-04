@@ -43,15 +43,10 @@ export type Props = $Omit<
 /**
  * A component used to display a back button in the appbar.
  *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/appbar-backaction-android.png" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { Appbar } from 'react-native-paper';
- *
  *
  * const MyComponent = () => (
  *     <Appbar.Header>

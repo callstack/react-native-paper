@@ -31,7 +31,7 @@ export type Props = {
   /**
    * Custom text color for button.
    */
-  color?: string;
+  iconColor?: string;
   /**
    * Whether the button is disabled.
    */
@@ -67,10 +67,6 @@ export type Props = {
 /**
  * Toggle buttons can be used to group related options. To emphasize groups of related toggle buttons,
  * a group should share a common container.
- *
- * <div class="screenshots">
- *   <img class="medium" src="screenshots/toggle-button.png" />
- * </div>
  *
  * ## Usage
  * ```js

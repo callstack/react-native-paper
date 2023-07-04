@@ -73,14 +73,14 @@ const ToggleButtonExample = () => {
             <ImageBackground
               style={styles.customImage}
               source={{
-                uri: 'https://images.pexels.com/photos/1068534/pexels-photo-1068534.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+                uri: 'https://images.pexels.com/photos/5946081/pexels-photo-5946081.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
               }}
             >
               <ToggleButton
                 value="watermelon"
                 size={24}
                 style={styles.customButton}
-                color="white"
+                iconColor="white"
                 icon={fruit === 'watermelon' ? 'heart' : 'heart-outline'}
               />
             </ImageBackground>
@@ -94,7 +94,7 @@ const ToggleButtonExample = () => {
                 value="strawberries"
                 size={24}
                 style={styles.customButton}
-                color="white"
+                iconColor="white"
                 icon={fruit === 'strawberries' ? 'heart' : 'heart-outline'}
               />
             </ImageBackground>

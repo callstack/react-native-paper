@@ -57,6 +57,28 @@ it('renders selected chip', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('renders disabled chip if there is no touch handler passed', () => {
+  const { getByTestId } = render(
+    <Chip testID="disabled-chip">Disabled chip</Chip>
+  );
+
+  expect(getByTestId('disabled-chip').props.accessibilityState).toMatchObject({
+    disabled: true,
+  });
+});
+
+it('renders active chip if only onLongPress handler is passed', () => {
+  const { getByTestId } = render(
+    <Chip onLongPress={() => {}} testID="active-chip">
+      Active chip
+    </Chip>
+  );
+
+  expect(getByTestId('active-chip').props.accessibilityState).toMatchObject({
+    disabled: false,
+  });
+});
+
 describe('getChipColors - text color', () => {
   it('should return correct disabled color, for theme version 3', () => {
     expect(
@@ -229,7 +251,7 @@ describe('getChipColors - icon color', () => {
   });
 });
 
-describe('getChipColors - underlay color', () => {
+describe('getChipColors - ripple color', () => {
   it('should return theme color, for theme version 3, flat mode', () => {
     expect(
       getChipColors({
@@ -237,7 +259,7 @@ describe('getChipColors - underlay color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      underlayColor: color(getTheme().colors.onSecondaryContainer)
+      rippleColor: color(getTheme().colors.onSecondaryContainer)
         .alpha(0.12)
         .rgb()
         .string(),
@@ -251,7 +273,7 @@ describe('getChipColors - underlay color', () => {
         isOutlined: true,
       })
     ).toMatchObject({
-      underlayColor: color(getTheme().colors.onSurfaceVariant)
+      rippleColor: color(getTheme().colors.onSurfaceVariant)
         .alpha(0.12)
         .rgb()
         .string(),
@@ -266,7 +288,7 @@ describe('getChipColors - underlay color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      underlayColor: color('purple').alpha(0.12).rgb().string(),
+      rippleColor: color('purple').alpha(0.12).rgb().string(),
     });
   });
 
@@ -278,7 +300,7 @@ describe('getChipColors - underlay color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      underlayColor: color('purple').fade(0.5).rgb().string(),
+      rippleColor: color('purple').fade(0.5).rgb().string(),
     });
   });
 
@@ -290,7 +312,7 @@ describe('getChipColors - underlay color', () => {
         isOutlined: true,
       })
     ).toMatchObject({
-      underlayColor: color('purple').lighten(0.2).rgb().string(),
+      rippleColor: color('purple').lighten(0.2).rgb().string(),
     });
   });
 
@@ -302,7 +324,7 @@ describe('getChipColors - underlay color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      underlayColor: color('purple').lighten(0.4).rgb().string(),
+      rippleColor: color('purple').lighten(0.4).rgb().string(),
     });
   });
 
@@ -314,7 +336,7 @@ describe('getChipColors - underlay color', () => {
         isOutlined: true,
       })
     ).toMatchObject({
-      underlayColor: color('purple').darken(0.08).rgb().string(),
+      rippleColor: color('purple').darken(0.08).rgb().string(),
     });
   });
 
@@ -326,7 +348,7 @@ describe('getChipColors - underlay color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      underlayColor: color('purple').darken(0.2).rgb().string(),
+      rippleColor: color('purple').darken(0.2).rgb().string(),
     });
   });
 
@@ -337,7 +359,7 @@ describe('getChipColors - underlay color', () => {
         isOutlined: true,
       })
     ).toMatchObject({
-      underlayColor: color(getTheme(false, false).colors.surface)
+      rippleColor: color(getTheme(false, false).colors.surface)
         .darken(0.08)
         .rgb()
         .string(),
@@ -351,7 +373,7 @@ describe('getChipColors - underlay color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      underlayColor: color('#ebebeb').darken(0.2).rgb().string(),
+      rippleColor: color('#ebebeb').darken(0.2).rgb().string(),
     });
   });
 
@@ -362,7 +384,7 @@ describe('getChipColors - underlay color', () => {
         isOutlined: true,
       })
     ).toMatchObject({
-      underlayColor: color(getTheme(true, false).colors.surface)
+      rippleColor: color(getTheme(true, false).colors.surface)
         .lighten(0.2)
         .rgb()
         .string(),
@@ -376,7 +398,7 @@ describe('getChipColors - underlay color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      underlayColor: color('#383838').lighten(0.4).rgb().string(),
+      rippleColor: color('#383838').lighten(0.4).rgb().string(),
     });
   });
 });
