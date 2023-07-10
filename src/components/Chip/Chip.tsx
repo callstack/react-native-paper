@@ -66,6 +66,11 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   showSelectedOverlay?: boolean;
   /**
+   * Whether to display default check icon on selected chip. 
+   * Note: Check will not be shown if `icon` is specified. If specified, `icon` will be shown regardless of `selected`.
+   */
+  showSelectedIcon?: boolean;
+  /**
    * Color of the ripple effect.
    */
   rippleColor?: ColorValue;
@@ -172,6 +177,7 @@ const Chip = ({
   selectedColor,
   rippleColor: customRippleColor,
   showSelectedOverlay = false,
+  showSelectedIcon = true,
   ellipsizeMode,
   compact,
   elevated = false,
@@ -312,7 +318,7 @@ const Chip = ({
                 : avatar}
             </View>
           ) : null}
-          {icon || selected ? (
+          {icon || (selected && showSelectedIcon) ? (
             <View
               style={[
                 styles.icon,
