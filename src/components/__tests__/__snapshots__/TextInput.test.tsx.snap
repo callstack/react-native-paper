@@ -793,8 +793,8 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "height": 100,
             },
             Object {
-              "paddingBottom": 24,
-              "paddingTop": 24,
+              "paddingBottom": 14,
+              "paddingTop": 14,
             },
             Object {
               "color": "rgba(28, 27, 31, 1)",

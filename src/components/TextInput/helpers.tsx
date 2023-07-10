@@ -1,3 +1,5 @@
+import { I18nManager } from 'react-native';
+
 import color from 'color';
 
 import type { InternalTheme } from '../../types';
@@ -75,19 +77,13 @@ export const calculatePadding = (props: PaddingProps): number => {
 
   if (multiline) {
     if (height && multiline) {
-      result = calculateTextAreaPadding(props);
+      result = 10;
     } else {
       result = calculateInputPadding(props);
     }
   }
 
   return Math.max(0, result);
-};
-
-const calculateTextAreaPadding = (props: PaddingProps) => {
-  const { dense } = props;
-
-  return dense ? 10 : 20;
 };
 
 const calculateInputPadding = ({
@@ -299,6 +295,39 @@ export const calculateFlatInputHorizontalPadding = ({
   });
 
   return { paddingLeft, paddingRight };
+};
+
+export const getTextAlignVertical = ({
+  textAlignVertical,
+  multiline,
+}: {
+  textAlignVertical?: 'center' | 'auto' | 'top' | 'bottom';
+  multiline?: boolean;
+}) => {
+  if (textAlignVertical) {
+    return textAlignVertical;
+  }
+
+  if (multiline) {
+    return 'top';
+  }
+
+  return 'center';
+};
+
+export const getTextAlign = ({
+  textAlign,
+}: {
+  textAlign?: 'center' | 'right' | 'left' | 'auto' | 'justify';
+}) => {
+  if (textAlign) {
+    return textAlign;
+  }
+
+  if (I18nManager.getConstants().isRTL) {
+    return 'right';
+  }
+  return 'left';
 };
 
 type BaseProps = {
