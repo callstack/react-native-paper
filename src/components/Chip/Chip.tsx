@@ -66,7 +66,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   showSelectedOverlay?: boolean;
   /**
-   * Whether to display default check icon on selected chip. 
+   * Whether to display default check icon on selected chip.
    * Note: Check will not be shown if `icon` is specified. If specified, `icon` will be shown regardless of `selected`.
    */
   showSelectedIcon?: boolean;
