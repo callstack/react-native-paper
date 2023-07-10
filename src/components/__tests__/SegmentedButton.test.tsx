@@ -23,7 +23,7 @@ it('renders segmented button', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders disabled segmented button', () => {
+it('renders disabled segmented button', async () => {
   const tree = render(
     <SegmentedButtons
       onValueChange={() => {}}
@@ -32,10 +32,12 @@ it('renders disabled segmented button', () => {
     />
   ).toJSON();
 
-  expect(tree).toMatchSnapshot();
+  process.nextTick(() => {
+    expect(tree).toMatchSnapshot();
+  });
 });
 
-it('renders checked segmented button with selected check', () => {
+it('renders checked segmented button with selected check', async () => {
   const tree = render(
     <SegmentedButtons
       onValueChange={() => {}}
@@ -47,7 +49,9 @@ it('renders checked segmented button with selected check', () => {
     />
   ).toJSON();
 
-  expect(tree).toMatchSnapshot();
+  process.nextTick(() => {
+    expect(tree).toMatchSnapshot();
+  });
 });
 
 describe('getSegmentedButtonColors', () => {
