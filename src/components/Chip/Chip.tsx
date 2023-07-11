@@ -254,7 +254,7 @@ const Chip = ({
   const multiplier = isV3 ? (compact ? 1.5 : 2) : 1;
   const labelSpacings = {
     marginRight: onClose ? 0 : 8 * multiplier,
-    marginLeft: avatar || icon || selected ? 4 * multiplier : 8 * multiplier,
+    marginLeft: avatar || icon || (selected && showSelectedIcon) ? 4 * multiplier : 8 * multiplier,
   };
   const contentSpacings = {
     paddingRight: isV3 ? (onClose ? 34 : 0) : onClose ? 32 : 4,
