@@ -5,7 +5,7 @@ import { StyleSheet, Text, Platform, I18nManager } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
 
-import { getTheme } from '../../core/theming';
+import { DefaultTheme, getTheme, ThemeProvider } from '../../core/theming';
 import { red500 } from '../../styles/themes/v2/colors';
 import {
   getFlatInputColors,
@@ -354,6 +354,33 @@ it('calls onLayout on right-side affix adornment', () => {
     });
   })
 );
+
+it("correctly applies theme background to label when input's background is transparent", () => {
+  const backgroundColor = 'transparent';
+  const theme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: 'pink',
+    },
+  };
+
+  const { getByTestId } = render(
+    <ThemeProvider theme={theme}>
+      <TextInput
+        mode="outlined"
+        label="Transparent input"
+        value={'Some test value'}
+        style={{ backgroundColor }}
+        testID={'transparent-example'}
+      />
+    </ThemeProvider>
+  );
+
+  expect(getByTestId('transparent-example-label-background')).toHaveStyle({
+    backgroundColor: 'pink',
+  });
+});
 
 describe('maxFontSizeMultiplier', () => {
   const createInput = (

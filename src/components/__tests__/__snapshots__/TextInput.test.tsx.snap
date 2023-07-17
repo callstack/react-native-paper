@@ -695,6 +695,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "writingDirection": "ltr",
             }
           }
+          testID="text-input-outlined-label-background"
         >
           Outline Input
         </Text>
