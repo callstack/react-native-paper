@@ -12,6 +12,7 @@ import {
 
 import color from 'color';
 
+import { forwardRef } from '../..//utils/forwardRef';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
@@ -125,6 +126,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * testID to be used on tests.
    */
   testID?: string;
+  ref?: React.Ref<ButtonRef>;
 };
 
 /**
@@ -144,33 +146,39 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
  * export default MyComponent;
  * ```
  */
-const Button = ({
-  disabled,
-  compact,
-  mode = 'text',
-  dark,
-  loading,
-  icon,
-  buttonColor: customButtonColor,
-  textColor: customTextColor,
-  rippleColor: customRippleColor,
-  children,
-  accessibilityLabel,
-  accessibilityHint,
-  onPress,
-  onPressIn,
-  onPressOut,
-  onLongPress,
-  delayLongPress,
-  style,
-  theme: themeOverrides,
-  uppercase: uppercaseProp,
-  contentStyle,
-  labelStyle,
-  testID = 'button',
-  accessible,
-  ...rest
-}: Props) => {
+
+type ButtonRef = React.ElementRef<typeof TouchableRipple>;
+
+const Button: React.ForwardRefRenderFunction<ButtonRef, Props> = (
+  {
+    disabled,
+    compact,
+    mode = 'text',
+    dark,
+    loading,
+    icon,
+    buttonColor: customButtonColor,
+    textColor: customTextColor,
+    rippleColor: customRippleColor,
+    children,
+    accessibilityLabel,
+    accessibilityHint,
+    onPress,
+    onPressIn,
+    onPressOut,
+    onLongPress,
+    delayLongPress,
+    style,
+    theme: themeOverrides,
+    uppercase: uppercaseProp,
+    contentStyle,
+    labelStyle,
+    testID = 'button',
+    accessible,
+    ...rest
+  },
+  ref
+) => {
   const theme = useInternalTheme(themeOverrides);
   const isMode = React.useCallback(
     (modeToCompare: ButtonMode) => {
@@ -297,6 +305,7 @@ const Button = ({
       {...(isV3 && { elevation: elevation })}
     >
       <TouchableRipple
+        ref={ref}
         borderless
         onPress={onPress}
         onLongPress={onLongPress}
@@ -448,4 +457,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Button;
+export default forwardRef(Button);

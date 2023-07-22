@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {
   PressableAndroidRippleConfig,
   StyleProp,
@@ -11,6 +11,7 @@ import {
   ColorValue,
 } from 'react-native';
 
+import { forwardRef } from '../..//utils/forwardRef';
 import { Settings, SettingsContext } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
@@ -36,17 +37,30 @@ export type Props = React.ComponentProps<typeof Pressable> & {
   theme?: ThemeProp;
 };
 
-const TouchableRipple = ({
-  style,
-  background,
-  borderless = false,
-  disabled: disabledProp,
-  rippleColor,
-  underlayColor,
-  children,
-  theme: themeOverrides,
-  ...rest
-}: Props) => {
+type TouchableRippleRef = React.ElementRef<typeof Pressable>;
+
+type componentLevelAttributesType = {
+  supported: boolean;
+};
+
+interface TouchableRippleComponent
+  extends React.ForwardRefRenderFunction<TouchableRippleRef, Props>,
+    componentLevelAttributesType {}
+
+const TouchableRipple: TouchableRippleComponent = (
+  {
+    style,
+    background,
+    borderless = false,
+    disabled: disabledProp,
+    rippleColor,
+    underlayColor,
+    children,
+    theme: themeOverrides,
+    ...rest
+  },
+  ref
+) => {
   const theme = useInternalTheme(themeOverrides);
   const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
@@ -99,6 +113,7 @@ const TouchableRipple = ({
   return (
     <Pressable
       {...rest}
+      ref={ref}
       disabled={disabled}
       style={[borderless && styles.overflowHidden, style]}
     >
@@ -133,4 +148,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TouchableRipple;
+let forwardedTouchableRipple = forwardRef(TouchableRipple);
+
+export default forwardedTouchableRipple as typeof forwardedTouchableRipple &
+  componentLevelAttributesType;
