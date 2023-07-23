@@ -69,9 +69,6 @@ exports[`renders chip with close button 1`] = `
             Object {
               "borderRadius": 8,
             },
-            Object {
-              "flexGrow": 1,
-            },
           ],
         ]
       }
@@ -83,7 +80,6 @@ exports[`renders chip with close button 1`] = `
             Object {
               "alignItems": "center",
               "flexDirection": "row",
-              "flexGrow": 1,
               "paddingLeft": 4,
               "position": "relative",
             },
@@ -345,9 +341,6 @@ exports[`renders chip with custom close button 1`] = `
             Object {
               "borderRadius": 8,
             },
-            Object {
-              "flexGrow": 1,
-            },
           ],
         ]
       }
@@ -359,7 +352,6 @@ exports[`renders chip with custom close button 1`] = `
             Object {
               "alignItems": "center",
               "flexDirection": "row",
-              "flexGrow": 1,
               "paddingLeft": 4,
               "position": "relative",
             },
@@ -621,9 +613,6 @@ exports[`renders chip with icon 1`] = `
             Object {
               "borderRadius": 8,
             },
-            Object {
-              "flexGrow": 1,
-            },
           ],
         ]
       }
@@ -635,7 +624,6 @@ exports[`renders chip with icon 1`] = `
             Object {
               "alignItems": "center",
               "flexDirection": "row",
-              "flexGrow": 1,
               "paddingLeft": 4,
               "position": "relative",
             },
@@ -820,9 +808,6 @@ exports[`renders chip with onPress 1`] = `
             Object {
               "borderRadius": 8,
             },
-            Object {
-              "flexGrow": 1,
-            },
           ],
         ]
       }
@@ -834,7 +819,6 @@ exports[`renders chip with onPress 1`] = `
             Object {
               "alignItems": "center",
               "flexDirection": "row",
-              "flexGrow": 1,
               "paddingLeft": 4,
               "position": "relative",
             },
@@ -967,9 +951,6 @@ exports[`renders outlined disabled chip 1`] = `
             Object {
               "borderRadius": 8,
             },
-            Object {
-              "flexGrow": 1,
-            },
           ],
         ]
       }
@@ -981,7 +962,6 @@ exports[`renders outlined disabled chip 1`] = `
             Object {
               "alignItems": "center",
               "flexDirection": "row",
-              "flexGrow": 1,
               "paddingLeft": 4,
               "position": "relative",
             },
@@ -1114,9 +1094,6 @@ exports[`renders selected chip 1`] = `
             Object {
               "borderRadius": 8,
             },
-            Object {
-              "flexGrow": 1,
-            },
           ],
         ]
       }
@@ -1128,7 +1105,6 @@ exports[`renders selected chip 1`] = `
             Object {
               "alignItems": "center",
               "flexDirection": "row",
-              "flexGrow": 1,
               "paddingLeft": 4,
               "position": "relative",
             },

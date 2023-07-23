@@ -280,7 +280,7 @@ const Chip = ({
     >
       <TouchableRipple
         borderless
-        style={[{ borderRadius }, styles.touchable]}
+        style={[{ borderRadius }]}
         onPress={onPress}
         onLongPress={onLongPress}
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
@@ -414,7 +414,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 4,
     position: 'relative',
-    flexGrow: 1,
   },
   md3Content: {
     paddingLeft: 0,
@@ -472,9 +471,6 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  touchable: {
-    flexGrow: 1,
   },
 });
 
