@@ -17,6 +17,7 @@ exports[`renders colored progress bar 1`] = `
   }
   accessible={true}
   onLayout={[Function]}
+  style={false}
 >
   <View
     collapsable={false}
@@ -68,6 +69,7 @@ exports[`renders hidden progress bar 1`] = `
   }
   accessible={true}
   onLayout={[Function]}
+  style={false}
 >
   <View
     collapsable={false}
@@ -113,6 +115,7 @@ exports[`renders indeterminate progress bar 1`] = `
   accessibilityValue={Object {}}
   accessible={true}
   onLayout={[Function]}
+  style={false}
 >
   <View
     collapsable={false}
@@ -164,6 +167,7 @@ exports[`renders progress bar with specific progress 1`] = `
   }
   accessible={true}
   onLayout={[Function]}
+  style={false}
 >
   <View
     collapsable={false}

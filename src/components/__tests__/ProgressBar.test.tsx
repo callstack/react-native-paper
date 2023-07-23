@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated } from 'react-native';
+import { Animated, Platform } from 'react-native';
 
 import { render, waitFor } from '@testing-library/react-native';
 
@@ -58,4 +58,14 @@ it('renders indeterminate progress bar', async () => {
   await waitFor(() => tree.getByRole(a11yRole).props.onLayout(layoutEvent));
 
   expect(tree.toJSON()).toMatchSnapshot();
+});
+
+it('renders progress bar with full height on web', () => {
+  Platform.OS = 'web';
+  const tree = render(<ProgressBar progress={0.2} />);
+
+  expect(tree.getByRole(a11yRole)).toHaveStyle({
+    width: '100%',
+    height: '100%',
+  });
 });
