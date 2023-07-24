@@ -1,7 +1,7 @@
-const path = require('path');
-const { spawnSync } = require('child_process');
 const { create } = require('babel-test');
+const { spawnSync } = require('child_process');
 const { toMatchFile } = require('jest-file-snapshot');
+const path = require('path');
 
 expect.extend({ toMatchFile });
 

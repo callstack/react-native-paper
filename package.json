@@ -6,7 +6,7 @@
   "module": "lib/module/index.js",
   "react-native": "src/index.tsx",
   "source": "src/index.tsx",
-  "types": "lib/typescript/src/index.d.ts",
+  "types": "lib/typescript/index.d.ts",
   "files": [
     "src",
     "lib",
@@ -38,7 +38,7 @@
     "lint": "yarn lint-no-fix --fix",
     "lint-no-fix": "eslint --ext '.js,.ts,.tsx' .",
     "test": "jest",
-    "prepare": "bob build && node ./scripts/generate-mappings.js",
+    "prepack": "bob build && node ./scripts/generate-mappings.js",
     "release": "release-it",
     "bootstrap": "yarn --cwd example && yarn --cwd docs && yarn",
     "docs": "yarn --cwd docs",
@@ -51,7 +51,6 @@
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.8",
     "color": "^3.1.2",
-    "patch-package": "^7.0.0",
     "use-latest-callback": "^0.1.5"
   },
   "devDependencies": {
@@ -87,16 +86,16 @@
     "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-local-rules": "^1.3.2",
     "expo-constants": "^9.3.5",
-    "flow-bin": "0.92.0",
     "glob": "^7.1.3",
     "husky": "^1.3.1",
     "jest": "^26.1.0",
     "jest-file-snapshot": "^0.3.2",
     "metro-react-native-babel-preset": "0.72.3",
+    "patch-package": "^7.0.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-native": "0.70.6",
-    "react-native-builder-bob": "^0.20.4",
+    "react-native-builder-bob": "^0.21.3",
     "react-native-safe-area-context": "^4.5.0",
     "react-native-vector-icons": "9.2.0",
     "react-test-renderer": "18.1.0",
@@ -142,7 +141,6 @@
   "greenkeeper": {
     "ignore": [
       "expo",
-      "flow-bin",
       "react",
       "react-dom",
       "react-native",
@@ -165,9 +163,6 @@
           "project": "tsconfig.build.json"
         }
       ]
-    ],
-    "files": [
-      "src/"
     ]
   }
 }
