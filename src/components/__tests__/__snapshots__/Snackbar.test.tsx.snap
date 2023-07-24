@@ -6,13 +6,13 @@ exports[`renders snackbar with Text as a child 1`] = `
 <View
   pointerEvents="box-none"
   style={
-    Array [
-      Object {
+    [
+      {
         "bottom": 0,
         "position": "absolute",
         "width": "100%",
       },
-      Object {
+      {
         "paddingBottom": 34,
         "paddingHorizontal": 0,
       },
@@ -23,20 +23,20 @@ exports[`renders snackbar with Text as a child 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(49, 48, 51, 1)",
         "borderRadius": 4,
         "margin": 8,
         "opacity": 1,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 2,
           "width": 0,
         },
         "shadowOpacity": 0.15,
         "shadowRadius": 6,
-        "transform": Array [
-          Object {
+        "transform": [
+          {
             "scale": 1,
           },
         ],
@@ -49,7 +49,7 @@ exports[`renders snackbar with Text as a child 1`] = `
       collapsable={false}
       pointerEvents="box-none"
       style={
-        Object {
+        {
           "backgroundColor": "rgba(49, 48, 51, 1)",
           "borderRadius": 4,
           "flex": undefined,
@@ -57,7 +57,7 @@ exports[`renders snackbar with Text as a child 1`] = `
           "justifyContent": "space-between",
           "minHeight": 48,
           "shadowColor": "#000",
-          "shadowOffset": Object {
+          "shadowOffset": {
             "height": 1,
             "width": 0,
           },
@@ -69,7 +69,7 @@ exports[`renders snackbar with Text as a child 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
             "marginHorizontal": 16,
             "marginVertical": 14,
@@ -91,13 +91,13 @@ exports[`renders snackbar with View & Text as a child 1`] = `
 <View
   pointerEvents="box-none"
   style={
-    Array [
-      Object {
+    [
+      {
         "bottom": 0,
         "position": "absolute",
         "width": "100%",
       },
-      Object {
+      {
         "paddingBottom": 34,
         "paddingHorizontal": 0,
       },
@@ -108,20 +108,20 @@ exports[`renders snackbar with View & Text as a child 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(49, 48, 51, 1)",
         "borderRadius": 4,
         "margin": 8,
         "opacity": 1,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 2,
           "width": 0,
         },
         "shadowOpacity": 0.15,
         "shadowRadius": 6,
-        "transform": Array [
-          Object {
+        "transform": [
+          {
             "scale": 1,
           },
         ],
@@ -134,7 +134,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
       collapsable={false}
       pointerEvents="box-none"
       style={
-        Object {
+        {
           "backgroundColor": "rgba(49, 48, 51, 1)",
           "borderRadius": 4,
           "flex": undefined,
@@ -142,7 +142,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
           "justifyContent": "space-between",
           "minHeight": 48,
           "shadowColor": "#000",
-          "shadowOffset": Object {
+          "shadowOffset": {
             "height": 1,
             "width": 0,
           },
@@ -154,7 +154,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "flex": 1,
             "marginHorizontal": 16,
             "marginVertical": 14,
@@ -164,7 +164,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
         <View>
           <View
             style={
-              Object {
+              {
                 "alignItems": "center",
                 "flexDirection": "row",
               }
@@ -172,7 +172,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
           >
             <View
               style={
-                Object {
+                {
                   "backgroundColor": "#ef9a9a",
                   "padding": 15,
                 }
@@ -180,7 +180,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
             />
             <Text
               style={
-                Object {
+                {
                   "color": "#ffffff",
                   "flexShrink": 1,
                   "flexWrap": "wrap",
@@ -202,13 +202,13 @@ exports[`renders snackbar with action button 1`] = `
 <View
   pointerEvents="box-none"
   style={
-    Array [
-      Object {
+    [
+      {
         "bottom": 0,
         "position": "absolute",
         "width": "100%",
       },
-      Object {
+      {
         "paddingBottom": 34,
         "paddingHorizontal": 0,
       },
@@ -219,20 +219,20 @@ exports[`renders snackbar with action button 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(49, 48, 51, 1)",
         "borderRadius": 4,
         "margin": 8,
         "opacity": 1,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 2,
           "width": 0,
         },
         "shadowOpacity": 0.15,
         "shadowRadius": 6,
-        "transform": Array [
-          Object {
+        "transform": [
+          {
             "scale": 1,
           },
         ],
@@ -245,7 +245,7 @@ exports[`renders snackbar with action button 1`] = `
       collapsable={false}
       pointerEvents="box-none"
       style={
-        Object {
+        {
           "backgroundColor": "rgba(49, 48, 51, 1)",
           "borderRadius": 4,
           "flex": undefined,
@@ -253,7 +253,7 @@ exports[`renders snackbar with action button 1`] = `
           "justifyContent": "space-between",
           "minHeight": 48,
           "shadowColor": "#000",
-          "shadowOffset": Object {
+          "shadowOffset": {
             "height": 1,
             "width": 0,
           },
@@ -265,29 +265,29 @@ exports[`renders snackbar with action button 1`] = `
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "textAlign": "left",
             },
-            Object {
+            {
               "color": "rgba(28, 27, 31, 1)",
               "writingDirection": "ltr",
             },
-            Array [
-              Object {
+            [
+              {
                 "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "400",
                 "letterSpacing": 0.25,
                 "lineHeight": 20,
               },
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "marginHorizontal": 16,
                   "marginVertical": 14,
                 },
-                Object {
+                {
                   "color": "rgba(244, 239, 244, 1)",
                 },
               ],
@@ -299,14 +299,14 @@ exports[`renders snackbar with action button 1`] = `
       </Text>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "flex-end",
               "minHeight": 48,
             },
-            Object {
+            {
               "marginLeft": -12,
             },
           ]
@@ -315,13 +315,13 @@ exports[`renders snackbar with action button 1`] = `
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "backgroundColor": "transparent",
               "borderRadius": 20,
               "marginLeft": 4,
               "marginRight": 8,
               "shadowColor": "#000",
-              "shadowOffset": Object {
+              "shadowOffset": {
                 "height": 0,
                 "width": 0,
               },
@@ -334,7 +334,7 @@ exports[`renders snackbar with action button 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "backgroundColor": "transparent",
                 "borderColor": "transparent",
                 "borderRadius": 20,
@@ -343,7 +343,7 @@ exports[`renders snackbar with action button 1`] = `
                 "flex": undefined,
                 "minWidth": 64,
                 "shadowColor": "#000",
-                "shadowOffset": Object {
+                "shadowOffset": {
                   "height": 0,
                   "width": 0,
                 },
@@ -356,8 +356,20 @@ exports[`renders snackbar with action button 1`] = `
             <View
               accessibilityRole="button"
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -373,11 +385,11 @@ exports[`renders snackbar with action button 1`] = `
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "overflow": "hidden",
                   },
-                  Object {
+                  {
                     "borderRadius": 20,
                   },
                 ]
@@ -386,8 +398,8 @@ exports[`renders snackbar with action button 1`] = `
             >
               <View
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "alignItems": "center",
                       "flexDirection": "row",
                       "justifyContent": "center",
@@ -400,35 +412,35 @@ exports[`renders snackbar with action button 1`] = `
                   numberOfLines={1}
                   selectable={false}
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "textAlign": "left",
                       },
-                      Object {
+                      {
                         "color": "rgba(28, 27, 31, 1)",
                         "writingDirection": "ltr",
                       },
-                      Array [
-                        Object {
+                      [
+                        {
                           "fontFamily": "System",
                           "fontSize": 14,
                           "fontWeight": "500",
                           "letterSpacing": 0.1,
                           "lineHeight": 20,
                         },
-                        Array [
-                          Object {
+                        [
+                          {
                             "marginHorizontal": 16,
                             "marginVertical": 9,
                             "textAlign": "center",
                           },
                           false,
-                          Object {
+                          {
                             "marginHorizontal": 12,
                           },
                           false,
                           false,
-                          Object {
+                          {
                             "color": "rgba(208, 188, 255, 1)",
                             "fontFamily": "System",
                             "fontSize": 14,
@@ -459,13 +471,13 @@ exports[`renders snackbar with content 1`] = `
 <View
   pointerEvents="box-none"
   style={
-    Array [
-      Object {
+    [
+      {
         "bottom": 0,
         "position": "absolute",
         "width": "100%",
       },
-      Object {
+      {
         "paddingBottom": 34,
         "paddingHorizontal": 0,
       },
@@ -476,20 +488,20 @@ exports[`renders snackbar with content 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(49, 48, 51, 1)",
         "borderRadius": 4,
         "margin": 8,
         "opacity": 1,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 2,
           "width": 0,
         },
         "shadowOpacity": 0.15,
         "shadowRadius": 6,
-        "transform": Array [
-          Object {
+        "transform": [
+          {
             "scale": 1,
           },
         ],
@@ -502,7 +514,7 @@ exports[`renders snackbar with content 1`] = `
       collapsable={false}
       pointerEvents="box-none"
       style={
-        Object {
+        {
           "backgroundColor": "rgba(49, 48, 51, 1)",
           "borderRadius": 4,
           "flex": undefined,
@@ -510,7 +522,7 @@ exports[`renders snackbar with content 1`] = `
           "justifyContent": "space-between",
           "minHeight": 48,
           "shadowColor": "#000",
-          "shadowOffset": Object {
+          "shadowOffset": {
             "height": 1,
             "width": 0,
           },
@@ -522,29 +534,29 @@ exports[`renders snackbar with content 1`] = `
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "textAlign": "left",
             },
-            Object {
+            {
               "color": "rgba(28, 27, 31, 1)",
               "writingDirection": "ltr",
             },
-            Array [
-              Object {
+            [
+              {
                 "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "400",
                 "letterSpacing": 0.25,
                 "lineHeight": 20,
               },
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "marginHorizontal": 16,
                   "marginVertical": 14,
                 },
-                Object {
+                {
                   "color": "rgba(244, 239, 244, 1)",
                 },
               ],

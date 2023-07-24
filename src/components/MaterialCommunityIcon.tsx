@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, Platform, ViewProps } from 'react-native';
+import { StyleSheet, Text, Platform, ViewProps, Role } from 'react-native';
 
 import { black } from '../styles/themes/v2/colors';
 
@@ -64,7 +64,7 @@ try {
 export const accessibilityProps =
   Platform.OS === 'web'
     ? {
-        role: 'img',
+        role: 'img' as Role,
         focusable: false,
       }
     : {

@@ -4,19 +4,19 @@ exports[`renders FAB with custom size prop 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 25,
       "opacity": 1,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 4,
         "width": 0,
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "transform": Array [
-        Object {
+      "transform": [
+        {
           "scale": 1,
         },
       ],
@@ -28,12 +28,12 @@ exports[`renders FAB with custom size prop 1`] = `
     collapsable={false}
     pointerEvents="auto"
     style={
-      Object {
+      {
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 25,
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -46,8 +46,20 @@ exports[`renders FAB with custom size prop 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -63,11 +75,11 @@ exports[`renders FAB with custom size prop 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderRadius": 25,
           },
         ]
@@ -77,13 +89,13 @@ exports[`renders FAB with custom size prop 1`] = `
       <View
         pointerEvents="none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 25,
               "height": 100,
               "width": 100,
@@ -94,12 +106,12 @@ exports[`renders FAB with custom size prop 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
               },
-              Object {
+              {
                 "height": 50,
                 "width": 50,
               },
@@ -109,15 +121,15 @@ exports[`renders FAB with custom size prop 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "bottom": 0,
                 "left": 0,
                 "opacity": 1,
                 "position": "absolute",
                 "right": 0,
                 "top": 0,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "rotate": "0deg",
                   },
                 ],
@@ -132,30 +144,30 @@ exports[`renders FAB with custom size prop 1`] = `
               pointerEvents="none"
               selectable={false}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "rgba(33, 0, 93, 1)",
                     "fontSize": 50,
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "lineHeight": 50,
-                      "transform": Array [
-                        Object {
+                      "transform": [
+                        {
                           "scaleX": 1,
                         },
                       ],
                     },
-                    Object {
+                    {
                       "backgroundColor": "transparent",
                     },
                   ],
-                  Object {
+                  {
                     "fontFamily": "Material Design Icons",
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  Object {},
+                  {},
                 ]
               }
             >
@@ -173,19 +185,19 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 1,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 4,
         "width": 0,
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "transform": Array [
-        Object {
+      "transform": [
+        {
           "scale": 1,
         },
       ],
@@ -197,12 +209,12 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
     collapsable={false}
     pointerEvents="auto"
     style={
-      Object {
+      {
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -215,8 +227,20 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -232,11 +256,11 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderRadius": 16,
           },
         ]
@@ -246,13 +270,13 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
       <View
         pointerEvents="none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 16,
               "height": 56,
               "width": 56,
@@ -263,12 +287,12 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
               },
-              Object {
+              {
                 "height": 24,
                 "width": 24,
               },
@@ -278,15 +302,15 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "bottom": 0,
                 "left": 0,
                 "opacity": 1,
                 "position": "absolute",
                 "right": 0,
                 "top": 0,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "rotate": "0deg",
                   },
                 ],
@@ -301,30 +325,30 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
               pointerEvents="none"
               selectable={false}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "#AA0114",
                     "fontSize": 24,
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "lineHeight": 24,
-                      "transform": Array [
-                        Object {
+                      "transform": [
+                        {
                           "scaleX": 1,
                         },
                       ],
                     },
-                    Object {
+                    {
                       "backgroundColor": "transparent",
                     },
                   ],
-                  Object {
+                  {
                     "fontFamily": "Material Design Icons",
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  Object {},
+                  {},
                 ]
               }
             >
@@ -342,19 +366,19 @@ exports[`renders default FAB 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 1,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 4,
         "width": 0,
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "transform": Array [
-        Object {
+      "transform": [
+        {
           "scale": 1,
         },
       ],
@@ -366,12 +390,12 @@ exports[`renders default FAB 1`] = `
     collapsable={false}
     pointerEvents="auto"
     style={
-      Object {
+      {
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -384,8 +408,20 @@ exports[`renders default FAB 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -401,11 +437,11 @@ exports[`renders default FAB 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderRadius": 16,
           },
         ]
@@ -415,13 +451,13 @@ exports[`renders default FAB 1`] = `
       <View
         pointerEvents="none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 16,
               "height": 56,
               "width": 56,
@@ -432,12 +468,12 @@ exports[`renders default FAB 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
               },
-              Object {
+              {
                 "height": 24,
                 "width": 24,
               },
@@ -447,15 +483,15 @@ exports[`renders default FAB 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "bottom": 0,
                 "left": 0,
                 "opacity": 1,
                 "position": "absolute",
                 "right": 0,
                 "top": 0,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "rotate": "0deg",
                   },
                 ],
@@ -470,30 +506,30 @@ exports[`renders default FAB 1`] = `
               pointerEvents="none"
               selectable={false}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "rgba(33, 0, 93, 1)",
                     "fontSize": 24,
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "lineHeight": 24,
-                      "transform": Array [
-                        Object {
+                      "transform": [
+                        {
                           "scaleX": 1,
                         },
                       ],
                     },
-                    Object {
+                    {
                       "backgroundColor": "transparent",
                     },
                   ],
-                  Object {
+                  {
                     "fontFamily": "Material Design Icons",
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  Object {},
+                  {},
                 ]
               }
             >
@@ -511,19 +547,19 @@ exports[`renders disabled FAB 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgba(28, 27, 31, 0.12)",
       "borderRadius": 16,
       "opacity": 1,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "transform": Array [
-        Object {
+      "transform": [
+        {
           "scale": 1,
         },
       ],
@@ -535,12 +571,12 @@ exports[`renders disabled FAB 1`] = `
     collapsable={false}
     pointerEvents="auto"
     style={
-      Object {
+      {
         "backgroundColor": "rgba(28, 27, 31, 0.12)",
         "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -553,8 +589,20 @@ exports[`renders disabled FAB 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -570,11 +618,11 @@ exports[`renders disabled FAB 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderRadius": 16,
           },
         ]
@@ -584,13 +632,13 @@ exports[`renders disabled FAB 1`] = `
       <View
         pointerEvents="none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 16,
               "height": 56,
               "width": 56,
@@ -601,12 +649,12 @@ exports[`renders disabled FAB 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
               },
-              Object {
+              {
                 "height": 24,
                 "width": 24,
               },
@@ -616,15 +664,15 @@ exports[`renders disabled FAB 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "bottom": 0,
                 "left": 0,
                 "opacity": 1,
                 "position": "absolute",
                 "right": 0,
                 "top": 0,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "rotate": "0deg",
                   },
                 ],
@@ -639,30 +687,30 @@ exports[`renders disabled FAB 1`] = `
               pointerEvents="none"
               selectable={false}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "rgba(28, 27, 31, 0.38)",
                     "fontSize": 24,
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "lineHeight": 24,
-                      "transform": Array [
-                        Object {
+                      "transform": [
+                        {
                           "scaleX": 1,
                         },
                       ],
                     },
-                    Object {
+                    {
                       "backgroundColor": "transparent",
                     },
                   ],
-                  Object {
+                  {
                     "fontFamily": "Material Design Icons",
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  Object {},
+                  {},
                 ]
               }
             >
@@ -680,19 +728,19 @@ exports[`renders extended FAB 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 1,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 4,
         "width": 0,
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "transform": Array [
-        Object {
+      "transform": [
+        {
           "scale": 1,
         },
       ],
@@ -704,12 +752,12 @@ exports[`renders extended FAB 1`] = `
     collapsable={false}
     pointerEvents="auto"
     style={
-      Object {
+      {
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -723,8 +771,20 @@ exports[`renders extended FAB 1`] = `
       accessibilityLabel="Add items"
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -740,11 +800,11 @@ exports[`renders extended FAB 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderRadius": 16,
           },
         ]
@@ -754,13 +814,13 @@ exports[`renders extended FAB 1`] = `
       <View
         pointerEvents="none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 16,
               "height": 56,
               "paddingHorizontal": 16,
@@ -771,12 +831,12 @@ exports[`renders extended FAB 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
               },
-              Object {
+              {
                 "height": 24,
                 "width": 24,
               },
@@ -786,15 +846,15 @@ exports[`renders extended FAB 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "bottom": 0,
                 "left": 0,
                 "opacity": 1,
                 "position": "absolute",
                 "right": 0,
                 "top": 0,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "rotate": "0deg",
                   },
                 ],
@@ -809,30 +869,30 @@ exports[`renders extended FAB 1`] = `
               pointerEvents="none"
               selectable={false}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "rgba(33, 0, 93, 1)",
                     "fontSize": 24,
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "lineHeight": 24,
-                      "transform": Array [
-                        Object {
+                      "transform": [
+                        {
                           "scaleX": 1,
                         },
                       ],
                     },
-                    Object {
+                    {
                       "backgroundColor": "transparent",
                     },
                   ],
-                  Object {
+                  {
                     "fontFamily": "Material Design Icons",
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  Object {},
+                  {},
                 ]
               }
             >
@@ -843,28 +903,28 @@ exports[`renders extended FAB 1`] = `
         <Text
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "textAlign": "left",
               },
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
-              Array [
-                Object {
+              [
+                {
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "marginHorizontal": 8,
                   },
                   false,
-                  Object {
+                  {
                     "color": "rgba(33, 0, 93, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,
@@ -890,19 +950,19 @@ exports[`renders extended FAB with custom size prop 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 25,
       "opacity": 1,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 4,
         "width": 0,
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "transform": Array [
-        Object {
+      "transform": [
+        {
           "scale": 1,
         },
       ],
@@ -914,12 +974,12 @@ exports[`renders extended FAB with custom size prop 1`] = `
     collapsable={false}
     pointerEvents="auto"
     style={
-      Object {
+      {
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 25,
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -933,8 +993,20 @@ exports[`renders extended FAB with custom size prop 1`] = `
       accessibilityLabel="Add items"
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -950,11 +1022,11 @@ exports[`renders extended FAB with custom size prop 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderRadius": 25,
           },
         ]
@@ -964,13 +1036,13 @@ exports[`renders extended FAB with custom size prop 1`] = `
       <View
         pointerEvents="none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
             },
-            Object {
+            {
               "height": 100,
               "paddingHorizontal": 16,
             },
@@ -980,12 +1052,12 @@ exports[`renders extended FAB with custom size prop 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
               },
-              Object {
+              {
                 "height": 50,
                 "width": 50,
               },
@@ -995,15 +1067,15 @@ exports[`renders extended FAB with custom size prop 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "bottom": 0,
                 "left": 0,
                 "opacity": 1,
                 "position": "absolute",
                 "right": 0,
                 "top": 0,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "rotate": "0deg",
                   },
                 ],
@@ -1018,30 +1090,30 @@ exports[`renders extended FAB with custom size prop 1`] = `
               pointerEvents="none"
               selectable={false}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "rgba(33, 0, 93, 1)",
                     "fontSize": 50,
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "lineHeight": 50,
-                      "transform": Array [
-                        Object {
+                      "transform": [
+                        {
                           "scaleX": 1,
                         },
                       ],
                     },
-                    Object {
+                    {
                       "backgroundColor": "transparent",
                     },
                   ],
-                  Object {
+                  {
                     "fontFamily": "Material Design Icons",
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  Object {},
+                  {},
                 ]
               }
             >
@@ -1052,28 +1124,28 @@ exports[`renders extended FAB with custom size prop 1`] = `
         <Text
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "textAlign": "left",
               },
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
-              Array [
-                Object {
+              [
+                {
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "marginHorizontal": 8,
                   },
                   false,
-                  Object {
+                  {
                     "color": "rgba(33, 0, 93, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,
@@ -1099,19 +1171,19 @@ exports[`renders large FAB 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 28,
       "opacity": 1,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 4,
         "width": 0,
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "transform": Array [
-        Object {
+      "transform": [
+        {
           "scale": 1,
         },
       ],
@@ -1123,12 +1195,12 @@ exports[`renders large FAB 1`] = `
     collapsable={false}
     pointerEvents="auto"
     style={
-      Object {
+      {
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 28,
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -1141,8 +1213,20 @@ exports[`renders large FAB 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -1158,11 +1242,11 @@ exports[`renders large FAB 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderRadius": 28,
           },
         ]
@@ -1172,13 +1256,13 @@ exports[`renders large FAB 1`] = `
       <View
         pointerEvents="none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 28,
               "height": 96,
               "width": 96,
@@ -1189,12 +1273,12 @@ exports[`renders large FAB 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
               },
-              Object {
+              {
                 "height": 36,
                 "width": 36,
               },
@@ -1204,15 +1288,15 @@ exports[`renders large FAB 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "bottom": 0,
                 "left": 0,
                 "opacity": 1,
                 "position": "absolute",
                 "right": 0,
                 "top": 0,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "rotate": "0deg",
                   },
                 ],
@@ -1227,30 +1311,30 @@ exports[`renders large FAB 1`] = `
               pointerEvents="none"
               selectable={false}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "rgba(33, 0, 93, 1)",
                     "fontSize": 36,
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "lineHeight": 36,
-                      "transform": Array [
-                        Object {
+                      "transform": [
+                        {
                           "scaleX": 1,
                         },
                       ],
                     },
-                    Object {
+                    {
                       "backgroundColor": "transparent",
                     },
                   ],
-                  Object {
+                  {
                     "fontFamily": "Material Design Icons",
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  Object {},
+                  {},
                 ]
               }
             >
@@ -1268,19 +1352,19 @@ exports[`renders loading FAB 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 1,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 4,
         "width": 0,
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "transform": Array [
-        Object {
+      "transform": [
+        {
           "scale": 1,
         },
       ],
@@ -1292,12 +1376,12 @@ exports[`renders loading FAB 1`] = `
     collapsable={false}
     pointerEvents="auto"
     style={
-      Object {
+      {
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -1310,8 +1394,20 @@ exports[`renders loading FAB 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -1327,11 +1423,11 @@ exports[`renders loading FAB 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderRadius": 16,
           },
         ]
@@ -1341,13 +1437,13 @@ exports[`renders loading FAB 1`] = `
       <View
         pointerEvents="none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 16,
               "height": 56,
               "width": 56,
@@ -1359,14 +1455,14 @@ exports[`renders loading FAB 1`] = `
         <View
           accessibilityRole="progressbar"
           accessibilityState={
-            Object {
+            {
               "busy": true,
             }
           }
           accessible={true}
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
               },
@@ -1377,7 +1473,7 @@ exports[`renders loading FAB 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "height": 18,
                 "opacity": 1,
                 "width": 18,
@@ -1387,7 +1483,7 @@ exports[`renders loading FAB 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "bottom": 0,
                   "justifyContent": "center",
@@ -1401,10 +1497,10 @@ exports[`renders loading FAB 1`] = `
               <View
                 collapsable={false}
                 style={
-                  Object {
+                  {
                     "height": 18,
-                    "transform": Array [
-                      Object {
+                    "transform": [
+                      {
                         "rotate": "45deg",
                       },
                     ],
@@ -1415,7 +1511,7 @@ exports[`renders loading FAB 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    Object {
+                    {
                       "height": 9,
                       "overflow": "hidden",
                       "width": 18,
@@ -1425,13 +1521,13 @@ exports[`renders loading FAB 1`] = `
                   <View
                     collapsable={false}
                     style={
-                      Object {
+                      {
                         "height": 18,
-                        "transform": Array [
-                          Object {
+                        "transform": [
+                          {
                             "translateY": 0,
                           },
-                          Object {
+                          {
                             "rotate": "-165deg",
                           },
                         ],
@@ -1442,7 +1538,7 @@ exports[`renders loading FAB 1`] = `
                     <View
                       collapsable={false}
                       style={
-                        Object {
+                        {
                           "height": 9,
                           "overflow": "hidden",
                           "width": 18,
@@ -1452,7 +1548,7 @@ exports[`renders loading FAB 1`] = `
                       <View
                         collapsable={false}
                         style={
-                          Object {
+                          {
                             "borderColor": "rgba(33, 0, 93, 1)",
                             "borderRadius": 9,
                             "borderWidth": 1.8,
@@ -1469,7 +1565,7 @@ exports[`renders loading FAB 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "bottom": 0,
                   "justifyContent": "center",
@@ -1483,10 +1579,10 @@ exports[`renders loading FAB 1`] = `
               <View
                 collapsable={false}
                 style={
-                  Object {
+                  {
                     "height": 18,
-                    "transform": Array [
-                      Object {
+                    "transform": [
+                      {
                         "rotate": "45deg",
                       },
                     ],
@@ -1497,7 +1593,7 @@ exports[`renders loading FAB 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    Object {
+                    {
                       "height": 9,
                       "overflow": "hidden",
                       "top": 9,
@@ -1508,13 +1604,13 @@ exports[`renders loading FAB 1`] = `
                   <View
                     collapsable={false}
                     style={
-                      Object {
+                      {
                         "height": 18,
-                        "transform": Array [
-                          Object {
+                        "transform": [
+                          {
                             "translateY": -9,
                           },
-                          Object {
+                          {
                             "rotate": "345deg",
                           },
                         ],
@@ -1525,7 +1621,7 @@ exports[`renders loading FAB 1`] = `
                     <View
                       collapsable={false}
                       style={
-                        Object {
+                        {
                           "height": 9,
                           "overflow": "hidden",
                           "width": 18,
@@ -1535,7 +1631,7 @@ exports[`renders loading FAB 1`] = `
                       <View
                         collapsable={false}
                         style={
-                          Object {
+                          {
                             "borderColor": "rgba(33, 0, 93, 1)",
                             "borderRadius": 9,
                             "borderWidth": 1.8,
@@ -1561,19 +1657,19 @@ exports[`renders loading FAB with custom size prop 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 25,
       "opacity": 1,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 4,
         "width": 0,
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "transform": Array [
-        Object {
+      "transform": [
+        {
           "scale": 1,
         },
       ],
@@ -1585,12 +1681,12 @@ exports[`renders loading FAB with custom size prop 1`] = `
     collapsable={false}
     pointerEvents="auto"
     style={
-      Object {
+      {
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 25,
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -1603,8 +1699,20 @@ exports[`renders loading FAB with custom size prop 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -1620,11 +1728,11 @@ exports[`renders loading FAB with custom size prop 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderRadius": 25,
           },
         ]
@@ -1634,13 +1742,13 @@ exports[`renders loading FAB with custom size prop 1`] = `
       <View
         pointerEvents="none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 25,
               "height": 100,
               "width": 100,
@@ -1652,14 +1760,14 @@ exports[`renders loading FAB with custom size prop 1`] = `
         <View
           accessibilityRole="progressbar"
           accessibilityState={
-            Object {
+            {
               "busy": true,
             }
           }
           accessible={true}
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
               },
@@ -1670,7 +1778,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "height": 50,
                 "opacity": 1,
                 "width": 50,
@@ -1680,7 +1788,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "bottom": 0,
                   "justifyContent": "center",
@@ -1694,10 +1802,10 @@ exports[`renders loading FAB with custom size prop 1`] = `
               <View
                 collapsable={false}
                 style={
-                  Object {
+                  {
                     "height": 50,
-                    "transform": Array [
-                      Object {
+                    "transform": [
+                      {
                         "rotate": "45deg",
                       },
                     ],
@@ -1708,7 +1816,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    Object {
+                    {
                       "height": 25,
                       "overflow": "hidden",
                       "width": 50,
@@ -1718,13 +1826,13 @@ exports[`renders loading FAB with custom size prop 1`] = `
                   <View
                     collapsable={false}
                     style={
-                      Object {
+                      {
                         "height": 50,
-                        "transform": Array [
-                          Object {
+                        "transform": [
+                          {
                             "translateY": 0,
                           },
-                          Object {
+                          {
                             "rotate": "-165deg",
                           },
                         ],
@@ -1735,7 +1843,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
                     <View
                       collapsable={false}
                       style={
-                        Object {
+                        {
                           "height": 25,
                           "overflow": "hidden",
                           "width": 50,
@@ -1745,7 +1853,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
                       <View
                         collapsable={false}
                         style={
-                          Object {
+                          {
                             "borderColor": "rgba(33, 0, 93, 1)",
                             "borderRadius": 25,
                             "borderWidth": 5,
@@ -1762,7 +1870,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "bottom": 0,
                   "justifyContent": "center",
@@ -1776,10 +1884,10 @@ exports[`renders loading FAB with custom size prop 1`] = `
               <View
                 collapsable={false}
                 style={
-                  Object {
+                  {
                     "height": 50,
-                    "transform": Array [
-                      Object {
+                    "transform": [
+                      {
                         "rotate": "45deg",
                       },
                     ],
@@ -1790,7 +1898,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    Object {
+                    {
                       "height": 25,
                       "overflow": "hidden",
                       "top": 25,
@@ -1801,13 +1909,13 @@ exports[`renders loading FAB with custom size prop 1`] = `
                   <View
                     collapsable={false}
                     style={
-                      Object {
+                      {
                         "height": 50,
-                        "transform": Array [
-                          Object {
+                        "transform": [
+                          {
                             "translateY": -25,
                           },
-                          Object {
+                          {
                             "rotate": "345deg",
                           },
                         ],
@@ -1818,7 +1926,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
                     <View
                       collapsable={false}
                       style={
-                        Object {
+                        {
                           "height": 25,
                           "overflow": "hidden",
                           "width": 50,
@@ -1828,7 +1936,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
                       <View
                         collapsable={false}
                         style={
-                          Object {
+                          {
                             "borderColor": "rgba(33, 0, 93, 1)",
                             "borderRadius": 25,
                             "borderWidth": 5,
@@ -1854,19 +1962,19 @@ exports[`renders not visible FAB 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 1,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 4,
         "width": 0,
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "transform": Array [
-        Object {
+      "transform": [
+        {
           "scale": 1,
         },
       ],
@@ -1878,12 +1986,12 @@ exports[`renders not visible FAB 1`] = `
     collapsable={false}
     pointerEvents="none"
     style={
-      Object {
+      {
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -1896,8 +2004,20 @@ exports[`renders not visible FAB 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -1913,11 +2033,11 @@ exports[`renders not visible FAB 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderRadius": 16,
           },
         ]
@@ -1927,13 +2047,13 @@ exports[`renders not visible FAB 1`] = `
       <View
         pointerEvents="none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 16,
               "height": 56,
               "width": 56,
@@ -1944,12 +2064,12 @@ exports[`renders not visible FAB 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
               },
-              Object {
+              {
                 "height": 24,
                 "width": 24,
               },
@@ -1959,15 +2079,15 @@ exports[`renders not visible FAB 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "bottom": 0,
                 "left": 0,
                 "opacity": 1,
                 "position": "absolute",
                 "right": 0,
                 "top": 0,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "rotate": "0deg",
                   },
                 ],
@@ -1982,30 +2102,30 @@ exports[`renders not visible FAB 1`] = `
               pointerEvents="none"
               selectable={false}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "rgba(33, 0, 93, 1)",
                     "fontSize": 24,
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "lineHeight": 24,
-                      "transform": Array [
-                        Object {
+                      "transform": [
+                        {
                           "scaleX": 1,
                         },
                       ],
                     },
-                    Object {
+                    {
                       "backgroundColor": "transparent",
                     },
                   ],
-                  Object {
+                  {
                     "fontFamily": "Material Design Icons",
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  Object {},
+                  {},
                 ]
               }
             >
@@ -2023,19 +2143,19 @@ exports[`renders small FAB 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 12,
       "opacity": 1,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 4,
         "width": 0,
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "transform": Array [
-        Object {
+      "transform": [
+        {
           "scale": 1,
         },
       ],
@@ -2047,12 +2167,12 @@ exports[`renders small FAB 1`] = `
     collapsable={false}
     pointerEvents="auto"
     style={
-      Object {
+      {
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 12,
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -2065,8 +2185,20 @@ exports[`renders small FAB 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -2082,11 +2214,11 @@ exports[`renders small FAB 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderRadius": 12,
           },
         ]
@@ -2096,13 +2228,13 @@ exports[`renders small FAB 1`] = `
       <View
         pointerEvents="none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 12,
               "height": 40,
               "width": 40,
@@ -2113,12 +2245,12 @@ exports[`renders small FAB 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
               },
-              Object {
+              {
                 "height": 24,
                 "width": 24,
               },
@@ -2128,15 +2260,15 @@ exports[`renders small FAB 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "bottom": 0,
                 "left": 0,
                 "opacity": 1,
                 "position": "absolute",
                 "right": 0,
                 "top": 0,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "rotate": "0deg",
                   },
                 ],
@@ -2151,30 +2283,30 @@ exports[`renders small FAB 1`] = `
               pointerEvents="none"
               selectable={false}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "rgba(33, 0, 93, 1)",
                     "fontSize": 24,
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "lineHeight": 24,
-                      "transform": Array [
-                        Object {
+                      "transform": [
+                        {
                           "scaleX": 1,
                         },
                       ],
                     },
-                    Object {
+                    {
                       "backgroundColor": "transparent",
                     },
                   ],
-                  Object {
+                  {
                     "fontFamily": "Material Design Icons",
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  Object {},
+                  {},
                 ]
               }
             >
@@ -2192,19 +2324,19 @@ exports[`renders visible FAB 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 0,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 4,
         "width": 0,
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "transform": Array [
-        Object {
+      "transform": [
+        {
           "scale": 0,
         },
       ],
@@ -2216,12 +2348,12 @@ exports[`renders visible FAB 1`] = `
     collapsable={false}
     pointerEvents="auto"
     style={
-      Object {
+      {
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -2234,8 +2366,20 @@ exports[`renders visible FAB 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -2251,11 +2395,11 @@ exports[`renders visible FAB 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderRadius": 16,
           },
         ]
@@ -2265,13 +2409,13 @@ exports[`renders visible FAB 1`] = `
       <View
         pointerEvents="none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 16,
               "height": 56,
               "width": 56,
@@ -2282,12 +2426,12 @@ exports[`renders visible FAB 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
               },
-              Object {
+              {
                 "height": 24,
                 "width": 24,
               },
@@ -2297,15 +2441,15 @@ exports[`renders visible FAB 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "bottom": 0,
                 "left": 0,
                 "opacity": 1,
                 "position": "absolute",
                 "right": 0,
                 "top": 0,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "rotate": "0deg",
                   },
                 ],
@@ -2320,30 +2464,30 @@ exports[`renders visible FAB 1`] = `
               pointerEvents="none"
               selectable={false}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "rgba(33, 0, 93, 1)",
                     "fontSize": 24,
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "lineHeight": 24,
-                      "transform": Array [
-                        Object {
+                      "transform": [
+                        {
                           "scaleX": 1,
                         },
                       ],
                     },
-                    Object {
+                    {
                       "backgroundColor": "transparent",
                     },
                   ],
-                  Object {
+                  {
                     "fontFamily": "Material Design Icons",
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  Object {},
+                  {},
                 ]
               }
             >

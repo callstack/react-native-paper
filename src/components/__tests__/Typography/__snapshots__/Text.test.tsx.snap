@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders every variant of Text with children as content 1`] = `
-Array [
+[
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "fontFamily": "System",
             "fontSize": 57,
             "fontWeight": "400",
@@ -29,16 +29,16 @@ Array [
   </Text>,
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "fontFamily": "System",
             "fontSize": 45,
             "fontWeight": "400",
@@ -54,16 +54,16 @@ Array [
   </Text>,
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "fontFamily": "System",
             "fontSize": 36,
             "fontWeight": "400",
@@ -79,16 +79,16 @@ Array [
   </Text>,
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "fontFamily": "System",
             "fontSize": 32,
             "fontWeight": "400",
@@ -104,16 +104,16 @@ Array [
   </Text>,
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "fontFamily": "System",
             "fontSize": 28,
             "fontWeight": "400",
@@ -129,16 +129,16 @@ Array [
   </Text>,
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "fontFamily": "System",
             "fontSize": 24,
             "fontWeight": "400",
@@ -154,16 +154,16 @@ Array [
   </Text>,
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "fontFamily": "System",
             "fontSize": 22,
             "fontWeight": "400",
@@ -179,16 +179,16 @@ Array [
   </Text>,
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": "500",
@@ -204,16 +204,16 @@ Array [
   </Text>,
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "fontFamily": "System",
             "fontSize": 14,
             "fontWeight": "500",
@@ -229,16 +229,16 @@ Array [
   </Text>,
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": "400",
@@ -254,16 +254,16 @@ Array [
   </Text>,
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "fontFamily": "System",
             "fontSize": 14,
             "fontWeight": "400",
@@ -279,16 +279,16 @@ Array [
   </Text>,
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "fontFamily": "System",
             "fontSize": 12,
             "fontWeight": "400",
@@ -304,16 +304,16 @@ Array [
   </Text>,
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "fontFamily": "System",
             "fontSize": 14,
             "fontWeight": "500",
@@ -329,16 +329,16 @@ Array [
   </Text>,
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "fontFamily": "System",
             "fontSize": 12,
             "fontWeight": "500",
@@ -354,16 +354,16 @@ Array [
   </Text>,
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "fontFamily": "System",
             "fontSize": 11,
             "fontWeight": "500",
@@ -381,16 +381,16 @@ Array [
 `;
 
 exports[`renders v3 Text component with custom variant correctly 1`] = `
-Array [
-  Object {
+[
+  {
     "textAlign": "left",
   },
-  Object {
+  {
     "color": "rgba(28, 27, 31, 1)",
     "writingDirection": "ltr",
   },
-  Array [
-    Object {
+  [
+    {
       "fontFamily": "Montserrat-Regular",
       "fontSize": 41,
       "fontWeight": "400",
