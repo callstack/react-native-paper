@@ -14,12 +14,20 @@ import useLatestCallback from 'use-latest-callback';
 
 import { useInternalTheme } from '../core/theming';
 import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
+import { forwardRef } from '../utils/forwardRef';
 import Button from './Button/Button';
 import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
 import Text from './Typography/Text';
+
+interface SnackbarComponent
+  extends React.ForwardRefExoticComponent<Props & React.RefAttributes<View>> {
+  DURATION_SHORT: number;
+  DURATION_MEDIUM: number;
+  DURATION_LONG: number;
+}
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
@@ -128,218 +136,224 @@ const DURATION_LONG = 10000;
  * export default MyComponent;
  * ```
  */
-const Snackbar = ({
-  visible,
-  action,
-  icon,
-  onIconPress,
-  iconAccessibilityLabel = 'Close icon',
-  duration = DURATION_MEDIUM,
-  onDismiss,
-  children,
-  elevation = 2,
-  wrapperStyle,
-  style,
-  theme: themeOverrides,
-  ...rest
-}: Props) => {
-  const theme = useInternalTheme(themeOverrides);
-  const { bottom, right, left } = useSafeAreaInsets();
+const Snackbar = forwardRef<View, Props>(
+  (
+    {
+      visible,
+      action,
+      icon,
+      onIconPress,
+      iconAccessibilityLabel = 'Close icon',
+      duration = DURATION_MEDIUM,
+      onDismiss,
+      children,
+      elevation = 2,
+      wrapperStyle,
+      style,
+      theme: themeOverrides,
+      ...rest
+    }: Props,
+    ref
+  ) => {
+    const theme = useInternalTheme(themeOverrides);
+    const { bottom, right, left } = useSafeAreaInsets();
 
-  const { current: opacity } = React.useRef<Animated.Value>(
-    new Animated.Value(0.0)
-  );
-  const hideTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
+    const { current: opacity } = React.useRef<Animated.Value>(
+      new Animated.Value(0.0)
+    );
+    const hideTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
 
-  const [hidden, setHidden] = React.useState(!visible);
+    const [hidden, setHidden] = React.useState(!visible);
 
-  const { scale } = theme.animation;
+    const { scale } = theme.animation;
 
-  const handleOnVisible = useLatestCallback(() => {
-    // show
-    if (hideTimeout.current) clearTimeout(hideTimeout.current);
-    setHidden(false);
-    Animated.timing(opacity, {
-      toValue: 1,
-      duration: 200 * scale,
-      easing: Easing.out(Easing.ease),
-      useNativeDriver: true,
-    }).start(({ finished }) => {
-      if (finished) {
-        const isInfinity =
-          duration === Number.POSITIVE_INFINITY ||
-          duration === Number.NEGATIVE_INFINITY;
-
-        if (!isInfinity) {
-          hideTimeout.current = setTimeout(
-            onDismiss,
-            duration
-          ) as unknown as NodeJS.Timeout;
-        }
-      }
-    });
-  });
-
-  const handleOnHidden = useLatestCallback(() => {
-    // hide
-    if (hideTimeout.current) {
-      clearTimeout(hideTimeout.current);
-    }
-
-    Animated.timing(opacity, {
-      toValue: 0,
-      duration: 100 * scale,
-      useNativeDriver: true,
-    }).start(({ finished }) => {
-      if (finished) {
-        setHidden(true);
-      }
-    });
-  });
-
-  React.useEffect(() => {
-    return () => {
+    const handleOnVisible = useLatestCallback(() => {
+      // show
       if (hideTimeout.current) clearTimeout(hideTimeout.current);
+      setHidden(false);
+      Animated.timing(opacity, {
+        toValue: 1,
+        duration: 200 * scale,
+        easing: Easing.out(Easing.ease),
+        useNativeDriver: true,
+      }).start(({ finished }) => {
+        if (finished) {
+          const isInfinity =
+            duration === Number.POSITIVE_INFINITY ||
+            duration === Number.NEGATIVE_INFINITY;
+
+          if (!isInfinity) {
+            hideTimeout.current = setTimeout(
+              onDismiss,
+              duration
+            ) as unknown as NodeJS.Timeout;
+          }
+        }
+      });
+    });
+
+    const handleOnHidden = useLatestCallback(() => {
+      // hide
+      if (hideTimeout.current) {
+        clearTimeout(hideTimeout.current);
+      }
+
+      Animated.timing(opacity, {
+        toValue: 0,
+        duration: 100 * scale,
+        useNativeDriver: true,
+      }).start(({ finished }) => {
+        if (finished) {
+          setHidden(true);
+        }
+      });
+    });
+
+    React.useEffect(() => {
+      return () => {
+        if (hideTimeout.current) clearTimeout(hideTimeout.current);
+      };
+    }, []);
+
+    React.useLayoutEffect(() => {
+      if (visible) {
+        handleOnVisible();
+      } else {
+        handleOnHidden();
+      }
+    }, [visible, handleOnVisible, handleOnHidden]);
+
+    const { colors, roundness, isV3 } = theme;
+
+    if (hidden) {
+      return null;
+    }
+
+    const {
+      style: actionStyle,
+      label: actionLabel,
+      onPress: onPressAction,
+      ...actionProps
+    } = action || {};
+
+    const buttonTextColor = isV3 ? colors.inversePrimary : colors.accent;
+    const textColor = isV3 ? colors.inverseOnSurface : colors?.surface;
+    const backgroundColor = isV3 ? colors.inverseSurface : colors?.onSurface;
+
+    const isIconButton = isV3 && onIconPress;
+
+    const marginLeft = action ? -12 : -16;
+
+    const wrapperPaddings = {
+      paddingBottom: bottom,
+      paddingHorizontal: Math.max(left, right),
     };
-  }, []);
 
-  React.useLayoutEffect(() => {
-    if (visible) {
-      handleOnVisible();
-    } else {
-      handleOnHidden();
-    }
-  }, [visible, handleOnVisible, handleOnHidden]);
+    const renderChildrenWithWrapper = () => {
+      if (typeof children === 'string') {
+        return (
+          <Text
+            variant="bodyMedium"
+            style={[styles.content, { color: textColor }]}
+          >
+            {children}
+          </Text>
+        );
+      }
 
-  const { colors, roundness, isV3 } = theme;
-
-  if (hidden) {
-    return null;
-  }
-
-  const {
-    style: actionStyle,
-    label: actionLabel,
-    onPress: onPressAction,
-    ...actionProps
-  } = action || {};
-
-  const buttonTextColor = isV3 ? colors.inversePrimary : colors.accent;
-  const textColor = isV3 ? colors.inverseOnSurface : colors?.surface;
-  const backgroundColor = isV3 ? colors.inverseSurface : colors?.onSurface;
-
-  const isIconButton = isV3 && onIconPress;
-
-  const marginLeft = action ? -12 : -16;
-
-  const wrapperPaddings = {
-    paddingBottom: bottom,
-    paddingHorizontal: Math.max(left, right),
-  };
-
-  const renderChildrenWithWrapper = () => {
-    if (typeof children === 'string') {
       return (
-        <Text
-          variant="bodyMedium"
-          style={[styles.content, { color: textColor }]}
-        >
-          {children}
-        </Text>
+        <View style={styles.content}>
+          {/* View is added to allow multiple lines support for Text component as children */}
+          <View>{children}</View>
+        </View>
       );
-    }
+    };
 
     return (
-      <View style={styles.content}>
-        {/* View is added to allow multiple lines support for Text component as children */}
-        <View>{children}</View>
+      <View
+        pointerEvents="box-none"
+        style={[styles.wrapper, wrapperPaddings, wrapperStyle]}
+      >
+        <Surface
+          pointerEvents="box-none"
+          accessibilityLiveRegion="polite"
+          theme={theme}
+          style={[
+            !isV3 && styles.elevation,
+            styles.container,
+            {
+              backgroundColor,
+              borderRadius: roundness,
+              opacity: opacity,
+              transform: [
+                {
+                  scale: visible
+                    ? opacity.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0.9, 1],
+                      })
+                    : 1,
+                },
+              ],
+            },
+            style,
+          ]}
+          ref={ref}
+          {...(isV3 && { elevation })}
+          {...rest}
+        >
+          {renderChildrenWithWrapper()}
+          {(action || isIconButton) && (
+            <View style={[styles.actionsContainer, { marginLeft }]}>
+              {action ? (
+                <Button
+                  onPress={(event) => {
+                    onPressAction?.(event);
+                    onDismiss();
+                  }}
+                  style={[styles.button, actionStyle]}
+                  textColor={buttonTextColor}
+                  compact={!isV3}
+                  mode="text"
+                  theme={theme}
+                  {...actionProps}
+                >
+                  {actionLabel}
+                </Button>
+              ) : null}
+              {isIconButton ? (
+                <IconButton
+                  accessibilityRole="button"
+                  borderless
+                  onPress={onIconPress}
+                  iconColor={theme.colors.inverseOnSurface}
+                  theme={theme}
+                  icon={
+                    icon ||
+                    (({ size, color }) => {
+                      return (
+                        <MaterialCommunityIcon
+                          name="close"
+                          color={color}
+                          size={size}
+                          direction={
+                            I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'
+                          }
+                        />
+                      );
+                    })
+                  }
+                  accessibilityLabel={iconAccessibilityLabel}
+                  style={styles.icon}
+                />
+              ) : null}
+            </View>
+          )}
+        </Surface>
       </View>
     );
-  };
-
-  return (
-    <View
-      pointerEvents="box-none"
-      style={[styles.wrapper, wrapperPaddings, wrapperStyle]}
-    >
-      <Surface
-        pointerEvents="box-none"
-        accessibilityLiveRegion="polite"
-        theme={theme}
-        style={[
-          !isV3 && styles.elevation,
-          styles.container,
-          {
-            backgroundColor,
-            borderRadius: roundness,
-            opacity: opacity,
-            transform: [
-              {
-                scale: visible
-                  ? opacity.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [0.9, 1],
-                    })
-                  : 1,
-              },
-            ],
-          },
-          style,
-        ]}
-        {...(isV3 && { elevation })}
-        {...rest}
-      >
-        {renderChildrenWithWrapper()}
-        {(action || isIconButton) && (
-          <View style={[styles.actionsContainer, { marginLeft }]}>
-            {action ? (
-              <Button
-                onPress={(event) => {
-                  onPressAction?.(event);
-                  onDismiss();
-                }}
-                style={[styles.button, actionStyle]}
-                textColor={buttonTextColor}
-                compact={!isV3}
-                mode="text"
-                theme={theme}
-                {...actionProps}
-              >
-                {actionLabel}
-              </Button>
-            ) : null}
-            {isIconButton ? (
-              <IconButton
-                accessibilityRole="button"
-                borderless
-                onPress={onIconPress}
-                iconColor={theme.colors.inverseOnSurface}
-                theme={theme}
-                icon={
-                  icon ||
-                  (({ size, color }) => {
-                    return (
-                      <MaterialCommunityIcon
-                        name="close"
-                        color={color}
-                        size={size}
-                        direction={
-                          I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'
-                        }
-                      />
-                    );
-                  })
-                }
-                accessibilityLabel={iconAccessibilityLabel}
-                style={styles.icon}
-              />
-            ) : null}
-          </View>
-        )}
-      </Surface>
-    </View>
-  );
-};
+  }
+) as SnackbarComponent;
 
 /**
  * Show the Snackbar for a short duration.
