@@ -23,6 +23,10 @@ class ClassProgressBar extends React.Component<Props> {
 
 const AnimatedProgressBar = Animated.createAnimatedComponent(ClassProgressBar);
 
+afterEach(() => {
+  Platform.OS = 'ios';
+});
+
 it('renders progress bar with animated value', async () => {
   const tree = render(<AnimatedProgressBar animatedValue={0.2} />);
   await waitFor(() => tree.getByRole(a11yRole).props.onLayout(layoutEvent));
