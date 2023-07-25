@@ -135,7 +135,15 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
 };
 
 /**
- * Chips can be used to display entities in small blocks.
+ * Chips are compact elements that can represent inputs, attributes, or actions.
+ * They can have an icon or avatar on the left, and a close button icon on the right.
+ * They are typically used to:
+ * <ul>
+ *  <li>Present multiple options </li>
+ *  <li>Represent attributes active or chosen </li>
+ *  <li>Present filter options </li>
+ *  <li>Trigger actions related to primary content </li>
+ * </ul>
  *
  * ## Usage
  * ```js
