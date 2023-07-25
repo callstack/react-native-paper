@@ -4,6 +4,7 @@ import type {
   StyleProp,
   ViewStyle,
   TouchableWithoutFeedback,
+  ColorValue,
 } from 'react-native';
 import { black } from '../../styles/colors';
 import IconButton from '../IconButton';
@@ -13,7 +14,7 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
   /**
    *  Custom color for action icon.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Name of the icon to show.
    */

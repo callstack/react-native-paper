@@ -4,6 +4,7 @@ import {
   I18nManager,
   Platform,
   ImageSourcePropType,
+  ColorValue,
 } from 'react-native';
 import { Consumer as SettingsConsumer } from '../core/settings';
 import { accessibilityProps } from './MaterialCommunityIcon';
@@ -22,7 +23,7 @@ type IconProps = {
 };
 
 type Props = IconProps & {
-  color?: string;
+  color?: ColorValue;
   source: any;
   /**
    * @optional

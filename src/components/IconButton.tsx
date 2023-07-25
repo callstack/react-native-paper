@@ -6,6 +6,7 @@ import {
   StyleProp,
   GestureResponderEvent,
   TouchableWithoutFeedback,
+  ColorValue,
 } from 'react-native';
 import color from 'color';
 
@@ -24,7 +25,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Color of the icon.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Size of the icon.
    */
