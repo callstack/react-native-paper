@@ -131,6 +131,7 @@ const config = {
           IconButton: {
             IconButton: 'IconButton/IconButton',
           },
+          Icon: 'Icon',
           List: {
             ListAccordion: 'List/ListAccordion',
             ListAccordionGroup: 'List/ListAccordionGroup',
