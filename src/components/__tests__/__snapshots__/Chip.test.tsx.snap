@@ -69,6 +69,9 @@ exports[`renders chip with close button 1`] = `
             Object {
               "borderRadius": 8,
             },
+            Object {
+              "width": "100%",
+            },
           ],
         ]
       }
@@ -340,6 +343,9 @@ exports[`renders chip with custom close button 1`] = `
           Array [
             Object {
               "borderRadius": 8,
+            },
+            Object {
+              "width": "100%",
             },
           ],
         ]
@@ -613,6 +619,9 @@ exports[`renders chip with icon 1`] = `
             Object {
               "borderRadius": 8,
             },
+            Object {
+              "width": "100%",
+            },
           ],
         ]
       }
@@ -808,6 +817,9 @@ exports[`renders chip with onPress 1`] = `
             Object {
               "borderRadius": 8,
             },
+            Object {
+              "width": "100%",
+            },
           ],
         ]
       }
@@ -951,6 +963,9 @@ exports[`renders outlined disabled chip 1`] = `
             Object {
               "borderRadius": 8,
             },
+            Object {
+              "width": "100%",
+            },
           ],
         ]
       }
@@ -1093,6 +1108,9 @@ exports[`renders selected chip 1`] = `
           Array [
             Object {
               "borderRadius": 8,
+            },
+            Object {
+              "width": "100%",
             },
           ],
         ]
