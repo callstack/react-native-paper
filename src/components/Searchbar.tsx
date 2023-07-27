@@ -313,6 +313,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
           }
           theme={theme}
           accessibilityLabel={searchAccessibilityLabel}
+          testID={`${testID}-icon`}
         />
         <TextInput
           style={[
@@ -372,6 +373,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
                   />
                 ))
               }
+              testID={`${testID}-clear-icon`}
               accessibilityRole="button"
               theme={theme}
             />

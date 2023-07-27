@@ -105,6 +105,23 @@ it('renders snackbar with View & Text as a child', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('renders with custom ripple color', () => {
+  const { getByTestId } = render(
+    <Snackbar
+      visible
+      onDismiss={() => {}}
+      onIconPress={() => {}}
+      rippleColor="purple"
+      testID="snackbar"
+    >
+      Snackbar content
+    </Snackbar>
+  );
+
+  const iconContainer = getByTestId('snackbar-icon-container').props.children;
+  expect(iconContainer.props.rippleColor).toBe('purple');
+});
+
 it('animated value changes correctly', () => {
   const value = new Animated.Value(1);
   const { getByTestId } = render(

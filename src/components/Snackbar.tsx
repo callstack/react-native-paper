@@ -82,6 +82,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * TestID used for testing purposes
+   */
+  testID?: string;
 };
 
 const DURATION_SHORT = 4000;
@@ -148,6 +152,7 @@ const Snackbar = ({
   style,
   theme: themeOverrides,
   rippleColor,
+  testID,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -294,6 +299,7 @@ const Snackbar = ({
           },
           style,
         ]}
+        testID={testID}
         {...(isV3 && { elevation })}
         {...rest}
       >
@@ -342,6 +348,7 @@ const Snackbar = ({
                 }
                 accessibilityLabel={iconAccessibilityLabel}
                 style={styles.icon}
+                testID={`${testID}-icon`}
               />
             ) : null}
           </View>

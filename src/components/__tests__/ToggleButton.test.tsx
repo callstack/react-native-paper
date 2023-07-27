@@ -33,6 +33,22 @@ it('renders unchecked toggle button', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('render toggle button with custom ripple color', () => {
+  const { getByTestId } = render(
+    <ToggleButton
+      disabled
+      value="toggle"
+      status="checked"
+      icon="heart"
+      testID="toggle-button"
+      rippleColor="purple"
+    />
+  );
+
+  const iconContainer = getByTestId('toggle-button-container').props.children;
+  expect(iconContainer.props.rippleColor).toBe('purple');
+});
+
 describe('getToggleButtonColor', () => {
   it('should return correct color when checked and theme version 3', () => {
     expect(getToggleButtonColor({ theme: getTheme(), checked: true })).toBe(
