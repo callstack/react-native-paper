@@ -63,6 +63,7 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    */
   selectionColor?: string;
   /**
+   * @platform Android only
    * Cursor (or "caret") color of the input on Android.
    * This property has no effect on iOS.
    */
@@ -100,6 +101,7 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    */
   multiline?: boolean;
   /**
+   * @platform Android only
    * The number of lines to show in the input (Android only).
    */
   numberOfLines?: number;
