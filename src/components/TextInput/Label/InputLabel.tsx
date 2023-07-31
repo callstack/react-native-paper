@@ -29,8 +29,8 @@ const InputLabel = (props: InputLabelProps) => {
     wiggleOffsetX,
     labelScale,
     topPosition,
-    paddingStart,
-    paddingEnd,
+    paddingLeft,
+    paddingRight,
     backgroundColor,
     roundness,
     placeholderColor,
@@ -41,7 +41,7 @@ const InputLabel = (props: InputLabelProps) => {
   } = props;
 
   const paddingOffset =
-    paddingStart && paddingEnd ? { paddingStart, paddingEnd } : {};
+    paddingLeft && paddingRight ? { paddingLeft, paddingRight } : {};
 
   const labelTranslationX = {
     transform: [

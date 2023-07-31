@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { I18nManager } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -25,22 +26,11 @@ import {
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 import DrawerItems from './DrawerItems';
+import PreferencesContext from './PreferencesContext';
 import App from './RootNavigator';
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
-
-export const PreferencesContext = React.createContext<{
-  toggleTheme: () => void;
-  toggleThemeVersion: () => void;
-  toggleCollapsed: () => void;
-  toggleCustomFont: () => void;
-  toggleRippleEffect: () => void;
-  customFontLoaded: boolean;
-  rippleEffectEnabled: boolean;
-  collapsed: boolean;
-  theme: MD2Theme | MD3Theme;
-} | null>(null);
 
 export const useExampleTheme = () => useTheme<MD2Theme | MD3Theme>();
 
@@ -63,6 +53,7 @@ export default function PaperExample() {
   const [collapsed, setCollapsed] = React.useState(false);
   const [customFontLoaded, setCustomFont] = React.useState(false);
   const [rippleEffectEnabled, setRippleEffectEnabled] = React.useState(true);
+  const [isRTL, setIsRTL] = React.useState(false);
 
   const theme = React.useMemo(() => {
     if (themeVersion === 2) {
@@ -99,6 +90,10 @@ export default function PaperExample() {
 
         if (preferences) {
           setIsDarkMode(preferences.theme === 'dark');
+
+          if (typeof preferences.rtl === 'boolean') {
+            setIsRTL(preferences.rtl);
+          }
         }
       } catch (e) {
         // ignore error
@@ -115,15 +110,19 @@ export default function PaperExample() {
           PREFERENCES_KEY,
           JSON.stringify({
             theme: isDarkMode ? 'dark' : 'light',
+            rtl: isRTL,
           })
         );
       } catch (e) {
         // ignore error
       }
+
+      document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+      I18nManager.forceRTL(isRTL);
     };
 
     savePrefs();
-  }, [isDarkMode]);
+  }, [isDarkMode, isRTL]);
 
   const preferences = React.useMemo(
     () => ({
@@ -131,6 +130,7 @@ export default function PaperExample() {
       toggleCollapsed: () => setCollapsed(!collapsed),
       toggleCustomFont: () => setCustomFont(!customFontLoaded),
       toggleRippleEffect: () => setRippleEffectEnabled(!rippleEffectEnabled),
+      toggleRTL: () => setIsRTL((rtl) => !rtl),
       toggleThemeVersion: () => {
         setCustomFont(false);
         setCollapsed(false);
@@ -140,9 +140,10 @@ export default function PaperExample() {
       customFontLoaded,
       rippleEffectEnabled,
       collapsed,
+      isRTL,
       theme,
     }),
-    [theme, collapsed, customFontLoaded, rippleEffectEnabled]
+    [customFontLoaded, rippleEffectEnabled, collapsed, isRTL, theme]
   );
 
   if (!isReady && !fontsLoaded) {
@@ -186,7 +187,7 @@ export default function PaperExample() {
     <PaperProvider
       settings={{ rippleEffectEnabled: preferences.rippleEffectEnabled }}
       theme={customFontLoaded ? configuredFontTheme : theme}
-      direction={rtl ? 'rtl' : 'ltr'}
+      direction={isRTL ? 'rtl' : 'ltr'}
     >
       <PreferencesContext.Provider value={preferences}>
         <React.Fragment>
@@ -207,6 +208,7 @@ export default function PaperExample() {
                       drawerStyle: collapsed && {
                         width: collapsedDrawerWidth,
                       },
+                      // drawerPosition: isRTL ? 'right' : 'left',
                     }}
                     drawerContent={() => <DrawerItems />}
                   >

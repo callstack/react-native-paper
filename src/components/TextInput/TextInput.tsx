@@ -155,7 +155,7 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
   /**
    * Pass custom style directly to the input itself.
    * Overrides input style
-   * Example: `paddingStart`, `backgroundColor`
+   * Example: `paddingLeft`, `backgroundColor`
    */
   contentStyle?: StyleProp<TextStyle>;
   /**

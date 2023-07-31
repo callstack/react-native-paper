@@ -30,26 +30,11 @@ import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 import { deviceColorsSupported } from '../utils';
 import DrawerItems from './DrawerItems';
+import PreferencesContext from './PreferencesContext';
 import App from './RootNavigator';
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
-
-export const PreferencesContext = React.createContext<{
-  toggleShouldUseDeviceColors?: () => void;
-  toggleTheme: () => void;
-  toggleRtl: () => void;
-  toggleThemeVersion: () => void;
-  toggleCollapsed: () => void;
-  toggleCustomFont: () => void;
-  toggleRippleEffect: () => void;
-  customFontLoaded: boolean;
-  rippleEffectEnabled: boolean;
-  collapsed: boolean;
-  rtl: boolean;
-  theme: MD2Theme | MD3Theme;
-  shouldUseDeviceColors?: boolean;
-} | null>(null);
 
 export const useExampleTheme = () => useTheme<MD2Theme | MD3Theme>();
 
@@ -71,7 +56,7 @@ export default function PaperExample() {
     React.useState(true);
   const [isDarkMode, setIsDarkMode] = React.useState(false);
   const [themeVersion, setThemeVersion] = React.useState<2 | 3>(3);
-  const [rtl, setRtl] = React.useState<boolean>(
+  const [isRTL, setIsRTL] = React.useState<boolean>(
     I18nManager.getConstants().isRTL
   );
   const [collapsed, setCollapsed] = React.useState(false);
@@ -122,7 +107,7 @@ export default function PaperExample() {
           setIsDarkMode(preferences.theme === 'dark');
 
           if (typeof preferences.rtl === 'boolean') {
-            setRtl(preferences.rtl);
+            setIsRTL(preferences.rtl);
           }
         }
       } catch (e) {
@@ -140,28 +125,28 @@ export default function PaperExample() {
           PREFERENCES_KEY,
           JSON.stringify({
             theme: isDarkMode ? 'dark' : 'light',
-            rtl,
+            rtl: isRTL,
           })
         );
       } catch (e) {
         // ignore error
       }
 
-      if (I18nManager.getConstants().isRTL !== rtl) {
-        I18nManager.forceRTL(rtl);
+      if (I18nManager.getConstants().isRTL !== isRTL) {
+        I18nManager.forceRTL(isRTL);
         Updates.reloadAsync();
       }
     };
 
     savePrefs();
-  }, [rtl, isDarkMode]);
+  }, [isRTL, isDarkMode]);
 
   const preferences = React.useMemo(
     () => ({
       toggleShouldUseDeviceColors: () =>
         setShouldUseDeviceColors((oldValue) => !oldValue),
       toggleTheme: () => setIsDarkMode((oldValue) => !oldValue),
-      toggleRtl: () => setRtl((rtl) => !rtl),
+      toggleRTL: () => setIsRTL((rtl) => !rtl),
       toggleCollapsed: () => setCollapsed(!collapsed),
       toggleCustomFont: () => setCustomFont(!customFontLoaded),
       toggleRippleEffect: () => setRippleEffectEnabled(!rippleEffectEnabled),
@@ -174,12 +159,12 @@ export default function PaperExample() {
       customFontLoaded,
       rippleEffectEnabled,
       collapsed,
-      rtl,
+      isRTL,
       theme,
       shouldUseDeviceColors,
     }),
     [
-      rtl,
+      isRTL,
       theme,
       collapsed,
       customFontLoaded,

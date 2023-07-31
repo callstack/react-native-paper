@@ -86,13 +86,13 @@ const styles = StyleSheet.create({
   view: {
     position: 'absolute',
     top: 6,
-    start: 10,
+    left: 10,
     width: 12,
   },
   // eslint-disable-next-line react-native/no-color-literals
   outlinedLabel: {
     position: 'absolute',
-    start: 8,
+    left: 8,
     paddingHorizontal: 0,
     color: 'transparent',
   },

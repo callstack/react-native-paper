@@ -71,8 +71,8 @@ export type LabelProps = {
   fontWeight: TextStyle['fontWeight'];
   font: any;
   topPosition: number;
-  paddingStart?: number;
-  paddingEnd?: number;
+  paddingLeft?: number;
+  paddingRight?: number;
   labelTranslationXOffset?: number;
   placeholderColor: string | null;
   backgroundColor?: ColorValue;

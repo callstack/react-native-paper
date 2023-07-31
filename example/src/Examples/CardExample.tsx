@@ -11,8 +11,9 @@ import {
   Text,
 } from 'react-native-paper';
 
-import { PreferencesContext, useExampleTheme } from '..';
+import { useExampleTheme } from '..';
 import { isWeb } from '../../utils';
+import { usePreferences } from '../PreferencesContext';
 import ScreenWrapper from '../ScreenWrapper';
 
 type Mode = 'elevated' | 'outlined' | 'contained';
@@ -21,7 +22,7 @@ const CardExample = () => {
   const { colors, isV3 } = useExampleTheme();
   const [selectedMode, setSelectedMode] = React.useState('elevated' as Mode);
   const [isSelected, setIsSelected] = React.useState(false);
-  const preferences = React.useContext(PreferencesContext);
+  const preferences = usePreferences();
 
   const modes = isV3
     ? ['elevated', 'outlined', 'contained']
@@ -175,7 +176,7 @@ const CardExample = () => {
         <Card
           style={styles.card}
           onPress={() => {
-            preferences?.toggleTheme();
+            preferences.toggleTheme();
           }}
           mode={selectedMode}
         >

@@ -78,7 +78,8 @@ const TextInputFlat = ({
   contentStyle,
   ...rest
 }: ChildTextInputProps) => {
-  const { direction } = useLocale();
+  const { direction, overwriteRTL } = useLocale();
+  const isRTL = direction === 'rtl';
   const isAndroid = Platform.OS === 'android';
   const { colors, isV3, roundness } = theme;
   const font = isV3 ? theme.fonts.bodyLarge : theme.fonts.regular;
@@ -106,14 +107,14 @@ const TextInputFlat = ({
     right,
   });
 
-  let { paddingStart, paddingEnd } = calculateFlatInputHorizontalPadding({
+  let { paddingLeft, paddingRight } = calculateFlatInputHorizontalPadding({
     adornmentConfig,
     isV3,
   });
 
   if (isPaddingHorizontalPassed) {
-    paddingStart = paddingHorizontal as number;
-    paddingEnd = paddingHorizontal as number;
+    paddingLeft = paddingHorizontal as number;
+    paddingRight = paddingHorizontal as number;
   }
 
   const { leftLayout, rightLayout } = parentState;
@@ -168,9 +169,8 @@ const TextInputFlat = ({
   const labelHalfHeight = labelHeight / 2;
 
   const baseLabelTranslateX =
-    (direction === 'rtl' ? 1 : -1) *
-      (labelHalfWidth - (labelScale * labelWidth) / 2) +
-    (1 - labelScale) * (direction === 'rtl' ? -1 : 1) * paddingStart;
+    (isRTL ? 1 : -1) * (labelHalfWidth - (labelScale * labelWidth) / 2) +
+    (1 - labelScale) * (isRTL ? -1 : 1) * paddingLeft;
 
   const minInputHeight = dense
     ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) - LABEL_PADDING_TOP_DENSE
@@ -263,8 +263,12 @@ const TextInputFlat = ({
     labelScale,
     wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
     topPosition,
-    paddingStart,
-    paddingEnd,
+    paddingLeft: isAndroid ? (isRTL ? paddingRight : paddingLeft) : paddingLeft,
+    paddingRight: isAndroid
+      ? isRTL
+        ? paddingLeft
+        : paddingRight
+      : paddingRight,
     hasActiveOutline,
     activeColor,
     placeholderColor,
@@ -345,8 +349,8 @@ const TextInputFlat = ({
               {
                 backgroundColor:
                   viewStyle.backgroundColor || containerStyle.backgroundColor,
-                start: paddingStart,
-                end: paddingEnd,
+                left: paddingLeft,
+                right: paddingRight,
               },
             ]}
           />
@@ -382,7 +386,7 @@ const TextInputFlat = ({
           multiline,
           style: [
             styles.input,
-            { paddingStart: paddingStart, paddingEnd: paddingEnd },
+            { paddingLeft, paddingRight },
             !multiline || (multiline && height) ? { height: flatHeight } : {},
             paddingFlat,
             {
@@ -392,9 +396,11 @@ const TextInputFlat = ({
               fontWeight,
               color: inputTextColor,
               textAlignVertical: multiline ? 'top' : 'center',
-              textAlign: textAlign
+              textAlign: overwriteRTL
+                ? 'right'
+                : textAlign
                 ? textAlign
-                : direction === 'rtl'
+                : isRTL
                 ? 'right'
                 : 'left',
             },
@@ -472,7 +478,7 @@ const Underline = ({
 const styles = StyleSheet.create({
   placeholder: {
     position: 'absolute',
-    start: 0,
+    left: 0,
   },
   underline: {
     position: 'absolute',

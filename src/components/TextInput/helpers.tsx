@@ -283,22 +283,22 @@ export const calculateFlatInputHorizontalPadding = ({
   const { LABEL_PADDING_HORIZONTAL, ADORNMENT_OFFSET, FLAT_INPUT_OFFSET } =
     getConstants(isV3);
 
-  let paddingStart = LABEL_PADDING_HORIZONTAL;
-  let paddingEnd = LABEL_PADDING_HORIZONTAL;
+  let paddingLeft = LABEL_PADDING_HORIZONTAL;
+  let paddingRight = LABEL_PADDING_HORIZONTAL;
 
   adornmentConfig.forEach(({ type, side }) => {
     if (type === AdornmentType.Icon && side === AdornmentSide.Left) {
-      paddingStart = ADORNMENT_SIZE + ADORNMENT_OFFSET + FLAT_INPUT_OFFSET;
+      paddingLeft = ADORNMENT_SIZE + ADORNMENT_OFFSET + FLAT_INPUT_OFFSET;
     } else if (side === AdornmentSide.Right) {
       if (type === AdornmentType.Affix) {
-        paddingEnd = ADORNMENT_SIZE + ADORNMENT_OFFSET + FLAT_INPUT_OFFSET;
+        paddingRight = ADORNMENT_SIZE + ADORNMENT_OFFSET + FLAT_INPUT_OFFSET;
       } else if (type === AdornmentType.Icon) {
-        paddingEnd = ADORNMENT_SIZE + ADORNMENT_OFFSET + FLAT_INPUT_OFFSET;
+        paddingRight = ADORNMENT_SIZE + ADORNMENT_OFFSET + FLAT_INPUT_OFFSET;
       }
     }
   });
 
-  return { paddingStart, paddingEnd };
+  return { paddingLeft, paddingRight };
 };
 
 type BaseProps = {
