@@ -224,6 +224,12 @@ html[data-theme='light'] .gallery-dark {
   border-color: rgba(0, 100, 0, 1);
 }
 
+.badge-platform {
+  color: rgb(212, 60, 14);
+  background-color: rgba(212, 60, 14, 0.2);
+  border-color: rgba(212, 60, 14, 1);
+}
+
 .showcase-gallery {
   display: flex;
   flex-direction: row;
