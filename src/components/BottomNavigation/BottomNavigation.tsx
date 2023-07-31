@@ -509,14 +509,14 @@ const BottomNavigation = <Route extends BaseRoute>({
             ? 1
             : 0;
 
+          const offsetTarget = focused ? 0 : FAR_FAR_AWAY;
+
           const top = sceneAnimationEnabled
             ? offsetsAnims[index].interpolate({
                 inputRange: [0, 1],
-                outputRange: [0, FAR_FAR_AWAY],
+                outputRange: [0, offsetTarget],
               })
-            : focused
-            ? 0
-            : FAR_FAR_AWAY;
+            : offsetTarget;
 
           const left =
             sceneAnimationType === 'shifting'
