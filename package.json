@@ -42,14 +42,13 @@
     "release": "release-it",
     "bootstrap": "yarn --cwd example && yarn --cwd docs && yarn",
     "docs": "yarn --cwd docs",
-    "example": "yarn --cwd example",
-    "postinstall": "patch-package"
+    "example": "yarn --cwd example"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@callstack/react-theme-provider": "^3.0.8",
+    "@callstack/react-theme-provider": "^3.0.9",
     "color": "^3.1.2",
     "use-latest-callback": "^0.1.5"
   },
@@ -91,7 +90,6 @@
     "jest": "^26.1.0",
     "jest-file-snapshot": "^0.3.2",
     "metro-react-native-babel-preset": "0.72.3",
-    "patch-package": "^7.0.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-native": "0.70.6",
