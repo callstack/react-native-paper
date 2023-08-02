@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
@@ -38,6 +39,7 @@ export type Props = {
    * - `toggleStackOnLongPress`: callback that is called when `FAB` is long pressed
    * - `size`: size of action item. Defaults to `small`. @supported Available in v5.x
    * - `testID`: testID to be used on tests
+   * - `rippleColor`: color of the ripple effect.
    */
   actions: Array<{
     icon: IconSource;
@@ -52,6 +54,7 @@ export type Props = {
     onPress: (e: GestureResponderEvent) => void;
     size?: 'small' | 'medium';
     testID?: string;
+    rippleColor?: ColorValue;
   }>;
   /**
    * Icon to display for the `FAB`.
@@ -70,6 +73,10 @@ export type Props = {
    * Custom backdrop color for opened speed dial background.
    */
   backdropColor?: string;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * Function to execute on pressing the `FAB`.
    */
@@ -208,6 +215,7 @@ const FABGroup = ({
   variant = 'primary',
   enableLongPressWhenStackOpened = false,
   backdropColor: customBackdropColor,
+  rippleColor,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { current: backdrop } = React.useRef<Animated.Value>(
@@ -426,6 +434,7 @@ const FABGroup = ({
                   accessibilityRole="button"
                   testID={it.testID}
                   visible={open}
+                  rippleColor={it.rippleColor}
                 />
               </View>
             );
@@ -457,6 +466,7 @@ const FABGroup = ({
           label={label}
           testID={testID}
           variant={variant}
+          rippleColor={rippleColor}
         />
       </View>
     </View>
