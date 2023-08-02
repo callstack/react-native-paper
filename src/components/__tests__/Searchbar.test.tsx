@@ -38,6 +38,15 @@ it('renders without ActivityIndicator', () => {
   expect(() => getByTestId('activity-indicator')).toThrow();
 });
 
+it('render icon with custom ripple color', () => {
+  const { getByTestId } = render(
+    <Searchbar testID="search-bar" value={''} rippleColor="purple" />
+  );
+
+  const iconContainer = getByTestId('search-bar-icon-container').props.children;
+  expect(iconContainer.props.rippleColor).toBe('purple');
+});
+
 it('renders clear icon with custom color', () => {
   const { getByTestId } = render(
     <Searchbar testID="search-bar" value="value" iconColor="purple" />
@@ -131,6 +140,16 @@ it('renders clear icon wrapper, with appropriate style for v3', () => {
   });
 });
 
+it('render clear icon with custom ripple color', () => {
+  const { getByTestId } = render(
+    <Searchbar testID="search-bar" value={''} rippleColor="purple" />
+  );
+
+  const clearIconContainer = getByTestId('search-bar-clear-icon-container')
+    .props.children;
+  expect(clearIconContainer.props.rippleColor).toBe('purple');
+});
+
 it('renders trailering icon when mode is set to "bar"', () => {
   const { getByTestId } = render(
     <Searchbar
@@ -159,6 +178,23 @@ it('renders trailering icon with press functionality', () => {
 
   fireEvent(getByTestId('search-bar-trailering-icon'), 'onPress');
   expect(onTraileringIconPressMock).toHaveBeenCalledTimes(1);
+});
+
+it('renders trailering icon with custom ripple colors', () => {
+  const { getByTestId } = render(
+    <Searchbar
+      testID="search-bar"
+      value={''}
+      traileringRippleColor={'purple'}
+      traileringIcon={'microphone'}
+      mode="bar"
+    />
+  );
+
+  const traileringIconContainer = getByTestId(
+    'search-bar-trailering-icon-container'
+  ).props.children;
+  expect(traileringIconContainer.props.rippleColor).toBe('purple');
 });
 
 it('renders clear icon instead of trailering icon', () => {

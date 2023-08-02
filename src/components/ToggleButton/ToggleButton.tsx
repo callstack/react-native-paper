@@ -6,6 +6,7 @@ import {
   ViewStyle,
   View,
   Animated,
+  ColorValue,
 } from 'react-native';
 
 import color from 'color';
@@ -32,6 +33,10 @@ export type Props = {
    * Custom text color for button.
    */
   iconColor?: string;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * Whether the button is disabled.
    */
@@ -106,6 +111,7 @@ const ToggleButton = forwardRef<View, Props>(
       value,
       status,
       onPress,
+      rippleColor,
       ...rest
     }: Props,
     ref
@@ -157,6 +163,7 @@ const ToggleButton = forwardRef<View, Props>(
               ]}
               ref={ref}
               theme={theme}
+              rippleColor={rippleColor}
               {...rest}
             />
           );
