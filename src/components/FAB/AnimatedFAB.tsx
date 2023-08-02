@@ -14,7 +14,6 @@ import {
   ScrollView,
   StyleProp,
   StyleSheet,
-  Text,
   View,
   ViewStyle,
 } from 'react-native';
@@ -499,7 +498,20 @@ const AnimatedFAB = ({
         // proper text measurements there is a need to additionaly render that text, but
         // wrapped in absolutely positioned `ScrollView` which height is 0.
         <ScrollView style={styles.textPlaceholderContainer}>
-          <Text onTextLayout={onTextLayout}>{label}</Text>
+          <AnimatedText
+            variant="labelLarge"
+            numberOfLines={1}
+            onTextLayout={onTextLayout}
+            ellipsizeMode={'tail'}
+            style={[
+              styles.label,
+              uppercase && styles.uppercaseLabel,
+              textStyle,
+            ]}
+            theme={theme}
+          >
+            {label}
+          </AnimatedText>
         </ScrollView>
       )}
     </Surface>
