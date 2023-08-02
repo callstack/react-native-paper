@@ -186,6 +186,11 @@ const TextInputOutlined = ({
     paddingHorizontal: INPUT_PADDING_HORIZONTAL,
   };
 
+  const labelBackgroundColor: ColorValue =
+    backgroundColor === 'transparent'
+      ? theme.colors.background
+      : backgroundColor;
+
   const labelProps = {
     label,
     onLayoutAnimatedText,
@@ -204,7 +209,7 @@ const TextInputOutlined = ({
     hasActiveOutline,
     activeColor,
     placeholderColor,
-    backgroundColor: backgroundColor as ColorValue,
+    backgroundColor: labelBackgroundColor,
     errorColor,
     labelTranslationXOffset,
     roundness,

@@ -122,6 +122,7 @@ const InputLabel = (props: InputLabelProps) => {
         backgroundColor,
         roundness,
         maxFontSizeMultiplier: maxFontSizeMultiplier,
+        testID,
       })}
       <AnimatedText
         variant="bodySmall"
