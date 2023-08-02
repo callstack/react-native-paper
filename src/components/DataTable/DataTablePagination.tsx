@@ -60,7 +60,7 @@ type PaginationDropdownProps = {
   /**
    * Color of the dropdown item ripple effect.
    */
-  itemRippleColor?: ColorValue;
+  dropdownItemRippleColor?: ColorValue;
   /**
    * Color of the select page dropdown ripple effect.
    */
@@ -190,7 +190,7 @@ const PaginationDropdown = ({
   onItemsPerPageChange,
   theme: themeOverrides,
   selectPageDropdownRippleColor,
-  itemRippleColor,
+  dropdownItemRippleColor,
 }: PaginationDropdownProps) => {
   const theme = useInternalTheme(themeOverrides);
   const { colors } = theme;
@@ -227,7 +227,7 @@ const PaginationDropdown = ({
             onItemsPerPageChange?.(option);
             toggleSelect(false);
           }}
-          rippleColor={itemRippleColor}
+          rippleColor={dropdownItemRippleColor}
           title={option}
           theme={theme}
         />
@@ -305,7 +305,7 @@ const DataTablePagination = ({
   selectPageDropdownLabel,
   selectPageDropdownAccessibilityLabel,
   selectPageDropdownRippleColor,
-  itemRippleColor,
+  dropdownItemRippleColor,
   theme: themeOverrides,
   ...rest
 }: Props) => {
@@ -345,7 +345,7 @@ const DataTablePagination = ({
               numberOfItemsPerPage={numberOfItemsPerPage}
               onItemsPerPageChange={onItemsPerPageChange}
               selectPageDropdownRippleColor={selectPageDropdownRippleColor}
-              itemRippleColor={itemRippleColor}
+              dropdownItemRippleColor={dropdownItemRippleColor}
               theme={theme}
             />
           </View>
