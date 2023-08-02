@@ -66,6 +66,11 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   showSelectedOverlay?: boolean;
   /**
+   * Whether to display default check icon on selected chip.
+   * Note: Check will not be shown if `icon` is specified. If specified, `icon` will be shown regardless of `selected`.
+   */
+  showSelectedCheck?: boolean;
+  /**
    * Color of the ripple effect.
    */
   rippleColor?: ColorValue;
@@ -180,6 +185,7 @@ const Chip = ({
   selectedColor,
   rippleColor: customRippleColor,
   showSelectedOverlay = false,
+  showSelectedCheck = true,
   ellipsizeMode,
   compact,
   elevated = false,
@@ -256,7 +262,10 @@ const Chip = ({
   const multiplier = isV3 ? (compact ? 1.5 : 2) : 1;
   const labelSpacings = {
     marginRight: onClose ? 0 : 8 * multiplier,
-    marginLeft: avatar || icon || selected ? 4 * multiplier : 8 * multiplier,
+    marginLeft:
+      avatar || icon || (selected && showSelectedCheck)
+        ? 4 * multiplier
+        : 8 * multiplier,
   };
   const contentSpacings = {
     paddingRight: isV3 ? (onClose ? 34 : 0) : onClose ? 32 : 4,
@@ -320,7 +329,7 @@ const Chip = ({
                 : avatar}
             </View>
           ) : null}
-          {icon || selected ? (
+          {icon || (selected && showSelectedCheck) ? (
             <View
               style={[
                 styles.icon,
