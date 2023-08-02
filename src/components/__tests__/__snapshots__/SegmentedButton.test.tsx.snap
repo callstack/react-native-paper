@@ -94,7 +94,7 @@ exports[`renders checked segmented button with selected check 1`] = `
               "marginRight": 3,
               "transform": Array [
                 Object {
-                  "scale": 0.00011425836668732536,
+                  "scale": 0,
                 },
               ],
             }
