@@ -422,7 +422,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 4,
     position: 'relative',
-    flexGrow: 1,
   },
   md3Content: {
     paddingLeft: 0,
@@ -482,7 +481,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   touchable: {
-    flexGrow: 1,
+    width: '100%',
   },
 });
 
