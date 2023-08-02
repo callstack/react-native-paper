@@ -15,6 +15,12 @@ const styles = StyleSheet.create({
   customBorderRadius: {
     borderRadius: 32,
   },
+  customCoverRadius: {
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 8,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 2,
+  },
   contentStyle: {
     flexDirection: 'column-reverse',
   },
@@ -105,6 +111,18 @@ describe('Card', () => {
     expect(getByTestId('card').props.accessibilityState).toMatchObject({
       disabled: true,
     });
+  });
+});
+
+describe('CardCover', () => {
+  it('renders with custom border radius', () => {
+    const { getByTestId } = render(
+      <Card>
+        <Card.Cover testID="card-cover" style={styles.customCoverRadius} />
+      </Card>
+    );
+
+    expect(getByTestId('card-cover')).toHaveStyle(styles.customCoverRadius);
   });
 });
 
@@ -218,10 +236,20 @@ describe('getCardColors - border color', () => {
 });
 
 describe('getCardCoverStyle - border radius', () => {
+  it('should return custom border radius', () => {
+    expect(
+      getCardCoverStyle({
+        theme: getTheme(),
+        borderRadiusStyles: styles.customCoverRadius,
+      })
+    ).toMatchObject(styles.customCoverRadius);
+  });
+
   it('should return correct border radius based on roundness, for theme version 3', () => {
     expect(
       getCardCoverStyle({
         theme: getTheme(),
+        borderRadiusStyles: {},
       })
     ).toMatchObject({ borderRadius: 3 * getTheme().roundness });
   });
@@ -230,6 +258,7 @@ describe('getCardCoverStyle - border radius', () => {
     expect(
       getCardCoverStyle({
         theme: getTheme(false, false),
+        borderRadiusStyles: {},
         index: 0,
         total: 1,
       })
@@ -240,6 +269,7 @@ describe('getCardCoverStyle - border radius', () => {
     expect(
       getCardCoverStyle({
         theme: getTheme(false, false),
+        borderRadiusStyles: {},
         index: 0,
         total: 2,
       })
@@ -253,6 +283,7 @@ describe('getCardCoverStyle - border radius', () => {
     expect(
       getCardCoverStyle({
         theme: getTheme(false, false),
+        borderRadiusStyles: {},
         index: 1,
         total: 2,
       })

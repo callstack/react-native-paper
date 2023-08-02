@@ -43,7 +43,6 @@ exports[`Card renders an outlined card 1`] = `
         Array [
           Object {
             "borderColor": "rgba(121, 116, 126, 1)",
-            "borderRadius": 12,
           },
           Object {
             "borderWidth": 1,
@@ -51,6 +50,9 @@ exports[`Card renders an outlined card 1`] = `
             "position": "absolute",
             "width": "100%",
             "zIndex": 2,
+          },
+          Object {
+            "borderRadius": 12,
           },
         ]
       }
