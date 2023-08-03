@@ -78,7 +78,7 @@ export type Props = IconProps & {
 };
 
 /**
- * An icon component which renders icon from vector library
+ * An icon component which renders icon from vector library.
  *
  * ## Usage
  * ```js
@@ -95,8 +95,6 @@ export type Props = IconProps & {
  *
  * export default MyComponent;
  * ```
- *
- * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
 
 const Icon = ({
