@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { Avatar, Icon, List, MD2Colors, MD3Colors } from 'react-native-paper';
+import { Avatar, List, MD2Colors, MD3Colors } from 'react-native-paper';
 
 import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
@@ -10,7 +10,6 @@ const AvatarExample = () => {
   const { isV3 } = useExampleTheme();
   return (
     <ScreenWrapper>
-      <Icon color={'red'} source={'camera'} size={20} />
       <List.Section title="Text">
         <View style={styles.row}>
           <Avatar.Text
