@@ -9,7 +9,7 @@ type Props = {
   /**
    * Icon to display for the `CrossFadeIcon`.
    */
-  source: IconSource;
+  icon: IconSource;
   /**
    * Color of the icon.
    */
@@ -31,14 +31,12 @@ type Props = {
 const CrossFadeIcon = ({
   color,
   size,
-  source,
+  icon,
   theme: themeOverrides,
   testID = 'cross-fade-icon',
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const [currentIcon, setCurrentIcon] = React.useState<IconSource>(
-    () => source
-  );
+  const [currentIcon, setCurrentIcon] = React.useState<IconSource>(() => icon);
   const [previousIcon, setPreviousIcon] = React.useState<IconSource | null>(
     null
   );
@@ -46,9 +44,9 @@ const CrossFadeIcon = ({
 
   const { scale } = theme.animation;
 
-  if (currentIcon !== source) {
+  if (currentIcon !== icon) {
     setPreviousIcon(() => currentIcon);
-    setCurrentIcon(() => source);
+    setCurrentIcon(() => icon);
   }
 
   React.useEffect(() => {
@@ -104,7 +102,7 @@ const CrossFadeIcon = ({
           ]}
           testID={`${testID}-previous`}
         >
-          <Icon source={previousIcon} size={size} color={color} theme={theme} />
+          <Icon icon={previousIcon} size={size} color={color} theme={theme} />
         </Animated.View>
       ) : null}
       <Animated.View
@@ -117,7 +115,7 @@ const CrossFadeIcon = ({
         ]}
         testID={`${testID}-current`}
       >
-        <Icon source={currentIcon} size={size} color={color} theme={theme} />
+        <Icon icon={currentIcon} size={size} color={color} theme={theme} />
       </Animated.View>
     </View>
   );

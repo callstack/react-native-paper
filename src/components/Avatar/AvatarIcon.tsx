@@ -70,7 +70,7 @@ const Avatar = ({
       ]}
       {...rest}
     >
-      <Icon source={icon} color={textColor} size={size * 0.6} />
+      <Icon icon={icon} color={textColor} size={size * 0.6} />
     </View>
   );
 };

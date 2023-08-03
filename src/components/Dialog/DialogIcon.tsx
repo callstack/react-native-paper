@@ -79,7 +79,7 @@ const DialogIcon = ({
 
   return (
     <View style={styles.wrapper}>
-      <Icon source={icon} color={iconColor} size={size} />
+      <Icon icon={icon} color={iconColor} size={size} />
     </View>
   );
 };

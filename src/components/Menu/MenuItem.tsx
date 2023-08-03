@@ -174,7 +174,7 @@ const MenuItem = ({
             style={[!isV3 && styles.item, { width: iconWidth }]}
             pointerEvents="box-none"
           >
-            <Icon source={leadingIcon} size={24} color={iconColor} />
+            <Icon icon={leadingIcon} size={24} color={iconColor} />
           </View>
         ) : null}
         <View
@@ -206,7 +206,7 @@ const MenuItem = ({
             style={[!isV3 && styles.item, { width: iconWidth }]}
             pointerEvents="box-none"
           >
-            <Icon source={trailingIcon} size={24} color={iconColor} />
+            <Icon icon={trailingIcon} size={24} color={iconColor} />
           </View>
         ) : null}
       </View>

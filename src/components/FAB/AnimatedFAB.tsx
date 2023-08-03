@@ -450,7 +450,7 @@ const AnimatedFAB = ({
         style={[styles.iconWrapper, combinedStyles.iconWrapper]}
         pointerEvents="none"
       >
-        <Icon source={icon} size={24} color={foregroundColor} theme={theme} />
+        <Icon icon={icon} size={24} color={foregroundColor} theme={theme} />
       </Animated.View>
 
       <View pointerEvents="none">

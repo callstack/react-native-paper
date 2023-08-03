@@ -296,7 +296,7 @@ const FAB = forwardRef<View, Props>(
           >
             {icon && loading !== true ? (
               <IconComponent
-                source={icon}
+                icon={icon}
                 size={customSize ? customSize / 2 : iconSize}
                 color={foregroundColor}
               />

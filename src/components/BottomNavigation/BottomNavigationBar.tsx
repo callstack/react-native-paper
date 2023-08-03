@@ -805,7 +805,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                         })
                       ) : (
                         <Icon
-                          source={route.focusedIcon as IconSource}
+                          icon={route.focusedIcon as IconSource}
                           color={activeTintColor}
                           size={24}
                         />
@@ -828,7 +828,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                         })
                       ) : (
                         <Icon
-                          source={
+                          icon={
                             theme.isV3 && route.unfocusedIcon !== undefined
                               ? route.unfocusedIcon
                               : (route.focusedIcon as IconSource)

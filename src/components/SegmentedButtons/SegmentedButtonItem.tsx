@@ -211,12 +211,12 @@ const SegmentedButtonItem = ({
               testID={`${testID}-check-icon`}
               style={[iconStyle, { transform: [{ scale: checkScale }] }]}
             >
-              <Icon source={'check'} size={iconSize} color={textColor} />
+              <Icon icon={'check'} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
           {showIcon ? (
             <Animated.View testID={`${testID}-icon`} style={iconStyle}>
-              <Icon source={icon} size={iconSize} color={textColor} />
+              <Icon icon={icon} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
           <Text

@@ -212,7 +212,7 @@ const Banner = ({
           <View style={styles.content}>
             {icon ? (
               <View style={styles.icon}>
-                <Icon source={icon} size={40} />
+                <Icon icon={icon} size={40} />
               </View>
             ) : null}
             <Text

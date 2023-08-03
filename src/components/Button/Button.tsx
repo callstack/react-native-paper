@@ -318,7 +318,7 @@ const Button = ({
           {icon && loading !== true ? (
             <View style={iconStyle} testID={`${testID}-icon-container`}>
               <Icon
-                source={icon}
+                icon={icon}
                 size={customLabelSize ?? iconSize}
                 color={
                   typeof customLabelColor === 'string'

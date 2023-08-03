@@ -192,7 +192,7 @@ const IconButton = forwardRef<View, Props>(
           testID={testID}
           {...rest}
         >
-          <IconComponent color={iconColor} source={icon} size={size} />
+          <IconComponent color={iconColor} icon={icon} size={size} />
         </TouchableRipple>
       </Surface>
     );

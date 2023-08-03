@@ -11,11 +11,11 @@ import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 import { accessibilityProps } from './MaterialCommunityIcon';
 
-type IconSourceBase = string | ImageSourcePropType;
+type IconBase = string | ImageSourcePropType;
 
 export type IconSource =
-  | IconSourceBase
-  | Readonly<{ source: IconSourceBase; direction: 'rtl' | 'ltr' | 'auto' }>
+  | IconBase
+  | Readonly<{ icon: IconBase; direction: 'rtl' | 'ltr' | 'auto' }>
   | ((props: IconProps & { color: string }) => React.ReactNode);
 
 type IconProps = {
@@ -26,37 +26,35 @@ type IconProps = {
   allowFontScaling?: boolean;
 };
 
-const isImageSource = (source: any) =>
-  // source is an object with uri
-  (typeof source === 'object' &&
-    source !== null &&
-    Object.prototype.hasOwnProperty.call(source, 'uri') &&
-    typeof source.uri === 'string') ||
-  // source is a module, e.g. - require('image')
-  typeof source === 'number' ||
+const isImageIcon = (icon: any) =>
+  // icon is an object with uri
+  (typeof icon === 'object' &&
+    icon !== null &&
+    Object.prototype.hasOwnProperty.call(icon, 'uri') &&
+    typeof icon.uri === 'string') ||
+  // icon is a module, e.g. - require('image')
+  typeof icon === 'number' ||
   // image url on web
   (Platform.OS === 'web' &&
-    typeof source === 'string' &&
-    (source.startsWith('data:image') ||
-      /\.(bmp|jpg|jpeg|png|gif|svg)$/.test(source)));
+    typeof icon === 'string' &&
+    (icon.startsWith('data:image') ||
+      /\.(bmp|jpg|jpeg|png|gif|svg)$/.test(icon)));
 
-const getIconId = (source: any) => {
+const getIconId = (icon: any) => {
   if (
-    typeof source === 'object' &&
-    source !== null &&
-    Object.prototype.hasOwnProperty.call(source, 'uri') &&
-    typeof source.uri === 'string'
+    typeof icon === 'object' &&
+    icon !== null &&
+    Object.prototype.hasOwnProperty.call(icon, 'uri') &&
+    typeof icon.uri === 'string'
   ) {
-    return source.uri;
+    return icon.uri;
   }
 
-  return source;
+  return icon;
 };
 
-export const isValidIcon = (source: any) =>
-  typeof source === 'string' ||
-  typeof source === 'function' ||
-  isImageSource(source);
+export const isValidIcon = (icon: any) =>
+  typeof icon === 'string' || typeof icon === 'function' || isImageIcon(icon);
 
 export const isEqualIcon = (a: any, b: any) =>
   a === b || getIconId(a) === getIconId(b);
@@ -65,7 +63,7 @@ export type Props = IconProps & {
   /**
    * Icon to display.
    */
-  source: any;
+  icon: any;
   /**
    *
    * Color of the icon.
@@ -87,7 +85,7 @@ export type Props = IconProps & {
  *
  * const MyComponent = () => (
  *   <Icon
- *     source="camera"
+ *     icon="camera"
  *     color={MD3Colors.error50}
  *     size={20}
  *   />
@@ -99,35 +97,27 @@ export type Props = IconProps & {
  * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
 
-const Icon = ({
-  source,
-  color,
-  size,
-  theme: themeOverrides,
-  ...rest
-}: Props) => {
+const Icon = ({ icon, color, size, theme: themeOverrides, ...rest }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const direction =
-    typeof source === 'object' && source.direction && source.source
-      ? source.direction === 'auto'
+    typeof icon === 'object' && icon.direction && icon.icon
+      ? icon.direction === 'auto'
         ? I18nManager.getConstants().isRTL
           ? 'rtl'
           : 'ltr'
-        : source.direction
+        : icon.direction
       : null;
 
-  const s =
-    typeof source === 'object' && source.direction && source.source
-      ? source.source
-      : source;
+  const i =
+    typeof icon === 'object' && icon.direction && icon.icon ? icon.icon : icon;
   const iconColor =
     color || (theme.isV3 ? theme.colors.onSurface : theme.colors.text);
 
-  if (isImageSource(s)) {
+  if (isImageIcon(i)) {
     return (
       <Image
         {...rest}
-        source={s}
+        source={i}
         style={[
           {
             transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
@@ -143,12 +133,12 @@ const Icon = ({
         accessibilityIgnoresInvertColors
       />
     );
-  } else if (typeof s === 'string') {
+  } else if (typeof i === 'string') {
     return (
       <SettingsConsumer>
         {({ icon }) => {
           return icon?.({
-            name: s,
+            name: i,
             color: iconColor,
             size,
             direction,
@@ -156,8 +146,8 @@ const Icon = ({
         }}
       </SettingsConsumer>
     );
-  } else if (typeof s === 'function') {
-    return s({ color: iconColor, size, direction });
+  } else if (typeof i === 'function') {
+    return i({ color: iconColor, size, direction });
   }
 
   return null;

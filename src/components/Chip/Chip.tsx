@@ -336,7 +336,7 @@ const Chip = ({
             >
               {icon ? (
                 <Icon
-                  source={icon}
+                  icon={icon}
                   color={
                     avatar
                       ? white
@@ -388,7 +388,7 @@ const Chip = ({
               ]}
             >
               {closeIcon ? (
-                <Icon source={closeIcon} color={iconColor} size={iconSize} />
+                <Icon icon={closeIcon} color={iconColor} size={iconSize} />
               ) : (
                 <MaterialCommunityIcon
                   name={isV3 ? 'close' : 'close-circle'}

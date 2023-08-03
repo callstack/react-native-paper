@@ -208,7 +208,7 @@ const DrawerCollapsedItem = ({
                 )}
               </View>
             )}
-            <Icon source={icon} size={iconSize} color={iconColor} />
+            <Icon icon={icon} size={iconSize} color={iconColor} />
           </View>
 
           {label ? (

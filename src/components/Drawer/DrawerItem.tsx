@@ -125,9 +125,7 @@ const DrawerItem = ({
       >
         <View style={[styles.wrapper, isV3 && styles.v3Wrapper]}>
           <View style={styles.content}>
-            {icon ? (
-              <Icon source={icon} size={24} color={contentColor} />
-            ) : null}
+            {icon ? <Icon icon={icon} size={24} color={contentColor} /> : null}
             <Text
               variant="labelLarge"
               selectable={false}

@@ -48,7 +48,7 @@ it('renders visible banner, without action buttons and with image', () => {
   const tree = render(
     <Banner
       visible
-      icon={({ size }) => (
+      icon={({ size }: { size: number }) => (
         <Image
           source={{ uri: 'https://callstack.com/images/team/Satya.png' }}
           style={{ width: size, height: size }}
@@ -68,7 +68,7 @@ it('renders visible banner, with action buttons and with image', () => {
   const tree = render(
     <Banner
       visible
-      icon={({ size }) => (
+      icon={({ size }: { size: number }) => (
         <Image
           source={{ uri: 'https://callstack.com/images/team/Satya.png' }}
           style={{ width: size, height: size }}
