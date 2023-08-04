@@ -11,6 +11,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import color from 'color';
 import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../../core/theming';
@@ -372,29 +373,29 @@ const TextInputFlat = ({
           />
         ) : null}
         {render?.({
-          testID,
           ...rest,
           ref: innerRef,
           onChangeText,
           placeholder: label ? parentState.placeholder : rest.placeholder,
-          placeholderTextColor: placeholderTextColor ?? placeholderColor,
           editable: !disabled && editable,
           selectionColor:
             typeof selectionColor === 'undefined'
-              ? activeColor
+              ? color(activeColor).alpha(0.54).rgb().string()
               : selectionColor,
           cursorColor:
             typeof cursorColor === 'undefined' ? activeColor : cursorColor,
+          placeholderTextColor: placeholderTextColor ?? placeholderColor,
           onFocus,
           onBlur,
           underlineColorAndroid: 'transparent',
           multiline,
           style: [
             styles.input,
-            { paddingLeft, paddingRight },
             !multiline || (multiline && height) ? { height: flatHeight } : {},
             paddingFlat,
             {
+              paddingLeft,
+              paddingRight,
               ...font,
               fontSize,
               lineHeight,
@@ -411,6 +412,7 @@ const TextInputFlat = ({
             adornmentStyleAdjustmentForNativeInput,
             contentStyle,
           ],
+          testID,
         })}
       </View>
       <TextInputAdornment {...adornmentProps} />

@@ -11,6 +11,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import color from 'color';
+
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
 import TextInputAdornment, {
   getAdornmentConfig,
@@ -338,19 +340,18 @@ const TextInputOutlined = ({
             />
           ) : null}
           {render?.({
-            testID,
             ...rest,
             ref: innerRef,
             onChangeText,
             placeholder: label ? parentState.placeholder : rest.placeholder,
-            placeholderTextColor: placeholderTextColor || placeholderColor,
             editable: !disabled && editable,
             selectionColor:
               typeof selectionColor === 'undefined'
-                ? activeColor
+                ? color(activeColor).alpha(0.54).rgb().string()
                 : selectionColor,
             cursorColor:
               typeof cursorColor === 'undefined' ? activeColor : cursorColor,
+            placeholderTextColor: placeholderTextColor || placeholderColor,
             onFocus,
             onBlur,
             underlineColorAndroid: 'transparent',
@@ -379,6 +380,7 @@ const TextInputOutlined = ({
               adornmentStyleAdjustmentForNativeInput,
               contentStyle,
             ],
+            testID,
           } as RenderProps)}
         </View>
         <TextInputAdornment {...adornmentProps} />
