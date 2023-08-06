@@ -168,7 +168,7 @@ exports[`correctly applies a component as the text label 1`] = `
       onFocus={[Function]}
       placeholder=" "
       placeholderTextColor="rgba(73, 69, 79, 1)"
-      selectionColor="rgba(103, 80, 164, 0.54)"
+      selectionColor="rgba(103, 80, 164, 1)"
       style={
         Array [
           Object {
@@ -360,7 +360,7 @@ exports[`correctly applies cursorColor prop 1`] = `
       onFocus={[Function]}
       placeholder=" "
       placeholderTextColor="rgba(73, 69, 79, 1)"
-      selectionColor="rgba(103, 80, 164, 0.54)"
+      selectionColor="rgba(103, 80, 164, 1)"
       style={
         Array [
           Object {
@@ -552,7 +552,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
       onFocus={[Function]}
       placeholder=" "
       placeholderTextColor="rgba(73, 69, 79, 1)"
-      selectionColor="rgba(103, 80, 164, 0.54)"
+      selectionColor="rgba(103, 80, 164, 1)"
       style={
         Array [
           Object {
@@ -777,7 +777,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
         onFocus={[Function]}
         placeholder=" "
         placeholderTextColor="rgba(73, 69, 79, 1)"
-        selectionColor="rgba(103, 80, 164, 0.54)"
+        selectionColor="rgba(103, 80, 164, 1)"
         style={
           Array [
             Object {
@@ -970,7 +970,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
       onFocus={[Function]}
       placeholder=" "
       placeholderTextColor="rgba(73, 69, 79, 1)"
-      selectionColor="rgba(103, 80, 164, 0.54)"
+      selectionColor="rgba(103, 80, 164, 1)"
       style={
         Array [
           Object {
@@ -1164,7 +1164,7 @@ exports[`correctly applies textAlign center 1`] = `
       onFocus={[Function]}
       placeholder=" "
       placeholderTextColor="rgba(73, 69, 79, 1)"
-      selectionColor="rgba(103, 80, 164, 0.54)"
+      selectionColor="rgba(103, 80, 164, 1)"
       style={
         Array [
           Object {
@@ -1356,7 +1356,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
       onFocus={[Function]}
       placeholder=" "
       placeholderTextColor="rgba(73, 69, 79, 1)"
-      selectionColor="rgba(103, 80, 164, 0.54)"
+      selectionColor="rgba(103, 80, 164, 1)"
       style={
         Array [
           Object {
@@ -1738,7 +1738,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       onFocus={[Function]}
       placeholder=" "
       placeholderTextColor="rgba(73, 69, 79, 1)"
-      selectionColor="rgba(103, 80, 164, 0.54)"
+      selectionColor="rgba(103, 80, 164, 1)"
       style={
         Array [
           Object {

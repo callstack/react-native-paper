@@ -1,20 +1,14 @@
 import * as React from 'react';
 import {
-  Animated,
   I18nManager,
   Platform,
-  StyleProp,
   StyleSheet,
   TextInput as NativeTextInput,
   TextStyle,
   View,
-  ViewStyle,
 } from 'react-native';
 
-import color from 'color';
-import type { ThemeProp } from 'src/types';
-
-import { useInternalTheme } from '../../core/theming';
+import { Underline } from './Addons/Underline';
 import { AdornmentSide, AdornmentType, InputMode } from './Adornment/enums';
 import TextInputAdornment, {
   TextInputAdornmentProps,
@@ -52,7 +46,7 @@ const TextInputFlat = ({
   editable = true,
   label,
   error = false,
-  selectionColor,
+  selectionColor: customSelectionColor,
   cursorColor,
   underlineColor,
   underlineStyle,
@@ -144,9 +138,11 @@ const TextInputFlat = ({
     placeholderColor,
     errorColor,
     backgroundColor,
+    selectionColor,
   } = getFlatInputColors({
     underlineColor,
     activeUnderlineColor,
+    customSelectionColor,
     textColor,
     disabled,
     error,
@@ -378,10 +374,7 @@ const TextInputFlat = ({
           onChangeText,
           placeholder: label ? parentState.placeholder : rest.placeholder,
           editable: !disabled && editable,
-          selectionColor:
-            typeof selectionColor === 'undefined'
-              ? color(activeColor).alpha(0.54).rgb().string()
-              : selectionColor,
+          selectionColor,
           cursorColor:
             typeof cursorColor === 'undefined' ? activeColor : cursorColor,
           placeholderTextColor: placeholderTextColor ?? placeholderColor,
@@ -422,79 +415,10 @@ const TextInputFlat = ({
 
 export default TextInputFlat;
 
-type UnderlineProps = {
-  parentState: {
-    focused: boolean;
-  };
-  error?: boolean;
-  colors?: {
-    error?: string;
-  };
-  activeColor: string;
-  underlineColorCustom?: string;
-  hasActiveOutline?: boolean;
-  style?: StyleProp<ViewStyle>;
-  theme?: ThemeProp;
-};
-
-const Underline = ({
-  parentState,
-  error,
-  colors,
-  activeColor,
-  underlineColorCustom,
-  hasActiveOutline,
-  style,
-  theme: themeOverrides,
-}: UnderlineProps) => {
-  const { isV3 } = useInternalTheme(themeOverrides);
-
-  let backgroundColor = parentState.focused
-    ? activeColor
-    : underlineColorCustom;
-
-  if (error) backgroundColor = colors?.error;
-
-  const activeScale = isV3 ? 2 : 1;
-
-  return (
-    <Animated.View
-      testID="text-input-underline"
-      style={[
-        styles.underline,
-        isV3 && styles.md3Underline,
-        {
-          backgroundColor,
-          // Underlines is thinner when input is not focused
-          transform: [
-            {
-              scaleY: (isV3 ? hasActiveOutline : parentState.focused)
-                ? activeScale
-                : 0.5,
-            },
-          ],
-        },
-        style,
-      ]}
-    />
-  );
-};
-
 const styles = StyleSheet.create({
   placeholder: {
     position: 'absolute',
     left: 0,
-  },
-  underline: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: 2,
-    zIndex: 1,
-  },
-  md3Underline: {
-    height: 1,
   },
   labelContainer: {
     paddingTop: 0,

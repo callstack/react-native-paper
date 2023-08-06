@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 import color from 'color';
 
 import type { InternalTheme } from '../../types';
@@ -389,6 +391,24 @@ const getPlaceholderColor = ({ theme, disabled }: BaseProps) => {
   return theme.colors.placeholder;
 };
 
+const getSelectionColor = ({
+  activeColor,
+  customSelectionColor,
+}: {
+  activeColor: string;
+  customSelectionColor?: string;
+}) => {
+  if (typeof customSelectionColor !== 'undefined') {
+    return customSelectionColor;
+  }
+
+  if (Platform.OS === 'android') {
+    return color(activeColor).alpha(0.54).rgb().string();
+  }
+
+  return activeColor;
+};
+
 const getFlatBackgroundColor = ({ theme, disabled }: BaseProps) => {
   if (theme.isV3) {
     if (disabled) {
@@ -465,6 +485,7 @@ const getOutlinedOutlineInputColor = ({
 export const getFlatInputColors = ({
   underlineColor,
   activeUnderlineColor,
+  customSelectionColor,
   textColor,
   disabled,
   error,
@@ -472,29 +493,33 @@ export const getFlatInputColors = ({
 }: {
   underlineColor?: string;
   activeUnderlineColor?: string;
+  customSelectionColor?: string;
   textColor?: string;
   disabled?: boolean;
   error?: boolean;
   theme: InternalTheme;
 }) => {
   const baseFlatColorProps = { theme, disabled };
+  const activeColor = getActiveColor({
+    ...baseFlatColorProps,
+    error,
+    activeUnderlineColor,
+    mode: 'flat',
+  });
+
   return {
     inputTextColor: getInputTextColor({
       ...baseFlatColorProps,
       textColor,
       mode: 'flat',
     }),
-    activeColor: getActiveColor({
-      ...baseFlatColorProps,
-      error,
-      activeUnderlineColor,
-      mode: 'flat',
-    }),
+    activeColor,
     underlineColorCustom: getFlatUnderlineColor({
       ...baseFlatColorProps,
       underlineColor,
     }),
     placeholderColor: getPlaceholderColor(baseFlatColorProps),
+    selectionColor: getSelectionColor({ activeColor, customSelectionColor }),
     errorColor: theme.colors.error,
     backgroundColor: getFlatBackgroundColor(baseFlatColorProps),
   };
@@ -503,6 +528,7 @@ export const getFlatInputColors = ({
 export const getOutlinedInputColors = ({
   activeOutlineColor,
   customOutlineColor,
+  customSelectionColor,
   textColor,
   disabled,
   error,
@@ -510,12 +536,19 @@ export const getOutlinedInputColors = ({
 }: {
   activeOutlineColor?: string;
   customOutlineColor?: string;
+  customSelectionColor?: string;
   textColor?: string;
   disabled?: boolean;
   error?: boolean;
   theme: InternalTheme;
 }) => {
   const baseOutlinedColorProps = { theme, disabled };
+  const activeColor = getActiveColor({
+    ...baseOutlinedColorProps,
+    error,
+    activeOutlineColor,
+    mode: 'outlined',
+  });
 
   return {
     inputTextColor: getInputTextColor({
@@ -523,17 +556,13 @@ export const getOutlinedInputColors = ({
       textColor,
       mode: 'outlined',
     }),
-    activeColor: getActiveColor({
-      ...baseOutlinedColorProps,
-      error,
-      activeOutlineColor,
-      mode: 'outlined',
-    }),
+    activeColor,
     outlineColor: getOutlinedOutlineInputColor({
       ...baseOutlinedColorProps,
       customOutlineColor,
     }),
     placeholderColor: getPlaceholderColor(baseOutlinedColorProps),
+    selectionColor: getSelectionColor({ activeColor, customSelectionColor }),
     errorColor: theme.colors.error,
   };
 };
