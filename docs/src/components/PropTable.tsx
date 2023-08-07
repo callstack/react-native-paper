@@ -17,8 +17,6 @@ const typeDefinitions = {
   'StyleProp<TextStyle>': 'https://reactnative.dev/docs/text-style-props',
 };
 
-const ANNOTATION_OPTIONAL = '@optional';
-const ANNOTATION_INTERNAL = '@internal';
 const ANNOTATION_EXTENDS = '@extends';
 
 const renderBadge = (annotation: string) => {
@@ -60,8 +58,14 @@ const renderExtendsLink = (description: string) => {
   ));
 };
 
-export default function PropTable({ link }: { link: string }) {
-  const doc = useDoc(link);
+export default function PropTable({
+  componentLink,
+  prop,
+}: {
+  componentLink: string;
+  prop: string;
+}) {
+  const doc = useDoc(componentLink);
 
   if (!doc || !doc.data || !doc.data.props) {
     return null;
@@ -69,33 +73,16 @@ export default function PropTable({ link }: { link: string }) {
 
   const props = doc.data.props;
 
-  for (const prop in props) {
-    if (!props[prop].description) {
-      props[prop].description = '';
-    }
-
-    // Remove @optional annotations from descriptions.
-    if (props[prop].description.includes(ANNOTATION_OPTIONAL)) {
-      props[prop].description = props[prop].description.replace(
-        ANNOTATION_OPTIONAL,
-        ''
-      );
-    }
-    // Hide props with @internal annotations.
-    if (props[prop].description.includes(ANNOTATION_INTERNAL)) {
-      delete props[prop];
-    }
-  }
-
   return (
     <div>
       {Object.keys(props).map((key) => {
-        let leadingBadge = '';
+        if (key !== prop) {
+          return null;
+        }
         let descriptionByLines = props[key].description.split('\n');
 
-        // Find leading badge and put it next after prop name.
+        // Slice leading badge - it's handled in `generatePageMDX`
         if (descriptionByLines[0].includes('@')) {
-          leadingBadge = descriptionByLines[0];
           descriptionByLines = descriptionByLines.slice(1);
         }
         descriptionByLines = descriptionByLines.map((line: string) => {
@@ -116,16 +103,6 @@ export default function PropTable({ link }: { link: string }) {
 
         return (
           <div key={key}>
-            <h3>
-              {key} {props[key].required ? '(required)' : ''}
-              {leadingBadge && (
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: renderBadge(leadingBadge),
-                  }}
-                />
-              )}
-            </h3>
             <p>
               Type:{' '}
               {tsTypeLink ? (
