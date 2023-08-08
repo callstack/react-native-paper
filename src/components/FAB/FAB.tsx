@@ -133,6 +133,9 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * TestID used for testing purposes
+   */
   testID?: string;
   ref?: React.RefObject<View>;
 } & IconOrLabel;

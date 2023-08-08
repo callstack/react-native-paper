@@ -187,6 +187,17 @@ html[data-theme='light'] .gallery-dark {
   src: url('../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf') format('truetype');
 }
 
+.badge:is(a .badge) {
+  padding: 0px;
+  height: 8px;
+  width: 8px;
+  border-radius: 4px;
+}
+
+a .badge .badge-text {
+  display: none;
+}
+
 .badge {
   background-color: black;
   color: white;
@@ -215,7 +226,6 @@ html[data-theme='light'] .gallery-dark {
   color: rgba(176, 0, 32, 1);
   background-color: rgba(176, 0, 32, 0.2);
   border-color: rgba(176, 0, 32, 1);
-
 }
 
 .badge-renamed {
