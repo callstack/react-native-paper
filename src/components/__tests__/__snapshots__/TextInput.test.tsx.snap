@@ -175,10 +175,6 @@ exports[`correctly applies a component as the text label 1`] = `
             "margin": 0,
           },
           Object {
-            "paddingLeft": 16,
-            "paddingRight": 16,
-          },
-          Object {
             "height": 56,
           },
           Object {
@@ -192,6 +188,8 @@ exports[`correctly applies a component as the text label 1`] = `
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": undefined,
+            "paddingLeft": 16,
+            "paddingRight": 16,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
@@ -369,10 +367,6 @@ exports[`correctly applies cursorColor prop 1`] = `
             "margin": 0,
           },
           Object {
-            "paddingLeft": 16,
-            "paddingRight": 16,
-          },
-          Object {
             "height": 56,
           },
           Object {
@@ -386,6 +380,8 @@ exports[`correctly applies cursorColor prop 1`] = `
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": undefined,
+            "paddingLeft": 16,
+            "paddingRight": 16,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
@@ -563,10 +559,6 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "margin": 0,
           },
           Object {
-            "paddingLeft": 16,
-            "paddingRight": 16,
-          },
-          Object {
             "height": 56,
           },
           Object {
@@ -580,6 +572,8 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": undefined,
+            "paddingLeft": 16,
+            "paddingRight": 16,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
@@ -983,10 +977,6 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
             "margin": 0,
           },
           Object {
-            "paddingLeft": 16,
-            "paddingRight": 16,
-          },
-          Object {
             "height": 56,
           },
           Object {
@@ -1000,6 +990,8 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": undefined,
+            "paddingLeft": 16,
+            "paddingRight": 16,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
@@ -1179,10 +1171,6 @@ exports[`correctly applies textAlign center 1`] = `
             "margin": 0,
           },
           Object {
-            "paddingLeft": 16,
-            "paddingRight": 16,
-          },
-          Object {
             "height": 56,
           },
           Object {
@@ -1196,6 +1184,8 @@ exports[`correctly applies textAlign center 1`] = `
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": undefined,
+            "paddingLeft": 16,
+            "paddingRight": 16,
             "textAlign": "center",
             "textAlignVertical": "center",
           },
@@ -1373,10 +1363,6 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "margin": 0,
           },
           Object {
-            "paddingLeft": 16,
-            "paddingRight": 56,
-          },
-          Object {
             "height": 56,
           },
           Object {
@@ -1390,6 +1376,8 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": undefined,
+            "paddingLeft": 16,
+            "paddingRight": 56,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
@@ -1757,10 +1745,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "margin": 0,
           },
           Object {
-            "paddingLeft": 56,
-            "paddingRight": 56,
-          },
-          Object {
             "height": 56,
           },
           Object {
@@ -1774,6 +1758,8 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": undefined,
+            "paddingLeft": 56,
+            "paddingRight": 56,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
