@@ -25,6 +25,12 @@ type AdditionalColorPickerProps = ColorProps & {
 
 type ColorPickerProps = ColorProps & { additional?: boolean };
 
+type CustomColorEntry = {
+  key: string;
+  name: string;
+  hex: string;
+};
+
 const defaultColor = '#663399';
 
 const colorPalette = [
@@ -174,41 +180,48 @@ const CodePreview = ({
   );
 };
 
+let uniqColorKey = 0;
+
 const CustomColors = ({
   customColors,
   setCustomColors,
 }: {
-  customColors: [string, string][];
-  setCustomColors: React.Dispatch<React.SetStateAction<[string, string][]>>;
+  customColors: CustomColorEntry[];
+  setCustomColors: React.Dispatch<React.SetStateAction<CustomColorEntry[]>>;
 }) => {
   const addCustomColor = () => {
-    const newName = `custom${customColors.length}`;
-    setCustomColors((colors) => [...colors, [newName, defaultColor]]);
+    const newColor = {
+      key: `custom${++uniqColorKey}`,
+      name: `custom${customColors.length}`,
+      hex: defaultColor,
+    };
+    setCustomColors((colors) => [...colors, newColor]);
   };
 
-  const setCustomColor = (index: number, hex: string) => {
+  const setCustomColor = (key: string, hex: string) => {
     setCustomColors((colors) =>
-      colors.map((color, i) => (i === index ? [color[0], hex] : color))
+      colors.map((color) => (color.key === key ? { ...color, hex } : color))
     );
   };
 
-  const setCustomName = (index: number, name: string) => {
+  const setCustomName = (key: string, name: string) => {
     setCustomColors((colors) =>
-      colors.map((color, i) => (i === index ? [name, color[1]] : color))
+      colors.map((color) => (color.key === key ? { ...color, name } : color))
     );
   };
 
-  const deleteCustomColor = (index: number) =>
-    setCustomColors((colors) => colors.filter((_c, i) => i !== index));
+  const deleteCustomColor = (key: string) =>
+    setCustomColors((colors) => colors.filter((color) => key !== color.key));
 
   return (
     <>
-      {customColors.map(([name, color], index) => (
+      {customColors.map(({ key, name, hex }, index) => (
         <CustomColor
-          key={`${index}${color}`}
+          key={key}
+          uniqKey={key}
           name={name}
           index={index}
-          color={color}
+          color={hex}
           setCustomColor={setCustomColor}
           deleteCustomColor={deleteCustomColor}
           setCustomName={setCustomName}
@@ -233,22 +246,24 @@ const CustomColor = ({
   name,
   color,
   index,
+  uniqKey,
   setCustomColor,
   deleteCustomColor,
   setCustomName,
 }: {
   name: string;
   color: string;
+  uniqKey: string;
   index: number;
-  setCustomColor: (index: number, hex: string) => void;
-  deleteCustomColor: (index: number) => void;
-  setCustomName: (index: number, name: string) => void;
+  setCustomColor: (key: string, hex: string) => void;
+  deleteCustomColor: (key: string) => void;
+  setCustomName: (key: string, name: string) => void;
 }) => {
   // const [colorName, setColorName] = useState<string>(name);
 
   const onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    setCustomName(index, event.target.value);
+    setCustomName(uniqKey, event.target.value);
   };
 
   if (name) {
@@ -265,12 +280,12 @@ const CustomColor = ({
         <td>
           <ColorPicker
             color={color}
-            setColor={(hex) => setCustomColor(index, hex)}
+            setColor={(hex) => setCustomColor(uniqKey, hex)}
             additional
           />
           <button
             className="color-picker-button-cancel"
-            onClick={() => deleteCustomColor(index)}
+            onClick={() => deleteCustomColor(uniqKey)}
           >
             ✕
           </button>
@@ -290,7 +305,7 @@ const CustomColor = ({
         />
         <button
           className="color-picker-button-cancel"
-          onClick={() => deleteCustomColor(index)}
+          onClick={() => deleteCustomColor(uniqKey)}
         >
           ✕
         </button>
@@ -305,7 +320,7 @@ const DynamicColorTheme = () => {
   const [primary, setPrimary] = useState<string>(defaultColor);
   const [secondary, setSecondary] = useState<string | undefined>();
   const [tertiary, setTertiary] = useState<string | undefined>();
-  const [customColors, setCustomColors] = useState<[string, string][]>([]);
+  const [customColors, setCustomColors] = useState<CustomColorEntry[]>([]);
 
   const darkMode = isDark ? 'dark' : 'light';
   const baseTheme = hexThemeFromColor(primary);
@@ -313,7 +328,7 @@ const DynamicColorTheme = () => {
     primary,
     secondary,
     tertiary,
-    custom: customColors,
+    custom: customColors.map(({ name, hex }) => [name, hex]),
   });
 
   return (
