@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import type { InternalTheme, MD3TypescaleKey } from '../../types';
+import type { ThemeProp, MD3TypescaleKey } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import RadioButton from './RadioButton';
@@ -79,7 +79,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme?: InternalTheme;
+  theme?: ThemeProp;
   /**
    * testID to be used on tests.
    */
