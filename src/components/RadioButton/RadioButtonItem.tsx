@@ -135,7 +135,14 @@ const RadioButtonItem = ({
   labelVariant = 'bodyLarge',
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const radioButtonProps = { value, disabled, status, color, uncheckedColor };
+  const radioButtonProps = {
+    value,
+    disabled,
+    status,
+    color,
+    theme,
+    uncheckedColor,
+  };
   const isLeading = position === 'leading';
   let radioButton: any;
 
