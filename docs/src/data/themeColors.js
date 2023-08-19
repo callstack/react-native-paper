@@ -302,7 +302,6 @@ const themeColors = {
     },
     unchecked: {
       '-': {
-        backgroundColor: 'transparent',
         textColor: 'theme.colors.onSurface',
         borderColor: 'theme.colors.outline',
       },
