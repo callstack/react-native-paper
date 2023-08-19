@@ -12,6 +12,8 @@ This wraps the [`BottomNavigation`](https://callstack.github.io/react-native-pap
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](https://reactnavigation.org/docs/getting-started):
 :::
 
+> For a complete example please visit `createMaterialBottomTabNavigator` [snack](https://snack.expo.dev/@react-native-paper/creatematerialbottomtabnavigator)
+
 ## API Definition
 
 To use this tab navigator, import it from `react-native-paper/react-navigation`:
@@ -106,6 +108,10 @@ If you have a translucent navigation bar on Android, you can also set a bottom p
   {/* ... */}
 </Tab.Navigator>
 ```
+
+#### `theme`
+
+Enables the customization of default theme attributes (e.g. colors) or facilitates the utilization of a personalized custom theme.
 
 ### Options
 
