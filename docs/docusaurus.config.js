@@ -78,8 +78,6 @@ const config = {
           BottomNavigation: {
             BottomNavigation: 'BottomNavigation/BottomNavigation',
             BottomNavigationBar: 'BottomNavigation/BottomNavigationBar',
-            createMaterialBottomTabNavigator:
-              '../react-navigation/navigators/createMaterialBottomTabNavigator',
           },
           Button: {
             Button: 'Button/Button',
@@ -247,7 +245,7 @@ const config = {
             type: 'doc',
             docId: 'guides/getting-started',
             position: 'left',
-            label: 'Docs',
+            label: 'Guides',
           },
           {
             type: 'doc',
