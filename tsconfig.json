@@ -4,6 +4,9 @@
     "paths": {
       "react-native-paper": [
         "./src/index"
+      ],
+      "react-native-paper/react-navigation": [
+        "./src/react-navigation"
       ]
     },
     "allowUnreachableCode": false,
