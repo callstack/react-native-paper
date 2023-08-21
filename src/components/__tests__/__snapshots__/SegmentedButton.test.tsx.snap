@@ -1,553 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders checked segmented button with selected check 1`] = `
-<View
-  style={
-    Array [
-      Object {
-        "flexDirection": "row",
-      },
-      undefined,
-    ]
-  }
->
-  <View
-    style={
-      Array [
-        Object {
-          "backgroundColor": "rgba(232, 222, 248, 1)",
-          "borderBottomRightRadius": 0,
-          "borderColor": "rgba(121, 116, 126, 1)",
-          "borderRadius": 20,
-          "borderRightWidth": 0,
-          "borderTopRightRadius": 0,
-          "borderWidth": 1,
-        },
-        Object {
-          "borderStyle": "solid",
-          "flex": 1,
-          "minWidth": 76,
-        },
-        Array [
-          undefined,
-          Object {
-            "borderRightWidth": 1,
-          },
-        ],
-      ]
-    }
-  >
-    <View
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "checked": true,
-          "disabled": false,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Object {
-            "borderBottomRightRadius": 0,
-            "borderRadius": 20,
-            "borderRightWidth": 0,
-            "borderTopRightRadius": 0,
-          },
-        ]
-      }
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-              "paddingHorizontal": 16,
-              "paddingVertical": 9,
-            },
-            Object {
-              "paddingVertical": 9,
-            },
-          ]
-        }
-      >
-        <View
-          collapsable={false}
-          style={
-            Object {
-              "marginRight": 3,
-              "transform": Array [
-                Object {
-                  "scale": 0,
-                },
-              ],
-            }
-          }
-          testID="undefined-check-icon"
-        >
-          <Text
-            accessibilityElementsHidden={true}
-            allowFontScaling={false}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
-            style={
-              Array [
-                Object {
-                  "color": "rgba(29, 25, 43, 1)",
-                  "fontSize": 18,
-                },
-                Array [
-                  Object {
-                    "lineHeight": 18,
-                    "transform": Array [
-                      Object {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  Object {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-                Object {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                Object {},
-              ]
-            }
-          >
-            󰄬
-          </Text>
-        </View>
-        <Text
-          numberOfLines={1}
-          selectable={false}
-          style={
-            Array [
-              Object {
-                "textAlign": "left",
-              },
-              Object {
-                "color": "rgba(28, 27, 31, 1)",
-                "writingDirection": "ltr",
-              },
-              Array [
-                Object {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
-                },
-                Array [
-                  Object {
-                    "textAlign": "center",
-                  },
-                  Object {
-                    "color": "rgba(29, 25, 43, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  undefined,
-                ],
-              ],
-            ]
-          }
-          testID="undefined-label"
-        />
-      </View>
-    </View>
-  </View>
-  <View
-    style={
-      Array [
-        Object {
-          "backgroundColor": "transparent",
-          "borderBottomLeftRadius": 0,
-          "borderColor": "rgba(28, 27, 31, 0.12)",
-          "borderRadius": 20,
-          "borderTopLeftRadius": 0,
-          "borderWidth": 1,
-        },
-        Object {
-          "borderStyle": "solid",
-          "flex": 1,
-          "minWidth": 76,
-        },
-        Array [
-          undefined,
-          Object {},
-        ],
-      ]
-    }
-  >
-    <View
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "checked": false,
-          "disabled": true,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Object {
-            "borderBottomLeftRadius": 0,
-            "borderRadius": 20,
-            "borderTopLeftRadius": 0,
-          },
-        ]
-      }
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-              "paddingHorizontal": 16,
-              "paddingVertical": 9,
-            },
-            Object {
-              "paddingVertical": 9,
-            },
-          ]
-        }
-      >
-        <Text
-          numberOfLines={1}
-          selectable={false}
-          style={
-            Array [
-              Object {
-                "textAlign": "left",
-              },
-              Object {
-                "color": "rgba(28, 27, 31, 1)",
-                "writingDirection": "ltr",
-              },
-              Array [
-                Object {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
-                },
-                Array [
-                  Object {
-                    "textAlign": "center",
-                  },
-                  Object {
-                    "color": "rgba(28, 27, 31, 0.38)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  undefined,
-                ],
-              ],
-            ]
-          }
-          testID="undefined-label"
-        />
-      </View>
-    </View>
-  </View>
-</View>
-`;
-
-exports[`renders disabled segmented button 1`] = `
-<View
-  style={
-    Array [
-      Object {
-        "flexDirection": "row",
-      },
-      undefined,
-    ]
-  }
->
-  <View
-    style={
-      Array [
-        Object {
-          "backgroundColor": "rgba(232, 222, 248, 1)",
-          "borderBottomRightRadius": 0,
-          "borderColor": "rgba(121, 116, 126, 1)",
-          "borderRadius": 20,
-          "borderRightWidth": 0,
-          "borderTopRightRadius": 0,
-          "borderWidth": 1,
-        },
-        Object {
-          "borderStyle": "solid",
-          "flex": 1,
-          "minWidth": 76,
-        },
-        Array [
-          undefined,
-          Object {
-            "borderRightWidth": 1,
-          },
-        ],
-      ]
-    }
-  >
-    <View
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "checked": true,
-          "disabled": false,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Object {
-            "borderBottomRightRadius": 0,
-            "borderRadius": 20,
-            "borderRightWidth": 0,
-            "borderTopRightRadius": 0,
-          },
-        ]
-      }
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-              "paddingHorizontal": 16,
-              "paddingVertical": 9,
-            },
-            Object {
-              "paddingVertical": 9,
-            },
-          ]
-        }
-      >
-        <Text
-          numberOfLines={1}
-          selectable={false}
-          style={
-            Array [
-              Object {
-                "textAlign": "left",
-              },
-              Object {
-                "color": "rgba(28, 27, 31, 1)",
-                "writingDirection": "ltr",
-              },
-              Array [
-                Object {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
-                },
-                Array [
-                  Object {
-                    "textAlign": "center",
-                  },
-                  Object {
-                    "color": "rgba(29, 25, 43, 1)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  undefined,
-                ],
-              ],
-            ]
-          }
-          testID="undefined-label"
-        />
-      </View>
-    </View>
-  </View>
-  <View
-    style={
-      Array [
-        Object {
-          "backgroundColor": "transparent",
-          "borderBottomLeftRadius": 0,
-          "borderColor": "rgba(28, 27, 31, 0.12)",
-          "borderRadius": 20,
-          "borderTopLeftRadius": 0,
-          "borderWidth": 1,
-        },
-        Object {
-          "borderStyle": "solid",
-          "flex": 1,
-          "minWidth": 76,
-        },
-        Array [
-          undefined,
-          Object {},
-        ],
-      ]
-    }
-  >
-    <View
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "checked": false,
-          "disabled": true,
-        }
-      }
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      style={
-        Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Object {
-            "borderBottomLeftRadius": 0,
-            "borderRadius": 20,
-            "borderTopLeftRadius": 0,
-          },
-        ]
-      }
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "center",
-              "paddingHorizontal": 16,
-              "paddingVertical": 9,
-            },
-            Object {
-              "paddingVertical": 9,
-            },
-          ]
-        }
-      >
-        <Text
-          numberOfLines={1}
-          selectable={false}
-          style={
-            Array [
-              Object {
-                "textAlign": "left",
-              },
-              Object {
-                "color": "rgba(28, 27, 31, 1)",
-                "writingDirection": "ltr",
-              },
-              Array [
-                Object {
-                  "fontFamily": "System",
-                  "fontSize": 14,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.1,
-                  "lineHeight": 20,
-                },
-                Array [
-                  Object {
-                    "textAlign": "center",
-                  },
-                  Object {
-                    "color": "rgba(28, 27, 31, 0.38)",
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  undefined,
-                ],
-              ],
-            ]
-          }
-          testID="undefined-label"
-        />
-      </View>
-    </View>
-  </View>
-</View>
-`;
-
 exports[`renders segmented button 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "flexDirection": "row",
       },
       undefined,
@@ -556,8 +13,8 @@ exports[`renders segmented button 1`] = `
 >
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "backgroundColor": "rgba(232, 222, 248, 1)",
           "borderBottomRightRadius": 0,
           "borderColor": "rgba(121, 116, 126, 1)",
@@ -566,14 +23,14 @@ exports[`renders segmented button 1`] = `
           "borderTopRightRadius": 0,
           "borderWidth": 1,
         },
-        Object {
+        {
           "borderStyle": "solid",
           "flex": 1,
           "minWidth": 76,
         },
-        Array [
+        [
           undefined,
-          Object {},
+          {},
         ],
       ]
     }
@@ -581,9 +38,20 @@ exports[`renders segmented button 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
           "checked": true,
           "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -599,11 +67,11 @@ exports[`renders segmented button 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderBottomRightRadius": 0,
             "borderRadius": 20,
             "borderRightWidth": 0,
@@ -614,15 +82,15 @@ exports[`renders segmented button 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
               "paddingHorizontal": 16,
               "paddingVertical": 9,
             },
-            Object {
+            {
               "paddingVertical": 9,
             },
           ]
@@ -632,27 +100,27 @@ exports[`renders segmented button 1`] = `
           numberOfLines={1}
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "textAlign": "left",
               },
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
-              Array [
-                Object {
+              [
+                {
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "textAlign": "center",
                   },
-                  Object {
+                  {
                     "color": "rgba(29, 25, 43, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,
@@ -672,8 +140,8 @@ exports[`renders segmented button 1`] = `
   </View>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "backgroundColor": "transparent",
           "borderBottomLeftRadius": 0,
           "borderColor": "rgba(121, 116, 126, 1)",
@@ -681,14 +149,14 @@ exports[`renders segmented button 1`] = `
           "borderTopLeftRadius": 0,
           "borderWidth": 1,
         },
-        Object {
+        {
           "borderStyle": "solid",
           "flex": 1,
           "minWidth": 76,
         },
-        Array [
+        [
           undefined,
-          Object {},
+          {},
         ],
       ]
     }
@@ -696,9 +164,20 @@ exports[`renders segmented button 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
           "checked": false,
           "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -714,11 +193,11 @@ exports[`renders segmented button 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderBottomLeftRadius": 0,
             "borderRadius": 20,
             "borderTopLeftRadius": 0,
@@ -728,15 +207,15 @@ exports[`renders segmented button 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
               "paddingHorizontal": 16,
               "paddingVertical": 9,
             },
-            Object {
+            {
               "paddingVertical": 9,
             },
           ]
@@ -746,27 +225,27 @@ exports[`renders segmented button 1`] = `
           numberOfLines={1}
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "textAlign": "left",
               },
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
-              Array [
-                Object {
+              [
+                {
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "textAlign": "center",
                   },
-                  Object {
+                  {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,

@@ -13,14 +13,14 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { ListAccordionGroupContext } from './ListAccordionGroup';
+import type { Style } from './utils';
+import { getAccordionColors, getLeftStyles } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { ListAccordionGroupContext } from './ListAccordionGroup';
-import type { Style } from './utils';
-import { getAccordionColors, getLeftStyles } from './utils';
 
 export type Props = {
   /**

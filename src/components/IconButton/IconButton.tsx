@@ -9,6 +9,7 @@ import {
   ColorValue,
 } from 'react-native';
 
+import { getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
@@ -16,7 +17,6 @@ import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { getIconButtonColor } from './utils';
 
 const PADDING = 8;
 

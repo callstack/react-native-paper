@@ -13,13 +13,13 @@ import {
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import FAB from './FAB';
+import { getFABGroupColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import Card from '../Card/Card';
 import type { IconSource } from '../Icon';
 import Text from '../Typography/Text';
-import FAB from './FAB';
-import { getFABGroupColors } from './utils';
 
 export type Props = {
   /**

@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { Appearance, AccessibilityInfo, View } from 'react-native';
+import {
+  Appearance,
+  AccessibilityInfo,
+  View,
+  ColorSchemeName,
+} from 'react-native';
 
 import { render, act } from '@testing-library/react-native';
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
@@ -25,6 +30,11 @@ declare module 'react-native' {
   }
 
   namespace Appearance {
+    //@ts-ignore
+    // eslint-disable-next-line jest/no-export
+    export type AppearancePreferences = {
+      colorScheme: ColorSchemeName;
+    };
     // eslint-disable-next-line jest/no-export
     export const __internalListeners: Array<
       (options: { colorScheme: 'dark' }) => {}

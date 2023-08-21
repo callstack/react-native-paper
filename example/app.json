@@ -5,7 +5,6 @@
     "slug": "react-native-paper-example",
     "privacy": "public",
     "version": "3.9.0",
-    "entryPoint": "App.js",
     "orientation": "default",
     "primaryColor": "#6200EE",
     "userInterfaceStyle": "automatic",

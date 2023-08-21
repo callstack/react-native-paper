@@ -43,7 +43,7 @@ const CustomControl = ({
   const { isV3 } = useExampleTheme();
 
   const _renderItem = React.useCallback(
-    ({ item }: ListRenderItemInfo<typeof options[number]>) => {
+    ({ item }: ListRenderItemInfo<(typeof options)[number]>) => {
       const TextComponent = isV3 ? Text : Paragraph;
 
       return (
@@ -65,7 +65,7 @@ const CustomControl = ({
   );
 
   const _keyExtractor = React.useCallback(
-    (item: typeof options[number]) => item,
+    (item: (typeof options)[number]) => item,
     []
   );
   const TextComponent = isV3 ? Text : Paragraph;

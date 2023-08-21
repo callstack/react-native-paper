@@ -13,12 +13,12 @@ import {
 
 import useLatestCallback from 'use-latest-callback';
 
+import BottomNavigationBar from './BottomNavigationBar';
+import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import type { IconSource } from '../Icon';
-import BottomNavigationBar from './BottomNavigationBar';
-import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 
 type BaseRoute = {
   key: string;

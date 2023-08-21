@@ -16,15 +16,15 @@ import {
 
 import color from 'color';
 
-import { useInternalTheme } from '../core/theming';
-import type { ThemeProp } from '../types';
-import { forwardRef } from '../utils/forwardRef';
 import ActivityIndicator from './ActivityIndicator';
 import Divider from './Divider';
 import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
+import { useInternalTheme } from '../core/theming';
+import type { ThemeProp } from '../types';
+import { forwardRef } from '../utils/forwardRef';
 
 interface Style {
   marginRight: number;

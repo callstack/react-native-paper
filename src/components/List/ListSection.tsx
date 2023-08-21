@@ -7,9 +7,9 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import ListSubheader from './ListSubheader';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import ListSubheader from './ListSubheader';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**

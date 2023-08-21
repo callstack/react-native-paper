@@ -15,6 +15,7 @@ import {
 
 import useLatestCallback from 'use-latest-callback';
 
+import { getChipColors } from './helpers';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
@@ -25,7 +26,6 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { getChipColors } from './helpers';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**

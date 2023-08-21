@@ -8,13 +8,13 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { getIconColor } from './utils';
 import { useInternalTheme } from '../../../core/theming';
 import type { $Omit, ThemeProp } from '../../../types';
 import type { IconSource } from '../../Icon';
 import IconButton from '../../IconButton/IconButton';
 import { ICON_SIZE } from '../constants';
 import { getConstants } from '../helpers';
-import { getIconColor } from './utils';
 
 export type Props = $Omit<
   React.ComponentProps<typeof IconButton>,

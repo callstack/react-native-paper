@@ -13,11 +13,11 @@ import {
 
 import color from 'color';
 
+import { modeTextVariant } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 import type { $RemoveChildren, MD3TypescaleKey, ThemeProp } from '../../types';
 import Text, { TextRef } from '../Typography/Text';
-import { modeTextVariant } from './utils';
 
 type TitleString = {
   title: string;

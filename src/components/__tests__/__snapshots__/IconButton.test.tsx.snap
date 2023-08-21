@@ -4,13 +4,13 @@ exports[`renders disabled icon button 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "transparent",
       "borderRadius": 20,
       "height": 40,
       "margin": 6,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
@@ -24,7 +24,7 @@ exports[`renders disabled icon button 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "transparent",
         "borderColor": "rgba(28, 27, 31, 0.12)",
         "borderRadius": 20,
@@ -33,7 +33,7 @@ exports[`renders disabled icon button 1`] = `
         "flex": 1,
         "overflow": "hidden",
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -47,22 +47,34 @@ exports[`renders disabled icon button 1`] = `
       accessibilityComponentType="button"
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
         }
       }
       accessibilityTraits={
-        Array [
+        [
           "button",
           "disabled",
         ]
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
       }
       accessible={true}
       centered={true}
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 6,
           "left": 6,
           "right": 6,
@@ -79,17 +91,17 @@ exports[`renders disabled icon button 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 20,
             },
           ],
@@ -104,30 +116,30 @@ exports[`renders disabled icon button 1`] = `
         pointerEvents="none"
         selectable={false}
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "rgba(28, 27, 31, 0.38)",
               "fontSize": 24,
             },
-            Array [
-              Object {
+            [
+              {
                 "lineHeight": 24,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "scaleX": 1,
                   },
                 ],
               },
-              Object {
+              {
                 "backgroundColor": "transparent",
               },
             ],
-            Object {
+            {
               "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -142,13 +154,13 @@ exports[`renders icon button by default 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "transparent",
       "borderRadius": 20,
       "height": 40,
       "margin": 6,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
@@ -162,7 +174,7 @@ exports[`renders icon button by default 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "transparent",
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 20,
@@ -171,7 +183,7 @@ exports[`renders icon button by default 1`] = `
         "flex": 1,
         "overflow": "hidden",
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -185,17 +197,29 @@ exports[`renders icon button by default 1`] = `
       accessibilityComponentType="button"
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
         }
       }
       accessibilityTraits="button"
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       centered={true}
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 6,
           "left": 6,
           "right": 6,
@@ -212,17 +236,17 @@ exports[`renders icon button by default 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 20,
             },
           ],
@@ -237,30 +261,30 @@ exports[`renders icon button by default 1`] = `
         pointerEvents="none"
         selectable={false}
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "rgba(73, 69, 79, 1)",
               "fontSize": 24,
             },
-            Array [
-              Object {
+            [
+              {
                 "lineHeight": 24,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "scaleX": 1,
                   },
                 ],
               },
-              Object {
+              {
                 "backgroundColor": "transparent",
               },
             ],
-            Object {
+            {
               "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -275,13 +299,13 @@ exports[`renders icon button with color 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "transparent",
       "borderRadius": 20,
       "height": 40,
       "margin": 6,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
@@ -295,7 +319,7 @@ exports[`renders icon button with color 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "transparent",
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 20,
@@ -304,7 +328,7 @@ exports[`renders icon button with color 1`] = `
         "flex": 1,
         "overflow": "hidden",
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -318,17 +342,29 @@ exports[`renders icon button with color 1`] = `
       accessibilityComponentType="button"
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
         }
       }
       accessibilityTraits="button"
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       centered={true}
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 6,
           "left": 6,
           "right": 6,
@@ -345,17 +381,17 @@ exports[`renders icon button with color 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 20,
             },
           ],
@@ -370,30 +406,30 @@ exports[`renders icon button with color 1`] = `
         pointerEvents="none"
         selectable={false}
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "#e91e63",
               "fontSize": 24,
             },
-            Array [
-              Object {
+            [
+              {
                 "lineHeight": 24,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "scaleX": 1,
                   },
                 ],
               },
-              Object {
+              {
                 "backgroundColor": "transparent",
               },
             ],
-            Object {
+            {
               "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -408,13 +444,13 @@ exports[`renders icon button with size 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "transparent",
       "borderRadius": 23,
       "height": 46,
       "margin": 6,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
@@ -428,7 +464,7 @@ exports[`renders icon button with size 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "transparent",
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 23,
@@ -437,7 +473,7 @@ exports[`renders icon button with size 1`] = `
         "flex": 1,
         "overflow": "hidden",
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -451,17 +487,29 @@ exports[`renders icon button with size 1`] = `
       accessibilityComponentType="button"
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
         }
       }
       accessibilityTraits="button"
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       centered={true}
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 6,
           "left": 6,
           "right": 6,
@@ -478,17 +526,17 @@ exports[`renders icon button with size 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 23,
             },
           ],
@@ -503,30 +551,30 @@ exports[`renders icon button with size 1`] = `
         pointerEvents="none"
         selectable={false}
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "rgba(73, 69, 79, 1)",
               "fontSize": 30,
             },
-            Array [
-              Object {
+            [
+              {
                 "lineHeight": 30,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "scaleX": 1,
                   },
                 ],
               },
-              Object {
+              {
                 "backgroundColor": "transparent",
               },
             ],
-            Object {
+            {
               "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -541,13 +589,13 @@ exports[`renders icon change animated 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "transparent",
       "borderRadius": 20,
       "height": 40,
       "margin": 6,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
@@ -561,7 +609,7 @@ exports[`renders icon change animated 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "transparent",
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 20,
@@ -570,7 +618,7 @@ exports[`renders icon change animated 1`] = `
         "flex": 1,
         "overflow": "hidden",
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -584,17 +632,29 @@ exports[`renders icon change animated 1`] = `
       accessibilityComponentType="button"
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
         }
       }
       accessibilityTraits="button"
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       centered={true}
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 6,
           "left": 6,
           "right": 6,
@@ -611,17 +671,17 @@ exports[`renders icon change animated 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 20,
             },
           ],
@@ -631,12 +691,12 @@ exports[`renders icon change animated 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "justifyContent": "center",
             },
-            Object {
+            {
               "height": 24,
               "width": 24,
             },
@@ -646,15 +706,15 @@ exports[`renders icon change animated 1`] = `
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "bottom": 0,
               "left": 0,
               "opacity": 1,
               "position": "absolute",
               "right": 0,
               "top": 0,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "rotate": "0deg",
                 },
               ],
@@ -669,30 +729,30 @@ exports[`renders icon change animated 1`] = `
             pointerEvents="none"
             selectable={false}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "lineHeight": 24,
-                    "transform": Array [
-                      Object {
+                    "transform": [
+                      {
                         "scaleX": 1,
                       },
                     ],
                   },
-                  Object {
+                  {
                     "backgroundColor": "transparent",
                   },
                 ],
-                Object {
+                {
                   "fontFamily": "Material Design Icons",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
-                Object {},
+                {},
               ]
             }
           >

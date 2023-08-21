@@ -118,7 +118,11 @@ describe('CardCover', () => {
   it('renders with custom border radius', () => {
     const { getByTestId } = render(
       <Card>
-        <Card.Cover testID="card-cover" style={styles.customCoverRadius} />
+        <Card.Cover
+          source={{ uri: 'https://picsum.photos/700' }}
+          testID="card-cover"
+          style={styles.customCoverRadius}
+        />
       </Card>
     );
 

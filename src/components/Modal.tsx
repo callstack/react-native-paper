@@ -13,11 +13,11 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useLatestCallback from 'use-latest-callback';
 
+import Surface from './Surface';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 import { addEventListener } from '../utils/addEventListener';
 import useAnimatedValue from '../utils/useAnimatedValue';
-import Surface from './Surface';
 
 export type Props = {
   /**

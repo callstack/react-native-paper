@@ -3,29 +3,29 @@
 exports[`renders caption applying style 1`] = `
 <Text
   style={
-    Array [
-      Object {
+    [
+      {
         "color": "rgba(28, 27, 31, 1)",
       },
-      Object {
+      {
         "textAlign": "left",
       },
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 0.54)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "fontSize": 12,
             "letterSpacing": 0.4,
             "lineHeight": 20,
             "marginVertical": 2,
           },
-          Object {
+          {
             "color": "#f44336",
             "fontSize": 20,
           },
@@ -41,23 +41,23 @@ exports[`renders caption applying style 1`] = `
 exports[`renders caption with children as content 1`] = `
 <Text
   style={
-    Array [
-      Object {
+    [
+      {
         "color": "rgba(28, 27, 31, 1)",
       },
-      Object {
+      {
         "textAlign": "left",
       },
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 0.54)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "fontSize": 12,
             "letterSpacing": 0.4,
             "lineHeight": 20,

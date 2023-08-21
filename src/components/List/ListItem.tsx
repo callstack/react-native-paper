@@ -12,11 +12,11 @@ import {
 
 import color from 'color';
 
+import { Style, getLeftStyles, getRightStyles } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, EllipsizeProp, ThemeProp } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { Style, getLeftStyles, getRightStyles } from './utils';
 
 type Title =
   | React.ReactNode

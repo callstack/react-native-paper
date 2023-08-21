@@ -8,7 +8,10 @@ const touchableEvents = [
 ] as const;
 
 type TouchableEventObject = Partial<
-  Record<typeof touchableEvents[number], (event: GestureResponderEvent) => void>
+  Record<
+    (typeof touchableEvents)[number],
+    (event: GestureResponderEvent) => void
+  >
 >;
 
 export default function hasTouchHandler(

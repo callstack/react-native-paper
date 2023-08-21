@@ -4,14 +4,14 @@ exports[`renders colored indicator 1`] = `
 <View
   accessibilityRole="progressbar"
   accessibilityState={
-    Object {
+    {
       "busy": true,
     }
   }
   accessible={true}
   style={
-    Array [
-      Object {
+    [
+      {
         "alignItems": "center",
         "justifyContent": "center",
       },
@@ -22,7 +22,7 @@ exports[`renders colored indicator 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "height": 24,
         "opacity": 1,
         "width": 24,
@@ -32,7 +32,7 @@ exports[`renders colored indicator 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "alignItems": "center",
           "bottom": 0,
           "justifyContent": "center",
@@ -46,10 +46,10 @@ exports[`renders colored indicator 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "height": 24,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "rotate": "45deg",
               },
             ],
@@ -60,7 +60,7 @@ exports[`renders colored indicator 1`] = `
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "height": 12,
               "overflow": "hidden",
               "width": 24,
@@ -70,13 +70,13 @@ exports[`renders colored indicator 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "height": 24,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "translateY": 0,
                   },
-                  Object {
+                  {
                     "rotate": "-165deg",
                   },
                 ],
@@ -87,7 +87,7 @@ exports[`renders colored indicator 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "height": 12,
                   "overflow": "hidden",
                   "width": 24,
@@ -97,7 +97,7 @@ exports[`renders colored indicator 1`] = `
               <View
                 collapsable={false}
                 style={
-                  Object {
+                  {
                     "borderColor": "#FF0000",
                     "borderRadius": 12,
                     "borderWidth": 2.4,
@@ -114,7 +114,7 @@ exports[`renders colored indicator 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "alignItems": "center",
           "bottom": 0,
           "justifyContent": "center",
@@ -128,10 +128,10 @@ exports[`renders colored indicator 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "height": 24,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "rotate": "45deg",
               },
             ],
@@ -142,7 +142,7 @@ exports[`renders colored indicator 1`] = `
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "height": 12,
               "overflow": "hidden",
               "top": 12,
@@ -153,13 +153,13 @@ exports[`renders colored indicator 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "height": 24,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "translateY": -12,
                   },
-                  Object {
+                  {
                     "rotate": "345deg",
                   },
                 ],
@@ -170,7 +170,7 @@ exports[`renders colored indicator 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "height": 12,
                   "overflow": "hidden",
                   "width": 24,
@@ -180,7 +180,7 @@ exports[`renders colored indicator 1`] = `
               <View
                 collapsable={false}
                 style={
-                  Object {
+                  {
                     "borderColor": "#FF0000",
                     "borderRadius": 12,
                     "borderWidth": 2.4,
@@ -202,14 +202,14 @@ exports[`renders hidden indicator 1`] = `
 <View
   accessibilityRole="progressbar"
   accessibilityState={
-    Object {
+    {
       "busy": false,
     }
   }
   accessible={true}
   style={
-    Array [
-      Object {
+    [
+      {
         "alignItems": "center",
         "justifyContent": "center",
       },
@@ -220,7 +220,7 @@ exports[`renders hidden indicator 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "height": 24,
         "opacity": 0,
         "width": 24,
@@ -230,7 +230,7 @@ exports[`renders hidden indicator 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "alignItems": "center",
           "bottom": 0,
           "justifyContent": "center",
@@ -244,10 +244,10 @@ exports[`renders hidden indicator 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "height": 24,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "rotate": "45deg",
               },
             ],
@@ -258,7 +258,7 @@ exports[`renders hidden indicator 1`] = `
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "height": 12,
               "overflow": "hidden",
               "width": 24,
@@ -268,13 +268,13 @@ exports[`renders hidden indicator 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "height": 24,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "translateY": 0,
                   },
-                  Object {
+                  {
                     "rotate": "-165deg",
                   },
                 ],
@@ -285,7 +285,7 @@ exports[`renders hidden indicator 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "height": 12,
                   "overflow": "hidden",
                   "width": 24,
@@ -295,7 +295,7 @@ exports[`renders hidden indicator 1`] = `
               <View
                 collapsable={false}
                 style={
-                  Object {
+                  {
                     "borderColor": "rgba(103, 80, 164, 1)",
                     "borderRadius": 12,
                     "borderWidth": 2.4,
@@ -312,7 +312,7 @@ exports[`renders hidden indicator 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "alignItems": "center",
           "bottom": 0,
           "justifyContent": "center",
@@ -326,10 +326,10 @@ exports[`renders hidden indicator 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "height": 24,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "rotate": "45deg",
               },
             ],
@@ -340,7 +340,7 @@ exports[`renders hidden indicator 1`] = `
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "height": 12,
               "overflow": "hidden",
               "top": 12,
@@ -351,13 +351,13 @@ exports[`renders hidden indicator 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "height": 24,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "translateY": -12,
                   },
-                  Object {
+                  {
                     "rotate": "345deg",
                   },
                 ],
@@ -368,7 +368,7 @@ exports[`renders hidden indicator 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "height": 12,
                   "overflow": "hidden",
                   "width": 24,
@@ -378,7 +378,7 @@ exports[`renders hidden indicator 1`] = `
               <View
                 collapsable={false}
                 style={
-                  Object {
+                  {
                     "borderColor": "rgba(103, 80, 164, 1)",
                     "borderRadius": 12,
                     "borderWidth": 2.4,
@@ -400,14 +400,14 @@ exports[`renders indicator 1`] = `
 <View
   accessibilityRole="progressbar"
   accessibilityState={
-    Object {
+    {
       "busy": true,
     }
   }
   accessible={true}
   style={
-    Array [
-      Object {
+    [
+      {
         "alignItems": "center",
         "justifyContent": "center",
       },
@@ -418,7 +418,7 @@ exports[`renders indicator 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "height": 24,
         "opacity": 1,
         "width": 24,
@@ -428,7 +428,7 @@ exports[`renders indicator 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "alignItems": "center",
           "bottom": 0,
           "justifyContent": "center",
@@ -442,10 +442,10 @@ exports[`renders indicator 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "height": 24,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "rotate": "45deg",
               },
             ],
@@ -456,7 +456,7 @@ exports[`renders indicator 1`] = `
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "height": 12,
               "overflow": "hidden",
               "width": 24,
@@ -466,13 +466,13 @@ exports[`renders indicator 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "height": 24,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "translateY": 0,
                   },
-                  Object {
+                  {
                     "rotate": "-165deg",
                   },
                 ],
@@ -483,7 +483,7 @@ exports[`renders indicator 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "height": 12,
                   "overflow": "hidden",
                   "width": 24,
@@ -493,7 +493,7 @@ exports[`renders indicator 1`] = `
               <View
                 collapsable={false}
                 style={
-                  Object {
+                  {
                     "borderColor": "rgba(103, 80, 164, 1)",
                     "borderRadius": 12,
                     "borderWidth": 2.4,
@@ -510,7 +510,7 @@ exports[`renders indicator 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "alignItems": "center",
           "bottom": 0,
           "justifyContent": "center",
@@ -524,10 +524,10 @@ exports[`renders indicator 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "height": 24,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "rotate": "45deg",
               },
             ],
@@ -538,7 +538,7 @@ exports[`renders indicator 1`] = `
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "height": 12,
               "overflow": "hidden",
               "top": 12,
@@ -549,13 +549,13 @@ exports[`renders indicator 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "height": 24,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "translateY": -12,
                   },
-                  Object {
+                  {
                     "rotate": "345deg",
                   },
                 ],
@@ -566,7 +566,7 @@ exports[`renders indicator 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "height": 12,
                   "overflow": "hidden",
                   "width": 24,
@@ -576,7 +576,7 @@ exports[`renders indicator 1`] = `
               <View
                 collapsable={false}
                 style={
-                  Object {
+                  {
                     "borderColor": "rgba(103, 80, 164, 1)",
                     "borderRadius": 12,
                     "borderWidth": 2.4,
@@ -598,14 +598,14 @@ exports[`renders large indicator 1`] = `
 <View
   accessibilityRole="progressbar"
   accessibilityState={
-    Object {
+    {
       "busy": true,
     }
   }
   accessible={true}
   style={
-    Array [
-      Object {
+    [
+      {
         "alignItems": "center",
         "justifyContent": "center",
       },
@@ -616,7 +616,7 @@ exports[`renders large indicator 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "height": 48,
         "opacity": 1,
         "width": 48,
@@ -626,7 +626,7 @@ exports[`renders large indicator 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "alignItems": "center",
           "bottom": 0,
           "justifyContent": "center",
@@ -640,10 +640,10 @@ exports[`renders large indicator 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "height": 48,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "rotate": "45deg",
               },
             ],
@@ -654,7 +654,7 @@ exports[`renders large indicator 1`] = `
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "height": 24,
               "overflow": "hidden",
               "width": 48,
@@ -664,13 +664,13 @@ exports[`renders large indicator 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "height": 48,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "translateY": 0,
                   },
-                  Object {
+                  {
                     "rotate": "-165deg",
                   },
                 ],
@@ -681,7 +681,7 @@ exports[`renders large indicator 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "height": 24,
                   "overflow": "hidden",
                   "width": 48,
@@ -691,7 +691,7 @@ exports[`renders large indicator 1`] = `
               <View
                 collapsable={false}
                 style={
-                  Object {
+                  {
                     "borderColor": "rgba(103, 80, 164, 1)",
                     "borderRadius": 24,
                     "borderWidth": 4.8,
@@ -708,7 +708,7 @@ exports[`renders large indicator 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "alignItems": "center",
           "bottom": 0,
           "justifyContent": "center",
@@ -722,10 +722,10 @@ exports[`renders large indicator 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "height": 48,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "rotate": "45deg",
               },
             ],
@@ -736,7 +736,7 @@ exports[`renders large indicator 1`] = `
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "height": 24,
               "overflow": "hidden",
               "top": 24,
@@ -747,13 +747,13 @@ exports[`renders large indicator 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "height": 48,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "translateY": -24,
                   },
-                  Object {
+                  {
                     "rotate": "345deg",
                   },
                 ],
@@ -764,7 +764,7 @@ exports[`renders large indicator 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "height": 24,
                   "overflow": "hidden",
                   "width": 48,
@@ -774,7 +774,7 @@ exports[`renders large indicator 1`] = `
               <View
                 collapsable={false}
                 style={
-                  Object {
+                  {
                     "borderColor": "rgba(103, 80, 164, 1)",
                     "borderRadius": 24,
                     "borderWidth": 4.8,

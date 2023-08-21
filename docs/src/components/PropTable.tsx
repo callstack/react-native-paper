@@ -67,7 +67,7 @@ export default function PropTable({
 }) {
   const doc = useDoc(componentLink);
 
-  if (!doc || !doc.data || !doc.data.props) {
+  if (!doc?.data?.props) {
     return null;
   }
 

@@ -5,9 +5,20 @@ exports[`can render leading checkbox control 1`] = `
   accessibilityLabel="Default with leading control"
   accessibilityRole="checkbox"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
       "checked": false,
       "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -23,7 +34,7 @@ exports[`can render leading checkbox control 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
+    [
       false,
       undefined,
     ]
@@ -33,8 +44,8 @@ exports[`can render leading checkbox control 1`] = `
     importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -49,9 +60,20 @@ exports[`can render leading checkbox control 1`] = `
       accessibilityLiveRegion="polite"
       accessibilityRole="checkbox"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
           "checked": false,
           "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -67,11 +89,11 @@ exports[`can render leading checkbox control 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderRadius": 18,
             "padding": 6,
           },
@@ -80,7 +102,7 @@ exports[`can render leading checkbox control 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "opacity": 0,
           }
         }
@@ -92,30 +114,30 @@ exports[`can render leading checkbox control 1`] = `
           pointerEvents="none"
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
-              Array [
-                Object {
+              [
+                {
                   "lineHeight": 24,
-                  "transform": Array [
-                    Object {
+                  "transform": [
+                    {
                       "scaleX": 1,
                     },
                   ],
                 },
-                Object {
+                {
                   "backgroundColor": "transparent",
                 },
               ],
-              Object {
+              {
                 "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              Object {},
+              {},
             ]
           }
         >
@@ -126,29 +148,29 @@ exports[`can render leading checkbox control 1`] = `
     <Text
       maxFontSizeMultiplier={1.5}
       style={
-        Array [
-          Object {
+        [
+          {
             "textAlign": "left",
           },
-          Object {
+          {
             "color": "rgba(28, 27, 31, 1)",
             "writingDirection": "ltr",
           },
-          Array [
-            Object {
+          [
+            {
               "fontFamily": "System",
               "fontSize": 16,
               "fontWeight": "400",
               "letterSpacing": 0.15,
               "lineHeight": 24,
             },
-            Array [
-              Object {
+            [
+              {
                 "flexGrow": 1,
                 "flexShrink": 1,
               },
               false,
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "textAlign": "right",
               },
@@ -170,9 +192,20 @@ exports[`can render the Android checkbox on different platforms 1`] = `
   accessibilityLabel="iOS Checkbox"
   accessibilityRole="checkbox"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
       "checked": false,
       "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -188,7 +221,7 @@ exports[`can render the Android checkbox on different platforms 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
+    [
       false,
       undefined,
     ]
@@ -198,8 +231,8 @@ exports[`can render the Android checkbox on different platforms 1`] = `
     importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -213,29 +246,29 @@ exports[`can render the Android checkbox on different platforms 1`] = `
     <Text
       maxFontSizeMultiplier={1.5}
       style={
-        Array [
-          Object {
+        [
+          {
             "textAlign": "left",
           },
-          Object {
+          {
             "color": "rgba(28, 27, 31, 1)",
             "writingDirection": "ltr",
           },
-          Array [
-            Object {
+          [
+            {
               "fontFamily": "System",
               "fontSize": 16,
               "fontWeight": "400",
               "letterSpacing": 0.15,
               "lineHeight": 24,
             },
-            Array [
-              Object {
+            [
+              {
                 "flexGrow": 1,
                 "flexShrink": 1,
               },
               false,
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "textAlign": "left",
               },
@@ -252,9 +285,20 @@ exports[`can render the Android checkbox on different platforms 1`] = `
       accessibilityLiveRegion="polite"
       accessibilityRole="checkbox"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
           "checked": false,
           "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -270,11 +314,11 @@ exports[`can render the Android checkbox on different platforms 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderRadius": 18,
             "height": 36,
             "padding": 6,
@@ -286,9 +330,9 @@ exports[`can render the Android checkbox on different platforms 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
-            "transform": Array [
-              Object {
+          {
+            "transform": [
+              {
                 "scale": 1,
               },
             ],
@@ -302,30 +346,30 @@ exports[`can render the Android checkbox on different platforms 1`] = `
           pointerEvents="none"
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
-              Array [
-                Object {
+              [
+                {
                   "lineHeight": 24,
-                  "transform": Array [
-                    Object {
+                  "transform": [
+                    {
                       "scaleX": 1,
                     },
                   ],
                 },
-                Object {
+                {
                   "backgroundColor": "transparent",
                 },
               ],
-              Object {
+              {
                 "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              Object {},
+              {},
             ]
           }
         >
@@ -333,15 +377,15 @@ exports[`can render the Android checkbox on different platforms 1`] = `
         </Text>
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "bottom": 0,
                 "left": 0,
                 "position": "absolute",
                 "right": 0,
                 "top": 0,
               },
-              Object {
+              {
                 "alignItems": "center",
                 "justifyContent": "center",
               },
@@ -351,7 +395,7 @@ exports[`can render the Android checkbox on different platforms 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "borderColor": "rgba(73, 69, 79, 1)",
                 "borderWidth": 0,
                 "height": 14,
@@ -371,9 +415,20 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
   accessibilityLabel="iOS Checkbox"
   accessibilityRole="checkbox"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
       "checked": false,
       "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -389,7 +444,7 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
+    [
       false,
       undefined,
     ]
@@ -399,8 +454,8 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
     importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -414,29 +469,29 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
     <Text
       maxFontSizeMultiplier={1.5}
       style={
-        Array [
-          Object {
+        [
+          {
             "textAlign": "left",
           },
-          Object {
+          {
             "color": "rgba(28, 27, 31, 1)",
             "writingDirection": "ltr",
           },
-          Array [
-            Object {
+          [
+            {
               "fontFamily": "System",
               "fontSize": 16,
               "fontWeight": "400",
               "letterSpacing": 0.15,
               "lineHeight": 24,
             },
-            Array [
-              Object {
+            [
+              {
                 "flexGrow": 1,
                 "flexShrink": 1,
               },
               false,
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "textAlign": "left",
               },
@@ -453,9 +508,20 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
       accessibilityLiveRegion="polite"
       accessibilityRole="checkbox"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
           "checked": false,
           "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -471,11 +537,11 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderRadius": 18,
             "padding": 6,
           },
@@ -484,7 +550,7 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "opacity": 0,
           }
         }
@@ -496,30 +562,30 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
           pointerEvents="none"
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
-              Array [
-                Object {
+              [
+                {
                   "lineHeight": 24,
-                  "transform": Array [
-                    Object {
+                  "transform": [
+                    {
                       "scaleX": 1,
                     },
                   ],
                 },
-                Object {
+                {
                   "backgroundColor": "transparent",
                 },
               ],
-              Object {
+              {
                 "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              Object {},
+              {},
             ]
           }
         >
@@ -536,9 +602,20 @@ exports[`renders unchecked 1`] = `
   accessibilityLabel="Unchecked Button"
   accessibilityRole="checkbox"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
       "checked": false,
       "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -554,7 +631,7 @@ exports[`renders unchecked 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
+    [
       false,
       undefined,
     ]
@@ -564,8 +641,8 @@ exports[`renders unchecked 1`] = `
     importantForAccessibility="no-hide-descendants"
     pointerEvents="none"
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "flexDirection": "row",
           "justifyContent": "space-between",
@@ -579,29 +656,29 @@ exports[`renders unchecked 1`] = `
     <Text
       maxFontSizeMultiplier={1.5}
       style={
-        Array [
-          Object {
+        [
+          {
             "textAlign": "left",
           },
-          Object {
+          {
             "color": "rgba(28, 27, 31, 1)",
             "writingDirection": "ltr",
           },
-          Array [
-            Object {
+          [
+            {
               "fontFamily": "System",
               "fontSize": 16,
               "fontWeight": "400",
               "letterSpacing": 0.15,
               "lineHeight": 24,
             },
-            Array [
-              Object {
+            [
+              {
                 "flexGrow": 1,
                 "flexShrink": 1,
               },
               false,
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "textAlign": "left",
               },
@@ -618,9 +695,20 @@ exports[`renders unchecked 1`] = `
       accessibilityLiveRegion="polite"
       accessibilityRole="checkbox"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
           "checked": false,
           "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -636,11 +724,11 @@ exports[`renders unchecked 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          Object {
+          {
             "borderRadius": 18,
             "padding": 6,
           },
@@ -649,7 +737,7 @@ exports[`renders unchecked 1`] = `
     >
       <View
         style={
-          Object {
+          {
             "opacity": 0,
           }
         }
@@ -661,30 +749,30 @@ exports[`renders unchecked 1`] = `
           pointerEvents="none"
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "rgba(103, 80, 164, 1)",
                 "fontSize": 24,
               },
-              Array [
-                Object {
+              [
+                {
                   "lineHeight": 24,
-                  "transform": Array [
-                    Object {
+                  "transform": [
+                    {
                       "scaleX": 1,
                     },
                   ],
                 },
-                Object {
+                {
                   "backgroundColor": "transparent",
                 },
               ],
-              Object {
+              {
                 "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              Object {},
+              {},
             ]
           }
         >

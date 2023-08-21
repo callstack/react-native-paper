@@ -7,10 +7,10 @@ import {
   TextStyle,
 } from 'react-native';
 
+import { getTextColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
 import AnimatedText from '../Typography/AnimatedText';
-import { getTextColor } from './utils';
 
 export type Props = $Omit<
   $Omit<React.ComponentPropsWithRef<typeof AnimatedText>, 'padding'>,
