@@ -2,7 +2,7 @@ import * as React from 'react';
 import { GestureResponderEvent, StyleSheet, View } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, InternalTheme } from '../../types';
+import type { $RemoveChildren, ThemeProp } from '../../types';
 import { getSelectionControlIOSColor } from '../Checkbox/utils';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -33,7 +33,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme?: InternalTheme;
+  theme?: ThemeProp;
   /**
    * testID to be used on tests.
    */
