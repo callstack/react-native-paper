@@ -46,5 +46,8 @@
     "@babel/core": "^7.12.9",
     "babel-plugin-module-resolver": "^5.0.0",
     "babel-preset-expo": "^9.3.0"
+  },
+  "resolutions": {
+    "expo/expo-asset": "8.9.1"
   }
 }
