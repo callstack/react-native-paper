@@ -4,13 +4,13 @@ import Color from 'color';
 //@ts-ignore
 import { BlockPicker } from 'react-color';
 
+import Switch from './Switch';
 import {
   getMatchingColor,
   getPreviewColors,
   hexThemeFromColor,
   prepareThemes,
 } from '../utils/themes';
-import Switch from './Switch';
 
 type ColorProps = {
   color?: string;

@@ -13,7 +13,6 @@
     "allowUnusedLabels": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "importsNotUsedAsValues": "error",
     "jsx": "react",
     "lib": [
       "esnext",

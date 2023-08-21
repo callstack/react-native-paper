@@ -10,10 +10,10 @@ import {
 
 import type { ThemeProp } from 'src/types';
 
-import { useInternalTheme } from '../../core/theming';
-import type { IconSource } from '../Icon';
 import SegmentedButtonItem from './SegmentedButtonItem';
 import { getDisabledSegmentedButtonStyle } from './utils';
+import { useInternalTheme } from '../../core/theming';
+import type { IconSource } from '../Icon';
 
 type ConditionalValue =
   | {

@@ -11,18 +11,18 @@ import {
 
 import useLatestCallback from 'use-latest-callback';
 
+import CardActions from './CardActions';
+import CardContent from './CardContent';
+import CardCover from './CardCover';
+import CardTitle from './CardTitle';
+import { getCardColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { splitStyles } from '../../utils/splitStyles';
 import Surface from '../Surface';
-import CardActions from './CardActions';
-import CardContent from './CardContent';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import CardCover from './CardCover';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import CardTitle from './CardTitle';
-import { getCardColors } from './utils';
 
 type OutlinedCardProps = {
   mode: 'outlined';

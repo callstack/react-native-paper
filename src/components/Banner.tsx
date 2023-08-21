@@ -4,12 +4,12 @@ import type { LayoutChangeEvent } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
 
-import { useInternalTheme } from '../core/theming';
-import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
 import Button from './Button/Button';
 import Icon, { IconSource } from './Icon';
 import Surface from './Surface';
 import Text from './Typography/Text';
+import { useInternalTheme } from '../core/theming';
+import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
 
 const DEFAULT_MAX_WIDTH = 960;
 

@@ -10,17 +10,17 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import Icon, { IconSource } from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
 import {
   getContentMaxWidth,
   getMenuItemColor,
   MAX_WIDTH,
   MIN_WIDTH,
 } from './utils';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
+import Icon, { IconSource } from '../Icon';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
 
 export type Props = {
   /**

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Animated, I18nManager, StyleSheet, TextStyle } from 'react-native';
 
+import type { VariantProp } from './types';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import type { VariantProp } from './types';
 
 type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
   /**

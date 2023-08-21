@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native');
 
-  const timing: typeof Animated['timing'] = (value, config) => ({
+  const timing: (typeof Animated)['timing'] = (value, config) => ({
     start: (callback) => {
       value.setValue(config.toValue as any);
       callback?.({ finished: true });

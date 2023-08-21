@@ -21,13 +21,13 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import MenuItem from './MenuItem';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 import { withInternalTheme } from '../../core/theming';
 import type { $Omit, InternalTheme } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
-import MenuItem from './MenuItem';
 
 export type Props = {
   /**

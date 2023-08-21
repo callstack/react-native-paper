@@ -7,15 +7,15 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useInternalTheme } from '../../core/theming';
-import overlay from '../../styles/overlay';
-import type { ThemeProp } from '../../types';
-import Modal from '../Modal';
 import DialogActions from './DialogActions';
 import DialogContent from './DialogContent';
 import DialogIcon from './DialogIcon';
 import DialogScrollArea from './DialogScrollArea';
 import DialogTitle from './DialogTitle';
+import { useInternalTheme } from '../../core/theming';
+import overlay from '../../styles/overlay';
+import type { ThemeProp } from '../../types';
+import Modal from '../Modal';
 
 export type Props = {
   /**

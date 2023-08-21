@@ -6,13 +6,13 @@ import {
   NativeEventSubscription,
 } from 'react-native';
 
+import SafeAreaProviderCompat from './SafeAreaProviderCompat';
+import { Provider as SettingsProvider, Settings } from './settings';
+import { defaultThemesByVersion, ThemeProvider } from './theming';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
 import type { ThemeProp } from '../types';
 import { addEventListener } from '../utils/addEventListener';
-import SafeAreaProviderCompat from './SafeAreaProviderCompat';
-import { Provider as SettingsProvider, Settings } from './settings';
-import { defaultThemesByVersion, ThemeProvider } from './theming';
 
 export type Props = {
   children: React.ReactNode;
