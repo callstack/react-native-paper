@@ -11,6 +11,16 @@ export type IconProps = {
   allowFontScaling?: boolean;
 };
 
+type AccessibilityProps =
+  | {
+      role?: Role;
+      focusable?: boolean;
+    }
+  | {
+      accessibilityElementsHidden?: boolean;
+      importantForAccessibility?: 'auto' | 'yes' | 'no' | 'no-hide-descendants';
+    };
+
 let MaterialCommunityIcons: React.ComponentType<
   React.ComponentProps<
     typeof import('react-native-vector-icons/MaterialCommunityIcons').default
@@ -61,10 +71,10 @@ try {
   };
 }
 
-export const accessibilityProps =
+export const accessibilityProps: AccessibilityProps =
   Platform.OS === 'web'
     ? {
-        role: 'img' as Role,
+        role: 'img',
         focusable: false,
       }
     : {
