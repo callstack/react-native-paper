@@ -270,7 +270,8 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
   },
   content: {
-    flex: 1,
+    flexShrink: 1,
+    flexGrow: 1,
     justifyContent: 'center',
   },
 });
