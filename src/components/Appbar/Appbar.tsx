@@ -11,10 +11,7 @@ import {
 
 import color from 'color';
 
-import AppbarAction from './AppbarAction';
-import AppbarBackAction from './AppbarBackAction';
 import AppbarContent from './AppbarContent';
-import AppbarHeader from './AppbarHeader';
 import {
   AppbarModes,
   DEFAULT_APPBAR_HEIGHT,
@@ -287,14 +284,14 @@ const Appbar = ({
               children,
               isDark,
               isV3,
-              renderOnly: [AppbarBackAction],
+              renderOnly: ['Appbar.BackAction'],
               mode,
             })}
             {renderAppbarContent({
               children: filterAppbarActions(true),
               isDark,
               isV3,
-              renderOnly: [AppbarAction],
+              renderOnly: ['Appbar.Action'],
               mode,
             })}
             {/* Right side of row container, can contain other AppbarAction if they are not leading icons */}
@@ -304,10 +301,10 @@ const Appbar = ({
                 isDark,
                 isV3,
                 renderExcept: [
-                  Appbar,
-                  AppbarBackAction,
-                  AppbarContent,
-                  AppbarHeader,
+                  'Appbar',
+                  'Appbar.BackAction',
+                  'Appbar.Content',
+                  'Appbar.Header',
                 ],
                 mode,
               })}
@@ -318,7 +315,7 @@ const Appbar = ({
             children,
             isDark,
             isV3,
-            renderOnly: [AppbarContent],
+            renderOnly: ['Appbar.Content'],
             mode,
           })}
         </View>

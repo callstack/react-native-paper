@@ -9,10 +9,6 @@ import { getTheme } from '../../../core/theming';
 import overlay from '../../../styles/overlay';
 import { tokens } from '../../../styles/themes/v3/tokens';
 import Appbar from '../../Appbar';
-import AppbarAction from '../../Appbar/AppbarAction';
-import AppbarBackAction from '../../Appbar/AppbarBackAction';
-import AppbarContent from '../../Appbar/AppbarContent';
-import AppbarHeader from '../../Appbar/AppbarHeader';
 import {
   getAppbarBackgroundColor,
   modeTextVariant,
@@ -86,7 +82,12 @@ describe('renderAppbarContent', () => {
         </Menu>,
       ],
       isDark: false,
-      renderExcept: [Appbar, AppbarHeader, AppbarBackAction, AppbarContent],
+      renderExcept: [
+        'Appbar',
+        'Appbar.Header',
+        'Appbar.BackAction',
+        'Appbar.Content',
+      ],
     });
 
     expect(result).toHaveLength(3);
@@ -97,7 +98,7 @@ describe('renderAppbarContent', () => {
       isV3: false,
       children,
       isDark: false,
-      renderOnly: [AppbarAction],
+      renderOnly: ['Appbar.Action'],
     });
 
     expect(result).toHaveLength(2);
@@ -108,7 +109,7 @@ describe('renderAppbarContent', () => {
       isV3: false,
       children,
       isDark: false,
-      renderOnly: [AppbarContent],
+      renderOnly: ['Appbar.Content'],
       mode: 'large',
     });
 
@@ -121,7 +122,7 @@ describe('renderAppbarContent', () => {
         children,
         isDark: false,
         isV3,
-        renderOnly: [AppbarContent],
+        renderOnly: ['Appbar.Content'],
         mode: 'center-aligned',
         shouldCenterContent: true,
       });
@@ -146,7 +147,7 @@ describe('renderAppbarContent', () => {
         children,
         isDark: false,
         isV3,
-        renderOnly: [AppbarContent],
+        renderOnly: ['Appbar.Content'],
         mode: 'center-aligned',
         shouldCenterContent: !isV3 && Platform.OS === 'ios',
       });
@@ -167,7 +168,7 @@ describe('renderAppbarContent', () => {
         children,
         isDark: false,
         isV3,
-        renderOnly: [AppbarContent],
+        renderOnly: ['Appbar.Content'],
         mode: 'center-aligned',
         shouldCenterContent: !isV3 && Platform.OS === 'ios',
       });
@@ -187,7 +188,10 @@ describe('renderAppbarContent', () => {
         children,
         isDark: false,
         isV3,
-        renderOnly: [AppbarContent, withAppbarBackAction && AppbarBackAction],
+        renderOnly: [
+          'Appbar.Content',
+          withAppbarBackAction && 'Appbar.BackAction',
+        ],
       });
 
     const v2Spacing = {
