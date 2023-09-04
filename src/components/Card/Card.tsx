@@ -258,11 +258,7 @@ const Card = ({
   };
 
   const content = (
-    <View
-      style={[styles.innerContainer, contentStyle]}
-      testID={testID}
-      accessible={accessible}
-    >
+    <View style={[styles.innerContainer, contentStyle]} testID={testID}>
       {React.Children.map(children, (child, index) =>
         React.isValidElement(child)
           ? React.cloneElement(child as React.ReactElement<any>, {
@@ -311,6 +307,7 @@ const Card = ({
 
       {hasPassedTouchHandler ? (
         <TouchableWithoutFeedback
+          accessible={accessible}
           delayPressIn={0}
           disabled={disabled}
           delayLongPress={delayLongPress}
