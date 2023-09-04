@@ -16,6 +16,7 @@ import { ButtonMode, getButtonColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import { splitStyles } from '../../utils/splitStyles';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
@@ -225,6 +226,12 @@ const Button = ({
     }
   };
 
+  const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const [, borderRadiusStyles] = splitStyles(
+    flattenedStyles,
+    (style) => style.startsWith('border') && style.endsWith('Radius')
+  );
+
   const borderRadius = (isV3 ? 5 : 1) * roundness;
   const iconSize = isV3 ? 18 : 16;
 
@@ -241,17 +248,16 @@ const Button = ({
   const rippleColor =
     customRippleColor || color(textColor).alpha(0.12).rgb().string();
 
+  const touchableStyle = {
+    ...borderRadiusStyles,
+    borderRadius: borderRadiusStyles.borderRadius ?? borderRadius,
+  };
+
   const buttonStyle = {
     backgroundColor,
     borderColor,
     borderWidth,
-    borderRadius,
-  };
-  const touchableStyle = {
-    borderRadius: style
-      ? ((StyleSheet.flatten(style) || {}) as ViewStyle).borderRadius ??
-        borderRadius
-      : borderRadius,
+    ...touchableStyle,
   };
 
   const { color: customLabelColor, fontSize: customLabelSize } =
