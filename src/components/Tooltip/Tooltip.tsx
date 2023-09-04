@@ -212,6 +212,8 @@ const Tooltip = ({
   );
 };
 
+Tooltip.displayName = 'Tooltip';
+
 const styles = StyleSheet.create({
   tooltip: {
     alignSelf: 'flex-start',
