@@ -219,7 +219,8 @@ exports[`renders expanded accordion 1`] = `
               "paddingLeft": 16,
             },
             {
-              "flex": 1,
+              "flexGrow": 1,
+              "flexShrink": 1,
               "justifyContent": "center",
             },
           ]
