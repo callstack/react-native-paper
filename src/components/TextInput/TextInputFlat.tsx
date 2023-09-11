@@ -316,13 +316,13 @@ class TextInputFlat extends React.Component<ChildTextInputProps> {
 
     return (
       <View style={[containerStyle, viewStyle]}>
-        <Underline
+        {/* <Underline
           parentState={parentState}
           underlineColorCustom={underlineColorCustom}
           error={error}
           colors={colors}
           activeColor={activeColor}
-        />
+        /> */}
         <View
           style={[
             styles.labelContainer,
