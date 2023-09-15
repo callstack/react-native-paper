@@ -62,6 +62,7 @@ exports[`correctly applies a component as the text label 1`] = `
               "translateX": 4,
             },
           ],
+          "width": 750,
           "zIndex": 3,
         }
       }
@@ -272,6 +273,7 @@ exports[`correctly applies cursorColor prop 1`] = `
               "translateX": 4,
             },
           ],
+          "width": 750,
           "zIndex": 3,
         }
       }
@@ -466,6 +468,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
               "translateX": 4,
             },
           ],
+          "width": 750,
           "zIndex": 3,
         }
       }
@@ -654,6 +657,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
                 "translateX": 3,
               },
             ],
+            "width": 750,
             "zIndex": 3,
           }
         }
@@ -888,6 +892,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
               "translateX": 4,
             },
           ],
+          "width": 750,
           "zIndex": 3,
         }
       }
@@ -1084,6 +1089,7 @@ exports[`correctly applies textAlign center 1`] = `
               "translateX": 4,
             },
           ],
+          "width": 750,
           "zIndex": 3,
         }
       }
@@ -1278,6 +1284,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
               "translateX": 4,
             },
           ],
+          "width": 750,
           "zIndex": 3,
         }
       }
@@ -1674,6 +1681,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
               "translateX": 14,
             },
           ],
+          "width": 750,
           "zIndex": 3,
         }
       }

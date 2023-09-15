@@ -455,7 +455,12 @@ const TextInput = forwardRef<TextInputHandles, Props>(
 
     const handleLabelTextLayout = React.useCallback(
       ({ nativeEvent }: NativeSyntheticEvent<TextLayoutEventData>) => {
-        setLabelTextLayout({ width: Math.ceil(nativeEvent.lines[0].width) });
+        setLabelTextLayout({
+          width: nativeEvent.lines.reduce(
+            (acc, line) => acc + Math.ceil(line.width),
+            0
+          ),
+        });
       },
       []
     );

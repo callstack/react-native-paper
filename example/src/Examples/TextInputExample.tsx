@@ -715,6 +715,39 @@ const TextInputExample = () => {
                 maxLength={3}
               />
             </View>
+            <View style={styles.row}>
+              <TextInput
+                mode="outlined"
+                label="Code"
+                placeholder="Code"
+                keyboardType="phone-pad"
+                maxLength={4}
+              />
+            </View>
+            <View style={styles.row}>
+              <TextInput
+                mode="flat"
+                label="Code"
+                placeholder="Code"
+                keyboardType="phone-pad"
+                maxLength={4}
+              />
+            </View>
+            <View style={styles.row}>
+              <TextInput
+                mode="flat"
+                label="Month"
+                placeholder="Month"
+                style={styles.month}
+              />
+              <TextInput
+                mode="flat"
+                label="Year"
+                placeholder="Year"
+                keyboardType="phone-pad"
+                style={styles.year}
+              />
+            </View>
           </List.Accordion>
         </List.AccordionGroup>
       </ScreenWrapper>
@@ -767,6 +800,14 @@ const styles = StyleSheet.create({
     margin: 8,
     justifyContent: 'space-between',
     flexDirection: 'row',
+  },
+  month: {
+    flex: 1,
+    marginRight: 4,
+  },
+  year: {
+    flex: 1,
+    marginLeft: 4,
   },
 });
 

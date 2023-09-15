@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, StyleSheet } from 'react-native';
+import { Animated, StyleSheet, Dimensions } from 'react-native';
 
 import AnimatedText from '../../Typography/AnimatedText';
 import type { InputLabelProps } from '../types';
@@ -40,6 +40,8 @@ const InputLabel = (props: InputLabelProps) => {
     maxFontSizeMultiplier,
     testID,
   } = props;
+
+  const { width } = Dimensions.get('window');
 
   const paddingOffset =
     paddingLeft && paddingRight ? { paddingLeft, paddingRight } : {};
@@ -108,7 +110,7 @@ const InputLabel = (props: InputLabelProps) => {
       style={[
         StyleSheet.absoluteFill,
         styles.labelContainer,
-        { opacity },
+        { opacity, width },
         labelTranslationX,
       ]}
     >
