@@ -7,6 +7,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { TextInputLabelProp } from '../types';
+
 type OutlineProps = {
   isV3: boolean;
   activeColor: string;
@@ -15,11 +17,13 @@ type OutlineProps = {
   focused?: boolean;
   outlineColor?: string;
   roundness?: number;
+  label?: TextInputLabelProp;
   style?: StyleProp<ViewStyle>;
 };
 
 export const Outline = ({
   isV3,
+  label,
   activeColor,
   backgroundColor,
   hasActiveOutline,
@@ -33,6 +37,7 @@ export const Outline = ({
     pointerEvents="none"
     style={[
       styles.outline,
+      !label && styles.noLabelOutline,
       // eslint-disable-next-line react-native/no-inline-styles
       {
         backgroundColor,
@@ -52,5 +57,8 @@ const styles = StyleSheet.create({
     right: 0,
     top: 6,
     bottom: 0,
+  },
+  noLabelOutline: {
+    top: 0,
   },
 });

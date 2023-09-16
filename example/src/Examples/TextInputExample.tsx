@@ -656,6 +656,9 @@ const TextInputExample = () => {
               />
             </View>
             <View style={styles.inputContainerStyle}>
+              <TextInput mode="outlined" placeholder="Outlined without label" />
+            </View>
+            <View style={styles.inputContainerStyle}>
               <TextInput
                 mode="outlined"
                 label="Outlined input with custom cursor and selection colors"
