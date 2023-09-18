@@ -14,7 +14,7 @@ import AppbarBackAction from '../../Appbar/AppbarBackAction';
 import AppbarContent from '../../Appbar/AppbarContent';
 import AppbarHeader from '../../Appbar/AppbarHeader';
 import {
-  getAppbarColor,
+  getAppbarBackgroundColor,
   modeTextVariant,
   getAppbarBorders,
   renderAppbarContent as utilRenderAppbarContent,
@@ -394,29 +394,31 @@ describe('getAppbarColors', () => {
   const customBackground = 'aquamarine';
 
   it('should return custom color no matter what is the theme version', () => {
-    expect(getAppbarColor(getTheme(), elevation, customBackground)).toBe(
-      customBackground
-    );
+    expect(
+      getAppbarBackgroundColor(getTheme(), elevation, customBackground)
+    ).toBe(customBackground);
   });
 
   it('should return v3 light color if theme version is 3', () => {
-    expect(getAppbarColor(getTheme(), elevation)).toBe(
+    expect(getAppbarBackgroundColor(getTheme(), elevation)).toBe(
       tokens.md.ref.palette.neutral99
     );
   });
 
   it('should return v3 dark color if theme version is 3', () => {
-    expect(getAppbarColor(getTheme(true), elevation)).toBe(
+    expect(getAppbarBackgroundColor(getTheme(true), elevation)).toBe(
       tokens.md.ref.palette.neutral10
     );
   });
 
   it('should return v2 light color if theme version is 2', () => {
-    expect(getAppbarColor(getTheme(false, false), elevation)).toBe('#6200ee');
+    expect(getAppbarBackgroundColor(getTheme(false, false), elevation)).toBe(
+      '#6200ee'
+    );
   });
 
   it('should return v2 dark color if theme version is 2', () => {
-    expect(getAppbarColor(getTheme(true, false), elevation)).toBe(
+    expect(getAppbarBackgroundColor(getTheme(true, false), elevation)).toBe(
       overlay(elevation, '#121212')
     );
   });

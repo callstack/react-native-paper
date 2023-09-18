@@ -14,7 +14,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Appbar } from './Appbar';
 import {
   DEFAULT_APPBAR_HEIGHT,
-  getAppbarColor,
+  getAppbarBackgroundColor,
   modeAppbarHeight,
   getAppbarBorders,
 } from './utils';
@@ -119,7 +119,7 @@ const AppbarHeader = ({
 
   const borderRadius = getAppbarBorders(restStyle);
 
-  const backgroundColor = getAppbarColor(
+  const backgroundColor = getAppbarBackgroundColor(
     theme,
     elevation,
     customBackground,

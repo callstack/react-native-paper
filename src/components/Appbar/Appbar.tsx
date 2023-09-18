@@ -18,7 +18,7 @@ import AppbarHeader from './AppbarHeader';
 import {
   AppbarModes,
   DEFAULT_APPBAR_HEIGHT,
-  getAppbarColor,
+  getAppbarBackgroundColor,
   modeAppbarHeight,
   renderAppbarContent,
 } from './utils';
@@ -177,9 +177,7 @@ const Appbar = ({
     backgroundColor?: ColorValue;
   };
 
-  let isDark: boolean;
-
-  const backgroundColor = getAppbarColor(
+  const backgroundColor = getAppbarBackgroundColor(
     theme,
     elevation,
     customBackground,
@@ -190,9 +188,11 @@ const Appbar = ({
     return isV3 && mode === modeToCompare;
   };
 
+  let isDark = false;
+
   if (typeof dark === 'boolean') {
     isDark = dark;
-  } else {
+  } else if (!isV3) {
     isDark =
       backgroundColor === 'transparent'
         ? false

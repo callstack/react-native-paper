@@ -20,7 +20,7 @@ const borderStyleProperties = [
   'borderBottomLeftRadius',
 ];
 
-export const getAppbarColor = (
+export const getAppbarBackgroundColor = (
   theme: InternalTheme,
   elevation: number,
   customBackground?: ColorValue,
@@ -47,6 +47,26 @@ export const getAppbarColor = (
   return colors.surface;
 };
 
+export const getAppbarColor = ({
+  color,
+  isDark,
+  isV3,
+}: BaseProps & { color: string }) => {
+  if (typeof color !== 'undefined') {
+    return color;
+  }
+
+  if (isDark) {
+    return white;
+  }
+
+  if (isV3) {
+    return undefined;
+  }
+
+  return black;
+};
+
 export const getAppbarBorders = (
   style:
     | Animated.Value
@@ -65,11 +85,14 @@ export const getAppbarBorders = (
   return borders;
 };
 
-type RenderAppbarContentProps = {
-  children: React.ReactNode;
+type BaseProps = {
   isDark: boolean;
-  shouldCenterContent?: boolean;
   isV3: boolean;
+};
+
+type RenderAppbarContentProps = BaseProps & {
+  children: React.ReactNode;
+  shouldCenterContent?: boolean;
   renderOnly?: (React.ComponentType<any> | false)[];
   renderExcept?: React.ComponentType<any>[];
   mode?: AppbarModes;
@@ -130,14 +153,7 @@ export const renderAppbarContent = ({
           theme?: ThemeProp;
         } = {
           theme,
-          color:
-            typeof child.props.color !== 'undefined'
-              ? child.props.color
-              : isV3
-              ? undefined
-              : isDark
-              ? white
-              : black,
+          color: getAppbarColor({ color: child.props.color, isDark, isV3 }),
         };
 
         if (child.type === AppbarContent) {
@@ -149,6 +165,7 @@ export const renderAppbarContent = ({
             shouldCenterContent && styles.centerAlignedContent,
             child.props.style,
           ];
+          props.color;
         }
         return React.cloneElement(child, props);
       })

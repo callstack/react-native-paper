@@ -145,10 +145,12 @@ const AppbarExample = ({ navigation }: Props) => {
         <TextComponent>Custom Color</TextComponent>
         <Switch value={showCustomColor} onValueChange={setShowCustomColor} />
       </View>
-      <View style={styles.row}>
-        <TextComponent>Exact Dark Theme</TextComponent>
-        <Switch value={showExactTheme} onValueChange={setShowExactTheme} />
-      </View>
+      {!theme.isV3 && (
+        <View style={styles.row}>
+          <TextComponent>Exact Dark Theme</TextComponent>
+          <Switch value={showExactTheme} onValueChange={setShowExactTheme} />
+        </View>
+      )}
       {theme.isV3 && (
         <View style={styles.row}>
           <TextComponent>Elevated</TextComponent>
@@ -204,9 +206,9 @@ const AppbarExample = ({ navigation }: Props) => {
           styles.bottom,
           {
             height: height + bottom,
-            backgroundColor: theme.isV3
-              ? theme.colors.elevation.level2
-              : theme.colors.primary,
+          },
+          theme.isV3 && {
+            backgroundColor: theme.colors.elevation.level2,
           },
         ]}
         safeAreaInsets={{ bottom, left, right }}
