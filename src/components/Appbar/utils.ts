@@ -56,19 +56,15 @@ export const getAppbarColor = ({
     return color;
   }
 
-  if (isV3) {
-    if (isDark) {
-      return white;
-    } else {
-      return undefined;
-    }
-  } else {
-    if (isDark) {
-      return white;
-    } else {
-      return black;
-    }
+  if (isDark) {
+    return white;
   }
+
+  if (isV3) {
+    return undefined;
+  }
+
+  return black;
 };
 
 export const getAppbarBorders = (
