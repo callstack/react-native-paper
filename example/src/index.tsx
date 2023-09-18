@@ -50,7 +50,7 @@ export default function PaperExample() {
   useKeepAwake();
 
   const [fontsLoaded] = useFonts({
-    NotoSans: require('../assets/fonts/NotoSans-Regular.ttf'),
+    Abel: require('../assets/fonts/Abel-Regular.ttf'),
   });
 
   const [isReady, setIsReady] = React.useState(false);
@@ -177,7 +177,7 @@ export default function PaperExample() {
     ...combinedTheme,
     fonts: configureFonts({
       config: {
-        fontFamily: 'NotoSans',
+        fontFamily: 'Abel',
       },
     }),
   };

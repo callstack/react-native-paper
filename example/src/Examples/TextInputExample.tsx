@@ -7,7 +7,9 @@ import {
   View,
 } from 'react-native';
 
+import { useFonts } from 'expo-font';
 import {
+  configureFonts,
   HelperText,
   List,
   MD2Colors,
@@ -140,6 +142,10 @@ const TextInputExample = () => {
       payload: newColors,
     });
   };
+
+  const [fontsLoaded] = useFonts({
+    Abel: require('../../assets/fonts/Abel-Regular.ttf'),
+  });
 
   const [expandedId, setExpandedId] = React.useState<ExpandedId>('flat');
 
@@ -674,6 +680,23 @@ const TextInputExample = () => {
                 placeholder="Custom colors"
               />
             </View>
+            {fontsLoaded && theme.isV3 ? (
+              <View style={styles.inputContainerStyle}>
+                <TextInput
+                  mode="outlined"
+                  label="Text input with custom font"
+                  placeholder="Custom font"
+                  style={styles.fontSize}
+                  theme={{
+                    fonts: configureFonts({
+                      config: {
+                        fontFamily: 'Abel',
+                      },
+                    }),
+                  }}
+                />
+              </View>
+            ) : null}
           </List.Accordion>
         </List.AccordionGroup>
       </ScreenWrapper>
