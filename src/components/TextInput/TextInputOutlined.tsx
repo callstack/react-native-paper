@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  Animated,
   View,
   TextInput as NativeTextInput,
   StyleSheet,
@@ -175,11 +176,14 @@ const TextInputOutlined = ({
   const baseLabelTranslateY =
     -labelHalfHeight - (topPosition + OUTLINE_MINIMIZED_LABEL_Y_OFFSET);
 
+  const { current: placeholderOpacityAnims } = React.useRef([
+    new Animated.Value(0),
+    new Animated.Value(1),
+  ]);
+
   const placeholderOpacity = hasActiveOutline
     ? parentState.labeled
-    : parentState.labelLayout.measured
-    ? 1
-    : 0;
+    : placeholderOpacityAnims[parentState.labelLayout.measured ? 1 : 0];
 
   const placeholderStyle = {
     position: 'absolute',

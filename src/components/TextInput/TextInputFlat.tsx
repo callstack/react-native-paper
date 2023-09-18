@@ -214,11 +214,14 @@ const TextInputFlat = ({
   const baseLabelTranslateY =
     -labelHalfHeight - (topPosition + MINIMIZED_LABEL_Y_OFFSET);
 
+  const { current: placeholderOpacityAnims } = React.useRef([
+    new Animated.Value(0),
+    new Animated.Value(1),
+  ]);
+
   const placeholderOpacity = hasActiveOutline
     ? parentState.labeled
-    : parentState.labelLayout.measured
-    ? 1
-    : 0;
+    : placeholderOpacityAnims[parentState.labelLayout.measured ? 1 : 0];
 
   const minHeight =
     height ||
