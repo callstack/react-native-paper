@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   ColorValue,
   GestureResponderEvent,
-  I18nManager,
   NativeSyntheticEvent,
   StyleProp,
   StyleSheet,
@@ -14,8 +13,9 @@ import {
 } from 'react-native';
 
 import { ListAccordionGroupContext } from './ListAccordionGroup';
-import type { Style } from './utils';
 import { getAccordionColors, getLeftStyles } from './utils';
+import type { Style } from './utils';
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -169,6 +169,7 @@ const ListAccordion = ({
   pointerEvents = 'none',
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
   );
@@ -288,7 +289,7 @@ const ListAccordion = ({
                   name={isExpanded ? 'chevron-up' : 'chevron-down'}
                   color={theme.isV3 ? descriptionColor : titleColor}
                   size={24}
-                  direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                  direction={direction}
                 />
               )}
             </View>
@@ -357,7 +358,7 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
   },
   child: {
-    paddingLeft: 64,
+    paddingStart: 64,
   },
   childV3: {
     paddingLeft: 40,

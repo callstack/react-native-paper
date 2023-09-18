@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  I18nManager,
   Platform,
   StyleSheet,
   TextInput as NativeTextInput,
@@ -40,6 +39,7 @@ import {
 } from './helpers';
 import InputLabel from './Label/InputLabel';
 import type { ChildTextInputProps, RenderProps } from './types';
+import { useLocale } from '../../core/Localization';
 
 const TextInputFlat = ({
   disabled = false,
@@ -73,6 +73,8 @@ const TextInputFlat = ({
   contentStyle,
   ...rest
 }: ChildTextInputProps) => {
+  const { direction, overwriteRTL } = useLocale();
+  const isRTL = direction === 'rtl';
   const isAndroid = Platform.OS === 'android';
   const { colors, isV3, roundness } = theme;
   const font = isV3 ? theme.fonts.bodyLarge : theme.fonts.regular;
@@ -164,11 +166,8 @@ const TextInputFlat = ({
   const labelHalfHeight = labelHeight / 2;
 
   const baseLabelTranslateX =
-    (I18nManager.getConstants().isRTL ? 1 : -1) *
-      (labelHalfWidth - (labelScale * labelWidth) / 2) +
-    (1 - labelScale) *
-      (I18nManager.getConstants().isRTL ? -1 : 1) *
-      paddingLeft;
+    (isRTL ? 1 : -1) * (labelHalfWidth - (labelScale * labelWidth) / 2) +
+    (1 - labelScale) * (isRTL ? -1 : 1) * paddingLeft;
 
   const minInputHeight = dense
     ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) - LABEL_PADDING_TOP_DENSE
@@ -261,13 +260,9 @@ const TextInputFlat = ({
     labelScale,
     wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
     topPosition,
-    paddingLeft: isAndroid
-      ? I18nManager.isRTL
-        ? paddingRight
-        : paddingLeft
-      : paddingLeft,
+    paddingLeft: isAndroid ? (isRTL ? paddingRight : paddingLeft) : paddingLeft,
     paddingRight: isAndroid
-      ? I18nManager.isRTL
+      ? isRTL
         ? paddingLeft
         : paddingRight
       : paddingRight,
@@ -395,9 +390,11 @@ const TextInputFlat = ({
               fontWeight,
               color: inputTextColor,
               textAlignVertical: multiline ? 'top' : 'center',
-              textAlign: textAlign
+              textAlign: overwriteRTL
+                ? 'right'
+                : textAlign
                 ? textAlign
-                : I18nManager.getConstants().isRTL
+                : isRTL
                 ? 'right'
                 : 'left',
             },

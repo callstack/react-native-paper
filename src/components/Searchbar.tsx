@@ -3,7 +3,6 @@ import {
   Animated,
   ColorValue,
   GestureResponderEvent,
-  I18nManager,
   Platform,
   StyleProp,
   StyleSheet,
@@ -22,12 +21,13 @@ import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
+import { useLocale } from '../core/Localization';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 import { forwardRef } from '../utils/forwardRef';
 
 interface Style {
-  marginRight: number;
+  marginEnd: number;
 }
 
 export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
@@ -210,6 +210,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
+    const { direction, localeProps } = useLocale();
     const root = React.useRef<TextInput>(null);
 
     React.useImperativeHandle(ref, () => {
@@ -293,6 +294,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
         testID={`${testID}-container`}
         {...(theme.isV3 && { elevation })}
         theme={theme}
+        {...localeProps}
       >
         <IconButton
           accessibilityRole="button"
@@ -307,7 +309,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
                 name="magnify"
                 color={color}
                 size={size}
-                direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                direction={direction}
               />
             ))
           }
@@ -318,7 +320,9 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
         <TextInput
           style={[
             styles.input,
+            // eslint-disable-next-line react-native/no-inline-styles
             {
+              textAlign: direction === 'rtl' ? 'right' : 'left',
               color: textColor,
               ...font,
               ...Platform.select({ web: { outline: 'none' } }),
@@ -369,7 +373,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
                     name={isV3 ? 'close' : 'close-circle-outline'}
                     color={color}
                     size={size}
-                    direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                    direction={direction}
                   />
                 ))
               }
@@ -418,17 +422,16 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 18,
-    paddingLeft: 8,
+    paddingStart: 8,
     alignSelf: 'stretch',
-    textAlign: I18nManager.getConstants().isRTL ? 'right' : 'left',
     minWidth: 0,
   },
   barModeInput: {
-    paddingLeft: 0,
+    paddingStart: 0,
     minHeight: 56,
   },
   viewModeInput: {
-    paddingLeft: 0,
+    paddingStart: 0,
     minHeight: 72,
   },
   elevation: {
@@ -441,12 +444,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   rightStyle: {
-    marginRight: 16,
+    marginEnd: 16,
   },
   v3ClearIcon: {
     position: 'absolute',
     right: 0,
-    marginLeft: 16,
+    marginStart: 16,
   },
   v3ClearIconHidden: {
     display: 'none',

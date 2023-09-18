@@ -219,7 +219,7 @@ exports[`renders menu with content styles 1`] = `
             "position": "absolute",
           },
           {
-            "left": 8,
+            "start": 8,
             "top": 8,
           },
           undefined,
@@ -364,7 +364,7 @@ exports[`renders menu with content styles 1`] = `
                         "minWidth": 100,
                       },
                       {
-                        "marginLeft": 4,
+                        "marginStart": 4,
                       },
                       undefined,
                     ]
@@ -484,7 +484,7 @@ exports[`renders menu with content styles 1`] = `
                         "minWidth": 100,
                       },
                       {
-                        "marginLeft": 4,
+                        "marginStart": 4,
                       },
                       undefined,
                     ]
@@ -925,7 +925,7 @@ exports[`renders visible menu 1`] = `
             "position": "absolute",
           },
           {
-            "left": 8,
+            "start": 8,
             "top": 8,
           },
           undefined,
@@ -1066,7 +1066,7 @@ exports[`renders visible menu 1`] = `
                         "minWidth": 100,
                       },
                       {
-                        "marginLeft": 4,
+                        "marginStart": 4,
                       },
                       undefined,
                     ]
@@ -1186,7 +1186,7 @@ exports[`renders visible menu 1`] = `
                         "minWidth": 100,
                       },
                       {
-                        "marginLeft": 4,
+                        "marginStart": 4,
                       },
                       undefined,
                     ]

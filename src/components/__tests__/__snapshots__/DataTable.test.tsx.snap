@@ -240,7 +240,7 @@ exports[`renders data table pagination 1`] = `
         "flexDirection": "row",
         "flexWrap": "wrap",
         "justifyContent": "flex-end",
-        "paddingLeft": 16,
+        "paddingStart": 16,
       },
       undefined,
     ]
@@ -266,7 +266,7 @@ exports[`renders data table pagination 1`] = `
         [
           {
             "fontSize": 12,
-            "marginRight": 16,
+            "marginEnd": 16,
           },
           {
             "color": "rgba(28, 27, 31, 0.6)",
@@ -582,7 +582,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
         "flexDirection": "row",
         "flexWrap": "wrap",
         "justifyContent": "flex-end",
-        "paddingLeft": 16,
+        "paddingStart": 16,
       },
       undefined,
     ]
@@ -608,7 +608,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
         [
           {
             "fontSize": 12,
-            "marginRight": 16,
+            "marginEnd": 16,
           },
           {
             "color": "rgba(28, 27, 31, 0.6)",
@@ -1212,7 +1212,7 @@ exports[`renders data table pagination with label 1`] = `
         "flexDirection": "row",
         "flexWrap": "wrap",
         "justifyContent": "flex-end",
-        "paddingLeft": 16,
+        "paddingStart": 16,
       },
       undefined,
     ]
@@ -1238,7 +1238,7 @@ exports[`renders data table pagination with label 1`] = `
         [
           {
             "fontSize": 12,
-            "marginRight": 16,
+            "marginEnd": 16,
           },
           {
             "color": "rgba(28, 27, 31, 0.6)",
@@ -1556,7 +1556,7 @@ exports[`renders data table pagination with options select 1`] = `
         "flexDirection": "row",
         "flexWrap": "wrap",
         "justifyContent": "flex-end",
-        "paddingLeft": 16,
+        "paddingStart": 16,
       },
       undefined,
     ]
@@ -1592,7 +1592,7 @@ exports[`renders data table pagination with options select 1`] = `
           [
             {
               "fontSize": 12,
-              "marginRight": 16,
+              "marginEnd": 16,
             },
             {
               "color": "rgba(28, 27, 31, 0.6)",
@@ -1612,7 +1612,7 @@ exports[`renders data table pagination with options select 1`] = `
           {
             "backgroundColor": "transparent",
             "borderRadius": 20,
-            "marginRight": 16,
+            "marginEnd": 16,
             "shadowColor": "#000",
             "shadowOffset": {
               "height": 0,
@@ -1708,12 +1708,12 @@ exports[`renders data table pagination with options select 1`] = `
                 style={
                   [
                     {
-                      "marginLeft": -4,
-                      "marginRight": 12,
+                      "marginEnd": 12,
+                      "marginStart": -4,
                     },
                     {
-                      "marginLeft": -16,
-                      "marginRight": 16,
+                      "marginEnd": 16,
+                      "marginStart": -16,
                     },
                     false,
                   ]
@@ -1833,7 +1833,7 @@ exports[`renders data table pagination with options select 1`] = `
         [
           {
             "fontSize": 12,
-            "marginRight": 16,
+            "marginEnd": 16,
           },
           {
             "color": "rgba(28, 27, 31, 0.6)",
@@ -2539,7 +2539,7 @@ exports[`renders data table title with press handler 1`] = `
           },
           {},
           {
-            "marginLeft": 8,
+            "marginStart": 8,
           },
           undefined,
         ],
@@ -2663,7 +2663,7 @@ exports[`renders data table title with sort icon 1`] = `
           },
           {},
           {
-            "marginLeft": 8,
+            "marginStart": 8,
           },
           undefined,
         ],

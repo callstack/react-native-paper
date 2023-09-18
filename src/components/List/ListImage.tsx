@@ -75,12 +75,12 @@ const styles = StyleSheet.create({
   video: {
     width: 100,
     height: 64,
-    marginLeft: 0,
+    marginStart: 0,
   },
   videoV3: {
     width: 114,
     height: 64,
-    marginLeft: 0,
+    marginStart: 0,
   },
 });
 

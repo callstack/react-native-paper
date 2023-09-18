@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   video: {
     width: 114,
     height: 64,
-    marginLeft: 0,
+    marginStart: 0,
   },
   container: {
     width: 30,

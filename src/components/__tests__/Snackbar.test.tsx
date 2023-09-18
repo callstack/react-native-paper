@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     backgroundColor: red200,
     padding: 15,
   },
-  text: { color: white, marginLeft: 10, flexWrap: 'wrap', flexShrink: 1 },
+  text: { color: white, marginStart: 10, flexWrap: 'wrap', flexShrink: 1 },
 });
 
 // Make sure any animation finishes before checking the snapshot results

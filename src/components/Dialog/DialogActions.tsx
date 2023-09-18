@@ -61,7 +61,7 @@ const DialogActions = (props: Props) => {
               uppercase: !isV3,
               style: [
                 isV3 && {
-                  marginRight: i + 1 === actionsLength ? 0 : 8,
+                  marginEnd: i + 1 === actionsLength ? 0 : 8,
                 },
                 child.props.style,
               ],

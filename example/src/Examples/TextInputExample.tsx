@@ -701,7 +701,7 @@ const styles = StyleSheet.create({
     margin: 8,
   },
   inputContentStyle: {
-    paddingLeft: 50,
+    paddingStart: 50,
     fontWeight: 'bold',
     fontStyle: 'italic',
   },

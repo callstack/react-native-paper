@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { I18nManager, StyleSheet, View, Platform } from 'react-native';
+import { StyleSheet, View, Platform } from 'react-native';
 
 import { DrawerContentScrollView } from '@react-navigation/drawer';
-import * as Updates from 'expo-updates';
 import {
   Badge,
   Drawer,
@@ -13,9 +12,10 @@ import {
   TouchableRipple,
 } from 'react-native-paper';
 
-import { deviceColorsSupported, isWeb } from '../utils';
+import { deviceColorsSupported } from '../utils';
+import { usePreferences } from './PreferencesContext';
 
-import { PreferencesContext, useExampleTheme } from './';
+import { useExampleTheme } from './';
 
 const DrawerItemsData = [
   {
@@ -87,38 +87,28 @@ const DrawerCollapsedItemsData = [
 
 function DrawerItems() {
   const [drawerItemIndex, setDrawerItemIndex] = React.useState<number>(0);
-  const preferences = React.useContext(PreferencesContext);
+  const preferences = usePreferences();
 
   const _setDrawerItem = (index: number) => setDrawerItemIndex(index);
 
   const { isV3, colors } = useExampleTheme();
   const isIOS = Platform.OS === 'ios';
 
-  if (!preferences) throw new Error('PreferencesContext not provided');
-
   const {
     toggleShouldUseDeviceColors,
     toggleTheme,
-    toggleRtl: toggleRTL,
     toggleThemeVersion,
     toggleCollapsed,
     toggleCustomFont,
     toggleRippleEffect,
+    toggleRTL,
     customFontLoaded,
     rippleEffectEnabled,
     collapsed,
-    rtl: isRTL,
+    isRTL,
     theme: { dark: isDarkTheme },
     shouldUseDeviceColors,
   } = preferences;
-
-  const _handleToggleRTL = () => {
-    toggleRTL();
-    I18nManager.forceRTL(!isRTL);
-    if (isWeb) {
-      Updates.reloadAsync();
-    }
-  };
 
   const coloredLabelTheme = {
     colors: isV3
@@ -190,16 +180,14 @@ function DrawerItems() {
               </View>
             </TouchableRipple>
 
-            {!isWeb && (
-              <TouchableRipple onPress={_handleToggleRTL}>
-                <View style={[styles.preference, isV3 && styles.v3Preference]}>
-                  <Text variant="labelLarge">RTL</Text>
-                  <View pointerEvents="none">
-                    <Switch value={isRTL} />
-                  </View>
+            <TouchableRipple onPress={toggleRTL}>
+              <View style={[styles.preference, isV3 && styles.v3Preference]}>
+                <Text variant="labelLarge">RTL</Text>
+                <View pointerEvents="none">
+                  <Switch value={isRTL} />
                 </View>
-              </TouchableRipple>
-            )}
+              </View>
+            </TouchableRipple>
 
             <TouchableRipple onPress={toggleThemeVersion}>
               <View style={[styles.preference, isV3 && styles.v3Preference]}>

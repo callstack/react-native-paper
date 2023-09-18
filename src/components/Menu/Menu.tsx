@@ -150,9 +150,6 @@ const WINDOW_LAYOUT = Dimensions.get('window');
  * wrapping is not necessary if you use Paper's `Modal` instead.
  */
 class Menu extends React.Component<Props, State> {
-  // @component ./MenuItem.tsx
-  static Item = MenuItem;
-
   static defaultProps = {
     statusBarHeight: APPROX_STATUSBAR_HEIGHT,
     overlayAccessibilityLabel: 'Close menu',
@@ -391,8 +388,7 @@ class Menu extends React.Component<Props, State> {
   };
 
   private keyboardDidShow = (e: RNKeyboardEvent) => {
-    const keyboardHeight = e.endCoordinates.height;
-    this.keyboardHeight = keyboardHeight;
+    this.keyboardHeight = e.endCoordinates.height;
   };
 
   private keyboardDidHide = () => {
@@ -452,7 +448,14 @@ class Menu extends React.Component<Props, State> {
     ];
 
     // We need to translate menu while animating scale to imitate transform origin for scale animation
-    const positionTransforms = [];
+    const positionTransforms: (
+      | {
+          translateX: Animated.AnimatedInterpolation<string | number>;
+        }
+      | {
+          translateY: Animated.AnimatedInterpolation<string | number>;
+        }
+    )[] = [];
 
     // Check if menu fits horizontally and if not align it to right.
     if (left <= windowLayout.width - menuLayout.width - SCREEN_INDENT) {
@@ -595,7 +598,7 @@ class Menu extends React.Component<Props, State> {
 
     const positionStyle = {
       top: this.isCoordinate(anchor) ? top : top + additionalVerticalValue,
-      ...(I18nManager.getConstants().isRTL ? { right: left } : { left }),
+      ...(I18nManager.getConstants().isRTL ? { end: left } : { start: left }),
     };
 
     const pointerEvents = visible ? 'box-none' : 'none';
@@ -675,4 +678,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withInternalTheme(Menu);
+export default Object.assign(withInternalTheme(Menu), {
+  // @component ./MenuItem.tsx
+  Item: MenuItem,
+});

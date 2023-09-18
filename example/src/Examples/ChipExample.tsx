@@ -354,8 +354,8 @@ const styles = StyleSheet.create({
   },
   tiny: {
     marginVertical: 2,
-    marginRight: 2,
-    marginLeft: 2,
+    marginEnd: 2,
+    marginStart: 2,
     minHeight: 19,
     lineHeight: 19,
   },

@@ -157,8 +157,8 @@ export default function ExampleList({ navigation }: Props) {
       contentContainerStyle={{
         backgroundColor: colors.background,
         paddingBottom: safeArea.bottom,
-        paddingLeft: safeArea.left,
-        paddingRight: safeArea.right,
+        paddingStart: safeArea.left,
+        paddingEnd: safeArea.right,
       }}
       style={{
         backgroundColor: colors.background,

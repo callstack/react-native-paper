@@ -3,7 +3,6 @@ import {
   Animated,
   ColorValue,
   Easing,
-  I18nManager,
   StyleProp,
   StyleSheet,
   View,
@@ -19,6 +18,7 @@ import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
 import Text from './Typography/Text';
+import { useLocale } from '../core/Localization';
 import { useInternalTheme } from '../core/theming';
 import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
 
@@ -156,6 +156,7 @@ const Snackbar = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction, localeProps } = useLocale();
   const { bottom, right, left } = useSafeAreaInsets();
 
   const { current: opacity } = React.useRef<Animated.Value>(
@@ -243,7 +244,7 @@ const Snackbar = ({
 
   const isIconButton = isV3 && onIconPress;
 
-  const marginLeft = action ? -12 : -16;
+  const marginStart = action ? -12 : -16;
 
   const wrapperPaddings = {
     paddingBottom: bottom,
@@ -301,11 +302,12 @@ const Snackbar = ({
         ]}
         testID={testID}
         {...(isV3 && { elevation })}
+        {...localeProps}
         {...rest}
       >
         {renderChildrenWithWrapper()}
         {(action || isIconButton) && (
-          <View style={[styles.actionsContainer, { marginLeft }]}>
+          <View style={[styles.actionsContainer, { marginStart }]}>
             {action ? (
               <Button
                 onPress={(event) => {
@@ -339,9 +341,7 @@ const Snackbar = ({
                         name="close"
                         color={color}
                         size={size}
-                        direction={
-                          I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'
-                        }
+                        direction={direction}
                       />
                     );
                   })
@@ -398,8 +398,8 @@ const styles = StyleSheet.create({
     minHeight: 48,
   },
   button: {
-    marginRight: 8,
-    marginLeft: 4,
+    marginEnd: 8,
+    marginStart: 4,
   },
   elevation: {
     elevation: 6,

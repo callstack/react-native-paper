@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
   button: {
-    marginRight: 16,
+    marginEnd: 16,
   },
 });
 
@@ -70,7 +70,7 @@ const Shimmer = () => {
       <View
         style={{
           width: 121,
-          marginRight: 16,
+          marginEnd: 16,
           borderWidth: 1,
           borderColor: 'rgba(125, 82, 96, 0.4)',
           borderStyle: 'solid',

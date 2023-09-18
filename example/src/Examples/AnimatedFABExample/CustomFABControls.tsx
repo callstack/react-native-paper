@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   controlItem: {
-    marginLeft: 16,
+    marginStart: 16,
     flexDirection: 'row',
     alignItems: 'center',
   },

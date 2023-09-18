@@ -147,7 +147,7 @@ describe('FABActions - labelStyle - containerStyle', () => {
             containerStyle: {
               padding: 16,
               backgroundColor: '#687456',
-              marginLeft: 16,
+              marginStart: 16,
             },
             onPress() {},
             icon: '',

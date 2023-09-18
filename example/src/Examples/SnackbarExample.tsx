@@ -3,7 +3,8 @@ import { StyleSheet, View } from 'react-native';
 
 import { Snackbar, Button, List, Text, Switch } from 'react-native-paper';
 
-import { PreferencesContext, useExampleTheme } from '..';
+import { useExampleTheme } from '..';
+import { usePreferences } from '../PreferencesContext';
 import ScreenWrapper from '../ScreenWrapper';
 
 const SHORT_MESSAGE = 'Single-line snackbar';
@@ -11,7 +12,7 @@ const LONG_MESSAGE =
   'Snackbar with longer message which does not fit in one line';
 
 const SnackbarExample = () => {
-  const preferences = React.useContext(PreferencesContext);
+  const preferences = usePreferences();
   const theme = useExampleTheme();
 
   const [options, setOptions] = React.useState({
@@ -33,7 +34,7 @@ const SnackbarExample = () => {
   const action = {
     label: showLongerAction ? 'Toggle Theme' : 'Action',
     onPress: () => {
-      preferences?.toggleTheme();
+      preferences.toggleTheme();
     },
   };
 

@@ -53,10 +53,10 @@ const SurfaceExample = () => {
         <View style={styles.content}>
           <View style={styles.horizontalSurfacesContainer}>
             <Surface style={styles.horizontalSurface}>
-              <Text style={styles.centerText}>Left</Text>
+              <Text style={styles.centerText}>Start</Text>
             </Surface>
             <Surface style={styles.horizontalSurface}>
-              <Text style={styles.centerText}>Right</Text>
+              <Text style={styles.centerText}>End</Text>
             </Surface>
           </View>
           <View style={styles.verticalSurfacesContainer}>

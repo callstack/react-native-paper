@@ -3,6 +3,36 @@ import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
 
 import ToggleButton from './ToggleButton';
 import ToggleButtonGroup from './ToggleButtonGroup';
+import { useLocale } from '../../core/Localization';
+
+const useBorderPositions = () => {
+  const { overwriteRTL } = useLocale();
+
+  return (index: number, count: number) => {
+    const first = index === 0;
+    const last = index === count - 1;
+
+    if (overwriteRTL) {
+      if (first) {
+        return styles.last;
+      }
+
+      if (last) {
+        return styles.first;
+      }
+    }
+
+    if (first) {
+      return styles.first;
+    }
+
+    if (last) {
+      return styles.last;
+    }
+
+    return styles.middle;
+  };
+};
 
 export type Props = {
   /**
@@ -45,6 +75,7 @@ export type Props = {
  */
 const ToggleButtonRow = ({ value, onValueChange, children, style }: Props) => {
   const count = React.Children.count(children);
+  const getBorderStyle = useBorderPositions();
 
   return (
     <ToggleButtonGroup value={value} onValueChange={onValueChange}>
@@ -56,11 +87,7 @@ const ToggleButtonRow = ({ value, onValueChange, children, style }: Props) => {
             return React.cloneElement(child, {
               style: [
                 styles.button,
-                i === 0
-                  ? styles.first
-                  : i === count - 1
-                  ? styles.last
-                  : styles.middle,
+                getBorderStyle(i, count),
                 // @ts-expect-error: We're sure that child is a React Element
                 child.props.style,
               ],

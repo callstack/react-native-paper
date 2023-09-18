@@ -818,7 +818,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
 </View>
 `;
 
-exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
+exports[`correctly applies paddingStart from contentStyleProp 1`] = `
 <View
   style={
     [
@@ -1000,7 +1000,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
             {},
           ],
           {
-            "paddingLeft": 20,
+            "paddingStart": 20,
           },
         ]
       }

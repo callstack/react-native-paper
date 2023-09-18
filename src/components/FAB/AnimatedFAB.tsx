@@ -9,7 +9,6 @@ import {
   Animated,
   Easing,
   GestureResponderEvent,
-  I18nManager,
   Platform,
   ScrollView,
   StyleProp,
@@ -21,6 +20,7 @@ import {
 import color from 'color';
 
 import { getCombinedStyles, getFABColors } from './utils';
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
@@ -129,7 +129,6 @@ const SCALE = 0.9;
  *   ScrollView,
  *   Text,
  *   SafeAreaView,
- *   I18nManager,
  * } from 'react-native';
  * import { AnimatedFAB } from 'react-native-paper';
  *
@@ -213,11 +212,11 @@ const AnimatedFAB = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   const uppercase: boolean = uppercaseProp ?? !theme.isV3;
   const isIOS = Platform.OS === 'ios';
   const isAnimatedFromRight = animateFrom === 'right';
   const isIconStatic = iconMode === 'static';
-  const { isRTL } = I18nManager;
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
@@ -307,6 +306,7 @@ const AnimatedFAB = ({
     isIconStatic,
     distance,
     animFAB,
+    direction,
   });
 
   const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
@@ -463,9 +463,10 @@ const AnimatedFAB = ({
           ellipsizeMode={'tail'}
           style={[
             {
-              [isAnimatedFromRight || isRTL ? 'right' : 'left']: isIconStatic
-                ? textWidth - SIZE + borderRadius / (isV3 ? 1 : 2)
-                : borderRadius,
+              [isAnimatedFromRight || direction === 'rtl' ? 'right' : 'left']:
+                isIconStatic
+                  ? textWidth - SIZE + borderRadius / (isV3 ? 1 : 2)
+                  : borderRadius,
             },
             {
               minWidth: textWidth,

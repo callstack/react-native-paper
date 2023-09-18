@@ -1007,7 +1007,7 @@ const styles = StyleSheet.create({
   },
   badgeContainer: {
     position: 'absolute',
-    left: 0,
+    start: 0,
   },
   v3TouchableContainer: {
     paddingTop: 12,

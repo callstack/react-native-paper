@@ -3,9 +3,12 @@ import {
   AccessibilityInfo,
   Appearance,
   ColorSchemeName,
+  I18nManager,
   NativeEventSubscription,
+  Platform,
 } from 'react-native';
 
+import { Direction, LocalizationProvider } from './Localization';
 import SafeAreaProviderCompat from './SafeAreaProviderCompat';
 import { Provider as SettingsProvider, Settings } from './settings';
 import { defaultThemesByVersion, ThemeProvider } from './theming';
@@ -18,6 +21,7 @@ export type Props = {
   children: React.ReactNode;
   theme?: ThemeProp;
   settings?: Settings;
+  direction?: Direction;
 };
 
 const PaperProvider = (props: Props) => {
@@ -76,6 +80,25 @@ const PaperProvider = (props: Props) => {
     };
   }, [props.theme, isOnlyVersionInTheme]);
 
+  React.useEffect(() => {
+    if (!props.direction || !['rtl', 'ltr'].includes(props.direction)) {
+      return;
+    }
+
+    const isRTL = props.direction === 'rtl';
+
+    if (Platform.OS === 'web') {
+      const htmlDir = document.documentElement.getAttribute('dir');
+      if (isRTL && htmlDir !== 'rtl') {
+        document.documentElement.setAttribute('dir', 'rtl');
+      }
+    } else {
+      if (isRTL && !I18nManager.isRTL) {
+        I18nManager.forceRTL(isRTL);
+      }
+    }
+  }, [props.direction]);
+
   const getTheme = () => {
     const themeVersion = props.theme?.version || 3;
     const scheme = colorScheme || 'light';
@@ -97,21 +120,27 @@ const PaperProvider = (props: Props) => {
     };
   };
 
-  const { children, settings } = props;
+  const {
+    children,
+    settings,
+    direction = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr',
+  } = props;
 
   return (
     <SafeAreaProviderCompat>
-      <PortalHost>
-        <SettingsProvider
-          value={{
-            icon: MaterialCommunityIcon,
-            rippleEffectEnabled: true,
-            ...settings,
-          }}
-        >
-          <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
-        </SettingsProvider>
-      </PortalHost>
+      <LocalizationProvider value={direction}>
+        <PortalHost>
+          <SettingsProvider
+            value={{
+              icon: MaterialCommunityIcon,
+              rippleEffectEnabled: true,
+              ...settings,
+            }}
+          >
+            <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
+          </SettingsProvider>
+        </PortalHost>
+      </LocalizationProvider>
     </SafeAreaProviderCompat>
   );
 };

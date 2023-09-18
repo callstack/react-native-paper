@@ -25,7 +25,7 @@ const DialogWithLoadingIndicator = ({
             <ActivityIndicator
               color={isV3 ? MD3Colors.tertiary30 : MD2Colors.indigo500}
               size={isIOS ? 'large' : 48}
-              style={styles.marginRight}
+              style={styles.marginEnd}
             />
             <TextComponent>Loading.....</TextComponent>
           </View>
@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  marginRight: {
-    marginRight: 16,
+  marginEnd: {
+    marginEnd: 16,
   },
 });
 

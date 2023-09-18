@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import ListSubheader from './ListSubheader';
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 
@@ -62,10 +63,11 @@ const ListSection = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { localeProps } = useLocale();
   const viewProps = { ...rest, theme };
 
   return (
-    <View {...viewProps} style={[styles.container, style]}>
+    <View {...viewProps} style={[styles.container, style]} {...localeProps}>
       {title ? (
         <ListSubheader style={titleStyle} theme={theme}>
           {title}

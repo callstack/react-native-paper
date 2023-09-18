@@ -13,6 +13,7 @@ import {
 import color from 'color';
 
 import { ButtonMode, getButtonColors } from './utils';
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
@@ -172,6 +173,7 @@ const Button = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { localeProps } = useLocale();
   const isMode = React.useCallback(
     (modeToCompare: ButtonMode) => {
       return mode === modeToCompare;
@@ -295,6 +297,7 @@ const Button = ({
         ] as ViewStyle
       }
       {...(isV3 && { elevation: elevation })}
+      {...localeProps}
     >
       <TouchableRipple
         borderless
@@ -381,45 +384,45 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   icon: {
-    marginLeft: 12,
-    marginRight: -4,
+    marginStart: 12,
+    marginEnd: -4,
   },
   iconReverse: {
-    marginRight: 12,
-    marginLeft: -4,
+    marginEnd: 12,
+    marginStart: -4,
   },
   /* eslint-disable react-native/no-unused-styles */
   md3Icon: {
-    marginLeft: 16,
-    marginRight: -16,
+    marginStart: 16,
+    marginEnd: -16,
   },
   md3IconCompact: {
-    marginLeft: 8,
-    marginRight: 0,
+    marginStart: 8,
+    marginEnd: 0,
   },
   md3IconReverse: {
-    marginLeft: -16,
-    marginRight: 16,
+    marginStart: -16,
+    marginEnd: 16,
   },
   md3IconReverseCompact: {
-    marginLeft: 0,
-    marginRight: 8,
+    marginStart: 0,
+    marginEnd: 8,
   },
   md3IconTextMode: {
-    marginLeft: 12,
-    marginRight: -8,
+    marginStart: 12,
+    marginEnd: -8,
   },
   md3IconTextModeCompact: {
-    marginLeft: 6,
-    marginRight: 0,
+    marginStart: 6,
+    marginEnd: 0,
   },
   md3IconReverseTextMode: {
-    marginLeft: -8,
-    marginRight: 12,
+    marginStart: -8,
+    marginEnd: 12,
   },
   md3IconReverseTextModeCompact: {
-    marginLeft: 0,
-    marginRight: 6,
+    marginStart: 0,
+    marginEnd: 6,
   },
   /* eslint-enable react-native/no-unused-styles */
   label: {

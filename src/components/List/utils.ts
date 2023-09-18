@@ -13,8 +13,8 @@ type Description =
     }) => React.ReactNode);
 
 export type Style = {
-  marginLeft?: number;
-  marginRight?: number;
+  marginStart?: number;
+  marginEnd?: number;
   marginVertical?: number;
   alignSelf?: FlexAlignType;
 };
@@ -25,25 +25,25 @@ export const getLeftStyles = (
   isV3: boolean
 ) => {
   const stylesV3 = {
-    marginRight: 0,
-    marginLeft: 16,
+    marginEnd: 0,
+    marginStart: 16,
     alignSelf: alignToTop ? 'flex-start' : 'center',
   };
 
   if (!description) {
     return {
-      ...styles.iconMarginLeft,
+      ...styles.iconmarginStart,
       ...styles.marginVerticalNone,
       ...(isV3 && { ...stylesV3 }),
     };
   }
 
   if (!isV3) {
-    return styles.iconMarginLeft;
+    return styles.iconmarginStart;
   }
 
   return {
-    ...styles.iconMarginLeft,
+    ...styles.iconmarginStart,
     ...stylesV3,
   };
 };
@@ -54,32 +54,32 @@ export const getRightStyles = (
   isV3: boolean
 ) => {
   const stylesV3 = {
-    marginLeft: 16,
+    marginStart: 16,
     alignSelf: alignToTop ? 'flex-start' : 'center',
   };
 
   if (!description) {
     return {
-      ...styles.iconMarginRight,
+      ...styles.iconmarginEnd,
       ...styles.marginVerticalNone,
       ...(isV3 && { ...stylesV3 }),
     };
   }
 
   if (!isV3) {
-    return styles.iconMarginRight;
+    return styles.iconmarginEnd;
   }
 
   return {
-    ...styles.iconMarginRight,
+    ...styles.iconmarginEnd,
     ...stylesV3,
   };
 };
 
 const styles = StyleSheet.create({
   marginVerticalNone: { marginVertical: 0 },
-  iconMarginLeft: { marginLeft: 0, marginRight: 16 },
-  iconMarginRight: { marginRight: 0 },
+  iconmarginStart: { marginStart: 0, marginEnd: 16 },
+  iconmarginEnd: { marginEnd: 0 },
 });
 
 export const getAccordionColors = ({

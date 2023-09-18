@@ -11,6 +11,7 @@ import {
 import Checkbox from './Checkbox';
 import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp, MD3TypescaleKey } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -131,6 +132,7 @@ const CheckboxItem = ({
   const theme = useInternalTheme(themeOverrides);
   const checkboxProps = { ...props, status, theme, disabled };
   const isLeading = position === 'leading';
+  const { overwriteRTL } = useLocale();
   let checkbox;
 
   if (mode === 'android') {
@@ -145,7 +147,12 @@ const CheckboxItem = ({
   const disabledTextColor = theme.isV3
     ? theme.colors.onSurfaceDisabled
     : theme.colors.disabled;
-  const textAlign = isLeading ? 'right' : 'left';
+
+  let textAlign = isLeading ? 'right' : 'left';
+
+  if (overwriteRTL) {
+    textAlign = isLeading ? 'left' : 'right';
+  }
 
   const computedStyle = {
     color: disabled ? disabledTextColor : textColor,

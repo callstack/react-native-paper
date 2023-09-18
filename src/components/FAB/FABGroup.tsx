@@ -324,8 +324,8 @@ const FABGroup = ({
   const { top, bottom, right, left } = useSafeAreaInsets();
   const containerPaddings = {
     paddingBottom: bottom,
-    paddingRight: right,
-    paddingLeft: left,
+    paddingEnd: right,
+    paddingStart: left,
     paddingTop: top,
   };
 

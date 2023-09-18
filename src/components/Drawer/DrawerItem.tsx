@@ -136,7 +136,7 @@ const DrawerItem = ({
                 styles.label,
                 {
                   color: contentColor,
-                  marginLeft: labelMargin,
+                  marginStart: labelMargin,
                   ...font,
                 },
               ]}
@@ -162,8 +162,8 @@ const styles = StyleSheet.create({
   v3Container: {
     justifyContent: 'center',
     height: 56,
-    marginLeft: 12,
-    marginRight: 12,
+    marginStart: 12,
+    marginEnd: 12,
     marginVertical: 0,
   },
   wrapper: {
@@ -172,8 +172,8 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   v3Wrapper: {
-    marginLeft: 16,
-    marginRight: 24,
+    marginStart: 16,
+    marginEnd: 24,
     padding: 0,
   },
   content: {
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   label: {
-    marginRight: 32,
+    marginEnd: 32,
   },
 });
 

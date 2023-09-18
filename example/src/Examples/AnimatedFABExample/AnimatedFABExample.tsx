@@ -11,6 +11,7 @@ import {
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import { useLocale } from '../../../../src/core/Localization';
 import CustomFAB from './CustomFAB';
 import CustomFABControls, {
   Controls,
@@ -33,6 +34,7 @@ type Item = {
 
 const AnimatedFABExample = () => {
   const { colors, isV3 } = useExampleTheme();
+  const { localeProps } = useLocale();
 
   const isIOS = Platform.OS === 'ios';
 
@@ -155,6 +157,7 @@ const AnimatedFABExample = () => {
         ]}
         contentContainerStyle={styles.container}
         onScroll={onScroll}
+        {...localeProps}
       />
 
       <CustomFAB
@@ -177,7 +180,7 @@ const styles = StyleSheet.create({
     paddingBottom: 60,
   },
   avatar: {
-    marginRight: 16,
+    marginEnd: 16,
     marginTop: 8,
   },
   flex: {
@@ -204,7 +207,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   icon: {
-    marginLeft: 16,
+    marginStart: 16,
     alignSelf: 'flex-end',
   },
   date: {
@@ -212,7 +215,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 14,
-    marginRight: 8,
+    marginEnd: 8,
     flex: 1,
   },
 });

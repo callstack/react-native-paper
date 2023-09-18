@@ -20,6 +20,7 @@ exports[`renders chip with close button 1`] = `
 >
   <View
     collapsable={false}
+    dir="rtl"
     style={
       {
         "backgroundColor": "rgba(232, 222, 248, 1)",
@@ -94,14 +95,14 @@ exports[`renders chip with close button 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
+              "paddingStart": 4,
               "position": "relative",
             },
             {
-              "paddingLeft": 0,
+              "paddingStart": 0,
             },
             {
-              "paddingRight": 34,
+              "paddingEnd": 34,
             },
           ]
         }
@@ -114,8 +115,8 @@ exports[`renders chip with close button 1`] = `
                 "padding": 4,
               },
               {
-                "paddingLeft": 8,
-                "paddingRight": 0,
+                "paddingEnd": 0,
+                "paddingStart": 8,
               },
               null,
             ]
@@ -192,8 +193,8 @@ exports[`renders chip with close button 1`] = `
                     "lineHeight": 20,
                   },
                   {
-                    "marginLeft": 8,
-                    "marginRight": 0,
+                    "marginEnd": 0,
+                    "marginStart": 8,
                   },
                   undefined,
                 ],
@@ -209,10 +210,10 @@ exports[`renders chip with close button 1`] = `
       style={
         {
           "alignItems": "center",
+          "end": 0,
           "height": "100%",
           "justifyContent": "center",
           "position": "absolute",
-          "right": 0,
         }
       }
     >
@@ -244,10 +245,10 @@ exports[`renders chip with close button 1`] = `
               "padding": 4,
             },
             {
-              "marginRight": 4,
+              "marginEnd": 4,
             },
             {
-              "marginRight": 8,
+              "marginEnd": 8,
               "padding": 0,
             },
           ]
@@ -315,6 +316,7 @@ exports[`renders chip with custom close button 1`] = `
 >
   <View
     collapsable={false}
+    dir="rtl"
     style={
       {
         "backgroundColor": "rgba(232, 222, 248, 1)",
@@ -389,14 +391,14 @@ exports[`renders chip with custom close button 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
+              "paddingStart": 4,
               "position": "relative",
             },
             {
-              "paddingLeft": 0,
+              "paddingStart": 0,
             },
             {
-              "paddingRight": 34,
+              "paddingEnd": 34,
             },
           ]
         }
@@ -409,8 +411,8 @@ exports[`renders chip with custom close button 1`] = `
                 "padding": 4,
               },
               {
-                "paddingLeft": 8,
-                "paddingRight": 0,
+                "paddingEnd": 0,
+                "paddingStart": 8,
               },
               null,
             ]
@@ -487,8 +489,8 @@ exports[`renders chip with custom close button 1`] = `
                     "lineHeight": 20,
                   },
                   {
-                    "marginLeft": 8,
-                    "marginRight": 0,
+                    "marginEnd": 0,
+                    "marginStart": 8,
                   },
                   undefined,
                 ],
@@ -504,10 +506,10 @@ exports[`renders chip with custom close button 1`] = `
       style={
         {
           "alignItems": "center",
+          "end": 0,
           "height": "100%",
           "justifyContent": "center",
           "position": "absolute",
-          "right": 0,
         }
       }
     >
@@ -539,10 +541,10 @@ exports[`renders chip with custom close button 1`] = `
               "padding": 4,
             },
             {
-              "marginRight": 4,
+              "marginEnd": 4,
             },
             {
-              "marginRight": 8,
+              "marginEnd": 8,
               "padding": 0,
             },
           ]
@@ -610,6 +612,7 @@ exports[`renders chip with icon 1`] = `
 >
   <View
     collapsable={false}
+    dir="rtl"
     style={
       {
         "backgroundColor": "rgba(232, 222, 248, 1)",
@@ -684,14 +687,14 @@ exports[`renders chip with icon 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
+              "paddingStart": 4,
               "position": "relative",
             },
             {
-              "paddingLeft": 0,
+              "paddingStart": 0,
             },
             {
-              "paddingRight": 0,
+              "paddingEnd": 0,
             },
           ]
         }
@@ -704,8 +707,8 @@ exports[`renders chip with icon 1`] = `
                 "padding": 4,
               },
               {
-                "paddingLeft": 8,
-                "paddingRight": 0,
+                "paddingEnd": 0,
+                "paddingStart": 8,
               },
               null,
             ]
@@ -782,8 +785,8 @@ exports[`renders chip with icon 1`] = `
                     "lineHeight": 20,
                   },
                   {
-                    "marginLeft": 8,
-                    "marginRight": 16,
+                    "marginEnd": 16,
+                    "marginStart": 8,
                   },
                   undefined,
                 ],
@@ -819,6 +822,7 @@ exports[`renders chip with onPress 1`] = `
 >
   <View
     collapsable={false}
+    dir="rtl"
     style={
       {
         "backgroundColor": "rgba(232, 222, 248, 1)",
@@ -893,14 +897,14 @@ exports[`renders chip with onPress 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
+              "paddingStart": 4,
               "position": "relative",
             },
             {
-              "paddingLeft": 0,
+              "paddingStart": 0,
             },
             {
-              "paddingRight": 0,
+              "paddingEnd": 0,
             },
           ]
         }
@@ -939,8 +943,8 @@ exports[`renders chip with onPress 1`] = `
                     "lineHeight": 20,
                   },
                   {
-                    "marginLeft": 16,
-                    "marginRight": 16,
+                    "marginEnd": 16,
+                    "marginStart": 16,
                   },
                   undefined,
                 ],
@@ -976,6 +980,7 @@ exports[`renders outlined disabled chip 1`] = `
 >
   <View
     collapsable={false}
+    dir="rtl"
     style={
       {
         "backgroundColor": "transparent",
@@ -1050,14 +1055,14 @@ exports[`renders outlined disabled chip 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
+              "paddingStart": 4,
               "position": "relative",
             },
             {
-              "paddingLeft": 0,
+              "paddingStart": 0,
             },
             {
-              "paddingRight": 0,
+              "paddingEnd": 0,
             },
           ]
         }
@@ -1096,8 +1101,8 @@ exports[`renders outlined disabled chip 1`] = `
                     "lineHeight": 20,
                   },
                   {
-                    "marginLeft": 16,
-                    "marginRight": 16,
+                    "marginEnd": 16,
+                    "marginStart": 16,
                   },
                   undefined,
                 ],
@@ -1133,6 +1138,7 @@ exports[`renders selected chip 1`] = `
 >
   <View
     collapsable={false}
+    dir="rtl"
     style={
       {
         "backgroundColor": "rgb(232, 222, 248)",
@@ -1207,14 +1213,14 @@ exports[`renders selected chip 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
+              "paddingStart": 4,
               "position": "relative",
             },
             {
-              "paddingLeft": 0,
+              "paddingStart": 0,
             },
             {
-              "paddingRight": 0,
+              "paddingEnd": 0,
             },
           ]
         }
@@ -1227,8 +1233,8 @@ exports[`renders selected chip 1`] = `
                 "padding": 4,
               },
               {
-                "paddingLeft": 8,
-                "paddingRight": 0,
+                "paddingEnd": 0,
+                "paddingStart": 8,
               },
               null,
             ]
@@ -1305,8 +1311,8 @@ exports[`renders selected chip 1`] = `
                     "lineHeight": 20,
                   },
                   {
-                    "marginLeft": 8,
-                    "marginRight": 16,
+                    "marginEnd": 16,
+                    "marginStart": 8,
                   },
                   undefined,
                 ],

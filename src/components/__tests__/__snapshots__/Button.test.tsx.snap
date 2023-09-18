@@ -851,16 +851,16 @@ exports[`renders button with icon 1`] = `
           style={
             [
               {
-                "marginLeft": 12,
-                "marginRight": -4,
+                "marginEnd": -4,
+                "marginStart": 12,
               },
               {
-                "marginLeft": 16,
-                "marginRight": -16,
+                "marginEnd": -16,
+                "marginStart": 16,
               },
               {
-                "marginLeft": 12,
-                "marginRight": -8,
+                "marginEnd": -8,
+                "marginStart": 12,
               },
             ]
           }
@@ -1059,16 +1059,16 @@ exports[`renders button with icon in reverse order 1`] = `
           style={
             [
               {
-                "marginLeft": -4,
-                "marginRight": 12,
+                "marginEnd": 12,
+                "marginStart": -4,
               },
               {
-                "marginLeft": -16,
-                "marginRight": 16,
+                "marginEnd": 16,
+                "marginStart": -16,
               },
               {
-                "marginLeft": -8,
-                "marginRight": 12,
+                "marginEnd": 12,
+                "marginStart": -8,
               },
             ]
           }
@@ -1578,16 +1578,16 @@ exports[`renders loading button 1`] = `
               },
               [
                 {
-                  "marginLeft": 12,
-                  "marginRight": -4,
+                  "marginEnd": -4,
+                  "marginStart": 12,
                 },
                 {
-                  "marginLeft": 16,
-                  "marginRight": -16,
+                  "marginEnd": -16,
+                  "marginStart": 16,
                 },
                 {
-                  "marginLeft": 12,
-                  "marginRight": -8,
+                  "marginEnd": -8,
+                  "marginStart": 12,
                 },
               ],
             ]

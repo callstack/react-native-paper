@@ -50,8 +50,8 @@ exports[`renders DrawerItem with icon 1`] = `
           {
             "height": 56,
             "justifyContent": "center",
-            "marginLeft": 12,
-            "marginRight": 12,
+            "marginEnd": 12,
+            "marginStart": 12,
             "marginVertical": 0,
           },
           undefined,
@@ -68,8 +68,8 @@ exports[`renders DrawerItem with icon 1`] = `
             "padding": 8,
           },
           {
-            "marginLeft": 16,
-            "marginRight": 24,
+            "marginEnd": 24,
+            "marginStart": 16,
             "padding": 0,
           },
         ]
@@ -142,7 +142,7 @@ exports[`renders DrawerItem with icon 1`] = `
                 },
                 [
                   {
-                    "marginRight": 32,
+                    "marginEnd": 32,
                   },
                   {
                     "color": "rgba(73, 69, 79, 1)",
@@ -151,7 +151,7 @@ exports[`renders DrawerItem with icon 1`] = `
                     "fontWeight": "500",
                     "letterSpacing": 0.1,
                     "lineHeight": 20,
-                    "marginLeft": 12,
+                    "marginStart": 12,
                   },
                 ],
               ],
@@ -216,8 +216,8 @@ exports[`renders active DrawerItem 1`] = `
           {
             "height": 56,
             "justifyContent": "center",
-            "marginLeft": 12,
-            "marginRight": 12,
+            "marginEnd": 12,
+            "marginStart": 12,
             "marginVertical": 0,
           },
           undefined,
@@ -234,8 +234,8 @@ exports[`renders active DrawerItem 1`] = `
             "padding": 8,
           },
           {
-            "marginLeft": 16,
-            "marginRight": 24,
+            "marginEnd": 24,
+            "marginStart": 16,
             "padding": 0,
           },
         ]
@@ -308,7 +308,7 @@ exports[`renders active DrawerItem 1`] = `
                 },
                 [
                   {
-                    "marginRight": 32,
+                    "marginEnd": 32,
                   },
                   {
                     "color": "rgba(29, 25, 43, 1)",
@@ -317,7 +317,7 @@ exports[`renders active DrawerItem 1`] = `
                     "fontWeight": "500",
                     "letterSpacing": 0.1,
                     "lineHeight": 20,
-                    "marginLeft": 12,
+                    "marginStart": 12,
                   },
                 ],
               ],
@@ -382,8 +382,8 @@ exports[`renders basic DrawerItem 1`] = `
           {
             "height": 56,
             "justifyContent": "center",
-            "marginLeft": 12,
-            "marginRight": 12,
+            "marginEnd": 12,
+            "marginStart": 12,
             "marginVertical": 0,
           },
           undefined,
@@ -400,8 +400,8 @@ exports[`renders basic DrawerItem 1`] = `
             "padding": 8,
           },
           {
-            "marginLeft": 16,
-            "marginRight": 24,
+            "marginEnd": 24,
+            "marginStart": 16,
             "padding": 0,
           },
         ]
@@ -438,7 +438,7 @@ exports[`renders basic DrawerItem 1`] = `
                 },
                 [
                   {
-                    "marginRight": 32,
+                    "marginEnd": 32,
                   },
                   {
                     "color": "rgba(73, 69, 79, 1)",
@@ -447,7 +447,7 @@ exports[`renders basic DrawerItem 1`] = `
                     "fontWeight": "500",
                     "letterSpacing": 0.1,
                     "lineHeight": 20,
-                    "marginLeft": 0,
+                    "marginStart": 0,
                   },
                 ],
               ],

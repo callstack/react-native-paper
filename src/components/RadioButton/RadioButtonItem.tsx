@@ -13,6 +13,7 @@ import RadioButtonAndroid from './RadioButtonAndroid';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import RadioButtonIOS from './RadioButtonIOS';
 import { handlePress, isChecked } from './utils';
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp, MD3TypescaleKey } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
@@ -135,6 +136,7 @@ const RadioButtonItem = ({
   labelVariant = 'bodyLarge',
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { overwriteRTL } = useLocale();
   const radioButtonProps = {
     value,
     disabled,
@@ -158,7 +160,12 @@ const RadioButtonItem = ({
   const disabledTextColor = theme.isV3
     ? theme.colors.onSurfaceDisabled
     : theme.colors.disabled;
-  const textAlign = isLeading ? 'right' : 'left';
+
+  let textAlign = isLeading ? 'right' : 'left';
+
+  if (overwriteRTL) {
+    textAlign = isLeading ? 'left' : 'right';
+  }
 
   const computedStyle = {
     color: disabled ? disabledTextColor : textColor,

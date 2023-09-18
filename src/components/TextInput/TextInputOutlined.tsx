@@ -3,7 +3,6 @@ import {
   View,
   TextInput as NativeTextInput,
   StyleSheet,
-  I18nManager,
   Platform,
   TextStyle,
   ColorValue,
@@ -39,6 +38,7 @@ import {
 import InputLabel from './Label/InputLabel';
 import LabelBackground from './Label/LabelBackground';
 import type { RenderProps, ChildTextInputProps } from './types';
+import { useLocale } from '../../core/Localization';
 
 const TextInputOutlined = ({
   disabled = false,
@@ -73,6 +73,9 @@ const TextInputOutlined = ({
   contentStyle,
   ...rest
 }: ChildTextInputProps) => {
+  const { direction } = useLocale();
+  const isRTL = direction === 'rtl';
+
   const adornmentConfig = getAdornmentConfig({ left, right });
 
   const { colors, isV3, roundness } = theme;
@@ -119,7 +122,7 @@ const TextInputOutlined = ({
   const labelHalfHeight = labelHeight / 2;
 
   const baseLabelTranslateX =
-    (I18nManager.getConstants().isRTL ? 1 : -1) *
+    (isRTL ? 1 : -1) *
     (labelHalfWidth -
       (labelScale * labelWidth) / 2 -
       (fontSize - MINIMIZED_LABEL_FONT_SIZE) * labelScale);
@@ -131,8 +134,7 @@ const TextInputOutlined = ({
   );
   if (isAdornmentLeftIcon) {
     labelTranslationXOffset =
-      (I18nManager.getConstants().isRTL ? -1 : 1) *
-      (ADORNMENT_SIZE + ADORNMENT_OFFSET - (isV3 ? 0 : 8));
+      (isRTL ? -1 : 1) * (ADORNMENT_SIZE + ADORNMENT_OFFSET - (isV3 ? 0 : 8));
   }
 
   const minInputHeight =
@@ -365,11 +367,7 @@ const TextInputOutlined = ({
                 fontWeight,
                 color: inputTextColor,
                 textAlignVertical: multiline ? 'top' : 'center',
-                textAlign: textAlign
-                  ? textAlign
-                  : I18nManager.getConstants().isRTL
-                  ? 'right'
-                  : 'left',
+                textAlign: textAlign ? textAlign : isRTL ? 'right' : 'left',
                 paddingHorizontal: INPUT_PADDING_HORIZONTAL,
               },
               Platform.OS === 'web' && { outline: 'none' },

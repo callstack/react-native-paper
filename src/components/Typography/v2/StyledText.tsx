@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { I18nManager, StyleProp, StyleSheet, TextStyle } from 'react-native';
+import { StyleProp, StyleSheet, TextStyle } from 'react-native';
 
 import color from 'color';
 import type { ThemeProp } from 'src/types';
 
 import Text from './Text';
+import { useLocale } from '../../../core/Localization';
 import { useInternalTheme } from '../../../core/theming';
 
 type Props = React.ComponentProps<typeof Text> & {
@@ -22,6 +23,7 @@ const StyledText = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
 
   const textColor = color(
     theme.isV3 ? theme.colors.onSurface : theme.colors?.text
@@ -29,7 +31,7 @@ const StyledText = ({
     .alpha(alpha)
     .rgb()
     .string();
-  const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
+  const writingDirection = direction;
 
   return (
     <Text

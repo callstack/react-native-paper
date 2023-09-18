@@ -6,20 +6,20 @@ import Text from '../Typography/Text';
 
 const styles = StyleSheet.create({
   leftItem: {
-    marginLeft: 0,
-    marginRight: 16,
+    marginStart: 0,
+    marginEnd: 16,
   },
   leftItemV3: {
-    marginLeft: 16,
-    marginRight: 0,
+    marginStart: 16,
+    marginEnd: 0,
     alignSelf: 'center',
   },
   rightItem: {
-    marginRight: 0,
+    marginEnd: 0,
   },
   rightItemV3: {
-    marginLeft: 16,
-    marginRight: 0,
+    marginStart: 16,
+    marginEnd: 0,
     alignSelf: 'center',
   },
 });

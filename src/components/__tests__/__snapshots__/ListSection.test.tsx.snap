@@ -253,7 +253,7 @@ exports[`renders list section with custom title style 1`] = `
         false,
         [
           {
-            "paddingRight": 24,
+            "paddingEnd": 24,
             "paddingVertical": 8,
           },
           undefined,
@@ -263,11 +263,13 @@ exports[`renders list section with custom title style 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+        ]
       }
     >
       <View
@@ -280,8 +282,8 @@ exports[`renders list section with custom title style 1`] = `
             },
             {
               "alignSelf": "center",
-              "marginLeft": 16,
-              "marginRight": 0,
+              "marginEnd": 0,
+              "marginStart": 16,
               "marginVertical": 0,
             },
           ]
@@ -328,7 +330,7 @@ exports[`renders list section with custom title style 1`] = `
         style={
           [
             {
-              "paddingLeft": 16,
+              "paddingStart": 16,
             },
             {
               "flexGrow": 1,
@@ -407,7 +409,7 @@ exports[`renders list section with custom title style 1`] = `
         false,
         [
           {
-            "paddingRight": 24,
+            "paddingEnd": 24,
             "paddingVertical": 8,
           },
           undefined,
@@ -417,11 +419,13 @@ exports[`renders list section with custom title style 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+        ]
       }
     >
       <View
@@ -434,8 +438,8 @@ exports[`renders list section with custom title style 1`] = `
             },
             {
               "alignSelf": "center",
-              "marginLeft": 16,
-              "marginRight": 0,
+              "marginEnd": 0,
+              "marginStart": 16,
               "marginVertical": 0,
             },
           ]
@@ -482,7 +486,7 @@ exports[`renders list section with custom title style 1`] = `
         style={
           [
             {
-              "paddingLeft": 16,
+              "paddingStart": 16,
             },
             {
               "flexGrow": 1,
@@ -780,7 +784,7 @@ exports[`renders list section with subheader 1`] = `
         false,
         [
           {
-            "paddingRight": 24,
+            "paddingEnd": 24,
             "paddingVertical": 8,
           },
           undefined,
@@ -790,11 +794,13 @@ exports[`renders list section with subheader 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+        ]
       }
     >
       <View
@@ -807,8 +813,8 @@ exports[`renders list section with subheader 1`] = `
             },
             {
               "alignSelf": "center",
-              "marginLeft": 16,
-              "marginRight": 0,
+              "marginEnd": 0,
+              "marginStart": 16,
               "marginVertical": 0,
             },
           ]
@@ -855,7 +861,7 @@ exports[`renders list section with subheader 1`] = `
         style={
           [
             {
-              "paddingLeft": 16,
+              "paddingStart": 16,
             },
             {
               "flexGrow": 1,
@@ -934,7 +940,7 @@ exports[`renders list section with subheader 1`] = `
         false,
         [
           {
-            "paddingRight": 24,
+            "paddingEnd": 24,
             "paddingVertical": 8,
           },
           undefined,
@@ -944,11 +950,13 @@ exports[`renders list section with subheader 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+        ]
       }
     >
       <View
@@ -961,8 +969,8 @@ exports[`renders list section with subheader 1`] = `
             },
             {
               "alignSelf": "center",
-              "marginLeft": 16,
-              "marginRight": 0,
+              "marginEnd": 0,
+              "marginStart": 16,
               "marginVertical": 0,
             },
           ]
@@ -1009,7 +1017,7 @@ exports[`renders list section with subheader 1`] = `
         style={
           [
             {
-              "paddingLeft": 16,
+              "paddingStart": 16,
             },
             {
               "flexGrow": 1,
@@ -1267,7 +1275,7 @@ exports[`renders list section without subheader 1`] = `
         false,
         [
           {
-            "paddingRight": 24,
+            "paddingEnd": 24,
             "paddingVertical": 8,
           },
           undefined,
@@ -1277,11 +1285,13 @@ exports[`renders list section without subheader 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+        ]
       }
     >
       <View
@@ -1294,8 +1304,8 @@ exports[`renders list section without subheader 1`] = `
             },
             {
               "alignSelf": "center",
-              "marginLeft": 16,
-              "marginRight": 0,
+              "marginEnd": 0,
+              "marginStart": 16,
               "marginVertical": 0,
             },
           ]
@@ -1342,7 +1352,7 @@ exports[`renders list section without subheader 1`] = `
         style={
           [
             {
-              "paddingLeft": 16,
+              "paddingStart": 16,
             },
             {
               "flexGrow": 1,
@@ -1421,7 +1431,7 @@ exports[`renders list section without subheader 1`] = `
         false,
         [
           {
-            "paddingRight": 24,
+            "paddingEnd": 24,
             "paddingVertical": 8,
           },
           undefined,
@@ -1431,11 +1441,13 @@ exports[`renders list section without subheader 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+        ]
       }
     >
       <View
@@ -1448,8 +1460,8 @@ exports[`renders list section without subheader 1`] = `
             },
             {
               "alignSelf": "center",
-              "marginLeft": 16,
-              "marginRight": 0,
+              "marginEnd": 0,
+              "marginStart": 16,
               "marginVertical": 0,
             },
           ]
@@ -1496,7 +1508,7 @@ exports[`renders list section without subheader 1`] = `
         style={
           [
             {
-              "paddingLeft": 16,
+              "paddingStart": 16,
             },
             {
               "flexGrow": 1,

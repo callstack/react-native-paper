@@ -16,6 +16,7 @@ import {
 import useLatestCallback from 'use-latest-callback';
 
 import { getChipColors } from './helpers';
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
@@ -192,6 +193,7 @@ const Chip = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction, localeProps } = useLocale();
   const { isV3 } = theme;
 
   const { current: elevation } = React.useRef<Animated.Value>(
@@ -261,14 +263,14 @@ const Chip = ({
   const elevationStyle = isV3 || Platform.OS === 'android' ? elevation : 0;
   const multiplier = isV3 ? (compact ? 1.5 : 2) : 1;
   const labelSpacings = {
-    marginRight: onClose ? 0 : 8 * multiplier,
-    marginLeft:
+    marginEnd: onClose ? 0 : 8 * multiplier,
+    marginStart:
       avatar || icon || (selected && showSelectedCheck)
         ? 4 * multiplier
         : 8 * multiplier,
   };
   const contentSpacings = {
-    paddingRight: isV3 ? (onClose ? 34 : 0) : onClose ? 32 : 4,
+    paddingEnd: isV3 ? (onClose ? 34 : 0) : onClose ? 32 : 4,
   };
   const labelTextStyle = {
     color: textColor,
@@ -294,6 +296,8 @@ const Chip = ({
       {...rest}
       testID={`${testID}-container`}
       theme={theme}
+      // @ts-ignore
+      dir="rtl"
     >
       <TouchableRipple
         borderless
@@ -310,6 +314,7 @@ const Chip = ({
         accessibilityState={accessibilityState}
         testID={testID}
         theme={theme}
+        {...localeProps}
       >
         <View
           style={[styles.content, isV3 && styles.md3Content, contentSpacings]}
@@ -361,7 +366,7 @@ const Chip = ({
                   name="check"
                   color={avatar ? white : iconColor}
                   size={18}
-                  direction="ltr"
+                  direction={direction}
                 />
               )}
             </View>
@@ -403,7 +408,7 @@ const Chip = ({
                   name={isV3 ? 'close' : 'close-circle'}
                   size={iconSize}
                   color={iconColor}
-                  direction="ltr"
+                  direction={direction}
                 />
               )}
             </View>
@@ -429,25 +434,25 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 4,
+    paddingStart: 4,
     position: 'relative',
   },
   md3Content: {
-    paddingLeft: 0,
+    paddingStart: 0,
   },
   icon: {
     padding: 4,
     alignSelf: 'center',
   },
   md3Icon: {
-    paddingLeft: 8,
-    paddingRight: 0,
+    paddingStart: 8,
+    paddingEnd: 0,
   },
   closeIcon: {
-    marginRight: 4,
+    marginEnd: 4,
   },
   md3CloseIcon: {
-    marginRight: 8,
+    marginEnd: 8,
     padding: 0,
   },
   labelText: {
@@ -466,25 +471,25 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   avatarWrapper: {
-    marginRight: 4,
+    marginEnd: 4,
   },
   md3AvatarWrapper: {
-    marginLeft: 4,
-    marginRight: 0,
+    marginStart: 4,
+    marginEnd: 0,
   },
   md3SelectedIcon: {
-    paddingLeft: 4,
+    paddingStart: 4,
   },
   // eslint-disable-next-line react-native/no-color-literals
   avatarSelected: {
     position: 'absolute',
     top: 4,
-    left: 4,
+    start: 4,
     backgroundColor: 'rgba(0, 0, 0, .29)',
   },
   closeButtonStyle: {
     position: 'absolute',
-    right: 0,
+    end: 0,
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',

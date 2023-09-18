@@ -121,7 +121,7 @@ exports[`Menu Item renders menu item 1`] = `
               "minWidth": 100,
             },
             {
-              "marginLeft": 12,
+              "marginStart": 12,
             },
             undefined,
           ]
@@ -289,7 +289,7 @@ exports[`Menu Item renders menu item 1`] = `
               "minWidth": 100,
             },
             {
-              "marginLeft": 12,
+              "marginStart": 12,
             },
             undefined,
           ]
@@ -457,7 +457,7 @@ exports[`Menu Item renders menu item 1`] = `
               "minWidth": 100,
             },
             {
-              "marginLeft": 12,
+              "marginStart": 12,
             },
             undefined,
           ]
@@ -625,7 +625,7 @@ exports[`Menu Item renders menu item 1`] = `
               "minWidth": 100,
             },
             {
-              "marginLeft": 12,
+              "marginStart": 12,
             },
             undefined,
           ]
@@ -745,7 +745,7 @@ exports[`Menu Item renders menu item 1`] = `
               "minWidth": 100,
             },
             {
-              "marginLeft": 4,
+              "marginStart": 4,
             },
             undefined,
           ]
