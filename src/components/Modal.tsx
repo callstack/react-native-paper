@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  BackHandler,
   Easing,
   StyleProp,
   StyleSheet,
@@ -17,6 +16,7 @@ import Surface from './Surface';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 import { addEventListener } from '../utils/addEventListener';
+import { BackHandler } from '../utils/BackHandler/BackHandler';
 import useAnimatedValue from '../utils/useAnimatedValue';
 
 export type Props = {
