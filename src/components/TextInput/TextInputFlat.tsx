@@ -83,7 +83,7 @@ const TextInputFlat = ({
 
   const {
     fontSize: fontSizeStyle,
-    lineHeight,
+    lineHeight: lineHeightStyle,
     fontWeight,
     height,
     paddingHorizontal,
@@ -91,6 +91,7 @@ const TextInputFlat = ({
     ...viewStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
   const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
+  const lineHeight = lineHeightStyle || fontSize * 1.2;
 
   const isPaddingHorizontalPassed =
     paddingHorizontal !== undefined && typeof paddingHorizontal === 'number';

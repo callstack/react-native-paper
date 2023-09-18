@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import { StyleSheet, Text, Platform, I18nManager } from 'react-native';
+import { StyleSheet, Text, Platform, I18nManager, View } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
@@ -379,6 +379,76 @@ it("correctly applies theme background to label when input's background is trans
 
   expect(getByTestId('transparent-example-label-background')).toHaveStyle({
     backgroundColor: 'pink',
+  });
+});
+
+it('always applies line height, even if not specified', () => {
+  const { getByTestId } = render(
+    <View>
+      <TextInput
+        mode="outlined"
+        label="Default font outlined"
+        value="Some test value"
+        testID="default-font"
+      />
+      <TextInput
+        mode="flat"
+        label="Default font outlined - flat"
+        value="Some test value"
+        testID="default-font-flat"
+      />
+      <TextInput
+        mode="outlined"
+        label="Large font outlined"
+        value="Some test value"
+        testID="large-font"
+        style={{
+          fontSize: 30,
+        }}
+      />
+      <TextInput
+        mode="outlined"
+        label="Large font outlined - flat"
+        value="Some test value"
+        testID="large-font-flat"
+        style={{
+          fontSize: 30,
+        }}
+      />
+      <TextInput
+        mode="outlined"
+        label="Custom line height outlined"
+        value="Some test value"
+        testID="custom-line-height"
+        style={{
+          fontSize: 40,
+          lineHeight: 29,
+        }}
+      />
+      <TextInput
+        mode="outlined"
+        label="Custom line height outlined - flat"
+        value="Some test value"
+        testID="custom-line-height-flat"
+        style={{
+          fontSize: 40,
+          lineHeight: 29,
+        }}
+      />
+    </View>
+  );
+
+  expect(getByTestId('default-font')).toHaveStyle({ lineHeight: 16 * 1.2 });
+  expect(getByTestId('default-font-flat')).toHaveStyle({
+    lineHeight: 16 * 1.2,
+  });
+
+  expect(getByTestId('large-font')).toHaveStyle({ lineHeight: 30 * 1.2 });
+  expect(getByTestId('large-font-flat')).toHaveStyle({ lineHeight: 30 * 1.2 });
+
+  expect(getByTestId('custom-line-height')).toHaveStyle({ lineHeight: 29 });
+  expect(getByTestId('custom-line-height-flat')).toHaveStyle({
+    lineHeight: 29,
   });
 });
 
