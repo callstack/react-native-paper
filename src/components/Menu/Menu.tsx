@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  BackHandler,
   Dimensions,
   Easing,
   EmitterSubscription,
@@ -16,9 +15,9 @@ import {
   ScrollViewProps,
   StyleProp,
   StyleSheet,
-  TouchableWithoutFeedback,
   View,
   ViewStyle,
+  Pressable,
 } from 'react-native';
 
 import MenuItem from './MenuItem';
@@ -26,6 +25,7 @@ import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 import { withInternalTheme } from '../../core/theming';
 import type { $Omit, InternalTheme } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
+import { BackHandler } from '../../utils/BackHandler/BackHandler';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
 
@@ -610,13 +610,12 @@ class Menu extends React.Component<Props, State> {
         {this.isCoordinate(anchor) ? null : anchor}
         {rendered ? (
           <Portal>
-            <TouchableWithoutFeedback
+            <Pressable
               accessibilityLabel={overlayAccessibilityLabel}
               accessibilityRole="button"
               onPress={onDismiss}
-            >
-              <View style={StyleSheet.absoluteFill} />
-            </TouchableWithoutFeedback>
+              style={styles.pressableOverlay}
+            />
             <View
               ref={(ref) => {
                 this.menu = ref;
@@ -672,6 +671,10 @@ const styles = StyleSheet.create({
   shadowMenuContainer: {
     opacity: 0,
     paddingVertical: 8,
+  },
+  pressableOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    width: '100%',
   },
 });
 

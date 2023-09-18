@@ -189,9 +189,20 @@ exports[`renders menu with content styles 1`] = `
           "selected": undefined,
         }
       }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -205,6 +216,7 @@ exports[`renders menu with content styles 1`] = `
           "position": "absolute",
           "right": 0,
           "top": 0,
+          "width": "100%",
         }
       }
     />
@@ -895,9 +907,20 @@ exports[`renders visible menu 1`] = `
           "selected": undefined,
         }
       }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -911,6 +934,7 @@ exports[`renders visible menu 1`] = `
           "position": "absolute",
           "right": 0,
           "top": 0,
+          "width": "100%",
         }
       }
     />
