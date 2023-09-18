@@ -62,6 +62,7 @@ exports[`correctly applies a component as the text label 1`] = `
               "translateX": 4,
             },
           ],
+          "width": 750,
           "zIndex": 3,
         }
       }
@@ -71,6 +72,7 @@ exports[`correctly applies a component as the text label 1`] = `
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onLayout={[Function]}
+        onTextLayout={[Function]}
         style={
           {
             "color": "rgba(103, 80, 164, 1)",
@@ -188,6 +190,7 @@ exports[`correctly applies a component as the text label 1`] = `
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "minWidth": 65,
             "paddingLeft": 16,
             "paddingRight": 16,
             "textAlign": "left",
@@ -270,6 +273,7 @@ exports[`correctly applies cursorColor prop 1`] = `
               "translateX": 4,
             },
           ],
+          "width": 750,
           "zIndex": 3,
         }
       }
@@ -279,6 +283,7 @@ exports[`correctly applies cursorColor prop 1`] = `
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onLayout={[Function]}
+        onTextLayout={[Function]}
         style={
           {
             "color": "rgba(103, 80, 164, 1)",
@@ -380,6 +385,7 @@ exports[`correctly applies cursorColor prop 1`] = `
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "minWidth": 65,
             "paddingLeft": 16,
             "paddingRight": 16,
             "textAlign": "left",
@@ -462,6 +468,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
               "translateX": 4,
             },
           ],
+          "width": 750,
           "zIndex": 3,
         }
       }
@@ -471,6 +478,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onLayout={[Function]}
+        onTextLayout={[Function]}
         style={
           {
             "color": "rgba(103, 80, 164, 1)",
@@ -572,6 +580,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "minWidth": 65,
             "paddingLeft": 16,
             "paddingRight": 16,
             "textAlign": "left",
@@ -648,6 +657,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
                 "translateX": 3,
               },
             ],
+            "width": 750,
             "zIndex": 3,
           }
         }
@@ -698,6 +708,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           onLayout={[Function]}
+          onTextLayout={[Function]}
           style={
             {
               "color": "rgba(103, 80, 164, 1)",
@@ -782,7 +793,6 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           [
             {
               "margin": 0,
-              "zIndex": 1,
             },
             {
               "height": 100,
@@ -798,6 +808,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "fontWeight": undefined,
               "letterSpacing": 0.15,
               "lineHeight": 19.2,
+              "minWidth": 65,
               "paddingHorizontal": 16,
               "textAlign": "left",
               "textAlignVertical": "top",
@@ -880,6 +891,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
               "translateX": 4,
             },
           ],
+          "width": 750,
           "zIndex": 3,
         }
       }
@@ -889,6 +901,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onLayout={[Function]}
+        onTextLayout={[Function]}
         style={
           {
             "color": "rgba(103, 80, 164, 1)",
@@ -990,6 +1003,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "minWidth": 65,
             "paddingLeft": 16,
             "paddingRight": 16,
             "textAlign": "left",
@@ -1074,6 +1088,7 @@ exports[`correctly applies textAlign center 1`] = `
               "translateX": 4,
             },
           ],
+          "width": 750,
           "zIndex": 3,
         }
       }
@@ -1083,6 +1098,7 @@ exports[`correctly applies textAlign center 1`] = `
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onLayout={[Function]}
+        onTextLayout={[Function]}
         style={
           {
             "color": "rgba(103, 80, 164, 1)",
@@ -1184,6 +1200,7 @@ exports[`correctly applies textAlign center 1`] = `
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "minWidth": 65,
             "paddingLeft": 16,
             "paddingRight": 16,
             "textAlign": "center",
@@ -1266,6 +1283,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
               "translateX": 4,
             },
           ],
+          "width": 750,
           "zIndex": 3,
         }
       }
@@ -1275,6 +1293,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onLayout={[Function]}
+        onTextLayout={[Function]}
         style={
           {
             "color": "rgba(103, 80, 164, 1)",
@@ -1376,6 +1395,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "minWidth": 65,
             "paddingLeft": 16,
             "paddingRight": 56,
             "textAlign": "left",
@@ -1660,6 +1680,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
               "translateX": 14,
             },
           ],
+          "width": 750,
           "zIndex": 3,
         }
       }
@@ -1669,6 +1690,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onLayout={[Function]}
+        onTextLayout={[Function]}
         style={
           {
             "color": "rgba(103, 80, 164, 1)",
@@ -1770,6 +1792,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "minWidth": 65,
             "paddingLeft": 56,
             "paddingRight": 56,
             "textAlign": "left",
