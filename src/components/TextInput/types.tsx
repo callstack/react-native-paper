@@ -1,3 +1,4 @@
+import * as React from 'react';
 import type {
   TextInput as NativeTextInput,
   Animated,
@@ -6,12 +7,43 @@ import type {
   ColorValue,
   StyleProp,
   ViewProps,
+  ViewStyle,
 } from 'react-native';
 
 import type { $Omit, InternalTheme, ThemeProp } from './../../types';
-import type { Props as TextInputProps } from './TextInput';
 
 export type TextInputLabelProp = string | React.ReactElement;
+
+type TextInputProps = React.ComponentPropsWithRef<typeof NativeTextInput> & {
+  mode?: 'flat' | 'outlined';
+  left?: React.ReactNode;
+  right?: React.ReactNode;
+  disabled?: boolean;
+  label?: TextInputLabelProp;
+  placeholder?: string;
+  error?: boolean;
+  onChangeText?: Function;
+  selectionColor?: string;
+  cursorColor?: string;
+  underlineColor?: string;
+  activeUnderlineColor?: string;
+  outlineColor?: string;
+  activeOutlineColor?: string;
+  textColor?: string;
+  dense?: boolean;
+  multiline?: boolean;
+  numberOfLines?: number;
+  onFocus?: (args: any) => void;
+  onBlur?: (args: any) => void;
+  render?: (props: RenderProps) => React.ReactNode;
+  value?: string;
+  style?: StyleProp<TextStyle>;
+  theme?: ThemeProp;
+  testID?: string;
+  contentStyle?: StyleProp<TextStyle>;
+  outlineStyle?: StyleProp<ViewStyle>;
+  underlineStyle?: StyleProp<ViewStyle>;
+};
 
 export type RenderProps = {
   ref: (a?: NativeTextInput | null) => void;
