@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
 
-import { useLocale } from '../../core/Localization';
 import ToggleButton from './ToggleButton';
 import ToggleButtonGroup from './ToggleButtonGroup';
+import { useLocale } from '../../core/Localization';
 
 const useBorderPositions = () => {
   const { overwriteRTL } = useLocale();

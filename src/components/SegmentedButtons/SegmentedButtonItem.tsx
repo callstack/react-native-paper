@@ -13,17 +13,17 @@ import {
 import color from 'color';
 import type { ThemeProp } from 'src/types';
 
+import {
+  getSegmentedButtonBorderRadius,
+  getSegmentedButtonColors,
+  getSegmentedButtonDensityPadding,
+} from './utils';
 import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import {
-  getSegmentedButtonBorderRadius,
-  getSegmentedButtonColors,
-  getSegmentedButtonDensityPadding,
-} from './utils';
 
 export type Props = {
   /**

@@ -123,7 +123,7 @@ type Props = {
 
 type Item = {
   id: string;
-  data: typeof mainExamples[string];
+  data: (typeof mainExamples)[string];
 };
 
 const data = Object.keys(mainExamples).map(

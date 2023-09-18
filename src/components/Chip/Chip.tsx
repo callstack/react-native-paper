@@ -13,9 +13,10 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useLocale } from '../../core/Localization';
 import useLatestCallback from 'use-latest-callback';
 
+import { getChipColors } from './helpers';
+import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
@@ -26,7 +27,6 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { getChipColors } from './helpers';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
@@ -66,6 +66,11 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Whether to display overlay on selected chip
    */
   showSelectedOverlay?: boolean;
+  /**
+   * Whether to display default check icon on selected chip.
+   * Note: Check will not be shown if `icon` is specified. If specified, `icon` will be shown regardless of `selected`.
+   */
+  showSelectedCheck?: boolean;
   /**
    * Color of the ripple effect.
    */
@@ -181,6 +186,7 @@ const Chip = ({
   selectedColor,
   rippleColor: customRippleColor,
   showSelectedOverlay = false,
+  showSelectedCheck = true,
   ellipsizeMode,
   compact,
   elevated = false,
@@ -258,7 +264,10 @@ const Chip = ({
   const multiplier = isV3 ? (compact ? 1.5 : 2) : 1;
   const labelSpacings = {
     marginEnd: onClose ? 0 : 8 * multiplier,
-    marginStart: avatar || icon || selected ? 4 * multiplier : 8 * multiplier,
+    marginStart:
+      avatar || icon || (selected && showSelectedCheck)
+        ? 4 * multiplier
+        : 8 * multiplier,
   };
   const contentSpacings = {
     paddingEnd: isV3 ? (onClose ? 34 : 0) : onClose ? 32 : 4,
@@ -325,7 +334,7 @@ const Chip = ({
                 : avatar}
             </View>
           ) : null}
-          {icon || selected ? (
+          {icon || (selected && showSelectedCheck) ? (
             <View
               style={[
                 styles.icon,
@@ -427,7 +436,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingStart: 4,
     position: 'relative',
-    flexGrow: 1,
   },
   md3Content: {
     paddingStart: 0,
@@ -487,7 +495,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   touchable: {
-    flexGrow: 1,
+    width: '100%',
   },
 });
 

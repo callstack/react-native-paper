@@ -3,18 +3,18 @@
 exports[`renders avatar with icon 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "rgba(103, 80, 164, 1)",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
       },
-      Object {
+      {
         "alignItems": "center",
         "justifyContent": "center",
       },
-      Object {},
+      {},
     ]
   }
 >
@@ -25,30 +25,30 @@ exports[`renders avatar with icon 1`] = `
     pointerEvents="none"
     selectable={false}
     style={
-      Array [
-        Object {
+      [
+        {
           "color": "#ffffff",
           "fontSize": 38.4,
         },
-        Array [
-          Object {
+        [
+          {
             "lineHeight": 38.4,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "scaleX": 1,
               },
             ],
           },
-          Object {
+          {
             "backgroundColor": "transparent",
           },
         ],
-        Object {
+        {
           "fontFamily": "Material Design Icons",
           "fontStyle": "normal",
           "fontWeight": "normal",
         },
-        Object {},
+        {},
       ]
     }
   >
@@ -60,18 +60,18 @@ exports[`renders avatar with icon 1`] = `
 exports[`renders avatar with icon and custom background color 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "#f44336",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
       },
-      Object {
+      {
         "alignItems": "center",
         "justifyContent": "center",
       },
-      Object {},
+      {},
     ]
   }
 >
@@ -82,30 +82,30 @@ exports[`renders avatar with icon and custom background color 1`] = `
     pointerEvents="none"
     selectable={false}
     style={
-      Array [
-        Object {
+      [
+        {
           "color": "#ffffff",
           "fontSize": 38.4,
         },
-        Array [
-          Object {
+        [
+          {
             "lineHeight": 38.4,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "scaleX": 1,
               },
             ],
           },
-          Object {
+          {
             "backgroundColor": "transparent",
           },
         ],
-        Object {
+        {
           "fontFamily": "Material Design Icons",
           "fontStyle": "normal",
           "fontWeight": "normal",
         },
-        Object {},
+        {},
       ]
     }
   >
@@ -117,8 +117,8 @@ exports[`renders avatar with icon and custom background color 1`] = `
 exports[`renders avatar with image 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "rgba(103, 80, 164, 1)",
         "borderRadius": 32,
         "height": 64,
@@ -131,12 +131,12 @@ exports[`renders avatar with image 1`] = `
   <Image
     accessibilityIgnoresInvertColors={true}
     source={
-      Object {
+      {
         "uri": "avatar.png",
       }
     }
     style={
-      Object {
+      {
         "borderRadius": 32,
         "height": 64,
         "width": 64,
@@ -149,43 +149,43 @@ exports[`renders avatar with image 1`] = `
 exports[`renders avatar with text 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "rgba(103, 80, 164, 1)",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
       },
-      Object {
+      {
         "alignItems": "center",
         "justifyContent": "center",
       },
-      Object {},
+      {},
     ]
   }
 >
   <Text
     numberOfLines={1}
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
         },
-        Object {
+        {
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "textAlign": "center",
             "textAlignVertical": "center",
           },
-          Object {
+          {
             "color": "#ffffff",
             "fontSize": 32,
             "lineHeight": 32,
@@ -203,43 +203,43 @@ exports[`renders avatar with text 1`] = `
 exports[`renders avatar with text and custom background color 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "#f44336",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
       },
-      Object {
+      {
         "alignItems": "center",
         "justifyContent": "center",
       },
-      Object {},
+      {},
     ]
   }
 >
   <Text
     numberOfLines={1}
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
         },
-        Object {
+        {
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "textAlign": "center",
             "textAlignVertical": "center",
           },
-          Object {
+          {
             "color": "#ffffff",
             "fontSize": 32,
             "lineHeight": 32,
@@ -257,43 +257,43 @@ exports[`renders avatar with text and custom background color 1`] = `
 exports[`renders avatar with text and custom colors 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "rgba(103, 80, 164, 1)",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
       },
-      Object {
+      {
         "alignItems": "center",
         "justifyContent": "center",
       },
-      Object {},
+      {},
     ]
   }
 >
   <Text
     numberOfLines={1}
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
         },
-        Object {
+        {
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "textAlign": "center",
             "textAlignVertical": "center",
           },
-          Object {
+          {
             "color": "#FFFFFF",
             "fontSize": 32,
             "lineHeight": 32,
@@ -311,43 +311,43 @@ exports[`renders avatar with text and custom colors 1`] = `
 exports[`renders avatar with text and custom size 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "rgba(103, 80, 164, 1)",
         "borderRadius": 48,
         "height": 96,
         "width": 96,
       },
-      Object {
+      {
         "alignItems": "center",
         "justifyContent": "center",
       },
-      Object {},
+      {},
     ]
   }
 >
   <Text
     numberOfLines={1}
     style={
-      Array [
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
         },
-        Object {
+        {
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
+        [
+          {
             "textAlign": "center",
             "textAlignVertical": "center",
           },
-          Object {
+          {
             "color": "#ffffff",
             "fontSize": 48,
             "lineHeight": 48,

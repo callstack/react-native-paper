@@ -8,14 +8,14 @@ import {
   Platform,
 } from 'react-native';
 
-import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
-import PortalHost from '../components/Portal/PortalHost';
-import type { ThemeProp } from '../types';
-import { addEventListener } from '../utils/addEventListener';
 import { Direction, LocalizationProvider } from './Localization';
 import SafeAreaProviderCompat from './SafeAreaProviderCompat';
 import { Provider as SettingsProvider, Settings } from './settings';
 import { defaultThemesByVersion, ThemeProvider } from './theming';
+import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
+import PortalHost from '../components/Portal/PortalHost';
+import type { ThemeProp } from '../types';
+import { addEventListener } from '../utils/addEventListener';
 
 export type Props = {
   children: React.ReactNode;

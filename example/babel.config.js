@@ -19,7 +19,7 @@ module.exports = function (api) {
               'package.json'
             ),
             // For development, we want to alias the library to the source
-            [pak.name]: path.join(__dirname, '..', pak.source),
+            [pak.name]: path.join(__dirname, '..', 'src'),
           },
         },
       ],

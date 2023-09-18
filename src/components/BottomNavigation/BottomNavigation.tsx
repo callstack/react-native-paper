@@ -13,12 +13,12 @@ import {
 
 import useLatestCallback from 'use-latest-callback';
 
+import BottomNavigationBar from './BottomNavigationBar';
+import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import type { IconSource } from '../Icon';
-import BottomNavigationBar from './BottomNavigationBar';
-import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 
 type BaseRoute = {
   key: string;
@@ -509,14 +509,14 @@ const BottomNavigation = <Route extends BaseRoute>({
             ? 1
             : 0;
 
+          const offsetTarget = focused ? 0 : FAR_FAR_AWAY;
+
           const top = sceneAnimationEnabled
             ? offsetsAnims[index].interpolate({
                 inputRange: [0, 1],
-                outputRange: [0, FAR_FAR_AWAY],
+                outputRange: [0, offsetTarget],
               })
-            : focused
-            ? 0
-            : FAR_FAR_AWAY;
+            : offsetTarget;
 
           const left =
             sceneAnimationType === 'shifting'

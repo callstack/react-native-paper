@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   Easing,
   StyleProp,
   StyleSheet,
@@ -11,15 +12,15 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useLatestCallback from 'use-latest-callback';
 
-import { useLocale } from '../core/Localization';
-import { useInternalTheme } from '../core/theming';
-import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
 import Button from './Button/Button';
 import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
 import Text from './Typography/Text';
+import { useLocale } from '../core/Localization';
+import { useInternalTheme } from '../core/theming';
+import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
@@ -39,6 +40,11 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Icon to display when `onIconPress` is defined. Default will be `close` icon.
    */
   icon?: IconSource;
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * @supported Available in v5.x with theme version 3
    * Function to execute on icon button press. The icon button appears only when this prop is specified.
@@ -62,13 +68,13 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   children: React.ReactNode;
   /**
-   * Style for the wrapper of the snackbar
-   */
-  /**
    * @supported Available in v5.x with theme version 3
    * Changes Snackbar shadow and background on iOS and Android.
    */
   elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+  /**
+   * Style for the wrapper of the snackbar
+   */
   wrapperStyle?: StyleProp<ViewStyle>;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   ref?: React.RefObject<View>;
@@ -76,6 +82,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * TestID used for testing purposes
+   */
+  testID?: string;
 };
 
 const DURATION_SHORT = 4000;
@@ -141,6 +151,8 @@ const Snackbar = ({
   wrapperStyle,
   style,
   theme: themeOverrides,
+  rippleColor,
+  testID,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -222,6 +234,7 @@ const Snackbar = ({
     style: actionStyle,
     label: actionLabel,
     onPress: onPressAction,
+    rippleColor: actionRippleColor,
     ...actionProps
   } = action || {};
 
@@ -287,6 +300,7 @@ const Snackbar = ({
           },
           style,
         ]}
+        testID={testID}
         {...(isV3 && { elevation })}
         {...localeProps}
         {...rest}
@@ -305,6 +319,7 @@ const Snackbar = ({
                 compact={!isV3}
                 mode="text"
                 theme={theme}
+                rippleColor={actionRippleColor}
                 {...actionProps}
               >
                 {actionLabel}
@@ -316,6 +331,7 @@ const Snackbar = ({
                 borderless
                 onPress={onIconPress}
                 iconColor={theme.colors.inverseOnSurface}
+                rippleColor={rippleColor}
                 theme={theme}
                 icon={
                   icon ||
@@ -332,6 +348,7 @@ const Snackbar = ({
                 }
                 accessibilityLabel={iconAccessibilityLabel}
                 style={styles.icon}
+                testID={`${testID}-icon`}
               />
             ) : null}
           </View>

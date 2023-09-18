@@ -94,9 +94,21 @@ const ProgressBarExample = () => {
       <View style={styles.row}>
         <Text variant="bodyMedium">ProgressBar with animated value</Text>
         <AnimatedProgressBar
+          visible={visible}
           style={styles.progressBar}
           animatedValue={progressBarValue}
           theme={theme}
+        />
+      </View>
+
+      <View style={[styles.row, styles.fullRow]}>
+        <Text variant="bodyMedium">
+          ProgressBar with custom percentage height
+        </Text>
+        <ProgressBar
+          style={styles.customPercentageHeight}
+          indeterminate
+          visible={visible}
         />
       </View>
     </ScreenWrapper>
@@ -112,8 +124,15 @@ const styles = StyleSheet.create({
   row: {
     marginVertical: 10,
   },
+  fullRow: {
+    height: '100%',
+    width: '100%',
+  },
   customHeight: {
     height: 20,
+  },
+  customPercentageHeight: {
+    height: '50%',
   },
   progressBar: {
     height: 15,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated } from 'react-native';
+import { Animated, Platform } from 'react-native';
 
 import { render, waitFor } from '@testing-library/react-native';
 
@@ -22,6 +22,10 @@ class ClassProgressBar extends React.Component<Props> {
 }
 
 const AnimatedProgressBar = Animated.createAnimatedComponent(ClassProgressBar);
+
+afterEach(() => {
+  Platform.OS = 'ios';
+});
 
 it('renders progress bar with animated value', async () => {
   const tree = render(<AnimatedProgressBar animatedValue={0.2} />);
@@ -58,4 +62,14 @@ it('renders indeterminate progress bar', async () => {
   await waitFor(() => tree.getByRole(a11yRole).props.onLayout(layoutEvent));
 
   expect(tree.toJSON()).toMatchSnapshot();
+});
+
+it('renders progress bar with full height on web', () => {
+  Platform.OS = 'web';
+  const tree = render(<ProgressBar progress={0.2} />);
+
+  expect(tree.getByRole(a11yRole)).toHaveStyle({
+    width: '100%',
+    height: '100%',
+  });
 });

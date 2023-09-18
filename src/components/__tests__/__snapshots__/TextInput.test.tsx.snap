@@ -3,28 +3,28 @@
 exports[`correctly applies a component as the text label 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "rgba(231, 224, 236, 1)",
         "borderTopLeftRadius": 4,
         "borderTopRightRadius": 4,
       },
-      Object {},
+      {},
     ]
   }
 >
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(28, 27, 31, 1)",
         "bottom": 0,
         "height": 1,
         "left": 0,
         "position": "absolute",
         "right": 0,
-        "transform": Array [
-          Object {
+        "transform": [
+          {
             "scaleY": 0.5,
           },
         ],
@@ -35,12 +35,12 @@ exports[`correctly applies a component as the text label 1`] = `
   />
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "paddingBottom": 0,
           "paddingTop": 0,
         },
-        Object {
+        {
           "minHeight": 56,
         },
       ]
@@ -50,15 +50,15 @@ exports[`correctly applies a component as the text label 1`] = `
       collapsable={false}
       pointerEvents="none"
       style={
-        Object {
+        {
           "bottom": 0,
           "left": 0,
           "opacity": 0,
           "position": "absolute",
           "right": 0,
           "top": 0,
-          "transform": Array [
-            Object {
+          "transform": [
+            {
               "translateX": 4,
             },
           ],
@@ -72,7 +72,7 @@ exports[`correctly applies a component as the text label 1`] = `
         numberOfLines={1}
         onLayout={[Function]}
         style={
-          Object {
+          {
             "color": "rgba(103, 80, 164, 1)",
             "fontFamily": "System",
             "fontSize": 16,
@@ -86,14 +86,14 @@ exports[`correctly applies a component as the text label 1`] = `
             "position": "absolute",
             "textAlign": "left",
             "top": 30,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 0,
               },
-              Object {
+              {
                 "translateY": -12,
               },
-              Object {
+              {
                 "scale": 0.75,
               },
             ],
@@ -104,7 +104,7 @@ exports[`correctly applies a component as the text label 1`] = `
       >
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
             }
           }
@@ -117,7 +117,7 @@ exports[`correctly applies a component as the text label 1`] = `
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
-          Object {
+          {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
@@ -131,14 +131,14 @@ exports[`correctly applies a component as the text label 1`] = `
             "position": "absolute",
             "textAlign": "left",
             "top": 30,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 0,
               },
-              Object {
+              {
                 "translateY": -12,
               },
-              Object {
+              {
                 "scale": 0.75,
               },
             ],
@@ -149,7 +149,7 @@ exports[`correctly applies a component as the text label 1`] = `
       >
         <Text
           style={
-            Object {
+            {
               "color": "#f44336",
             }
           }
@@ -170,34 +170,32 @@ exports[`correctly applies a component as the text label 1`] = `
       placeholderTextColor="rgba(73, 69, 79, 1)"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
-        Array [
-          Object {
+        [
+          {
             "margin": 0,
           },
-          Object {
-            "paddingLeft": 16,
-            "paddingRight": 16,
-          },
-          Object {
+          {
             "height": 56,
           },
-          Object {
+          {
             "paddingBottom": 4,
             "paddingTop": 24,
           },
-          Object {
+          {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": undefined,
+            "paddingLeft": 16,
+            "paddingRight": 16,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
           false,
-          Array [
-            Object {},
+          [
+            {},
           ],
           undefined,
         ]
@@ -213,28 +211,28 @@ exports[`correctly applies a component as the text label 1`] = `
 exports[`correctly applies cursorColor prop 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "rgba(231, 224, 236, 1)",
         "borderTopLeftRadius": 4,
         "borderTopRightRadius": 4,
       },
-      Object {},
+      {},
     ]
   }
 >
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(28, 27, 31, 1)",
         "bottom": 0,
         "height": 1,
         "left": 0,
         "position": "absolute",
         "right": 0,
-        "transform": Array [
-          Object {
+        "transform": [
+          {
             "scaleY": 0.5,
           },
         ],
@@ -245,12 +243,12 @@ exports[`correctly applies cursorColor prop 1`] = `
   />
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "paddingBottom": 0,
           "paddingTop": 0,
         },
-        Object {
+        {
           "minHeight": 56,
         },
       ]
@@ -260,15 +258,15 @@ exports[`correctly applies cursorColor prop 1`] = `
       collapsable={false}
       pointerEvents="none"
       style={
-        Object {
+        {
           "bottom": 0,
           "left": 0,
           "opacity": 0,
           "position": "absolute",
           "right": 0,
           "top": 0,
-          "transform": Array [
-            Object {
+          "transform": [
+            {
               "translateX": 4,
             },
           ],
@@ -282,7 +280,7 @@ exports[`correctly applies cursorColor prop 1`] = `
         numberOfLines={1}
         onLayout={[Function]}
         style={
-          Object {
+          {
             "color": "rgba(103, 80, 164, 1)",
             "fontFamily": "System",
             "fontSize": 16,
@@ -296,14 +294,14 @@ exports[`correctly applies cursorColor prop 1`] = `
             "position": "absolute",
             "textAlign": "left",
             "top": 30,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 0,
               },
-              Object {
+              {
                 "translateY": -12,
               },
-              Object {
+              {
                 "scale": 0.75,
               },
             ],
@@ -319,7 +317,7 @@ exports[`correctly applies cursorColor prop 1`] = `
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
-          Object {
+          {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
@@ -333,14 +331,14 @@ exports[`correctly applies cursorColor prop 1`] = `
             "position": "absolute",
             "textAlign": "left",
             "top": 30,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 0,
               },
-              Object {
+              {
                 "translateY": -12,
               },
-              Object {
+              {
                 "scale": 0.75,
               },
             ],
@@ -364,34 +362,32 @@ exports[`correctly applies cursorColor prop 1`] = `
       placeholderTextColor="rgba(73, 69, 79, 1)"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
-        Array [
-          Object {
+        [
+          {
             "margin": 0,
           },
-          Object {
-            "paddingLeft": 16,
-            "paddingRight": 16,
-          },
-          Object {
+          {
             "height": 56,
           },
-          Object {
+          {
             "paddingBottom": 4,
             "paddingTop": 24,
           },
-          Object {
+          {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": undefined,
+            "paddingLeft": 16,
+            "paddingRight": 16,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
           false,
-          Array [
-            Object {},
+          [
+            {},
           ],
           undefined,
         ]
@@ -407,28 +403,28 @@ exports[`correctly applies cursorColor prop 1`] = `
 exports[`correctly applies default textAlign based on default RTL 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "rgba(231, 224, 236, 1)",
         "borderTopLeftRadius": 4,
         "borderTopRightRadius": 4,
       },
-      Object {},
+      {},
     ]
   }
 >
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(28, 27, 31, 1)",
         "bottom": 0,
         "height": 1,
         "left": 0,
         "position": "absolute",
         "right": 0,
-        "transform": Array [
-          Object {
+        "transform": [
+          {
             "scaleY": 0.5,
           },
         ],
@@ -439,12 +435,12 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
   />
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "paddingBottom": 0,
           "paddingTop": 0,
         },
-        Object {
+        {
           "minHeight": 56,
         },
       ]
@@ -454,15 +450,15 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
       collapsable={false}
       pointerEvents="none"
       style={
-        Object {
+        {
           "bottom": 0,
           "left": 0,
           "opacity": 0,
           "position": "absolute",
           "right": 0,
           "top": 0,
-          "transform": Array [
-            Object {
+          "transform": [
+            {
               "translateX": 4,
             },
           ],
@@ -476,7 +472,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
         numberOfLines={1}
         onLayout={[Function]}
         style={
-          Object {
+          {
             "color": "rgba(103, 80, 164, 1)",
             "fontFamily": "System",
             "fontSize": 16,
@@ -490,14 +486,14 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "position": "absolute",
             "textAlign": "left",
             "top": 30,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 0,
               },
-              Object {
+              {
                 "translateY": -12,
               },
-              Object {
+              {
                 "scale": 0.75,
               },
             ],
@@ -513,7 +509,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
-          Object {
+          {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
@@ -527,14 +523,14 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "position": "absolute",
             "textAlign": "left",
             "top": 30,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 0,
               },
-              Object {
+              {
                 "translateY": -12,
               },
-              Object {
+              {
                 "scale": 0.75,
               },
             ],
@@ -558,34 +554,32 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
       placeholderTextColor="rgba(73, 69, 79, 1)"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
-        Array [
-          Object {
+        [
+          {
             "margin": 0,
           },
-          Object {
-            "paddingLeft": 16,
-            "paddingRight": 16,
-          },
-          Object {
+          {
             "height": 56,
           },
-          Object {
+          {
             "paddingBottom": 4,
             "paddingTop": 24,
           },
-          Object {
+          {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": undefined,
+            "paddingLeft": 16,
+            "paddingRight": 16,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
           false,
-          Array [
-            Object {},
+          [
+            {},
           ],
           undefined,
         ]
@@ -600,20 +594,20 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
 
 exports[`correctly applies height to multiline Outline TextInput 1`] = `
 <View
-  style={Object {}}
+  style={{}}
 >
   <View
     pointerEvents="none"
     style={
-      Array [
-        Object {
+      [
+        {
           "bottom": 0,
           "left": 0,
           "position": "absolute",
           "right": 0,
           "top": 6,
         },
-        Object {
+        {
           "backgroundColor": "rgba(255, 251, 254, 1)",
           "borderColor": "rgba(121, 116, 126, 1)",
           "borderRadius": 4,
@@ -627,11 +621,11 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
   <View>
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "paddingBottom": 0,
           },
-          Object {
+          {
             "minHeight": 100,
             "paddingTop": 8,
           },
@@ -642,15 +636,15 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
         collapsable={false}
         pointerEvents="none"
         style={
-          Object {
+          {
             "bottom": 0,
             "left": 0,
             "opacity": 0,
             "position": "absolute",
             "right": 0,
             "top": 0,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 3,
               },
             ],
@@ -663,7 +657,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           style={
-            Object {
+            {
               "backgroundColor": "rgba(255, 251, 254, 1)",
               "color": "transparent",
               "fontFamily": "System",
@@ -677,17 +671,17 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "position": "absolute",
               "textAlign": "left",
               "top": 59,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "translateX": 0,
                 },
-                Object {
+                {
                   "translateY": -52,
                 },
-                Object {
+                {
                   "scale": 0.75,
                 },
-                Object {
+                {
                   "scaleY": 0.2,
                 },
               ],
@@ -695,6 +689,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "writingDirection": "ltr",
             }
           }
+          testID="text-input-outlined-label-background"
         >
           Outline Input
         </Text>
@@ -704,7 +699,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           numberOfLines={1}
           onLayout={[Function]}
           style={
-            Object {
+            {
               "color": "rgba(103, 80, 164, 1)",
               "fontFamily": "System",
               "fontSize": 16,
@@ -717,14 +712,14 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "position": "absolute",
               "textAlign": "left",
               "top": 58,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "translateX": 0,
                 },
-                Object {
+                {
                   "translateY": -52,
                 },
-                Object {
+                {
                   "scale": 0.75,
                 },
               ],
@@ -740,7 +735,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           style={
-            Object {
+            {
               "color": "rgba(73, 69, 79, 1)",
               "fontFamily": "System",
               "fontSize": 16,
@@ -753,14 +748,14 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "position": "absolute",
               "textAlign": "left",
               "top": 58,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "translateX": 0,
                 },
-                Object {
+                {
                   "translateY": -52,
                 },
-                Object {
+                {
                   "scale": 0.75,
                 },
               ],
@@ -784,19 +779,19 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
         placeholderTextColor="rgba(73, 69, 79, 1)"
         selectionColor="rgba(103, 80, 164, 1)"
         style={
-          Array [
-            Object {
+          [
+            {
               "margin": 0,
               "zIndex": 1,
             },
-            Object {
+            {
               "height": 100,
             },
-            Object {
+            {
               "paddingBottom": 24,
               "paddingTop": 24,
             },
-            Object {
+            {
               "color": "rgba(28, 27, 31, 1)",
               "fontFamily": "System",
               "fontSize": 16,
@@ -808,8 +803,8 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "textAlignVertical": "top",
             },
             false,
-            Array [
-              Object {},
+            [
+              {},
             ],
             undefined,
           ]
@@ -826,28 +821,28 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
 exports[`correctly applies paddingStart from contentStyleProp 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "rgba(231, 224, 236, 1)",
         "borderTopLeftRadius": 4,
         "borderTopRightRadius": 4,
       },
-      Object {},
+      {},
     ]
   }
 >
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(28, 27, 31, 1)",
         "bottom": 0,
         "height": 1,
         "left": 0,
         "position": "absolute",
         "right": 0,
-        "transform": Array [
-          Object {
+        "transform": [
+          {
             "scaleY": 0.5,
           },
         ],
@@ -858,12 +853,12 @@ exports[`correctly applies paddingStart from contentStyleProp 1`] = `
   />
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "paddingBottom": 0,
           "paddingTop": 0,
         },
-        Object {
+        {
           "minHeight": 56,
         },
       ]
@@ -873,15 +868,15 @@ exports[`correctly applies paddingStart from contentStyleProp 1`] = `
       collapsable={false}
       pointerEvents="none"
       style={
-        Object {
+        {
           "bottom": 0,
           "left": 0,
           "opacity": 0,
           "position": "absolute",
           "right": 0,
           "top": 0,
-          "transform": Array [
-            Object {
+          "transform": [
+            {
               "translateX": 4,
             },
           ],
@@ -895,7 +890,7 @@ exports[`correctly applies paddingStart from contentStyleProp 1`] = `
         numberOfLines={1}
         onLayout={[Function]}
         style={
-          Object {
+          {
             "color": "rgba(103, 80, 164, 1)",
             "fontFamily": "System",
             "fontSize": 16,
@@ -909,14 +904,14 @@ exports[`correctly applies paddingStart from contentStyleProp 1`] = `
             "position": "absolute",
             "textAlign": "left",
             "top": 30,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 0,
               },
-              Object {
+              {
                 "translateY": -12,
               },
-              Object {
+              {
                 "scale": 0.75,
               },
             ],
@@ -932,7 +927,7 @@ exports[`correctly applies paddingStart from contentStyleProp 1`] = `
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
-          Object {
+          {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
@@ -946,14 +941,14 @@ exports[`correctly applies paddingStart from contentStyleProp 1`] = `
             "position": "absolute",
             "textAlign": "left",
             "top": 30,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 0,
               },
-              Object {
+              {
                 "translateY": -12,
               },
-              Object {
+              {
                 "scale": 0.75,
               },
             ],
@@ -977,36 +972,34 @@ exports[`correctly applies paddingStart from contentStyleProp 1`] = `
       placeholderTextColor="rgba(73, 69, 79, 1)"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
-        Array [
-          Object {
+        [
+          {
             "margin": 0,
           },
-          Object {
-            "paddingLeft": 16,
-            "paddingRight": 16,
-          },
-          Object {
+          {
             "height": 56,
           },
-          Object {
+          {
             "paddingBottom": 4,
             "paddingTop": 24,
           },
-          Object {
+          {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": undefined,
+            "paddingLeft": 16,
+            "paddingRight": 16,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
           false,
-          Array [
-            Object {},
+          [
+            {},
           ],
-          Object {
+          {
             "paddingStart": 20,
           },
         ]
@@ -1022,28 +1015,28 @@ exports[`correctly applies paddingStart from contentStyleProp 1`] = `
 exports[`correctly applies textAlign center 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "rgba(231, 224, 236, 1)",
         "borderTopLeftRadius": 4,
         "borderTopRightRadius": 4,
       },
-      Object {},
+      {},
     ]
   }
 >
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(28, 27, 31, 1)",
         "bottom": 0,
         "height": 1,
         "left": 0,
         "position": "absolute",
         "right": 0,
-        "transform": Array [
-          Object {
+        "transform": [
+          {
             "scaleY": 0.5,
           },
         ],
@@ -1054,12 +1047,12 @@ exports[`correctly applies textAlign center 1`] = `
   />
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "paddingBottom": 0,
           "paddingTop": 0,
         },
-        Object {
+        {
           "minHeight": 56,
         },
       ]
@@ -1069,15 +1062,15 @@ exports[`correctly applies textAlign center 1`] = `
       collapsable={false}
       pointerEvents="none"
       style={
-        Object {
+        {
           "bottom": 0,
           "left": 0,
           "opacity": 0,
           "position": "absolute",
           "right": 0,
           "top": 0,
-          "transform": Array [
-            Object {
+          "transform": [
+            {
               "translateX": 4,
             },
           ],
@@ -1091,7 +1084,7 @@ exports[`correctly applies textAlign center 1`] = `
         numberOfLines={1}
         onLayout={[Function]}
         style={
-          Object {
+          {
             "color": "rgba(103, 80, 164, 1)",
             "fontFamily": "System",
             "fontSize": 16,
@@ -1105,14 +1098,14 @@ exports[`correctly applies textAlign center 1`] = `
             "position": "absolute",
             "textAlign": "left",
             "top": 30,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 0,
               },
-              Object {
+              {
                 "translateY": -12,
               },
-              Object {
+              {
                 "scale": 0.75,
               },
             ],
@@ -1128,7 +1121,7 @@ exports[`correctly applies textAlign center 1`] = `
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
-          Object {
+          {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
@@ -1142,14 +1135,14 @@ exports[`correctly applies textAlign center 1`] = `
             "position": "absolute",
             "textAlign": "left",
             "top": 30,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 0,
               },
-              Object {
+              {
                 "translateY": -12,
               },
-              Object {
+              {
                 "scale": 0.75,
               },
             ],
@@ -1173,34 +1166,32 @@ exports[`correctly applies textAlign center 1`] = `
       placeholderTextColor="rgba(73, 69, 79, 1)"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
-        Array [
-          Object {
+        [
+          {
             "margin": 0,
           },
-          Object {
-            "paddingLeft": 16,
-            "paddingRight": 16,
-          },
-          Object {
+          {
             "height": 56,
           },
-          Object {
+          {
             "paddingBottom": 4,
             "paddingTop": 24,
           },
-          Object {
+          {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": undefined,
+            "paddingLeft": 16,
+            "paddingRight": 16,
             "textAlign": "center",
             "textAlignVertical": "center",
           },
           false,
-          Array [
-            Object {},
+          [
+            {},
           ],
           undefined,
         ]
@@ -1216,28 +1207,28 @@ exports[`correctly applies textAlign center 1`] = `
 exports[`correctly renders left-side affix adornment, and right-side icon adornment 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "rgba(231, 224, 236, 1)",
         "borderTopLeftRadius": 4,
         "borderTopRightRadius": 4,
       },
-      Object {},
+      {},
     ]
   }
 >
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(28, 27, 31, 1)",
         "bottom": 0,
         "height": 1,
         "left": 0,
         "position": "absolute",
         "right": 0,
-        "transform": Array [
-          Object {
+        "transform": [
+          {
             "scaleY": 0.5,
           },
         ],
@@ -1248,12 +1239,12 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
   />
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "paddingBottom": 0,
           "paddingTop": 0,
         },
-        Object {
+        {
           "minHeight": 56,
         },
       ]
@@ -1263,15 +1254,15 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
       collapsable={false}
       pointerEvents="none"
       style={
-        Object {
+        {
           "bottom": 0,
           "left": 0,
           "opacity": 0,
           "position": "absolute",
           "right": 0,
           "top": 0,
-          "transform": Array [
-            Object {
+          "transform": [
+            {
               "translateX": 4,
             },
           ],
@@ -1285,7 +1276,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
         numberOfLines={1}
         onLayout={[Function]}
         style={
-          Object {
+          {
             "color": "rgba(103, 80, 164, 1)",
             "fontFamily": "System",
             "fontSize": 16,
@@ -1299,14 +1290,14 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "position": "absolute",
             "textAlign": "left",
             "top": 30,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 0,
               },
-              Object {
+              {
                 "translateY": -12,
               },
-              Object {
+              {
                 "scale": 0.75,
               },
             ],
@@ -1322,7 +1313,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
-          Object {
+          {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
@@ -1336,14 +1327,14 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "position": "absolute",
             "textAlign": "left",
             "top": 30,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 0,
               },
-              Object {
+              {
                 "translateY": -12,
               },
-              Object {
+              {
                 "scale": 0.75,
               },
             ],
@@ -1367,33 +1358,31 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
       placeholderTextColor="rgba(73, 69, 79, 1)"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
-        Array [
-          Object {
+        [
+          {
             "margin": 0,
           },
-          Object {
-            "paddingLeft": 16,
-            "paddingRight": 56,
-          },
-          Object {
+          {
             "height": 56,
           },
-          Object {
+          {
             "paddingBottom": 4,
             "paddingTop": 24,
           },
-          Object {
+          {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": undefined,
+            "paddingLeft": 16,
+            "paddingRight": 56,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
           false,
-          Object {
+          {
             "marginLeft": 0,
             "marginRight": 40,
             "paddingLeft": 40,
@@ -1411,7 +1400,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
     collapsable={false}
     onLayout={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "justifyContent": "center",
         "left": 16,
@@ -1425,18 +1414,18 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
     <Text
       maxFontSizeMultiplier={1.5}
       style={
-        Array [
-          Object {
+        [
+          {
             "color": "rgba(73, 69, 79, 1)",
           },
-          Object {
+          {
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": undefined,
           },
-          Object {
+          {
             "color": "#f44336",
           },
         ]
@@ -1448,15 +1437,15 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
   </View>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "height": 24,
           "justifyContent": "center",
           "position": "absolute",
           "width": 24,
         },
-        Object {
+        {
           "right": 16,
           "top": 16,
         },
@@ -1466,13 +1455,13 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "backgroundColor": "transparent",
           "borderRadius": 20,
           "height": 40,
           "margin": 0,
           "shadowColor": "#000",
-          "shadowOffset": Object {
+          "shadowOffset": {
             "height": 0,
             "width": 0,
           },
@@ -1486,7 +1475,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "backgroundColor": "transparent",
             "borderColor": "rgba(121, 116, 126, 1)",
             "borderRadius": 20,
@@ -1495,7 +1484,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "flex": 1,
             "overflow": "hidden",
             "shadowColor": "#000",
-            "shadowOffset": Object {
+            "shadowOffset": {
               "height": 0,
               "width": 0,
             },
@@ -1509,17 +1498,29 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
           accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
             }
           }
           accessibilityTraits="button"
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           centered={true}
           collapsable={false}
           focusable={true}
           hitSlop={
-            Object {
+            {
               "bottom": 6,
               "left": 6,
               "right": 6,
@@ -1536,17 +1537,17 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Array [
-              Object {
+            [
+              {
                 "overflow": "hidden",
               },
-              Array [
-                Object {
+              [
+                {
                   "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                Object {
+                {
                   "borderRadius": 20,
                 },
               ],
@@ -1561,30 +1562,30 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             pointerEvents="none"
             selectable={false}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "lineHeight": 24,
-                    "transform": Array [
-                      Object {
+                    "transform": [
+                      {
                         "scaleX": 1,
                       },
                     ],
                   },
-                  Object {
+                  {
                     "backgroundColor": "transparent",
                   },
                 ],
-                Object {
+                {
                   "fontFamily": "Material Design Icons",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
-                Object {},
+                {},
               ]
             }
           >
@@ -1600,28 +1601,28 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
 exports[`correctly renders left-side icon adornment, and right-side affix adornment 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "backgroundColor": "rgba(231, 224, 236, 1)",
         "borderTopLeftRadius": 4,
         "borderTopRightRadius": 4,
       },
-      Object {},
+      {},
     ]
   }
 >
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(28, 27, 31, 1)",
         "bottom": 0,
         "height": 1,
         "left": 0,
         "position": "absolute",
         "right": 0,
-        "transform": Array [
-          Object {
+        "transform": [
+          {
             "scaleY": 0.5,
           },
         ],
@@ -1632,12 +1633,12 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
   />
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "paddingBottom": 0,
           "paddingTop": 0,
         },
-        Object {
+        {
           "minHeight": 56,
         },
       ]
@@ -1647,15 +1648,15 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       collapsable={false}
       pointerEvents="none"
       style={
-        Object {
+        {
           "bottom": 0,
           "left": 0,
           "opacity": 0,
           "position": "absolute",
           "right": 0,
           "top": 0,
-          "transform": Array [
-            Object {
+          "transform": [
+            {
               "translateX": 14,
             },
           ],
@@ -1669,7 +1670,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         numberOfLines={1}
         onLayout={[Function]}
         style={
-          Object {
+          {
             "color": "rgba(103, 80, 164, 1)",
             "fontFamily": "System",
             "fontSize": 16,
@@ -1683,14 +1684,14 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "position": "absolute",
             "textAlign": "left",
             "top": 30,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 0,
               },
-              Object {
+              {
                 "translateY": -12,
               },
-              Object {
+              {
                 "scale": 0.75,
               },
             ],
@@ -1706,7 +1707,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
-          Object {
+          {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
@@ -1720,14 +1721,14 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "position": "absolute",
             "textAlign": "left",
             "top": 30,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 0,
               },
-              Object {
+              {
                 "translateY": -12,
               },
-              Object {
+              {
                 "scale": 0.75,
               },
             ],
@@ -1751,33 +1752,31 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       placeholderTextColor="rgba(73, 69, 79, 1)"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
-        Array [
-          Object {
+        [
+          {
             "margin": 0,
           },
-          Object {
-            "paddingLeft": 56,
-            "paddingRight": 56,
-          },
-          Object {
+          {
             "height": 56,
           },
-          Object {
+          {
             "paddingBottom": 4,
             "paddingTop": 24,
           },
-          Object {
+          {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": undefined,
+            "paddingLeft": 56,
+            "paddingRight": 56,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
           false,
-          Object {
+          {
             "marginLeft": 40,
             "marginRight": 0,
             "paddingLeft": 16,
@@ -1793,15 +1792,15 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
   </View>
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "alignItems": "center",
           "height": 24,
           "justifyContent": "center",
           "position": "absolute",
           "width": 24,
         },
-        Object {
+        {
           "left": 16,
           "top": 16,
         },
@@ -1811,13 +1810,13 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "backgroundColor": "transparent",
           "borderRadius": 20,
           "height": 40,
           "margin": 0,
           "shadowColor": "#000",
-          "shadowOffset": Object {
+          "shadowOffset": {
             "height": 0,
             "width": 0,
           },
@@ -1831,7 +1830,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "backgroundColor": "transparent",
             "borderColor": "rgba(121, 116, 126, 1)",
             "borderRadius": 20,
@@ -1840,7 +1839,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "flex": 1,
             "overflow": "hidden",
             "shadowColor": "#000",
-            "shadowOffset": Object {
+            "shadowOffset": {
               "height": 0,
               "width": 0,
             },
@@ -1854,17 +1853,29 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
             }
           }
           accessibilityTraits="button"
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           centered={true}
           collapsable={false}
           focusable={true}
           hitSlop={
-            Object {
+            {
               "bottom": 6,
               "left": 6,
               "right": 6,
@@ -1881,17 +1892,17 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Array [
-              Object {
+            [
+              {
                 "overflow": "hidden",
               },
-              Array [
-                Object {
+              [
+                {
                   "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                Object {
+                {
                   "borderRadius": 20,
                 },
               ],
@@ -1906,30 +1917,30 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             pointerEvents="none"
             selectable={false}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "lineHeight": 24,
-                    "transform": Array [
-                      Object {
+                    "transform": [
+                      {
                         "scaleX": 1,
                       },
                     ],
                   },
-                  Object {
+                  {
                     "backgroundColor": "transparent",
                   },
                 ],
-                Object {
+                {
                   "fontFamily": "Material Design Icons",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
-                Object {},
+                {},
               ]
             }
           >
@@ -1943,7 +1954,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     collapsable={false}
     onLayout={[Function]}
     style={
-      Object {
+      {
         "alignItems": "center",
         "justifyContent": "center",
         "opacity": 1,
@@ -1957,18 +1968,18 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     <Text
       maxFontSizeMultiplier={1.5}
       style={
-        Array [
-          Object {
+        [
+          {
             "color": "rgba(73, 69, 79, 1)",
           },
-          Object {
+          {
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
             "lineHeight": undefined,
           },
-          Object {
+          {
             "color": "#f44336",
           },
         ]

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   GestureResponderEvent,
   Platform,
   StyleProp,
@@ -14,16 +15,16 @@ import {
 
 import color from 'color';
 
-import { useLocale } from '../core/Localization';
-import { useInternalTheme } from '../core/theming';
-import type { ThemeProp } from '../types';
-import { forwardRef } from '../utils/forwardRef';
 import ActivityIndicator from './ActivityIndicator';
 import Divider from './Divider';
 import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
+import { useLocale } from '../core/Localization';
+import { useInternalTheme } from '../core/theming';
+import type { ThemeProp } from '../types';
+import { forwardRef } from '../utils/forwardRef';
 
 interface Style {
   marginEnd: number;
@@ -55,6 +56,10 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    * Custom color for icon, default will be derived from theme
    */
   iconColor?: string;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * Callback to execute if we want the left icon to act as button.
    */
@@ -88,6 +93,11 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    * Custom color for the right trailering icon, default will be derived from theme
    */
   traileringIconColor?: string;
+  /**
+   * @supported Available in v5.x with theme version 3
+   * Color of the trailering icon ripple effect.
+   */
+  traileringRippleColor?: ColorValue;
   /**
    * @supported Available in v5.x with theme version 3
    * Callback to execute on the right trailering icon button press.
@@ -173,6 +183,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
     {
       icon,
       iconColor: customIconColor,
+      rippleColor: customRippleColor,
       onIconPress,
       searchAccessibilityLabel = 'search',
       clearIcon,
@@ -181,6 +192,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       traileringIcon,
       traileringIconColor,
       traileringIconAccessibilityLabel,
+      traileringRippleColor: customTraileringRippleColor,
       onTraileringIconPress,
       right,
       mode = 'bar',
@@ -244,7 +256,11 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       : color(textColor).alpha(0.54).rgb().string();
     const iconColor =
       customIconColor || (isV3 ? theme.colors.onSurfaceVariant : md2IconColor);
-    const rippleColor = color(textColor).alpha(0.32).rgb().string();
+    const rippleColor =
+      customRippleColor || color(textColor).alpha(0.32).rgb().string();
+    const traileringRippleColor =
+      customTraileringRippleColor ||
+      color(textColor).alpha(0.32).rgb().string();
 
     const font = isV3
       ? {
@@ -299,6 +315,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
           }
           theme={theme}
           accessibilityLabel={searchAccessibilityLabel}
+          testID={`${testID}-icon`}
         />
         <TextInput
           style={[
@@ -360,6 +377,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
                   />
                 ))
               }
+              testID={`${testID}-clear-icon`}
               accessibilityRole="button"
               theme={theme}
             />
@@ -371,6 +389,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             borderless
             onPress={onTraileringIconPress}
             iconColor={traileringIconColor || theme.colors.onSurfaceVariant}
+            rippleColor={traileringRippleColor}
             icon={traileringIcon}
             accessibilityLabel={traileringIconAccessibilityLabel}
             testID={`${testID}-trailering-icon`}

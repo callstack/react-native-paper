@@ -53,7 +53,7 @@ export const getTheme = <
 >(
   isDark: Scheme = false as Scheme,
   isV3: IsVersion3 = true as IsVersion3
-): typeof defaultThemesByVersion[IsVersion3 extends true
+): (typeof defaultThemesByVersion)[IsVersion3 extends true
   ? 3
   : 2][Scheme extends true ? 'dark' : 'light'] => {
   const themeVersion = isV3 ? 3 : 2;

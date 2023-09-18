@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Image, ImageSourcePropType, Platform } from 'react-native';
 
+import { accessibilityProps } from './MaterialCommunityIcon';
 import { useLocale } from '../core/Localization';
 import { Consumer as SettingsConsumer } from '../core/settings';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
-import { accessibilityProps } from './MaterialCommunityIcon';
 
 type IconSourceBase = string | ImageSourcePropType;
 

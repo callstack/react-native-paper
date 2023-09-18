@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Animated, StyleSheet, TextStyle } from 'react-native';
 
+import type { VariantProp } from './types';
 import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import type { VariantProp } from './types';
 
 type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
   /**

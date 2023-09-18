@@ -2,6 +2,13 @@ const config = require('../docusaurus.config');
 
 const { baseUrl, customFields } = config;
 
+function renderBadge(annotation) {
+  const [annotType, ...annotLabel] = annotation.split(' ');
+
+  // eslint-disable-next-line prettier/prettier
+  return `<span class="badge badge-${annotType.replace('@', '')} "><span class="badge-text">${annotLabel.join(' ')}</span></span>`;
+}
+
 function generateKnownIssues(componentName) {
   const componentKnownIssues = customFields.knownIssues[componentName];
 
@@ -79,6 +86,54 @@ function generateScreenshots(componentName, screenshotData) {
   `;
 }
 
+function generatePropsTable(data, link) {
+  const ANNOTATION_OPTIONAL = '@optional';
+  const ANNOTATION_INTERNAL = '@internal';
+
+  const props = Object.entries(data)
+    .map(([prop, value]) => {
+      if (!value.description) {
+        value.description = '';
+      }
+      // Remove @optional annotations from descriptions.
+      if (value.description.includes(ANNOTATION_OPTIONAL)) {
+        value.description = value.description.replace(ANNOTATION_OPTIONAL, '');
+      }
+      // Hide props with @internal annotations.
+      if (value.description.includes(ANNOTATION_INTERNAL)) {
+        return;
+      }
+
+      let leadingBadge = '';
+      let descriptionByLines = value.description?.split('\n');
+
+      // Find leading badge and put it next after prop name.
+      if (descriptionByLines?.[0].includes('@')) {
+        leadingBadge = descriptionByLines[0];
+      }
+
+      return `
+<div>
+
+### ${prop} ${value.required ? '(required)' : ''} ${
+        leadingBadge && renderBadge(leadingBadge)
+      }
+
+</div>
+  
+  <PropTable componentLink="${link}" prop="${prop}" />
+
+  ---
+  `;
+    })
+    .join('');
+
+  return `
+  ## Props
+  ${props}
+  `;
+}
+
 function generatePageMDX(doc, link) {
   const summaryRegex = /([\s\S]*?)## Usage/;
 
@@ -111,11 +166,9 @@ ${generateScreenshots(doc.title, screenshotData)}
 
 ${usage}
 
+${generatePropsTable(doc.data.props, link)}
+
 ${generateMoreExamples(doc.title)}
-
-## Props
-
-<PropTable link="${link}" />
 
 ${generateThemeColors(doc.title, themeColorsData)}
 

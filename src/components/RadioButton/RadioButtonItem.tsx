@@ -8,16 +8,16 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useLocale } from '../../core/Localization';
-import { useInternalTheme } from '../../core/theming';
-import type { InternalTheme, MD3TypescaleKey } from '../../types';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
 import RadioButton from './RadioButton';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import RadioButtonIOS from './RadioButtonIOS';
 import { handlePress, isChecked } from './utils';
+import { useLocale } from '../../core/Localization';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp, MD3TypescaleKey } from '../../types';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
 
 export type Props = {
   /**
@@ -80,7 +80,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme?: InternalTheme;
+  theme?: ThemeProp;
   /**
    * testID to be used on tests.
    */
@@ -137,7 +137,14 @@ const RadioButtonItem = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { overwriteRTL } = useLocale();
-  const radioButtonProps = { value, disabled, status, color, uncheckedColor };
+  const radioButtonProps = {
+    value,
+    disabled,
+    status,
+    color,
+    theme,
+    uncheckedColor,
+  };
   const isLeading = position === 'leading';
   let radioButton: any;
 

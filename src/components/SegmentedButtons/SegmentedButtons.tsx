@@ -10,11 +10,11 @@ import {
 
 import type { ThemeProp } from 'src/types';
 
+import SegmentedButtonItem from './SegmentedButtonItem';
+import { getDisabledSegmentedButtonStyle } from './utils';
 import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
-import SegmentedButtonItem from './SegmentedButtonItem';
-import { getDisabledSegmentedButtonStyle } from './utils';
 
 type ConditionalValue =
   | {

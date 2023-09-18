@@ -296,6 +296,21 @@ describe('AppbarAction', () => {
     expect(appbarActionIcon.props.color).toBe('purple');
   });
 
+  it('should be rendered with custom ripple color', () => {
+    const { getByTestId } = render(
+      <Appbar>
+        <Appbar.Action
+          icon="menu"
+          rippleColor="purple"
+          testID="appbar-action"
+        />
+      </Appbar>
+    );
+    const appbarActionContainer = getByTestId('appbar-action-container').props
+      .children;
+    expect(appbarActionContainer.props.rippleColor).toBe('purple');
+  });
+
   it('should render AppbarBackAction with custom color', () => {
     const { getByTestId } = render(
       <Appbar>

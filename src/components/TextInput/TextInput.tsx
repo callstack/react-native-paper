@@ -8,10 +8,6 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
-import { roundLayoutSize } from '../../utils/roundLayoutSize';
 import TextInputAffix, {
   Props as TextInputAffixProps,
 } from './Adornment/TextInputAffix';
@@ -21,6 +17,10 @@ import TextInputIcon, {
 import TextInputFlat from './TextInputFlat';
 import TextInputOutlined from './TextInputOutlined';
 import type { RenderProps, TextInputLabelProp } from './types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
+import { roundLayoutSize } from '../../utils/roundLayoutSize';
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;

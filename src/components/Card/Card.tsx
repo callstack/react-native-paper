@@ -11,17 +11,18 @@ import {
 
 import useLatestCallback from 'use-latest-callback';
 
+import CardActions from './CardActions';
+import CardContent from './CardContent';
+import CardCover from './CardCover';
+import CardTitle from './CardTitle';
+import { getCardColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import { splitStyles } from '../../utils/splitStyles';
 import Surface from '../Surface';
-import CardActions from './CardActions';
-import CardContent from './CardContent';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import CardCover from './CardCover';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import CardTitle from './CardTitle';
-import { getCardColors } from './utils';
 
 type OutlinedCardProps = {
   mode: 'outlined';
@@ -242,23 +243,29 @@ const Card = ({
     mode: cardMode,
   });
 
-  const {
-    borderRadius = (isV3 ? 3 : 1) * roundness,
-    borderColor = themedBorderColor,
-  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
+
+  const { borderColor = themedBorderColor } = flattenedStyles;
+
+  const [, borderRadiusStyles] = splitStyles(
+    flattenedStyles,
+    (style) => style.startsWith('border') && style.endsWith('Radius')
+  );
+
+  const borderRadiusCombinedStyles = {
+    borderRadius: (isV3 ? 3 : 1) * roundness,
+    ...borderRadiusStyles,
+  };
 
   const content = (
-    <View
-      style={[styles.innerContainer, contentStyle]}
-      testID={testID}
-      accessible={accessible}
-    >
+    <View style={[styles.innerContainer, contentStyle]} testID={testID}>
       {React.Children.map(children, (child, index) =>
         React.isValidElement(child)
           ? React.cloneElement(child as React.ReactElement<any>, {
               index,
               total,
               siblings,
+              borderRadiusStyles,
             })
           : child
       )}
@@ -268,15 +275,13 @@ const Card = ({
   return (
     <Surface
       style={[
-        {
-          borderRadius,
-        },
         isV3 && !isMode('elevated') && { backgroundColor },
         !isV3 && isMode('outlined')
           ? styles.resetElevation
           : {
               elevation: computedElevation as unknown as number,
             },
+        borderRadiusCombinedStyles,
         style,
       ]}
       theme={theme}
@@ -292,16 +297,17 @@ const Card = ({
           testID={`${testID}-outline`}
           style={[
             {
-              borderRadius,
               borderColor,
             },
             styles.outline,
+            borderRadiusCombinedStyles,
           ]}
         />
       )}
 
       {hasPassedTouchHandler ? (
         <TouchableWithoutFeedback
+          accessible={accessible}
           delayPressIn={0}
           disabled={disabled}
           delayLongPress={delayLongPress}

@@ -13,13 +13,13 @@ import {
   ScrollView,
   StyleProp,
   StyleSheet,
-  Text,
   View,
   ViewStyle,
 } from 'react-native';
 
 import color from 'color';
 
+import { getCombinedStyles, getFABColors } from './utils';
 import { useLocale } from '../../core/Localization';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
@@ -28,7 +28,6 @@ import Icon from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import AnimatedText from '../Typography/AnimatedText';
-import { getCombinedStyles, getFABColors } from './utils';
 
 export type AnimatedFABIconMode = 'static' | 'dynamic';
 export type AnimatedFABAnimateFrom = 'left' | 'right';
@@ -106,6 +105,9 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * TestID used for testing purposes
+   */
   testID?: string;
 };
 
@@ -500,7 +502,20 @@ const AnimatedFAB = ({
         // proper text measurements there is a need to additionaly render that text, but
         // wrapped in absolutely positioned `ScrollView` which height is 0.
         <ScrollView style={styles.textPlaceholderContainer}>
-          <Text onTextLayout={onTextLayout}>{label}</Text>
+          <AnimatedText
+            variant="labelLarge"
+            numberOfLines={1}
+            onTextLayout={onTextLayout}
+            ellipsizeMode={'tail'}
+            style={[
+              styles.label,
+              uppercase && styles.uppercaseLabel,
+              textStyle,
+            ]}
+            theme={theme}
+          >
+            {label}
+          </AnimatedText>
         </ScrollView>
       )}
     </Surface>

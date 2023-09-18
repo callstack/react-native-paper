@@ -9,11 +9,11 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { AdornmentSide } from './enums';
+import { getTextColor } from './utils';
 import { useInternalTheme } from '../../../core/theming';
 import type { ThemeProp } from '../../../types';
 import { getConstants } from '../helpers';
-import { AdornmentSide } from './enums';
-import { getTextColor } from './utils';
 
 export type Props = {
   /**

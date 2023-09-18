@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
@@ -7,13 +8,13 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { getIconColor } from './utils';
 import { useInternalTheme } from '../../../core/theming';
 import type { $Omit, ThemeProp } from '../../../types';
 import type { IconSource } from '../../Icon';
 import IconButton from '../../IconButton/IconButton';
 import { ICON_SIZE } from '../constants';
 import { getConstants } from '../helpers';
-import { getIconColor } from './utils';
 
 export type Props = $Omit<
   React.ComponentProps<typeof IconButton>,
@@ -36,6 +37,10 @@ export type Props = $Omit<
    * Color of the icon or a function receiving a boolean indicating whether the TextInput is focused and returning the color.
    */
   color?: ((isTextInputFocused: boolean) => string | undefined) | string;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -127,6 +132,7 @@ const TextInputIcon = ({
   forceTextInputFocus,
   color: customColor,
   theme: themeOverrides,
+  rippleColor,
   ...rest
 }: Props) => {
   const { style, isTextInputFocused, forceFocus, testID, disabled } =
@@ -162,6 +168,7 @@ const TextInputIcon = ({
         iconColor={iconColor}
         testID={testID}
         theme={themeOverrides}
+        rippleColor={rippleColor}
         {...rest}
       />
     </View>

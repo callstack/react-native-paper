@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native');
 
-  const timing: typeof Animated['timing'] = (value, config) => ({
+  const timing: (typeof Animated)['timing'] = (value, config) => ({
     start: (callback) => {
       value.setValue(config.toValue as any);
       callback?.({ finished: true });
@@ -103,6 +103,23 @@ it('renders snackbar with View & Text as a child', () => {
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('renders with custom ripple color', () => {
+  const { getByTestId } = render(
+    <Snackbar
+      visible
+      onDismiss={() => {}}
+      onIconPress={() => {}}
+      rippleColor="purple"
+      testID="snackbar"
+    >
+      Snackbar content
+    </Snackbar>
+  );
+
+  const iconContainer = getByTestId('snackbar-icon-container').props.children;
+  expect(iconContainer.props.rippleColor).toBe('purple');
 });
 
 it('animated value changes correctly', () => {
