@@ -793,7 +793,6 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           [
             {
               "margin": 0,
-              "zIndex": 1,
             },
             {
               "height": 100,

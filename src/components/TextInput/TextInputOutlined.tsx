@@ -403,7 +403,6 @@ const styles = StyleSheet.create({
   },
   input: {
     margin: 0,
-    zIndex: 1,
   },
   inputOutlined: {
     paddingTop: 8,
