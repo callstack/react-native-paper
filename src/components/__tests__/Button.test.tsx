@@ -13,6 +13,15 @@ const styles = StyleSheet.create({
   flexing: {
     flexDirection: 'row-reverse',
   },
+  customRadius: {
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 0,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 16,
+  },
+  noRadius: {
+    borderRadius: 0,
+  },
 });
 
 it('renders text button by default', () => {
@@ -135,6 +144,30 @@ it('renders button with an accessibility hint', () => {
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('renders button with custom border radius', () => {
+  const { getByTestId } = render(
+    <Button testID="custom-radius" style={styles.customRadius}>
+      Custom radius
+    </Button>
+  );
+
+  expect(getByTestId('custom-radius-container')).toHaveStyle(
+    styles.customRadius
+  );
+  expect(getByTestId('custom-radius')).toHaveStyle(styles.customRadius);
+});
+
+it('renders button without border radius', () => {
+  const { getByTestId } = render(
+    <Button testID="custom-radius" style={styles.noRadius}>
+      Custom radius
+    </Button>
+  );
+
+  expect(getByTestId('custom-radius-container')).toHaveStyle(styles.noRadius);
+  expect(getByTestId('custom-radius')).toHaveStyle(styles.noRadius);
 });
 
 it('should execute onPressIn', () => {

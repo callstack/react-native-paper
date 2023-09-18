@@ -286,6 +286,16 @@ const ButtonExample = () => {
           <Button mode="outlined" onPress={() => {}} style={styles.button}>
             <Text variant="titleLarge">Custom text</Text>
           </Button>
+          <Button
+            mode="outlined"
+            onPress={() => {}}
+            style={styles.customRadius}
+          >
+            Custom radius
+          </Button>
+          <Button mode="contained" onPress={() => {}} style={styles.noRadius}>
+            Without radius
+          </Button>
         </View>
 
         <View style={styles.row}>
@@ -366,6 +376,15 @@ const styles = StyleSheet.create({
   width100PercentButton: {
     width: '100%',
     marginTop: 10,
+  },
+  customRadius: {
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 0,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 16,
+  },
+  noRadius: {
+    borderRadius: 0,
   },
 });
 
