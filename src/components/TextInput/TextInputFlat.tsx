@@ -6,6 +6,7 @@ import {
   TextInput as NativeTextInput,
   TextStyle,
   View,
+  Animated,
 } from 'react-native';
 
 import { Underline } from './Addons/Underline';
