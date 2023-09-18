@@ -616,6 +616,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           "right": 0,
           "top": 6,
         },
+        false,
         {
           "backgroundColor": "rgba(255, 251, 254, 1)",
           "borderColor": "rgba(121, 116, 126, 1)",

@@ -113,6 +113,8 @@ const TextInputOutlined = ({
     theme,
   });
 
+  const paddingTop = label ? LABEL_PADDING_TOP : 0;
+
   const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
   const fontScale = MAXIMIZED_LABEL_FONT_SIZE / fontSize;
 
@@ -139,7 +141,7 @@ const TextInputOutlined = ({
   }
 
   const minInputHeight =
-    (dense ? MIN_DENSE_HEIGHT_OUTLINED : MIN_HEIGHT) - LABEL_PADDING_TOP;
+    (dense ? MIN_DENSE_HEIGHT_OUTLINED : MIN_HEIGHT) - paddingTop;
 
   const inputHeight = calculateInputHeight(labelHeight, height, minInputHeight);
 
@@ -315,6 +317,7 @@ const TextInputOutlined = ({
       <Outline
         isV3={isV3}
         style={outlineStyle}
+        label={label}
         roundness={roundness}
         hasActiveOutline={hasActiveOutline}
         focused={parentState.focused}
@@ -327,7 +330,7 @@ const TextInputOutlined = ({
           style={[
             styles.labelContainer,
             {
-              paddingTop: LABEL_PADDING_TOP,
+              paddingTop,
               minHeight,
             },
           ]}
