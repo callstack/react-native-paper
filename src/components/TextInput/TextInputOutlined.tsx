@@ -113,7 +113,9 @@ const TextInputOutlined = ({
     theme,
   });
 
+  const densePaddingTop = label ? LABEL_PADDING_TOP_DENSE : 0;
   const paddingTop = label ? LABEL_PADDING_TOP : 0;
+  const yOffset = label ? OUTLINE_MINIMIZED_LABEL_Y_OFFSET : 0;
 
   const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
   const fontScale = MAXIMIZED_LABEL_FONT_SIZE / fontSize;
@@ -148,7 +150,7 @@ const TextInputOutlined = ({
   const topPosition = calculateLabelTopPosition(
     labelHeight,
     inputHeight,
-    LABEL_PADDING_TOP
+    paddingTop
   );
 
   if (height && typeof height !== 'number') {
@@ -159,7 +161,7 @@ const TextInputOutlined = ({
   const paddingSettings = {
     height: height ? +height : null,
     labelHalfHeight,
-    offset: LABEL_PADDING_TOP,
+    offset: paddingTop,
     multiline: multiline ? multiline : null,
     dense: dense ? dense : null,
     topPosition,
@@ -177,8 +179,7 @@ const TextInputOutlined = ({
 
   const paddingOut = adjustPaddingOut({ ...paddingSettings, pad });
 
-  const baseLabelTranslateY =
-    -labelHalfHeight - (topPosition + OUTLINE_MINIMIZED_LABEL_Y_OFFSET);
+  const baseLabelTranslateY = -labelHalfHeight - (topPosition + yOffset);
 
   const { current: placeholderOpacityAnims } = React.useRef([
     new Animated.Value(0),
@@ -238,26 +239,25 @@ const TextInputOutlined = ({
     (dense ? MIN_DENSE_HEIGHT_OUTLINED : MIN_HEIGHT)) as number;
 
   const outlinedHeight =
-    inputHeight +
-    (!height ? (dense ? LABEL_PADDING_TOP_DENSE / 2 : LABEL_PADDING_TOP) : 0);
+    inputHeight + (!height ? (dense ? densePaddingTop / 2 : paddingTop) : 0);
 
   const { leftLayout, rightLayout } = parentState;
 
   const leftAffixTopPosition = calculateOutlinedIconAndAffixTopPosition({
     height: outlinedHeight,
     affixHeight: leftLayout.height || 0,
-    labelYOffset: -OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
+    labelYOffset: -yOffset,
   });
 
   const rightAffixTopPosition = calculateOutlinedIconAndAffixTopPosition({
     height: outlinedHeight,
     affixHeight: rightLayout.height || 0,
-    labelYOffset: -OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
+    labelYOffset: -yOffset,
   });
   const iconTopPosition = calculateOutlinedIconAndAffixTopPosition({
     height: outlinedHeight,
     affixHeight: ADORNMENT_SIZE,
-    labelYOffset: -OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
+    labelYOffset: -yOffset,
   });
 
   const rightAffixWidth = right
