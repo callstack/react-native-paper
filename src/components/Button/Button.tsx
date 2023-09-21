@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  AccessibilityRole,
   Animated,
   ColorValue,
   GestureResponderEvent,
@@ -89,6 +90,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   accessibilityHint?: string;
   /**
+  * Accessibility role for the button. Button by default.
+  */
+  accessibilityRole?: AccessibilityRole;
+  /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
@@ -158,6 +163,7 @@ const Button = ({
   children,
   accessibilityLabel,
   accessibilityHint,
+  accessibilityRole,
   onPress,
   onPressIn,
   onPressOut,
@@ -311,7 +317,7 @@ const Button = ({
         delayLongPress={delayLongPress}
         accessibilityLabel={accessibilityLabel}
         accessibilityHint={accessibilityHint}
-        accessibilityRole="button"
+        accessibilityRole={accessibilityRole || 'button'}
         accessibilityState={{ disabled }}
         accessible={accessible}
         disabled={disabled}
