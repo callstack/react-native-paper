@@ -271,4 +271,20 @@ describe('configureFonts', () => {
       },
     });
   });
+
+  it('should be deterministic', () => {
+    // first call that should not mutate the original config
+    configureFonts({
+      config: {
+        labelMedium: {
+          color: 'coral',
+        },
+      },
+    });
+
+    // second call that should return the original config without modification
+    const fontsB = configureFonts({ config: {} });
+
+    expect(fontsB.labelMedium.color).toBeUndefined();
+  });
 });

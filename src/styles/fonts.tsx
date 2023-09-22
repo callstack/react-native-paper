@@ -99,6 +99,7 @@ function configureV3Fonts(
   }
 
   return Object.assign(
+    {},
     typescale,
     ...Object.entries(config).map(([variantName, variantProperties]) => ({
       [variantName]: {
