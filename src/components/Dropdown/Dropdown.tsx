@@ -1,17 +1,19 @@
-import Menu from "../Menu/Menu";
-import {View} from "react-native";
-import React, {ReactElement, useEffect, useState} from "react";
-import TextInput from "../TextInput/TextInput";
-import DropdownContext from "./DropdownContext";
-import {Props as DropdownItemProps} from "./DropdownItem";
-import {TextInputProps} from "react-native-paper";
-import TouchableRipple from "../TouchableRipple/TouchableRipple";
+import React, { ReactElement, useEffect, useState } from 'react';
+import { View } from 'react-native';
+
+import DropdownContext from './DropdownContext';
+import { Props as DropdownItemProps } from './DropdownItem';
+import Menu from '../Menu/Menu';
+import TextInput, { Props as TextInputProps } from '../TextInput/TextInput';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
 export interface Props extends Omit<TextInputProps, 'value' | 'onChange'> {
   /**
    * List of underlying dropdown options.
    */
-  children?: ReactElement<DropdownItemProps> | Array<ReactElement<DropdownItemProps>>;
+  children?:
+    | ReactElement<DropdownItemProps>
+    | Array<ReactElement<DropdownItemProps>>;
   /**
    * Callback called when the selected option changes.
    * @param value new selected value
@@ -39,12 +41,6 @@ export interface Props extends Omit<TextInputProps, 'value' | 'onChange'> {
 /**
  * Dropdowns present a list of options which a user can select from.
  * A selected option can represent a value in a form, or can be used as an action to filter or sort existing content.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/dropdown-menu-android.gif" />
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js
@@ -79,20 +75,22 @@ export interface Props extends Omit<TextInputProps, 'value' | 'onChange'> {
  * ```
  */
 const Dropdown = ({
-                    value: valueFromProps,
-                    valueText: valueTextFromProps,
-                    required,
-                    onChange,
-                    children,
-                    defaultValue,
-                    ...textInputProps
-                  }: Props) => {
-  const isControlled = typeof valueFromProps !== "undefined";
+  value: valueFromProps,
+  valueText: valueTextFromProps,
+  required,
+  onChange,
+  children,
+  defaultValue,
+  ...textInputProps
+}: Props) => {
+  const isControlled = typeof valueFromProps !== 'undefined';
 
   const [menu, setMenu] = useState<View | null>(null);
   const [width, setWidth] = useState(0);
   const [open, setOpen] = useState(false);
-  const [internalValue, setInternalValue] = useState<string | null>(defaultValue ?? null);
+  const [internalValue, setInternalValue] = useState<string | null>(
+    defaultValue ?? null
+  );
 
   useEffect(() => {
     menu?.measureInWindow((_x, _y, width, _height) => {
@@ -101,51 +99,59 @@ const Dropdown = ({
   }, [open, menu]);
 
   useEffect(() => {
-    if (typeof valueFromProps !== "undefined") {
+    if (typeof valueFromProps !== 'undefined') {
       setInternalValue(valueFromProps);
     }
-  }, [valueFromProps])
+  }, [valueFromProps]);
 
   const value = isControlled ? valueFromProps : internalValue;
-  const valueText = typeof valueTextFromProps !== "undefined" ? valueTextFromProps : value;
+  const valueText =
+    typeof valueTextFromProps !== 'undefined' ? valueTextFromProps : value;
 
   return (
     <View>
       <Menu
         anchor={
           <View ref={setMenu}>
-            <TouchableRipple
-              onPress={() => setOpen(true)}>
+            <TouchableRipple onPress={() => setOpen(true)}>
               <TextInput
                 editable={false}
                 right={
-                  value && !required ?
-                    <TextInput.Icon icon="close-circle-outline" onPress={() => {
-                      onChange?.(null);
-                      setInternalValue(null);
-                    }}/>
-                    : undefined}
-                value={valueText ?? ""}
+                  value && !required ? (
+                    <TextInput.Icon
+                      icon="close-circle-outline"
+                      onPress={() => {
+                        onChange?.(null);
+                        setInternalValue(null);
+                      }}
+                    />
+                  ) : undefined
+                }
+                value={valueText ?? ''}
                 {...textInputProps}
               />
             </TouchableRipple>
           </View>
         }
         anchorPosition="bottom"
-        contentStyle={{width: width}}
-        visible={open} onDismiss={() => setOpen(false)}>
-        <DropdownContext.Provider value={{
-          onChange: (newValue: string) => {
-            setInternalValue(newValue);
-            onChange?.(newValue);
-            setOpen(false);
-          }
-        }}>
+        contentStyle={{ width: width }}
+        visible={open}
+        onDismiss={() => setOpen(false)}
+      >
+        <DropdownContext.Provider
+          value={{
+            onChange: (newValue: string) => {
+              setInternalValue(newValue);
+              onChange?.(newValue);
+              setOpen(false);
+            },
+          }}
+        >
           {children}
         </DropdownContext.Provider>
       </Menu>
     </View>
-  )
-}
+  );
+};
 
 export default Dropdown;
