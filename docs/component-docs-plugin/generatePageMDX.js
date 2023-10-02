@@ -122,14 +122,16 @@ function generatePropsTable(data, link) {
 </div>
   
   <PropTable componentLink="${link}" prop="${prop}" />
-
-  ---
   `;
     })
     .join('');
 
   return `
   ## Props
+  <ExtendsLink componentLink="${link}" />
+
+  ---
+  
   ${props}
   `;
 }
@@ -157,6 +159,7 @@ title: ${doc.title}
 ---
 
 import PropTable from '@site/src/components/PropTable.tsx';
+import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
 import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
 import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
 
