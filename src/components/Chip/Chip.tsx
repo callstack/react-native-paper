@@ -5,6 +5,7 @@ import {
   ColorValue,
   GestureResponderEvent,
   Platform,
+  PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -78,6 +79,11 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Whether the chip is disabled. A disabled chip is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
+  /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
   /**
    * Accessibility label for the chip. This is read by the screen reader when the user taps the chip.
    */
@@ -173,6 +179,7 @@ const Chip = ({
   avatar,
   selected = false,
   disabled = false,
+  background,
   accessibilityLabel,
   closeIconAccessibilityLabel = 'Close',
   onPress,
@@ -306,6 +313,7 @@ const Chip = ({
     >
       <TouchableRipple
         borderless
+        background={background}
         style={[{ borderRadius }, styles.touchable]}
         onPress={onPress}
         onLongPress={onLongPress}

@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   ColorValue,
   GestureResponderEvent,
+  PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
   View,
@@ -37,6 +38,11 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
@@ -88,6 +94,7 @@ const DrawerItem = ({
   rippleColor: customRippleColor,
   style,
   onPress,
+  background,
   accessibilityLabel,
   right,
   labelMaxFontSizeMultiplier,
@@ -121,6 +128,7 @@ const DrawerItem = ({
       <TouchableRipple
         borderless
         disabled={disabled}
+        background={background}
         onPress={onPress}
         style={[
           styles.container,

@@ -11,6 +11,7 @@ import {
   View,
   ViewProps,
   ViewStyle,
+  PressableAndroidRippleConfig,
 } from 'react-native';
 
 import { ListAccordionGroupContext } from './ListAccordionGroup';
@@ -65,6 +66,11 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
   /**
    * Style that is passed to the wrapping TouchableRipple element.
    */
@@ -169,6 +175,7 @@ const ListAccordion = ({
   style,
   id,
   testID,
+  background,
   onPress,
   onLongPress,
   delayLongPress,
@@ -241,6 +248,7 @@ const ListAccordion = ({
           accessibilityLabel={accessibilityLabel}
           testID={testID}
           theme={theme}
+          background={background}
           borderless
         >
           <View
