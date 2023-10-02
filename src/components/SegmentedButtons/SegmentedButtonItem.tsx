@@ -115,7 +115,7 @@ const SegmentedButtonItem = ({
   segment,
   density = 'regular',
   theme: themeOverrides,
-  labelMaxFontSizeMultiplier = 1.5,
+  labelMaxFontSizeMultiplier,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 

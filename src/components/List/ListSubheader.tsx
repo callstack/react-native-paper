@@ -38,7 +38,7 @@ export type Props = React.ComponentProps<typeof Text> & {
 const ListSubheader = ({
   style,
   theme: overrideTheme,
-  maxFontSizeMultiplier = 1.5,
+  maxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(overrideTheme);

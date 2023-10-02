@@ -174,7 +174,7 @@ const Button = ({
   labelStyle,
   testID = 'button',
   accessible,
-  maxFontSizeMultiplier = 1.5,
+  maxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);

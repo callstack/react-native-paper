@@ -69,7 +69,7 @@ const Tooltip = ({
   leaveTouchDelay = 1500,
   title,
   theme: themeOverrides,
-  titleMaxFontSizeMultiplier = 1.5,
+  titleMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const isWeb = Platform.OS === 'web';

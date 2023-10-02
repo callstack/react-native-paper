@@ -140,8 +140,8 @@ const ListItem = ({
   titleEllipsizeMode,
   descriptionEllipsizeMode,
   descriptionStyle,
-  descriptionMaxFontSizeMultiplier = 1.5,
-  titleMaxFontSizeMultiplier = 1.5,
+  descriptionMaxFontSizeMultiplier,
+  titleMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);

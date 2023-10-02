@@ -197,7 +197,7 @@ const FAB = forwardRef<View, Props>(
       customSize,
       mode = 'elevated',
       variant = 'primary',
-      labelMaxFontSizeMultiplier = 1.5,
+      labelMaxFontSizeMultiplier,
       ...rest
     }: Props,
     ref

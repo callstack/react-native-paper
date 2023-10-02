@@ -75,7 +75,6 @@ exports[`render visible banner, with custom theme 1`] = `
           <Text
             accessibilityLiveRegion="polite"
             accessibilityRole="alert"
-            maxFontSizeMultiplier={1.5}
             style={
               [
                 {
@@ -210,7 +209,6 @@ exports[`render visible banner, with custom theme 1`] = `
                   }
                 >
                   <Text
-                    maxFontSizeMultiplier={1.5}
                     numberOfLines={1}
                     selectable={false}
                     style={
@@ -359,7 +357,6 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
           <Text
             accessibilityLiveRegion="none"
             accessibilityRole="alert"
-            maxFontSizeMultiplier={1.5}
             style={
               [
                 {
@@ -501,7 +498,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
           <Text
             accessibilityLiveRegion="polite"
             accessibilityRole="alert"
-            maxFontSizeMultiplier={1.5}
             style={
               [
                 {
@@ -636,7 +632,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                   }
                 >
                   <Text
-                    maxFontSizeMultiplier={1.5}
                     numberOfLines={1}
                     selectable={false}
                     style={
@@ -773,7 +768,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
           <Text
             accessibilityLiveRegion="polite"
             accessibilityRole="alert"
-            maxFontSizeMultiplier={1.5}
             style={
               [
                 {
@@ -908,7 +902,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   }
                 >
                   <Text
-                    maxFontSizeMultiplier={1.5}
                     numberOfLines={1}
                     selectable={false}
                     style={
@@ -1059,7 +1052,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   }
                 >
                   <Text
-                    maxFontSizeMultiplier={1.5}
                     numberOfLines={1}
                     selectable={false}
                     style={
@@ -1218,7 +1210,6 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
           <Text
             accessibilityLiveRegion="polite"
             accessibilityRole="alert"
-            maxFontSizeMultiplier={1.5}
             style={
               [
                 {
@@ -1338,7 +1329,6 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
           <Text
             accessibilityLiveRegion="polite"
             accessibilityRole="alert"
-            maxFontSizeMultiplier={1.5}
             style={
               [
                 {

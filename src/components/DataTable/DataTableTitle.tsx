@@ -91,7 +91,7 @@ const DataTableTitle = ({
   style,
   theme: themeOverrides,
   numberOfLines = 1,
-  maxFontSizeMultiplier = 1.5,
+  maxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);

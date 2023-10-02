@@ -79,7 +79,11 @@ const DataTableCell = ({
       testID={testID}
       style={[styles.container, numeric && styles.right, style]}
     >
-      <CellContent textStyle={textStyle} testID={testID}>
+      <CellContent
+        textStyle={textStyle}
+        testID={testID}
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
+      >
         {children}
       </CellContent>
     </TouchableRipple>

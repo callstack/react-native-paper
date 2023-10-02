@@ -263,7 +263,6 @@ exports[`renders animated fab 1`] = `
       <Text
         collapsable={false}
         ellipsizeMode="tail"
-        maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onTextLayout={[Function]}
         style={
@@ -558,7 +557,6 @@ exports[`renders animated fab with label on the left 1`] = `
       <Text
         collapsable={false}
         ellipsizeMode="tail"
-        maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onTextLayout={[Function]}
         style={
@@ -855,7 +853,6 @@ exports[`renders animated fab with label on the right by default 1`] = `
       <Text
         collapsable={false}
         ellipsizeMode="tail"
-        maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         onTextLayout={[Function]}
         style={

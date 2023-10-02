@@ -109,7 +109,6 @@ exports[`renders menu with content styles 1`] = `
               }
             >
               <Text
-                maxFontSizeMultiplier={1.5}
                 numberOfLines={1}
                 selectable={false}
                 style={
@@ -662,7 +661,6 @@ exports[`renders not visible menu 1`] = `
             }
           >
             <Text
-              maxFontSizeMultiplier={1.5}
               numberOfLines={1}
               selectable={false}
               style={
@@ -829,7 +827,6 @@ exports[`renders visible menu 1`] = `
               }
             >
               <Text
-                maxFontSizeMultiplier={1.5}
                 numberOfLines={1}
                 selectable={false}
                 style={

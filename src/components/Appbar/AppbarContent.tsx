@@ -109,7 +109,7 @@ const AppbarContent = ({
   titleRef,
   titleStyle,
   title,
-  titleMaxFontSizeMultiplier = 1.5,
+  titleMaxFontSizeMultiplier,
   mode = 'small',
   theme: themeOverrides,
   testID = 'appbar-content',

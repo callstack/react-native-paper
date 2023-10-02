@@ -78,7 +78,6 @@ exports[`renders expanded accordion 1`] = `
           }
         >
           <Text
-            maxFontSizeMultiplier={1.5}
             numberOfLines={1}
             selectable={false}
             style={
@@ -228,7 +227,6 @@ exports[`renders expanded accordion 1`] = `
         }
       >
         <Text
-          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -397,7 +395,6 @@ exports[`renders list accordion with children 1`] = `
           }
         >
           <Text
-            maxFontSizeMultiplier={1.5}
             numberOfLines={1}
             selectable={false}
             style={
@@ -561,7 +558,6 @@ exports[`renders list accordion with custom title and description styles 1`] = `
           }
         >
           <Text
-            maxFontSizeMultiplier={1.5}
             numberOfLines={1}
             selectable={false}
             style={
@@ -595,7 +591,6 @@ exports[`renders list accordion with custom title and description styles 1`] = `
             Accordion item 1
           </Text>
           <Text
-            maxFontSizeMultiplier={1.5}
             numberOfLines={2}
             onTextLayout={[Function]}
             selectable={false}
@@ -820,7 +815,6 @@ exports[`renders list accordion with left items 1`] = `
           }
         >
           <Text
-            maxFontSizeMultiplier={1.5}
             numberOfLines={1}
             selectable={false}
             style={
@@ -984,7 +978,6 @@ exports[`renders multiline list accordion 1`] = `
           }
         >
           <Text
-            maxFontSizeMultiplier={1.5}
             numberOfLines={1}
             selectable={false}
             style={
@@ -1016,7 +1009,6 @@ exports[`renders multiline list accordion 1`] = `
             Expandable list item
           </Text>
           <Text
-            maxFontSizeMultiplier={1.5}
             numberOfLines={2}
             onTextLayout={[Function]}
             selectable={false}

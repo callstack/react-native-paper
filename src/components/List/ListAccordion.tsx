@@ -175,8 +175,8 @@ const ListAccordion = ({
   expanded: expandedProp,
   accessibilityLabel,
   pointerEvents = 'none',
-  titleMaxFontSizeMultiplier = 1.5,
-  descriptionMaxFontSizeMultiplier = 1.5,
+  titleMaxFontSizeMultiplier,
+  descriptionMaxFontSizeMultiplier,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const [expanded, setExpanded] = React.useState<boolean>(

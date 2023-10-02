@@ -155,7 +155,7 @@ const Snackbar = ({
   wrapperStyle,
   style,
   theme: themeOverrides,
-  maxFontSizeMultiplier = 1.5,
+  maxFontSizeMultiplier,
   rippleColor,
   testID,
   ...rest

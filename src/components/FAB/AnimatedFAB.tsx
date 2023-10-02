@@ -214,7 +214,7 @@ const AnimatedFAB = ({
   extended = false,
   iconMode = 'dynamic',
   variant = 'primary',
-  labelMaxFontSizeMultiplier = 1.5,
+  labelMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);

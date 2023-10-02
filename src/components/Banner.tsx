@@ -127,7 +127,7 @@ const Banner = ({
   theme: themeOverrides,
   onShowAnimationFinished = () => {},
   onHideAnimationFinished = () => {},
-  maxFontSizeMultiplier = 1.5,
+  maxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);

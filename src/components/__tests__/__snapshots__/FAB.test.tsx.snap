@@ -901,7 +901,6 @@ exports[`renders extended FAB 1`] = `
           </View>
         </View>
         <Text
-          maxFontSizeMultiplier={1.5}
           selectable={false}
           style={
             [
@@ -1123,7 +1122,6 @@ exports[`renders extended FAB with custom size prop 1`] = `
           </View>
         </View>
         <Text
-          maxFontSizeMultiplier={1.5}
           selectable={false}
           style={
             [

@@ -193,7 +193,7 @@ const Chip = ({
   ellipsizeMode,
   compact,
   elevated = false,
-  maxFontSizeMultiplier = 1.5,
+  maxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);

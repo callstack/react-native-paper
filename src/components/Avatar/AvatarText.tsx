@@ -67,7 +67,7 @@ const AvatarText = ({
   labelStyle,
   color: customColor,
   theme: themeOverrides,
-  maxFontSizeMultiplier = 1.5,
+  maxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);

@@ -102,7 +102,7 @@ const DrawerCollapsedItem = ({
   accessibilityLabel,
   badge = false,
   testID = 'drawer-collapsed-item',
-  labelMaxFontSizeMultiplier = 1.5,
+  labelMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);

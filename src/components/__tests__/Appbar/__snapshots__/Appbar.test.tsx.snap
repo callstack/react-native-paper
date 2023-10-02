@@ -670,7 +670,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         accessibilityRole="header"
         accessibilityTraits="header"
         accessible={true}
-        maxFontSizeMultiplier={1.5}
         numberOfLines={1}
         style={
           [

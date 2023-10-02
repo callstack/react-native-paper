@@ -47,7 +47,6 @@ exports[`DataTable.Cell renders data table cell 1`] = `
   }
 >
   <Text
-    maxFontSizeMultiplier={1.5}
     numberOfLines={1}
     style={
       [
@@ -196,7 +195,6 @@ exports[`DataTable.Header renders data table header 1`] = `
     }
   >
     <Text
-      maxFontSizeMultiplier={1.5}
       numberOfLines={1}
       style={
         [
@@ -267,7 +265,6 @@ exports[`DataTable.Header renders data table header 1`] = `
     }
   >
     <Text
-      maxFontSizeMultiplier={1.5}
       numberOfLines={1}
       style={
         [
@@ -1836,7 +1833,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                 </Text>
               </View>
               <Text
-                maxFontSizeMultiplier={1.5}
                 numberOfLines={1}
                 selectable={false}
                 style={
@@ -2591,7 +2587,6 @@ exports[`DataTable.Title renders data table title with press handler 1`] = `
     </Text>
   </View>
   <Text
-    maxFontSizeMultiplier={1.5}
     numberOfLines={1}
     style={
       [
@@ -2716,7 +2711,6 @@ exports[`DataTable.Title renders data table title with sort icon 1`] = `
     </Text>
   </View>
   <Text
-    maxFontSizeMultiplier={1.5}
     numberOfLines={1}
     style={
       [
@@ -2808,7 +2802,6 @@ exports[`renders right aligned data table cell 1`] = `
   }
 >
   <Text
-    maxFontSizeMultiplier={1.5}
     numberOfLines={1}
     style={
       [
@@ -2870,7 +2863,6 @@ exports[`renders right aligned data table title 1`] = `
   }
 >
   <Text
-    maxFontSizeMultiplier={1.5}
     numberOfLines={1}
     style={
       [

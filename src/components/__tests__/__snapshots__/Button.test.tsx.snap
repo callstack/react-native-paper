@@ -97,7 +97,6 @@ exports[`renders button with an accessibility hint 1`] = `
         }
       >
         <Text
-          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -249,7 +248,6 @@ exports[`renders button with an accessibility label 1`] = `
         }
       >
         <Text
-          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -400,7 +398,6 @@ exports[`renders button with button color 1`] = `
         }
       >
         <Text
-          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -551,7 +548,6 @@ exports[`renders button with color 1`] = `
         }
       >
         <Text
-          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -702,7 +698,6 @@ exports[`renders button with custom testID 1`] = `
         }
       >
         <Text
-          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -909,7 +904,6 @@ exports[`renders button with icon 1`] = `
           </Text>
         </View>
         <Text
-          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -1118,7 +1112,6 @@ exports[`renders button with icon in reverse order 1`] = `
           </Text>
         </View>
         <Text
-          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -1269,7 +1262,6 @@ exports[`renders contained contained with mode 1`] = `
         }
       >
         <Text
-          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -1421,7 +1413,6 @@ exports[`renders disabled button 1`] = `
         }
       >
         <Text
-          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -1780,7 +1771,6 @@ exports[`renders loading button 1`] = `
           </View>
         </View>
         <Text
-          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -1931,7 +1921,6 @@ exports[`renders outlined button with mode 1`] = `
         }
       >
         <Text
-          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -2083,7 +2072,6 @@ exports[`renders text button by default 1`] = `
         }
       >
         <Text
-          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
@@ -2234,7 +2222,6 @@ exports[`renders text button with mode 1`] = `
         }
       >
         <Text
-          maxFontSizeMultiplier={1.5}
           numberOfLines={1}
           selectable={false}
           style={
