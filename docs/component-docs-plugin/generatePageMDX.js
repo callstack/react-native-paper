@@ -86,7 +86,7 @@ function generateScreenshots(componentName, screenshotData) {
   `;
 }
 
-function generatePropsTable(data, link) {
+function generatePropsTable(data, link, extendsAttributes) {
   const ANNOTATION_OPTIONAL = '@optional';
   const ANNOTATION_INTERNAL = '@internal';
 
@@ -128,12 +128,42 @@ function generatePropsTable(data, link) {
 
   return `
   ## Props
-  <ExtendsLink componentLink="${link}" />
+  ${
+    extendsAttributes.length === 0
+      ? `<span />`
+      : `### ${extendsAttributes?.[0]?.name}`
+  }
+  ${extendsAttributes
+    .map((attr) => {
+      return `<ExtendsLink name="${attr.name}" link="${attr.link}" />`;
+    })
+    .join('')}
 
-  ---
-  
   ${props}
   `;
+}
+
+function generateExtendsAttributes(doc) {
+  const ANNOTATION_EXTENDS = '@extends';
+
+  const extendsAttributes = [];
+  doc?.description
+    .split('\n')
+    .filter((line) => {
+      if (line.startsWith(ANNOTATION_EXTENDS)) {
+        const parts = line.split(' ').slice(1);
+        const link = parts.pop();
+        extendsAttributes.push({
+          name: parts.join(' '),
+          link,
+        });
+        return false;
+      }
+      return true;
+    })
+    .join('\n');
+
+  return extendsAttributes;
 }
 
 function generatePageMDX(doc, link) {
@@ -153,6 +183,8 @@ function generatePageMDX(doc, link) {
   const themeColorsData = JSON.stringify(customFields.themeColors[doc.title]);
   const screenshotData = JSON.stringify(customFields.screenshots[doc.title]);
 
+  const extendsAttributes = generateExtendsAttributes(doc);
+
   const mdx = `
 ---
 title: ${doc.title}
@@ -169,7 +201,7 @@ ${generateScreenshots(doc.title, screenshotData)}
 
 ${usage}
 
-${generatePropsTable(doc.data.props, link)}
+${generatePropsTable(doc.data.props, link, extendsAttributes)}
 
 ${generateMoreExamples(doc.title)}
 
