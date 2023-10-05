@@ -452,6 +452,25 @@ it('always applies line height, even if not specified', () => {
   });
 });
 
+it('call onPress when affix adornment pressed', () => {
+  const affixOnPress = jest.fn();
+  const affixTextValue = '+39';
+  const { getByText, toJSON } = render(
+    <TextInput
+      label="Flat input"
+      placeholder="Enter your phone number"
+      value={''}
+      left={<TextInput.Affix text="+39" onPress={affixOnPress} />}
+    />
+  );
+
+  fireEvent.press(getByText(affixTextValue));
+
+  expect(getByText(affixTextValue)).toBeTruthy();
+  expect(toJSON()).toMatchSnapshot();
+  expect(affixOnPress).toHaveBeenCalledTimes(1);
+});
+
 describe('maxFontSizeMultiplier', () => {
   const createInput = (
     type: Exclude<Props['mode'], undefined>,

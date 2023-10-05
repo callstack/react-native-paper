@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Animated,
   LayoutChangeEvent,
+  Pressable,
   StyleProp,
   StyleSheet,
   Text,
@@ -21,6 +22,7 @@ export type Props = {
    */
   text: string;
   onLayout?: (event: LayoutChangeEvent) => void;
+  onPress?: () => void;
   /**
    * Style that is passed to the Text element.
    */
@@ -115,6 +117,7 @@ const TextInputAffix = ({
   textStyle: labelStyle,
   theme: themeOverrides,
   onLayout: onTextLayout,
+  onPress,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { AFFIX_OFFSET } = getConstants(theme.isV3);
@@ -142,30 +145,32 @@ const TextInputAffix = ({
   const textColor = getTextColor({ theme, disabled });
 
   return (
-    <Animated.View
-      style={[
-        styles.container,
-        style,
-        {
-          opacity:
-            visible?.interpolate({
-              inputRange: [0, 1],
-              outputRange: [1, 0],
-            }) || 1,
-        },
-      ]}
-      onLayout={onLayout}
-      testID={testID}
-    >
-      <Text
-        maxFontSizeMultiplier={maxFontSizeMultiplier}
-        style={[{ color: textColor }, textStyle, labelStyle]}
-        onLayout={onTextLayout}
-        testID={`${testID}-text`}
+    <Pressable accessibilityRole="button" onPress={onPress}>
+      <Animated.View
+        style={[
+          styles.container,
+          style,
+          {
+            opacity:
+              visible?.interpolate({
+                inputRange: [0, 1],
+                outputRange: [1, 0],
+              }) || 1,
+          },
+        ]}
+        onLayout={onLayout}
+        testID={testID}
       >
-        {text}
-      </Text>
-    </Animated.View>
+        <Text
+          maxFontSizeMultiplier={maxFontSizeMultiplier}
+          style={[{ color: textColor }, textStyle, labelStyle]}
+          onLayout={onTextLayout}
+          testID={`${testID}-text`}
+        >
+          {text}
+        </Text>
+      </Animated.View>
+    </Pressable>
   );
 };
 TextInputAffix.displayName = 'TextInput.Affix';
