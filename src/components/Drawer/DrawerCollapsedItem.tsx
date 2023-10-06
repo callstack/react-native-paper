@@ -4,10 +4,10 @@ import {
   GestureResponderEvent,
   NativeSyntheticEvent,
   Platform,
+  Pressable,
   StyleProp,
   StyleSheet,
   TextLayoutEventData,
-  TouchableWithoutFeedback,
   View,
   ViewStyle,
 } from 'react-native';
@@ -167,7 +167,7 @@ const DrawerCollapsedItem = ({
   return (
     <View {...rest}>
       {/* eslint-disable-next-line react-native-a11y/has-accessibility-props */}
-      <TouchableWithoutFeedback
+      <Pressable
         onPress={onPress}
         onPressOut={onPress ? handlePressOut : undefined}
         // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
@@ -229,7 +229,7 @@ const DrawerCollapsedItem = ({
             </Text>
           ) : null}
         </View>
-      </TouchableWithoutFeedback>
+      </Pressable>
     </View>
   );
 };

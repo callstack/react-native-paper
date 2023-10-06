@@ -164,7 +164,7 @@ export type Props<Route extends BaseRoute> = {
   }) => React.ReactNode;
   /**
    * Callback which returns a React element to be used as the touchable for the tab item.
-   * Renders a `TouchableRipple` on Android and `TouchableWithoutFeedback` with `View` on iOS.
+   * Renders a `TouchableRipple` on Android and `Pressable` on iOS.
    */
   renderTouchable?: (props: TouchableProps<Route>) => React.ReactNode;
   /**

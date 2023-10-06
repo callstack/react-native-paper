@@ -8,7 +8,7 @@ import {
   StyleProp,
   StyleSheet,
   TextStyle,
-  TouchableWithoutFeedback,
+  Pressable,
   View,
   ViewStyle,
 } from 'react-native';
@@ -390,7 +390,7 @@ const Chip = ({
       </TouchableRipple>
       {onClose ? (
         <View style={styles.closeButtonStyle}>
-          <TouchableWithoutFeedback
+          <Pressable
             onPress={onClose}
             accessibilityRole="button"
             accessibilityLabel={closeIconAccessibilityLabel}
@@ -413,7 +413,7 @@ const Chip = ({
                 />
               )}
             </View>
-          </TouchableWithoutFeedback>
+          </Pressable>
         </View>
       ) : null}
     </Surface>

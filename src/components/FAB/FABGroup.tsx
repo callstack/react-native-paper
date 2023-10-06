@@ -3,10 +3,10 @@ import {
   Animated,
   ColorValue,
   GestureResponderEvent,
+  Pressable,
   StyleProp,
   StyleSheet,
   TextStyle,
-  TouchableWithoutFeedback,
   View,
   ViewStyle,
 } from 'react-native';
@@ -20,6 +20,8 @@ import type { ThemeProp } from '../../types';
 import Card from '../Card/Card';
 import type { IconSource } from '../Icon';
 import Text from '../Typography/Text';
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export type Props = {
   /**
@@ -343,18 +345,18 @@ const FABGroup = ({
       pointerEvents="box-none"
       style={[styles.container, containerPaddings, style]}
     >
-      <TouchableWithoutFeedback accessibilityRole="button" onPress={close}>
-        <Animated.View
-          pointerEvents={open ? 'auto' : 'none'}
-          style={[
-            styles.backdrop,
-            {
-              opacity: backdropOpacity,
-              backgroundColor: backdropColor,
-            },
-          ]}
-        />
-      </TouchableWithoutFeedback>
+      <AnimatedPressable
+        accessibilityRole="button"
+        onPress={close}
+        pointerEvents={open ? 'auto' : 'none'}
+        style={[
+          styles.backdrop,
+          {
+            opacity: backdropOpacity,
+            backgroundColor: backdropColor,
+          },
+        ]}
+      />
       <View pointerEvents="box-none" style={styles.safeArea}>
         <View pointerEvents={open ? 'box-none' : 'none'}>
           {actions.map((it, i) => {
