@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 
 import ExpoMaterial3ThemeModule from '@pchmn/expo-material3-theme/build/ExpoMaterial3ThemeModule';
-import { MD3LightTheme, MD3DarkTheme, MD3Theme } from 'react-native-paper';
+import { MD3DarkTheme, MD3LightTheme, MD3Theme } from 'react-native-paper';
 
 type ReducerAction<T extends keyof State> = {
   payload: State[T];
@@ -24,6 +24,7 @@ export type State = {
   largeText: string;
   flatTextPassword: string;
   outlinedLargeText: string;
+  outlinedCustomLabel: string;
   outlinedTextPassword: string;
   nameNoPadding: string;
   customStyleText: string;

@@ -32,6 +32,7 @@ const initialState: State = {
   largeText: '',
   flatTextPassword: 'Password',
   outlinedLargeText: '',
+  outlinedCustomLabel: '',
   outlinedTextPassword: '',
   nameNoPadding: '',
   customStyleText: '',
@@ -89,6 +90,7 @@ const TextInputExample = () => {
     largeText,
     flatTextPassword,
     outlinedLargeText,
+    outlinedCustomLabel,
     outlinedTextPassword,
     nameNoPadding,
     customStyleText,
@@ -288,6 +290,21 @@ const TextInputExample = () => {
                     changeIconColor('outlineRightIcon');
                   }}
                 />
+              }
+            />
+            <TextInput
+              mode="outlined"
+              style={[styles.inputContainerStyle, styles.fontSize]}
+              label={
+                // eslint-disable-next-line react-native/no-inline-styles, react-native/no-color-literals
+                <Text selectionColor="blue" style={{ color: 'orange' }}>
+                  Custom label
+                </Text>
+              }
+              placeholder="Type something"
+              value={outlinedCustomLabel}
+              onChangeText={(outlinedCustomLabel) =>
+                inputActionHandler('outlinedCustomLabel', outlinedCustomLabel)
               }
             />
             <TextInput
