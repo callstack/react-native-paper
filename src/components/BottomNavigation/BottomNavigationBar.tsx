@@ -7,7 +7,6 @@ import {
   StyleProp,
   StyleSheet,
   Pressable,
-  TouchableWithoutFeedbackProps,
   View,
   ViewStyle,
 } from 'react-native';
@@ -32,7 +31,9 @@ import Badge from '../Badge';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
+
 type BaseRoute = {
   key: string;
   title?: string;
@@ -55,7 +56,7 @@ type TabPressEvent = {
   preventDefault(): void;
 };
 
-type TouchableProps<Route extends BaseRoute> = TouchableWithoutFeedbackProps & {
+type TouchableProps<Route extends BaseRoute> = TouchableRippleProps & {
   key: string;
   route: Route;
   children: React.ReactNode;
