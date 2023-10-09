@@ -295,12 +295,7 @@ const TextInputExample = () => {
             <TextInput
               mode="outlined"
               style={[styles.inputContainerStyle, styles.fontSize]}
-              label={
-                // eslint-disable-next-line react-native/no-inline-styles, react-native/no-color-literals
-                <Text selectionColor="blue" style={{ color: 'orange' }}>
-                  Custom label
-                </Text>
-              }
+              label={<Text style={styles.inputLabelText}>Custom label</Text>}
               placeholder="Type something"
               value={outlinedCustomLabel}
               onChangeText={(outlinedCustomLabel) =>
@@ -828,6 +823,9 @@ const styles = StyleSheet.create({
   year: {
     flex: 1,
     marginLeft: 4,
+  },
+  inputLabelText: {
+    color: MD3Colors.tertiary70,
   },
 });
 
