@@ -206,7 +206,7 @@ const ListItem = ({
   return (
     <TouchableRipple
       {...rest}
-      accessible={false}
+      accessible={rest.disabled ? false : true}
       style={[theme.isV3 ? styles.containerV3 : styles.container, style]}
       onPress={onPress}
       theme={theme}
