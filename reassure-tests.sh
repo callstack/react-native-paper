@@ -2,7 +2,7 @@
 set -e 
 
 # TODO: Replace with `main`
-BASELINE_BRANCH=${BASELINE_BRANCH:="edu/reassure_poc"}
+BASELINE_BRANCH=${BASELINE_BRANCH:="chore/add-reassure"}
 
 # Required for `git switch` on CI
 git fetch origin
