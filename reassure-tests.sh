@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -e 
 
-BASELINE_BRANCH=${BASELINE_BRANCH:="main"}
+# TODO: Replace with `main`
+BASELINE_BRANCH=${BASELINE_BRANCH:="edu/reassure_poc"}
 
 # Required for `git switch` on CI
 git fetch origin
