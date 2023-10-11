@@ -1,12 +1,10 @@
 import React from 'react';
-import { Text } from 'react-native';
 
 import { fireEvent, screen } from '@testing-library/react-native';
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 import { measurePerformance } from 'reassure';
 
-import Appbar from '../../Appbar';
-import theme from '../utils';
+import Appbar from '../Appbar';
 
 jest.mock('react-native-safe-area-context', () => mockSafeAreaContext);
 

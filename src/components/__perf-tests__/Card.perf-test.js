@@ -1,11 +1,10 @@
 import React from 'react';
 import { Button, Text } from 'react-native';
 
-import { fireEvent, screen } from '@testing-library/react-native';
 import { measurePerformance } from 'reassure';
 
-import Card from '../../Card/Card';
-import theme from '../utils';
+import { theme } from './utils/utils';
+import Card from '../Card/Card';
 
 const TEST_ID = 'card-perf-test';
 
@@ -44,7 +43,7 @@ describe('Card perf', () => {
     await measurePerformance(
       <Card testID={TEST_ID}>
         <Card.Cover
-          source={{ uri: require('../../../assets/back-chevron.png') }}
+          source={{ uri: require('../../assets/back-chevron.png') }}
         />
       </Card>
     );
@@ -70,7 +69,7 @@ describe('Card perf', () => {
           <Text>Card content</Text>
         </Card.Content>
         <Card.Cover
-          source={{ uri: require('../../../assets/back-chevron.png') }}
+          source={{ uri: require('../../assets/back-chevron.png') }}
         />
         <Card.Actions>
           <Button title="Cancel" />
@@ -89,7 +88,7 @@ describe('Card perf', () => {
           <Text>Card content</Text>
         </Card.Content>
         <Card.Cover
-          source={{ uri: require('../../../assets/back-chevron.png') }}
+          source={{ uri: require('../../assets/back-chevron.png') }}
         />
         <Card.Actions>
           <Button title="Cancel" />

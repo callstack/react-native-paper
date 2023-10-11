@@ -4,8 +4,8 @@ import { Text } from 'react-native';
 import { fireEvent, screen } from '@testing-library/react-native';
 import { measurePerformance } from 'reassure';
 
-import Button from '../../Button/Button';
-import theme from '../utils';
+import { theme } from './utils/utils';
+import Button from '../Button/Button';
 
 const TEST_ID = 'button-perf-test';
 
