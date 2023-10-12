@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, StyleSheet, Dimensions } from 'react-native';
+import { Animated, Dimensions, StyleSheet } from 'react-native';
 
 import AnimatedText from '../../Typography/AnimatedText';
 import type { InputLabelProps } from '../types';

@@ -77,7 +77,7 @@ const LabelBackground = ({
       numberOfLines={1}
       maxFontSizeMultiplier={maxFontSizeMultiplier}
     >
-      {label}
+      {typeof label === 'string' ? label : label?.props.children}
     </AnimatedText>,
   ];
 };

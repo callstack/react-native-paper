@@ -32,6 +32,7 @@ const initialState: State = {
   largeText: '',
   flatTextPassword: 'Password',
   outlinedLargeText: '',
+  outlinedCustomLabel: '',
   outlinedTextPassword: '',
   nameNoPadding: '',
   customStyleText: '',
@@ -89,6 +90,7 @@ const TextInputExample = () => {
     largeText,
     flatTextPassword,
     outlinedLargeText,
+    outlinedCustomLabel,
     outlinedTextPassword,
     nameNoPadding,
     customStyleText,
@@ -288,6 +290,16 @@ const TextInputExample = () => {
                     changeIconColor('outlineRightIcon');
                   }}
                 />
+              }
+            />
+            <TextInput
+              mode="outlined"
+              style={[styles.inputContainerStyle, styles.fontSize]}
+              label={<Text style={styles.inputLabelText}>Custom label</Text>}
+              placeholder="Type something"
+              value={outlinedCustomLabel}
+              onChangeText={(outlinedCustomLabel) =>
+                inputActionHandler('outlinedCustomLabel', outlinedCustomLabel)
               }
             />
             <TextInput
@@ -811,6 +823,9 @@ const styles = StyleSheet.create({
   year: {
     flex: 1,
     marginLeft: 4,
+  },
+  inputLabelText: {
+    color: MD3Colors.tertiary70,
   },
 });
 
