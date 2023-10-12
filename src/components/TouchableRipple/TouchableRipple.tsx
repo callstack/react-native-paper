@@ -10,13 +10,13 @@ import {
 
 import color from 'color';
 
+import type { PressableProps, PressableStateCallbackType } from './Pressable';
+import { Pressable } from './Pressable';
+import { getTouchableRippleColors } from './utils';
 import { Settings, SettingsContext } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
-import type { PressableProps, PressableStateCallbackType } from './Pressable';
-import { Pressable } from './Pressable';
-import { getTouchableRippleColors } from './utils';
 
 export type Props = PressableProps & {
   /**
@@ -80,12 +80,6 @@ export type Props = PressableProps & {
  * A wrapper for views that should respond to touches.
  * Provides a material "ink ripple" interaction effect for supported platforms (>= Android Lollipop).
  * On unsupported platforms, it falls back to a highlight effect.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/touchable-ripple.gif" />
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js

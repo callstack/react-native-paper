@@ -13,6 +13,9 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import useLatestCallback from 'use-latest-callback';
+
+import { getChipColors } from './helpers';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
@@ -23,7 +26,6 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { getChipColors } from './helpers';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
@@ -64,6 +66,11 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   showSelectedOverlay?: boolean;
   /**
+   * Whether to display default check icon on selected chip.
+   * Note: Check will not be shown if `icon` is specified. If specified, `icon` will be shown regardless of `selected`.
+   */
+  showSelectedCheck?: boolean;
+  /**
    * Color of the ripple effect.
    */
   rippleColor?: ColorValue;
@@ -84,6 +91,26 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * Function to execute on long press.
+   */
+  onLongPress?: () => void;
+  /**
+   * Function to execute as soon as the touchable element is pressed and invoked even before onPress.
+   */
+  onPressIn?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute as soon as the touch is released even before onPress.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute on close button press. The close button appears only when this prop is specified.
+   */
+  onClose?: () => void;
+  /**
+   * The number of milliseconds a user must touch the element before executing `onLongPress`.
+   */
+  delayLongPress?: number;
+  /**
    * @supported Available in v5.x with theme version 3
    * Sets smaller horizontal paddings `12dp` around label, when there is only label.
    */
@@ -93,18 +120,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Whether chip should have the elevation.
    */
   elevated?: boolean;
-  /**
-   * Function to execute on long press.
-   */
-  onLongPress?: () => void;
-  /**
-   * The number of milliseconds a user must touch the element before executing `onLongPress`.
-   */
-  delayLongPress?: number;
-  /**
-   * Function to execute on close button press. The close button appears only when this prop is specified.
-   */
-  onClose?: () => void;
   /**
    * Style of chip's text
    */
@@ -125,18 +140,15 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
 };
 
 /**
- * Chips can be used to display entities in small blocks.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/chip-1.png" />
- *     <figcaption>Flat chip</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/chip-2.png" />
- *     <figcaption>Outlined chip</figcaption>
- *   </figure>
- * </div>
+ * Chips are compact elements that can represent inputs, attributes, or actions.
+ * They can have an icon or avatar on the left, and a close button icon on the right.
+ * They are typically used to:
+ * <ul>
+ *  <li>Present multiple options </li>
+ *  <li>Represent attributes active or chosen </li>
+ *  <li>Present filter options </li>
+ *  <li>Trigger actions related to primary content </li>
+ * </ul>
  *
  * ## Usage
  * ```js
@@ -161,6 +173,8 @@ const Chip = ({
   closeIconAccessibilityLabel = 'Close',
   onPress,
   onLongPress,
+  onPressOut,
+  onPressIn,
   delayLongPress,
   onClose,
   closeIcon,
@@ -171,6 +185,7 @@ const Chip = ({
   selectedColor,
   rippleColor: customRippleColor,
   showSelectedOverlay = false,
+  showSelectedCheck = true,
   ellipsizeMode,
   compact,
   elevated = false,
@@ -183,27 +198,34 @@ const Chip = ({
     new Animated.Value(isV3 && elevated ? 1 : 0)
   );
 
-  const hasPassedTouchHandler = hasTouchHandler({ onPress, onLongPress });
+  const hasPassedTouchHandler = hasTouchHandler({
+    onPress,
+    onLongPress,
+    onPressIn,
+    onPressOut,
+  });
 
   const isOutlined = mode === 'outlined';
 
-  const handlePressIn = () => {
+  const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
     const { scale } = theme.animation;
+    onPressIn?.(e);
     Animated.timing(elevation, {
       toValue: isV3 ? (elevated ? 2 : 0) : 4,
       duration: 200 * scale,
       useNativeDriver: true,
     }).start();
-  };
+  });
 
-  const handlePressOut = () => {
+  const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
     const { scale } = theme.animation;
+    onPressOut?.(e);
     Animated.timing(elevation, {
       toValue: isV3 && elevated ? 1 : 0,
       duration: 150 * scale,
       useNativeDriver: true,
     }).start();
-  };
+  });
 
   const opacity = isV3 ? 0.38 : 0.26;
   const defaultBorderRadius = isV3 ? 8 : 16;
@@ -240,7 +262,10 @@ const Chip = ({
   const multiplier = isV3 ? (compact ? 1.5 : 2) : 1;
   const labelSpacings = {
     marginRight: onClose ? 0 : 8 * multiplier,
-    marginLeft: avatar || icon || selected ? 4 * multiplier : 8 * multiplier,
+    marginLeft:
+      avatar || icon || (selected && showSelectedCheck)
+        ? 4 * multiplier
+        : 8 * multiplier,
   };
   const contentSpacings = {
     paddingRight: isV3 ? (onClose ? 34 : 0) : onClose ? 32 : 4,
@@ -274,9 +299,9 @@ const Chip = ({
         borderless
         style={[{ borderRadius }, styles.touchable]}
         onPress={onPress}
+        onLongPress={onLongPress}
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
         onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
-        onLongPress={onLongPress}
         delayLongPress={delayLongPress}
         rippleColor={rippleColor}
         disabled={disabled}
@@ -304,7 +329,7 @@ const Chip = ({
                 : avatar}
             </View>
           ) : null}
-          {icon || selected ? (
+          {icon || (selected && showSelectedCheck) ? (
             <View
               style={[
                 styles.icon,
@@ -406,7 +431,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 4,
     position: 'relative',
-    flexGrow: 1,
   },
   md3Content: {
     paddingLeft: 0,
@@ -466,7 +490,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   touchable: {
-    flexGrow: 1,
+    width: '100%',
   },
 });
 

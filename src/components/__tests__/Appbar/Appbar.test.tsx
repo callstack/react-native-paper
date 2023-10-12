@@ -9,12 +9,8 @@ import { getTheme } from '../../../core/theming';
 import overlay from '../../../styles/overlay';
 import { tokens } from '../../../styles/themes/v3/tokens';
 import Appbar from '../../Appbar';
-import AppbarAction from '../../Appbar/AppbarAction';
-import AppbarBackAction from '../../Appbar/AppbarBackAction';
-import AppbarContent from '../../Appbar/AppbarContent';
-import AppbarHeader from '../../Appbar/AppbarHeader';
 import {
-  getAppbarColor,
+  getAppbarBackgroundColor,
   modeTextVariant,
   getAppbarBorders,
   renderAppbarContent as utilRenderAppbarContent,
@@ -86,7 +82,12 @@ describe('renderAppbarContent', () => {
         </Menu>,
       ],
       isDark: false,
-      renderExcept: [Appbar, AppbarHeader, AppbarBackAction, AppbarContent],
+      renderExcept: [
+        'Appbar',
+        'Appbar.Header',
+        'Appbar.BackAction',
+        'Appbar.Content',
+      ],
     });
 
     expect(result).toHaveLength(3);
@@ -97,7 +98,7 @@ describe('renderAppbarContent', () => {
       isV3: false,
       children,
       isDark: false,
-      renderOnly: [AppbarAction],
+      renderOnly: ['Appbar.Action'],
     });
 
     expect(result).toHaveLength(2);
@@ -108,7 +109,7 @@ describe('renderAppbarContent', () => {
       isV3: false,
       children,
       isDark: false,
-      renderOnly: [AppbarContent],
+      renderOnly: ['Appbar.Content'],
       mode: 'large',
     });
 
@@ -121,7 +122,7 @@ describe('renderAppbarContent', () => {
         children,
         isDark: false,
         isV3,
-        renderOnly: [AppbarContent],
+        renderOnly: ['Appbar.Content'],
         mode: 'center-aligned',
         shouldCenterContent: true,
       });
@@ -146,7 +147,7 @@ describe('renderAppbarContent', () => {
         children,
         isDark: false,
         isV3,
-        renderOnly: [AppbarContent],
+        renderOnly: ['Appbar.Content'],
         mode: 'center-aligned',
         shouldCenterContent: !isV3 && Platform.OS === 'ios',
       });
@@ -167,7 +168,7 @@ describe('renderAppbarContent', () => {
         children,
         isDark: false,
         isV3,
-        renderOnly: [AppbarContent],
+        renderOnly: ['Appbar.Content'],
         mode: 'center-aligned',
         shouldCenterContent: !isV3 && Platform.OS === 'ios',
       });
@@ -187,7 +188,10 @@ describe('renderAppbarContent', () => {
         children,
         isDark: false,
         isV3,
-        renderOnly: [AppbarContent, withAppbarBackAction && AppbarBackAction],
+        renderOnly: [
+          'Appbar.Content',
+          withAppbarBackAction && 'Appbar.BackAction',
+        ],
       });
 
     const v2Spacing = {
@@ -296,6 +300,21 @@ describe('AppbarAction', () => {
     expect(appbarActionIcon.props.color).toBe('purple');
   });
 
+  it('should be rendered with custom ripple color', () => {
+    const { getByTestId } = render(
+      <Appbar>
+        <Appbar.Action
+          icon="menu"
+          rippleColor="purple"
+          testID="appbar-action"
+        />
+      </Appbar>
+    );
+    const appbarActionContainer = getByTestId('appbar-action-container').props
+      .children;
+    expect(appbarActionContainer.props.rippleColor).toBe('purple');
+  });
+
   it('should render AppbarBackAction with custom color', () => {
     const { getByTestId } = render(
       <Appbar>
@@ -379,29 +398,31 @@ describe('getAppbarColors', () => {
   const customBackground = 'aquamarine';
 
   it('should return custom color no matter what is the theme version', () => {
-    expect(getAppbarColor(getTheme(), elevation, customBackground)).toBe(
-      customBackground
-    );
+    expect(
+      getAppbarBackgroundColor(getTheme(), elevation, customBackground)
+    ).toBe(customBackground);
   });
 
   it('should return v3 light color if theme version is 3', () => {
-    expect(getAppbarColor(getTheme(), elevation)).toBe(
+    expect(getAppbarBackgroundColor(getTheme(), elevation)).toBe(
       tokens.md.ref.palette.neutral99
     );
   });
 
   it('should return v3 dark color if theme version is 3', () => {
-    expect(getAppbarColor(getTheme(true), elevation)).toBe(
+    expect(getAppbarBackgroundColor(getTheme(true), elevation)).toBe(
       tokens.md.ref.palette.neutral10
     );
   });
 
   it('should return v2 light color if theme version is 2', () => {
-    expect(getAppbarColor(getTheme(false, false), elevation)).toBe('#6200ee');
+    expect(getAppbarBackgroundColor(getTheme(false, false), elevation)).toBe(
+      '#6200ee'
+    );
   });
 
   it('should return v2 dark color if theme version is 2', () => {
-    expect(getAppbarColor(getTheme(true, false), elevation)).toBe(
+    expect(getAppbarBackgroundColor(getTheme(true, false), elevation)).toBe(
       overlay(elevation, '#121212')
     );
   });

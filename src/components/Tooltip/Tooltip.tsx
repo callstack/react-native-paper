@@ -11,11 +11,11 @@ import {
 
 import type { ThemeProp } from 'src/types';
 
+import { getTooltipPosition, Measurement } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Text from '../Typography/Text';
-import { getTooltipPosition, Measurement } from './utils';
 
 export type Props = {
   /**
@@ -45,12 +45,6 @@ export type Props = {
  *
  * Plain tooltips, when activated, display a text label identifying an element, such as a description of its function. Tooltips should include only short, descriptive text and avoid restating visible UI text.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/tooltip.png" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -73,6 +67,8 @@ const Tooltip = ({
   theme: themeOverrides,
   ...rest
 }: Props) => {
+  const isWeb = Platform.OS === 'web';
+
   const theme = useInternalTheme(themeOverrides);
   const [visible, setVisible] = React.useState(false);
 
@@ -85,8 +81,6 @@ const Tooltip = ({
   const hideTooltipTimer = React.useRef<NodeJS.Timeout>();
   const childrenWrapperRef = React.useRef() as React.MutableRefObject<View>;
   const touched = React.useRef(false);
-
-  const isWeb = Platform.OS === 'web';
 
   React.useEffect(() => {
     return () => {
@@ -125,10 +119,15 @@ const Tooltip = ({
       clearTimeout(hideTooltipTimer.current);
     }
 
-    showTooltipTimer.current = setTimeout(() => {
+    if (isWeb) {
+      showTooltipTimer.current = setTimeout(() => {
+        touched.current = true;
+        setVisible(true);
+      }, enterTouchDelay) as unknown as NodeJS.Timeout;
+    } else {
       touched.current = true;
       setVisible(true);
-    }, enterTouchDelay) as unknown as NodeJS.Timeout;
+    }
   };
 
   const handleTouchEnd = () => {
@@ -179,7 +178,7 @@ const Tooltip = ({
                 backgroundColor: theme.isV3
                   ? theme.colors.onSurface
                   : theme.colors.tooltip,
-                ...getTooltipPosition(measurement as Measurement),
+                ...getTooltipPosition(measurement as Measurement, children),
                 borderRadius: theme.roundness,
                 ...(measurement.measured ? styles.visible : styles.hidden),
               },
@@ -213,6 +212,8 @@ const Tooltip = ({
   );
 };
 
+Tooltip.displayName = 'Tooltip';
+
 const styles = StyleSheet.create({
   tooltip: {
     alignSelf: 'flex-start',
@@ -228,8 +229,7 @@ const styles = StyleSheet.create({
     opacity: 0,
   },
   pressContainer: {
-    cursor: 'default',
-    alignSelf: 'flex-start',
+    ...(Platform.OS === 'web' && { cursor: 'default' }),
   } as ViewStyle,
 });
 

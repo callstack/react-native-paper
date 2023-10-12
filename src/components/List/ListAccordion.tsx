@@ -13,14 +13,14 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { ListAccordionGroupContext } from './ListAccordionGroup';
+import type { Style } from './utils';
+import { getAccordionColors, getLeftStyles } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { ListAccordionGroupContext } from './ListAccordionGroup';
-import type { Style } from './utils';
-import { getAccordionColors, getLeftStyles } from './utils';
 
 export type Props = {
   /**
@@ -112,12 +112,6 @@ export type Props = {
 /**
  * A component used to display an expandable list item.
  *
- * <div class="screenshots">
- *   <img class="medium" src="screenshots/list-accordion-1.png" />
- *   <img class="medium" src="screenshots/list-accordion-2.png" />
- *   <img class="medium" src="screenshots/list-accordion-3.png" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -203,7 +197,7 @@ const ListAccordion = ({
   const expandedInternal = expandedProp !== undefined ? expandedProp : expanded;
 
   const groupContext = React.useContext(ListAccordionGroupContext);
-  if (groupContext !== null && !id) {
+  if (groupContext !== null && (id === undefined || id === null || id === '')) {
     throw new Error(
       'List.Accordion is used inside a List.AccordionGroup without specifying an id prop.'
     );

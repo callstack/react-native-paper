@@ -6,12 +6,10 @@ import {
   TextInput as NativeTextInput,
   TextStyle,
   ViewStyle,
+  NativeSyntheticEvent,
+  TextLayoutEventData,
 } from 'react-native';
 
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
-import { roundLayoutSize } from '../../utils/roundLayoutSize';
 import TextInputAffix, {
   Props as TextInputAffixProps,
 } from './Adornment/TextInputAffix';
@@ -21,6 +19,10 @@ import TextInputIcon, {
 import TextInputFlat from './TextInputFlat';
 import TextInputOutlined from './TextInputOutlined';
 import type { RenderProps, TextInputLabelProp } from './types';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
+import { roundLayoutSize } from '../../utils/roundLayoutSize';
 
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
@@ -58,9 +60,16 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    */
   onChangeText?: Function;
   /**
-   * Selection color of the input.
+   * Selection color of the input. On iOS, it sets both the selection color and cursor color.
+   * On Android, it sets only the selection color.
    */
   selectionColor?: string;
+  /**
+   * @platform Android only
+   * Cursor (or "caret") color of the input on Android.
+   * This property has no effect on iOS.
+   */
+  cursorColor?: string;
   /**
    * Inactive underline color of the input.
    */
@@ -94,6 +103,7 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    */
   multiline?: boolean;
   /**
+   * @platform Android only
    * The number of lines to show in the input (Android only).
    */
   numberOfLines?: number;
@@ -182,25 +192,6 @@ const DefaultRenderer = (props: RenderProps) => <NativeTextInput {...props} />;
 /**
  * A component to allow users to input text.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img src="screenshots/textinput-flat.focused.png" />
- *     <figcaption>Flat (focused)</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/textinput-flat.disabled.png" />
- *     <figcaption>Flat (disabled)</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/textinput-outlined.focused.png" />
- *     <figcaption>Outlined (focused)</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/textinput-outlined.disabled.png" />
- *     <figcaption>Outlined (disabled)</figcaption>
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -258,6 +249,10 @@ const TextInput = forwardRef<TextInputHandles, Props>(
     >(validInputValue);
     // Use value from props instead of local state when input is controlled
     const value = isControlled ? rest.value : uncontrolledValue;
+
+    const [labelTextLayout, setLabelTextLayout] = React.useState({
+      width: 33,
+    });
 
     const [labelLayout, setLabelLayout] = React.useState<{
       measured: boolean;
@@ -458,6 +453,18 @@ const TextInput = forwardRef<TextInputHandles, Props>(
       [labelLayout.height, labelLayout.width]
     );
 
+    const handleLabelTextLayout = React.useCallback(
+      ({ nativeEvent }: NativeSyntheticEvent<TextLayoutEventData>) => {
+        setLabelTextLayout({
+          width: nativeEvent.lines.reduce(
+            (acc, line) => acc + Math.ceil(line.width),
+            0
+          ),
+        });
+      },
+      []
+    );
+
     const forceFocus = React.useCallback(() => root.current?.focus(), []);
 
     const { maxFontSizeMultiplier = 1.5 } = rest;
@@ -480,6 +487,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
             focused,
             placeholder,
             value,
+            labelTextLayout,
             labelLayout,
             leftLayout,
             rightLayout,
@@ -492,6 +500,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
           onBlur={handleBlur}
           onChangeText={handleChangeText}
           onLayoutAnimatedText={handleLayoutAnimatedText}
+          onLabelTextLayout={handleLabelTextLayout}
           onLeftAffixLayoutChange={onLeftAffixLayoutChange}
           onRightAffixLayoutChange={onRightAffixLayoutChange}
           maxFontSizeMultiplier={maxFontSizeMultiplier}
@@ -517,6 +526,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
           focused,
           placeholder,
           value,
+          labelTextLayout,
           labelLayout,
           leftLayout,
           rightLayout,
@@ -529,6 +539,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
         onBlur={handleBlur}
         onChangeText={handleChangeText}
         onLayoutAnimatedText={handleLayoutAnimatedText}
+        onLabelTextLayout={handleLabelTextLayout}
         onLeftAffixLayoutChange={onLeftAffixLayoutChange}
         onRightAffixLayoutChange={onRightAffixLayoutChange}
         maxFontSizeMultiplier={maxFontSizeMultiplier}

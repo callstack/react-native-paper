@@ -8,15 +8,15 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useInternalTheme } from '../../core/theming';
-import type { InternalTheme, MD3TypescaleKey } from '../../types';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
 import RadioButton from './RadioButton';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import RadioButtonIOS from './RadioButtonIOS';
 import { handlePress, isChecked } from './utils';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp, MD3TypescaleKey } from '../../types';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
 
 export type Props = {
   /**
@@ -79,7 +79,7 @@ export type Props = {
   /**
    * @optional
    */
-  theme?: InternalTheme;
+  theme?: ThemeProp;
   /**
    * testID to be used on tests.
    */
@@ -97,13 +97,6 @@ export type Props = {
 
 /**
  * RadioButton.Item allows you to press the whole row (item) instead of only the RadioButton.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/radio-item.ios.png" />
- *     <figcaption>Pressed</figcaption>
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js
@@ -142,7 +135,14 @@ const RadioButtonItem = ({
   labelVariant = 'bodyLarge',
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const radioButtonProps = { value, disabled, status, color, uncheckedColor };
+  const radioButtonProps = {
+    value,
+    disabled,
+    status,
+    color,
+    theme,
+    uncheckedColor,
+  };
   const isLeading = position === 'leading';
   let radioButton: any;
 

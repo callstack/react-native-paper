@@ -6,11 +6,11 @@ import {
   View,
 } from 'react-native';
 
+import { getAndroidSelectionControlColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { getAndroidSelectionControlColor } from './utils';
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -50,17 +50,6 @@ const ANIMATION_DURATION = 100;
  * Checkboxes allow the selection of multiple options from a set.
  * This component follows platform guidelines for Android, but can be used
  * on any platform.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img src="screenshots/checkbox-enabled.android.png" />
- *     <figcaption>Enabled</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/checkbox-disabled.android.png" />
- *     <figcaption>Disabled</figcaption>
- *   </figure>
- * </div>
  */
 const CheckboxAndroid = ({
   status,

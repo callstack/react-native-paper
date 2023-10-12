@@ -12,11 +12,11 @@ import {
 
 import color from 'color';
 
+import { Style, getLeftStyles, getRightStyles } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, EllipsizeProp, ThemeProp } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { Style, getLeftStyles, getRightStyles } from './utils';
 
 type Title =
   | React.ReactNode
@@ -99,12 +99,6 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
 
 /**
  * A component to show tiles inside a List.
- *
- * <div class="screenshots">
- *   <img class="medium" src="screenshots/list-item-1.png" />
- *   <img class="medium" src="screenshots/list-item-2.png" />
- *   <img class="medium" src="screenshots/list-item-3.png" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -276,7 +270,8 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
   },
   content: {
-    flex: 1,
+    flexShrink: 1,
+    flexGrow: 1,
     justifyContent: 'center',
   },
 });

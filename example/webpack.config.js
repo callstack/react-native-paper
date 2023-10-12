@@ -9,11 +9,20 @@ const node_modules = path.join(__dirname, 'node_modules');
 module.exports = async function (env, argv) {
   const config = await createExpoWebpackConfigAsync(env, argv);
 
+  config.entry = path.join(__dirname, 'index.js');
+
   config.module.rules.push({
     test: /\.(js|ts|tsx)$/,
     include: path.resolve(root, 'src'),
     use: 'babel-loader',
   });
+
+  config.ignoreWarnings = [
+    {
+      module: /Overlay\.js/,
+    },
+    () => true,
+  ];
 
   // We need to make sure that only one version is loaded for peerDependencies
   // So we alias them to the versions in example's node_modules

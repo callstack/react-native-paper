@@ -9,6 +9,7 @@ import {
   ColorValue,
 } from 'react-native';
 
+import { getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
@@ -16,7 +17,6 @@ import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { getIconButtonColor } from './utils';
 
 const PADDING = 8;
 
@@ -84,25 +84,6 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
 
 /**
  * An icon button is a button which displays only an icon without a label.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/icon-button-1.png" />
- *     <figcaption>Default icon button</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/icon-button-2.png" />
- *     <figcaption>Contained icon button</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/icon-button-3.png" />
- *     <figcaption>Contained-tonal icon button</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/icon-button-4.png" />
- *     <figcaption>Outlined icon button</figcaption>
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js

@@ -202,10 +202,10 @@ If you want to check how to use `configureFonts` on MD3, check the [Fonts](https
 
 `Appbar` and `Appbar.Header` in the latest version can be used in four various modes due to new prop `mode`:
 
-* `small` - Appbar with default height <i>(56) (default)</i>,
+* `small` - Appbar with default height <i>(64) (default)</i>,
 * `medium` - Appbar with medium height <i>(112)</i>,
 * `large` - Appbar with large height <i>(152)</i>,
-* `center-aligned` - Appbar with default height <i>(56)</i> and center-aligned title.
+* `center-aligned` - Appbar with default height <i>(64)</i> and center-aligned title.
 
 ```js
 <Appbar mode="center-aligned">

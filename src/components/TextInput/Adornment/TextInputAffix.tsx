@@ -9,11 +9,11 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { AdornmentSide } from './enums';
+import { getTextColor } from './utils';
 import { useInternalTheme } from '../../../core/theming';
 import type { ThemeProp } from '../../../types';
 import { getConstants } from '../helpers';
-import { AdornmentSide } from './enums';
-import { getTextColor } from './utils';
 
 export type Props = {
   /**
@@ -87,12 +87,6 @@ const AffixAdornment: React.FunctionComponent<
 
 /**
  * A component to render a leading / trailing text in the TextInput
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/textinput-outline.affix.png" />
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js

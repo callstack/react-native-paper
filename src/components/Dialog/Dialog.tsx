@@ -7,15 +7,15 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useInternalTheme } from '../../core/theming';
-import overlay from '../../styles/overlay';
-import type { ThemeProp } from '../../types';
-import Modal from '../Modal';
 import DialogActions from './DialogActions';
 import DialogContent from './DialogContent';
 import DialogIcon from './DialogIcon';
 import DialogScrollArea from './DialogScrollArea';
 import DialogTitle from './DialogTitle';
+import { useInternalTheme } from '../../core/theming';
+import overlay from '../../styles/overlay';
+import type { ThemeProp } from '../../types';
+import Modal from '../Modal';
 
 export type Props = {
   /**
@@ -54,11 +54,6 @@ const DIALOG_ELEVATION: number = 24;
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
  * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](../../Portal) component.
- *
- *  <div class="screenshots">
- *   <img class="small" src="screenshots/dialog-1.png" />
- *   <img class="small" src="screenshots/dialog-2.png" />
- * </div>
  *
  * ## Usage
  * ```js

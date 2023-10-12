@@ -4,11 +4,11 @@ exports[`render visible banner, with custom theme 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgb(247, 243, 249)",
       "opacity": 1,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 1,
         "width": 0,
       },
@@ -21,11 +21,11 @@ exports[`render visible banner, with custom theme 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgb(247, 243, 249)",
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -37,8 +37,8 @@ exports[`render visible banner, with custom theme 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignSelf": "center",
             "maxWidth": 960,
             "overflow": "hidden",
@@ -51,7 +51,7 @@ exports[`render visible banner, with custom theme 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "height": 0,
           }
         }
@@ -59,11 +59,11 @@ exports[`render visible banner, with custom theme 1`] = `
       <View
         collapsable={false}
         onLayout={[Function]}
-        style={Object {}}
+        style={{}}
       >
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-start",
               "marginBottom": 0,
@@ -76,25 +76,25 @@ exports[`render visible banner, with custom theme 1`] = `
             accessibilityLiveRegion="polite"
             accessibilityRole="alert"
             style={
-              Array [
-                Object {
+              [
+                {
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontWeight": "400",
                   "letterSpacing": 0,
                 },
-                Object {
+                {
                   "writingDirection": "ltr",
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "flex": 1,
                     "margin": 8,
                   },
-                  Object {
+                  {
                     "color": "rgba(28, 27, 31, 1)",
                   },
                 ],
@@ -106,7 +106,7 @@ exports[`render visible banner, with custom theme 1`] = `
         </View>
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-end",
               "margin": 4,
@@ -116,12 +116,12 @@ exports[`render visible banner, with custom theme 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "backgroundColor": "transparent",
                 "borderRadius": 20,
                 "margin": 4,
                 "shadowColor": "#000",
-                "shadowOffset": Object {
+                "shadowOffset": {
                   "height": 0,
                   "width": 0,
                 },
@@ -134,7 +134,7 @@ exports[`render visible banner, with custom theme 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "backgroundColor": "transparent",
                   "borderColor": "transparent",
                   "borderRadius": 20,
@@ -143,7 +143,7 @@ exports[`render visible banner, with custom theme 1`] = `
                   "flex": undefined,
                   "minWidth": "auto",
                   "shadowColor": "#000",
-                  "shadowOffset": Object {
+                  "shadowOffset": {
                     "height": 0,
                     "width": 0,
                   },
@@ -156,8 +156,20 @@ exports[`render visible banner, with custom theme 1`] = `
               <View
                 accessibilityRole="button"
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -173,11 +185,11 @@ exports[`render visible banner, with custom theme 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "overflow": "hidden",
                     },
-                    Object {
+                    {
                       "borderRadius": 20,
                     },
                   ]
@@ -186,8 +198,8 @@ exports[`render visible banner, with custom theme 1`] = `
               >
                 <View
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "alignItems": "center",
                         "flexDirection": "row",
                         "justifyContent": "center",
@@ -200,44 +212,46 @@ exports[`render visible banner, with custom theme 1`] = `
                     numberOfLines={1}
                     selectable={false}
                     style={
-                      Array [
-                        Object {
-                          "fontFamily": "System",
-                          "fontSize": 14,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.1,
-                          "lineHeight": 20,
-                        },
-                        Object {
+                      [
+                        {
                           "textAlign": "left",
                         },
-                        Object {
+                        {
                           "color": "rgba(28, 27, 31, 1)",
                           "writingDirection": "ltr",
                         },
-                        Array [
-                          Object {
-                            "marginHorizontal": 16,
-                            "marginVertical": 9,
-                            "textAlign": "center",
-                          },
-                          false,
-                          Object {
-                            "marginHorizontal": 12,
-                          },
-                          Object {
-                            "marginHorizontal": 8,
-                          },
-                          false,
-                          Object {
-                            "color": "#043",
+                        [
+                          {
                             "fontFamily": "System",
                             "fontSize": 14,
                             "fontWeight": "500",
                             "letterSpacing": 0.1,
                             "lineHeight": 20,
                           },
-                          undefined,
+                          [
+                            {
+                              "marginHorizontal": 16,
+                              "marginVertical": 9,
+                              "textAlign": "center",
+                            },
+                            false,
+                            {
+                              "marginHorizontal": 12,
+                            },
+                            {
+                              "marginHorizontal": 8,
+                            },
+                            false,
+                            {
+                              "color": "#043",
+                              "fontFamily": "System",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }
@@ -260,11 +274,11 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgb(247, 243, 249)",
       "opacity": 0,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 1,
         "width": 0,
       },
@@ -277,11 +291,11 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgb(247, 243, 249)",
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -293,8 +307,8 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignSelf": "center",
             "maxWidth": 960,
             "overflow": "hidden",
@@ -307,7 +321,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "height": 0,
           }
         }
@@ -316,12 +330,12 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
         collapsable={false}
         onLayout={[Function]}
         style={
-          Object {
+          {
             "opacity": 0,
             "position": "absolute",
             "top": 0,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateY": -0,
               },
             ],
@@ -331,7 +345,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
       >
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-start",
               "marginBottom": 0,
@@ -344,25 +358,25 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
             accessibilityLiveRegion="none"
             accessibilityRole="alert"
             style={
-              Array [
-                Object {
+              [
+                {
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontWeight": "400",
                   "letterSpacing": 0,
                 },
-                Object {
+                {
                   "writingDirection": "ltr",
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "flex": 1,
                     "margin": 8,
                   },
-                  Object {
+                  {
                     "color": "rgba(28, 27, 31, 1)",
                   },
                 ],
@@ -374,7 +388,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
         </View>
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-end",
               "margin": 4,
@@ -391,11 +405,11 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgb(247, 243, 249)",
       "opacity": 1,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 1,
         "width": 0,
       },
@@ -408,11 +422,11 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgb(247, 243, 249)",
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -424,8 +438,8 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignSelf": "center",
             "maxWidth": 960,
             "overflow": "hidden",
@@ -438,7 +452,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "height": 0,
           }
         }
@@ -446,11 +460,11 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
       <View
         collapsable={false}
         onLayout={[Function]}
-        style={Object {}}
+        style={{}}
       >
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-start",
               "marginBottom": 0,
@@ -461,7 +475,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
         >
           <View
             style={
-              Object {
+              {
                 "margin": 8,
               }
             }
@@ -469,12 +483,12 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
             <Image
               accessibilityIgnoresInvertColors={true}
               source={
-                Object {
+                {
                   "uri": "https://callstack.com/images/team/Satya.png",
                 }
               }
               style={
-                Object {
+                {
                   "height": 40,
                   "width": 40,
                 }
@@ -485,25 +499,25 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
             accessibilityLiveRegion="polite"
             accessibilityRole="alert"
             style={
-              Array [
-                Object {
+              [
+                {
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontWeight": "400",
                   "letterSpacing": 0,
                 },
-                Object {
+                {
                   "writingDirection": "ltr",
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "flex": 1,
                     "margin": 8,
                   },
-                  Object {
+                  {
                     "color": "rgba(28, 27, 31, 1)",
                   },
                 ],
@@ -515,7 +529,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
         </View>
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-end",
               "margin": 4,
@@ -525,12 +539,12 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "backgroundColor": "transparent",
                 "borderRadius": 20,
                 "margin": 4,
                 "shadowColor": "#000",
-                "shadowOffset": Object {
+                "shadowOffset": {
                   "height": 0,
                   "width": 0,
                 },
@@ -543,7 +557,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "backgroundColor": "transparent",
                   "borderColor": "transparent",
                   "borderRadius": 20,
@@ -552,7 +566,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                   "flex": undefined,
                   "minWidth": "auto",
                   "shadowColor": "#000",
-                  "shadowOffset": Object {
+                  "shadowOffset": {
                     "height": 0,
                     "width": 0,
                   },
@@ -565,8 +579,20 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
               <View
                 accessibilityRole="button"
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -582,11 +608,11 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "overflow": "hidden",
                     },
-                    Object {
+                    {
                       "borderRadius": 20,
                     },
                   ]
@@ -595,8 +621,8 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
               >
                 <View
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "alignItems": "center",
                         "flexDirection": "row",
                         "justifyContent": "center",
@@ -609,44 +635,46 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                     numberOfLines={1}
                     selectable={false}
                     style={
-                      Array [
-                        Object {
-                          "fontFamily": "System",
-                          "fontSize": 14,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.1,
-                          "lineHeight": 20,
-                        },
-                        Object {
+                      [
+                        {
                           "textAlign": "left",
                         },
-                        Object {
+                        {
                           "color": "rgba(28, 27, 31, 1)",
                           "writingDirection": "ltr",
                         },
-                        Array [
-                          Object {
-                            "marginHorizontal": 16,
-                            "marginVertical": 9,
-                            "textAlign": "center",
-                          },
-                          false,
-                          Object {
-                            "marginHorizontal": 12,
-                          },
-                          Object {
-                            "marginHorizontal": 8,
-                          },
-                          false,
-                          Object {
-                            "color": "rgba(103, 80, 164, 1)",
+                        [
+                          {
                             "fontFamily": "System",
                             "fontSize": 14,
                             "fontWeight": "500",
                             "letterSpacing": 0.1,
                             "lineHeight": 20,
                           },
-                          undefined,
+                          [
+                            {
+                              "marginHorizontal": 16,
+                              "marginVertical": 9,
+                              "textAlign": "center",
+                            },
+                            false,
+                            {
+                              "marginHorizontal": 12,
+                            },
+                            {
+                              "marginHorizontal": 8,
+                            },
+                            false,
+                            {
+                              "color": "rgba(103, 80, 164, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }
@@ -669,11 +697,11 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgb(247, 243, 249)",
       "opacity": 1,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 1,
         "width": 0,
       },
@@ -686,11 +714,11 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgb(247, 243, 249)",
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -702,8 +730,8 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignSelf": "center",
             "maxWidth": 960,
             "overflow": "hidden",
@@ -716,7 +744,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "height": 0,
           }
         }
@@ -724,11 +752,11 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
       <View
         collapsable={false}
         onLayout={[Function]}
-        style={Object {}}
+        style={{}}
       >
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-start",
               "marginBottom": 0,
@@ -741,25 +769,25 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             accessibilityLiveRegion="polite"
             accessibilityRole="alert"
             style={
-              Array [
-                Object {
+              [
+                {
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontWeight": "400",
                   "letterSpacing": 0,
                 },
-                Object {
+                {
                   "writingDirection": "ltr",
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "flex": 1,
                     "margin": 8,
                   },
-                  Object {
+                  {
                     "color": "rgba(28, 27, 31, 1)",
                   },
                 ],
@@ -771,7 +799,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
         </View>
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-end",
               "margin": 4,
@@ -781,12 +809,12 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "backgroundColor": "transparent",
                 "borderRadius": 20,
                 "margin": 4,
                 "shadowColor": "#000",
-                "shadowOffset": Object {
+                "shadowOffset": {
                   "height": 0,
                   "width": 0,
                 },
@@ -799,7 +827,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "backgroundColor": "transparent",
                   "borderColor": "transparent",
                   "borderRadius": 20,
@@ -808,7 +836,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   "flex": undefined,
                   "minWidth": "auto",
                   "shadowColor": "#000",
-                  "shadowOffset": Object {
+                  "shadowOffset": {
                     "height": 0,
                     "width": 0,
                   },
@@ -821,8 +849,20 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
               <View
                 accessibilityRole="button"
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -838,11 +878,11 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "overflow": "hidden",
                     },
-                    Object {
+                    {
                       "borderRadius": 20,
                     },
                   ]
@@ -851,8 +891,8 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
               >
                 <View
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "alignItems": "center",
                         "flexDirection": "row",
                         "justifyContent": "center",
@@ -865,44 +905,46 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                     numberOfLines={1}
                     selectable={false}
                     style={
-                      Array [
-                        Object {
-                          "fontFamily": "System",
-                          "fontSize": 14,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.1,
-                          "lineHeight": 20,
-                        },
-                        Object {
+                      [
+                        {
                           "textAlign": "left",
                         },
-                        Object {
+                        {
                           "color": "rgba(28, 27, 31, 1)",
                           "writingDirection": "ltr",
                         },
-                        Array [
-                          Object {
-                            "marginHorizontal": 16,
-                            "marginVertical": 9,
-                            "textAlign": "center",
-                          },
-                          false,
-                          Object {
-                            "marginHorizontal": 12,
-                          },
-                          Object {
-                            "marginHorizontal": 8,
-                          },
-                          false,
-                          Object {
-                            "color": "rgba(103, 80, 164, 1)",
+                        [
+                          {
                             "fontFamily": "System",
                             "fontSize": 14,
                             "fontWeight": "500",
                             "letterSpacing": 0.1,
                             "lineHeight": 20,
                           },
-                          undefined,
+                          [
+                            {
+                              "marginHorizontal": 16,
+                              "marginVertical": 9,
+                              "textAlign": "center",
+                            },
+                            false,
+                            {
+                              "marginHorizontal": 12,
+                            },
+                            {
+                              "marginHorizontal": 8,
+                            },
+                            false,
+                            {
+                              "color": "rgba(103, 80, 164, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }
@@ -917,12 +959,12 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "backgroundColor": "transparent",
                 "borderRadius": 20,
                 "margin": 4,
                 "shadowColor": "#000",
-                "shadowOffset": Object {
+                "shadowOffset": {
                   "height": 0,
                   "width": 0,
                 },
@@ -935,7 +977,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "backgroundColor": "transparent",
                   "borderColor": "transparent",
                   "borderRadius": 20,
@@ -944,7 +986,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   "flex": undefined,
                   "minWidth": "auto",
                   "shadowColor": "#000",
-                  "shadowOffset": Object {
+                  "shadowOffset": {
                     "height": 0,
                     "width": 0,
                   },
@@ -957,8 +999,20 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
               <View
                 accessibilityRole="button"
                 accessibilityState={
-                  Object {
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
                     "disabled": false,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -974,11 +1028,11 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "overflow": "hidden",
                     },
-                    Object {
+                    {
                       "borderRadius": 20,
                     },
                   ]
@@ -987,8 +1041,8 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
               >
                 <View
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "alignItems": "center",
                         "flexDirection": "row",
                         "justifyContent": "center",
@@ -1001,44 +1055,46 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                     numberOfLines={1}
                     selectable={false}
                     style={
-                      Array [
-                        Object {
-                          "fontFamily": "System",
-                          "fontSize": 14,
-                          "fontWeight": "500",
-                          "letterSpacing": 0.1,
-                          "lineHeight": 20,
-                        },
-                        Object {
+                      [
+                        {
                           "textAlign": "left",
                         },
-                        Object {
+                        {
                           "color": "rgba(28, 27, 31, 1)",
                           "writingDirection": "ltr",
                         },
-                        Array [
-                          Object {
-                            "marginHorizontal": 16,
-                            "marginVertical": 9,
-                            "textAlign": "center",
-                          },
-                          false,
-                          Object {
-                            "marginHorizontal": 12,
-                          },
-                          Object {
-                            "marginHorizontal": 8,
-                          },
-                          false,
-                          Object {
-                            "color": "rgba(103, 80, 164, 1)",
+                        [
+                          {
                             "fontFamily": "System",
                             "fontSize": 14,
                             "fontWeight": "500",
                             "letterSpacing": 0.1,
                             "lineHeight": 20,
                           },
-                          undefined,
+                          [
+                            {
+                              "marginHorizontal": 16,
+                              "marginVertical": 9,
+                              "textAlign": "center",
+                            },
+                            false,
+                            {
+                              "marginHorizontal": 12,
+                            },
+                            {
+                              "marginHorizontal": 8,
+                            },
+                            false,
+                            {
+                              "color": "rgba(103, 80, 164, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 14,
+                              "fontWeight": "500",
+                              "letterSpacing": 0.1,
+                              "lineHeight": 20,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }
@@ -1061,11 +1117,11 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgb(247, 243, 249)",
       "opacity": 1,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 1,
         "width": 0,
       },
@@ -1078,11 +1134,11 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgb(247, 243, 249)",
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -1094,8 +1150,8 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignSelf": "center",
             "maxWidth": 960,
             "overflow": "hidden",
@@ -1108,7 +1164,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "height": 0,
           }
         }
@@ -1116,11 +1172,11 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
       <View
         collapsable={false}
         onLayout={[Function]}
-        style={Object {}}
+        style={{}}
       >
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-start",
               "marginBottom": 0,
@@ -1131,7 +1187,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
         >
           <View
             style={
-              Object {
+              {
                 "margin": 8,
               }
             }
@@ -1139,12 +1195,12 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
             <Image
               accessibilityIgnoresInvertColors={true}
               source={
-                Object {
+                {
                   "uri": "https://callstack.com/images/team/Satya.png",
                 }
               }
               style={
-                Object {
+                {
                   "height": 40,
                   "width": 40,
                 }
@@ -1155,25 +1211,25 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
             accessibilityLiveRegion="polite"
             accessibilityRole="alert"
             style={
-              Array [
-                Object {
+              [
+                {
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontWeight": "400",
                   "letterSpacing": 0,
                 },
-                Object {
+                {
                   "writingDirection": "ltr",
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "flex": 1,
                     "margin": 8,
                   },
-                  Object {
+                  {
                     "color": "rgba(28, 27, 31, 1)",
                   },
                 ],
@@ -1185,7 +1241,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
         </View>
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-end",
               "margin": 4,
@@ -1202,11 +1258,11 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "backgroundColor": "rgb(247, 243, 249)",
       "opacity": 1,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 1,
         "width": 0,
       },
@@ -1219,11 +1275,11 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgb(247, 243, 249)",
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -1235,8 +1291,8 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "alignSelf": "center",
             "maxWidth": 960,
             "overflow": "hidden",
@@ -1249,7 +1305,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "height": 0,
           }
         }
@@ -1257,11 +1313,11 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
       <View
         collapsable={false}
         onLayout={[Function]}
-        style={Object {}}
+        style={{}}
       >
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-start",
               "marginBottom": 0,
@@ -1274,25 +1330,25 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
             accessibilityLiveRegion="polite"
             accessibilityRole="alert"
             style={
-              Array [
-                Object {
+              [
+                {
                   "textAlign": "left",
                 },
-                Object {
+                {
                   "color": "rgba(28, 27, 31, 1)",
                   "fontFamily": "System",
                   "fontWeight": "400",
                   "letterSpacing": 0,
                 },
-                Object {
+                {
                   "writingDirection": "ltr",
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "flex": 1,
                     "margin": 8,
                   },
-                  Object {
+                  {
                     "color": "rgba(28, 27, 31, 1)",
                   },
                 ],
@@ -1304,7 +1360,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
         </View>
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-end",
               "margin": 4,

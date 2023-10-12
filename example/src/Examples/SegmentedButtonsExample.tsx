@@ -3,7 +3,6 @@ import * as React from 'react';
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { List } from 'react-native-paper';
 
-import ScreenWrapper from '../ScreenWrapper';
 import {
   SegmentedButtonDefault,
   SegmentedButtonDisabled,
@@ -15,6 +14,7 @@ import {
   SegmentedButtonWithSelectedCheck,
   SegmentButtonCustomColorCheck,
 } from './SegmentedButtons';
+import ScreenWrapper from '../ScreenWrapper';
 
 type Props = {
   navigation: StackNavigationProp<{ [key: string]: undefined }>;

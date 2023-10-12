@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  Animated,
   View,
   TextInput as NativeTextInput,
   StyleSheet,
@@ -7,10 +8,9 @@ import {
   Platform,
   TextStyle,
   ColorValue,
-  StyleProp,
-  ViewStyle,
 } from 'react-native';
 
+import { Outline } from './Addons/Outline';
 import { AdornmentType, AdornmentSide } from './Adornment/enums';
 import TextInputAdornment, {
   getAdornmentConfig,
@@ -46,7 +46,8 @@ const TextInputOutlined = ({
   editable = true,
   label,
   error = false,
-  selectionColor,
+  selectionColor: customSelectionColor,
+  cursorColor,
   underlineColor: _underlineColor,
   outlineColor: customOutlineColor,
   activeOutlineColor,
@@ -64,6 +65,7 @@ const TextInputOutlined = ({
   onBlur,
   onChangeText,
   onLayoutAnimatedText,
+  onLabelTextLayout,
   onLeftAffixLayoutChange,
   onRightAffixLayoutChange,
   left,
@@ -85,13 +87,14 @@ const TextInputOutlined = ({
   const {
     fontSize: fontSizeStyle,
     fontWeight,
-    lineHeight,
+    lineHeight: lineHeightStyle,
     height,
     backgroundColor = colors?.background,
     textAlign,
     ...viewStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
   const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
+  const lineHeight = lineHeightStyle || fontSize * 1.2;
 
   const {
     inputTextColor,
@@ -99,14 +102,20 @@ const TextInputOutlined = ({
     outlineColor,
     placeholderColor,
     errorColor,
+    selectionColor,
   } = getOutlinedInputColors({
     activeOutlineColor,
     customOutlineColor,
+    customSelectionColor,
     textColor,
     disabled,
     error,
     theme,
   });
+
+  const densePaddingTop = label ? LABEL_PADDING_TOP_DENSE : 0;
+  const paddingTop = label ? LABEL_PADDING_TOP : 0;
+  const yOffset = label ? OUTLINE_MINIMIZED_LABEL_Y_OFFSET : 0;
 
   const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
   const fontScale = MAXIMIZED_LABEL_FONT_SIZE / fontSize;
@@ -134,14 +143,14 @@ const TextInputOutlined = ({
   }
 
   const minInputHeight =
-    (dense ? MIN_DENSE_HEIGHT_OUTLINED : MIN_HEIGHT) - LABEL_PADDING_TOP;
+    (dense ? MIN_DENSE_HEIGHT_OUTLINED : MIN_HEIGHT) - paddingTop;
 
   const inputHeight = calculateInputHeight(labelHeight, height, minInputHeight);
 
   const topPosition = calculateLabelTopPosition(
     labelHeight,
     inputHeight,
-    LABEL_PADDING_TOP
+    paddingTop
   );
 
   if (height && typeof height !== 'number') {
@@ -152,7 +161,7 @@ const TextInputOutlined = ({
   const paddingSettings = {
     height: height ? +height : null,
     labelHalfHeight,
-    offset: LABEL_PADDING_TOP,
+    offset: paddingTop,
     multiline: multiline ? multiline : null,
     dense: dense ? dense : null,
     topPosition,
@@ -170,14 +179,16 @@ const TextInputOutlined = ({
 
   const paddingOut = adjustPaddingOut({ ...paddingSettings, pad });
 
-  const baseLabelTranslateY =
-    -labelHalfHeight - (topPosition + OUTLINE_MINIMIZED_LABEL_Y_OFFSET);
+  const baseLabelTranslateY = -labelHalfHeight - (topPosition + yOffset);
+
+  const { current: placeholderOpacityAnims } = React.useRef([
+    new Animated.Value(0),
+    new Animated.Value(1),
+  ]);
 
   const placeholderOpacity = hasActiveOutline
     ? parentState.labeled
-    : parentState.labelLayout.measured
-    ? 1
-    : 0;
+    : placeholderOpacityAnims[parentState.labelLayout.measured ? 1 : 0];
 
   const placeholderStyle = {
     position: 'absolute',
@@ -185,9 +196,15 @@ const TextInputOutlined = ({
     paddingHorizontal: INPUT_PADDING_HORIZONTAL,
   };
 
+  const labelBackgroundColor: ColorValue =
+    backgroundColor === 'transparent'
+      ? theme.colors.background
+      : backgroundColor;
+
   const labelProps = {
     label,
     onLayoutAnimatedText,
+    onLabelTextLayout,
     placeholderOpacity,
     labelError: error,
     placeholderStyle,
@@ -203,7 +220,7 @@ const TextInputOutlined = ({
     hasActiveOutline,
     activeColor,
     placeholderColor,
-    backgroundColor: backgroundColor as ColorValue,
+    backgroundColor: labelBackgroundColor,
     errorColor,
     labelTranslationXOffset,
     roundness,
@@ -222,26 +239,25 @@ const TextInputOutlined = ({
     (dense ? MIN_DENSE_HEIGHT_OUTLINED : MIN_HEIGHT)) as number;
 
   const outlinedHeight =
-    inputHeight +
-    (!height ? (dense ? LABEL_PADDING_TOP_DENSE / 2 : LABEL_PADDING_TOP) : 0);
+    inputHeight + (!height ? (dense ? densePaddingTop / 2 : paddingTop) : 0);
 
   const { leftLayout, rightLayout } = parentState;
 
   const leftAffixTopPosition = calculateOutlinedIconAndAffixTopPosition({
     height: outlinedHeight,
     affixHeight: leftLayout.height || 0,
-    labelYOffset: -OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
+    labelYOffset: -yOffset,
   });
 
   const rightAffixTopPosition = calculateOutlinedIconAndAffixTopPosition({
     height: outlinedHeight,
     affixHeight: rightLayout.height || 0,
-    labelYOffset: -OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
+    labelYOffset: -yOffset,
   });
   const iconTopPosition = calculateOutlinedIconAndAffixTopPosition({
     height: outlinedHeight,
     affixHeight: ADORNMENT_SIZE,
-    labelYOffset: -OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
+    labelYOffset: -yOffset,
   });
 
   const rightAffixWidth = right
@@ -301,6 +317,7 @@ const TextInputOutlined = ({
       <Outline
         isV3={isV3}
         style={outlineStyle}
+        label={label}
         roundness={roundness}
         hasActiveOutline={hasActiveOutline}
         focused={parentState.focused}
@@ -313,7 +330,7 @@ const TextInputOutlined = ({
           style={[
             styles.labelContainer,
             {
-              paddingTop: LABEL_PADDING_TOP,
+              paddingTop,
               minHeight,
             },
           ]}
@@ -332,17 +349,15 @@ const TextInputOutlined = ({
             />
           ) : null}
           {render?.({
-            testID,
             ...rest,
             ref: innerRef,
             onChangeText,
             placeholder: label ? parentState.placeholder : rest.placeholder,
-            placeholderTextColor: placeholderTextColor || placeholderColor,
             editable: !disabled && editable,
-            selectionColor:
-              typeof selectionColor === 'undefined'
-                ? activeColor
-                : selectionColor,
+            selectionColor,
+            cursorColor:
+              typeof cursorColor === 'undefined' ? activeColor : cursorColor,
+            placeholderTextColor: placeholderTextColor || placeholderColor,
             onFocus,
             onBlur,
             underlineColorAndroid: 'transparent',
@@ -366,11 +381,15 @@ const TextInputOutlined = ({
                   ? 'right'
                   : 'left',
                 paddingHorizontal: INPUT_PADDING_HORIZONTAL,
+                minWidth:
+                  parentState.labelTextLayout.width +
+                  2 * INPUT_PADDING_HORIZONTAL,
               },
               Platform.OS === 'web' && { outline: 'none' },
               adornmentStyleAdjustmentForNativeInput,
               contentStyle,
             ],
+            testID,
           } as RenderProps)}
         </View>
         <TextInputAdornment {...adornmentProps} />
@@ -381,58 +400,12 @@ const TextInputOutlined = ({
 
 export default TextInputOutlined;
 
-type OutlineProps = {
-  isV3: boolean;
-  activeColor: string;
-  backgroundColor: ColorValue;
-  hasActiveOutline?: boolean;
-  focused?: boolean;
-  outlineColor?: string;
-  roundness?: number;
-  style?: StyleProp<ViewStyle>;
-};
-
-const Outline = ({
-  isV3,
-  activeColor,
-  backgroundColor,
-  hasActiveOutline,
-  focused,
-  outlineColor,
-  roundness,
-  style,
-}: OutlineProps) => (
-  <View
-    testID="text-input-outline"
-    pointerEvents="none"
-    style={[
-      styles.outline,
-      // eslint-disable-next-line react-native/no-inline-styles
-      {
-        backgroundColor,
-        borderRadius: roundness,
-        borderWidth: (isV3 ? hasActiveOutline : focused) ? 2 : 1,
-        borderColor: hasActiveOutline ? activeColor : outlineColor,
-      },
-      style,
-    ]}
-  />
-);
-
 const styles = StyleSheet.create({
-  outline: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 6,
-    bottom: 0,
-  },
   labelContainer: {
     paddingBottom: 0,
   },
   input: {
     margin: 0,
-    zIndex: 1,
   },
   inputOutlined: {
     paddingTop: 8,

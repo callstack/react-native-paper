@@ -2,7 +2,14 @@ import * as React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
 import color from 'color';
-import { Chip, List, MD2Colors, MD3Colors, Snackbar } from 'react-native-paper';
+import {
+  Chip,
+  List,
+  MD2Colors,
+  MD3Colors,
+  Snackbar,
+  Text,
+} from 'react-native-paper';
 
 import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
@@ -309,6 +316,13 @@ const ChipExample = () => {
               closeIconAccessibilityLabel="Custom Close icon accessibility label"
             >
               With custom close icon
+            </Chip>
+            <Chip
+              onPress={() => {}}
+              style={styles.chip}
+              textStyle={styles.tiny}
+            >
+              <Text variant="titleLarge">With custom text</Text>
             </Chip>
           </View>
           <Chip mode="outlined" onPress={() => {}} style={styles.fullWidthChip}>

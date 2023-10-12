@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  BackHandler,
   Easing,
   StyleProp,
   StyleSheet,
@@ -13,11 +12,12 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useLatestCallback from 'use-latest-callback';
 
+import Surface from './Surface';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 import { addEventListener } from '../utils/addEventListener';
+import { BackHandler } from '../utils/BackHandler/BackHandler';
 import useAnimatedValue from '../utils/useAnimatedValue';
-import Surface from './Surface';
 
 export type Props = {
   /**
@@ -68,12 +68,6 @@ const DEFAULT_DURATION = 220;
 /**
  * The Modal component is a simple way to present content above an enclosing view.
  * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](./Portal) component.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/modal.gif" />
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js

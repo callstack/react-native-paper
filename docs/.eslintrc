@@ -9,7 +9,7 @@
     "react/prop-types": "off",
     "import/no-unresolved": [
       2,
-      {"ignore": ["^@docusaurus"]}
+      {"ignore": ["^@docusaurus", "^@theme", "@^site"]}
     ]
   }
 }

@@ -229,17 +229,6 @@ const SurfaceIOS = forwardRef<
  * See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.
  * Overlay and shadow can be applied by specifying the `elevation` property both on Android and iOS.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/surface-android.png" />
- *     <figcaption>Surface on Android</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="medium" src="screenshots/surface-ios.png" />
- *     <figcaption>Surface on iOS</figcaption>
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -307,9 +296,11 @@ const Surface = forwardRef<View, Props>(
     const isElevated = mode === 'elevated';
 
     if (Platform.OS === 'web') {
+      const { pointerEvents = 'auto' } = props;
       return (
         <Animated.View
           {...props}
+          pointerEvents={pointerEvents}
           ref={ref}
           testID={testID}
           style={[

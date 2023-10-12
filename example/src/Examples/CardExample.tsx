@@ -118,6 +118,19 @@ const CardExample = () => {
             </Button>
           </Card.Actions>
         </Card>
+        <Card
+          style={[styles.card, styles.customCardRadius]}
+          mode={selectedMode}
+        >
+          <Card.Title
+            title="Custom border radius"
+            subtitle="... for card and cover"
+          />
+          <Card.Cover
+            source={require('../../assets/images/artist-2.jpg')}
+            style={styles.customCoverRadius}
+          />
+        </Card>
         <Card style={styles.card} mode={selectedMode}>
           <Card.Cover
             source={require('../../assets/images/strawberries.jpg')}
@@ -175,7 +188,7 @@ const CardExample = () => {
         <Card
           style={styles.card}
           onPress={() => {
-            preferences.toggleTheme();
+            preferences?.toggleTheme();
           }}
           mode={selectedMode}
         >
@@ -217,6 +230,15 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 12,
+  },
+  customCardRadius: {
+    borderTopLeftRadius: 24,
+    borderBottomRightRadius: 24,
+  },
+  customCoverRadius: {
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 24,
   },
 });
 

@@ -1,7 +1,7 @@
 import { Platform, PlatformOSType } from 'react-native';
 
-import type { Fonts, MD3Type, MD3Typescale, MD3TypescaleKey } from '../types';
 import { typescale } from './themes/v3/tokens';
+import type { Fonts, MD3Type, MD3Typescale, MD3TypescaleKey } from '../types';
 
 export const fontConfig = {
   web: {

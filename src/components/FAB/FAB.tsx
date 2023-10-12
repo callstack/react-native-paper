@@ -10,6 +10,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { getExtendedFabStyle, getFABColors, getFabStyle } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
@@ -19,7 +20,6 @@ import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { getExtendedFabStyle, getFABColors, getFabStyle } from './utils';
 
 type FABSize = 'small' | 'medium' | 'large';
 
@@ -133,18 +133,15 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * TestID used for testing purposes
+   */
   testID?: string;
   ref?: React.RefObject<View>;
 } & IconOrLabel;
 
 /**
  * A floating action button represents the primary action on a screen. It appears in front of all screen content.
- * <div class="screenshots">
- *   <img class="small" src="screenshots/fab-1.png" />
- *   <img class="small" src="screenshots/fab-2.png" />
- *   <img class="small" src="screenshots/fab-3.png" />
- *   <img class="small" src="screenshots/fab-4.png" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -293,6 +290,7 @@ const FAB = forwardRef<View, Props>(
           accessibilityState={newAccessibilityState}
           testID={testID}
           style={{ borderRadius }}
+          {...rest}
         >
           <View
             style={[styles.content, label ? extendedStyle : fabStyle]}

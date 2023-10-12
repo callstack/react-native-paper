@@ -10,13 +10,13 @@ import {
   ColorValue,
 } from 'react-native';
 
+import type { PressableProps } from './Pressable';
+import { Pressable } from './Pressable';
+import { getTouchableRippleColors } from './utils';
 import { Settings, SettingsContext } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
-import type { PressableProps } from './Pressable';
-import { Pressable } from './Pressable';
-import { getTouchableRippleColors } from './utils';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;

@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders menu with content styles 1`] = `
-Array [
+[
   <View
     collapsable={false}
     pointerEvents="box-none"
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
@@ -17,11 +17,11 @@ Array [
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "backgroundColor": "transparent",
             "borderRadius": 20,
             "shadowColor": "#000",
-            "shadowOffset": Object {
+            "shadowOffset": {
               "height": 0,
               "width": 0,
             },
@@ -34,7 +34,7 @@ Array [
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "backgroundColor": "transparent",
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
@@ -43,7 +43,7 @@ Array [
               "flex": undefined,
               "minWidth": 64,
               "shadowColor": "#000",
-              "shadowOffset": Object {
+              "shadowOffset": {
                 "height": 0,
                 "width": 0,
               },
@@ -56,8 +56,20 @@ Array [
           <View
             accessibilityRole="button"
             accessibilityState={
-              Object {
+              {
+                "busy": undefined,
+                "checked": undefined,
                 "disabled": true,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
               }
             }
             accessible={true}
@@ -73,11 +85,11 @@ Array [
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Array [
-                Object {
+              [
+                {
                   "overflow": "hidden",
                 },
-                Object {
+                {
                   "borderRadius": 20,
                 },
               ]
@@ -86,8 +98,8 @@ Array [
           >
             <View
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "alignItems": "center",
                     "flexDirection": "row",
                     "justifyContent": "center",
@@ -100,43 +112,45 @@ Array [
                 numberOfLines={1}
                 selectable={false}
                 style={
-                  Array [
-                    Object {
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "500",
-                      "letterSpacing": 0.1,
-                      "lineHeight": 20,
-                    },
-                    Object {
+                  [
+                    {
                       "textAlign": "left",
                     },
-                    Object {
+                    {
                       "color": "rgba(28, 27, 31, 1)",
                       "writingDirection": "ltr",
                     },
-                    Array [
-                      Object {
-                        "marginHorizontal": 16,
-                        "marginVertical": 9,
-                        "textAlign": "center",
-                      },
-                      false,
-                      Object {
-                        "marginHorizontal": 24,
-                        "marginVertical": 10,
-                      },
-                      undefined,
-                      false,
-                      Object {
-                        "color": "rgba(103, 80, 164, 1)",
+                    [
+                      {
                         "fontFamily": "System",
                         "fontSize": 14,
                         "fontWeight": "500",
                         "letterSpacing": 0.1,
                         "lineHeight": 20,
                       },
-                      undefined,
+                      [
+                        {
+                          "marginHorizontal": 16,
+                          "marginVertical": 9,
+                          "textAlign": "center",
+                        },
+                        false,
+                        {
+                          "marginHorizontal": 24,
+                          "marginVertical": 10,
+                        },
+                        undefined,
+                        false,
+                        {
+                          "color": "rgba(103, 80, 164, 1)",
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        undefined,
+                      ],
                     ],
                   ]
                 }
@@ -154,7 +168,7 @@ Array [
     collapsable={false}
     pointerEvents="box-none"
     style={
-      Object {
+      {
         "bottom": 0,
         "left": 0,
         "position": "absolute",
@@ -166,9 +180,29 @@ Array [
     <View
       accessibilityLabel="Close menu"
       accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -176,12 +210,13 @@ Array [
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "bottom": 0,
           "left": 0,
           "position": "absolute",
           "right": 0,
           "top": 0,
+          "width": "100%",
         }
       }
     />
@@ -191,11 +226,11 @@ Array [
       onAccessibilityEscape={[MockFunction]}
       pointerEvents="box-none"
       style={
-        Array [
-          Object {
+        [
+          {
             "position": "absolute",
           },
-          Object {
+          {
             "left": 8,
             "top": 8,
           },
@@ -206,13 +241,14 @@ Array [
     >
       <View
         collapsable={false}
+        pointerEvents="box-none"
         style={
-          Object {
-            "transform": Array [
-              Object {
+          {
+            "transform": [
+              {
                 "translateX": -0,
               },
-              Object {
+              {
                 "translateY": -0,
               },
             ],
@@ -222,24 +258,24 @@ Array [
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "backgroundColor": "rgb(243, 237, 246)",
               "borderRadius": 4,
               "borderTopLeftRadius": 0,
               "borderTopRightRadius": 0,
               "opacity": 0,
               "shadowColor": "#000",
-              "shadowOffset": Object {
+              "shadowOffset": {
                 "height": 2,
                 "width": 0,
               },
               "shadowOpacity": 0.15,
               "shadowRadius": 6,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "scaleX": 0,
                 },
-                Object {
+                {
                   "scaleY": 0,
                 },
               ],
@@ -249,8 +285,9 @@ Array [
         >
           <View
             collapsable={false}
+            pointerEvents="box-none"
             style={
-              Object {
+              {
                 "backgroundColor": "rgb(243, 237, 246)",
                 "borderRadius": 4,
                 "borderTopLeftRadius": 0,
@@ -258,7 +295,7 @@ Array [
                 "flex": undefined,
                 "paddingVertical": 8,
                 "shadowColor": "#000",
-                "shadowOffset": Object {
+                "shadowOffset": {
                   "height": 1,
                   "width": 0,
                 },
@@ -271,8 +308,20 @@ Array [
             <View
               accessibilityRole="menuitem"
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -288,16 +337,16 @@ Array [
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Array [
+                [
                   false,
-                  Array [
-                    Object {
+                  [
+                    {
                       "height": 48,
                       "justifyContent": "center",
                       "maxWidth": 280,
                       "minWidth": 112,
                     },
-                    Object {
+                    {
                       "paddingHorizontal": 12,
                     },
                     undefined,
@@ -309,7 +358,7 @@ Array [
             >
               <View
                 style={
-                  Object {
+                  {
                     "flexDirection": "row",
                   }
                 }
@@ -317,16 +366,16 @@ Array [
                 <View
                   pointerEvents="none"
                   style={
-                    Array [
+                    [
                       false,
-                      Object {
+                      {
                         "justifyContent": "center",
                       },
-                      Object {
+                      {
                         "maxWidth": 268,
                         "minWidth": 100,
                       },
-                      Object {
+                      {
                         "marginLeft": 4,
                       },
                       undefined,
@@ -338,32 +387,34 @@ Array [
                     numberOfLines={1}
                     selectable={false}
                     style={
-                      Array [
-                        Object {
-                          "fontFamily": "System",
-                          "fontSize": 16,
-                          "fontWeight": "400",
-                          "letterSpacing": 0.15,
-                          "lineHeight": 24,
-                        },
-                        Object {
+                      [
+                        {
                           "textAlign": "left",
                         },
-                        Object {
+                        {
                           "color": "rgba(28, 27, 31, 1)",
                           "writingDirection": "ltr",
                         },
-                        Array [
-                          false,
-                          Object {
-                            "color": "rgba(28, 27, 31, 1)",
+                        [
+                          {
                             "fontFamily": "System",
                             "fontSize": 16,
                             "fontWeight": "400",
                             "letterSpacing": 0.15,
                             "lineHeight": 24,
                           },
-                          undefined,
+                          [
+                            false,
+                            {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 16,
+                              "fontWeight": "400",
+                              "letterSpacing": 0.15,
+                              "lineHeight": 24,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }
@@ -377,8 +428,20 @@ Array [
             <View
               accessibilityRole="menuitem"
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -394,16 +457,16 @@ Array [
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Array [
+                [
                   false,
-                  Array [
-                    Object {
+                  [
+                    {
                       "height": 48,
                       "justifyContent": "center",
                       "maxWidth": 280,
                       "minWidth": 112,
                     },
-                    Object {
+                    {
                       "paddingHorizontal": 12,
                     },
                     undefined,
@@ -415,7 +478,7 @@ Array [
             >
               <View
                 style={
-                  Object {
+                  {
                     "flexDirection": "row",
                   }
                 }
@@ -423,16 +486,16 @@ Array [
                 <View
                   pointerEvents="none"
                   style={
-                    Array [
+                    [
                       false,
-                      Object {
+                      {
                         "justifyContent": "center",
                       },
-                      Object {
+                      {
                         "maxWidth": 268,
                         "minWidth": 100,
                       },
-                      Object {
+                      {
                         "marginLeft": 4,
                       },
                       undefined,
@@ -444,32 +507,34 @@ Array [
                     numberOfLines={1}
                     selectable={false}
                     style={
-                      Array [
-                        Object {
-                          "fontFamily": "System",
-                          "fontSize": 16,
-                          "fontWeight": "400",
-                          "letterSpacing": 0.15,
-                          "lineHeight": 24,
-                        },
-                        Object {
+                      [
+                        {
                           "textAlign": "left",
                         },
-                        Object {
+                        {
                           "color": "rgba(28, 27, 31, 1)",
                           "writingDirection": "ltr",
                         },
-                        Array [
-                          false,
-                          Object {
-                            "color": "rgba(28, 27, 31, 1)",
+                        [
+                          {
                             "fontFamily": "System",
                             "fontSize": 16,
                             "fontWeight": "400",
                             "letterSpacing": 0.15,
                             "lineHeight": 24,
                           },
-                          undefined,
+                          [
+                            false,
+                            {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 16,
+                              "fontWeight": "400",
+                              "letterSpacing": 0.15,
+                              "lineHeight": 24,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }
@@ -493,7 +558,7 @@ exports[`renders not visible menu 1`] = `
   collapsable={false}
   pointerEvents="box-none"
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
@@ -504,11 +569,11 @@ exports[`renders not visible menu 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "backgroundColor": "transparent",
           "borderRadius": 20,
           "shadowColor": "#000",
-          "shadowOffset": Object {
+          "shadowOffset": {
             "height": 0,
             "width": 0,
           },
@@ -521,7 +586,7 @@ exports[`renders not visible menu 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "backgroundColor": "transparent",
             "borderColor": "rgba(121, 116, 126, 1)",
             "borderRadius": 20,
@@ -530,7 +595,7 @@ exports[`renders not visible menu 1`] = `
             "flex": undefined,
             "minWidth": 64,
             "shadowColor": "#000",
-            "shadowOffset": Object {
+            "shadowOffset": {
               "height": 0,
               "width": 0,
             },
@@ -543,8 +608,20 @@ exports[`renders not visible menu 1`] = `
         <View
           accessibilityRole="button"
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": true,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
             }
           }
           accessible={true}
@@ -560,11 +637,11 @@ exports[`renders not visible menu 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Array [
-              Object {
+            [
+              {
                 "overflow": "hidden",
               },
-              Object {
+              {
                 "borderRadius": 20,
               },
             ]
@@ -573,8 +650,8 @@ exports[`renders not visible menu 1`] = `
         >
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "alignItems": "center",
                   "flexDirection": "row",
                   "justifyContent": "center",
@@ -587,43 +664,45 @@ exports[`renders not visible menu 1`] = `
               numberOfLines={1}
               selectable={false}
               style={
-                Array [
-                  Object {
-                    "fontFamily": "System",
-                    "fontSize": 14,
-                    "fontWeight": "500",
-                    "letterSpacing": 0.1,
-                    "lineHeight": 20,
-                  },
-                  Object {
+                [
+                  {
                     "textAlign": "left",
                   },
-                  Object {
+                  {
                     "color": "rgba(28, 27, 31, 1)",
                     "writingDirection": "ltr",
                   },
-                  Array [
-                    Object {
-                      "marginHorizontal": 16,
-                      "marginVertical": 9,
-                      "textAlign": "center",
-                    },
-                    false,
-                    Object {
-                      "marginHorizontal": 24,
-                      "marginVertical": 10,
-                    },
-                    undefined,
-                    false,
-                    Object {
-                      "color": "rgba(103, 80, 164, 1)",
+                  [
+                    {
                       "fontFamily": "System",
                       "fontSize": 14,
                       "fontWeight": "500",
                       "letterSpacing": 0.1,
                       "lineHeight": 20,
                     },
-                    undefined,
+                    [
+                      {
+                        "marginHorizontal": 16,
+                        "marginVertical": 9,
+                        "textAlign": "center",
+                      },
+                      false,
+                      {
+                        "marginHorizontal": 24,
+                        "marginVertical": 10,
+                      },
+                      undefined,
+                      false,
+                      {
+                        "color": "rgba(103, 80, 164, 1)",
+                        "fontFamily": "System",
+                        "fontSize": 14,
+                        "fontWeight": "500",
+                        "letterSpacing": 0.1,
+                        "lineHeight": 20,
+                      },
+                      undefined,
+                    ],
                   ],
                 ]
               }
@@ -640,12 +719,12 @@ exports[`renders not visible menu 1`] = `
 `;
 
 exports[`renders visible menu 1`] = `
-Array [
+[
   <View
     collapsable={false}
     pointerEvents="box-none"
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
@@ -656,11 +735,11 @@ Array [
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "backgroundColor": "transparent",
             "borderRadius": 20,
             "shadowColor": "#000",
-            "shadowOffset": Object {
+            "shadowOffset": {
               "height": 0,
               "width": 0,
             },
@@ -673,7 +752,7 @@ Array [
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "backgroundColor": "transparent",
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
@@ -682,7 +761,7 @@ Array [
               "flex": undefined,
               "minWidth": 64,
               "shadowColor": "#000",
-              "shadowOffset": Object {
+              "shadowOffset": {
                 "height": 0,
                 "width": 0,
               },
@@ -695,8 +774,20 @@ Array [
           <View
             accessibilityRole="button"
             accessibilityState={
-              Object {
+              {
+                "busy": undefined,
+                "checked": undefined,
                 "disabled": true,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
               }
             }
             accessible={true}
@@ -712,11 +803,11 @@ Array [
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Array [
-                Object {
+              [
+                {
                   "overflow": "hidden",
                 },
-                Object {
+                {
                   "borderRadius": 20,
                 },
               ]
@@ -725,8 +816,8 @@ Array [
           >
             <View
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "alignItems": "center",
                     "flexDirection": "row",
                     "justifyContent": "center",
@@ -739,43 +830,45 @@ Array [
                 numberOfLines={1}
                 selectable={false}
                 style={
-                  Array [
-                    Object {
-                      "fontFamily": "System",
-                      "fontSize": 14,
-                      "fontWeight": "500",
-                      "letterSpacing": 0.1,
-                      "lineHeight": 20,
-                    },
-                    Object {
+                  [
+                    {
                       "textAlign": "left",
                     },
-                    Object {
+                    {
                       "color": "rgba(28, 27, 31, 1)",
                       "writingDirection": "ltr",
                     },
-                    Array [
-                      Object {
-                        "marginHorizontal": 16,
-                        "marginVertical": 9,
-                        "textAlign": "center",
-                      },
-                      false,
-                      Object {
-                        "marginHorizontal": 24,
-                        "marginVertical": 10,
-                      },
-                      undefined,
-                      false,
-                      Object {
-                        "color": "rgba(103, 80, 164, 1)",
+                    [
+                      {
                         "fontFamily": "System",
                         "fontSize": 14,
                         "fontWeight": "500",
                         "letterSpacing": 0.1,
                         "lineHeight": 20,
                       },
-                      undefined,
+                      [
+                        {
+                          "marginHorizontal": 16,
+                          "marginVertical": 9,
+                          "textAlign": "center",
+                        },
+                        false,
+                        {
+                          "marginHorizontal": 24,
+                          "marginVertical": 10,
+                        },
+                        undefined,
+                        false,
+                        {
+                          "color": "rgba(103, 80, 164, 1)",
+                          "fontFamily": "System",
+                          "fontSize": 14,
+                          "fontWeight": "500",
+                          "letterSpacing": 0.1,
+                          "lineHeight": 20,
+                        },
+                        undefined,
+                      ],
                     ],
                   ]
                 }
@@ -793,7 +886,7 @@ Array [
     collapsable={false}
     pointerEvents="box-none"
     style={
-      Object {
+      {
         "bottom": 0,
         "left": 0,
         "position": "absolute",
@@ -805,9 +898,29 @@ Array [
     <View
       accessibilityLabel="Close menu"
       accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
+      collapsable={false}
       focusable={true}
+      onBlur={[Function]}
       onClick={[Function]}
+      onFocus={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -815,12 +928,13 @@ Array [
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "bottom": 0,
           "left": 0,
           "position": "absolute",
           "right": 0,
           "top": 0,
+          "width": "100%",
         }
       }
     />
@@ -830,11 +944,11 @@ Array [
       onAccessibilityEscape={[MockFunction]}
       pointerEvents="box-none"
       style={
-        Array [
-          Object {
+        [
+          {
             "position": "absolute",
           },
-          Object {
+          {
             "left": 8,
             "top": 8,
           },
@@ -845,13 +959,14 @@ Array [
     >
       <View
         collapsable={false}
+        pointerEvents="box-none"
         style={
-          Object {
-            "transform": Array [
-              Object {
+          {
+            "transform": [
+              {
                 "translateX": -0,
               },
-              Object {
+              {
                 "translateY": -0,
               },
             ],
@@ -861,22 +976,22 @@ Array [
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "backgroundColor": "rgb(243, 237, 246)",
               "borderRadius": 4,
               "opacity": 0,
               "shadowColor": "#000",
-              "shadowOffset": Object {
+              "shadowOffset": {
                 "height": 2,
                 "width": 0,
               },
               "shadowOpacity": 0.15,
               "shadowRadius": 6,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "scaleX": 0,
                 },
-                Object {
+                {
                   "scaleY": 0,
                 },
               ],
@@ -886,14 +1001,15 @@ Array [
         >
           <View
             collapsable={false}
+            pointerEvents="box-none"
             style={
-              Object {
+              {
                 "backgroundColor": "rgb(243, 237, 246)",
                 "borderRadius": 4,
                 "flex": undefined,
                 "paddingVertical": 8,
                 "shadowColor": "#000",
-                "shadowOffset": Object {
+                "shadowOffset": {
                   "height": 1,
                   "width": 0,
                 },
@@ -906,8 +1022,20 @@ Array [
             <View
               accessibilityRole="menuitem"
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -923,16 +1051,16 @@ Array [
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Array [
+                [
                   false,
-                  Array [
-                    Object {
+                  [
+                    {
                       "height": 48,
                       "justifyContent": "center",
                       "maxWidth": 280,
                       "minWidth": 112,
                     },
-                    Object {
+                    {
                       "paddingHorizontal": 12,
                     },
                     undefined,
@@ -944,7 +1072,7 @@ Array [
             >
               <View
                 style={
-                  Object {
+                  {
                     "flexDirection": "row",
                   }
                 }
@@ -952,16 +1080,16 @@ Array [
                 <View
                   pointerEvents="none"
                   style={
-                    Array [
+                    [
                       false,
-                      Object {
+                      {
                         "justifyContent": "center",
                       },
-                      Object {
+                      {
                         "maxWidth": 268,
                         "minWidth": 100,
                       },
-                      Object {
+                      {
                         "marginLeft": 4,
                       },
                       undefined,
@@ -973,32 +1101,34 @@ Array [
                     numberOfLines={1}
                     selectable={false}
                     style={
-                      Array [
-                        Object {
-                          "fontFamily": "System",
-                          "fontSize": 16,
-                          "fontWeight": "400",
-                          "letterSpacing": 0.15,
-                          "lineHeight": 24,
-                        },
-                        Object {
+                      [
+                        {
                           "textAlign": "left",
                         },
-                        Object {
+                        {
                           "color": "rgba(28, 27, 31, 1)",
                           "writingDirection": "ltr",
                         },
-                        Array [
-                          false,
-                          Object {
-                            "color": "rgba(28, 27, 31, 1)",
+                        [
+                          {
                             "fontFamily": "System",
                             "fontSize": 16,
                             "fontWeight": "400",
                             "letterSpacing": 0.15,
                             "lineHeight": 24,
                           },
-                          undefined,
+                          [
+                            false,
+                            {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 16,
+                              "fontWeight": "400",
+                              "letterSpacing": 0.15,
+                              "lineHeight": 24,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }
@@ -1012,8 +1142,20 @@ Array [
             <View
               accessibilityRole="menuitem"
               accessibilityState={
-                Object {
+                {
+                  "busy": undefined,
+                  "checked": undefined,
                   "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
                 }
               }
               accessible={true}
@@ -1029,16 +1171,16 @@ Array [
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
               style={
-                Array [
+                [
                   false,
-                  Array [
-                    Object {
+                  [
+                    {
                       "height": 48,
                       "justifyContent": "center",
                       "maxWidth": 280,
                       "minWidth": 112,
                     },
-                    Object {
+                    {
                       "paddingHorizontal": 12,
                     },
                     undefined,
@@ -1050,7 +1192,7 @@ Array [
             >
               <View
                 style={
-                  Object {
+                  {
                     "flexDirection": "row",
                   }
                 }
@@ -1058,16 +1200,16 @@ Array [
                 <View
                   pointerEvents="none"
                   style={
-                    Array [
+                    [
                       false,
-                      Object {
+                      {
                         "justifyContent": "center",
                       },
-                      Object {
+                      {
                         "maxWidth": 268,
                         "minWidth": 100,
                       },
-                      Object {
+                      {
                         "marginLeft": 4,
                       },
                       undefined,
@@ -1079,32 +1221,34 @@ Array [
                     numberOfLines={1}
                     selectable={false}
                     style={
-                      Array [
-                        Object {
-                          "fontFamily": "System",
-                          "fontSize": 16,
-                          "fontWeight": "400",
-                          "letterSpacing": 0.15,
-                          "lineHeight": 24,
-                        },
-                        Object {
+                      [
+                        {
                           "textAlign": "left",
                         },
-                        Object {
+                        {
                           "color": "rgba(28, 27, 31, 1)",
                           "writingDirection": "ltr",
                         },
-                        Array [
-                          false,
-                          Object {
-                            "color": "rgba(28, 27, 31, 1)",
+                        [
+                          {
                             "fontFamily": "System",
                             "fontSize": 16,
                             "fontWeight": "400",
                             "letterSpacing": 0.15,
                             "lineHeight": 24,
                           },
-                          undefined,
+                          [
+                            false,
+                            {
+                              "color": "rgba(28, 27, 31, 1)",
+                              "fontFamily": "System",
+                              "fontSize": 16,
+                              "fontWeight": "400",
+                              "letterSpacing": 0.15,
+                              "lineHeight": 24,
+                            },
+                            undefined,
+                          ],
                         ],
                       ]
                     }

@@ -4,8 +4,8 @@ import { I18nManager, StyleProp, StyleSheet, TextStyle } from 'react-native';
 import color from 'color';
 import type { ThemeProp } from 'src/types';
 
-import { useInternalTheme } from '../../../core/theming';
 import Text from './Text';
+import { useInternalTheme } from '../../../core/theming';
 
 type Props = React.ComponentProps<typeof Text> & {
   alpha?: number;

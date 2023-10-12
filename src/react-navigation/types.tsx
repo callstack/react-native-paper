@@ -7,7 +7,8 @@ import type {
   TabActionHelpers,
   TabNavigationState,
 } from '@react-navigation/native';
-import type { BottomNavigation } from 'react-native-paper';
+
+import type BottomNavigation from '../components/BottomNavigation/BottomNavigation';
 
 export type MaterialBottomTabNavigationEventMap = {
   /**

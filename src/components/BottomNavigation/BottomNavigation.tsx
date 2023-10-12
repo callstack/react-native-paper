@@ -13,12 +13,12 @@ import {
 
 import useLatestCallback from 'use-latest-callback';
 
+import BottomNavigationBar from './BottomNavigationBar';
+import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import type { IconSource } from '../Icon';
-import BottomNavigationBar from './BottomNavigationBar';
-import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 
 type BaseRoute = {
   key: string;
@@ -274,10 +274,6 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  * By default BottomNavigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
  * See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.
  *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/bottom-navigation.gif" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -513,14 +509,14 @@ const BottomNavigation = <Route extends BaseRoute>({
             ? 1
             : 0;
 
+          const offsetTarget = focused ? 0 : FAR_FAR_AWAY;
+
           const top = sceneAnimationEnabled
             ? offsetsAnims[index].interpolate({
                 inputRange: [0, 1],
-                outputRange: [0, FAR_FAR_AWAY],
+                outputRange: [0, offsetTarget],
               })
-            : focused
-            ? 0
-            : FAR_FAR_AWAY;
+            : offsetTarget;
 
           const left =
             sceneAnimationType === 'shifting'

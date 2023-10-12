@@ -15,6 +15,7 @@ const LabelBackground = ({
   roundness,
   labelStyle,
   maxFontSizeMultiplier,
+  testID,
 }: LabelBackgroundProps) => {
   const opacity = labeled.interpolate({
     inputRange: [0, 0.6],
@@ -60,6 +61,7 @@ const LabelBackground = ({
     roundedEdgeCover,
     <AnimatedText
       key="labelBackground-text"
+      testID={`${testID}-label-background`}
       style={[
         placeholderStyle,
         labelStyle,

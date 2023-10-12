@@ -6,18 +6,19 @@ import {
   ViewStyle,
   View,
   Animated,
+  ColorValue,
 } from 'react-native';
 
 import color from 'color';
 
+import { ToggleButtonGroupContext } from './ToggleButtonGroup';
+import { getToggleButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { black, white } from '../../styles/themes/v2/colors';
 import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
-import { ToggleButtonGroupContext } from './ToggleButtonGroup';
-import { getToggleButtonColor } from './utils';
 
 export type Props = {
   /**
@@ -32,6 +33,10 @@ export type Props = {
    * Custom text color for button.
    */
   iconColor?: string;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * Whether the button is disabled.
    */
@@ -67,10 +72,6 @@ export type Props = {
 /**
  * Toggle buttons can be used to group related options. To emphasize groups of related toggle buttons,
  * a group should share a common container.
- *
- * <div class="screenshots">
- *   <img class="medium" src="screenshots/toggle-button.png" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -110,6 +111,7 @@ const ToggleButton = forwardRef<View, Props>(
       value,
       status,
       onPress,
+      rippleColor,
       ...rest
     }: Props,
     ref
@@ -161,6 +163,7 @@ const ToggleButton = forwardRef<View, Props>(
               ]}
               ref={ref}
               theme={theme}
+              rippleColor={rippleColor}
               {...rest}
             />
           );

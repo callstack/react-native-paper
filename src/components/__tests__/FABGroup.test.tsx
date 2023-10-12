@@ -184,6 +184,37 @@ it('correctly adds label prop', () => {
   expect(getByText('Label test')).toBeTruthy();
 });
 
+it('correct renders custom ripple color passed to FAB.Group and its item', () => {
+  const { getByTestId } = render(
+    <FAB.Group
+      visible
+      open
+      label="Label test"
+      testID="fab-group"
+      rippleColor={'orange'}
+      icon="plus"
+      onStateChange={() => {}}
+      actions={[
+        {
+          label: 'testing',
+          onPress() {},
+          icon: '',
+          rippleColor: 'yellow',
+          testID: 'fab-group-item',
+        },
+      ]}
+    />
+  );
+
+  expect(
+    getByTestId('fab-group-container').props.children.props.rippleColor
+  ).toBe('orange');
+
+  expect(
+    getByTestId('fab-group-item-container').props.children.props.rippleColor
+  ).toBe('yellow');
+});
+
 it('animated value changes correctly', () => {
   const value = new Animated.Value(1);
   const { getByTestId } = render(

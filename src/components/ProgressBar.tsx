@@ -52,10 +52,6 @@ const { isRTL } = I18nManager;
 /**
  * Progress bar is an indicator used to present progress of some activity in the app.
  *
- * <div class="screenshots">
- *   <img src="screenshots/progress-bar.png" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -78,6 +74,7 @@ const ProgressBar = ({
   animatedValue,
   ...rest
 }: Props) => {
+  const isWeb = Platform.OS === 'web';
   const theme = useInternalTheme(themeOverrides);
   const { current: timer } = React.useRef<Animated.Value>(
     new Animated.Value(0)
@@ -127,7 +124,7 @@ const ProgressBar = ({
           duration: INDETERMINATE_DURATION,
           toValue: 1,
           // Animated.loop does not work if useNativeDriver is true on web
-          useNativeDriver: Platform.OS !== 'web',
+          useNativeDriver: !isWeb,
           isInteraction: false,
         });
       }
@@ -144,7 +141,7 @@ const ProgressBar = ({
         isInteraction: false,
       }).start();
     }
-  }, [fade, scale, indeterminate, timer, progress]);
+  }, [fade, scale, indeterminate, timer, progress, isWeb]);
 
   const stopAnimation = React.useCallback(() => {
     // Stop indeterminate animation
@@ -198,6 +195,7 @@ const ProgressBar = ({
       accessibilityValue={
         indeterminate ? {} : { min: 0, max: 100, now: progress * 100 }
       }
+      style={isWeb && styles.webContainer}
     >
       <Animated.View
         style={[
@@ -267,7 +265,10 @@ const styles = StyleSheet.create({
     height: 4,
     overflow: 'hidden',
   },
-
+  webContainer: {
+    width: '100%',
+    height: '100%',
+  },
   progressBar: {
     flex: 1,
   },

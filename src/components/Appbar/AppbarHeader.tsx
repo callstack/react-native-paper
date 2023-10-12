@@ -11,16 +11,16 @@ import {
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useInternalTheme } from '../../core/theming';
-import shadow from '../../styles/shadow';
-import type { ThemeProp } from '../../types';
 import { Appbar } from './Appbar';
 import {
   DEFAULT_APPBAR_HEIGHT,
-  getAppbarColor,
+  getAppbarBackgroundColor,
   modeAppbarHeight,
   getAppbarBorders,
 } from './utils';
+import { useInternalTheme } from '../../core/theming';
+import shadow from '../../styles/shadow';
+import type { ThemeProp } from '../../types';
 
 export type Props = React.ComponentProps<typeof Appbar> & {
   /**
@@ -42,7 +42,7 @@ export type Props = React.ComponentProps<typeof Appbar> & {
    * @supported Available in v5.x with theme version 3
    *
    * Mode of the Appbar.
-   * - `small` - Appbar with default height (56).
+   * - `small` - Appbar with default height (64).
    * - `medium` - Appbar with medium height (112).
    * - `large` - Appbar with large height (152).
    * - `center-aligned` - Appbar with default height and center-aligned title.
@@ -63,25 +63,6 @@ export type Props = React.ComponentProps<typeof Appbar> & {
 /**
  * A component to use as a header at the top of the screen.
  * It can contain the screen title, controls such as navigation buttons, menu button etc.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/appbar-small.png" />
- *     <figcaption>small</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/appbar-medium.png" />
- *     <figcaption>medium</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/appbar-large.png" />
- *     <figcaption>large</figcaption>
- *   </figure>
- *  <figure>
- *     <img class="small" src="screenshots/appbar-center-aligned.png" />
- *     <figcaption>center-aligned</figcaption>
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js
@@ -138,7 +119,7 @@ const AppbarHeader = ({
 
   const borderRadius = getAppbarBorders(restStyle);
 
-  const backgroundColor = getAppbarColor(
+  const backgroundColor = getAppbarBackgroundColor(
     theme,
     elevation,
     customBackground,

@@ -7,9 +7,9 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import ListSubheader from './ListSubheader';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
-import ListSubheader from './ListSubheader';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -33,10 +33,6 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
 
 /**
  * A component used to group list items.
- *
- * <div class="screenshots">
- *   <img src="screenshots/list-section.png" />
- * </div>
  *
  * ## Usage
  * ```js

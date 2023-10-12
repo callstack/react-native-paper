@@ -11,17 +11,18 @@ import {
 
 import useLatestCallback from 'use-latest-callback';
 
+import CardActions from './CardActions';
+import CardContent from './CardContent';
+import CardCover from './CardCover';
+import CardTitle from './CardTitle';
+import { getCardColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import { splitStyles } from '../../utils/splitStyles';
 import Surface from '../Surface';
-import CardActions from './CardActions';
-import CardContent from './CardContent';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import CardCover from './CardCover';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import CardTitle from './CardTitle';
-import { getCardColors } from './utils';
 
 type OutlinedCardProps = {
   mode: 'outlined';
@@ -63,13 +64,21 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
-   * If true, disable all interactions for this component.
+   * Function to execute as soon as the touchable element is pressed and invoked even before onPress.
    */
-  disabled?: boolean;
+  onPressIn?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute as soon as the touch is released even before onPress.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
   /**
    * The number of milliseconds a user must touch the element before executing `onLongPress`.
    */
   delayLongPress?: number;
+  /**
+   * If true, disable all interactions for this component.
+   */
+  disabled?: boolean;
   /**
    * Changes Card shadow and background on iOS and Android.
    */
@@ -95,21 +104,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
 
 /**
  * A card is a sheet of material that serves as an entry point to more detailed information.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img src="screenshots/card-1.png" />
- *     <figcaption>Elevated card</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/card-2.png" />
- *     <figcaption>Outlined card</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/card-3.png" />
- *     <figcaption>Contained card</figcaption>
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js
@@ -138,9 +132,11 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
  */
 const Card = ({
   elevation: cardElevation = 1,
-  onLongPress,
   delayLongPress,
   onPress,
+  onLongPress,
+  onPressOut,
+  onPressIn,
   mode: cardMode = 'elevated',
   children,
   style,
@@ -162,6 +158,8 @@ const Card = ({
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
     onLongPress,
+    onPressIn,
+    onPressOut,
   });
 
   // Default animated value
@@ -221,11 +219,13 @@ const Card = ({
     }
   };
 
-  const handlePressIn = useLatestCallback(() => {
+  const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
+    onPressIn?.(e);
     runElevationAnimation('in');
   });
 
-  const handlePressOut = useLatestCallback(() => {
+  const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
+    onPressOut?.(e);
     runElevationAnimation('out');
   });
 
@@ -243,23 +243,29 @@ const Card = ({
     mode: cardMode,
   });
 
-  const {
-    borderRadius = (isV3 ? 3 : 1) * roundness,
-    borderColor = themedBorderColor,
-  } = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
+
+  const { borderColor = themedBorderColor } = flattenedStyles;
+
+  const [, borderRadiusStyles] = splitStyles(
+    flattenedStyles,
+    (style) => style.startsWith('border') && style.endsWith('Radius')
+  );
+
+  const borderRadiusCombinedStyles = {
+    borderRadius: (isV3 ? 3 : 1) * roundness,
+    ...borderRadiusStyles,
+  };
 
   const content = (
-    <View
-      style={[styles.innerContainer, contentStyle]}
-      testID={testID}
-      accessible={accessible}
-    >
+    <View style={[styles.innerContainer, contentStyle]} testID={testID}>
       {React.Children.map(children, (child, index) =>
         React.isValidElement(child)
           ? React.cloneElement(child as React.ReactElement<any>, {
               index,
               total,
               siblings,
+              borderRadiusStyles,
             })
           : child
       )}
@@ -269,15 +275,13 @@ const Card = ({
   return (
     <Surface
       style={[
-        {
-          borderRadius,
-        },
         isV3 && !isMode('elevated') && { backgroundColor },
         !isV3 && isMode('outlined')
           ? styles.resetElevation
           : {
               elevation: computedElevation as unknown as number,
             },
+        borderRadiusCombinedStyles,
         style,
       ]}
       theme={theme}
@@ -293,16 +297,17 @@ const Card = ({
           testID={`${testID}-outline`}
           style={[
             {
-              borderRadius,
               borderColor,
             },
             styles.outline,
+            borderRadiusCombinedStyles,
           ]}
         />
       )}
 
       {hasPassedTouchHandler ? (
         <TouchableWithoutFeedback
+          accessible={accessible}
           delayPressIn={0}
           disabled={disabled}
           delayLongPress={delayLongPress}

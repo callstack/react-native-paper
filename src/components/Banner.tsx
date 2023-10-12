@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { Animated, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import type { LayoutChangeEvent } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
 
-import { useInternalTheme } from '../core/theming';
-import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
 import Button from './Button/Button';
 import Icon, { IconSource } from './Icon';
 import Surface from './Surface';
 import Text from './Typography/Text';
+import { useInternalTheme } from '../core/theming';
+import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
 
 const DEFAULT_MAX_WIDTH = 960;
 
@@ -67,23 +68,8 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
   onHideAnimationFinished?: Animated.EndCallback;
 };
 
-type NativeEvent = {
-  nativeEvent: {
-    layout: {
-      x: number;
-      y: number;
-      width: number;
-      height: number;
-    };
-  };
-};
-
 /**
  * Banner displays a prominent message and related actions.
- *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/banner.gif" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -180,7 +166,7 @@ const Banner = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible, position, scale]);
 
-  const handleLayout = ({ nativeEvent }: NativeEvent) => {
+  const handleLayout = ({ nativeEvent }: LayoutChangeEvent) => {
     const { height } = nativeEvent.layout;
     setLayout({ height, measured: true });
   };

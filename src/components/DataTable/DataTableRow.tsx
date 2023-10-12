@@ -38,13 +38,6 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
 /**
  * A component to show a single row inside of a table.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/data-table-row-cell.png" />
- *   </figure>
- * </div>
- *
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
