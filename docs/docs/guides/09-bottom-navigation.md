@@ -125,7 +125,7 @@ Generic title that can be used as a fallback for `headerTitle` and `tabBarLabel`
 
 Function that given `{ focused: boolean, color: string }` returns a React.Node, to display in the tab bar.
 
-#### `tabBarColor`
+#### `tabBarColor` <div class="badge badge-deprecated">In v5.x works only with theme version 2.</div>
 
 Color for the tab bar when the tab corresponding to the screen is active. Used for the ripple effect. This is only supported when `shifting` is `true`.
 
