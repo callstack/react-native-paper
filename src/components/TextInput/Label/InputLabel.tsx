@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import AnimatedText from '../../Typography/AnimatedText';
+import { getConstants } from '../helpers';
 import type { InputLabelProps } from '../types';
 
 const InputLabel = (props: InputLabelProps) => {
@@ -45,8 +46,10 @@ const InputLabel = (props: InputLabelProps) => {
     labelTranslationXOffset,
     maxFontSizeMultiplier,
     testID,
+    isV3,
   } = props;
 
+  const { INPUT_PADDING_HORIZONTAL } = getConstants(isV3);
   const { width } = useWindowDimensions();
 
   const paddingOffset =
@@ -119,7 +122,7 @@ const InputLabel = (props: InputLabelProps) => {
     labelError && errorColor ? errorColor : placeholderColor
   ) as ColorValue;
 
-  const maxWidth = width - (placeholderStyle.paddingHorizontal || 0);
+  const maxWidth = width - INPUT_PADDING_HORIZONTAL;
 
   return (
     // Position colored placeholder and gray placeholder on top of each other and crossfade them

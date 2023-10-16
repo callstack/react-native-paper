@@ -292,6 +292,7 @@ const TextInputFlat = ({
           ? 1
           : 0
         : 1,
+    isV3,
   };
 
   const affixTopPosition = {

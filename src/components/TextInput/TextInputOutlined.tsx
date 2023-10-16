@@ -233,6 +233,7 @@ const TextInputOutlined = ({
           ? 1
           : 0
         : 1,
+    isV3,
   };
 
   const minHeight = (height ||

@@ -135,6 +135,7 @@ export type InputLabelProps = {
   labelLayoutWidth: number;
   labelBackground?: any;
   maxFontSizeMultiplier?: number | undefined | null;
+  isV3?: boolean;
 } & LabelProps;
 
 export type LabelBackgroundProps = {
