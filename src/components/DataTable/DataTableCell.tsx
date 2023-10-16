@@ -29,6 +29,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Text content style of the `DataTableCell`.
    */
   textStyle?: StyleProp<TextStyle>;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 /**
@@ -56,23 +60,46 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  *
  * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
-
 const DataTableCell = ({
   children,
   textStyle,
   style,
   numeric,
+  testID,
   ...rest
-}: Props) => (
-  <TouchableRipple
-    {...rest}
-    style={[styles.container, numeric && styles.right, style]}
-  >
-    <Text style={textStyle} numberOfLines={1}>
+}: Props) => {
+  return (
+    <TouchableRipple
+      {...rest}
+      testID={testID}
+      style={[styles.container, numeric && styles.right, style]}
+    >
+      <CellContent textStyle={textStyle} testID={testID}>
+        {children}
+      </CellContent>
+    </TouchableRipple>
+  );
+};
+
+const CellContent = ({
+  children,
+  textStyle,
+  testID,
+}: Pick<Props, 'children' | 'textStyle' | 'testID'>) => {
+  if (React.isValidElement(children)) {
+    return children;
+  }
+
+  return (
+    <Text
+      style={textStyle}
+      numberOfLines={1}
+      testID={`${testID}-text-container`}
+    >
       {children}
     </Text>
-  </TouchableRipple>
-);
+  );
+};
 
 DataTableCell.displayName = 'DataTable.Cell';
 
