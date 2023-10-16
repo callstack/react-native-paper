@@ -67,10 +67,13 @@ export type Props = IconProps & {
    */
   source: any;
   /**
-   *
    * Color of the icon.
    */
   color?: string;
+  /**
+   * TestID used for testing purposes
+   */
+  testID?: string;
   /**
    * @optional
    */
@@ -102,6 +105,7 @@ const Icon = ({
   color,
   size,
   theme: themeOverrides,
+  testID,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -125,6 +129,7 @@ const Icon = ({
     return (
       <Image
         {...rest}
+        testID={testID}
         source={s}
         style={[
           {
@@ -150,12 +155,13 @@ const Icon = ({
             color: iconColor,
             size,
             direction,
+            testID,
           });
         }}
       </SettingsConsumer>
     );
   } else if (typeof s === 'function') {
-    return s({ color: iconColor, size, direction });
+    return s({ color: iconColor, size, direction, testID });
   }
 
   return null;

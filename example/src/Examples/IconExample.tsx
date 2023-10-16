@@ -1,26 +1,35 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 
-import { Icon, List, MD2Colors } from 'react-native-paper';
+import { Icon, List } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
+
+const AssetIcon = ({ size, testID }: { size: number; testID: string }) => (
+  <Image
+    accessibilityIgnoresInvertColors
+    source={require('../../assets/images/paper-icon.png')}
+    style={{ width: size, height: size }}
+    testID={testID}
+  />
+);
 
 const IconExample = () => {
   return (
     <ScreenWrapper>
-      <List.Section title="Default color">
+      <List.Section title="Default icon (MaterialCommunityIcon)">
         <View style={styles.row}>
           <Icon source="camera" size={24} />
         </View>
       </List.Section>
-      <List.Section title="Custom color">
+      <List.Section title="Image icon">
         <View style={styles.row}>
-          <Icon source="camera" color={MD2Colors.green500} size={24} />
+          <Icon source={{ uri: 'https://picsum.photos/700' }} size={48} />
         </View>
       </List.Section>
-      <List.Section title="Custom Size">
+      <List.Section title="Render function icon">
         <View style={styles.row}>
-          <Icon source="heart" color={MD2Colors.pink300} size={50} />
+          <Icon source={AssetIcon} size={48} />
         </View>
       </List.Section>
     </ScreenWrapper>
