@@ -126,6 +126,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * testID to be used on tests.
    */
   testID?: string;
+  /**
+   * Enable "adjustsFontSizeToFit" for text component
+   */
+  adjustsFontSizeToFit?: boolean;
 };
 
 /**
@@ -170,6 +174,7 @@ const Button = ({
   labelStyle,
   testID = 'button',
   accessible,
+  adjustsFontSizeToFit,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -364,6 +369,7 @@ const Button = ({
               textStyle,
               labelStyle,
             ]}
+            adjustsFontSizeToFit={adjustsFontSizeToFit}
           >
             {children}
           </Text>
