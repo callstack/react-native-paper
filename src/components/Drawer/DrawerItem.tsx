@@ -42,6 +42,10 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   right?: (props: { color: string }) => React.ReactNode;
   /**
+   * Specifies the largest possible scale a label font can reach.
+   */
+  labelMaxFontSizeMultiplier?: number;
+  /**
    * Color of the ripple effect.
    */
   rippleColor?: ColorValue;
@@ -81,6 +85,7 @@ const DrawerItem = ({
   onPress,
   accessibilityLabel,
   right,
+  labelMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -140,6 +145,7 @@ const DrawerItem = ({
                   ...font,
                 },
               ]}
+              maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
             >
               {label}
             </Text>

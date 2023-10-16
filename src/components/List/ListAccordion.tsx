@@ -92,6 +92,14 @@ export type Props = {
    */
   descriptionNumberOfLines?: number;
   /**
+   * Specifies the largest possible scale a title font can reach.
+   */
+  titleMaxFontSizeMultiplier?: number;
+  /**
+   * Specifies the largest possible scale a description font can reach.
+   */
+  descriptionMaxFontSizeMultiplier?: number;
+  /**
    * Id is used for distinguishing specific accordion when using List.AccordionGroup. Property is required when using List.AccordionGroup and has no impact on behavior when using standalone List.Accordion.
    */
   id?: string | number;
@@ -167,6 +175,8 @@ const ListAccordion = ({
   expanded: expandedProp,
   accessibilityLabel,
   pointerEvents = 'none',
+  titleMaxFontSizeMultiplier,
+  descriptionMaxFontSizeMultiplier,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const [expanded, setExpanded] = React.useState<boolean>(
@@ -256,6 +266,7 @@ const ListAccordion = ({
                   },
                   titleStyle,
                 ]}
+                maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
               >
                 {title}
               </Text>
@@ -271,6 +282,7 @@ const ListAccordion = ({
                     descriptionStyle,
                   ]}
                   onTextLayout={onDescriptionTextLayout}
+                  maxFontSizeMultiplier={descriptionMaxFontSizeMultiplier}
                 >
                   {description}
                 </Text>

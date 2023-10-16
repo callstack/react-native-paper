@@ -30,6 +30,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   textStyle?: StyleProp<TextStyle>;
   /**
+   * Specifies the largest possible scale a text font can reach.
+   */
+  maxFontSizeMultiplier?: number;
+  /**
    * testID to be used on tests.
    */
   testID?: string;
@@ -65,6 +69,7 @@ const DataTableCell = ({
   textStyle,
   style,
   numeric,
+  maxFontSizeMultiplier,
   testID,
   ...rest
 }: Props) => {
@@ -74,7 +79,11 @@ const DataTableCell = ({
       testID={testID}
       style={[styles.container, numeric && styles.right, style]}
     >
-      <CellContent textStyle={textStyle} testID={testID}>
+      <CellContent
+        textStyle={textStyle}
+        testID={testID}
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
+      >
         {children}
       </CellContent>
     </TouchableRipple>
@@ -84,8 +93,12 @@ const DataTableCell = ({
 const CellContent = ({
   children,
   textStyle,
+  maxFontSizeMultiplier,
   testID,
-}: Pick<Props, 'children' | 'textStyle' | 'testID'>) => {
+}: Pick<
+  Props,
+  'children' | 'textStyle' | 'testID' | 'maxFontSizeMultiplier'
+>) => {
   if (React.isValidElement(children)) {
     return children;
   }
@@ -94,6 +107,7 @@ const CellContent = ({
     <Text
       style={textStyle}
       numberOfLines={1}
+      maxFontSizeMultiplier={maxFontSizeMultiplier}
       testID={`${testID}-text-container`}
     >
       {children}

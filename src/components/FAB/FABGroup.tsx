@@ -34,6 +34,7 @@ export type Props = {
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
    * - `containerStyle`: pass additional styles for the fab item label container, for example, `backgroundColor` @supported Available in 5.x
    * - `labelStyle`: pass additional styles for the fab item label, for example, `fontSize`
+   * - `labelMaxFontSizeMultiplier`: specifies the largest possible scale a title font can reach.
    * - `onPress`: callback that is called when `FAB` is pressed (required)
    * - `onLongPress`: callback that is called when `FAB` is long pressed
    * - `toggleStackOnLongPress`: callback that is called when `FAB` is long pressed
@@ -51,6 +52,7 @@ export type Props = {
     style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
     containerStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
     labelStyle?: StyleProp<TextStyle>;
+    labelMaxFontSizeMultiplier?: number;
     onPress: (e: GestureResponderEvent) => void;
     size?: 'small' | 'medium';
     testID?: string;
@@ -407,6 +409,7 @@ const FABGroup = ({
                       <Text
                         variant="titleMedium"
                         style={[labelTextStyle, it.labelStyle]}
+                        maxFontSizeMultiplier={it.labelMaxFontSizeMultiplier}
                       >
                         {it.label}
                       </Text>

@@ -16,6 +16,10 @@ export type Props = React.ComponentProps<typeof Text> & {
    * Style that is passed to Text element.
    */
   style?: StyleProp<TextStyle>;
+  /**
+   * Specifies the largest possible scale a text font can reach.
+   */
+  maxFontSizeMultiplier?: number;
 };
 
 /**
@@ -31,7 +35,12 @@ export type Props = React.ComponentProps<typeof Text> & {
  * export default MyComponent;
  * ```
  */
-const ListSubheader = ({ style, theme: overrideTheme, ...rest }: Props) => {
+const ListSubheader = ({
+  style,
+  theme: overrideTheme,
+  maxFontSizeMultiplier,
+  ...rest
+}: Props) => {
   const theme = useInternalTheme(overrideTheme);
 
   const textColor = theme.isV3
@@ -44,6 +53,7 @@ const ListSubheader = ({ style, theme: overrideTheme, ...rest }: Props) => {
     <Text
       variant="bodyMedium"
       numberOfLines={1}
+      maxFontSizeMultiplier={maxFontSizeMultiplier}
       {...rest}
       style={[
         styles.container,

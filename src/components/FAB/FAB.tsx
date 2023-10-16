@@ -128,6 +128,10 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * Color mappings variant for combinations of container and icon colors.
    */
   variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
+  /**
+   * Specifies the largest possible scale a label font can reach.
+   */
+  labelMaxFontSizeMultiplier?: number;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
@@ -193,6 +197,7 @@ const FAB = forwardRef<View, Props>(
       customSize,
       mode = 'elevated',
       variant = 'primary',
+      labelMaxFontSizeMultiplier,
       ...rest
     }: Props,
     ref
@@ -320,6 +325,7 @@ const FAB = forwardRef<View, Props>(
                   uppercase && styles.uppercaseLabel,
                   textStyle,
                 ]}
+                maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
               >
                 {label}
               </Text>

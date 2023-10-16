@@ -46,6 +46,10 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * Specifies the largest possible scale a label font can reach.
+   */
+  labelMaxFontSizeMultiplier?: number;
+  /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityLabel?: string;
@@ -98,6 +102,7 @@ const DrawerCollapsedItem = ({
   accessibilityLabel,
   badge = false,
   testID = 'drawer-collapsed-item',
+  labelMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -218,6 +223,7 @@ const DrawerCollapsedItem = ({
               numberOfLines={2}
               onTextLayout={onTextLayout}
               style={[styles.label, androidLetterSpacingStyle, labelTextStyle]}
+              maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
             >
               {label}
             </Text>
