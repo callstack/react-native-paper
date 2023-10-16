@@ -62,17 +62,35 @@ const DataTableCell = ({
   textStyle,
   style,
   numeric,
+  testID,
   ...rest
-}: Props) => (
-  <TouchableRipple
-    {...rest}
-    style={[styles.container, numeric && styles.right, style]}
-  >
-    <Text style={textStyle} numberOfLines={1}>
-      {children}
-    </Text>
-  </TouchableRipple>
-);
+}: Props) => {
+  const renderChildren = () => {
+    if (React.isValidElement(children)) {
+      return children;
+    }
+
+    return (
+      <Text
+        style={textStyle}
+        numberOfLines={1}
+        testID={`${testID}-text-container`}
+      >
+        {children}
+      </Text>
+    );
+  };
+
+  return (
+    <TouchableRipple
+      {...rest}
+      testID={testID}
+      style={[styles.container, numeric && styles.right, style]}
+    >
+      {renderChildren()}
+    </TouchableRipple>
+  );
+};
 
 DataTableCell.displayName = 'DataTable.Cell';
 
