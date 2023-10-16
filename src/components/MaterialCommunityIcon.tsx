@@ -9,6 +9,7 @@ export type IconProps = {
   size: number;
   direction: 'rtl' | 'ltr';
   allowFontScaling?: boolean;
+  testID?: string;
 };
 
 type AccessibilityProps =
@@ -89,6 +90,7 @@ const defaultIcon = ({
   size,
   direction,
   allowFontScaling,
+  testID,
 }: IconProps) => (
   <MaterialCommunityIcons
     allowFontScaling={allowFontScaling}
@@ -104,6 +106,7 @@ const defaultIcon = ({
     ]}
     pointerEvents="none"
     selectable={false}
+    testID={testID}
     {...accessibilityProps}
   />
 );

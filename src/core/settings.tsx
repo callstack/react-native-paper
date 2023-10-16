@@ -5,7 +5,13 @@ import MaterialCommunityIcon, {
 } from '../components/MaterialCommunityIcon';
 
 export type Settings = {
-  icon?: ({ name, color, size, direction }: IconProps) => React.ReactNode;
+  icon?: ({
+    name,
+    color,
+    size,
+    direction,
+    testID,
+  }: IconProps) => React.ReactNode;
   rippleEffectEnabled?: boolean;
 };
 
