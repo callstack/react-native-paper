@@ -16,3 +16,7 @@ You can also run the example app as a web app using [react-native-web](https://g
 
 - Clone the repository and run `yarn` in the root
 - Run `yarn example web` to start the webpack server and open the app in your browser
+
+## Gist for React Native Paper Elemeents
+
+- [Radio Button](https://gist.github.com/agrittiwari/59f0a56a12fc96501d301aecd6ded237) 
