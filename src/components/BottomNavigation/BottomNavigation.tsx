@@ -251,6 +251,7 @@ export type Props<Route extends BaseRoute> = {
    */
   labelMaxFontSizeMultiplier?: number;
   style?: StyleProp<ViewStyle>;
+  activeIndicatorStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
@@ -332,6 +333,7 @@ const BottomNavigation = <Route extends BaseRoute>({
   barStyle,
   labeled = true,
   style,
+  activeIndicatorStyle,
   sceneAnimationEnabled = false,
   sceneAnimationType = 'opacity',
   sceneAnimationEasing,
@@ -579,6 +581,7 @@ const BottomNavigation = <Route extends BaseRoute>({
         inactiveColor={inactiveColor}
         keyboardHidesNavigationBar={keyboardHidesNavigationBar}
         style={barStyle}
+        activeIndicatorStyle={activeIndicatorStyle}
         labeled={labeled}
         animationEasing={sceneAnimationEasing}
         onTabPress={handleTabPress}

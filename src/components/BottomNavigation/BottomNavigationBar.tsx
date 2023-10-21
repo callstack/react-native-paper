@@ -15,11 +15,6 @@ import {
 import color from 'color';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import {
-  getActiveTintColor,
-  getInactiveTintColor,
-  getLabelColor,
-} from './utils';
 import { useInternalTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
 import { black, white } from '../../styles/themes/v2/colors';
@@ -33,6 +28,11 @@ import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
+import {
+  getActiveTintColor,
+  getInactiveTintColor,
+  getLabelColor,
+} from './utils';
 
 type BaseRoute = {
   key: string;
@@ -198,6 +198,7 @@ export type Props<Route extends BaseRoute> = {
    */
   labelMaxFontSizeMultiplier?: number;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  activeIndicatorStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
@@ -366,6 +367,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   inactiveColor,
   keyboardHidesNavigationBar = Platform.OS === 'android',
   style,
+  activeIndicatorStyle,
   labeled = true,
   animationEasing,
   onTabPress,
@@ -787,6 +789,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                             ],
                             backgroundColor: theme.colors.secondaryContainer,
                           },
+                          activeIndicatorStyle,
                         ]}
                       />
                     )}
