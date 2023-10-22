@@ -20,7 +20,7 @@ import type { ThemeProp } from '../../types';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import type { IconSource } from '../Icon';
 
-type BaseRoute = {
+export type BaseRoute = {
   key: string;
   title?: string;
   focusedIcon?: IconSource;
