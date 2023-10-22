@@ -80,7 +80,10 @@ export type { Props as AvatarImageProps } from './components/Avatar/AvatarImage'
 export type { Props as AvatarTextProps } from './components/Avatar/AvatarText';
 export type { Props as BadgeProps } from './components/Badge';
 export type { Props as BannerProps } from './components/Banner';
-export type { Props as BottomNavigationProps } from './components/BottomNavigation/BottomNavigation';
+export type {
+  Props as BottomNavigationProps,
+  BaseRoute as BottomNavigationRoute,
+} from './components/BottomNavigation/BottomNavigation';
 export type { Props as ButtonProps } from './components/Button/Button';
 export type { Props as CardProps } from './components/Card/Card';
 export type { Props as CardActionsProps } from './components/Card/CardActions';
