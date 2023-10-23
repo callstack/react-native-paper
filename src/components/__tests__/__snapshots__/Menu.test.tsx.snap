@@ -228,6 +228,7 @@ exports[`renders menu with content styles 1`] = `
       style={
         [
           {
+            "overflow": "hidden",
             "position": "absolute",
           },
           {
@@ -946,6 +947,7 @@ exports[`renders visible menu 1`] = `
       style={
         [
           {
+            "overflow": "hidden",
             "position": "absolute",
           },
           {
