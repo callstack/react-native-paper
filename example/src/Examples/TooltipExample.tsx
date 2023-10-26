@@ -8,6 +8,7 @@ import {
   Banner,
   Chip,
   FAB,
+  IconButton,
   List,
   ToggleButton,
   Tooltip,
@@ -57,6 +58,55 @@ const TooltipExample = ({ navigation }: Props) => {
           . Continuously display the tooltip as long as the user long-presses or
           hovers over the element.
         </Banner>
+        <List.Section title="Icon Buttons" style={styles.iconButtonContainer}>
+          <Tooltip title="1st tooltip - default delays">
+            <IconButton icon="camera" size={24} onPress={() => {}} />
+          </Tooltip>
+          <Tooltip title="2nd tooltip - default delays">
+            <IconButton icon="camera" size={24} onPress={() => {}} />
+          </Tooltip>
+
+          <Tooltip
+            title="3rd tooltip - long enter delay"
+            enterTouchDelay={1800}
+          >
+            <IconButton icon="camera" size={24} onPress={() => {}} />
+          </Tooltip>
+          <Tooltip
+            title="4th tooltip - long enter delay"
+            enterTouchDelay={1800}
+          >
+            <IconButton icon="camera" size={24} onPress={() => {}} />
+          </Tooltip>
+
+          <Tooltip
+            title="5th tooltip - long leave delay"
+            leaveTouchDelay={1800}
+          >
+            <IconButton icon="camera" size={24} onPress={() => {}} />
+          </Tooltip>
+          <Tooltip
+            title="6th tooltip - long leave delay"
+            leaveTouchDelay={1800}
+          >
+            <IconButton icon="camera" size={24} onPress={() => {}} />
+          </Tooltip>
+
+          <Tooltip
+            title="7th tooltip - long both delays"
+            enterTouchDelay={1800}
+            leaveTouchDelay={2800}
+          >
+            <IconButton icon="camera" size={24} onPress={() => {}} />
+          </Tooltip>
+          <Tooltip
+            title="8th tooltip - long both delays"
+            enterTouchDelay={1800}
+            leaveTouchDelay={2800}
+          >
+            <IconButton icon="camera" size={24} onPress={() => {}} />
+          </Tooltip>
+        </List.Section>
         <List.Section title="Toggle Buttons">
           <ToggleButton.Row
             value="bold"
@@ -141,5 +191,9 @@ const styles = StyleSheet.create({
   },
   toggleButtonRow: {
     paddingHorizontal: 16,
+  },
+  iconButtonContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
 });
