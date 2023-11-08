@@ -63,7 +63,9 @@ const TooltipExample = ({ navigation }: Props) => {
             style={styles.toggleButtonRow}
             onValueChange={() => {}}
           >
-            <ToggleButton icon="format-bold" value="bold" />
+            <Tooltip title="Bold">
+              <ToggleButton icon="format-bold" value="bold" />
+            </Tooltip>
             <Tooltip title="Align center">
               <ToggleButton icon="format-align-center" value="align-center" />
             </Tooltip>
