@@ -91,6 +91,20 @@ it("nested text with variant should override parent's variant", () => {
   );
 });
 
+it("nested non-text component should not override parent's variant", () => {
+  const ChildComponent = () => <>{content}</>;
+
+  const { getByTestId } = render(
+    <Text testID="parent-text" variant="displayLarge">
+      <ChildComponent />
+    </Text>
+  );
+
+  expect(getByTestId('parent-text')).toHaveStyle(
+    MD3LightTheme.fonts.displayLarge
+  );
+});
+
 it("nested text without variant, but with styles, should override parent's styles", () => {
   const customStyle = { fontSize: 50, lineHeight: 70 };
   const { getByTestId } = render(
