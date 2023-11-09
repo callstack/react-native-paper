@@ -284,7 +284,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
           { borderRadius: roundness },
           !isV3 && styles.elevation,
           isV3 && {
-            backgroundColor: theme.colors.elevation.level3,
+            backgroundColor: theme?.colors?.elevation?.level3,
             borderRadius: roundness * (isBarMode ? 7 : 0),
           },
           styles.container,
