@@ -31,7 +31,7 @@ const data: Data[] = [
     image: '/react-native-paper/showcase/bluebirding.png',
     android:
       'https://play.google.com/store/apps/details?id=com.bitzllc.bluebird',
-    ios: 'https://apps.apple.com/us/app/bluebirding/id1553837668', 
+    ios: 'https://apps.apple.com/us/app/bluebirding/id1553837668',
   },
   {
     color: '#696AC3',
