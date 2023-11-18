@@ -816,7 +816,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "minWidth": 65,
               "paddingHorizontal": 16,
               "textAlign": "left",
-              "textAlignVertical": "top",
+              "textAlignVertical": "center",
             },
             false,
             [
