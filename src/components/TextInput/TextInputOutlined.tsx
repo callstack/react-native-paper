@@ -68,6 +68,7 @@ const TextInputOutlined = ({
   onLabelTextLayout,
   onLeftAffixLayoutChange,
   onRightAffixLayoutChange,
+  onLayout,
   left,
   right,
   placeholderTextColor,
@@ -81,7 +82,7 @@ const TextInputOutlined = ({
   const font = isV3 ? theme.fonts.bodyLarge : theme.fonts.regular;
   const hasActiveOutline = parentState.focused || error;
 
-  const { INPUT_PADDING_HORIZONTAL, MIN_HEIGHT, ADORNMENT_OFFSET } =
+  const { INPUT_PADDING_HORIZONTAL, MIN_HEIGHT, ADORNMENT_OFFSET, MIN_WIDTH } =
     getConstants(isV3);
 
   const {
@@ -227,6 +228,7 @@ const TextInputOutlined = ({
     maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
     testID,
     contentStyle,
+    inputContainerLayout: parentState.inputContainerLayout,
     opacity:
       parentState.value || parentState.focused
         ? parentState.labelLayout.measured
@@ -353,6 +355,7 @@ const TextInputOutlined = ({
             ...rest,
             ref: innerRef,
             onChangeText,
+            onLayout,
             placeholder: label ? parentState.placeholder : rest.placeholder,
             editable: !disabled && editable,
             selectionColor,
@@ -382,9 +385,11 @@ const TextInputOutlined = ({
                   ? 'right'
                   : 'left',
                 paddingHorizontal: INPUT_PADDING_HORIZONTAL,
-                minWidth:
+                minWidth: Math.min(
                   parentState.labelTextLayout.width +
-                  2 * INPUT_PADDING_HORIZONTAL,
+                    2 * INPUT_PADDING_HORIZONTAL,
+                  MIN_WIDTH
+                ),
               },
               Platform.OS === 'web' && { outline: 'none' },
               adornmentStyleAdjustmentForNativeInput,

@@ -763,6 +763,46 @@ const TextInputExample = () => {
                 style={styles.year}
               />
             </View>
+            <View style={styles.row}>
+              <View style={styles.left}>
+                <TextInput
+                  mode="flat"
+                  label="Month of the car registration (optional)"
+                  placeholder="Month"
+                  style={styles.month}
+                />
+              </View>
+              <View style={styles.right}>
+                <TextInput
+                  mode="flat"
+                  label="Year of the car registration (optional)"
+                  placeholder="Year"
+                  keyboardType="phone-pad"
+                  style={styles.year}
+                  left={<TextInput.Icon icon="calendar" />}
+                />
+              </View>
+            </View>
+            <View style={styles.row}>
+              <View style={styles.left}>
+                <TextInput
+                  mode="outlined"
+                  label="Month of the car registration (optional)"
+                  placeholder="Month"
+                  style={styles.month}
+                />
+              </View>
+              <View style={styles.right}>
+                <TextInput
+                  mode="outlined"
+                  label="Year of the car registration (optional)"
+                  placeholder="Year"
+                  keyboardType="phone-pad"
+                  style={styles.year}
+                  right={<TextInput.Icon icon="calendar" />}
+                />
+              </View>
+            </View>
           </List.Accordion>
         </List.AccordionGroup>
       </ScreenWrapper>
@@ -826,6 +866,12 @@ const styles = StyleSheet.create({
   },
   inputLabelText: {
     color: MD3Colors.tertiary70,
+  },
+  left: {
+    width: '30%',
+  },
+  right: {
+    width: '70%',
   },
 });
 

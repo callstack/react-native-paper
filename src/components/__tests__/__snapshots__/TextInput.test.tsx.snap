@@ -82,6 +82,7 @@ exports[`correctly applies a component as the text label 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "maxWidth": 81,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -127,7 +128,7 @@ exports[`correctly applies a component as the text label 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
-            "maxWidth": 734,
+            "maxWidth": 81,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -169,6 +170,7 @@ exports[`correctly applies a component as the text label 1`] = `
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       placeholder=" "
       placeholderTextColor="rgba(73, 69, 79, 1)"
       selectionColor="rgba(103, 80, 164, 1)"
@@ -294,6 +296,7 @@ exports[`correctly applies cursorColor prop 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "maxWidth": 81,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -331,7 +334,7 @@ exports[`correctly applies cursorColor prop 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
-            "maxWidth": 734,
+            "maxWidth": 81,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -365,6 +368,7 @@ exports[`correctly applies cursorColor prop 1`] = `
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       placeholder=" "
       placeholderTextColor="rgba(73, 69, 79, 1)"
       selectionColor="rgba(103, 80, 164, 1)"
@@ -490,6 +494,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "maxWidth": 81,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -527,7 +532,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
-            "maxWidth": 734,
+            "maxWidth": 81,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -561,6 +566,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       placeholder=" "
       placeholderTextColor="rgba(73, 69, 79, 1)"
       selectionColor="rgba(103, 80, 164, 1)"
@@ -722,6 +728,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "left": 0,
               "letterSpacing": 0.15,
               "lineHeight": 19.2,
+              "maxWidth": 81,
               "opacity": 0,
               "paddingHorizontal": 16,
               "position": "absolute",
@@ -758,7 +765,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               "left": 0,
               "letterSpacing": 0.15,
               "lineHeight": 19.2,
-              "maxWidth": 734,
+              "maxWidth": 81,
               "opacity": 0,
               "paddingHorizontal": 16,
               "position": "absolute",
@@ -791,6 +798,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
         onBlur={[Function]}
         onChangeText={[Function]}
         onFocus={[Function]}
+        onLayout={[Function]}
         placeholder=" "
         placeholderTextColor="rgba(73, 69, 79, 1)"
         selectionColor="rgba(103, 80, 164, 1)"
@@ -916,6 +924,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "maxWidth": 81,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -953,7 +962,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
-            "maxWidth": 734,
+            "maxWidth": 81,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -987,6 +996,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       placeholder=" "
       placeholderTextColor="rgba(73, 69, 79, 1)"
       selectionColor="rgba(103, 80, 164, 1)"
@@ -1114,6 +1124,7 @@ exports[`correctly applies textAlign center 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "maxWidth": 81,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -1151,7 +1162,7 @@ exports[`correctly applies textAlign center 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
-            "maxWidth": 734,
+            "maxWidth": 81,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -1185,6 +1196,7 @@ exports[`correctly applies textAlign center 1`] = `
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       placeholder=" "
       placeholderTextColor="rgba(73, 69, 79, 1)"
       selectionColor="rgba(103, 80, 164, 1)"
@@ -1310,6 +1322,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "maxWidth": 81,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 56,
@@ -1347,7 +1360,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
-            "maxWidth": 734,
+            "maxWidth": 81,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 56,
@@ -1381,6 +1394,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       placeholder=" "
       placeholderTextColor="rgba(73, 69, 79, 1)"
       selectionColor="rgba(103, 80, 164, 1)"
@@ -1708,6 +1722,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "maxWidth": 81,
             "opacity": 0,
             "paddingLeft": 56,
             "paddingRight": 56,
@@ -1745,7 +1760,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
-            "maxWidth": 734,
+            "maxWidth": 81,
             "opacity": 0,
             "paddingLeft": 56,
             "paddingRight": 56,
@@ -1779,6 +1794,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
+      onLayout={[Function]}
       placeholder=" "
       placeholderTextColor="rgba(73, 69, 79, 1)"
       selectionColor="rgba(103, 80, 164, 1)"

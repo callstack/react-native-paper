@@ -254,6 +254,10 @@ const TextInput = forwardRef<TextInputHandles, Props>(
       width: 33,
     });
 
+    const [inputContainerLayout, setInputContainerLayout] = React.useState({
+      width: 65,
+    });
+
     const [labelLayout, setLabelLayout] = React.useState<{
       measured: boolean;
       width: number;
@@ -465,6 +469,15 @@ const TextInput = forwardRef<TextInputHandles, Props>(
       []
     );
 
+    const handleInputContainerLayout = React.useCallback(
+      ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
+        setInputContainerLayout({
+          width: layout.width,
+        });
+      },
+      []
+    );
+
     const forceFocus = React.useCallback(() => root.current?.focus(), []);
 
     const { maxFontSizeMultiplier = 1.5 } = rest;
@@ -491,6 +504,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
             labelLayout,
             leftLayout,
             rightLayout,
+            inputContainerLayout,
           }}
           innerRef={(ref) => {
             root.current = ref;
@@ -500,6 +514,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
           onBlur={handleBlur}
           onChangeText={handleChangeText}
           onLayoutAnimatedText={handleLayoutAnimatedText}
+          onLayout={handleInputContainerLayout}
           onLabelTextLayout={handleLabelTextLayout}
           onLeftAffixLayoutChange={onLeftAffixLayoutChange}
           onRightAffixLayoutChange={onRightAffixLayoutChange}
@@ -530,6 +545,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
           labelLayout,
           leftLayout,
           rightLayout,
+          inputContainerLayout,
         }}
         innerRef={(ref) => {
           root.current = ref;
@@ -537,6 +553,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
         onFocus={handleFocus}
         forceFocus={forceFocus}
         onBlur={handleBlur}
+        onLayout={handleInputContainerLayout}
         onChangeText={handleChangeText}
         onLayoutAnimatedText={handleLayoutAnimatedText}
         onLabelTextLayout={handleLabelTextLayout}

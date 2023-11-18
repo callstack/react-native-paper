@@ -3,6 +3,7 @@ export const MINIMIZED_LABEL_FONT_SIZE = 12;
 export const LABEL_WIGGLE_X_OFFSET = 4;
 
 export const ADORNMENT_SIZE = 24;
+export const MIN_WIDTH = 100;
 
 //Text input affix offset
 export const MD2_AFFIX_OFFSET = 12;
