@@ -3,6 +3,7 @@ import {
   StyleProp,
   StyleSheet,
   TextStyle,
+  TouchableOpacity,
   View,
   ViewStyle,
 } from 'react-native';
@@ -109,6 +110,11 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * @optional
+   * Makes the card title pressable
+   */
+  onPressTitle?: () => void;
 };
 
 const LEFT_SIZE = 40;
@@ -150,6 +156,7 @@ const CardTitle = ({
   rightStyle,
   style,
   theme: themeOverrides,
+  onPressTitle,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const TitleComponent = theme.isV3 ? Text : Title;
@@ -169,7 +176,18 @@ const CardTitle = ({
       ) : null}
 
       <View style={[styles.titles]}>
-        {title && (
+        {title && onPressTitle ? (
+          <TouchableOpacity onPress={onPressTitle}>
+            <TitleComponent
+              style={[styles.title, { marginBottom }, titleStyle]}
+              numberOfLines={titleNumberOfLines}
+              variant={titleVariant}
+              maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+            >
+              {title}
+            </TitleComponent>
+          </TouchableOpacity>
+        ) : (
           <TitleComponent
             style={[styles.title, { marginBottom }, titleStyle]}
             numberOfLines={titleNumberOfLines}
@@ -216,6 +234,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
+    alignSelf: 'flex-start',
   },
 
   title: {
