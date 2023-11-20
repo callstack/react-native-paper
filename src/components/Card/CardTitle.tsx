@@ -234,7 +234,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    alignSelf: 'flex-start',
   },
 
   title: {
