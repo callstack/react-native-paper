@@ -177,9 +177,9 @@ const CardTitle = ({
 
       <View style={[styles.titles]}>
         {title && onPressTitle ? (
-          <TouchableOpacity onPress={onPressTitle}>
+          <TouchableOpacity onPress={onPressTitle} style={[styles.title]}>
             <TitleComponent
-              style={[styles.title, { marginBottom }, titleStyle]}
+              style={[{ marginBottom }, titleStyle]}
               numberOfLines={titleNumberOfLines}
               variant={titleVariant}
               maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
@@ -238,6 +238,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    alignSelf: 'flex-start',
     minHeight: 30,
     paddingRight: 16,
   },
