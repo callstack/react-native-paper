@@ -114,7 +114,7 @@ const InputLabel = (props: InputLabelProps) => {
     placeholderStyle,
     {
       top: topPosition,
-      maxWidth: inputContainerLayout.width + INPUT_PADDING_HORIZONTAL,
+      maxWidth: inputContainerLayout.width + INPUT_PADDING_HORIZONTAL / 2,
     },
     labelStyle,
     paddingOffset || {},

@@ -328,7 +328,7 @@ const TextInputOutlined = ({
         outlineColor={outlineColor}
         backgroundColor={backgroundColor}
       />
-      <View>
+      <View onLayout={onLayout}>
         <View
           style={[
             styles.labelContainer,
@@ -355,7 +355,6 @@ const TextInputOutlined = ({
             ...rest,
             ref: innerRef,
             onChangeText,
-            onLayout,
             placeholder: label ? parentState.placeholder : rest.placeholder,
             editable: !disabled && editable,
             selectionColor,

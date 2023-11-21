@@ -343,6 +343,7 @@ const TextInputFlat = ({
         theme={theme}
       />
       <View
+        onLayout={onLayout}
         style={[
           styles.labelContainer,
           {
@@ -383,7 +384,6 @@ const TextInputFlat = ({
           ...rest,
           ref: innerRef,
           onChangeText,
-          onLayout,
           placeholder: label ? parentState.placeholder : rest.placeholder,
           editable: !disabled && editable,
           selectionColor,

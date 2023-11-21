@@ -49,7 +49,6 @@ type TextInputProps = React.ComponentPropsWithRef<typeof NativeTextInput> & {
 
 export type RenderProps = {
   ref: (a?: NativeTextInput | null) => void;
-  onLayout: (event: LayoutChangeEvent) => void;
   onChangeText?: (a: string) => void;
   placeholder?: string;
   placeholderTextColor?: ColorValue;
@@ -91,7 +90,6 @@ export type ChildTextInputProps = {
   onLabelTextLayout: (event: NativeSyntheticEvent<TextLayoutEventData>) => void;
   onLeftAffixLayoutChange: (event: LayoutChangeEvent) => void;
   onRightAffixLayoutChange: (event: LayoutChangeEvent) => void;
-  onLayout: (event: LayoutChangeEvent) => void;
 } & $Omit<TextInputTypesWithoutMode, 'theme'> & { theme: InternalTheme };
 
 export type LabelProps = {
