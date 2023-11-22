@@ -383,7 +383,6 @@ const FABGroup = ({
                 accessibilityRole="button"
                 importantForAccessibility="yes"
                 accessibilityLabel={accessibilityLabel}
-               
               >
                 {it.label && (
                   <View>
