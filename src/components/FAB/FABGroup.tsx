@@ -380,6 +380,10 @@ const FABGroup = ({
                   },
                 ]}
                 pointerEvents={open ? 'box-none' : 'none'}
+                accessibilityRole="button"
+                importantForAccessibility="yes"
+                accessibilityLabel={accessibilityLabel}
+               
               >
                 {it.label && (
                   <View>
@@ -390,8 +394,7 @@ const FABGroup = ({
                         close();
                       }}
                       accessibilityHint={it.accessibilityHint}
-                      accessibilityLabel={accessibilityLabel}
-                      accessibilityRole="button"
+                      importantForAccessibility="no-hide-descendants"
                       style={[
                         styles.containerStyle,
                         {
@@ -408,6 +411,7 @@ const FABGroup = ({
                     >
                       <Text
                         variant="titleMedium"
+                        importantForAccessibility="no-hide-descendants"
                         style={[labelTextStyle, it.labelStyle]}
                         maxFontSizeMultiplier={it.labelMaxFontSizeMultiplier}
                       >
@@ -433,8 +437,7 @@ const FABGroup = ({
                     it.onPress(e);
                     close();
                   }}
-                  accessibilityLabel={accessibilityLabel}
-                  accessibilityRole="button"
+                  importantForAccessibility="no-hide-descendants"
                   testID={it.testID}
                   visible={open}
                   rippleColor={it.rippleColor}
