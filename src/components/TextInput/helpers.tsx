@@ -5,6 +5,7 @@ import color from 'color';
 import { AdornmentSide, AdornmentType } from './Adornment/enums';
 import type { AdornmentConfig } from './Adornment/types';
 import {
+  MIN_WIDTH,
   ADORNMENT_SIZE,
   MD2_ADORNMENT_OFFSET,
   MD2_AFFIX_OFFSET,
@@ -614,5 +615,6 @@ export const getConstants = (isV3?: boolean) => {
     INPUT_PADDING_HORIZONTAL,
     ADORNMENT_OFFSET,
     OUTLINED_INPUT_OFFSET,
+    MIN_WIDTH,
   };
 };
