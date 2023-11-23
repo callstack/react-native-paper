@@ -7,7 +7,9 @@ import {
   TextStyle,
 } from 'react-native';
 
+import AnimatedText from './AnimatedText';
 import type { VariantProp } from './types';
+import StyledText from './v2/StyledText';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
@@ -96,9 +98,10 @@ const Text = (
     let textStyle = [font, style];
 
     if (
-      rest.children &&
-      typeof rest.children === 'object' &&
-      'props' in rest.children
+      React.isValidElement(rest.children) &&
+      (rest.children.type === Component ||
+        rest.children.type === AnimatedText ||
+        rest.children.type === StyledText)
     ) {
       const { props } = rest.children;
 
