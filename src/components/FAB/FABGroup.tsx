@@ -382,6 +382,7 @@ const FABGroup = ({
                 pointerEvents={open ? 'box-none' : 'none'}
                 accessibilityRole="button"
                 importantForAccessibility="yes"
+                accessible={true}
                 accessibilityLabel={accessibilityLabel}
               >
                 {it.label && (
@@ -394,6 +395,7 @@ const FABGroup = ({
                       }}
                       accessibilityHint={it.accessibilityHint}
                       importantForAccessibility="no-hide-descendants"
+                      accessibilityElementsHidden={true}
                       style={[
                         styles.containerStyle,
                         {
@@ -411,6 +413,7 @@ const FABGroup = ({
                       <Text
                         variant="titleMedium"
                         importantForAccessibility="no-hide-descendants"
+                        accessibilityElementsHidden={true}
                         style={[labelTextStyle, it.labelStyle]}
                         maxFontSizeMultiplier={it.labelMaxFontSizeMultiplier}
                       >
@@ -432,6 +435,7 @@ const FABGroup = ({
                     isV3 && { transform: [{ translateY: translations[i] }] },
                     it.style,
                   ]}
+                  accessibilityElementsHidden={true}
                   onPress={(e) => {
                     it.onPress(e);
                     close();
