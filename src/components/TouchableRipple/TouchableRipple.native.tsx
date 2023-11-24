@@ -16,6 +16,7 @@ import { getTouchableRippleColors } from './utils';
 import { Settings, SettingsContext } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
@@ -37,17 +38,20 @@ export type Props = PressableProps & {
   theme?: ThemeProp;
 };
 
-const TouchableRipple = ({
-  style,
-  background,
-  borderless = false,
-  disabled: disabledProp,
-  rippleColor,
-  underlayColor,
-  children,
-  theme: themeOverrides,
-  ...rest
-}: Props) => {
+const TouchableRipple = (
+  {
+    style,
+    background,
+    borderless = false,
+    disabled: disabledProp,
+    rippleColor,
+    underlayColor,
+    children,
+    theme: themeOverrides,
+    ...rest
+  }: Props,
+  ref: React.ForwardedRef<View>
+) => {
   const theme = useInternalTheme(themeOverrides);
   const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
@@ -88,6 +92,7 @@ const TouchableRipple = ({
     return (
       <Pressable
         {...rest}
+        ref={ref}
         disabled={disabled}
         style={[borderless && styles.overflowHidden, style]}
         android_ripple={androidRipple}
@@ -100,6 +105,7 @@ const TouchableRipple = ({
   return (
     <Pressable
       {...rest}
+      ref={ref}
       disabled={disabled}
       style={[borderless && styles.overflowHidden, style]}
     >
@@ -134,4 +140,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TouchableRipple;
+const Component = forwardRef(TouchableRipple);
+
+export default Component as typeof Component & { supported: boolean };

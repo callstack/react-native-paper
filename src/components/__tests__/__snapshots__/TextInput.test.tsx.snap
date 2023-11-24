@@ -34,6 +34,7 @@ exports[`correctly applies a component as the text label 1`] = `
     testID="text-input-underline"
   />
   <View
+    onLayout={[Function]}
     style={
       [
         {
@@ -82,6 +83,7 @@ exports[`correctly applies a component as the text label 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "maxWidth": 73,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -127,7 +129,7 @@ exports[`correctly applies a component as the text label 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
-            "maxWidth": 734,
+            "maxWidth": 73,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -246,6 +248,7 @@ exports[`correctly applies cursorColor prop 1`] = `
     testID="text-input-underline"
   />
   <View
+    onLayout={[Function]}
     style={
       [
         {
@@ -294,6 +297,7 @@ exports[`correctly applies cursorColor prop 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "maxWidth": 73,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -331,7 +335,7 @@ exports[`correctly applies cursorColor prop 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
-            "maxWidth": 734,
+            "maxWidth": 73,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -442,6 +446,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
     testID="text-input-underline"
   />
   <View
+    onLayout={[Function]}
     style={
       [
         {
@@ -490,6 +495,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "maxWidth": 73,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -527,7 +533,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
-            "maxWidth": 734,
+            "maxWidth": 73,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -631,205 +637,205 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
     }
     testID="text-input-outline"
   />
-  <View>
+  <View
+    style={
+      [
+        {
+          "paddingBottom": 0,
+        },
+        {
+          "minHeight": 100,
+          "paddingTop": 8,
+        },
+      ]
+    }
+  >
     <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "opacity": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": [
+            {
+              "translateX": 3,
+            },
+          ],
+          "width": 750,
+          "zIndex": 3,
+        }
+      }
+    >
+      <Text
+        collapsable={false}
+        maxFontSizeMultiplier={1.5}
+        numberOfLines={1}
+        style={
+          {
+            "backgroundColor": "rgba(255, 251, 254, 1)",
+            "color": "transparent",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "left": 8,
+            "letterSpacing": 0.15,
+            "lineHeight": 19.2,
+            "opacity": 1,
+            "paddingHorizontal": 0,
+            "position": "absolute",
+            "textAlign": "left",
+            "top": 59,
+            "transform": [
+              {
+                "translateX": 0,
+              },
+              {
+                "translateY": -52,
+              },
+              {
+                "scale": 0.75,
+              },
+              {
+                "scaleY": 0.2,
+              },
+            ],
+            "width": -16,
+            "writingDirection": "ltr",
+          }
+        }
+        testID="text-input-outlined-label-background"
+      >
+        Outline Input
+      </Text>
+      <Text
+        collapsable={false}
+        maxFontSizeMultiplier={1.5}
+        numberOfLines={1}
+        onLayout={[Function]}
+        onTextLayout={[Function]}
+        style={
+          {
+            "color": "rgba(103, 80, 164, 1)",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "left": 0,
+            "letterSpacing": 0.15,
+            "lineHeight": 19.2,
+            "maxWidth": 73,
+            "opacity": 0,
+            "paddingHorizontal": 16,
+            "position": "absolute",
+            "textAlign": "left",
+            "top": 58,
+            "transform": [
+              {
+                "translateX": 0,
+              },
+              {
+                "translateY": -52,
+              },
+              {
+                "scale": 0.75,
+              },
+            ],
+            "writingDirection": "ltr",
+          }
+        }
+        testID="text-input-outlined-label-active"
+      >
+        Outline Input
+      </Text>
+      <Text
+        collapsable={false}
+        maxFontSizeMultiplier={1.5}
+        numberOfLines={1}
+        style={
+          {
+            "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "left": 0,
+            "letterSpacing": 0.15,
+            "lineHeight": 19.2,
+            "maxWidth": 73,
+            "opacity": 0,
+            "paddingHorizontal": 16,
+            "position": "absolute",
+            "textAlign": "left",
+            "top": 58,
+            "transform": [
+              {
+                "translateX": 0,
+              },
+              {
+                "translateY": -52,
+              },
+              {
+                "scale": 0.75,
+              },
+            ],
+            "writingDirection": "ltr",
+          }
+        }
+        testID="text-input-outlined-label-inactive"
+      >
+        Outline Input
+      </Text>
+    </View>
+    <TextInput
+      cursorColor="rgba(103, 80, 164, 1)"
+      editable={true}
+      maxFontSizeMultiplier={1.5}
+      multiline={true}
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      onLayout={[Function]}
+      placeholder=" "
+      placeholderTextColor="rgba(73, 69, 79, 1)"
+      selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
           {
-            "paddingBottom": 0,
+            "margin": 0,
           },
           {
-            "minHeight": 100,
-            "paddingTop": 8,
+            "height": 100,
           },
+          {
+            "paddingBottom": 24,
+            "paddingTop": 24,
+          },
+          {
+            "color": "rgba(28, 27, 31, 1)",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "letterSpacing": 0.15,
+            "lineHeight": 19.2,
+            "minWidth": 65,
+            "paddingHorizontal": 16,
+            "textAlign": "left",
+            "textAlignVertical": "top",
+          },
+          false,
+          [
+            {},
+          ],
+          undefined,
         ]
       }
-    >
-      <View
-        collapsable={false}
-        pointerEvents="none"
-        style={
-          {
-            "bottom": 0,
-            "left": 0,
-            "opacity": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "transform": [
-              {
-                "translateX": 3,
-              },
-            ],
-            "width": 750,
-            "zIndex": 3,
-          }
-        }
-      >
-        <Text
-          collapsable={false}
-          maxFontSizeMultiplier={1.5}
-          numberOfLines={1}
-          style={
-            {
-              "backgroundColor": "rgba(255, 251, 254, 1)",
-              "color": "transparent",
-              "fontFamily": "System",
-              "fontSize": 16,
-              "fontWeight": undefined,
-              "left": 8,
-              "letterSpacing": 0.15,
-              "lineHeight": 19.2,
-              "opacity": 1,
-              "paddingHorizontal": 0,
-              "position": "absolute",
-              "textAlign": "left",
-              "top": 59,
-              "transform": [
-                {
-                  "translateX": 0,
-                },
-                {
-                  "translateY": -52,
-                },
-                {
-                  "scale": 0.75,
-                },
-                {
-                  "scaleY": 0.2,
-                },
-              ],
-              "width": -16,
-              "writingDirection": "ltr",
-            }
-          }
-          testID="text-input-outlined-label-background"
-        >
-          Outline Input
-        </Text>
-        <Text
-          collapsable={false}
-          maxFontSizeMultiplier={1.5}
-          numberOfLines={1}
-          onLayout={[Function]}
-          onTextLayout={[Function]}
-          style={
-            {
-              "color": "rgba(103, 80, 164, 1)",
-              "fontFamily": "System",
-              "fontSize": 16,
-              "fontWeight": undefined,
-              "left": 0,
-              "letterSpacing": 0.15,
-              "lineHeight": 19.2,
-              "opacity": 0,
-              "paddingHorizontal": 16,
-              "position": "absolute",
-              "textAlign": "left",
-              "top": 58,
-              "transform": [
-                {
-                  "translateX": 0,
-                },
-                {
-                  "translateY": -52,
-                },
-                {
-                  "scale": 0.75,
-                },
-              ],
-              "writingDirection": "ltr",
-            }
-          }
-          testID="text-input-outlined-label-active"
-        >
-          Outline Input
-        </Text>
-        <Text
-          collapsable={false}
-          maxFontSizeMultiplier={1.5}
-          numberOfLines={1}
-          style={
-            {
-              "color": "rgba(73, 69, 79, 1)",
-              "fontFamily": "System",
-              "fontSize": 16,
-              "fontWeight": undefined,
-              "left": 0,
-              "letterSpacing": 0.15,
-              "lineHeight": 19.2,
-              "maxWidth": 734,
-              "opacity": 0,
-              "paddingHorizontal": 16,
-              "position": "absolute",
-              "textAlign": "left",
-              "top": 58,
-              "transform": [
-                {
-                  "translateX": 0,
-                },
-                {
-                  "translateY": -52,
-                },
-                {
-                  "scale": 0.75,
-                },
-              ],
-              "writingDirection": "ltr",
-            }
-          }
-          testID="text-input-outlined-label-inactive"
-        >
-          Outline Input
-        </Text>
-      </View>
-      <TextInput
-        cursorColor="rgba(103, 80, 164, 1)"
-        editable={true}
-        maxFontSizeMultiplier={1.5}
-        multiline={true}
-        onBlur={[Function]}
-        onChangeText={[Function]}
-        onFocus={[Function]}
-        placeholder=" "
-        placeholderTextColor="rgba(73, 69, 79, 1)"
-        selectionColor="rgba(103, 80, 164, 1)"
-        style={
-          [
-            {
-              "margin": 0,
-            },
-            {
-              "height": 100,
-            },
-            {
-              "paddingBottom": 24,
-              "paddingTop": 24,
-            },
-            {
-              "color": "rgba(28, 27, 31, 1)",
-              "fontFamily": "System",
-              "fontSize": 16,
-              "fontWeight": undefined,
-              "letterSpacing": 0.15,
-              "lineHeight": 19.2,
-              "minWidth": 65,
-              "paddingHorizontal": 16,
-              "textAlign": "left",
-              "textAlignVertical": "top",
-            },
-            false,
-            [
-              {},
-            ],
-            undefined,
-          ]
-        }
-        testID="text-input-outlined"
-        underlineColorAndroid="transparent"
-        value="Some test value"
-      />
-    </View>
+      testID="text-input-outlined"
+      underlineColorAndroid="transparent"
+      value="Some test value"
+    />
   </View>
 </View>
 `;
@@ -868,6 +874,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
     testID="text-input-underline"
   />
   <View
+    onLayout={[Function]}
     style={
       [
         {
@@ -916,6 +923,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "maxWidth": 73,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -953,7 +961,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
-            "maxWidth": 734,
+            "maxWidth": 73,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -1066,6 +1074,7 @@ exports[`correctly applies textAlign center 1`] = `
     testID="text-input-underline"
   />
   <View
+    onLayout={[Function]}
     style={
       [
         {
@@ -1114,6 +1123,7 @@ exports[`correctly applies textAlign center 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "maxWidth": 73,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -1151,7 +1161,7 @@ exports[`correctly applies textAlign center 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
-            "maxWidth": 734,
+            "maxWidth": 73,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -1262,6 +1272,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
     testID="text-input-underline"
   />
   <View
+    onLayout={[Function]}
     style={
       [
         {
@@ -1310,6 +1321,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "maxWidth": 73,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 56,
@@ -1347,7 +1359,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
-            "maxWidth": 734,
+            "maxWidth": 73,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 56,
@@ -1660,6 +1672,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     testID="text-input-underline"
   />
   <View
+    onLayout={[Function]}
     style={
       [
         {
@@ -1708,6 +1721,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "maxWidth": 73,
             "opacity": 0,
             "paddingLeft": 56,
             "paddingRight": 56,
@@ -1745,7 +1759,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
-            "maxWidth": 734,
+            "maxWidth": 73,
             "opacity": 0,
             "paddingLeft": 56,
             "paddingRight": 56,

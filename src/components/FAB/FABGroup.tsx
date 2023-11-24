@@ -436,6 +436,7 @@ const FABGroup = ({
                     it.style,
                   ]}
                   accessibilityElementsHidden={true}
+                  theme={theme}
                   onPress={(e) => {
                     it.onPress(e);
                     close();
@@ -471,6 +472,7 @@ const FABGroup = ({
           accessibilityRole="button"
           accessibilityState={{ expanded: open }}
           style={[styles.fab, fabStyle]}
+          theme={theme}
           visible={visible}
           label={label}
           testID={testID}

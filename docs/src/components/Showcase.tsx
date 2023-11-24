@@ -26,8 +26,16 @@ const data: Data[] = [
     github: 'https://github.com/callstack/react-native-paper/tree/main/example',
   },
   {
+    color: '#2979FF',
+    name: 'Bluebirding',
+    image: '/react-native-paper/showcase/bluebirding.png',
+    android:
+      'https://play.google.com/store/apps/details?id=com.bitzllc.bluebird',
+    ios: 'https://apps.apple.com/us/app/bluebirding/id1553837668',
+  },
+  {
     color: '#696AC3',
-    name: 'Weather Forecast ',
+    name: 'Weather Forecast',
     image: '/react-native-paper/showcase/weatherforecast.png',
     android:
       'https://play.google.com/store/apps/details?id=com.rehankhalil462.WeatherApp',

@@ -5,6 +5,7 @@ import {
   Platform,
   StyleProp,
   StyleSheet,
+  View,
   ViewStyle,
 } from 'react-native';
 
@@ -16,6 +17,7 @@ import { getTouchableRippleColors } from './utils';
 import { Settings, SettingsContext } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 
 export type Props = PressableProps & {
@@ -101,17 +103,20 @@ export type Props = PressableProps & {
  *
  * @extends Pressable props https://reactnative.dev/docs/Pressable#props
  */
-const TouchableRipple = ({
-  style,
-  background: _background,
-  borderless = false,
-  disabled: disabledProp,
-  rippleColor,
-  underlayColor: _underlayColor,
-  children,
-  theme: themeOverrides,
-  ...rest
-}: Props) => {
+const TouchableRipple = (
+  {
+    style,
+    background: _background,
+    borderless = false,
+    disabled: disabledProp,
+    rippleColor,
+    underlayColor: _underlayColor,
+    children,
+    theme: themeOverrides,
+    ...rest
+  }: Props,
+  ref: React.ForwardedRef<View>
+) => {
   const theme = useInternalTheme(themeOverrides);
   const { calculatedRippleColor } = getTouchableRippleColors({
     theme,
@@ -267,6 +272,7 @@ const TouchableRipple = ({
   return (
     <Pressable
       {...rest}
+      ref={ref}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
       disabled={disabled}
@@ -306,4 +312,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TouchableRipple;
+const Component = forwardRef(TouchableRipple);
+
+export default Component as typeof Component & { supported: boolean };

@@ -68,6 +68,7 @@ const TextInputFlat = ({
   onLabelTextLayout,
   onLeftAffixLayoutChange,
   onRightAffixLayoutChange,
+  onLayout,
   left,
   right,
   placeholderTextColor,
@@ -80,7 +81,7 @@ const TextInputFlat = ({
   const font = isV3 ? theme.fonts.bodyLarge : theme.fonts.regular;
   const hasActiveOutline = parentState.focused || error;
 
-  const { LABEL_PADDING_TOP, FLAT_INPUT_OFFSET, MIN_HEIGHT } =
+  const { LABEL_PADDING_TOP, FLAT_INPUT_OFFSET, MIN_HEIGHT, MIN_WIDTH } =
     getConstants(isV3);
 
   const {
@@ -286,6 +287,8 @@ const TextInputFlat = ({
     maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
     testID,
     contentStyle,
+    inputContainerLayout: parentState.inputContainerLayout,
+    labelTextLayout: parentState.labelTextLayout,
     opacity:
       parentState.value || parentState.focused
         ? parentState.labelLayout.measured
@@ -340,6 +343,7 @@ const TextInputFlat = ({
         theme={theme}
       />
       <View
+        onLayout={onLayout}
         style={[
           styles.labelContainer,
           {
@@ -408,8 +412,10 @@ const TextInputFlat = ({
                 : I18nManager.getConstants().isRTL
                 ? 'right'
                 : 'left',
-              minWidth:
+              minWidth: Math.min(
                 parentState.labelTextLayout.width + 2 * FLAT_INPUT_OFFSET,
+                MIN_WIDTH
+              ),
             },
             Platform.OS === 'web' && { outline: 'none' },
             adornmentStyleAdjustmentForNativeInput,

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
@@ -45,6 +46,10 @@ export type Props = {
    * Custom color for checkbox.
    */
   color?: string;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * Additional styles for container View.
    */
@@ -126,6 +131,7 @@ const CheckboxItem = ({
   disabled,
   labelVariant = 'bodyLarge',
   labelMaxFontSizeMultiplier = 1.5,
+  rippleColor,
   ...props
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -163,6 +169,7 @@ const CheckboxItem = ({
       onPress={onPress}
       testID={testID}
       disabled={disabled}
+      rippleColor={rippleColor}
       theme={theme}
     >
       <View

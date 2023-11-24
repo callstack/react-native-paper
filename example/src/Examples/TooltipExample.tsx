@@ -8,6 +8,7 @@ import {
   Banner,
   Chip,
   FAB,
+  IconButton,
   List,
   ToggleButton,
   Tooltip,
@@ -22,6 +23,23 @@ type Props = {
 };
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
+
+const DURATION_MEDIUM = 1500;
+const DURATION_LONG = 3000;
+
+const formOfTransport = [
+  { title: 'Car - default delays' },
+  { title: 'Airplane - default delays' },
+  { title: 'Taxi - long enter delay', enterTouchDelay: DURATION_MEDIUM },
+  { title: 'Train - long enter delay', enterTouchDelay: DURATION_MEDIUM },
+  { title: 'Ferry - long leave delay', leaveTouchDelay: DURATION_MEDIUM },
+  { title: 'Bus - long leave delay', leaveTouchDelay: DURATION_MEDIUM },
+  {
+    title: 'Walk - long both delays',
+    enterTouchDelay: DURATION_MEDIUM,
+    leaveTouchDelay: DURATION_LONG,
+  },
+];
 
 const TooltipExample = ({ navigation }: Props) => {
   React.useLayoutEffect(() => {
@@ -57,13 +75,33 @@ const TooltipExample = ({ navigation }: Props) => {
           . Continuously display the tooltip as long as the user long-presses or
           hovers over the element.
         </Banner>
+        <List.Section title="Icon Buttons">
+          <View style={styles.iconButtonContainer}>
+            {formOfTransport.map((transport, index) => (
+              <Tooltip
+                key={index}
+                title={transport.title}
+                enterTouchDelay={transport.enterTouchDelay}
+                leaveTouchDelay={transport.leaveTouchDelay}
+              >
+                <IconButton
+                  icon={transport.title.split(' ')[0].toLowerCase()}
+                  size={24}
+                  onPress={() => {}}
+                />
+              </Tooltip>
+            ))}
+          </View>
+        </List.Section>
         <List.Section title="Toggle Buttons">
           <ToggleButton.Row
             value="bold"
             style={styles.toggleButtonRow}
             onValueChange={() => {}}
           >
-            <ToggleButton icon="format-bold" value="bold" />
+            <Tooltip title="Bold">
+              <ToggleButton icon="format-bold" value="bold" />
+            </Tooltip>
             <Tooltip title="Align center">
               <ToggleButton icon="format-align-center" value="align-center" />
             </Tooltip>
@@ -141,5 +179,9 @@ const styles = StyleSheet.create({
   },
   toggleButtonRow: {
     paddingHorizontal: 16,
+  },
+  iconButtonContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
 });
