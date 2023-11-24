@@ -139,6 +139,7 @@ const ButtonExample = () => {
             containerColor={MD3Colors.tertiary60}
           />
           <IconButton icon="heart" size={60} onPress={() => {}} />
+          <IconButton icon="" size={60} onPress={() => {}} loading />
         </View>
       </List.Section>
     </ScreenWrapper>
