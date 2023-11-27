@@ -8,6 +8,7 @@ import {
   Platform,
   TextStyle,
   ColorValue,
+  LayoutChangeEvent,
 } from 'react-native';
 
 import { Outline } from './Addons/Outline';
@@ -68,6 +69,7 @@ const TextInputOutlined = ({
   onLabelTextLayout,
   onLeftAffixLayoutChange,
   onRightAffixLayoutChange,
+  onInputLayout,
   onLayout,
   left,
   right,
@@ -249,6 +251,14 @@ const TextInputOutlined = ({
     isV3,
   };
 
+  const onLayoutChange = React.useCallback(
+    (e: LayoutChangeEvent) => {
+      onInputLayout(e);
+      onLayout?.(e);
+    },
+    [onLayout, onInputLayout]
+  );
+
   const minHeight = (height ||
     (dense ? MIN_DENSE_HEIGHT_OUTLINED : MIN_HEIGHT)) as number;
 
@@ -364,7 +374,7 @@ const TextInputOutlined = ({
         {render?.({
           ...rest,
           ref: innerRef,
-          onLayout,
+          onLayout: onLayoutChange,
           onChangeText,
           placeholder: label ? parentState.placeholder : rest.placeholder,
           editable: !disabled && editable,
