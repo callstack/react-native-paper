@@ -86,6 +86,7 @@ export type ChildTextInputProps = {
   onBlur?: (args: any) => void;
   forceFocus: () => void;
   onChangeText?: (value: string) => void;
+  onInputLayout: (event: LayoutChangeEvent) => void;
   onLayoutAnimatedText: (args: any) => void;
   onLabelTextLayout: (event: NativeSyntheticEvent<TextLayoutEventData>) => void;
   onLeftAffixLayoutChange: (event: LayoutChangeEvent) => void;

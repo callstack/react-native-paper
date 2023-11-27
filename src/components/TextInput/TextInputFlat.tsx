@@ -68,7 +68,7 @@ const TextInputFlat = ({
   onLabelTextLayout,
   onLeftAffixLayoutChange,
   onRightAffixLayoutChange,
-  onLayout,
+  onInputLayout,
   left,
   right,
   placeholderTextColor,
@@ -343,7 +343,7 @@ const TextInputFlat = ({
         theme={theme}
       />
       <View
-        onLayout={onLayout}
+        onLayout={onInputLayout}
         style={[
           styles.labelContainer,
           {
