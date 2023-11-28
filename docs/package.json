@@ -16,6 +16,7 @@
     "prepare": "patch-package"
   },
   "dependencies": {
+    "@callstack/react-theme-provider": "^3.0.9",
     "@docusaurus/core": "^2.3.1",
     "@docusaurus/preset-classic": "^2.3.1",
     "@docusaurus/remark-plugin-npm2yarn": "^2.3.1",
@@ -32,7 +33,8 @@
     "react-dom": "17.0.2",
     "react-native-safe-area-context": "^4.5.0",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-web": "^0.18.12"
+    "react-native-web": "^0.18.12",
+    "use-latest-callback": "^0.1.7"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^2.3.1",

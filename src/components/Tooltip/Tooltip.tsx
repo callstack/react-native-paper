@@ -35,6 +35,10 @@ export type Props = {
    */
   title: string;
   /**
+   * Specifies the largest possible scale a title font can reach.
+   */
+  titleMaxFontSizeMultiplier?: number;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -65,6 +69,7 @@ const Tooltip = ({
   leaveTouchDelay = 1500,
   title,
   theme: themeOverrides,
+  titleMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const isWeb = Platform.OS === 'web';
@@ -77,19 +82,21 @@ const Tooltip = ({
     tooltip: {},
     measured: false,
   });
-  const showTooltipTimer = React.useRef<NodeJS.Timeout>();
-  const hideTooltipTimer = React.useRef<NodeJS.Timeout>();
+  const showTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
+  const hideTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
   const childrenWrapperRef = React.useRef() as React.MutableRefObject<View>;
   const touched = React.useRef(false);
 
   React.useEffect(() => {
     return () => {
-      if (showTooltipTimer.current) {
-        clearTimeout(showTooltipTimer.current);
+      if (showTooltipTimer.current.length) {
+        showTooltipTimer.current.forEach((t) => clearTimeout(t));
+        showTooltipTimer.current = [];
       }
 
-      if (hideTooltipTimer.current) {
-        clearTimeout(hideTooltipTimer.current);
+      if (hideTooltipTimer.current.length) {
+        hideTooltipTimer.current.forEach((t) => clearTimeout(t));
+        hideTooltipTimer.current = [];
       }
     };
   }, []);
@@ -115,15 +122,17 @@ const Tooltip = ({
   };
 
   const handleTouchStart = () => {
-    if (hideTooltipTimer.current) {
-      clearTimeout(hideTooltipTimer.current);
+    if (hideTooltipTimer.current.length) {
+      hideTooltipTimer.current.forEach((t) => clearTimeout(t));
+      hideTooltipTimer.current = [];
     }
 
     if (isWeb) {
-      showTooltipTimer.current = setTimeout(() => {
+      let id = setTimeout(() => {
         touched.current = true;
         setVisible(true);
       }, enterTouchDelay) as unknown as NodeJS.Timeout;
+      showTooltipTimer.current.push(id);
     } else {
       touched.current = true;
       setVisible(true);
@@ -132,14 +141,16 @@ const Tooltip = ({
 
   const handleTouchEnd = () => {
     touched.current = false;
-    if (showTooltipTimer.current) {
-      clearTimeout(showTooltipTimer.current);
+    if (showTooltipTimer.current.length) {
+      showTooltipTimer.current.forEach((t) => clearTimeout(t));
+      showTooltipTimer.current = [];
     }
 
-    hideTooltipTimer.current = setTimeout(() => {
+    let id = setTimeout(() => {
       setVisible(false);
       setMeasurement({ children: {}, tooltip: {}, measured: false });
     }, leaveTouchDelay) as unknown as NodeJS.Timeout;
+    hideTooltipTimer.current.push(id);
   };
 
   const mobilePressProps = {
@@ -191,6 +202,7 @@ const Tooltip = ({
               selectable={false}
               variant="labelLarge"
               style={{ color: theme.colors.surface }}
+              maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
             >
               {title}
             </Text>

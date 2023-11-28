@@ -73,6 +73,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   elevation?: 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
   /**
+   * Specifies the largest possible scale a text font can reach.
+   */
+  maxFontSizeMultiplier?: number;
+  /**
    * Style for the wrapper of the snackbar
    */
   wrapperStyle?: StyleProp<ViewStyle>;
@@ -151,6 +155,7 @@ const Snackbar = ({
   wrapperStyle,
   style,
   theme: themeOverrides,
+  maxFontSizeMultiplier,
   rippleColor,
   testID,
   ...rest
@@ -256,6 +261,7 @@ const Snackbar = ({
         <Text
           variant="bodyMedium"
           style={[styles.content, { color: textColor }]}
+          maxFontSizeMultiplier={maxFontSizeMultiplier}
         >
           {children}
         </Text>

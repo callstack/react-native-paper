@@ -22,6 +22,10 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * Whether to show `Divider` at the end of the section. True by default.
    */
   showDivider?: boolean;
+  /**
+   * Specifies the largest possible scale a title font can reach.
+   */
+  titleMaxFontSizeMultiplier?: number;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -65,6 +69,7 @@ const DrawerSection = ({
   theme: themeOverrides,
   style,
   showDivider = true,
+  titleMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -90,6 +95,7 @@ const DrawerSection = ({
                   ...font,
                 },
               ]}
+              maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
             >
               {title}
             </Text>

@@ -526,3 +526,9 @@ a .badge .badge-text {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* ExtendsLink.tsx */
+
+.extends {
+  margin-bottom: 20px;
+}

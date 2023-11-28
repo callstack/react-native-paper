@@ -8,6 +8,7 @@ import {
   Platform,
   TextStyle,
   ColorValue,
+  LayoutChangeEvent,
 } from 'react-native';
 
 import { Outline } from './Addons/Outline';
@@ -68,6 +69,8 @@ const TextInputOutlined = ({
   onLabelTextLayout,
   onLeftAffixLayoutChange,
   onRightAffixLayoutChange,
+  onInputLayout,
+  onLayout,
   left,
   right,
   placeholderTextColor,
@@ -81,7 +84,7 @@ const TextInputOutlined = ({
   const font = isV3 ? theme.fonts.bodyLarge : theme.fonts.regular;
   const hasActiveOutline = parentState.focused || error;
 
-  const { INPUT_PADDING_HORIZONTAL, MIN_HEIGHT, ADORNMENT_OFFSET } =
+  const { INPUT_PADDING_HORIZONTAL, MIN_HEIGHT, ADORNMENT_OFFSET, MIN_WIDTH } =
     getConstants(isV3);
 
   const {
@@ -136,6 +139,11 @@ const TextInputOutlined = ({
     ({ side, type }) =>
       side === AdornmentSide.Left && type === AdornmentType.Icon
   );
+  const isAdornmentRightIcon = adornmentConfig.some(
+    ({ side, type }) =>
+      side === AdornmentSide.Right && type === AdornmentType.Icon
+  );
+
   if (isAdornmentLeftIcon) {
     labelTranslationXOffset =
       (I18nManager.getConstants().isRTL ? -1 : 1) *
@@ -227,13 +235,29 @@ const TextInputOutlined = ({
     maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
     testID,
     contentStyle,
+    inputContainerLayout: {
+      width:
+        parentState.inputContainerLayout.width +
+        (isAdornmentRightIcon || isAdornmentLeftIcon
+          ? INPUT_PADDING_HORIZONTAL
+          : 0),
+    },
     opacity:
       parentState.value || parentState.focused
         ? parentState.labelLayout.measured
           ? 1
           : 0
         : 1,
+    isV3,
   };
+
+  const onLayoutChange = React.useCallback(
+    (e: LayoutChangeEvent) => {
+      onInputLayout(e);
+      onLayout?.(e);
+    },
+    [onLayout, onInputLayout]
+  );
 
   const minHeight = (height ||
     (dense ? MIN_DENSE_HEIGHT_OUTLINED : MIN_HEIGHT)) as number;
@@ -325,75 +349,74 @@ const TextInputOutlined = ({
         outlineColor={outlineColor}
         backgroundColor={backgroundColor}
       />
-      <View>
-        <View
-          style={[
-            styles.labelContainer,
+      <View
+        style={[
+          styles.labelContainer,
+          {
+            paddingTop,
+            minHeight,
+          },
+        ]}
+      >
+        {label ? (
+          <InputLabel
+            labeled={parentState.labeled}
+            error={parentState.error}
+            focused={parentState.focused}
+            wiggle={Boolean(parentState.value && labelProps.labelError)}
+            labelLayoutMeasured={parentState.labelLayout.measured}
+            labelLayoutWidth={parentState.labelLayout.width}
+            {...labelProps}
+            labelBackground={LabelBackground}
+            maxFontSizeMultiplier={rest.maxFontSizeMultiplier}
+          />
+        ) : null}
+        {render?.({
+          ...rest,
+          ref: innerRef,
+          onLayout: onLayoutChange,
+          onChangeText,
+          placeholder: label ? parentState.placeholder : rest.placeholder,
+          editable: !disabled && editable,
+          selectionColor,
+          cursorColor:
+            typeof cursorColor === 'undefined' ? activeColor : cursorColor,
+          placeholderTextColor: placeholderTextColor || placeholderColor,
+          onFocus,
+          onBlur,
+          underlineColorAndroid: 'transparent',
+          multiline,
+          style: [
+            styles.input,
+            !multiline || (multiline && height) ? { height: inputHeight } : {},
+            paddingOut,
             {
-              paddingTop,
-              minHeight,
-            },
-          ]}
-        >
-          {label ? (
-            <InputLabel
-              labeled={parentState.labeled}
-              error={parentState.error}
-              focused={parentState.focused}
-              wiggle={Boolean(parentState.value && labelProps.labelError)}
-              labelLayoutMeasured={parentState.labelLayout.measured}
-              labelLayoutWidth={parentState.labelLayout.width}
-              {...labelProps}
-              labelBackground={LabelBackground}
-              maxFontSizeMultiplier={rest.maxFontSizeMultiplier}
-            />
-          ) : null}
-          {render?.({
-            ...rest,
-            ref: innerRef,
-            onChangeText,
-            placeholder: label ? parentState.placeholder : rest.placeholder,
-            editable: !disabled && editable,
-            selectionColor,
-            cursorColor:
-              typeof cursorColor === 'undefined' ? activeColor : cursorColor,
-            placeholderTextColor: placeholderTextColor || placeholderColor,
-            onFocus,
-            onBlur,
-            underlineColorAndroid: 'transparent',
-            multiline,
-            style: [
-              styles.input,
-              !multiline || (multiline && height)
-                ? { height: inputHeight }
-                : {},
-              paddingOut,
-              {
-                ...font,
-                fontSize,
-                lineHeight,
-                fontWeight,
-                color: inputTextColor,
-                textAlignVertical: multiline ? 'top' : 'center',
-                textAlign: textAlign
-                  ? textAlign
-                  : I18nManager.getConstants().isRTL
-                  ? 'right'
-                  : 'left',
-                paddingHorizontal: INPUT_PADDING_HORIZONTAL,
-                minWidth:
-                  parentState.labelTextLayout.width +
+              ...font,
+              fontSize,
+              lineHeight,
+              fontWeight,
+              color: inputTextColor,
+              textAlignVertical: multiline ? 'top' : 'center',
+              textAlign: textAlign
+                ? textAlign
+                : I18nManager.getConstants().isRTL
+                ? 'right'
+                : 'left',
+              paddingHorizontal: INPUT_PADDING_HORIZONTAL,
+              minWidth: Math.min(
+                parentState.labelTextLayout.width +
                   2 * INPUT_PADDING_HORIZONTAL,
-              },
-              Platform.OS === 'web' && { outline: 'none' },
-              adornmentStyleAdjustmentForNativeInput,
-              contentStyle,
-            ],
-            testID,
-          } as RenderProps)}
-        </View>
-        <TextInputAdornment {...adornmentProps} />
+                MIN_WIDTH
+              ),
+            },
+            Platform.OS === 'web' && { outline: 'none' },
+            adornmentStyleAdjustmentForNativeInput,
+            contentStyle,
+          ],
+          testID,
+        } as RenderProps)}
       </View>
+      <TextInputAdornment {...adornmentProps} />
     </View>
   );
 };

@@ -19,17 +19,11 @@ export type IconSource =
   | ((props: IconProps & { color: string }) => React.ReactNode);
 
 type IconProps = {
+  /**
+   * Size of icon.
+   */
   size: number;
   allowFontScaling?: boolean;
-};
-
-type Props = IconProps & {
-  color?: string;
-  source: any;
-  /**
-   * @optional
-   */
-  theme?: ThemeProp;
 };
 
 const isImageSource = (source: any) =>
@@ -67,11 +61,51 @@ export const isValidIcon = (source: any) =>
 export const isEqualIcon = (a: any, b: any) =>
   a === b || getIconId(a) === getIconId(b);
 
+export type Props = IconProps & {
+  /**
+   * Icon to display.
+   */
+  source: any;
+  /**
+   * Color of the icon.
+   */
+  color?: string;
+  /**
+   * TestID used for testing purposes
+   */
+  testID?: string;
+  /**
+   * @optional
+   */
+  theme?: ThemeProp;
+};
+
+/**
+ * An icon component which renders icon from vector library.
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { Icon, MD3Colors } from 'react-native-paper';
+ *
+ * const MyComponent = () => (
+ *   <Icon
+ *     source="camera"
+ *     color={MD3Colors.error50}
+ *     size={20}
+ *   />
+ * );
+ *
+ * export default MyComponent;
+ * ```
+ */
+
 const Icon = ({
   source,
   color,
   size,
   theme: themeOverrides,
+  testID,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -95,6 +129,7 @@ const Icon = ({
     return (
       <Image
         {...rest}
+        testID={testID}
         source={s}
         style={[
           {
@@ -120,12 +155,13 @@ const Icon = ({
             color: iconColor,
             size,
             direction,
+            testID,
           });
         }}
       </SettingsConsumer>
     );
   } else if (typeof s === 'function') {
-    return s({ color: iconColor, size, direction });
+    return s({ color: iconColor, size, direction, testID });
   }
 
   return null;

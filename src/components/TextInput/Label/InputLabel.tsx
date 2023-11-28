@@ -1,7 +1,14 @@
 import React from 'react';
-import { Animated, StyleSheet, Dimensions } from 'react-native';
+import {
+  Animated,
+  ColorValue,
+  Platform,
+  StyleSheet,
+  useWindowDimensions,
+} from 'react-native';
 
 import AnimatedText from '../../Typography/AnimatedText';
+import { getConstants } from '../helpers';
 import type { InputLabelProps } from '../types';
 
 const InputLabel = (props: InputLabelProps) => {
@@ -39,9 +46,12 @@ const InputLabel = (props: InputLabelProps) => {
     labelTranslationXOffset,
     maxFontSizeMultiplier,
     testID,
+    isV3,
+    inputContainerLayout,
   } = props;
 
-  const { width } = Dimensions.get('window');
+  const { INPUT_PADDING_HORIZONTAL } = getConstants(isV3);
+  const { width } = useWindowDimensions();
 
   const paddingOffset =
     paddingLeft && paddingRight ? { paddingLeft, paddingRight } : {};
@@ -100,7 +110,19 @@ const InputLabel = (props: InputLabelProps) => {
     ],
   };
 
-  const textColor = labelError && errorColor ? errorColor : placeholderColor;
+  const commonStyles = [
+    placeholderStyle,
+    {
+      top: topPosition,
+      maxWidth: inputContainerLayout.width + INPUT_PADDING_HORIZONTAL / 2,
+    },
+    labelStyle,
+    paddingOffset || {},
+  ];
+
+  const textColor = (
+    labelError && errorColor ? errorColor : placeholderColor
+  ) as ColorValue;
 
   return (
     // Position colored placeholder and gray placeholder on top of each other and crossfade them
@@ -110,7 +132,8 @@ const InputLabel = (props: InputLabelProps) => {
       style={[
         StyleSheet.absoluteFill,
         styles.labelContainer,
-        { opacity, width },
+        Platform.OS !== 'web' && { width },
+        { opacity },
         labelTranslationX,
       ]}
     >
@@ -132,12 +155,7 @@ const InputLabel = (props: InputLabelProps) => {
         onLayout={onLayoutAnimatedText}
         onTextLayout={onLabelTextLayout}
         style={[
-          placeholderStyle,
-          {
-            top: topPosition,
-          },
-          labelStyle,
-          paddingOffset || {},
+          commonStyles,
           {
             color: activeColor,
           },
@@ -151,12 +169,7 @@ const InputLabel = (props: InputLabelProps) => {
       <AnimatedText
         variant={focused ? 'bodyLarge' : 'bodySmall'}
         style={[
-          placeholderStyle,
-          {
-            top: topPosition,
-          },
-          labelStyle,
-          paddingOffset,
+          commonStyles,
           {
             color: textColor,
             opacity: placeholderOpacity,

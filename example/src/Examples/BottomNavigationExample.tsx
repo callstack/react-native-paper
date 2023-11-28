@@ -9,22 +9,16 @@ import {
 } from 'react-native';
 
 import type { StackNavigationProp } from '@react-navigation/stack';
-import { Appbar, BottomNavigation, Menu } from 'react-native-paper';
+import {
+  Appbar,
+  BottomNavigation,
+  BottomNavigationRoute,
+  Menu,
+} from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
-
-type RoutesState = Array<{
-  key: string;
-  title: string;
-  focusedIcon: string;
-  unfocusedIcon?: string;
-  color?: string;
-  badge?: boolean;
-  getAccessibilityLabel?: string;
-  getTestID?: string;
-}>;
 
 type Route = { route: { key: string } };
 
@@ -64,7 +58,7 @@ const BottomNavigationExample = ({ navigation }: Props) => {
       React.ComponentProps<typeof BottomNavigation>['sceneAnimationType']
     >();
 
-  const [routes] = React.useState<RoutesState>([
+  const [routes] = React.useState<BottomNavigationRoute[]>([
     {
       key: 'album',
       title: 'Album',

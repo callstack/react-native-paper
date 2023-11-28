@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  ColorValue,
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
@@ -48,6 +49,10 @@ export type Props = {
    */
   color?: string;
   /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
+  /**
    * Status of radio button.
    */
   status?: 'checked' | 'unchecked';
@@ -76,6 +81,10 @@ export type Props = {
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
   labelVariant?: keyof typeof MD3TypescaleKey;
+  /**
+   * Specifies the largest possible scale a label font can reach.
+   */
+  labelMaxFontSizeMultiplier?: number;
   /**
    * @optional
    */
@@ -126,6 +135,7 @@ const RadioButtonItem = ({
   disabled,
   color,
   uncheckedColor,
+  rippleColor,
   status,
   theme: themeOverrides,
   accessibilityLabel = label,
@@ -133,6 +143,7 @@ const RadioButtonItem = ({
   mode,
   position = 'trailing',
   labelVariant = 'bodyLarge',
+  labelMaxFontSizeMultiplier,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const radioButtonProps = {
@@ -193,6 +204,7 @@ const RadioButtonItem = ({
             testID={testID}
             disabled={disabled}
             theme={theme}
+            rippleColor={rippleColor}
           >
             <View style={[styles.container, style]} pointerEvents="none">
               {isLeading && radioButton}
@@ -204,6 +216,7 @@ const RadioButtonItem = ({
                   computedStyle,
                   labelStyle,
                 ]}
+                maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
               >
                 {label}
               </Text>

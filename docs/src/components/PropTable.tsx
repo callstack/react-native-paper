@@ -17,45 +17,11 @@ const typeDefinitions = {
   'StyleProp<TextStyle>': 'https://reactnative.dev/docs/text-style-props',
 };
 
-const ANNOTATION_EXTENDS = '@extends';
-
 const renderBadge = (annotation: string) => {
   const [annotType, ...annotLabel] = annotation.split(' ');
 
   // eslint-disable-next-line prettier/prettier
   return `<span class="badge badge-${annotType.replace('@', '')} ">${annotLabel.join(' ')}</span>`;
-};
-
-const renderExtendsLink = (description: string) => {
-  const extendsAttributes: { name: string; link?: string }[] = [];
-  description
-    .split('\n')
-    .filter((line: string) => {
-      if (line.startsWith(ANNOTATION_EXTENDS)) {
-        const parts = line.split(' ').slice(1);
-        const link = parts.pop();
-        extendsAttributes.push({
-          name: parts.join(' '),
-          link,
-        });
-        return false;
-      }
-      return true;
-    })
-    .join('\n');
-
-  if (extendsAttributes.length === 0) {
-    return null;
-  }
-
-  return extendsAttributes.map((prop) => (
-    <a key={prop.name} href={prop.link}>
-      <code>
-        ...
-        {prop.name}
-      </code>
-    </a>
-  ));
 };
 
 export default function PropTable({
@@ -132,7 +98,6 @@ export default function PropTable({
           </div>
         );
       })}
-      {renderExtendsLink(doc.description)}
     </div>
   );
 }

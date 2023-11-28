@@ -80,6 +80,7 @@ const screenshots = {
   AnimatedFAB: 'screenshots/animated-fab.gif',
   'FAB.Group': 'screenshots/fab-group.gif',
   HelperText: 'screenshots/helper-text.gif',
+  Icon: 'screenshots/icon.png',
   IconButton: {
     default: 'screenshots/icon-button-1.png',
     outlined: 'screenshots/icon-button-4.png',

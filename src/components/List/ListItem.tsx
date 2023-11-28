@@ -95,6 +95,14 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * See [`ellipsizeMode`](https://reactnative.dev/docs/text#ellipsizemode)
    */
   descriptionEllipsizeMode?: EllipsizeProp;
+  /**
+   * Specifies the largest possible scale a title font can reach.
+   */
+  titleMaxFontSizeMultiplier?: number;
+  /**
+   * Specifies the largest possible scale a description font can reach.
+   */
+  descriptionMaxFontSizeMultiplier?: number;
 };
 
 /**
@@ -132,6 +140,8 @@ const ListItem = ({
   titleEllipsizeMode,
   descriptionEllipsizeMode,
   descriptionStyle,
+  descriptionMaxFontSizeMultiplier,
+  titleMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -169,6 +179,7 @@ const ListItem = ({
           descriptionStyle,
         ]}
         onTextLayout={onDescriptionTextLayout}
+        maxFontSizeMultiplier={descriptionMaxFontSizeMultiplier}
       >
         {description}
       </Text>
@@ -193,6 +204,7 @@ const ListItem = ({
         ellipsizeMode={titleEllipsizeMode}
         numberOfLines={titleNumberOfLines}
         style={[styles.title, { color: titleColor }, titleStyle]}
+        maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
       >
         {title}
       </Text>

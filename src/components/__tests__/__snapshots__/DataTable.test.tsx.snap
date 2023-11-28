@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders data table cell 1`] = `
+exports[`DataTable.Cell renders data table cell 1`] = `
 <View
   accessibilityState={
     {
@@ -65,13 +65,88 @@ exports[`renders data table cell 1`] = `
         undefined,
       ]
     }
+    testID="undefined-text-container"
   >
     Cupcake
   </Text>
 </View>
 `;
 
-exports[`renders data table header 1`] = `
+exports[`DataTable.Cell renders right aligned data table cell 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      false,
+      [
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+        },
+        {
+          "justifyContent": "flex-end",
+        },
+        undefined,
+      ],
+    ]
+  }
+>
+  <Text
+    numberOfLines={1}
+    style={
+      [
+        {
+          "textAlign": "left",
+        },
+        {
+          "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
+          "letterSpacing": 0,
+        },
+        {
+          "writingDirection": "ltr",
+        },
+        undefined,
+      ]
+    }
+    testID="undefined-text-container"
+  >
+    356
+  </Text>
+</View>
+`;
+
+exports[`DataTable.Header renders data table header 1`] = `
 <View
   style={
     [
@@ -230,7 +305,7 @@ exports[`renders data table header 1`] = `
 </View>
 `;
 
-exports[`renders data table pagination 1`] = `
+exports[`DataTable.Pagination renders data table pagination 1`] = `
 <View
   accessibilityLabel="pagination-container"
   style={
@@ -572,7 +647,7 @@ exports[`renders data table pagination 1`] = `
 </View>
 `;
 
-exports[`renders data table pagination with fast-forward buttons 1`] = `
+exports[`DataTable.Pagination renders data table pagination with fast-forward buttons 1`] = `
 <View
   accessibilityLabel="pagination-container"
   style={
@@ -1202,7 +1277,7 @@ exports[`renders data table pagination with fast-forward buttons 1`] = `
 </View>
 `;
 
-exports[`renders data table pagination with label 1`] = `
+exports[`DataTable.Pagination renders data table pagination with label 1`] = `
 <View
   accessibilityLabel="pagination-container"
   style={
@@ -1546,7 +1621,7 @@ exports[`renders data table pagination with label 1`] = `
 </View>
 `;
 
-exports[`renders data table pagination with options select 1`] = `
+exports[`DataTable.Pagination renders data table pagination with options select 1`] = `
 <View
   accessibilityLabel="pagination-container"
   style={
@@ -2427,7 +2502,7 @@ exports[`renders data table pagination with options select 1`] = `
 </View>
 `;
 
-exports[`renders data table title with press handler 1`] = `
+exports[`DataTable.Title renders data table title with press handler 1`] = `
 <View
   accessibilityState={
     {
@@ -2551,7 +2626,7 @@ exports[`renders data table title with press handler 1`] = `
 </View>
 `;
 
-exports[`renders data table title with sort icon 1`] = `
+exports[`DataTable.Title renders data table title with sort icon 1`] = `
 <View
   accessibilityState={
     {
@@ -2675,80 +2750,7 @@ exports[`renders data table title with sort icon 1`] = `
 </View>
 `;
 
-exports[`renders right aligned data table cell 1`] = `
-<View
-  accessibilityState={
-    {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
-  accessible={true}
-  collapsable={false}
-  focusable={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  style={
-    [
-      false,
-      [
-        {
-          "alignItems": "center",
-          "flex": 1,
-          "flexDirection": "row",
-        },
-        {
-          "justifyContent": "flex-end",
-        },
-        undefined,
-      ],
-    ]
-  }
->
-  <Text
-    numberOfLines={1}
-    style={
-      [
-        {
-          "textAlign": "left",
-        },
-        {
-          "color": "rgba(28, 27, 31, 1)",
-          "fontFamily": "System",
-          "fontWeight": "400",
-          "letterSpacing": 0,
-        },
-        {
-          "writingDirection": "ltr",
-        },
-        undefined,
-      ]
-    }
-  >
-    356
-  </Text>
-</View>
-`;
-
-exports[`renders right aligned data table title 1`] = `
+exports[`DataTable.Title renders right aligned data table title 1`] = `
 <View
   accessibilityState={
     {
