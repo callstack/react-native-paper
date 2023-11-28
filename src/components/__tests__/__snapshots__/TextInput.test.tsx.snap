@@ -1684,76 +1684,43 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
     />
   </View>
   <View
-    accessibilityRole="button"
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": undefined,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
     collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-  >
-    <View
-      collapsable={false}
-      onLayout={[Function]}
-      style={
-        {
-          "alignItems": "center",
-          "justifyContent": "center",
-          "left": 16,
-          "opacity": 1,
-          "position": "absolute",
-          "top": null,
-        }
+    onLayout={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "left": 16,
+        "opacity": 1,
+        "position": "absolute",
+        "top": null,
       }
-      testID="left-affix-adornment"
+    }
+    testID="left-affix-adornment"
+  >
+    <Text
+      maxFontSizeMultiplier={1.5}
+      style={
+        [
+          {
+            "color": "rgba(73, 69, 79, 1)",
+          },
+          {
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "letterSpacing": 0.15,
+            "lineHeight": 19.2,
+          },
+          {
+            "color": "#f44336",
+          },
+        ]
+      }
+      testID="left-affix-adornment-text"
     >
-      <Text
-        maxFontSizeMultiplier={1.5}
-        style={
-          [
-            {
-              "color": "rgba(73, 69, 79, 1)",
-            },
-            {
-              "fontFamily": "System",
-              "fontSize": 16,
-              "fontWeight": undefined,
-              "letterSpacing": 0.15,
-              "lineHeight": 19.2,
-            },
-            {
-              "color": "#f44336",
-            },
-          ]
-        }
-        testID="left-affix-adornment-text"
-      >
-        /100
-      </Text>
-    </View>
+      /100
+    </Text>
   </View>
   <View
     style={
@@ -2274,76 +2241,43 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     </View>
   </View>
   <View
-    accessibilityRole="button"
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": undefined,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
     collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-  >
-    <View
-      collapsable={false}
-      onLayout={[Function]}
-      style={
-        {
-          "alignItems": "center",
-          "justifyContent": "center",
-          "opacity": 1,
-          "position": "absolute",
-          "right": 16,
-          "top": null,
-        }
+    onLayout={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "opacity": 1,
+        "position": "absolute",
+        "right": 16,
+        "top": null,
       }
-      testID="right-affix-adornment"
+    }
+    testID="right-affix-adornment"
+  >
+    <Text
+      maxFontSizeMultiplier={1.5}
+      style={
+        [
+          {
+            "color": "rgba(73, 69, 79, 1)",
+          },
+          {
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "letterSpacing": 0.15,
+            "lineHeight": 19.2,
+          },
+          {
+            "color": "#f44336",
+          },
+        ]
+      }
+      testID="right-affix-adornment-text"
     >
-      <Text
-        maxFontSizeMultiplier={1.5}
-        style={
-          [
-            {
-              "color": "rgba(73, 69, 79, 1)",
-            },
-            {
-              "fontFamily": "System",
-              "fontSize": 16,
-              "fontWeight": undefined,
-              "letterSpacing": 0.15,
-              "lineHeight": 19.2,
-            },
-            {
-              "color": "#f44336",
-            },
-          ]
-        }
-        testID="right-affix-adornment-text"
-      >
-        /100
-      </Text>
-    </View>
+      /100
+    </Text>
   </View>
 </View>
 `;

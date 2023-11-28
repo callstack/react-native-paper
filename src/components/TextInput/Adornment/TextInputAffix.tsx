@@ -144,8 +144,10 @@ const TextInputAffix = ({
 
   const textColor = getTextColor({ theme, disabled });
 
+  const Wrapper = typeof onPress === 'function' ? Pressable : React.Fragment;
+
   return (
-    <Pressable accessibilityRole="button" onPress={onPress}>
+    <Wrapper accessibilityRole="button" onPress={onPress}>
       <Animated.View
         style={[
           styles.container,
@@ -170,7 +172,7 @@ const TextInputAffix = ({
           {text}
         </Text>
       </Animated.View>
-    </Pressable>
+    </Wrapper>
   );
 };
 TextInputAffix.displayName = 'TextInput.Affix';
