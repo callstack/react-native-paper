@@ -210,7 +210,6 @@ const Banner = ({
     }
     return (
       <View
-        style={styles.content}
         accessibilityLiveRegion={visible ? 'polite' : 'none'}
         accessibilityRole="alert"
       >
