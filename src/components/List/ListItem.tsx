@@ -67,6 +67,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   style?: StyleProp<ViewStyle>;
   /**
+   * Style that is passed to the container wrapping title and descripton.
+   */
+  contentStyle?: StyleProp<ViewStyle>;
+  /**
    * Style that is passed to Title element.
    */
   titleStyle?: StyleProp<TextStyle>;
@@ -136,6 +140,7 @@ const ListItem = (
     onPress,
     theme: themeOverrides,
     style,
+    contentStyle,
     titleStyle,
     titleNumberOfLines = 1,
     descriptionNumberOfLines = 2,
@@ -235,7 +240,11 @@ const ListItem = (
             })
           : null}
         <View
-          style={[theme.isV3 ? styles.itemV3 : styles.item, styles.content]}
+          style={[
+            theme.isV3 ? styles.itemV3 : styles.item,
+            styles.content,
+            contentStyle,
+          ]}
         >
           {renderTitle()}
 
