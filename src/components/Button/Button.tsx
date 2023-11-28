@@ -90,7 +90,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   accessibilityHint?: string;
   /**
-   * Accessibility role for the button. Button by default.
+   * Accessibility role for the button. The "button" role is set by default.
    */
   accessibilityRole?: AccessibilityRole;
   /**
