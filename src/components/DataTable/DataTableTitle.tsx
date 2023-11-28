@@ -3,11 +3,10 @@ import {
   Animated,
   GestureResponderEvent,
   I18nManager,
+  Pressable,
   StyleProp,
   StyleSheet,
   TextStyle,
-  TouchableWithoutFeedback,
-  View,
   ViewStyle,
 } from 'react-native';
 
@@ -18,9 +17,7 @@ import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 
-export type Props = React.ComponentPropsWithRef<
-  typeof TouchableWithoutFeedback
-> & {
+export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
   /**
    * Text content of the `DataTableTitle`.
    */
@@ -128,33 +125,36 @@ const DataTableTitle = ({
   ) : null;
 
   return (
-    <TouchableWithoutFeedback disabled={!onPress} onPress={onPress} {...rest}>
-      <View style={[styles.container, numeric && styles.right, style]}>
-        {icon}
+    <Pressable
+      disabled={!onPress}
+      onPress={onPress}
+      {...rest}
+      style={[styles.container, numeric && styles.right, style]}
+    >
+      {icon}
 
-        <Text
-          style={[
-            styles.cell,
-            // height must scale with numberOfLines
-            { maxHeight: 24 * numberOfLines },
-            // if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
-            numberOfLines > 1
-              ? numeric
-                ? I18nManager.getConstants().isRTL
-                  ? styles.leftText
-                  : styles.rightText
-                : styles.centerText
-              : {},
-            sortDirection ? styles.sorted : { color: alphaTextColor },
-            textStyle,
-          ]}
-          numberOfLines={numberOfLines}
-          maxFontSizeMultiplier={maxFontSizeMultiplier}
-        >
-          {children}
-        </Text>
-      </View>
-    </TouchableWithoutFeedback>
+      <Text
+        style={[
+          styles.cell,
+          // height must scale with numberOfLines
+          { maxHeight: 24 * numberOfLines },
+          // if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
+          numberOfLines > 1
+            ? numeric
+              ? I18nManager.getConstants().isRTL
+                ? styles.leftText
+                : styles.rightText
+              : styles.centerText
+            : {},
+          sortDirection ? styles.sorted : { color: alphaTextColor },
+          textStyle,
+        ]}
+        numberOfLines={numberOfLines}
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
+      >
+        {children}
+      </Text>
+    </Pressable>
   );
 };
 

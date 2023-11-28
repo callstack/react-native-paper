@@ -6,9 +6,10 @@ import {
   StyleProp,
   StyleSheet,
   TextStyle,
-  TouchableWithoutFeedback,
+  Pressable,
   View,
   ViewStyle,
+  ViewProps,
 } from 'react-native';
 
 import color from 'color';
@@ -135,13 +136,15 @@ const AppbarContent = ({
 
   const variant = modeTextVariant[mode] as MD3TypescaleKey;
 
+  const contentWrapperProps = {
+    pointerEvents: 'box-none' as ViewProps['pointerEvents'],
+    style: [styles.container, isV3 && modeContainerStyles[mode], style],
+    testID,
+    ...rest,
+  };
+
   const content = (
-    <View
-      pointerEvents="box-none"
-      style={[styles.container, isV3 && modeContainerStyles[mode], style]}
-      testID={testID}
-      {...rest}
-    >
+    <>
       {typeof title === 'string' ? (
         <Text
           {...(isV3 && { variant })}
@@ -185,26 +188,27 @@ const AppbarContent = ({
           {subtitle}
         </Text>
       ) : null}
-    </View>
+    </>
   );
 
   if (onPress) {
     return (
       // eslint-disable-next-line react-native-a11y/has-accessibility-props
-      <TouchableWithoutFeedback
+      <Pressable
         accessibilityRole={touchableRole}
         // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
         accessibilityTraits={touchableRole}
         accessibilityComponentType="button"
         onPress={onPress}
         disabled={disabled}
+        {...contentWrapperProps}
       >
         {content}
-      </TouchableWithoutFeedback>
+      </Pressable>
     );
   }
 
-  return content;
+  return <View {...contentWrapperProps}>{content}</View>;
 };
 
 AppbarContent.displayName = 'Appbar.Content';

@@ -6,8 +6,7 @@ import {
   Platform,
   StyleProp,
   StyleSheet,
-  TouchableWithoutFeedback,
-  TouchableWithoutFeedbackProps,
+  Pressable,
   View,
   ViewStyle,
 } from 'react-native';
@@ -32,6 +31,7 @@ import Badge from '../Badge';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 type BaseRoute = {
@@ -56,7 +56,7 @@ type TabPressEvent = {
   preventDefault(): void;
 };
 
-type TouchableProps<Route extends BaseRoute> = TouchableWithoutFeedbackProps & {
+type TouchableProps<Route extends BaseRoute> = TouchableRippleProps & {
   key: string;
   route: Route;
   children: React.ReactNode;
@@ -134,7 +134,7 @@ export type Props<Route extends BaseRoute> = {
   }) => React.ReactNode;
   /**
    * Callback which returns a React element to be used as the touchable for the tab item.
-   * Renders a `TouchableRipple` on Android and `TouchableWithoutFeedback` with `View` on iOS.
+   * Renders a `TouchableRipple` on Android and `Pressable` on iOS.
    */
   renderTouchable?: (props: TouchableProps<Route>) => React.ReactNode;
   /**
@@ -235,9 +235,9 @@ const Touchable = <Route extends BaseRoute>({
       {children}
     </TouchableRipple>
   ) : (
-    <TouchableWithoutFeedback {...rest}>
-      <View style={style}>{children}</View>
-    </TouchableWithoutFeedback>
+    <Pressable style={style} {...rest}>
+      {children}
+    </Pressable>
   );
 
 /**

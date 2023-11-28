@@ -102,15 +102,13 @@ describe('Card', () => {
     });
   });
   it('does render a disabled accessibility state', () => {
-    const { getByTestId } = render(
+    const { getByA11yState } = render(
       <Card onPress={() => {}} disabled>
         {null}
       </Card>
     );
 
-    expect(getByTestId('card').props.accessibilityState).toMatchObject({
-      disabled: true,
-    });
+    expect(getByA11yState({ disabled: true })).toBeOnTheScreen();
   });
 });
 

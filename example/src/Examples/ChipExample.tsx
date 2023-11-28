@@ -15,7 +15,10 @@ import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const ChipExample = () => {
-  const [visible, setVisible] = React.useState<boolean>(false);
+  const [snackbarProperties, setSnackbarProperties] = React.useState({
+    visible: false,
+    text: '',
+  });
   const { isV3 } = useExampleTheme();
   const customColor = isV3 ? MD3Colors.error50 : MD2Colors.purple900;
 
@@ -47,7 +50,12 @@ const ChipExample = () => {
             )}
             <Chip
               onPress={() => {}}
-              onClose={() => {}}
+              onClose={() =>
+                setSnackbarProperties({
+                  visible: true,
+                  text: 'Close button pressed',
+                })
+              }
               style={styles.chip}
               closeIconAccessibilityLabel="Close icon accessibility label"
             >
@@ -56,7 +64,12 @@ const ChipExample = () => {
             <Chip
               icon="heart"
               onPress={() => {}}
-              onClose={() => {}}
+              onClose={() =>
+                setSnackbarProperties({
+                  visible: true,
+                  text: 'Heart icon close button pressed',
+                })
+              }
               style={styles.chip}
             >
               Icon
@@ -69,7 +82,12 @@ const ChipExample = () => {
                 />
               }
               onPress={() => {}}
-              onClose={() => {}}
+              onClose={() =>
+                setSnackbarProperties({
+                  visible: true,
+                  text: 'Avatar close button pressed',
+                })
+              }
               style={styles.chip}
             >
               Avatar
@@ -87,7 +105,17 @@ const ChipExample = () => {
             >
               Avatar (selected)
             </Chip>
-            <Chip disabled icon="heart" onClose={() => {}} style={styles.chip}>
+            <Chip
+              disabled
+              icon="heart"
+              onClose={() =>
+                setSnackbarProperties({
+                  visible: true,
+                  text: 'Disabled heart icon close button pressed',
+                })
+              }
+              style={styles.chip}
+            >
               Icon (disabled)
             </Chip>
             <Chip
@@ -141,7 +169,12 @@ const ChipExample = () => {
             <Chip
               mode="outlined"
               onPress={() => {}}
-              onClose={() => {}}
+              onClose={() =>
+                setSnackbarProperties({
+                  visible: true,
+                  text: 'Close button pressed',
+                })
+              }
               style={styles.chip}
             >
               Close button
@@ -150,7 +183,12 @@ const ChipExample = () => {
               mode="outlined"
               icon="heart"
               onPress={() => {}}
-              onClose={() => {}}
+              onClose={() =>
+                setSnackbarProperties({
+                  visible: true,
+                  text: 'Heart icon close button pressed',
+                })
+              }
               style={styles.chip}
             >
               Icon
@@ -186,7 +224,12 @@ const ChipExample = () => {
               disabled
               mode="outlined"
               icon="heart"
-              onClose={() => {}}
+              onClose={() =>
+                setSnackbarProperties({
+                  visible: true,
+                  text: 'Disabled close button pressed',
+                })
+              }
               style={styles.chip}
             >
               Icon (disabled)
@@ -243,7 +286,9 @@ const ChipExample = () => {
             <Chip
               mode="outlined"
               onPress={() => {}}
-              onLongPress={() => setVisible(true)}
+              onLongPress={() =>
+                setSnackbarProperties({ visible: true, text: '' })
+              }
               style={styles.chip}
             >
               With onLongPress
@@ -299,7 +344,12 @@ const ChipExample = () => {
             </Chip>
             <Chip
               onPress={() => {}}
-              onClose={() => {}}
+              onClose={() =>
+                setSnackbarProperties({
+                  visible: true,
+                  text: 'Close button pressed',
+                })
+              }
               style={styles.bigTextFlex}
               textStyle={styles.bigTextStyle}
               ellipsizeMode="middle"
@@ -310,7 +360,12 @@ const ChipExample = () => {
             </Chip>
             <Chip
               onPress={() => {}}
-              onClose={() => {}}
+              onClose={() =>
+                setSnackbarProperties({
+                  visible: true,
+                  text: 'Custom icon close button pressed',
+                })
+              }
               closeIcon="arrow-down"
               style={styles.chip}
               closeIconAccessibilityLabel="Custom Close icon accessibility label"
@@ -331,11 +386,11 @@ const ChipExample = () => {
         </List.Section>
       </ScreenWrapper>
       <Snackbar
-        visible={visible}
-        onDismiss={() => setVisible(false)}
+        visible={snackbarProperties.visible}
+        onDismiss={() => setSnackbarProperties({ visible: false, text: '' })}
         duration={Snackbar.DURATION_SHORT}
       >
-        onLongPress activated!
+        {snackbarProperties.text}
       </Snackbar>
     </>
   );

@@ -4,10 +4,10 @@ import {
   GestureResponderEvent,
   NativeSyntheticEvent,
   Platform,
+  Pressable,
   StyleProp,
   StyleSheet,
   TextLayoutEventData,
-  TouchableWithoutFeedback,
   View,
   ViewStyle,
 } from 'react-native';
@@ -27,6 +27,10 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * Badge to show on the icon, can be `true` to show a dot, `string` or `number` to show text.
    */
   badge?: string | number | boolean;
+  /**
+   * Whether the item is disabled.
+   */
+  disabled?: boolean;
   /**
    * @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
    * Icon to use as the focused destination icon, can be a string, an image source or a react component
@@ -99,6 +103,7 @@ const DrawerCollapsedItem = ({
   theme: themeOverrides,
   style,
   onPress,
+  disabled,
   accessibilityLabel,
   badge = false,
   testID = 'drawer-collapsed-item',
@@ -167,9 +172,10 @@ const DrawerCollapsedItem = ({
   return (
     <View {...rest}>
       {/* eslint-disable-next-line react-native-a11y/has-accessibility-props */}
-      <TouchableWithoutFeedback
+      <Pressable
         onPress={onPress}
         onPressOut={onPress ? handlePressOut : undefined}
+        disabled={disabled}
         // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
         accessibilityTraits={active ? ['button', 'selected'] : 'button'}
         accessibilityComponentType="button"
@@ -229,7 +235,7 @@ const DrawerCollapsedItem = ({
             </Text>
           ) : null}
         </View>
-      </TouchableWithoutFeedback>
+      </Pressable>
     </View>
   );
 };

@@ -223,72 +223,86 @@ exports[`renders chip with close button 1`] = `
           {
             "busy": undefined,
             "checked": undefined,
-            "disabled": undefined,
+            "disabled": false,
             "expanded": undefined,
             "selected": undefined,
           }
         }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
+        collapsable={false}
         focusable={true}
+        onBlur={[Function]}
         onClick={[Function]}
+        onFocus={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        style={
-          [
-            {
-              "alignSelf": "center",
-              "padding": 4,
-            },
-            {
-              "marginRight": 4,
-            },
-            {
-              "marginRight": 8,
-              "padding": 0,
-            },
-          ]
-        }
       >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
+        <View
           style={
             [
               {
-                "color": "rgba(29, 25, 43, 1)",
-                "fontSize": 18,
+                "alignSelf": "center",
+                "padding": 4,
               },
-              [
-                {
-                  "lineHeight": 18,
-                  "transform": [
-                    {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                {
-                  "backgroundColor": "transparent",
-                },
-              ],
               {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
+                "marginRight": 4,
               },
-              {},
+              {
+                "marginRight": 8,
+                "padding": 0,
+              },
             ]
           }
         >
-          󰅖
-        </Text>
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "rgba(29, 25, 43, 1)",
+                  "fontSize": 18,
+                },
+                [
+                  {
+                    "lineHeight": 18,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                {},
+              ]
+            }
+          >
+            󰅖
+          </Text>
+        </View>
       </View>
     </View>
   </View>
@@ -518,72 +532,86 @@ exports[`renders chip with custom close button 1`] = `
           {
             "busy": undefined,
             "checked": undefined,
-            "disabled": undefined,
+            "disabled": false,
             "expanded": undefined,
             "selected": undefined,
           }
         }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
+        collapsable={false}
         focusable={true}
+        onBlur={[Function]}
         onClick={[Function]}
+        onFocus={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        style={
-          [
-            {
-              "alignSelf": "center",
-              "padding": 4,
-            },
-            {
-              "marginRight": 4,
-            },
-            {
-              "marginRight": 8,
-              "padding": 0,
-            },
-          ]
-        }
       >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
+        <View
           style={
             [
               {
-                "color": "rgba(29, 25, 43, 1)",
-                "fontSize": 18,
+                "alignSelf": "center",
+                "padding": 4,
               },
-              [
-                {
-                  "lineHeight": 18,
-                  "transform": [
-                    {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                {
-                  "backgroundColor": "transparent",
-                },
-              ],
               {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
+                "marginRight": 4,
               },
-              {},
+              {
+                "marginRight": 8,
+                "padding": 0,
+              },
             ]
           }
         >
-          󰁅
-        </Text>
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "rgba(29, 25, 43, 1)",
+                  "fontSize": 18,
+                },
+                [
+                  {
+                    "lineHeight": 18,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                {},
+              ]
+            }
+          >
+            󰁅
+          </Text>
+        </View>
       </View>
     </View>
   </View>

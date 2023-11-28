@@ -4,7 +4,7 @@ import {
   Easing,
   StyleProp,
   StyleSheet,
-  TouchableWithoutFeedback,
+  Pressable,
   View,
   ViewStyle,
 } from 'react-native';
@@ -64,6 +64,7 @@ export type Props = {
 };
 
 const DEFAULT_DURATION = 220;
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 /**
  * The Modal component is a simple way to present content above an enclosing view.
@@ -208,24 +209,21 @@ function Modal({
       onAccessibilityEscape={hideModal}
       testID={testID}
     >
-      <TouchableWithoutFeedback
+      <AnimatedPressable
         accessibilityLabel={overlayAccessibilityLabel}
         accessibilityRole="button"
         disabled={!dismissable}
         onPress={dismissable ? hideModal : undefined}
         importantForAccessibility="no"
-      >
-        <Animated.View
-          testID={`${testID}-backdrop`}
-          style={[
-            styles.backdrop,
-            {
-              backgroundColor: theme.colors?.backdrop,
-              opacity,
-            },
-          ]}
-        />
-      </TouchableWithoutFeedback>
+        style={[
+          styles.backdrop,
+          {
+            backgroundColor: theme.colors?.backdrop,
+            opacity,
+          },
+        ]}
+        testID={`${testID}-backdrop`}
+      />
       <View
         style={[
           styles.wrapper,

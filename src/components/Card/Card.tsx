@@ -4,7 +4,7 @@ import {
   GestureResponderEvent,
   StyleProp,
   StyleSheet,
-  TouchableWithoutFeedback,
+  Pressable,
   View,
   ViewStyle,
 } from 'react-native';
@@ -306,9 +306,9 @@ const Card = ({
       )}
 
       {hasPassedTouchHandler ? (
-        <TouchableWithoutFeedback
+        <Pressable
           accessible={accessible}
-          delayPressIn={0}
+          unstable_pressDelay={0}
           disabled={disabled}
           delayLongPress={delayLongPress}
           onLongPress={onLongPress}
@@ -317,7 +317,7 @@ const Card = ({
           onPressOut={handlePressOut}
         >
           {content}
-        </TouchableWithoutFeedback>
+        </Pressable>
       ) : (
         content
       )}
