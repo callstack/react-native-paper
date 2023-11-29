@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {
+  Pressable,
   StyleProp,
   StyleSheet,
   TextStyle,
-  TouchableOpacity,
   View,
   ViewStyle,
 } from 'react-native';
@@ -177,7 +177,7 @@ const CardTitle = ({
 
       <View style={[styles.titles]}>
         {title && onPressTitle ? (
-          <TouchableOpacity onPress={onPressTitle} style={[styles.title]}>
+          <Pressable onPress={onPressTitle} style={[styles.title]}>
             <TitleComponent
               style={[{ marginBottom }, titleStyle]}
               numberOfLines={titleNumberOfLines}
@@ -186,7 +186,7 @@ const CardTitle = ({
             >
               {title}
             </TitleComponent>
-          </TouchableOpacity>
+          </Pressable>
         ) : (
           <TitleComponent
             style={[styles.title, { marginBottom }, titleStyle]}
