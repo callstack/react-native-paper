@@ -160,7 +160,7 @@ const CardTitle = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   let TitleContainer = theme.isV3 ? Text : Title;
-  const SubtitleComponent = theme.isV3 ? Text : Caption;
+  const SubtitleContainer = theme.isV3 ? Text : Caption;
 
   const minHeight = subtitle || left || right ? 72 : 50;
   const marginBottom = subtitle ? 0 : 2;
@@ -174,6 +174,16 @@ const CardTitle = ({
     >
       {props.title}
     </TitleContainer>
+  );
+  const SubtitleComponent = (props: { subtitle: React.ReactNode }) => (
+    <SubtitleContainer
+      style={[styles.subtitle, subtitleStyle]}
+      numberOfLines={subtitleNumberOfLines}
+      variant={subtitleVariant}
+      maxFontSizeMultiplier={subtitleMaxFontSizeMultiplier}
+    >
+      {props.subtitle}
+    </SubtitleContainer>
   );
 
   return (
@@ -194,16 +204,7 @@ const CardTitle = ({
         ) : (
           <TitleComponent {...{ title }} />
         )}
-        {subtitle && (
-          <SubtitleComponent
-            style={[styles.subtitle, subtitleStyle]}
-            numberOfLines={subtitleNumberOfLines}
-            variant={subtitleVariant}
-            maxFontSizeMultiplier={subtitleMaxFontSizeMultiplier}
-          >
-            {subtitle}
-          </SubtitleComponent>
-        )}
+        {subtitle && <SubtitleComponent {...{ subtitle }} />}
       </View>
       <View style={rightStyle}>{right ? right({ size: 24 }) : null}</View>
     </View>
