@@ -159,11 +159,22 @@ const CardTitle = ({
   onPressTitle,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const TitleComponent = theme.isV3 ? Text : Title;
+  let TitleContainer = theme.isV3 ? Text : Title;
   const SubtitleComponent = theme.isV3 ? Text : Caption;
 
   const minHeight = subtitle || left || right ? 72 : 50;
   const marginBottom = subtitle ? 0 : 2;
+
+  const TitleComponent = (props: { title: React.ReactNode }) => (
+    <TitleContainer
+      style={[styles.title, { marginBottom }, titleStyle]}
+      numberOfLines={titleNumberOfLines}
+      variant={titleVariant}
+      maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+    >
+      {props.title}
+    </TitleContainer>
+  );
 
   return (
     <View style={[styles.container, { minHeight }, style]}>
@@ -178,24 +189,10 @@ const CardTitle = ({
       <View style={[styles.titles]}>
         {title && onPressTitle ? (
           <Pressable onPress={onPressTitle} style={[styles.title]}>
-            <TitleComponent
-              style={[{ marginBottom }, titleStyle]}
-              numberOfLines={titleNumberOfLines}
-              variant={titleVariant}
-              maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
-            >
-              {title}
-            </TitleComponent>
+            <TitleComponent {...{ title }} />
           </Pressable>
         ) : (
-          <TitleComponent
-            style={[styles.title, { marginBottom }, titleStyle]}
-            numberOfLines={titleNumberOfLines}
-            variant={titleVariant}
-            maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
-          >
-            {title}
-          </TitleComponent>
+          <TitleComponent {...{ title }} />
         )}
         {subtitle && (
           <SubtitleComponent
