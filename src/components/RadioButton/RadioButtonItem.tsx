@@ -37,6 +37,10 @@ export type Props = {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
    * Accessibility label for the touchable. This is read by the screen reader when the user taps the touchable.
    */
   accessibilityLabel?: string;
@@ -132,6 +136,7 @@ const RadioButtonItem = ({
   style,
   labelStyle,
   onPress,
+  onLongPress,
   disabled,
   color,
   uncheckedColor,
@@ -195,6 +200,7 @@ const RadioButtonItem = ({
                 event,
               })
             }
+            onLongPress={onLongPress}
             accessibilityLabel={accessibilityLabel}
             accessibilityRole="radio"
             accessibilityState={{
