@@ -26,6 +26,9 @@ export type BaseRoute = {
   focusedIcon?: IconSource;
   unfocusedIcon?: IconSource;
   badge?: string | number | boolean;
+  /**
+   * @deprecated In v5.x works only with theme version 2.
+   */
   color?: string;
   accessibilityLabel?: string;
   testID?: string;

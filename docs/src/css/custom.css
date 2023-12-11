@@ -222,6 +222,7 @@ a .badge .badge-text {
   border-color: rgba(98, 0, 238, 1);
 }
 
+.badge-deprecatedProperty,
 .badge-deprecated {
   color: rgba(176, 0, 32, 1);
   background-color: rgba(176, 0, 32, 0.2);
