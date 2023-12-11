@@ -38,11 +38,19 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * Whether to show the ProgressBar (true, the default) or hide it (false).
    */
   visible?: boolean;
+  /**
+   * Style of filled part of the ProgresBar.
+   */
+  fillStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 const INDETERMINATE_DURATION = 2000;
@@ -67,11 +75,13 @@ const { isRTL } = I18nManager;
 const ProgressBar = ({
   color,
   indeterminate,
-  style,
   progress = 0,
   visible = true,
   theme: themeOverrides,
   animatedValue,
+  style,
+  fillStyle,
+  testID = 'progress-bar',
   ...rest
 }: Props) => {
   const isWeb = Platform.OS === 'web';
@@ -196,6 +206,7 @@ const ProgressBar = ({
         indeterminate ? {} : { min: 0, max: 100, now: progress * 100 }
       }
       style={isWeb && styles.webContainer}
+      testID={testID}
     >
       <Animated.View
         style={[
@@ -206,6 +217,7 @@ const ProgressBar = ({
       >
         {width ? (
           <Animated.View
+            testID={`${testID}-fill`}
             style={[
               styles.progressBar,
               {
@@ -252,6 +264,7 @@ const ProgressBar = ({
                   },
                 ],
               },
+              fillStyle,
             ]}
           />
         ) : null}
