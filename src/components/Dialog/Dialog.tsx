@@ -7,6 +7,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import DialogActions from './DialogActions';
 import DialogContent from './DialogContent';
 import DialogIcon from './DialogIcon';
@@ -101,6 +103,7 @@ const Dialog = ({
   theme: themeOverrides,
   testID,
 }: Props) => {
+  const { right, left } = useSafeAreaInsets();
   const theme = useInternalTheme(themeOverrides);
   const { isV3, dark, mode, colors, roundness } = theme;
   const borderRadius = (isV3 ? 7 : 1) * roundness;
@@ -123,6 +126,7 @@ const Dialog = ({
         {
           borderRadius,
           backgroundColor,
+          marginHorizontal: Math.max(left, right, 26),
         },
         styles.container,
         style,
@@ -179,7 +183,6 @@ const styles = StyleSheet.create({
      * dialog (44 pixel from the top and bottom) it won't be dismissed.
      */
     marginVertical: Platform.OS === 'android' ? 44 : 0,
-    marginHorizontal: 26,
     elevation: DIALOG_ELEVATION,
     justifyContent: 'flex-start',
   },
