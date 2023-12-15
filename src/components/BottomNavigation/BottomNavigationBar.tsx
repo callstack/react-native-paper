@@ -278,7 +278,7 @@ const Touchable = <Route extends BaseRoute>({
  *               preventDefault();
  *             } else {
  *              navigation.dispatch({
- *                 ...CommonActions.navigate(route.name, route.params),
+ *                 ...navigation.navigate(route.name, route.params),
  *                 target: state.key,
  *               });
  *             }
