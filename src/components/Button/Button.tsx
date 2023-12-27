@@ -3,6 +3,7 @@ import {
   Animated,
   ColorValue,
   GestureResponderEvent,
+  Platform,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -218,7 +219,7 @@ const Button = (
       Animated.timing(elevation, {
         toValue: activeElevation,
         duration: 200 * scale,
-        useNativeDriver: true,
+        useNativeDriver: Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };
@@ -230,7 +231,7 @@ const Button = (
       Animated.timing(elevation, {
         toValue: initialElevation,
         duration: 150 * scale,
-        useNativeDriver: true,
+        useNativeDriver: Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };
