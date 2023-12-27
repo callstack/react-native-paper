@@ -6,6 +6,7 @@ import {
   StyleSheet,
   StyleProp,
   TextStyle,
+  Platform,
 } from 'react-native';
 import color from 'color';
 
@@ -160,7 +161,7 @@ const Button = ({
       Animated.timing(elevation, {
         toValue: 8,
         duration: 200 * scale,
-        useNativeDriver: true,
+        useNativeDriver: Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };
@@ -171,7 +172,7 @@ const Button = ({
       Animated.timing(elevation, {
         toValue: 2,
         duration: 150 * scale,
-        useNativeDriver: true,
+        useNativeDriver: Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };
