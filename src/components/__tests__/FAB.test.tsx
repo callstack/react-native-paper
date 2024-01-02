@@ -138,6 +138,14 @@ it('renders FAB with custom border radius', () => {
   expect(getByTestId('fab-container')).toHaveStyle({ borderRadius: 0 });
 });
 
+it('renders FAB with zero border radius', () => {
+  const { getByTestId } = render(
+    <FAB theme={{ roundness: 0 }} onPress={() => {}} icon="plus" testID="fab" />
+  );
+
+  expect(getByTestId('fab-container')).toHaveStyle({ borderRadius: 0 });
+});
+
 it('renders FAB without uppercase styling by default', () => {
   const { getByTestId } = render(
     <FAB onPress={() => {}} label="Add items" testID="fab" />
