@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewStyle,
+  Platform,
 } from 'react-native';
 import color from 'color';
 import { white, black } from '../../styles/colors';
@@ -165,7 +166,7 @@ const Card = ({
       Animated.timing(elevation, {
         toValue: isPressTypeIn ? 8 : cardElevation,
         duration: animationDuration,
-        useNativeDriver: true,
+        useNativeDriver: Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };
