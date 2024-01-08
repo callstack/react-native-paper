@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { act, fireEvent, render } from '@testing-library/react-native';
 
 import RadioButton from '../../RadioButton';
 
@@ -57,4 +57,23 @@ it('can render leading radio button control', () => {
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('should execute onLongPress', () => {
+  const onLongPress = jest.fn();
+
+  const { getByTestId } = render(
+    <RadioButton.Item
+      label="Item"
+      value="android"
+      testID="radio-button-item"
+      onLongPress={onLongPress}
+    />
+  );
+
+  act(() => {
+    fireEvent(getByTestId('radio-button-item'), 'longPress', { key: 'value' });
+  });
+
+  expect(onLongPress).toHaveBeenCalledTimes(1);
 });
