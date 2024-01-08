@@ -23,7 +23,8 @@ import {
 import MenuItem from './MenuItem';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 import { withInternalTheme } from '../../core/theming';
-import type { $Omit, InternalTheme } from '../../types';
+import type { $Omit, InternalTheme, MD3Elevation } from '../../types';
+import { ElevationLevels } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import { BackHandler } from '../../utils/BackHandler/BackHandler';
 import Portal from '../Portal/Portal';
@@ -68,6 +69,11 @@ export type Props = {
   contentStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   style?: StyleProp<ViewStyle>;
   /**
+   * Elevation level of the menu's content. Shadow styles are calculated based on this value. Default `backgroundColor` is taken from the corresponding `theme.colors.elevation` property. By default equals `2`.
+   * @supported Available in v5.x with theme version 3
+   */
+  elevation?: MD3Elevation;
+  /**
    * @optional
    */
   theme: InternalTheme;
@@ -102,6 +108,11 @@ const ANIMATION_DURATION = 250;
 const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 
 const WINDOW_LAYOUT = Dimensions.get('window');
+
+const DEFAULT_ELEVATION: MD3Elevation = 2;
+const ELEVATION_LEVELS_MAP = Object.values(
+  ElevationLevels
+) as ElevationLevels[];
 
 /**
  * Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
@@ -406,6 +417,7 @@ class Menu extends React.Component<Props, State> {
       anchorPosition,
       contentStyle,
       style,
+      elevation = DEFAULT_ELEVATION,
       children,
       theme,
       statusBarHeight,
@@ -639,11 +651,12 @@ class Menu extends React.Component<Props, State> {
                     styles.shadowMenuContainer,
                     shadowMenuContainerStyle,
                     theme.isV3 && {
-                      backgroundColor: theme.colors.elevation.level2,
+                      backgroundColor:
+                        theme.colors.elevation[ELEVATION_LEVELS_MAP[elevation]],
                     },
                     contentStyle,
                   ]}
-                  {...(theme.isV3 && { elevation: 2 })}
+                  {...(theme.isV3 && { elevation })}
                   testID={`${testID}-surface`}
                   theme={theme}
                 >
