@@ -13,6 +13,7 @@ import { getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
+import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
@@ -80,6 +81,11 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * @optional
+   * If true Activity Indicator will appear instead of icon
+   */
+  loading?: boolean;
 };
 
 /**
@@ -121,6 +127,7 @@ const IconButton = forwardRef<View, Props>(
       style,
       theme: themeOverrides,
       testID = 'icon-button',
+      loading = false,
       ...rest
     }: Props,
     ref
@@ -192,7 +199,11 @@ const IconButton = forwardRef<View, Props>(
           testID={testID}
           {...rest}
         >
-          <IconComponent color={iconColor} source={icon} size={size} />
+          {loading ? (
+            <ActivityIndicator size={size} color={iconColor} />
+          ) : (
+            <IconComponent color={iconColor} source={icon} size={size} />
+          )}
         </TouchableRipple>
       </Surface>
     );
