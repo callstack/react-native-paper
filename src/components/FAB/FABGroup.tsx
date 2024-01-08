@@ -382,6 +382,10 @@ const FABGroup = ({
                   },
                 ]}
                 pointerEvents={open ? 'box-none' : 'none'}
+                accessibilityRole="button"
+                importantForAccessibility="yes"
+                accessible={true}
+                accessibilityLabel={accessibilityLabel}
               >
                 {it.label && (
                   <View>
@@ -392,8 +396,8 @@ const FABGroup = ({
                         close();
                       }}
                       accessibilityHint={it.accessibilityHint}
-                      accessibilityLabel={accessibilityLabel}
-                      accessibilityRole="button"
+                      importantForAccessibility="no-hide-descendants"
+                      accessibilityElementsHidden={true}
                       style={[
                         styles.containerStyle,
                         {
@@ -410,6 +414,8 @@ const FABGroup = ({
                     >
                       <Text
                         variant="titleMedium"
+                        importantForAccessibility="no-hide-descendants"
+                        accessibilityElementsHidden={true}
                         style={[labelTextStyle, it.labelStyle]}
                         maxFontSizeMultiplier={it.labelMaxFontSizeMultiplier}
                       >
@@ -431,13 +437,13 @@ const FABGroup = ({
                     isV3 && { transform: [{ translateY: translations[i] }] },
                     it.style,
                   ]}
+                  accessibilityElementsHidden={true}
                   theme={theme}
                   onPress={(e) => {
                     it.onPress(e);
                     close();
                   }}
-                  accessibilityLabel={accessibilityLabel}
-                  accessibilityRole="button"
+                  importantForAccessibility="no-hide-descendants"
                   testID={it.testID}
                   visible={open}
                   rippleColor={it.rippleColor}
