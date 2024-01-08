@@ -43,6 +43,7 @@ exports[`renders list item with custom description 1`] = `
       ],
     ]
   }
+  testID="list-item"
 >
   <View
     style={
@@ -67,6 +68,7 @@ exports[`renders list item with custom description 1`] = `
           undefined,
         ]
       }
+      testID="list-item-content"
     >
       <Text
         numberOfLines={1}
@@ -368,6 +370,7 @@ exports[`renders list item with custom title and description styles 1`] = `
       ],
     ]
   }
+  testID="list-item"
 >
   <View
     style={
@@ -392,6 +395,7 @@ exports[`renders list item with custom title and description styles 1`] = `
           undefined,
         ]
       }
+      testID="list-item-content"
     >
       <Text
         numberOfLines={1}
@@ -508,6 +512,7 @@ exports[`renders list item with left and right items 1`] = `
       ],
     ]
   }
+  testID="list-item"
 >
   <View
     style={
@@ -535,6 +540,7 @@ exports[`renders list item with left and right items 1`] = `
           undefined,
         ]
       }
+      testID="list-item-content"
     >
       <Text
         numberOfLines={1}
@@ -700,6 +706,7 @@ exports[`renders list item with left item 1`] = `
       ],
     ]
   }
+  testID="list-item"
 >
   <View
     style={
@@ -778,6 +785,7 @@ exports[`renders list item with left item 1`] = `
           undefined,
         ]
       }
+      testID="list-item-content"
     >
       <Text
         numberOfLines={1}
@@ -858,6 +866,7 @@ exports[`renders list item with right item 1`] = `
       ],
     ]
   }
+  testID="list-item"
 >
   <View
     style={
@@ -882,6 +891,7 @@ exports[`renders list item with right item 1`] = `
           undefined,
         ]
       }
+      testID="list-item-content"
     >
       <Text
         numberOfLines={1}
@@ -965,6 +975,7 @@ exports[`renders list item with title and description 1`] = `
       ],
     ]
   }
+  testID="list-item"
 >
   <View
     style={
@@ -989,6 +1000,7 @@ exports[`renders list item with title and description 1`] = `
           undefined,
         ]
       }
+      testID="list-item-content"
     >
       <Text
         numberOfLines={1}
@@ -1101,6 +1113,7 @@ exports[`renders with a description with typeof number 1`] = `
       ],
     ]
   }
+  testID="list-item"
 >
   <View
     style={
@@ -1125,6 +1138,7 @@ exports[`renders with a description with typeof number 1`] = `
           undefined,
         ]
       }
+      testID="list-item-content"
     >
       <Text
         numberOfLines={1}

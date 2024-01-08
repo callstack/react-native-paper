@@ -108,6 +108,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Specifies the largest possible scale a description font can reach.
    */
   descriptionMaxFontSizeMultiplier?: number;
+  /**
+   * TestID used for testing purposes
+   */
+  testID?: string;
 };
 
 /**
@@ -149,6 +153,7 @@ const ListItem = (
     descriptionStyle,
     descriptionMaxFontSizeMultiplier,
     titleMaxFontSizeMultiplier,
+    testID,
     ...rest
   }: Props,
   ref: React.ForwardedRef<View>
@@ -231,6 +236,7 @@ const ListItem = (
       style={[theme.isV3 ? styles.containerV3 : styles.container, style]}
       onPress={onPress}
       theme={theme}
+      testID={testID}
     >
       <View style={theme.isV3 ? styles.rowV3 : styles.row}>
         {left
@@ -245,6 +251,7 @@ const ListItem = (
             styles.content,
             contentStyle,
           ]}
+          testID={`${testID}-content`}
         >
           {renderTitle()}
 
