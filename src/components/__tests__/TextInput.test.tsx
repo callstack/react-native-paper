@@ -447,7 +447,7 @@ it('TODO: UPDATE THIS TEST', () => {
   expect(getByTestId('large-font-flat')).toHaveStyle({ lineHeight: undefined });
 
   expect(getByTestId('custom-line-height')).toHaveStyle({
-    lineHeight: undefined
+    lineHeight: undefined,
   });
   expect(getByTestId('custom-line-height-flat')).toHaveStyle({
     lineHeight: undefined,
