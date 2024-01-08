@@ -35,6 +35,10 @@ export type Props = {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
    * Accessibility label for the touchable. This is read by the screen reader when the user taps the touchable.
    */
   accessibilityLabel?: string;
@@ -122,6 +126,7 @@ const CheckboxItem = ({
   status,
   label,
   onPress,
+  onLongPress,
   labelStyle,
   theme: themeOverrides,
   testID,
@@ -167,6 +172,7 @@ const CheckboxItem = ({
         disabled,
       }}
       onPress={onPress}
+      onLongPress={onLongPress}
       testID={testID}
       disabled={disabled}
       rippleColor={rippleColor}
