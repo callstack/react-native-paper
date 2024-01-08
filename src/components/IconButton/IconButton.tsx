@@ -82,8 +82,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   theme?: ThemeProp;
   /**
-   * @optional
-   * If true Activity Indicator will appear instead of icon
+   * Whether to show a loading indicator.
    */
   loading?: boolean;
 };
