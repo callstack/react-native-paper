@@ -110,7 +110,7 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 const WINDOW_LAYOUT = Dimensions.get('window');
 
 const DEFAULT_ELEVATION: MD3Elevation = 2;
-const ELEVATION_LEVELS_MAP = Object.values(
+export const ELEVATION_LEVELS_MAP = Object.values(
   ElevationLevels
 ) as ElevationLevels[];
 

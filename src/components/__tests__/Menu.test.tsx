@@ -3,8 +3,10 @@ import { Animated, StyleSheet, View } from 'react-native';
 
 import { render, waitFor, screen } from '@testing-library/react-native';
 
+import { getTheme } from '../../core/theming';
+import { MD3Elevation } from '../../types';
 import Button from '../Button/Button';
-import Menu from '../Menu/Menu';
+import Menu, { ELEVATION_LEVELS_MAP } from '../Menu/Menu';
 import Portal from '../Portal/Portal';
 
 const styles = StyleSheet.create({
@@ -65,6 +67,30 @@ it('renders menu with content styles', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+([0, 1, 2, 3, 4, 5] as MD3Elevation[]).forEach((elevation) =>
+  it(`renders menu with background color based on elevation value = ${elevation}`, () => {
+    const theme = getTheme(false, true);
+
+    const { getByTestId } = render(
+      <Portal.Host>
+        <Menu
+          visible
+          onDismiss={jest.fn()}
+          anchor={<Button mode="outlined">Open menu</Button>}
+          elevation={elevation}
+        >
+          <Menu.Item onPress={jest.fn()} title="Undo" />
+          <Menu.Item onPress={jest.fn()} title="Redo" />
+        </Menu>
+      </Portal.Host>
+    );
+
+    expect(getByTestId('menu-surface')).toHaveStyle({
+      backgroundColor: theme.colors.elevation[ELEVATION_LEVELS_MAP[elevation]],
+    });
+  })
+);
 
 it('uses the default anchorPosition of top', async () => {
   function makeMenu(visible: boolean) {
