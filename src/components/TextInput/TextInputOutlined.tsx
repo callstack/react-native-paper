@@ -97,7 +97,9 @@ const TextInputOutlined = ({
     ...viewStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
   const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
-  const lineHeight = lineHeightStyle || fontSize * 1.2;
+  const lineHeight =
+  lineHeightStyle ||
+  (Platform.OS === 'web' ? fontSize * 1.2 : lineHeightStyle);
 
   const {
     inputTextColor,

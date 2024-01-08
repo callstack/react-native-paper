@@ -23,9 +23,11 @@ export type State = {
   outlinedText: string;
   largeText: string;
   flatTextPassword: string;
+  flatLongText: string;
   outlinedLargeText: string;
   outlinedCustomLabel: string;
   outlinedTextPassword: string;
+  outlinedLongText: string;
   nameNoPadding: string;
   customStyleText: string;
   nameRequired: string;
