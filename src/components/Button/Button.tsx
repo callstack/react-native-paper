@@ -219,7 +219,9 @@ const Button = (
       Animated.timing(elevation, {
         toValue: activeElevation,
         duration: 200 * scale,
-        useNativeDriver: Platform.constants.reactNativeVersion.minor <= 72,
+        useNativeDriver:
+          Platform.OS === 'web' ||
+          Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };
@@ -231,7 +233,9 @@ const Button = (
       Animated.timing(elevation, {
         toValue: initialElevation,
         duration: 150 * scale,
-        useNativeDriver: Platform.constants.reactNativeVersion.minor <= 72,
+        useNativeDriver:
+          Platform.OS === 'web' ||
+          Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };
