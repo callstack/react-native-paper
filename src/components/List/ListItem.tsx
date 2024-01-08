@@ -67,6 +67,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   style?: StyleProp<ViewStyle>;
   /**
+   * Style that is passed to the container wrapping title and descripton.
+   */
+  contentStyle?: StyleProp<ViewStyle>;
+  /**
    * Style that is passed to Title element.
    */
   titleStyle?: StyleProp<TextStyle>;
@@ -104,6 +108,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Specifies the largest possible scale a description font can reach.
    */
   descriptionMaxFontSizeMultiplier?: number;
+  /**
+   * TestID used for testing purposes
+   */
+  testID?: string;
 };
 
 /**
@@ -136,6 +144,7 @@ const ListItem = (
     onPress,
     theme: themeOverrides,
     style,
+    contentStyle,
     titleStyle,
     titleNumberOfLines = 1,
     descriptionNumberOfLines = 2,
@@ -144,6 +153,7 @@ const ListItem = (
     descriptionStyle,
     descriptionMaxFontSizeMultiplier,
     titleMaxFontSizeMultiplier,
+    testID,
     ...rest
   }: Props,
   ref: React.ForwardedRef<View>
@@ -226,6 +236,7 @@ const ListItem = (
       style={[theme.isV3 ? styles.containerV3 : styles.container, style]}
       onPress={onPress}
       theme={theme}
+      testID={testID}
     >
       <View style={theme.isV3 ? styles.rowV3 : styles.row}>
         {left
@@ -235,7 +246,12 @@ const ListItem = (
             })
           : null}
         <View
-          style={[theme.isV3 ? styles.itemV3 : styles.item, styles.content]}
+          style={[
+            theme.isV3 ? styles.itemV3 : styles.item,
+            styles.content,
+            contentStyle,
+          ]}
+          testID={`${testID}-content`}
         >
           {renderTitle()}
 

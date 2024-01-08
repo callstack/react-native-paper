@@ -260,6 +260,7 @@ exports[`renders list section with custom title style 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
@@ -335,8 +336,10 @@ exports[`renders list section with custom title style 1`] = `
               "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
@@ -414,6 +417,7 @@ exports[`renders list section with custom title style 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
@@ -489,8 +493,10 @@ exports[`renders list section with custom title style 1`] = `
               "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
@@ -787,6 +793,7 @@ exports[`renders list section with subheader 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
@@ -862,8 +869,10 @@ exports[`renders list section with subheader 1`] = `
               "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
@@ -941,6 +950,7 @@ exports[`renders list section with subheader 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
@@ -1016,8 +1026,10 @@ exports[`renders list section with subheader 1`] = `
               "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
@@ -1274,6 +1286,7 @@ exports[`renders list section without subheader 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
@@ -1349,8 +1362,10 @@ exports[`renders list section without subheader 1`] = `
               "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
@@ -1428,6 +1443,7 @@ exports[`renders list section without subheader 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
@@ -1503,8 +1519,10 @@ exports[`renders list section without subheader 1`] = `
               "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}

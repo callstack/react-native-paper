@@ -17,11 +17,20 @@ const styles = StyleSheet.create({
   description: {
     color: red500,
   },
+  content: {
+    paddingLeft: 0,
+  },
 });
+
+const testID = 'list-item';
 
 it('renders list item with title and description', () => {
   const tree = render(
-    <ListItem title="First Item" description="Description for first item" />
+    <ListItem
+      title="First Item"
+      testID={testID}
+      description="Description for first item"
+    />
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -31,6 +40,7 @@ it('renders list item with left item', () => {
   const tree = render(
     <ListItem
       title="First Item"
+      testID={testID}
       left={(props) => <ListIcon {...props} icon="folder" />}
     />
   ).toJSON();
@@ -40,7 +50,11 @@ it('renders list item with left item', () => {
 
 it('renders list item with right item', () => {
   const tree = render(
-    <ListItem title="First Item" right={() => <Text>GG</Text>} />
+    <ListItem
+      title="First Item"
+      testID={testID}
+      right={() => <Text>GG</Text>}
+    />
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -51,6 +65,7 @@ it('renders list item with left and right items', () => {
     <ListItem
       title="First Item"
       description="Item description"
+      testID={testID}
       left={() => <Text>GG</Text>}
       right={(props) => <ListIcon {...props} icon="folder" />}
     />
@@ -64,6 +79,7 @@ it('renders list item with custom title and description styles', () => {
     <ListItem
       title="First Item"
       description="Item description"
+      testID={testID}
       titleStyle={styles.title}
       descriptionStyle={styles.description}
     />
@@ -93,6 +109,7 @@ it('renders list item with custom description', () => {
           </View>
         </View>
       )}
+      testID={testID}
     />
   ).toJSON();
 
@@ -106,6 +123,7 @@ it('renders with a description with typeof number', () => {
       description={123}
       titleStyle={styles.title}
       descriptionStyle={styles.description}
+      testID={testID}
     />
   ).toJSON();
 
@@ -120,10 +138,24 @@ it('calling onPress on ListItem right component', () => {
     <ListItem
       title="First Item"
       description="Item description"
+      testID={testID}
       right={() => <IconButton icon="pencil" onPress={onPress} />}
     />
   );
 
   fireEvent(getByTestId('icon-button'), 'onPress');
   expect(onPress).toHaveBeenCalledTimes(1);
+});
+
+it('renders list item with custom content style', () => {
+  const { getByTestId } = render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      contentStyle={styles.content}
+      testID={testID}
+    />
+  );
+
+  expect(getByTestId('list-item-content')).toHaveStyle(styles.content);
 });
