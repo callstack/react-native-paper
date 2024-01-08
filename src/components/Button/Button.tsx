@@ -169,7 +169,7 @@ const Button = (
     children,
     accessibilityLabel,
     accessibilityHint,
-    accessibilityRole,
+    accessibilityRole = 'button',
     onPress,
     onPressIn,
     onPressOut,
@@ -327,7 +327,7 @@ const Button = (
         delayLongPress={delayLongPress}
         accessibilityLabel={accessibilityLabel}
         accessibilityHint={accessibilityHint}
-        accessibilityRole={accessibilityRole || 'button'}
+        accessibilityRole={accessibilityRole}
         accessibilityState={{ disabled }}
         accessible={accessible}
         disabled={disabled}
