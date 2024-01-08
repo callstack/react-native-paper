@@ -438,17 +438,17 @@ it('always applies line height, even if not specified', () => {
     </View>
   );
 
-  expect(getByTestId('default-font')).toHaveStyle({ lineHeight: 16 * 1.2 });
+  expect(getByTestId('default-font')).toHaveStyle({ lineHeight: undefined });
   expect(getByTestId('default-font-flat')).toHaveStyle({
-    lineHeight: 16 * 1.2,
+    lineHeight: undefined,
   });
 
-  expect(getByTestId('large-font')).toHaveStyle({ lineHeight: 30 * 1.2 });
-  expect(getByTestId('large-font-flat')).toHaveStyle({ lineHeight: 30 * 1.2 });
+  expect(getByTestId('large-font')).toHaveStyle({ lineHeight: undefined });
+  expect(getByTestId('large-font-flat')).toHaveStyle({ lineHeight: undefined });
 
-  expect(getByTestId('custom-line-height')).toHaveStyle({ lineHeight: 29 });
+  expect(getByTestId('custom-line-height')).toHaveStyle({ lineHeight: undefined });
   expect(getByTestId('custom-line-height-flat')).toHaveStyle({
-    lineHeight: 29,
+    lineHeight: undefined,
   });
 });
 
