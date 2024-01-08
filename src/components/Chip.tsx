@@ -152,7 +152,9 @@ const Chip = ({
     Animated.timing(elevation, {
       toValue: 4,
       duration: 200 * scale,
-      useNativeDriver: Platform.constants.reactNativeVersion.minor <= 72,
+      useNativeDriver:
+        Platform.OS === 'web' ||
+        Platform.constants.reactNativeVersion.minor <= 72,
     }).start();
   };
 
@@ -161,7 +163,9 @@ const Chip = ({
     Animated.timing(elevation, {
       toValue: 0,
       duration: 150 * scale,
-      useNativeDriver: Platform.constants.reactNativeVersion.minor <= 72,
+      useNativeDriver:
+        Platform.OS === 'web' ||
+        Platform.constants.reactNativeVersion.minor <= 72,
     }).start();
   };
 

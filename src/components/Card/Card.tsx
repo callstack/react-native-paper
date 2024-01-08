@@ -166,7 +166,9 @@ const Card = ({
       Animated.timing(elevation, {
         toValue: isPressTypeIn ? 8 : cardElevation,
         duration: animationDuration,
-        useNativeDriver: Platform.constants.reactNativeVersion.minor <= 72,
+        useNativeDriver:
+          Platform.OS === 'web' ||
+          Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };
