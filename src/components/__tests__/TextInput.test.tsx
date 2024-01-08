@@ -382,7 +382,7 @@ it("correctly applies theme background to label when input's background is trans
   });
 });
 
-it('always applies line height, even if not specified', () => {
+it('TODO: UPDATE THIS TEST', () => {
   const { getByTestId } = render(
     <View>
       <TextInput
