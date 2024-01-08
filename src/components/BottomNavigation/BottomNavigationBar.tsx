@@ -201,6 +201,7 @@ export type Props<Route extends BaseRoute> = {
    */
   labelMaxFontSizeMultiplier?: number;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  activeIndicatorStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
@@ -369,6 +370,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   inactiveColor,
   keyboardHidesNavigationBar = Platform.OS === 'android',
   style,
+  activeIndicatorStyle,
   labeled = true,
   animationEasing,
   onTabPress,
@@ -790,6 +792,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                             ],
                             backgroundColor: theme.colors.secondaryContainer,
                           },
+                          activeIndicatorStyle,
                         ]}
                       />
                     )}
