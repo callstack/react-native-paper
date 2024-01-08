@@ -422,7 +422,7 @@ it('always applies line height, even if not specified', () => {
         testID="custom-line-height"
         style={{
           fontSize: 40,
-          lineHeight: 29,
+          lineHeight: undefined,
         }}
       />
       <TextInput
@@ -432,7 +432,7 @@ it('always applies line height, even if not specified', () => {
         testID="custom-line-height-flat"
         style={{
           fontSize: 40,
-          lineHeight: 29,
+          lineHeight: undefined,
         }}
       />
     </View>
