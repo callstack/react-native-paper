@@ -1,5 +1,272 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`call onPress when affix adornment pressed 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "rgba(231, 224, 236, 1)",
+        "borderTopLeftRadius": 4,
+        "borderTopRightRadius": 4,
+      },
+      {},
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "rgba(28, 27, 31, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "transform": [
+          {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
+    }
+    testID="text-input-underline"
+  />
+  <View
+    style={
+      [
+        {
+          "paddingBottom": 0,
+          "paddingTop": 0,
+        },
+        {
+          "minHeight": 56,
+        },
+      ]
+    }
+  >
+    <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "opacity": 1,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "transform": [
+            {
+              "translateX": 0,
+            },
+          ],
+          "width": 750,
+          "zIndex": 3,
+        }
+      }
+    >
+      <Text
+        collapsable={false}
+        maxFontSizeMultiplier={1.5}
+        numberOfLines={1}
+        onLayout={[Function]}
+        onTextLayout={[Function]}
+        style={
+          {
+            "color": "rgba(103, 80, 164, 1)",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "left": 0,
+            "letterSpacing": 0.15,
+            "lineHeight": 19.2,
+            "opacity": 0,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "position": "absolute",
+            "textAlign": "left",
+            "top": 30,
+            "transform": [
+              {
+                "translateX": 0,
+              },
+              {
+                "translateY": 0,
+              },
+              {
+                "scale": 1,
+              },
+            ],
+            "writingDirection": "ltr",
+          }
+        }
+        testID="text-input-flat-label-active"
+      >
+        Flat input
+      </Text>
+      <Text
+        collapsable={false}
+        maxFontSizeMultiplier={1.5}
+        numberOfLines={1}
+        style={
+          {
+            "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "left": 0,
+            "letterSpacing": 0.15,
+            "lineHeight": 19.2,
+            "opacity": 0,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "position": "absolute",
+            "textAlign": "left",
+            "top": 30,
+            "transform": [
+              {
+                "translateX": 0,
+              },
+              {
+                "translateY": 0,
+              },
+              {
+                "scale": 1,
+              },
+            ],
+            "writingDirection": "ltr",
+          }
+        }
+        testID="text-input-flat-label-inactive"
+      >
+        Flat input
+      </Text>
+    </View>
+    <TextInput
+      cursorColor="rgba(103, 80, 164, 1)"
+      editable={true}
+      maxFontSizeMultiplier={1.5}
+      multiline={false}
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder=" "
+      placeholderTextColor="rgba(73, 69, 79, 1)"
+      selectionColor="rgba(103, 80, 164, 0.54)"
+      style={
+        [
+          {
+            "margin": 0,
+          },
+          {
+            "height": 56,
+          },
+          {
+            "paddingBottom": 4,
+            "paddingTop": 24,
+          },
+          {
+            "color": "rgba(73, 69, 79, 1)",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "letterSpacing": 0.15,
+            "lineHeight": 19.2,
+            "minWidth": 65,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "textAlign": "left",
+            "textAlignVertical": "center",
+          },
+          false,
+          {
+            "marginLeft": 0,
+            "paddingLeft": 40,
+          },
+          undefined,
+        ]
+      }
+      testID="text-input-flat"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+  </View>
+  <View
+    accessibilityLabel="+39"
+    accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+  >
+    <View
+      collapsable={false}
+      onLayout={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "left": 16,
+          "opacity": 0,
+          "position": "absolute",
+          "top": null,
+        }
+      }
+      testID="left-affix-adornment"
+    >
+      <Text
+        maxFontSizeMultiplier={1.5}
+        style={
+          [
+            {
+              "color": "rgba(73, 69, 79, 1)",
+            },
+            {
+              "fontFamily": "System",
+              "fontSize": 16,
+              "fontWeight": undefined,
+              "letterSpacing": 0.15,
+              "lineHeight": 19.2,
+            },
+            undefined,
+          ]
+        }
+        testID="left-affix-adornment-text"
+      >
+        +39
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`correctly applies a component as the text label 1`] = `
 <View
   style={

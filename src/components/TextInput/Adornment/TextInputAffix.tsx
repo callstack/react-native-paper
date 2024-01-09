@@ -1,7 +1,9 @@
 import React from 'react';
 import {
   Animated,
+  GestureResponderEvent,
   LayoutChangeEvent,
+  Pressable,
   StyleProp,
   StyleSheet,
   Text,
@@ -21,6 +23,14 @@ export type Props = {
    */
   text: string;
   onLayout?: (event: LayoutChangeEvent) => void;
+  /**
+   * Function to execute on press.
+   */
+  onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Accessibility label for the affix. This is read by the screen reader when the user taps the affix.
+   */
+  accessibilityLabel?: string;
   /**
    * Style that is passed to the Text element.
    */
@@ -115,6 +125,8 @@ const TextInputAffix = ({
   textStyle: labelStyle,
   theme: themeOverrides,
   onLayout: onTextLayout,
+  onPress,
+  accessibilityLabel = text,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { AFFIX_OFFSET } = getConstants(theme.isV3);
@@ -141,7 +153,7 @@ const TextInputAffix = ({
 
   const textColor = getTextColor({ theme, disabled });
 
-  return (
+  const affix = (
     <Animated.View
       style={[
         styles.container,
@@ -167,7 +179,21 @@ const TextInputAffix = ({
       </Text>
     </Animated.View>
   );
+
+  if (onPress) {
+    return (
+      <Pressable
+        onPress={onPress}
+        accessibilityRole="button"
+        accessibilityLabel={accessibilityLabel}
+      >
+        {affix}
+      </Pressable>
+    );
+  }
+  return affix;
 };
+
 TextInputAffix.displayName = 'TextInput.Affix';
 
 const styles = StyleSheet.create({
