@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Animated,
+  GestureResponderEvent,
   LayoutChangeEvent,
   Pressable,
   StyleProp,
@@ -22,7 +23,14 @@ export type Props = {
    */
   text: string;
   onLayout?: (event: LayoutChangeEvent) => void;
-  onPress?: () => void;
+  /**
+   * Function to execute on press.
+   */
+  onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Accessibility label for the affix. This is read by the screen reader when the user taps the affix.
+   */
+  accessibilityLabel?: string;
   /**
    * Style that is passed to the Text element.
    */
@@ -118,6 +126,7 @@ const TextInputAffix = ({
   theme: themeOverrides,
   onLayout: onTextLayout,
   onPress,
+  accessibilityLabel = text,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { AFFIX_OFFSET } = getConstants(theme.isV3);
@@ -144,37 +153,47 @@ const TextInputAffix = ({
 
   const textColor = getTextColor({ theme, disabled });
 
-  const Wrapper = typeof onPress === 'function' ? Pressable : React.Fragment;
-
-  return (
-    <Wrapper accessibilityRole="button" onPress={onPress}>
-      <Animated.View
-        style={[
-          styles.container,
-          style,
-          {
-            opacity:
-              visible?.interpolate({
-                inputRange: [0, 1],
-                outputRange: [1, 0],
-              }) || 1,
-          },
-        ]}
-        onLayout={onLayout}
-        testID={testID}
+  const affix = (
+    <Animated.View
+      style={[
+        styles.container,
+        style,
+        {
+          opacity:
+            visible?.interpolate({
+              inputRange: [0, 1],
+              outputRange: [1, 0],
+            }) || 1,
+        },
+      ]}
+      onLayout={onLayout}
+      testID={testID}
+    >
+      <Text
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
+        style={[{ color: textColor }, textStyle, labelStyle]}
+        onLayout={onTextLayout}
+        testID={`${testID}-text`}
       >
-        <Text
-          maxFontSizeMultiplier={maxFontSizeMultiplier}
-          style={[{ color: textColor }, textStyle, labelStyle]}
-          onLayout={onTextLayout}
-          testID={`${testID}-text`}
-        >
-          {text}
-        </Text>
-      </Animated.View>
-    </Wrapper>
+        {text}
+      </Text>
+    </Animated.View>
   );
+
+  if (onPress) {
+    return (
+      <Pressable
+        onPress={onPress}
+        accessibilityRole="button"
+        accessibilityLabel={accessibilityLabel}
+      >
+        {affix}
+      </Pressable>
+    );
+  }
+  return affix;
 };
+
 TextInputAffix.displayName = 'TextInput.Affix';
 
 const styles = StyleSheet.create({
