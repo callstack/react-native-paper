@@ -34,6 +34,7 @@ exports[`call onPress when affix adornment pressed 1`] = `
     testID="text-input-underline"
   />
   <View
+    onLayout={[Function]}
     style={
       [
         {
@@ -82,6 +83,7 @@ exports[`call onPress when affix adornment pressed 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "maxWidth": 73,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
@@ -119,6 +121,7 @@ exports[`call onPress when affix adornment pressed 1`] = `
             "left": 0,
             "letterSpacing": 0.15,
             "lineHeight": 19.2,
+            "maxWidth": 73,
             "opacity": 0,
             "paddingLeft": 16,
             "paddingRight": 16,
