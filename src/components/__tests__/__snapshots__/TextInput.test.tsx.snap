@@ -17,7 +17,7 @@ exports[`call onPress when affix adornment pressed 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(28, 27, 31, 1)",
+        "backgroundColor": "rgba(73, 69, 79, 1)",
         "bottom": 0,
         "height": 1,
         "left": 0,
@@ -63,7 +63,6 @@ exports[`call onPress when affix adornment pressed 1`] = `
               "translateX": 0,
             },
           ],
-          "width": 750,
           "zIndex": 3,
         }
       }
@@ -157,7 +156,7 @@ exports[`call onPress when affix adornment pressed 1`] = `
       onFocus={[Function]}
       placeholder=" "
       placeholderTextColor="rgba(73, 69, 79, 1)"
-      selectionColor="rgba(103, 80, 164, 0.54)"
+      selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
           {
@@ -171,7 +170,7 @@ exports[`call onPress when affix adornment pressed 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(73, 69, 79, 1)",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
@@ -183,7 +182,9 @@ exports[`call onPress when affix adornment pressed 1`] = `
             "textAlign": "left",
             "textAlignVertical": "center",
           },
-          false,
+          {
+            "outline": "none",
+          },
           {
             "marginLeft": 0,
             "paddingLeft": 40,
@@ -222,6 +223,8 @@ exports[`call onPress when affix adornment pressed 1`] = `
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
