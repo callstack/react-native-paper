@@ -557,7 +557,7 @@ describe('getFlatInputColor - underline color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      underlineColorCustom: getTheme().colors.onSurface,
+      underlineColorCustom: getTheme().colors.onSurfaceVariant,
     });
   });
 
@@ -644,7 +644,7 @@ describe('getFlatInputColor - input text color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      inputTextColor: getTheme().colors.onSurfaceVariant,
+      inputTextColor: getTheme().colors.onSurface,
     });
   });
 

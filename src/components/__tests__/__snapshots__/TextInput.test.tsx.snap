@@ -287,7 +287,7 @@ exports[`correctly applies a component as the text label 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(28, 27, 31, 1)",
+        "backgroundColor": "rgba(73, 69, 79, 1)",
         "bottom": 0,
         "height": 1,
         "left": 0,
@@ -457,7 +457,7 @@ exports[`correctly applies a component as the text label 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(73, 69, 79, 1)",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
@@ -501,7 +501,7 @@ exports[`correctly applies cursorColor prop 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(28, 27, 31, 1)",
+        "backgroundColor": "rgba(73, 69, 79, 1)",
         "bottom": 0,
         "height": 1,
         "left": 0,
@@ -655,7 +655,7 @@ exports[`correctly applies cursorColor prop 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(73, 69, 79, 1)",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
@@ -699,7 +699,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(28, 27, 31, 1)",
+        "backgroundColor": "rgba(73, 69, 79, 1)",
         "bottom": 0,
         "height": 1,
         "left": 0,
@@ -853,7 +853,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(73, 69, 79, 1)",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
@@ -1127,7 +1127,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(28, 27, 31, 1)",
+        "backgroundColor": "rgba(73, 69, 79, 1)",
         "bottom": 0,
         "height": 1,
         "left": 0,
@@ -1281,7 +1281,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(73, 69, 79, 1)",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
@@ -1327,7 +1327,7 @@ exports[`correctly applies textAlign center 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(28, 27, 31, 1)",
+        "backgroundColor": "rgba(73, 69, 79, 1)",
         "bottom": 0,
         "height": 1,
         "left": 0,
@@ -1481,7 +1481,7 @@ exports[`correctly applies textAlign center 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(73, 69, 79, 1)",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
@@ -1525,7 +1525,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(28, 27, 31, 1)",
+        "backgroundColor": "rgba(73, 69, 79, 1)",
         "bottom": 0,
         "height": 1,
         "left": 0,
@@ -1679,7 +1679,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "paddingTop": 24,
           },
           {
-            "color": "rgba(73, 69, 79, 1)",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
@@ -1925,7 +1925,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(28, 27, 31, 1)",
+        "backgroundColor": "rgba(73, 69, 79, 1)",
         "bottom": 0,
         "height": 1,
         "left": 0,
@@ -2079,7 +2079,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "paddingTop": 24,
           },
           {
-            "color": "rgba(73, 69, 79, 1)",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
