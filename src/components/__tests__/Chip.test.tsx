@@ -79,6 +79,18 @@ it('renders active chip if only onLongPress handler is passed', () => {
   });
 });
 
+it('renders chip with zero border radius', () => {
+  const { getByTestId } = render(
+    <Chip testID="active-chip" theme={{ roundness: 0 }}>
+      Active chip
+    </Chip>
+  );
+
+  expect(getByTestId('active-chip')).toHaveStyle({
+    borderRadius: 0,
+  });
+});
+
 describe('getChipColors - text color', () => {
   it('should return correct disabled color, for theme version 3', () => {
     expect(

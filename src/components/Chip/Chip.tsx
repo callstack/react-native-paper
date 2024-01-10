@@ -197,7 +197,7 @@ const Chip = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { isV3 } = theme;
+  const { isV3, roundness } = theme;
 
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(isV3 && elevated ? 1 : 0)
@@ -237,7 +237,7 @@ const Chip = ({
   });
 
   const opacity = isV3 ? 0.38 : 0.26;
-  const defaultBorderRadius = isV3 ? 8 : 16;
+  const defaultBorderRadius = roundness * (isV3 ? 2 : 4);
   const iconSize = isV3 ? 18 : 16;
 
   const {
