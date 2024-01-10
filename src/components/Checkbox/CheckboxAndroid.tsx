@@ -50,6 +50,8 @@ const ANIMATION_DURATION = 100;
  * Checkboxes allow the selection of multiple options from a set.
  * This component follows platform guidelines for Android, but can be used
  * on any platform.
+ *
+ * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
 const CheckboxAndroid = ({
   status,

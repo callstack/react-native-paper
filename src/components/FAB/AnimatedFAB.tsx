@@ -3,6 +3,7 @@ import type {
   AccessibilityState,
   ColorValue,
   NativeSyntheticEvent,
+  PressableAndroidRippleConfig,
   TextLayoutEventData,
 } from 'react-native';
 import {
@@ -45,6 +46,11 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * Make the label text uppercased.
    */
   uppercase?: boolean;
+  /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
   /**
    * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
    * Uses `label` by default if specified.
@@ -197,6 +203,7 @@ const SCALE = 0.9;
 const AnimatedFAB = ({
   icon,
   label,
+  background,
   accessibilityLabel = label,
   accessibilityState,
   color: customColor,
@@ -427,6 +434,7 @@ const AnimatedFAB = ({
           >
             <TouchableRipple
               borderless
+              background={background}
               onPress={onPress}
               onLongPress={onLongPress}
               delayLongPress={delayLongPress}

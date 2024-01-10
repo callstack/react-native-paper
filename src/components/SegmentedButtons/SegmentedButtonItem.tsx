@@ -3,6 +3,7 @@ import {
   Animated,
   ColorValue,
   GestureResponderEvent,
+  PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -51,6 +52,11 @@ export type Props = {
    * Whether the button is disabled.
    */
   disabled?: boolean;
+  /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
   /**
    * Accessibility label for the `SegmentedButtonItem`. This is read by the screen reader when the user taps the button.
    */
@@ -108,6 +114,7 @@ const SegmentedButtonItem = ({
   checkedColor,
   uncheckedColor,
   rippleColor: customRippleColor,
+  background,
   icon,
   testID,
   label,
@@ -208,6 +215,7 @@ const SegmentedButtonItem = ({
         rippleColor={rippleColor}
         testID={testID}
         style={rippleStyle}
+        background={background}
         theme={theme}
       >
         <View style={[styles.content, { paddingVertical }]}>

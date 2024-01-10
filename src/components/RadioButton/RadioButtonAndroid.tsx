@@ -49,6 +49,8 @@ const BORDER_WIDTH = 2;
  * Radio buttons allow the selection a single option from a set.
  * This component follows platform guidelines for Android, but can be used
  * on any platform.
+ *
+ * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
 const RadioButtonAndroid = ({
   disabled,

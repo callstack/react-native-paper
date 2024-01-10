@@ -3,6 +3,7 @@ import {
   AccessibilityState,
   ColorValue,
   GestureResponderEvent,
+  PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -49,6 +50,11 @@ export type Props = {
    * Sets min height with densed layout.
    */
   dense?: boolean;
+  /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
   /**
    * Function to execute on press.
    */
@@ -113,6 +119,7 @@ const MenuItem = ({
   dense,
   title,
   disabled,
+  background,
   onPress,
   style,
   contentStyle,
@@ -163,6 +170,7 @@ const MenuItem = ({
       onPress={onPress}
       disabled={disabled}
       testID={testID}
+      background={background}
       accessibilityLabel={accessibilityLabel}
       accessibilityRole="menuitem"
       accessibilityState={newAccessibilityState}
