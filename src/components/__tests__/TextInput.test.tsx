@@ -382,7 +382,8 @@ it("correctly applies theme background to label when input's background is trans
   });
 });
 
-it('TODO: UPDATE THIS TEST', () => {
+it('always applies line height for web, even if not specified', () => {
+  Platform.OS = 'web';
   const { getByTestId } = render(
     <View>
       <TextInput
@@ -422,7 +423,7 @@ it('TODO: UPDATE THIS TEST', () => {
         testID="custom-line-height"
         style={{
           fontSize: 40,
-          lineHeight: undefined,
+          lineHeight: 29,
         }}
       />
       <TextInput
@@ -432,25 +433,25 @@ it('TODO: UPDATE THIS TEST', () => {
         testID="custom-line-height-flat"
         style={{
           fontSize: 40,
-          lineHeight: undefined,
+          lineHeight: 29,
         }}
       />
     </View>
   );
 
-  expect(getByTestId('default-font')).toHaveStyle({ lineHeight: undefined });
+  expect(getByTestId('default-font')).toHaveStyle({ lineHeight: 16 * 1.2 });
   expect(getByTestId('default-font-flat')).toHaveStyle({
-    lineHeight: undefined,
+    lineHeight: 16 * 1.2,
   });
 
-  expect(getByTestId('large-font')).toHaveStyle({ lineHeight: undefined });
-  expect(getByTestId('large-font-flat')).toHaveStyle({ lineHeight: undefined });
+  expect(getByTestId('large-font')).toHaveStyle({ lineHeight: 30 * 1.2 });
+  expect(getByTestId('large-font-flat')).toHaveStyle({ lineHeight: 30 * 1.2 });
 
   expect(getByTestId('custom-line-height')).toHaveStyle({
-    lineHeight: undefined,
+    lineHeight: 29,
   });
   expect(getByTestId('custom-line-height-flat')).toHaveStyle({
-    lineHeight: undefined,
+    lineHeight: 29,
   });
 });
 
