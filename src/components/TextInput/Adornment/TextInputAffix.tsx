@@ -186,6 +186,7 @@ const TextInputAffix = ({
         onPress={onPress}
         accessibilityRole="button"
         accessibilityLabel={accessibilityLabel}
+        style={styles.container}
       >
         {affix}
       </Pressable>

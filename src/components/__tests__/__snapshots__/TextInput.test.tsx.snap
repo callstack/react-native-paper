@@ -231,6 +231,13 @@ exports[`call onPress when affix adornment pressed 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "position": "absolute",
+      }
+    }
   >
     <View
       collapsable={false}
