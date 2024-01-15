@@ -4,12 +4,12 @@ exports[`renders colored progress bar 1`] = `
 <View
   accessibilityRole="progressbar"
   accessibilityState={
-    Object {
+    {
       "busy": true,
     }
   }
   accessibilityValue={
-    Object {
+    {
       "max": 100,
       "min": 0,
       "now": 20,
@@ -17,11 +17,13 @@ exports[`renders colored progress bar 1`] = `
   }
   accessible={true}
   onLayout={[Function]}
+  style={false}
+  testID="progress-bar"
 >
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(231, 224, 236, 1)",
         "height": 4,
         "opacity": 0,
@@ -32,20 +34,21 @@ exports[`renders colored progress bar 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "backgroundColor": "red",
           "flex": 1,
-          "transform": Array [
-            Object {
+          "transform": [
+            {
               "translateX": -50,
             },
-            Object {
+            {
               "scaleX": 0.0001,
             },
           ],
           "width": 100,
         }
       }
+      testID="progress-bar-fill"
     />
   </View>
 </View>
@@ -55,12 +58,12 @@ exports[`renders hidden progress bar 1`] = `
 <View
   accessibilityRole="progressbar"
   accessibilityState={
-    Object {
+    {
       "busy": false,
     }
   }
   accessibilityValue={
-    Object {
+    {
       "max": 100,
       "min": 0,
       "now": 20,
@@ -68,11 +71,13 @@ exports[`renders hidden progress bar 1`] = `
   }
   accessible={true}
   onLayout={[Function]}
+  style={false}
+  testID="progress-bar"
 >
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(231, 224, 236, 1)",
         "height": 4,
         "opacity": 0,
@@ -83,20 +88,21 @@ exports[`renders hidden progress bar 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "backgroundColor": "rgba(103, 80, 164, 1)",
           "flex": 1,
-          "transform": Array [
-            Object {
+          "transform": [
+            {
               "translateX": -50,
             },
-            Object {
+            {
               "scaleX": 0.0001,
             },
           ],
           "width": 100,
         }
       }
+      testID="progress-bar-fill"
     />
   </View>
 </View>
@@ -106,18 +112,20 @@ exports[`renders indeterminate progress bar 1`] = `
 <View
   accessibilityRole="progressbar"
   accessibilityState={
-    Object {
+    {
       "busy": true,
     }
   }
-  accessibilityValue={Object {}}
+  accessibilityValue={{}}
   accessible={true}
   onLayout={[Function]}
+  style={false}
+  testID="progress-bar"
 >
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(231, 224, 236, 1)",
         "height": 4,
         "opacity": 0,
@@ -128,20 +136,21 @@ exports[`renders indeterminate progress bar 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "backgroundColor": "rgba(103, 80, 164, 1)",
           "flex": 1,
-          "transform": Array [
-            Object {
+          "transform": [
+            {
               "translateX": -50,
             },
-            Object {
+            {
               "scaleX": 0.0001,
             },
           ],
           "width": 100,
         }
       }
+      testID="progress-bar-fill"
     />
   </View>
 </View>
@@ -151,12 +160,12 @@ exports[`renders progress bar with specific progress 1`] = `
 <View
   accessibilityRole="progressbar"
   accessibilityState={
-    Object {
+    {
       "busy": true,
     }
   }
   accessibilityValue={
-    Object {
+    {
       "max": 100,
       "min": 0,
       "now": 20,
@@ -164,11 +173,13 @@ exports[`renders progress bar with specific progress 1`] = `
   }
   accessible={true}
   onLayout={[Function]}
+  style={false}
+  testID="progress-bar"
 >
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(231, 224, 236, 1)",
         "height": 4,
         "opacity": 0,
@@ -179,20 +190,21 @@ exports[`renders progress bar with specific progress 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "backgroundColor": "rgba(103, 80, 164, 1)",
           "flex": 1,
-          "transform": Array [
-            Object {
+          "transform": [
+            {
               "translateX": -50,
             },
-            Object {
+            {
               "scaleX": 0.0001,
             },
           ],
           "width": 100,
         }
       }
+      testID="progress-bar-fill"
     />
   </View>
 </View>

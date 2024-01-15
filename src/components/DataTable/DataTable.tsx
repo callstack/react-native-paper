@@ -28,23 +28,47 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
 /**
  * Data tables allow displaying sets of data.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="large" src="screenshots/data-table.png" />
- *     <figcaption>Data table</figcaption>
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { DataTable } from 'react-native-paper';
  *
- * const optionsPerPage = [2, 3, 4];
- *
  * const MyComponent = () => {
  *   const [page, setPage] = React.useState<number>(0);
- *   const [itemsPerPage, setItemsPerPage] = React.useState(optionsPerPage[0]);
+ *   const [numberOfItemsPerPageList] = React.useState([2, 3, 4]);
+ *   const [itemsPerPage, onItemsPerPageChange] = React.useState(
+ *     numberOfItemsPerPageList[0]
+ *   );
+ *
+ *   const [items] = React.useState([
+ *    {
+ *      key: 1,
+ *      name: 'Cupcake',
+ *      calories: 356,
+ *      fat: 16,
+ *    },
+ *    {
+ *      key: 2,
+ *      name: 'Eclair',
+ *      calories: 262,
+ *      fat: 16,
+ *    },
+ *    {
+ *      key: 3,
+ *      name: 'Frozen yogurt',
+ *      calories: 159,
+ *      fat: 6,
+ *    },
+ *    {
+ *      key: 4,
+ *      name: 'Gingerbread',
+ *      calories: 305,
+ *      fat: 3.7,
+ *    },
+ *   ]);
+ *
+ *   const from = page * itemsPerPage;
+ *   const to = Math.min((page + 1) * itemsPerPage, items.length);
  *
  *   React.useEffect(() => {
  *     setPage(0);
@@ -58,32 +82,28 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  *         <DataTable.Title numeric>Fat</DataTable.Title>
  *       </DataTable.Header>
  *
- *       <DataTable.Row>
- *         <DataTable.Cell>Frozen yogurt</DataTable.Cell>
- *         <DataTable.Cell numeric>159</DataTable.Cell>
- *         <DataTable.Cell numeric>6.0</DataTable.Cell>
- *       </DataTable.Row>
- *
- *       <DataTable.Row>
- *         <DataTable.Cell>Ice cream sandwich</DataTable.Cell>
- *         <DataTable.Cell numeric>237</DataTable.Cell>
- *         <DataTable.Cell numeric>8.0</DataTable.Cell>
- *       </DataTable.Row>
+ *       {items.slice(from, to).map((item) => (
+ *         <DataTable.Row key={item.key}>
+ *           <DataTable.Cell>{item.name}</DataTable.Cell>
+ *           <DataTable.Cell numeric>{item.calories}</DataTable.Cell>
+ *           <DataTable.Cell numeric>{item.fat}</DataTable.Cell>
+ *         </DataTable.Row>
+ *       ))}
  *
  *       <DataTable.Pagination
  *         page={page}
- *         numberOfPages={3}
+ *         numberOfPages={Math.ceil(items.length / itemsPerPage)}
  *         onPageChange={(page) => setPage(page)}
- *         label="1-2 of 6"
- *         optionsPerPage={optionsPerPage}
- *         itemsPerPage={itemsPerPage}
- *         setItemsPerPage={setItemsPerPage}
- *         showFastPagination
- *         optionsLabel={'Rows per page'}
+ *         label={`${from + 1}-${to} of ${items.length}`}
+ *         numberOfItemsPerPageList={numberOfItemsPerPageList}
+ *         numberOfItemsPerPage={itemsPerPage}
+ *         onItemsPerPageChange={onItemsPerPageChange}
+ *         showFastPaginationControls
+ *         selectPageDropdownLabel={'Rows per page'}
  *       />
  *     </DataTable>
  *   );
- *}
+ * };
  *
  * export default MyComponent;
  * ```

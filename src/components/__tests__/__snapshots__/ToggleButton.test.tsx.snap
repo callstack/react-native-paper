@@ -4,29 +4,18 @@ exports[`renders disabled toggle button 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
-      "alignSelf": undefined,
+    {
       "backgroundColor": "rgba(29, 25, 43, 0.12)",
       "borderRadius": 4,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
       "height": 42,
-      "left": undefined,
       "margin": 0,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
       "width": 42,
     }
   }
@@ -35,7 +24,7 @@ exports[`renders disabled toggle button 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(29, 25, 43, 0.12)",
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 4,
@@ -44,7 +33,7 @@ exports[`renders disabled toggle button 1`] = `
         "flex": 1,
         "overflow": "hidden",
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -58,23 +47,34 @@ exports[`renders disabled toggle button 1`] = `
       accessibilityComponentType="button"
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": true,
+          "expanded": undefined,
           "selected": true,
         }
       }
       accessibilityTraits={
-        Array [
+        [
           "button",
           "disabled",
         ]
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
       }
       accessible={true}
       centered={true}
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 6,
           "left": 6,
           "right": 6,
@@ -91,16 +91,15 @@ exports[`renders disabled toggle button 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
+        [
           false,
-          false,
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 4,
             },
           ],
@@ -115,30 +114,30 @@ exports[`renders disabled toggle button 1`] = `
         pointerEvents="none"
         selectable={false}
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "rgba(28, 27, 31, 0.38)",
               "fontSize": 24,
             },
-            Array [
-              Object {
+            [
+              {
                 "lineHeight": 24,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "scaleX": 1,
                   },
                 ],
               },
-              Object {
+              {
                 "backgroundColor": "transparent",
               },
             ],
-            Object {
+            {
               "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -153,29 +152,18 @@ exports[`renders toggle button 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
-      "alignSelf": undefined,
+    {
       "backgroundColor": "rgba(29, 25, 43, 0.12)",
       "borderRadius": 4,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
       "height": 42,
-      "left": undefined,
       "margin": 0,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
       "width": 42,
     }
   }
@@ -184,7 +172,7 @@ exports[`renders toggle button 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(29, 25, 43, 0.12)",
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 4,
@@ -193,7 +181,7 @@ exports[`renders toggle button 1`] = `
         "flex": 1,
         "overflow": "hidden",
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -207,18 +195,29 @@ exports[`renders toggle button 1`] = `
       accessibilityComponentType="button"
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
           "selected": true,
         }
       }
       accessibilityTraits="button"
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       centered={true}
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 6,
           "left": 6,
           "right": 6,
@@ -235,16 +234,15 @@ exports[`renders toggle button 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
+        [
           false,
-          false,
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 4,
             },
           ],
@@ -259,30 +257,30 @@ exports[`renders toggle button 1`] = `
         pointerEvents="none"
         selectable={false}
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "rgba(73, 69, 79, 1)",
               "fontSize": 24,
             },
-            Array [
-              Object {
+            [
+              {
                 "lineHeight": 24,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "scaleX": 1,
                   },
                 ],
               },
-              Object {
+              {
                 "backgroundColor": "transparent",
               },
             ],
-            Object {
+            {
               "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -297,29 +295,18 @@ exports[`renders unchecked toggle button 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
-      "alignSelf": undefined,
+    {
       "backgroundColor": "transparent",
       "borderRadius": 4,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
       "height": 42,
-      "left": undefined,
       "margin": 0,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
       "width": 42,
     }
   }
@@ -328,7 +315,7 @@ exports[`renders unchecked toggle button 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "transparent",
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 4,
@@ -337,7 +324,7 @@ exports[`renders unchecked toggle button 1`] = `
         "flex": 1,
         "overflow": "hidden",
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -351,23 +338,34 @@ exports[`renders unchecked toggle button 1`] = `
       accessibilityComponentType="button"
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": true,
+          "expanded": undefined,
           "selected": false,
         }
       }
       accessibilityTraits={
-        Array [
+        [
           "button",
           "disabled",
         ]
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
       }
       accessible={true}
       centered={true}
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 6,
           "left": 6,
           "right": 6,
@@ -384,16 +382,15 @@ exports[`renders unchecked toggle button 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
+        [
           false,
-          false,
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            Object {
+            {
               "borderRadius": 4,
             },
           ],
@@ -408,30 +405,30 @@ exports[`renders unchecked toggle button 1`] = `
         pointerEvents="none"
         selectable={false}
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "rgba(28, 27, 31, 0.38)",
               "fontSize": 24,
             },
-            Array [
-              Object {
+            [
+              {
                 "lineHeight": 24,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "scaleX": 1,
                   },
                 ],
               },
-              Object {
+              {
                 "backgroundColor": "transparent",
               },
             ],
-            Object {
+            {
               "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
-            Object {},
+            {},
           ]
         }
       >

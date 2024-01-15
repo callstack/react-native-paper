@@ -22,6 +22,10 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * Whether to show `Divider` at the end of the section. True by default.
    */
   showDivider?: boolean;
+  /**
+   * Specifies the largest possible scale a title font can reach.
+   */
+  titleMaxFontSizeMultiplier?: number;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -31,12 +35,6 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
 
 /**
  * A component to group content inside a navigation drawer.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/drawer-section.png" />
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js
@@ -71,6 +69,7 @@ const DrawerSection = ({
   theme: themeOverrides,
   style,
   showDivider = true,
+  titleMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -96,6 +95,7 @@ const DrawerSection = ({
                   ...font,
                 },
               ]}
+              maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
             >
               {title}
             </Text>

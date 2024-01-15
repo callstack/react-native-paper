@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {
+  ColorValue,
   GestureResponderEvent,
+  PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -8,15 +10,15 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useInternalTheme } from '../../core/theming';
-import type { InternalTheme, MD3TypescaleKey } from '../../types';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
 import RadioButton from './RadioButton';
 import RadioButtonAndroid from './RadioButtonAndroid';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import RadioButtonIOS from './RadioButtonIOS';
 import { handlePress, isChecked } from './utils';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp, MD3TypescaleKey } from '../../types';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
 
 export type Props = {
   /**
@@ -32,9 +34,18 @@ export type Props = {
    */
   disabled?: boolean;
   /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
+  /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
   /**
    * Accessibility label for the touchable. This is read by the screen reader when the user taps the touchable.
    */
@@ -47,6 +58,10 @@ export type Props = {
    * Custom color for radio.
    */
   color?: string;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * Status of radio button.
    */
@@ -77,9 +92,13 @@ export type Props = {
    */
   labelVariant?: keyof typeof MD3TypescaleKey;
   /**
+   * Specifies the largest possible scale a label font can reach.
+   */
+  labelMaxFontSizeMultiplier?: number;
+  /**
    * @optional
    */
-  theme?: InternalTheme;
+  theme?: ThemeProp;
   /**
    * testID to be used on tests.
    */
@@ -97,13 +116,6 @@ export type Props = {
 
 /**
  * RadioButton.Item allows you to press the whole row (item) instead of only the RadioButton.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/radio-item.ios.png" />
- *     <figcaption>Pressed</figcaption>
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js
@@ -130,19 +142,30 @@ const RadioButtonItem = ({
   style,
   labelStyle,
   onPress,
+  onLongPress,
   disabled,
   color,
   uncheckedColor,
+  rippleColor,
   status,
   theme: themeOverrides,
+  background,
   accessibilityLabel = label,
   testID,
   mode,
   position = 'trailing',
   labelVariant = 'bodyLarge',
+  labelMaxFontSizeMultiplier,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const radioButtonProps = { value, disabled, status, color, uncheckedColor };
+  const radioButtonProps = {
+    value,
+    disabled,
+    status,
+    color,
+    theme,
+    uncheckedColor,
+  };
   const isLeading = position === 'leading';
   let radioButton: any;
 
@@ -184,6 +207,7 @@ const RadioButtonItem = ({
                 event,
               })
             }
+            onLongPress={onLongPress}
             accessibilityLabel={accessibilityLabel}
             accessibilityRole="radio"
             accessibilityState={{
@@ -192,7 +216,9 @@ const RadioButtonItem = ({
             }}
             testID={testID}
             disabled={disabled}
+            background={background}
             theme={theme}
+            rippleColor={rippleColor}
           >
             <View style={[styles.container, style]} pointerEvents="none">
               {isLeading && radioButton}
@@ -204,6 +230,7 @@ const RadioButtonItem = ({
                   computedStyle,
                   labelStyle,
                 ]}
+                maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
               >
                 {label}
               </Text>

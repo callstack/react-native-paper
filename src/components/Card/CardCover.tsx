@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Image, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
+import { getCardCoverStyle } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { grey200 } from '../../styles/themes/v2/colors';
 import type { ThemeProp } from '../../types';
-import { getCardCoverStyle } from './utils';
+import { splitStyles } from '../../utils/splitStyles';
 
 export type Props = React.ComponentPropsWithRef<typeof Image> & {
   /**
@@ -24,12 +25,6 @@ export type Props = React.ComponentPropsWithRef<typeof Image> & {
 
 /**
  * A component to show a cover image inside a Card.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/card-cover.png" />
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js
@@ -55,7 +50,19 @@ const CardCover = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const coverStyle = getCardCoverStyle({ theme, index, total });
+
+  const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const [, borderRadiusStyles] = splitStyles(
+    flattenedStyles,
+    (style) => style.startsWith('border') && style.endsWith('Radius')
+  );
+
+  const coverStyle = getCardCoverStyle({
+    theme,
+    index,
+    total,
+    borderRadiusStyles,
+  });
 
   return (
     <View style={[styles.container, coverStyle, style]}>

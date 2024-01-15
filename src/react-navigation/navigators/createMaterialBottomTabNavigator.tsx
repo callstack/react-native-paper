@@ -18,7 +18,7 @@ import type {
 } from '../types';
 import MaterialBottomTabView from '../views/MaterialBottomTabView';
 
-type Props = DefaultNavigatorOptions<
+export type MaterialBottomTabNavigatorProps = DefaultNavigatorOptions<
   ParamListBase,
   TabNavigationState<ParamListBase>,
   MaterialBottomTabNavigationOptions,
@@ -35,7 +35,7 @@ function MaterialBottomTabNavigator({
   screenListeners,
   screenOptions,
   ...rest
-}: Props) {
+}: MaterialBottomTabNavigatorProps) {
   const { state, descriptors, navigation, NavigationContent } =
     useNavigationBuilder<
       TabNavigationState<ParamListBase>,

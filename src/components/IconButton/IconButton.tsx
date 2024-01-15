@@ -6,16 +6,18 @@ import {
   ViewStyle,
   View,
   Animated,
+  ColorValue,
 } from 'react-native';
 
+import { getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
+import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { getIconButtonColor } from './utils';
 
 const PADDING = 8;
 
@@ -40,6 +42,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Background color of the icon container.
    */
   containerColor?: string;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * @supported Available in v5.x with theme version 3
    * Whether icon button is selected. A selected button receives alternative combination of icon and container colors.
@@ -75,29 +81,14 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * Whether to show a loading indicator.
+   */
+  loading?: boolean;
 };
 
 /**
  * An icon button is a button which displays only an icon without a label.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/icon-button-1.png" />
- *     <figcaption>Default icon button</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/icon-button-2.png" />
- *     <figcaption>Contained icon button</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/icon-button-3.png" />
- *     <figcaption>Contained-tonal icon button</figcaption>
- *   </figure>
- *   <figure>
- *     <img class="small" src="screenshots/icon-button-4.png" />
- *     <figcaption>Outlined icon button</figcaption>
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js
@@ -124,6 +115,7 @@ const IconButton = forwardRef<View, Props>(
       icon,
       iconColor: customIconColor,
       containerColor: customContainerColor,
+      rippleColor: customRippleColor,
       size = 24,
       accessibilityLabel,
       disabled,
@@ -134,6 +126,7 @@ const IconButton = forwardRef<View, Props>(
       style,
       theme: themeOverrides,
       testID = 'icon-button',
+      loading = false,
       ...rest
     }: Props,
     ref
@@ -151,6 +144,7 @@ const IconButton = forwardRef<View, Props>(
         mode,
         customIconColor,
         customContainerColor,
+        customRippleColor,
       });
 
     const buttonSize = isV3 ? size + 2 * PADDING : size * 1.5;
@@ -204,7 +198,11 @@ const IconButton = forwardRef<View, Props>(
           testID={testID}
           {...rest}
         >
-          <IconComponent color={iconColor} source={icon} size={size} />
+          {loading ? (
+            <ActivityIndicator size={size} color={iconColor} />
+          ) : (
+            <IconComponent color={iconColor} source={icon} size={size} />
+          )}
         </TouchableRipple>
       </Surface>
     );

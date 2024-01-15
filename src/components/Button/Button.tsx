@@ -1,7 +1,11 @@
 import * as React from 'react';
 import {
+  AccessibilityRole,
   Animated,
+  ColorValue,
   GestureResponderEvent,
+  Platform,
+  PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -11,15 +15,17 @@ import {
 
 import color from 'color';
 
+import { ButtonMode, getButtonColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
+import { splitStyles } from '../../utils/splitStyles';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { ButtonMode, getButtonColors } from './utils';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
@@ -55,6 +61,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   textColor?: string;
   /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
+  /**
    * Whether to show a loading indicator.
    */
   loading?: boolean;
@@ -75,6 +85,11 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   uppercase?: boolean;
   /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
+  /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityLabel?: string;
@@ -82,6 +97,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Accessibility hint for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityHint?: string;
+  /**
+   * Accessibility role for the button. The "button" role is set by default.
+   */
+  accessibilityRole?: AccessibilityRole;
   /**
    * Function to execute on press.
    */
@@ -107,6 +126,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Use this prop to apply custom height and width and to set the icon on the right with `flexDirection: 'row-reverse'`.
    */
   contentStyle?: StyleProp<ViewStyle>;
+  /**
+   * Specifies the largest possible scale a text font can reach.
+   */
+  maxFontSizeMultiplier?: number;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * Style for the button text.
@@ -125,29 +148,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
 /**
  * A button is component that the user can press to trigger an action.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img src="screenshots/button-1.png" />
- *     <figcaption>Text button</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/button-2.png" />
- *     <figcaption>Outlined button</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/button-3.png" />
- *     <figcaption>Contained button</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/button-4.png" />
- *     <figcaption>Elevated button</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/button-5.png" />
- *     <figcaption>Contained-tonal button</figcaption>
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -162,32 +162,39 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
  * export default MyComponent;
  * ```
  */
-const Button = ({
-  disabled,
-  compact,
-  mode = 'text',
-  dark,
-  loading,
-  icon,
-  buttonColor: customButtonColor,
-  textColor: customTextColor,
-  children,
-  accessibilityLabel,
-  accessibilityHint,
-  onPress,
-  onPressIn,
-  onPressOut,
-  onLongPress,
-  delayLongPress,
-  style,
-  theme: themeOverrides,
-  uppercase: uppercaseProp,
-  contentStyle,
-  labelStyle,
-  testID = 'button',
-  accessible,
-  ...rest
-}: Props) => {
+const Button = (
+  {
+    disabled,
+    compact,
+    mode = 'text',
+    dark,
+    loading,
+    icon,
+    buttonColor: customButtonColor,
+    textColor: customTextColor,
+    rippleColor: customRippleColor,
+    children,
+    accessibilityLabel,
+    accessibilityHint,
+    accessibilityRole = 'button',
+    onPress,
+    onPressIn,
+    onPressOut,
+    onLongPress,
+    delayLongPress,
+    style,
+    theme: themeOverrides,
+    uppercase: uppercaseProp,
+    contentStyle,
+    labelStyle,
+    testID = 'button',
+    accessible,
+    background,
+    maxFontSizeMultiplier,
+    ...rest
+  }: Props,
+  ref: React.ForwardedRef<View>
+) => {
   const theme = useInternalTheme(themeOverrides);
   const isMode = React.useCallback(
     (modeToCompare: ButtonMode) => {
@@ -225,7 +232,9 @@ const Button = ({
       Animated.timing(elevation, {
         toValue: activeElevation,
         duration: 200 * scale,
-        useNativeDriver: true,
+        useNativeDriver:
+          Platform.OS === 'web' ||
+          Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };
@@ -237,10 +246,18 @@ const Button = ({
       Animated.timing(elevation, {
         toValue: initialElevation,
         duration: 150 * scale,
-        useNativeDriver: true,
+        useNativeDriver:
+          Platform.OS === 'web' ||
+          Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };
+
+  const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
+  const [, borderRadiusStyles] = splitStyles(
+    flattenedStyles,
+    (style) => style.startsWith('border') && style.endsWith('Radius')
+  );
 
   const borderRadius = (isV3 ? 5 : 1) * roundness;
   const iconSize = isV3 ? 18 : 16;
@@ -255,19 +272,19 @@ const Button = ({
       dark,
     });
 
-  const rippleColor = color(textColor).alpha(0.12).rgb().string();
+  const rippleColor =
+    customRippleColor || color(textColor).alpha(0.12).rgb().string();
+
+  const touchableStyle = {
+    ...borderRadiusStyles,
+    borderRadius: borderRadiusStyles.borderRadius ?? borderRadius,
+  };
 
   const buttonStyle = {
     backgroundColor,
     borderColor,
     borderWidth,
-    borderRadius,
-  };
-  const touchableStyle = {
-    borderRadius: style
-      ? ((StyleSheet.flatten(style) || {}) as ViewStyle).borderRadius ??
-        borderRadius
-      : borderRadius,
+    ...touchableStyle,
   };
 
   const { color: customLabelColor, fontSize: customLabelSize } =
@@ -300,6 +317,7 @@ const Button = ({
   return (
     <Surface
       {...rest}
+      ref={ref}
       testID={`${testID}-container`}
       style={
         [
@@ -314,6 +332,7 @@ const Button = ({
     >
       <TouchableRipple
         borderless
+        background={background}
         onPress={onPress}
         onLongPress={onLongPress}
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
@@ -321,7 +340,7 @@ const Button = ({
         delayLongPress={delayLongPress}
         accessibilityLabel={accessibilityLabel}
         accessibilityHint={accessibilityHint}
-        accessibilityRole="button"
+        accessibilityRole={accessibilityRole}
         accessibilityState={{ disabled }}
         accessible={accessible}
         disabled={disabled}
@@ -374,6 +393,7 @@ const Button = ({
               textStyle,
               labelStyle,
             ]}
+            maxFontSizeMultiplier={maxFontSizeMultiplier}
           >
             {children}
           </Text>
@@ -464,4 +484,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Button;
+export default forwardRef(Button);

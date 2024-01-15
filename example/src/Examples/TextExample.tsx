@@ -7,7 +7,7 @@ import {
   Headline,
   MD3LightTheme,
   Paragraph,
-  Provider,
+  PaperProvider,
   Subheading,
   customText,
   Title,
@@ -106,11 +106,11 @@ const TextExample = () => {
               Body Small
             </Text>
 
-            <Provider theme={theme}>
+            <PaperProvider theme={theme}>
               <Text style={styles.text} variant="customVariant">
                 Custom Variant
               </Text>
-            </Provider>
+            </PaperProvider>
           </>
         )}
       </View>

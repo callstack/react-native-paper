@@ -1,7 +1,9 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   GestureResponderEvent,
+  PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -12,16 +14,16 @@ import {
 import color from 'color';
 import type { ThemeProp } from 'src/types';
 
-import { useInternalTheme } from '../../core/theming';
-import type { IconSource } from '../Icon';
-import Icon from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
 import {
   getSegmentedButtonBorderRadius,
   getSegmentedButtonColors,
   getSegmentedButtonDensityPadding,
 } from './utils';
+import { useInternalTheme } from '../../core/theming';
+import type { IconSource } from '../Icon';
+import Icon from '../Icon';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
 
 export type Props = {
   /**
@@ -32,22 +34,29 @@ export type Props = {
    * Icon to display for the `SegmentedButtonItem`.
    */
   icon?: IconSource;
-
   /**
    * @supported Available in v5.x with theme version 3
    * Custom color for unchecked Text and Icon.
    */
   uncheckedColor?: string;
-
   /**
    * @supported Available in v5.x with theme version 3
    * Custom color for checked Text and Icon.
    */
   checkedColor?: string;
   /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
+  /**
    * Whether the button is disabled.
    */
   disabled?: boolean;
+  /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
   /**
    * Accessibility label for the `SegmentedButtonItem`. This is read by the screen reader when the user taps the button.
    */
@@ -76,7 +85,15 @@ export type Props = {
    * Density is applied to the height, to allow usage in denser UIs.
    */
   density?: 'regular' | 'small' | 'medium' | 'high';
+  /**
+   * Specifies the largest possible scale a label font can reach.
+   */
+  labelMaxFontSizeMultiplier?: number;
   style?: StyleProp<ViewStyle>;
+  /**
+   * Style for the button label.
+   */
+  labelStyle?: StyleProp<TextStyle>;
   /**
    * testID to be used on tests.
    */
@@ -92,9 +109,12 @@ const SegmentedButtonItem = ({
   accessibilityLabel,
   disabled,
   style,
+  labelStyle,
   showSelectedCheck,
   checkedColor,
   uncheckedColor,
+  rippleColor: customRippleColor,
+  background,
   icon,
   testID,
   label,
@@ -102,6 +122,7 @@ const SegmentedButtonItem = ({
   segment,
   density = 'regular',
   theme: themeOverrides,
+  labelMaxFontSizeMultiplier,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
@@ -139,7 +160,8 @@ const SegmentedButtonItem = ({
     theme,
     segment,
   });
-  const rippleColor = color(textColor).alpha(0.12).rgb().string();
+  const rippleColor =
+    customRippleColor || color(textColor).alpha(0.12).rgb().string();
 
   const showIcon = !icon ? false : label && checked ? !showSelectedCheck : true;
   const showCheckedIcon = checked && showSelectedCheck;
@@ -193,6 +215,7 @@ const SegmentedButtonItem = ({
         rippleColor={rippleColor}
         testID={testID}
         style={rippleStyle}
+        background={background}
         theme={theme}
       >
         <View style={[styles.content, { paddingVertical }]}>
@@ -211,9 +234,11 @@ const SegmentedButtonItem = ({
           ) : null}
           <Text
             variant="labelLarge"
-            style={[styles.label, labelTextStyle]}
+            style={[styles.label, labelTextStyle, labelStyle]}
             selectable={false}
             numberOfLines={1}
+            maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
+            testID={`${testID}-label`}
           >
             {label}
           </Text>

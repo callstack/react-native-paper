@@ -3,22 +3,22 @@
 exports[`renders list section with custom title style 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "marginVertical": 8,
       },
       undefined,
     ]
   }
   theme={
-    Object {
-      "animation": Object {
+    {
+      "animation": {
         "scale": 1,
       },
-      "colors": Object {
+      "colors": {
         "backdrop": "rgba(50, 47, 55, 0.4)",
         "background": "rgba(255, 251, 254, 1)",
-        "elevation": Object {
+        "elevation": {
           "level0": "transparent",
           "level1": "rgb(247, 243, 249)",
           "level2": "rgb(243, 237, 246)",
@@ -58,111 +58,111 @@ exports[`renders list section with custom title style 1`] = `
         "tertiaryContainer": "rgba(255, 216, 228, 1)",
       },
       "dark": false,
-      "fonts": Object {
-        "bodyLarge": Object {
+      "fonts": {
+        "bodyLarge": {
           "fontFamily": "System",
           "fontSize": 16,
           "fontWeight": "400",
           "letterSpacing": 0.15,
           "lineHeight": 24,
         },
-        "bodyMedium": Object {
+        "bodyMedium": {
           "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "400",
           "letterSpacing": 0.25,
           "lineHeight": 20,
         },
-        "bodySmall": Object {
+        "bodySmall": {
           "fontFamily": "System",
           "fontSize": 12,
           "fontWeight": "400",
           "letterSpacing": 0.4,
           "lineHeight": 16,
         },
-        "default": Object {
+        "default": {
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
         },
-        "displayLarge": Object {
+        "displayLarge": {
           "fontFamily": "System",
           "fontSize": 57,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 64,
         },
-        "displayMedium": Object {
+        "displayMedium": {
           "fontFamily": "System",
           "fontSize": 45,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 52,
         },
-        "displaySmall": Object {
+        "displaySmall": {
           "fontFamily": "System",
           "fontSize": 36,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 44,
         },
-        "headlineLarge": Object {
+        "headlineLarge": {
           "fontFamily": "System",
           "fontSize": 32,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 40,
         },
-        "headlineMedium": Object {
+        "headlineMedium": {
           "fontFamily": "System",
           "fontSize": 28,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 36,
         },
-        "headlineSmall": Object {
+        "headlineSmall": {
           "fontFamily": "System",
           "fontSize": 24,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 32,
         },
-        "labelLarge": Object {
+        "labelLarge": {
           "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "500",
           "letterSpacing": 0.1,
           "lineHeight": 20,
         },
-        "labelMedium": Object {
+        "labelMedium": {
           "fontFamily": "System",
           "fontSize": 12,
           "fontWeight": "500",
           "letterSpacing": 0.5,
           "lineHeight": 16,
         },
-        "labelSmall": Object {
+        "labelSmall": {
           "fontFamily": "System",
           "fontSize": 11,
           "fontWeight": "500",
           "letterSpacing": 0.5,
           "lineHeight": 16,
         },
-        "titleLarge": Object {
+        "titleLarge": {
           "fontFamily": "System",
           "fontSize": 22,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 28,
         },
-        "titleMedium": Object {
+        "titleMedium": {
           "fontFamily": "System",
           "fontSize": 16,
           "fontWeight": "500",
           "letterSpacing": 0.15,
           "lineHeight": 24,
         },
-        "titleSmall": Object {
+        "titleSmall": {
           "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "500",
@@ -179,37 +179,39 @@ exports[`renders list section with custom title style 1`] = `
   <Text
     numberOfLines={1}
     style={
-      Array [
-        Object {
-          "fontFamily": "System",
-          "fontSize": 14,
-          "fontWeight": "400",
-          "letterSpacing": 0.25,
-          "lineHeight": 20,
-        },
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
-            "paddingHorizontal": 16,
-            "paddingVertical": 13,
-          },
-          Object {
-            "color": "rgba(73, 69, 79, 1)",
+        [
+          {
             "fontFamily": "System",
             "fontSize": 14,
             "fontWeight": "400",
             "letterSpacing": 0.25,
             "lineHeight": 20,
           },
-          Object {
-            "color": "#f44336",
-          },
+          [
+            {
+              "paddingHorizontal": 16,
+              "paddingVertical": 13,
+            },
+            {
+              "color": "rgba(73, 69, 79, 1)",
+              "fontFamily": "System",
+              "fontSize": 14,
+              "fontWeight": "400",
+              "letterSpacing": 0.25,
+              "lineHeight": 20,
+            },
+            {
+              "color": "#f44336",
+            },
+          ],
         ],
       ]
     }
@@ -218,8 +220,20 @@ exports[`renders list section with custom title style 1`] = `
   </Text>
   <View
     accessibilityState={
-      Object {
+      {
+        "busy": undefined,
+        "checked": undefined,
         "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
       }
     }
     accessible={true}
@@ -235,11 +249,10 @@ exports[`renders list section with custom title style 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
+      [
         false,
-        false,
-        Array [
-          Object {
+        [
+          {
             "paddingRight": 24,
             "paddingVertical": 8,
           },
@@ -247,24 +260,26 @@ exports[`renders list section with custom title style 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "marginVertical": 6,
+          "width": "100%",
         }
       }
     >
       <View
         pointerEvents="box-none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "justifyContent": "center",
             },
-            Object {
+            {
               "alignSelf": "center",
               "marginLeft": 16,
               "marginRight": 0,
@@ -280,30 +295,30 @@ exports[`renders list section with custom title style 1`] = `
           pointerEvents="none"
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
-              Array [
-                Object {
+              [
+                {
                   "lineHeight": 24,
-                  "transform": Array [
-                    Object {
+                  "transform": [
+                    {
                       "scaleX": 1,
                     },
                   ],
                 },
-                Object {
+                {
                   "backgroundColor": "transparent",
                 },
               ],
-              Object {
+              {
                 "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              Object {},
+              {},
             ]
           }
         >
@@ -312,39 +327,42 @@ exports[`renders list section with custom title style 1`] = `
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "paddingLeft": 16,
             },
-            Object {
-              "flex": 1,
+            {
+              "flexGrow": 1,
+              "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "textAlign": "left",
               },
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "letterSpacing": 0,
               },
-              Object {
+              {
                 "writingDirection": "ltr",
               },
-              Array [
-                Object {
+              [
+                {
                   "fontSize": 16,
                 },
-                Object {
+                {
                   "color": "rgba(28, 27, 31, 1)",
                 },
                 undefined,
@@ -359,8 +377,20 @@ exports[`renders list section with custom title style 1`] = `
   </View>
   <View
     accessibilityState={
-      Object {
+      {
+        "busy": undefined,
+        "checked": undefined,
         "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
       }
     }
     accessible={true}
@@ -376,11 +406,10 @@ exports[`renders list section with custom title style 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
+      [
         false,
-        false,
-        Array [
-          Object {
+        [
+          {
             "paddingRight": 24,
             "paddingVertical": 8,
           },
@@ -388,24 +417,26 @@ exports[`renders list section with custom title style 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "marginVertical": 6,
+          "width": "100%",
         }
       }
     >
       <View
         pointerEvents="box-none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "justifyContent": "center",
             },
-            Object {
+            {
               "alignSelf": "center",
               "marginLeft": 16,
               "marginRight": 0,
@@ -421,30 +452,30 @@ exports[`renders list section with custom title style 1`] = `
           pointerEvents="none"
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
-              Array [
-                Object {
+              [
+                {
                   "lineHeight": 24,
-                  "transform": Array [
-                    Object {
+                  "transform": [
+                    {
                       "scaleX": 1,
                     },
                   ],
                 },
-                Object {
+                {
                   "backgroundColor": "transparent",
                 },
               ],
-              Object {
+              {
                 "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              Object {},
+              {},
             ]
           }
         >
@@ -453,39 +484,42 @@ exports[`renders list section with custom title style 1`] = `
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "paddingLeft": 16,
             },
-            Object {
-              "flex": 1,
+            {
+              "flexGrow": 1,
+              "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "textAlign": "left",
               },
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "letterSpacing": 0,
               },
-              Object {
+              {
                 "writingDirection": "ltr",
               },
-              Array [
-                Object {
+              [
+                {
                   "fontSize": 16,
                 },
-                Object {
+                {
                   "color": "rgba(28, 27, 31, 1)",
                 },
                 undefined,
@@ -504,22 +538,22 @@ exports[`renders list section with custom title style 1`] = `
 exports[`renders list section with subheader 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "marginVertical": 8,
       },
       undefined,
     ]
   }
   theme={
-    Object {
-      "animation": Object {
+    {
+      "animation": {
         "scale": 1,
       },
-      "colors": Object {
+      "colors": {
         "backdrop": "rgba(50, 47, 55, 0.4)",
         "background": "rgba(255, 251, 254, 1)",
-        "elevation": Object {
+        "elevation": {
           "level0": "transparent",
           "level1": "rgb(247, 243, 249)",
           "level2": "rgb(243, 237, 246)",
@@ -559,111 +593,111 @@ exports[`renders list section with subheader 1`] = `
         "tertiaryContainer": "rgba(255, 216, 228, 1)",
       },
       "dark": false,
-      "fonts": Object {
-        "bodyLarge": Object {
+      "fonts": {
+        "bodyLarge": {
           "fontFamily": "System",
           "fontSize": 16,
           "fontWeight": "400",
           "letterSpacing": 0.15,
           "lineHeight": 24,
         },
-        "bodyMedium": Object {
+        "bodyMedium": {
           "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "400",
           "letterSpacing": 0.25,
           "lineHeight": 20,
         },
-        "bodySmall": Object {
+        "bodySmall": {
           "fontFamily": "System",
           "fontSize": 12,
           "fontWeight": "400",
           "letterSpacing": 0.4,
           "lineHeight": 16,
         },
-        "default": Object {
+        "default": {
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
         },
-        "displayLarge": Object {
+        "displayLarge": {
           "fontFamily": "System",
           "fontSize": 57,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 64,
         },
-        "displayMedium": Object {
+        "displayMedium": {
           "fontFamily": "System",
           "fontSize": 45,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 52,
         },
-        "displaySmall": Object {
+        "displaySmall": {
           "fontFamily": "System",
           "fontSize": 36,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 44,
         },
-        "headlineLarge": Object {
+        "headlineLarge": {
           "fontFamily": "System",
           "fontSize": 32,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 40,
         },
-        "headlineMedium": Object {
+        "headlineMedium": {
           "fontFamily": "System",
           "fontSize": 28,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 36,
         },
-        "headlineSmall": Object {
+        "headlineSmall": {
           "fontFamily": "System",
           "fontSize": 24,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 32,
         },
-        "labelLarge": Object {
+        "labelLarge": {
           "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "500",
           "letterSpacing": 0.1,
           "lineHeight": 20,
         },
-        "labelMedium": Object {
+        "labelMedium": {
           "fontFamily": "System",
           "fontSize": 12,
           "fontWeight": "500",
           "letterSpacing": 0.5,
           "lineHeight": 16,
         },
-        "labelSmall": Object {
+        "labelSmall": {
           "fontFamily": "System",
           "fontSize": 11,
           "fontWeight": "500",
           "letterSpacing": 0.5,
           "lineHeight": 16,
         },
-        "titleLarge": Object {
+        "titleLarge": {
           "fontFamily": "System",
           "fontSize": 22,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 28,
         },
-        "titleMedium": Object {
+        "titleMedium": {
           "fontFamily": "System",
           "fontSize": 16,
           "fontWeight": "500",
           "letterSpacing": 0.15,
           "lineHeight": 24,
         },
-        "titleSmall": Object {
+        "titleSmall": {
           "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "500",
@@ -680,35 +714,37 @@ exports[`renders list section with subheader 1`] = `
   <Text
     numberOfLines={1}
     style={
-      Array [
-        Object {
-          "fontFamily": "System",
-          "fontSize": 14,
-          "fontWeight": "400",
-          "letterSpacing": 0.25,
-          "lineHeight": 20,
-        },
-        Object {
+      [
+        {
           "textAlign": "left",
         },
-        Object {
+        {
           "color": "rgba(28, 27, 31, 1)",
           "writingDirection": "ltr",
         },
-        Array [
-          Object {
-            "paddingHorizontal": 16,
-            "paddingVertical": 13,
-          },
-          Object {
-            "color": "rgba(73, 69, 79, 1)",
+        [
+          {
             "fontFamily": "System",
             "fontSize": 14,
             "fontWeight": "400",
             "letterSpacing": 0.25,
             "lineHeight": 20,
           },
-          undefined,
+          [
+            {
+              "paddingHorizontal": 16,
+              "paddingVertical": 13,
+            },
+            {
+              "color": "rgba(73, 69, 79, 1)",
+              "fontFamily": "System",
+              "fontSize": 14,
+              "fontWeight": "400",
+              "letterSpacing": 0.25,
+              "lineHeight": 20,
+            },
+            undefined,
+          ],
         ],
       ]
     }
@@ -717,8 +753,20 @@ exports[`renders list section with subheader 1`] = `
   </Text>
   <View
     accessibilityState={
-      Object {
+      {
+        "busy": undefined,
+        "checked": undefined,
         "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
       }
     }
     accessible={true}
@@ -734,11 +782,10 @@ exports[`renders list section with subheader 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
+      [
         false,
-        false,
-        Array [
-          Object {
+        [
+          {
             "paddingRight": 24,
             "paddingVertical": 8,
           },
@@ -746,24 +793,26 @@ exports[`renders list section with subheader 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "marginVertical": 6,
+          "width": "100%",
         }
       }
     >
       <View
         pointerEvents="box-none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "justifyContent": "center",
             },
-            Object {
+            {
               "alignSelf": "center",
               "marginLeft": 16,
               "marginRight": 0,
@@ -779,30 +828,30 @@ exports[`renders list section with subheader 1`] = `
           pointerEvents="none"
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
-              Array [
-                Object {
+              [
+                {
                   "lineHeight": 24,
-                  "transform": Array [
-                    Object {
+                  "transform": [
+                    {
                       "scaleX": 1,
                     },
                   ],
                 },
-                Object {
+                {
                   "backgroundColor": "transparent",
                 },
               ],
-              Object {
+              {
                 "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              Object {},
+              {},
             ]
           }
         >
@@ -811,39 +860,42 @@ exports[`renders list section with subheader 1`] = `
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "paddingLeft": 16,
             },
-            Object {
-              "flex": 1,
+            {
+              "flexGrow": 1,
+              "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "textAlign": "left",
               },
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "letterSpacing": 0,
               },
-              Object {
+              {
                 "writingDirection": "ltr",
               },
-              Array [
-                Object {
+              [
+                {
                   "fontSize": 16,
                 },
-                Object {
+                {
                   "color": "rgba(28, 27, 31, 1)",
                 },
                 undefined,
@@ -858,8 +910,20 @@ exports[`renders list section with subheader 1`] = `
   </View>
   <View
     accessibilityState={
-      Object {
+      {
+        "busy": undefined,
+        "checked": undefined,
         "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
       }
     }
     accessible={true}
@@ -875,11 +939,10 @@ exports[`renders list section with subheader 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
+      [
         false,
-        false,
-        Array [
-          Object {
+        [
+          {
             "paddingRight": 24,
             "paddingVertical": 8,
           },
@@ -887,24 +950,26 @@ exports[`renders list section with subheader 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "marginVertical": 6,
+          "width": "100%",
         }
       }
     >
       <View
         pointerEvents="box-none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "justifyContent": "center",
             },
-            Object {
+            {
               "alignSelf": "center",
               "marginLeft": 16,
               "marginRight": 0,
@@ -920,30 +985,30 @@ exports[`renders list section with subheader 1`] = `
           pointerEvents="none"
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
-              Array [
-                Object {
+              [
+                {
                   "lineHeight": 24,
-                  "transform": Array [
-                    Object {
+                  "transform": [
+                    {
                       "scaleX": 1,
                     },
                   ],
                 },
-                Object {
+                {
                   "backgroundColor": "transparent",
                 },
               ],
-              Object {
+              {
                 "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              Object {},
+              {},
             ]
           }
         >
@@ -952,39 +1017,42 @@ exports[`renders list section with subheader 1`] = `
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "paddingLeft": 16,
             },
-            Object {
-              "flex": 1,
+            {
+              "flexGrow": 1,
+              "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "textAlign": "left",
               },
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "letterSpacing": 0,
               },
-              Object {
+              {
                 "writingDirection": "ltr",
               },
-              Array [
-                Object {
+              [
+                {
                   "fontSize": 16,
                 },
-                Object {
+                {
                   "color": "rgba(28, 27, 31, 1)",
                 },
                 undefined,
@@ -1003,22 +1071,22 @@ exports[`renders list section with subheader 1`] = `
 exports[`renders list section without subheader 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "marginVertical": 8,
       },
       undefined,
     ]
   }
   theme={
-    Object {
-      "animation": Object {
+    {
+      "animation": {
         "scale": 1,
       },
-      "colors": Object {
+      "colors": {
         "backdrop": "rgba(50, 47, 55, 0.4)",
         "background": "rgba(255, 251, 254, 1)",
-        "elevation": Object {
+        "elevation": {
           "level0": "transparent",
           "level1": "rgb(247, 243, 249)",
           "level2": "rgb(243, 237, 246)",
@@ -1058,111 +1126,111 @@ exports[`renders list section without subheader 1`] = `
         "tertiaryContainer": "rgba(255, 216, 228, 1)",
       },
       "dark": false,
-      "fonts": Object {
-        "bodyLarge": Object {
+      "fonts": {
+        "bodyLarge": {
           "fontFamily": "System",
           "fontSize": 16,
           "fontWeight": "400",
           "letterSpacing": 0.15,
           "lineHeight": 24,
         },
-        "bodyMedium": Object {
+        "bodyMedium": {
           "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "400",
           "letterSpacing": 0.25,
           "lineHeight": 20,
         },
-        "bodySmall": Object {
+        "bodySmall": {
           "fontFamily": "System",
           "fontSize": 12,
           "fontWeight": "400",
           "letterSpacing": 0.4,
           "lineHeight": 16,
         },
-        "default": Object {
+        "default": {
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
         },
-        "displayLarge": Object {
+        "displayLarge": {
           "fontFamily": "System",
           "fontSize": 57,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 64,
         },
-        "displayMedium": Object {
+        "displayMedium": {
           "fontFamily": "System",
           "fontSize": 45,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 52,
         },
-        "displaySmall": Object {
+        "displaySmall": {
           "fontFamily": "System",
           "fontSize": 36,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 44,
         },
-        "headlineLarge": Object {
+        "headlineLarge": {
           "fontFamily": "System",
           "fontSize": 32,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 40,
         },
-        "headlineMedium": Object {
+        "headlineMedium": {
           "fontFamily": "System",
           "fontSize": 28,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 36,
         },
-        "headlineSmall": Object {
+        "headlineSmall": {
           "fontFamily": "System",
           "fontSize": 24,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 32,
         },
-        "labelLarge": Object {
+        "labelLarge": {
           "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "500",
           "letterSpacing": 0.1,
           "lineHeight": 20,
         },
-        "labelMedium": Object {
+        "labelMedium": {
           "fontFamily": "System",
           "fontSize": 12,
           "fontWeight": "500",
           "letterSpacing": 0.5,
           "lineHeight": 16,
         },
-        "labelSmall": Object {
+        "labelSmall": {
           "fontFamily": "System",
           "fontSize": 11,
           "fontWeight": "500",
           "letterSpacing": 0.5,
           "lineHeight": 16,
         },
-        "titleLarge": Object {
+        "titleLarge": {
           "fontFamily": "System",
           "fontSize": 22,
           "fontWeight": "400",
           "letterSpacing": 0,
           "lineHeight": 28,
         },
-        "titleMedium": Object {
+        "titleMedium": {
           "fontFamily": "System",
           "fontSize": 16,
           "fontWeight": "500",
           "letterSpacing": 0.15,
           "lineHeight": 24,
         },
-        "titleSmall": Object {
+        "titleSmall": {
           "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "500",
@@ -1178,8 +1246,20 @@ exports[`renders list section without subheader 1`] = `
 >
   <View
     accessibilityState={
-      Object {
+      {
+        "busy": undefined,
+        "checked": undefined,
         "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
       }
     }
     accessible={true}
@@ -1195,11 +1275,10 @@ exports[`renders list section without subheader 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
+      [
         false,
-        false,
-        Array [
-          Object {
+        [
+          {
             "paddingRight": 24,
             "paddingVertical": 8,
           },
@@ -1207,24 +1286,26 @@ exports[`renders list section without subheader 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "marginVertical": 6,
+          "width": "100%",
         }
       }
     >
       <View
         pointerEvents="box-none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "justifyContent": "center",
             },
-            Object {
+            {
               "alignSelf": "center",
               "marginLeft": 16,
               "marginRight": 0,
@@ -1240,30 +1321,30 @@ exports[`renders list section without subheader 1`] = `
           pointerEvents="none"
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
-              Array [
-                Object {
+              [
+                {
                   "lineHeight": 24,
-                  "transform": Array [
-                    Object {
+                  "transform": [
+                    {
                       "scaleX": 1,
                     },
                   ],
                 },
-                Object {
+                {
                   "backgroundColor": "transparent",
                 },
               ],
-              Object {
+              {
                 "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              Object {},
+              {},
             ]
           }
         >
@@ -1272,39 +1353,42 @@ exports[`renders list section without subheader 1`] = `
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "paddingLeft": 16,
             },
-            Object {
-              "flex": 1,
+            {
+              "flexGrow": 1,
+              "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "textAlign": "left",
               },
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "letterSpacing": 0,
               },
-              Object {
+              {
                 "writingDirection": "ltr",
               },
-              Array [
-                Object {
+              [
+                {
                   "fontSize": 16,
                 },
-                Object {
+                {
                   "color": "rgba(28, 27, 31, 1)",
                 },
                 undefined,
@@ -1319,8 +1403,20 @@ exports[`renders list section without subheader 1`] = `
   </View>
   <View
     accessibilityState={
-      Object {
+      {
+        "busy": undefined,
+        "checked": undefined,
         "disabled": true,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
       }
     }
     accessible={true}
@@ -1336,11 +1432,10 @@ exports[`renders list section without subheader 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Array [
+      [
         false,
-        false,
-        Array [
-          Object {
+        [
+          {
             "paddingRight": 24,
             "paddingVertical": 8,
           },
@@ -1348,24 +1443,26 @@ exports[`renders list section without subheader 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
-        Object {
+        {
           "flexDirection": "row",
           "marginVertical": 6,
+          "width": "100%",
         }
       }
     >
       <View
         pointerEvents="box-none"
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "justifyContent": "center",
             },
-            Object {
+            {
               "alignSelf": "center",
               "marginLeft": 16,
               "marginRight": 0,
@@ -1381,30 +1478,30 @@ exports[`renders list section without subheader 1`] = `
           pointerEvents="none"
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
-              Array [
-                Object {
+              [
+                {
                   "lineHeight": 24,
-                  "transform": Array [
-                    Object {
+                  "transform": [
+                    {
                       "scaleX": 1,
                     },
                   ],
                 },
-                Object {
+                {
                   "backgroundColor": "transparent",
                 },
               ],
-              Object {
+              {
                 "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
-              Object {},
+              {},
             ]
           }
         >
@@ -1413,39 +1510,42 @@ exports[`renders list section without subheader 1`] = `
       </View>
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "paddingLeft": 16,
             },
-            Object {
-              "flex": 1,
+            {
+              "flexGrow": 1,
+              "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
           selectable={false}
           style={
-            Array [
-              Object {
+            [
+              {
                 "textAlign": "left",
               },
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "letterSpacing": 0,
               },
-              Object {
+              {
                 "writingDirection": "ltr",
               },
-              Array [
-                Object {
+              [
+                {
                   "fontSize": 16,
                 },
-                Object {
+                {
                   "color": "rgba(28, 27, 31, 1)",
                 },
                 undefined,

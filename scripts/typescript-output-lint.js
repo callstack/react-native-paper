@@ -15,7 +15,6 @@ const output = path.join(root, 'lib', 'typescript');
 const unusedViewProps = [
   'nativeID',
   'accessibilityActions',
-  'accessibilityRole',
   'accessibilityValue',
   'onAccessibilityAction',
   'accessibilityLabelledBy',

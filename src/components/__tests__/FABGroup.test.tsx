@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Animated } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { act, fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
@@ -184,6 +184,37 @@ it('correctly adds label prop', () => {
   expect(getByText('Label test')).toBeTruthy();
 });
 
+it('correct renders custom ripple color passed to FAB.Group and its item', () => {
+  const { getByTestId } = render(
+    <FAB.Group
+      visible
+      open
+      label="Label test"
+      testID="fab-group"
+      rippleColor={'orange'}
+      icon="plus"
+      onStateChange={() => {}}
+      actions={[
+        {
+          label: 'testing',
+          onPress() {},
+          icon: '',
+          rippleColor: 'yellow',
+          testID: 'fab-group-item',
+        },
+      ]}
+    />
+  );
+
+  expect(
+    getByTestId('fab-group-container').props.children.props.rippleColor
+  ).toBe('orange');
+
+  expect(
+    getByTestId('fab-group-item-container').props.children.props.rippleColor
+  ).toBe('yellow');
+});
+
 it('animated value changes correctly', () => {
   const value = new Animated.Value(1);
   const { getByTestId } = render(
@@ -218,5 +249,226 @@ it('animated value changes correctly', () => {
 
   expect(getByTestId('my-fab-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
+  });
+});
+
+describe('FAB.Group events', () => {
+  it('onPress passes event', () => {
+    const onPress = jest.fn();
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open={false}
+        label="Stack test"
+        icon=""
+        onStateChange={jest.fn()}
+        onPress={onPress}
+        actions={[
+          {
+            label: 'testing',
+            onPress() {},
+            icon: '',
+          },
+        ]}
+      />
+    );
+
+    act(() => {
+      fireEvent(getByText('Stack test'), 'onPress', { key: 'value' });
+    });
+
+    expect(onPress).toHaveBeenCalledWith({ key: 'value' });
+  });
+
+  it('onLongPress passes event', () => {
+    const onLongPress = jest.fn();
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open={false}
+        label="Stack test"
+        icon=""
+        onStateChange={jest.fn()}
+        onLongPress={onLongPress}
+        actions={[
+          {
+            label: 'testing',
+            onPress() {},
+            icon: '',
+          },
+        ]}
+      />
+    );
+
+    act(() => {
+      fireEvent(getByText('Stack test'), 'onLongPress', { key: 'value' });
+    });
+
+    expect(onLongPress).toHaveBeenCalledWith({ key: 'value' });
+  });
+});
+
+describe('Toggle Stack visibility', () => {
+  it('toggles stack visibility on press', () => {
+    const onStateChange = jest.fn();
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open={false}
+        label="Stack test"
+        icon=""
+        onStateChange={onStateChange}
+        actions={[
+          {
+            label: 'testing',
+            onPress() {},
+            icon: '',
+          },
+        ]}
+      />
+    );
+
+    act(() => {
+      fireEvent(getByText('Stack test'), 'onPress');
+    });
+
+    expect(onStateChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not toggle stack visibility on long press', () => {
+    const onStateChange = jest.fn();
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open={false}
+        label="Stack test"
+        icon=""
+        onStateChange={onStateChange}
+        actions={[
+          {
+            label: 'testing',
+            onPress() {},
+            icon: '',
+          },
+        ]}
+      />
+    );
+
+    act(() => {
+      fireEvent(getByText('Stack test'), 'onLongPress');
+    });
+
+    expect(onStateChange).toHaveBeenCalledTimes(0);
+  });
+
+  it('toggles stack visibility on long press with toggleStackOnLongPress prop', () => {
+    const onStateChange = jest.fn();
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open={false}
+        toggleStackOnLongPress
+        label="Stack test"
+        icon=""
+        onStateChange={onStateChange}
+        actions={[
+          {
+            label: 'testing',
+            onPress() {},
+            icon: '',
+          },
+        ]}
+      />
+    );
+
+    act(() => {
+      fireEvent(getByText('Stack test'), 'onLongPress');
+    });
+
+    expect(onStateChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not toggle stack visibility on press with toggleStackOnLongPress prop', () => {
+    const onStateChange = jest.fn();
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open={false}
+        toggleStackOnLongPress
+        label="Stack test"
+        icon=""
+        onStateChange={onStateChange}
+        actions={[
+          {
+            label: 'testing',
+            onPress() {},
+            icon: '',
+          },
+        ]}
+      />
+    );
+
+    act(() => {
+      fireEvent(getByText('Stack test'), 'onPress');
+    });
+
+    expect(onStateChange).toHaveBeenCalledTimes(0);
+  });
+
+  it('does not trigger onLongPress when stack is opened', () => {
+    const onStateChange = jest.fn();
+    const onLongPress = jest.fn();
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open={true}
+        label="Stack test"
+        icon=""
+        onStateChange={onStateChange}
+        onLongPress={onLongPress}
+        actions={[
+          {
+            label: 'testing',
+            onPress() {},
+            icon: '',
+          },
+        ]}
+      />
+    );
+
+    act(() => {
+      fireEvent(getByText('Stack test'), 'onLongPress');
+    });
+
+    expect(onLongPress).toHaveBeenCalledTimes(0);
+  });
+
+  it('does trigger onLongPress when stack is opened and enableLongPressWhenStackOpened is true', () => {
+    const onStateChange = jest.fn();
+    const onLongPress = jest.fn();
+    const { getByText } = render(
+      <FAB.Group
+        visible
+        open={true}
+        enableLongPressWhenStackOpened
+        label="Stack test"
+        icon=""
+        onStateChange={onStateChange}
+        onLongPress={onLongPress}
+        actions={[
+          {
+            label: 'testing',
+            onPress() {},
+            icon: '',
+          },
+        ]}
+      />
+    );
+
+    act(() => {
+      fireEvent(getByText('Stack test'), 'onLongPress');
+    });
+
+    expect(onLongPress).toHaveBeenCalledTimes(1);
   });
 });

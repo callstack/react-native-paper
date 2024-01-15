@@ -10,7 +10,8 @@ export {
 
 export * from './styles/themes';
 
-export { default as Provider } from './core/Provider';
+export { default as Provider } from './core/PaperProvider';
+export { default as PaperProvider } from './core/PaperProvider';
 export { default as shadow } from './styles/shadow';
 export { default as overlay } from './styles/overlay';
 export { default as configureFonts } from './styles/fonts';
@@ -39,6 +40,7 @@ export { default as Divider } from './components/Divider';
 export { default as FAB } from './components/FAB';
 export { default as AnimatedFAB } from './components/FAB/AnimatedFAB';
 export { default as HelperText } from './components/HelperText/HelperText';
+export { default as Icon } from './components/Icon';
 export { default as IconButton } from './components/IconButton/IconButton';
 export { default as Menu } from './components/Menu/Menu';
 export { default as Modal } from './components/Modal';
@@ -78,7 +80,10 @@ export type { Props as AvatarImageProps } from './components/Avatar/AvatarImage'
 export type { Props as AvatarTextProps } from './components/Avatar/AvatarText';
 export type { Props as BadgeProps } from './components/Badge';
 export type { Props as BannerProps } from './components/Banner';
-export type { Props as BottomNavigationProps } from './components/BottomNavigation/BottomNavigation';
+export type {
+  Props as BottomNavigationProps,
+  BaseRoute as BottomNavigationRoute,
+} from './components/BottomNavigation/BottomNavigation';
 export type { Props as ButtonProps } from './components/Button/Button';
 export type { Props as CardProps } from './components/Card/Card';
 export type { Props as CardActionsProps } from './components/Card/CardActions';
@@ -122,7 +127,7 @@ export type { Props as ModalProps } from './components/Modal';
 export type { Props as PortalProps } from './components/Portal/Portal';
 export type { Props as PortalHostProps } from './components/Portal/PortalHost';
 export type { Props as ProgressBarProps } from './components/ProgressBar';
-export type { Props as ProviderProps } from './core/Provider';
+export type { Props as ProviderProps } from './core/PaperProvider';
 export type { Props as RadioButtonProps } from './components/RadioButton/RadioButton';
 export type { Props as RadioButtonAndroidProps } from './components/RadioButton/RadioButtonAndroid';
 export type { Props as RadioButtonGroupProps } from './components/RadioButton/RadioButtonGroup';
@@ -148,6 +153,12 @@ export type { Props as TextProps } from './components/Typography/Text';
 export type { Props as SegmentedButtonsProps } from './components/SegmentedButtons/SegmentedButtons';
 export type { Props as ListImageProps } from './components/List/ListImage';
 export type { Props as TooltipProps } from './components/Tooltip/Tooltip';
+export type {
+  MaterialBottomTabNavigationEventMap,
+  MaterialBottomTabNavigationOptions,
+  MaterialBottomTabNavigationProp,
+  MaterialBottomTabScreenProps,
+} from './react-navigation';
 
 export type {
   MD2Theme,

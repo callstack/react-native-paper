@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { GestureResponderEvent, StyleSheet, View } from 'react-native';
 
+import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
+import { handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, InternalTheme } from '../../types';
+import type { $RemoveChildren, ThemeProp } from '../../types';
 import { getSelectionControlIOSColor } from '../Checkbox/utils';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
-import { handlePress, isChecked } from './utils';
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -33,7 +33,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme?: InternalTheme;
+  theme?: ThemeProp;
   /**
    * testID to be used on tests.
    */
@@ -45,16 +45,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  * This component follows platform guidelines for iOS, but can be used
  * on any platform.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img src="screenshots/radio-enabled.ios.png" />
- *     <figcaption>Enabled</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/radio-disabled.ios.png" />
- *     <figcaption>Disabled</figcaption>
- *   </figure>
- * </div>
+ * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
 const RadioButtonIOS = ({
   disabled,

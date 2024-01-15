@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { render } from '@testing-library/react-native';
 
-import Provider from '../../../core/Provider';
+import PaperProvider from '../../../core/PaperProvider';
 import configureFonts from '../../../styles/fonts';
 import { MD3LightTheme } from '../../../styles/themes';
 import { tokens } from '../../../styles/themes/v3/tokens';
@@ -69,14 +69,51 @@ it('renders v3 Text component with custom variant correctly', () => {
   };
   const Text = customText<'customVariant'>();
   const { getByTestId } = render(
-    <Provider theme={theme}>
+    <PaperProvider theme={theme}>
       <Text testID="text-with-custom-variant" variant="customVariant">
         {content}
       </Text>
-    </Provider>
+    </PaperProvider>
   );
 
   expect(getByTestId('text-with-custom-variant').props.style).toMatchSnapshot();
+});
+
+it("nested text with variant should override parent's variant", () => {
+  const { getByTestId } = render(
+    <Text testID="parent-text" variant="bodySmall">
+      <Text variant="displayLarge">Test</Text>
+    </Text>
+  );
+
+  expect(getByTestId('parent-text')).toHaveStyle(
+    MD3LightTheme.fonts.displayLarge
+  );
+});
+
+it("nested non-text component should not override parent's variant", () => {
+  const ChildComponent = () => <>{content}</>;
+
+  const { getByTestId } = render(
+    <Text testID="parent-text" variant="displayLarge">
+      <ChildComponent />
+    </Text>
+  );
+
+  expect(getByTestId('parent-text')).toHaveStyle(
+    MD3LightTheme.fonts.displayLarge
+  );
+});
+
+it("nested text without variant, but with styles, should override parent's styles", () => {
+  const customStyle = { fontSize: 50, lineHeight: 70 };
+  const { getByTestId } = render(
+    <Text testID="parent-text" variant="bodySmall">
+      <Text style={customStyle}>Test</Text>
+    </Text>
+  );
+
+  expect(getByTestId('parent-text')).toHaveStyle(customStyle);
 });
 
 it('throws when custom variant not provided', () => {

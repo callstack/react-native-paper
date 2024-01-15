@@ -11,20 +11,17 @@ import {
 
 import color from 'color';
 
-import { useInternalTheme } from '../../core/theming';
-import type { MD3Elevation, ThemeProp } from '../../types';
-import Surface from '../Surface';
-import AppbarAction from './AppbarAction';
-import AppbarBackAction from './AppbarBackAction';
 import AppbarContent from './AppbarContent';
-import AppbarHeader from './AppbarHeader';
 import {
   AppbarModes,
   DEFAULT_APPBAR_HEIGHT,
-  getAppbarColor,
+  getAppbarBackgroundColor,
   modeAppbarHeight,
   renderAppbarContent,
 } from './utils';
+import { useInternalTheme } from '../../core/theming';
+import type { MD3Elevation, ThemeProp } from '../../types';
+import Surface from '../Surface';
 
 export type Props = Omit<
   Partial<React.ComponentPropsWithRef<typeof View>>,
@@ -76,10 +73,6 @@ export type Props = Omit<
  *
  * By default Appbar uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
  * See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more informations
- *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/appbar.png" />
- * </div>
  *
  * ## Usage
  * ### Top bar
@@ -181,9 +174,7 @@ const Appbar = ({
     backgroundColor?: ColorValue;
   };
 
-  let isDark: boolean;
-
-  const backgroundColor = getAppbarColor(
+  const backgroundColor = getAppbarBackgroundColor(
     theme,
     elevation,
     customBackground,
@@ -194,9 +185,11 @@ const Appbar = ({
     return isV3 && mode === modeToCompare;
   };
 
+  let isDark = false;
+
   if (typeof dark === 'boolean') {
     isDark = dark;
-  } else {
+  } else if (!isV3) {
     isDark =
       backgroundColor === 'transparent'
         ? false
@@ -291,14 +284,14 @@ const Appbar = ({
               children,
               isDark,
               isV3,
-              renderOnly: [AppbarBackAction],
+              renderOnly: ['Appbar.BackAction'],
               mode,
             })}
             {renderAppbarContent({
               children: filterAppbarActions(true),
               isDark,
               isV3,
-              renderOnly: [AppbarAction],
+              renderOnly: ['Appbar.Action'],
               mode,
             })}
             {/* Right side of row container, can contain other AppbarAction if they are not leading icons */}
@@ -308,10 +301,10 @@ const Appbar = ({
                 isDark,
                 isV3,
                 renderExcept: [
-                  Appbar,
-                  AppbarBackAction,
-                  AppbarContent,
-                  AppbarHeader,
+                  'Appbar',
+                  'Appbar.BackAction',
+                  'Appbar.Content',
+                  'Appbar.Header',
                 ],
                 mode,
               })}
@@ -322,7 +315,7 @@ const Appbar = ({
             children,
             isDark,
             isV3,
-            renderOnly: [AppbarContent],
+            renderOnly: ['Appbar.Content'],
             mode,
           })}
         </View>

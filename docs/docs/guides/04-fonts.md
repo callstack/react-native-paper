@@ -64,7 +64,7 @@ At a minimum, you need to explicitly pass fonts for `android`, `ios`, and `web`.
 
 ```js
 import * as React from 'react';
-import { configureFonts, MD2LightTheme, Provider as PaperProvider } from 'react-native-paper';
+import { configureFonts, MD2LightTheme, PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 const fontConfig = {
@@ -408,7 +408,7 @@ If any component uses Paper's `Text` component, without specified <b>variant</b>
 
 ```js
 import * as React from 'react';
-import { configureFonts, MD3LightTheme, Provider as PaperProvider } from 'react-native-paper';
+import { configureFonts, MD3LightTheme, PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 const fontConfig = {
@@ -453,7 +453,7 @@ export const Text = customText<'customVariant'>()
 
 ```js
 import * as React from 'react';
-import { configureFonts, MD3LightTheme, Provider as PaperProvider } from 'react-native-paper';
+import { configureFonts, MD3LightTheme, PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 const fontConfig = {
@@ -482,7 +482,7 @@ export default function Main() {
 
 ```js
 import * as React from 'react';
-import { configureFonts, MD3LightTheme, Provider as PaperProvider } from 'react-native-paper';
+import { configureFonts, MD3LightTheme, PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 const fontConfig = {

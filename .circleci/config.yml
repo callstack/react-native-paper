@@ -94,7 +94,7 @@ jobs:
       - run:
           name: Build package
           command: |
-            yarn prepare
+            yarn prepack
             node ./scripts/typescript-output-lint
 
   build-docs:

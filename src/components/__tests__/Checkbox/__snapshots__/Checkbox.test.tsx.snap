@@ -5,9 +5,20 @@ exports[`renders Checkbox with custom testID 1`] = `
   accessibilityLiveRegion="polite"
   accessibilityRole="checkbox"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
       "checked": true,
       "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -23,12 +34,11 @@ exports[`renders Checkbox with custom testID 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      Object {
+    [
+      {
         "overflow": "hidden",
       },
-      false,
-      Object {
+      {
         "borderRadius": 18,
         "padding": 6,
       },
@@ -38,7 +48,7 @@ exports[`renders Checkbox with custom testID 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
@@ -50,30 +60,30 @@ exports[`renders Checkbox with custom testID 1`] = `
       pointerEvents="none"
       selectable={false}
       style={
-        Array [
-          Object {
+        [
+          {
             "color": "rgba(103, 80, 164, 1)",
             "fontSize": 24,
           },
-          Array [
-            Object {
+          [
+            {
               "lineHeight": 24,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "scaleX": 1,
                 },
               ],
             },
-            Object {
+            {
               "backgroundColor": "transparent",
             },
           ],
-          Object {
+          {
             "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
-          Object {},
+          {},
         ]
       }
     >
@@ -88,9 +98,20 @@ exports[`renders checked Checkbox with color 1`] = `
   accessibilityLiveRegion="polite"
   accessibilityRole="checkbox"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
       "checked": true,
       "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -107,12 +128,11 @@ exports[`renders checked Checkbox with color 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      Object {
+    [
+      {
         "overflow": "hidden",
       },
-      false,
-      Object {
+      {
         "borderRadius": 18,
         "padding": 6,
       },
@@ -121,7 +141,7 @@ exports[`renders checked Checkbox with color 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
@@ -133,30 +153,30 @@ exports[`renders checked Checkbox with color 1`] = `
       pointerEvents="none"
       selectable={false}
       style={
-        Array [
-          Object {
+        [
+          {
             "color": "red",
             "fontSize": 24,
           },
-          Array [
-            Object {
+          [
+            {
               "lineHeight": 24,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "scaleX": 1,
                 },
               ],
             },
-            Object {
+            {
               "backgroundColor": "transparent",
             },
           ],
-          Object {
+          {
             "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
-          Object {},
+          {},
         ]
       }
     >
@@ -171,9 +191,20 @@ exports[`renders checked Checkbox with onPress 1`] = `
   accessibilityLiveRegion="polite"
   accessibilityRole="checkbox"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
       "checked": true,
       "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -189,12 +220,11 @@ exports[`renders checked Checkbox with onPress 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      Object {
+    [
+      {
         "overflow": "hidden",
       },
-      false,
-      Object {
+      {
         "borderRadius": 18,
         "padding": 6,
       },
@@ -203,7 +233,7 @@ exports[`renders checked Checkbox with onPress 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
@@ -215,30 +245,30 @@ exports[`renders checked Checkbox with onPress 1`] = `
       pointerEvents="none"
       selectable={false}
       style={
-        Array [
-          Object {
+        [
+          {
             "color": "rgba(103, 80, 164, 1)",
             "fontSize": 24,
           },
-          Array [
-            Object {
+          [
+            {
               "lineHeight": 24,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "scaleX": 1,
                 },
               ],
             },
-            Object {
+            {
               "backgroundColor": "transparent",
             },
           ],
-          Object {
+          {
             "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
-          Object {},
+          {},
         ]
       }
     >
@@ -253,9 +283,20 @@ exports[`renders indeterminate Checkbox 1`] = `
   accessibilityLiveRegion="polite"
   accessibilityRole="checkbox"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
       "checked": false,
       "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -271,12 +312,11 @@ exports[`renders indeterminate Checkbox 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      Object {
+    [
+      {
         "overflow": "hidden",
       },
-      false,
-      Object {
+      {
         "borderRadius": 18,
         "padding": 6,
       },
@@ -285,7 +325,7 @@ exports[`renders indeterminate Checkbox 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
@@ -297,30 +337,30 @@ exports[`renders indeterminate Checkbox 1`] = `
       pointerEvents="none"
       selectable={false}
       style={
-        Array [
-          Object {
+        [
+          {
             "color": "rgba(103, 80, 164, 1)",
             "fontSize": 24,
           },
-          Array [
-            Object {
+          [
+            {
               "lineHeight": 24,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "scaleX": 1,
                 },
               ],
             },
-            Object {
+            {
               "backgroundColor": "transparent",
             },
           ],
-          Object {
+          {
             "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
-          Object {},
+          {},
         ]
       }
     >
@@ -335,9 +375,20 @@ exports[`renders indeterminate Checkbox with color 1`] = `
   accessibilityLiveRegion="polite"
   accessibilityRole="checkbox"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
       "checked": false,
       "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -354,12 +405,11 @@ exports[`renders indeterminate Checkbox with color 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      Object {
+    [
+      {
         "overflow": "hidden",
       },
-      false,
-      Object {
+      {
         "borderRadius": 18,
         "padding": 6,
       },
@@ -368,7 +418,7 @@ exports[`renders indeterminate Checkbox with color 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
@@ -380,30 +430,30 @@ exports[`renders indeterminate Checkbox with color 1`] = `
       pointerEvents="none"
       selectable={false}
       style={
-        Array [
-          Object {
+        [
+          {
             "color": "red",
             "fontSize": 24,
           },
-          Array [
-            Object {
+          [
+            {
               "lineHeight": 24,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "scaleX": 1,
                 },
               ],
             },
-            Object {
+            {
               "backgroundColor": "transparent",
             },
           ],
-          Object {
+          {
             "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
-          Object {},
+          {},
         ]
       }
     >
@@ -418,9 +468,20 @@ exports[`renders unchecked Checkbox with color 1`] = `
   accessibilityLiveRegion="polite"
   accessibilityRole="checkbox"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
       "checked": true,
       "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -437,12 +498,11 @@ exports[`renders unchecked Checkbox with color 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      Object {
+    [
+      {
         "overflow": "hidden",
       },
-      false,
-      Object {
+      {
         "borderRadius": 18,
         "padding": 6,
       },
@@ -451,7 +511,7 @@ exports[`renders unchecked Checkbox with color 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
@@ -463,30 +523,30 @@ exports[`renders unchecked Checkbox with color 1`] = `
       pointerEvents="none"
       selectable={false}
       style={
-        Array [
-          Object {
+        [
+          {
             "color": "red",
             "fontSize": 24,
           },
-          Array [
-            Object {
+          [
+            {
               "lineHeight": 24,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "scaleX": 1,
                 },
               ],
             },
-            Object {
+            {
               "backgroundColor": "transparent",
             },
           ],
-          Object {
+          {
             "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
-          Object {},
+          {},
         ]
       }
     >
@@ -501,9 +561,20 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
   accessibilityLiveRegion="polite"
   accessibilityRole="checkbox"
   accessibilityState={
-    Object {
+    {
+      "busy": undefined,
       "checked": false,
       "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
     }
   }
   accessible={true}
@@ -519,12 +590,11 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Array [
-      Object {
+    [
+      {
         "overflow": "hidden",
       },
-      false,
-      Object {
+      {
         "borderRadius": 18,
         "padding": 6,
       },
@@ -533,7 +603,7 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
 >
   <View
     style={
-      Object {
+      {
         "opacity": 0,
       }
     }
@@ -545,30 +615,30 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
       pointerEvents="none"
       selectable={false}
       style={
-        Array [
-          Object {
+        [
+          {
             "color": "rgba(103, 80, 164, 1)",
             "fontSize": 24,
           },
-          Array [
-            Object {
+          [
+            {
               "lineHeight": 24,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "scaleX": 1,
                 },
               ],
             },
-            Object {
+            {
               "backgroundColor": "transparent",
             },
           ],
-          Object {
+          {
             "fontFamily": "Material Design Icons",
             "fontStyle": "normal",
             "fontWeight": "normal",
           },
-          Object {},
+          {},
         ]
       }
     >

@@ -1,30 +1,34 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   EasingFunction,
   Platform,
   StyleProp,
   StyleSheet,
-  TouchableWithoutFeedbackProps,
   View,
   ViewStyle,
 } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
 
+import BottomNavigationBar from './BottomNavigationBar';
+import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import type { IconSource } from '../Icon';
-import BottomNavigationBar from './BottomNavigationBar';
-import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
+import { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
-type BaseRoute = {
+export type BaseRoute = {
   key: string;
   title?: string;
   focusedIcon?: IconSource;
   unfocusedIcon?: IconSource;
   badge?: string | number | boolean;
+  /**
+   * @deprecated In v5.x works only with theme version 2.
+   */
   color?: string;
   accessibilityLabel?: string;
   testID?: string;
@@ -41,13 +45,13 @@ type TabPressEvent = {
   preventDefault(): void;
 };
 
-type TouchableProps<Route extends BaseRoute> = TouchableWithoutFeedbackProps & {
+type TouchableProps<Route extends BaseRoute> = TouchableRippleProps & {
   key: string;
   route: Route;
   children: React.ReactNode;
   borderless?: boolean;
   centered?: boolean;
-  rippleColor?: string;
+  rippleColor?: ColorValue;
 };
 
 export type Props<Route extends BaseRoute> = {
@@ -79,7 +83,7 @@ export type Props<Route extends BaseRoute> = {
    * - `title`: title of the route to use as the tab label
    * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
    * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3
-   * - `color`: color to use as background color for shifting bottom navigation @deprecated Deprecated in v5.x
+   * - `color`: color to use as background color for shifting bottom navigation @deprecated In v5.x works only with theme version 2.
    * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
    * - `accessibilityLabel`: accessibility label for the tab button
    * - `testID`: test id for the tab button
@@ -163,7 +167,7 @@ export type Props<Route extends BaseRoute> = {
   }) => React.ReactNode;
   /**
    * Callback which returns a React element to be used as the touchable for the tab item.
-   * Renders a `TouchableRipple` on Android and `TouchableWithoutFeedback` with `View` on iOS.
+   * Renders a `TouchableRipple` on Android and `Pressable` on iOS.
    */
   renderTouchable?: (props: TouchableProps<Route>) => React.ReactNode;
   /**
@@ -250,6 +254,7 @@ export type Props<Route extends BaseRoute> = {
    */
   labelMaxFontSizeMultiplier?: number;
   style?: StyleProp<ViewStyle>;
+  activeIndicatorStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
@@ -272,10 +277,6 @@ const SceneComponent = React.memo(({ component, ...rest }: any) =>
  *
  * By default BottomNavigation uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
  * See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more information.
- *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/bottom-navigation.gif" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -335,6 +336,7 @@ const BottomNavigation = <Route extends BaseRoute>({
   barStyle,
   labeled = true,
   style,
+  activeIndicatorStyle,
   sceneAnimationEnabled = false,
   sceneAnimationType = 'opacity',
   sceneAnimationEasing,
@@ -512,14 +514,14 @@ const BottomNavigation = <Route extends BaseRoute>({
             ? 1
             : 0;
 
+          const offsetTarget = focused ? 0 : FAR_FAR_AWAY;
+
           const top = sceneAnimationEnabled
             ? offsetsAnims[index].interpolate({
                 inputRange: [0, 1],
-                outputRange: [0, FAR_FAR_AWAY],
+                outputRange: [0, offsetTarget],
               })
-            : focused
-            ? 0
-            : FAR_FAR_AWAY;
+            : offsetTarget;
 
           const left =
             sceneAnimationType === 'shifting'
@@ -582,6 +584,7 @@ const BottomNavigation = <Route extends BaseRoute>({
         inactiveColor={inactiveColor}
         keyboardHidesNavigationBar={keyboardHidesNavigationBar}
         style={barStyle}
+        activeIndicatorStyle={activeIndicatorStyle}
         labeled={labeled}
         animationEasing={sceneAnimationEasing}
         onTabPress={handleTabPress}

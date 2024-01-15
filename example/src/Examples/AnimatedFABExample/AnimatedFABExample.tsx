@@ -11,13 +11,13 @@ import {
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { useExampleTheme } from '../..';
-import { animatedFABExampleData } from '../../../utils';
 import CustomFAB from './CustomFAB';
 import CustomFABControls, {
   Controls,
   initialControls,
 } from './CustomFABControls';
+import { useExampleTheme } from '../..';
+import { animatedFABExampleData } from '../../../utils';
 
 type Item = {
   id: string;

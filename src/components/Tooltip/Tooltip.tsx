@@ -5,15 +5,17 @@ import {
   LayoutChangeEvent,
   StyleSheet,
   Platform,
+  Pressable,
+  ViewStyle,
 } from 'react-native';
 
 import type { ThemeProp } from 'src/types';
 
+import { getTooltipPosition, Measurement } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Text from '../Typography/Text';
-import { getTooltipPosition, Measurement } from './utils';
 
 export type Props = {
   /**
@@ -33,6 +35,10 @@ export type Props = {
    */
   title: string;
   /**
+   * Specifies the largest possible scale a title font can reach.
+   */
+  titleMaxFontSizeMultiplier?: number;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -42,12 +48,6 @@ export type Props = {
  * Tooltips display informative text when users hover over, focus on, or tap an element.
  *
  * Plain tooltips, when activated, display a text label identifying an element, such as a description of its function. Tooltips should include only short, descriptive text and avoid restating visible UI text.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/tooltip.png" />
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js
@@ -69,8 +69,11 @@ const Tooltip = ({
   leaveTouchDelay = 1500,
   title,
   theme: themeOverrides,
+  titleMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
+  const isWeb = Platform.OS === 'web';
+
   const theme = useInternalTheme(themeOverrides);
   const [visible, setVisible] = React.useState(false);
 
@@ -79,21 +82,21 @@ const Tooltip = ({
     tooltip: {},
     measured: false,
   });
-  const showTooltipTimer = React.useRef<NodeJS.Timeout>();
-  const hideTooltipTimer = React.useRef<NodeJS.Timeout>();
+  const showTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
+  const hideTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
   const childrenWrapperRef = React.useRef() as React.MutableRefObject<View>;
   const touched = React.useRef(false);
 
-  const isWeb = Platform.OS === 'web';
-
   React.useEffect(() => {
     return () => {
-      if (showTooltipTimer.current) {
-        clearTimeout(showTooltipTimer.current);
+      if (showTooltipTimer.current.length) {
+        showTooltipTimer.current.forEach((t) => clearTimeout(t));
+        showTooltipTimer.current = [];
       }
 
-      if (hideTooltipTimer.current) {
-        clearTimeout(hideTooltipTimer.current);
+      if (hideTooltipTimer.current.length) {
+        hideTooltipTimer.current.forEach((t) => clearTimeout(t));
+        hideTooltipTimer.current = [];
       }
     };
   }, []);
@@ -119,26 +122,35 @@ const Tooltip = ({
   };
 
   const handleTouchStart = () => {
-    if (hideTooltipTimer.current) {
-      clearTimeout(hideTooltipTimer.current);
+    if (hideTooltipTimer.current.length) {
+      hideTooltipTimer.current.forEach((t) => clearTimeout(t));
+      hideTooltipTimer.current = [];
     }
 
-    showTooltipTimer.current = setTimeout(() => {
+    if (isWeb) {
+      let id = setTimeout(() => {
+        touched.current = true;
+        setVisible(true);
+      }, enterTouchDelay) as unknown as NodeJS.Timeout;
+      showTooltipTimer.current.push(id);
+    } else {
       touched.current = true;
       setVisible(true);
-    }, enterTouchDelay) as unknown as NodeJS.Timeout;
+    }
   };
 
   const handleTouchEnd = () => {
     touched.current = false;
-    if (showTooltipTimer.current) {
-      clearTimeout(showTooltipTimer.current);
+    if (showTooltipTimer.current.length) {
+      showTooltipTimer.current.forEach((t) => clearTimeout(t));
+      showTooltipTimer.current = [];
     }
 
-    hideTooltipTimer.current = setTimeout(() => {
+    let id = setTimeout(() => {
       setVisible(false);
       setMeasurement({ children: {}, tooltip: {}, measured: false });
     }, leaveTouchDelay) as unknown as NodeJS.Timeout;
+    hideTooltipTimer.current.push(id);
   };
 
   const mobilePressProps = {
@@ -149,6 +161,9 @@ const Tooltip = ({
         return children.props.onPress?.();
       }
     }, [children.props]),
+    onLongPress: () => handleTouchStart(),
+    onPressOut: () => handleTouchEnd(),
+    delayLongPress: enterTouchDelay,
   };
 
   const webPressProps = {
@@ -174,7 +189,7 @@ const Tooltip = ({
                 backgroundColor: theme.isV3
                   ? theme.colors.onSurface
                   : theme.colors.tooltip,
-                ...getTooltipPosition(measurement as Measurement),
+                ...getTooltipPosition(measurement as Measurement, children),
                 borderRadius: theme.roundness,
                 ...(measurement.measured ? styles.visible : styles.hidden),
               },
@@ -187,26 +202,29 @@ const Tooltip = ({
               selectable={false}
               variant="labelLarge"
               style={{ color: theme.colors.surface }}
+              maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
             >
               {title}
             </Text>
           </View>
         </Portal>
       )}
-      <View
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        onTouchCancel={handleTouchEnd}
+      {/* Need the xxPressProps in both places */}
+      <Pressable
+        ref={childrenWrapperRef}
+        style={styles.pressContainer}
+        {...(isWeb ? webPressProps : mobilePressProps)}
       >
         {React.cloneElement(children, {
           ...rest,
-          ref: childrenWrapperRef,
           ...(isWeb ? webPressProps : mobilePressProps),
         })}
-      </View>
+      </Pressable>
     </>
   );
 };
+
+Tooltip.displayName = 'Tooltip';
 
 const styles = StyleSheet.create({
   tooltip: {
@@ -222,6 +240,9 @@ const styles = StyleSheet.create({
   hidden: {
     opacity: 0,
   },
+  pressContainer: {
+    ...(Platform.OS === 'web' && { cursor: 'default' }),
+  } as ViewStyle,
 });
 
 export default Tooltip;

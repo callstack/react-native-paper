@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
+import { act } from 'react-test-renderer';
 
 import { getTheme } from '../../core/theming';
 import { black, white } from '../../styles/themes/v2/colors';
@@ -132,6 +133,14 @@ it('renders FAB with custom border radius', () => {
       testID="fab"
       style={styles.borderRadius}
     />
+  );
+
+  expect(getByTestId('fab-container')).toHaveStyle({ borderRadius: 0 });
+});
+
+it('renders FAB with zero border radius', () => {
+  const { getByTestId } = render(
+    <FAB theme={{ roundness: 0 }} onPress={() => {}} icon="plus" testID="fab" />
   );
 
   expect(getByTestId('fab-container')).toHaveStyle({ borderRadius: 0 });
@@ -416,5 +425,31 @@ it('animated value changes correctly', () => {
 
   expect(getByTestId('fab-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
+  });
+});
+
+describe('FAB events', () => {
+  it('onPress passes event', () => {
+    const onPress = jest.fn();
+    const { getByText } = render(<FAB onPress={onPress} label="Add items" />);
+
+    act(() => {
+      fireEvent(getByText('Add items'), 'onPress', { key: 'value' });
+    });
+
+    expect(onPress).toHaveBeenCalledWith({ key: 'value' });
+  });
+
+  it('onLongPress passes event', () => {
+    const onLongPress = jest.fn();
+    const { getByText } = render(
+      <FAB onLongPress={onLongPress} label="Add items" />
+    );
+
+    act(() => {
+      fireEvent(getByText('Add items'), 'onLongPress', { key: 'value' });
+    });
+
+    expect(onLongPress).toHaveBeenCalledWith({ key: 'value' });
   });
 });

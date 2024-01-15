@@ -1,11 +1,10 @@
 import * as React from 'react';
 import {
   Animated,
-  BackHandler,
   Easing,
   StyleProp,
   StyleSheet,
-  TouchableWithoutFeedback,
+  Pressable,
   View,
   ViewStyle,
 } from 'react-native';
@@ -13,17 +12,22 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useLatestCallback from 'use-latest-callback';
 
+import Surface from './Surface';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 import { addEventListener } from '../utils/addEventListener';
+import { BackHandler } from '../utils/BackHandler/BackHandler';
 import useAnimatedValue from '../utils/useAnimatedValue';
-import Surface from './Surface';
 
 export type Props = {
   /**
    * Determines whether clicking outside the modal dismiss it.
    */
   dismissable?: boolean;
+  /**
+   * Determines whether clicking Android hardware back button dismiss dialog.
+   */
+  dismissableBackButton?: boolean;
   /**
    * Callback that is called when the user dismisses the modal.
    */
@@ -60,21 +64,16 @@ export type Props = {
 };
 
 const DEFAULT_DURATION = 220;
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 /**
  * The Modal component is a simple way to present content above an enclosing view.
  * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](./Portal) component.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/modal.gif" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
+ * import { Modal, Portal, Text, Button, PaperProvider } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -84,7 +83,7 @@ const DEFAULT_DURATION = 220;
  *   const containerStyle = {backgroundColor: 'white', padding: 20};
  *
  *   return (
- *     <Provider>
+ *     <PaperProvider>
  *       <Portal>
  *         <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
  *           <Text>Example Modal.  Click outside this area to dismiss.</Text>
@@ -93,7 +92,7 @@ const DEFAULT_DURATION = 220;
  *       <Button style={{marginTop: 30}} onPress={showModal}>
  *         Show
  *       </Button>
- *     </Provider>
+ *     </PaperProvider>
  *   );
  * };
  *
@@ -102,6 +101,7 @@ const DEFAULT_DURATION = 220;
  */
 function Modal({
   dismissable = true,
+  dismissableBackButton = dismissable,
   visible = false,
   overlayAccessibilityLabel = 'Close modal',
   onDismiss = () => {},
@@ -170,7 +170,7 @@ function Modal({
     }
 
     const onHardwareBackPress = () => {
-      if (dismissable) {
+      if (dismissable || dismissableBackButton) {
         hideModal();
       }
 
@@ -183,7 +183,7 @@ function Modal({
       onHardwareBackPress
     );
     return () => subscription.remove();
-  }, [dismissable, hideModal, visible]);
+  }, [dismissable, dismissableBackButton, hideModal, visible]);
 
   const prevVisible = React.useRef<boolean | null>(null);
 
@@ -209,24 +209,21 @@ function Modal({
       onAccessibilityEscape={hideModal}
       testID={testID}
     >
-      <TouchableWithoutFeedback
+      <AnimatedPressable
         accessibilityLabel={overlayAccessibilityLabel}
         accessibilityRole="button"
         disabled={!dismissable}
         onPress={dismissable ? hideModal : undefined}
         importantForAccessibility="no"
-      >
-        <Animated.View
-          testID={`${testID}-backdrop`}
-          style={[
-            styles.backdrop,
-            {
-              backgroundColor: theme.colors?.backdrop,
-              opacity,
-            },
-          ]}
-        />
-      </TouchableWithoutFeedback>
+        style={[
+          styles.backdrop,
+          {
+            backgroundColor: theme.colors?.backdrop,
+            opacity,
+          },
+        ]}
+        testID={`${testID}-backdrop`}
+      />
       <View
         style={[
           styles.wrapper,

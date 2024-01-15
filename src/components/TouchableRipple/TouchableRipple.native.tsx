@@ -5,19 +5,24 @@ import {
   Platform,
   ViewStyle,
   StyleSheet,
-  Pressable,
   GestureResponderEvent,
+  View,
+  ColorValue,
 } from 'react-native';
 
+import type { PressableProps } from './Pressable';
+import { Pressable } from './Pressable';
+import { getTouchableRippleColors } from './utils';
+import { Settings, SettingsContext } from '../../core/settings';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
-import { getTouchableRippleColors } from './utils';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
 
-export type Props = React.ComponentProps<typeof Pressable> & {
+export type Props = PressableProps & {
   borderless?: boolean;
   background?: PressableAndroidRippleConfig;
   centered?: boolean;
@@ -26,26 +31,29 @@ export type Props = React.ComponentProps<typeof Pressable> & {
   onLongPress?: (e: GestureResponderEvent) => void;
   onPressIn?: (e: GestureResponderEvent) => void;
   onPressOut?: (e: GestureResponderEvent) => void;
-  rippleColor?: string;
+  rippleColor?: ColorValue;
   underlayColor?: string;
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
   theme?: ThemeProp;
 };
 
-const TouchableRipple = ({
-  style,
-  background,
-  borderless = false,
-  disabled: disabledProp,
-  rippleColor,
-  underlayColor,
-  children,
-  theme: themeOverrides,
-  ...rest
-}: Props) => {
+const TouchableRipple = (
+  {
+    style,
+    background,
+    borderless = false,
+    disabled: disabledProp,
+    rippleColor,
+    underlayColor,
+    children,
+    theme: themeOverrides,
+    ...rest
+  }: Props,
+  ref: React.ForwardedRef<View>
+) => {
   const theme = useInternalTheme(themeOverrides);
-  const [showUnderlay, setShowUnderlay] = React.useState<boolean>(false);
+  const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;
 
@@ -72,31 +80,22 @@ const TouchableRipple = ({
     Platform.Version >= ANDROID_VERSION_PIE &&
     borderless;
 
-  const handlePressIn = (e: GestureResponderEvent) => {
-    setShowUnderlay(true);
-    onPressIn?.(e);
-  };
-
-  const handlePressOut = (e: GestureResponderEvent) => {
-    setShowUnderlay(false);
-    onPressOut?.(e);
-  };
-
   if (TouchableRipple.supported) {
+    const androidRipple = rippleEffectEnabled
+      ? background ?? {
+          color: calculatedRippleColor,
+          borderless,
+          foreground: useForeground,
+        }
+      : undefined;
+
     return (
       <Pressable
         {...rest}
+        ref={ref}
         disabled={disabled}
         style={[borderless && styles.overflowHidden, style]}
-        android_ripple={
-          background != null
-            ? background
-            : {
-                color: calculatedRippleColor,
-                borderless,
-                foreground: useForeground,
-              }
-        }
+        android_ripple={androidRipple}
       >
         {React.Children.only(children)}
       </Pressable>
@@ -106,16 +105,24 @@ const TouchableRipple = ({
   return (
     <Pressable
       {...rest}
+      ref={ref}
       disabled={disabled}
-      style={[
-        borderless && styles.overflowHidden,
-        showUnderlay && { backgroundColor: calculatedUnderlayColor },
-        style,
-      ]}
-      onPressIn={handlePressIn}
-      onPressOut={handlePressOut}
+      style={[borderless && styles.overflowHidden, style]}
     >
-      {React.Children.only(children)}
+      {({ pressed }) => (
+        <>
+          {pressed && rippleEffectEnabled && (
+            <View
+              testID="touchable-ripple-underlay"
+              style={[
+                styles.underlay,
+                { backgroundColor: calculatedUnderlayColor },
+              ]}
+            />
+          )}
+          {React.Children.only(children)}
+        </>
+      )}
     </Pressable>
   );
 };
@@ -127,6 +134,12 @@ const styles = StyleSheet.create({
   overflowHidden: {
     overflow: 'hidden',
   },
+  underlay: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 2,
+  },
 });
 
-export default TouchableRipple;
+const Component = forwardRef(TouchableRipple);
+
+export default Component as typeof Component & { supported: boolean };

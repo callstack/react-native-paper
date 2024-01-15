@@ -4,29 +4,16 @@ exports[`renders chip with close button 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
-      "alignSelf": undefined,
+    {
       "backgroundColor": "rgba(232, 222, 248, 1)",
       "borderRadius": 8,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
-      "width": undefined,
     }
   }
   testID="chip-container-outer-layer"
@@ -34,7 +21,7 @@ exports[`renders chip with close button 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(232, 222, 248, 1)",
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 8,
@@ -43,7 +30,7 @@ exports[`renders chip with close button 1`] = `
         "flex": undefined,
         "flexDirection": "column",
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -56,9 +43,20 @@ exports[`renders chip with close button 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": true,
+          "expanded": undefined,
           "selected": false,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -74,17 +72,16 @@ exports[`renders chip with close button 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          false,
-          Array [
-            Object {
+          [
+            {
               "borderRadius": 8,
             },
-            Object {
-              "flexGrow": 1,
+            {
+              "width": "100%",
             },
           ],
         ]
@@ -93,18 +90,17 @@ exports[`renders chip with close button 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
-              "flexGrow": 1,
               "paddingLeft": 4,
               "position": "relative",
             },
-            Object {
+            {
               "paddingLeft": 0,
             },
-            Object {
+            {
               "paddingRight": 34,
             },
           ]
@@ -112,12 +108,12 @@ exports[`renders chip with close button 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignSelf": "center",
                 "padding": 4,
               },
-              Object {
+              {
                 "paddingLeft": 8,
                 "paddingRight": 0,
               },
@@ -132,30 +128,30 @@ exports[`renders chip with close button 1`] = `
             pointerEvents="none"
             selectable={false}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "rgba(103, 80, 164, 1)",
                   "fontSize": 18,
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "lineHeight": 18,
-                    "transform": Array [
-                      Object {
+                    "transform": [
+                      {
                         "scaleX": 1,
                       },
                     ],
                   },
-                  Object {
+                  {
                     "backgroundColor": "transparent",
                   },
                 ],
-                Object {
+                {
                   "fontFamily": "Material Design Icons",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
-                Object {},
+                {},
               ]
             }
           >
@@ -166,39 +162,41 @@ exports[`renders chip with close button 1`] = `
           numberOfLines={1}
           selectable={false}
           style={
-            Array [
-              Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
+            [
+              {
                 "textAlign": "left",
               },
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
-              Array [
-                Object {
-                  "marginVertical": 6,
-                  "textAlignVertical": "center",
-                },
-                Object {
-                  "color": "rgba(29, 25, 43, 1)",
+              [
+                {
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Object {
-                  "marginLeft": 8,
-                  "marginRight": 0,
-                },
-                undefined,
+                [
+                  {
+                    "marginVertical": 6,
+                    "textAlignVertical": "center",
+                  },
+                  {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  {
+                    "marginLeft": 8,
+                    "marginRight": 0,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -209,7 +207,7 @@ exports[`renders chip with close button 1`] = `
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": "100%",
           "justifyContent": "center",
@@ -221,67 +219,90 @@ exports[`renders chip with close button 1`] = `
       <View
         accessibilityLabel="Close"
         accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
+        collapsable={false}
         focusable={true}
+        onBlur={[Function]}
         onClick={[Function]}
+        onFocus={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "padding": 4,
-            },
-            Object {
-              "marginRight": 4,
-            },
-            Object {
-              "marginRight": 8,
-              "padding": 0,
-            },
-          ]
-        }
       >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
+        <View
           style={
-            Array [
-              Object {
-                "color": "rgba(29, 25, 43, 1)",
-                "fontSize": 18,
+            [
+              {
+                "alignSelf": "center",
+                "padding": 4,
               },
-              Array [
-                Object {
-                  "lineHeight": 18,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
+              {
+                "marginRight": 4,
               },
-              Object {},
+              {
+                "marginRight": 8,
+                "padding": 0,
+              },
             ]
           }
         >
-          󰅖
-        </Text>
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "rgba(29, 25, 43, 1)",
+                  "fontSize": 18,
+                },
+                [
+                  {
+                    "lineHeight": 18,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                {},
+              ]
+            }
+          >
+            󰅖
+          </Text>
+        </View>
       </View>
     </View>
   </View>
@@ -292,29 +313,16 @@ exports[`renders chip with custom close button 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
-      "alignSelf": undefined,
+    {
       "backgroundColor": "rgba(232, 222, 248, 1)",
       "borderRadius": 8,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
-      "width": undefined,
     }
   }
   testID="chip-container-outer-layer"
@@ -322,7 +330,7 @@ exports[`renders chip with custom close button 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(232, 222, 248, 1)",
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 8,
@@ -331,7 +339,7 @@ exports[`renders chip with custom close button 1`] = `
         "flex": undefined,
         "flexDirection": "column",
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -344,9 +352,20 @@ exports[`renders chip with custom close button 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": true,
+          "expanded": undefined,
           "selected": false,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -362,17 +381,16 @@ exports[`renders chip with custom close button 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          false,
-          Array [
-            Object {
+          [
+            {
               "borderRadius": 8,
             },
-            Object {
-              "flexGrow": 1,
+            {
+              "width": "100%",
             },
           ],
         ]
@@ -381,18 +399,17 @@ exports[`renders chip with custom close button 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
-              "flexGrow": 1,
               "paddingLeft": 4,
               "position": "relative",
             },
-            Object {
+            {
               "paddingLeft": 0,
             },
-            Object {
+            {
               "paddingRight": 34,
             },
           ]
@@ -400,12 +417,12 @@ exports[`renders chip with custom close button 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignSelf": "center",
                 "padding": 4,
               },
-              Object {
+              {
                 "paddingLeft": 8,
                 "paddingRight": 0,
               },
@@ -420,30 +437,30 @@ exports[`renders chip with custom close button 1`] = `
             pointerEvents="none"
             selectable={false}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "rgba(103, 80, 164, 1)",
                   "fontSize": 18,
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "lineHeight": 18,
-                    "transform": Array [
-                      Object {
+                    "transform": [
+                      {
                         "scaleX": 1,
                       },
                     ],
                   },
-                  Object {
+                  {
                     "backgroundColor": "transparent",
                   },
                 ],
-                Object {
+                {
                   "fontFamily": "Material Design Icons",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
-                Object {},
+                {},
               ]
             }
           >
@@ -454,39 +471,41 @@ exports[`renders chip with custom close button 1`] = `
           numberOfLines={1}
           selectable={false}
           style={
-            Array [
-              Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
+            [
+              {
                 "textAlign": "left",
               },
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
-              Array [
-                Object {
-                  "marginVertical": 6,
-                  "textAlignVertical": "center",
-                },
-                Object {
-                  "color": "rgba(29, 25, 43, 1)",
+              [
+                {
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Object {
-                  "marginLeft": 8,
-                  "marginRight": 0,
-                },
-                undefined,
+                [
+                  {
+                    "marginVertical": 6,
+                    "textAlignVertical": "center",
+                  },
+                  {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  {
+                    "marginLeft": 8,
+                    "marginRight": 0,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -497,7 +516,7 @@ exports[`renders chip with custom close button 1`] = `
     </View>
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": "100%",
           "justifyContent": "center",
@@ -509,67 +528,90 @@ exports[`renders chip with custom close button 1`] = `
       <View
         accessibilityLabel="Close"
         accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
         accessible={true}
+        collapsable={false}
         focusable={true}
+        onBlur={[Function]}
         onClick={[Function]}
+        onFocus={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
-        style={
-          Array [
-            Object {
-              "alignSelf": "center",
-              "padding": 4,
-            },
-            Object {
-              "marginRight": 4,
-            },
-            Object {
-              "marginRight": 8,
-              "padding": 0,
-            },
-          ]
-        }
       >
-        <Text
-          accessibilityElementsHidden={true}
-          allowFontScaling={false}
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          selectable={false}
+        <View
           style={
-            Array [
-              Object {
-                "color": "rgba(29, 25, 43, 1)",
-                "fontSize": 18,
+            [
+              {
+                "alignSelf": "center",
+                "padding": 4,
               },
-              Array [
-                Object {
-                  "lineHeight": 18,
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
+              {
+                "marginRight": 4,
               },
-              Object {},
+              {
+                "marginRight": 8,
+                "padding": 0,
+              },
             ]
           }
         >
-          󰁅
-        </Text>
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "rgba(29, 25, 43, 1)",
+                  "fontSize": 18,
+                },
+                [
+                  {
+                    "lineHeight": 18,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                {},
+              ]
+            }
+          >
+            󰁅
+          </Text>
+        </View>
       </View>
     </View>
   </View>
@@ -580,29 +622,16 @@ exports[`renders chip with icon 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
-      "alignSelf": undefined,
+    {
       "backgroundColor": "rgba(232, 222, 248, 1)",
       "borderRadius": 8,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
-      "width": undefined,
     }
   }
   testID="chip-container-outer-layer"
@@ -610,7 +639,7 @@ exports[`renders chip with icon 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(232, 222, 248, 1)",
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 8,
@@ -619,7 +648,7 @@ exports[`renders chip with icon 1`] = `
         "flex": undefined,
         "flexDirection": "column",
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -632,9 +661,20 @@ exports[`renders chip with icon 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": true,
+          "expanded": undefined,
           "selected": false,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -650,17 +690,16 @@ exports[`renders chip with icon 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          false,
-          Array [
-            Object {
+          [
+            {
               "borderRadius": 8,
             },
-            Object {
-              "flexGrow": 1,
+            {
+              "width": "100%",
             },
           ],
         ]
@@ -669,18 +708,17 @@ exports[`renders chip with icon 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
-              "flexGrow": 1,
               "paddingLeft": 4,
               "position": "relative",
             },
-            Object {
+            {
               "paddingLeft": 0,
             },
-            Object {
+            {
               "paddingRight": 0,
             },
           ]
@@ -688,12 +726,12 @@ exports[`renders chip with icon 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignSelf": "center",
                 "padding": 4,
               },
-              Object {
+              {
                 "paddingLeft": 8,
                 "paddingRight": 0,
               },
@@ -708,30 +746,30 @@ exports[`renders chip with icon 1`] = `
             pointerEvents="none"
             selectable={false}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "rgba(103, 80, 164, 1)",
                   "fontSize": 18,
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "lineHeight": 18,
-                    "transform": Array [
-                      Object {
+                    "transform": [
+                      {
                         "scaleX": 1,
                       },
                     ],
                   },
-                  Object {
+                  {
                     "backgroundColor": "transparent",
                   },
                 ],
-                Object {
+                {
                   "fontFamily": "Material Design Icons",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
-                Object {},
+                {},
               ]
             }
           >
@@ -742,39 +780,41 @@ exports[`renders chip with icon 1`] = `
           numberOfLines={1}
           selectable={false}
           style={
-            Array [
-              Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
+            [
+              {
                 "textAlign": "left",
               },
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
-              Array [
-                Object {
-                  "marginVertical": 6,
-                  "textAlignVertical": "center",
-                },
-                Object {
-                  "color": "rgba(29, 25, 43, 1)",
+              [
+                {
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Object {
-                  "marginLeft": 8,
-                  "marginRight": 16,
-                },
-                undefined,
+                [
+                  {
+                    "marginVertical": 6,
+                    "textAlignVertical": "center",
+                  },
+                  {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  {
+                    "marginLeft": 8,
+                    "marginRight": 16,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -791,29 +831,16 @@ exports[`renders chip with onPress 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
-      "alignSelf": undefined,
+    {
       "backgroundColor": "rgba(232, 222, 248, 1)",
       "borderRadius": 8,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
-      "width": undefined,
     }
   }
   testID="chip-container-outer-layer"
@@ -821,7 +848,7 @@ exports[`renders chip with onPress 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgba(232, 222, 248, 1)",
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 8,
@@ -830,7 +857,7 @@ exports[`renders chip with onPress 1`] = `
         "flex": undefined,
         "flexDirection": "column",
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -843,9 +870,20 @@ exports[`renders chip with onPress 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": false,
+          "expanded": undefined,
           "selected": false,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -861,17 +899,16 @@ exports[`renders chip with onPress 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          false,
-          Array [
-            Object {
+          [
+            {
               "borderRadius": 8,
             },
-            Object {
-              "flexGrow": 1,
+            {
+              "width": "100%",
             },
           ],
         ]
@@ -880,18 +917,17 @@ exports[`renders chip with onPress 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
-              "flexGrow": 1,
               "paddingLeft": 4,
               "position": "relative",
             },
-            Object {
+            {
               "paddingLeft": 0,
             },
-            Object {
+            {
               "paddingRight": 0,
             },
           ]
@@ -901,39 +937,41 @@ exports[`renders chip with onPress 1`] = `
           numberOfLines={1}
           selectable={false}
           style={
-            Array [
-              Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
+            [
+              {
                 "textAlign": "left",
               },
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
-              Array [
-                Object {
-                  "marginVertical": 6,
-                  "textAlignVertical": "center",
-                },
-                Object {
-                  "color": "rgba(29, 25, 43, 1)",
+              [
+                {
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Object {
-                  "marginLeft": 16,
-                  "marginRight": 16,
-                },
-                undefined,
+                [
+                  {
+                    "marginVertical": 6,
+                    "textAlignVertical": "center",
+                  },
+                  {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  {
+                    "marginLeft": 16,
+                    "marginRight": 16,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -950,29 +988,16 @@ exports[`renders outlined disabled chip 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
-      "alignSelf": undefined,
+    {
       "backgroundColor": "transparent",
       "borderRadius": 8,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
-      "width": undefined,
     }
   }
   testID="chip-container-outer-layer"
@@ -980,7 +1005,7 @@ exports[`renders outlined disabled chip 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "transparent",
         "borderColor": "rgba(73, 69, 79, 0.12)",
         "borderRadius": 8,
@@ -989,7 +1014,7 @@ exports[`renders outlined disabled chip 1`] = `
         "flex": undefined,
         "flexDirection": "column",
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -1002,9 +1027,20 @@ exports[`renders outlined disabled chip 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": true,
+          "expanded": undefined,
           "selected": false,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -1020,17 +1056,16 @@ exports[`renders outlined disabled chip 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          false,
-          Array [
-            Object {
+          [
+            {
               "borderRadius": 8,
             },
-            Object {
-              "flexGrow": 1,
+            {
+              "width": "100%",
             },
           ],
         ]
@@ -1039,18 +1074,17 @@ exports[`renders outlined disabled chip 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
-              "flexGrow": 1,
               "paddingLeft": 4,
               "position": "relative",
             },
-            Object {
+            {
               "paddingLeft": 0,
             },
-            Object {
+            {
               "paddingRight": 0,
             },
           ]
@@ -1060,39 +1094,41 @@ exports[`renders outlined disabled chip 1`] = `
           numberOfLines={1}
           selectable={false}
           style={
-            Array [
-              Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
+            [
+              {
                 "textAlign": "left",
               },
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
-              Array [
-                Object {
-                  "marginVertical": 6,
-                  "textAlignVertical": "center",
-                },
-                Object {
-                  "color": "rgba(28, 27, 31, 0.38)",
+              [
+                {
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Object {
-                  "marginLeft": 16,
-                  "marginRight": 16,
-                },
-                undefined,
+                [
+                  {
+                    "marginVertical": 6,
+                    "textAlignVertical": "center",
+                  },
+                  {
+                    "color": "rgba(28, 27, 31, 0.38)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  {
+                    "marginLeft": 16,
+                    "marginRight": 16,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }
@@ -1109,29 +1145,16 @@ exports[`renders selected chip 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
-      "alignSelf": undefined,
+    {
       "backgroundColor": "rgb(232, 222, 248)",
       "borderRadius": 8,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
-      "width": undefined,
     }
   }
   testID="chip-container-outer-layer"
@@ -1139,7 +1162,7 @@ exports[`renders selected chip 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "rgb(232, 222, 248)",
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 8,
@@ -1148,7 +1171,7 @@ exports[`renders selected chip 1`] = `
         "flex": undefined,
         "flexDirection": "column",
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -1161,9 +1184,20 @@ exports[`renders selected chip 1`] = `
     <View
       accessibilityRole="button"
       accessibilityState={
-        Object {
+        {
+          "busy": undefined,
+          "checked": undefined,
           "disabled": true,
+          "expanded": undefined,
           "selected": true,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
         }
       }
       accessible={true}
@@ -1179,17 +1213,16 @@ exports[`renders selected chip 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
+        [
+          {
             "overflow": "hidden",
           },
-          false,
-          Array [
-            Object {
+          [
+            {
               "borderRadius": 8,
             },
-            Object {
-              "flexGrow": 1,
+            {
+              "width": "100%",
             },
           ],
         ]
@@ -1198,18 +1231,17 @@ exports[`renders selected chip 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "flexDirection": "row",
-              "flexGrow": 1,
               "paddingLeft": 4,
               "position": "relative",
             },
-            Object {
+            {
               "paddingLeft": 0,
             },
-            Object {
+            {
               "paddingRight": 0,
             },
           ]
@@ -1217,12 +1249,12 @@ exports[`renders selected chip 1`] = `
       >
         <View
           style={
-            Array [
-              Object {
+            [
+              {
                 "alignSelf": "center",
                 "padding": 4,
               },
-              Object {
+              {
                 "paddingLeft": 8,
                 "paddingRight": 0,
               },
@@ -1237,30 +1269,30 @@ exports[`renders selected chip 1`] = `
             pointerEvents="none"
             selectable={false}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "rgba(29, 25, 43, 1)",
                   "fontSize": 18,
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "lineHeight": 18,
-                    "transform": Array [
-                      Object {
+                    "transform": [
+                      {
                         "scaleX": 1,
                       },
                     ],
                   },
-                  Object {
+                  {
                     "backgroundColor": "transparent",
                   },
                 ],
-                Object {
+                {
                   "fontFamily": "Material Design Icons",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
-                Object {},
+                {},
               ]
             }
           >
@@ -1271,39 +1303,41 @@ exports[`renders selected chip 1`] = `
           numberOfLines={1}
           selectable={false}
           style={
-            Array [
-              Object {
-                "fontFamily": "System",
-                "fontSize": 14,
-                "fontWeight": "500",
-                "letterSpacing": 0.1,
-                "lineHeight": 20,
-              },
-              Object {
+            [
+              {
                 "textAlign": "left",
               },
-              Object {
+              {
                 "color": "rgba(28, 27, 31, 1)",
                 "writingDirection": "ltr",
               },
-              Array [
-                Object {
-                  "marginVertical": 6,
-                  "textAlignVertical": "center",
-                },
-                Object {
-                  "color": "rgba(29, 25, 43, 1)",
+              [
+                {
                   "fontFamily": "System",
                   "fontSize": 14,
                   "fontWeight": "500",
                   "letterSpacing": 0.1,
                   "lineHeight": 20,
                 },
-                Object {
-                  "marginLeft": 8,
-                  "marginRight": 16,
-                },
-                undefined,
+                [
+                  {
+                    "marginVertical": 6,
+                    "textAlignVertical": "center",
+                  },
+                  {
+                    "color": "rgba(29, 25, 43, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  {
+                    "marginLeft": 8,
+                    "marginRight": 16,
+                  },
+                  undefined,
+                ],
               ],
             ]
           }

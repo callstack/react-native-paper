@@ -18,6 +18,7 @@ const ButtonExample = () => {
           iconColor={MD2Colors.green500}
           onPress={() => {}}
         />
+        <IconButton icon="" size={24} onPress={() => {}} loading />
         <IconButton icon="camera" size={36} onPress={() => {}} />
         <IconButton
           icon="lock"
@@ -37,6 +38,7 @@ const ButtonExample = () => {
           <IconButton icon="camera" size={24} onPress={() => {}} />
           <IconButton icon="camera" selected size={24} onPress={() => {}} />
           <IconButton icon="camera" disabled size={24} onPress={() => {}} />
+          <IconButton icon="camera" size={24} onPress={() => {}} loading />
         </View>
       </List.Section>
 
@@ -59,6 +61,14 @@ const ButtonExample = () => {
             icon="camera"
             mode="contained"
             disabled
+            size={24}
+            onPress={() => {}}
+          />
+          <IconButton
+            icon=""
+            mode="contained"
+            selected
+            loading
             size={24}
             onPress={() => {}}
           />
@@ -87,6 +97,14 @@ const ButtonExample = () => {
             size={24}
             onPress={() => {}}
           />
+          <IconButton
+            icon=""
+            mode="contained-tonal"
+            disabled
+            size={24}
+            onPress={() => {}}
+            loading
+          />
         </View>
       </List.Section>
 
@@ -111,6 +129,14 @@ const ButtonExample = () => {
             disabled
             size={24}
             onPress={() => {}}
+          />
+          <IconButton
+            icon=""
+            mode="outlined"
+            disabled
+            size={24}
+            onPress={() => {}}
+            loading
           />
         </View>
       </List.Section>
@@ -139,6 +165,7 @@ const ButtonExample = () => {
             containerColor={MD3Colors.tertiary60}
           />
           <IconButton icon="heart" size={60} onPress={() => {}} />
+          <IconButton icon="" size={60} onPress={() => {}} loading />
         </View>
       </List.Section>
     </ScreenWrapper>

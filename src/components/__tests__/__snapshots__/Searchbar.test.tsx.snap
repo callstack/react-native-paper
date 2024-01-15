@@ -4,29 +4,16 @@ exports[`activity indicator snapshot test 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
-      "alignSelf": undefined,
+    {
       "backgroundColor": "rgb(238, 232, 244)",
       "borderRadius": 28,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
-      "width": undefined,
     }
   }
   testID="search-bar-container-outer-layer"
@@ -34,14 +21,14 @@ exports[`activity indicator snapshot test 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "rgb(238, 232, 244)",
         "borderRadius": 28,
         "flex": undefined,
         "flexDirection": "row",
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -54,38 +41,27 @@ exports[`activity indicator snapshot test 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
-          "alignSelf": undefined,
+        {
           "backgroundColor": "transparent",
           "borderRadius": 20,
-          "bottom": undefined,
-          "end": undefined,
-          "flex": undefined,
           "height": 40,
-          "left": undefined,
           "margin": 6,
-          "opacity": undefined,
-          "position": undefined,
-          "right": undefined,
           "shadowColor": "#000",
-          "shadowOffset": Object {
+          "shadowOffset": {
             "height": 0,
             "width": 0,
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
-          "start": undefined,
-          "top": undefined,
-          "transform": undefined,
           "width": 40,
         }
       }
-      testID="icon-button-container-outer-layer"
+      testID="search-bar-icon-container-outer-layer"
     >
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "backgroundColor": "transparent",
             "borderColor": "rgba(121, 116, 126, 1)",
             "borderRadius": 20,
@@ -94,7 +70,7 @@ exports[`activity indicator snapshot test 1`] = `
             "flex": 1,
             "overflow": "hidden",
             "shadowColor": "#000",
-            "shadowOffset": Object {
+            "shadowOffset": {
               "height": 0,
               "width": 0,
             },
@@ -102,24 +78,36 @@ exports[`activity indicator snapshot test 1`] = `
             "shadowRadius": 0,
           }
         }
-        testID="icon-button-container"
+        testID="search-bar-icon-container"
       >
         <View
           accessibilityComponentType="button"
           accessibilityLabel="search"
           accessibilityRole="button"
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": true,
+              "expanded": undefined,
+              "selected": undefined,
             }
           }
           accessibilityTraits="button"
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           centered={true}
           collapsable={false}
           focusable={true}
           hitSlop={
-            Object {
+            {
               "bottom": 6,
               "left": 6,
               "right": 6,
@@ -136,24 +124,23 @@ exports[`activity indicator snapshot test 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Array [
-              Object {
+            [
+              {
                 "overflow": "hidden",
               },
-              false,
-              Array [
-                Object {
+              [
+                {
                   "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                Object {
+                {
                   "borderRadius": 20,
                 },
               ],
             ]
           }
-          testID="icon-button"
+          testID="search-bar-icon"
         >
           <Text
             accessibilityElementsHidden={true}
@@ -162,30 +149,30 @@ exports[`activity indicator snapshot test 1`] = `
             pointerEvents="none"
             selectable={false}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "lineHeight": 24,
-                    "transform": Array [
-                      Object {
+                    "transform": [
+                      {
                         "scaleX": 1,
                       },
                     ],
                   },
-                  Object {
+                  {
                     "backgroundColor": "transparent",
                   },
                 ],
-                Object {
+                {
                   "fontFamily": "Material Design Icons",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
-                Object {},
+                {},
               ]
             }
           >
@@ -202,8 +189,8 @@ exports[`activity indicator snapshot test 1`] = `
       returnKeyType="search"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
-        Array [
-          Object {
+        [
+          {
             "alignSelf": "stretch",
             "flex": 1,
             "fontSize": 18,
@@ -211,7 +198,7 @@ exports[`activity indicator snapshot test 1`] = `
             "paddingLeft": 8,
             "textAlign": "left",
           },
-          Object {
+          {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
@@ -219,7 +206,7 @@ exports[`activity indicator snapshot test 1`] = `
             "letterSpacing": 0.15,
             "lineHeight": 0,
           },
-          Object {
+          {
             "minHeight": 56,
             "paddingLeft": 0,
           },
@@ -233,18 +220,18 @@ exports[`activity indicator snapshot test 1`] = `
     <View
       accessibilityRole="progressbar"
       accessibilityState={
-        Object {
+        {
           "busy": true,
         }
       }
       accessible={true}
       style={
-        Array [
-          Object {
+        [
+          {
             "alignItems": "center",
             "justifyContent": "center",
           },
-          Object {
+          {
             "marginHorizontal": 16,
           },
         ]
@@ -254,7 +241,7 @@ exports[`activity indicator snapshot test 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "height": 24,
             "opacity": 1,
             "width": 24,
@@ -264,7 +251,7 @@ exports[`activity indicator snapshot test 1`] = `
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "alignItems": "center",
               "bottom": 0,
               "justifyContent": "center",
@@ -278,10 +265,10 @@ exports[`activity indicator snapshot test 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "height": 24,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "rotate": "45deg",
                   },
                 ],
@@ -292,7 +279,7 @@ exports[`activity indicator snapshot test 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "height": 12,
                   "overflow": "hidden",
                   "width": 24,
@@ -302,13 +289,13 @@ exports[`activity indicator snapshot test 1`] = `
               <View
                 collapsable={false}
                 style={
-                  Object {
+                  {
                     "height": 24,
-                    "transform": Array [
-                      Object {
+                    "transform": [
+                      {
                         "translateY": 0,
                       },
-                      Object {
+                      {
                         "rotate": "-165deg",
                       },
                     ],
@@ -319,7 +306,7 @@ exports[`activity indicator snapshot test 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    Object {
+                    {
                       "height": 12,
                       "overflow": "hidden",
                       "width": 24,
@@ -329,7 +316,7 @@ exports[`activity indicator snapshot test 1`] = `
                   <View
                     collapsable={false}
                     style={
-                      Object {
+                      {
                         "borderColor": "rgba(103, 80, 164, 1)",
                         "borderRadius": 12,
                         "borderWidth": 2.4,
@@ -346,7 +333,7 @@ exports[`activity indicator snapshot test 1`] = `
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "alignItems": "center",
               "bottom": 0,
               "justifyContent": "center",
@@ -360,10 +347,10 @@ exports[`activity indicator snapshot test 1`] = `
           <View
             collapsable={false}
             style={
-              Object {
+              {
                 "height": 24,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "rotate": "45deg",
                   },
                 ],
@@ -374,7 +361,7 @@ exports[`activity indicator snapshot test 1`] = `
             <View
               collapsable={false}
               style={
-                Object {
+                {
                   "height": 12,
                   "overflow": "hidden",
                   "top": 12,
@@ -385,13 +372,13 @@ exports[`activity indicator snapshot test 1`] = `
               <View
                 collapsable={false}
                 style={
-                  Object {
+                  {
                     "height": 24,
-                    "transform": Array [
-                      Object {
+                    "transform": [
+                      {
                         "translateY": -12,
                       },
-                      Object {
+                      {
                         "rotate": "345deg",
                       },
                     ],
@@ -402,7 +389,7 @@ exports[`activity indicator snapshot test 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    Object {
+                    {
                       "height": 12,
                       "overflow": "hidden",
                       "width": 24,
@@ -412,7 +399,7 @@ exports[`activity indicator snapshot test 1`] = `
                   <View
                     collapsable={false}
                     style={
-                      Object {
+                      {
                         "borderColor": "rgba(103, 80, 164, 1)",
                         "borderRadius": 12,
                         "borderWidth": 2.4,
@@ -436,29 +423,16 @@ exports[`renders with placeholder 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
-      "alignSelf": undefined,
+    {
       "backgroundColor": "rgb(238, 232, 244)",
       "borderRadius": 28,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
-      "width": undefined,
     }
   }
   testID="search-bar-container-outer-layer"
@@ -466,14 +440,14 @@ exports[`renders with placeholder 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "rgb(238, 232, 244)",
         "borderRadius": 28,
         "flex": undefined,
         "flexDirection": "row",
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -486,38 +460,27 @@ exports[`renders with placeholder 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
-          "alignSelf": undefined,
+        {
           "backgroundColor": "transparent",
           "borderRadius": 20,
-          "bottom": undefined,
-          "end": undefined,
-          "flex": undefined,
           "height": 40,
-          "left": undefined,
           "margin": 6,
-          "opacity": undefined,
-          "position": undefined,
-          "right": undefined,
           "shadowColor": "#000",
-          "shadowOffset": Object {
+          "shadowOffset": {
             "height": 0,
             "width": 0,
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
-          "start": undefined,
-          "top": undefined,
-          "transform": undefined,
           "width": 40,
         }
       }
-      testID="icon-button-container-outer-layer"
+      testID="search-bar-icon-container-outer-layer"
     >
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "backgroundColor": "transparent",
             "borderColor": "rgba(121, 116, 126, 1)",
             "borderRadius": 20,
@@ -526,7 +489,7 @@ exports[`renders with placeholder 1`] = `
             "flex": 1,
             "overflow": "hidden",
             "shadowColor": "#000",
-            "shadowOffset": Object {
+            "shadowOffset": {
               "height": 0,
               "width": 0,
             },
@@ -534,24 +497,36 @@ exports[`renders with placeholder 1`] = `
             "shadowRadius": 0,
           }
         }
-        testID="icon-button-container"
+        testID="search-bar-icon-container"
       >
         <View
           accessibilityComponentType="button"
           accessibilityLabel="search"
           accessibilityRole="button"
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": true,
+              "expanded": undefined,
+              "selected": undefined,
             }
           }
           accessibilityTraits="button"
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           centered={true}
           collapsable={false}
           focusable={true}
           hitSlop={
-            Object {
+            {
               "bottom": 6,
               "left": 6,
               "right": 6,
@@ -568,24 +543,23 @@ exports[`renders with placeholder 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Array [
-              Object {
+            [
+              {
                 "overflow": "hidden",
               },
-              false,
-              Array [
-                Object {
+              [
+                {
                   "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                Object {
+                {
                   "borderRadius": 20,
                 },
               ],
             ]
           }
-          testID="icon-button"
+          testID="search-bar-icon"
         >
           <Text
             accessibilityElementsHidden={true}
@@ -594,30 +568,30 @@ exports[`renders with placeholder 1`] = `
             pointerEvents="none"
             selectable={false}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "lineHeight": 24,
-                    "transform": Array [
-                      Object {
+                    "transform": [
+                      {
                         "scaleX": 1,
                       },
                     ],
                   },
-                  Object {
+                  {
                     "backgroundColor": "transparent",
                   },
                 ],
-                Object {
+                {
                   "fontFamily": "Material Design Icons",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
-                Object {},
+                {},
               ]
             }
           >
@@ -634,8 +608,8 @@ exports[`renders with placeholder 1`] = `
       returnKeyType="search"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
-        Array [
-          Object {
+        [
+          {
             "alignSelf": "stretch",
             "flex": 1,
             "fontSize": 18,
@@ -643,7 +617,7 @@ exports[`renders with placeholder 1`] = `
             "paddingLeft": 8,
             "textAlign": "left",
           },
-          Object {
+          {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
@@ -651,7 +625,7 @@ exports[`renders with placeholder 1`] = `
             "letterSpacing": 0.15,
             "lineHeight": 0,
           },
-          Object {
+          {
             "minHeight": 56,
             "paddingLeft": 0,
           },
@@ -665,8 +639,8 @@ exports[`renders with placeholder 1`] = `
     <View
       pointerEvents="none"
       style={
-        Array [
-          Object {
+        [
+          {
             "marginLeft": 16,
             "position": "absolute",
             "right": 0,
@@ -679,38 +653,27 @@ exports[`renders with placeholder 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
-            "alignSelf": undefined,
+          {
             "backgroundColor": "transparent",
             "borderRadius": 20,
-            "bottom": undefined,
-            "end": undefined,
-            "flex": undefined,
             "height": 40,
-            "left": undefined,
             "margin": 6,
-            "opacity": undefined,
-            "position": undefined,
-            "right": undefined,
             "shadowColor": "#000",
-            "shadowOffset": Object {
+            "shadowOffset": {
               "height": 0,
               "width": 0,
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-            "start": undefined,
-            "top": undefined,
-            "transform": undefined,
             "width": 40,
           }
         }
-        testID="icon-button-container-outer-layer"
+        testID="search-bar-clear-icon-container-outer-layer"
       >
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "backgroundColor": "transparent",
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
@@ -719,7 +682,7 @@ exports[`renders with placeholder 1`] = `
               "flex": 1,
               "overflow": "hidden",
               "shadowColor": "#000",
-              "shadowOffset": Object {
+              "shadowOffset": {
                 "height": 0,
                 "width": 0,
               },
@@ -727,24 +690,36 @@ exports[`renders with placeholder 1`] = `
               "shadowRadius": 0,
             }
           }
-          testID="icon-button-container"
+          testID="search-bar-clear-icon-container"
         >
           <View
             accessibilityComponentType="button"
             accessibilityLabel="clear"
             accessibilityRole="button"
             accessibilityState={
-              Object {
+              {
+                "busy": undefined,
+                "checked": undefined,
                 "disabled": false,
+                "expanded": undefined,
+                "selected": undefined,
               }
             }
             accessibilityTraits="button"
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             centered={true}
             collapsable={false}
             focusable={true}
             hitSlop={
-              Object {
+              {
                 "bottom": 6,
                 "left": 6,
                 "right": 6,
@@ -761,24 +736,23 @@ exports[`renders with placeholder 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Array [
-                Object {
+              [
+                {
                   "overflow": "hidden",
                 },
-                false,
-                Array [
-                  Object {
+                [
+                  {
                     "alignItems": "center",
                     "flexGrow": 1,
                     "justifyContent": "center",
                   },
-                  Object {
+                  {
                     "borderRadius": 20,
                   },
                 ],
               ]
             }
-            testID="icon-button"
+            testID="search-bar-clear-icon"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -787,30 +761,30 @@ exports[`renders with placeholder 1`] = `
               pointerEvents="none"
               selectable={false}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "rgba(255, 255, 255, 0)",
                     "fontSize": 24,
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "lineHeight": 24,
-                      "transform": Array [
-                        Object {
+                      "transform": [
+                        {
                           "scaleX": 1,
                         },
                       ],
                     },
-                    Object {
+                    {
                       "backgroundColor": "transparent",
                     },
                   ],
-                  Object {
+                  {
                     "fontFamily": "Material Design Icons",
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  Object {},
+                  {},
                 ]
               }
             >
@@ -828,29 +802,16 @@ exports[`renders with text 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
-      "alignSelf": undefined,
+    {
       "backgroundColor": "rgb(238, 232, 244)",
       "borderRadius": 28,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
-      "opacity": undefined,
-      "position": undefined,
-      "right": undefined,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0,
       "shadowRadius": 0,
-      "start": undefined,
-      "top": undefined,
-      "transform": undefined,
-      "width": undefined,
     }
   }
   testID="search-bar-container-outer-layer"
@@ -858,14 +819,14 @@ exports[`renders with text 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "rgb(238, 232, 244)",
         "borderRadius": 28,
         "flex": undefined,
         "flexDirection": "row",
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 0,
           "width": 0,
         },
@@ -878,38 +839,27 @@ exports[`renders with text 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
-          "alignSelf": undefined,
+        {
           "backgroundColor": "transparent",
           "borderRadius": 20,
-          "bottom": undefined,
-          "end": undefined,
-          "flex": undefined,
           "height": 40,
-          "left": undefined,
           "margin": 6,
-          "opacity": undefined,
-          "position": undefined,
-          "right": undefined,
           "shadowColor": "#000",
-          "shadowOffset": Object {
+          "shadowOffset": {
             "height": 0,
             "width": 0,
           },
           "shadowOpacity": 0,
           "shadowRadius": 0,
-          "start": undefined,
-          "top": undefined,
-          "transform": undefined,
           "width": 40,
         }
       }
-      testID="icon-button-container-outer-layer"
+      testID="search-bar-icon-container-outer-layer"
     >
       <View
         collapsable={false}
         style={
-          Object {
+          {
             "backgroundColor": "transparent",
             "borderColor": "rgba(121, 116, 126, 1)",
             "borderRadius": 20,
@@ -918,7 +868,7 @@ exports[`renders with text 1`] = `
             "flex": 1,
             "overflow": "hidden",
             "shadowColor": "#000",
-            "shadowOffset": Object {
+            "shadowOffset": {
               "height": 0,
               "width": 0,
             },
@@ -926,24 +876,36 @@ exports[`renders with text 1`] = `
             "shadowRadius": 0,
           }
         }
-        testID="icon-button-container"
+        testID="search-bar-icon-container"
       >
         <View
           accessibilityComponentType="button"
           accessibilityLabel="search"
           accessibilityRole="button"
           accessibilityState={
-            Object {
+            {
+              "busy": undefined,
+              "checked": undefined,
               "disabled": true,
+              "expanded": undefined,
+              "selected": undefined,
             }
           }
           accessibilityTraits="button"
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           centered={true}
           collapsable={false}
           focusable={true}
           hitSlop={
-            Object {
+            {
               "bottom": 6,
               "left": 6,
               "right": 6,
@@ -960,24 +922,23 @@ exports[`renders with text 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Array [
-              Object {
+            [
+              {
                 "overflow": "hidden",
               },
-              false,
-              Array [
-                Object {
+              [
+                {
                   "alignItems": "center",
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                Object {
+                {
                   "borderRadius": 20,
                 },
               ],
             ]
           }
-          testID="icon-button"
+          testID="search-bar-icon"
         >
           <Text
             accessibilityElementsHidden={true}
@@ -986,30 +947,30 @@ exports[`renders with text 1`] = `
             pointerEvents="none"
             selectable={false}
             style={
-              Array [
-                Object {
+              [
+                {
                   "color": "rgba(73, 69, 79, 1)",
                   "fontSize": 24,
                 },
-                Array [
-                  Object {
+                [
+                  {
                     "lineHeight": 24,
-                    "transform": Array [
-                      Object {
+                    "transform": [
+                      {
                         "scaleX": 1,
                       },
                     ],
                   },
-                  Object {
+                  {
                     "backgroundColor": "transparent",
                   },
                 ],
-                Object {
+                {
                   "fontFamily": "Material Design Icons",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
-                Object {},
+                {},
               ]
             }
           >
@@ -1026,8 +987,8 @@ exports[`renders with text 1`] = `
       returnKeyType="search"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
-        Array [
-          Object {
+        [
+          {
             "alignSelf": "stretch",
             "flex": 1,
             "fontSize": 18,
@@ -1035,7 +996,7 @@ exports[`renders with text 1`] = `
             "paddingLeft": 8,
             "textAlign": "left",
           },
-          Object {
+          {
             "color": "rgba(73, 69, 79, 1)",
             "fontFamily": "System",
             "fontSize": 16,
@@ -1043,7 +1004,7 @@ exports[`renders with text 1`] = `
             "letterSpacing": 0.15,
             "lineHeight": 0,
           },
-          Object {
+          {
             "minHeight": 56,
             "paddingLeft": 0,
           },
@@ -1057,7 +1018,7 @@ exports[`renders with text 1`] = `
     <View
       pointerEvents="auto"
       style={
-        Array [
+        [
           false,
           false,
         ]
@@ -1067,38 +1028,27 @@ exports[`renders with text 1`] = `
       <View
         collapsable={false}
         style={
-          Object {
-            "alignSelf": undefined,
+          {
             "backgroundColor": "transparent",
             "borderRadius": 20,
-            "bottom": undefined,
-            "end": undefined,
-            "flex": undefined,
             "height": 40,
-            "left": undefined,
             "margin": 6,
-            "opacity": undefined,
-            "position": undefined,
-            "right": undefined,
             "shadowColor": "#000",
-            "shadowOffset": Object {
+            "shadowOffset": {
               "height": 0,
               "width": 0,
             },
             "shadowOpacity": 0,
             "shadowRadius": 0,
-            "start": undefined,
-            "top": undefined,
-            "transform": undefined,
             "width": 40,
           }
         }
-        testID="icon-button-container-outer-layer"
+        testID="search-bar-clear-icon-container-outer-layer"
       >
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "backgroundColor": "transparent",
               "borderColor": "rgba(121, 116, 126, 1)",
               "borderRadius": 20,
@@ -1107,7 +1057,7 @@ exports[`renders with text 1`] = `
               "flex": 1,
               "overflow": "hidden",
               "shadowColor": "#000",
-              "shadowOffset": Object {
+              "shadowOffset": {
                 "height": 0,
                 "width": 0,
               },
@@ -1115,24 +1065,36 @@ exports[`renders with text 1`] = `
               "shadowRadius": 0,
             }
           }
-          testID="icon-button-container"
+          testID="search-bar-clear-icon-container"
         >
           <View
             accessibilityComponentType="button"
             accessibilityLabel="clear"
             accessibilityRole="button"
             accessibilityState={
-              Object {
+              {
+                "busy": undefined,
+                "checked": undefined,
                 "disabled": false,
+                "expanded": undefined,
+                "selected": undefined,
               }
             }
             accessibilityTraits="button"
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             centered={true}
             collapsable={false}
             focusable={true}
             hitSlop={
-              Object {
+              {
                 "bottom": 6,
                 "left": 6,
                 "right": 6,
@@ -1149,24 +1111,23 @@ exports[`renders with text 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Array [
-                Object {
+              [
+                {
                   "overflow": "hidden",
                 },
-                false,
-                Array [
-                  Object {
+                [
+                  {
                     "alignItems": "center",
                     "flexGrow": 1,
                     "justifyContent": "center",
                   },
-                  Object {
+                  {
                     "borderRadius": 20,
                   },
                 ],
               ]
             }
-            testID="icon-button"
+            testID="search-bar-clear-icon"
           >
             <Text
               accessibilityElementsHidden={true}
@@ -1175,30 +1136,30 @@ exports[`renders with text 1`] = `
               pointerEvents="none"
               selectable={false}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "rgba(73, 69, 79, 1)",
                     "fontSize": 24,
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "lineHeight": 24,
-                      "transform": Array [
-                        Object {
+                      "transform": [
+                        {
                           "scaleX": 1,
                         },
                       ],
                     },
-                    Object {
+                    {
                       "backgroundColor": "transparent",
                     },
                   ],
-                  Object {
+                  {
                     "fontFamily": "Material Design Icons",
                     "fontStyle": "normal",
                     "fontWeight": "normal",
                   },
-                  Object {},
+                  {},
                 ]
               }
             >

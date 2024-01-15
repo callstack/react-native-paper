@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, Platform, ViewProps } from 'react-native';
+import { StyleSheet, Text, Platform, ViewProps, Role } from 'react-native';
 
 import { black } from '../styles/themes/v2/colors';
 
@@ -9,7 +9,18 @@ export type IconProps = {
   size: number;
   direction: 'rtl' | 'ltr';
   allowFontScaling?: boolean;
+  testID?: string;
 };
+
+type AccessibilityProps =
+  | {
+      role?: Role;
+      focusable?: boolean;
+    }
+  | {
+      accessibilityElementsHidden?: boolean;
+      importantForAccessibility?: 'auto' | 'yes' | 'no' | 'no-hide-descendants';
+    };
 
 let MaterialCommunityIcons: React.ComponentType<
   React.ComponentProps<
@@ -61,7 +72,7 @@ try {
   };
 }
 
-export const accessibilityProps =
+export const accessibilityProps: AccessibilityProps =
   Platform.OS === 'web'
     ? {
         role: 'img',
@@ -79,6 +90,7 @@ const defaultIcon = ({
   size,
   direction,
   allowFontScaling,
+  testID,
 }: IconProps) => (
   <MaterialCommunityIcons
     allowFontScaling={allowFontScaling}
@@ -94,6 +106,7 @@ const defaultIcon = ({
     ]}
     pointerEvents="none"
     selectable={false}
+    testID={testID}
     {...accessibilityProps}
   />
 );

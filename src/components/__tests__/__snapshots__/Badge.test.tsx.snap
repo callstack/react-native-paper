@@ -5,7 +5,7 @@ exports[`renders badge 1`] = `
   collapsable={false}
   numberOfLines={1}
   style={
-    Object {
+    {
       "alignSelf": "flex-end",
       "backgroundColor": "rgba(179, 38, 30, 1)",
       "borderRadius": 10,
@@ -29,7 +29,7 @@ exports[`renders badge as hidden 1`] = `
   collapsable={false}
   numberOfLines={1}
   style={
-    Object {
+    {
       "alignSelf": "flex-end",
       "backgroundColor": "rgba(179, 38, 30, 1)",
       "borderRadius": 6,
@@ -55,7 +55,7 @@ exports[`renders badge in different color 1`] = `
   collapsable={false}
   numberOfLines={1}
   style={
-    Object {
+    {
       "alignSelf": "flex-end",
       "backgroundColor": "#f44336",
       "borderRadius": 10,
@@ -81,7 +81,7 @@ exports[`renders badge in different size 1`] = `
   collapsable={false}
   numberOfLines={1}
   style={
-    Object {
+    {
       "alignSelf": "flex-end",
       "backgroundColor": "rgba(179, 38, 30, 1)",
       "borderRadius": 6,
@@ -107,7 +107,7 @@ exports[`renders badge with content 1`] = `
   collapsable={false}
   numberOfLines={1}
   style={
-    Object {
+    {
       "alignSelf": "flex-end",
       "backgroundColor": "rgba(179, 38, 30, 1)",
       "borderRadius": 10,

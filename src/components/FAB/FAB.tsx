@@ -2,13 +2,16 @@ import * as React from 'react';
 import {
   AccessibilityState,
   Animated,
+  ColorValue,
   GestureResponderEvent,
+  PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
   View,
   ViewStyle,
 } from 'react-native';
 
+import { getExtendedFabStyle, getFABColors, getFabStyle } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
@@ -18,7 +21,6 @@ import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { getExtendedFabStyle, getFABColors, getFabStyle } from './utils';
 
 type FABSize = 'small' | 'medium' | 'large';
 
@@ -50,6 +52,11 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    */
   uppercase?: boolean;
   /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
+  /**
    * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
    * Uses `label` by default if specified.
    */
@@ -63,7 +70,7 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    */
   animated?: boolean;
   /**
-   *  @deprecated Deprecated in v.3x - use prop size="small".
+   *  @deprecated Deprecated in v.5x - use prop size="small".
    *
    *  Whether FAB is mini-sized, used to create visual continuity with other elements. This has no effect if `label` is specified.
    */
@@ -72,6 +79,10 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * Custom color for the icon and label of the `FAB`.
    */
   color?: string;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
@@ -91,7 +102,7 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
   /**
    * Function to execute on long press.
    */
-  onLongPress?: () => void;
+  onLongPress?: (e: GestureResponderEvent) => void;
   /**
    * The number of milliseconds a user must touch the element before executing `onLongPress`.
    */
@@ -123,23 +134,24 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * Color mappings variant for combinations of container and icon colors.
    */
   variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
+  /**
+   * Specifies the largest possible scale a label font can reach.
+   */
+  labelMaxFontSizeMultiplier?: number;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * TestID used for testing purposes
+   */
   testID?: string;
   ref?: React.RefObject<View>;
 } & IconOrLabel;
 
 /**
- * A floating action button represents the primary action in an application.
- * <div class="screenshots">
- *   <img class="small" src="screenshots/fab-1.png" />
- *   <img class="small" src="screenshots/fab-2.png" />
- *   <img class="small" src="screenshots/fab-3.png" />
- *   <img class="small" src="screenshots/fab-4.png" />
- * </div>
+ * A floating action button represents the primary action on a screen. It appears in front of all screen content.
  *
  * ## Usage
  * ```js
@@ -172,10 +184,12 @@ const FAB = forwardRef<View, Props>(
     {
       icon,
       label,
+      background,
       accessibilityLabel = label,
       accessibilityState,
       animated = true,
       color: customColor,
+      rippleColor: customRippleColor,
       disabled,
       onPress,
       onLongPress,
@@ -190,6 +204,7 @@ const FAB = forwardRef<View, Props>(
       customSize,
       mode = 'elevated',
       variant = 'primary',
+      labelMaxFontSizeMultiplier,
       ...rest
     }: Props,
     ref
@@ -233,6 +248,7 @@ const FAB = forwardRef<View, Props>(
       disabled,
       customColor,
       customBackgroundColor,
+      customRippleColor,
     });
 
     const isLargeSize = size === 'large';
@@ -276,6 +292,7 @@ const FAB = forwardRef<View, Props>(
       >
         <TouchableRipple
           borderless
+          background={background}
           onPress={onPress}
           onLongPress={onLongPress}
           delayLongPress={delayLongPress}
@@ -286,6 +303,7 @@ const FAB = forwardRef<View, Props>(
           accessibilityState={newAccessibilityState}
           testID={testID}
           style={{ borderRadius }}
+          {...rest}
         >
           <View
             style={[styles.content, label ? extendedStyle : fabStyle]}
@@ -315,6 +333,7 @@ const FAB = forwardRef<View, Props>(
                   uppercase && styles.uppercaseLabel,
                   textStyle,
                 ]}
+                maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
               >
                 {label}
               </Text>

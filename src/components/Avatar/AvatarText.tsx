@@ -38,6 +38,10 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   labelStyle?: StyleProp<TextStyle>;
   /**
+   * Specifies the largest possible scale a text font can reach.
+   */
+  maxFontSizeMultiplier?: number;
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -45,12 +49,6 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
 
 /**
  * Avatars can be used to represent people in a graphical way.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/avatar-text.png" />
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js
@@ -69,6 +67,7 @@ const AvatarText = ({
   labelStyle,
   color: customColor,
   theme: themeOverrides,
+  maxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -104,6 +103,7 @@ const AvatarText = ({
           labelStyle,
         ]}
         numberOfLines={1}
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
       >
         {label}
       </Text>

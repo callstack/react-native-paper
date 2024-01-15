@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { act, fireEvent, render } from '@testing-library/react-native';
 
 import Checkbox from '../../Checkbox';
 
@@ -94,4 +94,23 @@ it('should have maxFontSizeMultiplier set to 1.5 by default', () => {
   );
   const checkboxItemText = getByTestId('checkbox-item-text');
   expect(checkboxItemText.props.maxFontSizeMultiplier).toBe(1.5);
+});
+
+it('should execute onLongPress', () => {
+  const onLongPress = jest.fn();
+
+  const { getByTestId } = render(
+    <Checkbox.Item
+      label="Item"
+      status="unchecked"
+      testID="checkbox-item"
+      onLongPress={onLongPress}
+    />
+  );
+
+  act(() => {
+    fireEvent(getByTestId('checkbox-item'), 'longPress', { key: 'value' });
+  });
+
+  expect(onLongPress).toHaveBeenCalledTimes(1);
 });

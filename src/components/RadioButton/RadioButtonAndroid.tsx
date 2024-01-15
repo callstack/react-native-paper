@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 
-import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, InternalTheme } from '../../types';
-import { getAndroidSelectionControlColor } from '../Checkbox/utils';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
+import { useInternalTheme } from '../../core/theming';
+import type { $RemoveChildren, ThemeProp } from '../../types';
+import { getAndroidSelectionControlColor } from '../Checkbox/utils';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -36,7 +36,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * @optional
    */
-  theme?: InternalTheme;
+  theme?: ThemeProp;
   /**
    * testID to be used on tests.
    */
@@ -50,16 +50,7 @@ const BORDER_WIDTH = 2;
  * This component follows platform guidelines for Android, but can be used
  * on any platform.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img src="screenshots/radio-enabled.android.png" />
- *     <figcaption>Enabled</figcaption>
- *   </figure>
- *   <figure>
- *     <img src="screenshots/radio-disabled.android.png" />
- *     <figcaption>Disabled</figcaption>
- *   </figure>
- * </div>
+ * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
 const RadioButtonAndroid = ({
   disabled,

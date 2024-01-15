@@ -1,6 +1,7 @@
 import { Platform } from 'react-native';
 
-import { MD3LightTheme, MD3DarkTheme, MD3Theme } from 'react-native-paper';
+import ExpoMaterial3ThemeModule from '@pchmn/expo-material3-theme/build/ExpoMaterial3ThemeModule';
+import { MD3DarkTheme, MD3LightTheme, MD3Theme } from 'react-native-paper';
 
 type ReducerAction<T extends keyof State> = {
   payload: State[T];
@@ -22,8 +23,11 @@ export type State = {
   outlinedText: string;
   largeText: string;
   flatTextPassword: string;
+  flatLongText: string;
   outlinedLargeText: string;
+  outlinedCustomLabel: string;
   outlinedTextPassword: string;
+  outlinedLongText: string;
   nameNoPadding: string;
   customStyleText: string;
   nameRequired: string;
@@ -1415,3 +1419,8 @@ export const restaurantsData = [
     price: 4,
   },
 ];
+
+export const deviceColorsSupported =
+  Boolean(ExpoMaterial3ThemeModule) &&
+  Platform.OS === 'android' &&
+  Platform.Version >= 31;

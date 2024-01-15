@@ -23,6 +23,7 @@ import DialogExample from './Examples/DialogExample';
 import DividerExample from './Examples/DividerExample';
 import FABExample from './Examples/FABExample';
 import IconButtonExample from './Examples/IconButtonExample';
+import IconExample from './Examples/IconExample';
 import ListAccordionExample from './Examples/ListAccordionExample';
 import ListAccordionExampleGroup from './Examples/ListAccordionGroupExample';
 import ListItemExample from './Examples/ListItemExample';
@@ -74,6 +75,7 @@ export const mainExamples: Record<
   divider: DividerExample,
   fab: FABExample,
   iconButton: IconButtonExample,
+  icon: IconExample,
   listAccordion: ListAccordionExample,
   listAccordionGroup: ListAccordionExampleGroup,
   listSection: ListSectionExample,
@@ -123,7 +125,7 @@ type Props = {
 
 type Item = {
   id: string;
-  data: typeof mainExamples[string];
+  data: (typeof mainExamples)[string];
 };
 
 const data = Object.keys(mainExamples).map(

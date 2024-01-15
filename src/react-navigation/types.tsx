@@ -7,7 +7,8 @@ import type {
   TabActionHelpers,
   TabNavigationState,
 } from '@react-navigation/native';
-import type { BottomNavigation } from 'react-native-paper';
+
+import type BottomNavigation from '../components/BottomNavigation/BottomNavigation';
 
 export type MaterialBottomTabNavigationEventMap = {
   /**
@@ -60,6 +61,7 @@ export type MaterialBottomTabNavigationOptions = {
   title?: string;
 
   /**
+   * @deprecated In v5.x works only with theme version 2.
    * Color of the tab bar when this tab is active. Only used when `shifting` is `true`.
    */
   tabBarColor?: string;

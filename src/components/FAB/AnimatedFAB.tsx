@@ -1,7 +1,9 @@
 import * as React from 'react';
 import type {
   AccessibilityState,
+  ColorValue,
   NativeSyntheticEvent,
+  PressableAndroidRippleConfig,
   TextLayoutEventData,
 } from 'react-native';
 import {
@@ -13,13 +15,13 @@ import {
   ScrollView,
   StyleProp,
   StyleSheet,
-  Text,
   View,
   ViewStyle,
 } from 'react-native';
 
 import color from 'color';
 
+import { getCombinedStyles, getFABColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
@@ -27,7 +29,6 @@ import Icon from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import AnimatedText from '../Typography/AnimatedText';
-import { getCombinedStyles, getFABColors } from './utils';
 
 export type AnimatedFABIconMode = 'static' | 'dynamic';
 export type AnimatedFABAnimateFrom = 'left' | 'right';
@@ -46,6 +47,11 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    */
   uppercase?: boolean;
   /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
+  /**
    * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
    * Uses `label` by default if specified.
    */
@@ -58,6 +64,10 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * Custom color for the icon and label of the `FAB`.
    */
   color?: string;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
@@ -73,7 +83,7 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
   /**
    * Function to execute on long press.
    */
-  onLongPress?: () => void;
+  onLongPress?: (e: GestureResponderEvent) => void;
   /**
    * The number of milliseconds a user must touch the element before executing `onLongPress`.
    */
@@ -91,6 +101,10 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    */
   extended: boolean;
   /**
+   * Specifies the largest possible scale a label font can reach.
+   */
+  labelMaxFontSizeMultiplier?: number;
+  /**
    * @supported Available in v5.x with theme version 3
    *
    * Color mappings variant for combinations of container and icon colors.
@@ -101,6 +115,9 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * TestID used for testing purposes
+   */
   testID?: string;
 };
 
@@ -109,10 +126,6 @@ const SCALE = 0.9;
 
 /**
  * An animated, extending horizontally floating action button represents the primary action in an application.
- *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/animated-fab.gif" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -190,9 +203,11 @@ const SCALE = 0.9;
 const AnimatedFAB = ({
   icon,
   label,
+  background,
   accessibilityLabel = label,
   accessibilityState,
   color: customColor,
+  rippleColor: customRippleColor,
   disabled,
   onPress,
   onLongPress,
@@ -206,6 +221,7 @@ const AnimatedFAB = ({
   extended = false,
   iconMode = 'dynamic',
   variant = 'primary',
+  labelMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -255,7 +271,8 @@ const AnimatedFAB = ({
     customBackgroundColor,
   });
 
-  const rippleColor = color(foregroundColor).alpha(0.12).rgb().string();
+  const rippleColor =
+    customRippleColor || color(foregroundColor).alpha(0.12).rgb().string();
 
   const extendedWidth = textWidth + SIZE + borderRadius;
 
@@ -417,6 +434,7 @@ const AnimatedFAB = ({
           >
             <TouchableRipple
               borderless
+              background={background}
               onPress={onPress}
               onLongPress={onLongPress}
               delayLongPress={delayLongPress}
@@ -485,6 +503,7 @@ const AnimatedFAB = ({
           ]}
           theme={theme}
           testID={`${testID}-text`}
+          maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
         >
           {label}
         </AnimatedText>
@@ -496,7 +515,20 @@ const AnimatedFAB = ({
         // proper text measurements there is a need to additionaly render that text, but
         // wrapped in absolutely positioned `ScrollView` which height is 0.
         <ScrollView style={styles.textPlaceholderContainer}>
-          <Text onTextLayout={onTextLayout}>{label}</Text>
+          <AnimatedText
+            variant="labelLarge"
+            numberOfLines={1}
+            onTextLayout={onTextLayout}
+            ellipsizeMode={'tail'}
+            style={[
+              styles.label,
+              uppercase && styles.uppercaseLabel,
+              textStyle,
+            ]}
+            theme={theme}
+          >
+            {label}
+          </AnimatedText>
         </ScrollView>
       )}
     </Surface>

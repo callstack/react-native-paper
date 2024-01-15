@@ -1,7 +1,9 @@
 import * as React from 'react';
 import {
   AccessibilityState,
+  ColorValue,
   GestureResponderEvent,
+  PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -9,17 +11,17 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import Icon, { IconSource } from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
 import {
   getContentMaxWidth,
   getMenuItemColor,
   MAX_WIDTH,
   MIN_WIDTH,
 } from './utils';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
+import Icon, { IconSource } from '../Icon';
+import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import Text from '../Typography/Text';
 
 export type Props = {
   /**
@@ -49,6 +51,11 @@ export type Props = {
    */
   dense?: boolean;
   /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
+  /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
@@ -62,6 +69,10 @@ export type Props = {
   style?: StyleProp<ViewStyle>;
   contentStyle?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
+  /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
   /**
    * @optional
    */
@@ -82,12 +93,6 @@ export type Props = {
 
 /**
  * A component to show a single list item inside a Menu.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/menu-item.png" />
- *   </figure>
- * </div>
  *
  * ## Usage
  * ```js
@@ -114,20 +119,23 @@ const MenuItem = ({
   dense,
   title,
   disabled,
+  background,
   onPress,
   style,
   contentStyle,
-  testID = 'menu-item',
   titleStyle,
+  rippleColor: customRippleColor,
+  testID = 'menu-item',
   accessibilityLabel,
   accessibilityState,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier = 1.5,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { titleColor, iconColor, underlayColor } = getMenuItemColor({
+  const { titleColor, iconColor, rippleColor } = getMenuItemColor({
     theme,
     disabled,
+    customRippleColor,
   });
   const { isV3 } = theme;
 
@@ -162,10 +170,11 @@ const MenuItem = ({
       onPress={onPress}
       disabled={disabled}
       testID={testID}
+      background={background}
       accessibilityLabel={accessibilityLabel}
       accessibilityRole="menuitem"
       accessibilityState={newAccessibilityState}
-      underlayColor={underlayColor}
+      rippleColor={rippleColor}
     >
       <View style={styles.row}>
         {leadingIcon ? (

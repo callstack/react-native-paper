@@ -8,8 +8,8 @@ import {
   MD3Colors,
 } from 'react-native-paper';
 
-import { useExampleTheme } from '../..';
 import { TextComponent } from './DialogTextComponent';
+import { useExampleTheme } from '../..';
 
 const DialogWithCustomColors = ({
   visible,

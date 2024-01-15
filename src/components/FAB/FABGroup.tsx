@@ -1,24 +1,27 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   GestureResponderEvent,
+  Pressable,
   StyleProp,
   StyleSheet,
   TextStyle,
-  TouchableWithoutFeedback,
   View,
   ViewStyle,
 } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import FAB from './FAB';
+import { getFABGroupColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import Card from '../Card/Card';
 import type { IconSource } from '../Icon';
 import Text from '../Typography/Text';
-import FAB from './FAB';
-import { getFABGroupColors } from './utils';
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export type Props = {
   /**
@@ -33,9 +36,13 @@ export type Props = {
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
    * - `containerStyle`: pass additional styles for the fab item label container, for example, `backgroundColor` @supported Available in 5.x
    * - `labelStyle`: pass additional styles for the fab item label, for example, `fontSize`
+   * - `labelMaxFontSizeMultiplier`: specifies the largest possible scale a title font can reach.
    * - `onPress`: callback that is called when `FAB` is pressed (required)
+   * - `onLongPress`: callback that is called when `FAB` is long pressed
+   * - `toggleStackOnLongPress`: callback that is called when `FAB` is long pressed
    * - `size`: size of action item. Defaults to `small`. @supported Available in v5.x
    * - `testID`: testID to be used on tests
+   * - `rippleColor`: color of the ripple effect.
    */
   actions: Array<{
     icon: IconSource;
@@ -47,9 +54,11 @@ export type Props = {
     style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
     containerStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
     labelStyle?: StyleProp<TextStyle>;
+    labelMaxFontSizeMultiplier?: number;
     onPress: (e: GestureResponderEvent) => void;
     size?: 'small' | 'medium';
     testID?: string;
+    rippleColor?: ColorValue;
   }>;
   /**
    * Icon to display for the `FAB`.
@@ -69,9 +78,29 @@ export type Props = {
    */
   backdropColor?: string;
   /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
+  /**
    * Function to execute on pressing the `FAB`.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute on long pressing the `FAB`.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Makes actions stack appear on long press instead of on press.
+   */
+  toggleStackOnLongPress?: boolean;
+  /**
+   * Changes the delay for long press reaction.
+   */
+  delayLongPress?: number;
+  /**
+   * Allows for onLongPress when stack is opened.
+   */
+  enableLongPressWhenStackOpened?: boolean;
   /**
    * Whether the speed dial is open.
    */
@@ -118,14 +147,10 @@ export type Props = {
  * A component to display a stack of FABs with related actions in a speed dial.
  * To render the group above other components, you'll need to wrap it with the [`Portal`](../Portal) component.
  *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/fab-group.gif" />
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { FAB, Portal, Provider } from 'react-native-paper';
+ * import { FAB, Portal, PaperProvider } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [state, setState] = React.useState({ open: false });
@@ -135,7 +160,7 @@ export type Props = {
  *   const { open } = state;
  *
  *   return (
- *     <Provider>
+ *     <PaperProvider>
  *       <Portal>
  *         <FAB.Group
  *           open={open}
@@ -167,7 +192,7 @@ export type Props = {
  *           }}
  *         />
  *       </Portal>
- *     </Provider>
+ *     </PaperProvider>
  *   );
  * };
  *
@@ -179,6 +204,8 @@ const FABGroup = ({
   icon,
   open,
   onPress,
+  onLongPress,
+  toggleStackOnLongPress,
   accessibilityLabel,
   theme: themeOverrides,
   style,
@@ -188,8 +215,11 @@ const FABGroup = ({
   testID,
   onStateChange,
   color: colorProp,
+  delayLongPress = 200,
   variant = 'primary',
+  enableLongPressWhenStackOpened = false,
   backdropColor: customBackdropColor,
+  rippleColor,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { current: backdrop } = React.useRef<Animated.Value>(
@@ -315,18 +345,18 @@ const FABGroup = ({
       pointerEvents="box-none"
       style={[styles.container, containerPaddings, style]}
     >
-      <TouchableWithoutFeedback accessibilityRole="button" onPress={close}>
-        <Animated.View
-          pointerEvents={open ? 'auto' : 'none'}
-          style={[
-            styles.backdrop,
-            {
-              opacity: backdropOpacity,
-              backgroundColor: backdropColor,
-            },
-          ]}
-        />
-      </TouchableWithoutFeedback>
+      <AnimatedPressable
+        accessibilityRole="button"
+        onPress={close}
+        pointerEvents={open ? 'auto' : 'none'}
+        style={[
+          styles.backdrop,
+          {
+            opacity: backdropOpacity,
+            backgroundColor: backdropColor,
+          },
+        ]}
+      />
       <View pointerEvents="box-none" style={styles.safeArea}>
         <View pointerEvents={open ? 'box-none' : 'none'}>
           {actions.map((it, i) => {
@@ -352,6 +382,10 @@ const FABGroup = ({
                   },
                 ]}
                 pointerEvents={open ? 'box-none' : 'none'}
+                accessibilityRole="button"
+                importantForAccessibility="yes"
+                accessible={true}
+                accessibilityLabel={accessibilityLabel}
               >
                 {it.label && (
                   <View>
@@ -362,8 +396,8 @@ const FABGroup = ({
                         close();
                       }}
                       accessibilityHint={it.accessibilityHint}
-                      accessibilityLabel={accessibilityLabel}
-                      accessibilityRole="button"
+                      importantForAccessibility="no-hide-descendants"
+                      accessibilityElementsHidden={true}
                       style={[
                         styles.containerStyle,
                         {
@@ -380,7 +414,10 @@ const FABGroup = ({
                     >
                       <Text
                         variant="titleMedium"
+                        importantForAccessibility="no-hide-descendants"
+                        accessibilityElementsHidden={true}
                         style={[labelTextStyle, it.labelStyle]}
+                        maxFontSizeMultiplier={it.labelMaxFontSizeMultiplier}
                       >
                         {it.label}
                       </Text>
@@ -400,14 +437,16 @@ const FABGroup = ({
                     isV3 && { transform: [{ translateY: translations[i] }] },
                     it.style,
                   ]}
+                  accessibilityElementsHidden={true}
+                  theme={theme}
                   onPress={(e) => {
                     it.onPress(e);
                     close();
                   }}
-                  accessibilityLabel={accessibilityLabel}
-                  accessibilityRole="button"
+                  importantForAccessibility="no-hide-descendants"
                   testID={it.testID}
                   visible={open}
+                  rippleColor={it.rippleColor}
                 />
               </View>
             );
@@ -416,18 +455,31 @@ const FABGroup = ({
         <FAB
           onPress={(e) => {
             onPress?.(e);
-            toggle();
+            if (!toggleStackOnLongPress || open) {
+              toggle();
+            }
           }}
+          onLongPress={(e) => {
+            if (!open || enableLongPressWhenStackOpened) {
+              onLongPress?.(e);
+              if (toggleStackOnLongPress) {
+                toggle();
+              }
+            }
+          }}
+          delayLongPress={delayLongPress}
           icon={icon}
           color={colorProp}
           accessibilityLabel={accessibilityLabel}
           accessibilityRole="button"
           accessibilityState={{ expanded: open }}
           style={[styles.fab, fabStyle]}
+          theme={theme}
           visible={visible}
           label={label}
           testID={testID}
           variant={variant}
+          rippleColor={rippleColor}
         />
       </View>
     </View>

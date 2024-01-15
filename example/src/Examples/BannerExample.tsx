@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Dimensions, Image, Platform, StyleSheet, View } from 'react-native';
+import {
+  Dimensions,
+  Image,
+  LayoutChangeEvent,
+  Platform,
+  StyleSheet,
+  View,
+} from 'react-native';
 
 import { Banner, FAB, MD2Colors, MD3Colors } from 'react-native-paper';
 
@@ -14,6 +21,14 @@ const BannerExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [useCustomTheme, setUseCustomTheme] = React.useState<boolean>(false);
   const defaultTheme = useExampleTheme();
+
+  const [height, setHeight] = React.useState(0);
+
+  const handleLayout = ({ nativeEvent }: LayoutChangeEvent) => {
+    const { height: layoutHeight } = nativeEvent.layout;
+    setHeight(layoutHeight);
+  };
+
   const customTheme = !defaultTheme.isV3
     ? {
         ...defaultTheme,
@@ -37,31 +52,7 @@ const BannerExample = () => {
   return (
     <>
       <ScreenWrapper>
-        <Banner
-          actions={[
-            {
-              label: `Set ${useCustomTheme ? 'default' : 'custom'} theme`,
-              onPress: () => setUseCustomTheme(!useCustomTheme),
-            },
-            {
-              label: 'Fix it',
-              onPress: () => setVisible(false),
-            },
-          ]}
-          icon={require('../../assets/images/email-icon.png')}
-          visible={visible}
-          onShowAnimationFinished={() =>
-            console.log('Completed opening animation')
-          }
-          onHideAnimationFinished={() =>
-            console.log('Completed closing animation')
-          }
-          theme={useCustomTheme ? customTheme : defaultTheme}
-        >
-          Two line text string with two actions. One to two lines is preferable
-          on mobile.
-        </Banner>
-        <View style={styles.grid}>
+        <View style={[styles.grid, { paddingTop: height }]}>
           {PHOTOS.map((uri) => (
             <View key={uri} style={styles.item}>
               <Image
@@ -79,6 +70,32 @@ const BannerExample = () => {
         style={styles.fab}
         onPress={() => setVisible(!visible)}
       />
+      <Banner
+        onLayout={handleLayout}
+        actions={[
+          {
+            label: `Set ${useCustomTheme ? 'default' : 'custom'} theme`,
+            onPress: () => setUseCustomTheme(!useCustomTheme),
+          },
+          {
+            label: 'Fix it',
+            onPress: () => setVisible(false),
+          },
+        ]}
+        icon={require('../../assets/images/email-icon.png')}
+        visible={visible}
+        onShowAnimationFinished={() =>
+          console.log('Completed opening animation')
+        }
+        onHideAnimationFinished={() =>
+          console.log('Completed closing animation')
+        }
+        theme={useCustomTheme ? customTheme : defaultTheme}
+        style={styles.banner}
+      >
+        Two line text string with two actions. One to two lines is preferable on
+        mobile.
+      </Banner>
     </>
   );
 };
@@ -114,6 +131,12 @@ const styles = StyleSheet.create({
       },
     },
   }),
+  banner: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+  },
   photo: {
     flex: 1,
     resizeMode: 'cover',

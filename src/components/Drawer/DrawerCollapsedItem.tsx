@@ -4,10 +4,10 @@ import {
   GestureResponderEvent,
   NativeSyntheticEvent,
   Platform,
+  Pressable,
   StyleProp,
   StyleSheet,
   TextLayoutEventData,
-  TouchableWithoutFeedback,
   View,
   ViewStyle,
 } from 'react-native';
@@ -28,6 +28,10 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   badge?: string | number | boolean;
   /**
+   * Whether the item is disabled.
+   */
+  disabled?: boolean;
+  /**
    * @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
    * Icon to use as the focused destination icon, can be a string, an image source or a react component
    */
@@ -45,6 +49,10 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Specifies the largest possible scale a label font can reach.
+   */
+  labelMaxFontSizeMultiplier?: number;
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
@@ -71,12 +79,6 @@ const outlineHeight = 32;
  *
  * Collapsed component used to show an action item with an icon and optionally label in a navigation drawer.
  *
- * <div class="screenshots">
- *   <figure>
- *     <img class="small" src="screenshots/drawer-collapsed.png" />
- *   </figure>
- * </div>
- *
  * ## Usage
  * ```js
  * import * as React from 'react';
@@ -101,9 +103,11 @@ const DrawerCollapsedItem = ({
   theme: themeOverrides,
   style,
   onPress,
+  disabled,
   accessibilityLabel,
   badge = false,
   testID = 'drawer-collapsed-item',
+  labelMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -168,9 +172,10 @@ const DrawerCollapsedItem = ({
   return (
     <View {...rest}>
       {/* eslint-disable-next-line react-native-a11y/has-accessibility-props */}
-      <TouchableWithoutFeedback
+      <Pressable
         onPress={onPress}
         onPressOut={onPress ? handlePressOut : undefined}
+        disabled={disabled}
         // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
         accessibilityTraits={active ? ['button', 'selected'] : 'button'}
         accessibilityComponentType="button"
@@ -224,12 +229,13 @@ const DrawerCollapsedItem = ({
               numberOfLines={2}
               onTextLayout={onTextLayout}
               style={[styles.label, androidLetterSpacingStyle, labelTextStyle]}
+              maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
             >
               {label}
             </Text>
           ) : null}
         </View>
-      </TouchableWithoutFeedback>
+      </Pressable>
     </View>
   );
 };

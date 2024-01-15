@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {
+  ColorValue,
   GestureResponderEvent,
+  PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -8,13 +10,13 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import Checkbox from './Checkbox';
+import CheckboxAndroid from './CheckboxAndroid';
+import CheckboxIOS from './CheckboxIOS';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp, MD3TypescaleKey } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import Checkbox from './Checkbox';
-import CheckboxAndroid from './CheckboxAndroid';
-import CheckboxIOS from './CheckboxIOS';
 
 export type Props = {
   /**
@@ -34,6 +36,15 @@ export type Props = {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
+  /**
    * Accessibility label for the touchable. This is read by the screen reader when the user taps the touchable.
    */
   accessibilityLabel?: string;
@@ -46,11 +57,15 @@ export type Props = {
    */
   color?: string;
   /**
+   * Color of the ripple effect.
+   */
+  rippleColor?: ColorValue;
+  /**
    * Additional styles for container View.
    */
   style?: StyleProp<ViewStyle>;
   /**
-   * Specifies the largest possible scale a title font can reach.
+   * Specifies the largest possible scale a label font can reach.
    */
   labelMaxFontSizeMultiplier?: number;
   /**
@@ -117,6 +132,7 @@ const CheckboxItem = ({
   status,
   label,
   onPress,
+  onLongPress,
   labelStyle,
   theme: themeOverrides,
   testID,
@@ -126,6 +142,8 @@ const CheckboxItem = ({
   disabled,
   labelVariant = 'bodyLarge',
   labelMaxFontSizeMultiplier = 1.5,
+  rippleColor,
+  background,
   ...props
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -161,9 +179,12 @@ const CheckboxItem = ({
         disabled,
       }}
       onPress={onPress}
+      onLongPress={onLongPress}
       testID={testID}
       disabled={disabled}
+      rippleColor={rippleColor}
       theme={theme}
+      background={background}
     >
       <View
         style={[styles.container, style]}

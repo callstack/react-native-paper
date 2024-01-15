@@ -84,14 +84,14 @@ module.file_ext=.ios.js
 
 ## Usage
 
-Wrap your root component in `Provider` from `react-native-paper`. If you have a vanilla React Native project, it's a good idea to add it in the component which is passed to `AppRegistry.registerComponent`. This will usually be in the `index.js` file. If you have an Expo project, you can do this inside the exported component in the `App.js` file.
+Wrap your root component in `PaperProvider` from `react-native-paper`. If you have a vanilla React Native project, it's a good idea to add it in the component which is passed to `AppRegistry.registerComponent`. This will usually be in the `index.js` file. If you have an Expo project, you can do this inside the exported component in the `App.js` file.
 
 Example:
 
 ```js
 import * as React from 'react';
 import { AppRegistry } from 'react-native';
-import { Provider as PaperProvider } from 'react-native-paper';
+import { PaperProvider } from 'react-native-paper';
 import { name as appName } from './app.json';
 import App from './src/App';
 
@@ -112,7 +112,7 @@ If you have another provider (such as `Redux`), wrap it outside `PaperProvider` 
 
 ```js
 import * as React from 'react';
-import { Provider as PaperProvider } from 'react-native-paper';
+import { PaperProvider } from 'react-native-paper';
 import { Provider as StoreProvider } from 'react-redux';
 import App from './src/App';
 import store from './store';
@@ -136,7 +136,7 @@ Example:
 
 ```js
 import * as React from 'react';
-import { MD3LightTheme as DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
 import App from './src/App';
 
 const theme = {

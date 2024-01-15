@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  FlexAlignType,
   GestureResponderEvent,
   NativeSyntheticEvent,
   StyleProp,
@@ -13,11 +12,12 @@ import {
 
 import color from 'color';
 
+import { Style, getLeftStyles, getRightStyles } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, EllipsizeProp, ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import { getLeftStyles, getRightStyles } from './utils';
 
 type Title =
   | React.ReactNode
@@ -36,13 +36,6 @@ type Description =
       color: string;
       fontSize: number;
     }) => React.ReactNode);
-
-interface Style {
-  marginLeft?: number;
-  marginRight?: number;
-  marginVertical?: number;
-  alignSelf?: FlexAlignType;
-}
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -74,6 +67,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   style?: StyleProp<ViewStyle>;
   /**
+   * Style that is passed to the container wrapping title and descripton.
+   */
+  contentStyle?: StyleProp<ViewStyle>;
+  /**
    * Style that is passed to Title element.
    */
   titleStyle?: StyleProp<TextStyle>;
@@ -103,16 +100,22 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * See [`ellipsizeMode`](https://reactnative.dev/docs/text#ellipsizemode)
    */
   descriptionEllipsizeMode?: EllipsizeProp;
+  /**
+   * Specifies the largest possible scale a title font can reach.
+   */
+  titleMaxFontSizeMultiplier?: number;
+  /**
+   * Specifies the largest possible scale a description font can reach.
+   */
+  descriptionMaxFontSizeMultiplier?: number;
+  /**
+   * TestID used for testing purposes
+   */
+  testID?: string;
 };
 
 /**
  * A component to show tiles inside a List.
- *
- * <div class="screenshots">
- *   <img class="medium" src="screenshots/list-item-1.png" />
- *   <img class="medium" src="screenshots/list-item-2.png" />
- *   <img class="medium" src="screenshots/list-item-3.png" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -132,22 +135,29 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  *
  * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
-const ListItem = ({
-  left,
-  right,
-  title,
-  description,
-  onPress,
-  theme: themeOverrides,
-  style,
-  titleStyle,
-  titleNumberOfLines = 1,
-  descriptionNumberOfLines = 2,
-  titleEllipsizeMode,
-  descriptionEllipsizeMode,
-  descriptionStyle,
-  ...rest
-}: Props) => {
+const ListItem = (
+  {
+    left,
+    right,
+    title,
+    description,
+    onPress,
+    theme: themeOverrides,
+    style,
+    contentStyle,
+    titleStyle,
+    titleNumberOfLines = 1,
+    descriptionNumberOfLines = 2,
+    titleEllipsizeMode,
+    descriptionEllipsizeMode,
+    descriptionStyle,
+    descriptionMaxFontSizeMultiplier,
+    titleMaxFontSizeMultiplier,
+    testID,
+    ...rest
+  }: Props,
+  ref: React.ForwardedRef<View>
+) => {
   const theme = useInternalTheme(themeOverrides);
   const [alignToTop, setAlignToTop] = React.useState(false);
 
@@ -183,6 +193,7 @@ const ListItem = ({
           descriptionStyle,
         ]}
         onTextLayout={onDescriptionTextLayout}
+        maxFontSizeMultiplier={descriptionMaxFontSizeMultiplier}
       >
         {description}
       </Text>
@@ -207,6 +218,7 @@ const ListItem = ({
         ellipsizeMode={titleEllipsizeMode}
         numberOfLines={titleNumberOfLines}
         style={[styles.title, { color: titleColor }, titleStyle]}
+        maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
       >
         {title}
       </Text>
@@ -220,9 +232,11 @@ const ListItem = ({
   return (
     <TouchableRipple
       {...rest}
+      ref={ref}
       style={[theme.isV3 ? styles.containerV3 : styles.container, style]}
       onPress={onPress}
       theme={theme}
+      testID={testID}
     >
       <View style={theme.isV3 ? styles.rowV3 : styles.row}>
         {left
@@ -232,7 +246,12 @@ const ListItem = ({
             })
           : null}
         <View
-          style={[theme.isV3 ? styles.itemV3 : styles.item, styles.content]}
+          style={[
+            theme.isV3 ? styles.itemV3 : styles.item,
+            styles.content,
+            contentStyle,
+          ]}
+          testID={`${testID}-content`}
         >
           {renderTitle()}
 
@@ -251,7 +270,8 @@ const ListItem = ({
   );
 };
 
-ListItem.displayName = 'List.Item';
+const Component = forwardRef(ListItem);
+Component.displayName = 'List.Item';
 
 const styles = StyleSheet.create({
   container: {
@@ -262,9 +282,11 @@ const styles = StyleSheet.create({
     paddingRight: 24,
   },
   row: {
+    width: '100%',
     flexDirection: 'row',
   },
   rowV3: {
+    width: '100%',
     flexDirection: 'row',
     marginVertical: 6,
   },
@@ -282,9 +304,10 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
   },
   content: {
-    flex: 1,
+    flexShrink: 1,
+    flexGrow: 1,
     justifyContent: 'center',
   },
 });
 
-export default ListItem;
+export default Component;

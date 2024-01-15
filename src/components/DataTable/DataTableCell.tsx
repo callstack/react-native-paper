@@ -29,17 +29,18 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Text content style of the `DataTableCell`.
    */
   textStyle?: StyleProp<TextStyle>;
+  /**
+   * Specifies the largest possible scale a text font can reach.
+   */
+  maxFontSizeMultiplier?: number;
+  /**
+   * testID to be used on tests.
+   */
+  testID?: string;
 };
 
 /**
  * A component to show a single cell inside of a table.
- *
- * <div class="screenshots">
- *   <figure>
- *     <img class="medium" src="screenshots/data-table-row-cell.png" />
- *   </figure>
- * </div>
- *
  *
  * ## Usage
  * ```js
@@ -60,24 +61,59 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  *
  * If you want to support multiline text, please use View instead, as multiline text doesn't comply with
  * MD Guidelines (https://github.com/callstack/react-native-paper/issues/2381).
+ *
+ * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
-
 const DataTableCell = ({
   children,
   textStyle,
   style,
   numeric,
+  maxFontSizeMultiplier,
+  testID,
   ...rest
-}: Props) => (
-  <TouchableRipple
-    {...rest}
-    style={[styles.container, numeric && styles.right, style]}
-  >
-    <Text style={textStyle} numberOfLines={1}>
+}: Props) => {
+  return (
+    <TouchableRipple
+      {...rest}
+      testID={testID}
+      style={[styles.container, numeric && styles.right, style]}
+    >
+      <CellContent
+        textStyle={textStyle}
+        testID={testID}
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
+      >
+        {children}
+      </CellContent>
+    </TouchableRipple>
+  );
+};
+
+const CellContent = ({
+  children,
+  textStyle,
+  maxFontSizeMultiplier,
+  testID,
+}: Pick<
+  Props,
+  'children' | 'textStyle' | 'testID' | 'maxFontSizeMultiplier'
+>) => {
+  if (React.isValidElement(children)) {
+    return children;
+  }
+
+  return (
+    <Text
+      style={textStyle}
+      numberOfLines={1}
+      maxFontSizeMultiplier={maxFontSizeMultiplier}
+      testID={`${testID}-text-container`}
+    >
       {children}
     </Text>
-  </TouchableRipple>
-);
+  );
+};
 
 DataTableCell.displayName = 'DataTable.Cell';
 

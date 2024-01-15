@@ -5,6 +5,9 @@ const path = require('path');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 
+const { screenshots } = require('./src/data/screenshots.js');
+const { themeColors } = require('./src/data/themeColors.js');
+
 const { NODE_ENV, DOCUSAURUS_BASE_URL } = process.env;
 
 const title = 'React Native Paper';
@@ -126,6 +129,7 @@ const config = {
           IconButton: {
             IconButton: 'IconButton/IconButton',
           },
+          Icon: 'Icon',
           List: {
             ListAccordion: 'List/ListAccordion',
             ListAccordionGroup: 'List/ListAccordionGroup',
@@ -195,9 +199,26 @@ const config = {
           editUrl: (params) => {
             const urlToMain =
               'https://github.com/callstack/react-native-paper/tree/main';
+
             if (params.docPath.includes('guides')) {
               return `${urlToMain}/docs/docs/${params.docPath}`;
             }
+
+            const customUrls = {
+              TextInputAffix:
+                'src/components/TextInput/Adornment/TextInputAffix.tsx',
+              TextInputIcon:
+                'src/components/TextInput/Adornment/TextInputIcon.tsx',
+              Text: 'src/components/Typography/Text.tsx',
+            };
+
+            const customUrlComponent =
+              params.docPath.match(/\/?([^/]+)\.mdx$/)[1];
+
+            if (customUrls[customUrlComponent]) {
+              return `${urlToMain}/${customUrls[customUrlComponent]}`;
+            }
+
             return `${urlToMain}/src/${params.docPath.replace('mdx', 'tsx')}`;
           },
 
@@ -225,7 +246,7 @@ const config = {
             type: 'doc',
             docId: 'guides/getting-started',
             position: 'left',
-            label: 'Docs',
+            label: 'Guides',
           },
           {
             type: 'doc',
@@ -298,9 +319,23 @@ const config = {
     moreExamples: {
       Portal: {
         'Comprehensive Portal example':
-          'https://snack.expo.dev/@react-native-paper/comprehensive-portal-example',
+          'https://snack.expo.dev/@react-native-paper/more-examples---comprehensive-portal-example',
+      },
+      Snackbar: {
+        'Snackbar rendered regardless of the parent positioning':
+          'https://snack.expo.dev/@react-native-paper/more-examples---snackbar-rendered-regardless-of-the-parent-positioning',
       },
     },
+    knownIssues: {
+      TextInput: {
+        'Outline overlaps label':
+          'https://github.com/callstack/react-native-paper/issues/3759#issuecomment-1601235262',
+        'Long text wraps to a second line':
+          'https://github.com/callstack/react-native-paper/issues/2581#issuecomment-790251987',
+      },
+    },
+    themeColors,
+    screenshots,
   },
 };
 

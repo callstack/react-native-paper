@@ -6,8 +6,7 @@ import {
   Platform,
   StyleProp,
   StyleSheet,
-  TouchableWithoutFeedback,
-  TouchableWithoutFeedbackProps,
+  Pressable,
   View,
   ViewStyle,
 } from 'react-native';
@@ -15,6 +14,11 @@ import {
 import color from 'color';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import {
+  getActiveTintColor,
+  getInactiveTintColor,
+  getLabelColor,
+} from './utils';
 import { useInternalTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
 import { black, white } from '../../styles/themes/v2/colors';
@@ -27,12 +31,8 @@ import Badge from '../Badge';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import {
-  getActiveTintColor,
-  getInactiveTintColor,
-  getLabelColor,
-} from './utils';
 
 type BaseRoute = {
   key: string;
@@ -40,6 +40,9 @@ type BaseRoute = {
   focusedIcon?: IconSource;
   unfocusedIcon?: IconSource;
   badge?: string | number | boolean;
+  /**
+   * @deprecated In v5.x works only with theme version 2.
+   */
   color?: string;
   accessibilityLabel?: string;
   testID?: string;
@@ -56,13 +59,13 @@ type TabPressEvent = {
   preventDefault(): void;
 };
 
-type TouchableProps<Route extends BaseRoute> = TouchableWithoutFeedbackProps & {
+type TouchableProps<Route extends BaseRoute> = TouchableRippleProps & {
   key: string;
   route: Route;
   children: React.ReactNode;
   borderless?: boolean;
   centered?: boolean;
-  rippleColor?: string;
+  rippleColor?: ColorValue;
 };
 
 export type Props<Route extends BaseRoute> = {
@@ -94,7 +97,7 @@ export type Props<Route extends BaseRoute> = {
    * - `title`: title of the route to use as the tab label
    * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
    * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3
-   * - `color`: color to use as background color for shifting bottom navigation @deprecated Deprecated in v5.x
+   * - `color`: color to use as background color for shifting bottom navigation @deprecatedProperty In v5.x works only with theme version 2.
    * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
    * - `accessibilityLabel`: accessibility label for the tab button
    * - `testID`: test id for the tab button
@@ -134,7 +137,7 @@ export type Props<Route extends BaseRoute> = {
   }) => React.ReactNode;
   /**
    * Callback which returns a React element to be used as the touchable for the tab item.
-   * Renders a `TouchableRipple` on Android and `TouchableWithoutFeedback` with `View` on iOS.
+   * Renders a `TouchableRipple` on Android and `Pressable` on iOS.
    */
   renderTouchable?: (props: TouchableProps<Route>) => React.ReactNode;
   /**
@@ -198,6 +201,7 @@ export type Props<Route extends BaseRoute> = {
    */
   labelMaxFontSizeMultiplier?: number;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  activeIndicatorStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
@@ -235,17 +239,13 @@ const Touchable = <Route extends BaseRoute>({
       {children}
     </TouchableRipple>
   ) : (
-    <TouchableWithoutFeedback {...rest}>
-      <View style={style}>{children}</View>
-    </TouchableWithoutFeedback>
+    <Pressable style={style} {...rest}>
+      {children}
+    </Pressable>
   );
 
 /**
  * A navigation bar which can easily be integrated with [React Navigation's Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/).
- *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/bottom-navigation-tabs.jpg" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -370,6 +370,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   inactiveColor,
   keyboardHidesNavigationBar = Platform.OS === 'android',
   style,
+  activeIndicatorStyle,
   labeled = true,
   animationEasing,
   onTabPress,
@@ -791,6 +792,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                             ],
                             backgroundColor: theme.colors.secondaryContainer,
                           },
+                          activeIndicatorStyle,
                         ]}
                       />
                     )}

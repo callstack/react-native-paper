@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  BackHandler,
   Dimensions,
   Easing,
   EmitterSubscription,
@@ -16,18 +15,20 @@ import {
   ScrollViewProps,
   StyleProp,
   StyleSheet,
-  TouchableWithoutFeedback,
   View,
   ViewStyle,
+  Pressable,
 } from 'react-native';
 
+import MenuItem from './MenuItem';
 import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 import { withInternalTheme } from '../../core/theming';
-import type { $Omit, InternalTheme } from '../../types';
+import type { $Omit, InternalTheme, MD3Elevation } from '../../types';
+import { ElevationLevels } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
+import { BackHandler } from '../../utils/BackHandler/BackHandler';
 import Portal from '../Portal/Portal';
 import Surface from '../Surface';
-import MenuItem from './MenuItem';
 
 export type Props = {
   /**
@@ -68,6 +69,11 @@ export type Props = {
   contentStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   style?: StyleProp<ViewStyle>;
   /**
+   * Elevation level of the menu's content. Shadow styles are calculated based on this value. Default `backgroundColor` is taken from the corresponding `theme.colors.elevation` property. By default equals `2`.
+   * @supported Available in v5.x with theme version 3
+   */
+  elevation?: MD3Elevation;
+  /**
    * @optional
    */
   theme: InternalTheme;
@@ -103,19 +109,19 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 
 const WINDOW_LAYOUT = Dimensions.get('window');
 
+const DEFAULT_ELEVATION: MD3Elevation = 2;
+export const ELEVATION_LEVELS_MAP = Object.values(
+  ElevationLevels
+) as ElevationLevels[];
+
 /**
  * Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
- *
- *  <div class="screenshots">
- *   <img class="small" src="screenshots/menu-1.png" />
- *   <img class="small" src="screenshots/menu-2.png" />
- * </div>
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { Button, Menu, Divider, Provider } from 'react-native-paper';
+ * import { Button, Menu, Divider, PaperProvider } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [visible, setVisible] = React.useState(false);
@@ -125,7 +131,7 @@ const WINDOW_LAYOUT = Dimensions.get('window');
  *   const closeMenu = () => setVisible(false);
  *
  *   return (
- *     <Provider>
+ *     <PaperProvider>
  *       <View
  *         style={{
  *           paddingTop: 50,
@@ -142,7 +148,7 @@ const WINDOW_LAYOUT = Dimensions.get('window');
  *           <Menu.Item onPress={() => {}} title="Item 3" />
  *         </Menu>
  *       </View>
- *     </Provider>
+ *     </PaperProvider>
  *   );
  * };
  *
@@ -151,7 +157,7 @@ const WINDOW_LAYOUT = Dimensions.get('window');
  *
  * ### Note
  * When using `Menu` within a React Native's `Modal` component, you need to wrap all
- * `Modal` contents within a `Provider` in order for the menu to show. This
+ * `Modal` contents within a `PaperProvider` in order for the menu to show. This
  * wrapping is not necessary if you use Paper's `Modal` instead.
  */
 class Menu extends React.Component<Props, State> {
@@ -411,6 +417,7 @@ class Menu extends React.Component<Props, State> {
       anchorPosition,
       contentStyle,
       style,
+      elevation = DEFAULT_ELEVATION,
       children,
       theme,
       statusBarHeight,
@@ -603,6 +610,8 @@ class Menu extends React.Component<Props, State> {
       ...(I18nManager.getConstants().isRTL ? { right: left } : { left }),
     };
 
+    const pointerEvents = visible ? 'box-none' : 'none';
+
     return (
       <View
         ref={(ref) => {
@@ -613,13 +622,12 @@ class Menu extends React.Component<Props, State> {
         {this.isCoordinate(anchor) ? null : anchor}
         {rendered ? (
           <Portal>
-            <TouchableWithoutFeedback
+            <Pressable
               accessibilityLabel={overlayAccessibilityLabel}
               accessibilityRole="button"
               onPress={onDismiss}
-            >
-              <View style={StyleSheet.absoluteFill} />
-            </TouchableWithoutFeedback>
+              style={styles.pressableOverlay}
+            />
             <View
               ref={(ref) => {
                 this.menu = ref;
@@ -627,21 +635,28 @@ class Menu extends React.Component<Props, State> {
               collapsable={false}
               accessibilityViewIsModal={visible}
               style={[styles.wrapper, positionStyle, style]}
-              pointerEvents={visible ? 'box-none' : 'none'}
+              pointerEvents={pointerEvents}
               onAccessibilityEscape={onDismiss}
               testID={`${testID}-view`}
             >
-              <Animated.View style={{ transform: positionTransforms }}>
+              <Animated.View
+                pointerEvents={pointerEvents}
+                style={{
+                  transform: positionTransforms,
+                }}
+              >
                 <Surface
+                  pointerEvents={pointerEvents}
                   style={[
                     styles.shadowMenuContainer,
                     shadowMenuContainerStyle,
                     theme.isV3 && {
-                      backgroundColor: theme.colors.elevation.level2,
+                      backgroundColor:
+                        theme.colors.elevation[ELEVATION_LEVELS_MAP[elevation]],
                     },
                     contentStyle,
                   ]}
-                  {...(theme.isV3 && { elevation: 2 })}
+                  {...(theme.isV3 && { elevation })}
                   testID={`${testID}-surface`}
                   theme={theme}
                 >
@@ -669,6 +684,13 @@ const styles = StyleSheet.create({
   shadowMenuContainer: {
     opacity: 0,
     paddingVertical: 8,
+  },
+  pressableOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    ...(Platform.OS === 'web' && {
+      cursor: 'default',
+    }),
+    width: '100%',
   },
 });
 

@@ -4,33 +4,23 @@ exports[`renders animated fab 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
-      "alignSelf": undefined,
+    {
       "backgroundColor": "transparent",
       "borderRadius": 16,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
       "position": "absolute",
-      "right": undefined,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 4,
         "width": 0,
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "start": undefined,
-      "top": undefined,
-      "transform": Array [
-        Object {
+      "transform": [
+        {
           "scale": 1,
         },
       ],
-      "width": undefined,
     }
   }
   testID="animated-fab-container-outer-layer"
@@ -38,12 +28,12 @@ exports[`renders animated fab 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "transparent",
         "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -56,7 +46,7 @@ exports[`renders animated fab 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "borderRadius": 16,
           "height": 56,
         }
@@ -64,15 +54,15 @@ exports[`renders animated fab 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "bottom": 0,
               "left": 0,
               "position": "absolute",
               "right": 0,
               "top": 0,
             },
-            Object {
+            {
               "elevation": 0,
             },
           ]
@@ -82,7 +72,7 @@ exports[`renders animated fab 1`] = `
           collapsable={false}
           pointerEvents="none"
           style={
-            Object {
+            {
               "borderRadius": 16,
               "bottom": 0,
               "elevation": 3,
@@ -100,7 +90,7 @@ exports[`renders animated fab 1`] = `
           collapsable={false}
           pointerEvents="none"
           style={
-            Object {
+            {
               "borderRadius": 16,
               "bottom": 0,
               "elevation": 3,
@@ -109,8 +99,8 @@ exports[`renders animated fab 1`] = `
               "position": "absolute",
               "right": 0,
               "top": 0,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "translateX": 16,
                 },
               ],
@@ -124,7 +114,7 @@ exports[`renders animated fab 1`] = `
         collapsable={false}
         pointerEvents="box-none"
         style={
-          Object {
+          {
             "borderRadius": 16,
             "flexDirection": "row",
             "overflow": "hidden",
@@ -134,14 +124,14 @@ exports[`renders animated fab 1`] = `
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "backgroundColor": "rgba(234, 221, 255, 1)",
               "borderRadius": 16,
               "height": 56,
               "left": 16,
               "right": undefined,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "translateX": 0,
                 },
               ],
@@ -153,8 +143,20 @@ exports[`renders animated fab 1`] = `
             accessibilityLabel=""
             accessibilityRole="button"
             accessibilityState={
-              Object {
+              {
+                "busy": undefined,
+                "checked": undefined,
                 "disabled": false,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
               }
             }
             accessible={true}
@@ -170,12 +172,11 @@ exports[`renders animated fab 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Array [
-                Object {
+              [
+                {
                   "overflow": "hidden",
                 },
-                false,
-                Object {
+                {
                   "borderRadius": 16,
                 },
               ]
@@ -184,11 +185,11 @@ exports[`renders animated fab 1`] = `
           >
             <View
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "height": 56,
                   },
-                  Object {
+                  {
                     "borderRadius": 16,
                     "width": 72,
                   },
@@ -203,15 +204,15 @@ exports[`renders animated fab 1`] = `
       collapsable={false}
       pointerEvents="none"
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": 56,
           "justifyContent": "center",
           "left": 16,
           "position": "absolute",
           "right": undefined,
-          "transform": Array [
-            Object {
+          "transform": [
+            {
               "translateX": 0,
             },
           ],
@@ -226,30 +227,30 @@ exports[`renders animated fab 1`] = `
         pointerEvents="none"
         selectable={false}
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "rgba(33, 0, 93, 1)",
               "fontSize": 24,
             },
-            Array [
-              Object {
+            [
+              {
                 "lineHeight": 24,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "scaleX": 1,
                   },
                 ],
               },
-              Object {
+              {
                 "backgroundColor": "transparent",
               },
             ],
-            Object {
+            {
               "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -265,7 +266,7 @@ exports[`renders animated fab 1`] = `
         numberOfLines={1}
         onTextLayout={[Function]}
         style={
-          Object {
+          {
             "color": "rgba(33, 0, 93, 1)",
             "fontFamily": "System",
             "fontSize": 14,
@@ -278,8 +279,8 @@ exports[`renders animated fab 1`] = `
             "right": 16,
             "textAlign": "left",
             "top": -28,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 56,
               },
             ],
@@ -297,33 +298,23 @@ exports[`renders animated fab with label on the left 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
-      "alignSelf": undefined,
+    {
       "backgroundColor": "transparent",
       "borderRadius": 16,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
       "position": "absolute",
-      "right": undefined,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 4,
         "width": 0,
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "start": undefined,
-      "top": undefined,
-      "transform": Array [
-        Object {
+      "transform": [
+        {
           "scale": 1,
         },
       ],
-      "width": undefined,
     }
   }
   testID="animated-fab-container-outer-layer"
@@ -331,12 +322,12 @@ exports[`renders animated fab with label on the left 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "transparent",
         "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -349,7 +340,7 @@ exports[`renders animated fab with label on the left 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "borderRadius": 16,
           "height": 56,
         }
@@ -357,15 +348,15 @@ exports[`renders animated fab with label on the left 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "bottom": 0,
               "left": 0,
               "position": "absolute",
               "right": 0,
               "top": 0,
             },
-            Object {
+            {
               "elevation": 0,
             },
           ]
@@ -375,7 +366,7 @@ exports[`renders animated fab with label on the left 1`] = `
           collapsable={false}
           pointerEvents="none"
           style={
-            Object {
+            {
               "borderRadius": 16,
               "bottom": 0,
               "elevation": 3,
@@ -393,7 +384,7 @@ exports[`renders animated fab with label on the left 1`] = `
           collapsable={false}
           pointerEvents="none"
           style={
-            Object {
+            {
               "borderRadius": 16,
               "bottom": 0,
               "elevation": 3,
@@ -402,8 +393,8 @@ exports[`renders animated fab with label on the left 1`] = `
               "position": "absolute",
               "right": 0,
               "top": 0,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "translateX": 0,
                 },
               ],
@@ -417,7 +408,7 @@ exports[`renders animated fab with label on the left 1`] = `
         collapsable={false}
         pointerEvents="box-none"
         style={
-          Object {
+          {
             "borderRadius": 16,
             "flexDirection": "row",
             "overflow": "hidden",
@@ -427,14 +418,14 @@ exports[`renders animated fab with label on the left 1`] = `
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "backgroundColor": "rgba(234, 221, 255, 1)",
               "borderRadius": 16,
               "height": 56,
               "left": -16,
               "right": undefined,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "translateX": 0,
                 },
               ],
@@ -446,8 +437,20 @@ exports[`renders animated fab with label on the left 1`] = `
             accessibilityLabel="text"
             accessibilityRole="button"
             accessibilityState={
-              Object {
+              {
+                "busy": undefined,
+                "checked": undefined,
                 "disabled": false,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
               }
             }
             accessible={true}
@@ -463,12 +466,11 @@ exports[`renders animated fab with label on the left 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Array [
-                Object {
+              [
+                {
                   "overflow": "hidden",
                 },
-                false,
-                Object {
+                {
                   "borderRadius": 16,
                 },
               ]
@@ -477,11 +479,11 @@ exports[`renders animated fab with label on the left 1`] = `
           >
             <View
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "height": 56,
                   },
-                  Object {
+                  {
                     "borderRadius": 16,
                     "width": 72,
                   },
@@ -496,15 +498,15 @@ exports[`renders animated fab with label on the left 1`] = `
       collapsable={false}
       pointerEvents="none"
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": 56,
           "justifyContent": "center",
           "left": -16,
           "position": "absolute",
           "right": undefined,
-          "transform": Array [
-            Object {
+          "transform": [
+            {
               "translateX": 16,
             },
           ],
@@ -519,30 +521,30 @@ exports[`renders animated fab with label on the left 1`] = `
         pointerEvents="none"
         selectable={false}
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "rgba(33, 0, 93, 1)",
               "fontSize": 24,
             },
-            Array [
-              Object {
+            [
+              {
                 "lineHeight": 24,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "scaleX": 1,
                   },
                 ],
               },
-              Object {
+              {
                 "backgroundColor": "transparent",
               },
             ],
-            Object {
+            {
               "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -558,7 +560,7 @@ exports[`renders animated fab with label on the left 1`] = `
         numberOfLines={1}
         onTextLayout={[Function]}
         style={
-          Object {
+          {
             "color": "rgba(33, 0, 93, 1)",
             "fontFamily": "System",
             "fontSize": 14,
@@ -571,8 +573,8 @@ exports[`renders animated fab with label on the left 1`] = `
             "position": "absolute",
             "textAlign": "left",
             "top": -28,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 56,
               },
             ],
@@ -592,33 +594,23 @@ exports[`renders animated fab with label on the right by default 1`] = `
 <View
   collapsable={false}
   style={
-    Object {
-      "alignSelf": undefined,
+    {
       "backgroundColor": "transparent",
       "borderRadius": 16,
-      "bottom": undefined,
-      "end": undefined,
-      "flex": undefined,
-      "height": undefined,
-      "left": undefined,
       "opacity": 1,
       "position": "absolute",
-      "right": undefined,
       "shadowColor": "#000",
-      "shadowOffset": Object {
+      "shadowOffset": {
         "height": 4,
         "width": 0,
       },
       "shadowOpacity": 0.15,
       "shadowRadius": 8,
-      "start": undefined,
-      "top": undefined,
-      "transform": Array [
-        Object {
+      "transform": [
+        {
           "scale": 1,
         },
       ],
-      "width": undefined,
     }
   }
   testID="animated-fab-container-outer-layer"
@@ -626,12 +618,12 @@ exports[`renders animated fab with label on the right by default 1`] = `
   <View
     collapsable={false}
     style={
-      Object {
+      {
         "backgroundColor": "transparent",
         "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 0,
         },
@@ -644,7 +636,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "borderRadius": 16,
           "height": 56,
         }
@@ -652,15 +644,15 @@ exports[`renders animated fab with label on the right by default 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "bottom": 0,
               "left": 0,
               "position": "absolute",
               "right": 0,
               "top": 0,
             },
-            Object {
+            {
               "elevation": 0,
             },
           ]
@@ -670,7 +662,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
           collapsable={false}
           pointerEvents="none"
           style={
-            Object {
+            {
               "borderRadius": 16,
               "bottom": 0,
               "elevation": 3,
@@ -688,7 +680,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
           collapsable={false}
           pointerEvents="none"
           style={
-            Object {
+            {
               "borderRadius": 16,
               "bottom": 0,
               "elevation": 3,
@@ -697,8 +689,8 @@ exports[`renders animated fab with label on the right by default 1`] = `
               "position": "absolute",
               "right": 0,
               "top": 0,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "translateX": 16,
                 },
               ],
@@ -712,7 +704,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
         collapsable={false}
         pointerEvents="box-none"
         style={
-          Object {
+          {
             "borderRadius": 16,
             "flexDirection": "row",
             "overflow": "hidden",
@@ -722,14 +714,14 @@ exports[`renders animated fab with label on the right by default 1`] = `
         <View
           collapsable={false}
           style={
-            Object {
+            {
               "backgroundColor": "rgba(234, 221, 255, 1)",
               "borderRadius": 16,
               "height": 56,
               "left": 16,
               "right": undefined,
-              "transform": Array [
-                Object {
+              "transform": [
+                {
                   "translateX": 0,
                 },
               ],
@@ -741,8 +733,20 @@ exports[`renders animated fab with label on the right by default 1`] = `
             accessibilityLabel="text"
             accessibilityRole="button"
             accessibilityState={
-              Object {
+              {
+                "busy": undefined,
+                "checked": undefined,
                 "disabled": false,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
               }
             }
             accessible={true}
@@ -758,12 +762,11 @@ exports[`renders animated fab with label on the right by default 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Array [
-                Object {
+              [
+                {
                   "overflow": "hidden",
                 },
-                false,
-                Object {
+                {
                   "borderRadius": 16,
                 },
               ]
@@ -772,11 +775,11 @@ exports[`renders animated fab with label on the right by default 1`] = `
           >
             <View
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "height": 56,
                   },
-                  Object {
+                  {
                     "borderRadius": 16,
                     "width": 72,
                   },
@@ -791,15 +794,15 @@ exports[`renders animated fab with label on the right by default 1`] = `
       collapsable={false}
       pointerEvents="none"
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": 56,
           "justifyContent": "center",
           "left": 16,
           "position": "absolute",
           "right": undefined,
-          "transform": Array [
-            Object {
+          "transform": [
+            {
               "translateX": 0,
             },
           ],
@@ -814,30 +817,30 @@ exports[`renders animated fab with label on the right by default 1`] = `
         pointerEvents="none"
         selectable={false}
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "rgba(33, 0, 93, 1)",
               "fontSize": 24,
             },
-            Array [
-              Object {
+            [
+              {
                 "lineHeight": 24,
-                "transform": Array [
-                  Object {
+                "transform": [
+                  {
                     "scaleX": 1,
                   },
                 ],
               },
-              Object {
+              {
                 "backgroundColor": "transparent",
               },
             ],
-            Object {
+            {
               "fontFamily": "Material Design Icons",
               "fontStyle": "normal",
               "fontWeight": "normal",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -853,7 +856,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
         numberOfLines={1}
         onTextLayout={[Function]}
         style={
-          Object {
+          {
             "color": "rgba(33, 0, 93, 1)",
             "fontFamily": "System",
             "fontSize": 14,
@@ -866,8 +869,8 @@ exports[`renders animated fab with label on the right by default 1`] = `
             "right": 16,
             "textAlign": "left",
             "top": -28,
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateX": 56,
               },
             ],

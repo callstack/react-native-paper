@@ -2,13 +2,13 @@ import * as React from 'react';
 
 import type { InternalTheme } from 'src/types';
 
+import PortalConsumer from './PortalConsumer';
+import PortalHost, { PortalContext, PortalMethods } from './PortalHost';
 import {
   Consumer as SettingsConsumer,
   Provider as SettingsProvider,
 } from '../../core/settings';
 import { ThemeProvider, withInternalTheme } from '../../core/theming';
-import PortalConsumer from './PortalConsumer';
-import PortalHost, { PortalContext, PortalMethods } from './PortalHost';
 
 export type Props = {
   /**
@@ -55,7 +55,6 @@ class Portal extends React.Component<Props> {
             {(manager) => (
               <PortalConsumer manager={manager as PortalMethods}>
                 <SettingsProvider value={settings}>
-                  {/* @ts-expect-error check @callstack/react-theme-provider's children prop */}
                   <ThemeProvider theme={theme}>{children}</ThemeProvider>
                 </SettingsProvider>
               </PortalConsumer>

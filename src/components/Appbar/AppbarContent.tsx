@@ -6,18 +6,19 @@ import {
   StyleProp,
   StyleSheet,
   TextStyle,
-  TouchableWithoutFeedback,
+  Pressable,
   View,
   ViewStyle,
+  ViewProps,
 } from 'react-native';
 
 import color from 'color';
 
+import { modeTextVariant } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 import type { $RemoveChildren, MD3TypescaleKey, ThemeProp } from '../../types';
 import Text, { TextRef } from '../Typography/Text';
-import { modeTextVariant } from './utils';
 
 type TitleString = {
   title: string;
@@ -64,6 +65,10 @@ export type Props = $RemoveChildren<typeof View> & {
    */
   color?: string;
   /**
+   * Specifies the largest possible scale a title font can reach.
+   */
+  titleMaxFontSizeMultiplier?: number;
+  /**
    * @internal
    */
   mode?: 'small' | 'medium' | 'large' | 'center-aligned';
@@ -80,10 +85,6 @@ export type Props = $RemoveChildren<typeof View> & {
 
 /**
  * A component used to display a title and optional subtitle in an appbar.
- *
- * <div class="screenshots">
- *   <img class="small" src="screenshots/appbar-content.png" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -109,6 +110,7 @@ const AppbarContent = ({
   titleRef,
   titleStyle,
   title,
+  titleMaxFontSizeMultiplier,
   mode = 'small',
   theme: themeOverrides,
   testID = 'appbar-content',
@@ -134,13 +136,15 @@ const AppbarContent = ({
 
   const variant = modeTextVariant[mode] as MD3TypescaleKey;
 
+  const contentWrapperProps = {
+    pointerEvents: 'box-none' as ViewProps['pointerEvents'],
+    style: [styles.container, isV3 && modeContainerStyles[mode], style],
+    testID,
+    ...rest,
+  };
+
   const content = (
-    <View
-      pointerEvents="box-none"
-      style={[styles.container, isV3 && modeContainerStyles[mode], style]}
-      testID={testID}
-      {...rest}
-    >
+    <>
       {typeof title === 'string' ? (
         <Text
           {...(isV3 && { variant })}
@@ -169,6 +173,7 @@ const AppbarContent = ({
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
           accessibilityTraits="header"
           testID={`${testID}-title-text`}
+          maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
         >
           {title}
         </Text>
@@ -183,26 +188,27 @@ const AppbarContent = ({
           {subtitle}
         </Text>
       ) : null}
-    </View>
+    </>
   );
 
   if (onPress) {
     return (
       // eslint-disable-next-line react-native-a11y/has-accessibility-props
-      <TouchableWithoutFeedback
+      <Pressable
         accessibilityRole={touchableRole}
         // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
         accessibilityTraits={touchableRole}
         accessibilityComponentType="button"
         onPress={onPress}
         disabled={disabled}
+        {...contentWrapperProps}
       >
         {content}
-      </TouchableWithoutFeedback>
+      </Pressable>
     );
   }
 
-  return content;
+  return <View {...contentWrapperProps}>{content}</View>;
 };
 
 AppbarContent.displayName = 'Appbar.Content';
