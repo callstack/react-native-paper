@@ -256,8 +256,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
     const rippleColor =
       customRippleColor || color(textColor).alpha(0.32).rgb().string();
     const trailingRippleColor =
-      customTrailingRippleColor ||
-      color(textColor).alpha(0.32).rgb().string();
+      customTrailingRippleColor || color(textColor).alpha(0.32).rgb().string();
 
     const font = isV3
       ? {
@@ -271,10 +270,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
 
     const isBarMode = isV3 && mode === 'bar';
     const shouldRenderTrailingIcon =
-      isBarMode &&
-      trailingIcon &&
-      !loading &&
-      (!value || right !== undefined);
+      isBarMode && trailingIcon && !loading && (!value || right !== undefined);
 
     return (
       <Surface
