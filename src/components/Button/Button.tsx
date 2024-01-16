@@ -15,7 +15,11 @@ import {
 
 import color from 'color';
 
-import { ButtonMode, getButtonColors } from './utils';
+import {
+  ButtonMode,
+  getButtonColors,
+  getButtonTouchableRippleStyle,
+} from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
@@ -345,7 +349,7 @@ const Button = (
         accessible={accessible}
         disabled={disabled}
         rippleColor={rippleColor}
-        style={touchableStyle}
+        style={getButtonTouchableRippleStyle(touchableStyle, borderWidth)}
         testID={testID}
         theme={theme}
       >

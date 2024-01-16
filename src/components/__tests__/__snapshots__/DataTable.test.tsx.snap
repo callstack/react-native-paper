@@ -1741,7 +1741,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                   "overflow": "hidden",
                 },
                 {
-                  "borderRadius": 20,
+                  "borderRadius": 19,
                 },
               ]
             }
