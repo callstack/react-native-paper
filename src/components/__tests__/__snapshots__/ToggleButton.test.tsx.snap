@@ -93,16 +93,11 @@ exports[`renders disabled toggle button 1`] = `
       style={
         [
           false,
-          [
-            {
-              "alignItems": "center",
-              "flexGrow": 1,
-              "justifyContent": "center",
-            },
-            {
-              "borderRadius": 4,
-            },
-          ],
+          {
+            "alignItems": "center",
+            "flexGrow": 1,
+            "justifyContent": "center",
+          },
         ]
       }
       testID="icon-button"
@@ -236,16 +231,11 @@ exports[`renders toggle button 1`] = `
       style={
         [
           false,
-          [
-            {
-              "alignItems": "center",
-              "flexGrow": 1,
-              "justifyContent": "center",
-            },
-            {
-              "borderRadius": 4,
-            },
-          ],
+          {
+            "alignItems": "center",
+            "flexGrow": 1,
+            "justifyContent": "center",
+          },
         ]
       }
       testID="icon-button"
@@ -384,16 +374,11 @@ exports[`renders unchecked toggle button 1`] = `
       style={
         [
           false,
-          [
-            {
-              "alignItems": "center",
-              "flexGrow": 1,
-              "justifyContent": "center",
-            },
-            {
-              "borderRadius": 4,
-            },
-          ],
+          {
+            "alignItems": "center",
+            "flexGrow": 1,
+            "justifyContent": "center",
+          },
         ]
       }
       testID="icon-button"

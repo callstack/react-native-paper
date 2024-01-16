@@ -157,6 +157,30 @@ const ButtonExample = () => {
             iconColor={MD3Colors.tertiary50}
             onPress={() => {}}
           />
+          <IconButton
+            icon="eye"
+            mode="contained"
+            style={styles.slightlyRounded}
+            size={24}
+            iconColor={MD3Colors.tertiary50}
+            onPress={() => {}}
+          />
+          <IconButton
+            icon="heart"
+            mode="contained-tonal"
+            style={styles.differentBorderRadius}
+            size={24}
+            iconColor={MD3Colors.tertiary50}
+            onPress={() => {}}
+          />
+          <IconButton
+            icon="heart"
+            mode="outlined"
+            style={styles.differentBorderRadius}
+            size={24}
+            iconColor={MD3Colors.tertiary50}
+            onPress={() => {}}
+          />
           <IconButton icon="camera" size={36} onPress={() => {}} />
           <IconButton
             icon="lock"
@@ -188,6 +212,15 @@ const styles = StyleSheet.create({
   },
   square: {
     borderRadius: 0,
+  },
+  slightlyRounded: {
+    borderRadius: 4,
+  },
+  differentBorderRadius: {
+    borderTopLeftRadius: 2,
+    borderTopRightRadius: 4,
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 6,
   },
 });
 

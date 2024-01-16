@@ -1861,16 +1861,11 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
               {
                 "overflow": "hidden",
               },
-              [
-                {
-                  "alignItems": "center",
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                },
-                {
-                  "borderRadius": 20,
-                },
-              ],
+              {
+                "alignItems": "center",
+                "flexGrow": 1,
+                "justifyContent": "center",
+              },
             ]
           }
           testID="right-icon-adornment"
@@ -2222,16 +2217,11 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
               {
                 "overflow": "hidden",
               },
-              [
-                {
-                  "alignItems": "center",
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                },
-                {
-                  "borderRadius": 20,
-                },
-              ],
+              {
+                "alignItems": "center",
+                "flexGrow": 1,
+                "justifyContent": "center",
+              },
             ]
           }
           testID="left-icon-adornment"

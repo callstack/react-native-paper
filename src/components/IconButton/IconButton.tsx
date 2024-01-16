@@ -183,7 +183,7 @@ const IconButton = forwardRef<View, Props>(
           onPress={onPress}
           rippleColor={rippleColor}
           accessibilityLabel={accessibilityLabel}
-          style={[styles.touchable, { borderRadius }]}
+          style={styles.touchable}
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
           accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
           accessibilityComponentType="button"
