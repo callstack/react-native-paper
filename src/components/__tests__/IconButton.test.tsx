@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
   square: {
     borderRadius: 0,
   },
+  slightlyRounded: {
+    borderRadius: 4,
+  },
 });
 
 it('renders icon button by default', () => {
@@ -58,7 +61,21 @@ it('renders icon button with custom border radius', () => {
     />
   );
 
-  expect(getByTestId('icon-button')).toHaveStyle({ borderRadius: 0 });
+  expect(getByTestId('icon-button-container')).toHaveStyle({ borderRadius: 0 });
+});
+
+it('renders icon button with small border radius', () => {
+  const { getByTestId } = render(
+    <IconButton
+      icon="camera"
+      testID="icon-button"
+      size={36}
+      onPress={() => {}}
+      style={styles.slightlyRounded}
+    />
+  );
+
+  expect(getByTestId('icon-button-container')).toHaveStyle({ borderRadius: 4 });
 });
 
 describe('getIconButtonColor - icon color', () => {

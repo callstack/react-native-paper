@@ -95,16 +95,11 @@ exports[`renders disabled icon button 1`] = `
           {
             "overflow": "hidden",
           },
-          [
-            {
-              "alignItems": "center",
-              "flexGrow": 1,
-              "justifyContent": "center",
-            },
-            {
-              "borderRadius": 20,
-            },
-          ],
+          {
+            "alignItems": "center",
+            "flexGrow": 1,
+            "justifyContent": "center",
+          },
         ]
       }
       testID="icon-button"
@@ -240,16 +235,11 @@ exports[`renders icon button by default 1`] = `
           {
             "overflow": "hidden",
           },
-          [
-            {
-              "alignItems": "center",
-              "flexGrow": 1,
-              "justifyContent": "center",
-            },
-            {
-              "borderRadius": 20,
-            },
-          ],
+          {
+            "alignItems": "center",
+            "flexGrow": 1,
+            "justifyContent": "center",
+          },
         ]
       }
       testID="icon-button"
@@ -385,16 +375,11 @@ exports[`renders icon button with color 1`] = `
           {
             "overflow": "hidden",
           },
-          [
-            {
-              "alignItems": "center",
-              "flexGrow": 1,
-              "justifyContent": "center",
-            },
-            {
-              "borderRadius": 20,
-            },
-          ],
+          {
+            "alignItems": "center",
+            "flexGrow": 1,
+            "justifyContent": "center",
+          },
         ]
       }
       testID="icon-button"
@@ -530,16 +515,11 @@ exports[`renders icon button with size 1`] = `
           {
             "overflow": "hidden",
           },
-          [
-            {
-              "alignItems": "center",
-              "flexGrow": 1,
-              "justifyContent": "center",
-            },
-            {
-              "borderRadius": 23,
-            },
-          ],
+          {
+            "alignItems": "center",
+            "flexGrow": 1,
+            "justifyContent": "center",
+          },
         ]
       }
       testID="icon-button"
@@ -675,16 +655,11 @@ exports[`renders icon change animated 1`] = `
           {
             "overflow": "hidden",
           },
-          [
-            {
-              "alignItems": "center",
-              "flexGrow": 1,
-              "justifyContent": "center",
-            },
-            {
-              "borderRadius": 20,
-            },
-          ],
+          {
+            "alignItems": "center",
+            "flexGrow": 1,
+            "justifyContent": "center",
+          },
         ]
       }
       testID="icon-button"
