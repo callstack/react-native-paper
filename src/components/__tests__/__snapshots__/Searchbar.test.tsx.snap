@@ -128,11 +128,14 @@ exports[`activity indicator snapshot test 1`] = `
               {
                 "overflow": "hidden",
               },
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
             ]
           }
           testID="search-bar-icon"
@@ -542,11 +545,14 @@ exports[`renders with placeholder 1`] = `
               {
                 "overflow": "hidden",
               },
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
             ]
           }
           testID="search-bar-icon"
@@ -730,11 +736,14 @@ exports[`renders with placeholder 1`] = `
                 {
                   "overflow": "hidden",
                 },
-                {
-                  "alignItems": "center",
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                },
+                [
+                  {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                  undefined,
+                ],
               ]
             }
             testID="search-bar-clear-icon"
@@ -911,11 +920,14 @@ exports[`renders with text 1`] = `
               {
                 "overflow": "hidden",
               },
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
             ]
           }
           testID="search-bar-icon"
@@ -1095,11 +1107,14 @@ exports[`renders with text 1`] = `
                 {
                   "overflow": "hidden",
                 },
-                {
-                  "alignItems": "center",
-                  "flexGrow": 1,
-                  "justifyContent": "center",
-                },
+                [
+                  {
+                    "alignItems": "center",
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                  },
+                  undefined,
+                ],
               ]
             }
             testID="search-bar-clear-icon"

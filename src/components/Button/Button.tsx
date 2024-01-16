@@ -127,7 +127,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   delayLongPress?: number;
   /**
    * Style of button's inner content.
-   * Use this prop to apply custom height and width and to set the icon on the right with `flexDirection: 'row-reverse'`.
+   * Use this prop to apply custom height and width, to set a custom padding or to set the icon on the right with `flexDirection: 'row-reverse'`.
    */
   contentStyle?: StyleProp<ViewStyle>;
   /**
