@@ -169,11 +169,14 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                   {
                     "overflow": "hidden",
                   },
-                  {
-                    "alignItems": "center",
-                    "flexGrow": 1,
-                    "justifyContent": "center",
-                  },
+                  [
+                    {
+                      "alignItems": "center",
+                      "flexGrow": 1,
+                      "justifyContent": "center",
+                    },
+                    undefined,
+                  ],
                 ]
               }
               testID="search-bar-icon"
@@ -357,11 +360,14 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                     {
                       "overflow": "hidden",
                     },
-                    {
-                      "alignItems": "center",
-                      "flexGrow": 1,
-                      "justifyContent": "center",
-                    },
+                    [
+                      {
+                        "alignItems": "center",
+                        "flexGrow": 1,
+                        "justifyContent": "center",
+                      },
+                      undefined,
+                    ],
                   ]
                 }
                 testID="search-bar-clear-icon"
@@ -544,11 +550,14 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               {
                 "overflow": "hidden",
               },
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
             ]
           }
           testID="icon-button"
@@ -782,11 +791,14 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               {
                 "overflow": "hidden",
               },
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
             ]
           }
           testID="icon-button"

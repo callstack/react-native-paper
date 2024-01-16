@@ -469,11 +469,14 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
               {
                 "overflow": "hidden",
               },
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
             ]
           }
           testID="icon-button"
@@ -607,11 +610,14 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
               {
                 "overflow": "hidden",
               },
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
             ]
           }
           testID="icon-button"
@@ -803,11 +809,14 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
               {
                 "overflow": "hidden",
               },
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
             ]
           }
           testID="icon-button"
@@ -941,11 +950,14 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
               {
                 "overflow": "hidden",
               },
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
             ]
           }
           testID="icon-button"
@@ -1079,11 +1091,14 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
               {
                 "overflow": "hidden",
               },
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
             ]
           }
           testID="icon-button"
@@ -1217,11 +1232,14 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
               {
                 "overflow": "hidden",
               },
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
             ]
           }
           testID="icon-button"
@@ -1413,11 +1431,14 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
               {
                 "overflow": "hidden",
               },
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
             ]
           }
           testID="icon-button"
@@ -1551,11 +1572,14 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
               {
                 "overflow": "hidden",
               },
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
             ]
           }
           testID="icon-button"
@@ -1998,11 +2022,14 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               {
                 "overflow": "hidden",
               },
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
             ]
           }
           testID="icon-button"
@@ -2136,11 +2163,14 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               {
                 "overflow": "hidden",
               },
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
             ]
           }
           testID="icon-button"
@@ -2274,11 +2304,14 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               {
                 "overflow": "hidden",
               },
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
             ]
           }
           testID="icon-button"
@@ -2412,11 +2445,14 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               {
                 "overflow": "hidden",
               },
-              {
-                "alignItems": "center",
-                "flexGrow": 1,
-                "justifyContent": "center",
-              },
+              [
+                {
+                  "alignItems": "center",
+                  "flexGrow": 1,
+                  "justifyContent": "center",
+                },
+                undefined,
+              ],
             ]
           }
           testID="icon-button"
