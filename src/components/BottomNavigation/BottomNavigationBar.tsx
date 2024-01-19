@@ -253,6 +253,7 @@ const Touchable = <Route extends BaseRoute>({
  * import { View, StyleSheet } from 'react-native';
  *
  * import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+ * import { CommonActions } from "@react-navigation/native";
  * import { Text, BottomNavigation } from 'react-native-paper';
  * import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
  *
