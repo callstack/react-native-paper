@@ -257,9 +257,11 @@ export const getButtonTouchableRippleStyle = (
     ) as Array<keyof ViewStyleBorderRadiusStyles>
   ).forEach((key) => {
     const value = style[key as keyof ViewStyleBorderRadiusStyles];
-    if (typeof value !== 'undefined' && typeof value === 'number')
-      touchableRippleStyle[key as keyof ViewStyleBorderRadiusStyles] =
-        value - borderWidth;
+    if (typeof value !== 'undefined' && typeof value === 'number') {
+      // Only subtract borderWidth if value is greater than 0
+      const radius = value > 0 ? value - borderWidth : 0;
+      touchableRippleStyle[key as keyof ViewStyleBorderRadiusStyles] = radius;
+    }
   });
   return touchableRippleStyle;
 };
