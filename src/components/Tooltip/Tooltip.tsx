@@ -122,6 +122,7 @@ const Tooltip = ({
   };
 
   const handleTouchStart = () => {
+    console.log('start');
     if (hideTooltipTimer.current.length) {
       hideTooltipTimer.current.forEach((t) => clearTimeout(t));
       hideTooltipTimer.current = [];
@@ -158,6 +159,7 @@ const Tooltip = ({
       if (touched.current) {
         return null;
       } else {
+        if (children.props.disabled) return null;
         return children.props.onPress?.();
       }
     }, [children.props]),

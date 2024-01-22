@@ -42,6 +42,7 @@ const formOfTransport = [
 ];
 
 const TooltipExample = ({ navigation }: Props) => {
+  const [textAlign, setTextAlign] = React.useState('bold');
   React.useLayoutEffect(() => {
     navigation.setOptions({
       header: () => (
@@ -95,15 +96,18 @@ const TooltipExample = ({ navigation }: Props) => {
         </List.Section>
         <List.Section title="Toggle Buttons">
           <ToggleButton.Row
-            value="bold"
+            value={textAlign}
             style={styles.toggleButtonRow}
-            onValueChange={() => {}}
+            onValueChange={setTextAlign}
           >
-            <Tooltip title="Bold">
-              <ToggleButton icon="format-bold" value="bold" />
+            <Tooltip title="Align left">
+              <ToggleButton icon="format-align-left" value="left" />
             </Tooltip>
             <Tooltip title="Align center">
-              <ToggleButton icon="format-align-center" value="align-center" />
+              <ToggleButton icon="format-align-center" value="center" />
+            </Tooltip>
+            <Tooltip title="Align right">
+              <ToggleButton icon="format-align-right" value="right" disabled />
             </Tooltip>
           </ToggleButton.Row>
         </List.Section>
