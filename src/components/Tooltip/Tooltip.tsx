@@ -122,7 +122,6 @@ const Tooltip = ({
   };
 
   const handleTouchStart = () => {
-    console.log('start');
     if (hideTooltipTimer.current.length) {
       hideTooltipTimer.current.forEach((t) => clearTimeout(t));
       hideTooltipTimer.current = [];
