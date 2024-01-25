@@ -189,6 +189,35 @@ const Banner = ({
     Animated.add(position, -1),
     layout.height
   );
+
+  const renderChildrenWithWrapper = () => {
+    if (typeof children === 'string') {
+      return (
+        <Text
+          style={[
+            styles.message,
+            {
+              color: theme.isV3 ? theme.colors.onSurface : theme.colors.text,
+            },
+          ]}
+          accessibilityLiveRegion={visible ? 'polite' : 'none'}
+          accessibilityRole="alert"
+          maxFontSizeMultiplier={maxFontSizeMultiplier}
+        >
+          {children}
+        </Text>
+      );
+    }
+    return (
+      <View
+        accessibilityLiveRegion={visible ? 'polite' : 'none'}
+        accessibilityRole="alert"
+      >
+        {children}
+      </View>
+    );
+  };
+
   return (
     <Surface
       {...rest}
@@ -220,21 +249,7 @@ const Banner = ({
                 <Icon source={icon} size={40} />
               </View>
             ) : null}
-            <Text
-              style={[
-                styles.message,
-                {
-                  color: theme.isV3
-                    ? theme.colors.onSurface
-                    : theme.colors.text,
-                },
-              ]}
-              accessibilityLiveRegion={visible ? 'polite' : 'none'}
-              accessibilityRole="alert"
-              maxFontSizeMultiplier={maxFontSizeMultiplier}
-            >
-              {children}
-            </Text>
+            {renderChildrenWithWrapper()}
           </View>
           <View style={styles.actions}>
             {actions.map(({ label, ...others }, i) => (
