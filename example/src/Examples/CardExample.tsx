@@ -62,6 +62,25 @@ const CardExample = () => {
             </TextComponent>
           </Card.Content>
         </Card>
+        <Card style={styles.card} mode={selectedMode}>
+          <Card.Cover
+            source={require('../../assets/images/wrecked-ship.jpg')}
+          />
+          <Card.Title
+            title="Pressable Title"
+            onPressTitle={() => {
+              isWeb
+                ? alert('The title is Pressed')
+                : Alert.alert('The title is Pressed');
+            }}
+          />
+          <Card.Content>
+            <TextComponent variant="bodyMedium">
+              This is a card with a pressable title. {'\n'}If you press the
+              title I will alert
+            </TextComponent>
+          </Card.Content>
+        </Card>
         {isV3 && (
           <Card style={styles.card} mode={selectedMode}>
             <Card.Cover source={require('../../assets/images/bridge.jpg')} />
