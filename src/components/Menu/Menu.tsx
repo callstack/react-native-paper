@@ -680,6 +680,7 @@ class Menu extends React.Component<Props, State> {
 const styles = StyleSheet.create({
   wrapper: {
     position: 'absolute',
+    overflow: 'hidden',
   },
   shadowMenuContainer: {
     opacity: 0,
