@@ -1,7 +1,8 @@
 import { FlexAlignType, ColorValue, StyleSheet } from 'react-native';
 
 import color from 'color';
-import type { EllipsizeProp, InternalTheme } from 'src/types';
+
+import type { EllipsizeProp, InternalTheme } from '../../types';
 
 type Description =
   | React.ReactNode
