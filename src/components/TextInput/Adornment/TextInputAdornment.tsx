@@ -6,8 +6,6 @@ import type {
   Animated,
 } from 'react-native';
 
-import type { ThemeProp } from 'src/types';
-
 import { AdornmentSide, AdornmentType, InputMode } from './enums';
 import TextInputAffix, { AffixAdornment } from './TextInputAffix';
 import TextInputIcon, { IconAdornment } from './TextInputIcon';
@@ -15,6 +13,7 @@ import type {
   AdornmentConfig,
   AdornmentStyleAdjustmentForNativeInput,
 } from './types';
+import type { ThemeProp } from '../../../types';
 import { getConstants } from '../helpers';
 
 export function getAdornmentConfig({

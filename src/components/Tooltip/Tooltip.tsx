@@ -9,10 +9,9 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import type { ThemeProp } from 'src/types';
-
 import { getTooltipPosition, Measurement } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Text from '../Typography/Text';

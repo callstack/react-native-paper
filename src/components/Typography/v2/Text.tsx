@@ -6,9 +6,8 @@ import {
   TextStyle,
 } from 'react-native';
 
-import type { MD2Theme } from 'src/types';
-
 import { useInternalTheme } from '../../../core/theming';
+import type { MD2Theme } from '../../../types';
 import { forwardRef } from '../../../utils/forwardRef';
 
 type Props = React.ComponentProps<typeof NativeText> & {

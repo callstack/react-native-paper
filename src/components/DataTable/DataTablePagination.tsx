@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 
 import color from 'color';
-import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import Button from '../Button/Button';
 import IconButton from '../IconButton/IconButton';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';

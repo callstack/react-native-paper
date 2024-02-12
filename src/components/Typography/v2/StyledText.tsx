@@ -2,10 +2,10 @@ import * as React from 'react';
 import { I18nManager, StyleProp, StyleSheet, TextStyle } from 'react-native';
 
 import color from 'color';
-import type { ThemeProp } from 'src/types';
 
 import Text from './Text';
 import { useInternalTheme } from '../../../core/theming';
+import type { ThemeProp } from '../../../types';
 
 type Props = React.ComponentProps<typeof Text> & {
   alpha?: number;
