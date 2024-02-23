@@ -317,7 +317,6 @@ const Button = (
   return (
     <Surface
       {...rest}
-      ref={ref}
       testID={`${testID}-container`}
       style={
         [
@@ -331,6 +330,7 @@ const Button = (
       {...(isV3 && { elevation: elevation })}
     >
       <TouchableRipple
+        ref={ref}
         borderless
         background={background}
         onPress={onPress}
