@@ -75,7 +75,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Trailing icon to display for the `Button`.
    */
-  trailingIcon? IconSource;
+  trailingIcon?: IconSource;
   /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
@@ -419,11 +419,13 @@ const Button = (
           >
             {children}
           </Text>
-          <View style={[styles.content, contentStyle]}>
-          {trailingIcon && loading !== true ? (
-            <View style={trailingIconStyle} testID={`${testID}-trailing-icon-container`}>
+          {trailingIcon ? (
+            <View
+              style={trailingIconStyle}
+              testID={`${testID}-trailing-icon-container`}
+            >
               <Icon
-                source={trailingIcon}
+                source={trailingIconStyle}
                 size={customLabelSize ?? iconSize}
                 color={
                   typeof customLabelColor === 'string'
