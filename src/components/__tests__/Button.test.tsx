@@ -58,6 +58,14 @@ it('renders button with icon', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('renders button with trailing icon', () => {
+  const tree = render(
+    <Button trailingIcon="camera">Icon Button</Button>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('renders button with icon in reverse order', () => {
   const tree = render(
     <Button icon="chevron-right" contentStyle={styles.flexing}>
