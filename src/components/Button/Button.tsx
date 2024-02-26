@@ -319,7 +319,7 @@ const Button = (
             styles[`md3IconTextMode${compact ? 'Compact' : ''}`],
         ];
 
-  const trailingIconStyle = 
+  const trailingIconStyle =
     StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
       ? [
           styles.icon,
