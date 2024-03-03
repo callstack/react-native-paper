@@ -137,7 +137,7 @@ const AppbarHeader = ({
           backgroundColor,
           zIndex,
           elevation,
-          paddingTop: statusBarHeight ?? safeAreaInsets.top ?? top,
+          paddingTop: statusBarHeight ?? safeAreaInsets?.top ?? top,
           paddingHorizontal: Math.max(left, right),
         },
         borderRadius,
