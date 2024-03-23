@@ -862,6 +862,8 @@ exports[`renders button with icon 1`] = `
                 "marginLeft": 12,
                 "marginRight": -8,
               },
+              false,
+              false,
             ]
           }
           testID="button-icon-container"
@@ -1063,6 +1065,14 @@ exports[`renders button with icon in reverse order 1`] = `
                 "marginRight": 12,
               },
               {
+                "marginLeft": 16,
+                "marginRight": -16,
+              },
+              {
+                "marginLeft": 12,
+                "marginRight": -8,
+              },
+              {
                 "marginLeft": -16,
                 "marginRight": 16,
               },
@@ -1159,6 +1169,206 @@ exports[`renders button with icon in reverse order 1`] = `
           testID="button-text"
         >
           Right Icon
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders button with icon on top 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
+      "shadowColor": "#000",
+      "shadowOffset": {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0,
+      "shadowRadius": 0,
+    }
+  }
+  testID="button-container-outer-layer"
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "transparent",
+        "borderColor": "transparent",
+        "borderRadius": 20,
+        "borderStyle": "solid",
+        "borderWidth": 0,
+        "flex": undefined,
+        "minWidth": 64,
+        "shadowColor": "#000",
+        "shadowOffset": {
+          "height": 0,
+          "width": 0,
+        },
+        "shadowOpacity": 0,
+        "shadowRadius": 0,
+      }
+    }
+    testID="button-container"
+  >
+    <View
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "borderRadius": 20,
+          },
+        ]
+      }
+      testID="button"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            {
+              "flexDirection": "column",
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "marginRight": 4,
+                "marginTop": 8,
+              },
+            ]
+          }
+          testID="button-icon-container"
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            allowFontScaling={false}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "rgba(103, 80, 164, 1)",
+                  "fontSize": 18,
+                },
+                [
+                  {
+                    "lineHeight": 18,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+                {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                {},
+              ]
+            }
+          >
+            󰄀
+          </Text>
+        </View>
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(28, 27, 31, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "marginHorizontal": 16,
+                    "marginVertical": 9,
+                    "textAlign": "center",
+                  },
+                  false,
+                  {
+                    "marginHorizontal": 16,
+                  },
+                  undefined,
+                  false,
+                  {
+                    "color": "rgba(103, 80, 164, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          testID="button-text"
+        >
+          Icon on Top
         </Text>
       </View>
     </View>
@@ -1589,6 +1799,8 @@ exports[`renders loading button 1`] = `
                   "marginLeft": 12,
                   "marginRight": -8,
                 },
+                false,
+                false,
               ],
             ]
           }

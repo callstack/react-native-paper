@@ -305,12 +305,9 @@ const Button = (
           contentFlexDirection === 'row-reverse'
             ? styles.iconReverse
             : styles.icon,
-          isV3 &&
-            contentFlexDirection &&
-            styles[`md3Icon${compact ? 'Compact' : ''}`],
+          isV3 && styles[`md3Icon${compact ? 'Compact' : ''}`],
           isV3 &&
             isMode('text') &&
-            contentFlexDirection &&
             styles[`md3IconTextMode${compact ? 'Compact' : ''}`],
           contentFlexDirection === 'row-reverse' &&
             isV3 &&

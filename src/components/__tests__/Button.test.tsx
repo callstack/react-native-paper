@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
   flexing: {
     flexDirection: 'row-reverse',
   },
+  columnFlex: {
+    flexDirection: 'column',
+  },
   customRadius: {
     borderTopLeftRadius: 16,
     borderTopRightRadius: 0,
@@ -62,6 +65,16 @@ it('renders button with icon in reverse order', () => {
   const tree = render(
     <Button icon="chevron-right" contentStyle={styles.flexing}>
       Right Icon
+    </Button>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders button with icon on top', () => {
+  const tree = render(
+    <Button icon="camera" contentStyle={styles.columnFlex}>
+      Icon on Top
     </Button>
   ).toJSON();
 
@@ -276,6 +289,25 @@ describe('button icon styles', () => {
         });
       })
   );
+});
+
+describe('button icon on top styles', () => {
+  it('should return correct content styles for icon when displayed on top', () => {
+    const { getByTestId } = render(
+      <Button
+        mode={'contained'}
+        icon="camera"
+        contentStyle={styles.columnFlex}
+        testID="compact-button"
+      >
+        Compact text button
+      </Button>
+    );
+    expect(getByTestId('compact-button-icon-container')).toHaveStyle({
+      marginTop: 8,
+      marginRight: 4,
+    });
+  });
 });
 
 describe('getButtonColors - background color', () => {

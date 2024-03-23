@@ -284,7 +284,7 @@ const ButtonExample = () => {
             Custom Font
           </Button>
           <Button
-            mode="outlined"
+            mode="contained"
             contentStyle={styles.buttonWithImageOnTop}
             icon={{
               uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',
@@ -372,7 +372,6 @@ const styles = StyleSheet.create({
   },
   buttonWithImageOnTop: {
     flexDirection: 'column',
-    alignItems: 'center',
   },
   flexReverse: {
     flexDirection: 'row-reverse',
