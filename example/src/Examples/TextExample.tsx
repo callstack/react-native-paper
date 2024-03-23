@@ -11,6 +11,7 @@ import {
   Subheading,
   customText,
   Title,
+  Text as RNPText,
 } from 'react-native-paper';
 
 import { useExampleTheme } from '..';
@@ -111,6 +112,11 @@ const TextExample = () => {
                 Custom Variant
               </Text>
             </PaperProvider>
+
+            <RNPText style={{ color: 'red' }}>
+              <RNPText>Nested </RNPText>
+              Text
+            </RNPText>
           </>
         )}
       </View>
