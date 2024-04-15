@@ -1,14 +1,17 @@
-import React from 'react';
-import type {
-  LayoutChangeEvent,
-  TextStyle,
-  StyleProp,
-  Animated,
+import React, { isValidElement } from 'react';
+import {
+  type LayoutChangeEvent,
+  type TextStyle,
+  type StyleProp,
+  type Animated,
 } from 'react-native';
 
 import type { ThemeProp } from 'src/types';
 
 import { AdornmentSide, AdornmentType, InputMode } from './enums';
+import TextInputActivityIndicator, {
+  ActivityIndicatorAdornment,
+} from './TextInputActivityIndicator';
 import TextInputAffix, { AffixAdornment } from './TextInputAffix';
 import TextInputIcon, { IconAdornment } from './TextInputIcon';
 import type {
@@ -36,6 +39,8 @@ export function getAdornmentConfig({
           type = AdornmentType.Affix;
         } else if (adornment.type === TextInputIcon) {
           type = AdornmentType.Icon;
+        } else if (adornment.type === TextInputActivityIndicator) {
+          type = AdornmentType.ActivityIndicator;
         }
         adornmentConfig.push({
           side,
@@ -120,6 +125,7 @@ export interface TextInputAdornmentProps {
       [AdornmentSide.Right]: number | null;
     };
     [AdornmentType.Icon]: number;
+    [AdornmentType.ActivityIndicator]: number;
   };
   onAffixChange: {
     [AdornmentSide.Left]: (event: LayoutChangeEvent) => void;
@@ -191,6 +197,21 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
                 onLayout={onAffixChange[side]}
                 visible={visible}
                 maxFontSizeMultiplier={maxFontSizeMultiplier}
+              />
+            );
+          } else if (type === AdornmentType.ActivityIndicator) {
+            const { useNativeActivityIndicator } =
+              isValidElement(inputAdornmentComponent) &&
+              inputAdornmentComponent.props;
+            return (
+              <ActivityIndicatorAdornment
+                {...commonProps}
+                key={side}
+                indicator={inputAdornmentComponent}
+                topPosition={topPosition[AdornmentType.ActivityIndicator]}
+                theme={theme}
+                disabled={disabled}
+                useNativeActivityIndicator={useNativeActivityIndicator}
               />
             );
           } else {
