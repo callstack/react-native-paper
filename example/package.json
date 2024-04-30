@@ -32,13 +32,13 @@
     "file-loader": "^6.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "0.71.8",
-    "react-native-gesture-handler": "~2.9.0",
+    "react-native": "0.73.6",
+    "react-native-gesture-handler": "2.14.0",
     "react-native-reanimated": "3.6.2",
-    "react-native-safe-area-context": "4.5.0",
-    "react-native-screens": "~3.20.0",
+    "react-native-safe-area-context": "4.8.2",
+    "react-native-screens": "3.29.0",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-web": "~0.18.7",
+    "react-native-web": "0.19.6",
     "typeface-roboto": "^1.1.13"
   },
   "devDependencies": {
