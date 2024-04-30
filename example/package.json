@@ -52,7 +52,7 @@
   "expo": {
     "install": {
       "exclude": [
-        "expo", "expo-update"
+        "expo", "expo-updates"
       ]
     }
   }
