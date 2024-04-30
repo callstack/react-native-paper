@@ -23,11 +23,11 @@
     "@react-navigation/native": "^6.1.2",
     "@react-navigation/stack": "^6.3.11",
     "expo": "50.0.12",
-    "expo-dev-client": "~2.2.1",
+    "expo-dev-client": "3.3.11",
     "expo-font": "11.10.3",
-    "expo-keep-awake": "~12.0.1",
-    "expo-splash-screen": "0.18.2",
-    "expo-status-bar": "~1.4.4",
+    "expo-keep-awake": "12.8.2",
+    "expo-splash-screen": "0.26.5",
+    "expo-status-bar": "1.11.1",
     "expo-updates": "~0.16.4",
     "file-loader": "^6.2.0",
     "react": "18.2.0",
@@ -48,5 +48,12 @@
   },
   "resolutions": {
     "expo/expo-asset": "8.9.1"
+  },
+  "expo": {
+    "install": {
+      "exclude": [
+        "expo"
+      ]
+    }
   }
 }
