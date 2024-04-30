@@ -13,11 +13,11 @@
     "web": "EXPO_NO_TYPESCRIPT_SETUP=1 expo start --web"
   },
   "dependencies": {
-    "@expo/vector-icons": "^13.0.0",
-    "@expo/webpack-config": "^18.0.1",
+    "@expo/vector-icons": "14.0.0",
+    "@expo/webpack-config": "19.0.1",
     "@pchmn/expo-material3-theme": "^1.0.1",
-    "@react-native-async-storage/async-storage": "1.17.11",
-    "@react-native-masked-view/masked-view": "0.2.8",
+    "@react-native-async-storage/async-storage": "1.21.0",
+    "@react-native-masked-view/masked-view": "0.3.0",
     "@react-navigation/bottom-tabs": "^6.5.3",
     "@react-navigation/drawer": "^6.5.7",
     "@react-navigation/native": "^6.1.2",
