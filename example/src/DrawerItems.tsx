@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { I18nManager, StyleSheet, View, Platform } from 'react-native';
+import { StyleSheet, View, Platform } from 'react-native';
 
 import { DrawerContentScrollView } from '@react-navigation/drawer';
-import * as Updates from 'expo-updates';
 import {
   Badge,
   Drawer,
@@ -99,7 +98,6 @@ function DrawerItems() {
   const {
     toggleShouldUseDeviceColors,
     toggleTheme,
-    toggleRtl: toggleRTL,
     toggleThemeVersion,
     toggleCollapsed,
     toggleCustomFont,
@@ -107,18 +105,9 @@ function DrawerItems() {
     customFontLoaded,
     rippleEffectEnabled,
     collapsed,
-    rtl: isRTL,
     theme: { dark: isDarkTheme },
     shouldUseDeviceColors,
   } = preferences;
-
-  const _handleToggleRTL = () => {
-    toggleRTL();
-    I18nManager.forceRTL(!isRTL);
-    if (isWeb) {
-      Updates.reloadAsync();
-    }
-  };
 
   const coloredLabelTheme = {
     colors: isV3
@@ -191,14 +180,12 @@ function DrawerItems() {
             </TouchableRipple>
 
             {!isWeb && (
-              <TouchableRipple onPress={_handleToggleRTL}>
-                <View style={[styles.preference, isV3 && styles.v3Preference]}>
-                  <Text variant="labelLarge">RTL</Text>
-                  <View pointerEvents="none">
-                    <Switch value={isRTL} />
-                  </View>
-                </View>
-              </TouchableRipple>
+              <View style={[styles.preference, isV3 && styles.v3Preference]}>
+                <Text variant="labelLarge">RTL</Text>
+                <Text style={styles.rtlWarning} variant="bodySmall">
+                  only works from phone config
+                </Text>
+              </View>
             )}
 
             <TouchableRipple onPress={toggleThemeVersion}>
@@ -272,6 +259,9 @@ const styles = StyleSheet.create({
   v3Preference: {
     height: 56,
     paddingHorizontal: 28,
+  },
+  rtlWarning: {
+    color: 'red',
   },
   badge: {
     alignSelf: 'center',
