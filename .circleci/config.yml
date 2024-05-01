@@ -3,7 +3,7 @@ version: 2.1
 executors:
   default:
     docker:
-      - image: cimg/node:16.18.0
+      - image: cimg/node:18.20.2
     working_directory: ~/react-native-paper
 
 commands:
