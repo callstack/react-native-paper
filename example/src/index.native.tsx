@@ -28,9 +28,9 @@ import {
 } from 'react-native-paper';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
-import { deviceColorsSupported } from '../utils';
 import DrawerItems from './DrawerItems';
 import App from './RootNavigator';
+import { deviceColorsSupported } from '../utils';
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
