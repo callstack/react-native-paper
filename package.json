@@ -112,6 +112,9 @@
       "pre-commit": "yarn lint-no-fix && yarn typescript && yarn test"
     }
   },
+  "engines": {
+    "node": ">=16"
+  },
   "jest": {
     "setupFiles": [
       "<rootDir>/testSetup.js"
