@@ -21,6 +21,8 @@ type TextInputProps = React.ComponentPropsWithRef<typeof NativeTextInput> & {
   left?: React.ReactNode;
   right?: React.ReactNode;
   disabled?: boolean;
+  useNativeActivityIndicator?: boolean;
+  loading?: boolean;
   label?: TextInputLabelProp;
   placeholder?: string;
   error?: boolean;
@@ -45,6 +47,7 @@ type TextInputProps = React.ComponentPropsWithRef<typeof NativeTextInput> & {
   contentStyle?: StyleProp<TextStyle>;
   outlineStyle?: StyleProp<ViewStyle>;
   underlineStyle?: StyleProp<ViewStyle>;
+  loadingStyle?: StyleProp<ViewStyle>;
 };
 
 export type RenderProps = {

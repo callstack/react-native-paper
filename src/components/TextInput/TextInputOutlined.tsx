@@ -285,6 +285,12 @@ const TextInputOutlined = ({
     labelYOffset: -yOffset,
   });
 
+  const loadingTopPosition = calculateOutlinedIconAndAffixTopPosition({
+    height: outlinedHeight,
+    affixHeight: ADORNMENT_SIZE,
+    labelYOffset: -yOffset,
+  });
+
   const rightAffixWidth = right
     ? rightLayout.width || ADORNMENT_SIZE
     : ADORNMENT_SIZE;
@@ -316,6 +322,7 @@ const TextInputOutlined = ({
     topPosition: {
       [AdornmentType.Icon]: iconTopPosition,
       [AdornmentType.Affix]: affixTopPosition,
+      [AdornmentType.ActivityIndicator]: loadingTopPosition,
     },
     onAffixChange,
     isTextInputFocused: parentState.focused,

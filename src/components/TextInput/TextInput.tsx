@@ -10,6 +10,9 @@ import {
   TextLayoutEventData,
 } from 'react-native';
 
+import TextInputActivityIndicator, {
+  Props as TextInputActivityIndicatorProps,
+} from './Adornment/TextInputActivityIndicator';
 import TextInputAffix, {
   Props as TextInputAffixProps,
 } from './Adornment/TextInputAffix';
@@ -180,6 +183,7 @@ interface CompoundedComponent
   > {
   Icon: React.FunctionComponent<TextInputIconProps>;
   Affix: React.FunctionComponent<Partial<TextInputAffixProps>>;
+  ActivityIndicator: React.FunctionComponent<TextInputActivityIndicatorProps>;
 }
 
 type TextInputHandles = Pick<
@@ -571,5 +575,8 @@ TextInput.Icon = TextInputIcon;
 // @component ./Adornment/TextInputAffix.tsx
 // @ts-ignore Types of property 'theme' are incompatible.
 TextInput.Affix = TextInputAffix;
+
+// @component ./Adornment/TextInputActivityIndicator.tsx
+TextInput.ActivityIndicator = TextInputActivityIndicator;
 
 export default TextInput;

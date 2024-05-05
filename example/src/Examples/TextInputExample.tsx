@@ -215,6 +215,19 @@ const TextInputExample = () => {
               }
             />
             <TextInput
+              style={styles.inputContainerStyle}
+              label="Flat input with Activity Indicator"
+              placeholder="Type something"
+              value={text}
+              onChangeText={(text) => inputActionHandler('text', text)}
+              maxLength={100}
+              right={
+                <TextInput.ActivityIndicator
+                  useNativeActivityIndicator={true}
+                />
+              }
+            />
+            <TextInput
               style={[styles.inputContainerStyle, styles.fontSize]}
               label="Flat input large font"
               placeholder="Type something"
@@ -290,6 +303,20 @@ const TextInputExample = () => {
               }
               maxLength={100}
               right={<TextInput.Affix text={`${outlinedText.length}/100`} />}
+            />
+            <TextInput
+              mode="outlined"
+              style={styles.inputContainerStyle}
+              label="Outlined with Activity Indicator"
+              placeholder="Press the icon to submit"
+              value={text}
+              onChangeText={(text) => inputActionHandler('text', text)}
+              maxLength={100}
+              right={
+                <TextInput.ActivityIndicator
+                  useNativeActivityIndicator={true}
+                />
+              }
             />
             <TextInput
               mode="outlined"

@@ -238,6 +238,8 @@ const TextInputFlat = ({
 
   const iconTopPosition = (flatHeight - ADORNMENT_SIZE) / 2;
 
+  const loadingTopPosition = iconTopPosition;
+
   const leftAffixTopPosition = leftLayout.height
     ? calculateFlatAffixTopPosition({
         height: flatHeight,
@@ -315,6 +317,7 @@ const TextInputFlat = ({
     topPosition: {
       [AdornmentType.Affix]: affixTopPosition,
       [AdornmentType.Icon]: iconTopPosition,
+      [AdornmentType.ActivityIndicator]: loadingTopPosition,
     },
     onAffixChange,
     isTextInputFocused: parentState.focused,
