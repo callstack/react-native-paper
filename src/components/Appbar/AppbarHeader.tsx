@@ -98,6 +98,7 @@ const AppbarHeader = ({
   elevated = false,
   theme: themeOverrides,
   testID = 'appbar-header',
+  safeAreaInsets,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -136,7 +137,7 @@ const AppbarHeader = ({
           backgroundColor,
           zIndex,
           elevation,
-          paddingTop: statusBarHeight ?? top,
+          paddingTop: statusBarHeight ?? safeAreaInsets?.top ?? top,
           paddingHorizontal: Math.max(left, right),
         },
         borderRadius,
