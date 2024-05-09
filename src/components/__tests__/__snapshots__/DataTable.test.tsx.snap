@@ -1809,6 +1809,11 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                       "marginRight": 12,
                     },
                     {
+                      "marginLeft": 16,
+                      "marginRight": -16,
+                    },
+                    false,
+                    {
                       "marginLeft": -16,
                       "marginRight": 16,
                     },
