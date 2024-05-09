@@ -159,3 +159,30 @@ it('renders list item with custom content style', () => {
 
   expect(getByTestId('list-item-content')).toHaveStyle(styles.content);
 });
+
+it('renders list item with custom icon size with left and right items', () => {
+  const tree = render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      testID={testID}
+      left={() => <Text>GG</Text>}
+      right={() => <ListIcon size={10} icon="folder" />}
+    />
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders list item on left with a icon that has a custom size', () => {
+  const tree = render(
+    <ListItem
+      title="First Item"
+      description="Item description"
+      testID={testID}
+      left={() => <ListIcon size={10} icon="folder" />}
+    />
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

@@ -1,5 +1,194 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders list item on left with a icon that has a custom size 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      false,
+      [
+        {
+          "paddingRight": 24,
+          "paddingVertical": 8,
+        },
+        undefined,
+      ],
+    ]
+  }
+  testID="list-item"
+>
+  <View
+    style={
+      {
+        "flexDirection": "row",
+        "marginVertical": 6,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      pointerEvents="box-none"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        allowFontScaling={false}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(28, 27, 31, 1)",
+              "fontSize": 10,
+            },
+            [
+              {
+                "lineHeight": 10,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
+            {
+              "fontFamily": "Material Design Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            {},
+          ]
+        }
+      >
+        󰉋
+      </Text>
+    </View>
+    <View
+      style={
+        [
+          {
+            "paddingLeft": 16,
+          },
+          {
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "justifyContent": "center",
+          },
+          undefined,
+        ]
+      }
+      testID="list-item-content"
+    >
+      <Text
+        numberOfLines={1}
+        selectable={false}
+        style={
+          [
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "rgba(28, 27, 31, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "letterSpacing": 0,
+            },
+            {
+              "writingDirection": "ltr",
+            },
+            [
+              {
+                "fontSize": 16,
+              },
+              {
+                "color": "rgba(28, 27, 31, 1)",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        First Item
+      </Text>
+      <Text
+        numberOfLines={2}
+        onTextLayout={[Function]}
+        selectable={false}
+        style={
+          [
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "rgba(28, 27, 31, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "letterSpacing": 0,
+            },
+            {
+              "writingDirection": "ltr",
+            },
+            [
+              {
+                "fontSize": 14,
+              },
+              {
+                "color": "rgba(73, 69, 79, 1)",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        Item description
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`renders list item with custom description 1`] = `
 <View
   accessibilityState={
@@ -322,6 +511,198 @@ exports[`renders list item with custom description 1`] = `
           </View>
         </View>
       </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders list item with custom icon size with left and right items 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": true,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      false,
+      [
+        {
+          "paddingRight": 24,
+          "paddingVertical": 8,
+        },
+        undefined,
+      ],
+    ]
+  }
+  testID="list-item"
+>
+  <View
+    style={
+      {
+        "flexDirection": "row",
+        "marginVertical": 6,
+        "width": "100%",
+      }
+    }
+  >
+    <Text>
+      GG
+    </Text>
+    <View
+      style={
+        [
+          {
+            "paddingLeft": 16,
+          },
+          {
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "justifyContent": "center",
+          },
+          undefined,
+        ]
+      }
+      testID="list-item-content"
+    >
+      <Text
+        numberOfLines={1}
+        selectable={false}
+        style={
+          [
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "rgba(28, 27, 31, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "letterSpacing": 0,
+            },
+            {
+              "writingDirection": "ltr",
+            },
+            [
+              {
+                "fontSize": 16,
+              },
+              {
+                "color": "rgba(28, 27, 31, 1)",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        First Item
+      </Text>
+      <Text
+        numberOfLines={2}
+        onTextLayout={[Function]}
+        selectable={false}
+        style={
+          [
+            {
+              "textAlign": "left",
+            },
+            {
+              "color": "rgba(28, 27, 31, 1)",
+              "fontFamily": "System",
+              "fontWeight": "400",
+              "letterSpacing": 0,
+            },
+            {
+              "writingDirection": "ltr",
+            },
+            [
+              {
+                "fontSize": 14,
+              },
+              {
+                "color": "rgba(73, 69, 79, 1)",
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        Item description
+      </Text>
+    </View>
+    <View
+      pointerEvents="box-none"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        accessibilityElementsHidden={true}
+        allowFontScaling={false}
+        importantForAccessibility="no-hide-descendants"
+        pointerEvents="none"
+        selectable={false}
+        style={
+          [
+            {
+              "color": "rgba(28, 27, 31, 1)",
+              "fontSize": 10,
+            },
+            [
+              {
+                "lineHeight": 10,
+                "transform": [
+                  {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              {
+                "backgroundColor": "transparent",
+              },
+            ],
+            {
+              "fontFamily": "Material Design Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            {},
+          ]
+        }
+      >
+        󰉋
+      </Text>
     </View>
   </View>
 </View>
