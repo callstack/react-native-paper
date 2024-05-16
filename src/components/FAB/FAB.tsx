@@ -19,7 +19,9 @@ import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  MouseEventType,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 type FABSize = 'small' | 'medium' | 'large';
@@ -100,9 +102,26 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * Function to execute as soon as the touchable element is pressed and invoked even before onPress.
+   */
+  onPressIn?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute as soon as the touch is released even before onPress.
+   */
+  onPressOut?: (e: GestureResponderEvent) => void;
+  /**
    * Function to execute on long press.
    */
   onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Called when the hover is activated to provide visual feedback.
+   */
+  onHoverIn?: (e: MouseEventType) => void;
+
+  /**
+   * Called when the hover is deactivated to undo visual feedback.
+   */
+  onHoverOut?: (e: MouseEventType) => void;
   /**
    * The number of milliseconds a user must touch the element before executing `onLongPress`.
    */
@@ -192,6 +211,10 @@ const FAB = forwardRef<View, Props>(
       rippleColor: customRippleColor,
       disabled,
       onPress,
+      onPressIn,
+      onPressOut,
+      onHoverIn,
+      onHoverOut,
       onLongPress,
       delayLongPress,
       theme: themeOverrides,
@@ -294,6 +317,10 @@ const FAB = forwardRef<View, Props>(
           borderless
           background={background}
           onPress={onPress}
+          onPressIn={onPressIn}
+          onPressOut={onPressOut}
+          onHoverIn={onHoverIn}
+          onHoverOut={onHoverOut}
           onLongPress={onLongPress}
           delayLongPress={delayLongPress}
           rippleColor={rippleColor}
