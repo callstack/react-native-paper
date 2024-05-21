@@ -9,5 +9,5 @@ const estimatedStatusBarHeight =
 
 export const APPROX_STATUSBAR_HEIGHT = Platform.select({
   android: estimatedStatusBarHeight,
-  ios: Platform.Version < 11 ? estimatedStatusBarHeight : 0,
+  ios: Number(Platform.Version) < 11 ? estimatedStatusBarHeight : 0,
 });
