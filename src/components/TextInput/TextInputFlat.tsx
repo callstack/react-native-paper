@@ -74,6 +74,7 @@ const TextInputFlat = ({
   placeholderTextColor,
   testID = 'text-input-flat',
   contentStyle,
+  scaledLabel,
   ...rest
 }: ChildTextInputProps) => {
   const isAndroid = Platform.OS === 'android';
@@ -375,6 +376,7 @@ const TextInputFlat = ({
             labeled={parentState.labeled}
             error={parentState.error}
             focused={parentState.focused}
+            scaledLabel={scaledLabel}
             wiggle={Boolean(parentState.value && labelProps.labelError)}
             labelLayoutMeasured={parentState.labelLayout.measured}
             labelLayoutWidth={parentState.labelLayout.width}

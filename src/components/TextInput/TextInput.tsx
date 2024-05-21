@@ -482,6 +482,8 @@ const TextInput = forwardRef<TextInputHandles, Props>(
 
     const { maxFontSizeMultiplier = 1.5 } = rest;
 
+    const scaledLabel = !!(value || focused);
+
     if (mode === 'outlined') {
       return (
         <TextInputOutlined
@@ -520,6 +522,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
           onRightAffixLayoutChange={onRightAffixLayoutChange}
           maxFontSizeMultiplier={maxFontSizeMultiplier}
           contentStyle={contentStyle}
+          scaledLabel={scaledLabel}
         />
       );
     }
@@ -561,6 +564,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
         onRightAffixLayoutChange={onRightAffixLayoutChange}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
         contentStyle={contentStyle}
+        scaledLabel={scaledLabel}
       />
     );
   }
