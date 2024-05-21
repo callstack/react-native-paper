@@ -45,6 +45,7 @@ type TextInputProps = React.ComponentPropsWithRef<typeof NativeTextInput> & {
   contentStyle?: StyleProp<TextStyle>;
   outlineStyle?: StyleProp<ViewStyle>;
   underlineStyle?: StyleProp<ViewStyle>;
+  scaledLabel?: boolean;
 };
 
 export type RenderProps = {
@@ -140,6 +141,7 @@ export type InputLabelProps = {
   labelBackground?: any;
   maxFontSizeMultiplier?: number | undefined | null;
   isV3?: boolean;
+  scaledLabel?: boolean;
 } & LabelProps;
 
 export type LabelBackgroundProps = {
