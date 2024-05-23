@@ -54,51 +54,58 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.7",
-    "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
+    "@babel/parser": "^7.22.16",
+    "@babel/preset-env": "^7.20.0",
+    "@babel/preset-flow": "^7.12.13",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.21.5",
+    "@babel/plugin-syntax-flow": "7.14.5",
+    "@babel/plugin-transform-react-jsx": "7.14.9",
+    "@babel/traverse": "^7.22.20",
+    "@babel/types": "^7.22.19",
     "@babel/runtime": "^7.20.7",
-    "@callstack/eslint-config": "^13.0.2",
+    "@callstack/eslint-config": "^14.0.0",
     "@commitlint/config-conventional": "^8.3.4",
     "@react-navigation/native": "^6.1.2",
+    "@react-native/babel-preset": "^0.73.0",
+    "@react-native/eslint-config": "0.73.0",
+    "@react-native/metro-config": "^0.73.0",
+    "@react-native/typescript-config": "^0.73.1",
     "@release-it/conventional-changelog": "^1.1.0",
     "@testing-library/jest-native": "^5.4.1",
-    "@testing-library/react-native": "11.5.0",
+    "@testing-library/react-native": "12.3.0",
     "@types/color": "^3.0.0",
     "@types/jest": "^29.2.1",
-    "@types/node": "^13.1.0",
-    "@types/react-dom": "^18.0.8",
+    "@types/node": "^18.12.0",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "18.3.0",
     "@types/react-native-vector-icons": "^6.4.1",
     "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
     "all-contributors-cli": "^6.24.0",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^29.6.3",
-    "babel-loader": "^8.2.3",
-    "babel-test": "^0.1.1",
+    "babel-jest": "^29.5.0",
     "chalk": "^4.0.0",
     "commitlint": "^8.3.4",
     "conventional-changelog-cli": "^2.0.11",
     "dedent": "^0.7.0",
     "eslint": "8.31.0",
-    "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-local-rules": "^1.3.2",
     "expo-constants": "^9.3.5",
     "glob": "^7.1.3",
     "husky": "^1.3.1",
     "jest": "^29.2.1",
     "jest-file-snapshot": "^0.3.2",
-    "metro-react-native-babel-preset": "0.73.9",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "0.73.7",
+    "react-native": "0.73.4",
     "react-native-builder-bob": "^0.21.3",
-    "react-native-safe-area-context": "^4.5.0",
+    "react-native-safe-area-context": "^4.8.2",
     "react-native-vector-icons": "9.2.0",
     "react-test-renderer": "18.2.0",
     "release-it": "^13.4.0",
     "rimraf": "^3.0.2",
-    "typescript": "5.0.4"
+    "typescript": "5.3.2"
   },
   "peerDependencies": {
     "react": "*",
@@ -113,28 +120,38 @@
     }
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "jest": {
     "setupFiles": [
       "<rootDir>/testSetup.js"
     ],
+    "globals": {
+      "__DEV__": true
+    },
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
+    },
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "ios.js", "android.js"],
     "setupFilesAfterEnv": [
       "@testing-library/jest-native/extend-expect"
     ],
     "cacheDirectory": "./cache/jest",
     "testPathIgnorePatterns": [
-      "\\.d\\.ts$"
+      "\\.d\\.ts$", "<rootDir>/node_modules"
     ],
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",
       "<rootDir>/lib/"
     ],
+    "moduleNameMapper": {
+      "^react-native$": "<rootDir>/node_modules/react-native"
+    },
     "watchPathIgnorePatterns": [
       "__fixtures__\\/[^/]+\\/(output|error)\\.js"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(@react-native|react-native(-.*)?)/)"
+      "<rootDir>/node_modules/(?!(@react-native|react-native(-.*)?)/)"
     ]
   },
   "greenkeeper": {

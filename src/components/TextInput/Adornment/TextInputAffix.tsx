@@ -10,6 +10,7 @@ import {
   TextStyle,
   ViewStyle,
 } from 'react-native';
+import type { DimensionValue } from 'react-native';
 
 import { AdornmentSide } from './enums';
 import { getTextColor } from './utils';
@@ -47,7 +48,7 @@ type ContextState = {
   visible?: Animated.Value;
   textStyle?: StyleProp<TextStyle>;
   side: AdornmentSide;
-  paddingHorizontal?: number | string;
+  paddingHorizontal?: DimensionValue;
   maxFontSizeMultiplier?: number | undefined | null;
   testID?: string;
   disabled?: boolean;
