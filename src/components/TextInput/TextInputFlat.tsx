@@ -397,7 +397,7 @@ const TextInputFlat = ({
           multiline,
           style: [
             styles.input,
-            !multiline || (multiline && height) ? { height: flatHeight } : {},
+            multiline && height ? { height: flatHeight } : {},
             paddingFlat,
             {
               paddingLeft,
@@ -440,9 +440,11 @@ const styles = StyleSheet.create({
   labelContainer: {
     paddingTop: 0,
     paddingBottom: 0,
+    flex: 1,
   },
   input: {
     margin: 0,
+    flex: 1,
   },
   inputFlat: {
     paddingTop: 24,

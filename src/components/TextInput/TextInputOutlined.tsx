@@ -264,8 +264,7 @@ const TextInputOutlined = ({
     (dense ? MIN_DENSE_HEIGHT_OUTLINED : MIN_HEIGHT)) as number;
 
   const outlinedHeight =
-    inputHeight + (!height ? (dense ? densePaddingTop / 2 : paddingTop) : 0);
-
+    inputHeight + (dense ? densePaddingTop / 2 : paddingTop);
   const { leftLayout, rightLayout } = parentState;
 
   const leftAffixTopPosition = calculateOutlinedIconAndAffixTopPosition({
@@ -427,9 +426,11 @@ export default TextInputOutlined;
 const styles = StyleSheet.create({
   labelContainer: {
     paddingBottom: 0,
+    flex: 1,
   },
   input: {
     margin: 0,
+    flex: 1,
   },
   inputOutlined: {
     paddingTop: 8,
