@@ -127,7 +127,7 @@ describe('FABActions - labelStyle - containerStyle', () => {
       />
     );
 
-    expect(getByText('complete')).toHaveStyle({
+    expect(getByText('complete', { includeHiddenElements: true })).toHaveStyle({
       fontSize: 24,
       fontWeight: '500',
     });
@@ -156,7 +156,7 @@ describe('FABActions - labelStyle - containerStyle', () => {
       />
     );
 
-    expect(getByA11yHint('hint')).toHaveStyle({
+    expect(getByA11yHint('hint', { includeHiddenElements: true })).toHaveStyle({
       padding: 16,
       backgroundColor: '#687456',
     });
@@ -211,7 +211,7 @@ it('correct renders custom ripple color passed to FAB.Group and its item', () =>
   ).toBe('orange');
 
   expect(
-    getByTestId('fab-group-item-container').props.children.props.rippleColor
+    getByTestId('fab-group-item-container', { includeHiddenElements: true }).props.children.props.rippleColor
   ).toBe('yellow');
 });
 

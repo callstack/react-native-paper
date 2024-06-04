@@ -19,6 +19,7 @@ exports[`render visible banner, with custom theme 1`] = `
   testID="surface-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -132,6 +133,7 @@ exports[`render visible banner, with custom theme 1`] = `
             testID="button-container-outer-layer"
           >
             <View
+              accessible={true}
               collapsable={false}
               style={
                 {
@@ -289,6 +291,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
   testID="surface-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -420,6 +423,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
   testID="surface-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -555,6 +559,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
             testID="button-container-outer-layer"
           >
             <View
+              accessible={true}
               collapsable={false}
               style={
                 {
@@ -712,6 +717,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
   testID="surface-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -825,6 +831,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             testID="button-container-outer-layer"
           >
             <View
+              accessible={true}
               collapsable={false}
               style={
                 {
@@ -975,6 +982,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
             testID="button-container-outer-layer"
           >
             <View
+              accessible={true}
               collapsable={false}
               style={
                 {
@@ -1132,6 +1140,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
   testID="surface-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -1273,6 +1282,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
   testID="surface-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {

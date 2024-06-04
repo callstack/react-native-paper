@@ -19,6 +19,7 @@ exports[`renders button with an accessibility hint 1`] = `
   testID="button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -170,6 +171,7 @@ exports[`renders button with an accessibility label 1`] = `
   testID="button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -321,6 +323,7 @@ exports[`renders button with button color 1`] = `
   testID="button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -471,6 +474,7 @@ exports[`renders button with color 1`] = `
   testID="button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -621,6 +625,7 @@ exports[`renders button with custom testID 1`] = `
   testID="custom:testID-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -771,6 +776,7 @@ exports[`renders button with icon 1`] = `
   testID="button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -977,6 +983,7 @@ exports[`renders button with icon in reverse order 1`] = `
   testID="button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -1185,6 +1192,7 @@ exports[`renders contained contained with mode 1`] = `
   testID="button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -1336,6 +1344,7 @@ exports[`renders disabled button 1`] = `
   testID="button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -1486,6 +1495,7 @@ exports[`renders loading button 1`] = `
   testID="button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -1844,6 +1854,7 @@ exports[`renders outlined button with mode 1`] = `
   testID="button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -1995,6 +2006,7 @@ exports[`renders text button by default 1`] = `
   testID="button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -2145,6 +2157,7 @@ exports[`renders text button with mode 1`] = `
   testID="button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {

@@ -46,6 +46,7 @@ exports[`renders snackbar with Text as a child 1`] = `
   >
     <View
       accessibilityLiveRegion="polite"
+      accessible={true}
       collapsable={false}
       pointerEvents="box-none"
       style={
@@ -131,6 +132,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
   >
     <View
       accessibilityLiveRegion="polite"
+      accessible={true}
       collapsable={false}
       pointerEvents="box-none"
       style={
@@ -242,6 +244,7 @@ exports[`renders snackbar with action button 1`] = `
   >
     <View
       accessibilityLiveRegion="polite"
+      accessible={true}
       collapsable={false}
       pointerEvents="box-none"
       style={
@@ -332,6 +335,7 @@ exports[`renders snackbar with action button 1`] = `
           testID="button-container-outer-layer"
         >
           <View
+            accessible={true}
             collapsable={false}
             style={
               {
@@ -511,6 +515,7 @@ exports[`renders snackbar with content 1`] = `
   >
     <View
       accessibilityLiveRegion="polite"
+      accessible={true}
       collapsable={false}
       pointerEvents="box-none"
       style={

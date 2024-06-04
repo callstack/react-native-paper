@@ -286,6 +286,7 @@ const FAB = forwardRef<View, Props>(
           !isV3 && disabled && styles.disabled,
           style,
         ]}
+        accessible
         pointerEvents={visible ? 'auto' : 'none'}
         testID={`${testID}-container`}
         {...(isV3 && { elevation: md3Elevation })}

@@ -19,6 +19,7 @@ exports[`renders chip with close button 1`] = `
   testID="chip-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -328,6 +329,7 @@ exports[`renders chip with custom close button 1`] = `
   testID="chip-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -637,6 +639,7 @@ exports[`renders chip with icon 1`] = `
   testID="chip-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -846,6 +849,7 @@ exports[`renders chip with onPress 1`] = `
   testID="chip-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -1003,6 +1007,7 @@ exports[`renders outlined disabled chip 1`] = `
   testID="chip-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -1160,6 +1165,7 @@ exports[`renders selected chip 1`] = `
   testID="chip-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {

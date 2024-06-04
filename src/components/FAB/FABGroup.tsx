@@ -384,7 +384,7 @@ const FABGroup = ({
                 pointerEvents={open ? 'box-none' : 'none'}
                 accessibilityRole="button"
                 importantForAccessibility="yes"
-                accessible={true}
+                accessible
                 accessibilityLabel={accessibilityLabel}
               >
                 {it.label && (
@@ -395,6 +395,7 @@ const FABGroup = ({
                         it.onPress(e);
                         close();
                       }}
+                      accessible
                       accessibilityHint={it.accessibilityHint}
                       importantForAccessibility="no-hide-descendants"
                       accessibilityElementsHidden={true}

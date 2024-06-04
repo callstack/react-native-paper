@@ -147,7 +147,7 @@ it('renders correct elevation value for shadow views', () => {
 });
 
 describe('AnimatedFAB events', () => {
-  it('onPress passes event', () => {
+  it('onPress passes event', async () => {
     const onPress = jest.fn();
     const { getByTestId } = render(
       <AnimatedFAB extended icon="plus" onPress={onPress} label="Add items" />

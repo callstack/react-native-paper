@@ -52,7 +52,7 @@ it('renders ListImage with `image` variant', () => {
     />
   );
 
-  expect(tree.container.props['variant']).toBe('image');
+  expect(tree.UNSAFE_root.props['variant']).toBe('image');
   expect(tree.getByTestId(testID)).toHaveStyle(styles.image);
 });
 
@@ -64,6 +64,6 @@ it('renders ListImage with `video` variant', () => {
     />
   );
 
-  expect(tree.container.props['variant']).toBe('video');
+  expect(tree.UNSAFE_root.props['variant']).toBe('video');
   expect(tree.getByTestId(testID)).toHaveStyle(styles.video);
 });

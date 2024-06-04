@@ -201,7 +201,7 @@ it('calls onIndexChange', () => {
   fireEvent(tree.getByText('Route: 0'), 'onPress');
   expect(onIndexChange).not.toHaveBeenCalled();
 
-  fireEvent(tree.getByText('Route: 1'), 'onPress');
+  fireEvent(tree.getByText('Route: 1', { includeHiddenElements: true }), 'onPress');
   expect(onIndexChange).toHaveBeenCalledTimes(1);
 });
 
@@ -218,7 +218,7 @@ it('calls onTabPress', () => {
       renderScene={({ route }) => route.title}
     />
   );
-  fireEvent(tree.getByText('Route: 1'), 'onPress');
+  fireEvent(tree.getByText('Route: 1', { includeHiddenElements: true }), 'onPress');
   expect(onTabPress).toHaveBeenCalled();
   expect(onTabPress).toHaveBeenCalledTimes(1);
   expect(onTabPress).toHaveBeenLastCalledWith(

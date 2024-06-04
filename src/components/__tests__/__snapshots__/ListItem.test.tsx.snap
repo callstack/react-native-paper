@@ -132,6 +132,7 @@ exports[`renders list item with custom description 1`] = `
             testID="chip-container-outer-layer"
           >
             <View
+              accessible={true}
               collapsable={false}
               style={
                 {

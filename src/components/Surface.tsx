@@ -215,7 +215,7 @@ const SurfaceIOS = forwardRef<
         style={outerLayerViewStyles}
         testID={`${testID}-outer-layer`}
       >
-        <Animated.View {...props} style={innerLayerViewStyles} testID={testID}>
+        <Animated.View {...props} style={innerLayerViewStyles} testID={testID} accessible>
           {children}
         </Animated.View>
       </Animated.View>
@@ -300,6 +300,7 @@ const Surface = forwardRef<View, Props>(
       return (
         <Animated.View
           {...props}
+          accessible
           pointerEvents={pointerEvents}
           ref={ref}
           testID={testID}
@@ -338,6 +339,7 @@ const Surface = forwardRef<View, Props>(
       return (
         <Animated.View
           {...props}
+          accessible
           testID={testID}
           ref={ref}
           style={[

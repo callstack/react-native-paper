@@ -1199,7 +1199,7 @@ describe('outlineStyle - underlineStyle', () => {
       />
     );
 
-    expect(getByTestId('text-input-underline')).toHaveStyle({
+    expect(getByTestId('text-input-underline', { includeHiddenElements: true })).toHaveStyle({
       borderRadius: 16,
       borderWidth: 6,
     });

@@ -25,6 +25,7 @@ exports[`renders FAB with custom size prop 1`] = `
   testID="fab-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     pointerEvents="auto"
     style={
@@ -206,6 +207,7 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
   testID="fab-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     pointerEvents="auto"
     style={
@@ -387,6 +389,7 @@ exports[`renders default FAB 1`] = `
   testID="fab-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     pointerEvents="auto"
     style={
@@ -568,6 +571,7 @@ exports[`renders disabled FAB 1`] = `
   testID="fab-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     pointerEvents="auto"
     style={
@@ -749,6 +753,7 @@ exports[`renders extended FAB 1`] = `
   testID="fab-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     pointerEvents="auto"
     style={
@@ -971,6 +976,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
   testID="fab-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     pointerEvents="auto"
     style={
@@ -1192,6 +1198,7 @@ exports[`renders large FAB 1`] = `
   testID="fab-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     pointerEvents="auto"
     style={
@@ -1373,6 +1380,7 @@ exports[`renders loading FAB 1`] = `
   testID="fab-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     pointerEvents="auto"
     style={
@@ -1678,6 +1686,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
   testID="fab-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     pointerEvents="auto"
     style={
@@ -1983,6 +1992,7 @@ exports[`renders not visible FAB 1`] = `
   testID="fab-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     pointerEvents="none"
     style={
@@ -2164,6 +2174,7 @@ exports[`renders small FAB 1`] = `
   testID="fab-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     pointerEvents="auto"
     style={
@@ -2345,6 +2356,7 @@ exports[`renders visible FAB 1`] = `
   testID="fab-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     pointerEvents="auto"
     style={

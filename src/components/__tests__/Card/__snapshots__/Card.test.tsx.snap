@@ -19,6 +19,7 @@ exports[`Card renders an outlined card 1`] = `
   testID="card-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {

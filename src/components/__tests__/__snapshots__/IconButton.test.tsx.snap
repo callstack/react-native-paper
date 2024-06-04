@@ -22,6 +22,7 @@ exports[`renders disabled icon button 1`] = `
   testID="icon-button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -172,6 +173,7 @@ exports[`renders icon button by default 1`] = `
   testID="icon-button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -317,6 +319,7 @@ exports[`renders icon button with color 1`] = `
   testID="icon-button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -462,6 +465,7 @@ exports[`renders icon button with size 1`] = `
   testID="icon-button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -607,6 +611,7 @@ exports[`renders icon change animated 1`] = `
   testID="icon-button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {

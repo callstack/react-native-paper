@@ -19,6 +19,7 @@ exports[`activity indicator snapshot test 1`] = `
   testID="search-bar-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -59,6 +60,7 @@ exports[`activity indicator snapshot test 1`] = `
       testID="search-bar-icon-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {
@@ -438,6 +440,7 @@ exports[`renders with placeholder 1`] = `
   testID="search-bar-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -478,6 +481,7 @@ exports[`renders with placeholder 1`] = `
       testID="search-bar-icon-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {
@@ -671,6 +675,7 @@ exports[`renders with placeholder 1`] = `
         testID="search-bar-clear-icon-container-outer-layer"
       >
         <View
+          accessible={true}
           collapsable={false}
           style={
             {
@@ -817,6 +822,7 @@ exports[`renders with text 1`] = `
   testID="search-bar-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -857,6 +863,7 @@ exports[`renders with text 1`] = `
       testID="search-bar-icon-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {
@@ -1046,6 +1053,7 @@ exports[`renders with text 1`] = `
         testID="search-bar-clear-icon-container-outer-layer"
       >
         <View
+          accessible={true}
           collapsable={false}
           style={
             {

@@ -32,6 +32,7 @@ exports[`renders menu with content styles 1`] = `
         testID="button-container-outer-layer"
       >
         <View
+          accessible={true}
           collapsable={false}
           style={
             {
@@ -284,6 +285,7 @@ exports[`renders menu with content styles 1`] = `
           testID="menu-surface-outer-layer"
         >
           <View
+            accessible={true}
             collapsable={false}
             pointerEvents="box-none"
             style={
@@ -584,6 +586,7 @@ exports[`renders not visible menu 1`] = `
       testID="button-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {
@@ -750,6 +753,7 @@ exports[`renders visible menu 1`] = `
         testID="button-container-outer-layer"
       >
         <View
+          accessible={true}
           collapsable={false}
           style={
             {
@@ -1000,6 +1004,7 @@ exports[`renders visible menu 1`] = `
           testID="menu-surface-outer-layer"
         >
           <View
+            accessible={true}
             collapsable={false}
             pointerEvents="box-none"
             style={

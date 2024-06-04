@@ -400,6 +400,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
       testID="icon-button-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {
@@ -543,6 +544,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
       testID="icon-button-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {
@@ -744,6 +746,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
       testID="icon-button-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {
@@ -887,6 +890,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
       testID="icon-button-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {
@@ -1030,6 +1034,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
       testID="icon-button-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {
@@ -1173,6 +1178,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
       testID="icon-button-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {
@@ -1374,6 +1380,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
       testID="icon-button-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {
@@ -1517,6 +1524,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
       testID="icon-button-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {
@@ -1722,6 +1730,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         testID="button-container-outer-layer"
       >
         <View
+          accessible={true}
           collapsable={false}
           style={
             {
@@ -1969,6 +1978,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
       testID="icon-button-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {
@@ -2112,6 +2122,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
       testID="icon-button-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {
@@ -2255,6 +2266,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
       testID="icon-button-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {
@@ -2398,6 +2410,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
       testID="icon-button-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {

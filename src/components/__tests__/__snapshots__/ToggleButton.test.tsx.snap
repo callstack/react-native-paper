@@ -22,6 +22,7 @@ exports[`renders disabled toggle button 1`] = `
   testID="icon-button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -170,6 +171,7 @@ exports[`renders toggle button 1`] = `
   testID="icon-button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -313,6 +315,7 @@ exports[`renders unchecked toggle button 1`] = `
   testID="icon-button-container-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {

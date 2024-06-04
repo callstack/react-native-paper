@@ -19,6 +19,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
   testID="surface-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -60,6 +61,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       testID="search-bar-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {
@@ -100,6 +102,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           testID="search-bar-icon-container-outer-layer"
         >
           <View
+            accessible={true}
             collapsable={false}
             style={
               {
@@ -293,6 +296,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             testID="search-bar-clear-icon-container-outer-layer"
           >
             <View
+              accessible={true}
               collapsable={false}
               style={
                 {
@@ -441,6 +445,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
   testID="surface-outer-layer"
 >
   <View
+    accessible={true}
     collapsable={false}
     style={
       {
@@ -485,6 +490,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       testID="icon-button-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {
@@ -729,6 +735,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
       testID="icon-button-container-outer-layer"
     >
       <View
+        accessible={true}
         collapsable={false}
         style={
           {

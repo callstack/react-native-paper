@@ -97,6 +97,7 @@ const mockAccessibilityInfo = () => {
   );
 };
 
+
 const FakeChild = () => {
   const theme = useTheme();
   return <View testID="provider-child-view" theme={theme} />;
@@ -178,7 +179,7 @@ describe('PaperProvider', () => {
 
   it('should set Appearance listeners, if there is no theme', async () => {
     mockAppearance();
-    const { getByTestId } = render(createProvider());
+    const { getByTestId } = render(createProvider() as React.ReactElement);
 
     expect(Appearance.addChangeListener).toHaveBeenCalled();
     act(() => Appearance.__internalListeners[0]({ colorScheme: 'dark' }));
