@@ -134,9 +134,7 @@ exports[`activity indicator snapshot test 1`] = `
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -553,9 +551,7 @@ exports[`renders with placeholder 1`] = `
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -746,9 +742,7 @@ exports[`renders with placeholder 1`] = `
                     "flexGrow": 1,
                     "justifyContent": "center",
                   },
-                  {
-                    "borderRadius": 20,
-                  },
+                  undefined,
                 ],
               ]
             }
@@ -932,9 +926,7 @@ exports[`renders with text 1`] = `
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -1121,9 +1113,7 @@ exports[`renders with text 1`] = `
                     "flexGrow": 1,
                     "justifyContent": "center",
                   },
-                  {
-                    "borderRadius": 20,
-                  },
+                  undefined,
                 ],
               ]
             }

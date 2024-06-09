@@ -1902,7 +1902,7 @@ exports[`renders outlined button with mode 1`] = `
             "overflow": "hidden",
           },
           {
-            "borderRadius": 20,
+            "borderRadius": 19,
           },
         ]
       }
