@@ -129,7 +129,7 @@ const IconAdornment: React.FunctionComponent<
 const TextInputIcon = ({
   icon,
   onPress,
-  forceTextInputFocus=true,
+  forceTextInputFocus = true,
   color: customColor,
   theme: themeOverrides,
   rippleColor,
@@ -175,7 +175,6 @@ const TextInputIcon = ({
   );
 };
 TextInputIcon.displayName = 'TextInput.Icon';
-
 
 const styles = StyleSheet.create({
   container: {
