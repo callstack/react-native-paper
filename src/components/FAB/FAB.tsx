@@ -148,7 +148,7 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    */
   testID?: string;
   /**
-   * Direction that the content will be displayed
+   * Specifies the position of the icon in relation to the label.
    */
   iconPosition?: 'left' | 'right';
   ref?: React.RefObject<View>;
