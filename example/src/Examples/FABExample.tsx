@@ -83,13 +83,15 @@ const FABExample = () => {
               <View style={styles.fabVariant} key={position}>
                 <FAB
                   icon="pencil"
-                  label={`icon ${position}`}
+                  label={`icon on the ${position}`}
                   style={styles.fab}
                   onPress={() => {}}
                   visible={visible}
                   iconPosition={position as FABIconPosition}
                 />
-                {visible && <Text variant="bodyMedium">icon {position}</Text>}
+                {visible && (
+                  <Text variant="bodyMedium">icon on the {position}</Text>
+                )}
               </View>
             ))}
           </View>
