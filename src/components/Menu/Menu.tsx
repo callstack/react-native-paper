@@ -74,6 +74,14 @@ export type Props = {
    */
   elevation?: MD3Elevation;
   /**
+   * Mode of the menu's content.
+   * - `elevated` - Surface with a shadow and background color corresponding to set `elevation` value.
+   * - `flat` - Surface without a shadow, with the background color corresponding to set `elevation` value.
+   *
+   * @supported Available in v5.x with theme version 3
+   */
+  mode?: 'flat' | 'elevated';
+  /**
    * @optional
    */
   theme: InternalTheme;
@@ -113,6 +121,8 @@ const DEFAULT_ELEVATION: MD3Elevation = 2;
 export const ELEVATION_LEVELS_MAP = Object.values(
   ElevationLevels
 ) as ElevationLevels[];
+
+const DEFAULT_MODE = 'elevated';
 
 /**
  * Menus display a list of choices on temporary elevated surfaces. Their placement varies based on the element that opens them.
@@ -418,6 +428,7 @@ class Menu extends React.Component<Props, State> {
       contentStyle,
       style,
       elevation = DEFAULT_ELEVATION,
+      mode = DEFAULT_MODE,
       children,
       theme,
       statusBarHeight,
@@ -646,6 +657,7 @@ class Menu extends React.Component<Props, State> {
                 }}
               >
                 <Surface
+                  mode={mode}
                   pointerEvents={pointerEvents}
                   style={[
                     styles.shadowMenuContainer,
