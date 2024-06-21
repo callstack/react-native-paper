@@ -44,7 +44,7 @@ exports[`renders DrawerItem with icon 1`] = `
             "marginVertical": 4,
           },
           {
-            "backgroundColor": "transparent",
+            "backgroundColor": undefined,
             "borderRadius": 28,
           },
           {
@@ -376,7 +376,7 @@ exports[`renders basic DrawerItem 1`] = `
             "marginVertical": 4,
           },
           {
-            "backgroundColor": "transparent",
+            "backgroundColor": undefined,
             "borderRadius": 28,
           },
           {
