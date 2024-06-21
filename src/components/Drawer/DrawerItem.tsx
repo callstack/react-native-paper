@@ -107,7 +107,7 @@ const DrawerItem = ({
     ? isV3
       ? theme.colors.secondaryContainer
       : color(theme.colors.primary).alpha(0.12).rgb().string()
-    : 'transparent';
+    : undefined;
   const contentColor = active
     ? isV3
       ? theme.colors.onSecondaryContainer
