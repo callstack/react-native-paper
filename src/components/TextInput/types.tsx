@@ -137,6 +137,7 @@ export type InputLabelProps = {
   opacity: number;
   labelLayoutMeasured: boolean;
   labelLayoutWidth: number;
+  labelLayoutHeight: number;
   inputContainerLayout: { width: number };
   labelBackground?: any;
   maxFontSizeMultiplier?: number | undefined | null;
@@ -148,6 +149,7 @@ export type LabelBackgroundProps = {
   labelStyle: any;
   labeled: Animated.Value;
   labelLayoutWidth: number;
+  labelLayoutHeight: number;
   maxFontSizeMultiplier?: number | undefined | null;
   theme?: ThemeProp;
 } & LabelProps;
