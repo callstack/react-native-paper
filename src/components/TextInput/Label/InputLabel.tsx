@@ -19,6 +19,7 @@ const InputLabel = (props: InputLabelProps) => {
     focused,
     opacity,
     labelLayoutWidth,
+    labelLayoutHeight,
     labelBackground,
     label,
     labelError,
@@ -140,6 +141,7 @@ const InputLabel = (props: InputLabelProps) => {
       {labelBackground?.({
         labeled,
         labelLayoutWidth,
+        labelLayoutHeight,
         labelStyle,
         placeholderStyle,
         baseLabelTranslateX,
