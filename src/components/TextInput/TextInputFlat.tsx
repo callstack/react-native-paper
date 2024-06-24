@@ -378,6 +378,7 @@ const TextInputFlat = ({
             wiggle={Boolean(parentState.value && labelProps.labelError)}
             labelLayoutMeasured={parentState.labelLayout.measured}
             labelLayoutWidth={parentState.labelLayout.width}
+            labelLayoutHeight={parentState.labelLayout.height}
             {...labelProps}
           />
         ) : null}

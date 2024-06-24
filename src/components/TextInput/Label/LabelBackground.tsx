@@ -7,10 +7,10 @@ import type { LabelBackgroundProps } from '../types';
 const LabelBackground = ({
   labeled,
   labelLayoutWidth,
+  labelLayoutHeight,
   placeholderStyle,
   baseLabelTranslateX,
   topPosition,
-  label,
   backgroundColor,
   roundness,
   labelStyle,
@@ -69,6 +69,7 @@ const LabelBackground = ({
         {
           top: topPosition + 1,
           width: labelLayoutWidth - placeholderStyle.paddingHorizontal,
+          height: labelLayoutHeight,
           backgroundColor,
           opacity,
           transform: labelTextTransform,
@@ -76,9 +77,7 @@ const LabelBackground = ({
       ]}
       numberOfLines={1}
       maxFontSizeMultiplier={maxFontSizeMultiplier}
-    >
-      {typeof label === 'string' ? label : label?.props.children}
-    </AnimatedText>,
+    />,
   ];
 };
 
