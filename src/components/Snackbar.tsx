@@ -172,10 +172,9 @@ const Snackbar = ({
 
   const { scale } = theme.animation;
 
-  const handleOnVisible = useLatestCallback(() => {
-    // show
+  const animateShow = useLatestCallback(() => {
     if (hideTimeout.current) clearTimeout(hideTimeout.current);
-    setHidden(false);
+
     Animated.timing(opacity, {
       toValue: 1,
       duration: 200 * scale,
@@ -197,6 +196,11 @@ const Snackbar = ({
     });
   });
 
+  const handleOnVisible = useLatestCallback(() => {
+    // show
+    setHidden(false);
+  });
+
   const handleOnHidden = useLatestCallback(() => {
     // hide
     if (hideTimeout.current) {
@@ -213,6 +217,12 @@ const Snackbar = ({
       }
     });
   });
+
+  React.useEffect(() => {
+    if (!hidden) {
+      animateShow();
+    }
+  }, [animateShow, hidden]);
 
   React.useEffect(() => {
     return () => {
