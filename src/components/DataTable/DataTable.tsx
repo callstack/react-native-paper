@@ -1,21 +1,21 @@
-import * as React from 'react';
-import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
+import * as React from "react";
+import { StyleSheet, StyleProp, View, ViewStyle } from "react-native";
 
-import DataTableCell from './DataTableCell';
+import DataTableCell from "./DataTableCell";
 import DataTableHeader, {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   DataTableHeader as _DataTableHeader,
-} from './DataTableHeader';
+} from "./DataTableHeader";
 import DataTablePagination, {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   DataTablePagination as _DataTablePagination,
-} from './DataTablePagination';
+} from "./DataTablePagination";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import DataTableRow, { DataTableRow as _DataTableRow } from './DataTableRow';
+import DataTableRow, { DataTableRow as _DataTableRow } from "./DataTableRow";
 import DataTableTitle, {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   DataTableTitle as _DataTableTitle,
-} from './DataTableTitle';
+} from "./DataTableTitle";
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -131,7 +131,7 @@ DataTable.Pagination = DataTablePagination;
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: "100%",
   },
 });
 

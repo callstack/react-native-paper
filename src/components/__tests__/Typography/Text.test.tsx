@@ -1,16 +1,16 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { render } from '@testing-library/react-native';
+import { render } from "@testing-library/react-native";
 
-import PaperProvider from '../../../core/PaperProvider';
-import configureFonts from '../../../styles/fonts';
-import { MD3LightTheme } from '../../../styles/themes';
-import { tokens } from '../../../styles/themes/v3/tokens';
-import Text, { customText } from '../../Typography/Text';
+import PaperProvider from "../../../core/PaperProvider";
+import configureFonts from "../../../styles/fonts";
+import { MD3LightTheme } from "../../../styles/themes";
+import { tokens } from "../../../styles/themes/v3/tokens";
+import Text, { customText } from "../../Typography/Text";
 
-const content = 'Something rendered as a child content';
+const content = "Something rendered as a child content";
 
-it('renders every variant of Text with children as content', () => {
+it("renders every variant of Text with children as content", () => {
   const variants = (
     <>
       <Text variant="displayLarge">{content}</Text>
@@ -40,23 +40,23 @@ it('renders every variant of Text with children as content', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders v3 Text component without variant with default fontWeight and fontFamily', () => {
+it("renders v3 Text component without variant with default fontWeight and fontFamily", () => {
   const { getByTestId } = render(
-    <Text testID="text-without-variant">{content}</Text>
+    <Text testID="text-without-variant">{content}</Text>,
   );
   const { brandRegular, weightRegular } = tokens.md.ref.typeface;
 
-  expect(getByTestId('text-without-variant')).toHaveStyle({
+  expect(getByTestId("text-without-variant")).toHaveStyle({
     fontFamily: brandRegular,
     fontWeight: weightRegular,
   });
 });
 
-it('renders v3 Text component with custom variant correctly', () => {
+it("renders v3 Text component with custom variant correctly", () => {
   const fontConfig = {
     customVariant: {
-      fontFamily: 'Montserrat-Regular',
-      fontWeight: '400',
+      fontFamily: "Montserrat-Regular",
+      fontWeight: "400",
       letterSpacing: 0.51,
       lineHeight: 54.1,
       fontSize: 41,
@@ -67,27 +67,27 @@ it('renders v3 Text component with custom variant correctly', () => {
     ...MD3LightTheme,
     fonts: configureFonts({ config: fontConfig }),
   };
-  const Text = customText<'customVariant'>();
+  const Text = customText<"customVariant">();
   const { getByTestId } = render(
     <PaperProvider theme={theme}>
       <Text testID="text-with-custom-variant" variant="customVariant">
         {content}
       </Text>
-    </PaperProvider>
+    </PaperProvider>,
   );
 
-  expect(getByTestId('text-with-custom-variant').props.style).toMatchSnapshot();
+  expect(getByTestId("text-with-custom-variant").props.style).toMatchSnapshot();
 });
 
 it("nested text with variant should override parent's variant", () => {
   const { getByTestId } = render(
     <Text testID="parent-text" variant="bodySmall">
       <Text variant="displayLarge">Test</Text>
-    </Text>
+    </Text>,
   );
 
-  expect(getByTestId('parent-text')).toHaveStyle(
-    MD3LightTheme.fonts.displayLarge
+  expect(getByTestId("parent-text")).toHaveStyle(
+    MD3LightTheme.fonts.displayLarge,
   );
 });
 
@@ -97,11 +97,11 @@ it("nested non-text component should not override parent's variant", () => {
   const { getByTestId } = render(
     <Text testID="parent-text" variant="displayLarge">
       <ChildComponent />
-    </Text>
+    </Text>,
   );
 
-  expect(getByTestId('parent-text')).toHaveStyle(
-    MD3LightTheme.fonts.displayLarge
+  expect(getByTestId("parent-text")).toHaveStyle(
+    MD3LightTheme.fonts.displayLarge,
   );
 });
 
@@ -110,18 +110,18 @@ it("nested text without variant, but with styles, should override parent's style
   const { getByTestId } = render(
     <Text testID="parent-text" variant="bodySmall">
       <Text style={customStyle}>Test</Text>
-    </Text>
+    </Text>,
   );
 
-  expect(getByTestId('parent-text')).toHaveStyle(customStyle);
+  expect(getByTestId("parent-text")).toHaveStyle(customStyle);
 });
 
-it('throws when custom variant not provided', () => {
-  jest.spyOn(console, 'error').mockImplementation(() => {});
+it("throws when custom variant not provided", () => {
+  jest.spyOn(console, "error").mockImplementation(() => {});
 
-  const Text = customText<'myCustomVariant'>();
+  const Text = customText<"myCustomVariant">();
   expect(() =>
-    render(<Text variant="myCustomVariant">{content}</Text>)
+    render(<Text variant="myCustomVariant">{content}</Text>),
   ).toThrow(/myCustomVariant was not provided/);
 
   jest.clearAllMocks();

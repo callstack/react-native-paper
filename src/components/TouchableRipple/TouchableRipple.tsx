@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   ColorValue,
   GestureResponderEvent,
@@ -7,18 +7,18 @@ import {
   StyleSheet,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import type { PressableProps, PressableStateCallbackType } from './Pressable';
-import { Pressable } from './Pressable';
-import { getTouchableRippleColors } from './utils';
-import { Settings, SettingsContext } from '../../core/settings';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
-import hasTouchHandler from '../../utils/hasTouchHandler';
+import type { PressableProps, PressableStateCallbackType } from "./Pressable";
+import { Pressable } from "./Pressable";
+import { getTouchableRippleColors } from "./utils";
+import { Settings, SettingsContext } from "../../core/settings";
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp } from "../../types";
+import { forwardRef } from "../../utils/forwardRef";
+import hasTouchHandler from "../../utils/hasTouchHandler";
 
 export type Props = PressableProps & {
   /**
@@ -115,7 +115,7 @@ const TouchableRipple = (
     theme: themeOverrides,
     ...rest
   }: Props,
-  ref: React.ForwardedRef<View>
+  ref: React.ForwardedRef<View>,
 ) => {
   const theme = useInternalTheme(themeOverrides);
   const { calculatedRippleColor } = getTouchableRippleColors({
@@ -161,42 +161,42 @@ const TouchableRipple = (
             Math.max(dimensions.width, dimensions.height) * 2;
 
         // Create a container for our ripple effect so we don't need to change the parent's style
-        const container = document.createElement('span');
+        const container = document.createElement("span");
 
-        container.setAttribute('data-paper-ripple', '');
+        container.setAttribute("data-paper-ripple", "");
 
         Object.assign(container.style, {
-          position: 'absolute',
-          pointerEvents: 'none',
-          top: '0',
-          left: '0',
-          right: '0',
-          bottom: '0',
+          position: "absolute",
+          pointerEvents: "none",
+          top: "0",
+          left: "0",
+          right: "0",
+          bottom: "0",
           borderTopLeftRadius: style.borderTopLeftRadius,
           borderTopRightRadius: style.borderTopRightRadius,
           borderBottomRightRadius: style.borderBottomRightRadius,
           borderBottomLeftRadius: style.borderBottomLeftRadius,
-          overflow: centered ? 'visible' : 'hidden',
+          overflow: centered ? "visible" : "hidden",
         });
 
         // Create span to show the ripple effect
-        const ripple = document.createElement('span');
+        const ripple = document.createElement("span");
 
         Object.assign(ripple.style, {
-          position: 'absolute',
-          pointerEvents: 'none',
+          position: "absolute",
+          pointerEvents: "none",
           backgroundColor: calculatedRippleColor,
-          borderRadius: '50%',
+          borderRadius: "50%",
 
           /* Transition configuration */
-          transitionProperty: 'transform opacity',
+          transitionProperty: "transform opacity",
           transitionDuration: `${Math.min(size * 1.5, 350)}ms`,
-          transitionTimingFunction: 'linear',
-          transformOrigin: 'center',
+          transitionTimingFunction: "linear",
+          transformOrigin: "center",
 
           /* We'll animate these properties */
-          transform: 'translate3d(-50%, -50%, 0) scale3d(0.1, 0.1, 0.1)',
-          opacity: '0.5',
+          transform: "translate3d(-50%, -50%, 0) scale3d(0.1, 0.1, 0.1)",
+          opacity: "0.5",
 
           // Position the ripple where cursor was
           left: `${touchX}px`,
@@ -215,14 +215,14 @@ const TouchableRipple = (
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             Object.assign(ripple.style, {
-              transform: 'translate3d(-50%, -50%, 0) scale3d(1, 1, 1)',
-              opacity: '1',
+              transform: "translate3d(-50%, -50%, 0) scale3d(1, 1, 1)",
+              opacity: "1",
             });
           });
         });
       }
     },
-    [onPressIn, rest, rippleEffectEnabled, calculatedRippleColor]
+    [onPressIn, rest, rippleEffectEnabled, calculatedRippleColor],
   );
 
   const handlePressOut = React.useCallback(
@@ -231,7 +231,7 @@ const TouchableRipple = (
 
       if (rippleEffectEnabled) {
         const containers = e.currentTarget.querySelectorAll(
-          '[data-paper-ripple]'
+          "[data-paper-ripple]",
         ) as HTMLElement[];
 
         requestAnimationFrame(() => {
@@ -240,7 +240,7 @@ const TouchableRipple = (
               const ripple = container.firstChild as HTMLSpanElement;
 
               Object.assign(ripple.style, {
-                transitionDuration: '250ms',
+                transitionDuration: "250ms",
                 opacity: 0,
               });
 
@@ -257,7 +257,7 @@ const TouchableRipple = (
         });
       }
     },
-    [onPressOut, rippleEffectEnabled]
+    [onPressOut, rippleEffectEnabled],
   );
 
   const hasPassedTouchHandler = hasTouchHandler({
@@ -282,12 +282,12 @@ const TouchableRipple = (
         // focused state is not ready yet: https://github.com/necolas/react-native-web/issues/1849
         // state.focused && { backgroundColor: ___ },
         state.hovered && { backgroundColor: hoverColor },
-        typeof style === 'function' ? style(state) : style,
+        typeof style === "function" ? style(state) : style,
       ]}
     >
       {(state) =>
         React.Children.only(
-          typeof children === 'function' ? children(state) : children
+          typeof children === "function" ? children(state) : children,
         )
       }
     </Pressable>
@@ -301,14 +301,14 @@ TouchableRipple.supported = true;
 
 const styles = StyleSheet.create({
   touchable: {
-    position: 'relative',
-    ...(Platform.OS === 'web' && {
-      cursor: 'pointer',
-      transition: '150ms background-color',
+    position: "relative",
+    ...(Platform.OS === "web" && {
+      cursor: "pointer",
+      transition: "150ms background-color",
     }),
   },
   borderless: {
-    overflow: 'hidden',
+    overflow: "hidden",
   },
 });
 

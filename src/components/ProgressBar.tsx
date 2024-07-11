@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   I18nManager,
@@ -8,12 +8,12 @@ import {
   StyleSheet,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import setColor from 'color';
+import setColor from "color";
 
-import { useInternalTheme } from '../core/theming';
-import type { ThemeProp } from '../types';
+import { useInternalTheme } from "../core/theming";
+import type { ThemeProp } from "../types";
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -81,17 +81,17 @@ const ProgressBar = ({
   animatedValue,
   style,
   fillStyle,
-  testID = 'progress-bar',
+  testID = "progress-bar",
   ...rest
 }: Props) => {
-  const isWeb = Platform.OS === 'web';
+  const isWeb = Platform.OS === "web";
   const theme = useInternalTheme(themeOverrides);
   const { current: timer } = React.useRef<Animated.Value>(
-    new Animated.Value(0)
+    new Animated.Value(0),
   );
   const { current: fade } = React.useRef<Animated.Value>(new Animated.Value(0));
   const passedAnimatedValue =
-    React.useRef<Props['animatedValue']>(animatedValue);
+    React.useRef<Props["animatedValue"]>(animatedValue);
   const [width, setWidth] = React.useState<number>(0);
   const [prevWidth, setPrevWidth] = React.useState<number>(0);
 
@@ -120,7 +120,7 @@ const ProgressBar = ({
      * and we do early return.
      */
     const externalAnimation =
-      typeof passedAnimatedValue.current !== 'undefined' &&
+      typeof passedAnimatedValue.current !== "undefined" &&
       passedAnimatedValue.current >= 0;
 
     if (externalAnimation) {
@@ -241,7 +241,7 @@ const ProgressBar = ({
                         : {
                             inputRange: [0, 1],
                             outputRange: [(isRTL ? 1 : -1) * 0.5 * width, 0],
-                          }
+                          },
                     ),
                   },
                   {
@@ -259,7 +259,7 @@ const ProgressBar = ({
                         : {
                             inputRange: [0, 1],
                             outputRange: [0.0001, 1],
-                          }
+                          },
                     ),
                   },
                 ],
@@ -276,11 +276,11 @@ const ProgressBar = ({
 const styles = StyleSheet.create({
   container: {
     height: 4,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   webContainer: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   progressBar: {
     flex: 1,

@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { StyleSheet, Text, Platform, ViewProps, Role } from 'react-native';
+import * as React from "react";
+import { StyleSheet, Text, Platform, ViewProps, Role } from "react-native";
 
-import { black } from '../styles/themes/v2/colors';
+import { black } from "../styles/themes/v2/colors";
 
 export type IconProps = {
   name: string;
   color?: string;
   size: number;
-  direction: 'rtl' | 'ltr';
+  direction: "rtl" | "ltr";
   allowFontScaling?: boolean;
   testID?: string;
 };
@@ -19,22 +19,22 @@ type AccessibilityProps =
     }
   | {
       accessibilityElementsHidden?: boolean;
-      importantForAccessibility?: 'auto' | 'yes' | 'no' | 'no-hide-descendants';
+      importantForAccessibility?: "auto" | "yes" | "no" | "no-hide-descendants";
     };
 
 let MaterialCommunityIcons: React.ComponentType<
   React.ComponentProps<
-    typeof import('react-native-vector-icons/MaterialCommunityIcons').default
+    typeof import("react-native-vector-icons/MaterialCommunityIcons").default
   > & {
     color: string;
-    pointerEvents?: ViewProps['pointerEvents'];
+    pointerEvents?: ViewProps["pointerEvents"];
   }
 >;
 
 try {
   // Optionally require vector-icons
   MaterialCommunityIcons =
-    require('react-native-vector-icons/MaterialCommunityIcons').default;
+    require("react-native-vector-icons/MaterialCommunityIcons").default;
 } catch (e) {
   let isErrorLogged = false;
 
@@ -44,7 +44,7 @@ try {
     if (!isErrorLogged) {
       if (
         !/(Cannot find module|Module not found|Cannot resolve module)/.test(
-          (e as any).message
+          (e as any).message,
         )
       ) {
         console.error(e);
@@ -52,7 +52,7 @@ try {
 
       console.warn(
         `Tried to use the icon '${name}' in a component from 'react-native-paper', but 'react-native-vector-icons/MaterialCommunityIcons' could not be loaded.`,
-        `To remove this warning, try installing 'react-native-vector-icons' or use another method to specify icon: https://callstack.github.io/react-native-paper/docs/guides/icons`
+        `To remove this warning, try installing 'react-native-vector-icons' or use another method to specify icon: https://callstack.github.io/react-native-paper/docs/guides/icons`,
       );
 
       isErrorLogged = true;
@@ -73,15 +73,15 @@ try {
 }
 
 export const accessibilityProps: AccessibilityProps =
-  Platform.OS === 'web'
+  Platform.OS === "web"
     ? {
-        role: 'img',
+        role: "img",
         focusable: false,
       }
     : {
         accessibilityElementsHidden: true,
         importantForAccessibility:
-          'no-hide-descendants' as 'no-hide-descendants',
+          "no-hide-descendants" as "no-hide-descendants",
       };
 
 const defaultIcon = ({
@@ -99,7 +99,7 @@ const defaultIcon = ({
     size={size}
     style={[
       {
-        transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
+        transform: [{ scaleX: direction === "rtl" ? -1 : 1 }],
         lineHeight: size,
       },
       styles.icon,
@@ -114,7 +114,7 @@ const defaultIcon = ({
 const styles = StyleSheet.create({
   // eslint-disable-next-line react-native/no-color-literals
   icon: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   },
 });
 

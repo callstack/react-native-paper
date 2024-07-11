@@ -1,8 +1,8 @@
-import type { ColorValue } from 'react-native';
+import type { ColorValue } from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from "../../types";
 
 const getUnderlayColor = ({
   theme,

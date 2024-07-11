@@ -1,8 +1,8 @@
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
-import { usePluginData } from '@docusaurus/useGlobalData';
+import { usePluginData } from "@docusaurus/useGlobalData";
 
-const pluginName = 'component-docs-plugin';
+const pluginName = "component-docs-plugin";
 
 export interface ComponentDocsPluginData {
   docs: { [key in string]: PageDoc };

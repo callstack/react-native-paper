@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { Platform, StyleSheet, View } from "react-native";
 
-import type { StackNavigationProp } from '@react-navigation/stack';
+import type { StackNavigationProp } from "@react-navigation/stack";
 import {
   Appbar,
   FAB,
@@ -11,20 +11,20 @@ import {
   Snackbar,
   Switch,
   Text,
-} from 'react-native-paper';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+} from "react-native-paper";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { useExampleTheme } from '..';
-import { yellowA200 } from '../../../src/styles/themes/v2/colors';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import { yellowA200 } from "../../../src/styles/themes/v2/colors";
+import ScreenWrapper from "../ScreenWrapper";
 
 type Props = {
   navigation: StackNavigationProp<{}>;
 };
 
-type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
+type AppbarModes = "small" | "medium" | "large" | "center-aligned";
 
-const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
+const MORE_ICON = Platform.OS === "ios" ? "dots-horizontal" : "dots-vertical";
 const MEDIUM_FAB_HEIGHT = 56;
 
 const AppbarExample = ({ navigation }: Props) => {
@@ -34,7 +34,7 @@ const AppbarExample = ({ navigation }: Props) => {
   const [showMoreIcon, setShowMoreIcon] = React.useState(true);
   const [showCustomColor, setShowCustomColor] = React.useState(false);
   const [showExactTheme, setShowExactTheme] = React.useState(false);
-  const [appbarMode, setAppbarMode] = React.useState<AppbarModes>('small');
+  const [appbarMode, setAppbarMode] = React.useState<AppbarModes>("small");
   const [showCalendarIcon, setShowCalendarIcon] = React.useState(false);
   const [showElevated, setShowElevated] = React.useState(false);
   const [showSnackbar, setShowSnackbar] = React.useState(false);
@@ -43,7 +43,7 @@ const AppbarExample = ({ navigation }: Props) => {
   const { bottom, left, right } = useSafeAreaInsets();
   const height = theme.isV3 ? 80 : 56;
 
-  const isCenterAlignedMode = appbarMode === 'center-aligned';
+  const isCenterAlignedMode = appbarMode === "center-aligned";
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -51,7 +51,7 @@ const AppbarExample = ({ navigation }: Props) => {
         <Appbar.Header
           style={showCustomColor ? styles.customColor : null}
           theme={{
-            mode: showExactTheme ? 'exact' : 'adaptive',
+            mode: showExactTheme ? "exact" : "adaptive",
           }}
           mode={appbarMode}
           elevated={showElevated}
@@ -61,7 +61,7 @@ const AppbarExample = ({ navigation }: Props) => {
           )}
           <Appbar.Content
             title="Title"
-            subtitle={showSubtitle ? 'Subtitle' : null}
+            subtitle={showSubtitle ? "Subtitle" : null}
             onPress={() => setShowSnackbar(true)}
           />
           {isCenterAlignedMode
@@ -97,7 +97,7 @@ const AppbarExample = ({ navigation }: Props) => {
   const renderFAB = () => {
     return (
       <FAB
-        mode={theme.isV3 ? 'flat' : 'elevated'}
+        mode={theme.isV3 ? "flat" : "elevated"}
         size="medium"
         icon="plus"
         onPress={() => {}}
@@ -212,7 +212,7 @@ const AppbarExample = ({ navigation }: Props) => {
           },
         ]}
         safeAreaInsets={{ bottom, left, right }}
-        theme={{ mode: showExactTheme ? 'exact' : 'adaptive' }}
+        theme={{ mode: showExactTheme ? "exact" : "adaptive" }}
       >
         <Appbar.Action icon="archive" onPress={() => {}} />
         <Appbar.Action icon="email" onPress={() => {}} />
@@ -232,7 +232,7 @@ const AppbarExample = ({ navigation }: Props) => {
   );
 };
 
-AppbarExample.title = 'Appbar';
+AppbarExample.title = "Appbar";
 
 export default AppbarExample;
 
@@ -241,20 +241,20 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingVertical: 8,
     paddingHorizontal: 16,
   },
   bottom: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     right: 0,
     bottom: 0,
   },
   fab: {
-    position: 'absolute',
+    position: "absolute",
     right: 16,
   },
   customColor: {

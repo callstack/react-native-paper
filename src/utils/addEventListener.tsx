@@ -1,7 +1,7 @@
 import type {
   NativeEventSubscription,
   EmitterSubscription,
-} from 'react-native';
+} from "react-native";
 
 export function addEventListener<
   T extends {
@@ -10,7 +10,7 @@ export function addEventListener<
     ) => NativeEventSubscription | EmitterSubscription;
   } & { removeEventListener?: (...args: any) => void } & {
     remove?: (...args: any) => void;
-  }
+  },
 >(Module: T, ...rest: Parameters<typeof Module.addEventListener>) {
   const [eventName, handler] = rest;
 
@@ -35,7 +35,7 @@ export function addListener<
   T extends {
     addListener: (...args: any) => EmitterSubscription;
     removeEventListener: (...args: any) => void;
-  }
+  },
 >(Module: T, ...rest: Parameters<typeof Module.addListener>) {
   const [eventName, handler] = rest;
 

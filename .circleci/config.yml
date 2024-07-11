@@ -118,7 +118,7 @@ jobs:
       - attach_project
       - add_ssh_keys:
           fingerprints:
-            - '2f:b4:ed:e1:25:88:5c:4a:03:c2:16:40:56:70:29:29'
+            - "2f:b4:ed:e1:25:88:5c:4a:03:c2:16:40:56:70:29:29"
       - run:
           name: Deploy docs to GitHub pages
           command: |

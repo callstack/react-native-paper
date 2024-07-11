@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   ColorValue,
   GestureResponderEvent,
@@ -8,21 +8,21 @@ import {
   TextStyle,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import Checkbox from './Checkbox';
-import CheckboxAndroid from './CheckboxAndroid';
-import CheckboxIOS from './CheckboxIOS';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp, MD3TypescaleKey } from '../../types';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
+import Checkbox from "./Checkbox";
+import CheckboxAndroid from "./CheckboxAndroid";
+import CheckboxIOS from "./CheckboxIOS";
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp, MD3TypescaleKey } from "../../types";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
+import Text from "../Typography/Text";
 
 export type Props = {
   /**
    * Status of checkbox.
    */
-  status: 'checked' | 'unchecked' | 'indeterminate';
+  status: "checked" | "unchecked" | "indeterminate";
   /**
    * Whether checkbox is disabled.
    */
@@ -100,12 +100,12 @@ export type Props = {
   /**
    * Checkbox control position.
    */
-  position?: 'leading' | 'trailing';
+  position?: "leading" | "trailing";
   /**
    * Whether `<Checkbox.Android />` or `<Checkbox.IOS />` should be used.
    * Left undefined `<Checkbox />` will be used.
    */
-  mode?: 'android' | 'ios';
+  mode?: "android" | "ios";
 };
 
 /**
@@ -137,10 +137,10 @@ const CheckboxItem = ({
   theme: themeOverrides,
   testID,
   mode,
-  position = 'trailing',
+  position = "trailing",
   accessibilityLabel = label,
   disabled,
-  labelVariant = 'bodyLarge',
+  labelVariant = "bodyLarge",
   labelMaxFontSizeMultiplier = 1.5,
   rippleColor,
   background,
@@ -148,12 +148,12 @@ const CheckboxItem = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const checkboxProps = { ...props, status, theme, disabled };
-  const isLeading = position === 'leading';
+  const isLeading = position === "leading";
   let checkbox;
 
-  if (mode === 'android') {
+  if (mode === "android") {
     checkbox = <CheckboxAndroid {...checkboxProps} />;
-  } else if (mode === 'ios') {
+  } else if (mode === "ios") {
     checkbox = <CheckboxIOS {...checkboxProps} />;
   } else {
     checkbox = <Checkbox {...checkboxProps} />;
@@ -163,7 +163,7 @@ const CheckboxItem = ({
   const disabledTextColor = theme.isV3
     ? theme.colors.onSurfaceDisabled
     : theme.colors.disabled;
-  const textAlign = isLeading ? 'right' : 'left';
+  const textAlign = isLeading ? "right" : "left";
 
   const computedStyle = {
     color: disabled ? disabledTextColor : textColor,
@@ -175,7 +175,7 @@ const CheckboxItem = ({
       accessibilityLabel={accessibilityLabel}
       accessibilityRole="checkbox"
       accessibilityState={{
-        checked: status === 'checked',
+        checked: status === "checked",
         disabled,
       }}
       onPress={onPress}
@@ -211,7 +211,7 @@ const CheckboxItem = ({
   );
 };
 
-CheckboxItem.displayName = 'Checkbox.Item';
+CheckboxItem.displayName = "Checkbox.Item";
 
 export default CheckboxItem;
 
@@ -220,9 +220,9 @@ export { CheckboxItem };
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingVertical: 8,
     paddingHorizontal: 16,
   },

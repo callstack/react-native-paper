@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   Platform,
@@ -7,25 +7,25 @@ import {
   View,
   ViewStyle,
   ColorValue,
-} from 'react-native';
+} from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import AppbarContent from './AppbarContent';
+import AppbarContent from "./AppbarContent";
 import {
   AppbarModes,
   DEFAULT_APPBAR_HEIGHT,
   getAppbarBackgroundColor,
   modeAppbarHeight,
   renderAppbarContent,
-} from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { MD3Elevation, ThemeProp } from '../../types';
-import Surface from '../Surface';
+} from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { MD3Elevation, ThemeProp } from "../../types";
+import Surface from "../Surface";
 
 export type Props = Omit<
   Partial<React.ComponentPropsWithRef<typeof View>>,
-  'style'
+  "style"
 > & {
   /**
    * Whether the background color is a dark color. A dark appbar will render light text and vice-versa.
@@ -44,7 +44,7 @@ export type Props = Omit<
    * - `large` - Appbar with large height (152).
    * - `center-aligned` - Appbar with default height and center-aligned title.
    */
-  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
+  mode?: "small" | "medium" | "large" | "center-aligned";
   /**
    * @supported Available in v5.x with theme version 3
    * Whether Appbar background should have the elevation along with primary color pigment.
@@ -156,7 +156,7 @@ const Appbar = ({
   children,
   dark,
   style,
-  mode = 'small',
+  mode = "small",
   elevated,
   safeAreaInsets,
   theme: themeOverrides,
@@ -178,7 +178,7 @@ const Appbar = ({
     theme,
     elevation,
     customBackground,
-    elevated
+    elevated,
   );
 
   const isMode = (modeToCompare: AppbarModes) => {
@@ -187,23 +187,23 @@ const Appbar = ({
 
   let isDark = false;
 
-  if (typeof dark === 'boolean') {
+  if (typeof dark === "boolean") {
     isDark = dark;
   } else if (!isV3) {
     isDark =
-      backgroundColor === 'transparent'
+      backgroundColor === "transparent"
         ? false
-        : typeof backgroundColor === 'string'
-        ? !color(backgroundColor).isLight()
-        : true;
+        : typeof backgroundColor === "string"
+          ? !color(backgroundColor).isLight()
+          : true;
   }
 
-  const isV3CenterAlignedMode = isV3 && isMode('center-aligned');
+  const isV3CenterAlignedMode = isV3 && isMode("center-aligned");
 
   let shouldCenterContent = false;
   let shouldAddLeftSpacing = false;
   let shouldAddRightSpacing = false;
-  if ((!isV3 && Platform.OS === 'ios') || isV3CenterAlignedMode) {
+  if ((!isV3 && Platform.OS === "ios") || isV3CenterAlignedMode) {
     let hasAppbarContent = false;
     let leftItemsCount = 0;
     let rightItemsCount = 0;
@@ -232,9 +232,9 @@ const Appbar = ({
     (isLeading = false) =>
       React.Children.toArray(children).filter((child) =>
         // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
-        isLeading ? child.props.isLeading : !child.props.isLeading
+        isLeading ? child.props.isLeading : !child.props.isLeading,
       ),
-    [children]
+    [children],
   );
 
   const spacingStyle = isV3 ? styles.v3Spacing : styles.spacing;
@@ -262,7 +262,7 @@ const Appbar = ({
       {...rest}
     >
       {shouldAddLeftSpacing ? <View style={spacingStyle} /> : null}
-      {(!isV3 || isMode('small') || isMode('center-aligned')) &&
+      {(!isV3 || isMode("small") || isMode("center-aligned")) &&
         renderAppbarContent({
           children,
           isDark,
@@ -270,11 +270,11 @@ const Appbar = ({
           isV3,
           shouldCenterContent: isV3CenterAlignedMode || shouldCenterContent,
         })}
-      {(isMode('medium') || isMode('large')) && (
+      {(isMode("medium") || isMode("large")) && (
         <View
           style={[
             styles.columnContainer,
-            isMode('center-aligned') && styles.centerAlignedContainer,
+            isMode("center-aligned") && styles.centerAlignedContainer,
           ]}
         >
           {/* Appbar top row with controls */}
@@ -284,14 +284,14 @@ const Appbar = ({
               children,
               isDark,
               isV3,
-              renderOnly: ['Appbar.BackAction'],
+              renderOnly: ["Appbar.BackAction"],
               mode,
             })}
             {renderAppbarContent({
               children: filterAppbarActions(true),
               isDark,
               isV3,
-              renderOnly: ['Appbar.Action'],
+              renderOnly: ["Appbar.Action"],
               mode,
             })}
             {/* Right side of row container, can contain other AppbarAction if they are not leading icons */}
@@ -301,10 +301,10 @@ const Appbar = ({
                 isDark,
                 isV3,
                 renderExcept: [
-                  'Appbar',
-                  'Appbar.BackAction',
-                  'Appbar.Content',
-                  'Appbar.Header',
+                  "Appbar",
+                  "Appbar.BackAction",
+                  "Appbar.Content",
+                  "Appbar.Header",
                 ],
                 mode,
               })}
@@ -315,7 +315,7 @@ const Appbar = ({
             children,
             isDark,
             isV3,
-            renderOnly: ['Appbar.Content'],
+            renderOnly: ["Appbar.Content"],
             mode,
           })}
         </View>
@@ -327,8 +327,8 @@ const Appbar = ({
 
 const styles = StyleSheet.create({
   appbar: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 4,
   },
   spacing: {
@@ -339,17 +339,17 @@ const styles = StyleSheet.create({
   },
   controlsRow: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   rightActionControls: {
-    flexDirection: 'row',
+    flexDirection: "row",
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   columnContainer: {
-    flexDirection: 'column',
+    flexDirection: "column",
     flex: 1,
     paddingTop: 8,
   },

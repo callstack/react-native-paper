@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { Text, TextStyle, StyleSheet, StyleProp } from 'react-native';
+import * as React from "react";
+import { Text, TextStyle, StyleSheet, StyleProp } from "react-native";
 
-import StyledText from './StyledText';
+import StyledText from "./StyledText";
 
 export type Props = React.ComponentProps<typeof Text> & {
   style?: StyleProp<TextStyle>;

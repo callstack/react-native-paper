@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { StyleSheet, View } from "react-native";
 
-import { Avatar, List, MD2Colors, MD3Colors } from 'react-native-paper';
+import { Avatar, List, MD2Colors, MD3Colors } from "react-native-paper";
 
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
 const AvatarExample = () => {
   const { isV3 } = useExampleTheme();
@@ -46,11 +46,11 @@ const AvatarExample = () => {
         <View style={styles.row}>
           <Avatar.Image
             style={styles.avatar}
-            source={require('../../assets/images/avatar.png')}
+            source={require("../../assets/images/avatar.png")}
           />
           <Avatar.Image
             style={styles.avatar}
-            source={require('../../assets/images/avatar.png')}
+            source={require("../../assets/images/avatar.png")}
             size={80}
           />
         </View>
@@ -59,13 +59,13 @@ const AvatarExample = () => {
   );
 };
 
-AvatarExample.title = 'Avatar';
+AvatarExample.title = "Avatar";
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "center",
     margin: 8,
   },
   avatar: {

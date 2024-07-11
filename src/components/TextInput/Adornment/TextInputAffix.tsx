@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Animated,
   DimensionValue,
@@ -10,13 +10,13 @@ import {
   Text,
   TextStyle,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import { AdornmentSide } from './enums';
-import { getTextColor } from './utils';
-import { useInternalTheme } from '../../../core/theming';
-import type { ThemeProp } from '../../../types';
-import { getConstants } from '../helpers';
+import { AdornmentSide } from "./enums";
+import { getTextColor } from "./utils";
+import { useInternalTheme } from "../../../core/theming";
+import type { ThemeProp } from "../../../types";
+import { getConstants } from "../helpers";
 
 export type Props = {
   /**
@@ -55,7 +55,7 @@ type ContextState = {
 };
 
 const AffixContext = React.createContext<ContextState>({
-  textStyle: { fontFamily: '', color: '' },
+  textStyle: { fontFamily: "", color: "" },
   topPosition: null,
   side: AdornmentSide.Left,
 });
@@ -145,7 +145,7 @@ const TextInputAffix = ({
   } = React.useContext(AffixContext);
 
   const offset =
-    typeof paddingHorizontal === 'number' ? paddingHorizontal : AFFIX_OFFSET;
+    typeof paddingHorizontal === "number" ? paddingHorizontal : AFFIX_OFFSET;
 
   const style = {
     top: topPosition,
@@ -196,13 +196,13 @@ const TextInputAffix = ({
   );
 };
 
-TextInputAffix.displayName = 'TextInput.Affix';
+TextInputAffix.displayName = "TextInput.Affix";
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
+    position: "absolute",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

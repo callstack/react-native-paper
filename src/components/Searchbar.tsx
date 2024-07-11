@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   ColorValue,
@@ -12,19 +12,19 @@ import {
   TextStyle,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import ActivityIndicator from './ActivityIndicator';
-import Divider from './Divider';
-import type { IconSource } from './Icon';
-import IconButton from './IconButton/IconButton';
-import MaterialCommunityIcon from './MaterialCommunityIcon';
-import Surface from './Surface';
-import { useInternalTheme } from '../core/theming';
-import type { ThemeProp } from '../types';
-import { forwardRef } from '../utils/forwardRef';
+import ActivityIndicator from "./ActivityIndicator";
+import Divider from "./Divider";
+import type { IconSource } from "./Icon";
+import IconButton from "./IconButton/IconButton";
+import MaterialCommunityIcon from "./MaterialCommunityIcon";
+import Surface from "./Surface";
+import { useInternalTheme } from "../core/theming";
+import type { ThemeProp } from "../types";
+import { forwardRef } from "../utils/forwardRef";
 
 interface Style {
   marginRight: number;
@@ -47,7 +47,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    * @supported Available in v5.x with theme version 3
    * Search layout mode, the default value is "bar".
    */
-  mode?: 'bar' | 'view';
+  mode?: "bar" | "view";
   /**
    * Icon name for the left icon button (see `onIconPress`).
    */
@@ -149,7 +149,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
 
 type TextInputHandles = Pick<
   TextInput,
-  'setNativeProps' | 'isFocused' | 'clear' | 'blur' | 'focus'
+  "setNativeProps" | "isFocused" | "clear" | "blur" | "focus"
 >;
 
 /**
@@ -183,9 +183,9 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       iconColor: customIconColor,
       rippleColor: customRippleColor,
       onIconPress,
-      searchAccessibilityLabel = 'search',
+      searchAccessibilityLabel = "search",
       clearIcon,
-      clearAccessibilityLabel = 'clear',
+      clearAccessibilityLabel = "clear",
       onClearIconPress,
       traileringIcon,
       traileringIconColor,
@@ -193,7 +193,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       traileringRippleColor: customTraileringRippleColor,
       onTraileringIconPress,
       right,
-      mode = 'bar',
+      mode = "bar",
       showDivider = true,
       inputStyle,
       placeholder,
@@ -202,10 +202,10 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       theme: themeOverrides,
       value,
       loading = false,
-      testID = 'search-bar',
+      testID = "search-bar",
       ...rest
     }: Props,
-    ref
+    ref,
   ) => {
     const theme = useInternalTheme(themeOverrides);
     const root = React.useRef<TextInput>(null);
@@ -224,7 +224,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       }
 
       const noop = () => {
-        throw new Error('TextInput is not available');
+        throw new Error("TextInput is not available");
       };
 
       return {
@@ -238,7 +238,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
 
     const handleClearPress = (e: any) => {
       root.current?.clear();
-      rest.onChangeText?.('');
+      rest.onChangeText?.("");
       onClearIconPress?.(e);
     };
 
@@ -269,7 +269,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
         }
       : theme.fonts.regular;
 
-    const isBarMode = isV3 && mode === 'bar';
+    const isBarMode = isV3 && mode === "bar";
     const shouldRenderTraileringIcon =
       isBarMode &&
       traileringIcon &&
@@ -305,7 +305,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
                 name="magnify"
                 color={color}
                 size={size}
-                direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                direction={I18nManager.getConstants().isRTL ? "rtl" : "ltr"}
               />
             ))
           }
@@ -319,17 +319,17 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             {
               color: textColor,
               ...font,
-              ...Platform.select({ web: { outline: 'none' } }),
+              ...Platform.select({ web: { outline: "none" } }),
             },
             isV3 && (isBarMode ? styles.barModeInput : styles.viewModeInput),
             inputStyle,
           ]}
-          placeholder={placeholder || ''}
+          placeholder={placeholder || ""}
           placeholderTextColor={placeholderTextColor}
           selectionColor={theme.colors?.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
-          keyboardAppearance={dark ? 'dark' : 'light'}
+          keyboardAppearance={dark ? "dark" : "light"}
           accessibilityRole="search"
           ref={root}
           value={value}
@@ -347,7 +347,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
           // with the abruptly stopping ripple effect and changing bar width on web,
           // when clearing the value.
           <View
-            pointerEvents={value ? 'auto' : 'none'}
+            pointerEvents={value ? "auto" : "none"}
             testID={`${testID}-icon-wrapper`}
             style={[
               isV3 && !value && styles.v3ClearIcon,
@@ -357,17 +357,17 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             <IconButton
               borderless
               accessibilityLabel={clearAccessibilityLabel}
-              iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
+              iconColor={value ? iconColor : "rgba(255, 255, 255, 0)"}
               rippleColor={rippleColor}
               onPress={handleClearPress}
               icon={
                 clearIcon ||
                 (({ size, color }) => (
                   <MaterialCommunityIcon
-                    name={isV3 ? 'close' : 'close-circle-outline'}
+                    name={isV3 ? "close" : "close-circle-outline"}
                     color={color}
                     size={size}
-                    direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                    direction={I18nManager.getConstants().isRTL ? "rtl" : "ltr"}
                   />
                 ))
               }
@@ -405,20 +405,20 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
         )}
       </Surface>
     );
-  }
+  },
 );
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   input: {
     flex: 1,
     fontSize: 18,
     paddingLeft: 8,
-    alignSelf: 'stretch',
-    textAlign: I18nManager.getConstants().isRTL ? 'right' : 'left',
+    alignSelf: "stretch",
+    textAlign: I18nManager.getConstants().isRTL ? "right" : "left",
     minWidth: 0,
   },
   barModeInput: {
@@ -442,17 +442,17 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   v3ClearIcon: {
-    position: 'absolute',
+    position: "absolute",
     right: 0,
     marginLeft: 16,
   },
   v3ClearIconHidden: {
-    display: 'none',
+    display: "none",
   },
   divider: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
-    width: '100%',
+    width: "100%",
   },
 });
 

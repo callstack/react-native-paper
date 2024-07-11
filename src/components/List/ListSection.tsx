@@ -1,15 +1,15 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   StyleProp,
   StyleSheet,
   TextStyle,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import ListSubheader from './ListSubheader';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import ListSubheader from "./ListSubheader";
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp } from "../../types";
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -76,7 +76,7 @@ const ListSection = ({
   );
 };
 
-ListSection.displayName = 'List.Section';
+ListSection.displayName = "List.Section";
 
 const styles = StyleSheet.create({
   container: {

@@ -1,10 +1,11 @@
-const SKIP = Symbol('SKIP');
+const SKIP = Symbol("SKIP");
 
 module.exports = function rewire(babel, options) {
   const t = babel.types;
 
-  const { name, index, mappings } = require(options.mappings ||
-    '../../mappings.json');
+  const { name, index, mappings } = require(
+    options.mappings || "../../mappings.json",
+  );
 
   return {
     visitor: {
@@ -25,10 +26,10 @@ module.exports = function rewire(babel, options) {
               let s;
 
               switch (mapping.name) {
-                case 'default':
+                case "default":
                   s = t.importDefaultSpecifier(identifier);
                   break;
-                case '*':
+                case "*":
                   s = t.importNamespaceSpecifier(identifier);
                   break;
                 default:
@@ -36,11 +37,11 @@ module.exports = function rewire(babel, options) {
               }
 
               declarations.push(
-                t.importDeclaration([s], t.stringLiteral(alias))
+                t.importDeclaration([s], t.stringLiteral(alias)),
               );
             } else {
               const previous = declarations.find(
-                (d) => d.source.value === path.node.source.value
+                (d) => d.source.value === path.node.source.value,
               );
 
               if (previous) {
@@ -53,7 +54,7 @@ module.exports = function rewire(babel, options) {
             }
 
             return declarations;
-          }, [])
+          }, []),
         );
 
         path.requeue();

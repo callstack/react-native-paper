@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { Platform, StyleSheet, View } from "react-native";
 
 import {
   Caption,
@@ -11,12 +11,12 @@ import {
   Subheading,
   customText,
   Title,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
-const Text = customText<'customVariant'>();
+const Text = customText<"customVariant">();
 
 const TextExample = () => {
   const { isV3 } = useExampleTheme();
@@ -24,10 +24,10 @@ const TextExample = () => {
   const fontConfig = {
     customVariant: {
       fontFamily: Platform.select({
-        ios: 'Noteworthy',
-        default: 'serif',
+        ios: "Noteworthy",
+        default: "serif",
       }),
-      fontWeight: '400',
+      fontWeight: "400",
       letterSpacing: Platform.select({
         ios: 7,
         default: 4.6,
@@ -118,7 +118,7 @@ const TextExample = () => {
   );
 };
 
-TextExample.title = 'Typography';
+TextExample.title = "Typography";
 
 const styles = StyleSheet.create({
   container: {

@@ -1,11 +1,11 @@
-import type * as React from 'react';
+import type * as React from "react";
 import type {
   PressableProps as PressableNativeProps,
   StyleProp,
   View,
   ViewStyle,
-} from 'react-native';
-import { Pressable as PressableNative } from 'react-native';
+} from "react-native";
+import { Pressable as PressableNative } from "react-native";
 
 // This component is added to support type-safe hover and focus states on web
 // https://necolas.github.io/react-native-web/docs/pressable/
@@ -18,7 +18,7 @@ export type PressableStateCallbackType = {
 
 export type PressableProps = Omit<
   PressableNativeProps,
-  'children' | 'style'
+  "children" | "style"
 > & {
   children:
     | React.ReactNode

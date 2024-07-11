@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   AccessibilityRole,
   Animated,
@@ -11,23 +11,23 @@ import {
   TextStyle,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import { ButtonMode, getButtonColors } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $Omit, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
-import hasTouchHandler from '../../utils/hasTouchHandler';
-import { splitStyles } from '../../utils/splitStyles';
-import ActivityIndicator from '../ActivityIndicator';
-import Icon, { IconSource } from '../Icon';
-import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
+import { ButtonMode, getButtonColors } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { $Omit, ThemeProp } from "../../types";
+import { forwardRef } from "../../utils/forwardRef";
+import hasTouchHandler from "../../utils/hasTouchHandler";
+import { splitStyles } from "../../utils/splitStyles";
+import ActivityIndicator from "../ActivityIndicator";
+import Icon, { IconSource } from "../Icon";
+import Surface from "../Surface";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
+import Text from "../Typography/Text";
 
-export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
+export type Props = $Omit<React.ComponentProps<typeof Surface>, "mode"> & {
   /**
    * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis.
    * - `text` - flat button without background or outline, used for the lowest priority actions, especially when presenting multiple options.
@@ -36,7 +36,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * - `elevated` - button with a background color and elevation, used when absolutely necessary e.g. button requires visual separation from a patterned background. @supported Available in v5.x with theme version 3
    * - `contained-tonal` - button with a secondary background color, an alternative middle ground between contained and outlined buttons. @supported Available in v5.x with theme version 3
    */
-  mode?: 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal';
+  mode?: "text" | "outlined" | "contained" | "elevated" | "contained-tonal";
   /**
    * Whether the color is a dark color. A dark button will render light text and vice-versa. Only applicable for:
    *  * `contained` mode for theme version 2
@@ -170,7 +170,7 @@ const Button = (
   {
     disabled,
     compact,
-    mode = 'text',
+    mode = "text",
     dark,
     loading,
     icon,
@@ -180,7 +180,7 @@ const Button = (
     children,
     accessibilityLabel,
     accessibilityHint,
-    accessibilityRole = 'button',
+    accessibilityRole = "button",
     onPress,
     onPressIn,
     onPressOut,
@@ -191,21 +191,21 @@ const Button = (
     uppercase: uppercaseProp,
     contentStyle,
     labelStyle,
-    testID = 'button',
+    testID = "button",
     accessible,
     background,
     maxFontSizeMultiplier,
     touchableRef,
     ...rest
   }: Props,
-  ref: React.ForwardedRef<View>
+  ref: React.ForwardedRef<View>,
 ) => {
   const theme = useInternalTheme(themeOverrides);
   const isMode = React.useCallback(
     (modeToCompare: ButtonMode) => {
       return mode === modeToCompare;
     },
-    [mode]
+    [mode],
   );
   const { roundness, isV3, animation } = theme;
   const uppercase = uppercaseProp ?? !theme.isV3;
@@ -218,12 +218,12 @@ const Button = (
   });
 
   const isElevationEntitled =
-    !disabled && (isV3 ? isMode('elevated') : isMode('contained'));
+    !disabled && (isV3 ? isMode("elevated") : isMode("contained"));
   const initialElevation = isV3 ? 1 : 2;
   const activeElevation = isV3 ? 2 : 8;
 
   const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(isElevationEntitled ? initialElevation : 0)
+    new Animated.Value(isElevationEntitled ? initialElevation : 0),
   );
 
   React.useEffect(() => {
@@ -232,13 +232,13 @@ const Button = (
 
   const handlePressIn = (e: GestureResponderEvent) => {
     onPressIn?.(e);
-    if (isV3 ? isMode('elevated') : isMode('contained')) {
+    if (isV3 ? isMode("elevated") : isMode("contained")) {
       const { scale } = animation;
       Animated.timing(elevation, {
         toValue: activeElevation,
         duration: 200 * scale,
         useNativeDriver:
-          Platform.OS === 'web' ||
+          Platform.OS === "web" ||
           Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
@@ -246,13 +246,13 @@ const Button = (
 
   const handlePressOut = (e: GestureResponderEvent) => {
     onPressOut?.(e);
-    if (isV3 ? isMode('elevated') : isMode('contained')) {
+    if (isV3 ? isMode("elevated") : isMode("contained")) {
       const { scale } = animation;
       Animated.timing(elevation, {
         toValue: initialElevation,
         duration: 150 * scale,
         useNativeDriver:
-          Platform.OS === 'web' ||
+          Platform.OS === "web" ||
           Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
@@ -261,7 +261,7 @@ const Button = (
   const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
   const [, borderRadiusStyles] = splitStyles(
     flattenedStyles,
-    (style) => style.startsWith('border') && style.endsWith('Radius')
+    (style) => style.startsWith("border") && style.endsWith("Radius"),
   );
 
   const borderRadius = (isV3 ? 5 : 1) * roundness;
@@ -303,20 +303,20 @@ const Button = (
   };
 
   const iconStyle =
-    StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
+    StyleSheet.flatten(contentStyle)?.flexDirection === "row-reverse"
       ? [
           styles.iconReverse,
-          isV3 && styles[`md3IconReverse${compact ? 'Compact' : ''}`],
+          isV3 && styles[`md3IconReverse${compact ? "Compact" : ""}`],
           isV3 &&
-            isMode('text') &&
-            styles[`md3IconReverseTextMode${compact ? 'Compact' : ''}`],
+            isMode("text") &&
+            styles[`md3IconReverseTextMode${compact ? "Compact" : ""}`],
         ]
       : [
           styles.icon,
-          isV3 && styles[`md3Icon${compact ? 'Compact' : ''}`],
+          isV3 && styles[`md3Icon${compact ? "Compact" : ""}`],
           isV3 &&
-            isMode('text') &&
-            styles[`md3IconTextMode${compact ? 'Compact' : ''}`],
+            isMode("text") &&
+            styles[`md3IconTextMode${compact ? "Compact" : ""}`],
         ];
 
   return (
@@ -362,7 +362,7 @@ const Button = (
                 source={icon}
                 size={customLabelSize ?? iconSize}
                 color={
-                  typeof customLabelColor === 'string'
+                  typeof customLabelColor === "string"
                     ? customLabelColor
                     : textColor
                 }
@@ -373,7 +373,7 @@ const Button = (
             <ActivityIndicator
               size={customLabelSize ?? iconSize}
               color={
-                typeof customLabelColor === 'string'
+                typeof customLabelColor === "string"
                   ? customLabelColor
                   : textColor
               }
@@ -389,7 +389,7 @@ const Button = (
               styles.label,
               !isV3 && styles.md2Label,
               isV3 &&
-                (isMode('text')
+                (isMode("text")
                   ? icon || loading
                     ? styles.md3LabelTextAddons
                     : styles.md3LabelText
@@ -412,15 +412,15 @@ const Button = (
 const styles = StyleSheet.create({
   button: {
     minWidth: 64,
-    borderStyle: 'solid',
+    borderStyle: "solid",
   },
   compact: {
-    minWidth: 'auto',
+    minWidth: "auto",
   },
   content: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   icon: {
     marginLeft: 12,
@@ -465,7 +465,7 @@ const styles = StyleSheet.create({
   },
   /* eslint-enable react-native/no-unused-styles */
   label: {
-    textAlign: 'center',
+    textAlign: "center",
     marginVertical: 9,
     marginHorizontal: 16,
   },
@@ -476,7 +476,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
   },
   uppercaseLabel: {
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
   md3Label: {
     marginVertical: 10,

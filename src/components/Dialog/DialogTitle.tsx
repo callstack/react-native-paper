@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { StyleProp, StyleSheet, TextStyle } from 'react-native';
+import * as React from "react";
+import { StyleProp, StyleSheet, TextStyle } from "react-native";
 
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import Text from '../Typography/Text';
-import Title from '../Typography/v2/Title';
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp } from "../../types";
+import Text from "../Typography/Text";
+import Title from "../Typography/v2/Title";
 
 export type Props = React.ComponentPropsWithRef<typeof Title> & {
   /**
@@ -74,7 +74,7 @@ const DialogTitle = ({
   );
 };
 
-DialogTitle.displayName = 'Dialog.Title';
+DialogTitle.displayName = "Dialog.Title";
 
 const styles = StyleSheet.create({
   text: {

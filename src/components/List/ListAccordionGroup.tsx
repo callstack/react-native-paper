@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 export type Props = {
   /**
@@ -67,7 +67,7 @@ const ListAccordionGroup = ({
 
   const onAccordionPressDefault = (newExpandedId: string | number) => {
     setExpandedId((currentExpandedId) =>
-      currentExpandedId === newExpandedId ? undefined : newExpandedId
+      currentExpandedId === newExpandedId ? undefined : newExpandedId,
     );
   };
 
@@ -83,6 +83,6 @@ const ListAccordionGroup = ({
   );
 };
 
-ListAccordionGroup.displayName = 'List.AccordionGroup';
+ListAccordionGroup.displayName = "List.AccordionGroup";
 
 export default ListAccordionGroup;

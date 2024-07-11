@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { StyleSheet, View } from "react-native";
 
-import { Snackbar, Button, List, Text, Switch } from 'react-native-paper';
+import { Snackbar, Button, List, Text, Switch } from "react-native-paper";
 
-import { PreferencesContext, useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { PreferencesContext, useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
-const SHORT_MESSAGE = 'Single-line snackbar';
+const SHORT_MESSAGE = "Single-line snackbar";
 const LONG_MESSAGE =
-  'Snackbar with longer message which does not fit in one line';
+  "Snackbar with longer message which does not fit in one line";
 
 const SnackbarExample = () => {
   const preferences = React.useContext(PreferencesContext);
@@ -31,7 +31,7 @@ const SnackbarExample = () => {
   } = options;
 
   const action = {
-    label: showLongerAction ? 'Toggle Theme' : 'Action',
+    label: showLongerAction ? "Toggle Theme" : "Action",
     onPress: () => {
       preferences?.toggleTheme();
     },
@@ -94,7 +94,7 @@ const SnackbarExample = () => {
               setOptions({ ...options, showSnackbar: !showSnackbar })
             }
           >
-            {showSnackbar ? 'Hide' : 'Show'}
+            {showSnackbar ? "Hide" : "Show"}
           </Button>
         </View>
       </ScreenWrapper>
@@ -116,25 +116,25 @@ const SnackbarExample = () => {
   );
 };
 
-SnackbarExample.title = 'Snackbar';
+SnackbarExample.title = "Snackbar";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   wrapper: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingVertical: 8,
     paddingHorizontal: 16,
   },
   longerAction: {
-    flexDirection: 'column',
+    flexDirection: "column",
   },
 });
 

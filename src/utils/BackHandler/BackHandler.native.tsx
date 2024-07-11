@@ -1,3 +1,3 @@
-import { BackHandler } from 'react-native';
+import { BackHandler } from "react-native";
 
 export { BackHandler };

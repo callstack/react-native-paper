@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   ColorValue,
@@ -8,21 +8,21 @@ import {
   StyleSheet,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import useLatestCallback from 'use-latest-callback';
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import useLatestCallback from "use-latest-callback";
 
-import Button from './Button/Button';
-import type { IconSource } from './Icon';
-import IconButton from './IconButton/IconButton';
-import MaterialCommunityIcon from './MaterialCommunityIcon';
-import Surface from './Surface';
-import Text from './Typography/Text';
-import { useInternalTheme } from '../core/theming';
-import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
+import Button from "./Button/Button";
+import type { IconSource } from "./Icon";
+import IconButton from "./IconButton/IconButton";
+import MaterialCommunityIcon from "./MaterialCommunityIcon";
+import Surface from "./Surface";
+import Text from "./Typography/Text";
+import { useInternalTheme } from "../core/theming";
+import type { $Omit, $RemoveChildren, ThemeProp } from "../types";
 
-export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
+export type Props = $Omit<React.ComponentProps<typeof Surface>, "mode"> & {
   /**
    * Whether the Snackbar is currently visible.
    */
@@ -147,7 +147,7 @@ const Snackbar = ({
   action,
   icon,
   onIconPress,
-  iconAccessibilityLabel = 'Close icon',
+  iconAccessibilityLabel = "Close icon",
   duration = DURATION_MEDIUM,
   onDismiss,
   children,
@@ -164,7 +164,7 @@ const Snackbar = ({
   const { bottom, right, left } = useSafeAreaInsets();
 
   const { current: opacity } = React.useRef<Animated.Value>(
-    new Animated.Value(0.0)
+    new Animated.Value(0.0),
   );
   const hideTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
 
@@ -189,7 +189,7 @@ const Snackbar = ({
         if (!isInfinity) {
           hideTimeout.current = setTimeout(
             onDismiss,
-            duration
+            duration,
           ) as unknown as NodeJS.Timeout;
         }
       }
@@ -266,7 +266,7 @@ const Snackbar = ({
   };
 
   const renderChildrenWithWrapper = () => {
-    if (typeof children === 'string') {
+    if (typeof children === "string") {
       return (
         <Text
           variant="bodyMedium"
@@ -356,7 +356,7 @@ const Snackbar = ({
                         color={color}
                         size={size}
                         direction={
-                          I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'
+                          I18nManager.getConstants().isRTL ? "rtl" : "ltr"
                         }
                       />
                     );
@@ -391,13 +391,13 @@ Snackbar.DURATION_LONG = DURATION_LONG;
 
 const styles = StyleSheet.create({
   wrapper: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
-    width: '100%',
+    width: "100%",
   },
   container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     margin: 8,
     borderRadius: 4,
     minHeight: 48,
@@ -408,9 +408,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   actionsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
     minHeight: 48,
   },
   button: {

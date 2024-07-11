@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { ActivityIndicator, Platform, StyleSheet, View } from "react-native";
 
-import { Dialog, MD2Colors, MD3Colors, Portal } from 'react-native-paper';
+import { Dialog, MD2Colors, MD3Colors, Portal } from "react-native-paper";
 
-import { TextComponent } from './DialogTextComponent';
-import { useExampleTheme } from '../..';
+import { TextComponent } from "./DialogTextComponent";
+import { useExampleTheme } from "../..";
 
-const isIOS = Platform.OS === 'ios';
+const isIOS = Platform.OS === "ios";
 
 const DialogWithLoadingIndicator = ({
   visible,
@@ -24,7 +24,7 @@ const DialogWithLoadingIndicator = ({
           <View style={styles.flexing}>
             <ActivityIndicator
               color={isV3 ? MD3Colors.tertiary30 : MD2Colors.indigo500}
-              size={isIOS ? 'large' : 48}
+              size={isIOS ? "large" : 48}
               style={styles.marginRight}
             />
             <TextComponent>Loading.....</TextComponent>
@@ -37,8 +37,8 @@ const DialogWithLoadingIndicator = ({
 
 const styles = StyleSheet.create({
   flexing: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   marginRight: {
     marginRight: 16,

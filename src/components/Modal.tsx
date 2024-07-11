@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   Easing,
@@ -7,17 +7,17 @@ import {
   Pressable,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import useLatestCallback from 'use-latest-callback';
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import useLatestCallback from "use-latest-callback";
 
-import Surface from './Surface';
-import { useInternalTheme } from '../core/theming';
-import type { ThemeProp } from '../types';
-import { addEventListener } from '../utils/addEventListener';
-import { BackHandler } from '../utils/BackHandler/BackHandler';
-import useAnimatedValue from '../utils/useAnimatedValue';
+import Surface from "./Surface";
+import { useInternalTheme } from "../core/theming";
+import type { ThemeProp } from "../types";
+import { addEventListener } from "../utils/addEventListener";
+import { BackHandler } from "../utils/BackHandler/BackHandler";
+import useAnimatedValue from "../utils/useAnimatedValue";
 
 export type Props = {
   /**
@@ -103,13 +103,13 @@ function Modal({
   dismissable = true,
   dismissableBackButton = dismissable,
   visible = false,
-  overlayAccessibilityLabel = 'Close modal',
+  overlayAccessibilityLabel = "Close modal",
   onDismiss = () => {},
   children,
   contentContainerStyle,
   style,
   theme: themeOverrides,
-  testID = 'modal',
+  testID = "modal",
 }: Props) {
   const theme = useInternalTheme(themeOverrides);
   const visibleRef = React.useRef(visible);
@@ -179,8 +179,8 @@ function Modal({
 
     const subscription = addEventListener(
       BackHandler,
-      'hardwareBackPress',
-      onHardwareBackPress
+      "hardwareBackPress",
+      onHardwareBackPress,
     );
     return () => subscription.remove();
   }, [dismissable, dismissableBackButton, hideModal, visible]);
@@ -202,7 +202,7 @@ function Modal({
 
   return (
     <Animated.View
-      pointerEvents={visible ? 'auto' : 'none'}
+      pointerEvents={visible ? "auto" : "none"}
       accessibilityViewIsModal
       accessibilityLiveRegion="polite"
       style={StyleSheet.absoluteFill}
@@ -253,11 +253,11 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   // eslint-disable-next-line react-native/no-color-literals
   content: {
-    backgroundColor: 'transparent',
-    justifyContent: 'center',
+    backgroundColor: "transparent",
+    justifyContent: "center",
   },
 });

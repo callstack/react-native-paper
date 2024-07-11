@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { GestureResponderEvent, StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { GestureResponderEvent, StyleSheet, View } from "react-native";
 
-import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
-import { handlePress, isChecked } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
-import { getSelectionControlIOSColor } from '../Checkbox/utils';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import { RadioButtonContext, RadioButtonContextType } from "./RadioButtonGroup";
+import { handlePress, isChecked } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { $RemoveChildren, ThemeProp } from "../../types";
+import { getSelectionControlIOSColor } from "../Checkbox/utils";
+import MaterialCommunityIcon from "../MaterialCommunityIcon";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -17,7 +17,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Status of radio button.
    */
-  status?: 'checked' | 'unchecked';
+  status?: "checked" | "unchecked";
   /**
    * Whether radio is disabled.
    */
@@ -66,7 +66,7 @@ const RadioButtonIOS = ({
             contextValue: context?.value,
             status,
             value,
-          }) === 'checked';
+          }) === "checked";
 
         const { checkedColor, rippleColor } = getSelectionControlIOSColor({
           theme,
@@ -115,7 +115,7 @@ const RadioButtonIOS = ({
   );
 };
 
-RadioButtonIOS.displayName = 'RadioButton.IOS';
+RadioButtonIOS.displayName = "RadioButton.IOS";
 
 const styles = StyleSheet.create({
   container: {

@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { Alert, StyleSheet, View } from "react-native";
 
-import { FAB, Portal, Text } from 'react-native-paper';
+import { FAB, Portal, Text } from "react-native-paper";
 
-import { useExampleTheme } from '..';
-import { isWeb } from '../../utils';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import { isWeb } from "../../utils";
+import ScreenWrapper from "../ScreenWrapper";
 
-type FABVariant = 'primary' | 'secondary' | 'tertiary' | 'surface';
-type FABSize = 'small' | 'medium' | 'large';
-type FABMode = 'flat' | 'elevated';
+type FABVariant = "primary" | "secondary" | "tertiary" | "surface";
+type FABSize = "small" | "medium" | "large";
+type FABMode = "flat" | "elevated";
 
 const FABExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
@@ -18,15 +18,15 @@ const FABExample = () => {
   const [open, setOpen] = React.useState<boolean>(false);
   const { isV3 } = useExampleTheme();
 
-  const variants = ['primary', 'secondary', 'tertiary', 'surface'];
-  const sizes = ['small', 'medium', 'large'];
-  const modes = ['flat', 'elevated'];
+  const variants = ["primary", "secondary", "tertiary", "surface"];
+  const sizes = ["small", "medium", "large"];
+  const modes = ["flat", "elevated"];
 
   return (
     <ScreenWrapper style={styles.container}>
       <View style={styles.column}>
         <FAB
-          icon={visible ? 'eye-off' : 'eye'}
+          icon={visible ? "eye-off" : "eye"}
           size="small"
           style={styles.fab}
           onPress={() => setVisible(!visible)}
@@ -144,25 +144,25 @@ const FABExample = () => {
         <Portal>
           <FAB.Group
             open={open}
-            icon={open ? 'calendar-today' : 'plus'}
+            icon={open ? "calendar-today" : "plus"}
             toggleStackOnLongPress={toggleStackOnLongPress}
             actions={[
-              { icon: 'plus', onPress: () => {} },
-              { icon: 'star', label: 'Star', onPress: () => {} },
-              { icon: 'email', label: 'Email', onPress: () => {} },
+              { icon: "plus", onPress: () => {} },
+              { icon: "star", label: "Star", onPress: () => {} },
+              { icon: "email", label: "Email", onPress: () => {} },
               {
-                icon: 'bell',
-                label: 'Remind',
+                icon: "bell",
+                label: "Remind",
                 onPress: () => {},
-                size: isV3 ? 'small' : 'medium',
+                size: isV3 ? "small" : "medium",
               },
               {
                 icon: toggleStackOnLongPress
-                  ? 'gesture-tap'
-                  : 'gesture-tap-hold',
+                  ? "gesture-tap"
+                  : "gesture-tap-hold",
                 label: toggleStackOnLongPress
-                  ? 'Toggle on Press'
-                  : 'Toggle on Long Press',
+                  ? "Toggle on Press"
+                  : "Toggle on Long Press",
                 onPress: () => {
                   setToggleStackOnLongPress(!toggleStackOnLongPress);
                 },
@@ -172,18 +172,18 @@ const FABExample = () => {
             onStateChange={({ open }: { open: boolean }) => setOpen(open)}
             onPress={() => {
               if (toggleStackOnLongPress) {
-                isWeb ? alert('Fab is Pressed') : Alert.alert('Fab is Pressed');
+                isWeb ? alert("Fab is Pressed") : Alert.alert("Fab is Pressed");
                 // do something on press when the speed dial is closed
               } else if (open) {
-                isWeb ? alert('Fab is Pressed') : Alert.alert('Fab is Pressed');
+                isWeb ? alert("Fab is Pressed") : Alert.alert("Fab is Pressed");
                 // do something if the speed dial is open
               }
             }}
             onLongPress={() => {
               if (!toggleStackOnLongPress || open) {
                 isWeb
-                  ? alert('Fab is Long Pressed')
-                  : Alert.alert('Fab is Long Pressed');
+                  ? alert("Fab is Long Pressed")
+                  : Alert.alert("Fab is Long Pressed");
                 // do something if the speed dial is open
               }
             }}
@@ -195,7 +195,7 @@ const FABExample = () => {
   );
 };
 
-FABExample.title = 'Floating Action Button';
+FABExample.title = "Floating Action Button";
 
 const styles = StyleSheet.create({
   container: {
@@ -203,13 +203,13 @@ const styles = StyleSheet.create({
   },
   row: {
     marginBottom: 8,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   column: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 8,
   },
   fab: {
@@ -217,8 +217,8 @@ const styles = StyleSheet.create({
   },
   fabVariant: {
     flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 });
 

@@ -1,21 +1,21 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   I18nManager,
   Image,
   ImageSourcePropType,
   Platform,
-} from 'react-native';
+} from "react-native";
 
-import { accessibilityProps } from './MaterialCommunityIcon';
-import { Consumer as SettingsConsumer } from '../core/settings';
-import { useInternalTheme } from '../core/theming';
-import type { ThemeProp } from '../types';
+import { accessibilityProps } from "./MaterialCommunityIcon";
+import { Consumer as SettingsConsumer } from "../core/settings";
+import { useInternalTheme } from "../core/theming";
+import type { ThemeProp } from "../types";
 
 type IconSourceBase = string | ImageSourcePropType;
 
 export type IconSource =
   | IconSourceBase
-  | Readonly<{ source: IconSourceBase; direction: 'rtl' | 'ltr' | 'auto' }>
+  | Readonly<{ source: IconSourceBase; direction: "rtl" | "ltr" | "auto" }>
   | ((props: IconProps & { color: string }) => React.ReactNode);
 
 type IconProps = {
@@ -28,24 +28,24 @@ type IconProps = {
 
 const isImageSource = (source: any) =>
   // source is an object with uri
-  (typeof source === 'object' &&
+  (typeof source === "object" &&
     source !== null &&
-    Object.prototype.hasOwnProperty.call(source, 'uri') &&
-    typeof source.uri === 'string') ||
+    Object.prototype.hasOwnProperty.call(source, "uri") &&
+    typeof source.uri === "string") ||
   // source is a module, e.g. - require('image')
-  typeof source === 'number' ||
+  typeof source === "number" ||
   // image url on web
-  (Platform.OS === 'web' &&
-    typeof source === 'string' &&
-    (source.startsWith('data:image') ||
+  (Platform.OS === "web" &&
+    typeof source === "string" &&
+    (source.startsWith("data:image") ||
       /\.(bmp|jpg|jpeg|png|gif|svg)$/.test(source)));
 
 const getIconId = (source: any) => {
   if (
-    typeof source === 'object' &&
+    typeof source === "object" &&
     source !== null &&
-    Object.prototype.hasOwnProperty.call(source, 'uri') &&
-    typeof source.uri === 'string'
+    Object.prototype.hasOwnProperty.call(source, "uri") &&
+    typeof source.uri === "string"
   ) {
     return source.uri;
   }
@@ -54,8 +54,8 @@ const getIconId = (source: any) => {
 };
 
 export const isValidIcon = (source: any) =>
-  typeof source === 'string' ||
-  typeof source === 'function' ||
+  typeof source === "string" ||
+  typeof source === "function" ||
   isImageSource(source);
 
 export const isEqualIcon = (a: any, b: any) =>
@@ -110,16 +110,16 @@ const Icon = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const direction =
-    typeof source === 'object' && source.direction && source.source
-      ? source.direction === 'auto'
+    typeof source === "object" && source.direction && source.source
+      ? source.direction === "auto"
         ? I18nManager.getConstants().isRTL
-          ? 'rtl'
-          : 'ltr'
+          ? "rtl"
+          : "ltr"
         : source.direction
       : null;
 
   const s =
-    typeof source === 'object' && source.direction && source.source
+    typeof source === "object" && source.direction && source.source
       ? source.source
       : source;
   const iconColor =
@@ -133,7 +133,7 @@ const Icon = ({
         source={s}
         style={[
           {
-            transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
+            transform: [{ scaleX: direction === "rtl" ? -1 : 1 }],
           },
           {
             width: size,
@@ -146,7 +146,7 @@ const Icon = ({
         accessibilityIgnoresInvertColors
       />
     );
-  } else if (typeof s === 'string') {
+  } else if (typeof s === "string") {
     return (
       <SettingsConsumer>
         {({ icon }) => {
@@ -160,7 +160,7 @@ const Icon = ({
         }}
       </SettingsConsumer>
     );
-  } else if (typeof s === 'function') {
+  } else if (typeof s === "function") {
     return s({ color: iconColor, size, direction, testID });
   }
 

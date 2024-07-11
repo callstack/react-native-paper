@@ -1,13 +1,13 @@
-import * as React from 'react';
+import * as React from "react";
 
 import {
   Paragraph,
   Subheading,
   Text as NativeText,
   Text,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-import { useExampleTheme } from '../..';
+import { useExampleTheme } from "../..";
 
 type Props = React.ComponentProps<typeof NativeText> & {
   isSubheading?: boolean;
@@ -19,7 +19,7 @@ export const TextComponent = ({ isSubheading = false, ...props }: Props) => {
   if (theme.isV3) {
     return (
       <Text
-        variant={isSubheading ? 'bodyLarge' : 'bodyMedium'}
+        variant={isSubheading ? "bodyLarge" : "bodyMedium"}
         style={{ color: theme.colors.onSurfaceVariant }}
         {...props}
       />

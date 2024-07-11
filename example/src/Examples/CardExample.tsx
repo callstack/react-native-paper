@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Alert, ScrollView, StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { Alert, ScrollView, StyleSheet, View } from "react-native";
 
 import {
   Avatar,
@@ -9,23 +9,23 @@ import {
   IconButton,
   Paragraph,
   Text,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-import { PreferencesContext, useExampleTheme } from '..';
-import { isWeb } from '../../utils';
-import ScreenWrapper from '../ScreenWrapper';
+import { PreferencesContext, useExampleTheme } from "..";
+import { isWeb } from "../../utils";
+import ScreenWrapper from "../ScreenWrapper";
 
-type Mode = 'elevated' | 'outlined' | 'contained';
+type Mode = "elevated" | "outlined" | "contained";
 
 const CardExample = () => {
   const { colors, isV3 } = useExampleTheme();
-  const [selectedMode, setSelectedMode] = React.useState('elevated' as Mode);
+  const [selectedMode, setSelectedMode] = React.useState("elevated" as Mode);
   const [isSelected, setIsSelected] = React.useState(false);
   const preferences = React.useContext(PreferencesContext);
 
   const modes = isV3
-    ? ['elevated', 'outlined', 'contained']
-    : ['elevated', 'outlined'];
+    ? ["elevated", "outlined", "contained"]
+    : ["elevated", "outlined"];
 
   const TextComponent = isV3 ? Text : Paragraph;
 
@@ -50,7 +50,7 @@ const CardExample = () => {
       >
         <Card style={styles.card} mode={selectedMode}>
           <Card.Cover
-            source={require('../../assets/images/wrecked-ship.jpg')}
+            source={require("../../assets/images/wrecked-ship.jpg")}
           />
           <Card.Title title="Abandoned Ship" />
           <Card.Content>
@@ -64,7 +64,7 @@ const CardExample = () => {
         </Card>
         {isV3 && (
           <Card style={styles.card} mode={selectedMode}>
-            <Card.Cover source={require('../../assets/images/bridge.jpg')} />
+            <Card.Cover source={require("../../assets/images/bridge.jpg")} />
             <Card.Title
               title="Title variant"
               subtitle="Subtitle variant"
@@ -79,7 +79,7 @@ const CardExample = () => {
           </Card>
         )}
         <Card style={styles.card} mode={selectedMode}>
-          <Card.Cover source={require('../../assets/images/forest.jpg')} />
+          <Card.Cover source={require("../../assets/images/forest.jpg")} />
           <Card.Actions>
             <Button onPress={() => {}}>Share</Button>
             <Button onPress={() => {}}>Explore</Button>
@@ -106,7 +106,7 @@ const CardExample = () => {
         </Card>
         <Card style={styles.card} mode={selectedMode}>
           <Card.Cover
-            source={require('../../assets/images/restaurant-1.jpg')}
+            source={require("../../assets/images/restaurant-1.jpg")}
           />
           <Card.Title title="Custom Button styles" />
           <Card.Actions>
@@ -127,13 +127,13 @@ const CardExample = () => {
             subtitle="... for card and cover"
           />
           <Card.Cover
-            source={require('../../assets/images/artist-2.jpg')}
+            source={require("../../assets/images/artist-2.jpg")}
             style={styles.customCoverRadius}
           />
         </Card>
         <Card style={styles.card} mode={selectedMode}>
           <Card.Cover
-            source={require('../../assets/images/strawberries.jpg')}
+            source={require("../../assets/images/strawberries.jpg")}
           />
           <Card.Title
             title="Just Strawberries"
@@ -141,7 +141,7 @@ const CardExample = () => {
             right={(props: any) => (
               <IconButton
                 {...props}
-                icon={isSelected ? 'heart' : 'heart-outline'}
+                icon={isSelected ? "heart" : "heart-outline"}
                 onPress={() => setIsSelected(!isSelected)}
               />
             )}
@@ -151,12 +151,12 @@ const CardExample = () => {
           style={styles.card}
           onPress={() => {
             isWeb
-              ? alert('The Chameleon is Pressed')
-              : Alert.alert('The Chameleon is Pressed');
+              ? alert("The Chameleon is Pressed")
+              : Alert.alert("The Chameleon is Pressed");
           }}
           mode={selectedMode}
         >
-          <Card.Cover source={require('../../assets/images/chameleon.jpg')} />
+          <Card.Cover source={require("../../assets/images/chameleon.jpg")} />
           <Card.Title title="Pressable Chameleon" />
           <Card.Content>
             <TextComponent variant="bodyMedium">
@@ -168,12 +168,12 @@ const CardExample = () => {
           style={styles.card}
           onLongPress={() => {
             isWeb
-              ? alert('The City is Long Pressed')
-              : Alert.alert('The City is Long Pressed');
+              ? alert("The City is Long Pressed")
+              : Alert.alert("The City is Long Pressed");
           }}
           mode={selectedMode}
         >
-          <Card.Cover source={require('../../assets/images/city.jpg')} />
+          <Card.Cover source={require("../../assets/images/city.jpg")} />
           <Card.Title
             title="Long Pressable City"
             left={(props) => <Avatar.Icon {...props} icon="city" />}
@@ -207,7 +207,7 @@ const CardExample = () => {
   );
 };
 
-CardExample.title = 'Card';
+CardExample.title = "Card";
 
 const styles = StyleSheet.create({
   container: {
@@ -223,8 +223,8 @@ const styles = StyleSheet.create({
     margin: 4,
   },
   preference: {
-    alignItems: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    flexDirection: "row",
     paddingVertical: 12,
     paddingHorizontal: 8,
   },

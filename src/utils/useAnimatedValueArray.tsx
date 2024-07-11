@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Animated } from 'react-native';
+import * as React from "react";
+import { Animated } from "react-native";
 
 export default function useAnimatedValueArray(initialValues: number[]) {
   const refs = React.useRef<Animated.Value[]>([]);

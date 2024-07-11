@@ -7,7 +7,7 @@ export const getUniqueNestedKeys = (data: DataObject): string[] => {
 
   const traverseObject = (obj: DataObject) => {
     for (const [key, value] of Object.entries(obj)) {
-      if (typeof value === 'object') {
+      if (typeof value === "object") {
         traverseObject(value);
       } else {
         keys.push(key);
@@ -24,7 +24,7 @@ export const getMaxNestedLevel = (obj: DataObject): number => {
   let maxNestedLevel = 0;
 
   for (const key in obj) {
-    if (typeof obj[key] === 'object') {
+    if (typeof obj[key] === "object") {
       const nestedLevel = getMaxNestedLevel(obj[key] as DataObject) + 1;
       maxNestedLevel = Math.max(maxNestedLevel, nestedLevel);
     }

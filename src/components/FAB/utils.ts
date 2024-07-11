@@ -1,10 +1,10 @@
-import { Animated, ColorValue, I18nManager, ViewStyle } from 'react-native';
+import { Animated, ColorValue, I18nManager, ViewStyle } from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import { black, white } from '../../styles/themes/v2/colors';
-import type { InternalTheme } from '../../types';
-import getContrastingColor from '../../utils/getContrastingColor';
+import { black, white } from "../../styles/themes/v2/colors";
+import type { InternalTheme } from "../../types";
+import getContrastingColor from "../../utils/getContrastingColor";
 
 type GetCombinedStylesProps = {
   isAnimatedFromRight: boolean;
@@ -19,7 +19,7 @@ type CombinedStyles = {
   absoluteFill: Animated.WithAnimatedValue<ViewStyle>;
 };
 
-type Variant = 'primary' | 'secondary' | 'tertiary' | 'surface';
+type Variant = "primary" | "secondary" | "tertiary" | "surface";
 
 type BaseProps = {
   isVariant: (variant: Variant) => boolean;
@@ -172,19 +172,19 @@ const getBackgroundColor = ({
       return theme.colors.surfaceDisabled;
     }
 
-    if (isVariant('primary')) {
+    if (isVariant("primary")) {
       return theme.colors.primaryContainer;
     }
 
-    if (isVariant('secondary')) {
+    if (isVariant("secondary")) {
       return theme.colors.secondaryContainer;
     }
 
-    if (isVariant('tertiary')) {
+    if (isVariant("tertiary")) {
       return theme.colors.tertiaryContainer;
     }
 
-    if (isVariant('surface')) {
+    if (isVariant("surface")) {
       return theme.colors.elevation.level3;
     }
   }
@@ -207,7 +207,7 @@ const getForegroundColor = ({
   backgroundColor,
   customColor,
 }: BaseProps & { backgroundColor: string; customColor?: string }) => {
-  if (typeof customColor !== 'undefined' && !disabled) {
+  if (typeof customColor !== "undefined" && !disabled) {
     return customColor;
   }
 
@@ -216,19 +216,19 @@ const getForegroundColor = ({
       return theme.colors.onSurfaceDisabled;
     }
 
-    if (isVariant('primary')) {
+    if (isVariant("primary")) {
       return theme.colors.onPrimaryContainer;
     }
 
-    if (isVariant('secondary')) {
+    if (isVariant("secondary")) {
       return theme.colors.onSecondaryContainer;
     }
 
-    if (isVariant('tertiary')) {
+    if (isVariant("tertiary")) {
       return theme.colors.onTertiaryContainer;
     }
 
-    if (isVariant('surface')) {
+    if (isVariant("surface")) {
       return theme.colors.primary;
     }
   }
@@ -244,11 +244,11 @@ const getForegroundColor = ({
     return getContrastingColor(
       backgroundColor || white,
       white,
-      'rgba(0, 0, 0, .54)'
+      "rgba(0, 0, 0, .54)",
     );
   }
 
-  return getContrastingColor(white, white, 'rgba(0, 0, 0, .54)');
+  return getContrastingColor(white, white, "rgba(0, 0, 0, .54)");
 };
 
 export const getFABColors = ({
@@ -375,7 +375,7 @@ export const getFabStyle = ({
   customSize,
 }: {
   customSize?: number;
-  size: 'small' | 'medium' | 'large';
+  size: "small" | "medium" | "large";
   theme: InternalTheme;
 }) => {
   const { isV3, roundness } = theme;
@@ -384,16 +384,16 @@ export const getFabStyle = ({
 
   if (isV3) {
     switch (size) {
-      case 'small':
+      case "small":
         return { ...v3SmallSize, borderRadius: 3 * roundness };
-      case 'medium':
+      case "medium":
         return { ...v3MediumSize, borderRadius: 4 * roundness };
-      case 'large':
+      case "large":
         return { ...v3LargeSize, borderRadius: 7 * roundness };
     }
   }
 
-  if (size === 'small') {
+  if (size === "small") {
     return smallSize;
   }
   return standardSize;

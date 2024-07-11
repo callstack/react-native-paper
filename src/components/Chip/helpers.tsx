@@ -1,9 +1,9 @@
-import type { ColorValue } from 'react-native';
+import type { ColorValue } from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import { black, white } from '../../styles/themes/v2/colors';
-import type { InternalTheme } from '../../types';
+import { black, white } from "../../styles/themes/v2/colors";
+import type { InternalTheme } from "../../types";
 
 type BaseProps = {
   theme: InternalTheme;
@@ -86,7 +86,7 @@ const getTextColor = ({
 const getDefaultBackgroundColor = ({
   theme,
   isOutlined,
-}: Omit<BaseProps, 'disabled' | 'selectedColor'>) => {
+}: Omit<BaseProps, "disabled" | "selectedColor">) => {
   if (theme.isV3) {
     if (isOutlined) {
       return theme.colors.surface;
@@ -100,10 +100,10 @@ const getDefaultBackgroundColor = ({
   }
 
   if (theme.dark) {
-    return '#383838';
+    return "#383838";
   }
 
-  return '#ebebeb';
+  return "#ebebeb";
 };
 
 const getBackgroundColor = ({
@@ -114,14 +114,14 @@ const getBackgroundColor = ({
 }: BaseProps & {
   customBackgroundColor?: ColorValue;
 }) => {
-  if (typeof customBackgroundColor === 'string') {
+  if (typeof customBackgroundColor === "string") {
     return customBackgroundColor;
   }
 
   if (theme.isV3) {
     if (disabled) {
       if (isOutlined) {
-        return 'transparent';
+        return "transparent";
       }
       return color(theme.colors.onSurfaceVariant).alpha(0.12).rgb().string();
     }

@@ -1,8 +1,8 @@
-import AppbarComponent from './Appbar';
-import AppbarAction from './AppbarAction';
-import AppbarBackAction from './AppbarBackAction';
-import AppbarContent from './AppbarContent';
-import AppbarHeader from './AppbarHeader';
+import AppbarComponent from "./Appbar";
+import AppbarAction from "./AppbarAction";
+import AppbarBackAction from "./AppbarBackAction";
+import AppbarContent from "./AppbarContent";
+import AppbarHeader from "./AppbarHeader";
 
 const Appbar = Object.assign(
   // @component ./Appbar.tsx
@@ -16,7 +16,7 @@ const Appbar = Object.assign(
     BackAction: AppbarBackAction,
     // @component ./AppbarHeader.tsx
     Header: AppbarHeader,
-  }
+  },
 );
 
 export default Appbar;

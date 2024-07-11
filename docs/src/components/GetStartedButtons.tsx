@@ -1,23 +1,23 @@
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { StyleSheet, View } from "react-native";
 
 //@ts-ignore
-import BrowserOnly from '@docusaurus/BrowserOnly';
+import BrowserOnly from "@docusaurus/BrowserOnly";
 //@ts-ignore
-import Link from '@docusaurus/Link';
+import Link from "@docusaurus/Link";
 //@ts-ignore
-import { useColorMode } from '@docusaurus/theme-common';
+import { useColorMode } from "@docusaurus/theme-common";
 import {
   Button,
   MD3DarkTheme as DarkTheme,
   MD3LightTheme as DefaultTheme,
   PaperProvider,
-} from 'react-native-paper';
+} from "react-native-paper";
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
     paddingBottom: 16,
   },
   button: {
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 });
 
 const noTextDecoration = {
-  textDecoration: 'none',
+  textDecoration: "none",
 };
 
 // Needed for ripple effect when pressing `Button`, however navigation is handled by `Link`
@@ -44,7 +44,7 @@ const GetStartedButton = () => {
         mode="outlined"
         onPress={() =>
           window.open(
-            'https://snack.expo.dev/@react-native-paper/react-native-paper-example_v5'
+            "https://snack.expo.dev/@react-native-paper/react-native-paper-example_v5",
           )
         }
       >
@@ -61,9 +61,9 @@ const Shimmer = () => {
   return (
     <View
       style={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
         paddingBottom: 18,
       }}
     >
@@ -72,8 +72,8 @@ const Shimmer = () => {
           width: 121,
           marginRight: 16,
           borderWidth: 1,
-          borderColor: 'rgba(125, 82, 96, 0.4)',
-          borderStyle: 'solid',
+          borderColor: "rgba(125, 82, 96, 0.4)",
+          borderStyle: "solid",
           borderRadius: 40,
           height: 40,
         }}
@@ -82,8 +82,8 @@ const Shimmer = () => {
         style={{
           width: 132,
           borderWidth: 1,
-          borderColor: 'rgba(125, 82, 96, 0.4)',
-          borderStyle: 'solid',
+          borderColor: "rgba(125, 82, 96, 0.4)",
+          borderStyle: "solid",
           borderRadius: 40,
           height: 40,
         }}
@@ -93,7 +93,7 @@ const Shimmer = () => {
 };
 
 const ThemedGetStarted = () => {
-  const isDarkTheme = useColorMode().colorMode === 'dark';
+  const isDarkTheme = useColorMode().colorMode === "dark";
   return (
     <PaperProvider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
       <GetStartedButton />

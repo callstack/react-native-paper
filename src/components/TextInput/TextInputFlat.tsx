@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   I18nManager,
   Platform,
@@ -7,17 +7,17 @@ import {
   TextStyle,
   View,
   Animated,
-} from 'react-native';
+} from "react-native";
 
-import { Underline } from './Addons/Underline';
-import { AdornmentSide, AdornmentType, InputMode } from './Adornment/enums';
+import { Underline } from "./Addons/Underline";
+import { AdornmentSide, AdornmentType, InputMode } from "./Adornment/enums";
 import TextInputAdornment, {
   TextInputAdornmentProps,
-} from './Adornment/TextInputAdornment';
+} from "./Adornment/TextInputAdornment";
 import {
   getAdornmentConfig,
   getAdornmentStyleAdjustmentForNativeInput,
-} from './Adornment/TextInputAdornment';
+} from "./Adornment/TextInputAdornment";
 import {
   ADORNMENT_SIZE,
   LABEL_PADDING_TOP_DENSE,
@@ -27,7 +27,7 @@ import {
   MINIMIZED_LABEL_Y_OFFSET,
   MIN_DENSE_HEIGHT,
   MIN_DENSE_HEIGHT_WL,
-} from './constants';
+} from "./constants";
 import {
   adjustPaddingFlat,
   calculateFlatAffixTopPosition,
@@ -38,9 +38,9 @@ import {
   getConstants,
   getFlatInputColors,
   Padding,
-} from './helpers';
-import InputLabel from './Label/InputLabel';
-import type { ChildTextInputProps, RenderProps } from './types';
+} from "./helpers";
+import InputLabel from "./Label/InputLabel";
+import type { ChildTextInputProps, RenderProps } from "./types";
 
 const TextInputFlat = ({
   disabled = false,
@@ -72,12 +72,12 @@ const TextInputFlat = ({
   left,
   right,
   placeholderTextColor,
-  testID = 'text-input-flat',
+  testID = "text-input-flat",
   contentStyle,
   scaledLabel,
   ...rest
 }: ChildTextInputProps) => {
-  const isAndroid = Platform.OS === 'android';
+  const isAndroid = Platform.OS === "android";
   const { colors, isV3, roundness } = theme;
   const font = isV3 ? theme.fonts.bodyLarge : theme.fonts.regular;
   const hasActiveOutline = parentState.focused || error;
@@ -96,10 +96,10 @@ const TextInputFlat = ({
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
   const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
   const lineHeight =
-    lineHeightStyle || (Platform.OS === 'web' ? fontSize * 1.2 : undefined);
+    lineHeightStyle || (Platform.OS === "web" ? fontSize * 1.2 : undefined);
 
   const isPaddingHorizontalPassed =
-    paddingHorizontal !== undefined && typeof paddingHorizontal === 'number';
+    paddingHorizontal !== undefined && typeof paddingHorizontal === "number";
 
   const adornmentConfig = getAdornmentConfig({
     left,
@@ -185,12 +185,12 @@ const TextInputFlat = ({
   const topPosition = calculateLabelTopPosition(
     labelHeight,
     inputHeight,
-    multiline && height ? 0 : !height ? minInputHeight / 2 : 0
+    multiline && height ? 0 : !height ? minInputHeight / 2 : 0,
   );
 
-  if (height && typeof height !== 'number') {
+  if (height && typeof height !== "number") {
     // eslint-disable-next-line
-    console.warn('Currently we support only numbers in height prop');
+    console.warn("Currently we support only numbers in height prop");
   }
 
   const paddingSettings = {
@@ -206,7 +206,7 @@ const TextInputFlat = ({
     scale: fontScale,
     isAndroid,
     styles: StyleSheet.flatten(
-      dense ? styles.inputFlatDense : styles.inputFlat
+      dense ? styles.inputFlatDense : styles.inputFlat,
     ) as Padding,
   };
 
@@ -392,11 +392,11 @@ const TextInputFlat = ({
           editable: !disabled && editable,
           selectionColor,
           cursorColor:
-            typeof cursorColor === 'undefined' ? activeColor : cursorColor,
+            typeof cursorColor === "undefined" ? activeColor : cursorColor,
           placeholderTextColor: placeholderTextColor ?? placeholderColor,
           onFocus,
           onBlur,
-          underlineColorAndroid: 'transparent',
+          underlineColorAndroid: "transparent",
           multiline,
           style: [
             styles.input,
@@ -410,18 +410,18 @@ const TextInputFlat = ({
               lineHeight,
               fontWeight,
               color: inputTextColor,
-              textAlignVertical: multiline ? 'top' : 'center',
+              textAlignVertical: multiline ? "top" : "center",
               textAlign: textAlign
                 ? textAlign
                 : I18nManager.getConstants().isRTL
-                ? 'right'
-                : 'left',
+                  ? "right"
+                  : "left",
               minWidth: Math.min(
                 parentState.labelTextLayout.width + 2 * FLAT_INPUT_OFFSET,
-                MIN_WIDTH
+                MIN_WIDTH,
               ),
             },
-            Platform.OS === 'web' && { outline: 'none' },
+            Platform.OS === "web" && { outline: "none" },
             adornmentStyleAdjustmentForNativeInput,
             contentStyle,
           ],
@@ -437,7 +437,7 @@ export default TextInputFlat;
 
 const styles = StyleSheet.create({
   placeholder: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
   },
   labelContainer: {

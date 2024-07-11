@@ -1,25 +1,25 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   LayoutChangeEvent,
   StyleProp,
   StyleSheet,
   TextStyle,
-} from 'react-native';
+} from "react-native";
 
-import { getTextColor } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $Omit, ThemeProp } from '../../types';
-import AnimatedText from '../Typography/AnimatedText';
+import { getTextColor } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { $Omit, ThemeProp } from "../../types";
+import AnimatedText from "../Typography/AnimatedText";
 
 export type Props = $Omit<
-  $Omit<React.ComponentPropsWithRef<typeof AnimatedText>, 'padding'>,
-  'type'
+  $Omit<React.ComponentPropsWithRef<typeof AnimatedText>, "padding">,
+  "type"
 > & {
   /**
    * Type of the helper text.
    */
-  type: 'error' | 'info';
+  type: "error" | "info";
   /**
    * Text content of the HelperText.
    */
@@ -31,7 +31,7 @@ export type Props = $Omit<
   /**
    * Whether to apply padding to the helper text.
    */
-  padding?: 'none' | 'normal';
+  padding?: "none" | "normal";
   /**
    * Whether the text input tied with helper text is disabled.
    */
@@ -80,17 +80,17 @@ export type Props = $Omit<
  */
 const HelperText = ({
   style,
-  type = 'info',
+  type = "info",
   visible = true,
   theme: themeOverrides,
   onLayout,
-  padding = 'normal',
+  padding = "normal",
   disabled,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { current: shown } = React.useRef<Animated.Value>(
-    new Animated.Value(visible ? 1 : 0)
+    new Animated.Value(visible ? 1 : 0),
   );
 
   let { current: textHeight } = React.useRef<number>(0);
@@ -129,12 +129,12 @@ const HelperText = ({
       onLayout={handleTextLayout}
       style={[
         styles.text,
-        padding !== 'none' ? styles.padding : {},
+        padding !== "none" ? styles.padding : {},
         {
           color: textColor,
           opacity: shown,
           transform:
-            visible && type === 'error'
+            visible && type === "error"
               ? [
                   {
                     translateY: shown.interpolate({

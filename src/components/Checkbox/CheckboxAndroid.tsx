@@ -1,22 +1,22 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   GestureResponderEvent,
   StyleSheet,
   View,
-} from 'react-native';
+} from "react-native";
 
-import { getAndroidSelectionControlColor } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import { getAndroidSelectionControlColor } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { $RemoveChildren, ThemeProp } from "../../types";
+import MaterialCommunityIcon from "../MaterialCommunityIcon";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Status of checkbox.
    */
-  status: 'checked' | 'unchecked' | 'indeterminate';
+  status: "checked" | "unchecked" | "indeterminate";
   /**
    * Whether checkbox is disabled.
    */
@@ -63,7 +63,7 @@ const CheckboxAndroid = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { current: scaleAnim } = React.useRef<Animated.Value>(
-    new Animated.Value(1)
+    new Animated.Value(1),
   );
   const isFirstRendering = React.useRef<boolean>(true);
 
@@ -78,7 +78,7 @@ const CheckboxAndroid = ({
       return;
     }
 
-    const checked = status === 'checked';
+    const checked = status === "checked";
 
     Animated.sequence([
       Animated.timing(scaleAnim, {
@@ -96,8 +96,8 @@ const CheckboxAndroid = ({
     ]).start();
   }, [status, scaleAnim, scale]);
 
-  const checked = status === 'checked';
-  const indeterminate = status === 'indeterminate';
+  const checked = status === "checked";
+  const indeterminate = status === "indeterminate";
 
   const { rippleColor, selectionControlColor } =
     getAndroidSelectionControlColor({
@@ -114,10 +114,10 @@ const CheckboxAndroid = ({
   });
 
   const icon = indeterminate
-    ? 'minus-box'
+    ? "minus-box"
     : checked
-    ? 'checkbox-marked'
-    : 'checkbox-blank-outline';
+      ? "checkbox-marked"
+      : "checkbox-blank-outline";
 
   return (
     <TouchableRipple
@@ -155,7 +155,7 @@ const CheckboxAndroid = ({
   );
 };
 
-CheckboxAndroid.displayName = 'Checkbox.Android';
+CheckboxAndroid.displayName = "Checkbox.Android";
 
 const styles = StyleSheet.create({
   container: {
@@ -165,8 +165,8 @@ const styles = StyleSheet.create({
     padding: 6,
   },
   fillContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   fill: {
     height: 14,

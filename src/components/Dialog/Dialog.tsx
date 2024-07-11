@@ -1,23 +1,23 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   Platform,
   StyleProp,
   StyleSheet,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import DialogActions from './DialogActions';
-import DialogContent from './DialogContent';
-import DialogIcon from './DialogIcon';
-import DialogScrollArea from './DialogScrollArea';
-import DialogTitle from './DialogTitle';
-import { useInternalTheme } from '../../core/theming';
-import overlay from '../../styles/overlay';
-import type { ThemeProp } from '../../types';
-import Modal from '../Modal';
+import DialogActions from "./DialogActions";
+import DialogContent from "./DialogContent";
+import DialogIcon from "./DialogIcon";
+import DialogScrollArea from "./DialogScrollArea";
+import DialogTitle from "./DialogTitle";
+import { useInternalTheme } from "../../core/theming";
+import overlay from "../../styles/overlay";
+import type { ThemeProp } from "../../types";
+import Modal from "../Modal";
 
 export type Props = {
   /**
@@ -109,7 +109,7 @@ const Dialog = ({
   const borderRadius = (isV3 ? 7 : 1) * roundness;
 
   const backgroundColorV2 =
-    dark && mode === 'adaptive'
+    dark && mode === "adaptive"
       ? overlay(DIALOG_ELEVATION, colors?.surface)
       : colors?.surface;
   const backgroundColor = isV3
@@ -135,7 +135,7 @@ const Dialog = ({
       testID={testID}
     >
       {React.Children.toArray(children)
-        .filter((child) => child != null && typeof child !== 'boolean')
+        .filter((child) => child != null && typeof child !== "boolean")
         .map((child, i) => {
           if (isV3) {
             if (i === 0 && React.isValidElement(child)) {
@@ -182,9 +182,9 @@ const styles = StyleSheet.create({
      * of the shadow around the dialog, consequently, if you click around the
      * dialog (44 pixel from the top and bottom) it won't be dismissed.
      */
-    marginVertical: Platform.OS === 'android' ? 44 : 0,
+    marginVertical: Platform.OS === "android" ? 44 : 0,
     elevation: DIALOG_ELEVATION,
-    justifyContent: 'flex-start',
+    justifyContent: "flex-start",
   },
 });
 
