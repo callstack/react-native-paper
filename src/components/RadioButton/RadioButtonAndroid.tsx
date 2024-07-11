@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { Animated, StyleSheet, View } from "react-native";
 
-import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
-import { handlePress, isChecked } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
-import { getAndroidSelectionControlColor } from '../Checkbox/utils';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import { RadioButtonContext, RadioButtonContextType } from "./RadioButtonGroup";
+import { handlePress, isChecked } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { $RemoveChildren, ThemeProp } from "../../types";
+import { getAndroidSelectionControlColor } from "../Checkbox/utils";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -16,7 +16,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Status of radio button.
    */
-  status?: 'checked' | 'unchecked';
+  status?: "checked" | "unchecked";
   /**
    * Whether radio is disabled.
    */
@@ -63,11 +63,11 @@ const RadioButtonAndroid = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { current: borderAnim } = React.useRef<Animated.Value>(
-    new Animated.Value(BORDER_WIDTH)
+    new Animated.Value(BORDER_WIDTH),
   );
 
   const { current: radioAnim } = React.useRef<Animated.Value>(
-    new Animated.Value(1)
+    new Animated.Value(1),
   );
 
   const isFirstRendering = React.useRef<boolean>(true);
@@ -81,7 +81,7 @@ const RadioButtonAndroid = ({
       return;
     }
 
-    if (status === 'checked') {
+    if (status === "checked") {
       radioAnim.setValue(1.2);
 
       Animated.timing(radioAnim, {
@@ -108,7 +108,7 @@ const RadioButtonAndroid = ({
             contextValue: context?.value,
             status,
             value,
-          }) === 'checked';
+          }) === "checked";
 
         const { rippleColor, selectionControlColor } =
           getAndroidSelectionControlColor({
@@ -173,15 +173,15 @@ const RadioButtonAndroid = ({
   );
 };
 
-RadioButtonAndroid.displayName = 'RadioButton.Android';
+RadioButtonAndroid.displayName = "RadioButton.Android";
 
 const styles = StyleSheet.create({
   container: {
     borderRadius: 18,
   },
   radioContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   radio: {
     height: 20,

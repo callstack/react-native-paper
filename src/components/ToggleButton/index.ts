@@ -1,6 +1,6 @@
-import ToggleButtonComponent from './ToggleButton';
-import ToggleButtonGroup from './ToggleButtonGroup';
-import ToggleButtonRow from './ToggleButtonRow';
+import ToggleButtonComponent from "./ToggleButton";
+import ToggleButtonGroup from "./ToggleButtonGroup";
+import ToggleButtonRow from "./ToggleButtonRow";
 
 const ToggleButton = Object.assign(
   // @component ./ToggleButton.tsx
@@ -10,7 +10,7 @@ const ToggleButton = Object.assign(
     Group: ToggleButtonGroup,
     // @component ./ToggleButtonRow.tsx
     Row: ToggleButtonRow,
-  }
+  },
 );
 
 export default ToggleButton;

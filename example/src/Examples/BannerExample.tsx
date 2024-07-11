@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Dimensions,
   Image,
@@ -6,15 +6,15 @@ import {
   Platform,
   StyleSheet,
   View,
-} from 'react-native';
+} from "react-native";
 
-import { Banner, FAB, MD2Colors, MD3Colors } from 'react-native-paper';
+import { Banner, FAB, MD2Colors, MD3Colors } from "react-native-paper";
 
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
 const PHOTOS = Array.from({ length: 24 }).map(
-  (_, i) => `https://unsplash.it/300/300/?random&__id=${i}`
+  (_, i) => `https://unsplash.it/300/300/?random&__id=${i}`,
 );
 
 const BannerExample = () => {
@@ -66,7 +66,7 @@ const BannerExample = () => {
       </ScreenWrapper>
       <FAB
         icon="eye"
-        label={visible ? 'Hide banner' : 'Show banner'}
+        label={visible ? "Hide banner" : "Show banner"}
         style={styles.fab}
         onPress={() => setVisible(!visible)}
       />
@@ -74,21 +74,21 @@ const BannerExample = () => {
         onLayout={handleLayout}
         actions={[
           {
-            label: `Set ${useCustomTheme ? 'default' : 'custom'} theme`,
+            label: `Set ${useCustomTheme ? "default" : "custom"} theme`,
             onPress: () => setUseCustomTheme(!useCustomTheme),
           },
           {
-            label: 'Fix it',
+            label: "Fix it",
             onPress: () => setVisible(false),
           },
         ]}
-        icon={require('../../assets/images/email-icon.png')}
+        icon={require("../../assets/images/email-icon.png")}
         visible={visible}
         onShowAnimationFinished={() =>
-          console.log('Completed opening animation')
+          console.log("Completed opening animation")
         }
         onHideAnimationFinished={() =>
-          console.log('Completed closing animation')
+          console.log("Completed closing animation")
         }
         theme={useCustomTheme ? customTheme : defaultTheme}
         style={styles.banner}
@@ -100,50 +100,50 @@ const BannerExample = () => {
   );
 };
 
-BannerExample.title = 'Banner';
+BannerExample.title = "Banner";
 
 const styles = StyleSheet.create({
   ...Platform.select({
     web: {
       grid: {
         // there is no 'grid' type in RN :(
-        display: 'grid' as 'none',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
-        gridRowGap: '8px',
-        gridColumnGap: '8px',
+        display: "grid" as "none",
+        gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
+        gridRowGap: "8px",
+        gridColumnGap: "8px",
         padding: 8,
       },
       item: {
-        width: '100%',
+        width: "100%",
         height: 150,
       },
     },
     default: {
       grid: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
+        flexDirection: "row",
+        flexWrap: "wrap",
         padding: 4,
       },
       item: {
-        height: Dimensions.get('window').width / 2,
-        width: '50%',
+        height: Dimensions.get("window").width / 2,
+        width: "50%",
         padding: 4,
       },
     },
   }),
   banner: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
-    width: '100%',
+    width: "100%",
   },
   photo: {
     flex: 1,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   fab: {
-    alignSelf: 'center',
-    position: 'absolute',
+    alignSelf: "center",
+    position: "absolute",
     bottom: 0,
     margin: 16,
   },

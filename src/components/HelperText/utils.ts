@@ -1,17 +1,17 @@
-import color from 'color';
+import color from "color";
 
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from "../../types";
 
 type BaseProps = {
   theme: InternalTheme;
   disabled?: boolean;
-  type?: 'error' | 'info';
+  type?: "error" | "info";
 };
 
 export function getTextColor({ theme, disabled, type }: BaseProps) {
   const { colors, dark } = theme;
 
-  if (type === 'error') {
+  if (type === "error") {
     return colors?.error;
   }
 

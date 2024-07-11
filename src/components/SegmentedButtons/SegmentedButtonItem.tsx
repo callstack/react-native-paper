@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   ColorValue,
@@ -9,21 +9,21 @@ import {
   TextStyle,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import color from 'color';
-import type { ThemeProp } from 'src/types';
+import color from "color";
+import type { ThemeProp } from "src/types";
 
 import {
   getSegmentedButtonBorderRadius,
   getSegmentedButtonColors,
   getSegmentedButtonDensityPadding,
-} from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { IconSource } from '../Icon';
-import Icon from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
+} from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { IconSource } from "../Icon";
+import Icon from "../Icon";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
+import Text from "../Typography/Text";
 
 export type Props = {
   /**
@@ -76,7 +76,7 @@ export type Props = {
   /**
    * Button segment.
    */
-  segment?: 'first' | 'last';
+  segment?: "first" | "last";
   /**
    * Show optional check icon to indicate selected state
    */
@@ -84,7 +84,7 @@ export type Props = {
   /**
    * Density is applied to the height, to allow usage in denser UIs.
    */
-  density?: 'regular' | 'small' | 'medium' | 'high';
+  density?: "regular" | "small" | "medium" | "high";
   /**
    * Specifies the largest possible scale a label font can reach.
    */
@@ -120,7 +120,7 @@ const SegmentedButtonItem = ({
   label,
   onPress,
   segment,
-  density = 'regular',
+  density = "regular",
   theme: themeOverrides,
   labelMaxFontSizeMultiplier,
 }: Props) => {
@@ -196,8 +196,8 @@ const SegmentedButtonItem = ({
   const labelTextStyle: TextStyle = {
     ...(!isV3
       ? {
-          textTransform: 'uppercase',
-          fontWeight: '500',
+          textTransform: "uppercase",
+          fontWeight: "500",
         }
       : theme.fonts.labelLarge),
     color: textColor,
@@ -224,7 +224,7 @@ const SegmentedButtonItem = ({
               testID={`${testID}-check-icon`}
               style={[iconStyle, { transform: [{ scale: checkScale }] }]}
             >
-              <Icon source={'check'} size={iconSize} color={textColor} />
+              <Icon source={"check"} size={iconSize} color={textColor} />
             </Animated.View>
           ) : null}
           {showIcon ? (
@@ -252,15 +252,15 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     minWidth: 76,
-    borderStyle: 'solid',
+    borderStyle: "solid",
   },
   label: {
-    textAlign: 'center',
+    textAlign: "center",
   },
   content: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 9,
     paddingHorizontal: 16,
   },

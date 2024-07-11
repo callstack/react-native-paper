@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { StyleSheet, View } from "react-native";
 
 import {
   Checkbox,
@@ -8,10 +8,10 @@ import {
   Paragraph,
   Text,
   TouchableRipple,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
 const CheckboxExample = () => {
   const [checkedNormal, setCheckedNormal] = React.useState<boolean>(true);
@@ -27,7 +27,7 @@ const CheckboxExample = () => {
         <View style={styles.row}>
           <TextComponent>Normal</TextComponent>
           <View pointerEvents="none">
-            <Checkbox status={checkedNormal ? 'checked' : 'unchecked'} />
+            <Checkbox status={checkedNormal ? "checked" : "unchecked"} />
           </View>
         </View>
       </TouchableRipple>
@@ -38,7 +38,7 @@ const CheckboxExample = () => {
           <View pointerEvents="none">
             <Checkbox
               color={isV3 ? MD3Colors.error70 : MD2Colors.blue500}
-              status={checkedCustom ? 'checked' : 'unchecked'}
+              status={checkedCustom ? "checked" : "unchecked"}
             />
           </View>
         </View>
@@ -48,7 +48,7 @@ const CheckboxExample = () => {
         <View style={styles.row}>
           <TextComponent>Indeterminate</TextComponent>
           <View pointerEvents="none">
-            <Checkbox status={indeterminate ? 'indeterminate' : 'unchecked'} />
+            <Checkbox status={indeterminate ? "indeterminate" : "unchecked"} />
           </View>
         </View>
       </TouchableRipple>
@@ -69,16 +69,16 @@ const CheckboxExample = () => {
   );
 };
 
-CheckboxExample.title = 'Checkbox';
+CheckboxExample.title = "Checkbox";
 
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 8,
   },
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingVertical: 8,
     paddingHorizontal: 16,
   },

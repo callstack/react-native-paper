@@ -1,19 +1,19 @@
-import * as React from 'react';
-import { I18nManager } from 'react-native';
+import * as React from "react";
+import { I18nManager } from "react-native";
 
-import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { useMaterial3Theme } from "@pchmn/expo-material3-theme";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import {
   InitialState,
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
-} from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { useKeepAwake } from 'expo-keep-awake';
-import { StatusBar } from 'expo-status-bar';
-import * as Updates from 'expo-updates';
+} from "@react-navigation/native";
+import { useFonts } from "expo-font";
+import { useKeepAwake } from "expo-keep-awake";
+import { StatusBar } from "expo-status-bar";
+import * as Updates from "expo-updates";
 import {
   Provider as PaperProvider,
   MD3DarkTheme,
@@ -25,15 +25,15 @@ import {
   useTheme,
   adaptNavigationTheme,
   configureFonts,
-} from 'react-native-paper';
-import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
+} from "react-native-paper";
+import { SafeAreaInsetsContext } from "react-native-safe-area-context";
 
-import DrawerItems from './DrawerItems';
-import App from './RootNavigator';
-import { deviceColorsSupported } from '../utils';
+import DrawerItems from "./DrawerItems";
+import App from "./RootNavigator";
+import { deviceColorsSupported } from "../utils";
 
-const PERSISTENCE_KEY = 'NAVIGATION_STATE';
-const PREFERENCES_KEY = 'APP_PREFERENCES';
+const PERSISTENCE_KEY = "NAVIGATION_STATE";
+const PREFERENCES_KEY = "APP_PREFERENCES";
 
 export const PreferencesContext = React.createContext<{
   toggleShouldUseDeviceColors?: () => void;
@@ -59,7 +59,7 @@ export default function PaperExample() {
   useKeepAwake();
 
   const [fontsLoaded] = useFonts({
-    Abel: require('../assets/fonts/Abel-Regular.ttf'),
+    Abel: require("../assets/fonts/Abel-Regular.ttf"),
   });
 
   const [isReady, setIsReady] = React.useState(false);
@@ -72,7 +72,7 @@ export default function PaperExample() {
   const [isDarkMode, setIsDarkMode] = React.useState(false);
   const [themeVersion, setThemeVersion] = React.useState<2 | 3>(3);
   const [rtl, setRtl] = React.useState<boolean>(
-    I18nManager.getConstants().isRTL
+    I18nManager.getConstants().isRTL,
   );
   const [collapsed, setCollapsed] = React.useState(false);
   const [customFontLoaded, setCustomFont] = React.useState(false);
@@ -97,7 +97,7 @@ export default function PaperExample() {
     const restoreState = async () => {
       try {
         const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
-        const state = JSON.parse(savedStateString || '');
+        const state = JSON.parse(savedStateString || "");
 
         setInitialState(state);
       } catch (e) {
@@ -116,12 +116,12 @@ export default function PaperExample() {
     const restorePrefs = async () => {
       try {
         const prefString = await AsyncStorage.getItem(PREFERENCES_KEY);
-        const preferences = JSON.parse(prefString || '');
+        const preferences = JSON.parse(prefString || "");
 
         if (preferences) {
-          setIsDarkMode(preferences.theme === 'dark');
+          setIsDarkMode(preferences.theme === "dark");
 
-          if (typeof preferences.rtl === 'boolean') {
+          if (typeof preferences.rtl === "boolean") {
             setRtl(preferences.rtl);
           }
         }
@@ -139,9 +139,9 @@ export default function PaperExample() {
         await AsyncStorage.setItem(
           PREFERENCES_KEY,
           JSON.stringify({
-            theme: isDarkMode ? 'dark' : 'light',
+            theme: isDarkMode ? "dark" : "light",
             rtl,
-          })
+          }),
         );
       } catch (e) {
         // ignore error
@@ -185,7 +185,7 @@ export default function PaperExample() {
       customFontLoaded,
       shouldUseDeviceColors,
       rippleEffectEnabled,
-    ]
+    ],
   );
 
   if (!isReady && !fontsLoaded) {
@@ -220,7 +220,7 @@ export default function PaperExample() {
     ...combinedTheme,
     fonts: configureFonts({
       config: {
-        fontFamily: 'Abel',
+        fontFamily: "Abel",
       },
     }),
   };
@@ -261,7 +261,7 @@ export default function PaperExample() {
                 );
               }}
             </SafeAreaInsetsContext.Consumer>
-            <StatusBar style={!theme.isV3 || theme.dark ? 'light' : 'dark'} />
+            <StatusBar style={!theme.isV3 || theme.dark ? "light" : "dark"} />
           </NavigationContainer>
         </React.Fragment>
       </PreferencesContext.Provider>

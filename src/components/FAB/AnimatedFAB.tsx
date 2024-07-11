@@ -1,11 +1,11 @@
-import * as React from 'react';
+import * as React from "react";
 import type {
   AccessibilityState,
   ColorValue,
   NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   TextLayoutEventData,
-} from 'react-native';
+} from "react-native";
 import {
   Animated,
   Easing,
@@ -17,23 +17,23 @@ import {
   StyleSheet,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import { getCombinedStyles, getFABColors } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
-import type { IconSource } from '../Icon';
-import Icon from '../Icon';
-import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import AnimatedText from '../Typography/AnimatedText';
+import { getCombinedStyles, getFABColors } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { $Omit, $RemoveChildren, ThemeProp } from "../../types";
+import type { IconSource } from "../Icon";
+import Icon from "../Icon";
+import Surface from "../Surface";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
+import AnimatedText from "../Typography/AnimatedText";
 
-export type AnimatedFABIconMode = 'static' | 'dynamic';
-export type AnimatedFABAnimateFrom = 'left' | 'right';
+export type AnimatedFABIconMode = "static" | "dynamic";
+export type AnimatedFABAnimateFrom = "left" | "right";
 
-export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
+export type Props = $Omit<$RemoveChildren<typeof Surface>, "mode"> & {
   /**
    * Icon to display for the `FAB`.
    */
@@ -109,7 +109,7 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    *
    * Color mappings variant for combinations of container and icon colors.
    */
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
+  variant?: "primary" | "secondary" | "tertiary" | "surface";
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
@@ -216,25 +216,25 @@ const AnimatedFAB = ({
   style,
   visible = true,
   uppercase: uppercaseProp,
-  testID = 'animated-fab',
-  animateFrom = 'right',
+  testID = "animated-fab",
+  animateFrom = "right",
   extended = false,
-  iconMode = 'dynamic',
-  variant = 'primary',
+  iconMode = "dynamic",
+  variant = "primary",
   labelMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const uppercase: boolean = uppercaseProp ?? !theme.isV3;
-  const isIOS = Platform.OS === 'ios';
-  const isAnimatedFromRight = animateFrom === 'right';
-  const isIconStatic = iconMode === 'static';
+  const isIOS = Platform.OS === "ios";
+  const isAnimatedFromRight = animateFrom === "right";
+  const isIconStatic = iconMode === "static";
   const { isRTL } = I18nManager;
   const { current: visibility } = React.useRef<Animated.Value>(
-    new Animated.Value(visible ? 1 : 0)
+    new Animated.Value(visible ? 1 : 0),
   );
   const { current: animFAB } = React.useRef<Animated.Value>(
-    new Animated.Value(0)
+    new Animated.Value(0),
   );
   const { isV3, animation } = theme;
   const { scale } = animation;
@@ -473,10 +473,10 @@ const AnimatedFAB = ({
           variant="labelLarge"
           numberOfLines={1}
           onTextLayout={isIOS ? onTextLayout : undefined}
-          ellipsizeMode={'tail'}
+          ellipsizeMode={"tail"}
           style={[
             {
-              [isAnimatedFromRight || isRTL ? 'right' : 'left']: isIconStatic
+              [isAnimatedFromRight || isRTL ? "right" : "left"]: isIconStatic
                 ? textWidth - SIZE + borderRadius / (isV3 ? 1 : 2)
                 : borderRadius,
             },
@@ -519,7 +519,7 @@ const AnimatedFAB = ({
             variant="labelLarge"
             numberOfLines={1}
             onTextLayout={onTextLayout}
-            ellipsizeMode={'tail'}
+            ellipsizeMode={"tail"}
             style={[
               styles.label,
               uppercase && styles.uppercaseLabel,
@@ -544,12 +544,12 @@ const styles = StyleSheet.create({
   },
   // eslint-disable-next-line react-native/no-color-literals
   container: {
-    position: 'absolute',
-    backgroundColor: 'transparent',
+    position: "absolute",
+    backgroundColor: "transparent",
   },
   innerWrapper: {
-    flexDirection: 'row',
-    overflow: 'hidden',
+    flexDirection: "row",
+    overflow: "hidden",
   },
   shadowWrapper: {
     elevation: 0,
@@ -561,21 +561,21 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   iconWrapper: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
     height: SIZE,
     width: SIZE,
   },
   label: {
-    position: 'absolute',
+    position: "absolute",
   },
   uppercaseLabel: {
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
   textPlaceholderContainer: {
     height: 0,
-    position: 'absolute',
+    position: "absolute",
   },
 });
 

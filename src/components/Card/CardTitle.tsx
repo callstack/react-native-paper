@@ -1,17 +1,17 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   StyleProp,
   StyleSheet,
   TextStyle,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import { useInternalTheme } from '../../core/theming';
-import type { MD3TypescaleKey, ThemeProp } from '../../types';
-import Text from '../Typography/Text';
-import Caption from '../Typography/v2/Caption';
-import Title from '../Typography/v2/Title';
+import { useInternalTheme } from "../../core/theming";
+import type { MD3TypescaleKey, ThemeProp } from "../../types";
+import Text from "../Typography/Text";
+import Caption from "../Typography/v2/Caption";
+import Title from "../Typography/v2/Title";
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -137,12 +137,12 @@ const CardTitle = ({
   title,
   titleStyle,
   titleNumberOfLines = 1,
-  titleVariant = 'bodyLarge',
+  titleVariant = "bodyLarge",
   titleMaxFontSizeMultiplier,
   subtitle,
   subtitleStyle,
   subtitleNumberOfLines = 1,
-  subtitleVariant = 'bodyMedium',
+  subtitleVariant = "bodyMedium",
   subtitleMaxFontSizeMultiplier,
   left,
   leftStyle,
@@ -195,18 +195,18 @@ const CardTitle = ({
   );
 };
 
-CardTitle.displayName = 'Card.Title';
+CardTitle.displayName = "Card.Title";
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingLeft: 16,
   },
 
   left: {
-    justifyContent: 'center',
+    justifyContent: "center",
     marginRight: 16,
     height: LEFT_SIZE,
     width: LEFT_SIZE,
@@ -214,8 +214,8 @@ const styles = StyleSheet.create({
 
   titles: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flexDirection: "column",
+    justifyContent: "center",
   },
 
   title: {

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 export type Props<Value = string> = {
   /**
@@ -64,7 +64,7 @@ const ToggleButtonGroup = <Value = string,>({
   </ToggleButtonGroupContext.Provider>
 );
 
-ToggleButtonGroup.displayName = 'ToggleButton.Group';
+ToggleButtonGroup.displayName = "ToggleButton.Group";
 
 export default ToggleButtonGroup;
 

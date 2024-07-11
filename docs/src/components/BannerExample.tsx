@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { StyleSheet, View } from "react-native";
 
 //@ts-ignore
-import BrowserOnly from '@docusaurus/BrowserOnly';
+import BrowserOnly from "@docusaurus/BrowserOnly";
 //@ts-ignore
-import { useColorMode } from '@docusaurus/theme-common';
+import { useColorMode } from "@docusaurus/theme-common";
 import {
   Avatar,
   Button,
@@ -18,7 +18,7 @@ import {
   Text,
   TextInput,
   useTheme,
-} from 'react-native-paper';
+} from "react-native-paper";
 
 const styles = StyleSheet.create({
   container: {
@@ -27,21 +27,21 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     marginTop: 16,
     marginBottom: 32,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   row: {
-    alignItems: 'flex-start',
-    flexWrap: 'wrap',
+    alignItems: "flex-start",
+    flexWrap: "wrap",
   },
 });
 
 const Stack: React.FC<
   React.PropsWithChildren<{
-    direction?: 'row' | 'column';
+    direction?: "row" | "column";
     spacing?: number;
     style?: any;
   }>
-> = ({ direction = 'column', spacing = 0, style, children }) => {
+> = ({ direction = "column", spacing = 0, style, children }) => {
   return (
     <View style={[{ flexDirection: direction, margin: -spacing }, style]}>
       {React.Children.map(children, (child, index) => (
@@ -57,8 +57,8 @@ const BannerExample = () => {
   const theme = useTheme();
 
   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
-  const [text, setText] = React.useState('');
-  const [checked, setChecked] = React.useState('first');
+  const [text, setText] = React.useState("");
+  const [checked, setChecked] = React.useState("first");
 
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
@@ -122,18 +122,18 @@ const BannerExample = () => {
         <Stack direction="row" spacing={8}>
           <RadioButton
             value="first"
-            status={checked === 'first' ? 'checked' : 'unchecked'}
-            onPress={() => setChecked('first')}
+            status={checked === "first" ? "checked" : "unchecked"}
+            onPress={() => setChecked("first")}
           />
           <RadioButton
             value="second"
-            status={checked === 'second' ? 'checked' : 'unchecked'}
-            onPress={() => setChecked('second')}
+            status={checked === "second" ? "checked" : "unchecked"}
+            onPress={() => setChecked("second")}
           />
           <RadioButton
             value="third"
-            status={checked === 'third' ? 'checked' : 'unchecked'}
-            onPress={() => setChecked('third')}
+            status={checked === "third" ? "checked" : "unchecked"}
+            onPress={() => setChecked("third")}
           />
         </Stack>
       </Stack>
@@ -148,14 +148,14 @@ const Shimmer = () => {
   return (
     <View
       style={{
-        display: 'flex',
+        display: "flex",
         minHeight: 500,
         borderWidth: 1,
-        borderColor: 'rgba(125, 82, 96, 0.4)',
-        borderStyle: 'solid',
+        borderColor: "rgba(125, 82, 96, 0.4)",
+        borderStyle: "solid",
         borderRadius: 16,
-        alignContent: 'center',
-        justifyContent: 'center',
+        alignContent: "center",
+        justifyContent: "center",
         padding: 30,
         marginTop: 36,
         marginBottom: 32,
@@ -165,7 +165,7 @@ const Shimmer = () => {
 };
 
 const ThemedBannerExample = () => {
-  const isDarkTheme = useColorMode().colorMode === 'dark';
+  const isDarkTheme = useColorMode().colorMode === "dark";
   return (
     <PaperProvider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
       <BannerExample />

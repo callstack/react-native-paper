@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import * as React from "react";
+import { StyleSheet } from "react-native";
 
-import type { StackNavigationProp } from '@react-navigation/stack';
-import { List, PaperProvider, Banner } from 'react-native-paper';
+import type { StackNavigationProp } from "@react-navigation/stack";
+import { List, PaperProvider, Banner } from "react-native-paper";
 
-import ScreenWrapper from '../ScreenWrapper';
+import ScreenWrapper from "../ScreenWrapper";
 
 type Props = {
   navigation: StackNavigationProp<{ [key: string]: undefined }>;
@@ -23,7 +23,7 @@ const ThemeExample = ({ navigation }: Props) => {
           <List.Item
             title="Themed Sport App"
             description="Go to the example"
-            onPress={() => navigation.navigate('teamsList')}
+            onPress={() => navigation.navigate("teamsList")}
             right={(props) => <List.Icon {...props} icon="arrow-right" />}
           />
         </List.Section>
@@ -31,7 +31,7 @@ const ThemeExample = ({ navigation }: Props) => {
     </PaperProvider>
   );
 };
-ThemeExample.title = 'Theme';
+ThemeExample.title = "Theme";
 
 const styles = StyleSheet.create({
   container: {

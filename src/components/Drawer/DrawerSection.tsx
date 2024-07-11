@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import * as React from "react";
+import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import { useInternalTheme } from '../../core/theming';
-import { MD3Colors } from '../../styles/themes/v3/tokens';
-import type { ThemeProp } from '../../types';
-import Divider from '../Divider';
-import Text from '../Typography/Text';
+import { useInternalTheme } from "../../core/theming";
+import { MD3Colors } from "../../styles/themes/v3/tokens";
+import type { ThemeProp } from "../../types";
+import Divider from "../Divider";
+import Text from "../Typography/Text";
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -114,7 +114,7 @@ const DrawerSection = ({
   );
 };
 
-DrawerSection.displayName = 'Drawer.Section';
+DrawerSection.displayName = "Drawer.Section";
 
 const styles = StyleSheet.create({
   container: {
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     height: 40,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   v3TitleContainer: {
     height: 56,

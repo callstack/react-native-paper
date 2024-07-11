@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { FlatList, StyleSheet, View } from "react-native";
 
-import { Card, IconButton, SegmentedButtons } from 'react-native-paper';
+import { Card, IconButton, SegmentedButtons } from "react-native-paper";
 
-import { restaurantsData } from '../../../utils';
+import { restaurantsData } from "../../../utils";
 
 const SegmentedButtonMultiselectRealCase = () => {
   const [value, setValue] = React.useState<string[]>([]);
@@ -11,7 +11,7 @@ const SegmentedButtonMultiselectRealCase = () => {
   const filteredData = React.useMemo(
     () =>
       restaurantsData.filter((item) => value.includes(item.price.toString())),
-    [value]
+    [value],
   );
 
   return (
@@ -22,26 +22,26 @@ const SegmentedButtonMultiselectRealCase = () => {
         multiSelect
         buttons={[
           {
-            value: '1',
-            label: '$',
+            value: "1",
+            label: "$",
             style: styles.button,
             showSelectedCheck: true,
           },
           {
-            value: '2',
-            label: '$$',
+            value: "2",
+            label: "$$",
             style: styles.button,
             showSelectedCheck: true,
           },
           {
-            value: '3',
-            label: '$$$',
+            value: "3",
+            label: "$$$",
             style: styles.button,
             showSelectedCheck: true,
           },
           {
-            value: '4',
-            label: '$$$$',
+            value: "4",
+            label: "$$$$",
             style: styles.button,
             showSelectedCheck: true,
           },
@@ -59,10 +59,10 @@ const SegmentedButtonMultiselectRealCase = () => {
                 <Card.Cover style={styles.cover} source={item.cover} />
                 <Card.Title
                   title={item.name}
-                  subtitle={'$'.repeat(item.price)}
+                  subtitle={"$".repeat(item.price)}
                   titleVariant="titleMedium"
                   style={styles.title}
-                  right={() => <IconButton icon={'bookmark-outline'} />}
+                  right={() => <IconButton icon={"bookmark-outline"} />}
                 />
               </Card.Content>
             </Card>
@@ -86,8 +86,8 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   content: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 0,
     paddingVertical: 0,
   },
@@ -102,9 +102,9 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
   },
-  group: { paddingHorizontal: 20, justifyContent: 'center' },
+  group: { paddingHorizontal: 20, justifyContent: "center" },
 });
 
-SegmentedButtonMultiselectRealCase.title = 'Restaurants';
+SegmentedButtonMultiselectRealCase.title = "Restaurants";
 
 export default SegmentedButtonMultiselectRealCase;

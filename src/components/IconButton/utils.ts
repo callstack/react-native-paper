@@ -1,10 +1,10 @@
-import type { ColorValue } from 'react-native';
+import type { ColorValue } from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import type { InternalTheme } from '../../types';
+import type { InternalTheme } from "../../types";
 
-type IconButtonMode = 'outlined' | 'contained' | 'contained-tonal';
+type IconButtonMode = "outlined" | "contained" | "contained-tonal";
 
 type BaseProps = {
   theme: InternalTheme;
@@ -40,37 +40,37 @@ const getBackgroundColor = ({
 }: BaseProps & { customContainerColor?: string }) => {
   if (theme.isV3) {
     if (disabled) {
-      if (isMode('contained') || isMode('contained-tonal')) {
+      if (isMode("contained") || isMode("contained-tonal")) {
         return theme.colors.surfaceDisabled;
       }
     }
 
-    if (typeof customContainerColor !== 'undefined') {
+    if (typeof customContainerColor !== "undefined") {
       return customContainerColor;
     }
 
-    if (isMode('contained')) {
+    if (isMode("contained")) {
       if (selected) {
         return theme.colors.primary;
       }
       return theme.colors.surfaceVariant;
     }
 
-    if (isMode('contained-tonal')) {
+    if (isMode("contained-tonal")) {
       if (selected) {
         return theme.colors.secondaryContainer;
       }
       return theme.colors.surfaceVariant;
     }
 
-    if (isMode('outlined')) {
+    if (isMode("outlined")) {
       if (selected) {
         return theme.colors.inverseSurface;
       }
     }
   }
 
-  if (typeof customContainerColor !== 'undefined') {
+  if (typeof customContainerColor !== "undefined") {
     return customContainerColor;
   }
 
@@ -89,25 +89,25 @@ const getIconColor = ({
       return theme.colors.onSurfaceDisabled;
     }
 
-    if (typeof customIconColor !== 'undefined') {
+    if (typeof customIconColor !== "undefined") {
       return customIconColor;
     }
 
-    if (isMode('contained')) {
+    if (isMode("contained")) {
       if (selected) {
         return theme.colors.onPrimary;
       }
       return theme.colors.primary;
     }
 
-    if (isMode('contained-tonal')) {
+    if (isMode("contained-tonal")) {
       if (selected) {
         return theme.colors.onSecondaryContainer;
       }
       return theme.colors.onSurfaceVariant;
     }
 
-    if (isMode('outlined')) {
+    if (isMode("outlined")) {
       if (selected) {
         return theme.colors.inverseOnSurface;
       }
@@ -120,7 +120,7 @@ const getIconColor = ({
     return theme.colors.onSurfaceVariant;
   }
 
-  if (typeof customIconColor !== 'undefined') {
+  if (typeof customIconColor !== "undefined") {
     return customIconColor;
   }
 

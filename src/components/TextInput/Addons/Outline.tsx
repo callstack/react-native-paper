@@ -1,13 +1,13 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   StyleSheet,
   ColorValue,
   StyleProp,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import { TextInputLabelProp } from '../types';
+import { TextInputLabelProp } from "../types";
 
 type OutlineProps = {
   isV3: boolean;
@@ -52,7 +52,7 @@ export const Outline = ({
 
 const styles = StyleSheet.create({
   outline: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     right: 0,
     top: 6,

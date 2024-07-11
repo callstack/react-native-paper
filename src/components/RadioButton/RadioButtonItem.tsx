@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   ColorValue,
   GestureResponderEvent,
@@ -8,17 +8,17 @@ import {
   TextStyle,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import RadioButton from './RadioButton';
-import RadioButtonAndroid from './RadioButtonAndroid';
-import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
-import RadioButtonIOS from './RadioButtonIOS';
-import { handlePress, isChecked } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp, MD3TypescaleKey } from '../../types';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
+import RadioButton from "./RadioButton";
+import RadioButtonAndroid from "./RadioButtonAndroid";
+import { RadioButtonContext, RadioButtonContextType } from "./RadioButtonGroup";
+import RadioButtonIOS from "./RadioButtonIOS";
+import { handlePress, isChecked } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp, MD3TypescaleKey } from "../../types";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
+import Text from "../Typography/Text";
 
 export type Props = {
   /**
@@ -65,7 +65,7 @@ export type Props = {
   /**
    * Status of radio button.
    */
-  status?: 'checked' | 'unchecked';
+  status?: "checked" | "unchecked";
   /**
    * Additional styles for container View.
    */
@@ -107,11 +107,11 @@ export type Props = {
    * Whether `<RadioButton.Android />` or `<RadioButton.IOS />` should be used.
    * Left undefined `<RadioButton />` will be used.
    */
-  mode?: 'android' | 'ios';
+  mode?: "android" | "ios";
   /**
    * Radio button control position.
    */
-  position?: 'leading' | 'trailing';
+  position?: "leading" | "trailing";
 };
 
 /**
@@ -153,8 +153,8 @@ const RadioButtonItem = ({
   accessibilityLabel = label,
   testID,
   mode,
-  position = 'trailing',
-  labelVariant = 'bodyLarge',
+  position = "trailing",
+  labelVariant = "bodyLarge",
   labelMaxFontSizeMultiplier,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -166,12 +166,12 @@ const RadioButtonItem = ({
     theme,
     uncheckedColor,
   };
-  const isLeading = position === 'leading';
+  const isLeading = position === "leading";
   let radioButton: any;
 
-  if (mode === 'android') {
+  if (mode === "android") {
     radioButton = <RadioButtonAndroid {...radioButtonProps} />;
-  } else if (mode === 'ios') {
+  } else if (mode === "ios") {
     radioButton = <RadioButtonIOS {...radioButtonProps} />;
   } else {
     radioButton = <RadioButton {...radioButtonProps} />;
@@ -181,7 +181,7 @@ const RadioButtonItem = ({
   const disabledTextColor = theme.isV3
     ? theme.colors.onSurfaceDisabled
     : theme.colors.disabled;
-  const textAlign = isLeading ? 'right' : 'left';
+  const textAlign = isLeading ? "right" : "left";
 
   const computedStyle = {
     color: disabled ? disabledTextColor : textColor,
@@ -196,7 +196,7 @@ const RadioButtonItem = ({
             contextValue: context?.value,
             status,
             value,
-          }) === 'checked';
+          }) === "checked";
         return (
           <TouchableRipple
             onPress={(event) =>
@@ -243,7 +243,7 @@ const RadioButtonItem = ({
   );
 };
 
-RadioButtonItem.displayName = 'RadioButton.Item';
+RadioButtonItem.displayName = "RadioButton.Item";
 
 export default RadioButtonItem;
 
@@ -252,9 +252,9 @@ export { RadioButtonItem };
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingVertical: 8,
     paddingHorizontal: 16,
   },

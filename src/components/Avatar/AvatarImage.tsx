@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Image,
   ImageProps,
@@ -7,10 +7,10 @@ import {
   StyleSheet,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp } from "../../types";
 
 const defaultSize = 64;
 
@@ -33,27 +33,27 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Invoked on load error.
    */
-  onError?: ImageProps['onError'];
+  onError?: ImageProps["onError"];
   /**
    * Invoked on mount and on layout changes.
    */
-  onLayout?: ImageProps['onLayout'];
+  onLayout?: ImageProps["onLayout"];
   /**
    * Invoked when load completes successfully.
    */
-  onLoad?: ImageProps['onLoad'];
+  onLoad?: ImageProps["onLoad"];
   /**
    * Invoked when load either succeeds or fails.
    */
-  onLoadEnd?: ImageProps['onLoadEnd'];
+  onLoadEnd?: ImageProps["onLoadEnd"];
   /**
    * Invoked on load start.
    */
-  onLoadStart?: ImageProps['onLoadStart'];
+  onLoadStart?: ImageProps["onLoadStart"];
   /**
    * Invoked on download progress.
    */
-  onProgress?: ImageProps['onProgress'];
+  onProgress?: ImageProps["onProgress"];
   /**
    * @optional
    */
@@ -104,8 +104,8 @@ const AvatarImage = ({
       ]}
       {...rest}
     >
-      {typeof source === 'function' && source({ size })}
-      {typeof source !== 'function' && (
+      {typeof source === "function" && source({ size })}
+      {typeof source !== "function" && (
         <Image
           testID={testID}
           source={source}
@@ -123,6 +123,6 @@ const AvatarImage = ({
   );
 };
 
-AvatarImage.displayName = 'Avatar.Image';
+AvatarImage.displayName = "Avatar.Image";
 
 export default AvatarImage;

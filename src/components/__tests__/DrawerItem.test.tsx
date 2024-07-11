@@ -1,28 +1,28 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { render } from '@testing-library/react-native';
+import { render } from "@testing-library/react-native";
 
-import DrawerItem from '../Drawer/DrawerItem';
+import DrawerItem from "../Drawer/DrawerItem";
 
-it('renders basic DrawerItem', () => {
+it("renders basic DrawerItem", () => {
   const tree = render(
-    <DrawerItem onPress={() => {}} label="Example item" />
+    <DrawerItem onPress={() => {}} label="Example item" />,
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders DrawerItem with icon', () => {
+it("renders DrawerItem with icon", () => {
   const tree = render(
-    <DrawerItem icon="information" label="Example item" />
+    <DrawerItem icon="information" label="Example item" />,
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders active DrawerItem', () => {
+it("renders active DrawerItem", () => {
   const tree = render(
-    <DrawerItem icon="information" active label="Example item" />
+    <DrawerItem icon="information" active label="Example item" />,
   ).toJSON();
 
   expect(tree).toMatchSnapshot();

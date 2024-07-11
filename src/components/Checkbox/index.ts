@@ -1,7 +1,7 @@
-import CheckboxComponent from './Checkbox';
-import CheckboxAndroid from './CheckboxAndroid';
-import CheckboxIOS from './CheckboxIOS';
-import CheckboxItem from './CheckboxItem';
+import CheckboxComponent from "./Checkbox";
+import CheckboxAndroid from "./CheckboxAndroid";
+import CheckboxIOS from "./CheckboxIOS";
+import CheckboxItem from "./CheckboxItem";
 
 const Checkbox = Object.assign(
   // @component ./Checkbox.tsx
@@ -13,7 +13,7 @@ const Checkbox = Object.assign(
     Android: CheckboxAndroid,
     // @component ./CheckboxIOS.tsx
     IOS: CheckboxIOS,
-  }
+  },
 );
 
 export default Checkbox;

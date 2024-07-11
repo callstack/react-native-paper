@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { I18nManager, Platform, StyleSheet } from 'react-native';
+import * as React from "react";
+import { I18nManager, Platform, StyleSheet } from "react-native";
 
 import {
   CommonActions,
@@ -8,15 +8,15 @@ import {
   Route,
   TabNavigationState,
   useLinkBuilder,
-} from '@react-navigation/native';
+} from "@react-navigation/native";
 
-import BottomNavigation from '../../components/BottomNavigation/BottomNavigation';
-import MaterialCommunityIcon from '../../components/MaterialCommunityIcon';
+import BottomNavigation from "../../components/BottomNavigation/BottomNavigation";
+import MaterialCommunityIcon from "../../components/MaterialCommunityIcon";
 import type {
   MaterialBottomTabDescriptorMap,
   MaterialBottomTabNavigationConfig,
   MaterialBottomTabNavigationHelpers,
-} from '../types';
+} from "../types";
 
 type Props = MaterialBottomTabNavigationConfig & {
   state: TabNavigationState<ParamListBase>;
@@ -38,7 +38,7 @@ export default function MaterialBottomTabView({
       navigationState={state}
       renderScene={({ route }) => descriptors[route.key].render()}
       renderTouchable={
-        Platform.OS === 'web'
+        Platform.OS === "web"
           ? ({
               onPress,
               route,
@@ -73,10 +73,10 @@ export default function MaterialBottomTabView({
       renderIcon={({ route, focused, color }) => {
         const { options } = descriptors[route.key];
 
-        if (typeof options.tabBarIcon === 'string') {
+        if (typeof options.tabBarIcon === "string") {
           return (
             <MaterialCommunityIcon
-              direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+              direction={I18nManager.getConstants().isRTL ? "rtl" : "ltr"}
               name={options.tabBarIcon}
               color={color}
               size={24}
@@ -84,7 +84,7 @@ export default function MaterialBottomTabView({
           );
         }
 
-        if (typeof options.tabBarIcon === 'function') {
+        if (typeof options.tabBarIcon === "function") {
           return options.tabBarIcon({ focused, color });
         }
 
@@ -96,8 +96,8 @@ export default function MaterialBottomTabView({
         return options.tabBarLabel !== undefined
           ? options.tabBarLabel
           : options.title !== undefined
-          ? options.title
-          : (route as Route<string>).name;
+            ? options.title
+            : (route as Route<string>).name;
       }}
       getColor={({ route }) => descriptors[route.key].options.tabBarColor}
       getBadge={({ route }) => descriptors[route.key].options.tabBarBadge}
@@ -109,7 +109,7 @@ export default function MaterialBottomTabView({
       }
       onTabPress={({ route, preventDefault }) => {
         const event = navigation.emit({
-          type: 'tabPress',
+          type: "tabPress",
           target: route.key,
           canPreventDefault: true,
         });
@@ -124,7 +124,7 @@ export default function MaterialBottomTabView({
         }
       }}
       onTabLongPress={({ route }) =>
-        navigation.emit({ type: 'tabLongPress', target: route.key })
+        navigation.emit({ type: "tabLongPress", target: route.key })
       }
     />
   );
@@ -132,8 +132,8 @@ export default function MaterialBottomTabView({
 
 const styles = StyleSheet.create({
   touchable: {
-    display: 'flex',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
   },
 });
 

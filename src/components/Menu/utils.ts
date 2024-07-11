@@ -1,10 +1,10 @@
-import type { ColorValue } from 'react-native';
+import type { ColorValue } from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import { black, white } from '../../styles/themes/v2/colors';
-import type { InternalTheme } from '../../types';
-import type { IconSource } from '../Icon';
+import { black, white } from "../../styles/themes/v2/colors";
+import type { InternalTheme } from "../../types";
+import type { IconSource } from "../Icon";
 
 export const MIN_WIDTH = 112;
 export const MAX_WIDTH = 280;
@@ -60,7 +60,7 @@ const getIconColor = ({ theme, disabled }: ColorProps) => {
 const getRippleColor = ({
   theme,
   customRippleColor,
-}: Omit<ColorProps, 'disabled'>) => {
+}: Omit<ColorProps, "disabled">) => {
   if (customRippleColor) {
     return customRippleColor;
   }

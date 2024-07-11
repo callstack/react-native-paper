@@ -1,1 +1,1 @@
-export { default } from './AnimatedFABExample';
+export { default } from "./AnimatedFABExample";

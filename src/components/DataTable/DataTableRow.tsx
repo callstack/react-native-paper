@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   GestureResponderEvent,
   StyleProp,
@@ -6,14 +6,14 @@ import {
   View,
   ViewProps,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import { useInternalTheme } from '../../core/theming';
-import { black, white } from '../../styles/themes/v2/colors';
-import type { $RemoveChildren, ThemeProp } from '../../types';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import { useInternalTheme } from "../../core/theming";
+import { black, white } from "../../styles/themes/v2/colors";
+import type { $RemoveChildren, ThemeProp } from "../../types";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -32,7 +32,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * `pointerEvents` passed to the `View` container, which is wrapping children within `TouchableRipple`.
    */
-  pointerEvents?: ViewProps['pointerEvents'];
+  pointerEvents?: ViewProps["pointerEvents"];
 };
 
 /**
@@ -86,18 +86,18 @@ const DataTableRow = ({
   );
 };
 
-DataTableRow.displayName = 'DataTable.Row';
+DataTableRow.displayName = "DataTable.Row";
 
 const styles = StyleSheet.create({
   container: {
-    borderStyle: 'solid',
+    borderStyle: "solid",
     borderBottomWidth: StyleSheet.hairlineWidth,
     minHeight: 48,
     paddingHorizontal: 16,
   },
   content: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
 });
 

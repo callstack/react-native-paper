@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { I18nManager, StyleSheet, View, Platform } from 'react-native';
+import * as React from "react";
+import { I18nManager, StyleSheet, View, Platform } from "react-native";
 
-import { DrawerContentScrollView } from '@react-navigation/drawer';
-import * as Updates from 'expo-updates';
+import { DrawerContentScrollView } from "@react-navigation/drawer";
+import * as Updates from "expo-updates";
 import {
   Badge,
   Drawer,
@@ -11,22 +11,22 @@ import {
   Switch,
   Text,
   TouchableRipple,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-import { deviceColorsSupported, isWeb } from '../utils';
+import { deviceColorsSupported, isWeb } from "../utils";
 
-import { PreferencesContext, useExampleTheme } from './';
+import { PreferencesContext, useExampleTheme } from "./";
 
 const DrawerItemsData = [
   {
-    label: 'Inbox',
-    icon: 'inbox',
+    label: "Inbox",
+    icon: "inbox",
     key: 0,
     right: () => <Text variant="labelLarge">44</Text>,
   },
   {
-    label: 'Starred',
-    icon: 'star',
+    label: "Starred",
+    icon: "star",
     key: 1,
     right: ({ color }: { color: string }) => (
       <Badge
@@ -36,11 +36,11 @@ const DrawerItemsData = [
       />
     ),
   },
-  { label: 'Sent mail', icon: 'send', key: 2 },
-  { label: 'Colored label', icon: 'palette', key: 3 },
+  { label: "Sent mail", icon: "send", key: 2 },
+  { label: "Colored label", icon: "palette", key: 3 },
   {
-    label: 'A very long title that will be truncated',
-    icon: 'delete',
+    label: "A very long title that will be truncated",
+    icon: "delete",
     key: 4,
     right: () => <Badge visible size={8} style={styles.badge} />,
   },
@@ -48,38 +48,38 @@ const DrawerItemsData = [
 
 const DrawerCollapsedItemsData = [
   {
-    label: 'Inbox',
-    focusedIcon: 'inbox',
-    unfocusedIcon: 'inbox-outline',
+    label: "Inbox",
+    focusedIcon: "inbox",
+    unfocusedIcon: "inbox-outline",
     key: 0,
     badge: 44,
   },
   {
-    label: 'Starred',
-    focusedIcon: 'star',
-    unfocusedIcon: 'star-outline',
+    label: "Starred",
+    focusedIcon: "star",
+    unfocusedIcon: "star-outline",
     key: 1,
   },
   {
-    label: 'Sent mail',
-    focusedIcon: 'send',
-    unfocusedIcon: 'send-outline',
+    label: "Sent mail",
+    focusedIcon: "send",
+    unfocusedIcon: "send-outline",
     key: 2,
   },
   {
-    label: 'A very long title that will be truncated',
-    focusedIcon: 'delete',
-    unfocusedIcon: 'delete-outline',
+    label: "A very long title that will be truncated",
+    focusedIcon: "delete",
+    unfocusedIcon: "delete-outline",
     key: 3,
   },
   {
-    label: 'Full width',
-    focusedIcon: 'arrow-all',
+    label: "Full width",
+    focusedIcon: "arrow-all",
     key: 4,
   },
   {
-    focusedIcon: 'bell',
-    unfocusedIcon: 'bell-outline',
+    focusedIcon: "bell",
+    unfocusedIcon: "bell-outline",
     key: 5,
     badge: true,
   },
@@ -92,9 +92,9 @@ function DrawerItems() {
   const _setDrawerItem = (index: number) => setDrawerItemIndex(index);
 
   const { isV3, colors } = useExampleTheme();
-  const isIOS = Platform.OS === 'ios';
+  const isIOS = Platform.OS === "ios";
 
-  if (!preferences) throw new Error('PreferencesContext not provided');
+  if (!preferences) throw new Error("PreferencesContext not provided");
 
   const {
     toggleShouldUseDeviceColors,
@@ -235,7 +235,7 @@ function DrawerItems() {
             <TouchableRipple onPress={toggleRippleEffect}>
               <View style={[styles.preference, isV3 && styles.v3Preference]}>
                 <Text variant="labelLarge">
-                  {isIOS ? 'Highlight' : 'Ripple'} effect *
+                  {isIOS ? "Highlight" : "Ripple"} effect *
                 </Text>
                 <View pointerEvents="none">
                   <Switch value={rippleEffectEnabled} />
@@ -249,8 +249,8 @@ function DrawerItems() {
             </Text>
           )}
           <Text variant="bodySmall" style={styles.annotation}>
-            React Native Paper Version{' '}
-            {require('react-native-paper/package.json').version}
+            React Native Paper Version{" "}
+            {require("react-native-paper/package.json").version}
           </Text>
         </>
       )}
@@ -263,9 +263,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   preference: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingVertical: 12,
     paddingHorizontal: 16,
   },
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 28,
   },
   badge: {
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   collapsedSection: {
     marginTop: 16,

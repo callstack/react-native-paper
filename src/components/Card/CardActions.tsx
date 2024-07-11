@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import * as React from "react";
+import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 
-import type { ThemeProp } from 'src/types';
+import type { ThemeProp } from "src/types";
 
-import { useInternalTheme } from '../../core/theming';
+import { useInternalTheme } from "../../core/theming";
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -36,7 +36,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  */
 const CardActions = (props: Props) => {
   const { isV3 } = useInternalTheme(props.theme);
-  const justifyContent = isV3 ? 'flex-end' : 'flex-start';
+  const justifyContent = isV3 ? "flex-end" : "flex-start";
 
   return (
     <View
@@ -49,7 +49,7 @@ const CardActions = (props: Props) => {
               compact: !isV3 && child.props.compact !== false,
               mode:
                 child.props.mode ||
-                (isV3 && (i === 0 ? 'outlined' : 'contained')),
+                (isV3 && (i === 0 ? "outlined" : "contained")),
               style: [isV3 && styles.button, child.props.style],
             })
           : child;
@@ -58,12 +58,12 @@ const CardActions = (props: Props) => {
   );
 };
 
-CardActions.displayName = 'Card.Actions';
+CardActions.displayName = "Card.Actions";
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: 8,
   },
   button: {

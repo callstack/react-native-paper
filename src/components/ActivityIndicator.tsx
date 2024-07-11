@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   Easing,
@@ -7,10 +7,10 @@ import {
   StyleSheet,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import { useInternalTheme } from '../core/theming';
-import type { ThemeProp } from '../types';
+import { useInternalTheme } from "../core/theming";
+import type { ThemeProp } from "../types";
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -24,7 +24,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Size of the indicator.
    */
-  size?: 'small' | 'large' | number;
+  size?: "small" | "large" | number;
   /**
    * Whether the indicator should hide when not animating.
    */
@@ -58,21 +58,21 @@ const ActivityIndicator = ({
   animating = true,
   color: indicatorColor,
   hidesWhenStopped = true,
-  size: indicatorSize = 'small',
+  size: indicatorSize = "small",
   style,
   theme: themeOverrides,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { current: timer } = React.useRef<Animated.Value>(
-    new Animated.Value(0)
+    new Animated.Value(0),
   );
   const { current: fade } = React.useRef<Animated.Value>(
-    new Animated.Value(!animating && hidesWhenStopped ? 0 : 1)
+    new Animated.Value(!animating && hidesWhenStopped ? 0 : 1),
   );
 
   const rotation = React.useRef<Animated.CompositeAnimation | undefined>(
-    undefined
+    undefined,
   );
 
   const {
@@ -109,7 +109,7 @@ const ActivityIndicator = ({
         duration: DURATION,
         easing: Easing.linear,
         // Animated.loop does not work if useNativeDriver is true on web
-        useNativeDriver: Platform.OS !== 'web',
+        useNativeDriver: Platform.OS !== "web",
         toValue: 1,
         isInteraction: false,
       });
@@ -132,20 +132,20 @@ const ActivityIndicator = ({
 
   const color = indicatorColor || theme.colors?.primary;
   const size =
-    typeof indicatorSize === 'string'
-      ? indicatorSize === 'small'
+    typeof indicatorSize === "string"
+      ? indicatorSize === "small"
         ? 24
         : 48
       : indicatorSize
-      ? indicatorSize
-      : 24;
+        ? indicatorSize
+        : 24;
 
   const frames = (60 * DURATION) / 1000;
   const easing = Easing.bezier(0.4, 0.0, 0.7, 1.0);
   const containerStyle = {
     width: size,
     height: size / 2,
-    overflow: 'hidden' as const,
+    overflow: "hidden" as const,
   };
 
   return (
@@ -164,7 +164,7 @@ const ActivityIndicator = ({
           // Thanks to https://github.com/n4kz/react-native-indicators for the great work
           const inputRange = Array.from(
             new Array(frames),
-            (_, frameIndex) => frameIndex / (frames - 1)
+            (_, frameIndex) => frameIndex / (frames - 1),
           );
           const outputRange = Array.from(new Array(frames), (_, frameIndex) => {
             let progress = (2 * frameIndex) / (frames - 1);
@@ -239,15 +239,15 @@ const ActivityIndicator = ({
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   layer: {
     ...StyleSheet.absoluteFillObject,
 
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

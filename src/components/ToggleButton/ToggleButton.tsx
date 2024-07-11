@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   GestureResponderEvent,
   StyleProp,
@@ -7,18 +7,18 @@ import {
   View,
   Animated,
   ColorValue,
-} from 'react-native';
+} from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import { ToggleButtonGroupContext } from './ToggleButtonGroup';
-import { getToggleButtonColor } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import { black, white } from '../../styles/themes/v2/colors';
-import type { ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
-import type { IconSource } from '../Icon';
-import IconButton from '../IconButton/IconButton';
+import { ToggleButtonGroupContext } from "./ToggleButtonGroup";
+import { getToggleButtonColor } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import { black, white } from "../../styles/themes/v2/colors";
+import type { ThemeProp } from "../../types";
+import { forwardRef } from "../../utils/forwardRef";
+import type { IconSource } from "../Icon";
+import IconButton from "../IconButton/IconButton";
 
 export type Props = {
   /**
@@ -56,7 +56,7 @@ export type Props = {
   /**
    * Status of button.
    */
-  status?: 'checked' | 'unchecked';
+  status?: "checked" | "unchecked";
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
@@ -114,7 +114,7 @@ const ToggleButton = forwardRef<View, Props>(
       rippleColor,
       ...rest
     }: Props,
-    ref
+    ref,
   ) => {
     const theme = useInternalTheme(themeOverrides);
     const borderRadius = theme.roundness;
@@ -122,10 +122,10 @@ const ToggleButton = forwardRef<View, Props>(
     return (
       <ToggleButtonGroupContext.Consumer>
         {(
-          context: { value: string | null; onValueChange: Function } | null
+          context: { value: string | null; onValueChange: Function } | null,
         ) => {
           const checked: boolean | null =
-            (context && context.value === value) || status === 'checked';
+            (context && context.value === value) || status === "checked";
 
           const backgroundColor = getToggleButtonColor({ theme, checked });
           const borderColor = theme.isV3
@@ -170,7 +170,7 @@ const ToggleButton = forwardRef<View, Props>(
         }}
       </ToggleButtonGroupContext.Consumer>
     );
-  }
+  },
 );
 
 const styles = StyleSheet.create({

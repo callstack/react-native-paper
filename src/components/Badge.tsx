@@ -1,16 +1,16 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   StyleProp,
   StyleSheet,
   TextStyle,
   useWindowDimensions,
-} from 'react-native';
+} from "react-native";
 
-import { useInternalTheme } from '../core/theming';
-import { black, white } from '../styles/themes/v2/colors';
-import type { ThemeProp } from '../types';
-import getContrastingColor from '../utils/getContrastingColor';
+import { useInternalTheme } from "../core/theming";
+import { black, white } from "../styles/themes/v2/colors";
+import type { ThemeProp } from "../types";
+import getContrastingColor from "../utils/getContrastingColor";
 
 const defaultSize = 20;
 
@@ -61,7 +61,7 @@ const Badge = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { current: opacity } = React.useRef<Animated.Value>(
-    new Animated.Value(visible ? 1 : 0)
+    new Animated.Value(visible ? 1 : 0),
   );
   const { fontScale } = useWindowDimensions();
 
@@ -130,9 +130,9 @@ export default Badge;
 
 const styles = StyleSheet.create({
   container: {
-    alignSelf: 'flex-end',
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    overflow: 'hidden',
+    alignSelf: "flex-end",
+    textAlign: "center",
+    textAlignVertical: "center",
+    overflow: "hidden",
   },
 });

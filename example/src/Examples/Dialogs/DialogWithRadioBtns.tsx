@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
+import * as React from "react";
+import { ScrollView, View, StyleSheet } from "react-native";
 
 import {
   Button,
@@ -7,19 +7,19 @@ import {
   Dialog,
   RadioButton,
   TouchableRipple,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-import { TextComponent } from './DialogTextComponent';
+import { TextComponent } from "./DialogTextComponent";
 
 type Props = {
   visible: boolean;
   close: () => void;
 };
 
-type CheckedState = 'normal' | 'first' | 'second' | 'third' | 'fourth';
+type CheckedState = "normal" | "first" | "second" | "third" | "fourth";
 
 const DialogWithRadioBtns = ({ visible, close }: Props) => {
-  const [checked, setChecked] = React.useState<CheckedState>('normal');
+  const [checked, setChecked] = React.useState<CheckedState>("normal");
 
   return (
     <Portal>
@@ -28,12 +28,12 @@ const DialogWithRadioBtns = ({ visible, close }: Props) => {
         <Dialog.ScrollArea style={styles.container}>
           <ScrollView>
             <View>
-              <TouchableRipple onPress={() => setChecked('normal')}>
+              <TouchableRipple onPress={() => setChecked("normal")}>
                 <View style={styles.row}>
                   <View pointerEvents="none">
                     <RadioButton
                       value="normal"
-                      status={checked === 'normal' ? 'checked' : 'unchecked'}
+                      status={checked === "normal" ? "checked" : "unchecked"}
                     />
                   </View>
                   <TextComponent isSubheading style={styles.text}>
@@ -41,12 +41,12 @@ const DialogWithRadioBtns = ({ visible, close }: Props) => {
                   </TextComponent>
                 </View>
               </TouchableRipple>
-              <TouchableRipple onPress={() => setChecked('second')}>
+              <TouchableRipple onPress={() => setChecked("second")}>
                 <View style={styles.row}>
                   <View pointerEvents="none">
                     <RadioButton
                       value="second"
-                      status={checked === 'second' ? 'checked' : 'unchecked'}
+                      status={checked === "second" ? "checked" : "unchecked"}
                     />
                   </View>
                   <TextComponent isSubheading style={styles.text}>
@@ -54,12 +54,12 @@ const DialogWithRadioBtns = ({ visible, close }: Props) => {
                   </TextComponent>
                 </View>
               </TouchableRipple>
-              <TouchableRipple onPress={() => setChecked('third')}>
+              <TouchableRipple onPress={() => setChecked("third")}>
                 <View style={styles.row}>
                   <View pointerEvents="none">
                     <RadioButton
                       value="third"
-                      status={checked === 'third' ? 'checked' : 'unchecked'}
+                      status={checked === "third" ? "checked" : "unchecked"}
                     />
                   </View>
                   <TextComponent isSubheading style={styles.text}>
@@ -67,12 +67,12 @@ const DialogWithRadioBtns = ({ visible, close }: Props) => {
                   </TextComponent>
                 </View>
               </TouchableRipple>
-              <TouchableRipple onPress={() => setChecked('fourth')}>
+              <TouchableRipple onPress={() => setChecked("fourth")}>
                 <View style={styles.row}>
                   <View pointerEvents="none">
                     <RadioButton
                       value="fourth"
-                      status={checked === 'fourth' ? 'checked' : 'unchecked'}
+                      status={checked === "fourth" ? "checked" : "unchecked"}
                     />
                   </View>
                   <TextComponent isSubheading style={styles.text}>
@@ -100,8 +100,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 0,
   },
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 16,
     paddingVertical: 8,
   },

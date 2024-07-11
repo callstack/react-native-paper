@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import * as React from "react";
+import { StyleSheet } from "react-native";
 
-import { render } from '@testing-library/react-native';
+import { render } from "@testing-library/react-native";
 
-import ListImage from '../List/ListImage';
+import ListImage from "../List/ListImage";
 
 const styles = StyleSheet.create({
   image: {
@@ -21,49 +21,49 @@ const styles = StyleSheet.create({
   },
 });
 
-const testID = 'list-image';
+const testID = "list-image";
 
-it('renders ListImage with default variant', () => {
+it("renders ListImage with default variant", () => {
   const tree = render(
     <ListImage
-      source={require('../../../example/assets/images/strawberries.jpg')}
-    />
+      source={require("../../../example/assets/images/strawberries.jpg")}
+    />,
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders ListImage with default variant & styles', () => {
+it("renders ListImage with default variant & styles", () => {
   const tree = render(
     <ListImage
-      source={require('../../../example/assets/images/strawberries.jpg')}
+      source={require("../../../example/assets/images/strawberries.jpg")}
       style={styles.container}
-    />
+    />,
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders ListImage with `image` variant', () => {
+it("renders ListImage with `image` variant", () => {
   const tree = render(
     <ListImage
       variant="image"
-      source={{ uri: 'https://www.someurl.com/apple' }}
-    />
+      source={{ uri: "https://www.someurl.com/apple" }}
+    />,
   );
 
-  expect(tree.container.props['variant']).toBe('image');
+  expect(tree.container.props["variant"]).toBe("image");
   expect(tree.getByTestId(testID)).toHaveStyle(styles.image);
 });
 
-it('renders ListImage with `video` variant', () => {
+it("renders ListImage with `video` variant", () => {
   const tree = render(
     <ListImage
       variant="video"
-      source={{ uri: 'https://www.someurl.com/apple' }}
-    />
+      source={{ uri: "https://www.someurl.com/apple" }}
+    />,
   );
 
-  expect(tree.container.props['variant']).toBe('video');
+  expect(tree.container.props["variant"]).toBe("video");
   expect(tree.getByTestId(testID)).toHaveStyle(styles.video);
 });

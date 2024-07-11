@@ -1,6 +1,6 @@
-import color from 'color';
+import color from "color";
 
-import type { InternalTheme } from '../../../types';
+import type { InternalTheme } from "../../../types";
 
 type BaseProps = {
   theme: InternalTheme;
@@ -29,7 +29,7 @@ export function getIconColor({
   isTextInputFocused: boolean;
   customColor?: ((isTextInputFocused: boolean) => string | undefined) | string;
 }) {
-  if (typeof customColor === 'function') {
+  if (typeof customColor === "function") {
     return customColor(isTextInputFocused);
   }
   if (customColor) {

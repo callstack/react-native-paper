@@ -1,15 +1,15 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   StyleSheet,
   StyleProp,
   ViewStyle,
   TextStyle,
   GestureResponderEvent,
-} from 'react-native';
+} from "react-native";
 
-import type { $RemoveChildren } from '../../types';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
+import type { $RemoveChildren } from "../../types";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
+import Text from "../Typography/Text";
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -97,7 +97,7 @@ const CellContent = ({
   testID,
 }: Pick<
   Props,
-  'children' | 'textStyle' | 'testID' | 'maxFontSizeMultiplier'
+  "children" | "textStyle" | "testID" | "maxFontSizeMultiplier"
 >) => {
   if (React.isValidElement(children)) {
     return children;
@@ -115,17 +115,17 @@ const CellContent = ({
   );
 };
 
-DataTableCell.displayName = 'DataTable.Cell';
+DataTableCell.displayName = "DataTable.Cell";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
 
   right: {
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
 });
 

@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { Animated, I18nManager, StyleSheet, TextStyle } from 'react-native';
+import * as React from "react";
+import { Animated, I18nManager, StyleSheet, TextStyle } from "react-native";
 
-import type { VariantProp } from './types';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { VariantProp } from "./types";
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp } from "../../types";
 
 type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
   /**
@@ -40,15 +40,15 @@ function AnimatedText({
   ...rest
 }: Props<never>) {
   const theme = useInternalTheme(themeOverrides);
-  const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
+  const writingDirection = I18nManager.getConstants().isRTL ? "rtl" : "ltr";
 
   if (theme.isV3 && variant) {
     const font = theme.fonts[variant];
-    if (typeof font !== 'object') {
+    if (typeof font !== "object") {
       throw new Error(
         `Variant ${variant} was not provided properly. Valid variants are ${Object.keys(
-          theme.fonts
-        ).join(', ')}.`
+          theme.fonts,
+        ).join(", ")}.`,
       );
     }
 
@@ -87,7 +87,7 @@ function AnimatedText({
 
 const styles = StyleSheet.create({
   text: {
-    textAlign: 'left',
+    textAlign: "left",
   },
 });
 

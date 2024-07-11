@@ -1,10 +1,10 @@
-import type { ViewStyle } from 'react-native';
+import type { ViewStyle } from "react-native";
 
-import { splitStyles } from '../splitStyles';
+import { splitStyles } from "../splitStyles";
 
-describe('splitStyles', () => {
+describe("splitStyles", () => {
   const styles: Readonly<ViewStyle> = Object.freeze({
-    backgroundColor: 'red',
+    backgroundColor: "red",
     marginTop: 1,
     marginBottom: 2,
     marginLeft: 3,
@@ -14,17 +14,17 @@ describe('splitStyles', () => {
     right: 4,
   });
 
-  it('splits margins, paddings, and border radiuses correctly', () => {
-    const marginPredicate = (style: string) => style.startsWith('margin');
-    const paddingPredicate = (style: string) => style.startsWith('padding');
+  it("splits margins, paddings, and border radiuses correctly", () => {
+    const marginPredicate = (style: string) => style.startsWith("margin");
+    const paddingPredicate = (style: string) => style.startsWith("padding");
     const borderRadiusPredicate = (style: string) =>
-      style.startsWith('border') && style.endsWith('Radius');
+      style.startsWith("border") && style.endsWith("Radius");
     const [filteredStyles, marginStyles, paddingStyles, borderRadiusStyles] =
       splitStyles(
         styles,
         marginPredicate,
         paddingPredicate,
-        borderRadiusPredicate
+        borderRadiusPredicate,
       );
 
     expect(keysLength(filteredStyles)).toBeGreaterThan(0);
@@ -51,26 +51,26 @@ describe('splitStyles', () => {
     }
   });
 
-  it('filtered styles is an empty object if all styles matched some predicate', () => {
+  it("filtered styles is an empty object if all styles matched some predicate", () => {
     const styles = {
       margin: 5,
       padding: 6,
     };
     const [filteredStyles] = splitStyles(
       styles,
-      (style) => style.startsWith('margin'),
-      (style) => style.startsWith('padding')
+      (style) => style.startsWith("margin"),
+      (style) => style.startsWith("padding"),
     );
 
     expect(keysLength(filteredStyles)).toBe(0);
   });
 
-  it('processes predicates in order', () => {
+  it("processes predicates in order", () => {
     const [, marginStyles, marginStyles2, marginStyles3] = splitStyles(
       styles,
-      (style) => style.startsWith('margin'),
-      (style) => style.startsWith('margin'),
-      (style) => style.startsWith('margin')
+      (style) => style.startsWith("margin"),
+      (style) => style.startsWith("margin"),
+      (style) => style.startsWith("margin"),
     );
 
     expect(keysLength(marginStyles)).toBeGreaterThan(0);

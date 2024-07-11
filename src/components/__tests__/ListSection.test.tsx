@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import * as React from "react";
+import { StyleSheet } from "react-native";
 
-import { render } from '@testing-library/react-native';
+import { render } from "@testing-library/react-native";
 
-import { red500 } from '../../styles/themes/v2/colors';
-import ListIcon from '../List/ListIcon';
-import ListItem from '../List/ListItem';
-import ListSection from '../List/ListSection';
-import ListSubheader from '../List/ListSubheader';
+import { red500 } from "../../styles/themes/v2/colors";
+import ListIcon from "../List/ListIcon";
+import ListItem from "../List/ListItem";
+import ListSection from "../List/ListSection";
+import ListSubheader from "../List/ListSubheader";
 
 const styles = StyleSheet.create({
   itemColor: {
@@ -15,9 +15,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const testID = 'list-item';
+const testID = "list-item";
 
-it('renders list section without subheader', () => {
+it("renders list section without subheader", () => {
   const tree = render(
     <ListSection>
       <ListItem
@@ -30,13 +30,13 @@ it('renders list section without subheader', () => {
         testID={testID}
         left={(props) => <ListIcon {...props} icon="folder" />}
       />
-    </ListSection>
+    </ListSection>,
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders list section with subheader', () => {
+it("renders list section with subheader", () => {
   const tree = render(
     <ListSection>
       <ListSubheader>Some title</ListSubheader>
@@ -50,13 +50,13 @@ it('renders list section with subheader', () => {
         testID={testID}
         left={(props) => <ListIcon {...props} icon="folder" />}
       />
-    </ListSection>
+    </ListSection>,
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders list section with custom title style', () => {
+it("renders list section with custom title style", () => {
   const tree = render(
     <ListSection title="Some title" titleStyle={styles.itemColor}>
       <ListItem
@@ -69,7 +69,7 @@ it('renders list section with custom title style', () => {
         testID={testID}
         left={(props) => <ListIcon {...props} icon="folder" />}
       />
-    </ListSection>
+    </ListSection>,
   ).toJSON();
 
   expect(tree).toMatchSnapshot();

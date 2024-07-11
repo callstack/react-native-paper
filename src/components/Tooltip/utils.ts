@@ -1,4 +1,4 @@
-import { Dimensions, LayoutRectangle, ViewStyle } from 'react-native';
+import { Dimensions, LayoutRectangle, ViewStyle } from "react-native";
 
 type ChildrenMeasurement = {
   width: number;
@@ -28,7 +28,7 @@ const overflowLeft = (center: number): boolean => {
  * The tooltip width will grow from right to left relative to the wrapped element.
  */
 const overflowRight = (center: number, tooltipWidth: number): boolean => {
-  const { width: layoutWidth } = Dimensions.get('window');
+  const { width: layoutWidth } = Dimensions.get("window");
 
   return center + tooltipWidth > layoutWidth;
 };
@@ -40,16 +40,16 @@ const overflowRight = (center: number, tooltipWidth: number): boolean => {
 const overflowBottom = (
   childrenY: number,
   childrenHeight: number,
-  tooltipHeight: number
+  tooltipHeight: number,
 ): boolean => {
-  const { height: layoutHeight } = Dimensions.get('window');
+  const { height: layoutHeight } = Dimensions.get("window");
 
   return childrenY + childrenHeight + tooltipHeight > layoutHeight;
 };
 
 const getTooltipXPosition = (
   { pageX: childrenX, width: childrenWidth }: ChildrenMeasurement,
-  { width: tooltipWidth }: TooltipLayout
+  { width: tooltipWidth }: TooltipLayout,
 ): number => {
   // when the children use position absolute the childrenWidth is measured as 0,
   // so it's best to anchor the tooltip at the start of the children
@@ -68,7 +68,7 @@ const getTooltipXPosition = (
 
 const getTooltipYPosition = (
   { pageY: childrenY, height: childrenHeight }: ChildrenMeasurement,
-  { height: tooltipHeight }: TooltipLayout
+  { height: tooltipHeight }: TooltipLayout,
 ): number => {
   if (overflowBottom(childrenY, childrenHeight, tooltipHeight))
     return childrenY - tooltipHeight;
@@ -78,29 +78,29 @@ const getTooltipYPosition = (
 
 const getChildrenMeasures = (
   style: ViewStyle | Array<ViewStyle>,
-  measures: ChildrenMeasurement
+  measures: ChildrenMeasurement,
 ): ChildrenMeasurement => {
   const { position, top, bottom, left, right } = Array.isArray(style)
     ? style.reduce((acc, current) => ({ ...acc, ...current }))
     : style;
 
-  if (position === 'absolute') {
+  if (position === "absolute") {
     let pageX = 0;
     let pageY = measures.pageY;
     let height = 0;
     let width = 0;
-    if (typeof left === 'number') {
+    if (typeof left === "number") {
       pageX = left;
       width = 0;
     }
-    if (typeof right === 'number') {
+    if (typeof right === "number") {
       pageX = measures.width - right;
       width = 0;
     }
-    if (typeof top === 'number') {
+    if (typeof top === "number") {
       pageY = pageY + top;
     }
-    if (typeof bottom === 'number') {
+    if (typeof bottom === "number") {
       pageY = pageY - bottom;
     }
 
@@ -114,7 +114,7 @@ export const getTooltipPosition = (
   { children, tooltip, measured }: Measurement,
   component: React.ReactElement<{
     style: ViewStyle | Array<ViewStyle> | undefined | null;
-  }>
+  }>,
 ): {} | { left: number; top: number } => {
   if (!measured) return {};
   let measures = children;

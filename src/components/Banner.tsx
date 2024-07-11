@@ -1,19 +1,19 @@
-import * as React from 'react';
-import { Animated, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
-import type { LayoutChangeEvent } from 'react-native';
+import * as React from "react";
+import { Animated, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import type { LayoutChangeEvent } from "react-native";
 
-import useLatestCallback from 'use-latest-callback';
+import useLatestCallback from "use-latest-callback";
 
-import Button from './Button/Button';
-import Icon, { IconSource } from './Icon';
-import Surface from './Surface';
-import Text from './Typography/Text';
-import { useInternalTheme } from '../core/theming';
-import type { $Omit, $RemoveChildren, ThemeProp } from '../types';
+import Button from "./Button/Button";
+import Icon, { IconSource } from "./Icon";
+import Surface from "./Surface";
+import Text from "./Typography/Text";
+import { useInternalTheme } from "../core/theming";
+import type { $Omit, $RemoveChildren, ThemeProp } from "../types";
 
 const DEFAULT_MAX_WIDTH = 960;
 
-export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
+export type Props = $Omit<$RemoveChildren<typeof Surface>, "mode"> & {
   /**
    * Whether banner is currently visible.
    */
@@ -132,7 +132,7 @@ const Banner = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { current: position } = React.useRef<Animated.Value>(
-    new Animated.Value(visible ? 1 : 0)
+    new Animated.Value(visible ? 1 : 0),
   );
   const [layout, setLayout] = React.useState<{
     height: number;
@@ -187,7 +187,7 @@ const Banner = ({
 
   const translateY = Animated.multiply(
     Animated.add(position, -1),
-    layout.height
+    layout.height,
   );
   return (
     <Surface
@@ -229,7 +229,7 @@ const Banner = ({
                     : theme.colors.text,
                 },
               ]}
-              accessibilityLiveRegion={visible ? 'polite' : 'none'}
+              accessibilityLiveRegion={visible ? "polite" : "none"}
               accessibilityRole="alert"
               maxFontSizeMultiplier={maxFontSizeMultiplier}
             >
@@ -259,19 +259,19 @@ const Banner = ({
 
 const styles = StyleSheet.create({
   wrapper: {
-    overflow: 'hidden',
-    alignSelf: 'center',
-    width: '100%',
+    overflow: "hidden",
+    alignSelf: "center",
+    width: "100%",
     maxWidth: DEFAULT_MAX_WIDTH,
   },
   absolute: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
-    width: '100%',
+    width: "100%",
   },
   content: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
+    flexDirection: "row",
+    justifyContent: "flex-start",
     marginHorizontal: 8,
     marginTop: 16,
     marginBottom: 0,
@@ -284,8 +284,8 @@ const styles = StyleSheet.create({
     margin: 8,
   },
   actions: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+    flexDirection: "row",
+    justifyContent: "flex-end",
     margin: 4,
   },
   button: {

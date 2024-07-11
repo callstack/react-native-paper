@@ -1,20 +1,20 @@
-import type { ComponentType } from 'react';
+import type { ComponentType } from "react";
 
-import { $DeepPartial, createTheming } from '@callstack/react-theme-provider';
-import color from 'color';
+import { $DeepPartial, createTheming } from "@callstack/react-theme-provider";
+import color from "color";
 
 import {
   MD2DarkTheme,
   MD2LightTheme,
   MD3DarkTheme,
   MD3LightTheme,
-} from '../styles/themes';
+} from "../styles/themes";
 import type {
   InternalTheme,
   MD3Theme,
   MD3AndroidColors,
   NavigationTheme,
-} from '../types';
+} from "../types";
 
 export const DefaultTheme = MD3LightTheme;
 
@@ -29,11 +29,11 @@ export function useTheme<T = MD3Theme>(overrides?: $DeepPartial<T>) {
 }
 
 export const useInternalTheme = (
-  themeOverrides: $DeepPartial<InternalTheme> | undefined
+  themeOverrides: $DeepPartial<InternalTheme> | undefined,
 ) => useAppTheme<InternalTheme>(themeOverrides);
 
 export const withInternalTheme = <Props extends { theme: InternalTheme }, C>(
-  WrappedComponent: ComponentType<Props & { theme: InternalTheme }> & C
+  WrappedComponent: ComponentType<Props & { theme: InternalTheme }> & C,
 ) => withTheme<Props, C>(WrappedComponent);
 
 export const defaultThemesByVersion = {
@@ -49,15 +49,15 @@ export const defaultThemesByVersion = {
 
 export const getTheme = <
   Scheme extends boolean = false,
-  IsVersion3 extends boolean = true
+  IsVersion3 extends boolean = true,
 >(
   isDark: Scheme = false as Scheme,
-  isV3: IsVersion3 = true as IsVersion3
+  isV3: IsVersion3 = true as IsVersion3,
 ): (typeof defaultThemesByVersion)[IsVersion3 extends true
   ? 3
-  : 2][Scheme extends true ? 'dark' : 'light'] => {
+  : 2][Scheme extends true ? "dark" : "light"] => {
   const themeVersion = isV3 ? 3 : 2;
-  const scheme = isDark ? 'dark' : 'light';
+  const scheme = isDark ? "dark" : "light";
 
   return defaultThemesByVersion[themeVersion][scheme];
 };
@@ -94,7 +94,7 @@ export function adaptNavigationTheme(themes: any) {
 
   const getAdaptedTheme = (
     navigationTheme: NavigationTheme,
-    MD3Theme: MD3Theme
+    MD3Theme: MD3Theme,
   ) => {
     return {
       ...navigationTheme,
@@ -116,7 +116,7 @@ export function adaptNavigationTheme(themes: any) {
   };
 
   if (reactNavigationLight && reactNavigationDark) {
-    const modes = ['light', 'dark'] as const;
+    const modes = ["light", "dark"] as const;
 
     const NavigationThemes = {
       light: reactNavigationLight,
@@ -133,7 +133,7 @@ export function adaptNavigationTheme(themes: any) {
       {
         light: reactNavigationLight,
         dark: reactNavigationDark,
-      }
+      },
     );
 
     return {
@@ -154,7 +154,7 @@ export function adaptNavigationTheme(themes: any) {
 }
 
 export const getDynamicThemeElevations = (scheme: MD3AndroidColors) => {
-  const elevationValues = ['transparent', 0.05, 0.08, 0.11, 0.12, 0.14];
+  const elevationValues = ["transparent", 0.05, 0.08, 0.11, 0.12, 0.14];
   return elevationValues.reduce((elevations, elevationValue, index) => {
     return {
       ...elevations,

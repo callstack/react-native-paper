@@ -1,17 +1,17 @@
-import * as React from 'react';
-import { GestureResponderEvent, StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { GestureResponderEvent, StyleSheet, View } from "react-native";
 
-import { getSelectionControlIOSColor } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import { getSelectionControlIOSColor } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { $RemoveChildren, ThemeProp } from "../../types";
+import MaterialCommunityIcon from "../MaterialCommunityIcon";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Status of checkbox.
    */
-  status: 'checked' | 'unchecked' | 'indeterminate';
+  status: "checked" | "unchecked" | "indeterminate";
   /**
    * Whether checkbox is disabled.
    */
@@ -50,8 +50,8 @@ const CheckboxIOS = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const checked = status === 'checked';
-  const indeterminate = status === 'indeterminate';
+  const checked = status === "checked";
+  const indeterminate = status === "indeterminate";
 
   const { checkedColor, rippleColor } = getSelectionControlIOSColor({
     theme,
@@ -59,7 +59,7 @@ const CheckboxIOS = ({
     customColor: rest.color,
   });
 
-  const icon = indeterminate ? 'minus' : 'check';
+  const icon = indeterminate ? "minus" : "check";
   const opacity = indeterminate || checked ? 1 : 0;
 
   return (
@@ -89,7 +89,7 @@ const CheckboxIOS = ({
   );
 };
 
-CheckboxIOS.displayName = 'Checkbox.IOS';
+CheckboxIOS.displayName = "Checkbox.IOS";
 
 const styles = StyleSheet.create({
   container: {

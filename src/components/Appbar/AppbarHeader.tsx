@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   ColorValue,
@@ -7,20 +7,20 @@ import {
   StyleSheet,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { Appbar } from './Appbar';
+import { Appbar } from "./Appbar";
 import {
   DEFAULT_APPBAR_HEIGHT,
   getAppbarBackgroundColor,
   modeAppbarHeight,
   getAppbarBorders,
-} from './utils';
-import { useInternalTheme } from '../../core/theming';
-import shadow from '../../styles/shadow';
-import type { ThemeProp } from '../../types';
+} from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import shadow from "../../styles/shadow";
+import type { ThemeProp } from "../../types";
 
 export type Props = React.ComponentProps<typeof Appbar> & {
   /**
@@ -47,7 +47,7 @@ export type Props = React.ComponentProps<typeof Appbar> & {
    * - `large` - Appbar with large height (152).
    * - `center-aligned` - Appbar with default height and center-aligned title.
    */
-  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
+  mode?: "small" | "medium" | "large" | "center-aligned";
   /**
    * @supported Available in v5.x with theme version 3
    * Whether Appbar background should have the elevation along with primary color pigment.
@@ -94,10 +94,10 @@ const AppbarHeader = ({
   statusBarHeight,
   style,
   dark,
-  mode = Platform.OS === 'ios' ? 'center-aligned' : 'small',
+  mode = Platform.OS === "ios" ? "center-aligned" : "small",
   elevated = false,
   theme: themeOverrides,
-  testID = 'appbar-header',
+  testID = "appbar-header",
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -123,7 +123,7 @@ const AppbarHeader = ({
     theme,
     elevation,
     customBackground,
-    elevated
+    elevated,
   );
 
   const { top, left, right } = useSafeAreaInsets();
@@ -157,7 +157,7 @@ const AppbarHeader = ({
   );
 };
 
-AppbarHeader.displayName = 'Appbar.Header';
+AppbarHeader.displayName = "Appbar.Header";
 
 const styles = StyleSheet.create({
   appbar: {

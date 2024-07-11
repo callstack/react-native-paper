@@ -1,5 +1,5 @@
-import FABComponent from './FAB';
-import FABGroup from './FABGroup';
+import FABComponent from "./FAB";
+import FABGroup from "./FABGroup";
 
 const FAB = Object.assign(
   // @component ./FAB.tsx
@@ -7,7 +7,7 @@ const FAB = Object.assign(
   {
     // @component ./FABGroup.tsx
     Group: FABGroup,
-  }
+  },
 );
 
 export default FAB;

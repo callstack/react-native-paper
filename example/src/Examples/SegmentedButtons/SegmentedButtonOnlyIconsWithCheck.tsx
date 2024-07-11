@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import * as React from "react";
+import { StyleSheet } from "react-native";
 
-import { List, SegmentedButtons } from 'react-native-paper';
+import { List, SegmentedButtons } from "react-native-paper";
 
 const SegmentedButtonOnlyIconsWithCheck = () => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState("");
 
   return (
     <List.Section title={`Segmented Button - icons + show selected check`}>
@@ -14,18 +14,18 @@ const SegmentedButtonOnlyIconsWithCheck = () => {
         value={value}
         buttons={[
           {
-            icon: 'walk',
-            value: 'walk',
+            icon: "walk",
+            value: "walk",
             showSelectedCheck: true,
           },
           {
-            icon: 'train',
-            value: 'transit',
+            icon: "train",
+            value: "transit",
             showSelectedCheck: true,
           },
           {
-            icon: 'car',
-            value: 'drive',
+            icon: "car",
+            value: "drive",
             showSelectedCheck: true,
           },
         ]}
@@ -35,7 +35,7 @@ const SegmentedButtonOnlyIconsWithCheck = () => {
 };
 
 const styles = StyleSheet.create({
-  group: { paddingHorizontal: 20, justifyContent: 'center' },
+  group: { paddingHorizontal: 20, justifyContent: "center" },
 });
 
 export default SegmentedButtonOnlyIconsWithCheck;

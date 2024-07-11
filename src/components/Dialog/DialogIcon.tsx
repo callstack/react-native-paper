@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { StyleSheet, View } from "react-native";
 
-import type { ThemeProp } from 'src/types';
+import type { ThemeProp } from "src/types";
 
-import { useInternalTheme } from '../../core/theming';
-import Icon, { IconSource } from '../Icon';
+import { useInternalTheme } from "../../core/theming";
+import Icon, { IconSource } from "../Icon";
 
 export type Props = {
   /**
@@ -84,12 +84,12 @@ const DialogIcon = ({
   );
 };
 
-DialogIcon.displayName = 'Dialog.Icon';
+DialogIcon.displayName = "Dialog.Icon";
 
 const styles = StyleSheet.create({
   wrapper: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingTop: 24,
   },
 });

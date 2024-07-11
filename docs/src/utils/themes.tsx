@@ -2,9 +2,9 @@ import {
   argbFromHex,
   themeFromSourceColor,
   //@ts-ignore
-} from '@material/material-color-utilities';
-import camelCase from 'camelcase';
-import Color from 'color';
+} from "@material/material-color-utilities";
+import camelCase from "camelcase";
+import Color from "color";
 
 type ARGBTheme = ReturnType<typeof argbThemeFromColor>;
 type CSSTheme = Record<keyof ARGBTheme, string>;
@@ -16,7 +16,7 @@ type RGBColorList = {
   custom?: [string, string][];
 };
 
-type CustomTheme = RGBColorList & { type: 'light' | 'dark' };
+type CustomTheme = RGBColorList & { type: "light" | "dark" };
 
 const opacity = {
   level1: 0.08,
@@ -28,21 +28,21 @@ const opacity = {
 const elevationLevels = [0.05, 0.08, 0.11, 0.12, 0.14];
 
 const nonMaterialCore = [
-  'elevation',
-  'shadow',
-  'scrim',
-  'inverseSurface',
-  'inverseOnSurface',
-  'surfaceDisabled',
-  'onSurfaceDisabled',
-  'outlineVariant',
-  'backdrop',
-  'inversePrimary',
+  "elevation",
+  "shadow",
+  "scrim",
+  "inverseSurface",
+  "inverseOnSurface",
+  "surfaceDisabled",
+  "onSurfaceDisabled",
+  "outlineVariant",
+  "backdrop",
+  "inversePrimary",
 ];
 
 const argbThemeFromColor = (
   color: string,
-  type: 'light' | 'dark' = 'light'
+  type: "light" | "dark" = "light",
 ) => {
   return themeFromSourceColor(argbFromHex(color)).schemes[type].toJSON();
 };
@@ -50,7 +50,7 @@ const argbThemeFromColor = (
 const argbThemeToHexTheme = (theme: ARGBTheme) => {
   return Object.fromEntries(
     //@ts-ignore
-    Object.entries(theme).map(([key, value]) => [key, Color(value).hex()])
+    Object.entries(theme).map(([key, value]) => [key, Color(value).hex()]),
   ) as CSSTheme;
 };
 
@@ -61,13 +61,13 @@ const argbThemeToRgbTheme = (theme: ARGBTheme) => {
       key,
       //@ts-ignore
       Color(value).rgb().string(),
-    ])
+    ]),
   ) as CSSTheme;
 };
 
 export const hexThemeFromColor = (
   color: string,
-  type: 'light' | 'dark' = 'light'
+  type: "light" | "dark" = "light",
 ) => {
   return argbThemeToHexTheme(argbThemeFromColor(color, type));
 };
@@ -99,7 +99,7 @@ const prepareSurfaceColors = (argbTheme: ARGBTheme) => {
 
 const prepareElevations = (argbTheme: ARGBTheme) => {
   let elevations: Record<string, string> = {
-    level0: 'transparent',
+    level0: "transparent",
   };
 
   const { primary, surface } = argbTheme;
@@ -128,13 +128,13 @@ export const getPreviewColors = (theme: Record<string, any>) => {
 
 export const getMatchingColor = (
   colorName: string,
-  theme: Record<string, any>
+  theme: Record<string, any>,
 ) => {
-  if (colorName === 'outline') {
+  if (colorName === "outline") {
     return theme.surface;
   }
 
-  if (colorName.startsWith('on')) {
+  if (colorName.startsWith("on")) {
     const key = camelCase(colorName.slice(2));
     return theme[key];
   }
@@ -144,8 +144,8 @@ export const getMatchingColor = (
 };
 
 const prepareCustomColors = (
-  type: 'light' | 'dark',
-  custom?: [string, string][]
+  type: "light" | "dark",
+  custom?: [string, string][],
 ) => {
   if (!custom?.length) {
     return {};
@@ -210,12 +210,12 @@ export const prepareVariant = ({
 export const prepareThemes = (colors: RGBColorList) => {
   const light = prepareVariant({
     ...colors,
-    type: 'light',
+    type: "light",
   });
 
   const dark = prepareVariant({
     ...colors,
-    type: 'dark',
+    type: "dark",
   });
 
   return { light, dark };

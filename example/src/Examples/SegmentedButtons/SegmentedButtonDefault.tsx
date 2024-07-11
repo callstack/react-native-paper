@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import * as React from "react";
+import { StyleSheet } from "react-native";
 
-import { List, SegmentedButtons } from 'react-native-paper';
+import { List, SegmentedButtons } from "react-native-paper";
 
 const SegmentedButtonDefault = () => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState("");
 
   return (
     <List.Section title={`Segmented Button`}>
@@ -13,21 +13,21 @@ const SegmentedButtonDefault = () => {
         onValueChange={setValue}
         buttons={[
           {
-            value: 'walk',
-            icon: 'walk',
-            label: 'Walking',
+            value: "walk",
+            icon: "walk",
+            label: "Walking",
             style: styles.button,
           },
           {
-            value: 'train',
-            icon: 'train',
-            label: 'Transit',
+            value: "train",
+            icon: "train",
+            label: "Transit",
             style: styles.button,
           },
           {
-            value: 'drive',
-            icon: 'car',
-            label: 'Driving',
+            value: "drive",
+            icon: "car",
+            label: "Driving",
             style: styles.button,
           },
         ]}
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
   },
-  group: { paddingHorizontal: 20, justifyContent: 'center' },
+  group: { paddingHorizontal: 20, justifyContent: "center" },
 });
 
 export default SegmentedButtonDefault;

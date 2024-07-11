@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { Animated, StyleSheet, View } from "react-native";
 
-import { render, waitFor, screen } from '@testing-library/react-native';
+import { render, waitFor, screen } from "@testing-library/react-native";
 
-import { getTheme } from '../../core/theming';
-import { MD3Elevation } from '../../types';
-import Button from '../Button/Button';
-import Menu, { ELEVATION_LEVELS_MAP } from '../Menu/Menu';
-import Portal from '../Portal/Portal';
+import { getTheme } from "../../core/theming";
+import { MD3Elevation } from "../../types";
+import Button from "../Button/Button";
+import Menu, { ELEVATION_LEVELS_MAP } from "../Menu/Menu";
+import Portal from "../Portal/Portal";
 
 const styles = StyleSheet.create({
   contentStyle: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
 });
 
-it('renders visible menu', () => {
+it("renders visible menu", () => {
   const tree = render(
     <Portal.Host>
       <Menu
@@ -27,13 +27,13 @@ it('renders visible menu', () => {
         <Menu.Item onPress={jest.fn()} title="Undo" />
         <Menu.Item onPress={jest.fn()} title="Redo" />
       </Menu>
-    </Portal.Host>
+    </Portal.Host>,
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders not visible menu', () => {
+it("renders not visible menu", () => {
   const tree = render(
     <Portal.Host>
       <Menu
@@ -44,13 +44,13 @@ it('renders not visible menu', () => {
         <Menu.Item onPress={jest.fn()} title="Undo" />
         <Menu.Item onPress={jest.fn()} title="Redo" />
       </Menu>
-    </Portal.Host>
+    </Portal.Host>,
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders menu with content styles', () => {
+it("renders menu with content styles", () => {
   const tree = render(
     <Portal.Host>
       <Menu
@@ -62,7 +62,7 @@ it('renders menu with content styles', () => {
         <Menu.Item onPress={jest.fn()} title="Undo" />
         <Menu.Item onPress={jest.fn()} title="Redo" />
       </Menu>
-    </Portal.Host>
+    </Portal.Host>,
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -83,16 +83,16 @@ it('renders menu with content styles', () => {
           <Menu.Item onPress={jest.fn()} title="Undo" />
           <Menu.Item onPress={jest.fn()} title="Redo" />
         </Menu>
-      </Portal.Host>
+      </Portal.Host>,
     );
 
-    expect(getByTestId('menu-surface')).toHaveStyle({
+    expect(getByTestId("menu-surface")).toHaveStyle({
       backgroundColor: theme.colors.elevation[ELEVATION_LEVELS_MAP[elevation]],
     });
-  })
+  }),
 );
 
-it('uses the default anchorPosition of top', async () => {
+it("uses the default anchorPosition of top", async () => {
   function makeMenu(visible: boolean) {
     return (
       <Portal.Host>
@@ -116,7 +116,7 @@ it('uses the default anchorPosition of top', async () => {
   render(makeMenu(false));
 
   jest
-    .spyOn(View.prototype, 'measureInWindow')
+    .spyOn(View.prototype, "measureInWindow")
     .mockImplementation((fn) => fn(100, 100, 80, 32));
 
   // You must update instead of creating directly and using it because
@@ -126,16 +126,16 @@ it('uses the default anchorPosition of top', async () => {
   screen.update(makeMenu(true));
 
   await waitFor(() => {
-    const menu = screen.getByTestId('menu-view');
+    const menu = screen.getByTestId("menu-view");
     expect(menu).toHaveStyle({
-      position: 'absolute',
+      position: "absolute",
       left: 100,
       top: 100,
     });
   });
 });
 
-it('respects anchorPosition bottom', async () => {
+it("respects anchorPosition bottom", async () => {
   function makeMenu(visible: boolean) {
     return (
       <Portal.Host>
@@ -160,22 +160,22 @@ it('respects anchorPosition bottom', async () => {
   render(makeMenu(false));
 
   jest
-    .spyOn(View.prototype, 'measureInWindow')
+    .spyOn(View.prototype, "measureInWindow")
     .mockImplementation((fn) => fn(100, 100, 80, 32));
 
   screen.update(makeMenu(true));
 
   await waitFor(() => {
-    const menu = screen.getByTestId('menu-view');
+    const menu = screen.getByTestId("menu-view");
     expect(menu).toHaveStyle({
-      position: 'absolute',
+      position: "absolute",
       left: 100,
       top: 132,
     });
   });
 });
 
-it('animated value changes correctly', () => {
+it("animated value changes correctly", () => {
   const value = new Animated.Value(1);
   const { getByTestId } = render(
     <Portal.Host>
@@ -188,9 +188,9 @@ it('animated value changes correctly', () => {
       >
         <Menu.Item onPress={jest.fn()} title="Test" />
       </Menu>
-    </Portal.Host>
+    </Portal.Host>,
   );
-  expect(getByTestId('menu-surface-outer-layer')).toHaveStyle({
+  expect(getByTestId("menu-surface-outer-layer")).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -202,7 +202,7 @@ it('animated value changes correctly', () => {
 
   jest.advanceTimersByTime(200);
 
-  expect(getByTestId('menu-surface-outer-layer')).toHaveStyle({
+  expect(getByTestId("menu-surface-outer-layer")).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });

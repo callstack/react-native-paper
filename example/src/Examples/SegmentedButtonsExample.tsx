@@ -1,7 +1,7 @@
-import * as React from 'react';
+import * as React from "react";
 
-import type { StackNavigationProp } from '@react-navigation/stack';
-import { List } from 'react-native-paper';
+import type { StackNavigationProp } from "@react-navigation/stack";
+import { List } from "react-native-paper";
 
 import {
   SegmentedButtonDefault,
@@ -13,8 +13,8 @@ import {
   SegmentedButtonWithDensity,
   SegmentedButtonWithSelectedCheck,
   SegmentButtonCustomColorCheck,
-} from './SegmentedButtons';
-import ScreenWrapper from '../ScreenWrapper';
+} from "./SegmentedButtons";
+import ScreenWrapper from "../ScreenWrapper";
 
 type Props = {
   navigation: StackNavigationProp<{ [key: string]: undefined }>;
@@ -27,14 +27,14 @@ const SegmentedButtonExample = ({ navigation }: Props) => {
         <List.Item
           title="Single select"
           description="Go to the example"
-          onPress={() => navigation.navigate('segmentedButtonRealCase')}
+          onPress={() => navigation.navigate("segmentedButtonRealCase")}
           right={(props) => <List.Icon {...props} icon="arrow-right" />}
         />
         <List.Item
           title="Multiselect select"
           description="Go to the example"
           onPress={() =>
-            navigation.navigate('segmentedButtonMultiselectRealCase')
+            navigation.navigate("segmentedButtonMultiselectRealCase")
           }
           right={(props) => <List.Icon {...props} icon="arrow-right" />}
         />
@@ -52,6 +52,6 @@ const SegmentedButtonExample = ({ navigation }: Props) => {
   );
 };
 
-SegmentedButtonExample.title = 'Segmented Buttons';
+SegmentedButtonExample.title = "Segmented Buttons";
 
 export default SegmentedButtonExample;

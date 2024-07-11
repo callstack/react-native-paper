@@ -18,7 +18,7 @@
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
+[data-theme="dark"] {
   --ifm-color-primary: #cfbcff;
   --ifm-color-primary-dark: #af90ff;
   --ifm-color-primary-darker: #9f7aff;
@@ -33,7 +33,7 @@
   position: relative;
 }
 .nav-link::before {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   top: 0;
@@ -55,13 +55,13 @@
 }
 
 .nav-link::after {
-  content: '';
+  content: "";
   display: flex;
   height: 1.5rem;
   width: 1.5rem;
   background-repeat: no-repeat;
 }
-html[data-theme='dark'] .nav-link::after {
+html[data-theme="dark"] .nav-link::after {
   filter: invert(1);
 }
 .nav-discord-link::after {
@@ -79,7 +79,6 @@ html[data-theme='dark'] .nav-link::after {
 }
 
 .screenshots img,
-
 .tabScreenshot {
   max-width: 45%;
 }
@@ -88,7 +87,7 @@ html[data-theme='dark'] .nav-link::after {
   max-width: 40%;
 }
 
-.screenshots figure>img {
+.screenshots figure > img {
   max-width: 100%;
 }
 
@@ -102,14 +101,13 @@ html[data-theme='dark'] .nav-link::after {
   width: 33%;
 }
 
-
-html[data-theme='dark'] .gallery-dark,
-html[data-theme='light'] .gallery-light {
+html[data-theme="dark"] .gallery-dark,
+html[data-theme="light"] .gallery-light {
   display: block;
 }
 
-html[data-theme='dark'] .gallery-light,
-html[data-theme='light'] .gallery-dark {
+html[data-theme="dark"] .gallery-light,
+html[data-theme="light"] .gallery-dark {
   display: none;
 }
 
@@ -137,7 +135,7 @@ html[data-theme='light'] .gallery-dark {
 .icons-list-icon {
   display: block;
   margin: 16px;
-  font-family: 'MaterialCommunityIcons';
+  font-family: "MaterialCommunityIcons";
   font-size: 48px;
   color: var(--theme-text-color);
 }
@@ -183,8 +181,9 @@ html[data-theme='light'] .gallery-dark {
 }
 
 @font-face {
-  font-family: 'MaterialCommunityIcons';
-  src: url('../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf') format('truetype');
+  font-family: "MaterialCommunityIcons";
+  src: url("../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf")
+    format("truetype");
 }
 
 .badge:is(a .badge) {
@@ -212,8 +211,8 @@ a .badge .badge-text {
   background-color: rgba(0, 0, 0, 0.25);
 }
 
-[data-theme='dark'] .badge {
-  color: white
+[data-theme="dark"] .badge {
+  color: white;
 }
 
 .badge-supported {
@@ -261,7 +260,7 @@ a .badge .badge-text {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,.2);
+  background: rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -362,7 +361,6 @@ a .badge .badge-text {
   flex-direction: row;
   gap: 20px;
   margin-top: 20px;
-
 }
 .color-picker-themes > div {
   flex: 1 0 300px;
@@ -388,15 +386,17 @@ a .badge .badge-text {
 .color-picker-preview-box {
   padding: 6px 6px 18px 6px;
   font-size: 12px;
-  display:block;
+  display: block;
 }
 
-.color-picker-button:hover, .color-picker-button:focus,
-.color-picker-button-additional:hover, .color-picker-button-additional:focus,
-.color-picker-button-cancel:hover, .color-picker-button-cancel:focus{
+.color-picker-button:hover,
+.color-picker-button:focus,
+.color-picker-button-additional:hover,
+.color-picker-button-additional:focus,
+.color-picker-button-cancel:hover,
+.color-picker-button-cancel:focus {
   opacity: 0.8;
 }
-
 
 @media (max-width: 680px) {
   .showcase-gallery {
@@ -420,7 +420,6 @@ a .badge .badge-text {
     transform: translateY(-48px);
   }
 }
-
 
 .showcase-image {
   display: block;
@@ -482,11 +481,11 @@ a .badge .badge-text {
   background: grey;
   border-radius: 100px;
   position: relative;
-  transition: background-color .2s;
+  transition: background-color 0.2s;
 }
 
 .react-switch-label .react-switch-button {
-  content: '';
+  content: "";
   position: absolute;
   top: 2px;
   left: 2px;
@@ -498,7 +497,7 @@ a .badge .badge-text {
   box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
 }
 
-.react-switch-checkbox:checked+.react-switch-label .react-switch-button {
+.react-switch-checkbox:checked + .react-switch-label .react-switch-button {
   left: calc(100% - 2px);
   transform: translateX(-100%);
 }

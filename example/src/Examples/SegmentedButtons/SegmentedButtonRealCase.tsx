@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { FlatList, StyleSheet, View } from "react-native";
 
-import { Card, IconButton, SegmentedButtons } from 'react-native-paper';
+import { Card, IconButton, SegmentedButtons } from "react-native-paper";
 
-import { songsData, albumsData } from '../../../utils';
+import { songsData, albumsData } from "../../../utils";
 
 const SegmentedButtonRealCase = () => {
-  const [value, setValue] = React.useState('songs');
+  const [value, setValue] = React.useState("songs");
 
   return (
     <View style={styles.container}>
@@ -15,14 +15,14 @@ const SegmentedButtonRealCase = () => {
         onValueChange={setValue}
         buttons={[
           {
-            value: 'songs',
-            label: 'Songs',
+            value: "songs",
+            label: "Songs",
             style: styles.button,
             showSelectedCheck: true,
           },
           {
-            value: 'albums',
-            label: 'Albums',
+            value: "albums",
+            label: "Albums",
             style: styles.button,
             showSelectedCheck: true,
           },
@@ -30,7 +30,7 @@ const SegmentedButtonRealCase = () => {
         style={styles.group}
       />
       <FlatList
-        data={value === 'songs' ? songsData : albumsData}
+        data={value === "songs" ? songsData : albumsData}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.contentContainer}
         renderItem={({ item }) => {
@@ -43,7 +43,7 @@ const SegmentedButtonRealCase = () => {
                   subtitle={item.artist}
                   titleVariant="titleMedium"
                   style={styles.title}
-                  right={() => <IconButton icon={'bookmark-outline'} />}
+                  right={() => <IconButton icon={"bookmark-outline"} />}
                 />
               </Card.Content>
             </Card>
@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   content: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 0,
     paddingVertical: 0,
   },
@@ -85,11 +85,11 @@ const styles = StyleSheet.create({
   },
   group: {
     paddingHorizontal: 20,
-    justifyContent: 'center',
+    justifyContent: "center",
     paddingBottom: 8,
   },
 });
 
-SegmentedButtonRealCase.title = 'Music player';
+SegmentedButtonRealCase.title = "Music player";
 
 export default SegmentedButtonRealCase;

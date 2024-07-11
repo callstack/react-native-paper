@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   ColorValue,
   GestureResponderEvent,
@@ -12,16 +12,16 @@ import {
   ViewProps,
   ViewStyle,
   PressableAndroidRippleConfig,
-} from 'react-native';
+} from "react-native";
 
-import { ListAccordionGroupContext } from './ListAccordionGroup';
-import type { Style } from './utils';
-import { getAccordionColors, getLeftStyles } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
+import { ListAccordionGroupContext } from "./ListAccordionGroup";
+import type { Style } from "./utils";
+import { getAccordionColors, getLeftStyles } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp } from "../../types";
+import MaterialCommunityIcon from "../MaterialCommunityIcon";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
+import Text from "../Typography/Text";
 
 export type Props = {
   /**
@@ -120,7 +120,7 @@ export type Props = {
   /**
    * `pointerEvents` passed to the `View` container
    */
-  pointerEvents?: ViewProps['pointerEvents'];
+  pointerEvents?: ViewProps["pointerEvents"];
 };
 
 /**
@@ -181,18 +181,18 @@ const ListAccordion = ({
   delayLongPress,
   expanded: expandedProp,
   accessibilityLabel,
-  pointerEvents = 'none',
+  pointerEvents = "none",
   titleMaxFontSizeMultiplier,
   descriptionMaxFontSizeMultiplier,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const [expanded, setExpanded] = React.useState<boolean>(
-    expandedProp || false
+    expandedProp || false,
   );
   const [alignToTop, setAlignToTop] = React.useState(false);
 
   const onDescriptionTextLayout = (
-    event: NativeSyntheticEvent<TextLayoutEventData>
+    event: NativeSyntheticEvent<TextLayoutEventData>,
   ) => {
     if (!theme.isV3) {
       return;
@@ -214,9 +214,9 @@ const ListAccordion = ({
   const expandedInternal = expandedProp !== undefined ? expandedProp : expanded;
 
   const groupContext = React.useContext(ListAccordionGroupContext);
-  if (groupContext !== null && (id === undefined || id === null || id === '')) {
+  if (groupContext !== null && (id === undefined || id === null || id === "")) {
     throw new Error(
-      'List.Accordion is used inside a List.AccordionGroup without specifying an id prop.'
+      "List.Accordion is used inside a List.AccordionGroup without specifying an id prop.",
     );
   }
   const isExpanded = groupContext
@@ -305,10 +305,10 @@ const ListAccordion = ({
                 })
               ) : (
                 <MaterialCommunityIcon
-                  name={isExpanded ? 'chevron-up' : 'chevron-down'}
+                  name={isExpanded ? "chevron-up" : "chevron-down"}
                   color={theme.isV3 ? descriptionColor : titleColor}
                   size={24}
-                  direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                  direction={I18nManager.getConstants().isRTL ? "rtl" : "ltr"}
                 />
               )}
             </View>
@@ -340,7 +340,7 @@ const ListAccordion = ({
   );
 };
 
-ListAccordion.displayName = 'List.Accordion';
+ListAccordion.displayName = "List.Accordion";
 
 const styles = StyleSheet.create({
   container: {
@@ -351,17 +351,17 @@ const styles = StyleSheet.create({
     paddingRight: 24,
   },
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   rowV3: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginVertical: 6,
   },
   multiline: {
     height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     fontSize: 16,
@@ -384,7 +384,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
 });
 

@@ -6,9 +6,9 @@ import type {
   RouteProp,
   TabActionHelpers,
   TabNavigationState,
-} from '@react-navigation/native';
+} from "@react-navigation/native";
 
-import type BottomNavigation from '../components/BottomNavigation/BottomNavigation';
+import type BottomNavigation from "../components/BottomNavigation/BottomNavigation";
 
 export type MaterialBottomTabNavigationEventMap = {
   /**
@@ -30,7 +30,7 @@ export type MaterialBottomTabNavigationHelpers = NavigationHelpers<
 export type MaterialBottomTabNavigationProp<
   ParamList extends ParamListBase,
   RouteName extends keyof ParamList = keyof ParamList,
-  NavigatorID extends string | undefined = undefined
+  NavigatorID extends string | undefined = undefined,
 > = NavigationProp<
   ParamList,
   RouteName,
@@ -44,7 +44,7 @@ export type MaterialBottomTabNavigationProp<
 export type MaterialBottomTabScreenProps<
   ParamList extends ParamListBase,
   RouteName extends keyof ParamList = keyof ParamList,
-  NavigatorID extends string | undefined = undefined
+  NavigatorID extends string | undefined = undefined,
 > = {
   navigation: MaterialBottomTabNavigationProp<
     ParamList,
@@ -109,18 +109,18 @@ export type MaterialBottomTabDescriptorMap = Record<
 export type MaterialBottomTabNavigationConfig = Partial<
   Omit<
     React.ComponentProps<typeof BottomNavigation>,
-    | 'navigationState'
-    | 'onIndexChange'
-    | 'onTabPress'
-    | 'onTabLongPress'
-    | 'renderScene'
-    | 'renderLabel'
-    | 'renderIcon'
-    | 'getAccessibilityLabel'
-    | 'getBadge'
-    | 'getColor'
-    | 'getLabelText'
-    | 'getTestID'
-    | 'getLazy'
+    | "navigationState"
+    | "onIndexChange"
+    | "onTabPress"
+    | "onTabLongPress"
+    | "renderScene"
+    | "renderLabel"
+    | "renderIcon"
+    | "getAccessibilityLabel"
+    | "getBadge"
+    | "getColor"
+    | "getLabelText"
+    | "getTestID"
+    | "getLazy"
   >
 >;

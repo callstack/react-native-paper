@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import * as React from "react";
+import { StyleSheet } from "react-native";
 
-import { List, SegmentedButtons } from 'react-native-paper';
+import { List, SegmentedButtons } from "react-native-paper";
 
 const SegmentedButtonMultiselect = () => {
   const [value, setValue] = React.useState<string[]>([]);
@@ -16,20 +16,20 @@ const SegmentedButtonMultiselect = () => {
         buttons={[
           {
             style: styles.button,
-            value: 'walk',
-            label: 'Walking',
+            value: "walk",
+            label: "Walking",
             showSelectedCheck: true,
           },
           {
             style: styles.button,
-            value: 'transit',
-            label: 'Transit',
+            value: "transit",
+            label: "Transit",
             showSelectedCheck: true,
           },
           {
             style: styles.button,
-            value: 'drive',
-            label: 'Driving',
+            value: "drive",
+            label: "Driving",
             showSelectedCheck: true,
           },
         ]}
@@ -39,7 +39,7 @@ const SegmentedButtonMultiselect = () => {
 };
 
 const styles = StyleSheet.create({
-  group: { paddingHorizontal: 20, justifyContent: 'center' },
+  group: { paddingHorizontal: 20, justifyContent: "center" },
   button: {
     flex: 1,
   },
