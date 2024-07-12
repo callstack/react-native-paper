@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Dimensions,
   View,
@@ -7,15 +7,15 @@ import {
   Platform,
   Pressable,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import type { ThemeProp } from 'src/types';
+import type { ThemeProp } from "src/types";
 
-import { getTooltipPosition, Measurement } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import { addEventListener } from '../../utils/addEventListener';
-import Portal from '../Portal/Portal';
-import Text from '../Typography/Text';
+import { getTooltipPosition, Measurement } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import { addEventListener } from "../../utils/addEventListener";
+import Portal from "../Portal/Portal";
+import Text from "../Typography/Text";
 
 export type Props = {
   /**
@@ -72,7 +72,7 @@ const Tooltip = ({
   titleMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
-  const isWeb = Platform.OS === 'web';
+  const isWeb = Platform.OS === "web";
 
   const theme = useInternalTheme(themeOverrides);
   const [visible, setVisible] = React.useState(false);
@@ -102,8 +102,8 @@ const Tooltip = ({
   }, []);
 
   React.useEffect(() => {
-    const subscription = addEventListener(Dimensions, 'change', () =>
-      setVisible(false)
+    const subscription = addEventListener(Dimensions, "change", () =>
+      setVisible(false),
     );
 
     return () => subscription.remove();
@@ -117,7 +117,7 @@ const Tooltip = ({
           tooltip: { ...layout },
           measured: true,
         });
-      }
+      },
     );
   };
 
@@ -225,12 +225,12 @@ const Tooltip = ({
   );
 };
 
-Tooltip.displayName = 'Tooltip';
+Tooltip.displayName = "Tooltip";
 
 const styles = StyleSheet.create({
   tooltip: {
-    alignSelf: 'flex-start',
-    justifyContent: 'center',
+    alignSelf: "flex-start",
+    justifyContent: "center",
     paddingHorizontal: 16,
     height: 32,
     maxHeight: 32,
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
     opacity: 0,
   },
   pressContainer: {
-    ...(Platform.OS === 'web' && { cursor: 'default' }),
+    ...(Platform.OS === "web" && { cursor: "default" }),
   } as ViewStyle,
 });
 

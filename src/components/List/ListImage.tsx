@@ -1,18 +1,18 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   StyleSheet,
   StyleProp,
   Image,
   ImageSourcePropType,
   ImageStyle,
-} from 'react-native';
+} from "react-native";
 
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp } from "../../types";
 
 export type Props = {
   source: ImageSourcePropType;
-  variant?: 'image' | 'video';
+  variant?: "image" | "video";
   style?: StyleProp<ImageStyle>;
   /**
    * @optional
@@ -41,12 +41,12 @@ export type Props = {
 const ListImage = ({
   style,
   source,
-  variant = 'image',
+  variant = "image",
   theme: themeOverrides,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const getStyles = () => {
-    if (variant === 'video') {
+    if (variant === "video") {
       if (!theme.isV3) {
         return [style, styles.video];
       }
@@ -84,6 +84,6 @@ const styles = StyleSheet.create({
   },
 });
 
-ListImage.displayName = 'List.Image';
+ListImage.displayName = "List.Image";
 
 export default ListImage;

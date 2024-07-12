@@ -1,8 +1,8 @@
-import RadioButtonComponent from './RadioButton';
-import RadioButtonAndroid from './RadioButtonAndroid';
-import RadioButtonGroup from './RadioButtonGroup';
-import RadioButtonIOS from './RadioButtonIOS';
-import RadioButtonItem from './RadioButtonItem';
+import RadioButtonComponent from "./RadioButton";
+import RadioButtonAndroid from "./RadioButtonAndroid";
+import RadioButtonGroup from "./RadioButtonGroup";
+import RadioButtonIOS from "./RadioButtonIOS";
+import RadioButtonItem from "./RadioButtonItem";
 
 const RadioButton = Object.assign(
   // @component ./RadioButton.tsx
@@ -16,7 +16,7 @@ const RadioButton = Object.assign(
     IOS: RadioButtonIOS,
     // @component ./RadioButtonItem.tsx
     Item: RadioButtonItem,
-  }
+  },
 );
 
 export default RadioButton;

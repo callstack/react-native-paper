@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   AccessibilityState,
   ColorValue,
@@ -9,19 +9,19 @@ import {
   TextStyle,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
 import {
   getContentMaxWidth,
   getMenuItemColor,
   MAX_WIDTH,
   MIN_WIDTH,
-} from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import Icon, { IconSource } from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
+} from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp } from "../../types";
+import Icon, { IconSource } from "../Icon";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
+import Text from "../Typography/Text";
 
 export type Props = {
   /**
@@ -125,7 +125,7 @@ const MenuItem = ({
   contentStyle,
   titleStyle,
   rippleColor: customRippleColor,
-  testID = 'menu-item',
+  testID = "menu-item",
   accessibilityLabel,
   accessibilityState,
   theme: themeOverrides,
@@ -222,20 +222,20 @@ const MenuItem = ({
   );
 };
 
-MenuItem.displayName = 'Menu.Item';
+MenuItem.displayName = "Menu.Item";
 
 const styles = StyleSheet.create({
   container: {
     minWidth: MIN_WIDTH,
     maxWidth: MAX_WIDTH,
     height: 48,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   md3DenseContainer: {
     height: 32,
   },
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   title: {
     fontSize: 16,
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
   },
   content: {
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   md3LeadingIcon: {
     marginLeft: 12,

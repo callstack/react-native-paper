@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import * as React from "react";
+import { StyleSheet } from "react-native";
 
-import { Checkbox } from 'react-native-paper';
+import { Checkbox } from "react-native-paper";
 
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
 const CheckboxExample = () => {
   const [checkedDefault, setCheckedDefault] = React.useState<boolean>(true);
@@ -21,31 +21,31 @@ const CheckboxExample = () => {
     <ScreenWrapper style={styles.container}>
       <Checkbox.Item
         label="Default (will look like whatever system this is running on)"
-        status={checkedDefault ? 'checked' : 'unchecked'}
+        status={checkedDefault ? "checked" : "unchecked"}
         onPress={() => setCheckedDefault(!checkedDefault)}
       />
       <Checkbox.Item
         label="Material Design"
         mode="android"
-        status={checkedAndroid ? 'checked' : 'unchecked'}
+        status={checkedAndroid ? "checked" : "unchecked"}
         onPress={() => setCheckedAndroid(!checkedAndroid)}
       />
       <Checkbox.Item
         label="iOS"
         mode="ios"
-        status={checkedIOS ? 'checked' : 'unchecked'}
+        status={checkedIOS ? "checked" : "unchecked"}
         onPress={() => setCheckedIOS(!checkedIOS)}
       />
       <Checkbox.Item
         label="Default with leading control"
-        status={checkedLeadingControl ? 'checked' : 'unchecked'}
+        status={checkedLeadingControl ? "checked" : "unchecked"}
         onPress={() => setCheckedLeadingControl(!checkedLeadingControl)}
         mode="ios"
         position="leading"
       />
       <Checkbox.Item
         label="Disabled checkbox"
-        status={checkedDisabled ? 'checked' : 'unchecked'}
+        status={checkedDisabled ? "checked" : "unchecked"}
         onPress={() => setCheckedDisabled(!checkedDisabled)}
         disabled
       />
@@ -53,7 +53,7 @@ const CheckboxExample = () => {
         <Checkbox.Item
           label="Default with titleLarge title variant"
           labelVariant="titleLarge"
-          status={checkedLabelVariant ? 'checked' : 'unchecked'}
+          status={checkedLabelVariant ? "checked" : "unchecked"}
           onPress={() => setCheckedLabelVariant(!checkedLabelVariant)}
         />
       )}
@@ -61,7 +61,7 @@ const CheckboxExample = () => {
   );
 };
 
-CheckboxExample.title = 'Checkbox Item';
+CheckboxExample.title = "Checkbox Item";
 
 const styles = StyleSheet.create({
   container: {

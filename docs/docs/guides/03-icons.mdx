@@ -2,7 +2,7 @@
 title: Icons
 ---
 
-import IconsList from '@site/src/components/IconsList.tsx';
+import IconsList from "@site/src/components/IconsList.tsx";
 
 # Icons
 
@@ -23,12 +23,11 @@ You can pass the name of an icon from [`MaterialCommunityIcons`](https://materia
 Example:
 
 ```js
-<Button icon="camera">
-  Press me
-</Button>
+<Button icon="camera">Press me</Button>
 ```
 
-<details><summary>See the list of supported icons</summary>
+<details>
+  <summary>See the list of supported icons</summary>
   <IconsList />
 </details>
 
@@ -39,7 +38,9 @@ You can pass an image source, such as an object of shape `{ uri: 'https://path.t
 Remote image:
 
 ```js
-<Button icon={{ uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400' }}>
+<Button
+  icon={{ uri: "https://avatars0.githubusercontent.com/u/17571969?v=3&s=400" }}
+>
   Press me
 </Button>
 ```
@@ -47,9 +48,7 @@ Remote image:
 Local image:
 
 ```js
-<Button icon={require('../assets/chameleon.jpg')}>
-  Press me
-</Button>
+<Button icon={require("../assets/chameleon.jpg")}>Press me</Button>
 ```
 
 ### 3. A render function
@@ -62,7 +61,7 @@ Example:
 <Button
   icon={({ size, color }) => (
     <Image
-      source={require('../assets/chameleon.jpg')}
+      source={require("../assets/chameleon.jpg")}
       style={{ width: size, height: size, tintColor: color }}
     />
   )}
@@ -78,17 +77,17 @@ If you want to use icons other than `MaterialCommunityIcons` you need to import 
 Example:
 
 ```js
-import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import AwesomeIcon from "react-native-vector-icons/FontAwesome";
 // ...
 
-      <PaperProvider
-        settings={{
-          icon: props => <AwesomeIcon {...props} />,
-        }}
-        theme={this.state.theme}
-      >
-        // ...
-      </PaperProvider>
+<PaperProvider
+  settings={{
+    icon: (props) => <AwesomeIcon {...props} />,
+  }}
+  theme={this.state.theme}
+>
+  // ...
+</PaperProvider>;
 ```
 
 ## RTL support
@@ -102,7 +101,14 @@ If you want your icon to behave properly in a RTL environment, you can pass an o
 Example for using an image source:
 
 ```js
-<Button icon={{ source: { uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400' }, direction: 'rtl' }}>
+<Button
+  icon={{
+    source: {
+      uri: "https://avatars0.githubusercontent.com/u/17571969?v=3&s=400",
+    },
+    direction: "rtl",
+  }}
+>
   Press me
 </Button>
 ```
@@ -110,9 +116,7 @@ Example for using an image source:
 Example for using an icon name:
 
 ```js
-<Button icon={{ source: "add-a-photo", direction: 'rtl' }}>
-  Press me
-</Button>
+<Button icon={{ source: "add-a-photo", direction: "rtl" }}>Press me</Button>
 ```
 
 You can also use a render function. Along with `size` and `color`, you have access to `direction` which will either be `'rtl'` or `'ltr'`. You can then decide how to render your icon component accordingly.
@@ -123,16 +127,16 @@ Example of using a render function:
 <Button
   icon={({ size, color, direction }) => (
     <Image
-      source={require('../assets/chameleon.jpg')}
+      source={require("../assets/chameleon.jpg")}
       style={[
         {
-          transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
+          transform: [{ scaleX: direction === "rtl" ? -1 : 1 }],
         },
         {
           width: size,
           height: size,
-          tintColor: color
-        }
+          tintColor: color,
+        },
       ]}
     />
   )}

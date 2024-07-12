@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { Platform, StyleSheet, View, Image } from 'react-native';
+import * as React from "react";
+import { Platform, StyleSheet, View, Image } from "react-native";
 
-import type { StackNavigationProp } from '@react-navigation/stack';
+import type { StackNavigationProp } from "@react-navigation/stack";
 import {
   Appbar,
   Avatar,
@@ -13,36 +13,36 @@ import {
   ToggleButton,
   Tooltip,
   Card,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-import { isWeb } from '../../utils';
-import ScreenWrapper from '../ScreenWrapper';
+import { isWeb } from "../../utils";
+import ScreenWrapper from "../ScreenWrapper";
 
 type Props = {
   navigation: StackNavigationProp<{}>;
 };
 
-const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
+const MORE_ICON = Platform.OS === "ios" ? "dots-horizontal" : "dots-vertical";
 
 const DURATION_MEDIUM = 1500;
 const DURATION_LONG = 3000;
 
 const formOfTransport = [
-  { title: 'Car - default delays' },
-  { title: 'Airplane - default delays' },
-  { title: 'Taxi - long enter delay', enterTouchDelay: DURATION_MEDIUM },
-  { title: 'Train - long enter delay', enterTouchDelay: DURATION_MEDIUM },
-  { title: 'Ferry - long leave delay', leaveTouchDelay: DURATION_MEDIUM },
-  { title: 'Bus - long leave delay', leaveTouchDelay: DURATION_MEDIUM },
+  { title: "Car - default delays" },
+  { title: "Airplane - default delays" },
+  { title: "Taxi - long enter delay", enterTouchDelay: DURATION_MEDIUM },
+  { title: "Train - long enter delay", enterTouchDelay: DURATION_MEDIUM },
+  { title: "Ferry - long leave delay", leaveTouchDelay: DURATION_MEDIUM },
+  { title: "Bus - long leave delay", leaveTouchDelay: DURATION_MEDIUM },
   {
-    title: 'Walk - long both delays',
+    title: "Walk - long both delays",
     enterTouchDelay: DURATION_MEDIUM,
     leaveTouchDelay: DURATION_LONG,
   },
 ];
 
 const TooltipExample = ({ navigation }: Props) => {
-  const [textAlign, setTextAlign] = React.useState('bold');
+  const [textAlign, setTextAlign] = React.useState("bold");
   React.useLayoutEffect(() => {
     navigation.setOptions({
       header: () => (
@@ -71,8 +71,8 @@ const TooltipExample = ({ navigation }: Props) => {
         <Banner visible>
           A tooltip is displayed upon
           {!isWeb
-            ? ' tapping and holding a screen element or component'
-            : ' hovering over a screen element or component'}
+            ? " tapping and holding a screen element or component"
+            : " hovering over a screen element or component"}
           . Continuously display the tooltip as long as the user long-presses or
           hovers over the element.
         </Banner>
@@ -86,7 +86,7 @@ const TooltipExample = ({ navigation }: Props) => {
                 leaveTouchDelay={transport.leaveTouchDelay}
               >
                 <IconButton
-                  icon={transport.title.split(' ')[0].toLowerCase()}
+                  icon={transport.title.split(" ")[0].toLowerCase()}
                   size={24}
                   onPress={() => {}}
                 />
@@ -125,7 +125,7 @@ const TooltipExample = ({ navigation }: Props) => {
                 mode="outlined"
                 avatar={
                   <Image
-                    source={require('../../assets/images/avatar.png')}
+                    source={require("../../assets/images/avatar.png")}
                     accessibilityIgnoresInvertColors
                   />
                 }
@@ -158,7 +158,7 @@ const TooltipExample = ({ navigation }: Props) => {
   );
 };
 
-TooltipExample.title = 'Tooltip';
+TooltipExample.title = "Tooltip";
 
 export default TooltipExample;
 
@@ -169,13 +169,13 @@ const styles = StyleSheet.create({
   },
   chipContainer: {
     marginHorizontal: 16,
-    alignItems: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    flexDirection: "row",
   },
   fabContainer: {
     margin: 16,
     right: 0,
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
   },
   cardContainer: {
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   iconButtonContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
 });

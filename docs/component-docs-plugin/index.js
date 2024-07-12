@@ -1,12 +1,12 @@
 const {
   default: parseComponentDocs,
-} = require('component-docs/dist/parsers/component');
-const fs = require('fs');
-const path = require('path');
+} = require("component-docs/dist/parsers/component");
+const fs = require("fs");
+const path = require("path");
 
-const generatePageMDX = require('./generatePageMDX');
+const generatePageMDX = require("./generatePageMDX");
 
-const pluginName = 'component-docs-plugin';
+const pluginName = "component-docs-plugin";
 
 async function componentsPlugin(_, options) {
   const { docsRootDir, libsRootDir, pages } = options;
@@ -15,7 +15,7 @@ async function componentsPlugin(_, options) {
     fs.rmSync(docsRootDir, { recursive: true, force: true });
   }
 
-  function createCategory(label, dir = '.') {
+  function createCategory(label, dir = ".") {
     const categoryJSON = JSON.stringify({ label }, undefined, 2);
     const docsCategoryDir = path.join(docsRootDir, dir);
     if (!fs.existsSync(docsCategoryDir)) {
@@ -23,15 +23,15 @@ async function componentsPlugin(_, options) {
     }
     fs.writeFileSync(
       path.join(docsCategoryDir, `_category_.json`),
-      categoryJSON
+      categoryJSON,
     );
   }
 
   function createPageForComponent(targetArray, source) {
     const [item, subitem] = targetArray;
     const target = subitem ? `${item}/${subitem}` : item;
-    const targetPath = target + '.mdx';
-    const sourcePath = source + '.tsx';
+    const targetPath = target + ".mdx";
+    const sourcePath = source + ".tsx";
 
     // Parse component using component-docs.
     const doc = parseComponentDocs(path.join(libsRootDir, sourcePath), {
@@ -40,14 +40,14 @@ async function componentsPlugin(_, options) {
 
     // Create directory for the output mdx file.
     fs.mkdirSync(
-      path.join(docsRootDir, targetPath).split('/').slice(0, -1).join('/'),
-      { recursive: true }
+      path.join(docsRootDir, targetPath).split("/").slice(0, -1).join("/"),
+      { recursive: true },
     );
 
     // Generate and write mdx file.
     fs.writeFileSync(
       path.join(docsRootDir, targetPath),
-      generatePageMDX(doc, source)
+      generatePageMDX(doc, source),
     );
 
     return doc;
@@ -59,19 +59,19 @@ async function componentsPlugin(_, options) {
       // Clean up docs directory.
       clean();
       // Create root components category.
-      createCategory('Components', '.');
+      createCategory("Components", ".");
 
       const docs = {};
 
       for (const item in pages) {
-        if (typeof pages[item] === 'string') {
+        if (typeof pages[item] === "string") {
           const doc = createPageForComponent([item], pages[item]);
           docs[pages[item]] = doc;
         } else {
           for (const subitem in pages[item]) {
             const doc = createPageForComponent(
               [item, subitem],
-              pages[item][subitem]
+              pages[item][subitem],
             );
             docs[pages[item][subitem]] = doc;
           }

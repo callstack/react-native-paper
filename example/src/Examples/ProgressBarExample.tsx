@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { View, StyleSheet, Animated } from 'react-native';
+import * as React from "react";
+import { View, StyleSheet, Animated } from "react-native";
 
 import {
   Button,
@@ -8,10 +8,10 @@ import {
   MD3Colors,
   ProgressBarProps,
   Text,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
 class ClassProgressBar extends React.Component {
   constructor(props: ProgressBarProps) {
@@ -115,7 +115,7 @@ const ProgressBarExample = () => {
   );
 };
 
-ProgressBarExample.title = 'Progress Bar';
+ProgressBarExample.title = "Progress Bar";
 
 const styles = StyleSheet.create({
   container: {
@@ -125,14 +125,14 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   fullRow: {
-    height: '100%',
-    width: '100%',
+    height: "100%",
+    width: "100%",
   },
   customHeight: {
     height: 20,
   },
   customPercentageHeight: {
-    height: '50%',
+    height: "50%",
   },
   progressBar: {
     height: 15,

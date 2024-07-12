@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import * as React from "react";
+import { View, StyleSheet } from "react-native";
 
-import { List, Divider, Checkbox, Avatar, Switch } from 'react-native-paper';
+import { List, Divider, Checkbox, Avatar, Switch } from "react-native-paper";
 
-import ScreenWrapper from '../ScreenWrapper';
+import ScreenWrapper from "../ScreenWrapper";
 
 const CenteredCheckbox = () => (
   <View style={styles.centered}>
@@ -126,7 +126,7 @@ const ListItemExample = () => {
           left={(props) => (
             <List.Image
               style={props.style}
-              source={require('../../../example/assets/images/strawberries.jpg')}
+              source={require("../../../example/assets/images/strawberries.jpg")}
             />
           )}
         />
@@ -136,7 +136,7 @@ const ListItemExample = () => {
           left={(props) => (
             <List.Image
               style={props.style}
-              source={require('../../../example/assets/images/strawberries.jpg')}
+              source={require("../../../example/assets/images/strawberries.jpg")}
             />
           )}
         />
@@ -146,7 +146,7 @@ const ListItemExample = () => {
           left={(props) => (
             <List.Image
               style={props.style}
-              source={require('../../../example/assets/images/strawberries.jpg')}
+              source={require("../../../example/assets/images/strawberries.jpg")}
             />
           )}
         />
@@ -156,7 +156,7 @@ const ListItemExample = () => {
           left={(props) => (
             <List.Image
               style={props.style}
-              source={require('../../../example/assets/images/strawberries.jpg')}
+              source={require("../../../example/assets/images/strawberries.jpg")}
             />
           )}
           right={() => <CenteredCheckbox />}
@@ -167,7 +167,7 @@ const ListItemExample = () => {
           left={(props) => (
             <List.Image
               style={props.style}
-              source={require('../../../example/assets/images/strawberries.jpg')}
+              source={require("../../../example/assets/images/strawberries.jpg")}
             />
           )}
           right={() => <CenteredCheckbox />}
@@ -178,7 +178,7 @@ const ListItemExample = () => {
           left={(props) => (
             <List.Image
               style={props.style}
-              source={require('../../../example/assets/images/strawberries.jpg')}
+              source={require("../../../example/assets/images/strawberries.jpg")}
             />
           )}
           right={() => <Checkbox status="checked" />}
@@ -193,7 +193,7 @@ const ListItemExample = () => {
             <List.Image
               variant="video"
               style={props.style}
-              source={require('../../../example/assets/images/strawberries.jpg')}
+              source={require("../../../example/assets/images/strawberries.jpg")}
             />
           )}
         />
@@ -204,7 +204,7 @@ const ListItemExample = () => {
             <List.Image
               variant="video"
               style={props.style}
-              source={require('../../../example/assets/images/strawberries.jpg')}
+              source={require("../../../example/assets/images/strawberries.jpg")}
             />
           )}
         />
@@ -215,7 +215,7 @@ const ListItemExample = () => {
             <List.Image
               variant="video"
               style={props.style}
-              source={require('../../../example/assets/images/strawberries.jpg')}
+              source={require("../../../example/assets/images/strawberries.jpg")}
             />
           )}
         />
@@ -226,7 +226,7 @@ const ListItemExample = () => {
             <List.Image
               variant="video"
               style={props.style}
-              source={require('../../../example/assets/images/strawberries.jpg')}
+              source={require("../../../example/assets/images/strawberries.jpg")}
             />
           )}
           right={() => <CenteredCheckbox />}
@@ -238,7 +238,7 @@ const ListItemExample = () => {
             <List.Image
               variant="video"
               style={props.style}
-              source={require('../../../example/assets/images/strawberries.jpg')}
+              source={require("../../../example/assets/images/strawberries.jpg")}
             />
           )}
           right={() => <CenteredCheckbox />}
@@ -250,7 +250,7 @@ const ListItemExample = () => {
             <List.Image
               variant="video"
               style={props.style}
-              source={require('../../../example/assets/images/strawberries.jpg')}
+              source={require("../../../example/assets/images/strawberries.jpg")}
             />
           )}
           right={() => <Checkbox status="checked" />}
@@ -299,10 +299,10 @@ const ListItemExample = () => {
 
 const styles = StyleSheet.create({
   centered: {
-    alignSelf: 'center',
+    alignSelf: "center",
   },
 });
 
-ListItemExample.title = 'List.Item';
+ListItemExample.title = "List.Item";
 
 export default ListItemExample;

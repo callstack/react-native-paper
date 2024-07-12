@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import * as React from "react";
+import { StyleSheet } from "react-native";
 
-import { List, SegmentedButtons } from 'react-native-paper';
+import { List, SegmentedButtons } from "react-native-paper";
 
 const SegmentedButtonMultiselectIcons = () => {
   const [value, setValue] = React.useState<string[]>([]);
@@ -15,24 +15,24 @@ const SegmentedButtonMultiselectIcons = () => {
         style={styles.group}
         buttons={[
           {
-            value: 'size-s',
-            icon: 'size-s',
+            value: "size-s",
+            icon: "size-s",
           },
           {
-            value: 'size-m',
-            icon: 'size-m',
+            value: "size-m",
+            icon: "size-m",
           },
           {
-            value: 'size-l',
-            icon: 'size-l',
+            value: "size-l",
+            icon: "size-l",
           },
           {
-            value: 'size-xl',
-            icon: 'size-xl',
+            value: "size-xl",
+            icon: "size-xl",
           },
           {
-            value: 'size-xxl',
-            icon: 'size-xxl',
+            value: "size-xxl",
+            icon: "size-xxl",
           },
         ]}
       />
@@ -41,7 +41,7 @@ const SegmentedButtonMultiselectIcons = () => {
 };
 
 const styles = StyleSheet.create({
-  group: { paddingHorizontal: 20, justifyContent: 'center' },
+  group: { paddingHorizontal: 20, justifyContent: "center" },
 });
 
 export default SegmentedButtonMultiselectIcons;

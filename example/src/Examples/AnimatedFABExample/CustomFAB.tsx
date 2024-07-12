@@ -1,23 +1,23 @@
-import React from 'react';
+import React from "react";
 import {
   Animated,
   Platform,
   StyleProp,
   StyleSheet,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import { AnimatedFAB } from 'react-native-paper';
+import { AnimatedFAB } from "react-native-paper";
 
-import { useExampleTheme } from '../..';
+import { useExampleTheme } from "../..";
 
 type CustomFABProps = {
   animatedValue: Animated.Value;
   visible: boolean;
   extended: boolean;
   label: string;
-  animateFrom: 'left' | 'right';
-  iconMode?: 'static' | 'dynamic';
+  animateFrom: "left" | "right";
+  iconMode?: "static" | "dynamic";
   style?: StyleProp<ViewStyle>;
 };
 
@@ -33,7 +33,7 @@ const CustomFAB = ({
   const [isExtended, setIsExtended] = React.useState(true);
   const { isV3 } = useExampleTheme();
 
-  const isIOS = Platform.OS === 'ios';
+  const isIOS = Platform.OS === "ios";
 
   React.useEffect(() => {
     if (!isIOS) {
@@ -47,11 +47,11 @@ const CustomFAB = ({
 
   return (
     <AnimatedFAB
-      icon={'plus'}
+      icon={"plus"}
       label={label}
       extended={isExtended}
       uppercase={!isV3}
-      onPress={() => console.log('Pressed')}
+      onPress={() => console.log("Pressed")}
       visible={visible}
       animateFrom={animateFrom}
       iconMode={iconMode}
@@ -65,6 +65,6 @@ export default CustomFAB;
 const styles = StyleSheet.create({
   fabStyle: {
     bottom: 16,
-    position: 'absolute',
+    position: "absolute",
   },
 });

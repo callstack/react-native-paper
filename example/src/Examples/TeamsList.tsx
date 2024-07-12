@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import * as React from "react";
+import { StyleSheet } from "react-native";
 
-import type { ParamListBase } from '@react-navigation/native';
-import type { StackScreenProps } from '@react-navigation/stack';
-import { DataTable } from 'react-native-paper';
+import type { ParamListBase } from "@react-navigation/native";
+import type { StackScreenProps } from "@react-navigation/stack";
+import { DataTable } from "react-native-paper";
 
-import { teamsList } from '../../utils';
-import ScreenWrapper from '../ScreenWrapper';
+import { teamsList } from "../../utils";
+import ScreenWrapper from "../ScreenWrapper";
 
 type Props = StackScreenProps<ParamListBase>;
 
@@ -25,8 +25,8 @@ const TeamsList = ({ navigation }: Props) => {
           <DataTable.Row
             key={item.key}
             onPress={() =>
-              navigation.navigate('teamDetails', {
-                sourceColor: item.name.split(' ')[1].toLowerCase(),
+              navigation.navigate("teamDetails", {
+                sourceColor: item.name.split(" ")[1].toLowerCase(),
                 headerTitle: item.name,
                 darkMode: item.darkMode,
               })
@@ -52,6 +52,6 @@ const styles = StyleSheet.create({
   },
 });
 
-TeamsList.title = 'Teams';
+TeamsList.title = "Teams";
 
 export default TeamsList;

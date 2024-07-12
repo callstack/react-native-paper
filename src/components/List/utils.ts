@@ -1,7 +1,7 @@
-import { FlexAlignType, ColorValue, StyleSheet } from 'react-native';
+import { FlexAlignType, ColorValue, StyleSheet } from "react-native";
 
-import color from 'color';
-import type { EllipsizeProp, InternalTheme } from 'src/types';
+import color from "color";
+import type { EllipsizeProp, InternalTheme } from "src/types";
 
 type Description =
   | React.ReactNode
@@ -22,12 +22,12 @@ export type Style = {
 export const getLeftStyles = (
   alignToTop: boolean,
   description: Description,
-  isV3: boolean
+  isV3: boolean,
 ) => {
   const stylesV3 = {
     marginRight: 0,
     marginLeft: 16,
-    alignSelf: alignToTop ? 'flex-start' : 'center',
+    alignSelf: alignToTop ? "flex-start" : "center",
   };
 
   if (!description) {
@@ -51,11 +51,11 @@ export const getLeftStyles = (
 export const getRightStyles = (
   alignToTop: boolean,
   description: Description,
-  isV3: boolean
+  isV3: boolean,
 ) => {
   const stylesV3 = {
     marginLeft: 16,
-    alignSelf: alignToTop ? 'flex-start' : 'center',
+    alignSelf: alignToTop ? "flex-start" : "center",
   };
 
   if (!description) {

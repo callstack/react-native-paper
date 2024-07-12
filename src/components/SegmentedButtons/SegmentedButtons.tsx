@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   GestureResponderEvent,
   StyleProp,
@@ -6,14 +6,14 @@ import {
   TextStyle,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import type { ThemeProp } from 'src/types';
+import type { ThemeProp } from "src/types";
 
-import SegmentedButtonItem from './SegmentedButtonItem';
-import { getDisabledSegmentedButtonStyle } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { IconSource } from '../Icon';
+import SegmentedButtonItem from "./SegmentedButtonItem";
+import { getDisabledSegmentedButtonStyle } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { IconSource } from "../Icon";
 
 type ConditionalValue =
   | {
@@ -78,7 +78,7 @@ export type Props = {
   /**
    * Density is applied to the height, to allow usage in denser UIs
    */
-  density?: 'regular' | 'small' | 'medium' | 'high';
+  density?: "regular" | "small" | "medium" | "high";
   style?: StyleProp<ViewStyle>;
   theme?: ThemeProp;
 } & ConditionalValue;
@@ -146,7 +146,7 @@ const SegmentedButtons = ({
           index: i,
         });
         const segment =
-          i === 0 ? 'first' : i === buttons.length - 1 ? 'last' : undefined;
+          i === 0 ? "first" : i === buttons.length - 1 ? "last" : undefined;
 
         const checked =
           multiSelect && Array.isArray(value)
@@ -187,7 +187,7 @@ const SegmentedButtons = ({
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
 });
 

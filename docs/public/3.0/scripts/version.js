@@ -1,6 +1,6 @@
 /* eslint-disable strict, no-var, vars-on-top, prefer-template */
 
-'use strict';
+"use strict";
 
 function createUrlForVersion(version) {
   const url = window.location.pathname;
@@ -123,12 +123,12 @@ function appendVersionBanner() {
         <ul class="list" role="menu">
           <li class="list-item">
             <a class="link" href="${createUrlForVersion(
-              '1.0'
+              "1.0",
             )}" role="menuitem">v1.x</a>
           </li>
           <li class="list-item">
             <a class="link" href="${createUrlForVersion(
-              '2.0'
+              "2.0",
             )}" role="menuitem">v2.x</a>
           </li>
         </ul>
@@ -136,13 +136,13 @@ function appendVersionBanner() {
     </div>
   `;
 
-  if (document.getElementById('version-banner')) return;
+  if (document.getElementById("version-banner")) return;
 
-  const div = document.createElement('div');
+  const div = document.createElement("div");
   div.innerHTML = html;
-  div.id = 'version-banner';
+  div.id = "version-banner";
 
-  const root = document.getElementById('root');
+  const root = document.getElementById("root");
 
   if (root) {
     if (root.childNodes.length === 1) {
@@ -157,7 +157,7 @@ function appendVersionBanner() {
 
 appendVersionBanner();
 
-var mutationObserver = new MutationObserver(mutations => {
+var mutationObserver = new MutationObserver((mutations) => {
   mutations.forEach(appendVersionBanner);
 });
 

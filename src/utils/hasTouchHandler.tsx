@@ -1,10 +1,10 @@
-import type { GestureResponderEvent } from 'react-native';
+import type { GestureResponderEvent } from "react-native";
 
 const touchableEvents = [
-  'onPress',
-  'onLongPress',
-  'onPressIn',
-  'onPressOut',
+  "onPress",
+  "onLongPress",
+  "onPressIn",
+  "onPressOut",
 ] as const;
 
 type TouchableEventObject = Partial<
@@ -15,7 +15,7 @@ type TouchableEventObject = Partial<
 >;
 
 export default function hasTouchHandler(
-  touchableEventObject: TouchableEventObject
+  touchableEventObject: TouchableEventObject,
 ) {
   return touchableEvents.some((event) => {
     return Boolean(touchableEventObject[event]);

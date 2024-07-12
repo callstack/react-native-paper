@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 import {
   createNavigatorFactory,
@@ -9,14 +9,14 @@ import {
   TabRouter,
   TabRouterOptions,
   useNavigationBuilder,
-} from '@react-navigation/native';
+} from "@react-navigation/native";
 
 import type {
   MaterialBottomTabNavigationConfig,
   MaterialBottomTabNavigationEventMap,
   MaterialBottomTabNavigationOptions,
-} from '../types';
-import MaterialBottomTabView from '../views/MaterialBottomTabView';
+} from "../types";
+import MaterialBottomTabView from "../views/MaterialBottomTabView";
 
 export type MaterialBottomTabNavigatorProps = DefaultNavigatorOptions<
   ParamListBase,

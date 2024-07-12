@@ -1,10 +1,10 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React from "react";
+import { View, StyleSheet } from "react-native";
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { CommonActions } from '@react-navigation/native';
-import { Text, BottomNavigation } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { CommonActions } from "@react-navigation/native";
+import { Text, BottomNavigation } from "react-native-paper";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +36,7 @@ export default function BottomNavigationBarExample() {
           safeAreaInsets={insets}
           onTabPress={({ route, preventDefault }) => {
             const event = navigation.emit({
-              type: 'tabPress',
+              type: "tabPress",
               target: route.key,
               canPreventDefault: true,
             });
@@ -83,12 +83,12 @@ export default function BottomNavigationBarExample() {
   );
 }
 
-BottomNavigationBarExample.title = 'Bottom Navigation Bar';
+BottomNavigationBarExample.title = "Bottom Navigation Bar";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

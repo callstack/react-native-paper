@@ -1,7 +1,7 @@
-import color from 'color';
+import color from "color";
 
-import { tokens } from '../../styles/themes/v3/tokens';
-import type { InternalTheme } from '../../types';
+import { tokens } from "../../styles/themes/v3/tokens";
+import type { InternalTheme } from "../../types";
 
 export const getToggleButtonColor = ({
   theme,
@@ -18,9 +18,9 @@ export const getToggleButtonColor = ({
         .string();
     }
     if (theme.dark) {
-      return 'rgba(255, 255, 255, .12)';
+      return "rgba(255, 255, 255, .12)";
     }
-    return 'rgba(0, 0, 0, .08)';
+    return "rgba(0, 0, 0, .08)";
   }
-  return 'transparent';
+  return "transparent";
 };

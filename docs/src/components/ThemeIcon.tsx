@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 type Props = {
-  type: 'dark' | 'light';
+  type: "dark" | "light";
 };
 
-const ThemeIcon = ({ type = 'dark' }: Props) => {
-  if (type === 'dark') {
+const ThemeIcon = ({ type = "dark" }: Props) => {
+  if (type === "dark") {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@ const ThemeIcon = ({ type = 'dark' }: Props) => {
         xmlns="http://www.w3.org/2000/svg"
         width="23"
         height="22"
-        fill={'orange'}
+        fill={"orange"}
         viewBox="0 0 130 130"
         enableBackground="new 0 0 129 129"
       >

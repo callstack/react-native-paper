@@ -1,18 +1,18 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   AccessibilityInfo,
   Appearance,
   ColorSchemeName,
   NativeEventSubscription,
-} from 'react-native';
+} from "react-native";
 
-import SafeAreaProviderCompat from './SafeAreaProviderCompat';
-import { Provider as SettingsProvider, Settings } from './settings';
-import { defaultThemesByVersion, ThemeProvider } from './theming';
-import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
-import PortalHost from '../components/Portal/PortalHost';
-import type { ThemeProp } from '../types';
-import { addEventListener } from '../utils/addEventListener';
+import SafeAreaProviderCompat from "./SafeAreaProviderCompat";
+import { Provider as SettingsProvider, Settings } from "./settings";
+import { defaultThemesByVersion, ThemeProvider } from "./theming";
+import MaterialCommunityIcon from "../components/MaterialCommunityIcon";
+import PortalHost from "../components/Portal/PortalHost";
+import type { ThemeProp } from "../types";
+import { addEventListener } from "../utils/addEventListener";
 
 export type Props = {
   children: React.ReactNode;
@@ -26,7 +26,7 @@ const PaperProvider = (props: Props) => {
 
   const colorSchemeName =
     ((!props.theme || isOnlyVersionInTheme) && Appearance?.getColorScheme()) ||
-    'light';
+    "light";
 
   const [reduceMotionEnabled, setReduceMotionEnabled] =
     React.useState<boolean>(false);
@@ -34,7 +34,7 @@ const PaperProvider = (props: Props) => {
     React.useState<ColorSchemeName>(colorSchemeName);
 
   const handleAppearanceChange = (
-    preferences: Appearance.AppearancePreferences
+    preferences: Appearance.AppearancePreferences,
   ) => {
     const { colorScheme } = preferences;
     setColorScheme(colorScheme);
@@ -46,8 +46,8 @@ const PaperProvider = (props: Props) => {
     if (!props.theme) {
       subscription = addEventListener(
         AccessibilityInfo,
-        'reduceMotionChanged',
-        setReduceMotionEnabled
+        "reduceMotionChanged",
+        setReduceMotionEnabled,
       );
     }
     return () => {
@@ -61,7 +61,7 @@ const PaperProvider = (props: Props) => {
     let appearanceSubscription: NativeEventSubscription | undefined;
     if (!props.theme || isOnlyVersionInTheme) {
       appearanceSubscription = Appearance?.addChangeListener(
-        handleAppearanceChange
+        handleAppearanceChange,
       ) as NativeEventSubscription | undefined;
     }
     return () => {
@@ -78,7 +78,7 @@ const PaperProvider = (props: Props) => {
 
   const getTheme = () => {
     const themeVersion = props.theme?.version || 3;
-    const scheme = colorScheme || 'light';
+    const scheme = colorScheme || "light";
     const defaultThemeBase = defaultThemesByVersion[themeVersion][scheme];
 
     const extendedThemeBase = {

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   Dimensions,
@@ -18,17 +18,17 @@ import {
   View,
   ViewStyle,
   Pressable,
-} from 'react-native';
+} from "react-native";
 
-import MenuItem from './MenuItem';
-import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
-import { withInternalTheme } from '../../core/theming';
-import type { $Omit, InternalTheme, MD3Elevation } from '../../types';
-import { ElevationLevels } from '../../types';
-import { addEventListener } from '../../utils/addEventListener';
-import { BackHandler } from '../../utils/BackHandler/BackHandler';
-import Portal from '../Portal/Portal';
-import Surface from '../Surface';
+import MenuItem from "./MenuItem";
+import { APPROX_STATUSBAR_HEIGHT } from "../../constants";
+import { withInternalTheme } from "../../core/theming";
+import type { $Omit, InternalTheme, MD3Elevation } from "../../types";
+import { ElevationLevels } from "../../types";
+import { addEventListener } from "../../utils/addEventListener";
+import { BackHandler } from "../../utils/BackHandler/BackHandler";
+import Portal from "../Portal/Portal";
+import Surface from "../Surface";
 
 export type Props = {
   /**
@@ -43,7 +43,7 @@ export type Props = {
    * Whether the menu should open at the top of the anchor or at its bottom.
    * Applied only when anchor is a node, not an x/y position.
    */
-  anchorPosition?: 'top' | 'bottom';
+  anchorPosition?: "top" | "bottom";
   /**
    * Extra margin to add at the top of the menu to account for translucent status bar on Android.
    * If you are using Expo, we assume translucent status bar and set a height for status bar automatically.
@@ -80,14 +80,14 @@ export type Props = {
   /**
    * Inner ScrollView prop
    */
-  keyboardShouldPersistTaps?: ScrollViewProps['keyboardShouldPersistTaps'];
+  keyboardShouldPersistTaps?: ScrollViewProps["keyboardShouldPersistTaps"];
   /**
    * testID to be used on tests.
    */
   testID?: string;
 };
 
-type Layout = $Omit<$Omit<LayoutRectangle, 'x'>, 'y'>;
+type Layout = $Omit<$Omit<LayoutRectangle, "x">, "y">;
 
 type State = {
   rendered: boolean;
@@ -107,11 +107,11 @@ const ANIMATION_DURATION = 250;
 // From the 'Standard easing' section of https://material.io/design/motion/speed.html#easing
 const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 
-const WINDOW_LAYOUT = Dimensions.get('window');
+const WINDOW_LAYOUT = Dimensions.get("window");
 
 const DEFAULT_ELEVATION: MD3Elevation = 2;
 export const ELEVATION_LEVELS_MAP = Object.values(
-  ElevationLevels
+  ElevationLevels,
 ) as ElevationLevels[];
 
 /**
@@ -166,8 +166,8 @@ class Menu extends React.Component<Props, State> {
 
   static defaultProps = {
     statusBarHeight: APPROX_STATUSBAR_HEIGHT,
-    overlayAccessibilityLabel: 'Close menu',
-    testID: 'menu',
+    overlayAccessibilityLabel: "Close menu",
+    testID: "menu",
   };
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
@@ -194,12 +194,12 @@ class Menu extends React.Component<Props, State> {
 
   componentDidMount() {
     this.keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      this.keyboardDidShow
+      "keyboardDidShow",
+      this.keyboardDidShow,
     );
     this.keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      this.keyboardDidHide
+      "keyboardDidHide",
+      this.keyboardDidHide,
     );
   }
 
@@ -225,8 +225,8 @@ class Menu extends React.Component<Props, State> {
 
   private isCoordinate = (anchor: any): anchor is { x: number; y: number } =>
     !React.isValidElement(anchor) &&
-    typeof anchor?.x === 'number' &&
-    typeof anchor?.y === 'number';
+    typeof anchor?.x === "number" &&
+    typeof anchor?.y === "number";
 
   private measureMenuLayout = () =>
     new Promise<LayoutRectangle>((resolve) => {
@@ -264,7 +264,7 @@ class Menu extends React.Component<Props, State> {
     }
   };
 
-  private isBrowser = () => Platform.OS === 'web' && 'document' in global;
+  private isBrowser = () => Platform.OS === "web" && "document" in global;
 
   private focusFirstDOMNode = (el: View | null | undefined) => {
     if (el && this.isBrowser()) {
@@ -274,7 +274,7 @@ class Menu extends React.Component<Props, State> {
       const node: any = findNodeHandle(el);
       const focusableNode = node.querySelector(
         // This is a rough list of selectors that can be focused
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       );
 
       focusableNode?.focus();
@@ -289,7 +289,7 @@ class Menu extends React.Component<Props, State> {
   };
 
   private handleKeypress = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
+    if (e.key === "Escape") {
       this.props.onDismiss?.();
     }
   };
@@ -297,26 +297,26 @@ class Menu extends React.Component<Props, State> {
   private attachListeners = () => {
     this.backHandlerSubscription = addEventListener(
       BackHandler,
-      'hardwareBackPress',
-      this.handleDismiss
+      "hardwareBackPress",
+      this.handleDismiss,
     );
     this.dimensionsSubscription = addEventListener(
       Dimensions,
-      'change',
-      this.handleDismiss
+      "change",
+      this.handleDismiss,
     );
-    this.isBrowser() && document.addEventListener('keyup', this.handleKeypress);
+    this.isBrowser() && document.addEventListener("keyup", this.handleKeypress);
   };
 
   private removeListeners = () => {
     this.backHandlerSubscription?.remove();
     this.dimensionsSubscription?.remove();
     this.isBrowser() &&
-      document.removeEventListener('keyup', this.handleKeypress);
+      document.removeEventListener("keyup", this.handleKeypress);
   };
 
   private show = async () => {
-    const windowLayout = Dimensions.get('window');
+    const windowLayout = Dimensions.get("window");
     const [menuLayout, anchorLayout] = await Promise.all([
       this.measureMenuLayout(),
       this.measureAnchorLayout(),
@@ -379,7 +379,7 @@ class Menu extends React.Component<Props, State> {
             this.focusFirstDOMNode(this.menu);
           }
         });
-      }
+      },
     );
   };
 
@@ -438,7 +438,7 @@ class Menu extends React.Component<Props, State> {
 
     let { left, top } = this.state;
 
-    if (!this.isCoordinate(this.anchor) && anchorPosition === 'bottom') {
+    if (!this.isCoordinate(this.anchor) && anchorPosition === "bottom") {
       top += anchorLayout.height;
     }
 
@@ -610,7 +610,7 @@ class Menu extends React.Component<Props, State> {
       ...(I18nManager.getConstants().isRTL ? { right: left } : { left }),
     };
 
-    const pointerEvents = visible ? 'box-none' : 'none';
+    const pointerEvents = visible ? "box-none" : "none";
 
     return (
       <View
@@ -679,7 +679,7 @@ class Menu extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
   wrapper: {
-    position: 'absolute',
+    position: "absolute",
   },
   shadowMenuContainer: {
     opacity: 0,
@@ -687,10 +687,10 @@ const styles = StyleSheet.create({
   },
   pressableOverlay: {
     ...StyleSheet.absoluteFillObject,
-    ...(Platform.OS === 'web' && {
-      cursor: 'default',
+    ...(Platform.OS === "web" && {
+      cursor: "default",
     }),
-    width: '100%',
+    width: "100%",
   },
 });
 

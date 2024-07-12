@@ -1,4 +1,4 @@
-import type { GestureResponderEvent } from 'react-native';
+import type { GestureResponderEvent } from "react-native";
 
 export const handlePress = ({
   onPress,
@@ -13,7 +13,7 @@ export const handlePress = ({
 }) => {
   if (onPress && onValueChange) {
     console.warn(
-      `onPress in the scope of RadioButtonGroup will not be executed, use onValueChange instead`
+      `onPress in the scope of RadioButtonGroup will not be executed, use onValueChange instead`,
     );
   }
 
@@ -26,11 +26,11 @@ export const isChecked = ({
   contextValue,
 }: {
   value: string;
-  status?: 'checked' | 'unchecked';
+  status?: "checked" | "unchecked";
   contextValue?: string;
 }) => {
   if (contextValue !== undefined && contextValue !== null) {
-    return contextValue === value ? 'checked' : 'unchecked';
+    return contextValue === value ? "checked" : "unchecked";
   } else {
     return status;
   }

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   AccessibilityRole,
   GestureResponderEvent,
@@ -10,15 +10,15 @@ import {
   View,
   ViewStyle,
   ViewProps,
-} from 'react-native';
+} from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import { modeTextVariant } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import { white } from '../../styles/themes/v2/colors';
-import type { $RemoveChildren, MD3TypescaleKey, ThemeProp } from '../../types';
-import Text, { TextRef } from '../Typography/Text';
+import { modeTextVariant } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import { white } from "../../styles/themes/v2/colors";
+import type { $RemoveChildren, MD3TypescaleKey, ThemeProp } from "../../types";
+import Text, { TextRef } from "../Typography/Text";
 
 type TitleString = {
   title: string;
@@ -71,7 +71,7 @@ export type Props = $RemoveChildren<typeof View> & {
   /**
    * @internal
    */
-  mode?: 'small' | 'medium' | 'large' | 'center-aligned';
+  mode?: "small" | "medium" | "large" | "center-aligned";
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -111,9 +111,9 @@ const AppbarContent = ({
   titleStyle,
   title,
   titleMaxFontSizeMultiplier,
-  mode = 'small',
+  mode = "small",
   theme: themeOverrides,
-  testID = 'appbar-content',
+  testID = "appbar-content",
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -122,8 +122,8 @@ const AppbarContent = ({
   const titleTextColor = titleColor
     ? titleColor
     : isV3
-    ? colors.onSurface
-    : white;
+      ? colors.onSurface
+      : white;
 
   const subtitleColor = color(titleTextColor).alpha(0.7).rgb().string();
 
@@ -131,13 +131,13 @@ const AppbarContent = ({
     small: styles.v3DefaultContainer,
     medium: styles.v3MediumContainer,
     large: styles.v3LargeContainer,
-    'center-aligned': styles.v3DefaultContainer,
+    "center-aligned": styles.v3DefaultContainer,
   };
 
   const variant = modeTextVariant[mode] as MD3TypescaleKey;
 
   const contentWrapperProps = {
-    pointerEvents: 'box-none' as ViewProps['pointerEvents'],
+    pointerEvents: "box-none" as ViewProps["pointerEvents"],
     style: [styles.container, isV3 && modeContainerStyles[mode], style],
     testID,
     ...rest,
@@ -145,7 +145,7 @@ const AppbarContent = ({
 
   const content = (
     <>
-      {typeof title === 'string' ? (
+      {typeof title === "string" ? (
         <Text
           {...(isV3 && { variant })}
           ref={titleRef}
@@ -154,9 +154,9 @@ const AppbarContent = ({
               color: titleTextColor,
               ...(isV3
                 ? theme.fonts[variant]
-                : Platform.OS === 'ios'
-                ? theme.fonts.regular
-                : theme.fonts.medium),
+                : Platform.OS === "ios"
+                  ? theme.fonts.regular
+                  : theme.fonts.medium),
             },
             !isV3 && styles.title,
             titleStyle,
@@ -165,10 +165,10 @@ const AppbarContent = ({
           accessible
           accessibilityRole={
             onPress
-              ? 'none'
-              : Platform.OS === 'web'
-              ? ('heading' as 'header')
-              : 'header'
+              ? "none"
+              : Platform.OS === "web"
+                ? ("heading" as "header")
+                : "header"
           }
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
           accessibilityTraits="header"
@@ -211,7 +211,7 @@ const AppbarContent = ({
   return <View {...contentWrapperProps}>{content}</View>;
 };
 
-AppbarContent.displayName = 'Appbar.Content';
+AppbarContent.displayName = "Appbar.Content";
 
 const styles = StyleSheet.create({
   container: {
@@ -223,26 +223,26 @@ const styles = StyleSheet.create({
   },
   v3MediumContainer: {
     paddingHorizontal: 0,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     paddingBottom: 24,
   },
   v3LargeContainer: {
     paddingHorizontal: 0,
     paddingTop: 36,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     paddingBottom: 28,
   },
   title: {
-    fontSize: Platform.OS === 'ios' ? 17 : 20,
+    fontSize: Platform.OS === "ios" ? 17 : 20,
   },
   subtitle: {
-    fontSize: Platform.OS === 'ios' ? 11 : 14,
+    fontSize: Platform.OS === "ios" ? 11 : 14,
   },
 });
 
-const iosTouchableRole: readonly AccessibilityRole[] = ['button', 'header'];
+const iosTouchableRole: readonly AccessibilityRole[] = ["button", "header"];
 const touchableRole: AccessibilityRole = Platform.select({
-  ios: iosTouchableRole as unknown as 'button',
+  ios: iosTouchableRole as unknown as "button",
   default: iosTouchableRole[0],
 });
 

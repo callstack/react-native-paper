@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   GestureResponderEvent,
@@ -7,43 +7,43 @@ import {
   Pressable,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import useLatestCallback from 'use-latest-callback';
+import useLatestCallback from "use-latest-callback";
 
-import CardActions from './CardActions';
-import CardContent from './CardContent';
-import CardCover from './CardCover';
-import CardTitle from './CardTitle';
-import { getCardColors } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $Omit, ThemeProp } from '../../types';
-import hasTouchHandler from '../../utils/hasTouchHandler';
-import { splitStyles } from '../../utils/splitStyles';
-import Surface from '../Surface';
+import CardActions from "./CardActions";
+import CardContent from "./CardContent";
+import CardCover from "./CardCover";
+import CardTitle from "./CardTitle";
+import { getCardColors } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { $Omit, ThemeProp } from "../../types";
+import hasTouchHandler from "../../utils/hasTouchHandler";
+import { splitStyles } from "../../utils/splitStyles";
+import Surface from "../Surface";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
 type OutlinedCardProps = {
-  mode: 'outlined';
+  mode: "outlined";
   elevation?: never;
 };
 
 type ElevatedCardProps = {
-  mode?: 'elevated';
+  mode?: "elevated";
   elevation?: number;
 };
 
 type ContainedCardProps = {
-  mode?: 'contained';
+  mode?: "contained";
   elevation?: never;
 };
 
-type HandlePressType = 'in' | 'out';
+type HandlePressType = "in" | "out";
 
-type Mode = 'elevated' | 'outlined' | 'contained';
+type Mode = "elevated" | "outlined" | "contained";
 
-export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
+export type Props = $Omit<React.ComponentProps<typeof Surface>, "mode"> & {
   /**
    * Mode of the Card.
    * - `elevated` - Card with elevation.
@@ -137,12 +137,12 @@ const Card = ({
   onLongPress,
   onPressOut,
   onPressIn,
-  mode: cardMode = 'elevated',
+  mode: cardMode = "elevated",
   children,
   style,
   contentStyle,
   theme: themeOverrides,
-  testID = 'card',
+  testID = "card",
   accessible,
   disabled,
   ...rest
@@ -152,7 +152,7 @@ const Card = ({
     (modeToCompare: Mode) => {
       return cardMode === modeToCompare;
     },
-    [cardMode]
+    [cardMode],
   );
 
   const hasPassedTouchHandler = hasTouchHandler({
@@ -164,12 +164,12 @@ const Card = ({
 
   // Default animated value
   const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(cardElevation)
+    new Animated.Value(cardElevation),
   );
   // Dark adaptive animated value, used in case of toggling the theme,
   // it prevents animating the background with native drivers inside Surface
   const { current: elevationDarkAdaptive } = React.useRef<Animated.Value>(
-    new Animated.Value(cardElevation)
+    new Animated.Value(cardElevation),
   );
   const { animation, dark, mode, roundness, isV3 } = theme;
 
@@ -179,7 +179,7 @@ const Card = ({
   });
 
   const prevDark = prevDarkRef.current;
-  const isAdaptiveMode = mode === 'adaptive';
+  const isAdaptiveMode = mode === "adaptive";
   const animationDuration = 150 * animation.scale;
 
   React.useEffect(() => {
@@ -203,7 +203,7 @@ const Card = ({
   ]);
 
   const runElevationAnimation = (pressType: HandlePressType) => {
-    const isPressTypeIn = pressType === 'in';
+    const isPressTypeIn = pressType === "in";
     if (dark && isAdaptiveMode) {
       Animated.timing(elevationDarkAdaptive, {
         toValue: isPressTypeIn ? (isV3 ? 2 : 8) : cardElevation,
@@ -221,19 +221,19 @@ const Card = ({
 
   const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
     onPressIn?.(e);
-    runElevationAnimation('in');
+    runElevationAnimation("in");
   });
 
   const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
     onPressOut?.(e);
-    runElevationAnimation('out');
+    runElevationAnimation("out");
   });
 
   const total = React.Children.count(children);
   const siblings = React.Children.map(children, (child) =>
     React.isValidElement(child) && child.type
       ? (child.type as any).displayName
-      : null
+      : null,
   );
   const computedElevation =
     dark && isAdaptiveMode ? elevationDarkAdaptive : elevation;
@@ -249,7 +249,7 @@ const Card = ({
 
   const [, borderRadiusStyles] = splitStyles(
     flattenedStyles,
-    (style) => style.startsWith('border') && style.endsWith('Radius')
+    (style) => style.startsWith("border") && style.endsWith("Radius"),
   );
 
   const borderRadiusCombinedStyles = {
@@ -267,7 +267,7 @@ const Card = ({
               siblings,
               borderRadiusStyles,
             })
-          : child
+          : child,
       )}
     </View>
   );
@@ -275,8 +275,8 @@ const Card = ({
   return (
     <Surface
       style={[
-        isV3 && !isMode('elevated') && { backgroundColor },
-        !isV3 && isMode('outlined')
+        isV3 && !isMode("elevated") && { backgroundColor },
+        !isV3 && isMode("outlined")
           ? styles.resetElevation
           : {
               elevation: computedElevation as unknown as number,
@@ -286,12 +286,12 @@ const Card = ({
       ]}
       theme={theme}
       {...(isV3 && {
-        elevation: isMode('elevated') ? computedElevation : 0,
+        elevation: isMode("elevated") ? computedElevation : 0,
       })}
       testID={`${testID}-container`}
       {...rest}
     >
-      {isMode('outlined') && (
+      {isMode("outlined") && (
         <View
           pointerEvents="none"
           testID={`${testID}-outline`}
@@ -340,9 +340,9 @@ const styles = StyleSheet.create({
   },
   outline: {
     borderWidth: 1,
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
+    position: "absolute",
+    width: "100%",
+    height: "100%",
     zIndex: 2,
   },
   resetElevation: {

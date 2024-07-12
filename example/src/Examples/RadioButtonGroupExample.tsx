@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { StyleSheet, View } from "react-native";
 
-import { List, Paragraph, RadioButton, Text } from 'react-native-paper';
+import { List, Paragraph, RadioButton, Text } from "react-native-paper";
 
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
 const RadioButtonGroupExample = () => {
-  const [value, setValue] = React.useState('first');
-  const [value2, setValue2] = React.useState('first');
+  const [value, setValue] = React.useState("first");
+  const [value2, setValue2] = React.useState("first");
 
   const { colors, isV3 } = useExampleTheme();
   const TextComponent = isV3 ? Text : Paragraph;
@@ -52,13 +52,13 @@ const RadioButtonGroupExample = () => {
   );
 };
 
-RadioButtonGroupExample.title = 'Radio Button Group';
+RadioButtonGroupExample.title = "Radio Button Group";
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingVertical: 8,
     paddingHorizontal: 16,
   },

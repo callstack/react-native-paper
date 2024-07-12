@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+import * as React from "react";
+import { View, ViewStyle, StyleSheet, StyleProp } from "react-native";
 
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import Icon, { IconSource } from '../Icon';
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp } from "../../types";
+import Icon, { IconSource } from "../Icon";
 
 export type Props = {
   /**
@@ -65,15 +65,15 @@ const styles = StyleSheet.create({
     margin: 8,
     height: 40,
     width: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   itemV3: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
-ListIcon.displayName = 'List.Icon';
+ListIcon.displayName = "List.Icon";
 
 export default ListIcon;

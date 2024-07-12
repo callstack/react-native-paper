@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   GestureResponderEvent,
   StyleProp,
@@ -7,21 +7,21 @@ import {
   View,
   Animated,
   ColorValue,
-} from 'react-native';
+} from "react-native";
 
-import { getIconButtonColor } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
-import ActivityIndicator from '../ActivityIndicator';
-import CrossFadeIcon from '../CrossFadeIcon';
-import Icon, { IconSource } from '../Icon';
-import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import { getIconButtonColor } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { $RemoveChildren, ThemeProp } from "../../types";
+import { forwardRef } from "../../utils/forwardRef";
+import ActivityIndicator from "../ActivityIndicator";
+import CrossFadeIcon from "../CrossFadeIcon";
+import Icon, { IconSource } from "../Icon";
+import Surface from "../Surface";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
 
 const PADDING = 8;
 
-type IconButtonMode = 'outlined' | 'contained' | 'contained-tonal';
+type IconButtonMode = "outlined" | "contained" | "contained-tonal";
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -125,11 +125,11 @@ const IconButton = forwardRef<View, Props>(
       mode,
       style,
       theme: themeOverrides,
-      testID = 'icon-button',
+      testID = "icon-button",
       loading = false,
       ...rest
     }: Props,
-    ref
+    ref,
   ) => {
     const theme = useInternalTheme(themeOverrides);
     const { isV3 } = theme;
@@ -150,7 +150,7 @@ const IconButton = forwardRef<View, Props>(
     const buttonSize = isV3 ? size + 2 * PADDING : size * 1.5;
 
     const {
-      borderWidth = isV3 && mode === 'outlined' && !selected ? 1 : 0,
+      borderWidth = isV3 && mode === "outlined" && !selected ? 1 : 0,
       borderRadius = buttonSize / 2,
     } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
@@ -185,7 +185,7 @@ const IconButton = forwardRef<View, Props>(
           accessibilityLabel={accessibilityLabel}
           style={[styles.touchable, { borderRadius }]}
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-          accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
+          accessibilityTraits={disabled ? ["button", "disabled"] : "button"}
           accessibilityComponentType="button"
           accessibilityRole="button"
           accessibilityState={{ disabled }}
@@ -206,19 +206,19 @@ const IconButton = forwardRef<View, Props>(
         </TouchableRipple>
       </Surface>
     );
-  }
+  },
 );
 
 const styles = StyleSheet.create({
   container: {
-    overflow: 'hidden',
+    overflow: "hidden",
     margin: 6,
     elevation: 0,
   },
   touchable: {
     flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   disabled: {
     opacity: 0.32,

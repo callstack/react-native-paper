@@ -1,4 +1,4 @@
-import { NativeModules, Platform } from 'react-native';
+import { NativeModules, Platform } from "react-native";
 
 // Use the existence of expo-constants as a heuristic for determining if the
 // status bar is translucent on Android. This should be replaced in the future

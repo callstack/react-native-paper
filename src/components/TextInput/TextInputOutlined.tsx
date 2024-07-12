@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   View,
@@ -9,15 +9,15 @@ import {
   TextStyle,
   ColorValue,
   LayoutChangeEvent,
-} from 'react-native';
+} from "react-native";
 
-import { Outline } from './Addons/Outline';
-import { AdornmentType, AdornmentSide } from './Adornment/enums';
+import { Outline } from "./Addons/Outline";
+import { AdornmentType, AdornmentSide } from "./Adornment/enums";
 import TextInputAdornment, {
   getAdornmentConfig,
   getAdornmentStyleAdjustmentForNativeInput,
   TextInputAdornmentProps,
-} from './Adornment/TextInputAdornment';
+} from "./Adornment/TextInputAdornment";
 import {
   MAXIMIZED_LABEL_FONT_SIZE,
   MINIMIZED_LABEL_FONT_SIZE,
@@ -27,7 +27,7 @@ import {
   LABEL_PADDING_TOP,
   MIN_DENSE_HEIGHT_OUTLINED,
   LABEL_PADDING_TOP_DENSE,
-} from './constants';
+} from "./constants";
 import {
   calculateLabelTopPosition,
   calculateInputHeight,
@@ -37,10 +37,10 @@ import {
   calculateOutlinedIconAndAffixTopPosition,
   getOutlinedInputColors,
   getConstants,
-} from './helpers';
-import InputLabel from './Label/InputLabel';
-import LabelBackground from './Label/LabelBackground';
-import type { RenderProps, ChildTextInputProps } from './types';
+} from "./helpers";
+import InputLabel from "./Label/InputLabel";
+import LabelBackground from "./Label/LabelBackground";
+import type { RenderProps, ChildTextInputProps } from "./types";
 
 const TextInputOutlined = ({
   disabled = false,
@@ -74,7 +74,7 @@ const TextInputOutlined = ({
   left,
   right,
   placeholderTextColor,
-  testID = 'text-input-outlined',
+  testID = "text-input-outlined",
   contentStyle,
   ...rest
 }: ChildTextInputProps) => {
@@ -98,7 +98,7 @@ const TextInputOutlined = ({
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
   const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
   const lineHeight =
-    lineHeightStyle || (Platform.OS === 'web' ? fontSize * 1.2 : undefined);
+    lineHeightStyle || (Platform.OS === "web" ? fontSize * 1.2 : undefined);
 
   const {
     inputTextColor,
@@ -138,11 +138,11 @@ const TextInputOutlined = ({
   let labelTranslationXOffset = 0;
   const isAdornmentLeftIcon = adornmentConfig.some(
     ({ side, type }) =>
-      side === AdornmentSide.Left && type === AdornmentType.Icon
+      side === AdornmentSide.Left && type === AdornmentType.Icon,
   );
   const isAdornmentRightIcon = adornmentConfig.some(
     ({ side, type }) =>
-      side === AdornmentSide.Right && type === AdornmentType.Icon
+      side === AdornmentSide.Right && type === AdornmentType.Icon,
   );
 
   if (isAdornmentLeftIcon) {
@@ -159,12 +159,12 @@ const TextInputOutlined = ({
   const topPosition = calculateLabelTopPosition(
     labelHeight,
     inputHeight,
-    paddingTop
+    paddingTop,
   );
 
-  if (height && typeof height !== 'number') {
+  if (height && typeof height !== "number") {
     // eslint-disable-next-line
-    console.warn('Currently we support only numbers in height prop');
+    console.warn("Currently we support only numbers in height prop");
   }
 
   const paddingSettings = {
@@ -178,9 +178,9 @@ const TextInputOutlined = ({
     lineHeight,
     label,
     scale: fontScale,
-    isAndroid: Platform.OS === 'android',
+    isAndroid: Platform.OS === "android",
     styles: StyleSheet.flatten(
-      dense ? styles.inputOutlinedDense : styles.inputOutlined
+      dense ? styles.inputOutlinedDense : styles.inputOutlined,
     ) as Padding,
   };
 
@@ -200,13 +200,13 @@ const TextInputOutlined = ({
     : placeholderOpacityAnims[parentState.labelLayout.measured ? 1 : 0];
 
   const placeholderStyle = {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     paddingHorizontal: INPUT_PADDING_HORIZONTAL,
   };
 
   const labelBackgroundColor: ColorValue =
-    backgroundColor === 'transparent'
+    backgroundColor === "transparent"
       ? theme.colors.background
       : backgroundColor;
 
@@ -257,7 +257,7 @@ const TextInputOutlined = ({
       onInputLayout(e);
       onLayout?.(e);
     },
-    [onLayout, onInputLayout]
+    [onLayout, onInputLayout],
   );
 
   const minHeight = (height ||
@@ -298,7 +298,7 @@ const TextInputOutlined = ({
       adornmentConfig,
       rightAffixWidth,
       leftAffixWidth,
-      mode: 'outlined',
+      mode: "outlined",
       isV3,
     });
   const affixTopPosition = {
@@ -381,11 +381,11 @@ const TextInputOutlined = ({
           editable: !disabled && editable,
           selectionColor,
           cursorColor:
-            typeof cursorColor === 'undefined' ? activeColor : cursorColor,
+            typeof cursorColor === "undefined" ? activeColor : cursorColor,
           placeholderTextColor: placeholderTextColor || placeholderColor,
           onFocus,
           onBlur,
-          underlineColorAndroid: 'transparent',
+          underlineColorAndroid: "transparent",
           multiline,
           style: [
             styles.input,
@@ -397,20 +397,20 @@ const TextInputOutlined = ({
               lineHeight,
               fontWeight,
               color: inputTextColor,
-              textAlignVertical: multiline ? 'top' : 'center',
+              textAlignVertical: multiline ? "top" : "center",
               textAlign: textAlign
                 ? textAlign
                 : I18nManager.getConstants().isRTL
-                ? 'right'
-                : 'left',
+                  ? "right"
+                  : "left",
               paddingHorizontal: INPUT_PADDING_HORIZONTAL,
               minWidth: Math.min(
                 parentState.labelTextLayout.width +
                   2 * INPUT_PADDING_HORIZONTAL,
-                MIN_WIDTH
+                MIN_WIDTH,
               ),
             },
-            Platform.OS === 'web' && { outline: 'none' },
+            Platform.OS === "web" && { outline: "none" },
             adornmentStyleAdjustmentForNativeInput,
             contentStyle,
           ],

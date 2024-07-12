@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   ColorValue,
@@ -8,17 +8,17 @@ import {
   StyleSheet,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import useLatestCallback from 'use-latest-callback';
+import useLatestCallback from "use-latest-callback";
 
-import BottomNavigationBar from './BottomNavigationBar';
-import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
-import type { IconSource } from '../Icon';
-import { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
+import BottomNavigationBar from "./BottomNavigationBar";
+import BottomNavigationRouteScreen from "./BottomNavigationRouteScreen";
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp } from "../../types";
+import useAnimatedValueArray from "../../utils/useAnimatedValueArray";
+import type { IconSource } from "../Icon";
+import { Props as TouchableRippleProps } from "../TouchableRipple/TouchableRipple";
 
 export type BaseRoute = {
   key: string;
@@ -221,7 +221,7 @@ export type Props<Route extends BaseRoute> = {
    * The scene animation effect. Specify `'shifting'` for a different effect.
    * By default, 'opacity' will be used.
    */
-  sceneAnimationType?: 'opacity' | 'shifting';
+  sceneAnimationType?: "opacity" | "shifting";
   /**
    * The scene animation Easing.
    */
@@ -265,10 +265,10 @@ export type Props<Route extends BaseRoute> = {
   testID?: string;
 };
 
-const FAR_FAR_AWAY = Platform.OS === 'web' ? 0 : 9999;
+const FAR_FAR_AWAY = Platform.OS === "web" ? 0 : 9999;
 
 const SceneComponent = React.memo(({ component, ...rest }: any) =>
-  React.createElement(component, rest)
+  React.createElement(component, rest),
 );
 
 /**
@@ -332,13 +332,13 @@ const BottomNavigation = <Route extends BaseRoute>({
   getTestID,
   activeColor,
   inactiveColor,
-  keyboardHidesNavigationBar = Platform.OS === 'android',
+  keyboardHidesNavigationBar = Platform.OS === "android",
   barStyle,
   labeled = true,
   style,
   activeIndicatorStyle,
   sceneAnimationEnabled = false,
-  sceneAnimationType = 'opacity',
+  sceneAnimationType = "opacity",
   sceneAnimationEasing,
   onTabPress,
   onTabLongPress,
@@ -347,7 +347,7 @@ const BottomNavigation = <Route extends BaseRoute>({
   safeAreaInsets,
   labelMaxFontSizeMultiplier = 1,
   compact: compactProp,
-  testID = 'bottom-navigation',
+  testID = "bottom-navigation",
   theme: themeOverrides,
   getLazy = ({ route }: { route: Route }) => route.lazy,
 }: Props<Route>) => {
@@ -360,7 +360,7 @@ const BottomNavigation = <Route extends BaseRoute>({
   if (shifting && navigationState.routes.length < 2) {
     shifting = false;
     console.warn(
-      'BottomNavigation needs at least 2 tabs to run shifting animation'
+      "BottomNavigation needs at least 2 tabs to run shifting animation",
     );
   }
 
@@ -372,8 +372,8 @@ const BottomNavigation = <Route extends BaseRoute>({
    */
   const tabsPositionAnims = useAnimatedValueArray(
     navigationState.routes.map((_, i) =>
-      i === navigationState.index ? 0 : i >= navigationState.index ? 1 : -1
-    )
+      i === navigationState.index ? 0 : i >= navigationState.index ? 1 : -1,
+    ),
   );
 
   /**
@@ -384,8 +384,8 @@ const BottomNavigation = <Route extends BaseRoute>({
   const offsetsAnims = useAnimatedValueArray(
     navigationState.routes.map(
       // offscreen === 1, normal === 0
-      (_, i) => (i === navigationState.index ? 0 : 1)
-    )
+      (_, i) => (i === navigationState.index ? 0 : 1),
+    ),
   );
 
   /**
@@ -407,7 +407,7 @@ const BottomNavigation = <Route extends BaseRoute>({
             duration: theme.isV3 || shifting ? 150 * scale : 0,
             useNativeDriver: true,
             easing: sceneAnimationEasing,
-          })
+          }),
         ),
       ]).start(({ finished }) => {
         if (finished) {
@@ -431,7 +431,7 @@ const BottomNavigation = <Route extends BaseRoute>({
       tabsPositionAnims,
       sceneAnimationEasing,
       theme,
-    ]
+    ],
   );
 
   React.useEffect(() => {
@@ -466,19 +466,19 @@ const BottomNavigation = <Route extends BaseRoute>({
       }
 
       const index = navigationState.routes.findIndex(
-        (route) => event.route.key === route.key
+        (route) => event.route.key === route.key,
       );
 
       if (index !== navigationState.index) {
         prevNavigationState.current = navigationState;
         onIndexChange(index);
       }
-    }
+    },
   );
 
   const jumpTo = useLatestCallback((key: string) => {
     const index = navigationState.routes.findIndex(
-      (route) => route.key === key
+      (route) => route.key === key,
     );
 
     prevNavigationState.current = navigationState;
@@ -511,8 +511,8 @@ const BottomNavigation = <Route extends BaseRoute>({
                 outputRange: [0, 1, 0],
               })
             : focused
-            ? 1
-            : 0;
+              ? 1
+              : 0;
 
           const offsetTarget = focused ? 0 : FAR_FAR_AWAY;
 
@@ -524,7 +524,7 @@ const BottomNavigation = <Route extends BaseRoute>({
             : offsetTarget;
 
           const left =
-            sceneAnimationType === 'shifting'
+            sceneAnimationType === "shifting"
               ? tabsPositionAnims[index].interpolate({
                   inputRange: [-1, 0, 1],
                   outputRange: [-50, 0, 50],
@@ -536,10 +536,10 @@ const BottomNavigation = <Route extends BaseRoute>({
           return (
             <BottomNavigationRouteScreen
               key={route.key}
-              pointerEvents={focused ? 'auto' : 'none'}
+              pointerEvents={focused ? "auto" : "none"}
               accessibilityElementsHidden={!focused}
               importantForAccessibility={
-                focused ? 'auto' : 'no-hide-descendants'
+                focused ? "auto" : "no-hide-descendants"
               }
               index={index}
               visibility={opacity}
@@ -548,11 +548,11 @@ const BottomNavigation = <Route extends BaseRoute>({
               removeClippedSubviews={
                 // On iOS, set removeClippedSubviews to true only when not focused
                 // This is an workaround for a bug where the clipped view never re-appears
-                Platform.OS === 'ios' ? navigationState.index !== index : true
+                Platform.OS === "ios" ? navigationState.index !== index : true
               }
             >
               <Animated.View
-                {...(Platform.OS === 'android' && {
+                {...(Platform.OS === "android" && {
                   needsOffscreenAlphaCompositing: countAlphaOffscreen,
                 })}
                 renderToHardwareTextureAndroid={renderToHardwareTextureAndroid}
@@ -620,7 +620,7 @@ BottomNavigation.SceneMap = <Route extends BaseRoute>(scenes: {
   }) => (
     <SceneComponent
       key={route.key}
-      component={scenes[route.key ? route.key : '']}
+      component={scenes[route.key ? route.key : ""]}
       route={route}
       jumpTo={jumpTo}
     />
@@ -635,7 +635,7 @@ export default BottomNavigation;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   content: {
     flex: 1,

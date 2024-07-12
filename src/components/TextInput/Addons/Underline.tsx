@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { Animated, StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import * as React from "react";
+import { Animated, StyleSheet, StyleProp, ViewStyle } from "react-native";
 
-import type { ThemeProp } from 'src/types';
+import type { ThemeProp } from "src/types";
 
-import { useInternalTheme } from '../../../core/theming';
+import { useInternalTheme } from "../../../core/theming";
 
 type UnderlineProps = {
   parentState: {
@@ -65,7 +65,7 @@ export const Underline = ({
 
 const styles = StyleSheet.create({
   underline: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     right: 0,
     bottom: 0,

@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { StyleSheet, Image, View } from 'react-native';
+import * as React from "react";
+import { StyleSheet, Image, View } from "react-native";
 
-import { Caption, List, Text, Chip, Divider } from 'react-native-paper';
+import { Caption, List, Text, Chip, Divider } from "react-native-paper";
 
-import ScreenWrapper from '../ScreenWrapper';
+import ScreenWrapper from "../ScreenWrapper";
 const ListSectionExample = () => {
   return (
     <ScreenWrapper>
@@ -29,7 +29,7 @@ const ListSectionExample = () => {
         <List.Item
           left={() => (
             <Image
-              source={require('../../assets/images/email-icon.png')}
+              source={require("../../assets/images/email-icon.png")}
               style={styles.image}
               accessibilityIgnoresInvertColors
             />
@@ -40,7 +40,7 @@ const ListSectionExample = () => {
         <List.Item
           left={() => (
             <Image
-              source={require('../../assets/images/email-icon.png')}
+              source={require("../../assets/images/email-icon.png")}
               style={styles.image}
               accessibilityIgnoresInvertColors
             />
@@ -56,7 +56,7 @@ const ListSectionExample = () => {
         <List.Item
           left={() => (
             <Image
-              source={require('../../assets/images/email-icon.png')}
+              source={require("../../assets/images/email-icon.png")}
               style={styles.image}
               accessibilityIgnoresInvertColors
             />
@@ -67,7 +67,7 @@ const ListSectionExample = () => {
         <List.Item
           left={() => (
             <Image
-              source={require('../../assets/images/email-icon.png')}
+              source={require("../../assets/images/email-icon.png")}
               style={styles.image}
               accessibilityIgnoresInvertColors
             />
@@ -83,7 +83,7 @@ const ListSectionExample = () => {
         <List.Item
           left={() => (
             <Image
-              source={require('../../assets/images/email-icon.png')}
+              source={require("../../assets/images/email-icon.png")}
               style={styles.image}
               accessibilityIgnoresInvertColors
             />
@@ -130,7 +130,7 @@ const ListSectionExample = () => {
   );
 };
 
-ListSectionExample.title = 'List.Section';
+ListSectionExample.title = "List.Section";
 
 const styles = StyleSheet.create({
   container: {
@@ -142,14 +142,14 @@ const styles = StyleSheet.create({
     margin: 8,
   },
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   column: {
-    flexDirection: 'column',
+    flexDirection: "column",
   },
   customTitle: {
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   additionalPadding: {
     paddingTop: 8,

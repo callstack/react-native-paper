@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 // @ts-ignore
-import MaterialCommunityIcons from 'react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json';
+import MaterialCommunityIcons from "react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json";
 
 const icons: { [key in string]: number } = {
   ...MaterialCommunityIcons,
 };
 
 export default function IconsList() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   const iconNames = Object.keys(icons).filter(
     (item) =>
-      item.includes(query.replace(/\s/g, '-')) ||
-      item.replace(/-/g, '').includes(query)
+      item.includes(query.replace(/\s/g, "-")) ||
+      item.replace(/-/g, "").includes(query),
   );
 
   return (

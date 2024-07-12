@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   AccessibilityState,
   Animated,
@@ -12,29 +12,29 @@ import {
   Pressable,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import useLatestCallback from 'use-latest-callback';
+import useLatestCallback from "use-latest-callback";
 
-import { getChipColors } from './helpers';
-import { useInternalTheme } from '../../core/theming';
-import { white } from '../../styles/themes/v2/colors';
-import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
-import hasTouchHandler from '../../utils/hasTouchHandler';
-import type { IconSource } from '../Icon';
-import Icon from '../Icon';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
+import { getChipColors } from "./helpers";
+import { useInternalTheme } from "../../core/theming";
+import { white } from "../../styles/themes/v2/colors";
+import type { $Omit, EllipsizeProp, ThemeProp } from "../../types";
+import hasTouchHandler from "../../utils/hasTouchHandler";
+import type { IconSource } from "../Icon";
+import Icon from "../Icon";
+import MaterialCommunityIcon from "../MaterialCommunityIcon";
+import Surface from "../Surface";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
+import Text from "../Typography/Text";
 
-export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
+export type Props = $Omit<React.ComponentProps<typeof Surface>, "mode"> & {
   /**
    * Mode of the chip.
    * - `flat` - flat chip without outline.
    * - `outlined` - chip with an outline.
    */
-  mode?: 'flat' | 'outlined';
+  mode?: "flat" | "outlined";
   /**
    * Text content of the `Chip`.
    */
@@ -173,7 +173,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
  * ```
  */
 const Chip = ({
-  mode = 'flat',
+  mode = "flat",
   children,
   icon,
   avatar,
@@ -181,7 +181,7 @@ const Chip = ({
   disabled = false,
   background,
   accessibilityLabel,
-  closeIconAccessibilityLabel = 'Close',
+  closeIconAccessibilityLabel = "Close",
   onPress,
   onLongPress,
   onPressOut,
@@ -192,7 +192,7 @@ const Chip = ({
   textStyle,
   style,
   theme: themeOverrides,
-  testID = 'chip',
+  testID = "chip",
   selectedColor,
   rippleColor: customRippleColor,
   showSelectedOverlay = false,
@@ -207,7 +207,7 @@ const Chip = ({
   const { isV3, roundness } = theme;
 
   const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(isV3 && elevated ? 1 : 0)
+    new Animated.Value(isV3 && elevated ? 1 : 0),
   );
 
   const hasPassedTouchHandler = hasTouchHandler({
@@ -217,7 +217,7 @@ const Chip = ({
     onPressOut,
   });
 
-  const isOutlined = mode === 'outlined';
+  const isOutlined = mode === "outlined";
 
   const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
     const { scale } = theme.animation;
@@ -226,7 +226,7 @@ const Chip = ({
       toValue: isV3 ? (elevated ? 2 : 0) : 4,
       duration: 200 * scale,
       useNativeDriver:
-        Platform.OS === 'web' ||
+        Platform.OS === "web" ||
         Platform.constants.reactNativeVersion.minor <= 72,
     }).start();
   });
@@ -238,7 +238,7 @@ const Chip = ({
       toValue: isV3 && elevated ? 1 : 0,
       duration: 150 * scale,
       useNativeDriver:
-        Platform.OS === 'web' ||
+        Platform.OS === "web" ||
         Platform.constants.reactNativeVersion.minor <= 72,
     }).start();
   });
@@ -274,7 +274,7 @@ const Chip = ({
     disabled,
   };
 
-  const elevationStyle = isV3 || Platform.OS === 'android' ? elevation : 0;
+  const elevationStyle = isV3 || Platform.OS === "android" ? elevation : 0;
   const multiplier = isV3 ? (compact ? 1.5 : 2) : 1;
   const labelSpacings = {
     marginRight: onClose ? 0 : 8 * multiplier,
@@ -367,8 +367,8 @@ const Chip = ({
                     avatar
                       ? white
                       : !disabled && theme.isV3
-                      ? theme.colors.primary
-                      : iconColor
+                        ? theme.colors.primary
+                        : iconColor
                   }
                   size={18}
                   theme={theme}
@@ -419,7 +419,7 @@ const Chip = ({
                 <Icon source={closeIcon} color={iconColor} size={iconSize} />
               ) : (
                 <MaterialCommunityIcon
-                  name={isV3 ? 'close' : 'close-circle'}
+                  name={isV3 ? "close" : "close-circle"}
                   size={iconSize}
                   color={iconColor}
                   direction="ltr"
@@ -436,8 +436,8 @@ const Chip = ({
 const styles = StyleSheet.create({
   container: {
     borderWidth: StyleSheet.hairlineWidth,
-    borderStyle: 'solid',
-    flexDirection: Platform.select({ default: 'column', web: 'row' }),
+    borderStyle: "solid",
+    flexDirection: Platform.select({ default: "column", web: "row" }),
   },
   md3OutlineContainer: {
     borderWidth: 1,
@@ -446,17 +446,17 @@ const styles = StyleSheet.create({
     borderWidth: 0,
   },
   content: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingLeft: 4,
-    position: 'relative',
+    position: "relative",
   },
   md3Content: {
     paddingLeft: 0,
   },
   icon: {
     padding: 4,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   md3Icon: {
     paddingLeft: 8,
@@ -472,11 +472,11 @@ const styles = StyleSheet.create({
   labelText: {
     minHeight: 24,
     lineHeight: 24,
-    textAlignVertical: 'center',
+    textAlignVertical: "center",
     marginVertical: 4,
   },
   md3LabelText: {
-    textAlignVertical: 'center',
+    textAlignVertical: "center",
     marginVertical: 6,
   },
   avatar: {
@@ -496,20 +496,20 @@ const styles = StyleSheet.create({
   },
   // eslint-disable-next-line react-native/no-color-literals
   avatarSelected: {
-    position: 'absolute',
+    position: "absolute",
     top: 4,
     left: 4,
-    backgroundColor: 'rgba(0, 0, 0, .29)',
+    backgroundColor: "rgba(0, 0, 0, .29)",
   },
   closeButtonStyle: {
-    position: 'absolute',
+    position: "absolute",
     right: 0,
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   touchable: {
-    width: '100%',
+    width: "100%",
   },
 });
 

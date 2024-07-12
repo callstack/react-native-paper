@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import type {
   TextInput as NativeTextInput,
   Animated,
@@ -10,14 +10,14 @@ import type {
   ViewStyle,
   NativeSyntheticEvent,
   TextLayoutEventData,
-} from 'react-native';
+} from "react-native";
 
-import type { $Omit, InternalTheme, ThemeProp } from './../../types';
+import type { $Omit, InternalTheme, ThemeProp } from "./../../types";
 
 export type TextInputLabelProp = string | React.ReactElement;
 
 type TextInputProps = React.ComponentPropsWithRef<typeof NativeTextInput> & {
-  mode?: 'flat' | 'outlined';
+  mode?: "flat" | "outlined";
   left?: React.ReactNode;
   right?: React.ReactNode;
   disabled?: boolean;
@@ -66,7 +66,7 @@ export type RenderProps = {
   adjustsFontSizeToFit?: boolean;
   testID?: string;
 };
-type TextInputTypesWithoutMode = $Omit<TextInputProps, 'mode'>;
+type TextInputTypesWithoutMode = $Omit<TextInputProps, "mode">;
 export type State = {
   labeled: Animated.Value;
   error: Animated.Value;
@@ -92,10 +92,10 @@ export type ChildTextInputProps = {
   onLabelTextLayout: (event: NativeSyntheticEvent<TextLayoutEventData>) => void;
   onLeftAffixLayoutChange: (event: LayoutChangeEvent) => void;
   onRightAffixLayoutChange: (event: LayoutChangeEvent) => void;
-} & $Omit<TextInputTypesWithoutMode, 'theme'> & { theme: InternalTheme };
+} & $Omit<TextInputTypesWithoutMode, "theme"> & { theme: InternalTheme };
 
 export type LabelProps = {
-  mode?: 'flat' | 'outlined';
+  mode?: "flat" | "outlined";
   placeholderStyle: any;
   placeholderOpacity:
     | number
@@ -107,7 +107,7 @@ export type LabelProps = {
   labelScale: number;
   fontSize: number;
   lineHeight?: number | undefined;
-  fontWeight: TextStyle['fontWeight'];
+  fontWeight: TextStyle["fontWeight"];
   font: any;
   topPosition: number;
   paddingLeft?: number;

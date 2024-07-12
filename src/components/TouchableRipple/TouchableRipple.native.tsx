@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   PressableAndroidRippleConfig,
   StyleProp,
@@ -8,16 +8,16 @@ import {
   GestureResponderEvent,
   View,
   ColorValue,
-} from 'react-native';
+} from "react-native";
 
-import type { PressableProps } from './Pressable';
-import { Pressable } from './Pressable';
-import { getTouchableRippleColors } from './utils';
-import { Settings, SettingsContext } from '../../core/settings';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
-import hasTouchHandler from '../../utils/hasTouchHandler';
+import type { PressableProps } from "./Pressable";
+import { Pressable } from "./Pressable";
+import { getTouchableRippleColors } from "./utils";
+import { Settings, SettingsContext } from "../../core/settings";
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp } from "../../types";
+import { forwardRef } from "../../utils/forwardRef";
+import hasTouchHandler from "../../utils/hasTouchHandler";
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 const ANDROID_VERSION_PIE = 28;
@@ -50,7 +50,7 @@ const TouchableRipple = (
     theme: themeOverrides,
     ...rest
   }: Props,
-  ref: React.ForwardedRef<View>
+  ref: React.ForwardedRef<View>,
 ) => {
   const theme = useInternalTheme(themeOverrides);
   const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
@@ -76,7 +76,7 @@ const TouchableRipple = (
   // A workaround for ripple on Android P is to use useForeground + overflow: 'hidden'
   // https://github.com/facebook/react-native/issues/6480
   const useForeground =
-    Platform.OS === 'android' &&
+    Platform.OS === "android" &&
     Platform.Version >= ANDROID_VERSION_PIE &&
     borderless;
 
@@ -128,11 +128,11 @@ const TouchableRipple = (
 };
 
 TouchableRipple.supported =
-  Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_LOLLIPOP;
+  Platform.OS === "android" && Platform.Version >= ANDROID_VERSION_LOLLIPOP;
 
 const styles = StyleSheet.create({
   overflowHidden: {
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   underlay: {
     ...StyleSheet.absoluteFillObject,

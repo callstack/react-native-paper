@@ -1,22 +1,22 @@
-import type * as React from 'react';
+import type * as React from "react";
 
-import type { $DeepPartial } from '@callstack/react-theme-provider';
+import type { $DeepPartial } from "@callstack/react-theme-provider";
 
 export type Font = {
   fontFamily: string;
   fontWeight?:
-    | 'normal'
-    | 'bold'
-    | '100'
-    | '200'
-    | '300'
-    | '400'
-    | '500'
-    | '600'
-    | '700'
-    | '800'
-    | '900';
-  fontStyle?: 'normal' | 'italic' | undefined;
+    | "normal"
+    | "bold"
+    | "100"
+    | "200"
+    | "300"
+    | "400"
+    | "500"
+    | "600"
+    | "700"
+    | "800"
+    | "900";
+  fontStyle?: "normal" | "italic" | undefined;
 };
 
 export type Fonts = {
@@ -26,7 +26,7 @@ export type Fonts = {
   thin: Font;
 };
 
-type Mode = 'adaptive' | 'exact';
+type Mode = "adaptive" | "exact";
 
 export type MD2Colors = {
   primary: string;
@@ -143,52 +143,51 @@ export type InternalTheme = MD2Theme | MD3Theme;
 
 // MD3 types
 export enum MD3TypescaleKey {
-  displayLarge = 'displayLarge',
-  displayMedium = 'displayMedium',
-  displaySmall = 'displaySmall',
+  displayLarge = "displayLarge",
+  displayMedium = "displayMedium",
+  displaySmall = "displaySmall",
 
-  headlineLarge = 'headlineLarge',
-  headlineMedium = 'headlineMedium',
-  headlineSmall = 'headlineSmall',
+  headlineLarge = "headlineLarge",
+  headlineMedium = "headlineMedium",
+  headlineSmall = "headlineSmall",
 
-  titleLarge = 'titleLarge',
-  titleMedium = 'titleMedium',
-  titleSmall = 'titleSmall',
+  titleLarge = "titleLarge",
+  titleMedium = "titleMedium",
+  titleSmall = "titleSmall",
 
-  labelLarge = 'labelLarge',
-  labelMedium = 'labelMedium',
-  labelSmall = 'labelSmall',
+  labelLarge = "labelLarge",
+  labelMedium = "labelMedium",
+  labelSmall = "labelSmall",
 
-  bodyLarge = 'bodyLarge',
-  bodyMedium = 'bodyMedium',
-  bodySmall = 'bodySmall',
+  bodyLarge = "bodyLarge",
+  bodyMedium = "bodyMedium",
+  bodySmall = "bodySmall",
 }
 
 export type MD3Type = {
   fontFamily: string;
   letterSpacing: number;
-  fontWeight: Font['fontWeight'];
+  fontWeight: Font["fontWeight"];
   lineHeight: number;
   fontSize: number;
-  fontStyle?: Font['fontStyle'];
+  fontStyle?: Font["fontStyle"];
 };
 
-export type MD3Typescale =
-  | {
-      [key in MD3TypescaleKey]: MD3Type;
-    } & {
-      ['default']: Omit<MD3Type, 'lineHeight' | 'fontSize'>;
-    };
+export type MD3Typescale = {
+  [key in MD3TypescaleKey]: MD3Type;
+} & {
+  ["default"]: Omit<MD3Type, "lineHeight" | "fontSize">;
+};
 
 export type MD3Elevation = 0 | 1 | 2 | 3 | 4 | 5;
 
 export enum ElevationLevels {
-  'level0',
-  'level1',
-  'level2',
-  'level3',
-  'level4',
-  'level5',
+  "level0",
+  "level1",
+  "level2",
+  "level3",
+  "level4",
+  "level5",
 }
 
 export type MD3ElevationColors = {
@@ -198,10 +197,10 @@ export type MD3ElevationColors = {
 export type $Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 export type $RemoveChildren<T extends React.ComponentType<any>> = $Omit<
   React.ComponentPropsWithoutRef<T>,
-  'children'
+  "children"
 >;
 
-export type EllipsizeProp = 'head' | 'middle' | 'tail' | 'clip';
+export type EllipsizeProp = "head" | "middle" | "tail" | "clip";
 
 export type NavigationTheme = {
   dark: boolean;

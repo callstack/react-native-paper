@@ -1,39 +1,39 @@
-import * as React from 'react';
-import { Animated } from 'react-native';
+import * as React from "react";
+import { Animated } from "react-native";
 
-import { render } from '@testing-library/react-native';
-import color from 'color';
+import { render } from "@testing-library/react-native";
+import color from "color";
 
-import { getTheme } from '../../core/theming';
-import { tokens } from '../../styles/themes/v3/tokens';
-import ToggleButton from '../ToggleButton';
-import { getToggleButtonColor } from '../ToggleButton/utils';
+import { getTheme } from "../../core/theming";
+import { tokens } from "../../styles/themes/v3/tokens";
+import ToggleButton from "../ToggleButton";
+import { getToggleButtonColor } from "../ToggleButton/utils";
 
-it('renders toggle button', () => {
+it("renders toggle button", () => {
   const tree = render(
-    <ToggleButton status="checked" onPress={() => {}} icon="heart" />
+    <ToggleButton status="checked" onPress={() => {}} icon="heart" />,
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders disabled toggle button', () => {
+it("renders disabled toggle button", () => {
   const tree = render(
-    <ToggleButton disabled value="toggle" status="checked" icon="heart" />
+    <ToggleButton disabled value="toggle" status="checked" icon="heart" />,
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('renders unchecked toggle button', () => {
+it("renders unchecked toggle button", () => {
   const tree = render(
-    <ToggleButton disabled status="unchecked" icon="heart" />
+    <ToggleButton disabled status="unchecked" icon="heart" />,
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
-it('render toggle button with custom ripple color', () => {
+it("render toggle button with custom ripple color", () => {
   const { getByTestId } = render(
     <ToggleButton
       disabled
@@ -42,52 +42,52 @@ it('render toggle button with custom ripple color', () => {
       icon="heart"
       testID="toggle-button"
       rippleColor="purple"
-    />
+    />,
   );
 
-  const iconContainer = getByTestId('toggle-button-container').props.children;
-  expect(iconContainer.props.rippleColor).toBe('purple');
+  const iconContainer = getByTestId("toggle-button-container").props.children;
+  expect(iconContainer.props.rippleColor).toBe("purple");
 });
 
-describe('getToggleButtonColor', () => {
-  it('should return correct color when checked and theme version 3', () => {
+describe("getToggleButtonColor", () => {
+  it("should return correct color when checked and theme version 3", () => {
     expect(getToggleButtonColor({ theme: getTheme(), checked: true })).toBe(
       color(getTheme().colors.onSecondaryContainer)
         .alpha(tokens.md.ref.opacity.level2)
         .rgb()
-        .string()
+        .string(),
     );
   });
 
-  it('should return correct color when checked and theme version 3, dark theme', () => {
+  it("should return correct color when checked and theme version 3, dark theme", () => {
     expect(getToggleButtonColor({ theme: getTheme(true), checked: true })).toBe(
       color(getTheme(true).colors.onSecondaryContainer)
         .alpha(tokens.md.ref.opacity.level2)
         .rgb()
-        .string()
+        .string(),
     );
   });
 
-  it('should return correct color when checked and theme version 2', () => {
+  it("should return correct color when checked and theme version 2", () => {
     expect(
-      getToggleButtonColor({ theme: getTheme(false, false), checked: true })
-    ).toBe('rgba(0, 0, 0, .08)');
+      getToggleButtonColor({ theme: getTheme(false, false), checked: true }),
+    ).toBe("rgba(0, 0, 0, .08)");
   });
 
-  it('should return correct color when checked and theme version 2, dark theme', () => {
+  it("should return correct color when checked and theme version 2, dark theme", () => {
     expect(
-      getToggleButtonColor({ theme: getTheme(true, false), checked: true })
-    ).toBe('rgba(255, 255, 255, .12)');
+      getToggleButtonColor({ theme: getTheme(true, false), checked: true }),
+    ).toBe("rgba(255, 255, 255, .12)");
   });
 
-  it('should return transparent color when not checked', () => {
+  it("should return transparent color when not checked", () => {
     expect(getToggleButtonColor({ theme: getTheme(), checked: false })).toBe(
-      'transparent'
+      "transparent",
     );
   });
 });
 
-it('animated value changes correctly', () => {
+it("animated value changes correctly", () => {
   const value = new Animated.Value(1);
   const { getByTestId } = render(
     <ToggleButton
@@ -96,9 +96,9 @@ it('animated value changes correctly', () => {
       icon="heart"
       testID="toggle-button"
       style={[{ transform: [{ scale: value }] }]}
-    />
+    />,
   );
-  expect(getByTestId('toggle-button-container-outer-layer')).toHaveStyle({
+  expect(getByTestId("toggle-button-container-outer-layer")).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -110,7 +110,7 @@ it('animated value changes correctly', () => {
 
   jest.advanceTimersByTime(200);
 
-  expect(getByTestId('toggle-button-container-outer-layer')).toHaveStyle({
+  expect(getByTestId("toggle-button-container-outer-layer")).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });

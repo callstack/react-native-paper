@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { I18nManager, StyleProp, StyleSheet, TextStyle } from 'react-native';
+import * as React from "react";
+import { I18nManager, StyleProp, StyleSheet, TextStyle } from "react-native";
 
-import color from 'color';
-import type { ThemeProp } from 'src/types';
+import color from "color";
+import type { ThemeProp } from "src/types";
 
-import Text from './Text';
-import { useInternalTheme } from '../../../core/theming';
+import Text from "./Text";
+import { useInternalTheme } from "../../../core/theming";
 
 type Props = React.ComponentProps<typeof Text> & {
   alpha?: number;
-  family: 'regular' | 'medium' | 'light' | 'thin';
+  family: "regular" | "medium" | "light" | "thin";
   style?: StyleProp<TextStyle>;
   theme?: ThemeProp;
 };
@@ -24,12 +24,12 @@ const StyledText = ({
   const theme = useInternalTheme(themeOverrides);
 
   const textColor = color(
-    theme.isV3 ? theme.colors.onSurface : theme.colors?.text
+    theme.isV3 ? theme.colors.onSurface : theme.colors?.text,
   )
     .alpha(alpha)
     .rgb()
     .string();
-  const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
+  const writingDirection = I18nManager.getConstants().isRTL ? "rtl" : "ltr";
 
   return (
     <Text
@@ -49,7 +49,7 @@ const StyledText = ({
 
 const styles = StyleSheet.create({
   text: {
-    textAlign: 'left',
+    textAlign: "left",
   },
 });
 

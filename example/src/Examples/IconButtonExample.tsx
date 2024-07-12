@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { StyleSheet, View } from "react-native";
 
-import { IconButton, List, MD2Colors, MD3Colors } from 'react-native-paper';
+import { IconButton, List, MD2Colors, MD3Colors } from "react-native-paper";
 
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
 const ButtonExample = () => {
   const { isV3 } = useExampleTheme();
@@ -172,18 +172,18 @@ const ButtonExample = () => {
   );
 };
 
-ButtonExample.title = 'Icon Button';
+ButtonExample.title = "Icon Button";
 
 const styles = StyleSheet.create({
   v2Container: {
-    flexDirection: 'row',
+    flexDirection: "row",
     padding: 8,
   },
   v3Container: {
-    flexDirection: 'column',
+    flexDirection: "column",
   },
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingHorizontal: 12,
   },
   square: {

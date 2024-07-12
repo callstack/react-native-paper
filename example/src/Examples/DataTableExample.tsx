@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import * as React from "react";
+import { StyleSheet } from "react-native";
 
-import { DataTable, Card } from 'react-native-paper';
+import { DataTable, Card } from "react-native-paper";
 
-import ScreenWrapper from '../ScreenWrapper';
+import ScreenWrapper from "../ScreenWrapper";
 
 type ItemsState = Array<{
   key: number;
@@ -18,51 +18,51 @@ const DataTableExample = () => {
   const [items] = React.useState<ItemsState>([
     {
       key: 1,
-      name: 'Cupcake',
+      name: "Cupcake",
       calories: 356,
       fat: 16,
     },
     {
       key: 2,
-      name: 'Eclair',
+      name: "Eclair",
       calories: 262,
       fat: 16,
     },
     {
       key: 3,
-      name: 'Frozen yogurt',
+      name: "Frozen yogurt",
       calories: 159,
       fat: 6,
     },
     {
       key: 4,
-      name: 'Gingerbread',
+      name: "Gingerbread",
       calories: 305,
       fat: 3.7,
     },
     {
       key: 5,
-      name: 'Ice cream sandwich',
+      name: "Ice cream sandwich",
       calories: 237,
       fat: 9,
     },
     {
       key: 6,
-      name: 'Jelly Bean',
+      name: "Jelly Bean",
       calories: 375,
       fat: 0,
     },
   ]);
   const [numberOfItemsPerPageList] = React.useState([2, 3, 4, 200]);
   const [itemsPerPage, onItemsPerPageChange] = React.useState(
-    numberOfItemsPerPageList[0]
+    numberOfItemsPerPageList[0],
   );
   const sortedItems = items
     .slice()
     .sort((item1, item2) =>
       sortAscending
         ? item1.name.localeCompare(item2.name)
-        : item2.name.localeCompare(item1.name)
+        : item2.name.localeCompare(item1.name),
     );
   const from = page * itemsPerPage;
   const to = Math.min((page + 1) * itemsPerPage, items.length);
@@ -77,7 +77,7 @@ const DataTableExample = () => {
         <DataTable>
           <DataTable.Header>
             <DataTable.Title
-              sortDirection={sortAscending ? 'ascending' : 'descending'}
+              sortDirection={sortAscending ? "ascending" : "descending"}
               onPress={() => setSortAscending(!sortAscending)}
               style={styles.first}
             >
@@ -106,7 +106,7 @@ const DataTableExample = () => {
             numberOfItemsPerPage={itemsPerPage}
             onItemsPerPageChange={onItemsPerPageChange}
             showFastPaginationControls
-            selectPageDropdownLabel={'Rows per page'}
+            selectPageDropdownLabel={"Rows per page"}
           />
         </DataTable>
       </Card>
@@ -114,7 +114,7 @@ const DataTableExample = () => {
   );
 };
 
-DataTableExample.title = 'Data Table';
+DataTableExample.title = "Data Table";
 
 const styles = StyleSheet.create({
   content: {

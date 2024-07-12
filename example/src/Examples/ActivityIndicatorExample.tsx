@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { StyleSheet, View } from "react-native";
 
 import {
   ActivityIndicator,
@@ -7,10 +7,10 @@ import {
   List,
   MD2Colors,
   MD3Colors,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
 const ActivityIndicatorExample = () => {
   const [animating, setAnimating] = React.useState<boolean>(true);
@@ -21,7 +21,7 @@ const ActivityIndicatorExample = () => {
       <View style={styles.row}>
         <FAB
           size="small"
-          icon={animating ? 'pause' : 'play'}
+          icon={animating ? "pause" : "play"}
           onPress={() => setAnimating(!animating)}
         />
       </View>
@@ -57,15 +57,15 @@ const ActivityIndicatorExample = () => {
   );
 };
 
-ActivityIndicatorExample.title = 'Activity Indicator';
+ActivityIndicatorExample.title = "Activity Indicator";
 
 const styles = StyleSheet.create({
   container: {
     padding: 4,
   },
   row: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     margin: 10,
   },
 });

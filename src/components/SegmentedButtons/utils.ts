@@ -1,9 +1,9 @@
-import { StyleSheet, ViewStyle } from 'react-native';
+import { StyleSheet, ViewStyle } from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import { black, white } from '../../styles/themes/v2/colors';
-import type { InternalTheme } from '../../types';
+import { black, white } from "../../styles/themes/v2/colors";
+import type { InternalTheme } from "../../types";
 
 type BaseProps = {
   theme: InternalTheme;
@@ -21,16 +21,16 @@ const DEFAULT_PADDING = 9;
 export const getSegmentedButtonDensityPadding = ({
   density,
 }: {
-  density?: 'regular' | 'small' | 'medium' | 'high';
+  density?: "regular" | "small" | "medium" | "high";
 }) => {
   let padding = DEFAULT_PADDING;
 
   switch (density) {
-    case 'small':
+    case "small":
       return padding - 2;
-    case 'medium':
+    case "medium":
       return padding - 4;
-    case 'high':
+    case "high":
       return padding - 8;
     default:
       return padding;
@@ -63,15 +63,15 @@ export const getSegmentedButtonBorderRadius = ({
   theme,
 }: {
   theme: InternalTheme;
-  segment?: 'first' | 'last';
+  segment?: "first" | "last";
 }): ViewStyle => {
-  if (segment === 'first') {
+  if (segment === "first") {
     return {
       borderTopRightRadius: 0,
       borderBottomRightRadius: 0,
       ...(theme.isV3 && { borderRightWidth: 0 }),
     };
-  } else if (segment === 'last') {
+  } else if (segment === "last") {
     return {
       borderTopLeftRadius: 0,
       borderBottomLeftRadius: 0,
@@ -92,7 +92,7 @@ const getSegmentedButtonBackgroundColor = ({ checked, theme }: BaseProps) => {
       return color(theme.colors.primary).alpha(0.12).rgb().string();
     }
   }
-  return 'transparent';
+  return "transparent";
 };
 
 const getSegmentedButtonBorderColor = ({
@@ -118,7 +118,7 @@ const getSegmentedButtonBorderColor = ({
 
 const getSegmentedButtonBorderWidth = ({
   theme,
-}: Omit<BaseProps, 'disabled' | 'checked'>) => {
+}: Omit<BaseProps, "disabled" | "checked">) => {
   if (theme.isV3) {
     return 1;
   }

@@ -1,6 +1,6 @@
-import * as React from 'react';
-import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
-import { Animated, FlatList, Platform, StyleSheet, View } from 'react-native';
+import * as React from "react";
+import type { NativeScrollEvent, NativeSyntheticEvent } from "react-native";
+import { Animated, FlatList, Platform, StyleSheet, View } from "react-native";
 
 import {
   Avatar,
@@ -8,16 +8,16 @@ import {
   MD3Colors,
   Paragraph,
   Text,
-} from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+} from "react-native-paper";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
-import CustomFAB from './CustomFAB';
+import CustomFAB from "./CustomFAB";
 import CustomFABControls, {
   Controls,
   initialControls,
-} from './CustomFABControls';
-import { useExampleTheme } from '../..';
-import { animatedFABExampleData } from '../../../utils';
+} from "./CustomFABControls";
+import { useExampleTheme } from "../..";
+import { animatedFABExampleData } from "../../../utils";
 
 type Item = {
   id: string;
@@ -34,7 +34,7 @@ type Item = {
 const AnimatedFABExample = () => {
   const { colors, isV3 } = useExampleTheme();
 
-  const isIOS = Platform.OS === 'ios';
+  const isIOS = Platform.OS === "ios";
 
   const [extended, setExtended] = React.useState<boolean>(true);
   const [visible, setVisible] = React.useState<boolean>(true);
@@ -42,7 +42,7 @@ const AnimatedFABExample = () => {
   const [controls, setControls] = React.useState<Controls>(initialControls);
 
   const { current: velocity } = React.useRef<Animated.Value>(
-    new Animated.Value(0)
+    new Animated.Value(0),
   );
 
   const renderItem = React.useCallback(
@@ -95,15 +95,15 @@ const AnimatedFABExample = () => {
               </View>
 
               <Icon
-                name={item.favorite ? 'star' : 'star-outline'}
+                name={item.favorite ? "star" : "star-outline"}
                 color={
                   item.favorite
                     ? isV3
                       ? MD3Colors.error70
                       : MD2Colors.orange500
                     : isV3
-                    ? MD3Colors.neutralVariant70
-                    : MD2Colors.grey500
+                      ? MD3Colors.neutralVariant70
+                      : MD2Colors.grey500
                 }
                 size={20}
                 onPress={() => setVisible(!visible)}
@@ -114,7 +114,7 @@ const AnimatedFABExample = () => {
         </View>
       );
     },
-    [visible, isV3]
+    [visible, isV3],
   );
 
   const onScroll = ({
@@ -132,7 +132,7 @@ const AnimatedFABExample = () => {
 
   const _keyExtractor = React.useCallback(
     (item: { id: string }) => item.id,
-    []
+    [],
   );
 
   const { animateFrom, iconMode } = controls;
@@ -161,7 +161,7 @@ const AnimatedFABExample = () => {
         visible={visible}
         animatedValue={velocity}
         extended={extended}
-        label={'New Message'}
+        label={"New Message"}
         animateFrom={animateFrom}
         iconMode={iconMode}
       />
@@ -169,7 +169,7 @@ const AnimatedFABExample = () => {
   );
 };
 
-AnimatedFABExample.title = 'Animated Floating Action Button';
+AnimatedFABExample.title = "Animated Floating Action Button";
 
 const styles = StyleSheet.create({
   container: {
@@ -185,27 +185,27 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     marginBottom: 16,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   itemTextContentContainer: {
-    flexDirection: 'column',
+    flexDirection: "column",
     flex: 1,
   },
   itemHeaderContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   itemMessageContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     flexGrow: 1,
   },
   read: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   icon: {
     marginLeft: 16,
-    alignSelf: 'flex-end',
+    alignSelf: "flex-end",
   },
   date: {
     fontSize: 12,

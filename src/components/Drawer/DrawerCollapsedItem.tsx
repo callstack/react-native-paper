@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   GestureResponderEvent,
@@ -10,13 +10,13 @@ import {
   TextLayoutEventData,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import Badge from '../Badge';
-import Icon, { IconSource } from '../Icon';
-import Text from '../Typography/Text';
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp } from "../../types";
+import Badge from "../Badge";
+import Icon, { IconSource } from "../Icon";
+import Text from "../Typography/Text";
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -106,7 +106,7 @@ const DrawerCollapsedItem = ({
   disabled,
   accessibilityLabel,
   badge = false,
-  testID = 'drawer-collapsed-item',
+  testID = "drawer-collapsed-item",
   labelMaxFontSizeMultiplier,
   ...rest
 }: Props) => {
@@ -117,7 +117,7 @@ const DrawerCollapsedItem = ({
   const [numOfLines, setNumOfLines] = React.useState(1);
 
   const { current: animScale } = React.useRef<Animated.Value>(
-    new Animated.Value(active ? 1 : 0.5)
+    new Animated.Value(active ? 1 : 0.5),
   );
 
   React.useEffect(() => {
@@ -142,7 +142,7 @@ const DrawerCollapsedItem = ({
 
   const backgroundColor = active
     ? theme.colors.secondaryContainer
-    : 'transparent';
+    : "transparent";
   const labelColor = active
     ? theme.colors.onSurface
     : theme.colors.onSurfaceVariant;
@@ -159,7 +159,7 @@ const DrawerCollapsedItem = ({
   // Label is cut off on Android, when centered "labelMedium" text
   // has more than 4 lines, so there is a need to decrease the letter spacing.
   const androidLetterSpacingStyle =
-    Platform.OS === 'android' && numOfLines > 4 && styles.letterSpacing;
+    Platform.OS === "android" && numOfLines > 4 && styles.letterSpacing;
 
   const labelTextStyle = {
     color: labelColor,
@@ -177,7 +177,7 @@ const DrawerCollapsedItem = ({
         onPressOut={onPress ? handlePressOut : undefined}
         disabled={disabled}
         // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-        accessibilityTraits={active ? ['button', 'selected'] : 'button'}
+        accessibilityTraits={active ? ["button", "selected"] : "button"}
         accessibilityComponentType="button"
         accessibilityRole="button"
         accessibilityState={{ selected: active }}
@@ -210,7 +210,7 @@ const DrawerCollapsedItem = ({
           >
             {badge && (
               <View style={styles.badgeContainer}>
-                {typeof badge === 'boolean' ? (
+                {typeof badge === "boolean" ? (
                   <Badge visible={badge} size={badgeSize} />
                 ) : (
                   <Badge visible={badge != null} size={2 * badgeSize}>
@@ -240,39 +240,39 @@ const DrawerCollapsedItem = ({
   );
 };
 
-DrawerCollapsedItem.displayName = 'Drawer.CollapsedItem';
+DrawerCollapsedItem.displayName = "Drawer.CollapsedItem";
 
 const styles = StyleSheet.create({
   wrapper: {
     width: 80,
     marginBottom: 12,
     minHeight: itemSize,
-    alignItems: 'center',
+    alignItems: "center",
   },
   outline: {
     width: itemSize,
     height: outlineHeight,
     borderRadius: itemSize / 2,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   roundedOutline: {
     height: itemSize,
   },
   icon: {
-    position: 'absolute',
+    position: "absolute",
   },
   letterSpacing: {
     letterSpacing: 0.3,
-    alignSelf: 'stretch',
+    alignSelf: "stretch",
   },
   label: {
     marginHorizontal: 12,
     marginTop: 4,
-    textAlign: 'center',
+    textAlign: "center",
   },
   badgeContainer: {
-    position: 'absolute',
+    position: "absolute",
     left: 20,
     bottom: 20,
     zIndex: 2,

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   ColorValue,
@@ -9,17 +9,17 @@ import {
   TextStyle,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import FAB from './FAB';
-import { getFABGroupColors } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import Card from '../Card/Card';
-import type { IconSource } from '../Icon';
-import Text from '../Typography/Text';
+import FAB from "./FAB";
+import { getFABGroupColors } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp } from "../../types";
+import Card from "../Card/Card";
+import type { IconSource } from "../Icon";
+import Text from "../Typography/Text";
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -56,7 +56,7 @@ export type Props = {
     labelStyle?: StyleProp<TextStyle>;
     labelMaxFontSizeMultiplier?: number;
     onPress: (e: GestureResponderEvent) => void;
-    size?: 'small' | 'medium';
+    size?: "small" | "medium";
     testID?: string;
     rippleColor?: ColorValue;
   }>;
@@ -128,7 +128,7 @@ export type Props = {
    *
    * Color mappings variant for combinations of container and icon colors.
    */
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
+  variant?: "primary" | "secondary" | "tertiary" | "surface";
   /**
    * @optional
    */
@@ -216,17 +216,17 @@ const FABGroup = ({
   onStateChange,
   color: colorProp,
   delayLongPress = 200,
-  variant = 'primary',
+  variant = "primary",
   enableLongPressWhenStackOpened = false,
   backdropColor: customBackdropColor,
   rippleColor,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { current: backdrop } = React.useRef<Animated.Value>(
-    new Animated.Value(0)
+    new Animated.Value(0),
   );
   const animations = React.useRef<Animated.Value[]>(
-    actions.map(() => new Animated.Value(open ? 1 : 0))
+    actions.map(() => new Animated.Value(open ? 1 : 0)),
   );
 
   const [prevActions, setPrevActions] = React.useState<
@@ -261,9 +261,9 @@ const FABGroup = ({
                 toValue: 1,
                 duration: 150 * scale,
                 useNativeDriver: true,
-              })
+              }),
             )
-            .reverse()
+            .reverse(),
         ),
       ]).start();
     } else {
@@ -278,7 +278,7 @@ const FABGroup = ({
             toValue: 0,
             duration: 150 * scale,
             useNativeDriver: true,
-          })
+          }),
         ),
       ]).start();
     }
@@ -305,7 +305,7 @@ const FABGroup = ({
           inputRange: [0, 1],
           outputRange: [0.5, 1],
         })
-      : 1
+      : 1,
   );
 
   const translations = opacities.map((opacity) =>
@@ -314,7 +314,7 @@ const FABGroup = ({
           inputRange: [0, 1],
           outputRange: [24, -8],
         })
-      : -8
+      : -8,
   );
   const labelTranslations = opacities.map((opacity) =>
     open
@@ -322,7 +322,7 @@ const FABGroup = ({
           inputRange: [0, 1],
           outputRange: [8, -8],
         })
-      : -8
+      : -8,
   );
 
   const { top, bottom, right, left } = useSafeAreaInsets();
@@ -335,7 +335,7 @@ const FABGroup = ({
 
   if (actions.length !== prevActions?.length) {
     animations.current = actions.map(
-      (_, i) => animations.current[i] || new Animated.Value(open ? 1 : 0)
+      (_, i) => animations.current[i] || new Animated.Value(open ? 1 : 0),
     );
     setPrevActions(actions);
   }
@@ -348,7 +348,7 @@ const FABGroup = ({
       <AnimatedPressable
         accessibilityRole="button"
         onPress={close}
-        pointerEvents={open ? 'auto' : 'none'}
+        pointerEvents={open ? "auto" : "none"}
         style={[
           styles.backdrop,
           {
@@ -358,19 +358,19 @@ const FABGroup = ({
         ]}
       />
       <View pointerEvents="box-none" style={styles.safeArea}>
-        <View pointerEvents={open ? 'box-none' : 'none'}>
+        <View pointerEvents={open ? "box-none" : "none"}>
           {actions.map((it, i) => {
             const labelTextStyle = {
               color: it.labelTextColor ?? labelColor,
               ...(isV3 ? theme.fonts.titleMedium : {}),
             };
             const marginHorizontal =
-              typeof it.size === 'undefined' || it.size === 'small' ? 24 : 16;
+              typeof it.size === "undefined" || it.size === "small" ? 24 : 16;
             const accessibilityLabel =
-              typeof it.accessibilityLabel !== 'undefined'
+              typeof it.accessibilityLabel !== "undefined"
                 ? it.accessibilityLabel
                 : it.label;
-            const size = typeof it.size !== 'undefined' ? it.size : 'small';
+            const size = typeof it.size !== "undefined" ? it.size : "small";
 
             return (
               <View
@@ -381,7 +381,7 @@ const FABGroup = ({
                     marginHorizontal,
                   },
                 ]}
-                pointerEvents={open ? 'box-none' : 'none'}
+                pointerEvents={open ? "box-none" : "none"}
                 accessibilityRole="button"
                 importantForAccessibility="yes"
                 accessible={true}
@@ -390,7 +390,7 @@ const FABGroup = ({
                 {it.label && (
                   <View>
                     <Card
-                      mode={isV3 ? 'contained' : 'elevated'}
+                      mode={isV3 ? "contained" : "elevated"}
                       onPress={(e) => {
                         it.onPress(e);
                         close();
@@ -486,7 +486,7 @@ const FABGroup = ({
   );
 };
 
-FABGroup.displayName = 'FAB.Group';
+FABGroup.displayName = "FAB.Group";
 
 export default FABGroup;
 
@@ -495,11 +495,11 @@ export { FABGroup };
 
 const styles = StyleSheet.create({
   safeArea: {
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
   },
   container: {
     ...StyleSheet.absoluteFillObject,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   fab: {
     marginHorizontal: 16,
@@ -519,13 +519,13 @@ const styles = StyleSheet.create({
   },
   item: {
     marginBottom: 16,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
   // eslint-disable-next-line react-native/no-color-literals
   v3ContainerStyle: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     elevation: 0,
   },
 });

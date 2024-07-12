@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import * as React from "react";
+import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 
-import type { ThemeProp } from 'src/types';
+import type { ThemeProp } from "src/types";
 
-import { useInternalTheme } from '../../core/theming';
+import { useInternalTheme } from "../../core/theming";
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -66,26 +66,26 @@ const DialogActions = (props: Props) => {
                 child.props.style,
               ],
             })
-          : child
+          : child,
       )}
     </View>
   );
 };
 
-DialogActions.displayName = 'Dialog.Actions';
+DialogActions.displayName = "Dialog.Actions";
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
     padding: 8,
   },
   v3Container: {
-    flexDirection: 'row',
+    flexDirection: "row",
     flexGrow: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+    alignItems: "center",
+    justifyContent: "flex-end",
     paddingBottom: 24,
     paddingHorizontal: 24,
   },

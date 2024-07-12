@@ -1,7 +1,7 @@
-import { Animated } from 'react-native';
+import { Animated } from "react-native";
 
-import * as MD2Colors from './themes/v2/colors';
-import { MD3Colors } from './themes/v3/tokens';
+import * as MD2Colors from "./themes/v2/colors";
+import { MD3Colors } from "./themes/v3/tokens";
 
 const SHADOW_COLOR = MD2Colors.black;
 const SHADOW_OPACITY = 0.24;
@@ -10,7 +10,7 @@ const MD3_SHADOW_COLOR = MD3Colors.primary0;
 
 export default function shadow(
   elevation: number | Animated.Value = 0,
-  isV3 = false
+  isV3 = false,
 ) {
   return isV3 ? v3Shadow(elevation) : v2Shadow(elevation);
 }
@@ -31,7 +31,7 @@ function v2Shadow(elevation: number | Animated.Value = 0) {
       shadowOpacity: elevation.interpolate({
         inputRange: [0, 1],
         outputRange: [0, SHADOW_OPACITY],
-        extrapolate: 'clamp',
+        extrapolate: "clamp",
       }),
       shadowRadius: elevation.interpolate({
         inputRange,
@@ -88,7 +88,7 @@ function v3Shadow(elevation: number | Animated.Value = 0) {
       shadowOpacity: elevation.interpolate({
         inputRange: [0, 1],
         outputRange: [0, MD3_SHADOW_OPACITY],
-        extrapolate: 'clamp',
+        extrapolate: "clamp",
       }),
       shadowRadius: elevation.interpolate({
         inputRange,

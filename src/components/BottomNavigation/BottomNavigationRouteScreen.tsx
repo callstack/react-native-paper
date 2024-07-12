@@ -1,5 +1,5 @@
-import React from 'react';
-import { Animated, Platform, View, ViewProps } from 'react-native';
+import React from "react";
+import { Animated, Platform, View, ViewProps } from "react-native";
 
 interface Props extends ViewProps {
   visibility?: 0 | 1 | Animated.AnimatedInterpolation<number>;
@@ -14,7 +14,7 @@ class BottomNavigationRouteScreen extends React.Component<Props> {
     // Hiding them with `display: none` makes sure that they won't receive clicks
     // We only set it on Web since on native, react-native-pager-view's breaks due to layout changing
     const display =
-      Platform.OS === 'web' ? (visibility === 0 ? 'none' : 'flex') : undefined;
+      Platform.OS === "web" ? (visibility === 0 ? "none" : "flex") : undefined;
 
     return (
       <View

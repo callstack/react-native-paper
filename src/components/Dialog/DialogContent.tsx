@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+import * as React from "react";
+import { View, ViewStyle, StyleSheet, StyleProp } from "react-native";
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -42,7 +42,7 @@ const DialogContent = (props: Props) => (
   </View>
 );
 
-DialogContent.displayName = 'Dialog.Content';
+DialogContent.displayName = "Dialog.Content";
 
 const styles = StyleSheet.create({
   container: {

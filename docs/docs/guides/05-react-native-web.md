@@ -43,14 +43,14 @@ module.exports = function override(config, env) {
           ["@babel/preset-env", { useBuiltIns: "usage" }],
           "@babel/preset-react",
           "@babel/preset-flow",
-          "@babel/preset-typescript"
+          "@babel/preset-typescript",
         ],
         plugins: [
           "@babel/plugin-proposal-class-properties",
-          "@babel/plugin-proposal-object-rest-spread"
-        ]
-      }
-    }
+          "@babel/plugin-proposal-object-rest-spread",
+        ],
+      },
+    },
   });
 
   return config;
@@ -83,36 +83,32 @@ npm install --save-dev webpack webpack-cli webpack-dev-server
 If you don't have a webpack config in your project, copy the following to `webpack.config.js` get started:
 
 ```js
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  mode: 'development',
+  mode: "development",
 
   // Path to the entry file, change it according to the path you have
-  entry: path.join(__dirname, 'App.js'),
+  entry: path.join(__dirname, "App.js"),
 
   // Path for the output files
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'app.bundle.js',
+    path: path.join(__dirname, "dist"),
+    filename: "app.bundle.js",
   },
 
   // Enable source map support
-  devtool: 'source-map',
+  devtool: "source-map",
 
   // Loaders and resolver config
   module: {
-    rules: [
-
-    ],
+    rules: [],
   },
-  resolve: {
-
-  },
+  resolve: {},
 
   // Development server config
   devServer: {
-    contentBase: [path.join(__dirname, 'public')],
+    contentBase: [path.join(__dirname, "public")],
     historyApiFallback: true,
   },
 };
@@ -123,15 +119,20 @@ Also create a folder named `public` and add the following file named `index.html
 ```html
 <!doctype html>
 <head>
-  <meta charSet="utf-8" />
+  <meta charset="utf-8" />
   <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
-  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+  <meta
+    name="viewport"
+    content="width=device-width,minimum-scale=1,initial-scale=1"
+  />
 
   <title>App</title>
 
   <style>
-    html, body, #root {
+    html,
+    body,
+    #root {
       height: 100%;
     }
 
@@ -245,11 +246,11 @@ Now we need tweak this section to load the Material Community Icons from the [`r
 ```js
 <PaperProvider>
   <React.Fragment>
-    {Platform.OS === 'web' ? (
+    {Platform.OS === "web" ? (
       <style type="text/css">{`
         @font-face {
           font-family: 'MaterialCommunityIcons';
-          src: url(${require('react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf')}) format('truetype');
+          src: url(${require("react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf")}) format('truetype');
         }
       `}</style>
     ) : null}
@@ -261,7 +262,7 @@ Now we need tweak this section to load the Material Community Icons from the [`r
 Remember to import `Platform` from `react-native` at the top:
 
 ```js
-import { Platform } from 'react-native';
+import { Platform } from "react-native";
 ```
 
 You can also load these fonts using [`css-loader`](https://github.com/webpack-contrib/css-loader) if you prefer.

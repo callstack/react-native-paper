@@ -2,22 +2,15 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "react-native-paper": [
-        "./src/index"
-      ],
-      "react-native-paper/react-navigation": [
-        "./src/react-navigation"
-      ]
+      "react-native-paper": ["./src/index"],
+      "react-native-paper/react-navigation": ["./src/react-navigation"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "jsx": "react",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
+    "lib": ["esnext", "dom"],
     "moduleSuffixes": [".ios", ".native", ".android", ""],
     "module": "esnext",
     "moduleResolution": "node",
@@ -32,7 +25,5 @@
     "strict": true,
     "target": "esnext"
   },
-  "exclude": [
-    "lib/**/*"
-  ]
+  "exclude": ["lib/**/*"]
 }

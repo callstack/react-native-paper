@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
 
 import {
   MD3Elevation,
@@ -7,17 +7,17 @@ import {
   Text,
   MD3Colors,
   List,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
 const SurfaceExample = () => {
   const { isV3 } = useExampleTheme();
   const v2Elevation = [1, 2, 4, 8, 12];
   const elevationValues = isV3 ? Array.from({ length: 6 }) : v2Elevation;
 
-  const renderSurface = (index: number, mode: 'flat' | 'elevated') => (
+  const renderSurface = (index: number, mode: "flat" | "elevated") => (
     <Surface
       key={index}
       style={[
@@ -29,7 +29,7 @@ const SurfaceExample = () => {
     >
       <Text variant="bodyLarge">
         {isV3
-          ? `Elevation ${index === 1 ? '(default)' : ''} ${index}`
+          ? `Elevation ${index === 1 ? "(default)" : ""} ${index}`
           : `${elevationValues[index]}`}
       </Text>
     </Surface>
@@ -39,13 +39,13 @@ const SurfaceExample = () => {
     <ScreenWrapper>
       <List.Section title="Elevated surface">
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {elevationValues.map((_, index) => renderSurface(index, 'elevated'))}
+          {elevationValues.map((_, index) => renderSurface(index, "elevated"))}
         </ScrollView>
       </List.Section>
 
       <List.Section title="Flat surface">
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {elevationValues.map((_, index) => renderSurface(index, 'flat'))}
+          {elevationValues.map((_, index) => renderSurface(index, "flat"))}
         </ScrollView>
       </List.Section>
 
@@ -73,57 +73,57 @@ const SurfaceExample = () => {
   );
 };
 
-SurfaceExample.title = 'Surface';
+SurfaceExample.title = "Surface";
 
 const styles = StyleSheet.create({
   content: {
     padding: 24,
-    alignItems: 'center',
+    alignItems: "center",
   },
   surface: {
     margin: 24,
     height: 80,
     width: 80,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   v3Surface: {
     borderRadius: 16,
     height: 200,
     width: 200,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   horizontalSurfacesContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
     marginBottom: 20,
     borderColor: MD3Colors.tertiary50,
     padding: 10,
     borderWidth: 1,
   },
   horizontalSurface: {
-    width: '48%',
+    width: "48%",
   },
 
   verticalSurfacesContainer: {
     height: 400,
-    justifyContent: 'space-between',
-    width: '100%',
+    justifyContent: "space-between",
+    width: "100%",
     marginBottom: 100,
     borderColor: MD3Colors.tertiary50,
     padding: 10,
     borderWidth: 1,
   },
   verticalSurface: {
-    height: '48%',
-    justifyContent: 'center',
+    height: "48%",
+    justifyContent: "center",
   },
 
   centerText: {
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
 

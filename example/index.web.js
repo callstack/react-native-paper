@@ -1,3 +1,3 @@
-import './assets/styles/fonts.css';
+import "./assets/styles/fonts.css";
 
-export { default } from './src/index';
+export { default } from "./src/index";
