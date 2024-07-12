@@ -24,6 +24,7 @@ import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 import { roundLayoutSize } from '../../utils/roundLayoutSize';
 
+// toDo: will these remain the same
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
 
