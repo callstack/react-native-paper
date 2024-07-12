@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   AccessibilityState,
   Animated,
@@ -9,22 +9,22 @@ import {
   StyleSheet,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import { getExtendedFabStyle, getFABColors, getFabStyle } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
-import ActivityIndicator from '../ActivityIndicator';
-import CrossFadeIcon from '../CrossFadeIcon';
-import Icon, { IconSource } from '../Icon';
-import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
+import { getExtendedFabStyle, getFABColors, getFabStyle } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { $Omit, $RemoveChildren, ThemeProp } from "../../types";
+import { forwardRef } from "../../utils/forwardRef";
+import ActivityIndicator from "../ActivityIndicator";
+import CrossFadeIcon from "../CrossFadeIcon";
+import Icon, { IconSource } from "../Icon";
+import Surface from "../Surface";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
+import Text from "../Typography/Text";
 
-type FABSize = 'small' | 'medium' | 'large';
+type FABSize = "small" | "medium" | "large";
 
-type FABMode = 'flat' | 'elevated';
+type FABMode = "flat" | "elevated";
 
 type IconOrLabel =
   | {
@@ -36,7 +36,7 @@ type IconOrLabel =
       label: string;
     };
 
-export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
+export type Props = $Omit<$RemoveChildren<typeof Surface>, "mode"> & {
   // For `icon` and `label` props their types are duplicated due to the generation of documentation.
   // Appropriate type for them is `IconOrLabel` contains the both union and intersection types.
   /**
@@ -133,7 +133,7 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    *
    * Color mappings variant for combinations of container and icon colors.
    */
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
+  variant?: "primary" | "secondary" | "tertiary" | "surface";
   /**
    * Specifies the largest possible scale a label font can reach.
    */
@@ -199,20 +199,20 @@ const FAB = forwardRef<View, Props>(
       visible = true,
       uppercase: uppercaseProp,
       loading,
-      testID = 'fab',
-      size = 'medium',
+      testID = "fab",
+      size = "medium",
       customSize,
-      mode = 'elevated',
-      variant = 'primary',
+      mode = "elevated",
+      variant = "primary",
       labelMaxFontSizeMultiplier,
       ...rest
     }: Props,
-    ref
+    ref,
   ) => {
     const theme = useInternalTheme(themeOverrides);
     const uppercase = uppercaseProp ?? !theme.isV3;
     const { current: visibility } = React.useRef<Animated.Value>(
-      new Animated.Value(visible ? 1 : 0)
+      new Animated.Value(visible ? 1 : 0),
     );
     const { isV3, animation } = theme;
     const { scale } = animation;
@@ -251,8 +251,8 @@ const FAB = forwardRef<View, Props>(
       customRippleColor,
     });
 
-    const isLargeSize = size === 'large';
-    const isFlatMode = mode === 'flat';
+    const isLargeSize = size === "large";
+    const isFlatMode = mode === "flat";
     const iconSize = isLargeSize ? 36 : 24;
     const loadingIndicatorSize = isLargeSize ? 24 : 18;
     const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
@@ -286,7 +286,7 @@ const FAB = forwardRef<View, Props>(
           !isV3 && disabled && styles.disabled,
           style,
         ]}
-        pointerEvents={visible ? 'auto' : 'none'}
+        pointerEvents={visible ? "auto" : "none"}
         testID={`${testID}-container`}
         {...(isV3 && { elevation: md3Elevation })}
       >
@@ -342,7 +342,7 @@ const FAB = forwardRef<View, Props>(
         </TouchableRipple>
       </Surface>
     );
-  }
+  },
 );
 
 const styles = StyleSheet.create({
@@ -350,15 +350,15 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   content: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   label: {
     marginHorizontal: 8,
   },
   uppercaseLabel: {
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
   disabled: {
     elevation: 0,

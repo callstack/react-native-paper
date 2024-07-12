@@ -1,20 +1,20 @@
-import * as React from 'react';
+import * as React from "react";
 import type {
   StyleProp,
   ViewStyle,
   View,
   Animated,
   ColorValue,
-} from 'react-native';
+} from "react-native";
 
-import color from 'color';
-import type { ThemeProp } from 'src/types';
+import color from "color";
+import type { ThemeProp } from "src/types";
 
-import { useInternalTheme } from '../../core/theming';
-import { black } from '../../styles/themes/v2/colors';
-import { forwardRef } from '../../utils/forwardRef';
-import type { IconSource } from '../Icon';
-import IconButton from '../IconButton/IconButton';
+import { useInternalTheme } from "../../core/theming";
+import { black } from "../../styles/themes/v2/colors";
+import { forwardRef } from "../../utils/forwardRef";
+import type { IconSource } from "../Icon";
+import IconButton from "../IconButton/IconButton";
 
 export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
   /**
@@ -95,17 +95,17 @@ const AppbarAction = forwardRef<View, Props>(
       rippleColor,
       ...rest
     }: Props,
-    ref
+    ref,
   ) => {
     const theme = useInternalTheme(themeOverrides);
 
     const actionIconColor = iconColor
       ? iconColor
       : theme.isV3
-      ? isLeading
-        ? theme.colors.onSurface
-        : theme.colors.onSurfaceVariant
-      : color(black).alpha(0.54).rgb().string();
+        ? isLeading
+          ? theme.colors.onSurface
+          : theme.colors.onSurfaceVariant
+        : color(black).alpha(0.54).rgb().string();
 
     return (
       <IconButton
@@ -121,10 +121,10 @@ const AppbarAction = forwardRef<View, Props>(
         {...rest}
       />
     );
-  }
+  },
 );
 
-AppbarAction.displayName = 'Appbar.Action';
+AppbarAction.displayName = "Appbar.Action";
 
 export default AppbarAction;
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Dimensions,
   Easing,
@@ -6,19 +6,19 @@ import {
   Platform,
   StyleSheet,
   View,
-} from 'react-native';
+} from "react-native";
 
-import type { StackNavigationProp } from '@react-navigation/stack';
+import type { StackNavigationProp } from "@react-navigation/stack";
 import {
   Appbar,
   BottomNavigation,
   BottomNavigationRoute,
   Menu,
-} from 'react-native-paper';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+} from "react-native-paper";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
 type Route = { route: { key: string } };
 
@@ -26,11 +26,11 @@ type Props = {
   navigation: StackNavigationProp<{}>;
 };
 
-const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
+const MORE_ICON = Platform.OS === "ios" ? "dots-horizontal" : "dots-vertical";
 
 const PhotoGallery = ({ route }: Route) => {
   const PHOTOS = Array.from({ length: 24 }).map(
-    (_, i) => `https://unsplash.it/300/300/?random&__id=${route.key}${i}`
+    (_, i) => `https://unsplash.it/300/300/?random&__id=${route.key}${i}`,
   );
 
   return (
@@ -55,42 +55,42 @@ const BottomNavigationExample = ({ navigation }: Props) => {
   const [menuVisible, setMenuVisible] = React.useState(false);
   const [sceneAnimation, setSceneAnimation] =
     React.useState<
-      React.ComponentProps<typeof BottomNavigation>['sceneAnimationType']
+      React.ComponentProps<typeof BottomNavigation>["sceneAnimationType"]
     >();
 
   const [routes] = React.useState<BottomNavigationRoute[]>([
     {
-      key: 'album',
-      title: 'Album',
-      focusedIcon: 'image-album',
-      ...(!isV3 && { color: '#6200ee' }),
+      key: "album",
+      title: "Album",
+      focusedIcon: "image-album",
+      ...(!isV3 && { color: "#6200ee" }),
     },
     {
-      key: 'library',
-      title: 'Library',
-      focusedIcon: 'inbox',
+      key: "library",
+      title: "Library",
+      focusedIcon: "inbox",
       badge: true,
       ...(isV3
-        ? { unfocusedIcon: 'inbox-outline' }
+        ? { unfocusedIcon: "inbox-outline" }
         : {
-            color: '#2962ff',
+            color: "#2962ff",
           }),
     },
     {
-      key: 'favorites',
-      title: 'Favorites',
-      focusedIcon: 'heart',
+      key: "favorites",
+      title: "Favorites",
+      focusedIcon: "heart",
       ...(isV3
-        ? { unfocusedIcon: 'heart-outline' }
+        ? { unfocusedIcon: "heart-outline" }
         : {
-            color: '#00796b',
+            color: "#00796b",
           }),
     },
     {
-      key: 'purchased',
-      title: 'Purchased',
-      focusedIcon: 'shopping',
-      ...(isV3 ? { unfocusedIcon: 'shopping-outline' } : { color: '#c51162' }),
+      key: "purchased",
+      title: "Purchased",
+      focusedIcon: "shopping",
+      ...(isV3 ? { unfocusedIcon: "shopping-outline" } : { color: "#c51162" }),
     },
   ]);
 
@@ -112,12 +112,12 @@ const BottomNavigationExample = ({ navigation }: Props) => {
             <Appbar.Action
               icon={MORE_ICON}
               onPress={() => setMenuVisible(true)}
-              {...(!isV3 && { color: 'white' })}
+              {...(!isV3 && { color: "white" })}
             />
           }
         >
           <Menu.Item
-            trailingIcon={sceneAnimation === undefined ? 'check' : undefined}
+            trailingIcon={sceneAnimation === undefined ? "check" : undefined}
             onPress={() => {
               setSceneAnimation(undefined);
               setMenuVisible(false);
@@ -125,17 +125,17 @@ const BottomNavigationExample = ({ navigation }: Props) => {
             title="Scene animation: none"
           />
           <Menu.Item
-            trailingIcon={sceneAnimation === 'shifting' ? 'check' : undefined}
+            trailingIcon={sceneAnimation === "shifting" ? "check" : undefined}
             onPress={() => {
-              setSceneAnimation('shifting');
+              setSceneAnimation("shifting");
               setMenuVisible(false);
             }}
             title="Scene animation: shifting"
           />
           <Menu.Item
-            trailingIcon={sceneAnimation === 'opacity' ? 'check' : undefined}
+            trailingIcon={sceneAnimation === "opacity" ? "check" : undefined}
             onPress={() => {
-              setSceneAnimation('opacity');
+              setSceneAnimation("opacity");
               setMenuVisible(false);
             }}
             title="Scene animation: opacity"
@@ -156,13 +156,13 @@ const BottomNavigationExample = ({ navigation }: Props) => {
         sceneAnimationEnabled={sceneAnimation !== undefined}
         sceneAnimationType={sceneAnimation}
         sceneAnimationEasing={Easing.ease}
-        getLazy={({ route }) => route.key !== 'album'}
+        getLazy={({ route }) => route.key !== "album"}
       />
     </View>
   );
 };
 
-BottomNavigationExample.title = 'Bottom Navigation';
+BottomNavigationExample.title = "Bottom Navigation";
 
 export default BottomNavigationExample;
 
@@ -171,33 +171,33 @@ const styles = StyleSheet.create({
     web: {
       content: {
         // there is no 'grid' type in RN :(
-        display: 'grid' as 'none',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
-        gridRowGap: '8px',
-        gridColumnGap: '8px',
+        display: "grid" as "none",
+        gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
+        gridRowGap: "8px",
+        gridColumnGap: "8px",
         padding: 8,
       },
       item: {
-        width: '100%',
+        width: "100%",
         height: 150,
       },
     },
     default: {
       content: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
+        flexDirection: "row",
+        flexWrap: "wrap",
         padding: 4,
       },
       item: {
-        height: Dimensions.get('window').width / 2,
-        width: '50%',
+        height: Dimensions.get("window").width / 2,
+        width: "50%",
         padding: 4,
       },
     },
   }),
   photo: {
     flex: 1,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   screen: {
     flex: 1,

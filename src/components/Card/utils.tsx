@@ -1,11 +1,11 @@
-import type { ViewStyle } from 'react-native';
+import type { ViewStyle } from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import { black, white } from '../../styles/themes/v2/colors';
-import type { InternalTheme } from '../../types';
+import { black, white } from "../../styles/themes/v2/colors";
+import type { InternalTheme } from "../../types";
 
-type CardMode = 'elevated' | 'outlined' | 'contained';
+type CardMode = "elevated" | "outlined" | "contained";
 
 type BorderRadiusStyles = Pick<
   ViewStyle,
@@ -51,7 +51,7 @@ export const getCardCoverStyle = ({
     };
   }
 
-  if (typeof total === 'number' && index === total - 1) {
+  if (typeof total === "number" && index === total - 1) {
     return {
       borderBottomLeftRadius: roundness,
     };
@@ -79,10 +79,10 @@ const getBackgroundColor = ({
   isMode: (mode: CardMode) => boolean;
 }) => {
   if (theme.isV3) {
-    if (isMode('contained')) {
+    if (isMode("contained")) {
       return theme.colors.surfaceVariant;
     }
-    if (isMode('outlined')) {
+    if (isMode("outlined")) {
       return theme.colors.surface;
     }
   }

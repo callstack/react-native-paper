@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import * as React from "react";
+import { View, StyleSheet } from "react-native";
 
-import { Text, TouchableRipple } from 'react-native-paper';
+import { Text, TouchableRipple } from "react-native-paper";
 
-import ScreenWrapper from '../ScreenWrapper';
+import ScreenWrapper from "../ScreenWrapper";
 
 const RippleExample = () => {
   return (
@@ -21,7 +21,7 @@ const RippleExample = () => {
   );
 };
 
-RippleExample.title = 'TouchableRipple';
+RippleExample.title = "TouchableRipple";
 
 const styles = StyleSheet.create({
   container: {
@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
   },
   ripple: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

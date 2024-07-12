@@ -6,13 +6,13 @@ title: Getting Started
 
 ## Installation
 
-* Open a Terminal in your project's folder and run:
+- Open a Terminal in your project's folder and run:
 
 ```bash npm2yarn
 npm install react-native-paper
 ```
 
-* From `v5` there is a need to install [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) for handling safe area.
+- From `v5` there is a need to install [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) for handling safe area.
 
 ```bash npm2yarn
 npm install react-native-safe-area-context
@@ -24,9 +24,9 @@ Additionaly for `iOS` platform there is a requirement to link the native parts o
 npx pod-install
 ```
 
-* If you're on a vanilla React Native project, you also need to install and link [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons).
+- If you're on a vanilla React Native project, you also need to install and link [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons).
 
-Specifically `MaterialCommunityIcons` icon pack needs to be included in the project, because some components use those internally (e.g. `AppBar.BackAction` on Android). 
+Specifically `MaterialCommunityIcons` icon pack needs to be included in the project, because some components use those internally (e.g. `AppBar.BackAction` on Android).
 
 ```bash npm2yarn
 npm install react-native-vector-icons
@@ -42,10 +42,10 @@ To get smaller bundle size by excluding modules you don't use, you can use our o
 
 ```js
 module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
+  presets: ["module:metro-react-native-babel-preset"],
   env: {
     production: {
-      plugins: ['react-native-paper/babel'],
+      plugins: ["react-native-paper/babel"],
     },
   },
 };
@@ -54,13 +54,13 @@ module.exports = {
 If you created your project using Expo, it'll look something like this:
 
 ```js
-module.exports = function(api) {
+module.exports = function (api) {
   api.cache(true);
   return {
-    presets: ['babel-preset-expo'],
+    presets: ["babel-preset-expo"],
     env: {
       production: {
-        plugins: ['react-native-paper/babel'],
+        plugins: ["react-native-paper/babel"],
       },
     },
   };
@@ -89,11 +89,11 @@ Wrap your root component in `PaperProvider` from `react-native-paper`. If you ha
 Example:
 
 ```js
-import * as React from 'react';
-import { AppRegistry } from 'react-native';
-import { PaperProvider } from 'react-native-paper';
-import { name as appName } from './app.json';
-import App from './src/App';
+import * as React from "react";
+import { AppRegistry } from "react-native";
+import { PaperProvider } from "react-native-paper";
+import { name as appName } from "./app.json";
+import App from "./src/App";
 
 export default function Main() {
   return (
@@ -111,11 +111,11 @@ The `PaperProvider` component provides the theme to all the components in the fr
 If you have another provider (such as `Redux`), wrap it outside `PaperProvider` so that the context is available to components rendered inside a `Modal` from the library:
 
 ```js
-import * as React from 'react';
-import { PaperProvider } from 'react-native-paper';
-import { Provider as StoreProvider } from 'react-redux';
-import App from './src/App';
-import store from './store';
+import * as React from "react";
+import { PaperProvider } from "react-native-paper";
+import { Provider as StoreProvider } from "react-redux";
+import App from "./src/App";
+import store from "./store";
 
 export default function Main() {
   return (
@@ -135,16 +135,19 @@ You can provide a custom theme to customize the colors, typescales etc. with the
 Example:
 
 ```js
-import * as React from 'react';
-import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
-import App from './src/App';
+import * as React from "react";
+import {
+  MD3LightTheme as DefaultTheme,
+  PaperProvider,
+} from "react-native-paper";
+import App from "./src/App";
 
 const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: 'tomato',
-    secondary: 'yellow',
+    primary: "tomato",
+    secondary: "yellow",
   },
 };
 

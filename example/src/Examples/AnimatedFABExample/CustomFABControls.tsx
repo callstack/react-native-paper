@@ -1,14 +1,14 @@
-import React from 'react';
-import { FlatList, ListRenderItemInfo, StyleSheet, View } from 'react-native';
+import React from "react";
+import { FlatList, ListRenderItemInfo, StyleSheet, View } from "react-native";
 
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from "react-native-gesture-handler";
 import type {
   AnimatedFABAnimateFrom,
   AnimatedFABIconMode,
-} from 'react-native-paper';
-import { Paragraph, RadioButton, Text } from 'react-native-paper';
+} from "react-native-paper";
+import { Paragraph, RadioButton, Text } from "react-native-paper";
 
-import { useExampleTheme } from '../..';
+import { useExampleTheme } from "../..";
 
 export type Controls = {
   iconMode: AnimatedFABIconMode;
@@ -16,8 +16,8 @@ export type Controls = {
 };
 
 export const initialControls: Controls = {
-  iconMode: 'static',
-  animateFrom: 'right',
+  iconMode: "static",
+  animateFrom: "right",
 };
 
 type Props = {
@@ -56,17 +56,17 @@ const CustomControl = ({
 
           <RadioButton
             value="dynamic"
-            status={value === item ? 'checked' : 'unchecked'}
+            status={value === item ? "checked" : "unchecked"}
           />
         </TouchableOpacity>
       );
     },
-    [value, onChange, isV3]
+    [value, onChange, isV3],
   );
 
   const _keyExtractor = React.useCallback(
     (item: (typeof options)[number]) => item,
-    []
+    [],
   );
   const TextComponent = isV3 ? Text : Paragraph;
 
@@ -109,14 +109,14 @@ const CustomFABControls = ({
     >
       <CustomControl
         name="iconMode"
-        options={['static', 'dynamic']}
+        options={["static", "dynamic"]}
         value={iconMode}
         onChange={setIconMode}
       />
 
       <CustomControl
         name="animateFrom"
-        options={['left', 'right']}
+        options={["left", "right"]}
         value={animateFrom}
         onChange={setAnimateFrom}
       />
@@ -131,16 +131,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   controlWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   controlItemsList: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   controlItem: {
     marginLeft: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
 });

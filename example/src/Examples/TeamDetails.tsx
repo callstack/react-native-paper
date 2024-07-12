@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Easing,
   FlatList,
@@ -6,9 +6,9 @@ import {
   StyleSheet,
   useColorScheme,
   View,
-} from 'react-native';
+} from "react-native";
 
-import type { StackNavigationProp } from '@react-navigation/stack';
+import type { StackNavigationProp } from "@react-navigation/stack";
 import {
   Appbar,
   BottomNavigation,
@@ -20,11 +20,11 @@ import {
   IconButton,
   FAB,
   PaperProvider,
-} from 'react-native-paper';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+} from "react-native-paper";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { colorThemes, teamResultsData } from '../../utils';
-import ScreenWrapper from '../ScreenWrapper';
+import { colorThemes, teamResultsData } from "../../utils";
+import ScreenWrapper from "../ScreenWrapper";
 
 type RoutesState = Array<{
   key: string;
@@ -94,7 +94,7 @@ const News = () => {
         </ScrollView>
         <View style={styles.cardContainer}>
           <Card style={styles.card} mode="contained">
-            <Card.Cover source={require('../../assets/images/players.jpg')} />
+            <Card.Cover source={require("../../assets/images/players.jpg")} />
             <Card.Title
               title="Winter transfer window"
               titleVariant="headlineMedium"
@@ -112,7 +112,7 @@ const News = () => {
             </Card.Actions>
           </Card>
           <Card style={styles.card} mode="contained">
-            <Card.Cover source={require('../../assets/images/players-2.jpg')} />
+            <Card.Cover source={require("../../assets/images/players-2.jpg")} />
             <Card.Title
               title="John Doe's injury"
               titleVariant="headlineMedium"
@@ -142,7 +142,7 @@ const Results = () => {
         <IconButton
           onPress={() => {}}
           selected={item.favourite}
-          icon={item.favourite ? 'star' : 'star-outline'}
+          icon={item.favourite ? "star" : "star-outline"}
         />
         <View style={styles.teamResultRow}>
           <View>
@@ -160,8 +160,8 @@ const Results = () => {
             </Text>
           </View>
           <View style={styles.score}>
-            <Text variant="bodyLarge">{item.result.split(':')[0]}</Text>
-            <Text variant="bodyLarge">{item.result.split(':')[1]}</Text>
+            <Text variant="bodyLarge">{item.result.split(":")[0]}</Text>
+            <Text variant="bodyLarge">{item.result.split(":")[1]}</Text>
           </View>
         </View>
       </View>
@@ -186,22 +186,22 @@ const ThemeBasedOnSourceColor = ({ navigation, route }: Props) => {
 
   const [routes] = React.useState<RoutesState>([
     {
-      key: 'news',
-      title: 'News',
-      focusedIcon: 'newspaper-variant',
-      unfocusedIcon: 'newspaper-variant-outline',
+      key: "news",
+      title: "News",
+      focusedIcon: "newspaper-variant",
+      unfocusedIcon: "newspaper-variant-outline",
       badge: true,
     },
     {
-      key: 'results',
-      title: 'Results',
-      focusedIcon: 'soccer-field',
+      key: "results",
+      title: "Results",
+      focusedIcon: "soccer-field",
     },
     {
-      key: 'roster',
-      title: 'Roster',
-      focusedIcon: 'account-group',
-      unfocusedIcon: 'account-group-outline',
+      key: "roster",
+      title: "Roster",
+      focusedIcon: "account-group",
+      unfocusedIcon: "account-group-outline",
     },
   ]);
 
@@ -211,10 +211,10 @@ const ThemeBasedOnSourceColor = ({ navigation, route }: Props) => {
     });
   }, [navigation]);
 
-  const theme = colorThemes[sourceColor || 'paper'];
+  const theme = colorThemes[sourceColor || "paper"];
 
-  const systemColorScheme = useColorScheme() || 'light';
-  const colorScheme = darkMode ? 'dark' : systemColorScheme;
+  const systemColorScheme = useColorScheme() || "light";
+  const colorScheme = darkMode ? "dark" : systemColorScheme;
 
   return (
     <PaperProvider theme={theme[colorScheme]}>
@@ -234,16 +234,16 @@ const ThemeBasedOnSourceColor = ({ navigation, route }: Props) => {
             roster: Roster,
           })}
           sceneAnimationEnabled
-          sceneAnimationType={'opacity'}
+          sceneAnimationType={"opacity"}
           sceneAnimationEasing={Easing.ease}
-          getLazy={({ route }) => route.key !== 'album'}
+          getLazy={({ route }) => route.key !== "album"}
         />
       </View>
     </PaperProvider>
   );
 };
 
-ThemeBasedOnSourceColor.title = 'Theme Based On Source Color';
+ThemeBasedOnSourceColor.title = "Theme Based On Source Color";
 
 export default ThemeBasedOnSourceColor;
 
@@ -252,22 +252,22 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   winner: {
-    fontWeight: '700',
+    fontWeight: "700",
   },
   listRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginVertical: 8,
   },
   teamResultRow: {
     flex: 1,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
+    justifyContent: "space-between",
+    flexDirection: "row",
   },
   score: {
     marginRight: 16,
   },
   fab: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 16,
     right: 16,
   },
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
     marginBottom: 80,
   },
   chipsContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   chipsContent: {
     paddingLeft: 8,

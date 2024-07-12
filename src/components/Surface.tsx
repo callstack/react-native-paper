@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   Platform,
@@ -7,14 +7,14 @@ import {
   StyleSheet,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import { useInternalTheme } from '../core/theming';
-import overlay, { isAnimatedValue } from '../styles/overlay';
-import shadow from '../styles/shadow';
-import type { ThemeProp, MD3Elevation } from '../types';
-import { forwardRef } from '../utils/forwardRef';
-import { splitStyles } from '../utils/splitStyles';
+import { useInternalTheme } from "../core/theming";
+import overlay, { isAnimatedValue } from "../styles/overlay";
+import shadow from "../styles/shadow";
+import type { ThemeProp, MD3Elevation } from "../types";
+import { forwardRef } from "../utils/forwardRef";
+import { splitStyles } from "../utils/splitStyles";
 
 type Elevation = 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
 
@@ -41,7 +41,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * - `elevated` - Surface with a shadow and background color corresponding to set `elevation` value.
    * - `flat` - Surface without a shadow, with the background color corresponding to set `elevation` value.
    */
-  mode?: 'flat' | 'elevated';
+  mode?: "flat" | "elevated";
   /**
    * @optional
    */
@@ -54,7 +54,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
 };
 
 const MD2Surface = forwardRef<View, Props>(
-  ({ style, theme: overrideTheme, ...rest }: Omit<Props, 'elevation'>, ref) => {
+  ({ style, theme: overrideTheme, ...rest }: Omit<Props, "elevation">, ref) => {
     const { elevation = 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
     const { dark: isDarkTheme, mode, colors } = useInternalTheme(overrideTheme);
 
@@ -65,7 +65,7 @@ const MD2Surface = forwardRef<View, Props>(
         style={[
           {
             backgroundColor:
-              isDarkTheme && mode === 'adaptive'
+              isDarkTheme && mode === "adaptive"
                 ? overlay(elevation, colors?.surface)
                 : colors?.surface,
           },
@@ -74,28 +74,28 @@ const MD2Surface = forwardRef<View, Props>(
         ]}
       />
     );
-  }
+  },
 );
 
 const outerLayerStyleProperties: (keyof ViewStyle)[] = [
-  'position',
-  'alignSelf',
-  'top',
-  'right',
-  'bottom',
-  'left',
-  'start',
-  'end',
-  'flex',
-  'flexShrink',
-  'flexGrow',
-  'width',
-  'height',
-  'transform',
-  'opacity',
+  "position",
+  "alignSelf",
+  "top",
+  "right",
+  "bottom",
+  "left",
+  "start",
+  "end",
+  "flex",
+  "flexShrink",
+  "flexGrow",
+  "width",
+  "height",
+  "transform",
+  "opacity",
 ];
 
-const shadowColor = '#000';
+const shadowColor = "#000";
 const iOSShadowOutputRanges = [
   {
     shadowOpacity: 0.15,
@@ -111,7 +111,7 @@ const iOSShadowOutputRanges = [
 const inputRange = [0, 1, 2, 3, 4, 5];
 function getStyleForShadowLayer(
   elevation: Elevation,
-  layer: 0 | 1
+  layer: 0 | 1,
 ): Animated.WithAnimatedValue<ShadowStyleIOS> {
   if (isAnimatedValue(elevation)) {
     return {
@@ -119,7 +119,7 @@ function getStyleForShadowLayer(
       shadowOpacity: elevation.interpolate({
         inputRange: [0, 1],
         outputRange: [0, iOSShadowOutputRanges[layer].shadowOpacity],
-        extrapolate: 'clamp',
+        extrapolate: "clamp",
       }),
       shadowOffset: {
         width: 0,
@@ -148,7 +148,7 @@ function getStyleForShadowLayer(
 
 const SurfaceIOS = forwardRef<
   View,
-  Omit<Props, 'elevation'> & {
+  Omit<Props, "elevation"> & {
     elevation: Elevation;
     backgroundColor?: string | Animated.AnimatedInterpolation<string | number>;
   }
@@ -160,10 +160,10 @@ const SurfaceIOS = forwardRef<
       backgroundColor,
       testID,
       children,
-      mode = 'elevated',
+      mode = "elevated",
       ...props
     },
-    ref
+    ref,
   ) => {
     const [outerLayerViewStyles, innerLayerViewStyles] = React.useMemo(() => {
       const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
@@ -173,23 +173,23 @@ const SurfaceIOS = forwardRef<
           flattenedStyles,
           (style) =>
             outerLayerStyleProperties.includes(style) ||
-            style.startsWith('margin'),
-          (style) => style.startsWith('border') && style.endsWith('Radius')
+            style.startsWith("margin"),
+          (style) => style.startsWith("border") && style.endsWith("Radius"),
         );
 
       if (
-        process.env.NODE_ENV !== 'production' &&
-        filteredStyles.overflow === 'hidden' &&
+        process.env.NODE_ENV !== "production" &&
+        filteredStyles.overflow === "hidden" &&
         elevation !== 0
       ) {
         console.warn(
-          'When setting overflow to hidden on Surface the shadow will not be displayed correctly. Wrap the content of your component in a separate View with the overflow style.'
+          "When setting overflow to hidden on Surface the shadow will not be displayed correctly. Wrap the content of your component in a separate View with the overflow style.",
         );
       }
 
       const bgColor = flattenedStyles.backgroundColor || backgroundColor;
 
-      const isElevated = mode === 'elevated';
+      const isElevated = mode === "elevated";
 
       const outerLayerViewStyles = {
         ...(isElevated && getStyleForShadowLayer(elevation, 0)),
@@ -220,7 +220,7 @@ const SurfaceIOS = forwardRef<
         </Animated.View>
       </Animated.View>
     );
-  }
+  },
 );
 
 /**
@@ -261,11 +261,11 @@ const Surface = forwardRef<View, Props>(
       children,
       theme: overridenTheme,
       style,
-      testID = 'surface',
-      mode = 'elevated',
+      testID = "surface",
+      mode = "elevated",
       ...props
     }: Props,
-    ref
+    ref,
   ) => {
     const theme = useInternalTheme(overridenTheme);
 
@@ -293,10 +293,10 @@ const Surface = forwardRef<View, Props>(
       return colors.elevation?.[`level${elevation}`];
     })();
 
-    const isElevated = mode === 'elevated';
+    const isElevated = mode === "elevated";
 
-    if (Platform.OS === 'web') {
-      const { pointerEvents = 'auto' } = props;
+    if (Platform.OS === "web") {
+      const { pointerEvents = "auto" } = props;
       return (
         <Animated.View
           {...props}
@@ -314,7 +314,7 @@ const Surface = forwardRef<View, Props>(
       );
     }
 
-    if (Platform.OS === 'android') {
+    if (Platform.OS === "android") {
       const elevationLevel = [0, 3, 6, 9, 12, 15];
 
       const getElevationAndroid = () => {
@@ -329,7 +329,7 @@ const Surface = forwardRef<View, Props>(
       };
 
       const { margin, padding, transform, borderRadius } = (StyleSheet.flatten(
-        style
+        style,
       ) || {}) as ViewStyle;
 
       const outerLayerStyles = { margin, padding, transform, borderRadius };
@@ -370,7 +370,7 @@ const Surface = forwardRef<View, Props>(
         {children}
       </SurfaceIOS>
     );
-  }
+  },
 );
 
 export default Surface;

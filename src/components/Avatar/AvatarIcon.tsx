@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import * as React from "react";
+import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 
-import { useInternalTheme } from '../../core/theming';
-import { white } from '../../styles/themes/v2/colors';
-import type { ThemeProp } from '../../types';
-import getContrastingColor from '../../utils/getContrastingColor';
-import Icon, { IconSource } from '../Icon';
+import { useInternalTheme } from "../../core/theming";
+import { white } from "../../styles/themes/v2/colors";
+import type { ThemeProp } from "../../types";
+import getContrastingColor from "../../utils/getContrastingColor";
+import Icon, { IconSource } from "../Icon";
 
 const defaultSize = 64;
 
@@ -54,7 +54,7 @@ const Avatar = ({
     StyleSheet.flatten(style) || {};
   const textColor =
     rest.color ??
-    getContrastingColor(backgroundColor, white, 'rgba(0, 0, 0, .54)');
+    getContrastingColor(backgroundColor, white, "rgba(0, 0, 0, .54)");
 
   return (
     <View
@@ -75,12 +75,12 @@ const Avatar = ({
   );
 };
 
-Avatar.displayName = 'Avatar.Icon';
+Avatar.displayName = "Avatar.Icon";
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

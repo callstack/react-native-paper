@@ -1,12 +1,12 @@
-const config = require('../docusaurus.config');
+const config = require("../docusaurus.config");
 
 const { baseUrl, customFields } = config;
 
 function renderBadge(annotation) {
-  const [annotType, ...annotLabel] = annotation.split(' ');
+  const [annotType, ...annotLabel] = annotation.split(" ");
 
   // eslint-disable-next-line prettier/prettier
-  return `<span class="badge badge-${annotType.replace('@', '')} "><span class="badge-text">${annotLabel.join(' ')}</span></span>`;
+  return `<span class="badge badge-${annotType.replace("@", "")} "><span class="badge-text">${annotLabel.join(" ")}</span></span>`;
 }
 
 function generateKnownIssues(componentName) {
@@ -24,7 +24,7 @@ function generateKnownIssues(componentName) {
         </li>
     `;
     })
-    .join('');
+    .join("");
 
   return `
   ## Known Issues
@@ -52,7 +52,7 @@ function generateMoreExamples(componentName) {
         </li>
     `;
     })
-    .join('');
+    .join("");
 
   return `
   ## More Examples
@@ -87,35 +87,35 @@ function generateScreenshots(componentName, screenshotData) {
 }
 
 function generatePropsTable(data, link, extendsAttributes) {
-  const ANNOTATION_OPTIONAL = '@optional';
-  const ANNOTATION_INTERNAL = '@internal';
+  const ANNOTATION_OPTIONAL = "@optional";
+  const ANNOTATION_INTERNAL = "@internal";
 
   const props = Object.entries(data)
     .map(([prop, value]) => {
       if (!value.description) {
-        value.description = '';
+        value.description = "";
       }
       // Remove @optional annotations from descriptions.
       if (value.description.includes(ANNOTATION_OPTIONAL)) {
-        value.description = value.description.replace(ANNOTATION_OPTIONAL, '');
+        value.description = value.description.replace(ANNOTATION_OPTIONAL, "");
       }
       // Hide props with @internal annotations.
       if (value.description.includes(ANNOTATION_INTERNAL)) {
         return;
       }
 
-      let leadingBadge = '';
-      let descriptionByLines = value.description?.split('\n');
+      let leadingBadge = "";
+      let descriptionByLines = value.description?.split("\n");
 
       // Find leading badge and put it next after prop name.
-      if (descriptionByLines?.[0].includes('@')) {
+      if (descriptionByLines?.[0].includes("@")) {
         leadingBadge = descriptionByLines[0];
       }
 
       return `
 <div>
 
-### ${prop} ${value.required ? '(required)' : ''} ${
+### ${prop} ${value.required ? "(required)" : ""} ${
         leadingBadge && renderBadge(leadingBadge)
       }
 
@@ -124,7 +124,7 @@ function generatePropsTable(data, link, extendsAttributes) {
   <PropTable componentLink="${link}" prop="${prop}" />
   `;
     })
-    .join('');
+    .join("");
 
   return `
   ## Props
@@ -137,31 +137,31 @@ function generatePropsTable(data, link, extendsAttributes) {
     .map((attr) => {
       return `<ExtendsLink name="${attr.name}" link="${attr.link}" />`;
     })
-    .join('')}
+    .join("")}
 
   ${props}
   `;
 }
 
 function generateExtendsAttributes(doc) {
-  const ANNOTATION_EXTENDS = '@extends';
+  const ANNOTATION_EXTENDS = "@extends";
 
   const extendsAttributes = [];
   doc?.description
-    .split('\n')
+    .split("\n")
     .filter((line) => {
       if (line.startsWith(ANNOTATION_EXTENDS)) {
-        const parts = line.split(' ').slice(1);
+        const parts = line.split(" ").slice(1);
         const link = parts.pop();
         extendsAttributes.push({
-          name: parts.join(' '),
+          name: parts.join(" "),
           link,
         });
         return false;
       }
       return true;
     })
-    .join('\n');
+    .join("\n");
 
   return extendsAttributes;
 }
@@ -170,15 +170,15 @@ function generatePageMDX(doc, link) {
   const summaryRegex = /([\s\S]*?)## Usage/;
 
   const description = doc.description
-    .replace(/<\/br>/g, '')
-    .replace(/style="[a-zA-Z0-9:;.\s()\-,]*"/gi, '')
+    .replace(/<\/br>/g, "")
+    .replace(/style="[a-zA-Z0-9:;.\s()\-,]*"/gi, "")
     .replace(/src="screenshots/g, `src="${baseUrl}screenshots`)
-    .replace(/@extends.+$/, '');
+    .replace(/@extends.+$/, "");
 
   const summary = summaryRegex.exec(description)
     ? summaryRegex.exec(description)[1]
-    : '';
-  const usage = description.replace(summary, '');
+    : "";
+  const usage = description.replace(summary, "");
 
   const themeColorsData = JSON.stringify(customFields.themeColors[doc.title]);
   const screenshotData = JSON.stringify(customFields.screenshots[doc.title]);

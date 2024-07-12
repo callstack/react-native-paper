@@ -1,7 +1,7 @@
-import color from 'color';
-import type { InternalTheme } from 'src/types';
+import color from "color";
+import type { InternalTheme } from "src/types";
 
-import type { black, white } from '../../styles/themes/v2/colors';
+import type { black, white } from "../../styles/themes/v2/colors";
 
 type BaseProps = {
   defaultColor: typeof black | typeof white;
@@ -15,7 +15,7 @@ export const getActiveTintColor = ({
 }: BaseProps & {
   activeColor: string | undefined;
 }) => {
-  if (typeof activeColor === 'string') {
+  if (typeof activeColor === "string") {
     return activeColor;
   }
 
@@ -33,7 +33,7 @@ export const getInactiveTintColor = ({
 }: BaseProps & {
   inactiveColor: string | undefined;
 }) => {
-  if (typeof inactiveColor === 'string') {
+  if (typeof inactiveColor === "string") {
     return inactiveColor;
   }
 

@@ -1,10 +1,10 @@
-import * as React from 'react';
+import * as React from "react";
 import type {
   ForwardRefRenderFunction,
   PropsWithoutRef,
   RefAttributes,
   ForwardRefExoticComponent,
-} from 'react';
+} from "react";
 
 export type ForwardRefComponent<T, P = {}> = ForwardRefExoticComponent<
   PropsWithoutRef<P> & RefAttributes<T>
@@ -19,5 +19,5 @@ export type ForwardRefComponent<T, P = {}> = ForwardRefExoticComponent<
  * More info: https://github.com/callstack/react-native-paper/pull/3603
  */
 export const forwardRef: <T, P = {}>(
-  render: ForwardRefRenderFunction<T, P>
+  render: ForwardRefRenderFunction<T, P>,
 ) => ForwardRefComponent<T, P> = React.forwardRef;

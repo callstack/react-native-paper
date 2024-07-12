@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Animated,
   GestureResponderEvent,
@@ -8,14 +8,14 @@ import {
   StyleSheet,
   TextStyle,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import Text from '../Typography/Text';
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp } from "../../types";
+import MaterialCommunityIcon from "../MaterialCommunityIcon";
+import Text from "../Typography/Text";
 
 export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
   /**
@@ -29,7 +29,7 @@ export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
   /**
    * Direction of sorting. An arrow indicating the direction is displayed when this is given.
    */
-  sortDirection?: 'ascending' | 'descending';
+  sortDirection?: "ascending" | "descending";
   /**
    * The number of lines to show.
    */
@@ -93,12 +93,12 @@ const DataTableTitle = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { current: spinAnim } = React.useRef<Animated.Value>(
-    new Animated.Value(sortDirection === 'ascending' ? 0 : 1)
+    new Animated.Value(sortDirection === "ascending" ? 0 : 1),
   );
 
   React.useEffect(() => {
     Animated.timing(spinAnim, {
-      toValue: sortDirection === 'ascending' ? 0 : 1,
+      toValue: sortDirection === "ascending" ? 0 : 1,
       duration: 150,
       useNativeDriver: true,
     }).start();
@@ -110,7 +110,7 @@ const DataTableTitle = ({
 
   const spin = spinAnim.interpolate({
     inputRange: [0, 1],
-    outputRange: ['0deg', '180deg'],
+    outputRange: ["0deg", "180deg"],
   });
 
   const icon = sortDirection ? (
@@ -119,7 +119,7 @@ const DataTableTitle = ({
         name="arrow-up"
         size={16}
         color={textColor}
-        direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+        direction={I18nManager.getConstants().isRTL ? "rtl" : "ltr"}
       />
     </Animated.View>
   ) : null;
@@ -158,37 +158,37 @@ const DataTableTitle = ({
   );
 };
 
-DataTableTitle.displayName = 'DataTable.Title';
+DataTableTitle.displayName = "DataTable.Title";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-    alignContent: 'center',
+    flexDirection: "row",
+    alignContent: "center",
     paddingVertical: 12,
   },
 
   rightText: {
-    textAlign: 'right',
+    textAlign: "right",
   },
 
   leftText: {
-    textAlign: 'left',
+    textAlign: "left",
   },
 
   centerText: {
-    textAlign: 'center',
+    textAlign: "center",
   },
 
   right: {
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
 
   cell: {
     lineHeight: 24,
     fontSize: 12,
-    fontWeight: '500',
-    alignItems: 'center',
+    fontWeight: "500",
+    alignItems: "center",
   },
 
   sorted: {
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
 
   icon: {
     height: 24,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
 });
 

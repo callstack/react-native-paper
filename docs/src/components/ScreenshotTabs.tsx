@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 //@ts-ignore
-import TabItem from '@theme/TabItem';
+import TabItem from "@theme/TabItem";
 //@ts-ignore
-import Tabs from '@theme/Tabs';
+import Tabs from "@theme/Tabs";
 
-import type { DataObject } from '../utils/themeColors';
+import type { DataObject } from "../utils/themeColors";
 
 type ScreenshotTabsProps = {
   screenshotData: DataObject | string;
@@ -13,9 +13,9 @@ type ScreenshotTabsProps = {
 };
 
 const getClassName = (value: string) =>
-  value.endsWith('.gif')
-    ? 'gifScreenshot'
-    : `tabScreenshot${value.includes('full-width') ? 'full-width' : ''}`;
+  value.endsWith(".gif")
+    ? "gifScreenshot"
+    : `tabScreenshot${value.includes("full-width") ? "full-width" : ""}`;
 
 const ScreenshotTabs: React.FC<ScreenshotTabsProps> = ({
   screenshotData,
@@ -25,7 +25,7 @@ const ScreenshotTabs: React.FC<ScreenshotTabsProps> = ({
     <img src={`${baseUrl}${src}`} className={getClassName(src)} />
   );
 
-  if (typeof screenshotData === 'string') {
+  if (typeof screenshotData === "string") {
     return renderScreenhot(screenshotData);
   }
 

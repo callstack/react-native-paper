@@ -1,21 +1,21 @@
-import * as React from 'react';
-import { Platform } from 'react-native';
+import * as React from "react";
+import { Platform } from "react-native";
 
-import type { DrawerNavigationProp } from '@react-navigation/drawer';
-import { getHeaderTitle } from '@react-navigation/elements';
+import type { DrawerNavigationProp } from "@react-navigation/drawer";
+import { getHeaderTitle } from "@react-navigation/elements";
 import {
   CardStyleInterpolators,
   createStackNavigator,
-} from '@react-navigation/stack';
-import { Appbar } from 'react-native-paper';
+} from "@react-navigation/stack";
+import { Appbar } from "react-native-paper";
 
-import ExampleList, { examples } from './ExampleList';
+import ExampleList, { examples } from "./ExampleList";
 
 const Stack = createStackNavigator();
 
 export default function Root() {
   const cardStyleInterpolator =
-    Platform.OS === 'android'
+    Platform.OS === "android"
       ? CardStyleInterpolators.forFadeFromBottomAndroid
       : CardStyleInterpolators.forHorizontalIOS;
   return (
@@ -52,7 +52,7 @@ export default function Root() {
         name="ExampleList"
         component={ExampleList}
         options={{
-          title: 'Examples',
+          title: "Examples",
         }}
       />
       {(Object.keys(examples) as Array<keyof typeof examples>).map((id) => {
@@ -63,7 +63,7 @@ export default function Root() {
             component={examples[id]}
             options={{
               title: examples[id].title,
-              headerShown: id !== 'themingWithReactNavigation',
+              headerShown: id !== "themingWithReactNavigation",
             }}
           />
         );

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   ColorValue,
   GestureResponderEvent,
@@ -7,15 +7,15 @@ import {
   StyleSheet,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import Icon, { IconSource } from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp } from "../../types";
+import Icon, { IconSource } from "../Icon";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
+import Text from "../Typography/Text";
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -107,14 +107,14 @@ const DrawerItem = ({
     ? isV3
       ? theme.colors.secondaryContainer
       : color(theme.colors.primary).alpha(0.12).rgb().string()
-    : 'transparent';
+    : "transparent";
   const contentColor = active
     ? isV3
       ? theme.colors.onSecondaryContainer
       : theme.colors.primary
     : isV3
-    ? theme.colors.onSurfaceVariant
-    : color(theme.colors.text).alpha(0.68).rgb().string();
+      ? theme.colors.onSurfaceVariant
+      : color(theme.colors.text).alpha(0.68).rgb().string();
 
   const labelMargin = icon ? (isV3 ? 12 : 32) : 0;
   const borderRadius = (isV3 ? 7 : 1) * roundness;
@@ -172,7 +172,7 @@ const DrawerItem = ({
   );
 };
 
-DrawerItem.displayName = 'Drawer.Item';
+DrawerItem.displayName = "Drawer.Item";
 
 const styles = StyleSheet.create({
   container: {
@@ -180,15 +180,15 @@ const styles = StyleSheet.create({
     marginVertical: 4,
   },
   v3Container: {
-    justifyContent: 'center',
+    justifyContent: "center",
     height: 56,
     marginLeft: 12,
     marginRight: 12,
     marginVertical: 0,
   },
   wrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: 8,
   },
   v3Wrapper: {
@@ -198,8 +198,8 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   label: {
     marginRight: 32,

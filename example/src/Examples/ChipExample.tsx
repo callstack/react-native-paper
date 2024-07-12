@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { Image, StyleSheet, View } from "react-native";
 
-import color from 'color';
+import color from "color";
 import {
   Chip,
   List,
@@ -9,15 +9,15 @@ import {
   MD3Colors,
   Snackbar,
   Text,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
 const ChipExample = () => {
   const [snackbarProperties, setSnackbarProperties] = React.useState({
     visible: false,
-    text: '',
+    text: "",
   });
   const { isV3 } = useExampleTheme();
   const customColor = isV3 ? MD3Colors.error50 : MD2Colors.purple900;
@@ -53,7 +53,7 @@ const ChipExample = () => {
               onClose={() =>
                 setSnackbarProperties({
                   visible: true,
-                  text: 'Close button pressed',
+                  text: "Close button pressed",
                 })
               }
               style={styles.chip}
@@ -67,7 +67,7 @@ const ChipExample = () => {
               onClose={() =>
                 setSnackbarProperties({
                   visible: true,
-                  text: 'Heart icon close button pressed',
+                  text: "Heart icon close button pressed",
                 })
               }
               style={styles.chip}
@@ -77,7 +77,7 @@ const ChipExample = () => {
             <Chip
               avatar={
                 <Image
-                  source={require('../../assets/images/avatar.png')}
+                  source={require("../../assets/images/avatar.png")}
                   accessibilityIgnoresInvertColors
                 />
               }
@@ -85,7 +85,7 @@ const ChipExample = () => {
               onClose={() =>
                 setSnackbarProperties({
                   visible: true,
-                  text: 'Avatar close button pressed',
+                  text: "Avatar close button pressed",
                 })
               }
               style={styles.chip}
@@ -96,7 +96,7 @@ const ChipExample = () => {
               selected
               avatar={
                 <Image
-                  source={require('../../assets/images/avatar.png')}
+                  source={require("../../assets/images/avatar.png")}
                   accessibilityIgnoresInvertColors
                 />
               }
@@ -111,7 +111,7 @@ const ChipExample = () => {
               onClose={() =>
                 setSnackbarProperties({
                   visible: true,
-                  text: 'Disabled heart icon close button pressed',
+                  text: "Disabled heart icon close button pressed",
                 })
               }
               style={styles.chip}
@@ -122,7 +122,7 @@ const ChipExample = () => {
               disabled
               avatar={
                 <Image
-                  source={require('../../assets/images/avatar.png')}
+                  source={require("../../assets/images/avatar.png")}
                   accessibilityIgnoresInvertColors
                 />
               }
@@ -172,7 +172,7 @@ const ChipExample = () => {
               onClose={() =>
                 setSnackbarProperties({
                   visible: true,
-                  text: 'Close button pressed',
+                  text: "Close button pressed",
                 })
               }
               style={styles.chip}
@@ -186,7 +186,7 @@ const ChipExample = () => {
               onClose={() =>
                 setSnackbarProperties({
                   visible: true,
-                  text: 'Heart icon close button pressed',
+                  text: "Heart icon close button pressed",
                 })
               }
               style={styles.chip}
@@ -197,7 +197,7 @@ const ChipExample = () => {
               mode="outlined"
               avatar={
                 <Image
-                  source={require('../../assets/images/avatar.png')}
+                  source={require("../../assets/images/avatar.png")}
                   accessibilityIgnoresInvertColors
                 />
               }
@@ -211,7 +211,7 @@ const ChipExample = () => {
               mode="outlined"
               avatar={
                 <Image
-                  source={require('../../assets/images/avatar.png')}
+                  source={require("../../assets/images/avatar.png")}
                   accessibilityIgnoresInvertColors
                 />
               }
@@ -227,7 +227,7 @@ const ChipExample = () => {
               onClose={() =>
                 setSnackbarProperties({
                   visible: true,
-                  text: 'Disabled close button pressed',
+                  text: "Disabled close button pressed",
                 })
               }
               style={styles.chip}
@@ -239,7 +239,7 @@ const ChipExample = () => {
               mode="outlined"
               avatar={
                 <Image
-                  source={require('../../assets/images/avatar.png')}
+                  source={require("../../assets/images/avatar.png")}
                   accessibilityIgnoresInvertColors
                 />
               }
@@ -259,7 +259,7 @@ const ChipExample = () => {
                   compact
                   avatar={
                     <Image
-                      source={require('../../assets/images/avatar.png')}
+                      source={require("../../assets/images/avatar.png")}
                       accessibilityIgnoresInvertColors
                     />
                   }
@@ -273,7 +273,7 @@ const ChipExample = () => {
                   compact
                   avatar={
                     <Image
-                      source={require('../../assets/images/avatar.png')}
+                      source={require("../../assets/images/avatar.png")}
                       accessibilityIgnoresInvertColors
                     />
                   }
@@ -287,7 +287,7 @@ const ChipExample = () => {
               mode="outlined"
               onPress={() => {}}
               onLongPress={() =>
-                setSnackbarProperties({ visible: true, text: '' })
+                setSnackbarProperties({ visible: true, text: "" })
               }
               style={styles.chip}
             >
@@ -347,7 +347,7 @@ const ChipExample = () => {
               onClose={() =>
                 setSnackbarProperties({
                   visible: true,
-                  text: 'Close button pressed',
+                  text: "Close button pressed",
                 })
               }
               style={styles.bigTextFlex}
@@ -363,7 +363,7 @@ const ChipExample = () => {
               onClose={() =>
                 setSnackbarProperties({
                   visible: true,
-                  text: 'Custom icon close button pressed',
+                  text: "Custom icon close button pressed",
                 })
               }
               closeIcon="arrow-down"
@@ -387,7 +387,7 @@ const ChipExample = () => {
       </ScreenWrapper>
       <Snackbar
         visible={snackbarProperties.visible}
-        onDismiss={() => setSnackbarProperties({ visible: false, text: '' })}
+        onDismiss={() => setSnackbarProperties({ visible: false, text: "" })}
         duration={Snackbar.DURATION_SHORT}
       >
         {snackbarProperties.text}
@@ -396,12 +396,12 @@ const ChipExample = () => {
   );
 };
 
-ChipExample.title = 'Chip';
+ChipExample.title = "Chip";
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     paddingHorizontal: 12,
   },
   chip: {

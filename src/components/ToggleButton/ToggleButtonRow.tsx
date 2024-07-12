@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
+import * as React from "react";
+import { StyleSheet, View, StyleProp, ViewStyle } from "react-native";
 
-import ToggleButton from './ToggleButton';
-import ToggleButtonGroup from './ToggleButtonGroup';
+import ToggleButton from "./ToggleButton";
+import ToggleButtonGroup from "./ToggleButtonGroup";
 
 export type Props = {
   /**
@@ -59,8 +59,8 @@ const ToggleButtonRow = ({ value, onValueChange, children, style }: Props) => {
                 i === 0
                   ? styles.first
                   : i === count - 1
-                  ? styles.last
-                  : styles.middle,
+                    ? styles.last
+                    : styles.middle,
                 // @ts-expect-error: We're sure that child is a React Element
                 child.props.style,
               ],
@@ -74,11 +74,11 @@ const ToggleButtonRow = ({ value, onValueChange, children, style }: Props) => {
   );
 };
 
-ToggleButtonRow.displayName = 'ToggleButton.Row';
+ToggleButtonRow.displayName = "ToggleButton.Row";
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   button: {
     borderWidth: StyleSheet.hairlineWidth,

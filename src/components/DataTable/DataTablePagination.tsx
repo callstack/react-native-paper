@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   ColorValue,
   I18nManager,
@@ -6,17 +6,17 @@ import {
   StyleSheet,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import color from 'color';
-import type { ThemeProp } from 'src/types';
+import color from "color";
+import type { ThemeProp } from "src/types";
 
-import { useInternalTheme } from '../../core/theming';
-import Button from '../Button/Button';
-import IconButton from '../IconButton/IconButton';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import Menu from '../Menu/Menu';
-import Text from '../Typography/Text';
+import { useInternalTheme } from "../../core/theming";
+import Button from "../Button/Button";
+import IconButton from "../IconButton/IconButton";
+import MaterialCommunityIcon from "../MaterialCommunityIcon";
+import Menu from "../Menu/Menu";
+import Text from "../Typography/Text";
 
 export type Props = React.ComponentPropsWithRef<typeof View> &
   PaginationControlsProps &
@@ -119,7 +119,7 @@ const PaginationControls = ({
               name="page-first"
               color={color}
               size={size}
-              direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+              direction={I18nManager.getConstants().isRTL ? "rtl" : "ltr"}
             />
           )}
           iconColor={textColor}
@@ -136,7 +136,7 @@ const PaginationControls = ({
             name="chevron-left"
             color={color}
             size={size}
-            direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+            direction={I18nManager.getConstants().isRTL ? "rtl" : "ltr"}
           />
         )}
         iconColor={textColor}
@@ -152,7 +152,7 @@ const PaginationControls = ({
             name="chevron-right"
             color={color}
             size={size}
-            direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+            direction={I18nManager.getConstants().isRTL ? "rtl" : "ltr"}
           />
         )}
         iconColor={textColor}
@@ -169,7 +169,7 @@ const PaginationControls = ({
               name="page-last"
               color={color}
               size={size}
-              direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+              direction={I18nManager.getConstants().isRTL ? "rtl" : "ltr"}
             />
           )}
           iconColor={textColor}
@@ -311,7 +311,7 @@ const DataTablePagination = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const labelColor = color(
-    theme.isV3 ? theme.colors.onSurface : theme?.colors.text
+    theme.isV3 ? theme.colors.onSurface : theme?.colors.text,
   )
     .alpha(0.6)
     .rgb()
@@ -335,7 +335,7 @@ const DataTablePagination = ({
               numberOfLines={3}
               accessibilityLabel={
                 selectPageDropdownAccessibilityLabel ||
-                'selectPageDropdownLabel'
+                "selectPageDropdownLabel"
               }
             >
               {selectPageDropdownLabel}
@@ -353,7 +353,7 @@ const DataTablePagination = ({
       <Text
         style={[styles.label, { color: labelColor }]}
         numberOfLines={3}
-        accessibilityLabel={accessibilityLabel || 'label'}
+        accessibilityLabel={accessibilityLabel || "label"}
       >
         {label}
       </Text>
@@ -370,19 +370,19 @@ const DataTablePagination = ({
   );
 };
 
-DataTablePagination.displayName = 'DataTable.Pagination';
+DataTablePagination.displayName = "DataTable.Pagination";
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'flex-end',
-    flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: "flex-end",
+    flexDirection: "row",
+    alignItems: "center",
     paddingLeft: 16,
-    flexWrap: 'wrap',
+    flexWrap: "wrap",
   },
   optionsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginVertical: 6,
   },
   label: {
@@ -390,14 +390,14 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   button: {
-    textAlign: 'center',
+    textAlign: "center",
     marginRight: 16,
   },
   iconsContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   contentStyle: {
-    flexDirection: 'row-reverse',
+    flexDirection: "row-reverse",
   },
 });
 

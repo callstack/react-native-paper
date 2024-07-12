@@ -1,27 +1,27 @@
 /* @flow */
 
-const parser = require('@babel/parser');
-const types = require('babel-types');
-const fs = require('fs');
-const path = require('path');
+const parser = require("@babel/parser");
+const types = require("babel-types");
+const fs = require("fs");
+const path = require("path");
 
-const packageJson = require('../package.json');
-const root = path.resolve(__dirname, '..');
-const output = path.join(root, 'lib/mappings.json');
-const source = fs.readFileSync(path.resolve(root, 'src', 'index.tsx'), 'utf8');
+const packageJson = require("../package.json");
+const root = path.resolve(__dirname, "..");
+const output = path.join(root, "lib/mappings.json");
+const source = fs.readFileSync(path.resolve(root, "src", "index.tsx"), "utf8");
 const ast = parser.parse(source, {
-  sourceType: 'module',
+  sourceType: "module",
   plugins: [
-    'jsx',
-    'typescript',
-    'objectRestSpread',
-    'classProperties',
-    'asyncGenerators',
+    "jsx",
+    "typescript",
+    "objectRestSpread",
+    "classProperties",
+    "asyncGenerators",
   ],
 });
 
 const index = packageJson.module;
-const relative = (value /* : string */) =>
+const relative = (value: string) =>
   path.relative(root, path.resolve(path.dirname(index), value));
 
 const mappings = ast.program.body.reduce((acc, declaration, index, self) => {
@@ -43,12 +43,12 @@ const mappings = ast.program.body.reduce((acc, declaration, index, self) => {
             it.specifiers.some(
               (s) =>
                 types.isImportNamespaceSpecifier(s) &&
-                s.local.name === specifier.local.name
+                s.local.name === specifier.local.name,
             )
           ) {
             acc[name] = {
               path: relative(it.source.value),
-              name: '*',
+              name: "*",
             };
           }
         });
@@ -62,5 +62,5 @@ const mappings = ast.program.body.reduce((acc, declaration, index, self) => {
 fs.existsSync(path.dirname(output)) || fs.mkdirSync(path.dirname(output));
 fs.writeFileSync(
   output,
-  JSON.stringify({ name: packageJson.name, index, mappings }, null, 2)
+  JSON.stringify({ name: packageJson.name, index, mappings }, null, 2),
 );

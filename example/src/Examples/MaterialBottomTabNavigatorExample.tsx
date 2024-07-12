@@ -1,9 +1,9 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
-import { createMaterialBottomTabNavigator } from '../../../src/react-navigation';
+import { createMaterialBottomTabNavigator } from "../../../src/react-navigation";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -18,7 +18,7 @@ export default function MaterialBottomTabNavigatorExample() {
         name="Feed"
         component={Feed}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (
             <Icon name="home" color={color} size={26} />
           ),
@@ -28,7 +28,7 @@ export default function MaterialBottomTabNavigatorExample() {
         name="Notifications"
         component={Notifications}
         options={{
-          tabBarLabel: 'Updates',
+          tabBarLabel: "Updates",
           tabBarIcon: ({ color }) => (
             <Icon name="bell" color={color} size={26} />
           ),
@@ -38,7 +38,7 @@ export default function MaterialBottomTabNavigatorExample() {
         name="Profile"
         component={Profile}
         options={{
-          tabBarLabel: 'Profile',
+          tabBarLabel: "Profile",
           tabBarIcon: ({ color }) => (
             <Icon name="account" color={color} size={26} />
           ),
@@ -48,7 +48,7 @@ export default function MaterialBottomTabNavigatorExample() {
   );
 }
 
-MaterialBottomTabNavigatorExample.title = 'Material Bottom Tab Navigator';
+MaterialBottomTabNavigatorExample.title = "Material Bottom Tab Navigator";
 
 function Feed() {
   return (
@@ -77,11 +77,11 @@ function Notifications() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   // eslint-disable-next-line react-native/no-color-literals
   tabs: {
-    backgroundColor: 'tomato',
+    backgroundColor: "tomato",
   },
 });

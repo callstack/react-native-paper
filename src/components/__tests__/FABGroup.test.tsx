@@ -1,34 +1,34 @@
-import * as React from 'react';
-import { Animated } from 'react-native';
+import * as React from "react";
+import { Animated } from "react-native";
 
-import { act, fireEvent, render } from '@testing-library/react-native';
-import color from 'color';
+import { act, fireEvent, render } from "@testing-library/react-native";
+import color from "color";
 
-import { getTheme } from '../../core/theming';
-import FAB from '../FAB';
-import { getFABGroupColors } from '../FAB/utils';
+import { getTheme } from "../../core/theming";
+import FAB from "../FAB";
+import { getFABGroupColors } from "../FAB/utils";
 
-jest.mock('react-native-safe-area-context', () => ({
+jest.mock("react-native-safe-area-context", () => ({
   useSafeAreaInsets: () => ({ bottom: 34, left: 0, right: 0, top: 47 }),
 }));
 
-describe('getFABGroupColors - backdrop color', () => {
-  it('should return custom color', () => {
+describe("getFABGroupColors - backdrop color", () => {
+  it("should return custom color", () => {
     expect(
       getFABGroupColors({
         theme: getTheme(),
-        customBackdropColor: 'transparent',
-      })
+        customBackdropColor: "transparent",
+      }),
     ).toMatchObject({
-      backdropColor: 'transparent',
+      backdropColor: "transparent",
     });
   });
 
-  it('should return correct backdrop color, for theme version 3', () => {
+  it("should return correct backdrop color, for theme version 3", () => {
     expect(
       getFABGroupColors({
         theme: getTheme(),
-      })
+      }),
     ).toMatchObject({
       backdropColor: color(getTheme().colors.background)
         .alpha(0.95)
@@ -37,43 +37,43 @@ describe('getFABGroupColors - backdrop color', () => {
     });
   });
 
-  it('should return correct backdrop color, for theme version 2', () => {
+  it("should return correct backdrop color, for theme version 2", () => {
     expect(
       getFABGroupColors({
         theme: getTheme(false, false),
-      })
+      }),
     ).toMatchObject({
       backdropColor: getTheme(false, false).colors.backdrop,
     });
   });
 });
 
-describe('getFABGroupColors - label color', () => {
-  it('should return correct theme color, for theme version 3', () => {
+describe("getFABGroupColors - label color", () => {
+  it("should return correct theme color, for theme version 3", () => {
     expect(
       getFABGroupColors({
         theme: getTheme(),
-      })
+      }),
     ).toMatchObject({
       labelColor: getTheme().colors.onSurface,
     });
   });
 
-  it('should return correct theme color, dark mode, for theme version 2', () => {
+  it("should return correct theme color, dark mode, for theme version 2", () => {
     expect(
       getFABGroupColors({
         theme: getTheme(true, false),
-      })
+      }),
     ).toMatchObject({
       labelColor: getTheme(true, false).colors.text,
     });
   });
 
-  it('should return correct theme color, light mode, for theme version 2', () => {
+  it("should return correct theme color, light mode, for theme version 2", () => {
     expect(
       getFABGroupColors({
         theme: getTheme(false, false),
-      })
+      }),
     ).toMatchObject({
       labelColor: color(getTheme(false, false).colors.text)
         .fade(0.54)
@@ -83,30 +83,30 @@ describe('getFABGroupColors - label color', () => {
   });
 });
 
-describe('getFABGroupColors - stacked FAB background color', () => {
-  it('should return correct theme color, for theme version 3', () => {
+describe("getFABGroupColors - stacked FAB background color", () => {
+  it("should return correct theme color, for theme version 3", () => {
     expect(
       getFABGroupColors({
         theme: getTheme(),
-      })
+      }),
     ).toMatchObject({
       stackedFABBackgroundColor: getTheme().colors.elevation.level3,
     });
   });
 
-  it('should return correct theme color, dark mode, for theme version 2', () => {
+  it("should return correct theme color, dark mode, for theme version 2", () => {
     expect(
       getFABGroupColors({
         theme: getTheme(false, false),
-      })
+      }),
     ).toMatchObject({
       stackedFABBackgroundColor: getTheme(false, false).colors.surface,
     });
   });
 });
 
-describe('FABActions - labelStyle - containerStyle', () => {
-  it('correctly applies label style', () => {
+describe("FABActions - labelStyle - containerStyle", () => {
+  it("correctly applies label style", () => {
     const { getByText } = render(
       <FAB.Group
         visible
@@ -115,25 +115,25 @@ describe('FABActions - labelStyle - containerStyle', () => {
         onStateChange={() => {}}
         actions={[
           {
-            label: 'complete',
+            label: "complete",
             labelStyle: {
               fontSize: 24,
-              fontWeight: '500',
+              fontWeight: "500",
             },
             onPress() {},
-            icon: '',
+            icon: "",
           },
         ]}
-      />
+      />,
     );
 
-    expect(getByText('complete')).toHaveStyle({
+    expect(getByText("complete")).toHaveStyle({
       fontSize: 24,
-      fontWeight: '500',
+      fontWeight: "500",
     });
   });
 
-  it('correctly applies containerStyle style', () => {
+  it("correctly applies containerStyle style", () => {
     const { getByA11yHint } = render(
       <FAB.Group
         visible
@@ -142,28 +142,28 @@ describe('FABActions - labelStyle - containerStyle', () => {
         onStateChange={() => {}}
         actions={[
           {
-            label: 'remove',
-            accessibilityHint: 'hint',
+            label: "remove",
+            accessibilityHint: "hint",
             containerStyle: {
               padding: 16,
-              backgroundColor: '#687456',
+              backgroundColor: "#687456",
               marginLeft: 16,
             },
             onPress() {},
-            icon: '',
+            icon: "",
           },
         ]}
-      />
+      />,
     );
 
-    expect(getByA11yHint('hint')).toHaveStyle({
+    expect(getByA11yHint("hint")).toHaveStyle({
       padding: 16,
-      backgroundColor: '#687456',
+      backgroundColor: "#687456",
     });
   });
 });
 
-it('correctly adds label prop', () => {
+it("correctly adds label prop", () => {
   const { getByText } = render(
     <FAB.Group
       visible
@@ -173,49 +173,49 @@ it('correctly adds label prop', () => {
       onStateChange={() => {}}
       actions={[
         {
-          label: 'testing',
+          label: "testing",
           onPress() {},
-          icon: '',
+          icon: "",
         },
       ]}
-    />
+    />,
   );
 
-  expect(getByText('Label test')).toBeTruthy();
+  expect(getByText("Label test")).toBeTruthy();
 });
 
-it('correct renders custom ripple color passed to FAB.Group and its item', () => {
+it("correct renders custom ripple color passed to FAB.Group and its item", () => {
   const { getByTestId } = render(
     <FAB.Group
       visible
       open
       label="Label test"
       testID="fab-group"
-      rippleColor={'orange'}
+      rippleColor={"orange"}
       icon="plus"
       onStateChange={() => {}}
       actions={[
         {
-          label: 'testing',
+          label: "testing",
           onPress() {},
-          icon: '',
-          rippleColor: 'yellow',
-          testID: 'fab-group-item',
+          icon: "",
+          rippleColor: "yellow",
+          testID: "fab-group-item",
         },
       ]}
-    />
+    />,
   );
 
   expect(
-    getByTestId('fab-group-container').props.children.props.rippleColor
-  ).toBe('orange');
+    getByTestId("fab-group-container").props.children.props.rippleColor,
+  ).toBe("orange");
 
   expect(
-    getByTestId('fab-group-item-container').props.children.props.rippleColor
-  ).toBe('yellow');
+    getByTestId("fab-group-item-container").props.children.props.rippleColor,
+  ).toBe("yellow");
 });
 
-it('animated value changes correctly', () => {
+it("animated value changes correctly", () => {
   const value = new Animated.Value(1);
   const { getByTestId } = render(
     <FAB.Group
@@ -228,14 +228,14 @@ it('animated value changes correctly', () => {
       fabStyle={[{ transform: [{ scale: value }] }]}
       actions={[
         {
-          label: 'testing',
+          label: "testing",
           onPress() {},
-          icon: '',
+          icon: "",
         },
       ]}
-    />
+    />,
   );
-  expect(getByTestId('my-fab-container-outer-layer')).toHaveStyle({
+  expect(getByTestId("my-fab-container-outer-layer")).toHaveStyle({
     transform: [{ scale: 1 }],
   });
 
@@ -247,13 +247,13 @@ it('animated value changes correctly', () => {
 
   jest.advanceTimersByTime(200);
 
-  expect(getByTestId('my-fab-container-outer-layer')).toHaveStyle({
+  expect(getByTestId("my-fab-container-outer-layer")).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
 });
 
-describe('FAB.Group events', () => {
-  it('onPress passes event', () => {
+describe("FAB.Group events", () => {
+  it("onPress passes event", () => {
     const onPress = jest.fn();
     const { getByText } = render(
       <FAB.Group
@@ -265,22 +265,22 @@ describe('FAB.Group events', () => {
         onPress={onPress}
         actions={[
           {
-            label: 'testing',
+            label: "testing",
             onPress() {},
-            icon: '',
+            icon: "",
           },
         ]}
-      />
+      />,
     );
 
     act(() => {
-      fireEvent(getByText('Stack test'), 'onPress', { key: 'value' });
+      fireEvent(getByText("Stack test"), "onPress", { key: "value" });
     });
 
-    expect(onPress).toHaveBeenCalledWith({ key: 'value' });
+    expect(onPress).toHaveBeenCalledWith({ key: "value" });
   });
 
-  it('onLongPress passes event', () => {
+  it("onLongPress passes event", () => {
     const onLongPress = jest.fn();
     const { getByText } = render(
       <FAB.Group
@@ -292,24 +292,24 @@ describe('FAB.Group events', () => {
         onLongPress={onLongPress}
         actions={[
           {
-            label: 'testing',
+            label: "testing",
             onPress() {},
-            icon: '',
+            icon: "",
           },
         ]}
-      />
+      />,
     );
 
     act(() => {
-      fireEvent(getByText('Stack test'), 'onLongPress', { key: 'value' });
+      fireEvent(getByText("Stack test"), "onLongPress", { key: "value" });
     });
 
-    expect(onLongPress).toHaveBeenCalledWith({ key: 'value' });
+    expect(onLongPress).toHaveBeenCalledWith({ key: "value" });
   });
 });
 
-describe('Toggle Stack visibility', () => {
-  it('toggles stack visibility on press', () => {
+describe("Toggle Stack visibility", () => {
+  it("toggles stack visibility on press", () => {
     const onStateChange = jest.fn();
     const { getByText } = render(
       <FAB.Group
@@ -320,22 +320,22 @@ describe('Toggle Stack visibility', () => {
         onStateChange={onStateChange}
         actions={[
           {
-            label: 'testing',
+            label: "testing",
             onPress() {},
-            icon: '',
+            icon: "",
           },
         ]}
-      />
+      />,
     );
 
     act(() => {
-      fireEvent(getByText('Stack test'), 'onPress');
+      fireEvent(getByText("Stack test"), "onPress");
     });
 
     expect(onStateChange).toHaveBeenCalledTimes(1);
   });
 
-  it('does not toggle stack visibility on long press', () => {
+  it("does not toggle stack visibility on long press", () => {
     const onStateChange = jest.fn();
     const { getByText } = render(
       <FAB.Group
@@ -346,22 +346,22 @@ describe('Toggle Stack visibility', () => {
         onStateChange={onStateChange}
         actions={[
           {
-            label: 'testing',
+            label: "testing",
             onPress() {},
-            icon: '',
+            icon: "",
           },
         ]}
-      />
+      />,
     );
 
     act(() => {
-      fireEvent(getByText('Stack test'), 'onLongPress');
+      fireEvent(getByText("Stack test"), "onLongPress");
     });
 
     expect(onStateChange).toHaveBeenCalledTimes(0);
   });
 
-  it('toggles stack visibility on long press with toggleStackOnLongPress prop', () => {
+  it("toggles stack visibility on long press with toggleStackOnLongPress prop", () => {
     const onStateChange = jest.fn();
     const { getByText } = render(
       <FAB.Group
@@ -373,22 +373,22 @@ describe('Toggle Stack visibility', () => {
         onStateChange={onStateChange}
         actions={[
           {
-            label: 'testing',
+            label: "testing",
             onPress() {},
-            icon: '',
+            icon: "",
           },
         ]}
-      />
+      />,
     );
 
     act(() => {
-      fireEvent(getByText('Stack test'), 'onLongPress');
+      fireEvent(getByText("Stack test"), "onLongPress");
     });
 
     expect(onStateChange).toHaveBeenCalledTimes(1);
   });
 
-  it('does not toggle stack visibility on press with toggleStackOnLongPress prop', () => {
+  it("does not toggle stack visibility on press with toggleStackOnLongPress prop", () => {
     const onStateChange = jest.fn();
     const { getByText } = render(
       <FAB.Group
@@ -400,22 +400,22 @@ describe('Toggle Stack visibility', () => {
         onStateChange={onStateChange}
         actions={[
           {
-            label: 'testing',
+            label: "testing",
             onPress() {},
-            icon: '',
+            icon: "",
           },
         ]}
-      />
+      />,
     );
 
     act(() => {
-      fireEvent(getByText('Stack test'), 'onPress');
+      fireEvent(getByText("Stack test"), "onPress");
     });
 
     expect(onStateChange).toHaveBeenCalledTimes(0);
   });
 
-  it('does not trigger onLongPress when stack is opened', () => {
+  it("does not trigger onLongPress when stack is opened", () => {
     const onStateChange = jest.fn();
     const onLongPress = jest.fn();
     const { getByText } = render(
@@ -428,22 +428,22 @@ describe('Toggle Stack visibility', () => {
         onLongPress={onLongPress}
         actions={[
           {
-            label: 'testing',
+            label: "testing",
             onPress() {},
-            icon: '',
+            icon: "",
           },
         ]}
-      />
+      />,
     );
 
     act(() => {
-      fireEvent(getByText('Stack test'), 'onLongPress');
+      fireEvent(getByText("Stack test"), "onLongPress");
     });
 
     expect(onLongPress).toHaveBeenCalledTimes(0);
   });
 
-  it('does trigger onLongPress when stack is opened and enableLongPressWhenStackOpened is true', () => {
+  it("does trigger onLongPress when stack is opened and enableLongPressWhenStackOpened is true", () => {
     const onStateChange = jest.fn();
     const onLongPress = jest.fn();
     const { getByText } = render(
@@ -457,16 +457,16 @@ describe('Toggle Stack visibility', () => {
         onLongPress={onLongPress}
         actions={[
           {
-            label: 'testing',
+            label: "testing",
             onPress() {},
-            icon: '',
+            icon: "",
           },
         ]}
-      />
+      />,
     );
 
     act(() => {
-      fireEvent(getByText('Stack test'), 'onLongPress');
+      fireEvent(getByText("Stack test"), "onLongPress");
     });
 
     expect(onLongPress).toHaveBeenCalledTimes(1);

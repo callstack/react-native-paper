@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { List, Divider } from 'react-native-paper';
+import { List, Divider } from "react-native-paper";
 
-import ScreenWrapper from '../ScreenWrapper';
+import ScreenWrapper from "../ScreenWrapper";
 
 const ListAccordionExample = () => {
   const [expanded, setExpanded] = React.useState<boolean>(true);
@@ -60,6 +60,6 @@ const ListAccordionExample = () => {
   );
 };
 
-ListAccordionExample.title = 'List.Accordion';
+ListAccordionExample.title = "List.Accordion";
 
 export default ListAccordionExample;

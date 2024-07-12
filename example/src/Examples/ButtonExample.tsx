@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { Image, StyleSheet, View } from "react-native";
 
-import { Button, List, Text } from 'react-native-paper';
+import { Button, List, Text } from "react-native-paper";
 
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
 const ButtonExample = () => {
   const theme = useExampleTheme();
@@ -13,7 +13,7 @@ const ButtonExample = () => {
 
   return (
     <ScreenWrapper>
-      <List.Section title={`Text button ${theme.isV3 ? '(text)' : ''}`}>
+      <List.Section title={`Text button ${theme.isV3 ? "(text)" : ""}`}>
         <View style={styles.row}>
           <Button onPress={() => {}} style={styles.button}>
             Default
@@ -94,7 +94,7 @@ const ButtonExample = () => {
           </View>
         </List.Section>
       )}
-      <List.Section title={`Outlined button ${theme.isV3 ? '(outlined)' : ''}`}>
+      <List.Section title={`Outlined button ${theme.isV3 ? "(outlined)" : ""}`}>
         <View style={styles.row}>
           <Button mode="outlined" onPress={() => {}} style={styles.button}>
             Default
@@ -142,7 +142,7 @@ const ButtonExample = () => {
           </Button>
         </View>
       </List.Section>
-      <List.Section title={`Contained button ${theme.isV3 ? '(filled)' : ''}`}>
+      <List.Section title={`Contained button ${theme.isV3 ? "(filled)" : ""}`}>
         <View style={styles.row}>
           <Button mode="contained" onPress={() => {}} style={styles.button}>
             Default
@@ -191,7 +191,7 @@ const ButtonExample = () => {
         </View>
       </List.Section>
       {theme.isV3 && (
-        <List.Section title={'Elevated button (elevated)'}>
+        <List.Section title={"Elevated button (elevated)"}>
           <View style={styles.row}>
             <Button mode="elevated" onPress={() => {}} style={styles.button}>
               Default
@@ -245,7 +245,7 @@ const ButtonExample = () => {
           <Button
             mode="outlined"
             icon={{
-              uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',
+              uri: "https://avatars0.githubusercontent.com/u/17571969?v=3&s=400",
             }}
             onPress={() => {}}
             style={styles.button}
@@ -254,7 +254,7 @@ const ButtonExample = () => {
           </Button>
           <Button
             mode="outlined"
-            icon={require('../../assets/images/favorite.png')}
+            icon={require("../../assets/images/favorite.png")}
             onPress={() => {}}
             style={styles.button}
           >
@@ -264,7 +264,7 @@ const ButtonExample = () => {
             mode="outlined"
             icon={({ size }) => (
               <Image
-                source={require('../../assets/images/chameleon.jpg')}
+                source={require("../../assets/images/chameleon.jpg")}
                 style={{ width: size, height: size, borderRadius: size / 2 }}
                 accessibilityIgnoresInvertColors
               />
@@ -321,11 +321,11 @@ const ButtonExample = () => {
         <View style={styles.row}>
           {(
             [
-              'text',
-              'outlined',
-              'contained',
-              'elevated',
-              'contained-tonal',
+              "text",
+              "outlined",
+              "contained",
+              "elevated",
+              "contained-tonal",
             ] as const
           ).map((mode) => {
             return (
@@ -347,26 +347,26 @@ const ButtonExample = () => {
   );
 };
 
-ButtonExample.title = 'Button';
+ButtonExample.title = "Button";
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     paddingHorizontal: 12,
-    alignItems: 'center',
+    alignItems: "center",
   },
   button: {
     margin: 4,
   },
   flexReverse: {
-    flexDirection: 'row-reverse',
+    flexDirection: "row-reverse",
   },
   md3FontStyles: {
     lineHeight: 32,
   },
   fontStyles: {
-    fontWeight: '800',
+    fontWeight: "800",
     fontSize: 24,
   },
   flexGrow1Button: {
@@ -374,7 +374,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   width100PercentButton: {
-    width: '100%',
+    width: "100%",
     marginTop: 10,
   },
   customRadius: {

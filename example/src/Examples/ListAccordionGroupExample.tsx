@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { List } from 'react-native-paper';
+import { List } from "react-native-paper";
 
-import ScreenWrapper from '../ScreenWrapper';
+import ScreenWrapper from "../ScreenWrapper";
 
 type State = string | number | undefined;
 
@@ -75,6 +75,6 @@ const ListAccordionGroupExample = () => {
   );
 };
 
-ListAccordionGroupExample.title = 'List.AccordionGroup';
+ListAccordionGroupExample.title = "List.AccordionGroup";
 
 export default ListAccordionGroupExample;

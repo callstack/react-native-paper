@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const { marked } = require('marked');
+const { marked } = require("marked");
 
 interface MarkdownProps {
   content: string;

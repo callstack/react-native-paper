@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   ScrollView,
   ScrollViewProps,
@@ -6,11 +6,11 @@ import {
   StyleSheet,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { useExampleTheme } from '.';
+import { useExampleTheme } from ".";
 
 type Props = ScrollViewProps & {
   children: React.ReactNode;

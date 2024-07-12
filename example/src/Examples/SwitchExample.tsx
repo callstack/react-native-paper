@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { Platform, StyleSheet, View } from "react-native";
 
 import {
   MD2Colors,
@@ -8,10 +8,10 @@ import {
   Switch,
   Text,
   TouchableRipple,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
 const SwitchExample = () => {
   const [valueNormal, setNormalValue] = React.useState<boolean>(true);
@@ -20,15 +20,15 @@ const SwitchExample = () => {
   const { isV3 } = useExampleTheme();
 
   const switchValueNormalLabel = `switch ${
-    valueNormal === true ? 'on' : 'off'
+    valueNormal === true ? "on" : "off"
   }`;
   const switchValueCustomlLabel = `switch ${
-    valueCustom === true ? 'on' : 'off'
+    valueCustom === true ? "on" : "off"
   }`;
 
   const TextComponent = isV3 ? Text : Paragraph;
 
-  return Platform.OS === 'android' ? (
+  return Platform.OS === "android" ? (
     <ScreenWrapper style={styles.container}>
       <TouchableRipple onPress={() => setNormalValue(!valueNormal)}>
         <View style={styles.row}>
@@ -87,16 +87,16 @@ const SwitchExample = () => {
   );
 };
 
-SwitchExample.title = 'Switch';
+SwitchExample.title = "Switch";
 
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 8,
   },
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingVertical: 8,
     paddingHorizontal: 16,
   },

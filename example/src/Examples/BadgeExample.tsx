@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import * as React from "react";
+import { StyleSheet, View } from "react-native";
 
 import {
   Badge,
@@ -9,10 +9,10 @@ import {
   MD3Colors,
   Text,
   Switch,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
 const BadgeExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
@@ -71,12 +71,12 @@ const BadgeExample = () => {
   );
 };
 
-BadgeExample.title = 'Badge';
+BadgeExample.title = "Badge";
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
   item: {
     margin: 16,
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     opacity: 0.6,
   },
   badge: {
-    position: 'absolute',
+    position: "absolute",
     top: 4,
     right: 0,
   },

@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { Platform, I18nManager, View, Image, StyleSheet } from 'react-native';
+import * as React from "react";
+import { Platform, I18nManager, View, Image, StyleSheet } from "react-native";
 
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import MaterialCommunityIcon from "../MaterialCommunityIcon";
 
 const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
   const iosIconSize = size - 3;
 
-  return Platform.OS === 'ios' ? (
+  return Platform.OS === "ios" ? (
     <View
       style={[
         styles.wrapper,
@@ -18,7 +18,7 @@ const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
       ]}
     >
       <Image
-        source={require('../../assets/back-chevron.png')}
+        source={require("../../assets/back-chevron.png")}
         style={[
           styles.icon,
           { tintColor: color, width: iosIconSize, height: iosIconSize },
@@ -31,18 +31,18 @@ const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
       name="arrow-left"
       color={color}
       size={size}
-      direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+      direction={I18nManager.getConstants().isRTL ? "rtl" : "ltr"}
     />
   );
 };
 
 const styles = StyleSheet.create({
   wrapper: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   icon: {
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
 });
 

@@ -1,16 +1,16 @@
-import * as React from 'react';
-import { GestureResponderEvent, Platform } from 'react-native';
+import * as React from "react";
+import { GestureResponderEvent, Platform } from "react-native";
 
-import CheckboxAndroid from './CheckboxAndroid';
-import CheckboxIOS from './CheckboxIOS';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import CheckboxAndroid from "./CheckboxAndroid";
+import CheckboxIOS from "./CheckboxIOS";
+import { useInternalTheme } from "../../core/theming";
+import type { ThemeProp } from "../../types";
 
 export type Props = {
   /**
    * Status of checkbox.
    */
-  status: 'checked' | 'unchecked' | 'indeterminate';
+  status: "checked" | "unchecked" | "indeterminate";
   /**
    * Whether checkbox is disabled.
    */
@@ -63,7 +63,7 @@ export type Props = {
  */
 const Checkbox = ({ theme: themeOverrides, ...props }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  return Platform.OS === 'ios' ? (
+  return Platform.OS === "ios" ? (
     <CheckboxIOS {...props} theme={theme} />
   ) : (
     <CheckboxAndroid {...props} theme={theme} />

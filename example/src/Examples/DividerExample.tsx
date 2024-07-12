@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { FlatList } from 'react-native';
+import * as React from "react";
+import { FlatList } from "react-native";
 
-import { Divider, List } from 'react-native-paper';
+import { Divider, List } from "react-native-paper";
 
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
-const items = ['Apple', 'Banana', 'Coconut', 'Lemon', 'Mango', 'Peach'];
+const items = ["Apple", "Banana", "Coconut", "Lemon", "Mango", "Peach"];
 
 const DividerExample = () => {
   const { colors } = useExampleTheme();
@@ -25,6 +25,6 @@ const DividerExample = () => {
   );
 };
 
-DividerExample.title = 'Divider';
+DividerExample.title = "Divider";
 
 export default DividerExample;

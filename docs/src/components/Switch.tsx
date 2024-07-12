@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface SwitchProps {
   value: boolean;
@@ -7,7 +7,7 @@ interface SwitchProps {
 }
 
 const Switch = ({ value, onValueChange, color }: SwitchProps) => {
-  const background = value ? color : 'none';
+  const background = value ? color : "none";
   return (
     <>
       <input

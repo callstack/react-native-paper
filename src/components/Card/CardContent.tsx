@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
+import * as React from "react";
+import { StyleSheet, StyleProp, View, ViewStyle } from "react-native";
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -42,12 +42,12 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const CardContent = ({ index, total, siblings, style, ...rest }: Props) => {
-  const cover = 'withInternalTheme(CardCover)';
-  const title = 'withInternalTheme(CardTitle)';
+  const cover = "withInternalTheme(CardCover)";
+  const title = "withInternalTheme(CardTitle)";
 
   let contentStyle, prev, next;
 
-  if (typeof index === 'number' && siblings) {
+  if (typeof index === "number" && siblings) {
     prev = siblings[index - 1];
     next = siblings[index + 1];
   }
@@ -64,7 +64,7 @@ const CardContent = ({ index, total, siblings, style, ...rest }: Props) => {
     } else {
       contentStyle = styles.first;
     }
-  } else if (typeof total === 'number' && index === total - 1) {
+  } else if (typeof total === "number" && index === total - 1) {
     if (prev === cover || prev === title) {
       contentStyle = styles.only;
     } else {
@@ -79,7 +79,7 @@ const CardContent = ({ index, total, siblings, style, ...rest }: Props) => {
   return <View {...rest} style={[styles.container, contentStyle, style]} />;
 };
 
-CardContent.displayName = 'Card.Content';
+CardContent.displayName = "Card.Content";
 
 const styles = StyleSheet.create({
   container: {

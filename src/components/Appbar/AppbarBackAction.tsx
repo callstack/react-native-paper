@@ -1,20 +1,20 @@
-import * as React from 'react';
+import * as React from "react";
 import type {
   GestureResponderEvent,
   StyleProp,
   ViewStyle,
   View,
   Animated,
-} from 'react-native';
+} from "react-native";
 
-import type { $Omit } from './../../types';
-import AppbarAction from './AppbarAction';
-import AppbarBackIcon from './AppbarBackIcon';
-import { forwardRef } from '../../utils/forwardRef';
+import type { $Omit } from "./../../types";
+import AppbarAction from "./AppbarAction";
+import AppbarBackIcon from "./AppbarBackIcon";
+import { forwardRef } from "../../utils/forwardRef";
 
 export type Props = $Omit<
   React.ComponentPropsWithoutRef<typeof AppbarAction>,
-  'icon'
+  "icon"
 > & {
   /**
    *  Custom color for back icon.
@@ -58,7 +58,7 @@ export type Props = $Omit<
  * ```
  */
 const AppbarBackAction = forwardRef<View, Props>(
-  ({ accessibilityLabel = 'Back', ...rest }: Props, ref) => (
+  ({ accessibilityLabel = "Back", ...rest }: Props, ref) => (
     <AppbarAction
       accessibilityLabel={accessibilityLabel}
       {...rest}
@@ -66,10 +66,10 @@ const AppbarBackAction = forwardRef<View, Props>(
       isLeading
       ref={ref}
     />
-  )
+  ),
 );
 
-AppbarBackAction.displayName = 'Appbar.BackAction';
+AppbarBackAction.displayName = "Appbar.BackAction";
 
 export default AppbarBackAction;
 

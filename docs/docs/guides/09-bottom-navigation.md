@@ -19,7 +19,7 @@ To use this navigator, ensure that you have [`@react-navigation/native` and its 
 To use this tab navigator, import it from `react-native-paper/react-navigation`:
 
 ```js
-import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
+import { createMaterialBottomTabNavigator } from "react-native-paper/react-navigation";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -90,7 +90,7 @@ Style for the bottom navigation bar. You can pass custom background color here:
   initialRouteName="Home"
   activeColor="#f0edf6"
   inactiveColor="#3e2465"
-  barStyle={{ backgroundColor: '#694fad' }}
+  barStyle={{ backgroundColor: "#694fad" }}
 >
   {/* ... */}
 </Tab.Navigator>
@@ -162,7 +162,7 @@ To prevent the default behavior, you can call `event.preventDefault`:
 
 ```js
 React.useEffect(() => {
-  const unsubscribe = navigation.addListener('tabPress', (e) => {
+  const unsubscribe = navigation.addListener("tabPress", (e) => {
     // Prevent default behavior
 
     e.preventDefault();
@@ -188,14 +188,14 @@ Navigates to an existing screen in the tab navigator. The method accepts followi
 <samp id="material-tab-jump-to" />
 
 ```js
-navigation.jumpTo('Profile', { name: 'Michaś' });
+navigation.jumpTo("Profile", { name: "Michaś" });
 ```
 
 ## Example
 
 ```js
-import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { createMaterialBottomTabNavigator } from "react-native-paper/react-navigation";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -204,13 +204,13 @@ function MyTabs() {
     <Tab.Navigator
       initialRouteName="Feed"
       activeColor="#e91e63"
-      barStyle={{ backgroundColor: 'tomato' }}
+      barStyle={{ backgroundColor: "tomato" }}
     >
       <Tab.Screen
         name="Feed"
         component={Feed}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
           ),
@@ -220,7 +220,7 @@ function MyTabs() {
         name="Notifications"
         component={Notifications}
         options={{
-          tabBarLabel: 'Updates',
+          tabBarLabel: "Updates",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="bell" color={color} size={26} />
           ),
@@ -230,7 +230,7 @@ function MyTabs() {
         name="Profile"
         component={Profile}
         options={{
-          tabBarLabel: 'Profile',
+          tabBarLabel: "Profile",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account" color={color} size={26} />
           ),

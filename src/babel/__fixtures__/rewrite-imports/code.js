@@ -12,4 +12,4 @@ import {
   ThemeProvider,
   withTheme,
   DefaultTheme,
-} from 'react-native-paper';
+} from "react-native-paper";

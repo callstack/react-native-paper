@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import * as React from "react";
+import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import { useInternalTheme } from '../../core/theming';
-import { black, white } from '../../styles/themes/v2/colors';
-import type { ThemeProp } from '../../types';
+import { useInternalTheme } from "../../core/theming";
+import { black, white } from "../../styles/themes/v2/colors";
+import type { ThemeProp } from "../../types";
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -66,11 +66,11 @@ const DataTableHeader = ({
   );
 };
 
-DataTableHeader.displayName = 'DataTable.Header';
+DataTableHeader.displayName = "DataTable.Header";
 
 const styles = StyleSheet.create({
   header: {
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingHorizontal: 16,
     borderBottomWidth: StyleSheet.hairlineWidth * 2,
   },

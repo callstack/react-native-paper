@@ -1,15 +1,15 @@
-import * as React from 'react';
+import * as React from "react";
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import {
   InitialState,
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
-} from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { useKeepAwake } from 'expo-keep-awake';
+} from "@react-navigation/native";
+import { useFonts } from "expo-font";
+import { useKeepAwake } from "expo-keep-awake";
 import {
   PaperProvider,
   MD3DarkTheme,
@@ -21,14 +21,14 @@ import {
   useTheme,
   adaptNavigationTheme,
   configureFonts,
-} from 'react-native-paper';
-import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
+} from "react-native-paper";
+import { SafeAreaInsetsContext } from "react-native-safe-area-context";
 
-import DrawerItems from './DrawerItems';
-import App from './RootNavigator';
+import DrawerItems from "./DrawerItems";
+import App from "./RootNavigator";
 
-const PERSISTENCE_KEY = 'NAVIGATION_STATE';
-const PREFERENCES_KEY = 'APP_PREFERENCES';
+const PERSISTENCE_KEY = "NAVIGATION_STATE";
+const PREFERENCES_KEY = "APP_PREFERENCES";
 
 export const PreferencesContext = React.createContext<{
   toggleTheme: () => void;
@@ -50,7 +50,7 @@ export default function PaperExample() {
   useKeepAwake();
 
   const [fontsLoaded] = useFonts({
-    Abel: require('../assets/fonts/Abel-Regular.ttf'),
+    Abel: require("../assets/fonts/Abel-Regular.ttf"),
   });
 
   const [isReady, setIsReady] = React.useState(false);
@@ -76,7 +76,7 @@ export default function PaperExample() {
     const restoreState = async () => {
       try {
         const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
-        const state = JSON.parse(savedStateString || '');
+        const state = JSON.parse(savedStateString || "");
 
         setInitialState(state);
       } catch (e) {
@@ -95,10 +95,10 @@ export default function PaperExample() {
     const restorePrefs = async () => {
       try {
         const prefString = await AsyncStorage.getItem(PREFERENCES_KEY);
-        const preferences = JSON.parse(prefString || '');
+        const preferences = JSON.parse(prefString || "");
 
         if (preferences) {
-          setIsDarkMode(preferences.theme === 'dark');
+          setIsDarkMode(preferences.theme === "dark");
         }
       } catch (e) {
         // ignore error
@@ -114,8 +114,8 @@ export default function PaperExample() {
         await AsyncStorage.setItem(
           PREFERENCES_KEY,
           JSON.stringify({
-            theme: isDarkMode ? 'dark' : 'light',
-          })
+            theme: isDarkMode ? "dark" : "light",
+          }),
         );
       } catch (e) {
         // ignore error
@@ -142,7 +142,7 @@ export default function PaperExample() {
       collapsed,
       theme,
     }),
-    [theme, collapsed, customFontLoaded, rippleEffectEnabled]
+    [theme, collapsed, customFontLoaded, rippleEffectEnabled],
   );
 
   if (!isReady && !fontsLoaded) {
@@ -177,7 +177,7 @@ export default function PaperExample() {
     ...combinedTheme,
     fonts: configureFonts({
       config: {
-        fontFamily: 'Abel',
+        fontFamily: "Abel",
       },
     }),
   };

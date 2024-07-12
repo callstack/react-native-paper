@@ -1,15 +1,15 @@
-import color from 'color';
+import color from "color";
 
-import { MD3LightTheme } from './LightTheme';
-import { MD3Colors, tokens } from './tokens';
-import type { MD3Theme } from '../../../types';
+import { MD3LightTheme } from "./LightTheme";
+import { MD3Colors, tokens } from "./tokens";
+import type { MD3Theme } from "../../../types";
 
 const { palette, opacity } = tokens.md.ref;
 
 export const MD3DarkTheme: MD3Theme = {
   ...MD3LightTheme,
   dark: true,
-  mode: 'adaptive',
+  mode: "adaptive",
   version: 3,
   isV3: true,
   colors: {
@@ -52,15 +52,15 @@ export const MD3DarkTheme: MD3Theme = {
     scrim: palette.neutral0,
     backdrop: color(MD3Colors.neutralVariant20).alpha(0.4).rgb().string(),
     elevation: {
-      level0: 'transparent',
+      level0: "transparent",
       // Note: Color values with transparency cause RN to transfer shadows to children nodes
       // instead of View component in Surface. Providing solid background fixes the issue.
       // Opaque color values generated with `palette.primary80` used as background
-      level1: 'rgb(37, 35, 42)', // palette.primary80, alpha 0.05
-      level2: 'rgb(44, 40, 49)', // palette.primary80, alpha 0.08
-      level3: 'rgb(49, 44, 56)', // palette.primary80, alpha 0.11
-      level4: 'rgb(51, 46, 58)', // palette.primary80, alpha 0.12
-      level5: 'rgb(52, 49, 63)', // palette.primary80, alpha 0.14
+      level1: "rgb(37, 35, 42)", // palette.primary80, alpha 0.05
+      level2: "rgb(44, 40, 49)", // palette.primary80, alpha 0.08
+      level3: "rgb(49, 44, 56)", // palette.primary80, alpha 0.11
+      level4: "rgb(51, 46, 58)", // palette.primary80, alpha 0.12
+      level5: "rgb(52, 49, 63)", // palette.primary80, alpha 0.14
     },
   },
 };

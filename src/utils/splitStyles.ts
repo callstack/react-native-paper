@@ -1,10 +1,10 @@
-import type { ViewStyle } from 'react-native';
+import type { ViewStyle } from "react-native";
 
 type FiltersArray = readonly ((style: keyof ViewStyle) => boolean)[];
 
 type MappedTuple<Tuple extends FiltersArray> = {
   [Index in keyof Tuple]: ViewStyle;
-} & { length: Tuple['length'] };
+} & { length: Tuple["length"] };
 
 type Style = ViewStyle[keyof ViewStyle];
 type Entry = [keyof ViewStyle, Style];
@@ -23,8 +23,8 @@ export function splitStyles<Tuple extends FiltersArray>(
   styles: ViewStyle,
   ...filters: Tuple
 ) {
-  if (process.env.NODE_ENV !== 'production' && filters.length === 0) {
-    console.error('No filters were passed when calling splitStyles');
+  if (process.env.NODE_ENV !== "production" && filters.length === 0) {
+    console.error("No filters were passed when calling splitStyles");
   }
 
   // `Object.entries` will be used to iterate over the styles and `Object.fromEntries` will be called before returning
@@ -55,6 +55,6 @@ export function splitStyles<Tuple extends FiltersArray>(
   // Convert arrays of entries into objects
   return newStyles.map((styles) => Object.fromEntries(styles)) as unknown as [
     ViewStyle,
-    ...MappedTuple<Tuple>
+    ...MappedTuple<Tuple>,
   ];
 }

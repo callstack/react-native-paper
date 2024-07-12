@@ -19,17 +19,14 @@ Fortunately, in Material Design 2, both React Navigation and React Native Paper 
 import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
-} from '@react-navigation/native';
+} from "@react-navigation/native";
 
-import {
-  MD2LightTheme,
-  MD2DarkTheme,
-} from 'react-native-paper';
+import { MD2LightTheme, MD2DarkTheme } from "react-native-paper";
 ```
 
 ### Material Design 3
 
-From v5, React Native Paper theme colors structure is following the Material Design 3 <i>(known as Material You)</i> colors system, which differs significantly from both previous Paper's theme and React Navigation theme. 
+From v5, React Native Paper theme colors structure is following the Material Design 3 <i>(known as Material You)</i> colors system, which differs significantly from both previous Paper's theme and React Navigation theme.
 
 However, to simplify adapting React Navigation theme colors, to use the ones from React Native Paper, it's worth using a utility called `adaptNavigationTheme` – it accepts navigation compliant themes in both modes and returns their equivalents adjusted to Material Design 3.
 
@@ -37,8 +34,8 @@ However, to simplify adapting React Navigation theme colors, to use the ones fro
 import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
-} from '@react-navigation/native';
-import { adaptNavigationTheme } from 'react-native-paper';
+} from "@react-navigation/native";
+import { adaptNavigationTheme } from "react-native-paper";
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -49,10 +46,7 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
 Library exports also Material Design 3 themes in both modes:
 
 ```js
-import {
-  MD3LightTheme,
-  MD3DarkTheme,
-} from 'react-native-paper';
+import { MD3LightTheme, MD3DarkTheme } from "react-native-paper";
 ```
 
 ## Combining theme objects
@@ -62,23 +56,23 @@ React Navigation exposes `NavigationContainer` which ensures that navigation wor
 For React Native Paper theme to work, we need to use `PaperProvider` also at application's entry point.
 
 ```js
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { TouchableOpacity } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { TouchableOpacity } from "react-native";
 import {
   Card,
   Title,
   Paragraph,
   List,
   PaperProvider,
-} from 'react-native-paper';
+} from "react-native-paper";
 
 const Stack = createStackNavigator();
 
 const HomeScreen = ({ navigation }) => (
   <TouchableOpacity
     onPress={() =>
-      navigation?.push('Details', {
+      navigation?.push("Details", {
         title,
         content,
       })
@@ -117,8 +111,6 @@ export default function App() {
 }
 ```
 
-
-
 Our goal here is to combine those two themes, so that we could control the theme for the entire application from a single place.
 
 To make things easier we can use [deepmerge](https://www.npmjs.com/package/deepmerge) package. With `yarn` we can install it like this
@@ -134,12 +126,9 @@ import {
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
-} from '@react-navigation/native';
-import {
-  MD2DarkTheme,
-  MD2LightTheme,
-} from 'react-native-paper';
-import merge from 'deepmerge';
+} from "@react-navigation/native";
+import { MD2DarkTheme, MD2LightTheme } from "react-native-paper";
+import merge from "deepmerge";
 
 const CombinedDefaultTheme = merge(MD2LightTheme, NavigationDefaultTheme);
 const CombinedDarkTheme = merge(MD2DarkTheme, NavigationDarkTheme);
@@ -152,13 +141,13 @@ import {
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
-} from '@react-navigation/native';
+} from "@react-navigation/native";
 import {
   MD3DarkTheme,
   MD3LightTheme,
   adaptNavigationTheme,
-} from 'react-native-paper';
-import merge from 'deepmerge';
+} from "react-native-paper";
+import merge from "deepmerge";
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -260,7 +249,7 @@ React Context proves itself very useful in handling cross-cutting concerns like 
 First, we define our Context.
 
 ```js
-import React from 'react';
+import React from "react";
 
 export const PreferencesContext = React.createContext({
   toggleTheme: () => {},
@@ -273,8 +262,8 @@ export const PreferencesContext = React.createContext({
 Context Provider should be imported also at the entry point, as we want it to wrap the whole app, for the theme values to be accessible at every component that we have.
 
 ```js
-import React from 'react';
-import { PreferencesContext } from './PreferencesContext';
+import React from "react";
+import { PreferencesContext } from "./PreferencesContext";
 
 const Stack = createStackNavigator();
 
@@ -292,7 +281,7 @@ export default function App() {
       toggleTheme,
       isThemeDark,
     }),
-    [toggleTheme, isThemeDark]
+    [toggleTheme, isThemeDark],
   );
 
   return (
@@ -314,9 +303,9 @@ export default function App() {
 Now that the Context is available at every component, all we need to do is import it. Next thing is to provide the user with some UI element to control changing the theme. We will use `Paper`'s [Switch](https://callstack.github.io/react-native-paper/docs/components/Switch) for this purpose.
 
 ```js
-import React from 'react';
-import { useTheme, Appbar, TouchableRipple, Switch } from 'react-native-paper';
-import { PreferencesContext } from './PreferencesContext';
+import React from "react";
+import { useTheme, Appbar, TouchableRipple, Switch } from "react-native-paper";
+import { PreferencesContext } from "./PreferencesContext";
 
 const Header = ({ scene }) => {
   const theme = useTheme();
@@ -331,11 +320,7 @@ const Header = ({ scene }) => {
       }}
     >
       <Appbar.Content title={scene.route?.name} />
-        <Switch
-          color={'red'}
-          value={isThemeDark}
-          onValueChange={toggleTheme}
-        />
+      <Switch color={"red"} value={isThemeDark} onValueChange={toggleTheme} />
     </Appbar.Header>
   );
 };

@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { Keyboard, StyleSheet } from 'react-native';
+import * as React from "react";
+import { Keyboard, StyleSheet } from "react-native";
 
-import type { DrawerNavigationProp } from '@react-navigation/drawer';
-import type { StackNavigationProp } from '@react-navigation/stack';
+import type { DrawerNavigationProp } from "@react-navigation/drawer";
+import type { StackNavigationProp } from "@react-navigation/stack";
 import {
   List,
   MD3Colors,
   Searchbar,
   Snackbar,
   Avatar,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
+import { useExampleTheme } from "..";
+import ScreenWrapper from "../ScreenWrapper";
 
 type Props = {
   navigation: StackNavigationProp<{}>;
@@ -21,17 +21,17 @@ type Props = {
 const SearchExample = ({ navigation }: Props) => {
   const [isVisible, setIsVisible] = React.useState(false);
   const [searchQueries, setSearchQuery] = React.useState({
-    searchBarMode: '',
-    traileringIcon: '',
-    traileringIconWithRightItem: '',
-    rightItem: '',
-    loadingBarMode: '',
-    searchViewMode: '',
-    searchWithoutBottomLine: '',
-    loadingViewMode: '',
-    clickableBack: '',
-    clickableDrawer: '',
-    clickableLoading: '',
+    searchBarMode: "",
+    traileringIcon: "",
+    traileringIconWithRightItem: "",
+    rightItem: "",
+    loadingBarMode: "",
+    searchViewMode: "",
+    searchWithoutBottomLine: "",
+    loadingViewMode: "",
+    clickableBack: "",
+    clickableDrawer: "",
+    clickableLoading: "",
   });
 
   const { isV3, colors } = useExampleTheme();
@@ -66,11 +66,11 @@ const SearchExample = ({ navigation }: Props) => {
                 setSearchQuery({ ...searchQueries, traileringIcon: query })
               }
               value={searchQueries.traileringIcon}
-              traileringIcon={'microphone'}
+              traileringIcon={"microphone"}
               traileringIconColor={
                 isVisible ? MD3Colors.error40 : colors.onSurfaceVariant
               }
-              traileringIconAccessibilityLabel={'microphone button'}
+              traileringIconAccessibilityLabel={"microphone button"}
               onTraileringIconPress={() => setIsVisible(true)}
               style={styles.searchbar}
               mode="bar"
@@ -85,17 +85,17 @@ const SearchExample = ({ navigation }: Props) => {
                 })
               }
               value={searchQueries.traileringIconWithRightItem}
-              traileringIcon={'microphone'}
+              traileringIcon={"microphone"}
               traileringIconColor={
                 isVisible ? MD3Colors.error40 : colors.onSurfaceVariant
               }
-              traileringIconAccessibilityLabel={'microphone button'}
+              traileringIconAccessibilityLabel={"microphone button"}
               onTraileringIconPress={() => setIsVisible(true)}
               right={(props) => (
                 <Avatar.Image
                   {...props}
                   size={30}
-                  source={require('../../assets/images/avatar.png')}
+                  source={require("../../assets/images/avatar.png")}
                 />
               )}
               style={styles.searchbar}
@@ -114,7 +114,7 @@ const SearchExample = ({ navigation }: Props) => {
                 <Avatar.Image
                   {...props}
                   size={30}
-                  source={require('../../assets/images/avatar.png')}
+                  source={require("../../assets/images/avatar.png")}
                 />
               )}
               style={styles.searchbar}
@@ -131,7 +131,7 @@ const SearchExample = ({ navigation }: Props) => {
               style={styles.searchbar}
               mode="bar"
               loading
-              traileringIcon={'microphone'}
+              traileringIcon={"microphone"}
             />
           </List.Section>
         )}
@@ -194,7 +194,7 @@ const SearchExample = ({ navigation }: Props) => {
             onClearIconPress={() => {
               Keyboard.dismiss();
             }}
-            icon={{ source: 'arrow-left', direction: 'auto' }}
+            icon={{ source: "arrow-left", direction: "auto" }}
             style={styles.searchbar}
           />
           <Searchbar
@@ -238,7 +238,7 @@ const SearchExample = ({ navigation }: Props) => {
   );
 };
 
-SearchExample.title = 'Searchbar';
+SearchExample.title = "Searchbar";
 
 const styles = StyleSheet.create({
   searchbar: {

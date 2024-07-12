@@ -1,9 +1,9 @@
-import { Platform } from 'react-native';
+import { Platform } from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import { AdornmentSide, AdornmentType } from './Adornment/enums';
-import type { AdornmentConfig } from './Adornment/types';
+import { AdornmentSide, AdornmentType } from "./Adornment/enums";
+import type { AdornmentConfig } from "./Adornment/types";
 import {
   MIN_WIDTH,
   ADORNMENT_SIZE,
@@ -25,9 +25,9 @@ import {
   MD3_LABEL_PADDING_TOP,
   MD3_MIN_HEIGHT,
   MD3_OUTLINED_INPUT_OFFSET,
-} from './constants';
-import type { TextInputLabelProp } from './types';
-import type { InternalTheme } from '../../types';
+} from "./constants";
+import type { TextInputLabelProp } from "./types";
+import type { InternalTheme } from "../../types";
 
 type PaddingProps = {
   height: number | null;
@@ -53,7 +53,7 @@ export type Padding = { paddingTop: number; paddingBottom: number };
 export const calculateLabelTopPosition = (
   labelHeight: number,
   height: number = 0,
-  optionalPadding: number = 0
+  optionalPadding: number = 0,
 ): number => {
   const customHeight = height > 0 ? height : 0;
 
@@ -63,7 +63,7 @@ export const calculateLabelTopPosition = (
 export const calculateInputHeight = (
   labelHeight: number,
   height: any = 0,
-  minHeight: number
+  minHeight: number,
 ): number => {
   const finalHeight = height > 0 ? height : labelHeight;
 
@@ -309,7 +309,7 @@ type BaseProps = {
   disabled?: boolean;
 };
 
-type Mode = 'flat' | 'outlined';
+type Mode = "flat" | "outlined";
 
 const getInputTextColor = ({
   theme,
@@ -348,7 +348,7 @@ const getActiveColor = ({
   activeOutlineColor?: string;
   mode?: Mode;
 }) => {
-  const isFlat = mode === 'flat';
+  const isFlat = mode === "flat";
   const modeColor = isFlat ? activeUnderlineColor : activeOutlineColor;
 
   if (error) {
@@ -393,11 +393,11 @@ const getSelectionColor = ({
   activeColor: string;
   customSelectionColor?: string;
 }) => {
-  if (typeof customSelectionColor !== 'undefined') {
+  if (typeof customSelectionColor !== "undefined") {
     return customSelectionColor;
   }
 
-  if (Platform.OS === 'android') {
+  if (Platform.OS === "android") {
     return color(activeColor).alpha(0.54).rgb().string();
   }
 
@@ -440,7 +440,7 @@ const getFlatUnderlineColor = ({
   }
 
   if (disabled) {
-    return 'transparent';
+    return "transparent";
   }
 
   return theme.colors.disabled;
@@ -460,7 +460,7 @@ const getOutlinedOutlineInputColor = ({
   if (theme.isV3) {
     if (disabled) {
       if (theme.dark) {
-        return 'transparent';
+        return "transparent";
       }
       return theme.colors.surfaceDisabled;
     }
@@ -499,7 +499,7 @@ export const getFlatInputColors = ({
     ...baseFlatColorProps,
     error,
     activeUnderlineColor,
-    mode: 'flat',
+    mode: "flat",
   });
 
   return {
@@ -541,7 +541,7 @@ export const getOutlinedInputColors = ({
     ...baseOutlinedColorProps,
     error,
     activeOutlineColor,
-    mode: 'outlined',
+    mode: "outlined",
   });
 
   return {

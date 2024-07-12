@@ -1,14 +1,14 @@
-import * as React from 'react';
+import * as React from "react";
 
-import type { InternalTheme } from 'src/types';
+import type { InternalTheme } from "src/types";
 
-import PortalConsumer from './PortalConsumer';
-import PortalHost, { PortalContext, PortalMethods } from './PortalHost';
+import PortalConsumer from "./PortalConsumer";
+import PortalHost, { PortalContext, PortalMethods } from "./PortalHost";
 import {
   Consumer as SettingsConsumer,
   Provider as SettingsProvider,
-} from '../../core/settings';
-import { ThemeProvider, withInternalTheme } from '../../core/theming';
+} from "../../core/settings";
+import { ThemeProvider, withInternalTheme } from "../../core/theming";
 
 export type Props = {
   /**

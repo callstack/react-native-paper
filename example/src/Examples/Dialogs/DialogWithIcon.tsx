@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import * as React from "react";
+import { StyleSheet } from "react-native";
 
-import { Button, Portal, Dialog, MD3Colors } from 'react-native-paper';
+import { Button, Portal, Dialog, MD3Colors } from "react-native-paper";
 
-import { TextComponent } from './DialogTextComponent';
+import { TextComponent } from "./DialogTextComponent";
 
 const DialogWithIcon = ({
   visible,
@@ -36,7 +36,7 @@ const DialogWithIcon = ({
 
 const styles = StyleSheet.create({
   title: {
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
 export default DialogWithIcon;

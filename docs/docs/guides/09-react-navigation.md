@@ -6,14 +6,14 @@ title: Integrate AppBar with React Navigation
 
 ## Prerequisites
 
- - `react-native-paper`
- - `react-navigation`
- 
+- `react-native-paper`
+- `react-navigation`
+
 We assume that you have already installed the mentioned libraries above, otherwise please check out the guides below.
- 
- [React Native Paper - Getting Started](https://callstack.github.io/react-native-paper/docs/guides/getting-started)
- 
- [React Navigation - Getting Started](https://reactnavigation.org/docs/getting-started/)
+
+[React Native Paper - Getting Started](https://callstack.github.io/react-native-paper/docs/guides/getting-started)
+
+[React Navigation - Getting Started](https://reactnavigation.org/docs/getting-started/)
 
 ## Stack Navigator
 
@@ -23,10 +23,10 @@ Screens are pushed and popped from the stack while the user navigates to a new s
 Let's create two screens. A main screen named `Home` and details screen named `Details`.
 
 ```js
-import 'react-native-gesture-handler';
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import "react-native-gesture-handler";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
@@ -45,8 +45,8 @@ export default function App() {
 At the moment our navigation stack contains two screens and will render `HomeScreen` or `DetailsScreen` components according to the current navigation state. We have not implemented those components yet, so let's do this now:
 
 ```js
-import React from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import React from "react";
+import { View, Text, Button, StyleSheet } from "react-native";
 
 function HomeScreen() {
   return (
@@ -67,8 +67,8 @@ function DetailsScreen() {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 ```
@@ -80,13 +80,13 @@ Once we have finished implementing the components, we can run the app and check 
 To navigate from `HomeScreen` to `DetailsScreen` we can use the navigation object provided by `Stack.Screen` component. Every component rendered by `Stack.Screen` has an access to the navigation object via props. Let's modify our `HomeScreen` component:
 
 ```js
-import { Button } from 'react-native-paper';
+import { Button } from "react-native-paper";
 
 function HomeScreen({ navigation }) {
   return (
     <View style={style.container}>
       <Text>Home Screen</Text>
-      <Button mode="contained" onPress={() => navigation.navigate('Details')}>
+      <Button mode="contained" onPress={() => navigation.navigate("Details")}>
         Go to details
       </Button>
     </View>
@@ -96,8 +96,8 @@ function HomeScreen({ navigation }) {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 ```
@@ -120,7 +120,8 @@ export default function App() {
         initialRouteName="Home"
         screenOptions={{
           header: (props) => <CustomNavigationBar {...props} />,
-        }}>
+        }}
+      >
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
@@ -132,7 +133,7 @@ export default function App() {
 Now we will implement `CustomNavigationBar` using `AppBar` component:
 
 ```js
-import { Appbar } from 'react-native-paper';
+import { Appbar } from "react-native-paper";
 
 export default function CustomNavigationBar() {
   return (
@@ -147,8 +148,8 @@ Current implementation of the `CustomNavigationBar` is simple - we just render a
 To automatically get the correct `title` for the screen, we're going to take the advantage of `getHeaderTitle` helper available in `@react-navigation/elements` in the following way:
 
 ```js
-import { Appbar } from 'react-native-paper';
-import { getHeaderTitle } from '@react-navigation/elements';
+import { Appbar } from "react-native-paper";
+import { getHeaderTitle } from "@react-navigation/elements";
 
 export default function CustomNavigationBar({ route, options }) {
   const title = getHeaderTitle(options, route.name);
@@ -166,10 +167,15 @@ You may notice there is no way to go back to the previous screen, because the ba
 In order to achieve it, we firstly check, if the navigation bar receives a `back` prop. If it has, it means there is another screen on the stack beneath the current screen and we should render the back arrow button in such a case.
 
 ```js
-import { Appbar } from 'react-native-paper';
-import { getHeaderTitle } from '@react-navigation/elements';
+import { Appbar } from "react-native-paper";
+import { getHeaderTitle } from "@react-navigation/elements";
 
-export default function CustomNavigationBar({ navigation, route, options, back }) {
+export default function CustomNavigationBar({
+  navigation,
+  route,
+  options,
+  back,
+}) {
   const title = getHeaderTitle(options, route.name);
 
   return (
@@ -186,6 +192,7 @@ export default function CustomNavigationBar({ navigation, route, options, back }
 ### Adding more items to `Appbar`
 
 Another interesting pattern that can be implemented with `react-native-paper` and `react-navigation` is a "menu" button. Thanks to the `Menu` component we can add a nice looking pop-up to our `Appbar`. To implement this feature we need to make a couple of changes in `CustomNavigationBar`:
+
 - Render a `Menu` component
 - Pass `Appbar.Action` to the anchor prop
 - Add a state to control `Menu` visibility
@@ -194,7 +201,7 @@ Another interesting pattern that can be implemented with `react-native-paper` an
 To have properly working `Menu` component, remember to wrap your root component with the `PaperProvider`:
 
 ```js
-import { PaperProvider } from 'react-native-paper';
+import { PaperProvider } from "react-native-paper";
 
 // ...
 
@@ -204,21 +211,23 @@ import { PaperProvider } from 'react-native-paper';
       initialRouteName="Home"
       screenOptions={{
         header: (props) => <CustomNavigationBar {...props} />,
-      }}>
+      }}
+    >
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Details" component={DetailsScreen} />
     </Stack.Navigator>
   </NavigationContainer>
-</PaperProvider>
+</PaperProvider>;
 ```
+
 :::
 
 We also want the menu to appear only on `HomeScreen`, which means we will render it conditionally based on the `back` prop.
 
 ```js
-import React from 'react';
-import { Appbar, Menu } from 'react-native-paper';
-import { getHeaderTitle } from '@react-navigation/elements';
+import React from "react";
+import { Appbar, Menu } from "react-native-paper";
+import { getHeaderTitle } from "@react-navigation/elements";
 
 export default function CustomNavigationBar({
   navigation,
@@ -240,27 +249,23 @@ export default function CustomNavigationBar({
         <Menu
           visible={visible}
           onDismiss={closeMenu}
-          anchor={
-            <Appbar.Action
-              icon="dots-vertical"
-              onPress={openMenu}
-            />
-          }>
+          anchor={<Appbar.Action icon="dots-vertical" onPress={openMenu} />}
+        >
           <Menu.Item
             onPress={() => {
-              console.log('Option 1 was pressed');
+              console.log("Option 1 was pressed");
             }}
             title="Option 1"
           />
           <Menu.Item
             onPress={() => {
-              console.log('Option 2 was pressed');
+              console.log("Option 2 was pressed");
             }}
             title="Option 2"
           />
           <Menu.Item
             onPress={() => {
-              console.log('Option 3 was pressed');
+              console.log("Option 3 was pressed");
             }}
             title="Option 3"
             disabled
@@ -276,6 +281,6 @@ Final result:
 
 <img src="/react-native-paper/screenshots/react-navigation-appBar4.gif" width="300" />
 
-That's all we need! We have app bar that contains everything we need to navigate through screens and access an additional menu on the main screen. As you can see, with Material design `Appbar` provided by `react-native-paper` used together with `react-navigation` we can easily create an app that looks and works great. 
+That's all we need! We have app bar that contains everything we need to navigate through screens and access an additional menu on the main screen. As you can see, with Material design `Appbar` provided by `react-native-paper` used together with `react-navigation` we can easily create an app that looks and works great.
 
 Grab the Expo [snack](https://snack.expo.dev/@react-native-paper/integrate-appbar-with-react-navigation) if you want to check the whole code!

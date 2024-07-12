@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { Image, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import * as React from "react";
+import { Image, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 
-import { getCardCoverStyle } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import { grey200 } from '../../styles/themes/v2/colors';
-import type { ThemeProp } from '../../types';
-import { splitStyles } from '../../utils/splitStyles';
+import { getCardCoverStyle } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import { grey200 } from "../../styles/themes/v2/colors";
+import type { ThemeProp } from "../../types";
+import { splitStyles } from "../../utils/splitStyles";
 
 export type Props = React.ComponentPropsWithRef<typeof Image> & {
   /**
@@ -54,7 +54,7 @@ const CardCover = ({
   const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
   const [, borderRadiusStyles] = splitStyles(
     flattenedStyles,
-    (style) => style.startsWith('border') && style.endsWith('Radius')
+    (style) => style.startsWith("border") && style.endsWith("Radius"),
   );
 
   const coverStyle = getCardCoverStyle({
@@ -75,19 +75,19 @@ const CardCover = ({
   );
 };
 
-CardCover.displayName = 'Card.Cover';
+CardCover.displayName = "Card.Cover";
 const styles = StyleSheet.create({
   container: {
     height: 195,
     backgroundColor: grey200,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   image: {
     flex: 1,
     height: undefined,
     width: undefined,
     padding: 16,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
 });
 

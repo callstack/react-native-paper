@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { Animated, StyleSheet } from 'react-native';
+import * as React from "react";
+import { Animated, StyleSheet } from "react-native";
 
-import AnimatedText from '../../Typography/AnimatedText';
-import type { LabelBackgroundProps } from '../types';
+import AnimatedText from "../../Typography/AnimatedText";
+import type { LabelBackgroundProps } from "../types";
 
 const LabelBackground = ({
   labeled,
@@ -77,7 +77,7 @@ const LabelBackground = ({
       numberOfLines={1}
       maxFontSizeMultiplier={maxFontSizeMultiplier}
     >
-      {typeof label === 'string' ? label : label?.props.children}
+      {typeof label === "string" ? label : label?.props.children}
     </AnimatedText>,
   ];
 };
@@ -86,16 +86,16 @@ export default LabelBackground;
 
 const styles = StyleSheet.create({
   view: {
-    position: 'absolute',
+    position: "absolute",
     top: 6,
     left: 10,
     width: 12,
   },
   // eslint-disable-next-line react-native/no-color-literals
   outlinedLabel: {
-    position: 'absolute',
+    position: "absolute",
     left: 8,
     paddingHorizontal: 0,
-    color: 'transparent',
+    color: "transparent",
   },
 });

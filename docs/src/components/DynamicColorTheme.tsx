@@ -1,16 +1,16 @@
-import React, { useState, ReactNode } from 'react';
+import React, { useState, ReactNode } from "react";
 
-import Color from 'color';
+import Color from "color";
 //@ts-ignore
-import { BlockPicker } from 'react-color';
+import { BlockPicker } from "react-color";
 
-import Switch from './Switch';
+import Switch from "./Switch";
 import {
   getMatchingColor,
   getPreviewColors,
   hexThemeFromColor,
   prepareThemes,
-} from '../utils/themes';
+} from "../utils/themes";
 
 type ColorProps = {
   color?: string;
@@ -31,39 +31,39 @@ type CustomColorEntry = {
   hex: string;
 };
 
-const defaultColor = '#663399';
+const defaultColor = "#663399";
 
 const colorPalette = [
-  '#FBC02D',
-  '#FFA000',
-  '#F57C00',
-  '#E64A19',
-  '#D32F2F',
-  '#C2185B',
-  '#7B1FA2',
-  '#512DA8',
-  '#303F9F',
-  '#1976D2',
-  '#0288D1',
-  '#0097A7',
-  '#00796B',
-  '#388E3C',
-  '#689F38',
-  '#AFB42B',
-  '#5D4037',
-  '#616161',
-  '#455A64',
+  "#FBC02D",
+  "#FFA000",
+  "#F57C00",
+  "#E64A19",
+  "#D32F2F",
+  "#C2185B",
+  "#7B1FA2",
+  "#512DA8",
+  "#303F9F",
+  "#1976D2",
+  "#0288D1",
+  "#0097A7",
+  "#00796B",
+  "#388E3C",
+  "#689F38",
+  "#AFB42B",
+  "#5D4037",
+  "#616161",
+  "#455A64",
 ];
 
 const ColorPicker = ({ color, setColor, additional }: ColorPickerProps) => {
   const [open, setOpen] = useState(false);
-  const labelColor = Color(color).isDark() ? '#fff' : '#000';
+  const labelColor = Color(color).isDark() ? "#fff" : "#000";
 
   return (
     <div className="color-picker-anchor">
       <button
         className={
-          additional ? 'color-picker-button-additional' : 'color-picker-button'
+          additional ? "color-picker-button-additional" : "color-picker-button"
         }
         style={{
           background: color,
@@ -154,7 +154,7 @@ const CodePreview = ({
         colors: theme,
       },
       null,
-      2
+      2,
     );
   };
 
@@ -170,7 +170,7 @@ const CodePreview = ({
       <div className="color-picker-schema-copy-header">
         <h4>{children}</h4>
         <button onClick={onCopy} className="color-picker-action-button">
-          {copied ? 'copied' : 'copy'}
+          {copied ? "copied" : "copy"}
         </button>
       </div>
       <pre>
@@ -200,13 +200,13 @@ const CustomColors = ({
 
   const setCustomColor = (key: string, hex: string) => {
     setCustomColors((colors) =>
-      colors.map((color) => (color.key === key ? { ...color, hex } : color))
+      colors.map((color) => (color.key === key ? { ...color, hex } : color)),
     );
   };
 
   const setCustomName = (key: string, name: string) => {
     setCustomColors((colors) =>
-      colors.map((color) => (color.key === key ? { ...color, name } : color))
+      colors.map((color) => (color.key === key ? { ...color, name } : color)),
     );
   };
 
@@ -270,7 +270,7 @@ const CustomColor = ({
     return (
       <tr>
         <td>
-          Custom color #{index + 1}:{' '}
+          Custom color #{index + 1}:{" "}
           <input
             value={name}
             onChange={onNameChange}
@@ -297,7 +297,7 @@ const CustomColor = ({
   return (
     <tr>
       <td colSpan={2}>
-        Custom color #{index + 1}:{' '}
+        Custom color #{index + 1}:{" "}
         <input
           value={name}
           onChange={onNameChange}
@@ -322,7 +322,7 @@ const DynamicColorTheme = () => {
   const [tertiary, setTertiary] = useState<string | undefined>();
   const [customColors, setCustomColors] = useState<CustomColorEntry[]>([]);
 
-  const darkMode = isDark ? 'dark' : 'light';
+  const darkMode = isDark ? "dark" : "light";
   const baseTheme = hexThemeFromColor(primary);
   const themes = prepareThemes({
     primary,
@@ -383,7 +383,7 @@ const DynamicColorTheme = () => {
 
         <div className="color-picker-grid-column">
           {getPreviewColors(themes[darkMode]).map(([key, color]) => {
-            const gridColumn = key === 'outline' ? 'span 2' : undefined;
+            const gridColumn = key === "outline" ? "span 2" : undefined;
             return (
               <div
                 key={key}

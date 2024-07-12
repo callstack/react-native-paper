@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   GestureResponderEvent,
   NativeSyntheticEvent,
@@ -8,16 +8,16 @@ import {
   TextStyle,
   View,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
 
-import color from 'color';
+import color from "color";
 
-import { Style, getLeftStyles, getRightStyles } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, EllipsizeProp, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
+import { Style, getLeftStyles, getRightStyles } from "./utils";
+import { useInternalTheme } from "../../core/theming";
+import type { $RemoveChildren, EllipsizeProp, ThemeProp } from "../../types";
+import { forwardRef } from "../../utils/forwardRef";
+import TouchableRipple from "../TouchableRipple/TouchableRipple";
+import Text from "../Typography/Text";
 
 type Title =
   | React.ReactNode
@@ -156,13 +156,13 @@ const ListItem = (
     testID,
     ...rest
   }: Props,
-  ref: React.ForwardedRef<View>
+  ref: React.ForwardedRef<View>,
 ) => {
   const theme = useInternalTheme(themeOverrides);
   const [alignToTop, setAlignToTop] = React.useState(false);
 
   const onDescriptionTextLayout = (
-    event: NativeSyntheticEvent<TextLayoutEventData>
+    event: NativeSyntheticEvent<TextLayoutEventData>,
   ) => {
     if (!theme.isV3) {
       return;
@@ -173,9 +173,9 @@ const ListItem = (
 
   const renderDescription = (
     descriptionColor: string,
-    description?: Description | null
+    description?: Description | null,
   ) => {
-    return typeof description === 'function' ? (
+    return typeof description === "function" ? (
       description({
         selectable: false,
         ellipsizeMode: descriptionEllipsizeMode,
@@ -205,7 +205,7 @@ const ListItem = (
       ? theme.colors.onSurface
       : color(theme.colors.text).alpha(0.87).rgb().string();
 
-    return typeof title === 'function' ? (
+    return typeof title === "function" ? (
       title({
         selectable: false,
         ellipsizeMode: titleEllipsizeMode,
@@ -271,7 +271,7 @@ const ListItem = (
 };
 
 const Component = forwardRef(ListItem);
-Component.displayName = 'List.Item';
+Component.displayName = "List.Item";
 
 const styles = StyleSheet.create({
   container: {
@@ -282,12 +282,12 @@ const styles = StyleSheet.create({
     paddingRight: 24,
   },
   row: {
-    width: '100%',
-    flexDirection: 'row',
+    width: "100%",
+    flexDirection: "row",
   },
   rowV3: {
-    width: '100%',
-    flexDirection: 'row',
+    width: "100%",
+    flexDirection: "row",
     marginVertical: 6,
   },
   title: {
@@ -306,7 +306,7 @@ const styles = StyleSheet.create({
   content: {
     flexShrink: 1,
     flexGrow: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
 });
 
