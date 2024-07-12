@@ -44,6 +44,22 @@ Check the components and their usage in our [documentation](https://callstack.gi
 
 Read the [contribution guidelines](/CONTRIBUTING.md) before contributing.
 
+## Commits
+
+- build
+- chore
+- ci
+- docs
+- feat
+- fix
+- perf
+- refactor
+- revert
+- style
+- test
+
+https://github.com/conventional-changelog/commitlint/?tab=readme-ov-file#what-is-commitlint
+
 ## Figma and Sketch component kits
 
 Use official component kits provided by [Material Design](https://m3.material.io/).
