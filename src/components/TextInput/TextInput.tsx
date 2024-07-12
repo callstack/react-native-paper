@@ -27,6 +27,8 @@ import { roundLayoutSize } from '../../utils/roundLayoutSize';
 const BLUR_ANIMATION_DURATION = 180;
 const FOCUS_ANIMATION_DURATION = 150;
 
+// toDo: delete comment
+
 export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
   /**
    * Mode of the TextInput.
