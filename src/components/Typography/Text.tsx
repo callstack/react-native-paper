@@ -102,12 +102,12 @@ const Text = (
     let textStyle = [font, style];
 
     if (
-      React.isValidElement(rest.children) &&
-      (rest.children.type === Component ||
-        rest.children.type === AnimatedText ||
-        rest.children.type === StyledText)
+      React.isValidElement(children) &&
+      (children.type === Component ||
+        children.type === AnimatedText ||
+        children.type === StyledText)
     ) {
-      const { props } = rest.children;
+      const { props } = children;
 
       // Context:   Some components have the built-in `Text` component with a predefined variant,
       //            that also accepts `children` as a `React.Node`. This can result in a situation,
