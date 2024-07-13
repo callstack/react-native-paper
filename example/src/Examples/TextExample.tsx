@@ -105,7 +105,7 @@ const TextExample = () => {
             <Text style={styles.text} variant="bodySmall">
               Body Small
             </Text>
-            
+
             <PaperProvider theme={theme}>
               <Text style={styles.text} variant="customVariant">
                 Custom Variant
