@@ -21,7 +21,7 @@ const ast = parser.parse(source, {
 });
 
 const index = packageJson.module;
-const relative = (value: string) =>
+const relative = (value) =>
   path.relative(root, path.resolve(path.dirname(index), value));
 
 const mappings = ast.program.body.reduce((acc, declaration, index, self) => {

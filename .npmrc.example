@@ -1,0 +1,4 @@
+This is what you will need to add to your .npmrc file to be able to use the @c4solutions packages. If you don't have a .npmrc file, you can create one in the root of your project.
+
+@c4solutions:registry=https://npm.pkg.github.com/
+//npm.pkg.github.com/:_authToken=YOUR_TOKEN_HERE
