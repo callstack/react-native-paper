@@ -57,6 +57,7 @@ Read the [contribution guidelines](/CONTRIBUTING.md) before contributing.
 - revert
 - style
 - test
+- 
 
 https://github.com/conventional-changelog/commitlint/?tab=readme-ov-file#what-is-commitlint
 
