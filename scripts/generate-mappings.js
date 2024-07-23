@@ -59,8 +59,11 @@ const mappings = ast.program.body.reduce((acc, declaration, index, self) => {
   return acc;
 }, {});
 
+const packageName = packageJson.name.substring(
+  packageJson.name.lastIndexOf("/") + 1,
+);
 fs.existsSync(path.dirname(output)) || fs.mkdirSync(path.dirname(output));
 fs.writeFileSync(
   output,
-  JSON.stringify({ name: packageJson.name, index, mappings }, null, 2),
+  JSON.stringify({ name: packageName, index, mappings }, null, 2),
 );
