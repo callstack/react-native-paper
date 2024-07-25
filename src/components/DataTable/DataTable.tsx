@@ -16,6 +16,7 @@ import DataTableTitle, {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   DataTableTitle as _DataTableTitle,
 } from './DataTableTitle';
+import DataTableSearchCell from './DataTableSearchCell';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -129,6 +130,9 @@ DataTable.Cell = DataTableCell;
 // @component ./DataTablePagination.tsx
 DataTable.Pagination = DataTablePagination;
 
+
+//
+DataTable.CellSearch = DataTableSearchCell;
 const styles = StyleSheet.create({
   container: {
     width: '100%',

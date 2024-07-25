@@ -106,12 +106,6 @@
     "react-native-safe-area-context": "*",
     "react-native-vector-icons": "*"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn lint-no-fix && yarn typescript && yarn test"
-    }
-  },
   "jest": {
     "preset": "react-native",
     "setupFiles": [

@@ -1,8 +1,6 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
-
+import { Alert, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 import { DataTable, Card } from 'react-native-paper';
-
 import ScreenWrapper from '../ScreenWrapper';
 
 type ItemsState = Array<{
@@ -15,7 +13,46 @@ type ItemsState = Array<{
 const DataTableExample = () => {
   const [sortAscending, setSortAscending] = React.useState<boolean>(true);
   const [page, setPage] = React.useState<number>(0);
-  const [items] = React.useState<ItemsState>([
+  const [visible, setVisible] = React.useState<boolean>(false);
+  const [originalItems] = React.useState<ItemsState>([
+    {
+      key: 1,
+      name: 'Cupcake',
+      calories: 356,
+      fat: 16,
+    },
+    {
+      key: 2,
+      name: 'Eclair',
+      calories: 262,
+      fat: 16,
+    },
+    {
+      key: 3,
+      name: 'Frozen yogurt',
+      calories: 159,
+      fat: 6,
+    },
+    {
+      key: 4,
+      name: 'Gingerbread',
+      calories: 305,
+      fat: 3.7,
+    },
+    {
+      key: 5,
+      name: 'Ice cream sandwich',
+      calories: 237,
+      fat: 9,
+    },
+    {
+      key: 6,
+      name: 'Jelly Bean',
+      calories: 375,
+      fat: 0,
+    },
+  ]);
+  const [items, setItems] = React.useState<ItemsState>([
     {
       key: 1,
       name: 'Cupcake',
@@ -57,6 +94,7 @@ const DataTableExample = () => {
   const [itemsPerPage, onItemsPerPageChange] = React.useState(
     numberOfItemsPerPageList[0]
   );
+  const [modalVisible, setModalVisible] = React.useState(false);
   const sortedItems = items
     .slice()
     .sort((item1, item2) =>
@@ -71,6 +109,22 @@ const DataTableExample = () => {
     setPage(0);
   }, [itemsPerPage]);
 
+  const likeMatch = (array, key, searchStr) => {
+    if (key == 'calories') {
+      return array.filter((item) => {
+        console.log(searchStr);
+        return item.calories == searchStr;
+      });
+    } else if (key == 'fat') {
+      return array.filter((item) => {
+        console.log(searchStr);
+        return item.fat == searchStr;
+      });
+    }
+    return array.filter((item) =>
+      item[key].toLowerCase().includes(searchStr.toLowerCase())
+    );
+  };
   return (
     <ScreenWrapper contentContainerStyle={styles.content}>
       <Card>
@@ -78,15 +132,63 @@ const DataTableExample = () => {
           <DataTable.Header>
             <DataTable.Title
               sortDirection={sortAscending ? 'ascending' : 'descending'}
-              onPress={() => setSortAscending(!sortAscending)}
-              style={styles.first}
+              onPress={() => {
+                setSortAscending(!sortAscending);
+              }}
+              onPressAsc={() => { setSortAscending(true); }}
+              onPressDes={() => { setSortAscending(false); }}
+              style={[styles.first]}
+              onLeftIconPress={() => {}}
             >
               Dessert
             </DataTable.Title>
-            <DataTable.Title numberOfLines={2} numeric>
+
+            <DataTable.Title
+              numberOfLines={2}
+              onPress={() => {}}
+              onLeftIconPress={() => {}}
+              onPressAsc={() => { setSortAscending(true); }}
+              onPressDes={() => { setSortAscending(false); }}
+            >
               Calories per piece
             </DataTable.Title>
-            <DataTable.Title numeric>Fat (g)</DataTable.Title>
+            <DataTable.Title onPress={() => {}} onLeftIconPress={() => {}}>
+              Fat (g)
+            </DataTable.Title>
+          </DataTable.Header>
+
+          <DataTable.Header>
+            <DataTable.CellSearch
+              style={styles.first}
+              onChangeText={(text) => {
+                if (text.length) {
+                  setItems(likeMatch(originalItems, 'name', text));
+                } else {
+                  setItems(originalItems);
+                }
+              }}
+              placeholder={'Search Dessert'}
+            ></DataTable.CellSearch>
+            <DataTable.CellSearch
+              onChangeText={(text) => {
+                if (text.length) {
+                  setItems(likeMatch(originalItems, 'calories', text));
+                } else {
+                  setItems(originalItems);
+                }
+              }}
+              placeholder={'Search Calories'}
+            ></DataTable.CellSearch>
+            <DataTable.CellSearch
+              onChangeText={(text) => {
+                if (text.length) {
+                  setItems(likeMatch(originalItems, 'fat', text));
+                } else {
+                  setItems(originalItems);
+                }
+              }}
+              placeholder={'Search Calories'}
+            ></DataTable.CellSearch>
           </DataTable.Header>
 
           {sortedItems.slice(from, to).map((item) => (
@@ -122,6 +224,66 @@ const styles = StyleSheet.create({
   },
   first: {
     flex: 2,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    width: '30%',
+    top: 55,
+  },
+  centeredView: {
+    flex: 1,
+    marginTop: 30,
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+});
+const popoverStyle = StyleSheet.create({
+  app: {
+    ...StyleSheet.absoluteFillObject,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#c2ffd2',
+  },
+  content: {
+    padding: 16,
+    backgroundColor: 'pink',
+    borderRadius: 8,
+  },
+  arrow: {
+    borderTopColor: 'pink',
+  },
+  background: {
+    backgroundColor: 'rgba(0, 0, 255, 0.5)',
   },
 });
 

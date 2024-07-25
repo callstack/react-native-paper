@@ -5,20 +5,27 @@ import {
   ViewStyle,
   TextStyle,
   GestureResponderEvent,
+  View,
 } from 'react-native';
 
 import type { $RemoveChildren } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
+import Searchbar from '../Searchbar';
+import Icon from '../Icon';
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
-   * Content of the `DataTableCell`.
+   * Content of the `DataTableSearchCell`.
    */
   children: React.ReactNode;
   /**
    * Align the text to the right. Generally monetary or number fields are aligned to right.
    */
+    /**
+    * The value of the text input.
+    */
+    value: string;
   numeric?: boolean;
   /**
    * Function to execute on press.
@@ -26,7 +33,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   onPress?: (e: GestureResponderEvent) => void;
   style?: StyleProp<ViewStyle>;
   /**
-   * Text content style of the `DataTableCell`.
+   * Text content style of the `DataTableSearchCell`.
    */
   textStyle?: StyleProp<TextStyle>;
   /**
@@ -37,6 +44,17 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * testID to be used on tests.
    */
   testID?: string;
+
+   /**
+   * Hint text shown when the input is empty.
+   */
+   placeholder?: string;
+ 
+   /**
+    * Callback that is called when the text input's text changes.
+    */
+   onChangeText?: (query: string) => void;
+   
 };
 
 /**
@@ -64,13 +82,16 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  *
  * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
-const DataTableCell = ({
+const DataTableSearchCell = ({
   children,
   textStyle,
   style,
   numeric,
   maxFontSizeMultiplier,
   testID,
+  placeholder = "Search",
+  value,
+  onChangeText,
   ...rest
 }: Props) => {
   return (
@@ -79,13 +100,21 @@ const DataTableCell = ({
       testID={testID}
       style={[styles.container, numeric && styles.right, style]}
     >
-      <CellContent
+      {/* <CellContent
         textStyle={textStyle}
         testID={testID}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
-      >
-        {children}
-      </CellContent>
+      > */}
+      <View style={{width: '100%', overflow : 'hidden', padding : 5, flexDirection : 'row'}}>
+        <Searchbar  
+        placeholder={placeholder}
+        onChangeText={onChangeText}
+        value={value} 
+        style={{flex : 3}}
+      />
+     
+      </View>
+      {/* </CellContent> */}
     </TouchableRipple>
   );
 };
@@ -105,7 +134,7 @@ const CellContent = ({
 
   return (
     <Text
-      style={textStyle}
+      style={[textStyle, {padding : 10}]}
       numberOfLines={1}
       maxFontSizeMultiplier={maxFontSizeMultiplier}
       testID={`${testID}-text-container`}
@@ -115,14 +144,14 @@ const CellContent = ({
   );
 };
 
-DataTableCell.displayName = 'DataTable.Cell';
+DataTableSearchCell.displayName = 'DataTable.Cell';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-   
+  //  borderRightWidth : 0.5
   },
 
   right: {
@@ -130,4 +159,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DataTableCell;
+export default DataTableSearchCell;

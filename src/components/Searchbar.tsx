@@ -415,7 +415,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: 18,
+    fontSize: 16,
     paddingLeft: 8,
     alignSelf: 'stretch',
     textAlign: I18nManager.getConstants().isRTL ? 'right' : 'left',
