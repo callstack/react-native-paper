@@ -20,7 +20,22 @@ import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Text from '../Typography/Text';
 import Menu from '../Menu/Menu';
+import { usePopover } from '../ModalPopover/usePopover';
+import Popover from '../ModalPopover';
 
+export type LeftIconConfig = {
+  id: string;
+  title: string;
+  onPress: () => void;
+  leadingIcon?: string;
+  disabled?: boolean;
+};
+export type LeftIconProps = {
+  modalVisible: boolean;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  textColor: string;
+  leftIconConfig?: LeftIconConfig[];
+};
 export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
   /**
    * Text content of the `DataTableTitle`.
@@ -44,9 +59,12 @@ export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
-  onLeftIconPress?: (e: GestureResponderEvent) => void;
-  onPressAsc?:() => void,
-  onPressDes?:() => void,
+
+  /**
+   * left icon config
+   */
+  leftIconConfig?: () => void | LeftIconConfig[];
+
   style?: StyleProp<ViewStyle>;
   /**
    * Text content style of the `DataTableTitle`.
@@ -92,9 +110,7 @@ const DataTableTitle = ({
   numeric,
   children,
   onPress,
-  onLeftIconPress,
-  onPressAsc,
-  onPressDes,
+  leftIconConfig,
   sortDirection,
   filterOption = true,
   textStyle,
@@ -127,6 +143,13 @@ const DataTableTitle = ({
     outputRange: ['0deg', '180deg'],
   });
 
+  const {
+    openPopover,
+    closePopover,
+    popoverVisible,
+    touchableRef,
+    popoverAnchorRect,
+  } = usePopover();
   // const icon = sortDirection ? (
   //   <Animated.View style={[styles.icon, { transform: [{ rotate: spin }] }]}>
   //     <MaterialCommunityIcon
@@ -139,11 +162,7 @@ const DataTableTitle = ({
   // ) : null;
 
   const iconFilter = filterOption ? (
-    <TouchableOpacity
-      onPress={() => {
-        setModalVisible(!modalVisible);
-      }}
-    >
+    <TouchableOpacity onPress={openPopover} ref={touchableRef}>
       <Animated.View style={[styles.icon, { alignSelf: 'flex-end' }]}>
         <MaterialCommunityIcon
           name="dots-vertical"
@@ -159,12 +178,7 @@ const DataTableTitle = ({
       disabled={!onPress}
       onPress={onPress}
       {...rest}
-      style={[
-        styles.container,
-        numeric && styles.right,
-        style,
-       
-      ]}
+      style={[styles.container, numeric && styles.right, style]}
     >
       {/* {icon} */}
       <Text
@@ -189,30 +203,55 @@ const DataTableTitle = ({
       >
         {children}
       </Text>
+
       {iconFilter}
-      <Modal
-        animationType="none"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
+      <Popover
+        contentStyle={{
+          padding: 16,
+          //  backgroundColor: 'pink',
+          borderRadius: 8,
         }}
+        arrowStyle={{
+          borderTopColor: 'pink',
+        }}
+        backgroundStyle={
+          {
+            // backgroundColor: 'rgba(0, 0, 255, 0.5)',
+          }
+        }
+        visible={popoverVisible}
+        onClose={closePopover}
+        fromRect={popoverAnchorRect}
+        supportedOrientations={['portrait', 'landscape']}
       >
-        <View style={modalStyle.centeredView}>
-          <View style={modalStyle.modalView}>
-          <Pressable onPress={() =>{ setModalVisible(!modalVisible);} } style={{alignContent : 'flex-end'}}>   <MaterialCommunityIcon
-          name="close"
-          size={16}
-          color={textColor}
-          direction={'ltr'}
-        /></Pressable>
-            <Menu.Item leadingIcon="arrow-up" titleStyle={{fontSize : 14}} onPress={onPressAsc} title="Sort Ascending" />
-            <Menu.Item leadingIcon="arrow-down" titleStyle={{fontSize : 14}} onPress={onPressDes} title="Sort Descending" />
-            <Menu.Item leadingIcon="pin" titleStyle={{fontSize : 14}} onPress={() => {}} title="Pin Column" />
-          </View>
-        </View>
-      </Modal>
+        {leftIconConfig && Array.isArray(leftIconConfig) && (
+          <LeftIconRender
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            textColor={textColor}
+            leftIconConfig={leftIconConfig}
+          />
+        )}
+      </Popover>
     </Pressable>
+  );
+};
+
+const LeftIconRender = ({ leftIconConfig }: LeftIconProps) => {
+  return (
+    <View>
+      {leftIconConfig?.map((item) => {
+        return (
+          <Menu.Item
+            leadingIcon={item.leadingIcon}
+            titleStyle={{ fontSize: 14 }}
+            onPress={item.onPress}
+            title={item.title}
+            disabled={item.disabled}
+          />
+        );
+      })}
+    </View>
   );
 };
 
@@ -269,7 +308,7 @@ const modalStyle = StyleSheet.create({
   modalView: {
     margin: 10,
     backgroundColor: 'white',
-    
+
     padding: 2,
     alignItems: 'flex-start',
     shadowColor: '#000',

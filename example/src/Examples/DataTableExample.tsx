@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Alert, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { DataTable, Card } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -90,6 +90,27 @@ const DataTableExample = () => {
       fat: 0,
     },
   ]);
+
+  const leftIconConfig = [
+    {
+      id: 1,
+      title: 'Sort Ascending',
+      onPress: () => {
+        setSortAscending(true);
+      },
+      leadingIcon: 'arrow-up',
+      disabled: sortAscending ? true : false,
+    },
+    {
+      id: 1,
+      title: 'Sort Descending',
+      onPress: () => {
+        setSortAscending(false);
+      },
+      leadingIcon: 'arrow-down',
+      disabled: !sortAscending ? true : false,
+    },
+  ];
   const [numberOfItemsPerPageList] = React.useState([2, 3, 4, 200]);
   const [itemsPerPage, onItemsPerPageChange] = React.useState(
     numberOfItemsPerPageList[0]
@@ -135,8 +156,7 @@ const DataTableExample = () => {
               onPress={() => {
                 setSortAscending(!sortAscending);
               }}
-              onPressAsc={() => { setSortAscending(true); }}
-              onPressDes={() => { setSortAscending(false); }}
+              leftIconConfig={leftIconConfig}
               style={[styles.first]}
               onLeftIconPress={() => {}}
             >
@@ -147,8 +167,12 @@ const DataTableExample = () => {
               numberOfLines={2}
               onPress={() => {}}
               onLeftIconPress={() => {}}
-              onPressAsc={() => { setSortAscending(true); }}
-              onPressDes={() => { setSortAscending(false); }}
+              onPressAsc={() => {
+                setSortAscending(true);
+              }}
+              onPressDes={() => {
+                setSortAscending(false);
+              }}
             >
               Calories per piece
             </DataTable.Title>
@@ -265,25 +289,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-  },
-});
-const popoverStyle = StyleSheet.create({
-  app: {
-    ...StyleSheet.absoluteFillObject,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#c2ffd2',
-  },
-  content: {
-    padding: 16,
-    backgroundColor: 'pink',
-    borderRadius: 8,
-  },
-  arrow: {
-    borderTopColor: 'pink',
-  },
-  background: {
-    backgroundColor: 'rgba(0, 0, 255, 0.5)',
   },
 });
 

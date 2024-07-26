@@ -57,7 +57,6 @@ export { default as TextInput } from './components/TextInput/TextInput';
 export { default as ToggleButton } from './components/ToggleButton';
 export { default as SegmentedButtons } from './components/SegmentedButtons/SegmentedButtons';
 export { default as Tooltip } from './components/Tooltip/Tooltip';
-
 export {
   Caption,
   Headline,
@@ -66,7 +65,13 @@ export {
   Title,
 } from './components/Typography/v2';
 export { default as Text, customText } from './components/Typography/Text';
-
+export { Popover, PopoverProps } from './components/ModalPopover';
+export {
+  PopoverController,
+  PopoverControllerRenderProps,
+} from './components/ModalPopover/PopoverController';
+export { PopoverTouchable } from './components/ModalPopover/PopoverTouchable';
+export * as usePopover from './components/ModalPopover/usePopover';
 // Types
 export type { Props as ActivityIndicatorProps } from './components/ActivityIndicator';
 export type { Props as AnimatedFABProps } from './components/FAB/AnimatedFAB';
