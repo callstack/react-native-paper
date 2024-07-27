@@ -76,6 +76,7 @@ const TextInputOutlined = ({
   placeholderTextColor,
   testID = 'text-input-outlined',
   contentStyle,
+  scaledLabel,
   ...rest
 }: ChildTextInputProps) => {
   const adornmentConfig = getAdornmentConfig({ left, right });
@@ -364,6 +365,7 @@ const TextInputOutlined = ({
             labeled={parentState.labeled}
             error={parentState.error}
             focused={parentState.focused}
+            scaledLabel={scaledLabel}
             wiggle={Boolean(parentState.value && labelProps.labelError)}
             labelLayoutMeasured={parentState.labelLayout.measured}
             labelLayoutWidth={parentState.labelLayout.width}
