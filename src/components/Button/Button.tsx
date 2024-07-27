@@ -140,6 +140,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   theme?: ThemeProp;
   /**
+   * Reference for the touchable
+   */
+  touchableRef?: React.RefObject<View>;
+  /**
    * testID to be used on tests.
    */
   testID?: string;
@@ -191,6 +195,7 @@ const Button = (
     accessible,
     background,
     maxFontSizeMultiplier,
+    touchableRef,
     ...rest
   }: Props,
   ref: React.ForwardedRef<View>
@@ -348,6 +353,7 @@ const Button = (
         style={touchableStyle}
         testID={testID}
         theme={theme}
+        ref={touchableRef}
       >
         <View style={[styles.content, contentStyle]}>
           {icon && loading !== true ? (
