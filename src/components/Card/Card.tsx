@@ -18,6 +18,7 @@ import CardTitle from './CardTitle';
 import { getCardColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { splitStyles } from '../../utils/splitStyles';
 import Surface from '../Surface';
@@ -130,23 +131,26 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
  * export default MyComponent;
  * ```
  */
-const Card = ({
-  elevation: cardElevation = 1,
-  delayLongPress,
-  onPress,
-  onLongPress,
-  onPressOut,
-  onPressIn,
-  mode: cardMode = 'elevated',
-  children,
-  style,
-  contentStyle,
-  theme: themeOverrides,
-  testID = 'card',
-  accessible,
-  disabled,
-  ...rest
-}: (OutlinedCardProps | ElevatedCardProps | ContainedCardProps) & Props) => {
+const CardComponent = (
+  {
+    elevation: cardElevation = 1,
+    delayLongPress,
+    onPress,
+    onLongPress,
+    onPressOut,
+    onPressIn,
+    mode: cardMode = 'elevated',
+    children,
+    style,
+    contentStyle,
+    theme: themeOverrides,
+    testID = 'card',
+    accessible,
+    disabled,
+    ...rest
+  }: (OutlinedCardProps | ElevatedCardProps | ContainedCardProps) & Props,
+  ref: React.ForwardedRef<View>
+) => {
   const theme = useInternalTheme(themeOverrides);
   const isMode = React.useCallback(
     (modeToCompare: Mode) => {
@@ -274,6 +278,7 @@ const Card = ({
 
   return (
     <Surface
+      ref={ref}
       style={[
         isV3 && !isMode('elevated') && { backgroundColor },
         !isV3 && isMode('outlined')
@@ -323,6 +328,16 @@ const Card = ({
       )}
     </Surface>
   );
+};
+
+const Component = forwardRef(CardComponent);
+Component.displayName = 'Card';
+
+const Card = Component as typeof Component & {
+  Content: typeof CardContent;
+  Actions: typeof CardActions;
+  Cover: typeof CardCover;
+  Title: typeof CardTitle;
 };
 
 // @component ./CardContent.tsx
