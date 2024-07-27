@@ -1084,6 +1084,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
                 "fontFamily": "System",
                 "fontSize": 16,
                 "fontWeight": undefined,
+                "height": 0,
                 "left": 8,
                 "letterSpacing": 0.15,
                 "lineHeight": undefined,
@@ -1111,9 +1112,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               }
             }
             testID="text-input-outlined-label-background"
-          >
-            Outline Input
-          </Text>
+          />
           <Text
             collapsable={false}
             maxFontSizeMultiplier={1.5}
