@@ -132,7 +132,7 @@ export const adjustPaddingOut = ({
   const refFontHeight = scale * fontSize;
   let result = pad;
 
-  if (height && !multiline) {
+  if (!isAndroid && height && !multiline) {
     return {
       paddingTop: Math.max(0, (height - fontHeight) / 2),
       paddingBottom: Math.max(0, (height - fontHeight) / 2),

@@ -38,6 +38,7 @@ exports[`call onPress when affix adornment pressed 1`] = `
     style={
       [
         {
+          "flex": 1,
           "paddingBottom": 0,
           "paddingTop": 0,
         },
@@ -186,11 +187,10 @@ exports[`call onPress when affix adornment pressed 1`] = `
       style={
         [
           {
+            "flex": 1,
             "margin": 0,
           },
-          {
-            "height": 56,
-          },
+          {},
           {
             "paddingBottom": 4,
             "paddingTop": 24,
@@ -337,6 +337,7 @@ exports[`correctly applies a component as the text label 1`] = `
     style={
       [
         {
+          "flex": 1,
           "paddingBottom": 0,
           "paddingTop": 0,
         },
@@ -502,11 +503,10 @@ exports[`correctly applies a component as the text label 1`] = `
       style={
         [
           {
+            "flex": 1,
             "margin": 0,
           },
-          {
-            "height": 56,
-          },
+          {},
           {
             "paddingBottom": 4,
             "paddingTop": 24,
@@ -577,6 +577,7 @@ exports[`correctly applies cursorColor prop 1`] = `
     style={
       [
         {
+          "flex": 1,
           "paddingBottom": 0,
           "paddingTop": 0,
         },
@@ -726,11 +727,10 @@ exports[`correctly applies cursorColor prop 1`] = `
       style={
         [
           {
+            "flex": 1,
             "margin": 0,
           },
-          {
-            "height": 56,
-          },
+          {},
           {
             "paddingBottom": 4,
             "paddingTop": 24,
@@ -801,6 +801,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
     style={
       [
         {
+          "flex": 1,
           "paddingBottom": 0,
           "paddingTop": 0,
         },
@@ -950,11 +951,10 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
       style={
         [
           {
+            "flex": 1,
             "margin": 0,
           },
-          {
-            "height": 56,
-          },
+          {},
           {
             "paddingBottom": 4,
             "paddingTop": 24,
@@ -1018,6 +1018,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
     style={
       [
         {
+          "flex": 1,
           "paddingBottom": 0,
         },
         {
@@ -1207,6 +1208,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
       style={
         [
           {
+            "flex": 1,
             "margin": 0,
           },
           {
@@ -1281,6 +1283,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
     style={
       [
         {
+          "flex": 1,
           "paddingBottom": 0,
           "paddingTop": 0,
         },
@@ -1430,11 +1433,10 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
       style={
         [
           {
+            "flex": 1,
             "margin": 0,
           },
-          {
-            "height": 56,
-          },
+          {},
           {
             "paddingBottom": 4,
             "paddingTop": 24,
@@ -1507,6 +1509,7 @@ exports[`correctly applies textAlign center 1`] = `
     style={
       [
         {
+          "flex": 1,
           "paddingBottom": 0,
           "paddingTop": 0,
         },
@@ -1656,11 +1659,10 @@ exports[`correctly applies textAlign center 1`] = `
       style={
         [
           {
+            "flex": 1,
             "margin": 0,
           },
-          {
-            "height": 56,
-          },
+          {},
           {
             "paddingBottom": 4,
             "paddingTop": 24,
@@ -1731,6 +1733,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
     style={
       [
         {
+          "flex": 1,
           "paddingBottom": 0,
           "paddingTop": 0,
         },
@@ -1880,11 +1883,10 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
       style={
         [
           {
+            "flex": 1,
             "margin": 0,
           },
-          {
-            "height": 56,
-          },
+          {},
           {
             "paddingBottom": 4,
             "paddingTop": 24,
@@ -2157,6 +2159,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     style={
       [
         {
+          "flex": 1,
           "paddingBottom": 0,
           "paddingTop": 0,
         },
@@ -2306,11 +2309,10 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       style={
         [
           {
+            "flex": 1,
             "margin": 0,
           },
-          {
-            "height": 56,
-          },
+          {},
           {
             "paddingBottom": 4,
             "paddingTop": 24,
