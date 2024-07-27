@@ -206,3 +206,51 @@ it('animated value changes correctly', () => {
     transform: [{ scale: 1.5 }],
   });
 });
+
+it('renders menu with mode "elevated"', () => {
+  const { getByTestId } = render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+        mode="elevated"
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+        <Menu.Item onPress={jest.fn()} title="Redo" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  const menuSurface = getByTestId('menu-surface');
+
+  // Get flattened styles
+  const styles = StyleSheet.flatten(menuSurface.props.style);
+
+  expect(styles).toHaveProperty('shadowColor');
+  expect(styles).toHaveProperty('shadowOpacity');
+});
+
+it('renders menu with mode "flat"', () => {
+  const { getByTestId } = render(
+    <Portal.Host>
+      <Menu
+        visible
+        onDismiss={jest.fn()}
+        anchor={<Button mode="outlined">Open menu</Button>}
+        mode="flat"
+      >
+        <Menu.Item onPress={jest.fn()} title="Undo" />
+        <Menu.Item onPress={jest.fn()} title="Redo" />
+      </Menu>
+    </Portal.Host>
+  );
+
+  const menuSurface = getByTestId('menu-surface');
+
+  // Get flattened styles
+  const styles = StyleSheet.flatten(menuSurface.props.style);
+
+  expect(styles).not.toHaveProperty('shadowColor');
+  expect(styles).not.toHaveProperty('shadowOpacity');
+});
