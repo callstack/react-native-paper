@@ -224,61 +224,54 @@ exports[`call onPress when affix adornment pressed 1`] = `
     />
   </View>
   <View
-    accessibilityLabel="+39"
-    accessibilityRole="button"
-    accessibilityState={
-      {
-        "busy": undefined,
-        "checked": undefined,
-        "disabled": undefined,
-        "expanded": undefined,
-        "selected": undefined,
-      }
-    }
-    accessibilityValue={
-      {
-        "max": undefined,
-        "min": undefined,
-        "now": undefined,
-        "text": undefined,
-      }
-    }
-    accessible={true}
     collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
+    onLayout={[Function]}
     style={
       {
         "alignItems": "center",
         "justifyContent": "center",
+        "left": 16,
+        "opacity": 0,
         "position": "absolute",
+        "top": null,
       }
     }
+    testID="left-affix-adornment"
   >
     <View
-      collapsable={false}
-      onLayout={[Function]}
-      style={
+      accessibilityLabel="+39"
+      accessibilityRole="button"
+      accessibilityState={
         {
-          "alignItems": "center",
-          "justifyContent": "center",
-          "left": 16,
-          "opacity": 0,
-          "position": "absolute",
-          "top": null,
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
         }
       }
-      testID="left-affix-adornment"
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
     >
       <Text
         maxFontSizeMultiplier={1.5}
