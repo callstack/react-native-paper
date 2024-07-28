@@ -429,11 +429,11 @@ export default TextInputOutlined;
 const styles = StyleSheet.create({
   labelContainer: {
     paddingBottom: 0,
-    flex: 1,
+    flexGrow: 1,
   },
   input: {
     margin: 0,
-    flex: 1,
+    flexGrow: 1,
   },
   inputOutlined: {
     paddingTop: 8,
