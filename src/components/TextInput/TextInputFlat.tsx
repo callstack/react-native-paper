@@ -443,11 +443,11 @@ const styles = StyleSheet.create({
   labelContainer: {
     paddingTop: 0,
     paddingBottom: 0,
-    flex: 1,
+    flexGrow: 1,
   },
   input: {
     margin: 0,
-    flex: 1,
+    flexGrow: 1,
   },
   inputFlat: {
     paddingTop: 24,
