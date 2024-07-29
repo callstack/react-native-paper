@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 
 import color from 'color';
-import type { ThemeProp } from 'src/types';
 
 import {
   getSegmentedButtonBorderRadius,
@@ -20,6 +19,7 @@ import {
   getSegmentedButtonDensityPadding,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';

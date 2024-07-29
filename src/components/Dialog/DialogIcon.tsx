@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import type { ThemeProp } from 'src/types';
-
 import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import Icon, { IconSource } from '../Icon';
 
 export type Props = {
