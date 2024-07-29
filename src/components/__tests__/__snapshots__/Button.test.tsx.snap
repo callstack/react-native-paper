@@ -1166,6 +1166,175 @@ exports[`renders button with icon in reverse order 1`] = `
 </View>
 `;
 
+exports[`renders button with trailing icon 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
+      "shadowColor": "#000",
+      "shadowOffset": {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0,
+      "shadowRadius": 0,
+    }
+  }
+  testID="button-container-outer-layer"
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "transparent",
+        "borderColor": "transparent",
+        "borderRadius": 20,
+        "borderStyle": "solid",
+        "borderWidth": 0,
+        "flex": undefined,
+        "minWidth": 64,
+        "shadowColor": "#000",
+        "shadowOffset": {
+          "height": 0,
+          "width": 0,
+        },
+        "shadowOpacity": 0,
+        "shadowRadius": 0,
+      }
+    }
+    testID="button-container"
+  >
+    <View
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "borderRadius": 20,
+          },
+        ]
+      }
+      testID="button"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(28, 27, 31, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 14,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.1,
+                  "lineHeight": 20,
+                },
+                [
+                  {
+                    "marginHorizontal": 16,
+                    "marginVertical": 9,
+                    "textAlign": "center",
+                  },
+                  false,
+                  {
+                    "marginHorizontal": 12,
+                  },
+                  undefined,
+                  false,
+                  {
+                    "color": "rgba(103, 80, 164, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.1,
+                    "lineHeight": 20,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          testID="button-text"
+        >
+          Icon Button
+        </Text>
+        <View
+          style={
+            [
+              {
+                "marginLeft": -4,
+                "marginRight": 12,
+              },
+              {
+                "marginLeft": -16,
+                "marginRight": 16,
+              },
+              {
+                "marginLeft": -8,
+                "marginRight": 12,
+              },
+            ]
+          }
+          testID="button-trailing-icon-container"
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`renders contained contained with mode 1`] = `
 <View
   collapsable={false}
