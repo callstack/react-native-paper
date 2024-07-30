@@ -64,3 +64,5 @@ CHANGELOG.md
 lib/
 
 .expo
+# Reassure output directory
+.reassure
