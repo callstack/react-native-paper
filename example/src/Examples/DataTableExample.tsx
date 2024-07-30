@@ -157,7 +157,8 @@ const DataTableExample = () => {
                 setSortAscending(!sortAscending);
               }}
               leftIconConfig={leftIconConfig}
-              style={[styles.first]}
+              style={styles.first}
+              textStyle={styles.titleStyle}
               onLeftIconPress={() => {}}
             >
               Dessert
@@ -167,6 +168,8 @@ const DataTableExample = () => {
               numberOfLines={2}
               onPress={() => {}}
               onLeftIconPress={() => {}}
+              style={styles.first}
+              textStyle={styles.titleStyle}
               onPressAsc={() => {
                 setSortAscending(true);
               }}
@@ -176,14 +179,19 @@ const DataTableExample = () => {
             >
               Calories per piece
             </DataTable.Title>
-            <DataTable.Title onPress={() => {}} onLeftIconPress={() => {}}>
+            <DataTable.Title
+              onPress={() => {}}
+              style={styles.first}
+              textStyle={styles.titleStyle}
+              onLeftIconPress={() => {}}
+            >
               Fat (g)
             </DataTable.Title>
           </DataTable.Header>
 
           <DataTable.Header>
             <DataTable.CellSearch
-              style={styles.first}
+              style={styles.searchStyle}
               onChangeText={(text) => {
                 if (text.length) {
                   setItems(likeMatch(originalItems, 'name', text));
@@ -194,6 +202,7 @@ const DataTableExample = () => {
               placeholder={'Search Dessert'}
             ></DataTable.CellSearch>
             <DataTable.CellSearch
+              style={styles.searchStyle}
               onChangeText={(text) => {
                 if (text.length) {
                   setItems(likeMatch(originalItems, 'calories', text));
@@ -204,6 +213,7 @@ const DataTableExample = () => {
               placeholder={'Search Calories'}
             ></DataTable.CellSearch>
             <DataTable.CellSearch
+              style={styles.searchStyle}
               onChangeText={(text) => {
                 if (text.length) {
                   setItems(likeMatch(originalItems, 'fat', text));
@@ -216,10 +226,16 @@ const DataTableExample = () => {
           </DataTable.Header>
 
           {sortedItems.slice(from, to).map((item) => (
-            <DataTable.Row key={item.key}>
-              <DataTable.Cell style={styles.first}>{item.name}</DataTable.Cell>
-              <DataTable.Cell numeric>{item.calories}</DataTable.Cell>
-              <DataTable.Cell numeric>{item.fat}</DataTable.Cell>
+            <DataTable.Row key={item.key} style={styles.bodyStyle}>
+              <DataTable.Cell style={styles.bodyStyleItem}>
+                {item.name}
+              </DataTable.Cell>
+              <DataTable.Cell style={styles.bodyStyleItem} numeric>
+                {item.calories}
+              </DataTable.Cell>
+              <DataTable.Cell style={styles.bodyStyleItem} numeric>
+                {item.fat}
+              </DataTable.Cell>
             </DataTable.Row>
           ))}
 
@@ -248,6 +264,26 @@ const styles = StyleSheet.create({
   },
   first: {
     flex: 2,
+    borderColor: 'grey',
+    borderBottomWidth: 1,
+    borderRightWidth: 1,
+    paddingHorizontal: 5,
+  },
+  titleStyle: {
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  bodyStyle: {},
+  bodyStyleItem: {
+    paddingHorizontal: 20,
+    borderBottomWidth: 1,
+    borderRightWidth: 1,
+    paddingHorizontal: 5,
+  },
+  searchStyle: {
+    borderBottomWidth: 1,
+    borderRightWidth: 1,
+    paddingHorizontal: 5,
   },
   modalView: {
     margin: 20,

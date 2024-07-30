@@ -248,6 +248,7 @@ const LeftIconRender = ({ leftIconConfig }: LeftIconProps) => {
             onPress={item.onPress}
             title={item.title}
             disabled={item.disabled}
+            style={{flex: 1}}
           />
         );
       })}

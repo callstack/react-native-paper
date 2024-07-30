@@ -22,10 +22,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Align the text to the right. Generally monetary or number fields are aligned to right.
    */
-    /**
-    * The value of the text input.
-    */
-    value: string;
+  /**
+   * The value of the text input.
+   */
+  value: string;
   numeric?: boolean;
   /**
    * Function to execute on press.
@@ -45,16 +45,15 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   testID?: string;
 
-   /**
+  /**
    * Hint text shown when the input is empty.
    */
-   placeholder?: string;
- 
-   /**
-    * Callback that is called when the text input's text changes.
-    */
-   onChangeText?: (query: string) => void;
-   
+  placeholder?: string;
+
+  /**
+   * Callback that is called when the text input's text changes.
+   */
+  onChangeText?: (query: string) => void;
 };
 
 /**
@@ -89,7 +88,7 @@ const DataTableSearchCell = ({
   numeric,
   maxFontSizeMultiplier,
   testID,
-  placeholder = "Search",
+  placeholder = 'Search',
   value,
   onChangeText,
   ...rest
@@ -105,14 +104,22 @@ const DataTableSearchCell = ({
         testID={testID}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
       > */}
-      <View style={{width: '100%', overflow : 'hidden', padding : 5, flexDirection : 'row'}}>
-        <Searchbar  
-        placeholder={placeholder}
-        onChangeText={onChangeText}
-        value={value} 
-        style={{flex : 3}}
-      />
-     
+      <View
+        style={{
+          width: '90%',
+          height: '100%',
+          overflow: 'hidden',
+          padding: 5,
+          flexDirection: 'row',
+        }}
+      >
+        <Searchbar
+          placeholder={placeholder}
+          onChangeText={onChangeText}
+          value={value}
+          style={{flex: 3, height: '70%', alignSelf: 'center' }}
+          inputStyle={{alignSelf: 'center' }}
+        />
       </View>
       {/* </CellContent> */}
     </TouchableRipple>
@@ -134,7 +141,7 @@ const CellContent = ({
 
   return (
     <Text
-      style={[textStyle, {padding : 10}]}
+      style={[textStyle, { padding: 10 }]}
       numberOfLines={1}
       maxFontSizeMultiplier={maxFontSizeMultiplier}
       testID={`${testID}-text-container`}
@@ -153,7 +160,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   //  borderRightWidth : 0.5
   },
-
   right: {
     justifyContent: 'flex-end',
   },
