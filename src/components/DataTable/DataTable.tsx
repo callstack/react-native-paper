@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { StyleSheet, StyleProp, View, ViewStyle } from 'react-native';
+import {
+  StyleSheet,
+  StyleProp,
+  View,
+  ViewStyle,
+  TouchableOpacity,
+  Animated,
+} from 'react-native';
 
 import DataTableCell from './DataTableCell';
 import DataTableHeader, {
@@ -17,12 +24,16 @@ import DataTableTitle, {
   DataTableTitle as _DataTableTitle,
 } from './DataTableTitle';
 import DataTableSearchCell from './DataTableSearchCell';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import { usePopover } from '../ModalPopover/usePopover';
+import Popover from '../ModalPopover';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Content of the `DataTable`.
    */
   children: React.ReactNode;
+  config?: any,
   style?: StyleProp<ViewStyle>;
 };
 
@@ -109,11 +120,61 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * export default MyComponent;
  * ```
  */
-const DataTable = ({ children, style, ...rest }: Props) => (
-  <View {...rest} style={[styles.container, style]}>
-    {children}
-  </View>
-);
+const DataTable = ({ children, style, config, ...rest }: Props) => {
+  const {
+    openPopover,
+    closePopover,
+    popoverVisible,
+    touchableRef,
+    popoverAnchorRect,
+  } = usePopover();
+  return (
+    <View {...rest} style={[styles.container, style]}>
+     { config && <TouchableOpacity ref={touchableRef} onPress={openPopover}>
+        <Animated.View
+          style={[
+            {
+              height: 24,
+              justifyContent: 'center',
+            },
+            { alignSelf: 'flex-end' },
+          ]}
+        >
+          <MaterialCommunityIcon
+            name="cog-outline"
+            size={16}
+            color={'grey'}
+            direction={'ltr'}
+          />
+        </Animated.View>
+      </TouchableOpacity>
+}
+      <Popover
+        contentStyle={{
+          padding: 16,
+          //  backgroundColor: 'pink',
+          borderRadius: 8,
+        }}
+        arrowStyle={{
+          borderTopColor: 'pink',
+        }}
+        backgroundStyle={
+          {
+            // backgroundColor: 'rgba(0, 0, 255, 0.5)',
+          }
+        }
+        visible={popoverVisible}
+        onClose={closePopover}
+        fromRect={popoverAnchorRect}
+        supportedOrientations={['portrait', 'landscape']}
+      >
+
+        
+      </Popover>
+      {children}
+    </View>
+  );
+};
 
 // @component ./DataTableHeader.tsx
 DataTable.Header = DataTableHeader;
@@ -129,7 +190,6 @@ DataTable.Cell = DataTableCell;
 
 // @component ./DataTablePagination.tsx
 DataTable.Pagination = DataTablePagination;
-
 
 //
 DataTable.CellSearch = DataTableSearchCell;

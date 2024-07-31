@@ -299,56 +299,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-const modalStyle = StyleSheet.create({
-  content: {
-    padding: 8,
-  },
-  first: {
-    flex: 2,
-  },
-  modalView: {
-    margin: 10,
-    backgroundColor: 'white',
-
-    padding: 2,
-    alignItems: 'flex-start',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-    top: 55,
-    right: 0,
-  },
-  centeredView: {
-    flex: 1,
-    marginTop: 30,
-    alignSelf: 'center',
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
-  },
-  buttonClose: {
-    backgroundColor: '#2196F3',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-});
 
 export default DataTableTitle;
 
