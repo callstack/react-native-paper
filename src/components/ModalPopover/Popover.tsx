@@ -94,6 +94,7 @@ export interface PopoverProps {
   easing?: (show: boolean) => (value: number) => number;
   useNativeDriver?: boolean;
   supportedOrientations?: Orientation[];
+  titleHeader?:boolean;
   calculateStatusBar?: boolean;
   children?: React.ReactNode;
 }
@@ -350,37 +351,22 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
       popover: [
         styles.popover,
         this.props.popoverStyle,
+      ],
+      popoverTitle: [
+        styles.popover,
+        this.props.popoverStyle,
         { top: origin.y, left: origin.x },
       ],
       content: [
         styles.content,
         this.props.contentStyle,
-        {
-          transform: [
-            {
-              translateX: animation.interpolate({
-                inputRange: [0, 1],
-                outputRange: [translateOrigin.x, 0],
-                extrapolate: 'clamp',
-              }),
-            },
-            {
-              translateY: animation.interpolate({
-                inputRange: [0, 1],
-                outputRange: [translateOrigin.y, 0],
-                extrapolate: 'clamp',
-              }),
-            },
-            { scale: animation },
-          ],
-        },
       ],
     };
   };
 
   render() {
     const { visible } = this.state;
-    const { onClose, onDismiss, supportedOrientations } = this.props;
+    const { onClose, onDismiss, supportedOrientations,titleHeader } = this.props;
     const computedStyles = this.computeStyles();
     const contentSizeAvailable = this.state.contentSize.width;
     return (
@@ -399,7 +385,7 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
           <TouchableWithoutFeedback onPress={this.props.onClose}>
             <Animated.View style={computedStyles.background} />
           </TouchableWithoutFeedback>
-          <Animated.View style={computedStyles.popover}>
+          <Animated.View style={titleHeader ? computedStyles.popoverTitle : computedStyles.popover}>
             <Animated.View
               onLayout={this.measureContent}
               style={computedStyles.content}>

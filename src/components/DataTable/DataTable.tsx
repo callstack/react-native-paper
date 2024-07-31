@@ -6,7 +6,7 @@ import {
   ViewStyle,
   TouchableOpacity,
   Animated,
-  Text
+  Text,
 } from 'react-native';
 
 import DataTableCell from './DataTableCell';
@@ -34,7 +34,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * Content of the `DataTable`.
    */
   children: React.ReactNode;
-  config?: any,
+  config?: any;
   style?: StyleProp<ViewStyle>;
 };
 
@@ -131,30 +131,38 @@ const DataTable = ({ children, style, config, ...rest }: Props) => {
   } = usePopover();
   return (
     <View {...rest} style={[styles.container, style]}>
-     { config && <TouchableOpacity ref={touchableRef} onPress={openPopover}>
-        <Animated.View
-          style={[
-            {
-              height: 24,
-              justifyContent: 'center',
-            },
-            { alignSelf: 'flex-end' },
-          ]}
-        >
-          <MaterialCommunityIcon
-            name="cog-outline"
-            size={16}
-            color={'grey'}
-            direction={'ltr'}
-          />
-        </Animated.View>
-      </TouchableOpacity>
-}
+      {config && (
+        <TouchableOpacity ref={touchableRef} onPress={openPopover}>
+          <Animated.View
+            style={[
+              {
+                height: 24,
+                justifyContent: 'center',
+              },
+              { alignSelf: 'flex-end' },
+            ]}
+          >
+            <MaterialCommunityIcon
+              name="cog-outline"
+              size={16}
+              color={'grey'}
+              direction={'ltr'}
+            />
+          </Animated.View>
+        </TouchableOpacity>
+      )}
       <Popover
+        popoverStyle={{
+          top: '15%',
+          right: '12%'
+        }}
         contentStyle={{
           padding: 16,
-          //  backgroundColor: 'pink',
+          // backgroundColor: 'pink',
           borderRadius: 8,
+          marginLeft: '90%',
+          // position: 'absolute',
+          // right: 0,
         }}
         arrowStyle={{
           borderTopColor: 'pink',
@@ -166,17 +174,19 @@ const DataTable = ({ children, style, config, ...rest }: Props) => {
         }
         visible={popoverVisible}
         onClose={closePopover}
+        bodyStyle={{}}
         fromRect={popoverAnchorRect}
         supportedOrientations={['portrait', 'landscape']}
       >
-
-        
+        <View style={{ paddingHorizontal: 5, width: 120 }}>
+          {config.headers.map((item, index) => (
+            <Text key={index} style={{ marginVertical: 4 }}>
+              {item}
+            </Text>
+          ))}
+        </View>
       </Popover>
       {children}
-
-      <View style={{flex : 1}}> 
-      <Text>Sheena</Text>
-      </View>
     </View>
   );
 };
@@ -200,7 +210,7 @@ DataTable.Pagination = DataTablePagination;
 DataTable.CellSearch = DataTableSearchCell;
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    // width: '100%',
   },
 });
 

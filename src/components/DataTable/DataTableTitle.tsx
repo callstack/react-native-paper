@@ -173,6 +173,7 @@ const DataTableTitle = ({
       </Animated.View>
     </TouchableOpacity>
   ) : null;
+  
   return (
     <Pressable
       disabled={!onPress}
@@ -206,6 +207,10 @@ const DataTableTitle = ({
 
       {iconFilter}
       <Popover
+        popoverStyle={{
+          top: origin.y,
+          left: origin.x,
+        }}
         contentStyle={{
           padding: 16,
           //  backgroundColor: 'pink',
@@ -223,6 +228,7 @@ const DataTableTitle = ({
         onClose={closePopover}
         fromRect={popoverAnchorRect}
         supportedOrientations={['portrait', 'landscape']}
+        titleHeader={true}
       >
         {leftIconConfig && Array.isArray(leftIconConfig) && (
           <LeftIconRender
@@ -248,7 +254,7 @@ const LeftIconRender = ({ leftIconConfig }: LeftIconProps) => {
             onPress={item.onPress}
             title={item.title}
             disabled={item.disabled}
-            style={{flex: 1}}
+            style={{ flex: 1 }}
           />
         );
       })}
