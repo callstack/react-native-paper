@@ -6,6 +6,7 @@ import {
   ViewStyle,
   TouchableOpacity,
   Animated,
+  Text
 } from 'react-native';
 
 import DataTableCell from './DataTableCell';
@@ -172,6 +173,10 @@ const DataTable = ({ children, style, config, ...rest }: Props) => {
         
       </Popover>
       {children}
+
+      <View style={{flex : 1}}> 
+      <Text>Sheena</Text>
+      </View>
     </View>
   );
 };

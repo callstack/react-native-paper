@@ -149,7 +149,7 @@ const DataTableExample = () => {
   return (
     <ScreenWrapper contentContainerStyle={styles.content}>
       <Card>
-        <DataTable>
+        <DataTable config={{headers : [ "Dessert","Calories per piece", "Fat" ]}}>
           <DataTable.Header>
             <DataTable.Title
               sortDirection={sortAscending ? 'ascending' : 'descending'}
