@@ -111,7 +111,7 @@ const DataTableExample = () => {
       disabled: !sortAscending ? true : false,
     },
   ];
-  const [numberOfItemsPerPageList] = React.useState([2, 3, 4, 200]);
+  const [numberOfItemsPerPageList] = React.useState([10, 200]);
   const [itemsPerPage, onItemsPerPageChange] = React.useState(
     numberOfItemsPerPageList[0]
   );

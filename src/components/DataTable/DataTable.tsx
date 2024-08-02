@@ -27,7 +27,8 @@ import DataTableTitle, {
 import DataTableSearchCell from './DataTableSearchCell';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import { usePopover } from '../ModalPopover/usePopover';
-import Popover from '../ModalPopover';
+
+import DraggableGrid from '../DraggableGrid';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -36,6 +37,32 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   children: React.ReactNode;
   config?: any;
   style?: StyleProp<ViewStyle>;
+};
+
+const renderItem = (item: { name: string; key: string }) => {
+  // console.log(item);
+
+  return (
+    <View
+      style={{
+        width: 200,
+        height: 50,
+        backgroundColor: 'black',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+      key={item.key}
+    >
+      <Text
+        style={{
+          fontSize: 14,
+          color: '#FFFFFF',
+        }}
+      >
+        {item.name}
+      </Text>
+    </View>
+  );
 };
 
 /**
@@ -122,17 +149,28 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const DataTable = ({ children, style, config, ...rest }: Props) => {
-  const {
-    openPopover,
-    closePopover,
-    popoverVisible,
-    touchableRef,
-    popoverAnchorRect,
-  } = usePopover();
+  const [isVisible, setIsVisible] = React.useState<boolean>(false);
+
+  const [data, setData] = React.useState<any>([
+    { name: 'Column One', key: 'one' },
+    { name: 'Column Two', key: 'two' },
+    { name: 'Column Three', key: 'three' },
+    { name: 'Column Four', key: 'four' },
+    { name: 'Column Five', key: 'five' },
+    { name: 'Column Six', key: 'six' },
+    { name: 'Column Seven', key: 'seven' },
+    { name: 'Column Eight', key: 'eight' },
+    { name: 'Column Nine', key: 'night' },
+    { name: 'Column Zero', key: 'zero' },
+  ]);
   return (
     <View {...rest} style={[styles.container, style]}>
       {config && (
-        <TouchableOpacity ref={touchableRef} onPress={openPopover}>
+        <TouchableOpacity
+          onPress={() => {
+            setIsVisible(!isVisible);
+          }}
+        >
           <Animated.View
             style={[
               {
@@ -151,42 +189,22 @@ const DataTable = ({ children, style, config, ...rest }: Props) => {
           </Animated.View>
         </TouchableOpacity>
       )}
-      <Popover
-        popoverStyle={{
-          top: '15%',
-          right: '12%'
-        }}
-        contentStyle={{
-          padding: 16,
-          // backgroundColor: 'pink',
-          borderRadius: 8,
-          marginLeft: '90%',
-          // position: 'absolute',
-          // right: 0,
-        }}
-        arrowStyle={{
-          borderTopColor: 'pink',
-        }}
-        backgroundStyle={
-          {
-            // backgroundColor: 'rgba(0, 0, 255, 0.5)',
-          }
-        }
-        visible={popoverVisible}
-        onClose={closePopover}
-        bodyStyle={{}}
-        fromRect={popoverAnchorRect}
-        supportedOrientations={['portrait', 'landscape']}
-      >
-        <View style={{ paddingHorizontal: 5, width: 120 }}>
-          {config.headers.map((item, index) => (
-            <Text key={index} style={{ marginVertical: 4 }}>
-              {item}
-            </Text>
-          ))}
-        </View>
-      </Popover>
-      {children}
+      <View style={{ flexDirection: 'row' }}>
+        <View style={{ flex: 3 }}>{children}</View>
+
+        {isVisible && (
+          <View style={{ marginLeft: 10 }}>
+            <DraggableGrid
+              data={data}
+              renderItem={renderItem}
+              onDragRelease={(newData) => setData(newData)}
+              numColumns={1}
+              style={{ width: 300 }}
+              itemHeight={40}
+            />
+          </View>
+        )}
+      </View>
     </View>
   );
 };
