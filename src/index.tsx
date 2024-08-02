@@ -57,6 +57,7 @@ export { default as TextInput } from './components/TextInput/TextInput';
 export { default as ToggleButton } from './components/ToggleButton';
 export { default as SegmentedButtons } from './components/SegmentedButtons/SegmentedButtons';
 export { default as Tooltip } from './components/Tooltip/Tooltip';
+
 export {
   Caption,
   Headline,
@@ -72,6 +73,7 @@ export {
 } from './components/ModalPopover/PopoverController';
 export { PopoverTouchable } from './components/ModalPopover/PopoverTouchable';
 export * as usePopover from './components/ModalPopover/usePopover';
+export {default as DraggableGrid} from './components/DraggableGrid';
 // Types
 export type { Props as ActivityIndicatorProps } from './components/ActivityIndicator';
 export type { Props as AnimatedFABProps } from './components/FAB/AnimatedFAB';
@@ -172,3 +174,4 @@ export type {
   MD3Elevation,
   MD3TypescaleKey,
 } from './types';
+export type {IDraggableGridProps} from './components/DraggableGrid/draggable-grid'
