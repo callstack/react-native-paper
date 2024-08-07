@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {
   Animated,
-  Text,
   BackHandler as RNBackHandler,
   BackHandlerStatic as RNBackHandlerStatic,
+  Text,
 } from 'react-native';
 
 import { act, fireEvent, render } from '@testing-library/react-native';
@@ -606,7 +606,9 @@ describe('Modal', () => {
       duration: 200,
     }).start();
 
-    jest.runAllTimers();
+    act(() => {
+      jest.runAllTimers();
+    });
 
     expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
       transform: [{ scale: 1.5 }],

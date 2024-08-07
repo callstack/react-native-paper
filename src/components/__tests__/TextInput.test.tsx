@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import { StyleSheet, Text, Platform, I18nManager, View } from 'react-native';
+import { I18nManager, Platform, StyleSheet, Text, View } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 import color from 'color';

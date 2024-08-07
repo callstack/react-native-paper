@@ -38,7 +38,7 @@
     "react-native-reanimated": "~3.6.2",
     "react-native-safe-area-context": "4.8.2",
     "react-native-screens": "~3.29.0",
-    "react-native-vector-icons": "^9.2.0",
+    "react-native-vector-icons": "^10.1.0",
     "react-native-web": "~0.19.6",
     "typeface-roboto": "^1.1.13"
   },

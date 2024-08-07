@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 
-import { render, waitFor, screen } from '@testing-library/react-native';
+import { act, render, screen, waitFor } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
 import { MD3Elevation } from '../../types';
@@ -200,8 +200,9 @@ it('animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
-
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
   expect(getByTestId('menu-surface-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });

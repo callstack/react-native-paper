@@ -1,16 +1,16 @@
 import * as React from 'react';
 import type {
+  Animated,
   GestureResponderEvent,
   StyleProp,
-  ViewStyle,
   View,
-  Animated,
+  ViewStyle,
 } from 'react-native';
 
+import { forwardRef } from '../../utils/forwardRef';
 import type { $Omit } from './../../types';
 import AppbarAction from './AppbarAction';
 import AppbarBackIcon from './AppbarBackIcon';
-import { forwardRef } from '../../utils/forwardRef';
 
 export type Props = $Omit<
   React.ComponentPropsWithoutRef<typeof AppbarAction>,
