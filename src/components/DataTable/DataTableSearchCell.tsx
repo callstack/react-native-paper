@@ -6,13 +6,18 @@ import {
   TextStyle,
   GestureResponderEvent,
   View,
+  TouchableOpacity,
+  Modal,
+  FlatList,
 } from 'react-native';
 
 import type { $RemoveChildren } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 import Searchbar from '../Searchbar';
-import Icon from '../Icon';
+import MaterialCommunityIcon from '../MaterialCommunityIcon';
+import { log } from 'console';
+import Popover, { usePopover } from '../ModalPopover';
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
@@ -54,6 +59,16 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Callback that is called when the text input's text changes.
    */
   onChangeText?: (query: string) => void;
+
+  /**
+   * Data that is displayed in the pop up to filter on search.
+   */
+  searchFilterData?:any;
+
+  /**
+   * On clicking of a value in the popover, it is stored in the the below use state
+   */
+  setFilteredOption?: any;
 };
 
 /**
@@ -91,10 +106,33 @@ const DataTableSearchCell = ({
   placeholder = 'Search',
   value,
   onChangeText,
+  searchFilterData,
+  setFilteredOption,
   ...rest
 }: Props) => {
+  const {
+    openPopover,
+    closePopover,
+    popoverVisible,
+    touchableRef,
+    popoverAnchorRect,
+  } = usePopover();
+
+  const iconFilter = (
+    <TouchableOpacity onPress={openPopover} ref={touchableRef}>
+      <View style={[styles.icon, { alignSelf: 'flex-end' }]}>
+        <MaterialCommunityIcon
+          name="filter"
+          size={20}
+          color={'black'}
+          direction={'ltr'}
+        />
+      </View>
+    </TouchableOpacity>
+  );
+
   return (
-    <TouchableRipple
+    <View
       {...rest}
       testID={testID}
       style={[styles.container, numeric && styles.right, style]}
@@ -104,25 +142,73 @@ const DataTableSearchCell = ({
         testID={testID}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
       > */}
-      <View
+      {/* <View
         style={{
-          width: '90%',
+          width: '100%',
           height: '100%',
           overflow: 'hidden',
           padding: 5,
           flexDirection: 'row',
+          justifyContent: 'space-between',
         }}
+      > */}
+      <Searchbar
+        placeholder={placeholder}
+        onChangeText={onChangeText}
+        value={value}
+        style={{ height: '70%', alignSelf: 'center', width: '85%' }}
+        inputStyle={{ alignSelf: 'center' }}
+      />
+
+      {iconFilter}
+      {/* </View> */}
+      <Popover
+        popoverStyle={{
+          top: origin.y,
+          left: origin.x,
+          width: 200
+        }}
+        arrowSize={{width: 0, height: 0}}
+        contentStyle={{
+          padding: 16,
+          //  backgroundColor: 'pink',
+          borderRadius: 8,
+        }}
+        arrowStyle={{
+          borderTopColor: 'pink',
+        }}
+        backgroundStyle={
+          {
+            // backgroundColor: 'rgba(0, 0, 255, 0.5)',
+          }
+        }
+        visible={popoverVisible}
+        onClose={closePopover}
+        fromRect={popoverAnchorRect}
+        supportedOrientations={['portrait', 'landscape']}
+        titleHeader={true}
       >
-        <Searchbar
-          placeholder={placeholder}
-          onChangeText={onChangeText}
-          value={value}
-          style={{flex: 3, height: '70%', alignSelf: 'center' }}
-          inputStyle={{alignSelf: 'center' }}
+        <View>
+        <FlatList
+          data={searchFilterData}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <View>
+              <TouchableOpacity
+                onPress={() => {
+                  setFilteredOption(item.name);
+                  closePopover();
+                }}
+              >
+                <Text style={{padding: 5}}>{item.name}</Text>
+              </TouchableOpacity>
+            </View>
+          )}
         />
-      </View>
+        </View>
+      </Popover>
       {/* </CellContent> */}
-    </TouchableRipple>
+    </View>
   );
 };
 
@@ -158,10 +244,40 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-  //  borderRightWidth : 0.5
+    justifyContent: 'space-between'
+    //  borderRightWidth : 0.5
   },
   right: {
     justifyContent: 'flex-end',
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  icon: {
+    height: 24,
+    justifyContent: 'center',
   },
 });
 

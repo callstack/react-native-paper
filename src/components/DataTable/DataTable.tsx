@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Animated,
   Text,
+  FlatList,
 } from 'react-native';
 
 import DataTableCell from './DataTableCell';

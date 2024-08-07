@@ -211,6 +211,7 @@ const DataTableTitle = ({
           top: origin.y,
           left: origin.x,
         }}
+        arrowSize={{width: 0, height: 0}}
         contentStyle={{
           padding: 16,
           //  backgroundColor: 'pink',

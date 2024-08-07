@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import { DataTable, Card } from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -14,6 +20,7 @@ const DataTableExample = () => {
   const [sortAscending, setSortAscending] = React.useState<boolean>(true);
   const [page, setPage] = React.useState<number>(0);
   const [visible, setVisible] = React.useState<boolean>(false);
+  const [filteredOption, setFilteredOption] = React.useState('Contain');
   const [originalItems] = React.useState<ItemsState>([
     {
       key: 1,
@@ -131,6 +138,58 @@ const DataTableExample = () => {
   }, [itemsPerPage]);
 
   const likeMatch = (array, key, searchStr) => {
+    if (key === 'calories' || key === 'fat') {
+      return array.filter((item) => {
+        const itemValue = item[key].toString();
+        const searchValue = searchStr.toString();
+        return itemValue.includes(searchValue);
+      });
+    }
+    return array.filter((item) =>
+      item[key].toLowerCase().includes(searchStr.toLowerCase())
+    );
+  };
+
+  const unlikeMatch = (array, key, searchStr) => {
+    if (key === 'calories' || key === 'fat') {
+      return array.filter((item) => {
+        const itemValue = item[key].toString();
+        const searchValue = searchStr.toString();
+        return !itemValue.includes(searchValue);
+      });
+    }
+    return array.filter(
+      (item) => !item[key].toLowerCase().includes(searchStr.toLowerCase())
+    );
+  };
+
+  const equalMatch = (array, key, searchStr) => {
+    if (key === 'calories' || key === 'fat') {
+      return array.filter((item) => {
+        const itemValue = item[key].toString();
+        const searchValue = searchStr.toString();
+        return itemValue === searchValue;
+      });
+    }
+    return array.filter(
+      (item) => item[key].toLowerCase() === searchStr.toLowerCase()
+    );
+  };
+
+  const notEqualMatch = (array, key, searchStr) => {
+    if (key === 'calories' || key === 'fat') {
+      return array.filter((item) => {
+        const itemValue = item[key].toString();
+        const searchValue = searchStr.toString();
+        return itemValue !== searchValue;
+      });
+    }
+    return array.filter(
+      (item) => item[key].toLowerCase() !== searchStr.toLowerCase()
+    );
+  };
+
+  const emptyMatch = (array, key, searchStr) => {
     if (key == 'calories') {
       return array.filter((item) => {
         console.log(searchStr);
@@ -142,14 +201,67 @@ const DataTableExample = () => {
         return item.fat == searchStr;
       });
     }
+    return array.filter((item) => item[key].name.toLowerCase().length === 0);
+  };
+
+  const notEmptyMatch = (array, key, searchStr) => {
+    if (key == 'calories') {
+      return array.filter((item) => {
+        console.log(searchStr);
+        return item.calories == searchStr;
+      });
+    } else if (key == 'fat') {
+      return array.filter((item) => {
+        console.log(searchStr);
+        return item.fat == searchStr;
+      });
+    }
+    return array.filter((item) => item[key].name.toLowerCase().length !== 0);
+  };
+
+  const startsWithMatch = (array, key, searchStr) => {
+    if (key === 'calories' || key === 'fat') {
+      return array.filter((item) => {
+        const itemValue = item[key].toString();
+        const searchValue = searchStr.toString();
+        return itemValue.startsWith(searchValue);
+      });
+    }
     return array.filter((item) =>
-      item[key].toLowerCase().includes(searchStr.toLowerCase())
+      item[key].toLowerCase().startsWith(searchStr.toLowerCase())
     );
   };
+
+  const endsWithMatch = (array, key, searchStr) => {
+    if (key === 'calories' || key === 'fat') {
+      return array.filter((item) => {
+        const itemValue = item[key].toString();
+        const searchValue = searchStr.toString();
+        return itemValue.endsWith(searchValue);
+      });
+    }
+    return array.filter((item) =>
+      item[key].toLowerCase().endsWith(searchStr.toLowerCase())
+    );
+  };
+
+  const filterData = [
+    { id: 1, name: 'Contain' },
+    { id: 2, name: 'Does not contain' },
+    { id: 3, name: 'Equals' },
+    { id: 4, name: 'Does not equal' },
+    // { id: 5, name: 'Empty' },
+    // { id: 6, name: 'Not empty' },
+    { id: 7, name: 'Starts with' },
+    { id: 8, name: 'Ends with' },
+  ];
+
   return (
     <ScreenWrapper contentContainerStyle={styles.content}>
       <Card>
-        <DataTable config={{headers : [ "Dessert","Calories per piece", "Fat" ]}}>
+        <DataTable
+          config={{ headers: ['Dessert', 'Calories per piece', 'Fat'] }}
+        >
           <DataTable.Header>
             <DataTable.Title
               sortDirection={sortAscending ? 'ascending' : 'descending'}
@@ -163,7 +275,6 @@ const DataTableExample = () => {
             >
               Dessert
             </DataTable.Title>
-
             <DataTable.Title
               numberOfLines={2}
               onPress={() => {}}
@@ -188,13 +299,30 @@ const DataTableExample = () => {
               Fat (g)
             </DataTable.Title>
           </DataTable.Header>
-
           <DataTable.Header>
             <DataTable.CellSearch
               style={styles.searchStyle}
+              searchFilterData={filterData}
+              setFilteredOption={setFilteredOption}
               onChangeText={(text) => {
                 if (text.length) {
-                  setItems(likeMatch(originalItems, 'name', text));
+                  if (filteredOption === 'Contain') {
+                    setItems(likeMatch(originalItems, 'name', text));
+                  } else if (filteredOption === 'Does not contain') {
+                    setItems(unlikeMatch(originalItems, 'name', text));
+                  } else if (filteredOption === 'Equals') {
+                    setItems(equalMatch(originalItems, 'name', text));
+                  } else if (filteredOption === 'Does not equal') {
+                    setItems(notEqualMatch(originalItems, 'name', text));
+                  } else if (filteredOption === 'Empty') {
+                    setItems(emptyMatch(originalItems, 'name', text));
+                  } else if (filteredOption === 'Not empty') {
+                    setItems(notEmptyMatch(originalItems, 'name', text));
+                  } else if (filteredOption === 'Starts with') {
+                    setItems(startsWithMatch(originalItems, 'name', text));
+                  } else if (filteredOption === 'Ends with') {
+                    setItems(endsWithMatch(originalItems, 'name', text));
+                  }
                 } else {
                   setItems(originalItems);
                 }
@@ -203,9 +331,27 @@ const DataTableExample = () => {
             ></DataTable.CellSearch>
             <DataTable.CellSearch
               style={styles.searchStyle}
+              searchFilterData={filterData}
+              setFilteredOption={setFilteredOption}
               onChangeText={(text) => {
                 if (text.length) {
-                  setItems(likeMatch(originalItems, 'calories', text));
+                  if (filteredOption === 'Contain') {
+                    setItems(likeMatch(originalItems, 'calories', text));
+                  } else if (filteredOption === 'Does not contain') {
+                    setItems(unlikeMatch(originalItems, 'calories', text));
+                  } else if (filteredOption === 'Equals') {
+                    setItems(equalMatch(originalItems, 'calories', text));
+                  } else if (filteredOption === 'Does not equal') {
+                    setItems(notEqualMatch(originalItems, 'calories', text));
+                  } else if (filteredOption === 'Empty') {
+                    setItems(emptyMatch(originalItems, 'calories', text));
+                  } else if (filteredOption === 'Not empty') {
+                    setItems(notEmptyMatch(originalItems, 'calories', text));
+                  } else if (filteredOption === 'Starts with') {
+                    setItems(startsWithMatch(originalItems, 'calories', text));
+                  } else if (filteredOption === 'Ends with') {
+                    setItems(endsWithMatch(originalItems, 'calories', text));
+                  }
                 } else {
                   setItems(originalItems);
                 }
@@ -214,9 +360,27 @@ const DataTableExample = () => {
             ></DataTable.CellSearch>
             <DataTable.CellSearch
               style={styles.searchStyle}
+              searchFilterData={filterData}
+              setFilteredOption={setFilteredOption}
               onChangeText={(text) => {
                 if (text.length) {
-                  setItems(likeMatch(originalItems, 'fat', text));
+                  if (filteredOption === 'Contain') {
+                    setItems(likeMatch(originalItems, 'fat', text));
+                  } else if (filteredOption === 'Does not contain') {
+                    setItems(unlikeMatch(originalItems, 'fat', text));
+                  } else if (filteredOption === 'Equals') {
+                    setItems(equalMatch(originalItems, 'fat', text));
+                  } else if (filteredOption === 'Does not equal') {
+                    setItems(notEqualMatch(originalItems, 'fat', text));
+                  } else if (filteredOption === 'Empty') {
+                    setItems(emptyMatch(originalItems, 'fat', text));
+                  } else if (filteredOption === 'Not empty') {
+                    setItems(notEmptyMatch(originalItems, 'fat', text));
+                  } else if (filteredOption === 'Starts with') {
+                    setItems(startsWithMatch(originalItems, 'fat', text));
+                  } else if (filteredOption === 'Ends with') {
+                    setItems(endsWithMatch(originalItems, 'fat', text));
+                  }
                 } else {
                   setItems(originalItems);
                 }
