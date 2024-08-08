@@ -58,7 +58,7 @@ When you're working on a component:
 
 The example app uses [Expo](https://expo.dev/) for the React Native example. You will need to install the Expo app for [Android](https://play.google.com/store/apps/details?id=host.exp.exponent) and [iOS](https://itunes.apple.com/app/apple-store/id982107779) to start developing.
 
-After you're done, you can run `yarn example start` in the project root (or `expo start` in the `example/` folder) and scan the QR code to launch it on your device.
+After you're done, you can run `npx expo start --offline` in the `example/` folder and scan the QR code to launch it on your device.
 
 To run the example on web, run `yarn example web` in the project root.
 
