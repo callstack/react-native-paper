@@ -31,6 +31,12 @@ const style = StyleSheet.create({
   },
 });
 
+// Revert changes to Platform.OS automatically
+const defaultPlatform = Platform.OS;
+beforeEach(() => {
+  Platform.OS = defaultPlatform;
+});
+
 const affixTextValue = '/100';
 it('correctly renders left-side icon adornment, and right-side affix adornment', () => {
   const { getByText, getByTestId, toJSON } = render(
