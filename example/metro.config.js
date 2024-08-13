@@ -16,6 +16,7 @@ const modules = [
   'expo-constants',
   ...Object.keys(pak.peerDependencies),
   '@react-navigation/native',
+  '@react-native/assets-registry',
 ];
 
 module.exports = {
