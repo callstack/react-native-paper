@@ -194,7 +194,7 @@ const themeColors = {
     disabled: {
       textColor: 'theme.colors.onSurfaceDisabled',
     },
-    defualt: {
+    default: {
       textColor: 'theme.colors.onSurfaceVariant',
     },
     error: {
