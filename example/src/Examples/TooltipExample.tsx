@@ -151,22 +151,23 @@ const TooltipExample = ({ navigation }: Props) => {
         </List.Section>
         <List.Section title="Info Tooltip">
           <TextInput
-            placeholder='IBAN'
-            mode='outlined'
+            placeholder="IBAN"
+            mode="outlined"
             style={styles.textInput}
             right={
-              <TextInput.Icon icon={() => (
-                <Tooltip
-                  title="International Bank Account Number"
-                  touchToDisplay={true}
-                >
-                  <IconButton
-                    icon={'information'}
-                    size={24}
-                    onPress={() => { }}
-                  />
-                </Tooltip>
-              )}
+              <TextInput.Icon
+                icon={() => (
+                  <Tooltip
+                    title="International Bank Account Number"
+                    touchToDisplay={true}
+                  >
+                    <IconButton
+                      icon={'information'}
+                      size={24}
+                      onPress={() => {}}
+                    />
+                  </Tooltip>
+                )}
               />
             }
           />
