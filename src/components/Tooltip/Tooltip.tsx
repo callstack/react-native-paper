@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {
   Dimensions,
-  View,
   LayoutChangeEvent,
-  StyleSheet,
   Platform,
   Pressable,
+  StyleSheet,
+  View,
   ViewStyle,
 } from 'react-native';
 
@@ -171,7 +171,7 @@ const Tooltip = ({
         if (children.props.disabled) return null;
         return children.props.onPress?.();
       }
-    }, [children.props]),
+    }, [children.props, touchToDisplay]),
     onLongPress: () => handleTouchStart(),
     onPressOut: () => handleTouchEnd(),
     delayLongPress: enterTouchDelay,
