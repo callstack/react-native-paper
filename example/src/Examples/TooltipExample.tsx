@@ -10,6 +10,7 @@ import {
   FAB,
   IconButton,
   List,
+  TextInput,
   ToggleButton,
   Tooltip,
   Card,
@@ -148,6 +149,29 @@ const TooltipExample = ({ navigation }: Props) => {
             </Card>
           </Tooltip>
         </List.Section>
+        <List.Section title="Info Tooltip">
+          <TextInput
+            placeholder='IBAN'
+            mode='outlined'
+            style={styles.textInput}
+            right={
+              <TextInput.Icon icon={() => (
+                <Tooltip
+                  title="International Bank Account Number"
+                  touchToDisplay={true}
+                >
+                  <IconButton
+                    icon={'information'}
+                    size={24}
+                    onPress={() => { }}
+                  />
+                </Tooltip>
+              )}
+              />
+            }
+          />
+        </List.Section>
+        <View style={styles.listBottomMargin} />
       </ScreenWrapper>
       <View style={styles.fabContainer}>
         <Tooltip title="Press Me">
@@ -181,11 +205,17 @@ const styles = StyleSheet.create({
   cardContainer: {
     margin: 16,
   },
+  textInput: {
+    margin: 16,
+  },
   toggleButtonRow: {
     paddingHorizontal: 16,
   },
   iconButtonContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+  },
+  listBottomMargin: {
+    marginBottom: 128,
   },
 });

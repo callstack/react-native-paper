@@ -11,11 +11,11 @@ import {
 
 import type { ThemeProp } from 'src/types';
 
-import { getTooltipPosition, Measurement } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
 import Text from '../Typography/Text';
+import { getTooltipPosition, Measurement } from './utils';
 
 export type Props = {
   /**
@@ -42,6 +42,10 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * Whether the tooltip should be displayed on touch instead long press on mobile.
+   */
+  touchToDisplay?: boolean;
 };
 
 /**
@@ -67,6 +71,7 @@ const Tooltip = ({
   children,
   enterTouchDelay = 500,
   leaveTouchDelay = 1500,
+  touchToDisplay = false,
   title,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier,
@@ -155,6 +160,11 @@ const Tooltip = ({
 
   const mobilePressProps = {
     onPress: React.useCallback(() => {
+      if (touchToDisplay) {
+        touched.current = true;
+        setVisible(true);
+        return null;
+      }
       if (touched.current) {
         return null;
       } else {
