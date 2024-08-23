@@ -460,8 +460,10 @@ const getOutlinedOutlineInputColor = ({
   if (theme.isV3) {
     if (disabled) {
       if (theme.dark) {
+        if(customOutlineColor) return customOutlineColor
         return 'transparent';
       }
+      if(customOutlineColor) return customOutlineColor
       return theme.colors.surfaceDisabled;
     }
 
