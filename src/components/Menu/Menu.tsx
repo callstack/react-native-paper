@@ -326,7 +326,7 @@ class Menu extends React.Component<Props, State> {
   };
 
   private show = async () => {
-    const windowLayout = Dimensions.get('window');
+    const windowLayout = this.getWindowLayout();
     const [menuLayout, anchorLayout] = await Promise.all([
       this.measureMenuLayout(),
       this.measureAnchorLayout(),
@@ -339,8 +339,7 @@ class Menu extends React.Component<Props, State> {
     // so we have to wait until views are ready
     // and rerun this function to show menu
     if (
-      !windowLayout.width ||
-      !windowLayout.height ||
+      !windowLayout ||
       !menuLayout.width ||
       !menuLayout.height ||
       (!anchorLayout.width && !this.isCoordinate(this.props.anchor)) ||
@@ -362,10 +361,7 @@ class Menu extends React.Component<Props, State> {
           width: menuLayout.width,
           height: menuLayout.height,
         },
-        windowLayout: {
-          height: windowLayout.height - this.keyboardHeight,
-          width: windowLayout.width,
-        },
+        windowLayout: windowLayout,
       }),
       () => {
         this.attachListeners();
@@ -414,10 +410,47 @@ class Menu extends React.Component<Props, State> {
   private keyboardDidShow = (e: RNKeyboardEvent) => {
     const keyboardHeight = e.endCoordinates.height;
     this.keyboardHeight = keyboardHeight;
+
+    this.refreshWindowLayout();
   };
 
   private keyboardDidHide = () => {
     this.keyboardHeight = 0;
+
+    this.refreshWindowLayout();
+  };
+
+  private refreshWindowLayout = () => {
+    if (!this.state.rendered) {
+      return;
+    }
+
+    const windowLayout = this.getWindowLayout();
+
+    if (!windowLayout) {
+      return;
+    }
+
+    this.setState({
+      windowLayout,
+    });
+  };
+
+  private getWindowLayout = (): Layout | undefined => {
+    const windowLayout = Dimensions.get('window');
+
+    // When visible for the first render
+    // native views can be still not rendered and
+    // Dimensions.get('window')
+    // returns wrong value e.g { x:0, y: 0, width: 0, height: 0 }
+    if (!windowLayout.width || !windowLayout.height) {
+      return;
+    }
+
+    return {
+      height: windowLayout.height - this.keyboardHeight,
+      width: windowLayout.width,
+    };
   };
 
   render() {
