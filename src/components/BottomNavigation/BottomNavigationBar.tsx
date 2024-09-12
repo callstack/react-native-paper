@@ -360,7 +360,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   navigationState,
   renderIcon,
   renderLabel,
-  renderTouchable = (props: TouchableProps<Route>) => <Touchable {...props} />,
+  renderTouchable = ({ key, ...props }: TouchableProps<Route>) => (
+    <Touchable key={key} {...props} />
+  ),
   getLabelText = ({ route }: { route: Route }) => route.title,
   getBadge = ({ route }: { route: Route }) => route.badge,
   getColor = ({ route }: { route: Route }) => route.color,
