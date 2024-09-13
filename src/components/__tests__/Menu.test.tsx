@@ -2,12 +2,15 @@ import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 
 import { render, waitFor, screen } from '@testing-library/react-native';
+import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 
 import { getTheme } from '../../core/theming';
 import { MD3Elevation } from '../../types';
 import Button from '../Button/Button';
 import Menu, { ELEVATION_LEVELS_MAP } from '../Menu/Menu';
 import Portal from '../Portal/Portal';
+
+jest.mock('react-native-safe-area-context', () => mockSafeAreaContext);
 
 const styles = StyleSheet.create({
   contentStyle: {
@@ -16,9 +19,17 @@ const styles = StyleSheet.create({
   },
 });
 
+const TestContextProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => (
+  <mockSafeAreaContext.SafeAreaProvider>
+    <Portal.Host>{children}</Portal.Host>
+  </mockSafeAreaContext.SafeAreaProvider>
+);
+
 it('renders visible menu', () => {
   const tree = render(
-    <Portal.Host>
+    <TestContextProvider>
       <Menu
         visible
         onDismiss={jest.fn()}
@@ -27,7 +38,7 @@ it('renders visible menu', () => {
         <Menu.Item onPress={jest.fn()} title="Undo" />
         <Menu.Item onPress={jest.fn()} title="Redo" />
       </Menu>
-    </Portal.Host>
+    </TestContextProvider>
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -35,7 +46,7 @@ it('renders visible menu', () => {
 
 it('renders not visible menu', () => {
   const tree = render(
-    <Portal.Host>
+    <TestContextProvider>
       <Menu
         visible={false}
         onDismiss={jest.fn()}
@@ -44,7 +55,7 @@ it('renders not visible menu', () => {
         <Menu.Item onPress={jest.fn()} title="Undo" />
         <Menu.Item onPress={jest.fn()} title="Redo" />
       </Menu>
-    </Portal.Host>
+    </TestContextProvider>
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -52,7 +63,7 @@ it('renders not visible menu', () => {
 
 it('renders menu with content styles', () => {
   const tree = render(
-    <Portal.Host>
+    <TestContextProvider>
       <Menu
         visible
         onDismiss={jest.fn()}
@@ -62,7 +73,7 @@ it('renders menu with content styles', () => {
         <Menu.Item onPress={jest.fn()} title="Undo" />
         <Menu.Item onPress={jest.fn()} title="Redo" />
       </Menu>
-    </Portal.Host>
+    </TestContextProvider>
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -73,7 +84,7 @@ it('renders menu with content styles', () => {
     const theme = getTheme(false, true);
 
     const { getByTestId } = render(
-      <Portal.Host>
+      <TestContextProvider>
         <Menu
           visible
           onDismiss={jest.fn()}
@@ -83,7 +94,7 @@ it('renders menu with content styles', () => {
           <Menu.Item onPress={jest.fn()} title="Undo" />
           <Menu.Item onPress={jest.fn()} title="Redo" />
         </Menu>
-      </Portal.Host>
+      </TestContextProvider>
     );
 
     expect(getByTestId('menu-surface')).toHaveStyle({
@@ -95,7 +106,7 @@ it('renders menu with content styles', () => {
 it('uses the default anchorPosition of top', async () => {
   function makeMenu(visible: boolean) {
     return (
-      <Portal.Host>
+      <TestContextProvider>
         <Menu
           visible={visible}
           onDismiss={jest.fn()}
@@ -109,7 +120,7 @@ it('uses the default anchorPosition of top', async () => {
           <Menu.Item onPress={jest.fn()} title="Undo" />
           <Menu.Item onPress={jest.fn()} title="Redo" />
         </Menu>
-      </Portal.Host>
+      </TestContextProvider>
     );
   }
 
@@ -138,7 +149,7 @@ it('uses the default anchorPosition of top', async () => {
 it('respects anchorPosition bottom', async () => {
   function makeMenu(visible: boolean) {
     return (
-      <Portal.Host>
+      <TestContextProvider>
         <Menu
           visible={visible}
           onDismiss={jest.fn()}
@@ -153,7 +164,7 @@ it('respects anchorPosition bottom', async () => {
           <Menu.Item onPress={jest.fn()} title="Undo" />
           <Menu.Item onPress={jest.fn()} title="Redo" />
         </Menu>
-      </Portal.Host>
+      </TestContextProvider>
     );
   }
 
@@ -178,7 +189,7 @@ it('respects anchorPosition bottom', async () => {
 it('animated value changes correctly', () => {
   const value = new Animated.Value(1);
   const { getByTestId } = render(
-    <Portal.Host>
+    <TestContextProvider>
       <Menu
         visible
         onDismiss={jest.fn()}
@@ -188,7 +199,7 @@ it('animated value changes correctly', () => {
       >
         <Menu.Item onPress={jest.fn()} title="Test" />
       </Menu>
-    </Portal.Host>
+    </TestContextProvider>
   );
   expect(getByTestId('menu-surface-outer-layer')).toHaveStyle({
     transform: [{ scale: 1 }],
@@ -209,7 +220,7 @@ it('animated value changes correctly', () => {
 
 it('renders menu with mode "elevated"', () => {
   const { getByTestId } = render(
-    <Portal.Host>
+    <TestContextProvider>
       <Menu
         visible
         onDismiss={jest.fn()}
@@ -219,7 +230,7 @@ it('renders menu with mode "elevated"', () => {
         <Menu.Item onPress={jest.fn()} title="Undo" />
         <Menu.Item onPress={jest.fn()} title="Redo" />
       </Menu>
-    </Portal.Host>
+    </TestContextProvider>
   );
 
   const menuSurface = getByTestId('menu-surface');
@@ -233,7 +244,7 @@ it('renders menu with mode "elevated"', () => {
 
 it('renders menu with mode "flat"', () => {
   const { getByTestId } = render(
-    <Portal.Host>
+    <TestContextProvider>
       <Menu
         visible
         onDismiss={jest.fn()}
@@ -243,7 +254,7 @@ it('renders menu with mode "flat"', () => {
         <Menu.Item onPress={jest.fn()} title="Undo" />
         <Menu.Item onPress={jest.fn()} title="Redo" />
       </Menu>
-    </Portal.Host>
+    </TestContextProvider>
   );
 
   const menuSurface = getByTestId('menu-surface');

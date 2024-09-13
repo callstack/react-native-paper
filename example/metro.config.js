@@ -13,7 +13,6 @@ const defaultConfig = getDefaultConfig(__dirname);
 
 const modules = [
   '@expo/vector-icons',
-  'expo-constants',
   ...Object.keys(pak.peerDependencies),
   '@react-navigation/native',
 ];

@@ -48,7 +48,7 @@ const MenuExample = ({ navigation }: Props) => {
       x: nativeEvent.pageX,
       y: nativeEvent.pageY,
     });
-    setVisible({ menu3: true });
+    setVisible({ menu4: true });
   };
 
   React.useLayoutEffect(() => {
@@ -127,9 +127,25 @@ const MenuExample = ({ navigation }: Props) => {
               )}
             </Menu>
           </View>
+          <View style={styles.alignCenter}>
+            <Menu
+              visible={_getVisible('menu3')}
+              onDismiss={_toggleMenu('menu3')}
+              anchor={
+                <Button mode="outlined" onPress={_toggleMenu('menu3')}>
+                  Menu with anchorPosition bottom
+                </Button>
+              }
+              anchorPosition="bottom"
+            >
+              <Menu.Item onPress={() => {}} title="One" />
+              <Menu.Item onPress={() => {}} title="Two" />
+              <Menu.Item onPress={() => {}} title="Three" />
+            </Menu>
+          </View>
           <Menu
-            visible={_getVisible('menu3')}
-            onDismiss={_toggleMenu('menu3')}
+            visible={_getVisible('menu4')}
+            onDismiss={_toggleMenu('menu4')}
             anchor={contextualMenuCoord}
           >
             <Menu.Item onPress={() => {}} title="Item 1" />
@@ -149,10 +165,10 @@ const MenuExample = ({ navigation }: Props) => {
 
         <View style={styles.bottomMenu}>
           <Menu
-            visible={_getVisible('menu4')}
-            onDismiss={_toggleMenu('menu4')}
+            visible={_getVisible('menu5')}
+            onDismiss={_toggleMenu('menu5')}
             anchor={
-              <Button mode="outlined" onPress={_toggleMenu('menu4')}>
+              <Button mode="outlined" onPress={_toggleMenu('menu5')}>
                 Menu at bottom
               </Button>
             }
@@ -181,6 +197,7 @@ const styles = StyleSheet.create({
   },
   alignCenter: {
     alignItems: 'center',
+    marginVertical: 8,
   },
   md3Divider: {
     marginVertical: 8,

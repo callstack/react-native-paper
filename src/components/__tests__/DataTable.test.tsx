@@ -1,9 +1,12 @@
 import * as React from 'react';
 
 import { render } from '@testing-library/react-native';
+import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 
 import Checkbox from '../Checkbox';
 import DataTable from '../DataTable/DataTable';
+
+jest.mock('react-native-safe-area-context', () => mockSafeAreaContext);
 
 describe('DataTable.Header', () => {
   it('renders data table header', () => {
@@ -133,17 +136,19 @@ describe('DataTable.Pagination', () => {
 
   it('renders data table pagination with options select', () => {
     const { getByLabelText, toJSON } = render(
-      <DataTable.Pagination
-        page={3}
-        numberOfPages={15}
-        onPageChange={() => {}}
-        label="11-20 of 150"
-        showFastPaginationControls
-        numberOfItemsPerPageList={[2, 4, 6]}
-        numberOfItemsPerPage={2}
-        onItemsPerPageChange={() => {}}
-        selectPageDropdownLabel={'Rows per page'}
-      />
+      <mockSafeAreaContext.SafeAreaProvider>
+        <DataTable.Pagination
+          page={3}
+          numberOfPages={15}
+          onPageChange={() => {}}
+          label="11-20 of 150"
+          showFastPaginationControls
+          numberOfItemsPerPageList={[2, 4, 6]}
+          numberOfItemsPerPage={2}
+          onItemsPerPageChange={() => {}}
+          selectPageDropdownLabel={'Rows per page'}
+        />
+      </mockSafeAreaContext.SafeAreaProvider>
     );
 
     expect(getByLabelText('Options Select')).toBeTruthy();
