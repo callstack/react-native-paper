@@ -131,7 +131,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
  * export default MyComponent;
  * ```
  */
-const CardComponent = (
+const Card = (
   {
     elevation: cardElevation = 1,
     delayLongPress,
@@ -330,10 +330,10 @@ const CardComponent = (
   );
 };
 
-const Component = forwardRef(CardComponent);
+const Component = forwardRef(Card);
 Component.displayName = 'Card';
 
-const Card = Component as typeof Component & {
+const CardComponent = Component as typeof Component & {
   Content: typeof CardContent;
   Actions: typeof CardActions;
   Cover: typeof CardCover;
@@ -341,13 +341,13 @@ const Card = Component as typeof Component & {
 };
 
 // @component ./CardContent.tsx
-Card.Content = CardContent;
+CardComponent.Content = CardContent;
 // @component ./CardActions.tsx
-Card.Actions = CardActions;
+CardComponent.Actions = CardActions;
 // @component ./CardCover.tsx
-Card.Cover = CardCover;
+CardComponent.Cover = CardCover;
 // @component ./CardTitle.tsx
-Card.Title = CardTitle;
+CardComponent.Title = CardTitle;
 
 const styles = StyleSheet.create({
   innerContainer: {
@@ -365,4 +365,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Card;
+export default CardComponent;

@@ -173,10 +173,7 @@ const DEFAULT_MODE = 'elevated';
  * `Modal` contents within a `PaperProvider` in order for the menu to show. This
  * wrapping is not necessary if you use Paper's `Modal` instead.
  */
-class MenuComponent extends React.Component<Props, State> {
-  // @component ./MenuItem.tsx
-  static Item = MenuItem;
-
+class Menu extends React.Component<Props, State> {
   static defaultProps = {
     overlayAccessibilityLabel: 'Close menu',
     testID: 'menu',
@@ -709,13 +706,15 @@ const styles = StyleSheet.create({
   },
 });
 
-const MenuWithHOC = withInternalTheme(withSafeAreaInsets(MenuComponent));
+const Component = withInternalTheme(withSafeAreaInsets(Menu));
+Component.displayName = 'Menu';
 
-const Menu = MenuWithHOC as typeof MenuWithHOC & {
+const MenuComponent = Component as typeof Component & {
   Item: typeof MenuItem;
 };
 
-// we need to attach again MenuItem as it is lost after using withSafeAreaInsets
-Menu.Item = MenuItem;
+// we need to attach MenuItem here instead of a static property otherwise it will be lost after using withSafeAreaInsets
+// @component ./MenuItem.tsx
+MenuComponent.Item = MenuItem;
 
-export default Menu;
+export default MenuComponent;
