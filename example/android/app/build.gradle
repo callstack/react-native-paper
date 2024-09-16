@@ -118,8 +118,8 @@ android {
         applicationId 'com.callstack.reactnativepaperexample'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 27
-        versionName "3.13.0"
+        versionCode 28
+        versionName "3.14.0"
     }
 
     splits {

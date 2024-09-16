@@ -76,6 +76,7 @@ const TextInputOutlined = ({
   placeholderTextColor,
   testID = 'text-input-outlined',
   contentStyle,
+  scaledLabel,
   ...rest
 }: ChildTextInputProps) => {
   const adornmentConfig = getAdornmentConfig({ left, right });
@@ -264,8 +265,7 @@ const TextInputOutlined = ({
     (dense ? MIN_DENSE_HEIGHT_OUTLINED : MIN_HEIGHT)) as number;
 
   const outlinedHeight =
-    inputHeight + (!height ? (dense ? densePaddingTop / 2 : paddingTop) : 0);
-
+    inputHeight + (dense ? densePaddingTop / 2 : paddingTop);
   const { leftLayout, rightLayout } = parentState;
 
   const leftAffixTopPosition = calculateOutlinedIconAndAffixTopPosition({
@@ -364,9 +364,11 @@ const TextInputOutlined = ({
             labeled={parentState.labeled}
             error={parentState.error}
             focused={parentState.focused}
+            scaledLabel={scaledLabel}
             wiggle={Boolean(parentState.value && labelProps.labelError)}
             labelLayoutMeasured={parentState.labelLayout.measured}
             labelLayoutWidth={parentState.labelLayout.width}
+            labelLayoutHeight={parentState.labelLayout.height}
             {...labelProps}
             labelBackground={LabelBackground}
             maxFontSizeMultiplier={rest.maxFontSizeMultiplier}
@@ -427,9 +429,11 @@ export default TextInputOutlined;
 const styles = StyleSheet.create({
   labelContainer: {
     paddingBottom: 0,
+    flexGrow: 1,
   },
   input: {
     margin: 0,
+    flexGrow: 1,
   },
   inputOutlined: {
     paddingTop: 8,

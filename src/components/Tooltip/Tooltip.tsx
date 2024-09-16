@@ -158,6 +158,7 @@ const Tooltip = ({
       if (touched.current) {
         return null;
       } else {
+        if (children.props.disabled) return null;
         return children.props.onPress?.();
       }
     }, [children.props]),
