@@ -145,7 +145,7 @@ const FABExample = () => {
           <FAB.Group
             open={open}
             icon={open ? 'calendar-today' : 'plus'}
-            accessibilityLabel='Calendar FAB'
+            accessibilityLabel="Calendar FAB"
             toggleStackOnLongPress={toggleStackOnLongPress}
             actions={[
               { icon: 'plus', onPress: () => {} },
