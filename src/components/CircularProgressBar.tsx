@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Animated, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import {
+  Animated,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+  PixelRatio,
+} from 'react-native';
 
 import setColor from 'color';
 
@@ -39,7 +46,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * import { CircularProgressBar, MD2Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <CircularProgressBar animating={true} color={MD2Colors.red800} />
+ *   <CircularProgressBar progress={0.75} />
  * );
  *
  * export default MyComponent;
@@ -68,13 +75,6 @@ const CircularProgressBar = ({
 
   const { scale } = theme.animation;
 
-  Animated.timing(timer, {
-    duration: 200 * scale,
-    toValue: 1,
-    useNativeDriver: true,
-    isInteraction: false,
-  }).start();
-
   React.useEffect(() => {
     timer.setValue(0);
     Animated.timing(timer, {
@@ -94,7 +94,7 @@ const CircularProgressBar = ({
     ? theme.colors.surfaceVariant
     : setColor(color).alpha(0.38).rgb().string();
 
-  const size =
+  let size =
     typeof indicatorSize === 'string'
       ? indicatorSize === 'small'
         ? 24
@@ -102,10 +102,19 @@ const CircularProgressBar = ({
       : indicatorSize
       ? indicatorSize
       : 24;
+  // Calculate the actual size of the circular progress bar to prevent a bug with clipping containers
+  const halfSize = PixelRatio.roundToNearestPixel(size / 2);
+  size = halfSize * 2;
 
   const layerStyle = {
     width: size,
     height: size,
+  };
+
+  const containerStyle = {
+    width: halfSize,
+    height: size,
+    overflow: 'hidden' as const,
   };
 
   const backgroundStyle = {
@@ -124,6 +133,34 @@ const CircularProgressBar = ({
   const prevRightRotation =
     prevProgressInDegrees > 180 ? prevProgressInDegrees - 180 : 0;
 
+  const addProgress = progressInDegrees > prevProgressInDegrees;
+  const noProgress = progressInDegrees - prevProgressInDegrees === 0;
+  const progressLteFiftyPercent = progressInDegrees <= 180;
+  const prevProgressGteFiftyPercent = prevProgressInDegrees >= 180;
+
+  let middle = 0;
+
+  if (
+    noProgress ||
+    (addProgress && prevProgressGteFiftyPercent) ||
+    (!addProgress && !prevProgressGteFiftyPercent)
+  ) {
+    middle = 0;
+  } else if (
+    (addProgress && progressLteFiftyPercent) ||
+    (!addProgress && !progressLteFiftyPercent)
+  ) {
+    middle = 1;
+  } else if (addProgress) {
+    middle =
+      (180 - prevProgressInDegrees) /
+      (progressInDegrees - prevProgressInDegrees);
+  } else {
+    middle =
+      (prevProgressInDegrees - 180) /
+      (prevProgressInDegrees - progressInDegrees);
+  }
+
   return (
     <View
       style={[styles.container, style]}
@@ -138,34 +175,6 @@ const CircularProgressBar = ({
       >
         <Animated.View style={[backgroundStyle, layerStyle]} />
         {[0, 1].map((index) => {
-          const addProgress = progressInDegrees > prevProgressInDegrees;
-
-          const middle = addProgress
-            ? progressInDegrees <= 180
-              ? 1
-              : prevProgressInDegrees >= 180
-              ? 0
-              : progressInDegrees - prevProgressInDegrees === 0
-              ? 0
-              : (180 - prevProgressInDegrees) /
-                (progressInDegrees - prevProgressInDegrees)
-            : progressInDegrees <= 180
-            ? prevProgressInDegrees >= 180
-              ? progressInDegrees - prevProgressInDegrees === 0
-                ? 0
-                : (prevProgressInDegrees - 180) /
-                  (prevProgressInDegrees - progressInDegrees)
-              : 0
-            : 1;
-
-          console.log(middle);
-
-          const containerStyle = {
-            width: size / 2,
-            height: size,
-            overflow: 'hidden' as const,
-          };
-
           const offsetStyle = index
             ? {
                 transform: [
@@ -224,7 +233,7 @@ const CircularProgressBar = ({
             width: size,
             height: size,
             borderColor: color,
-            borderWidth: size / 10, // Prevents clipping when progress is 0
+            borderWidth: size / 10,
             borderRadius: size / 2,
           };
 
