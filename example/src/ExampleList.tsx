@@ -18,6 +18,7 @@ import CardExample from './Examples/CardExample';
 import CheckboxExample from './Examples/CheckboxExample';
 import CheckboxItemExample from './Examples/CheckboxItemExample';
 import ChipExample from './Examples/ChipExample';
+import CircularProgressBarExample from './Examples/CircularProgressBarExample';
 import DataTableExample from './Examples/DataTableExample';
 import DialogExample from './Examples/DialogExample';
 import DividerExample from './Examples/DividerExample';
@@ -70,6 +71,7 @@ export const mainExamples: Record<
   checkbox: CheckboxExample,
   checkboxItem: CheckboxItemExample,
   chip: ChipExample,
+  circularProgressBar: CircularProgressBarExample,
   dataTable: DataTableExample,
   dialog: DialogExample,
   divider: DividerExample,

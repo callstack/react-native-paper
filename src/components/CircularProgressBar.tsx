@@ -145,14 +145,20 @@ const CircularProgressBar = ({
               ? 1
               : prevProgressInDegrees >= 180
               ? 0
+              : progressInDegrees - prevProgressInDegrees === 0
+              ? 0
               : (180 - prevProgressInDegrees) /
                 (progressInDegrees - prevProgressInDegrees)
             : progressInDegrees <= 180
             ? prevProgressInDegrees >= 180
-              ? (prevProgressInDegrees - 180) /
-                (prevProgressInDegrees - progressInDegrees)
+              ? progressInDegrees - prevProgressInDegrees === 0
+                ? 0
+                : (prevProgressInDegrees - 180) /
+                  (prevProgressInDegrees - progressInDegrees)
               : 0
             : 1;
+
+          console.log(middle);
 
           const containerStyle = {
             width: size / 2,
