@@ -95,6 +95,7 @@ const config = {
             CheckboxIOS: 'Checkbox/CheckboxIOS',
             CheckboxItem: 'Checkbox/CheckboxItem',
           },
+          CircularProgressBar: 'CircularProgressBar',
           Chip: {
             Chip: 'Chip/Chip',
           },
