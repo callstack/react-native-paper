@@ -12,15 +12,15 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   progress?: number;
   /**
-   * Whether to show the indicator or hide it.
+   * Whether to animate the circular progress bar or not.
    */
   animating?: boolean;
   /**
-   * The color of the spinner.
+   * The color of the circular progress bar.
    */
   color?: string;
   /**
-   * Size of the indicator.
+   * Size of the circular progress bar.
    */
   size?: 'small' | 'large' | number;
   style?: StyleProp<ViewStyle>;
@@ -32,6 +32,18 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
 
 /**
  * Circular progress bar is an indicator used to present progress of some activity in the app.
+ *
+ * ## Usage
+ * ```js
+ * import * as React from 'react';
+ * import { CircularProgressBar, MD2Colors } from 'react-native-paper';
+ *
+ * const MyComponent = () => (
+ *   <CircularProgressBar animating={true} color={MD2Colors.red800} />
+ * );
+ *
+ * export default MyComponent;
+ * ```
  */
 const CircularProgressBar = ({
   progress = 0,
@@ -52,6 +64,8 @@ const CircularProgressBar = ({
     new Animated.Value(0)
   );
 
+  const prevProgressValue = React.useRef<number>(0);
+
   const { scale } = theme.animation;
 
   Animated.timing(timer, {
@@ -60,6 +74,20 @@ const CircularProgressBar = ({
     useNativeDriver: true,
     isInteraction: false,
   }).start();
+
+  React.useEffect(() => {
+    timer.setValue(0);
+    Animated.timing(timer, {
+      duration: 200 * scale,
+      toValue: 1,
+      useNativeDriver: true,
+      isInteraction: false,
+    }).start();
+  }, [progress, scale, timer]);
+
+  React.useEffect(() => {
+    prevProgressValue.current = progress;
+  }, [progress]);
 
   const color = indicatorColor || theme.colors?.primary;
   const tintColor = theme.isV3
@@ -86,11 +114,15 @@ const CircularProgressBar = ({
     borderRadius: size / 2,
   };
 
-  const progressInDegrees = progress * 360;
-  // Rotation of the left half of the circle
+  const progressInDegrees = Math.ceil(progress * 360);
   const leftRotation = progressInDegrees > 180 ? 180 : progressInDegrees;
-  // Rotation the right half of the circle
   const rightRotation = progressInDegrees > 180 ? progressInDegrees - 180 : 0;
+
+  const prevProgressInDegrees = Math.ceil(prevProgressValue.current * 360);
+  const prevLeftRotation =
+    prevProgressInDegrees > 180 ? 180 : prevProgressInDegrees;
+  const prevRightRotation =
+    prevProgressInDegrees > 180 ? prevProgressInDegrees - 180 : 0;
 
   return (
     <View
@@ -106,18 +138,30 @@ const CircularProgressBar = ({
       >
         <Animated.View style={[backgroundStyle, layerStyle]} />
         {[0, 1].map((index) => {
-          const fixWidth =
-            progress > 0.5 ? (index ? size / 2 : size / 2 + 1) : size / 2;
+          const addProgress = progressInDegrees > prevProgressInDegrees;
+
+          const middle = addProgress
+            ? progressInDegrees <= 180
+              ? 1
+              : prevProgressInDegrees >= 180
+              ? 0
+              : (180 - prevProgressInDegrees) /
+                (progressInDegrees - prevProgressInDegrees)
+            : progressInDegrees <= 180
+            ? prevProgressInDegrees >= 180
+              ? (prevProgressInDegrees - 180) /
+                (prevProgressInDegrees - progressInDegrees)
+              : 0
+            : 1;
 
           const containerStyle = {
-            width: fixWidth,
+            width: size / 2,
             height: size,
             overflow: 'hidden' as const,
           };
 
           const offsetStyle = index
             ? {
-                left: size / 2,
                 transform: [
                   {
                     rotate: `180deg`,
@@ -126,28 +170,36 @@ const CircularProgressBar = ({
               }
             : null;
 
-          const middle = Math.floor(180 / progressInDegrees);
-
           const rotationStyle = animating
             ? {
                 transform: [
                   {
                     rotate: timer.interpolate({
-                      inputRange:
-                        progressInDegrees > 180
-                          ? index
-                            ? [0, middle, middle]
-                            : [middle, middle, 1]
-                          : index
-                          ? [0, 1, 1]
-                          : [0, 0, 1],
+                      inputRange: addProgress
+                        ? index
+                          ? [0, middle, middle]
+                          : [middle, middle, 1]
+                        : index
+                        ? [middle, middle, 1]
+                        : [0, middle, middle],
                       outputRange: index
                         ? [
-                            `180deg`,
-                            `${leftRotation + 180}deg`,
+                            `${prevLeftRotation + 180}deg`,
+                            `${
+                              (addProgress ? leftRotation : prevLeftRotation) +
+                              180
+                            }deg`,
                             `${leftRotation + 180}deg`,
                           ]
-                        : [`180deg`, `180deg`, `${rightRotation + 180}deg`],
+                        : [
+                            `${prevRightRotation + 180}deg`,
+                            `${
+                              (addProgress
+                                ? prevRightRotation
+                                : rightRotation) + 180
+                            }deg`,
+                            `${rightRotation + 180}deg`,
+                          ],
                     }),
                   },
                 ],
@@ -166,17 +218,14 @@ const CircularProgressBar = ({
             width: size,
             height: size,
             borderColor: color,
-            borderWidth: progress === 0 ? 0 : size / 10, // Prevents clipping when progress is 0
+            borderWidth: size / 10, // Prevents clipping when progress is 0
             borderRadius: size / 2,
           };
 
           return (
-            <Animated.View key={index} style={[styles.layer]}>
-              <Animated.View style={layerStyle}>
-                <Animated.View
-                  style={[containerStyle, offsetStyle]}
-                  collapsable={false}
-                >
+            <Animated.View key={index} style={[styles.layer, offsetStyle]}>
+              <Animated.View style={[layerStyle]}>
+                <Animated.View style={[containerStyle]} collapsable={false}>
                   <Animated.View style={[layerStyle, rotationStyle]}>
                     <Animated.View style={containerStyle} collapsable={false}>
                       <Animated.View style={lineStyle} />
