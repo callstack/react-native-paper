@@ -8,17 +8,19 @@ import CircularProgressBar from '../../../src/components/CircularProgressBar';
 import ScreenWrapper from '../ScreenWrapper';
 
 const CircularProgressBarExample = () => {
-  const [progress, setProgress] = React.useState<number>(1);
-  const [text, setText] = React.useState('');
+  const [progress, setProgress] = React.useState<number>(0.6);
+  const [text, setText] = React.useState('0.6');
   const { isV3 } = useExampleTheme();
 
   return (
     <ScreenWrapper style={styles.container}>
-      <TextInput
-        label="Progress (between 0 and 1)"
-        value={text}
-        onChangeText={(text) => setText(text)}
-      />
+      <View style={styles.container}>
+        <TextInput
+          label="Progress (between 0 and 1)"
+          value={text}
+          onChangeText={(text) => setText(text)}
+        />
+      </View>
       <View style={styles.row}>
         <FAB
           size="small"
@@ -47,6 +49,10 @@ const CircularProgressBarExample = () => {
           progress={progress}
           color={isV3 ? MD3Colors.error20 : MD2Colors.red500}
         />
+      </List.Section>
+
+      <List.Section title="No animation">
+        <CircularProgressBar progress={progress} animating={false} />
       </List.Section>
     </ScreenWrapper>
   );
