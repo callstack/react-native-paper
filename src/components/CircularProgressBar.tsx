@@ -138,24 +138,35 @@ const CircularProgressBar = ({
   const progressLteFiftyPercent = progressInDegrees <= 180;
   const prevProgressGteFiftyPercent = prevProgressInDegrees >= 180;
 
+  /**
+   * The animation uses a timer which counts from 0 to 1 for each change in progress.
+   * Since we have 2 half circles rotating, we need to calculate the timing when the other half circle has to start rotating.
+   * This value is used for the interpolation in the rotation style.
+   */
   let middle = 0;
 
   if (
+    // There is no progress or the progress does not intersect the 50% mark
     noProgress ||
     (addProgress && prevProgressGteFiftyPercent) ||
     (!addProgress && !prevProgressGteFiftyPercent)
   ) {
     middle = 0;
   } else if (
+    // The progress does not intersect the 50% mark
     (addProgress && progressLteFiftyPercent) ||
     (!addProgress && !progressLteFiftyPercent)
   ) {
     middle = 1;
-  } else if (addProgress) {
+  } else if (
+    // The progress intersects the 50% mark and both half circles need to rotate
+    addProgress
+  ) {
     middle =
       (180 - prevProgressInDegrees) /
       (progressInDegrees - prevProgressInDegrees);
   } else {
+    // The progress intersects the 50% mark and both half circles need to rotate
     middle =
       (prevProgressInDegrees - 180) /
       (prevProgressInDegrees - progressInDegrees);
@@ -185,18 +196,13 @@ const CircularProgressBar = ({
               }
             : null;
 
+          // The rotation both half circles need to do
           const rotationStyle = animating
             ? {
                 transform: [
                   {
                     rotate: timer.interpolate({
-                      inputRange: addProgress
-                        ? index
-                          ? [0, middle, middle]
-                          : [middle, middle, 1]
-                        : index
-                        ? [middle, middle, 1]
-                        : [0, middle, middle],
+                      inputRange: [0, middle, 1],
                       outputRange: index
                         ? [
                             `${prevLeftRotation + 180}deg`,
@@ -239,8 +245,8 @@ const CircularProgressBar = ({
 
           return (
             <Animated.View key={index} style={[styles.layer, offsetStyle]}>
-              <Animated.View style={[layerStyle]}>
-                <Animated.View style={[containerStyle]} collapsable={false}>
+              <Animated.View style={layerStyle}>
+                <Animated.View style={containerStyle} collapsable={false}>
                   <Animated.View style={[layerStyle, rotationStyle]}>
                     <Animated.View style={containerStyle} collapsable={false}>
                       <Animated.View style={lineStyle} />
