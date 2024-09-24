@@ -76,6 +76,7 @@ const CircularProgressBar = ({
   const { scale } = theme.animation;
 
   React.useEffect(() => {
+    prevProgressValue.current = progress;
     timer.setValue(0);
     Animated.timing(timer, {
       duration: 200 * scale,
@@ -84,10 +85,6 @@ const CircularProgressBar = ({
       isInteraction: false,
     }).start();
   }, [progress, scale, timer]);
-
-  React.useEffect(() => {
-    prevProgressValue.current = progress;
-  }, [progress]);
 
   const color = indicatorColor || theme.colors?.primary;
   const tintColor = theme.isV3
