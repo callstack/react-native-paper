@@ -358,100 +358,102 @@ const FABGroup = ({
         ]}
       />
       <View pointerEvents="box-none" style={styles.safeArea}>
-        <View pointerEvents={open ? 'box-none' : 'none'}>
-          {actions.map((it, i) => {
-            const labelTextStyle = {
-              color: it.labelTextColor ?? labelColor,
-              ...(isV3 ? theme.fonts.titleMedium : {}),
-            };
-            const marginHorizontal =
-              typeof it.size === 'undefined' || it.size === 'small' ? 24 : 16;
-            const accessibilityLabel =
-              typeof it.accessibilityLabel !== 'undefined'
-                ? it.accessibilityLabel
-                : it.label;
-            const size = typeof it.size !== 'undefined' ? it.size : 'small';
+        {open && (
+          <View pointerEvents={open ? 'box-none' : 'none'}>
+            {actions.map((it, i) => {
+              const labelTextStyle = {
+                color: it.labelTextColor ?? labelColor,
+                ...(isV3 ? theme.fonts.titleMedium : {}),
+              };
+              const marginHorizontal =
+                typeof it.size === 'undefined' || it.size === 'small' ? 24 : 16;
+              const accessibilityLabel =
+                typeof it.accessibilityLabel !== 'undefined'
+                  ? it.accessibilityLabel
+                  : it.label;
+              const size = typeof it.size !== 'undefined' ? it.size : 'small';
 
-            return (
-              <View
-                key={i} // eslint-disable-line react/no-array-index-key
-                style={[
-                  styles.item,
-                  {
-                    marginHorizontal,
-                  },
-                ]}
-                pointerEvents={open ? 'box-none' : 'none'}
-                accessibilityRole="button"
-                importantForAccessibility="yes"
-                accessible={true}
-                accessibilityLabel={accessibilityLabel}
-              >
-                {it.label && (
-                  <View>
-                    <Card
-                      mode={isV3 ? 'contained' : 'elevated'}
-                      onPress={(e) => {
-                        it.onPress(e);
-                        close();
-                      }}
-                      accessibilityHint={it.accessibilityHint}
-                      importantForAccessibility="no-hide-descendants"
-                      accessibilityElementsHidden={true}
-                      style={[
-                        styles.containerStyle,
-                        {
-                          transform: [
-                            isV3
-                              ? { translateY: labelTranslations[i] }
-                              : { scale: scales[i] },
-                          ],
-                          opacity: opacities[i],
-                        },
-                        isV3 && styles.v3ContainerStyle,
-                        it.containerStyle,
-                      ]}
-                    >
-                      <Text
-                        variant="titleMedium"
+              return (
+                <View
+                  key={i} // eslint-disable-line react/no-array-index-key
+                  style={[
+                    styles.item,
+                    {
+                      marginHorizontal,
+                    },
+                  ]}
+                  pointerEvents={open ? 'box-none' : 'none'}
+                  accessibilityRole="button"
+                  importantForAccessibility="yes"
+                  accessible={true}
+                  accessibilityLabel={accessibilityLabel}
+                >
+                  {it.label && (
+                    <View>
+                      <Card
+                        mode={isV3 ? 'contained' : 'elevated'}
+                        onPress={(e) => {
+                          it.onPress(e);
+                          close();
+                        }}
+                        accessibilityHint={it.accessibilityHint}
                         importantForAccessibility="no-hide-descendants"
                         accessibilityElementsHidden={true}
-                        style={[labelTextStyle, it.labelStyle]}
-                        maxFontSizeMultiplier={it.labelMaxFontSizeMultiplier}
+                        style={[
+                          styles.containerStyle,
+                          {
+                            transform: [
+                              isV3
+                                ? { translateY: labelTranslations[i] }
+                                : { scale: scales[i] },
+                            ],
+                            opacity: opacities[i],
+                          },
+                          isV3 && styles.v3ContainerStyle,
+                          it.containerStyle,
+                        ]}
                       >
-                        {it.label}
-                      </Text>
-                    </Card>
-                  </View>
-                )}
-                <FAB
-                  size={size}
-                  icon={it.icon}
-                  color={it.color}
-                  style={[
-                    {
-                      transform: [{ scale: scales[i] }],
-                      opacity: opacities[i],
-                      backgroundColor: stackedFABBackgroundColor,
-                    },
-                    isV3 && { transform: [{ translateY: translations[i] }] },
-                    it.style,
-                  ]}
-                  accessibilityElementsHidden={true}
-                  theme={theme}
-                  onPress={(e) => {
-                    it.onPress(e);
-                    close();
-                  }}
-                  importantForAccessibility="no-hide-descendants"
-                  testID={it.testID}
-                  visible={open}
-                  rippleColor={it.rippleColor}
-                />
-              </View>
-            );
-          })}
-        </View>
+                        <Text
+                          variant="titleMedium"
+                          importantForAccessibility="no-hide-descendants"
+                          accessibilityElementsHidden={true}
+                          style={[labelTextStyle, it.labelStyle]}
+                          maxFontSizeMultiplier={it.labelMaxFontSizeMultiplier}
+                        >
+                          {it.label}
+                        </Text>
+                      </Card>
+                    </View>
+                  )}
+                  <FAB
+                    size={size}
+                    icon={it.icon}
+                    color={it.color}
+                    style={[
+                      {
+                        transform: [{ scale: scales[i] }],
+                        opacity: opacities[i],
+                        backgroundColor: stackedFABBackgroundColor,
+                      },
+                      isV3 && { transform: [{ translateY: translations[i] }] },
+                      it.style,
+                    ]}
+                    accessibilityElementsHidden={true}
+                    theme={theme}
+                    onPress={(e) => {
+                      it.onPress(e);
+                      close();
+                    }}
+                    importantForAccessibility="no-hide-descendants"
+                    testID={it.testID}
+                    visible={open}
+                    rippleColor={it.rippleColor}
+                  />
+                </View>
+              );
+            })}
+          </View>
+        )}
         <FAB
           onPress={(e) => {
             onPress?.(e);
