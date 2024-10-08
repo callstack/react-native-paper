@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet } from 'react-native';
+import { Animated, StyleSheet, Platform } from 'react-native';
 
 import AnimatedText from '../../Typography/AnimatedText';
 import type { LabelBackgroundProps } from '../types';
@@ -50,8 +50,10 @@ const LabelBackground = ({
           backgroundColor,
           maxHeight: Math.max(roundness / 3, 2),
           bottom: Math.max(roundness, 2),
-          transform: [labelTranslationX],
           opacity,
+        },
+        Platform.constants.reactNativeVersion.minor <= 72 && {
+          transform: [labelTranslationX],
         },
       ]}
     />
