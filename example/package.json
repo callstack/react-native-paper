@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "eas-build-pre-install": "cd .. && yarn",
-    "start": "EXPO_NO_TYPESCRIPT_SETUP=1 expo start",
+    "start": "EXPO_NO_TYPESCRIPT_SETUP=1 expo start --go",
     "android": "EXPO_NO_TYPESCRIPT_SETUP=1 expo start --android",
     "android:native": "EXPO_NO_TYPESCRIPT_SETUP=1 expo run:android",
     "ios:native": "EXPO_NO_TYPESCRIPT_SETUP=1 expo run:ios",
