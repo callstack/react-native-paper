@@ -12,7 +12,8 @@ const SegmentedButtonMultiselectRealCase = () => {
 
   const filteredData = React.useMemo(
     () =>
-      restaurantsData.filter((item) => value.includes(item.price.toString() as PriceRange)),
+      value.includes(item.price.toString() as PriceRange)
+    ),
     [value]
   );
 
