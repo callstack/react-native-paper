@@ -3,12 +3,14 @@ import { StyleSheet } from 'react-native';
 
 import { List, SegmentedButtons } from 'react-native-paper';
 
+type TransportMode = 'walk' | 'transit' | 'drive';
+
 const SegmentedButtonMultiselect = () => {
-  const [value, setValue] = React.useState<string[]>([]);
+  const [value, setValue] = React.useState<TransportMode[]>([]);
 
   return (
     <List.Section title={`Segmented Button - multiselect`}>
-      <SegmentedButtons
+      <SegmentedButtons<TransportMode>
         multiSelect
         onValueChange={setValue}
         value={value}

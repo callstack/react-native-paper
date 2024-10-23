@@ -3,12 +3,14 @@ import { StyleSheet } from 'react-native';
 
 import { List, SegmentedButtons } from 'react-native-paper';
 
+type TransportMode = 'walk' | 'train' | 'drive';
+
 const SegmentedButtonOnlyIcons = () => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState<TransportMode>('walk');
 
   return (
     <List.Section title={`Segmented Button - only icons`}>
-      <SegmentedButtons
+      <SegmentedButtons<TransportMode>
         onValueChange={setValue}
         style={styles.group}
         value={value}
@@ -19,7 +21,7 @@ const SegmentedButtonOnlyIcons = () => {
           },
           {
             icon: 'train',
-            value: 'trainsit',
+            value: 'train',
           },
           {
             icon: 'car',
