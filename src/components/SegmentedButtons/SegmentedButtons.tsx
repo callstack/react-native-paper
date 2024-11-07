@@ -79,6 +79,7 @@ export type Props = {
    * Density is applied to the height, to allow usage in denser UIs
    */
   density?: 'regular' | 'small' | 'medium' | 'high';
+  animated?: boolean;
   style?: StyleProp<ViewStyle>;
   theme?: ThemeProp;
 } & ConditionalValue;
@@ -132,6 +133,7 @@ const SegmentedButtons = ({
   buttons,
   multiSelect,
   density,
+  animated,
   style,
   theme: themeOverrides,
 }: Props) => {
@@ -172,6 +174,7 @@ const SegmentedButtons = ({
             {...item}
             key={i}
             checked={checked}
+            animated={animated}
             segment={segment}
             density={density}
             onPress={onPress}
