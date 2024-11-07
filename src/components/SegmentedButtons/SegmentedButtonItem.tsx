@@ -24,7 +24,7 @@ import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import CrossFadeIcon from '../../../src/components/CrossFadeIcon';
+import CrossFadeIcon from '../CrossFadeIcon';
 
 export type Props = {
   /**
