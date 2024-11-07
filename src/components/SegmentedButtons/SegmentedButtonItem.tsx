@@ -208,9 +208,7 @@ const SegmentedButtonItem = ({
       : theme.fonts.labelLarge),
     color: textColor,
   };
-  
   const IconComponent = animated ? CrossFadeIcon : Icon;
-  
   return (
     <View style={[buttonStyle, styles.button, style]}>
       <TouchableRipple
