@@ -20,11 +20,11 @@ import {
   getSegmentedButtonDensityPadding,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import CrossFadeIcon from '../CrossFadeIcon';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
-import CrossFadeIcon from '../CrossFadeIcon';
 
 export type Props = {
   /**
