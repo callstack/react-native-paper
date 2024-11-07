@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 import color from 'color';
-import type { ThemeProp } from 'src/types';
+import type { ThemeProp } from '../../../src/types';
 
 import {
   getSegmentedButtonBorderRadius,
