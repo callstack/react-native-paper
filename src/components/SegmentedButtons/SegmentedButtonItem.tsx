@@ -237,7 +237,11 @@ const SegmentedButtonItem = ({
           ) : null}
           {showIcon ? (
             <Animated.View testID={`${testID}-icon`} style={iconStyle}>
-              <IconComponent color={textColor} source={icon ? icon:'progress-question'} size={iconSize} />
+              <IconComponent
+                color={textColor}
+                source={icon ? icon : 'progress-question'}
+                size={iconSize}
+              />
             </Animated.View>
           ) : null}
           <Text
