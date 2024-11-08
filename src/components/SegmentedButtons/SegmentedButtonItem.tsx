@@ -79,6 +79,10 @@ export type Props = {
    */
   label?: string;
   /**
+   * Label text number of lines of the button.
+   */
+  numberOfLines?: number;
+  /**
    * Button segment.
    */
   segment?: 'first' | 'last';
@@ -124,6 +128,7 @@ const SegmentedButtonItem = ({
   icon,
   testID,
   label,
+  numberOfLines,
   onPress,
   segment,
   density = 'regular',
@@ -209,6 +214,7 @@ const SegmentedButtonItem = ({
     color: textColor,
   };
   const IconComponent = animated ? CrossFadeIcon : Icon;
+  const NumberOfLines = numberOfLines ? numberOfLines : 1;
   return (
     <View style={[buttonStyle, styles.button, style]}>
       <TouchableRipple
@@ -246,7 +252,7 @@ const SegmentedButtonItem = ({
             variant="labelLarge"
             style={[styles.label, labelTextStyle, labelStyle]}
             selectable={false}
-            numberOfLines={1}
+            numberOfLines={NumberOfLines}
             maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
             testID={`${testID}-label`}
           >
