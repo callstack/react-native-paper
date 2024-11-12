@@ -548,7 +548,8 @@ const BottomNavigation = <Route extends BaseRoute>({
               removeClippedSubviews={
                 // On iOS, set removeClippedSubviews to true only when not focused
                 // This is an workaround for a bug where the clipped view never re-appears
-                Platform.OS === 'ios' ? navigationState.index !== index : true
+                // On Android, it is disabled until https://github.com/software-mansion/react-native-screens/issues/2491 is fixed
+                Platform.OS === 'ios' ? navigationState.index !== index : false
               }
             >
               <Animated.View
