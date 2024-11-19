@@ -133,7 +133,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Label text number Of Lines of the button.
    */
-  noOfLines?: number;
+  numberOfLines?: number;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * Style for the button text.
@@ -190,7 +190,7 @@ const Button = (
     onPressOut,
     onLongPress,
     delayLongPress,
-    noOfLines,
+    numberOfLines,
     style,
     theme: themeOverrides,
     uppercase: uppercaseProp,
@@ -271,7 +271,7 @@ const Button = (
 
   const borderRadius = (isV3 ? 5 : 1) * roundness;
   const iconSize = isV3 ? 18 : 16;
-  const numberOfLines = noOfLines ? 1 : noOfLines;
+  const NumberOfLines = numberOfLines ? numberOfLines : 1;
 
   const { backgroundColor, borderColor, textColor, borderWidth } =
     getButtonColors({
@@ -389,7 +389,7 @@ const Button = (
           <Text
             variant="labelLarge"
             selectable={false}
-            numberOfLines={numberOfLines}
+            numberOfLines={NumberOfLines}
             testID={`${testID}-text`}
             style={[
               styles.label,
