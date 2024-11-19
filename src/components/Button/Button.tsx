@@ -130,10 +130,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Specifies the largest possible scale a text font can reach.
    */
   maxFontSizeMultiplier?: number;
-  /**
-   * Label text number Of Lines of the button.
-   */
-  noOfLines?: number;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * Style for the button text.
@@ -190,7 +186,6 @@ const Button = (
     onPressOut,
     onLongPress,
     delayLongPress,
-    noOfLines,
     style,
     theme: themeOverrides,
     uppercase: uppercaseProp,
@@ -271,7 +266,6 @@ const Button = (
 
   const borderRadius = (isV3 ? 5 : 1) * roundness;
   const iconSize = isV3 ? 18 : 16;
-  const numberOfLines = noOfLines ? 1 : noOfLines;
 
   const { backgroundColor, borderColor, textColor, borderWidth } =
     getButtonColors({
@@ -389,7 +383,7 @@ const Button = (
           <Text
             variant="labelLarge"
             selectable={false}
-            numberOfLines={numberOfLines}
+            numberOfLines={1}
             testID={`${testID}-text`}
             style={[
               styles.label,
