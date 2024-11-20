@@ -147,6 +147,7 @@ const Text = (
           styles.text,
           { writingDirection, color: theme.colors.onSurface },
           textStyle,
+          Platform.OS == 'ios' && { lineHeight: 0 }
         ]}
         {...rest}
       />
@@ -161,7 +162,7 @@ const Text = (
       <NativeText
         {...rest}
         ref={root}
-        style={[styles.text, textStyle, { writingDirection }, style]}
+        style={[styles.text, textStyle, { writingDirection }, style, Platform.OS == 'ios' && { lineHeight: 0 }]}
       />
     );
   }
