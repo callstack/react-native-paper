@@ -2,15 +2,19 @@ import * as React from 'react';
 import { I18nManager, StyleSheet, View, Platform } from 'react-native';
 
 import { DrawerContentScrollView } from '@react-navigation/drawer';
+import Constants, { ExecutionEnvironment } from 'expo-constants';
 import * as Updates from 'expo-updates';
 import {
   Badge,
+  Button,
+  Dialog,
   Drawer,
   MD2Colors,
   MD3Colors,
   Switch,
   Text,
   TouchableRipple,
+  Portal,
 } from 'react-native-paper';
 
 import { deviceColorsSupported, isWeb } from '../utils';
@@ -87,12 +91,15 @@ const DrawerCollapsedItemsData = [
 
 function DrawerItems() {
   const [drawerItemIndex, setDrawerItemIndex] = React.useState<number>(0);
+  const [showRTLDialog, setShowRTLDialog] = React.useState(false);
   const preferences = React.useContext(PreferencesContext);
 
   const _setDrawerItem = (index: number) => setDrawerItemIndex(index);
 
   const { isV3, colors } = useExampleTheme();
   const isIOS = Platform.OS === 'ios';
+  const expoGoExecution =
+    Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
 
   if (!preferences) throw new Error('PreferencesContext not provided');
 
@@ -113,11 +120,20 @@ function DrawerItems() {
   } = preferences;
 
   const _handleToggleRTL = () => {
+    if (expoGoExecution) {
+      setShowRTLDialog(true);
+      return;
+    }
+
     toggleRTL();
     I18nManager.forceRTL(!isRTL);
     if (isWeb) {
       Updates.reloadAsync();
     }
+  };
+
+  const _handleDismissRTLDialog = () => {
+    setShowRTLDialog(false);
   };
 
   const coloredLabelTheme = {
@@ -254,6 +270,24 @@ function DrawerItems() {
           </Text>
         </>
       )}
+      <Portal>
+        <Dialog visible={showRTLDialog} onDismiss={_handleDismissRTLDialog}>
+          <Dialog.Title>Changing to RTL</Dialog.Title>
+          <Dialog.Content>
+            <Text variant="bodyMedium">
+              Due to Expo Go limitations it is impossible to change RTL
+              dynamically. To do so, you need to create a development build of
+              Example app or change it statically by setting{' '}
+              <Text variant="labelMedium">forcesRTL</Text> property to true in{' '}
+              <Text variant="labelMedium">app.json</Text> within{' '}
+              <Text variant="labelMedium">example</Text> directory.
+            </Text>
+            <Dialog.Actions>
+              <Button onPress={_handleDismissRTLDialog}>Ok</Button>
+            </Dialog.Actions>
+          </Dialog.Content>
+        </Dialog>
+      </Portal>
     </DrawerContentScrollView>
   );
 }

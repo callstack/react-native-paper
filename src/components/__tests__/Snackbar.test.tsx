@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { act, render } from '@testing-library/react-native';
 
 import { red200, white } from '../../styles/themes/v2/colors';
 import Snackbar from '../Snackbar';
@@ -144,8 +144,9 @@ it('animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
-
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
   expect(getByTestId('snack-bar-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });

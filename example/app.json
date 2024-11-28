@@ -13,11 +13,7 @@
       "config": "./metro.config.js",
       "projectRoots": ""
     },
-    "platforms": [
-      "android",
-      "ios",
-      "web"
-    ],
+    "platforms": ["android", "ios", "web"],
     "owner": "react-native-paper",
     "ios": {
       "bundleIdentifier": "com.callstack.reactnativepaperexample",
@@ -26,10 +22,7 @@
     "android": {
       "package": "com.callstack.reactnativepaperexample",
       "versionCode": 28,
-      "permissions": [
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE"
-      ],
+      "permissions": ["READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"],
       "icon": "./assets/images/paper-icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/android-icon.png",
@@ -51,6 +44,7 @@
     },
     "updates": {
       "url": "https://u.expo.dev/ba8f5139-58fe-48f0-b2f2-2d675b6eb2d4"
-    }
+    },
+    "plugins": ["expo-font"]
   }
 }

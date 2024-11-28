@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { act, fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
-import { pink500, black, white } from '../../styles/themes/v2/colors';
+import { black, pink500, white } from '../../styles/themes/v2/colors';
 import Button from '../Button/Button';
 import { getButtonColors } from '../Button/utils';
 
@@ -903,8 +903,9 @@ it('animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
-
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
   expect(getByTestId('button-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
