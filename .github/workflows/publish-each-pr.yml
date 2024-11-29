@@ -46,7 +46,7 @@ jobs:
         run: echo "EXPO_CONFIG=$(npx expo config --json)" >> $GITHUB_OUTPUT
 
       - name: Comment on PR
-        uses: actions/github-script@v3
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -62,7 +62,7 @@ jobs:
             <a href="${url}"><img src="https://qr.expo.dev/eas-update?appScheme=exp&projectId=${projectId}&channel=${channel}&runtimeVersion=exposdk:${sdkVersion}&host=u.expo.dev" height="200px" width="200px"></a>
             `;
 
-            const comments = await github.issues.listComments({
+            const comments = await github.rest.issues.listComments({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -72,7 +72,7 @@ jobs:
               return;
             }
 
-            github.issues.createComment({
+            github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
