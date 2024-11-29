@@ -1,5 +1,3 @@
-/* @flow */
-
 const parser = require('@babel/parser');
 const types = require('babel-types');
 const fs = require('fs');

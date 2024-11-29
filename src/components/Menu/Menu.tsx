@@ -698,10 +698,12 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   pressableOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    ...(Platform.OS === 'web' && {
-      cursor: 'default',
+    ...Platform.select({
+      web: {
+        cursor: 'auto',
+      },
     }),
+    ...StyleSheet.absoluteFillObject,
     width: '100%',
   },
 });

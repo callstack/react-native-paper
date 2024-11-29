@@ -9,6 +9,7 @@
     "primaryColor": "#6200EE",
     "userInterfaceStyle": "automatic",
     "icon": "./assets/images/paper-icon.png",
+    "newArchEnabled": true,
     "packagerOpts": {
       "config": "./metro.config.js",
       "projectRoots": ""

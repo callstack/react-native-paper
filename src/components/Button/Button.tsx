@@ -331,7 +331,7 @@ const Button = (
           buttonStyle,
           style,
           !isV3 && !disabled && { elevation },
-        ] as ViewStyle
+        ] as StyleProp<ViewStyle>
       }
       {...(isV3 && { elevation: elevation })}
     >

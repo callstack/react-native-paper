@@ -20,6 +20,7 @@
     android:allowBackup="true"
     android:theme="@style/AppTheme"
     android:usesCleartextTraffic="true"
+    android:supportsRtl="true"
   >
     
     <meta-data android:name="expo.modules.updates.ENABLED" android:value="true"/>
