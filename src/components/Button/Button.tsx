@@ -73,6 +73,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   icon?: IconSource;
   /**
+   * Trailing icon to display for the `Button`.
+   */
+  trailingIcon?: IconSource;
+  /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
@@ -174,6 +178,7 @@ const Button = (
     dark,
     loading,
     icon,
+    trailingIcon,
     buttonColor: customButtonColor,
     textColor: customTextColor,
     rippleColor: customRippleColor,
@@ -319,6 +324,23 @@ const Button = (
             styles[`md3IconTextMode${compact ? 'Compact' : ''}`],
         ];
 
+  const trailingIconStyle =
+    StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
+      ? [
+          styles.icon,
+          isV3 && styles[`md3Icon${compact ? 'Compact' : ''}`],
+          isV3 &&
+            isMode('text') &&
+            styles[`md3IconTextMode${compact ? 'Compact' : ''}`],
+        ]
+      : [
+          styles.iconReverse,
+          isV3 && styles[`md3IconReverse${compact ? 'Compact' : ''}`],
+          isV3 &&
+            isMode('text') &&
+            styles[`md3IconReverseTextMode${compact ? 'Compact' : ''}`],
+        ];
+
   return (
     <Surface
       {...rest}
@@ -403,6 +425,22 @@ const Button = (
           >
             {children}
           </Text>
+          {trailingIcon ? (
+            <View
+              style={trailingIconStyle}
+              testID={`${testID}-trailing-icon-container`}
+            >
+              <Icon
+                source={trailingIconStyle}
+                size={customLabelSize ?? iconSize}
+                color={
+                  typeof customLabelColor === 'string'
+                    ? customLabelColor
+                    : textColor
+                }
+              />
+            </View>
+          ) : null}
         </View>
       </TouchableRipple>
     </Surface>
