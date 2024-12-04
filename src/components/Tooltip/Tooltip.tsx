@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {
   Dimensions,
-  View,
   LayoutChangeEvent,
-  StyleSheet,
   Platform,
   Pressable,
+  StyleSheet,
+  View,
   ViewStyle,
 } from 'react-native';
 
@@ -42,6 +42,10 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * Whether the tooltip should be displayed on touch instead long press on mobile.
+   */
+  touchToDisplay?: boolean;
 };
 
 /**
@@ -67,6 +71,7 @@ const Tooltip = ({
   children,
   enterTouchDelay = 500,
   leaveTouchDelay = 1500,
+  touchToDisplay = false,
   title,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier,
@@ -155,13 +160,18 @@ const Tooltip = ({
 
   const mobilePressProps = {
     onPress: React.useCallback(() => {
+      if (touchToDisplay) {
+        touched.current = true;
+        setVisible(true);
+        return null;
+      }
       if (touched.current) {
         return null;
       } else {
         if (children.props.disabled) return null;
         return children.props.onPress?.();
       }
-    }, [children.props]),
+    }, [children.props, touchToDisplay]),
     onLongPress: () => handleTouchStart(),
     onPressOut: () => handleTouchEnd(),
     delayLongPress: enterTouchDelay,
