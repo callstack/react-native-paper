@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { act, render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
@@ -358,8 +358,9 @@ it('action animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
-
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
   expect(getByTestId('icon-button-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
