@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, I18nManager, View, Image, StyleSheet } from 'react-native';
+import { I18nManager, Image, Platform, StyleSheet, View } from 'react-native';
 
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 

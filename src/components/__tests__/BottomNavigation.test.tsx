@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StyleSheet, Easing, Animated, Platform } from 'react-native';
+import { Animated, Easing, Platform, StyleSheet } from 'react-native';
 
-import { fireEvent, render, act } from '@testing-library/react-native';
+import { act, fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
@@ -618,8 +618,9 @@ it('barStyle animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
-
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
   expect(getByTestId('bottom-navigation-bar-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });

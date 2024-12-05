@@ -1,10 +1,10 @@
 import * as React from 'react';
 import type {
-  StyleProp,
-  ViewStyle,
-  View,
   Animated,
   ColorValue,
+  StyleProp,
+  View,
+  ViewStyle,
 } from 'react-native';
 
 import color from 'color';
