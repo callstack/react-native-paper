@@ -29,9 +29,11 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            yarn install --cwd example --frozen-lockfile
-            yarn install --cwd docs --frozen-lockfile
-            yarn install --frozen-lockfile
+            sudo corepack enable
+            yarn set version berry
+            yarn --cwd example --frozen-lockfile
+            yarn --cwd docs --frozen-lockfile
+            yarn --frozen-lockfile
       - save_cache:
           key: dependencies-{{ checksum "package.json" }}
           paths:
