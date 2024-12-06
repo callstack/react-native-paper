@@ -216,15 +216,16 @@ const Menu = ({
   const prevVisible = React.useRef<boolean | null>(null);
   const anchorRef = React.useRef<View | null>(null);
   const menuRef = React.useRef<View | null>(null);
+  const prevRendered = React.useRef(false);
 
-  const keyboardDidShow = (e: RNKeyboardEvent) => {
+  const keyboardDidShow = React.useCallback((e: RNKeyboardEvent) => {
     const keyboardHeight = e.endCoordinates.height;
     keyboardHeightRef.current = keyboardHeight;
-  };
+  }, []);
 
-  const keyboardDidHide = () => {
+  const keyboardDidHide = React.useCallback(() => {
     keyboardHeightRef.current = 0;
-  };
+  }, []);
 
   const keyboardDidShowListenerRef: React.MutableRefObject<
     EmitterSubscription | undefined
@@ -244,7 +245,6 @@ const Menu = ({
     if (visible) {
       onDismiss?.();
     }
-    return true;
   }, [onDismiss, visible]);
 
   const handleKeypress = React.useCallback(
@@ -362,6 +362,7 @@ const Menu = ({
     ]).start(({ finished }) => {
       if (finished) {
         focusFirstDOMNode(menuRef.current);
+        prevRendered.current = true;
       }
     });
   }, [anchor, attachListeners, measureAnchorLayout, theme]);
@@ -380,6 +381,7 @@ const Menu = ({
       if (finished) {
         setMenuLayout({ width: 0, height: 0 });
         setRendered(false);
+        prevRendered.current = false;
         focusFirstDOMNode(anchorRef.current);
       }
     });
@@ -390,16 +392,18 @@ const Menu = ({
       // Menu is rendered in Portal, which updates items asynchronously
       // We need to do the same here so that the ref is up-to-date
       await Promise.resolve().then(() => {
-        if (display) {
+        if (display && !prevRendered.current) {
           show();
         } else {
-          hide();
+          if (rendered) {
+            hide();
+          }
         }
 
         return;
       });
     },
-    [show, hide]
+    [hide, show, rendered]
   );
 
   React.useEffect(() => {
@@ -421,7 +425,7 @@ const Menu = ({
       scaleAnimation.removeAllListeners();
       opacityAnimation?.removeAllListeners();
     };
-  }, [removeListeners]);
+  }, [removeListeners, keyboardDidHide, keyboardDidShow]);
 
   React.useEffect(() => {
     if (prevVisible.current !== visible) {
