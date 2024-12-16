@@ -27,7 +27,7 @@ type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
   variant?: VariantProp<T>;
-  style?: StyleProp<TextStyle> | undefined;
+  style?: StyleProp<TextStyle>;
   /**
    * @optional
    */
