@@ -337,7 +337,7 @@ const Button = (
           buttonStyle,
           style,
           !isV3 && !disabled && { elevation },
-        ] as StyleProp<ViewStyle>
+        ] as Animated.WithAnimatedValue<StyleProp<ViewStyle>>
       }
       {...(isV3 && { elevation: elevation })}
     >

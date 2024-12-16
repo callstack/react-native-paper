@@ -30,7 +30,6 @@ jobs:
           name: Install dependencies
           command: |
             sudo corepack enable
-            yarn set version berry
             yarn --cwd example --immutable
             yarn --cwd docs --immutable
             yarn --immutable

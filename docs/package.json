@@ -17,9 +17,9 @@
   },
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.9",
-    "@docusaurus/core": "^2.3.1",
-    "@docusaurus/preset-classic": "^2.3.1",
-    "@docusaurus/remark-plugin-npm2yarn": "^2.3.1",
+    "@docusaurus/core": "^2.3.6",
+    "@docusaurus/preset-classic": "^2.3.6",
+    "@docusaurus/remark-plugin-npm2yarn": "^2.3.6",
     "@easyops-cn/docusaurus-search-local": "^0.33.4",
     "@material/material-color-utilities": "0.2.4",
     "@mdx-js/react": "^1.6.22",
@@ -37,7 +37,7 @@
     "use-latest-callback": "^0.1.7"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.3.1",
+    "@docusaurus/module-type-aliases": "^2.3.6",
     "@tsconfig/docusaurus": "^1.0.6",
     "@types/marked": "^4.0.7",
     "@types/react-color": "^3.0.6",
@@ -58,7 +58,7 @@
     ]
   },
   "engines": {
-    "node": ">=16.14"
+    "node": ">=18"
   },
   "resolutions": {
     "@types/react": "18.0.8",
