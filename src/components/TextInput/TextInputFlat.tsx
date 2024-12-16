@@ -229,6 +229,13 @@ const TextInputFlat = ({
     ? parentState.labeled
     : placeholderOpacityAnims[parentState.labelLayout.measured ? 1 : 0];
 
+  // We don't want to show placeholder if label is displayed, because they overlap.
+  // Before it was done by setting placeholder's value to " ", but inputs have the same props
+  // what causes broken styles due to: https://github.com/facebook/react-native/issues/48249
+  const placeholderTextColorBasedOnState = parentState.displayPlaceholder
+    ? placeholderTextColor ?? placeholderColor
+    : 'transparent';
+
   const minHeight =
     height ||
     (dense ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) : MIN_HEIGHT);
@@ -388,12 +395,12 @@ const TextInputFlat = ({
           ...rest,
           ref: innerRef,
           onChangeText,
-          placeholder: label ? parentState.placeholder : rest.placeholder,
+          placeholder: rest.placeholder,
           editable: !disabled && editable,
           selectionColor,
           cursorColor:
             typeof cursorColor === 'undefined' ? activeColor : cursorColor,
-          placeholderTextColor: placeholderTextColor ?? placeholderColor,
+          placeholderTextColor: placeholderTextColorBasedOnState,
           onFocus,
           onBlur,
           underlineColorAndroid: 'transparent',

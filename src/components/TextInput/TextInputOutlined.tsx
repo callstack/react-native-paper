@@ -206,6 +206,10 @@ const TextInputOutlined = ({
     paddingHorizontal: INPUT_PADDING_HORIZONTAL,
   };
 
+  const placeholderTextColorBasedOnState = parentState.displayPlaceholder
+    ? placeholderTextColor ?? placeholderColor
+    : 'transparent';
+
   const labelBackgroundColor: ColorValue =
     backgroundColor === 'transparent'
       ? theme.colors.background
@@ -379,12 +383,12 @@ const TextInputOutlined = ({
           ref: innerRef,
           onLayout: onLayoutChange,
           onChangeText,
-          placeholder: label ? parentState.placeholder : rest.placeholder,
+          placeholder: rest.placeholder,
           editable: !disabled && editable,
           selectionColor,
           cursorColor:
             typeof cursorColor === 'undefined' ? activeColor : cursorColor,
-          placeholderTextColor: placeholderTextColor || placeholderColor,
+          placeholderTextColor: placeholderTextColorBasedOnState,
           onFocus,
           onBlur,
           underlineColorAndroid: 'transparent',
