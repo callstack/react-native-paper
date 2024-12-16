@@ -31,9 +31,9 @@ jobs:
           command: |
             sudo corepack enable
             yarn set version berry
-            yarn --cwd example --frozen-lockfile
-            yarn --cwd docs --frozen-lockfile
-            yarn --frozen-lockfile
+            yarn --cwd example --immutable
+            yarn --cwd docs --immutable
+            yarn --immutable
       - save_cache:
           key: dependencies-{{ checksum "package.json" }}
           paths:
