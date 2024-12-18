@@ -141,7 +141,7 @@ Badge to show on the tab icon, can be `true` to show a dot, `string` or `number`
 
 Accessibility label for the tab button. This is read by the screen reader when the user taps the tab. It's recommended to set this if you don't have a label for the tab.
 
-#### `tabBarTestID`
+#### `tabBarButtonTestID`
 
 ID to locate this tab button in tests.
 
