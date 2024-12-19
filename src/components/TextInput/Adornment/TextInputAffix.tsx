@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Animated,
-  DimensionValue,
   GestureResponderEvent,
   LayoutChangeEvent,
   Pressable,
@@ -48,7 +47,7 @@ type ContextState = {
   visible?: Animated.Value;
   textStyle?: StyleProp<TextStyle>;
   side: AdornmentSide;
-  paddingHorizontal?: DimensionValue;
+  paddingHorizontal?: number | string;
   maxFontSizeMultiplier?: number | undefined | null;
   testID?: string;
   disabled?: boolean;
