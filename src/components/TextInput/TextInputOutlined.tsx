@@ -374,7 +374,6 @@ const TextInputOutlined = ({
             labelBackground={LabelBackground}
             maxFontSizeMultiplier={rest.maxFontSizeMultiplier}
             placeholderColor={outlineColor ?? null}
-            accessible={Platform.OS !== 'ios'}
           />
         ) : null}
         {render?.({
