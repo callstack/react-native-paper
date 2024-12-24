@@ -17,6 +17,13 @@
     "no-undef": "off",
     "global-require": "off",
 
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+
     "import/no-extraneous-dependencies": "off",
     "import/first": "off",
     "import/order": [
