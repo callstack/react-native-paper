@@ -69,7 +69,7 @@ function MaterialBottomTabNavigator({
   );
 }
 
-function createMaterialBottomTabs<
+function createMaterialBottomTabNavigator<
   const ParamList extends ParamListBase,
   const NavigatorID extends string | undefined,
   const TypeBag extends NavigatorTypeBagBase = {
@@ -88,4 +88,4 @@ function createMaterialBottomTabs<
   return createNavigatorFactory(MaterialBottomTabNavigator)(config);
 }
 
-export default createMaterialBottomTabs;
+export default createMaterialBottomTabNavigator;
