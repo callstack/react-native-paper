@@ -31,6 +31,23 @@ type MenuVisibility = {
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
+const longMenuItems = [
+  'Home',
+  'About us',
+  'History',
+  'Team',
+  'Products',
+  'Investments',
+  'R&D',
+  'News',
+  'Archive',
+  'Events',
+  'Blog',
+  'Account',
+  'Press',
+  'Contact',
+];
+
 const MenuExample = ({ navigation }: Props) => {
   const [visible, setVisible] = React.useState<MenuVisibility>({});
   const [contextualMenuCoord, setContextualMenuCoor] =
@@ -146,6 +163,49 @@ const MenuExample = ({ navigation }: Props) => {
             </TouchableRipple>
           </List.Section>
         </View>
+        <List.Section style={styles.listSection} title="Long menus">
+          <View style={styles.spaceBetween}>
+            <Menu
+              visible={_getVisible('menu-left')}
+              onDismiss={_toggleMenu('menu-left')}
+              anchor={
+                <Button mode="outlined" onPress={_toggleMenu('menu-left')}>
+                  Left
+                </Button>
+              }
+            >
+              {longMenuItems.map((item) => (
+                <Menu.Item key={item} title={item} onPress={() => {}} />
+              ))}
+            </Menu>
+            <Menu
+              visible={_getVisible('menu-center')}
+              onDismiss={_toggleMenu('menu-center')}
+              anchor={
+                <Button mode="outlined" onPress={_toggleMenu('menu-center')}>
+                  Center
+                </Button>
+              }
+            >
+              {longMenuItems.map((item) => (
+                <Menu.Item key={item} title={item} onPress={() => {}} />
+              ))}
+            </Menu>
+            <Menu
+              visible={_getVisible('menu-right')}
+              onDismiss={_toggleMenu('menu-right')}
+              anchor={
+                <Button mode="outlined" onPress={_toggleMenu('menu-right')}>
+                  Right
+                </Button>
+              }
+            >
+              {longMenuItems.map((item) => (
+                <Menu.Item key={item} title={item} onPress={() => {}} />
+              ))}
+            </Menu>
+          </View>
+        </List.Section>
 
         <View style={styles.bottomMenu}>
           <Menu
@@ -181,6 +241,14 @@ const styles = StyleSheet.create({
   },
   alignCenter: {
     alignItems: 'center',
+  },
+  listSection: {
+    flex: 1,
+    overflow: 'scroll',
+  },
+  spaceBetween: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   md3Divider: {
     marginVertical: 8,
