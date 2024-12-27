@@ -21,11 +21,11 @@ import useAnimatedValue from '../utils/useAnimatedValue';
 
 export type Props = {
   /**
-   * Determines whether clicking outside the modal dismiss it.
+   * Determines whether clicking outside the modal dismisses it.
    */
   dismissable?: boolean;
   /**
-   * Determines whether clicking Android hardware back button dismiss dialog.
+   * Determines whether clicking Android hardware back button dismisses the dialog.
    */
   dismissableBackButton?: boolean;
   /**
