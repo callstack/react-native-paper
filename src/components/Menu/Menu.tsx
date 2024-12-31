@@ -441,12 +441,6 @@ const Menu = ({
     updateVisibility(rendered);
   }, [rendered, updateVisibility]);
 
-  React.useEffect(() => {
-    if (!isCoordinate(anchorRef.current) && anchorPosition === 'bottom') {
-      setTop((prev) => prev + anchorLayout.height);
-    }
-  }, [anchorPosition, anchorLayout.height]);
-
   // I don't know why but on Android measure function is wrong by 24
   const additionalVerticalValue = Platform.select({
     android: statusBarHeight,
@@ -456,7 +450,10 @@ const Menu = ({
   // We need to translate menu while animating scale to imitate transform origin for scale animation
   const positionTransforms = [];
   let leftTransformation = left;
-  let topTransformation = top;
+  let topTransformation =
+    !isCoordinate(anchorRef.current) && anchorPosition === 'bottom'
+      ? top + anchorLayout.height
+      : top;
 
   // Check if menu fits horizontally and if not align it to right.
   if (left <= windowLayout.width - menuLayout.width - SCREEN_INDENT) {
