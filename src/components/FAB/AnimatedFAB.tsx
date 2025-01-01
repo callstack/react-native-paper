@@ -419,7 +419,10 @@ const AnimatedFAB = ({
         </View>
         <Animated.View
           pointerEvents="box-none"
-          style={[styles.innerWrapper, { borderRadius }]}
+          style={[
+            styles.innerWrapper,
+            { borderRadius: restStyle?.borderRadius || borderRadius },
+          ]}
         >
           <Animated.View
             style={[
@@ -427,7 +430,7 @@ const AnimatedFAB = ({
               {
                 width: extendedWidth,
                 backgroundColor,
-                borderRadius,
+                borderRadius: restStyle?.borderRadius || borderRadius,
               },
               combinedStyles.innerWrapper,
             ]}
