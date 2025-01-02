@@ -206,14 +206,14 @@ function Modal({
       accessibilityViewIsModal
       accessibilityLiveRegion="polite"
       style={StyleSheet.absoluteFill}
-      onAccessibilityEscape={hideModal}
+      onAccessibilityEscape={onDismissCallback}
       testID={testID}
     >
       <AnimatedPressable
         accessibilityLabel={overlayAccessibilityLabel}
         accessibilityRole="button"
         disabled={!dismissable}
-        onPress={dismissable ? hideModal : undefined}
+        onPress={dismissable ? onDismissCallback : undefined}
         importantForAccessibility="no"
         style={[
           styles.backdrop,

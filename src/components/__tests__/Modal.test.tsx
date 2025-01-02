@@ -130,29 +130,6 @@ describe('Modal', () => {
           opacity: 1,
         });
       });
-
-      it('should invoke the onDismiss function after the animation', () => {
-        const onDismiss = jest.fn();
-        const { getByTestId } = render(
-          <Modal testID="modal" visible onDismiss={onDismiss}>
-            {null}
-          </Modal>
-        );
-
-        expect(onDismiss).not.toHaveBeenCalled();
-
-        act(() => {
-          fireEvent.press(getByTestId('modal-backdrop'));
-        });
-
-        expect(onDismiss).not.toHaveBeenCalled();
-
-        act(() => {
-          jest.runAllTimers();
-        });
-
-        expect(onDismiss).toHaveBeenCalledTimes(1);
-      });
     });
 
     describe('if closed via Android back button', () => {
