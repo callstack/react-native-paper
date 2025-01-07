@@ -261,6 +261,7 @@ const ListAccordion = ({
           <View
             style={theme.isV3 ? styles.rowV3 : styles.row}
             pointerEvents={pointerEvents}
+            accessible={Platform.OS=== 'ios'? false: true}
           >
             {left
               ? left({
@@ -270,6 +271,7 @@ const ListAccordion = ({
               : null}
             <View
               style={[theme.isV3 ? styles.itemV3 : styles.item, styles.content]}
+              accessible={Platform.OS=== 'ios'? false: true}
             >
               <Text
                 selectable={false}
@@ -305,6 +307,7 @@ const ListAccordion = ({
             </View>
             <View
               style={[styles.item, description ? styles.multiline : undefined]}
+              accessible={Platform.OS=== 'ios'? false: true}
             >
               {right ? (
                 right({

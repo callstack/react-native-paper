@@ -38,7 +38,7 @@
     "lint": "yarn lint-no-fix --fix",
     "lint-no-fix": "eslint --ext '.js,.ts,.tsx' .",
     "test": "jest",
-    "prepare": "bob build && node ./scripts/generate-mappings.js",
+    "prepack": "bob build && node ./scripts/generate-mappings.js",
     "release": "release-it",
     "bootstrap": "yarn --cwd example && yarn --cwd docs && yarn",
     "docs": "yarn --cwd docs",
