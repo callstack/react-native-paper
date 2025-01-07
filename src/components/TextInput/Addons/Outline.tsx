@@ -5,6 +5,7 @@ import {
   StyleProp,
   View,
   ViewStyle,
+  Platform,
 } from 'react-native';
 
 import { TextInputLabelProp } from '../types';
@@ -47,6 +48,7 @@ export const Outline = ({
       },
       style,
     ]}
+    accessible={Platform.OS === 'ios'? false: true}
   />
 );
 
