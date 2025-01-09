@@ -8,12 +8,12 @@ jobs:
     if: github.event.pull_request.head.repo.full_name == 'callstack/react-native-paper'
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: 16.x
+          node-version: 18.x
 
       - name: Setup Expo
         uses: expo/expo-github-action@v7
@@ -21,20 +21,29 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Get yarn cache
+      - name: Restore dependencies
         id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Check yarn cache
-        uses: actions/cache@v1
+        uses: actions/cache/restore@v4
         with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: '**/node_modules'
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}-${{ hashFiles('**/package.json', '!node_modules/**') }}
           restore-keys: |
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: |
+          sudo corepack enable
+          yarn --cwd example --immutable
+          yarn --immutable
+
+      - name: Cache dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: '**/node_modules'
+          key: ${{ steps.yarn-cache.outputs.cache-primary-key }}
 
       - name: Publish Expo app
         working-directory: ./example
