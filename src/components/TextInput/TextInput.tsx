@@ -241,9 +241,8 @@ const TextInput = forwardRef<TextInputHandles, Props>(
       new Animated.Value(errorProp ? 1 : 0)
     );
     const [focused, setFocused] = React.useState<boolean>(false);
-    const [placeholder, setPlaceholder] = React.useState<string | undefined>(
-      ' '
-    );
+    const [displayPlaceholder, setDisplayPlaceholder] =
+      React.useState<boolean>(false);
     const [uncontrolledValue, setUncontrolledValue] = React.useState<
       string | undefined
     >(validInputValue);
@@ -328,24 +327,16 @@ const TextInput = forwardRef<TextInputHandles, Props>(
         // If the user wants to use the contextMenu, when changing the placeholder, the contextMenu is closed
         // This is a workaround to mitigate this behavior in scenarios where the placeholder is not specified.
         if (rest.placeholder) {
-          // Set the placeholder in a delay to offset the label animation
+          // Display placeholder in a delay to offset the label animation
           // If we show it immediately, they'll overlap and look ugly
           timer.current = setTimeout(
-            () => setPlaceholder(rest.placeholder),
+            () => setDisplayPlaceholder(true),
             50
           ) as unknown as NodeJS.Timeout;
         }
       } else {
         // hidePlaceholder
-
-        // Issue: https://github.com/callstack/react-native-paper/issues/3138
-        // Description:   Changing the placeholder text value dynamically,
-        //                within multiline input on iOS, doesn't work properly –
-        //                the placeholder is not displayed initially.
-        // Root cause:    Placeholder initial value, which has length 0.
-        // More context:  The issue was also reproduced in react-native, using its own TextInput.
-        // Workaround:    Set an empty space character in the default value.
-        setPlaceholder(' ');
+        setDisplayPlaceholder(false);
       }
 
       return () => {
@@ -500,7 +491,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
             labeled,
             error,
             focused,
-            placeholder,
+            displayPlaceholder,
             value,
             labelTextLayout,
             labelLayout,
@@ -542,7 +533,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
           labeled,
           error,
           focused,
-          placeholder,
+          displayPlaceholder,
           value,
           labelTextLayout,
           labelLayout,

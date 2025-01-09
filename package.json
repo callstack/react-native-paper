@@ -53,9 +53,9 @@
     "use-latest-callback": "^0.1.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.7",
+    "@babel/core": "^7.25.2",
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
-    "@babel/runtime": "^7.20.7",
+    "@babel/runtime": "^7.25.0",
     "@callstack/eslint-config": "^13.0.2",
     "@commitlint/config-conventional": "^8.3.4",
     "@expo/vector-icons": "^14.0.2",
@@ -66,9 +66,9 @@
     "@types/color": "^3.0.0",
     "@types/jest": "^29.2.1",
     "@types/node": "^13.1.0",
-    "@types/react-dom": "^18.0.8",
+    "@types/react-dom": "^18.3.1",
     "@types/react-native-vector-icons": "^6.4.18",
-    "@types/react-test-renderer": "^18.0.0",
+    "@types/react-test-renderer": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
     "all-contributors-cli": "^6.24.0",
@@ -90,13 +90,13 @@
     "jest": "^29.6.3",
     "jest-file-snapshot": "^0.3.2",
     "metro-react-native-babel-preset": "0.73.9",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-native": "0.73.6",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-native": "0.76.3",
     "react-native-builder-bob": "^0.21.3",
-    "react-native-safe-area-context": "4.8.2",
+    "react-native-safe-area-context": "4.12.0",
     "react-native-vector-icons": "^10.1.0",
-    "react-test-renderer": "18.2.0",
+    "react-test-renderer": "18.3.1",
     "release-it": "^13.4.0",
     "rimraf": "^3.0.2",
     "typescript": "5.0.4"
@@ -162,5 +162,6 @@
         }
       ]
     ]
-  }
+  },
+  "packageManager": "yarn@4.5.3"
 }

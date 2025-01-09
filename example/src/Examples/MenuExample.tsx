@@ -146,6 +146,22 @@ const MenuExample = ({ navigation }: Props) => {
             </TouchableRipple>
           </List.Section>
         </View>
+        <View style={styles.alignCenter}>
+          <Menu
+            visible={_getVisible('menu5')}
+            onDismiss={_toggleMenu('menu5')}
+            anchorPosition="bottom"
+            anchor={
+              <Button mode="outlined" onPress={_toggleMenu('menu5')}>
+                Menu with anchor position
+              </Button>
+            }
+          >
+            <Menu.Item onPress={() => {}} title="Item 1" />
+            <Menu.Item onPress={() => {}} title="Item 2" />
+            <Menu.Item onPress={() => {}} title="Item 3" />
+          </Menu>
+        </View>
 
         <View style={styles.bottomMenu}>
           <Menu

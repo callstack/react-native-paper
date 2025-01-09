@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Animated, I18nManager, StyleSheet, TextStyle } from 'react-native';
+import {
+  Animated,
+  I18nManager,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+} from 'react-native';
 
 import type { VariantProp } from './types';
 import { useInternalTheme } from '../../core/theming';
@@ -21,7 +27,7 @@ type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
   variant?: VariantProp<T>;
-  style?: TextStyle;
+  style?: StyleProp<TextStyle>;
   /**
    * @optional
    */

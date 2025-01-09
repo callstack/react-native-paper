@@ -231,10 +231,9 @@ describe('renderAppbarContent', () => {
       </mockSafeAreaContext.SafeAreaProvider>
     );
 
-    expect(getByTestId('appbar-content').props.accessibilityRole).toEqual([
-      'button',
-      'header',
-    ]);
+    expect(getByTestId('appbar-content').props.accessibilityRole).toEqual(
+      'button'
+    );
     expect(
       getByTestId('appbar-content').props.accessibilityState || {}
     ).not.toMatchObject({ disabled: true });
@@ -251,10 +250,9 @@ describe('renderAppbarContent', () => {
       </mockSafeAreaContext.SafeAreaProvider>
     );
 
-    expect(getByTestId('appbar-content').props.accessibilityRole).toEqual([
-      'button',
-      'header',
-    ]);
+    expect(getByTestId('appbar-content').props.accessibilityRole).toEqual(
+      'button'
+    );
     expect(
       getByTestId('appbar-content').props.accessibilityState
     ).toMatchObject({ disabled: true });

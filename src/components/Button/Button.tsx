@@ -227,7 +227,13 @@ const Button = (
   );
 
   React.useEffect(() => {
-    elevation.setValue(isElevationEntitled ? initialElevation : 0);
+    // Workaround not to call setValue on Animated.Value, because it breaks styles.
+    // https://github.com/callstack/react-native-paper/issues/4559
+    Animated.timing(elevation, {
+      toValue: isElevationEntitled ? initialElevation : 0,
+      duration: 0,
+      useNativeDriver: true,
+    });
   }, [isElevationEntitled, elevation, initialElevation]);
 
   const handlePressIn = (e: GestureResponderEvent) => {
@@ -331,7 +337,7 @@ const Button = (
           buttonStyle,
           style,
           !isV3 && !disabled && { elevation },
-        ] as ViewStyle
+        ] as Animated.WithAnimatedValue<StyleProp<ViewStyle>>
       }
       {...(isV3 && { elevation: elevation })}
     >

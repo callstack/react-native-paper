@@ -245,12 +245,14 @@ it('renders label with correct color when inactive', () => {
   });
 });
 
-it('renders input placeholder initially with an empty space character', () => {
+it('renders input placeholder initially with transparent placeholderTextColor', () => {
   const { getByTestId } = render(
     <TextInput multiline label="Multiline input" testID={'text-input'} />
   );
 
-  expect(getByTestId('text-input').props.placeholder).toBe(' ');
+  expect(getByTestId('text-input').props.placeholderTextColor).toBe(
+    'transparent'
+  );
 });
 
 it('correctly applies padding offset to input label on Android when RTL', () => {

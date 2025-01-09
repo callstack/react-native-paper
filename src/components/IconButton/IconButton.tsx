@@ -23,7 +23,7 @@ const PADDING = 8;
 
 type IconButtonMode = 'outlined' | 'contained' | 'contained-tonal';
 
-export type Props = $RemoveChildren<typeof TouchableRipple> & {
+export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
   /**
    * Icon to display.
    */

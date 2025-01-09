@@ -9,6 +9,7 @@
     "primaryColor": "#6200EE",
     "userInterfaceStyle": "automatic",
     "icon": "./assets/images/paper-icon.png",
+    "newArchEnabled": true,
     "packagerOpts": {
       "config": "./metro.config.js",
       "projectRoots": ""
@@ -39,9 +40,7 @@
         "projectId": "ba8f5139-58fe-48f0-b2f2-2d675b6eb2d4"
       }
     },
-    "runtimeVersion": {
-      "policy": "sdkVersion"
-    },
+    "runtimeVersion": "exposdk:52.0.0",
     "updates": {
       "url": "https://u.expo.dev/ba8f5139-58fe-48f0-b2f2-2d675b6eb2d4"
     },

@@ -18,7 +18,7 @@ import { splitStyles } from '../utils/splitStyles';
 
 type Elevation = 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
 
-export type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = Omit<React.ComponentPropsWithRef<typeof View>, 'style'> & {
   /**
    * Content of the `Surface`.
    */

@@ -182,8 +182,8 @@ exports[`call onPress when affix adornment pressed 1`] = `
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
-      placeholder=" "
-      placeholderTextColor="rgba(73, 69, 79, 1)"
+      placeholder="Enter your phone number"
+      placeholderTextColor="transparent"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
@@ -494,8 +494,8 @@ exports[`correctly applies a component as the text label 1`] = `
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
-      placeholder=" "
-      placeholderTextColor="rgba(73, 69, 79, 1)"
+      placeholder="Type something"
+      placeholderTextColor="transparent"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
@@ -718,8 +718,8 @@ exports[`correctly applies cursorColor prop 1`] = `
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
-      placeholder=" "
-      placeholderTextColor="rgba(73, 69, 79, 1)"
+      placeholder="Type something"
+      placeholderTextColor="transparent"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
@@ -942,8 +942,8 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
-      placeholder=" "
-      placeholderTextColor="rgba(73, 69, 79, 1)"
+      placeholder="Type something"
+      placeholderTextColor="transparent"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
@@ -1198,8 +1198,8 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
       onChangeText={[Function]}
       onFocus={[Function]}
       onLayout={[Function]}
-      placeholder=" "
-      placeholderTextColor="rgba(73, 69, 79, 1)"
+      placeholder="Type Something"
+      placeholderTextColor="transparent"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
@@ -1423,8 +1423,8 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
-      placeholder=" "
-      placeholderTextColor="rgba(73, 69, 79, 1)"
+      placeholder="Type something"
+      placeholderTextColor="transparent"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
@@ -1649,8 +1649,8 @@ exports[`correctly applies textAlign center 1`] = `
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
-      placeholder=" "
-      placeholderTextColor="rgba(73, 69, 79, 1)"
+      placeholder="Type something"
+      placeholderTextColor="transparent"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
@@ -1873,8 +1873,8 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
-      placeholder=" "
-      placeholderTextColor="rgba(73, 69, 79, 1)"
+      placeholder="Type something"
+      placeholderTextColor="transparent"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
@@ -2299,8 +2299,8 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
-      placeholder=" "
-      placeholderTextColor="rgba(73, 69, 79, 1)"
+      placeholder="Type something"
+      placeholderTextColor="transparent"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
