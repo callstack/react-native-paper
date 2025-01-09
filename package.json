@@ -50,6 +50,7 @@
   "dependencies": {
     "@callstack/react-theme-provider": "^3.0.9",
     "color": "^3.1.2",
+    "expo-font": "^13.0.2",
     "use-latest-callback": "^0.1.5"
   },
   "devDependencies": {
