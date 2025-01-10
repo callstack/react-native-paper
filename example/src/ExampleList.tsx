@@ -21,6 +21,7 @@ import ChipExample from './Examples/ChipExample';
 import DataTableExample from './Examples/DataTableExample';
 import DialogExample from './Examples/DialogExample';
 import DividerExample from './Examples/DividerExample';
+import DropdownExample from './Examples/DropdownExample';
 import FABExample from './Examples/FABExample';
 import IconButtonExample from './Examples/IconButtonExample';
 import IconExample from './Examples/IconExample';
@@ -73,6 +74,7 @@ export const mainExamples: Record<
   dataTable: DataTableExample,
   dialog: DialogExample,
   divider: DividerExample,
+  dropdown: DropdownExample,
   fab: FABExample,
   iconButton: IconButtonExample,
   icon: IconExample,
