@@ -36,7 +36,7 @@ npx pod-install
 
 ### Versioning
 
-Introducing Material You <i>(MD3)</i> into `react-native-paper` doesn't mean dropping previous Material Design <i>(MD2)</i>! On the contrary, both of them will be supported, however, not simultaneously. To specify which design system components should follow in the app, there is a newly created property in the theme called `version` which can accept only one of two values:
+Introducing Material You <i>(MD3)</i> into `react-native-paper` doesn't mean dropping previous Material Design <i>(MD2)</i>! On the contrary, both of them will be supported, however, not simultaneously. To specify which design system components should follow in the app, there is a newly created property in [the theme](https://callstack.github.io/react-native-paper/docs/guides/theming#theme-properties) named `version` that accepts one of two values:
 
 * <b>3</b> – <b>(default)</b> new Material You <i>(MD3)</i>,
 * <b>2</b> - previous Material Design <i>(MD2)</i>.
