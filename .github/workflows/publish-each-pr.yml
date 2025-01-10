@@ -53,6 +53,13 @@ jobs:
         working-directory: ./example
         id: expo
         run: echo "EXPO_CONFIG=$(npx expo config --json)" >> $GITHUB_OUTPUT
+        
+      - name: Get branch info from EAS
+        working-directory: ./example
+        id: eas
+        run: |
+            branch_id=$(eas branch:view pr-${{ github.event.number }} --json --non-interactive | jq -r '.id')
+            echo "BRANCH_ID=$branch_id" >> $GITHUB_OUTPUT
 
       - name: Comment on PR
         uses: actions/github-script@v7
@@ -61,14 +68,15 @@ jobs:
           script: |
             const config = JSON.parse('${{ steps.expo.outputs.EXPO_CONFIG }}');
 
+            const branchId = '${{ steps.eas.outputs.BRANCH_ID }}';
+            const channel = 'pr-${{ github.event.number }}';
+
             const { sdkVersion } = config;
             const { projectId } = config.extra.eas;
 
-            const channel = 'pr-${{ github.event.number }}';
-
             const url = `https://expo.dev/@react-native-paper/react-native-paper-example?serviceType=eas&distribution=expo-go&scheme=exp+react-native-paper-example&channel=${channel}&sdkVersion=${sdkVersion}`;
             const body = `The mobile version of example app from this branch is ready! You can [see it here.](${url})
-            <a href="${url}"><img src="https://qr.expo.dev/eas-update?appScheme=exp&projectId=${projectId}&channel=${channel}&runtimeVersion=exposdk:${sdkVersion}&host=u.expo.dev" height="200px" width="200px"></a>
+            <a href="${url}"><img src="https://qr.expo.dev/eas-update?projectId=${projectId}&runtimeVersion=exposdk:${sdkVersion}&branchId=${branchId}" height="200px" width="200px"></a>
             `;
 
             const comments = await github.rest.issues.listComments({
