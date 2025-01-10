@@ -69,6 +69,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 /**
  * The Modal component is a simple way to present content above an enclosing view.
  * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](./Portal) component.
+ * Note that this modal is NOT accessible by default; if you need an accessible modal, please use the React Native Modal.
  *
  * ## Usage
  * ```js
