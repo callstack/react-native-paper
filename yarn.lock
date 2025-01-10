@@ -7819,18 +7819,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-font@npm:^13.0.2":
-  version: 13.0.2
-  resolution: "expo-font@npm:13.0.2"
-  dependencies:
-    fontfaceobserver: "npm:^2.1.0"
-  peerDependencies:
-    expo: "*"
-    react: "*"
-  checksum: 10c0/d4bf597bc6d03d40cd1fc029080f25c9b0cf1e48669d3e40747540bb3e20a303c2a7a027344df502a556e19d3ec8572db311bfe67e101a5526dcc29b18759bac
-  languageName: node
-  linkType: hard
-
 "exponential-backoff@npm:^3.1.1":
   version: 3.1.1
   resolution: "exponential-backoff@npm:3.1.1"
@@ -8155,13 +8143,6 @@ __metadata:
   version: 0.214.0
   resolution: "flow-parser@npm:0.214.0"
   checksum: 10c0/abe4f874086373046a85765de7e763e723900814a69fec6f5ad3e29c41bd66de4f85b8e4fdf4e28e2c9cc2c9e2a5342f2190ff97d33effd2e7fd08d14f6fd9ce
-  languageName: node
-  linkType: hard
-
-"fontfaceobserver@npm:^2.1.0":
-  version: 2.3.0
-  resolution: "fontfaceobserver@npm:2.3.0"
-  checksum: 10c0/9b539d5021757d3ed73c355bdb839296d6654de473a992aa98993ef46d951f0361545323de68f6d70c5334d7e3e9f409c1ae7a03c168b00cb0f6c5dea6c77bfa
   languageName: node
   linkType: hard
 
@@ -13213,7 +13194,6 @@ __metadata:
     eslint-plugin-flowtype: "npm:^8.0.3"
     eslint-plugin-local-rules: "npm:^1.3.2"
     expo-constants: "npm:~15.4.6"
-    expo-font: "npm:^13.0.2"
     glob: "npm:^7.1.3"
     husky: "npm:^1.3.1"
     jest: "npm:^29.6.3"
