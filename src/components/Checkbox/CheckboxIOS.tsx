@@ -32,6 +32,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * testID to be used on tests.
    */
   testID?: string;
+  /**
+   * custom icon.
+   */
+  icon?: (props: { size: number; color: string }) => JSX.Element;
 };
 
 /**
@@ -47,6 +51,7 @@ const CheckboxIOS = ({
   onPress,
   theme: themeOverrides,
   testID,
+  icon: customIcon,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -77,13 +82,15 @@ const CheckboxIOS = ({
       theme={theme}
     >
       <View style={{ opacity }}>
-        <MaterialCommunityIcon
-          allowFontScaling={false}
-          name={icon}
-          size={24}
-          color={checkedColor}
-          direction="ltr"
-        />
+        {customIcon?.({ size: 24, color: checkedColor }) || (
+          <MaterialCommunityIcon
+            allowFontScaling={false}
+            name={icon}
+            size={24}
+            color={checkedColor}
+            direction="ltr"
+          />
+        )}
       </View>
     </TouchableRipple>
   );
