@@ -111,6 +111,9 @@ const InputLabel = (props: InputLabelProps) => {
             : labeled,
       },
     ],
+    ...(Platform.constants.reactNativeVersion.minor >= 73 && {
+      transformOrigin: 'left',
+    }),
   };
 
   const labelWidth =
@@ -147,7 +150,8 @@ const InputLabel = (props: InputLabelProps) => {
           styles.labelContainer,
           Platform.OS !== 'web' && { width },
           { opacity },
-          labelTranslationX,
+          Platform.constants.reactNativeVersion.minor <= 72 &&
+            labelTranslationX,
         ]}
       >
         <View
