@@ -9,7 +9,7 @@ assignees: ''
 ### Current behaviour
 <!-- Describe your issue in detail -->
 
-### Expected behaviour
+### Expected behavior
 <!-- A clear and concise description of what you expected to happen -->
 
 ### How to reproduce?
