@@ -147,6 +147,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * testID to be used on tests.
    */
   testID?: string;
+  /**
+   * Number of lines the label text is limited to. Defaults to 1
+   */
+  numberOfLines?: number;
 };
 
 /**
@@ -196,6 +200,7 @@ const Button = (
     background,
     maxFontSizeMultiplier,
     touchableRef,
+    numberOfLines = 1,
     ...rest
   }: Props,
   ref: React.ForwardedRef<View>
@@ -389,7 +394,7 @@ const Button = (
           <Text
             variant="labelLarge"
             selectable={false}
-            numberOfLines={1}
+            numberOfLines={numberOfLines}
             testID={`${testID}-text`}
             style={[
               styles.label,
