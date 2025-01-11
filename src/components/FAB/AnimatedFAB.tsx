@@ -21,7 +21,7 @@ import {
 
 import color from 'color';
 
-import { getCombinedStyles, getFABColors } from './utils';
+import { getCombinedStyles, getFABColors, getLabelSizeWeb } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
@@ -227,9 +227,11 @@ const AnimatedFAB = ({
   const theme = useInternalTheme(themeOverrides);
   const uppercase: boolean = uppercaseProp ?? !theme.isV3;
   const isIOS = Platform.OS === 'ios';
+  const isWeb = Platform.OS === 'web';
   const isAnimatedFromRight = animateFrom === 'right';
   const isIconStatic = iconMode === 'static';
   const { isRTL } = I18nManager;
+  const labelRef = React.useRef<HTMLElement | null>(null);
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
@@ -239,10 +241,43 @@ const AnimatedFAB = ({
   const { isV3, animation } = theme;
   const { scale } = animation;
 
-  const [textWidth, setTextWidth] = React.useState<number>(0);
-  const [textHeight, setTextHeight] = React.useState<number>(0);
+  const labelSize = isWeb ? getLabelSizeWeb(labelRef) : null;
+  const [textWidth, setTextWidth] = React.useState<number>(
+    labelSize?.width ?? 0
+  );
+  const [textHeight, setTextHeight] = React.useState<number>(
+    labelSize?.height ?? 0
+  );
 
   const borderRadius = SIZE / (isV3 ? 3.5 : 2);
+
+  React.useEffect(() => {
+    if (!isWeb) {
+      return;
+    }
+
+    const updateTextSize = () => {
+      if (labelRef.current) {
+        const labelSize = getLabelSizeWeb(labelRef);
+
+        if (labelSize) {
+          setTextHeight(labelSize.height ?? 0);
+          setTextWidth(labelSize.width ?? 0);
+        }
+      }
+    };
+
+    updateTextSize();
+    window.addEventListener('resize', updateTextSize);
+
+    return () => {
+      if (!isWeb) {
+        return;
+      }
+
+      window.removeEventListener('resize', updateTextSize);
+    };
+  }, [isWeb]);
 
   React.useEffect(() => {
     if (visible) {
@@ -470,6 +505,7 @@ const AnimatedFAB = ({
 
       <View pointerEvents="none">
         <AnimatedText
+          ref={isWeb ? labelRef : null}
           variant="labelLarge"
           numberOfLines={1}
           onTextLayout={isIOS ? onTextLayout : undefined}
