@@ -53,6 +53,7 @@ export type Props = {
    * - `icon`: icon to display for the item
    * - `disabled`: whether the button is disabled
    * - `accessibilityLabel`: acccessibility label for the button. This is read by the screen reader when the user taps the button.
+   * - `numberOfLines`: label text number of lines of the button
    * - `checkedColor`: custom color for checked Text and Icon
    * - `uncheckedColor`: custom color for unchecked Text and Icon
    * - `onPress`: callback that is called when button is pressed
@@ -66,6 +67,7 @@ export type Props = {
     icon?: IconSource;
     disabled?: boolean;
     accessibilityLabel?: string;
+    numberOfLines?: number;
     checkedColor?: string;
     uncheckedColor?: string;
     onPress?: (event: GestureResponderEvent) => void;
@@ -79,6 +81,7 @@ export type Props = {
    * Density is applied to the height, to allow usage in denser UIs
    */
   density?: 'regular' | 'small' | 'medium' | 'high';
+  animated?: boolean;
   style?: StyleProp<ViewStyle>;
   theme?: ThemeProp;
 } & ConditionalValue;
@@ -132,6 +135,7 @@ const SegmentedButtons = ({
   buttons,
   multiSelect,
   density,
+  animated,
   style,
   theme: themeOverrides,
 }: Props) => {
@@ -172,6 +176,7 @@ const SegmentedButtons = ({
             {...item}
             key={i}
             checked={checked}
+            animated={animated}
             segment={segment}
             density={density}
             onPress={onPress}
