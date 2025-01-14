@@ -290,7 +290,13 @@ const TextInput = forwardRef<TextInputHandles, Props>(
     React.useImperativeHandle(ref, () => ({
       focus: () => root.current?.focus(),
       clear: () => root.current?.clear(),
-      setNativeProps: (args: Object) => root.current?.setNativeProps(args),
+      setNativeProps: (args: { text?: string } & Object) => {
+        if ('text' in args) {
+          // Update uncontrolledValue when text is set via setNativeProps
+          setUncontrolledValue(args.text as string);
+        }
+        root.current?.setNativeProps(args);
+      },
       isFocused: () => root.current?.isFocused() || false,
       blur: () => root.current?.blur(),
       forceFocus: () => root.current?.focus(),
