@@ -436,13 +436,17 @@ export const getExtendedFabStyle = ({
   return isV3 ? v3Extended : extended;
 };
 
+let cachedContext: CanvasRenderingContext2D | null = null;
+
 const getCanvasContext = () => {
-  const fragment = document.createDocumentFragment();
+  if (cachedContext) {
+    return cachedContext;
+  }
+
   const canvas = document.createElement('canvas');
+  cachedContext = canvas.getContext('2d');
 
-  fragment.appendChild(canvas);
-
-  return canvas.getContext('2d');
+  return cachedContext;
 };
 
 export const getLabelSizeWeb = (ref: MutableRefObject<HTMLElement | null>) => {
