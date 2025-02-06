@@ -144,7 +144,6 @@ const InputLabel = (props: InputLabelProps) => {
         pointerEvents="none"
         style={[
           StyleSheet.absoluteFill,
-          styles.labelContainer,
           Platform.OS !== 'web' && { width },
           { opacity },
           labelTranslationX,
