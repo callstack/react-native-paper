@@ -85,7 +85,7 @@ export type Props = {
    */
   descriptionStyle?: StyleProp<TextStyle>;
   /**
-   * Style that is passed to children container View.
+   * Style that is passed to each child of the List.Accordion.
    */
   childrenStyle?: StyleProp<ViewStyle | TextStyle | ImageStyle>;
   /**
