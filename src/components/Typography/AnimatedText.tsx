@@ -10,6 +10,7 @@ import {
 import type { VariantProp } from './types';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 
 type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
   /**
@@ -39,12 +40,10 @@ type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
  *
  * @extends Text props https://reactnative.dev/docs/text#props
  */
-function AnimatedText({
-  style,
-  theme: themeOverrides,
-  variant,
-  ...rest
-}: Props<never>) {
+const AnimatedText = forwardRef(function AnimatedText(
+  { style, theme: themeOverrides, variant, ...rest }: Props<never>,
+  ref
+) {
   const theme = useInternalTheme(themeOverrides);
   const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
 
@@ -60,6 +59,7 @@ function AnimatedText({
 
     return (
       <Animated.Text
+        ref={ref}
         {...rest}
         style={[
           font,
@@ -77,6 +77,7 @@ function AnimatedText({
     };
     return (
       <Animated.Text
+        ref={ref}
         {...rest}
         style={[
           styles.text,
@@ -89,7 +90,7 @@ function AnimatedText({
       />
     );
   }
-}
+});
 
 const styles = StyleSheet.create({
   text: {
