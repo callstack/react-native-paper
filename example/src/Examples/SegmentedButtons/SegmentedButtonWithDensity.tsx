@@ -3,12 +3,14 @@ import { StyleSheet } from 'react-native';
 
 import { List, SegmentedButtons } from 'react-native-paper';
 
+type TransportMode = 'walk' | 'transit' | 'drive';
+
 const SegmentedButtonWithDensity = () => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState<TransportMode>('walk');
 
   return (
     <List.Section title={`Segmented Button - only labels + density`}>
-      <SegmentedButtons
+      <SegmentedButtons<TransportMode>
         onValueChange={setValue}
         value={value}
         density="medium"

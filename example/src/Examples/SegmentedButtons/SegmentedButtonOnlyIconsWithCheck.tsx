@@ -3,12 +3,14 @@ import { StyleSheet } from 'react-native';
 
 import { List, SegmentedButtons } from 'react-native-paper';
 
+type TransportMode = 'walk' | 'transit' | 'drive';
+
 const SegmentedButtonOnlyIconsWithCheck = () => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState<TransportMode>('walk');
 
   return (
     <List.Section title={`Segmented Button - icons + show selected check`}>
-      <SegmentedButtons
+      <SegmentedButtons<TransportMode>
         onValueChange={setValue}
         style={styles.group}
         value={value}

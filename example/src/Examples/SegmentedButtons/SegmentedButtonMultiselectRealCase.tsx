@@ -5,18 +5,21 @@ import { Card, IconButton, SegmentedButtons } from 'react-native-paper';
 
 import { restaurantsData } from '../../../utils';
 
+type PriceRange = '1' | '2' | '3' | '4';
+
 const SegmentedButtonMultiselectRealCase = () => {
-  const [value, setValue] = React.useState<string[]>([]);
+  const [value, setValue] = React.useState<PriceRange[]>([]);
 
   const filteredData = React.useMemo(
     () =>
-      restaurantsData.filter((item) => value.includes(item.price.toString())),
+      value.includes(item.price.toString() as PriceRange)
+    ),
     [value]
   );
 
   return (
     <View style={styles.container}>
-      <SegmentedButtons
+      <SegmentedButtons<PriceRange>
         value={value}
         onValueChange={setValue}
         multiSelect

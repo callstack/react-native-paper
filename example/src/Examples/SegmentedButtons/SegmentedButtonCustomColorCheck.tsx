@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native';
 
 import { List, SegmentedButtons } from 'react-native-paper';
 
+type TransportMode = 'walk' | 'train' | 'drive';
+
 const themeMock = {
   colors: {
     onSurface: '#3700B3',
@@ -12,13 +14,13 @@ const themeMock = {
 };
 
 const SegmentButtonCustomColorCheck = () => {
-  const [themeValue, setThemeValue] = React.useState('');
-  const [colorValue, setColorValue] = React.useState('');
+  const [themeValue, setThemeValue] = React.useState<TransportMode>('walk');
+  const [colorValue, setColorValue] = React.useState<TransportMode>('walk');
 
   return (
     <List.Section title={`Segmented Button - Custom Colors`}>
       <List.Subheader>Via Theme</List.Subheader>
-      <SegmentedButtons
+      <SegmentedButtons<TransportMode>
         value={themeValue}
         onValueChange={setThemeValue}
         theme={themeMock}
@@ -46,7 +48,7 @@ const SegmentButtonCustomColorCheck = () => {
         style={styles.group}
       />
       <List.Subheader>Via Props</List.Subheader>
-      <SegmentedButtons
+      <SegmentedButtons<TransportMode>
         value={colorValue}
         onValueChange={setColorValue}
         theme={themeMock}
