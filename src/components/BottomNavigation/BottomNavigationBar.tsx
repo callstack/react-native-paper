@@ -158,6 +158,10 @@ export type Props<Route extends BaseRoute> = {
    */
   getLabelText?: (props: { route: Route }) => string | undefined;
   /**
+   * Get the height of the Bottom Tab. Useful for Custom Tab bars.
+   */
+  getBottomTabHeight?: (height: number) => void;
+  /**
    * Get the id to locate this tab button in tests, uses `route.testID` by default.
    */
   getTestID?: (props: { route: Route }) => string | undefined;
@@ -368,6 +372,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   getColor = ({ route }: { route: Route }) => route.color,
   getAccessibilityLabel = ({ route }: { route: Route }) =>
     route.accessibilityLabel,
+  getBottomTabHeight,
   getTestID = ({ route }: { route: Route }) => route.testID,
   activeColor,
   inactiveColor,
@@ -429,6 +434,13 @@ const BottomNavigationBar = <Route extends BaseRoute>({
    * Layout of the navigation bar. The width is used to determine the size and position of the ripple.
    */
   const [layout, onLayout] = useLayout();
+
+  /**
+   * Gets the height of the Bottom Tabs when using Custom Tab bar.
+   */
+  React.useEffect(() => {
+    layout.measured && getBottomTabHeight?.(layout.height);
+  }, [layout.measured, getBottomTabHeight]);
 
   /**
    * Track whether the keyboard is visible to show and hide the navigation bar.
