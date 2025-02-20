@@ -159,6 +159,28 @@ it('renders button with custom border radius', () => {
   expect(getByTestId('custom-radius')).toHaveStyle(styles.customRadius);
 });
 
+it('renders outlined button with custom border radius', () => {
+  const { getByTestId } = render(
+    <Button
+      mode={'outlined'}
+      testID="custom-radius"
+      style={styles.customRadius}
+    >
+      Custom radius
+    </Button>
+  );
+
+  expect(getByTestId('custom-radius-container')).toHaveStyle(
+    styles.customRadius
+  );
+  expect(getByTestId('custom-radius')).toHaveStyle({
+    borderTopLeftRadius: 15, // styles.customRadius - 1px outline
+    borderTopRightRadius: 0,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 15, // styles.customRadius - 1px outline
+  });
+});
+
 it('renders button without border radius', () => {
   const { getByTestId } = render(
     <Button testID="custom-radius" style={styles.noRadius}>

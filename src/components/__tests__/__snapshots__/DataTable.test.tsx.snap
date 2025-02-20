@@ -475,9 +475,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -618,9 +616,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -819,9 +815,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -962,9 +956,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -1105,9 +1097,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -1248,9 +1238,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -1449,9 +1437,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -1592,9 +1578,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -1781,7 +1765,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                   "overflow": "hidden",
                 },
                 {
-                  "borderRadius": 20,
+                  "borderRadius": 19,
                 },
               ]
             }
@@ -2044,9 +2028,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -2187,9 +2169,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -2330,9 +2310,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -2473,9 +2451,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
