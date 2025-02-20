@@ -910,3 +910,19 @@ it('animated value changes correctly', () => {
     transform: [{ scale: 1.5 }],
   });
 });
+
+describe('numberOfLines', ()=> {
+  it('defaults to 1', () => {
+    const { getByTestId } = render(
+      <Button testID="button">Button</Button>
+    );
+    expect(getByTestId('button-text')).toHaveProp('numberOfLines', 1);
+  })
+  it('matches specified prop', () => {
+    const { getByTestId } = render(
+      <Button numberOfLines={2} testID="button">Button</Button>
+    );
+    expect(getByTestId('button-text')).toHaveProp('numberOfLines', 2);
+  })
+});
+
