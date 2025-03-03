@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { I18nManager, Platform, StyleSheet } from 'react-native';
+import { I18nManager, Platform, StyleSheet, ColorValue } from 'react-native';
 
 import {
   CommonActions,
@@ -23,13 +23,23 @@ type Props = MaterialBottomTabNavigationConfig & {
   navigation: MaterialBottomTabNavigationHelpers;
   descriptors: MaterialBottomTabDescriptorMap;
 };
+
+type RenderTouchableProps = {
+  onPress?: (e: any) => void;
+  route: Route<string, object | undefined>;
+  style?: any;
+  rippleColor?: string | ColorValue;
+  children?: React.ReactNode;
+  [key: string]: any;
+};
+
 export default function MaterialBottomTabView({
   state,
   navigation,
   descriptors,
   ...rest
 }: Props) {
-  const buildLink = useLinkBuilder();
+  const buildHref = useLinkBuilder();
 
   return (
     <BottomNavigation
@@ -39,33 +49,42 @@ export default function MaterialBottomTabView({
       renderScene={({ route }) => descriptors[route.key].render()}
       renderTouchable={
         Platform.OS === 'web'
-          ? ({
-              onPress,
-              route,
-              accessibilityRole: _0,
-              borderless: _1,
-              centered: _2,
-              rippleColor: _3,
-              style,
-              ...rest
-            }) => {
+          ? (props: RenderTouchableProps) => {
+              const {
+                onPress,
+                route,
+                style,
+                rippleColor,
+                children,
+                ...restProps
+              } = props;
+
+              // Fallback to an empty string if buildHref returns undefined
+              const href = buildHref(route.name, route.params) ?? '';
+
               return (
                 <Link
-                  {...rest}
-                  // @ts-expect-error: to could be undefined, but it doesn't affect functionality
-                  to={buildLink(route.name, route.params)}
+                  {...restProps}
+                  to={href}
                   accessibilityRole="link"
                   onPress={(e: any) => {
                     if (
-                      !(e.metaKey || e.altKey || e.ctrlKey || e.shiftKey) && // ignore clicks with modifier keys
-                      (e.button == null || e.button === 0) // ignore everything but left clicks
+                      !(e.metaKey || e.altKey || e.ctrlKey || e.shiftKey) &&
+                      (e.button == null || e.button === 0)
                     ) {
                       e.preventDefault();
                       onPress?.(e);
                     }
                   }}
-                  style={[styles.touchable, style]}
-                />
+                  // Apply rippleColor so it's actually used
+                  style={[
+                    styles.touchable,
+                    style,
+                    rippleColor ? { backgroundColor: rippleColor } : null,
+                  ]}
+                >
+                  {children}
+                </Link>
               );
             }
           : undefined
@@ -92,12 +111,7 @@ export default function MaterialBottomTabView({
       }}
       getLabelText={({ route }) => {
         const { options } = descriptors[route.key];
-
-        return options.tabBarLabel !== undefined
-          ? options.tabBarLabel
-          : options.title !== undefined
-          ? options.title
-          : (route as Route<string>).name;
+        return options.tabBarLabel ?? options.title ?? route.name;
       }}
       getColor={({ route }) => descriptors[route.key].options.tabBarColor}
       getBadge={({ route }) => descriptors[route.key].options.tabBarBadge}
@@ -124,7 +138,10 @@ export default function MaterialBottomTabView({
         }
       }}
       onTabLongPress={({ route }) =>
-        navigation.emit({ type: 'tabLongPress', target: route.key })
+        navigation.emit({
+          type: 'tabLongPress',
+          target: route.key,
+        })
       }
     />
   );
