@@ -35,6 +35,7 @@ export type Props = {
    * - `accessibilityHint`: accessibility hint for the action
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
    * - `containerStyle`: pass additional styles for the fab item label container, for example, `backgroundColor` @supported Available in 5.x
+   * - `wrapperStyle`: pass additional styles for the wrapper of the action item.
    * - `labelStyle`: pass additional styles for the fab item label, for example, `fontSize`
    * - `labelMaxFontSizeMultiplier`: specifies the largest possible scale a title font can reach.
    * - `onPress`: callback that is called when `FAB` is pressed (required)
@@ -53,6 +54,7 @@ export type Props = {
     accessibilityHint?: string;
     style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
     containerStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+    wrapperStyle: StyleProp<ViewStyle>;
     labelStyle?: StyleProp<TextStyle>;
     labelMaxFontSizeMultiplier?: number;
     onPress: (e: GestureResponderEvent) => void;
@@ -376,6 +378,7 @@ const FABGroup = ({
               <View
                 key={i} // eslint-disable-line react/no-array-index-key
                 style={[
+                  it.wrapperStyle,
                   styles.item,
                   {
                     marginHorizontal,
