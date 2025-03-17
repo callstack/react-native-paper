@@ -54,7 +54,7 @@ export type Props = {
     accessibilityHint?: string;
     style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
     containerStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
-    wrapperStyle: StyleProp<ViewStyle>;
+    wrapperStyle?: StyleProp<ViewStyle>;
     labelStyle?: StyleProp<TextStyle>;
     labelMaxFontSizeMultiplier?: number;
     onPress: (e: GestureResponderEvent) => void;
