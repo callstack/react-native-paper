@@ -41,7 +41,7 @@ export const Outline = ({
       // eslint-disable-next-line react-native/no-inline-styles
       {
         backgroundColor,
-        borderRadius: roundness * (isV3 ? 5 : 1),
+        borderRadius: roundness ? roundness * (isV3 ? 5 : 1) : undefined,
         borderWidth: (isV3 ? hasActiveOutline : focused) ? 2 : 1,
         borderColor: hasActiveOutline ? activeColor : outlineColor,
       },
