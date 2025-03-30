@@ -231,7 +231,7 @@ const AnimatedFAB = ({
   const isAnimatedFromRight = animateFrom === 'right';
   const isIconStatic = iconMode === 'static';
   const { isRTL } = I18nManager;
-  const labelRef = React.useRef<HTMLElement | null>(null);
+  const labelRef = React.useRef(null);
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );

@@ -5,6 +5,7 @@ import {
   StyleProp,
   StyleSheet,
   TextStyle,
+  Text,
 } from 'react-native';
 
 import type { VariantProp } from './types';
@@ -12,7 +13,7 @@ import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 
-type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
+type Props<T> = React.ComponentPropsWithoutRef<typeof Animated.Text> & {
   /**
    * Variant defines appropriate text styles for type role and its size.
    * Available variants:
@@ -40,8 +41,8 @@ type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
  *
  * @extends Text props https://reactnative.dev/docs/text#props
  */
-const AnimatedText = forwardRef(function AnimatedText(
-  { style, theme: themeOverrides, variant, ...rest }: Props<never>,
+const AnimatedText = forwardRef<Text, Props<never>>(function AnimatedText(
+  { style, theme: themeOverrides, variant, ...rest },
   ref
 ) {
   const theme = useInternalTheme(themeOverrides);
