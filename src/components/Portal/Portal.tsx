@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import type { InternalTheme } from 'src/types';
+import type { InternalTheme } from '../../types';
 
 import PortalConsumer from './PortalConsumer';
 import PortalHost, { PortalContext, PortalMethods } from './PortalHost';
