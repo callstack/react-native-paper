@@ -17,6 +17,7 @@ import {
   StyleSheet,
   View,
   ViewStyle,
+  Text,
 } from 'react-native';
 
 import color from 'color';
@@ -231,7 +232,7 @@ const AnimatedFAB = ({
   const isAnimatedFromRight = animateFrom === 'right';
   const isIconStatic = iconMode === 'static';
   const { isRTL } = I18nManager;
-  const labelRef = React.useRef<HTMLElement | null>(null);
+  const labelRef = React.useRef<Text & HTMLElement>(null);
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
