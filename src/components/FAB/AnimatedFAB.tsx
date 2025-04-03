@@ -387,7 +387,7 @@ const AnimatedFAB = ({
               scale: visibility,
             },
           ],
-          borderRadius,
+          borderRadius: restStyle?.borderRadius || borderRadius,
         },
         !isV3 && {
           elevation: md2Elevation,
@@ -411,7 +411,7 @@ const AnimatedFAB = ({
             ],
           },
           styles.standard,
-          { borderRadius },
+          { borderRadius: restStyle?.borderRadius || borderRadius },
         ]}
       >
         <View style={[StyleSheet.absoluteFill, styles.shadowWrapper]}>
@@ -425,7 +425,7 @@ const AnimatedFAB = ({
                   inputRange: propForDirection([distance, 0.9 * distance, 0]),
                   outputRange: propForDirection([1, 0.15, 0]),
                 }),
-                borderRadius,
+                borderRadius: restStyle?.borderRadius || borderRadius,
               },
             ]}
             testID={`${testID}-extended-shadow`}
@@ -444,7 +444,8 @@ const AnimatedFAB = ({
                   inputRange: propForDirection([distance, 0]),
                   outputRange: propForDirection([
                     SIZE / (extendedWidth / SIZE),
-                    borderRadius,
+                    (restStyle?.borderRadius as number | undefined) ||
+                      borderRadius,
                   ]),
                 }),
               },
@@ -455,7 +456,10 @@ const AnimatedFAB = ({
         </View>
         <Animated.View
           pointerEvents="box-none"
-          style={[styles.innerWrapper, { borderRadius }]}
+          style={[
+            styles.innerWrapper,
+            { borderRadius: restStyle?.borderRadius || borderRadius },
+          ]}
         >
           <Animated.View
             style={[
@@ -463,7 +467,7 @@ const AnimatedFAB = ({
               {
                 width: extendedWidth,
                 backgroundColor,
-                borderRadius,
+                borderRadius: restStyle?.borderRadius || borderRadius,
               },
               combinedStyles.innerWrapper,
             ]}
@@ -480,7 +484,7 @@ const AnimatedFAB = ({
               accessibilityRole="button"
               accessibilityState={newAccessibilityState}
               testID={testID}
-              style={{ borderRadius }}
+              style={{ borderRadius: restStyle?.borderRadius || borderRadius }}
               theme={theme}
             >
               <View
