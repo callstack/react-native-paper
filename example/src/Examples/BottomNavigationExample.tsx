@@ -140,6 +140,13 @@ const BottomNavigationExample = ({ navigation }: Props) => {
             }}
             title="Scene animation: opacity"
           />
+          <Menu.Item
+            trailingIcon={sceneAnimation === 'opacity' ? 'check' : undefined}
+            onPress={() => {
+              setIndex(-1);
+            }}
+            title="Unselect menu items"
+          />
         </Menu>
       </Appbar.Header>
       <BottomNavigation

@@ -353,6 +353,9 @@ const BottomNavigation = <Route extends BaseRoute>({
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
   const { scale } = theme.animation;
+  const isValidIndex =
+    navigationState.index >= 0 &&
+    navigationState.index < navigationState.routes.length;
   const compact = compactProp ?? !theme.isV3;
   let shifting =
     shiftingProp ?? (theme.isV3 ? false : navigationState.routes.length > 3);
@@ -364,7 +367,9 @@ const BottomNavigation = <Route extends BaseRoute>({
     );
   }
 
-  const focusedKey = navigationState.routes[navigationState.index].key;
+  const focusedKey = isValidIndex
+    ? navigationState.routes[navigationState.index].key
+    : '';
 
   /**
    * Active state of individual tab item positions:
@@ -400,6 +405,7 @@ const BottomNavigation = <Route extends BaseRoute>({
 
   const animateToIndex = React.useCallback(
     (index: number) => {
+      if (index < 0 || index > navigationState.routes.length) return;
       Animated.parallel([
         ...navigationState.routes.map((_, i) =>
           Animated.timing(tabsPositionAnims[i], {

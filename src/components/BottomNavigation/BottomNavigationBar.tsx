@@ -456,6 +456,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
 
   const animateToIndex = React.useCallback(
     (index: number) => {
+      if (index < 0 || index > navigationState.routes.length) return;
       // Reset the ripple to avoid glitch if it's currently animating
       rippleAnim.setValue(MIN_RIPPLE_SCALE);
 
