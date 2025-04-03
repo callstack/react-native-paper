@@ -136,10 +136,10 @@ exports[`renders list item with custom description 1`] = `
               style={
                 {
                   "backgroundColor": "rgba(232, 222, 248, 1)",
-                  "borderColor": "rgba(121, 116, 126, 1)",
+                  "borderColor": "transparent",
                   "borderRadius": 8,
                   "borderStyle": "solid",
-                  "borderWidth": 0,
+                  "borderWidth": 1,
                   "flex": undefined,
                   "flexDirection": "column",
                   "shadowColor": "#000",

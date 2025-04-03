@@ -669,10 +669,7 @@ describe('getChipColor - border color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      borderColor: color(getTheme().colors.onSurfaceVariant)
-        .alpha(0.12)
-        .rgb()
-        .string(),
+      borderColor: 'transparent',
     });
   });
 
@@ -684,7 +681,7 @@ describe('getChipColor - border color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      borderColor: color('purple').alpha(0.29).rgb().string(),
+      borderColor: 'transparent',
     });
   });
 
@@ -695,7 +692,7 @@ describe('getChipColor - border color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.outline,
+      borderColor: 'transparent',
     });
   });
 
