@@ -6,6 +6,7 @@ import {
   Text as NativeText,
   TextStyle,
 } from 'react-native';
+import type { TextProps } from 'react-native';
 
 import AnimatedText from './AnimatedText';
 import type { VariantProp } from './types';
@@ -13,6 +14,8 @@ import StyledText from './v2/StyledText';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
+
+const TextContext = React.createContext<TextProps | null>(null);
 
 export type Props<T> = React.ComponentProps<typeof NativeText> & {
   /**
@@ -81,13 +84,14 @@ export type TextRef = React.ForwardedRef<{
  * @extends Text props https://reactnative.dev/docs/text#props
  */
 const Text = (
-  { style, variant, theme: initialTheme, ...rest }: Props<string>,
+  { style, variant, theme: initialTheme, children, ...rest }: Props<string>,
   ref: TextRef
 ) => {
   const root = React.useRef<NativeText | null>(null);
   // FIXME: destructure it in TS 4.6+
   const theme = useInternalTheme(initialTheme);
   const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
+  const parentTextContext = React.useContext(TextContext);
 
   React.useImperativeHandle(ref, () => ({
     setNativeProps: (args: Object) => root.current?.setNativeProps(args),
@@ -98,12 +102,12 @@ const Text = (
     let textStyle = [font, style];
 
     if (
-      React.isValidElement(rest.children) &&
-      (rest.children.type === Component ||
-        rest.children.type === AnimatedText ||
-        rest.children.type === StyledText)
+      React.isValidElement(children) &&
+      (children.type === Component ||
+        children.type === AnimatedText ||
+        children.type === StyledText)
     ) {
-      const { props } = rest.children;
+      const { props } = children;
 
       // Context:   Some components have the built-in `Text` component with a predefined variant,
       //            that also accepts `children` as a `React.Node`. This can result in a situation,
@@ -117,7 +121,7 @@ const Text = (
       //            specified in a parent in favor of children's variant:
       if (props.variant) {
         font = theme.fonts[props.variant as VariantProp<typeof props.variant>];
-        textStyle = [style, font];
+        textStyle = [style, props.style, font];
       }
 
       // Case two:  Nested `Text` has specified `styles` which intefere
@@ -149,7 +153,9 @@ const Text = (
           textStyle,
         ]}
         {...rest}
-      />
+      >
+        {children}
+      </NativeText>
     );
   } else {
     const font = theme.isV3 ? theme.fonts.default : theme.fonts?.regular;
@@ -157,12 +163,25 @@ const Text = (
       ...font,
       color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,
     };
+
+    if (parentTextContext) {
+      Object.assign(textStyle, StyleSheet.flatten(parentTextContext.style));
+    }
+
     return (
-      <NativeText
-        {...rest}
-        ref={root}
-        style={[styles.text, textStyle, { writingDirection }, style]}
-      />
+      <TextContext.Provider
+        value={{
+          style: [styles.text, textStyle, { writingDirection }, style],
+        }}
+      >
+        <NativeText
+          {...rest}
+          ref={root}
+          style={[styles.text, textStyle, { writingDirection }, style]}
+        >
+          {children}
+        </NativeText>
+      </TextContext.Provider>
     );
   }
 };
