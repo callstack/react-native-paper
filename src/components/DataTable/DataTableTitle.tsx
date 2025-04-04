@@ -3,6 +3,7 @@ import {
   Animated,
   GestureResponderEvent,
   I18nManager,
+  PixelRatio,
   Pressable,
   StyleProp,
   StyleSheet,
@@ -137,7 +138,7 @@ const DataTableTitle = ({
         style={[
           styles.cell,
           // height must scale with numberOfLines
-          { maxHeight: 24 * numberOfLines },
+          { maxHeight: 24 * PixelRatio.getFontScale() * numberOfLines },
           // if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
           numberOfLines > 1
             ? numeric
