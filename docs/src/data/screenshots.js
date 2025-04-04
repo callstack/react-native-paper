@@ -71,6 +71,7 @@ const screenshots = {
   'Drawer.CollapsedItem': 'screenshots/drawer-collapsed.png',
   'Drawer.Item': 'screenshots/drawer-item.png',
   'Drawer.Section': 'screenshots/drawer-section.png',
+  Dropdown: 'screenshots/dropdown-menu-android.gif',
   FAB: {
     'all variants': 'screenshots/fab-1.png',
     'all sizes': 'screenshots/fab-2.png',
