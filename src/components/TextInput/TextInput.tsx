@@ -294,6 +294,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
       isFocused: () => root.current?.isFocused() || false,
       blur: () => root.current?.blur(),
       forceFocus: () => root.current?.focus(),
+      setFocused: (focused: boolean) => root.current?.setFocused(focused)
     }));
 
     React.useEffect(() => {
