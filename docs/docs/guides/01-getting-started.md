@@ -51,6 +51,10 @@ module.exports = {
 };
 ```
 
+:::note
+For your next React Native project, consider using the [expo-react-native-paper](https://github.com/youzarsiph/expo-react-native-paper) template. This template utilizes Expo's routing for navigation, providing a streamlined development experience with Expo and React Native Paper.
+:::
+
 If you created your project using Expo, it'll look something like this:
 
 ```js
