@@ -24,7 +24,9 @@ import { splitStyles } from '../../utils/splitStyles';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  MouseEventType,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
@@ -118,6 +120,15 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   onLongPress?: (e: GestureResponderEvent) => void;
   /**
+   * Called when the hover is activated to provide visual feedback.
+   */
+  onHoverIn?: (e: MouseEventType) => void;
+
+  /**
+   * Called when the hover is deactivated to undo visual feedback.
+   */
+  onHoverOut?: (e: MouseEventType) => void;
+  /**
    * The number of milliseconds a user must touch the element before executing `onLongPress`.
    */
   delayLongPress?: number;
@@ -185,6 +196,8 @@ const Button = (
     onPressIn,
     onPressOut,
     onLongPress,
+    onHoverIn,
+    onHoverOut,
     delayLongPress,
     style,
     theme: themeOverrides,
@@ -348,6 +361,8 @@ const Button = (
         onLongPress={onLongPress}
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
         onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
+        onHoverIn={onHoverIn}
+        onHoverOut={onHoverOut}
         delayLongPress={delayLongPress}
         accessibilityLabel={accessibilityLabel}
         accessibilityHint={accessibilityHint}
