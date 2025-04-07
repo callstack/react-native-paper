@@ -186,6 +186,23 @@ it('renders FAB with uppercase styling if uppercase prop is truthy', () => {
   });
 });
 
+(['left', 'right'] as const).forEach((iconPosition) => {
+  it(`renders FAB with icon positioned to the ${iconPosition}`, () => {
+    const { getByTestId } = render(
+      <FAB
+        onPress={() => {}}
+        icon="plus"
+        iconPosition={iconPosition}
+        testID={`${iconPosition}-icon-fab`}
+      />
+    );
+
+    expect(getByTestId(`${iconPosition}-icon-fab-content`)).toHaveStyle({
+      flexDirection: iconPosition === 'left' ? 'row' : 'row-reverse',
+    });
+  });
+});
+
 describe('getFABColors - background color', () => {
   it('should return color from styles', () => {
     expect(
