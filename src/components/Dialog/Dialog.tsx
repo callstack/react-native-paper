@@ -33,6 +33,10 @@ export type Props = {
    */
   onDismiss?: () => void;
   /**
+   * Accessibility label for the overlay. This is read by the screen reader when the user taps outside the dialog.
+   */
+  overlayAccessibilityLabel?: string;
+  /**
    * Determines Whether the dialog is visible.
    */
   visible: boolean;
@@ -98,6 +102,7 @@ const Dialog = ({
   dismissable = true,
   dismissableBackButton = dismissable,
   onDismiss,
+  overlayAccessibilityLabel,
   visible = false,
   style,
   theme: themeOverrides,
@@ -122,6 +127,7 @@ const Dialog = ({
       dismissableBackButton={dismissableBackButton}
       onDismiss={onDismiss}
       visible={visible}
+      overlayAccessibilityLabel={overlayAccessibilityLabel}
       contentContainerStyle={[
         {
           borderRadius,
