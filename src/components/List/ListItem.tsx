@@ -246,6 +246,7 @@ const ListItem = (
             })
           : null}
         <View
+          accessible={true}
           style={[
             theme.isV3 ? styles.itemV3 : styles.item,
             styles.content,

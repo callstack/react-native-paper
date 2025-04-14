@@ -213,6 +213,7 @@ exports[`renders expanded accordion 1`] = `
       }
     >
       <View
+        accessible={true}
         style={
           [
             {
