@@ -20,7 +20,8 @@ module.exports = function (api) {
             ),
             // For development, we want to alias the library to the source
             [pak.name]: path.join(__dirname, '..', 'src'),
-            'react-native-vector-icons': '@expo/vector-icons', //Fixes issue with icons not showing up on web (I also had to add @expo/vector-icons to react-native-paper devDependencies)
+            '@react-native-vector-icons/material-icons':
+              '@expo/vector-icons/MaterialIcons', //Fixes issue with icons not showing up on web (I also had to add @expo/vector-icons to react-native-paper devDependencies)
           },
         },
       ],

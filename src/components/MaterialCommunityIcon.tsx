@@ -1,10 +1,11 @@
 import * as React from 'react';
+import { ComponentProps } from 'react';
 import { StyleSheet, Text, Platform, ViewProps, Role } from 'react-native';
 
 import { black } from '../styles/themes/v2/colors';
 
 export type IconProps = {
-  name: string;
+  name: ComponentProps<typeof MaterialCommunityIcons>['name'];
   color?: string;
   size: number;
   direction: 'rtl' | 'ltr';
@@ -24,7 +25,7 @@ type AccessibilityProps =
 
 let MaterialCommunityIcons: React.ComponentType<
   React.ComponentProps<
-    typeof import('react-native-vector-icons/MaterialCommunityIcons').default
+    typeof import('@react-native-vector-icons/material-icons').default
   > & {
     color: string;
     pointerEvents?: ViewProps['pointerEvents'];
@@ -34,7 +35,7 @@ let MaterialCommunityIcons: React.ComponentType<
 try {
   // Optionally require vector-icons
   MaterialCommunityIcons =
-    require('react-native-vector-icons/MaterialCommunityIcons').default;
+    require('@react-native-vector-icons/material-icons').default;
 } catch (e) {
   let isErrorLogged = false;
 
