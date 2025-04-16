@@ -14,7 +14,8 @@ jobs:
           required-packages: |
             react-native
             react-native-paper
-            react-native-vector-icons
+            @react-native-vector-icons/common
+            @react-native-vector-icons/material-design-icons
           optional-packages: |
             expo
             npm

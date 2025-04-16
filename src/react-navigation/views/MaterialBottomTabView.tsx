@@ -77,7 +77,7 @@ export default function MaterialBottomTabView({
           return (
             <MaterialCommunityIcon
               direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
-              name={options.tabBarIcon}
+              name={options.tabBarIcon as any}
               color={color}
               size={24}
             />

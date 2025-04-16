@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 
+import Icon from '@react-native-vector-icons/material-design-icons';
 import { useFonts } from 'expo-font';
 import {
   configureFonts,
@@ -16,7 +17,6 @@ import {
   MD3Colors,
   TextInput,
 } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { useExampleTheme } from '..';
 import { inputReducer, State } from '../../utils';

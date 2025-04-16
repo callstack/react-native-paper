@@ -2572,15 +2572,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-vector-icons/material-icons@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "@react-native-vector-icons/material-icons@npm:0.0.1"
+"@react-native-vector-icons/material-design-icons@npm:^7.4.47":
+  version: 7.4.47
+  resolution: "@react-native-vector-icons/material-design-icons@npm:7.4.47"
   dependencies:
     "@react-native-vector-icons/common": "npm:^11.0.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/0b36ab48ae70976fa5418bce89c9c4436159504fe707f7771051d0ec40ed9dc0791b35554a3b7d75b7d3b339f1f6551019f3fb358da48f1ec0a7ce3d54a517d4
+  checksum: 10c0/8c86c0310eb3ee7d7ea620edb0d346f1ab9b5a502f4c378447d57aa9656744b3944663cedb581cd7f9fa99d2dd26e50dbe8862662a368fc46de4b5413189453c
   languageName: node
   linkType: hard
 
@@ -10093,7 +10093,7 @@ __metadata:
     "@react-native-async-storage/async-storage": "npm:1.23.1"
     "@react-native-masked-view/masked-view": "npm:0.3.2"
     "@react-native-vector-icons/common": "npm:^11.0.0"
-    "@react-native-vector-icons/material-icons": "npm:^0.0.1"
+    "@react-native-vector-icons/material-design-icons": "npm:^7.4.47"
     "@react-navigation/bottom-tabs": "npm:^6.6.1"
     "@react-navigation/drawer": "npm:^6.7.2"
     "@react-navigation/native": "npm:^6.1.18"

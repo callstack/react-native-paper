@@ -2892,17 +2892,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/vector-icons@npm:^14.1.0":
-  version: 14.1.0
-  resolution: "@expo/vector-icons@npm:14.1.0"
-  peerDependencies:
-    expo-font: "*"
-    react: "*"
-    react-native: "*"
-  checksum: 10c0/f1dcea2c43c0808f48d1953395c6f8025ae5e811648e86b79158492c9ef8af7a40781e42844dfb1434242a08fcf6ab14886825eb2c79bad2a792aebd1eb5077c
-  languageName: node
-  linkType: hard
-
 "@humanwhocodes/config-array@npm:^0.11.8":
   version: 0.11.10
   resolution: "@humanwhocodes/config-array@npm:0.11.10"
@@ -3587,15 +3576,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-vector-icons/material-icons@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "@react-native-vector-icons/material-icons@npm:0.0.1"
+"@react-native-vector-icons/material-design-icons@npm:^7.4.47":
+  version: 7.4.47
+  resolution: "@react-native-vector-icons/material-design-icons@npm:7.4.47"
   dependencies:
     "@react-native-vector-icons/common": "npm:^11.0.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/0b36ab48ae70976fa5418bce89c9c4436159504fe707f7771051d0ec40ed9dc0791b35554a3b7d75b7d3b339f1f6551019f3fb358da48f1ec0a7ce3d54a517d4
+  checksum: 10c0/8c86c0310eb3ee7d7ea620edb0d346f1ab9b5a502f4c378447d57aa9656744b3944663cedb581cd7f9fa99d2dd26e50dbe8862662a368fc46de4b5413189453c
   languageName: node
   linkType: hard
 
@@ -13036,9 +13025,8 @@ __metadata:
     "@callstack/eslint-config": "npm:^13.0.2"
     "@callstack/react-theme-provider": "npm:^3.0.9"
     "@commitlint/config-conventional": "npm:^8.3.4"
-    "@expo/vector-icons": "npm:^14.1.0"
     "@react-native-vector-icons/common": "npm:^11.0.0"
-    "@react-native-vector-icons/material-icons": "npm:^0.0.1"
+    "@react-native-vector-icons/material-design-icons": "npm:^7.4.47"
     "@react-navigation/native": "npm:^6.1.2"
     "@release-it/conventional-changelog": "npm:^1.1.0"
     "@testing-library/jest-native": "npm:^5.4.1"
@@ -13081,6 +13069,8 @@ __metadata:
     typescript: "npm:5.0.4"
     use-latest-callback: "npm:^0.2.3"
   peerDependencies:
+    "@react-native-vector-icons/common": "*"
+    "@react-native-vector-icons/material-design-icons": "*"
     react: "*"
     react-native: "*"
     react-native-safe-area-context: "*"

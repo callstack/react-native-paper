@@ -25,7 +25,7 @@ type AccessibilityProps =
 
 let MaterialCommunityIcons: React.ComponentType<
   React.ComponentProps<
-    typeof import('@react-native-vector-icons/material-icons').default
+    typeof import('@react-native-vector-icons/material-design-icons').default
   > & {
     color: string;
     pointerEvents?: ViewProps['pointerEvents'];
@@ -35,7 +35,7 @@ let MaterialCommunityIcons: React.ComponentType<
 try {
   // Optionally require vector-icons
   MaterialCommunityIcons =
-    require('@react-native-vector-icons/material-icons').default;
+    require('@react-native-vector-icons/material-design-icons').default;
 } catch (e) {
   let isErrorLogged = false;
 

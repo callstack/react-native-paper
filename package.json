@@ -58,9 +58,8 @@
     "@babel/runtime": "^7.25.0",
     "@callstack/eslint-config": "^13.0.2",
     "@commitlint/config-conventional": "^8.3.4",
-    "@expo/vector-icons": "^14.1.0",
     "@react-native-vector-icons/common": "^11.0.0",
-    "@react-native-vector-icons/material-icons": "^0.0.1",
+    "@react-native-vector-icons/material-design-icons": "^7.4.47",
     "@react-navigation/native": "^6.1.2",
     "@release-it/conventional-changelog": "^1.1.0",
     "@testing-library/jest-native": "^5.4.1",
@@ -102,6 +101,8 @@
     "typescript": "5.0.4"
   },
   "peerDependencies": {
+    "@react-native-vector-icons/common": "*",
+    "@react-native-vector-icons/material-design-icons": "*",
     "react": "*",
     "react-native": "*",
     "react-native-safe-area-context": "*"

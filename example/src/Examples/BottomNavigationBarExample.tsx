@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import Icon from '@react-native-vector-icons/material-icons';
+import Icon from '@react-native-vector-icons/material-design-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CommonActions } from '@react-navigation/native';
 import { Text, BottomNavigation } from 'react-native-paper';
@@ -75,7 +75,7 @@ export default function BottomNavigationBarExample() {
         component={SettingsScreen}
         options={{
           tabBarIcon: ({ color, size }) => {
-            return <Icon name="settings" size={size} color={color} />;
+            return <Icon name="cog" size={size} color={color} />;
           },
         }}
       />

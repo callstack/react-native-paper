@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 
-// @ts-ignore
-import MaterialCommunityIcons from 'react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json';
-
 const icons: { [key in string]: number } = {
-  ...MaterialCommunityIcons,
+  ...require('../../node_modules/@react-native-vector-icons/material-design-icons/glyphmaps/MaterialDesignIcons.json'),
 };
 
 export default function IconsList() {
