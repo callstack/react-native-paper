@@ -181,6 +181,7 @@ const Button = (
     accessibilityLabel,
     accessibilityHint,
     accessibilityRole = 'button',
+    hitSlop,
     onPress,
     onPressIn,
     onPressOut,
@@ -354,6 +355,7 @@ const Button = (
         accessibilityRole={accessibilityRole}
         accessibilityState={{ disabled }}
         accessible={accessible}
+        hitSlop={hitSlop}
         disabled={disabled}
         rippleColor={rippleColor}
         style={touchableStyle}
