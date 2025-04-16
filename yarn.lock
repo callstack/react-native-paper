@@ -13209,7 +13209,7 @@ __metadata:
     release-it: "npm:^13.4.0"
     rimraf: "npm:^3.0.2"
     typescript: "npm:5.0.4"
-    use-latest-callback: "npm:^0.1.5"
+    use-latest-callback: "npm:^0.2.3"
   peerDependencies:
     react: "*"
     react-native: "*"
@@ -15624,6 +15624,15 @@ __metadata:
   peerDependencies:
     react: ">=16.8"
   checksum: 10c0/514604ad33cb2f040ad3ece8ee787cc549ec92135ee12ebc6857bb309eeacf5d66426b3b94089842e8215a252d5ca6f04b059387f681688fb70ac37b238209f9
+  languageName: node
+  linkType: hard
+
+"use-latest-callback@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "use-latest-callback@npm:0.2.3"
+  peerDependencies:
+    react: ">=16.8"
+  checksum: 10c0/dc87503f6279ce2980f78e1019231ba20d7509e9d17adac05285babe4d6ba6f68c52f4ef7b5ad777cbc2af9fbaaa09d7adb664ca556da0aebab9f020022880be
   languageName: node
   linkType: hard
 
