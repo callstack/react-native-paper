@@ -7,7 +7,6 @@ import {
   ParamListBase,
   Route,
   TabNavigationState,
-  useLinkBuilder,
 } from '@react-navigation/native';
 
 import BottomNavigation from '../../components/BottomNavigation/BottomNavigation';
@@ -17,6 +16,7 @@ import type {
   MaterialBottomTabNavigationConfig,
   MaterialBottomTabNavigationHelpers,
 } from '../types';
+import { useCompatibleLinkBuilder } from '../utils';
 
 type Props = MaterialBottomTabNavigationConfig & {
   state: TabNavigationState<ParamListBase>;
@@ -29,7 +29,7 @@ export default function MaterialBottomTabView({
   descriptors,
   ...rest
 }: Props) {
-  const buildLink = useLinkBuilder();
+  const buildLink = useCompatibleLinkBuilder();
 
   return (
     <BottomNavigation
