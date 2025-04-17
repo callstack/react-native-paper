@@ -138,13 +138,12 @@ const InputLabel = (props: InputLabelProps) => {
     // This gives the effect of animating the color, but allows us to use native driver
     <View
       pointerEvents="none"
-      style={[StyleSheet.absoluteFill, styles.overflow]}
+      style={[StyleSheet.absoluteFill, styles.overflow, styles.labelContainer]}
     >
       <Animated.View
         pointerEvents="none"
         style={[
           StyleSheet.absoluteFill,
-          styles.labelContainer,
           Platform.OS !== 'web' && { width },
           { opacity },
           labelTranslationX,

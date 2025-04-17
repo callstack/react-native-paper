@@ -270,8 +270,8 @@ const ListItem = (
   );
 };
 
+ListItem.displayName = 'List.Item';
 const Component = forwardRef(ListItem);
-Component.displayName = 'List.Item';
 
 const styles = StyleSheet.create({
   container: {

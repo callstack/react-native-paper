@@ -394,16 +394,17 @@ const Menu = ({
       await Promise.resolve().then(() => {
         if (display && !prevRendered.current) {
           show();
-        } else {
-          if (rendered) {
-            hide();
-          }
+          return;
+        }
+
+        if (!display && prevRendered.current) {
+          hide();
         }
 
         return;
       });
     },
-    [hide, show, rendered]
+    [hide, show]
   );
 
   React.useEffect(() => {
