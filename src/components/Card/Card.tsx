@@ -213,6 +213,10 @@ const Card = (
   ]);
 
   const runElevationAnimation = (pressType: HandlePressType) => {
+    if (isV3 && isMode('contained')) {
+      return;
+    }
+
     const isPressTypeIn = pressType === 'in';
     if (dark && isAdaptiveMode) {
       Animated.timing(elevationDarkAdaptive, {
