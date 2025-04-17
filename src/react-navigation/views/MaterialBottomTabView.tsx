@@ -29,6 +29,7 @@ export default function MaterialBottomTabView({
   descriptors,
   ...rest
 }: Props) {
+
   const buildLink = useCompatibleLinkBuilder();
 
   return (
@@ -40,34 +41,34 @@ export default function MaterialBottomTabView({
       renderTouchable={
         Platform.OS === 'web'
           ? ({
-              onPress,
-              route,
-              accessibilityRole: _0,
-              borderless: _1,
-              centered: _2,
-              rippleColor: _3,
-              style,
-              ...rest
-            }) => {
-              return (
-                <Link
-                  {...rest}
-                  // @ts-expect-error: to could be undefined, but it doesn't affect functionality
-                  to={buildLink(route.name, route.params)}
-                  accessibilityRole="link"
-                  onPress={(e: any) => {
-                    if (
-                      !(e.metaKey || e.altKey || e.ctrlKey || e.shiftKey) && // ignore clicks with modifier keys
-                      (e.button == null || e.button === 0) // ignore everything but left clicks
-                    ) {
-                      e.preventDefault();
-                      onPress?.(e);
-                    }
-                  }}
-                  style={[styles.touchable, style]}
-                />
-              );
-            }
+            onPress,
+            route,
+            accessibilityRole: _0,
+            borderless: _1,
+            centered: _2,
+            rippleColor: _3,
+            style,
+            ...rest
+          }) => {
+            return (
+              <Link
+                {...rest}
+                // @ts-expect-error: to could be undefined, but it doesn't affect functionality
+                to={buildLink(route.name, route.params)}
+                accessibilityRole="link"
+                onPress={(e: any) => {
+                  if (
+                    !(e.metaKey || e.altKey || e.ctrlKey || e.shiftKey) && // ignore clicks with modifier keys
+                    (e.button == null || e.button === 0) // ignore everything but left clicks
+                  ) {
+                    e.preventDefault();
+                    onPress?.(e);
+                  }
+                }}
+                style={[styles.touchable, style]}
+              />
+            );
+          }
           : undefined
       }
       renderIcon={({ route, focused, color }) => {
@@ -96,8 +97,8 @@ export default function MaterialBottomTabView({
         return options.tabBarLabel !== undefined
           ? options.tabBarLabel
           : options.title !== undefined
-          ? options.title
-          : (route as Route<string>).name;
+            ? options.title
+            : (route as Route<string>).name;
       }}
       getColor={({ route }) => descriptors[route.key].options.tabBarColor}
       getBadge={({ route }) => descriptors[route.key].options.tabBarBadge}
@@ -137,4 +138,4 @@ const styles = StyleSheet.create({
   },
 });
 
-function noop() {}
+function noop() { }
