@@ -18,17 +18,16 @@ Many components such as `Button` accept an `icon` prop which is used to display 
 
 ### 1. An icon name
 
-You can pass the name of an icon from [`MaterialCommunityIcons`](https://materialdesignicons.com). This will use the [`react-native-vector-icons`](https://github.com/oblador/react-native-vector-icons) library to display the icon.
+You can pass the name of an icon from [`MaterialDesignIcons`](https://pictogrammers.com/library/mdi/). This will use the [`@react-native-vector-icons/material-design-icons`](https://github.com/oblador/react-native-vector-icons/tree/master/packages/material-design-icons) library to display the icon.
 
 Example:
 
 ```js
-<Button icon="camera">
-  Press me
-</Button>
+<Button icon="camera">Press me</Button>
 ```
 
-<details><summary>See the list of supported icons</summary>
+<details>
+  <summary>See the list of supported icons</summary>
   <IconsList />
 </details>
 
@@ -39,7 +38,9 @@ You can pass an image source, such as an object of shape `{ uri: 'https://path.t
 Remote image:
 
 ```js
-<Button icon={{ uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400' }}>
+<Button
+  icon={{ uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400' }}
+>
   Press me
 </Button>
 ```
@@ -47,9 +48,7 @@ Remote image:
 Local image:
 
 ```js
-<Button icon={require('../assets/chameleon.jpg')}>
-  Press me
-</Button>
+<Button icon={require('../assets/chameleon.jpg')}>Press me</Button>
 ```
 
 ### 3. A render function
@@ -73,22 +72,22 @@ Example:
 
 ### 4. Use custom icons
 
-If you want to use icons other than `MaterialCommunityIcons` you need to import the icons and pass it to the `settings` prop within `PaperProvider`.
+If you want to use icons other than `MaterialDesignIcons` you need to import the icons and pass it to the `settings` prop within `PaperProvider`.
 
 Example:
 
 ```js
-import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import AwesomeIcon from '@react-native-vector-icons/fontawesome';
 // ...
 
-      <PaperProvider
-        settings={{
-          icon: props => <AwesomeIcon {...props} />,
-        }}
-        theme={this.state.theme}
-      >
-        // ...
-      </PaperProvider>
+<PaperProvider
+  settings={{
+    icon: (props) => <AwesomeIcon {...props} />,
+  }}
+  theme={this.state.theme}
+>
+  // ...
+</PaperProvider>;
 ```
 
 ## RTL support
@@ -102,7 +101,14 @@ If you want your icon to behave properly in a RTL environment, you can pass an o
 Example for using an image source:
 
 ```js
-<Button icon={{ source: { uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400' }, direction: 'rtl' }}>
+<Button
+  icon={{
+    source: {
+      uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',
+    },
+    direction: 'rtl',
+  }}
+>
   Press me
 </Button>
 ```
@@ -110,9 +116,7 @@ Example for using an image source:
 Example for using an icon name:
 
 ```js
-<Button icon={{ source: "add-a-photo", direction: 'rtl' }}>
-  Press me
-</Button>
+<Button icon={{ source: 'add-a-photo', direction: 'rtl' }}>Press me</Button>
 ```
 
 You can also use a render function. Along with `size` and `color`, you have access to `direction` which will either be `'rtl'` or `'ltr'`. You can then decide how to render your icon component accordingly.
@@ -131,8 +135,8 @@ Example of using a render function:
         {
           width: size,
           height: size,
-          tintColor: color
-        }
+          tintColor: color,
+        },
       ]}
     />
   )}

@@ -6,13 +6,13 @@ title: Getting Started
 
 ## Installation
 
-* Open a Terminal in your project's folder and run:
+- Open a Terminal in your project's folder and run:
 
 ```bash npm2yarn
 npm install react-native-paper
 ```
 
-* From `v5` there is a need to install [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) for handling safe area.
+- From `v5` there is a need to install [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) for handling safe area.
 
 ```bash npm2yarn
 npm install react-native-safe-area-context
@@ -24,12 +24,12 @@ Additionaly for `iOS` platform there is a requirement to link the native parts o
 npx pod-install
 ```
 
-* If you're on a vanilla React Native project, you also need to install and link [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons).
+- If you're on a vanilla React Native project, you also need to install and link [@react-native-vector-icons/common](https://github.com/oblador/react-native-vector-icons).
 
-Specifically `MaterialCommunityIcons` icon pack needs to be included in the project, because some components use those internally (e.g. `AppBar.BackAction` on Android). 
+Specifically `MaterialDesignIcons` icon pack needs to be included in the project, because some components use those internally (e.g. `AppBar.BackAction` on Android).
 
 ```bash npm2yarn
-npm install react-native-vector-icons
+npm install @react-native-vector-icons/common @react-native-vector-icons/material-design-icons
 ```
 
 The library has specified dedicated steps for each platform. Please follow their [installation guide](https://github.com/oblador/react-native-vector-icons#installation) in order to properly use icon fonts.
@@ -54,7 +54,7 @@ module.exports = {
 If you created your project using Expo, it'll look something like this:
 
 ```js
-module.exports = function(api) {
+module.exports = function (api) {
   api.cache(true);
   return {
     presets: ['babel-preset-expo'],
@@ -136,7 +136,10 @@ Example:
 
 ```js
 import * as React from 'react';
-import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
+import {
+  MD3LightTheme as DefaultTheme,
+  PaperProvider,
+} from 'react-native-paper';
 import App from './src/App';
 
 const theme = {
