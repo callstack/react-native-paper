@@ -40,7 +40,7 @@ const DURATION = 2400;
 
 /**
  * Activity indicator is used to present progress of some activity in the app.
- * It can be used as a drop-in for the ActivityIndicator shipped with React Native.
+ * It can be used as a drop-in replacement for the ActivityIndicator shipped with React Native.
  *
  * ## Usage
  * ```js

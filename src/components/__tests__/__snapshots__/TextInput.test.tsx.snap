@@ -62,6 +62,9 @@ exports[`call onPress when affix adornment pressed 1`] = `
           {
             "overflow": "hidden",
           },
+          {
+            "zIndex": 3,
+          },
         ]
       }
     >
@@ -82,7 +85,6 @@ exports[`call onPress when affix adornment pressed 1`] = `
               },
             ],
             "width": 750,
-            "zIndex": 3,
           }
         }
       >
@@ -358,6 +360,9 @@ exports[`correctly applies a component as the text label 1`] = `
           {
             "overflow": "hidden",
           },
+          {
+            "zIndex": 3,
+          },
         ]
       }
     >
@@ -378,7 +383,6 @@ exports[`correctly applies a component as the text label 1`] = `
               },
             ],
             "width": 750,
-            "zIndex": 3,
           }
         }
       >
@@ -598,6 +602,9 @@ exports[`correctly applies cursorColor prop 1`] = `
           {
             "overflow": "hidden",
           },
+          {
+            "zIndex": 3,
+          },
         ]
       }
     >
@@ -618,7 +625,6 @@ exports[`correctly applies cursorColor prop 1`] = `
               },
             ],
             "width": 750,
-            "zIndex": 3,
           }
         }
       >
@@ -822,6 +828,9 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
           {
             "overflow": "hidden",
           },
+          {
+            "zIndex": 3,
+          },
         ]
       }
     >
@@ -842,7 +851,6 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
               },
             ],
             "width": 750,
-            "zIndex": 3,
           }
         }
       >
@@ -1039,6 +1047,9 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
           {
             "overflow": "hidden",
           },
+          {
+            "zIndex": 3,
+          },
         ]
       }
     >
@@ -1059,7 +1070,6 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
               },
             ],
             "width": 750,
-            "zIndex": 3,
           }
         }
       >
@@ -1303,6 +1313,9 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
           {
             "overflow": "hidden",
           },
+          {
+            "zIndex": 3,
+          },
         ]
       }
     >
@@ -1323,7 +1336,6 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
               },
             ],
             "width": 750,
-            "zIndex": 3,
           }
         }
       >
@@ -1529,6 +1541,9 @@ exports[`correctly applies textAlign center 1`] = `
           {
             "overflow": "hidden",
           },
+          {
+            "zIndex": 3,
+          },
         ]
       }
     >
@@ -1549,7 +1564,6 @@ exports[`correctly applies textAlign center 1`] = `
               },
             ],
             "width": 750,
-            "zIndex": 3,
           }
         }
       >
@@ -1753,6 +1767,9 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
           {
             "overflow": "hidden",
           },
+          {
+            "zIndex": 3,
+          },
         ]
       }
     >
@@ -1773,7 +1790,6 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
               },
             ],
             "width": 750,
-            "zIndex": 3,
           }
         }
       >
@@ -2179,6 +2195,9 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           {
             "overflow": "hidden",
           },
+          {
+            "zIndex": 3,
+          },
         ]
       }
     >
@@ -2199,7 +2218,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
               },
             ],
             "width": 750,
-            "zIndex": 3,
           }
         }
       >

@@ -1,4 +1,11 @@
-import { Animated, ColorValue, I18nManager, ViewStyle } from 'react-native';
+import { MutableRefObject } from 'react';
+import {
+  Animated,
+  ColorValue,
+  I18nManager,
+  Platform,
+  ViewStyle,
+} from 'react-native';
 
 import color from 'color';
 
@@ -427,4 +434,41 @@ export const getExtendedFabStyle = ({
   const { isV3 } = theme;
 
   return isV3 ? v3Extended : extended;
+};
+
+let cachedContext: CanvasRenderingContext2D | null = null;
+
+const getCanvasContext = () => {
+  if (cachedContext) {
+    return cachedContext;
+  }
+
+  const canvas = document.createElement('canvas');
+  cachedContext = canvas.getContext('2d');
+
+  return cachedContext;
+};
+
+export const getLabelSizeWeb = (ref: MutableRefObject<HTMLElement | null>) => {
+  if (Platform.OS !== 'web' || ref.current === null) {
+    return null;
+  }
+
+  const canvasContext = getCanvasContext();
+
+  if (!canvasContext) {
+    return null;
+  }
+
+  const elementStyles = window.getComputedStyle(ref.current);
+  canvasContext.font = elementStyles.font;
+
+  const metrics = canvasContext.measureText(ref.current.innerText);
+
+  return {
+    width: metrics.width,
+    height:
+      (metrics.fontBoundingBoxAscent ?? 0) +
+      (metrics.fontBoundingBoxDescent ?? 0),
+  };
 };
