@@ -23,7 +23,7 @@ import MaterialBottomTabView from '../views/MaterialBottomTabView';
 
 export type MaterialBottomTabNavigatorProps = DefaultNavigatorOptions<
   ParamListBase,
-  undefined,
+  string | undefined,
   TabNavigationState<ParamListBase>,
   MaterialBottomTabNavigationOptions,
   MaterialBottomTabNavigationEventMap,
