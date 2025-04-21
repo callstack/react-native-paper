@@ -63,26 +63,29 @@ export const getTheme = <
 };
 
 // eslint-disable-next-line no-redeclare
-export function adaptNavigationTheme(themes: {
-  reactNavigationLight: NavigationTheme;
+export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
+  reactNavigationLight: T;
   materialLight?: MD3Theme;
 }): {
   LightTheme: NavigationTheme;
 };
 // eslint-disable-next-line no-redeclare
-export function adaptNavigationTheme(themes: {
-  reactNavigationDark: NavigationTheme;
+export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
+  reactNavigationDark: T;
   materialDark?: MD3Theme;
 }): {
   DarkTheme: NavigationTheme;
 };
 // eslint-disable-next-line no-redeclare
-export function adaptNavigationTheme(themes: {
-  reactNavigationLight: NavigationTheme;
-  reactNavigationDark: NavigationTheme;
+export function adaptNavigationTheme<
+  TLight extends NavigationTheme,
+  TDark extends NavigationTheme
+>(themes: {
+  reactNavigationLight: TLight;
+  reactNavigationDark: TDark;
   materialLight?: MD3Theme;
   materialDark?: MD3Theme;
-}): { LightTheme: NavigationTheme; DarkTheme: NavigationTheme };
+}): { LightTheme: TLight; DarkTheme: TDark };
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme(themes: any) {
   const {
@@ -92,66 +95,41 @@ export function adaptNavigationTheme(themes: any) {
     materialDark,
   } = themes;
 
-  const getAdaptedTheme = (
-    navigationTheme: NavigationTheme,
-    MD3Theme: MD3Theme
-  ) => {
-    return {
-      ...navigationTheme,
-      colors: {
-        ...navigationTheme.colors,
-        primary: MD3Theme.colors.primary,
-        background: MD3Theme.colors.background,
-        card: MD3Theme.colors.elevation.level2,
-        text: MD3Theme.colors.onSurface,
-        border: MD3Theme.colors.outline,
-        notification: MD3Theme.colors.error,
-      },
-    };
-  };
-
   const MD3Themes = {
     light: materialLight || MD3LightTheme,
     dark: materialDark || MD3DarkTheme,
   };
 
-  if (reactNavigationLight && reactNavigationDark) {
-    const modes = ['light', 'dark'] as const;
+  const result: { LightTheme?: any; DarkTheme?: any } = {};
 
-    const NavigationThemes = {
-      light: reactNavigationLight,
-      dark: reactNavigationDark,
-    };
-
-    const { light: adaptedLight, dark: adaptedDark } = modes.reduce(
-      (prev, curr) => {
-        return {
-          ...prev,
-          [curr]: getAdaptedTheme(NavigationThemes[curr], MD3Themes[curr]),
-        };
-      },
-      {
-        light: reactNavigationLight,
-        dark: reactNavigationDark,
-      }
-    );
-
-    return {
-      LightTheme: adaptedLight,
-      DarkTheme: adaptedDark,
-    };
+  if (reactNavigationLight) {
+    result.LightTheme = getAdaptedTheme(reactNavigationLight, MD3Themes.light);
   }
 
   if (reactNavigationDark) {
-    return {
-      DarkTheme: getAdaptedTheme(reactNavigationDark, MD3Themes.dark),
-    };
+    result.DarkTheme = getAdaptedTheme(reactNavigationDark, MD3Themes.dark);
   }
 
-  return {
-    LightTheme: getAdaptedTheme(reactNavigationLight, MD3Themes.light),
-  };
+  return result;
 }
+
+const getAdaptedTheme = <T extends NavigationTheme>(
+  theme: T,
+  materialTheme: MD3Theme
+): T => {
+  return {
+    ...theme,
+    colors: {
+      ...theme.colors,
+      primary: materialTheme.colors.primary,
+      background: materialTheme.colors.background,
+      card: materialTheme.colors.elevation.level2,
+      text: materialTheme.colors.onSurface,
+      border: materialTheme.colors.outline,
+      notification: materialTheme.colors.error,
+    },
+  } as T;
+};
 
 export const getDynamicThemeElevations = (scheme: MD3AndroidColors) => {
   const elevationValues = ['transparent', 0.05, 0.08, 0.11, 0.12, 0.14];
