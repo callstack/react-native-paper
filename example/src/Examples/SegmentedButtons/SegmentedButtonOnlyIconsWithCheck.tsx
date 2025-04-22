@@ -10,7 +10,7 @@ const SegmentedButtonOnlyIconsWithCheck = () => {
 
   return (
     <List.Section title={`Segmented Button - icons + show selected check`}>
-      <SegmentedButtons<TransportMode>
+      <SegmentedButtons
         onValueChange={setValue}
         style={styles.group}
         value={value}

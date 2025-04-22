@@ -20,7 +20,7 @@ const SegmentButtonCustomColorCheck = () => {
   return (
     <List.Section title={`Segmented Button - Custom Colors`}>
       <List.Subheader>Via Theme</List.Subheader>
-      <SegmentedButtons<TransportMode>
+      <SegmentedButtons
         value={themeValue}
         onValueChange={setThemeValue}
         theme={themeMock}

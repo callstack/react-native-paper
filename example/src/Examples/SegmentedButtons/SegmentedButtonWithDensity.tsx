@@ -10,7 +10,7 @@ const SegmentedButtonWithDensity = () => {
 
   return (
     <List.Section title={`Segmented Button - only labels + density`}>
-      <SegmentedButtons<TransportMode>
+      <SegmentedButtons
         onValueChange={setValue}
         value={value}
         density="medium"

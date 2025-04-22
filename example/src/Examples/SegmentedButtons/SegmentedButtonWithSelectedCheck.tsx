@@ -10,7 +10,7 @@ const SegmentedButtonWithSelectedCheck = () => {
 
   return (
     <List.Section title={`Segmented Button - show selected check`}>
-      <SegmentedButtons<TransportMode>
+      <SegmentedButtons
         onValueChange={setValue}
         value={value}
         style={styles.group}
@@ -24,7 +24,7 @@ const SegmentedButtonWithSelectedCheck = () => {
           },
           {
             icon: 'train',
-            value: 'transit',
+            value: 'train',
             label: 'Transit',
             showSelectedCheck: true,
             style: styles.button,

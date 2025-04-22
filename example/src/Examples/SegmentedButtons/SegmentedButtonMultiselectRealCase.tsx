@@ -12,14 +12,15 @@ const SegmentedButtonMultiselectRealCase = () => {
 
   const filteredData = React.useMemo(
     () =>
-      value.includes(item.price.toString() as PriceRange)
-    ),
+      restaurantsData.filter((item) =>
+        value.includes(item.price.toString() as PriceRange)
+      ),
     [value]
   );
 
   return (
     <View style={styles.container}>
-      <SegmentedButtons<PriceRange>
+      <SegmentedButtons
         value={value}
         onValueChange={setValue}
         multiSelect

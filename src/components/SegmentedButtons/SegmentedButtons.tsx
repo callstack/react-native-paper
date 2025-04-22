@@ -15,7 +15,7 @@ import { getDisabledSegmentedButtonStyle } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 
-type ConditionalValue<T> =
+type ConditionalValue<T extends string = string> =
   | {
       /**
        * Array of the currently selected segmented button values.
@@ -45,7 +45,7 @@ type ConditionalValue<T> =
       onValueChange: (value: T) => void;
     };
 
-export type Props<T> = {
+export type Props<T extends string = string> = {
   /**
    * Buttons to display as options in toggle button.
    * Button should contain the following properties:
@@ -126,7 +126,7 @@ export type Props<T> = {
  * export default MyComponent;
  *```
  */
-const SegmentedButtons = <T,>({
+const SegmentedButtons = <T extends string = string>({
   value,
   onValueChange,
   buttons,

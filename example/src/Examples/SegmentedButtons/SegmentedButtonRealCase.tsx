@@ -12,7 +12,7 @@ const SegmentedButtonRealCase = () => {
 
   return (
     <View style={styles.container}>
-      <SegmentedButtons<MediaType>
+      <SegmentedButtons
         value={value}
         onValueChange={setValue}
         buttons={[

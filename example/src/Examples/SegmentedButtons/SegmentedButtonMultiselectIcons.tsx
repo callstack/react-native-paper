@@ -10,7 +10,7 @@ const SegmentedButtonMultiselectIcons = () => {
 
   return (
     <List.Section title={`Segmented Button - multiselect only icons`}>
-      <SegmentedButtons<Size>
+      <SegmentedButtons
         multiSelect
         onValueChange={setValue}
         value={value}

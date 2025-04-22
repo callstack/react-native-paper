@@ -10,7 +10,7 @@ const SegmentedButtonDefault = () => {
 
   return (
     <List.Section title={`Segmented Button`}>
-      <SegmentedButtons<TransportMode>
+      <SegmentedButtons
         value={value}
         onValueChange={setValue}
         buttons={[
