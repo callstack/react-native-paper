@@ -184,7 +184,7 @@ interface CompoundedComponent
 
 type TextInputHandles = Pick<
   NativeTextInput,
-  'focus' | 'clear' | 'blur' | 'isFocused' | 'setNativeProps'
+  'focus' | 'clear' | 'blur' | 'isFocused' | 'setNativeProps' | 'setSelection'
 >;
 
 const DefaultRenderer = (props: RenderProps) => <NativeTextInput {...props} />;
@@ -294,6 +294,8 @@ const TextInput = forwardRef<TextInputHandles, Props>(
       isFocused: () => root.current?.isFocused() || false,
       blur: () => root.current?.blur(),
       forceFocus: () => root.current?.focus(),
+      setSelection: (start: number, end: number) =>
+        root.current?.setSelection(start, end),
     }));
 
     React.useEffect(() => {
