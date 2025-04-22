@@ -14,6 +14,7 @@ import type {
   MD3Theme,
   MD3AndroidColors,
   NavigationTheme,
+  NavigationFonts,
 } from '../types';
 
 export const DefaultTheme = MD3LightTheme;
@@ -117,7 +118,7 @@ const getAdaptedTheme = <T extends NavigationTheme>(
   theme: T,
   materialTheme: MD3Theme
 ): T => {
-  return {
+  const base = {
     ...theme,
     colors: {
       ...theme.colors,
@@ -128,7 +129,35 @@ const getAdaptedTheme = <T extends NavigationTheme>(
       border: materialTheme.colors.outline,
       notification: materialTheme.colors.error,
     },
-  } as T;
+  };
+
+  if ('fonts' in theme) {
+    const navigationFonts = theme.fonts as NavigationFonts;
+    return {
+      ...base,
+      fonts: {
+        ...navigationFonts,
+        regular: {
+          ...navigationFonts.regular,
+          fontFamily: materialTheme.fonts.default.fontFamily,
+        },
+        medium: {
+          ...navigationFonts.medium,
+          fontFamily: materialTheme.fonts.default.fontFamily,
+        },
+        bold: {
+          ...navigationFonts.bold,
+          fontFamily: materialTheme.fonts.default.fontFamily,
+        },
+        heavy: {
+          ...navigationFonts.heavy,
+          fontFamily: materialTheme.fonts.default.fontFamily,
+        },
+      },
+    };
+  }
+
+  return base;
 };
 
 export const getDynamicThemeElevations = (scheme: MD3AndroidColors) => {
