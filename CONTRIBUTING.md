@@ -10,7 +10,7 @@ The core team works directly on GitHub and all work is public.
 
 ### Development workflow
 
-> **Working on your first pull request?** You can learn how from this *free* series: [How to Contribute to an Open Source Project on GitHub](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github).
+> **Working on your first pull request?** You can learn how from this _free_ series: [How to Contribute to an Open Source Project on GitHub](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github).
 
 1. Fork the repo and create your branch from `main` (a guide on [how to fork a repository](https://help.github.com/articles/fork-a-repo/)).
 2. Run `yarn bootstrap` on the root level, to setup the development environment.
@@ -20,13 +20,13 @@ The core team works directly on GitHub and all work is public.
 
 We follow the [conventional commits specification](https://www.conventionalcommits.org/en) for our commit messages:
 
-* `fix`: bug fixes, e.g. fix Button color on DarkTheme.
-* `feat`: new features, e.g. add Snackbar component.
-* `refactor`: code refactor, e.g. new folder structure for components.
-* `docs`: changes into documentation, e.g. add usage example for Button.
-* `test`: adding or updating tests, eg unit, snapshot testing.
-* `chore`: tooling changes, e.g. change circleci config.
-* `BREAKING CHANGE`: for changes that break existing usage, e.g. change API of a component.
+- `fix`: bug fixes, e.g. fix Button color on DarkTheme.
+- `feat`: new features, e.g. add Snackbar component.
+- `refactor`: code refactor, e.g. new folder structure for components.
+- `docs`: changes into documentation, e.g. add usage example for Button.
+- `test`: adding or updating tests, eg unit, snapshot testing.
+- `chore`: tooling changes, e.g. change circleci config.
+- `BREAKING CHANGE`: for changes that break existing usage, e.g. change API of a component.
 
 Our pre-commit hooks verify that your commit message matches this format when committing.
 
@@ -34,31 +34,31 @@ Our pre-commit hooks verify that your commit message matches this format when co
 
 We use `typescript` for type checking, `eslint` with `prettier` for linting and formatting the code, and `jest` for testing. Our pre-commit hooks verify that the linter and tests pass when commiting. You can also run the following commands manually:
 
-* `yarn typescript`: type-check files with `tsc`.
-* `yarn lint`: lint files with `eslint` and `prettier`.
-* `yarn test`: run unit tests with `jest`.
+- `yarn typescript`: type-check files with `tsc`.
+- `yarn lint`: lint files with `eslint` and `prettier`.
+- `yarn test`: run unit tests with `jest`.
 
 ### Sending a pull request
 
 When you're sending a pull request:
 
-* Prefer small pull requests focused on one change.
-* Verify that `typescript`, `eslint` and all tests are passing.
-* Preview the documentation to make sure it looks good.
-* Follow the pull request template when opening a pull request.
+- Prefer small pull requests focused on one change.
+- Verify that `typescript`, `eslint` and all tests are passing.
+- Preview the documentation to make sure it looks good.
+- Follow the pull request template when opening a pull request.
 
 When you're working on a component:
 
-* Follow the guidelines described in the [official material design docs](https://material.io/guidelines/).
-* Write a brief description of every prop when defining `type Props` to aid with documentation.
-* Provide an example usage for the component (check other components to get a idea).
-* Update the type definitions for Flow and TypeScript if you changed an API or added a component.
+- Follow the guidelines described in the [official material design docs](https://material.io/guidelines/).
+- Write a brief description of every prop when defining `type Props` to aid with documentation.
+- Provide an example usage for the component (check other components to get a idea).
+- Update the type definitions for Flow and TypeScript if you changed an API or added a component.
 
 ### Running the example
 
 The example app uses [Expo](https://expo.dev/) for the React Native example. You will need to install the Expo app for [Android](https://play.google.com/store/apps/details?id=host.exp.exponent) and [iOS](https://itunes.apple.com/app/apple-store/id982107779) to start developing.
 
-After you're done, you can run `yarn example start` in the project root (or `expo start` in the `example/` folder) and scan the QR code to launch it on your device.
+After you're done, you can run `yarn example start` in the project root (or `npx expo start` in the `example/` folder) and scan the QR code to launch it on your device.
 
 To run the example on web, run `yarn example web` in the project root.
 
