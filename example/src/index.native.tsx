@@ -4,33 +4,31 @@ import { I18nManager } from 'react-native';
 import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import {
-  InitialState,
-  NavigationContainer,
-  DarkTheme as NavigationDarkTheme,
-  DefaultTheme as NavigationDefaultTheme,
-} from '@react-navigation/native';
+import { InitialState, NavigationContainer } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { useKeepAwake } from 'expo-keep-awake';
 import { StatusBar } from 'expo-status-bar';
 import * as Updates from 'expo-updates';
 import {
-  Provider as PaperProvider,
-  MD3DarkTheme,
-  MD3LightTheme,
+  PaperProvider,
   MD2DarkTheme,
   MD2LightTheme,
+  MD3DarkTheme,
+  MD3LightTheme,
   MD2Theme,
   MD3Theme,
   useTheme,
-  adaptNavigationTheme,
-  configureFonts,
 } from 'react-native-paper';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 import DrawerItems from './DrawerItems';
 import App from './RootNavigator';
 import { deviceColorsSupported } from '../utils';
+import {
+  CombinedDefaultTheme,
+  CombinedDarkTheme,
+  createConfiguredFontTheme,
+} from '../utils/themes';
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
@@ -192,38 +190,8 @@ export default function PaperExample() {
     return null;
   }
 
-  const { LightTheme, DarkTheme } = adaptNavigationTheme({
-    reactNavigationLight: NavigationDefaultTheme,
-    reactNavigationDark: NavigationDarkTheme,
-  });
-
-  const CombinedDefaultTheme = {
-    ...MD3LightTheme,
-    ...LightTheme,
-    colors: {
-      ...MD3LightTheme.colors,
-      ...LightTheme.colors,
-    },
-  };
-
-  const CombinedDarkTheme = {
-    ...MD3DarkTheme,
-    ...DarkTheme,
-    colors: {
-      ...MD3DarkTheme.colors,
-      ...DarkTheme.colors,
-    },
-  };
-
   const combinedTheme = isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme;
-  const configuredFontTheme = {
-    ...combinedTheme,
-    fonts: configureFonts({
-      config: {
-        fontFamily: 'Abel',
-      },
-    }),
-  };
+  const configuredFontTheme = createConfiguredFontTheme(combinedTheme);
 
   return (
     <PaperProvider
