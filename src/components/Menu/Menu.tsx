@@ -20,8 +20,9 @@ import {
   Pressable,
 } from 'react-native';
 
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import MenuItem from './MenuItem';
-import { APPROX_STATUSBAR_HEIGHT } from '../../constants';
 import { useInternalTheme } from '../../core/theming';
 import type { MD3Elevation, ThemeProp } from '../../types';
 import { ElevationLevels } from '../../types';
@@ -182,7 +183,7 @@ const isBrowser = () => Platform.OS === 'web' && 'document' in global;
 
 const Menu = ({
   visible,
-  statusBarHeight = APPROX_STATUSBAR_HEIGHT,
+  statusBarHeight,
   overlayAccessibilityLabel = 'Close menu',
   testID = 'menu',
   anchor,
@@ -197,6 +198,7 @@ const Menu = ({
   keyboardShouldPersistTaps,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const insets = useSafeAreaInsets();
   const [rendered, setRendered] = React.useState(visible);
   const [left, setLeft] = React.useState(0);
   const [top, setTop] = React.useState(0);
@@ -444,7 +446,7 @@ const Menu = ({
 
   // I don't know why but on Android measure function is wrong by 24
   const additionalVerticalValue = Platform.select({
-    android: statusBarHeight,
+    android: statusBarHeight ?? insets.top,
     default: 0,
   });
 
