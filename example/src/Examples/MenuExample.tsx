@@ -153,7 +153,7 @@ const MenuExample = ({ navigation }: Props) => {
             anchorPosition="bottom"
             anchor={
               <Button mode="outlined" onPress={_toggleMenu('menu5')}>
-                Menu with anchor position
+                Menu with anchor position bottom
               </Button>
             }
           >
