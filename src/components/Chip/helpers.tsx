@@ -21,6 +21,11 @@ const getBorderColor = ({
   const isSelectedColor = selectedColor !== undefined;
 
   if (theme.isV3) {
+    if (!isOutlined) {
+      // If the Chip mode is "flat", set border color to transparent
+      return 'transparent';
+    }
+
     if (disabled) {
       return color(theme.colors.onSurfaceVariant).alpha(0.12).rgb().string();
     }

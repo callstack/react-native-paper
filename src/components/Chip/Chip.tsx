@@ -295,8 +295,7 @@ const Chip = ({
     <Surface
       style={[
         styles.container,
-        isV3 &&
-          (isOutlined ? styles.md3OutlineContainer : styles.md3FlatContainer),
+        isV3 && styles.md3Container,
         !theme.isV3 && {
           elevation: elevationStyle,
         },
@@ -440,11 +439,8 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     flexDirection: Platform.select({ default: 'column', web: 'row' }),
   },
-  md3OutlineContainer: {
+  md3Container: {
     borderWidth: 1,
-  },
-  md3FlatContainer: {
-    borderWidth: 0,
   },
   content: {
     flexDirection: 'row',
