@@ -175,9 +175,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                       "flexGrow": 1,
                       "justifyContent": "center",
                     },
-                    {
-                      "borderRadius": 20,
-                    },
+                    undefined,
                   ],
                 ]
               }
@@ -368,9 +366,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                         "flexGrow": 1,
                         "justifyContent": "center",
                       },
-                      {
-                        "borderRadius": 20,
-                      },
+                      undefined,
                     ],
                   ]
                 }
@@ -560,9 +556,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -803,9 +797,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }

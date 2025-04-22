@@ -101,9 +101,7 @@ exports[`renders disabled icon button 1`] = `
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            {
-              "borderRadius": 20,
-            },
+            undefined,
           ],
         ]
       }
@@ -246,9 +244,7 @@ exports[`renders icon button by default 1`] = `
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            {
-              "borderRadius": 20,
-            },
+            undefined,
           ],
         ]
       }
@@ -391,9 +387,7 @@ exports[`renders icon button with color 1`] = `
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            {
-              "borderRadius": 20,
-            },
+            undefined,
           ],
         ]
       }
@@ -536,9 +530,7 @@ exports[`renders icon button with size 1`] = `
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            {
-              "borderRadius": 23,
-            },
+            undefined,
           ],
         ]
       }
@@ -681,9 +673,7 @@ exports[`renders icon change animated 1`] = `
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            {
-              "borderRadius": 20,
-            },
+            undefined,
           ],
         ]
       }

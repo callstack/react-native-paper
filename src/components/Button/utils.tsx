@@ -1,9 +1,10 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, type ViewStyle } from 'react-native';
 
 import color from 'color';
 
 import { black, white } from '../../styles/themes/v2/colors';
 import type { InternalTheme } from '../../types';
+import { splitStyles } from '../../utils/splitStyles';
 
 export type ButtonMode =
   | 'text'
@@ -229,4 +230,43 @@ export const getButtonColors = ({
     textColor,
     borderWidth,
   };
+};
+
+type ViewStyleBorderRadiusStyles = Partial<
+  Pick<
+    ViewStyle,
+    | 'borderBottomEndRadius'
+    | 'borderBottomLeftRadius'
+    | 'borderBottomRightRadius'
+    | 'borderBottomStartRadius'
+    | 'borderTopEndRadius'
+    | 'borderTopLeftRadius'
+    | 'borderTopRightRadius'
+    | 'borderTopStartRadius'
+    | 'borderRadius'
+  >
+>;
+export const getButtonTouchableRippleStyle = (
+  style?: ViewStyle,
+  borderWidth: number = 0
+): ViewStyleBorderRadiusStyles => {
+  if (!style) return {};
+  const touchableRippleStyle: ViewStyleBorderRadiusStyles = {};
+
+  const [, borderRadiusStyles] = splitStyles(
+    style,
+    (style) => style.startsWith('border') && style.endsWith('Radius')
+  );
+
+  (
+    Object.keys(borderRadiusStyles) as Array<keyof ViewStyleBorderRadiusStyles>
+  ).forEach((key) => {
+    const value = style[key as keyof ViewStyleBorderRadiusStyles];
+    if (typeof value === 'number') {
+      // Only subtract borderWidth if value is greater than 0
+      const radius = value > 0 ? value - borderWidth : 0;
+      touchableRippleStyle[key as keyof ViewStyleBorderRadiusStyles] = radius;
+    }
+  });
+  return touchableRippleStyle;
 };
