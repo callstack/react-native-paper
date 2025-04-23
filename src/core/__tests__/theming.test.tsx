@@ -55,6 +55,28 @@ const AppCustomDarkTheme = {
   },
 };
 
+const NavigationThemeWithFonts = {
+  ...NavigationLightTheme,
+  fonts: {
+    regular: {
+      fontFamily: 'System',
+      fontWeight: '400',
+    },
+    medium: {
+      fontFamily: 'System',
+      fontWeight: '500',
+    },
+    bold: {
+      fontFamily: 'System',
+      fontWeight: '700',
+    },
+    heavy: {
+      fontFamily: 'System',
+      fontWeight: '800',
+    },
+  },
+};
+
 describe('adaptNavigationTheme', () => {
   it('should return adapted both navigation themes', () => {
     const themes = adaptNavigationTheme({
@@ -197,5 +219,53 @@ describe('adaptNavigationTheme', () => {
         notification: colors.error,
       },
     });
+  });
+
+  it('should adapt navigation theme with fonts', () => {
+    const { LightTheme } = adaptNavigationTheme({
+      reactNavigationLight: NavigationThemeWithFonts,
+    });
+
+    expect(LightTheme).toMatchObject({
+      ...NavigationThemeWithFonts,
+      colors: {
+        ...NavigationThemeWithFonts.colors,
+        primary: MD3LightTheme.colors.primary,
+        background: MD3LightTheme.colors.background,
+        card: MD3LightTheme.colors.elevation.level2,
+        text: MD3LightTheme.colors.onSurface,
+        border: MD3LightTheme.colors.outline,
+        notification: MD3LightTheme.colors.error,
+      },
+      fonts: {
+        ...NavigationThemeWithFonts.fonts,
+        regular: {
+          ...NavigationThemeWithFonts.fonts.regular,
+          fontFamily: MD3LightTheme.fonts.default.fontFamily,
+        },
+        medium: {
+          ...NavigationThemeWithFonts.fonts.medium,
+          fontFamily: MD3LightTheme.fonts.default.fontFamily,
+        },
+        bold: {
+          ...NavigationThemeWithFonts.fonts.bold,
+          fontFamily: MD3LightTheme.fonts.default.fontFamily,
+        },
+        heavy: {
+          ...NavigationThemeWithFonts.fonts.heavy,
+          fontFamily: MD3LightTheme.fonts.default.fontFamily,
+        },
+      },
+    });
+  });
+
+  it('should not expect fonts on theme without fonts', () => {
+    const { LightTheme, DarkTheme } = adaptNavigationTheme({
+      reactNavigationLight: NavigationLightTheme,
+      reactNavigationDark: NavigationDarkTheme,
+    });
+
+    expect(LightTheme).not.toHaveProperty('fonts');
+    expect(DarkTheme).not.toHaveProperty('fonts');
   });
 });
