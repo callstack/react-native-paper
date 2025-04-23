@@ -2090,7 +2090,6 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -2113,16 +2112,10 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰋑
+            heart
           </Text>
         </View>
       </View>
@@ -2477,7 +2470,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -2500,16 +2492,10 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰋑
+            heart
           </Text>
         </View>
       </View>

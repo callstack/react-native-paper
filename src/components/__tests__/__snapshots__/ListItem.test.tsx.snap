@@ -236,7 +236,6 @@ exports[`renders list item with custom description 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
-                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
@@ -259,16 +258,10 @@ exports[`renders list item with custom description 1`] = `
                               "backgroundColor": "transparent",
                             },
                           ],
-                          {
-                            "fontFamily": "Material Design Icons",
-                            "fontStyle": "normal",
-                            "fontWeight": "normal",
-                          },
-                          {},
                         ]
                       }
                     >
-                      󰈦
+                      file-pdf-box
                     </Text>
                   </View>
                   <Text
@@ -624,7 +617,6 @@ exports[`renders list item with left and right items 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         selectable={false}
@@ -647,16 +639,10 @@ exports[`renders list item with left and right items 1`] = `
                 "backgroundColor": "transparent",
               },
             ],
-            {
-              "fontFamily": "Material Design Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            {},
           ]
         }
       >
-        󰉋
+        folder
       </Text>
     </View>
   </View>
@@ -736,7 +722,6 @@ exports[`renders list item with left item 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         selectable={false}
@@ -759,16 +744,10 @@ exports[`renders list item with left item 1`] = `
                 "backgroundColor": "transparent",
               },
             ],
-            {
-              "fontFamily": "Material Design Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            {},
           ]
         }
       >
-        󰉋
+        folder
       </Text>
     </View>
     <View

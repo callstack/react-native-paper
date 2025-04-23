@@ -900,7 +900,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -923,16 +922,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -951,7 +944,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -974,16 +966,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -1108,7 +1094,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -1131,16 +1116,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -1159,7 +1138,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -1182,16 +1160,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -1316,7 +1288,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -1339,16 +1310,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -1367,7 +1332,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -1390,16 +1354,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -1683,7 +1641,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -1706,16 +1663,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -1734,7 +1685,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -1757,16 +1707,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -1891,7 +1835,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -1914,16 +1857,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -1942,7 +1879,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -1965,16 +1901,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -2099,7 +2029,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -2122,16 +2051,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -2150,7 +2073,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -2173,16 +2095,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -2597,7 +2513,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -2620,16 +2535,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -2648,7 +2557,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -2671,16 +2579,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -2924,7 +2826,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -2947,16 +2848,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -2975,7 +2870,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -2998,16 +2892,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -3251,7 +3139,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -3274,16 +3161,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -3302,7 +3183,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -3325,16 +3205,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -3578,7 +3452,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -3601,16 +3474,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰋑
+                    heart
                   </Text>
                 </View>
                 <View
@@ -3629,7 +3496,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -3652,16 +3518,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰋑
+                    heart
                   </Text>
                 </View>
                 <View
@@ -3905,7 +3765,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -3928,16 +3787,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰒛
+                    shopping-music
                   </Text>
                 </View>
                 <View
@@ -3956,7 +3809,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -3979,16 +3831,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰒛
+                    shopping-music
                   </Text>
                 </View>
                 <View
@@ -4396,7 +4242,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -4419,16 +4264,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -4447,7 +4286,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -4470,16 +4308,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -4673,7 +4505,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -4696,16 +4527,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -4724,7 +4549,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -4747,16 +4571,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -4950,7 +4768,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -4973,16 +4790,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -5001,7 +4812,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -5024,16 +4834,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -5227,7 +5031,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -5250,16 +5053,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰋑
+                    heart
                   </Text>
                 </View>
                 <View
@@ -5278,7 +5075,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -5301,16 +5097,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰋑
+                    heart
                   </Text>
                 </View>
                 <View
@@ -5504,7 +5294,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -5527,16 +5316,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰒛
+                    shopping-music
                   </Text>
                 </View>
                 <View
@@ -5555,7 +5338,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -5578,16 +5360,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰒛
+                    shopping-music
                   </Text>
                 </View>
                 <View
@@ -7692,7 +7468,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -7715,16 +7490,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -7743,7 +7512,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -7766,16 +7534,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -8019,7 +7781,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -8042,16 +7803,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -8070,7 +7825,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -8093,16 +7847,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -8346,7 +8094,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -8369,16 +8116,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -8397,7 +8138,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -8420,16 +8160,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -8837,7 +8571,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -8860,16 +8593,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -8888,7 +8615,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -8911,16 +8637,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -9114,7 +8834,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -9137,16 +8856,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -9165,7 +8878,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -9188,16 +8900,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -9391,7 +9097,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -9414,16 +9119,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -9442,7 +9141,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -9465,16 +9163,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -9822,7 +9514,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -9845,16 +9536,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -9873,7 +9558,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -9896,16 +9580,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -10149,7 +9827,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -10172,16 +9849,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -10200,7 +9871,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -10223,16 +9893,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -10476,7 +10140,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -10499,16 +10162,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -10527,7 +10184,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -10550,16 +10206,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -10967,7 +10617,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -10990,16 +10639,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -11018,7 +10661,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -11041,16 +10683,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -11244,7 +10880,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -11267,16 +10902,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -11295,7 +10924,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -11318,16 +10946,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -11521,7 +11143,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -11544,16 +11165,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -11572,7 +11187,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -11595,16 +11209,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -11798,7 +11406,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -11821,16 +11428,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰋑
+                    heart
                   </Text>
                 </View>
                 <View
@@ -11849,7 +11450,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -11872,16 +11472,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰋑
+                    heart
                   </Text>
                 </View>
                 <View
@@ -12075,7 +11669,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -12098,16 +11691,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰒛
+                    shopping-music
                   </Text>
                 </View>
                 <View
@@ -12126,7 +11713,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -12149,16 +11735,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰒛
+                    shopping-music
                   </Text>
                 </View>
                 <View

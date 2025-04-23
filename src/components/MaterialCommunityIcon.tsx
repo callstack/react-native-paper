@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ComponentProps } from 'react';
-import { StyleSheet, Text, Platform, ViewProps, Role } from 'react-native';
+import { StyleSheet, Text, Platform, Role, ViewProps } from 'react-native';
 
 import { black } from '../styles/themes/v2/colors';
 
@@ -23,9 +23,23 @@ type AccessibilityProps =
       importantForAccessibility?: 'auto' | 'yes' | 'no' | 'no-hide-descendants';
     };
 
+const loadIconModule = () => {
+  try {
+    return require('@react-native-vector-icons/material-design-icons').default;
+  } catch (e) {
+    try {
+      return require('react-native-vector-icons/MaterialCommunityIcons')
+        .default;
+    } catch (e) {
+      return null;
+    }
+  }
+};
+
 let MaterialCommunityIcons: React.ComponentType<
   React.ComponentProps<
-    typeof import('@react-native-vector-icons/material-design-icons').default
+    | typeof import('@react-native-vector-icons/material-design-icons').default
+    | typeof import('react-native-vector-icons/MaterialCommunityIcons').default
   > & {
     color: string;
     pointerEvents?: ViewProps['pointerEvents'];
@@ -33,9 +47,7 @@ let MaterialCommunityIcons: React.ComponentType<
 >;
 
 try {
-  // Optionally require vector-icons
-  MaterialCommunityIcons =
-    require('@react-native-vector-icons/material-design-icons').default;
+  MaterialCommunityIcons = loadIconModule();
 } catch (e) {
   let isErrorLogged = false;
 
@@ -52,8 +64,9 @@ try {
       }
 
       console.warn(
-        `Tried to use the icon '${name}' in a component from 'react-native-paper', but 'react-native-vector-icons/MaterialCommunityIcons' could not be loaded.`,
-        `To remove this warning, try installing 'react-native-vector-icons' or use another method to specify icon: https://callstack.github.io/react-native-paper/docs/guides/icons`
+        `Tried to use the icon '${name}' in a component from 'react-native-paper', but '@react-native-vector-icons/material-design-icons' or 'react-native-vector-icons/MaterialCommunityIcons' could not be loaded.`,
+        `To remove this warning, try installing '@react-native-vector-icons/common' along with @react-native-vector-icons/material-design-icons' or 'react-native-vector-icons'. 
+        You can also use another method to specify icon: https://callstack.github.io/react-native-paper/docs/guides/icons`
       );
 
       isErrorLogged = true;

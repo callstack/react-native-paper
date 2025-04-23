@@ -73,7 +73,6 @@ exports[`Menu Item renders menu item 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -96,16 +95,10 @@ exports[`Menu Item renders menu item 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰑎
+          redo
         </Text>
       </View>
       <View
@@ -241,7 +234,6 @@ exports[`Menu Item renders menu item 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -264,16 +256,10 @@ exports[`Menu Item renders menu item 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰕌
+          undo
         </Text>
       </View>
       <View
@@ -409,7 +395,6 @@ exports[`Menu Item renders menu item 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -432,16 +417,10 @@ exports[`Menu Item renders menu item 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰆐
+          content-cut
         </Text>
       </View>
       <View
@@ -577,7 +556,6 @@ exports[`Menu Item renders menu item 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -600,16 +578,10 @@ exports[`Menu Item renders menu item 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰆏
+          content-copy
         </Text>
       </View>
       <View

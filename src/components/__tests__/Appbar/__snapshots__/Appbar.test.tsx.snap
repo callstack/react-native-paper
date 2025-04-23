@@ -183,7 +183,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                allowFontScaling={false}
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 selectable={false}
@@ -206,16 +205,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                         "backgroundColor": "transparent",
                       },
                     ],
-                    {
-                      "fontFamily": "Material Design Icons",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
-                    },
-                    {},
                   ]
                 }
               >
-                󰍉
+                magnify
               </Text>
             </View>
           </View>
@@ -374,7 +367,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               >
                 <Text
                   accessibilityElementsHidden={true}
-                  allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
                   selectable={false}
@@ -397,16 +389,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                           "backgroundColor": "transparent",
                         },
                       ],
-                      {
-                        "fontFamily": "Material Design Icons",
-                        "fontStyle": "normal",
-                        "fontWeight": "normal",
-                      },
-                      {},
                     ]
                   }
                 >
-                  󰅖
+                  close
                 </Text>
               </View>
             </View>
@@ -838,7 +824,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             >
               <Text
                 accessibilityElementsHidden={true}
-                allowFontScaling={false}
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 selectable={false}
@@ -861,16 +846,10 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                         "backgroundColor": "transparent",
                       },
                     ],
-                    {
-                      "fontFamily": "Material Design Icons",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
-                    },
-                    {},
                   ]
                 }
               >
-                󰍜
+                menu
               </Text>
             </View>
           </View>

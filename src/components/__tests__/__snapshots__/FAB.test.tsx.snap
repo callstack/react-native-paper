@@ -139,7 +139,6 @@ exports[`renders FAB with custom size prop 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
-              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
@@ -162,16 +161,10 @@ exports[`renders FAB with custom size prop 1`] = `
                       "backgroundColor": "transparent",
                     },
                   ],
-                  {
-                    "fontFamily": "Material Design Icons",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  {},
                 ]
               }
             >
-              󰐕
+              plus
             </Text>
           </View>
         </View>
@@ -320,7 +313,6 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
-              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
@@ -343,16 +335,10 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
                       "backgroundColor": "transparent",
                     },
                   ],
-                  {
-                    "fontFamily": "Material Design Icons",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  {},
                 ]
               }
             >
-              󰐕
+              plus
             </Text>
           </View>
         </View>
@@ -501,7 +487,6 @@ exports[`renders default FAB 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
-              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
@@ -524,16 +509,10 @@ exports[`renders default FAB 1`] = `
                       "backgroundColor": "transparent",
                     },
                   ],
-                  {
-                    "fontFamily": "Material Design Icons",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  {},
                 ]
               }
             >
-              󰐕
+              plus
             </Text>
           </View>
         </View>
@@ -682,7 +661,6 @@ exports[`renders disabled FAB 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
-              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
@@ -705,16 +683,10 @@ exports[`renders disabled FAB 1`] = `
                       "backgroundColor": "transparent",
                     },
                   ],
-                  {
-                    "fontFamily": "Material Design Icons",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  {},
                 ]
               }
             >
-              󰐕
+              plus
             </Text>
           </View>
         </View>
@@ -864,7 +836,6 @@ exports[`renders extended FAB 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
-              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
@@ -887,16 +858,10 @@ exports[`renders extended FAB 1`] = `
                       "backgroundColor": "transparent",
                     },
                   ],
-                  {
-                    "fontFamily": "Material Design Icons",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  {},
                 ]
               }
             >
-              󰐕
+              plus
             </Text>
           </View>
         </View>
@@ -1085,7 +1050,6 @@ exports[`renders extended FAB with custom size prop 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
-              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
@@ -1108,16 +1072,10 @@ exports[`renders extended FAB with custom size prop 1`] = `
                       "backgroundColor": "transparent",
                     },
                   ],
-                  {
-                    "fontFamily": "Material Design Icons",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  {},
                 ]
               }
             >
-              󰐕
+              plus
             </Text>
           </View>
         </View>
@@ -1306,7 +1264,6 @@ exports[`renders large FAB 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
-              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
@@ -1329,16 +1286,10 @@ exports[`renders large FAB 1`] = `
                       "backgroundColor": "transparent",
                     },
                   ],
-                  {
-                    "fontFamily": "Material Design Icons",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  {},
                 ]
               }
             >
-              󰐕
+              plus
             </Text>
           </View>
         </View>
@@ -2097,7 +2048,6 @@ exports[`renders not visible FAB 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
-              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
@@ -2120,16 +2070,10 @@ exports[`renders not visible FAB 1`] = `
                       "backgroundColor": "transparent",
                     },
                   ],
-                  {
-                    "fontFamily": "Material Design Icons",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  {},
                 ]
               }
             >
-              󰐕
+              plus
             </Text>
           </View>
         </View>
@@ -2278,7 +2222,6 @@ exports[`renders small FAB 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
-              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
@@ -2301,16 +2244,10 @@ exports[`renders small FAB 1`] = `
                       "backgroundColor": "transparent",
                     },
                   ],
-                  {
-                    "fontFamily": "Material Design Icons",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  {},
                 ]
               }
             >
-              󰐕
+              plus
             </Text>
           </View>
         </View>
@@ -2459,7 +2396,6 @@ exports[`renders visible FAB 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
-              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
@@ -2482,16 +2418,10 @@ exports[`renders visible FAB 1`] = `
                       "backgroundColor": "transparent",
                     },
                   ],
-                  {
-                    "fontFamily": "Material Design Icons",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  {},
                 ]
               }
             >
-              󰐕
+              plus
             </Text>
           </View>
         </View>

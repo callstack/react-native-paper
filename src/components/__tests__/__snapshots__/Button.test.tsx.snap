@@ -868,7 +868,6 @@ exports[`renders button with icon 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -891,16 +890,10 @@ exports[`renders button with icon 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰄀
+            camera
           </Text>
         </View>
         <Text
@@ -1076,7 +1069,6 @@ exports[`renders button with icon in reverse order 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -1099,16 +1091,10 @@ exports[`renders button with icon in reverse order 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰅂
+            chevron-right
           </Text>
         </View>
         <Text
