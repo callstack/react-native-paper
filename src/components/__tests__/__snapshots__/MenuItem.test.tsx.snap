@@ -55,9 +55,12 @@ exports[`Menu Item renders menu item 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-        }
+        [
+          {
+            "flexDirection": "row",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -223,9 +226,12 @@ exports[`Menu Item renders menu item 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-        }
+        [
+          {
+            "flexDirection": "row",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -391,9 +397,12 @@ exports[`Menu Item renders menu item 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-        }
+        [
+          {
+            "flexDirection": "row",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -559,9 +568,12 @@ exports[`Menu Item renders menu item 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-        }
+        [
+          {
+            "flexDirection": "row",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -727,9 +739,12 @@ exports[`Menu Item renders menu item 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-        }
+        [
+          {
+            "flexDirection": "row",
+          },
+          undefined,
+        ]
       }
     >
       <View

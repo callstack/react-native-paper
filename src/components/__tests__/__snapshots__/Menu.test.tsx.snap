@@ -358,9 +358,12 @@ exports[`renders menu with content styles 1`] = `
             >
               <View
                 style={
-                  {
-                    "flexDirection": "row",
-                  }
+                  [
+                    {
+                      "flexDirection": "row",
+                    },
+                    undefined,
+                  ]
                 }
               >
                 <View
@@ -478,9 +481,12 @@ exports[`renders menu with content styles 1`] = `
             >
               <View
                 style={
-                  {
-                    "flexDirection": "row",
-                  }
+                  [
+                    {
+                      "flexDirection": "row",
+                    },
+                    undefined,
+                  ]
                 }
               >
                 <View
@@ -1072,9 +1078,12 @@ exports[`renders visible menu 1`] = `
             >
               <View
                 style={
-                  {
-                    "flexDirection": "row",
-                  }
+                  [
+                    {
+                      "flexDirection": "row",
+                    },
+                    undefined,
+                  ]
                 }
               >
                 <View
@@ -1192,9 +1201,12 @@ exports[`renders visible menu 1`] = `
             >
               <View
                 style={
-                  {
-                    "flexDirection": "row",
-                  }
+                  [
+                    {
+                      "flexDirection": "row",
+                    },
+                    undefined,
+                  ]
                 }
               >
                 <View

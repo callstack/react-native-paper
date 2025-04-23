@@ -205,11 +205,14 @@ exports[`renders expanded accordion 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
     >
       <View
