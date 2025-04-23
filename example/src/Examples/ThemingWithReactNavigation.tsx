@@ -56,7 +56,7 @@ const HomeTab = () => {
 
 function ThemingWithReactNavigation() {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator>
       <Stack.Screen name="React Navigation" component={HomeTab} />
     </Stack.Navigator>
   );

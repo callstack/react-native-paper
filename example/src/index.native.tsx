@@ -199,39 +199,38 @@ export default function PaperExample() {
       theme={customFontLoaded ? configuredFontTheme : theme}
     >
       <PreferencesContext.Provider value={preferences}>
-        <React.Fragment>
-          <NavigationContainer
-            theme={combinedTheme}
-            initialState={initialState}
-            onStateChange={(state) =>
-              AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
-            }
-          >
-            <SafeAreaInsetsContext.Consumer>
-              {(insets) => {
-                const { left, right } = insets || { left: 0, right: 0 };
-                const collapsedDrawerWidth = 80 + Math.max(left, right);
-                return (
-                  <Drawer.Navigator
-                    screenOptions={{
-                      drawerStyle: collapsed && {
-                        width: collapsedDrawerWidth,
-                      },
-                    }}
-                    drawerContent={() => <DrawerItems />}
-                  >
-                    <Drawer.Screen
-                      name="Home"
-                      component={App}
-                      options={{ headerShown: false }}
-                    />
-                  </Drawer.Navigator>
-                );
-              }}
-            </SafeAreaInsetsContext.Consumer>
-            <StatusBar style={!theme.isV3 || theme.dark ? 'light' : 'dark'} />
-          </NavigationContainer>
-        </React.Fragment>
+        <NavigationContainer
+          // @ts-ignore - will be adjusted after merging https://github.com/callstack/react-native-paper/pull/4690
+          theme={combinedTheme}
+          initialState={initialState}
+          onStateChange={(state) =>
+            AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
+          }
+        >
+          <SafeAreaInsetsContext.Consumer>
+            {(insets) => {
+              const { left, right } = insets || { left: 0, right: 0 };
+              const collapsedDrawerWidth = 100 + Math.max(left, right);
+              return (
+                <Drawer.Navigator
+                  screenOptions={{
+                    drawerStyle: collapsed && {
+                      width: collapsedDrawerWidth,
+                    },
+                  }}
+                  drawerContent={() => <DrawerItems />}
+                >
+                  <Drawer.Screen
+                    name="Home"
+                    component={App}
+                    options={{ headerShown: false }}
+                  />
+                </Drawer.Navigator>
+              );
+            }}
+          </SafeAreaInsetsContext.Consumer>
+          <StatusBar style={!theme.isV3 || theme.dark ? 'light' : 'dark'} />
+        </NavigationContainer>
       </PreferencesContext.Provider>
     </PaperProvider>
   );
