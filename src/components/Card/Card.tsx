@@ -273,16 +273,28 @@ const Card = (
 
   const content = (
     <View style={[styles.innerContainer, contentStyle]} testID={testID}>
-      {React.Children.map(children, (child, index) =>
-        React.isValidElement(child)
-          ? React.cloneElement(child as React.ReactElement<any>, {
-              index,
-              total,
-              siblings,
-              borderRadiusStyles,
-            })
-          : child
-      )}
+      {React.Children.map(children, (child, index) => {
+        if (!React.isValidElement(child)) {
+          return child;
+        }
+  
+        const childType = child.type;
+        if (
+          childType === CardContent ||
+          childType === CardActions ||
+          childType === CardCover ||
+          childType === CardTitle
+        ) {
+          return React.cloneElement(child as React.ReactElement<any>, {
+            index,
+            total,
+            siblings,
+            borderRadiusStyles,
+          });
+        } else {
+          return child;
+        }
+      })}
     </View>
   );
 
