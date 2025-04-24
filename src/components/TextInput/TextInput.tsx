@@ -9,6 +9,7 @@ import {
   NativeSyntheticEvent,
   TextLayoutEventData,
 } from 'react-native';
+
 import TextInputAffix, {
   Props as TextInputAffixProps,
 } from './Adornment/TextInputAffix';
