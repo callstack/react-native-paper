@@ -555,8 +555,11 @@ const TextInput = forwardRef<TextInputHandles, Props>(
         disabled={disabled}
         error={errorProp}
         multiline={multiline}
-        editable={editable}
         render={render}
+        // if disabledFocusOnScroll is enabled
+        editable={(disableFocusOnScroll ? !isScrolling : undefined) || editable}
+        onTouchEnd={handleTouchEnd}
+        onScroll={handleScroll}
         {...rest}
         theme={theme}
         value={value}
