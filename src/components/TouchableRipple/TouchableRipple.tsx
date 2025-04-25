@@ -282,6 +282,7 @@ const TouchableRipple = (
         // focused state is not ready yet: https://github.com/necolas/react-native-web/issues/1849
         // state.focused && { backgroundColor: ___ },
         state.hovered && { backgroundColor: hoverColor },
+        disabled && styles.disabled,
         typeof style === 'function' ? style(state) : style,
       ]}
     >
@@ -305,6 +306,11 @@ const styles = StyleSheet.create({
     ...(Platform.OS === 'web' && {
       cursor: 'pointer',
       transition: '150ms background-color',
+    }),
+  },
+  disabled: {
+    ...(Platform.OS === 'web' && {
+      cursor: 'auto',
     }),
   },
   borderless: {
