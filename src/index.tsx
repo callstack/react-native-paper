@@ -166,4 +166,5 @@ export type {
   ThemeBase,
   MD3Elevation,
   MD3TypescaleKey,
+  TextComponent,
 } from './types';
