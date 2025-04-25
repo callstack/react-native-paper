@@ -298,6 +298,7 @@ exports[`allows customizing Route's type via generics 1`] = `
                     {
                       "bottom": 0,
                       "left": 0,
+                      "opacity": 1,
                       "position": "absolute",
                       "right": 0,
                       "top": 0,
@@ -551,6 +552,7 @@ exports[`allows customizing Route's type via generics 1`] = `
                     {
                       "bottom": 0,
                       "left": 0,
+                      "opacity": 0,
                       "position": "absolute",
                       "right": 0,
                       "top": 0,
@@ -2735,6 +2737,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     {
                       "bottom": 0,
                       "left": 0,
+                      "opacity": 1,
                       "position": "absolute",
                       "right": 0,
                       "top": 0,
@@ -3062,6 +3065,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     {
                       "bottom": 0,
                       "left": 0,
+                      "opacity": 0,
                       "position": "absolute",
                       "right": 0,
                       "top": 0,
@@ -3389,6 +3393,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     {
                       "bottom": 0,
                       "left": 0,
+                      "opacity": 0,
                       "position": "absolute",
                       "right": 0,
                       "top": 0,
@@ -3716,6 +3721,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     {
                       "bottom": 0,
                       "left": 0,
+                      "opacity": 0,
                       "position": "absolute",
                       "right": 0,
                       "top": 0,
@@ -4043,6 +4049,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     {
                       "bottom": 0,
                       "left": 0,
+                      "opacity": 0,
                       "position": "absolute",
                       "right": 0,
                       "top": 0,
@@ -6007,6 +6014,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     {
                       "bottom": 0,
                       "left": 0,
+                      "opacity": 1,
                       "position": "absolute",
                       "right": 0,
                       "top": 0,
@@ -6195,6 +6203,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     {
                       "bottom": 0,
                       "left": 0,
+                      "opacity": 0,
                       "position": "absolute",
                       "right": 0,
                       "top": 0,
@@ -6383,6 +6392,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                     {
                       "bottom": 0,
                       "left": 0,
+                      "opacity": 0,
                       "position": "absolute",
                       "right": 0,
                       "top": 0,
@@ -7830,6 +7840,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     {
                       "bottom": 0,
                       "left": 0,
+                      "opacity": 1,
                       "position": "absolute",
                       "right": 0,
                       "top": 0,
@@ -8157,6 +8168,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     {
                       "bottom": 0,
                       "left": 0,
+                      "opacity": 0,
                       "position": "absolute",
                       "right": 0,
                       "top": 0,
@@ -8484,6 +8496,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                     {
                       "bottom": 0,
                       "left": 0,
+                      "opacity": 0,
                       "position": "absolute",
                       "right": 0,
                       "top": 0,
@@ -9960,6 +9973,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     {
                       "bottom": 0,
                       "left": 0,
+                      "opacity": 1,
                       "position": "absolute",
                       "right": 0,
                       "top": 0,
@@ -10287,6 +10301,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     {
                       "bottom": 0,
                       "left": 0,
+                      "opacity": 0,
                       "position": "absolute",
                       "right": 0,
                       "top": 0,
@@ -10614,6 +10629,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     {
                       "bottom": 0,
                       "left": 0,
+                      "opacity": 0,
                       "position": "absolute",
                       "right": 0,
                       "top": 0,
