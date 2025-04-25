@@ -11,7 +11,7 @@ import AnimatedText from './AnimatedText';
 import type { VariantProp } from './types';
 import StyledText from './v2/StyledText';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { ThemeProp, TextComponent } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 
 export type Props<T> = React.ComponentProps<typeof NativeText> & {
@@ -172,10 +172,6 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
 });
-
-type TextComponent<T> = (
-  props: Props<T> & { ref?: React.RefObject<TextRef> }
-) => JSX.Element;
 
 const Component = forwardRef(Text) as TextComponent<never>;
 
