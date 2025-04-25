@@ -211,12 +211,14 @@ const Appbar = ({
 
     React.Children.forEach(children, (child) => {
       if (React.isValidElement(child)) {
+        const isLeading = child.props.isLeading === true;
+
         if (child.type === AppbarContent) {
           hasAppbarContent = true;
-        } else if (hasAppbarContent) {
-          rightItemsCount++;
-        } else {
+        } else if (isLeading || !hasAppbarContent) {
           leftItemsCount++;
+        } else {
+          rightItemsCount++;
         }
       }
     });
@@ -254,18 +256,32 @@ const Appbar = ({
       {...rest}
     >
       {shouldAddLeftSpacing ? <View style={spacingStyle} /> : null}
-      {(!isV3 || isMode('small') || isMode('center-aligned')) &&
-        renderAppbarContent({
-          children: [
+      {(!isV3 || isMode('small') || isMode('center-aligned')) && (
+        <>
+          {/* Render only the back action at first place  */}
+          {renderAppbarContent({
+            children,
+            isDark,
+            theme,
+            isV3,
+            renderOnly: ['Appbar.BackAction'],
+            shouldCenterContent: isV3CenterAlignedMode || shouldCenterContent,
+          })}
+          {/* Render the rest of the content except the back action */}
+          {renderAppbarContent({
             // Filter appbar actions - first leading icons, then trailing icons
-            ...filterAppbarActions(children, true),
-            ...filterAppbarActions(children),
-          ],
-          isDark,
-          theme,
-          isV3,
-          shouldCenterContent: isV3CenterAlignedMode || shouldCenterContent,
-        })}
+            children: [
+              ...filterAppbarActions(children, true),
+              ...filterAppbarActions(children),
+            ],
+            isDark,
+            theme,
+            isV3,
+            renderExcept: ['Appbar.BackAction'],
+            shouldCenterContent: isV3CenterAlignedMode || shouldCenterContent,
+          })}
+        </>
+      )}
       {(isMode('medium') || isMode('large')) && (
         <View
           style={[
