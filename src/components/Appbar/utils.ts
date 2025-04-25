@@ -113,6 +113,22 @@ export const modeTextVariant = {
   'center-aligned': 'titleLarge',
 } as const;
 
+/**
+ * Filtruje akcje w Appbarze na podstawie właściwości isLeading.
+ * @param children - Dzieci komponentu Appbar do przefiltrowania
+ * @param isLeading - Czy filtrować akcje wiodące (true) czy niewiodące (false). Domyślnie false.
+ * @returns Przefiltrowana tablica elementów React
+ */
+export const filterAppbarActions = (
+  children: React.ReactNode,
+  isLeading = false
+) => {
+  return React.Children.toArray(children).filter((child) => {
+    if (!React.isValidElement(child)) return false;
+    return isLeading ? child.props.isLeading : !child.props.isLeading;
+  });
+};
+
 export const renderAppbarContent = ({
   children,
   isDark,
