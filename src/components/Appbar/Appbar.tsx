@@ -18,6 +18,7 @@ import {
   getAppbarBackgroundColor,
   modeAppbarHeight,
   renderAppbarContent,
+  filterAppbarActions,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { MD3Elevation, ThemeProp } from '../../types';
@@ -228,15 +229,6 @@ const Appbar = ({
     shouldAddRightSpacing = shouldCenterContent && rightItemsCount === 0;
   }
 
-  const filterAppbarActions = React.useCallback(
-    (isLeading = false) =>
-      React.Children.toArray(children).filter((child) =>
-        // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
-        isLeading ? child.props.isLeading : !child.props.isLeading
-      ),
-    [children]
-  );
-
   const spacingStyle = isV3 ? styles.v3Spacing : styles.spacing;
 
   const insets = {
@@ -264,7 +256,11 @@ const Appbar = ({
       {shouldAddLeftSpacing ? <View style={spacingStyle} /> : null}
       {(!isV3 || isMode('small') || isMode('center-aligned')) &&
         renderAppbarContent({
-          children,
+          children: [
+            // Filter appbar actions - first leading icons, then trailing icons
+            ...filterAppbarActions(children, true),
+            ...filterAppbarActions(children),
+          ],
           isDark,
           theme,
           isV3,
@@ -288,7 +284,7 @@ const Appbar = ({
               mode,
             })}
             {renderAppbarContent({
-              children: filterAppbarActions(true),
+              children: filterAppbarActions(children, true),
               isDark,
               isV3,
               renderOnly: ['Appbar.Action'],
@@ -297,7 +293,7 @@ const Appbar = ({
             {/* Right side of row container, can contain other AppbarAction if they are not leading icons */}
             <View style={styles.rightActionControls}>
               {renderAppbarContent({
-                children: filterAppbarActions(false),
+                children: filterAppbarActions(children),
                 isDark,
                 isV3,
                 renderExcept: [
@@ -310,7 +306,6 @@ const Appbar = ({
               })}
             </View>
           </View>
-          {/* Middle of the row, can contain only AppbarContent */}
           {renderAppbarContent({
             children,
             isDark,
