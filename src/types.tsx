@@ -1,6 +1,7 @@
 import type * as React from 'react';
 
 import type { $DeepPartial } from '@callstack/react-theme-provider';
+import type { Props, TextRef } from './components/Typography/Text';
 
 export type Font = {
   fontFamily: string;
@@ -172,6 +173,10 @@ export type MD3Type = {
   fontSize: number;
   fontStyle?: Font['fontStyle'];
 };
+
+export type TextComponent<T> = (
+  props: Props<T> & { ref?: React.RefObject<TextRef> }
+) => JSX.Element;
 
 export type MD3Typescale =
   | {
