@@ -747,7 +747,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                   : 0) - (!isV3 ? 2 : 0),
             };
 
-            const isV3Shifting = isV3 && shifting && labeled;
+            const isLegacyOrV3Shifting = !isV3 || (isV3 && shifting && labeled);
 
             const font = isV3 ? theme.fonts.labelMedium : {};
 
@@ -778,7 +778,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                     style={[
                       styles.iconContainer,
                       isV3 && styles.v3IconContainer,
-                      (!isV3 || isV3Shifting) && {
+                      isLegacyOrV3Shifting && {
                         transform: [{ translateY }],
                       },
                     ]}
@@ -803,7 +803,11 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                       style={[
                         styles.iconWrapper,
                         isV3 && styles.v3IconWrapper,
-                        { opacity: isV3 ? v3ActiveOpacity : activeOpacity },
+                        {
+                          opacity: isLegacyOrV3Shifting
+                            ? activeOpacity
+                            : v3ActiveOpacity,
+                        },
                       ]}
                     >
                       {renderIcon ? (
@@ -825,7 +829,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                         styles.iconWrapper,
                         isV3 && styles.v3IconWrapper,
                         {
-                          opacity: isV3 ? v3InactiveOpacity : inactiveOpacity,
+                          opacity: isLegacyOrV3Shifting
+                            ? inactiveOpacity
+                            : v3InactiveOpacity,
                         },
                       ]}
                     >
@@ -867,8 +873,10 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                       <Animated.View
                         style={[
                           styles.labelWrapper,
-                          (!isV3 || isV3Shifting) && {
-                            opacity: activeOpacity,
+                          {
+                            opacity: isLegacyOrV3Shifting
+                              ? activeOpacity
+                              : v3ActiveOpacity,
                           },
                         ]}
                       >
@@ -898,7 +906,11 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                         <Animated.View
                           style={[
                             styles.labelWrapper,
-                            { opacity: inactiveOpacity },
+                            {
+                              opacity: isLegacyOrV3Shifting
+                                ? inactiveOpacity
+                                : v3InactiveOpacity,
+                            },
                           ]}
                         >
                           {renderLabel ? (
