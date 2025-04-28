@@ -31,8 +31,12 @@ const loadIconModule = () => {
       return require('@react-native-vector-icons/material-design-icons')
         .default;
     } catch (e) {
-      return require('react-native-vector-icons/MaterialCommunityIcons')
-        .default;
+      try {
+        return require('react-native-vector-icons/MaterialCommunityIcons')
+          .default;
+      } catch (e) {
+        return null;
+      }
     }
   }
 };
@@ -47,27 +51,22 @@ let MaterialCommunityIcons: React.ComponentType<
   }
 >;
 
-try {
-  MaterialCommunityIcons = loadIconModule();
-} catch (e) {
+MaterialCommunityIcons = loadIconModule();
+
+if (!MaterialCommunityIcons) {
   let isErrorLogged = false;
 
   // Fallback component for icons
   MaterialCommunityIcons = ({ name, color, size, ...rest }) => {
     /* eslint-disable no-console */
     if (!isErrorLogged) {
-      if (
-        !/(Cannot find module|Module not found|Cannot resolve module)/.test(
-          (e as any).message
-        )
-      ) {
-        console.error(e);
-      }
-
       console.warn(
-        `Tried to use the icon '${name}' in a component from 'react-native-paper', but '@react-native-vector-icons/material-design-icons' or 'react-native-vector-icons/MaterialCommunityIcons' could not be loaded.`,
-        `To remove this warning, try installing '@react-native-vector-icons/common' along with @react-native-vector-icons/material-design-icons' or 'react-native-vector-icons'. 
-        You can also use another method to specify icon: https://callstack.github.io/react-native-paper/docs/guides/icons`
+        `Tried to use the icon '${name}' in a component from 'react-native-paper', but none of the required icon libraries are installed.`,
+        `To fix this, please install one of the following:\n` +
+          `- @expo/vector-icons\n` +
+          `- @react-native-vector-icons/material-design-icons\n` +
+          `- react-native-vector-icons\n\n` +
+          `You can also use another method to specify icon: https://callstack.github.io/react-native-paper/docs/guides/icons`
       );
 
       isErrorLogged = true;
