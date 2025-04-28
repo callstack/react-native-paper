@@ -2,15 +2,15 @@
 title: Icons
 ---
 
-import IconsList from '@site/src/components/IconsList.tsx';
-
 # Icons
 
 ## Configuring icons
 
-Many of the components require the [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons) library to render correctly. If you're using Expo, you don't need to do anything extra, but if it's a vanilla React Native project, you need to link the library as described in the getting started guide.
+Many of the components require the [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons) library to render correctly. If you're using Expo, you don't need to do anything extra, but if it's a vanilla React Native project, you need to link the library as described in the [getting started guide](./01-getting-started.md).
 
+:::note
 If you opted out of vector icons support using [babel-plugin-optional-require](https://github.com/satya164/babel-plugin-optional-require), you won't be able to use icon names for the icon prop. Some components may not look correct without vector icons and might need extra configuration.
+:::
 
 ## Using the `icon` prop
 
@@ -28,7 +28,6 @@ Example:
 
 <details>
   <summary>See the list of supported icons</summary>
-  <IconsList />
 </details>
 
 ### 2. An image source

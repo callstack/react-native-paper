@@ -11,7 +11,7 @@ module.exports = function () {
             react: path.resolve('node_modules/react'),
             'react-native$': 'react-native-web',
             'react-native-paper': path.resolve('../src'),
-            '@react-native-vector-icons/material-design-icons': path.resolve(
+            'react-native-vector-icons/MaterialCommunityIcons': path.resolve(
               'node_modules/@react-native-vector-icons/material-design-icons'
             ),
           },

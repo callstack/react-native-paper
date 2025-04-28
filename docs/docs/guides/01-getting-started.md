@@ -32,11 +32,17 @@ Specifically `MaterialDesignIcons` icon pack needs to be included in the project
 npm install @react-native-vector-icons/common @react-native-vector-icons/material-design-icons
 ```
 
-The library has specified dedicated steps for each platform. Please follow their [installation guide](https://github.com/oblador/react-native-vector-icons#installation) in order to properly use icon fonts.
+:::note
+The `react-native-vector-icons` library requires some additional setup steps for each platform. To ensure proper use of icon fonts, please follow their [installation guide](https://github.com/oblador/react-native-vector-icons?tab=readme-ov-file#setup).
+:::
 
+If you use Expo, you don't need to install vector icons - those are the part of the expo package. However, if you have a `babel.config.js` or `.babelrc` file, make sure that it includes `babel-preset-expo`.
+
+:::info
 If you don't want to install vector icons, you can use [babel-plugin-optional-require](https://github.com/satya164/babel-plugin-optional-require) to opt-out.
+:::note
 
-If you use Expo, you don't need to install vector icons. But if you have a `babel.config.js` or `.babelrc` file, make sure that it includes `babel-preset-expo`.
+### Bundle size optimization
 
 To get smaller bundle size by excluding modules you don't use, you can use our optional babel plugin. The plugin automatically rewrites the import statements so that only the modules you use are imported instead of the whole library. Add `react-native-paper/babel` to the `plugins` section in your `babel.config.js` for production environment. It should look like this:
 

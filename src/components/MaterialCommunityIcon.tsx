@@ -31,12 +31,8 @@ const loadIconModule = () => {
       return require('@react-native-vector-icons/material-design-icons')
         .default;
     } catch (e) {
-      try {
-        return require('react-native-vector-icons/MaterialCommunityIcons')
-          .default;
-      } catch (e) {
-        return null;
-      }
+      return require('react-native-vector-icons/MaterialCommunityIcons')
+        .default;
     }
   }
 };
