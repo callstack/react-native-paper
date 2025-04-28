@@ -151,7 +151,7 @@ const Icon = ({
       <SettingsConsumer>
         {({ icon }) => {
           return icon?.({
-            name: s as any,
+            name: s,
             color: iconColor,
             size,
             direction,
