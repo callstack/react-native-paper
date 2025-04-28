@@ -25,13 +25,18 @@ type AccessibilityProps =
 
 const loadIconModule = () => {
   try {
-    return require('@react-native-vector-icons/material-design-icons').default;
+    return require('@expo/vector-icons/MaterialCommunityIcons').default;
   } catch (e) {
     try {
-      return require('react-native-vector-icons/MaterialCommunityIcons')
+      return require('@react-native-vector-icons/material-design-icons')
         .default;
     } catch (e) {
-      return null;
+      try {
+        return require('react-native-vector-icons/MaterialCommunityIcons')
+          .default;
+      } catch (e) {
+        return null;
+      }
     }
   }
 };
