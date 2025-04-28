@@ -238,22 +238,25 @@ describe('adaptNavigationTheme', () => {
         notification: MD3LightTheme.colors.error,
       },
       fonts: {
-        ...NavigationThemeWithFonts.fonts,
         regular: {
-          ...NavigationThemeWithFonts.fonts.regular,
-          fontFamily: MD3LightTheme.fonts.default.fontFamily,
+          fontFamily: MD3LightTheme.fonts.bodyMedium.fontFamily,
+          fontWeight: MD3LightTheme.fonts.bodyMedium.fontWeight,
+          letterSpacing: MD3LightTheme.fonts.bodyMedium.letterSpacing,
         },
         medium: {
-          ...NavigationThemeWithFonts.fonts.medium,
-          fontFamily: MD3LightTheme.fonts.default.fontFamily,
+          fontFamily: MD3LightTheme.fonts.titleMedium.fontFamily,
+          fontWeight: MD3LightTheme.fonts.titleMedium.fontWeight,
+          letterSpacing: MD3LightTheme.fonts.titleMedium.letterSpacing,
         },
         bold: {
-          ...NavigationThemeWithFonts.fonts.bold,
-          fontFamily: MD3LightTheme.fonts.default.fontFamily,
+          fontFamily: MD3LightTheme.fonts.headlineSmall.fontFamily,
+          fontWeight: MD3LightTheme.fonts.headlineSmall.fontWeight,
+          letterSpacing: MD3LightTheme.fonts.headlineSmall.letterSpacing,
         },
         heavy: {
-          ...NavigationThemeWithFonts.fonts.heavy,
-          fontFamily: MD3LightTheme.fonts.default.fontFamily,
+          fontFamily: MD3LightTheme.fonts.headlineLarge.fontFamily,
+          fontWeight: MD3LightTheme.fonts.headlineLarge.fontWeight,
+          letterSpacing: MD3LightTheme.fonts.headlineLarge.letterSpacing,
         },
       },
     });

@@ -214,26 +214,3 @@ export type NavigationTheme = {
     notification: string;
   };
 };
-
-type NavigationFontStyle = {
-  fontFamily: string;
-  fontWeight:
-    | 'normal'
-    | 'bold'
-    | '100'
-    | '200'
-    | '300'
-    | '400'
-    | '500'
-    | '600'
-    | '700'
-    | '800'
-    | '900';
-};
-
-export type NavigationFonts = {
-  regular: NavigationFontStyle;
-  medium: NavigationFontStyle;
-  bold: NavigationFontStyle;
-  heavy: NavigationFontStyle;
-};

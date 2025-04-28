@@ -14,7 +14,6 @@ import type {
   MD3Theme,
   MD3AndroidColors,
   NavigationTheme,
-  NavigationFonts,
 } from '../types';
 
 export const DefaultTheme = MD3LightTheme;
@@ -132,26 +131,28 @@ const getAdaptedTheme = <T extends NavigationTheme>(
   };
 
   if ('fonts' in theme) {
-    const navigationFonts = theme.fonts as NavigationFonts;
     return {
       ...base,
       fonts: {
-        ...navigationFonts,
         regular: {
-          ...navigationFonts.regular,
-          fontFamily: materialTheme.fonts.default.fontFamily,
+          fontFamily: materialTheme.fonts.bodyMedium.fontFamily,
+          fontWeight: materialTheme.fonts.bodyMedium.fontWeight,
+          letterSpacing: materialTheme.fonts.bodyMedium.letterSpacing,
         },
         medium: {
-          ...navigationFonts.medium,
-          fontFamily: materialTheme.fonts.default.fontFamily,
+          fontFamily: materialTheme.fonts.titleMedium.fontFamily,
+          fontWeight: materialTheme.fonts.titleMedium.fontWeight,
+          letterSpacing: materialTheme.fonts.titleMedium.letterSpacing,
         },
         bold: {
-          ...navigationFonts.bold,
-          fontFamily: materialTheme.fonts.default.fontFamily,
+          fontFamily: materialTheme.fonts.headlineSmall.fontFamily,
+          fontWeight: materialTheme.fonts.headlineSmall.fontWeight,
+          letterSpacing: materialTheme.fonts.headlineSmall.letterSpacing,
         },
         heavy: {
-          ...navigationFonts.heavy,
-          fontFamily: materialTheme.fonts.default.fontFamily,
+          fontFamily: materialTheme.fonts.headlineLarge.fontFamily,
+          fontWeight: materialTheme.fonts.headlineLarge.fontWeight,
+          letterSpacing: materialTheme.fonts.headlineLarge.letterSpacing,
         },
       },
     };
