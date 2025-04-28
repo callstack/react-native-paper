@@ -268,7 +268,7 @@ const Touchable = <Route extends BaseRoute>({
  *       tabBar={({ navigation, state, descriptors, insets }) => (
  *         <BottomNavigation.Bar
  *           navigationState={state}
- *          safeAreaInsets={insets}
+ *           safeAreaInsets={insets}
  *           onTabPress={({ route, preventDefault }) => {
  *             const event = navigation.emit({
  *               type: 'tabPress',
@@ -296,11 +296,11 @@ const Touchable = <Route extends BaseRoute>({
  *           getLabelText={({ route }) => {
  *             const { options } = descriptors[route.key];
  *             const label =
- *               options.tabBarLabel !== undefined
+ *               typeof options.tabBarLabel === 'string'
  *                 ? options.tabBarLabel
- *                 : options.title !== undefined
+ *                 : typeof options.title === 'string'
  *                 ? options.title
- *                 : route.title;
+ *                 : route.name;
  *
  *             return label;
  *           }}
