@@ -13069,8 +13069,6 @@ __metadata:
     typescript: "npm:5.0.4"
     use-latest-callback: "npm:^0.2.3"
   peerDependencies:
-    "@react-native-vector-icons/common": "*"
-    "@react-native-vector-icons/material-design-icons": "*"
     react: "*"
     react-native: "*"
     react-native-safe-area-context: "*"

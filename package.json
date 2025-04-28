@@ -101,8 +101,6 @@
     "typescript": "5.0.4"
   },
   "peerDependencies": {
-    "@react-native-vector-icons/common": "*",
-    "@react-native-vector-icons/material-design-icons": "*",
     "react": "*",
     "react-native": "*",
     "react-native-safe-area-context": "*"
