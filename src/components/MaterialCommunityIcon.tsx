@@ -23,6 +23,20 @@ type AccessibilityProps =
       importantForAccessibility?: 'auto' | 'yes' | 'no' | 'no-hide-descendants';
     };
 
+export const accessibilityProps: AccessibilityProps =
+  Platform.OS === 'web'
+    ? {
+        role: 'img',
+        focusable: false,
+      }
+    : {
+        accessibilityElementsHidden: true,
+        importantForAccessibility: 'no-hide-descendants',
+      };
+
+/**
+ * Loads the appropriate icon module based on available dependencies
+ */
 const loadIconModule = () => {
   try {
     return require('@expo/vector-icons/MaterialCommunityIcons').default;
@@ -41,7 +55,7 @@ const loadIconModule = () => {
   }
 };
 
-let MaterialCommunityIcons: React.ComponentType<
+type IconModuleType = React.ComponentType<
   React.ComponentProps<
     | typeof import('@react-native-vector-icons/material-design-icons').default
     | typeof import('react-native-vector-icons/MaterialCommunityIcons').default
@@ -51,79 +65,65 @@ let MaterialCommunityIcons: React.ComponentType<
   }
 >;
 
-MaterialCommunityIcons = loadIconModule();
+const IconModule = loadIconModule();
 
-if (!MaterialCommunityIcons) {
-  let isErrorLogged = false;
+/**
+ * Fallback component displayed when no icon library is available
+ */
+const FallbackIcon = ({ name, color, size, ...rest }: IconProps) => {
+  console.warn(
+    `Tried to use the icon '${name}' in a component from 'react-native-paper', but none of the required icon libraries are installed.`,
+    `To fix this, please install one of the following:\n` +
+      `- @expo/vector-icons\n` +
+      `- @react-native-vector-icons/material-design-icons\n` +
+      `- react-native-vector-icons\n\n` +
+      `You can also use another method to specify icon: https://callstack.github.io/react-native-paper/docs/guides/icons`
+  );
 
-  // Fallback component for icons
-  MaterialCommunityIcons = ({ name, color, size, ...rest }) => {
-    /* eslint-disable no-console */
-    if (!isErrorLogged) {
-      console.warn(
-        `Tried to use the icon '${name}' in a component from 'react-native-paper', but none of the required icon libraries are installed.`,
-        `To fix this, please install one of the following:\n` +
-          `- @expo/vector-icons\n` +
-          `- @react-native-vector-icons/material-design-icons\n` +
-          `- react-native-vector-icons\n\n` +
-          `You can also use another method to specify icon: https://callstack.github.io/react-native-paper/docs/guides/icons`
-      );
+  return (
+    <Text
+      {...rest}
+      style={[styles.icon, { color, fontSize: size }]}
+      selectable={false}
+    >
+      □
+    </Text>
+  );
+};
 
-      isErrorLogged = true;
-    }
+const MaterialCommunityIcons: IconModuleType = IconModule || FallbackIcon;
 
-    return (
-      <Text
-        {...rest}
-        style={[styles.icon, { color, fontSize: size }]}
-        // @ts-expect-error: Text doesn't support this, but it seems to affect TouchableNativeFeedback
-        pointerEvents="none"
-        selectable={false}
-      >
-        □
-      </Text>
-    );
-  };
-}
-
-export const accessibilityProps: AccessibilityProps =
-  Platform.OS === 'web'
-    ? {
-        role: 'img',
-        focusable: false,
-      }
-    : {
-        accessibilityElementsHidden: true,
-        importantForAccessibility:
-          'no-hide-descendants' as 'no-hide-descendants',
-      };
-
-const defaultIcon = ({
+/**
+ * Default icon component that handles icon rendering with proper styling and accessibility
+ */
+const DefaultIcon = ({
   name,
   color = black,
   size,
   direction,
   allowFontScaling,
   testID,
-}: IconProps) => (
-  <MaterialCommunityIcons
-    allowFontScaling={allowFontScaling}
-    name={name}
-    color={color}
-    size={size}
-    style={[
-      {
-        transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
-        lineHeight: size,
-      },
-      styles.icon,
-    ]}
-    pointerEvents="none"
-    selectable={false}
-    testID={testID}
-    {...accessibilityProps}
-  />
-);
+}: IconProps) => {
+  return (
+    <MaterialCommunityIcons
+      allowFontScaling={allowFontScaling}
+      name={name}
+      color={color}
+      size={size}
+      style={[
+        {
+          transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
+          lineHeight: size,
+        },
+        styles.icon,
+      ]}
+      pointerEvents="none"
+      selectable={false}
+      testID={testID}
+      {...accessibilityProps}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   // eslint-disable-next-line react-native/no-color-literals
@@ -132,4 +132,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default defaultIcon;
+export default DefaultIcon;
