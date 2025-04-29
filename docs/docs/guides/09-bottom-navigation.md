@@ -2,6 +2,39 @@
 title: Using BottomNavigation with React Navigation
 ---
 
+:::caution
+`createMaterialBottomTabNavigator` has been deprecated since `react-native-paper@5.14.0`. Please use `@react-navigation/bottom-tabs` version `7.x` or higher and combine it with `BottomNavigation.Bar` for a Material Design look.
+
+```js
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { BottomNavigation } from 'react-native-paper';
+
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
+  return (
+    <Tab.Navigator
+      tabBar={({ navigation, state, descriptors, insets }) => (
+        <BottomNavigation.Bar
+          ...
+        />
+      )}
+    >
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
+  );
+}
+```
+
+:::
+
+> 👉 For a complete example please visit `createBottomTabNavigator` [snack](https://snack.expo.dev/@react-native-paper/createbottomtabnavigator-with-bottomnavigationbar).
+
+---
+
+_For projects using `react-native-paper` < `5.14.0` and `react-navigation` < `7.x`, proceed as follows:_
+
 A material-design themed tab bar on the bottom of the screen that lets you switch between different routes with animation. Routes are lazily initialized - their screen components are not mounted until they are first focused.
 
 This wraps the [`BottomNavigation`](https://callstack.github.io/react-native-paper/docs/components/BottomNavigation/) component from `react-native-paper`, however if you [configure the Babel plugin](https://callstack.github.io/react-native-paper/docs/guides/getting-started/), it won't include the whole library in your bundle.
@@ -12,7 +45,7 @@ This wraps the [`BottomNavigation`](https://callstack.github.io/react-native-pap
 To use this navigator, ensure that you have [`@react-navigation/native` and its dependencies (follow this guide)](https://reactnavigation.org/docs/getting-started):
 :::
 
-> For a complete example please visit `createMaterialBottomTabNavigator` [snack](https://snack.expo.dev/@react-native-paper/creatematerialbottomtabnavigator)
+> 👉 For a complete example please visit `createMaterialBottomTabNavigator` [snack](https://snack.expo.dev/@react-native-paper/creatematerialbottomtabnavigator)
 
 ## API Definition
 
@@ -33,7 +66,7 @@ function MyTabs() {
 }
 ```
 
-> For a complete usage guide please visit [Tab Navigation](https://reactnavigation.org/docs/tab-based-navigation/)
+> 👉 For a complete usage guide please visit [Tab Navigation](https://reactnavigation.org/docs/tab-based-navigation/)
 
 ### Props
 

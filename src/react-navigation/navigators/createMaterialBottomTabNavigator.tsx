@@ -3,14 +3,11 @@ import * as React from 'react';
 import {
   createNavigatorFactory,
   DefaultNavigatorOptions,
-  NavigatorTypeBagBase,
   ParamListBase,
-  StaticConfig,
   TabActionHelpers,
   TabNavigationState,
   TabRouter,
   TabRouterOptions,
-  TypedNavigator,
   useNavigationBuilder,
 } from '@react-navigation/native';
 
@@ -21,14 +18,11 @@ import type {
 } from '../types';
 import MaterialBottomTabView from '../views/MaterialBottomTabView';
 
-// Based on: https://github.com/react-navigation/react-navigation/blob/main/packages/bottom-tabs/src/types.tsx#L445-L454
 export type MaterialBottomTabNavigatorProps = DefaultNavigatorOptions<
   ParamListBase,
-  undefined,
   TabNavigationState<ParamListBase>,
   MaterialBottomTabNavigationOptions,
-  MaterialBottomTabNavigationEventMap,
-  typeof MaterialBottomTabView
+  MaterialBottomTabNavigationEventMap
 > &
   TabRouterOptions &
   MaterialBottomTabNavigationConfig;
@@ -70,22 +64,12 @@ function MaterialBottomTabNavigator({
   );
 }
 
-// Based on: https://github.com/react-navigation/react-navigation/blob/main/packages/material-top-tabs/src/navigators/createMaterialTopTabNavigator.tsx#L65-L86
-export default function <
-  const ParamList extends ParamListBase,
-  const NavigatorID extends string | undefined,
-  const TypeBag extends NavigatorTypeBagBase = {
-    ParamList: ParamList;
-    NavigatorID: NavigatorID;
-    State: TabNavigationState<ParamList>;
-    ScreenOptions: MaterialBottomTabNavigationOptions;
-    EventMap: MaterialBottomTabNavigationEventMap;
-    NavigationList: {
-      [RouteName in keyof ParamList]: MaterialBottomTabNavigatorProps;
-    };
-    Navigator: typeof MaterialBottomTabNavigator;
-  },
-  const Config extends StaticConfig<TypeBag> = StaticConfig<TypeBag>
->(config?: Config): TypedNavigator<TypeBag, Config> {
-  return createNavigatorFactory(MaterialBottomTabNavigator)(config);
-}
+/**
+ * @deprecated `createMaterialBottomTabNavigator` has been deprecated since `5.14.0`. Please use `@react-navigation/bottom-tabs` version `7.x` or higher instead.
+ */
+export default createNavigatorFactory<
+  TabNavigationState<ParamListBase>,
+  MaterialBottomTabNavigationOptions,
+  MaterialBottomTabNavigationEventMap,
+  typeof MaterialBottomTabNavigator
+>(MaterialBottomTabNavigator);
