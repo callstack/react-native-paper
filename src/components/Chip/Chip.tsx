@@ -469,12 +469,14 @@ const styles = StyleSheet.create({
   labelText: {
     minHeight: 24,
     lineHeight: 24,
-    textAlignVertical: 'center',
     marginVertical: 4,
+    textAlignVertical: 'center',
+    flexShrink: 1,
   },
   md3LabelText: {
-    textAlignVertical: 'center',
     marginVertical: 6,
+    textAlignVertical: 'center',
+    flexShrink: 1,
   },
   avatar: {
     width: 24,
