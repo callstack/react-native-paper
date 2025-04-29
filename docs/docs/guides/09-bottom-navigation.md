@@ -3,37 +3,10 @@ title: Using BottomNavigation with React Navigation
 ---
 
 :::caution
-`createMaterialBottomTabNavigator` has been deprecated since `react-native-paper@5.14.0`. Please use `@react-navigation/bottom-tabs` version `7.x` or higher and combine it with `BottomNavigation.Bar` for a Material Design look.
+The `createMaterialBottomTabNavigator` has been deprecated as of `react-native-paper@5.14.0`. Instead, use `@react-navigation/bottom-tabs` version `7.x` or later, combined with `BottomNavigation.Bar` to achieve a Material Design look.
 
-```js
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { BottomNavigation } from 'react-native-paper';
-
-const Tab = createBottomTabNavigator();
-
-function MyTabs() {
-  return (
-    <Tab.Navigator
-      tabBar={({ navigation, state, descriptors, insets }) => (
-        <BottomNavigation.Bar
-          ...
-        />
-      )}
-    >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-    </Tab.Navigator>
-  );
-}
-```
-
+For implementation details, see the [dedicated example](https://callstack.github.io/react-native-paper/docs/components/BottomNavigation/BottomNavigationBar#with-react-navigation).
 :::
-
-> 👉 For a complete example please visit `createBottomTabNavigator` [snack](https://snack.expo.dev/@react-native-paper/createbottomtabnavigator-with-bottomnavigationbar).
-
----
-
-_For projects using `react-native-paper` < `5.14.0` and `react-navigation` < `7.x`, proceed as follows:_
 
 A material-design themed tab bar on the bottom of the screen that lets you switch between different routes with animation. Routes are lazily initialized - their screen components are not mounted until they are first focused.
 
