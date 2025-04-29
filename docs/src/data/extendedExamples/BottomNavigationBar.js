@@ -76,7 +76,7 @@ const MyTabs = createBottomTabNavigator({
         ),
       },
     },
-    Profile: {
+    Settings: {
       screen: SettingsScreen,
       options: {
         tabBarIcon: ({ color }) => (
