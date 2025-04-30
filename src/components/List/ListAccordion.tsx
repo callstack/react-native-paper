@@ -72,9 +72,17 @@ export type Props = {
    */
   background?: PressableAndroidRippleConfig;
   /**
-   * Style that is passed to the wrapping TouchableRipple element.
+   * Style that is passed to the root TouchableRipple container.
    */
   style?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to the outermost container that wraps the entire content, including left and right items and both title and description.
+   */
+  containerStyle?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to the content container, which wraps the title and description.
+   */
+  contentStyle?: StyleProp<ViewStyle>;
   /**
    * Style that is passed to Title element.
    */
@@ -173,6 +181,8 @@ const ListAccordion = ({
   descriptionNumberOfLines = 2,
   rippleColor: customRippleColor,
   style,
+  containerStyle,
+  contentStyle,
   id,
   testID,
   background,
@@ -252,7 +262,7 @@ const ListAccordion = ({
           borderless
         >
           <View
-            style={theme.isV3 ? styles.rowV3 : styles.row}
+            style={[theme.isV3 ? styles.rowV3 : styles.row, containerStyle]}
             pointerEvents={pointerEvents}
           >
             {left
@@ -262,7 +272,11 @@ const ListAccordion = ({
                 })
               : null}
             <View
-              style={[theme.isV3 ? styles.itemV3 : styles.item, styles.content]}
+              style={[
+                theme.isV3 ? styles.itemV3 : styles.item,
+                styles.content,
+                contentStyle,
+              ]}
             >
               <Text
                 selectable={false}

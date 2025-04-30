@@ -47,11 +47,14 @@ exports[`renders list item with custom description 1`] = `
 >
   <View
     style={
-      {
-        "flexDirection": "row",
-        "marginVertical": 6,
-        "width": "100%",
-      }
+      [
+        {
+          "flexDirection": "row",
+          "marginVertical": 6,
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
   >
     <View
@@ -374,11 +377,14 @@ exports[`renders list item with custom title and description styles 1`] = `
 >
   <View
     style={
-      {
-        "flexDirection": "row",
-        "marginVertical": 6,
-        "width": "100%",
-      }
+      [
+        {
+          "flexDirection": "row",
+          "marginVertical": 6,
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
   >
     <View
@@ -516,11 +522,14 @@ exports[`renders list item with left and right items 1`] = `
 >
   <View
     style={
-      {
-        "flexDirection": "row",
-        "marginVertical": 6,
-        "width": "100%",
-      }
+      [
+        {
+          "flexDirection": "row",
+          "marginVertical": 6,
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
   >
     <Text>
@@ -710,11 +719,14 @@ exports[`renders list item with left item 1`] = `
 >
   <View
     style={
-      {
-        "flexDirection": "row",
-        "marginVertical": 6,
-        "width": "100%",
-      }
+      [
+        {
+          "flexDirection": "row",
+          "marginVertical": 6,
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
   >
     <View
@@ -870,11 +882,14 @@ exports[`renders list item with right item 1`] = `
 >
   <View
     style={
-      {
-        "flexDirection": "row",
-        "marginVertical": 6,
-        "width": "100%",
-      }
+      [
+        {
+          "flexDirection": "row",
+          "marginVertical": 6,
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
   >
     <View
@@ -979,11 +994,14 @@ exports[`renders list item with title and description 1`] = `
 >
   <View
     style={
-      {
-        "flexDirection": "row",
-        "marginVertical": 6,
-        "width": "100%",
-      }
+      [
+        {
+          "flexDirection": "row",
+          "marginVertical": 6,
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
   >
     <View
@@ -1117,11 +1135,14 @@ exports[`renders with a description with typeof number 1`] = `
 >
   <View
     style={
-      {
-        "flexDirection": "row",
-        "marginVertical": 6,
-        "width": "100%",
-      }
+      [
+        {
+          "flexDirection": "row",
+          "marginVertical": 6,
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
   >
     <View

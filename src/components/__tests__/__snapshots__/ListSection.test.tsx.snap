@@ -264,11 +264,14 @@ exports[`renders list section with custom title style 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -421,11 +424,14 @@ exports[`renders list section with custom title style 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -797,11 +803,14 @@ exports[`renders list section with subheader 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -954,11 +963,14 @@ exports[`renders list section with subheader 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -1290,11 +1302,14 @@ exports[`renders list section without subheader 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -1447,11 +1462,14 @@ exports[`renders list section without subheader 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
     >
       <View

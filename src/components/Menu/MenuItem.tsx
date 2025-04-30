@@ -64,10 +64,21 @@ export type Props = {
    */
   titleMaxFontSizeMultiplier?: number;
   /**
+   * Style that is passed to the root TouchableRipple container.
    * @optional
    */
   style?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to the outermost container that wraps the entire content, including leading and trailing icons and title text.
+   */
+  containerStyle?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to the content container, which wraps the title text.
+   */
   contentStyle?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to the Title element.
+   */
   titleStyle?: StyleProp<TextStyle>;
   /**
    * Color of the ripple effect.
@@ -122,6 +133,7 @@ const MenuItem = ({
   background,
   onPress,
   style,
+  containerStyle,
   contentStyle,
   titleStyle,
   rippleColor: customRippleColor,
@@ -176,7 +188,7 @@ const MenuItem = ({
       accessibilityState={newAccessibilityState}
       rippleColor={rippleColor}
     >
-      <View style={styles.row}>
+      <View style={[styles.row, containerStyle]}>
         {leadingIcon ? (
           <View
             style={[!isV3 && styles.item, { width: iconWidth }]}
