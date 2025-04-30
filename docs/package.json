@@ -23,6 +23,8 @@
     "@easyops-cn/docusaurus-search-local": "^0.33.4",
     "@material/material-color-utilities": "0.2.4",
     "@mdx-js/react": "^1.6.22",
+    "@react-native-vector-icons/common": "^11.0.0",
+    "@react-native-vector-icons/material-design-icons": "^7.4.47",
     "camelcase": "^7.0.1",
     "clsx": "^1.2.1",
     "color": "^4.2.3",
@@ -32,7 +34,6 @@
     "react-color": "^2.19.3",
     "react-dom": "17.0.2",
     "react-native-safe-area-context": "^4.5.0",
-    "react-native-vector-icons": "^9.2.0",
     "react-native-web": "^0.18.12",
     "use-latest-callback": "^0.1.7"
   },

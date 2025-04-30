@@ -8,14 +8,11 @@ jobs:
     if: ${{ github.event.label.name == 'bug' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: react-navigation/check-versions-action@v1.0.0
+      - uses: react-navigation/check-versions-action@v1.1.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           required-packages: |
-            react-native
             react-native-paper
-            react-native-vector-icons
           optional-packages: |
-            expo
-            npm
-            yarn
+            @react-native-vector-icons/common
+            @react-native-vector-icons/material-design-icons

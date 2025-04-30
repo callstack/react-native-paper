@@ -132,16 +132,10 @@ exports[`can render leading checkbox control 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰄬
+          check
         </Text>
       </View>
     </View>
@@ -364,16 +358,10 @@ exports[`can render the Android checkbox on different platforms 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰄱
+          checkbox-blank-outline
         </Text>
         <View
           style={
@@ -580,16 +568,10 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰄬
+          check
         </Text>
       </View>
     </View>
@@ -767,16 +749,10 @@ exports[`renders unchecked 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰄬
+          check
         </Text>
       </View>
     </View>

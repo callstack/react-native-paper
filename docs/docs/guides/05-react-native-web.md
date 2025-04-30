@@ -32,7 +32,7 @@ module.exports = function override(config, env) {
     test: /\.js$/,
     exclude: /node_modules[/\\](?!react-native-vector-icons)/,
     use: {
-      loader: "babel-loader",
+      loader: 'babel-loader',
       options: {
         // Disable reading babel configuration
         babelrc: false,
@@ -40,17 +40,17 @@ module.exports = function override(config, env) {
 
         // The configuration for compilation
         presets: [
-          ["@babel/preset-env", { useBuiltIns: "usage" }],
-          "@babel/preset-react",
-          "@babel/preset-flow",
-          "@babel/preset-typescript"
+          ['@babel/preset-env', { useBuiltIns: 'usage' }],
+          '@babel/preset-react',
+          '@babel/preset-flow',
+          '@babel/preset-typescript',
         ],
         plugins: [
-          "@babel/plugin-proposal-class-properties",
-          "@babel/plugin-proposal-object-rest-spread"
-        ]
-      }
-    }
+          '@babel/plugin-proposal-class-properties',
+          '@babel/plugin-proposal-object-rest-spread',
+        ],
+      },
+    },
   });
 
   return config;
@@ -102,13 +102,9 @@ module.exports = {
 
   // Loaders and resolver config
   module: {
-    rules: [
-
-    ],
+    rules: [],
   },
-  resolve: {
-
-  },
+  resolve: {},
 
   // Development server config
   devServer: {
@@ -121,17 +117,22 @@ module.exports = {
 Also create a folder named `public` and add the following file named `index.html`:
 
 ```html
-<!doctype html>
+<!DOCTYPE html>
 <head>
-  <meta charSet="utf-8" />
+  <meta charset="utf-8" />
   <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
-  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+  <meta
+    name="viewport"
+    content="width=device-width,minimum-scale=1,initial-scale=1"
+  />
 
   <title>App</title>
 
   <style>
-    html, body, #root {
+    html,
+    body,
+    #root {
       height: 100%;
     }
 
@@ -230,7 +231,7 @@ Use `asset/resource`, since `file-loader` was deprecated in webpack v5.
 }
 ```
 
-## Load the Material Community Icons
+## Load the Material Design Icons
 
 If you followed the getting started guide, you should have the following code in your root component:
 
@@ -240,7 +241,7 @@ If you followed the getting started guide, you should have the following code in
 </PaperProvider>
 ```
 
-Now we need tweak this section to load the Material Community Icons from the [`react-native-vector-icons`](https://github.com/oblador/react-native-vector-icons) library:
+Now we need tweak this section to load the Material Design Icons from the [`react-native-vector-icons`](https://github.com/oblador/react-native-vector-icons) library:
 
 ```js
 <PaperProvider>
@@ -248,8 +249,8 @@ Now we need tweak this section to load the Material Community Icons from the [`r
     {Platform.OS === 'web' ? (
       <style type="text/css">{`
         @font-face {
-          font-family: 'MaterialCommunityIcons';
-          src: url(${require('react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf')}) format('truetype');
+          font-family: 'MaterialDesignIcons';
+          src: url(${require('@react-native-vector-icons/material-design-icons/fonts/MaterialDesignIcons.ttf')}) format('truetype');
         }
       `}</style>
     ) : null}

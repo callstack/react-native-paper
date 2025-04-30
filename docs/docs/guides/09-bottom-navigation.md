@@ -195,7 +195,7 @@ navigation.jumpTo('Profile', { name: 'Michaś' });
 
 ```js
 import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialDesignIcons from '@react-native-vector-icons/material-design-icons';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -212,7 +212,7 @@ function MyTabs() {
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
+            <MaterialDesignIcons name="home" color={color} size={26} />
           ),
         }}
       />
@@ -222,7 +222,7 @@ function MyTabs() {
         options={{
           tabBarLabel: 'Updates',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="bell" color={color} size={26} />
+            <MaterialDesignIcons name="bell" color={color} size={26} />
           ),
         }}
       />
@@ -232,7 +232,7 @@ function MyTabs() {
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
+            <MaterialDesignIcons name="account" color={color} size={26} />
           ),
         }}
       />

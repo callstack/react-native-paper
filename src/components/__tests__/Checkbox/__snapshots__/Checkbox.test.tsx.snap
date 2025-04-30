@@ -78,16 +78,10 @@ exports[`renders Checkbox with custom testID 1`] = `
               "backgroundColor": "transparent",
             },
           ],
-          {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          {},
         ]
       }
     >
-      󰄬
+      check
     </Text>
   </View>
 </View>
@@ -171,16 +165,10 @@ exports[`renders checked Checkbox with color 1`] = `
               "backgroundColor": "transparent",
             },
           ],
-          {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          {},
         ]
       }
     >
-      󰄬
+      check
     </Text>
   </View>
 </View>
@@ -263,16 +251,10 @@ exports[`renders checked Checkbox with onPress 1`] = `
               "backgroundColor": "transparent",
             },
           ],
-          {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          {},
         ]
       }
     >
-      󰄬
+      check
     </Text>
   </View>
 </View>
@@ -355,16 +337,10 @@ exports[`renders indeterminate Checkbox 1`] = `
               "backgroundColor": "transparent",
             },
           ],
-          {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          {},
         ]
       }
     >
-      󰍴
+      minus
     </Text>
   </View>
 </View>
@@ -448,16 +424,10 @@ exports[`renders indeterminate Checkbox with color 1`] = `
               "backgroundColor": "transparent",
             },
           ],
-          {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          {},
         ]
       }
     >
-      󰍴
+      minus
     </Text>
   </View>
 </View>
@@ -541,16 +511,10 @@ exports[`renders unchecked Checkbox with color 1`] = `
               "backgroundColor": "transparent",
             },
           ],
-          {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          {},
         ]
       }
     >
-      󰄬
+      check
     </Text>
   </View>
 </View>
@@ -633,16 +597,10 @@ exports[`renders unchecked Checkbox with onPress 1`] = `
               "backgroundColor": "transparent",
             },
           ],
-          {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          {},
         ]
       }
     >
-      󰄬
+      check
     </Text>
   </View>
 </View>
