@@ -69,11 +69,14 @@ exports[`renders snackbar with Text as a child 1`] = `
     >
       <View
         style={
-          {
-            "flex": 1,
-            "marginHorizontal": 16,
-            "marginVertical": 14,
-          }
+          [
+            {
+              "flex": 1,
+              "marginHorizontal": 16,
+              "marginVertical": 14,
+            },
+            undefined,
+          ]
         }
       >
         <View>
@@ -154,11 +157,14 @@ exports[`renders snackbar with View & Text as a child 1`] = `
     >
       <View
         style={
-          {
-            "flex": 1,
-            "marginHorizontal": 16,
-            "marginVertical": 14,
-          }
+          [
+            {
+              "flex": 1,
+              "marginHorizontal": 16,
+              "marginVertical": 14,
+            },
+            undefined,
+          ]
         }
       >
         <View>
