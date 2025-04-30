@@ -69,7 +69,7 @@ export type Props = {
    */
   style?: StyleProp<ViewStyle>;
   /**
-   * Style that is passed to the outermost container that wraps the entire content, including icons and text.
+   * Style that is passed to the outermost container that wraps the entire content, including leading and trailing icons and title text.
    */
   containerStyle?: StyleProp<ViewStyle>;
   /**

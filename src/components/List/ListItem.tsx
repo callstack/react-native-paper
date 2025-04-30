@@ -67,7 +67,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   style?: StyleProp<ViewStyle>;
   /**
-   * Style that is passed to the outermost container that wraps the entire content, including icons and text.
+   * Style that is passed to the outermost container that wraps the entire content, including left and right items and both title and description.
    */
   containerStyle?: StyleProp<ViewStyle>;
   /**
