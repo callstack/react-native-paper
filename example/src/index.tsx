@@ -22,6 +22,7 @@ import App from './RootNavigator';
 import {
   CombinedDarkTheme,
   CombinedDefaultTheme,
+  createConfiguredFontNavigationTheme,
   createConfiguredFontTheme,
 } from '../utils/themes';
 
@@ -149,6 +150,8 @@ export default function PaperExample() {
 
   const combinedTheme = isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme;
   const configuredFontTheme = createConfiguredFontTheme(combinedTheme);
+  const configuredFontNavigationTheme =
+    createConfiguredFontNavigationTheme(combinedTheme);
 
   return (
     <PaperProvider
@@ -156,38 +159,38 @@ export default function PaperExample() {
       theme={customFontLoaded ? configuredFontTheme : theme}
     >
       <PreferencesContext.Provider value={preferences}>
-        <React.Fragment>
-          <NavigationContainer
-            theme={combinedTheme}
-            initialState={initialState}
-            onStateChange={(state) =>
-              AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
-            }
-          >
-            <SafeAreaInsetsContext.Consumer>
-              {(insets) => {
-                const { left, right } = insets || { left: 0, right: 0 };
-                const collapsedDrawerWidth = 80 + Math.max(left, right);
-                return (
-                  <Drawer.Navigator
-                    screenOptions={{
-                      drawerStyle: collapsed && {
-                        width: collapsedDrawerWidth,
-                      },
-                    }}
-                    drawerContent={() => <DrawerItems />}
-                  >
-                    <Drawer.Screen
-                      name="Home"
-                      component={App}
-                      options={{ headerShown: false }}
-                    />
-                  </Drawer.Navigator>
-                );
-              }}
-            </SafeAreaInsetsContext.Consumer>
-          </NavigationContainer>
-        </React.Fragment>
+        <NavigationContainer
+          theme={
+            customFontLoaded ? configuredFontNavigationTheme : combinedTheme
+          }
+          initialState={initialState}
+          onStateChange={(state) =>
+            AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
+          }
+        >
+          <SafeAreaInsetsContext.Consumer>
+            {(insets) => {
+              const { left, right } = insets || { left: 0, right: 0 };
+              const collapsedDrawerWidth = 100 + Math.max(left, right);
+              return (
+                <Drawer.Navigator
+                  screenOptions={{
+                    drawerStyle: collapsed && {
+                      width: collapsedDrawerWidth,
+                    },
+                  }}
+                  drawerContent={() => <DrawerItems />}
+                >
+                  <Drawer.Screen
+                    name="Home"
+                    component={App}
+                    options={{ headerShown: false }}
+                  />
+                </Drawer.Navigator>
+              );
+            }}
+          </SafeAreaInsetsContext.Consumer>
+        </NavigationContainer>
       </PreferencesContext.Provider>
     </PaperProvider>
   );

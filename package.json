@@ -131,7 +131,7 @@
       "__fixtures__\\/[^/]+\\/(output|error)\\.js"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(@react-native|react-native(-.*)?)/)"
+      "node_modules/(?!(@react-navigation|@react-native|react-native(-.*)?)/)"
     ]
   },
   "greenkeeper": {

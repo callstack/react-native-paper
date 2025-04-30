@@ -28,7 +28,6 @@ import ListAccordionExample from './Examples/ListAccordionExample';
 import ListAccordionExampleGroup from './Examples/ListAccordionGroupExample';
 import ListItemExample from './Examples/ListItemExample';
 import ListSectionExample from './Examples/ListSectionExample';
-import MaterialBottomTabNavigatorExample from './Examples/MaterialBottomTabNavigatorExample';
 import MenuExample from './Examples/MenuExample';
 import ProgressBarExample from './Examples/ProgressBarExample';
 import RadioButtonExample from './Examples/RadioButtonExample';
@@ -80,7 +79,6 @@ export const mainExamples: Record<
   listAccordionGroup: ListAccordionExampleGroup,
   listSection: ListSectionExample,
   listItem: ListItemExample,
-  materialBottomTabNavigator: MaterialBottomTabNavigatorExample,
   menu: MenuExample,
   progressbar: ProgressBarExample,
   radio: RadioButtonExample,
