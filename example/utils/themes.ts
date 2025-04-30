@@ -21,6 +21,10 @@ export const CombinedDefaultTheme = {
     ...MD3LightTheme.colors,
     ...LightTheme.colors,
   },
+  fonts: {
+    ...MD3LightTheme.fonts,
+    ...LightTheme.fonts,
+  },
 };
 
 export const CombinedDarkTheme = {
@@ -29,6 +33,10 @@ export const CombinedDarkTheme = {
   colors: {
     ...MD3DarkTheme.colors,
     ...DarkTheme.colors,
+  },
+  fonts: {
+    ...MD3DarkTheme.fonts,
+    ...DarkTheme.fonts,
   },
 };
 
@@ -41,4 +49,27 @@ export const createConfiguredFontTheme = (theme: CombinedTheme) => ({
       fontFamily: 'Abel',
     },
   }),
+});
+
+export const createConfiguredFontNavigationTheme = (theme: CombinedTheme) => ({
+  ...theme,
+  fonts: {
+    ...theme.fonts,
+    regular: {
+      ...theme.fonts.regular,
+      fontFamily: 'Abel',
+    },
+    medium: {
+      ...theme.fonts.medium,
+      fontFamily: 'Abel',
+    },
+    heavy: {
+      ...theme.fonts.heavy,
+      fontFamily: 'Abel',
+    },
+    bold: {
+      ...theme.fonts.bold,
+      fontFamily: 'Abel',
+    },
+  },
 });

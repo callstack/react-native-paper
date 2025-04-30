@@ -20,8 +20,7 @@ export default function Root() {
   return (
     <View style={styles.stackWrapper}>
       <Stack.Navigator
-        screenOptions={({ navigation }) => ({
-          detachPreviousScreen: !navigation.isFocused(),
+        screenOptions={() => ({
           cardStyleInterpolator,
           header: ({ navigation, route, options, back }) => (
             <Appbar.Header elevated>

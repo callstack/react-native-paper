@@ -22,6 +22,7 @@ import App from './RootNavigator';
 import {
   CombinedDarkTheme,
   CombinedDefaultTheme,
+  createConfiguredFontNavigationTheme,
   createConfiguredFontTheme,
 } from '../utils/themes';
 
@@ -149,6 +150,8 @@ export default function PaperExample() {
 
   const combinedTheme = isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme;
   const configuredFontTheme = createConfiguredFontTheme(combinedTheme);
+  const configuredFontNavigationTheme =
+    createConfiguredFontNavigationTheme(combinedTheme);
 
   return (
     <PaperProvider
@@ -157,8 +160,9 @@ export default function PaperExample() {
     >
       <PreferencesContext.Provider value={preferences}>
         <NavigationContainer
-          // @ts-ignore - will be adjusted after merging https://github.com/callstack/react-native-paper/pull/4690
-          theme={combinedTheme}
+          theme={
+            customFontLoaded ? configuredFontNavigationTheme : combinedTheme
+          }
           initialState={initialState}
           onStateChange={(state) =>
             AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
