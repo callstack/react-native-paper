@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { PlatformPressable } from '@react-navigation/elements';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Text } from 'react-native-paper';
 
@@ -30,6 +31,12 @@ const HomeTab = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        tabBarButton: (props) => (
+          <PlatformPressable
+            {...props}
+            android_ripple={{ color: 'transparent' }}
+          />
+        ),
       }}
     >
       <Tab.Screen
