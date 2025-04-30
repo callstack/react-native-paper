@@ -9,8 +9,8 @@ export type Props = React.ComponentProps<typeof Text> & {
 };
 
 // @component-group Typography
-
 /**
+ * @deprecated Deprecated in v5.x - use `<Text variant="bodySmall" />` instead.
  * Typography component for showing a caption.
  *
  * <div class="screenshots">

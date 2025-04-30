@@ -10,6 +10,7 @@ export type Props = React.ComponentProps<typeof Text> & {
 // @component-group Typography
 
 /**
+ * @deprecated Deprecated in v5.x - use `<Text variant="titleLarge" />` instead.
  * Typography component for showing a title.
  *
  * <div class="screenshots">
