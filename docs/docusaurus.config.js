@@ -240,7 +240,8 @@ const config = {
       navbar: {
         logo: {
           alt: 'React Native Paper',
-          src: 'images/sidebar-logo.svg',
+          src: 'images/navbar-logo.svg',
+          srcDark: 'images/navbar-logo-dark.svg',
         },
         items: [
           {
