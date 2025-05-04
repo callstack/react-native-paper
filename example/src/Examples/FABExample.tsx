@@ -10,6 +10,7 @@ import ScreenWrapper from '../ScreenWrapper';
 type FABVariant = 'primary' | 'secondary' | 'tertiary' | 'surface';
 type FABSize = 'small' | 'medium' | 'large';
 type FABMode = 'flat' | 'elevated';
+type FABIconPosition = 'left' | 'right';
 
 const FABExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
@@ -21,6 +22,7 @@ const FABExample = () => {
   const variants = ['primary', 'secondary', 'tertiary', 'surface'];
   const sizes = ['small', 'medium', 'large'];
   const modes = ['flat', 'elevated'];
+  const iconPositions = ['left', 'right'];
 
   return (
     <ScreenWrapper style={styles.container}>
@@ -73,6 +75,23 @@ const FABExample = () => {
                   mode={mode as FABMode}
                 />
                 {visible && <Text variant="bodyMedium">{mode}</Text>}
+              </View>
+            ))}
+          </View>
+          <View style={styles.row}>
+            {iconPositions.map((position) => (
+              <View style={styles.fabVariant} key={position}>
+                <FAB
+                  icon="pencil"
+                  label={`icon on the ${position}`}
+                  style={styles.fab}
+                  onPress={() => {}}
+                  visible={visible}
+                  iconPosition={position as FABIconPosition}
+                />
+                {visible && (
+                  <Text variant="bodyMedium">icon on the {position}</Text>
+                )}
               </View>
             ))}
           </View>
