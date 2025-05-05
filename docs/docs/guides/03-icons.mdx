@@ -2,6 +2,8 @@
 title: Icons
 ---
 
+import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
 import IconsList from '@site/src/components/IconsList.tsx';
 
 # Icons
@@ -28,10 +30,29 @@ Example:
 <Button icon="camera">Press me</Button>
 ```
 
-<details>
-  <summary>See the list of supported icons</summary>
-  <IconsList />
-</details>
+:::note
+Choose the correct tab below based on your `react-native-vector-icons` version:
+
+- Use **latest** tab if you're using the latest version of `@react-native-vector-icons/material-design-icons`
+- Use **10.x** tab if you're still using the old single package `react-native-vector-icons`, version `10.x`
+
+If you are using `@expo/vector-icons`, please check their [searchable list of icons](https://icons.expo.fyi/).
+:::
+
+<Tabs>
+  <TabItem value="material-design-icons" label="latest">
+    <details>
+      <summary>See the list of supported icons</summary>
+      <IconsList latest />
+    </details>
+  </TabItem>
+  <TabItem value="material-community-icons" label="10.x">
+    <details>
+      <summary>See the list of supported icons</summary>
+      <IconsList />
+    </details>
+  </TabItem>
+</Tabs>
 
 ### 2. An image source
 

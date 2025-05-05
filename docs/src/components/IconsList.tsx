@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 
-const icons: { [key in string]: number } = {
+const latestIcons: { [key in string]: number } = {
   ...require('../../node_modules/@react-native-vector-icons/material-design-icons/glyphmaps/MaterialDesignIcons.json'),
 };
 
-export default function IconsList() {
+const oldIcons: { [key in string]: number } = {
+  ...require('../utils/MaterialCommunityIcons.json'),
+};
+
+export default function IconsList({ latest }: { latest?: boolean }) {
+  const icons = latest ? latestIcons : oldIcons;
+
   const [query, setQuery] = useState('');
 
   const iconNames = Object.keys(icons).filter(
