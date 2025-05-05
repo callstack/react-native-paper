@@ -25,7 +25,9 @@ import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
@@ -132,6 +134,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   textStyle?: StyleProp<TextStyle>;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -202,6 +208,7 @@ const Chip = ({
   compact,
   elevated = false,
   maxFontSizeMultiplier,
+  hitSlop,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -327,6 +334,7 @@ const Chip = ({
         accessibilityState={accessibilityState}
         testID={testID}
         theme={theme}
+        hitSlop={hitSlop}
       >
         <View
           style={[styles.content, isV3 && styles.md3Content, contentSpacings]}

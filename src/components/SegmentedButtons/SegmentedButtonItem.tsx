@@ -22,7 +22,9 @@ import {
 import { useInternalTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {
@@ -99,6 +101,10 @@ export type Props = {
    */
   testID?: string;
   /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -123,6 +129,7 @@ const SegmentedButtonItem = ({
   density = 'regular',
   theme: themeOverrides,
   labelMaxFontSizeMultiplier,
+  hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
@@ -217,6 +224,7 @@ const SegmentedButtonItem = ({
         style={rippleStyle}
         background={background}
         theme={theme}
+        hitSlop={hitSlop}
       >
         <View style={[styles.content, { paddingVertical }]}>
           {showCheckedIcon ? (

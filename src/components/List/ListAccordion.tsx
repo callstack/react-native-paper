@@ -20,7 +20,9 @@ import { getAccordionColors, getLeftStyles } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {
@@ -129,6 +131,11 @@ export type Props = {
    * `pointerEvents` passed to the `View` container
    */
   pointerEvents?: ViewProps['pointerEvents'];
+  /**
+   * Amount of space between the touchable area and the edge of the component.
+   * This can be used to enlarge the touchable area beyond the visible component.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
 };
 
 /**
@@ -194,6 +201,7 @@ const ListAccordion = ({
   pointerEvents = 'none',
   titleMaxFontSizeMultiplier,
   descriptionMaxFontSizeMultiplier,
+  hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const [expanded, setExpanded] = React.useState<boolean>(
@@ -260,6 +268,7 @@ const ListAccordion = ({
           theme={theme}
           background={background}
           borderless
+          hitSlop={hitSlop}
         >
           <View
             style={[theme.isV3 ? styles.rowV3 : styles.row, containerStyle]}

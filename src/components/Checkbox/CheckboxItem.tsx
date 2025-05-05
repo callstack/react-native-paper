@@ -15,7 +15,9 @@ import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp, MD3TypescaleKey } from '../../types';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {
@@ -106,6 +108,10 @@ export type Props = {
    * Left undefined `<Checkbox />` will be used.
    */
   mode?: 'android' | 'ios';
+  /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
 };
 
 /**
@@ -144,6 +150,7 @@ const CheckboxItem = ({
   labelMaxFontSizeMultiplier = 1.5,
   rippleColor,
   background,
+  hitSlop,
   ...props
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -185,6 +192,7 @@ const CheckboxItem = ({
       rippleColor={rippleColor}
       theme={theme}
       background={background}
+      hitSlop={hitSlop}
     >
       <View
         style={[styles.container, style]}
