@@ -37,7 +37,13 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    * This component render TextInputOutlined or TextInputFlat based on that props
    */
   mode?: 'flat' | 'outlined';
+  /**
+   * The adornment placed on the left side of the input. It can be either `TextInput.Icon` or `TextInput.Affix`.
+   */
   left?: React.ReactNode;
+  /**
+   * The adornment placed on the right side of the input. It can be either `TextInput.Icon` or `TextInput.Affix`.
+   */
   right?: React.ReactNode;
   /**
    * If true, user won't be able to interact with the component.
