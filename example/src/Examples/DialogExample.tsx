@@ -3,6 +3,8 @@ import { Platform, StyleSheet } from 'react-native';
 
 import { Button } from 'react-native-paper';
 
+import { useExampleTheme } from '..';
+import ScreenWrapper from '../ScreenWrapper';
 import {
   DialogWithCustomColors,
   DialogWithDismissableBackButton,
@@ -12,8 +14,6 @@ import {
   DialogWithRadioBtns,
   UndismissableDialog,
 } from './Dialogs';
-import { useExampleTheme } from '..';
-import ScreenWrapper from '../ScreenWrapper';
 
 type ButtonVisibility = {
   [key: string]: boolean | undefined;

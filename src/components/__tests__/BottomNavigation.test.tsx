@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, Easing, Platform, StyleSheet } from 'react-native';
+import { Animated, Easing, Platform, StyleSheet, Text } from 'react-native';
 
 import { act, fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
@@ -655,4 +655,80 @@ it("allows customizing Route's type via generics", () => {
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('renders all icons as unfocused when index is -1', () => {
+  const navigationState = {
+    index: -1,
+    routes: Array.from({ length: 3 }, (_, i) => ({
+      key: `key-${i}`,
+      icon: icons[i],
+      title: `Route: ${i}`,
+    })),
+  };
+
+  const component = render(
+    <BottomNavigation
+      shifting={false}
+      navigationState={navigationState}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+      renderIcon={({ route, focused, color }) => (
+        <Text testID={`icon-${route.key}`} style={{ color }}>
+          {focused ? 'focused' : 'unfocused'}
+        </Text>
+      )}
+    />
+  );
+  const { container } = component;
+  const iconNodes0 = container.findAll(
+    (node) => node.props.testID === 'icon-key-0'
+  );
+  const visibleIcon0 = iconNodes0.find((node) => {
+    // node.parent it's an Animated.View wrapping the icon so we can check that its style.opacity equals 1.
+    const parentStyle = node.parent?.props.style;
+    if (Array.isArray(parentStyle)) {
+      return parentStyle.some((style) => style && style.opacity === 1);
+    }
+    return parentStyle && parentStyle.opacity === 1;
+  });
+  expect(visibleIcon0!.props.children).toBe('unfocused');
+});
+
+it('renders all icons as unfocused when index is greater than the the routes length', () => {
+  const navigationState = {
+    index: 4,
+    routes: Array.from({ length: 3 }, (_, i) => ({
+      key: `key-${i}`,
+      icon: icons[i],
+      title: `Route: ${i}`,
+    })),
+  };
+
+  const component = render(
+    <BottomNavigation
+      shifting={false}
+      navigationState={navigationState}
+      onIndexChange={jest.fn()}
+      renderScene={({ route }) => route.title}
+      renderIcon={({ route, focused, color }) => (
+        <Text testID={`icon-${route.key}`} style={{ color }}>
+          {focused ? 'focused' : 'unfocused'}
+        </Text>
+      )}
+    />
+  );
+  const { container } = component;
+  const iconNodes0 = container.findAll(
+    (node) => node.props.testID === 'icon-key-2'
+  );
+  const visibleIcon2 = iconNodes0.find((node) => {
+    // node.parent it's an Animated.View wrapping the icon so we can check that its style.opacity equals 1.
+    const parentStyle = node.parent?.props.style;
+    if (Array.isArray(parentStyle)) {
+      return parentStyle.some((style) => style && style.opacity === 1);
+    }
+    return parentStyle && parentStyle.opacity === 1;
+  });
+  expect(visibleIcon2!.props.children).toBe('unfocused');
 });
