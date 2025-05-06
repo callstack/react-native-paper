@@ -12,7 +12,6 @@ const root = path.resolve(__dirname, '..');
 const defaultConfig = getDefaultConfig(__dirname);
 
 const modules = [
-  '@react-native-vector-icons/common',
   '@react-native-vector-icons/material-design-icons',
   '@expo/vector-icons',
   'expo-constants',
