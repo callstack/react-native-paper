@@ -27,7 +27,7 @@ exports[`renders snackbar with Text as a child 1`] = `
         "backgroundColor": "rgba(49, 48, 51, 1)",
         "borderRadius": 4,
         "margin": 8,
-        "opacity": 1,
+        "opacity": 0,
         "shadowColor": "#000",
         "shadowOffset": {
           "height": 2,
@@ -37,7 +37,7 @@ exports[`renders snackbar with Text as a child 1`] = `
         "shadowRadius": 6,
         "transform": [
           {
-            "scale": 1,
+            "scale": 0.9,
           },
         ],
       }
@@ -115,7 +115,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
         "backgroundColor": "rgba(49, 48, 51, 1)",
         "borderRadius": 4,
         "margin": 8,
-        "opacity": 1,
+        "opacity": 0,
         "shadowColor": "#000",
         "shadowOffset": {
           "height": 2,
@@ -125,7 +125,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
         "shadowRadius": 6,
         "transform": [
           {
-            "scale": 1,
+            "scale": 0.9,
           },
         ],
       }
@@ -229,7 +229,7 @@ exports[`renders snackbar with action button 1`] = `
         "backgroundColor": "rgba(49, 48, 51, 1)",
         "borderRadius": 4,
         "margin": 8,
-        "opacity": 1,
+        "opacity": 0,
         "shadowColor": "#000",
         "shadowOffset": {
           "height": 2,
@@ -239,7 +239,7 @@ exports[`renders snackbar with action button 1`] = `
         "shadowRadius": 6,
         "transform": [
           {
-            "scale": 1,
+            "scale": 0.9,
           },
         ],
       }
@@ -498,7 +498,7 @@ exports[`renders snackbar with content 1`] = `
         "backgroundColor": "rgba(49, 48, 51, 1)",
         "borderRadius": 4,
         "margin": 8,
-        "opacity": 1,
+        "opacity": 0,
         "shadowColor": "#000",
         "shadowOffset": {
           "height": 2,
@@ -508,7 +508,7 @@ exports[`renders snackbar with content 1`] = `
         "shadowRadius": 6,
         "transform": [
           {
-            "scale": 1,
+            "scale": 0.9,
           },
         ],
       }

@@ -174,7 +174,7 @@ exports[`renders avatar with text 1`] = `
           {
             "color": "#ffffff",
             "fontSize": 32,
-            "lineHeight": 32,
+            "lineHeight": 64,
           },
           undefined,
         ],
@@ -228,7 +228,7 @@ exports[`renders avatar with text and custom background color 1`] = `
           {
             "color": "#ffffff",
             "fontSize": 32,
-            "lineHeight": 32,
+            "lineHeight": 64,
           },
           undefined,
         ],
@@ -282,7 +282,7 @@ exports[`renders avatar with text and custom colors 1`] = `
           {
             "color": "#FFFFFF",
             "fontSize": 32,
-            "lineHeight": 32,
+            "lineHeight": 64,
           },
           undefined,
         ],
@@ -336,7 +336,7 @@ exports[`renders avatar with text and custom size 1`] = `
           {
             "color": "#ffffff",
             "fontSize": 48,
-            "lineHeight": 48,
+            "lineHeight": 96,
           },
           undefined,
         ],
