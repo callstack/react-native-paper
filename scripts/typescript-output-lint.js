@@ -25,7 +25,6 @@ const unusedViewProps = [
   'onAccessibilityTap',
   'onMagicTap',
   'accessibilityIgnoresInvertColors',
-  'hitSlop',
   'removeClippedSubviews',
   'collapsable',
   'needsOffscreenAlphaCompositing',
