@@ -202,7 +202,7 @@ const SurfaceIOS = forwardRef<
         ...(isElevated && getStyleForShadowLayer(elevation, 1)),
         ...filteredStyles,
         ...borderRadiusStyles,
-        flex: flattenedStyles.height ? 1 : undefined,
+        flex: flattenedStyles.height || flattenedStyles.flex ? 1 : undefined,
         backgroundColor: bgColor,
       };
 
