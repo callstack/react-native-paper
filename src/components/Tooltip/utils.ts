@@ -1,4 +1,10 @@
-import { Dimensions, LayoutRectangle, ViewStyle } from 'react-native';
+import {
+  Dimensions,
+  LayoutRectangle,
+  StyleProp,
+  ViewStyle,
+  StyleSheet,
+} from 'react-native';
 
 type ChildrenMeasurement = {
   width: number;
@@ -13,6 +19,14 @@ export type Measurement = {
   children: ChildrenMeasurement;
   tooltip: TooltipLayout;
   measured: boolean;
+};
+
+export type TooltipChildProps = {
+  style: StyleProp<ViewStyle>;
+  disabled?: boolean;
+  onPress?: () => void;
+  onHoverIn?: () => void;
+  onHoverOut?: () => void;
 };
 
 /**
@@ -77,12 +91,10 @@ const getTooltipYPosition = (
 };
 
 const getChildrenMeasures = (
-  style: ViewStyle | Array<ViewStyle>,
+  style: StyleProp<ViewStyle>,
   measures: ChildrenMeasurement
 ): ChildrenMeasurement => {
-  const { position, top, bottom, left, right } = Array.isArray(style)
-    ? style.reduce((acc, current) => ({ ...acc, ...current }))
-    : style;
+  const { position, top, bottom, left, right } = StyleSheet.flatten(style);
 
   if (position === 'absolute') {
     let pageX = 0;
@@ -113,7 +125,7 @@ const getChildrenMeasures = (
 export const getTooltipPosition = (
   { children, tooltip, measured }: Measurement,
   component: React.ReactElement<{
-    style: ViewStyle | Array<ViewStyle> | undefined | null;
+    style: StyleProp<ViewStyle>;
   }>
 ): {} | { left: number; top: number } => {
   if (!measured) return {};

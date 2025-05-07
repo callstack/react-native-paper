@@ -11,13 +11,11 @@ import {
   MD3LightTheme,
   MD2DarkTheme,
   MD2LightTheme,
-  MD2Theme,
-  MD3Theme,
-  useTheme,
 } from 'react-native-paper';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 import DrawerItems from './DrawerItems';
+import { PreferencesContext } from './PreferencesContext';
 import App from './RootNavigator';
 import {
   CombinedDarkTheme,
@@ -28,20 +26,7 @@ import {
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
-
-export const PreferencesContext = React.createContext<{
-  toggleTheme: () => void;
-  toggleThemeVersion: () => void;
-  toggleCollapsed: () => void;
-  toggleCustomFont: () => void;
-  toggleRippleEffect: () => void;
-  customFontLoaded: boolean;
-  rippleEffectEnabled: boolean;
-  collapsed: boolean;
-  theme: MD2Theme | MD3Theme;
-} | null>(null);
-
-export const useExampleTheme = () => useTheme<MD2Theme | MD3Theme>();
+const noop = () => {};
 
 const Drawer = createDrawerNavigator<{ Home: undefined }>();
 
@@ -127,19 +112,24 @@ export default function PaperExample() {
   const preferences = React.useMemo(
     () => ({
       toggleTheme: () => setIsDarkMode((oldValue) => !oldValue),
-      toggleCollapsed: () => setCollapsed(!collapsed),
-      toggleCustomFont: () => setCustomFont(!customFontLoaded),
-      toggleRippleEffect: () => setRippleEffectEnabled(!rippleEffectEnabled),
       toggleThemeVersion: () => {
         setCustomFont(false);
         setCollapsed(false);
         setThemeVersion((oldThemeVersion) => (oldThemeVersion === 2 ? 3 : 2));
         setRippleEffectEnabled(true);
       },
+      toggleCollapsed: () => setCollapsed(!collapsed),
+      toggleCustomFont: () => setCustomFont(!customFontLoaded),
+      toggleRippleEffect: () => setRippleEffectEnabled(!rippleEffectEnabled),
+      theme,
+      collapsed,
       customFontLoaded,
       rippleEffectEnabled,
-      collapsed,
-      theme,
+      // noop for web, specified to avoid type errors
+      toggleRtl: noop,
+      toggleShouldUseDeviceColors: noop,
+      rtl: false,
+      shouldUseDeviceColors: false,
     }),
     [theme, collapsed, customFontLoaded, rippleEffectEnabled]
   );

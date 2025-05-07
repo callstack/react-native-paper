@@ -66,8 +66,6 @@ const unusedViewProps = [
   'onPointerDownCapture',
   'onPointerUp',
   'onPointerUpCapture',
-  'onHoverIn',
-  'onHoverOut',
   'cancelable',
   'delayHoverIn',
   'delayHoverOut',

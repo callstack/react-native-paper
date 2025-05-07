@@ -15,7 +15,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version-file: .nvmrc
 
       - name: Setup Expo
         uses: expo/expo-github-action@v7

@@ -6179,11 +6179,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                       },
                     ]
                   }
-                >
-                  <icon
-                    color="rgba(29, 25, 43, 1)"
-                  />
-                </View>
+                />
                 <View
                   collapsable={false}
                   style={
@@ -6204,11 +6200,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                       },
                     ]
                   }
-                >
-                  <icon
-                    color="rgba(73, 69, 79, 1)"
-                  />
-                </View>
+                />
                 <View
                   style={
                     [
@@ -6401,11 +6393,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                       },
                     ]
                   }
-                >
-                  <icon
-                    color="rgba(29, 25, 43, 1)"
-                  />
-                </View>
+                />
                 <View
                   collapsable={false}
                   style={
@@ -6426,11 +6414,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                       },
                     ]
                   }
-                >
-                  <icon
-                    color="rgba(73, 69, 79, 1)"
-                  />
-                </View>
+                />
                 <View
                   style={
                     [
@@ -6623,11 +6607,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                       },
                     ]
                   }
-                >
-                  <icon
-                    color="rgba(29, 25, 43, 1)"
-                  />
-                </View>
+                />
                 <View
                   collapsable={false}
                   style={
@@ -6648,11 +6628,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                       },
                     ]
                   }
-                >
-                  <icon
-                    color="rgba(73, 69, 79, 1)"
-                  />
-                </View>
+                />
                 <View
                   style={
                     [
@@ -7006,11 +6982,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(29, 25, 43, 1)"
-                  />
-                </View>
+                />
                 <View
                   collapsable={false}
                   style={
@@ -7024,11 +6996,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(73, 69, 79, 1)"
-                  />
-                </View>
+                />
                 <View
                   style={
                     [
@@ -7184,11 +7152,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(29, 25, 43, 1)"
-                  />
-                </View>
+                />
                 <View
                   collapsable={false}
                   style={
@@ -7202,11 +7166,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(73, 69, 79, 1)"
-                  />
-                </View>
+                />
                 <View
                   style={
                     [
@@ -7362,11 +7322,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(29, 25, 43, 1)"
-                  />
-                </View>
+                />
                 <View
                   collapsable={false}
                   style={
@@ -7380,11 +7336,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(73, 69, 79, 1)"
-                  />
-                </View>
+                />
                 <View
                   style={
                     [
@@ -7540,11 +7492,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(29, 25, 43, 1)"
-                  />
-                </View>
+                />
                 <View
                   collapsable={false}
                   style={
@@ -7558,11 +7506,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(73, 69, 79, 1)"
-                  />
-                </View>
+                />
                 <View
                   style={
                     [
@@ -7718,11 +7662,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(29, 25, 43, 1)"
-                  />
-                </View>
+                />
                 <View
                   collapsable={false}
                   style={
@@ -7736,11 +7676,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(73, 69, 79, 1)"
-                  />
-                </View>
+                />
                 <View
                   style={
                     [

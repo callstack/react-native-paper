@@ -3,7 +3,7 @@ import { Image, StyleSheet, View } from 'react-native';
 
 import { Button, List, Text } from 'react-native-paper';
 
-import { useExampleTheme } from '..';
+import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const ButtonExample = () => {

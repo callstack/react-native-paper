@@ -16,7 +16,7 @@ import {
 
 import useLatestCallback from 'use-latest-callback';
 
-import { getChipColors } from './helpers';
+import { ChipAvatarProps, getChipColors } from './helpers';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
@@ -347,8 +347,8 @@ const Chip = ({
                 disabled && { opacity },
               ]}
             >
-              {React.isValidElement(avatar)
-                ? React.cloneElement(avatar as React.ReactElement<any>, {
+              {React.isValidElement<ChipAvatarProps>(avatar)
+                ? React.cloneElement(avatar, {
                     style: [styles.avatar, avatar.props.style],
                   })
                 : avatar}

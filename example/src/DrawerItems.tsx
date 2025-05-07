@@ -18,8 +18,8 @@ import {
 } from 'react-native-paper';
 
 import { deviceColorsSupported, isWeb } from '../utils';
-
-import { PreferencesContext, useExampleTheme } from './';
+import { useExampleTheme } from './hooks/useExampleTheme';
+import { PreferencesContext } from './PreferencesContext';
 
 const DrawerItemsData = [
   {

@@ -229,19 +229,19 @@ const Menu = ({
     keyboardHeightRef.current = 0;
   }, []);
 
-  const keyboardDidShowListenerRef: React.MutableRefObject<
+  const keyboardDidShowListenerRef: React.RefObject<
     EmitterSubscription | undefined
-  > = React.useRef();
-  const keyboardDidHideListenerRef: React.MutableRefObject<
+  > = React.useRef(undefined);
+  const keyboardDidHideListenerRef: React.RefObject<
     EmitterSubscription | undefined
-  > = React.useRef();
+  > = React.useRef(undefined);
 
-  const backHandlerSubscriptionRef: React.MutableRefObject<
+  const backHandlerSubscriptionRef: React.RefObject<
     NativeEventSubscription | undefined
-  > = React.useRef();
-  const dimensionsSubscriptionRef: React.MutableRefObject<
+  > = React.useRef(undefined);
+  const dimensionsSubscriptionRef: React.RefObject<
     NativeEventSubscription | undefined
-  > = React.useRef();
+  > = React.useRef(undefined);
 
   const handleDismiss = React.useCallback(() => {
     if (visible) {
@@ -630,7 +630,12 @@ const Menu = ({
   const pointerEvents = visible ? 'box-none' : 'none';
 
   return (
-    <View ref={(ref) => (anchorRef.current = ref)} collapsable={false}>
+    <View
+      ref={(ref) => {
+        anchorRef.current = ref;
+      }}
+      collapsable={false}
+    >
       {isCoordinate(anchor) ? null : anchor}
       {rendered ? (
         <Portal>
@@ -641,7 +646,9 @@ const Menu = ({
             style={styles.pressableOverlay}
           />
           <View
-            ref={(ref) => (menuRef.current = ref)}
+            ref={(ref) => {
+              menuRef.current = ref;
+            }}
             collapsable={false}
             accessibilityViewIsModal={visible}
             style={[styles.wrapper, positionStyle, style]}

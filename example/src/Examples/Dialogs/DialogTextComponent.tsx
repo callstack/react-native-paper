@@ -7,7 +7,7 @@ import {
   Text,
 } from 'react-native-paper';
 
-import { useExampleTheme } from '../..';
+import { useExampleTheme } from '../../hooks/useExampleTheme';
 
 type Props = React.ComponentProps<typeof NativeText> & {
   isSubheading?: boolean;

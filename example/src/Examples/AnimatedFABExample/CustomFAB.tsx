@@ -9,7 +9,7 @@ import {
 
 import { AnimatedFAB } from 'react-native-paper';
 
-import { useExampleTheme } from '../..';
+import { useExampleTheme } from '../../hooks/useExampleTheme';
 
 type CustomFABProps = {
   animatedValue: Animated.Value;

@@ -19,6 +19,7 @@ import {
   modeAppbarHeight,
   renderAppbarContent,
   filterAppbarActions,
+  AppbarChildProps,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { MD3Elevation, ThemeProp } from '../../types';
@@ -210,7 +211,7 @@ const Appbar = ({
     let rightItemsCount = 0;
 
     React.Children.forEach(children, (child) => {
-      if (React.isValidElement(child)) {
+      if (React.isValidElement<AppbarChildProps>(child)) {
         const isLeading = child.props.isLeading === true;
 
         if (child.type === AppbarContent) {

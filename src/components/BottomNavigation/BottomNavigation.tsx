@@ -441,7 +441,9 @@ const BottomNavigation = <Route extends BaseRoute>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const prevNavigationState = React.useRef<NavigationState<Route>>();
+  const prevNavigationState = React.useRef<NavigationState<Route> | undefined>(
+    undefined
+  );
 
   React.useEffect(() => {
     // Reset offsets of previous and current tabs before animation
