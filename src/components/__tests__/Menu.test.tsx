@@ -2,15 +2,12 @@ import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 
 import { act, render, screen, waitFor } from '@testing-library/react-native';
-import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 
 import { getTheme } from '../../core/theming';
 import { MD3Elevation } from '../../types';
 import Button from '../Button/Button';
 import Menu, { ELEVATION_LEVELS_MAP } from '../Menu/Menu';
 import Portal from '../Portal/Portal';
-
-jest.mock('react-native-safe-area-context', () => mockSafeAreaContext);
 
 const styles = StyleSheet.create({
   contentStyle: {

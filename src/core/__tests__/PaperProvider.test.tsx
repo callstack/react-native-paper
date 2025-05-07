@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 
 import { render, act } from '@testing-library/react-native';
-import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 
 import {
   MD2LightTheme,
@@ -18,8 +17,6 @@ import {
 import type { ThemeProp } from '../../types';
 import PaperProvider from '../PaperProvider';
 import { useTheme } from '../theming';
-
-jest.mock('react-native-safe-area-context', () => mockSafeAreaContext);
 
 declare module 'react-native' {
   interface AccessibilityInfoStatic {

@@ -20,8 +20,6 @@ import Searchbar from '../../Searchbar';
 import Tooltip from '../../Tooltip/Tooltip';
 import Text from '../../Typography/Text';
 
-jest.mock('react-native-safe-area-context', () => mockSafeAreaContext);
-
 const renderAppbarContent = utilRenderAppbarContent as (
   props: Parameters<typeof utilRenderAppbarContent>[0]
 ) => { props: any }[];
