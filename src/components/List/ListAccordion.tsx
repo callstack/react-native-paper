@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 
 import { ListAccordionGroupContext } from './ListAccordionGroup';
-import type { Style } from './utils';
+import type { ListChildProps, Style } from './utils';
 import { getAccordionColors, getLeftStyles } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
@@ -343,11 +343,11 @@ const ListAccordion = ({
         ? React.Children.map(children, (child) => {
             if (
               left &&
-              React.isValidElement(child) &&
+              React.isValidElement<ListChildProps>(child) &&
               !child.props.left &&
               !child.props.right
             ) {
-              return React.cloneElement(child as React.ReactElement<any>, {
+              return React.cloneElement(child, {
                 style: [
                   theme.isV3 ? styles.childV3 : styles.child,
                   child.props.style,

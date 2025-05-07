@@ -1,4 +1,4 @@
-import type { ViewStyle } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 import color from 'color';
 
@@ -11,6 +11,12 @@ type BorderRadiusStyles = Pick<
   ViewStyle,
   Extract<keyof ViewStyle, `border${string}Radius`>
 >;
+
+export type CardActionChildProps = {
+  compact?: boolean;
+  mode?: string;
+  style?: StyleProp<ViewStyle>;
+};
 
 export const getCardCoverStyle = ({
   theme,

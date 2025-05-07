@@ -3,6 +3,7 @@ import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import type { ThemeProp } from 'src/types';
 
+import { CardActionChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
@@ -45,7 +46,7 @@ const CardActions = ({ theme, style, children, ...rest }: Props) => {
   return (
     <View {...rest} style={containerStyle}>
       {React.Children.map(children, (child, index) => {
-        if (!React.isValidElement(child)) {
+        if (!React.isValidElement<CardActionChildProps>(child)) {
           return child;
         }
 

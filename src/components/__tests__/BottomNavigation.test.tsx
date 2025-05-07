@@ -14,20 +14,13 @@ import {
   getInactiveTintColor,
   getLabelColor,
 } from '../BottomNavigation/utils';
+import Icon from '../Icon';
 
 const styles = StyleSheet.create({
   backgroundColor: {
     backgroundColor: red300,
   },
 });
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      icon: { color: string; src: any };
-    }
-  }
-}
 
 const icons = ['magnify', 'camera', 'inbox', 'heart', 'shopping-music'];
 
@@ -247,7 +240,7 @@ it('renders custom icon and label in shifting bottom navigation', () => {
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
       renderIcon={({ route, color }) => (
-        <icon color={color} src={route.unfocusedIcon} />
+        <Icon color={color} source={route.unfocusedIcon} size={24} />
       )}
       renderLabel={({ route, color }) => (
         <text color={color}>{route.title}</text>
@@ -266,7 +259,7 @@ it('renders custom icon and label in non-shifting bottom navigation', () => {
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
       renderIcon={({ route, color }) => (
-        <icon color={color} src={route.unfocusedIcon} />
+        <Icon color={color} source={route.unfocusedIcon} size={24} />
       )}
       renderLabel={({ route, color }) => (
         <text color={color}>{route.title}</text>
