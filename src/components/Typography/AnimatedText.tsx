@@ -102,6 +102,6 @@ const styles = StyleSheet.create({
 });
 
 export const customAnimatedText = <T,>() =>
-  AnimatedText as (props: Props<T>) => JSX.Element;
+  AnimatedText as (props: Props<T>) => React.JSX.Element;
 
 export default AnimatedText;

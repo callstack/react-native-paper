@@ -13,11 +13,14 @@ import {
   getUniqueNestedKeys,
 } from '../utils/themeColors';
 
-const getTableHeader = (keys: string[]): JSX.Element[] => {
+const getTableHeader = (keys: string[]): React.JSX.Element[] => {
   return keys.map((key) => <th key={key}>{key}</th>);
 };
 
-const getTableCell = (keys: string[], modes: DataObject): JSX.Element[] => {
+const getTableCell = (
+  keys: string[],
+  modes: DataObject
+): React.JSX.Element[] => {
   return keys.map((key) => {
     const value = modes[key];
     if (typeof value === 'string') {
@@ -33,7 +36,7 @@ const FlatTable = ({
 }: {
   themeColorsData: DataObject;
   uniqueKeys: string[];
-}): JSX.Element => {
+}): React.JSX.Element => {
   const rows = Object.keys(themeColorsData).map((mode) => {
     return (
       <tr key={`${mode}`}>
@@ -68,7 +71,7 @@ const TabbedTable = ({
 }: {
   themeColorsData: DataObject;
   uniqueKeys: string[];
-}): JSX.Element => {
+}): React.JSX.Element => {
   const tabTableContent = Object.keys(themeColorsData).map((key) => {
     const modes = themeColorsData[key] as DataObject;
     const rows = Object.keys(modes).map((mode) => {
@@ -111,7 +114,7 @@ const ThemeColorsTable = ({
 }: {
   themeColorsData: DataObject;
   componentName: string;
-}): JSX.Element | null => {
+}): React.JSX.Element | null => {
   const uniqueKeys = getUniqueNestedKeys(themeColorsData);
   const nestingLevel = getMaxNestedLevel(themeColorsData);
   const isFlatTable = nestingLevel === 1;
