@@ -155,21 +155,21 @@ const Tooltip = ({
     const props = children.props as TooltipChildProps;
     if (props.disabled) return null;
     return props.onPress?.();
-  }, [children, isValidChild]);
+  }, [children.props, isValidChild]);
 
   const handleHoverIn = React.useCallback(() => {
     handleTouchStart();
     if (isValidChild) {
       (children.props as TooltipChildProps).onHoverIn?.();
     }
-  }, [children, handleTouchStart, isValidChild]);
+  }, [children.props, handleTouchStart, isValidChild]);
 
   const handleHoverOut = React.useCallback(() => {
     handleTouchEnd();
     if (isValidChild) {
       (children.props as TooltipChildProps).onHoverOut?.();
     }
-  }, [children, handleTouchEnd, isValidChild]);
+  }, [children.props, handleTouchEnd, isValidChild]);
 
   const handleOnLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
     childrenWrapperRef.current?.measure(
