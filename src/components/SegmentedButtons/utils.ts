@@ -69,7 +69,7 @@ export const getSegmentedButtonBorderRadius = ({
     return {
       borderTopRightRadius: 0,
       borderBottomRightRadius: 0,
-      ...(theme.isV3 && { borderRightWidth: 0 }),
+      ...(theme.isV3 && { borderEndWidth: 0 }),
     };
   } else if (segment === 'last') {
     return {
@@ -79,7 +79,7 @@ export const getSegmentedButtonBorderRadius = ({
   } else {
     return {
       borderRadius: 0,
-      ...(theme.isV3 && { borderRightWidth: 0 }),
+      ...(theme.isV3 && { borderEndWidth: 0 }),
     };
   }
 };
