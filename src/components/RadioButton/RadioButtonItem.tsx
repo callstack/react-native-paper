@@ -17,7 +17,9 @@ import RadioButtonIOS from './RadioButtonIOS';
 import { handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp, MD3TypescaleKey } from '../../types';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {
@@ -112,6 +114,10 @@ export type Props = {
    * Radio button control position.
    */
   position?: 'leading' | 'trailing';
+  /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
 };
 
 /**
@@ -156,6 +162,7 @@ const RadioButtonItem = ({
   position = 'trailing',
   labelVariant = 'bodyLarge',
   labelMaxFontSizeMultiplier,
+  hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const radioButtonProps = {
@@ -219,6 +226,7 @@ const RadioButtonItem = ({
             background={background}
             theme={theme}
             rippleColor={rippleColor}
+            hitSlop={hitSlop}
           >
             <View style={[styles.container, style]} pointerEvents="none">
               {isLeading && radioButton}

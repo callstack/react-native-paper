@@ -20,7 +20,9 @@ import {
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import Icon, { IconSource } from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {
@@ -89,6 +91,10 @@ export type Props = {
    */
   theme?: ThemeProp;
   /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
+  /**
    * TestID used for testing purposes
    */
   testID?: string;
@@ -142,6 +148,7 @@ const MenuItem = ({
   accessibilityState,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier = 1.5,
+  hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { titleColor, iconColor, rippleColor } = getMenuItemColor({
@@ -187,6 +194,7 @@ const MenuItem = ({
       accessibilityRole="menuitem"
       accessibilityState={newAccessibilityState}
       rippleColor={rippleColor}
+      hitSlop={hitSlop}
     >
       <View style={[styles.row, containerStyle]}>
         {leadingIcon ? (

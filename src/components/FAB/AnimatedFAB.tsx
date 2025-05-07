@@ -28,7 +28,9 @@ import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import AnimatedText from '../Typography/AnimatedText';
 
 export type AnimatedFABIconMode = 'static' | 'dynamic';
@@ -112,6 +114,10 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    */
   variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
   /**
    * @optional
    */
@@ -223,6 +229,7 @@ const AnimatedFAB = ({
   iconMode = 'dynamic',
   variant = 'primary',
   labelMaxFontSizeMultiplier,
+  hitSlop,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -482,6 +489,7 @@ const AnimatedFAB = ({
               testID={testID}
               style={{ borderRadius }}
               theme={theme}
+              hitSlop={hitSlop}
             >
               <View
                 style={[
