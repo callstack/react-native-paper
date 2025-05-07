@@ -14,5 +14,4 @@ jobs:
           required-packages: |
             react-native-paper
           optional-packages: |
-            @react-native-vector-icons/common
             @react-native-vector-icons/material-design-icons

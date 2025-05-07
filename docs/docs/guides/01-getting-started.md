@@ -24,12 +24,12 @@ Additionaly for `iOS` platform there is a requirement to link the native parts o
 npx pod-install
 ```
 
-- If you're on a vanilla React Native project, you also need to install and link [@react-native-vector-icons/common](https://github.com/oblador/react-native-vector-icons).
+- If you're on a vanilla React Native project, you also need to install and link [@react-native-vector-icons/material-design-icons](https://github.com/oblador/react-native-vector-icons).
 
 Specifically `MaterialDesignIcons` icon pack needs to be included in the project, because some components use those internally (e.g. `AppBar.BackAction` on Android).
 
 ```bash npm2yarn
-npm install @react-native-vector-icons/common @react-native-vector-icons/material-design-icons
+npm install @react-native-vector-icons/material-design-icons
 ```
 
 :::note

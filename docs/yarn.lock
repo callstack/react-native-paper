@@ -3417,50 +3417,53 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/cli-tools@npm:^15.1.2":
-  version: 15.1.3
-  resolution: "@react-native-community/cli-tools@npm:15.1.3"
+"@react-native-community/cli-tools@npm:^17.0.0":
+  version: 17.0.0
+  resolution: "@react-native-community/cli-tools@npm:17.0.0"
   dependencies:
+    "@vscode/sudo-prompt": "npm:^9.0.0"
     appdirsjs: "npm:^1.2.4"
     chalk: "npm:^4.1.2"
     execa: "npm:^5.0.0"
     find-up: "npm:^5.0.0"
+    launch-editor: "npm:^2.9.1"
     mime: "npm:^2.4.1"
-    open: "npm:^6.2.0"
     ora: "npm:^5.4.1"
     prompts: "npm:^2.4.2"
     semver: "npm:^7.5.2"
-    shell-quote: "npm:^1.7.3"
-    sudo-prompt: "npm:^9.0.0"
-  checksum: 10c0/e458f3a5e97456b6fa8741cd8c04ca384b7657df9f53111daaf132911b00b6b5bf08fad2206c8461d0974b71548296b9da669af76dddf7f3261ac5d527df6bcc
+  checksum: 10c0/a01dbc9d4653ae87b06dbc7b18890d785a68319216c85f661d3c637d6684d8b685455146304dc26773ea5997d681426f22fcad3af4b2115e54f35e389daab469
   languageName: node
   linkType: hard
 
-"@react-native-vector-icons/common@npm:^11.0.0":
-  version: 11.0.0
-  resolution: "@react-native-vector-icons/common@npm:11.0.0"
+"@react-native-vector-icons/common@npm:^12.0.0":
+  version: 12.0.0
+  resolution: "@react-native-vector-icons/common@npm:12.0.0"
   dependencies:
-    "@react-native-community/cli-tools": "npm:^15.1.2"
+    "@react-native-community/cli-tools": "npm:^17.0.0"
     picocolors: "npm:^1.1.1"
     plist: "npm:^3.1.0"
   peerDependencies:
+    "@react-native-vector-icons/get-image": ^12.0.0
     react: "*"
     react-native: "*"
+  peerDependenciesMeta:
+    "@react-native-vector-icons/get-image":
+      optional: true
   bin:
     rnvi-update-plist: lib/commonjs/scripts/updatePlist.js
-  checksum: 10c0/4463ee8abfaa3560afe7ff8d395217590ab484295831bf16e32615c3741a8c6a017f73b3162d819c3181a4d7007e57915be0328256943c8388b128055f1dd8c7
+  checksum: 10c0/f4a5c741c1e2aa14c9ad6d4c7b04aaa3925aef838820b3c05cb224ccdfbc9c5416dae0230180f913851e4eab54ebad5a1251314acfe28db1f9501b5da30b2e51
   languageName: node
   linkType: hard
 
-"@react-native-vector-icons/material-design-icons@npm:^7.4.47":
-  version: 7.4.47
-  resolution: "@react-native-vector-icons/material-design-icons@npm:7.4.47"
+"@react-native-vector-icons/material-design-icons@npm:^12.0.0":
+  version: 12.0.0
+  resolution: "@react-native-vector-icons/material-design-icons@npm:12.0.0"
   dependencies:
-    "@react-native-vector-icons/common": "npm:^11.0.0"
+    "@react-native-vector-icons/common": "npm:^12.0.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/8c86c0310eb3ee7d7ea620edb0d346f1ab9b5a502f4c378447d57aa9656744b3944663cedb581cd7f9fa99d2dd26e50dbe8862662a368fc46de4b5413189453c
+  checksum: 10c0/668b7ce267e09b941ad1b6a68202ec2767f0be7964e2d34a8be53d260d0efaa064c456504a47ad807d32614f65a81e50799c9bec942ba5e9a878e107609d166d
   languageName: node
   linkType: hard
 
@@ -4059,6 +4062,13 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: 10c0/af36857b804e6df615b401bacf34e9312f073ed9dbeda35be16ee3352d18a4449f27066169893166a6ec17ae51557c3adf8d232ac4a4a0226aafb3267e1f1b39
+  languageName: node
+  linkType: hard
+
+"@vscode/sudo-prompt@npm:^9.0.0":
+  version: 9.3.1
+  resolution: "@vscode/sudo-prompt@npm:9.3.1"
+  checksum: 10c0/680f0c0d16303bf2f7b28fda83a3e6725e75a593461521460a56365af0ca619595e2b6dcc56b1fa4ba24f8be4030fb1b015c31a92773c09ca55c49da89490e38
   languageName: node
   linkType: hard
 
@@ -6480,8 +6490,7 @@ __metadata:
     "@easyops-cn/docusaurus-search-local": "npm:^0.33.4"
     "@material/material-color-utilities": "npm:0.2.4"
     "@mdx-js/react": "npm:^1.6.22"
-    "@react-native-vector-icons/common": "npm:^11.0.0"
-    "@react-native-vector-icons/material-design-icons": "npm:^7.4.47"
+    "@react-native-vector-icons/material-design-icons": "npm:^12.0.0"
     "@tsconfig/docusaurus": "npm:^1.0.6"
     "@types/marked": "npm:^4.0.7"
     "@types/react-color": "npm:^3.0.6"
@@ -9337,6 +9346,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"launch-editor@npm:^2.9.1":
+  version: 2.10.0
+  resolution: "launch-editor@npm:2.10.0"
+  dependencies:
+    picocolors: "npm:^1.0.0"
+    shell-quote: "npm:^1.8.1"
+  checksum: 10c0/8b5a26be6b0da1da039ed2254b837dea0651a6406ea4dc4c9a5b28ea72862f1b12880135c495baf9d8a08997473b44034172506781744cf82e155451a40b7d51
+  languageName: node
+  linkType: hard
+
 "leven@npm:^3.1.0":
   version: 3.1.0
   resolution: "leven@npm:3.1.0"
@@ -10588,15 +10607,6 @@ __metadata:
   dependencies:
     mimic-fn: "npm:^2.1.0"
   checksum: 10c0/ffcef6fbb2692c3c40749f31ea2e22677a876daea92959b8a80b521d95cca7a668c884d8b2045d1d8ee7d56796aa405c405462af112a1477594cc63531baeb8f
-  languageName: node
-  linkType: hard
-
-"open@npm:^6.2.0":
-  version: 6.4.0
-  resolution: "open@npm:6.4.0"
-  dependencies:
-    is-wsl: "npm:^1.1.0"
-  checksum: 10c0/447115632b4f3939fa0d973c33e17f28538fd268fd8257fc49763f7de6e76d29d65585b15998bbd2137337cfb70a92084a0e1b183a466e53a4829f704f295823
   languageName: node
   linkType: hard
 
@@ -13122,6 +13132,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"shell-quote@npm:^1.8.1":
+  version: 1.8.2
+  resolution: "shell-quote@npm:1.8.2"
+  checksum: 10c0/85fdd44f2ad76e723d34eb72c753f04d847ab64e9f1f10677e3f518d0e5b0752a176fd805297b30bb8c3a1556ebe6e77d2288dbd7b7b0110c7e941e9e9c20ce1
+  languageName: node
+  linkType: hard
+
 "shelljs@npm:^0.8.5":
   version: 0.8.5
   resolution: "shelljs@npm:0.8.5"
@@ -13706,13 +13723,6 @@ __metadata:
   version: 3.5.4
   resolution: "stylis@npm:3.5.4"
   checksum: 10c0/5da2f4527d6f3b4877bd575dca068698ddc7882d0f4c3f69178f19328726a2b885e03d759ef82bb06e9bd1a5d47f1f2ce17cc5acbeee2435d42940a261ee11fd
-  languageName: node
-  linkType: hard
-
-"sudo-prompt@npm:^9.0.0":
-  version: 9.2.1
-  resolution: "sudo-prompt@npm:9.2.1"
-  checksum: 10c0/e56793513a9c95f66367a3be2ec4c1adee84a2a62f1b7ff6453d610586dcd373d7d8f4df522a7dae03aea8b779ef7f7ba25d1130d24fb1e495cfbbc2c72c7486
   languageName: node
   linkType: hard
 
