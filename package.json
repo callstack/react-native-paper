@@ -33,6 +33,10 @@
     "material design",
     "bootstrap"
   ],
+  "workspaces": [
+    "example",
+    "docs"
+  ],
   "scripts": {
     "typescript": "tsc --noEmit",
     "lint": "yarn lint-no-fix --fix",
@@ -40,7 +44,6 @@
     "test": "jest",
     "prepack": "bob build && node ./scripts/generate-mappings.js",
     "release": "release-it",
-    "bootstrap": "yarn --cwd example && yarn --cwd docs && yarn",
     "docs": "yarn --cwd docs",
     "example": "yarn --cwd example"
   },
@@ -160,5 +163,5 @@
       ]
     ]
   },
-  "packageManager": "yarn@4.5.3"
+  "packageManager": "yarn@4.9.1"
 }
