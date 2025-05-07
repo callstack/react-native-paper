@@ -9,7 +9,7 @@ import {
 } from 'react-native-paper';
 
 import { TextComponent } from './DialogTextComponent';
-import { useExampleTheme } from '../..';
+import { useExampleTheme } from '../../hooks/useExampleTheme';
 
 const DialogWithCustomColors = ({
   visible,

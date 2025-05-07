@@ -16,8 +16,8 @@ import CustomFABControls, {
   Controls,
   initialControls,
 } from './CustomFABControls';
-import { useExampleTheme } from '../..';
 import { animatedFABExampleData } from '../../../utils';
+import { useExampleTheme } from '../../hooks/useExampleTheme';
 
 type Item = {
   id: string;

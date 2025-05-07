@@ -18,8 +18,8 @@ import {
   TextInput,
 } from 'react-native-paper';
 
-import { useExampleTheme } from '..';
 import { inputReducer, State } from '../../utils';
+import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const MAX_LENGTH = 20;

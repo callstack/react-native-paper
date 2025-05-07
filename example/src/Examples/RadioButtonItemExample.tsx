@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 import { RadioButton } from 'react-native-paper';
 
-import { useExampleTheme } from '..';
+import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const RadioButtonItemExample = () => {

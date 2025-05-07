@@ -49,8 +49,7 @@ import ThemingWithReactNavigation from './Examples/ThemingWithReactNavigation';
 import ToggleButtonExample from './Examples/ToggleButtonExample';
 import TooltipExample from './Examples/TooltipExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
-
-import { useExampleTheme } from '.';
+import { useExampleTheme } from './hooks/useExampleTheme';
 
 export const mainExamples: Record<
   string,

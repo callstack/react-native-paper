@@ -15,15 +15,13 @@ import {
   MD2LightTheme,
   MD3DarkTheme,
   MD3LightTheme,
-  MD2Theme,
-  MD3Theme,
-  useTheme,
 } from 'react-native-paper';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 import DrawerItems from './DrawerItems';
 import App from './RootNavigator';
 import { deviceColorsSupported } from '../utils';
+import { PreferencesContext } from './PreferencesContext';
 import {
   CombinedDefaultTheme,
   CombinedDarkTheme,
@@ -33,24 +31,6 @@ import {
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
-
-export const PreferencesContext = React.createContext<{
-  toggleShouldUseDeviceColors?: () => void;
-  toggleTheme: () => void;
-  toggleRtl: () => void;
-  toggleThemeVersion: () => void;
-  toggleCollapsed: () => void;
-  toggleCustomFont: () => void;
-  toggleRippleEffect: () => void;
-  customFontLoaded: boolean;
-  rippleEffectEnabled: boolean;
-  collapsed: boolean;
-  rtl: boolean;
-  theme: MD2Theme | MD3Theme;
-  shouldUseDeviceColors?: boolean;
-} | null>(null);
-
-export const useExampleTheme = () => useTheme<MD2Theme | MD3Theme>();
 
 const Drawer = createDrawerNavigator<{ Home: undefined }>();
 
