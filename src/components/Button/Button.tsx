@@ -28,7 +28,9 @@ import { splitStyles } from '../../utils/splitStyles';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
@@ -134,6 +136,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Specifies the largest possible scale a text font can reach.
    */
   maxFontSizeMultiplier?: number;
+  /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * Style for the button text.
@@ -185,6 +191,7 @@ const Button = (
     accessibilityLabel,
     accessibilityHint,
     accessibilityRole = 'button',
+    hitSlop,
     onPress,
     onPressIn,
     onPressOut,
@@ -358,6 +365,7 @@ const Button = (
         accessibilityRole={accessibilityRole}
         accessibilityState={{ disabled }}
         accessible={accessible}
+        hitSlop={hitSlop}
         disabled={disabled}
         rippleColor={rippleColor}
         style={getButtonTouchableRippleStyle(touchableStyle, borderWidth)}
