@@ -17,6 +17,8 @@ const LabelBackground = ({
   maxFontSizeMultiplier,
   testID,
 }: LabelBackgroundProps) => {
+  const isWeb = Platform.OS === 'web';
+
   const opacity = labeled.interpolate({
     inputRange: [0, 0.6],
     outputRange: [1, 0],
@@ -52,7 +54,7 @@ const LabelBackground = ({
           bottom: Math.max(roundness, 2),
           opacity,
         },
-        Platform.constants.reactNativeVersion.minor <= 72 && {
+        (isWeb || Platform.constants.reactNativeVersion.minor <= 72) && {
           transform: [labelTranslationX],
         },
       ]}

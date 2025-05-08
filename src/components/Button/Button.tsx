@@ -220,6 +220,7 @@ const Button = (
   );
   const { roundness, isV3, animation } = theme;
   const uppercase = uppercaseProp ?? !theme.isV3;
+  const isWeb = Platform.OS === 'web';
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -255,8 +256,7 @@ const Button = (
         toValue: activeElevation,
         duration: 200 * scale,
         useNativeDriver:
-          Platform.OS === 'web' ||
-          Platform.constants.reactNativeVersion.minor <= 72,
+          isWeb || Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };
@@ -269,8 +269,7 @@ const Button = (
         toValue: initialElevation,
         duration: 150 * scale,
         useNativeDriver:
-          Platform.OS === 'web' ||
-          Platform.constants.reactNativeVersion.minor <= 72,
+          isWeb || Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };
