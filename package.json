@@ -2,7 +2,6 @@
   "name": "react-native-paper",
   "version": "5.14.1",
   "description": "Material design for React Native",
-  "private": true,
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
   "react-native": "src/index.tsx",
