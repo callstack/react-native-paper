@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Animated, Platform, StyleSheet } from 'react-native';
 
-import { render, waitFor } from '@testing-library/react-native';
+import { render, waitFor, act } from '@testing-library/react-native';
 
 import ProgressBar, { Props } from '../ProgressBar';
 
@@ -81,12 +81,22 @@ it('renders progress bar with full height on web', () => {
 });
 
 it('renders progress bar with custom style of filled part', async () => {
+  jest.useFakeTimers();
+
   const tree = render(
     <ProgressBar progress={0.2} fillStyle={styles.fill} testID="progress-bar" />
   );
   await waitFor(() => tree.getByRole(a11yRole).props.onLayout(layoutEvent));
 
+  act(() => {
+    jest.runAllTimers();
+  });
+
+  await waitFor(() => tree.getByTestId('progress-bar-fill'));
+
   expect(tree.getByTestId('progress-bar-fill')).toHaveStyle({
     borderRadius: 4,
   });
+
+  jest.useRealTimers();
 });
