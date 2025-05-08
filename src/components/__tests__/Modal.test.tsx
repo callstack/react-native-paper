@@ -11,19 +11,19 @@ import { act, fireEvent, render } from '@testing-library/react-native';
 import { MD3LightTheme } from '../../styles/themes';
 import Modal from '../Modal';
 
-jest.mock('react-native-safe-area-context', () => ({
-  useSafeAreaInsets: () => ({ bottom: 44, left: 0, right: 0, top: 37 }),
-}));
-
 interface BackHandlerStatic extends RNBackHandlerStatic {
   mockPressBack(): void;
 }
 
 const BackHandler = RNBackHandler as BackHandlerStatic;
 
+jest.mock('react-native-safe-area-context', () => ({
+  useSafeAreaInsets: () => ({ bottom: 44, left: 0, right: 0, top: 37 }),
+}));
+
 jest.mock('react-native/Libraries/Utilities/BackHandler', () =>
   // eslint-disable-next-line jest/no-mocks-import
-  require('react-native/Libraries/Utilities/__mocks__/BackHandler')
+  require('../../utils/__mocks__/BackHandler')
 );
 
 describe('Modal', () => {
