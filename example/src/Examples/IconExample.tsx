@@ -17,7 +17,7 @@ const AssetIcon = ({ size, testID }: { size: number; testID: string }) => (
 const IconExample = () => {
   return (
     <ScreenWrapper>
-      <List.Section title="Default icon (MaterialCommunityIcon)">
+      <List.Section title="Default icon (MaterialDesignIcons)">
         <View style={styles.row}>
           <Icon source="camera" size={24} />
         </View>
