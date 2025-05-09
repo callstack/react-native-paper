@@ -72,3 +72,5 @@ lib/
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+example/ios/*
