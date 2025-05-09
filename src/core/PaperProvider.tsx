@@ -77,14 +77,12 @@ const PaperProvider = (props: Props) => {
   }, [props.theme, isOnlyVersionInTheme]);
 
   const theme = React.useMemo(() => {
-    const themeVersion = props.theme?.version || 3;
     const scheme = colorScheme || 'light';
-    const defaultThemeBase = defaultThemesByVersion[themeVersion][scheme];
+    const defaultThemeBase = defaultThemesByVersion[scheme];
 
     const extendedThemeBase = {
       ...defaultThemeBase,
       ...props.theme,
-      version: themeVersion,
       animation: {
         ...props.theme?.animation,
         scale: reduceMotionEnabled ? 0 : 1,
@@ -93,7 +91,8 @@ const PaperProvider = (props: Props) => {
 
     return {
       ...extendedThemeBase,
-      isV3: extendedThemeBase.version === 3,
+      // TODO: Remove it completely
+      isV3: true,
     };
   }, [colorScheme, props.theme, reduceMotionEnabled]);
 

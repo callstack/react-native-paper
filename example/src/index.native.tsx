@@ -9,13 +9,7 @@ import { useFonts } from 'expo-font';
 import { useKeepAwake } from 'expo-keep-awake';
 import { StatusBar } from 'expo-status-bar';
 import * as Updates from 'expo-updates';
-import {
-  PaperProvider,
-  MD2DarkTheme,
-  MD2LightTheme,
-  MD3DarkTheme,
-  MD3LightTheme,
-} from 'react-native-paper';
+import { PaperProvider, MD3DarkTheme, MD3LightTheme } from 'react-native-paper';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 import DrawerItems from './DrawerItems';
@@ -49,7 +43,7 @@ export default function PaperExample() {
   const [shouldUseDeviceColors, setShouldUseDeviceColors] =
     React.useState(true);
   const [isDarkMode, setIsDarkMode] = React.useState(false);
-  const [themeVersion, setThemeVersion] = React.useState<2 | 3>(3);
+  const [_, setThemeVersion] = React.useState<2 | 3>(3);
   const [rtl, setRtl] = React.useState<boolean>(
     I18nManager.getConstants().isRTL
   );
@@ -59,10 +53,6 @@ export default function PaperExample() {
 
   const { theme: mdTheme } = useMaterial3Theme();
   const theme = React.useMemo(() => {
-    if (themeVersion === 2) {
-      return isDarkMode ? MD2DarkTheme : MD2LightTheme;
-    }
-
     if (!deviceColorsSupported || !shouldUseDeviceColors) {
       return isDarkMode ? MD3DarkTheme : MD3LightTheme;
     }
@@ -70,7 +60,7 @@ export default function PaperExample() {
     return isDarkMode
       ? { ...MD3DarkTheme, colors: mdTheme.dark }
       : { ...MD3LightTheme, colors: mdTheme.light };
-  }, [isDarkMode, mdTheme, shouldUseDeviceColors, themeVersion]);
+  }, [isDarkMode, mdTheme, shouldUseDeviceColors]);
 
   React.useEffect(() => {
     const restoreState = async () => {
