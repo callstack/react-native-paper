@@ -9,8 +9,6 @@ import {
 
 import { AnimatedFAB } from 'react-native-paper';
 
-import { useExampleTheme } from '../../hooks/useExampleTheme';
-
 type CustomFABProps = {
   animatedValue: Animated.Value;
   visible: boolean;
@@ -31,7 +29,6 @@ const CustomFAB = ({
   iconMode,
 }: CustomFABProps) => {
   const [isExtended, setIsExtended] = React.useState(true);
-  const { isV3 } = useExampleTheme();
 
   const isIOS = Platform.OS === 'ios';
 
@@ -50,7 +47,7 @@ const CustomFAB = ({
       icon={'plus'}
       label={label}
       extended={isExtended}
-      uppercase={!isV3}
+      uppercase={false}
       onPress={() => console.log('Pressed')}
       visible={visible}
       animateFrom={animateFrom}

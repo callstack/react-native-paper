@@ -88,7 +88,8 @@ const Badge = ({
   const {
     backgroundColor = theme.isV3
       ? theme.colors.error
-      : theme.colors?.notification,
+      : // @ts-expect-error TODO: Remove it
+        theme.colors?.notification,
     ...restStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
 
@@ -109,7 +110,6 @@ const Badge = ({
           backgroundColor,
           color: textColor,
           fontSize: size * 0.5,
-          ...(!theme.isV3 && theme.fonts.regular),
           lineHeight: size / fontScale,
           height: size,
           minWidth: size,

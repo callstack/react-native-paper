@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FlatList } from 'react-native';
 
 import type { StackNavigationProp } from '@react-navigation/stack';
-import { Divider, List } from 'react-native-paper';
+import { Divider, List, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ActivityIndicatorExample from './Examples/ActivityIndicatorExample';
@@ -49,7 +49,6 @@ import ThemingWithReactNavigation from './Examples/ThemingWithReactNavigation';
 import ToggleButtonExample from './Examples/ToggleButtonExample';
 import TooltipExample from './Examples/TooltipExample';
 import TouchableRippleExample from './Examples/TouchableRippleExample';
-import { useExampleTheme } from './hooks/useExampleTheme';
 
 export const mainExamples: Record<
   string,
@@ -132,15 +131,11 @@ const data = Object.keys(mainExamples).map(
 export default function ExampleList({ navigation }: Props) {
   const keyExtractor = (item: { id: string }) => item.id;
 
-  const { colors, isV3 } = useExampleTheme();
+  const { colors } = useTheme();
   const safeArea = useSafeAreaInsets();
 
   const renderItem = ({ item }: { item: Item }) => {
     const { data, id } = item;
-
-    if (!isV3 && data.title === mainExamples.themingWithReactNavigation.title) {
-      return null;
-    }
 
     return (
       <List.Item

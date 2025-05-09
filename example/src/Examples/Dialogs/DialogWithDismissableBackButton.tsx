@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Button, Portal, Dialog, MD2Colors } from 'react-native-paper';
+import { Button, Portal, Dialog, MD3Colors } from 'react-native-paper';
 
 import { TextComponent } from './DialogTextComponent';
 
@@ -26,7 +26,7 @@ const DialogWithDismissableBackButton = ({
         </TextComponent>
       </Dialog.Content>
       <Dialog.Actions>
-        <Button color={MD2Colors.teal500} disabled>
+        <Button textColor={MD3Colors.tertiary50} disabled>
           Disagree
         </Button>
         <Button onPress={close}>Agree</Button>

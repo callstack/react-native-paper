@@ -3,12 +3,7 @@ import type { ComponentType } from 'react';
 import { $DeepPartial, createTheming } from '@callstack/react-theme-provider';
 import color from 'color';
 
-import {
-  MD2DarkTheme,
-  MD2LightTheme,
-  MD3DarkTheme,
-  MD3LightTheme,
-} from '../styles/themes';
+import { MD3DarkTheme, MD3LightTheme } from '../styles/themes';
 import type {
   InternalTheme,
   MD3Theme,
@@ -37,29 +32,16 @@ export const withInternalTheme = <Props extends { theme: InternalTheme }, C>(
 ) => withTheme<Props, C>(WrappedComponent);
 
 export const defaultThemesByVersion = {
-  2: {
-    light: MD2LightTheme,
-    dark: MD2DarkTheme,
-  },
-  3: {
-    light: MD3LightTheme,
-    dark: MD3DarkTheme,
-  },
+  light: MD3LightTheme,
+  dark: MD3DarkTheme,
 };
 
-export const getTheme = <
-  Scheme extends boolean = false,
-  IsVersion3 extends boolean = true
->(
-  isDark: Scheme = false as Scheme,
-  isV3: IsVersion3 = true as IsVersion3
-): (typeof defaultThemesByVersion)[IsVersion3 extends true
-  ? 3
-  : 2][Scheme extends true ? 'dark' : 'light'] => {
-  const themeVersion = isV3 ? 3 : 2;
+export const getTheme = <Scheme extends boolean = false>(
+  isDark: Scheme = false as Scheme
+): (typeof defaultThemesByVersion)[Scheme extends true ? 'dark' : 'light'] => {
   const scheme = isDark ? 'dark' : 'light';
 
-  return defaultThemesByVersion[themeVersion][scheme];
+  return defaultThemesByVersion[scheme];
 };
 
 // eslint-disable-next-line no-redeclare
