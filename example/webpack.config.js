@@ -40,7 +40,7 @@ module.exports = async function (env, argv) {
     ...resolver.extraNodeModules,
     crypto: require.resolve('expo-crypto'), //Fixes issue with crypto not being found on web
     'react-native-web': path.join(node_modules, 'react-native-web'),
-    '@expo/vector-icons/MaterialCommunityIcons': require.resolve(
+    '@react-native-vector-icons/material-design-icons': require.resolve(
       '@expo/vector-icons/MaterialCommunityIcons'
     ),
   });
