@@ -37,7 +37,6 @@ export default function PaperExample() {
   >();
 
   const [isDarkMode, setIsDarkMode] = React.useState(false);
-  const [_, setThemeVersion] = React.useState<2 | 3>(3);
   const [collapsed, setCollapsed] = React.useState(false);
   const [customFontLoaded, setCustomFont] = React.useState(false);
   const [rippleEffectEnabled, setRippleEffectEnabled] = React.useState(true);
@@ -102,12 +101,6 @@ export default function PaperExample() {
   const preferences = React.useMemo(
     () => ({
       toggleTheme: () => setIsDarkMode((oldValue) => !oldValue),
-      toggleThemeVersion: () => {
-        setCustomFont(false);
-        setCollapsed(false);
-        setThemeVersion((oldThemeVersion) => (oldThemeVersion === 2 ? 3 : 2));
-        setRippleEffectEnabled(true);
-      },
       toggleCollapsed: () => setCollapsed(!collapsed),
       toggleCustomFont: () => setCustomFont(!customFontLoaded),
       toggleRippleEffect: () => setRippleEffectEnabled(!rippleEffectEnabled),

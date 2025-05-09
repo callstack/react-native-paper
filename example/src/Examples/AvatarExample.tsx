@@ -1,13 +1,11 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { Avatar, List, MD2Colors, MD3Colors } from 'react-native-paper';
+import { Avatar, List, MD3Colors } from 'react-native-paper';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const AvatarExample = () => {
-  const { isV3 } = useExampleTheme();
   return (
     <ScreenWrapper>
       <List.Section title="Text">
@@ -16,11 +14,11 @@ const AvatarExample = () => {
             style={[
               styles.avatar,
               {
-                backgroundColor: isV3 ? MD3Colors.error70 : MD2Colors.yellow500,
+                backgroundColor: MD3Colors.error70,
               },
             ]}
             label="XD"
-            color={isV3 ? MD3Colors.primary0 : MD2Colors.black}
+            color={MD3Colors.primary0}
           />
           <Avatar.Text style={styles.avatar} label="XD" />
           <Avatar.Text style={styles.avatar} label="XD" size={80} />
@@ -32,11 +30,11 @@ const AvatarExample = () => {
             style={[
               styles.avatar,
               {
-                backgroundColor: isV3 ? MD3Colors.error70 : MD2Colors.yellow500,
+                backgroundColor: MD3Colors.error70,
               },
             ]}
             icon="folder"
-            color={isV3 ? MD3Colors.primary0 : MD2Colors.black}
+            color={MD3Colors.primary0}
           />
           <Avatar.Icon style={styles.avatar} icon="folder" />
           <Avatar.Icon style={styles.avatar} icon="folder" size={80} />

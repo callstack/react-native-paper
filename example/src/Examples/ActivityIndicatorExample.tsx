@@ -1,20 +1,12 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import {
-  ActivityIndicator,
-  FAB,
-  List,
-  MD2Colors,
-  MD3Colors,
-} from 'react-native-paper';
+import { ActivityIndicator, FAB, List, MD3Colors } from 'react-native-paper';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const ActivityIndicatorExample = () => {
   const [animating, setAnimating] = React.useState<boolean>(true);
-  const { isV3 } = useExampleTheme();
 
   return (
     <ScreenWrapper style={styles.container}>
@@ -49,7 +41,7 @@ const ActivityIndicatorExample = () => {
       <List.Section title="Custom color">
         <ActivityIndicator
           animating={animating}
-          color={isV3 ? MD3Colors.error20 : MD2Colors.red500}
+          color={MD3Colors.error20}
           hidesWhenStopped={false}
         />
       </List.Section>

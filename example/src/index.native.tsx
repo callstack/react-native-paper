@@ -43,7 +43,6 @@ export default function PaperExample() {
   const [shouldUseDeviceColors, setShouldUseDeviceColors] =
     React.useState(true);
   const [isDarkMode, setIsDarkMode] = React.useState(false);
-  const [_, setThemeVersion] = React.useState<2 | 3>(3);
   const [rtl, setRtl] = React.useState<boolean>(
     I18nManager.getConstants().isRTL
   );
@@ -134,12 +133,6 @@ export default function PaperExample() {
       toggleCollapsed: () => setCollapsed(!collapsed),
       toggleCustomFont: () => setCustomFont(!customFontLoaded),
       toggleRippleEffect: () => setRippleEffectEnabled(!rippleEffectEnabled),
-      toggleThemeVersion: () => {
-        setCustomFont(false);
-        setCollapsed(false);
-        setThemeVersion((oldThemeVersion) => (oldThemeVersion === 2 ? 3 : 2));
-        setRippleEffectEnabled(true);
-      },
       customFontLoaded,
       rippleEffectEnabled,
       collapsed,

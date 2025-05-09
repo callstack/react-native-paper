@@ -2,14 +2,7 @@ import * as React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
 import color from 'color';
-import {
-  Chip,
-  List,
-  MD2Colors,
-  MD3Colors,
-  Snackbar,
-  Text,
-} from 'react-native-paper';
+import { Chip, List, MD3Colors, Snackbar, Text } from 'react-native-paper';
 
 import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
@@ -20,7 +13,7 @@ const ChipExample = () => {
     text: '',
   });
   const { isV3 } = useExampleTheme();
-  const customColor = isV3 ? MD3Colors.error50 : MD2Colors.purple900;
+  const customColor = MD3Colors.error50;
 
   return (
     <>
