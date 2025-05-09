@@ -6895,15 +6895,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-core@npm:^7.0.0-bridge.0":
-  version: 7.0.0-bridge.0
-  resolution: "babel-core@npm:7.0.0-bridge.0"
-  peerDependencies:
-    "@babel/core": ^7.0.0-0
-  checksum: 10c0/f57576e30267be4607d163b7288031d332cf9200ea35efe9fb33c97f834e304376774c28c1f9d6928d6733fcde7041e4010f1248a0519e7730c590d4b07b9608
-  languageName: node
-  linkType: hard
-
 "babel-generator@npm:^6.26.0":
   version: 6.26.1
   resolution: "babel-generator@npm:6.26.1"
@@ -19821,17 +19812,13 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.41.0"
     all-contributors-cli: "npm:^6.24.0"
     babel-cli: "npm:^6.26.0"
-    babel-core: "npm:^7.0.0-bridge.0"
     babel-jest: "npm:^29.6.3"
     babel-loader: "npm:^8.2.3"
     babel-test: "npm:^0.1.1"
-    chalk: "npm:^4.0.0"
     color: "npm:^3.1.2"
     commitlint: "npm:^8.3.4"
     conventional-changelog-cli: "npm:^2.0.11"
-    dedent: "npm:^0.7.0"
     eslint: "npm:8.31.0"
-    eslint-plugin-flowtype: "npm:^8.0.3"
     eslint-plugin-local-rules: "npm:^1.3.2"
     glob: "npm:^7.1.3"
     husky: "npm:^1.3.1"
