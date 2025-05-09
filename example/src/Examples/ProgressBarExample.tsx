@@ -27,8 +27,8 @@ const AnimatedProgressBar = Animated.createAnimatedComponent(ClassProgressBar);
 const ProgressBarExample = () => {
   const theme = useTheme();
 
-  const [visible, setVisible] = React.useState<boolean>(true);
-  const [progress, setProgress] = React.useState<number>(0.3);
+  const [visible, setVisible] = React.useState(true);
+  const [progress, setProgress] = React.useState(0.3);
   const { current: progressBarValue } = React.useRef(new Animated.Value(0));
 
   const runCustomAnimation = () => {
