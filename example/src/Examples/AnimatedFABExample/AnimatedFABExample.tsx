@@ -3,7 +3,7 @@ import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 import { Animated, FlatList, Platform, StyleSheet, View } from 'react-native';
 
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
-import { Avatar, MD3Colors, Text } from 'react-native-paper';
+import { Avatar, MD3Colors, Text, useTheme } from 'react-native-paper';
 
 import CustomFAB from './CustomFAB';
 import CustomFABControls, {
@@ -11,7 +11,6 @@ import CustomFABControls, {
   initialControls,
 } from './CustomFABControls';
 import { animatedFABExampleData } from '../../../utils';
-import { useExampleTheme } from '../../hooks/useExampleTheme';
 
 type Item = {
   id: string;
@@ -26,7 +25,7 @@ type Item = {
 };
 
 const AnimatedFABExample = () => {
-  const { colors } = useExampleTheme();
+  const { colors } = useTheme();
 
   const isIOS = Platform.OS === 'ios';
 

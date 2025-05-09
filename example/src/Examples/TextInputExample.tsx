@@ -15,10 +15,10 @@ import {
   List,
   MD3Colors,
   TextInput,
+  useTheme,
 } from 'react-native-paper';
 
 import { inputReducer, State } from '../../utils';
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const MAX_LENGTH = 20;
@@ -124,7 +124,7 @@ const TextInputExample = () => {
 
   const _isUsernameValid = (name: string) => /^[a-zA-Z]*$/.test(name);
 
-  const theme = useExampleTheme();
+  const { colors } = useTheme();
 
   const inputActionHandler = (type: keyof State, payload: string) =>
     dispatch({
@@ -137,11 +137,7 @@ const TextInputExample = () => {
 
     const newColors = {
       ...state.iconsColor,
-      [name]: !color
-        ? theme.isV3
-          ? theme.colors.primary
-          : theme.colors?.accent
-        : undefined,
+      [name]: !color ? colors.primary : undefined,
     };
 
     dispatch({
@@ -430,9 +426,7 @@ const TextInputExample = () => {
               right={
                 <TextInput.Icon
                   icon="chevron-up"
-                  color={(focused) =>
-                    focused ? theme.colors?.primary : undefined
-                  }
+                  color={(focused) => (focused ? colors.primary : undefined)}
                 />
               }
             />
@@ -717,7 +711,7 @@ const TextInputExample = () => {
                 placeholder="Custom colors"
               />
             </View>
-            {fontsLoaded && theme.isV3 ? (
+            {fontsLoaded && (
               <View style={styles.inputContainerStyle}>
                 <TextInput
                   mode="outlined"
@@ -733,7 +727,7 @@ const TextInputExample = () => {
                   }}
                 />
               </View>
-            ) : null}
+            )}
             <View style={styles.row}>
               <TextInput
                 mode="outlined"

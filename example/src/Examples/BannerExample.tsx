@@ -8,9 +8,8 @@ import {
   View,
 } from 'react-native';
 
-import { Banner, FAB, MD3Colors } from 'react-native-paper';
+import { Banner, FAB, MD3Colors, useTheme } from 'react-native-paper';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const PHOTOS = Array.from({ length: 24 }).map(
@@ -20,7 +19,7 @@ const PHOTOS = Array.from({ length: 24 }).map(
 const BannerExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [useCustomTheme, setUseCustomTheme] = React.useState<boolean>(false);
-  const defaultTheme = useExampleTheme();
+  const theme = useTheme();
 
   const [height, setHeight] = React.useState(0);
 
@@ -30,7 +29,7 @@ const BannerExample = () => {
   };
 
   const customTheme = {
-    ...defaultTheme,
+    ...theme,
     colors: {
       onSurface: MD3Colors.tertiary100,
       elevation: {
@@ -81,7 +80,7 @@ const BannerExample = () => {
         onHideAnimationFinished={() =>
           console.log('Completed closing animation')
         }
-        theme={useCustomTheme ? customTheme : defaultTheme}
+        theme={useCustomTheme ? customTheme : theme}
         style={styles.banner}
       >
         Two line text string with two actions. One to two lines is preferable on

@@ -17,7 +17,6 @@ import {
 } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 type Route = { route: { key: string } };
@@ -49,7 +48,6 @@ const PhotoGallery = ({ route }: Route) => {
 };
 
 const BottomNavigationExample = ({ navigation }: Props) => {
-  const { isV3 } = useExampleTheme();
   const insets = useSafeAreaInsets();
   const [index, setIndex] = React.useState(0);
   const [menuVisible, setMenuVisible] = React.useState(false);
@@ -63,34 +61,25 @@ const BottomNavigationExample = ({ navigation }: Props) => {
       key: 'album',
       title: 'Album',
       focusedIcon: 'image-album',
-      ...(!isV3 && { color: '#6200ee' }),
     },
     {
       key: 'library',
       title: 'Library',
       focusedIcon: 'inbox',
       badge: true,
-      ...(isV3
-        ? { unfocusedIcon: 'inbox-outline' }
-        : {
-            color: '#2962ff',
-          }),
+      unfocusedIcon: 'inbox-outline',
     },
     {
       key: 'favorites',
       title: 'Favorites',
       focusedIcon: 'heart',
-      ...(isV3
-        ? { unfocusedIcon: 'heart-outline' }
-        : {
-            color: '#00796b',
-          }),
+      unfocusedIcon: 'heart-outline',
     },
     {
       key: 'purchased',
       title: 'Purchased',
       focusedIcon: 'shopping',
-      ...(isV3 ? { unfocusedIcon: 'shopping-outline' } : { color: '#c51162' }),
+      unfocusedIcon: 'shopping-outline',
     },
   ]);
 
@@ -112,7 +101,6 @@ const BottomNavigationExample = ({ navigation }: Props) => {
             <Appbar.Action
               icon={MORE_ICON}
               onPress={() => setMenuVisible(true)}
-              {...(!isV3 && { color: 'white' })}
             />
           }
         >
