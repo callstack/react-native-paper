@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
 
 type TextComponent<T> = (
   props: Props<T> & { ref?: React.RefObject<TextRef> }
-) => JSX.Element;
+) => React.JSX.Element;
 
 const Component = forwardRef(Text) as TextComponent<never>;
 

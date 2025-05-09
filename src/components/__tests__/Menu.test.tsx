@@ -113,17 +113,15 @@ it('uses the default anchorPosition of top', async () => {
     );
   }
 
-  render(makeMenu(false));
+  const { rerender } = render(makeMenu(false));
 
-  jest
-    .spyOn(View.prototype, 'measureInWindow')
-    .mockImplementation((fn) => fn(100, 100, 80, 32));
+  jest.mocked(View.prototype.measureInWindow).mockImplementation((callback) => {
+    callback(100, 100, 80, 32);
+  });
 
-  // You must update instead of creating directly and using it because
-  // componentDidUpdate isn't called by default in jest. Forcing the update
-  // than triggers measureInWindow, which is how Menu decides where to show
-  // itself.
-  screen.update(makeMenu(true));
+  await act(async () => {
+    rerender(makeMenu(true));
+  });
 
   await waitFor(() => {
     const menu = screen.getByTestId('menu-view');
@@ -157,13 +155,15 @@ it('respects anchorPosition bottom', async () => {
     );
   }
 
-  render(makeMenu(false));
+  const { rerender } = render(makeMenu(false));
 
   jest
-    .spyOn(View.prototype, 'measureInWindow')
-    .mockImplementation((fn) => fn(100, 100, 80, 32));
+    .mocked(View.prototype.measureInWindow)
+    .mockImplementation((callback) => callback(100, 100, 80, 32));
 
-  screen.update(makeMenu(true));
+  await act(async () => {
+    rerender(makeMenu(true));
+  });
 
   await waitFor(() => {
     const menu = screen.getByTestId('menu-view');
