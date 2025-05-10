@@ -12,6 +12,7 @@ import {
   ViewProps,
   ViewStyle,
   PressableAndroidRippleConfig,
+  ImageStyle,
 } from 'react-native';
 
 import { ListAccordionGroupContext } from './ListAccordionGroup';
@@ -93,6 +94,10 @@ export type Props = {
    * Style that is passed to Description element.
    */
   descriptionStyle?: StyleProp<TextStyle>;
+  /**
+   * Style that is passed to each child of the List.Accordion.
+   */
+  childrenStyle?: StyleProp<ViewStyle | TextStyle | ImageStyle>;
   /**
    * Color of the ripple effect.
    */
@@ -184,6 +189,7 @@ const ListAccordion = ({
   theme: themeOverrides,
   titleStyle,
   descriptionStyle,
+  childrenStyle,
   titleNumberOfLines = 1,
   descriptionNumberOfLines = 2,
   rippleColor: customRippleColor,
@@ -350,6 +356,7 @@ const ListAccordion = ({
               return React.cloneElement(child, {
                 style: [
                   theme.isV3 ? styles.childV3 : styles.child,
+                  childrenStyle,
                   child.props.style,
                 ],
                 theme,
