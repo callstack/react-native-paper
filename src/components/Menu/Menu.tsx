@@ -227,17 +227,17 @@ const Menu = ({
     keyboardHeightRef.current = 0;
   }, []);
 
-  const keyboardDidShowListenerRef: React.RefObject<
+  const keyboardDidShowListenerRef: React.MutableRefObject<
     EmitterSubscription | undefined
   > = React.useRef(undefined);
-  const keyboardDidHideListenerRef: React.RefObject<
+  const keyboardDidHideListenerRef: React.MutableRefObject<
     EmitterSubscription | undefined
   > = React.useRef(undefined);
 
-  const backHandlerSubscriptionRef: React.RefObject<
+  const backHandlerSubscriptionRef: React.MutableRefObject<
     NativeEventSubscription | undefined
   > = React.useRef(undefined);
-  const dimensionsSubscriptionRef: React.RefObject<
+  const dimensionsSubscriptionRef: React.MutableRefObject<
     NativeEventSubscription | undefined
   > = React.useRef(undefined);
 

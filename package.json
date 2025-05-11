@@ -34,8 +34,6 @@
     "bootstrap"
   ],
   "workspaces": [
-    "example",
-    "docs"
   ],
   "scripts": {
     "typescript": "tsc --noEmit",
