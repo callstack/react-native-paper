@@ -130,7 +130,7 @@ const TextInputAffix = ({
   accessibilityLabel = text,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { AFFIX_OFFSET } = getConstants(true);
+  const { AFFIX_OFFSET } = getConstants();
 
   const {
     textStyle,

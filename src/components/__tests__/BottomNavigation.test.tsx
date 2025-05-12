@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Animated, Easing, Platform, StyleSheet } from 'react-native';
 
 import { act, fireEvent, render } from '@testing-library/react-native';
-import color from 'color';
 
 import { getTheme } from '../../core/theming';
 import { red300 } from '../../styles/themes/v2/colors';
@@ -446,22 +445,6 @@ it('does not apply maxTabBarWidth styling if compact prop is falsy', () => {
   });
 });
 
-it('displays ripple animation view if shifting is truthy', () => {
-  const { getByTestId } = render(
-    <BottomNavigation
-      navigationState={createState(0, 5)}
-      onIndexChange={jest.fn()}
-      renderScene={({ route }) => route.title}
-      getLazy={({ route }) => route.key === 'key-2'}
-      testID="bottom-navigation"
-      theme={{ isV3: false }}
-      shifting
-    />
-  );
-
-  expect(getByTestId('bottom-navigation-bar-content-ripple')).toBeDefined();
-});
-
 it('does not display ripple animation view if shifting is falsy', () => {
   const { queryByTestId } = render(
     <BottomNavigation
@@ -479,14 +462,13 @@ it('does not display ripple animation view if shifting is falsy', () => {
 
 describe('getActiveTintColor', () => {
   it.each`
-    activeColor  | defaultColor | useV3    | expected
-    ${'#FBF7DB'} | ${'#fff'}    | ${true}  | ${'#FBF7DB'}
-    ${undefined} | ${'#fff'}    | ${true}  | ${MD3Colors.secondary10}
-    ${undefined} | ${'#fff'}    | ${false} | ${'#fff'}
+    activeColor  | defaultColor | expected
+    ${'#FBF7DB'} | ${'#fff'}    | ${'#FBF7DB'}
+    ${undefined} | ${'#fff'}    | ${MD3Colors.secondary10}
   `(
-    'returns $expected when activeColor: $activeColor and useV3: $useV3',
-    ({ activeColor, defaultColor, useV3, expected }) => {
-      const theme = getTheme(false, useV3);
+    'returns $expected when activeColor: $activeColor',
+    ({ activeColor, defaultColor, expected }) => {
+      const theme = getTheme();
       const color = getActiveTintColor({ activeColor, defaultColor, theme });
       expect(color).toBe(expected);
     }
@@ -495,14 +477,13 @@ describe('getActiveTintColor', () => {
 
 describe('getInactiveTintColor', () => {
   it.each`
-    inactiveColor | defaultColor | useV3    | expected
-    ${'#853D4B'}  | ${'#fff'}    | ${true}  | ${'#853D4B'}
-    ${undefined}  | ${'#fff'}    | ${true}  | ${MD3Colors.neutralVariant30}
-    ${undefined}  | ${'#fff'}    | ${false} | ${color('#fff').alpha(0.5).rgb().string()}
+    inactiveColor | defaultColor | expected
+    ${'#853D4B'}  | ${'#fff'}    | ${'#853D4B'}
+    ${undefined}  | ${'#fff'}    | ${MD3Colors.neutralVariant30}
   `(
-    'returns $expected when inactiveColor: $inactiveColor and useV3: $useV3',
-    ({ inactiveColor, defaultColor, useV3, expected }) => {
-      const theme = getTheme(false, useV3);
+    'returns $expected when inactiveColor: $inactiveColor',
+    ({ inactiveColor, defaultColor, expected }) => {
+      const theme = getTheme();
       const color = getInactiveTintColor({
         inactiveColor,
         defaultColor,
@@ -515,17 +496,15 @@ describe('getInactiveTintColor', () => {
 
 describe('getLabelColor', () => {
   it.each`
-    tintColor    | focused  | defaultColor | useV3    | expected
-    ${'#FBF7DB'} | ${true}  | ${'#fff'}    | ${true}  | ${'#FBF7DB'}
-    ${'#853D4B'} | ${true}  | ${'#fff'}    | ${true}  | ${'#853D4B'}
-    ${undefined} | ${true}  | ${'#fff'}    | ${true}  | ${MD3Colors.neutral10}
-    ${undefined} | ${false} | ${'#fff'}    | ${true}  | ${MD3Colors.neutralVariant30}
-    ${undefined} | ${false} | ${'#fff'}    | ${false} | ${'#fff'}
-    ${undefined} | ${true}  | ${'#fff'}    | ${false} | ${'#fff'}
+    tintColor    | focused  | defaultColor | expected
+    ${'#FBF7DB'} | ${true}  | ${'#fff'}    | ${'#FBF7DB'}
+    ${'#853D4B'} | ${true}  | ${'#fff'}    | ${'#853D4B'}
+    ${undefined} | ${true}  | ${'#fff'}    | ${MD3Colors.neutral10}
+    ${undefined} | ${false} | ${'#fff'}    | ${MD3Colors.neutralVariant30}
   `(
-    'returns $expected when tintColor: $tintColor, focused: $focused useV3: $useV3',
-    ({ tintColor, focused, defaultColor, useV3, expected }) => {
-      const theme = getTheme(false, useV3);
+    'returns $expected when tintColor: $tintColor, focused: $focused',
+    ({ tintColor, focused, defaultColor, expected }) => {
+      const theme = getTheme();
       const color = getLabelColor({
         tintColor,
         hasColor: Boolean(tintColor),

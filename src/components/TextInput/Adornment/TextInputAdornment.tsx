@@ -64,7 +64,7 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   mode?: 'outlined' | 'flat';
   paddingHorizontal?: DimensionValue;
 }): AdornmentStyleAdjustmentForNativeInput | {} {
-  const { OUTLINED_INPUT_OFFSET, ADORNMENT_OFFSET } = getConstants(true);
+  const { OUTLINED_INPUT_OFFSET, ADORNMENT_OFFSET } = getConstants();
 
   if (adornmentConfig.length) {
     const adornmentStyleAdjustmentForNativeInput = adornmentConfig.map(

@@ -81,7 +81,7 @@ const IconAdornment: React.FunctionComponent<
   testID,
   disabled,
 }) => {
-  const { ICON_OFFSET } = getConstants(true);
+  const { ICON_OFFSET } = getConstants();
 
   const style = {
     top: topPosition,

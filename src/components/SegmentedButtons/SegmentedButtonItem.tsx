@@ -164,7 +164,6 @@ const SegmentedButtonItem = ({
 
   const borderRadius = 5 * roundness;
   const segmentBorderRadius = getSegmentedButtonBorderRadius({
-    theme,
     segment,
   });
   const rippleColor =

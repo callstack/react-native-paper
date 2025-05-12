@@ -52,7 +52,7 @@ const InputLabel = (props: InputLabelProps) => {
     scaledLabel,
   } = props;
 
-  const { INPUT_PADDING_HORIZONTAL } = getConstants(true);
+  const { INPUT_PADDING_HORIZONTAL } = getConstants();
   const { width } = useWindowDimensions();
 
   const isWeb = Platform.OS === 'web';

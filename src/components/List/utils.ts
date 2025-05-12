@@ -35,11 +35,11 @@ export type Style = {
 export const getLeftStyles = (
   alignToTop: boolean,
   description: Description
-) => {
+): Style => {
   const stylesV3 = {
     marginRight: 0,
     marginLeft: 16,
-    alignSelf: alignToTop ? 'flex-start' : 'center',
+    alignSelf: (alignToTop ? 'flex-start' : 'center') as FlexAlignType,
   };
 
   if (!description) {
@@ -59,10 +59,10 @@ export const getLeftStyles = (
 export const getRightStyles = (
   alignToTop: boolean,
   description: Description
-) => {
+): Style => {
   const stylesV3 = {
     marginLeft: 16,
-    alignSelf: alignToTop ? 'flex-start' : 'center',
+    alignSelf: (alignToTop ? 'flex-start' : 'center') as FlexAlignType,
   };
 
   if (!description) {
@@ -94,14 +94,14 @@ export const getAccordionColors = ({
   isExpanded?: boolean;
   customRippleColor?: ColorValue;
 }) => {
-  const titleColor = theme.colors.onSurface;
   const descriptionColor = theme.colors.onSurfaceVariant;
-  const titleTextColor = isExpanded ? theme.colors?.primary : titleColor;
+  const titleTextColor = isExpanded
+    ? theme.colors?.primary
+    : theme.colors.onSurface;
   const rippleColor =
     customRippleColor || color(titleTextColor).alpha(0.12).rgb().string();
 
   return {
-    titleColor,
     descriptionColor,
     titleTextColor,
     rippleColor,
