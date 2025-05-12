@@ -8,7 +8,13 @@ import {
 } from 'react-native';
 
 export type Props = {
+  /**
+   * Image source.
+   */
   source: ImageSourcePropType;
+  /**
+   * Variant of the image. The default variant is `image`.
+   */
   variant?: 'image' | 'video';
   style?: StyleProp<ImageStyle>;
 };

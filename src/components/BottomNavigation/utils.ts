@@ -1,9 +1,6 @@
 import type { InternalTheme } from 'src/types';
 
-import type { black, white } from '../../styles/themes/v2/colors';
-
 type BaseProps = {
-  defaultColor: typeof black | typeof white;
   theme: InternalTheme;
 };
 

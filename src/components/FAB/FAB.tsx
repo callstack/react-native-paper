@@ -197,7 +197,7 @@ const FAB = forwardRef<View, Props>(
       theme: themeOverrides,
       style,
       visible = true,
-      uppercase: uppercaseProp,
+      uppercase = false,
       loading,
       testID = 'fab',
       size = 'medium',
@@ -215,7 +215,6 @@ const FAB = forwardRef<View, Props>(
       fonts,
     } = theme;
 
-    const uppercase = uppercaseProp ?? false;
     const { current: visibility } = React.useRef<Animated.Value>(
       new Animated.Value(visible ? 1 : 0)
     );

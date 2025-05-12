@@ -199,7 +199,7 @@ const Button = (
     delayLongPress,
     style,
     theme: themeOverrides,
-    uppercase: uppercaseProp,
+    uppercase = false,
     contentStyle,
     labelStyle,
     testID = 'button',
@@ -219,7 +219,6 @@ const Button = (
     [mode]
   );
   const { roundness, animation, fonts } = theme;
-  const uppercase = uppercaseProp ?? false;
   const isWeb = Platform.OS === 'web';
 
   const hasPassedTouchHandler = hasTouchHandler({

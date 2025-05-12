@@ -221,7 +221,7 @@ const AnimatedFAB = ({
   theme: themeOverrides,
   style,
   visible = true,
-  uppercase: uppercaseProp,
+  uppercase = false,
   testID = 'animated-fab',
   animateFrom = 'right',
   extended = false,
@@ -232,7 +232,6 @@ const AnimatedFAB = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const uppercase: boolean = uppercaseProp ?? false;
   const isIOS = Platform.OS === 'ios';
   const isWeb = Platform.OS === 'web';
   const isAnimatedFromRight = animateFrom === 'right';

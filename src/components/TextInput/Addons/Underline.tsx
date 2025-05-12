@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { Animated, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 
-import type { ThemeProp } from 'src/types';
-
 type UnderlineProps = {
   parentState: {
     focused: boolean;
@@ -15,7 +13,6 @@ type UnderlineProps = {
   underlineColorCustom?: string;
   hasActiveOutline?: boolean;
   style?: StyleProp<ViewStyle>;
-  theme?: ThemeProp;
 };
 
 export const Underline = ({
@@ -33,8 +30,6 @@ export const Underline = ({
 
   if (error) backgroundColor = colors?.error;
 
-  const activeScale = 2;
-
   return (
     <Animated.View
       testID="text-input-underline"
@@ -45,7 +40,7 @@ export const Underline = ({
           // Underlines is thinner when input is not focused
           transform: [
             {
-              scaleY: hasActiveOutline ? activeScale : 0.5,
+              scaleY: hasActiveOutline ? 2 : 0.5,
             },
           ],
         },

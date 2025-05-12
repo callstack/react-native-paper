@@ -346,7 +346,6 @@ const TextInputFlat = ({
         error={error}
         colors={colors}
         activeColor={activeColor}
-        theme={theme}
       />
       <View
         onLayout={onInputLayout}

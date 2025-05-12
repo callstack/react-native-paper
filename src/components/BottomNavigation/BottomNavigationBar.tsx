@@ -11,7 +11,6 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import {
@@ -20,8 +19,6 @@ import {
   getLabelColor,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import overlay from '../../styles/overlay';
-import { black, white } from '../../styles/themes/v2/colors';
 import type { ThemeProp } from '../../types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
@@ -333,18 +330,17 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   animationEasing,
   onTabPress,
   onTabLongPress,
-  shifting: shiftingProp,
+  shifting: shiftingProp = false,
   safeAreaInsets,
   labelMaxFontSizeMultiplier = 1,
-  compact: compactProp,
+  compact = false,
   testID = 'bottom-navigation-bar',
   theme: themeOverrides,
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
   const { bottom, left, right } = useSafeAreaInsets();
   const { scale } = theme.animation;
-  const compact = compactProp ?? false;
-  let shifting = shiftingProp ?? false;
+  let shifting = shiftingProp;
 
   if (shifting && navigationState.routes.length < 2) {
     shifting = false;
@@ -476,38 +472,22 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   };
 
   const { routes } = navigationState;
-  const { colors, dark: isDarkTheme, mode } = theme;
 
-  const { backgroundColor: customBackground, elevation = 4 } =
-    (StyleSheet.flatten(style) || {}) as {
-      elevation?: number;
-      backgroundColor?: ColorValue;
-    };
-
-  const approxBackgroundColor = customBackground
-    ? customBackground
-    : isDarkTheme && mode === 'adaptive'
-    ? overlay(elevation, colors?.surface)
-    : colors?.primary;
+  const { backgroundColor: customBackground } = (StyleSheet.flatten(style) ||
+    {}) as {
+    elevation?: number;
+    backgroundColor?: ColorValue;
+  };
 
   const backgroundColor = customBackground || theme.colors.elevation.level2;
 
-  const isDark =
-    typeof approxBackgroundColor === 'string'
-      ? !color(approxBackgroundColor).isLight()
-      : true;
-
-  const textColor = isDark ? white : black;
-
   const activeTintColor = getActiveTintColor({
     activeColor,
-    defaultColor: textColor,
     theme,
   });
 
   const inactiveTintColor = getInactiveTintColor({
     inactiveColor,
-    defaultColor: textColor,
     theme,
   });
 
@@ -615,7 +595,6 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               tintColor: activeTintColor,
               hasColor: Boolean(activeColor),
               focused,
-              defaultColor: textColor,
               theme,
             });
 
@@ -623,7 +602,6 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               tintColor: inactiveTintColor,
               hasColor: Boolean(inactiveColor),
               focused,
-              defaultColor: textColor,
               theme,
             });
 
