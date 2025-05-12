@@ -1801,7 +1801,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                           "marginVertical": 9,
                           "textAlign": "center",
                         },
-                        false,
                         {
                           "marginHorizontal": 24,
                           "marginVertical": 10,

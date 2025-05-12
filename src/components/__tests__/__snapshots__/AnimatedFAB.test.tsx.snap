@@ -47,7 +47,6 @@ exports[`renders animated fab 1`] = `
       collapsable={false}
       style={
         [
-          false,
           {
             "height": 56,
           },
@@ -343,7 +342,6 @@ exports[`renders animated fab with label on the left 1`] = `
       collapsable={false}
       style={
         [
-          false,
           {
             "height": 56,
           },
@@ -641,7 +639,6 @@ exports[`renders animated fab with label on the right by default 1`] = `
       collapsable={false}
       style={
         [
-          false,
           {
             "height": 56,
           },

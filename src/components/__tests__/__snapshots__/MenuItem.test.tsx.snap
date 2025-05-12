@@ -67,7 +67,6 @@ exports[`Menu Item renders menu item 1`] = `
         pointerEvents="box-none"
         style={
           [
-            false,
             {
               "width": 24,
             },
@@ -108,7 +107,6 @@ exports[`Menu Item renders menu item 1`] = `
         pointerEvents="none"
         style={
           [
-            false,
             {
               "justifyContent": "center",
             },
@@ -145,7 +143,6 @@ exports[`Menu Item renders menu item 1`] = `
                   "lineHeight": 24,
                 },
                 [
-                  false,
                   {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontFamily": "System",
@@ -231,7 +228,6 @@ exports[`Menu Item renders menu item 1`] = `
         pointerEvents="box-none"
         style={
           [
-            false,
             {
               "width": 24,
             },
@@ -272,7 +268,6 @@ exports[`Menu Item renders menu item 1`] = `
         pointerEvents="none"
         style={
           [
-            false,
             {
               "justifyContent": "center",
             },
@@ -309,7 +304,6 @@ exports[`Menu Item renders menu item 1`] = `
                   "lineHeight": 24,
                 },
                 [
-                  false,
                   {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontFamily": "System",
@@ -395,7 +389,6 @@ exports[`Menu Item renders menu item 1`] = `
         pointerEvents="box-none"
         style={
           [
-            false,
             {
               "width": 24,
             },
@@ -436,7 +429,6 @@ exports[`Menu Item renders menu item 1`] = `
         pointerEvents="none"
         style={
           [
-            false,
             {
               "justifyContent": "center",
             },
@@ -473,7 +465,6 @@ exports[`Menu Item renders menu item 1`] = `
                   "lineHeight": 24,
                 },
                 [
-                  false,
                   {
                     "color": "rgba(28, 27, 31, 0.38)",
                     "fontFamily": "System",
@@ -559,7 +550,6 @@ exports[`Menu Item renders menu item 1`] = `
         pointerEvents="box-none"
         style={
           [
-            false,
             {
               "width": 24,
             },
@@ -600,7 +590,6 @@ exports[`Menu Item renders menu item 1`] = `
         pointerEvents="none"
         style={
           [
-            false,
             {
               "justifyContent": "center",
             },
@@ -637,7 +626,6 @@ exports[`Menu Item renders menu item 1`] = `
                   "lineHeight": 24,
                 },
                 [
-                  false,
                   {
                     "color": "rgba(28, 27, 31, 0.38)",
                     "fontFamily": "System",
@@ -723,7 +711,6 @@ exports[`Menu Item renders menu item 1`] = `
         pointerEvents="none"
         style={
           [
-            false,
             {
               "justifyContent": "center",
             },
@@ -760,7 +747,6 @@ exports[`Menu Item renders menu item 1`] = `
                   "lineHeight": 24,
                 },
                 [
-                  false,
                   {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontFamily": "System",

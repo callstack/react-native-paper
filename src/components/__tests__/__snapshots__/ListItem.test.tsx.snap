@@ -210,11 +210,8 @@ exports[`renders list item with custom description 1`] = `
                       {
                         "alignItems": "center",
                         "flexDirection": "row",
-                        "paddingLeft": 4,
-                        "position": "relative",
-                      },
-                      {
                         "paddingLeft": 0,
+                        "position": "relative",
                       },
                       {
                         "paddingRight": 0,
@@ -228,8 +225,6 @@ exports[`renders list item with custom description 1`] = `
                         {
                           "alignSelf": "center",
                           "padding": 4,
-                        },
-                        {
                           "paddingLeft": 8,
                           "paddingRight": 0,
                         },

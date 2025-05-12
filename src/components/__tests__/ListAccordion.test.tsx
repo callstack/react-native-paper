@@ -115,18 +115,6 @@ describe('ListAccordion', () => {
   });
 });
 
-describe('getAccordionColors - title color', () => {
-  it('should return theme color, for theme version 3', () => {
-    expect(
-      getAccordionColors({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      titleColor: getTheme().colors.onSurface,
-    });
-  });
-});
-
 describe('getAccordionColors - description color', () => {
   it('should return theme color, for theme version 3', () => {
     expect(

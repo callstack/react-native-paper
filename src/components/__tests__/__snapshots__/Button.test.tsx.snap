@@ -122,7 +122,6 @@ exports[`renders button with an accessibility hint 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 12,
                   },
@@ -273,7 +272,6 @@ exports[`renders button with an accessibility label 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 12,
                   },
@@ -423,7 +421,6 @@ exports[`renders button with button color 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 12,
                   },
@@ -573,7 +570,6 @@ exports[`renders button with color 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 12,
                   },
@@ -723,7 +719,6 @@ exports[`renders button with custom testID 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 12,
                   },
@@ -922,7 +917,6 @@ exports[`renders button with icon 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 16,
                   },
@@ -1123,7 +1117,6 @@ exports[`renders button with icon in reverse order 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 16,
                   },
@@ -1273,7 +1266,6 @@ exports[`renders contained contained with mode 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 24,
                     "marginVertical": 10,
@@ -1424,7 +1416,6 @@ exports[`renders disabled button 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 12,
                   },
@@ -1793,7 +1784,6 @@ exports[`renders loading button 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 16,
                   },
@@ -1943,7 +1933,6 @@ exports[`renders outlined button with mode 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 24,
                     "marginVertical": 10,
@@ -2094,7 +2083,6 @@ exports[`renders text button by default 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 12,
                   },
@@ -2244,7 +2232,6 @@ exports[`renders text button with mode 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 12,
                   },

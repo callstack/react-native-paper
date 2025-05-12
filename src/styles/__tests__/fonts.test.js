@@ -1,20 +1,5 @@
-import configureFonts, { fontConfig } from '../fonts';
+import configureFonts from '../fonts';
 import { typescale } from '../themes/v3/tokens';
-
-const mockPlatform = (OS) => {
-  jest.resetModules();
-  jest.doMock('react-native/Libraries/Utilities/Platform', () => ({
-    OS,
-    select: (objs) => objs[OS],
-  }));
-};
-
-const customFont = {
-  custom: {
-    fontFamily: 'sans-serif',
-    fontWeight: 'bold',
-  },
-};
 
 const customFontV3 = {
   displayLarge: {
@@ -135,63 +120,6 @@ const customFontV3 = {
 };
 
 describe('configureFonts', () => {
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip('adds custom fonts to the iOS config', () => {
-    mockPlatform('ios');
-    expect(
-      configureFonts({
-        config: {
-          ios: {
-            ...fontConfig.ios,
-            customFont,
-          },
-        },
-        isV3: false,
-      })
-    ).toEqual({
-      ...fontConfig.ios,
-      customFont,
-    });
-  });
-
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip('adds custom fonts to the Android config', () => {
-    mockPlatform('android');
-    expect(
-      configureFonts({
-        config: {
-          android: {
-            ...fontConfig.android,
-            customFont,
-          },
-        },
-        isV3: false,
-      })
-    ).toEqual({
-      ...fontConfig.android,
-      customFont,
-    });
-  });
-
-  // eslint-disable-next-line jest/no-disabled-tests
-  it.skip('adds custom fonts to the Web config', () => {
-    mockPlatform('web');
-    expect(
-      configureFonts({
-        config: {
-          web: {
-            ...fontConfig.web,
-            customFont,
-          },
-        },
-        isV3: false,
-      })
-    ).toEqual({
-      ...fontConfig.web,
-      customFont,
-    });
-  });
-
   it('overrides properties passed in config for all variants', () => {
     expect(
       configureFonts({
