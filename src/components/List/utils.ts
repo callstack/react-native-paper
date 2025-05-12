@@ -94,15 +94,16 @@ export const getAccordionColors = ({
   isExpanded?: boolean;
   customRippleColor?: ColorValue;
 }) => {
-  const descriptionColor = theme.colors.onSurfaceVariant;
-  const titleTextColor = isExpanded
-    ? theme.colors?.primary
-    : theme.colors.onSurface;
+  const {
+    colors: { onSurfaceVariant, primary, onSurface },
+  } = theme;
+
+  const titleTextColor = isExpanded ? primary : onSurface;
   const rippleColor =
     customRippleColor || color(titleTextColor).alpha(0.12).rgb().string();
 
   return {
-    descriptionColor,
+    descriptionColor: onSurfaceVariant,
     titleTextColor,
     rippleColor,
   };

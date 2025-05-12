@@ -74,7 +74,10 @@ const Tooltip = ({
 }: Props) => {
   const isWeb = Platform.OS === 'web';
 
-  const { colors, roundness } = useInternalTheme(themeOverrides);
+  const {
+    colors: { onSurface, surface },
+    roundness,
+  } = useInternalTheme(themeOverrides);
   const [visible, setVisible] = React.useState(false);
 
   const [measurement, setMeasurement] = React.useState({
@@ -204,7 +207,7 @@ const Tooltip = ({
             style={[
               styles.tooltip,
               {
-                backgroundColor: colors.onSurface,
+                backgroundColor: onSurface,
                 ...getTooltipPosition(
                   measurement as Measurement,
                   children as React.ReactElement<TooltipChildProps>
@@ -220,7 +223,7 @@ const Tooltip = ({
               numberOfLines={1}
               selectable={false}
               variant="labelLarge"
-              style={{ color: colors.surface }}
+              style={{ color: surface }}
               maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
             >
               {title}

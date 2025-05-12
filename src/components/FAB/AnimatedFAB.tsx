@@ -244,7 +244,10 @@ const AnimatedFAB = ({
   const { current: animFAB } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
-  const { animation, fonts } = theme;
+  const {
+    animation,
+    fonts: { labelLarge },
+  } = theme;
   const { scale } = animation;
 
   const labelSize = isWeb ? getLabelSizeWeb(labelRef) : null;
@@ -362,11 +365,9 @@ const AnimatedFAB = ({
     animFAB,
   });
 
-  const font = fonts.labelLarge;
-
   const textStyle = {
     color: foregroundColor,
-    ...font,
+    ...labelLarge,
   };
 
   const md3Elevation = disabled || !isIOS ? 0 : 3;

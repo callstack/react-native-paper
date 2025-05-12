@@ -152,7 +152,10 @@ const SegmentedButtonItem = ({
     }
   }, [checked, checkScale, showSelectedCheck]);
 
-  const { roundness, fonts } = theme;
+  const {
+    roundness,
+    fonts: { labelLarge },
+  } = theme;
   const { borderColor, textColor, borderWidth, backgroundColor } =
     getSegmentedButtonColors({
       checked,
@@ -200,7 +203,7 @@ const SegmentedButtonItem = ({
     ...segmentBorderRadius,
   };
   const labelTextStyle: TextStyle = {
-    ...fonts.labelLarge,
+    ...labelLarge,
     color: textColor,
   };
 

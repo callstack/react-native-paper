@@ -81,8 +81,11 @@ const TextInputOutlined = ({
 }: ChildTextInputProps) => {
   const adornmentConfig = getAdornmentConfig({ left, right });
 
-  const { colors, roundness, fonts } = theme;
-  const font = fonts.bodyLarge;
+  const {
+    colors: { background },
+    roundness,
+    fonts: { bodyLarge },
+  } = theme;
   const hasActiveOutline = parentState.focused || error;
 
   const { INPUT_PADDING_HORIZONTAL, MIN_HEIGHT, ADORNMENT_OFFSET, MIN_WIDTH } =
@@ -93,7 +96,7 @@ const TextInputOutlined = ({
     fontWeight,
     lineHeight: lineHeightStyle,
     height,
-    backgroundColor = colors?.background,
+    backgroundColor = background,
     textAlign,
     ...viewStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
@@ -211,9 +214,7 @@ const TextInputOutlined = ({
     : 'transparent';
 
   const labelBackgroundColor: ColorValue =
-    backgroundColor === 'transparent'
-      ? theme.colors.background
-      : backgroundColor;
+    backgroundColor === 'transparent' ? background : backgroundColor;
 
   const labelProps = {
     label,
@@ -224,7 +225,7 @@ const TextInputOutlined = ({
     placeholderStyle,
     baseLabelTranslateY,
     baseLabelTranslateX,
-    font,
+    font: bodyLarge,
     fontSize,
     lineHeight,
     fontWeight,
@@ -329,7 +330,7 @@ const TextInputOutlined = ({
       ...adornmentProps,
       left,
       right,
-      textStyle: { ...font, fontSize, lineHeight, fontWeight },
+      textStyle: { ...bodyLarge, fontSize, lineHeight, fontWeight },
       visible: parentState.labeled,
     };
   }
@@ -394,7 +395,7 @@ const TextInputOutlined = ({
             !multiline || (multiline && height) ? { height: inputHeight } : {},
             paddingOut,
             {
-              ...font,
+              ...bodyLarge,
               fontSize,
               lineHeight,
               fontWeight,

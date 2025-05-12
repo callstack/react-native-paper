@@ -25,11 +25,15 @@ const getCheckedColor = ({
   theme: InternalTheme;
   color?: string;
 }) => {
+  const {
+    colors: { primary },
+  } = theme;
+
   if (color) {
     return color;
   }
 
-  return theme.colors.primary;
+  return primary;
 };
 
 const getThumbTintColor = ({
@@ -38,6 +42,7 @@ const getThumbTintColor = ({
   value,
   checkedColor,
 }: BaseProps & { checkedColor: string }) => {
+  const { dark } = theme;
   const isIOS = Platform.OS === 'ios';
 
   if (isIOS) {
@@ -45,7 +50,7 @@ const getThumbTintColor = ({
   }
 
   if (disabled) {
-    if (theme.dark) {
+    if (dark) {
       return grey800;
     }
     return grey400;
@@ -55,7 +60,7 @@ const getThumbTintColor = ({
     return checkedColor;
   }
 
-  if (theme.dark) {
+  if (dark) {
     return grey400;
   }
   return grey50;
@@ -67,6 +72,8 @@ const getOnTintColor = ({
   value,
   checkedColor,
 }: BaseProps & { checkedColor: string }) => {
+  const { dark } = theme;
+
   const isIOS = Platform.OS === 'ios';
 
   if (isIOS) {
@@ -74,7 +81,7 @@ const getOnTintColor = ({
   }
 
   if (disabled) {
-    if (theme.dark) {
+    if (dark) {
       return setColor(white).alpha(0.06).rgb().string();
     }
     return setColor(black).alpha(0.12).rgb().string();
@@ -84,7 +91,7 @@ const getOnTintColor = ({
     return setColor(checkedColor).alpha(0.5).rgb().string();
   }
 
-  if (theme.dark) {
+  if (dark) {
     return grey700;
   }
   return 'rgb(178, 175, 177)';

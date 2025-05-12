@@ -208,6 +208,19 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
+    const {
+      roundness,
+      dark,
+      fonts: { bodyLarge },
+      colors: {
+        elevation: elevationColors,
+        onSurface,
+        onSurfaceVariant,
+        outline,
+        primary,
+      },
+    } = theme;
+
     const root = React.useRef<TextInput>(null);
 
     React.useImperativeHandle(ref, () => ({
@@ -227,22 +240,18 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       onClearIconPress?.(e);
     };
 
-    const { roundness, dark, fonts, colors } = theme;
-
-    const placeholderTextColor = colors.onSurface;
-    const textColor = colors.onSurfaceVariant;
-    const iconColor = customIconColor || colors.onSurfaceVariant;
+    const iconColor = customIconColor || onSurfaceVariant;
     const rippleColor =
-      customRippleColor || color(textColor).alpha(0.32).rgb().string();
+      customRippleColor || color(onSurfaceVariant).alpha(0.32).rgb().string();
     const traileringRippleColor =
       customTraileringRippleColor ||
-      color(textColor).alpha(0.32).rgb().string();
+      color(onSurfaceVariant).alpha(0.32).rgb().string();
 
     const font = {
-      ...fonts.bodyLarge,
+      ...bodyLarge,
       lineHeight: Platform.select({
         ios: 0,
-        default: fonts.bodyLarge.lineHeight,
+        default: bodyLarge.lineHeight,
       }),
     };
 
@@ -257,7 +266,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       <Surface
         style={[
           {
-            backgroundColor: colors.elevation.level3,
+            backgroundColor: elevationColors.level3,
             borderRadius: roundness * (isBarMode ? 7 : 0),
           },
           styles.container,
@@ -292,7 +301,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
           style={[
             styles.input,
             {
-              color: textColor,
+              color: onSurfaceVariant,
               ...font,
               ...Platform.select({ web: { outline: 'none' } }),
             },
@@ -300,8 +309,8 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             inputStyle,
           ]}
           placeholder={placeholder || ''}
-          placeholderTextColor={placeholderTextColor}
-          selectionColor={colors.primary}
+          placeholderTextColor={onSurface}
+          selectionColor={primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
           keyboardAppearance={dark ? 'dark' : 'light'}
@@ -357,7 +366,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             accessibilityRole="button"
             borderless
             onPress={onTraileringIconPress}
-            iconColor={traileringIconColor || colors.onSurfaceVariant}
+            iconColor={traileringIconColor || onSurfaceVariant}
             rippleColor={traileringRippleColor}
             icon={traileringIcon}
             accessibilityLabel={traileringIconAccessibilityLabel}
@@ -365,14 +374,18 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
           />
         ) : null}
         {isBarMode &&
-          right?.({ color: textColor, style: styles.rightStyle, testID })}
+          right?.({
+            color: onSurfaceVariant,
+            style: styles.rightStyle,
+            testID,
+          })}
         {!isBarMode && showDivider && (
           <Divider
             bold
             style={[
               styles.divider,
               {
-                backgroundColor: colors.outline,
+                backgroundColor: outline,
               },
             ]}
             testID={`${testID}-divider`}

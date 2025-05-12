@@ -290,7 +290,9 @@ const TextInput = forwardRef<TextInputHandles, Props>(
     const timer = React.useRef<NodeJS.Timeout | undefined>(undefined);
     const root = React.useRef<NativeTextInput | undefined | null>(null);
 
-    const { scale } = theme.animation;
+    const {
+      animation: { scale },
+    } = theme;
 
     React.useImperativeHandle(ref, () => ({
       focus: () => root.current?.focus(),

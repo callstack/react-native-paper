@@ -84,8 +84,10 @@ const Text = (
   ref: TextRef
 ) => {
   const root = React.useRef<NativeText | null>(null);
-  // FIXME: destructure it in TS 4.6+
-  const theme = useInternalTheme(initialTheme);
+  const {
+    fonts,
+    colors: { onSurface },
+  } = useInternalTheme(initialTheme);
   const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
 
   React.useImperativeHandle(ref, () => ({
@@ -93,7 +95,7 @@ const Text = (
   }));
 
   if (variant) {
-    let font = theme.fonts[variant];
+    let font = fonts[variant];
     let textStyle = [font, style];
 
     if (
@@ -115,7 +117,7 @@ const Text = (
       // Solution:  To address the following scenario, the code below overrides the `variant`
       //            specified in a parent in favor of children's variant:
       if (props.variant) {
-        font = theme.fonts[props.variant as VariantProp<typeof props.variant>];
+        font = fonts[props.variant as VariantProp<typeof props.variant>];
         textStyle = [style, font];
       }
 
@@ -134,7 +136,7 @@ const Text = (
     if (typeof font !== 'object') {
       throw new Error(
         `Variant ${variant} was not provided properly. Valid variants are ${Object.keys(
-          theme.fonts
+          fonts
         ).join(', ')}.`
       );
     }
@@ -142,19 +144,15 @@ const Text = (
     return (
       <NativeText
         ref={root}
-        style={[
-          styles.text,
-          { writingDirection, color: theme.colors.onSurface },
-          textStyle,
-        ]}
+        style={[styles.text, { writingDirection, color: onSurface }, textStyle]}
         {...rest}
       />
     );
   } else {
-    const font = theme.fonts.default;
+    const font = fonts.default;
     const textStyle = {
       ...font,
-      color: theme.colors?.onSurface,
+      color: onSurface,
     };
     return (
       <NativeText

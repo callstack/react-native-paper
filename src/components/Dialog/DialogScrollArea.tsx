@@ -49,16 +49,14 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const DialogScrollArea = (props: Props) => {
-  const { colors } = useInternalTheme(props.theme);
+  const {
+    colors: { surfaceVariant },
+  } = useInternalTheme(props.theme);
 
   return (
     <View
       {...props}
-      style={[
-        { borderColor: colors.surfaceVariant },
-        styles.container,
-        props.style,
-      ]}
+      style={[{ borderColor: surfaceVariant }, styles.container, props.style]}
     >
       {props.children}
     </View>

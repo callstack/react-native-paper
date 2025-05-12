@@ -7,15 +7,17 @@ type BaseProps = {
 };
 
 export function getTextColor({ theme, disabled, type }: BaseProps) {
-  const { colors } = theme;
+  const {
+    colors: { error, onSurfaceDisabled, onSurfaceVariant },
+  } = theme;
 
   if (type === 'error') {
-    return colors?.error;
+    return error;
   }
 
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return onSurfaceDisabled;
   }
 
-  return theme.colors.onSurfaceVariant;
+  return onSurfaceVariant;
 }

@@ -212,7 +212,7 @@ const FAB = forwardRef<View, Props>(
     const theme = useInternalTheme(themeOverrides);
     const {
       animation: { scale },
-      fonts,
+      fonts: { labelLarge },
     } = theme;
 
     const { current: visibility } = React.useRef<Animated.Value>(
@@ -257,12 +257,11 @@ const FAB = forwardRef<View, Props>(
     const isFlatMode = mode === 'flat';
     const iconSize = isLargeSize ? 36 : 24;
     const loadingIndicatorSize = isLargeSize ? 24 : 18;
-    const font = fonts.labelLarge;
 
     const extendedStyle = getExtendedFabStyle({ customSize });
     const textStyle = {
       color: foregroundColor,
-      ...font,
+      ...labelLarge,
     };
 
     const md3Elevation = isFlatMode || disabled ? 0 : 3;

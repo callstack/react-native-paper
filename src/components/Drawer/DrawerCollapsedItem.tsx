@@ -113,8 +113,13 @@ const DrawerCollapsedItem = ({
   const theme = useInternalTheme(themeOverrides);
   const {
     animation: { scale },
-    colors,
-    fonts,
+    colors: {
+      secondaryContainer,
+      onSurface,
+      onSurfaceVariant,
+      onSecondaryContainer,
+    },
+    fonts: { labelMedium },
   } = theme;
 
   const [numOfLines, setNumOfLines] = React.useState(1);
@@ -139,11 +144,9 @@ const DrawerCollapsedItem = ({
 
   const iconPadding = ((!label ? itemSize : outlineHeight) - iconSize) / 2;
 
-  const backgroundColor = active ? colors.secondaryContainer : 'transparent';
-  const labelColor = active ? colors.onSurface : colors.onSurfaceVariant;
-  const iconColor = active
-    ? colors.onSecondaryContainer
-    : colors.onSurfaceVariant;
+  const backgroundColor = active ? secondaryContainer : 'transparent';
+  const labelColor = active ? onSurface : onSurfaceVariant;
+  const iconColor = active ? onSecondaryContainer : onSurfaceVariant;
 
   const onTextLayout = ({
     nativeEvent,
@@ -158,7 +161,7 @@ const DrawerCollapsedItem = ({
 
   const labelTextStyle = {
     color: labelColor,
-    ...fonts.labelMedium,
+    ...labelMedium,
   };
 
   const icon =

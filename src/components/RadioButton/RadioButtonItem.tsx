@@ -165,6 +165,9 @@ const RadioButtonItem = ({
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const {
+    colors: { onSurface, onSurfaceDisabled },
+  } = theme;
   const radioButtonProps = {
     value,
     disabled,
@@ -184,13 +187,9 @@ const RadioButtonItem = ({
     radioButton = <RadioButton {...radioButtonProps} />;
   }
 
-  const textColor = theme.colors.onSurface;
-  const disabledTextColor = theme.colors.onSurfaceDisabled;
-  const textAlign = isLeading ? 'right' : 'left';
-
   const computedStyle = {
-    color: disabled ? disabledTextColor : textColor,
-    textAlign,
+    color: disabled ? onSurfaceDisabled : onSurface,
+    textAlign: isLeading ? 'right' : 'left',
   } as TextStyle;
 
   return (

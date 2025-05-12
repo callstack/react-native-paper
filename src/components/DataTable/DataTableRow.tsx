@@ -62,14 +62,15 @@ const DataTableRow = ({
   theme: themeOverrides,
   ...rest
 }: Props) => {
-  const { colors } = useInternalTheme(themeOverrides);
-  const borderBottomColor = colors.surfaceVariant;
+  const {
+    colors: { surfaceVariant },
+  } = useInternalTheme(themeOverrides);
 
   return (
     <TouchableRipple
       {...rest}
       onPress={onPress}
-      style={[styles.container, { borderBottomColor }, style]}
+      style={[styles.container, { borderBottomColor: surfaceVariant }, style]}
     >
       <View style={styles.content} pointerEvents={pointerEvents}>
         {children}

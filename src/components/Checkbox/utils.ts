@@ -9,11 +9,15 @@ const getAndroidCheckedColor = ({
   theme: InternalTheme;
   customColor?: string;
 }) => {
+  const {
+    colors: { primary },
+  } = theme;
+
   if (customColor) {
     return customColor;
   }
 
-  return theme.colors.primary;
+  return primary;
 };
 
 const getAndroidUncheckedColor = ({
@@ -23,11 +27,15 @@ const getAndroidUncheckedColor = ({
   theme: InternalTheme;
   customUncheckedColor?: string;
 }) => {
+  const {
+    colors: { onSurfaceVariant },
+  } = theme;
+
   if (customUncheckedColor) {
     return customUncheckedColor;
   }
 
-  return theme.colors.onSurfaceVariant;
+  return onSurfaceVariant;
 };
 
 const getAndroidRippleColor = ({
@@ -39,8 +47,12 @@ const getAndroidRippleColor = ({
   checkedColor: string;
   disabled?: boolean;
 }) => {
+  const {
+    colors: { onSurface },
+  } = theme;
+
   if (disabled) {
-    return color(theme.colors.onSurface).alpha(0.16).rgb().string();
+    return color(onSurface).alpha(0.16).rgb().string();
   }
 
   return color(checkedColor).fade(0.32).rgb().string();
@@ -59,8 +71,12 @@ const getAndroidControlColor = ({
   uncheckedColor: string;
   disabled?: boolean;
 }) => {
+  const {
+    colors: { onSurfaceDisabled },
+  } = theme;
+
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return onSurfaceDisabled;
   }
 
   if (checked) {
@@ -108,15 +124,19 @@ const getIOSCheckedColor = ({
   customColor?: string;
   disabled?: boolean;
 }) => {
+  const {
+    colors: { onSurfaceDisabled, primary },
+  } = theme;
+
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return onSurfaceDisabled;
   }
 
   if (customColor) {
     return customColor;
   }
 
-  return theme.colors.primary;
+  return primary;
 };
 
 const getIOSRippleColor = ({
@@ -128,8 +148,12 @@ const getIOSRippleColor = ({
   checkedColor: string;
   disabled?: boolean;
 }) => {
+  const {
+    colors: { onSurface },
+  } = theme;
+
   if (disabled) {
-    return color(theme.colors.onSurface).alpha(0.16).rgb().string();
+    return color(onSurface).alpha(0.16).rgb().string();
   }
   return color(checkedColor).fade(0.32).rgb().string();
 };

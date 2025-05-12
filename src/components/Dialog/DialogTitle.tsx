@@ -51,11 +51,14 @@ const DialogTitle = ({
   style,
   ...rest
 }: Props) => {
-  const { colors, fonts } = useInternalTheme(themeOverrides);
+  const {
+    colors: { onSurface },
+    fonts: { headlineSmall },
+  } = useInternalTheme(themeOverrides);
 
   const headerTextStyle = {
-    color: colors.onSurface,
-    ...fonts.headlineSmall,
+    color: onSurface,
+    ...headlineSmall,
   };
 
   return (

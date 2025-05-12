@@ -49,6 +49,10 @@ const getButtonBackgroundColor = ({
 }: BaseProps & {
   customButtonColor?: string;
 }) => {
+  const {
+    colors: { surfaceDisabled, elevation, primary, secondaryContainer },
+  } = theme;
+
   if (customButtonColor && !disabled) {
     return customButtonColor;
   }
@@ -58,19 +62,19 @@ const getButtonBackgroundColor = ({
       return 'transparent';
     }
 
-    return theme.colors.surfaceDisabled;
+    return surfaceDisabled;
   }
 
   if (isMode('elevated')) {
-    return theme.colors.elevation.level1;
+    return elevation.level1;
   }
 
   if (isMode('contained')) {
-    return theme.colors.primary;
+    return primary;
   }
 
   if (isMode('contained-tonal')) {
-    return theme.colors.secondaryContainer;
+    return secondaryContainer;
   }
 
   return 'transparent';
@@ -88,12 +92,15 @@ const getButtonTextColor = ({
   backgroundColor: string;
   dark?: boolean;
 }) => {
+  const {
+    colors: { onSurfaceDisabled, primary, onPrimary, onSecondaryContainer },
+  } = theme;
   if (customTextColor && !disabled) {
     return customTextColor;
   }
 
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return onSurfaceDisabled;
   }
 
   if (typeof dark === 'boolean') {
@@ -107,27 +114,31 @@ const getButtonTextColor = ({
   }
 
   if (isMode('outlined') || isMode('text') || isMode('elevated')) {
-    return theme.colors.primary;
+    return primary;
   }
 
   if (isMode('contained')) {
-    return theme.colors.onPrimary;
+    return onPrimary;
   }
 
   if (isMode('contained-tonal')) {
-    return theme.colors.onSecondaryContainer;
+    return onSecondaryContainer;
   }
 
-  return theme.colors.primary;
+  return primary;
 };
 
 const getButtonBorderColor = ({ isMode, disabled, theme }: BaseProps) => {
+  const {
+    colors: { surfaceDisabled, outline },
+  } = theme;
+
   if (disabled && isMode('outlined')) {
-    return theme.colors.surfaceDisabled;
+    return surfaceDisabled;
   }
 
   if (isMode('outlined')) {
-    return theme.colors.outline;
+    return outline;
   }
 
   return 'transparent';

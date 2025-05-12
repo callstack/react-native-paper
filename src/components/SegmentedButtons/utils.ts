@@ -79,17 +79,24 @@ export const getSegmentedButtonBorderRadius = ({
 };
 
 const getSegmentedButtonBackgroundColor = ({ checked, theme }: BaseProps) => {
+  const {
+    colors: { secondaryContainer },
+  } = theme;
   if (checked) {
-    return theme.colors.secondaryContainer;
+    return secondaryContainer;
   }
   return 'transparent';
 };
 
 const getSegmentedButtonBorderColor = ({ theme, disabled }: BaseProps) => {
+  const {
+    colors: { surfaceDisabled, outline },
+  } = theme;
+
   if (disabled) {
-    return theme.colors.surfaceDisabled;
+    return surfaceDisabled;
   }
-  return theme.colors.outline;
+  return outline;
 };
 
 const getSegmentedButtonBorderWidth = () => {
@@ -103,13 +110,16 @@ const getSegmentedButtonTextColor = ({
   checkedColor,
   uncheckedColor,
 }: SegmentedButtonProps) => {
+  const {
+    colors: { onSurfaceDisabled, onSecondaryContainer, onSurface },
+  } = theme;
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return onSurfaceDisabled;
   }
   if (checked) {
-    return checkedColor ?? theme.colors.onSecondaryContainer;
+    return checkedColor ?? onSecondaryContainer;
   }
-  return uncheckedColor ?? theme.colors.onSurface;
+  return uncheckedColor ?? onSurface;
 };
 
 export const getSegmentedButtonColors = ({

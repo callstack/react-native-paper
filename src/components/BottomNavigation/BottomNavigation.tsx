@@ -343,18 +343,21 @@ const BottomNavigation = <Route extends BaseRoute>({
   onTabPress,
   onTabLongPress,
   onIndexChange,
-  shifting: shiftingProp,
+  shifting: shiftingProp = false,
   safeAreaInsets,
   labelMaxFontSizeMultiplier = 1,
-  compact: compactProp,
+  compact = false,
   testID = 'bottom-navigation',
   theme: themeOverrides,
   getLazy = ({ route }: { route: Route }) => route.lazy,
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
-  const { scale } = theme.animation;
-  const compact = compactProp ?? false;
-  let shifting = shiftingProp ?? false;
+  const {
+    animation: { scale },
+    colors,
+  } = theme;
+
+  let shifting = shiftingProp;
 
   if (shifting && navigationState.routes.length < 2) {
     shifting = false;
@@ -486,7 +489,6 @@ const BottomNavigation = <Route extends BaseRoute>({
   });
 
   const { routes } = navigationState;
-  const { colors } = theme;
 
   return (
     <View style={[styles.container, style]} testID={testID}>

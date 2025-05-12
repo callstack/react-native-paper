@@ -67,7 +67,7 @@ const Badge = ({
 
   const {
     animation: { scale },
-    colors,
+    colors: { error, onError },
   } = theme;
 
   React.useEffect(() => {
@@ -84,7 +84,7 @@ const Badge = ({
     }).start();
   }, [visible, opacity, scale]);
 
-  const { backgroundColor = colors.error, ...restStyle } = (StyleSheet.flatten(
+  const { backgroundColor = error, ...restStyle } = (StyleSheet.flatten(
     style
   ) || {}) as TextStyle;
 
@@ -95,7 +95,7 @@ const Badge = ({
         {
           opacity,
           backgroundColor,
-          color: colors.onError,
+          color: onError,
           fontSize: size * 0.5,
           lineHeight: size / fontScale,
           height: size,

@@ -168,31 +168,42 @@ const getBackgroundColor = ({
   disabled,
   customBackgroundColor,
 }: BaseProps & { customBackgroundColor?: ColorValue }) => {
+  const {
+    colors: {
+      surfaceDisabled,
+      primaryContainer,
+      secondaryContainer,
+      tertiaryContainer,
+      elevation,
+      primary,
+    },
+  } = theme;
+
   if (customBackgroundColor && !disabled) {
     return customBackgroundColor;
   }
 
   if (disabled) {
-    return theme.colors.surfaceDisabled;
+    return surfaceDisabled;
   }
 
   if (isVariant('primary')) {
-    return theme.colors.primaryContainer;
+    return primaryContainer;
   }
 
   if (isVariant('secondary')) {
-    return theme.colors.secondaryContainer;
+    return secondaryContainer;
   }
 
   if (isVariant('tertiary')) {
-    return theme.colors.tertiaryContainer;
+    return tertiaryContainer;
   }
 
   if (isVariant('surface')) {
-    return theme.colors.elevation.level3;
+    return elevation.level3;
   }
 
-  return theme.colors.primary;
+  return primary;
 };
 
 const getForegroundColor = ({
@@ -201,31 +212,41 @@ const getForegroundColor = ({
   disabled,
   customColor,
 }: BaseProps & { customColor?: string }) => {
+  const {
+    colors: {
+      onSurfaceDisabled,
+      onPrimaryContainer,
+      onSecondaryContainer,
+      onTertiaryContainer,
+      primary,
+    },
+  } = theme;
+
   if (typeof customColor !== 'undefined' && !disabled) {
     return customColor;
   }
 
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return onSurfaceDisabled;
   }
 
   if (isVariant('primary')) {
-    return theme.colors.onPrimaryContainer;
+    return onPrimaryContainer;
   }
 
   if (isVariant('secondary')) {
-    return theme.colors.onSecondaryContainer;
+    return onSecondaryContainer;
   }
 
   if (isVariant('tertiary')) {
-    return theme.colors.onTertiaryContainer;
+    return onTertiaryContainer;
   }
 
   if (isVariant('surface')) {
-    return theme.colors.primary;
+    return primary;
   }
 
-  return theme.colors.primary;
+  return primary;
 };
 
 export const getFABColors = ({
@@ -268,7 +289,11 @@ export const getFABColors = ({
 };
 
 const getLabelColor = ({ theme }: { theme: InternalTheme }) => {
-  return theme.colors.onSurface;
+  const {
+    colors: { onSurface },
+  } = theme;
+
+  return onSurface;
 };
 
 const getBackdropColor = ({
@@ -278,14 +303,22 @@ const getBackdropColor = ({
   theme: InternalTheme;
   customBackdropColor?: string;
 }) => {
+  const {
+    colors: { background },
+  } = theme;
+
   if (customBackdropColor) {
     return customBackdropColor;
   }
-  return color(theme.colors.background).alpha(0.95).rgb().string();
+  return color(background).alpha(0.95).rgb().string();
 };
 
 const getStackedFABBackgroundColor = ({ theme }: { theme: InternalTheme }) => {
-  return theme.colors.elevation.level3;
+  const {
+    colors: { elevation },
+  } = theme;
+
+  return elevation.level3;
 };
 
 export const getFABGroupColors = ({

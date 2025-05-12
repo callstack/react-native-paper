@@ -10,8 +10,12 @@ export const getToggleButtonColor = ({
   theme: InternalTheme;
   checked: boolean | null;
 }) => {
+  const {
+    colors: { onSecondaryContainer },
+  } = theme;
+
   if (checked) {
-    return color(theme.colors.onSecondaryContainer)
+    return color(onSecondaryContainer)
       .alpha(tokens.md.ref.opacity.level2)
       .rgb()
       .string();

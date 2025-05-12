@@ -20,6 +20,10 @@ const getBorderColor = ({
   disabled,
   selectedColor,
 }: BaseProps & { selectedColor?: string }) => {
+  const {
+    colors: { onSurfaceVariant, outline },
+  } = theme;
+
   const isSelectedColor = selectedColor !== undefined;
 
   if (!isOutlined) {
@@ -28,14 +32,14 @@ const getBorderColor = ({
   }
 
   if (disabled) {
-    return color(theme.colors.onSurfaceVariant).alpha(0.12).rgb().string();
+    return color(onSurfaceVariant).alpha(0.12).rgb().string();
   }
 
   if (isSelectedColor) {
     return color(selectedColor).alpha(0.29).rgb().string();
   }
 
-  return theme.colors.outline;
+  return outline;
 };
 
 const getTextColor = ({
@@ -46,9 +50,13 @@ const getTextColor = ({
 }: BaseProps & {
   selectedColor?: string;
 }) => {
+  const {
+    colors: { onSurfaceDisabled, onSurfaceVariant, onSecondaryContainer },
+  } = theme;
+
   const isSelectedColor = selectedColor !== undefined;
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return onSurfaceDisabled;
   }
 
   if (isSelectedColor) {
@@ -56,21 +64,25 @@ const getTextColor = ({
   }
 
   if (isOutlined) {
-    return theme.colors.onSurfaceVariant;
+    return onSurfaceVariant;
   }
 
-  return theme.colors.onSecondaryContainer;
+  return onSecondaryContainer;
 };
 
 const getDefaultBackgroundColor = ({
   theme,
   isOutlined,
 }: Omit<BaseProps, 'disabled' | 'selectedColor'>) => {
+  const {
+    colors: { surface, secondaryContainer },
+  } = theme;
+
   if (isOutlined) {
-    return theme.colors.surface;
+    return surface;
   }
 
-  return theme.colors.secondaryContainer;
+  return secondaryContainer;
 };
 
 const getBackgroundColor = ({
@@ -81,6 +93,10 @@ const getBackgroundColor = ({
 }: BaseProps & {
   customBackgroundColor?: ColorValue;
 }) => {
+  const {
+    colors: { onSurfaceVariant },
+  } = theme;
+
   if (typeof customBackgroundColor === 'string') {
     return customBackgroundColor;
   }
@@ -89,7 +105,7 @@ const getBackgroundColor = ({
     if (isOutlined) {
       return 'transparent';
     }
-    return color(theme.colors.onSurfaceVariant).alpha(0.12).rgb().string();
+    return color(onSurfaceVariant).alpha(0.12).rgb().string();
   }
   return getDefaultBackgroundColor({ theme, isOutlined });
 };
@@ -104,6 +120,10 @@ const getSelectedBackgroundColor = ({
   customBackgroundColor?: ColorValue;
   showSelectedOverlay?: boolean;
 }) => {
+  const {
+    colors: { onSurfaceVariant, onSecondaryContainer },
+  } = theme;
+
   const backgroundColor = getBackgroundColor({
     theme,
     disabled,
@@ -114,25 +134,25 @@ const getSelectedBackgroundColor = ({
   if (isOutlined) {
     if (showSelectedOverlay) {
       return color(backgroundColor)
-        .mix(color(theme.colors.onSurfaceVariant), 0.12)
+        .mix(color(onSurfaceVariant), 0.12)
         .rgb()
         .string();
     }
     return color(backgroundColor)
-      .mix(color(theme.colors.onSurfaceVariant), 0)
+      .mix(color(onSurfaceVariant), 0)
       .rgb()
       .string();
   }
 
   if (showSelectedOverlay) {
     return color(backgroundColor)
-      .mix(color(theme.colors.onSecondaryContainer), 0.12)
+      .mix(color(onSecondaryContainer), 0.12)
       .rgb()
       .string();
   }
 
   return color(backgroundColor)
-    .mix(color(theme.colors.onSecondaryContainer), 0)
+    .mix(color(onSecondaryContainer), 0)
     .rgb()
     .string();
 };
@@ -145,9 +165,13 @@ const getIconColor = ({
 }: BaseProps & {
   selectedColor?: string;
 }) => {
+  const {
+    colors: { onSurfaceDisabled, onSurfaceVariant, onSecondaryContainer },
+  } = theme;
+
   const isSelectedColor = selectedColor !== undefined;
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return onSurfaceDisabled;
   }
 
   if (isSelectedColor) {
@@ -155,10 +179,10 @@ const getIconColor = ({
   }
 
   if (isOutlined) {
-    return theme.colors.onSurfaceVariant;
+    return onSurfaceVariant;
   }
 
-  return theme.colors.onSecondaryContainer;
+  return onSecondaryContainer;
 };
 
 const getRippleColor = ({

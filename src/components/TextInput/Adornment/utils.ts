@@ -6,10 +6,14 @@ type BaseProps = {
 };
 
 export function getTextColor({ theme, disabled }: BaseProps) {
+  const {
+    colors: { onSurfaceDisabled, onSurfaceVariant },
+  } = theme;
+
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return onSurfaceDisabled;
   }
-  return theme.colors.onSurfaceVariant;
+  return onSurfaceVariant;
 }
 
 export function getIconColor({
@@ -21,6 +25,10 @@ export function getIconColor({
   isTextInputFocused: boolean;
   customColor?: ((isTextInputFocused: boolean) => string | undefined) | string;
 }) {
+  const {
+    colors: { onSurfaceDisabled, onSurfaceVariant },
+  } = theme;
+
   if (typeof customColor === 'function') {
     return customColor(isTextInputFocused);
   }
@@ -30,8 +38,8 @@ export function getIconColor({
   }
 
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return onSurfaceDisabled;
   }
 
-  return theme.colors.onSurfaceVariant;
+  return onSurfaceVariant;
 }

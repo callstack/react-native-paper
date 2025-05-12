@@ -48,16 +48,14 @@ const DataTableHeader = ({
   theme: themeOverrides,
   ...rest
 }: Props) => {
-  const { colors } = useInternalTheme(themeOverrides);
+  const {
+    colors: { surfaceVariant },
+  } = useInternalTheme(themeOverrides);
 
   return (
     <View
       {...rest}
-      style={[
-        styles.header,
-        { borderBottomColor: colors.surfaceVariant },
-        style,
-      ]}
+      style={[styles.header, { borderBottomColor: surfaceVariant }, style]}
     >
       {children}
     </View>

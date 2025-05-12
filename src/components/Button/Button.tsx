@@ -212,13 +212,18 @@ const Button = (
   ref: React.ForwardedRef<View>
 ) => {
   const theme = useInternalTheme(themeOverrides);
+  const {
+    roundness,
+    animation,
+    fonts: { labelLarge },
+  } = theme;
+
   const isMode = React.useCallback(
     (modeToCompare: ButtonMode) => {
       return mode === modeToCompare;
     },
     [mode]
   );
-  const { roundness, animation, fonts } = theme;
   const isWeb = Platform.OS === 'web';
 
   const hasPassedTouchHandler = hasTouchHandler({
@@ -309,11 +314,9 @@ const Button = (
   const { color: customLabelColor, fontSize: customLabelSize } =
     StyleSheet.flatten(labelStyle) || {};
 
-  const font = fonts.labelLarge;
-
   const textStyle = {
     color: textColor,
-    ...font,
+    ...labelLarge,
   };
 
   const iconStyle =

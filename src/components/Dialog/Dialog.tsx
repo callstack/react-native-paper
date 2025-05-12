@@ -105,7 +105,10 @@ const Dialog = ({
 }: Props) => {
   const { right, left } = useSafeAreaInsets();
   const theme = useInternalTheme(themeOverrides);
-  const { colors, roundness } = theme;
+  const {
+    colors: { elevation },
+    roundness,
+  } = theme;
   const borderRadius = 7 * roundness;
 
   return (
@@ -117,7 +120,7 @@ const Dialog = ({
       contentContainerStyle={[
         {
           borderRadius,
-          backgroundColor: colors.elevation.level3,
+          backgroundColor: elevation.level3,
           marginHorizontal: Math.max(left, right, 26),
         },
         styles.container,

@@ -114,7 +114,10 @@ const ToggleButton = forwardRef<View, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
-    const { colors, roundness } = theme;
+    const {
+      colors: { outline },
+      roundness,
+    } = theme;
 
     return (
       <ToggleButtonGroupContext.Consumer>
@@ -148,7 +151,7 @@ const ToggleButton = forwardRef<View, Props>(
                 {
                   backgroundColor,
                   borderRadius: roundness,
-                  borderColor: colors.outline,
+                  borderColor: outline,
                 },
                 style,
               ]}

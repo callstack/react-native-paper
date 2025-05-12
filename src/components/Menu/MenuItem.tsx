@@ -151,7 +151,9 @@ const MenuItem = ({
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { fonts } = theme;
+  const {
+    fonts: { bodyLarge },
+  } = theme;
 
   const { titleColor, iconColor, rippleColor } = getMenuItemColor({
     theme,
@@ -170,7 +172,7 @@ const MenuItem = ({
 
   const titleTextStyle = {
     color: titleColor,
-    ...fonts.bodyLarge,
+    ...bodyLarge,
   };
 
   const newAccessibilityState = { ...accessibilityState, disabled };

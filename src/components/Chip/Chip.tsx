@@ -212,6 +212,11 @@ const Chip = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const {
+    animation: { scale },
+    fonts: { labelLarge },
+    colors: { primary },
+  } = theme;
   const { roundness } = theme;
   const isWeb = Platform.OS === 'web';
 
@@ -229,7 +234,6 @@ const Chip = ({
   const isOutlined = mode === 'outlined';
 
   const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
-    const { scale } = theme.animation;
     onPressIn?.(e);
     Animated.timing(elevation, {
       toValue: elevated ? 2 : 0,
@@ -240,7 +244,6 @@ const Chip = ({
   });
 
   const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
-    const { scale } = theme.animation;
     onPressOut?.(e);
     Animated.timing(elevation, {
       toValue: elevated ? 1 : 0,
@@ -295,7 +298,7 @@ const Chip = ({
   };
   const labelTextStyle = {
     color: textColor,
-    ...theme.fonts.labelLarge,
+    ...labelLarge,
   };
   return (
     <Surface
@@ -357,13 +360,7 @@ const Chip = ({
               {icon ? (
                 <Icon
                   source={icon}
-                  color={
-                    avatar
-                      ? white
-                      : !disabled
-                      ? theme.colors.primary
-                      : iconColor
-                  }
+                  color={avatar ? white : !disabled ? primary : iconColor}
                   size={18}
                   theme={theme}
                 />

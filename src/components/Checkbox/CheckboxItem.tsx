@@ -154,7 +154,9 @@ const CheckboxItem = ({
   ...props
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors } = theme;
+  const {
+    colors: { onSurface, onSurfaceDisabled },
+  } = theme;
 
   const checkboxProps = { ...props, status, theme, disabled };
   const isLeading = position === 'leading';
@@ -168,14 +170,9 @@ const CheckboxItem = ({
     checkbox = <Checkbox {...checkboxProps} />;
   }
 
-  const textColor = colors.onSurface;
-  const disabledTextColor = colors.onSurfaceDisabled;
-
-  const textAlign = isLeading ? 'right' : 'left';
-
   const computedStyle = {
-    color: disabled ? disabledTextColor : textColor,
-    textAlign,
+    color: disabled ? onSurfaceDisabled : onSurface,
+    textAlign: isLeading ? 'right' : 'left',
   } as TextStyle;
 
   return (

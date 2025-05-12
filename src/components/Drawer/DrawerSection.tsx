@@ -71,10 +71,11 @@ const DrawerSection = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors, fonts } = theme;
-  const titleColor = colors.onSurfaceVariant;
+  const {
+    colors: { onSurfaceVariant },
+    fonts: { titleSmall },
+  } = theme;
   const titleMargin = 28;
-  const font = fonts.titleSmall;
 
   return (
     <View style={[styles.container, style]} {...rest}>
@@ -86,9 +87,9 @@ const DrawerSection = ({
               numberOfLines={1}
               style={[
                 {
-                  color: titleColor,
+                  color: onSurfaceVariant,
                   marginLeft: titleMargin,
-                  ...font,
+                  ...titleSmall,
                 },
               ]}
               maxFontSizeMultiplier={titleMaxFontSizeMultiplier}

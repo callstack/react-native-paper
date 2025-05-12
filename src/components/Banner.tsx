@@ -131,6 +131,11 @@ const Banner = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const {
+    animation: { scale },
+    colors: { onSurface, primary },
+  } = theme;
+
   const { current: position } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
@@ -144,11 +149,6 @@ const Banner = ({
 
   const showCallback = useLatestCallback(onShowAnimationFinished);
   const hideCallback = useLatestCallback(onHideAnimationFinished);
-
-  const {
-    animation: { scale },
-    colors,
-  } = theme;
 
   const opacity = position.interpolate({
     inputRange: [0, 0.1, 1],
@@ -227,7 +227,7 @@ const Banner = ({
               style={[
                 styles.message,
                 {
-                  color: colors.onSurface,
+                  color: onSurface,
                 },
               ]}
               accessibilityLiveRegion={visible ? 'polite' : 'none'}
@@ -244,7 +244,7 @@ const Banner = ({
                 compact
                 mode="text"
                 style={styles.button}
-                textColor={colors.primary}
+                textColor={primary}
                 theme={theme}
                 {...others}
               >

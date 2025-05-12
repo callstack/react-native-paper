@@ -25,11 +25,15 @@ const getRippleColor = ({
   theme: InternalTheme;
   rippleColor?: ColorValue;
 }) => {
+  const {
+    colors: { onSurface },
+  } = theme;
+
   if (rippleColor) {
     return rippleColor;
   }
 
-  return color(theme.colors.onSurface).alpha(0.12).rgb().string();
+  return color(onSurface).alpha(0.12).rgb().string();
 };
 
 export const getTouchableRippleColors = ({

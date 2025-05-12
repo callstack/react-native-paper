@@ -162,6 +162,9 @@ const ListItem = (
   ref: React.ForwardedRef<View>
 ) => {
   const theme = useInternalTheme(themeOverrides);
+  const {
+    colors: { onSurface, onSurfaceVariant },
+  } = theme;
   const [alignToTop, setAlignToTop] = React.useState(false);
 
   const onDescriptionTextLayout = (
@@ -201,13 +204,11 @@ const ListItem = (
   };
 
   const renderTitle = () => {
-    const titleColor = theme.colors.onSurface;
-
     return typeof title === 'function' ? (
       title({
         selectable: false,
         ellipsizeMode: titleEllipsizeMode,
-        color: titleColor,
+        color: onSurface,
         fontSize: styles.title.fontSize,
       })
     ) : (
@@ -215,15 +216,13 @@ const ListItem = (
         selectable={false}
         ellipsizeMode={titleEllipsizeMode}
         numberOfLines={titleNumberOfLines}
-        style={[styles.title, { color: titleColor }, titleStyle]}
+        style={[styles.title, { color: onSurface }, titleStyle]}
         maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
       >
         {title}
       </Text>
     );
   };
-
-  const descriptionColor = theme.colors.onSurfaceVariant;
 
   return (
     <TouchableRipple
@@ -237,7 +236,7 @@ const ListItem = (
       <View style={[styles.rowV3, containerStyle]}>
         {left
           ? left({
-              color: descriptionColor,
+              color: onSurfaceVariant,
               style: getLeftStyles(alignToTop, description),
             })
           : null}
@@ -248,12 +247,12 @@ const ListItem = (
           {renderTitle()}
 
           {description
-            ? renderDescription(descriptionColor, description)
+            ? renderDescription(onSurfaceVariant, description)
             : null}
         </View>
         {right
           ? right({
-              color: descriptionColor,
+              color: onSurfaceVariant,
               style: getRightStyles(alignToTop, description),
             })
           : null}

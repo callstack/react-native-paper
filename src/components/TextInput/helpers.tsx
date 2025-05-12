@@ -305,15 +305,19 @@ const getInputTextColor = ({
   textColor,
   disabled,
 }: BaseProps & { textColor?: string }) => {
+  const {
+    colors: { onSurfaceDisabled, onSurface },
+  } = theme;
+
   if (textColor) {
     return textColor;
   }
 
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return onSurfaceDisabled;
   }
 
-  return theme.colors.onSurface;
+  return onSurface;
 };
 
 const getActiveColor = ({
@@ -329,11 +333,15 @@ const getActiveColor = ({
   activeOutlineColor?: string;
   mode?: Mode;
 }) => {
+  const {
+    colors: { error: errorColor, onSurfaceDisabled, primary },
+  } = theme;
+
   const isFlat = mode === 'flat';
   const modeColor = isFlat ? activeUnderlineColor : activeOutlineColor;
 
   if (error) {
-    return theme.colors.error;
+    return errorColor;
   }
 
   if (modeColor) {
@@ -341,18 +349,22 @@ const getActiveColor = ({
   }
 
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return onSurfaceDisabled;
   }
 
-  return theme.colors.primary;
+  return primary;
 };
 
 const getPlaceholderColor = ({ theme, disabled }: BaseProps) => {
+  const {
+    colors: { onSurfaceDisabled, onSurfaceVariant },
+  } = theme;
+
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return onSurfaceDisabled;
   }
 
-  return theme.colors.onSurfaceVariant;
+  return onSurfaceVariant;
 };
 
 const getSelectionColor = ({
@@ -374,10 +386,14 @@ const getSelectionColor = ({
 };
 
 const getFlatBackgroundColor = ({ theme, disabled }: BaseProps) => {
+  const {
+    colors: { onSurface, surfaceVariant },
+  } = theme;
+
   if (disabled) {
-    return color(theme.colors.onSurface).alpha(0.04).rgb().string();
+    return color(onSurface).alpha(0.04).rgb().string();
   } else {
-    return theme.colors.surfaceVariant;
+    return surfaceVariant;
   }
 };
 
@@ -386,15 +402,19 @@ const getFlatUnderlineColor = ({
   disabled,
   underlineColor,
 }: BaseProps & { underlineColor?: string }) => {
+  const {
+    colors: { onSurfaceDisabled, onSurfaceVariant },
+  } = theme;
+
   if (!disabled && underlineColor) {
     return underlineColor;
   }
 
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return onSurfaceDisabled;
   }
 
-  return theme.colors.onSurfaceVariant;
+  return onSurfaceVariant;
 };
 
 const getOutlinedOutlineInputColor = ({
@@ -402,18 +422,23 @@ const getOutlinedOutlineInputColor = ({
   disabled,
   customOutlineColor,
 }: BaseProps & { customOutlineColor?: string }) => {
+  const {
+    dark,
+    colors: { surfaceDisabled, outline },
+  } = theme;
+
   if (!disabled && customOutlineColor) {
     return customOutlineColor;
   }
 
   if (disabled) {
-    if (theme.dark) {
+    if (dark) {
       return 'transparent';
     }
-    return theme.colors.surfaceDisabled;
+    return surfaceDisabled;
   }
 
-  return theme.colors.outline;
+  return outline;
 };
 
 export const getFlatInputColors = ({
@@ -433,6 +458,10 @@ export const getFlatInputColors = ({
   error?: boolean;
   theme: InternalTheme;
 }) => {
+  const {
+    colors: { error: errorColor },
+  } = theme;
+
   const baseFlatColorProps = { theme, disabled };
   const activeColor = getActiveColor({
     ...baseFlatColorProps,
@@ -453,7 +482,7 @@ export const getFlatInputColors = ({
     }),
     placeholderColor: getPlaceholderColor(baseFlatColorProps),
     selectionColor: getSelectionColor({ activeColor, customSelectionColor }),
-    errorColor: theme.colors.error,
+    errorColor,
     backgroundColor: getFlatBackgroundColor(baseFlatColorProps),
   };
 };
@@ -475,6 +504,10 @@ export const getOutlinedInputColors = ({
   error?: boolean;
   theme: InternalTheme;
 }) => {
+  const {
+    colors: { error: errorColor },
+  } = theme;
+
   const baseOutlinedColorProps = { theme, disabled };
   const activeColor = getActiveColor({
     ...baseOutlinedColorProps,
@@ -495,7 +528,7 @@ export const getOutlinedInputColors = ({
     }),
     placeholderColor: getPlaceholderColor(baseOutlinedColorProps),
     selectionColor: getSelectionColor({ activeColor, customSelectionColor }),
-    errorColor: theme.colors.error,
+    errorColor,
   };
 };
 

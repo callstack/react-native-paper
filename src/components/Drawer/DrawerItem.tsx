@@ -108,17 +108,18 @@ const DrawerItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { roundness, colors, fonts } = theme;
+  const {
+    roundness,
+    colors: { secondaryContainer, onSurfaceVariant, onSecondaryContainer },
+    fonts: { labelLarge },
+  } = theme;
 
-  const backgroundColor = active ? colors.secondaryContainer : undefined;
-  const contentColor = active
-    ? colors.onSecondaryContainer
-    : colors.onSurfaceVariant;
+  const backgroundColor = active ? secondaryContainer : undefined;
+  const contentColor = active ? onSecondaryContainer : onSurfaceVariant;
 
   const labelMargin = icon ? 12 : 0;
   const borderRadius = 7 * roundness;
   const rippleColor = color(contentColor).alpha(0.12).rgb().string();
-  const font = fonts.labelLarge;
 
   return (
     <View {...rest}>
@@ -149,7 +150,7 @@ const DrawerItem = ({
                 {
                   color: contentColor,
                   marginLeft: labelMargin,
-                  ...font,
+                  ...labelLarge,
                 },
               ]}
               maxFontSizeMultiplier={labelMaxFontSizeMultiplier}

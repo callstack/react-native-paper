@@ -107,9 +107,9 @@ const PaginationControls = ({
   paginationControlRippleColor,
 }: PaginationControlsProps) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors } = theme;
-
-  const textColor = colors.onSurface;
+  const {
+    colors: { onSurface },
+  } = theme;
 
   return (
     <>
@@ -123,7 +123,7 @@ const PaginationControls = ({
               direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
             />
           )}
-          iconColor={textColor}
+          iconColor={onSurface}
           rippleColor={paginationControlRippleColor}
           disabled={page === 0}
           onPress={() => onPageChange(0)}
@@ -140,7 +140,7 @@ const PaginationControls = ({
             direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
           />
         )}
-        iconColor={textColor}
+        iconColor={onSurface}
         rippleColor={paginationControlRippleColor}
         disabled={page === 0}
         onPress={() => onPageChange(page - 1)}
@@ -156,7 +156,7 @@ const PaginationControls = ({
             direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
           />
         )}
-        iconColor={textColor}
+        iconColor={onSurface}
         rippleColor={paginationControlRippleColor}
         disabled={numberOfPages === 0 || page === numberOfPages - 1}
         onPress={() => onPageChange(page + 1)}
@@ -173,7 +173,7 @@ const PaginationControls = ({
               direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
             />
           )}
-          iconColor={textColor}
+          iconColor={onSurface}
           rippleColor={paginationControlRippleColor}
           disabled={numberOfPages === 0 || page === numberOfPages - 1}
           onPress={() => onPageChange(numberOfPages - 1)}
@@ -311,7 +311,10 @@ const DataTablePagination = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const labelColor = color(theme.colors.onSurface).alpha(0.6).rgb().string();
+  const {
+    colors: { onSurface },
+  } = theme;
+  const labelColor = color(onSurface).alpha(0.6).rgb().string();
 
   return (
     <View

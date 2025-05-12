@@ -56,7 +56,9 @@ const Divider = ({
   bold = false,
   ...rest
 }: Props) => {
-  const { colors } = useInternalTheme(themeOverrides);
+  const {
+    colors: { outlineVariant },
+  } = useInternalTheme(themeOverrides);
 
   return (
     <View
@@ -64,7 +66,7 @@ const Divider = ({
       style={[
         {
           height: StyleSheet.hairlineWidth,
-          backgroundColor: colors.outlineVariant,
+          backgroundColor: outlineVariant,
         },
         leftInset && styles.v3LeftInset,
         horizontalInset && styles.horizontalInset,

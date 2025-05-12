@@ -78,8 +78,11 @@ const TextInputFlat = ({
   ...rest
 }: ChildTextInputProps) => {
   const isAndroid = Platform.OS === 'android';
-  const { colors, roundness, fonts } = theme;
-  const font = fonts.bodyLarge;
+  const {
+    colors,
+    roundness,
+    fonts: { bodyLarge },
+  } = theme;
   const hasActiveOutline = parentState.focused || error;
 
   const { LABEL_PADDING_TOP, FLAT_INPUT_OFFSET, MIN_HEIGHT, MIN_WIDTH } =
@@ -155,8 +158,8 @@ const TextInputFlat = ({
 
   const containerStyle = {
     backgroundColor,
-    borderTopLeftRadius: theme.roundness,
-    borderTopRightRadius: theme.roundness,
+    borderTopLeftRadius: roundness,
+    borderTopRightRadius: roundness,
   };
 
   const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
@@ -269,7 +272,7 @@ const TextInputFlat = ({
     placeholderStyle: styles.placeholder,
     baseLabelTranslateY,
     baseLabelTranslateX,
-    font,
+    font: bodyLarge,
     fontSize,
     lineHeight,
     fontWeight,
@@ -331,7 +334,7 @@ const TextInputFlat = ({
       ...adornmentProps,
       left,
       right,
-      textStyle: { ...font, fontSize, lineHeight, fontWeight },
+      textStyle: { ...bodyLarge, fontSize, lineHeight, fontWeight },
       visible: parentState.labeled,
     };
   }
@@ -408,7 +411,7 @@ const TextInputFlat = ({
             {
               paddingLeft,
               paddingRight,
-              ...font,
+              ...bodyLarge,
               fontSize,
               lineHeight,
               fontWeight,

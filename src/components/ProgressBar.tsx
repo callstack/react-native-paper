@@ -85,7 +85,7 @@ const ProgressBar = ({
   const isWeb = Platform.OS === 'web';
   const {
     animation: { scale },
-    colors,
+    colors: { surfaceVariant, primary },
   } = useInternalTheme(themeOverrides);
 
   const { current: timer } = React.useRef<Animated.Value>(
@@ -190,8 +190,7 @@ const ProgressBar = ({
     setWidth(event.nativeEvent.layout.width);
   };
 
-  const tintColor = color || colors?.primary;
-  const trackTintColor = colors.surfaceVariant;
+  const tintColor = color || primary;
 
   return (
     <View
@@ -211,7 +210,7 @@ const ProgressBar = ({
       <Animated.View
         style={[
           styles.container,
-          { backgroundColor: trackTintColor, opacity: fade },
+          { backgroundColor: surfaceVariant, opacity: fade },
           style,
         ]}
       >

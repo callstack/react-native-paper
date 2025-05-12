@@ -339,7 +339,11 @@ const BottomNavigationBar = <Route extends BaseRoute>({
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
   const { bottom, left, right } = useSafeAreaInsets();
-  const { scale } = theme.animation;
+  const {
+    animation: { scale },
+    colors: { elevation: elevationColors, secondaryContainer },
+    fonts: { labelMedium },
+  } = theme;
   let shifting = shiftingProp;
 
   if (shifting && navigationState.routes.length < 2) {
@@ -479,7 +483,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
     backgroundColor?: ColorValue;
   };
 
-  const backgroundColor = customBackground || theme.colors.elevation.level2;
+  const backgroundColor = customBackground || elevationColors.level2;
 
   const activeTintColor = getActiveTintColor({
     activeColor,
@@ -615,8 +619,6 @@ const BottomNavigationBar = <Route extends BaseRoute>({
 
             const isLegacyOrV3Shifting = shifting && labeled;
 
-            const font = theme.fonts.labelMedium;
-
             return renderTouchable({
               key: route.key,
               route,
@@ -657,7 +659,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                                 scaleX: outlineScale,
                               },
                             ],
-                            backgroundColor: theme.colors.secondaryContainer,
+                            backgroundColor: secondaryContainer,
                           },
                           activeIndicatorStyle,
                         ]}
@@ -751,7 +753,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                               styles.label,
                               {
                                 color: activeLabelColor,
-                                ...font,
+                                ...labelMedium,
                               },
                             ]}
                           >
@@ -785,7 +787,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                                 styles.label,
                                 {
                                   color: inactiveLabelColor,
-                                  ...font,
+                                  ...labelMedium,
                                 },
                               ]}
                             >

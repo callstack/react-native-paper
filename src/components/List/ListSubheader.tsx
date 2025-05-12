@@ -40,10 +40,10 @@ const ListSubheader = ({
   maxFontSizeMultiplier,
   ...rest
 }: Props) => {
-  const { colors, fonts } = useInternalTheme(overrideTheme);
-
-  const textColor = colors.onSurfaceVariant;
-  const font = fonts.bodyMedium;
+  const {
+    colors: { onSurfaceVariant },
+    fonts: { bodyMedium },
+  } = useInternalTheme(overrideTheme);
 
   return (
     <Text
@@ -54,8 +54,8 @@ const ListSubheader = ({
       style={[
         styles.container,
         {
-          color: textColor,
-          ...font,
+          color: onSurfaceVariant,
+          ...bodyMedium,
         },
         style,
       ]}

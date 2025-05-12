@@ -62,6 +62,10 @@ const RadioButtonAndroid = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const {
+    animation: { scale },
+  } = theme;
+
   const { current: borderAnim } = React.useRef<Animated.Value>(
     new Animated.Value(BORDER_WIDTH)
   );
@@ -71,8 +75,6 @@ const RadioButtonAndroid = ({
   );
 
   const isFirstRendering = React.useRef<boolean>(true);
-
-  const { scale } = theme.animation;
 
   React.useEffect(() => {
     // Do not run animation on very first rendering

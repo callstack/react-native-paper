@@ -21,34 +21,48 @@ type ColorProps = {
 };
 
 const getDisabledColor = (theme: InternalTheme) => {
-  return theme.colors.onSurfaceDisabled;
+  const {
+    colors: { onSurfaceDisabled },
+  } = theme;
+
+  return onSurfaceDisabled;
 };
 
 const getTitleColor = ({ theme, disabled }: ColorProps) => {
+  const {
+    colors: { onSurface },
+  } = theme;
   if (disabled) {
     return getDisabledColor(theme);
   }
 
-  return theme.colors.onSurface;
+  return onSurface;
 };
 
 const getIconColor = ({ theme, disabled }: ColorProps) => {
+  const {
+    colors: { onSurfaceVariant },
+  } = theme;
   if (disabled) {
     return getDisabledColor(theme);
   }
 
-  return theme.colors.onSurfaceVariant;
+  return onSurfaceVariant;
 };
 
 const getRippleColor = ({
   theme,
   customRippleColor,
 }: Omit<ColorProps, 'disabled'>) => {
+  const {
+    colors: { onSurfaceVariant },
+  } = theme;
+
   if (customRippleColor) {
     return customRippleColor;
   }
 
-  return color(theme.colors.onSurfaceVariant).alpha(0.12).rgb().string();
+  return color(onSurfaceVariant).alpha(0.12).rgb().string();
 };
 
 export const getMenuItemColor = ({

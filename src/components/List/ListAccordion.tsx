@@ -196,7 +196,7 @@ const ListAccordion = ({
   onPress,
   onLongPress,
   delayLongPress,
-  expanded: expandedProp,
+  expanded: expandedProp = false,
   accessibilityLabel,
   pointerEvents = 'none',
   titleMaxFontSizeMultiplier,
@@ -204,9 +204,11 @@ const ListAccordion = ({
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const [expanded, setExpanded] = React.useState<boolean>(
-    expandedProp || false
-  );
+  const {
+    colors: { primary },
+  } = theme;
+
+  const [expanded, setExpanded] = React.useState<boolean>(expandedProp);
   const [alignToTop, setAlignToTop] = React.useState(false);
 
   const onDescriptionTextLayout = (
@@ -272,7 +274,7 @@ const ListAccordion = ({
           >
             {left
               ? left({
-                  color: isExpanded ? theme.colors?.primary : descriptionColor,
+                  color: isExpanded ? primary : descriptionColor,
                   style: getLeftStyles(alignToTop, description),
                 })
               : null}

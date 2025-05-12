@@ -226,7 +226,7 @@ const FABGroup = ({
   const theme = useInternalTheme(themeOverrides);
   const {
     animation: { scale },
-    fonts,
+    fonts: { titleMedium },
   } = useInternalTheme(themeOverrides);
   const { top, bottom, right, left } = useSafeAreaInsets();
 
@@ -396,7 +396,7 @@ const FABGroup = ({
           {actions.map((it, i) => {
             const labelTextStyle = {
               color: it.labelTextColor ?? labelColor,
-              ...fonts.titleMedium,
+              ...titleMedium,
             };
             const marginHorizontal =
               typeof it.size === 'undefined' || it.size === 'small' ? 24 : 16;

@@ -462,14 +462,14 @@ it('does not display ripple animation view if shifting is falsy', () => {
 
 describe('getActiveTintColor', () => {
   it.each`
-    activeColor  | defaultColor | expected
-    ${'#FBF7DB'} | ${'#fff'}    | ${'#FBF7DB'}
-    ${undefined} | ${'#fff'}    | ${MD3Colors.secondary10}
+    activeColor  | expected
+    ${'#FBF7DB'} | ${'#FBF7DB'}
+    ${undefined} | ${MD3Colors.secondary10}
   `(
     'returns $expected when activeColor: $activeColor',
-    ({ activeColor, defaultColor, expected }) => {
+    ({ activeColor, expected }) => {
       const theme = getTheme();
-      const color = getActiveTintColor({ activeColor, defaultColor, theme });
+      const color = getActiveTintColor({ activeColor, theme });
       expect(color).toBe(expected);
     }
   );
@@ -477,16 +477,15 @@ describe('getActiveTintColor', () => {
 
 describe('getInactiveTintColor', () => {
   it.each`
-    inactiveColor | defaultColor | expected
-    ${'#853D4B'}  | ${'#fff'}    | ${'#853D4B'}
-    ${undefined}  | ${'#fff'}    | ${MD3Colors.neutralVariant30}
+    inactiveColor | expected
+    ${'#853D4B'}  | ${'#853D4B'}
+    ${undefined}  | ${MD3Colors.neutralVariant30}
   `(
     'returns $expected when inactiveColor: $inactiveColor',
-    ({ inactiveColor, defaultColor, expected }) => {
+    ({ inactiveColor, expected }) => {
       const theme = getTheme();
       const color = getInactiveTintColor({
         inactiveColor,
-        defaultColor,
         theme,
       });
       expect(color).toBe(expected);
@@ -496,20 +495,19 @@ describe('getInactiveTintColor', () => {
 
 describe('getLabelColor', () => {
   it.each`
-    tintColor    | focused  | defaultColor | expected
-    ${'#FBF7DB'} | ${true}  | ${'#fff'}    | ${'#FBF7DB'}
-    ${'#853D4B'} | ${true}  | ${'#fff'}    | ${'#853D4B'}
-    ${undefined} | ${true}  | ${'#fff'}    | ${MD3Colors.neutral10}
-    ${undefined} | ${false} | ${'#fff'}    | ${MD3Colors.neutralVariant30}
+    tintColor    | focused  | expected
+    ${'#FBF7DB'} | ${true}  | ${'#FBF7DB'}
+    ${'#853D4B'} | ${true}  | ${'#853D4B'}
+    ${undefined} | ${true}  | ${MD3Colors.neutral10}
+    ${undefined} | ${false} | ${MD3Colors.neutralVariant30}
   `(
     'returns $expected when tintColor: $tintColor, focused: $focused',
-    ({ tintColor, focused, defaultColor, expected }) => {
+    ({ tintColor, focused, expected }) => {
       const theme = getTheme();
       const color = getLabelColor({
         tintColor,
         hasColor: Boolean(tintColor),
         focused,
-        defaultColor,
         theme,
       });
       expect(color).toBe(expected);

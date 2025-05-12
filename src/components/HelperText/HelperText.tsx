@@ -89,13 +89,14 @@ const HelperText = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const {
+    animation: { scale },
+  } = theme;
   const { current: shown } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
 
   let { current: textHeight } = React.useRef<number>(0);
-
-  const { scale } = theme.animation;
 
   const { maxFontSizeMultiplier = 1.5 } = rest;
 

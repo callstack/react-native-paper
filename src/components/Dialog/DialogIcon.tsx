@@ -68,13 +68,13 @@ const DialogIcon = ({
   icon,
   theme: themeOverrides,
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
-
-  const iconColor = color || theme.colors.secondary;
+  const {
+    colors: { secondary },
+  } = useInternalTheme(themeOverrides);
 
   return (
     <View style={styles.wrapper}>
-      <Icon source={icon} color={iconColor} size={size} />
+      <Icon source={icon} color={color || secondary} size={size} />
     </View>
   );
 };

@@ -39,7 +39,11 @@ export const getCardCoverStyle = ({
 };
 
 const getBorderColor = ({ theme }: { theme: InternalTheme }) => {
-  return theme.colors.outline;
+  const {
+    colors: { outline },
+  } = theme;
+
+  return outline;
 };
 
 const getBackgroundColor = ({
@@ -49,11 +53,15 @@ const getBackgroundColor = ({
   theme: InternalTheme;
   isMode: (mode: CardMode) => boolean;
 }) => {
+  const {
+    colors: { surfaceVariant, surface },
+  } = theme;
+
   if (isMode('contained')) {
-    return theme.colors.surfaceVariant;
+    return surfaceVariant;
   }
   if (isMode('outlined')) {
-    return theme.colors.surface;
+    return surface;
   }
   return undefined;
 };
