@@ -328,8 +328,8 @@ const AnimatedFAB = ({
   const onTextLayout = ({
     nativeEvent,
   }: NativeSyntheticEvent<TextLayoutEventData>) => {
-    const currentWidth = Math.ceil(nativeEvent.lines[0].width);
-    const currentHeight = Math.ceil(nativeEvent.lines[0].height);
+    const currentWidth = Math.ceil(nativeEvent.lines[0]?.width ?? 0);
+    const currentHeight = Math.ceil(nativeEvent.lines[0]?.height ?? 0);
 
     if (currentWidth !== textWidth || currentHeight !== textHeight) {
       setTextHeight(currentHeight);
