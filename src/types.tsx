@@ -104,8 +104,6 @@ export type ThemeBase = {
 };
 
 export type MD3Theme = ThemeBase & {
-  version: 3;
-  isV3: true;
   colors: MD3Colors;
   fonts: MD3Typescale;
 };

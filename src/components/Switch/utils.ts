@@ -29,11 +29,7 @@ const getCheckedColor = ({
     return color;
   }
 
-  if (theme.isV3) {
-    return theme.colors.primary;
-  }
-
-  return theme.colors.accent;
+  return theme.colors.primary;
 };
 
 const getThumbTintColor = ({
@@ -79,10 +75,7 @@ const getOnTintColor = ({
 
   if (disabled) {
     if (theme.dark) {
-      if (theme.isV3) {
-        return setColor(white).alpha(0.06).rgb().string();
-      }
-      return setColor(white).alpha(0.1).rgb().string();
+      return setColor(white).alpha(0.06).rgb().string();
     }
     return setColor(black).alpha(0.12).rgb().string();
   }

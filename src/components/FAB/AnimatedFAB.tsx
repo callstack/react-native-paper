@@ -33,6 +33,8 @@ import TouchableRipple, {
 } from '../TouchableRipple/TouchableRipple';
 import AnimatedText from '../Typography/AnimatedText';
 
+const SIZE = 56;
+
 export type AnimatedFABIconMode = 'static' | 'dynamic';
 export type AnimatedFABAnimateFrom = 'left' | 'right';
 
@@ -127,9 +129,6 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    */
   testID?: string;
 };
-
-const SIZE = 56;
-const SCALE = 0.9;
 
 /**
  * An animated, extending horizontally floating action button represents the primary action in an application.
@@ -233,7 +232,7 @@ const AnimatedFAB = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const uppercase: boolean = uppercaseProp ?? !theme.isV3;
+  const uppercase: boolean = uppercaseProp ?? false;
   const isIOS = Platform.OS === 'ios';
   const isWeb = Platform.OS === 'web';
   const isAnimatedFromRight = animateFrom === 'right';
@@ -246,7 +245,7 @@ const AnimatedFAB = ({
   const { current: animFAB } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
-  const { isV3, animation } = theme;
+  const { animation, fonts } = theme;
   const { scale } = animation;
 
   const labelSize = isWeb ? getLabelSizeWeb(labelRef) : null;
@@ -257,7 +256,7 @@ const AnimatedFAB = ({
     labelSize?.height ?? 0
   );
 
-  const borderRadius = SIZE / (isV3 ? 3.5 : 2);
+  const borderRadius = SIZE / 3.5;
 
   React.useEffect(() => {
     if (!isWeb) {
@@ -364,17 +363,16 @@ const AnimatedFAB = ({
     animFAB,
   });
 
-  const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
+  const font = fonts.labelLarge;
 
   const textStyle = {
     color: foregroundColor,
     ...font,
   };
 
-  const md2Elevation = disabled || !isIOS ? 0 : 6;
   const md3Elevation = disabled || !isIOS ? 0 : 3;
 
-  const shadowStyle = isV3 ? styles.v3Shadow : styles.shadow;
+  const shadowStyle = styles.v3Shadow;
   const baseStyle = [
     StyleSheet.absoluteFill,
     disabled ? styles.disabled : shadowStyle,
@@ -396,31 +394,13 @@ const AnimatedFAB = ({
           ],
           borderRadius,
         },
-        !isV3 && {
-          elevation: md2Elevation,
-        },
         styles.container,
         restStyle,
       ]}
-      {...(isV3 && { elevation: md3Elevation })}
+      elevation={md3Elevation}
       theme={theme}
     >
-      <Animated.View
-        style={[
-          !isV3 && {
-            transform: [
-              {
-                scaleY: animFAB.interpolate({
-                  inputRange: propForDirection([distance, 0]),
-                  outputRange: propForDirection([SCALE, 1]),
-                }),
-              },
-            ],
-          },
-          styles.standard,
-          { borderRadius },
-        ]}
-      >
+      <Animated.View style={[styles.standard, { borderRadius }]}>
         <View style={[StyleSheet.absoluteFill, styles.shadowWrapper]}>
           <Animated.View
             pointerEvents="none"
@@ -522,7 +502,7 @@ const AnimatedFAB = ({
           style={[
             {
               [isAnimatedFromRight || isRTL ? 'right' : 'left']: isIconStatic
-                ? textWidth - SIZE + borderRadius / (isV3 ? 1 : 2)
+                ? textWidth - SIZE + borderRadius
                 : borderRadius,
             },
             {
@@ -598,9 +578,6 @@ const styles = StyleSheet.create({
   },
   shadowWrapper: {
     elevation: 0,
-  },
-  shadow: {
-    elevation: 6,
   },
   v3Shadow: {
     elevation: 3,

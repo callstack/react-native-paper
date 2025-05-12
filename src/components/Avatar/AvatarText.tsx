@@ -70,8 +70,10 @@ const AvatarText = ({
   maxFontSizeMultiplier,
   ...rest
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
-  const { backgroundColor = theme.colors?.primary, ...restStyle } =
+  const {
+    colors: { primary },
+  } = useInternalTheme(themeOverrides);
+  const { backgroundColor = primary, ...restStyle } =
     StyleSheet.flatten(style) || {};
   const textColor =
     customColor ??

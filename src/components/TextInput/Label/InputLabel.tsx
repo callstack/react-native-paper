@@ -48,12 +48,11 @@ const InputLabel = (props: InputLabelProps) => {
     labelTranslationXOffset,
     maxFontSizeMultiplier,
     testID,
-    isV3,
     inputContainerLayout,
     scaledLabel,
   } = props;
 
-  const { INPUT_PADDING_HORIZONTAL } = getConstants(isV3);
+  const { INPUT_PADDING_HORIZONTAL } = getConstants(true);
   const { width } = useWindowDimensions();
 
   const isWeb = Platform.OS === 'web';

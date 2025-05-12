@@ -9,12 +9,9 @@ import {
   ColorValue,
 } from 'react-native';
 
-import color from 'color';
-
 import { ToggleButtonGroupContext } from './ToggleButtonGroup';
 import { getToggleButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { black, white } from '../../styles/themes/v2/colors';
 import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
@@ -117,7 +114,7 @@ const ToggleButton = forwardRef<View, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
-    const borderRadius = theme.roundness;
+    const { colors, roundness } = theme;
 
     return (
       <ToggleButtonGroupContext.Consumer>
@@ -128,12 +125,6 @@ const ToggleButton = forwardRef<View, Props>(
             (context && context.value === value) || status === 'checked';
 
           const backgroundColor = getToggleButtonColor({ theme, checked });
-          const borderColor = theme.isV3
-            ? theme.colors.outline
-            : color(theme.dark ? white : black)
-                .alpha(0.29)
-                .rgb()
-                .string();
 
           return (
             <IconButton
@@ -156,8 +147,8 @@ const ToggleButton = forwardRef<View, Props>(
                 styles.content,
                 {
                   backgroundColor,
-                  borderRadius,
-                  borderColor,
+                  borderRadius: roundness,
+                  borderColor: colors.outline,
                 },
                 style,
               ]}

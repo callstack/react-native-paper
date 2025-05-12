@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-import color from 'color';
-
 import { useInternalTheme } from '../../core/theming';
 import { MD3Colors } from '../../styles/themes/v3/tokens';
 import type { ThemeProp } from '../../types';
@@ -73,17 +71,15 @@ const DrawerSection = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { isV3 } = theme;
-  const titleColor = isV3
-    ? theme.colors.onSurfaceVariant
-    : color(theme.colors.text).alpha(0.54).rgb().string();
-  const titleMargin = isV3 ? 28 : 16;
-  const font = isV3 ? theme.fonts.titleSmall : theme.fonts.medium;
+  const { colors, fonts } = theme;
+  const titleColor = colors.onSurfaceVariant;
+  const titleMargin = 28;
+  const font = fonts.titleSmall;
 
   return (
     <View style={[styles.container, style]} {...rest}>
       {title && (
-        <View style={[styles.titleContainer, isV3 && styles.v3TitleContainer]}>
+        <View style={[styles.titleContainer]}>
           {title && (
             <Text
               variant="titleSmall"
@@ -104,11 +100,7 @@ const DrawerSection = ({
       )}
       {children}
       {showDivider && (
-        <Divider
-          {...(isV3 && { horizontalInset: true, bold: true })}
-          style={[styles.divider, isV3 && styles.v3Divider]}
-          theme={theme}
-        />
+        <Divider horizontalInset style={styles.divider} theme={theme} />
       )}
     </View>
   );
@@ -121,16 +113,11 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   titleContainer: {
-    height: 40,
-    justifyContent: 'center',
-  },
-  v3TitleContainer: {
     height: 56,
+    justifyContent: 'center',
   },
   divider: {
     marginTop: 4,
-  },
-  v3Divider: {
     backgroundColor: MD3Colors.neutralVariant50,
   },
 });

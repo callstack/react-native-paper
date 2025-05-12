@@ -108,27 +108,17 @@ const DrawerItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { roundness, isV3 } = theme;
+  const { roundness, colors, fonts } = theme;
 
-  const backgroundColor = active
-    ? isV3
-      ? theme.colors.secondaryContainer
-      : color(theme.colors.primary).alpha(0.12).rgb().string()
-    : undefined;
+  const backgroundColor = active ? colors.secondaryContainer : undefined;
   const contentColor = active
-    ? isV3
-      ? theme.colors.onSecondaryContainer
-      : theme.colors.primary
-    : isV3
-    ? theme.colors.onSurfaceVariant
-    : color(theme.colors.text).alpha(0.68).rgb().string();
+    ? colors.onSecondaryContainer
+    : colors.onSurfaceVariant;
 
-  const labelMargin = icon ? (isV3 ? 12 : 32) : 0;
-  const borderRadius = (isV3 ? 7 : 1) * roundness;
-  const rippleColor = isV3
-    ? color(contentColor).alpha(0.12).rgb().string()
-    : undefined;
-  const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
+  const labelMargin = icon ? 12 : 0;
+  const borderRadius = 7 * roundness;
+  const rippleColor = color(contentColor).alpha(0.12).rgb().string();
+  const font = fonts.labelLarge;
 
   return (
     <View {...rest}>
@@ -137,12 +127,7 @@ const DrawerItem = ({
         disabled={disabled}
         background={background}
         onPress={onPress}
-        style={[
-          styles.container,
-          { backgroundColor, borderRadius },
-          isV3 && styles.v3Container,
-          style,
-        ]}
+        style={[styles.container, { backgroundColor, borderRadius }, style]}
         accessibilityRole="button"
         accessibilityState={{ selected: active }}
         accessibilityLabel={accessibilityLabel}
@@ -150,7 +135,7 @@ const DrawerItem = ({
         theme={theme}
         hitSlop={hitSlop}
       >
-        <View style={[styles.wrapper, isV3 && styles.v3Wrapper]}>
+        <View style={styles.wrapper}>
           <View style={styles.content}>
             {icon ? (
               <Icon source={icon} size={24} color={contentColor} />
@@ -185,9 +170,6 @@ DrawerItem.displayName = 'Drawer.Item';
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 10,
-    marginVertical: 4,
-  },
-  v3Container: {
     justifyContent: 'center',
     height: 56,
     marginLeft: 12,
@@ -197,9 +179,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 8,
-  },
-  v3Wrapper: {
     marginLeft: 16,
     marginRight: 24,
     padding: 0,

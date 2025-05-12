@@ -49,7 +49,7 @@ const AnimatedText = forwardRef<Text & HTMLElement, Props<never>>(
     const theme = useInternalTheme(themeOverrides);
     const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
 
-    if (theme.isV3 && variant) {
+    if (variant) {
       const font = theme.fonts[variant];
       if (typeof font !== 'object') {
         throw new Error(
@@ -72,10 +72,10 @@ const AnimatedText = forwardRef<Text & HTMLElement, Props<never>>(
         />
       );
     } else {
-      const font = !theme.isV3 ? theme.fonts.regular : theme.fonts.bodyMedium;
+      const font = theme.fonts.bodyMedium;
       const textStyle = {
         ...font,
-        color: theme.isV3 ? theme.colors.onSurface : theme.colors.text,
+        color: theme.colors.onSurface,
       };
       return (
         <Animated.Text

@@ -111,8 +111,11 @@ const DrawerCollapsedItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { isV3 } = theme;
-  const { scale } = theme.animation;
+  const {
+    animation: { scale },
+    colors,
+    fonts,
+  } = theme;
 
   const [numOfLines, setNumOfLines] = React.useState(1);
 
@@ -126,10 +129,6 @@ const DrawerCollapsedItem = ({
     }
   }, [animScale, active]);
 
-  if (!isV3) {
-    return null;
-  }
-
   const handlePressOut = () => {
     Animated.timing(animScale, {
       toValue: 1,
@@ -140,15 +139,11 @@ const DrawerCollapsedItem = ({
 
   const iconPadding = ((!label ? itemSize : outlineHeight) - iconSize) / 2;
 
-  const backgroundColor = active
-    ? theme.colors.secondaryContainer
-    : 'transparent';
-  const labelColor = active
-    ? theme.colors.onSurface
-    : theme.colors.onSurfaceVariant;
+  const backgroundColor = active ? colors.secondaryContainer : 'transparent';
+  const labelColor = active ? colors.onSurface : colors.onSurfaceVariant;
   const iconColor = active
-    ? theme.colors.onSecondaryContainer
-    : theme.colors.onSurfaceVariant;
+    ? colors.onSecondaryContainer
+    : colors.onSurfaceVariant;
 
   const onTextLayout = ({
     nativeEvent,
@@ -163,7 +158,7 @@ const DrawerCollapsedItem = ({
 
   const labelTextStyle = {
     color: labelColor,
-    ...(isV3 ? theme.fonts.labelMedium : {}),
+    ...fonts.labelMedium,
   };
 
   const icon =

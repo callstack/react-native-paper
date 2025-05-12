@@ -34,8 +34,7 @@ export type Style = {
 
 export const getLeftStyles = (
   alignToTop: boolean,
-  description: Description,
-  isV3: boolean
+  description: Description
 ) => {
   const stylesV3 = {
     marginRight: 0,
@@ -47,12 +46,8 @@ export const getLeftStyles = (
     return {
       ...styles.iconMarginLeft,
       ...styles.marginVerticalNone,
-      ...(isV3 && { ...stylesV3 }),
+      ...stylesV3,
     };
-  }
-
-  if (!isV3) {
-    return styles.iconMarginLeft;
   }
 
   return {
@@ -63,8 +58,7 @@ export const getLeftStyles = (
 
 export const getRightStyles = (
   alignToTop: boolean,
-  description: Description,
-  isV3: boolean
+  description: Description
 ) => {
   const stylesV3 = {
     marginLeft: 16,
@@ -75,12 +69,8 @@ export const getRightStyles = (
     return {
       ...styles.iconMarginRight,
       ...styles.marginVerticalNone,
-      ...(isV3 && { ...stylesV3 }),
+      ...stylesV3,
     };
-  }
-
-  if (!isV3) {
-    return styles.iconMarginRight;
   }
 
   return {
@@ -104,16 +94,9 @@ export const getAccordionColors = ({
   isExpanded?: boolean;
   customRippleColor?: ColorValue;
 }) => {
-  const titleColor = theme.isV3
-    ? theme.colors.onSurface
-    : color(theme.colors.text).alpha(0.87).rgb().string();
-
-  const descriptionColor = theme.isV3
-    ? theme.colors.onSurfaceVariant
-    : color(theme.colors.text).alpha(0.54).rgb().string();
-
+  const titleColor = theme.colors.onSurface;
+  const descriptionColor = theme.colors.onSurfaceVariant;
   const titleTextColor = isExpanded ? theme.colors?.primary : titleColor;
-
   const rippleColor =
     customRippleColor || color(titleTextColor).alpha(0.12).rgb().string();
 

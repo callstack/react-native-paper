@@ -274,7 +274,7 @@ const Surface = forwardRef<View, Props>(
           testID={testID}
           style={[
             { backgroundColor },
-            elevation && isElevated ? shadow(elevation, theme.isV3) : null,
+            elevation && isElevated ? shadow(elevation) : null,
             style,
           ]}
         >

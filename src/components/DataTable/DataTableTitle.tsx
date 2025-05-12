@@ -92,7 +92,7 @@ const DataTableTitle = ({
   maxFontSizeMultiplier,
   ...rest
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
+  const { colors } = useInternalTheme(themeOverrides);
   const { current: spinAnim } = React.useRef<Animated.Value>(
     new Animated.Value(sortDirection === 'ascending' ? 0 : 1)
   );
@@ -105,7 +105,7 @@ const DataTableTitle = ({
     }).start();
   }, [sortDirection, spinAnim]);
 
-  const textColor = theme.isV3 ? theme.colors.onSurface : theme?.colors?.text;
+  const textColor = colors.onSurface;
 
   const alphaTextColor = color(textColor).alpha(0.6).rgb().string();
 

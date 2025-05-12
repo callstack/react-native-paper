@@ -1,8 +1,5 @@
-import { StyleSheet, ViewStyle } from 'react-native';
+import { ViewStyle } from 'react-native';
 
-import color from 'color';
-
-import { black, white } from '../../styles/themes/v2/colors';
 import type { InternalTheme } from '../../types';
 
 type BaseProps = {
@@ -38,7 +35,6 @@ export const getSegmentedButtonDensityPadding = ({
 };
 
 export const getDisabledSegmentedButtonStyle = ({
-  theme,
   index,
   buttons,
 }: {
@@ -46,7 +42,7 @@ export const getDisabledSegmentedButtonStyle = ({
   buttons: { disabled?: boolean }[];
   index: number;
 }): ViewStyle => {
-  const width = getSegmentedButtonBorderWidth({ theme });
+  const width = getSegmentedButtonBorderWidth();
   const isDisabled = buttons[index]?.disabled;
   const isNextDisabled = buttons[index + 1]?.disabled;
 
@@ -60,16 +56,14 @@ export const getDisabledSegmentedButtonStyle = ({
 
 export const getSegmentedButtonBorderRadius = ({
   segment,
-  theme,
 }: {
-  theme: InternalTheme;
   segment?: 'first' | 'last';
 }): ViewStyle => {
   if (segment === 'first') {
     return {
       borderTopRightRadius: 0,
       borderBottomRightRadius: 0,
-      ...(theme.isV3 && { borderEndWidth: 0 }),
+      borderEndWidth: 0,
     };
   } else if (segment === 'last') {
     return {
@@ -79,51 +73,27 @@ export const getSegmentedButtonBorderRadius = ({
   } else {
     return {
       borderRadius: 0,
-      ...(theme.isV3 && { borderEndWidth: 0 }),
+      borderEndWidth: 0,
     };
   }
 };
 
 const getSegmentedButtonBackgroundColor = ({ checked, theme }: BaseProps) => {
   if (checked) {
-    if (theme.isV3) {
-      return theme.colors.secondaryContainer;
-    } else {
-      return color(theme.colors.primary).alpha(0.12).rgb().string();
-    }
+    return theme.colors.secondaryContainer;
   }
   return 'transparent';
 };
 
-const getSegmentedButtonBorderColor = ({
-  theme,
-  disabled,
-  checked,
-}: BaseProps) => {
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.surfaceDisabled;
-    }
-    return theme.colors.outline;
+const getSegmentedButtonBorderColor = ({ theme, disabled }: BaseProps) => {
+  if (disabled) {
+    return theme.colors.surfaceDisabled;
   }
-  if (checked) {
-    return theme.colors.primary;
-  }
-
-  return color(theme.dark ? white : black)
-    .alpha(0.29)
-    .rgb()
-    .string();
+  return theme.colors.outline;
 };
 
-const getSegmentedButtonBorderWidth = ({
-  theme,
-}: Omit<BaseProps, 'disabled' | 'checked'>) => {
-  if (theme.isV3) {
-    return 1;
-  }
-
-  return StyleSheet.hairlineWidth;
+const getSegmentedButtonBorderWidth = () => {
+  return 1;
 };
 
 const getSegmentedButtonTextColor = ({
@@ -133,21 +103,13 @@ const getSegmentedButtonTextColor = ({
   checkedColor,
   uncheckedColor,
 }: SegmentedButtonProps) => {
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.onSurfaceDisabled;
-    }
-    if (checked) {
-      return checkedColor ?? theme.colors.onSecondaryContainer;
-    }
-    return uncheckedColor ?? theme.colors.onSurface;
-  }
-
   if (disabled) {
-    return theme.colors.disabled;
+    return theme.colors.onSurfaceDisabled;
   }
-  // Primary color is used for checked state too.
-  return theme.colors.primary;
+  if (checked) {
+    return checkedColor ?? theme.colors.onSecondaryContainer;
+  }
+  return uncheckedColor ?? theme.colors.onSurface;
 };
 
 export const getSegmentedButtonColors = ({
@@ -173,7 +135,7 @@ export const getSegmentedButtonColors = ({
     checkedColor,
     uncheckedColor,
   });
-  const borderWidth = getSegmentedButtonBorderWidth({ theme });
+  const borderWidth = getSegmentedButtonBorderWidth();
 
   return { backgroundColor, borderColor, textColor, borderWidth };
 };

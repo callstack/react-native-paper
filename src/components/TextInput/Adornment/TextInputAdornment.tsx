@@ -56,7 +56,6 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   paddingHorizontal,
   inputOffset = 0,
   mode,
-  isV3,
 }: {
   inputOffset?: number;
   adornmentConfig: AdornmentConfig[];
@@ -64,9 +63,8 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   rightAffixWidth: number;
   mode?: 'outlined' | 'flat';
   paddingHorizontal?: DimensionValue;
-  isV3?: boolean;
 }): AdornmentStyleAdjustmentForNativeInput | {} {
-  const { OUTLINED_INPUT_OFFSET, ADORNMENT_OFFSET } = getConstants(isV3);
+  const { OUTLINED_INPUT_OFFSET, ADORNMENT_OFFSET } = getConstants(true);
 
   if (adornmentConfig.length) {
     const adornmentStyleAdjustmentForNativeInput = adornmentConfig.map(

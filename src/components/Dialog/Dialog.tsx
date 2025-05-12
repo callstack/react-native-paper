@@ -15,7 +15,6 @@ import DialogIcon from './DialogIcon';
 import DialogScrollArea from './DialogScrollArea';
 import DialogTitle from './DialogTitle';
 import { useInternalTheme } from '../../core/theming';
-import overlay from '../../styles/overlay';
 import type { ThemeProp } from '../../types';
 import Modal from '../Modal';
 import { DialogChildProps } from './utils';
@@ -106,16 +105,8 @@ const Dialog = ({
 }: Props) => {
   const { right, left } = useSafeAreaInsets();
   const theme = useInternalTheme(themeOverrides);
-  const { isV3, dark, mode, colors, roundness } = theme;
-  const borderRadius = (isV3 ? 7 : 1) * roundness;
-
-  const backgroundColorV2 =
-    dark && mode === 'adaptive'
-      ? overlay(DIALOG_ELEVATION, colors?.surface)
-      : colors?.surface;
-  const backgroundColor = isV3
-    ? theme.colors.elevation.level3
-    : backgroundColorV2;
+  const { colors, roundness } = theme;
+  const borderRadius = 7 * roundness;
 
   return (
     <Modal
@@ -126,7 +117,7 @@ const Dialog = ({
       contentContainerStyle={[
         {
           borderRadius,
-          backgroundColor,
+          backgroundColor: colors.elevation.level3,
           marginHorizontal: Math.max(left, right, 26),
         },
         styles.container,
@@ -138,22 +129,9 @@ const Dialog = ({
       {React.Children.toArray(children)
         .filter((child) => child != null && typeof child !== 'boolean')
         .map((child, i) => {
-          if (isV3) {
-            if (i === 0 && React.isValidElement<DialogChildProps>(child)) {
-              return React.cloneElement(child, {
-                style: [{ marginTop: 24 }, child.props.style],
-              });
-            }
-          }
-
-          if (
-            i === 0 &&
-            React.isValidElement<DialogChildProps>(child) &&
-            child.type === DialogContent
-          ) {
-            // Dialog content is the first item, so we add a top padding
+          if (i === 0 && React.isValidElement<DialogChildProps>(child)) {
             return React.cloneElement(child, {
-              style: [{ paddingTop: 24 }, child.props.style],
+              style: [{ marginTop: 24 }, child.props.style],
             });
           }
 

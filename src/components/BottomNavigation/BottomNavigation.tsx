@@ -353,9 +353,8 @@ const BottomNavigation = <Route extends BaseRoute>({
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
   const { scale } = theme.animation;
-  const compact = compactProp ?? !theme.isV3;
-  let shifting =
-    shiftingProp ?? (theme.isV3 ? false : navigationState.routes.length > 3);
+  const compact = compactProp ?? false;
+  let shifting = shiftingProp ?? false;
 
   if (shifting && navigationState.routes.length < 2) {
     shifting = false;
@@ -404,7 +403,7 @@ const BottomNavigation = <Route extends BaseRoute>({
         ...navigationState.routes.map((_, i) =>
           Animated.timing(tabsPositionAnims[i], {
             toValue: i === index ? 0 : i >= index ? 1 : -1,
-            duration: theme.isV3 || shifting ? 150 * scale : 0,
+            duration: shifting ? 150 * scale : 0,
             useNativeDriver: true,
             easing: sceneAnimationEasing,
           })
@@ -430,7 +429,6 @@ const BottomNavigation = <Route extends BaseRoute>({
       scale,
       tabsPositionAnims,
       sceneAnimationEasing,
-      theme,
     ]
   );
 

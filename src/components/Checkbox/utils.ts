@@ -13,11 +13,7 @@ const getAndroidCheckedColor = ({
     return customColor;
   }
 
-  if (theme.isV3) {
-    return theme.colors.primary;
-  }
-
-  return theme.colors.accent;
+  return theme.colors.primary;
 };
 
 const getAndroidUncheckedColor = ({
@@ -31,15 +27,7 @@ const getAndroidUncheckedColor = ({
     return customUncheckedColor;
   }
 
-  if (theme.isV3) {
-    return theme.colors.onSurfaceVariant;
-  }
-
-  if (theme.dark) {
-    return color(theme.colors.text).alpha(0.7).rgb().string();
-  }
-
-  return color(theme.colors.text).alpha(0.54).rgb().string();
+  return theme.colors.onSurfaceVariant;
 };
 
 const getAndroidRippleColor = ({
@@ -52,10 +40,7 @@ const getAndroidRippleColor = ({
   disabled?: boolean;
 }) => {
   if (disabled) {
-    if (theme.isV3) {
-      return color(theme.colors.onSurface).alpha(0.16).rgb().string();
-    }
-    return color(theme.colors.text).alpha(0.16).rgb().string();
+    return color(theme.colors.onSurface).alpha(0.16).rgb().string();
   }
 
   return color(checkedColor).fade(0.32).rgb().string();
@@ -75,10 +60,7 @@ const getAndroidControlColor = ({
   disabled?: boolean;
 }) => {
   if (disabled) {
-    if (theme.isV3) {
-      return theme.colors.onSurfaceDisabled;
-    }
-    return theme.colors.disabled;
+    return theme.colors.onSurfaceDisabled;
   }
 
   if (checked) {
@@ -127,21 +109,14 @@ const getIOSCheckedColor = ({
   disabled?: boolean;
 }) => {
   if (disabled) {
-    if (theme.isV3) {
-      return theme.colors.onSurfaceDisabled;
-    }
-    return theme.colors.disabled;
+    return theme.colors.onSurfaceDisabled;
   }
 
   if (customColor) {
     return customColor;
   }
 
-  if (theme.isV3) {
-    return theme.colors.primary;
-  }
-
-  return theme.colors.accent;
+  return theme.colors.primary;
 };
 
 const getIOSRippleColor = ({
@@ -154,10 +129,7 @@ const getIOSRippleColor = ({
   disabled?: boolean;
 }) => {
   if (disabled) {
-    if (theme.isV3) {
-      return color(theme.colors.onSurface).alpha(0.16).rgb().string();
-    }
-    return color(theme.colors.text).alpha(0.16).rgb().string();
+    return color(theme.colors.onSurface).alpha(0.16).rgb().string();
   }
   return color(checkedColor).fade(0.32).rgb().string();
 };

@@ -9,7 +9,6 @@ import {
 
 import AnimatedText from './AnimatedText';
 import type { VariantProp } from './types';
-import StyledText from './v2/StyledText';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
@@ -93,15 +92,13 @@ const Text = (
     setNativeProps: (args: Object) => root.current?.setNativeProps(args),
   }));
 
-  if (theme.isV3 && variant) {
+  if (variant) {
     let font = theme.fonts[variant];
     let textStyle = [font, style];
 
     if (
       React.isValidElement(rest.children) &&
-      (rest.children.type === Component ||
-        rest.children.type === AnimatedText ||
-        rest.children.type === StyledText)
+      (rest.children.type === Component || rest.children.type === AnimatedText)
     ) {
       const { props } = rest.children as {
         props: { variant?: string; style?: StyleProp<TextStyle> };
@@ -154,10 +151,10 @@ const Text = (
       />
     );
   } else {
-    const font = theme.isV3 ? theme.fonts.default : theme.fonts?.regular;
+    const font = theme.fonts.default;
     const textStyle = {
       ...font,
-      color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,
+      color: theme.colors?.onSurface,
     };
     return (
       <NativeText

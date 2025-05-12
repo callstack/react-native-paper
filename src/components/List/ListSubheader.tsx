@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { StyleProp, StyleSheet, TextStyle } from 'react-native';
 
-import color from 'color';
 import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../../core/theming';
@@ -41,13 +40,10 @@ const ListSubheader = ({
   maxFontSizeMultiplier,
   ...rest
 }: Props) => {
-  const theme = useInternalTheme(overrideTheme);
+  const { colors, fonts } = useInternalTheme(overrideTheme);
 
-  const textColor = theme.isV3
-    ? theme.colors.onSurfaceVariant
-    : color(theme.colors.text).alpha(0.54).rgb().string();
-
-  const font = theme.isV3 ? theme.fonts.bodyMedium : theme.fonts.medium;
+  const textColor = colors.onSurfaceVariant;
+  const font = fonts.bodyMedium;
 
   return (
     <Text

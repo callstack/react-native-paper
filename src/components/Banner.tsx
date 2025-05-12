@@ -145,7 +145,10 @@ const Banner = ({
   const showCallback = useLatestCallback(onShowAnimationFinished);
   const hideCallback = useLatestCallback(onHideAnimationFinished);
 
-  const { scale } = theme.animation;
+  const {
+    animation: { scale },
+    colors,
+  } = theme;
 
   const opacity = position.interpolate({
     inputRange: [0, 0.1, 1],
@@ -192,9 +195,9 @@ const Banner = ({
   return (
     <Surface
       {...rest}
-      style={[!theme.isV3 && styles.elevation, { opacity }, style]}
+      style={[{ opacity }, style]}
       theme={theme}
-      {...(theme.isV3 && { elevation })}
+      elevation={elevation}
     >
       <View style={[styles.wrapper, contentStyle]}>
         <Animated.View style={{ height }} />
@@ -224,9 +227,7 @@ const Banner = ({
               style={[
                 styles.message,
                 {
-                  color: theme.isV3
-                    ? theme.colors.onSurface
-                    : theme.colors.text,
+                  color: colors.onSurface,
                 },
               ]}
               accessibilityLiveRegion={visible ? 'polite' : 'none'}
@@ -243,7 +244,7 @@ const Banner = ({
                 compact
                 mode="text"
                 style={styles.button}
-                textColor={theme.colors?.primary}
+                textColor={colors.primary}
                 theme={theme}
                 {...others}
               >
@@ -290,9 +291,6 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 4,
-  },
-  elevation: {
-    elevation: 1,
   },
   transparent: {
     opacity: 0,

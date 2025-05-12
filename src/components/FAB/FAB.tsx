@@ -210,12 +210,15 @@ const FAB = forwardRef<View, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
-    const uppercase = uppercaseProp ?? !theme.isV3;
+    const {
+      animation: { scale },
+      fonts,
+    } = theme;
+
+    const uppercase = uppercaseProp ?? false;
     const { current: visibility } = React.useRef<Animated.Value>(
       new Animated.Value(visible ? 1 : 0)
     );
-    const { isV3, animation } = theme;
-    const { scale } = animation;
 
     React.useEffect(() => {
       if (visible) {
@@ -255,7 +258,7 @@ const FAB = forwardRef<View, Props>(
     const isFlatMode = mode === 'flat';
     const iconSize = isLargeSize ? 36 : 24;
     const loadingIndicatorSize = isLargeSize ? 24 : 18;
-    const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
+    const font = fonts.labelLarge;
 
     const extendedStyle = getExtendedFabStyle({ customSize, theme });
     const textStyle = {
@@ -282,13 +285,11 @@ const FAB = forwardRef<View, Props>(
               },
             ],
           },
-          !isV3 && styles.elevated,
-          !isV3 && disabled && styles.disabled,
           style,
         ]}
         pointerEvents={visible ? 'auto' : 'none'}
         testID={`${testID}-container`}
-        {...(isV3 && { elevation: md3Elevation })}
+        elevation={md3Elevation}
       >
         <TouchableRipple
           borderless
