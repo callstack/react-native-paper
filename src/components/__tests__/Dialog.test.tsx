@@ -12,16 +12,16 @@ import { act, fireEvent, render } from '@testing-library/react-native';
 import Dialog from '../../components/Dialog/Dialog';
 import Button from '../Button/Button';
 
-jest.mock('react-native/Libraries/Utilities/BackHandler', () =>
-  // eslint-disable-next-line jest/no-mocks-import
-  require('react-native/Libraries/Utilities/__mocks__/BackHandler')
-);
-
 interface BackHandlerStatic extends RNBackHandlerStatic {
   mockPressBack(): void;
 }
 
 const BackHandler = RNBackHandler as BackHandlerStatic;
+
+jest.mock('react-native/Libraries/Utilities/BackHandler', () =>
+  // eslint-disable-next-line jest/no-mocks-import
+  require('../../utils/__mocks__/BackHandler')
+);
 
 describe('Dialog', () => {
   it('should render passed children', () => {

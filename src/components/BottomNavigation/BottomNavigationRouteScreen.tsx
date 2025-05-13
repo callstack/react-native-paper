@@ -7,7 +7,7 @@ interface Props extends ViewProps {
 }
 
 class BottomNavigationRouteScreen extends React.Component<Props> {
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     const { style, index, children, visibility, ...rest } = this.props;
 
     // On Web, the unfocused tab screens can still be clicked since they are transparent, but still there
