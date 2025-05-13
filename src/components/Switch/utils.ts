@@ -2,15 +2,15 @@ import { Platform } from 'react-native';
 
 import setColor from 'color';
 
-import {
-  grey400,
-  grey800,
-  grey50,
-  grey700,
-  white,
-  black,
-} from '../../styles/themes/v2/colors';
 import type { InternalTheme } from '../../types';
+
+export const black = '#000000';
+export const white = '#ffffff';
+export const grey50 = '#fafafa';
+export const grey200 = '#eeeeee';
+export const grey400 = '#bdbdbd';
+export const grey700 = '#616161';
+export const grey800 = '#424242';
 
 type BaseProps = {
   theme: InternalTheme;

@@ -305,7 +305,7 @@ exports[`renders button with button color 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "#e91e63",
+      "backgroundColor": "rgba(152, 105, 119, 1)",
       "borderRadius": 20,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -322,7 +322,7 @@ exports[`renders button with button color 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "#e91e63",
+        "backgroundColor": "rgba(152, 105, 119, 1)",
         "borderColor": "transparent",
         "borderRadius": 20,
         "borderStyle": "solid",
@@ -576,7 +576,7 @@ exports[`renders button with color 1`] = `
                   undefined,
                   false,
                   {
-                    "color": "#e91e63",
+                    "color": "rgba(152, 105, 119, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,
                     "fontWeight": "500",

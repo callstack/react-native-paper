@@ -4,7 +4,6 @@ import { Animated, Easing, Platform, StyleSheet } from 'react-native';
 import { act, fireEvent, render } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
-import { red300 } from '../../styles/themes/v2/colors';
 import { MD3Colors } from '../../styles/themes/v3/tokens';
 import BottomNavigation from '../BottomNavigation/BottomNavigation';
 import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRouteScreen';
@@ -17,7 +16,7 @@ import Icon from '../Icon';
 
 const styles = StyleSheet.create({
   backgroundColor: {
-    backgroundColor: red300,
+    backgroundColor: MD3Colors.error30,
   },
 });
 
@@ -377,7 +376,7 @@ it('renders custom background color passed to barStyle property', () => {
   );
 
   const wrapper = getByTestId('bottom-navigation-bar-content');
-  expect(wrapper).toHaveStyle({ backgroundColor: red300 });
+  expect(wrapper).toHaveStyle({ backgroundColor: MD3Colors.error30 });
 });
 
 it('renders a single tab', () => {

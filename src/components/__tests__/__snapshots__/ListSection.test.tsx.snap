@@ -207,7 +207,7 @@ exports[`renders list section with custom title style 1`] = `
               "lineHeight": 20,
             },
             {
-              "color": "#f44336",
+              "color": "rgba(220, 54, 46, 1)",
             },
           ],
         ],

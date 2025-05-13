@@ -444,7 +444,7 @@ exports[`correctly applies a component as the text label 1`] = `
             <Text
               style={
                 {
-                  "color": "#f44336",
+                  "color": "rgba(220, 54, 46, 1)",
                 }
               }
             >
@@ -490,7 +490,7 @@ exports[`correctly applies a component as the text label 1`] = `
             <Text
               style={
                 {
-                  "color": "#f44336",
+                  "color": "rgba(220, 54, 46, 1)",
                 }
               }
             >
@@ -732,7 +732,7 @@ exports[`correctly applies cursorColor prop 1`] = `
       </View>
     </View>
     <TextInput
-      cursorColor="#f44336"
+      cursorColor="rgba(220, 54, 46, 1)"
       editable={true}
       maxFontSizeMultiplier={1.5}
       multiline={false}
@@ -1996,7 +1996,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "lineHeight": undefined,
           },
           {
-            "color": "#f44336",
+            "color": "rgba(220, 54, 46, 1)",
           },
         ]
       }
@@ -2571,7 +2571,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "lineHeight": undefined,
           },
           {
-            "color": "#f44336",
+            "color": "rgba(220, 54, 46, 1)",
           },
         ]
       }

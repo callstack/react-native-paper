@@ -387,7 +387,7 @@ exports[`renders icon button with color 1`] = `
         style={
           [
             {
-              "color": "#e91e63",
+              "color": "rgba(152, 105, 119, 1)",
               "fontSize": 24,
             },
             [

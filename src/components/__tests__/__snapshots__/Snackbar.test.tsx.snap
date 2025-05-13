@@ -179,7 +179,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
             <View
               style={
                 {
-                  "backgroundColor": "#ef9a9a",
+                  "backgroundColor": "rgba(96, 20, 16, 1)",
                   "padding": 15,
                 }
               }
@@ -187,7 +187,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
             <Text
               style={
                 {
-                  "color": "#ffffff",
+                  "color": "rgba(255, 255, 255, 1)",
                   "flexShrink": 1,
                   "flexWrap": "wrap",
                   "marginLeft": 10,

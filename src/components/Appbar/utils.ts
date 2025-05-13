@@ -2,7 +2,7 @@ import React from 'react';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet, Animated } from 'react-native';
 
-import { white } from '../../styles/themes/v2/colors';
+import { MD3Colors } from '../../styles/themes/v3/tokens';
 import type { InternalTheme, ThemeProp } from '../../types';
 
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
@@ -49,7 +49,7 @@ export const getAppbarColor = ({
   }
 
   if (isDark) {
-    return white;
+    return MD3Colors.primary100;
   }
 
   return undefined;

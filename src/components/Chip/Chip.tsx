@@ -18,7 +18,7 @@ import useLatestCallback from 'use-latest-callback';
 
 import { ChipAvatarProps, getChipColors } from './helpers';
 import { useInternalTheme } from '../../core/theming';
-import { white } from '../../styles/themes/v2/colors';
+import { MD3Colors } from '../../styles/themes/v3/tokens';
 import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import type { IconSource } from '../Icon';
@@ -360,14 +360,20 @@ const Chip = ({
               {icon ? (
                 <Icon
                   source={icon}
-                  color={avatar ? white : !disabled ? primary : iconColor}
+                  color={
+                    avatar
+                      ? MD3Colors.primary100
+                      : !disabled
+                      ? primary
+                      : iconColor
+                  }
                   size={18}
                   theme={theme}
                 />
               ) : (
                 <MaterialCommunityIcon
                   name="check"
-                  color={avatar ? white : iconColor}
+                  color={avatar ? MD3Colors.primary100 : iconColor}
                   size={18}
                   direction="ltr"
                 />

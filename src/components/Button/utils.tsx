@@ -2,7 +2,7 @@ import { type ViewStyle } from 'react-native';
 
 import color from 'color';
 
-import { black, white } from '../../styles/themes/v2/colors';
+import { MD3Colors } from '../../styles/themes/v3/tokens';
 import type { InternalTheme } from '../../types';
 import { splitStyles } from '../../utils/splitStyles';
 
@@ -109,7 +109,9 @@ const getButtonTextColor = ({
       isMode('contained-tonal') ||
       isMode('elevated')
     ) {
-      return isDark({ dark, backgroundColor }) ? white : black;
+      return isDark({ dark, backgroundColor })
+        ? MD3Colors.primary100
+        : MD3Colors.primary0;
     }
   }
 

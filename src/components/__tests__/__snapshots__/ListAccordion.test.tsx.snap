@@ -578,7 +578,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
                     "color": "rgba(28, 27, 31, 1)",
                   },
                   {
-                    "color": "#f44336",
+                    "color": "rgba(220, 54, 46, 1)",
                   },
                 ],
               ]
@@ -612,7 +612,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
                     "color": "rgba(73, 69, 79, 1)",
                   },
                   {
-                    "color": "#f44336",
+                    "color": "rgba(220, 54, 46, 1)",
                   },
                 ],
               ]

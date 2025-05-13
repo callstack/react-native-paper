@@ -5,16 +5,16 @@ import { render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
+import { MD3Colors } from '../../styles/themes/v3/tokens';
+import Switch from '../Switch/Switch';
 import {
   white,
   black,
   grey400,
   grey50,
   grey800,
-  pink500,
   grey700,
-} from '../../styles/themes/v2/colors';
-import Switch from '../Switch/Switch';
+} from '../Switch/utils';
 import { getSwitchColor } from '../Switch/utils';
 
 it('renders on switch', () => {
@@ -36,7 +36,7 @@ it('renders disabled switch', () => {
 });
 
 it('renders switch with color', () => {
-  const tree = render(<Switch value color={pink500} />).toJSON();
+  const tree = render(<Switch value color={MD3Colors.error50} />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

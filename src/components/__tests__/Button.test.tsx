@@ -4,7 +4,7 @@ import { Animated, StyleSheet } from 'react-native';
 import { act, fireEvent, render } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
-import { pink500, white } from '../../styles/themes/v2/colors';
+import { MD3Colors } from '../../styles/themes/v3/tokens';
 import Button from '../Button/Button';
 import { getButtonColors } from '../Button/utils';
 
@@ -105,7 +105,7 @@ it('renders active button if only onLongPress handler is passed', () => {
 
 it('renders button with color', () => {
   const tree = render(
-    <Button textColor={pink500}>Custom Button</Button>
+    <Button textColor={MD3Colors.tertiary50}>Custom Button</Button>
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -113,7 +113,7 @@ it('renders button with color', () => {
 
 it('renders button with button color', () => {
   const tree = render(
-    <Button buttonColor={pink500}>Custom Button</Button>
+    <Button buttonColor={MD3Colors.tertiary50}>Custom Button</Button>
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -511,7 +511,7 @@ describe('getButtonColors - text color', () => {
           dark: true,
         })
       ).toMatchObject({
-        textColor: white,
+        textColor: MD3Colors.primary100,
       });
     })
   );

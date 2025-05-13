@@ -5,7 +5,7 @@ import { act, render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
-import { pink500 } from '../../styles/themes/v2/colors';
+import { MD3Colors } from '../../styles/themes/v3/tokens';
 import IconButton from '../IconButton/IconButton';
 import { getIconButtonColor } from '../IconButton/utils';
 
@@ -26,7 +26,7 @@ it('renders icon button by default', () => {
 
 it('renders icon button with color', () => {
   const tree = render(
-    <IconButton icon="camera" iconColor={pink500} />
+    <IconButton icon="camera" iconColor={MD3Colors.tertiary50} />
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
