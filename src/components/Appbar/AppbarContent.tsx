@@ -14,7 +14,7 @@ import {
 
 import { modeTextVariant } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, MD3TypescaleKey, ThemeProp } from '../../types';
+import type { $RemoveChildren, TypescaleKey, ThemeProp } from '../../types';
 import Text, { TextRef } from '../Typography/Text';
 
 type TitleString = {
@@ -125,7 +125,7 @@ const AppbarContent = ({
     'center-aligned': styles.v3DefaultContainer,
   };
 
-  const variant = modeTextVariant[mode] as MD3TypescaleKey;
+  const variant = modeTextVariant[mode] as TypescaleKey;
 
   const contentWrapperProps = {
     pointerEvents: 'box-none' as ViewProps['pointerEvents'],

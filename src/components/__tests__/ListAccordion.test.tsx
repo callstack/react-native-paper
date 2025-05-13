@@ -5,7 +5,7 @@ import { render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
-import { MD3Colors } from '../../styles/themes/v3/tokens';
+import { Colors } from '../../styles/themes/tokens';
 import ListAccordion from '../List/ListAccordion';
 import ListAccordionGroup from '../List/ListAccordionGroup';
 import ListIcon from '../List/ListIcon';
@@ -14,7 +14,7 @@ import { getAccordionColors } from '../List/utils';
 
 const styles = StyleSheet.create({
   coloring: {
-    color: MD3Colors.error50,
+    color: Colors.error50,
   },
 });
 

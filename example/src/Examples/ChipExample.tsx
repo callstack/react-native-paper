@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
 import color from 'color';
-import { Chip, List, MD3Colors, Snackbar, Text } from 'react-native-paper';
+import { Chip, List, Colors, Snackbar, Text } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
-const customColor = MD3Colors.error50;
+const customColor = Colors.error50;
 
 const ChipExample = () => {
   const [snackbarProperties, setSnackbarProperties] = React.useState({

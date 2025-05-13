@@ -3,7 +3,7 @@ import { Platform, StyleSheet, View } from 'react-native';
 
 import {
   configureFonts,
-  MD3LightTheme,
+  LightTheme,
   PaperProvider,
   customText,
 } from 'react-native-paper';
@@ -30,7 +30,7 @@ const TextExample = () => {
   } as const;
 
   const theme = {
-    ...MD3LightTheme,
+    ...LightTheme,
     fonts: configureFonts({ config: fontConfig }),
   };
   return (

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Button, Portal, Dialog, MD3Colors } from 'react-native-paper';
+import { Button, Portal, Dialog, Colors } from 'react-native-paper';
 
 import { TextComponent } from './DialogTextComponent';
 
@@ -16,20 +16,18 @@ const DialogWithCustomColors = ({
       <Dialog
         onDismiss={close}
         style={{
-          backgroundColor: MD3Colors.primary10,
+          backgroundColor: Colors.primary10,
         }}
         visible={visible}
       >
-        <Dialog.Title style={{ color: MD3Colors.primary95 }}>
-          Alert
-        </Dialog.Title>
+        <Dialog.Title style={{ color: Colors.primary95 }}>Alert</Dialog.Title>
         <Dialog.Content>
-          <TextComponent style={{ color: MD3Colors.primary95 }}>
+          <TextComponent style={{ color: Colors.primary95 }}>
             This is a dialog with custom colors
           </TextComponent>
         </Dialog.Content>
         <Dialog.Actions>
-          <Button textColor={MD3Colors.primary95} onPress={close}>
+          <Button textColor={Colors.primary95} onPress={close}>
             Ok
           </Button>
         </Dialog.Actions>

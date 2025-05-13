@@ -3,12 +3,12 @@ import { StyleSheet } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 
-import { MD3Colors } from '../../styles/themes/v3/tokens';
+import { Colors } from '../../styles/themes/tokens';
 import * as Avatar from '../Avatar/Avatar';
 
 const styles = StyleSheet.create({
   bgColor: {
-    backgroundColor: MD3Colors.error50,
+    backgroundColor: Colors.error50,
   },
 });
 

@@ -9,7 +9,7 @@ import { useFonts } from 'expo-font';
 import { useKeepAwake } from 'expo-keep-awake';
 import { StatusBar } from 'expo-status-bar';
 import * as Updates from 'expo-updates';
-import { PaperProvider, MD3DarkTheme, MD3LightTheme } from 'react-native-paper';
+import { PaperProvider, DarkTheme, LightTheme } from 'react-native-paper';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 import DrawerItems from './DrawerItems';
@@ -53,12 +53,12 @@ export default function PaperExample() {
   const { theme: mdTheme } = useMaterial3Theme();
   const theme = React.useMemo(() => {
     if (!deviceColorsSupported || !shouldUseDeviceColors) {
-      return isDarkMode ? MD3DarkTheme : MD3LightTheme;
+      return isDarkMode ? DarkTheme : LightTheme;
     }
 
     return isDarkMode
-      ? { ...MD3DarkTheme, colors: mdTheme.dark }
-      : { ...MD3LightTheme, colors: mdTheme.light };
+      ? { ...DarkTheme, colors: mdTheme.dark }
+      : { ...LightTheme, colors: mdTheme.light };
   }, [isDarkMode, mdTheme, shouldUseDeviceColors]);
 
   React.useEffect(() => {

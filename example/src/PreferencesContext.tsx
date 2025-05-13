@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { MD3Theme } from 'react-native-paper';
+import { Theme } from 'react-native-paper';
 
 export const PreferencesContext = React.createContext<{
   toggleTheme: () => void;
@@ -9,7 +9,7 @@ export const PreferencesContext = React.createContext<{
   toggleCustomFont: () => void;
   toggleRippleEffect: () => void;
   toggleShouldUseDeviceColors?: () => void;
-  theme: MD3Theme;
+  theme: Theme;
   rtl: boolean;
   collapsed: boolean;
   customFontLoaded: boolean;

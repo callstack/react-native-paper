@@ -3,7 +3,7 @@ import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 import { Animated, FlatList, Platform, StyleSheet, View } from 'react-native';
 
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
-import { Avatar, MD3Colors, Text, useTheme } from 'react-native-paper';
+import { Avatar, Colors, Text, useTheme } from 'react-native-paper';
 
 import CustomFAB from './CustomFAB';
 import CustomFABControls, {
@@ -44,7 +44,7 @@ const AnimatedFABExample = () => {
           <Avatar.Text
             style={[styles.avatar, { backgroundColor: item.bgColor }]}
             label={item.initials}
-            color={MD3Colors.primary100}
+            color={Colors.primary100}
             size={40}
           />
           <View style={styles.itemTextContentContainer}>
@@ -86,9 +86,7 @@ const AnimatedFABExample = () => {
 
               <Icon
                 name={item.favorite ? 'star' : 'star-outline'}
-                color={
-                  item.favorite ? MD3Colors.error70 : MD3Colors.neutralVariant70
-                }
+                color={item.favorite ? Colors.error70 : Colors.neutralVariant70}
                 size={20}
                 onPress={() => setVisible(!visible)}
                 style={styles.icon}

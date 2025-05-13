@@ -20,6 +20,8 @@ import {
 } from './Adornment/TextInputAdornment';
 import {
   ADORNMENT_SIZE,
+  FLAT_INPUT_OFFSET,
+  LABEL_PADDING_TOP,
   LABEL_PADDING_TOP_DENSE,
   LABEL_WIGGLE_X_OFFSET,
   MAXIMIZED_LABEL_FONT_SIZE,
@@ -27,6 +29,8 @@ import {
   MINIMIZED_LABEL_Y_OFFSET,
   MIN_DENSE_HEIGHT,
   MIN_DENSE_HEIGHT_WL,
+  MIN_HEIGHT,
+  MIN_WIDTH,
 } from './constants';
 import {
   adjustPaddingFlat,
@@ -35,7 +39,6 @@ import {
   calculateInputHeight,
   calculateLabelTopPosition,
   calculatePadding,
-  getConstants,
   getFlatInputColors,
   Padding,
 } from './helpers';
@@ -84,9 +87,6 @@ const TextInputFlat = ({
     fonts: { bodyLarge },
   } = theme;
   const hasActiveOutline = parentState.focused || error;
-
-  const { LABEL_PADDING_TOP, FLAT_INPUT_OFFSET, MIN_HEIGHT, MIN_WIDTH } =
-    getConstants();
 
   const {
     fontSize: fontSizeStyle,

@@ -25,7 +25,7 @@ export type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { List, MD3Colors } from 'react-native-paper';
+ * import { List, Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <>

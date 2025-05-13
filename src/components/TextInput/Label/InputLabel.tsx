@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import AnimatedText from '../../Typography/AnimatedText';
-import { getConstants } from '../helpers';
+import { INPUT_PADDING_HORIZONTAL } from '../constants';
 import type { InputLabelProps } from '../types';
 
 const InputLabel = (props: InputLabelProps) => {
@@ -52,7 +52,6 @@ const InputLabel = (props: InputLabelProps) => {
     scaledLabel,
   } = props;
 
-  const { INPUT_PADDING_HORIZONTAL } = getConstants();
   const { width } = useWindowDimensions();
 
   const isWeb = Platform.OS === 'web';

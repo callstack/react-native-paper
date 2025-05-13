@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 
 import ExpoMaterial3ThemeModule from '@pchmn/expo-material3-theme/build/ExpoMaterial3ThemeModule';
-import { MD3DarkTheme, MD3LightTheme, MD3Theme } from 'react-native-paper';
+import { DarkTheme, LightTheme, Theme } from 'react-native-paper';
 
 type ReducerAction<T extends keyof State> = {
   payload: State[T];
@@ -1156,80 +1156,80 @@ const darkCyanColors = {
 
 export const colorThemes = {
   paper: {
-    light: MD3LightTheme,
-    dark: MD3DarkTheme,
+    light: LightTheme,
+    dark: DarkTheme,
   },
   pink: {
     light: {
-      ...MD3LightTheme,
+      ...LightTheme,
       ...lightPinkColors,
     },
     dark: {
-      ...MD3DarkTheme,
+      ...DarkTheme,
       ...darkPinkColors,
     },
   },
   green: {
     light: {
-      ...MD3LightTheme,
+      ...LightTheme,
       ...lightGreenColors,
     },
     dark: {
-      ...MD3DarkTheme,
+      ...DarkTheme,
       ...darkGreenColors,
     },
   },
   blue: {
     light: {
-      ...MD3LightTheme,
+      ...LightTheme,
       ...lightBlueColors,
     },
     dark: {
-      ...MD3DarkTheme,
+      ...DarkTheme,
       ...darkBlueColors,
     },
   },
   orange: {
     light: {
-      ...MD3LightTheme,
+      ...LightTheme,
       ...lightOrangeColors,
     },
     dark: {
-      ...MD3DarkTheme,
+      ...DarkTheme,
       ...darkOrangeColors,
     },
   },
   red: {
     light: {
-      ...MD3LightTheme,
+      ...LightTheme,
       ...lightRedColors,
     },
     dark: {
-      ...MD3DarkTheme,
+      ...DarkTheme,
       ...darkRedColors,
     },
   },
   yellow: {
     light: {
-      ...MD3LightTheme,
+      ...LightTheme,
       ...lightYellowColors,
     },
     dark: {
-      ...MD3DarkTheme,
+      ...DarkTheme,
       ...darkYellowColors,
     },
   },
   cyan: {
     light: {
-      ...MD3LightTheme,
+      ...LightTheme,
       ...lightCyanColors,
     },
     dark: {
-      ...MD3DarkTheme,
+      ...DarkTheme,
       ...darkCyanColors,
     },
   },
-} as { [key: string]: { light: MD3Theme; dark: MD3Theme } };
+} as { [key: string]: { light: Theme; dark: Theme } };
 
 export const songsData = [
   {

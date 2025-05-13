@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { render } from '@testing-library/react-native';
 
-import { MD3Colors } from '../../styles/themes/v3/tokens';
+import { Colors } from '../../styles/themes/tokens';
 import Badge from '../Badge';
 
 it('renders badge', () => {
@@ -35,7 +35,7 @@ it('renders badge as hidden', () => {
 
 it('renders badge in different color', () => {
   const tree = render(
-    <Badge style={{ backgroundColor: MD3Colors.error50 }}>3</Badge>
+    <Badge style={{ backgroundColor: Colors.error50 }}>3</Badge>
   ).toJSON();
 
   expect(tree).toMatchSnapshot();

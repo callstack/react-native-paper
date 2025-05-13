@@ -4,8 +4,8 @@ import {
 } from '@react-navigation/native';
 import {
   adaptNavigationTheme,
-  MD3DarkTheme,
-  MD3LightTheme,
+  DarkTheme as PaperDarkTheme,
+  LightTheme as PaperLightTheme,
   configureFonts,
 } from 'react-native-paper';
 
@@ -15,27 +15,27 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
 });
 
 export const CombinedDefaultTheme = {
-  ...MD3LightTheme,
+  ...PaperLightTheme,
   ...LightTheme,
   colors: {
-    ...MD3LightTheme.colors,
+    ...PaperLightTheme.colors,
     ...LightTheme.colors,
   },
   fonts: {
-    ...MD3LightTheme.fonts,
+    ...PaperLightTheme.fonts,
     ...LightTheme.fonts,
   },
 };
 
 export const CombinedDarkTheme = {
-  ...MD3DarkTheme,
+  ...PaperDarkTheme,
   ...DarkTheme,
   colors: {
-    ...MD3DarkTheme.colors,
+    ...PaperDarkTheme.colors,
     ...DarkTheme.colors,
   },
   fonts: {
-    ...MD3DarkTheme.fonts,
+    ...PaperDarkTheme.fonts,
     ...DarkTheme.fonts,
   },
 };

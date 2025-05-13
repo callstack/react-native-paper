@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
 
-import { Dialog, MD3Colors, Portal } from 'react-native-paper';
+import { Dialog, Colors, Portal } from 'react-native-paper';
 
 import { TextComponent } from './DialogTextComponent';
 
@@ -21,7 +21,7 @@ const DialogWithLoadingIndicator = ({
         <Dialog.Content>
           <View style={styles.flexing}>
             <ActivityIndicator
-              color={MD3Colors.tertiary30}
+              color={Colors.tertiary30}
               size={isIOS ? 'large' : 48}
               style={styles.marginRight}
             />

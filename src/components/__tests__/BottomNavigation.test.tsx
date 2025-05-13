@@ -4,7 +4,7 @@ import { Animated, Easing, Platform, StyleSheet } from 'react-native';
 import { act, fireEvent, render } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
-import { MD3Colors } from '../../styles/themes/v3/tokens';
+import { Colors } from '../../styles/themes/tokens';
 import BottomNavigation from '../BottomNavigation/BottomNavigation';
 import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRouteScreen';
 import {
@@ -16,7 +16,7 @@ import Icon from '../Icon';
 
 const styles = StyleSheet.create({
   backgroundColor: {
-    backgroundColor: MD3Colors.error30,
+    backgroundColor: Colors.error30,
   },
 });
 
@@ -376,7 +376,7 @@ it('renders custom background color passed to barStyle property', () => {
   );
 
   const wrapper = getByTestId('bottom-navigation-bar-content');
-  expect(wrapper).toHaveStyle({ backgroundColor: MD3Colors.error30 });
+  expect(wrapper).toHaveStyle({ backgroundColor: Colors.error30 });
 });
 
 it('renders a single tab', () => {
@@ -463,7 +463,7 @@ describe('getActiveTintColor', () => {
   it.each`
     activeColor  | expected
     ${'#FBF7DB'} | ${'#FBF7DB'}
-    ${undefined} | ${MD3Colors.secondary10}
+    ${undefined} | ${Colors.secondary10}
   `(
     'returns $expected when activeColor: $activeColor',
     ({ activeColor, expected }) => {
@@ -478,7 +478,7 @@ describe('getInactiveTintColor', () => {
   it.each`
     inactiveColor | expected
     ${'#853D4B'}  | ${'#853D4B'}
-    ${undefined}  | ${MD3Colors.neutralVariant30}
+    ${undefined}  | ${Colors.neutralVariant30}
   `(
     'returns $expected when inactiveColor: $inactiveColor',
     ({ inactiveColor, expected }) => {
@@ -497,8 +497,8 @@ describe('getLabelColor', () => {
     tintColor    | focused  | expected
     ${'#FBF7DB'} | ${true}  | ${'#FBF7DB'}
     ${'#853D4B'} | ${true}  | ${'#853D4B'}
-    ${undefined} | ${true}  | ${MD3Colors.neutral10}
-    ${undefined} | ${false} | ${MD3Colors.neutralVariant30}
+    ${undefined} | ${true}  | ${Colors.neutral10}
+    ${undefined} | ${false} | ${Colors.neutralVariant30}
   `(
     'returns $expected when tintColor: $tintColor, focused: $focused',
     ({ tintColor, focused, expected }) => {

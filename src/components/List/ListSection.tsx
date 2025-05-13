@@ -37,7 +37,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { List, MD3Colors } from 'react-native-paper';
+ * import { List, Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <List.Section>
@@ -45,7 +45,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  *     <List.Item title="First Item" left={() => <List.Icon icon="folder" />} />
  *     <List.Item
  *       title="Second Item"
- *       left={() => <List.Icon color={MD3Colors.tertiary70} icon="folder" />}
+ *       left={() => <List.Icon color={Colors.tertiary70} icon="folder" />}
  *     />
  *   </List.Section>
  * );

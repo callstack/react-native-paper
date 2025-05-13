@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import { MD3Colors } from '../../styles/themes/v3/tokens';
+import { Colors } from '../../styles/themes/tokens';
 import type { ThemeProp } from '../../types';
 import getContrastingColor from '../../utils/getContrastingColor';
 import Text from '../Typography/Text';
@@ -79,7 +79,7 @@ const AvatarText = ({
     customColor ??
     getContrastingColor(
       backgroundColor,
-      MD3Colors.primary100,
+      Colors.primary100,
       'rgba(0, 0, 0, .54)'
     );
   const { fontScale } = useWindowDimensions();

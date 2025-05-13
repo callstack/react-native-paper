@@ -5,7 +5,7 @@ import {
   Button,
   FAB,
   Appbar,
-  MD3Colors,
+  Colors,
   NonExistent,
   NonExistentSecond as Stuff,
   ThemeProvider,
