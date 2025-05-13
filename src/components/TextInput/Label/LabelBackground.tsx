@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, StyleSheet, Platform } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 
 import AnimatedText from '../../Typography/AnimatedText';
 import type { LabelBackgroundProps } from '../types';
@@ -17,8 +17,6 @@ const LabelBackground = ({
   maxFontSizeMultiplier,
   testID,
 }: LabelBackgroundProps) => {
-  const isWeb = Platform.OS === 'web';
-
   const opacity = labeled.interpolate({
     inputRange: [0, 0.6],
     outputRange: [1, 0],
@@ -52,10 +50,8 @@ const LabelBackground = ({
           backgroundColor,
           maxHeight: Math.max(roundness / 3, 2),
           bottom: Math.max(roundness, 2),
-          opacity,
-        },
-        (isWeb || Platform.constants.reactNativeVersion.minor <= 77) && {
           transform: [labelTranslationX],
+          opacity,
         },
       ]}
     />
