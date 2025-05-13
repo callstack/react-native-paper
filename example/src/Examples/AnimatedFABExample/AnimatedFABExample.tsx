@@ -3,13 +3,7 @@ import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 import { Animated, FlatList, Platform, StyleSheet, View } from 'react-native';
 
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
-import {
-  Avatar,
-  MD2Colors,
-  MD3Colors,
-  Paragraph,
-  Text,
-} from 'react-native-paper';
+import { Avatar, MD3Colors, Text, useTheme } from 'react-native-paper';
 
 import CustomFAB from './CustomFAB';
 import CustomFABControls, {
@@ -17,7 +11,6 @@ import CustomFABControls, {
   initialControls,
 } from './CustomFABControls';
 import { animatedFABExampleData } from '../../../utils';
-import { useExampleTheme } from '../../hooks/useExampleTheme';
 
 type Item = {
   id: string;
@@ -32,7 +25,7 @@ type Item = {
 };
 
 const AnimatedFABExample = () => {
-  const { colors, isV3 } = useExampleTheme();
+  const { colors } = useTheme();
 
   const isIOS = Platform.OS === 'ios';
 
@@ -47,63 +40,55 @@ const AnimatedFABExample = () => {
 
   const renderItem = React.useCallback(
     ({ item }: { item: Item }) => {
-      const TextComponent = isV3 ? Text : Paragraph;
-
       return (
         <View style={styles.itemContainer}>
           <Avatar.Text
             style={[styles.avatar, { backgroundColor: item.bgColor }]}
             label={item.initials}
-            color={isV3 ? MD3Colors.primary100 : MD2Colors.white}
+            color={MD3Colors.primary100}
             size={40}
           />
           <View style={styles.itemTextContentContainer}>
             <View style={styles.itemHeaderContainer}>
-              <TextComponent
+              <Text
                 variant="labelLarge"
                 style={[styles.header, !item.read && styles.read]}
                 ellipsizeMode="tail"
                 numberOfLines={1}
               >
                 {item.sender}
-              </TextComponent>
-              <TextComponent
+              </Text>
+              <Text
                 variant="labelLarge"
                 style={[styles.date, !item.read && styles.read]}
               >
                 {item.date}
-              </TextComponent>
+              </Text>
             </View>
 
             <View style={styles.itemMessageContainer}>
               <View style={styles.flex}>
-                <TextComponent
+                <Text
                   variant="labelLarge"
                   ellipsizeMode="tail"
                   numberOfLines={1}
                   style={!item.read && styles.read}
                 >
                   {item.header}
-                </TextComponent>
-                <TextComponent
+                </Text>
+                <Text
                   variant="labelLarge"
                   numberOfLines={1}
                   ellipsizeMode="tail"
                 >
                   {item.message}
-                </TextComponent>
+                </Text>
               </View>
 
               <Icon
                 name={item.favorite ? 'star' : 'star-outline'}
                 color={
-                  item.favorite
-                    ? isV3
-                      ? MD3Colors.error70
-                      : MD2Colors.orange500
-                    : isV3
-                    ? MD3Colors.neutralVariant70
-                    : MD2Colors.grey500
+                  item.favorite ? MD3Colors.error70 : MD3Colors.neutralVariant70
                 }
                 size={20}
                 onPress={() => setVisible(!visible)}
@@ -114,7 +99,7 @@ const AnimatedFABExample = () => {
         </View>
       );
     },
-    [visible, isV3]
+    [visible]
   );
 
   const onScroll = ({

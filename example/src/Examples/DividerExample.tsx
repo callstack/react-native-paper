@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { FlatList } from 'react-native';
 
-import { Divider, List } from 'react-native-paper';
+import { Divider, List, useTheme } from 'react-native-paper';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const items = ['Apple', 'Banana', 'Coconut', 'Lemon', 'Mango', 'Peach'];
 
 const DividerExample = () => {
-  const { colors } = useExampleTheme();
+  const { colors } = useTheme();
 
   return (
     <ScreenWrapper withScrollView={false}>

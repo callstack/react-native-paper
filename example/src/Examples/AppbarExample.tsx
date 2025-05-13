@@ -6,16 +6,14 @@ import {
   Appbar,
   FAB,
   List,
-  Paragraph,
   RadioButton,
   Snackbar,
   Switch,
   Text,
+  useTheme,
 } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { yellowA200 } from '../../../src/styles/themes/v2/colors';
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 type Props = {
@@ -26,22 +24,20 @@ type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 const MEDIUM_FAB_HEIGHT = 56;
+const HEIGHT = 80;
 
 const AppbarExample = ({ navigation }: Props) => {
   const [showLeftIcon, setShowLeftIcon] = React.useState(true);
-  const [showSubtitle, setShowSubtitle] = React.useState(true);
   const [showSearchIcon, setShowSearchIcon] = React.useState(true);
   const [showMoreIcon, setShowMoreIcon] = React.useState(true);
   const [showCustomColor, setShowCustomColor] = React.useState(false);
-  const [showExactTheme, setShowExactTheme] = React.useState(false);
   const [appbarMode, setAppbarMode] = React.useState<AppbarModes>('small');
   const [showCalendarIcon, setShowCalendarIcon] = React.useState(false);
   const [showElevated, setShowElevated] = React.useState(false);
   const [showSnackbar, setShowSnackbar] = React.useState(false);
 
-  const theme = useExampleTheme();
+  const { colors } = useTheme();
   const { bottom, left, right } = useSafeAreaInsets();
-  const height = theme.isV3 ? 80 : 56;
 
   const isCenterAlignedMode = appbarMode === 'center-aligned';
 
@@ -51,7 +47,7 @@ const AppbarExample = ({ navigation }: Props) => {
         <Appbar.Header
           style={showCustomColor ? styles.customColor : null}
           theme={{
-            mode: showExactTheme ? 'exact' : 'adaptive',
+            mode: 'adaptive',
           }}
           mode={appbarMode}
           elevated={showElevated}
@@ -59,11 +55,7 @@ const AppbarExample = ({ navigation }: Props) => {
           {showLeftIcon && (
             <Appbar.BackAction onPress={() => navigation.goBack()} />
           )}
-          <Appbar.Content
-            title="Title"
-            subtitle={showSubtitle ? 'Subtitle' : null}
-            onPress={() => setShowSnackbar(true)}
-          />
+          <Appbar.Content title="Title" onPress={() => setShowSnackbar(true)} />
           {isCenterAlignedMode
             ? false
             : showCalendarIcon && (
@@ -81,32 +73,23 @@ const AppbarExample = ({ navigation }: Props) => {
   }, [
     navigation,
     showLeftIcon,
-    showSubtitle,
     showSearchIcon,
     showMoreIcon,
     showCustomColor,
-    showExactTheme,
     appbarMode,
     showCalendarIcon,
     isCenterAlignedMode,
     showElevated,
   ]);
 
-  const TextComponent = theme.isV3 ? Text : Paragraph;
-
   const renderFAB = () => {
     return (
       <FAB
-        mode={theme.isV3 ? 'flat' : 'elevated'}
+        mode={'flat'}
         size="medium"
         icon="plus"
         onPress={() => {}}
-        style={[
-          styles.fab,
-          theme.isV3
-            ? { top: (height - MEDIUM_FAB_HEIGHT) / 2 }
-            : { bottom: height / 2 + bottom },
-        ]}
+        style={[styles.fab, { top: (HEIGHT - MEDIUM_FAB_HEIGHT) / 2 }]}
       />
     );
   };
@@ -114,113 +97,88 @@ const AppbarExample = ({ navigation }: Props) => {
   const renderDefaultOptions = () => (
     <>
       <View style={styles.row}>
-        <TextComponent>Left icon</TextComponent>
+        <Text>Left icon</Text>
         <Switch value={showLeftIcon} onValueChange={setShowLeftIcon} />
       </View>
-      {!theme.isV3 && (
-        <View style={styles.row}>
-          <TextComponent>Subtitle</TextComponent>
-          <Switch value={showSubtitle} onValueChange={setShowSubtitle} />
-        </View>
-      )}
       <View style={styles.row}>
-        <TextComponent>Search icon</TextComponent>
+        <Text>Search icon</Text>
         <Switch value={showSearchIcon} onValueChange={setShowSearchIcon} />
       </View>
       <View style={styles.row}>
-        <TextComponent>More icon</TextComponent>
+        <Text>More icon</Text>
         <Switch value={showMoreIcon} onValueChange={setShowMoreIcon} />
       </View>
-      {theme.isV3 && (
-        <View style={styles.row}>
-          <TextComponent>Calendar icon</TextComponent>
-          <Switch
-            value={isCenterAlignedMode ? false : showCalendarIcon}
-            disabled={isCenterAlignedMode}
-            onValueChange={setShowCalendarIcon}
-          />
-        </View>
-      )}
       <View style={styles.row}>
-        <TextComponent>Custom Color</TextComponent>
+        <Text>Calendar icon</Text>
+        <Switch
+          value={isCenterAlignedMode ? false : showCalendarIcon}
+          disabled={isCenterAlignedMode}
+          onValueChange={setShowCalendarIcon}
+        />
+      </View>
+      <View style={styles.row}>
+        <Text>Custom Color</Text>
         <Switch value={showCustomColor} onValueChange={setShowCustomColor} />
       </View>
-      {!theme.isV3 && (
-        <View style={styles.row}>
-          <TextComponent>Exact Dark Theme</TextComponent>
-          <Switch value={showExactTheme} onValueChange={setShowExactTheme} />
-        </View>
-      )}
-      {theme.isV3 && (
-        <View style={styles.row}>
-          <TextComponent>Elevated</TextComponent>
-          <Switch value={showElevated} onValueChange={setShowElevated} />
-        </View>
-      )}
+      <View style={styles.row}>
+        <Text>Elevated</Text>
+        <Switch value={showElevated} onValueChange={setShowElevated} />
+      </View>
     </>
   );
 
   return (
     <>
       <ScreenWrapper
-        style={{ marginBottom: height + bottom }}
+        style={{ marginBottom: HEIGHT + bottom }}
         contentContainerStyle={styles.contentContainer}
       >
-        {theme.isV3 ? (
-          <List.Section title="Default options">
-            {renderDefaultOptions()}
-          </List.Section>
-        ) : (
-          renderDefaultOptions()
-        )}
-        {theme.isV3 && (
-          <List.Section title="Appbar Modes">
-            <RadioButton.Group
-              value={appbarMode}
-              onValueChange={(value: string) =>
-                setAppbarMode(value as AppbarModes)
-              }
-            >
-              <View style={styles.row}>
-                <TextComponent>Small (default)</TextComponent>
-                <RadioButton value="small" />
-              </View>
-              <View style={styles.row}>
-                <TextComponent>Medium</TextComponent>
-                <RadioButton value="medium" />
-              </View>
-              <View style={styles.row}>
-                <TextComponent>Large</TextComponent>
-                <RadioButton value="large" />
-              </View>
-              <View style={styles.row}>
-                <TextComponent>Center-aligned</TextComponent>
-                <RadioButton value="center-aligned" />
-              </View>
-            </RadioButton.Group>
-          </List.Section>
-        )}
+        <List.Section title="Default options">
+          {renderDefaultOptions()}
+        </List.Section>
+        <List.Section title="Appbar Modes">
+          <RadioButton.Group
+            value={appbarMode}
+            onValueChange={(value: string) =>
+              setAppbarMode(value as AppbarModes)
+            }
+          >
+            <View style={styles.row}>
+              <Text>Small (default)</Text>
+              <RadioButton value="small" />
+            </View>
+            <View style={styles.row}>
+              <Text>Medium</Text>
+              <RadioButton value="medium" />
+            </View>
+            <View style={styles.row}>
+              <Text>Large</Text>
+              <RadioButton value="large" />
+            </View>
+            <View style={styles.row}>
+              <Text>Center-aligned</Text>
+              <RadioButton value="center-aligned" />
+            </View>
+          </RadioButton.Group>
+        </List.Section>
       </ScreenWrapper>
       <Appbar
         style={[
           styles.bottom,
           {
-            height: height + bottom,
-          },
-          theme.isV3 && {
-            backgroundColor: theme.colors.elevation.level2,
+            height: HEIGHT + bottom,
+            backgroundColor: colors.elevation.level2,
           },
         ]}
         safeAreaInsets={{ bottom, left, right }}
-        theme={{ mode: showExactTheme ? 'exact' : 'adaptive' }}
+        theme={{ mode: 'adaptive' }}
       >
         <Appbar.Action icon="archive" onPress={() => {}} />
         <Appbar.Action icon="email" onPress={() => {}} />
         <Appbar.Action icon="label" onPress={() => {}} />
         <Appbar.Action icon="delete" onPress={() => {}} />
-        {theme.isV3 && renderFAB()}
+        {renderFAB()}
       </Appbar>
-      {!theme.isV3 && renderFAB()}
       <Snackbar
         visible={showSnackbar}
         onDismiss={() => setShowSnackbar(false)}
@@ -257,7 +215,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 16,
   },
+  // eslint-disable-next-line react-native/no-color-literals
   customColor: {
-    backgroundColor: yellowA200,
+    backgroundColor: 'yellow',
   },
 });
