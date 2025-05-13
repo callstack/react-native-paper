@@ -13,15 +13,12 @@ export * from './styles/themes';
 export { default as Provider } from './core/PaperProvider';
 export { default as PaperProvider } from './core/PaperProvider';
 export { default as shadow } from './styles/shadow';
-export { default as overlay } from './styles/overlay';
 export { default as configureFonts } from './styles/fonts';
 
 import * as Avatar from './components/Avatar/Avatar';
 import * as Drawer from './components/Drawer/Drawer';
 import * as List from './components/List/List';
-import * as MD2Colors from './styles/themes/v2/colors';
 
-export { MD2Colors };
 export { Avatar, List, Drawer };
 
 export * from './components/FAB/AnimatedFAB';
@@ -161,7 +158,6 @@ export type {
 } from './react-navigation';
 
 export type {
-  MD2Theme,
   MD3Theme,
   ThemeBase,
   MD3Elevation,
