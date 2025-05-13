@@ -54,7 +54,7 @@ const LabelBackground = ({
           bottom: Math.max(roundness, 2),
           opacity,
         },
-        (isWeb || Platform.constants.reactNativeVersion.minor <= 72) && {
+        (isWeb || Platform.constants.reactNativeVersion.minor <= 77) && {
           transform: [labelTranslationX],
         },
       ]}

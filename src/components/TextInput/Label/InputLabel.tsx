@@ -114,7 +114,7 @@ const InputLabel = (props: InputLabelProps) => {
       },
     ],
     ...(!isWeb &&
-      Platform.constants.reactNativeVersion.minor >= 73 && {
+      Platform.constants.reactNativeVersion.minor >= 78 && {
         transformOrigin: 'left',
       }),
   };
@@ -152,7 +152,7 @@ const InputLabel = (props: InputLabelProps) => {
           StyleSheet.absoluteFill,
           !isWeb && { width },
           { opacity },
-          (isWeb || Platform.constants.reactNativeVersion.minor <= 72) &&
+          (isWeb || Platform.constants.reactNativeVersion.minor <= 77) &&
             labelTranslationX,
         ]}
       >
