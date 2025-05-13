@@ -21,7 +21,7 @@ const ScreenshotTabs: React.FC<ScreenshotTabsProps> = ({
   screenshotData,
   baseUrl,
 }) => {
-  const renderScreenhot = (src: string): JSX.Element => (
+  const renderScreenhot = (src: string): React.JSX.Element => (
     <img src={`${baseUrl}${src}`} className={getClassName(src)} />
   );
 
