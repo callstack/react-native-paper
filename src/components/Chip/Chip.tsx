@@ -454,6 +454,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 4,
     position: 'relative',
+    justifyContent: "center"
   },
   md3Content: {
     paddingLeft: 0,
