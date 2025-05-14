@@ -22,8 +22,8 @@ const SearchExample = ({ navigation }: Props) => {
   const [isVisible, setIsVisible] = React.useState(false);
   const [searchQueries, setSearchQuery] = React.useState({
     searchBarMode: '',
-    traileringIcon: '',
-    traileringIconWithRightItem: '',
+    trailingIcon: '',
+    trailingIconWithRightItem: '',
     rightItem: '',
     loadingBarMode: '',
     searchViewMode: '',
@@ -61,36 +61,36 @@ const SearchExample = ({ navigation }: Props) => {
               mode="bar"
             />
             <Searchbar
-              placeholder="Trailering icon"
+              placeholder="Trailing icon"
               onChangeText={(query) =>
-                setSearchQuery({ ...searchQueries, traileringIcon: query })
+                setSearchQuery({ ...searchQueries, trailingIcon: query })
               }
-              value={searchQueries.traileringIcon}
-              traileringIcon={'microphone'}
-              traileringIconColor={
+              value={searchQueries.trailingIcon}
+              trailingIcon={'microphone'}
+              trailingIconColor={
                 isVisible ? MD3Colors.error40 : colors.onSurfaceVariant
               }
-              traileringIconAccessibilityLabel={'microphone button'}
-              onTraileringIconPress={() => setIsVisible(true)}
+              trailingIconAccessibilityLabel={'microphone button'}
+              onTrailingIconPress={() => setIsVisible(true)}
               style={styles.searchbar}
               mode="bar"
             />
             <Searchbar
               mode="bar"
-              placeholder="Trailering icon with right item"
+              placeholder="Trailing icon with right item"
               onChangeText={(query) =>
                 setSearchQuery({
                   ...searchQueries,
-                  traileringIconWithRightItem: query,
+                  trailingIconWithRightItem: query,
                 })
               }
-              value={searchQueries.traileringIconWithRightItem}
-              traileringIcon={'microphone'}
-              traileringIconColor={
+              value={searchQueries.trailingIconWithRightItem}
+              trailingIcon={'microphone'}
+              trailingIconColor={
                 isVisible ? MD3Colors.error40 : colors.onSurfaceVariant
               }
-              traileringIconAccessibilityLabel={'microphone button'}
-              onTraileringIconPress={() => setIsVisible(true)}
+              trailingIconAccessibilityLabel={'microphone button'}
+              onTrailingIconPress={() => setIsVisible(true)}
               right={(props) => (
                 <Avatar.Image
                   {...props}
@@ -131,7 +131,7 @@ const SearchExample = ({ navigation }: Props) => {
               style={styles.searchbar}
               mode="bar"
               loading
-              traileringIcon={'microphone'}
+              trailingIcon={'microphone'}
             />
           </List.Section>
         )}
