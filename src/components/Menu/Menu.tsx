@@ -4,7 +4,6 @@ import {
   Dimensions,
   Easing,
   EmitterSubscription,
-  I18nManager,
   Keyboard,
   KeyboardEvent as RNKeyboardEvent,
   LayoutRectangle,
@@ -620,7 +619,7 @@ const Menu = ({
     top: isCoordinate(anchor)
       ? topTransformation
       : topTransformation + additionalVerticalValue,
-    ...(I18nManager.getConstants().isRTL
+    ...(theme.direction === 'rtl'
       ? { right: leftTransformation }
       : { left: leftTransformation }),
   };

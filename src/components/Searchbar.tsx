@@ -3,7 +3,6 @@ import {
   Animated,
   ColorValue,
   GestureResponderEvent,
-  I18nManager,
   Platform,
   StyleProp,
   StyleSheet,
@@ -290,7 +289,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
                 name="magnify"
                 color={color}
                 size={size}
-                direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                direction={theme.direction}
               />
             ))
           }
@@ -302,6 +301,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
           style={[
             styles.input,
             {
+              textAlign: theme.direction === 'rtl' ? 'right' : 'left',
               color: textColor,
               ...font,
               ...Platform.select({ web: { outline: 'none' } }),
@@ -352,7 +352,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
                     name={isV3 ? 'close' : 'close-circle-outline'}
                     color={color}
                     size={size}
-                    direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                    direction={theme.direction}
                   />
                 ))
               }
@@ -403,7 +403,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingLeft: 8,
     alignSelf: 'stretch',
-    textAlign: I18nManager.getConstants().isRTL ? 'right' : 'left',
     minWidth: 0,
   },
   barModeInput: {

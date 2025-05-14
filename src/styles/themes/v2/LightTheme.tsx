@@ -1,3 +1,5 @@
+import { I18nManager } from 'react-native';
+
 import color from 'color';
 
 import { black, pinkA400, white } from './colors';
@@ -6,6 +8,7 @@ import configureFonts from '../../fonts';
 
 export const MD2LightTheme: MD2Theme = {
   dark: false,
+  direction: I18nManager.getConstants().isRTL ? 'rtl' : 'ltr',
   roundness: 4,
   version: 2,
   isV3: false,

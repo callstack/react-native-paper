@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  I18nManager,
-  Image,
-  ImageSourcePropType,
-  Platform,
-} from 'react-native';
+import { Image, ImageSourcePropType, Platform } from 'react-native';
 
 import { accessibilityProps } from './MaterialCommunityIcon';
 import { Consumer as SettingsConsumer } from '../core/settings';
@@ -112,9 +107,7 @@ const Icon = ({
   const direction =
     typeof source === 'object' && source.direction && source.source
       ? source.direction === 'auto'
-        ? I18nManager.getConstants().isRTL
-          ? 'rtl'
-          : 'ltr'
+        ? theme.direction
         : source.direction
       : null;
 

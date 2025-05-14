@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { I18nManager, StyleProp, StyleSheet, TextStyle } from 'react-native';
+import { StyleProp, StyleSheet, TextStyle } from 'react-native';
 
 import color from 'color';
 import type { ThemeProp } from 'src/types';
@@ -29,7 +29,6 @@ const StyledText = ({
     .alpha(alpha)
     .rgb()
     .string();
-  const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
 
   return (
     <Text
@@ -39,7 +38,7 @@ const StyledText = ({
         {
           color: textColor,
           ...(!theme.isV3 && theme.fonts?.[family]),
-          writingDirection,
+          writingDirection: theme.direction,
         },
         style,
       ]}

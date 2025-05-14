@@ -270,6 +270,9 @@ it('correctly applies padding offset to input label on Android when RTL', () => 
       right={
         <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
       }
+      theme={{
+        direction: I18nManager.isRTL ? 'rtl' : 'ltr',
+      }}
     />
   );
 

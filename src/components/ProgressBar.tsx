@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  I18nManager,
   LayoutChangeEvent,
   Platform,
   StyleProp,
@@ -55,7 +54,6 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
 
 const INDETERMINATE_DURATION = 2000;
 const INDETERMINATE_MAX_WIDTH = 0.6;
-const { isRTL } = I18nManager;
 
 /**
  * Progress bar is an indicator used to present progress of some activity in the app.
@@ -99,6 +97,7 @@ const ProgressBar = ({
     React.useRef<Animated.CompositeAnimation | null>(null);
 
   const { scale } = theme.animation;
+  const isRTL = theme.direction === 'rtl';
 
   React.useEffect(() => {
     passedAnimatedValue.current = animatedValue;

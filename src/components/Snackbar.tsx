@@ -3,7 +3,6 @@ import {
   Animated,
   ColorValue,
   Easing,
-  I18nManager,
   StyleProp,
   StyleSheet,
   View,
@@ -360,9 +359,7 @@ const Snackbar = ({
                         name="close"
                         color={color}
                         size={size}
-                        direction={
-                          I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'
-                        }
+                        direction={theme.direction}
                       />
                     );
                   })

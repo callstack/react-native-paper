@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   ColorValue,
-  I18nManager,
   StyleProp,
   StyleSheet,
   View,
@@ -119,7 +118,7 @@ const PaginationControls = ({
               name="page-first"
               color={color}
               size={size}
-              direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+              direction={theme.direction}
             />
           )}
           iconColor={textColor}
@@ -136,7 +135,7 @@ const PaginationControls = ({
             name="chevron-left"
             color={color}
             size={size}
-            direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+            direction={theme.direction}
           />
         )}
         iconColor={textColor}
@@ -152,7 +151,7 @@ const PaginationControls = ({
             name="chevron-right"
             color={color}
             size={size}
-            direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+            direction={theme.direction}
           />
         )}
         iconColor={textColor}
@@ -169,7 +168,7 @@ const PaginationControls = ({
               name="page-last"
               color={color}
               size={size}
-              direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+              direction={theme.direction}
             />
           )}
           iconColor={textColor}
