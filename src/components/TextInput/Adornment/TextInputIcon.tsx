@@ -79,11 +79,9 @@ const IconAdornment: React.FunctionComponent<
   isTextInputFocused,
   forceFocus,
   testID,
-  theme: themeOverrides,
   disabled,
 }) => {
-  const { isV3 } = useInternalTheme(themeOverrides);
-  const { ICON_OFFSET } = getConstants(isV3);
+  const { ICON_OFFSET } = getConstants();
 
   const style = {
     top: topPosition,

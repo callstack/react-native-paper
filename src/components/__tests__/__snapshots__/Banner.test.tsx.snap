@@ -239,7 +239,6 @@ exports[`render visible banner, with custom theme 1`] = `
                               "marginVertical": 9,
                               "textAlign": "center",
                             },
-                            false,
                             {
                               "marginHorizontal": 12,
                             },
@@ -667,7 +666,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                               "marginVertical": 9,
                               "textAlign": "center",
                             },
-                            false,
                             {
                               "marginHorizontal": 12,
                             },
@@ -942,7 +940,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                               "marginVertical": 9,
                               "textAlign": "center",
                             },
-                            false,
                             {
                               "marginHorizontal": 12,
                             },
@@ -1092,7 +1089,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                               "marginVertical": 9,
                               "textAlign": "center",
                             },
-                            false,
                             {
                               "marginHorizontal": 12,
                             },

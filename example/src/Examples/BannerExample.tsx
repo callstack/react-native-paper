@@ -17,10 +17,10 @@ const PHOTOS = Array.from({ length: 24 }).map(
 );
 
 const BannerExample = () => {
-  const [visible, setVisible] = React.useState<boolean>(true);
-  const [useCustomTheme, setUseCustomTheme] = React.useState<boolean>(false);
   const theme = useTheme();
 
+  const [visible, setVisible] = React.useState<boolean>(true);
+  const [useCustomTheme, setUseCustomTheme] = React.useState<boolean>(false);
   const [height, setHeight] = React.useState(0);
 
   const handleLayout = ({ nativeEvent }: LayoutChangeEvent) => {

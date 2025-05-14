@@ -1,8 +1,8 @@
-import { StyleSheet, type ViewStyle } from 'react-native';
+import { type ViewStyle } from 'react-native';
 
 import color from 'color';
 
-import { black, white } from '../../styles/themes/v2/colors';
+import { MD3Colors } from '../../styles/themes/v3/tokens';
 import type { InternalTheme } from '../../types';
 import { splitStyles } from '../../utils/splitStyles';
 
@@ -49,41 +49,32 @@ const getButtonBackgroundColor = ({
 }: BaseProps & {
   customButtonColor?: string;
 }) => {
+  const {
+    colors: { surfaceDisabled, elevation, primary, secondaryContainer },
+  } = theme;
+
   if (customButtonColor && !disabled) {
     return customButtonColor;
   }
 
-  if (theme.isV3) {
-    if (disabled) {
-      if (isMode('outlined') || isMode('text')) {
-        return 'transparent';
-      }
-
-      return theme.colors.surfaceDisabled;
+  if (disabled) {
+    if (isMode('outlined') || isMode('text')) {
+      return 'transparent';
     }
 
-    if (isMode('elevated')) {
-      return theme.colors.elevation.level1;
-    }
+    return surfaceDisabled;
+  }
 
-    if (isMode('contained')) {
-      return theme.colors.primary;
-    }
-
-    if (isMode('contained-tonal')) {
-      return theme.colors.secondaryContainer;
-    }
+  if (isMode('elevated')) {
+    return elevation.level1;
   }
 
   if (isMode('contained')) {
-    if (disabled) {
-      return color(theme.dark ? white : black)
-        .alpha(0.12)
-        .rgb()
-        .string();
-    }
+    return primary;
+  }
 
-    return theme.colors.primary;
+  if (isMode('contained-tonal')) {
+    return secondaryContainer;
   }
 
   return 'transparent';
@@ -101,85 +92,63 @@ const getButtonTextColor = ({
   backgroundColor: string;
   dark?: boolean;
 }) => {
+  const {
+    colors: { onSurfaceDisabled, primary, onPrimary, onSecondaryContainer },
+  } = theme;
   if (customTextColor && !disabled) {
     return customTextColor;
   }
 
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.onSurfaceDisabled;
-    }
+  if (disabled) {
+    return onSurfaceDisabled;
+  }
 
-    if (typeof dark === 'boolean') {
-      if (
-        isMode('contained') ||
-        isMode('contained-tonal') ||
-        isMode('elevated')
-      ) {
-        return isDark({ dark, backgroundColor }) ? white : black;
-      }
-    }
-
-    if (isMode('outlined') || isMode('text') || isMode('elevated')) {
-      return theme.colors.primary;
-    }
-
-    if (isMode('contained')) {
-      return theme.colors.onPrimary;
-    }
-
-    if (isMode('contained-tonal')) {
-      return theme.colors.onSecondaryContainer;
+  if (typeof dark === 'boolean') {
+    if (
+      isMode('contained') ||
+      isMode('contained-tonal') ||
+      isMode('elevated')
+    ) {
+      return isDark({ dark, backgroundColor })
+        ? MD3Colors.primary100
+        : MD3Colors.primary0;
     }
   }
 
-  if (disabled) {
-    return color(theme.dark ? white : black)
-      .alpha(0.32)
-      .rgb()
-      .string();
+  if (isMode('outlined') || isMode('text') || isMode('elevated')) {
+    return primary;
   }
 
   if (isMode('contained')) {
-    return isDark({ dark, backgroundColor }) ? white : black;
+    return onPrimary;
   }
 
-  return theme.colors.primary;
+  if (isMode('contained-tonal')) {
+    return onSecondaryContainer;
+  }
+
+  return primary;
 };
 
 const getButtonBorderColor = ({ isMode, disabled, theme }: BaseProps) => {
-  if (theme.isV3) {
-    if (disabled && isMode('outlined')) {
-      return theme.colors.surfaceDisabled;
-    }
+  const {
+    colors: { surfaceDisabled, outline },
+  } = theme;
 
-    if (isMode('outlined')) {
-      return theme.colors.outline;
-    }
+  if (disabled && isMode('outlined')) {
+    return surfaceDisabled;
   }
 
   if (isMode('outlined')) {
-    return color(theme.dark ? white : black)
-      .alpha(0.29)
-      .rgb()
-      .string();
+    return outline;
   }
 
   return 'transparent';
 };
 
-const getButtonBorderWidth = ({
-  isMode,
-  theme,
-}: Omit<BaseProps, 'disabled'>) => {
-  if (theme.isV3) {
-    if (isMode('outlined')) {
-      return 1;
-    }
-  }
-
+const getButtonBorderWidth = ({ isMode }: Omit<BaseProps, 'disabled'>) => {
   if (isMode('outlined')) {
-    return StyleSheet.hairlineWidth;
+    return 1;
   }
 
   return 0;

@@ -81,19 +81,22 @@ const TextInputOutlined = ({
 }: ChildTextInputProps) => {
   const adornmentConfig = getAdornmentConfig({ left, right });
 
-  const { colors, isV3, roundness } = theme;
-  const font = isV3 ? theme.fonts.bodyLarge : theme.fonts.regular;
+  const {
+    colors: { background },
+    roundness,
+    fonts: { bodyLarge },
+  } = theme;
   const hasActiveOutline = parentState.focused || error;
 
   const { INPUT_PADDING_HORIZONTAL, MIN_HEIGHT, ADORNMENT_OFFSET, MIN_WIDTH } =
-    getConstants(isV3);
+    getConstants();
 
   const {
     fontSize: fontSizeStyle,
     fontWeight,
     lineHeight: lineHeightStyle,
     height,
-    backgroundColor = colors?.background,
+    backgroundColor = background,
     textAlign,
     ...viewStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
@@ -149,7 +152,7 @@ const TextInputOutlined = ({
   if (isAdornmentLeftIcon) {
     labelTranslationXOffset =
       (I18nManager.getConstants().isRTL ? -1 : 1) *
-      (ADORNMENT_SIZE + ADORNMENT_OFFSET - (isV3 ? 0 : 8));
+      (ADORNMENT_SIZE + ADORNMENT_OFFSET);
   }
 
   const minInputHeight =
@@ -211,9 +214,7 @@ const TextInputOutlined = ({
     : 'transparent';
 
   const labelBackgroundColor: ColorValue =
-    backgroundColor === 'transparent'
-      ? theme.colors.background
-      : backgroundColor;
+    backgroundColor === 'transparent' ? background : backgroundColor;
 
   const labelProps = {
     label,
@@ -224,7 +225,7 @@ const TextInputOutlined = ({
     placeholderStyle,
     baseLabelTranslateY,
     baseLabelTranslateX,
-    font,
+    font: bodyLarge,
     fontSize,
     lineHeight,
     fontWeight,
@@ -254,7 +255,6 @@ const TextInputOutlined = ({
           ? 1
           : 0
         : 1,
-    isV3,
   };
 
   const onLayoutChange = React.useCallback(
@@ -303,7 +303,6 @@ const TextInputOutlined = ({
       rightAffixWidth,
       leftAffixWidth,
       mode: 'outlined',
-      isV3,
     });
   const affixTopPosition = {
     [AdornmentSide.Left]: leftAffixTopPosition,
@@ -331,7 +330,7 @@ const TextInputOutlined = ({
       ...adornmentProps,
       left,
       right,
-      textStyle: { ...font, fontSize, lineHeight, fontWeight },
+      textStyle: { ...bodyLarge, fontSize, lineHeight, fontWeight },
       visible: parentState.labeled,
     };
   }
@@ -344,12 +343,10 @@ const TextInputOutlined = ({
           Otherwise the border will cut off the label on Android
           */}
       <Outline
-        isV3={isV3}
         style={outlineStyle}
         label={label}
         roundness={roundness}
         hasActiveOutline={hasActiveOutline}
-        focused={parentState.focused}
         activeColor={activeColor}
         outlineColor={outlineColor}
         backgroundColor={backgroundColor}
@@ -398,7 +395,7 @@ const TextInputOutlined = ({
             !multiline || (multiline && height) ? { height: inputHeight } : {},
             paddingOut,
             {
-              ...font,
+              ...bodyLarge,
               fontSize,
               lineHeight,
               fontWeight,

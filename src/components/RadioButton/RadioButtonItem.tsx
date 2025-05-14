@@ -165,6 +165,9 @@ const RadioButtonItem = ({
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const {
+    colors: { onSurface, onSurfaceDisabled },
+  } = theme;
   const radioButtonProps = {
     value,
     disabled,
@@ -184,15 +187,9 @@ const RadioButtonItem = ({
     radioButton = <RadioButton {...radioButtonProps} />;
   }
 
-  const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
-  const disabledTextColor = theme.isV3
-    ? theme.colors.onSurfaceDisabled
-    : theme.colors.disabled;
-  const textAlign = isLeading ? 'right' : 'left';
-
   const computedStyle = {
-    color: disabled ? disabledTextColor : textColor,
-    textAlign,
+    color: disabled ? onSurfaceDisabled : onSurface,
+    textAlign: isLeading ? 'right' : 'left',
   } as TextStyle;
 
   return (
@@ -232,12 +229,7 @@ const RadioButtonItem = ({
               {isLeading && radioButton}
               <Text
                 variant={labelVariant}
-                style={[
-                  styles.label,
-                  !theme.isV3 && styles.font,
-                  computedStyle,
-                  labelStyle,
-                ]}
+                style={[styles.label, computedStyle, labelStyle]}
                 maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
               >
                 {label}
@@ -269,8 +261,5 @@ const styles = StyleSheet.create({
   label: {
     flexShrink: 1,
     flexGrow: 1,
-  },
-  font: {
-    fontSize: 16,
   },
 });

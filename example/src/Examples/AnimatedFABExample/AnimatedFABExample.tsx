@@ -29,9 +29,8 @@ const AnimatedFABExample = () => {
 
   const isIOS = Platform.OS === 'ios';
 
-  const [extended, setExtended] = React.useState<boolean>(true);
-  const [visible, setVisible] = React.useState<boolean>(true);
-
+  const [extended, setExtended] = React.useState(true);
+  const [visible, setVisible] = React.useState(true);
   const [controls, setControls] = React.useState<Controls>(initialControls);
 
   const { current: velocity } = React.useRef<Animated.Value>(

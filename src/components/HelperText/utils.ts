@@ -1,5 +1,3 @@
-import color from 'color';
-
 import type { InternalTheme } from '../../types';
 
 type BaseProps = {
@@ -9,22 +7,17 @@ type BaseProps = {
 };
 
 export function getTextColor({ theme, disabled, type }: BaseProps) {
-  const { colors, dark } = theme;
+  const {
+    colors: { error, onSurfaceDisabled, onSurfaceVariant },
+  } = theme;
 
   if (type === 'error') {
-    return colors?.error;
+    return error;
   }
 
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.onSurfaceDisabled;
-    } else {
-      return theme.colors.onSurfaceVariant;
-    }
+  if (disabled) {
+    return onSurfaceDisabled;
   }
 
-  return color(theme?.colors?.text)
-    .alpha(dark ? 0.7 : 0.54)
-    .rgb()
-    .string();
+  return onSurfaceVariant;
 }

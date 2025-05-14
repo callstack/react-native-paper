@@ -94,11 +94,8 @@ exports[`renders chip with close button 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
-              "position": "relative",
-            },
-            {
               "paddingLeft": 0,
+              "position": "relative",
             },
             {
               "paddingRight": 34,
@@ -112,8 +109,6 @@ exports[`renders chip with close button 1`] = `
               {
                 "alignSelf": "center",
                 "padding": 4,
-              },
-              {
                 "paddingLeft": 8,
                 "paddingRight": 0,
               },
@@ -248,9 +243,8 @@ exports[`renders chip with close button 1`] = `
               {
                 "alignSelf": "center",
                 "padding": 4,
-              },
-              {
-                "marginRight": 4,
+                "paddingLeft": 8,
+                "paddingRight": 0,
               },
               {
                 "marginRight": 8,
@@ -389,11 +383,8 @@ exports[`renders chip with custom close button 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
-              "position": "relative",
-            },
-            {
               "paddingLeft": 0,
+              "position": "relative",
             },
             {
               "paddingRight": 34,
@@ -407,8 +398,6 @@ exports[`renders chip with custom close button 1`] = `
               {
                 "alignSelf": "center",
                 "padding": 4,
-              },
-              {
                 "paddingLeft": 8,
                 "paddingRight": 0,
               },
@@ -543,9 +532,8 @@ exports[`renders chip with custom close button 1`] = `
               {
                 "alignSelf": "center",
                 "padding": 4,
-              },
-              {
-                "marginRight": 4,
+                "paddingLeft": 8,
+                "paddingRight": 0,
               },
               {
                 "marginRight": 8,
@@ -684,11 +672,8 @@ exports[`renders chip with icon 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
-              "position": "relative",
-            },
-            {
               "paddingLeft": 0,
+              "position": "relative",
             },
             {
               "paddingRight": 0,
@@ -702,8 +687,6 @@ exports[`renders chip with icon 1`] = `
               {
                 "alignSelf": "center",
                 "padding": 4,
-              },
-              {
                 "paddingLeft": 8,
                 "paddingRight": 0,
               },
@@ -886,11 +869,8 @@ exports[`renders chip with onPress 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
-              "position": "relative",
-            },
-            {
               "paddingLeft": 0,
+              "position": "relative",
             },
             {
               "paddingRight": 0,
@@ -1043,11 +1023,8 @@ exports[`renders outlined disabled chip 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
-              "position": "relative",
-            },
-            {
               "paddingLeft": 0,
+              "position": "relative",
             },
             {
               "paddingRight": 0,
@@ -1200,11 +1177,8 @@ exports[`renders selected chip 1`] = `
             {
               "alignItems": "center",
               "flexDirection": "row",
-              "paddingLeft": 4,
-              "position": "relative",
-            },
-            {
               "paddingLeft": 0,
+              "position": "relative",
             },
             {
               "paddingRight": 0,
@@ -1218,8 +1192,6 @@ exports[`renders selected chip 1`] = `
               {
                 "alignSelf": "center",
                 "padding": 4,
-              },
-              {
                 "paddingLeft": 8,
                 "paddingRight": 0,
               },

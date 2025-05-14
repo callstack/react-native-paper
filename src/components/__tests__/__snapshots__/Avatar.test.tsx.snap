@@ -26,7 +26,7 @@ exports[`renders avatar with icon 1`] = `
     style={
       [
         {
-          "color": "#ffffff",
+          "color": "rgba(255, 255, 255, 1)",
           "fontSize": 38.4,
         },
         [
@@ -55,7 +55,7 @@ exports[`renders avatar with icon and custom background color 1`] = `
   style={
     [
       {
-        "backgroundColor": "#f44336",
+        "backgroundColor": "rgba(220, 54, 46, 1)",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
@@ -76,7 +76,7 @@ exports[`renders avatar with icon and custom background color 1`] = `
     style={
       [
         {
-          "color": "#ffffff",
+          "color": "rgba(255, 255, 255, 1)",
           "fontSize": 38.4,
         },
         [
@@ -172,7 +172,7 @@ exports[`renders avatar with text 1`] = `
             "textAlignVertical": "center",
           },
           {
-            "color": "#ffffff",
+            "color": "rgba(255, 255, 255, 1)",
             "fontSize": 32,
             "lineHeight": 64,
           },
@@ -191,7 +191,7 @@ exports[`renders avatar with text and custom background color 1`] = `
   style={
     [
       {
-        "backgroundColor": "#f44336",
+        "backgroundColor": "rgba(220, 54, 46, 1)",
         "borderRadius": 32,
         "height": 64,
         "width": 64,
@@ -226,7 +226,7 @@ exports[`renders avatar with text and custom background color 1`] = `
             "textAlignVertical": "center",
           },
           {
-            "color": "#ffffff",
+            "color": "rgba(255, 255, 255, 1)",
             "fontSize": 32,
             "lineHeight": 64,
           },
@@ -334,7 +334,7 @@ exports[`renders avatar with text and custom size 1`] = `
             "textAlignVertical": "center",
           },
           {
-            "color": "#ffffff",
+            "color": "rgba(255, 255, 255, 1)",
             "fontSize": 48,
             "lineHeight": 96,
           },

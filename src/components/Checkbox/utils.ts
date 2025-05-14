@@ -9,15 +9,15 @@ const getAndroidCheckedColor = ({
   theme: InternalTheme;
   customColor?: string;
 }) => {
+  const {
+    colors: { primary },
+  } = theme;
+
   if (customColor) {
     return customColor;
   }
 
-  if (theme.isV3) {
-    return theme.colors.primary;
-  }
-
-  return theme.colors.accent;
+  return primary;
 };
 
 const getAndroidUncheckedColor = ({
@@ -27,19 +27,15 @@ const getAndroidUncheckedColor = ({
   theme: InternalTheme;
   customUncheckedColor?: string;
 }) => {
+  const {
+    colors: { onSurfaceVariant },
+  } = theme;
+
   if (customUncheckedColor) {
     return customUncheckedColor;
   }
 
-  if (theme.isV3) {
-    return theme.colors.onSurfaceVariant;
-  }
-
-  if (theme.dark) {
-    return color(theme.colors.text).alpha(0.7).rgb().string();
-  }
-
-  return color(theme.colors.text).alpha(0.54).rgb().string();
+  return onSurfaceVariant;
 };
 
 const getAndroidRippleColor = ({
@@ -51,11 +47,12 @@ const getAndroidRippleColor = ({
   checkedColor: string;
   disabled?: boolean;
 }) => {
+  const {
+    colors: { onSurface },
+  } = theme;
+
   if (disabled) {
-    if (theme.isV3) {
-      return color(theme.colors.onSurface).alpha(0.16).rgb().string();
-    }
-    return color(theme.colors.text).alpha(0.16).rgb().string();
+    return color(onSurface).alpha(0.16).rgb().string();
   }
 
   return color(checkedColor).fade(0.32).rgb().string();
@@ -74,11 +71,12 @@ const getAndroidControlColor = ({
   uncheckedColor: string;
   disabled?: boolean;
 }) => {
+  const {
+    colors: { onSurfaceDisabled },
+  } = theme;
+
   if (disabled) {
-    if (theme.isV3) {
-      return theme.colors.onSurfaceDisabled;
-    }
-    return theme.colors.disabled;
+    return onSurfaceDisabled;
   }
 
   if (checked) {
@@ -126,22 +124,19 @@ const getIOSCheckedColor = ({
   customColor?: string;
   disabled?: boolean;
 }) => {
+  const {
+    colors: { onSurfaceDisabled, primary },
+  } = theme;
+
   if (disabled) {
-    if (theme.isV3) {
-      return theme.colors.onSurfaceDisabled;
-    }
-    return theme.colors.disabled;
+    return onSurfaceDisabled;
   }
 
   if (customColor) {
     return customColor;
   }
 
-  if (theme.isV3) {
-    return theme.colors.primary;
-  }
-
-  return theme.colors.accent;
+  return primary;
 };
 
 const getIOSRippleColor = ({
@@ -153,11 +148,12 @@ const getIOSRippleColor = ({
   checkedColor: string;
   disabled?: boolean;
 }) => {
+  const {
+    colors: { onSurface },
+  } = theme;
+
   if (disabled) {
-    if (theme.isV3) {
-      return color(theme.colors.onSurface).alpha(0.16).rgb().string();
-    }
-    return color(theme.colors.text).alpha(0.16).rgb().string();
+    return color(onSurface).alpha(0.16).rgb().string();
   }
   return color(checkedColor).fade(0.32).rgb().string();
 };

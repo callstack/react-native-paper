@@ -55,13 +55,6 @@ export { default as ToggleButton } from './components/ToggleButton';
 export { default as SegmentedButtons } from './components/SegmentedButtons/SegmentedButtons';
 export { default as Tooltip } from './components/Tooltip/Tooltip';
 
-export {
-  Caption,
-  Headline,
-  Paragraph,
-  Subheading,
-  Title,
-} from './components/Typography/v2';
 export { default as Text, customText } from './components/Typography/Text';
 
 // Types
@@ -141,11 +134,6 @@ export type { Props as ToggleButtonProps } from './components/ToggleButton/Toggl
 export type { Props as ToggleButtonGroupProps } from './components/ToggleButton/ToggleButtonGroup';
 export type { Props as ToggleButtonRowProps } from './components/ToggleButton/ToggleButtonRow';
 export type { Props as TouchableRippleProps } from './components/TouchableRipple/TouchableRipple';
-export type { Props as CaptionProps } from './components/Typography/v2/Caption';
-export type { Props as HeadlineProps } from './components/Typography/v2/Headline';
-export type { Props as ParagraphProps } from './components/Typography/v2/Paragraph';
-export type { Props as SubheadingProps } from './components/Typography/v2/Subheading';
-export type { Props as TitleProps } from './components/Typography/v2/Title';
 export type { Props as TextProps } from './components/Typography/Text';
 export type { Props as SegmentedButtonsProps } from './components/SegmentedButtons/SegmentedButtons';
 export type { Props as ListImageProps } from './components/List/ListImage';

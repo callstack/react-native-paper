@@ -70,7 +70,9 @@ it('renders menu with content styles', () => {
 
 ([0, 1, 2, 3, 4, 5] as MD3Elevation[]).forEach((elevation) =>
   it(`renders menu with background color based on elevation value = ${elevation}`, () => {
-    const theme = getTheme(false, true);
+    const {
+      colors: { elevation: elevationColors },
+    } = getTheme();
 
     const { getByTestId } = render(
       <Portal.Host>
@@ -87,7 +89,7 @@ it('renders menu with content styles', () => {
     );
 
     expect(getByTestId('menu-surface')).toHaveStyle({
-      backgroundColor: theme.colors.elevation[ELEVATION_LEVELS_MAP[elevation]],
+      backgroundColor: elevationColors[ELEVATION_LEVELS_MAP[elevation]],
     });
   })
 );

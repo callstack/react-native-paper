@@ -199,7 +199,7 @@ const Button = (
     delayLongPress,
     style,
     theme: themeOverrides,
-    uppercase: uppercaseProp,
+    uppercase = false,
     contentStyle,
     labelStyle,
     testID = 'button',
@@ -212,14 +212,18 @@ const Button = (
   ref: React.ForwardedRef<View>
 ) => {
   const theme = useInternalTheme(themeOverrides);
+  const {
+    roundness,
+    animation,
+    fonts: { labelLarge },
+  } = theme;
+
   const isMode = React.useCallback(
     (modeToCompare: ButtonMode) => {
       return mode === modeToCompare;
     },
     [mode]
   );
-  const { roundness, isV3, animation } = theme;
-  const uppercase = uppercaseProp ?? !theme.isV3;
   const isWeb = Platform.OS === 'web';
 
   const hasPassedTouchHandler = hasTouchHandler({
@@ -229,10 +233,9 @@ const Button = (
     onLongPress,
   });
 
-  const isElevationEntitled =
-    !disabled && (isV3 ? isMode('elevated') : isMode('contained'));
-  const initialElevation = isV3 ? 1 : 2;
-  const activeElevation = isV3 ? 2 : 8;
+  const isElevationEntitled = !disabled && isMode('elevated');
+  const initialElevation = 1;
+  const activeElevation = 2;
 
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(isElevationEntitled ? initialElevation : 0)
@@ -250,7 +253,7 @@ const Button = (
 
   const handlePressIn = (e: GestureResponderEvent) => {
     onPressIn?.(e);
-    if (isV3 ? isMode('elevated') : isMode('contained')) {
+    if (isMode('elevated')) {
       const { scale } = animation;
       Animated.timing(elevation, {
         toValue: activeElevation,
@@ -263,7 +266,7 @@ const Button = (
 
   const handlePressOut = (e: GestureResponderEvent) => {
     onPressOut?.(e);
-    if (isV3 ? isMode('elevated') : isMode('contained')) {
+    if (isMode('elevated')) {
       const { scale } = animation;
       Animated.timing(elevation, {
         toValue: initialElevation,
@@ -280,8 +283,8 @@ const Button = (
     (style) => style.startsWith('border') && style.endsWith('Radius')
   );
 
-  const borderRadius = (isV3 ? 5 : 1) * roundness;
-  const iconSize = isV3 ? 18 : 16;
+  const borderRadius = 5 * roundness;
+  const iconSize = 18;
 
   const { backgroundColor, borderColor, textColor, borderWidth } =
     getButtonColors({
@@ -311,27 +314,23 @@ const Button = (
   const { color: customLabelColor, fontSize: customLabelSize } =
     StyleSheet.flatten(labelStyle) || {};
 
-  const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
-
   const textStyle = {
     color: textColor,
-    ...font,
+    ...labelLarge,
   };
 
   const iconStyle =
     StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
       ? [
           styles.iconReverse,
-          isV3 && styles[`md3IconReverse${compact ? 'Compact' : ''}`],
-          isV3 &&
-            isMode('text') &&
+          styles[`md3IconReverse${compact ? 'Compact' : ''}`],
+          isMode('text') &&
             styles[`md3IconReverseTextMode${compact ? 'Compact' : ''}`],
         ]
       : [
           styles.icon,
-          isV3 && styles[`md3Icon${compact ? 'Compact' : ''}`],
-          isV3 &&
-            isMode('text') &&
+          styles[`md3Icon${compact ? 'Compact' : ''}`],
+          isMode('text') &&
             styles[`md3IconTextMode${compact ? 'Compact' : ''}`],
         ];
 
@@ -346,10 +345,9 @@ const Button = (
           compact && styles.compact,
           buttonStyle,
           style,
-          !isV3 && !disabled && { elevation },
         ] as Animated.WithAnimatedValue<StyleProp<ViewStyle>>
       }
-      {...(isV3 && { elevation: elevation })}
+      elevation={elevation}
     >
       <TouchableRipple
         borderless
@@ -404,13 +402,11 @@ const Button = (
             testID={`${testID}-text`}
             style={[
               styles.label,
-              !isV3 && styles.md2Label,
-              isV3 &&
-                (isMode('text')
-                  ? icon || loading
-                    ? styles.md3LabelTextAddons
-                    : styles.md3LabelText
-                  : styles.md3Label),
+              isMode('text')
+                ? icon || loading
+                  ? styles.md3LabelTextAddons
+                  : styles.md3LabelText
+                : styles.md3Label,
               compact && styles.compactLabel,
               uppercase && styles.uppercaseLabel,
               textStyle,
@@ -485,9 +481,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: 9,
     marginHorizontal: 16,
-  },
-  md2Label: {
-    letterSpacing: 1,
   },
   compactLabel: {
     marginHorizontal: 8,

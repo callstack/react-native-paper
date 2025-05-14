@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  Platform,
   StyleProp,
   StyleSheet,
   View,
@@ -9,12 +8,9 @@ import {
   ColorValue,
 } from 'react-native';
 
-import color from 'color';
-
 import AppbarContent from './AppbarContent';
 import {
   AppbarModes,
-  DEFAULT_APPBAR_HEIGHT,
   getAppbarBackgroundColor,
   modeAppbarHeight,
   renderAppbarContent,
@@ -165,11 +161,10 @@ const Appbar = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { isV3 } = theme;
   const flattenedStyle = StyleSheet.flatten(style);
   const {
     backgroundColor: customBackground,
-    elevation = isV3 ? (elevated ? 2 : 0) : 4,
+    elevation = elevated ? 2 : 0,
     ...restStyle
   } = (flattenedStyle || {}) as Exclude<typeof flattenedStyle, number> & {
     elevation?: number;
@@ -178,34 +173,26 @@ const Appbar = ({
 
   const backgroundColor = getAppbarBackgroundColor(
     theme,
-    elevation,
     customBackground,
     elevated
   );
 
   const isMode = (modeToCompare: AppbarModes) => {
-    return isV3 && mode === modeToCompare;
+    return mode === modeToCompare;
   };
 
   let isDark = false;
 
   if (typeof dark === 'boolean') {
     isDark = dark;
-  } else if (!isV3) {
-    isDark =
-      backgroundColor === 'transparent'
-        ? false
-        : typeof backgroundColor === 'string'
-        ? !color(backgroundColor).isLight()
-        : true;
   }
 
-  const isV3CenterAlignedMode = isV3 && isMode('center-aligned');
+  const isCenterAlignedMode = isMode('center-aligned');
 
   let shouldCenterContent = false;
   let shouldAddLeftSpacing = false;
   let shouldAddRightSpacing = false;
-  if ((!isV3 && Platform.OS === 'ios') || isV3CenterAlignedMode) {
+  if (isCenterAlignedMode) {
     let hasAppbarContent = false;
     let leftItemsCount = 0;
     let rightItemsCount = 0;
@@ -225,14 +212,12 @@ const Appbar = ({
     });
 
     shouldCenterContent =
-      hasAppbarContent &&
-      leftItemsCount < 2 &&
-      rightItemsCount < (isV3 ? 3 : 2);
+      hasAppbarContent && leftItemsCount < 2 && rightItemsCount < 3;
     shouldAddLeftSpacing = shouldCenterContent && leftItemsCount === 0;
     shouldAddRightSpacing = shouldCenterContent && rightItemsCount === 0;
   }
 
-  const spacingStyle = isV3 ? styles.v3Spacing : styles.spacing;
+  const spacingStyle = styles.v3Spacing;
 
   const insets = {
     paddingBottom: safeAreaInsets?.bottom,
@@ -247,26 +232,24 @@ const Appbar = ({
         { backgroundColor },
         styles.appbar,
         {
-          height: isV3 ? modeAppbarHeight[mode] : DEFAULT_APPBAR_HEIGHT,
+          height: modeAppbarHeight[mode],
         },
         insets,
         restStyle,
-        !theme.isV3 && { elevation },
       ]}
       elevation={elevation as MD3Elevation}
       {...rest}
     >
       {shouldAddLeftSpacing ? <View style={spacingStyle} /> : null}
-      {(!isV3 || isMode('small') || isMode('center-aligned')) && (
+      {(isMode('small') || isMode('center-aligned')) && (
         <>
           {/* Render only the back action at first place  */}
           {renderAppbarContent({
             children,
             isDark,
             theme,
-            isV3,
             renderOnly: ['Appbar.BackAction'],
-            shouldCenterContent: isV3CenterAlignedMode || shouldCenterContent,
+            shouldCenterContent: isCenterAlignedMode || shouldCenterContent,
           })}
           {/* Render the rest of the content except the back action */}
           {renderAppbarContent({
@@ -277,9 +260,8 @@ const Appbar = ({
             ],
             isDark,
             theme,
-            isV3,
             renderExcept: ['Appbar.BackAction'],
-            shouldCenterContent: isV3CenterAlignedMode || shouldCenterContent,
+            shouldCenterContent: isCenterAlignedMode || shouldCenterContent,
           })}
         </>
       )}
@@ -296,14 +278,12 @@ const Appbar = ({
             {renderAppbarContent({
               children,
               isDark,
-              isV3,
               renderOnly: ['Appbar.BackAction'],
               mode,
             })}
             {renderAppbarContent({
               children: filterAppbarActions(children, true),
               isDark,
-              isV3,
               renderOnly: ['Appbar.Action'],
               mode,
             })}
@@ -312,7 +292,6 @@ const Appbar = ({
               {renderAppbarContent({
                 children: filterAppbarActions(children),
                 isDark,
-                isV3,
                 renderExcept: [
                   'Appbar',
                   'Appbar.BackAction',
@@ -326,7 +305,6 @@ const Appbar = ({
           {renderAppbarContent({
             children,
             isDark,
-            isV3,
             renderOnly: ['Appbar.Content'],
             mode,
           })}
@@ -342,9 +320,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 4,
-  },
-  spacing: {
-    width: 48,
   },
   v3Spacing: {
     width: 52,

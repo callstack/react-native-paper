@@ -21,12 +21,8 @@ export type Props = {
 };
 
 const PaperProvider = (props: Props) => {
-  const isOnlyVersionInTheme =
-    props.theme && Object.keys(props.theme).length === 1 && props.theme.version;
-
   const colorSchemeName =
-    ((!props.theme || isOnlyVersionInTheme) && Appearance?.getColorScheme()) ||
-    'light';
+    (!props.theme && Appearance?.getColorScheme()) || 'light';
 
   const [reduceMotionEnabled, setReduceMotionEnabled] =
     React.useState<boolean>(false);
@@ -59,13 +55,13 @@ const PaperProvider = (props: Props) => {
 
   React.useEffect(() => {
     let appearanceSubscription: NativeEventSubscription | undefined;
-    if (!props.theme || isOnlyVersionInTheme) {
+    if (!props.theme) {
       appearanceSubscription = Appearance?.addChangeListener(
         handleAppearanceChange
       ) as NativeEventSubscription | undefined;
     }
     return () => {
-      if (!props.theme || isOnlyVersionInTheme) {
+      if (!props.theme) {
         if (appearanceSubscription) {
           appearanceSubscription.remove();
         } else {
@@ -74,7 +70,7 @@ const PaperProvider = (props: Props) => {
         }
       }
     };
-  }, [props.theme, isOnlyVersionInTheme]);
+  }, [props.theme]);
 
   const theme = React.useMemo(() => {
     const scheme = colorScheme || 'light';
@@ -91,8 +87,6 @@ const PaperProvider = (props: Props) => {
 
     return {
       ...extendedThemeBase,
-      // TODO: Remove it completely
-      isV3: true,
     };
   }, [colorScheme, props.theme, reduceMotionEnabled]);
 

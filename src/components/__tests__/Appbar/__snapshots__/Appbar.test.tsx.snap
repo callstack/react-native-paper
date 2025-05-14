@@ -683,7 +683,6 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                   "letterSpacing": 0,
                   "lineHeight": 28,
                 },
-                false,
                 undefined,
               ],
             ],

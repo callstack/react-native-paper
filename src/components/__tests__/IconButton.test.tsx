@@ -5,7 +5,7 @@ import { act, render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
-import { pink500 } from '../../styles/themes/v2/colors';
+import { MD3Colors } from '../../styles/themes/v3/tokens';
 import IconButton from '../IconButton/IconButton';
 import { getIconButtonColor } from '../IconButton/utils';
 
@@ -26,7 +26,7 @@ it('renders icon button by default', () => {
 
 it('renders icon button with color', () => {
   const tree = render(
-    <IconButton icon="camera" iconColor={pink500} />
+    <IconButton icon="camera" iconColor={MD3Colors.tertiary50} />
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -190,16 +190,6 @@ describe('getIconButtonColor - icon color', () => {
       iconColor: getTheme().colors.primary,
     });
   });
-
-  it('should return theme icon color, for theme version 2', () => {
-    expect(
-      getIconButtonColor({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      iconColor: getTheme(false, false).colors.text,
-    });
-  });
 });
 
 describe('getIconButtonColor - background color', () => {
@@ -316,16 +306,6 @@ describe('getIconButtonColor - border color', () => {
       borderColor: getTheme().colors.outline,
     });
   });
-
-  it('should return undefined, for theme version 2', () => {
-    expect(
-      getIconButtonColor({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      borderColor: undefined,
-    });
-  });
 });
 
 describe('getIconButtonColor - ripple color', () => {
@@ -337,19 +317,6 @@ describe('getIconButtonColor - ripple color', () => {
     ).toMatchObject({
       rippleColor: color(getTheme().colors.onSurfaceVariant)
         .alpha(0.12)
-        .rgb()
-        .string(),
-    });
-  });
-
-  it('should return theme color, for theme version 2', () => {
-    expect(
-      getIconButtonColor({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme(false, false).colors.text)
-        .alpha(0.32)
         .rgb()
         .string(),
     });

@@ -182,9 +182,6 @@ exports[`allows customizing Route's type via generics 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -205,15 +202,10 @@ exports[`allows customizing Route's type via generics 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -248,9 +240,6 @@ exports[`allows customizing Route's type via generics 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -269,9 +258,6 @@ exports[`allows customizing Route's type via generics 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -325,7 +311,6 @@ exports[`allows customizing Route's type via generics 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -486,9 +471,6 @@ exports[`allows customizing Route's type via generics 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -509,15 +491,10 @@ exports[`allows customizing Route's type via generics 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -535,9 +512,6 @@ exports[`allows customizing Route's type via generics 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -556,9 +530,6 @@ exports[`allows customizing Route's type via generics 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -612,7 +583,6 @@ exports[`allows customizing Route's type via generics 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -927,9 +897,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -951,15 +918,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -994,9 +956,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -1045,9 +1004,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -1160,9 +1116,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -1184,15 +1137,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -1210,9 +1158,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -1261,9 +1206,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -1376,9 +1318,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -1400,15 +1339,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -1426,9 +1360,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -1477,9 +1408,6 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -1746,9 +1674,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -1770,15 +1695,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -1813,9 +1733,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -1972,9 +1889,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -1996,15 +1910,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -2022,9 +1931,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -2181,9 +2087,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -2205,15 +2108,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -2231,9 +2129,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -2700,9 +2595,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -2723,15 +2615,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -2766,9 +2653,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -2817,9 +2701,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -2903,7 +2784,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -3064,9 +2944,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -3087,15 +2964,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -3113,9 +2985,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -3164,9 +3033,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -3250,7 +3116,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -3411,9 +3276,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -3434,15 +3296,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -3460,9 +3317,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -3511,9 +3365,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -3597,7 +3448,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -3758,9 +3608,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -3781,15 +3628,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -3807,9 +3649,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -3858,9 +3697,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -3944,7 +3780,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -4105,9 +3940,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -4128,15 +3960,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -4154,9 +3981,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -4205,9 +4029,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -4291,7 +4112,6 @@ exports[`renders bottom navigation with getLazy 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -4602,9 +4422,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -4788,7 +4605,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -4885,9 +4701,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -5054,7 +4867,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -5151,9 +4963,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -5320,7 +5129,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -5417,9 +5225,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -5586,7 +5391,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -5683,9 +5487,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -5852,7 +5653,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -6103,9 +5903,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -6126,15 +5923,10 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -6169,9 +5961,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -6190,9 +5979,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -6246,7 +6032,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -6334,9 +6119,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -6357,15 +6139,10 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -6383,9 +6160,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -6404,9 +6178,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -6460,7 +6231,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -6548,9 +6318,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -6571,15 +6338,10 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -6597,9 +6359,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -6618,9 +6377,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -6674,7 +6430,6 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -6916,9 +6671,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -7042,7 +6794,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -7103,9 +6854,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -7212,7 +6960,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -7273,9 +7020,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -7382,7 +7126,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -7443,9 +7186,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -7552,7 +7292,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -7613,9 +7352,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -7722,7 +7458,6 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -7937,9 +7672,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -7960,15 +7692,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -8003,9 +7730,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -8054,9 +7778,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -8140,7 +7861,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -8301,9 +8021,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -8324,15 +8041,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -8350,9 +8062,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -8401,9 +8110,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -8487,7 +8193,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -8648,9 +8353,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -8671,15 +8373,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -8697,9 +8394,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -8748,9 +8442,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -8834,7 +8525,6 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -9149,9 +8839,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -9335,7 +9022,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -9432,9 +9118,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -9601,7 +9284,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -9698,9 +9380,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -9867,7 +9546,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -10118,9 +9796,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -10141,15 +9816,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -10184,9 +9854,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -10235,9 +9902,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -10321,7 +9985,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -10482,9 +10145,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -10505,15 +10165,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -10531,9 +10186,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -10582,9 +10234,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -10668,7 +10317,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -10829,9 +10477,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -10852,15 +10497,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                   [
                     {
                       "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
                       "height": 32,
                       "justifyContent": "center",
                       "marginBottom": 4,
+                      "marginHorizontal": 12,
                       "marginTop": 0,
                       "width": 32,
                     },
@@ -10878,9 +10518,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -10929,9 +10566,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                         "left": 0,
                         "position": "absolute",
                         "right": 0,
-                        "top": 0,
-                      },
-                      {
                         "top": 4,
                       },
                       {
@@ -11015,7 +10649,6 @@ exports[`renders non-shifting bottom navigation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -11330,9 +10963,6 @@ exports[`renders shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -11516,7 +11146,6 @@ exports[`renders shifting bottom navigation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -11613,9 +11242,6 @@ exports[`renders shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -11782,7 +11408,6 @@ exports[`renders shifting bottom navigation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -11879,9 +11504,6 @@ exports[`renders shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -12048,7 +11670,6 @@ exports[`renders shifting bottom navigation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -12145,9 +11766,6 @@ exports[`renders shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -12314,7 +11932,6 @@ exports[`renders shifting bottom navigation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >
@@ -12411,9 +12028,6 @@ exports[`renders shifting bottom navigation 1`] = `
               [
                 {
                   "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
                   "paddingVertical": 0,
                 },
               ]
@@ -12580,7 +12194,6 @@ exports[`renders shifting bottom navigation 1`] = `
                       "height": 16,
                       "paddingBottom": 2,
                     },
-                    false,
                   ]
                 }
               >

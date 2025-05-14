@@ -34,25 +34,20 @@ export type Style = {
 
 export const getLeftStyles = (
   alignToTop: boolean,
-  description: Description,
-  isV3: boolean
-) => {
+  description: Description
+): Style => {
   const stylesV3 = {
     marginRight: 0,
     marginLeft: 16,
-    alignSelf: alignToTop ? 'flex-start' : 'center',
+    alignSelf: (alignToTop ? 'flex-start' : 'center') as FlexAlignType,
   };
 
   if (!description) {
     return {
       ...styles.iconMarginLeft,
       ...styles.marginVerticalNone,
-      ...(isV3 && { ...stylesV3 }),
+      ...stylesV3,
     };
-  }
-
-  if (!isV3) {
-    return styles.iconMarginLeft;
   }
 
   return {
@@ -63,24 +58,19 @@ export const getLeftStyles = (
 
 export const getRightStyles = (
   alignToTop: boolean,
-  description: Description,
-  isV3: boolean
-) => {
+  description: Description
+): Style => {
   const stylesV3 = {
     marginLeft: 16,
-    alignSelf: alignToTop ? 'flex-start' : 'center',
+    alignSelf: (alignToTop ? 'flex-start' : 'center') as FlexAlignType,
   };
 
   if (!description) {
     return {
       ...styles.iconMarginRight,
       ...styles.marginVerticalNone,
-      ...(isV3 && { ...stylesV3 }),
+      ...stylesV3,
     };
-  }
-
-  if (!isV3) {
-    return styles.iconMarginRight;
   }
 
   return {
@@ -104,22 +94,16 @@ export const getAccordionColors = ({
   isExpanded?: boolean;
   customRippleColor?: ColorValue;
 }) => {
-  const titleColor = theme.isV3
-    ? theme.colors.onSurface
-    : color(theme.colors.text).alpha(0.87).rgb().string();
+  const {
+    colors: { onSurfaceVariant, primary, onSurface },
+  } = theme;
 
-  const descriptionColor = theme.isV3
-    ? theme.colors.onSurfaceVariant
-    : color(theme.colors.text).alpha(0.54).rgb().string();
-
-  const titleTextColor = isExpanded ? theme.colors?.primary : titleColor;
-
+  const titleTextColor = isExpanded ? primary : onSurface;
   const rippleColor =
     customRippleColor || color(titleTextColor).alpha(0.12).rgb().string();
 
   return {
-    titleColor,
-    descriptionColor,
+    descriptionColor: onSurfaceVariant,
     titleTextColor,
     rippleColor,
   };

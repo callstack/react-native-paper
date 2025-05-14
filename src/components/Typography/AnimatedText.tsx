@@ -46,15 +46,18 @@ const AnimatedText = forwardRef<Text & HTMLElement, Props<never>>(
     { style, theme: themeOverrides, variant, ...rest },
     ref
   ) {
-    const theme = useInternalTheme(themeOverrides);
+    const {
+      fonts,
+      colors: { onSurface },
+    } = useInternalTheme(themeOverrides);
     const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
 
-    if (theme.isV3 && variant) {
-      const font = theme.fonts[variant];
+    if (variant) {
+      const font = fonts[variant];
       if (typeof font !== 'object') {
         throw new Error(
           `Variant ${variant} was not provided properly. Valid variants are ${Object.keys(
-            theme.fonts
+            fonts
           ).join(', ')}.`
         );
       }
@@ -66,16 +69,15 @@ const AnimatedText = forwardRef<Text & HTMLElement, Props<never>>(
           style={[
             font,
             styles.text,
-            { writingDirection, color: theme.colors.onSurface },
+            { writingDirection, color: onSurface },
             style,
           ]}
         />
       );
     } else {
-      const font = !theme.isV3 ? theme.fonts.regular : theme.fonts.bodyMedium;
       const textStyle = {
-        ...font,
-        color: theme.isV3 ? theme.colors.onSurface : theme.colors.text,
+        ...fonts.bodyMedium,
+        color: onSurface,
       };
       return (
         <Animated.Text
