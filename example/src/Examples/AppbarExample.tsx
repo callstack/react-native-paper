@@ -46,9 +46,6 @@ const AppbarExample = ({ navigation }: Props) => {
       header: () => (
         <Appbar.Header
           style={showCustomColor ? styles.customColor : null}
-          theme={{
-            mode: 'adaptive',
-          }}
           mode={appbarMode}
           elevated={showElevated}
         >
@@ -171,7 +168,6 @@ const AppbarExample = ({ navigation }: Props) => {
           },
         ]}
         safeAreaInsets={{ bottom, left, right }}
-        theme={{ mode: 'adaptive' }}
       >
         <Appbar.Action icon="archive" onPress={() => {}} />
         <Appbar.Action icon="email" onPress={() => {}} />
