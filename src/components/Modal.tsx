@@ -159,7 +159,7 @@ function Modal({
     if (subscription.current?.remove) {
       subscription.current?.remove();
     } else {
-      BackHandler.removeEventListener('hardwareBackPress', handleBack);
+      BackHandler.removeEventListener?.('hardwareBackPress', handleBack);
     }
   };
 
