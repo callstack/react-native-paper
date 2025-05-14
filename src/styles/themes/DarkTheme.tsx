@@ -9,7 +9,6 @@ const { palette, opacity } = tokens.md.ref;
 export const DarkTheme: Theme = {
   ...LightTheme,
   dark: true,
-  mode: 'adaptive',
   colors: {
     primary: palette.primary80,
     primaryContainer: palette.primary30,
