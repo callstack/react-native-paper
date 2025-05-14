@@ -21,7 +21,7 @@ export function addEventListener<
         return;
       }
 
-      Module.removeEventListener(eventName, handler);
+      Module.removeEventListener?.(eventName, handler);
       removed = true;
     },
   };
@@ -45,7 +45,7 @@ export function addListener<
         return;
       }
 
-      Module.removeEventListener(eventName, handler);
+      Module.removeEventListener?.(eventName, handler);
       removed = true;
     },
   };
