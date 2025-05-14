@@ -4,7 +4,6 @@ import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import type { ThemeProp } from 'src/types';
 
 import { DialogActionChildProps } from './utils';
-import { useInternalTheme } from '../../core/theming';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -47,21 +46,17 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const DialogActions = (props: Props) => {
-  const { isV3 } = useInternalTheme(props.theme);
   const actionsLength = React.Children.toArray(props.children).length;
 
   return (
-    <View
-      {...props}
-      style={[isV3 ? styles.v3Container : styles.container, props.style]}
-    >
+    <View {...props} style={[styles.v3Container, props.style]}>
       {React.Children.map(props.children, (child, i) =>
         React.isValidElement<DialogActionChildProps>(child)
           ? React.cloneElement(child, {
               compact: true,
-              uppercase: !isV3,
+              uppercase: false,
               style: [
-                isV3 && {
+                {
                   marginRight: i + 1 === actionsLength ? 0 : 8,
                 },
                 child.props.style,
@@ -76,12 +71,6 @@ const DialogActions = (props: Props) => {
 DialogActions.displayName = 'Dialog.Actions';
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: 8,
-  },
   v3Container: {
     flexDirection: 'row',
     flexGrow: 1,

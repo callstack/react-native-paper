@@ -252,8 +252,9 @@ const Surface = forwardRef<View, Props>(
     ref
   ) => {
     const theme = useInternalTheme(overridenTheme);
-
-    const { colors } = theme;
+    const {
+      colors: { elevation: elevationColors },
+    } = theme;
 
     const inputRange = [0, 1, 2, 3, 4, 5];
 
@@ -262,12 +263,12 @@ const Surface = forwardRef<View, Props>(
         return elevation.interpolate({
           inputRange,
           outputRange: inputRange.map((elevation) => {
-            return colors.elevation?.[`level${elevation as MD3Elevation}`];
+            return elevationColors?.[`level${elevation as MD3Elevation}`];
           }),
         });
       }
 
-      return colors.elevation?.[`level${elevation}`];
+      return elevationColors?.[`level${elevation}`];
     })();
 
     const isElevated = mode === 'elevated';
@@ -282,7 +283,7 @@ const Surface = forwardRef<View, Props>(
           testID={testID}
           style={[
             { backgroundColor },
-            elevation && isElevated ? shadow(elevation, theme.isV3) : null,
+            elevation && isElevated ? shadow(elevation) : null,
             style,
           ]}
         >

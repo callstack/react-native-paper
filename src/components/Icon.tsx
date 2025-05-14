@@ -108,7 +108,9 @@ const Icon = ({
   testID,
   ...rest
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
+  const {
+    colors: { onSurface },
+  } = useInternalTheme(themeOverrides);
   const direction =
     typeof source === 'object' && source.direction && source.source
       ? source.direction === 'auto'
@@ -122,8 +124,7 @@ const Icon = ({
     typeof source === 'object' && source.direction && source.source
       ? source.source
       : source;
-  const iconColor =
-    color || (theme.isV3 ? theme.colors.onSurface : theme.colors.text);
+  const iconColor = color || onSurface;
 
   if (isImageSource(s)) {
     return (

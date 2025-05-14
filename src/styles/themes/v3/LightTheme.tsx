@@ -9,8 +9,6 @@ const { palette, opacity } = tokens.md.ref;
 export const MD3LightTheme: MD3Theme = {
   dark: false,
   roundness: 4,
-  version: 3,
-  isV3: true,
   colors: {
     primary: palette.primary40,
     primaryContainer: palette.primary90,

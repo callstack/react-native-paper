@@ -18,7 +18,7 @@ import useLatestCallback from 'use-latest-callback';
 
 import { ChipAvatarProps, getChipColors } from './helpers';
 import { useInternalTheme } from '../../core/theming';
-import { white } from '../../styles/themes/v2/colors';
+import { MD3Colors } from '../../styles/themes/v3/tokens';
 import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import type { IconSource } from '../Icon';
@@ -212,11 +212,16 @@ const Chip = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { isV3, roundness } = theme;
+  const {
+    animation: { scale },
+    fonts: { labelLarge },
+    colors: { primary },
+  } = theme;
+  const { roundness } = theme;
   const isWeb = Platform.OS === 'web';
 
   const { current: elevation } = React.useRef<Animated.Value>(
-    new Animated.Value(isV3 && elevated ? 1 : 0)
+    new Animated.Value(elevated ? 1 : 0)
   );
 
   const hasPassedTouchHandler = hasTouchHandler({
@@ -229,10 +234,9 @@ const Chip = ({
   const isOutlined = mode === 'outlined';
 
   const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
-    const { scale } = theme.animation;
     onPressIn?.(e);
     Animated.timing(elevation, {
-      toValue: isV3 ? (elevated ? 2 : 0) : 4,
+      toValue: elevated ? 2 : 0,
       duration: 200 * scale,
       useNativeDriver:
         isWeb || Platform.constants.reactNativeVersion.minor <= 72,
@@ -240,19 +244,18 @@ const Chip = ({
   });
 
   const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
-    const { scale } = theme.animation;
     onPressOut?.(e);
     Animated.timing(elevation, {
-      toValue: isV3 && elevated ? 1 : 0,
+      toValue: elevated ? 1 : 0,
       duration: 150 * scale,
       useNativeDriver:
         isWeb || Platform.constants.reactNativeVersion.minor <= 72,
     }).start();
   });
 
-  const opacity = isV3 ? 0.38 : 0.26;
-  const defaultBorderRadius = roundness * (isV3 ? 2 : 4);
-  const iconSize = isV3 ? 18 : 16;
+  const opacity = 0.38;
+  const defaultBorderRadius = roundness * 2;
+  const iconSize = 18;
 
   const {
     backgroundColor: customBackgroundColor,
@@ -281,8 +284,8 @@ const Chip = ({
     disabled,
   };
 
-  const elevationStyle = isV3 || Platform.OS === 'android' ? elevation : 0;
-  const multiplier = isV3 ? (compact ? 1.5 : 2) : 1;
+  const elevationStyle = Platform.OS === 'android' ? elevation : 0;
+  const multiplier = compact ? 1.5 : 2;
   const labelSpacings = {
     marginRight: onClose ? 0 : 8 * multiplier,
     marginLeft:
@@ -291,20 +294,16 @@ const Chip = ({
         : 8 * multiplier,
   };
   const contentSpacings = {
-    paddingRight: isV3 ? (onClose ? 34 : 0) : onClose ? 32 : 4,
+    paddingRight: onClose ? 34 : 0,
   };
   const labelTextStyle = {
     color: textColor,
-    ...(isV3 ? theme.fonts.labelLarge : theme.fonts.regular),
+    ...labelLarge,
   };
   return (
     <Surface
       style={[
         styles.container,
-        isV3 && styles.md3Container,
-        !theme.isV3 && {
-          elevation: elevationStyle,
-        },
         {
           backgroundColor: selected ? selectedBackgroundColor : backgroundColor,
           borderColor,
@@ -312,7 +311,7 @@ const Chip = ({
         },
         style,
       ]}
-      {...(theme.isV3 && { elevation: elevationStyle })}
+      elevation={elevationStyle}
       {...rest}
       testID={`${testID}-container`}
       theme={theme}
@@ -336,17 +335,9 @@ const Chip = ({
         theme={theme}
         hitSlop={hitSlop}
       >
-        <View
-          style={[styles.content, isV3 && styles.md3Content, contentSpacings]}
-        >
+        <View style={[styles.content, contentSpacings]}>
           {avatar && !icon ? (
-            <View
-              style={[
-                styles.avatarWrapper,
-                isV3 && styles.md3AvatarWrapper,
-                disabled && { opacity },
-              ]}
-            >
+            <View style={[styles.avatarWrapper, disabled && { opacity }]}>
               {React.isValidElement<ChipAvatarProps>(avatar)
                 ? React.cloneElement(avatar, {
                     style: [styles.avatar, avatar.props.style],
@@ -358,12 +349,11 @@ const Chip = ({
             <View
               style={[
                 styles.icon,
-                isV3 && styles.md3Icon,
                 avatar
                   ? [
                       styles.avatar,
                       styles.avatarSelected,
-                      isV3 && selected && styles.md3SelectedIcon,
+                      selected && styles.md3SelectedIcon,
                     ]
                   : null,
               ]}
@@ -373,9 +363,9 @@ const Chip = ({
                   source={icon}
                   color={
                     avatar
-                      ? white
-                      : !disabled && theme.isV3
-                      ? theme.colors.primary
+                      ? MD3Colors.primary100
+                      : !disabled
+                      ? primary
                       : iconColor
                   }
                   size={18}
@@ -384,7 +374,7 @@ const Chip = ({
               ) : (
                 <MaterialCommunityIcon
                   name="check"
-                  color={avatar ? white : iconColor}
+                  color={avatar ? MD3Colors.primary100 : iconColor}
                   size={18}
                   direction="ltr"
                 />
@@ -396,7 +386,7 @@ const Chip = ({
             selectable={false}
             numberOfLines={1}
             style={[
-              isV3 ? styles.md3LabelText : styles.labelText,
+              styles.md3LabelText,
               labelTextStyle,
               labelSpacings,
               textStyle,
@@ -416,18 +406,12 @@ const Chip = ({
             accessibilityRole="button"
             accessibilityLabel={closeIconAccessibilityLabel}
           >
-            <View
-              style={[
-                styles.icon,
-                styles.closeIcon,
-                isV3 && styles.md3CloseIcon,
-              ]}
-            >
+            <View style={[styles.icon, styles.closeIcon]}>
               {closeIcon ? (
                 <Icon source={closeIcon} color={iconColor} size={iconSize} />
               ) : (
                 <MaterialCommunityIcon
-                  name={isV3 ? 'close' : 'close-circle'}
+                  name={'close'}
                   size={iconSize}
                   color={iconColor}
                   direction="ltr"
@@ -443,42 +427,25 @@ const Chip = ({
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: StyleSheet.hairlineWidth,
+    borderWidth: 1,
     borderStyle: 'solid',
     flexDirection: Platform.select({ default: 'column', web: 'row' }),
-  },
-  md3Container: {
-    borderWidth: 1,
   },
   content: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 4,
-    position: 'relative',
-  },
-  md3Content: {
     paddingLeft: 0,
+    position: 'relative',
   },
   icon: {
     padding: 4,
-    alignSelf: 'center',
-  },
-  md3Icon: {
     paddingLeft: 8,
     paddingRight: 0,
+    alignSelf: 'center',
   },
   closeIcon: {
-    marginRight: 4,
-  },
-  md3CloseIcon: {
     marginRight: 8,
     padding: 0,
-  },
-  labelText: {
-    minHeight: 24,
-    lineHeight: 24,
-    textAlignVertical: 'center',
-    marginVertical: 4,
   },
   md3LabelText: {
     textAlignVertical: 'center',
@@ -490,9 +457,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   avatarWrapper: {
-    marginRight: 4,
-  },
-  md3AvatarWrapper: {
     marginLeft: 4,
     marginRight: 0,
   },

@@ -196,6 +196,10 @@ const Menu = ({
   keyboardShouldPersistTaps,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const {
+    colors: { elevation: elevationColors },
+    roundness,
+  } = theme;
   const insets = useSafeAreaInsets();
   const [rendered, setRendered] = React.useState(visible);
   const [left, setLeft] = React.useState(0);
@@ -611,8 +615,7 @@ const Menu = ({
         }),
       },
     ],
-    borderRadius: theme.roundness,
-    ...(!theme.isV3 && { elevation: 8 }),
+    borderRadius: roundness,
     ...(scrollableMenuHeight ? { height: scrollableMenuHeight } : {}),
   };
 
@@ -666,13 +669,13 @@ const Menu = ({
                 style={[
                   styles.shadowMenuContainer,
                   shadowMenuContainerStyle,
-                  theme.isV3 && {
+                  {
                     backgroundColor:
-                      theme.colors.elevation[ELEVATION_LEVELS_MAP[elevation]],
+                      elevationColors[ELEVATION_LEVELS_MAP[elevation]],
                   },
                   contentStyle,
                 ]}
-                {...(theme.isV3 && { elevation })}
+                elevation={elevation}
                 testID={`${testID}-surface`}
                 theme={theme}
                 container

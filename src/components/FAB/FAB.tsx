@@ -197,7 +197,7 @@ const FAB = forwardRef<View, Props>(
       theme: themeOverrides,
       style,
       visible = true,
-      uppercase: uppercaseProp,
+      uppercase = false,
       loading,
       testID = 'fab',
       size = 'medium',
@@ -210,12 +210,14 @@ const FAB = forwardRef<View, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
-    const uppercase = uppercaseProp ?? !theme.isV3;
+    const {
+      animation: { scale },
+      fonts: { labelLarge },
+    } = theme;
+
     const { current: visibility } = React.useRef<Animated.Value>(
       new Animated.Value(visible ? 1 : 0)
     );
-    const { isV3, animation } = theme;
-    const { scale } = animation;
 
     React.useEffect(() => {
       if (visible) {
@@ -255,12 +257,11 @@ const FAB = forwardRef<View, Props>(
     const isFlatMode = mode === 'flat';
     const iconSize = isLargeSize ? 36 : 24;
     const loadingIndicatorSize = isLargeSize ? 24 : 18;
-    const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
 
-    const extendedStyle = getExtendedFabStyle({ customSize, theme });
+    const extendedStyle = getExtendedFabStyle({ customSize });
     const textStyle = {
       color: foregroundColor,
-      ...font,
+      ...labelLarge,
     };
 
     const md3Elevation = isFlatMode || disabled ? 0 : 3;
@@ -282,14 +283,16 @@ const FAB = forwardRef<View, Props>(
               },
             ],
           },
-          !isV3 && styles.elevated,
-          !isV3 && disabled && styles.disabled,
           style,
         ]}
         pointerEvents={visible ? 'auto' : 'none'}
         testID={`${testID}-container`}
+<<<<<<< HEAD
         {...(isV3 && { elevation: md3Elevation })}
         container
+=======
+        elevation={md3Elevation}
+>>>>>>> e44bc5a3f (refactor: remove `isV3` and MD2 from components (#4727))
       >
         <TouchableRipple
           borderless

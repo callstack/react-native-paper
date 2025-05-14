@@ -36,6 +36,10 @@ const CrossFadeIcon = ({
   testID = 'cross-fade-icon',
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const {
+    animation: { scale },
+  } = theme;
+
   const [currentIcon, setCurrentIcon] = React.useState<IconSource>(
     () => source
   );
@@ -43,8 +47,6 @@ const CrossFadeIcon = ({
     null
   );
   const { current: fade } = React.useRef<Animated.Value>(new Animated.Value(1));
-
-  const { scale } = theme.animation;
 
   if (currentIcon !== source) {
     setPreviousIcon(() => currentIcon);

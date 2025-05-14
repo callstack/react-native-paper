@@ -91,7 +91,7 @@ it('render visible banner, with custom theme', () => {
       visible
       theme={{
         colors: {
-          text: '#00f',
+          onPrimary: '#00f',
           surface: '#ccc',
           primary: '#043',
         },

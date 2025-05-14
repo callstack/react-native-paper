@@ -138,6 +138,7 @@ const config = {
             ListItem: 'List/ListItem',
             ListSection: 'List/ListSection',
             ListSubheader: 'List/ListSubheader',
+            ListImage: 'List/ListImage',
           },
           Menu: {
             Menu: 'Menu/Menu',

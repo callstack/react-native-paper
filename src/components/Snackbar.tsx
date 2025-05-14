@@ -166,6 +166,12 @@ const Snackbar = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const {
+    animation: { scale },
+    colors: { inverseOnSurface, inversePrimary, inverseSurface },
+    roundness,
+  } = theme;
+
   const { bottom, right, left } = useSafeAreaInsets();
 
   const { current: opacity } = React.useRef<Animated.Value>(
@@ -174,8 +180,6 @@ const Snackbar = ({
   const hideTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
 
   const [hidden, setHidden] = React.useState(!visible);
-
-  const { scale } = theme.animation;
 
   const animateShow = useLatestCallback(() => {
     if (hideTimeout.current) clearTimeout(hideTimeout.current);
@@ -243,8 +247,6 @@ const Snackbar = ({
     }
   }, [visible, handleOnVisible, handleOnHidden]);
 
-  const { colors, roundness, isV3 } = theme;
-
   if (hidden) {
     return null;
   }
@@ -256,12 +258,6 @@ const Snackbar = ({
     rippleColor: actionRippleColor,
     ...actionProps
   } = action || {};
-
-  const buttonTextColor = isV3 ? colors.inversePrimary : colors.accent;
-  const textColor = isV3 ? colors.inverseOnSurface : colors?.surface;
-  const backgroundColor = isV3 ? colors.inverseSurface : colors?.onSurface;
-
-  const isIconButton = isV3 && onIconPress;
 
   const marginLeft = action ? -12 : -16;
 
@@ -275,7 +271,7 @@ const Snackbar = ({
       return (
         <Text
           variant="bodyMedium"
-          style={[styles.content, { color: textColor }]}
+          style={[styles.content, { color: inverseOnSurface }]}
           maxFontSizeMultiplier={maxFontSizeMultiplier}
         >
           {children}
@@ -301,10 +297,9 @@ const Snackbar = ({
         accessibilityLiveRegion="polite"
         theme={theme}
         style={[
-          !isV3 && styles.elevation,
           styles.container,
           {
-            backgroundColor,
+            backgroundColor: inverseSurface,
             borderRadius: roundness,
             opacity: opacity,
             transform: [
@@ -322,11 +317,11 @@ const Snackbar = ({
         ]}
         testID={testID}
         container
-        {...(isV3 && { elevation })}
+        elevation={elevation}
         {...rest}
       >
         {renderChildrenWithWrapper()}
-        {(action || isIconButton) && (
+        {(action || onIconPress) && (
           <View style={[styles.actionsContainer, { marginLeft }]}>
             {action ? (
               <Button
@@ -335,8 +330,8 @@ const Snackbar = ({
                   onDismiss();
                 }}
                 style={[styles.button, actionStyle]}
-                textColor={buttonTextColor}
-                compact={!isV3}
+                textColor={inversePrimary}
+                compact={false}
                 mode="text"
                 theme={theme}
                 rippleColor={actionRippleColor}
@@ -345,12 +340,12 @@ const Snackbar = ({
                 {actionLabel}
               </Button>
             ) : null}
-            {isIconButton ? (
+            {onIconPress ? (
               <IconButton
                 accessibilityRole="button"
                 borderless
                 onPress={onIconPress}
-                iconColor={theme.colors.inverseOnSurface}
+                iconColor={inverseOnSurface}
                 rippleColor={rippleColor}
                 theme={theme}
                 icon={
@@ -422,9 +417,6 @@ const styles = StyleSheet.create({
   button: {
     marginRight: 8,
     marginLeft: 4,
-  },
-  elevation: {
-    elevation: 6,
   },
   icon: {
     width: 40,

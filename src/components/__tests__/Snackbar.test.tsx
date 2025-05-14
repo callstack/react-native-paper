@@ -3,7 +3,7 @@ import { Animated, StyleSheet, Text, View } from 'react-native';
 
 import { act, render } from '@testing-library/react-native';
 
-import { red200, white } from '../../styles/themes/v2/colors';
+import { MD3Colors } from '../../styles/themes/v3/tokens';
 import Snackbar from '../Snackbar';
 
 const styles = StyleSheet.create({
@@ -12,10 +12,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconView: {
-    backgroundColor: red200,
+    backgroundColor: MD3Colors.error20,
     padding: 15,
   },
-  text: { color: white, marginLeft: 10, flexWrap: 'wrap', flexShrink: 1 },
+  text: {
+    color: MD3Colors.primary100,
+    marginLeft: 10,
+    flexWrap: 'wrap',
+    flexShrink: 1,
+  },
 });
 
 jest.mock('react-native-safe-area-context', () => ({

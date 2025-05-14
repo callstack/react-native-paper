@@ -92,7 +92,9 @@ const DataTableTitle = ({
   maxFontSizeMultiplier,
   ...rest
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
+  const {
+    colors: { onSurface },
+  } = useInternalTheme(themeOverrides);
   const { current: spinAnim } = React.useRef<Animated.Value>(
     new Animated.Value(sortDirection === 'ascending' ? 0 : 1)
   );
@@ -105,9 +107,7 @@ const DataTableTitle = ({
     }).start();
   }, [sortDirection, spinAnim]);
 
-  const textColor = theme.isV3 ? theme.colors.onSurface : theme?.colors?.text;
-
-  const alphaTextColor = color(textColor).alpha(0.6).rgb().string();
+  const alphaTextColor = color(onSurface).alpha(0.6).rgb().string();
 
   const spin = spinAnim.interpolate({
     inputRange: [0, 1],
@@ -119,7 +119,7 @@ const DataTableTitle = ({
       <MaterialCommunityIcon
         name="arrow-up"
         size={16}
-        color={textColor}
+        color={onSurface}
         direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
       />
     </Animated.View>

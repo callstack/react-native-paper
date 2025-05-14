@@ -7,15 +7,6 @@ import type { AdornmentConfig } from './Adornment/types';
 import {
   MIN_WIDTH,
   ADORNMENT_SIZE,
-  MD2_ADORNMENT_OFFSET,
-  MD2_AFFIX_OFFSET,
-  MD2_FLAT_INPUT_OFFSET,
-  MD2_ICON_OFFSET,
-  MD2_INPUT_PADDING_HORIZONTAL,
-  MD2_LABEL_PADDING_HORIZONTAL,
-  MD2_LABEL_PADDING_TOP,
-  MD2_MIN_HEIGHT,
-  MD2_OUTLINED_INPUT_OFFSET,
   MD3_ADORNMENT_OFFSET,
   MD3_AFFIX_OFFSET,
   MD3_FLAT_INPUT_OFFSET,
@@ -278,13 +269,11 @@ export function calculateOutlinedIconAndAffixTopPosition({
 
 export const calculateFlatInputHorizontalPadding = ({
   adornmentConfig,
-  isV3,
 }: {
   adornmentConfig: AdornmentConfig[];
-  isV3?: boolean;
 }) => {
   const { LABEL_PADDING_HORIZONTAL, ADORNMENT_OFFSET, FLAT_INPUT_OFFSET } =
-    getConstants(isV3);
+    getConstants();
 
   let paddingLeft = LABEL_PADDING_HORIZONTAL;
   let paddingRight = LABEL_PADDING_HORIZONTAL;
@@ -316,23 +305,19 @@ const getInputTextColor = ({
   textColor,
   disabled,
 }: BaseProps & { textColor?: string }) => {
+  const {
+    colors: { onSurfaceDisabled, onSurface },
+  } = theme;
+
   if (textColor) {
     return textColor;
   }
 
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.onSurfaceDisabled;
-    }
-
-    return theme.colors.onSurface;
-  }
-
   if (disabled) {
-    return color(theme.colors.text).alpha(0.54).rgb().string();
+    return onSurfaceDisabled;
   }
 
-  return theme.colors.text;
+  return onSurface;
 };
 
 const getActiveColor = ({
@@ -348,11 +333,15 @@ const getActiveColor = ({
   activeOutlineColor?: string;
   mode?: Mode;
 }) => {
+  const {
+    colors: { error: errorColor, onSurfaceDisabled, primary },
+  } = theme;
+
   const isFlat = mode === 'flat';
   const modeColor = isFlat ? activeUnderlineColor : activeOutlineColor;
 
   if (error) {
-    return theme.colors.error;
+    return errorColor;
   }
 
   if (modeColor) {
@@ -360,30 +349,22 @@ const getActiveColor = ({
   }
 
   if (disabled) {
-    if (theme.isV3) {
-      return theme.colors.onSurfaceDisabled;
-    }
-
-    return color(theme.colors.text).alpha(0.54).rgb().string();
+    return onSurfaceDisabled;
   }
 
-  return theme.colors.primary;
+  return primary;
 };
 
 const getPlaceholderColor = ({ theme, disabled }: BaseProps) => {
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.onSurfaceDisabled;
-    }
-
-    return theme.colors.onSurfaceVariant;
-  }
+  const {
+    colors: { onSurfaceDisabled, onSurfaceVariant },
+  } = theme;
 
   if (disabled) {
-    return theme.colors.disabled;
+    return onSurfaceDisabled;
   }
 
-  return theme.colors.placeholder;
+  return onSurfaceVariant;
 };
 
 const getSelectionColor = ({
@@ -405,21 +386,15 @@ const getSelectionColor = ({
 };
 
 const getFlatBackgroundColor = ({ theme, disabled }: BaseProps) => {
-  if (theme.isV3) {
-    if (disabled) {
-      return color(theme.colors.onSurface).alpha(0.04).rgb().string();
-    } else {
-      return theme.colors.surfaceVariant;
-    }
-  }
+  const {
+    colors: { onSurface, surfaceVariant },
+  } = theme;
 
   if (disabled) {
-    return undefined;
+    return color(onSurface).alpha(0.04).rgb().string();
+  } else {
+    return surfaceVariant;
   }
-
-  return theme.dark
-    ? color(theme.colors?.background).lighten(0.24).rgb().string()
-    : color(theme.colors?.background).darken(0.06).rgb().string();
 };
 
 const getFlatUnderlineColor = ({
@@ -427,23 +402,19 @@ const getFlatUnderlineColor = ({
   disabled,
   underlineColor,
 }: BaseProps & { underlineColor?: string }) => {
+  const {
+    colors: { onSurfaceDisabled, onSurfaceVariant },
+  } = theme;
+
   if (!disabled && underlineColor) {
     return underlineColor;
   }
 
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.onSurfaceDisabled;
-    }
-
-    return theme.colors.onSurfaceVariant;
-  }
-
   if (disabled) {
-    return 'transparent';
+    return onSurfaceDisabled;
   }
 
-  return theme.colors.disabled;
+  return onSurfaceVariant;
 };
 
 const getOutlinedOutlineInputColor = ({
@@ -451,30 +422,23 @@ const getOutlinedOutlineInputColor = ({
   disabled,
   customOutlineColor,
 }: BaseProps & { customOutlineColor?: string }) => {
-  const isTransparent = color(customOutlineColor).alpha() === 0;
+  const {
+    dark,
+    colors: { surfaceDisabled, outline },
+  } = theme;
 
   if (!disabled && customOutlineColor) {
     return customOutlineColor;
   }
 
-  if (theme.isV3) {
-    if (disabled) {
-      if (theme.dark) {
-        return 'transparent';
-      }
-      return theme.colors.surfaceDisabled;
-    }
-
-    return theme.colors.outline;
-  }
-
   if (disabled) {
-    if (isTransparent) {
-      return customOutlineColor;
+    if (dark) {
+      return 'transparent';
     }
-    return theme.colors.disabled;
+    return surfaceDisabled;
   }
-  return theme.colors.placeholder;
+
+  return outline;
 };
 
 export const getFlatInputColors = ({
@@ -494,6 +458,10 @@ export const getFlatInputColors = ({
   error?: boolean;
   theme: InternalTheme;
 }) => {
+  const {
+    colors: { error: errorColor },
+  } = theme;
+
   const baseFlatColorProps = { theme, disabled };
   const activeColor = getActiveColor({
     ...baseFlatColorProps,
@@ -514,7 +482,7 @@ export const getFlatInputColors = ({
     }),
     placeholderColor: getPlaceholderColor(baseFlatColorProps),
     selectionColor: getSelectionColor({ activeColor, customSelectionColor }),
-    errorColor: theme.colors.error,
+    errorColor,
     backgroundColor: getFlatBackgroundColor(baseFlatColorProps),
   };
 };
@@ -536,6 +504,10 @@ export const getOutlinedInputColors = ({
   error?: boolean;
   theme: InternalTheme;
 }) => {
+  const {
+    colors: { error: errorColor },
+  } = theme;
+
   const baseOutlinedColorProps = { theme, disabled };
   const activeColor = getActiveColor({
     ...baseOutlinedColorProps,
@@ -556,57 +528,25 @@ export const getOutlinedInputColors = ({
     }),
     placeholderColor: getPlaceholderColor(baseOutlinedColorProps),
     selectionColor: getSelectionColor({ activeColor, customSelectionColor }),
-    errorColor: theme.colors.error,
+    errorColor,
   };
 };
 
-export const getConstants = (isV3?: boolean) => {
-  // Text input affix
-  let AFFIX_OFFSET;
-  // Text input icon
-  let ICON_OFFSET;
-  //Text input flat
-  let LABEL_PADDING_TOP;
-  let LABEL_PADDING_HORIZONTAL;
-  let FLAT_INPUT_OFFSET;
-  let MIN_HEIGHT;
-  // Text input outlined;
-  let INPUT_PADDING_HORIZONTAL;
-  let ADORNMENT_OFFSET;
-  let OUTLINED_INPUT_OFFSET;
-
-  if (isV3) {
-    AFFIX_OFFSET = MD3_AFFIX_OFFSET;
-    ICON_OFFSET = MD3_ICON_OFFSET;
-    LABEL_PADDING_TOP = MD3_LABEL_PADDING_TOP;
-    LABEL_PADDING_HORIZONTAL = MD3_LABEL_PADDING_HORIZONTAL;
-    FLAT_INPUT_OFFSET = MD3_FLAT_INPUT_OFFSET;
-    MIN_HEIGHT = MD3_MIN_HEIGHT;
-    INPUT_PADDING_HORIZONTAL = MD3_INPUT_PADDING_HORIZONTAL;
-    ADORNMENT_OFFSET = MD3_ADORNMENT_OFFSET;
-    OUTLINED_INPUT_OFFSET = MD3_OUTLINED_INPUT_OFFSET;
-  } else {
-    AFFIX_OFFSET = MD2_AFFIX_OFFSET;
-    ICON_OFFSET = MD2_ICON_OFFSET;
-    LABEL_PADDING_TOP = MD2_LABEL_PADDING_TOP;
-    LABEL_PADDING_HORIZONTAL = MD2_LABEL_PADDING_HORIZONTAL;
-    FLAT_INPUT_OFFSET = MD2_FLAT_INPUT_OFFSET;
-    MIN_HEIGHT = MD2_MIN_HEIGHT;
-    INPUT_PADDING_HORIZONTAL = MD2_INPUT_PADDING_HORIZONTAL;
-    ADORNMENT_OFFSET = MD2_ADORNMENT_OFFSET;
-    OUTLINED_INPUT_OFFSET = MD2_OUTLINED_INPUT_OFFSET;
-  }
-
+export const getConstants = () => {
   return {
-    AFFIX_OFFSET,
-    ICON_OFFSET,
-    LABEL_PADDING_TOP,
-    LABEL_PADDING_HORIZONTAL,
-    FLAT_INPUT_OFFSET,
-    MIN_HEIGHT,
-    INPUT_PADDING_HORIZONTAL,
-    ADORNMENT_OFFSET,
-    OUTLINED_INPUT_OFFSET,
     MIN_WIDTH,
+    // Text input affix
+    AFFIX_OFFSET: MD3_AFFIX_OFFSET,
+    // Text input icon
+    ICON_OFFSET: MD3_ICON_OFFSET,
+    //Text input flat
+    LABEL_PADDING_TOP: MD3_LABEL_PADDING_TOP,
+    LABEL_PADDING_HORIZONTAL: MD3_LABEL_PADDING_HORIZONTAL,
+    FLAT_INPUT_OFFSET: MD3_FLAT_INPUT_OFFSET,
+    MIN_HEIGHT: MD3_MIN_HEIGHT,
+    // Text input outlined;
+    INPUT_PADDING_HORIZONTAL: MD3_INPUT_PADDING_HORIZONTAL,
+    ADORNMENT_OFFSET: MD3_ADORNMENT_OFFSET,
+    OUTLINED_INPUT_OFFSET: MD3_OUTLINED_INPUT_OFFSET,
   };
 };

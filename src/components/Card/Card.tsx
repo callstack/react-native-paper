@@ -181,7 +181,7 @@ const Card = (
   const { current: elevationDarkAdaptive } = React.useRef<Animated.Value>(
     new Animated.Value(cardElevation)
   );
-  const { animation, dark, mode, roundness, isV3 } = theme;
+  const { animation, dark, mode, roundness } = theme;
 
   const prevDarkRef = React.useRef<boolean>(dark);
   React.useEffect(() => {
@@ -213,20 +213,20 @@ const Card = (
   ]);
 
   const runElevationAnimation = (pressType: HandlePressType) => {
-    if (isV3 && isMode('contained')) {
+    if (isMode('contained')) {
       return;
     }
 
     const isPressTypeIn = pressType === 'in';
     if (dark && isAdaptiveMode) {
       Animated.timing(elevationDarkAdaptive, {
-        toValue: isPressTypeIn ? (isV3 ? 2 : 8) : cardElevation,
+        toValue: isPressTypeIn ? 2 : cardElevation,
         duration: animationDuration,
         useNativeDriver: false,
       }).start();
     } else {
       Animated.timing(elevation, {
-        toValue: isPressTypeIn ? (isV3 ? 2 : 8) : cardElevation,
+        toValue: isPressTypeIn ? 2 : cardElevation,
         duration: animationDuration,
         useNativeDriver: false,
       }).start();
@@ -267,7 +267,7 @@ const Card = (
   );
 
   const borderRadiusCombinedStyles = {
-    borderRadius: (isV3 ? 3 : 1) * roundness,
+    borderRadius: 3 * roundness,
     ...borderRadiusStyles,
   };
 
@@ -290,6 +290,7 @@ const Card = (
     <Surface
       ref={ref}
       style={[
+<<<<<<< HEAD
         isV3 && !isMode('elevated') && { backgroundColor },
         !isV3 &&
           (isMode('outlined')
@@ -297,13 +298,17 @@ const Card = (
             : {
                 elevation: computedElevation as unknown as number,
               }),
+=======
+        !isMode('elevated') && { backgroundColor },
+        {
+          elevation: computedElevation as unknown as number,
+        },
+>>>>>>> e44bc5a3f (refactor: remove `isV3` and MD2 from components (#4727))
         borderRadiusCombinedStyles,
         style,
       ]}
       theme={theme}
-      {...(isV3 && {
-        elevation: isMode('elevated') ? computedElevation : 0,
-      })}
+      elevation={isMode('elevated') ? computedElevation : 0}
       testID={`${testID}-container`}
       container
       {...rest}
@@ -366,9 +371,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     zIndex: 2,
-  },
-  resetElevation: {
-    elevation: 0,
   },
 });
 

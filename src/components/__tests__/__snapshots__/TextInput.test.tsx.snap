@@ -19,14 +19,11 @@ exports[`call onPress when affix adornment pressed 1`] = `
       [
         {
           "bottom": 0,
-          "height": 2,
+          "height": 1,
           "left": 0,
           "position": "absolute",
           "right": 0,
           "zIndex": 1,
-        },
-        {
-          "height": 1,
         },
         {
           "backgroundColor": "rgba(73, 69, 79, 1)",
@@ -325,14 +322,11 @@ exports[`correctly applies a component as the text label 1`] = `
       [
         {
           "bottom": 0,
-          "height": 2,
+          "height": 1,
           "left": 0,
           "position": "absolute",
           "right": 0,
           "zIndex": 1,
-        },
-        {
-          "height": 1,
         },
         {
           "backgroundColor": "rgba(73, 69, 79, 1)",
@@ -450,7 +444,7 @@ exports[`correctly applies a component as the text label 1`] = `
             <Text
               style={
                 {
-                  "color": "#f44336",
+                  "color": "rgba(220, 54, 46, 1)",
                 }
               }
             >
@@ -496,7 +490,7 @@ exports[`correctly applies a component as the text label 1`] = `
             <Text
               style={
                 {
-                  "color": "#f44336",
+                  "color": "rgba(220, 54, 46, 1)",
                 }
               }
             >
@@ -575,14 +569,11 @@ exports[`correctly applies cursorColor prop 1`] = `
       [
         {
           "bottom": 0,
-          "height": 2,
+          "height": 1,
           "left": 0,
           "position": "absolute",
           "right": 0,
           "zIndex": 1,
-        },
-        {
-          "height": 1,
         },
         {
           "backgroundColor": "rgba(73, 69, 79, 1)",
@@ -741,7 +732,7 @@ exports[`correctly applies cursorColor prop 1`] = `
       </View>
     </View>
     <TextInput
-      cursorColor="#f44336"
+      cursorColor="rgba(220, 54, 46, 1)"
       editable={true}
       maxFontSizeMultiplier={1.5}
       multiline={false}
@@ -809,14 +800,11 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
       [
         {
           "bottom": 0,
-          "height": 2,
+          "height": 1,
           "left": 0,
           "position": "absolute",
           "right": 0,
           "zIndex": 1,
-        },
-        {
-          "height": 1,
         },
         {
           "backgroundColor": "rgba(73, 69, 79, 1)",
@@ -1302,14 +1290,11 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
       [
         {
           "bottom": 0,
-          "height": 2,
+          "height": 1,
           "left": 0,
           "position": "absolute",
           "right": 0,
           "zIndex": 1,
-        },
-        {
-          "height": 1,
         },
         {
           "backgroundColor": "rgba(73, 69, 79, 1)",
@@ -1538,14 +1523,11 @@ exports[`correctly applies textAlign center 1`] = `
       [
         {
           "bottom": 0,
-          "height": 2,
+          "height": 1,
           "left": 0,
           "position": "absolute",
           "right": 0,
           "zIndex": 1,
-        },
-        {
-          "height": 1,
         },
         {
           "backgroundColor": "rgba(73, 69, 79, 1)",
@@ -1772,14 +1754,11 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
       [
         {
           "bottom": 0,
-          "height": 2,
+          "height": 1,
           "left": 0,
           "position": "absolute",
           "right": 0,
           "zIndex": 1,
-        },
-        {
-          "height": 1,
         },
         {
           "backgroundColor": "rgba(73, 69, 79, 1)",
@@ -2017,7 +1996,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "lineHeight": undefined,
           },
           {
-            "color": "#f44336",
+            "color": "rgba(220, 54, 46, 1)",
           },
         ]
       }
@@ -2199,14 +2178,11 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       [
         {
           "bottom": 0,
-          "height": 2,
+          "height": 1,
           "left": 0,
           "position": "absolute",
           "right": 0,
           "zIndex": 1,
-        },
-        {
-          "height": 1,
         },
         {
           "backgroundColor": "rgba(73, 69, 79, 1)",
@@ -2595,7 +2571,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "lineHeight": undefined,
           },
           {
-            "color": "#f44336",
+            "color": "rgba(220, 54, 46, 1)",
           },
         ]
       }

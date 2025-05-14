@@ -113,8 +113,12 @@ function Modal({
   testID = 'modal',
 }: Props) {
   const theme = useInternalTheme(themeOverrides);
+  const {
+    animation: { scale },
+    colors: { backdrop },
+  } = theme;
+
   const onDismissCallback = useLatestCallback(onDismiss);
-  const { scale } = theme.animation;
   const { top, bottom } = useSafeAreaInsets();
   const opacity = useAnimatedValue(visible ? 1 : 0);
   const [visibleInternal, setVisibleInternal] = React.useState(visible);
@@ -201,7 +205,7 @@ function Modal({
         style={[
           styles.backdrop,
           {
-            backgroundColor: theme.colors?.backdrop,
+            backgroundColor: backdrop,
             opacity,
           },
         ]}

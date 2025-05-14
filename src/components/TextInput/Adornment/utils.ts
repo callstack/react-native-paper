@@ -1,5 +1,3 @@
-import color from 'color';
-
 import type { InternalTheme } from '../../../types';
 
 type BaseProps = {
@@ -8,16 +6,14 @@ type BaseProps = {
 };
 
 export function getTextColor({ theme, disabled }: BaseProps) {
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.onSurfaceDisabled;
-    }
-    return theme.colors.onSurfaceVariant;
+  const {
+    colors: { onSurfaceDisabled, onSurfaceVariant },
+  } = theme;
+
+  if (disabled) {
+    return onSurfaceDisabled;
   }
-  return color(theme.colors?.text)
-    .alpha(theme.dark ? 0.7 : 0.54)
-    .rgb()
-    .string();
+  return onSurfaceVariant;
 }
 
 export function getIconColor({
@@ -29,20 +25,21 @@ export function getIconColor({
   isTextInputFocused: boolean;
   customColor?: ((isTextInputFocused: boolean) => string | undefined) | string;
 }) {
+  const {
+    colors: { onSurfaceDisabled, onSurfaceVariant },
+  } = theme;
+
   if (typeof customColor === 'function') {
     return customColor(isTextInputFocused);
   }
+
   if (customColor) {
     return customColor;
   }
 
-  if (!theme.isV3) {
-    return theme.colors.text;
-  }
-
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return onSurfaceDisabled;
   }
 
-  return theme.colors.onSurfaceVariant;
+  return onSurfaceVariant;
 }

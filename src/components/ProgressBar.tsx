@@ -10,8 +10,6 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import setColor from 'color';
-
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 
@@ -85,7 +83,11 @@ const ProgressBar = ({
   ...rest
 }: Props) => {
   const isWeb = Platform.OS === 'web';
-  const theme = useInternalTheme(themeOverrides);
+  const {
+    animation: { scale },
+    colors: { surfaceVariant, primary },
+  } = useInternalTheme(themeOverrides);
+
   const { current: timer } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
@@ -97,8 +99,6 @@ const ProgressBar = ({
 
   const indeterminateAnimation =
     React.useRef<Animated.CompositeAnimation | null>(null);
-
-  const { scale } = theme.animation;
 
   React.useEffect(() => {
     passedAnimatedValue.current = animatedValue;
@@ -190,10 +190,7 @@ const ProgressBar = ({
     setWidth(event.nativeEvent.layout.width);
   };
 
-  const tintColor = color || theme.colors?.primary;
-  const trackTintColor = theme.isV3
-    ? theme.colors.surfaceVariant
-    : setColor(tintColor).alpha(0.38).rgb().string();
+  const tintColor = color || primary;
 
   return (
     <View
@@ -213,7 +210,7 @@ const ProgressBar = ({
       <Animated.View
         style={[
           styles.container,
-          { backgroundColor: trackTintColor, opacity: fade },
+          { backgroundColor: surfaceVariant, opacity: fade },
           style,
         ]}
       >

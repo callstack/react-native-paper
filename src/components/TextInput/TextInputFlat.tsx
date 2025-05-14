@@ -78,12 +78,15 @@ const TextInputFlat = ({
   ...rest
 }: ChildTextInputProps) => {
   const isAndroid = Platform.OS === 'android';
-  const { colors, isV3, roundness } = theme;
-  const font = isV3 ? theme.fonts.bodyLarge : theme.fonts.regular;
+  const {
+    colors,
+    roundness,
+    fonts: { bodyLarge },
+  } = theme;
   const hasActiveOutline = parentState.focused || error;
 
   const { LABEL_PADDING_TOP, FLAT_INPUT_OFFSET, MIN_HEIGHT, MIN_WIDTH } =
-    getConstants(isV3);
+    getConstants();
 
   const {
     fontSize: fontSizeStyle,
@@ -108,7 +111,6 @@ const TextInputFlat = ({
 
   let { paddingLeft, paddingRight } = calculateFlatInputHorizontalPadding({
     adornmentConfig,
-    isV3,
   });
 
   if (isPaddingHorizontalPassed) {
@@ -134,7 +136,6 @@ const TextInputFlat = ({
       paddingHorizontal,
       inputOffset: FLAT_INPUT_OFFSET,
       mode: InputMode.Flat,
-      isV3,
     });
 
   const {
@@ -157,8 +158,8 @@ const TextInputFlat = ({
 
   const containerStyle = {
     backgroundColor,
-    borderTopLeftRadius: theme.roundness,
-    borderTopRightRadius: theme.roundness,
+    borderTopLeftRadius: roundness,
+    borderTopRightRadius: roundness,
   };
 
   const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
@@ -271,7 +272,7 @@ const TextInputFlat = ({
     placeholderStyle: styles.placeholder,
     baseLabelTranslateY,
     baseLabelTranslateX,
-    font,
+    font: bodyLarge,
     fontSize,
     lineHeight,
     fontWeight,
@@ -304,7 +305,6 @@ const TextInputFlat = ({
           ? 1
           : 0
         : 1,
-    isV3,
   };
 
   const affixTopPosition = {
@@ -334,7 +334,7 @@ const TextInputFlat = ({
       ...adornmentProps,
       left,
       right,
-      textStyle: { ...font, fontSize, lineHeight, fontWeight },
+      textStyle: { ...bodyLarge, fontSize, lineHeight, fontWeight },
       visible: parentState.labeled,
     };
   }
@@ -349,7 +349,6 @@ const TextInputFlat = ({
         error={error}
         colors={colors}
         activeColor={activeColor}
-        theme={theme}
       />
       <View
         onLayout={onInputLayout}
@@ -412,7 +411,7 @@ const TextInputFlat = ({
             {
               paddingLeft,
               paddingRight,
-              ...font,
+              ...bodyLarge,
               fontSize,
               lineHeight,
               fontWeight,

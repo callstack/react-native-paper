@@ -63,7 +63,11 @@ const ActivityIndicator = ({
   theme: themeOverrides,
   ...rest
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
+  const {
+    animation: { scale },
+    colors: { primary },
+  } = useInternalTheme(themeOverrides);
+
   const { current: timer } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
@@ -74,10 +78,6 @@ const ActivityIndicator = ({
   const rotation = React.useRef<Animated.CompositeAnimation | undefined>(
     undefined
   );
-
-  const {
-    animation: { scale },
-  } = theme;
 
   const startRotation = React.useCallback(() => {
     // Show indicator
@@ -130,7 +130,7 @@ const ActivityIndicator = ({
     }
   }, [animating, fade, hidesWhenStopped, startRotation, scale, timer]);
 
-  const color = indicatorColor || theme.colors?.primary;
+  const color = indicatorColor || primary;
   const size =
     typeof indicatorSize === 'string'
       ? indicatorSize === 'small'

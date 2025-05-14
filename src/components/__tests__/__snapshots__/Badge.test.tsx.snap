@@ -57,7 +57,7 @@ exports[`renders badge in different color 1`] = `
   style={
     {
       "alignSelf": "flex-end",
-      "backgroundColor": "#f44336",
+      "backgroundColor": "rgba(220, 54, 46, 1)",
       "borderRadius": 10,
       "color": "rgba(255, 255, 255, 1)",
       "fontSize": 10,

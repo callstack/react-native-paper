@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 
-import { red500 } from '../../styles/themes/v2/colors';
+import { MD3Colors } from '../../styles/themes/v3/tokens';
 import ListIcon from '../List/ListIcon';
 import ListItem from '../List/ListItem';
 import ListSection from '../List/ListSection';
@@ -11,7 +11,7 @@ import ListSubheader from '../List/ListSubheader';
 
 const styles = StyleSheet.create({
   itemColor: {
-    color: red500,
+    color: MD3Colors.error50,
   },
 });
 
