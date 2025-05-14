@@ -264,7 +264,7 @@ const FAB = forwardRef<View, Props>(
       ...labelLarge,
     };
 
-    const md3Elevation = isFlatMode || disabled ? 0 : 3;
+    const elevation = isFlatMode || disabled ? 0 : 3;
 
     const newAccessibilityState = { ...accessibilityState, disabled };
 
@@ -287,7 +287,7 @@ const FAB = forwardRef<View, Props>(
         ]}
         pointerEvents={visible ? 'auto' : 'none'}
         testID={`${testID}-container`}
-        elevation={md3Elevation}
+        elevation={elevation}
       >
         <TouchableRipple
           borderless

@@ -228,12 +228,12 @@ const ListItem = (
     <TouchableRipple
       {...rest}
       ref={ref}
-      style={[styles.containerV3, style]}
+      style={[styles.container, style]}
       onPress={onPress}
       theme={theme}
       testID={testID}
     >
-      <View style={[styles.rowV3, containerStyle]}>
+      <View style={[styles.row, containerStyle]}>
         {left
           ? left({
               color: onSurfaceVariant,
@@ -241,7 +241,7 @@ const ListItem = (
             })
           : null}
         <View
-          style={[styles.itemV3, styles.content, contentStyle]}
+          style={[styles.item, styles.content, contentStyle]}
           testID={`${testID}-content`}
         >
           {renderTitle()}
@@ -265,11 +265,11 @@ ListItem.displayName = 'List.Item';
 const Component = forwardRef(ListItem);
 
 const styles = StyleSheet.create({
-  containerV3: {
+  container: {
     paddingVertical: 8,
     paddingRight: 24,
   },
-  rowV3: {
+  row: {
     width: '100%',
     flexDirection: 'row',
     marginVertical: 6,
@@ -280,7 +280,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
   },
-  itemV3: {
+  item: {
     paddingLeft: 16,
   },
   content: {

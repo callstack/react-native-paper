@@ -68,7 +68,7 @@ const Divider = ({
           height: StyleSheet.hairlineWidth,
           backgroundColor: outlineVariant,
         },
-        leftInset && styles.v3LeftInset,
+        leftInset && styles.leftInset,
         horizontalInset && styles.horizontalInset,
         bold && styles.bold,
         style,
@@ -78,7 +78,7 @@ const Divider = ({
 };
 
 const styles = StyleSheet.create({
-  v3LeftInset: {
+  leftInset: {
     marginLeft: 16,
   },
   horizontalInset: {

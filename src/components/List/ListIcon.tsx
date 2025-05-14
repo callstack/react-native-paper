@@ -51,14 +51,14 @@ const ListIcon = ({
   const theme = useInternalTheme(themeOverrides);
 
   return (
-    <View style={[styles.itemV3, style]} pointerEvents="box-none">
+    <View style={[styles.item, style]} pointerEvents="box-none">
       <Icon source={icon} size={ICON_SIZE} color={iconColor} theme={theme} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  itemV3: {
+  item: {
     alignItems: 'center',
     justifyContent: 'center',
   },

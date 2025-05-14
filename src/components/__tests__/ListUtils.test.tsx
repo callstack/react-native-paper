@@ -6,18 +6,11 @@ import Text from '../Typography/Text';
 
 const styles = StyleSheet.create({
   leftItem: {
-    marginLeft: 0,
-    marginRight: 16,
-  },
-  leftItemV3: {
     marginLeft: 16,
     marginRight: 0,
     alignSelf: 'center',
   },
   rightItem: {
-    marginRight: 0,
-  },
-  rightItemV3: {
     marginLeft: 16,
     marginRight: 0,
     alignSelf: 'center',
@@ -30,15 +23,15 @@ const description = <Text>Test</Text>;
  * ********************** getLeftStyles ********************** *
  */
 
-it('returns styles for left item without description for V3', () => {
+it('returns styles for left item without description', () => {
   const style = getLeftStyles(false, null);
-  expect(style).toStrictEqual({ ...styles.leftItemV3, marginVertical: 0 });
+  expect(style).toStrictEqual({ ...styles.leftItem, marginVertical: 0 });
 });
 
-it('returns styles for left item w/ desctiption for V3', () => {
+it('returns styles for left item w/ desctiption', () => {
   const style = getLeftStyles(true, description);
   expect(style).toStrictEqual({
-    ...styles.leftItemV3,
+    ...styles.leftItem,
     alignSelf: 'flex-start',
   });
 });
@@ -47,15 +40,15 @@ it('returns styles for left item w/ desctiption for V3', () => {
  * ********************** getRightStyles ********************** *
  */
 
-it('returns styles for right item without description for V3', () => {
+it('returns styles for right item without description', () => {
   const style = getRightStyles(false, null);
-  expect(style).toStrictEqual({ ...styles.rightItemV3, marginVertical: 0 });
+  expect(style).toStrictEqual({ ...styles.rightItem, marginVertical: 0 });
 });
 
-it('returns styles for right item w/ desctiption for V3', () => {
+it('returns styles for right item w/ desctiption', () => {
   const style = getRightStyles(true, description);
   expect(style).toStrictEqual({
-    ...styles.rightItemV3,
+    ...styles.rightItem,
     alignSelf: 'flex-start',
   });
 });

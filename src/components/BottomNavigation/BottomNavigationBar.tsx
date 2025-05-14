@@ -568,12 +568,15 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               outputRange: [1, 0],
             });
 
-            const v3ActiveOpacity = focused ? 1 : 0;
-            const v3InactiveOpacity = shifting
-              ? inactiveOpacity
-              : focused
-              ? 0
-              : 1;
+            const getActiveOpacity = () => {
+              if (shiftingAndLabeled) return activeOpacity;
+              return focused ? 1 : 0;
+            };
+
+            const getInactiveOpacity = () => {
+              if (shiftingAndLabeled) return inactiveOpacity;
+              return focused ? 0 : 1;
+            };
 
             // Scale horizontally the outline pill
             const outlineScale = focused
@@ -607,7 +610,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                   : 0,
             };
 
-            const isLegacyOrV3Shifting = shifting && labeled;
+            const shiftingAndLabeled = shifting && labeled;
 
             return renderTouchable({
               key: route.key,
@@ -627,14 +630,14 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                   pointerEvents="none"
                   style={
                     labeled
-                      ? styles.v3TouchableContainer
-                      : styles.v3NoLabelContainer
+                      ? styles.touchableContainer
+                      : styles.noLabelContainer
                   }
                 >
                   <Animated.View
                     style={[
                       styles.iconContainer,
-                      isLegacyOrV3Shifting && {
+                      shiftingAndLabeled && {
                         transform: [{ translateY }],
                       },
                     ]}
@@ -659,9 +662,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                       style={[
                         styles.iconWrapper,
                         {
-                          opacity: isLegacyOrV3Shifting
-                            ? activeOpacity
-                            : v3ActiveOpacity,
+                          opacity: getActiveOpacity(),
                         },
                       ]}
                     >
@@ -683,9 +684,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                       style={[
                         styles.iconWrapper,
                         {
-                          opacity: isLegacyOrV3Shifting
-                            ? inactiveOpacity
-                            : v3InactiveOpacity,
+                          opacity: getInactiveOpacity(),
                         },
                       ]}
                     >
@@ -723,9 +722,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                         style={[
                           styles.labelWrapper,
                           {
-                            opacity: isLegacyOrV3Shifting
-                              ? activeOpacity
-                              : v3ActiveOpacity,
+                            opacity: getActiveOpacity(),
                           },
                         ]}
                       >
@@ -756,9 +753,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                           style={[
                             styles.labelWrapper,
                             {
-                              opacity: isLegacyOrV3Shifting
-                                ? inactiveOpacity
-                                : v3InactiveOpacity,
+                              opacity: getInactiveOpacity(),
                             },
                           ]}
                         >
@@ -862,11 +857,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
   },
-  v3TouchableContainer: {
+  touchableContainer: {
     paddingTop: 12,
     paddingBottom: 16,
   },
-  v3NoLabelContainer: {
+  noLabelContainer: {
     height: 80,
     justifyContent: 'center',
     alignItems: 'center',

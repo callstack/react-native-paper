@@ -36,7 +36,7 @@ export const getLeftStyles = (
   alignToTop: boolean,
   description: Description
 ): Style => {
-  const stylesV3 = {
+  const additionalStyles = {
     marginRight: 0,
     marginLeft: 16,
     alignSelf: (alignToTop ? 'flex-start' : 'center') as FlexAlignType,
@@ -46,13 +46,13 @@ export const getLeftStyles = (
     return {
       ...styles.iconMarginLeft,
       ...styles.marginVerticalNone,
-      ...stylesV3,
+      ...additionalStyles,
     };
   }
 
   return {
     ...styles.iconMarginLeft,
-    ...stylesV3,
+    ...additionalStyles,
   };
 };
 
@@ -60,7 +60,7 @@ export const getRightStyles = (
   alignToTop: boolean,
   description: Description
 ): Style => {
-  const stylesV3 = {
+  const additionalStyles = {
     marginLeft: 16,
     alignSelf: (alignToTop ? 'flex-start' : 'center') as FlexAlignType,
   };
@@ -69,13 +69,13 @@ export const getRightStyles = (
     return {
       ...styles.iconMarginRight,
       ...styles.marginVerticalNone,
-      ...stylesV3,
+      ...additionalStyles,
     };
   }
 
   return {
     ...styles.iconMarginRight,
-    ...stylesV3,
+    ...additionalStyles,
   };
 };
 
