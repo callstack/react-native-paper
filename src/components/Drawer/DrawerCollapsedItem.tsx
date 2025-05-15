@@ -32,12 +32,10 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   disabled?: boolean;
   /**
-   * @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
    * Icon to use as the focused destination icon, can be a string, an image source or a react component
    */
   focusedIcon?: IconSource;
   /**
-   * @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
    * Icon to use as the unfocused destination icon, can be a string, an image source or a react component
    */
   unfocusedIcon?: IconSource;

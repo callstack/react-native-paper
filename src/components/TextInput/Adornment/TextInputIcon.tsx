@@ -20,7 +20,6 @@ export type Props = $Omit<
   'icon' | 'theme' | 'color' | 'iconColor'
 > & {
   /**
-   * @renamed Renamed from 'name' to 'icon` in v5.x
    * Icon to show.
    */
   icon: IconSource;

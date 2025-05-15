@@ -88,8 +88,8 @@ export type Props<Route extends BaseRoute> = {
    *
    * - `key`: a unique key to identify the route (required)
    * - `title`: title of the route to use as the tab label
-   * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
-   * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3
+   * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component
+   * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component
    * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
    * - `accessibilityLabel`: accessibility label for the tab button
    * - `testID`: test id for the tab button

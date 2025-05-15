@@ -31,8 +31,6 @@ export type Props = {
    */
   title: React.ReactNode;
   /**
-   * @renamed Renamed from 'icon' to 'leadingIcon' in v5.x
-   *
    * Leading icon to display for the `MenuItem`.
    */
   leadingIcon?: IconSource;
