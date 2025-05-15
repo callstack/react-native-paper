@@ -137,12 +137,12 @@ describe('renderAppbarContent', () => {
         ],
       });
 
-    const v3Spacing = {
+    const spacing = {
       marginLeft: 12,
     };
 
     expect(renderResult()[0].props.style).toEqual(
-      expect.arrayContaining([expect.objectContaining(v3Spacing)])
+      expect.arrayContaining([expect.objectContaining(spacing)])
     );
   });
 
@@ -301,13 +301,13 @@ describe('getAppbarColors', () => {
     );
   });
 
-  it('should return v3 light color if theme version is 3', () => {
+  it('should return default light color', () => {
     expect(getAppbarBackgroundColor(getTheme())).toBe(
       tokens.md.ref.palette.neutral99
     );
   });
 
-  it('should return v3 dark color if theme version is 3', () => {
+  it('should return default dark color', () => {
     expect(getAppbarBackgroundColor(getTheme(true))).toBe(
       tokens.md.ref.palette.neutral10
     );

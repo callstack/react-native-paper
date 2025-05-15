@@ -1,7 +1,7 @@
 import configureFonts from '../fonts';
 import { typescale } from '../themes/tokens';
 
-const customFontV3 = {
+const customFont = {
   displayLarge: {
     fontFamily: 'NotoSans',
     letterSpacing: 0,
@@ -128,7 +128,7 @@ describe('configureFonts', () => {
           letterSpacing: 0,
         },
       })
-    ).toEqual(customFontV3);
+    ).toEqual(customFont);
   });
 
   it('overrides properties passed in config for several variants', () => {

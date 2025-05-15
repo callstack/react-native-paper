@@ -323,7 +323,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
         {loading ? (
           <ActivityIndicator
             testID="activity-indicator"
-            style={styles.v3Loader}
+            style={styles.loader}
           />
         ) : (
           // Clear icon should be always rendered within Searchbar – it's transparent,
@@ -334,8 +334,8 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             pointerEvents={value ? 'auto' : 'none'}
             testID={`${testID}-icon-wrapper`}
             style={[
-              !value && styles.v3ClearIcon,
-              right !== undefined && styles.v3ClearIconHidden,
+              !value && styles.clearIcon,
+              right !== undefined && styles.clearIconHidden,
             ]}
           >
             <IconButton
@@ -417,18 +417,18 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
     minHeight: 72,
   },
-  v3Loader: {
+  loader: {
     marginHorizontal: 16,
   },
   rightStyle: {
     marginRight: 16,
   },
-  v3ClearIcon: {
+  clearIcon: {
     position: 'absolute',
     right: 0,
     marginLeft: 16,
   },
-  v3ClearIconHidden: {
+  clearIconHidden: {
     display: 'none',
   },
   divider: {

@@ -335,15 +335,15 @@ export const getFABGroupColors = ({
   };
 };
 
-const v3SmallSize = {
+const smallSize = {
   height: 40,
   width: 40,
 };
-const v3MediumSize = {
+const mediumSize = {
   height: 56,
   width: 56,
 };
-const v3LargeSize = {
+const largeSize = {
   height: 96,
   width: 96,
 };
@@ -369,15 +369,15 @@ export const getFabStyle = ({
 
   switch (size) {
     case 'small':
-      return { ...v3SmallSize, borderRadius: 3 * roundness };
+      return { ...smallSize, borderRadius: 3 * roundness };
     case 'medium':
-      return { ...v3MediumSize, borderRadius: 4 * roundness };
+      return { ...mediumSize, borderRadius: 4 * roundness };
     case 'large':
-      return { ...v3LargeSize, borderRadius: 7 * roundness };
+      return { ...largeSize, borderRadius: 7 * roundness };
   }
 };
 
-const v3Extended = {
+const extended = {
   height: 56,
   borderRadius: 16,
   paddingHorizontal: 16,
@@ -395,7 +395,7 @@ export const getExtendedFabStyle = ({
 }) => {
   if (customSize) return getExtendedFabDimensions(customSize);
 
-  return v3Extended;
+  return extended;
 };
 
 let cachedContext: CanvasRenderingContext2D | null = null;

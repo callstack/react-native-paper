@@ -352,7 +352,7 @@ const Chip = ({
                   ? [
                       styles.avatar,
                       styles.avatarSelected,
-                      selected && styles.md3SelectedIcon,
+                      selected && styles.selectedIcon,
                     ]
                   : null,
               ]}
@@ -380,12 +380,7 @@ const Chip = ({
             variant="labelLarge"
             selectable={false}
             numberOfLines={1}
-            style={[
-              styles.md3LabelText,
-              labelTextStyle,
-              labelSpacings,
-              textStyle,
-            ]}
+            style={[styles.labelText, labelTextStyle, labelSpacings, textStyle]}
             ellipsizeMode={ellipsizeMode}
             maxFontSizeMultiplier={maxFontSizeMultiplier}
           >
@@ -442,7 +437,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
     padding: 0,
   },
-  md3LabelText: {
+  labelText: {
     textAlignVertical: 'center',
     marginVertical: 6,
   },
@@ -455,7 +450,7 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     marginRight: 0,
   },
-  md3SelectedIcon: {
+  selectedIcon: {
     paddingLeft: 4,
   },
   // eslint-disable-next-line react-native/no-color-literals

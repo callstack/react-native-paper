@@ -65,7 +65,7 @@ describe('getSegmentedButtonColors', () => {
     ${getTheme()} | ${false} | ${false} | ${'a125f5'}  | ${undefined}   | ${getTheme().colors.onSurface}
     ${getTheme()} | ${false} | ${true}  | ${undefined} | ${'000'}       | ${getTheme().colors.onSecondaryContainer}
   `(
-    'returns $expected when disabled: $disabled, checked: $checked, checkedColor is $checkedColor and uncheckedColor is $uncheckedColor  and isV3: $theme.isV3',
+    'returns $expected when disabled: $disabled, checked: $checked, checkedColor is $checkedColor and uncheckedColor is $uncheckedColor',
     ({ theme, disabled, checked, checkedColor, uncheckedColor, expected }) => {
       expect(
         getSegmentedButtonColors({
@@ -79,7 +79,7 @@ describe('getSegmentedButtonColors', () => {
     }
   );
 
-  it('should return correct background color when checked and theme version 3', () => {
+  it('should return correct background color when checked', () => {
     expect(
       getSegmentedButtonColors({
         theme: getTheme(),
@@ -101,7 +101,7 @@ describe('getSegmentedButtonColors', () => {
     });
   });
 
-  it('should return correct border color with theme version 3', () => {
+  it('should return correct border color', () => {
     expect(
       getSegmentedButtonColors({
         theme: getTheme(),
@@ -113,7 +113,7 @@ describe('getSegmentedButtonColors', () => {
     });
   });
 
-  it('should return correct border color when disabled and theme version 3', () => {
+  it('should return correct border color when disabled', () => {
     expect(
       getSegmentedButtonColors({
         theme: getTheme(),
@@ -125,7 +125,7 @@ describe('getSegmentedButtonColors', () => {
     });
   });
 
-  it('should return correct textColor with theme version 3', () => {
+  it('should return correct textColor', () => {
     expect(
       getSegmentedButtonColors({
         theme: getTheme(),
@@ -137,7 +137,7 @@ describe('getSegmentedButtonColors', () => {
     });
   });
 
-  it('should return correct textColor when disabled and theme version 3', () => {
+  it('should return correct textColor when disabled', () => {
     expect(
       getSegmentedButtonColors({
         theme: getTheme(),

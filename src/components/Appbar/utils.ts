@@ -161,7 +161,7 @@ export const renderAppbarContent = ({
       if (child.type.displayName === 'Appbar.Content') {
         props.mode = mode;
         props.style = [
-          i === 0 && !shouldCenterContent && styles.v3Spacing,
+          i === 0 && !shouldCenterContent && styles.spacing,
           shouldCenterContent && styles.centerAlignedContent,
           child.props.style,
         ];
@@ -175,10 +175,7 @@ const styles = StyleSheet.create({
   centerAlignedContent: {
     alignItems: 'center',
   },
-  v2Spacing: {
-    marginLeft: 8,
-  },
-  v3Spacing: {
+  spacing: {
     marginLeft: 12,
   },
 });

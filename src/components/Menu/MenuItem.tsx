@@ -182,7 +182,7 @@ const MenuItem = ({
       style={[
         styles.container,
         { paddingHorizontal: containerPadding },
-        dense && styles.md3DenseContainer,
+        dense && styles.denseContainer,
         style,
       ]}
       onPress={onPress}
@@ -205,7 +205,7 @@ const MenuItem = ({
           style={[
             styles.content,
             { minWidth, maxWidth },
-            leadingIcon ? styles.md3LeadingIcon : styles.md3WithoutLeadingIcon,
+            leadingIcon ? styles.leadingIcon : styles.withoutLeadingIcons,
             contentStyle,
           ]}
           pointerEvents="none"
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     height: 48,
     justifyContent: 'center',
   },
-  md3DenseContainer: {
+  denseContainer: {
     height: 32,
   },
   row: {
@@ -249,10 +249,10 @@ const styles = StyleSheet.create({
   content: {
     justifyContent: 'center',
   },
-  md3LeadingIcon: {
+  leadingIcon: {
     marginLeft: 12,
   },
-  md3WithoutLeadingIcon: {
+  withoutLeadingIcons: {
     marginLeft: 4,
   },
 });

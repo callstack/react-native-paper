@@ -119,10 +119,10 @@ const AppbarContent = ({
   const titleTextColor = titleColor ? titleColor : onSurface;
 
   const modeContainerStyles = {
-    small: styles.v3DefaultContainer,
-    medium: styles.v3MediumContainer,
-    large: styles.v3LargeContainer,
-    'center-aligned': styles.v3DefaultContainer,
+    small: styles.defaultContainer,
+    medium: styles.mediumContainer,
+    large: styles.largeContainer,
+    'center-aligned': styles.defaultContainer,
   };
 
   const variant = modeTextVariant[mode] as TypescaleKey;
@@ -197,15 +197,15 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 12,
   },
-  v3DefaultContainer: {
+  defaultContainer: {
     paddingHorizontal: 0,
   },
-  v3MediumContainer: {
+  mediumContainer: {
     paddingHorizontal: 0,
     justifyContent: 'flex-end',
     paddingBottom: 24,
   },
-  v3LargeContainer: {
+  largeContainer: {
     paddingHorizontal: 0,
     paddingTop: 36,
     justifyContent: 'flex-end',
