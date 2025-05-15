@@ -7,7 +7,7 @@ import ScreenWrapper from '../ScreenWrapper';
 
 const ButtonExample = () => {
   return (
-    <ScreenWrapper contentContainerStyle={styles.v3Container}>
+    <ScreenWrapper contentContainerStyle={styles.container}>
       <List.Section title="Default">
         <View style={styles.row}>
           <IconButton icon="camera" size={24} onPress={() => {}} />
@@ -175,7 +175,7 @@ const ButtonExample = () => {
 ButtonExample.title = 'Icon Button';
 
 const styles = StyleSheet.create({
-  v3Container: {
+  container: {
     flexDirection: 'column',
   },
   row: {

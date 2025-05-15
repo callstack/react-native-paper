@@ -95,7 +95,7 @@ describe('Dialog', () => {
     expect(onDismiss).toHaveBeenCalledTimes(1);
   });
 
-  it('should apply top margin to the first child if the dialog is V3', () => {
+  it('should apply top margin to the first child', () => {
     const { getByTestId } = render(
       <Dialog visible={true}>
         <Dialog.Title testID="dialog-content">

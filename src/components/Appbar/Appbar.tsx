@@ -217,7 +217,7 @@ const Appbar = ({
     shouldAddRightSpacing = shouldCenterContent && rightItemsCount === 0;
   }
 
-  const spacingStyle = styles.v3Spacing;
+  const spacingStyle = styles.spacing;
 
   const insets = {
     paddingBottom: safeAreaInsets?.bottom,
@@ -322,7 +322,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 4,
   },
-  v3Spacing: {
+  spacing: {
     width: 52,
   },
   controlsRow: {
