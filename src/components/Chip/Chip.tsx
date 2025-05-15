@@ -316,6 +316,7 @@ const Chip = ({
       {...rest}
       testID={`${testID}-container`}
       theme={theme}
+      container
     >
       <TouchableRipple
         borderless

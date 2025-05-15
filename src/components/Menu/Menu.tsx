@@ -675,6 +675,7 @@ const Menu = ({
                 {...(theme.isV3 && { elevation })}
                 testID={`${testID}-surface`}
                 theme={theme}
+                container
               >
                 {(scrollableMenuHeight && (
                   <ScrollView

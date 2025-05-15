@@ -404,6 +404,7 @@ const AnimatedFAB = ({
       ]}
       {...(isV3 && { elevation: md3Elevation })}
       theme={theme}
+      container
     >
       <Animated.View
         style={[

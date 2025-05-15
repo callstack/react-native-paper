@@ -574,6 +574,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
           : 'none'
       }
       onLayout={onLayout}
+      container
     >
       <Animated.View
         style={[styles.barContent, { backgroundColor }]}

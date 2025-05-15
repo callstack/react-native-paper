@@ -275,6 +275,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
         ]}
         testID={`${testID}-container`}
         {...(theme.isV3 && { elevation })}
+        container
         theme={theme}
       >
         <IconButton

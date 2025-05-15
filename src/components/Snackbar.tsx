@@ -321,6 +321,7 @@ const Snackbar = ({
           style,
         ]}
         testID={testID}
+        container
         {...(isV3 && { elevation })}
         {...rest}
       >

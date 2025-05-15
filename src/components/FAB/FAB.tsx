@@ -289,6 +289,7 @@ const FAB = forwardRef<View, Props>(
         pointerEvents={visible ? 'auto' : 'none'}
         testID={`${testID}-container`}
         {...(isV3 && { elevation: md3Elevation })}
+        container
       >
         <TouchableRipple
           borderless
