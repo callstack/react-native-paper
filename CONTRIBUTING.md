@@ -13,7 +13,7 @@ The core team works directly on GitHub and all work is public.
 > **Working on your first pull request?** You can learn how from this _free_ series: [How to Contribute to an Open Source Project on GitHub](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github).
 
 1. Fork the repo and create your branch from `main` (a guide on [how to fork a repository](https://help.github.com/articles/fork-a-repo/)).
-2. Run `yarn bootstrap` on the root level, to setup the development environment.
+2. Run `yarn` on the root level, to setup the development environment.
 3. Do the changes you want and test them out in the example app before sending a pull request.
 
 ### Commit message convention
@@ -57,6 +57,9 @@ When you're working on a component:
 ### Running the example
 
 The example app uses [Expo](https://expo.dev/) for the React Native example. You will need to install the Expo app for [Android](https://play.google.com/store/apps/details?id=host.exp.exponent) and [iOS](https://itunes.apple.com/app/apple-store/id982107779) to start developing.
+
+> [!IMPORTANT]  
+> The example app is built with `react-native@0.77.x` and Expo SDK 52, which isn’t compatible with Expo Go. To run the app, you have to create a [development build](https://docs.expo.dev/develop/development-builds/create-a-build/).
 
 After you're done, you can run `yarn example start` in the project root (or `npx expo start` in the `example/` folder) and scan the QR code to launch it on your device.
 
