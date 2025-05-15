@@ -58,6 +58,7 @@ exports[`renders list section with custom title style 1`] = `
         "tertiaryContainer": "rgba(255, 216, 228, 1)",
       },
       "dark": false,
+      "direction": "ltr",
       "fonts": {
         "bodyLarge": {
           "fontFamily": "System",
@@ -585,6 +586,7 @@ exports[`renders list section with subheader 1`] = `
         "tertiaryContainer": "rgba(255, 216, 228, 1)",
       },
       "dark": false,
+      "direction": "ltr",
       "fonts": {
         "bodyLarge": {
           "fontFamily": "System",
@@ -1110,6 +1112,7 @@ exports[`renders list section without subheader 1`] = `
         "tertiaryContainer": "rgba(255, 216, 228, 1)",
       },
       "dark": false,
+      "direction": "ltr",
       "fonts": {
         "bodyLarge": {
           "fontFamily": "System",
