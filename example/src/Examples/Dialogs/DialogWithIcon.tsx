@@ -24,7 +24,7 @@ const DialogWithIcon = ({
           </TextComponent>
         </Dialog.Content>
         <Dialog.Actions>
-          <Button onPress={close} color={MD3Colors.error50}>
+          <Button onPress={close} textColor={MD3Colors.error50}>
             Disagree
           </Button>
           <Button onPress={close}>Agree</Button>

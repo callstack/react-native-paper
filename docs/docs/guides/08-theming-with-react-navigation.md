@@ -11,25 +11,7 @@ But how to make them work together?
 
 ## Themes adaptation
 
-### Material Design 2
-
-Fortunately, in Material Design 2, both React Navigation and React Native Paper offer very similar API when it comes to theming and theme color structure. It's possible to import them in light and dark variants from both.
-
-```js
-import {
-  DarkTheme as NavigationDarkTheme,
-  DefaultTheme as NavigationDefaultTheme,
-} from '@react-navigation/native';
-
-import {
-  MD2LightTheme,
-  MD2DarkTheme,
-} from 'react-native-paper';
-```
-
-### Material Design 3
-
-From v5, React Native Paper theme colors structure follows the Material Design 3 <i>(known as Material You)</i> colors system, which differs significantly from both the previous Paper's theme and React Navigation theme. 
+From `v5`, React Native Paper theme colors structure follows the Material Design 3 <i>(known as Material You)</i> colors system, which differs significantly from both the previous Paper's theme and React Navigation theme.
 
 However, to simplify adapting React Navigation theme colors, to use the ones from React Native Paper, it's worth using a utility called `adaptNavigationTheme` – it accepts navigation-compliant themes in both modes and returns their equivalents adjusted to Material Design 3.
 
@@ -49,10 +31,7 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
 Library exports also Material Design 3 themes in both modes:
 
 ```js
-import {
-  MD3LightTheme,
-  MD3DarkTheme,
-} from 'react-native-paper';
+import { LightTheme, DarkTheme } from 'react-native-paper';
 ```
 
 ## Combining theme objects
@@ -117,8 +96,6 @@ export default function App() {
 }
 ```
 
-
-
 Our goal here is to combine those two themes, so that we could control the theme for the entire application from a single place.
 
 To make things easier we can use [deepmerge](https://www.npmjs.com/package/deepmerge) package. We can install it with:
@@ -127,8 +104,6 @@ To make things easier we can use [deepmerge](https://www.npmjs.com/package/deepm
 npm install deepmerge
 ```
 
-### Material Design 2
-
 ```js
 import {
   NavigationContainer,
@@ -136,26 +111,8 @@ import {
   DefaultTheme as NavigationDefaultTheme,
 } from '@react-navigation/native';
 import {
-  MD2DarkTheme,
-  MD2LightTheme,
-} from 'react-native-paper';
-import merge from 'deepmerge';
-
-const CombinedDefaultTheme = merge(MD2LightTheme, NavigationDefaultTheme);
-const CombinedDarkTheme = merge(MD2DarkTheme, NavigationDarkTheme);
-```
-
-### Material Design 3
-
-```js
-import {
-  NavigationContainer,
-  DarkTheme as NavigationDarkTheme,
-  DefaultTheme as NavigationDefaultTheme,
-} from '@react-navigation/native';
-import {
-  MD3DarkTheme,
-  MD3LightTheme,
+  DarkTheme as PaperDarkTheme,
+  LightTheme as PaperLightTheme,
   adaptNavigationTheme,
 } from 'react-native-paper';
 import merge from 'deepmerge';
@@ -165,34 +122,11 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationDark: NavigationDarkTheme,
 });
 
-const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
-const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
+const CombinedDefaultTheme = merge(PaperLightTheme, LightTheme);
+const CombinedDarkTheme = merge(PaperDarkTheme, DarkTheme);
 ```
 
 Alternatively, we could merge those themes using vanilla JavaScript:
-
-### Material Design 2
-
-```js
-const CombinedDefaultTheme = {
-  ...MD2LightTheme,
-  ...NavigationDefaultTheme,
-  colors: {
-    ...MD2LightTheme.colors,
-    ...NavigationDefaultTheme.colors,
-  },
-};
-const CombinedDarkTheme = {
-  ...MD2DarkTheme,
-  ...NavigationDarkTheme,
-  colors: {
-    ...MD2DarkTheme.colors,
-    ...NavigationDarkTheme.colors,
-  },
-};
-```
-
-### Material Design 3
 
 ```js
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
@@ -201,18 +135,18 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
 });
 
 const CombinedDefaultTheme = {
-  ...MD3LightTheme,
+  ...PaperLightTheme,
   ...LightTheme,
   colors: {
-    ...MD3LightTheme.colors,
+    ...PaperLightTheme.colors,
     ...LightTheme.colors,
   },
 };
 const CombinedDarkTheme = {
-  ...MD3DarkTheme,
+  ...PaperDarkTheme,
   ...DarkTheme,
   colors: {
-    ...MD3DarkTheme.colors,
+    ...PaperDarkTheme.colors,
     ...DarkTheme.colors,
   },
 };
@@ -326,16 +260,12 @@ const Header = ({ scene }) => {
     <Appbar.Header
       theme={{
         colors: {
-          primary: theme?.colors.surface,
+          primary: theme.colors.surface,
         },
       }}
     >
       <Appbar.Content title={scene.route?.name} />
-        <Switch
-          color={'red'}
-          value={isThemeDark}
-          onValueChange={toggleTheme}
-        />
+      <Switch color={'red'} value={isThemeDark} onValueChange={toggleTheme} />
     </Appbar.Header>
   );
 };
@@ -350,7 +280,6 @@ Thanks to the linking of themes that we did earlier, switching themes can be con
 React Native Paper components will automatically use the provided theme thanks to the `PaperProvider` that is wrapped around the entry point of our application, but we can also access theme values manually with `useTheme` hook,
 exposed by the library. You can see how it's done in the `Header` component code above.
 
-If light/dark themes are not enough for your use case, you can learn more about creating Material Design themes [here](https://material.io/design/material-theming/implementing-your-theme.html#color).
-On `main` branch of the example app, you will find implemented [Menu](https://callstack.github.io/react-native-paper/docs/components/Menu) component, which allows you to choose a few custom themes. Inspecting code in `utils` and `Header` may give you some idea of how to use your own themes with `Paper`, in addition to dedicated [docs](https://callstack.github.io/react-native-paper/docs/components/Menu).
+If light/dark themes are not enough for your use case, you can learn more about extending the Material Design theme [here](https://callstack.github.io/react-native-paper/docs/guides/theming#extending-the-theme).
 
 Read more about integrating `Paper` with `React Navigation` in a brilliant [article](https://reactnavigation.org/blog/2020/01/29/using-react-navigation-5-with-react-native-paper/) by [@trensik](https://twitter.com/trensik)
