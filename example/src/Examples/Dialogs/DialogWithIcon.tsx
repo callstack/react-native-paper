@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Button, Portal, Dialog, MD3Colors } from 'react-native-paper';
+import { Button, Portal, Dialog, Colors } from 'react-native-paper';
 
 import { TextComponent } from './DialogTextComponent';
 
@@ -24,7 +24,7 @@ const DialogWithIcon = ({
           </TextComponent>
         </Dialog.Content>
         <Dialog.Actions>
-          <Button onPress={close} color={MD3Colors.error50}>
+          <Button onPress={close} color={Colors.error50}>
             Disagree
           </Button>
           <Button onPress={close}>Agree</Button>

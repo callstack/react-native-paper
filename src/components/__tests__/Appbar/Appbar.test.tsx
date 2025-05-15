@@ -5,7 +5,7 @@ import { act, render } from '@testing-library/react-native';
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 
 import { getTheme } from '../../../core/theming';
-import { tokens } from '../../../styles/themes/v3/tokens';
+import { tokens } from '../../../styles/themes/tokens';
 import Appbar from '../../Appbar';
 import {
   getAppbarBackgroundColor,

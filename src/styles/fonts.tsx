@@ -1,18 +1,18 @@
-import type { MD3Type, MD3Typescale, MD3TypescaleKey } from '../types';
-import { typescale } from './themes/v3/tokens';
+import type { TypescaleConfig, Typescale, TypescaleKey } from '../types';
+import { typescale } from './themes/tokens';
 
-type MD3FontsConfig =
+type FontsConfig =
   | {
-      [key in MD3TypescaleKey]: Partial<MD3Type>;
+      [key in TypescaleKey]: Partial<TypescaleConfig>;
     }
   | {
-      [key: string]: MD3Type;
+      [key: string]: TypescaleConfig;
     }
-  | Partial<MD3Type>;
+  | Partial<TypescaleConfig>;
 
-function configureV3Fonts(
-  config: MD3FontsConfig
-): MD3Typescale | (MD3Typescale & { [key: string]: MD3Type }) {
+function mergeFontsConfig(
+  config: FontsConfig
+): Typescale | (Typescale & { [key: string]: TypescaleConfig }) {
   if (!config) {
     return typescale;
   }
@@ -27,7 +27,7 @@ function configureV3Fonts(
         variantName,
         { ...variantProperties, ...config },
       ])
-    ) as MD3Typescale;
+    ) as Typescale;
   }
 
   return Object.assign(
@@ -35,7 +35,7 @@ function configureV3Fonts(
     typescale,
     ...Object.entries(config).map(([variantName, variantProperties]) => ({
       [variantName]: {
-        ...typescale[variantName as MD3TypescaleKey],
+        ...typescale[variantName as TypescaleKey],
         ...variantProperties,
       },
     }))
@@ -44,18 +44,18 @@ function configureV3Fonts(
 
 // eslint-disable-next-line no-redeclare
 export default function configureFonts(params?: {
-  config?: Partial<MD3Type>;
-}): MD3Typescale;
+  config?: Partial<TypescaleConfig>;
+}): Typescale;
 // eslint-disable-next-line no-redeclare
 export default function configureFonts(params?: {
-  config?: Partial<Record<MD3TypescaleKey, Partial<MD3Type>>>;
-}): MD3Typescale;
+  config?: Partial<Record<TypescaleKey, Partial<TypescaleConfig>>>;
+}): Typescale;
 // eslint-disable-next-line no-redeclare
 export default function configureFonts(params: {
-  config: Record<string, MD3Type>;
-}): MD3Typescale & { [key: string]: MD3Type };
+  config: Record<string, TypescaleConfig>;
+}): Typescale & { [key: string]: TypescaleConfig };
 // eslint-disable-next-line no-redeclare
 export default function configureFonts(params?: any) {
   const { config } = params || {};
-  return configureV3Fonts(config);
+  return mergeFontsConfig(config);
 }

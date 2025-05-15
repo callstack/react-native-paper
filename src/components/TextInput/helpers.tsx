@@ -5,17 +5,10 @@ import color from 'color';
 import { AdornmentSide, AdornmentType } from './Adornment/enums';
 import type { AdornmentConfig } from './Adornment/types';
 import {
-  MIN_WIDTH,
   ADORNMENT_SIZE,
-  MD3_ADORNMENT_OFFSET,
-  MD3_AFFIX_OFFSET,
-  MD3_FLAT_INPUT_OFFSET,
-  MD3_ICON_OFFSET,
-  MD3_INPUT_PADDING_HORIZONTAL,
-  MD3_LABEL_PADDING_HORIZONTAL,
-  MD3_LABEL_PADDING_TOP,
-  MD3_MIN_HEIGHT,
-  MD3_OUTLINED_INPUT_OFFSET,
+  LABEL_PADDING_HORIZONTAL,
+  ADORNMENT_OFFSET,
+  FLAT_INPUT_OFFSET,
 } from './constants';
 import type { TextInputLabelProp } from './types';
 import type { InternalTheme } from '../../types';
@@ -272,9 +265,6 @@ export const calculateFlatInputHorizontalPadding = ({
 }: {
   adornmentConfig: AdornmentConfig[];
 }) => {
-  const { LABEL_PADDING_HORIZONTAL, ADORNMENT_OFFSET, FLAT_INPUT_OFFSET } =
-    getConstants();
-
   let paddingLeft = LABEL_PADDING_HORIZONTAL;
   let paddingRight = LABEL_PADDING_HORIZONTAL;
 
@@ -529,24 +519,5 @@ export const getOutlinedInputColors = ({
     placeholderColor: getPlaceholderColor(baseOutlinedColorProps),
     selectionColor: getSelectionColor({ activeColor, customSelectionColor }),
     errorColor,
-  };
-};
-
-export const getConstants = () => {
-  return {
-    MIN_WIDTH,
-    // Text input affix
-    AFFIX_OFFSET: MD3_AFFIX_OFFSET,
-    // Text input icon
-    ICON_OFFSET: MD3_ICON_OFFSET,
-    //Text input flat
-    LABEL_PADDING_TOP: MD3_LABEL_PADDING_TOP,
-    LABEL_PADDING_HORIZONTAL: MD3_LABEL_PADDING_HORIZONTAL,
-    FLAT_INPUT_OFFSET: MD3_FLAT_INPUT_OFFSET,
-    MIN_HEIGHT: MD3_MIN_HEIGHT,
-    // Text input outlined;
-    INPUT_PADDING_HORIZONTAL: MD3_INPUT_PADDING_HORIZONTAL,
-    ADORNMENT_OFFSET: MD3_ADORNMENT_OFFSET,
-    OUTLINED_INPUT_OFFSET: MD3_OUTLINED_INPUT_OFFSET,
   };
 };

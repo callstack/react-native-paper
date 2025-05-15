@@ -12,11 +12,11 @@ import {
 import { useInternalTheme } from '../core/theming';
 import { isAnimatedValue } from '../styles/overlay';
 import shadow from '../styles/shadow';
-import type { ThemeProp, MD3Elevation } from '../types';
+import type { ThemeProp, Elevation } from '../types';
 import { forwardRef } from '../utils/forwardRef';
 import { splitStyles } from '../utils/splitStyles';
 
-type Elevation = 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+type SurfaceElevation = Elevation | Animated.Value;
 
 export type Props = Omit<React.ComponentPropsWithRef<typeof View>, 'style'> & {
   /**
@@ -34,7 +34,7 @@ export type Props = Omit<React.ComponentPropsWithRef<typeof View>, 'style'> & {
    * Note: In version 2 the `elevation` prop was accepted via `style` prop i.e. `style={{ elevation: 4 }}`.
    * It's no longer supported with theme version 3 and you should use `elevation` property instead.
    */
-  elevation?: Elevation;
+  elevation?: SurfaceElevation;
   /**
    * @supported Available in v5.x with theme version 3
    * Mode of the Surface.
@@ -86,7 +86,7 @@ const iOSShadowOutputRanges = [
 ];
 const inputRange = [0, 1, 2, 3, 4, 5];
 function getStyleForShadowLayer(
-  elevation: Elevation,
+  elevation: SurfaceElevation,
   layer: 0 | 1
 ): Animated.WithAnimatedValue<ShadowStyleIOS> {
   if (isAnimatedValue(elevation)) {
@@ -125,7 +125,7 @@ function getStyleForShadowLayer(
 const SurfaceIOS = forwardRef<
   View,
   Omit<Props, 'elevation'> & {
-    elevation: Elevation;
+    elevation: SurfaceElevation;
     backgroundColor?: string | Animated.AnimatedInterpolation<string | number>;
   }
 >(
@@ -255,7 +255,7 @@ const Surface = forwardRef<View, Props>(
         return elevation.interpolate({
           inputRange,
           outputRange: inputRange.map((elevation) => {
-            return elevationColors?.[`level${elevation as MD3Elevation}`];
+            return elevationColors?.[`level${elevation as Elevation}`];
           }),
         });
       }

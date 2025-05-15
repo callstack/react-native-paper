@@ -9,7 +9,7 @@ import {
   Button,
   Dialog,
   Drawer,
-  MD3Colors,
+  Colors,
   Switch,
   Text,
   TouchableRipple,
@@ -136,8 +136,8 @@ function DrawerItems() {
 
   const coloredLabelTheme = {
     colors: {
-      secondaryContainer: MD3Colors.tertiary80,
-      onSecondaryContainer: MD3Colors.tertiary20,
+      secondaryContainer: Colors.tertiary80,
+      onSecondaryContainer: Colors.tertiary20,
     },
   };
 
@@ -184,7 +184,7 @@ function DrawerItems() {
             {deviceColorsSupported ? (
               <TouchableRipple onPress={toggleShouldUseDeviceColors}>
                 <View style={styles.preference}>
-                  <Text variant="labelLarge">Use device colors *</Text>
+                  <Text variant="labelLarge">Use device colors</Text>
                   <View pointerEvents="none">
                     <Switch value={shouldUseDeviceColors} />
                   </View>
@@ -213,7 +213,7 @@ function DrawerItems() {
 
             <TouchableRipple onPress={toggleCollapsed}>
               <View style={styles.preference}>
-                <Text variant="labelLarge">Collapsed drawer *</Text>
+                <Text variant="labelLarge">Collapsed drawer</Text>
                 <View pointerEvents="none">
                   <Switch value={collapsed} />
                 </View>
@@ -222,7 +222,7 @@ function DrawerItems() {
 
             <TouchableRipple onPress={toggleCustomFont}>
               <View style={styles.preference}>
-                <Text variant="labelLarge">Custom font *</Text>
+                <Text variant="labelLarge">Custom font</Text>
                 <View pointerEvents="none">
                   <Switch value={customFontLoaded} />
                 </View>
@@ -232,7 +232,7 @@ function DrawerItems() {
             <TouchableRipple onPress={toggleRippleEffect}>
               <View style={styles.preference}>
                 <Text variant="labelLarge">
-                  {isIOS ? 'Highlight' : 'Ripple'} effect *
+                  {isIOS ? 'Highlight' : 'Ripple'} effect
                 </Text>
                 <View pointerEvents="none">
                   <Switch value={rippleEffectEnabled} />
@@ -240,11 +240,6 @@ function DrawerItems() {
               </View>
             </TouchableRipple>
           </Drawer.Section>
-          {!collapsed && (
-            <Text variant="bodySmall" style={styles.annotation}>
-              * - available only for MD3
-            </Text>
-          )}
           <Text variant="bodySmall" style={styles.annotation}>
             React Native Paper Version{' '}
             {require('react-native-paper/package.json').version}

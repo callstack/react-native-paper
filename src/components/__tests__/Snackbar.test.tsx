@@ -3,7 +3,7 @@ import { Animated, StyleSheet, Text, View } from 'react-native';
 
 import { act, render } from '@testing-library/react-native';
 
-import { MD3Colors } from '../../styles/themes/v3/tokens';
+import { Colors } from '../../styles/themes/tokens';
 import Snackbar from '../Snackbar';
 
 const styles = StyleSheet.create({
@@ -12,11 +12,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconView: {
-    backgroundColor: MD3Colors.error20,
+    backgroundColor: Colors.error20,
     padding: 15,
   },
   text: {
-    color: MD3Colors.primary100,
+    color: Colors.primary100,
     marginLeft: 10,
     flexWrap: 'wrap',
     flexShrink: 1,

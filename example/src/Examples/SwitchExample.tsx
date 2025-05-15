@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 
-import { MD3Colors, Switch, Text, TouchableRipple } from 'react-native-paper';
+import { Colors, Switch, Text, TouchableRipple } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -30,7 +30,7 @@ const SwitchExample = () => {
         <View style={styles.row}>
           <Text>Custom {switchValueCustomlLabel}</Text>
           <View pointerEvents="none">
-            <Switch value={valueCustom} color={MD3Colors.tertiary50} />
+            <Switch value={valueCustom} color={Colors.tertiary50} />
           </View>
         </View>
       </TouchableRipple>
@@ -57,7 +57,7 @@ const SwitchExample = () => {
         <Switch
           value={valueCustom}
           onValueChange={() => setCustomValue(!valueCustom)}
-          color={MD3Colors.tertiary50}
+          color={Colors.tertiary50}
         />
       </View>
       <View style={styles.row}>

@@ -7,7 +7,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import type { MD3TypescaleKey, ThemeProp } from '../../types';
+import type { TypescaleKey, ThemeProp } from '../../types';
 import Text from '../Typography/Text';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
@@ -39,7 +39,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
-  titleVariant?: keyof typeof MD3TypescaleKey;
+  titleVariant?: keyof typeof TypescaleKey;
   /**
    * Text for the subtitle. Note that this will only accept a string or `<Text>`-based node.
    */
@@ -68,7 +68,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
-  subtitleVariant?: keyof typeof MD3TypescaleKey;
+  subtitleVariant?: keyof typeof TypescaleKey;
   /**
    * Callback which returns a React element to display on the left side.
    */

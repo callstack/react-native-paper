@@ -1,5 +1,5 @@
 import configureFonts from '../fonts';
-import { typescale } from '../themes/v3/tokens';
+import { typescale } from '../themes/tokens';
 
 const customFontV3 = {
   displayLarge: {

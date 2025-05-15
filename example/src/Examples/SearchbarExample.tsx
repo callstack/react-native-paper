@@ -5,7 +5,7 @@ import type { DrawerNavigationProp } from '@react-navigation/drawer';
 import type { StackNavigationProp } from '@react-navigation/stack';
 import {
   List,
-  MD3Colors,
+  Colors,
   Searchbar,
   Snackbar,
   Avatar,
@@ -57,7 +57,7 @@ const SearchExample = ({ navigation }: Props) => {
             value={searchQueries.traileringIcon}
             traileringIcon={'microphone'}
             traileringIconColor={
-              isVisible ? MD3Colors.error40 : colors.onSurfaceVariant
+              isVisible ? Colors.error40 : colors.onSurfaceVariant
             }
             traileringIconAccessibilityLabel={'microphone button'}
             onTraileringIconPress={() => setIsVisible(true)}
@@ -76,7 +76,7 @@ const SearchExample = ({ navigation }: Props) => {
             value={searchQueries.traileringIconWithRightItem}
             traileringIcon={'microphone'}
             traileringIconColor={
-              isVisible ? MD3Colors.error40 : colors.onSurfaceVariant
+              isVisible ? Colors.error40 : colors.onSurfaceVariant
             }
             traileringIconAccessibilityLabel={'microphone button'}
             onTraileringIconPress={() => setIsVisible(true)}

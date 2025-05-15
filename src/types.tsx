@@ -21,7 +21,7 @@ export type Font = {
 
 type Mode = 'adaptive' | 'exact';
 
-export type MD3Colors = {
+export type Colors = {
   primary: string;
   primaryContainer: string;
   secondary: string;
@@ -54,42 +54,8 @@ export type MD3Colors = {
   shadow: string;
   scrim: string;
   backdrop: string;
-  elevation: MD3ElevationColors;
+  elevation: ElevationColors;
 };
-
-export type MD3AndroidColors = {
-  primary: number;
-  primaryContainer: number;
-  secondary: number;
-  secondaryContainer: number;
-  tertiary: number;
-  tertiaryContainer: number;
-  surface: number;
-  surfaceVariant: number;
-  background: number;
-  error: number;
-  errorContainer: number;
-  onPrimary: number;
-  onPrimaryContainer: number;
-  onSecondary: number;
-  onSecondaryContainer: number;
-  onTertiary: number;
-  onTertiaryContainer: number;
-  onSurface: number;
-  onSurfaceVariant: number;
-  onError: number;
-  onErrorContainer: number;
-  onBackground: number;
-  outline: number;
-  outlineVariant: number;
-  inverseSurface: number;
-  inverseOnSurface: number;
-  inversePrimary: number;
-  shadow: number;
-  scrim: number;
-};
-
-export type MD3Palette = {};
 
 export type ThemeProp = $DeepPartial<InternalTheme>;
 
@@ -103,15 +69,14 @@ export type ThemeBase = {
   };
 };
 
-export type MD3Theme = ThemeBase & {
-  colors: MD3Colors;
-  fonts: MD3Typescale;
+export type Theme = ThemeBase & {
+  colors: Colors;
+  fonts: Typescale;
 };
 
-export type InternalTheme = MD3Theme;
+export type InternalTheme = Theme;
 
-// MD3 types
-export enum MD3TypescaleKey {
+export enum TypescaleKey {
   displayLarge = 'displayLarge',
   displayMedium = 'displayMedium',
   displaySmall = 'displaySmall',
@@ -133,7 +98,7 @@ export enum MD3TypescaleKey {
   bodySmall = 'bodySmall',
 }
 
-export type MD3Type = {
+export type TypescaleConfig = {
   fontFamily: string;
   letterSpacing: number;
   fontWeight: Font['fontWeight'];
@@ -142,14 +107,14 @@ export type MD3Type = {
   fontStyle?: Font['fontStyle'];
 };
 
-export type MD3Typescale =
+export type Typescale =
   | {
-      [key in MD3TypescaleKey]: MD3Type;
+      [key in TypescaleKey]: TypescaleConfig;
     } & {
-      ['default']: Omit<MD3Type, 'lineHeight' | 'fontSize'>;
+      ['default']: Omit<TypescaleConfig, 'lineHeight' | 'fontSize'>;
     };
 
-export type MD3Elevation = 0 | 1 | 2 | 3 | 4 | 5;
+export type Elevation = 0 | 1 | 2 | 3 | 4 | 5;
 
 export enum ElevationLevels {
   'level0',
@@ -160,7 +125,7 @@ export enum ElevationLevels {
   'level5',
 }
 
-export type MD3ElevationColors = {
+export type ElevationColors = {
   [key in keyof typeof ElevationLevels]: string;
 };
 
