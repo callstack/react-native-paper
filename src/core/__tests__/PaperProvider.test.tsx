@@ -8,7 +8,7 @@ import {
 
 import { render, act } from '@testing-library/react-native';
 
-import { MD3LightTheme, MD3DarkTheme } from '../../styles/themes';
+import { LightTheme, DarkTheme } from '../../styles/themes';
 import type { ThemeProp } from '../../types';
 import PaperProvider from '../PaperProvider';
 import { useTheme } from '../theming';
@@ -111,24 +111,24 @@ describe('PaperProvider', () => {
     mockAppearance();
     const { getByTestId } = render(createProvider());
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-      MD3LightTheme
+      LightTheme
     );
     act(() => Appearance.__internalListeners[0]({ colorScheme: 'dark' }));
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-      MD3DarkTheme
+      DarkTheme
     );
   });
 
   it('handles overriding animation with the custom one', () => {
     const { getByTestId } = render(
       createProvider({
-        ...MD3LightTheme,
+        ...LightTheme,
         animation: { defaultAnimationDuration: 250 },
       })
     );
 
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual({
-      ...MD3LightTheme,
+      ...LightTheme,
       animation: { scale: 1, defaultAnimationDuration: 250 },
     });
   });
@@ -150,18 +150,18 @@ describe('PaperProvider', () => {
       getByTestId('provider-child-view').props.theme.animation.scale
     ).toStrictEqual(0);
 
-    rerender(createProvider(MD3LightTheme));
+    rerender(createProvider(LightTheme));
     expect(AccessibilityInfo.removeEventListener).toHaveBeenCalled();
   });
 
   it('should not set AccessibilityInfo listeners, if there is a theme', async () => {
     mockAppearance();
-    const { getByTestId } = render(createProvider(MD3DarkTheme));
+    const { getByTestId } = render(createProvider(DarkTheme));
 
     expect(AccessibilityInfo.addEventListener).not.toHaveBeenCalled();
     expect(AccessibilityInfo.removeEventListener).not.toHaveBeenCalled();
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-      MD3DarkTheme
+      DarkTheme
     );
   });
 
@@ -172,18 +172,18 @@ describe('PaperProvider', () => {
     expect(Appearance.addChangeListener).toHaveBeenCalled();
     act(() => Appearance.__internalListeners[0]({ colorScheme: 'dark' }));
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-      MD3DarkTheme
+      DarkTheme
     );
   });
 
   it('should not set Appearance listeners, if the theme is passed', async () => {
     mockAppearance();
-    const { getByTestId } = render(createProvider(MD3LightTheme));
+    const { getByTestId } = render(createProvider(LightTheme));
 
     expect(Appearance.addChangeListener).not.toHaveBeenCalled();
     expect(Appearance.removeChangeListener).not.toHaveBeenCalled();
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-      MD3LightTheme
+      LightTheme
     );
   });
 
@@ -194,14 +194,14 @@ describe('PaperProvider', () => {
     const { getByTestId } = render(createProvider());
     expect(Appearance).toEqual(null);
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-      MD3LightTheme
+      LightTheme
     );
   });
 
   it.each`
-    label              | theme            | colorScheme
-    ${'default theme'} | ${MD3LightTheme} | ${'light'}
-    ${'dark theme'}    | ${MD3DarkTheme}  | ${'dark'}
+    label              | theme         | colorScheme
+    ${'default theme'} | ${LightTheme} | ${'light'}
+    ${'dark theme'}    | ${DarkTheme}  | ${'dark'}
   `(
     'provides $label for $colorScheme color scheme',
     async ({ theme, colorScheme }) => {
@@ -217,9 +217,9 @@ describe('PaperProvider', () => {
   it('uses provided custom theme', async () => {
     mockAppearance();
     const customTheme = {
-      ...MD3LightTheme,
+      ...LightTheme,
       colors: {
-        ...MD3LightTheme.colors,
+        ...LightTheme.colors,
         primary: 'tomato',
         accent: 'yellow',
       },
@@ -232,8 +232,8 @@ describe('PaperProvider', () => {
 
   it.each`
     colorScheme | expectedTheme
-    ${'light'}  | ${MD3LightTheme}
-    ${'dark'}   | ${MD3DarkTheme}
+    ${'light'}  | ${LightTheme}
+    ${'dark'}   | ${DarkTheme}
   `(
     'uses correct theme, $colorScheme mode, version $version',
     async ({ colorScheme, expectedTheme }) => {

@@ -8,7 +8,7 @@ import {
 
 import { act, fireEvent, render } from '@testing-library/react-native';
 
-import { MD3LightTheme } from '../../styles/themes';
+import { LightTheme } from '../../styles/themes';
 import Modal from '../Modal';
 
 interface BackHandlerStatic extends RNBackHandlerStatic {
@@ -60,7 +60,7 @@ describe('Modal', () => {
       );
 
       expect(getByTestId('modal-backdrop')).toHaveStyle({
-        backgroundColor: MD3LightTheme.colors.backdrop,
+        backgroundColor: LightTheme.colors.backdrop,
       });
     });
 

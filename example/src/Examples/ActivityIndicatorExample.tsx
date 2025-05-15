@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { ActivityIndicator, FAB, List, MD3Colors } from 'react-native-paper';
+import { ActivityIndicator, FAB, List, Colors } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -41,7 +41,7 @@ const ActivityIndicatorExample = () => {
       <List.Section title="Custom color">
         <ActivityIndicator
           animating={animating}
-          color={MD3Colors.error20}
+          color={Colors.error20}
           hidesWhenStopped={false}
         />
       </List.Section>

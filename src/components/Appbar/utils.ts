@@ -2,7 +2,7 @@ import React from 'react';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet, Animated } from 'react-native';
 
-import { MD3Colors } from '../../styles/themes/v3/tokens';
+import { Colors } from '../../styles/themes/tokens';
 import type { InternalTheme, ThemeProp } from '../../types';
 
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
@@ -49,7 +49,7 @@ export const getAppbarColor = ({
   }
 
   if (isDark) {
-    return MD3Colors.primary100;
+    return Colors.primary100;
   }
 
   return undefined;
@@ -86,13 +86,13 @@ type RenderAppbarContentProps = BaseProps & {
   theme?: ThemeProp;
 };
 
-const MD3_DEFAULT_APPBAR_HEIGHT = 64;
+const DEFAULT_APPBAR_HEIGHT = 64;
 
 export const modeAppbarHeight = {
-  small: MD3_DEFAULT_APPBAR_HEIGHT,
+  small: DEFAULT_APPBAR_HEIGHT,
   medium: 112,
   large: 152,
-  'center-aligned': MD3_DEFAULT_APPBAR_HEIGHT,
+  'center-aligned': DEFAULT_APPBAR_HEIGHT,
 };
 
 export const modeTextVariant = {

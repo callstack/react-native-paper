@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import { MD3Colors } from '../../styles/themes/v3/tokens';
+import { Colors } from '../../styles/themes/tokens';
 import type { ThemeProp } from '../../types';
 import getContrastingColor from '../../utils/getContrastingColor';
 import Icon, { IconSource } from '../Icon';
@@ -58,7 +58,7 @@ const Avatar = ({
     rest.color ??
     getContrastingColor(
       backgroundColor,
-      MD3Colors.primary100,
+      Colors.primary100,
       'rgba(0, 0, 0, .54)'
     );
 

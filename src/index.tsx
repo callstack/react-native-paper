@@ -1,4 +1,4 @@
-export { MD3Colors } from './styles/themes/v3/tokens';
+export { Colors } from './styles/themes/tokens';
 
 export {
   useTheme,
@@ -145,9 +145,4 @@ export type {
   MaterialBottomTabScreenProps,
 } from './react-navigation';
 
-export type {
-  MD3Theme,
-  ThemeBase,
-  MD3Elevation,
-  MD3TypescaleKey,
-} from './types';
+export type { Theme, ThemeBase, Elevation, TypescaleKey } from './types';

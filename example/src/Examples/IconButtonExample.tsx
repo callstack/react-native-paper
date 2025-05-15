@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { IconButton, List, MD3Colors } from 'react-native-paper';
+import { IconButton, List, Colors } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -121,7 +121,7 @@ const ButtonExample = () => {
           <IconButton
             icon="lock"
             size={24}
-            iconColor={MD3Colors.tertiary50}
+            iconColor={Colors.tertiary50}
             onPress={() => {}}
           />
           <IconButton
@@ -129,7 +129,7 @@ const ButtonExample = () => {
             mode="contained"
             style={styles.square}
             size={24}
-            iconColor={MD3Colors.tertiary50}
+            iconColor={Colors.tertiary50}
             onPress={() => {}}
           />
           <IconButton
@@ -138,7 +138,7 @@ const ButtonExample = () => {
             style={styles.slightlyRounded}
             size={24}
             contentStyle={styles.padding}
-            iconColor={MD3Colors.tertiary50}
+            iconColor={Colors.tertiary50}
             onPress={() => {}}
           />
           <IconButton
@@ -146,7 +146,7 @@ const ButtonExample = () => {
             mode="contained-tonal"
             style={styles.differentBorderRadius}
             size={24}
-            iconColor={MD3Colors.tertiary50}
+            iconColor={Colors.tertiary50}
             onPress={() => {}}
           />
           <IconButton
@@ -154,7 +154,7 @@ const ButtonExample = () => {
             mode="outlined"
             style={styles.differentBorderRadius}
             size={24}
-            iconColor={MD3Colors.tertiary50}
+            iconColor={Colors.tertiary50}
             onPress={() => {}}
           />
           <IconButton icon="camera" size={36} onPress={() => {}} />
@@ -162,7 +162,7 @@ const ButtonExample = () => {
             icon="lock"
             size={36}
             onPress={() => {}}
-            containerColor={MD3Colors.tertiary60}
+            containerColor={Colors.tertiary60}
           />
           <IconButton icon="heart" size={60} onPress={() => {}} />
           <IconButton icon="" size={60} onPress={() => {}} loading />

@@ -13,8 +13,7 @@ import { useInternalTheme } from '../../../core/theming';
 import type { $Omit, ThemeProp } from '../../../types';
 import type { IconSource } from '../../Icon';
 import IconButton from '../../IconButton/IconButton';
-import { ICON_SIZE } from '../constants';
-import { getConstants } from '../helpers';
+import { ICON_OFFSET, ICON_SIZE } from '../constants';
 
 export type Props = $Omit<
   React.ComponentProps<typeof IconButton>,
@@ -81,8 +80,6 @@ const IconAdornment: React.FunctionComponent<
   testID,
   disabled,
 }) => {
-  const { ICON_OFFSET } = getConstants();
-
   const style = {
     top: topPosition,
     [side]: ICON_OFFSET,

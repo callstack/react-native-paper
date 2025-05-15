@@ -6,7 +6,7 @@ import { fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
 
 import { DefaultTheme, getTheme, ThemeProvider } from '../../core/theming';
-import { MD3Colors } from '../../styles/themes/v3/tokens';
+import { Colors } from '../../styles/themes/tokens';
 import {
   getFlatInputColors,
   getOutlinedInputColors,
@@ -15,7 +15,7 @@ import TextInput, { Props } from '../TextInput/TextInput';
 
 const style = StyleSheet.create({
   inputStyle: {
-    color: MD3Colors.error50,
+    color: Colors.error50,
   },
   centered: {
     textAlign: 'center',
@@ -119,7 +119,7 @@ it('correctly applies cursorColor prop', () => {
       label="Flat input"
       placeholder="Type something"
       value={'Some test value'}
-      cursorColor={MD3Colors.error50}
+      cursorColor={Colors.error50}
     />
   );
 

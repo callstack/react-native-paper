@@ -24,9 +24,13 @@ import {
   LABEL_WIGGLE_X_OFFSET,
   ADORNMENT_SIZE,
   OUTLINE_MINIMIZED_LABEL_Y_OFFSET,
-  LABEL_PADDING_TOP,
   MIN_DENSE_HEIGHT_OUTLINED,
   LABEL_PADDING_TOP_DENSE,
+  ADORNMENT_OFFSET,
+  MIN_HEIGHT,
+  INPUT_PADDING_HORIZONTAL,
+  MIN_WIDTH,
+  OUTLINED_INPUT_OFFSET,
 } from './constants';
 import {
   calculateLabelTopPosition,
@@ -36,7 +40,6 @@ import {
   Padding,
   calculateOutlinedIconAndAffixTopPosition,
   getOutlinedInputColors,
-  getConstants,
 } from './helpers';
 import InputLabel from './Label/InputLabel';
 import LabelBackground from './Label/LabelBackground';
@@ -88,9 +91,6 @@ const TextInputOutlined = ({
   } = theme;
   const hasActiveOutline = parentState.focused || error;
 
-  const { INPUT_PADDING_HORIZONTAL, MIN_HEIGHT, ADORNMENT_OFFSET, MIN_WIDTH } =
-    getConstants();
-
   const {
     fontSize: fontSizeStyle,
     fontWeight,
@@ -122,7 +122,7 @@ const TextInputOutlined = ({
   });
 
   const densePaddingTop = label ? LABEL_PADDING_TOP_DENSE : 0;
-  const paddingTop = label ? LABEL_PADDING_TOP : 0;
+  const paddingTop = label ? OUTLINED_INPUT_OFFSET / 2 : 0;
   const yOffset = label ? OUTLINE_MINIMIZED_LABEL_Y_OFFSET : 0;
 
   const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
