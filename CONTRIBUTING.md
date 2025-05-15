@@ -65,6 +65,22 @@ After you're done, you can run `yarn example start` in the project root (or `npx
 
 To run the example on web, run `yarn example web` in the project root.
 
+### Testing a specific pull request/commit
+
+If you want to test the changes brought by a pull request, you can do so by pointing at the git-commit or branch in your `package.json` file. For example:
+
+```json
+{
+  "dependencies": {
+    "react-native-paper": "git+https://github.com/callstack/react-native-paper.git#<commit-hash>",
+  }
+}
+```
+
+Then run `yarn install`/`npm install` in your project to install the package from the git repository.
+
+Alternatively, you may clone the `react-native-paper` repo and use the [yalc](https://github.com/wclr/yalc) tool to link the package to the project.
+
 ### Working on documentation
 
 The documentation is automatically generated from the [TypeScript](https://www.typescriptlang.org/) annotations in the components. You can add comments above the type annotations to add descriptions. To preview the generated documentation, run `yarn docs start` in the project root.
