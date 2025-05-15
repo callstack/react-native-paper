@@ -220,6 +220,7 @@ function Modal({
           testID={`${testID}-surface`}
           theme={theme}
           style={[{ opacity }, styles.content, contentContainerStyle]}
+          container
         >
           {children}
         </Surface>

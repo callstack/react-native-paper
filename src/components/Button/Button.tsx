@@ -350,6 +350,7 @@ const Button = (
         ] as Animated.WithAnimatedValue<StyleProp<ViewStyle>>
       }
       {...(isV3 && { elevation: elevation })}
+      container
     >
       <TouchableRipple
         borderless

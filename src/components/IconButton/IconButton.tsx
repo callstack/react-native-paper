@@ -181,6 +181,7 @@ const IconButton = forwardRef<View, Props>(
           !isV3 && disabled && styles.disabled,
           style,
         ]}
+        container
         {...(isV3 && { elevation: 0 })}
       >
         <TouchableRipple

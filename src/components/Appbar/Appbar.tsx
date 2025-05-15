@@ -254,6 +254,7 @@ const Appbar = ({
         !theme.isV3 && { elevation },
       ]}
       elevation={elevation as MD3Elevation}
+      container
       {...rest}
     >
       {shouldAddLeftSpacing ? <View style={spacingStyle} /> : null}

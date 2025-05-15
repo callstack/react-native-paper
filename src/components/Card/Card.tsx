@@ -304,6 +304,7 @@ const Card = (
         elevation: isMode('elevated') ? computedElevation : 0,
       })}
       testID={`${testID}-container`}
+      container
       {...rest}
     >
       {isMode('outlined') && (
