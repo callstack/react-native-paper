@@ -19,8 +19,6 @@ export type Font = {
   fontStyle?: 'normal' | 'italic' | undefined;
 };
 
-type Mode = 'adaptive' | 'exact';
-
 export type Colors = {
   primary: string;
   primaryContainer: string;
@@ -61,7 +59,6 @@ export type ThemeProp = $DeepPartial<InternalTheme>;
 
 export type ThemeBase = {
   dark: boolean;
-  mode?: Mode;
   roundness: number;
   animation: {
     scale: number;
