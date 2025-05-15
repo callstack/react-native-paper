@@ -29,12 +29,10 @@ export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
    */
   icon: IconSource;
   /**
-   * @supported Available in v5.x with theme version 3
    * Mode of the icon button. By default there is no specified mode - only pressable icon will be rendered.
    */
   mode?: IconButtonMode;
   /**
-   * @renamed Renamed from 'color' to 'iconColor' in v5.x
    * Color of the icon.
    */
   iconColor?: string;
