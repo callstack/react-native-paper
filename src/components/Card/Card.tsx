@@ -291,11 +291,12 @@ const Card = (
       ref={ref}
       style={[
         isV3 && !isMode('elevated') && { backgroundColor },
-        !isV3 && isMode('outlined')
-          ? styles.resetElevation
-          : {
-              elevation: computedElevation as unknown as number,
-            },
+        !isV3 &&
+          (isMode('outlined')
+            ? styles.resetElevation
+            : {
+                elevation: computedElevation as unknown as number,
+              }),
         borderRadiusCombinedStyles,
         style,
       ]}
