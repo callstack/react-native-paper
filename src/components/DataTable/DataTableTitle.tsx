@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Animated,
   GestureResponderEvent,
-  I18nManager,
   PixelRatio,
   Pressable,
   StyleProp,
@@ -120,7 +119,7 @@ const DataTableTitle = ({
         name="arrow-up"
         size={16}
         color={textColor}
-        direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+        direction={theme.direction}
       />
     </Animated.View>
   ) : null;
@@ -142,7 +141,7 @@ const DataTableTitle = ({
           // if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
           numberOfLines > 1
             ? numeric
-              ? I18nManager.getConstants().isRTL
+              ? theme.direction === 'rtl'
                 ? styles.leftText
                 : styles.rightText
               : styles.centerText
