@@ -179,12 +179,8 @@ const IconButton = forwardRef<View, Props>(
           borderStyles,
           style,
         ]}
-<<<<<<< HEAD
         container
-        {...(isV3 && { elevation: 0 })}
-=======
         elevation={0}
->>>>>>> e44bc5a3f (refactor: remove `isV3` and MD2 from components (#4727))
       >
         <TouchableRipple
           borderless

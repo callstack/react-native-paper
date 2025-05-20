@@ -346,12 +346,8 @@ const Button = (
           style,
         ] as Animated.WithAnimatedValue<StyleProp<ViewStyle>>
       }
-<<<<<<< HEAD
-      {...(isV3 && { elevation: elevation })}
-      container
-=======
       elevation={elevation}
->>>>>>> e44bc5a3f (refactor: remove `isV3` and MD2 from components (#4727))
+      container
     >
       <TouchableRipple
         borderless
