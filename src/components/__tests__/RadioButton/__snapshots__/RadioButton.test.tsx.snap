@@ -3,7 +3,6 @@
 exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="radio"
   accessibilityState={
     {
       "busy": undefined,
@@ -33,6 +32,7 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="radio"
   style={
     [
       {
@@ -90,7 +90,6 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
 exports[`RadioButton on default platform renders properly 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="radio"
   accessibilityState={
     {
       "busy": undefined,
@@ -120,6 +119,7 @@ exports[`RadioButton on default platform renders properly 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="radio"
   style={
     [
       {
@@ -176,7 +176,6 @@ exports[`RadioButton on default platform renders properly 1`] = `
 exports[`RadioButton on ios platform renders properly 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="radio"
   accessibilityState={
     {
       "busy": undefined,
@@ -206,6 +205,7 @@ exports[`RadioButton on ios platform renders properly 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="radio"
   style={
     [
       {
@@ -262,7 +262,6 @@ exports[`RadioButton on ios platform renders properly 1`] = `
 exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider renders properly 1`] = `
 <View
   accessibilityLiveRegion="polite"
-  accessibilityRole="radio"
   accessibilityState={
     {
       "busy": undefined,
@@ -292,6 +291,7 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="radio"
   style={
     [
       {

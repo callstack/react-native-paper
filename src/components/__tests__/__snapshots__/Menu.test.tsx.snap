@@ -54,7 +54,6 @@ exports[`renders menu with content styles 1`] = `
           testID="button-container"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -84,6 +83,7 @@ exports[`renders menu with content styles 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -305,7 +305,6 @@ exports[`renders menu with content styles 1`] = `
             testID="menu-surface"
           >
             <View
-              accessibilityRole="menuitem"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -335,6 +334,7 @@ exports[`renders menu with content styles 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="menuitem"
               style={
                 [
                   false,
@@ -426,7 +426,6 @@ exports[`renders menu with content styles 1`] = `
               </View>
             </View>
             <View
-              accessibilityRole="menuitem"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -456,6 +455,7 @@ exports[`renders menu with content styles 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="menuitem"
               style={
                 [
                   false,
@@ -607,7 +607,6 @@ exports[`renders not visible menu 1`] = `
         testID="button-container"
       >
         <View
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -637,6 +636,7 @@ exports[`renders not visible menu 1`] = `
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -772,7 +772,6 @@ exports[`renders visible menu 1`] = `
           testID="button-container"
         >
           <View
-            accessibilityRole="button"
             accessibilityState={
               {
                 "busy": undefined,
@@ -802,6 +801,7 @@ exports[`renders visible menu 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -1019,7 +1019,6 @@ exports[`renders visible menu 1`] = `
             testID="menu-surface"
           >
             <View
-              accessibilityRole="menuitem"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -1049,6 +1048,7 @@ exports[`renders visible menu 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="menuitem"
               style={
                 [
                   false,
@@ -1140,7 +1140,6 @@ exports[`renders visible menu 1`] = `
               </View>
             </View>
             <View
-              accessibilityRole="menuitem"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -1170,6 +1169,7 @@ exports[`renders visible menu 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="menuitem"
               style={
                 [
                   false,

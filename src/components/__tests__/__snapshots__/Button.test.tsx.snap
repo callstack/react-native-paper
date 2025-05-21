@@ -42,7 +42,6 @@ exports[`renders button with an accessibility hint 1`] = `
   >
     <View
       accessibilityHint="hint"
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -72,6 +71,7 @@ exports[`renders button with an accessibility hint 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -192,7 +192,6 @@ exports[`renders button with an accessibility label 1`] = `
   >
     <View
       accessibilityLabel="label"
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -222,6 +221,7 @@ exports[`renders button with an accessibility label 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -341,7 +341,6 @@ exports[`renders button with button color 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -371,6 +370,7 @@ exports[`renders button with button color 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -490,7 +490,6 @@ exports[`renders button with color 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -520,6 +519,7 @@ exports[`renders button with color 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -639,7 +639,6 @@ exports[`renders button with custom testID 1`] = `
     testID="custom:testID-container"
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -669,6 +668,7 @@ exports[`renders button with custom testID 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -788,7 +788,6 @@ exports[`renders button with icon 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -818,6 +817,7 @@ exports[`renders button with icon 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -986,7 +986,6 @@ exports[`renders button with icon in reverse order 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -1016,6 +1015,7 @@ exports[`renders button with icon in reverse order 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -1186,7 +1186,6 @@ exports[`renders contained contained with mode 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -1216,6 +1215,7 @@ exports[`renders contained contained with mode 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -1336,7 +1336,6 @@ exports[`renders disabled button 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -1366,6 +1365,7 @@ exports[`renders disabled button 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -1485,7 +1485,6 @@ exports[`renders loading button 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -1515,6 +1514,7 @@ exports[`renders loading button 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -1540,13 +1540,9 @@ exports[`renders loading button 1`] = `
         }
       >
         <View
-          accessibilityRole="progressbar"
-          accessibilityState={
-            {
-              "busy": true,
-            }
-          }
           accessible={true}
+          aria-busy={true}
+          role="progressbar"
           style={
             [
               {
@@ -1853,7 +1849,6 @@ exports[`renders outlined button with mode 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -1883,6 +1878,7 @@ exports[`renders outlined button with mode 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -2003,7 +1999,6 @@ exports[`renders text button by default 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -2033,6 +2028,7 @@ exports[`renders text button by default 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -2152,7 +2148,6 @@ exports[`renders text button with mode 1`] = `
     testID="button-container"
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -2182,6 +2177,7 @@ exports[`renders text button with mode 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {

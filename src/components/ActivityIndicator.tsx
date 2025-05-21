@@ -153,8 +153,8 @@ const ActivityIndicator = ({
       style={[styles.container, style]}
       {...rest}
       accessible
-      accessibilityRole="progressbar"
-      accessibilityState={{ busy: animating }}
+      role="progressbar"
+      aria-busy={animating}
     >
       <Animated.View
         style={[{ width: size, height: size, opacity: fade }]}

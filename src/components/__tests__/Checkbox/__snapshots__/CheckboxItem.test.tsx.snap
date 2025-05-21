@@ -3,7 +3,6 @@
 exports[`can render leading checkbox control 1`] = `
 <View
   accessibilityLabel="Default with leading control"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
@@ -33,6 +32,7 @@ exports[`can render leading checkbox control 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       false,
@@ -57,8 +57,6 @@ exports[`can render leading checkbox control 1`] = `
     }
   >
     <View
-      accessibilityLiveRegion="polite"
-      accessibilityRole="checkbox"
       accessibilityState={
         {
           "busy": undefined,
@@ -88,6 +86,7 @@ exports[`can render leading checkbox control 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="checkbox"
       style={
         [
           {
@@ -183,7 +182,6 @@ exports[`can render leading checkbox control 1`] = `
 exports[`can render the Android checkbox on different platforms 1`] = `
 <View
   accessibilityLabel="iOS Checkbox"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
@@ -213,6 +211,7 @@ exports[`can render the Android checkbox on different platforms 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       false,
@@ -274,8 +273,6 @@ exports[`can render the Android checkbox on different platforms 1`] = `
       iOS Checkbox
     </Text>
     <View
-      accessibilityLiveRegion="polite"
-      accessibilityRole="checkbox"
       accessibilityState={
         {
           "busy": undefined,
@@ -305,6 +302,7 @@ exports[`can render the Android checkbox on different platforms 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="checkbox"
       style={
         [
           {
@@ -399,7 +397,6 @@ exports[`can render the Android checkbox on different platforms 1`] = `
 exports[`can render the iOS checkbox on different platforms 1`] = `
 <View
   accessibilityLabel="iOS Checkbox"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
@@ -429,6 +426,7 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       false,
@@ -490,8 +488,6 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
       iOS Checkbox
     </Text>
     <View
-      accessibilityLiveRegion="polite"
-      accessibilityRole="checkbox"
       accessibilityState={
         {
           "busy": undefined,
@@ -521,6 +517,7 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="checkbox"
       style={
         [
           {
@@ -579,7 +576,6 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
 exports[`renders unchecked 1`] = `
 <View
   accessibilityLabel="Unchecked Button"
-  accessibilityRole="checkbox"
   accessibilityState={
     {
       "busy": undefined,
@@ -609,6 +605,7 @@ exports[`renders unchecked 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="checkbox"
   style={
     [
       false,
@@ -670,8 +667,6 @@ exports[`renders unchecked 1`] = `
       Unchecked Button
     </Text>
     <View
-      accessibilityLiveRegion="polite"
-      accessibilityRole="checkbox"
       accessibilityState={
         {
           "busy": undefined,
@@ -701,6 +696,7 @@ exports[`renders unchecked 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="checkbox"
       style={
         [
           {

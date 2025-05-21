@@ -78,8 +78,8 @@ exports[`render visible banner, with custom theme 1`] = `
           }
         >
           <Text
-            accessibilityLiveRegion="polite"
-            accessibilityRole="alert"
+            aria-live="polite"
+            role="alert"
             style={
               [
                 {
@@ -159,7 +159,6 @@ exports[`render visible banner, with custom theme 1`] = `
               testID="button-container"
             >
               <View
-                accessibilityRole="button"
                 accessibilityState={
                   {
                     "busy": undefined,
@@ -189,6 +188,7 @@ exports[`render visible banner, with custom theme 1`] = `
                 onResponderTerminate={[Function]}
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
+                role="button"
                 style={
                   [
                     {
@@ -359,8 +359,8 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
           }
         >
           <Text
-            accessibilityLiveRegion="none"
-            accessibilityRole="alert"
+            aria-live="off"
+            role="alert"
             style={
               [
                 {
@@ -505,8 +505,8 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
             />
           </View>
           <Text
-            accessibilityLiveRegion="polite"
-            accessibilityRole="alert"
+            aria-live="polite"
+            role="alert"
             style={
               [
                 {
@@ -586,7 +586,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
               testID="button-container"
             >
               <View
-                accessibilityRole="button"
                 accessibilityState={
                   {
                     "busy": undefined,
@@ -616,6 +615,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                 onResponderTerminate={[Function]}
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
+                role="button"
                 style={
                   [
                     {
@@ -779,8 +779,8 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
           }
         >
           <Text
-            accessibilityLiveRegion="polite"
-            accessibilityRole="alert"
+            aria-live="polite"
+            role="alert"
             style={
               [
                 {
@@ -860,7 +860,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
               testID="button-container"
             >
               <View
-                accessibilityRole="button"
                 accessibilityState={
                   {
                     "busy": undefined,
@@ -890,6 +889,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 onResponderTerminate={[Function]}
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
+                role="button"
                 style={
                   [
                     {
@@ -1009,7 +1009,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
               testID="button-container"
             >
               <View
-                accessibilityRole="button"
                 accessibilityState={
                   {
                     "busy": undefined,
@@ -1039,6 +1038,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 onResponderTerminate={[Function]}
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
+                role="button"
                 style={
                   [
                     {
@@ -1224,8 +1224,8 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
             />
           </View>
           <Text
-            accessibilityLiveRegion="polite"
-            accessibilityRole="alert"
+            aria-live="polite"
+            role="alert"
             style={
               [
                 {
@@ -1348,8 +1348,8 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
           }
         >
           <Text
-            accessibilityLiveRegion="polite"
-            accessibilityRole="alert"
+            aria-live="polite"
+            role="alert"
             style={
               [
                 {

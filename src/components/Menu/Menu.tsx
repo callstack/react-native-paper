@@ -641,7 +641,7 @@ const Menu = ({
       {rendered ? (
         <Portal>
           <Pressable
-            accessibilityLabel={overlayAccessibilityLabel}
+            aria-label={overlayAccessibilityLabel}
             accessibilityRole="button"
             onPress={onDismiss}
             style={styles.pressableOverlay}

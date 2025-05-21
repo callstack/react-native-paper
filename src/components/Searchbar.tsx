@@ -292,7 +292,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             ))
           }
           theme={theme}
-          accessibilityLabel={searchAccessibilityLabel}
+          aria-label={searchAccessibilityLabel}
           testID={`${testID}-icon`}
         />
         <TextInput
@@ -338,7 +338,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
           >
             <IconButton
               borderless
-              accessibilityLabel={clearAccessibilityLabel}
+              aria-label={clearAccessibilityLabel}
               iconColor={value ? iconColor : 'rgba(255, 255, 255, 0)'}
               rippleColor={rippleColor}
               onPress={handleClearPress}
@@ -367,7 +367,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             iconColor={trailingIconColor || onSurfaceVariant}
             rippleColor={trailingRippleColor}
             icon={trailingIcon}
-            accessibilityLabel={trailingIconAccessibilityLabel}
+            aria-label={trailingIconAccessibilityLabel}
             testID={`${testID}-trailing-icon`}
           />
         ) : null}

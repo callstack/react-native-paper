@@ -3,7 +3,6 @@
 exports[`renders DrawerItem with icon 1`] = `
 <View>
   <View
-    accessibilityRole="button"
     accessibilityState={
       {
         "busy": undefined,
@@ -33,6 +32,7 @@ exports[`renders DrawerItem with icon 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
         {
@@ -154,7 +154,6 @@ exports[`renders DrawerItem with icon 1`] = `
 exports[`renders active DrawerItem 1`] = `
 <View>
   <View
-    accessibilityRole="button"
     accessibilityState={
       {
         "busy": undefined,
@@ -184,6 +183,7 @@ exports[`renders active DrawerItem 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
         {
@@ -305,7 +305,6 @@ exports[`renders active DrawerItem 1`] = `
 exports[`renders basic DrawerItem 1`] = `
 <View>
   <View
-    accessibilityRole="button"
     accessibilityState={
       {
         "busy": undefined,
@@ -335,6 +334,7 @@ exports[`renders basic DrawerItem 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    role="button"
     style={
       [
         {

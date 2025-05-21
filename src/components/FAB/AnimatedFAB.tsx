@@ -1,6 +1,5 @@
 import * as React from 'react';
 import type {
-  AccessibilityState,
   ColorValue,
   NativeSyntheticEvent,
   PressableAndroidRippleConfig,
@@ -61,10 +60,11 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * Uses `label` by default if specified.
    */
   accessibilityLabel?: string;
-  /**
-   * Accessibility state for the FAB. This is read by the screen reader when the user taps the FAB.
-   */
-  accessibilityState?: AccessibilityState;
+  'aria-disabled'?: boolean;
+  'aria-selected'?: boolean;
+  'aria-checked'?: boolean;
+  'aria-expanded'?: boolean;
+  'aria-busy'?: boolean;
   /**
    * Custom color for the icon and label of the `FAB`.
    */
@@ -211,7 +211,6 @@ const AnimatedFAB = ({
   label,
   background,
   accessibilityLabel = label,
-  accessibilityState,
   color: customColor,
   rippleColor: customRippleColor,
   disabled,
@@ -377,8 +376,6 @@ const AnimatedFAB = ({
     disabled ? styles.disabled : styles.shadow,
   ];
 
-  const newAccessibilityState = { ...accessibilityState, disabled };
-
   return (
     <Surface
       {...rest}
@@ -463,9 +460,9 @@ const AnimatedFAB = ({
               delayLongPress={delayLongPress}
               rippleColor={rippleColor}
               disabled={disabled}
-              accessibilityLabel={accessibilityLabel}
-              accessibilityRole="button"
-              accessibilityState={newAccessibilityState}
+              aria-label={accessibilityLabel}
+              aria-disabled={disabled}
+              role="button"
               testID={testID}
               style={{ borderRadius }}
               theme={theme}

@@ -340,24 +340,37 @@ describe('should not render icon when', () => {
   });
 });
 
-describe('should have `accessibilityState={ checked: true }` when selected', () => {
+describe('should have `aria-checked="true"` when selected', () => {
   it('should have two button selected', () => {
     const onValueChange = jest.fn();
-    const { getAllByA11yState } = render(
+    const { getByTestId } = render(
       <SegmentedButtons
         multiSelect
         value={['walk', 'transit']}
         buttons={[
-          { value: 'walk', label: 'Walking' },
-          { value: 'transit', label: 'Transit' },
-          { value: 'drive', label: 'Driving' },
+          { value: 'walk', label: 'Walking', testID: 'walking-button' },
+          { value: 'transit', label: 'Transit', testID: 'transit-button' },
+          { value: 'drive', label: 'Driving', testID: 'driving-button' },
         ]}
         onValueChange={onValueChange}
       />
     );
 
-    const checkedButtons = getAllByA11yState({ checked: true });
-    expect(checkedButtons).toHaveLength(2);
+    console.log(getByTestId('walking-button'));
+    expect(getByTestId('walking-button')).toHaveProp('accessibilityState', {
+      busy: undefined,
+      checked: true,
+      disabled: false,
+      expanded: undefined,
+      selected: undefined,
+    });
+    expect(getByTestId('transit-button')).toHaveProp('accessibilityState', {
+      busy: undefined,
+      checked: true,
+      disabled: false,
+      expanded: undefined,
+      selected: undefined,
+    });
   });
 
   it('show selected check icon should be shown', () => {

@@ -1,8 +1,6 @@
 import * as React from 'react';
 import {
-  AccessibilityRole,
   GestureResponderEvent,
-  Platform,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -138,16 +136,7 @@ const AppbarContent = ({
             titleStyle,
           ]}
           numberOfLines={1}
-          accessible
-          accessibilityRole={
-            onPress
-              ? 'none'
-              : Platform.OS === 'web'
-              ? ('heading' as 'header')
-              : 'header'
-          }
-          // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-          accessibilityTraits="header"
+          role={onPress ? 'none' : 'heading'}
           testID={`${testID}-title-text`}
           maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
         >
@@ -161,13 +150,9 @@ const AppbarContent = ({
 
   if (onPress) {
     return (
-      // eslint-disable-next-line react-native-a11y/has-accessibility-props
       <Pressable
-        accessibilityRole={touchableRole}
-        // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
-        accessibilityTraits={touchableRole}
-        accessibilityComponentType="button"
-        accessbilityState={disabled ? 'disabled' : null}
+        role="button"
+        aria-disabled={disabled}
         onPress={onPress}
         disabled={disabled}
         {...contentWrapperProps}
@@ -202,8 +187,6 @@ const styles = StyleSheet.create({
     paddingBottom: 28,
   },
 });
-
-const touchableRole: AccessibilityRole = 'button';
 
 export default AppbarContent;
 

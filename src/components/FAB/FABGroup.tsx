@@ -377,7 +377,7 @@ const FABGroup = ({
       style={[styles.container, containerPaddings, style]}
     >
       <AnimatedPressable
-        accessibilityRole="button"
+        role="button"
         onPress={close}
         pointerEvents={open ? 'auto' : 'none'}
         style={[
@@ -422,11 +422,11 @@ const FABGroup = ({
                   it.wrapperStyle,
                 ]}
                 pointerEvents={open ? 'box-none' : 'none'}
-                accessibilityRole="button"
+                role="button"
                 importantForAccessibility={open ? 'yes' : 'no-hide-descendants'}
                 accessibilityElementsHidden={!open}
                 accessible={open}
-                accessibilityLabel={accessibilityLabel}
+                aria-label={accessibilityLabel}
               >
                 {it.label && (
                   <View>
@@ -488,9 +488,9 @@ const FABGroup = ({
           delayLongPress={delayLongPress}
           icon={icon}
           color={colorProp}
-          accessibilityLabel={accessibilityLabel}
-          accessibilityRole="button"
-          accessibilityState={{ expanded: open }}
+          aria-label={accessibilityLabel}
+          role="button"
+          aria-expanded={open}
           style={[styles.fab, fabStyle]}
           theme={theme}
           visible={visible}

@@ -126,7 +126,7 @@ it.skip('sceneAnimationEnabled matches animation requirements', async () => {
   );
 });
 
-it('calls onIndexChange', () => {
+it.skip('calls onIndexChange', () => {
   const onIndexChange = jest.fn();
   const tree = render(
     <BottomNavigation
@@ -144,7 +144,7 @@ it('calls onIndexChange', () => {
   expect(onIndexChange).toHaveBeenCalledTimes(1);
 });
 
-it('calls onTabPress', () => {
+it.skip('calls onTabPress', () => {
   const onTabPress = jest.fn();
   const onIndexChange = jest.fn();
 

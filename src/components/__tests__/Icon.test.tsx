@@ -1,11 +1,15 @@
 import React from 'react';
 import { Image } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { configure, render } from '@testing-library/react-native';
 
 import Icon from '../Icon';
 
 const ICON_SIZE = 24;
+
+configure({
+  defaultIncludeHiddenElements: true,
+});
 
 describe('Icon Component', () => {
   it('renders correctly with image source', () => {

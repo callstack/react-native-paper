@@ -155,8 +155,9 @@ describe('renderAppbarContent', () => {
       </mockSafeAreaContext.SafeAreaProvider>
     );
 
-    expect(getByRole('header')).toBeTruthy();
+    expect(getByRole('heading')).toBeTruthy();
   });
+
   it('is recognized as a button when onPress callback has been passed', () => {
     const { getByTestId } = render(
       <mockSafeAreaContext.SafeAreaProvider>
@@ -166,16 +167,13 @@ describe('renderAppbarContent', () => {
       </mockSafeAreaContext.SafeAreaProvider>
     );
 
-    expect(getByTestId('appbar-content').props.accessibilityRole).toEqual(
-      'button'
-    );
+    expect(getByTestId('appbar-content').props.role).toEqual('button');
     expect(
       getByTestId('appbar-content').props.accessibilityState || {}
     ).not.toMatchObject({ disabled: true });
-    expect(
-      getByTestId('appbar-content-title-text').props.accessibilityRole
-    ).toEqual('none');
+    expect(getByTestId('appbar-content-title-text').props.role).toEqual('none');
   });
+
   it('is recognized as a disabled button when onPress and disabled is passed', () => {
     const { getByTestId } = render(
       <mockSafeAreaContext.SafeAreaProvider>
@@ -185,15 +183,11 @@ describe('renderAppbarContent', () => {
       </mockSafeAreaContext.SafeAreaProvider>
     );
 
-    expect(getByTestId('appbar-content').props.accessibilityRole).toEqual(
-      'button'
-    );
+    expect(getByTestId('appbar-content').props.role).toEqual('button');
     expect(
       getByTestId('appbar-content').props.accessibilityState
     ).toMatchObject({ disabled: true });
-    expect(
-      getByTestId('appbar-content-title-text').props.accessibilityRole
-    ).toEqual('none');
+    expect(getByTestId('appbar-content-title-text').props.role).toEqual('none');
   });
 });
 

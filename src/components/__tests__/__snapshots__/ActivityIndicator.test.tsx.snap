@@ -2,13 +2,9 @@
 
 exports[`renders colored indicator 1`] = `
 <View
-  accessibilityRole="progressbar"
-  accessibilityState={
-    {
-      "busy": true,
-    }
-  }
   accessible={true}
+  aria-busy={true}
+  role="progressbar"
   style={
     [
       {
@@ -211,13 +207,9 @@ exports[`renders colored indicator 1`] = `
 
 exports[`renders hidden indicator 1`] = `
 <View
-  accessibilityRole="progressbar"
-  accessibilityState={
-    {
-      "busy": false,
-    }
-  }
   accessible={true}
+  aria-busy={false}
+  role="progressbar"
   style={
     [
       {
@@ -420,13 +412,9 @@ exports[`renders hidden indicator 1`] = `
 
 exports[`renders indicator 1`] = `
 <View
-  accessibilityRole="progressbar"
-  accessibilityState={
-    {
-      "busy": true,
-    }
-  }
   accessible={true}
+  aria-busy={true}
+  role="progressbar"
   style={
     [
       {
@@ -629,13 +617,9 @@ exports[`renders indicator 1`] = `
 
 exports[`renders large indicator 1`] = `
 <View
-  accessibilityRole="progressbar"
-  accessibilityState={
-    {
-      "busy": true,
-    }
-  }
   accessible={true}
+  aria-busy={true}
+  role="progressbar"
   style={
     [
       {

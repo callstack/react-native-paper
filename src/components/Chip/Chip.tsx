@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  AccessibilityState,
   Animated,
   ColorValue,
   GestureResponderEvent,
@@ -12,6 +11,7 @@ import {
   Pressable,
   View,
   ViewStyle,
+  Role,
 } from 'react-native';
 
 import useLatestCallback from 'use-latest-callback';
@@ -86,6 +86,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
+  /**
+   * Accessibility role for the chip.
+   */
+  accessibilityRole?: Role;
   /**
    * Accessibility label for the chip. This is read by the screen reader when the user taps the chip.
    */
@@ -188,7 +192,7 @@ const Chip = ({
   background,
   accessibilityLabel,
   accessibilityRole = 'button',
-  closeIconAccessibilityLabel = 'Close',
+  closeIconAccessibilityLabel,
   onPress,
   onLongPress,
   onPressOut,
@@ -279,11 +283,6 @@ const Chip = ({
     customRippleColor,
   });
 
-  const accessibilityState: AccessibilityState = {
-    selected,
-    disabled,
-  };
-
   const elevationStyle = Platform.OS === 'android' ? elevation : 0;
   const multiplier = compact ? 1.5 : 2;
   const labelSpacings = {
@@ -328,9 +327,10 @@ const Chip = ({
         delayLongPress={delayLongPress}
         rippleColor={rippleColor}
         disabled={disabled}
-        accessibilityLabel={accessibilityLabel}
-        accessibilityRole={accessibilityRole}
-        accessibilityState={accessibilityState}
+        aria-label={accessibilityLabel}
+        role={accessibilityRole}
+        aria-disabled={disabled}
+        aria-selected={selected}
         testID={testID}
         theme={theme}
         hitSlop={hitSlop}
@@ -394,8 +394,8 @@ const Chip = ({
           <Pressable
             onPress={onClose}
             disabled={disabled}
-            accessibilityRole="button"
-            accessibilityLabel={closeIconAccessibilityLabel}
+            role="button"
+            aria-label={closeIconAccessibilityLabel}
           >
             <View style={[styles.icon, styles.closeIcon]}>
               {closeIcon ? (

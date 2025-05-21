@@ -246,7 +246,6 @@ exports[`call onPress when affix adornment pressed 1`] = `
   >
     <View
       accessibilityLabel="+39"
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -276,6 +275,7 @@ exports[`call onPress when affix adornment pressed 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
     >
       <Text
         maxFontSizeMultiplier={1.5}
@@ -2065,8 +2065,6 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
         testID="right-icon-adornment-container"
       >
         <View
-          accessibilityComponentType="button"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -2076,7 +2074,6 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -2106,6 +2103,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -2450,8 +2448,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         testID="left-icon-adornment-container"
       >
         <View
-          accessibilityComponentType="button"
-          accessibilityRole="button"
           accessibilityState={
             {
               "busy": undefined,
@@ -2461,7 +2457,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -2491,6 +2486,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {

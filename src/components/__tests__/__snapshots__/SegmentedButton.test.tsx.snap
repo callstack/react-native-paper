@@ -36,7 +36,6 @@ exports[`renders segmented button 1`] = `
     }
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -66,6 +65,7 @@ exports[`renders segmented button 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
@@ -162,7 +162,6 @@ exports[`renders segmented button 1`] = `
     }
   >
     <View
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -192,6 +191,7 @@ exports[`renders segmented button 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           {
