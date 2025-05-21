@@ -186,7 +186,6 @@ const FAB = forwardRef<View, Props>(
       label,
       background,
       accessibilityLabel = label,
-      accessibilityState,
       animated = true,
       color: customColor,
       rippleColor: customRippleColor,
@@ -266,8 +265,6 @@ const FAB = forwardRef<View, Props>(
 
     const elevation = isFlatMode || disabled ? 0 : 3;
 
-    const newAccessibilityState = { ...accessibilityState, disabled };
-
     return (
       <Surface
         ref={ref}
@@ -298,9 +295,9 @@ const FAB = forwardRef<View, Props>(
           delayLongPress={delayLongPress}
           rippleColor={rippleColor}
           disabled={disabled}
-          accessibilityLabel={accessibilityLabel}
-          accessibilityRole="button"
-          accessibilityState={newAccessibilityState}
+          aria-label={accessibilityLabel}
+          role="button"
+          aria-disabled={disabled}
           testID={testID}
           style={{ borderRadius }}
           {...rest}

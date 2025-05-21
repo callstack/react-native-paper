@@ -3,7 +3,6 @@
 exports[`can render leading radio button control 1`] = `
 <View
   accessibilityLabel="Default with leading control"
-  accessibilityRole="radio"
   accessibilityState={
     {
       "busy": undefined,
@@ -33,6 +32,7 @@ exports[`can render leading radio button control 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="radio"
   style={
     [
       false,
@@ -57,7 +57,6 @@ exports[`can render leading radio button control 1`] = `
   >
     <View
       accessibilityLiveRegion="polite"
-      accessibilityRole="radio"
       accessibilityState={
         {
           "busy": undefined,
@@ -87,6 +86,7 @@ exports[`can render leading radio button control 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="radio"
       style={
         [
           {
@@ -180,7 +180,6 @@ exports[`can render leading radio button control 1`] = `
 exports[`can render the Android radio button on different platforms 1`] = `
 <View
   accessibilityLabel="iOS Checkbox"
-  accessibilityRole="radio"
   accessibilityState={
     {
       "busy": undefined,
@@ -210,6 +209,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="radio"
   style={
     [
       false,
@@ -269,7 +269,6 @@ exports[`can render the Android radio button on different platforms 1`] = `
     </Text>
     <View
       accessibilityLiveRegion="polite"
-      accessibilityRole="radio"
       accessibilityState={
         {
           "busy": undefined,
@@ -299,6 +298,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="radio"
       style={
         [
           {
@@ -331,7 +331,6 @@ exports[`can render the Android radio button on different platforms 1`] = `
 exports[`can render the iOS radio button on different platforms 1`] = `
 <View
   accessibilityLabel="iOS Radio button"
-  accessibilityRole="radio"
   accessibilityState={
     {
       "busy": undefined,
@@ -361,6 +360,7 @@ exports[`can render the iOS radio button on different platforms 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="radio"
   style={
     [
       false,
@@ -420,7 +420,6 @@ exports[`can render the iOS radio button on different platforms 1`] = `
     </Text>
     <View
       accessibilityLiveRegion="polite"
-      accessibilityRole="radio"
       accessibilityState={
         {
           "busy": undefined,
@@ -450,6 +449,7 @@ exports[`can render the iOS radio button on different platforms 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="radio"
       style={
         [
           {
@@ -508,7 +508,6 @@ exports[`can render the iOS radio button on different platforms 1`] = `
 exports[`renders unchecked 1`] = `
 <View
   accessibilityLabel="Unchecked Button"
-  accessibilityRole="radio"
   accessibilityState={
     {
       "busy": undefined,
@@ -538,6 +537,7 @@ exports[`renders unchecked 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  role="radio"
   style={
     [
       false,
@@ -597,7 +597,6 @@ exports[`renders unchecked 1`] = `
     </Text>
     <View
       accessibilityLiveRegion="polite"
-      accessibilityRole="radio"
       accessibilityState={
         {
           "busy": undefined,
@@ -627,6 +626,7 @@ exports[`renders unchecked 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="radio"
       style={
         [
           {

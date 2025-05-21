@@ -360,7 +360,6 @@ exports[`renders snackbar with action button 1`] = `
             testID="button-container"
           >
             <View
-              accessibilityRole="button"
               accessibilityState={
                 {
                   "busy": undefined,
@@ -390,6 +389,7 @@ exports[`renders snackbar with action button 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
+              role="button"
               style={
                 [
                   {

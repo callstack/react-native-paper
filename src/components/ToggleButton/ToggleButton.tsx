@@ -143,8 +143,9 @@ const ToggleButton = forwardRef<View, Props>(
                 }
               }}
               size={size}
-              accessibilityLabel={accessibilityLabel}
-              accessibilityState={{ disabled, selected: checked }}
+              aria-label={accessibilityLabel}
+              aria-disabled={disabled}
+              aria-selected={checked}
               disabled={disabled}
               style={[
                 styles.content,

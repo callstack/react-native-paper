@@ -56,7 +56,7 @@ export const RadioButtonContext = React.createContext<RadioButtonContextType>(
  */
 const RadioButtonGroup = ({ value, onValueChange, children }: Props) => (
   <RadioButtonContext.Provider value={{ value, onValueChange }}>
-    <View accessibilityRole="radiogroup">{children}</View>
+    <View role="radiogroup">{children}</View>
   </RadioButtonContext.Provider>
 );
 

@@ -212,9 +212,10 @@ const SegmentedButtonItem = ({
       <TouchableRipple
         borderless
         onPress={onPress}
-        accessibilityLabel={accessibilityLabel}
-        accessibilityState={{ disabled, checked }}
-        accessibilityRole="button"
+        aria-label={accessibilityLabel}
+        aria-disabled={disabled}
+        aria-checked={checked}
+        role="button"
         disabled={disabled}
         rippleColor={rippleColor}
         testID={testID}

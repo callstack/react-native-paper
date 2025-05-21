@@ -543,7 +543,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               maxWidth: maxTabBarWidth,
             },
           ]}
-          accessibilityRole={'tablist'}
+          role={'tablist'}
           testID={`${testID}-content-wrapper`}
         >
           {routes.map((route, index) => {
@@ -622,9 +622,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               onPress: () => onTabPress(eventForIndex(index)),
               onLongPress: () => onTabLongPress?.(eventForIndex(index)),
               testID: getTestID({ route }),
-              accessibilityLabel: getAccessibilityLabel({ route }),
-              accessibilityRole: Platform.OS === 'ios' ? 'button' : 'tab',
-              accessibilityState: { selected: focused },
+              'aria-label': getAccessibilityLabel({ route }),
+              role: Platform.OS === 'ios' ? 'button' : 'tab',
+              'aria-selected': focused,
               style: [styles.item],
               children: (
                 <View

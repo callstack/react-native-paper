@@ -219,7 +219,7 @@ const Tooltip = ({
             testID="tooltip-container"
           >
             <Text
-              accessibilityLiveRegion="polite"
+              aria-live="polite"
               numberOfLines={1}
               selectable={false}
               variant="labelLarge"

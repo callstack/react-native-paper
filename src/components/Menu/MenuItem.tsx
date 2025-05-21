@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  AccessibilityState,
   ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
@@ -102,10 +101,11 @@ export type Props = {
    * Accessibility label for the Touchable. This is read by the screen reader when the user taps the component.
    */
   accessibilityLabel?: string;
-  /**
-   * Accessibility state for the Touchable. This is read by the screen reader when the user taps the component.
-   */
-  accessibilityState?: AccessibilityState;
+  'aria-disabled'?: boolean;
+  'aria-selected'?: boolean;
+  'aria-checked'?: boolean;
+  'aria-expanded'?: boolean;
+  'aria-busy'?: boolean;
 };
 
 /**
@@ -145,7 +145,11 @@ const MenuItem = ({
   rippleColor: customRippleColor,
   testID = 'menu-item',
   accessibilityLabel,
-  accessibilityState,
+  'aria-disabled': ariaDisabled,
+  'aria-selected': ariaSelected,
+  'aria-checked': ariaChecked,
+  'aria-expanded': ariaExpanded,
+  'aria-busy': ariaBusy,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier = 1.5,
   hitSlop,
@@ -175,8 +179,6 @@ const MenuItem = ({
     ...bodyLarge,
   };
 
-  const newAccessibilityState = { ...accessibilityState, disabled };
-
   return (
     <TouchableRipple
       style={[
@@ -189,9 +191,13 @@ const MenuItem = ({
       disabled={disabled}
       testID={testID}
       background={background}
-      accessibilityLabel={accessibilityLabel}
-      accessibilityRole="menuitem"
-      accessibilityState={newAccessibilityState}
+      role="menuitem"
+      aria-label={accessibilityLabel}
+      aria-disabled={disabled || ariaDisabled}
+      aria-selected={ariaSelected}
+      aria-checked={ariaChecked}
+      aria-expanded={ariaExpanded}
+      aria-busy={ariaBusy}
       rippleColor={rippleColor}
       hitSlop={hitSlop}
     >

@@ -81,7 +81,6 @@ exports[`activity indicator snapshot test 1`] = `
         testID="search-bar-icon-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="search"
           accessibilityRole="button"
           accessibilityState={
@@ -93,7 +92,6 @@ exports[`activity indicator snapshot test 1`] = `
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -123,6 +121,7 @@ exports[`activity indicator snapshot test 1`] = `
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -209,13 +208,9 @@ exports[`activity indicator snapshot test 1`] = `
       value=""
     />
     <View
-      accessibilityRole="progressbar"
-      accessibilityState={
-        {
-          "busy": true,
-        }
-      }
       accessible={true}
+      aria-busy={true}
+      role="progressbar"
       style={
         [
           {
@@ -502,7 +497,6 @@ exports[`renders with placeholder 1`] = `
         testID="search-bar-icon-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="search"
           accessibilityRole="button"
           accessibilityState={
@@ -514,7 +508,6 @@ exports[`renders with placeholder 1`] = `
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -544,6 +537,7 @@ exports[`renders with placeholder 1`] = `
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -686,7 +680,6 @@ exports[`renders with placeholder 1`] = `
           testID="search-bar-clear-icon-container"
         >
           <View
-            accessibilityComponentType="button"
             accessibilityLabel="clear"
             accessibilityRole="button"
             accessibilityState={
@@ -698,7 +691,6 @@ exports[`renders with placeholder 1`] = `
                 "selected": undefined,
               }
             }
-            accessibilityTraits="button"
             accessibilityValue={
               {
                 "max": undefined,
@@ -728,6 +720,7 @@ exports[`renders with placeholder 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {
@@ -863,7 +856,6 @@ exports[`renders with text 1`] = `
         testID="search-bar-icon-container"
       >
         <View
-          accessibilityComponentType="button"
           accessibilityLabel="search"
           accessibilityRole="button"
           accessibilityState={
@@ -875,7 +867,6 @@ exports[`renders with text 1`] = `
               "selected": undefined,
             }
           }
-          accessibilityTraits="button"
           accessibilityValue={
             {
               "max": undefined,
@@ -905,6 +896,7 @@ exports[`renders with text 1`] = `
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
+          role="button"
           style={
             [
               {
@@ -1043,7 +1035,6 @@ exports[`renders with text 1`] = `
           testID="search-bar-clear-icon-container"
         >
           <View
-            accessibilityComponentType="button"
             accessibilityLabel="clear"
             accessibilityRole="button"
             accessibilityState={
@@ -1055,7 +1046,6 @@ exports[`renders with text 1`] = `
                 "selected": undefined,
               }
             }
-            accessibilityTraits="button"
             accessibilityValue={
               {
                 "max": undefined,
@@ -1085,6 +1075,7 @@ exports[`renders with text 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
+            role="button"
             style={
               [
                 {

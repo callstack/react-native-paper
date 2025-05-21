@@ -177,12 +177,10 @@ const CheckboxItem = ({
 
   return (
     <TouchableRipple
-      accessibilityLabel={accessibilityLabel}
-      accessibilityRole="checkbox"
-      accessibilityState={{
-        checked: status === 'checked',
-        disabled,
-      }}
+      aria-label={accessibilityLabel}
+      role="checkbox"
+      aria-checked={status === 'checked'}
+      aria-disabled={disabled}
       onPress={onPress}
       onLongPress={onLongPress}
       testID={testID}

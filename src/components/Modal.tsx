@@ -190,15 +190,16 @@ function Modal({
   return (
     <Animated.View
       pointerEvents={visible ? 'auto' : 'none'}
-      accessibilityViewIsModal
-      accessibilityLiveRegion="polite"
+      role="dialog"
+      aria-modal={true}
+      aria-live="polite"
       style={StyleSheet.absoluteFill}
       onAccessibilityEscape={onDismissCallback}
       testID={testID}
     >
       <AnimatedPressable
-        accessibilityLabel={overlayAccessibilityLabel}
-        accessibilityRole="button"
+        aria-label={overlayAccessibilityLabel}
+        role="button"
         disabled={!dismissable}
         onPress={dismissable ? onDismissCallback : undefined}
         importantForAccessibility="no"

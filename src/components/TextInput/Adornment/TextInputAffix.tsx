@@ -183,8 +183,8 @@ const TextInputAffix = ({
       {onPress ? (
         <Pressable
           onPress={onPress}
-          accessibilityRole="button"
-          accessibilityLabel={accessibilityLabel}
+          role="button"
+          aria-label={accessibilityLabel}
         >
           {content}
         </Pressable>

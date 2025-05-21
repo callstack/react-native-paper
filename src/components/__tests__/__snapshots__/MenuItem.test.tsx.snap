@@ -3,7 +3,6 @@
 exports[`Menu Item renders menu item 1`] = `
 [
   <View
-    accessibilityRole="menuitem"
     accessibilityState={
       {
         "busy": undefined,
@@ -33,6 +32,7 @@ exports[`Menu Item renders menu item 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    role="menuitem"
     style={
       [
         false,
@@ -164,7 +164,6 @@ exports[`Menu Item renders menu item 1`] = `
     </View>
   </View>,
   <View
-    accessibilityRole="menuitem"
     accessibilityState={
       {
         "busy": undefined,
@@ -194,6 +193,7 @@ exports[`Menu Item renders menu item 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    role="menuitem"
     style={
       [
         false,
@@ -325,7 +325,6 @@ exports[`Menu Item renders menu item 1`] = `
     </View>
   </View>,
   <View
-    accessibilityRole="menuitem"
     accessibilityState={
       {
         "busy": undefined,
@@ -355,6 +354,7 @@ exports[`Menu Item renders menu item 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    role="menuitem"
     style={
       [
         false,
@@ -486,7 +486,6 @@ exports[`Menu Item renders menu item 1`] = `
     </View>
   </View>,
   <View
-    accessibilityRole="menuitem"
     accessibilityState={
       {
         "busy": undefined,
@@ -516,6 +515,7 @@ exports[`Menu Item renders menu item 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    role="menuitem"
     style={
       [
         false,
@@ -647,7 +647,6 @@ exports[`Menu Item renders menu item 1`] = `
     </View>
   </View>,
   <View
-    accessibilityRole="menuitem"
     accessibilityState={
       {
         "busy": undefined,
@@ -677,6 +676,7 @@ exports[`Menu Item renders menu item 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    role="menuitem"
     style={
       [
         false,

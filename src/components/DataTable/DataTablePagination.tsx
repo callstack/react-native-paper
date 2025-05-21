@@ -127,7 +127,7 @@ const PaginationControls = ({
           rippleColor={paginationControlRippleColor}
           disabled={page === 0}
           onPress={() => onPageChange(0)}
-          accessibilityLabel="page-first"
+          aria-label="page-first"
           theme={theme}
         />
       ) : null}
@@ -144,7 +144,7 @@ const PaginationControls = ({
         rippleColor={paginationControlRippleColor}
         disabled={page === 0}
         onPress={() => onPageChange(page - 1)}
-        accessibilityLabel="chevron-left"
+        aria-label="chevron-left"
         theme={theme}
       />
       <IconButton
@@ -160,7 +160,7 @@ const PaginationControls = ({
         rippleColor={paginationControlRippleColor}
         disabled={numberOfPages === 0 || page === numberOfPages - 1}
         onPress={() => onPageChange(page + 1)}
-        accessibilityLabel="chevron-right"
+        aria-label="chevron-right"
         theme={theme}
       />
       {showFastPaginationControls ? (
@@ -177,7 +177,7 @@ const PaginationControls = ({
           rippleColor={paginationControlRippleColor}
           disabled={numberOfPages === 0 || page === numberOfPages - 1}
           onPress={() => onPageChange(numberOfPages - 1)}
-          accessibilityLabel="page-last"
+          aria-label="page-last"
           theme={theme}
         />
       ) : null}
@@ -320,19 +320,16 @@ const DataTablePagination = ({
     <View
       {...rest}
       style={[styles.container, style]}
-      accessibilityLabel="pagination-container"
+      aria-label="pagination-container"
     >
       {numberOfItemsPerPageList &&
         numberOfItemsPerPage &&
         onItemsPerPageChange && (
-          <View
-            accessibilityLabel="Options Select"
-            style={styles.optionsContainer}
-          >
+          <View aria-label="Options Select" style={styles.optionsContainer}>
             <Text
               style={[styles.label, { color: labelColor }]}
               numberOfLines={3}
-              accessibilityLabel={
+              aria-label={
                 selectPageDropdownAccessibilityLabel ||
                 'selectPageDropdownLabel'
               }
@@ -352,7 +349,7 @@ const DataTablePagination = ({
       <Text
         style={[styles.label, { color: labelColor }]}
         numberOfLines={3}
-        accessibilityLabel={accessibilityLabel || 'label'}
+        aria-label={accessibilityLabel || 'label'}
       >
         {label}
       </Text>

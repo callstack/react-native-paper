@@ -44,8 +44,6 @@ exports[`renders disabled toggle button 1`] = `
     testID="icon-button-container"
   >
     <View
-      accessibilityComponentType="button"
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -54,12 +52,6 @@ exports[`renders disabled toggle button 1`] = `
           "expanded": undefined,
           "selected": true,
         }
-      }
-      accessibilityTraits={
-        [
-          "button",
-          "disabled",
-        ]
       }
       accessibilityValue={
         {
@@ -90,6 +82,7 @@ exports[`renders disabled toggle button 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           false,
@@ -183,8 +176,6 @@ exports[`renders toggle button 1`] = `
     testID="icon-button-container"
   >
     <View
-      accessibilityComponentType="button"
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -194,7 +185,6 @@ exports[`renders toggle button 1`] = `
           "selected": true,
         }
       }
-      accessibilityTraits="button"
       accessibilityValue={
         {
           "max": undefined,
@@ -224,6 +214,7 @@ exports[`renders toggle button 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           false,
@@ -317,8 +308,6 @@ exports[`renders unchecked toggle button 1`] = `
     testID="icon-button-container"
   >
     <View
-      accessibilityComponentType="button"
-      accessibilityRole="button"
       accessibilityState={
         {
           "busy": undefined,
@@ -327,12 +316,6 @@ exports[`renders unchecked toggle button 1`] = `
           "expanded": undefined,
           "selected": false,
         }
-      }
-      accessibilityTraits={
-        [
-          "button",
-          "disabled",
-        ]
       }
       accessibilityValue={
         {
@@ -363,6 +346,7 @@ exports[`renders unchecked toggle button 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      role="button"
       style={
         [
           false,

@@ -138,9 +138,10 @@ const RadioButtonAndroid = ({
                     });
                   }
             }
-            accessibilityRole="radio"
-            accessibilityState={{ disabled, checked }}
-            accessibilityLiveRegion="polite"
+            role="radio"
+            aria-disabled={disabled}
+            aria-checked={checked}
+            aria-live="polite"
             style={styles.container}
             testID={testID}
             theme={theme}

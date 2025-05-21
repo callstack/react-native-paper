@@ -363,7 +363,7 @@ const Snackbar = ({
                     );
                   })
                 }
-                accessibilityLabel={iconAccessibilityLabel}
+                aria-label={iconAccessibilityLabel}
                 style={styles.icon}
                 testID={`${testID}-icon`}
               />

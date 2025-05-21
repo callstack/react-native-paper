@@ -112,7 +112,7 @@ const AppbarAction = forwardRef<View, Props>(
         iconColor={actionIconColor}
         icon={icon}
         disabled={disabled}
-        accessibilityLabel={accessibilityLabel}
+        aria-label={accessibilityLabel}
         animated
         ref={ref}
         rippleColor={rippleColor}

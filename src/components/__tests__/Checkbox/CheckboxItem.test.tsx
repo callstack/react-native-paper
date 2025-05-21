@@ -76,7 +76,7 @@ it('disables the row when the prop disabled is true', () => {
     <Checkbox.Item
       status="unchecked"
       label=""
-      accessibilityLabel="some checkbox"
+      aria-label="some checkbox"
       disabled
     />
   );

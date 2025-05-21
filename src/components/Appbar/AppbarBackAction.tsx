@@ -60,7 +60,7 @@ export type Props = $Omit<
 const AppbarBackAction = forwardRef<View, Props>(
   ({ accessibilityLabel = 'Back', ...rest }: Props, ref) => (
     <AppbarAction
-      accessibilityLabel={accessibilityLabel}
+      aria-label={accessibilityLabel}
       {...rest}
       icon={AppbarBackIcon}
       isLeading

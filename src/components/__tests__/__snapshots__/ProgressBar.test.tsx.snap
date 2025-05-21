@@ -2,21 +2,13 @@
 
 exports[`renders colored progress bar 1`] = `
 <View
-  accessibilityRole="progressbar"
-  accessibilityState={
-    {
-      "busy": true,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": 100,
-      "min": 0,
-      "now": 20,
-    }
-  }
   accessible={true}
+  aria-busy={true}
+  aria-valuemax={100}
+  aria-valuemin={0}
+  aria-valuenow={20}
   onLayout={[Function]}
+  role="progressbar"
   style={false}
   testID="progress-bar"
 >
@@ -36,21 +28,13 @@ exports[`renders colored progress bar 1`] = `
 
 exports[`renders hidden progress bar 1`] = `
 <View
-  accessibilityRole="progressbar"
-  accessibilityState={
-    {
-      "busy": false,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": 100,
-      "min": 0,
-      "now": 20,
-    }
-  }
   accessible={true}
+  aria-busy={false}
+  aria-valuemax={100}
+  aria-valuemin={0}
+  aria-valuenow={20}
   onLayout={[Function]}
+  role="progressbar"
   style={false}
   testID="progress-bar"
 >
@@ -70,15 +54,10 @@ exports[`renders hidden progress bar 1`] = `
 
 exports[`renders indeterminate progress bar 1`] = `
 <View
-  accessibilityRole="progressbar"
-  accessibilityState={
-    {
-      "busy": true,
-    }
-  }
-  accessibilityValue={{}}
   accessible={true}
+  aria-busy={true}
   onLayout={[Function]}
+  role="progressbar"
   style={false}
   testID="progress-bar"
 >
@@ -98,21 +77,13 @@ exports[`renders indeterminate progress bar 1`] = `
 
 exports[`renders progress bar with specific progress 1`] = `
 <View
-  accessibilityRole="progressbar"
-  accessibilityState={
-    {
-      "busy": true,
-    }
-  }
-  accessibilityValue={
-    {
-      "max": 100,
-      "min": 0,
-      "now": 20,
-    }
-  }
   accessible={true}
+  aria-busy={true}
+  aria-valuemax={100}
+  aria-valuemin={0}
+  aria-valuenow={20}
   onLayout={[Function]}
+  role="progressbar"
   style={false}
   testID="progress-bar"
 >

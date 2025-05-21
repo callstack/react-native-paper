@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {
-  AccessibilityRole,
   Animated,
   ColorValue,
   GestureResponderEvent,
   Platform,
   PressableAndroidRippleConfig,
+  Role,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -106,7 +106,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Accessibility role for the button. The "button" role is set by default.
    */
-  accessibilityRole?: AccessibilityRole;
+  accessibilityRole?: Role;
   /**
    * Function to execute on press.
    */
@@ -357,10 +357,10 @@ const Button = (
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
         onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
         delayLongPress={delayLongPress}
-        accessibilityLabel={accessibilityLabel}
+        aria-label={accessibilityLabel}
         accessibilityHint={accessibilityHint}
-        accessibilityRole={accessibilityRole}
-        accessibilityState={{ disabled }}
+        role={accessibilityRole}
+        aria-disabled={disabled}
         accessible={accessible}
         hitSlop={hitSlop}
         disabled={disabled}

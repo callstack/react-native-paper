@@ -231,8 +231,8 @@ const Banner = ({
                   color: onSurface,
                 },
               ]}
-              accessibilityLiveRegion={visible ? 'polite' : 'none'}
-              accessibilityRole="alert"
+              aria-live={visible ? 'polite' : 'off'}
+              role="alert"
               maxFontSizeMultiplier={maxFontSizeMultiplier}
             >
               {children}
