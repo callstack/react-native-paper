@@ -11,7 +11,6 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import {
@@ -20,8 +19,6 @@ import {
   getLabelColor,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import overlay from '../../styles/overlay';
-import { black, white } from '../../styles/themes/v2/colors';
 import type { ThemeProp } from '../../types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
@@ -40,10 +37,6 @@ type BaseRoute = {
   focusedIcon?: IconSource;
   unfocusedIcon?: IconSource;
   badge?: string | number | boolean;
-  /**
-   * @deprecated In v5.x works only with theme version 2.
-   */
-  color?: string;
   accessibilityLabel?: string;
   testID?: string;
   lazy?: boolean;
@@ -97,7 +90,6 @@ export type Props<Route extends BaseRoute> = {
    * - `title`: title of the route to use as the tab label
    * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
    * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3
-   * - `color`: color to use as background color for shifting bottom navigation @deprecatedProperty In v5.x works only with theme version 2.
    * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
    * - `accessibilityLabel`: accessibility label for the tab button
    * - `testID`: test id for the tab button
@@ -149,10 +141,6 @@ export type Props<Route extends BaseRoute> = {
    * Get badge for the tab, uses `route.badge` by default.
    */
   getBadge?: (props: { route: Route }) => boolean | number | string | undefined;
-  /**
-   * Get color for the tab, uses `route.color` by default.
-   */
-  getColor?: (props: { route: Route }) => string | undefined;
   /**
    * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
    */
@@ -248,122 +236,79 @@ const Touchable = <Route extends BaseRoute>({
  * A navigation bar which can easily be integrated with [React Navigation's Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/).
  *
  * ## Usage
+ * ### without React Navigation
  * ```js
  * import React from 'react';
- * import { View, StyleSheet } from 'react-native';
- *
- * import { CommonActions } from '@react-navigation/native';
- * import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
- * import { Text, BottomNavigation } from 'react-native-paper';
- * import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
- *
- * const Tab = createBottomTabNavigator();
- *
- * export default function MyComponent() {
- *   return (
- *     <Tab.Navigator
- *       screenOptions={{
- *         headerShown: false,
- *       }}
- *       tabBar={({ navigation, state, descriptors, insets }) => (
- *         <BottomNavigation.Bar
- *           navigationState={state}
- *          safeAreaInsets={insets}
- *           onTabPress={({ route, preventDefault }) => {
- *             const event = navigation.emit({
- *               type: 'tabPress',
- *               target: route.key,
- *               canPreventDefault: true,
- *             });
- *
- *             if (event.defaultPrevented) {
- *               preventDefault();
- *             } else {
- *              navigation.dispatch({
- *                 ...CommonActions.navigate(route.name, route.params),
- *                 target: state.key,
- *               });
- *             }
- *           }}
- *           renderIcon={({ route, focused, color }) => {
- *             const { options } = descriptors[route.key];
- *             if (options.tabBarIcon) {
- *               return options.tabBarIcon({ focused, color, size: 24 });
- *             }
- *
- *             return null;
- *           }}
- *           getLabelText={({ route }) => {
- *             const { options } = descriptors[route.key];
- *             const label =
- *               options.tabBarLabel !== undefined
- *                 ? options.tabBarLabel
- *                 : options.title !== undefined
- *                 ? options.title
- *                 : route.title;
- *
- *             return label;
- *           }}
- *         />
- *       )}
- *     >
- *       <Tab.Screen
- *         name="Home"
- *         component={HomeScreen}
- *         options={{
- *           tabBarLabel: 'Home',
- *           tabBarIcon: ({ color, size }) => {
- *             return <Icon name="home" size={size} color={color} />;
- *           },
- *         }}
- *       />
- *       <Tab.Screen
- *         name="Settings"
- *         component={SettingsScreen}
- *         options={{
- *           tabBarLabel: 'Settings',
- *           tabBarIcon: ({ color, size }) => {
- *             return <Icon name="cog" size={size} color={color} />;
- *           },
- *         }}
- *       />
- *     </Tab.Navigator>
- *   );
- * }
+ * import { useState } from 'react';
+ * import { View } from 'react-native';
+ * import { BottomNavigation, Text, Provider } from 'react-native-paper';
+ * import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
  *
  * function HomeScreen() {
  *   return (
- *     <View style={styles.container}>
- *       <Text variant="headlineMedium">Home!</Text>
+ *     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+ *       <Text>Home!</Text>
  *     </View>
  *   );
  * }
  *
  * function SettingsScreen() {
  *   return (
- *     <View style={styles.container}>
- *       <Text variant="headlineMedium">Settings!</Text>
- *     </View>
+ *     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+ *       <Text>Settings!</Text>
+ *   </View>
  *   );
  * }
  *
- * const styles = StyleSheet.create({
- *   container: {
- *     flex: 1,
- *     justifyContent: 'center',
- *     alignItems: 'center',
- *   },
- * });
+ * export default function MyComponent() {
+ *   const [index, setIndex] = useState(0);
+ *
+ *   const routes = [
+ *     { key: 'home', title: 'Home', icon: 'home' },
+ *     { key: 'settings', title: 'Settings', icon: 'cog' },
+ *   ];
+
+ *   const renderScene = ({ route }) => {
+ *     switch (route.key) {
+ *       case 'home':
+ *         return <HomeScreen />;
+ *       case 'settings':
+ *         return <SettingsScreen />;
+ *       default:
+ *         return null;
+ *     }
+ *   };
+ *
+ *   return (
+ *     <Provider>
+ *       {renderScene({ route: routes[index] })}
+ *       <BottomNavigation.Bar
+ *         navigationState={{ index, routes }}
+ *         onTabPress={({ route }) => {
+ *           const newIndex = routes.findIndex((r) => r.key === route.key);
+ *           if (newIndex !== -1) {
+ *             setIndex(newIndex);
+ *           }
+ *         }}
+ *         renderIcon={({ route, color }) => (
+ *           <Icon name={route.icon} size={24} color={color} />
+ *         )}
+ *         getLabelText={({ route }) => route.title}
+ *       />
+ *     </Provider>
+ *   );
+ * }
  * ```
  */
 const BottomNavigationBar = <Route extends BaseRoute>({
   navigationState,
   renderIcon,
   renderLabel,
-  renderTouchable = (props: TouchableProps<Route>) => <Touchable {...props} />,
+  renderTouchable = ({ key, ...props }: TouchableProps<Route>) => (
+    <Touchable key={key} {...props} />
+  ),
   getLabelText = ({ route }: { route: Route }) => route.title,
   getBadge = ({ route }: { route: Route }) => route.badge,
-  getColor = ({ route }: { route: Route }) => route.color,
   getAccessibilityLabel = ({ route }: { route: Route }) =>
     route.accessibilityLabel,
   getTestID = ({ route }: { route: Route }) => route.testID,
@@ -376,19 +321,21 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   animationEasing,
   onTabPress,
   onTabLongPress,
-  shifting: shiftingProp,
+  shifting: shiftingProp = false,
   safeAreaInsets,
   labelMaxFontSizeMultiplier = 1,
-  compact: compactProp,
+  compact = false,
   testID = 'bottom-navigation-bar',
   theme: themeOverrides,
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
   const { bottom, left, right } = useSafeAreaInsets();
-  const { scale } = theme.animation;
-  const compact = compactProp ?? !theme.isV3;
-  let shifting =
-    shiftingProp ?? (theme.isV3 ? false : navigationState.routes.length > 3);
+  const {
+    animation: { scale },
+    colors: { elevation: elevationColors, secondaryContainer },
+    fonts: { labelMedium },
+  } = theme;
+  let shifting = shiftingProp;
 
   if (shifting && navigationState.routes.length < 2) {
     shifting = false;
@@ -460,13 +407,13 @@ const BottomNavigationBar = <Route extends BaseRoute>({
       Animated.parallel([
         Animated.timing(rippleAnim, {
           toValue: 1,
-          duration: theme.isV3 || shifting ? 400 * scale : 0,
+          duration: 400 * scale,
           useNativeDriver: true,
         }),
         ...navigationState.routes.map((_, i) =>
           Animated.timing(tabsAnims[i], {
             toValue: i === index ? 1 : 0,
-            duration: theme.isV3 || shifting ? 150 * scale : 0,
+            duration: 150 * scale,
             useNativeDriver: true,
             easing: animationEasing,
           })
@@ -482,8 +429,6 @@ const BottomNavigationBar = <Route extends BaseRoute>({
     },
     [
       rippleAnim,
-      theme.isV3,
-      shifting,
       scale,
       navigationState.routes,
       tabsAnims,
@@ -521,61 +466,27 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   };
 
   const { routes } = navigationState;
-  const { colors, dark: isDarkTheme, mode, isV3 } = theme;
 
-  const { backgroundColor: customBackground, elevation = 4 } =
-    (StyleSheet.flatten(style) || {}) as {
-      elevation?: number;
-      backgroundColor?: ColorValue;
-    };
+  const { backgroundColor: customBackground } = (StyleSheet.flatten(style) ||
+    {}) as {
+    elevation?: number;
+    backgroundColor?: ColorValue;
+  };
 
-  const approxBackgroundColor = customBackground
-    ? customBackground
-    : isDarkTheme && mode === 'adaptive'
-    ? overlay(elevation, colors?.surface)
-    : colors?.primary;
-
-  const v2BackgroundColorInterpolation = shifting
-    ? indexAnim.interpolate({
-        inputRange: routes.map((_, i) => i),
-        // FIXME: does outputRange support ColorValue or just strings?
-        // @ts-expect-error
-        outputRange: routes.map(
-          (route) => getColor({ route }) || approxBackgroundColor
-        ),
-      })
-    : approxBackgroundColor;
-
-  const backgroundColor = isV3
-    ? customBackground || theme.colors.elevation.level2
-    : shifting
-    ? v2BackgroundColorInterpolation
-    : approxBackgroundColor;
-
-  const isDark =
-    typeof approxBackgroundColor === 'string'
-      ? !color(approxBackgroundColor).isLight()
-      : true;
-
-  const textColor = isDark ? white : black;
+  const backgroundColor = customBackground || elevationColors.level2;
 
   const activeTintColor = getActiveTintColor({
     activeColor,
-    defaultColor: textColor,
     theme,
   });
 
   const inactiveTintColor = getInactiveTintColor({
     inactiveColor,
-    defaultColor: textColor,
     theme,
   });
-  const touchColor = color(activeTintColor).alpha(0.12).rgb().string();
 
   const maxTabWidth = routes.length > 3 ? MIN_TAB_WIDTH : MAX_TAB_WIDTH;
   const maxTabBarWidth = maxTabWidth * routes.length;
-
-  const rippleSize = layout.width / 4;
 
   const insets = {
     left: safeAreaInsets?.left ?? left,
@@ -585,10 +496,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
 
   return (
     <Surface
-      {...(theme.isV3 && { elevation: 0 })}
+      elevation={0}
       testID={testID}
       style={[
-        !theme.isV3 && styles.elevation,
         styles.bar,
         keyboardHidesNavigationBar // eslint-disable-next-line react-native/no-inline-styles
           ? {
@@ -616,6 +526,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
           : 'none'
       }
       onLayout={onLayout}
+      container
     >
       <Animated.View
         style={[styles.barContent, { backgroundColor }]}
@@ -635,55 +546,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
           accessibilityRole={'tablist'}
           testID={`${testID}-content-wrapper`}
         >
-          {shifting && !isV3 ? (
-            <Animated.View
-              pointerEvents="none"
-              style={[
-                styles.ripple,
-                {
-                  // Since we have a single ripple, we have to reposition it so that it appears to expand from active tab.
-                  // We need to move it from the top to center of the navigation bar and from the left to the active tab.
-                  top: (BAR_HEIGHT - rippleSize) / 2,
-                  left:
-                    (Math.min(layout.width, maxTabBarWidth) / routes.length) *
-                      (navigationState.index + 0.5) -
-                    rippleSize / 2,
-                  height: rippleSize,
-                  width: rippleSize,
-                  borderRadius: rippleSize / 2,
-                  backgroundColor: getColor({
-                    route: routes[navigationState.index],
-                  }),
-                  transform: [
-                    {
-                      // Scale to twice the size  to ensure it covers the whole navigation bar
-                      scale: rippleAnim.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0, 8],
-                      }),
-                    },
-                  ],
-                  opacity: rippleAnim.interpolate({
-                    inputRange: [0, MIN_RIPPLE_SCALE, 0.3, 1],
-                    outputRange: [0, 0, 1, 1],
-                  }),
-                },
-              ]}
-              testID={`${testID}-content-ripple`}
-            />
-          ) : null}
           {routes.map((route, index) => {
             const focused = navigationState.index === index;
             const active = tabsAnims[index];
-
-            // Scale the label up
-            const scale =
-              labeled && shifting
-                ? active.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0.5, 1],
-                  })
-                : 1;
 
             // Move down the icon to account for no-label in shifting and smaller label in non-shifting.
             const translateY = labeled
@@ -704,12 +569,15 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               outputRange: [1, 0],
             });
 
-            const v3ActiveOpacity = focused ? 1 : 0;
-            const v3InactiveOpacity = shifting
-              ? inactiveOpacity
-              : focused
-              ? 0
-              : 1;
+            const getActiveOpacity = () => {
+              if (shiftingAndLabeled) return activeOpacity;
+              return focused ? 1 : 0;
+            };
+
+            const getInactiveOpacity = () => {
+              if (shiftingAndLabeled) return inactiveOpacity;
+              return focused ? 0 : 1;
+            };
 
             // Scale horizontally the outline pill
             const outlineScale = focused
@@ -725,7 +593,6 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               tintColor: activeTintColor,
               hasColor: Boolean(activeColor),
               focused,
-              defaultColor: textColor,
               theme,
             });
 
@@ -733,55 +600,50 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               tintColor: inactiveTintColor,
               hasColor: Boolean(inactiveColor),
               focused,
-              defaultColor: textColor,
               theme,
             });
 
             const badgeStyle = {
-              top: !isV3 ? -2 : typeof badge === 'boolean' ? 4 : 2,
+              top: typeof badge === 'boolean' ? 4 : 2,
               right:
-                (badge != null && typeof badge !== 'boolean'
+                badge != null && typeof badge !== 'boolean'
                   ? String(badge).length * -2
-                  : 0) - (!isV3 ? 2 : 0),
+                  : 0,
             };
 
-            const isV3Shifting = isV3 && shifting && labeled;
-
-            const font = isV3 ? theme.fonts.labelMedium : {};
+            const shiftingAndLabeled = shifting && labeled;
 
             return renderTouchable({
               key: route.key,
               route,
               borderless: true,
               centered: true,
-              rippleColor: isV3 ? 'transparent' : touchColor,
+              rippleColor: 'transparent',
               onPress: () => onTabPress(eventForIndex(index)),
               onLongPress: () => onTabLongPress?.(eventForIndex(index)),
               testID: getTestID({ route }),
               accessibilityLabel: getAccessibilityLabel({ route }),
               accessibilityRole: Platform.OS === 'ios' ? 'button' : 'tab',
               accessibilityState: { selected: focused },
-              style: [styles.item, isV3 && styles.v3Item],
+              style: [styles.item],
               children: (
                 <View
                   pointerEvents="none"
                   style={
-                    isV3 &&
-                    (labeled
-                      ? styles.v3TouchableContainer
-                      : styles.v3NoLabelContainer)
+                    labeled
+                      ? styles.touchableContainer
+                      : styles.noLabelContainer
                   }
                 >
                   <Animated.View
                     style={[
                       styles.iconContainer,
-                      isV3 && styles.v3IconContainer,
-                      (!isV3 || isV3Shifting) && {
+                      shiftingAndLabeled && {
                         transform: [{ translateY }],
                       },
                     ]}
                   >
-                    {isV3 && focused && (
+                    {focused && (
                       <Animated.View
                         style={[
                           styles.outline,
@@ -791,7 +653,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                                 scaleX: outlineScale,
                               },
                             ],
-                            backgroundColor: theme.colors.secondaryContainer,
+                            backgroundColor: secondaryContainer,
                           },
                           activeIndicatorStyle,
                         ]}
@@ -800,8 +662,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                     <Animated.View
                       style={[
                         styles.iconWrapper,
-                        isV3 && styles.v3IconWrapper,
-                        { opacity: isV3 ? v3ActiveOpacity : activeOpacity },
+                        {
+                          opacity: getActiveOpacity(),
+                        },
                       ]}
                     >
                       {renderIcon ? (
@@ -821,9 +684,8 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                     <Animated.View
                       style={[
                         styles.iconWrapper,
-                        isV3 && styles.v3IconWrapper,
                         {
-                          opacity: isV3 ? v3InactiveOpacity : inactiveOpacity,
+                          opacity: getInactiveOpacity(),
                         },
                       ]}
                     >
@@ -836,7 +698,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                       ) : (
                         <Icon
                           source={
-                            theme.isV3 && route.unfocusedIcon !== undefined
+                            route.unfocusedIcon !== undefined
                               ? route.unfocusedIcon
                               : (route.focusedIcon as IconSource)
                           }
@@ -847,7 +709,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                     </Animated.View>
                     <View style={[styles.badgeContainer, badgeStyle]}>
                       {typeof badge === 'boolean' ? (
-                        <Badge visible={badge} size={isV3 ? 6 : 8} />
+                        <Badge visible={badge} size={6} />
                       ) : (
                         <Badge visible={badge != null} size={16}>
                           {badge}
@@ -856,17 +718,12 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                     </View>
                   </Animated.View>
                   {labeled ? (
-                    <Animated.View
-                      style={[
-                        styles.labelContainer,
-                        !isV3 && { transform: [{ scale }] },
-                      ]}
-                    >
+                    <Animated.View style={[styles.labelContainer]}>
                       <Animated.View
                         style={[
                           styles.labelWrapper,
-                          (!isV3 || isV3Shifting) && {
-                            opacity: activeOpacity,
+                          {
+                            opacity: getActiveOpacity(),
                           },
                         ]}
                       >
@@ -884,7 +741,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                               styles.label,
                               {
                                 color: activeLabelColor,
-                                ...font,
+                                ...labelMedium,
                               },
                             ]}
                           >
@@ -896,7 +753,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                         <Animated.View
                           style={[
                             styles.labelWrapper,
-                            { opacity: inactiveOpacity },
+                            {
+                              opacity: getInactiveOpacity(),
+                            },
                           ]}
                         >
                           {renderLabel ? (
@@ -914,7 +773,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                                 styles.label,
                                 {
                                   color: inactiveLabelColor,
-                                  ...font,
+                                  ...labelMedium,
                                 },
                               ]}
                             >
@@ -924,9 +783,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                         </Animated.View>
                       )}
                     </Animated.View>
-                  ) : (
-                    !isV3 && <View style={styles.labelContainer} />
-                  )}
+                  ) : null}
                 </View>
               ),
             });
@@ -961,24 +818,11 @@ const styles = StyleSheet.create({
   },
   item: {
     flex: 1,
-    // Top padding is 6 and bottom padding is 10
-    // The extra 4dp bottom padding is offset by label's height
-    paddingVertical: 6,
-  },
-  v3Item: {
     paddingVertical: 0,
   },
-  ripple: {
-    position: 'absolute',
-  },
   iconContainer: {
-    height: 24,
-    width: 24,
-    marginTop: 2,
     marginHorizontal: 12,
     alignSelf: 'center',
-  },
-  v3IconContainer: {
     height: 32,
     width: 32,
     marginBottom: 4,
@@ -988,8 +832,6 @@ const styles = StyleSheet.create({
   iconWrapper: {
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',
-  },
-  v3IconWrapper: {
     top: 4,
   },
   labelContainer: {
@@ -1016,11 +858,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
   },
-  v3TouchableContainer: {
+  touchableContainer: {
     paddingTop: 12,
     paddingBottom: 16,
   },
-  v3NoLabelContainer: {
+  noLabelContainer: {
     height: 80,
     justifyContent: 'center',
     alignItems: 'center',
@@ -1030,8 +872,5 @@ const styles = StyleSheet.create({
     height: OUTLINE_WIDTH / 2,
     borderRadius: OUTLINE_WIDTH / 4,
     alignSelf: 'center',
-  },
-  elevation: {
-    elevation: 4,
   },
 });

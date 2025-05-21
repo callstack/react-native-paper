@@ -102,7 +102,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    * @supported Available in v5.x with theme version 3
    * Callback to execute on the right trailing icon button press.
    */
-  onTrailingIconPress?: (e: GestureResponderEvent) => void;
+  ontrailingIconPress?: (e: GestureResponderEvent) => void;
   /**
    * Accessibility label for the right trailing icon button. This is read by the screen reader when the user taps the button.
    */
@@ -149,7 +149,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
 
 type TextInputHandles = Pick<
   TextInput,
-  'setNativeProps' | 'isFocused' | 'clear' | 'blur' | 'focus'
+  'setNativeProps' | 'isFocused' | 'clear' | 'blur' | 'focus' | 'setSelection'
 >;
 
 /**
@@ -190,8 +190,8 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       trailingIcon,
       trailingIconColor,
       trailingIconAccessibilityLabel,
-      trailingRippleColor: customTrailingRippleColor,
-      onTrailingIconPress,
+      trailingRippleColor: customtrailingRippleColor,
+      ontrailingIconPress,
       right,
       mode = 'bar',
       showDivider = true,
@@ -208,33 +208,31 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
+    const {
+      roundness,
+      dark,
+      fonts: { bodyLarge },
+      colors: {
+        elevation: elevationColors,
+        onSurface,
+        onSurfaceVariant,
+        outline,
+        primary,
+      },
+    } = theme;
+
     const root = React.useRef<TextInput>(null);
 
-    React.useImperativeHandle(ref, () => {
-      const input = root.current;
-
-      if (input) {
-        return {
-          focus: () => input.focus(),
-          clear: () => input.clear(),
-          setNativeProps: (args: TextInputProps) => input.setNativeProps(args),
-          isFocused: () => input.isFocused(),
-          blur: () => input.blur(),
-        };
-      }
-
-      const noop = () => {
-        throw new Error('TextInput is not available');
-      };
-
-      return {
-        focus: noop,
-        clear: noop,
-        setNativeProps: noop,
-        isFocused: noop,
-        blur: noop,
-      };
-    });
+    React.useImperativeHandle(ref, () => ({
+      focus: () => root.current?.focus(),
+      clear: () => root.current?.clear(),
+      setNativeProps: (args: TextInputProps) =>
+        root.current?.setNativeProps(args),
+      isFocused: () => root.current?.isFocused() || false,
+      blur: () => root.current?.blur(),
+      setSelection: (start: number, end: number) =>
+        root.current?.setSelection(start, end),
+    }));
 
     const handleClearPress = (e: any) => {
       root.current?.clear();
@@ -242,50 +240,38 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       onClearIconPress?.(e);
     };
 
-    const { roundness, dark, isV3, fonts } = theme;
-
-    const placeholderTextColor = isV3
-      ? theme.colors.onSurface
-      : theme.colors?.placeholder;
-    const textColor = isV3 ? theme.colors.onSurfaceVariant : theme.colors.text;
-    const md2IconColor = dark
-      ? textColor
-      : color(textColor).alpha(0.54).rgb().string();
-    const iconColor =
-      customIconColor || (isV3 ? theme.colors.onSurfaceVariant : md2IconColor);
+    const iconColor = customIconColor || onSurfaceVariant;
     const rippleColor =
-      customRippleColor || color(textColor).alpha(0.32).rgb().string();
+      customRippleColor || color(onSurfaceVariant).alpha(0.32).rgb().string();
     const trailingRippleColor =
-      customTrailingRippleColor || color(textColor).alpha(0.32).rgb().string();
+      customtrailingRippleColor ||
+      color(onSurfaceVariant).alpha(0.32).rgb().string();
 
-    const font = isV3
-      ? {
-          ...fonts.bodyLarge,
-          lineHeight: Platform.select({
-            ios: 0,
-            default: fonts.bodyLarge.lineHeight,
-          }),
-        }
-      : theme.fonts.regular;
+    const font = {
+      ...bodyLarge,
+      lineHeight: Platform.select({
+        ios: 0,
+        default: bodyLarge.lineHeight,
+      }),
+    };
 
-    const isBarMode = isV3 && mode === 'bar';
-    const shouldRenderTrailingIcon =
+    const isBarMode = mode === 'bar';
+    const shouldRendertrailingIcon =
       isBarMode && trailingIcon && !loading && (!value || right !== undefined);
 
     return (
       <Surface
         style={[
-          { borderRadius: roundness },
-          !isV3 && styles.elevation,
-          isV3 && {
-            backgroundColor: theme.colors.elevation.level3,
+          {
+            backgroundColor: elevationColors.level3,
             borderRadius: roundness * (isBarMode ? 7 : 0),
           },
           styles.container,
           style,
         ]}
         testID={`${testID}-container`}
-        {...(theme.isV3 && { elevation })}
+        elevation={elevation}
+        container
         theme={theme}
       >
         <IconButton
@@ -313,16 +299,16 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
           style={[
             styles.input,
             {
-              color: textColor,
+              color: onSurfaceVariant,
               ...font,
               ...Platform.select({ web: { outline: 'none' } }),
             },
-            isV3 && (isBarMode ? styles.barModeInput : styles.viewModeInput),
+            isBarMode ? styles.barModeInput : styles.viewModeInput,
             inputStyle,
           ]}
           placeholder={placeholder || ''}
-          placeholderTextColor={placeholderTextColor}
-          selectionColor={theme.colors?.primary}
+          placeholderTextColor={onSurface}
+          selectionColor={primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
           keyboardAppearance={dark ? 'dark' : 'light'}
@@ -335,7 +321,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
         {loading ? (
           <ActivityIndicator
             testID="activity-indicator"
-            style={isV3 ? styles.v3Loader : styles.loader}
+            style={styles.loader}
           />
         ) : (
           // Clear icon should be always rendered within Searchbar – it's transparent,
@@ -346,8 +332,8 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             pointerEvents={value ? 'auto' : 'none'}
             testID={`${testID}-icon-wrapper`}
             style={[
-              isV3 && !value && styles.v3ClearIcon,
-              isV3 && right !== undefined && styles.v3ClearIconHidden,
+              !value && styles.clearIcon,
+              right !== undefined && styles.clearIconHidden,
             ]}
           >
             <IconButton
@@ -360,7 +346,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
                 clearIcon ||
                 (({ size, color }) => (
                   <MaterialCommunityIcon
-                    name={isV3 ? 'close' : 'close-circle-outline'}
+                    name={'close'}
                     color={color}
                     size={size}
                     direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
@@ -373,12 +359,12 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             />
           </View>
         )}
-        {shouldRenderTrailingIcon ? (
+        {shouldRendertrailingIcon ? (
           <IconButton
             accessibilityRole="button"
             borderless
-            onPress={onTrailingIconPress}
-            iconColor={trailingIconColor || theme.colors.onSurfaceVariant}
+            onPress={ontrailingIconPress}
+            iconColor={trailingIconColor || onSurfaceVariant}
             rippleColor={trailingRippleColor}
             icon={trailingIcon}
             accessibilityLabel={trailingIconAccessibilityLabel}
@@ -386,14 +372,18 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
           />
         ) : null}
         {isBarMode &&
-          right?.({ color: textColor, style: styles.rightStyle, testID })}
-        {isV3 && !isBarMode && showDivider && (
+          right?.({
+            color: onSurfaceVariant,
+            style: styles.rightStyle,
+            testID,
+          })}
+        {!isBarMode && showDivider && (
           <Divider
             bold
             style={[
               styles.divider,
               {
-                backgroundColor: theme.colors.outline,
+                backgroundColor: outline,
               },
             ]}
             testID={`${testID}-divider`}
@@ -425,24 +415,18 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
     minHeight: 72,
   },
-  elevation: {
-    elevation: 4,
-  },
   loader: {
-    margin: 10,
-  },
-  v3Loader: {
     marginHorizontal: 16,
   },
   rightStyle: {
     marginRight: 16,
   },
-  v3ClearIcon: {
+  clearIcon: {
     position: 'absolute',
     right: 0,
     marginLeft: 16,
   },
-  v3ClearIconHidden: {
+  clearIconHidden: {
     display: 'none',
   },
   divider: {

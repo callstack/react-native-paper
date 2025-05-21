@@ -21,12 +21,8 @@ export type Props = {
 };
 
 const PaperProvider = (props: Props) => {
-  const isOnlyVersionInTheme =
-    props.theme && Object.keys(props.theme).length === 1 && props.theme.version;
-
   const colorSchemeName =
-    ((!props.theme || isOnlyVersionInTheme) && Appearance?.getColorScheme()) ||
-    'light';
+    (!props.theme && Appearance?.getColorScheme()) || 'light';
 
   const [reduceMotionEnabled, setReduceMotionEnabled] =
     React.useState<boolean>(false);
@@ -59,13 +55,13 @@ const PaperProvider = (props: Props) => {
 
   React.useEffect(() => {
     let appearanceSubscription: NativeEventSubscription | undefined;
-    if (!props.theme || isOnlyVersionInTheme) {
+    if (!props.theme) {
       appearanceSubscription = Appearance?.addChangeListener(
         handleAppearanceChange
       ) as NativeEventSubscription | undefined;
     }
     return () => {
-      if (!props.theme || isOnlyVersionInTheme) {
+      if (!props.theme) {
         if (appearanceSubscription) {
           appearanceSubscription.remove();
         } else {
@@ -74,17 +70,15 @@ const PaperProvider = (props: Props) => {
         }
       }
     };
-  }, [props.theme, isOnlyVersionInTheme]);
+  }, [props.theme]);
 
-  const getTheme = () => {
-    const themeVersion = props.theme?.version || 3;
+  const theme = React.useMemo(() => {
     const scheme = colorScheme || 'light';
-    const defaultThemeBase = defaultThemesByVersion[themeVersion][scheme];
+    const defaultThemeBase = defaultThemesByVersion[scheme];
 
     const extendedThemeBase = {
       ...defaultThemeBase,
       ...props.theme,
-      version: themeVersion,
       animation: {
         ...props.theme?.animation,
         scale: reduceMotionEnabled ? 0 : 1,
@@ -93,23 +87,25 @@ const PaperProvider = (props: Props) => {
 
     return {
       ...extendedThemeBase,
-      isV3: extendedThemeBase.version === 3,
     };
-  };
+  }, [colorScheme, props.theme, reduceMotionEnabled]);
 
   const { children, settings } = props;
+
+  const settingsValue = React.useMemo(
+    () => ({
+      icon: MaterialCommunityIcon,
+      rippleEffectEnabled: true,
+      ...settings,
+    }),
+    [settings]
+  );
 
   return (
     <SafeAreaProviderCompat>
       <PortalHost>
-        <SettingsProvider
-          value={{
-            icon: MaterialCommunityIcon,
-            rippleEffectEnabled: true,
-            ...settings,
-          }}
-        >
-          <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
+        <SettingsProvider value={settingsValue}>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
         </SettingsProvider>
       </PortalHost>
     </SafeAreaProviderCompat>

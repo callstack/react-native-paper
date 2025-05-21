@@ -5,7 +5,7 @@ import { render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
-import { red500 } from '../../styles/themes/v2/colors';
+import { Colors } from '../../styles/themes/tokens';
 import ListAccordion from '../List/ListAccordion';
 import ListAccordionGroup from '../List/ListAccordionGroup';
 import ListIcon from '../List/ListIcon';
@@ -14,7 +14,7 @@ import { getAccordionColors } from '../List/utils';
 
 const styles = StyleSheet.create({
   coloring: {
-    color: red500,
+    color: Colors.error50,
   },
 });
 
@@ -115,31 +115,6 @@ describe('ListAccordion', () => {
   });
 });
 
-describe('getAccordionColors - title color', () => {
-  it('should return theme color, for theme version 3', () => {
-    expect(
-      getAccordionColors({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      titleColor: getTheme().colors.onSurface,
-    });
-  });
-
-  it('should return theme color, for theme version 2', () => {
-    expect(
-      getAccordionColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      titleColor: color(getTheme(false, false).colors.text)
-        .alpha(0.87)
-        .rgb()
-        .string(),
-    });
-  });
-});
-
 describe('getAccordionColors - description color', () => {
   it('should return theme color, for theme version 3', () => {
     expect(
@@ -148,19 +123,6 @@ describe('getAccordionColors - description color', () => {
       })
     ).toMatchObject({
       descriptionColor: getTheme().colors.onSurfaceVariant,
-    });
-  });
-
-  it('should return theme color, for theme version 2', () => {
-    expect(
-      getAccordionColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      descriptionColor: color(getTheme(false, false).colors.text)
-        .alpha(0.54)
-        .rgb()
-        .string(),
     });
   });
 });
@@ -173,19 +135,6 @@ describe('getAccordionColors - title text color', () => {
       })
     ).toMatchObject({
       titleTextColor: getTheme().colors.onSurface,
-    });
-  });
-
-  it('should return theme color, for theme version 2', () => {
-    expect(
-      getAccordionColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      titleTextColor: color(getTheme(false, false).colors.text)
-        .alpha(0.87)
-        .rgb()
-        .string(),
     });
   });
 
@@ -212,21 +161,6 @@ describe('getAccordionColors - ripple color', () => {
         .alpha(0.12)
         .rgb()
         .string(),
-    });
-  });
-
-  it('should return theme color, for theme version 2', () => {
-    const v2TextColor = color(getTheme(false, false).colors.text)
-      .alpha(0.87)
-      .rgb()
-      .string();
-
-    expect(
-      getAccordionColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      rippleColor: color(v2TextColor).alpha(0.12).rgb().string(),
     });
   });
 

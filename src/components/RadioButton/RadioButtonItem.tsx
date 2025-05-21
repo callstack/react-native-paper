@@ -16,8 +16,10 @@ import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import RadioButtonIOS from './RadioButtonIOS';
 import { handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp, MD3TypescaleKey } from '../../types';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import type { ThemeProp, TypescaleKey } from '../../types';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {
@@ -90,7 +92,7 @@ export type Props = {
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
-  labelVariant?: keyof typeof MD3TypescaleKey;
+  labelVariant?: keyof typeof TypescaleKey;
   /**
    * Specifies the largest possible scale a label font can reach.
    */
@@ -112,6 +114,10 @@ export type Props = {
    * Radio button control position.
    */
   position?: 'leading' | 'trailing';
+  /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
 };
 
 /**
@@ -156,8 +162,12 @@ const RadioButtonItem = ({
   position = 'trailing',
   labelVariant = 'bodyLarge',
   labelMaxFontSizeMultiplier,
+  hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const {
+    colors: { onSurface, onSurfaceDisabled },
+  } = theme;
   const radioButtonProps = {
     value,
     disabled,
@@ -177,15 +187,9 @@ const RadioButtonItem = ({
     radioButton = <RadioButton {...radioButtonProps} />;
   }
 
-  const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
-  const disabledTextColor = theme.isV3
-    ? theme.colors.onSurfaceDisabled
-    : theme.colors.disabled;
-  const textAlign = isLeading ? 'right' : 'left';
-
   const computedStyle = {
-    color: disabled ? disabledTextColor : textColor,
-    textAlign,
+    color: disabled ? onSurfaceDisabled : onSurface,
+    textAlign: isLeading ? 'right' : 'left',
   } as TextStyle;
 
   return (
@@ -219,17 +223,13 @@ const RadioButtonItem = ({
             background={background}
             theme={theme}
             rippleColor={rippleColor}
+            hitSlop={hitSlop}
           >
             <View style={[styles.container, style]} pointerEvents="none">
               {isLeading && radioButton}
               <Text
                 variant={labelVariant}
-                style={[
-                  styles.label,
-                  !theme.isV3 && styles.font,
-                  computedStyle,
-                  labelStyle,
-                ]}
+                style={[styles.label, computedStyle, labelStyle]}
                 maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
               >
                 {label}
@@ -261,8 +261,5 @@ const styles = StyleSheet.create({
   label: {
     flexShrink: 1,
     flexGrow: 1,
-  },
-  font: {
-    fontSize: 16,
   },
 });

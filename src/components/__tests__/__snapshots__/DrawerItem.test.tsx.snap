@@ -40,19 +40,16 @@ exports[`renders DrawerItem with icon 1`] = `
         },
         [
           {
+            "height": 56,
+            "justifyContent": "center",
             "marginHorizontal": 10,
-            "marginVertical": 4,
+            "marginLeft": 12,
+            "marginRight": 12,
+            "marginVertical": 0,
           },
           {
             "backgroundColor": undefined,
             "borderRadius": 28,
-          },
-          {
-            "height": 56,
-            "justifyContent": "center",
-            "marginLeft": 12,
-            "marginRight": 12,
-            "marginVertical": 0,
           },
           undefined,
         ],
@@ -61,18 +58,13 @@ exports[`renders DrawerItem with icon 1`] = `
   >
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "padding": 8,
-          },
-          {
-            "marginLeft": 16,
-            "marginRight": 24,
-            "padding": 0,
-          },
-        ]
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "marginLeft": 16,
+          "marginRight": 24,
+          "padding": 0,
+        }
       }
     >
       <View
@@ -86,7 +78,6 @@ exports[`renders DrawerItem with icon 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -109,16 +100,10 @@ exports[`renders DrawerItem with icon 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰋼
+          information
         </Text>
         <Text
           numberOfLines={1}
@@ -206,19 +191,16 @@ exports[`renders active DrawerItem 1`] = `
         },
         [
           {
+            "height": 56,
+            "justifyContent": "center",
             "marginHorizontal": 10,
-            "marginVertical": 4,
+            "marginLeft": 12,
+            "marginRight": 12,
+            "marginVertical": 0,
           },
           {
             "backgroundColor": "rgba(232, 222, 248, 1)",
             "borderRadius": 28,
-          },
-          {
-            "height": 56,
-            "justifyContent": "center",
-            "marginLeft": 12,
-            "marginRight": 12,
-            "marginVertical": 0,
           },
           undefined,
         ],
@@ -227,18 +209,13 @@ exports[`renders active DrawerItem 1`] = `
   >
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "padding": 8,
-          },
-          {
-            "marginLeft": 16,
-            "marginRight": 24,
-            "padding": 0,
-          },
-        ]
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "marginLeft": 16,
+          "marginRight": 24,
+          "padding": 0,
+        }
       }
     >
       <View
@@ -252,7 +229,6 @@ exports[`renders active DrawerItem 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -275,16 +251,10 @@ exports[`renders active DrawerItem 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰋼
+          information
         </Text>
         <Text
           numberOfLines={1}
@@ -372,19 +342,16 @@ exports[`renders basic DrawerItem 1`] = `
         },
         [
           {
+            "height": 56,
+            "justifyContent": "center",
             "marginHorizontal": 10,
-            "marginVertical": 4,
+            "marginLeft": 12,
+            "marginRight": 12,
+            "marginVertical": 0,
           },
           {
             "backgroundColor": undefined,
             "borderRadius": 28,
-          },
-          {
-            "height": 56,
-            "justifyContent": "center",
-            "marginLeft": 12,
-            "marginRight": 12,
-            "marginVertical": 0,
           },
           undefined,
         ],
@@ -393,18 +360,13 @@ exports[`renders basic DrawerItem 1`] = `
   >
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "padding": 8,
-          },
-          {
-            "marginLeft": 16,
-            "marginRight": 24,
-            "padding": 0,
-          },
-        ]
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "marginLeft": 16,
+          "marginRight": 24,
+          "padding": 0,
+        }
       }
     >
       <View

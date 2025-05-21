@@ -10,8 +10,6 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import setColor from 'color';
-
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 
@@ -63,10 +61,10 @@ const { isRTL } = I18nManager;
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ProgressBar, MD3Colors } from 'react-native-paper';
+ * import { ProgressBar, Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <ProgressBar progress={0.5} color={MD3Colors.error50} />
+ *   <ProgressBar progress={0.5} color={Colors.error50} />
  * );
  *
  * export default MyComponent;
@@ -85,7 +83,11 @@ const ProgressBar = ({
   ...rest
 }: Props) => {
   const isWeb = Platform.OS === 'web';
-  const theme = useInternalTheme(themeOverrides);
+  const {
+    animation: { scale },
+    colors: { surfaceVariant, primary },
+  } = useInternalTheme(themeOverrides);
+
   const { current: timer } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
@@ -97,8 +99,6 @@ const ProgressBar = ({
 
   const indeterminateAnimation =
     React.useRef<Animated.CompositeAnimation | null>(null);
-
-  const { scale } = theme.animation;
 
   React.useEffect(() => {
     passedAnimatedValue.current = animatedValue;
@@ -190,10 +190,7 @@ const ProgressBar = ({
     setWidth(event.nativeEvent.layout.width);
   };
 
-  const tintColor = color || theme.colors?.primary;
-  const trackTintColor = theme.isV3
-    ? theme.colors.surfaceVariant
-    : setColor(tintColor).alpha(0.38).rgb().string();
+  const tintColor = color || primary;
 
   return (
     <View
@@ -203,7 +200,9 @@ const ProgressBar = ({
       accessibilityRole="progressbar"
       accessibilityState={{ busy: visible }}
       accessibilityValue={
-        indeterminate ? {} : { min: 0, max: 100, now: progress * 100 }
+        indeterminate
+          ? {}
+          : { min: 0, max: 100, now: Math.round(progress * 100) }
       }
       style={isWeb && styles.webContainer}
       testID={testID}
@@ -211,7 +210,7 @@ const ProgressBar = ({
       <Animated.View
         style={[
           styles.container,
-          { backgroundColor: trackTintColor, opacity: fade },
+          { backgroundColor: surfaceVariant, opacity: fade },
           style,
         ]}
       >

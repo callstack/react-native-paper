@@ -17,18 +17,23 @@ import {
   StyleSheet,
   View,
   ViewStyle,
+  Text,
 } from 'react-native';
 
 import color from 'color';
 
-import { getCombinedStyles, getFABColors } from './utils';
+import { getCombinedStyles, getFABColors, getLabelSizeWeb } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import AnimatedText from '../Typography/AnimatedText';
+
+const SIZE = 56;
 
 export type AnimatedFABIconMode = 'static' | 'dynamic';
 export type AnimatedFABAnimateFrom = 'left' | 'right';
@@ -112,6 +117,10 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
   variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -120,9 +129,6 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    */
   testID?: string;
 };
-
-const SIZE = 56;
-const SCALE = 0.9;
 
 /**
  * An animated, extending horizontally floating action button represents the primary action in an application.
@@ -215,34 +221,72 @@ const AnimatedFAB = ({
   theme: themeOverrides,
   style,
   visible = true,
-  uppercase: uppercaseProp,
+  uppercase = false,
   testID = 'animated-fab',
   animateFrom = 'right',
   extended = false,
   iconMode = 'dynamic',
   variant = 'primary',
   labelMaxFontSizeMultiplier,
+  hitSlop,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const uppercase: boolean = uppercaseProp ?? !theme.isV3;
   const isIOS = Platform.OS === 'ios';
+  const isWeb = Platform.OS === 'web';
   const isAnimatedFromRight = animateFrom === 'right';
   const isIconStatic = iconMode === 'static';
   const { isRTL } = I18nManager;
+  const labelRef = React.useRef<Text & HTMLElement>(null);
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
   const { current: animFAB } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
-  const { isV3, animation } = theme;
+  const {
+    animation,
+    fonts: { labelLarge },
+  } = theme;
   const { scale } = animation;
 
-  const [textWidth, setTextWidth] = React.useState<number>(0);
-  const [textHeight, setTextHeight] = React.useState<number>(0);
+  const labelSize = isWeb ? getLabelSizeWeb(labelRef) : null;
+  const [textWidth, setTextWidth] = React.useState<number>(
+    labelSize?.width ?? 0
+  );
+  const [textHeight, setTextHeight] = React.useState<number>(
+    labelSize?.height ?? 0
+  );
 
-  const borderRadius = SIZE / (isV3 ? 3.5 : 2);
+  const borderRadius = SIZE / 3.5;
+
+  React.useEffect(() => {
+    if (!isWeb) {
+      return;
+    }
+
+    const updateTextSize = () => {
+      if (labelRef.current) {
+        const labelSize = getLabelSizeWeb(labelRef);
+
+        if (labelSize) {
+          setTextHeight(labelSize.height ?? 0);
+          setTextWidth(labelSize.width ?? 0);
+        }
+      }
+    };
+
+    updateTextSize();
+    window.addEventListener('resize', updateTextSize);
+
+    return () => {
+      if (!isWeb) {
+        return;
+      }
+
+      window.removeEventListener('resize', updateTextSize);
+    };
+  }, [isWeb]);
 
   React.useEffect(() => {
     if (visible) {
@@ -292,8 +336,8 @@ const AnimatedFAB = ({
   const onTextLayout = ({
     nativeEvent,
   }: NativeSyntheticEvent<TextLayoutEventData>) => {
-    const currentWidth = Math.ceil(nativeEvent.lines[0].width);
-    const currentHeight = Math.ceil(nativeEvent.lines[0].height);
+    const currentWidth = Math.ceil(nativeEvent.lines[0]?.width ?? 0);
+    const currentHeight = Math.ceil(nativeEvent.lines[0]?.height ?? 0);
 
     if (currentWidth !== textWidth || currentHeight !== textHeight) {
       setTextHeight(currentHeight);
@@ -321,20 +365,16 @@ const AnimatedFAB = ({
     animFAB,
   });
 
-  const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
-
   const textStyle = {
     color: foregroundColor,
-    ...font,
+    ...labelLarge,
   };
 
-  const md2Elevation = disabled || !isIOS ? 0 : 6;
-  const md3Elevation = disabled || !isIOS ? 0 : 3;
+  const elevation = disabled || !isIOS ? 0 : 3;
 
-  const shadowStyle = isV3 ? styles.v3Shadow : styles.shadow;
   const baseStyle = [
     StyleSheet.absoluteFill,
-    disabled ? styles.disabled : shadowStyle,
+    disabled ? styles.disabled : styles.shadow,
   ];
 
   const newAccessibilityState = { ...accessibilityState, disabled };
@@ -353,31 +393,14 @@ const AnimatedFAB = ({
           ],
           borderRadius,
         },
-        !isV3 && {
-          elevation: md2Elevation,
-        },
         styles.container,
         restStyle,
       ]}
-      {...(isV3 && { elevation: md3Elevation })}
+      elevation={elevation}
       theme={theme}
+      container
     >
-      <Animated.View
-        style={[
-          !isV3 && {
-            transform: [
-              {
-                scaleY: animFAB.interpolate({
-                  inputRange: propForDirection([distance, 0]),
-                  outputRange: propForDirection([SCALE, 1]),
-                }),
-              },
-            ],
-          },
-          styles.standard,
-          { borderRadius },
-        ]}
-      >
+      <Animated.View style={[styles.standard, { borderRadius }]}>
         <View style={[StyleSheet.absoluteFill, styles.shadowWrapper]}>
           <Animated.View
             pointerEvents="none"
@@ -446,6 +469,7 @@ const AnimatedFAB = ({
               testID={testID}
               style={{ borderRadius }}
               theme={theme}
+              hitSlop={hitSlop}
             >
               <View
                 style={[
@@ -470,6 +494,7 @@ const AnimatedFAB = ({
 
       <View pointerEvents="none">
         <AnimatedText
+          ref={isWeb ? labelRef : null}
           variant="labelLarge"
           numberOfLines={1}
           onTextLayout={isIOS ? onTextLayout : undefined}
@@ -477,7 +502,7 @@ const AnimatedFAB = ({
           style={[
             {
               [isAnimatedFromRight || isRTL ? 'right' : 'left']: isIconStatic
-                ? textWidth - SIZE + borderRadius / (isV3 ? 1 : 2)
+                ? textWidth - SIZE + borderRadius
                 : borderRadius,
             },
             {
@@ -555,9 +580,6 @@ const styles = StyleSheet.create({
     elevation: 0,
   },
   shadow: {
-    elevation: 6,
-  },
-  v3Shadow: {
     elevation: 3,
   },
   iconWrapper: {

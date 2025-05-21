@@ -4,54 +4,27 @@ import { I18nManager } from 'react-native';
 import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import {
-  InitialState,
-  NavigationContainer,
-  DarkTheme as NavigationDarkTheme,
-  DefaultTheme as NavigationDefaultTheme,
-} from '@react-navigation/native';
+import { InitialState, NavigationContainer } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { useKeepAwake } from 'expo-keep-awake';
 import { StatusBar } from 'expo-status-bar';
 import * as Updates from 'expo-updates';
-import {
-  Provider as PaperProvider,
-  MD3DarkTheme,
-  MD3LightTheme,
-  MD2DarkTheme,
-  MD2LightTheme,
-  MD2Theme,
-  MD3Theme,
-  useTheme,
-  adaptNavigationTheme,
-  configureFonts,
-} from 'react-native-paper';
+import { PaperProvider, DarkTheme, LightTheme } from 'react-native-paper';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 import DrawerItems from './DrawerItems';
 import App from './RootNavigator';
 import { deviceColorsSupported } from '../utils';
+import { PreferencesContext } from './PreferencesContext';
+import {
+  CombinedDefaultTheme,
+  CombinedDarkTheme,
+  createConfiguredFontTheme,
+  createConfiguredFontNavigationTheme,
+} from '../utils/themes';
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
-
-export const PreferencesContext = React.createContext<{
-  toggleShouldUseDeviceColors?: () => void;
-  toggleTheme: () => void;
-  toggleRtl: () => void;
-  toggleThemeVersion: () => void;
-  toggleCollapsed: () => void;
-  toggleCustomFont: () => void;
-  toggleRippleEffect: () => void;
-  customFontLoaded: boolean;
-  rippleEffectEnabled: boolean;
-  collapsed: boolean;
-  rtl: boolean;
-  theme: MD2Theme | MD3Theme;
-  shouldUseDeviceColors?: boolean;
-} | null>(null);
-
-export const useExampleTheme = () => useTheme<MD2Theme | MD3Theme>();
 
 const Drawer = createDrawerNavigator<{ Home: undefined }>();
 
@@ -70,7 +43,6 @@ export default function PaperExample() {
   const [shouldUseDeviceColors, setShouldUseDeviceColors] =
     React.useState(true);
   const [isDarkMode, setIsDarkMode] = React.useState(false);
-  const [themeVersion, setThemeVersion] = React.useState<2 | 3>(3);
   const [rtl, setRtl] = React.useState<boolean>(
     I18nManager.getConstants().isRTL
   );
@@ -80,18 +52,14 @@ export default function PaperExample() {
 
   const { theme: mdTheme } = useMaterial3Theme();
   const theme = React.useMemo(() => {
-    if (themeVersion === 2) {
-      return isDarkMode ? MD2DarkTheme : MD2LightTheme;
-    }
-
     if (!deviceColorsSupported || !shouldUseDeviceColors) {
-      return isDarkMode ? MD3DarkTheme : MD3LightTheme;
+      return isDarkMode ? DarkTheme : LightTheme;
     }
 
     return isDarkMode
-      ? { ...MD3DarkTheme, colors: mdTheme.dark }
-      : { ...MD3LightTheme, colors: mdTheme.light };
-  }, [isDarkMode, mdTheme, shouldUseDeviceColors, themeVersion]);
+      ? { ...DarkTheme, colors: mdTheme.dark }
+      : { ...LightTheme, colors: mdTheme.light };
+  }, [isDarkMode, mdTheme, shouldUseDeviceColors]);
 
   React.useEffect(() => {
     const restoreState = async () => {
@@ -165,12 +133,6 @@ export default function PaperExample() {
       toggleCollapsed: () => setCollapsed(!collapsed),
       toggleCustomFont: () => setCustomFont(!customFontLoaded),
       toggleRippleEffect: () => setRippleEffectEnabled(!rippleEffectEnabled),
-      toggleThemeVersion: () => {
-        setCustomFont(false);
-        setCollapsed(false);
-        setThemeVersion((oldThemeVersion) => (oldThemeVersion === 2 ? 3 : 2));
-        setRippleEffectEnabled(true);
-      },
       customFontLoaded,
       rippleEffectEnabled,
       collapsed,
@@ -192,38 +154,10 @@ export default function PaperExample() {
     return null;
   }
 
-  const { LightTheme, DarkTheme } = adaptNavigationTheme({
-    reactNavigationLight: NavigationDefaultTheme,
-    reactNavigationDark: NavigationDarkTheme,
-  });
-
-  const CombinedDefaultTheme = {
-    ...MD3LightTheme,
-    ...LightTheme,
-    colors: {
-      ...MD3LightTheme.colors,
-      ...LightTheme.colors,
-    },
-  };
-
-  const CombinedDarkTheme = {
-    ...MD3DarkTheme,
-    ...DarkTheme,
-    colors: {
-      ...MD3DarkTheme.colors,
-      ...DarkTheme.colors,
-    },
-  };
-
   const combinedTheme = isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme;
-  const configuredFontTheme = {
-    ...combinedTheme,
-    fonts: configureFonts({
-      config: {
-        fontFamily: 'Abel',
-      },
-    }),
-  };
+  const configuredFontTheme = createConfiguredFontTheme(combinedTheme);
+  const configuredFontNavigationTheme =
+    createConfiguredFontNavigationTheme(combinedTheme);
 
   return (
     <PaperProvider
@@ -231,39 +165,39 @@ export default function PaperExample() {
       theme={customFontLoaded ? configuredFontTheme : theme}
     >
       <PreferencesContext.Provider value={preferences}>
-        <React.Fragment>
-          <NavigationContainer
-            theme={combinedTheme}
-            initialState={initialState}
-            onStateChange={(state) =>
-              AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
-            }
-          >
-            <SafeAreaInsetsContext.Consumer>
-              {(insets) => {
-                const { left, right } = insets || { left: 0, right: 0 };
-                const collapsedDrawerWidth = 80 + Math.max(left, right);
-                return (
-                  <Drawer.Navigator
-                    screenOptions={{
-                      drawerStyle: collapsed && {
-                        width: collapsedDrawerWidth,
-                      },
-                    }}
-                    drawerContent={() => <DrawerItems />}
-                  >
-                    <Drawer.Screen
-                      name="Home"
-                      component={App}
-                      options={{ headerShown: false }}
-                    />
-                  </Drawer.Navigator>
-                );
-              }}
-            </SafeAreaInsetsContext.Consumer>
-            <StatusBar style={!theme.isV3 || theme.dark ? 'light' : 'dark'} />
-          </NavigationContainer>
-        </React.Fragment>
+        <NavigationContainer
+          theme={
+            customFontLoaded ? configuredFontNavigationTheme : combinedTheme
+          }
+          initialState={initialState}
+          onStateChange={(state) =>
+            AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
+          }
+        >
+          <SafeAreaInsetsContext.Consumer>
+            {(insets) => {
+              const { left, right } = insets || { left: 0, right: 0 };
+              const collapsedDrawerWidth = 100 + Math.max(left, right);
+              return (
+                <Drawer.Navigator
+                  screenOptions={{
+                    drawerStyle: collapsed && {
+                      width: collapsedDrawerWidth,
+                    },
+                  }}
+                  drawerContent={() => <DrawerItems />}
+                >
+                  <Drawer.Screen
+                    name="Home"
+                    component={App}
+                    options={{ headerShown: false }}
+                  />
+                </Drawer.Navigator>
+              );
+            }}
+          </SafeAreaInsetsContext.Consumer>
+          <StatusBar style={theme.dark ? 'light' : 'dark'} />
+        </NavigationContainer>
       </PreferencesContext.Provider>
     </PaperProvider>
   );

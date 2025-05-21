@@ -3,12 +3,12 @@ import { StyleSheet } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 
-import { red500 } from '../../styles/themes/v2/colors';
+import { Colors } from '../../styles/themes/tokens';
 import * as Avatar from '../Avatar/Avatar';
 
 const styles = StyleSheet.create({
   bgColor: {
-    backgroundColor: red500,
+    backgroundColor: Colors.error50,
   },
 });
 

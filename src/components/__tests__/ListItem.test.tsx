@@ -4,7 +4,7 @@ import { Text, View } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 
-import { red500 } from '../../styles/themes/v2/colors';
+import { Colors } from '../../styles/themes/tokens';
 import Chip from '../Chip/Chip';
 import IconButton from '../IconButton/IconButton';
 import ListIcon from '../List/ListIcon';
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   description: {
-    color: red500,
+    color: Colors.error50,
   },
   content: {
     paddingLeft: 0,

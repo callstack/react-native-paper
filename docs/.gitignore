@@ -25,3 +25,6 @@ docs/components
 # legacy
 dist/
 .linaria-cache/
+
+# Yarn
+.yarn/*

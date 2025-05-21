@@ -61,14 +61,14 @@ exports[`renders switch with color 1`] = `
   onChange={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-  onTintColor="#e91e63"
+  onTintColor="rgba(220, 54, 46, 1)"
   style={
     {
       "height": 31,
       "width": 51,
     }
   }
-  tintColor="#e91e63"
+  tintColor="rgba(220, 54, 46, 1)"
   value={true}
 />
 `;

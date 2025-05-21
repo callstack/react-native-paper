@@ -1,10 +1,7 @@
 import * as React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-import color from 'color';
-
 import { useInternalTheme } from '../core/theming';
-import { black, white } from '../styles/themes/v2/colors';
 import type { $RemoveChildren, ThemeProp } from '../types';
 
 export type Props = $RemoveChildren<typeof View> & {
@@ -59,24 +56,21 @@ const Divider = ({
   bold = false,
   ...rest
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
-  const { dark: isDarkTheme, isV3 } = theme;
-
-  const dividerColor = isV3
-    ? theme.colors.outlineVariant
-    : color(isDarkTheme ? white : black)
-        .alpha(0.12)
-        .rgb()
-        .string();
+  const {
+    colors: { outlineVariant },
+  } = useInternalTheme(themeOverrides);
 
   return (
     <View
       {...rest}
       style={[
-        { height: StyleSheet.hairlineWidth, backgroundColor: dividerColor },
-        leftInset && (isV3 ? styles.v3LeftInset : styles.leftInset),
-        isV3 && horizontalInset && styles.horizontalInset,
-        isV3 && bold && styles.bold,
+        {
+          height: StyleSheet.hairlineWidth,
+          backgroundColor: outlineVariant,
+        },
+        leftInset && styles.leftInset,
+        horizontalInset && styles.horizontalInset,
+        bold && styles.bold,
         style,
       ]}
     />
@@ -85,9 +79,6 @@ const Divider = ({
 
 const styles = StyleSheet.create({
   leftInset: {
-    marginLeft: 72,
-  },
-  v3LeftInset: {
     marginLeft: 16,
   },
   horizontalInset: {

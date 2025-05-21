@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 
 import { Snackbar, Button, List, Text, Switch } from 'react-native-paper';
 
-import { PreferencesContext, useExampleTheme } from '..';
+import { PreferencesContext } from '../PreferencesContext';
 import ScreenWrapper from '../ScreenWrapper';
 
 const SHORT_MESSAGE = 'Single-line snackbar';
@@ -12,7 +12,6 @@ const LONG_MESSAGE =
 
 const SnackbarExample = () => {
   const preferences = React.useContext(PreferencesContext);
-  const theme = useExampleTheme();
 
   const [options, setOptions] = React.useState({
     showSnackbar: false,
@@ -50,17 +49,15 @@ const SnackbarExample = () => {
               }
             />
           </View>
-          {theme.isV3 && (
-            <View style={styles.row}>
-              <Text>Close icon button</Text>
-              <Switch
-                value={showCloseIcon}
-                onValueChange={() =>
-                  setOptions({ ...options, showCloseIcon: !showCloseIcon })
-                }
-              />
-            </View>
-          )}
+          <View style={styles.row}>
+            <Text>Close icon button</Text>
+            <Switch
+              value={showCloseIcon}
+              onValueChange={() =>
+                setOptions({ ...options, showCloseIcon: !showCloseIcon })
+              }
+            />
+          </View>
           <View style={styles.row}>
             <Text>Longer message</Text>
             <Switch

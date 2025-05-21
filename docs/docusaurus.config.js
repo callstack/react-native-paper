@@ -5,6 +5,7 @@ const path = require('path');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 
+const { extendedExamples } = require('./src/data/extendedExamples.js');
 const { screenshots } = require('./src/data/screenshots.js');
 const { themeColors } = require('./src/data/themeColors.js');
 
@@ -137,6 +138,7 @@ const config = {
             ListItem: 'List/ListItem',
             ListSection: 'List/ListSection',
             ListSubheader: 'List/ListSubheader',
+            ListImage: 'List/ListImage',
           },
           Menu: {
             Menu: 'Menu/Menu',
@@ -336,6 +338,7 @@ const config = {
     },
     themeColors,
     screenshots,
+    extendedExamples,
   },
 };
 

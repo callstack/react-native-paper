@@ -8,9 +8,8 @@ import {
   View,
 } from 'react-native';
 
-import { Banner, FAB, MD2Colors, MD3Colors } from 'react-native-paper';
+import { Banner, FAB, Colors, useTheme } from 'react-native-paper';
 
-import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const PHOTOS = Array.from({ length: 24 }).map(
@@ -18,10 +17,10 @@ const PHOTOS = Array.from({ length: 24 }).map(
 );
 
 const BannerExample = () => {
+  const theme = useTheme();
+
   const [visible, setVisible] = React.useState<boolean>(true);
   const [useCustomTheme, setUseCustomTheme] = React.useState<boolean>(false);
-  const defaultTheme = useExampleTheme();
-
   const [height, setHeight] = React.useState(0);
 
   const handleLayout = ({ nativeEvent }: LayoutChangeEvent) => {
@@ -29,25 +28,16 @@ const BannerExample = () => {
     setHeight(layoutHeight);
   };
 
-  const customTheme = !defaultTheme.isV3
-    ? {
-        ...defaultTheme,
-        colors: {
-          text: MD2Colors.white,
-          surface: MD2Colors.blue200,
-          primary: MD2Colors.purple900,
-        },
-      }
-    : {
-        ...defaultTheme,
-        colors: {
-          onSurface: MD3Colors.tertiary100,
-          elevation: {
-            level1: MD3Colors.tertiary50,
-          },
-          primary: MD3Colors.tertiary10,
-        },
-      };
+  const customTheme = {
+    ...theme,
+    colors: {
+      onSurface: Colors.tertiary100,
+      elevation: {
+        level1: Colors.tertiary50,
+      },
+      primary: Colors.tertiary10,
+    },
+  };
 
   return (
     <>
@@ -90,7 +80,7 @@ const BannerExample = () => {
         onHideAnimationFinished={() =>
           console.log('Completed closing animation')
         }
-        theme={useCustomTheme ? customTheme : defaultTheme}
+        theme={useCustomTheme ? customTheme : theme}
         style={styles.banner}
       >
         Two line text string with two actions. One to two lines is preferable on

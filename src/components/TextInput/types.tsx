@@ -72,7 +72,7 @@ export type State = {
   labeled: Animated.Value;
   error: Animated.Value;
   focused: boolean;
-  placeholder?: string;
+  displayPlaceholder: boolean;
   value?: string;
   labelTextLayout: { width: number };
   labelLayout: { measured: boolean; width: number; height: number };
@@ -141,7 +141,6 @@ export type InputLabelProps = {
   inputContainerLayout: { width: number };
   labelBackground?: any;
   maxFontSizeMultiplier?: number | undefined | null;
-  isV3?: boolean;
   scaledLabel?: boolean;
 } & LabelProps;
 

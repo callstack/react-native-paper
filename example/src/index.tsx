@@ -2,47 +2,25 @@ import * as React from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import {
-  InitialState,
-  NavigationContainer,
-  DarkTheme as NavigationDarkTheme,
-  DefaultTheme as NavigationDefaultTheme,
-} from '@react-navigation/native';
+import { InitialState, NavigationContainer } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { useKeepAwake } from 'expo-keep-awake';
-import {
-  PaperProvider,
-  MD3DarkTheme,
-  MD3LightTheme,
-  MD2DarkTheme,
-  MD2LightTheme,
-  MD2Theme,
-  MD3Theme,
-  useTheme,
-  adaptNavigationTheme,
-  configureFonts,
-} from 'react-native-paper';
+import { PaperProvider, DarkTheme, LightTheme } from 'react-native-paper';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 import DrawerItems from './DrawerItems';
+import { PreferencesContext } from './PreferencesContext';
 import App from './RootNavigator';
+import {
+  CombinedDarkTheme,
+  CombinedDefaultTheme,
+  createConfiguredFontNavigationTheme,
+  createConfiguredFontTheme,
+} from '../utils/themes';
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCES_KEY = 'APP_PREFERENCES';
-
-export const PreferencesContext = React.createContext<{
-  toggleTheme: () => void;
-  toggleThemeVersion: () => void;
-  toggleCollapsed: () => void;
-  toggleCustomFont: () => void;
-  toggleRippleEffect: () => void;
-  customFontLoaded: boolean;
-  rippleEffectEnabled: boolean;
-  collapsed: boolean;
-  theme: MD2Theme | MD3Theme;
-} | null>(null);
-
-export const useExampleTheme = () => useTheme<MD2Theme | MD3Theme>();
+const noop = () => {};
 
 const Drawer = createDrawerNavigator<{ Home: undefined }>();
 
@@ -59,18 +37,13 @@ export default function PaperExample() {
   >();
 
   const [isDarkMode, setIsDarkMode] = React.useState(false);
-  const [themeVersion, setThemeVersion] = React.useState<2 | 3>(3);
   const [collapsed, setCollapsed] = React.useState(false);
   const [customFontLoaded, setCustomFont] = React.useState(false);
   const [rippleEffectEnabled, setRippleEffectEnabled] = React.useState(true);
 
   const theme = React.useMemo(() => {
-    if (themeVersion === 2) {
-      return isDarkMode ? MD2DarkTheme : MD2LightTheme;
-    }
-
-    return isDarkMode ? MD3DarkTheme : MD3LightTheme;
-  }, [isDarkMode, themeVersion]);
+    return isDarkMode ? DarkTheme : LightTheme;
+  }, [isDarkMode]);
 
   React.useEffect(() => {
     const restoreState = async () => {
@@ -131,16 +104,15 @@ export default function PaperExample() {
       toggleCollapsed: () => setCollapsed(!collapsed),
       toggleCustomFont: () => setCustomFont(!customFontLoaded),
       toggleRippleEffect: () => setRippleEffectEnabled(!rippleEffectEnabled),
-      toggleThemeVersion: () => {
-        setCustomFont(false);
-        setCollapsed(false);
-        setThemeVersion((oldThemeVersion) => (oldThemeVersion === 2 ? 3 : 2));
-        setRippleEffectEnabled(true);
-      },
+      theme,
+      collapsed,
       customFontLoaded,
       rippleEffectEnabled,
-      collapsed,
-      theme,
+      // noop for web, specified to avoid type errors
+      toggleRtl: noop,
+      toggleShouldUseDeviceColors: noop,
+      rtl: false,
+      shouldUseDeviceColors: false,
     }),
     [theme, collapsed, customFontLoaded, rippleEffectEnabled]
   );
@@ -149,38 +121,10 @@ export default function PaperExample() {
     return null;
   }
 
-  const { LightTheme, DarkTheme } = adaptNavigationTheme({
-    reactNavigationLight: NavigationDefaultTheme,
-    reactNavigationDark: NavigationDarkTheme,
-  });
-
-  const CombinedDefaultTheme = {
-    ...MD3LightTheme,
-    ...LightTheme,
-    colors: {
-      ...MD3LightTheme.colors,
-      ...LightTheme.colors,
-    },
-  };
-
-  const CombinedDarkTheme = {
-    ...MD3DarkTheme,
-    ...DarkTheme,
-    colors: {
-      ...MD3DarkTheme.colors,
-      ...DarkTheme.colors,
-    },
-  };
-
   const combinedTheme = isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme;
-  const configuredFontTheme = {
-    ...combinedTheme,
-    fonts: configureFonts({
-      config: {
-        fontFamily: 'Abel',
-      },
-    }),
-  };
+  const configuredFontTheme = createConfiguredFontTheme(combinedTheme);
+  const configuredFontNavigationTheme =
+    createConfiguredFontNavigationTheme(combinedTheme);
 
   return (
     <PaperProvider
@@ -188,38 +132,38 @@ export default function PaperExample() {
       theme={customFontLoaded ? configuredFontTheme : theme}
     >
       <PreferencesContext.Provider value={preferences}>
-        <React.Fragment>
-          <NavigationContainer
-            theme={combinedTheme}
-            initialState={initialState}
-            onStateChange={(state) =>
-              AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
-            }
-          >
-            <SafeAreaInsetsContext.Consumer>
-              {(insets) => {
-                const { left, right } = insets || { left: 0, right: 0 };
-                const collapsedDrawerWidth = 80 + Math.max(left, right);
-                return (
-                  <Drawer.Navigator
-                    screenOptions={{
-                      drawerStyle: collapsed && {
-                        width: collapsedDrawerWidth,
-                      },
-                    }}
-                    drawerContent={() => <DrawerItems />}
-                  >
-                    <Drawer.Screen
-                      name="Home"
-                      component={App}
-                      options={{ headerShown: false }}
-                    />
-                  </Drawer.Navigator>
-                );
-              }}
-            </SafeAreaInsetsContext.Consumer>
-          </NavigationContainer>
-        </React.Fragment>
+        <NavigationContainer
+          theme={
+            customFontLoaded ? configuredFontNavigationTheme : combinedTheme
+          }
+          initialState={initialState}
+          onStateChange={(state) =>
+            AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
+          }
+        >
+          <SafeAreaInsetsContext.Consumer>
+            {(insets) => {
+              const { left, right } = insets || { left: 0, right: 0 };
+              const collapsedDrawerWidth = 100 + Math.max(left, right);
+              return (
+                <Drawer.Navigator
+                  screenOptions={{
+                    drawerStyle: collapsed && {
+                      width: collapsedDrawerWidth,
+                    },
+                  }}
+                  drawerContent={() => <DrawerItems />}
+                >
+                  <Drawer.Screen
+                    name="Home"
+                    component={App}
+                    options={{ headerShown: false }}
+                  />
+                </Drawer.Navigator>
+              );
+            }}
+          </SafeAreaInsetsContext.Consumer>
+        </NavigationContainer>
       </PreferencesContext.Provider>
     </PaperProvider>
   );

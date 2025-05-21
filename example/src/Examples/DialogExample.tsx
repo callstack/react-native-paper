@@ -12,7 +12,6 @@ import {
   DialogWithRadioBtns,
   UndismissableDialog,
 } from './Dialogs';
-import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 type ButtonVisibility = {
@@ -21,7 +20,6 @@ type ButtonVisibility = {
 
 const DialogExample = () => {
   const [visible, setVisible] = React.useState<ButtonVisibility>({});
-  const { isV3 } = useExampleTheme();
 
   const _toggleDialog = (name: string) => () =>
     setVisible({ ...visible, [name]: !visible[name] });
@@ -65,15 +63,13 @@ const DialogExample = () => {
       >
         Custom colors
       </Button>
-      {isV3 && (
-        <Button
-          mode="outlined"
-          onPress={_toggleDialog('dialog6')}
-          style={styles.button}
-        >
-          With icon
-        </Button>
-      )}
+      <Button
+        mode="outlined"
+        onPress={_toggleDialog('dialog6')}
+        style={styles.button}
+      >
+        With icon
+      </Button>
       {Platform.OS === 'android' && (
         <Button
           mode="outlined"
@@ -103,12 +99,10 @@ const DialogExample = () => {
         visible={_getVisible('dialog5')}
         close={_toggleDialog('dialog5')}
       />
-      {isV3 && (
-        <DialogWithIcon
-          visible={_getVisible('dialog6')}
-          close={_toggleDialog('dialog6')}
-        />
-      )}
+      <DialogWithIcon
+        visible={_getVisible('dialog6')}
+        close={_toggleDialog('dialog6')}
+      />
       <DialogWithDismissableBackButton
         visible={_getVisible('dialog7')}
         close={_toggleDialog('dialog7')}

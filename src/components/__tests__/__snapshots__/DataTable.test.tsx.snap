@@ -229,7 +229,7 @@ exports[`DataTable.Header renders data table header 1`] = `
               "lineHeight": 24,
             },
             {
-              "maxHeight": 24,
+              "maxHeight": 48,
             },
             {},
             {
@@ -310,7 +310,7 @@ exports[`DataTable.Header renders data table header 1`] = `
               "lineHeight": 24,
             },
             {
-              "maxHeight": 24,
+              "maxHeight": 48,
             },
             {},
             {
@@ -475,9 +475,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -485,7 +483,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -508,16 +505,10 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰅁
+            chevron-left
           </Text>
         </View>
       </View>
@@ -618,9 +609,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -628,7 +617,6 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -651,16 +639,10 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰅂
+            chevron-right
           </Text>
         </View>
       </View>
@@ -819,9 +801,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -829,7 +809,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -852,16 +831,10 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰘀
+            page-first
           </Text>
         </View>
       </View>
@@ -962,9 +935,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -972,7 +943,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -995,16 +965,10 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰅁
+            chevron-left
           </Text>
         </View>
       </View>
@@ -1105,9 +1069,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -1115,7 +1077,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -1138,16 +1099,10 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰅂
+            chevron-right
           </Text>
         </View>
       </View>
@@ -1248,9 +1203,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -1258,7 +1211,6 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -1281,16 +1233,10 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰘁
+            page-last
           </Text>
         </View>
       </View>
@@ -1449,9 +1395,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -1459,7 +1403,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -1482,16 +1425,10 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰅁
+            chevron-left
           </Text>
         </View>
       </View>
@@ -1592,9 +1529,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -1602,7 +1537,6 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -1625,16 +1559,10 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰅂
+            chevron-right
           </Text>
         </View>
       </View>
@@ -1781,7 +1709,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                   "overflow": "hidden",
                 },
                 {
-                  "borderRadius": 20,
+                  "borderRadius": 19,
                 },
               ]
             }
@@ -1819,7 +1747,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               >
                 <Text
                   accessibilityElementsHidden={true}
-                  allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
                   selectable={false}
@@ -1842,16 +1769,10 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                           "backgroundColor": "transparent",
                         },
                       ],
-                      {
-                        "fontFamily": "Material Design Icons",
-                        "fontStyle": "normal",
-                        "fontWeight": "normal",
-                      },
-                      {},
                     ]
                   }
                 >
-                  󰍝
+                  menu-down
                 </Text>
               </View>
               <Text
@@ -1880,7 +1801,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                           "marginVertical": 9,
                           "textAlign": "center",
                         },
-                        false,
                         {
                           "marginHorizontal": 24,
                           "marginVertical": 10,
@@ -2044,9 +1964,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -2054,7 +1972,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -2077,16 +1994,10 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰘀
+            page-first
           </Text>
         </View>
       </View>
@@ -2187,9 +2098,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -2197,7 +2106,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -2220,16 +2128,10 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰅁
+            chevron-left
           </Text>
         </View>
       </View>
@@ -2330,9 +2232,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -2340,7 +2240,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -2363,16 +2262,10 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰅂
+            chevron-right
           </Text>
         </View>
       </View>
@@ -2473,9 +2366,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -2483,7 +2374,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -2506,16 +2396,10 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰘁
+            page-last
           </Text>
         </View>
       </View>
@@ -2584,7 +2468,6 @@ exports[`DataTable.Title renders data table title with press handler 1`] = `
   >
     <Text
       accessibilityElementsHidden={true}
-      allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
       selectable={false}
@@ -2607,16 +2490,10 @@ exports[`DataTable.Title renders data table title with press handler 1`] = `
               "backgroundColor": "transparent",
             },
           ],
-          {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          {},
         ]
       }
     >
-      󰁝
+      arrow-up
     </Text>
   </View>
   <Text
@@ -2643,7 +2520,7 @@ exports[`DataTable.Title renders data table title with press handler 1`] = `
             "lineHeight": 24,
           },
           {
-            "maxHeight": 24,
+            "maxHeight": 48,
           },
           {},
           {
@@ -2719,7 +2596,6 @@ exports[`DataTable.Title renders data table title with sort icon 1`] = `
   >
     <Text
       accessibilityElementsHidden={true}
-      allowFontScaling={false}
       importantForAccessibility="no-hide-descendants"
       pointerEvents="none"
       selectable={false}
@@ -2742,16 +2618,10 @@ exports[`DataTable.Title renders data table title with sort icon 1`] = `
               "backgroundColor": "transparent",
             },
           ],
-          {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          {},
         ]
       }
     >
-      󰁝
+      arrow-up
     </Text>
   </View>
   <Text
@@ -2778,7 +2648,7 @@ exports[`DataTable.Title renders data table title with sort icon 1`] = `
             "lineHeight": 24,
           },
           {
-            "maxHeight": 24,
+            "maxHeight": 48,
           },
           {},
           {
@@ -2864,7 +2734,7 @@ exports[`DataTable.Title renders right aligned data table title 1`] = `
             "lineHeight": 24,
           },
           {
-            "maxHeight": 24,
+            "maxHeight": 48,
           },
           {},
           {

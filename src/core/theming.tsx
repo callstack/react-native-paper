@@ -1,30 +1,19 @@
 import type { ComponentType } from 'react';
 
 import { $DeepPartial, createTheming } from '@callstack/react-theme-provider';
-import color from 'color';
 
-import {
-  MD2DarkTheme,
-  MD2LightTheme,
-  MD3DarkTheme,
-  MD3LightTheme,
-} from '../styles/themes';
-import type {
-  InternalTheme,
-  MD3Theme,
-  MD3AndroidColors,
-  NavigationTheme,
-} from '../types';
+import { DarkTheme, LightTheme } from '../styles/themes';
+import type { InternalTheme, Theme, NavigationTheme } from '../types';
 
-export const DefaultTheme = MD3LightTheme;
+export const DefaultTheme = LightTheme;
 
 export const {
   ThemeProvider,
   withTheme,
   useTheme: useAppTheme,
-} = createTheming<unknown>(MD3LightTheme);
+} = createTheming<unknown>(LightTheme);
 
-export function useTheme<T = MD3Theme>(overrides?: $DeepPartial<T>) {
+export function useTheme<T = Theme>(overrides?: $DeepPartial<T>) {
   return useAppTheme<T>(overrides);
 }
 
@@ -37,52 +26,42 @@ export const withInternalTheme = <Props extends { theme: InternalTheme }, C>(
 ) => withTheme<Props, C>(WrappedComponent);
 
 export const defaultThemesByVersion = {
-  2: {
-    light: MD2LightTheme,
-    dark: MD2DarkTheme,
-  },
-  3: {
-    light: MD3LightTheme,
-    dark: MD3DarkTheme,
-  },
+  light: LightTheme,
+  dark: DarkTheme,
 };
 
-export const getTheme = <
-  Scheme extends boolean = false,
-  IsVersion3 extends boolean = true
->(
-  isDark: Scheme = false as Scheme,
-  isV3: IsVersion3 = true as IsVersion3
-): (typeof defaultThemesByVersion)[IsVersion3 extends true
-  ? 3
-  : 2][Scheme extends true ? 'dark' : 'light'] => {
-  const themeVersion = isV3 ? 3 : 2;
+export const getTheme = <Scheme extends boolean = false>(
+  isDark: Scheme = false as Scheme
+): (typeof defaultThemesByVersion)[Scheme extends true ? 'dark' : 'light'] => {
   const scheme = isDark ? 'dark' : 'light';
 
-  return defaultThemesByVersion[themeVersion][scheme];
+  return defaultThemesByVersion[scheme];
 };
 
 // eslint-disable-next-line no-redeclare
-export function adaptNavigationTheme(themes: {
-  reactNavigationLight: NavigationTheme;
-  materialLight?: MD3Theme;
+export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
+  reactNavigationLight: T;
+  materialLight?: Theme;
 }): {
   LightTheme: NavigationTheme;
 };
 // eslint-disable-next-line no-redeclare
-export function adaptNavigationTheme(themes: {
-  reactNavigationDark: NavigationTheme;
-  materialDark?: MD3Theme;
+export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
+  reactNavigationDark: T;
+  materialDark?: Theme;
 }): {
   DarkTheme: NavigationTheme;
 };
 // eslint-disable-next-line no-redeclare
-export function adaptNavigationTheme(themes: {
-  reactNavigationLight: NavigationTheme;
-  reactNavigationDark: NavigationTheme;
-  materialLight?: MD3Theme;
-  materialDark?: MD3Theme;
-}): { LightTheme: NavigationTheme; DarkTheme: NavigationTheme };
+export function adaptNavigationTheme<
+  TLight extends NavigationTheme,
+  TDark extends NavigationTheme
+>(themes: {
+  reactNavigationLight: TLight;
+  reactNavigationDark: TDark;
+  materialLight?: Theme;
+  materialDark?: Theme;
+}): { LightTheme: TLight; DarkTheme: TDark };
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme(themes: any) {
   const {
@@ -92,79 +71,68 @@ export function adaptNavigationTheme(themes: any) {
     materialDark,
   } = themes;
 
-  const getAdaptedTheme = (
-    navigationTheme: NavigationTheme,
-    MD3Theme: MD3Theme
-  ) => {
-    return {
-      ...navigationTheme,
-      colors: {
-        ...navigationTheme.colors,
-        primary: MD3Theme.colors.primary,
-        background: MD3Theme.colors.background,
-        card: MD3Theme.colors.elevation.level2,
-        text: MD3Theme.colors.onSurface,
-        border: MD3Theme.colors.outline,
-        notification: MD3Theme.colors.error,
-      },
-    };
+  const Theme = {
+    light: materialLight || LightTheme,
+    dark: materialDark || DarkTheme,
   };
 
-  const MD3Themes = {
-    light: materialLight || MD3LightTheme,
-    dark: materialDark || MD3DarkTheme,
-  };
+  const result: { LightTheme?: any; DarkTheme?: any } = {};
 
-  if (reactNavigationLight && reactNavigationDark) {
-    const modes = ['light', 'dark'] as const;
-
-    const NavigationThemes = {
-      light: reactNavigationLight,
-      dark: reactNavigationDark,
-    };
-
-    const { light: adaptedLight, dark: adaptedDark } = modes.reduce(
-      (prev, curr) => {
-        return {
-          ...prev,
-          [curr]: getAdaptedTheme(NavigationThemes[curr], MD3Themes[curr]),
-        };
-      },
-      {
-        light: reactNavigationLight,
-        dark: reactNavigationDark,
-      }
-    );
-
-    return {
-      LightTheme: adaptedLight,
-      DarkTheme: adaptedDark,
-    };
+  if (reactNavigationLight) {
+    result.LightTheme = getAdaptedTheme(reactNavigationLight, Theme.light);
   }
 
   if (reactNavigationDark) {
+    result.DarkTheme = getAdaptedTheme(reactNavigationDark, Theme.dark);
+  }
+
+  return result;
+}
+
+const getAdaptedTheme = <T extends NavigationTheme>(
+  theme: T,
+  materialTheme: Theme
+): T => {
+  const base = {
+    ...theme,
+    colors: {
+      ...theme.colors,
+      primary: materialTheme.colors.primary,
+      background: materialTheme.colors.background,
+      card: materialTheme.colors.elevation.level2,
+      text: materialTheme.colors.onSurface,
+      border: materialTheme.colors.outline,
+      notification: materialTheme.colors.error,
+    },
+  };
+
+  if ('fonts' in theme) {
     return {
-      DarkTheme: getAdaptedTheme(reactNavigationDark, MD3Themes.dark),
+      ...base,
+      fonts: {
+        regular: {
+          fontFamily: materialTheme.fonts.bodyMedium.fontFamily,
+          fontWeight: materialTheme.fonts.bodyMedium.fontWeight,
+          letterSpacing: materialTheme.fonts.bodyMedium.letterSpacing,
+        },
+        medium: {
+          fontFamily: materialTheme.fonts.titleMedium.fontFamily,
+          fontWeight: materialTheme.fonts.titleMedium.fontWeight,
+          letterSpacing: materialTheme.fonts.titleMedium.letterSpacing,
+        },
+        bold: {
+          fontFamily: materialTheme.fonts.headlineSmall.fontFamily,
+          fontWeight: materialTheme.fonts.headlineSmall.fontWeight,
+          letterSpacing: materialTheme.fonts.headlineSmall.letterSpacing,
+        },
+        heavy: {
+          fontFamily: materialTheme.fonts.headlineLarge.fontFamily,
+          fontWeight: materialTheme.fonts.headlineLarge.fontWeight,
+          letterSpacing: materialTheme.fonts.headlineLarge.letterSpacing,
+        },
+      },
     };
   }
 
-  return {
-    LightTheme: getAdaptedTheme(reactNavigationLight, MD3Themes.light),
-  };
-}
-
-export const getDynamicThemeElevations = (scheme: MD3AndroidColors) => {
-  const elevationValues = ['transparent', 0.05, 0.08, 0.11, 0.12, 0.14];
-  return elevationValues.reduce((elevations, elevationValue, index) => {
-    return {
-      ...elevations,
-      [`level${index}`]:
-        index === 0
-          ? elevationValue
-          : color(scheme.surface)
-              .mix(color(scheme.primary), elevationValue as number)
-              .rgb()
-              .string(),
-    };
-  }, {});
+  return base;
 };

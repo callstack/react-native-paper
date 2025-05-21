@@ -132,16 +132,10 @@ exports[`can render leading checkbox control 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰄬
+          check
         </Text>
       </View>
     </View>
@@ -169,7 +163,6 @@ exports[`can render leading checkbox control 1`] = `
                 "flexGrow": 1,
                 "flexShrink": 1,
               },
-              false,
               {
                 "color": "rgba(28, 27, 31, 1)",
                 "textAlign": "right",
@@ -267,7 +260,6 @@ exports[`can render the Android checkbox on different platforms 1`] = `
                 "flexGrow": 1,
                 "flexShrink": 1,
               },
-              false,
               {
                 "color": "rgba(28, 27, 31, 1)",
                 "textAlign": "left",
@@ -364,16 +356,10 @@ exports[`can render the Android checkbox on different platforms 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰄱
+          checkbox-blank-outline
         </Text>
         <View
           style={
@@ -490,7 +476,6 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
                 "flexGrow": 1,
                 "flexShrink": 1,
               },
-              false,
               {
                 "color": "rgba(28, 27, 31, 1)",
                 "textAlign": "left",
@@ -580,16 +565,10 @@ exports[`can render the iOS checkbox on different platforms 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰄬
+          check
         </Text>
       </View>
     </View>
@@ -677,7 +656,6 @@ exports[`renders unchecked 1`] = `
                 "flexGrow": 1,
                 "flexShrink": 1,
               },
-              false,
               {
                 "color": "rgba(28, 27, 31, 1)",
                 "textAlign": "left",
@@ -767,16 +745,10 @@ exports[`renders unchecked 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰄬
+          check
         </Text>
       </View>
     </View>

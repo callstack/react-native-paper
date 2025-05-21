@@ -6,12 +6,12 @@ import { Animated, StyleSheet } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import { act } from 'react-test-renderer';
 
-import { MD3Colors } from '../../styles/themes/v3/tokens';
+import { Colors } from '../../styles/themes/tokens';
 import AnimatedFAB from '../FAB/AnimatedFAB';
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: MD3Colors.tertiary50,
+    backgroundColor: Colors.tertiary50,
   },
 });
 
@@ -83,7 +83,9 @@ it('animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
 
   expect(getByTestId('animated-fab-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],

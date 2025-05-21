@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-import color from 'color';
-
 import { useInternalTheme } from '../../core/theming';
-import { MD3Colors } from '../../styles/themes/v3/tokens';
+import { Colors } from '../../styles/themes/tokens';
 import type { ThemeProp } from '../../types';
 import Divider from '../Divider';
 import Text from '../Typography/Text';
@@ -73,26 +71,25 @@ const DrawerSection = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { isV3 } = theme;
-  const titleColor = isV3
-    ? theme.colors.onSurfaceVariant
-    : color(theme.colors.text).alpha(0.54).rgb().string();
-  const titleMargin = isV3 ? 28 : 16;
-  const font = isV3 ? theme.fonts.titleSmall : theme.fonts.medium;
+  const {
+    colors: { onSurfaceVariant },
+    fonts: { titleSmall },
+  } = theme;
+  const titleMargin = 28;
 
   return (
     <View style={[styles.container, style]} {...rest}>
       {title && (
-        <View style={[styles.titleContainer, isV3 && styles.v3TitleContainer]}>
+        <View style={[styles.titleContainer]}>
           {title && (
             <Text
               variant="titleSmall"
               numberOfLines={1}
               style={[
                 {
-                  color: titleColor,
+                  color: onSurfaceVariant,
                   marginLeft: titleMargin,
-                  ...font,
+                  ...titleSmall,
                 },
               ]}
               maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
@@ -104,11 +101,7 @@ const DrawerSection = ({
       )}
       {children}
       {showDivider && (
-        <Divider
-          {...(isV3 && { horizontalInset: true, bold: true })}
-          style={[styles.divider, isV3 && styles.v3Divider]}
-          theme={theme}
-        />
+        <Divider horizontalInset bold style={styles.divider} theme={theme} />
       )}
     </View>
   );
@@ -121,17 +114,12 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   titleContainer: {
-    height: 40,
-    justifyContent: 'center',
-  },
-  v3TitleContainer: {
     height: 56,
+    justifyContent: 'center',
   },
   divider: {
     marginTop: 4,
-  },
-  v3Divider: {
-    backgroundColor: MD3Colors.neutralVariant50,
+    backgroundColor: Colors.neutralVariant50,
   },
 });
 

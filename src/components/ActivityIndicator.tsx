@@ -40,15 +40,15 @@ const DURATION = 2400;
 
 /**
  * Activity indicator is used to present progress of some activity in the app.
- * It can be used as a drop-in for the ActivityIndicator shipped with React Native.
+ * It can be used as a drop-in replacement for the ActivityIndicator shipped with React Native.
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ActivityIndicator, MD2Colors } from 'react-native-paper';
+ * import { ActivityIndicator, Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <ActivityIndicator animating={true} color={MD2Colors.red800} />
+ *   <ActivityIndicator animating={true} color={Colors.primary100} />
  * );
  *
  * export default MyComponent;
@@ -63,7 +63,11 @@ const ActivityIndicator = ({
   theme: themeOverrides,
   ...rest
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
+  const {
+    animation: { scale },
+    colors: { primary },
+  } = useInternalTheme(themeOverrides);
+
   const { current: timer } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
@@ -74,10 +78,6 @@ const ActivityIndicator = ({
   const rotation = React.useRef<Animated.CompositeAnimation | undefined>(
     undefined
   );
-
-  const {
-    animation: { scale },
-  } = theme;
 
   const startRotation = React.useCallback(() => {
     // Show indicator
@@ -130,7 +130,7 @@ const ActivityIndicator = ({
     }
   }, [animating, fade, hidesWhenStopped, startRotation, scale, timer]);
 
-  const color = indicatorColor || theme.colors?.primary;
+  const color = indicatorColor || primary;
   const size =
     typeof indicatorSize === 'string'
       ? indicatorSize === 'small'

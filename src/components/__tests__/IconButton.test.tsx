@@ -1,17 +1,20 @@
 import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { act, render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
-import { pink500 } from '../../styles/themes/v2/colors';
+import { Colors } from '../../styles/themes/tokens';
 import IconButton from '../IconButton/IconButton';
 import { getIconButtonColor } from '../IconButton/utils';
 
 const styles = StyleSheet.create({
   square: {
     borderRadius: 0,
+  },
+  slightlyRounded: {
+    borderRadius: 4,
   },
 });
 
@@ -23,7 +26,7 @@ it('renders icon button by default', () => {
 
 it('renders icon button with color', () => {
   const tree = render(
-    <IconButton icon="camera" iconColor={pink500} />
+    <IconButton icon="camera" iconColor={Colors.tertiary50} />
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -58,7 +61,21 @@ it('renders icon button with custom border radius', () => {
     />
   );
 
-  expect(getByTestId('icon-button')).toHaveStyle({ borderRadius: 0 });
+  expect(getByTestId('icon-button-container')).toHaveStyle({ borderRadius: 0 });
+});
+
+it('renders icon button with small border radius', () => {
+  const { getByTestId } = render(
+    <IconButton
+      icon="camera"
+      testID="icon-button"
+      size={36}
+      onPress={() => {}}
+      style={styles.slightlyRounded}
+    />
+  );
+
+  expect(getByTestId('icon-button-container')).toHaveStyle({ borderRadius: 4 });
 });
 
 describe('getIconButtonColor - icon color', () => {
@@ -171,16 +188,6 @@ describe('getIconButtonColor - icon color', () => {
       })
     ).toMatchObject({
       iconColor: getTheme().colors.primary,
-    });
-  });
-
-  it('should return theme icon color, for theme version 2', () => {
-    expect(
-      getIconButtonColor({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      iconColor: getTheme(false, false).colors.text,
     });
   });
 });
@@ -299,16 +306,6 @@ describe('getIconButtonColor - border color', () => {
       borderColor: getTheme().colors.outline,
     });
   });
-
-  it('should return undefined, for theme version 2', () => {
-    expect(
-      getIconButtonColor({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      borderColor: undefined,
-    });
-  });
 });
 
 describe('getIconButtonColor - ripple color', () => {
@@ -320,19 +317,6 @@ describe('getIconButtonColor - ripple color', () => {
     ).toMatchObject({
       rippleColor: color(getTheme().colors.onSurfaceVariant)
         .alpha(0.12)
-        .rgb()
-        .string(),
-    });
-  });
-
-  it('should return theme color, for theme version 2', () => {
-    expect(
-      getIconButtonColor({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme(false, false).colors.text)
-        .alpha(0.32)
         .rgb()
         .string(),
     });
@@ -358,8 +342,9 @@ it('action animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
-
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
   expect(getByTestId('icon-button-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });

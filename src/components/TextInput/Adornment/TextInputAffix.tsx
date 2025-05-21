@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Animated,
+  DimensionValue,
   GestureResponderEvent,
   LayoutChangeEvent,
   Pressable,
@@ -15,7 +16,7 @@ import { AdornmentSide } from './enums';
 import { getTextColor } from './utils';
 import { useInternalTheme } from '../../../core/theming';
 import type { ThemeProp } from '../../../types';
-import { getConstants } from '../helpers';
+import { AFFIX_OFFSET } from '../constants';
 
 export type Props = {
   /**
@@ -47,7 +48,7 @@ type ContextState = {
   visible?: Animated.Value;
   textStyle?: StyleProp<TextStyle>;
   side: AdornmentSide;
-  paddingHorizontal?: number | string;
+  paddingHorizontal?: DimensionValue;
   maxFontSizeMultiplier?: number | undefined | null;
   testID?: string;
   disabled?: boolean;
@@ -129,7 +130,6 @@ const TextInputAffix = ({
   accessibilityLabel = text,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { AFFIX_OFFSET } = getConstants(theme.isV3);
 
   const {
     textStyle,

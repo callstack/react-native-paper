@@ -3,8 +3,10 @@ import { StyleSheet } from 'react-native';
 
 import { List, SegmentedButtons } from 'react-native-paper';
 
+type Size = 'size-s' | 'size-m' | 'size-l' | 'size-xl' | 'size-xxl';
+
 const SegmentedButtonMultiselectIcons = () => {
-  const [value, setValue] = React.useState<string[]>([]);
+  const [value, setValue] = React.useState<Size[]>([]);
 
   return (
     <List.Section title={`Segmented Button - multiselect only icons`}>

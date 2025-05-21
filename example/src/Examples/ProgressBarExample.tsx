@@ -4,13 +4,12 @@ import { View, StyleSheet, Animated } from 'react-native';
 import {
   Button,
   ProgressBar,
-  MD2Colors,
-  MD3Colors,
+  Colors,
   ProgressBarProps,
   Text,
+  useTheme,
 } from 'react-native-paper';
 
-import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 class ClassProgressBar extends React.Component {
@@ -26,10 +25,10 @@ class ClassProgressBar extends React.Component {
 const AnimatedProgressBar = Animated.createAnimatedComponent(ClassProgressBar);
 
 const ProgressBarExample = () => {
-  const [visible, setVisible] = React.useState<boolean>(true);
-  const [progress, setProgress] = React.useState<number>(0.3);
-  const theme = useExampleTheme();
-  const { isV3 } = theme;
+  const theme = useTheme();
+
+  const [visible, setVisible] = React.useState(true);
+  const [progress, setProgress] = React.useState(0.3);
   const { current: progressBarValue } = React.useRef(new Animated.Value(0));
 
   const runCustomAnimation = () => {
@@ -64,7 +63,7 @@ const ProgressBarExample = () => {
         <ProgressBar
           progress={progress}
           visible={visible}
-          color={isV3 ? MD3Colors.error50 : MD2Colors.red800}
+          color={Colors.error50}
         />
       </View>
 
@@ -75,9 +74,9 @@ const ProgressBarExample = () => {
         <ProgressBar
           progress={progress}
           visible={visible}
-          color={MD2Colors.red800}
+          color={Colors.error50}
           style={{
-            backgroundColor: isV3 ? MD3Colors.secondary50 : MD2Colors.teal500,
+            backgroundColor: Colors.secondary50,
           }}
         />
       </View>

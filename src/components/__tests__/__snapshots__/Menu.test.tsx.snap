@@ -90,7 +90,7 @@ exports[`renders menu with content styles 1`] = `
                   "overflow": "hidden",
                 },
                 {
-                  "borderRadius": 20,
+                  "borderRadius": 19,
                 },
               ]
             }
@@ -134,7 +134,6 @@ exports[`renders menu with content styles 1`] = `
                           "marginVertical": 9,
                           "textAlign": "center",
                         },
-                        false,
                         {
                           "marginHorizontal": 24,
                           "marginVertical": 10,
@@ -358,16 +357,18 @@ exports[`renders menu with content styles 1`] = `
             >
               <View
                 style={
-                  {
-                    "flexDirection": "row",
-                  }
+                  [
+                    {
+                      "flexDirection": "row",
+                    },
+                    undefined,
+                  ]
                 }
               >
                 <View
                   pointerEvents="none"
                   style={
                     [
-                      false,
                       {
                         "justifyContent": "center",
                       },
@@ -404,7 +405,6 @@ exports[`renders menu with content styles 1`] = `
                             "lineHeight": 24,
                           },
                           [
-                            false,
                             {
                               "color": "rgba(28, 27, 31, 1)",
                               "fontFamily": "System",
@@ -478,16 +478,18 @@ exports[`renders menu with content styles 1`] = `
             >
               <View
                 style={
-                  {
-                    "flexDirection": "row",
-                  }
+                  [
+                    {
+                      "flexDirection": "row",
+                    },
+                    undefined,
+                  ]
                 }
               >
                 <View
                   pointerEvents="none"
                   style={
                     [
-                      false,
                       {
                         "justifyContent": "center",
                       },
@@ -524,7 +526,6 @@ exports[`renders menu with content styles 1`] = `
                             "lineHeight": 24,
                           },
                           [
-                            false,
                             {
                               "color": "rgba(28, 27, 31, 1)",
                               "fontFamily": "System",
@@ -642,7 +643,7 @@ exports[`renders not visible menu 1`] = `
                 "overflow": "hidden",
               },
               {
-                "borderRadius": 20,
+                "borderRadius": 19,
               },
             ]
           }
@@ -686,7 +687,6 @@ exports[`renders not visible menu 1`] = `
                         "marginVertical": 9,
                         "textAlign": "center",
                       },
-                      false,
                       {
                         "marginHorizontal": 24,
                         "marginVertical": 10,
@@ -808,7 +808,7 @@ exports[`renders visible menu 1`] = `
                   "overflow": "hidden",
                 },
                 {
-                  "borderRadius": 20,
+                  "borderRadius": 19,
                 },
               ]
             }
@@ -852,7 +852,6 @@ exports[`renders visible menu 1`] = `
                           "marginVertical": 9,
                           "textAlign": "center",
                         },
-                        false,
                         {
                           "marginHorizontal": 24,
                           "marginVertical": 10,
@@ -1072,16 +1071,18 @@ exports[`renders visible menu 1`] = `
             >
               <View
                 style={
-                  {
-                    "flexDirection": "row",
-                  }
+                  [
+                    {
+                      "flexDirection": "row",
+                    },
+                    undefined,
+                  ]
                 }
               >
                 <View
                   pointerEvents="none"
                   style={
                     [
-                      false,
                       {
                         "justifyContent": "center",
                       },
@@ -1118,7 +1119,6 @@ exports[`renders visible menu 1`] = `
                             "lineHeight": 24,
                           },
                           [
-                            false,
                             {
                               "color": "rgba(28, 27, 31, 1)",
                               "fontFamily": "System",
@@ -1192,16 +1192,18 @@ exports[`renders visible menu 1`] = `
             >
               <View
                 style={
-                  {
-                    "flexDirection": "row",
-                  }
+                  [
+                    {
+                      "flexDirection": "row",
+                    },
+                    undefined,
+                  ]
                 }
               >
                 <View
                   pointerEvents="none"
                   style={
                     [
-                      false,
                       {
                         "justifyContent": "center",
                       },
@@ -1238,7 +1240,6 @@ exports[`renders visible menu 1`] = `
                             "lineHeight": 24,
                           },
                           [
-                            false,
                             {
                               "color": "rgba(28, 27, 31, 1)",
                               "fontFamily": "System",

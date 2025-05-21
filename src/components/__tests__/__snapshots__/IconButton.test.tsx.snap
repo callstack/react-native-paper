@@ -101,9 +101,7 @@ exports[`renders disabled icon button 1`] = `
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            {
-              "borderRadius": 20,
-            },
+            undefined,
           ],
         ]
       }
@@ -111,7 +109,6 @@ exports[`renders disabled icon button 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         selectable={false}
@@ -134,16 +131,10 @@ exports[`renders disabled icon button 1`] = `
                 "backgroundColor": "transparent",
               },
             ],
-            {
-              "fontFamily": "Material Design Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            {},
           ]
         }
       >
-        󰄀
+        camera
       </Text>
     </View>
   </View>
@@ -246,9 +237,7 @@ exports[`renders icon button by default 1`] = `
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            {
-              "borderRadius": 20,
-            },
+            undefined,
           ],
         ]
       }
@@ -256,7 +245,6 @@ exports[`renders icon button by default 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         selectable={false}
@@ -279,16 +267,10 @@ exports[`renders icon button by default 1`] = `
                 "backgroundColor": "transparent",
               },
             ],
-            {
-              "fontFamily": "Material Design Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            {},
           ]
         }
       >
-        󰄀
+        camera
       </Text>
     </View>
   </View>
@@ -391,9 +373,7 @@ exports[`renders icon button with color 1`] = `
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            {
-              "borderRadius": 20,
-            },
+            undefined,
           ],
         ]
       }
@@ -401,14 +381,13 @@ exports[`renders icon button with color 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         selectable={false}
         style={
           [
             {
-              "color": "#e91e63",
+              "color": "rgba(152, 105, 119, 1)",
               "fontSize": 24,
             },
             [
@@ -424,16 +403,10 @@ exports[`renders icon button with color 1`] = `
                 "backgroundColor": "transparent",
               },
             ],
-            {
-              "fontFamily": "Material Design Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            {},
           ]
         }
       >
-        󰄀
+        camera
       </Text>
     </View>
   </View>
@@ -536,9 +509,7 @@ exports[`renders icon button with size 1`] = `
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            {
-              "borderRadius": 23,
-            },
+            undefined,
           ],
         ]
       }
@@ -546,7 +517,6 @@ exports[`renders icon button with size 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         selectable={false}
@@ -569,16 +539,10 @@ exports[`renders icon button with size 1`] = `
                 "backgroundColor": "transparent",
               },
             ],
-            {
-              "fontFamily": "Material Design Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            {},
           ]
         }
       >
-        󰄀
+        camera
       </Text>
     </View>
   </View>
@@ -681,9 +645,7 @@ exports[`renders icon change animated 1`] = `
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            {
-              "borderRadius": 20,
-            },
+            undefined,
           ],
         ]
       }
@@ -706,25 +668,28 @@ exports[`renders icon change animated 1`] = `
         <View
           collapsable={false}
           style={
-            {
-              "bottom": 0,
-              "left": 0,
-              "opacity": 1,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-              "transform": [
-                {
-                  "rotate": "0deg",
-                },
-              ],
-            }
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              {
+                "opacity": 1,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              },
+            ]
           }
           testID="cross-fade-icon-current"
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -747,16 +712,10 @@ exports[`renders icon change animated 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰄀
+            camera
           </Text>
         </View>
       </View>

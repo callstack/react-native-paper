@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 
-import { render, waitFor, screen } from '@testing-library/react-native';
+import { act, render, screen, waitFor } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
-import { MD3Elevation } from '../../types';
+import { Elevation } from '../../types';
 import Button from '../Button/Button';
 import Menu, { ELEVATION_LEVELS_MAP } from '../Menu/Menu';
 import Portal from '../Portal/Portal';
@@ -68,9 +68,11 @@ it('renders menu with content styles', () => {
   expect(tree).toMatchSnapshot();
 });
 
-([0, 1, 2, 3, 4, 5] as MD3Elevation[]).forEach((elevation) =>
+([0, 1, 2, 3, 4, 5] as Elevation[]).forEach((elevation) =>
   it(`renders menu with background color based on elevation value = ${elevation}`, () => {
-    const theme = getTheme(false, true);
+    const {
+      colors: { elevation: elevationColors },
+    } = getTheme();
 
     const { getByTestId } = render(
       <Portal.Host>
@@ -87,7 +89,7 @@ it('renders menu with content styles', () => {
     );
 
     expect(getByTestId('menu-surface')).toHaveStyle({
-      backgroundColor: theme.colors.elevation[ELEVATION_LEVELS_MAP[elevation]],
+      backgroundColor: elevationColors[ELEVATION_LEVELS_MAP[elevation]],
     });
   })
 );
@@ -113,17 +115,15 @@ it('uses the default anchorPosition of top', async () => {
     );
   }
 
-  render(makeMenu(false));
+  const { rerender } = render(makeMenu(false));
 
-  jest
-    .spyOn(View.prototype, 'measureInWindow')
-    .mockImplementation((fn) => fn(100, 100, 80, 32));
+  jest.mocked(View.prototype.measureInWindow).mockImplementation((callback) => {
+    callback(100, 100, 80, 32);
+  });
 
-  // You must update instead of creating directly and using it because
-  // componentDidUpdate isn't called by default in jest. Forcing the update
-  // than triggers measureInWindow, which is how Menu decides where to show
-  // itself.
-  screen.update(makeMenu(true));
+  await act(async () => {
+    rerender(makeMenu(true));
+  });
 
   await waitFor(() => {
     const menu = screen.getByTestId('menu-view');
@@ -157,13 +157,15 @@ it('respects anchorPosition bottom', async () => {
     );
   }
 
-  render(makeMenu(false));
+  const { rerender } = render(makeMenu(false));
 
   jest
-    .spyOn(View.prototype, 'measureInWindow')
-    .mockImplementation((fn) => fn(100, 100, 80, 32));
+    .mocked(View.prototype.measureInWindow)
+    .mockImplementation((callback) => callback(100, 100, 80, 32));
 
-  screen.update(makeMenu(true));
+  await act(async () => {
+    rerender(makeMenu(true));
+  });
 
   await waitFor(() => {
     const menu = screen.getByTestId('menu-view');
@@ -200,8 +202,9 @@ it('animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
-
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
   expect(getByTestId('menu-surface-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });

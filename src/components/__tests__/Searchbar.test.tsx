@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Animated } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { act, fireEvent, render } from '@testing-library/react-native';
 
 import * as Avatar from '../Avatar/Avatar';
 import Searchbar from '../Searchbar';
@@ -94,8 +94,9 @@ it('animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
-
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
   expect(getByTestId('search-bar-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });
@@ -116,7 +117,7 @@ it('defines onClearIconPress action and checks if it is called when close button
   expect(onClearIconPressMock).toHaveBeenCalledTimes(1);
 });
 
-it('renders clear icon wrapper, with appropriate style for v3', () => {
+it('renders clear icon wrapper, with appropriate style', () => {
   const { getByTestId, update } = render(
     <Searchbar testID="search-bar" value="" />
   );

@@ -9,7 +9,6 @@ import {
 
 import AnimatedText from './AnimatedText';
 import type { VariantProp } from './types';
-import StyledText from './v2/StyledText';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
@@ -85,25 +84,27 @@ const Text = (
   ref: TextRef
 ) => {
   const root = React.useRef<NativeText | null>(null);
-  // FIXME: destructure it in TS 4.6+
-  const theme = useInternalTheme(initialTheme);
+  const {
+    fonts,
+    colors: { onSurface },
+  } = useInternalTheme(initialTheme);
   const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
 
   React.useImperativeHandle(ref, () => ({
     setNativeProps: (args: Object) => root.current?.setNativeProps(args),
   }));
 
-  if (theme.isV3 && variant) {
-    let font = theme.fonts[variant];
+  if (variant) {
+    let font = fonts[variant];
     let textStyle = [font, style];
 
     if (
       React.isValidElement(rest.children) &&
-      (rest.children.type === Component ||
-        rest.children.type === AnimatedText ||
-        rest.children.type === StyledText)
+      (rest.children.type === Component || rest.children.type === AnimatedText)
     ) {
-      const { props } = rest.children;
+      const { props } = rest.children as {
+        props: { variant?: string; style?: StyleProp<TextStyle> };
+      };
 
       // Context:   Some components have the built-in `Text` component with a predefined variant,
       //            that also accepts `children` as a `React.Node`. This can result in a situation,
@@ -116,7 +117,7 @@ const Text = (
       // Solution:  To address the following scenario, the code below overrides the `variant`
       //            specified in a parent in favor of children's variant:
       if (props.variant) {
-        font = theme.fonts[props.variant as VariantProp<typeof props.variant>];
+        font = fonts[props.variant as VariantProp<typeof props.variant>];
         textStyle = [style, font];
       }
 
@@ -135,7 +136,7 @@ const Text = (
     if (typeof font !== 'object') {
       throw new Error(
         `Variant ${variant} was not provided properly. Valid variants are ${Object.keys(
-          theme.fonts
+          fonts
         ).join(', ')}.`
       );
     }
@@ -143,19 +144,15 @@ const Text = (
     return (
       <NativeText
         ref={root}
-        style={[
-          styles.text,
-          { writingDirection, color: theme.colors.onSurface },
-          textStyle,
-        ]}
+        style={[styles.text, { writingDirection, color: onSurface }, textStyle]}
         {...rest}
       />
     );
   } else {
-    const font = theme.isV3 ? theme.fonts.default : theme.fonts?.regular;
+    const font = fonts.default;
     const textStyle = {
       ...font,
-      color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,
+      color: onSurface,
     };
     return (
       <NativeText
@@ -175,7 +172,7 @@ const styles = StyleSheet.create({
 
 type TextComponent<T> = (
   props: Props<T> & { ref?: React.RefObject<TextRef> }
-) => JSX.Element;
+) => React.JSX.Element;
 
 const Component = forwardRef(Text) as TextComponent<never>;
 

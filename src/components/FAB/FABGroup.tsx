@@ -35,6 +35,7 @@ export type Props = {
    * - `accessibilityHint`: accessibility hint for the action
    * - `style`: pass additional styles for the fab item, for example, `backgroundColor`
    * - `containerStyle`: pass additional styles for the fab item label container, for example, `backgroundColor` @supported Available in 5.x
+   * - `wrapperStyle`: pass additional styles for the wrapper of the action item.
    * - `labelStyle`: pass additional styles for the fab item label, for example, `fontSize`
    * - `labelMaxFontSizeMultiplier`: specifies the largest possible scale a title font can reach.
    * - `onPress`: callback that is called when `FAB` is pressed (required)
@@ -53,6 +54,7 @@ export type Props = {
     accessibilityHint?: string;
     style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
     containerStyle?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+    wrapperStyle?: StyleProp<ViewStyle>;
     labelStyle?: StyleProp<TextStyle>;
     labelMaxFontSizeMultiplier?: number;
     onPress: (e: GestureResponderEvent) => void;
@@ -222,12 +224,21 @@ const FABGroup = ({
   rippleColor,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const {
+    animation: { scale },
+    fonts: { titleMedium },
+  } = useInternalTheme(themeOverrides);
+  const { top, bottom, right, left } = useSafeAreaInsets();
+
   const { current: backdrop } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );
   const animations = React.useRef<Animated.Value[]>(
     actions.map(() => new Animated.Value(open ? 1 : 0))
   );
+
+  const [isClosingAnimationFinished, setIsClosingAnimationFinished] =
+    React.useState(false);
 
   const [prevActions, setPrevActions] = React.useState<
     | {
@@ -242,11 +253,9 @@ const FABGroup = ({
     | null
   >(null);
 
-  const { scale } = theme.animation;
-  const { isV3 } = theme;
-
   React.useEffect(() => {
     if (open) {
+      setIsClosingAnimationFinished(false);
       Animated.parallel([
         Animated.timing(backdrop, {
           toValue: 1,
@@ -254,7 +263,7 @@ const FABGroup = ({
           useNativeDriver: true,
         }),
         Animated.stagger(
-          isV3 ? 15 : 50 * scale,
+          15 * scale,
           animations.current
             .map((animation) =>
               Animated.timing(animation, {
@@ -280,13 +289,32 @@ const FABGroup = ({
             useNativeDriver: true,
           })
         ),
-      ]).start();
+      ]).start(({ finished }) => {
+        if (finished) {
+          setIsClosingAnimationFinished(true);
+        }
+      });
     }
-  }, [open, actions, backdrop, scale, isV3]);
+  }, [open, actions, backdrop, scale]);
 
   const close = () => onStateChange({ open: false });
-
   const toggle = () => onStateChange({ open: !open });
+
+  const handlePress = (e: GestureResponderEvent) => {
+    onPress?.(e);
+    if (!toggleStackOnLongPress || open) {
+      toggle();
+    }
+  };
+
+  const handleLongPress = (e: GestureResponderEvent) => {
+    if (!open || enableLongPressWhenStackOpened) {
+      onLongPress?.(e);
+      if (toggleStackOnLongPress) {
+        toggle();
+      }
+    }
+  };
 
   const { labelColor, backdropColor, stackedFABBackgroundColor } =
     getFABGroupColors({ theme, customBackdropColor });
@@ -325,12 +353,15 @@ const FABGroup = ({
       : -8
   );
 
-  const { top, bottom, right, left } = useSafeAreaInsets();
   const containerPaddings = {
     paddingBottom: bottom,
     paddingRight: right,
     paddingLeft: left,
     paddingTop: top,
+  };
+
+  const actionsContainerVisibility: ViewStyle = {
+    display: isClosingAnimationFinished ? 'none' : 'flex',
   };
 
   if (actions.length !== prevActions?.length) {
@@ -358,11 +389,14 @@ const FABGroup = ({
         ]}
       />
       <View pointerEvents="box-none" style={styles.safeArea}>
-        <View pointerEvents={open ? 'box-none' : 'none'}>
+        <View
+          pointerEvents={open ? 'box-none' : 'none'}
+          style={actionsContainerVisibility}
+        >
           {actions.map((it, i) => {
             const labelTextStyle = {
               color: it.labelTextColor ?? labelColor,
-              ...(isV3 ? theme.fonts.titleMedium : {}),
+              ...titleMedium,
             };
             const marginHorizontal =
               typeof it.size === 'undefined' || it.size === 'small' ? 24 : 16;
@@ -372,6 +406,11 @@ const FABGroup = ({
                 : it.label;
             const size = typeof it.size !== 'undefined' ? it.size : 'small';
 
+            const handleActionPress = (e: GestureResponderEvent) => {
+              it.onPress(e);
+              close();
+            };
+
             return (
               <View
                 key={i} // eslint-disable-line react/no-array-index-key
@@ -380,35 +419,29 @@ const FABGroup = ({
                   {
                     marginHorizontal,
                   },
+                  it.wrapperStyle,
                 ]}
                 pointerEvents={open ? 'box-none' : 'none'}
                 accessibilityRole="button"
-                importantForAccessibility="yes"
-                accessible={true}
+                importantForAccessibility={open ? 'yes' : 'no-hide-descendants'}
+                accessibilityElementsHidden={!open}
+                accessible={open}
                 accessibilityLabel={accessibilityLabel}
               >
                 {it.label && (
                   <View>
                     <Card
-                      mode={isV3 ? 'contained' : 'elevated'}
-                      onPress={(e) => {
-                        it.onPress(e);
-                        close();
-                      }}
+                      mode="contained"
+                      onPress={handleActionPress}
                       accessibilityHint={it.accessibilityHint}
                       importantForAccessibility="no-hide-descendants"
                       accessibilityElementsHidden={true}
                       style={[
                         styles.containerStyle,
                         {
-                          transform: [
-                            isV3
-                              ? { translateY: labelTranslations[i] }
-                              : { scale: scales[i] },
-                          ],
+                          transform: [{ translateY: labelTranslations[i] }],
                           opacity: opacities[i],
                         },
-                        isV3 && styles.v3ContainerStyle,
                         it.containerStyle,
                       ]}
                     >
@@ -434,15 +467,12 @@ const FABGroup = ({
                       opacity: opacities[i],
                       backgroundColor: stackedFABBackgroundColor,
                     },
-                    isV3 && { transform: [{ translateY: translations[i] }] },
+                    { transform: [{ translateY: translations[i] }] },
                     it.style,
                   ]}
                   accessibilityElementsHidden={true}
                   theme={theme}
-                  onPress={(e) => {
-                    it.onPress(e);
-                    close();
-                  }}
+                  onPress={handleActionPress}
                   importantForAccessibility="no-hide-descendants"
                   testID={it.testID}
                   visible={open}
@@ -453,20 +483,8 @@ const FABGroup = ({
           })}
         </View>
         <FAB
-          onPress={(e) => {
-            onPress?.(e);
-            if (!toggleStackOnLongPress || open) {
-              toggle();
-            }
-          }}
-          onLongPress={(e) => {
-            if (!open || enableLongPressWhenStackOpened) {
-              onLongPress?.(e);
-              if (toggleStackOnLongPress) {
-                toggle();
-              }
-            }
-          }}
+          onPress={handlePress}
+          onLongPress={handleLongPress}
           delayLongPress={delayLongPress}
           icon={icon}
           color={colorProp}
@@ -509,23 +527,20 @@ const styles = StyleSheet.create({
   backdrop: {
     ...StyleSheet.absoluteFillObject,
   },
+  // eslint-disable-next-line react-native/no-color-literals
   containerStyle: {
     borderRadius: 5,
     paddingHorizontal: 12,
     paddingVertical: 6,
     marginVertical: 8,
     marginHorizontal: 16,
-    elevation: 2,
+    backgroundColor: 'transparent',
+    elevation: 0,
   },
   item: {
     marginBottom: 16,
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-  },
-  // eslint-disable-next-line react-native/no-color-literals
-  v3ContainerStyle: {
-    backgroundColor: 'transparent',
-    elevation: 0,
   },
 });

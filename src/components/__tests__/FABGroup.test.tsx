@@ -8,10 +8,6 @@ import { getTheme } from '../../core/theming';
 import FAB from '../FAB';
 import { getFABGroupColors } from '../FAB/utils';
 
-jest.mock('react-native-safe-area-context', () => ({
-  useSafeAreaInsets: () => ({ bottom: 34, left: 0, right: 0, top: 47 }),
-}));
-
 describe('getFABGroupColors - backdrop color', () => {
   it('should return custom color', () => {
     expect(
@@ -36,16 +32,6 @@ describe('getFABGroupColors - backdrop color', () => {
         .string(),
     });
   });
-
-  it('should return correct backdrop color, for theme version 2', () => {
-    expect(
-      getFABGroupColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      backdropColor: getTheme(false, false).colors.backdrop,
-    });
-  });
 });
 
 describe('getFABGroupColors - label color', () => {
@@ -58,29 +44,6 @@ describe('getFABGroupColors - label color', () => {
       labelColor: getTheme().colors.onSurface,
     });
   });
-
-  it('should return correct theme color, dark mode, for theme version 2', () => {
-    expect(
-      getFABGroupColors({
-        theme: getTheme(true, false),
-      })
-    ).toMatchObject({
-      labelColor: getTheme(true, false).colors.text,
-    });
-  });
-
-  it('should return correct theme color, light mode, for theme version 2', () => {
-    expect(
-      getFABGroupColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      labelColor: color(getTheme(false, false).colors.text)
-        .fade(0.54)
-        .rgb()
-        .string(),
-    });
-  });
 });
 
 describe('getFABGroupColors - stacked FAB background color', () => {
@@ -91,16 +54,6 @@ describe('getFABGroupColors - stacked FAB background color', () => {
       })
     ).toMatchObject({
       stackedFABBackgroundColor: getTheme().colors.elevation.level3,
-    });
-  });
-
-  it('should return correct theme color, dark mode, for theme version 2', () => {
-    expect(
-      getFABGroupColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      stackedFABBackgroundColor: getTheme(false, false).colors.surface,
     });
   });
 });
@@ -245,8 +198,9 @@ it('animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
-
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
   expect(getByTestId('my-fab-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });

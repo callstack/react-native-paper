@@ -1,17 +1,15 @@
 import * as React from 'react';
 import type {
-  StyleProp,
-  ViewStyle,
-  View,
   Animated,
   ColorValue,
+  StyleProp,
+  View,
+  ViewStyle,
 } from 'react-native';
 
-import color from 'color';
 import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../../core/theming';
-import { black } from '../../styles/themes/v2/colors';
 import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
@@ -48,7 +46,7 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
   /**
    * @supported Available in v5.x with theme version 3
    *
-   * Whether it's the leading button.
+   * Whether it's the leading button. Note: If `Appbar.BackAction` is present, it will be rendered before any `isLeading` icons.
    */
   isLeading?: boolean;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
@@ -97,15 +95,15 @@ const AppbarAction = forwardRef<View, Props>(
     }: Props,
     ref
   ) => {
-    const theme = useInternalTheme(themeOverrides);
+    const {
+      colors: { onSurface, onSurfaceVariant },
+    } = useInternalTheme(themeOverrides);
 
     const actionIconColor = iconColor
       ? iconColor
-      : theme.isV3
-      ? isLeading
-        ? theme.colors.onSurface
-        : theme.colors.onSurfaceVariant
-      : color(black).alpha(0.54).rgb().string();
+      : isLeading
+      ? onSurface
+      : onSurfaceVariant;
 
     return (
       <IconButton

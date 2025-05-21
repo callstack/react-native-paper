@@ -1,19 +1,15 @@
 import * as React from 'react';
 import {
   Animated,
-  Text,
   BackHandler as RNBackHandler,
   BackHandlerStatic as RNBackHandlerStatic,
+  Text,
 } from 'react-native';
 
 import { act, fireEvent, render } from '@testing-library/react-native';
 
-import { MD3LightTheme } from '../../styles/themes';
+import { LightTheme } from '../../styles/themes';
 import Modal from '../Modal';
-
-jest.mock('react-native-safe-area-context', () => ({
-  useSafeAreaInsets: () => ({ bottom: 44, left: 0, right: 0, top: 37 }),
-}));
 
 interface BackHandlerStatic extends RNBackHandlerStatic {
   mockPressBack(): void;
@@ -21,9 +17,13 @@ interface BackHandlerStatic extends RNBackHandlerStatic {
 
 const BackHandler = RNBackHandler as BackHandlerStatic;
 
+jest.mock('react-native-safe-area-context', () => ({
+  useSafeAreaInsets: () => ({ bottom: 44, left: 0, right: 0, top: 37 }),
+}));
+
 jest.mock('react-native/Libraries/Utilities/BackHandler', () =>
   // eslint-disable-next-line jest/no-mocks-import
-  require('react-native/Libraries/Utilities/__mocks__/BackHandler')
+  require('../../utils/__mocks__/BackHandler')
 );
 
 describe('Modal', () => {
@@ -60,7 +60,7 @@ describe('Modal', () => {
       );
 
       expect(getByTestId('modal-backdrop')).toHaveStyle({
-        backgroundColor: MD3LightTheme.colors.backdrop,
+        backgroundColor: LightTheme.colors.backdrop,
       });
     });
 
@@ -98,21 +98,22 @@ describe('Modal', () => {
     });
   });
   describe('when open', () => {
-    describe('if closed via touching backdrop', () => {
-      it('will run the animation but not fade out', async () => {
+    describe('if backdrop touched', () => {
+      it('should invoke the onDismiss function immediately', () => {
+        const onDismiss = jest.fn();
         const { getByTestId } = render(
-          <Modal testID="modal" visible onDismiss={() => {}}>
+          <Modal testID="modal" visible onDismiss={onDismiss}>
             {null}
           </Modal>
         );
 
-        expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
-          opacity: 1,
-        });
+        expect(onDismiss).not.toHaveBeenCalled();
 
         act(() => {
           fireEvent.press(getByTestId('modal-backdrop'));
         });
+
+        expect(onDismiss).toHaveBeenCalled();
 
         expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
@@ -128,37 +129,59 @@ describe('Modal', () => {
 
         expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
-        });
-      });
-
-      it('should invoke the onDismiss function after the animation', () => {
-        const onDismiss = jest.fn();
-        const { getByTestId } = render(
-          <Modal testID="modal" visible onDismiss={onDismiss}>
-            {null}
-          </Modal>
-        );
-
-        expect(onDismiss).not.toHaveBeenCalled();
-
-        act(() => {
-          fireEvent.press(getByTestId('modal-backdrop'));
-        });
-
-        expect(onDismiss).not.toHaveBeenCalled();
-
-        act(() => {
-          jest.runAllTimers();
         });
 
         expect(onDismiss).toHaveBeenCalledTimes(1);
       });
     });
 
+    it('runs the closing animation if visible toggled', () => {
+      const { getByTestId, queryByTestId, rerender } = render(
+        <Modal testID="modal" visible onDismiss={() => {}}>
+          {null}
+        </Modal>
+      );
+
+      expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        opacity: 1,
+      });
+
+      act(() => {
+        fireEvent.press(getByTestId('modal-backdrop'));
+      });
+
+      rerender(
+        <Modal testID="modal" visible={false} onDismiss={() => {}}>
+          {null}
+        </Modal>
+      );
+
+      expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        opacity: 1,
+      });
+
+      expect(getByTestId('modal-backdrop')).toHaveStyle({
+        opacity: 1,
+      });
+
+      expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
+        opacity: 1,
+      });
+
+      act(() => {
+        jest.runAllTimers();
+      });
+
+      expect(queryByTestId('modal-surface-outer-layer')).not.toBeOnTheScreen();
+
+      expect(queryByTestId('modal-backdrop')).not.toBeOnTheScreen();
+    });
+
     describe('if closed via Android back button', () => {
-      it('will run the animation but not fade out', async () => {
+      it('invokes onDismiss', async () => {
+        const onDismiss = jest.fn();
         const { getByTestId } = render(
-          <Modal testID="modal" visible onDismiss={() => {}}>
+          <Modal testID="modal" visible onDismiss={onDismiss}>
             {null}
           </Modal>
         );
@@ -185,28 +208,6 @@ describe('Modal', () => {
 
         expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
-        });
-      });
-
-      it('should invoke the onDismiss function after the animation', () => {
-        const onDismiss = jest.fn();
-
-        render(
-          <Modal testID="modal" visible onDismiss={onDismiss}>
-            {null}
-          </Modal>
-        );
-
-        expect(onDismiss).not.toHaveBeenCalled();
-
-        act(() => {
-          BackHandler.mockPressBack();
-        });
-
-        expect(onDismiss).not.toHaveBeenCalled();
-
-        act(() => {
-          jest.runAllTimers();
         });
 
         expect(onDismiss).toHaveBeenCalledTimes(1);
@@ -606,7 +607,9 @@ describe('Modal', () => {
       duration: 200,
     }).start();
 
-    jest.runAllTimers();
+    act(() => {
+      jest.runAllTimers();
+    });
 
     expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
       transform: [{ scale: 1.5 }],

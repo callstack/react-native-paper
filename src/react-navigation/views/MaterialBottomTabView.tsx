@@ -99,7 +99,6 @@ export default function MaterialBottomTabView({
           ? options.title
           : (route as Route<string>).name;
       }}
-      getColor={({ route }) => descriptors[route.key].options.tabBarColor}
       getBadge={({ route }) => descriptors[route.key].options.tabBarBadge}
       getAccessibilityLabel={({ route }) =>
         descriptors[route.key].options.tabBarAccessibilityLabel

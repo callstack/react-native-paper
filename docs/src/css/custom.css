@@ -137,7 +137,7 @@ html[data-theme='light'] .gallery-dark {
 .icons-list-icon {
   display: block;
   margin: 16px;
-  font-family: 'MaterialCommunityIcons';
+  font-family: 'MaterialDesignIcons';
   font-size: 48px;
   color: var(--theme-text-color);
 }
@@ -183,8 +183,8 @@ html[data-theme='light'] .gallery-dark {
 }
 
 @font-face {
-  font-family: 'MaterialCommunityIcons';
-  src: url('../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf') format('truetype');
+  font-family: 'MaterialDesignIcons';
+  src: url('../../node_modules/@react-native-vector-icons/material-design-icons/fonts/MaterialDesignIcons.ttf') format('truetype');
 }
 
 .badge:is(a .badge) {

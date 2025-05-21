@@ -20,7 +20,9 @@ import {
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import Icon, { IconSource } from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {
@@ -64,10 +66,21 @@ export type Props = {
    */
   titleMaxFontSizeMultiplier?: number;
   /**
+   * Style that is passed to the root TouchableRipple container.
    * @optional
    */
   style?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to the outermost container that wraps the entire content, including leading and trailing icons and title text.
+   */
+  containerStyle?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to the content container, which wraps the title text.
+   */
   contentStyle?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to the Title element.
+   */
   titleStyle?: StyleProp<TextStyle>;
   /**
    * Color of the ripple effect.
@@ -77,6 +90,10 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
   /**
    * TestID used for testing purposes
    */
@@ -122,6 +139,7 @@ const MenuItem = ({
   background,
   onPress,
   style,
+  containerStyle,
   contentStyle,
   titleStyle,
   rippleColor: customRippleColor,
@@ -130,23 +148,23 @@ const MenuItem = ({
   accessibilityState,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier = 1.5,
+  hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const {
+    fonts: { bodyLarge },
+  } = theme;
+
   const { titleColor, iconColor, rippleColor } = getMenuItemColor({
     theme,
     disabled,
     customRippleColor,
   });
-  const { isV3 } = theme;
 
-  const containerPadding = isV3 ? 12 : 8;
-
-  const iconWidth = isV3 ? 24 : 40;
-
-  const minWidth = MIN_WIDTH - (isV3 ? 12 : 16);
-
+  const containerPadding = 12;
+  const iconWidth = 24;
+  const minWidth = MIN_WIDTH - 12;
   const maxWidth = getContentMaxWidth({
-    isV3,
     iconWidth,
     leadingIcon,
     trailingIcon,
@@ -154,7 +172,7 @@ const MenuItem = ({
 
   const titleTextStyle = {
     color: titleColor,
-    ...(isV3 ? theme.fonts.bodyLarge : {}),
+    ...bodyLarge,
   };
 
   const newAccessibilityState = { ...accessibilityState, disabled };
@@ -164,7 +182,7 @@ const MenuItem = ({
       style={[
         styles.container,
         { paddingHorizontal: containerPadding },
-        dense && styles.md3DenseContainer,
+        dense && styles.denseContainer,
         style,
       ]}
       onPress={onPress}
@@ -175,25 +193,19 @@ const MenuItem = ({
       accessibilityRole="menuitem"
       accessibilityState={newAccessibilityState}
       rippleColor={rippleColor}
+      hitSlop={hitSlop}
     >
-      <View style={styles.row}>
+      <View style={[styles.row, containerStyle]}>
         {leadingIcon ? (
-          <View
-            style={[!isV3 && styles.item, { width: iconWidth }]}
-            pointerEvents="box-none"
-          >
+          <View style={[{ width: iconWidth }]} pointerEvents="box-none">
             <Icon source={leadingIcon} size={24} color={iconColor} />
           </View>
         ) : null}
         <View
           style={[
-            !isV3 && styles.item,
             styles.content,
             { minWidth, maxWidth },
-            isV3 &&
-              (leadingIcon
-                ? styles.md3LeadingIcon
-                : styles.md3WithoutLeadingIcon),
+            leadingIcon ? styles.leadingIcon : styles.withoutLeadingIcons,
             contentStyle,
           ]}
           pointerEvents="none"
@@ -203,17 +215,14 @@ const MenuItem = ({
             selectable={false}
             numberOfLines={1}
             testID={`${testID}-title`}
-            style={[!isV3 && styles.title, titleTextStyle, titleStyle]}
+            style={[titleTextStyle, titleStyle]}
             maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
           >
             {title}
           </Text>
         </View>
-        {isV3 && trailingIcon ? (
-          <View
-            style={[!isV3 && styles.item, { width: iconWidth }]}
-            pointerEvents="box-none"
-          >
+        {trailingIcon ? (
+          <View style={[{ width: iconWidth }]} pointerEvents="box-none">
             <Icon source={trailingIcon} size={24} color={iconColor} />
           </View>
         ) : null}
@@ -231,25 +240,19 @@ const styles = StyleSheet.create({
     height: 48,
     justifyContent: 'center',
   },
-  md3DenseContainer: {
+  denseContainer: {
     height: 32,
   },
   row: {
     flexDirection: 'row',
   },
-  title: {
-    fontSize: 16,
-  },
-  item: {
-    marginHorizontal: 8,
-  },
   content: {
     justifyContent: 'center',
   },
-  md3LeadingIcon: {
+  leadingIcon: {
     marginLeft: 12,
   },
-  md3WithoutLeadingIcon: {
+  withoutLeadingIcons: {
     marginLeft: 4,
   },
 });

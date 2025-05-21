@@ -3,7 +3,7 @@ import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import type { ThemeProp } from 'src/types';
 
-import { useInternalTheme } from '../../core/theming';
+import { CardActionChildProps } from './utils';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -34,25 +34,27 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * export default MyComponent;
  * ```
  */
-const CardActions = (props: Props) => {
-  const { isV3 } = useInternalTheme(props.theme);
-  const justifyContent = isV3 ? 'flex-end' : 'flex-start';
+const CardActions = ({ style, children, ...rest }: Props) => {
+  const justifyContent = 'flex-end' as ViewStyle['justifyContent'];
+  const containerStyle = [styles.container, { justifyContent }, style];
 
   return (
-    <View
-      {...props}
-      style={[styles.container, props.style, { justifyContent }]}
-    >
-      {React.Children.map(props.children, (child, i) => {
-        return React.isValidElement(child)
-          ? React.cloneElement(child as React.ReactElement<any>, {
-              compact: !isV3 && child.props.compact !== false,
-              mode:
-                child.props.mode ||
-                (isV3 && (i === 0 ? 'outlined' : 'contained')),
-              style: [isV3 && styles.button, child.props.style],
-            })
-          : child;
+    <View {...rest} style={containerStyle}>
+      {React.Children.map(children, (child, index) => {
+        if (!React.isValidElement<CardActionChildProps>(child)) {
+          return child;
+        }
+
+        const mode =
+          child.props.mode ?? (index === 0 ? 'outlined' : 'contained');
+        const childStyle = [styles.button, child.props.style];
+
+        return React.cloneElement(child, {
+          ...child.props,
+          compact: false,
+          mode,
+          style: childStyle,
+        });
       })}
     </View>
   );

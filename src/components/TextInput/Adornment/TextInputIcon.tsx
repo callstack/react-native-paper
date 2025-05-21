@@ -13,8 +13,7 @@ import { useInternalTheme } from '../../../core/theming';
 import type { $Omit, ThemeProp } from '../../../types';
 import type { IconSource } from '../../Icon';
 import IconButton from '../../IconButton/IconButton';
-import { ICON_SIZE } from '../constants';
-import { getConstants } from '../helpers';
+import { ICON_OFFSET, ICON_SIZE } from '../constants';
 
 export type Props = $Omit<
   React.ComponentProps<typeof IconButton>,
@@ -79,12 +78,8 @@ const IconAdornment: React.FunctionComponent<
   isTextInputFocused,
   forceFocus,
   testID,
-  theme: themeOverrides,
   disabled,
 }) => {
-  const { isV3 } = useInternalTheme(themeOverrides);
-  const { ICON_OFFSET } = getConstants(isV3);
-
   const style = {
     top: topPosition,
     [side]: ICON_OFFSET,

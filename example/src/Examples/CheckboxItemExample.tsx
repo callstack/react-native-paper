@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 
 import { Checkbox } from 'react-native-paper';
 
-import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const CheckboxExample = () => {
@@ -14,8 +13,6 @@ const CheckboxExample = () => {
     React.useState<boolean>(true);
   const [checkedDisabled, setCheckedDisabled] = React.useState<boolean>(true);
   const [checkedLabelVariant, setCheckedLabelVariant] = React.useState(true);
-
-  const { isV3 } = useExampleTheme();
 
   return (
     <ScreenWrapper style={styles.container}>
@@ -49,14 +46,12 @@ const CheckboxExample = () => {
         onPress={() => setCheckedDisabled(!checkedDisabled)}
         disabled
       />
-      {isV3 && (
-        <Checkbox.Item
-          label="Default with titleLarge title variant"
-          labelVariant="titleLarge"
-          status={checkedLabelVariant ? 'checked' : 'unchecked'}
-          onPress={() => setCheckedLabelVariant(!checkedLabelVariant)}
-        />
-      )}
+      <Checkbox.Item
+        label="Default with titleLarge title variant"
+        labelVariant="titleLarge"
+        status={checkedLabelVariant ? 'checked' : 'unchecked'}
+        onPress={() => setCheckedLabelVariant(!checkedLabelVariant)}
+      />
     </ScreenWrapper>
   );
 };

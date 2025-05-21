@@ -1,30 +1,20 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import {
-  MD2Colors,
-  MD3Colors,
-  Paragraph,
-  RadioButton,
-  Text,
-  TouchableRipple,
-} from 'react-native-paper';
+import { Colors, RadioButton, Text, TouchableRipple } from 'react-native-paper';
 
-import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 type State = 'normal' | 'normal-ios' | 'normal-item' | 'custom';
 
 const RadioButtonExample = () => {
   const [checked, setChecked] = React.useState<State>('normal');
-  const { isV3 } = useExampleTheme();
-  const TextComponent = isV3 ? Text : Paragraph;
 
   return (
     <ScreenWrapper style={styles.container}>
       <TouchableRipple onPress={() => setChecked('normal')}>
         <View style={styles.row}>
-          <TextComponent>Normal - Material Design</TextComponent>
+          <Text>Normal - Material Design</Text>
           <View pointerEvents="none">
             <RadioButton.Android
               value="normal"
@@ -35,7 +25,7 @@ const RadioButtonExample = () => {
       </TouchableRipple>
       <TouchableRipple onPress={() => setChecked('normal-ios')}>
         <View style={styles.row}>
-          <TextComponent>Normal 2 - IOS</TextComponent>
+          <Text>Normal 2 - IOS</Text>
           <View pointerEvents="none">
             <RadioButton.IOS
               value="normal-ios"
@@ -46,11 +36,11 @@ const RadioButtonExample = () => {
       </TouchableRipple>
       <TouchableRipple onPress={() => setChecked('custom')}>
         <View style={styles.row}>
-          <TextComponent>Custom</TextComponent>
+          <Text>Custom</Text>
           <View pointerEvents="none">
             <RadioButton
               value="custom"
-              color={isV3 ? MD3Colors.error70 : MD2Colors.blue500}
+              color={Colors.error70}
               status={checked === 'custom' ? 'checked' : 'unchecked'}
             />
           </View>
@@ -63,11 +53,11 @@ const RadioButtonExample = () => {
         onPress={() => setChecked('normal-item')}
       />
       <View style={styles.row}>
-        <TextComponent>Checked (Disabled)</TextComponent>
+        <Text>Checked (Disabled)</Text>
         <RadioButton value="first" status="checked" disabled />
       </View>
       <View style={styles.row}>
-        <TextComponent>Unchecked (Disabled)</TextComponent>
+        <Text>Unchecked (Disabled)</Text>
         <RadioButton value="second" status="unchecked" disabled />
       </View>
       <RadioButton.Item

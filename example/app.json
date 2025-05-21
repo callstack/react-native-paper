@@ -4,32 +4,26 @@
     "description": "Example app for React Native Paper: https://callstack.github.io/react-native-paper/",
     "slug": "react-native-paper-example",
     "privacy": "public",
-    "version": "3.14.0",
+    "version": "3.16.0",
     "orientation": "default",
     "primaryColor": "#6200EE",
     "userInterfaceStyle": "automatic",
     "icon": "./assets/images/paper-icon.png",
+    "newArchEnabled": true,
     "packagerOpts": {
       "config": "./metro.config.js",
       "projectRoots": ""
     },
-    "platforms": [
-      "android",
-      "ios",
-      "web"
-    ],
+    "platforms": ["android", "ios", "web"],
     "owner": "react-native-paper",
     "ios": {
       "bundleIdentifier": "com.callstack.reactnativepaperexample",
-      "buildNumber": "24.0.0"
+      "buildNumber": "26.0.5"
     },
     "android": {
       "package": "com.callstack.reactnativepaperexample",
-      "versionCode": 28,
-      "permissions": [
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE"
-      ],
+      "versionCode": 38,
+      "permissions": ["READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"],
       "icon": "./assets/images/paper-icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/android-icon.png",
@@ -46,11 +40,10 @@
         "projectId": "ba8f5139-58fe-48f0-b2f2-2d675b6eb2d4"
       }
     },
-    "runtimeVersion": {
-      "policy": "sdkVersion"
-    },
+    "runtimeVersion": "exposdk:52.0.0",
     "updates": {
       "url": "https://u.expo.dev/ba8f5139-58fe-48f0-b2f2-2d675b6eb2d4"
-    }
+    },
+    "plugins": ["expo-font"]
   }
 }

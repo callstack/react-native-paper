@@ -55,16 +55,18 @@ exports[`Menu Item renders menu item 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-        }
+        [
+          {
+            "flexDirection": "row",
+          },
+          undefined,
+        ]
       }
     >
       <View
         pointerEvents="box-none"
         style={
           [
-            false,
             {
               "width": 24,
             },
@@ -73,7 +75,6 @@ exports[`Menu Item renders menu item 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -96,23 +97,16 @@ exports[`Menu Item renders menu item 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰑎
+          redo
         </Text>
       </View>
       <View
         pointerEvents="none"
         style={
           [
-            false,
             {
               "justifyContent": "center",
             },
@@ -149,7 +143,6 @@ exports[`Menu Item renders menu item 1`] = `
                   "lineHeight": 24,
                 },
                 [
-                  false,
                   {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontFamily": "System",
@@ -223,16 +216,18 @@ exports[`Menu Item renders menu item 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-        }
+        [
+          {
+            "flexDirection": "row",
+          },
+          undefined,
+        ]
       }
     >
       <View
         pointerEvents="box-none"
         style={
           [
-            false,
             {
               "width": 24,
             },
@@ -241,7 +236,6 @@ exports[`Menu Item renders menu item 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -264,23 +258,16 @@ exports[`Menu Item renders menu item 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰕌
+          undo
         </Text>
       </View>
       <View
         pointerEvents="none"
         style={
           [
-            false,
             {
               "justifyContent": "center",
             },
@@ -317,7 +304,6 @@ exports[`Menu Item renders menu item 1`] = `
                   "lineHeight": 24,
                 },
                 [
-                  false,
                   {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontFamily": "System",
@@ -391,16 +377,18 @@ exports[`Menu Item renders menu item 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-        }
+        [
+          {
+            "flexDirection": "row",
+          },
+          undefined,
+        ]
       }
     >
       <View
         pointerEvents="box-none"
         style={
           [
-            false,
             {
               "width": 24,
             },
@@ -409,7 +397,6 @@ exports[`Menu Item renders menu item 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -432,23 +419,16 @@ exports[`Menu Item renders menu item 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰆐
+          content-cut
         </Text>
       </View>
       <View
         pointerEvents="none"
         style={
           [
-            false,
             {
               "justifyContent": "center",
             },
@@ -485,7 +465,6 @@ exports[`Menu Item renders menu item 1`] = `
                   "lineHeight": 24,
                 },
                 [
-                  false,
                   {
                     "color": "rgba(28, 27, 31, 0.38)",
                     "fontFamily": "System",
@@ -559,16 +538,18 @@ exports[`Menu Item renders menu item 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-        }
+        [
+          {
+            "flexDirection": "row",
+          },
+          undefined,
+        ]
       }
     >
       <View
         pointerEvents="box-none"
         style={
           [
-            false,
             {
               "width": 24,
             },
@@ -577,7 +558,6 @@ exports[`Menu Item renders menu item 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -600,23 +580,16 @@ exports[`Menu Item renders menu item 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰆏
+          content-copy
         </Text>
       </View>
       <View
         pointerEvents="none"
         style={
           [
-            false,
             {
               "justifyContent": "center",
             },
@@ -653,7 +626,6 @@ exports[`Menu Item renders menu item 1`] = `
                   "lineHeight": 24,
                 },
                 [
-                  false,
                   {
                     "color": "rgba(28, 27, 31, 0.38)",
                     "fontFamily": "System",
@@ -727,16 +699,18 @@ exports[`Menu Item renders menu item 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-        }
+        [
+          {
+            "flexDirection": "row",
+          },
+          undefined,
+        ]
       }
     >
       <View
         pointerEvents="none"
         style={
           [
-            false,
             {
               "justifyContent": "center",
             },
@@ -773,7 +747,6 @@ exports[`Menu Item renders menu item 1`] = `
                   "lineHeight": 24,
                 },
                 [
-                  false,
                   {
                     "color": "rgba(28, 27, 31, 1)",
                     "fontFamily": "System",

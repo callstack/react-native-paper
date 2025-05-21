@@ -10,8 +10,6 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
-
 import { Style, getLeftStyles, getRightStyles } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, EllipsizeProp, ThemeProp } from '../../types';
@@ -63,11 +61,15 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   theme?: ThemeProp;
   /**
-   * Style that is passed to the wrapping TouchableRipple element.
+   * Style that is passed to the root TouchableRipple container.
    */
   style?: StyleProp<ViewStyle>;
   /**
-   * Style that is passed to the container wrapping title and descripton.
+   * Style that is passed to the outermost container that wraps the entire content, including left and right items and both title and description.
+   */
+  containerStyle?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to the content container, which wraps the title and description.
    */
   contentStyle?: StyleProp<ViewStyle>;
   /**
@@ -144,6 +146,7 @@ const ListItem = (
     onPress,
     theme: themeOverrides,
     style,
+    containerStyle,
     contentStyle,
     titleStyle,
     titleNumberOfLines = 1,
@@ -159,14 +162,14 @@ const ListItem = (
   ref: React.ForwardedRef<View>
 ) => {
   const theme = useInternalTheme(themeOverrides);
+  const {
+    colors: { onSurface, onSurfaceVariant },
+  } = theme;
   const [alignToTop, setAlignToTop] = React.useState(false);
 
   const onDescriptionTextLayout = (
     event: NativeSyntheticEvent<TextLayoutEventData>
   ) => {
-    if (!theme.isV3) {
-      return;
-    }
     const { nativeEvent } = event;
     setAlignToTop(nativeEvent.lines.length >= 2);
   };
@@ -201,15 +204,11 @@ const ListItem = (
   };
 
   const renderTitle = () => {
-    const titleColor = theme.isV3
-      ? theme.colors.onSurface
-      : color(theme.colors.text).alpha(0.87).rgb().string();
-
     return typeof title === 'function' ? (
       title({
         selectable: false,
         ellipsizeMode: titleEllipsizeMode,
-        color: titleColor,
+        color: onSurface,
         fontSize: styles.title.fontSize,
       })
     ) : (
@@ -217,7 +216,7 @@ const ListItem = (
         selectable={false}
         ellipsizeMode={titleEllipsizeMode}
         numberOfLines={titleNumberOfLines}
-        style={[styles.title, { color: titleColor }, titleStyle]}
+        style={[styles.title, { color: onSurface }, titleStyle]}
         maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
       >
         {title}
@@ -225,44 +224,36 @@ const ListItem = (
     );
   };
 
-  const descriptionColor = theme.isV3
-    ? theme.colors.onSurfaceVariant
-    : color(theme.colors.text).alpha(0.54).rgb().string();
-
   return (
     <TouchableRipple
       {...rest}
       ref={ref}
-      style={[theme.isV3 ? styles.containerV3 : styles.container, style]}
+      style={[styles.container, style]}
       onPress={onPress}
       theme={theme}
       testID={testID}
     >
-      <View style={theme.isV3 ? styles.rowV3 : styles.row}>
+      <View style={[styles.row, containerStyle]}>
         {left
           ? left({
-              color: descriptionColor,
-              style: getLeftStyles(alignToTop, description, theme.isV3),
+              color: onSurfaceVariant,
+              style: getLeftStyles(alignToTop, description),
             })
           : null}
         <View
-          style={[
-            theme.isV3 ? styles.itemV3 : styles.item,
-            styles.content,
-            contentStyle,
-          ]}
+          style={[styles.item, styles.content, contentStyle]}
           testID={`${testID}-content`}
         >
           {renderTitle()}
 
           {description
-            ? renderDescription(descriptionColor, description)
+            ? renderDescription(onSurfaceVariant, description)
             : null}
         </View>
         {right
           ? right({
-              color: descriptionColor,
-              style: getRightStyles(alignToTop, description, theme.isV3),
+              color: onSurfaceVariant,
+              style: getRightStyles(alignToTop, description),
             })
           : null}
       </View>
@@ -270,22 +261,15 @@ const ListItem = (
   );
 };
 
+ListItem.displayName = 'List.Item';
 const Component = forwardRef(ListItem);
-Component.displayName = 'List.Item';
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8,
-  },
-  containerV3: {
     paddingVertical: 8,
     paddingRight: 24,
   },
   row: {
-    width: '100%',
-    flexDirection: 'row',
-  },
-  rowV3: {
     width: '100%',
     flexDirection: 'row',
     marginVertical: 6,
@@ -297,10 +281,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   item: {
-    marginVertical: 6,
-    paddingLeft: 8,
-  },
-  itemV3: {
     paddingLeft: 16,
   },
   content: {

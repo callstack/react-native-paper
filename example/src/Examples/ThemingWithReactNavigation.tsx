@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
+import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { PlatformPressable } from '@react-navigation/elements';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Text } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -30,6 +31,12 @@ const HomeTab = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        tabBarButton: (props) => (
+          <PlatformPressable
+            {...props}
+            android_ripple={{ color: 'transparent' }}
+          />
+        ),
       }}
     >
       <Tab.Screen
@@ -56,7 +63,7 @@ const HomeTab = () => {
 
 function ThemingWithReactNavigation() {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator>
       <Stack.Screen name="React Navigation" component={HomeTab} />
     </Stack.Navigator>
   );

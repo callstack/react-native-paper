@@ -22,7 +22,9 @@ import {
 import { useInternalTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {
@@ -99,6 +101,10 @@ export type Props = {
    */
   testID?: string;
   /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -123,6 +129,7 @@ const SegmentedButtonItem = ({
   density = 'regular',
   theme: themeOverrides,
   labelMaxFontSizeMultiplier,
+  hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
@@ -145,7 +152,10 @@ const SegmentedButtonItem = ({
     }
   }, [checked, checkScale, showSelectedCheck]);
 
-  const { roundness, isV3 } = theme;
+  const {
+    roundness,
+    fonts: { labelLarge },
+  } = theme;
   const { borderColor, textColor, borderWidth, backgroundColor } =
     getSegmentedButtonColors({
       checked,
@@ -155,9 +165,8 @@ const SegmentedButtonItem = ({
       uncheckedColor,
     });
 
-  const borderRadius = (isV3 ? 5 : 1) * roundness;
+  const borderRadius = 5 * roundness;
   const segmentBorderRadius = getSegmentedButtonBorderRadius({
-    theme,
     segment,
   });
   const rippleColor =
@@ -166,7 +175,7 @@ const SegmentedButtonItem = ({
   const showIcon = !icon ? false : label && checked ? !showSelectedCheck : true;
   const showCheckedIcon = checked && showSelectedCheck;
 
-  const iconSize = isV3 ? 18 : 16;
+  const iconSize = 18;
   const iconStyle = {
     marginRight: label ? 5 : showCheckedIcon ? 3 : 0,
     ...(label && {
@@ -194,12 +203,7 @@ const SegmentedButtonItem = ({
     ...segmentBorderRadius,
   };
   const labelTextStyle: TextStyle = {
-    ...(!isV3
-      ? {
-          textTransform: 'uppercase',
-          fontWeight: '500',
-        }
-      : theme.fonts.labelLarge),
+    ...labelLarge,
     color: textColor,
   };
 
@@ -217,6 +221,7 @@ const SegmentedButtonItem = ({
         style={rippleStyle}
         background={background}
         theme={theme}
+        hitSlop={hitSlop}
       >
         <View style={[styles.content, { paddingVertical }]}>
           {showCheckedIcon ? (

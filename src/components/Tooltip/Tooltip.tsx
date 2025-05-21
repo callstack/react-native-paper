@@ -11,7 +11,7 @@ import {
 
 import type { ThemeProp } from 'src/types';
 
-import { getTooltipPosition, Measurement } from './utils';
+import { getTooltipPosition, Measurement, TooltipChildProps } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import { addEventListener } from '../../utils/addEventListener';
 import Portal from '../Portal/Portal';
@@ -74,7 +74,10 @@ const Tooltip = ({
 }: Props) => {
   const isWeb = Platform.OS === 'web';
 
-  const theme = useInternalTheme(themeOverrides);
+  const {
+    colors: { onSurface, surface },
+    roundness,
+  } = useInternalTheme(themeOverrides);
   const [visible, setVisible] = React.useState(false);
 
   const [measurement, setMeasurement] = React.useState({
@@ -84,8 +87,14 @@ const Tooltip = ({
   });
   const showTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
   const hideTooltipTimer = React.useRef<NodeJS.Timeout[]>([]);
-  const childrenWrapperRef = React.useRef() as React.MutableRefObject<View>;
+
+  const childrenWrapperRef = React.useRef<View>(null);
   const touched = React.useRef(false);
+
+  const isValidChild = React.useMemo(
+    () => React.isValidElement<TooltipChildProps>(children),
+    [children]
+  );
 
   React.useEffect(() => {
     return () => {
@@ -109,19 +118,7 @@ const Tooltip = ({
     return () => subscription.remove();
   }, []);
 
-  const handleOnLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
-    childrenWrapperRef.current.measure(
-      (_x, _y, width, height, pageX, pageY) => {
-        setMeasurement({
-          children: { pageX, pageY, height, width },
-          tooltip: { ...layout },
-          measured: true,
-        });
-      }
-    );
-  };
-
-  const handleTouchStart = () => {
+  const handleTouchStart = React.useCallback(() => {
     if (hideTooltipTimer.current.length) {
       hideTooltipTimer.current.forEach((t) => clearTimeout(t));
       hideTooltipTimer.current = [];
@@ -137,9 +134,9 @@ const Tooltip = ({
       touched.current = true;
       setVisible(true);
     }
-  };
+  }, [isWeb, enterTouchDelay]);
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = React.useCallback(() => {
     touched.current = false;
     if (showTooltipTimer.current.length) {
       showTooltipTimer.current.forEach((t) => clearTimeout(t));
@@ -151,31 +148,54 @@ const Tooltip = ({
       setMeasurement({ children: {}, tooltip: {}, measured: false });
     }, leaveTouchDelay) as unknown as NodeJS.Timeout;
     hideTooltipTimer.current.push(id);
+  }, [leaveTouchDelay]);
+
+  const handlePress = React.useCallback(() => {
+    if (touched.current) {
+      return null;
+    }
+    if (!isValidChild) return null;
+    const props = children.props as TooltipChildProps;
+    if (props.disabled) return null;
+    return props.onPress?.();
+  }, [children.props, isValidChild]);
+
+  const handleHoverIn = React.useCallback(() => {
+    handleTouchStart();
+    if (isValidChild) {
+      (children.props as TooltipChildProps).onHoverIn?.();
+    }
+  }, [children.props, handleTouchStart, isValidChild]);
+
+  const handleHoverOut = React.useCallback(() => {
+    handleTouchEnd();
+    if (isValidChild) {
+      (children.props as TooltipChildProps).onHoverOut?.();
+    }
+  }, [children.props, handleTouchEnd, isValidChild]);
+
+  const handleOnLayout = ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
+    childrenWrapperRef.current?.measure(
+      (_x, _y, width, height, pageX, pageY) => {
+        setMeasurement({
+          children: { pageX, pageY, height, width },
+          tooltip: { ...layout },
+          measured: true,
+        });
+      }
+    );
   };
 
   const mobilePressProps = {
-    onPress: React.useCallback(() => {
-      if (touched.current) {
-        return null;
-      } else {
-        if (children.props.disabled) return null;
-        return children.props.onPress?.();
-      }
-    }, [children.props]),
+    onPress: handlePress,
     onLongPress: () => handleTouchStart(),
     onPressOut: () => handleTouchEnd(),
     delayLongPress: enterTouchDelay,
   };
 
   const webPressProps = {
-    onHoverIn: () => {
-      handleTouchStart();
-      children.props.onHoverIn?.();
-    },
-    onHoverOut: () => {
-      handleTouchEnd();
-      children.props.onHoverOut?.();
-    },
+    onHoverIn: handleHoverIn,
+    onHoverOut: handleHoverOut,
   };
 
   return (
@@ -187,11 +207,12 @@ const Tooltip = ({
             style={[
               styles.tooltip,
               {
-                backgroundColor: theme.isV3
-                  ? theme.colors.onSurface
-                  : theme.colors.tooltip,
-                ...getTooltipPosition(measurement as Measurement, children),
-                borderRadius: theme.roundness,
+                backgroundColor: onSurface,
+                ...getTooltipPosition(
+                  measurement as Measurement,
+                  children as React.ReactElement<TooltipChildProps>
+                ),
+                borderRadius: roundness,
                 ...(measurement.measured ? styles.visible : styles.hidden),
               },
             ]}
@@ -202,7 +223,7 @@ const Tooltip = ({
               numberOfLines={1}
               selectable={false}
               variant="labelLarge"
-              style={{ color: theme.colors.surface }}
+              style={{ color: surface }}
               maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
             >
               {title}
@@ -210,7 +231,6 @@ const Tooltip = ({
           </View>
         </Portal>
       )}
-      {/* Need the xxPressProps in both places */}
       <Pressable
         ref={childrenWrapperRef}
         style={styles.pressContainer}

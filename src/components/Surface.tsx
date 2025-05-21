@@ -10,15 +10,15 @@ import {
 } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
-import overlay, { isAnimatedValue } from '../styles/overlay';
+import { isAnimatedValue } from '../styles/overlay';
 import shadow from '../styles/shadow';
-import type { ThemeProp, MD3Elevation } from '../types';
+import type { ThemeProp, Elevation } from '../types';
 import { forwardRef } from '../utils/forwardRef';
 import { splitStyles } from '../utils/splitStyles';
 
-type Elevation = 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+type SurfaceElevation = Elevation | Animated.Value;
 
-export type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = Omit<React.ComponentPropsWithRef<typeof View>, 'style'> & {
   /**
    * Content of the `Surface`.
    */
@@ -34,7 +34,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * Note: In version 2 the `elevation` prop was accepted via `style` prop i.e. `style={{ elevation: 4 }}`.
    * It's no longer supported with theme version 3 and you should use `elevation` property instead.
    */
-  elevation?: Elevation;
+  elevation?: SurfaceElevation;
   /**
    * @supported Available in v5.x with theme version 3
    * Mode of the Surface.
@@ -51,31 +51,11 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   testID?: string;
   ref?: React.RefObject<View>;
+  /**
+   * @internal
+   */
+  container?: boolean;
 };
-
-const MD2Surface = forwardRef<View, Props>(
-  ({ style, theme: overrideTheme, ...rest }: Omit<Props, 'elevation'>, ref) => {
-    const { elevation = 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
-    const { dark: isDarkTheme, mode, colors } = useInternalTheme(overrideTheme);
-
-    return (
-      <Animated.View
-        ref={ref}
-        {...rest}
-        style={[
-          {
-            backgroundColor:
-              isDarkTheme && mode === 'adaptive'
-                ? overlay(elevation, colors?.surface)
-                : colors?.surface,
-          },
-          elevation ? shadow(elevation) : null,
-          style,
-        ]}
-      />
-    );
-  }
-);
 
 const outerLayerStyleProperties: (keyof ViewStyle)[] = [
   'position',
@@ -110,7 +90,7 @@ const iOSShadowOutputRanges = [
 ];
 const inputRange = [0, 1, 2, 3, 4, 5];
 function getStyleForShadowLayer(
-  elevation: Elevation,
+  elevation: SurfaceElevation,
   layer: 0 | 1
 ): Animated.WithAnimatedValue<ShadowStyleIOS> {
   if (isAnimatedValue(elevation)) {
@@ -149,7 +129,7 @@ function getStyleForShadowLayer(
 const SurfaceIOS = forwardRef<
   View,
   Omit<Props, 'elevation'> & {
-    elevation: Elevation;
+    elevation: SurfaceElevation;
     backgroundColor?: string | Animated.AnimatedInterpolation<string | number>;
   }
 >(
@@ -161,6 +141,7 @@ const SurfaceIOS = forwardRef<
       testID,
       children,
       mode = 'elevated',
+      container,
       ...props
     },
     ref
@@ -202,12 +183,15 @@ const SurfaceIOS = forwardRef<
         ...(isElevated && getStyleForShadowLayer(elevation, 1)),
         ...filteredStyles,
         ...borderRadiusStyles,
-        flex: flattenedStyles.height ? 1 : undefined,
+        flex:
+          flattenedStyles.height || (!container && flattenedStyles.flex)
+            ? 1
+            : undefined,
         backgroundColor: bgColor,
       };
 
       return [outerLayerViewStyles, innerLayerViewStyles];
-    }, [style, elevation, backgroundColor, mode]);
+    }, [style, elevation, backgroundColor, mode, container]);
 
     return (
       <Animated.View
@@ -268,15 +252,9 @@ const Surface = forwardRef<View, Props>(
     ref
   ) => {
     const theme = useInternalTheme(overridenTheme);
-
-    if (!theme.isV3)
-      return (
-        <MD2Surface {...props} theme={theme} style={style} ref={ref}>
-          {children}
-        </MD2Surface>
-      );
-
-    const { colors } = theme;
+    const {
+      colors: { elevation: elevationColors },
+    } = theme;
 
     const inputRange = [0, 1, 2, 3, 4, 5];
 
@@ -285,12 +263,12 @@ const Surface = forwardRef<View, Props>(
         return elevation.interpolate({
           inputRange,
           outputRange: inputRange.map((elevation) => {
-            return colors.elevation?.[`level${elevation as MD3Elevation}`];
+            return elevationColors?.[`level${elevation as Elevation}`];
           }),
         });
       }
 
-      return colors.elevation?.[`level${elevation}`];
+      return elevationColors?.[`level${elevation}`];
     })();
 
     const isElevated = mode === 'elevated';
@@ -305,7 +283,7 @@ const Surface = forwardRef<View, Props>(
           testID={testID}
           style={[
             { backgroundColor },
-            elevation && isElevated ? shadow(elevation, theme.isV3) : null,
+            elevation && isElevated ? shadow(elevation) : null,
             style,
           ]}
         >

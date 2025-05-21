@@ -1,29 +1,18 @@
 import React, { RefObject } from 'react';
 import { Dimensions, Text, View, Platform } from 'react-native';
 
-import {
-  fireEvent,
-  render,
-  waitForElementToBeRemoved,
-} from '@testing-library/react-native';
-import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
+import { fireEvent, render, act } from '@testing-library/react-native';
 
 import PaperProvider from '../../core/PaperProvider';
 import Tooltip from '../Tooltip/Tooltip';
 
 const mockedRemoveEventListener = jest.fn();
 
-jest.mock('react-native-safe-area-context', () => mockSafeAreaContext);
-
-jest.mock('react-native', () => {
-  const RN = jest.requireActual('react-native');
-
-  RN.Dimensions.addEventListener = () => ({
+jest.mock('../../utils/addEventListener', () => ({
+  addEventListener: () => ({
     remove: mockedRemoveEventListener,
-  });
-
-  return RN;
-});
+  }),
+}));
 
 const DummyComponent = React.forwardRef<View>((props, ref) => (
   <View {...props} ref={ref as RefObject<View>}>
@@ -123,21 +112,27 @@ describe('Tooltip', () => {
     });
 
     describe('pressOut', () => {
-      // eslint-disable-next-line jest/valid-title
       it('hides the tooltip when the user stop pressing the component', async () => {
         const {
-          wrapper: { queryByText, getByText, findByText },
+          wrapper: { getByText, findByText },
         } = setup({ enterTouchDelay: 50, leaveTouchDelay: 0 });
 
         fireEvent(getByText('dummy component'), 'longPress');
 
-        await findByText('some tooltip text');
+        act(() => {
+          jest.runAllTimers();
+        });
+
+        const tooltip = await findByText('some tooltip text');
+        expect(tooltip).toBeOnTheScreen();
 
         fireEvent(getByText('dummy component'), 'pressOut');
 
-        await waitForElementToBeRemoved(() => getByText('some tooltip text'));
+        act(() => {
+          jest.runAllTimers();
+        });
 
-        expect(queryByText('some tooltip text')).toBeNull();
+        expect(tooltip).not.toBeOnTheScreen();
       });
     });
 
@@ -293,6 +288,10 @@ describe('Tooltip', () => {
 
         fireEvent(getByText('dummy component'), 'hoverIn');
 
+        act(() => {
+          jest.runAllTimers();
+        });
+
         await findByText('some tooltip text');
 
         unmount();
@@ -313,6 +312,11 @@ describe('Tooltip', () => {
         } = setup();
 
         fireEvent(getByText('dummy component'), 'hoverIn');
+
+        act(() => {
+          jest.runAllTimers();
+        });
+
         fireEvent(getByText('dummy component'), 'hoverOut');
         fireEvent(getByText('dummy component'), 'hoverIn');
 
@@ -321,7 +325,6 @@ describe('Tooltip', () => {
     });
 
     describe('hoverOut', () => {
-      // eslint-disable-next-line jest/valid-title
       it('hides the tooltip when the user stops hovering the component', async () => {
         const {
           wrapper: { queryByText, getByText, findByText },
@@ -329,13 +332,20 @@ describe('Tooltip', () => {
 
         fireEvent(getByText('dummy component'), 'hoverIn');
 
-        await findByText('some tooltip text');
+        act(() => {
+          jest.runAllTimers();
+        });
+
+        const tooltip = await findByText('some tooltip text');
+        expect(tooltip).toBeOnTheScreen();
 
         fireEvent(getByText('dummy component'), 'hoverOut');
 
-        await waitForElementToBeRemoved(() => getByText('some tooltip text'));
+        act(() => {
+          jest.runAllTimers();
+        });
 
-        expect(queryByText('some tooltip text')).toBeNull();
+        expect(queryByText('some tooltip text')).not.toBeOnTheScreen();
       });
     });
 
@@ -362,6 +372,10 @@ describe('Tooltip', () => {
 
           fireEvent(getByText('dummy component'), 'hoverIn');
 
+          act(() => {
+            jest.runAllTimers();
+          });
+
           fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
@@ -385,6 +399,10 @@ describe('Tooltip', () => {
           } = setup({}, { pageX: 0 }); // Component starting at the starting 0 X coord
 
           fireEvent(getByText('dummy component'), 'hoverIn');
+
+          act(() => {
+            jest.runAllTimers();
+          });
 
           fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
@@ -410,6 +428,10 @@ describe('Tooltip', () => {
 
           fireEvent(getByText('dummy component'), 'hoverIn');
 
+          act(() => {
+            jest.runAllTimers();
+          });
+
           fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
@@ -433,6 +455,10 @@ describe('Tooltip', () => {
           } = setup({}, { pageY: 600, height: 50 });
 
           fireEvent(getByText('dummy component'), 'hoverIn');
+
+          act(() => {
+            jest.runAllTimers();
+          });
 
           fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {

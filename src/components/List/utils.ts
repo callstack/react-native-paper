@@ -1,7 +1,13 @@
-import { FlexAlignType, ColorValue, StyleSheet } from 'react-native';
+import {
+  FlexAlignType,
+  ColorValue,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 
 import color from 'color';
-import type { EllipsizeProp, InternalTheme } from 'src/types';
+import type { EllipsizeProp, InternalTheme, ThemeProp } from 'src/types';
 
 type Description =
   | React.ReactNode
@@ -12,6 +18,13 @@ type Description =
       fontSize: number;
     }) => React.ReactNode);
 
+export type ListChildProps = {
+  left?: React.ReactNode;
+  right?: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
+  theme?: ThemeProp;
+};
+
 export type Style = {
   marginLeft?: number;
   marginRight?: number;
@@ -21,58 +34,48 @@ export type Style = {
 
 export const getLeftStyles = (
   alignToTop: boolean,
-  description: Description,
-  isV3: boolean
-) => {
-  const stylesV3 = {
+  description: Description
+): Style => {
+  const additionalStyles = {
     marginRight: 0,
     marginLeft: 16,
-    alignSelf: alignToTop ? 'flex-start' : 'center',
+    alignSelf: (alignToTop ? 'flex-start' : 'center') as FlexAlignType,
   };
 
   if (!description) {
     return {
       ...styles.iconMarginLeft,
       ...styles.marginVerticalNone,
-      ...(isV3 && { ...stylesV3 }),
+      ...additionalStyles,
     };
-  }
-
-  if (!isV3) {
-    return styles.iconMarginLeft;
   }
 
   return {
     ...styles.iconMarginLeft,
-    ...stylesV3,
+    ...additionalStyles,
   };
 };
 
 export const getRightStyles = (
   alignToTop: boolean,
-  description: Description,
-  isV3: boolean
-) => {
-  const stylesV3 = {
+  description: Description
+): Style => {
+  const additionalStyles = {
     marginLeft: 16,
-    alignSelf: alignToTop ? 'flex-start' : 'center',
+    alignSelf: (alignToTop ? 'flex-start' : 'center') as FlexAlignType,
   };
 
   if (!description) {
     return {
       ...styles.iconMarginRight,
       ...styles.marginVerticalNone,
-      ...(isV3 && { ...stylesV3 }),
+      ...additionalStyles,
     };
-  }
-
-  if (!isV3) {
-    return styles.iconMarginRight;
   }
 
   return {
     ...styles.iconMarginRight,
-    ...stylesV3,
+    ...additionalStyles,
   };
 };
 
@@ -91,22 +94,16 @@ export const getAccordionColors = ({
   isExpanded?: boolean;
   customRippleColor?: ColorValue;
 }) => {
-  const titleColor = theme.isV3
-    ? theme.colors.onSurface
-    : color(theme.colors.text).alpha(0.87).rgb().string();
+  const {
+    colors: { onSurfaceVariant, primary, onSurface },
+  } = theme;
 
-  const descriptionColor = theme.isV3
-    ? theme.colors.onSurfaceVariant
-    : color(theme.colors.text).alpha(0.54).rgb().string();
-
-  const titleTextColor = isExpanded ? theme.colors?.primary : titleColor;
-
+  const titleTextColor = isExpanded ? primary : onSurface;
   const rippleColor =
     customRippleColor || color(titleTextColor).alpha(0.12).rgb().string();
 
   return {
-    titleColor,
-    descriptionColor,
+    descriptionColor: onSurfaceVariant,
     titleTextColor,
     rippleColor,
   };

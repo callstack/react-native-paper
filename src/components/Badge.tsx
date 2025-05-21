@@ -8,9 +8,7 @@ import {
 } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
-import { black, white } from '../styles/themes/v2/colors';
 import type { ThemeProp } from '../types';
-import getContrastingColor from '../utils/getContrastingColor';
 
 const defaultSize = 20;
 
@@ -69,6 +67,7 @@ const Badge = ({
 
   const {
     animation: { scale },
+    colors: { error, onError },
   } = theme;
 
   React.useEffect(() => {
@@ -85,20 +84,9 @@ const Badge = ({
     }).start();
   }, [visible, opacity, scale]);
 
-  const {
-    backgroundColor = theme.isV3
-      ? theme.colors.error
-      : theme.colors?.notification,
-    ...restStyle
-  } = (StyleSheet.flatten(style) || {}) as TextStyle;
-
-  const textColor = theme.isV3
-    ? theme.colors.onError
-    : getContrastingColor(backgroundColor, white, black);
-
-  const borderRadius = size / 2;
-
-  const paddingHorizontal = theme.isV3 ? 3 : 4;
+  const { backgroundColor = error, ...restStyle } = (StyleSheet.flatten(
+    style
+  ) || {}) as TextStyle;
 
   return (
     <Animated.Text
@@ -107,14 +95,12 @@ const Badge = ({
         {
           opacity,
           backgroundColor,
-          color: textColor,
+          color: onError,
           fontSize: size * 0.5,
-          ...(!theme.isV3 && theme.fonts.regular),
           lineHeight: size / fontScale,
           height: size,
           minWidth: size,
-          borderRadius,
-          paddingHorizontal,
+          borderRadius: size / 2,
         },
         styles.container,
         restStyle,
@@ -134,5 +120,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     overflow: 'hidden',
+    paddingHorizontal: 3,
   },
 });

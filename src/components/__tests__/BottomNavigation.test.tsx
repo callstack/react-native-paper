@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { StyleSheet, Easing, Animated, Platform } from 'react-native';
+import { Animated, Easing, Platform, StyleSheet } from 'react-native';
 
-import { fireEvent, render, act } from '@testing-library/react-native';
-import color from 'color';
+import { act, fireEvent, render } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
-import { red300 } from '../../styles/themes/v2/colors';
-import { MD3Colors } from '../../styles/themes/v3/tokens';
+import { Colors } from '../../styles/themes/tokens';
 import BottomNavigation from '../BottomNavigation/BottomNavigation';
 import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRouteScreen';
 import {
@@ -14,72 +12,13 @@ import {
   getInactiveTintColor,
   getLabelColor,
 } from '../BottomNavigation/utils';
+import Icon from '../Icon';
 
 const styles = StyleSheet.create({
   backgroundColor: {
-    backgroundColor: red300,
+    backgroundColor: Colors.error30,
   },
 });
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      icon: { color: string; src: any };
-    }
-  }
-}
-
-type AnimatedTiming = (
-  value: Animated.Value | Animated.ValueXY,
-  config: Animated.TimingAnimationConfig
-) => Animated.CompositeAnimation;
-
-type AnimatedParallel = (animations: Array<Animated.CompositeAnimation>) => {
-  start: (callback?: Animated.EndCallback) => void;
-};
-
-// Make sure any animation finishes before checking the snapshot results
-jest.mock('react-native', () => {
-  const RN = jest.requireActual('react-native');
-
-  const timing: AnimatedTiming = (value, config) => ({
-    start: (callback) => {
-      value.setValue(config.toValue as any);
-      callback?.({ finished: true });
-    },
-    value,
-    config,
-    stop: () => {
-      throw new Error('Not implemented');
-    },
-    reset: () => {
-      throw new Error('Not implemented');
-    },
-  });
-  RN.Animated.timing = timing;
-
-  const parallel: AnimatedParallel = (animations) => ({
-    start: (callback) => {
-      const results = animations.map((animation) => {
-        animation.start();
-        return { finished: true };
-      });
-      callback?.({ finished: results.every((result) => result.finished) });
-    },
-  });
-
-  RN.Animated.parallel = parallel;
-
-  RN.Dimensions.get = () => ({
-    fontScale: 1,
-  });
-
-  return RN;
-});
-
-jest.mock('react-native-safe-area-context', () => ({
-  useSafeAreaInsets: () => ({ bottom: 0, left: 0, right: 0, top: 0 }),
-}));
 
 const icons = ['magnify', 'camera', 'inbox', 'heart', 'shopping-music'];
 
@@ -299,7 +238,7 @@ it('renders custom icon and label in shifting bottom navigation', () => {
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
       renderIcon={({ route, color }) => (
-        <icon color={color} src={route.unfocusedIcon} />
+        <Icon color={color} source={route.unfocusedIcon} size={24} />
       )}
       renderLabel={({ route, color }) => (
         <text color={color}>{route.title}</text>
@@ -318,7 +257,7 @@ it('renders custom icon and label in non-shifting bottom navigation', () => {
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
       renderIcon={({ route, color }) => (
-        <icon color={color} src={route.unfocusedIcon} />
+        <Icon color={color} source={route.unfocusedIcon} size={24} />
       )}
       renderLabel={({ route, color }) => (
         <text color={color}>{route.title}</text>
@@ -437,7 +376,7 @@ it('renders custom background color passed to barStyle property', () => {
   );
 
   const wrapper = getByTestId('bottom-navigation-bar-content');
-  expect(wrapper).toHaveStyle({ backgroundColor: red300 });
+  expect(wrapper).toHaveStyle({ backgroundColor: Colors.error30 });
 });
 
 it('renders a single tab', () => {
@@ -505,22 +444,6 @@ it('does not apply maxTabBarWidth styling if compact prop is falsy', () => {
   });
 });
 
-it('displays ripple animation view if shifting is truthy', () => {
-  const { getByTestId } = render(
-    <BottomNavigation
-      navigationState={createState(0, 5)}
-      onIndexChange={jest.fn()}
-      renderScene={({ route }) => route.title}
-      getLazy={({ route }) => route.key === 'key-2'}
-      testID="bottom-navigation"
-      theme={{ isV3: false }}
-      shifting
-    />
-  );
-
-  expect(getByTestId('bottom-navigation-bar-content-ripple')).toBeDefined();
-});
-
 it('does not display ripple animation view if shifting is falsy', () => {
   const { queryByTestId } = render(
     <BottomNavigation
@@ -538,15 +461,14 @@ it('does not display ripple animation view if shifting is falsy', () => {
 
 describe('getActiveTintColor', () => {
   it.each`
-    activeColor  | defaultColor | useV3    | expected
-    ${'#FBF7DB'} | ${'#fff'}    | ${true}  | ${'#FBF7DB'}
-    ${undefined} | ${'#fff'}    | ${true}  | ${MD3Colors.secondary10}
-    ${undefined} | ${'#fff'}    | ${false} | ${'#fff'}
+    activeColor  | expected
+    ${'#FBF7DB'} | ${'#FBF7DB'}
+    ${undefined} | ${Colors.secondary10}
   `(
-    'returns $expected when activeColor: $activeColor and useV3: $useV3',
-    ({ activeColor, defaultColor, useV3, expected }) => {
-      const theme = getTheme(false, useV3);
-      const color = getActiveTintColor({ activeColor, defaultColor, theme });
+    'returns $expected when activeColor: $activeColor',
+    ({ activeColor, expected }) => {
+      const theme = getTheme();
+      const color = getActiveTintColor({ activeColor, theme });
       expect(color).toBe(expected);
     }
   );
@@ -554,17 +476,15 @@ describe('getActiveTintColor', () => {
 
 describe('getInactiveTintColor', () => {
   it.each`
-    inactiveColor | defaultColor | useV3    | expected
-    ${'#853D4B'}  | ${'#fff'}    | ${true}  | ${'#853D4B'}
-    ${undefined}  | ${'#fff'}    | ${true}  | ${MD3Colors.neutralVariant30}
-    ${undefined}  | ${'#fff'}    | ${false} | ${color('#fff').alpha(0.5).rgb().string()}
+    inactiveColor | expected
+    ${'#853D4B'}  | ${'#853D4B'}
+    ${undefined}  | ${Colors.neutralVariant30}
   `(
-    'returns $expected when inactiveColor: $inactiveColor and useV3: $useV3',
-    ({ inactiveColor, defaultColor, useV3, expected }) => {
-      const theme = getTheme(false, useV3);
+    'returns $expected when inactiveColor: $inactiveColor',
+    ({ inactiveColor, expected }) => {
+      const theme = getTheme();
       const color = getInactiveTintColor({
         inactiveColor,
-        defaultColor,
         theme,
       });
       expect(color).toBe(expected);
@@ -574,22 +494,19 @@ describe('getInactiveTintColor', () => {
 
 describe('getLabelColor', () => {
   it.each`
-    tintColor    | focused  | defaultColor | useV3    | expected
-    ${'#FBF7DB'} | ${true}  | ${'#fff'}    | ${true}  | ${'#FBF7DB'}
-    ${'#853D4B'} | ${true}  | ${'#fff'}    | ${true}  | ${'#853D4B'}
-    ${undefined} | ${true}  | ${'#fff'}    | ${true}  | ${MD3Colors.neutral10}
-    ${undefined} | ${false} | ${'#fff'}    | ${true}  | ${MD3Colors.neutralVariant30}
-    ${undefined} | ${false} | ${'#fff'}    | ${false} | ${'#fff'}
-    ${undefined} | ${true}  | ${'#fff'}    | ${false} | ${'#fff'}
+    tintColor    | focused  | expected
+    ${'#FBF7DB'} | ${true}  | ${'#FBF7DB'}
+    ${'#853D4B'} | ${true}  | ${'#853D4B'}
+    ${undefined} | ${true}  | ${Colors.neutral10}
+    ${undefined} | ${false} | ${Colors.neutralVariant30}
   `(
-    'returns $expected when tintColor: $tintColor, focused: $focused useV3: $useV3',
-    ({ tintColor, focused, defaultColor, useV3, expected }) => {
-      const theme = getTheme(false, useV3);
+    'returns $expected when tintColor: $tintColor, focused: $focused',
+    ({ tintColor, focused, expected }) => {
+      const theme = getTheme();
       const color = getLabelColor({
         tintColor,
         hasColor: Boolean(tintColor),
         focused,
-        defaultColor,
         theme,
       });
       expect(color).toBe(expected);
@@ -618,8 +535,9 @@ it('barStyle animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
-
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
   expect(getByTestId('bottom-navigation-bar-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });

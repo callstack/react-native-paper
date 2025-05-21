@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { Animated } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { act, render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
-import { black, white } from '../../styles/themes/v2/colors';
 import Chip from '../Chip/Chip';
 import { getChipColors } from '../Chip/helpers';
 
@@ -104,18 +103,6 @@ describe('getChipColors - text color', () => {
     });
   });
 
-  it('should return correct disabled color, for theme version 2', () => {
-    expect(
-      getChipColors({
-        disabled: true,
-        theme: getTheme(false, false),
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      textColor: getTheme(false, false).colors.disabled,
-    });
-  });
-
   it('should return correct theme color, for theme version 3, flat mode', () => {
     expect(
       getChipColors({
@@ -138,20 +125,6 @@ describe('getChipColors - text color', () => {
     });
   });
 
-  it('should return correct theme color, for theme version 2', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      textColor: color(getTheme(false, false).colors.text)
-        .alpha(0.87)
-        .rgb()
-        .string(),
-    });
-  });
-
   it('should return custom color, for theme version 3', () => {
     expect(
       getChipColors({
@@ -161,18 +134,6 @@ describe('getChipColors - text color', () => {
       })
     ).toMatchObject({
       textColor: 'purple',
-    });
-  });
-
-  it('should return custom color, for theme version 2', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        selectedColor: 'purple',
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      textColor: color('purple').alpha(0.87).rgb().string(),
     });
   });
 });
@@ -187,18 +148,6 @@ describe('getChipColors - icon color', () => {
       })
     ).toMatchObject({
       iconColor: getTheme().colors.onSurfaceDisabled,
-    });
-  });
-
-  it('should return correct disabled color, for theme version 2', () => {
-    expect(
-      getChipColors({
-        disabled: true,
-        theme: getTheme(false, false),
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      iconColor: getTheme(false, false).colors.disabled,
     });
   });
 
@@ -224,20 +173,6 @@ describe('getChipColors - icon color', () => {
     });
   });
 
-  it('should return correct theme color, for theme version 2', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      iconColor: color(getTheme(false, false).colors.text)
-        .alpha(0.54)
-        .rgb()
-        .string(),
-    });
-  });
-
   it('should return custom color, for theme version 3', () => {
     expect(
       getChipColors({
@@ -247,18 +182,6 @@ describe('getChipColors - icon color', () => {
       })
     ).toMatchObject({
       iconColor: 'purple',
-    });
-  });
-
-  it('should return custom color, for theme version 2', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        selectedColor: 'purple',
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      iconColor: color('purple').alpha(0.54).rgb().string(),
     });
   });
 });
@@ -301,116 +224,6 @@ describe('getChipColors - ripple color', () => {
       })
     ).toMatchObject({
       rippleColor: color('purple').alpha(0.12).rgb().string(),
-    });
-  });
-
-  it('should return custom color, for theme version 2', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        selectedColor: 'purple',
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      rippleColor: color('purple').fade(0.5).rgb().string(),
-    });
-  });
-
-  it('should return custom color, for theme version 2, dark mode, outline mode, customBackgroundColor', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(true, false),
-        customBackgroundColor: 'purple',
-        isOutlined: true,
-      })
-    ).toMatchObject({
-      rippleColor: color('purple').lighten(0.2).rgb().string(),
-    });
-  });
-
-  it('should return custom color, for theme version 2, dark mode, flat mode, customBackgroundColor', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(true, false),
-        customBackgroundColor: 'purple',
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      rippleColor: color('purple').lighten(0.4).rgb().string(),
-    });
-  });
-
-  it('should return custom color, for theme version 2, light mode, outline mode, customBackgroundColor', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        customBackgroundColor: 'purple',
-        isOutlined: true,
-      })
-    ).toMatchObject({
-      rippleColor: color('purple').darken(0.08).rgb().string(),
-    });
-  });
-
-  it('should return custom color, for theme version 2, light mode, flat mode, customBackgroundColor', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        customBackgroundColor: 'purple',
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      rippleColor: color('purple').darken(0.2).rgb().string(),
-    });
-  });
-
-  it('should return theme color, for theme version 2, light mode, outline mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        isOutlined: true,
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme(false, false).colors.surface)
-        .darken(0.08)
-        .rgb()
-        .string(),
-    });
-  });
-
-  it('should return theme color, for theme version 2, light mode, flat mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      rippleColor: color('#ebebeb').darken(0.2).rgb().string(),
-    });
-  });
-
-  it('should return theme color, for theme version 2, dark mode, outline mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(true, false),
-        isOutlined: true,
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme(true, false).colors.surface)
-        .lighten(0.2)
-        .rgb()
-        .string(),
-    });
-  });
-
-  it('should return theme color, for theme version 2, dark mode, flat mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(true, false),
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      rippleColor: color('#383838').lighten(0.4).rgb().string(),
     });
   });
 });
@@ -505,90 +318,6 @@ describe('getChipColor - selected background color', () => {
         .string(),
     });
   });
-
-  it('should return custom color, for theme version 2, light mode, outlined mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        customBackgroundColor: 'purple',
-        isOutlined: true,
-      })
-    ).toMatchObject({
-      selectedBackgroundColor: color('purple').darken(0.08).rgb().string(),
-    });
-  });
-
-  it('should return custom color, for theme version 2, light mode, flat mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        customBackgroundColor: 'purple',
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      selectedBackgroundColor: color('purple').darken(0.2).rgb().string(),
-    });
-  });
-
-  it('should return custom color, for theme version 2, dark mode, outlined mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(true, false),
-        customBackgroundColor: 'purple',
-        isOutlined: true,
-      })
-    ).toMatchObject({
-      selectedBackgroundColor: color('purple').lighten(0.2).rgb().string(),
-    });
-  });
-
-  it('should return custom color, for theme version 2, dark mode, flat mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(true, false),
-        customBackgroundColor: 'purple',
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      selectedBackgroundColor: color('purple').lighten(0.4).rgb().string(),
-    });
-  });
-
-  it('should return theme color, for theme version 2, outlined mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        isOutlined: true,
-      })
-    ).toMatchObject({
-      selectedBackgroundColor: color(getTheme(false, false).colors.surface)
-        .darken(0.08)
-        .rgb()
-        .string(),
-    });
-  });
-
-  it('should return theme color, for theme version 2, light mode, flat mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      selectedBackgroundColor: color('#ebebeb').darken(0.2).rgb().string(),
-    });
-  });
-
-  it('should return theme color, for theme version 2, dark mode, flat mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(true, false),
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      selectedBackgroundColor: color('#383838').lighten(0.4).rgb().string(),
-    });
-  });
 });
 
 describe('getChipColor - background color', () => {
@@ -625,39 +354,6 @@ describe('getChipColor - background color', () => {
       backgroundColor: getTheme().colors.secondaryContainer,
     });
   });
-
-  it('should return theme color, for theme version 2, outlined mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        isOutlined: true,
-      })
-    ).toMatchObject({
-      backgroundColor: getTheme(false, false).colors.surface,
-    });
-  });
-
-  it('should return theme color, for theme version 2, light mode, flat mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      backgroundColor: '#ebebeb',
-    });
-  });
-
-  it('should return theme color, for theme version 2, dark mode, flat mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(true, false),
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      backgroundColor: '#383838',
-    });
-  });
 });
 
 describe('getChipColor - border color', () => {
@@ -669,10 +365,7 @@ describe('getChipColor - border color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      borderColor: color(getTheme().colors.onSurfaceVariant)
-        .alpha(0.12)
-        .rgb()
-        .string(),
+      borderColor: 'transparent',
     });
   });
 
@@ -684,7 +377,7 @@ describe('getChipColor - border color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      borderColor: color('purple').alpha(0.29).rgb().string(),
+      borderColor: 'transparent',
     });
   });
 
@@ -695,75 +388,7 @@ describe('getChipColor - border color', () => {
         isOutlined: false,
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.outline,
-    });
-  });
-
-  it('should return custom color, for theme version 2, outlined mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        selectedColor: 'purple',
-        isOutlined: true,
-      })
-    ).toMatchObject({
-      borderColor: color('purple').alpha(0.29).rgb().string(),
-    });
-  });
-
-  it('should return custom color, for theme version 2, flat mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(true, false),
-        customBackgroundColor: 'purple',
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      borderColor: 'purple',
-    });
-  });
-
-  it('should return theme color, for theme version 2, light mode, outlined mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        isOutlined: true,
-      })
-    ).toMatchObject({
-      borderColor: color(black).alpha(0.29).rgb().string(),
-    });
-  });
-
-  it('should return theme color, for theme version 2, dark mode, outlined mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(true, false),
-        isOutlined: true,
-      })
-    ).toMatchObject({
-      borderColor: color(white).alpha(0.29).rgb().string(),
-    });
-  });
-
-  it('should return theme background color, for theme version 2, light mode, flat mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(false, false),
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      borderColor: '#ebebeb',
-    });
-  });
-
-  it('should return theme background color, for theme version 2, dark mode, flat mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(true, false),
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      borderColor: '#383838',
+      borderColor: 'transparent',
     });
   });
 });
@@ -789,8 +414,9 @@ it('animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
-
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
   expect(getByTestId('chip-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });

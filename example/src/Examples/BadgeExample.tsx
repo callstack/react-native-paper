@@ -5,18 +5,15 @@ import {
   Badge,
   IconButton,
   List,
-  MD2Colors,
-  MD3Colors,
+  Colors,
   Text,
   Switch,
 } from 'react-native-paper';
 
-import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const BadgeExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
-  const { isV3 } = useExampleTheme();
 
   return (
     <ScreenWrapper>
@@ -44,9 +41,7 @@ const BadgeExample = () => {
               style={[
                 styles.badge,
                 {
-                  backgroundColor: isV3
-                    ? MD3Colors.primary80
-                    : MD2Colors.blue500,
+                  backgroundColor: Colors.primary80,
                 },
               ]}
             >
@@ -59,11 +54,11 @@ const BadgeExample = () => {
         <View style={styles.row}>
           <View style={styles.item}>
             <IconButton icon="book-open" size={36} style={styles.button} />
-            <Badge visible={visible} style={styles.badge} size={isV3 ? 6 : 8} />
+            <Badge visible={visible} style={styles.badge} size={6} />
           </View>
           <View style={styles.item}>
             <IconButton icon="receipt" size={36} style={styles.button} />
-            <Badge visible={visible} style={styles.badge} size={isV3 ? 6 : 8} />
+            <Badge visible={visible} style={styles.badge} size={6} />
           </View>
         </View>
       </List.Section>

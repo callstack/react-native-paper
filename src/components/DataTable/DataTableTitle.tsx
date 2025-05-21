@@ -3,6 +3,7 @@ import {
   Animated,
   GestureResponderEvent,
   I18nManager,
+  PixelRatio,
   Pressable,
   StyleProp,
   StyleSheet,
@@ -91,7 +92,9 @@ const DataTableTitle = ({
   maxFontSizeMultiplier,
   ...rest
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
+  const {
+    colors: { onSurface },
+  } = useInternalTheme(themeOverrides);
   const { current: spinAnim } = React.useRef<Animated.Value>(
     new Animated.Value(sortDirection === 'ascending' ? 0 : 1)
   );
@@ -104,9 +107,7 @@ const DataTableTitle = ({
     }).start();
   }, [sortDirection, spinAnim]);
 
-  const textColor = theme.isV3 ? theme.colors.onSurface : theme?.colors?.text;
-
-  const alphaTextColor = color(textColor).alpha(0.6).rgb().string();
+  const alphaTextColor = color(onSurface).alpha(0.6).rgb().string();
 
   const spin = spinAnim.interpolate({
     inputRange: [0, 1],
@@ -118,7 +119,7 @@ const DataTableTitle = ({
       <MaterialCommunityIcon
         name="arrow-up"
         size={16}
-        color={textColor}
+        color={onSurface}
         direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
       />
     </Animated.View>
@@ -137,7 +138,7 @@ const DataTableTitle = ({
         style={[
           styles.cell,
           // height must scale with numberOfLines
-          { maxHeight: 24 * numberOfLines },
+          { maxHeight: 24 * PixelRatio.getFontScale() * numberOfLines },
           // if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
           numberOfLines > 1
             ? numeric

@@ -12,20 +12,16 @@ import { act, fireEvent, render } from '@testing-library/react-native';
 import Dialog from '../../components/Dialog/Dialog';
 import Button from '../Button/Button';
 
-jest.mock('react-native-safe-area-context', () => ({
-  useSafeAreaInsets: () => ({ bottom: 44, left: 0, right: 0, top: 37 }),
-}));
-
-jest.mock('react-native/Libraries/Utilities/BackHandler', () =>
-  // eslint-disable-next-line jest/no-mocks-import
-  require('react-native/Libraries/Utilities/__mocks__/BackHandler')
-);
-
 interface BackHandlerStatic extends RNBackHandlerStatic {
   mockPressBack(): void;
 }
 
 const BackHandler = RNBackHandler as BackHandlerStatic;
+
+jest.mock('react-native/Libraries/Utilities/BackHandler', () =>
+  // eslint-disable-next-line jest/no-mocks-import
+  require('../../utils/__mocks__/BackHandler')
+);
 
 describe('Dialog', () => {
   it('should render passed children', () => {
@@ -99,7 +95,7 @@ describe('Dialog', () => {
     expect(onDismiss).toHaveBeenCalledTimes(1);
   });
 
-  it('should apply top margin to the first child if the dialog is V3', () => {
+  it('should apply top margin to the first child', () => {
     const { getByTestId } = render(
       <Dialog visible={true}>
         <Dialog.Title testID="dialog-content">

@@ -15,12 +15,12 @@ import { getDisabledSegmentedButtonStyle } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 
-type ConditionalValue =
+type ConditionalValue<T extends string = string> =
   | {
       /**
        * Array of the currently selected segmented button values.
        */
-      value: string[];
+      value: T[];
       /**
        * Support multiple selected options.
        */
@@ -28,13 +28,13 @@ type ConditionalValue =
       /**
        * Function to execute on selection change
        */
-      onValueChange: (value: string[]) => void;
+      onValueChange: (value: T[]) => void;
     }
   | {
       /**
        * Value of the currently selected segmented button.
        */
-      value: string;
+      value: T;
       /**
        * Support multiple selected options.
        */
@@ -42,10 +42,10 @@ type ConditionalValue =
       /**
        * Function to execute on selection change
        */
-      onValueChange: (value: string) => void;
+      onValueChange: (value: T) => void;
     };
 
-export type Props = {
+export type Props<T extends string = string> = {
   /**
    * Buttons to display as options in toggle button.
    * Button should contain the following properties:
@@ -62,7 +62,7 @@ export type Props = {
    * - `testID`: testID to be used on tests
    */
   buttons: {
-    value: string;
+    value: T;
     icon?: IconSource;
     disabled?: boolean;
     accessibilityLabel?: string;
@@ -81,7 +81,7 @@ export type Props = {
   density?: 'regular' | 'small' | 'medium' | 'high';
   style?: StyleProp<ViewStyle>;
   theme?: ThemeProp;
-} & ConditionalValue;
+} & ConditionalValue<T>;
 
 /**
  * Segmented buttons can be used to select options, switch views or sort elements.</br>
@@ -126,7 +126,7 @@ export type Props = {
  * export default MyComponent;
  *```
  */
-const SegmentedButtons = ({
+const SegmentedButtons = <T extends string = string>({
   value,
   onValueChange,
   buttons,
@@ -134,7 +134,7 @@ const SegmentedButtons = ({
   density,
   style,
   theme: themeOverrides,
-}: Props) => {
+}: Props<T>) => {
   const theme = useInternalTheme(themeOverrides);
 
   return (

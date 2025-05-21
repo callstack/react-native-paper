@@ -7,11 +7,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useInternalTheme } from '../../core/theming';
-import type { MD3TypescaleKey, ThemeProp } from '../../types';
+import type { TypescaleKey, ThemeProp } from '../../types';
 import Text from '../Typography/Text';
-import Caption from '../Typography/v2/Caption';
-import Title from '../Typography/v2/Title';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
@@ -42,7 +39,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
-  titleVariant?: keyof typeof MD3TypescaleKey;
+  titleVariant?: keyof typeof TypescaleKey;
   /**
    * Text for the subtitle. Note that this will only accept a string or `<Text>`-based node.
    */
@@ -71,7 +68,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
-  subtitleVariant?: keyof typeof MD3TypescaleKey;
+  subtitleVariant?: keyof typeof TypescaleKey;
   /**
    * Callback which returns a React element to display on the left side.
    */
@@ -149,12 +146,7 @@ const CardTitle = ({
   right,
   rightStyle,
   style,
-  theme: themeOverrides,
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
-  const TitleComponent = theme.isV3 ? Text : Title;
-  const SubtitleComponent = theme.isV3 ? Text : Caption;
-
   const minHeight = subtitle || left || right ? 72 : 50;
   const marginBottom = subtitle ? 0 : 2;
 
@@ -170,24 +162,24 @@ const CardTitle = ({
 
       <View style={[styles.titles]}>
         {title && (
-          <TitleComponent
+          <Text
             style={[styles.title, { marginBottom }, titleStyle]}
             numberOfLines={titleNumberOfLines}
             variant={titleVariant}
             maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
           >
             {title}
-          </TitleComponent>
+          </Text>
         )}
         {subtitle && (
-          <SubtitleComponent
+          <Text
             style={[styles.subtitle, subtitleStyle]}
             numberOfLines={subtitleNumberOfLines}
             variant={subtitleVariant}
             maxFontSizeMultiplier={subtitleMaxFontSizeMultiplier}
           >
             {subtitle}
-          </SubtitleComponent>
+          </Text>
         )}
       </View>
       <View style={rightStyle}>{right ? right({ size: 24 }) : null}</View>

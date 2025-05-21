@@ -122,7 +122,6 @@ exports[`renders button with an accessibility hint 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 12,
                   },
@@ -273,7 +272,6 @@ exports[`renders button with an accessibility label 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 12,
                   },
@@ -307,7 +305,7 @@ exports[`renders button with button color 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "#e91e63",
+      "backgroundColor": "rgba(152, 105, 119, 1)",
       "borderRadius": 20,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -324,7 +322,7 @@ exports[`renders button with button color 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "#e91e63",
+        "backgroundColor": "rgba(152, 105, 119, 1)",
         "borderColor": "transparent",
         "borderRadius": 20,
         "borderStyle": "solid",
@@ -423,7 +421,6 @@ exports[`renders button with button color 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 12,
                   },
@@ -573,14 +570,13 @@ exports[`renders button with color 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 12,
                   },
                   undefined,
                   false,
                   {
-                    "color": "#e91e63",
+                    "color": "rgba(152, 105, 119, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,
                     "fontWeight": "500",
@@ -723,7 +719,6 @@ exports[`renders button with custom testID 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 12,
                   },
@@ -868,7 +863,6 @@ exports[`renders button with icon 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -891,16 +885,10 @@ exports[`renders button with icon 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰄀
+            camera
           </Text>
         </View>
         <Text
@@ -929,7 +917,6 @@ exports[`renders button with icon 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 16,
                   },
@@ -1076,7 +1063,6 @@ exports[`renders button with icon in reverse order 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -1099,16 +1085,10 @@ exports[`renders button with icon in reverse order 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰅂
+            chevron-right
           </Text>
         </View>
         <Text
@@ -1137,7 +1117,6 @@ exports[`renders button with icon in reverse order 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 16,
                   },
@@ -1287,7 +1266,6 @@ exports[`renders contained contained with mode 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 24,
                     "marginVertical": 10,
@@ -1438,7 +1416,6 @@ exports[`renders disabled button 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 12,
                   },
@@ -1606,15 +1583,17 @@ exports[`renders loading button 1`] = `
             <View
               collapsable={false}
               style={
-                {
-                  "alignItems": "center",
-                  "bottom": 0,
-                  "justifyContent": "center",
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                }
+                [
+                  {
+                    "alignItems": "center",
+                    "bottom": 0,
+                    "justifyContent": "center",
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                ]
               }
             >
               <View
@@ -1634,11 +1613,14 @@ exports[`renders loading button 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "height": 9,
-                      "overflow": "hidden",
-                      "width": 18,
-                    }
+                    [
+                      {
+                        "height": 9,
+                        "overflow": "hidden",
+                        "width": 18,
+                      },
+                      null,
+                    ]
                   }
                 >
                   <View
@@ -1688,15 +1670,17 @@ exports[`renders loading button 1`] = `
             <View
               collapsable={false}
               style={
-                {
-                  "alignItems": "center",
-                  "bottom": 0,
-                  "justifyContent": "center",
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                }
+                [
+                  {
+                    "alignItems": "center",
+                    "bottom": 0,
+                    "justifyContent": "center",
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                ]
               }
             >
               <View
@@ -1716,12 +1700,16 @@ exports[`renders loading button 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "height": 9,
-                      "overflow": "hidden",
-                      "top": 9,
-                      "width": 18,
-                    }
+                    [
+                      {
+                        "height": 9,
+                        "overflow": "hidden",
+                        "width": 18,
+                      },
+                      {
+                        "top": 9,
+                      },
+                    ]
                   }
                 >
                   <View
@@ -1796,7 +1784,6 @@ exports[`renders loading button 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 16,
                   },
@@ -1902,7 +1889,7 @@ exports[`renders outlined button with mode 1`] = `
             "overflow": "hidden",
           },
           {
-            "borderRadius": 20,
+            "borderRadius": 19,
           },
         ]
       }
@@ -1946,7 +1933,6 @@ exports[`renders outlined button with mode 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 24,
                     "marginVertical": 10,
@@ -2097,7 +2083,6 @@ exports[`renders text button by default 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 12,
                   },
@@ -2247,7 +2232,6 @@ exports[`renders text button with mode 1`] = `
                     "marginVertical": 9,
                     "textAlign": "center",
                   },
-                  false,
                   {
                     "marginHorizontal": 12,
                   },

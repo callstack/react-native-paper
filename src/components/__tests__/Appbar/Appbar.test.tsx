@@ -1,26 +1,21 @@
 import React from 'react';
-import { Animated, Platform } from 'react-native';
+import { Animated } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { act, render } from '@testing-library/react-native';
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 
-import PaperProvider from '../../../core/PaperProvider';
 import { getTheme } from '../../../core/theming';
-import overlay from '../../../styles/overlay';
-import { tokens } from '../../../styles/themes/v3/tokens';
+import { tokens } from '../../../styles/themes/tokens';
 import Appbar from '../../Appbar';
 import {
   getAppbarBackgroundColor,
-  modeTextVariant,
   getAppbarBorders,
+  modeTextVariant,
   renderAppbarContent as utilRenderAppbarContent,
 } from '../../Appbar/utils';
 import Menu from '../../Menu/Menu';
 import Searchbar from '../../Searchbar';
-import Tooltip from '../../Tooltip/Tooltip';
 import Text from '../../Typography/Text';
-
-jest.mock('react-native-safe-area-context', () => mockSafeAreaContext);
 
 const renderAppbarContent = utilRenderAppbarContent as (
   props: Parameters<typeof utilRenderAppbarContent>[0]
@@ -60,7 +55,6 @@ describe('renderAppbarContent', () => {
 
   it('should render all children types if renderOnly is not specified', () => {
     const result = renderAppbarContent({
-      isV3: false,
       children,
       isDark: false,
     });
@@ -70,7 +64,6 @@ describe('renderAppbarContent', () => {
 
   it('should render all children types except specified in renderExcept', () => {
     const result = renderAppbarContent({
-      isV3: false,
       children: [
         ...children,
         <Menu
@@ -95,7 +88,6 @@ describe('renderAppbarContent', () => {
 
   it('should render only children types specifed in renderOnly', () => {
     const result = renderAppbarContent({
-      isV3: false,
       children,
       isDark: false,
       renderOnly: ['Appbar.Action'],
@@ -106,7 +98,6 @@ describe('renderAppbarContent', () => {
 
   it('should render AppbarContent with correct mode', () => {
     const result = renderAppbarContent({
-      isV3: false,
       children,
       isDark: false,
       renderOnly: ['Appbar.Content'],
@@ -117,11 +108,10 @@ describe('renderAppbarContent', () => {
   });
 
   it('should render centered AppbarContent', () => {
-    const renderResult = (isV3 = true) =>
+    const renderResult = () =>
       renderAppbarContent({
         children,
         isDark: false,
-        isV3,
         renderOnly: ['Appbar.Content'],
         mode: 'center-aligned',
         shouldCenterContent: true,
@@ -134,80 +124,25 @@ describe('renderAppbarContent', () => {
     expect(renderResult()[0].props.style).toEqual(
       expect.arrayContaining([expect.objectContaining(centerAlignedContent)])
     );
-
-    expect(renderResult(false)[0].props.style).toEqual(
-      expect.arrayContaining([expect.objectContaining(centerAlignedContent)])
-    );
-  });
-
-  it('should not render centered AppbarContent for Android, if not V3', () => {
-    Platform.OS = 'android';
-    const renderResult = (isV3 = true) =>
-      renderAppbarContent({
-        children,
-        isDark: false,
-        isV3,
-        renderOnly: ['Appbar.Content'],
-        mode: 'center-aligned',
-        shouldCenterContent: !isV3 && Platform.OS === 'ios',
-      });
-
-    const centerAlignedContent = {
-      alignItems: 'center',
-    };
-
-    expect(renderResult(false)[0].props.style).not.toEqual(
-      expect.arrayContaining([expect.objectContaining(centerAlignedContent)])
-    );
-  });
-
-  it('should render centered AppbarContent always for iOS, if not V3', () => {
-    Platform.OS = 'ios';
-    const renderResult = (isV3 = true) =>
-      renderAppbarContent({
-        children,
-        isDark: false,
-        isV3,
-        renderOnly: ['Appbar.Content'],
-        mode: 'center-aligned',
-        shouldCenterContent: !isV3 && Platform.OS === 'ios',
-      });
-
-    const centerAlignedContent = {
-      alignItems: 'center',
-    };
-
-    expect(renderResult(false)[0].props.style).toEqual(
-      expect.arrayContaining([expect.objectContaining(centerAlignedContent)])
-    );
   });
 
   it('should render AppbarContent with correct spacings', () => {
-    const renderResult = (isV3 = true, withAppbarBackAction = false) =>
+    const renderResult = (withAppbarBackAction = false) =>
       renderAppbarContent({
         children,
         isDark: false,
-        isV3,
         renderOnly: [
           'Appbar.Content',
           withAppbarBackAction && 'Appbar.BackAction',
         ],
       });
 
-    const v2Spacing = {
-      marginLeft: 8,
-    };
-
-    const v3Spacing = {
+    const spacing = {
       marginLeft: 12,
     };
 
     expect(renderResult()[0].props.style).toEqual(
-      expect.arrayContaining([expect.objectContaining(v3Spacing)])
-    );
-
-    expect(renderResult(false, true)[1].props.style).toEqual(
-      expect.arrayContaining([expect.objectContaining(v2Spacing)])
+      expect.arrayContaining([expect.objectContaining(spacing)])
     );
   });
 
@@ -231,10 +166,9 @@ describe('renderAppbarContent', () => {
       </mockSafeAreaContext.SafeAreaProvider>
     );
 
-    expect(getByTestId('appbar-content').props.accessibilityRole).toEqual([
-      'button',
-      'header',
-    ]);
+    expect(getByTestId('appbar-content').props.accessibilityRole).toEqual(
+      'button'
+    );
     expect(
       getByTestId('appbar-content').props.accessibilityState || {}
     ).not.toMatchObject({ disabled: true });
@@ -251,10 +185,9 @@ describe('renderAppbarContent', () => {
       </mockSafeAreaContext.SafeAreaProvider>
     );
 
-    expect(getByTestId('appbar-content').props.accessibilityRole).toEqual([
-      'button',
-      'header',
-    ]);
+    expect(getByTestId('appbar-content').props.accessibilityRole).toEqual(
+      'button'
+    );
     expect(
       getByTestId('appbar-content').props.accessibilityState
     ).toMatchObject({ disabled: true });
@@ -325,40 +258,6 @@ describe('AppbarAction', () => {
       .children;
     expect(appbarBackActionIcon.props.color).toBe('purple');
   });
-
-  describe('When V2', () => {
-    const theme = { isV3: false };
-
-    it('should be rendered with the right color when no color is passed', () => {
-      const { getByTestId } = render(
-        <Appbar theme={theme}>
-          <Appbar.Action icon="menu" testID="appbar-action" />
-        </Appbar>
-      );
-
-      const appbarActionIcon = getByTestId('cross-fade-icon-current').props
-        .children;
-
-      expect(appbarActionIcon.props.color).toBe('#ffffff');
-    });
-
-    it('should be rendered with the right color when no color is passed but is wrapped by a Tooltip', () => {
-      const { getByTestId } = render(
-        <PaperProvider>
-          <Appbar theme={theme}>
-            <Tooltip title="Menu">
-              <Appbar.Action icon="menu" testID="appbar-action" />
-            </Tooltip>
-          </Appbar>
-        </PaperProvider>
-      );
-
-      const appbarActionIcon = getByTestId('cross-fade-icon-current').props
-        .children;
-
-      expect(appbarActionIcon.props.color).toBe('#ffffff');
-    });
-  });
 });
 
 describe('AppbarContent', () => {
@@ -394,36 +293,23 @@ describe('AppbarContent', () => {
 });
 
 describe('getAppbarColors', () => {
-  const elevation = 4;
   const customBackground = 'aquamarine';
 
   it('should return custom color no matter what is the theme version', () => {
-    expect(
-      getAppbarBackgroundColor(getTheme(), elevation, customBackground)
-    ).toBe(customBackground);
+    expect(getAppbarBackgroundColor(getTheme(), customBackground)).toBe(
+      customBackground
+    );
   });
 
-  it('should return v3 light color if theme version is 3', () => {
-    expect(getAppbarBackgroundColor(getTheme(), elevation)).toBe(
+  it('should return default light color', () => {
+    expect(getAppbarBackgroundColor(getTheme())).toBe(
       tokens.md.ref.palette.neutral99
     );
   });
 
-  it('should return v3 dark color if theme version is 3', () => {
-    expect(getAppbarBackgroundColor(getTheme(true), elevation)).toBe(
+  it('should return default dark color', () => {
+    expect(getAppbarBackgroundColor(getTheme(true))).toBe(
       tokens.md.ref.palette.neutral10
-    );
-  });
-
-  it('should return v2 light color if theme version is 2', () => {
-    expect(getAppbarBackgroundColor(getTheme(false, false), elevation)).toBe(
-      '#6200ee'
-    );
-  });
-
-  it('should return v2 dark color if theme version is 2', () => {
-    expect(getAppbarBackgroundColor(getTheme(true, false), elevation)).toBe(
-      overlay(elevation, '#121212')
     );
   });
 });
@@ -446,7 +332,9 @@ describe('animated value changes correctly', () => {
       duration: 200,
     }).start();
 
-    jest.advanceTimersByTime(200);
+    act(() => {
+      jest.advanceTimersByTime(200);
+    });
 
     expect(getByTestId('appbar-outer-layer')).toHaveStyle({
       transform: [{ scale: 1.5 }],
@@ -474,7 +362,9 @@ describe('animated value changes correctly', () => {
       duration: 200,
     }).start();
 
-    jest.advanceTimersByTime(200);
+    act(() => {
+      jest.advanceTimersByTime(200);
+    });
 
     expect(getByTestId('appbar-action-container-outer-layer')).toHaveStyle({
       transform: [{ scale: 1.5 }],
@@ -503,7 +393,9 @@ describe('animated value changes correctly', () => {
       duration: 200,
     }).start();
 
-    jest.advanceTimersByTime(200);
+    act(() => {
+      jest.advanceTimersByTime(200);
+    });
 
     expect(getByTestId('appbar-back-action-container-outer-layer')).toHaveStyle(
       {
@@ -534,7 +426,9 @@ describe('animated value changes correctly', () => {
       duration: 200,
     }).start();
 
-    jest.advanceTimersByTime(200);
+    act(() => {
+      jest.advanceTimersByTime(200);
+    });
 
     expect(getByTestId('appbar-header-outer-layer')).toHaveStyle({
       transform: [{ scale: 1.5 }],

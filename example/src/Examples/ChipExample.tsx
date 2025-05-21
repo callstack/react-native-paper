@@ -2,25 +2,17 @@ import * as React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
 import color from 'color';
-import {
-  Chip,
-  List,
-  MD2Colors,
-  MD3Colors,
-  Snackbar,
-  Text,
-} from 'react-native-paper';
+import { Chip, List, Colors, Snackbar, Text } from 'react-native-paper';
 
-import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
+
+const customColor = Colors.error50;
 
 const ChipExample = () => {
   const [snackbarProperties, setSnackbarProperties] = React.useState({
     visible: false,
     text: '',
   });
-  const { isV3 } = useExampleTheme();
-  const customColor = isV3 ? MD3Colors.error50 : MD2Colors.purple900;
 
   return (
     <>
@@ -30,24 +22,20 @@ const ChipExample = () => {
             <Chip selected onPress={() => {}} style={styles.chip}>
               Simple
             </Chip>
-            {isV3 && (
-              <>
-                <Chip
-                  selected
-                  showSelectedOverlay
-                  onPress={() => {}}
-                  style={styles.chip}
-                >
-                  With selected overlay
-                </Chip>
-                <Chip elevated onPress={() => {}} style={styles.chip}>
-                  Elevated
-                </Chip>
-                <Chip compact style={styles.chip} onPress={() => {}}>
-                  Compact chip
-                </Chip>
-              </>
-            )}
+            <Chip
+              selected
+              showSelectedOverlay
+              onPress={() => {}}
+              style={styles.chip}
+            >
+              With selected overlay
+            </Chip>
+            <Chip elevated onPress={() => {}} style={styles.chip}>
+              Elevated
+            </Chip>
+            <Chip compact style={styles.chip} onPress={() => {}}>
+              Compact chip
+            </Chip>
             <Chip
               onPress={() => {}}
               onClose={() =>
@@ -137,35 +125,31 @@ const ChipExample = () => {
             <Chip mode="outlined" onPress={() => {}} style={styles.chip}>
               Simple
             </Chip>
-            {isV3 && (
-              <>
-                <Chip
-                  mode="outlined"
-                  selected
-                  showSelectedOverlay
-                  onPress={() => {}}
-                  style={styles.chip}
-                >
-                  With selected overlay
-                </Chip>
-                <Chip
-                  mode="outlined"
-                  elevated
-                  onPress={() => {}}
-                  style={styles.chip}
-                >
-                  Elevated
-                </Chip>
-                <Chip
-                  mode="outlined"
-                  compact
-                  onPress={() => {}}
-                  style={styles.chip}
-                >
-                  Compact chip
-                </Chip>
-              </>
-            )}
+            <Chip
+              mode="outlined"
+              selected
+              showSelectedOverlay
+              onPress={() => {}}
+              style={styles.chip}
+            >
+              With selected overlay
+            </Chip>
+            <Chip
+              mode="outlined"
+              elevated
+              onPress={() => {}}
+              style={styles.chip}
+            >
+              Elevated
+            </Chip>
+            <Chip
+              mode="outlined"
+              compact
+              onPress={() => {}}
+              style={styles.chip}
+            >
+              Compact chip
+            </Chip>
             <Chip
               mode="outlined"
               onPress={() => {}}
@@ -251,38 +235,34 @@ const ChipExample = () => {
         </List.Section>
         <List.Section title="Custom chip">
           <View style={styles.row}>
-            {isV3 && (
-              <>
-                <Chip
-                  mode="outlined"
-                  onPress={() => {}}
-                  compact
-                  avatar={
-                    <Image
-                      source={require('../../assets/images/avatar.png')}
-                      accessibilityIgnoresInvertColors
-                    />
-                  }
-                  style={[styles.chip, styles.customBorderRadius]}
-                >
-                  Compact with custom border radius
-                </Chip>
-                <Chip
-                  mode="flat"
-                  onPress={() => {}}
-                  compact
-                  avatar={
-                    <Image
-                      source={require('../../assets/images/avatar.png')}
-                      accessibilityIgnoresInvertColors
-                    />
-                  }
-                  style={[styles.chip, styles.customBorderRadius]}
-                >
-                  Compact with custom border radius
-                </Chip>
-              </>
-            )}
+            <Chip
+              mode="outlined"
+              onPress={() => {}}
+              compact
+              avatar={
+                <Image
+                  source={require('../../assets/images/avatar.png')}
+                  accessibilityIgnoresInvertColors
+                />
+              }
+              style={[styles.chip, styles.customBorderRadius]}
+            >
+              Compact with custom border radius
+            </Chip>
+            <Chip
+              mode="flat"
+              onPress={() => {}}
+              compact
+              avatar={
+                <Image
+                  source={require('../../assets/images/avatar.png')}
+                  accessibilityIgnoresInvertColors
+                />
+              }
+              style={[styles.chip, styles.customBorderRadius]}
+            >
+              Compact with custom border radius
+            </Chip>
             <Chip
               mode="outlined"
               onPress={() => {}}

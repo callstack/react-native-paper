@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  Platform,
   StyleProp,
   StyleSheet,
   View,
@@ -9,18 +8,17 @@ import {
   ColorValue,
 } from 'react-native';
 
-import color from 'color';
-
 import AppbarContent from './AppbarContent';
 import {
   AppbarModes,
-  DEFAULT_APPBAR_HEIGHT,
   getAppbarBackgroundColor,
   modeAppbarHeight,
   renderAppbarContent,
+  filterAppbarActions,
+  AppbarChildProps,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { MD3Elevation, ThemeProp } from '../../types';
+import type { Elevation, ThemeProp } from '../../types';
 import Surface from '../Surface';
 
 export type Props = Omit<
@@ -163,11 +161,10 @@ const Appbar = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { isV3 } = theme;
   const flattenedStyle = StyleSheet.flatten(style);
   const {
     backgroundColor: customBackground,
-    elevation = isV3 ? (elevated ? 2 : 0) : 4,
+    elevation = elevated ? 2 : 0,
     ...restStyle
   } = (flattenedStyle || {}) as Exclude<typeof flattenedStyle, number> & {
     elevation?: number;
@@ -176,68 +173,51 @@ const Appbar = ({
 
   const backgroundColor = getAppbarBackgroundColor(
     theme,
-    elevation,
     customBackground,
     elevated
   );
 
   const isMode = (modeToCompare: AppbarModes) => {
-    return isV3 && mode === modeToCompare;
+    return mode === modeToCompare;
   };
 
   let isDark = false;
 
   if (typeof dark === 'boolean') {
     isDark = dark;
-  } else if (!isV3) {
-    isDark =
-      backgroundColor === 'transparent'
-        ? false
-        : typeof backgroundColor === 'string'
-        ? !color(backgroundColor).isLight()
-        : true;
   }
 
-  const isV3CenterAlignedMode = isV3 && isMode('center-aligned');
+  const isCenterAlignedMode = isMode('center-aligned');
 
   let shouldCenterContent = false;
   let shouldAddLeftSpacing = false;
   let shouldAddRightSpacing = false;
-  if ((!isV3 && Platform.OS === 'ios') || isV3CenterAlignedMode) {
+  if (isCenterAlignedMode) {
     let hasAppbarContent = false;
     let leftItemsCount = 0;
     let rightItemsCount = 0;
 
     React.Children.forEach(children, (child) => {
-      if (React.isValidElement(child)) {
+      if (React.isValidElement<AppbarChildProps>(child)) {
+        const isLeading = child.props.isLeading === true;
+
         if (child.type === AppbarContent) {
           hasAppbarContent = true;
-        } else if (hasAppbarContent) {
-          rightItemsCount++;
-        } else {
+        } else if (isLeading || !hasAppbarContent) {
           leftItemsCount++;
+        } else {
+          rightItemsCount++;
         }
       }
     });
 
     shouldCenterContent =
-      hasAppbarContent &&
-      leftItemsCount < 2 &&
-      rightItemsCount < (isV3 ? 3 : 2);
+      hasAppbarContent && leftItemsCount < 2 && rightItemsCount < 3;
     shouldAddLeftSpacing = shouldCenterContent && leftItemsCount === 0;
     shouldAddRightSpacing = shouldCenterContent && rightItemsCount === 0;
   }
 
-  const filterAppbarActions = React.useCallback(
-    (isLeading = false) =>
-      React.Children.toArray(children).filter((child) =>
-        // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
-        isLeading ? child.props.isLeading : !child.props.isLeading
-      ),
-    [children]
-  );
-
-  const spacingStyle = isV3 ? styles.v3Spacing : styles.spacing;
+  const spacingStyle = styles.spacing;
 
   const insets = {
     paddingBottom: safeAreaInsets?.bottom,
@@ -252,24 +232,40 @@ const Appbar = ({
         { backgroundColor },
         styles.appbar,
         {
-          height: isV3 ? modeAppbarHeight[mode] : DEFAULT_APPBAR_HEIGHT,
+          height: modeAppbarHeight[mode],
         },
         insets,
         restStyle,
-        !theme.isV3 && { elevation },
       ]}
-      elevation={elevation as MD3Elevation}
+      elevation={elevation as Elevation}
+      container
       {...rest}
     >
       {shouldAddLeftSpacing ? <View style={spacingStyle} /> : null}
-      {(!isV3 || isMode('small') || isMode('center-aligned')) &&
-        renderAppbarContent({
-          children,
-          isDark,
-          theme,
-          isV3,
-          shouldCenterContent: isV3CenterAlignedMode || shouldCenterContent,
-        })}
+      {(isMode('small') || isMode('center-aligned')) && (
+        <>
+          {/* Render only the back action at first place  */}
+          {renderAppbarContent({
+            children,
+            isDark,
+            theme,
+            renderOnly: ['Appbar.BackAction'],
+            shouldCenterContent: isCenterAlignedMode || shouldCenterContent,
+          })}
+          {/* Render the rest of the content except the back action */}
+          {renderAppbarContent({
+            // Filter appbar actions - first leading icons, then trailing icons
+            children: [
+              ...filterAppbarActions(children, true),
+              ...filterAppbarActions(children),
+            ],
+            isDark,
+            theme,
+            renderExcept: ['Appbar.BackAction'],
+            shouldCenterContent: isCenterAlignedMode || shouldCenterContent,
+          })}
+        </>
+      )}
       {(isMode('medium') || isMode('large')) && (
         <View
           style={[
@@ -283,23 +279,20 @@ const Appbar = ({
             {renderAppbarContent({
               children,
               isDark,
-              isV3,
               renderOnly: ['Appbar.BackAction'],
               mode,
             })}
             {renderAppbarContent({
-              children: filterAppbarActions(true),
+              children: filterAppbarActions(children, true),
               isDark,
-              isV3,
               renderOnly: ['Appbar.Action'],
               mode,
             })}
             {/* Right side of row container, can contain other AppbarAction if they are not leading icons */}
             <View style={styles.rightActionControls}>
               {renderAppbarContent({
-                children: filterAppbarActions(false),
+                children: filterAppbarActions(children),
                 isDark,
-                isV3,
                 renderExcept: [
                   'Appbar',
                   'Appbar.BackAction',
@@ -310,11 +303,9 @@ const Appbar = ({
               })}
             </View>
           </View>
-          {/* Middle of the row, can contain only AppbarContent */}
           {renderAppbarContent({
             children,
             isDark,
-            isV3,
             renderOnly: ['Appbar.Content'],
             mode,
           })}
@@ -332,9 +323,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
   },
   spacing: {
-    width: 48,
-  },
-  v3Spacing: {
     width: 52,
   },
   controlsRow: {

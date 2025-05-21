@@ -1,36 +1,22 @@
 import * as React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
-import {
-  MD3Elevation,
-  Surface,
-  Text,
-  MD3Colors,
-  List,
-} from 'react-native-paper';
+import { Elevation, Surface, Text, Colors, List } from 'react-native-paper';
 
-import { useExampleTheme } from '..';
 import ScreenWrapper from '../ScreenWrapper';
 
 const SurfaceExample = () => {
-  const { isV3 } = useExampleTheme();
-  const v2Elevation = [1, 2, 4, 8, 12];
-  const elevationValues = isV3 ? Array.from({ length: 6 }) : v2Elevation;
+  const elevationValues = Array.from({ length: 6 });
 
   const renderSurface = (index: number, mode: 'flat' | 'elevated') => (
     <Surface
       key={index}
-      style={[
-        styles.surface,
-        isV3 ? styles.v3Surface : { elevation: v2Elevation[index] },
-      ]}
+      style={styles.surface}
       mode={mode}
-      {...(isV3 && { elevation: index as MD3Elevation })}
+      elevation={index as Elevation}
     >
       <Text variant="bodyLarge">
-        {isV3
-          ? `Elevation ${index === 1 ? '(default)' : ''} ${index}`
-          : `${elevationValues[index]}`}
+        `Elevation ${index === 1 ? '(default)' : ''} ${index}`
       </Text>
     </Surface>
   );
@@ -82,25 +68,18 @@ const styles = StyleSheet.create({
   },
   surface: {
     margin: 24,
-    height: 80,
-    width: 80,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  v3Surface: {
     borderRadius: 16,
     height: 200,
     width: 200,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-
   horizontalSurfacesContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
     marginBottom: 20,
-    borderColor: MD3Colors.tertiary50,
+    borderColor: Colors.tertiary50,
     padding: 10,
     borderWidth: 1,
   },
@@ -113,7 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     marginBottom: 100,
-    borderColor: MD3Colors.tertiary50,
+    borderColor: Colors.tertiary50,
     padding: 10,
     borderWidth: 1,
   },
