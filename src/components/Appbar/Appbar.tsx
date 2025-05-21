@@ -69,9 +69,6 @@ export type Props = Omit<
  * The top bar usually contains the screen title, controls such as navigation buttons, menu button etc.
  * The bottom bar usually provides access to a drawer and up to four actions.
  *
- * By default Appbar uses primary color as a background, in dark theme with `adaptive` mode it will use surface colour instead.
- * See [Dark Theme](https://callstack.github.io/react-native-paper/docs/guides/theming#dark-theme) for more informations
- *
  * ## Usage
  * ### Top bar
  * ```js
