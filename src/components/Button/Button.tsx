@@ -54,11 +54,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   compact?: boolean;
   /**
-   * @deprecated Deprecated in v5.x - use `buttonColor` or `textColor` instead.
-   * Custom text color for flat button, or background color for contained button.
-   */
-  color?: string;
-  /**
    * Custom button's background color.
    */
   buttonColor?: string;
