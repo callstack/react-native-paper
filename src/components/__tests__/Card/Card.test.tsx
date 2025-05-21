@@ -100,13 +100,13 @@ describe('Card', () => {
     });
   });
   it('does render a disabled accessibility state', () => {
-    const { getByA11yState } = render(
-      <Card onPress={() => {}} disabled>
+    const { getByTestId } = render(
+      <Card onPress={() => {}} disabled testID="card">
         {null}
       </Card>
     );
 
-    expect(getByA11yState({ disabled: true })).toBeOnTheScreen();
+    expect(getByTestId('card')).toBeDisabled();
   });
 });
 

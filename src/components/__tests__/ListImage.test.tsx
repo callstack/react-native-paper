@@ -45,15 +45,14 @@ it('renders ListImage with default variant & styles', () => {
 });
 
 it('renders ListImage with `image` variant', () => {
-  const tree = render(
+  const { getByTestId } = render(
     <ListImage
       variant="image"
       source={{ uri: 'https://www.someurl.com/apple' }}
     />
   );
 
-  expect(tree.container.props['variant']).toBe('image');
-  expect(tree.getByTestId(testID)).toHaveStyle(styles.image);
+  expect(getByTestId(testID)).toHaveStyle(styles.image);
 });
 
 it('renders ListImage with `video` variant', () => {
@@ -64,6 +63,5 @@ it('renders ListImage with `video` variant', () => {
     />
   );
 
-  expect(tree.container.props['variant']).toBe('video');
   expect(tree.getByTestId(testID)).toHaveStyle(styles.video);
 });

@@ -131,8 +131,7 @@ describe('DataTable.Pagination', () => {
     expect(queryByLabelText('Options Select')).toBeFalsy();
   });
 
-  // TODO: Update testing-library to work with aria-*
-  it.skip('renders data table pagination with options select', () => {
+  it('renders data table pagination with options select', () => {
     const { getByLabelText, toJSON } = render(
       <DataTable.Pagination
         page={3}

@@ -44,31 +44,28 @@ it('can render leading checkbox control', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('should have `accessibilityState={ checked: true }` when `status="checked"`', () => {
-  const { getAllByA11yState } = render(
+it('should have `aria-checked="true"` when `status="checked"`', () => {
+  const { getByRole } = render(
     <Checkbox.Item status="checked" label="Checked Button" />
   );
 
-  const elements = getAllByA11yState({ checked: true });
-  expect(elements).toHaveLength(2);
+  expect(getByRole('checkbox')).toBeChecked();
 });
 
-it('should have `accessibilityState={ checked: false }` when `status="unchecked"', () => {
-  const { getAllByA11yState } = render(
+it('should have `aria-checked="false"` when `status="unchecked"`', () => {
+  const { getByRole } = render(
     <Checkbox.Item status="unchecked" label="Unchecked Button" />
   );
 
-  const elements = getAllByA11yState({ checked: false });
-  expect(elements).toHaveLength(2);
+  expect(getByRole('checkbox')).not.toBeChecked();
 });
 
-it('should have `accessibilityState={ checked: false }` when `status="indeterminate"', () => {
-  const { getAllByA11yState } = render(
+it('should have `aria-checked="false"` when `status="indeterminate"`', () => {
+  const { getByRole } = render(
     <Checkbox.Item status="indeterminate" label="Indeterminate Button" />
   );
 
-  const elements = getAllByA11yState({ checked: false });
-  expect(elements).toHaveLength(2);
+  expect(getByRole('checkbox')).not.toBeChecked();
 });
 
 it('disables the row when the prop disabled is true', () => {
@@ -76,7 +73,7 @@ it('disables the row when the prop disabled is true', () => {
     <Checkbox.Item
       status="unchecked"
       label=""
-      aria-label="some checkbox"
+      accessibilityLabel="some checkbox"
       disabled
     />
   );
@@ -92,8 +89,10 @@ it('should have maxFontSizeMultiplier set to 1.5 by default', () => {
   const { getByTestId } = render(
     <Checkbox.Item label="" testID="checkbox-item" status="unchecked" />
   );
-  const checkboxItemText = getByTestId('checkbox-item-text');
-  expect(checkboxItemText.props.maxFontSizeMultiplier).toBe(1.5);
+
+  expect(
+    getByTestId('checkbox-item-text', { includeHiddenElements: true })
+  ).toHaveProp('maxFontSizeMultiplier', 1.5);
 });
 
 it('should execute onLongPress', () => {

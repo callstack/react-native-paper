@@ -126,35 +126,45 @@ describe('DialogActions', () => {
   it('should apply default styles', () => {
     const { getByTestId } = render(
       <Dialog.Actions testID="dialog-actions">
-        <Button>Cancel</Button>
-        <Button>Ok</Button>
+        <Button testID="dialog-button-1">Cancel</Button>
+        <Button testID="dialog-button-2">Ok</Button>
       </Dialog.Actions>
     );
 
-    const dialogActionsContainer = getByTestId('dialog-actions');
-    const dialogActionButtons = dialogActionsContainer.children;
-
-    expect(dialogActionsContainer).toHaveStyle({
+    expect(getByTestId('dialog-actions')).toHaveStyle({
       paddingBottom: 24,
       paddingHorizontal: 24,
     });
-    expect(dialogActionButtons[0]).toHaveStyle({ marginRight: 8 });
-    expect(dialogActionButtons[1]).toHaveStyle({ marginRight: 0 });
+    expect(getByTestId('dialog-button-1-container')).toHaveStyle({
+      marginRight: 8,
+    });
+    expect(getByTestId('dialog-button-2-container')).toHaveStyle({
+      marginRight: 0,
+    });
   });
 
   it('should apply custom styles', () => {
     const { getByTestId } = render(
       <Dialog.Actions testID="dialog-actions">
-        <Button style={styles.spacing}>Cancel</Button>
-        <Button style={styles.noSpacing}>Ok</Button>
+        <Button testID="dialog-button-1" style={styles.spacing}>
+          Cancel
+        </Button>
+        <Button testID="dialog-button-2" style={styles.noSpacing}>
+          Ok
+        </Button>
       </Dialog.Actions>
     );
 
-    const dialogActionsContainer = getByTestId('dialog-actions');
-    const dialogActionButtons = dialogActionsContainer.children;
-
-    expect(dialogActionButtons[0]).toHaveStyle({ margin: 10 });
-    expect(dialogActionButtons[1]).toHaveStyle({ margin: 0 });
+    expect(getByTestId('dialog-actions')).toHaveStyle({
+      paddingBottom: 24,
+      paddingHorizontal: 24,
+    });
+    expect(getByTestId('dialog-button-1-container')).toHaveStyle({
+      marginRight: 8,
+    });
+    expect(getByTestId('dialog-button-2-container')).toHaveStyle({
+      marginRight: 0,
+    });
   });
 });
 

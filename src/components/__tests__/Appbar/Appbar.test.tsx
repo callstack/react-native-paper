@@ -146,8 +146,7 @@ describe('renderAppbarContent', () => {
     );
   });
 
-  // TODO: Update testing-library to work with role
-  it.skip('Is recognized as a header when no onPress callback has been pressed', () => {
+  it('Is recognized as a header when no onPress callback has been pressed', () => {
     const { getByRole } = render(
       <mockSafeAreaContext.SafeAreaProvider>
         <Appbar.Header>
@@ -156,11 +155,10 @@ describe('renderAppbarContent', () => {
       </mockSafeAreaContext.SafeAreaProvider>
     );
 
-    expect(getByRole('header')).toBeTruthy();
+    expect(getByRole('heading')).toBeTruthy();
   });
 
-  // TODO: Refactor after testing-library update
-  it.skip('is recognized as a button when onPress callback has been passed', () => {
+  it('is recognized as a button when onPress callback has been passed', () => {
     const { getByTestId } = render(
       <mockSafeAreaContext.SafeAreaProvider>
         <Appbar.Header>
@@ -169,19 +167,14 @@ describe('renderAppbarContent', () => {
       </mockSafeAreaContext.SafeAreaProvider>
     );
 
-    expect(getByTestId('appbar-content').props.accessibilityRole).toEqual(
-      'button'
-    );
+    expect(getByTestId('appbar-content').props.role).toEqual('button');
     expect(
       getByTestId('appbar-content').props.accessibilityState || {}
     ).not.toMatchObject({ disabled: true });
-    expect(
-      getByTestId('appbar-content-title-text').props.accessibilityRole
-    ).toEqual('none');
+    expect(getByTestId('appbar-content-title-text').props.role).toEqual('none');
   });
 
-  // TODO: Refactor after testing-library update
-  it.skip('is recognized as a disabled button when onPress and disabled is passed', () => {
+  it('is recognized as a disabled button when onPress and disabled is passed', () => {
     const { getByTestId } = render(
       <mockSafeAreaContext.SafeAreaProvider>
         <Appbar.Header>
@@ -190,15 +183,11 @@ describe('renderAppbarContent', () => {
       </mockSafeAreaContext.SafeAreaProvider>
     );
 
-    expect(getByTestId('appbar-content').props.accessibilityRole).toEqual(
-      'button'
-    );
+    expect(getByTestId('appbar-content').props.role).toEqual('button');
     expect(
       getByTestId('appbar-content').props.accessibilityState
     ).toMatchObject({ disabled: true });
-    expect(
-      getByTestId('appbar-content-title-text').props.accessibilityRole
-    ).toEqual('none');
+    expect(getByTestId('appbar-content-title-text').props.role).toEqual('none');
   });
 });
 
