@@ -140,9 +140,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Sets additional distance outside of element in which a press can be detected.
    */
   hitSlop?: TouchableRippleProps['hitSlop'];
+  /**
    * Label text number Of Lines of the button.
    */
-   numberOfLines?: number;
+  numberOfLines?: number;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * Style for the button text.
