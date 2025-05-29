@@ -5,8 +5,10 @@ import { Card, IconButton, SegmentedButtons } from 'react-native-paper';
 
 import { songsData, albumsData } from '../../../utils';
 
+type MediaType = 'songs' | 'albums';
+
 const SegmentedButtonRealCase = () => {
-  const [value, setValue] = React.useState('songs');
+  const [value, setValue] = React.useState<MediaType>('songs');
 
   return (
     <View style={styles.container}>

@@ -21,11 +21,11 @@ import useAnimatedValue from '../utils/useAnimatedValue';
 
 export type Props = {
   /**
-   * Determines whether clicking outside the modal dismiss it.
+   * Determines whether clicking outside the modal dismisses it.
    */
   dismissable?: boolean;
   /**
-   * Determines whether clicking Android hardware back button dismiss dialog.
+   * Determines whether clicking Android hardware back button dismisses the dialog.
    */
   dismissableBackButton?: boolean;
   /**
@@ -69,6 +69,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 /**
  * The Modal component is a simple way to present content above an enclosing view.
  * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](./Portal) component.
+ * Note that this modal is NOT accessible by default; if you need an accessible modal, please use the React Native Modal.
  *
  * ## Usage
  * ```js
@@ -112,27 +113,13 @@ function Modal({
   testID = 'modal',
 }: Props) {
   const theme = useInternalTheme(themeOverrides);
-  const visibleRef = React.useRef(visible);
-
-  React.useEffect(() => {
-    visibleRef.current = visible;
-  });
-
   const onDismissCallback = useLatestCallback(onDismiss);
-
   const { scale } = theme.animation;
-
   const { top, bottom } = useSafeAreaInsets();
-
   const opacity = useAnimatedValue(visible ? 1 : 0);
+  const [visibleInternal, setVisibleInternal] = React.useState(visible);
 
-  const [rendered, setRendered] = React.useState(visible);
-
-  if (visible && !rendered) {
-    setRendered(true);
-  }
-
-  const showModal = React.useCallback(() => {
+  const showModalAnimation = React.useCallback(() => {
     Animated.timing(opacity, {
       toValue: 1,
       duration: scale * DEFAULT_DURATION,
@@ -141,7 +128,7 @@ function Modal({
     }).start();
   }, [opacity, scale]);
 
-  const hideModal = React.useCallback(() => {
+  const hideModalAnimation = React.useCallback(() => {
     Animated.timing(opacity, {
       toValue: 0,
       duration: scale * DEFAULT_DURATION,
@@ -152,17 +139,24 @@ function Modal({
         return;
       }
 
-      if (visible) {
-        onDismissCallback();
-      }
-
-      if (visibleRef.current) {
-        showModal();
-      } else {
-        setRendered(false);
-      }
+      setVisibleInternal(false);
     });
-  }, [onDismissCallback, opacity, scale, showModal, visible]);
+  }, [opacity, scale]);
+
+  React.useEffect(() => {
+    if (visibleInternal === visible) {
+      return;
+    }
+
+    if (!visibleInternal && visible) {
+      setVisibleInternal(true);
+      return showModalAnimation();
+    }
+
+    if (visibleInternal && !visible) {
+      return hideModalAnimation();
+    }
+  }, [visible, showModalAnimation, hideModalAnimation, visibleInternal]);
 
   React.useEffect(() => {
     if (!visible) {
@@ -171,7 +165,7 @@ function Modal({
 
     const onHardwareBackPress = () => {
       if (dismissable || dismissableBackButton) {
-        hideModal();
+        onDismissCallback();
       }
 
       return true;
@@ -183,22 +177,11 @@ function Modal({
       onHardwareBackPress
     );
     return () => subscription.remove();
-  }, [dismissable, dismissableBackButton, hideModal, visible]);
+  }, [dismissable, dismissableBackButton, onDismissCallback, visible]);
 
-  const prevVisible = React.useRef<boolean | null>(null);
-
-  React.useEffect(() => {
-    if (prevVisible.current !== visible) {
-      if (visible) {
-        showModal();
-      } else {
-        hideModal();
-      }
-    }
-    prevVisible.current = visible;
-  });
-
-  if (!rendered) return null;
+  if (!visibleInternal) {
+    return null;
+  }
 
   return (
     <Animated.View
@@ -206,14 +189,14 @@ function Modal({
       accessibilityViewIsModal
       accessibilityLiveRegion="polite"
       style={StyleSheet.absoluteFill}
-      onAccessibilityEscape={hideModal}
+      onAccessibilityEscape={onDismissCallback}
       testID={testID}
     >
       <AnimatedPressable
         accessibilityLabel={overlayAccessibilityLabel}
         accessibilityRole="button"
         disabled={!dismissable}
-        onPress={dismissable ? hideModal : undefined}
+        onPress={dismissable ? onDismissCallback : undefined}
         importantForAccessibility="no"
         style={[
           styles.backdrop,
@@ -237,6 +220,7 @@ function Modal({
           testID={`${testID}-surface`}
           theme={theme}
           style={[{ opacity }, styles.content, contentContainerStyle]}
+          container
         >
           {children}
         </Surface>

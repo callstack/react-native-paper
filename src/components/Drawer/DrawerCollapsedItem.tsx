@@ -208,7 +208,7 @@ const DrawerCollapsedItem = ({
             style={[styles.icon, { top: iconPadding }]}
             testID={`${testID}-container`}
           >
-            {badge && (
+            {badge !== false && (
               <View style={styles.badgeContainer}>
                 {typeof badge === 'boolean' ? (
                   <Badge visible={badge} size={badgeSize} />

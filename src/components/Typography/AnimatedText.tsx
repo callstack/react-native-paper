@@ -1,9 +1,17 @@
 import * as React from 'react';
-import { Animated, I18nManager, StyleSheet, TextStyle } from 'react-native';
+import {
+  Animated,
+  I18nManager,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  Text,
+} from 'react-native';
 
 import type { VariantProp } from './types';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 
 type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
   /**
@@ -21,7 +29,7 @@ type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
   variant?: VariantProp<T>;
-  style?: TextStyle;
+  style?: StyleProp<TextStyle>;
   /**
    * @optional
    */
@@ -33,57 +41,59 @@ type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
  *
  * @extends Text props https://reactnative.dev/docs/text#props
  */
-function AnimatedText({
-  style,
-  theme: themeOverrides,
-  variant,
-  ...rest
-}: Props<never>) {
-  const theme = useInternalTheme(themeOverrides);
-  const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
+const AnimatedText = forwardRef<Text & HTMLElement, Props<never>>(
+  function AnimatedText(
+    { style, theme: themeOverrides, variant, ...rest },
+    ref
+  ) {
+    const theme = useInternalTheme(themeOverrides);
+    const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
 
-  if (theme.isV3 && variant) {
-    const font = theme.fonts[variant];
-    if (typeof font !== 'object') {
-      throw new Error(
-        `Variant ${variant} was not provided properly. Valid variants are ${Object.keys(
-          theme.fonts
-        ).join(', ')}.`
+    if (theme.isV3 && variant) {
+      const font = theme.fonts[variant];
+      if (typeof font !== 'object') {
+        throw new Error(
+          `Variant ${variant} was not provided properly. Valid variants are ${Object.keys(
+            theme.fonts
+          ).join(', ')}.`
+        );
+      }
+
+      return (
+        <Animated.Text
+          ref={ref}
+          {...rest}
+          style={[
+            font,
+            styles.text,
+            { writingDirection, color: theme.colors.onSurface },
+            style,
+          ]}
+        />
+      );
+    } else {
+      const font = !theme.isV3 ? theme.fonts.regular : theme.fonts.bodyMedium;
+      const textStyle = {
+        ...font,
+        color: theme.isV3 ? theme.colors.onSurface : theme.colors.text,
+      };
+      return (
+        <Animated.Text
+          ref={ref}
+          {...rest}
+          style={[
+            styles.text,
+            textStyle,
+            {
+              writingDirection,
+            },
+            style,
+          ]}
+        />
       );
     }
-
-    return (
-      <Animated.Text
-        {...rest}
-        style={[
-          font,
-          styles.text,
-          { writingDirection, color: theme.colors.onSurface },
-          style,
-        ]}
-      />
-    );
-  } else {
-    const font = !theme.isV3 ? theme.fonts.regular : theme.fonts.bodyMedium;
-    const textStyle = {
-      ...font,
-      color: theme.isV3 ? theme.colors.onSurface : theme.colors.text,
-    };
-    return (
-      <Animated.Text
-        {...rest}
-        style={[
-          styles.text,
-          textStyle,
-          {
-            writingDirection,
-          },
-          style,
-        ]}
-      />
-    );
   }
-}
+);
 
 const styles = StyleSheet.create({
   text: {

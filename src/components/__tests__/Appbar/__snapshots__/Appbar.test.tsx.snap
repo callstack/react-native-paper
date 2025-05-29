@@ -175,9 +175,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                       "flexGrow": 1,
                       "justifyContent": "center",
                     },
-                    {
-                      "borderRadius": 20,
-                    },
+                    undefined,
                   ],
                 ]
               }
@@ -185,7 +183,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             >
               <Text
                 accessibilityElementsHidden={true}
-                allowFontScaling={false}
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 selectable={false}
@@ -208,16 +205,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                         "backgroundColor": "transparent",
                       },
                     ],
-                    {
-                      "fontFamily": "Material Design Icons",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
-                    },
-                    {},
                   ]
                 }
               >
-                󰍉
+                magnify
               </Text>
             </View>
           </View>
@@ -368,9 +359,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                         "flexGrow": 1,
                         "justifyContent": "center",
                       },
-                      {
-                        "borderRadius": 20,
-                      },
+                      undefined,
                     ],
                   ]
                 }
@@ -378,7 +367,6 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               >
                 <Text
                   accessibilityElementsHidden={true}
-                  allowFontScaling={false}
                   importantForAccessibility="no-hide-descendants"
                   pointerEvents="none"
                   selectable={false}
@@ -401,16 +389,10 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                           "backgroundColor": "transparent",
                         },
                       ],
-                      {
-                        "fontFamily": "Material Design Icons",
-                        "fontStyle": "normal",
-                        "fontWeight": "normal",
-                      },
-                      {},
                     ]
                   }
                 >
-                  󰅖
+                  close
                 </Text>
               </View>
             </View>
@@ -560,9 +542,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -585,19 +565,23 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             <View
               collapsable={false}
               style={
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "opacity": 1,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                }
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "opacity": 1,
+                    "transform": [
+                      {
+                        "rotate": "0deg",
+                      },
+                    ],
+                  },
+                ]
               }
               testID="cross-fade-icon-current"
             >
@@ -658,7 +642,9 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             "paddingHorizontal": 0,
           },
           [
-            false,
+            {
+              "marginLeft": 12,
+            },
             false,
             undefined,
           ],
@@ -803,9 +789,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -828,25 +812,28 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             <View
               collapsable={false}
               style={
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "opacity": 1,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                }
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "opacity": 1,
+                    "transform": [
+                      {
+                        "rotate": "0deg",
+                      },
+                    ],
+                  },
+                ]
               }
               testID="cross-fade-icon-current"
             >
               <Text
                 accessibilityElementsHidden={true}
-                allowFontScaling={false}
                 importantForAccessibility="no-hide-descendants"
                 pointerEvents="none"
                 selectable={false}
@@ -869,16 +856,10 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                         "backgroundColor": "transparent",
                       },
                     ],
-                    {
-                      "fontFamily": "Material Design Icons",
-                      "fontStyle": "normal",
-                      "fontWeight": "normal",
-                    },
-                    {},
                   ]
                 }
               >
-                󰍜
+                menu
               </Text>
             </View>
           </View>

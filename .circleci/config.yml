@@ -29,9 +29,10 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            yarn install --cwd example --frozen-lockfile
-            yarn install --cwd docs --frozen-lockfile
-            yarn install --frozen-lockfile
+            sudo corepack enable
+            yarn --cwd example --immutable
+            yarn --cwd docs --immutable
+            yarn --immutable
       - save_cache:
           key: dependencies-{{ checksum "package.json" }}
           paths:

@@ -3,7 +3,7 @@ import { Image, StyleSheet, View } from 'react-native';
 
 import { Button, List, Text } from 'react-native-paper';
 
-import { useExampleTheme } from '..';
+import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const ButtonExample = () => {
@@ -296,6 +296,14 @@ const ButtonExample = () => {
           <Button mode="contained" onPress={() => {}} style={styles.noRadius}>
             Without radius
           </Button>
+          <Button
+            mode="contained-tonal"
+            onPress={() => {}}
+            style={{ borderRadius: styles.customRadiusAndPadding.borderRadius }}
+            contentStyle={styles.customRadiusAndPadding}
+          >
+            Custom radius and padding
+          </Button>
         </View>
 
         <View style={styles.row}>
@@ -355,6 +363,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     paddingHorizontal: 12,
     alignItems: 'center',
+    gap: 12,
   },
   button: {
     margin: 4,
@@ -385,6 +394,11 @@ const styles = StyleSheet.create({
   },
   noRadius: {
     borderRadius: 0,
+  },
+  customRadiusAndPadding: {
+    borderRadius: 4,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
   },
 });
 

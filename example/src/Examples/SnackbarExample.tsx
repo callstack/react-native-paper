@@ -3,7 +3,8 @@ import { StyleSheet, View } from 'react-native';
 
 import { Snackbar, Button, List, Text, Switch } from 'react-native-paper';
 
-import { PreferencesContext, useExampleTheme } from '..';
+import { useExampleTheme } from '../hooks/useExampleTheme';
+import { PreferencesContext } from '../PreferencesContext';
 import ScreenWrapper from '../ScreenWrapper';
 
 const SHORT_MESSAGE = 'Single-line snackbar';

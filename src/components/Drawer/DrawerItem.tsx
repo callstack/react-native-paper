@@ -14,7 +14,9 @@ import color from 'color';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import Icon, { IconSource } from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
@@ -59,6 +61,10 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * Color of the ripple effect.
    */
   rippleColor?: ColorValue;
+  /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -98,6 +104,7 @@ const DrawerItem = ({
   accessibilityLabel,
   right,
   labelMaxFontSizeMultiplier,
+  hitSlop,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -141,6 +148,7 @@ const DrawerItem = ({
         accessibilityLabel={accessibilityLabel}
         rippleColor={customRippleColor || rippleColor}
         theme={theme}
+        hitSlop={hitSlop}
       >
         <View style={[styles.wrapper, isV3 && styles.v3Wrapper]}>
           <View style={styles.content}>

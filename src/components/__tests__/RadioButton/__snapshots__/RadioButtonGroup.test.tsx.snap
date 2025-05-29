@@ -80,16 +80,10 @@ exports[`RadioButtonGroup renders properly 1`] = `
                 "backgroundColor": "transparent",
               },
             ],
-            {
-              "fontFamily": "Material Design Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            {},
           ]
         }
       >
-        󰄬
+        check
       </Text>
     </View>
   </View>

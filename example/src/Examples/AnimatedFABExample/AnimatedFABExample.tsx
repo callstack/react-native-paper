@@ -2,6 +2,7 @@ import * as React from 'react';
 import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 import { Animated, FlatList, Platform, StyleSheet, View } from 'react-native';
 
+import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import {
   Avatar,
   MD2Colors,
@@ -9,15 +10,14 @@ import {
   Paragraph,
   Text,
 } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import CustomFAB from './CustomFAB';
 import CustomFABControls, {
   Controls,
   initialControls,
 } from './CustomFABControls';
-import { useExampleTheme } from '../..';
 import { animatedFABExampleData } from '../../../utils';
+import { useExampleTheme } from '../../hooks/useExampleTheme';
 
 type Item = {
   id: string;

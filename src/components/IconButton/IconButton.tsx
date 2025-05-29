@@ -23,7 +23,7 @@ const PADDING = 8;
 
 type IconButtonMode = 'outlined' | 'contained' | 'contained-tonal';
 
-export type Props = $RemoveChildren<typeof TouchableRipple> & {
+export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
   /**
    * Icon to display.
    */
@@ -67,6 +67,11 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityLabel?: string;
+  /**
+   * Style of button's inner content.
+   * Use this prop to apply custom height and width or to set a custom padding`.
+   */
+  contentStyle?: StyleProp<ViewStyle>;
   /**
    * Function to execute on press.
    */
@@ -127,6 +132,7 @@ const IconButton = forwardRef<View, Props>(
       theme: themeOverrides,
       testID = 'icon-button',
       loading = false,
+      contentStyle,
       ...rest
     }: Props,
     ref
@@ -175,6 +181,7 @@ const IconButton = forwardRef<View, Props>(
           !isV3 && disabled && styles.disabled,
           style,
         ]}
+        container
         {...(isV3 && { elevation: 0 })}
       >
         <TouchableRipple
@@ -183,7 +190,7 @@ const IconButton = forwardRef<View, Props>(
           onPress={onPress}
           rippleColor={rippleColor}
           accessibilityLabel={accessibilityLabel}
-          style={[styles.touchable, { borderRadius }]}
+          style={[styles.touchable, contentStyle]}
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
           accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
           accessibilityComponentType="button"

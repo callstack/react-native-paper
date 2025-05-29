@@ -56,6 +56,8 @@ const InputLabel = (props: InputLabelProps) => {
   const { INPUT_PADDING_HORIZONTAL } = getConstants(isV3);
   const { width } = useWindowDimensions();
 
+  const isWeb = Platform.OS === 'web';
+
   const paddingOffset =
     paddingLeft && paddingRight ? { paddingLeft, paddingRight } : {};
 
@@ -138,14 +140,13 @@ const InputLabel = (props: InputLabelProps) => {
     // This gives the effect of animating the color, but allows us to use native driver
     <View
       pointerEvents="none"
-      style={[StyleSheet.absoluteFill, styles.overflow]}
+      style={[StyleSheet.absoluteFill, styles.overflow, styles.labelContainer]}
     >
       <Animated.View
         pointerEvents="none"
         style={[
           StyleSheet.absoluteFill,
-          styles.labelContainer,
-          Platform.OS !== 'web' && { width },
+          !isWeb && { width },
           { opacity },
           labelTranslationX,
         ]}

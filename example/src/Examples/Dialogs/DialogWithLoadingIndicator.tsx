@@ -4,7 +4,7 @@ import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
 import { Dialog, MD2Colors, MD3Colors, Portal } from 'react-native-paper';
 
 import { TextComponent } from './DialogTextComponent';
-import { useExampleTheme } from '../..';
+import { useExampleTheme } from '../../hooks/useExampleTheme';
 
 const isIOS = Platform.OS === 'ios';
 

@@ -18,29 +18,6 @@ const styles = StyleSheet.create({
   text: { color: white, marginLeft: 10, flexWrap: 'wrap', flexShrink: 1 },
 });
 
-// Make sure any animation finishes before checking the snapshot results
-jest.mock('react-native', () => {
-  const RN = jest.requireActual('react-native');
-
-  const timing: (typeof Animated)['timing'] = (value, config) => ({
-    start: (callback) => {
-      value.setValue(config.toValue as any);
-      callback?.({ finished: true });
-    },
-    value,
-    config,
-    stop: () => {
-      throw new Error('Not implemented');
-    },
-    reset: () => {
-      throw new Error('Not implemented');
-    },
-  });
-  RN.Animated.timing = timing;
-
-  return RN;
-});
-
 jest.mock('react-native-safe-area-context', () => ({
   useSafeAreaInsets: () => ({ bottom: 34, left: 0, right: 0, top: 47 }),
 }));

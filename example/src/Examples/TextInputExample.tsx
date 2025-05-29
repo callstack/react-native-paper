@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 
+import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import { useFonts } from 'expo-font';
 import {
   configureFonts,
@@ -16,10 +17,9 @@ import {
   MD3Colors,
   TextInput,
 } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { useExampleTheme } from '..';
 import { inputReducer, State } from '../../utils';
+import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const MAX_LENGTH = 20;

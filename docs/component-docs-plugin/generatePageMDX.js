@@ -166,6 +166,22 @@ function generateExtendsAttributes(doc) {
   return extendsAttributes;
 }
 
+function generateExtendedExamples(usage, extendedExamplesData) {
+  if (!extendedExamplesData) {
+    return usage;
+  }
+
+  const data = JSON.parse(extendedExamplesData);
+  const exampleHeader = Object.keys(data)[0];
+
+  return `
+  ${usage}
+
+  ### ${exampleHeader}
+  <ExtendedExample extendedExamplesData={${extendedExamplesData}} />
+  `;
+}
+
 function generatePageMDX(doc, link) {
   const summaryRegex = /([\s\S]*?)## Usage/;
 
@@ -182,6 +198,9 @@ function generatePageMDX(doc, link) {
 
   const themeColorsData = JSON.stringify(customFields.themeColors[doc.title]);
   const screenshotData = JSON.stringify(customFields.screenshots[doc.title]);
+  const extendedExamplesData = JSON.stringify(
+    customFields.extendedExamples[doc.title]
+  );
 
   const extendsAttributes = generateExtendsAttributes(doc);
 
@@ -194,12 +213,13 @@ import PropTable from '@site/src/components/PropTable.tsx';
 import ExtendsLink from '@site/src/components/ExtendsLink.tsx';
 import ThemeColorsTable from '@site/src/components/ThemeColorsTable.tsx';
 import ScreenshotTabs from '@site/src/components/ScreenshotTabs.tsx';
+import ExtendedExample from '@site/src/components/ExtendedExample.tsx';
 
 ${summary}
 
 ${generateScreenshots(doc.title, screenshotData)}
 
-${usage}
+${generateExtendedExamples(usage, extendedExamplesData)}
 
 ${generatePropsTable(doc.data.props, link, extendsAttributes)}
 

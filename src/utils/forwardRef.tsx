@@ -19,5 +19,5 @@ export type ForwardRefComponent<T, P = {}> = ForwardRefExoticComponent<
  * More info: https://github.com/callstack/react-native-paper/pull/3603
  */
 export const forwardRef: <T, P = {}>(
-  render: ForwardRefRenderFunction<T, P>
+  render: ForwardRefRenderFunction<T, PropsWithoutRef<P>>
 ) => ForwardRefComponent<T, P> = React.forwardRef;
