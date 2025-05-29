@@ -10,7 +10,7 @@ import {
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useExampleTheme } from '.';
+import { useExampleTheme } from './hooks/useExampleTheme';
 
 type Props = ScrollViewProps & {
   children: React.ReactNode;

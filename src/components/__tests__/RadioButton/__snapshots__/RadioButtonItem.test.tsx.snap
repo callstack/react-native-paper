@@ -131,16 +131,10 @@ exports[`can render leading radio button control 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰄬
+          check
         </Text>
       </View>
     </View>
@@ -503,16 +497,10 @@ exports[`can render the iOS radio button on different platforms 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰄬
+          check
         </Text>
       </View>
     </View>
@@ -687,16 +675,10 @@ exports[`renders unchecked 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰄬
+          check
         </Text>
       </View>
     </View>

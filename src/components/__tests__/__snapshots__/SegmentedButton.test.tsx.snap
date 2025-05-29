@@ -18,8 +18,8 @@ exports[`renders segmented button 1`] = `
           "backgroundColor": "rgba(232, 222, 248, 1)",
           "borderBottomRightRadius": 0,
           "borderColor": "rgba(121, 116, 126, 1)",
+          "borderEndWidth": 0,
           "borderRadius": 20,
-          "borderRightWidth": 0,
           "borderTopRightRadius": 0,
           "borderWidth": 1,
         },
@@ -73,8 +73,8 @@ exports[`renders segmented button 1`] = `
           },
           {
             "borderBottomRightRadius": 0,
+            "borderEndWidth": 0,
             "borderRadius": 20,
-            "borderRightWidth": 0,
             "borderTopRightRadius": 0,
           },
         ]

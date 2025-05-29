@@ -18,7 +18,7 @@ import { splitStyles } from '../utils/splitStyles';
 
 type Elevation = 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
 
-export type Props = React.ComponentPropsWithRef<typeof View> & {
+export type Props = Omit<React.ComponentPropsWithRef<typeof View>, 'style'> & {
   /**
    * Content of the `Surface`.
    */
@@ -51,6 +51,10 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   testID?: string;
   ref?: React.RefObject<View>;
+  /**
+   * @internal
+   */
+  container?: boolean;
 };
 
 const MD2Surface = forwardRef<View, Props>(
@@ -161,6 +165,7 @@ const SurfaceIOS = forwardRef<
       testID,
       children,
       mode = 'elevated',
+      container,
       ...props
     },
     ref
@@ -202,12 +207,15 @@ const SurfaceIOS = forwardRef<
         ...(isElevated && getStyleForShadowLayer(elevation, 1)),
         ...filteredStyles,
         ...borderRadiusStyles,
-        flex: flattenedStyles.height ? 1 : undefined,
+        flex:
+          flattenedStyles.height || (!container && flattenedStyles.flex)
+            ? 1
+            : undefined,
         backgroundColor: bgColor,
       };
 
       return [outerLayerViewStyles, innerLayerViewStyles];
-    }, [style, elevation, backgroundColor, mode]);
+    }, [style, elevation, backgroundColor, mode, container]);
 
     return (
       <Animated.View

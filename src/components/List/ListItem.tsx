@@ -63,11 +63,15 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   theme?: ThemeProp;
   /**
-   * Style that is passed to the wrapping TouchableRipple element.
+   * Style that is passed to the root TouchableRipple container.
    */
   style?: StyleProp<ViewStyle>;
   /**
-   * Style that is passed to the container wrapping title and descripton.
+   * Style that is passed to the outermost container that wraps the entire content, including left and right items and both title and description.
+   */
+  containerStyle?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to the content container, which wraps the title and description.
    */
   contentStyle?: StyleProp<ViewStyle>;
   /**
@@ -144,6 +148,7 @@ const ListItem = (
     onPress,
     theme: themeOverrides,
     style,
+    containerStyle,
     contentStyle,
     titleStyle,
     titleNumberOfLines = 1,
@@ -238,7 +243,7 @@ const ListItem = (
       theme={theme}
       testID={testID}
     >
-      <View style={theme.isV3 ? styles.rowV3 : styles.row}>
+      <View style={[theme.isV3 ? styles.rowV3 : styles.row, containerStyle]}>
         {left
           ? left({
               color: descriptionColor,
@@ -270,8 +275,8 @@ const ListItem = (
   );
 };
 
+ListItem.displayName = 'List.Item';
 const Component = forwardRef(ListItem);
-Component.displayName = 'List.Item';
 
 const styles = StyleSheet.create({
   container: {

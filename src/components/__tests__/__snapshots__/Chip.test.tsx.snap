@@ -23,10 +23,10 @@ exports[`renders chip with close button 1`] = `
     style={
       {
         "backgroundColor": "rgba(232, 222, 248, 1)",
-        "borderColor": "rgba(121, 116, 126, 1)",
+        "borderColor": "transparent",
         "borderRadius": 8,
         "borderStyle": "solid",
-        "borderWidth": 0,
+        "borderWidth": 1,
         "flex": undefined,
         "flexDirection": "column",
         "shadowColor": "#000",
@@ -123,7 +123,6 @@ exports[`renders chip with close button 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -146,16 +145,10 @@ exports[`renders chip with close button 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰋼
+            information
           </Text>
         </View>
         <Text
@@ -268,7 +261,6 @@ exports[`renders chip with close button 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -291,16 +283,10 @@ exports[`renders chip with close button 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰅖
+            close
           </Text>
         </View>
       </View>
@@ -332,10 +318,10 @@ exports[`renders chip with custom close button 1`] = `
     style={
       {
         "backgroundColor": "rgba(232, 222, 248, 1)",
-        "borderColor": "rgba(121, 116, 126, 1)",
+        "borderColor": "transparent",
         "borderRadius": 8,
         "borderStyle": "solid",
-        "borderWidth": 0,
+        "borderWidth": 1,
         "flex": undefined,
         "flexDirection": "column",
         "shadowColor": "#000",
@@ -432,7 +418,6 @@ exports[`renders chip with custom close button 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -455,16 +440,10 @@ exports[`renders chip with custom close button 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰋼
+            information
           </Text>
         </View>
         <Text
@@ -577,7 +556,6 @@ exports[`renders chip with custom close button 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -600,16 +578,10 @@ exports[`renders chip with custom close button 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰁅
+            arrow-down
           </Text>
         </View>
       </View>
@@ -641,10 +613,10 @@ exports[`renders chip with icon 1`] = `
     style={
       {
         "backgroundColor": "rgba(232, 222, 248, 1)",
-        "borderColor": "rgba(121, 116, 126, 1)",
+        "borderColor": "transparent",
         "borderRadius": 8,
         "borderStyle": "solid",
-        "borderWidth": 0,
+        "borderWidth": 1,
         "flex": undefined,
         "flexDirection": "column",
         "shadowColor": "#000",
@@ -741,7 +713,6 @@ exports[`renders chip with icon 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -764,16 +735,10 @@ exports[`renders chip with icon 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰋼
+            information
           </Text>
         </View>
         <Text
@@ -850,10 +815,10 @@ exports[`renders chip with onPress 1`] = `
     style={
       {
         "backgroundColor": "rgba(232, 222, 248, 1)",
-        "borderColor": "rgba(121, 116, 126, 1)",
+        "borderColor": "transparent",
         "borderRadius": 8,
         "borderStyle": "solid",
-        "borderWidth": 0,
+        "borderWidth": 1,
         "flex": undefined,
         "flexDirection": "column",
         "shadowColor": "#000",
@@ -1164,10 +1129,10 @@ exports[`renders selected chip 1`] = `
     style={
       {
         "backgroundColor": "rgb(232, 222, 248)",
-        "borderColor": "rgba(121, 116, 126, 1)",
+        "borderColor": "transparent",
         "borderRadius": 8,
         "borderStyle": "solid",
-        "borderWidth": 0,
+        "borderWidth": 1,
         "flex": undefined,
         "flexDirection": "column",
         "shadowColor": "#000",
@@ -1264,7 +1229,6 @@ exports[`renders selected chip 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -1287,16 +1251,10 @@ exports[`renders selected chip 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰄬
+            check
           </Text>
         </View>
         <Text

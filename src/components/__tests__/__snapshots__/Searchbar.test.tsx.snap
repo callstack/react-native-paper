@@ -134,9 +134,7 @@ exports[`activity indicator snapshot test 1`] = `
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -144,7 +142,6 @@ exports[`activity indicator snapshot test 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -167,16 +164,10 @@ exports[`activity indicator snapshot test 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰍉
+            magnify
           </Text>
         </View>
       </View>
@@ -251,15 +242,17 @@ exports[`activity indicator snapshot test 1`] = `
         <View
           collapsable={false}
           style={
-            {
-              "alignItems": "center",
-              "bottom": 0,
-              "justifyContent": "center",
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            }
+            [
+              {
+                "alignItems": "center",
+                "bottom": 0,
+                "justifyContent": "center",
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+            ]
           }
         >
           <View
@@ -279,11 +272,14 @@ exports[`activity indicator snapshot test 1`] = `
             <View
               collapsable={false}
               style={
-                {
-                  "height": 12,
-                  "overflow": "hidden",
-                  "width": 24,
-                }
+                [
+                  {
+                    "height": 12,
+                    "overflow": "hidden",
+                    "width": 24,
+                  },
+                  null,
+                ]
               }
             >
               <View
@@ -333,15 +329,17 @@ exports[`activity indicator snapshot test 1`] = `
         <View
           collapsable={false}
           style={
-            {
-              "alignItems": "center",
-              "bottom": 0,
-              "justifyContent": "center",
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            }
+            [
+              {
+                "alignItems": "center",
+                "bottom": 0,
+                "justifyContent": "center",
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+            ]
           }
         >
           <View
@@ -361,12 +359,16 @@ exports[`activity indicator snapshot test 1`] = `
             <View
               collapsable={false}
               style={
-                {
-                  "height": 12,
-                  "overflow": "hidden",
-                  "top": 12,
-                  "width": 24,
-                }
+                [
+                  {
+                    "height": 12,
+                    "overflow": "hidden",
+                    "width": 24,
+                  },
+                  {
+                    "top": 12,
+                  },
+                ]
               }
             >
               <View
@@ -553,9 +555,7 @@ exports[`renders with placeholder 1`] = `
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -563,7 +563,6 @@ exports[`renders with placeholder 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -586,16 +585,10 @@ exports[`renders with placeholder 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰍉
+            magnify
           </Text>
         </View>
       </View>
@@ -746,9 +739,7 @@ exports[`renders with placeholder 1`] = `
                     "flexGrow": 1,
                     "justifyContent": "center",
                   },
-                  {
-                    "borderRadius": 20,
-                  },
+                  undefined,
                 ],
               ]
             }
@@ -756,7 +747,6 @@ exports[`renders with placeholder 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
-              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
@@ -779,16 +769,10 @@ exports[`renders with placeholder 1`] = `
                       "backgroundColor": "transparent",
                     },
                   ],
-                  {
-                    "fontFamily": "Material Design Icons",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  {},
                 ]
               }
             >
-              󰅖
+              close
             </Text>
           </View>
         </View>
@@ -932,9 +916,7 @@ exports[`renders with text 1`] = `
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -942,7 +924,6 @@ exports[`renders with text 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -965,16 +946,10 @@ exports[`renders with text 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰍉
+            magnify
           </Text>
         </View>
       </View>
@@ -1121,9 +1096,7 @@ exports[`renders with text 1`] = `
                     "flexGrow": 1,
                     "justifyContent": "center",
                   },
-                  {
-                    "borderRadius": 20,
-                  },
+                  undefined,
                 ],
               ]
             }
@@ -1131,7 +1104,6 @@ exports[`renders with text 1`] = `
           >
             <Text
               accessibilityElementsHidden={true}
-              allowFontScaling={false}
               importantForAccessibility="no-hide-descendants"
               pointerEvents="none"
               selectable={false}
@@ -1154,16 +1126,10 @@ exports[`renders with text 1`] = `
                       "backgroundColor": "transparent",
                     },
                   ],
-                  {
-                    "fontFamily": "Material Design Icons",
-                    "fontStyle": "normal",
-                    "fontWeight": "normal",
-                  },
-                  {},
                 ]
               }
             >
-              󰅖
+              close
             </Text>
           </View>
         </View>

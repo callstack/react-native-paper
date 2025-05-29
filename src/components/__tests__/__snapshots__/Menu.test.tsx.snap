@@ -90,7 +90,7 @@ exports[`renders menu with content styles 1`] = `
                   "overflow": "hidden",
                 },
                 {
-                  "borderRadius": 20,
+                  "borderRadius": 19,
                 },
               ]
             }
@@ -358,9 +358,12 @@ exports[`renders menu with content styles 1`] = `
             >
               <View
                 style={
-                  {
-                    "flexDirection": "row",
-                  }
+                  [
+                    {
+                      "flexDirection": "row",
+                    },
+                    undefined,
+                  ]
                 }
               >
                 <View
@@ -478,9 +481,12 @@ exports[`renders menu with content styles 1`] = `
             >
               <View
                 style={
-                  {
-                    "flexDirection": "row",
-                  }
+                  [
+                    {
+                      "flexDirection": "row",
+                    },
+                    undefined,
+                  ]
                 }
               >
                 <View
@@ -642,7 +648,7 @@ exports[`renders not visible menu 1`] = `
                 "overflow": "hidden",
               },
               {
-                "borderRadius": 20,
+                "borderRadius": 19,
               },
             ]
           }
@@ -808,7 +814,7 @@ exports[`renders visible menu 1`] = `
                   "overflow": "hidden",
                 },
                 {
-                  "borderRadius": 20,
+                  "borderRadius": 19,
                 },
               ]
             }
@@ -1072,9 +1078,12 @@ exports[`renders visible menu 1`] = `
             >
               <View
                 style={
-                  {
-                    "flexDirection": "row",
-                  }
+                  [
+                    {
+                      "flexDirection": "row",
+                    },
+                    undefined,
+                  ]
                 }
               >
                 <View
@@ -1192,9 +1201,12 @@ exports[`renders visible menu 1`] = `
             >
               <View
                 style={
-                  {
-                    "flexDirection": "row",
-                  }
+                  [
+                    {
+                      "flexDirection": "row",
+                    },
+                    undefined,
+                  ]
                 }
               >
                 <View

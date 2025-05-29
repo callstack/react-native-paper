@@ -17,17 +17,20 @@ import {
   StyleSheet,
   View,
   ViewStyle,
+  Text,
 } from 'react-native';
 
 import color from 'color';
 
-import { getCombinedStyles, getFABColors } from './utils';
+import { getCombinedStyles, getFABColors, getLabelSizeWeb } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import AnimatedText from '../Typography/AnimatedText';
 
 export type AnimatedFABIconMode = 'static' | 'dynamic';
@@ -111,6 +114,10 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    */
   variant?: 'primary' | 'secondary' | 'tertiary' | 'surface';
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
   /**
    * @optional
    */
@@ -222,14 +229,17 @@ const AnimatedFAB = ({
   iconMode = 'dynamic',
   variant = 'primary',
   labelMaxFontSizeMultiplier,
+  hitSlop,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const uppercase: boolean = uppercaseProp ?? !theme.isV3;
   const isIOS = Platform.OS === 'ios';
+  const isWeb = Platform.OS === 'web';
   const isAnimatedFromRight = animateFrom === 'right';
   const isIconStatic = iconMode === 'static';
   const { isRTL } = I18nManager;
+  const labelRef = React.useRef<Text & HTMLElement>(null);
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
   );
@@ -239,10 +249,43 @@ const AnimatedFAB = ({
   const { isV3, animation } = theme;
   const { scale } = animation;
 
-  const [textWidth, setTextWidth] = React.useState<number>(0);
-  const [textHeight, setTextHeight] = React.useState<number>(0);
+  const labelSize = isWeb ? getLabelSizeWeb(labelRef) : null;
+  const [textWidth, setTextWidth] = React.useState<number>(
+    labelSize?.width ?? 0
+  );
+  const [textHeight, setTextHeight] = React.useState<number>(
+    labelSize?.height ?? 0
+  );
 
   const borderRadius = SIZE / (isV3 ? 3.5 : 2);
+
+  React.useEffect(() => {
+    if (!isWeb) {
+      return;
+    }
+
+    const updateTextSize = () => {
+      if (labelRef.current) {
+        const labelSize = getLabelSizeWeb(labelRef);
+
+        if (labelSize) {
+          setTextHeight(labelSize.height ?? 0);
+          setTextWidth(labelSize.width ?? 0);
+        }
+      }
+    };
+
+    updateTextSize();
+    window.addEventListener('resize', updateTextSize);
+
+    return () => {
+      if (!isWeb) {
+        return;
+      }
+
+      window.removeEventListener('resize', updateTextSize);
+    };
+  }, [isWeb]);
 
   React.useEffect(() => {
     if (visible) {
@@ -292,8 +335,8 @@ const AnimatedFAB = ({
   const onTextLayout = ({
     nativeEvent,
   }: NativeSyntheticEvent<TextLayoutEventData>) => {
-    const currentWidth = Math.ceil(nativeEvent.lines[0].width);
-    const currentHeight = Math.ceil(nativeEvent.lines[0].height);
+    const currentWidth = Math.ceil(nativeEvent.lines[0]?.width ?? 0);
+    const currentHeight = Math.ceil(nativeEvent.lines[0]?.height ?? 0);
 
     if (currentWidth !== textWidth || currentHeight !== textHeight) {
       setTextHeight(currentHeight);
@@ -361,6 +404,7 @@ const AnimatedFAB = ({
       ]}
       {...(isV3 && { elevation: md3Elevation })}
       theme={theme}
+      container
     >
       <Animated.View
         style={[
@@ -446,6 +490,7 @@ const AnimatedFAB = ({
               testID={testID}
               style={{ borderRadius }}
               theme={theme}
+              hitSlop={hitSlop}
             >
               <View
                 style={[
@@ -470,6 +515,7 @@ const AnimatedFAB = ({
 
       <View pointerEvents="none">
         <AnimatedText
+          ref={isWeb ? labelRef : null}
           variant="labelLarge"
           numberOfLines={1}
           onTextLayout={isIOS ? onTextLayout : undefined}

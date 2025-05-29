@@ -16,7 +16,7 @@ import {
 
 import useLatestCallback from 'use-latest-callback';
 
-import { getChipColors } from './helpers';
+import { ChipAvatarProps, getChipColors } from './helpers';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
@@ -25,7 +25,9 @@ import type { IconSource } from '../Icon';
 import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
@@ -132,6 +134,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   textStyle?: StyleProp<TextStyle>;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -202,10 +208,12 @@ const Chip = ({
   compact,
   elevated = false,
   maxFontSizeMultiplier,
+  hitSlop,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { isV3, roundness } = theme;
+  const isWeb = Platform.OS === 'web';
 
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(isV3 && elevated ? 1 : 0)
@@ -227,8 +235,7 @@ const Chip = ({
       toValue: isV3 ? (elevated ? 2 : 0) : 4,
       duration: 200 * scale,
       useNativeDriver:
-        Platform.OS === 'web' ||
-        Platform.constants.reactNativeVersion.minor <= 72,
+        isWeb || Platform.constants.reactNativeVersion.minor <= 72,
     }).start();
   });
 
@@ -239,8 +246,7 @@ const Chip = ({
       toValue: isV3 && elevated ? 1 : 0,
       duration: 150 * scale,
       useNativeDriver:
-        Platform.OS === 'web' ||
-        Platform.constants.reactNativeVersion.minor <= 72,
+        isWeb || Platform.constants.reactNativeVersion.minor <= 72,
     }).start();
   });
 
@@ -295,8 +301,7 @@ const Chip = ({
     <Surface
       style={[
         styles.container,
-        isV3 &&
-          (isOutlined ? styles.md3OutlineContainer : styles.md3FlatContainer),
+        isV3 && styles.md3Container,
         !theme.isV3 && {
           elevation: elevationStyle,
         },
@@ -311,6 +316,7 @@ const Chip = ({
       {...rest}
       testID={`${testID}-container`}
       theme={theme}
+      container
     >
       <TouchableRipple
         borderless
@@ -328,6 +334,7 @@ const Chip = ({
         accessibilityState={accessibilityState}
         testID={testID}
         theme={theme}
+        hitSlop={hitSlop}
       >
         <View
           style={[styles.content, isV3 && styles.md3Content, contentSpacings]}
@@ -340,8 +347,8 @@ const Chip = ({
                 disabled && { opacity },
               ]}
             >
-              {React.isValidElement(avatar)
-                ? React.cloneElement(avatar as React.ReactElement<any>, {
+              {React.isValidElement<ChipAvatarProps>(avatar)
+                ? React.cloneElement(avatar, {
                     style: [styles.avatar, avatar.props.style],
                   })
                 : avatar}
@@ -440,11 +447,8 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     flexDirection: Platform.select({ default: 'column', web: 'row' }),
   },
-  md3OutlineContainer: {
+  md3Container: {
     borderWidth: 1,
-  },
-  md3FlatContainer: {
-    borderWidth: 0,
   },
   content: {
     flexDirection: 'row',

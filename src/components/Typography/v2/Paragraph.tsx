@@ -10,6 +10,7 @@ export type Props = TextProps & {
 // @component-group Typography
 
 /**
+ * @deprecated Deprecated in v5.x - use `<Text variant="bodyMedium" />` instead.
  * Typography component for showing a paragraph.
  *
  * <div class="screenshots">

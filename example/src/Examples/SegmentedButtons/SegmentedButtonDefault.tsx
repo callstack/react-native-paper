@@ -3,8 +3,10 @@ import { StyleSheet } from 'react-native';
 
 import { List, SegmentedButtons } from 'react-native-paper';
 
+type TransportMode = 'walk' | 'train' | 'drive';
+
 const SegmentedButtonDefault = () => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState<TransportMode>('walk');
 
   return (
     <List.Section title={`Segmented Button`}>

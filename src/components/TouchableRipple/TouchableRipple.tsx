@@ -156,7 +156,7 @@ const TouchableRipple = (
         // Get the size of the button to determine how big the ripple should be
         const size = centered
           ? // If ripple is always centered, we don't need to make it too big
-            Math.min(dimensions.width, dimensions.height) * 1.25
+            Math.min(dimensions.width, dimensions.height) * 1.5
           : // Otherwise make it twice as big so clicking on one end spreads ripple to other
             Math.max(dimensions.width, dimensions.height) * 2;
 
@@ -282,6 +282,7 @@ const TouchableRipple = (
         // focused state is not ready yet: https://github.com/necolas/react-native-web/issues/1849
         // state.focused && { backgroundColor: ___ },
         state.hovered && { backgroundColor: hoverColor },
+        disabled && styles.disabled,
         typeof style === 'function' ? style(state) : style,
       ]}
     >
@@ -305,6 +306,11 @@ const styles = StyleSheet.create({
     ...(Platform.OS === 'web' && {
       cursor: 'pointer',
       transition: '150ms background-color',
+    }),
+  },
+  disabled: {
+    ...(Platform.OS === 'web' && {
+      cursor: 'auto',
     }),
   },
   borderless: {

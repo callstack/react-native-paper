@@ -47,11 +47,14 @@ exports[`renders list item with custom description 1`] = `
 >
   <View
     style={
-      {
-        "flexDirection": "row",
-        "marginVertical": 6,
-        "width": "100%",
-      }
+      [
+        {
+          "flexDirection": "row",
+          "marginVertical": 6,
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
   >
     <View
@@ -136,10 +139,10 @@ exports[`renders list item with custom description 1`] = `
               style={
                 {
                   "backgroundColor": "rgba(232, 222, 248, 1)",
-                  "borderColor": "rgba(121, 116, 126, 1)",
+                  "borderColor": "transparent",
                   "borderRadius": 8,
                   "borderStyle": "solid",
-                  "borderWidth": 0,
+                  "borderWidth": 1,
                   "flex": undefined,
                   "flexDirection": "column",
                   "shadowColor": "#000",
@@ -236,7 +239,6 @@ exports[`renders list item with custom description 1`] = `
                   >
                     <Text
                       accessibilityElementsHidden={true}
-                      allowFontScaling={false}
                       importantForAccessibility="no-hide-descendants"
                       pointerEvents="none"
                       selectable={false}
@@ -259,16 +261,10 @@ exports[`renders list item with custom description 1`] = `
                               "backgroundColor": "transparent",
                             },
                           ],
-                          {
-                            "fontFamily": "Material Design Icons",
-                            "fontStyle": "normal",
-                            "fontWeight": "normal",
-                          },
-                          {},
                         ]
                       }
                     >
-                      󰈦
+                      file-pdf-box
                     </Text>
                   </View>
                   <Text
@@ -374,11 +370,14 @@ exports[`renders list item with custom title and description styles 1`] = `
 >
   <View
     style={
-      {
-        "flexDirection": "row",
-        "marginVertical": 6,
-        "width": "100%",
-      }
+      [
+        {
+          "flexDirection": "row",
+          "marginVertical": 6,
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
   >
     <View
@@ -516,11 +515,14 @@ exports[`renders list item with left and right items 1`] = `
 >
   <View
     style={
-      {
-        "flexDirection": "row",
-        "marginVertical": 6,
-        "width": "100%",
-      }
+      [
+        {
+          "flexDirection": "row",
+          "marginVertical": 6,
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
   >
     <Text>
@@ -624,7 +626,6 @@ exports[`renders list item with left and right items 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         selectable={false}
@@ -647,16 +648,10 @@ exports[`renders list item with left and right items 1`] = `
                 "backgroundColor": "transparent",
               },
             ],
-            {
-              "fontFamily": "Material Design Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            {},
           ]
         }
       >
-        󰉋
+        folder
       </Text>
     </View>
   </View>
@@ -710,11 +705,14 @@ exports[`renders list item with left item 1`] = `
 >
   <View
     style={
-      {
-        "flexDirection": "row",
-        "marginVertical": 6,
-        "width": "100%",
-      }
+      [
+        {
+          "flexDirection": "row",
+          "marginVertical": 6,
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
   >
     <View
@@ -736,7 +734,6 @@ exports[`renders list item with left item 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         selectable={false}
@@ -759,16 +756,10 @@ exports[`renders list item with left item 1`] = `
                 "backgroundColor": "transparent",
               },
             ],
-            {
-              "fontFamily": "Material Design Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            {},
           ]
         }
       >
-        󰉋
+        folder
       </Text>
     </View>
     <View
@@ -870,11 +861,14 @@ exports[`renders list item with right item 1`] = `
 >
   <View
     style={
-      {
-        "flexDirection": "row",
-        "marginVertical": 6,
-        "width": "100%",
-      }
+      [
+        {
+          "flexDirection": "row",
+          "marginVertical": 6,
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
   >
     <View
@@ -979,11 +973,14 @@ exports[`renders list item with title and description 1`] = `
 >
   <View
     style={
-      {
-        "flexDirection": "row",
-        "marginVertical": 6,
-        "width": "100%",
-      }
+      [
+        {
+          "flexDirection": "row",
+          "marginVertical": 6,
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
   >
     <View
@@ -1117,11 +1114,14 @@ exports[`renders with a description with typeof number 1`] = `
 >
   <View
     style={
-      {
-        "flexDirection": "row",
-        "marginVertical": 6,
-        "width": "100%",
-      }
+      [
+        {
+          "flexDirection": "row",
+          "marginVertical": 6,
+          "width": "100%",
+        },
+        undefined,
+      ]
     }
   >
     <View

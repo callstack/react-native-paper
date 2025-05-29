@@ -15,7 +15,11 @@ import {
 
 import color from 'color';
 
-import { ButtonMode, getButtonColors } from './utils';
+import {
+  ButtonMode,
+  getButtonColors,
+  getButtonTouchableRippleStyle,
+} from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
@@ -24,7 +28,9 @@ import { splitStyles } from '../../utils/splitStyles';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
@@ -123,7 +129,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   delayLongPress?: number;
   /**
    * Style of button's inner content.
-   * Use this prop to apply custom height and width and to set the icon on the right with `flexDirection: 'row-reverse'`.
+   * Use this prop to apply custom height and width, to set a custom padding or to set the icon on the right with `flexDirection: 'row-reverse'`.
    */
   contentStyle?: StyleProp<ViewStyle>;
   /**
@@ -131,9 +137,12 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   maxFontSizeMultiplier?: number;
   /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
    * Label text number Of Lines of the button.
    */
-  numberOfLines?: number;
+   numberOfLines?: number;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * Style for the button text.
@@ -185,6 +194,7 @@ const Button = (
     accessibilityLabel,
     accessibilityHint,
     accessibilityRole = 'button',
+    hitSlop,
     onPress,
     onPressIn,
     onPressOut,
@@ -214,6 +224,7 @@ const Button = (
   );
   const { roundness, isV3, animation } = theme;
   const uppercase = uppercaseProp ?? !theme.isV3;
+  const isWeb = Platform.OS === 'web';
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -232,7 +243,13 @@ const Button = (
   );
 
   React.useEffect(() => {
-    elevation.setValue(isElevationEntitled ? initialElevation : 0);
+    // Workaround not to call setValue on Animated.Value, because it breaks styles.
+    // https://github.com/callstack/react-native-paper/issues/4559
+    Animated.timing(elevation, {
+      toValue: isElevationEntitled ? initialElevation : 0,
+      duration: 0,
+      useNativeDriver: true,
+    });
   }, [isElevationEntitled, elevation, initialElevation]);
 
   const handlePressIn = (e: GestureResponderEvent) => {
@@ -243,8 +260,7 @@ const Button = (
         toValue: activeElevation,
         duration: 200 * scale,
         useNativeDriver:
-          Platform.OS === 'web' ||
-          Platform.constants.reactNativeVersion.minor <= 72,
+          isWeb || Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };
@@ -257,8 +273,7 @@ const Button = (
         toValue: initialElevation,
         duration: 150 * scale,
         useNativeDriver:
-          Platform.OS === 'web' ||
-          Platform.constants.reactNativeVersion.minor <= 72,
+          isWeb || Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };
@@ -337,9 +352,10 @@ const Button = (
           buttonStyle,
           style,
           !isV3 && !disabled && { elevation },
-        ] as ViewStyle
+        ] as Animated.WithAnimatedValue<StyleProp<ViewStyle>>
       }
       {...(isV3 && { elevation: elevation })}
+      container
     >
       <TouchableRipple
         borderless
@@ -354,9 +370,10 @@ const Button = (
         accessibilityRole={accessibilityRole}
         accessibilityState={{ disabled }}
         accessible={accessible}
+        hitSlop={hitSlop}
         disabled={disabled}
         rippleColor={rippleColor}
-        style={touchableStyle}
+        style={getButtonTouchableRippleStyle(touchableStyle, borderWidth)}
         testID={testID}
         theme={theme}
         ref={touchableRef}

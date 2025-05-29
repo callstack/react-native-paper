@@ -12,7 +12,7 @@ import {
   DialogWithRadioBtns,
   UndismissableDialog,
 } from './Dialogs';
-import { useExampleTheme } from '..';
+import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 type ButtonVisibility = {

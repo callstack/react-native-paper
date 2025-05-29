@@ -80,6 +80,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Style for the wrapper of the snackbar
    */
   wrapperStyle?: StyleProp<ViewStyle>;
+  /**
+   * Style for the content of the snackbar
+   */
+  contentStyle?: StyleProp<ViewStyle>;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   ref?: React.RefObject<View>;
   /**
@@ -152,8 +156,9 @@ const Snackbar = ({
   onDismiss,
   children,
   elevation = 2,
-  wrapperStyle,
   style,
+  wrapperStyle,
+  contentStyle,
   theme: themeOverrides,
   maxFontSizeMultiplier,
   rippleColor,
@@ -279,7 +284,7 @@ const Snackbar = ({
     }
 
     return (
-      <View style={styles.content}>
+      <View style={[styles.content, contentStyle]}>
         {/* View is added to allow multiple lines support for Text component as children */}
         <View>{children}</View>
       </View>
@@ -316,6 +321,7 @@ const Snackbar = ({
           style,
         ]}
         testID={testID}
+        container
         {...(isV3 && { elevation })}
         {...rest}
       >

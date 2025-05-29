@@ -76,7 +76,7 @@ const PaperProvider = (props: Props) => {
     };
   }, [props.theme, isOnlyVersionInTheme]);
 
-  const getTheme = () => {
+  const theme = React.useMemo(() => {
     const themeVersion = props.theme?.version || 3;
     const scheme = colorScheme || 'light';
     const defaultThemeBase = defaultThemesByVersion[themeVersion][scheme];
@@ -95,21 +95,24 @@ const PaperProvider = (props: Props) => {
       ...extendedThemeBase,
       isV3: extendedThemeBase.version === 3,
     };
-  };
+  }, [colorScheme, props.theme, reduceMotionEnabled]);
 
   const { children, settings } = props;
+
+  const settingsValue = React.useMemo(
+    () => ({
+      icon: MaterialCommunityIcon,
+      rippleEffectEnabled: true,
+      ...settings,
+    }),
+    [settings]
+  );
 
   return (
     <SafeAreaProviderCompat>
       <PortalHost>
-        <SettingsProvider
-          value={{
-            icon: MaterialCommunityIcon,
-            rippleEffectEnabled: true,
-            ...settings,
-          }}
-        >
-          <ThemeProvider theme={getTheme()}>{children}</ThemeProvider>
+        <SettingsProvider value={settingsValue}>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
         </SettingsProvider>
       </PortalHost>
     </SafeAreaProviderCompat>

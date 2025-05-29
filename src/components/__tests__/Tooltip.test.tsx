@@ -6,24 +6,17 @@ import {
   render,
   waitForElementToBeRemoved,
 } from '@testing-library/react-native';
-import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 
 import PaperProvider from '../../core/PaperProvider';
 import Tooltip from '../Tooltip/Tooltip';
 
 const mockedRemoveEventListener = jest.fn();
 
-jest.mock('react-native-safe-area-context', () => mockSafeAreaContext);
-
-jest.mock('react-native', () => {
-  const RN = jest.requireActual('react-native');
-
-  RN.Dimensions.addEventListener = () => ({
+jest.mock('../../utils/addEventListener', () => ({
+  addEventListener: () => ({
     remove: mockedRemoveEventListener,
-  });
-
-  return RN;
-});
+  }),
+}));
 
 const DummyComponent = React.forwardRef<View>((props, ref) => (
   <View {...props} ref={ref as RefObject<View>}>

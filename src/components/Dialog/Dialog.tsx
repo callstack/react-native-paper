@@ -18,6 +18,7 @@ import { useInternalTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
 import type { ThemeProp } from '../../types';
 import Modal from '../Modal';
+import { DialogChildProps } from './utils';
 
 export type Props = {
   /**
@@ -138,8 +139,8 @@ const Dialog = ({
         .filter((child) => child != null && typeof child !== 'boolean')
         .map((child, i) => {
           if (isV3) {
-            if (i === 0 && React.isValidElement(child)) {
-              return React.cloneElement(child as React.ReactElement<any>, {
+            if (i === 0 && React.isValidElement<DialogChildProps>(child)) {
+              return React.cloneElement(child, {
                 style: [{ marginTop: 24 }, child.props.style],
               });
             }
@@ -147,11 +148,11 @@ const Dialog = ({
 
           if (
             i === 0 &&
-            React.isValidElement(child) &&
+            React.isValidElement<DialogChildProps>(child) &&
             child.type === DialogContent
           ) {
             // Dialog content is the first item, so we add a top padding
-            return React.cloneElement(child as React.ReactElement<any>, {
+            return React.cloneElement(child, {
               style: [{ paddingTop: 24 }, child.props.style],
             });
           }

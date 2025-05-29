@@ -203,7 +203,9 @@ const ProgressBar = ({
       accessibilityRole="progressbar"
       accessibilityState={{ busy: visible }}
       accessibilityValue={
-        indeterminate ? {} : { min: 0, max: 100, now: progress * 100 }
+        indeterminate
+          ? {}
+          : { min: 0, max: 100, now: Math.round(progress * 100) }
       }
       style={isWeb && styles.webContainer}
       testID={testID}

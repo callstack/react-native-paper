@@ -199,6 +199,7 @@ const AppbarContent = ({
         // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
         accessibilityTraits={touchableRole}
         accessibilityComponentType="button"
+        accessbilityState={disabled ? 'disabled' : null}
         onPress={onPress}
         disabled={disabled}
         {...contentWrapperProps}
@@ -240,11 +241,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const iosTouchableRole: readonly AccessibilityRole[] = ['button', 'header'];
-const touchableRole: AccessibilityRole = Platform.select({
-  ios: iosTouchableRole as unknown as 'button',
-  default: iosTouchableRole[0],
-});
+const touchableRole: AccessibilityRole = 'button';
 
 export default AppbarContent;
 

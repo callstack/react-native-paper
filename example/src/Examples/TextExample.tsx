@@ -13,7 +13,7 @@ import {
   Title,
 } from 'react-native-paper';
 
-import { useExampleTheme } from '..';
+import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const Text = customText<'customVariant'>();

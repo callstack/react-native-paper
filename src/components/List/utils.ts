@@ -1,7 +1,13 @@
-import { FlexAlignType, ColorValue, StyleSheet } from 'react-native';
+import {
+  FlexAlignType,
+  ColorValue,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 
 import color from 'color';
-import type { EllipsizeProp, InternalTheme } from 'src/types';
+import type { EllipsizeProp, InternalTheme, ThemeProp } from 'src/types';
 
 type Description =
   | React.ReactNode
@@ -11,6 +17,13 @@ type Description =
       color: string;
       fontSize: number;
     }) => React.ReactNode);
+
+export type ListChildProps = {
+  left?: React.ReactNode;
+  right?: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
+  theme?: ThemeProp;
+};
 
 export type Style = {
   marginLeft?: number;

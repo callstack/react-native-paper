@@ -1,9 +1,13 @@
-import type { ColorValue } from 'react-native';
+import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
 import color from 'color';
 
 import { black, white } from '../../styles/themes/v2/colors';
 import type { InternalTheme } from '../../types';
+
+export type ChipAvatarProps = {
+  style?: StyleProp<ViewStyle>;
+};
 
 type BaseProps = {
   theme: InternalTheme;
@@ -21,6 +25,11 @@ const getBorderColor = ({
   const isSelectedColor = selectedColor !== undefined;
 
   if (theme.isV3) {
+    if (!isOutlined) {
+      // If the Chip mode is "flat", set border color to transparent
+      return 'transparent';
+    }
+
     if (disabled) {
       return color(theme.colors.onSurfaceVariant).alpha(0.12).rgb().string();
     }

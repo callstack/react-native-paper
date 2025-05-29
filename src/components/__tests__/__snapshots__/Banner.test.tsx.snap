@@ -59,7 +59,12 @@ exports[`render visible banner, with custom theme 1`] = `
       <View
         collapsable={false}
         onLayout={[Function]}
-        style={{}}
+        style={
+          [
+            null,
+            null,
+          ]
+        }
       >
         <View
           style={
@@ -460,7 +465,12 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
       <View
         collapsable={false}
         onLayout={[Function]}
-        style={{}}
+        style={
+          [
+            null,
+            null,
+          ]
+        }
       >
         <View
           style={
@@ -752,7 +762,12 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
       <View
         collapsable={false}
         onLayout={[Function]}
-        style={{}}
+        style={
+          [
+            null,
+            null,
+          ]
+        }
       >
         <View
           style={
@@ -1172,7 +1187,12 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
       <View
         collapsable={false}
         onLayout={[Function]}
-        style={{}}
+        style={
+          [
+            null,
+            null,
+          ]
+        }
       >
         <View
           style={
@@ -1313,7 +1333,12 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
       <View
         collapsable={false}
         onLayout={[Function]}
-        style={{}}
+        style={
+          [
+            null,
+            null,
+          ]
+        }
       >
         <View
           style={

@@ -20,7 +20,9 @@ import {
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import Icon, { IconSource } from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {
@@ -64,10 +66,21 @@ export type Props = {
    */
   titleMaxFontSizeMultiplier?: number;
   /**
+   * Style that is passed to the root TouchableRipple container.
    * @optional
    */
   style?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to the outermost container that wraps the entire content, including leading and trailing icons and title text.
+   */
+  containerStyle?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to the content container, which wraps the title text.
+   */
   contentStyle?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to the Title element.
+   */
   titleStyle?: StyleProp<TextStyle>;
   /**
    * Color of the ripple effect.
@@ -77,6 +90,10 @@ export type Props = {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
   /**
    * TestID used for testing purposes
    */
@@ -122,6 +139,7 @@ const MenuItem = ({
   background,
   onPress,
   style,
+  containerStyle,
   contentStyle,
   titleStyle,
   rippleColor: customRippleColor,
@@ -130,6 +148,7 @@ const MenuItem = ({
   accessibilityState,
   theme: themeOverrides,
   titleMaxFontSizeMultiplier = 1.5,
+  hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { titleColor, iconColor, rippleColor } = getMenuItemColor({
@@ -175,8 +194,9 @@ const MenuItem = ({
       accessibilityRole="menuitem"
       accessibilityState={newAccessibilityState}
       rippleColor={rippleColor}
+      hitSlop={hitSlop}
     >
-      <View style={styles.row}>
+      <View style={[styles.row, containerStyle]}>
         {leadingIcon ? (
           <View
             style={[!isV3 && styles.item, { width: iconWidth }]}

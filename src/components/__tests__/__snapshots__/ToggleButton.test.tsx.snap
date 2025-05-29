@@ -99,9 +99,7 @@ exports[`renders disabled toggle button 1`] = `
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            {
-              "borderRadius": 4,
-            },
+            undefined,
           ],
         ]
       }
@@ -109,7 +107,6 @@ exports[`renders disabled toggle button 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         selectable={false}
@@ -132,16 +129,10 @@ exports[`renders disabled toggle button 1`] = `
                 "backgroundColor": "transparent",
               },
             ],
-            {
-              "fontFamily": "Material Design Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            {},
           ]
         }
       >
-        󰋑
+        heart
       </Text>
     </View>
   </View>
@@ -242,9 +233,7 @@ exports[`renders toggle button 1`] = `
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            {
-              "borderRadius": 4,
-            },
+            undefined,
           ],
         ]
       }
@@ -252,7 +241,6 @@ exports[`renders toggle button 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         selectable={false}
@@ -275,16 +263,10 @@ exports[`renders toggle button 1`] = `
                 "backgroundColor": "transparent",
               },
             ],
-            {
-              "fontFamily": "Material Design Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            {},
           ]
         }
       >
-        󰋑
+        heart
       </Text>
     </View>
   </View>
@@ -390,9 +372,7 @@ exports[`renders unchecked toggle button 1`] = `
               "flexGrow": 1,
               "justifyContent": "center",
             },
-            {
-              "borderRadius": 4,
-            },
+            undefined,
           ],
         ]
       }
@@ -400,7 +380,6 @@ exports[`renders unchecked toggle button 1`] = `
     >
       <Text
         accessibilityElementsHidden={true}
-        allowFontScaling={false}
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         selectable={false}
@@ -423,16 +402,10 @@ exports[`renders unchecked toggle button 1`] = `
                 "backgroundColor": "transparent",
               },
             ],
-            {
-              "fontFamily": "Material Design Icons",
-              "fontStyle": "normal",
-              "fontWeight": "normal",
-            },
-            {},
           ]
         }
       >
-        󰋑
+        heart
       </Text>
     </View>
   </View>
