@@ -117,6 +117,7 @@ export type ThemeProp = $DeepPartial<InternalTheme>;
 
 export type ThemeBase = {
   dark: boolean;
+  direction: 'rtl' | 'ltr';
   mode?: Mode;
   roundness: number;
   animation: {

@@ -1,12 +1,5 @@
 import * as React from 'react';
-import {
-  Animated,
-  I18nManager,
-  StyleProp,
-  StyleSheet,
-  TextStyle,
-  Text,
-} from 'react-native';
+import { Animated, StyleProp, StyleSheet, TextStyle, Text } from 'react-native';
 
 import type { VariantProp } from './types';
 import { useInternalTheme } from '../../core/theming';
@@ -47,7 +40,6 @@ const AnimatedText = forwardRef<Text & HTMLElement, Props<never>>(
     ref
   ) {
     const theme = useInternalTheme(themeOverrides);
-    const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
 
     if (theme.isV3 && variant) {
       const font = theme.fonts[variant];
@@ -66,7 +58,10 @@ const AnimatedText = forwardRef<Text & HTMLElement, Props<never>>(
           style={[
             font,
             styles.text,
-            { writingDirection, color: theme.colors.onSurface },
+            {
+              writingDirection: theme.direction,
+              color: theme.colors.onSurface,
+            },
             style,
           ]}
         />
@@ -85,7 +80,7 @@ const AnimatedText = forwardRef<Text & HTMLElement, Props<never>>(
             styles.text,
             textStyle,
             {
-              writingDirection,
+              writingDirection: theme.direction,
             },
             style,
           ]}

@@ -187,7 +187,6 @@ exports[`activity indicator snapshot test 1`] = `
             "fontSize": 18,
             "minWidth": 0,
             "paddingLeft": 8,
-            "textAlign": "left",
           },
           {
             "color": "rgba(73, 69, 79, 1)",
@@ -196,6 +195,7 @@ exports[`activity indicator snapshot test 1`] = `
             "fontWeight": "400",
             "letterSpacing": 0.15,
             "lineHeight": 0,
+            "textAlign": "left",
           },
           {
             "minHeight": 56,
@@ -608,7 +608,6 @@ exports[`renders with placeholder 1`] = `
             "fontSize": 18,
             "minWidth": 0,
             "paddingLeft": 8,
-            "textAlign": "left",
           },
           {
             "color": "rgba(73, 69, 79, 1)",
@@ -617,6 +616,7 @@ exports[`renders with placeholder 1`] = `
             "fontWeight": "400",
             "letterSpacing": 0.15,
             "lineHeight": 0,
+            "textAlign": "left",
           },
           {
             "minHeight": 56,
@@ -969,7 +969,6 @@ exports[`renders with text 1`] = `
             "fontSize": 18,
             "minWidth": 0,
             "paddingLeft": 8,
-            "textAlign": "left",
           },
           {
             "color": "rgba(73, 69, 79, 1)",
@@ -978,6 +977,7 @@ exports[`renders with text 1`] = `
             "fontWeight": "400",
             "letterSpacing": 0.15,
             "lineHeight": 0,
+            "textAlign": "left",
           },
           {
             "minHeight": 56,
