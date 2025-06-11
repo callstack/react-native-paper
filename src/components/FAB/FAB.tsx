@@ -147,6 +147,10 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * TestID used for testing purposes
    */
   testID?: string;
+  /**
+   * Specifies the position of the icon in relation to the label.
+   */
+  iconPosition?: 'left' | 'right';
   ref?: React.RefObject<View>;
 } & IconOrLabel;
 
@@ -205,6 +209,7 @@ const FAB = forwardRef<View, Props>(
       mode = 'elevated',
       variant = 'primary',
       labelMaxFontSizeMultiplier,
+      iconPosition = 'left',
       ...rest
     }: Props,
     ref
@@ -307,7 +312,11 @@ const FAB = forwardRef<View, Props>(
           {...rest}
         >
           <View
-            style={[styles.content, label ? extendedStyle : fabStyle]}
+            style={[
+              styles.content,
+              label ? extendedStyle : fabStyle,
+              iconPosition === 'left' ? styles.iconLeft : styles.iconRight,
+            ]}
             testID={`${testID}-content`}
             pointerEvents="none"
           >
@@ -350,8 +359,13 @@ const styles = StyleSheet.create({
   elevated: {
     elevation: 6,
   },
-  content: {
+  iconLeft: {
     flexDirection: 'row',
+  },
+  iconRight: {
+    flexDirection: 'row-reverse',
+  },
+  content: {
     alignItems: 'center',
     justifyContent: 'center',
   },
