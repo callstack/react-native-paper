@@ -121,6 +121,7 @@ const config = {
             DrawerItem: 'Drawer/DrawerItem',
             DrawerSection: 'Drawer/DrawerSection',
           },
+          Dropdown: 'Dropdown/Dropdown',
           FAB: {
             FAB: 'FAB/FAB',
             AnimatedFAB: 'FAB/AnimatedFAB',
