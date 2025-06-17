@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  I18nManager,
   Platform,
   StyleSheet,
   TextInput as NativeTextInput,
@@ -170,11 +169,9 @@ const TextInputFlat = ({
   const labelHalfHeight = labelHeight / 2;
 
   const baseLabelTranslateX =
-    (I18nManager.getConstants().isRTL ? 1 : -1) *
+    (theme.direction === 'rtl' ? 1 : -1) *
       (labelHalfWidth - (labelScale * labelWidth) / 2) +
-    (1 - labelScale) *
-      (I18nManager.getConstants().isRTL ? -1 : 1) *
-      paddingLeft;
+    (1 - labelScale) * (theme.direction === 'rtl' ? -1 : 1) * paddingLeft;
 
   const minInputHeight = dense
     ? (label ? MIN_DENSE_HEIGHT_WL : MIN_DENSE_HEIGHT) - LABEL_PADDING_TOP_DENSE
@@ -279,12 +276,12 @@ const TextInputFlat = ({
     wiggleOffsetX: LABEL_WIGGLE_X_OFFSET,
     topPosition,
     paddingLeft: isAndroid
-      ? I18nManager.isRTL
+      ? theme.direction === 'rtl'
         ? paddingRight
         : paddingLeft
       : paddingLeft,
     paddingRight: isAndroid
-      ? I18nManager.isRTL
+      ? theme.direction === 'rtl'
         ? paddingLeft
         : paddingRight
       : paddingRight,
@@ -420,7 +417,7 @@ const TextInputFlat = ({
               textAlignVertical: multiline ? 'top' : 'center',
               textAlign: textAlign
                 ? textAlign
-                : I18nManager.getConstants().isRTL
+                : theme.direction === 'rtl'
                 ? 'right'
                 : 'left',
               minWidth: Math.min(
