@@ -26,6 +26,13 @@ const data: Data[] = [
     github: 'https://github.com/callstack/react-native-paper/tree/main/example',
   },
   {
+    color: '#0D92F2',
+    name: 'Address Archive',
+    image: '/react-native-paper/showcase/address-archive.png',
+    android: 'https://play.google.com/store/apps/details?id=com.addressarchive',
+    ios: 'https://apps.apple.com/app/id6742468584',
+  },
+  {
     color: '#2979FF',
     name: 'Bluebirding',
     image: '/react-native-paper/showcase/bluebirding.png',
