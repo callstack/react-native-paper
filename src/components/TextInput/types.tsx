@@ -45,6 +45,7 @@ type TextInputProps = React.ComponentPropsWithRef<typeof NativeTextInput> & {
   contentStyle?: StyleProp<TextStyle>;
   outlineStyle?: StyleProp<ViewStyle>;
   underlineStyle?: StyleProp<ViewStyle>;
+  scaledLabel?: boolean;
 };
 
 export type RenderProps = {
@@ -58,6 +59,7 @@ export type RenderProps = {
   onFocus?: (args: any) => void;
   onBlur?: (args: any) => void;
   underlineColorAndroid?: string;
+  onLayout?: (args: any) => void;
   style: any;
   multiline?: boolean;
   numberOfLines?: number;
@@ -70,7 +72,7 @@ export type State = {
   labeled: Animated.Value;
   error: Animated.Value;
   focused: boolean;
-  placeholder?: string;
+  displayPlaceholder: boolean;
   value?: string;
   labelTextLayout: { width: number };
   labelLayout: { measured: boolean; width: number; height: number };
@@ -135,16 +137,19 @@ export type InputLabelProps = {
   opacity: number;
   labelLayoutMeasured: boolean;
   labelLayoutWidth: number;
+  labelLayoutHeight: number;
   inputContainerLayout: { width: number };
   labelBackground?: any;
   maxFontSizeMultiplier?: number | undefined | null;
   isV3?: boolean;
+  scaledLabel?: boolean;
 } & LabelProps;
 
 export type LabelBackgroundProps = {
   labelStyle: any;
   labeled: Animated.Value;
   labelLayoutWidth: number;
+  labelLayoutHeight: number;
   maxFontSizeMultiplier?: number | undefined | null;
   theme?: ThemeProp;
 } & LabelProps;

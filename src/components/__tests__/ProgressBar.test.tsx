@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Animated, Platform } from 'react-native';
+import { Animated, Platform, StyleSheet } from 'react-native';
 
 import { render, waitFor } from '@testing-library/react-native';
 
@@ -12,6 +12,12 @@ const layoutEvent = {
     },
   },
 };
+
+const styles = StyleSheet.create({
+  fill: {
+    borderRadius: 4,
+  },
+});
 
 const a11yRole = 'progressbar';
 
@@ -71,5 +77,16 @@ it('renders progress bar with full height on web', () => {
   expect(tree.getByRole(a11yRole)).toHaveStyle({
     width: '100%',
     height: '100%',
+  });
+});
+
+it('renders progress bar with custom style of filled part', async () => {
+  const tree = render(
+    <ProgressBar progress={0.2} fillStyle={styles.fill} testID="progress-bar" />
+  );
+  await waitFor(() => tree.getByRole(a11yRole).props.onLayout(layoutEvent));
+
+  expect(tree.getByTestId('progress-bar-fill')).toHaveStyle({
+    borderRadius: 4,
   });
 });

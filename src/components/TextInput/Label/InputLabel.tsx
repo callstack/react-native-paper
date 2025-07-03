@@ -5,6 +5,7 @@ import {
   Platform,
   StyleSheet,
   useWindowDimensions,
+  View,
 } from 'react-native';
 
 import AnimatedText from '../../Typography/AnimatedText';
@@ -19,6 +20,7 @@ const InputLabel = (props: InputLabelProps) => {
     focused,
     opacity,
     labelLayoutWidth,
+    labelLayoutHeight,
     labelBackground,
     label,
     labelError,
@@ -48,10 +50,13 @@ const InputLabel = (props: InputLabelProps) => {
     testID,
     isV3,
     inputContainerLayout,
+    scaledLabel,
   } = props;
 
   const { INPUT_PADDING_HORIZONTAL } = getConstants(isV3);
   const { width } = useWindowDimensions();
+
+  const isWeb = Platform.OS === 'web';
 
   const paddingOffset =
     paddingLeft && paddingRight ? { paddingLeft, paddingRight } : {};
@@ -110,11 +115,17 @@ const InputLabel = (props: InputLabelProps) => {
     ],
   };
 
+  const labelWidth =
+    (inputContainerLayout.width + INPUT_PADDING_HORIZONTAL / 2) /
+    (scaledLabel ? labelScale : 1);
+
   const commonStyles = [
     placeholderStyle,
     {
       top: topPosition,
-      maxWidth: inputContainerLayout.width + INPUT_PADDING_HORIZONTAL / 2,
+    },
+    {
+      maxWidth: labelWidth,
     },
     labelStyle,
     paddingOffset || {},
@@ -127,65 +138,79 @@ const InputLabel = (props: InputLabelProps) => {
   return (
     // Position colored placeholder and gray placeholder on top of each other and crossfade them
     // This gives the effect of animating the color, but allows us to use native driver
-    <Animated.View
+    <View
       pointerEvents="none"
-      style={[
-        StyleSheet.absoluteFill,
-        styles.labelContainer,
-        Platform.OS !== 'web' && { width },
-        { opacity },
-        labelTranslationX,
-      ]}
+      style={[StyleSheet.absoluteFill, styles.overflow, styles.labelContainer]}
     >
-      {labelBackground?.({
-        labeled,
-        labelLayoutWidth,
-        labelStyle,
-        placeholderStyle,
-        baseLabelTranslateX,
-        topPosition,
-        label,
-        backgroundColor,
-        roundness,
-        maxFontSizeMultiplier: maxFontSizeMultiplier,
-        testID,
-      })}
-      <AnimatedText
-        variant="bodySmall"
-        onLayout={onLayoutAnimatedText}
-        onTextLayout={onLabelTextLayout}
+      <Animated.View
+        pointerEvents="none"
         style={[
-          commonStyles,
-          {
-            color: activeColor,
-          },
+          StyleSheet.absoluteFill,
+          !isWeb && { width },
+          { opacity },
+          labelTranslationX,
         ]}
-        numberOfLines={1}
-        maxFontSizeMultiplier={maxFontSizeMultiplier}
-        testID={`${testID}-label-active`}
       >
-        {label}
-      </AnimatedText>
-      <AnimatedText
-        variant={focused ? 'bodyLarge' : 'bodySmall'}
-        style={[
-          commonStyles,
-          {
-            color: textColor,
-            opacity: placeholderOpacity,
-          },
-        ]}
-        numberOfLines={1}
-        maxFontSizeMultiplier={maxFontSizeMultiplier}
-        testID={`${testID}-label-inactive`}
-      >
-        {label}
-      </AnimatedText>
-    </Animated.View>
+        <View
+          style={{
+            width: labelWidth,
+          }}
+        >
+          {labelBackground?.({
+            labeled,
+            labelLayoutWidth,
+            labelLayoutHeight,
+            labelStyle,
+            placeholderStyle,
+            baseLabelTranslateX,
+            topPosition,
+            label,
+            backgroundColor,
+            roundness,
+            maxFontSizeMultiplier: maxFontSizeMultiplier,
+            testID,
+          })}
+          <AnimatedText
+            variant="bodySmall"
+            onLayout={onLayoutAnimatedText}
+            onTextLayout={onLabelTextLayout}
+            style={[
+              commonStyles,
+              {
+                color: activeColor,
+              },
+            ]}
+            numberOfLines={1}
+            maxFontSizeMultiplier={maxFontSizeMultiplier}
+            testID={`${testID}-label-active`}
+          >
+            {label}
+          </AnimatedText>
+          <AnimatedText
+            variant={focused ? 'bodyLarge' : 'bodySmall'}
+            style={[
+              commonStyles,
+              {
+                color: textColor,
+                opacity: placeholderOpacity,
+              },
+            ]}
+            numberOfLines={1}
+            maxFontSizeMultiplier={maxFontSizeMultiplier}
+            testID={`${testID}-label-inactive`}
+          >
+            {label}
+          </AnimatedText>
+        </View>
+      </Animated.View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  overflow: {
+    overflow: 'hidden',
+  },
   labelContainer: {
     zIndex: 3,
   },

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { act, fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
-import { pink500, black, white } from '../../styles/themes/v2/colors';
+import { black, pink500, white } from '../../styles/themes/v2/colors';
 import Button from '../Button/Button';
 import { getButtonColors } from '../Button/utils';
 
@@ -157,6 +157,28 @@ it('renders button with custom border radius', () => {
     styles.customRadius
   );
   expect(getByTestId('custom-radius')).toHaveStyle(styles.customRadius);
+});
+
+it('renders outlined button with custom border radius', () => {
+  const { getByTestId } = render(
+    <Button
+      mode={'outlined'}
+      testID="custom-radius"
+      style={styles.customRadius}
+    >
+      Custom radius
+    </Button>
+  );
+
+  expect(getByTestId('custom-radius-container')).toHaveStyle(
+    styles.customRadius
+  );
+  expect(getByTestId('custom-radius')).toHaveStyle({
+    borderTopLeftRadius: 15, // styles.customRadius - 1px outline
+    borderTopRightRadius: 0,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 15, // styles.customRadius - 1px outline
+  });
 });
 
 it('renders button without border radius', () => {
@@ -903,8 +925,9 @@ it('animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
-
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
   expect(getByTestId('button-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });

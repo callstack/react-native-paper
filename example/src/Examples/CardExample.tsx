@@ -11,8 +11,9 @@ import {
   Text,
 } from 'react-native-paper';
 
-import { PreferencesContext, useExampleTheme } from '..';
 import { isWeb } from '../../utils';
+import { useExampleTheme } from '../hooks/useExampleTheme';
+import { PreferencesContext } from '../PreferencesContext';
 import ScreenWrapper from '../ScreenWrapper';
 
 type Mode = 'elevated' | 'outlined' | 'contained';

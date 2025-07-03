@@ -64,6 +64,10 @@ function MaterialBottomTabNavigator({
   );
 }
 
+/**
+ * @deprecated `createMaterialBottomTabNavigator` has been deprecated since `react-native-paper@5.14.0`.
+ * Please use `@react-navigation/bottom-tabs` version `7.x` or higher and combine it with `BottomNavigation.Bar` for a Material Design look.
+ */
 export default createNavigatorFactory<
   TabNavigationState<ParamListBase>,
   MaterialBottomTabNavigationOptions,

@@ -3,6 +3,7 @@ import {
   Animated,
   ColorValue,
   GestureResponderEvent,
+  PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -21,7 +22,9 @@ import {
 import { useInternalTheme } from '../../core/theming';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {
@@ -51,6 +54,11 @@ export type Props = {
    * Whether the button is disabled.
    */
   disabled?: boolean;
+  /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
   /**
    * Accessibility label for the `SegmentedButtonItem`. This is read by the screen reader when the user taps the button.
    */
@@ -93,6 +101,10 @@ export type Props = {
    */
   testID?: string;
   /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -108,6 +120,7 @@ const SegmentedButtonItem = ({
   checkedColor,
   uncheckedColor,
   rippleColor: customRippleColor,
+  background,
   icon,
   testID,
   label,
@@ -116,6 +129,7 @@ const SegmentedButtonItem = ({
   density = 'regular',
   theme: themeOverrides,
   labelMaxFontSizeMultiplier,
+  hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
@@ -208,7 +222,9 @@ const SegmentedButtonItem = ({
         rippleColor={rippleColor}
         testID={testID}
         style={rippleStyle}
+        background={background}
         theme={theme}
+        hitSlop={hitSlop}
       >
         <View style={[styles.content, { paddingVertical }]}>
           {showCheckedIcon ? (

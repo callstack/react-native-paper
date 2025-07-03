@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Animated, Image } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { act, render } from '@testing-library/react-native';
 
 import Banner from '../Banner';
 
@@ -140,7 +140,9 @@ describe('animations', () => {
       expect(showCallback).not.toHaveBeenCalled();
       expect(hideCallback).not.toHaveBeenCalled();
 
-      jest.runAllTimers();
+      act(() => {
+        jest.runAllTimers();
+      });
       expect(showCallback).not.toHaveBeenCalled();
       expect(hideCallback).toHaveBeenCalled();
     });
@@ -156,7 +158,9 @@ describe('animations', () => {
         </Banner>
       );
 
-      jest.runAllTimers();
+      act(() => {
+        jest.runAllTimers();
+      });
       expect(showCallback).toHaveBeenCalledTimes(0);
       expect(hideCallback).toHaveBeenCalledTimes(1);
 
@@ -169,7 +173,9 @@ describe('animations', () => {
           Text
         </Banner>
       );
-      jest.runAllTimers();
+      act(() => {
+        jest.runAllTimers();
+      });
       expect(showCallback).toHaveBeenCalledTimes(1);
       expect(hideCallback).toHaveBeenCalledTimes(1);
     });
@@ -191,7 +197,9 @@ describe('animations', () => {
       expect(showCallback).not.toHaveBeenCalled();
       expect(hideCallback).not.toHaveBeenCalled();
 
-      jest.runAllTimers();
+      act(() => {
+        jest.runAllTimers();
+      });
       expect(showCallback).toHaveBeenCalled();
       expect(hideCallback).not.toHaveBeenCalled();
     });
@@ -207,7 +215,9 @@ describe('animations', () => {
         </Banner>
       );
 
-      jest.runAllTimers();
+      act(() => {
+        jest.runAllTimers();
+      });
       expect(showCallback).toHaveBeenCalledTimes(1);
       expect(hideCallback).toHaveBeenCalledTimes(0);
 
@@ -220,7 +230,9 @@ describe('animations', () => {
           Text
         </Banner>
       );
-      jest.runAllTimers();
+      act(() => {
+        jest.runAllTimers();
+      });
       expect(showCallback).toHaveBeenCalledTimes(1);
       expect(hideCallback).toHaveBeenCalledTimes(1);
     });
@@ -238,7 +250,9 @@ describe('animations', () => {
         </Banner>
       );
 
-      jest.runAllTimers();
+      act(() => {
+        jest.runAllTimers();
+      });
       expect(showCallback).toHaveBeenCalledTimes(1);
       expect(hideCallback).toHaveBeenCalledTimes(0);
 
@@ -255,7 +269,9 @@ describe('animations', () => {
         </Banner>
       );
 
-      jest.runAllTimers();
+      act(() => {
+        jest.runAllTimers();
+      });
       expect(showCallback).toHaveBeenCalledTimes(1);
       expect(hideCallback).toHaveBeenCalledTimes(0);
       expect(nextShowCallback).toHaveBeenCalledTimes(0);
@@ -273,7 +289,9 @@ describe('animations', () => {
         </Banner>
       );
 
-      jest.runAllTimers();
+      act(() => {
+        jest.runAllTimers();
+      });
       expect(showCallback).toHaveBeenCalledTimes(1);
       expect(hideCallback).toHaveBeenCalledTimes(0);
 
@@ -290,7 +308,9 @@ describe('animations', () => {
         </Banner>
       );
 
-      jest.runAllTimers();
+      act(() => {
+        jest.runAllTimers();
+      });
       expect(showCallback).toHaveBeenCalledTimes(1);
       expect(hideCallback).toHaveBeenCalledTimes(0);
       expect(nextShowCallback).toHaveBeenCalledTimes(0);
@@ -306,7 +326,9 @@ describe('animations', () => {
         </Banner>
       );
 
-      jest.runAllTimers();
+      act(() => {
+        jest.runAllTimers();
+      });
       expect(showCallback).toHaveBeenCalledTimes(1);
       expect(hideCallback).toHaveBeenCalledTimes(0);
       expect(nextShowCallback).toHaveBeenCalledTimes(0);
@@ -335,7 +357,9 @@ describe('animations', () => {
       duration: 200,
     }).start();
 
-    jest.runAllTimers();
+    act(() => {
+      jest.runAllTimers();
+    });
 
     expect(getByTestId('banner-outer-layer')).toHaveStyle({
       transform: [{ scale: 1.5 }],

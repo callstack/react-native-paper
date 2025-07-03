@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import { StyleSheet, Text, Platform, I18nManager, View } from 'react-native';
+import { I18nManager, Platform, StyleSheet, Text, View } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
@@ -29,6 +29,12 @@ const style = StyleSheet.create({
   contentStyle: {
     paddingLeft: 20,
   },
+});
+
+// Revert changes to Platform.OS automatically
+const defaultPlatform = Platform.OS;
+beforeEach(() => {
+  Platform.OS = defaultPlatform;
 });
 
 const affixTextValue = '/100';
@@ -239,12 +245,14 @@ it('renders label with correct color when inactive', () => {
   });
 });
 
-it('renders input placeholder initially with an empty space character', () => {
+it('renders input placeholder initially with transparent placeholderTextColor', () => {
   const { getByTestId } = render(
     <TextInput multiline label="Multiline input" testID={'text-input'} />
   );
 
-  expect(getByTestId('text-input').props.placeholder).toBe(' ');
+  expect(getByTestId('text-input').props.placeholderTextColor).toBe(
+    'transparent'
+  );
 });
 
 it('correctly applies padding offset to input label on Android when RTL', () => {
@@ -382,7 +390,8 @@ it("correctly applies theme background to label when input's background is trans
   });
 });
 
-it('always applies line height, even if not specified', () => {
+it('always applies line height for web, even if not specified', () => {
+  Platform.OS = 'web';
   const { getByTestId } = render(
     <View>
       <TextInput
@@ -446,10 +455,31 @@ it('always applies line height, even if not specified', () => {
   expect(getByTestId('large-font')).toHaveStyle({ lineHeight: 30 * 1.2 });
   expect(getByTestId('large-font-flat')).toHaveStyle({ lineHeight: 30 * 1.2 });
 
-  expect(getByTestId('custom-line-height')).toHaveStyle({ lineHeight: 29 });
+  expect(getByTestId('custom-line-height')).toHaveStyle({
+    lineHeight: 29,
+  });
   expect(getByTestId('custom-line-height-flat')).toHaveStyle({
     lineHeight: 29,
   });
+});
+
+it('call onPress when affix adornment pressed', () => {
+  const affixOnPress = jest.fn();
+  const affixTextValue = '+39';
+  const { getByText, toJSON } = render(
+    <TextInput
+      label="Flat input"
+      placeholder="Enter your phone number"
+      value={''}
+      left={<TextInput.Affix text="+39" onPress={affixOnPress} />}
+    />
+  );
+
+  fireEvent.press(getByText(affixTextValue));
+
+  expect(getByText(affixTextValue)).toBeTruthy();
+  expect(toJSON()).toMatchSnapshot();
+  expect(affixOnPress).toHaveBeenCalledTimes(1);
 });
 
 describe('maxFontSizeMultiplier', () => {
@@ -538,7 +568,7 @@ describe('getFlatInputColor - underline color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      underlineColorCustom: getTheme().colors.onSurface,
+      underlineColorCustom: getTheme().colors.onSurfaceVariant,
     });
   });
 
@@ -625,7 +655,7 @@ describe('getFlatInputColor - input text color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      inputTextColor: getTheme().colors.onSurfaceVariant,
+      inputTextColor: getTheme().colors.onSurface,
     });
   });
 

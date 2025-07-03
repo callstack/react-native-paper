@@ -33,14 +33,18 @@ exports[`allows customizing Route's type via generics 1`] = `
       removeClippedSubviews={false}
       style={
         [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "zIndex": 1,
-          },
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "zIndex": 1,
+            },
+          ],
           {
             "display": undefined,
           },
@@ -52,18 +56,22 @@ exports[`allows customizing Route's type via generics 1`] = `
         collapsable={false}
         renderToHardwareTextureAndroid={false}
         style={
-          {
-            "flex": 1,
-            "opacity": 1,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": 0,
-              },
-            ],
-          }
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "opacity": 1,
+              "transform": [
+                {
+                  "translateX": 0,
+                },
+                {
+                  "translateY": 0,
+                },
+              ],
+            },
+          ]
         }
       >
         First
@@ -111,11 +119,15 @@ exports[`allows customizing Route's type via generics 1`] = `
       <View
         collapsable={false}
         style={
-          {
-            "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
-            "overflow": "hidden",
-          }
+          [
+            {
+              "alignItems": "center",
+              "overflow": "hidden",
+            },
+            {
+              "backgroundColor": "rgb(243, 237, 246)",
+            },
+          ]
         }
         testID="bottom-navigation-bar-content"
       >
@@ -190,15 +202,23 @@ exports[`allows customizing Route's type via generics 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -221,29 +241,43 @@ exports[`allows customizing Route's type via generics 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 />
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 />
                 <View
@@ -286,22 +320,30 @@ exports[`allows customizing Route's type via generics 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -349,14 +391,18 @@ exports[`allows customizing Route's type via generics 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -460,43 +506,65 @@ exports[`allows customizing Route's type via generics 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 />
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 />
                 <View
@@ -539,22 +607,30 @@ exports[`allows customizing Route's type via generics 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -602,14 +678,18 @@ exports[`allows customizing Route's type via generics 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -698,14 +778,18 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
       removeClippedSubviews={false}
       style={
         [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "zIndex": 1,
-          },
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "zIndex": 1,
+            },
+          ],
           {
             "display": undefined,
           },
@@ -717,18 +801,22 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         collapsable={false}
         renderToHardwareTextureAndroid={false}
         style={
-          {
-            "flex": 1,
-            "opacity": 1,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": 0,
-              },
-            ],
-          }
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "opacity": 1,
+              "transform": [
+                {
+                  "translateX": 0,
+                },
+                {
+                  "translateY": 0,
+                },
+              ],
+            },
+          ]
         }
       >
         Route: 0
@@ -776,11 +864,15 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
       <View
         collapsable={false}
         style={
-          {
-            "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
-            "overflow": "hidden",
-          }
+          [
+            {
+              "alignItems": "center",
+              "overflow": "hidden",
+            },
+            {
+              "backgroundColor": "rgb(243, 237, 246)",
+            },
+          ]
         }
         testID="bottom-navigation-bar-content"
       >
@@ -856,15 +948,23 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -887,20 +987,26 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -923,35 +1029,35 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -974,16 +1080,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -1081,34 +1181,48 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -1131,35 +1245,35 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -1182,16 +1296,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -1289,34 +1397,48 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -1339,35 +1461,35 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -1390,16 +1512,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -1481,14 +1597,18 @@ exports[`hides labels in shifting bottom navigation 1`] = `
       removeClippedSubviews={false}
       style={
         [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "zIndex": 1,
-          },
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "zIndex": 1,
+            },
+          ],
           {
             "display": undefined,
           },
@@ -1500,18 +1620,22 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         collapsable={false}
         renderToHardwareTextureAndroid={false}
         style={
-          {
-            "flex": 1,
-            "opacity": 1,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": 0,
-              },
-            ],
-          }
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "opacity": 1,
+              "transform": [
+                {
+                  "translateX": 0,
+                },
+                {
+                  "translateY": 0,
+                },
+              ],
+            },
+          ]
         }
       >
         Route: 0
@@ -1559,11 +1683,15 @@ exports[`hides labels in shifting bottom navigation 1`] = `
       <View
         collapsable={false}
         style={
-          {
-            "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
-            "overflow": "hidden",
-          }
+          [
+            {
+              "alignItems": "center",
+              "overflow": "hidden",
+            },
+            {
+              "backgroundColor": "rgb(243, 237, 246)",
+            },
+          ]
         }
         testID="bottom-navigation-bar-content"
       >
@@ -1639,15 +1767,23 @@ exports[`hides labels in shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -1670,20 +1806,26 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -1706,16 +1848,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -1734,7 +1870,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -1757,16 +1892,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -1864,34 +1993,48 @@ exports[`hides labels in shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -1914,16 +2057,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -1942,7 +2079,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -1965,16 +2101,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -2072,34 +2202,48 @@ exports[`hides labels in shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -2122,16 +2266,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -2150,7 +2288,6 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -2173,16 +2310,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -2264,14 +2395,18 @@ exports[`renders bottom navigation with getLazy 1`] = `
       removeClippedSubviews={false}
       style={
         [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "zIndex": 1,
-          },
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "zIndex": 1,
+            },
+          ],
           {
             "display": undefined,
           },
@@ -2283,18 +2418,22 @@ exports[`renders bottom navigation with getLazy 1`] = `
         collapsable={false}
         renderToHardwareTextureAndroid={false}
         style={
-          {
-            "flex": 1,
-            "opacity": 1,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": 0,
-              },
-            ],
-          }
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "opacity": 1,
+              "transform": [
+                {
+                  "translateX": 0,
+                },
+                {
+                  "translateY": 0,
+                },
+              ],
+            },
+          ]
         }
       >
         Route: 0
@@ -2308,14 +2447,18 @@ exports[`renders bottom navigation with getLazy 1`] = `
       removeClippedSubviews={true}
       style={
         [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "zIndex": 0,
-          },
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "zIndex": 0,
+            },
+          ],
           {
             "display": undefined,
           },
@@ -2327,18 +2470,22 @@ exports[`renders bottom navigation with getLazy 1`] = `
         collapsable={false}
         renderToHardwareTextureAndroid={false}
         style={
-          {
-            "flex": 1,
-            "opacity": 0,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": 9999,
-              },
-            ],
-          }
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "opacity": 0,
+              "transform": [
+                {
+                  "translateX": 0,
+                },
+                {
+                  "translateY": 9999,
+                },
+              ],
+            },
+          ]
         }
       >
         Route: 1
@@ -2352,14 +2499,18 @@ exports[`renders bottom navigation with getLazy 1`] = `
       removeClippedSubviews={true}
       style={
         [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "zIndex": 0,
-          },
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "zIndex": 0,
+            },
+          ],
           {
             "display": undefined,
           },
@@ -2371,18 +2522,22 @@ exports[`renders bottom navigation with getLazy 1`] = `
         collapsable={false}
         renderToHardwareTextureAndroid={false}
         style={
-          {
-            "flex": 1,
-            "opacity": 0,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": 9999,
-              },
-            ],
-          }
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "opacity": 0,
+              "transform": [
+                {
+                  "translateX": 0,
+                },
+                {
+                  "translateY": 9999,
+                },
+              ],
+            },
+          ]
         }
       >
         Route: 3
@@ -2396,14 +2551,18 @@ exports[`renders bottom navigation with getLazy 1`] = `
       removeClippedSubviews={true}
       style={
         [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "zIndex": 0,
-          },
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "zIndex": 0,
+            },
+          ],
           {
             "display": undefined,
           },
@@ -2415,18 +2574,22 @@ exports[`renders bottom navigation with getLazy 1`] = `
         collapsable={false}
         renderToHardwareTextureAndroid={false}
         style={
-          {
-            "flex": 1,
-            "opacity": 0,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": 9999,
-              },
-            ],
-          }
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "opacity": 0,
+              "transform": [
+                {
+                  "translateX": 0,
+                },
+                {
+                  "translateY": 9999,
+                },
+              ],
+            },
+          ]
         }
       >
         Route: 4
@@ -2474,11 +2637,15 @@ exports[`renders bottom navigation with getLazy 1`] = `
       <View
         collapsable={false}
         style={
-          {
-            "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
-            "overflow": "hidden",
-          }
+          [
+            {
+              "alignItems": "center",
+              "overflow": "hidden",
+            },
+            {
+              "backgroundColor": "rgb(243, 237, 246)",
+            },
+          ]
         }
         testID="bottom-navigation-bar-content"
       >
@@ -2553,15 +2720,23 @@ exports[`renders bottom navigation with getLazy 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -2584,20 +2759,26 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -2620,35 +2801,35 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -2671,16 +2852,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -2723,22 +2898,30 @@ exports[`renders bottom navigation with getLazy 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -2786,14 +2969,18 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -2897,34 +3084,48 @@ exports[`renders bottom navigation with getLazy 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -2947,35 +3148,35 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -2998,16 +3199,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -3050,22 +3245,30 @@ exports[`renders bottom navigation with getLazy 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -3113,14 +3316,18 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -3224,34 +3431,48 @@ exports[`renders bottom navigation with getLazy 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -3274,35 +3495,35 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -3325,16 +3546,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -3377,22 +3592,30 @@ exports[`renders bottom navigation with getLazy 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -3440,14 +3663,18 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -3551,34 +3778,48 @@ exports[`renders bottom navigation with getLazy 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -3601,35 +3842,35 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰋑
+                    heart
                   </Text>
                 </View>
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -3652,16 +3893,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰋑
+                    heart
                   </Text>
                 </View>
                 <View
@@ -3704,22 +3939,30 @@ exports[`renders bottom navigation with getLazy 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -3767,14 +4010,18 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -3878,34 +4125,48 @@ exports[`renders bottom navigation with getLazy 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -3928,35 +4189,35 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰒛
+                    shopping-music
                   </Text>
                 </View>
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -3979,16 +4240,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰒛
+                    shopping-music
                   </Text>
                 </View>
                 <View
@@ -4031,22 +4286,30 @@ exports[`renders bottom navigation with getLazy 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -4094,14 +4357,18 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -4190,14 +4457,18 @@ exports[`renders bottom navigation with scene animation 1`] = `
       removeClippedSubviews={false}
       style={
         [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "zIndex": 1,
-          },
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "zIndex": 1,
+            },
+          ],
           {
             "display": undefined,
           },
@@ -4268,11 +4539,15 @@ exports[`renders bottom navigation with scene animation 1`] = `
       <View
         collapsable={false}
         style={
-          {
-            "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
-            "overflow": "hidden",
-          }
+          [
+            {
+              "alignItems": "center",
+              "overflow": "hidden",
+            },
+            {
+              "backgroundColor": "rgb(243, 237, 246)",
+            },
+          ]
         }
         testID="bottom-navigation-bar-content"
       >
@@ -4396,7 +4671,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -4419,16 +4693,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -4447,7 +4715,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -4470,16 +4737,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -4522,10 +4783,13 @@ exports[`renders bottom navigation with scene animation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -4673,7 +4937,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -4696,16 +4959,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -4724,7 +4981,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -4747,16 +5003,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -4799,10 +5049,13 @@ exports[`renders bottom navigation with scene animation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -4950,7 +5203,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -4973,16 +5225,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -5001,7 +5247,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -5024,16 +5269,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -5076,10 +5315,13 @@ exports[`renders bottom navigation with scene animation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -5227,7 +5469,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -5250,16 +5491,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰋑
+                    heart
                   </Text>
                 </View>
                 <View
@@ -5278,7 +5513,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -5301,16 +5535,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰋑
+                    heart
                   </Text>
                 </View>
                 <View
@@ -5353,10 +5581,13 @@ exports[`renders bottom navigation with scene animation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -5504,7 +5735,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -5527,16 +5757,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰒛
+                    shopping-music
                   </Text>
                 </View>
                 <View
@@ -5555,7 +5779,6 @@ exports[`renders bottom navigation with scene animation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -5578,16 +5801,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰒛
+                    shopping-music
                   </Text>
                 </View>
                 <View
@@ -5630,10 +5847,13 @@ exports[`renders bottom navigation with scene animation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -5734,14 +5954,18 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       removeClippedSubviews={false}
       style={
         [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "zIndex": 1,
-          },
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "zIndex": 1,
+            },
+          ],
           {
             "display": undefined,
           },
@@ -5753,18 +5977,22 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         collapsable={false}
         renderToHardwareTextureAndroid={false}
         style={
-          {
-            "flex": 1,
-            "opacity": 1,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": 0,
-              },
-            ],
-          }
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "opacity": 1,
+              "transform": [
+                {
+                  "translateX": 0,
+                },
+                {
+                  "translateY": 0,
+                },
+              ],
+            },
+          ]
         }
       >
         Route: 0
@@ -5812,11 +6040,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
       <View
         collapsable={false}
         style={
-          {
-            "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
-            "overflow": "hidden",
-          }
+          [
+            {
+              "alignItems": "center",
+              "overflow": "hidden",
+            },
+            {
+              "backgroundColor": "rgb(243, 237, 246)",
+            },
+          ]
         }
         testID="bottom-navigation-bar-content"
       >
@@ -5891,15 +6123,23 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -5922,39 +6162,45 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
-                >
-                  <icon
-                    color="rgba(29, 25, 43, 1)"
-                  />
-                </View>
+                />
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
-                >
-                  <icon
-                    color="rgba(73, 69, 79, 1)"
-                  />
-                </View>
+                />
                 <View
                   style={
                     [
@@ -5995,22 +6241,30 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <text
@@ -6022,14 +6276,18 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <text
@@ -6096,53 +6354,67 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
-                >
-                  <icon
-                    color="rgba(29, 25, 43, 1)"
-                  />
-                </View>
+                />
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
-                >
-                  <icon
-                    color="rgba(73, 69, 79, 1)"
-                  />
-                </View>
+                />
                 <View
                   style={
                     [
@@ -6183,22 +6455,30 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <text
@@ -6210,14 +6490,18 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <text
@@ -6284,53 +6568,67 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
-                >
-                  <icon
-                    color="rgba(29, 25, 43, 1)"
-                  />
-                </View>
+                />
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
-                >
-                  <icon
-                    color="rgba(73, 69, 79, 1)"
-                  />
-                </View>
+                />
                 <View
                   style={
                     [
@@ -6371,22 +6669,30 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <text
@@ -6398,14 +6704,18 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <text
@@ -6457,14 +6767,18 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       removeClippedSubviews={false}
       style={
         [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "zIndex": 1,
-          },
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "zIndex": 1,
+            },
+          ],
           {
             "display": undefined,
           },
@@ -6476,18 +6790,22 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         collapsable={false}
         renderToHardwareTextureAndroid={false}
         style={
-          {
-            "flex": 1,
-            "opacity": 1,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": 0,
-              },
-            ],
-          }
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "opacity": 1,
+              "transform": [
+                {
+                  "translateX": 0,
+                },
+                {
+                  "translateY": 0,
+                },
+              ],
+            },
+          ]
         }
       >
         Route: 0
@@ -6535,11 +6853,15 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
       <View
         collapsable={false}
         style={
-          {
-            "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
-            "overflow": "hidden",
-          }
+          [
+            {
+              "alignItems": "center",
+              "overflow": "hidden",
+            },
+            {
+              "backgroundColor": "rgb(243, 237, 246)",
+            },
+          ]
         }
         testID="bottom-navigation-bar-content"
       >
@@ -6660,11 +6982,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(29, 25, 43, 1)"
-                  />
-                </View>
+                />
                 <View
                   collapsable={false}
                   style={
@@ -6678,11 +6996,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(73, 69, 79, 1)"
-                  />
-                </View>
+                />
                 <View
                   style={
                     [
@@ -6723,10 +7037,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -6835,11 +7152,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(29, 25, 43, 1)"
-                  />
-                </View>
+                />
                 <View
                   collapsable={false}
                   style={
@@ -6853,11 +7166,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(73, 69, 79, 1)"
-                  />
-                </View>
+                />
                 <View
                   style={
                     [
@@ -6898,10 +7207,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -7010,11 +7322,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(29, 25, 43, 1)"
-                  />
-                </View>
+                />
                 <View
                   collapsable={false}
                   style={
@@ -7028,11 +7336,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(73, 69, 79, 1)"
-                  />
-                </View>
+                />
                 <View
                   style={
                     [
@@ -7073,10 +7377,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -7185,11 +7492,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(29, 25, 43, 1)"
-                  />
-                </View>
+                />
                 <View
                   collapsable={false}
                   style={
@@ -7203,11 +7506,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(73, 69, 79, 1)"
-                  />
-                </View>
+                />
                 <View
                   style={
                     [
@@ -7248,10 +7547,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -7360,11 +7662,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(29, 25, 43, 1)"
-                  />
-                </View>
+                />
                 <View
                   collapsable={false}
                   style={
@@ -7378,11 +7676,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
                       "top": 4,
                     }
                   }
-                >
-                  <icon
-                    color="rgba(73, 69, 79, 1)"
-                  />
-                </View>
+                />
                 <View
                   style={
                     [
@@ -7423,10 +7717,13 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -7491,14 +7788,18 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       removeClippedSubviews={false}
       style={
         [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "zIndex": 1,
-          },
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "zIndex": 1,
+            },
+          ],
           {
             "display": undefined,
           },
@@ -7510,18 +7811,22 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         collapsable={false}
         renderToHardwareTextureAndroid={false}
         style={
-          {
-            "flex": 1,
-            "opacity": 1,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": 0,
-              },
-            ],
-          }
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "opacity": 1,
+              "transform": [
+                {
+                  "translateX": 0,
+                },
+                {
+                  "translateY": 0,
+                },
+              ],
+            },
+          ]
         }
       >
         Route: 0
@@ -7569,11 +7874,15 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
       <View
         collapsable={false}
         style={
-          {
-            "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
-            "overflow": "hidden",
-          }
+          [
+            {
+              "alignItems": "center",
+              "overflow": "hidden",
+            },
+            {
+              "backgroundColor": "rgb(243, 237, 246)",
+            },
+          ]
         }
         testID="bottom-navigation-bar-content"
       >
@@ -7648,15 +7957,23 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -7679,20 +7996,26 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -7715,35 +8038,35 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -7766,16 +8089,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -7818,22 +8135,30 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -7881,14 +8206,18 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -7992,34 +8321,48 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -8042,35 +8385,35 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -8093,16 +8436,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -8145,22 +8482,30 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -8208,14 +8553,18 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -8319,34 +8668,48 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -8369,35 +8732,35 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -8420,16 +8783,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -8472,22 +8829,30 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -8535,14 +8900,18 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -8631,14 +9000,18 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       removeClippedSubviews={false}
       style={
         [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "zIndex": 1,
-          },
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "zIndex": 1,
+            },
+          ],
           {
             "display": undefined,
           },
@@ -8650,18 +9023,22 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         collapsable={false}
         renderToHardwareTextureAndroid={false}
         style={
-          {
-            "flex": 1,
-            "opacity": 1,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": 0,
-              },
-            ],
-          }
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "opacity": 1,
+              "transform": [
+                {
+                  "translateX": 0,
+                },
+                {
+                  "translateY": 0,
+                },
+              ],
+            },
+          ]
         }
       >
         Route: 0
@@ -8709,11 +9086,15 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
       <View
         collapsable={false}
         style={
-          {
-            "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
-            "overflow": "hidden",
-          }
+          [
+            {
+              "alignItems": "center",
+              "overflow": "hidden",
+            },
+            {
+              "backgroundColor": "rgb(243, 237, 246)",
+            },
+          ]
         }
         testID="bottom-navigation-bar-content"
       >
@@ -8837,7 +9218,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -8860,16 +9240,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -8888,7 +9262,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -8911,16 +9284,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -8963,10 +9330,13 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -9114,7 +9484,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -9137,16 +9506,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -9165,7 +9528,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -9188,16 +9550,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -9240,10 +9596,13 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -9391,7 +9750,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -9414,16 +9772,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -9442,7 +9794,6 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -9465,16 +9816,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -9517,10 +9862,13 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -9621,14 +9969,18 @@ exports[`renders non-shifting bottom navigation 1`] = `
       removeClippedSubviews={false}
       style={
         [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "zIndex": 1,
-          },
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "zIndex": 1,
+            },
+          ],
           {
             "display": undefined,
           },
@@ -9640,18 +9992,22 @@ exports[`renders non-shifting bottom navigation 1`] = `
         collapsable={false}
         renderToHardwareTextureAndroid={false}
         style={
-          {
-            "flex": 1,
-            "opacity": 1,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": 0,
-              },
-            ],
-          }
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "opacity": 1,
+              "transform": [
+                {
+                  "translateX": 0,
+                },
+                {
+                  "translateY": 0,
+                },
+              ],
+            },
+          ]
         }
       >
         Route: 0
@@ -9699,11 +10055,15 @@ exports[`renders non-shifting bottom navigation 1`] = `
       <View
         collapsable={false}
         style={
-          {
-            "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
-            "overflow": "hidden",
-          }
+          [
+            {
+              "alignItems": "center",
+              "overflow": "hidden",
+            },
+            {
+              "backgroundColor": "rgb(243, 237, 246)",
+            },
+          ]
         }
         testID="bottom-navigation-bar-content"
       >
@@ -9778,15 +10138,23 @@ exports[`renders non-shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -9809,20 +10177,26 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -9845,35 +10219,35 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -9896,16 +10270,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -9948,22 +10316,30 @@ exports[`renders non-shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -10011,14 +10387,18 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -10122,34 +10502,48 @@ exports[`renders non-shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -10172,35 +10566,35 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -10223,16 +10617,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -10275,22 +10663,30 @@ exports[`renders non-shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -10338,14 +10734,18 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -10449,34 +10849,48 @@ exports[`renders non-shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "alignSelf": "center",
-                    "height": 32,
-                    "justifyContent": "center",
-                    "marginBottom": 4,
-                    "marginHorizontal": 12,
-                    "marginTop": 0,
-                    "width": 32,
-                  }
+                  [
+                    {
+                      "alignSelf": "center",
+                      "height": 24,
+                      "marginHorizontal": 12,
+                      "marginTop": 2,
+                      "width": 24,
+                    },
+                    {
+                      "height": 32,
+                      "justifyContent": "center",
+                      "marginBottom": 4,
+                      "marginTop": 0,
+                      "width": 32,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -10499,35 +10913,35 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "alignItems": "center",
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 4,
-                    }
+                    [
+                      {
+                        "alignItems": "center",
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "top": 4,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -10550,16 +10964,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -10602,22 +11010,30 @@ exports[`renders non-shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 0,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -10665,14 +11081,18 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    {
-                      "bottom": 0,
-                      "left": 0,
-                      "opacity": 1,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    [
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      {
+                        "opacity": 1,
+                      },
+                    ]
                   }
                 >
                   <Text
@@ -10761,14 +11181,18 @@ exports[`renders shifting bottom navigation 1`] = `
       removeClippedSubviews={false}
       style={
         [
-          {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "zIndex": 1,
-          },
+          [
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "zIndex": 1,
+            },
+          ],
           {
             "display": undefined,
           },
@@ -10780,18 +11204,22 @@ exports[`renders shifting bottom navigation 1`] = `
         collapsable={false}
         renderToHardwareTextureAndroid={false}
         style={
-          {
-            "flex": 1,
-            "opacity": 1,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": 0,
-              },
-            ],
-          }
+          [
+            {
+              "flex": 1,
+            },
+            {
+              "opacity": 1,
+              "transform": [
+                {
+                  "translateX": 0,
+                },
+                {
+                  "translateY": 0,
+                },
+              ],
+            },
+          ]
         }
       >
         Route: 0
@@ -10839,11 +11267,15 @@ exports[`renders shifting bottom navigation 1`] = `
       <View
         collapsable={false}
         style={
-          {
-            "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
-            "overflow": "hidden",
-          }
+          [
+            {
+              "alignItems": "center",
+              "overflow": "hidden",
+            },
+            {
+              "backgroundColor": "rgb(243, 237, 246)",
+            },
+          ]
         }
         testID="bottom-navigation-bar-content"
       >
@@ -10967,7 +11399,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -10990,16 +11421,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -11018,7 +11443,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -11041,16 +11465,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰍉
+                    magnify
                   </Text>
                 </View>
                 <View
@@ -11093,10 +11511,13 @@ exports[`renders shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -11244,7 +11665,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -11267,16 +11687,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -11295,7 +11709,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -11318,16 +11731,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰄀
+                    camera
                   </Text>
                 </View>
                 <View
@@ -11370,10 +11777,13 @@ exports[`renders shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -11521,7 +11931,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -11544,16 +11953,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -11572,7 +11975,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -11595,16 +11997,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰚇
+                    inbox
                   </Text>
                 </View>
                 <View
@@ -11647,10 +12043,13 @@ exports[`renders shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -11798,7 +12197,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -11821,16 +12219,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰋑
+                    heart
                   </Text>
                 </View>
                 <View
@@ -11849,7 +12241,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -11872,16 +12263,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰋑
+                    heart
                   </Text>
                 </View>
                 <View
@@ -11924,10 +12309,13 @@ exports[`renders shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View
@@ -12075,7 +12463,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -12098,16 +12485,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰒛
+                    shopping-music
                   </Text>
                 </View>
                 <View
@@ -12126,7 +12507,6 @@ exports[`renders shifting bottom navigation 1`] = `
                 >
                   <Text
                     accessibilityElementsHidden={true}
-                    allowFontScaling={false}
                     importantForAccessibility="no-hide-descendants"
                     pointerEvents="none"
                     selectable={false}
@@ -12149,16 +12529,10 @@ exports[`renders shifting bottom navigation 1`] = `
                             "backgroundColor": "transparent",
                           },
                         ],
-                        {
-                          "fontFamily": "Material Design Icons",
-                          "fontStyle": "normal",
-                          "fontWeight": "normal",
-                        },
-                        {},
                       ]
                     }
                   >
-                    󰒛
+                    shopping-music
                   </Text>
                 </View>
                 <View
@@ -12201,10 +12575,13 @@ exports[`renders shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  {
-                    "height": 16,
-                    "paddingBottom": 2,
-                  }
+                  [
+                    {
+                      "height": 16,
+                      "paddingBottom": 2,
+                    },
+                    false,
+                  ]
                 }
               >
                 <View

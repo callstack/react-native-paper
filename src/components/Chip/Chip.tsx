@@ -5,6 +5,7 @@ import {
   ColorValue,
   GestureResponderEvent,
   Platform,
+  PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -15,7 +16,7 @@ import {
 
 import useLatestCallback from 'use-latest-callback';
 
-import { getChipColors } from './helpers';
+import { ChipAvatarProps, getChipColors } from './helpers';
 import { useInternalTheme } from '../../core/theming';
 import { white } from '../../styles/themes/v2/colors';
 import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
@@ -26,6 +27,7 @@ import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
 import TouchableRipple, {
   MouseEventType,
+  Props as TouchableRippleProps,
 } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
@@ -80,6 +82,11 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Whether the chip is disabled. A disabled chip is greyed out and `onPress` is not called on touch.
    */
   disabled?: boolean;
+  /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
   /**
    * Accessibility label for the chip. This is read by the screen reader when the user taps the chip.
    */
@@ -137,6 +144,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   textStyle?: StyleProp<TextStyle>;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
+  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -184,7 +195,9 @@ const Chip = ({
   avatar,
   selected = false,
   disabled = false,
+  background,
   accessibilityLabel,
+  accessibilityRole = 'button',
   closeIconAccessibilityLabel = 'Close',
   onPress,
   onPressIn,
@@ -207,10 +220,12 @@ const Chip = ({
   compact,
   elevated = false,
   maxFontSizeMultiplier,
+  hitSlop,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { isV3 } = theme;
+  const { isV3, roundness } = theme;
+  const isWeb = Platform.OS === 'web';
 
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(isV3 && elevated ? 1 : 0)
@@ -232,7 +247,8 @@ const Chip = ({
     Animated.timing(elevation, {
       toValue: isV3 ? (elevated ? 2 : 0) : 4,
       duration: 200 * scale,
-      useNativeDriver: true,
+      useNativeDriver:
+        isWeb || Platform.constants.reactNativeVersion.minor <= 72,
     }).start();
   });
 
@@ -243,12 +259,13 @@ const Chip = ({
     Animated.timing(elevation, {
       toValue: isV3 && elevated ? 1 : 0,
       duration: 150 * scale,
-      useNativeDriver: true,
+      useNativeDriver:
+        isWeb || Platform.constants.reactNativeVersion.minor <= 72,
     }).start();
   });
 
   const opacity = isV3 ? 0.38 : 0.26;
-  const defaultBorderRadius = isV3 ? 8 : 16;
+  const defaultBorderRadius = roundness * (isV3 ? 2 : 4);
   const iconSize = isV3 ? 18 : 16;
 
   const {
@@ -298,8 +315,7 @@ const Chip = ({
     <Surface
       style={[
         styles.container,
-        isV3 &&
-          (isOutlined ? styles.md3OutlineContainer : styles.md3FlatContainer),
+        isV3 && styles.md3Container,
         !theme.isV3 && {
           elevation: elevationStyle,
         },
@@ -314,9 +330,11 @@ const Chip = ({
       {...rest}
       testID={`${testID}-container`}
       theme={theme}
+      container
     >
       <TouchableRipple
         borderless
+        background={background}
         style={[{ borderRadius }, styles.touchable]}
         onPress={onPress}
         onLongPress={onLongPress}
@@ -328,10 +346,11 @@ const Chip = ({
         rippleColor={rippleColor}
         disabled={disabled}
         accessibilityLabel={accessibilityLabel}
-        accessibilityRole="button"
+        accessibilityRole={accessibilityRole}
         accessibilityState={accessibilityState}
         testID={testID}
         theme={theme}
+        hitSlop={hitSlop}
       >
         <View
           style={[styles.content, isV3 && styles.md3Content, contentSpacings]}
@@ -344,8 +363,8 @@ const Chip = ({
                 disabled && { opacity },
               ]}
             >
-              {React.isValidElement(avatar)
-                ? React.cloneElement(avatar as React.ReactElement<any>, {
+              {React.isValidElement<ChipAvatarProps>(avatar)
+                ? React.cloneElement(avatar, {
                     style: [styles.avatar, avatar.props.style],
                   })
                 : avatar}
@@ -444,11 +463,8 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     flexDirection: Platform.select({ default: 'column', web: 'row' }),
   },
-  md3OutlineContainer: {
+  md3Container: {
     borderWidth: 1,
-  },
-  md3FlatContainer: {
-    borderWidth: 0,
   },
   content: {
     flexDirection: 'row',

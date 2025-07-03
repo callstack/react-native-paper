@@ -1,8 +1,11 @@
 import * as React from 'react';
 import {
+  AccessibilityRole,
   Animated,
   ColorValue,
   GestureResponderEvent,
+  Platform,
+  PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -12,7 +15,11 @@ import {
 
 import color from 'color';
 
-import { ButtonMode, getButtonColors } from './utils';
+import {
+  ButtonMode,
+  getButtonColors,
+  getButtonTouchableRippleStyle,
+} from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
@@ -23,6 +30,7 @@ import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
 import TouchableRipple, {
   MouseEventType,
+  Props as TouchableRippleProps,
 } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
@@ -84,6 +92,11 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   uppercase?: boolean;
   /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
+  /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityLabel?: string;
@@ -91,6 +104,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Accessibility hint for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityHint?: string;
+  /**
+   * Accessibility role for the button. The "button" role is set by default.
+   */
+  accessibilityRole?: AccessibilityRole;
   /**
    * Function to execute on press.
    */
@@ -122,13 +139,17 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   delayLongPress?: number;
   /**
    * Style of button's inner content.
-   * Use this prop to apply custom height and width and to set the icon on the right with `flexDirection: 'row-reverse'`.
+   * Use this prop to apply custom height and width, to set a custom padding or to set the icon on the right with `flexDirection: 'row-reverse'`.
    */
   contentStyle?: StyleProp<ViewStyle>;
   /**
    * Specifies the largest possible scale a text font can reach.
    */
   maxFontSizeMultiplier?: number;
+  /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * Style for the button text.
@@ -138,6 +159,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * Reference for the touchable
+   */
+  touchableRef?: React.RefObject<View>;
   /**
    * testID to be used on tests.
    */
@@ -175,6 +200,8 @@ const Button = (
     children,
     accessibilityLabel,
     accessibilityHint,
+    accessibilityRole = 'button',
+    hitSlop,
     onPress,
     onPressIn,
     onPressOut,
@@ -189,7 +216,9 @@ const Button = (
     labelStyle,
     testID = 'button',
     accessible,
+    background,
     maxFontSizeMultiplier,
+    touchableRef,
     ...rest
   }: Props,
   ref: React.ForwardedRef<View>
@@ -203,6 +232,7 @@ const Button = (
   );
   const { roundness, isV3, animation } = theme;
   const uppercase = uppercaseProp ?? !theme.isV3;
+  const isWeb = Platform.OS === 'web';
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -221,7 +251,13 @@ const Button = (
   );
 
   React.useEffect(() => {
-    elevation.setValue(isElevationEntitled ? initialElevation : 0);
+    // Workaround not to call setValue on Animated.Value, because it breaks styles.
+    // https://github.com/callstack/react-native-paper/issues/4559
+    Animated.timing(elevation, {
+      toValue: isElevationEntitled ? initialElevation : 0,
+      duration: 0,
+      useNativeDriver: true,
+    });
   }, [isElevationEntitled, elevation, initialElevation]);
 
   const handlePressIn = (e: GestureResponderEvent) => {
@@ -231,7 +267,8 @@ const Button = (
       Animated.timing(elevation, {
         toValue: activeElevation,
         duration: 200 * scale,
-        useNativeDriver: true,
+        useNativeDriver:
+          isWeb || Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };
@@ -243,7 +280,8 @@ const Button = (
       Animated.timing(elevation, {
         toValue: initialElevation,
         duration: 150 * scale,
-        useNativeDriver: true,
+        useNativeDriver:
+          isWeb || Platform.constants.reactNativeVersion.minor <= 72,
       }).start();
     }
   };
@@ -320,13 +358,15 @@ const Button = (
           compact && styles.compact,
           buttonStyle,
           style,
-          !isV3 && { elevation },
-        ] as ViewStyle
+          !isV3 && !disabled && { elevation },
+        ] as Animated.WithAnimatedValue<StyleProp<ViewStyle>>
       }
       {...(isV3 && { elevation: elevation })}
+      container
     >
       <TouchableRipple
         borderless
+        background={background}
         onPress={onPress}
         onLongPress={onLongPress}
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
@@ -336,14 +376,16 @@ const Button = (
         delayLongPress={delayLongPress}
         accessibilityLabel={accessibilityLabel}
         accessibilityHint={accessibilityHint}
-        accessibilityRole="button"
+        accessibilityRole={accessibilityRole}
         accessibilityState={{ disabled }}
         accessible={accessible}
+        hitSlop={hitSlop}
         disabled={disabled}
         rippleColor={rippleColor}
-        style={touchableStyle}
+        style={getButtonTouchableRippleStyle(touchableStyle, borderWidth)}
         testID={testID}
         theme={theme}
+        ref={touchableRef}
       >
         <View style={[styles.content, contentStyle]}>
           {icon && loading !== true ? (

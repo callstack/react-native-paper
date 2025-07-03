@@ -1,7 +1,10 @@
 import React from 'react';
 import {
   Animated,
+  DimensionValue,
+  GestureResponderEvent,
   LayoutChangeEvent,
+  Pressable,
   StyleProp,
   StyleSheet,
   Text,
@@ -22,6 +25,14 @@ export type Props = {
   text: string;
   onLayout?: (event: LayoutChangeEvent) => void;
   /**
+   * Function to execute on press.
+   */
+  onPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Accessibility label for the affix. This is read by the screen reader when the user taps the affix.
+   */
+  accessibilityLabel?: string;
+  /**
    * Style that is passed to the Text element.
    */
   textStyle?: StyleProp<TextStyle>;
@@ -37,7 +48,7 @@ type ContextState = {
   visible?: Animated.Value;
   textStyle?: StyleProp<TextStyle>;
   side: AdornmentSide;
-  paddingHorizontal?: number | string;
+  paddingHorizontal?: DimensionValue;
   maxFontSizeMultiplier?: number | undefined | null;
   testID?: string;
   disabled?: boolean;
@@ -115,6 +126,8 @@ const TextInputAffix = ({
   textStyle: labelStyle,
   theme: themeOverrides,
   onLayout: onTextLayout,
+  onPress,
+  accessibilityLabel = text,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { AFFIX_OFFSET } = getConstants(theme.isV3);
@@ -141,6 +154,17 @@ const TextInputAffix = ({
 
   const textColor = getTextColor({ theme, disabled });
 
+  const content = (
+    <Text
+      maxFontSizeMultiplier={maxFontSizeMultiplier}
+      style={[{ color: textColor }, textStyle, labelStyle]}
+      onLayout={onTextLayout}
+      testID={`${testID}-text`}
+    >
+      {text}
+    </Text>
+  );
+
   return (
     <Animated.View
       style={[
@@ -157,17 +181,21 @@ const TextInputAffix = ({
       onLayout={onLayout}
       testID={testID}
     >
-      <Text
-        maxFontSizeMultiplier={maxFontSizeMultiplier}
-        style={[{ color: textColor }, textStyle, labelStyle]}
-        onLayout={onTextLayout}
-        testID={`${testID}-text`}
-      >
-        {text}
-      </Text>
+      {onPress ? (
+        <Pressable
+          onPress={onPress}
+          accessibilityRole="button"
+          accessibilityLabel={accessibilityLabel}
+        >
+          {content}
+        </Pressable>
+      ) : (
+        content
+      )}
     </Animated.View>
   );
 };
+
 TextInputAffix.displayName = 'TextInput.Affix';
 
 const styles = StyleSheet.create({

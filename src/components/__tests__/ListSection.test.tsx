@@ -15,15 +15,19 @@ const styles = StyleSheet.create({
   },
 });
 
+const testID = 'list-item';
+
 it('renders list section without subheader', () => {
   const tree = render(
     <ListSection>
       <ListItem
         title="First Item"
+        testID={testID}
         left={(props) => <ListIcon {...props} icon="folder" />}
       />
       <ListItem
         title="Second Item"
+        testID={testID}
         left={(props) => <ListIcon {...props} icon="folder" />}
       />
     </ListSection>
@@ -38,10 +42,12 @@ it('renders list section with subheader', () => {
       <ListSubheader>Some title</ListSubheader>
       <ListItem
         title="First Item"
+        testID={testID}
         left={(props) => <ListIcon {...props} icon="folder" />}
       />
       <ListItem
         title="Second Item"
+        testID={testID}
         left={(props) => <ListIcon {...props} icon="folder" />}
       />
     </ListSection>
@@ -55,10 +61,12 @@ it('renders list section with custom title style', () => {
     <ListSection title="Some title" titleStyle={styles.itemColor}>
       <ListItem
         title="First Item"
+        testID={testID}
         left={(props) => <ListIcon {...props} icon="folder" />}
       />
       <ListItem
         title="Second Item"
+        testID={testID}
         left={(props) => <ListIcon {...props} icon="folder" />}
       />
     </ListSection>

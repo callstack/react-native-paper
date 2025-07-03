@@ -1,10 +1,10 @@
 import * as React from 'react';
 import type {
+  Animated,
   GestureResponderEvent,
   StyleProp,
-  ViewStyle,
   View,
-  Animated,
+  ViewStyle,
 } from 'react-native';
 
 import type { $Omit } from './../../types';

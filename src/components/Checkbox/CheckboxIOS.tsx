@@ -38,6 +38,8 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
  * Checkboxes allow the selection of multiple options from a set.
  * This component follows platform guidelines for iOS, but can be used
  * on any platform.
+ *
+ * @extends TouchableRipple props https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
  */
 const CheckboxIOS = ({
   status,

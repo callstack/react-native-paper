@@ -18,11 +18,17 @@ import CardTitle from './CardTitle';
 import { getCardColors } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, ThemeProp } from '../../types';
+import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { splitStyles } from '../../utils/splitStyles';
 import Surface from '../Surface';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+type CardComposition = {
+  Content: typeof CardContent;
+  Actions: typeof CardActions;
+  Cover: typeof CardCover;
+  Title: typeof CardTitle;
+};
 
 type OutlinedCardProps = {
   mode: 'outlined';
@@ -87,7 +93,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Style of card's inner content.
    */
   contentStyle?: StyleProp<ViewStyle>;
-  style?: StyleProp<ViewStyle>;
+  style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
   /**
    * @optional
    */
@@ -130,23 +136,27 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
  * export default MyComponent;
  * ```
  */
-const Card = ({
-  elevation: cardElevation = 1,
-  delayLongPress,
-  onPress,
-  onLongPress,
-  onPressOut,
-  onPressIn,
-  mode: cardMode = 'elevated',
-  children,
-  style,
-  contentStyle,
-  theme: themeOverrides,
-  testID = 'card',
-  accessible,
-  disabled,
-  ...rest
-}: (OutlinedCardProps | ElevatedCardProps | ContainedCardProps) & Props) => {
+
+const Card = (
+  {
+    elevation: cardElevation = 1,
+    delayLongPress,
+    onPress,
+    onLongPress,
+    onPressOut,
+    onPressIn,
+    mode: cardMode = 'elevated',
+    children,
+    style,
+    contentStyle,
+    theme: themeOverrides,
+    testID = 'card',
+    accessible,
+    disabled,
+    ...rest
+  }: (OutlinedCardProps | ElevatedCardProps | ContainedCardProps) & Props,
+  ref: React.ForwardedRef<View>
+) => {
   const theme = useInternalTheme(themeOverrides);
   const isMode = React.useCallback(
     (modeToCompare: Mode) => {
@@ -203,6 +213,10 @@ const Card = ({
   ]);
 
   const runElevationAnimation = (pressType: HandlePressType) => {
+    if (isV3 && isMode('contained')) {
+      return;
+    }
+
     const isPressTypeIn = pressType === 'in';
     if (dark && isAdaptiveMode) {
       Animated.timing(elevationDarkAdaptive, {
@@ -274,13 +288,15 @@ const Card = ({
 
   return (
     <Surface
+      ref={ref}
       style={[
         isV3 && !isMode('elevated') && { backgroundColor },
-        !isV3 && isMode('outlined')
-          ? styles.resetElevation
-          : {
-              elevation: computedElevation as unknown as number,
-            },
+        !isV3 &&
+          (isMode('outlined')
+            ? styles.resetElevation
+            : {
+                elevation: computedElevation as unknown as number,
+              }),
         borderRadiusCombinedStyles,
         style,
       ]}
@@ -289,6 +305,7 @@ const Card = ({
         elevation: isMode('elevated') ? computedElevation : 0,
       })}
       testID={`${testID}-container`}
+      container
       {...rest}
     >
       {isMode('outlined') && (
@@ -325,14 +342,19 @@ const Card = ({
   );
 };
 
+Card.displayName = 'Card';
+const Component = forwardRef(Card);
+
+const CardComponent = Component as typeof Component & CardComposition;
+
 // @component ./CardContent.tsx
-Card.Content = CardContent;
+CardComponent.Content = CardContent;
 // @component ./CardActions.tsx
-Card.Actions = CardActions;
+CardComponent.Actions = CardActions;
 // @component ./CardCover.tsx
-Card.Cover = CardCover;
+CardComponent.Cover = CardCover;
 // @component ./CardTitle.tsx
-Card.Title = CardTitle;
+CardComponent.Title = CardTitle;
 
 const styles = StyleSheet.create({
   innerContainer: {
@@ -350,4 +372,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Card;
+export default CardComponent;

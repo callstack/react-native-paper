@@ -58,10 +58,13 @@ exports[`renders expanded accordion 1`] = `
       <View
         pointerEvents="none"
         style={
-          {
-            "flexDirection": "row",
-            "marginVertical": 6,
-          }
+          [
+            {
+              "flexDirection": "row",
+              "marginVertical": 6,
+            },
+            undefined,
+          ]
         }
       >
         <View
@@ -74,6 +77,7 @@ exports[`renders expanded accordion 1`] = `
                 "flex": 1,
                 "justifyContent": "center",
               },
+              undefined,
             ]
           }
         >
@@ -122,7 +126,6 @@ exports[`renders expanded accordion 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -145,16 +148,10 @@ exports[`renders expanded accordion 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰅃
+            chevron-up
           </Text>
         </View>
       </View>
@@ -205,11 +202,14 @@ exports[`renders expanded accordion 1`] = `
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -223,8 +223,10 @@ exports[`renders expanded accordion 1`] = `
               "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="undefined-content"
       >
         <Text
           numberOfLines={1}
@@ -321,10 +323,13 @@ exports[`renders list accordion with children 1`] = `
       <View
         pointerEvents="none"
         style={
-          {
-            "flexDirection": "row",
-            "marginVertical": 6,
-          }
+          [
+            {
+              "flexDirection": "row",
+              "marginVertical": 6,
+            },
+            undefined,
+          ]
         }
       >
         <View
@@ -346,7 +351,6 @@ exports[`renders list accordion with children 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -369,16 +373,10 @@ exports[`renders list accordion with children 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰉋
+            folder
           </Text>
         </View>
         <View
@@ -391,6 +389,7 @@ exports[`renders list accordion with children 1`] = `
                 "flex": 1,
                 "justifyContent": "center",
               },
+              undefined,
             ]
           }
         >
@@ -439,7 +438,6 @@ exports[`renders list accordion with children 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -462,16 +460,10 @@ exports[`renders list accordion with children 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰅀
+            chevron-down
           </Text>
         </View>
       </View>
@@ -538,10 +530,13 @@ exports[`renders list accordion with custom title and description styles 1`] = `
       <View
         pointerEvents="none"
         style={
-          {
-            "flexDirection": "row",
-            "marginVertical": 6,
-          }
+          [
+            {
+              "flexDirection": "row",
+              "marginVertical": 6,
+            },
+            undefined,
+          ]
         }
       >
         <View
@@ -554,6 +549,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
                 "flex": 1,
                 "justifyContent": "center",
               },
+              undefined,
             ]
           }
         >
@@ -642,7 +638,6 @@ exports[`renders list accordion with custom title and description styles 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -665,16 +660,10 @@ exports[`renders list accordion with custom title and description styles 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰅀
+            chevron-down
           </Text>
         </View>
       </View>
@@ -741,10 +730,13 @@ exports[`renders list accordion with left items 1`] = `
       <View
         pointerEvents="none"
         style={
-          {
-            "flexDirection": "row",
-            "marginVertical": 6,
-          }
+          [
+            {
+              "flexDirection": "row",
+              "marginVertical": 6,
+            },
+            undefined,
+          ]
         }
       >
         <View
@@ -766,7 +758,6 @@ exports[`renders list accordion with left items 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -789,16 +780,10 @@ exports[`renders list accordion with left items 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰓎
+            star
           </Text>
         </View>
         <View
@@ -811,6 +796,7 @@ exports[`renders list accordion with left items 1`] = `
                 "flex": 1,
                 "justifyContent": "center",
               },
+              undefined,
             ]
           }
         >
@@ -859,7 +845,6 @@ exports[`renders list accordion with left items 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -882,16 +867,10 @@ exports[`renders list accordion with left items 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰅀
+            chevron-down
           </Text>
         </View>
       </View>
@@ -958,10 +937,13 @@ exports[`renders multiline list accordion 1`] = `
       <View
         pointerEvents="none"
         style={
-          {
-            "flexDirection": "row",
-            "marginVertical": 6,
-          }
+          [
+            {
+              "flexDirection": "row",
+              "marginVertical": 6,
+            },
+            undefined,
+          ]
         }
       >
         <View
@@ -974,6 +956,7 @@ exports[`renders multiline list accordion 1`] = `
                 "flex": 1,
                 "justifyContent": "center",
               },
+              undefined,
             ]
           }
         >
@@ -1058,7 +1041,6 @@ exports[`renders multiline list accordion 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -1081,16 +1063,10 @@ exports[`renders multiline list accordion 1`] = `
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰅀
+            chevron-down
           </Text>
         </View>
       </View>

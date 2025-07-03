@@ -194,6 +194,7 @@ const Banner = ({
       {...rest}
       style={[!theme.isV3 && styles.elevation, { opacity }, style]}
       theme={theme}
+      container
       {...(theme.isV3 && { elevation })}
     >
       <View style={[styles.wrapper, contentStyle]}>

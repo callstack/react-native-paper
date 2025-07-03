@@ -1,5 +1,311 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`call onPress when affix adornment pressed 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "rgba(231, 224, 236, 1)",
+        "borderTopLeftRadius": 4,
+        "borderTopRightRadius": 4,
+      },
+      {},
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    style={
+      [
+        {
+          "bottom": 0,
+          "height": 2,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "zIndex": 1,
+        },
+        {
+          "height": 1,
+        },
+        {
+          "backgroundColor": "rgba(73, 69, 79, 1)",
+          "transform": [
+            {
+              "scaleY": 0.5,
+            },
+          ],
+        },
+        undefined,
+      ]
+    }
+    testID="text-input-underline"
+  />
+  <View
+    onLayout={[Function]}
+    style={
+      [
+        {
+          "flexGrow": 1,
+          "paddingBottom": 0,
+          "paddingTop": 0,
+        },
+        {
+          "minHeight": 56,
+        },
+      ]
+    }
+  >
+    <View
+      pointerEvents="none"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "zIndex": 3,
+          },
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        pointerEvents="none"
+        style={
+          {
+            "bottom": 0,
+            "left": 0,
+            "opacity": 1,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+            "transform": [
+              {
+                "translateX": 0,
+              },
+            ],
+            "width": 750,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "width": 73,
+            }
+          }
+        >
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            onLayout={[Function]}
+            onTextLayout={[Function]}
+            style={
+              {
+                "color": "rgba(103, 80, 164, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 73,
+                "opacity": 0,
+                "paddingLeft": 16,
+                "paddingRight": 16,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 30,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": 0,
+                  },
+                  {
+                    "scale": 1,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-flat-label-active"
+          >
+            Flat input
+          </Text>
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            style={
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 73,
+                "opacity": 0,
+                "paddingLeft": 16,
+                "paddingRight": 16,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 30,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": 0,
+                  },
+                  {
+                    "scale": 1,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-flat-label-inactive"
+          >
+            Flat input
+          </Text>
+        </View>
+      </View>
+    </View>
+    <TextInput
+      cursorColor="rgba(103, 80, 164, 1)"
+      editable={true}
+      maxFontSizeMultiplier={1.5}
+      multiline={false}
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Enter your phone number"
+      placeholderTextColor="transparent"
+      selectionColor="rgba(103, 80, 164, 1)"
+      style={
+        [
+          {
+            "flexGrow": 1,
+            "margin": 0,
+          },
+          {},
+          {
+            "paddingBottom": 4,
+            "paddingTop": 24,
+          },
+          {
+            "color": "rgba(28, 27, 31, 1)",
+            "fontFamily": "System",
+            "fontSize": 16,
+            "fontWeight": undefined,
+            "letterSpacing": 0.15,
+            "lineHeight": undefined,
+            "minWidth": 65,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "textAlign": "left",
+            "textAlignVertical": "center",
+          },
+          undefined,
+          {
+            "marginLeft": 0,
+            "paddingLeft": 40,
+          },
+          undefined,
+        ]
+      }
+      testID="text-input-flat"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+  </View>
+  <View
+    collapsable={false}
+    onLayout={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "left": 16,
+        "opacity": 0,
+        "position": "absolute",
+        "top": null,
+      }
+    }
+    testID="left-affix-adornment"
+  >
+    <View
+      accessibilityLabel="+39"
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+    >
+      <Text
+        maxFontSizeMultiplier={1.5}
+        style={
+          [
+            {
+              "color": "rgba(73, 69, 79, 1)",
+            },
+            {
+              "fontFamily": "System",
+              "fontSize": 16,
+              "fontWeight": undefined,
+              "letterSpacing": 0.15,
+              "lineHeight": undefined,
+            },
+            undefined,
+          ]
+        }
+        testID="left-affix-adornment-text"
+      >
+        +39
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`correctly applies a component as the text label 1`] = `
 <View
   style={
@@ -16,20 +322,28 @@ exports[`correctly applies a component as the text label 1`] = `
   <View
     collapsable={false}
     style={
-      {
-        "backgroundColor": "rgba(28, 27, 31, 1)",
-        "bottom": 0,
-        "height": 1,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "transform": [
-          {
-            "scaleY": 0.5,
-          },
-        ],
-        "zIndex": 1,
-      }
+      [
+        {
+          "bottom": 0,
+          "height": 2,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "zIndex": 1,
+        },
+        {
+          "height": 1,
+        },
+        {
+          "backgroundColor": "rgba(73, 69, 79, 1)",
+          "transform": [
+            {
+              "scaleY": 0.5,
+            },
+          ],
+        },
+        undefined,
+      ]
     }
     testID="text-input-underline"
   />
@@ -38,6 +352,7 @@ exports[`correctly applies a component as the text label 1`] = `
     style={
       [
         {
+          "flexGrow": 1,
           "paddingBottom": 0,
           "paddingTop": 0,
         },
@@ -48,120 +363,148 @@ exports[`correctly applies a component as the text label 1`] = `
     }
   >
     <View
-      collapsable={false}
       pointerEvents="none"
       style={
-        {
-          "bottom": 0,
-          "left": 0,
-          "opacity": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": [
-            {
-              "translateX": 4,
-            },
-          ],
-          "width": 750,
-          "zIndex": 3,
-        }
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "zIndex": 3,
+          },
+        ]
       }
     >
-      <Text
+      <View
         collapsable={false}
-        maxFontSizeMultiplier={1.5}
-        numberOfLines={1}
-        onLayout={[Function]}
-        onTextLayout={[Function]}
+        pointerEvents="none"
         style={
           {
-            "color": "rgba(103, 80, 164, 1)",
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": undefined,
+            "bottom": 0,
             "left": 0,
-            "letterSpacing": 0.15,
-            "lineHeight": 19.2,
-            "maxWidth": 73,
             "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 16,
             "position": "absolute",
-            "textAlign": "left",
-            "top": 30,
+            "right": 0,
+            "top": 0,
             "transform": [
               {
-                "translateX": 0,
-              },
-              {
-                "translateY": -12,
-              },
-              {
-                "scale": 0.75,
+                "translateX": 4,
               },
             ],
-            "writingDirection": "ltr",
+            "width": 750,
           }
         }
-        testID="text-input-flat-label-active"
       >
-        <Text
+        <View
           style={
             {
-              "color": "#f44336",
+              "width": 97.33333333333333,
             }
           }
         >
-          Flat input
-        </Text>
-      </Text>
-      <Text
-        collapsable={false}
-        maxFontSizeMultiplier={1.5}
-        numberOfLines={1}
-        style={
-          {
-            "color": "rgba(73, 69, 79, 1)",
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": undefined,
-            "left": 0,
-            "letterSpacing": 0.15,
-            "lineHeight": 19.2,
-            "maxWidth": 73,
-            "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 16,
-            "position": "absolute",
-            "textAlign": "left",
-            "top": 30,
-            "transform": [
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            onLayout={[Function]}
+            onTextLayout={[Function]}
+            style={
               {
-                "translateX": 0,
-              },
-              {
-                "translateY": -12,
-              },
-              {
-                "scale": 0.75,
-              },
-            ],
-            "writingDirection": "ltr",
-          }
-        }
-        testID="text-input-flat-label-inactive"
-      >
-        <Text
-          style={
-            {
-              "color": "#f44336",
+                "color": "rgba(103, 80, 164, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 97.33333333333333,
+                "opacity": 0,
+                "paddingLeft": 16,
+                "paddingRight": 16,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 30,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": -12,
+                  },
+                  {
+                    "scale": 0.75,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
             }
-          }
-        >
-          Flat input
-        </Text>
-      </Text>
+            testID="text-input-flat-label-active"
+          >
+            <Text
+              style={
+                {
+                  "color": "#f44336",
+                }
+              }
+            >
+              Flat input
+            </Text>
+          </Text>
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            style={
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 97.33333333333333,
+                "opacity": 0,
+                "paddingLeft": 16,
+                "paddingRight": 16,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 30,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": -12,
+                  },
+                  {
+                    "scale": 0.75,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-flat-label-inactive"
+          >
+            <Text
+              style={
+                {
+                  "color": "#f44336",
+                }
+              }
+            >
+              Flat input
+            </Text>
+          </Text>
+        </View>
+      </View>
     </View>
     <TextInput
       cursorColor="rgba(103, 80, 164, 1)"
@@ -171,35 +514,34 @@ exports[`correctly applies a component as the text label 1`] = `
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
-      placeholder=" "
-      placeholderTextColor="rgba(73, 69, 79, 1)"
+      placeholder="Type something"
+      placeholderTextColor="transparent"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
           {
+            "flexGrow": 1,
             "margin": 0,
           },
-          {
-            "height": 56,
-          },
+          {},
           {
             "paddingBottom": 4,
             "paddingTop": 24,
           },
           {
-            "color": "rgba(73, 69, 79, 1)",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
-            "lineHeight": 19.2,
+            "lineHeight": undefined,
             "minWidth": 65,
             "paddingLeft": 16,
             "paddingRight": 16,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
-          false,
+          undefined,
           [
             {},
           ],
@@ -230,20 +572,28 @@ exports[`correctly applies cursorColor prop 1`] = `
   <View
     collapsable={false}
     style={
-      {
-        "backgroundColor": "rgba(28, 27, 31, 1)",
-        "bottom": 0,
-        "height": 1,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "transform": [
-          {
-            "scaleY": 0.5,
-          },
-        ],
-        "zIndex": 1,
-      }
+      [
+        {
+          "bottom": 0,
+          "height": 2,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "zIndex": 1,
+        },
+        {
+          "height": 1,
+        },
+        {
+          "backgroundColor": "rgba(73, 69, 79, 1)",
+          "transform": [
+            {
+              "scaleY": 0.5,
+            },
+          ],
+        },
+        undefined,
+      ]
     }
     testID="text-input-underline"
   />
@@ -252,6 +602,7 @@ exports[`correctly applies cursorColor prop 1`] = `
     style={
       [
         {
+          "flexGrow": 1,
           "paddingBottom": 0,
           "paddingTop": 0,
         },
@@ -262,104 +613,132 @@ exports[`correctly applies cursorColor prop 1`] = `
     }
   >
     <View
-      collapsable={false}
       pointerEvents="none"
       style={
-        {
-          "bottom": 0,
-          "left": 0,
-          "opacity": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": [
-            {
-              "translateX": 4,
-            },
-          ],
-          "width": 750,
-          "zIndex": 3,
-        }
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "zIndex": 3,
+          },
+        ]
       }
     >
-      <Text
+      <View
         collapsable={false}
-        maxFontSizeMultiplier={1.5}
-        numberOfLines={1}
-        onLayout={[Function]}
-        onTextLayout={[Function]}
+        pointerEvents="none"
         style={
           {
-            "color": "rgba(103, 80, 164, 1)",
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": undefined,
+            "bottom": 0,
             "left": 0,
-            "letterSpacing": 0.15,
-            "lineHeight": 19.2,
-            "maxWidth": 73,
             "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 16,
             "position": "absolute",
-            "textAlign": "left",
-            "top": 30,
+            "right": 0,
+            "top": 0,
             "transform": [
               {
-                "translateX": 0,
-              },
-              {
-                "translateY": -12,
-              },
-              {
-                "scale": 0.75,
+                "translateX": 4,
               },
             ],
-            "writingDirection": "ltr",
+            "width": 750,
           }
         }
-        testID="text-input-flat-label-active"
       >
-        Flat input
-      </Text>
-      <Text
-        collapsable={false}
-        maxFontSizeMultiplier={1.5}
-        numberOfLines={1}
-        style={
-          {
-            "color": "rgba(73, 69, 79, 1)",
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": undefined,
-            "left": 0,
-            "letterSpacing": 0.15,
-            "lineHeight": 19.2,
-            "maxWidth": 73,
-            "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 16,
-            "position": "absolute",
-            "textAlign": "left",
-            "top": 30,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": -12,
-              },
-              {
-                "scale": 0.75,
-              },
-            ],
-            "writingDirection": "ltr",
+        <View
+          style={
+            {
+              "width": 97.33333333333333,
+            }
           }
-        }
-        testID="text-input-flat-label-inactive"
-      >
-        Flat input
-      </Text>
+        >
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            onLayout={[Function]}
+            onTextLayout={[Function]}
+            style={
+              {
+                "color": "rgba(103, 80, 164, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 97.33333333333333,
+                "opacity": 0,
+                "paddingLeft": 16,
+                "paddingRight": 16,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 30,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": -12,
+                  },
+                  {
+                    "scale": 0.75,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-flat-label-active"
+          >
+            Flat input
+          </Text>
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            style={
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 97.33333333333333,
+                "opacity": 0,
+                "paddingLeft": 16,
+                "paddingRight": 16,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 30,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": -12,
+                  },
+                  {
+                    "scale": 0.75,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-flat-label-inactive"
+          >
+            Flat input
+          </Text>
+        </View>
+      </View>
     </View>
     <TextInput
       cursorColor="#f44336"
@@ -369,35 +748,34 @@ exports[`correctly applies cursorColor prop 1`] = `
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
-      placeholder=" "
-      placeholderTextColor="rgba(73, 69, 79, 1)"
+      placeholder="Type something"
+      placeholderTextColor="transparent"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
           {
+            "flexGrow": 1,
             "margin": 0,
           },
-          {
-            "height": 56,
-          },
+          {},
           {
             "paddingBottom": 4,
             "paddingTop": 24,
           },
           {
-            "color": "rgba(73, 69, 79, 1)",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
-            "lineHeight": 19.2,
+            "lineHeight": undefined,
             "minWidth": 65,
             "paddingLeft": 16,
             "paddingRight": 16,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
-          false,
+          undefined,
           [
             {},
           ],
@@ -428,20 +806,28 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
   <View
     collapsable={false}
     style={
-      {
-        "backgroundColor": "rgba(28, 27, 31, 1)",
-        "bottom": 0,
-        "height": 1,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "transform": [
-          {
-            "scaleY": 0.5,
-          },
-        ],
-        "zIndex": 1,
-      }
+      [
+        {
+          "bottom": 0,
+          "height": 2,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "zIndex": 1,
+        },
+        {
+          "height": 1,
+        },
+        {
+          "backgroundColor": "rgba(73, 69, 79, 1)",
+          "transform": [
+            {
+              "scaleY": 0.5,
+            },
+          ],
+        },
+        undefined,
+      ]
     }
     testID="text-input-underline"
   />
@@ -450,6 +836,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
     style={
       [
         {
+          "flexGrow": 1,
           "paddingBottom": 0,
           "paddingTop": 0,
         },
@@ -460,104 +847,132 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
     }
   >
     <View
-      collapsable={false}
       pointerEvents="none"
       style={
-        {
-          "bottom": 0,
-          "left": 0,
-          "opacity": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": [
-            {
-              "translateX": 4,
-            },
-          ],
-          "width": 750,
-          "zIndex": 3,
-        }
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "zIndex": 3,
+          },
+        ]
       }
     >
-      <Text
+      <View
         collapsable={false}
-        maxFontSizeMultiplier={1.5}
-        numberOfLines={1}
-        onLayout={[Function]}
-        onTextLayout={[Function]}
+        pointerEvents="none"
         style={
           {
-            "color": "rgba(103, 80, 164, 1)",
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": undefined,
+            "bottom": 0,
             "left": 0,
-            "letterSpacing": 0.15,
-            "lineHeight": 19.2,
-            "maxWidth": 73,
             "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 16,
             "position": "absolute",
-            "textAlign": "left",
-            "top": 30,
+            "right": 0,
+            "top": 0,
             "transform": [
               {
-                "translateX": 0,
-              },
-              {
-                "translateY": -12,
-              },
-              {
-                "scale": 0.75,
+                "translateX": 4,
               },
             ],
-            "writingDirection": "ltr",
+            "width": 750,
           }
         }
-        testID="text-input-flat-label-active"
       >
-        Flat input
-      </Text>
-      <Text
-        collapsable={false}
-        maxFontSizeMultiplier={1.5}
-        numberOfLines={1}
-        style={
-          {
-            "color": "rgba(73, 69, 79, 1)",
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": undefined,
-            "left": 0,
-            "letterSpacing": 0.15,
-            "lineHeight": 19.2,
-            "maxWidth": 73,
-            "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 16,
-            "position": "absolute",
-            "textAlign": "left",
-            "top": 30,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": -12,
-              },
-              {
-                "scale": 0.75,
-              },
-            ],
-            "writingDirection": "ltr",
+        <View
+          style={
+            {
+              "width": 97.33333333333333,
+            }
           }
-        }
-        testID="text-input-flat-label-inactive"
-      >
-        Flat input
-      </Text>
+        >
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            onLayout={[Function]}
+            onTextLayout={[Function]}
+            style={
+              {
+                "color": "rgba(103, 80, 164, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 97.33333333333333,
+                "opacity": 0,
+                "paddingLeft": 16,
+                "paddingRight": 16,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 30,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": -12,
+                  },
+                  {
+                    "scale": 0.75,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-flat-label-active"
+          >
+            Flat input
+          </Text>
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            style={
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 97.33333333333333,
+                "opacity": 0,
+                "paddingLeft": 16,
+                "paddingRight": 16,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 30,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": -12,
+                  },
+                  {
+                    "scale": 0.75,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-flat-label-inactive"
+          >
+            Flat input
+          </Text>
+        </View>
+      </View>
     </View>
     <TextInput
       cursorColor="rgba(103, 80, 164, 1)"
@@ -567,35 +982,34 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
-      placeholder=" "
-      placeholderTextColor="rgba(73, 69, 79, 1)"
+      placeholder="Type something"
+      placeholderTextColor="transparent"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
           {
+            "flexGrow": 1,
             "margin": 0,
           },
-          {
-            "height": 56,
-          },
+          {},
           {
             "paddingBottom": 4,
             "paddingTop": 24,
           },
           {
-            "color": "rgba(73, 69, 79, 1)",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
-            "lineHeight": 19.2,
+            "lineHeight": undefined,
             "minWidth": 65,
             "paddingLeft": 16,
             "paddingRight": 16,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
-          false,
+          undefined,
           [
             {},
           ],
@@ -641,6 +1055,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
     style={
       [
         {
+          "flexGrow": 1,
           "paddingBottom": 0,
         },
         {
@@ -651,143 +1066,170 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
     }
   >
     <View
-      collapsable={false}
       pointerEvents="none"
       style={
-        {
-          "bottom": 0,
-          "left": 0,
-          "opacity": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": [
-            {
-              "translateX": 3,
-            },
-          ],
-          "width": 750,
-          "zIndex": 3,
-        }
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "zIndex": 3,
+          },
+        ]
       }
     >
-      <Text
+      <View
         collapsable={false}
-        maxFontSizeMultiplier={1.5}
-        numberOfLines={1}
+        pointerEvents="none"
         style={
           {
-            "backgroundColor": "rgba(255, 251, 254, 1)",
-            "color": "transparent",
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": undefined,
-            "left": 8,
-            "letterSpacing": 0.15,
-            "lineHeight": 19.2,
-            "opacity": 1,
-            "paddingHorizontal": 0,
-            "position": "absolute",
-            "textAlign": "left",
-            "top": 59,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": -52,
-              },
-              {
-                "scale": 0.75,
-              },
-              {
-                "scaleY": 0.2,
-              },
-            ],
-            "width": -16,
-            "writingDirection": "ltr",
-          }
-        }
-        testID="text-input-outlined-label-background"
-      >
-        Outline Input
-      </Text>
-      <Text
-        collapsable={false}
-        maxFontSizeMultiplier={1.5}
-        numberOfLines={1}
-        onLayout={[Function]}
-        onTextLayout={[Function]}
-        style={
-          {
-            "color": "rgba(103, 80, 164, 1)",
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": undefined,
+            "bottom": 0,
             "left": 0,
-            "letterSpacing": 0.15,
-            "lineHeight": 19.2,
-            "maxWidth": 73,
             "opacity": 0,
-            "paddingHorizontal": 16,
             "position": "absolute",
-            "textAlign": "left",
-            "top": 58,
+            "right": 0,
+            "top": 0,
             "transform": [
               {
-                "translateX": 0,
-              },
-              {
-                "translateY": -52,
-              },
-              {
-                "scale": 0.75,
+                "translateX": 3,
               },
             ],
-            "writingDirection": "ltr",
+            "width": 750,
           }
         }
-        testID="text-input-outlined-label-active"
       >
-        Outline Input
-      </Text>
-      <Text
-        collapsable={false}
-        maxFontSizeMultiplier={1.5}
-        numberOfLines={1}
-        style={
-          {
-            "color": "rgba(73, 69, 79, 1)",
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": undefined,
-            "left": 0,
-            "letterSpacing": 0.15,
-            "lineHeight": 19.2,
-            "maxWidth": 73,
-            "opacity": 0,
-            "paddingHorizontal": 16,
-            "position": "absolute",
-            "textAlign": "left",
-            "top": 58,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": -52,
-              },
-              {
-                "scale": 0.75,
-              },
-            ],
-            "writingDirection": "ltr",
+        <View
+          style={
+            {
+              "width": 97.33333333333333,
+            }
           }
-        }
-        testID="text-input-outlined-label-inactive"
-      >
-        Outline Input
-      </Text>
+        >
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            style={
+              {
+                "backgroundColor": "rgba(255, 251, 254, 1)",
+                "color": "transparent",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "height": 0,
+                "left": 8,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "opacity": 1,
+                "paddingHorizontal": 0,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 59,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": -52,
+                  },
+                  {
+                    "scale": 0.75,
+                  },
+                  {
+                    "scaleY": 0.2,
+                  },
+                ],
+                "width": -16,
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-outlined-label-background"
+          />
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            onLayout={[Function]}
+            onTextLayout={[Function]}
+            style={
+              {
+                "color": "rgba(103, 80, 164, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 97.33333333333333,
+                "opacity": 0,
+                "paddingHorizontal": 16,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 58,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": -52,
+                  },
+                  {
+                    "scale": 0.75,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-outlined-label-active"
+          >
+            Outline Input
+          </Text>
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            style={
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 97.33333333333333,
+                "opacity": 0,
+                "paddingHorizontal": 16,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 58,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": -52,
+                  },
+                  {
+                    "scale": 0.75,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-outlined-label-inactive"
+          >
+            Outline Input
+          </Text>
+        </View>
+      </View>
     </View>
     <TextInput
       cursorColor="rgba(103, 80, 164, 1)"
@@ -798,12 +1240,13 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
       onChangeText={[Function]}
       onFocus={[Function]}
       onLayout={[Function]}
-      placeholder=" "
-      placeholderTextColor="rgba(73, 69, 79, 1)"
+      placeholder="Type Something"
+      placeholderTextColor="transparent"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
           {
+            "flexGrow": 1,
             "margin": 0,
           },
           {
@@ -819,13 +1262,13 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
-            "lineHeight": 19.2,
+            "lineHeight": undefined,
             "minWidth": 65,
             "paddingHorizontal": 16,
             "textAlign": "left",
             "textAlignVertical": "top",
           },
-          false,
+          undefined,
           [
             {},
           ],
@@ -856,20 +1299,28 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
   <View
     collapsable={false}
     style={
-      {
-        "backgroundColor": "rgba(28, 27, 31, 1)",
-        "bottom": 0,
-        "height": 1,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "transform": [
-          {
-            "scaleY": 0.5,
-          },
-        ],
-        "zIndex": 1,
-      }
+      [
+        {
+          "bottom": 0,
+          "height": 2,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "zIndex": 1,
+        },
+        {
+          "height": 1,
+        },
+        {
+          "backgroundColor": "rgba(73, 69, 79, 1)",
+          "transform": [
+            {
+              "scaleY": 0.5,
+            },
+          ],
+        },
+        undefined,
+      ]
     }
     testID="text-input-underline"
   />
@@ -878,6 +1329,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
     style={
       [
         {
+          "flexGrow": 1,
           "paddingBottom": 0,
           "paddingTop": 0,
         },
@@ -888,104 +1340,132 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
     }
   >
     <View
-      collapsable={false}
       pointerEvents="none"
       style={
-        {
-          "bottom": 0,
-          "left": 0,
-          "opacity": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": [
-            {
-              "translateX": 4,
-            },
-          ],
-          "width": 750,
-          "zIndex": 3,
-        }
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "zIndex": 3,
+          },
+        ]
       }
     >
-      <Text
+      <View
         collapsable={false}
-        maxFontSizeMultiplier={1.5}
-        numberOfLines={1}
-        onLayout={[Function]}
-        onTextLayout={[Function]}
+        pointerEvents="none"
         style={
           {
-            "color": "rgba(103, 80, 164, 1)",
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": undefined,
+            "bottom": 0,
             "left": 0,
-            "letterSpacing": 0.15,
-            "lineHeight": 19.2,
-            "maxWidth": 73,
             "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 16,
             "position": "absolute",
-            "textAlign": "left",
-            "top": 30,
+            "right": 0,
+            "top": 0,
             "transform": [
               {
-                "translateX": 0,
-              },
-              {
-                "translateY": -12,
-              },
-              {
-                "scale": 0.75,
+                "translateX": 4,
               },
             ],
-            "writingDirection": "ltr",
+            "width": 750,
           }
         }
-        testID="text-input-flat-label-active"
       >
-        With padding
-      </Text>
-      <Text
-        collapsable={false}
-        maxFontSizeMultiplier={1.5}
-        numberOfLines={1}
-        style={
-          {
-            "color": "rgba(73, 69, 79, 1)",
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": undefined,
-            "left": 0,
-            "letterSpacing": 0.15,
-            "lineHeight": 19.2,
-            "maxWidth": 73,
-            "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 16,
-            "position": "absolute",
-            "textAlign": "left",
-            "top": 30,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": -12,
-              },
-              {
-                "scale": 0.75,
-              },
-            ],
-            "writingDirection": "ltr",
+        <View
+          style={
+            {
+              "width": 97.33333333333333,
+            }
           }
-        }
-        testID="text-input-flat-label-inactive"
-      >
-        With padding
-      </Text>
+        >
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            onLayout={[Function]}
+            onTextLayout={[Function]}
+            style={
+              {
+                "color": "rgba(103, 80, 164, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 97.33333333333333,
+                "opacity": 0,
+                "paddingLeft": 16,
+                "paddingRight": 16,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 30,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": -12,
+                  },
+                  {
+                    "scale": 0.75,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-flat-label-active"
+          >
+            With padding
+          </Text>
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            style={
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 97.33333333333333,
+                "opacity": 0,
+                "paddingLeft": 16,
+                "paddingRight": 16,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 30,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": -12,
+                  },
+                  {
+                    "scale": 0.75,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-flat-label-inactive"
+          >
+            With padding
+          </Text>
+        </View>
+      </View>
     </View>
     <TextInput
       cursorColor="rgba(103, 80, 164, 1)"
@@ -995,35 +1475,34 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
-      placeholder=" "
-      placeholderTextColor="rgba(73, 69, 79, 1)"
+      placeholder="Type something"
+      placeholderTextColor="transparent"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
           {
+            "flexGrow": 1,
             "margin": 0,
           },
-          {
-            "height": 56,
-          },
+          {},
           {
             "paddingBottom": 4,
             "paddingTop": 24,
           },
           {
-            "color": "rgba(73, 69, 79, 1)",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
-            "lineHeight": 19.2,
+            "lineHeight": undefined,
             "minWidth": 65,
             "paddingLeft": 16,
             "paddingRight": 16,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
-          false,
+          undefined,
           [
             {},
           ],
@@ -1056,20 +1535,28 @@ exports[`correctly applies textAlign center 1`] = `
   <View
     collapsable={false}
     style={
-      {
-        "backgroundColor": "rgba(28, 27, 31, 1)",
-        "bottom": 0,
-        "height": 1,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "transform": [
-          {
-            "scaleY": 0.5,
-          },
-        ],
-        "zIndex": 1,
-      }
+      [
+        {
+          "bottom": 0,
+          "height": 2,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "zIndex": 1,
+        },
+        {
+          "height": 1,
+        },
+        {
+          "backgroundColor": "rgba(73, 69, 79, 1)",
+          "transform": [
+            {
+              "scaleY": 0.5,
+            },
+          ],
+        },
+        undefined,
+      ]
     }
     testID="text-input-underline"
   />
@@ -1078,6 +1565,7 @@ exports[`correctly applies textAlign center 1`] = `
     style={
       [
         {
+          "flexGrow": 1,
           "paddingBottom": 0,
           "paddingTop": 0,
         },
@@ -1088,104 +1576,132 @@ exports[`correctly applies textAlign center 1`] = `
     }
   >
     <View
-      collapsable={false}
       pointerEvents="none"
       style={
-        {
-          "bottom": 0,
-          "left": 0,
-          "opacity": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": [
-            {
-              "translateX": 4,
-            },
-          ],
-          "width": 750,
-          "zIndex": 3,
-        }
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "zIndex": 3,
+          },
+        ]
       }
     >
-      <Text
+      <View
         collapsable={false}
-        maxFontSizeMultiplier={1.5}
-        numberOfLines={1}
-        onLayout={[Function]}
-        onTextLayout={[Function]}
+        pointerEvents="none"
         style={
           {
-            "color": "rgba(103, 80, 164, 1)",
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": undefined,
+            "bottom": 0,
             "left": 0,
-            "letterSpacing": 0.15,
-            "lineHeight": 19.2,
-            "maxWidth": 73,
             "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 16,
             "position": "absolute",
-            "textAlign": "left",
-            "top": 30,
+            "right": 0,
+            "top": 0,
             "transform": [
               {
-                "translateX": 0,
-              },
-              {
-                "translateY": -12,
-              },
-              {
-                "scale": 0.75,
+                "translateX": 4,
               },
             ],
-            "writingDirection": "ltr",
+            "width": 750,
           }
         }
-        testID="text-input-flat-label-active"
       >
-        Flat input
-      </Text>
-      <Text
-        collapsable={false}
-        maxFontSizeMultiplier={1.5}
-        numberOfLines={1}
-        style={
-          {
-            "color": "rgba(73, 69, 79, 1)",
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": undefined,
-            "left": 0,
-            "letterSpacing": 0.15,
-            "lineHeight": 19.2,
-            "maxWidth": 73,
-            "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 16,
-            "position": "absolute",
-            "textAlign": "left",
-            "top": 30,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": -12,
-              },
-              {
-                "scale": 0.75,
-              },
-            ],
-            "writingDirection": "ltr",
+        <View
+          style={
+            {
+              "width": 97.33333333333333,
+            }
           }
-        }
-        testID="text-input-flat-label-inactive"
-      >
-        Flat input
-      </Text>
+        >
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            onLayout={[Function]}
+            onTextLayout={[Function]}
+            style={
+              {
+                "color": "rgba(103, 80, 164, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 97.33333333333333,
+                "opacity": 0,
+                "paddingLeft": 16,
+                "paddingRight": 16,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 30,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": -12,
+                  },
+                  {
+                    "scale": 0.75,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-flat-label-active"
+          >
+            Flat input
+          </Text>
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            style={
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 97.33333333333333,
+                "opacity": 0,
+                "paddingLeft": 16,
+                "paddingRight": 16,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 30,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": -12,
+                  },
+                  {
+                    "scale": 0.75,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-flat-label-inactive"
+          >
+            Flat input
+          </Text>
+        </View>
+      </View>
     </View>
     <TextInput
       cursorColor="rgba(103, 80, 164, 1)"
@@ -1195,35 +1711,34 @@ exports[`correctly applies textAlign center 1`] = `
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
-      placeholder=" "
-      placeholderTextColor="rgba(73, 69, 79, 1)"
+      placeholder="Type something"
+      placeholderTextColor="transparent"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
           {
+            "flexGrow": 1,
             "margin": 0,
           },
-          {
-            "height": 56,
-          },
+          {},
           {
             "paddingBottom": 4,
             "paddingTop": 24,
           },
           {
-            "color": "rgba(73, 69, 79, 1)",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
-            "lineHeight": 19.2,
+            "lineHeight": undefined,
             "minWidth": 65,
             "paddingLeft": 16,
             "paddingRight": 16,
             "textAlign": "center",
             "textAlignVertical": "center",
           },
-          false,
+          undefined,
           [
             {},
           ],
@@ -1254,20 +1769,28 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
   <View
     collapsable={false}
     style={
-      {
-        "backgroundColor": "rgba(28, 27, 31, 1)",
-        "bottom": 0,
-        "height": 1,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "transform": [
-          {
-            "scaleY": 0.5,
-          },
-        ],
-        "zIndex": 1,
-      }
+      [
+        {
+          "bottom": 0,
+          "height": 2,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "zIndex": 1,
+        },
+        {
+          "height": 1,
+        },
+        {
+          "backgroundColor": "rgba(73, 69, 79, 1)",
+          "transform": [
+            {
+              "scaleY": 0.5,
+            },
+          ],
+        },
+        undefined,
+      ]
     }
     testID="text-input-underline"
   />
@@ -1276,6 +1799,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
     style={
       [
         {
+          "flexGrow": 1,
           "paddingBottom": 0,
           "paddingTop": 0,
         },
@@ -1286,104 +1810,132 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
     }
   >
     <View
-      collapsable={false}
       pointerEvents="none"
       style={
-        {
-          "bottom": 0,
-          "left": 0,
-          "opacity": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": [
-            {
-              "translateX": 4,
-            },
-          ],
-          "width": 750,
-          "zIndex": 3,
-        }
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "zIndex": 3,
+          },
+        ]
       }
     >
-      <Text
+      <View
         collapsable={false}
-        maxFontSizeMultiplier={1.5}
-        numberOfLines={1}
-        onLayout={[Function]}
-        onTextLayout={[Function]}
+        pointerEvents="none"
         style={
           {
-            "color": "rgba(103, 80, 164, 1)",
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": undefined,
+            "bottom": 0,
             "left": 0,
-            "letterSpacing": 0.15,
-            "lineHeight": 19.2,
-            "maxWidth": 73,
             "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 56,
             "position": "absolute",
-            "textAlign": "left",
-            "top": 30,
+            "right": 0,
+            "top": 0,
             "transform": [
               {
-                "translateX": 0,
-              },
-              {
-                "translateY": -12,
-              },
-              {
-                "scale": 0.75,
+                "translateX": 4,
               },
             ],
-            "writingDirection": "ltr",
+            "width": 750,
           }
         }
-        testID="text-input-flat-label-active"
       >
-        Flat input
-      </Text>
-      <Text
-        collapsable={false}
-        maxFontSizeMultiplier={1.5}
-        numberOfLines={1}
-        style={
-          {
-            "color": "rgba(73, 69, 79, 1)",
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": undefined,
-            "left": 0,
-            "letterSpacing": 0.15,
-            "lineHeight": 19.2,
-            "maxWidth": 73,
-            "opacity": 0,
-            "paddingLeft": 16,
-            "paddingRight": 56,
-            "position": "absolute",
-            "textAlign": "left",
-            "top": 30,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": -12,
-              },
-              {
-                "scale": 0.75,
-              },
-            ],
-            "writingDirection": "ltr",
+        <View
+          style={
+            {
+              "width": 97.33333333333333,
+            }
           }
-        }
-        testID="text-input-flat-label-inactive"
-      >
-        Flat input
-      </Text>
+        >
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            onLayout={[Function]}
+            onTextLayout={[Function]}
+            style={
+              {
+                "color": "rgba(103, 80, 164, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 97.33333333333333,
+                "opacity": 0,
+                "paddingLeft": 16,
+                "paddingRight": 56,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 30,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": -12,
+                  },
+                  {
+                    "scale": 0.75,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-flat-label-active"
+          >
+            Flat input
+          </Text>
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            style={
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 97.33333333333333,
+                "opacity": 0,
+                "paddingLeft": 16,
+                "paddingRight": 56,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 30,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": -12,
+                  },
+                  {
+                    "scale": 0.75,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-flat-label-inactive"
+          >
+            Flat input
+          </Text>
+        </View>
+      </View>
     </View>
     <TextInput
       cursorColor="rgba(103, 80, 164, 1)"
@@ -1393,35 +1945,34 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
-      placeholder=" "
-      placeholderTextColor="rgba(73, 69, 79, 1)"
+      placeholder="Type something"
+      placeholderTextColor="transparent"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
           {
+            "flexGrow": 1,
             "margin": 0,
           },
-          {
-            "height": 56,
-          },
+          {},
           {
             "paddingBottom": 4,
             "paddingTop": 24,
           },
           {
-            "color": "rgba(73, 69, 79, 1)",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
-            "lineHeight": 19.2,
+            "lineHeight": undefined,
             "minWidth": 65,
             "paddingLeft": 16,
             "paddingRight": 56,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
-          false,
+          undefined,
           {
             "marginLeft": 0,
             "marginRight": 40,
@@ -1463,7 +2014,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
-            "lineHeight": 19.2,
+            "lineHeight": undefined,
           },
           {
             "color": "#f44336",
@@ -1587,9 +2138,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -1597,7 +2146,6 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -1620,16 +2168,10 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰋑
+            heart
           </Text>
         </View>
       </View>
@@ -1654,20 +2196,28 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
   <View
     collapsable={false}
     style={
-      {
-        "backgroundColor": "rgba(28, 27, 31, 1)",
-        "bottom": 0,
-        "height": 1,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "transform": [
-          {
-            "scaleY": 0.5,
-          },
-        ],
-        "zIndex": 1,
-      }
+      [
+        {
+          "bottom": 0,
+          "height": 2,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "zIndex": 1,
+        },
+        {
+          "height": 1,
+        },
+        {
+          "backgroundColor": "rgba(73, 69, 79, 1)",
+          "transform": [
+            {
+              "scaleY": 0.5,
+            },
+          ],
+        },
+        undefined,
+      ]
     }
     testID="text-input-underline"
   />
@@ -1676,6 +2226,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     style={
       [
         {
+          "flexGrow": 1,
           "paddingBottom": 0,
           "paddingTop": 0,
         },
@@ -1686,104 +2237,132 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
     }
   >
     <View
-      collapsable={false}
       pointerEvents="none"
       style={
-        {
-          "bottom": 0,
-          "left": 0,
-          "opacity": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": [
-            {
-              "translateX": 14,
-            },
-          ],
-          "width": 750,
-          "zIndex": 3,
-        }
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "overflow": "hidden",
+          },
+          {
+            "zIndex": 3,
+          },
+        ]
       }
     >
-      <Text
+      <View
         collapsable={false}
-        maxFontSizeMultiplier={1.5}
-        numberOfLines={1}
-        onLayout={[Function]}
-        onTextLayout={[Function]}
+        pointerEvents="none"
         style={
           {
-            "color": "rgba(103, 80, 164, 1)",
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": undefined,
+            "bottom": 0,
             "left": 0,
-            "letterSpacing": 0.15,
-            "lineHeight": 19.2,
-            "maxWidth": 73,
             "opacity": 0,
-            "paddingLeft": 56,
-            "paddingRight": 56,
             "position": "absolute",
-            "textAlign": "left",
-            "top": 30,
+            "right": 0,
+            "top": 0,
             "transform": [
               {
-                "translateX": 0,
-              },
-              {
-                "translateY": -12,
-              },
-              {
-                "scale": 0.75,
+                "translateX": 14,
               },
             ],
-            "writingDirection": "ltr",
+            "width": 750,
           }
         }
-        testID="text-input-flat-label-active"
       >
-        Flat input
-      </Text>
-      <Text
-        collapsable={false}
-        maxFontSizeMultiplier={1.5}
-        numberOfLines={1}
-        style={
-          {
-            "color": "rgba(73, 69, 79, 1)",
-            "fontFamily": "System",
-            "fontSize": 16,
-            "fontWeight": undefined,
-            "left": 0,
-            "letterSpacing": 0.15,
-            "lineHeight": 19.2,
-            "maxWidth": 73,
-            "opacity": 0,
-            "paddingLeft": 56,
-            "paddingRight": 56,
-            "position": "absolute",
-            "textAlign": "left",
-            "top": 30,
-            "transform": [
-              {
-                "translateX": 0,
-              },
-              {
-                "translateY": -12,
-              },
-              {
-                "scale": 0.75,
-              },
-            ],
-            "writingDirection": "ltr",
+        <View
+          style={
+            {
+              "width": 97.33333333333333,
+            }
           }
-        }
-        testID="text-input-flat-label-inactive"
-      >
-        Flat input
-      </Text>
+        >
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            onLayout={[Function]}
+            onTextLayout={[Function]}
+            style={
+              {
+                "color": "rgba(103, 80, 164, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 97.33333333333333,
+                "opacity": 0,
+                "paddingLeft": 56,
+                "paddingRight": 56,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 30,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": -12,
+                  },
+                  {
+                    "scale": 0.75,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-flat-label-active"
+          >
+            Flat input
+          </Text>
+          <Text
+            collapsable={false}
+            maxFontSizeMultiplier={1.5}
+            numberOfLines={1}
+            style={
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": undefined,
+                "left": 0,
+                "letterSpacing": 0.15,
+                "lineHeight": undefined,
+                "maxWidth": 97.33333333333333,
+                "opacity": 0,
+                "paddingLeft": 56,
+                "paddingRight": 56,
+                "position": "absolute",
+                "textAlign": "left",
+                "top": 30,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                  {
+                    "translateY": -12,
+                  },
+                  {
+                    "scale": 0.75,
+                  },
+                ],
+                "writingDirection": "ltr",
+              }
+            }
+            testID="text-input-flat-label-inactive"
+          >
+            Flat input
+          </Text>
+        </View>
+      </View>
     </View>
     <TextInput
       cursorColor="rgba(103, 80, 164, 1)"
@@ -1793,35 +2372,34 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
       onBlur={[Function]}
       onChangeText={[Function]}
       onFocus={[Function]}
-      placeholder=" "
-      placeholderTextColor="rgba(73, 69, 79, 1)"
+      placeholder="Type something"
+      placeholderTextColor="transparent"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
         [
           {
+            "flexGrow": 1,
             "margin": 0,
           },
-          {
-            "height": 56,
-          },
+          {},
           {
             "paddingBottom": 4,
             "paddingTop": 24,
           },
           {
-            "color": "rgba(73, 69, 79, 1)",
+            "color": "rgba(28, 27, 31, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
-            "lineHeight": 19.2,
+            "lineHeight": undefined,
             "minWidth": 65,
             "paddingLeft": 56,
             "paddingRight": 56,
             "textAlign": "left",
             "textAlignVertical": "center",
           },
-          false,
+          undefined,
           {
             "marginLeft": 40,
             "marginRight": 0,
@@ -1948,9 +2526,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
                   "flexGrow": 1,
                   "justifyContent": "center",
                 },
-                {
-                  "borderRadius": 20,
-                },
+                undefined,
               ],
             ]
           }
@@ -1958,7 +2534,6 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
         >
           <Text
             accessibilityElementsHidden={true}
-            allowFontScaling={false}
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             selectable={false}
@@ -1981,16 +2556,10 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
                     "backgroundColor": "transparent",
                   },
                 ],
-                {
-                  "fontFamily": "Material Design Icons",
-                  "fontStyle": "normal",
-                  "fontWeight": "normal",
-                },
-                {},
               ]
             }
           >
-            󰋑
+            heart
           </Text>
         </View>
       </View>
@@ -2023,7 +2592,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "fontSize": 16,
             "fontWeight": undefined,
             "letterSpacing": 0.15,
-            "lineHeight": 19.2,
+            "lineHeight": undefined,
           },
           {
             "color": "#f44336",

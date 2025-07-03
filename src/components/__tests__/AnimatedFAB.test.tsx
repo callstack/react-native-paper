@@ -83,7 +83,9 @@ it('animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
 
   expect(getByTestId('animated-fab-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],

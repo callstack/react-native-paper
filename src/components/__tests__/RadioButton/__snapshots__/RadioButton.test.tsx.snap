@@ -78,16 +78,10 @@ exports[`RadioButton RadioButton with custom testID renders properly 1`] = `
               "backgroundColor": "transparent",
             },
           ],
-          {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          {},
         ]
       }
     >
-      󰄬
+      check
     </Text>
   </View>
 </View>
@@ -170,16 +164,10 @@ exports[`RadioButton on default platform renders properly 1`] = `
               "backgroundColor": "transparent",
             },
           ],
-          {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          {},
         ]
       }
     >
-      󰄬
+      check
     </Text>
   </View>
 </View>
@@ -262,16 +250,10 @@ exports[`RadioButton on ios platform renders properly 1`] = `
               "backgroundColor": "transparent",
             },
           ],
-          {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          {},
         ]
       }
     >
-      󰄬
+      check
     </Text>
   </View>
 </View>
@@ -354,16 +336,10 @@ exports[`RadioButton when RadioButton is wrapped by RadioButtonContext.Provider 
               "backgroundColor": "transparent",
             },
           ],
-          {
-            "fontFamily": "Material Design Icons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-          {},
         ]
       }
     >
-      󰄬
+      check
     </Text>
   </View>
 </View>

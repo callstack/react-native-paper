@@ -260,14 +260,18 @@ exports[`renders list section with custom title style 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -289,7 +293,6 @@ exports[`renders list section with custom title style 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -312,16 +315,10 @@ exports[`renders list section with custom title style 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰉋
+          folder
         </Text>
       </View>
       <View
@@ -335,8 +332,10 @@ exports[`renders list section with custom title style 1`] = `
               "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
@@ -414,14 +413,18 @@ exports[`renders list section with custom title style 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -443,7 +446,6 @@ exports[`renders list section with custom title style 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -466,16 +468,10 @@ exports[`renders list section with custom title style 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰉋
+          folder
         </Text>
       </View>
       <View
@@ -489,8 +485,10 @@ exports[`renders list section with custom title style 1`] = `
               "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
@@ -787,14 +785,18 @@ exports[`renders list section with subheader 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -816,7 +818,6 @@ exports[`renders list section with subheader 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -839,16 +840,10 @@ exports[`renders list section with subheader 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰉋
+          folder
         </Text>
       </View>
       <View
@@ -862,8 +857,10 @@ exports[`renders list section with subheader 1`] = `
               "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
@@ -941,14 +938,18 @@ exports[`renders list section with subheader 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -970,7 +971,6 @@ exports[`renders list section with subheader 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -993,16 +993,10 @@ exports[`renders list section with subheader 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰉋
+          folder
         </Text>
       </View>
       <View
@@ -1016,8 +1010,10 @@ exports[`renders list section with subheader 1`] = `
               "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
@@ -1274,14 +1270,18 @@ exports[`renders list section without subheader 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -1303,7 +1303,6 @@ exports[`renders list section without subheader 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -1326,16 +1325,10 @@ exports[`renders list section without subheader 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰉋
+          folder
         </Text>
       </View>
       <View
@@ -1349,8 +1342,10 @@ exports[`renders list section without subheader 1`] = `
               "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}
@@ -1428,14 +1423,18 @@ exports[`renders list section without subheader 1`] = `
         ],
       ]
     }
+    testID="list-item"
   >
     <View
       style={
-        {
-          "flexDirection": "row",
-          "marginVertical": 6,
-          "width": "100%",
-        }
+        [
+          {
+            "flexDirection": "row",
+            "marginVertical": 6,
+            "width": "100%",
+          },
+          undefined,
+        ]
       }
     >
       <View
@@ -1457,7 +1456,6 @@ exports[`renders list section without subheader 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -1480,16 +1478,10 @@ exports[`renders list section without subheader 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰉋
+          folder
         </Text>
       </View>
       <View
@@ -1503,8 +1495,10 @@ exports[`renders list section without subheader 1`] = `
               "flexShrink": 1,
               "justifyContent": "center",
             },
+            undefined,
           ]
         }
+        testID="list-item-content"
       >
         <Text
           numberOfLines={1}

@@ -40,6 +40,9 @@ type BaseRoute = {
   focusedIcon?: IconSource;
   unfocusedIcon?: IconSource;
   badge?: string | number | boolean;
+  /**
+   * @deprecated In v5.x works only with theme version 2.
+   */
   color?: string;
   accessibilityLabel?: string;
   testID?: string;
@@ -94,7 +97,7 @@ export type Props<Route extends BaseRoute> = {
    * - `title`: title of the route to use as the tab label
    * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
    * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3
-   * - `color`: color to use as background color for shifting bottom navigation @deprecated Deprecated in v5.x
+   * - `color`: color to use as background color for shifting bottom navigation @deprecatedProperty In v5.x works only with theme version 2.
    * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
    * - `accessibilityLabel`: accessibility label for the tab button
    * - `testID`: test id for the tab button
@@ -198,6 +201,7 @@ export type Props<Route extends BaseRoute> = {
    */
   labelMaxFontSizeMultiplier?: number;
   style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+  activeIndicatorStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
@@ -244,118 +248,77 @@ const Touchable = <Route extends BaseRoute>({
  * A navigation bar which can easily be integrated with [React Navigation's Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/).
  *
  * ## Usage
+ * ### without React Navigation
  * ```js
  * import React from 'react';
- * import { View, StyleSheet } from 'react-native';
- *
- * import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
- * import { Text, BottomNavigation } from 'react-native-paper';
- * import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
- *
- * const Tab = createBottomTabNavigator();
- *
- * export default function MyComponent() {
- *   return (
- *     <Tab.Navigator
- *       screenOptions={{
- *         headerShown: false,
- *       }}
- *       tabBar={({ navigation, state, descriptors, insets }) => (
- *         <BottomNavigation.Bar
- *           navigationState={state}
- *          safeAreaInsets={insets}
- *           onTabPress={({ route, preventDefault }) => {
- *             const event = navigation.emit({
- *               type: 'tabPress',
- *               target: route.key,
- *               canPreventDefault: true,
- *             });
- *
- *             if (event.defaultPrevented) {
- *               preventDefault();
- *             } else {
- *              navigation.dispatch({
- *                 ...CommonActions.navigate(route.name, route.params),
- *                 target: state.key,
- *               });
- *             }
- *           }}
- *           renderIcon={({ route, focused, color }) => {
- *             const { options } = descriptors[route.key];
- *             if (options.tabBarIcon) {
- *               return options.tabBarIcon({ focused, color, size: 24 });
- *             }
- *
- *             return null;
- *           }}
- *           getLabelText={({ route }) => {
- *             const { options } = descriptors[route.key];
- *             const label =
- *               options.tabBarLabel !== undefined
- *                 ? options.tabBarLabel
- *                 : options.title !== undefined
- *                 ? options.title
- *                 : route.title;
- *
- *             return label;
- *           }}
- *         />
- *       )}
- *     >
- *       <Tab.Screen
- *         name="Home"
- *         component={HomeScreen}
- *         options={{
- *           tabBarLabel: 'Home',
- *           tabBarIcon: ({ color, size }) => {
- *             return <Icon name="home" size={size} color={color} />;
- *           },
- *         }}
- *       />
- *       <Tab.Screen
- *         name="Settings"
- *         component={SettingsScreen}
- *         options={{
- *           tabBarLabel: 'Settings',
- *           tabBarIcon: ({ color, size }) => {
- *             return <Icon name="cog" size={size} color={color} />;
- *           },
- *         }}
- *       />
- *     </Tab.Navigator>
- *   );
- * }
+ * import { useState } from 'react';
+ * import { View } from 'react-native';
+ * import { BottomNavigation, Text, Provider } from 'react-native-paper';
+ * import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
  *
  * function HomeScreen() {
  *   return (
- *     <View style={styles.container}>
- *       <Text variant="headlineMedium">Home!</Text>
+ *     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+ *       <Text>Home!</Text>
  *     </View>
  *   );
  * }
  *
  * function SettingsScreen() {
  *   return (
- *     <View style={styles.container}>
- *       <Text variant="headlineMedium">Settings!</Text>
- *     </View>
+ *     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+ *       <Text>Settings!</Text>
+ *   </View>
  *   );
  * }
  *
- * const styles = StyleSheet.create({
- *   container: {
- *     flex: 1,
- *     justifyContent: 'center',
- *     alignItems: 'center',
- *   },
- * });
+ * export default function MyComponent() {
+ *   const [index, setIndex] = useState(0);
+ *
+ *   const routes = [
+ *     { key: 'home', title: 'Home', icon: 'home' },
+ *     { key: 'settings', title: 'Settings', icon: 'cog' },
+ *   ];
+
+ *   const renderScene = ({ route }) => {
+ *     switch (route.key) {
+ *       case 'home':
+ *         return <HomeScreen />;
+ *       case 'settings':
+ *         return <SettingsScreen />;
+ *       default:
+ *         return null;
+ *     }
+ *   };
+ *
+ *   return (
+ *     <Provider>
+ *       {renderScene({ route: routes[index] })}
+ *       <BottomNavigation.Bar
+ *         navigationState={{ index, routes }}
+ *         onTabPress={({ route }) => {
+ *           const newIndex = routes.findIndex((r) => r.key === route.key);
+ *           if (newIndex !== -1) {
+ *             setIndex(newIndex);
+ *           }
+ *         }}
+ *         renderIcon={({ route, color }) => (
+ *           <Icon name={route.icon} size={24} color={color} />
+ *         )}
+ *         getLabelText={({ route }) => route.title}
+ *       />
+ *     </Provider>
+ *   );
+ * }
  * ```
  */
 const BottomNavigationBar = <Route extends BaseRoute>({
   navigationState,
   renderIcon,
   renderLabel,
-  renderTouchable = (props: TouchableProps<Route>) => <Touchable {...props} />,
+  renderTouchable = ({ key, ...props }: TouchableProps<Route>) => (
+    <Touchable key={key} {...props} />
+  ),
   getLabelText = ({ route }: { route: Route }) => route.title,
   getBadge = ({ route }: { route: Route }) => route.badge,
   getColor = ({ route }: { route: Route }) => route.color,
@@ -366,6 +329,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   inactiveColor,
   keyboardHidesNavigationBar = Platform.OS === 'android',
   style,
+  activeIndicatorStyle,
   labeled = true,
   animationEasing,
   onTabPress,
@@ -610,6 +574,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
           : 'none'
       }
       onLayout={onLayout}
+      container
     >
       <Animated.View
         style={[styles.barContent, { backgroundColor }]}
@@ -739,7 +704,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                   : 0) - (!isV3 ? 2 : 0),
             };
 
-            const isV3Shifting = isV3 && shifting && labeled;
+            const isLegacyOrV3Shifting = !isV3 || (isV3 && shifting && labeled);
 
             const font = isV3 ? theme.fonts.labelMedium : {};
 
@@ -770,7 +735,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                     style={[
                       styles.iconContainer,
                       isV3 && styles.v3IconContainer,
-                      (!isV3 || isV3Shifting) && {
+                      isLegacyOrV3Shifting && {
                         transform: [{ translateY }],
                       },
                     ]}
@@ -787,6 +752,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                             ],
                             backgroundColor: theme.colors.secondaryContainer,
                           },
+                          activeIndicatorStyle,
                         ]}
                       />
                     )}
@@ -794,7 +760,11 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                       style={[
                         styles.iconWrapper,
                         isV3 && styles.v3IconWrapper,
-                        { opacity: isV3 ? v3ActiveOpacity : activeOpacity },
+                        {
+                          opacity: isLegacyOrV3Shifting
+                            ? activeOpacity
+                            : v3ActiveOpacity,
+                        },
                       ]}
                     >
                       {renderIcon ? (
@@ -816,7 +786,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                         styles.iconWrapper,
                         isV3 && styles.v3IconWrapper,
                         {
-                          opacity: isV3 ? v3InactiveOpacity : inactiveOpacity,
+                          opacity: isLegacyOrV3Shifting
+                            ? inactiveOpacity
+                            : v3InactiveOpacity,
                         },
                       ]}
                     >
@@ -858,8 +830,10 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                       <Animated.View
                         style={[
                           styles.labelWrapper,
-                          (!isV3 || isV3Shifting) && {
-                            opacity: activeOpacity,
+                          {
+                            opacity: isLegacyOrV3Shifting
+                              ? activeOpacity
+                              : v3ActiveOpacity,
                           },
                         ]}
                       >
@@ -889,7 +863,11 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                         <Animated.View
                           style={[
                             styles.labelWrapper,
-                            { opacity: inactiveOpacity },
+                            {
+                              opacity: isLegacyOrV3Shifting
+                                ? inactiveOpacity
+                                : v3InactiveOpacity,
+                            },
                           ]}
                         >
                           {renderLabel ? (

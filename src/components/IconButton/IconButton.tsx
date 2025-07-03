@@ -13,6 +13,7 @@ import { getIconButtonColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { $RemoveChildren, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
+import ActivityIndicator from '../ActivityIndicator';
 import CrossFadeIcon from '../CrossFadeIcon';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';
@@ -22,7 +23,7 @@ const PADDING = 8;
 
 type IconButtonMode = 'outlined' | 'contained' | 'contained-tonal';
 
-export type Props = $RemoveChildren<typeof TouchableRipple> & {
+export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
   /**
    * Icon to display.
    */
@@ -67,6 +68,11 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    */
   accessibilityLabel?: string;
   /**
+   * Style of button's inner content.
+   * Use this prop to apply custom height and width or to set a custom padding`.
+   */
+  contentStyle?: StyleProp<ViewStyle>;
+  /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
@@ -80,6 +86,10 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * Whether to show a loading indicator.
+   */
+  loading?: boolean;
 };
 
 /**
@@ -121,6 +131,8 @@ const IconButton = forwardRef<View, Props>(
       style,
       theme: themeOverrides,
       testID = 'icon-button',
+      loading = false,
+      contentStyle,
       ...rest
     }: Props,
     ref
@@ -169,6 +181,7 @@ const IconButton = forwardRef<View, Props>(
           !isV3 && disabled && styles.disabled,
           style,
         ]}
+        container
         {...(isV3 && { elevation: 0 })}
       >
         <TouchableRipple
@@ -177,7 +190,7 @@ const IconButton = forwardRef<View, Props>(
           onPress={onPress}
           rippleColor={rippleColor}
           accessibilityLabel={accessibilityLabel}
-          style={[styles.touchable, { borderRadius }]}
+          style={[styles.touchable, contentStyle]}
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
           accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
           accessibilityComponentType="button"
@@ -192,7 +205,11 @@ const IconButton = forwardRef<View, Props>(
           testID={testID}
           {...rest}
         >
-          <IconComponent color={iconColor} source={icon} size={size} />
+          {loading ? (
+            <ActivityIndicator size={size} color={iconColor} />
+          ) : (
+            <IconComponent color={iconColor} source={icon} size={size} />
+          )}
         </TouchableRipple>
       </Surface>
     );

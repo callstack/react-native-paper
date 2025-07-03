@@ -149,7 +149,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
 
 type TextInputHandles = Pick<
   TextInput,
-  'setNativeProps' | 'isFocused' | 'clear' | 'blur' | 'focus'
+  'setNativeProps' | 'isFocused' | 'clear' | 'blur' | 'focus' | 'setSelection'
 >;
 
 /**
@@ -163,12 +163,10 @@ type TextInputHandles = Pick<
  * const MyComponent = () => {
  *   const [searchQuery, setSearchQuery] = React.useState('');
  *
- *   const onChangeSearch = query => setSearchQuery(query);
- *
  *   return (
  *     <Searchbar
  *       placeholder="Search"
- *       onChangeText={onChangeSearch}
+ *       onChangeText={setSearchQuery}
  *       value={searchQuery}
  *     />
  *   );
@@ -212,31 +210,16 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
     const theme = useInternalTheme(themeOverrides);
     const root = React.useRef<TextInput>(null);
 
-    React.useImperativeHandle(ref, () => {
-      const input = root.current;
-
-      if (input) {
-        return {
-          focus: () => input.focus(),
-          clear: () => input.clear(),
-          setNativeProps: (args: TextInputProps) => input.setNativeProps(args),
-          isFocused: () => input.isFocused(),
-          blur: () => input.blur(),
-        };
-      }
-
-      const noop = () => {
-        throw new Error('TextInput is not available');
-      };
-
-      return {
-        focus: noop,
-        clear: noop,
-        setNativeProps: noop,
-        isFocused: noop,
-        blur: noop,
-      };
-    });
+    React.useImperativeHandle(ref, () => ({
+      focus: () => root.current?.focus(),
+      clear: () => root.current?.clear(),
+      setNativeProps: (args: TextInputProps) =>
+        root.current?.setNativeProps(args),
+      isFocused: () => root.current?.isFocused() || false,
+      blur: () => root.current?.blur(),
+      setSelection: (start: number, end: number) =>
+        root.current?.setSelection(start, end),
+    }));
 
     const handleClearPress = (e: any) => {
       root.current?.clear();
@@ -292,6 +275,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
         ]}
         testID={`${testID}-container`}
         {...(theme.isV3 && { elevation })}
+        container
         theme={theme}
       >
         <IconButton

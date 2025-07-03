@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { StyleSheet, Easing, Animated, Platform } from 'react-native';
+import { Animated, Easing, Platform, StyleSheet } from 'react-native';
 
-import { fireEvent, render, act } from '@testing-library/react-native';
+import { act, fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
@@ -14,72 +14,13 @@ import {
   getInactiveTintColor,
   getLabelColor,
 } from '../BottomNavigation/utils';
+import Icon from '../Icon';
 
 const styles = StyleSheet.create({
   backgroundColor: {
     backgroundColor: red300,
   },
 });
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      icon: { color: string; src: any };
-    }
-  }
-}
-
-type AnimatedTiming = (
-  value: Animated.Value | Animated.ValueXY,
-  config: Animated.TimingAnimationConfig
-) => Animated.CompositeAnimation;
-
-type AnimatedParallel = (animations: Array<Animated.CompositeAnimation>) => {
-  start: (callback?: Animated.EndCallback) => void;
-};
-
-// Make sure any animation finishes before checking the snapshot results
-jest.mock('react-native', () => {
-  const RN = jest.requireActual('react-native');
-
-  const timing: AnimatedTiming = (value, config) => ({
-    start: (callback) => {
-      value.setValue(config.toValue as any);
-      callback?.({ finished: true });
-    },
-    value,
-    config,
-    stop: () => {
-      throw new Error('Not implemented');
-    },
-    reset: () => {
-      throw new Error('Not implemented');
-    },
-  });
-  RN.Animated.timing = timing;
-
-  const parallel: AnimatedParallel = (animations) => ({
-    start: (callback) => {
-      const results = animations.map((animation) => {
-        animation.start();
-        return { finished: true };
-      });
-      callback?.({ finished: results.every((result) => result.finished) });
-    },
-  });
-
-  RN.Animated.parallel = parallel;
-
-  RN.Dimensions.get = () => ({
-    fontScale: 1,
-  });
-
-  return RN;
-});
-
-jest.mock('react-native-safe-area-context', () => ({
-  useSafeAreaInsets: () => ({ bottom: 0, left: 0, right: 0, top: 0 }),
-}));
 
 const icons = ['magnify', 'camera', 'inbox', 'heart', 'shopping-music'];
 
@@ -299,7 +240,7 @@ it('renders custom icon and label in shifting bottom navigation', () => {
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
       renderIcon={({ route, color }) => (
-        <icon color={color} src={route.unfocusedIcon} />
+        <Icon color={color} source={route.unfocusedIcon} size={24} />
       )}
       renderLabel={({ route, color }) => (
         <text color={color}>{route.title}</text>
@@ -318,7 +259,7 @@ it('renders custom icon and label in non-shifting bottom navigation', () => {
       onIndexChange={jest.fn()}
       renderScene={({ route }) => route.title}
       renderIcon={({ route, color }) => (
-        <icon color={color} src={route.unfocusedIcon} />
+        <Icon color={color} source={route.unfocusedIcon} size={24} />
       )}
       renderLabel={({ route, color }) => (
         <text color={color}>{route.title}</text>
@@ -618,8 +559,9 @@ it('barStyle animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
-
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
   expect(getByTestId('bottom-navigation-bar-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });

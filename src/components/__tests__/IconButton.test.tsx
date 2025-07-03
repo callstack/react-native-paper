@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { act, render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
@@ -12,6 +12,9 @@ import { getIconButtonColor } from '../IconButton/utils';
 const styles = StyleSheet.create({
   square: {
     borderRadius: 0,
+  },
+  slightlyRounded: {
+    borderRadius: 4,
   },
 });
 
@@ -58,7 +61,21 @@ it('renders icon button with custom border radius', () => {
     />
   );
 
-  expect(getByTestId('icon-button')).toHaveStyle({ borderRadius: 0 });
+  expect(getByTestId('icon-button-container')).toHaveStyle({ borderRadius: 0 });
+});
+
+it('renders icon button with small border radius', () => {
+  const { getByTestId } = render(
+    <IconButton
+      icon="camera"
+      testID="icon-button"
+      size={36}
+      onPress={() => {}}
+      style={styles.slightlyRounded}
+    />
+  );
+
+  expect(getByTestId('icon-button-container')).toHaveStyle({ borderRadius: 4 });
 });
 
 describe('getIconButtonColor - icon color', () => {
@@ -358,8 +375,9 @@ it('action animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
-
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
   expect(getByTestId('icon-button-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });

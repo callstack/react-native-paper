@@ -32,15 +32,17 @@ exports[`renders colored indicator 1`] = `
     <View
       collapsable={false}
       style={
-        {
-          "alignItems": "center",
-          "bottom": 0,
-          "justifyContent": "center",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        [
+          {
+            "alignItems": "center",
+            "bottom": 0,
+            "justifyContent": "center",
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
       }
     >
       <View
@@ -60,11 +62,14 @@ exports[`renders colored indicator 1`] = `
         <View
           collapsable={false}
           style={
-            {
-              "height": 12,
-              "overflow": "hidden",
-              "width": 24,
-            }
+            [
+              {
+                "height": 12,
+                "overflow": "hidden",
+                "width": 24,
+              },
+              null,
+            ]
           }
         >
           <View
@@ -114,15 +119,17 @@ exports[`renders colored indicator 1`] = `
     <View
       collapsable={false}
       style={
-        {
-          "alignItems": "center",
-          "bottom": 0,
-          "justifyContent": "center",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        [
+          {
+            "alignItems": "center",
+            "bottom": 0,
+            "justifyContent": "center",
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
       }
     >
       <View
@@ -142,12 +149,16 @@ exports[`renders colored indicator 1`] = `
         <View
           collapsable={false}
           style={
-            {
-              "height": 12,
-              "overflow": "hidden",
-              "top": 12,
-              "width": 24,
-            }
+            [
+              {
+                "height": 12,
+                "overflow": "hidden",
+                "width": 24,
+              },
+              {
+                "top": 12,
+              },
+            ]
           }
         >
           <View
@@ -230,15 +241,17 @@ exports[`renders hidden indicator 1`] = `
     <View
       collapsable={false}
       style={
-        {
-          "alignItems": "center",
-          "bottom": 0,
-          "justifyContent": "center",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        [
+          {
+            "alignItems": "center",
+            "bottom": 0,
+            "justifyContent": "center",
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
       }
     >
       <View
@@ -258,11 +271,14 @@ exports[`renders hidden indicator 1`] = `
         <View
           collapsable={false}
           style={
-            {
-              "height": 12,
-              "overflow": "hidden",
-              "width": 24,
-            }
+            [
+              {
+                "height": 12,
+                "overflow": "hidden",
+                "width": 24,
+              },
+              null,
+            ]
           }
         >
           <View
@@ -312,15 +328,17 @@ exports[`renders hidden indicator 1`] = `
     <View
       collapsable={false}
       style={
-        {
-          "alignItems": "center",
-          "bottom": 0,
-          "justifyContent": "center",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        [
+          {
+            "alignItems": "center",
+            "bottom": 0,
+            "justifyContent": "center",
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
       }
     >
       <View
@@ -340,12 +358,16 @@ exports[`renders hidden indicator 1`] = `
         <View
           collapsable={false}
           style={
-            {
-              "height": 12,
-              "overflow": "hidden",
-              "top": 12,
-              "width": 24,
-            }
+            [
+              {
+                "height": 12,
+                "overflow": "hidden",
+                "width": 24,
+              },
+              {
+                "top": 12,
+              },
+            ]
           }
         >
           <View
@@ -428,15 +450,17 @@ exports[`renders indicator 1`] = `
     <View
       collapsable={false}
       style={
-        {
-          "alignItems": "center",
-          "bottom": 0,
-          "justifyContent": "center",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        [
+          {
+            "alignItems": "center",
+            "bottom": 0,
+            "justifyContent": "center",
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
       }
     >
       <View
@@ -456,11 +480,14 @@ exports[`renders indicator 1`] = `
         <View
           collapsable={false}
           style={
-            {
-              "height": 12,
-              "overflow": "hidden",
-              "width": 24,
-            }
+            [
+              {
+                "height": 12,
+                "overflow": "hidden",
+                "width": 24,
+              },
+              null,
+            ]
           }
         >
           <View
@@ -510,15 +537,17 @@ exports[`renders indicator 1`] = `
     <View
       collapsable={false}
       style={
-        {
-          "alignItems": "center",
-          "bottom": 0,
-          "justifyContent": "center",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        [
+          {
+            "alignItems": "center",
+            "bottom": 0,
+            "justifyContent": "center",
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
       }
     >
       <View
@@ -538,12 +567,16 @@ exports[`renders indicator 1`] = `
         <View
           collapsable={false}
           style={
-            {
-              "height": 12,
-              "overflow": "hidden",
-              "top": 12,
-              "width": 24,
-            }
+            [
+              {
+                "height": 12,
+                "overflow": "hidden",
+                "width": 24,
+              },
+              {
+                "top": 12,
+              },
+            ]
           }
         >
           <View
@@ -626,15 +659,17 @@ exports[`renders large indicator 1`] = `
     <View
       collapsable={false}
       style={
-        {
-          "alignItems": "center",
-          "bottom": 0,
-          "justifyContent": "center",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        [
+          {
+            "alignItems": "center",
+            "bottom": 0,
+            "justifyContent": "center",
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
       }
     >
       <View
@@ -654,11 +689,14 @@ exports[`renders large indicator 1`] = `
         <View
           collapsable={false}
           style={
-            {
-              "height": 24,
-              "overflow": "hidden",
-              "width": 48,
-            }
+            [
+              {
+                "height": 24,
+                "overflow": "hidden",
+                "width": 48,
+              },
+              null,
+            ]
           }
         >
           <View
@@ -708,15 +746,17 @@ exports[`renders large indicator 1`] = `
     <View
       collapsable={false}
       style={
-        {
-          "alignItems": "center",
-          "bottom": 0,
-          "justifyContent": "center",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        [
+          {
+            "alignItems": "center",
+            "bottom": 0,
+            "justifyContent": "center",
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
       }
     >
       <View
@@ -736,12 +776,16 @@ exports[`renders large indicator 1`] = `
         <View
           collapsable={false}
           style={
-            {
-              "height": 24,
-              "overflow": "hidden",
-              "top": 24,
-              "width": 48,
-            }
+            [
+              {
+                "height": 24,
+                "overflow": "hidden",
+                "width": 48,
+              },
+              {
+                "top": 24,
+              },
+            ]
           }
         >
           <View

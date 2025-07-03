@@ -7,6 +7,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import DialogActions from './DialogActions';
 import DialogContent from './DialogContent';
 import DialogIcon from './DialogIcon';
@@ -16,6 +18,7 @@ import { useInternalTheme } from '../../core/theming';
 import overlay from '../../styles/overlay';
 import type { ThemeProp } from '../../types';
 import Modal from '../Modal';
+import { DialogChildProps } from './utils';
 
 export type Props = {
   /**
@@ -101,6 +104,7 @@ const Dialog = ({
   theme: themeOverrides,
   testID,
 }: Props) => {
+  const { right, left } = useSafeAreaInsets();
   const theme = useInternalTheme(themeOverrides);
   const { isV3, dark, mode, colors, roundness } = theme;
   const borderRadius = (isV3 ? 7 : 1) * roundness;
@@ -123,6 +127,7 @@ const Dialog = ({
         {
           borderRadius,
           backgroundColor,
+          marginHorizontal: Math.max(left, right, 26),
         },
         styles.container,
         style,
@@ -134,8 +139,8 @@ const Dialog = ({
         .filter((child) => child != null && typeof child !== 'boolean')
         .map((child, i) => {
           if (isV3) {
-            if (i === 0 && React.isValidElement(child)) {
-              return React.cloneElement(child as React.ReactElement<any>, {
+            if (i === 0 && React.isValidElement<DialogChildProps>(child)) {
+              return React.cloneElement(child, {
                 style: [{ marginTop: 24 }, child.props.style],
               });
             }
@@ -143,11 +148,11 @@ const Dialog = ({
 
           if (
             i === 0 &&
-            React.isValidElement(child) &&
+            React.isValidElement<DialogChildProps>(child) &&
             child.type === DialogContent
           ) {
             // Dialog content is the first item, so we add a top padding
-            return React.cloneElement(child as React.ReactElement<any>, {
+            return React.cloneElement(child, {
               style: [{ paddingTop: 24 }, child.props.style],
             });
           }
@@ -179,7 +184,6 @@ const styles = StyleSheet.create({
      * dialog (44 pixel from the top and bottom) it won't be dismissed.
      */
     marginVertical: Platform.OS === 'android' ? 44 : 0,
-    marginHorizontal: 26,
     elevation: DIALOG_ELEVATION,
     justifyContent: 'flex-start',
   },

@@ -11,15 +11,18 @@ import {
   View,
   ViewProps,
   ViewStyle,
+  PressableAndroidRippleConfig,
 } from 'react-native';
 
 import { ListAccordionGroupContext } from './ListAccordionGroup';
-import type { Style } from './utils';
+import type { ListChildProps, Style } from './utils';
 import { getAccordionColors, getLeftStyles } from './utils';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = {
@@ -66,9 +69,22 @@ export type Props = {
    */
   theme?: ThemeProp;
   /**
-   * Style that is passed to the wrapping TouchableRipple element.
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
+  /**
+   * Style that is passed to the root TouchableRipple container.
    */
   style?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to the outermost container that wraps the entire content, including left and right items and both title and description.
+   */
+  containerStyle?: StyleProp<ViewStyle>;
+  /**
+   * Style that is passed to the content container, which wraps the title and description.
+   */
+  contentStyle?: StyleProp<ViewStyle>;
   /**
    * Style that is passed to Title element.
    */
@@ -115,6 +131,11 @@ export type Props = {
    * `pointerEvents` passed to the `View` container
    */
   pointerEvents?: ViewProps['pointerEvents'];
+  /**
+   * Amount of space between the touchable area and the edge of the component.
+   * This can be used to enlarge the touchable area beyond the visible component.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
 };
 
 /**
@@ -167,8 +188,11 @@ const ListAccordion = ({
   descriptionNumberOfLines = 2,
   rippleColor: customRippleColor,
   style,
+  containerStyle,
+  contentStyle,
   id,
   testID,
+  background,
   onPress,
   onLongPress,
   delayLongPress,
@@ -177,6 +201,7 @@ const ListAccordion = ({
   pointerEvents = 'none',
   titleMaxFontSizeMultiplier,
   descriptionMaxFontSizeMultiplier,
+  hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const [expanded, setExpanded] = React.useState<boolean>(
@@ -241,10 +266,12 @@ const ListAccordion = ({
           accessibilityLabel={accessibilityLabel}
           testID={testID}
           theme={theme}
+          background={background}
           borderless
+          hitSlop={hitSlop}
         >
           <View
-            style={theme.isV3 ? styles.rowV3 : styles.row}
+            style={[theme.isV3 ? styles.rowV3 : styles.row, containerStyle]}
             pointerEvents={pointerEvents}
           >
             {left
@@ -254,7 +281,11 @@ const ListAccordion = ({
                 })
               : null}
             <View
-              style={[theme.isV3 ? styles.itemV3 : styles.item, styles.content]}
+              style={[
+                theme.isV3 ? styles.itemV3 : styles.item,
+                styles.content,
+                contentStyle,
+              ]}
             >
               <Text
                 selectable={false}
@@ -312,11 +343,11 @@ const ListAccordion = ({
         ? React.Children.map(children, (child) => {
             if (
               left &&
-              React.isValidElement(child) &&
+              React.isValidElement<ListChildProps>(child) &&
               !child.props.left &&
               !child.props.right
             ) {
-              return React.cloneElement(child as React.ReactElement<any>, {
+              return React.cloneElement(child, {
                 style: [
                   theme.isV3 ? styles.childV3 : styles.child,
                   child.props.style,

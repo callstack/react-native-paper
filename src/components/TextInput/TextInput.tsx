@@ -37,7 +37,13 @@ export type Props = React.ComponentPropsWithRef<typeof NativeTextInput> & {
    * This component render TextInputOutlined or TextInputFlat based on that props
    */
   mode?: 'flat' | 'outlined';
+  /**
+   * The adornment placed on the left side of the input. It can be either `TextInput.Icon` or `TextInput.Affix`.
+   */
   left?: React.ReactNode;
+  /**
+   * The adornment placed on the right side of the input. It can be either `TextInput.Icon` or `TextInput.Affix`.
+   */
   right?: React.ReactNode;
   /**
    * If true, user won't be able to interact with the component.
@@ -184,7 +190,7 @@ interface CompoundedComponent
 
 type TextInputHandles = Pick<
   NativeTextInput,
-  'focus' | 'clear' | 'blur' | 'isFocused' | 'setNativeProps'
+  'focus' | 'clear' | 'blur' | 'isFocused' | 'setNativeProps' | 'setSelection'
 >;
 
 const DefaultRenderer = (props: RenderProps) => <NativeTextInput {...props} />;
@@ -241,9 +247,8 @@ const TextInput = forwardRef<TextInputHandles, Props>(
       new Animated.Value(errorProp ? 1 : 0)
     );
     const [focused, setFocused] = React.useState<boolean>(false);
-    const [placeholder, setPlaceholder] = React.useState<string | undefined>(
-      ' '
-    );
+    const [displayPlaceholder, setDisplayPlaceholder] =
+      React.useState<boolean>(false);
     const [uncontrolledValue, setUncontrolledValue] = React.useState<
       string | undefined
     >(validInputValue);
@@ -282,9 +287,8 @@ const TextInput = forwardRef<TextInputHandles, Props>(
       height: null,
     });
 
-    const timer = React.useRef<NodeJS.Timeout | undefined>();
-
-    const root = React.useRef<NativeTextInput | undefined | null>();
+    const timer = React.useRef<NodeJS.Timeout | undefined>(undefined);
+    const root = React.useRef<NativeTextInput | undefined | null>(null);
 
     const { scale } = theme.animation;
 
@@ -295,6 +299,8 @@ const TextInput = forwardRef<TextInputHandles, Props>(
       isFocused: () => root.current?.isFocused() || false,
       blur: () => root.current?.blur(),
       forceFocus: () => root.current?.focus(),
+      setSelection: (start: number, end: number) =>
+        root.current?.setSelection(start, end),
     }));
 
     React.useEffect(() => {
@@ -328,24 +334,16 @@ const TextInput = forwardRef<TextInputHandles, Props>(
         // If the user wants to use the contextMenu, when changing the placeholder, the contextMenu is closed
         // This is a workaround to mitigate this behavior in scenarios where the placeholder is not specified.
         if (rest.placeholder) {
-          // Set the placeholder in a delay to offset the label animation
+          // Display placeholder in a delay to offset the label animation
           // If we show it immediately, they'll overlap and look ugly
           timer.current = setTimeout(
-            () => setPlaceholder(rest.placeholder),
+            () => setDisplayPlaceholder(true),
             50
           ) as unknown as NodeJS.Timeout;
         }
       } else {
         // hidePlaceholder
-
-        // Issue: https://github.com/callstack/react-native-paper/issues/3138
-        // Description:   Changing the placeholder text value dynamically,
-        //                within multiline input on iOS, doesn't work properly –
-        //                the placeholder is not displayed initially.
-        // Root cause:    Placeholder initial value, which has length 0.
-        // More context:  The issue was also reproduced in react-native, using its own TextInput.
-        // Workaround:    Set an empty space character in the default value.
-        setPlaceholder(' ');
+        setDisplayPlaceholder(false);
       }
 
       return () => {
@@ -482,6 +480,8 @@ const TextInput = forwardRef<TextInputHandles, Props>(
 
     const { maxFontSizeMultiplier = 1.5 } = rest;
 
+    const scaledLabel = !!(value || focused);
+
     if (mode === 'outlined') {
       return (
         <TextInputOutlined
@@ -498,7 +498,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
             labeled,
             error,
             focused,
-            placeholder,
+            displayPlaceholder,
             value,
             labelTextLayout,
             labelLayout,
@@ -520,6 +520,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
           onRightAffixLayoutChange={onRightAffixLayoutChange}
           maxFontSizeMultiplier={maxFontSizeMultiplier}
           contentStyle={contentStyle}
+          scaledLabel={scaledLabel}
         />
       );
     }
@@ -539,7 +540,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
           labeled,
           error,
           focused,
-          placeholder,
+          displayPlaceholder,
           value,
           labelTextLayout,
           labelLayout,
@@ -561,6 +562,7 @@ const TextInput = forwardRef<TextInputHandles, Props>(
         onRightAffixLayoutChange={onRightAffixLayoutChange}
         maxFontSizeMultiplier={maxFontSizeMultiplier}
         contentStyle={contentStyle}
+        scaledLabel={scaledLabel}
       />
     );
   }

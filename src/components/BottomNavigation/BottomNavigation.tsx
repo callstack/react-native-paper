@@ -26,6 +26,9 @@ export type BaseRoute = {
   focusedIcon?: IconSource;
   unfocusedIcon?: IconSource;
   badge?: string | number | boolean;
+  /**
+   * @deprecated In v5.x works only with theme version 2.
+   */
   color?: string;
   accessibilityLabel?: string;
   testID?: string;
@@ -80,7 +83,7 @@ export type Props<Route extends BaseRoute> = {
    * - `title`: title of the route to use as the tab label
    * - `focusedIcon`:  icon to use as the focused tab icon, can be a string, an image source or a react component @renamed Renamed from 'icon' to 'focusedIcon' in v5.x
    * - `unfocusedIcon`:  icon to use as the unfocused tab icon, can be a string, an image source or a react component @supported Available in v5.x with theme version 3
-   * - `color`: color to use as background color for shifting bottom navigation @deprecated In v5.x works only with theme version 2.
+   * - `color`: color to use as background color for shifting bottom navigation @deprecatedProperty In v5.x works only with theme version 2.
    * - `badge`: badge to show on the tab icon, can be `true` to show a dot, `string` or `number` to show text.
    * - `accessibilityLabel`: accessibility label for the tab button
    * - `testID`: test id for the tab button
@@ -251,6 +254,7 @@ export type Props<Route extends BaseRoute> = {
    */
   labelMaxFontSizeMultiplier?: number;
   style?: StyleProp<ViewStyle>;
+  activeIndicatorStyle?: StyleProp<ViewStyle>;
   /**
    * @optional
    */
@@ -332,6 +336,7 @@ const BottomNavigation = <Route extends BaseRoute>({
   barStyle,
   labeled = true,
   style,
+  activeIndicatorStyle,
   sceneAnimationEnabled = false,
   sceneAnimationType = 'opacity',
   sceneAnimationEasing,
@@ -436,7 +441,9 @@ const BottomNavigation = <Route extends BaseRoute>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const prevNavigationState = React.useRef<NavigationState<Route>>();
+  const prevNavigationState = React.useRef<NavigationState<Route> | undefined>(
+    undefined
+  );
 
   React.useEffect(() => {
     // Reset offsets of previous and current tabs before animation
@@ -579,6 +586,7 @@ const BottomNavigation = <Route extends BaseRoute>({
         inactiveColor={inactiveColor}
         keyboardHidesNavigationBar={keyboardHidesNavigationBar}
         style={barStyle}
+        activeIndicatorStyle={activeIndicatorStyle}
         labeled={labeled}
         animationEasing={sceneAnimationEasing}
         onTabPress={handleTabPress}

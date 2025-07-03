@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 
 import { Divider, List } from 'react-native-paper';
 
-import { useExampleTheme } from '..';
+import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const items = ['Apple', 'Banana', 'Coconut', 'Lemon', 'Mango', 'Peach'];

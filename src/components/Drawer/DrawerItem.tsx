@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   ColorValue,
   GestureResponderEvent,
+  PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
   View,
@@ -13,7 +14,9 @@ import color from 'color';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import Icon, { IconSource } from '../Icon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
@@ -38,6 +41,11 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
+  /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
   accessibilityLabel?: string;
@@ -53,6 +61,10 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * Color of the ripple effect.
    */
   rippleColor?: ColorValue;
+  /**
+   * Sets additional distance outside of element in which a press can be detected.
+   */
+  hitSlop?: TouchableRippleProps['hitSlop'];
   style?: StyleProp<ViewStyle>;
   /**
    * @optional
@@ -88,9 +100,11 @@ const DrawerItem = ({
   rippleColor: customRippleColor,
   style,
   onPress,
+  background,
   accessibilityLabel,
   right,
   labelMaxFontSizeMultiplier,
+  hitSlop,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
@@ -100,7 +114,7 @@ const DrawerItem = ({
     ? isV3
       ? theme.colors.secondaryContainer
       : color(theme.colors.primary).alpha(0.12).rgb().string()
-    : 'transparent';
+    : undefined;
   const contentColor = active
     ? isV3
       ? theme.colors.onSecondaryContainer
@@ -121,6 +135,7 @@ const DrawerItem = ({
       <TouchableRipple
         borderless
         disabled={disabled}
+        background={background}
         onPress={onPress}
         style={[
           styles.container,
@@ -133,6 +148,7 @@ const DrawerItem = ({
         accessibilityLabel={accessibilityLabel}
         rippleColor={customRippleColor || rippleColor}
         theme={theme}
+        hitSlop={hitSlop}
       >
         <View style={[styles.wrapper, isV3 && styles.v3Wrapper]}>
           <View style={styles.content}>

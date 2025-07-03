@@ -1,10 +1,10 @@
-<p align="center">
-  <img alt="react-native-paper" src="docs/static/images/paper-logo.svg?sanitize=true" width="300">
-</p>
-<p align="center">
+<a href="https://www.callstack.com/open-source?utm_campaign=generic&utm_source=github&utm_medium=referral&utm_content=react-native-paper" align="center">
+  <img alt="react-native-paper" src="https://github.com/user-attachments/assets/5c62c47c-7991-4189-be21-614d4ffa9029">
+</a>
+<h3 align="center">
   Material design for React Native.<br/>
   <a href="https://reactnativepaper.com">reactnativepaper.com</a>
-</p>
+</h3>
 
 ---
 

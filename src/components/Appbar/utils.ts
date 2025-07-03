@@ -8,6 +8,12 @@ import type { InternalTheme, ThemeProp } from '../../types';
 
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 
+export type AppbarChildProps = {
+  isLeading?: boolean;
+  color: string;
+  style?: StyleProp<ViewStyle>;
+};
+
 const borderStyleProperties = [
   'borderRadius',
   'borderTopLeftRadius',
@@ -113,6 +119,16 @@ export const modeTextVariant = {
   'center-aligned': 'titleLarge',
 } as const;
 
+export const filterAppbarActions = (
+  children: React.ReactNode,
+  isLeading = false
+) => {
+  return React.Children.toArray(children).filter((child) => {
+    if (!React.isValidElement<AppbarChildProps>(child)) return false;
+    return isLeading ? child.props.isLeading : !child.props.isLeading;
+  });
+};
+
 export const renderAppbarContent = ({
   children,
   isDark,
@@ -135,7 +151,7 @@ export const renderAppbarContent = ({
     )
     .map((child, i) => {
       if (
-        !React.isValidElement(child) ||
+        !React.isValidElement<AppbarChildProps>(child) ||
         ![
           'Appbar.Content',
           'Appbar.Action',

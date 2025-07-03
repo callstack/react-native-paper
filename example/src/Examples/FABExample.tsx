@@ -3,8 +3,8 @@ import { Alert, StyleSheet, View } from 'react-native';
 
 import { FAB, Portal, Text } from 'react-native-paper';
 
-import { useExampleTheme } from '..';
 import { isWeb } from '../../utils';
+import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 type FABVariant = 'primary' | 'secondary' | 'tertiary' | 'surface';
@@ -145,6 +145,7 @@ const FABExample = () => {
           <FAB.Group
             open={open}
             icon={open ? 'calendar-today' : 'plus'}
+            accessibilityLabel="Calendar FAB"
             toggleStackOnLongPress={toggleStackOnLongPress}
             actions={[
               { icon: 'plus', onPress: () => {} },

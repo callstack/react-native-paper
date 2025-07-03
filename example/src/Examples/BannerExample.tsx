@@ -10,7 +10,7 @@ import {
 
 import { Banner, FAB, MD2Colors, MD3Colors } from 'react-native-paper';
 
-import { useExampleTheme } from '..';
+import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const PHOTOS = Array.from({ length: 24 }).map(

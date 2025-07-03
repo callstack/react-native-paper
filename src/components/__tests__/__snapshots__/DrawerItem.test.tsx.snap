@@ -44,7 +44,7 @@ exports[`renders DrawerItem with icon 1`] = `
             "marginVertical": 4,
           },
           {
-            "backgroundColor": "transparent",
+            "backgroundColor": undefined,
             "borderRadius": 28,
           },
           {
@@ -86,7 +86,6 @@ exports[`renders DrawerItem with icon 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -109,16 +108,10 @@ exports[`renders DrawerItem with icon 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰋼
+          information
         </Text>
         <Text
           numberOfLines={1}
@@ -252,7 +245,6 @@ exports[`renders active DrawerItem 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          allowFontScaling={false}
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           selectable={false}
@@ -275,16 +267,10 @@ exports[`renders active DrawerItem 1`] = `
                   "backgroundColor": "transparent",
                 },
               ],
-              {
-                "fontFamily": "Material Design Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-              {},
             ]
           }
         >
-          󰋼
+          information
         </Text>
         <Text
           numberOfLines={1}
@@ -376,7 +362,7 @@ exports[`renders basic DrawerItem 1`] = `
             "marginVertical": 4,
           },
           {
-            "backgroundColor": "transparent",
+            "backgroundColor": undefined,
             "borderRadius": 28,
           },
           {

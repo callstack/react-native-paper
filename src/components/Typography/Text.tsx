@@ -103,7 +103,9 @@ const Text = (
         rest.children.type === AnimatedText ||
         rest.children.type === StyledText)
     ) {
-      const { props } = rest.children;
+      const { props } = rest.children as {
+        props: { variant?: string; style?: StyleProp<TextStyle> };
+      };
 
       // Context:   Some components have the built-in `Text` component with a predefined variant,
       //            that also accepts `children` as a `React.Node`. This can result in a situation,

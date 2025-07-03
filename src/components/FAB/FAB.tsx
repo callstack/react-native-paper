@@ -4,6 +4,7 @@ import {
   Animated,
   ColorValue,
   GestureResponderEvent,
+  PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
   View,
@@ -53,6 +54,11 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    */
   uppercase?: boolean;
   /**
+   * Type of background drawabale to display the feedback (Android).
+   * https://reactnative.dev/docs/pressable#rippleconfig
+   */
+  background?: PressableAndroidRippleConfig;
+  /**
    * Accessibility label for the FAB. This is read by the screen reader when the user taps the FAB.
    * Uses `label` by default if specified.
    */
@@ -66,7 +72,7 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    */
   animated?: boolean;
   /**
-   *  @deprecated Deprecated in v.3x - use prop size="small".
+   *  @deprecated Deprecated in v.5x - use prop size="small".
    *
    *  Whether FAB is mini-sized, used to create visual continuity with other elements. This has no effect if `label` is specified.
    */
@@ -197,6 +203,7 @@ const FAB = forwardRef<View, Props>(
     {
       icon,
       label,
+      background,
       accessibilityLabel = label,
       accessibilityState,
       animated = true,
@@ -305,9 +312,11 @@ const FAB = forwardRef<View, Props>(
         pointerEvents={visible ? 'auto' : 'none'}
         testID={`${testID}-container`}
         {...(isV3 && { elevation: md3Elevation })}
+        container
       >
         <TouchableRipple
           borderless
+          background={background}
           onPress={onPress}
           onPressIn={onPressIn}
           onPressOut={onPressOut}

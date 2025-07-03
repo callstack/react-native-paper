@@ -8,10 +8,6 @@ import { getTheme } from '../../core/theming';
 import FAB from '../FAB';
 import { getFABGroupColors } from '../FAB/utils';
 
-jest.mock('react-native-safe-area-context', () => ({
-  useSafeAreaInsets: () => ({ bottom: 34, left: 0, right: 0, top: 47 }),
-}));
-
 describe('getFABGroupColors - backdrop color', () => {
   it('should return custom color', () => {
     expect(
@@ -245,8 +241,9 @@ it('animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
-
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
   expect(getByTestId('my-fab-container-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });

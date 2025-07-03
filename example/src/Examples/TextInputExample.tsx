@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 
+import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import { useFonts } from 'expo-font';
 import {
   configureFonts,
@@ -16,10 +17,9 @@ import {
   MD3Colors,
   TextInput,
 } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { useExampleTheme } from '..';
 import { inputReducer, State } from '../../utils';
+import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const MAX_LENGTH = 20;
@@ -31,9 +31,13 @@ const initialState: State = {
   outlinedText: '',
   largeText: '',
   flatTextPassword: 'Password',
+  flatLongText:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae odio quis dolor tempor mattis at non sem. Suspendisse et sem tincidunt, accumsan massa eleifend, euismod dui. Praesent eget urna lectus.',
   outlinedLargeText: '',
   outlinedCustomLabel: '',
   outlinedTextPassword: '',
+  outlinedLongText:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae odio quis dolor tempor mattis at non sem. Suspendisse et sem tincidunt, accumsan massa eleifend, euismod dui. Praesent eget urna lectus.',
   nameNoPadding: '',
   customStyleText: '',
   nameRequired: '',
@@ -89,9 +93,11 @@ const TextInputExample = () => {
     outlinedText,
     largeText,
     flatTextPassword,
+    flatLongText,
     outlinedLargeText,
     outlinedCustomLabel,
     outlinedTextPassword,
+    outlinedLongText,
     nameNoPadding,
     customStyleText,
     nameRequired,
@@ -249,6 +255,19 @@ const TextInputExample = () => {
                 />
               }
             />
+            <TextInput
+              style={[
+                styles.inputContainerStyle,
+                styles.fixedHeight,
+                styles.autoText,
+              ]}
+              label="Flat input long text"
+              placeholder="Type something"
+              value={flatLongText}
+              onChangeText={(flatLongText) =>
+                inputActionHandler('flatLongText', flatLongText)
+              }
+            />
           </List.Accordion>
           <List.Accordion title="Outlined inputs" id="outlined">
             <TextInput
@@ -322,6 +341,20 @@ const TextInputExample = () => {
                     })
                   }
                 />
+              }
+            />
+            <TextInput
+              mode="outlined"
+              style={[
+                styles.inputContainerStyle,
+                styles.fixedHeight,
+                styles.autoText,
+              ]}
+              label="Outlined input long text"
+              placeholder="Type something"
+              value={outlinedLongText}
+              onChangeText={(outlinedLongText) =>
+                inputActionHandler('outlinedLongText', outlinedLongText)
               }
             />
           </List.Accordion>
@@ -872,6 +905,9 @@ const styles = StyleSheet.create({
   },
   right: {
     width: '70%',
+  },
+  autoText: {
+    textAlign: 'auto',
   },
 });
 

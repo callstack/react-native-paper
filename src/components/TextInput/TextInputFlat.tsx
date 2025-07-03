@@ -74,6 +74,7 @@ const TextInputFlat = ({
   placeholderTextColor,
   testID = 'text-input-flat',
   contentStyle,
+  scaledLabel,
   ...rest
 }: ChildTextInputProps) => {
   const isAndroid = Platform.OS === 'android';
@@ -94,7 +95,8 @@ const TextInputFlat = ({
     ...viewStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
   const fontSize = fontSizeStyle || MAXIMIZED_LABEL_FONT_SIZE;
-  const lineHeight = lineHeightStyle || fontSize * 1.2;
+  const lineHeight =
+    lineHeightStyle || (Platform.OS === 'web' ? fontSize * 1.2 : undefined);
 
   const isPaddingHorizontalPassed =
     paddingHorizontal !== undefined && typeof paddingHorizontal === 'number';
@@ -226,6 +228,13 @@ const TextInputFlat = ({
   const placeholderOpacity = hasActiveOutline
     ? parentState.labeled
     : placeholderOpacityAnims[parentState.labelLayout.measured ? 1 : 0];
+
+  // We don't want to show placeholder if label is displayed, because they overlap.
+  // Before it was done by setting placeholder's value to " ", but inputs have the same props
+  // what causes broken styles due to: https://github.com/facebook/react-native/issues/48249
+  const placeholderTextColorBasedOnState = parentState.displayPlaceholder
+    ? placeholderTextColor ?? placeholderColor
+    : 'transparent';
 
   const minHeight =
     height ||
@@ -374,9 +383,11 @@ const TextInputFlat = ({
             labeled={parentState.labeled}
             error={parentState.error}
             focused={parentState.focused}
+            scaledLabel={scaledLabel}
             wiggle={Boolean(parentState.value && labelProps.labelError)}
             labelLayoutMeasured={parentState.labelLayout.measured}
             labelLayoutWidth={parentState.labelLayout.width}
+            labelLayoutHeight={parentState.labelLayout.height}
             {...labelProps}
           />
         ) : null}
@@ -384,19 +395,19 @@ const TextInputFlat = ({
           ...rest,
           ref: innerRef,
           onChangeText,
-          placeholder: label ? parentState.placeholder : rest.placeholder,
+          placeholder: rest.placeholder,
           editable: !disabled && editable,
           selectionColor,
           cursorColor:
             typeof cursorColor === 'undefined' ? activeColor : cursorColor,
-          placeholderTextColor: placeholderTextColor ?? placeholderColor,
+          placeholderTextColor: placeholderTextColorBasedOnState,
           onFocus,
           onBlur,
           underlineColorAndroid: 'transparent',
           multiline,
           style: [
             styles.input,
-            !multiline || (multiline && height) ? { height: flatHeight } : {},
+            multiline && height ? { height: flatHeight } : {},
             paddingFlat,
             {
               paddingLeft,
@@ -417,7 +428,7 @@ const TextInputFlat = ({
                 MIN_WIDTH
               ),
             },
-            Platform.OS === 'web' && { outline: 'none' },
+            Platform.OS === 'web' ? { outline: 'none' } : undefined,
             adornmentStyleAdjustmentForNativeInput,
             contentStyle,
           ],
@@ -439,9 +450,11 @@ const styles = StyleSheet.create({
   labelContainer: {
     paddingTop: 0,
     paddingBottom: 0,
+    flexGrow: 1,
   },
   input: {
     margin: 0,
+    flexGrow: 1,
   },
   inputFlat: {
     paddingTop: 24,

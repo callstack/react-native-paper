@@ -4,6 +4,7 @@ import type {
   TextStyle,
   StyleProp,
   Animated,
+  DimensionValue,
 } from 'react-native';
 
 import type { ThemeProp } from 'src/types';
@@ -62,7 +63,7 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   leftAffixWidth: number;
   rightAffixWidth: number;
   mode?: 'outlined' | 'flat';
-  paddingHorizontal?: number | string;
+  paddingHorizontal?: DimensionValue;
   isV3?: boolean;
 }): AdornmentStyleAdjustmentForNativeInput | {} {
   const { OUTLINED_INPUT_OFFSET, ADORNMENT_OFFSET } = getConstants(isV3);
@@ -130,7 +131,7 @@ export interface TextInputAdornmentProps {
   textStyle?: StyleProp<TextStyle>;
   visible?: Animated.Value;
   isTextInputFocused: boolean;
-  paddingHorizontal?: number | string;
+  paddingHorizontal?: DimensionValue;
   maxFontSizeMultiplier?: number | undefined | null;
   theme?: ThemeProp;
   disabled?: boolean;

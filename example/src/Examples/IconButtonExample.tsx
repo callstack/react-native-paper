@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 
 import { IconButton, List, MD2Colors, MD3Colors } from 'react-native-paper';
 
-import { useExampleTheme } from '..';
+import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const ButtonExample = () => {
@@ -18,6 +18,7 @@ const ButtonExample = () => {
           iconColor={MD2Colors.green500}
           onPress={() => {}}
         />
+        <IconButton icon="" size={24} onPress={() => {}} loading />
         <IconButton icon="camera" size={36} onPress={() => {}} />
         <IconButton
           icon="lock"
@@ -37,6 +38,7 @@ const ButtonExample = () => {
           <IconButton icon="camera" size={24} onPress={() => {}} />
           <IconButton icon="camera" selected size={24} onPress={() => {}} />
           <IconButton icon="camera" disabled size={24} onPress={() => {}} />
+          <IconButton icon="camera" size={24} onPress={() => {}} loading />
         </View>
       </List.Section>
 
@@ -59,6 +61,14 @@ const ButtonExample = () => {
             icon="camera"
             mode="contained"
             disabled
+            size={24}
+            onPress={() => {}}
+          />
+          <IconButton
+            icon=""
+            mode="contained"
+            selected
+            loading
             size={24}
             onPress={() => {}}
           />
@@ -87,6 +97,14 @@ const ButtonExample = () => {
             size={24}
             onPress={() => {}}
           />
+          <IconButton
+            icon=""
+            mode="contained-tonal"
+            disabled
+            size={24}
+            onPress={() => {}}
+            loading
+          />
         </View>
       </List.Section>
 
@@ -112,6 +130,14 @@ const ButtonExample = () => {
             size={24}
             onPress={() => {}}
           />
+          <IconButton
+            icon=""
+            mode="outlined"
+            disabled
+            size={24}
+            onPress={() => {}}
+            loading
+          />
         </View>
       </List.Section>
 
@@ -131,6 +157,31 @@ const ButtonExample = () => {
             iconColor={MD3Colors.tertiary50}
             onPress={() => {}}
           />
+          <IconButton
+            icon="eye"
+            mode="contained"
+            style={styles.slightlyRounded}
+            size={24}
+            contentStyle={{ padding: 8 }}
+            iconColor={MD3Colors.tertiary50}
+            onPress={() => {}}
+          />
+          <IconButton
+            icon="heart"
+            mode="contained-tonal"
+            style={styles.differentBorderRadius}
+            size={24}
+            iconColor={MD3Colors.tertiary50}
+            onPress={() => {}}
+          />
+          <IconButton
+            icon="heart"
+            mode="outlined"
+            style={styles.differentBorderRadius}
+            size={24}
+            iconColor={MD3Colors.tertiary50}
+            onPress={() => {}}
+          />
           <IconButton icon="camera" size={36} onPress={() => {}} />
           <IconButton
             icon="lock"
@@ -139,6 +190,7 @@ const ButtonExample = () => {
             containerColor={MD3Colors.tertiary60}
           />
           <IconButton icon="heart" size={60} onPress={() => {}} />
+          <IconButton icon="" size={60} onPress={() => {}} loading />
         </View>
       </List.Section>
     </ScreenWrapper>
@@ -161,6 +213,17 @@ const styles = StyleSheet.create({
   },
   square: {
     borderRadius: 0,
+  },
+  slightlyRounded: {
+    borderRadius: 4,
+    width: 48,
+    height: 48,
+  },
+  differentBorderRadius: {
+    borderTopLeftRadius: 2,
+    borderTopRightRadius: 4,
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 6,
   },
 });
 

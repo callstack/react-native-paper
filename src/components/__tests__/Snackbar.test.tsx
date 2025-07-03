@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { act, render } from '@testing-library/react-native';
 
 import { red200, white } from '../../styles/themes/v2/colors';
 import Snackbar from '../Snackbar';
@@ -16,29 +16,6 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   text: { color: white, marginLeft: 10, flexWrap: 'wrap', flexShrink: 1 },
-});
-
-// Make sure any animation finishes before checking the snapshot results
-jest.mock('react-native', () => {
-  const RN = jest.requireActual('react-native');
-
-  const timing: (typeof Animated)['timing'] = (value, config) => ({
-    start: (callback) => {
-      value.setValue(config.toValue as any);
-      callback?.({ finished: true });
-    },
-    value,
-    config,
-    stop: () => {
-      throw new Error('Not implemented');
-    },
-    reset: () => {
-      throw new Error('Not implemented');
-    },
-  });
-  RN.Animated.timing = timing;
-
-  return RN;
 });
 
 jest.mock('react-native-safe-area-context', () => ({
@@ -144,8 +121,9 @@ it('animated value changes correctly', () => {
     duration: 200,
   }).start();
 
-  jest.advanceTimersByTime(200);
-
+  act(() => {
+    jest.advanceTimersByTime(200);
+  });
   expect(getByTestId('snack-bar-outer-layer')).toHaveStyle({
     transform: [{ scale: 1.5 }],
   });

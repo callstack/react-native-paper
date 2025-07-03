@@ -8,7 +8,7 @@ import type {
 } from 'react-native-paper';
 import { Paragraph, RadioButton, Text } from 'react-native-paper';
 
-import { useExampleTheme } from '../..';
+import { useExampleTheme } from '../../hooks/useExampleTheme';
 
 export type Controls = {
   iconMode: AnimatedFABIconMode;
