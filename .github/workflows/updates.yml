@@ -10,15 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version-file: .nvmrc
 
       - name: Setup Expo
-        uses: expo/expo-github-action@v7
+        uses: expo/expo-github-action@d300b960e9f91a8c59b2aaca92e89ad70b0785ac # v7
         with:
           expo-version: latest
           eas-version: latest
@@ -26,7 +26,7 @@ jobs:
 
       - name: Restore dependencies
         id: yarn-cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}-${{ hashFiles('**/package.json', '!node_modules/**') }}
@@ -43,7 +43,7 @@ jobs:
 
       - name: Cache dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
           path: '**/node_modules'
           key: ${{ steps.yarn-cache.outputs.cache-primary-key }}

@@ -10,10 +10,23 @@ jobs:
     if: ${{ github.event.label.name == 'bug' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+      - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0. 
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            if (context.eventName === 'issue_comment') {
+              const actor = context.actor;
+              const { data: collaborators } = await github.rest.repos.listCollaborators({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+              });
+
+              const isCollaborator = collaborators.some(collaborator => collaborator.login === actor);
+              if (!isCollaborator) {
+                console.log(`Actor ${actor} is not a collaborator, skipping workflow`);
+                return;
+              }
+            }
             const user = context.payload.sender.login;
             const body = context.payload.comment
               ? context.payload.comment.body
