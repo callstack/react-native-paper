@@ -3,6 +3,10 @@ on:
   issues:
     types: [labeled]
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   needs-more-info:
     runs-on: ubuntu-latest
@@ -13,6 +17,18 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const actor = context.actor;
+            const { data: collaborators } = await github.rest.repos.listCollaborators({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            const isCollaborator = collaborators.some(collaborator => collaborator.login === actor);
+            if (!isCollaborator) {
+              console.log(`Actor ${actor} is not a collaborator, skipping workflow`);
+              return;
+            }
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -29,6 +45,18 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const actor = context.actor;
+            const { data: collaborators } = await github.rest.repos.listCollaborators({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            const isCollaborator = collaborators.some(collaborator => collaborator.login === actor);
+            if (!isCollaborator) {
+              console.log(`Actor ${actor} is not a collaborator, skipping workflow`);
+              return;
+            }
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,

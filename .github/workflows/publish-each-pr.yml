@@ -1,6 +1,10 @@
 name: Expo Preview
 on: [pull_request]
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   publish:
     name: Install and publish
