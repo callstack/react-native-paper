@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  I18nManager,
   StyleProp,
   StyleSheet,
   Text as NativeText,
@@ -87,7 +86,6 @@ const Text = (
   const root = React.useRef<NativeText | null>(null);
   // FIXME: destructure it in TS 4.6+
   const theme = useInternalTheme(initialTheme);
-  const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
 
   React.useImperativeHandle(ref, () => ({
     setNativeProps: (args: Object) => root.current?.setNativeProps(args),
@@ -147,7 +145,7 @@ const Text = (
         ref={root}
         style={[
           styles.text,
-          { writingDirection, color: theme.colors.onSurface },
+          { writingDirection: theme.direction, color: theme.colors.onSurface },
           textStyle,
         ]}
         {...rest}
@@ -163,7 +161,12 @@ const Text = (
       <NativeText
         {...rest}
         ref={root}
-        style={[styles.text, textStyle, { writingDirection }, style]}
+        style={[
+          styles.text,
+          textStyle,
+          { writingDirection: theme.direction },
+          style,
+        ]}
       />
     );
   }

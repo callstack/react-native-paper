@@ -10,7 +10,6 @@ import {
   Animated,
   Easing,
   GestureResponderEvent,
-  I18nManager,
   Platform,
   ScrollView,
   StyleProp,
@@ -146,7 +145,6 @@ const SCALE = 0.9;
  *   ScrollView,
  *   Text,
  *   SafeAreaView,
- *   I18nManager,
  * } from 'react-native';
  * import { AnimatedFAB } from 'react-native-paper';
  *
@@ -238,7 +236,7 @@ const AnimatedFAB = ({
   const isWeb = Platform.OS === 'web';
   const isAnimatedFromRight = animateFrom === 'right';
   const isIconStatic = iconMode === 'static';
-  const { isRTL } = I18nManager;
+  const isRTL = theme.direction === 'rtl';
   const labelRef = React.useRef<Text & HTMLElement>(null);
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
@@ -362,6 +360,7 @@ const AnimatedFAB = ({
     isIconStatic,
     distance,
     animFAB,
+    isRTL: theme.direction === 'rtl',
   });
 
   const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;

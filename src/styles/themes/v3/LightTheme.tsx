@@ -1,3 +1,5 @@
+import { I18nManager } from 'react-native';
+
 import color from 'color';
 
 import { MD3Colors, tokens } from './tokens';
@@ -8,6 +10,7 @@ const { palette, opacity } = tokens.md.ref;
 
 export const MD3LightTheme: MD3Theme = {
   dark: false,
+  direction: I18nManager.getConstants().isRTL ? 'rtl' : 'ltr',
   roundness: 4,
   version: 3,
   isV3: true,

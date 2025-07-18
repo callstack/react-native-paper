@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   ColorValue,
   GestureResponderEvent,
-  I18nManager,
   NativeSyntheticEvent,
   StyleProp,
   StyleSheet,
@@ -331,7 +330,7 @@ const ListAccordion = ({
                   name={isExpanded ? 'chevron-up' : 'chevron-down'}
                   color={theme.isV3 ? descriptionColor : titleColor}
                   size={24}
-                  direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                  direction={theme.direction}
                 />
               )}
             </View>
