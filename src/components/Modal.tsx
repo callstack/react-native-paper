@@ -4,6 +4,7 @@ import {
   Easing,
   StyleProp,
   StyleSheet,
+  Platform,
   Pressable,
   View,
   ViewStyle,
@@ -40,6 +41,14 @@ export type Props = {
    * Determines Whether the modal is visible.
    */
   visible: boolean;
+  /**
+   * Determines whether the modal uses animations.
+   */
+  disableAnimations?: boolean;
+  /**
+   * Determines whether the modal closes on Escape on web.
+   */
+  handleEscape?: boolean;
   /**
    * Content of the `Modal`.
    */
@@ -104,6 +113,8 @@ function Modal({
   dismissable = true,
   dismissableBackButton = dismissable,
   visible = false,
+  disableAnimations = false,
+  handleEscape = false,
   overlayAccessibilityLabel = 'Close modal',
   onDismiss = () => {},
   children,
@@ -120,28 +131,34 @@ function Modal({
   const [visibleInternal, setVisibleInternal] = React.useState(visible);
 
   const showModalAnimation = React.useCallback(() => {
-    Animated.timing(opacity, {
-      toValue: 1,
-      duration: scale * DEFAULT_DURATION,
-      easing: Easing.out(Easing.cubic),
-      useNativeDriver: true,
-    }).start();
-  }, [opacity, scale]);
+    if (!disableAnimations) {
+      Animated.timing(opacity, {
+        toValue: 1,
+        duration: scale * DEFAULT_DURATION,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [opacity, scale, disableAnimations]);
 
   const hideModalAnimation = React.useCallback(() => {
-    Animated.timing(opacity, {
-      toValue: 0,
-      duration: scale * DEFAULT_DURATION,
-      easing: Easing.out(Easing.cubic),
-      useNativeDriver: true,
-    }).start(({ finished }) => {
-      if (!finished) {
-        return;
-      }
+    if (!disableAnimations) {
+      Animated.timing(opacity, {
+        toValue: 0,
+        duration: scale * DEFAULT_DURATION,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: true,
+      }).start(({ finished }) => {
+        if (!finished) {
+          return;
+        }
 
+        setVisibleInternal(false);
+      });
+    } else {
       setVisibleInternal(false);
-    });
-  }, [opacity, scale]);
+    }
+  }, [opacity, scale, disableAnimations]);
 
   React.useEffect(() => {
     if (visibleInternal === visible) {
@@ -179,6 +196,23 @@ function Modal({
     return () => subscription.remove();
   }, [dismissable, dismissableBackButton, onDismissCallback, visible]);
 
+  React.useEffect(() => {
+    if (!visible || !handleEscape || Platform.OS !== 'web') {
+      return undefined;
+    }
+
+    const closeOnEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        if (dismissable) {
+          onDismissCallback();
+        }
+      }
+    };
+    document.addEventListener('keyup', closeOnEscape, false);
+    return () => document.removeEventListener('keyup', closeOnEscape, false);
+  }, [dismissable, onDismissCallback, visible, handleEscape]);
+
   if (!visibleInternal) {
     return null;
   }
@@ -202,8 +236,8 @@ function Modal({
           styles.backdrop,
           {
             backgroundColor: theme.colors?.backdrop,
-            opacity,
           },
+          ...(!disableAnimations ? [{ opacity }] : []),
         ]}
         testID={`${testID}-backdrop`}
       />
@@ -219,7 +253,11 @@ function Modal({
         <Surface
           testID={`${testID}-surface`}
           theme={theme}
-          style={[{ opacity }, styles.content, contentContainerStyle]}
+          style={[
+            ...(!disableAnimations ? [{ opacity }] : []),
+            styles.content,
+            contentContainerStyle,
+          ]}
           container
         >
           {children}
