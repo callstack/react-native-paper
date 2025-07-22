@@ -137,6 +137,10 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   maxFontSizeMultiplier?: number;
   /**
+   * Label text number Of Lines of the button.
+   */
+  numberOfLines?: number;
+  /**
    * Sets additional distance outside of element in which a press can be detected.
    */
   hitSlop?: TouchableRippleProps['hitSlop'];
@@ -197,6 +201,7 @@ const Button = (
     onPressOut,
     onLongPress,
     delayLongPress,
+    numberOfLines,
     style,
     theme: themeOverrides,
     uppercase: uppercaseProp,
@@ -282,6 +287,7 @@ const Button = (
 
   const borderRadius = (isV3 ? 5 : 1) * roundness;
   const iconSize = isV3 ? 18 : 16;
+  const NumberOfLines = numberOfLines ? numberOfLines : 1;
 
   const { backgroundColor, borderColor, textColor, borderWidth } =
     getButtonColors({
@@ -401,7 +407,7 @@ const Button = (
           <Text
             variant="labelLarge"
             selectable={false}
-            numberOfLines={1}
+            numberOfLines={NumberOfLines}
             testID={`${testID}-text`}
             style={[
               styles.label,
