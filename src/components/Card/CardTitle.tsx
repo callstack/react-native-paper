@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  Pressable,
   StyleProp,
   StyleSheet,
   TextStyle,
@@ -109,6 +110,11 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    * @optional
    */
   theme?: ThemeProp;
+  /**
+   * @optional
+   * Makes the card title pressable
+   */
+  onPressTitle?: () => void;
 };
 
 const LEFT_SIZE = 40;
@@ -150,13 +156,35 @@ const CardTitle = ({
   rightStyle,
   style,
   theme: themeOverrides,
+  onPressTitle,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const TitleComponent = theme.isV3 ? Text : Title;
-  const SubtitleComponent = theme.isV3 ? Text : Caption;
+  let TitleContainer = theme.isV3 ? Text : Title;
+  const SubtitleContainer = theme.isV3 ? Text : Caption;
 
   const minHeight = subtitle || left || right ? 72 : 50;
   const marginBottom = subtitle ? 0 : 2;
+
+  const TitleComponent = (props: { title: React.ReactNode }) => (
+    <TitleContainer
+      style={[styles.title, { marginBottom }, titleStyle]}
+      numberOfLines={titleNumberOfLines}
+      variant={titleVariant}
+      maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
+    >
+      {props.title}
+    </TitleContainer>
+  );
+  const SubtitleComponent = (props: { subtitle: React.ReactNode }) => (
+    <SubtitleContainer
+      style={[styles.subtitle, subtitleStyle]}
+      numberOfLines={subtitleNumberOfLines}
+      variant={subtitleVariant}
+      maxFontSizeMultiplier={subtitleMaxFontSizeMultiplier}
+    >
+      {props.subtitle}
+    </SubtitleContainer>
+  );
 
   return (
     <View style={[styles.container, { minHeight }, style]}>
@@ -169,26 +197,14 @@ const CardTitle = ({
       ) : null}
 
       <View style={[styles.titles]}>
-        {title && (
-          <TitleComponent
-            style={[styles.title, { marginBottom }, titleStyle]}
-            numberOfLines={titleNumberOfLines}
-            variant={titleVariant}
-            maxFontSizeMultiplier={titleMaxFontSizeMultiplier}
-          >
-            {title}
-          </TitleComponent>
+        {title && onPressTitle ? (
+          <Pressable onPress={onPressTitle} style={[styles.title]}>
+            <TitleComponent {...{ title }} />
+          </Pressable>
+        ) : (
+          <TitleComponent {...{ title }} />
         )}
-        {subtitle && (
-          <SubtitleComponent
-            style={[styles.subtitle, subtitleStyle]}
-            numberOfLines={subtitleNumberOfLines}
-            variant={subtitleVariant}
-            maxFontSizeMultiplier={subtitleMaxFontSizeMultiplier}
-          >
-            {subtitle}
-          </SubtitleComponent>
-        )}
+        {subtitle && <SubtitleComponent {...{ subtitle }} />}
       </View>
       <View style={rightStyle}>{right ? right({ size: 24 }) : null}</View>
     </View>
@@ -219,6 +235,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    alignSelf: 'flex-start',
     minHeight: 30,
     paddingRight: 16,
   },
