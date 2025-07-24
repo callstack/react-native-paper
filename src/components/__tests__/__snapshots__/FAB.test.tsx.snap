@@ -92,13 +92,15 @@ exports[`renders FAB with custom size prop 1`] = `
           [
             {
               "alignItems": "center",
-              "flexDirection": "row",
               "justifyContent": "center",
             },
             {
               "borderRadius": 25,
               "height": 100,
               "width": 100,
+            },
+            {
+              "flexDirection": "row",
             },
           ]
         }
@@ -270,13 +272,15 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
           [
             {
               "alignItems": "center",
-              "flexDirection": "row",
               "justifyContent": "center",
             },
             {
               "borderRadius": 16,
               "height": 56,
               "width": 56,
+            },
+            {
+              "flexDirection": "row",
             },
           ]
         }
@@ -448,13 +452,15 @@ exports[`renders default FAB 1`] = `
           [
             {
               "alignItems": "center",
-              "flexDirection": "row",
               "justifyContent": "center",
             },
             {
               "borderRadius": 16,
               "height": 56,
               "width": 56,
+            },
+            {
+              "flexDirection": "row",
             },
           ]
         }
@@ -626,13 +632,15 @@ exports[`renders disabled FAB 1`] = `
           [
             {
               "alignItems": "center",
-              "flexDirection": "row",
               "justifyContent": "center",
             },
             {
               "borderRadius": 16,
               "height": 56,
               "width": 56,
+            },
+            {
+              "flexDirection": "row",
             },
           ]
         }
@@ -805,13 +813,15 @@ exports[`renders extended FAB 1`] = `
           [
             {
               "alignItems": "center",
-              "flexDirection": "row",
               "justifyContent": "center",
             },
             {
               "borderRadius": 16,
               "height": 56,
               "paddingHorizontal": 16,
+            },
+            {
+              "flexDirection": "row",
             },
           ]
         }
@@ -1024,12 +1034,14 @@ exports[`renders extended FAB with custom size prop 1`] = `
           [
             {
               "alignItems": "center",
-              "flexDirection": "row",
               "justifyContent": "center",
             },
             {
               "height": 100,
               "paddingHorizontal": 16,
+            },
+            {
+              "flexDirection": "row",
             },
           ]
         }
@@ -1241,13 +1253,15 @@ exports[`renders large FAB 1`] = `
           [
             {
               "alignItems": "center",
-              "flexDirection": "row",
               "justifyContent": "center",
             },
             {
               "borderRadius": 28,
               "height": 96,
               "width": 96,
+            },
+            {
+              "flexDirection": "row",
             },
           ]
         }
@@ -1419,13 +1433,15 @@ exports[`renders loading FAB 1`] = `
           [
             {
               "alignItems": "center",
-              "flexDirection": "row",
               "justifyContent": "center",
             },
             {
               "borderRadius": 16,
               "height": 56,
               "width": 56,
+            },
+            {
+              "flexDirection": "row",
             },
           ]
         }
@@ -1735,13 +1751,15 @@ exports[`renders loading FAB with custom size prop 1`] = `
           [
             {
               "alignItems": "center",
-              "flexDirection": "row",
               "justifyContent": "center",
             },
             {
               "borderRadius": 25,
               "height": 100,
               "width": 100,
+            },
+            {
+              "flexDirection": "row",
             },
           ]
         }
@@ -2051,13 +2069,15 @@ exports[`renders not visible FAB 1`] = `
           [
             {
               "alignItems": "center",
-              "flexDirection": "row",
               "justifyContent": "center",
             },
             {
               "borderRadius": 16,
               "height": 56,
               "width": 56,
+            },
+            {
+              "flexDirection": "row",
             },
           ]
         }
@@ -2229,13 +2249,15 @@ exports[`renders small FAB 1`] = `
           [
             {
               "alignItems": "center",
-              "flexDirection": "row",
               "justifyContent": "center",
             },
             {
               "borderRadius": 12,
               "height": 40,
               "width": 40,
+            },
+            {
+              "flexDirection": "row",
             },
           ]
         }
@@ -2407,13 +2429,15 @@ exports[`renders visible FAB 1`] = `
           [
             {
               "alignItems": "center",
-              "flexDirection": "row",
               "justifyContent": "center",
             },
             {
               "borderRadius": 16,
               "height": 56,
               "width": 56,
+            },
+            {
+              "flexDirection": "row",
             },
           ]
         }
