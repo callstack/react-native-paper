@@ -104,7 +104,7 @@ export type Props = PressableProps & {
  * ### Accessibility
  * Note that, while `onPress` is not a required prop, not passing an `onPress` prop directly to `TouchableRipple` (e.g., passing it to a component it wraps instead) will likely break the accessibility of the component.
  * When `onPress` is not present, the component will read as a "dimmed", inactive button to screen readers, and will not be reachable at all to voice control users.
- * 
+ *
  * @extends Pressable props https://reactnative.dev/docs/Pressable#props
  */
 const TouchableRipple = (
