@@ -205,7 +205,13 @@ const ProgressBar = ({
       accessibilityValue={
         indeterminate
           ? {}
-          : { min: 0, max: 100, now: Math.round(progress * 100) }
+          : {
+              min: 0,
+              max: 100,
+              now: Math.round(
+                (animatedValue !== undefined ? animatedValue : progress) * 100
+              ),
+            }
       }
       style={isWeb && styles.webContainer}
       testID={testID}
