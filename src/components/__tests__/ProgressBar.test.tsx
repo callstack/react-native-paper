@@ -90,3 +90,45 @@ it('renders progress bar with custom style of filled part', async () => {
     borderRadius: 4,
   });
 });
+
+it('sets correct accessibilityValue with progress prop', async () => {
+  const tree = render(<ProgressBar progress={0.2} />);
+  await waitFor(() => tree.getByRole(a11yRole).props.onLayout(layoutEvent));
+
+  expect(tree.getByRole(a11yRole).props.accessibilityValue).toEqual({
+    min: 0,
+    max: 100,
+    now: 20,
+  });
+});
+
+it('sets correct accessibilityValue with animatedValue prop', async () => {
+  const tree = render(<ProgressBar animatedValue={0.4} />);
+  await waitFor(() => tree.getByRole(a11yRole).props.onLayout(layoutEvent));
+
+  expect(tree.getByRole(a11yRole).props.accessibilityValue).toEqual({
+    min: 0,
+    max: 100,
+    now: 40,
+  });
+});
+
+it('updates accessibilityValue when animatedValue changes', async () => {
+  const tree = render(<ProgressBar animatedValue={0.2} />);
+  await waitFor(() => tree.getByRole(a11yRole).props.onLayout(layoutEvent));
+
+  tree.update(<ProgressBar animatedValue={0.6} />);
+
+  expect(tree.getByRole(a11yRole).props.accessibilityValue).toEqual({
+    min: 0,
+    max: 100,
+    now: 60,
+  });
+});
+
+it('sets empty accessibilityValue when indeterminate is true', async () => {
+  const tree = render(<ProgressBar indeterminate />);
+  await waitFor(() => tree.getByRole(a11yRole).props.onLayout(layoutEvent));
+
+  expect(tree.getByRole(a11yRole).props.accessibilityValue).toEqual({});
+});
