@@ -39,34 +39,34 @@ const ListItemExample = () => {
       <List.Section title="With icon">
         <List.Item
           title="Headline"
-          left={(props) => <List.Icon size={32}  {...props} icon="account-outline" />}
+          left={(props) => <List.Icon iconSize={32}  {...props} icon="account-outline" />}
         />
         <List.Item
           title="Headline"
           description="Supporting text"
-          left={(props) => <List.Icon size={32}  {...props} icon="account-outline" />}
+          left={(props) => <List.Icon iconSize={32}  {...props} icon="account-outline" />}
         />
         <List.Item
           title="Headline"
           description="Supporting text that is long enough to fill up multiple lines in the item"
-          left={(props) => <List.Icon size={32}  {...props} icon="account-outline" />}
+          left={(props) => <List.Icon iconSize={32}  {...props} icon="account-outline" />}
         />
         <Divider />
         <List.Item
           title="Headline"
-          left={(props) => <List.Icon size={32}  {...props} icon="account-outline" />}
+          left={(props) => <List.Icon iconSize={32}  {...props} icon="account-outline" />}
           right={() => <CenteredCheckbox />}
         />
         <List.Item
           title="Headline"
           description="Supporting text"
-          left={(props) => <List.Icon size={32}  {...props} icon="account-outline" />}
+          left={(props) => <List.Icon iconSize={32}  {...props} icon="account-outline" />}
           right={() => <CenteredCheckbox />}
         />
         <List.Item
           title="Headline"
           description="Supporting text that is long enough to fill up multiple lines in the item"
-          left={(props) => <List.Icon size={32}  {...props} icon="account-outline" />}
+          left={(props) => <List.Icon iconSize={32}  {...props} icon="account-outline" />}
           right={() => <Checkbox status="checked" />}
         />
         <Divider />
@@ -276,19 +276,19 @@ const ListItemExample = () => {
         <Divider />
         <List.Item
           title="Headline"
-          left={(props) => <List.Icon size={32}  {...props} icon="account-outline" />}
+          left={(props) => <List.Icon iconSize={32}  {...props} icon="account-outline" />}
           right={() => <Switch disabled style={styles.centered} />}
         />
         <List.Item
           title="Headline"
           description="Supporting text"
-          left={(props) => <List.Icon size={32}  {...props} icon="account-outline" />}
+          left={(props) => <List.Icon iconSize={32}  {...props} icon="account-outline" />}
           right={() => <Switch disabled style={styles.centered} />}
         />
         <List.Item
           title="Headline"
           description="Supporting text that is long enough to fill up multiple lines in the item"
-          left={(props) => <List.Icon size={32}  {...props} icon="account-outline" />}
+          left={(props) => <List.Icon iconSize={32}  {...props} icon="account-outline" />}
           right={() => <Switch disabled />}
         />
         <Divider />

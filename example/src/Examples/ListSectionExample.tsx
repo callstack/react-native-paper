@@ -10,17 +10,17 @@ const ListSectionExample = () => {
       <List.Section>
         <List.Subheader>Single line</List.Subheader>
         <List.Item
-          left={(props) => <List.Icon size={32}  {...props} icon="calendar" />}
+          left={(props) => <List.Icon iconSize={32}  {...props} icon="calendar" />}
           title="List item 1"
         />
         <List.Item
-          left={(props) => <List.Icon size={32}  {...props} icon="wallet-giftcard" />}
+          left={(props) => <List.Icon iconSize={32}  {...props} icon="wallet-giftcard" />}
           title="List item 2"
         />
         <List.Item
           title="List item 3"
-          left={(props) => <List.Icon size={32}  {...props} icon="folder" />}
-          right={(props) => <List.Icon size={32}  {...props} icon="equal" />}
+          left={(props) => <List.Icon iconSize={32}  {...props} icon="folder" />}
+          right={(props) => <List.Icon iconSize={32}  {...props} icon="equal" />}
         />
       </List.Section>
       <Divider />
@@ -45,7 +45,7 @@ const ListSectionExample = () => {
               accessibilityIgnoresInvertColors
             />
           )}
-          right={(props) => <List.Icon size={32}  {...props} icon="information" />}
+          right={(props) => <List.Icon iconSize={32}  {...props} icon="information" />}
           title="List item 2"
           description="Describes item 2"
         />
@@ -72,7 +72,7 @@ const ListSectionExample = () => {
               accessibilityIgnoresInvertColors
             />
           )}
-          right={(props) => <List.Icon size={32}  {...props} icon="star-outline" />}
+          right={(props) => <List.Icon iconSize={32}  {...props} icon="star-outline" />}
           title="List item 2"
           description="Describes item 2. Example of a very very long description."
         />
@@ -88,7 +88,7 @@ const ListSectionExample = () => {
               accessibilityIgnoresInvertColors
             />
           )}
-          right={(props) => <List.Icon size={32}  {...props} icon="star-outline" />}
+          right={(props) => <List.Icon iconSize={32}  {...props} icon="star-outline" />}
           title={({ ellipsizeMode, color: titleColor, fontSize }) => (
             <View style={[styles.container, styles.row, styles.customTitle]}>
               <Text
