@@ -24,7 +24,9 @@ const ThemeExample = ({ navigation }: Props) => {
             title="Themed Sport App"
             description="Go to the example"
             onPress={() => navigation.navigate('teamsList')}
-            right={(props) => <List.Icon iconSize={32}  {...props} icon="arrow-right" />}
+            right={(props) => (
+              <List.Icon iconSize={32} {...props} icon="arrow-right" />
+            )}
           />
         </List.Section>
       </ScreenWrapper>
