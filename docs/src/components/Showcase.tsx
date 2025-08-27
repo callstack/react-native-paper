@@ -174,6 +174,15 @@ const data: Data[] = [
     image: '/react-native-paper/showcase/moonmeet.png',
     github: 'https://github.com/MoonMeet/MoonMeet-CrossPlatform',
   },
+  {
+    color: '#dfe4d7',
+    name: 'LiftLog',
+    image: '/react-native-paper/showcase/liftlog.png',
+    android:
+      'https://play.google.com/store/apps/details?id=com.limajuice.liftlog',
+    ios: 'https://apps.apple.com/au/app/liftlog/id6467372581',
+    github: 'https://github.com/LiamMorrow/LiftLog',
+  },
 ];
 
 const getOpacity = (item?: string) => (item ? 1 : 0.4);
