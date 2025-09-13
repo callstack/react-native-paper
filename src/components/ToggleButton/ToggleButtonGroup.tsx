@@ -15,9 +15,9 @@ export type Props<Value = string> = {
   children: React.ReactNode;
 };
 
-type ToggleButtonContextType<Value> = {
+export type ToggleButtonContextType<Value> = {
   value: Value | null;
-  onValueChange: (item: Value) => void;
+  onValueChange: (item: Value | null) => void;
 };
 
 export const ToggleButtonGroupContext =

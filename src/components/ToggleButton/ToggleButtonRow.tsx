@@ -4,15 +4,15 @@ import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native';
 import ToggleButton from './ToggleButton';
 import ToggleButtonGroup from './ToggleButtonGroup';
 
-export type Props = {
+export type Props<Value = string> = {
   /**
    * Function to execute on selection change.
    */
-  onValueChange: (value: string) => void;
+  onValueChange: (value: Value) => void;
   /**
    * Value of the currently selected toggle button.
    */
-  value: string;
+  value: Value;
   /**
    * React elements containing toggle buttons.
    */
@@ -43,7 +43,12 @@ export type Props = {
  *
  *```
  */
-const ToggleButtonRow = ({ value, onValueChange, children, style }: Props) => {
+const ToggleButtonRow = <Value = string,>({
+  value,
+  onValueChange,
+  children,
+  style,
+}: Props<Value>) => {
   const count = React.Children.count(children);
 
   return (
