@@ -67,12 +67,32 @@ const Switch = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+
+  // Internal state is needed to fix #4789 where Switch is inside a Portal
+  const [internalValue, setInternalValue] = React.useState<boolean>(() =>
+    typeof value === 'boolean' ? value : false
+  );
+
+  React.useEffect(() => {
+    if (typeof value === 'boolean' && value !== internalValue) {
+      setInternalValue(value);
+    }
+  }, [value, internalValue]);
+
   const { checkedColor, onTintColor, thumbTintColor } = getSwitchColor({
     theme,
     disabled,
-    value,
+    value: internalValue,
     color,
   });
+
+  const handleValueChange = React.useCallback(
+    (newValue: boolean) => {
+      setInternalValue(newValue);
+      onValueChange?.(newValue);
+    },
+    [onValueChange]
+  );
 
   const props =
     version && version.major === 0 && version.minor <= 56
@@ -96,13 +116,15 @@ const Switch = ({
 
   return (
     <NativeSwitch
-      value={value}
+      value={internalValue}
       disabled={disabled}
-      onValueChange={disabled ? undefined : onValueChange}
+      onValueChange={disabled ? undefined : handleValueChange}
       {...props}
       {...rest}
     />
   );
 };
+
+Switch.displayName = 'Switch';
 
 export default Switch;
