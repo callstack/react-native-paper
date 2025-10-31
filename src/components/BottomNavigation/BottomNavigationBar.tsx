@@ -425,7 +425,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
       if (animationInProgressRef.current) {
         rippleAnim.stopAnimation();
         indexAnim.stopAnimation();
-        tabsAnims.forEach(tab => tab.stopAnimation());
+        tabsAnims.forEach((tab) => tab.stopAnimation());
       }
 
       targetIndexRef.current = index;
