@@ -380,6 +380,9 @@ const BottomNavigationBar = <Route extends BaseRoute>({
    * Animation for the background color ripple, used to determine it's scale and opacity.
    */
   const rippleAnim = useAnimatedValue(MIN_RIPPLE_SCALE);
+  const animationInProgressRef = React.useRef(false);
+  const targetIndexRef = React.useRef(navigationState.index);
+  const isInitialMount = React.useRef(true);
 
   /**
    * Layout of the navigation bar. The width is used to determine the size and position of the ripple.
@@ -412,6 +415,21 @@ const BottomNavigationBar = <Route extends BaseRoute>({
 
   const animateToIndex = React.useCallback(
     (index: number) => {
+      // If already animating to this index, do nothing
+      if (animationInProgressRef.current && targetIndexRef.current === index) {
+        return;
+      }
+
+      // If animating to a different index, cancel current animation and restart
+      // This prevents half-states when rapidly switching tabs
+      if (animationInProgressRef.current) {
+        rippleAnim.stopAnimation();
+        indexAnim.stopAnimation();
+        tabsAnims.forEach(tab => tab.stopAnimation());
+      }
+
+      targetIndexRef.current = index;
+      animationInProgressRef.current = true;
       // Reset the ripple to avoid glitch if it's currently animating
       rippleAnim.setValue(MIN_RIPPLE_SCALE);
 
@@ -429,13 +447,40 @@ const BottomNavigationBar = <Route extends BaseRoute>({
             easing: animationEasing,
           })
         ),
-      ]).start(() => {
-        // Workaround a bug in native animations where this is reset after first animation
-        tabsAnims.map((tab, i) => tab.setValue(i === index ? 1 : 0));
+      ]).start((result) => {
+        animationInProgressRef.current = false;
 
-        // Update the index to change bar's background color and then hide the ripple
+        if (targetIndexRef.current !== index) {
+          return;
+        }
+
+        // Explicitly finish the animation values to avoid RN 0.80 dropping the completion frame
+        tabsAnims.forEach((tab, i) => {
+          tab.stopAnimation();
+          tab.setValue(i === index ? 1 : 0);
+        });
+
+        indexAnim.stopAnimation();
         indexAnim.setValue(index);
+
+        rippleAnim.stopAnimation();
         rippleAnim.setValue(MIN_RIPPLE_SCALE);
+
+        // Safety fallback: if animation was interrupted, ensure completion on next frame
+        if (result?.finished === false) {
+          requestAnimationFrame(() => {
+            if (targetIndexRef.current !== index) {
+              return;
+            }
+
+            tabsAnims.forEach((tab, i) => {
+              tab.stopAnimation();
+              tab.setValue(i === index ? 1 : 0);
+            });
+            indexAnim.setValue(index);
+            rippleAnim.setValue(MIN_RIPPLE_SCALE);
+          });
+        }
       });
     },
     [
@@ -450,19 +495,18 @@ const BottomNavigationBar = <Route extends BaseRoute>({
     ]
   );
 
-  React.useEffect(() => {
-    // Workaround for native animated bug in react-native@^0.57
-    // Context: https://github.com/callstack/react-native-paper/pull/637
-    animateToIndex(navigationState.index);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   useIsKeyboardShown({
     onShow: handleKeyboardShow,
     onHide: handleKeyboardHide,
   });
 
   React.useEffect(() => {
+    if (isInitialMount.current) {
+      // Skip animation on initial mount - values are already correctly initialized
+      // Animating on mount causes RN 0.80+ native driver to render incomplete frames
+      isInitialMount.current = false;
+      return;
+    }
     animateToIndex(navigationState.index);
   }, [navigationState.index, animateToIndex]);
 
@@ -676,7 +720,10 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                   inputRange: [0, 1],
                   outputRange: [0.5, 1],
                 })
-              : 0;
+              : active.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0, 1],
+                });
 
             const badge = getBadge({ route });
 
@@ -740,7 +787,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                       },
                     ]}
                   >
-                    {isV3 && focused && (
+                    {isV3 && (
                       <Animated.View
                         style={[
                           styles.outline,
