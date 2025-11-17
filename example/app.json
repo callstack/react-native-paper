@@ -1,30 +1,27 @@
 {
   "expo": {
-    "name": "React Native Paper Example",
-    "description": "Example app for React Native Paper: https://callstack.github.io/react-native-paper/",
-    "slug": "react-native-paper-example",
+    "name": "React Native Paper Example - Harshal",
+    "description": "Your custom build",
+    "slug": "react-native-paper-example-harshal",
     "privacy": "public",
-    "version": "3.16.0",
+    "version": "1.0.0",
     "orientation": "default",
     "primaryColor": "#6200EE",
     "userInterfaceStyle": "automatic",
     "icon": "./assets/images/paper-icon.png",
     "newArchEnabled": true,
-    "packagerOpts": {
-      "config": "./metro.config.js",
-      "projectRoots": ""
-    },
-    "platforms": ["android", "ios", "web"],
-    "owner": "react-native-paper",
+    "platforms": [
+      "android",
+      "ios",
+      "web"
+    ],
+    "owner": "harshald",
     "ios": {
-      "bundleIdentifier": "com.callstack.reactnativepaperexample",
-      "buildNumber": "26.0.5"
+      "bundleIdentifier": "com.harshald.paperexample"
     },
     "android": {
-      "package": "com.callstack.reactnativepaperexample",
-      "versionCode": 38,
-      "permissions": ["READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"],
-      "icon": "./assets/images/paper-icon.png",
+      "package": "com.harshald.paperexample",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/android-icon.png",
         "backgroundColor": "#6200EE"
@@ -35,15 +32,14 @@
       "backgroundColor": "#6200EE",
       "resizeMode": "cover"
     },
+    "runtimeVersion": "exposdk:52.0.0",
+    "plugins": [
+      "expo-font"
+    ],
     "extra": {
       "eas": {
-        "projectId": "ba8f5139-58fe-48f0-b2f2-2d675b6eb2d4"
+        "projectId": "7775f939-c899-435e-9733-6f717715a3a8"
       }
-    },
-    "runtimeVersion": "exposdk:52.0.0",
-    "updates": {
-      "url": "https://u.expo.dev/ba8f5139-58fe-48f0-b2f2-2d675b6eb2d4"
-    },
-    "plugins": ["expo-font"]
+    }
   }
 }

@@ -474,6 +474,7 @@ const TextInputExample = () => {
               style={styles.inputContainerStyle}
               label="Flat input multiline"
               multiline
+              numberOfLines={10}
               placeholder="Type something"
               value={flatMultiline}
               onChangeText={(flatMultiline) =>
