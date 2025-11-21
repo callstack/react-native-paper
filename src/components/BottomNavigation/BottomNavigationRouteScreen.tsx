@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import { Animated, Platform, View, ViewProps } from 'react-native';
 
 interface Props extends ViewProps {

@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Animated,
-  Platform,
-  StyleProp,
-  StyleSheet,
-  ViewStyle,
-} from 'react-native';
+import { Animated, Platform, StyleSheet, ViewStyle } from 'react-native';
 
 import { AnimatedFAB } from 'react-native-paper';
 
@@ -18,7 +12,7 @@ type CustomFABProps = {
   label: string;
   animateFrom: 'left' | 'right';
   iconMode?: 'static' | 'dynamic';
-  style?: StyleProp<ViewStyle>;
+  style?: ViewStyle;
 };
 
 const CustomFAB = ({
