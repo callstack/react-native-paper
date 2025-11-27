@@ -370,6 +370,8 @@ const Menu = ({
   const hide = React.useCallback(() => {
     removeListeners();
 
+    setRendered(false);
+    prevRendered.current = false;
     const { animation } = theme;
 
     Animated.timing(opacityAnimationRef.current, {
@@ -380,8 +382,6 @@ const Menu = ({
     }).start(({ finished }) => {
       if (finished) {
         setMenuLayout({ width: 0, height: 0 });
-        setRendered(false);
-        prevRendered.current = false;
         focusFirstDOMNode(anchorRef.current);
       }
     });
