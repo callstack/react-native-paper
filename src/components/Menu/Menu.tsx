@@ -372,7 +372,6 @@ const Menu = ({
 
     setRendered(false);
     prevRendered.current = false;
-    
     const { animation } = theme;
 
     Animated.timing(opacityAnimationRef.current, {
