@@ -45,8 +45,7 @@
     "prepack": "bob build && node ./scripts/generate-mappings.js",
     "release": "release-it",
     "docs": "yarn --cwd docs",
-    "example": "yarn --cwd example",
-    "postinstall": "patch-package"
+    "example": "yarn --cwd example"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -55,8 +54,6 @@
     "@callstack/react-theme-provider": "^3.0.9",
     "@react-native/babel-preset": "^0.82.1",
     "color": "^3.1.2",
-    "patch-package": "^8.0.1",
-    "postinstall-postinstall": "^2.1.0",
     "use-latest-callback": "^0.2.3"
   },
   "devDependencies": {
