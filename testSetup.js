@@ -94,3 +94,38 @@ jest.mock('react-native/Libraries/Utilities/useWindowDimensions', () => ({
     width: 750,
   }),
 }));
+
+jest.mock('react-native/Libraries/Utilities/BackHandler', () => {
+  const _backPressSubscriptions = new Set();
+  const exitApp = jest.fn();
+  return {
+    __esModule: true,
+    default: {
+      exitApp,
+      addEventListener: function (eventName, handler) {
+        '';
+        _backPressSubscriptions.add(handler);
+        return {
+          remove: () => {
+            _backPressSubscriptions.delete(handler);
+          },
+        };
+      },
+
+      mockPressBack: function () {
+        let invokeDefault = true;
+        const subscriptions = [..._backPressSubscriptions].reverse();
+        for (let i = 0; i < subscriptions.length; ++i) {
+          if (subscriptions[i]()) {
+            invokeDefault = false;
+            break;
+          }
+        }
+
+        if (invokeDefault) {
+          exitApp();
+        }
+      },
+    },
+  };
+});

@@ -21,11 +21,6 @@ interface BackHandlerStatic extends RNBackHandlerStatic {
 
 const BackHandler = RNBackHandler as BackHandlerStatic;
 
-jest.mock('react-native/Libraries/Utilities/BackHandler', () =>
-  // eslint-disable-next-line jest/no-mocks-import
-  require('react-native/Libraries/Utilities/__mocks__/BackHandler')
-);
-
 describe('Modal', () => {
   beforeAll(() => {
     jest.useFakeTimers();

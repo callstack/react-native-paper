@@ -242,17 +242,15 @@ exports[`activity indicator snapshot test 1`] = `
         <View
           collapsable={false}
           style={
-            [
-              {
-                "alignItems": "center",
-                "bottom": 0,
-                "justifyContent": "center",
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-              },
-            ]
+            {
+              "alignItems": "center",
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
           }
         >
           <View
@@ -272,14 +270,11 @@ exports[`activity indicator snapshot test 1`] = `
             <View
               collapsable={false}
               style={
-                [
-                  {
-                    "height": 12,
-                    "overflow": "hidden",
-                    "width": 24,
-                  },
-                  null,
-                ]
+                {
+                  "height": 12,
+                  "overflow": "hidden",
+                  "width": 24,
+                }
               }
             >
               <View
@@ -329,17 +324,15 @@ exports[`activity indicator snapshot test 1`] = `
         <View
           collapsable={false}
           style={
-            [
-              {
-                "alignItems": "center",
-                "bottom": 0,
-                "justifyContent": "center",
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-              },
-            ]
+            {
+              "alignItems": "center",
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
           }
         >
           <View
@@ -359,16 +352,12 @@ exports[`activity indicator snapshot test 1`] = `
             <View
               collapsable={false}
               style={
-                [
-                  {
-                    "height": 12,
-                    "overflow": "hidden",
-                    "width": 24,
-                  },
-                  {
-                    "top": 12,
-                  },
-                ]
+                {
+                  "height": 12,
+                  "overflow": "hidden",
+                  "top": 12,
+                  "width": 24,
+                }
               }
             >
               <View

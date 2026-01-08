@@ -121,23 +121,19 @@ exports[`renders FAB with custom size prop 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >
@@ -299,23 +295,19 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >
@@ -477,23 +469,19 @@ exports[`renders default FAB 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >
@@ -655,23 +643,19 @@ exports[`renders disabled FAB 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >
@@ -834,23 +818,19 @@ exports[`renders extended FAB 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >
@@ -1052,23 +1032,19 @@ exports[`renders extended FAB with custom size prop 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >
@@ -1270,23 +1246,19 @@ exports[`renders large FAB 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >
@@ -1462,17 +1434,15 @@ exports[`renders loading FAB 1`] = `
             <View
               collapsable={false}
               style={
-                [
-                  {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "justifyContent": "center",
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                ]
+                {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
               }
             >
               <View
@@ -1492,14 +1462,11 @@ exports[`renders loading FAB 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "height": 9,
-                        "overflow": "hidden",
-                        "width": 18,
-                      },
-                      null,
-                    ]
+                    {
+                      "height": 9,
+                      "overflow": "hidden",
+                      "width": 18,
+                    }
                   }
                 >
                   <View
@@ -1549,17 +1516,15 @@ exports[`renders loading FAB 1`] = `
             <View
               collapsable={false}
               style={
-                [
-                  {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "justifyContent": "center",
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                ]
+                {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
               }
             >
               <View
@@ -1579,16 +1544,12 @@ exports[`renders loading FAB 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "height": 9,
-                        "overflow": "hidden",
-                        "width": 18,
-                      },
-                      {
-                        "top": 9,
-                      },
-                    ]
+                    {
+                      "height": 9,
+                      "overflow": "hidden",
+                      "top": 9,
+                      "width": 18,
+                    }
                   }
                 >
                   <View
@@ -1778,17 +1739,15 @@ exports[`renders loading FAB with custom size prop 1`] = `
             <View
               collapsable={false}
               style={
-                [
-                  {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "justifyContent": "center",
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                ]
+                {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
               }
             >
               <View
@@ -1808,14 +1767,11 @@ exports[`renders loading FAB with custom size prop 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "height": 25,
-                        "overflow": "hidden",
-                        "width": 50,
-                      },
-                      null,
-                    ]
+                    {
+                      "height": 25,
+                      "overflow": "hidden",
+                      "width": 50,
+                    }
                   }
                 >
                   <View
@@ -1865,17 +1821,15 @@ exports[`renders loading FAB with custom size prop 1`] = `
             <View
               collapsable={false}
               style={
-                [
-                  {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "justifyContent": "center",
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                ]
+                {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
               }
             >
               <View
@@ -1895,16 +1849,12 @@ exports[`renders loading FAB with custom size prop 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "height": 25,
-                        "overflow": "hidden",
-                        "width": 50,
-                      },
-                      {
-                        "top": 25,
-                      },
-                    ]
+                    {
+                      "height": 25,
+                      "overflow": "hidden",
+                      "top": 25,
+                      "width": 50,
+                    }
                   }
                 >
                   <View
@@ -2080,23 +2030,19 @@ exports[`renders not visible FAB 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >
@@ -2258,23 +2204,19 @@ exports[`renders small FAB 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >
@@ -2436,23 +2378,19 @@ exports[`renders visible FAB 1`] = `
           <View
             collapsable={false}
             style={
-              [
-                {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-                {
-                  "opacity": 1,
-                  "transform": [
-                    {
-                      "rotate": "0deg",
-                    },
-                  ],
-                },
-              ]
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "rotate": "0deg",
+                  },
+                ],
+              }
             }
             testID="cross-fade-icon-current"
           >

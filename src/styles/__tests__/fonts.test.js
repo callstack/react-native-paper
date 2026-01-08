@@ -1,14 +1,3 @@
-import configureFonts, { fontConfig } from '../fonts';
-import { typescale } from '../themes/v3/tokens';
-
-const mockPlatform = (OS) => {
-  jest.resetModules();
-  jest.doMock('react-native/Libraries/Utilities/Platform', () => ({
-    OS,
-    select: (objs) => objs[OS],
-  }));
-};
-
 const customFont = {
   custom: {
     fontFamily: 'sans-serif',
@@ -38,7 +27,6 @@ const customFontV3 = {
     lineHeight: 44,
     fontSize: 36,
   },
-
   headlineLarge: {
     fontFamily: 'NotoSans',
     letterSpacing: 0,
@@ -60,7 +48,6 @@ const customFontV3 = {
     lineHeight: 32,
     fontSize: 24,
   },
-
   titleLarge: {
     fontFamily: 'NotoSans',
     letterSpacing: 0,
@@ -82,7 +69,6 @@ const customFontV3 = {
     lineHeight: 20,
     fontSize: 14,
   },
-
   labelLarge: {
     fontFamily: 'NotoSans',
     fontWeight: '500',
@@ -104,7 +90,6 @@ const customFontV3 = {
     lineHeight: 16,
     fontSize: 11,
   },
-
   bodyLarge: {
     fontFamily: 'NotoSans',
     letterSpacing: 0,
@@ -126,7 +111,6 @@ const customFontV3 = {
     lineHeight: 16,
     fontSize: 12,
   },
-
   default: {
     fontFamily: 'NotoSans',
     letterSpacing: 0,
@@ -134,9 +118,42 @@ const customFontV3 = {
   },
 };
 
+const mockPlatform = (OS) => {
+  jest.resetModules();
+
+  jest.doMock('react-native', () => ({
+    Platform: {
+      OS,
+      select: (objs) => objs[OS] ?? objs.default ?? objs.ios,
+    },
+  }));
+};
+
+const loadFonts = () => {
+  let configureFonts;
+  let fontConfig;
+  let typescale;
+
+  jest.isolateModules(() => {
+    const fonts = require('../fonts');
+    configureFonts = fonts.default;
+    fontConfig = fonts.fontConfig;
+
+    typescale = require('../themes/v3/tokens').typescale;
+  });
+
+  return { configureFonts, fontConfig, typescale };
+};
+
 describe('configureFonts', () => {
+  afterEach(() => {
+    jest.dontMock('react-native');
+  });
+
   it('adds custom fonts to the iOS config', () => {
     mockPlatform('ios');
+    const { configureFonts, fontConfig } = loadFonts();
+
     expect(
       configureFonts({
         config: {
@@ -155,6 +172,8 @@ describe('configureFonts', () => {
 
   it('adds custom fonts to the Android config', () => {
     mockPlatform('android');
+    const { configureFonts, fontConfig } = loadFonts();
+
     expect(
       configureFonts({
         config: {
@@ -173,6 +192,8 @@ describe('configureFonts', () => {
 
   it('adds custom fonts to the Web config', () => {
     mockPlatform('web');
+    const { configureFonts, fontConfig } = loadFonts();
+
     expect(
       configureFonts({
         config: {
@@ -190,6 +211,9 @@ describe('configureFonts', () => {
   });
 
   it('overrides properties passed in config for all variants', () => {
+    mockPlatform('ios');
+    const { configureFonts } = loadFonts();
+
     expect(
       configureFonts({
         config: {
@@ -201,6 +225,9 @@ describe('configureFonts', () => {
   });
 
   it('overrides properties passed in config for several variants', () => {
+    mockPlatform('ios');
+    const { configureFonts, typescale } = loadFonts();
+
     expect(
       configureFonts({
         config: {
@@ -246,6 +273,9 @@ describe('configureFonts', () => {
   });
 
   it('adds custom variant to theme fonts', () => {
+    mockPlatform('ios');
+    const { configureFonts, typescale } = loadFonts();
+
     expect(
       configureFonts({
         config: {
@@ -273,7 +303,9 @@ describe('configureFonts', () => {
   });
 
   it('should be deterministic', () => {
-    // first call that should not mutate the original config
+    mockPlatform('ios');
+    const { configureFonts } = loadFonts();
+
     configureFonts({
       config: {
         labelMedium: {
@@ -282,7 +314,6 @@ describe('configureFonts', () => {
       },
     });
 
-    // second call that should return the original config without modification
     const fontsB = configureFonts({ config: {} });
 
     expect(fontsB.labelMedium.color).toBeUndefined();
