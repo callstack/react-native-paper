@@ -30,7 +30,27 @@ exports[`renders colored progress bar 1`] = `
         "overflow": "hidden",
       }
     }
-  />
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "red",
+          "flex": 1,
+          "transform": [
+            {
+              "translateX": -50,
+            },
+            {
+              "scaleX": 0.0001,
+            },
+          ],
+          "width": 100,
+        }
+      }
+      testID="progress-bar-fill"
+    />
+  </View>
 </View>
 `;
 
@@ -64,7 +84,27 @@ exports[`renders hidden progress bar 1`] = `
         "overflow": "hidden",
       }
     }
-  />
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "flex": 1,
+          "transform": [
+            {
+              "translateX": -50,
+            },
+            {
+              "scaleX": 0.0001,
+            },
+          ],
+          "width": 100,
+        }
+      }
+      testID="progress-bar-fill"
+    />
+  </View>
 </View>
 `;
 
@@ -92,7 +132,27 @@ exports[`renders indeterminate progress bar 1`] = `
         "overflow": "hidden",
       }
     }
-  />
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "flex": 1,
+          "transform": [
+            {
+              "translateX": -50,
+            },
+            {
+              "scaleX": 0.0001,
+            },
+          ],
+          "width": 100,
+        }
+      }
+      testID="progress-bar-fill"
+    />
+  </View>
 </View>
 `;
 
@@ -126,6 +186,26 @@ exports[`renders progress bar with specific progress 1`] = `
         "overflow": "hidden",
       }
     }
-  />
+  >
+    <View
+      collapsable={false}
+      style={
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "flex": 1,
+          "transform": [
+            {
+              "translateX": -50,
+            },
+            {
+              "scaleX": 0.0001,
+            },
+          ],
+          "width": 100,
+        }
+      }
+      testID="progress-bar-fill"
+    />
+  </View>
 </View>
 `;
