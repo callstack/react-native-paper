@@ -2,6 +2,7 @@ import React, { useState, ReactNode } from 'react';
 
 import Color from 'color';
 //@ts-ignore
+// eslint-disable-next-line import/no-unresolved
 import { BlockPicker } from 'react-color';
 
 import Switch from './Switch';
