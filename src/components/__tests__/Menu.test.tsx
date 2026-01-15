@@ -131,6 +131,8 @@ it('uses the default anchorPosition of top', async () => {
   // itself.
   await act(async () => {
     screen.update(makeMenu(true));
+    // Menu waits a tick for Portal refs to be up-to-date.
+    await Promise.resolve();
   });
 
   await waitFor(() => {
@@ -182,6 +184,8 @@ it('respects anchorPosition bottom', async () => {
 
   await act(async () => {
     screen.update(makeMenu(true));
+    // Menu waits a tick for Portal refs to be up-to-date.
+    await Promise.resolve();
   });
 
   await waitFor(() => {
