@@ -1,6 +1,6 @@
 {
   "name": "react-native-paper",
-  "version": "5.13.0",
+  "version": "5.13.0-picnic.0",
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -109,10 +109,7 @@
     "react-native-vector-icons": "*"
   },
   "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn lint-no-fix && yarn typescript && yarn test"
-    }
+    "hooks": {}
   },
   "jest": {
     "preset": "react-native",

@@ -75,7 +75,7 @@ try {
 export const accessibilityProps: AccessibilityProps =
   Platform.OS === 'web'
     ? {
-        role: 'img',
+        role: 'img' as Role,
         focusable: false,
       }
     : {

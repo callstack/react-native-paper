@@ -12,7 +12,7 @@ import type {
   TextLayoutEventData,
 } from 'react-native';
 
-import type { $Omit, InternalTheme, ThemeProp } from './../../types';
+import type { $Omit, InternalTheme, ThemeProp } from '../../types';
 
 export type TextInputLabelProp = string | React.ReactElement;
 

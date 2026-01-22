@@ -67,3 +67,5 @@ lib/
 
 # Yarn
 .yarn/*
+
+.cursor/*

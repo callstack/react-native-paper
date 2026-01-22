@@ -60,6 +60,7 @@ const LabelBackground = ({
   return [
     roundedEdgeCover,
     <AnimatedText
+      accessible={false}
       key="labelBackground-text"
       testID={`${testID}-label-background`}
       style={[

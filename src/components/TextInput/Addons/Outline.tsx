@@ -22,13 +22,9 @@ type OutlineProps = {
 };
 
 export const Outline = ({
-  isV3,
   label,
   activeColor,
   backgroundColor,
-  hasActiveOutline,
-  focused,
-  outlineColor,
   roundness,
   style,
 }: OutlineProps) => (
@@ -42,8 +38,8 @@ export const Outline = ({
       {
         backgroundColor,
         borderRadius: roundness,
-        borderWidth: (isV3 ? hasActiveOutline : focused) ? 2 : 1,
-        borderColor: hasActiveOutline ? activeColor : outlineColor,
+        borderWidth: 2,
+        borderColor: activeColor,
       },
       style,
     ]}

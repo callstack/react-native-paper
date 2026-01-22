@@ -94,6 +94,10 @@ const TextInputOutlined = ({
     lineHeight: lineHeightStyle,
     height,
     backgroundColor = colors?.background,
+    paddingHorizontal,
+    paddingVertical,
+    paddingTop: paddingTopProp,
+    paddingBottom: paddingBottomProp,
     textAlign,
     ...viewStyle
   } = (StyleSheet.flatten(style) || {}) as TextStyle;
@@ -187,7 +191,46 @@ const TextInputOutlined = ({
 
   const pad = calculatePadding(paddingSettings);
 
-  const paddingOut = adjustPaddingOut({ ...paddingSettings, pad });
+  const paddingOutDefault = adjustPaddingOut({ ...paddingSettings, pad });
+  const resolvedPaddingHorizontal =
+    typeof paddingHorizontal === 'number'
+      ? paddingHorizontal
+      : INPUT_PADDING_HORIZONTAL;
+
+  let paddingOut = paddingOutDefault;
+
+  if (paddingVertical !== undefined) {
+    if (typeof paddingVertical !== 'number') {
+      console.warn('Currently we support only numbers in paddingVertical prop');
+    } else {
+      paddingOut = {
+        paddingTop: paddingVertical,
+        paddingBottom: paddingVertical,
+      };
+    }
+  }
+
+  if (paddingBottomProp !== undefined) {
+    if (typeof paddingBottomProp !== 'number') {
+      console.warn('Currently we support only numbers in paddingBottom prop');
+    } else {
+      paddingOut = {
+        ...paddingOut,
+        paddingBottom: paddingBottomProp,
+      };
+    }
+  }
+
+  if (paddingTopProp !== undefined) {
+    if (typeof paddingTopProp !== 'number') {
+      console.warn('Currently we support only numbers in paddingTop prop');
+    } else {
+      paddingOut = {
+        ...paddingOut,
+        paddingTop: paddingTopProp,
+      };
+    }
+  }
 
   const baseLabelTranslateY = -labelHalfHeight - (topPosition + yOffset);
 
@@ -203,7 +246,7 @@ const TextInputOutlined = ({
   const placeholderStyle = {
     position: 'absolute',
     left: 0,
-    paddingHorizontal: INPUT_PADDING_HORIZONTAL,
+    paddingHorizontal: resolvedPaddingHorizontal,
   };
 
   const placeholderTextColorBasedOnState = parentState.displayPlaceholder
@@ -409,10 +452,10 @@ const TextInputOutlined = ({
                 : I18nManager.getConstants().isRTL
                 ? 'right'
                 : 'left',
-              paddingHorizontal: INPUT_PADDING_HORIZONTAL,
+              paddingHorizontal: resolvedPaddingHorizontal,
               minWidth: Math.min(
                 parentState.labelTextLayout.width +
-                  2 * INPUT_PADDING_HORIZONTAL,
+                  2 * resolvedPaddingHorizontal,
                 MIN_WIDTH
               ),
             },
