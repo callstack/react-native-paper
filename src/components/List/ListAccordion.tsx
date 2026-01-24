@@ -136,6 +136,11 @@ export type Props = {
    * This can be used to enlarge the touchable area beyond the visible component.
    */
   hitSlop?: TouchableRippleProps['hitSlop'];
+  /**
+   * Sets expansion direction for the accordion.
+   * Can be 'downwards' (default) or 'upwards'.
+   */
+  expandDirection?: 'downwards' | 'upwards';
 };
 
 /**
@@ -202,6 +207,7 @@ const ListAccordion = ({
   titleMaxFontSizeMultiplier,
   descriptionMaxFontSizeMultiplier,
   hitSlop,
+  expandDirection: expandDirectionProp,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const [expanded, setExpanded] = React.useState<boolean>(
@@ -252,8 +258,34 @@ const ListAccordion = ({
     groupContext && id !== undefined
       ? () => groupContext.onAccordionPress(id)
       : handlePressAction;
+
+  const expandDirection =
+    expandDirectionProp || groupContext?.expandDirection || 'downwards';
+
+  const expandedContent = isExpanded
+    ? React.Children.map(children, (child) => {
+        if (
+          left &&
+          React.isValidElement<ListChildProps>(child) &&
+          !child.props.left &&
+          !child.props.right
+        ) {
+          return React.cloneElement(child, {
+            style: [
+              theme.isV3 ? styles.childV3 : styles.child,
+              child.props.style,
+            ],
+            theme,
+          });
+        }
+
+        return child;
+      })
+    : null;
+
   return (
     <View>
+      {expandDirection === 'upwards' ? expandedContent : null}
       <View style={{ backgroundColor: theme?.colors?.background }}>
         <TouchableRipple
           style={[theme.isV3 ? styles.containerV3 : styles.container, style]}
@@ -339,26 +371,7 @@ const ListAccordion = ({
         </TouchableRipple>
       </View>
 
-      {isExpanded
-        ? React.Children.map(children, (child) => {
-            if (
-              left &&
-              React.isValidElement<ListChildProps>(child) &&
-              !child.props.left &&
-              !child.props.right
-            ) {
-              return React.cloneElement(child, {
-                style: [
-                  theme.isV3 ? styles.childV3 : styles.child,
-                  child.props.style,
-                ],
-                theme,
-              });
-            }
-
-            return child;
-          })
-        : null}
+      {expandDirection === 'downwards' ? expandedContent : null}
     </View>
   );
 };
