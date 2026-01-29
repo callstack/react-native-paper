@@ -5816,15 +5816,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^19.1.1":
-  version: 19.2.10
-  resolution: "@types/react@npm:19.2.10"
-  dependencies:
-    csstype: "npm:^3.2.2"
-  checksum: 10c0/17b96203a79ad3fa3cee8f1f1f324b93f005bc125755e29ac149402807275feaf3f00a4e65b8405f633923ac993da5737fd9800d27ee49911f3ed51dc27478f9
-  languageName: node
-  linkType: hard
-
 "@types/reactcss@npm:*":
   version: 1.2.13
   resolution: "@types/reactcss@npm:1.2.13"
@@ -20124,7 +20115,6 @@ __metadata:
     "@types/color": "npm:^3.0.0"
     "@types/jest": "npm:^29.2.1"
     "@types/node": "npm:^13.1.0"
-    "@types/react": "npm:^19.1.1"
     "@types/react-dom": "npm:^19.1.1"
     "@types/react-native-vector-icons": "npm:^6.4.18"
     "@types/react-test-renderer": "npm:^19.1.0"
