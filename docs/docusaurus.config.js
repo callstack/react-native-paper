@@ -5,11 +5,6 @@ const path = require('path');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 
-// Node 18 lacks a global File in some environments; undici expects it during build.
-if (typeof globalThis.File === 'undefined') {
-  globalThis.File = require('undici').File;
-}
-
 const { extendedExamples } = require('./src/data/extendedExamples.js');
 const { screenshots } = require('./src/data/screenshots.js');
 const { themeColors } = require('./src/data/themeColors.js');

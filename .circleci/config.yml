@@ -3,7 +3,7 @@ version: 2.1
 executors:
   default:
     docker:
-      - image: cimg/node:18.20.2
+      - image: cimg/node:20.19.0
     working_directory: ~/react-native-paper
 
 commands:
@@ -106,7 +106,6 @@ jobs:
           name: Build docs
           command: |
             export DOCUSAURUS_BASE_URL="/output/job/$CIRCLE_WORKFLOW_JOB_ID/artifacts/$CIRCLE_NODE_INDEX/docs/"
-            export NODE_OPTIONS="--require $(pwd)/docs/scripts/node-shims.cjs"
             cd docs && yarn build && cd ..
             bash .circleci/comment-artifacts.sh
       - store_artifacts:
