@@ -1592,17 +1592,15 @@ exports[`renders loading button 1`] = `
             <View
               collapsable={false}
               style={
-                [
-                  {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "justifyContent": "center",
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                ]
+                {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
               }
             >
               <View
@@ -1622,14 +1620,11 @@ exports[`renders loading button 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "height": 9,
-                        "overflow": "hidden",
-                        "width": 18,
-                      },
-                      null,
-                    ]
+                    {
+                      "height": 9,
+                      "overflow": "hidden",
+                      "width": 18,
+                    }
                   }
                 >
                   <View
@@ -1679,17 +1674,15 @@ exports[`renders loading button 1`] = `
             <View
               collapsable={false}
               style={
-                [
-                  {
-                    "alignItems": "center",
-                    "bottom": 0,
-                    "justifyContent": "center",
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                ]
+                {
+                  "alignItems": "center",
+                  "bottom": 0,
+                  "justifyContent": "center",
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
               }
             >
               <View
@@ -1709,16 +1702,12 @@ exports[`renders loading button 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "height": 9,
-                        "overflow": "hidden",
-                        "width": 18,
-                      },
-                      {
-                        "top": 9,
-                      },
-                    ]
+                    {
+                      "height": 9,
+                      "overflow": "hidden",
+                      "top": 9,
+                      "width": 18,
+                    }
                   }
                 >
                   <View

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 //@ts-ignore
 import TabItem from '@theme/TabItem';
@@ -21,7 +21,7 @@ const ScreenshotTabs: React.FC<ScreenshotTabsProps> = ({
   screenshotData,
   baseUrl,
 }) => {
-  const renderScreenhot = (src: string): JSX.Element => (
+  const renderScreenhot = (src: string): ReactNode => (
     <img src={`${baseUrl}${src}`} className={getClassName(src)} />
   );
 

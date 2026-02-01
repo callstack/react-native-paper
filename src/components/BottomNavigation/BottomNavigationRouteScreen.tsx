@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Animated, Platform, View, ViewProps } from 'react-native';
 
 interface Props extends ViewProps {
@@ -7,7 +7,7 @@ interface Props extends ViewProps {
 }
 
 class BottomNavigationRouteScreen extends React.Component<Props> {
-  render(): JSX.Element {
+  render(): ReactNode {
     const { style, index, children, visibility, ...rest } = this.props;
 
     // On Web, the unfocused tab screens can still be clicked since they are transparent, but still there

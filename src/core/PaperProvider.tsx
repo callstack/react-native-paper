@@ -78,7 +78,7 @@ const PaperProvider = (props: Props) => {
 
   const theme = React.useMemo(() => {
     const themeVersion = props.theme?.version || 3;
-    const scheme = colorScheme || 'light';
+    const scheme = colorScheme === 'dark' ? 'dark' : 'light';
     const defaultThemeBase = defaultThemesByVersion[themeVersion][scheme];
 
     const extendedThemeBase = {

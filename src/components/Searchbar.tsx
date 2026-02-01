@@ -75,7 +75,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   searchAccessibilityLabel?: string;
   /**
    * Custom icon for clear button, default will be icon close. It's visible when `loading` is set to `false`.
-   * In v5.x with theme version 3, `clearIcon` is visible only `right` prop is not defined.
+   * In v5.x with theme version 3, `clearIcon` is visible only if `right` prop is not defined.
    */
   clearIcon?: IconSource;
   /**

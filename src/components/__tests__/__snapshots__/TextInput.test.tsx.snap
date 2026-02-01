@@ -16,28 +16,20 @@ exports[`call onPress when affix adornment pressed 1`] = `
   <View
     collapsable={false}
     style={
-      [
-        {
-          "bottom": 0,
-          "height": 2,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "zIndex": 1,
-        },
-        {
-          "height": 1,
-        },
-        {
-          "backgroundColor": "rgba(73, 69, 79, 1)",
-          "transform": [
-            {
-              "scaleY": 0.5,
-            },
-          ],
-        },
-        undefined,
-      ]
+      {
+        "backgroundColor": "rgba(73, 69, 79, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "transform": [
+          {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
     }
     testID="text-input-underline"
   />
@@ -322,28 +314,20 @@ exports[`correctly applies a component as the text label 1`] = `
   <View
     collapsable={false}
     style={
-      [
-        {
-          "bottom": 0,
-          "height": 2,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "zIndex": 1,
-        },
-        {
-          "height": 1,
-        },
-        {
-          "backgroundColor": "rgba(73, 69, 79, 1)",
-          "transform": [
-            {
-              "scaleY": 0.5,
-            },
-          ],
-        },
-        undefined,
-      ]
+      {
+        "backgroundColor": "rgba(73, 69, 79, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "transform": [
+          {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
     }
     testID="text-input-underline"
   />
@@ -572,28 +556,20 @@ exports[`correctly applies cursorColor prop 1`] = `
   <View
     collapsable={false}
     style={
-      [
-        {
-          "bottom": 0,
-          "height": 2,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "zIndex": 1,
-        },
-        {
-          "height": 1,
-        },
-        {
-          "backgroundColor": "rgba(73, 69, 79, 1)",
-          "transform": [
-            {
-              "scaleY": 0.5,
-            },
-          ],
-        },
-        undefined,
-      ]
+      {
+        "backgroundColor": "rgba(73, 69, 79, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "transform": [
+          {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
     }
     testID="text-input-underline"
   />
@@ -806,28 +782,20 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
   <View
     collapsable={false}
     style={
-      [
-        {
-          "bottom": 0,
-          "height": 2,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "zIndex": 1,
-        },
-        {
-          "height": 1,
-        },
-        {
-          "backgroundColor": "rgba(73, 69, 79, 1)",
-          "transform": [
-            {
-              "scaleY": 0.5,
-            },
-          ],
-        },
-        undefined,
-      ]
+      {
+        "backgroundColor": "rgba(73, 69, 79, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "transform": [
+          {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
     }
     testID="text-input-underline"
   />
@@ -1299,28 +1267,20 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
   <View
     collapsable={false}
     style={
-      [
-        {
-          "bottom": 0,
-          "height": 2,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "zIndex": 1,
-        },
-        {
-          "height": 1,
-        },
-        {
-          "backgroundColor": "rgba(73, 69, 79, 1)",
-          "transform": [
-            {
-              "scaleY": 0.5,
-            },
-          ],
-        },
-        undefined,
-      ]
+      {
+        "backgroundColor": "rgba(73, 69, 79, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "transform": [
+          {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
     }
     testID="text-input-underline"
   />
@@ -1535,28 +1495,20 @@ exports[`correctly applies textAlign center 1`] = `
   <View
     collapsable={false}
     style={
-      [
-        {
-          "bottom": 0,
-          "height": 2,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "zIndex": 1,
-        },
-        {
-          "height": 1,
-        },
-        {
-          "backgroundColor": "rgba(73, 69, 79, 1)",
-          "transform": [
-            {
-              "scaleY": 0.5,
-            },
-          ],
-        },
-        undefined,
-      ]
+      {
+        "backgroundColor": "rgba(73, 69, 79, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "transform": [
+          {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
     }
     testID="text-input-underline"
   />
@@ -1769,28 +1721,20 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
   <View
     collapsable={false}
     style={
-      [
-        {
-          "bottom": 0,
-          "height": 2,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "zIndex": 1,
-        },
-        {
-          "height": 1,
-        },
-        {
-          "backgroundColor": "rgba(73, 69, 79, 1)",
-          "transform": [
-            {
-              "scaleY": 0.5,
-            },
-          ],
-        },
-        undefined,
-      ]
+      {
+        "backgroundColor": "rgba(73, 69, 79, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "transform": [
+          {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
     }
     testID="text-input-underline"
   />
@@ -2196,28 +2140,20 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
   <View
     collapsable={false}
     style={
-      [
-        {
-          "bottom": 0,
-          "height": 2,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "zIndex": 1,
-        },
-        {
-          "height": 1,
-        },
-        {
-          "backgroundColor": "rgba(73, 69, 79, 1)",
-          "transform": [
-            {
-              "scaleY": 0.5,
-            },
-          ],
-        },
-        undefined,
-      ]
+      {
+        "backgroundColor": "rgba(73, 69, 79, 1)",
+        "bottom": 0,
+        "height": 1,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "transform": [
+          {
+            "scaleY": 0.5,
+          },
+        ],
+        "zIndex": 1,
+      }
     }
     testID="text-input-underline"
   />

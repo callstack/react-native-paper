@@ -1,11 +1,8 @@
 import React, { RefObject } from 'react';
 import { Dimensions, Text, View, Platform } from 'react-native';
 
-import {
-  fireEvent,
-  render,
-  waitForElementToBeRemoved,
-} from '@testing-library/react-native';
+import { act, fireEvent, render } from '@testing-library/react-native';
+import type { ReactTestInstance } from 'react-test-renderer';
 
 import PaperProvider from '../../core/PaperProvider';
 import Tooltip from '../Tooltip/Tooltip';
@@ -25,6 +22,19 @@ const DummyComponent = React.forwardRef<View>((props, ref) => (
 ));
 
 describe('Tooltip', () => {
+  const getTrigger = (getByText: (text: string) => ReactTestInstance) =>
+    getByText('dummy component').parent as ReactTestInstance;
+
+  const runTimers = (ms?: number) => {
+    act(() => {
+      if (ms === undefined) {
+        jest.runOnlyPendingTimers();
+      } else {
+        jest.advanceTimersByTime(ms);
+      }
+    });
+  };
+
   const setup = (
     propOverrides?: Partial<React.ComponentProps<typeof Tooltip>>,
     measure = {}
@@ -74,7 +84,7 @@ describe('Tooltip', () => {
           wrapper: { getByText, unmount },
         } = setup({ enterTouchDelay: 5000 });
 
-        fireEvent(getByText('dummy component'), 'pressOut');
+        fireEvent(getTrigger(getByText), 'pressOut');
 
         unmount();
 
@@ -86,7 +96,7 @@ describe('Tooltip', () => {
           wrapper: { getByText, findByText, unmount },
         } = setup();
 
-        fireEvent(getByText('dummy component'), 'longPress');
+        fireEvent(getTrigger(getByText), 'longPress');
 
         await findByText('some tooltip text');
 
@@ -107,9 +117,10 @@ describe('Tooltip', () => {
           wrapper: { getByText },
         } = setup();
 
-        fireEvent(getByText('dummy component'), 'longPress');
-        fireEvent(getByText('dummy component'), 'pressOut');
-        fireEvent(getByText('dummy component'), 'longPress');
+        const trigger = getTrigger(getByText);
+        fireEvent(trigger, 'longPress');
+        fireEvent(trigger, 'pressOut');
+        fireEvent(trigger, 'longPress');
 
         expect(global.clearTimeout).toHaveBeenCalledTimes(1);
       });
@@ -122,13 +133,12 @@ describe('Tooltip', () => {
           wrapper: { queryByText, getByText, findByText },
         } = setup({ enterTouchDelay: 50, leaveTouchDelay: 0 });
 
-        fireEvent(getByText('dummy component'), 'longPress');
+        fireEvent(getTrigger(getByText), 'longPress');
 
         await findByText('some tooltip text');
 
-        fireEvent(getByText('dummy component'), 'pressOut');
-
-        await waitForElementToBeRemoved(() => getByText('some tooltip text'));
+        fireEvent(getTrigger(getByText), 'pressOut');
+        runTimers();
 
         expect(queryByText('some tooltip text')).toBeNull();
       });
@@ -155,7 +165,7 @@ describe('Tooltip', () => {
             wrapper: { getByText, getByTestId, findByText },
           } = setup();
 
-          fireEvent(getByText('dummy component'), 'longPress');
+          fireEvent(getTrigger(getByText), 'longPress');
 
           fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
@@ -179,7 +189,7 @@ describe('Tooltip', () => {
             wrapper: { getByText, getByTestId, findByText },
           } = setup({}, { pageX: 0 }); // Component starting at the starting 0 X coord
 
-          fireEvent(getByText('dummy component'), 'longPress');
+          fireEvent(getTrigger(getByText), 'longPress');
 
           fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
@@ -203,7 +213,7 @@ describe('Tooltip', () => {
             wrapper: { getByText, getByTestId, findByText },
           } = setup({}, { pageX: 900, width: 150 }); // Component close to the screen limit
 
-          fireEvent(getByText('dummy component'), 'longPress');
+          fireEvent(getTrigger(getByText), 'longPress');
 
           fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
@@ -227,7 +237,7 @@ describe('Tooltip', () => {
             wrapper: { getByText, getByTestId, findByText },
           } = setup({}, { pageY: 600, height: 50 });
 
-          fireEvent(getByText('dummy component'), 'longPress');
+          fireEvent(getTrigger(getByText), 'longPress');
 
           fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
@@ -260,7 +270,7 @@ describe('Tooltip', () => {
           wrapper: { getByText, unmount },
         } = setup({ enterTouchDelay: 5000 });
 
-        fireEvent(getByText('dummy component'), 'hoverIn');
+        fireEvent(getTrigger(getByText), 'hoverIn');
 
         unmount();
 
@@ -272,7 +282,7 @@ describe('Tooltip', () => {
           wrapper: { getByText, unmount },
         } = setup({ enterTouchDelay: 5000 });
 
-        fireEvent(getByText('dummy component'), 'hoverOut');
+        fireEvent(getTrigger(getByText), 'hoverOut');
 
         unmount();
 
@@ -284,7 +294,8 @@ describe('Tooltip', () => {
           wrapper: { getByText, findByText, unmount },
         } = setup();
 
-        fireEvent(getByText('dummy component'), 'hoverIn');
+        fireEvent(getTrigger(getByText), 'hoverIn');
+        runTimers(500);
 
         await findByText('some tooltip text');
 
@@ -305,9 +316,10 @@ describe('Tooltip', () => {
           wrapper: { getByText },
         } = setup();
 
-        fireEvent(getByText('dummy component'), 'hoverIn');
-        fireEvent(getByText('dummy component'), 'hoverOut');
-        fireEvent(getByText('dummy component'), 'hoverIn');
+        const trigger = getTrigger(getByText);
+        fireEvent(trigger, 'hoverIn');
+        fireEvent(trigger, 'hoverOut');
+        fireEvent(trigger, 'hoverIn');
 
         expect(global.clearTimeout).toHaveBeenCalledTimes(2);
       });
@@ -320,13 +332,13 @@ describe('Tooltip', () => {
           wrapper: { queryByText, getByText, findByText },
         } = setup({ enterTouchDelay: 50, leaveTouchDelay: 0 });
 
-        fireEvent(getByText('dummy component'), 'hoverIn');
+        fireEvent(getTrigger(getByText), 'hoverIn');
+        runTimers(50);
 
         await findByText('some tooltip text');
 
-        fireEvent(getByText('dummy component'), 'hoverOut');
-
-        await waitForElementToBeRemoved(() => getByText('some tooltip text'));
+        fireEvent(getTrigger(getByText), 'hoverOut');
+        runTimers();
 
         expect(queryByText('some tooltip text')).toBeNull();
       });
@@ -353,7 +365,8 @@ describe('Tooltip', () => {
             wrapper: { getByText, getByTestId, findByText },
           } = setup();
 
-          fireEvent(getByText('dummy component'), 'hoverIn');
+          fireEvent(getTrigger(getByText), 'hoverIn');
+          runTimers(500);
 
           fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
@@ -377,7 +390,8 @@ describe('Tooltip', () => {
             wrapper: { getByText, getByTestId, findByText },
           } = setup({}, { pageX: 0 }); // Component starting at the starting 0 X coord
 
-          fireEvent(getByText('dummy component'), 'hoverIn');
+          fireEvent(getTrigger(getByText), 'hoverIn');
+          runTimers(500);
 
           fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
@@ -401,7 +415,8 @@ describe('Tooltip', () => {
             wrapper: { getByText, getByTestId, findByText },
           } = setup({}, { pageX: 900, width: 150 }); // Component close to the screen limit
 
-          fireEvent(getByText('dummy component'), 'hoverIn');
+          fireEvent(getTrigger(getByText), 'hoverIn');
+          runTimers(500);
 
           fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
@@ -425,7 +440,8 @@ describe('Tooltip', () => {
             wrapper: { getByText, getByTestId, findByText },
           } = setup({}, { pageY: 600, height: 50 });
 
-          fireEvent(getByText('dummy component'), 'hoverIn');
+          fireEvent(getTrigger(getByText), 'hoverIn');
+          runTimers(500);
 
           fireEvent(await findByText('some tooltip text'), 'layout', {
             nativeEvent: {
