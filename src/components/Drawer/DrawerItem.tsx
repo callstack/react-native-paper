@@ -81,11 +81,11 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * import { Drawer } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *    <Drawer.Item
- *      style={{ backgroundColor: '#64ffda' }}
- *      icon="star"
- *      label="First Item"
- *    />
+ *   <Drawer.Item
+ *     style={{ backgroundColor: '#64ffda' }}
+ *     icon="star"
+ *     label="First Item"
+ *   />
  * );
  *
  * export default MyComponent;
