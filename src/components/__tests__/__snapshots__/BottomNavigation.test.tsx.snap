@@ -492,22 +492,15 @@ exports[`allows customizing Route's type via generics 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "alignItems": "center",
-                        "bottom": 0,
-                        "left": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      },
-                      {
-                        "top": 4,
-                      },
-                      {
-                        "opacity": 0,
-                      },
-                    ]
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 4,
+                    }
                   }
                 />
                 <View
@@ -1124,22 +1117,15 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "alignItems": "center",
-                        "bottom": 0,
-                        "left": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      },
-                      {
-                        "top": 4,
-                      },
-                      {
-                        "opacity": 0,
-                      },
-                    ]
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 4,
+                    }
                   }
                 >
                   <Text
@@ -1342,22 +1328,15 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "alignItems": "center",
-                        "bottom": 0,
-                        "left": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      },
-                      {
-                        "top": 4,
-                      },
-                      {
-                        "opacity": 0,
-                      },
-                    ]
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 4,
+                    }
                   }
                 >
                   <Text
@@ -1913,22 +1892,15 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "alignItems": "center",
-                        "bottom": 0,
-                        "left": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      },
-                      {
-                        "top": 4,
-                      },
-                      {
-                        "opacity": 0,
-                      },
-                    ]
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 4,
+                    }
                   }
                 >
                   <Text
@@ -2131,22 +2103,15 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "alignItems": "center",
-                        "bottom": 0,
-                        "left": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      },
-                      {
-                        "top": 4,
-                      },
-                      {
-                        "opacity": 0,
-                      },
-                    ]
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 4,
+                    }
                   }
                 >
                   <Text
@@ -2953,22 +2918,15 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "alignItems": "center",
-                        "bottom": 0,
-                        "left": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      },
-                      {
-                        "top": 4,
-                      },
-                      {
-                        "opacity": 0,
-                      },
-                    ]
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 4,
+                    }
                   }
                 >
                   <Text
@@ -3291,22 +3249,15 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "alignItems": "center",
-                        "bottom": 0,
-                        "left": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      },
-                      {
-                        "top": 4,
-                      },
-                      {
-                        "opacity": 0,
-                      },
-                    ]
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 4,
+                    }
                   }
                 >
                   <Text
@@ -3629,22 +3580,15 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "alignItems": "center",
-                        "bottom": 0,
-                        "left": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      },
-                      {
-                        "top": 4,
-                      },
-                      {
-                        "opacity": 0,
-                      },
-                    ]
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 4,
+                    }
                   }
                 >
                   <Text
@@ -3967,22 +3911,15 @@ exports[`renders bottom navigation with getLazy 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "alignItems": "center",
-                        "bottom": 0,
-                        "left": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      },
-                      {
-                        "top": 4,
-                      },
-                      {
-                        "opacity": 0,
-                      },
-                    ]
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 4,
+                    }
                   }
                 >
                   <Text
@@ -6187,22 +6124,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "alignItems": "center",
-                        "bottom": 0,
-                        "left": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      },
-                      {
-                        "top": 4,
-                      },
-                      {
-                        "opacity": 0,
-                      },
-                    ]
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 4,
+                    }
                   }
                 />
                 <View
@@ -6361,23 +6291,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
               <View
                 collapsable={false}
                 style={
-                  [
-                    {
-                      "alignSelf": "center",
-                      "height": 24,
-                      "marginHorizontal": 12,
-                      "marginTop": 2,
-                      "width": 24,
-                    },
-                    {
-                      "height": 32,
-                      "justifyContent": "center",
-                      "marginBottom": 4,
-                      "marginTop": 0,
-                      "width": 32,
-                    },
-                    false,
-                  ]
+                  {
+                    "alignSelf": "center",
+                    "height": 32,
+                    "justifyContent": "center",
+                    "marginBottom": 4,
+                    "marginHorizontal": 12,
+                    "marginTop": 0,
+                    "width": 32,
+                  }
                 }
               >
                 <View
@@ -6400,22 +6322,15 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "alignItems": "center",
-                        "bottom": 0,
-                        "left": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      },
-                      {
-                        "top": 4,
-                      },
-                      {
-                        "opacity": 0,
-                      },
-                    ]
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 4,
+                    }
                   }
                 />
                 <View
@@ -8140,22 +8055,15 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "alignItems": "center",
-                        "bottom": 0,
-                        "left": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      },
-                      {
-                        "top": 4,
-                      },
-                      {
-                        "opacity": 0,
-                      },
-                    ]
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 4,
+                    }
                   }
                 >
                   <Text
@@ -8478,22 +8386,15 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "alignItems": "center",
-                        "bottom": 0,
-                        "left": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      },
-                      {
-                        "top": 4,
-                      },
-                      {
-                        "opacity": 0,
-                      },
-                    ]
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 4,
+                    }
                   }
                 >
                   <Text
@@ -10271,22 +10172,15 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "alignItems": "center",
-                        "bottom": 0,
-                        "left": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      },
-                      {
-                        "top": 4,
-                      },
-                      {
-                        "opacity": 0,
-                      },
-                    ]
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 4,
+                    }
                   }
                 >
                   <Text
@@ -10609,22 +10503,15 @@ exports[`renders non-shifting bottom navigation 1`] = `
                 <View
                   collapsable={false}
                   style={
-                    [
-                      {
-                        "alignItems": "center",
-                        "bottom": 0,
-                        "left": 0,
-                        "position": "absolute",
-                        "right": 0,
-                        "top": 0,
-                      },
-                      {
-                        "top": 4,
-                      },
-                      {
-                        "opacity": 0,
-                      },
-                    ]
+                    {
+                      "alignItems": "center",
+                      "bottom": 0,
+                      "left": 0,
+                      "opacity": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 4,
+                    }
                   }
                 >
                   <Text
