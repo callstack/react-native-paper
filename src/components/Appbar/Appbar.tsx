@@ -11,6 +11,9 @@ import {
 
 import color from 'color';
 
+import { useInternalTheme } from '@/core/theming';
+import type { MD3Elevation, ThemeProp } from '@/types';
+
 import AppbarContent from './AppbarContent';
 import {
   AppbarModes,
@@ -21,8 +24,6 @@ import {
   filterAppbarActions,
   AppbarChildProps,
 } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { MD3Elevation, ThemeProp } from '../../types';
 import Surface from '../Surface';
 
 export type Props = Omit<
