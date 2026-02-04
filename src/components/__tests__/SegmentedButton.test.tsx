@@ -3,14 +3,13 @@ import * as React from 'react';
 import { render } from '@testing-library/react-native';
 import color from 'color';
 
-import { getTheme } from '@/core/theming';
-import { black } from '@/styles/themes/v2/colors';
-
-import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
+import SegmentedButtons from '@/components/SegmentedButtons/SegmentedButtons';
 import {
   getDisabledSegmentedButtonStyle,
   getSegmentedButtonColors,
-} from '../SegmentedButtons/utils';
+} from '@/components/SegmentedButtons/utils';
+import { getTheme } from '@/core/theming';
+import { black } from '@/styles/themes/v2/colors';
 
 it('renders segmented button', () => {
   const tree = render(
