@@ -13,13 +13,14 @@ import {
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import Card from '@/components/Card/Card';
+import type { IconSource } from '@/components/Icon';
+import Text from '@/components/Typography/Text';
+import { useInternalTheme } from '@/core/theming';
+import type { ThemeProp } from '@/types';
+
 import FAB from './FAB';
 import { getFABGroupColors } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import Card from '../Card/Card';
-import type { IconSource } from '../Icon';
-import Text from '../Typography/Text';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 

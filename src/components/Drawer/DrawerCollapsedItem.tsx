@@ -12,11 +12,11 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import Badge from '../Badge';
-import Icon, { IconSource } from '../Icon';
-import Text from '../Typography/Text';
+import Badge from '@/components/Badge';
+import Icon, { IconSource } from '@/components/Icon';
+import Text from '@/components/Typography/Text';
+import { useInternalTheme } from '@/core/theming';
+import type { ThemeProp } from '@/types';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**

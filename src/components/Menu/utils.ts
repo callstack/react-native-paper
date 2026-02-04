@@ -2,9 +2,9 @@ import type { ColorValue } from 'react-native';
 
 import color from 'color';
 
-import { black, white } from '../../styles/themes/v2/colors';
-import type { InternalTheme } from '../../types';
-import type { IconSource } from '../Icon';
+import type { IconSource } from '@/components/Icon';
+import { black, white } from '@/styles/themes/v2/colors';
+import type { InternalTheme } from '@/types';
 
 export const MIN_WIDTH = 112;
 export const MAX_WIDTH = 280;

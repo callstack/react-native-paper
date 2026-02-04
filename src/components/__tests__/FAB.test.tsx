@@ -5,9 +5,10 @@ import { fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
 import { act } from 'react-test-renderer';
 
-import { getTheme } from '../../core/theming';
-import { black, white } from '../../styles/themes/v2/colors';
-import getContrastingColor from '../../utils/getContrastingColor';
+import { getTheme } from '@/core/theming';
+import { black, white } from '@/styles/themes/v2/colors';
+import getContrastingColor from '@/utils/getContrastingColor';
+
 import FAB from '../FAB';
 import { getFABColors } from '../FAB/utils';
 

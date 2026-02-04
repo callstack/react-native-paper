@@ -22,16 +22,17 @@ import {
 
 import color from 'color';
 
-import { getCombinedStyles, getFABColors, getLabelSizeWeb } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
-import type { IconSource } from '../Icon';
-import Icon from '../Icon';
-import Surface from '../Surface';
+import type { IconSource } from '@/components/Icon';
+import Icon from '@/components/Icon';
+import Surface from '@/components/Surface';
 import TouchableRipple, {
   Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
-import AnimatedText from '../Typography/AnimatedText';
+} from '@/components/TouchableRipple/TouchableRipple';
+import AnimatedText from '@/components/Typography/AnimatedText';
+import { useInternalTheme } from '@/core/theming';
+import type { $Omit, $RemoveChildren, ThemeProp } from '@/types';
+
+import { getCombinedStyles, getFABColors, getLabelSizeWeb } from './utils';
 
 export type AnimatedFABIconMode = 'static' | 'dynamic';
 export type AnimatedFABAnimateFrom = 'left' | 'right';

@@ -1,4 +1,5 @@
-import { MD3DarkTheme, MD3LightTheme } from '../../styles/themes';
+import { MD3DarkTheme, MD3LightTheme } from '@/styles/themes';
+
 import { adaptNavigationTheme } from '../theming';
 
 const NavigationLightTheme = {

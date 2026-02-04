@@ -2,7 +2,8 @@ import React from 'react';
 
 import { render } from '@testing-library/react-native';
 
-import { getTheme } from '../../core/theming';
+import { getTheme } from '@/core/theming';
+
 import HelperText from '../HelperText/HelperText';
 
 describe('HelperText', () => {

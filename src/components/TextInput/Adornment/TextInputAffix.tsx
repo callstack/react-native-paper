@@ -12,10 +12,11 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { useInternalTheme } from '@/core/theming';
+import type { ThemeProp } from '@/types';
+
 import { AdornmentSide } from './enums';
 import { getTextColor } from './utils';
-import { useInternalTheme } from '../../../core/theming';
-import type { ThemeProp } from '../../../types';
 import { getConstants } from '../helpers';
 
 export type Props = {

@@ -4,7 +4,8 @@ import { Platform } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 
-import { getTheme } from '../../core/theming';
+import { getTheme } from '@/core/theming';
+
 import Surface from '../Surface';
 
 describe('Surface', () => {

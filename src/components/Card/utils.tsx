@@ -2,8 +2,8 @@ import type { StyleProp, ViewStyle } from 'react-native';
 
 import color from 'color';
 
-import { black, white } from '../../styles/themes/v2/colors';
-import type { InternalTheme } from '../../types';
+import { black, white } from '@/styles/themes/v2/colors';
+import type { InternalTheme } from '@/types';
 
 type CardMode = 'elevated' | 'outlined' | 'contained';
 

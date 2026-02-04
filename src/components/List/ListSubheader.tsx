@@ -4,8 +4,8 @@ import { StyleProp, StyleSheet, TextStyle } from 'react-native';
 import color from 'color';
 import type { ThemeProp } from 'src/types';
 
-import { useInternalTheme } from '../../core/theming';
-import Text from '../Typography/Text';
+import Text from '@/components/Typography/Text';
+import { useInternalTheme } from '@/core/theming';
 
 export type Props = React.ComponentProps<typeof Text> & {
   /**

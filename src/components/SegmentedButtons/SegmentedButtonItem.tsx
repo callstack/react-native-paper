@@ -14,18 +14,19 @@ import {
 import color from 'color';
 import type { ThemeProp } from 'src/types';
 
+import type { IconSource } from '@/components/Icon';
+import Icon from '@/components/Icon';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '@/components/TouchableRipple/TouchableRipple';
+import Text from '@/components/Typography/Text';
+import { useInternalTheme } from '@/core/theming';
+
 import {
   getSegmentedButtonBorderRadius,
   getSegmentedButtonColors,
   getSegmentedButtonDensityPadding,
 } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { IconSource } from '../Icon';
-import Icon from '../Icon';
-import TouchableRipple, {
-  Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
 
 export type Props = {
   /**

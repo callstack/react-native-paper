@@ -4,7 +4,8 @@ import { Button, Text, View } from 'react-native';
 import { NavigationContainer, ParamListBase } from '@react-navigation/native';
 import { fireEvent, render } from '@testing-library/react-native';
 
-import PaperProvider from '../../core/PaperProvider';
+import PaperProvider from '@/core/PaperProvider';
+
 import {
   createMaterialBottomTabNavigator,
   MaterialBottomTabScreenProps,

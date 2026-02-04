@@ -7,11 +7,11 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useInternalTheme } from '../../core/theming';
-import type { MD3TypescaleKey, ThemeProp } from '../../types';
-import Text from '../Typography/Text';
-import Caption from '../Typography/v2/Caption';
-import Title from '../Typography/v2/Title';
+import Text from '@/components/Typography/Text';
+import Caption from '@/components/Typography/v2/Caption';
+import Title from '@/components/Typography/v2/Title';
+import { useInternalTheme } from '@/core/theming';
+import type { MD3TypescaleKey, ThemeProp } from '@/types';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**

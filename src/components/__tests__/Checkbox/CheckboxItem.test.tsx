@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 
 import { act, fireEvent, render } from '@testing-library/react-native';
 
-import Checkbox from '../../Checkbox';
+import Checkbox from '@/components/Checkbox';
 
 it('renders unchecked', () => {
   const tree = render(

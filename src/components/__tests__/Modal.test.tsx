@@ -8,7 +8,8 @@ import {
 
 import { act, fireEvent, render } from '@testing-library/react-native';
 
-import { MD3LightTheme } from '../../styles/themes';
+import { MD3LightTheme } from '@/styles/themes';
+
 import Modal from '../Modal';
 
 jest.mock('react-native-safe-area-context', () => ({

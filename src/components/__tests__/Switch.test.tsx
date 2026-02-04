@@ -4,7 +4,7 @@ import { Platform } from 'react-native';
 import { render } from '@testing-library/react-native';
 import color from 'color';
 
-import { getTheme } from '../../core/theming';
+import { getTheme } from '@/core/theming';
 import {
   white,
   black,
@@ -13,7 +13,8 @@ import {
   grey800,
   pink500,
   grey700,
-} from '../../styles/themes/v2/colors';
+} from '@/styles/themes/v2/colors';
+
 import Switch from '../Switch/Switch';
 import { getSwitchColor } from '../Switch/utils';
 

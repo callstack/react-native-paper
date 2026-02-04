@@ -11,14 +11,15 @@ import {
 
 import color from 'color';
 
-import type { PressableProps, PressableStateCallbackType } from './Pressable';
+import { Settings, SettingsContext } from '@/core/settings';
+import { useInternalTheme } from '@/core/theming';
+import type { ThemeProp } from '@/types';
+import { forwardRef } from '@/utils/forwardRef';
+import hasTouchHandler from '@/utils/hasTouchHandler';
+
 import { Pressable } from './Pressable';
+import type { PressableProps, PressableStateCallbackType } from './Pressable';
 import { getTouchableRippleColors } from './utils';
-import { Settings, SettingsContext } from '../../core/settings';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
-import hasTouchHandler from '../../utils/hasTouchHandler';
 
 export type Props = PressableProps & {
   /**

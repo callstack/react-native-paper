@@ -7,8 +7,8 @@ import {
   ImageStyle,
 } from 'react-native';
 
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import { useInternalTheme } from '@/core/theming';
+import type { ThemeProp } from '@/types';
 
 export type Props = {
   source: ImageSourcePropType;
@@ -31,7 +31,7 @@ export type Props = {
  * const MyComponent = () => (
  *   <>
  *     <List.Image variant="image" source={{uri: 'https://www.someurl.com/apple'}} />
- *     <List.Image variant="video" source={require('../../some-apple.png')} />
+ *     <List.Image variant="video" source={require('@/some-apple.png')} />
  *   </>
  * );
  *

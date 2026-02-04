@@ -3,7 +3,8 @@ import { StyleSheet } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 
-import { red500 } from '../../styles/themes/v2/colors';
+import { red500 } from '@/styles/themes/v2/colors';
+
 import ListIcon from '../List/ListIcon';
 import ListItem from '../List/ListItem';
 import ListSection from '../List/ListSection';

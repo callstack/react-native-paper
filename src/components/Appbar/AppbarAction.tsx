@@ -8,13 +8,13 @@ import type {
 } from 'react-native';
 
 import color from 'color';
-import type { ThemeProp } from 'src/types';
 
-import { useInternalTheme } from '../../core/theming';
-import { black } from '../../styles/themes/v2/colors';
-import { forwardRef } from '../../utils/forwardRef';
-import type { IconSource } from '../Icon';
-import IconButton from '../IconButton/IconButton';
+import type { IconSource } from '@/components/Icon';
+import IconButton from '@/components/IconButton/IconButton';
+import { useInternalTheme } from '@/core/theming';
+import { black } from '@/styles/themes/v2/colors';
+import type { ThemeProp } from '@/types';
+import { forwardRef } from '@/utils/forwardRef';
 
 export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
   /**

@@ -4,8 +4,9 @@ import { Animated } from 'react-native';
 import { act, render } from '@testing-library/react-native';
 import color from 'color';
 
-import { getTheme } from '../../core/theming';
-import { black, white } from '../../styles/themes/v2/colors';
+import { getTheme } from '@/core/theming';
+import { black, white } from '@/styles/themes/v2/colors';
+
 import Chip from '../Chip/Chip';
 import { getChipColors } from '../Chip/helpers';
 

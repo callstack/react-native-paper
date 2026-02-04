@@ -9,7 +9,8 @@ import {
 
 import { act, fireEvent, render } from '@testing-library/react-native';
 
-import Dialog from '../../components/Dialog/Dialog';
+import Dialog from '@/components/Dialog/Dialog';
+
 import Button from '../Button/Button';
 
 interface BackHandlerStatic extends RNBackHandlerStatic {

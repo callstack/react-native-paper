@@ -2,11 +2,11 @@ import * as React from 'react';
 
 import { render } from '@testing-library/react-native';
 
-import PaperProvider from '../../../core/PaperProvider';
-import configureFonts from '../../../styles/fonts';
-import { MD3LightTheme } from '../../../styles/themes';
-import { tokens } from '../../../styles/themes/v3/tokens';
-import Text, { customText } from '../../Typography/Text';
+import Text, { customText } from '@/components/Typography/Text';
+import PaperProvider from '@/core/PaperProvider';
+import configureFonts from '@/styles/fonts';
+import { MD3LightTheme } from '@/styles/themes';
+import { tokens } from '@/styles/themes/v3/tokens';
 
 const content = 'Something rendered as a child content';
 

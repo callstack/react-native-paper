@@ -2,9 +2,9 @@ import React from 'react';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet, Animated } from 'react-native';
 
-import overlay from '../../styles/overlay';
-import { black, white } from '../../styles/themes/v2/colors';
-import type { InternalTheme, ThemeProp } from '../../types';
+import overlay from '@/styles/overlay';
+import { black, white } from '@/styles/themes/v2/colors';
+import type { InternalTheme, ThemeProp } from '@/types';
 
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 

@@ -10,15 +10,16 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '@/components/TouchableRipple/TouchableRipple';
+import Text from '@/components/Typography/Text';
+import { useInternalTheme } from '@/core/theming';
+import type { ThemeProp, MD3TypescaleKey } from '@/types';
+
 import Checkbox from './Checkbox';
 import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp, MD3TypescaleKey } from '../../types';
-import TouchableRipple, {
-  Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
 
 export type Props = {
   /**

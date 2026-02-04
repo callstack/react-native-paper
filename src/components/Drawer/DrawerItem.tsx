@@ -11,13 +11,13 @@ import {
 
 import color from 'color';
 
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import Icon, { IconSource } from '../Icon';
+import Icon, { IconSource } from '@/components/Icon';
 import TouchableRipple, {
   Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
+} from '@/components/TouchableRipple/TouchableRipple';
+import Text from '@/components/Typography/Text';
+import { useInternalTheme } from '@/core/theming';
+import type { ThemeProp } from '@/types';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**

@@ -9,9 +9,9 @@ import {
 
 import color from 'color';
 
-import { black, white } from '../../styles/themes/v2/colors';
-import type { InternalTheme } from '../../types';
-import getContrastingColor from '../../utils/getContrastingColor';
+import { black, white } from '@/styles/themes/v2/colors';
+import type { InternalTheme } from '@/types';
+import getContrastingColor from '@/utils/getContrastingColor';
 
 type GetCombinedStylesProps = {
   isAnimatedFromRight: boolean;

@@ -2,6 +2,8 @@ import { Platform } from 'react-native';
 
 import color from 'color';
 
+import type { InternalTheme } from '@/types';
+
 import { AdornmentSide, AdornmentType } from './Adornment/enums';
 import type { AdornmentConfig } from './Adornment/types';
 import {
@@ -27,7 +29,6 @@ import {
   MD3_OUTLINED_INPUT_OFFSET,
 } from './constants';
 import type { TextInputLabelProp } from './types';
-import type { InternalTheme } from '../../types';
 
 type PaddingProps = {
   height: number | null;

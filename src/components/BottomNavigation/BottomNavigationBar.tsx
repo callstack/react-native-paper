@@ -14,25 +14,26 @@ import {
 import color from 'color';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import Badge from '@/components/Badge';
+import Icon, { IconSource } from '@/components/Icon';
+import Surface from '@/components/Surface';
+import TouchableRipple from '@/components/TouchableRipple/TouchableRipple';
+import { Props as TouchableRippleProps } from '@/components/TouchableRipple/TouchableRipple';
+import Text from '@/components/Typography/Text';
+import { useInternalTheme } from '@/core/theming';
+import overlay from '@/styles/overlay';
+import { black, white } from '@/styles/themes/v2/colors';
+import type { ThemeProp } from '@/types';
+import useAnimatedValue from '@/utils/useAnimatedValue';
+import useAnimatedValueArray from '@/utils/useAnimatedValueArray';
+import useIsKeyboardShown from '@/utils/useIsKeyboardShown';
+import useLayout from '@/utils/useLayout';
+
 import {
   getActiveTintColor,
   getInactiveTintColor,
   getLabelColor,
 } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import overlay from '../../styles/overlay';
-import { black, white } from '../../styles/themes/v2/colors';
-import type { ThemeProp } from '../../types';
-import useAnimatedValue from '../../utils/useAnimatedValue';
-import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
-import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
-import useLayout from '../../utils/useLayout';
-import Badge from '../Badge';
-import Icon, { IconSource } from '../Icon';
-import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
 
 type BaseRoute = {
   key: string;

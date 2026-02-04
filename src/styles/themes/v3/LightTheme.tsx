@@ -1,8 +1,9 @@
 import color from 'color';
 
+import configureFonts from '@/styles/fonts';
+import type { MD3Theme } from '@/types';
+
 import { MD3Colors, tokens } from './tokens';
-import type { MD3Theme } from '../../../types';
-import configureFonts from '../../fonts';
 
 const { palette, opacity } = tokens.md.ref;
 

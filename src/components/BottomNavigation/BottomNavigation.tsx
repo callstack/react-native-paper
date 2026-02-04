@@ -12,13 +12,14 @@ import {
 
 import useLatestCallback from 'use-latest-callback';
 
+import type { IconSource } from '@/components/Icon';
+import { Props as TouchableRippleProps } from '@/components/TouchableRipple/TouchableRipple';
+import { useInternalTheme } from '@/core/theming';
+import type { ThemeProp } from '@/types';
+import useAnimatedValueArray from '@/utils/useAnimatedValueArray';
+
 import BottomNavigationBar from './BottomNavigationBar';
 import BottomNavigationRouteScreen from './BottomNavigationRouteScreen';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
-import type { IconSource } from '../Icon';
-import { Props as TouchableRippleProps } from '../TouchableRipple/TouchableRipple';
 
 export type BaseRoute = {
   key: string;

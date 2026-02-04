@@ -6,11 +6,12 @@ import {
   View,
 } from 'react-native';
 
+import MaterialCommunityIcon from '@/components/MaterialCommunityIcon';
+import TouchableRipple from '@/components/TouchableRipple/TouchableRipple';
+import { useInternalTheme } from '@/core/theming';
+import type { $RemoveChildren, ThemeProp } from '@/types';
+
 import { getAndroidSelectionControlColor } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**

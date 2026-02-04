@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { GestureResponderEvent, StyleSheet, View } from 'react-native';
 
+import { getSelectionControlIOSColor } from '@/components/Checkbox/utils';
+import MaterialCommunityIcon from '@/components/MaterialCommunityIcon';
+import TouchableRipple from '@/components/TouchableRipple/TouchableRipple';
+import { useInternalTheme } from '@/core/theming';
+import type { $RemoveChildren, ThemeProp } from '@/types';
+
 import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import { handlePress, isChecked } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
-import { getSelectionControlIOSColor } from '../Checkbox/utils';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**

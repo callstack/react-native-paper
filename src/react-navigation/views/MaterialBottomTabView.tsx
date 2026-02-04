@@ -10,8 +10,9 @@ import {
   useLinkBuilder,
 } from '@react-navigation/native';
 
-import BottomNavigation from '../../components/BottomNavigation/BottomNavigation';
-import MaterialCommunityIcon from '../../components/MaterialCommunityIcon';
+import BottomNavigation from '@/components/BottomNavigation/BottomNavigation';
+import MaterialCommunityIcon from '@/components/MaterialCommunityIcon';
+
 import type {
   MaterialBottomTabDescriptorMap,
   MaterialBottomTabNavigationConfig,

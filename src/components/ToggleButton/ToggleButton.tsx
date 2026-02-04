@@ -11,14 +11,15 @@ import {
 
 import color from 'color';
 
+import type { IconSource } from '@/components/Icon';
+import IconButton from '@/components/IconButton/IconButton';
+import { useInternalTheme } from '@/core/theming';
+import { black, white } from '@/styles/themes/v2/colors';
+import type { ThemeProp } from '@/types';
+import { forwardRef } from '@/utils/forwardRef';
+
 import { ToggleButtonGroupContext } from './ToggleButtonGroup';
 import { getToggleButtonColor } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import { black, white } from '../../styles/themes/v2/colors';
-import type { ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
-import type { IconSource } from '../Icon';
-import IconButton from '../IconButton/IconButton';
 
 export type Props = {
   /**
