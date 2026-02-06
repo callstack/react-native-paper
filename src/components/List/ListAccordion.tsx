@@ -265,21 +265,21 @@ const ListAccordion = ({
   const expandedContent = isExpanded
     ? React.Children.map(children, (child) => {
         if (
-          left &&
-          React.isValidElement<ListChildProps>(child) &&
-          !child.props.left &&
-          !child.props.right
+          !left ||
+          !React.isValidElement<ListChildProps>(child) ||
+          child.props.left ||
+          child.props.right
         ) {
-          return React.cloneElement(child, {
-            style: [
-              theme.isV3 ? styles.childV3 : styles.child,
-              child.props.style,
-            ],
-            theme,
-          });
+          return child;
         }
 
-        return child;
+        return React.cloneElement(child, {
+          style: [
+            theme.isV3 ? styles.childV3 : styles.child,
+            child.props.style,
+          ],
+          theme,
+        });
       })
     : null;
 
