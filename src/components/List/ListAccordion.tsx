@@ -18,7 +18,7 @@ import { ListAccordionGroupContext } from './ListAccordionGroup';
 import type { ListChildProps, Style } from './utils';
 import { getAccordionColors, getLeftStyles } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { InternalTheme, ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple, {
   Props as TouchableRippleProps,
@@ -180,6 +180,39 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
+function getExpandedContent({
+  isExpanded,
+  children,
+  left,
+  theme,
+}: {
+  isExpanded: boolean;
+  children: React.ReactNode;
+  left?: Props['left'];
+  theme: InternalTheme;
+}) {
+  return isExpanded
+    ? React.Children.map(children, (child) => {
+        if (
+          !left ||
+          !React.isValidElement<ListChildProps>(child) ||
+          child.props.left ||
+          child.props.right
+        ) {
+          return child;
+        }
+
+        return React.cloneElement(child, {
+          style: [
+            theme.isV3 ? styles.childV3 : styles.child,
+            child.props.style,
+          ],
+          theme,
+        });
+      })
+    : null;
+}
+
 const ListAccordion = ({
   left,
   right,
@@ -262,26 +295,12 @@ const ListAccordion = ({
   const expandDirection =
     expandDirectionProp || groupContext?.expandDirection || 'downwards';
 
-  const expandedContent = isExpanded
-    ? React.Children.map(children, (child) => {
-        if (
-          !left ||
-          !React.isValidElement<ListChildProps>(child) ||
-          child.props.left ||
-          child.props.right
-        ) {
-          return child;
-        }
-
-        return React.cloneElement(child, {
-          style: [
-            theme.isV3 ? styles.childV3 : styles.child,
-            child.props.style,
-          ],
-          theme,
-        });
-      })
-    : null;
+  const expandedContent = getExpandedContent({
+    isExpanded,
+    children,
+    left,
+    theme,
+  });
 
   return (
     <View>
