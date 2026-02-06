@@ -138,7 +138,6 @@ export type Props = {
   hitSlop?: TouchableRippleProps['hitSlop'];
   /**
    * Sets expansion direction for the accordion.
-   * Can be 'downwards' (default) or 'upwards'.
    */
   expandDirection?: 'downwards' | 'upwards';
 };
@@ -240,7 +239,7 @@ const ListAccordion = ({
   titleMaxFontSizeMultiplier,
   descriptionMaxFontSizeMultiplier,
   hitSlop,
-  expandDirection: expandDirectionProp,
+  expandDirection = 'downwards',
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const [expanded, setExpanded] = React.useState<boolean>(
@@ -291,9 +290,6 @@ const ListAccordion = ({
     groupContext && id !== undefined
       ? () => groupContext.onAccordionPress(id)
       : handlePressAction;
-
-  const expandDirection =
-    expandDirectionProp || groupContext?.expandDirection || 'downwards';
 
   const expandedContent = getExpandedContent({
     isExpanded,

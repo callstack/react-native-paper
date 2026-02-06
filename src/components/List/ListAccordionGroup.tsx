@@ -15,7 +15,6 @@ export type Props = {
   children: React.ReactNode;
   /**
    * Sets expansion direction for all accordions in the group.
-   * Can be 'downwards' (default) or 'upwards'.
    */
   expandDirection?: 'downwards' | 'upwards';
 };
@@ -66,7 +65,7 @@ const ListAccordionGroup = ({
   expandedId: expandedIdProp,
   onAccordionPress,
   children,
-  expandDirection,
+  expandDirection = 'downwards',
 }: Props) => {
   const [expandedId, setExpandedId] = React.useState<
     string | number | undefined
