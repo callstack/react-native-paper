@@ -92,9 +92,9 @@ export type Props = $RemoveChildren<typeof View> & {
  * import { Appbar } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *     <Appbar.Header>
- *        <Appbar.Content title="Title" />
- *     </Appbar.Header>
+ *   <Appbar.Header>
+ *      <Appbar.Content title="Title" />
+ *   </Appbar.Header>
  * );
  *
  * export default MyComponent;
