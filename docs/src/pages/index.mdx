@@ -1,8 +1,17 @@
-![paperLogo](../../static/images/sidebar-logo.svg)
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
+<ThemedImage
+  alt="React Native Paper"
+  sources={{
+    light: useBaseUrl('/images/navbar-logo.svg'),
+    dark: useBaseUrl('/images/navbar-logo-dark.svg'),
+  }}
+/>
 
 # Cross-platform Material Design for React Native
 
-import {Button} from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import GetStartedButtons from '../components/GetStartedButtons';
 import BannerExample from '../components/BannerExample';
 
