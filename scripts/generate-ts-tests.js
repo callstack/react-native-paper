@@ -36,7 +36,7 @@ const getFiles = () =>
 const writeFiles = (files) => {
   mkdirSync(DESTINATION_DIR);
 
-  files.forEach((f) =>
+  files.map((f) =>
     writeFileSync(
       path.join(
         DESTINATION_DIR,

@@ -4,11 +4,10 @@
   "description": "Material design for React Native",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
-  "react-native": "src/index.tsx",
+  "react-native": "lib/module/index.js",
   "source": "src/index.tsx",
   "types": "lib/typescript/index.d.ts",
   "files": [
-    "src",
     "lib",
     "react-navigation",
     "babel.js"
@@ -42,7 +41,7 @@
     "lint": "yarn lint-no-fix --fix",
     "lint-no-fix": "eslint --ext '.js,.ts,.tsx' .",
     "test": "jest",
-    "prepack": "bob build && node ./scripts/generate-mappings.js",
+    "prepack": "bob build && node ./scripts/resolve-aliases.js && node ./scripts/generate-mappings.js",
     "release": "release-it",
     "docs": "yarn --cwd docs",
     "example": "yarn --cwd example"
