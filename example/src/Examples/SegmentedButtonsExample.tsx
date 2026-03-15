@@ -28,7 +28,9 @@ const SegmentedButtonExample = ({ navigation }: Props) => {
           title="Single select"
           description="Go to the example"
           onPress={() => navigation.navigate('segmentedButtonRealCase')}
-          right={(props) => <List.Icon {...props} icon="arrow-right" />}
+          right={(props) => (
+            <List.Icon iconSize={32} {...props} icon="arrow-right" />
+          )}
         />
         <List.Item
           title="Multiselect select"
@@ -36,7 +38,9 @@ const SegmentedButtonExample = ({ navigation }: Props) => {
           onPress={() =>
             navigation.navigate('segmentedButtonMultiselectRealCase')
           }
-          right={(props) => <List.Icon {...props} icon="arrow-right" />}
+          right={(props) => (
+            <List.Icon iconSize={32} {...props} icon="arrow-right" />
+          )}
         />
       </List.Section>
       <SegmentedButtonDefault />
