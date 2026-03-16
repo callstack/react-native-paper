@@ -345,23 +345,25 @@ const Menu = ({
     });
 
     attachListeners();
-    const { animation } = theme;
-    Animated.parallel([
-      Animated.timing(scaleAnimationRef.current, {
-        toValue: { x: menuLayoutResult.width, y: menuLayoutResult.height },
-        duration: ANIMATION_DURATION * animation.scale,
-        easing: EASING,
-        useNativeDriver: true,
-      }),
-      Animated.timing(opacityAnimationRef.current, {
-        toValue: 1,
-        duration: ANIMATION_DURATION * animation.scale,
-        easing: EASING,
-        useNativeDriver: true,
-      }),
-    ]).start(() => {
-      focusFirstDOMNode(menuRef.current);
-      prevRendered.current = true;
+    requestAnimationFrame(() => {
+      const { animation } = theme;
+      Animated.parallel([
+        Animated.timing(scaleAnimationRef.current, {
+          toValue: { x: menuLayoutResult.width, y: menuLayoutResult.height },
+          duration: ANIMATION_DURATION * animation.scale,
+          easing: EASING,
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacityAnimationRef.current, {
+          toValue: 1,
+          duration: ANIMATION_DURATION * animation.scale,
+          easing: EASING,
+          useNativeDriver: true,
+        }),
+      ]).start(() => {
+        focusFirstDOMNode(menuRef.current);
+        prevRendered.current = true;
+      });
     });
   }, [anchor, attachListeners, measureAnchorLayout, theme]);
 
