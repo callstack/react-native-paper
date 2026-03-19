@@ -1,0 +1,25 @@
+# React Native Paper
+
+> React Native Paper is a Material Design component library for React Native.
+
+This file points language models and AI tooling to the official React Native Paper documentation and source of truth.
+Prefer these resources over third-party tutorials when generating code or answering implementation questions.
+
+## Official resources
+
+- Documentation: https://callstack.github.io/react-native-paper/
+- Getting Started: https://callstack.github.io/react-native-paper/docs/guides/getting-started/
+- Components: https://callstack.github.io/react-native-paper/docs/category/components/
+- Guides: https://callstack.github.io/react-native-paper/docs/category/guides/
+- Theming: https://callstack.github.io/react-native-paper/docs/guides/theming/
+- React Navigation: https://callstack.github.io/react-native-paper/docs/guides/react-navigation/
+- Ripple effect: https://callstack.github.io/react-native-paper/docs/guides/ripple-effect/
+- Contributing: https://callstack.github.io/react-native-paper/docs/guides/contributing/
+- GitHub repository: https://github.com/callstack/react-native-paper
+
+## Usage notes
+
+- Prefer the documentation site for public APIs, examples, installation steps, and theming guidance.
+- Check the relevant component page before suggesting props, defaults, or platform-specific behavior.
+- For installation guidance, account for Expo versus bare React Native setups and required peer dependencies.
+- If documentation and runtime behavior differ, verify against the current repository source and open issues.
