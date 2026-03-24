@@ -1,0 +1,80 @@
+# React Native Paper
+
+> Material Design components for React Native.
+> See the full documentation at: https://callstack.github.io/react-native-paper/
+
+## Getting Started
+
+- Install: npm install react-native-paper react-native-safe-area-context
+- Wrap your app with PaperProvider
+- Default theme is Material You (MD3); set theme.version: 2 for MD2
+- Requires React Native 0.72+ and React 18+
+
+## Guides
+
+- Getting Started: https://callstack.github.io/react-native-paper/docs/guides/getting-started
+- Theming: https://callstack.github.io/react-native-paper/docs/guides/theming
+- Icons: https://callstack.github.io/react-native-paper/docs/guides/icons
+- Fonts: https://callstack.github.io/react-native-paper/docs/guides/fonts
+- React Native Web: https://callstack.github.io/react-native-paper/docs/guides/react-native-web
+- Migration to v5: https://callstack.github.io/react-native-paper/docs/guides/migration-guide-to-5.0
+- Recommended Libraries: https://callstack.github.io/react-native-paper/docs/guides/recommended-libraries
+- Contributing: https://callstack.github.io/react-native-paper/docs/guides/contributing
+- Bottom Navigation: https://callstack.github.io/react-native-paper/docs/guides/bottom-navigation
+- Ripple Effect: https://callstack.github.io/react-native-paper/docs/guides/ripple-effect
+
+## Components
+
+- ActivityIndicator: https://callstack.github.io/react-native-paper/docs/components/ActivityIndicator
+- Appbar: https://callstack.github.io/react-native-paper/docs/components/Appbar
+- Avatar: https://callstack.github.io/react-native-paper/docs/components/Avatar
+- Badge: https://callstack.github.io/react-native-paper/docs/components/Badge
+- Banner: https://callstack.github.io/react-native-paper/docs/components/Banner
+- BottomNavigation: https://callstack.github.io/react-native-paper/docs/components/BottomNavigation
+- Button: https://callstack.github.io/react-native-paper/docs/components/Button
+- Card: https://callstack.github.io/react-native-paper/docs/components/Card
+- Checkbox: https://callstack.github.io/react-native-paper/docs/components/Checkbox
+- Chip: https://callstack.github.io/react-native-paper/docs/components/Chip
+- DataTable: https://callstack.github.io/react-native-paper/docs/components/DataTable
+- Dialog: https://callstack.github.io/react-native-paper/docs/components/Dialog
+- Divider: https://callstack.github.io/react-native-paper/docs/components/Divider
+- Drawer: https://callstack.github.io/react-native-paper/docs/components/Drawer
+- FAB: https://callstack.github.io/react-native-paper/docs/components/FAB
+- HelperText: https://callstack.github.io/react-native-paper/docs/components/HelperText
+- IconButton: https://callstack.github.io/react-native-paper/docs/components/IconButton
+- Icon: https://callstack.github.io/react-native-paper/docs/components/Icon
+- List: https://callstack.github.io/react-native-paper/docs/components/List
+- Menu: https://callstack.github.io/react-native-paper/docs/components/Menu
+- Modal: https://callstack.github.io/react-native-paper/docs/components/Modal
+- Portal: https://callstack.github.io/react-native-paper/docs/components/Portal
+- ProgressBar: https://callstack.github.io/react-native-paper/docs/components/ProgressBar
+- RadioButton: https://callstack.github.io/react-native-paper/docs/components/RadioButton
+- Searchbar: https://callstack.github.io/react-native-paper/docs/components/Searchbar
+- SegmentedButtons: https://callstack.github.io/react-native-paper/docs/components/SegmentedButtons
+- Snackbar: https://callstack.github.io/react-native-paper/docs/components/Snackbar
+- Surface: https://callstack.github.io/react-native-paper/docs/components/Surface
+- Switch: https://callstack.github.io/react-native-paper/docs/components/Switch
+- Text: https://callstack.github.io/react-native-paper/docs/components/Text
+- TextInput: https://callstack.github.io/react-native-paper/docs/components/TextInput
+- TouchableRipple: https://callstack.github.io/react-native-paper/docs/components/TouchableRipple
+- Tooltip: https://callstack.github.io/react-native-paper/docs/components/Tooltip
+
+## Theming
+
+- Theme object accepts colors, dark, roundness, fonts, animation, and version properties
+- Use useTheme() hook or ThemeProvider for nested theme overrides
+- MD3 (Material You) is the default; set version: 2 for MD2 compatibility
+- See theming guide: https://callstack.github.io/react-native-paper/docs/guides/theming
+
+## Provider Pattern
+
+- Wrap root component with PaperProvider (required)
+- PaperProvider accepts an optional theme prop
+- Supports theming with React Navigation via react-native-paper theming integration
+
+## Important Notes
+
+- This is a cross-platform library (iOS, Android, web)
+- Built with TypeScript
+- MIT licensed
+- Maintained by Callstack
