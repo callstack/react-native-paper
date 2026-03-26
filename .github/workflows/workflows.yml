@@ -1,0 +1,145 @@
+name: build-and-test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'
+          cache: 'yarn'
+      - run: corepack enable
+      - run: yarn --immutable
+      - run: yarn lint-no-fix
+
+  typescript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'
+          cache: 'yarn'
+      - run: corepack enable
+      - run: yarn --immutable
+      - run: yarn typescript
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'
+          cache: 'yarn'
+      - run: corepack enable
+      - run: yarn --immutable
+      - uses: actions/cache@v4
+        with:
+          path: ./cache/jest
+          key: jest-cache-${{ github.ref_name }}
+          restore-keys: jest-cache-
+      - name: Run unit tests
+        run: yarn test --maxWorkers=2 --coverage
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage
+          path: coverage
+
+  build-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'
+          cache: 'yarn'
+      - run: corepack enable
+      - run: yarn --immutable
+      - name: Build package
+        run: |
+          yarn prepack
+          node ./scripts/typescript-output-lint
+
+  build-docs:
+    if: github.ref != 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'
+          cache: 'yarn'
+      - run: corepack enable
+      - run: yarn --immutable
+      - name: Build docs
+        run: yarn --cwd docs build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: docs
+          path: docs/build
+
+  comment-artifacts:
+    if: github.event_name == 'pull_request'
+    needs: build-docs
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const artifactsUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}/artifacts`;
+            const body = `Hey @${context.payload.pull_request.user.login}, thank you for your pull request 🤗. The documentation from this branch can be viewed [here](${artifactsUrl}).`;
+            const marker = 'The documentation from this branch can be viewed';
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const existing = comments.find(c => c.body.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
+  deploy-docs:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'
+          cache: 'yarn'
+      - run: corepack enable
+      - run: yarn --immutable
+      - name: Build docs
+        run: yarn --cwd docs build
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/build
