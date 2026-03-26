@@ -18,7 +18,7 @@ import { ListAccordionGroupContext } from './ListAccordionGroup';
 import type { ListChildProps, Style } from './utils';
 import { getAccordionColors, getLeftStyles } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import type { InternalTheme, ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import TouchableRipple, {
   Props as TouchableRippleProps,
@@ -136,6 +136,10 @@ export type Props = {
    * This can be used to enlarge the touchable area beyond the visible component.
    */
   hitSlop?: TouchableRippleProps['hitSlop'];
+  /**
+   * Sets expansion direction for the accordion.
+   */
+  expandDirection?: 'downwards' | 'upwards';
 };
 
 /**
@@ -175,6 +179,39 @@ export type Props = {
  * export default MyComponent;
  * ```
  */
+function getExpandedContent({
+  isExpanded,
+  children,
+  left,
+  theme,
+}: {
+  isExpanded: boolean;
+  children: React.ReactNode;
+  left?: Props['left'];
+  theme: InternalTheme;
+}) {
+  return isExpanded
+    ? React.Children.map(children, (child) => {
+        if (
+          !left ||
+          !React.isValidElement<ListChildProps>(child) ||
+          child.props.left ||
+          child.props.right
+        ) {
+          return child;
+        }
+
+        return React.cloneElement(child, {
+          style: [
+            theme.isV3 ? styles.childV3 : styles.child,
+            child.props.style,
+          ],
+          theme,
+        });
+      })
+    : null;
+}
+
 const ListAccordion = ({
   left,
   right,
@@ -202,6 +239,7 @@ const ListAccordion = ({
   titleMaxFontSizeMultiplier,
   descriptionMaxFontSizeMultiplier,
   hitSlop,
+  expandDirection = 'downwards',
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const [expanded, setExpanded] = React.useState<boolean>(
@@ -252,8 +290,17 @@ const ListAccordion = ({
     groupContext && id !== undefined
       ? () => groupContext.onAccordionPress(id)
       : handlePressAction;
+
+  const expandedContent = getExpandedContent({
+    isExpanded,
+    children,
+    left,
+    theme,
+  });
+
   return (
     <View>
+      {expandDirection === 'upwards' ? expandedContent : null}
       <View style={{ backgroundColor: theme?.colors?.background }}>
         <TouchableRipple
           style={[theme.isV3 ? styles.containerV3 : styles.container, style]}
@@ -339,26 +386,7 @@ const ListAccordion = ({
         </TouchableRipple>
       </View>
 
-      {isExpanded
-        ? React.Children.map(children, (child) => {
-            if (
-              left &&
-              React.isValidElement<ListChildProps>(child) &&
-              !child.props.left &&
-              !child.props.right
-            ) {
-              return React.cloneElement(child, {
-                style: [
-                  theme.isV3 ? styles.childV3 : styles.child,
-                  child.props.style,
-                ],
-                theme,
-              });
-            }
-
-            return child;
-          })
-        : null}
+      {expandDirection === 'downwards' ? expandedContent : null}
     </View>
   );
 };
