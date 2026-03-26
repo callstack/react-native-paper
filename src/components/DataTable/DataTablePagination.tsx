@@ -11,12 +11,12 @@ import {
 import color from 'color';
 import type { ThemeProp } from 'src/types';
 
-import { useInternalTheme } from '../../core/theming';
-import Button from '../Button/Button';
-import IconButton from '../IconButton/IconButton';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import Menu from '../Menu/Menu';
-import Text from '../Typography/Text';
+import Button from '@/components/Button/Button';
+import IconButton from '@/components/IconButton/IconButton';
+import MaterialCommunityIcon from '@/components/MaterialCommunityIcon';
+import Menu from '@/components/Menu/Menu';
+import Text from '@/components/Typography/Text';
+import { useInternalTheme } from '@/core/theming';
 
 export type Props = React.ComponentPropsWithRef<typeof View> &
   PaginationControlsProps &

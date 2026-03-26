@@ -8,12 +8,12 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import type { ThemeProp } from 'src/types';
+import type { IconSource } from '@/components/Icon';
+import { useInternalTheme } from '@/core/theming';
+import type { ThemeProp } from '@/types';
 
 import SegmentedButtonItem from './SegmentedButtonItem';
 import { getDisabledSegmentedButtonStyle } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { IconSource } from '../Icon';
 
 type ConditionalValue<T extends string = string> =
   | {

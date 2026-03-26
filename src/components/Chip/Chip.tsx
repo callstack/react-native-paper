@@ -16,19 +16,20 @@ import {
 
 import useLatestCallback from 'use-latest-callback';
 
-import { ChipAvatarProps, getChipColors } from './helpers';
-import { useInternalTheme } from '../../core/theming';
-import { white } from '../../styles/themes/v2/colors';
-import type { $Omit, EllipsizeProp, ThemeProp } from '../../types';
-import hasTouchHandler from '../../utils/hasTouchHandler';
-import type { IconSource } from '../Icon';
-import Icon from '../Icon';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import Surface from '../Surface';
+import Icon from '@/components/Icon';
+import MaterialCommunityIcon from '@/components/MaterialCommunityIcon';
+import Surface from '@/components/Surface';
 import TouchableRipple, {
   Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
+} from '@/components/TouchableRipple/TouchableRipple';
+import Text from '@/components/Typography/Text';
+import { useInternalTheme } from '@/core/theming';
+import { white } from '@/styles/themes/v2/colors';
+import type { $Omit, EllipsizeProp, ThemeProp } from '@/types';
+import hasTouchHandler from '@/utils/hasTouchHandler';
+
+import { ChipAvatarProps, getChipColors } from './helpers';
+import type { IconSource } from '../Icon';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**

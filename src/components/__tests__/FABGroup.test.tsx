@@ -4,7 +4,8 @@ import { Animated } from 'react-native';
 import { act, fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
 
-import { getTheme } from '../../core/theming';
+import { getTheme } from '@/core/theming';
+
 import FAB from '../FAB';
 import { getFABGroupColors } from '../FAB/utils';
 

@@ -9,15 +9,16 @@ import {
   ColorValue,
 } from 'react-native';
 
+import ActivityIndicator from '@/components/ActivityIndicator';
+import CrossFadeIcon from '@/components/CrossFadeIcon';
+import Icon, { IconSource } from '@/components/Icon';
+import Surface from '@/components/Surface';
+import TouchableRipple from '@/components/TouchableRipple/TouchableRipple';
+import { useInternalTheme } from '@/core/theming';
+import type { $RemoveChildren, ThemeProp } from '@/types';
+import { forwardRef } from '@/utils/forwardRef';
+
 import { getIconButtonColor } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
-import ActivityIndicator from '../ActivityIndicator';
-import CrossFadeIcon from '../CrossFadeIcon';
-import Icon, { IconSource } from '../Icon';
-import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
 const PADDING = 8;
 

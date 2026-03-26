@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 
 import { act, fireEvent, render } from '@testing-library/react-native';
 
-import RadioButton from '../../RadioButton';
+import RadioButton from '@/components/RadioButton';
 
 it('renders unchecked', () => {
   const tree = render(

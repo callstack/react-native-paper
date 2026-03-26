@@ -21,14 +21,15 @@ import {
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import Portal from '@/components/Portal/Portal';
+import Surface from '@/components/Surface';
+import { useInternalTheme } from '@/core/theming';
+import type { MD3Elevation, ThemeProp } from '@/types';
+import { ElevationLevels } from '@/types';
+import { addEventListener } from '@/utils/addEventListener';
+import { BackHandler } from '@/utils/BackHandler/BackHandler';
+
 import MenuItem from './MenuItem';
-import { useInternalTheme } from '../../core/theming';
-import type { MD3Elevation, ThemeProp } from '../../types';
-import { ElevationLevels } from '../../types';
-import { addEventListener } from '../../utils/addEventListener';
-import { BackHandler } from '../../utils/BackHandler/BackHandler';
-import Portal from '../Portal/Portal';
-import Surface from '../Surface';
 
 export type Props = {
   /**

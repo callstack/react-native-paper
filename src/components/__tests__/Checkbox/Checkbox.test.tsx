@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { render } from '@testing-library/react-native';
 
-import Checkbox from '../../Checkbox';
+import Checkbox from '@/components/Checkbox';
 
 it('renders checked Checkbox with onPress', () => {
   const tree = render(

@@ -9,8 +9,8 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
+import { useInternalTheme } from '@/core/theming';
+import type { ThemeProp } from '@/types';
 
 const defaultSize = 64;
 

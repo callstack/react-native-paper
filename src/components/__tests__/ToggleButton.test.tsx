@@ -4,8 +4,9 @@ import { Animated } from 'react-native';
 import { act, render } from '@testing-library/react-native';
 import color from 'color';
 
-import { getTheme } from '../../core/theming';
-import { tokens } from '../../styles/themes/v3/tokens';
+import { getTheme } from '@/core/theming';
+import { tokens } from '@/styles/themes/v3/tokens';
+
 import ToggleButton from '../ToggleButton';
 import { getToggleButtonColor } from '../ToggleButton/utils';
 

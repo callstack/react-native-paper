@@ -4,21 +4,21 @@ import { Animated, Platform } from 'react-native';
 import { act, render } from '@testing-library/react-native';
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 
-import PaperProvider from '../../../core/PaperProvider';
-import { getTheme } from '../../../core/theming';
-import overlay from '../../../styles/overlay';
-import { tokens } from '../../../styles/themes/v3/tokens';
-import Appbar from '../../Appbar';
+import Appbar from '@/components/Appbar';
 import {
   getAppbarBackgroundColor,
   getAppbarBorders,
   modeTextVariant,
   renderAppbarContent as utilRenderAppbarContent,
-} from '../../Appbar/utils';
-import Menu from '../../Menu/Menu';
-import Searchbar from '../../Searchbar';
-import Tooltip from '../../Tooltip/Tooltip';
-import Text from '../../Typography/Text';
+} from '@/components/Appbar/utils';
+import Menu from '@/components/Menu/Menu';
+import Searchbar from '@/components/Searchbar';
+import Tooltip from '@/components/Tooltip/Tooltip';
+import Text from '@/components/Typography/Text';
+import PaperProvider from '@/core/PaperProvider';
+import { getTheme } from '@/core/theming';
+import overlay from '@/styles/overlay';
+import { tokens } from '@/styles/themes/v3/tokens';
 
 const renderAppbarContent = utilRenderAppbarContent as (
   props: Parameters<typeof utilRenderAppbarContent>[0]

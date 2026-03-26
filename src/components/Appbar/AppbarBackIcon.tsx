@@ -18,7 +18,7 @@ const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
       ]}
     >
       <Image
-        source={require('../../assets/back-chevron.png')}
+        source={require('@/assets/back-chevron.png')}
         style={[
           styles.icon,
           { tintColor: color, width: iosIconSize, height: iosIconSize },

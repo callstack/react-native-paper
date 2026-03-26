@@ -3,11 +3,11 @@ import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import color from 'color';
 
-import { useInternalTheme } from '../../core/theming';
-import { MD3Colors } from '../../styles/themes/v3/tokens';
-import type { ThemeProp } from '../../types';
-import Divider from '../Divider';
-import Text from '../Typography/Text';
+import Divider from '@/components/Divider';
+import Text from '@/components/Typography/Text';
+import { useInternalTheme } from '@/core/theming';
+import { MD3Colors } from '@/styles/themes/v3/tokens';
+import type { ThemeProp } from '@/types';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**

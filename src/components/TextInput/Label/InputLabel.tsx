@@ -8,7 +8,8 @@ import {
   View,
 } from 'react-native';
 
-import AnimatedText from '../../Typography/AnimatedText';
+import AnimatedText from '@/components/Typography/AnimatedText';
+
 import { getConstants } from '../helpers';
 import type { InputLabelProps } from '../types';
 

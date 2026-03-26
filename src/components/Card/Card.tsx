@@ -11,16 +11,17 @@ import {
 
 import useLatestCallback from 'use-latest-callback';
 
+import { useInternalTheme } from '@/core/theming';
+import type { $Omit, ThemeProp } from '@/types';
+import { forwardRef } from '@/utils/forwardRef';
+import hasTouchHandler from '@/utils/hasTouchHandler';
+import { splitStyles } from '@/utils/splitStyles';
+
 import CardActions from './CardActions';
 import CardContent from './CardContent';
 import CardCover from './CardCover';
 import CardTitle from './CardTitle';
 import { getCardColors } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $Omit, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
-import hasTouchHandler from '../../utils/hasTouchHandler';
-import { splitStyles } from '../../utils/splitStyles';
 import Surface from '../Surface';
 
 type CardComposition = {

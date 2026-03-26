@@ -15,16 +15,17 @@ import {
 
 import color from 'color';
 
+import { useInternalTheme } from '@/core/theming';
+import type { $Omit, ThemeProp } from '@/types';
+import { forwardRef } from '@/utils/forwardRef';
+import hasTouchHandler from '@/utils/hasTouchHandler';
+import { splitStyles } from '@/utils/splitStyles';
+
 import {
   ButtonMode,
   getButtonColors,
   getButtonTouchableRippleStyle,
 } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $Omit, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
-import hasTouchHandler from '../../utils/hasTouchHandler';
-import { splitStyles } from '../../utils/splitStyles';
 import ActivityIndicator from '../ActivityIndicator';
 import Icon, { IconSource } from '../Icon';
 import Surface from '../Surface';

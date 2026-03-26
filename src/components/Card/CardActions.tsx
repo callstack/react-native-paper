@@ -3,8 +3,9 @@ import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import type { ThemeProp } from 'src/types';
 
+import { useInternalTheme } from '@/core/theming';
+
 import { CardActionChildProps } from './utils';
-import { useInternalTheme } from '../../core/theming';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**

@@ -35,7 +35,7 @@
             "position": "before"
           },
           {
-            "pattern": "@src/**",
+            "pattern": "@/**",
             "group": "internal"
           }
         ],
@@ -71,7 +71,8 @@
     "import/resolver": {
       "node": {
         "extensions": [".js", ".ts", ".tsx"]
-      }
+      },
+      "babel-module": {}
     }
   }
 }

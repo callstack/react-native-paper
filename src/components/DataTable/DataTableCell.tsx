@@ -7,9 +7,9 @@ import {
   GestureResponderEvent,
 } from 'react-native';
 
-import type { $RemoveChildren } from '../../types';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
+import TouchableRipple from '@/components/TouchableRipple/TouchableRipple';
+import Text from '@/components/Typography/Text';
+import type { $RemoveChildren } from '@/types';
 
 export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render } from '@testing-library/react-native';
 
-import DrawerCollapsedItem from '../../Drawer/DrawerCollapsedItem';
+import DrawerCollapsedItem from '@/components/Drawer/DrawerCollapsedItem';
 
 describe('DrawerCollapsedItem', () => {
   it('should have regular outline if label is specified', () => {

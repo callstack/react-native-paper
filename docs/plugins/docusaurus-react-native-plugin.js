@@ -8,6 +8,7 @@ module.exports = function () {
         mergeStrategy: { 'resolve.extensions': 'prepend' },
         resolve: {
           alias: {
+            '@': path.resolve(__dirname, '../../src'),
             react: path.resolve('node_modules/react'),
             'react-native$': 'react-native-web',
             'react-native-paper': path.resolve('../src'),

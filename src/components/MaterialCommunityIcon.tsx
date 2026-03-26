@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ComponentProps } from 'react';
 import { StyleSheet, Text, Platform, Role, ViewProps } from 'react-native';
 
-import { black } from '../styles/themes/v2/colors';
+import { black } from '@/styles/themes/v2/colors';
 
 export type IconProps = {
   name: ComponentProps<typeof MaterialCommunityIcons>['name'];

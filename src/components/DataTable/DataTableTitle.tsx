@@ -13,10 +13,10 @@ import {
 
 import color from 'color';
 
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import Text from '../Typography/Text';
+import MaterialCommunityIcon from '@/components/MaterialCommunityIcon';
+import Text from '@/components/Typography/Text';
+import { useInternalTheme } from '@/core/theming';
+import type { ThemeProp } from '@/types';
 
 export type Props = React.ComponentPropsWithRef<typeof Pressable> & {
   /**

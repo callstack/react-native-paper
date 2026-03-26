@@ -11,6 +11,10 @@ import {
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useInternalTheme } from '@/core/theming';
+import shadow from '@/styles/shadow';
+import type { ThemeProp } from '@/types';
+
 import { Appbar } from './Appbar';
 import {
   DEFAULT_APPBAR_HEIGHT,
@@ -18,9 +22,6 @@ import {
   modeAppbarHeight,
   getAppbarBorders,
 } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import shadow from '../../styles/shadow';
-import type { ThemeProp } from '../../types';
 
 export type Props = Omit<
   React.ComponentProps<typeof Appbar>,

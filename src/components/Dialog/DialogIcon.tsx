@@ -3,8 +3,8 @@ import { StyleSheet, View } from 'react-native';
 
 import type { ThemeProp } from 'src/types';
 
-import { useInternalTheme } from '../../core/theming';
-import Icon, { IconSource } from '../Icon';
+import Icon, { IconSource } from '@/components/Icon';
+import { useInternalTheme } from '@/core/theming';
 
 export type Props = {
   /**

@@ -4,12 +4,12 @@ import { Animated, StyleSheet, Text } from 'react-native';
 import { act, render } from '@testing-library/react-native';
 import color from 'color';
 
-import { getTheme } from '../../../core/theming';
-import { black, white } from '../../../styles/themes/v2/colors';
-import { MD3Colors } from '../../../styles/themes/v3/tokens';
-import Button from '../../Button/Button';
-import Card from '../../Card/Card';
-import { getCardColors, getCardCoverStyle } from '../../Card/utils';
+import Button from '@/components/Button/Button';
+import Card from '@/components/Card/Card';
+import { getCardColors, getCardCoverStyle } from '@/components/Card/utils';
+import { getTheme } from '@/core/theming';
+import { black, white } from '@/styles/themes/v2/colors';
+import { MD3Colors } from '@/styles/themes/v3/tokens';
 
 const styles = StyleSheet.create({
   customBorderRadius: {

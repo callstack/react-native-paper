@@ -14,16 +14,17 @@ import {
   PressableAndroidRippleConfig,
 } from 'react-native';
 
+import MaterialCommunityIcon from '@/components/MaterialCommunityIcon';
+import TouchableRipple, {
+  Props as TouchableRippleProps,
+} from '@/components/TouchableRipple/TouchableRipple';
+import Text from '@/components/Typography/Text';
+import { useInternalTheme } from '@/core/theming';
+import type { ThemeProp } from '@/types';
+
 import { ListAccordionGroupContext } from './ListAccordionGroup';
 import type { ListChildProps, Style } from './utils';
 import { getAccordionColors, getLeftStyles } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import MaterialCommunityIcon from '../MaterialCommunityIcon';
-import TouchableRipple, {
-  Props as TouchableRippleProps,
-} from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
 
 export type Props = {
   /**

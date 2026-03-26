@@ -2,9 +2,9 @@ import { StyleSheet, type ViewStyle } from 'react-native';
 
 import color from 'color';
 
-import { black, white } from '../../styles/themes/v2/colors';
-import type { InternalTheme } from '../../types';
-import { splitStyles } from '../../utils/splitStyles';
+import { black, white } from '@/styles/themes/v2/colors';
+import type { InternalTheme } from '@/types';
+import { splitStyles } from '@/utils/splitStyles';
 
 export type ButtonMode =
   | 'text'

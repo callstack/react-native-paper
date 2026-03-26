@@ -11,16 +11,17 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import ActivityIndicator from '@/components/ActivityIndicator';
+import CrossFadeIcon from '@/components/CrossFadeIcon';
+import Icon, { IconSource } from '@/components/Icon';
+import Surface from '@/components/Surface';
+import TouchableRipple from '@/components/TouchableRipple/TouchableRipple';
+import Text from '@/components/Typography/Text';
+import { useInternalTheme } from '@/core/theming';
+import type { $Omit, $RemoveChildren, ThemeProp } from '@/types';
+import { forwardRef } from '@/utils/forwardRef';
+
 import { getExtendedFabStyle, getFABColors, getFabStyle } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
-import ActivityIndicator from '../ActivityIndicator';
-import CrossFadeIcon from '../CrossFadeIcon';
-import Icon, { IconSource } from '../Icon';
-import Surface from '../Surface';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
 
 type FABSize = 'small' | 'medium' | 'large';
 

@@ -8,11 +8,12 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import type { IconSource } from '@/components/Icon';
+import IconButton from '@/components/IconButton/IconButton';
+import { useInternalTheme } from '@/core/theming';
+import type { $Omit, ThemeProp } from '@/types';
+
 import { getIconColor } from './utils';
-import { useInternalTheme } from '../../../core/theming';
-import type { $Omit, ThemeProp } from '../../../types';
-import type { IconSource } from '../../Icon';
-import IconButton from '../../IconButton/IconButton';
 import { ICON_SIZE } from '../constants';
 import { getConstants } from '../helpers';
 

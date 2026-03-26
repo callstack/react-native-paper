@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 
-import DrawerSection from '../../Drawer/DrawerSection';
+import DrawerSection from '@/components/Drawer/DrawerSection';
 
 describe('DrawerSection', () => {
   it('renders properly', () => {

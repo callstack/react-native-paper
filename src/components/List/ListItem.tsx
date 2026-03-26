@@ -12,12 +12,13 @@ import {
 
 import color from 'color';
 
+import TouchableRipple from '@/components/TouchableRipple/TouchableRipple';
+import Text from '@/components/Typography/Text';
+import { useInternalTheme } from '@/core/theming';
+import type { $RemoveChildren, EllipsizeProp, ThemeProp } from '@/types';
+import { forwardRef } from '@/utils/forwardRef';
+
 import { Style, getLeftStyles, getRightStyles } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import type { $RemoveChildren, EllipsizeProp, ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
-import TouchableRipple from '../TouchableRipple/TouchableRipple';
-import Text from '../Typography/Text';
 
 type Title =
   | React.ReactNode

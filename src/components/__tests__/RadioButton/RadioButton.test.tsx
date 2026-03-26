@@ -2,8 +2,8 @@ import React from 'react';
 
 import { render } from '@testing-library/react-native';
 
-import RadioButton from '../../RadioButton';
-import { RadioButtonContext } from '../../RadioButton/RadioButtonGroup';
+import RadioButton from '@/components/RadioButton';
+import { RadioButtonContext } from '@/components/RadioButton/RadioButtonGroup';
 
 describe('RadioButton', () => {
   describe('on default platform', () => {

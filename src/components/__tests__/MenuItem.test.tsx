@@ -3,8 +3,9 @@ import * as React from 'react';
 import { render } from '@testing-library/react-native';
 import color from 'color';
 
-import { getTheme } from '../../core/theming';
-import { black, white } from '../../styles/themes/v2/colors';
+import { getTheme } from '@/core/theming';
+import { black, white } from '@/styles/themes/v2/colors';
+
 import Menu from '../Menu/Menu';
 import { getMenuItemColor } from '../Menu/utils';
 

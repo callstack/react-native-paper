@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native';
 
 import { render } from '@testing-library/react-native';
 
-import { red500 } from '../../../styles/themes/v2/colors';
-import Caption from '../../Typography/v2/Caption';
+import Caption from '@/components/Typography/v2/Caption';
+import { red500 } from '@/styles/themes/v2/colors';
 
 const style = StyleSheet.create({
   caption: {

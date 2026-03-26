@@ -13,8 +13,9 @@ import {
   MD2DarkTheme,
   MD3LightTheme,
   MD3DarkTheme,
-} from '../../styles/themes';
-import type { ThemeProp } from '../../types';
+} from '@/styles/themes';
+import type { ThemeProp } from '@/types';
+
 import PaperProvider from '../PaperProvider';
 import { useTheme } from '../theming';
 

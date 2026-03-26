@@ -6,7 +6,8 @@ import { Animated, StyleSheet } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import { act } from 'react-test-renderer';
 
-import { MD3Colors } from '../../styles/themes/v3/tokens';
+import { MD3Colors } from '@/styles/themes/v3/tokens';
+
 import AnimatedFAB from '../FAB/AnimatedFAB';
 
 const styles = StyleSheet.create({

@@ -7,7 +7,8 @@
       ],
       "react-native-paper/react-navigation": [
         "./src/react-navigation"
-      ]
+      ],
+      "@/*": ["src/*"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

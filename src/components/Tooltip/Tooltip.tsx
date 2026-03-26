@@ -11,11 +11,12 @@ import {
 
 import type { ThemeProp } from 'src/types';
 
+import Portal from '@/components/Portal/Portal';
+import Text from '@/components/Typography/Text';
+import { useInternalTheme } from '@/core/theming';
+import { addEventListener } from '@/utils/addEventListener';
+
 import { getTooltipPosition, Measurement, TooltipChildProps } from './utils';
-import { useInternalTheme } from '../../core/theming';
-import { addEventListener } from '../../utils/addEventListener';
-import Portal from '../Portal/Portal';
-import Text from '../Typography/Text';
 
 export type Props = {
   /**

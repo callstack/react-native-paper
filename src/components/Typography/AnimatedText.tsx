@@ -9,10 +9,11 @@ import {
   Text,
 } from 'react-native';
 
+import { useInternalTheme } from '@/core/theming';
+import type { ThemeProp } from '@/types';
+import { forwardRef } from '@/utils/forwardRef';
+
 import type { VariantProp } from './types';
-import { useInternalTheme } from '../../core/theming';
-import type { ThemeProp } from '../../types';
-import { forwardRef } from '../../utils/forwardRef';
 
 type Props<T> = React.ComponentPropsWithRef<typeof Animated.Text> & {
   /**
