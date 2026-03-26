@@ -209,6 +209,7 @@ exports[`renders menu with content styles 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      pointerEvents="auto"
       style={
         {
           "bottom": 0,
@@ -933,6 +934,7 @@ exports[`renders visible menu 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      pointerEvents="auto"
       style={
         {
           "bottom": 0,
