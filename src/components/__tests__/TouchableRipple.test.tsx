@@ -29,6 +29,54 @@ describe('TouchableRipple', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
+  it('debounces onPress when debounce prop is provided', () => {
+    jest.useFakeTimers();
+    const onPress = jest.fn();
+    const { getByText } = render(
+      <TouchableRipple onPress={onPress} debounce={300}>
+        <Text>Button</Text>
+      </TouchableRipple>
+    );
+
+    const button = getByText('Button');
+    
+    // Press multiple times rapidly
+    fireEvent.press(button);
+    fireEvent.press(button);
+    fireEvent.press(button);
+
+    // Should only be called once due to debouncing
+    expect(onPress).toHaveBeenCalledTimes(1);
+
+    // Fast forward time past debounce window
+    jest.advanceTimersByTime(400);
+
+    // Now pressing should work again
+    fireEvent.press(button);
+    expect(onPress).toHaveBeenCalledTimes(2);
+
+    jest.useRealTimers();
+  });
+
+  it('does not debounce when debounce is not provided', () => {
+    const onPress = jest.fn();
+    const { getByText } = render(
+      <TouchableRipple onPress={onPress}>
+        <Text>Button</Text>
+      </TouchableRipple>
+    );
+
+    const button = getByText('Button');
+    
+    // Press multiple times rapidly
+    fireEvent.press(button);
+    fireEvent.press(button);
+    fireEvent.press(button);
+
+    // Should be called for each press
+    expect(onPress).toHaveBeenCalledTimes(3);
+  });
+
   it('disables the button when disabled prop is true', () => {
     const onPress = jest.fn();
     const { getByText } = render(
