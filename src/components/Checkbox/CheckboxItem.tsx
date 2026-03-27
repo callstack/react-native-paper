@@ -15,6 +15,7 @@ import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp, MD3TypescaleKey } from '../../types';
+import { IconSource } from '../Icon';
 import TouchableRipple, {
   Props as TouchableRippleProps,
 } from '../TouchableRipple/TouchableRipple';
@@ -100,6 +101,10 @@ export type Props = {
    */
   testID?: string;
   /**
+   * custom icon.
+   */
+  icon?: IconSource;
+  /**
    * Checkbox control position.
    */
   position?: 'leading' | 'trailing';
@@ -142,6 +147,7 @@ const CheckboxItem = ({
   labelStyle,
   theme: themeOverrides,
   testID,
+  icon,
   mode,
   position = 'trailing',
   accessibilityLabel = label,
@@ -154,7 +160,7 @@ const CheckboxItem = ({
   ...props
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const checkboxProps = { ...props, status, theme, disabled };
+  const checkboxProps = { ...props, status, theme, disabled, icon };
   const isLeading = position === 'leading';
   let checkbox;
 
