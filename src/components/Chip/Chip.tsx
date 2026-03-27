@@ -26,6 +26,7 @@ import Icon from '../Icon';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 import Surface from '../Surface';
 import TouchableRipple, {
+  MouseEventType,
   Props as TouchableRippleProps,
 } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
@@ -99,10 +100,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   onPress?: (e: GestureResponderEvent) => void;
   /**
-   * Function to execute on long press.
-   */
-  onLongPress?: () => void;
-  /**
    * Function to execute as soon as the touchable element is pressed and invoked even before onPress.
    */
   onPressIn?: (e: GestureResponderEvent) => void;
@@ -110,6 +107,19 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Function to execute as soon as the touch is released even before onPress.
    */
   onPressOut?: (e: GestureResponderEvent) => void;
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: (e: GestureResponderEvent) => void;
+  /**
+   * Called when the hover is activated to provide visual feedback.
+   */
+  onHoverIn?: (e: MouseEventType) => void;
+
+  /**
+   * Called when the hover is deactivated to undo visual feedback.
+   */
+  onHoverOut?: (e: MouseEventType) => void;
   /**
    * Function to execute on close button press. The close button appears only when this prop is specified.
    */
@@ -190,9 +200,11 @@ const Chip = ({
   accessibilityRole = 'button',
   closeIconAccessibilityLabel = 'Close',
   onPress,
-  onLongPress,
-  onPressOut,
   onPressIn,
+  onPressOut,
+  onLongPress,
+  onHoverIn,
+  onHoverOut,
   delayLongPress,
   onClose,
   closeIcon,
@@ -229,6 +241,7 @@ const Chip = ({
   const isOutlined = mode === 'outlined';
 
   const handlePressIn = useLatestCallback((e: GestureResponderEvent) => {
+    onPressIn?.(e);
     const { scale } = theme.animation;
     onPressIn?.(e);
     Animated.timing(elevation, {
@@ -240,6 +253,7 @@ const Chip = ({
   });
 
   const handlePressOut = useLatestCallback((e: GestureResponderEvent) => {
+    onPressOut?.(e);
     const { scale } = theme.animation;
     onPressOut?.(e);
     Animated.timing(elevation, {
@@ -326,6 +340,8 @@ const Chip = ({
         onLongPress={onLongPress}
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
         onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
+        onHoverIn={onHoverIn}
+        onHoverOut={onHoverOut}
         delayLongPress={delayLongPress}
         rippleColor={rippleColor}
         disabled={disabled}
