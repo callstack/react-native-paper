@@ -182,6 +182,21 @@ html[data-theme='light'] .gallery-dark {
   }
 }
 
+[data-theme='dark'] .icons-list-searchbar {
+  background-color: var(--ifm-color-emphasis-200);
+  color: var(--ifm-font-color-base);
+}
+
+[data-theme='dark'] .icons-list-searchbar::placeholder {
+  color: var(--ifm-color-content-secondary);
+  opacity: 0.6;
+}
+
+[data-theme='dark'] .icons-list-searchbar:focus,
+[data-theme='dark'] .icons-list-searchbar:hover {
+  background-color: var(--ifm-color-emphasis-300);
+}
+
 @font-face {
   font-family: 'MaterialDesignIcons';
   src: url('../../node_modules/@react-native-vector-icons/material-design-icons/fonts/MaterialDesignIcons.ttf') format('truetype');
