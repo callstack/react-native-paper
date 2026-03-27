@@ -177,7 +177,7 @@ const RadioButtonItem = ({
   let radioButton: any;
 
   if (mode === 'android') {
-    radioButton = <RadioButtonAndroid {...radioButtonProps} />;
+    radioButton = <RadioButtonAndroid {...radioButtonProps} aria-hidden />;
   } else if (mode === 'ios') {
     radioButton = <RadioButtonIOS {...radioButtonProps} />;
   } else {
