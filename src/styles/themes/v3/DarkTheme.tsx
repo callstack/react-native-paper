@@ -41,7 +41,7 @@ export const MD3DarkTheme: MD3Theme = {
       .rgb()
       .string(),
     onError: palette.error20,
-    onErrorContainer: palette.error80,
+    onErrorContainer: palette.error90,
     onBackground: palette.neutral90,
     outline: palette.neutralVariant60,
     outlineVariant: palette.neutralVariant30,

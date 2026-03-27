@@ -121,7 +121,7 @@ exports[`renders segmented button 1`] = `
                     "textAlign": "center",
                   },
                   {
-                    "color": "rgba(29, 25, 43, 1)",
+                    "color": "rgba(74, 68, 88, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,
                     "fontWeight": "500",

@@ -145,7 +145,7 @@ exports[`renders FAB with custom size prop 1`] = `
               style={
                 [
                   {
-                    "color": "rgba(33, 0, 93, 1)",
+                    "color": "rgba(79, 55, 139, 1)",
                     "fontSize": 50,
                   },
                   [
@@ -493,7 +493,7 @@ exports[`renders default FAB 1`] = `
               style={
                 [
                   {
-                    "color": "rgba(33, 0, 93, 1)",
+                    "color": "rgba(79, 55, 139, 1)",
                     "fontSize": 24,
                   },
                   [
@@ -842,7 +842,7 @@ exports[`renders extended FAB 1`] = `
               style={
                 [
                   {
-                    "color": "rgba(33, 0, 93, 1)",
+                    "color": "rgba(79, 55, 139, 1)",
                     "fontSize": 24,
                   },
                   [
@@ -890,7 +890,7 @@ exports[`renders extended FAB 1`] = `
                   },
                   false,
                   {
-                    "color": "rgba(33, 0, 93, 1)",
+                    "color": "rgba(79, 55, 139, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,
                     "fontWeight": "500",
@@ -1056,7 +1056,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
               style={
                 [
                   {
-                    "color": "rgba(33, 0, 93, 1)",
+                    "color": "rgba(79, 55, 139, 1)",
                     "fontSize": 50,
                   },
                   [
@@ -1104,7 +1104,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
                   },
                   false,
                   {
-                    "color": "rgba(33, 0, 93, 1)",
+                    "color": "rgba(79, 55, 139, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,
                     "fontWeight": "500",
@@ -1270,7 +1270,7 @@ exports[`renders large FAB 1`] = `
               style={
                 [
                   {
-                    "color": "rgba(33, 0, 93, 1)",
+                    "color": "rgba(79, 55, 139, 1)",
                     "fontSize": 36,
                   },
                   [
@@ -1500,7 +1500,7 @@ exports[`renders loading FAB 1`] = `
                         collapsable={false}
                         style={
                           {
-                            "borderColor": "rgba(33, 0, 93, 1)",
+                            "borderColor": "rgba(79, 55, 139, 1)",
                             "borderRadius": 9,
                             "borderWidth": 1.8,
                             "height": 18,
@@ -1583,7 +1583,7 @@ exports[`renders loading FAB 1`] = `
                         collapsable={false}
                         style={
                           {
-                            "borderColor": "rgba(33, 0, 93, 1)",
+                            "borderColor": "rgba(79, 55, 139, 1)",
                             "borderRadius": 9,
                             "borderWidth": 1.8,
                             "height": 18,
@@ -1805,7 +1805,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
                         collapsable={false}
                         style={
                           {
-                            "borderColor": "rgba(33, 0, 93, 1)",
+                            "borderColor": "rgba(79, 55, 139, 1)",
                             "borderRadius": 25,
                             "borderWidth": 5,
                             "height": 50,
@@ -1888,7 +1888,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
                         collapsable={false}
                         style={
                           {
-                            "borderColor": "rgba(33, 0, 93, 1)",
+                            "borderColor": "rgba(79, 55, 139, 1)",
                             "borderRadius": 25,
                             "borderWidth": 5,
                             "height": 50,
@@ -2054,7 +2054,7 @@ exports[`renders not visible FAB 1`] = `
               style={
                 [
                   {
-                    "color": "rgba(33, 0, 93, 1)",
+                    "color": "rgba(79, 55, 139, 1)",
                     "fontSize": 24,
                   },
                   [
@@ -2228,7 +2228,7 @@ exports[`renders small FAB 1`] = `
               style={
                 [
                   {
-                    "color": "rgba(33, 0, 93, 1)",
+                    "color": "rgba(79, 55, 139, 1)",
                     "fontSize": 24,
                   },
                   [
@@ -2402,7 +2402,7 @@ exports[`renders visible FAB 1`] = `
               style={
                 [
                   {
-                    "color": "rgba(33, 0, 93, 1)",
+                    "color": "rgba(79, 55, 139, 1)",
                     "fontSize": 24,
                   },
                   [

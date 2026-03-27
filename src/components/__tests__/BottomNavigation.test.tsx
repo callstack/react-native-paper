@@ -481,7 +481,7 @@ describe('getActiveTintColor', () => {
   it.each`
     activeColor  | defaultColor | useV3    | expected
     ${'#FBF7DB'} | ${'#fff'}    | ${true}  | ${'#FBF7DB'}
-    ${undefined} | ${'#fff'}    | ${true}  | ${MD3Colors.secondary10}
+    ${undefined} | ${'#fff'}    | ${true}  | ${MD3Colors.secondary30}
     ${undefined} | ${'#fff'}    | ${false} | ${'#fff'}
   `(
     'returns $expected when activeColor: $activeColor and useV3: $useV3',
