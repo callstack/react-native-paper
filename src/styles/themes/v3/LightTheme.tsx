@@ -28,11 +28,11 @@ export const MD3LightTheme: MD3Theme = {
     error: palette.error40,
     errorContainer: palette.error90,
     onPrimary: palette.primary100,
-    onPrimaryContainer: palette.primary10,
+    onPrimaryContainer: palette.primary30,
     onSecondary: palette.secondary100,
-    onSecondaryContainer: palette.secondary10,
+    onSecondaryContainer: palette.secondary30,
     onTertiary: palette.tertiary100,
-    onTertiaryContainer: palette.tertiary10,
+    onTertiaryContainer: palette.tertiary30,
     onSurface: palette.neutral10,
     onSurfaceVariant: palette.neutralVariant30,
     onSurfaceDisabled: color(palette.neutral10)
@@ -40,7 +40,7 @@ export const MD3LightTheme: MD3Theme = {
       .rgb()
       .string(),
     onError: palette.error100,
-    onErrorContainer: palette.error10,
+    onErrorContainer: palette.error30,
     onBackground: palette.neutral10,
     outline: palette.neutralVariant50,
     outlineVariant: palette.neutralVariant80,

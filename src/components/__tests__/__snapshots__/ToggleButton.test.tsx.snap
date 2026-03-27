@@ -5,7 +5,7 @@ exports[`renders disabled toggle button 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(29, 25, 43, 0.12)",
+      "backgroundColor": "rgba(74, 68, 88, 0.12)",
       "borderRadius": 4,
       "height": 42,
       "margin": 0,
@@ -25,7 +25,7 @@ exports[`renders disabled toggle button 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(29, 25, 43, 0.12)",
+        "backgroundColor": "rgba(74, 68, 88, 0.12)",
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 4,
         "borderWidth": 0,
@@ -144,7 +144,7 @@ exports[`renders toggle button 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(29, 25, 43, 0.12)",
+      "backgroundColor": "rgba(74, 68, 88, 0.12)",
       "borderRadius": 4,
       "height": 42,
       "margin": 0,
@@ -164,7 +164,7 @@ exports[`renders toggle button 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(29, 25, 43, 0.12)",
+        "backgroundColor": "rgba(74, 68, 88, 0.12)",
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 4,
         "borderWidth": 0,

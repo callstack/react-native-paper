@@ -251,7 +251,7 @@ exports[`renders active DrawerItem 1`] = `
           style={
             [
               {
-                "color": "rgba(29, 25, 43, 1)",
+                "color": "rgba(74, 68, 88, 1)",
                 "fontSize": 24,
               },
               [
@@ -297,7 +297,7 @@ exports[`renders active DrawerItem 1`] = `
                     "marginRight": 32,
                   },
                   {
-                    "color": "rgba(29, 25, 43, 1)",
+                    "color": "rgba(74, 68, 88, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,
                     "fontWeight": "500",

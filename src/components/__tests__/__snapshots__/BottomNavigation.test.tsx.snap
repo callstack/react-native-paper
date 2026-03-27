@@ -908,7 +908,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -1102,7 +1102,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -1296,7 +1296,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -1649,7 +1649,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -1843,7 +1843,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -2037,7 +2037,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -2521,7 +2521,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -2835,7 +2835,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -3149,7 +3149,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -3463,7 +3463,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -3777,7 +3777,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -4255,7 +4255,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -4518,7 +4518,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -4781,7 +4781,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -5044,7 +5044,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -5307,7 +5307,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -9469,7 +9469,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -9783,7 +9783,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -10097,7 +10097,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -10575,7 +10575,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -10838,7 +10838,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -11101,7 +11101,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -11364,7 +11364,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
@@ -11627,7 +11627,7 @@ exports[`renders shifting bottom navigation 1`] = `
                     style={
                       [
                         {
-                          "color": "rgba(29, 25, 43, 1)",
+                          "color": "rgba(74, 68, 88, 1)",
                           "fontSize": 24,
                         },
                         [
