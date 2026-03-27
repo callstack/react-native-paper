@@ -59,10 +59,14 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   selected?: boolean;
   /**
    * Whether to style the chip color as selected.
-   * Note: With theme version 3 `selectedColor` doesn't apply to the `icon`.
+   * Note: With theme version 3 `selectedColor` doesn't apply to the `icon`. Only text color is affected.
    *       If you want specify custom color for the `icon`, render your own `Icon` component.
    */
   selectedColor?: string;
+  /**
+   * Background color for the selected chip.
+   */
+  selectedBackgroundColor?: string;
   /**
    * @supported Available in v5.x with theme version 3
    * Whether to display overlay on selected chip
@@ -139,6 +143,29 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   hitSlop?: TouchableRippleProps['hitSlop'];
   /**
    * @optional
+   * Theme object containing styling properties. The following theme properties are used:
+   *
+   * **V3 Theme:**
+   *
+   * - `colors.onSurfaceDisabled` - Text and icon color when disabled
+   * - `colors.onSurfaceVariant` - Text/icon color for outlined mode, disabled border color, overlay mixing
+   * - `colors.outline` - Border color for outlined mode (when not disabled/selected)
+   * - `colors.surface` - Background color for outlined mode
+   * - `colors.secondaryContainer` - Background color for flat mode
+   * - `colors.onSecondaryContainer` - Text/icon color for flat mode, overlay mixing
+   * - `colors.primary` - Icon color when not disabled (for custom icons)
+   *
+   * **V2 Theme:**
+   *
+   * - `colors.disabled` - Text and icon color when disabled
+   * - `colors.text` - Base text and icon color (with alpha applied)
+   * - `colors.surface` - Background color for outlined mode
+   * **Common:**
+   * - `roundness` - Used to calculate default border radius (V3: roundness * 2, V2: roundness * 4)
+   * - `animation.scale` - Used for elevation animation timing
+   * - `fonts.labelLarge` (V3) / `fonts.regular` (V2) - Text typography
+   * - `dark` - Determines color calculations for V2 theme
+   * - `isV3` - Determines which theme version logic to apply
    */
   theme?: ThemeProp;
   /**
@@ -201,6 +228,7 @@ const Chip = ({
   theme: themeOverrides,
   testID = 'chip',
   selectedColor,
+  selectedBackgroundColor: customSelectedBackgroundColor,
   rippleColor: customRippleColor,
   showSelectedOverlay = false,
   showSelectedCheck = true,
@@ -259,22 +287,18 @@ const Chip = ({
     borderRadius = defaultBorderRadius,
   } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
-  const {
-    borderColor,
-    textColor,
-    iconColor,
-    rippleColor,
-    selectedBackgroundColor,
-    backgroundColor,
-  } = getChipColors({
-    isOutlined,
-    theme,
-    selectedColor,
-    showSelectedOverlay,
-    customBackgroundColor,
-    disabled,
-    customRippleColor,
-  });
+  const { borderColor, textColor, iconColor, rippleColor, backgroundColor } =
+    getChipColors({
+      isOutlined,
+      theme,
+      selectedColor,
+      showSelectedOverlay,
+      customBackgroundColor,
+      disabled,
+      customRippleColor,
+      selected,
+      customSelectedBackgroundColor,
+    });
 
   const accessibilityState: AccessibilityState = {
     selected,
@@ -306,7 +330,7 @@ const Chip = ({
           elevation: elevationStyle,
         },
         {
-          backgroundColor: selected ? selectedBackgroundColor : backgroundColor,
+          backgroundColor,
           borderColor,
           borderRadius,
         },

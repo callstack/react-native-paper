@@ -13,6 +13,7 @@ type BaseProps = {
   theme: InternalTheme;
   isOutlined: boolean;
   disabled?: boolean;
+  selected?: boolean;
 };
 
 const getBorderColor = ({
@@ -21,6 +22,7 @@ const getBorderColor = ({
   disabled,
   selectedColor,
   backgroundColor,
+  selected,
 }: BaseProps & { backgroundColor: string; selectedColor?: string }) => {
   const isSelectedColor = selectedColor !== undefined;
 
@@ -34,7 +36,7 @@ const getBorderColor = ({
       return color(theme.colors.onSurfaceVariant).alpha(0.12).rgb().string();
     }
 
-    if (isSelectedColor) {
+    if (isSelectedColor && selected) {
       return color(selectedColor).alpha(0.29).rgb().string();
     }
 
@@ -42,7 +44,7 @@ const getBorderColor = ({
   }
 
   if (isOutlined) {
-    if (isSelectedColor) {
+    if (isSelectedColor && selected) {
       return color(selectedColor).alpha(0.29).rgb().string();
     }
 
@@ -61,6 +63,7 @@ const getTextColor = ({
   isOutlined,
   disabled,
   selectedColor,
+  selected,
 }: BaseProps & {
   selectedColor?: string;
 }) => {
@@ -70,7 +73,7 @@ const getTextColor = ({
       return theme.colors.onSurfaceDisabled;
     }
 
-    if (isSelectedColor) {
+    if (isSelectedColor && selected) {
       return selectedColor;
     }
 
@@ -85,7 +88,7 @@ const getTextColor = ({
     return theme.colors.disabled;
   }
 
-  if (isSelectedColor) {
+  if (isSelectedColor && selected) {
     return color(selectedColor).alpha(0.87).rgb().string();
   }
 
@@ -119,6 +122,7 @@ const getBackgroundColor = ({
   theme,
   isOutlined,
   disabled,
+  selected,
   customBackgroundColor,
 }: BaseProps & {
   customBackgroundColor?: ColorValue;
@@ -136,26 +140,37 @@ const getBackgroundColor = ({
     }
   }
 
-  return getDefaultBackgroundColor({ theme, isOutlined });
+  return getDefaultBackgroundColor({ theme, isOutlined, selected });
 };
 
 const getSelectedBackgroundColor = ({
   theme,
   isOutlined,
   disabled,
+  selected,
   customBackgroundColor,
   showSelectedOverlay,
+  customSelectedBackgroundColor,
 }: BaseProps & {
   customBackgroundColor?: ColorValue;
   showSelectedOverlay?: boolean;
+  customSelectedBackgroundColor?: ColorValue;
 }) => {
+  // If customSelectedBackgroundColor is provided, use it as-is without processing
+  if (typeof customSelectedBackgroundColor === 'string') {
+    return customSelectedBackgroundColor;
+  }
+
+  // Get the base background color (which may be custom or theme-based)
   const backgroundColor = getBackgroundColor({
     theme,
     disabled,
     isOutlined,
     customBackgroundColor,
+    selected,
   });
 
+  // Process the background color to get the selected background color
   if (theme.isV3) {
     if (isOutlined) {
       if (showSelectedOverlay) {
@@ -202,6 +217,7 @@ const getIconColor = ({
   isOutlined,
   disabled,
   selectedColor,
+  selected,
 }: BaseProps & {
   selectedColor?: string;
 }) => {
@@ -211,7 +227,7 @@ const getIconColor = ({
       return theme.colors.onSurfaceDisabled;
     }
 
-    if (isSelectedColor) {
+    if (isSelectedColor && selected) {
       return selectedColor;
     }
 
@@ -226,7 +242,7 @@ const getIconColor = ({
     return theme.colors.disabled;
   }
 
-  if (isSelectedColor) {
+  if (isSelectedColor && selected) {
     return color(selectedColor).alpha(0.54).rgb().string();
   }
 
@@ -237,6 +253,7 @@ const getRippleColor = ({
   theme,
   isOutlined,
   disabled,
+  selected,
   selectedColor,
   selectedBackgroundColor,
   customRippleColor,
@@ -255,17 +272,18 @@ const getRippleColor = ({
     disabled,
     selectedColor,
     isOutlined,
+    selected,
   });
 
   if (theme.isV3) {
-    if (isSelectedColor) {
+    if (isSelectedColor && selected) {
       return color(selectedColor).alpha(0.12).rgb().string();
     }
 
     return color(textColor).alpha(0.12).rgb().string();
   }
 
-  if (isSelectedColor) {
+  if (isSelectedColor && selected) {
     return color(selectedColor).fade(0.5).rgb().string();
   }
 
@@ -280,14 +298,18 @@ export const getChipColors = ({
   customBackgroundColor,
   disabled,
   customRippleColor,
+  selected = false,
+  customSelectedBackgroundColor,
 }: BaseProps & {
   customBackgroundColor?: ColorValue;
   disabled?: boolean;
   showSelectedOverlay?: boolean;
   selectedColor?: string;
   customRippleColor?: ColorValue;
+  selected?: boolean;
+  customSelectedBackgroundColor?: ColorValue;
 }) => {
-  const baseChipColorProps = { theme, isOutlined, disabled };
+  const baseChipColorProps = { theme, isOutlined, disabled, selected };
 
   const backgroundColor = getBackgroundColor({
     ...baseChipColorProps,
@@ -298,6 +320,7 @@ export const getChipColors = ({
     ...baseChipColorProps,
     customBackgroundColor,
     showSelectedOverlay,
+    customSelectedBackgroundColor,
   });
 
   return {
@@ -320,7 +343,6 @@ export const getChipColors = ({
       selectedBackgroundColor,
       customRippleColor,
     }),
-    backgroundColor,
-    selectedBackgroundColor,
+    backgroundColor: selected ? selectedBackgroundColor : backgroundColor,
   };
 };
