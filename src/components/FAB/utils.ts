@@ -410,10 +410,16 @@ const extended = {
   height: 48,
   paddingHorizontal: 16,
 };
-
-const v3Extended = {
+const v3ExtendedSmallSize = {
+  height: 40,
+  paddingHorizontal: 16,
+};
+const v3ExtendedMediumSize = {
   height: 56,
-  borderRadius: 16,
+  paddingHorizontal: 16,
+};
+const v3ExtendedLargeSize = {
+  height: 96,
   paddingHorizontal: 16,
 };
 
@@ -424,16 +430,38 @@ const getExtendedFabDimensions = (customSize: number) => ({
 
 export const getExtendedFabStyle = ({
   customSize,
+  size,
   theme,
 }: {
   customSize?: number;
+  size: 'small' | 'medium' | 'large';
   theme: InternalTheme;
 }) => {
   if (customSize) return getExtendedFabDimensions(customSize);
 
-  const { isV3 } = theme;
+  const { isV3, roundness } = theme;
 
-  return isV3 ? v3Extended : extended;
+  if (isV3) {
+    switch (size) {
+      case 'small':
+        return {
+          ...v3ExtendedSmallSize,
+          borderRadius: 3 * roundness,
+        };
+      case 'medium':
+        return {
+          ...v3ExtendedMediumSize,
+          borderRadius: 4 * roundness,
+        };
+      case 'large':
+        return {
+          ...v3ExtendedLargeSize,
+          borderRadius: 7 * roundness,
+        };
+    }
+  }
+
+  return extended;
 };
 
 let cachedContext: CanvasRenderingContext2D | null = null;
