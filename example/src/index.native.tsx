@@ -19,9 +19,9 @@ import {
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 import DrawerItems from './DrawerItems';
+import { PreferencesContext } from './PreferencesContext';
 import App from './RootNavigator';
 import { deviceColorsSupported } from '../utils';
-import { PreferencesContext } from './PreferencesContext';
 import {
   CombinedDefaultTheme,
   CombinedDarkTheme,
@@ -57,6 +57,7 @@ export default function PaperExample() {
   const [customFontLoaded, setCustomFont] = React.useState(false);
   const [rippleEffectEnabled, setRippleEffectEnabled] = React.useState(true);
 
+  //TODO: remove usage of @pchmn/expo-material3-theme
   const { theme: mdTheme } = useMaterial3Theme();
   const theme = React.useMemo(() => {
     if (themeVersion === 2) {
@@ -68,8 +69,11 @@ export default function PaperExample() {
     }
 
     return isDarkMode
-      ? { ...MD3DarkTheme, colors: mdTheme.dark }
-      : { ...MD3LightTheme, colors: mdTheme.light };
+      ? { ...MD3DarkTheme, colors: { ...MD3DarkTheme.colors, ...mdTheme.dark } }
+      : {
+          ...MD3LightTheme,
+          colors: { ...MD3LightTheme.colors, ...mdTheme.light },
+        };
   }, [isDarkMode, mdTheme, shouldUseDeviceColors, themeVersion]);
 
   React.useEffect(() => {
