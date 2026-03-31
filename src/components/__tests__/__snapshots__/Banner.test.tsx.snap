@@ -81,7 +81,7 @@ exports[`render visible banner, with custom theme 1`] = `
                   "textAlign": "left",
                 },
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "writingDirection": "ltr",
                 },
                 [
@@ -221,7 +221,7 @@ exports[`render visible banner, with custom theme 1`] = `
                           "textAlign": "left",
                         },
                         {
-                          "color": "rgba(28, 27, 31, 1)",
+                          "color": "rgba(29, 27, 32, 1)",
                           "writingDirection": "ltr",
                         },
                         [
@@ -366,7 +366,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
                   "textAlign": "left",
                 },
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "writingDirection": "ltr",
                 },
                 [
@@ -383,7 +383,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
                       "margin": 8,
                     },
                     {
-                      "color": "rgba(28, 27, 31, 1)",
+                      "color": "rgba(29, 27, 32, 1)",
                     },
                   ],
                 ],
@@ -511,7 +511,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                   "textAlign": "left",
                 },
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "writingDirection": "ltr",
                 },
                 [
@@ -528,7 +528,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                       "margin": 8,
                     },
                     {
-                      "color": "rgba(28, 27, 31, 1)",
+                      "color": "rgba(29, 27, 32, 1)",
                     },
                   ],
                 ],
@@ -651,7 +651,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                           "textAlign": "left",
                         },
                         {
-                          "color": "rgba(28, 27, 31, 1)",
+                          "color": "rgba(29, 27, 32, 1)",
                           "writingDirection": "ltr",
                         },
                         [
@@ -784,7 +784,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   "textAlign": "left",
                 },
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "writingDirection": "ltr",
                 },
                 [
@@ -801,7 +801,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                       "margin": 8,
                     },
                     {
-                      "color": "rgba(28, 27, 31, 1)",
+                      "color": "rgba(29, 27, 32, 1)",
                     },
                   ],
                 ],
@@ -924,7 +924,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                           "textAlign": "left",
                         },
                         {
-                          "color": "rgba(28, 27, 31, 1)",
+                          "color": "rgba(29, 27, 32, 1)",
                           "writingDirection": "ltr",
                         },
                         [
@@ -1073,7 +1073,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                           "textAlign": "left",
                         },
                         {
-                          "color": "rgba(28, 27, 31, 1)",
+                          "color": "rgba(29, 27, 32, 1)",
                           "writingDirection": "ltr",
                         },
                         [
@@ -1228,7 +1228,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
                   "textAlign": "left",
                 },
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "writingDirection": "ltr",
                 },
                 [
@@ -1245,7 +1245,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
                       "margin": 8,
                     },
                     {
-                      "color": "rgba(28, 27, 31, 1)",
+                      "color": "rgba(29, 27, 32, 1)",
                     },
                   ],
                 ],
@@ -1351,7 +1351,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
                   "textAlign": "left",
                 },
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "writingDirection": "ltr",
                 },
                 [
@@ -1368,7 +1368,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
                       "margin": 8,
                     },
                     {
-                      "color": "rgba(28, 27, 31, 1)",
+                      "color": "rgba(29, 27, 32, 1)",
                     },
                   ],
                 ],

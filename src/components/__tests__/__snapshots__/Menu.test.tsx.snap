@@ -117,7 +117,7 @@ exports[`renders menu with content styles 1`] = `
                       "textAlign": "left",
                     },
                     {
-                      "color": "rgba(28, 27, 31, 1)",
+                      "color": "rgba(29, 27, 32, 1)",
                       "writingDirection": "ltr",
                     },
                     [
@@ -394,7 +394,7 @@ exports[`renders menu with content styles 1`] = `
                           "textAlign": "left",
                         },
                         {
-                          "color": "rgba(28, 27, 31, 1)",
+                          "color": "rgba(29, 27, 32, 1)",
                           "writingDirection": "ltr",
                         },
                         [
@@ -407,7 +407,7 @@ exports[`renders menu with content styles 1`] = `
                           },
                           [
                             {
-                              "color": "rgba(28, 27, 31, 1)",
+                              "color": "rgba(29, 27, 32, 1)",
                               "fontFamily": "System",
                               "fontSize": 16,
                               "fontWeight": "400",
@@ -515,7 +515,7 @@ exports[`renders menu with content styles 1`] = `
                           "textAlign": "left",
                         },
                         {
-                          "color": "rgba(28, 27, 31, 1)",
+                          "color": "rgba(29, 27, 32, 1)",
                           "writingDirection": "ltr",
                         },
                         [
@@ -528,7 +528,7 @@ exports[`renders menu with content styles 1`] = `
                           },
                           [
                             {
-                              "color": "rgba(28, 27, 31, 1)",
+                              "color": "rgba(29, 27, 32, 1)",
                               "fontFamily": "System",
                               "fontSize": 16,
                               "fontWeight": "400",
@@ -671,7 +671,7 @@ exports[`renders not visible menu 1`] = `
                     "textAlign": "left",
                   },
                   {
-                    "color": "rgba(28, 27, 31, 1)",
+                    "color": "rgba(29, 27, 32, 1)",
                     "writingDirection": "ltr",
                   },
                   [
@@ -836,7 +836,7 @@ exports[`renders visible menu 1`] = `
                       "textAlign": "left",
                     },
                     {
-                      "color": "rgba(28, 27, 31, 1)",
+                      "color": "rgba(29, 27, 32, 1)",
                       "writingDirection": "ltr",
                     },
                     [
@@ -1109,7 +1109,7 @@ exports[`renders visible menu 1`] = `
                           "textAlign": "left",
                         },
                         {
-                          "color": "rgba(28, 27, 31, 1)",
+                          "color": "rgba(29, 27, 32, 1)",
                           "writingDirection": "ltr",
                         },
                         [
@@ -1122,7 +1122,7 @@ exports[`renders visible menu 1`] = `
                           },
                           [
                             {
-                              "color": "rgba(28, 27, 31, 1)",
+                              "color": "rgba(29, 27, 32, 1)",
                               "fontFamily": "System",
                               "fontSize": 16,
                               "fontWeight": "400",
@@ -1230,7 +1230,7 @@ exports[`renders visible menu 1`] = `
                           "textAlign": "left",
                         },
                         {
-                          "color": "rgba(28, 27, 31, 1)",
+                          "color": "rgba(29, 27, 32, 1)",
                           "writingDirection": "ltr",
                         },
                         [
@@ -1243,7 +1243,7 @@ exports[`renders visible menu 1`] = `
                           },
                           [
                             {
-                              "color": "rgba(28, 27, 31, 1)",
+                              "color": "rgba(29, 27, 32, 1)",
                               "fontFamily": "System",
                               "fontSize": 16,
                               "fontWeight": "400",

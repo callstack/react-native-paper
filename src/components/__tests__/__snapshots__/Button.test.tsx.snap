@@ -105,7 +105,7 @@ exports[`renders button with an accessibility hint 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -255,7 +255,7 @@ exports[`renders button with an accessibility label 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -404,7 +404,7 @@ exports[`renders button with button color 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -553,7 +553,7 @@ exports[`renders button with color 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -702,7 +702,7 @@ exports[`renders button with custom testID 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -900,7 +900,7 @@ exports[`renders button with icon 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -1100,7 +1100,7 @@ exports[`renders button with icon in reverse order 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -1249,7 +1249,7 @@ exports[`renders contained contained with mode 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -1399,7 +1399,7 @@ exports[`renders disabled button 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -1422,7 +1422,7 @@ exports[`renders disabled button 1`] = `
                   undefined,
                   false,
                   {
-                    "color": "rgba(28, 27, 31, 0.38)",
+                    "color": "rgba(29, 27, 32, 0.38)",
                     "fontFamily": "System",
                     "fontSize": 14,
                     "fontWeight": "500",
@@ -1756,7 +1756,7 @@ exports[`renders loading button 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -1905,7 +1905,7 @@ exports[`renders outlined button with mode 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -2055,7 +2055,7 @@ exports[`renders text button by default 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -2204,7 +2204,7 @@ exports[`renders text button with mode 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [

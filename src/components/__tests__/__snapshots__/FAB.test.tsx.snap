@@ -527,7 +527,7 @@ exports[`renders disabled FAB 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(28, 27, 31, 0.12)",
+      "backgroundColor": "rgba(29, 27, 32, 0.12)",
       "borderRadius": 16,
       "opacity": 1,
       "shadowColor": "#000",
@@ -551,7 +551,7 @@ exports[`renders disabled FAB 1`] = `
     pointerEvents="auto"
     style={
       {
-        "backgroundColor": "rgba(28, 27, 31, 0.12)",
+        "backgroundColor": "rgba(29, 27, 32, 0.12)",
         "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
@@ -667,7 +667,7 @@ exports[`renders disabled FAB 1`] = `
               style={
                 [
                   {
-                    "color": "rgba(28, 27, 31, 0.38)",
+                    "color": "rgba(29, 27, 32, 0.38)",
                     "fontSize": 24,
                   },
                   [
@@ -873,7 +873,7 @@ exports[`renders extended FAB 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -1087,7 +1087,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [

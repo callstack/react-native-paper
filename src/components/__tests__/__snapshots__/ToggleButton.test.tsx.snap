@@ -113,7 +113,7 @@ exports[`renders disabled toggle button 1`] = `
         style={
           [
             {
-              "color": "rgba(28, 27, 31, 0.38)",
+              "color": "rgba(29, 27, 32, 0.38)",
               "fontSize": 24,
             },
             [
@@ -386,7 +386,7 @@ exports[`renders unchecked toggle button 1`] = `
         style={
           [
             {
-              "color": "rgba(28, 27, 31, 0.38)",
+              "color": "rgba(29, 27, 32, 0.38)",
               "fontSize": 24,
             },
             [
