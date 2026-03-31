@@ -5,7 +5,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(255, 251, 254, 1)",
+      "backgroundColor": "rgba(255, 251, 255, 1)",
       "height": 64,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -23,7 +23,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "rgba(255, 251, 254, 1)",
+        "backgroundColor": "rgba(255, 251, 255, 1)",
         "flex": 1,
         "flexDirection": "row",
         "paddingBottom": undefined,
@@ -217,7 +217,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
           accessibilityRole="search"
           keyboardAppearance="light"
           placeholder="Search"
-          placeholderTextColor="rgba(28, 27, 31, 1)"
+          placeholderTextColor="rgba(29, 27, 32, 1)"
           returnKeyType="search"
           selectionColor="rgba(103, 80, 164, 1)"
           style={
@@ -409,7 +409,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(255, 251, 254, 1)",
+      "backgroundColor": "rgba(255, 251, 255, 1)",
       "height": 64,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -427,7 +427,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "rgba(255, 251, 254, 1)",
+        "backgroundColor": "rgba(255, 251, 255, 1)",
         "flex": 1,
         "flexDirection": "row",
         "paddingBottom": undefined,
@@ -614,7 +614,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
                       },
                       {
                         "height": 21,
-                        "tintColor": "rgba(28, 27, 31, 1)",
+                        "tintColor": "rgba(29, 27, 32, 1)",
                         "width": 21,
                       },
                     ]
@@ -659,7 +659,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               "textAlign": "left",
             },
             {
-              "color": "rgba(28, 27, 31, 1)",
+              "color": "rgba(29, 27, 32, 1)",
               "writingDirection": "ltr",
             },
             [
@@ -672,7 +672,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
               },
               [
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontFamily": "System",
                   "fontSize": 22,
                   "fontWeight": "400",
