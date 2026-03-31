@@ -5,7 +5,7 @@ exports[`renders caption applying style 1`] = `
   style={
     [
       {
-        "color": "rgba(28, 27, 31, 1)",
+        "color": "rgba(29, 27, 32, 1)",
       },
       {
         "textAlign": "left",
@@ -15,7 +15,7 @@ exports[`renders caption applying style 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 0.54)",
+          "color": "rgba(29, 27, 32, 0.54)",
           "writingDirection": "ltr",
         },
         [
@@ -43,7 +43,7 @@ exports[`renders caption with children as content 1`] = `
   style={
     [
       {
-        "color": "rgba(28, 27, 31, 1)",
+        "color": "rgba(29, 27, 32, 1)",
       },
       {
         "textAlign": "left",
@@ -53,7 +53,7 @@ exports[`renders caption with children as content 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 0.54)",
+          "color": "rgba(29, 27, 32, 0.54)",
           "writingDirection": "ltr",
         },
         [

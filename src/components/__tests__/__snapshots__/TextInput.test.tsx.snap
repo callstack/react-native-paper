@@ -199,7 +199,7 @@ exports[`call onPress when affix adornment pressed 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
@@ -513,7 +513,7 @@ exports[`correctly applies a component as the text label 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
@@ -739,7 +739,7 @@ exports[`correctly applies cursorColor prop 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
@@ -965,7 +965,7 @@ exports[`correctly applies default textAlign based on default RTL 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
@@ -1009,7 +1009,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
         },
         false,
         {
-          "backgroundColor": "rgba(255, 251, 254, 1)",
+          "backgroundColor": "rgba(254, 247, 255, 1)",
           "borderColor": "rgba(121, 116, 126, 1)",
           "borderRadius": 4,
           "borderWidth": 1,
@@ -1086,7 +1086,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
             numberOfLines={1}
             style={
               {
-                "backgroundColor": "rgba(255, 251, 254, 1)",
+                "backgroundColor": "rgba(254, 247, 255, 1)",
                 "color": "transparent",
                 "fontFamily": "System",
                 "fontSize": 16,
@@ -1225,7 +1225,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
@@ -1450,7 +1450,7 @@ exports[`correctly applies paddingLeft from contentStyleProp 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
@@ -1678,7 +1678,7 @@ exports[`correctly applies textAlign center 1`] = `
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
@@ -1904,7 +1904,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,
@@ -2323,7 +2323,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "paddingTop": 24,
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": undefined,

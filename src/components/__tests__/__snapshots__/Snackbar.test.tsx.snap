@@ -24,7 +24,7 @@ exports[`renders snackbar with Text as a child 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(49, 48, 51, 1)",
+        "backgroundColor": "rgba(50, 47, 53, 1)",
         "borderRadius": 4,
         "margin": 8,
         "opacity": 0,
@@ -50,7 +50,7 @@ exports[`renders snackbar with Text as a child 1`] = `
       pointerEvents="box-none"
       style={
         {
-          "backgroundColor": "rgba(49, 48, 51, 1)",
+          "backgroundColor": "rgba(50, 47, 53, 1)",
           "borderRadius": 4,
           "flex": undefined,
           "flexDirection": "row",
@@ -112,7 +112,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(49, 48, 51, 1)",
+        "backgroundColor": "rgba(50, 47, 53, 1)",
         "borderRadius": 4,
         "margin": 8,
         "opacity": 0,
@@ -138,7 +138,7 @@ exports[`renders snackbar with View & Text as a child 1`] = `
       pointerEvents="box-none"
       style={
         {
-          "backgroundColor": "rgba(49, 48, 51, 1)",
+          "backgroundColor": "rgba(50, 47, 53, 1)",
           "borderRadius": 4,
           "flex": undefined,
           "flexDirection": "row",
@@ -226,7 +226,7 @@ exports[`renders snackbar with action button 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(49, 48, 51, 1)",
+        "backgroundColor": "rgba(50, 47, 53, 1)",
         "borderRadius": 4,
         "margin": 8,
         "opacity": 0,
@@ -252,7 +252,7 @@ exports[`renders snackbar with action button 1`] = `
       pointerEvents="box-none"
       style={
         {
-          "backgroundColor": "rgba(49, 48, 51, 1)",
+          "backgroundColor": "rgba(50, 47, 53, 1)",
           "borderRadius": 4,
           "flex": undefined,
           "flexDirection": "row",
@@ -276,7 +276,7 @@ exports[`renders snackbar with action button 1`] = `
               "textAlign": "left",
             },
             {
-              "color": "rgba(28, 27, 31, 1)",
+              "color": "rgba(29, 27, 32, 1)",
               "writingDirection": "ltr",
             },
             [
@@ -294,7 +294,7 @@ exports[`renders snackbar with action button 1`] = `
                   "marginVertical": 14,
                 },
                 {
-                  "color": "rgba(244, 239, 244, 1)",
+                  "color": "rgba(245, 239, 247, 1)",
                 },
               ],
             ],
@@ -423,7 +423,7 @@ exports[`renders snackbar with action button 1`] = `
                         "textAlign": "left",
                       },
                       {
-                        "color": "rgba(28, 27, 31, 1)",
+                        "color": "rgba(29, 27, 32, 1)",
                         "writingDirection": "ltr",
                       },
                       [
@@ -495,7 +495,7 @@ exports[`renders snackbar with content 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(49, 48, 51, 1)",
+        "backgroundColor": "rgba(50, 47, 53, 1)",
         "borderRadius": 4,
         "margin": 8,
         "opacity": 0,
@@ -521,7 +521,7 @@ exports[`renders snackbar with content 1`] = `
       pointerEvents="box-none"
       style={
         {
-          "backgroundColor": "rgba(49, 48, 51, 1)",
+          "backgroundColor": "rgba(50, 47, 53, 1)",
           "borderRadius": 4,
           "flex": undefined,
           "flexDirection": "row",
@@ -545,7 +545,7 @@ exports[`renders snackbar with content 1`] = `
               "textAlign": "left",
             },
             {
-              "color": "rgba(28, 27, 31, 1)",
+              "color": "rgba(29, 27, 32, 1)",
               "writingDirection": "ltr",
             },
             [
@@ -563,7 +563,7 @@ exports[`renders snackbar with content 1`] = `
                   "marginVertical": 14,
                 },
                 {
-                  "color": "rgba(244, 239, 244, 1)",
+                  "color": "rgba(245, 239, 247, 1)",
                 },
               ],
             ],

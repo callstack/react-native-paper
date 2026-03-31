@@ -54,7 +54,7 @@ exports[`DataTable.Cell renders data table cell 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -128,7 +128,7 @@ exports[`DataTable.Cell renders right aligned data table cell 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -213,7 +213,7 @@ exports[`DataTable.Header renders data table header 1`] = `
             "textAlign": "left",
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontWeight": "400",
             "letterSpacing": 0,
@@ -233,7 +233,7 @@ exports[`DataTable.Header renders data table header 1`] = `
             },
             {},
             {
-              "color": "rgba(28, 27, 31, 0.6)",
+              "color": "rgba(29, 27, 32, 0.6)",
             },
             undefined,
           ],
@@ -294,7 +294,7 @@ exports[`DataTable.Header renders data table header 1`] = `
             "textAlign": "left",
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontWeight": "400",
             "letterSpacing": 0,
@@ -314,7 +314,7 @@ exports[`DataTable.Header renders data table header 1`] = `
             },
             {},
             {
-              "color": "rgba(28, 27, 31, 0.6)",
+              "color": "rgba(29, 27, 32, 0.6)",
             },
             undefined,
           ],
@@ -352,7 +352,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -366,7 +366,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
             "marginRight": 16,
           },
           {
-            "color": "rgba(28, 27, 31, 0.6)",
+            "color": "rgba(29, 27, 32, 0.6)",
           },
         ],
       ]
@@ -489,7 +489,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
             style={
               [
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontSize": 24,
                 },
                 [
@@ -623,7 +623,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
             style={
               [
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontSize": 24,
                 },
                 [
@@ -676,7 +676,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -690,7 +690,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             "marginRight": 16,
           },
           {
-            "color": "rgba(28, 27, 31, 0.6)",
+            "color": "rgba(29, 27, 32, 0.6)",
           },
         ],
       ]
@@ -815,7 +815,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             style={
               [
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontSize": 24,
                 },
                 [
@@ -949,7 +949,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             style={
               [
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontSize": 24,
                 },
                 [
@@ -1083,7 +1083,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             style={
               [
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontSize": 24,
                 },
                 [
@@ -1217,7 +1217,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             style={
               [
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontSize": 24,
                 },
                 [
@@ -1270,7 +1270,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -1284,7 +1284,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
             "marginRight": 16,
           },
           {
-            "color": "rgba(28, 27, 31, 0.6)",
+            "color": "rgba(29, 27, 32, 0.6)",
           },
         ],
       ]
@@ -1409,7 +1409,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
             style={
               [
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontSize": 24,
                 },
                 [
@@ -1543,7 +1543,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
             style={
               [
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontSize": 24,
                 },
                 [
@@ -1606,7 +1606,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "textAlign": "left",
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontWeight": "400",
             "letterSpacing": 0,
@@ -1620,7 +1620,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               "marginRight": 16,
             },
             {
-              "color": "rgba(28, 27, 31, 0.6)",
+              "color": "rgba(29, 27, 32, 0.6)",
             },
           ],
         ]
@@ -1784,7 +1784,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                       "textAlign": "left",
                     },
                     {
-                      "color": "rgba(28, 27, 31, 1)",
+                      "color": "rgba(29, 27, 32, 1)",
                       "writingDirection": "ltr",
                     },
                     [
@@ -1840,7 +1840,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -1854,7 +1854,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "marginRight": 16,
           },
           {
-            "color": "rgba(28, 27, 31, 0.6)",
+            "color": "rgba(29, 27, 32, 0.6)",
           },
         ],
       ]
@@ -1979,7 +1979,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             style={
               [
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontSize": 24,
                 },
                 [
@@ -2113,7 +2113,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             style={
               [
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontSize": 24,
                 },
                 [
@@ -2247,7 +2247,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             style={
               [
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontSize": 24,
                 },
                 [
@@ -2381,7 +2381,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             style={
               [
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontSize": 24,
                 },
                 [
@@ -2475,7 +2475,7 @@ exports[`DataTable.Title renders data table title with press handler 1`] = `
       style={
         [
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontSize": 16,
           },
           [
@@ -2505,7 +2505,7 @@ exports[`DataTable.Title renders data table title with press handler 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -2603,7 +2603,7 @@ exports[`DataTable.Title renders data table title with sort icon 1`] = `
       style={
         [
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontSize": 16,
           },
           [
@@ -2633,7 +2633,7 @@ exports[`DataTable.Title renders data table title with sort icon 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -2719,7 +2719,7 @@ exports[`DataTable.Title renders right aligned data table title 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -2739,7 +2739,7 @@ exports[`DataTable.Title renders right aligned data table title 1`] = `
           },
           {},
           {
-            "color": "rgba(28, 27, 31, 0.6)",
+            "color": "rgba(29, 27, 32, 0.6)",
           },
           undefined,
         ],

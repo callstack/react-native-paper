@@ -5,7 +5,7 @@ exports[`activity indicator snapshot test 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgb(238, 232, 244)",
+      "backgroundColor": "rgba(243, 237, 247, 1)",
       "borderRadius": 28,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -23,7 +23,7 @@ exports[`activity indicator snapshot test 1`] = `
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "rgb(238, 232, 244)",
+        "backgroundColor": "rgba(243, 237, 247, 1)",
         "borderRadius": 28,
         "flex": undefined,
         "flexDirection": "row",
@@ -176,7 +176,7 @@ exports[`activity indicator snapshot test 1`] = `
       accessibilityRole="search"
       keyboardAppearance="light"
       placeholder=""
-      placeholderTextColor="rgba(28, 27, 31, 1)"
+      placeholderTextColor="rgba(29, 27, 32, 1)"
       returnKeyType="search"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
@@ -415,7 +415,7 @@ exports[`renders with placeholder 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgb(238, 232, 244)",
+      "backgroundColor": "rgba(243, 237, 247, 1)",
       "borderRadius": 28,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -433,7 +433,7 @@ exports[`renders with placeholder 1`] = `
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "rgb(238, 232, 244)",
+        "backgroundColor": "rgba(243, 237, 247, 1)",
         "borderRadius": 28,
         "flex": undefined,
         "flexDirection": "row",
@@ -586,7 +586,7 @@ exports[`renders with placeholder 1`] = `
       accessibilityRole="search"
       keyboardAppearance="light"
       placeholder="Search"
-      placeholderTextColor="rgba(28, 27, 31, 1)"
+      placeholderTextColor="rgba(29, 27, 32, 1)"
       returnKeyType="search"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
@@ -776,7 +776,7 @@ exports[`renders with text 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgb(238, 232, 244)",
+      "backgroundColor": "rgba(243, 237, 247, 1)",
       "borderRadius": 28,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -794,7 +794,7 @@ exports[`renders with text 1`] = `
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "rgb(238, 232, 244)",
+        "backgroundColor": "rgba(243, 237, 247, 1)",
         "borderRadius": 28,
         "flex": undefined,
         "flexDirection": "row",
@@ -947,7 +947,7 @@ exports[`renders with text 1`] = `
       accessibilityRole="search"
       keyboardAppearance="light"
       placeholder="Search"
-      placeholderTextColor="rgba(28, 27, 31, 1)"
+      placeholderTextColor="rgba(29, 27, 32, 1)"
       returnKeyType="search"
       selectionColor="rgba(103, 80, 164, 1)"
       style={
