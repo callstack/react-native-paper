@@ -51,8 +51,17 @@ export type MD3Colors = {
   tertiary: string;
   tertiaryContainer: string;
   surface: string;
+  surfaceDim: string;
+  surfaceBright: string;
+  surfaceContainerLowest: string;
+  surfaceContainerLow: string;
+  surfaceContainer: string;
+  surfaceContainerHigh: string;
+  surfaceContainerHighest: string;
+  /** @deprecated Use surfaceContainerHighest instead */
   surfaceVariant: string;
   surfaceDisabled: string;
+  /** @deprecated Use surface instead */
   background: string;
   error: string;
   errorContainer: string;
@@ -67,12 +76,25 @@ export type MD3Colors = {
   onSurfaceDisabled: string;
   onError: string;
   onErrorContainer: string;
+  /** @deprecated Use onSurface instead */
   onBackground: string;
   outline: string;
   outlineVariant: string;
   inverseSurface: string;
   inverseOnSurface: string;
   inversePrimary: string;
+  primaryFixed: string;
+  primaryFixedDim: string;
+  onPrimaryFixed: string;
+  onPrimaryFixedVariant: string;
+  secondaryFixed: string;
+  secondaryFixedDim: string;
+  onSecondaryFixed: string;
+  onSecondaryFixedVariant: string;
+  tertiaryFixed: string;
+  tertiaryFixedDim: string;
+  onTertiaryFixed: string;
+  onTertiaryFixedVariant: string;
   shadow: string;
   scrim: string;
   backdrop: string;
@@ -87,7 +109,16 @@ export type MD3AndroidColors = {
   tertiary: number;
   tertiaryContainer: number;
   surface: number;
+  surfaceDim: number;
+  surfaceBright: number;
+  surfaceContainerLowest: number;
+  surfaceContainerLow: number;
+  surfaceContainer: number;
+  surfaceContainerHigh: number;
+  surfaceContainerHighest: number;
+  /** @deprecated Use surfaceContainerHighest instead */
   surfaceVariant: number;
+  /** @deprecated Use surface instead */
   background: number;
   error: number;
   errorContainer: number;
@@ -101,12 +132,25 @@ export type MD3AndroidColors = {
   onSurfaceVariant: number;
   onError: number;
   onErrorContainer: number;
+  /** @deprecated Use onSurface instead */
   onBackground: number;
   outline: number;
   outlineVariant: number;
   inverseSurface: number;
   inverseOnSurface: number;
   inversePrimary: number;
+  primaryFixed: number;
+  primaryFixedDim: number;
+  onPrimaryFixed: number;
+  onPrimaryFixedVariant: number;
+  secondaryFixed: number;
+  secondaryFixedDim: number;
+  onSecondaryFixed: number;
+  onSecondaryFixedVariant: number;
+  tertiaryFixed: number;
+  tertiaryFixedDim: number;
+  onTertiaryFixed: number;
+  onTertiaryFixedVariant: number;
   shadow: number;
   scrim: number;
 };
