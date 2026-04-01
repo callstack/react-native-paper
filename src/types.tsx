@@ -58,10 +58,8 @@ export type MD3Colors = {
   surfaceContainer: string;
   surfaceContainerHigh: string;
   surfaceContainerHighest: string;
-  /** @deprecated Use surfaceContainerHighest instead */
   surfaceVariant: string;
   surfaceDisabled: string;
-  /** @deprecated Use surface instead */
   background: string;
   error: string;
   errorContainer: string;
@@ -76,7 +74,6 @@ export type MD3Colors = {
   onSurfaceDisabled: string;
   onError: string;
   onErrorContainer: string;
-  /** @deprecated Use onSurface instead */
   onBackground: string;
   outline: string;
   outlineVariant: string;
@@ -116,9 +113,7 @@ export type MD3AndroidColors = {
   surfaceContainer: number;
   surfaceContainerHigh: number;
   surfaceContainerHighest: number;
-  /** @deprecated Use surfaceContainerHighest instead */
   surfaceVariant: number;
-  /** @deprecated Use surface instead */
   background: number;
   error: number;
   errorContainer: number;
@@ -132,7 +127,6 @@ export type MD3AndroidColors = {
   onSurfaceVariant: number;
   onError: number;
   onErrorContainer: number;
-  /** @deprecated Use onSurface instead */
   onBackground: number;
   outline: number;
   outlineVariant: number;
@@ -154,8 +148,6 @@ export type MD3AndroidColors = {
   shadow: number;
   scrim: number;
 };
-
-export type MD3Palette = {};
 
 export type ThemeProp = $DeepPartial<InternalTheme>;
 
