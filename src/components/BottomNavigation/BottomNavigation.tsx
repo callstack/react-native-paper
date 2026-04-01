@@ -180,10 +180,6 @@ export type Props<Route extends BaseRoute> = {
    */
   getBadge?: (props: { route: Route }) => boolean | number | string | undefined;
   /**
-   * Get color for the tab, uses `route.color` by default.
-   */
-  getColor?: (props: { route: Route }) => string | undefined;
-  /**
    * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
    */
   getLabelText?: (props: { route: Route }) => string | undefined;
@@ -327,7 +323,6 @@ const BottomNavigation = <Route extends BaseRoute>({
   renderTouchable,
   getLabelText,
   getBadge,
-  getColor,
   getAccessibilityLabel,
   getTestID,
   activeColor,
@@ -353,9 +348,8 @@ const BottomNavigation = <Route extends BaseRoute>({
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
   const { scale } = theme.animation;
-  const compact = compactProp ?? !theme.isV3;
-  let shifting =
-    shiftingProp ?? (theme.isV3 ? false : navigationState.routes.length > 3);
+  const compact = compactProp ?? false;
+  let shifting = shiftingProp ?? false;
 
   if (shifting && navigationState.routes.length < 2) {
     shifting = false;
@@ -404,7 +398,7 @@ const BottomNavigation = <Route extends BaseRoute>({
         ...navigationState.routes.map((_, i) =>
           Animated.timing(tabsPositionAnims[i], {
             toValue: i === index ? 0 : i >= index ? 1 : -1,
-            duration: theme.isV3 || shifting ? 150 * scale : 0,
+            duration: 150 * scale,
             useNativeDriver: true,
             easing: sceneAnimationEasing,
           })
@@ -424,13 +418,11 @@ const BottomNavigation = <Route extends BaseRoute>({
       });
     },
     [
-      shifting,
       navigationState.routes,
       offsetsAnims,
       scale,
       tabsPositionAnims,
       sceneAnimationEasing,
-      theme,
     ]
   );
 
@@ -579,7 +571,6 @@ const BottomNavigation = <Route extends BaseRoute>({
         renderTouchable={renderTouchable}
         getLabelText={getLabelText}
         getBadge={getBadge}
-        getColor={getColor}
         getAccessibilityLabel={getAccessibilityLabel}
         getTestID={getTestID}
         activeColor={activeColor}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Button, Portal, Dialog, MD2Colors } from 'react-native-paper';
+import { Button, Portal, Dialog } from 'react-native-paper';
 
 import { TextComponent } from './DialogTextComponent';
 
@@ -18,9 +18,7 @@ const UndismissableDialog = ({
         <TextComponent>This is an undismissable dialog!!</TextComponent>
       </Dialog.Content>
       <Dialog.Actions>
-        <Button color={MD2Colors.teal500} disabled>
-          Disagree
-        </Button>
+        <Button disabled>Disagree</Button>
         <Button onPress={close}>Agree</Button>
       </Dialog.Actions>
     </Dialog>

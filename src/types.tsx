@@ -26,23 +26,6 @@ export type Fonts = {
   thin: Font;
 };
 
-type Mode = 'adaptive' | 'exact';
-
-export type MD2Colors = {
-  primary: string;
-  background: string;
-  surface: string;
-  accent: string;
-  error: string;
-  text: string;
-  onSurface: string;
-  disabled: string;
-  placeholder: string;
-  backdrop: string;
-  notification: string;
-  tooltip: string;
-};
-
 export type MD3Colors = {
   primary: string;
   primaryContainer: string;
@@ -153,7 +136,6 @@ export type ThemeProp = $DeepPartial<InternalTheme>;
 
 export type ThemeBase = {
   dark: boolean;
-  mode?: Mode;
   roundness: number;
   animation: {
     scale: number;
@@ -162,20 +144,11 @@ export type ThemeBase = {
 };
 
 export type MD3Theme = ThemeBase & {
-  version: 3;
-  isV3: true;
   colors: MD3Colors;
   fonts: MD3Typescale;
 };
 
-export type MD2Theme = ThemeBase & {
-  version: 2;
-  isV3: false;
-  colors: MD2Colors;
-  fonts: Fonts;
-};
-
-export type InternalTheme = MD2Theme | MD3Theme;
+export type InternalTheme = MD3Theme;
 
 // MD3 types
 export enum MD3TypescaleKey {

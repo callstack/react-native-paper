@@ -3,8 +3,10 @@ import { Animated, StyleSheet, Text, View } from 'react-native';
 
 import { act, render } from '@testing-library/react-native';
 
-import { red200, white } from '../../styles/themes/v2/colors';
+import { white } from '../../styles/themes/v3/baseColors';
 import Snackbar from '../Snackbar';
+
+const red200 = '#ef9a9a';
 
 const styles = StyleSheet.create({
   snackContent: {

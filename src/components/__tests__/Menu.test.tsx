@@ -70,7 +70,7 @@ it('renders menu with content styles', () => {
 
 ([0, 1, 2, 3, 4, 5] as MD3Elevation[]).forEach((elevation) =>
   it(`renders menu with background color based on elevation value = ${elevation}`, () => {
-    const theme = getTheme(false, true);
+    const theme = getTheme(false);
 
     const { getByTestId } = render(
       <Portal.Host>

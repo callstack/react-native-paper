@@ -66,12 +66,9 @@ exports[`Menu Item renders menu item 1`] = `
       <View
         pointerEvents="box-none"
         style={
-          [
-            false,
-            {
-              "width": 24,
-            },
-          ]
+          {
+            "width": 24,
+          }
         }
       >
         <Text
@@ -108,7 +105,6 @@ exports[`Menu Item renders menu item 1`] = `
         pointerEvents="none"
         style={
           [
-            false,
             {
               "justifyContent": "center",
             },
@@ -145,7 +141,6 @@ exports[`Menu Item renders menu item 1`] = `
                   "lineHeight": 24,
                 },
                 [
-                  false,
                   {
                     "color": "rgba(29, 27, 32, 1)",
                     "fontFamily": "System",
@@ -230,12 +225,9 @@ exports[`Menu Item renders menu item 1`] = `
       <View
         pointerEvents="box-none"
         style={
-          [
-            false,
-            {
-              "width": 24,
-            },
-          ]
+          {
+            "width": 24,
+          }
         }
       >
         <Text
@@ -272,7 +264,6 @@ exports[`Menu Item renders menu item 1`] = `
         pointerEvents="none"
         style={
           [
-            false,
             {
               "justifyContent": "center",
             },
@@ -309,7 +300,6 @@ exports[`Menu Item renders menu item 1`] = `
                   "lineHeight": 24,
                 },
                 [
-                  false,
                   {
                     "color": "rgba(29, 27, 32, 1)",
                     "fontFamily": "System",
@@ -394,12 +384,9 @@ exports[`Menu Item renders menu item 1`] = `
       <View
         pointerEvents="box-none"
         style={
-          [
-            false,
-            {
-              "width": 24,
-            },
-          ]
+          {
+            "width": 24,
+          }
         }
       >
         <Text
@@ -436,7 +423,6 @@ exports[`Menu Item renders menu item 1`] = `
         pointerEvents="none"
         style={
           [
-            false,
             {
               "justifyContent": "center",
             },
@@ -473,7 +459,6 @@ exports[`Menu Item renders menu item 1`] = `
                   "lineHeight": 24,
                 },
                 [
-                  false,
                   {
                     "color": "rgba(29, 27, 32, 0.38)",
                     "fontFamily": "System",
@@ -558,12 +543,9 @@ exports[`Menu Item renders menu item 1`] = `
       <View
         pointerEvents="box-none"
         style={
-          [
-            false,
-            {
-              "width": 24,
-            },
-          ]
+          {
+            "width": 24,
+          }
         }
       >
         <Text
@@ -600,7 +582,6 @@ exports[`Menu Item renders menu item 1`] = `
         pointerEvents="none"
         style={
           [
-            false,
             {
               "justifyContent": "center",
             },
@@ -637,7 +618,6 @@ exports[`Menu Item renders menu item 1`] = `
                   "lineHeight": 24,
                 },
                 [
-                  false,
                   {
                     "color": "rgba(29, 27, 32, 0.38)",
                     "fontFamily": "System",
@@ -723,7 +703,6 @@ exports[`Menu Item renders menu item 1`] = `
         pointerEvents="none"
         style={
           [
-            false,
             {
               "justifyContent": "center",
             },
@@ -760,7 +739,6 @@ exports[`Menu Item renders menu item 1`] = `
                   "lineHeight": 24,
                 },
                 [
-                  false,
                   {
                     "color": "rgba(29, 27, 32, 1)",
                     "fontFamily": "System",

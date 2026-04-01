@@ -5,7 +5,7 @@ import { act, render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
-import { pink500 } from '../../styles/themes/v2/colors';
+import { pink500 } from '../../styles/themes/v3/baseColors';
 import IconButton from '../IconButton/IconButton';
 import { getIconButtonColor } from '../IconButton/utils';
 
@@ -194,10 +194,10 @@ describe('getIconButtonColor - icon color', () => {
   it('should return theme icon color, for theme version 2', () => {
     expect(
       getIconButtonColor({
-        theme: getTheme(false, false),
+        theme: getTheme(false),
       })
     ).toMatchObject({
-      iconColor: getTheme(false, false).colors.text,
+      iconColor: getTheme(false).colors.onSurfaceVariant,
     });
   });
 });
@@ -317,13 +317,13 @@ describe('getIconButtonColor - border color', () => {
     });
   });
 
-  it('should return undefined, for theme version 2', () => {
+  it('should return theme outline color, for theme version 2', () => {
     expect(
       getIconButtonColor({
-        theme: getTheme(false, false),
+        theme: getTheme(false),
       })
     ).toMatchObject({
-      borderColor: undefined,
+      borderColor: getTheme(false).colors.outline,
     });
   });
 });
@@ -345,11 +345,11 @@ describe('getIconButtonColor - ripple color', () => {
   it('should return theme color, for theme version 2', () => {
     expect(
       getIconButtonColor({
-        theme: getTheme(false, false),
+        theme: getTheme(false),
       })
     ).toMatchObject({
-      rippleColor: color(getTheme(false, false).colors.text)
-        .alpha(0.32)
+      rippleColor: color(getTheme(false).colors.onSurfaceVariant)
+        .alpha(0.12)
         .rgb()
         .string(),
     });

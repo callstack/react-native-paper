@@ -6,7 +6,6 @@ import {
   Appbar,
   FAB,
   List,
-  Paragraph,
   RadioButton,
   Snackbar,
   Switch,
@@ -14,7 +13,7 @@ import {
 } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { yellowA200 } from '../../../src/styles/themes/v2/colors';
+import { yellowA200 } from '../../../src/styles/themes/v3/baseColors';
 import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -29,11 +28,10 @@ const MEDIUM_FAB_HEIGHT = 56;
 
 const AppbarExample = ({ navigation }: Props) => {
   const [showLeftIcon, setShowLeftIcon] = React.useState(true);
-  const [showSubtitle, setShowSubtitle] = React.useState(true);
+  const [showSubtitle] = React.useState(true);
   const [showSearchIcon, setShowSearchIcon] = React.useState(true);
   const [showMoreIcon, setShowMoreIcon] = React.useState(true);
   const [showCustomColor, setShowCustomColor] = React.useState(false);
-  const [showExactTheme, setShowExactTheme] = React.useState(false);
   const [appbarMode, setAppbarMode] = React.useState<AppbarModes>('small');
   const [showCalendarIcon, setShowCalendarIcon] = React.useState(false);
   const [showElevated, setShowElevated] = React.useState(false);
@@ -41,7 +39,7 @@ const AppbarExample = ({ navigation }: Props) => {
 
   const theme = useExampleTheme();
   const { bottom, left, right } = useSafeAreaInsets();
-  const height = theme.isV3 ? 80 : 56;
+  const height = 80;
 
   const isCenterAlignedMode = appbarMode === 'center-aligned';
 
@@ -50,9 +48,6 @@ const AppbarExample = ({ navigation }: Props) => {
       header: () => (
         <Appbar.Header
           style={showCustomColor ? styles.customColor : null}
-          theme={{
-            mode: showExactTheme ? 'exact' : 'adaptive',
-          }}
           mode={appbarMode}
           elevated={showElevated}
         >
@@ -85,28 +80,22 @@ const AppbarExample = ({ navigation }: Props) => {
     showSearchIcon,
     showMoreIcon,
     showCustomColor,
-    showExactTheme,
     appbarMode,
     showCalendarIcon,
     isCenterAlignedMode,
     showElevated,
   ]);
 
-  const TextComponent = theme.isV3 ? Text : Paragraph;
+  const TextComponent = Text;
 
   const renderFAB = () => {
     return (
       <FAB
-        mode={theme.isV3 ? 'flat' : 'elevated'}
+        mode="flat"
         size="medium"
         icon="plus"
         onPress={() => {}}
-        style={[
-          styles.fab,
-          theme.isV3
-            ? { top: (height - MEDIUM_FAB_HEIGHT) / 2 }
-            : { bottom: height / 2 + bottom },
-        ]}
+        style={[styles.fab, { top: (height - MEDIUM_FAB_HEIGHT) / 2 }]}
       />
     );
   };
@@ -117,12 +106,6 @@ const AppbarExample = ({ navigation }: Props) => {
         <TextComponent>Left icon</TextComponent>
         <Switch value={showLeftIcon} onValueChange={setShowLeftIcon} />
       </View>
-      {!theme.isV3 && (
-        <View style={styles.row}>
-          <TextComponent>Subtitle</TextComponent>
-          <Switch value={showSubtitle} onValueChange={setShowSubtitle} />
-        </View>
-      )}
       <View style={styles.row}>
         <TextComponent>Search icon</TextComponent>
         <Switch value={showSearchIcon} onValueChange={setShowSearchIcon} />
@@ -131,32 +114,22 @@ const AppbarExample = ({ navigation }: Props) => {
         <TextComponent>More icon</TextComponent>
         <Switch value={showMoreIcon} onValueChange={setShowMoreIcon} />
       </View>
-      {theme.isV3 && (
-        <View style={styles.row}>
-          <TextComponent>Calendar icon</TextComponent>
-          <Switch
-            value={isCenterAlignedMode ? false : showCalendarIcon}
-            disabled={isCenterAlignedMode}
-            onValueChange={setShowCalendarIcon}
-          />
-        </View>
-      )}
+      <View style={styles.row}>
+        <TextComponent>Calendar icon</TextComponent>
+        <Switch
+          value={isCenterAlignedMode ? false : showCalendarIcon}
+          disabled={isCenterAlignedMode}
+          onValueChange={setShowCalendarIcon}
+        />
+      </View>
       <View style={styles.row}>
         <TextComponent>Custom Color</TextComponent>
         <Switch value={showCustomColor} onValueChange={setShowCustomColor} />
       </View>
-      {!theme.isV3 && (
-        <View style={styles.row}>
-          <TextComponent>Exact Dark Theme</TextComponent>
-          <Switch value={showExactTheme} onValueChange={setShowExactTheme} />
-        </View>
-      )}
-      {theme.isV3 && (
-        <View style={styles.row}>
-          <TextComponent>Elevated</TextComponent>
-          <Switch value={showElevated} onValueChange={setShowElevated} />
-        </View>
-      )}
+      <View style={styles.row}>
+        <TextComponent>Elevated</TextComponent>
+        <Switch value={showElevated} onValueChange={setShowElevated} />
+      </View>
     </>
   );
 
@@ -166,40 +139,34 @@ const AppbarExample = ({ navigation }: Props) => {
         style={{ marginBottom: height + bottom }}
         contentContainerStyle={styles.contentContainer}
       >
-        {theme.isV3 ? (
-          <List.Section title="Default options">
-            {renderDefaultOptions()}
-          </List.Section>
-        ) : (
-          renderDefaultOptions()
-        )}
-        {theme.isV3 && (
-          <List.Section title="Appbar Modes">
-            <RadioButton.Group
-              value={appbarMode}
-              onValueChange={(value: string) =>
-                setAppbarMode(value as AppbarModes)
-              }
-            >
-              <View style={styles.row}>
-                <TextComponent>Small (default)</TextComponent>
-                <RadioButton value="small" />
-              </View>
-              <View style={styles.row}>
-                <TextComponent>Medium</TextComponent>
-                <RadioButton value="medium" />
-              </View>
-              <View style={styles.row}>
-                <TextComponent>Large</TextComponent>
-                <RadioButton value="large" />
-              </View>
-              <View style={styles.row}>
-                <TextComponent>Center-aligned</TextComponent>
-                <RadioButton value="center-aligned" />
-              </View>
-            </RadioButton.Group>
-          </List.Section>
-        )}
+        <List.Section title="Default options">
+          {renderDefaultOptions()}
+        </List.Section>
+        <List.Section title="Appbar Modes">
+          <RadioButton.Group
+            value={appbarMode}
+            onValueChange={(value: string) =>
+              setAppbarMode(value as AppbarModes)
+            }
+          >
+            <View style={styles.row}>
+              <TextComponent>Small (default)</TextComponent>
+              <RadioButton value="small" />
+            </View>
+            <View style={styles.row}>
+              <TextComponent>Medium</TextComponent>
+              <RadioButton value="medium" />
+            </View>
+            <View style={styles.row}>
+              <TextComponent>Large</TextComponent>
+              <RadioButton value="large" />
+            </View>
+            <View style={styles.row}>
+              <TextComponent>Center-aligned</TextComponent>
+              <RadioButton value="center-aligned" />
+            </View>
+          </RadioButton.Group>
+        </List.Section>
       </ScreenWrapper>
       <Appbar
         style={[
@@ -207,20 +174,18 @@ const AppbarExample = ({ navigation }: Props) => {
           {
             height: height + bottom,
           },
-          theme.isV3 && {
+          {
             backgroundColor: theme.colors.elevation.level2,
           },
         ]}
         safeAreaInsets={{ bottom, left, right }}
-        theme={{ mode: showExactTheme ? 'exact' : 'adaptive' }}
       >
         <Appbar.Action icon="archive" onPress={() => {}} />
         <Appbar.Action icon="email" onPress={() => {}} />
         <Appbar.Action icon="label" onPress={() => {}} />
         <Appbar.Action icon="delete" onPress={() => {}} />
-        {theme.isV3 && renderFAB()}
+        {renderFAB()}
       </Appbar>
-      {!theme.isV3 && renderFAB()}
       <Snackbar
         visible={showSnackbar}
         onDismiss={() => setShowSnackbar(false)}

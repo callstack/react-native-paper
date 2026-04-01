@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
-import overlay, { isAnimatedValue } from '../styles/overlay';
+import { isAnimatedValue } from '../styles/overlay';
 import shadow from '../styles/shadow';
 import type { ThemeProp, MD3Elevation } from '../types';
 import { forwardRef } from '../utils/forwardRef';
@@ -56,30 +56,6 @@ export type Props = Omit<React.ComponentPropsWithRef<typeof View>, 'style'> & {
    */
   container?: boolean;
 };
-
-const MD2Surface = forwardRef<View, Props>(
-  ({ style, theme: overrideTheme, ...rest }: Omit<Props, 'elevation'>, ref) => {
-    const { elevation = 4 } = (StyleSheet.flatten(style) || {}) as ViewStyle;
-    const { dark: isDarkTheme, mode, colors } = useInternalTheme(overrideTheme);
-
-    return (
-      <Animated.View
-        ref={ref}
-        {...rest}
-        style={[
-          {
-            backgroundColor:
-              isDarkTheme && mode === 'adaptive'
-                ? overlay(elevation, colors?.surface)
-                : colors?.surface,
-          },
-          elevation ? shadow(elevation) : null,
-          style,
-        ]}
-      />
-    );
-  }
-);
 
 const outerLayerStyleProperties: (keyof ViewStyle)[] = [
   'position',
@@ -277,13 +253,6 @@ const Surface = forwardRef<View, Props>(
   ) => {
     const theme = useInternalTheme(overridenTheme);
 
-    if (!theme.isV3)
-      return (
-        <MD2Surface {...props} theme={theme} style={style} ref={ref}>
-          {children}
-        </MD2Surface>
-      );
-
     const { colors } = theme;
 
     const inputRange = [0, 1, 2, 3, 4, 5];
@@ -313,7 +282,7 @@ const Surface = forwardRef<View, Props>(
           testID={testID}
           style={[
             { backgroundColor },
-            elevation && isElevated ? shadow(elevation, theme.isV3) : null,
+            elevation && isElevated ? shadow(elevation) : null,
             style,
           ]}
         >

@@ -70,10 +70,6 @@ const DialogIcon = ({
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
-  if (!theme.isV3) {
-    return null;
-  }
-
   //@ts-ignore
   const iconColor = color || theme.colors.secondary;
 

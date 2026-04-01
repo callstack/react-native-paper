@@ -8,12 +8,7 @@ import {
 
 import { render, act } from '@testing-library/react-native';
 
-import {
-  MD2LightTheme,
-  MD2DarkTheme,
-  MD3LightTheme,
-  MD3DarkTheme,
-} from '../../styles/themes';
+import { MD3LightTheme, MD3DarkTheme } from '../../styles/themes';
 import type { ThemeProp } from '../../types';
 import PaperProvider from '../PaperProvider';
 import { useTheme } from '../theming';
@@ -107,8 +102,8 @@ const createProvider = (theme?: ThemeProp) => {
   );
 };
 
-const ExtendedLightTheme = { ...MD3LightTheme, isV3: true } as ThemeProp;
-const ExtendedDarkTheme = { ...MD3DarkTheme, isV3: true } as ThemeProp;
+const ExtendedLightTheme = { ...MD3LightTheme } as ThemeProp;
+const ExtendedDarkTheme = { ...MD3DarkTheme } as ThemeProp;
 
 describe('PaperProvider', () => {
   beforeEach(() => {
@@ -229,7 +224,6 @@ describe('PaperProvider', () => {
       colors: {
         ...ExtendedLightTheme.colors,
         primary: 'tomato',
-        accent: 'yellow',
       },
     } as ThemeProp;
     const { getByTestId } = render(createProvider(customTheme));
@@ -237,23 +231,4 @@ describe('PaperProvider', () => {
       customTheme
     );
   });
-
-  it.each`
-    version | colorScheme | expectedTheme
-    ${2}    | ${'light'}  | ${MD2LightTheme}
-    ${2}    | ${'dark'}   | ${MD2DarkTheme}
-    ${3}    | ${'light'}  | ${MD3LightTheme}
-    ${3}    | ${'dark'}   | ${MD3DarkTheme}
-  `(
-    'uses correct theme, $colorScheme mode, version $version',
-    async ({ version, colorScheme, expectedTheme }) => {
-      mockAppearance();
-      (Appearance.getColorScheme as jest.Mock).mockReturnValue(colorScheme);
-      const { getByTestId } = render(createProvider({ version }));
-
-      expect(getByTestId('provider-child-view').props.theme).toStrictEqual(
-        expectedTheme
-      );
-    }
-  );
 });

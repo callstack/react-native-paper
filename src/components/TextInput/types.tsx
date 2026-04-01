@@ -141,7 +141,6 @@ export type InputLabelProps = {
   inputContainerLayout: { width: number };
   labelBackground?: any;
   maxFontSizeMultiplier?: number | undefined | null;
-  isV3?: boolean;
   scaledLabel?: boolean;
 } & LabelProps;
 

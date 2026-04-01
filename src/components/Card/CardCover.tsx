@@ -3,7 +3,7 @@ import { Image, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { getCardCoverStyle } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { grey200 } from '../../styles/themes/v2/colors';
+import { grey200 } from '../../styles/themes/v3/baseColors';
 import type { ThemeProp } from '../../types';
 import { splitStyles } from '../../utils/splitStyles';
 
@@ -76,6 +76,7 @@ const CardCover = ({
 };
 
 CardCover.displayName = 'Card.Cover';
+
 const styles = StyleSheet.create({
   container: {
     height: 195,

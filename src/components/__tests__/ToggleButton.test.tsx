@@ -68,18 +68,6 @@ describe('getToggleButtonColor', () => {
     );
   });
 
-  it('should return correct color when checked and theme version 2', () => {
-    expect(
-      getToggleButtonColor({ theme: getTheme(false, false), checked: true })
-    ).toBe('rgba(0, 0, 0, .08)');
-  });
-
-  it('should return correct color when checked and theme version 2, dark theme', () => {
-    expect(
-      getToggleButtonColor({ theme: getTheme(true, false), checked: true })
-    ).toBe('rgba(255, 255, 255, .12)');
-  });
-
   it('should return transparent color when not checked', () => {
     expect(getToggleButtonColor({ theme: getTheme(), checked: false })).toBe(
       'transparent'

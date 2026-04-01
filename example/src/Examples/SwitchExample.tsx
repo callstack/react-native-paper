@@ -1,23 +1,13 @@
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 
-import {
-  MD2Colors,
-  MD3Colors,
-  Paragraph,
-  Switch,
-  Text,
-  TouchableRipple,
-} from 'react-native-paper';
+import { MD3Colors, Switch, Text, TouchableRipple } from 'react-native-paper';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const SwitchExample = () => {
   const [valueNormal, setNormalValue] = React.useState<boolean>(true);
   const [valueCustom, setCustomValue] = React.useState<boolean>(true);
-
-  const { isV3 } = useExampleTheme();
 
   const switchValueNormalLabel = `switch ${
     valueNormal === true ? 'on' : 'off'
@@ -26,7 +16,7 @@ const SwitchExample = () => {
     valueCustom === true ? 'on' : 'off'
   }`;
 
-  const TextComponent = isV3 ? Text : Paragraph;
+  const TextComponent = Text;
 
   return Platform.OS === 'android' ? (
     <ScreenWrapper style={styles.container}>
@@ -42,10 +32,7 @@ const SwitchExample = () => {
         <View style={styles.row}>
           <TextComponent>Custom {switchValueCustomlLabel}</TextComponent>
           <View pointerEvents="none">
-            <Switch
-              value={valueCustom}
-              color={isV3 ? MD3Colors.tertiary50 : MD2Colors.blue500}
-            />
+            <Switch value={valueCustom} color={MD3Colors.tertiary50} />
           </View>
         </View>
       </TouchableRipple>
@@ -72,7 +59,7 @@ const SwitchExample = () => {
         <Switch
           value={valueCustom}
           onValueChange={() => setCustomValue(!valueCustom)}
-          color={isV3 ? MD3Colors.tertiary50 : MD2Colors.blue500}
+          color={MD3Colors.tertiary50}
         />
       </View>
       <View style={styles.row}>

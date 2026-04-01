@@ -1,6 +1,4 @@
-import { Platform, PlatformOSType } from 'react-native';
-
-import type { Fonts, MD3Type, MD3Typescale, MD3TypescaleKey } from '../types';
+import type { MD3Type, MD3Typescale, MD3TypescaleKey } from '../types';
 import { typescale } from './themes/v3/tokens';
 
 export const fontConfig = {
@@ -60,27 +58,22 @@ export const fontConfig = {
   },
 };
 
-type MD2FontsConfig = {
-  [platform in PlatformOSType | 'default']?: Fonts;
-};
+// eslint-disable-next-line no-redeclare
+export default function configureFonts(params?: {
+  config?: Partial<MD3Type>;
+}): MD3Typescale;
+// eslint-disable-next-line no-redeclare
+export default function configureFonts(params?: {
+  config?: Partial<Record<MD3TypescaleKey, Partial<MD3Type>>>;
+}): MD3Typescale;
+// eslint-disable-next-line no-redeclare
+export default function configureFonts(params: {
+  config: Record<string, MD3Type>;
+}): MD3Typescale & { [key: string]: MD3Type };
+// eslint-disable-next-line no-redeclare
+export default function configureFonts(params?: any) {
+  const { config } = params || {};
 
-type MD3FontsConfig =
-  | {
-      [key in MD3TypescaleKey]: Partial<MD3Type>;
-    }
-  | {
-      [key: string]: MD3Type;
-    }
-  | Partial<MD3Type>;
-
-function configureV2Fonts(config: MD2FontsConfig): Fonts {
-  const fonts = Platform.select({ ...fontConfig, ...config }) as Fonts;
-  return fonts;
-}
-
-function configureV3Fonts(
-  config: MD3FontsConfig
-): MD3Typescale | (MD3Typescale & { [key: string]: MD3Type }) {
   if (!config) {
     return typescale;
   }
@@ -103,41 +96,9 @@ function configureV3Fonts(
     typescale,
     ...Object.entries(config).map(([variantName, variantProperties]) => ({
       [variantName]: {
-        ...typescale[variantName as MD3TypescaleKey],
-        ...variantProperties,
+        ...(typescale[variantName as MD3TypescaleKey] as object),
+        ...(variantProperties as object),
       },
     }))
   );
-}
-
-// eslint-disable-next-line no-redeclare
-export default function configureFonts(params: { isV3: false }): Fonts;
-// eslint-disable-next-line no-redeclare
-export default function configureFonts(params: {
-  config?: MD2FontsConfig;
-  isV3: false;
-}): Fonts;
-// eslint-disable-next-line no-redeclare
-export default function configureFonts(params?: {
-  config?: Partial<MD3Type>;
-  isV3?: true;
-}): MD3Typescale;
-// eslint-disable-next-line no-redeclare
-export default function configureFonts(params?: {
-  config?: Partial<Record<MD3TypescaleKey, Partial<MD3Type>>>;
-  isV3?: true;
-}): MD3Typescale;
-// eslint-disable-next-line no-redeclare
-export default function configureFonts(params: {
-  config: Record<string, MD3Type>;
-  isV3?: true;
-}): MD3Typescale & { [key: string]: MD3Type };
-// eslint-disable-next-line no-redeclare
-export default function configureFonts(params?: any) {
-  const { isV3 = true, config } = params || {};
-
-  if (isV3) {
-    return configureV3Fonts(config);
-  }
-  return configureV2Fonts(config);
 }

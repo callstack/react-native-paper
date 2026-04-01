@@ -2,23 +2,19 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import {
-  MD2Colors,
   MD3Colors,
-  Paragraph,
   RadioButton,
   Text,
   TouchableRipple,
 } from 'react-native-paper';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 type State = 'normal' | 'normal-ios' | 'normal-item' | 'custom';
 
 const RadioButtonExample = () => {
   const [checked, setChecked] = React.useState<State>('normal');
-  const { isV3 } = useExampleTheme();
-  const TextComponent = isV3 ? Text : Paragraph;
+  const TextComponent = Text;
 
   return (
     <ScreenWrapper style={styles.container}>
@@ -50,7 +46,7 @@ const RadioButtonExample = () => {
           <View pointerEvents="none">
             <RadioButton
               value="custom"
-              color={isV3 ? MD3Colors.error70 : MD2Colors.blue500}
+              color={MD3Colors.error70}
               status={checked === 'custom' ? 'checked' : 'unchecked'}
             />
           </View>

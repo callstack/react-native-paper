@@ -192,10 +192,10 @@ const Banner = ({
   return (
     <Surface
       {...rest}
-      style={[!theme.isV3 && styles.elevation, { opacity }, style]}
+      style={[{ opacity }, style]}
       theme={theme}
       container
-      {...(theme.isV3 && { elevation })}
+      elevation={elevation}
     >
       <View style={[styles.wrapper, contentStyle]}>
         <Animated.View style={{ height }} />
@@ -222,14 +222,7 @@ const Banner = ({
               </View>
             ) : null}
             <Text
-              style={[
-                styles.message,
-                {
-                  color: theme.isV3
-                    ? theme.colors.onSurface
-                    : theme.colors.text,
-                },
-              ]}
+              style={[styles.message, { color: theme.colors.onSurface }]}
               accessibilityLiveRegion={visible ? 'polite' : 'none'}
               accessibilityRole="alert"
               maxFontSizeMultiplier={maxFontSizeMultiplier}
@@ -291,9 +284,6 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 4,
-  },
-  elevation: {
-    elevation: 1,
   },
   transparent: {
     opacity: 0,

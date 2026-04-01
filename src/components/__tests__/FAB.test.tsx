@@ -2,12 +2,9 @@ import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
-import color from 'color';
 import { act } from 'react-test-renderer';
 
 import { getTheme } from '../../core/theming';
-import { black, white } from '../../styles/themes/v2/colors';
-import getContrastingColor from '../../utils/getContrastingColor';
 import FAB from '../FAB';
 import { getFABColors } from '../FAB/utils';
 
@@ -214,24 +211,24 @@ describe('getFABColors - background color', () => {
   it('should return correct disabled color, for theme version 2, light mode', () => {
     expect(
       getFABColors({
-        theme: getTheme(false, false),
+        theme: getTheme(false),
         disabled: true,
         variant: 'primary',
       })
     ).toMatchObject({
-      backgroundColor: color(black).alpha(0.12).rgb().string(),
+      backgroundColor: getTheme(false).colors.surfaceDisabled,
     });
   });
 
   it('should return correct disabled color, for theme version 2, dark mode', () => {
     expect(
       getFABColors({
-        theme: getTheme(true, false),
+        theme: getTheme(true),
         disabled: true,
         variant: 'primary',
       })
     ).toMatchObject({
-      backgroundColor: color(white).alpha(0.12).rgb().string(),
+      backgroundColor: getTheme(true).colors.surfaceDisabled,
     });
   });
 
@@ -282,11 +279,11 @@ describe('getFABColors - background color', () => {
   it('should return correct theme color, for theme version 2', () => {
     expect(
       getFABColors({
-        theme: getTheme(false, false),
+        theme: getTheme(false),
         variant: 'primary',
       })
     ).toMatchObject({
-      backgroundColor: getTheme(false, false).colors.accent,
+      backgroundColor: getTheme(false).colors.primaryContainer,
     });
   });
 });
@@ -319,24 +316,24 @@ describe('getFABColors - foreground color', () => {
   it('should return correct disabled color, for theme version 2, light mode', () => {
     expect(
       getFABColors({
-        theme: getTheme(false, false),
+        theme: getTheme(false),
         disabled: true,
         variant: 'primary',
       })
     ).toMatchObject({
-      foregroundColor: color(black).alpha(0.32).rgb().string(),
+      foregroundColor: getTheme(false).colors.onSurfaceDisabled,
     });
   });
 
   it('should return correct disabled color, for theme version 2, dark mode', () => {
     expect(
       getFABColors({
-        theme: getTheme(true, false),
+        theme: getTheme(true),
         disabled: true,
         variant: 'primary',
       })
     ).toMatchObject({
-      foregroundColor: color(white).alpha(0.32).rgb().string(),
+      foregroundColor: getTheme(true).colors.onSurfaceDisabled,
     });
   });
 
@@ -387,15 +384,11 @@ describe('getFABColors - foreground color', () => {
   it('should return correct theme color, for theme version 2', () => {
     expect(
       getFABColors({
-        theme: getTheme(false, false),
+        theme: getTheme(false),
         variant: 'primary',
       })
     ).toMatchObject({
-      foregroundColor: getContrastingColor(
-        getTheme(false, false).colors.accent,
-        white,
-        'rgba(0, 0, 0, .54)'
-      ),
+      foregroundColor: getTheme(false).colors.onPrimaryContainer,
     });
   });
 });

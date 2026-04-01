@@ -7,11 +7,9 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
 import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../../core/theming';
-import { black } from '../../styles/themes/v2/colors';
 import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
@@ -101,11 +99,9 @@ const AppbarAction = forwardRef<View, Props>(
 
     const actionIconColor = iconColor
       ? iconColor
-      : theme.isV3
-      ? isLeading
-        ? theme.colors.onSurface
-        : theme.colors.onSurfaceVariant
-      : color(black).alpha(0.54).rgb().string();
+      : isLeading
+      ? theme.colors.onSurface
+      : theme.colors.onSurfaceVariant;
 
     return (
       <IconButton

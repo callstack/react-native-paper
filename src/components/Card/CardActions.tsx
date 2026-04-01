@@ -36,12 +36,13 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const CardActions = ({ theme, style, children, ...rest }: Props) => {
-  const { isV3 } = useInternalTheme(theme);
+  useInternalTheme(theme);
 
-  const justifyContent = (
-    isV3 ? 'flex-end' : 'flex-start'
-  ) as ViewStyle['justifyContent'];
-  const containerStyle = [styles.container, { justifyContent }, style];
+  const containerStyle = [
+    styles.container,
+    { justifyContent: 'flex-end' as ViewStyle['justifyContent'] },
+    style,
+  ];
 
   return (
     <View {...rest} style={containerStyle}>
@@ -50,15 +51,12 @@ const CardActions = ({ theme, style, children, ...rest }: Props) => {
           return child;
         }
 
-        const compact = !isV3 && child.props.compact !== false;
         const mode =
-          child.props.mode ??
-          (isV3 ? (index === 0 ? 'outlined' : 'contained') : undefined);
-        const childStyle = [isV3 && styles.button, child.props.style];
+          child.props.mode ?? (index === 0 ? 'outlined' : 'contained');
+        const childStyle = [styles.button, child.props.style];
 
         return React.cloneElement(child, {
           ...child.props,
-          compact,
           mode,
           style: childStyle,
         });

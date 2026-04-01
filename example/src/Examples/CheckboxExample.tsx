@@ -1,16 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import {
-  Checkbox,
-  MD2Colors,
-  MD3Colors,
-  Paragraph,
-  Text,
-  TouchableRipple,
-} from 'react-native-paper';
+import { Checkbox, MD3Colors, Text, TouchableRipple } from 'react-native-paper';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const CheckboxExample = () => {
@@ -18,8 +10,7 @@ const CheckboxExample = () => {
   const [checkedCustom, setCheckedCustom] = React.useState<boolean>(true);
   const [indeterminate, setIndeterminate] = React.useState<boolean>(true);
 
-  const { isV3 } = useExampleTheme();
-  const TextComponent = isV3 ? Text : Paragraph;
+  const TextComponent = Text;
 
   return (
     <ScreenWrapper style={styles.container}>
@@ -37,7 +28,7 @@ const CheckboxExample = () => {
           <TextComponent>Custom</TextComponent>
           <View pointerEvents="none">
             <Checkbox
-              color={isV3 ? MD3Colors.error70 : MD2Colors.blue500}
+              color={MD3Colors.error70}
               status={checkedCustom ? 'checked' : 'unchecked'}
             />
           </View>

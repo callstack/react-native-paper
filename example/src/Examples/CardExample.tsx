@@ -7,7 +7,6 @@ import {
   Card,
   Chip,
   IconButton,
-  Paragraph,
   Text,
 } from 'react-native-paper';
 
@@ -19,16 +18,14 @@ import ScreenWrapper from '../ScreenWrapper';
 type Mode = 'elevated' | 'outlined' | 'contained';
 
 const CardExample = () => {
-  const { colors, isV3 } = useExampleTheme();
+  const { colors } = useExampleTheme();
   const [selectedMode, setSelectedMode] = React.useState('elevated' as Mode);
   const [isSelected, setIsSelected] = React.useState(false);
   const preferences = React.useContext(PreferencesContext);
 
-  const modes = isV3
-    ? ['elevated', 'outlined', 'contained']
-    : ['elevated', 'outlined'];
+  const modes = ['elevated', 'outlined', 'contained'];
 
-  const TextComponent = isV3 ? Text : Paragraph;
+  const TextComponent = Text;
 
   return (
     <ScreenWrapper contentContainerStyle={styles.content}>
@@ -63,22 +60,20 @@ const CardExample = () => {
             </TextComponent>
           </Card.Content>
         </Card>
-        {isV3 && (
-          <Card style={styles.card} mode={selectedMode}>
-            <Card.Cover source={require('../../assets/images/bridge.jpg')} />
-            <Card.Title
-              title="Title variant"
-              subtitle="Subtitle variant"
-              titleVariant="headlineMedium"
-              subtitleVariant="bodyLarge"
-            />
-            <Card.Content>
-              <TextComponent variant="bodyMedium">
-                This is a card using title and subtitle with specified variants.
-              </TextComponent>
-            </Card.Content>
-          </Card>
-        )}
+        <Card style={styles.card} mode={selectedMode}>
+          <Card.Cover source={require('../../assets/images/bridge.jpg')} />
+          <Card.Title
+            title="Title variant"
+            subtitle="Subtitle variant"
+            titleVariant="headlineMedium"
+            subtitleVariant="bodyLarge"
+          />
+          <Card.Content>
+            <TextComponent variant="bodyMedium">
+              This is a card using title and subtitle with specified variants.
+            </TextComponent>
+          </Card.Content>
+        </Card>
         <Card style={styles.card} mode={selectedMode}>
           <Card.Cover source={require('../../assets/images/forest.jpg')} />
           <Card.Actions>

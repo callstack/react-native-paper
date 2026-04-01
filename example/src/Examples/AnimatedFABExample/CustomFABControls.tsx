@@ -6,7 +6,7 @@ import type {
   AnimatedFABAnimateFrom,
   AnimatedFABIconMode,
 } from 'react-native-paper';
-import { Paragraph, RadioButton, Text } from 'react-native-paper';
+import { RadioButton, Text } from 'react-native-paper';
 
 import { useExampleTheme } from '../../hooks/useExampleTheme';
 
@@ -40,19 +40,15 @@ const CustomControl = ({
   value,
   onChange,
 }: CustomControlProps) => {
-  const { isV3 } = useExampleTheme();
-
   const _renderItem = React.useCallback(
     ({ item }: ListRenderItemInfo<(typeof options)[number]>) => {
-      const TextComponent = isV3 ? Text : Paragraph;
-
       return (
         <TouchableOpacity
           accessibilityRole="button"
           onPress={() => onChange(item)}
           style={styles.controlItem}
         >
-          <TextComponent variant="labelLarge">{item}</TextComponent>
+          <Text variant="labelLarge">{item}</Text>
 
           <RadioButton
             value="dynamic"
@@ -61,18 +57,17 @@ const CustomControl = ({
         </TouchableOpacity>
       );
     },
-    [value, onChange, isV3]
+    [value, onChange]
   );
 
   const _keyExtractor = React.useCallback(
     (item: (typeof options)[number]) => item,
     []
   );
-  const TextComponent = isV3 ? Text : Paragraph;
 
   return (
     <View style={styles.controlWrapper}>
-      <TextComponent variant="labelLarge">{name}</TextComponent>
+      <Text variant="labelLarge">{name}</Text>
 
       <FlatList
         horizontal

@@ -122,8 +122,7 @@ const Icon = ({
     typeof source === 'object' && source.direction && source.source
       ? source.source
       : source;
-  const iconColor =
-    color || (theme.isV3 ? theme.colors.onSurface : theme.colors.text);
+  const iconColor = color || theme.colors.onSurface;
 
   if (isImageSource(s)) {
     return (

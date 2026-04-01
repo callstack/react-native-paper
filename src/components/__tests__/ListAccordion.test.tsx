@@ -5,7 +5,7 @@ import { render } from '@testing-library/react-native';
 import color from 'color';
 
 import { getTheme } from '../../core/theming';
-import { red500 } from '../../styles/themes/v2/colors';
+import { red500 } from '../../styles/themes/v3/baseColors';
 import ListAccordion from '../List/ListAccordion';
 import ListAccordionGroup from '../List/ListAccordionGroup';
 import ListIcon from '../List/ListIcon';
@@ -129,13 +129,10 @@ describe('getAccordionColors - title color', () => {
   it('should return theme color, for theme version 2', () => {
     expect(
       getAccordionColors({
-        theme: getTheme(false, false),
+        theme: getTheme(false),
       })
     ).toMatchObject({
-      titleColor: color(getTheme(false, false).colors.text)
-        .alpha(0.87)
-        .rgb()
-        .string(),
+      titleColor: getTheme(false).colors.onSurface,
     });
   });
 });
@@ -154,13 +151,10 @@ describe('getAccordionColors - description color', () => {
   it('should return theme color, for theme version 2', () => {
     expect(
       getAccordionColors({
-        theme: getTheme(false, false),
+        theme: getTheme(false),
       })
     ).toMatchObject({
-      descriptionColor: color(getTheme(false, false).colors.text)
-        .alpha(0.54)
-        .rgb()
-        .string(),
+      descriptionColor: getTheme(false).colors.onSurfaceVariant,
     });
   });
 });
@@ -179,13 +173,10 @@ describe('getAccordionColors - title text color', () => {
   it('should return theme color, for theme version 2', () => {
     expect(
       getAccordionColors({
-        theme: getTheme(false, false),
+        theme: getTheme(false),
       })
     ).toMatchObject({
-      titleTextColor: color(getTheme(false, false).colors.text)
-        .alpha(0.87)
-        .rgb()
-        .string(),
+      titleTextColor: getTheme(false).colors.onSurface,
     });
   });
 
@@ -216,17 +207,15 @@ describe('getAccordionColors - ripple color', () => {
   });
 
   it('should return theme color, for theme version 2', () => {
-    const v2TextColor = color(getTheme(false, false).colors.text)
-      .alpha(0.87)
-      .rgb()
-      .string();
-
     expect(
       getAccordionColors({
-        theme: getTheme(false, false),
+        theme: getTheme(false),
       })
     ).toMatchObject({
-      rippleColor: color(v2TextColor).alpha(0.12).rgb().string(),
+      rippleColor: color(getTheme(false).colors.onSurface)
+        .alpha(0.12)
+        .rgb()
+        .string(),
     });
   });
 

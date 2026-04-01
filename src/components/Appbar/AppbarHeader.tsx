@@ -13,7 +13,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Appbar } from './Appbar';
 import {
-  DEFAULT_APPBAR_HEIGHT,
   getAppbarBackgroundColor,
   modeAppbarHeight,
   getAppbarBorders,
@@ -104,14 +103,13 @@ const AppbarHeader = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { isV3 } = theme;
 
   const flattenedStyle = StyleSheet.flatten(style);
   const {
-    height = isV3 ? modeAppbarHeight[mode] : DEFAULT_APPBAR_HEIGHT,
-    elevation = isV3 ? (elevated ? 2 : 0) : 4,
+    height = modeAppbarHeight[mode],
+    elevation = elevated ? 2 : 0,
     backgroundColor: customBackground,
-    zIndex = isV3 && elevated ? 1 : 0,
+    zIndex = elevated ? 1 : 0,
     ...restStyle
   } = (flattenedStyle || {}) as Exclude<typeof flattenedStyle, number> & {
     height?: number;
@@ -124,7 +122,6 @@ const AppbarHeader = ({
 
   const backgroundColor = getAppbarBackgroundColor(
     theme,
-    elevation,
     customBackground,
     elevated
   );
@@ -150,9 +147,7 @@ const AppbarHeader = ({
         testID={testID}
         style={[{ height, backgroundColor }, styles.appbar, restStyle]}
         dark={dark}
-        {...(isV3 && {
-          mode,
-        })}
+        mode={mode}
         {...rest}
         theme={theme}
       />

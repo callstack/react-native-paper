@@ -3,13 +3,13 @@ import { Platform } from 'react-native';
 import setColor from 'color';
 
 import {
-  grey400,
-  grey800,
-  grey50,
-  grey700,
-  white,
   black,
-} from '../../styles/themes/v2/colors';
+  white,
+  grey50,
+  grey400,
+  grey700,
+  grey800,
+} from '../../styles/themes/v3/baseColors';
 import type { InternalTheme } from '../../types';
 
 type BaseProps = {
@@ -29,11 +29,7 @@ const getCheckedColor = ({
     return color;
   }
 
-  if (theme.isV3) {
-    return theme.colors.primary;
-  }
-
-  return theme.colors.accent;
+  return theme.colors.primary;
 };
 
 const getThumbTintColor = ({
@@ -79,10 +75,7 @@ const getOnTintColor = ({
 
   if (disabled) {
     if (theme.dark) {
-      if (theme.isV3) {
-        return setColor(white).alpha(0.06).rgb().string();
-      }
-      return setColor(white).alpha(0.1).rgb().string();
+      return setColor(white).alpha(0.06).rgb().string();
     }
     return setColor(black).alpha(0.12).rgb().string();
   }

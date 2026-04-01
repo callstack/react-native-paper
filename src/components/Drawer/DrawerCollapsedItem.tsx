@@ -111,7 +111,6 @@ const DrawerCollapsedItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { isV3 } = theme;
   const { scale } = theme.animation;
 
   const [numOfLines, setNumOfLines] = React.useState(1);
@@ -125,10 +124,6 @@ const DrawerCollapsedItem = ({
       animScale.setValue(0.5);
     }
   }, [animScale, active]);
-
-  if (!isV3) {
-    return null;
-  }
 
   const handlePressOut = () => {
     Animated.timing(animScale, {
@@ -163,7 +158,7 @@ const DrawerCollapsedItem = ({
 
   const labelTextStyle = {
     color: labelColor,
-    ...(isV3 ? theme.fonts.labelMedium : {}),
+    ...theme.fonts.labelMedium,
   };
 
   const icon =

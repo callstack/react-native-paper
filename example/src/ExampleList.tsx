@@ -132,15 +132,11 @@ const data = Object.keys(mainExamples).map(
 export default function ExampleList({ navigation }: Props) {
   const keyExtractor = (item: { id: string }) => item.id;
 
-  const { colors, isV3 } = useExampleTheme();
+  const { colors } = useExampleTheme();
   const safeArea = useSafeAreaInsets();
 
   const renderItem = ({ item }: { item: Item }) => {
     const { data, id } = item;
-
-    if (!isV3 && data.title === mainExamples.themingWithReactNavigation.title) {
-      return null;
-    }
 
     return (
       <List.Item

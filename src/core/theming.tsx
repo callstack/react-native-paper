@@ -1,20 +1,9 @@
 import type { ComponentType } from 'react';
 
 import { $DeepPartial, createTheming } from '@callstack/react-theme-provider';
-import color from 'color';
 
-import {
-  MD2DarkTheme,
-  MD2LightTheme,
-  MD3DarkTheme,
-  MD3LightTheme,
-} from '../styles/themes';
-import type {
-  InternalTheme,
-  MD3Theme,
-  MD3AndroidColors,
-  NavigationTheme,
-} from '../types';
+import { MD3DarkTheme, MD3LightTheme } from '../styles/themes';
+import type { InternalTheme, MD3Theme, NavigationTheme } from '../types';
 
 export const DefaultTheme = MD3LightTheme;
 
@@ -36,30 +25,8 @@ export const withInternalTheme = <Props extends { theme: InternalTheme }, C>(
   WrappedComponent: ComponentType<Props & { theme: InternalTheme }> & C
 ) => withTheme<Props, C>(WrappedComponent);
 
-export const defaultThemesByVersion = {
-  2: {
-    light: MD2LightTheme,
-    dark: MD2DarkTheme,
-  },
-  3: {
-    light: MD3LightTheme,
-    dark: MD3DarkTheme,
-  },
-};
-
-export const getTheme = <
-  Scheme extends boolean = false,
-  IsVersion3 extends boolean = true
->(
-  isDark: Scheme = false as Scheme,
-  isV3: IsVersion3 = true as IsVersion3
-): (typeof defaultThemesByVersion)[IsVersion3 extends true
-  ? 3
-  : 2][Scheme extends true ? 'dark' : 'light'] => {
-  const themeVersion = isV3 ? 3 : 2;
-  const scheme = isDark ? 'dark' : 'light';
-
-  return defaultThemesByVersion[themeVersion][scheme];
+export const getTheme = (isDark: boolean = false): MD3Theme => {
+  return isDark ? MD3DarkTheme : MD3LightTheme;
 };
 
 // eslint-disable-next-line no-redeclare
@@ -159,20 +126,4 @@ const getAdaptedTheme = <T extends NavigationTheme>(
   }
 
   return base;
-};
-
-export const getDynamicThemeElevations = (scheme: MD3AndroidColors) => {
-  const elevationValues = ['transparent', 0.05, 0.08, 0.11, 0.12, 0.14];
-  return elevationValues.reduce((elevations, elevationValue, index) => {
-    return {
-      ...elevations,
-      [`level${index}`]:
-        index === 0
-          ? elevationValue
-          : color(scheme.surface)
-              .mix(color(scheme.primary), elevationValue as number)
-              .rgb()
-              .string(),
-    };
-  }, {});
 };
