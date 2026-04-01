@@ -4,7 +4,7 @@ import { Text, View } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 
-import { red500 } from '../../styles/themes/v3/baseColors';
+import { red500 } from '../../styles/themes/baseColors';
 import Chip from '../Chip/Chip';
 import IconButton from '../IconButton/IconButton';
 import ListIcon from '../List/ListIcon';

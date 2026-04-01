@@ -117,7 +117,7 @@ it('defines onClearIconPress action and checks if it is called when close button
   expect(onClearIconPressMock).toHaveBeenCalledTimes(1);
 });
 
-it('renders clear icon wrapper, with appropriate style for v3', () => {
+it('renders clear icon wrapper, with appropriate style', () => {
   const { getByTestId, update } = render(
     <Searchbar testID="search-bar" value="" />
   );

@@ -1,4 +1,4 @@
-export { MD3Colors } from './styles/themes/v3/tokens';
+export { MD3Colors } from './styles/themes/tokens';
 
 export {
   useTheme,

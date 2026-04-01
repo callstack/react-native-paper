@@ -1,5 +1,5 @@
 import type { MD3Type, MD3Typescale, MD3TypescaleKey } from '../types';
-import { typescale } from './themes/v3/tokens';
+import { typescale } from './themes/tokens';
 
 export const fontConfig = {
   web: {

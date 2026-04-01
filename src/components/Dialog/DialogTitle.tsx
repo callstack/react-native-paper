@@ -63,7 +63,7 @@ const DialogTitle = ({
     <Text
       variant="headlineSmall"
       accessibilityRole="header"
-      style={[styles.text, styles.v3Text, headerTextStyle, style]}
+      style={[styles.text, headerTextStyle, style]}
       {...rest}
     >
       {children}
@@ -75,13 +75,9 @@ DialogTitle.displayName = 'Dialog.Title';
 
 const styles = StyleSheet.create({
   text: {
-    marginTop: 22,
-    marginBottom: 18,
-    marginHorizontal: 24,
-  },
-  v3Text: {
     marginTop: 16,
     marginBottom: 16,
+    marginHorizontal: 24,
   },
 });
 

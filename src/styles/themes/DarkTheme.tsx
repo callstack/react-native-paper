@@ -2,7 +2,7 @@ import color from 'color';
 
 import { MD3LightTheme } from './LightTheme';
 import { MD3Colors, tokens } from './tokens';
-import type { MD3Theme } from '../../../types';
+import type { MD3Theme } from '../../types';
 
 const { palette, opacity } = tokens.md.ref;
 

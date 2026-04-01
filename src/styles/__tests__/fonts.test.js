@@ -132,7 +132,7 @@ const loadFonts = () => {
     configureFonts = fonts.default;
     fontConfig = fonts.fontConfig;
 
-    typescale = require('../themes/v3/tokens').typescale;
+    typescale = require('../themes/tokens').typescale;
   });
 
   return { configureFonts, fontConfig, typescale };

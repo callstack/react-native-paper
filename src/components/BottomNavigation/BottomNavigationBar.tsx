@@ -565,15 +565,12 @@ const BottomNavigationBar = <Route extends BaseRoute>({
             // We render the active icon and label on top of inactive ones and cross-fade them on change.
             // This trick gives the illusion that we are animating between active and inactive colors.
             // This is to ensure that we can use native driver, as colors cannot be animated with native driver.
-            const activeOpacity = active;
-            const inactiveOpacity = active.interpolate({
-              inputRange: [0, 1],
-              outputRange: [1, 0],
-            });
-
-            const v3ActiveOpacity = focused ? 1 : 0;
-            const v3InactiveOpacity = shifting
-              ? inactiveOpacity
+            const activeOpacity = focused ? 1 : 0;
+            const inactiveOpacity = shifting
+              ? active.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [1, 0],
+                })
               : focused
               ? 0
               : 1;
@@ -626,20 +623,19 @@ const BottomNavigationBar = <Route extends BaseRoute>({
               accessibilityLabel: getAccessibilityLabel({ route }),
               accessibilityRole: Platform.OS === 'ios' ? 'button' : 'tab',
               accessibilityState: { selected: focused },
-              style: [styles.item, styles.v3Item],
+              style: styles.item,
               children: (
                 <View
                   pointerEvents="none"
                   style={
                     labeled
-                      ? styles.v3TouchableContainer
-                      : styles.v3NoLabelContainer
+                      ? styles.touchableContainer
+                      : styles.noLabelContainer
                   }
                 >
                   <Animated.View
                     style={[
                       styles.iconContainer,
-                      styles.v3IconContainer,
                       isShiftingOrLabeled && {
                         transform: [{ translateY }],
                       },
@@ -664,11 +660,10 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                     <Animated.View
                       style={[
                         styles.iconWrapper,
-                        styles.v3IconWrapper,
                         {
                           opacity: isShiftingOrLabeled
                             ? activeOpacity
-                            : v3ActiveOpacity,
+                            : activeOpacity,
                         },
                       ]}
                     >
@@ -689,11 +684,10 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                     <Animated.View
                       style={[
                         styles.iconWrapper,
-                        styles.v3IconWrapper,
                         {
                           opacity: isShiftingOrLabeled
                             ? inactiveOpacity
-                            : v3InactiveOpacity,
+                            : inactiveOpacity,
                         },
                       ]}
                     >
@@ -733,7 +727,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                           {
                             opacity: isShiftingOrLabeled
                               ? activeOpacity
-                              : v3ActiveOpacity,
+                              : activeOpacity,
                           },
                         ]}
                       >
@@ -766,7 +760,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                             {
                               opacity: isShiftingOrLabeled
                                 ? inactiveOpacity
-                                : v3InactiveOpacity,
+                                : inactiveOpacity,
                             },
                           ]}
                         >
@@ -830,32 +824,20 @@ const styles = StyleSheet.create({
   },
   item: {
     flex: 1,
-    // Top padding is 6 and bottom padding is 10
-    // The extra 4dp bottom padding is offset by label's height
-    paddingVertical: 6,
-  },
-  v3Item: {
     paddingVertical: 0,
   },
   iconContainer: {
-    height: 24,
-    width: 24,
-    marginTop: 2,
-    marginHorizontal: 12,
-    alignSelf: 'center',
-  },
-  v3IconContainer: {
     height: 32,
     width: 32,
-    marginBottom: 4,
     marginTop: 0,
+    marginBottom: 4,
+    marginHorizontal: 12,
+    alignSelf: 'center',
     justifyContent: 'center',
   },
   iconWrapper: {
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',
-  },
-  v3IconWrapper: {
     top: 4,
   },
   labelContainer: {
@@ -882,11 +864,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
   },
-  v3TouchableContainer: {
+  touchableContainer: {
     paddingTop: 12,
     paddingBottom: 16,
   },
-  v3NoLabelContainer: {
+  noLabelContainer: {
     height: 80,
     justifyContent: 'center',
     alignItems: 'center',

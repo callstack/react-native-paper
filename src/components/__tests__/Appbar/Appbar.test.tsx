@@ -5,7 +5,7 @@ import { act, render } from '@testing-library/react-native';
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 
 import { getTheme } from '../../../core/theming';
-import { tokens } from '../../../styles/themes/v3/tokens';
+import { tokens } from '../../../styles/themes/tokens';
 import Appbar from '../../Appbar';
 import {
   getAppbarBackgroundColor,
@@ -132,12 +132,12 @@ describe('renderAppbarContent', () => {
       renderOnly: ['Appbar.Content'],
     });
 
-    const v3Spacing = {
+    const spacing = {
       marginLeft: 12,
     };
 
     expect(result[0].props.style).toEqual(
-      expect.arrayContaining([expect.objectContaining(v3Spacing)])
+      expect.arrayContaining([expect.objectContaining(spacing)])
     );
   });
 
@@ -296,13 +296,13 @@ describe('getAppbarColors', () => {
     );
   });
 
-  it('should return v3 light color if theme version is 3', () => {
+  it('should return light theme color', () => {
     expect(getAppbarBackgroundColor(getTheme())).toBe(
       tokens.md.ref.palette.neutral98
     );
   });
 
-  it('should return v3 dark color if theme version is 3', () => {
+  it('should return dark theme color', () => {
     expect(getAppbarBackgroundColor(getTheme(true))).toBe(
       tokens.md.ref.palette.neutral6
     );

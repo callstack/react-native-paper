@@ -4,7 +4,7 @@ import { Animated, StyleSheet, Text } from 'react-native';
 import { act, render } from '@testing-library/react-native';
 
 import { getTheme } from '../../../core/theming';
-import { MD3Colors } from '../../../styles/themes/v3/tokens';
+import { MD3Colors } from '../../../styles/themes/tokens';
 import Button from '../../Button/Button';
 import Card from '../../Card/Card';
 import { getCardColors, getCardCoverStyle } from '../../Card/utils';

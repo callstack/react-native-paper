@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import { MD3Colors } from '../../styles/themes/v3/tokens';
+import { MD3Colors } from '../../styles/themes/tokens';
 import type { ThemeProp } from '../../types';
 import Divider from '../Divider';
 import Text from '../Typography/Text';
@@ -78,7 +78,7 @@ const DrawerSection = ({
   return (
     <View style={[styles.container, style]} {...rest}>
       {title && (
-        <View style={[styles.titleContainer, styles.v3TitleContainer]}>
+        <View style={styles.titleContainer}>
           {title && (
             <Text
               variant="titleSmall"
@@ -99,12 +99,7 @@ const DrawerSection = ({
       )}
       {children}
       {showDivider && (
-        <Divider
-          horizontalInset
-          bold
-          style={[styles.divider, styles.v3Divider]}
-          theme={theme}
-        />
+        <Divider horizontalInset bold style={styles.divider} theme={theme} />
       )}
     </View>
   );
@@ -117,16 +112,11 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   titleContainer: {
-    height: 40,
-    justifyContent: 'center',
-  },
-  v3TitleContainer: {
     height: 56,
+    justifyContent: 'center',
   },
   divider: {
     marginTop: 4,
-  },
-  v3Divider: {
     backgroundColor: MD3Colors.neutralVariant50,
   },
 });

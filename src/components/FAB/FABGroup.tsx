@@ -432,7 +432,6 @@ const FABGroup = ({
                           transform: [{ translateY: labelTranslations[i] }],
                           opacity: opacities[i],
                         },
-                        styles.v3ContainerStyle,
                         it.containerStyle,
                       ]}
                     >
@@ -517,23 +516,20 @@ const styles = StyleSheet.create({
   backdrop: {
     ...StyleSheet.absoluteFillObject,
   },
+  // eslint-disable-next-line react-native/no-color-literals
   containerStyle: {
     borderRadius: 5,
     paddingHorizontal: 12,
     paddingVertical: 6,
     marginVertical: 8,
     marginHorizontal: 16,
-    elevation: 2,
+    elevation: 0,
+    backgroundColor: 'transparent',
   },
   item: {
     marginBottom: 16,
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-  },
-  // eslint-disable-next-line react-native/no-color-literals
-  v3ContainerStyle: {
-    backgroundColor: 'transparent',
-    elevation: 0,
   },
 });

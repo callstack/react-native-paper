@@ -127,12 +127,7 @@ const DrawerItem = ({
         disabled={disabled}
         background={background}
         onPress={onPress}
-        style={[
-          styles.container,
-          { backgroundColor, borderRadius },
-          styles.v3Container,
-          style,
-        ]}
+        style={[styles.container, { backgroundColor, borderRadius }, style]}
         accessibilityRole="button"
         accessibilityState={{ selected: active }}
         accessibilityLabel={accessibilityLabel}
@@ -140,7 +135,7 @@ const DrawerItem = ({
         theme={theme}
         hitSlop={hitSlop}
       >
-        <View style={[styles.wrapper, styles.v3Wrapper]}>
+        <View style={styles.wrapper}>
           <View style={styles.content}>
             {icon ? (
               <Icon source={icon} size={24} color={contentColor} />
@@ -174,10 +169,6 @@ DrawerItem.displayName = 'Drawer.Item';
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 10,
-    marginVertical: 4,
-  },
-  v3Container: {
     justifyContent: 'center',
     height: 56,
     marginLeft: 12,
@@ -187,12 +178,9 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 8,
-  },
-  v3Wrapper: {
+    padding: 0,
     marginLeft: 16,
     marginRight: 24,
-    padding: 0,
   },
   content: {
     flex: 1,

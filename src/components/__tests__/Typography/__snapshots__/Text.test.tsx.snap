@@ -1,5 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders Text component with custom variant correctly 1`] = `
+[
+  {
+    "textAlign": "left",
+  },
+  {
+    "color": "rgba(29, 27, 32, 1)",
+    "writingDirection": "ltr",
+  },
+  [
+    {
+      "fontFamily": "Montserrat-Regular",
+      "fontSize": 41,
+      "fontWeight": "400",
+      "letterSpacing": 0.51,
+      "lineHeight": 54.1,
+    },
+    undefined,
+  ],
+]
+`;
+
 exports[`renders every variant of Text with children as content 1`] = `
 [
   <Text
@@ -377,27 +399,5 @@ exports[`renders every variant of Text with children as content 1`] = `
   >
     Something rendered as a child content
   </Text>,
-]
-`;
-
-exports[`renders v3 Text component with custom variant correctly 1`] = `
-[
-  {
-    "textAlign": "left",
-  },
-  {
-    "color": "rgba(29, 27, 32, 1)",
-    "writingDirection": "ltr",
-  },
-  [
-    {
-      "fontFamily": "Montserrat-Regular",
-      "fontSize": 41,
-      "fontWeight": "400",
-      "letterSpacing": 0.51,
-      "lineHeight": 54.1,
-    },
-    undefined,
-  ],
 ]
 `;

@@ -2,7 +2,7 @@ import { Platform, PlatformColor } from 'react-native';
 
 import { MD3DarkTheme } from './DarkTheme';
 import { MD3LightTheme } from './LightTheme';
-import type { MD3Theme } from '../../../types';
+import type { MD3Theme } from '../../types';
 
 const isApi34 = (Platform.Version as number) >= 34;
 const isApi31 = (Platform.Version as number) >= 31;

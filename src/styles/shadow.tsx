@@ -1,6 +1,6 @@
 import { Animated } from 'react-native';
 
-import { MD3Colors } from './themes/v3/tokens';
+import { MD3Colors } from './themes/tokens';
 
 const MD3_SHADOW_OPACITY = 0.3;
 const MD3_SHADOW_COLOR = MD3Colors.primary0;

@@ -4,7 +4,7 @@ import { Animated, Easing, Platform, StyleSheet } from 'react-native';
 import { act, fireEvent, render } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
-import { red300 } from '../../styles/themes/v3/baseColors';
+import { red300 } from '../../styles/themes/baseColors';
 import BottomNavigation from '../BottomNavigation/BottomNavigation';
 import BottomNavigationRouteScreen from '../BottomNavigation/BottomNavigationRouteScreen';
 import {

@@ -167,15 +167,10 @@ exports[`allows customizing Route's type via generics 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -438,15 +433,10 @@ exports[`allows customizing Route's type via generics 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -834,15 +824,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -1045,15 +1030,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -1239,15 +1219,10 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -1575,15 +1550,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -1786,15 +1756,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -1980,15 +1945,10 @@ exports[`hides labels in shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -2448,15 +2408,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -2779,15 +2734,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -3093,15 +3043,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -3407,15 +3352,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -3721,15 +3661,10 @@ exports[`renders bottom navigation with getLazy 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -4177,15 +4112,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -4457,15 +4387,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -4720,15 +4645,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -4983,15 +4903,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -5246,15 +5161,10 @@ exports[`renders bottom navigation with scene animation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -5651,15 +5561,10 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -5849,15 +5754,10 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -6030,15 +5930,10 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -6353,15 +6248,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -6537,15 +6427,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -6704,15 +6589,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -6871,15 +6751,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -7038,15 +6913,10 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -7347,15 +7217,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -7678,15 +7543,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -7992,15 +7852,10 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -8448,15 +8303,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -8728,15 +8578,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -8991,15 +8836,10 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -9396,15 +9236,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -9727,15 +9562,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -10041,15 +9871,10 @@ exports[`renders non-shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -10497,15 +10322,10 @@ exports[`renders shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -10777,15 +10597,10 @@ exports[`renders shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -11040,15 +10855,10 @@ exports[`renders shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -11303,15 +11113,10 @@ exports[`renders shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View
@@ -11566,15 +11371,10 @@ exports[`renders shifting bottom navigation 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              [
-                {
-                  "flex": 1,
-                  "paddingVertical": 6,
-                },
-                {
-                  "paddingVertical": 0,
-                },
-              ]
+              {
+                "flex": 1,
+                "paddingVertical": 0,
+              }
             }
           >
             <View

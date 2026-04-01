@@ -5,7 +5,7 @@ import { render } from '@testing-library/react-native';
 import PaperProvider from '../../../core/PaperProvider';
 import configureFonts from '../../../styles/fonts';
 import { MD3LightTheme } from '../../../styles/themes';
-import { tokens } from '../../../styles/themes/v3/tokens';
+import { tokens } from '../../../styles/themes/tokens';
 import Text, { customText } from '../../Typography/Text';
 
 const content = 'Something rendered as a child content';
@@ -40,7 +40,7 @@ it('renders every variant of Text with children as content', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders v3 Text component without variant with default fontWeight and fontFamily', () => {
+it('renders Text component without variant with default fontWeight and fontFamily', () => {
   const { getByTestId } = render(
     <Text testID="text-without-variant">{content}</Text>
   );
@@ -52,7 +52,7 @@ it('renders v3 Text component without variant with default fontWeight and fontFa
   });
 });
 
-it('renders v3 Text component with custom variant correctly', () => {
+it('renders Text component with custom variant correctly', () => {
   const fontConfig = {
     customVariant: {
       fontFamily: 'Montserrat-Regular',

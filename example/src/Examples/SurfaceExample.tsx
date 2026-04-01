@@ -17,7 +17,7 @@ const SurfaceExample = () => {
   const renderSurface = (index: number, mode: 'flat' | 'elevated') => (
     <Surface
       key={index}
-      style={[styles.surface, styles.v3Surface]}
+      style={styles.surface}
       mode={mode}
       elevation={index as MD3Elevation}
     >
@@ -74,15 +74,9 @@ const styles = StyleSheet.create({
   },
   surface: {
     margin: 24,
-    height: 80,
-    width: 80,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  v3Surface: {
-    borderRadius: 16,
     height: 200,
     width: 200,
+    borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
   },

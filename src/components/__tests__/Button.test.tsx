@@ -4,7 +4,7 @@ import { Animated, StyleSheet } from 'react-native';
 import { act, fireEvent, render } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
-import { white } from '../../styles/themes/v3/baseColors';
+import { white } from '../../styles/themes/baseColors';
 import Button from '../Button/Button';
 import { getButtonColors } from '../Button/utils';
 const pink500 = '#e91e63';

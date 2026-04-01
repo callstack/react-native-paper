@@ -9,7 +9,7 @@ import {
   grey400,
   grey700,
   grey800,
-} from '../../styles/themes/v3/baseColors';
+} from '../../styles/themes/baseColors';
 import type { InternalTheme } from '../../types';
 
 type BaseProps = {

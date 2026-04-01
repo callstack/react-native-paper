@@ -2,7 +2,7 @@ import React from 'react';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet, Animated } from 'react-native';
 
-import { white } from '../../styles/themes/v3/baseColors';
+import { white } from '../../styles/themes/baseColors';
 import type { InternalTheme, ThemeProp } from '../../types';
 
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
@@ -84,13 +84,13 @@ type RenderAppbarContentProps = BaseProps & {
   theme?: ThemeProp;
 };
 
-const MD3_DEFAULT_APPBAR_HEIGHT = 64;
+const DEFAULT_APPBAR_HEIGHT = 64;
 
 export const modeAppbarHeight = {
-  small: MD3_DEFAULT_APPBAR_HEIGHT,
+  small: DEFAULT_APPBAR_HEIGHT,
   medium: 112,
   large: 152,
-  'center-aligned': MD3_DEFAULT_APPBAR_HEIGHT,
+  'center-aligned': DEFAULT_APPBAR_HEIGHT,
 };
 
 export const modeTextVariant = {
@@ -159,7 +159,7 @@ export const renderAppbarContent = ({
       if (child.type.displayName === 'Appbar.Content') {
         props.mode = mode;
         props.style = [
-          i === 0 && !shouldCenterContent && styles.v3Spacing,
+          i === 0 && !shouldCenterContent && styles.spacing,
           shouldCenterContent && styles.centerAlignedContent,
           child.props.style,
         ];
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   centerAlignedContent: {
     alignItems: 'center',
   },
-  v3Spacing: {
+  spacing: {
     marginLeft: 12,
   },
 });

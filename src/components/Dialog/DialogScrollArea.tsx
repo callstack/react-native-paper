@@ -56,10 +56,7 @@ const DialogScrollArea = (props: Props) => {
     borderBottomWidth: 1,
   };
   return (
-    <View
-      {...props}
-      style={[styles.container, borderStyles, styles.v3Container, props.style]}
-    >
+    <View {...props} style={[styles.container, borderStyles, props.style]}>
       {props.children}
     </View>
   );
@@ -72,8 +69,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     flexGrow: 1,
     flexShrink: 1,
-  },
-  v3Container: {
     marginBottom: 24,
   },
 });

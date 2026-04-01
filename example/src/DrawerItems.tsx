@@ -183,7 +183,7 @@ function DrawerItems() {
           <Drawer.Section title="Preferences">
             {deviceColorsSupported ? (
               <TouchableRipple onPress={toggleShouldUseDeviceColors}>
-                <View style={[styles.preference, styles.v3Preference]}>
+                <View style={styles.preference}>
                   <Text variant="labelLarge">Use device colors *</Text>
                   <View pointerEvents="none">
                     <Switch value={shouldUseDeviceColors} />
@@ -192,7 +192,7 @@ function DrawerItems() {
               </TouchableRipple>
             ) : null}
             <TouchableRipple onPress={toggleTheme}>
-              <View style={[styles.preference, styles.v3Preference]}>
+              <View style={styles.preference}>
                 <Text variant="labelLarge">Dark Theme</Text>
                 <View pointerEvents="none">
                   <Switch value={isDarkTheme} />
@@ -202,7 +202,7 @@ function DrawerItems() {
 
             {!isWeb && (
               <TouchableRipple onPress={_handleToggleRTL}>
-                <View style={[styles.preference, styles.v3Preference]}>
+                <View style={styles.preference}>
                   <Text variant="labelLarge">RTL</Text>
                   <View pointerEvents="none">
                     <Switch value={isRTL} />
@@ -212,7 +212,7 @@ function DrawerItems() {
             )}
 
             <TouchableRipple onPress={toggleCollapsed}>
-              <View style={[styles.preference, styles.v3Preference]}>
+              <View style={styles.preference}>
                 <Text variant="labelLarge">Collapsed drawer</Text>
                 <View pointerEvents="none">
                   <Switch value={collapsed} />
@@ -221,7 +221,7 @@ function DrawerItems() {
             </TouchableRipple>
 
             <TouchableRipple onPress={toggleCustomFont}>
-              <View style={[styles.preference, styles.v3Preference]}>
+              <View style={styles.preference}>
                 <Text variant="labelLarge">Custom font</Text>
                 <View pointerEvents="none">
                   <Switch value={customFontLoaded} />
@@ -230,7 +230,7 @@ function DrawerItems() {
             </TouchableRipple>
 
             <TouchableRipple onPress={toggleRippleEffect}>
-              <View style={[styles.preference, styles.v3Preference]}>
+              <View style={styles.preference}>
                 <Text variant="labelLarge">
                   {isIOS ? 'Highlight' : 'Ripple'} effect
                 </Text>
@@ -277,11 +277,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: 12,
-    paddingHorizontal: 16,
-  },
-  v3Preference: {
-    height: 56,
     paddingHorizontal: 28,
+    height: 56,
   },
   badge: {
     alignSelf: 'center',

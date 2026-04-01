@@ -51,7 +51,7 @@ const DialogActions = (props: Props) => {
   const actionsLength = React.Children.toArray(props.children).length;
 
   return (
-    <View {...props} style={[styles.v3Container, props.style]}>
+    <View {...props} style={[styles.container, props.style]}>
       {React.Children.map(props.children, (child, i) =>
         React.isValidElement<DialogActionChildProps>(child)
           ? React.cloneElement(child, {
@@ -73,7 +73,7 @@ const DialogActions = (props: Props) => {
 DialogActions.displayName = 'Dialog.Actions';
 
 const styles = StyleSheet.create({
-  v3Container: {
+  container: {
     flexDirection: 'row',
     flexGrow: 1,
     alignItems: 'center',

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
-import { white } from '../../styles/themes/v3/baseColors';
+import { white } from '../../styles/themes/baseColors';
 import type { ThemeProp } from '../../types';
 import getContrastingColor from '../../utils/getContrastingColor';
 import Text from '../Typography/Text';
