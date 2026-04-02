@@ -4,7 +4,7 @@ import { MD3Colors, tokens } from './tokens';
 import type { MD3Theme } from '../../types';
 import configureFonts from '../fonts';
 
-const { palette, opacity } = tokens.md.ref;
+const { palette, stateOpacity } = tokens.md.ref;
 
 export const MD3LightTheme: MD3Theme = {
   dark: false,
@@ -26,7 +26,7 @@ export const MD3LightTheme: MD3Theme = {
     surfaceContainerHighest: palette.neutral90,
     surfaceVariant: palette.neutralVariant90,
     surfaceDisabled: color(palette.neutral10)
-      .alpha(opacity.level2)
+      .alpha(stateOpacity.pressed)
       .rgb()
       .string(),
     background: palette.neutral98,
@@ -41,7 +41,7 @@ export const MD3LightTheme: MD3Theme = {
     onSurface: palette.neutral10,
     onSurfaceVariant: palette.neutralVariant30,
     onSurfaceDisabled: color(palette.neutral10)
-      .alpha(opacity.level4)
+      .alpha(stateOpacity.disabled)
       .rgb()
       .string(),
     onError: palette.error100,

@@ -4,7 +4,7 @@ import { MD3LightTheme } from './LightTheme';
 import { MD3Colors, tokens } from './tokens';
 import type { MD3Theme } from '../../types';
 
-const { palette, opacity } = tokens.md.ref;
+const { palette, stateOpacity } = tokens.md.ref;
 
 export const MD3DarkTheme: MD3Theme = {
   ...MD3LightTheme,
@@ -25,8 +25,9 @@ export const MD3DarkTheme: MD3Theme = {
     surfaceContainerHigh: palette.neutral17,
     surfaceContainerHighest: palette.neutral22,
     surfaceVariant: palette.neutralVariant30,
+    //TODO: remove this
     surfaceDisabled: color(palette.neutral90)
-      .alpha(opacity.level2)
+      .alpha(stateOpacity.pressed)
       .rgb()
       .string(),
     background: palette.neutral6,
@@ -40,8 +41,9 @@ export const MD3DarkTheme: MD3Theme = {
     onTertiaryContainer: palette.tertiary90,
     onSurface: palette.neutral90,
     onSurfaceVariant: palette.neutralVariant80,
+    //TODO: remove this
     onSurfaceDisabled: color(palette.neutral90)
-      .alpha(opacity.level4)
+      .alpha(stateOpacity.disabled)
       .rgb()
       .string(),
     onError: palette.error20,
@@ -66,6 +68,7 @@ export const MD3DarkTheme: MD3Theme = {
     onTertiaryFixedVariant: palette.tertiary30,
     shadow: palette.neutral0,
     scrim: palette.neutral0,
+    //TODO: remove this
     backdrop: color(MD3Colors.neutralVariant20).alpha(0.4).rgb().string(),
     elevation: {
       level0: 'transparent',

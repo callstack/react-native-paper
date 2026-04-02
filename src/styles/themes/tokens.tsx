@@ -116,11 +116,15 @@ const ref = {
     weightMedium: '500' as Font['fontWeight'],
   },
 
-  opacity: {
-    level1: 0.08,
-    level2: 0.12,
-    level3: 0.16,
-    level4: 0.38,
+  /** State layers opacity
+   * @see https://m3.material.io/foundations/interaction/states/state-layers
+   */
+  stateOpacity: {
+    dragged: 0.16,
+    pressed: 0.1,
+    focus: 0.1,
+    hover: 0.08,
+    disabled: 0.38,
   },
 };
 

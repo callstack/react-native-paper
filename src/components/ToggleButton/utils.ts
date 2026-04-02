@@ -12,7 +12,7 @@ export const getToggleButtonColor = ({
 }) => {
   if (checked) {
     return color(theme.colors.onSecondaryContainer)
-      .alpha(tokens.md.ref.opacity.level2)
+      .alpha(tokens.md.ref.stateOpacity.pressed)
       .rgb()
       .string();
   }

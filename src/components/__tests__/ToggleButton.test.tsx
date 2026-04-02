@@ -53,7 +53,7 @@ describe('getToggleButtonColor', () => {
   it('should return correct color when checked and theme version 3', () => {
     expect(getToggleButtonColor({ theme: getTheme(), checked: true })).toBe(
       color(getTheme().colors.onSecondaryContainer)
-        .alpha(tokens.md.ref.opacity.level2)
+        .alpha(tokens.md.ref.stateOpacity.pressed)
         .rgb()
         .string()
     );
@@ -62,7 +62,7 @@ describe('getToggleButtonColor', () => {
   it('should return correct color when checked and theme version 3, dark theme', () => {
     expect(getToggleButtonColor({ theme: getTheme(true), checked: true })).toBe(
       color(getTheme(true).colors.onSecondaryContainer)
-        .alpha(tokens.md.ref.opacity.level2)
+        .alpha(tokens.md.ref.stateOpacity.pressed)
         .rgb()
         .string()
     );

@@ -527,7 +527,7 @@ exports[`renders disabled FAB 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(29, 27, 32, 0.12)",
+      "backgroundColor": "rgba(29, 27, 32, 0.1)",
       "borderRadius": 16,
       "opacity": 1,
       "shadowColor": "#000",
@@ -551,7 +551,7 @@ exports[`renders disabled FAB 1`] = `
     pointerEvents="auto"
     style={
       {
-        "backgroundColor": "rgba(29, 27, 32, 0.12)",
+        "backgroundColor": "rgba(29, 27, 32, 0.1)",
         "borderRadius": 16,
         "flex": undefined,
         "shadowColor": "#000",
