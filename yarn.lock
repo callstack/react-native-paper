@@ -4317,20 +4317,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pchmn/expo-material3-theme@npm:^1.3.2":
-  version: 1.3.2
-  resolution: "@pchmn/expo-material3-theme@npm:1.3.2"
-  dependencies:
-    "@material/material-color-utilities": "npm:^0.2.7"
-    color: "npm:^4.2.3"
-  peerDependencies:
-    expo: "*"
-    react: "*"
-    react-native: "*"
-  checksum: 10c0/89aa0a65b04f4a7f709c35bbdc2f7830dff73e0335877d36a091c55fb174ce82e4b2c67690657978b03fc563ab4c20565ded0ed7faec94d0a384a9c5085dfe19
-  languageName: node
-  linkType: hard
-
 "@polka/url@npm:^1.0.0-next.24":
   version: 1.0.0-next.29
   resolution: "@polka/url@npm:1.0.0-next.29"
@@ -20063,7 +20049,6 @@ __metadata:
     "@babel/core": "npm:^7.25.2"
     "@expo/vector-icons": "npm:^15.0.2"
     "@expo/webpack-config": "npm:~19.0.1"
-    "@pchmn/expo-material3-theme": "npm:^1.3.2"
     "@react-native-async-storage/async-storage": "npm:2.2.0"
     "@react-native-masked-view/masked-view": "npm:0.3.2"
     "@react-navigation/bottom-tabs": "npm:^7.3.10"
