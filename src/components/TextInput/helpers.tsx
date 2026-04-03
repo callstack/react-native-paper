@@ -1,7 +1,3 @@
-import { Platform } from 'react-native';
-
-import color from 'color';
-
 import { AdornmentSide, AdornmentType } from './Adornment/enums';
 import type { AdornmentConfig } from './Adornment/types';
 import {
@@ -18,7 +14,10 @@ import {
   OUTLINED_INPUT_OFFSET,
 } from './constants';
 import type { TextInputLabelProp } from './types';
+import { tokens } from '../../styles/themes/tokens';
 import type { InternalTheme } from '../../types';
+
+const { stateOpacity } = tokens.md.ref;
 
 type PaddingProps = {
   height: number | null;
@@ -300,14 +299,9 @@ type Mode = 'flat' | 'outlined';
 const getInputTextColor = ({
   theme,
   textColor,
-  disabled,
 }: BaseProps & { textColor?: string }) => {
   if (textColor) {
     return textColor;
-  }
-
-  if (disabled) {
-    return theme.colors.onSurfaceDisabled;
   }
 
   return theme.colors.onSurface;
@@ -315,7 +309,6 @@ const getInputTextColor = ({
 
 const getActiveColor = ({
   theme,
-  disabled,
   error,
   activeUnderlineColor,
   activeOutlineColor,
@@ -337,18 +330,10 @@ const getActiveColor = ({
     return modeColor;
   }
 
-  if (disabled) {
-    return theme.colors.onSurfaceDisabled;
-  }
-
   return theme.colors.primary;
 };
 
-const getPlaceholderColor = ({ theme, disabled }: BaseProps) => {
-  if (disabled) {
-    return theme.colors.onSurfaceDisabled;
-  }
-
+const getPlaceholderColor = ({ theme }: BaseProps) => {
   return theme.colors.onSurfaceVariant;
 };
 
@@ -362,17 +347,12 @@ const getSelectionColor = ({
   if (typeof customSelectionColor !== 'undefined') {
     return customSelectionColor;
   }
-
-  if (Platform.OS === 'android') {
-    return color(activeColor).alpha(0.54).rgb().string();
-  }
-
   return activeColor;
 };
 
 const getFlatBackgroundColor = ({ theme, disabled }: BaseProps) => {
   if (disabled) {
-    return color(theme.colors.onSurface).alpha(0.04).rgb().string();
+    return theme.colors.surfaceContainerHighest;
   }
 
   return theme.colors.surfaceVariant;
@@ -385,10 +365,6 @@ const getFlatUnderlineColor = ({
 }: BaseProps & { underlineColor?: string }) => {
   if (!disabled && underlineColor) {
     return underlineColor;
-  }
-
-  if (disabled) {
-    return theme.colors.onSurfaceDisabled;
   }
 
   return theme.colors.onSurfaceVariant;
@@ -407,7 +383,7 @@ const getOutlinedOutlineInputColor = ({
     if (theme.dark) {
       return 'transparent';
     }
-    return theme.colors.surfaceDisabled;
+    return theme.colors.outlineVariant;
   }
 
   return theme.colors.outline;
@@ -438,12 +414,17 @@ export const getFlatInputColors = ({
     mode: 'flat',
   });
 
+  const disabledOpacity = disabled
+    ? stateOpacity.disabled
+    : stateOpacity.enabled;
+
   return {
     inputTextColor: getInputTextColor({
       ...baseFlatColorProps,
       textColor,
     }),
     activeColor,
+    disabledOpacity,
     underlineColorCustom: getFlatUnderlineColor({
       ...baseFlatColorProps,
       underlineColor,
@@ -480,12 +461,17 @@ export const getOutlinedInputColors = ({
     mode: 'outlined',
   });
 
+  const disabledOpacity = disabled
+    ? stateOpacity.disabled
+    : stateOpacity.enabled;
+
   return {
     inputTextColor: getInputTextColor({
       ...baseOutlinedColorProps,
       textColor,
     }),
     activeColor,
+    disabledOpacity,
     outlineColor: getOutlinedOutlineInputColor({
       ...baseOutlinedColorProps,
       customOutlineColor,

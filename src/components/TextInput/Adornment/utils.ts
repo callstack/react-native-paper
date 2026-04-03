@@ -1,4 +1,7 @@
+import { tokens } from '../../../styles/themes/tokens';
 import type { InternalTheme } from '../../../types';
+
+const { stateOpacity } = tokens.md.ref;
 
 type BaseProps = {
   theme: InternalTheme;
@@ -7,9 +10,15 @@ type BaseProps = {
 
 export function getTextColor({ theme, disabled }: BaseProps) {
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return {
+      color: theme.colors.onSurfaceVariant,
+      opacity: stateOpacity.disabled,
+    };
   }
-  return theme.colors.onSurfaceVariant;
+  return {
+    color: theme.colors.onSurfaceVariant,
+    opacity: stateOpacity.enabled,
+  };
 }
 
 export function getIconColor({
@@ -22,15 +31,24 @@ export function getIconColor({
   customColor?: ((isTextInputFocused: boolean) => string | undefined) | string;
 }) {
   if (typeof customColor === 'function') {
-    return customColor(isTextInputFocused);
+    return {
+      color: customColor(isTextInputFocused),
+      opacity: stateOpacity.enabled,
+    };
   }
   if (customColor) {
-    return customColor;
+    return { color: customColor, opacity: stateOpacity.enabled };
   }
 
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return {
+      color: theme.colors.onSurfaceVariant,
+      opacity: stateOpacity.disabled,
+    };
   }
 
-  return theme.colors.onSurfaceVariant;
+  return {
+    color: theme.colors.onSurfaceVariant,
+    opacity: stateOpacity.enabled,
+  };
 }

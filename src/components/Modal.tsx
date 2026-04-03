@@ -201,8 +201,11 @@ function Modal({
         style={[
           styles.backdrop,
           {
-            backgroundColor: theme.colors?.backdrop,
-            opacity,
+            backgroundColor: theme.colors.scrim,
+            opacity: opacity.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, 0.32],
+            }),
           },
         ]}
         testID={`${testID}-backdrop`}

@@ -125,6 +125,7 @@ const ref = {
     focus: 0.1,
     hover: 0.08,
     disabled: 0.38,
+    enabled: 1.0,
   },
 };
 

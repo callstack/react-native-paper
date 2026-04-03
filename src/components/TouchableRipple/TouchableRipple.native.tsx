@@ -73,12 +73,13 @@ const TouchableRipple = (
       underlayColor,
     });
 
-  // A workaround for ripple on Android P is to use useForeground + overflow: 'hidden'
+  // Use foreground ripple on Android P+ to ensure visibility.
+  // Background ripple requires the view to have a background drawable,
+  // which isn't always present. Foreground ripple needs overflow: 'hidden'
+  // to stay within bounds.
   // https://github.com/facebook/react-native/issues/6480
   const useForeground =
-    Platform.OS === 'android' &&
-    Platform.Version >= ANDROID_VERSION_PIE &&
-    borderless;
+    Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_PIE;
 
   if (TouchableRipple.supported) {
     const androidRipple = rippleEffectEnabled
@@ -94,7 +95,7 @@ const TouchableRipple = (
         {...rest}
         ref={ref}
         disabled={disabled}
-        style={[borderless && styles.overflowHidden, style]}
+        style={[useForeground && styles.overflowHidden, style]}
         android_ripple={androidRipple}
       >
         {React.Children.only(children)}

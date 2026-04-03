@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   AccessibilityState,
-  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -83,10 +82,6 @@ export type Props = {
    */
   titleStyle?: StyleProp<TextStyle>;
   /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
-  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -142,7 +137,6 @@ const MenuItem = ({
   containerStyle,
   contentStyle,
   titleStyle,
-  rippleColor: customRippleColor,
   testID = 'menu-item',
   accessibilityLabel,
   accessibilityState,
@@ -151,10 +145,9 @@ const MenuItem = ({
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { titleColor, iconColor, rippleColor } = getMenuItemColor({
+  const { titleColor, iconColor, contentOpacity } = getMenuItemColor({
     theme,
     disabled,
-    customRippleColor,
   });
 
   const containerPadding = 12;
@@ -191,10 +184,9 @@ const MenuItem = ({
       accessibilityLabel={accessibilityLabel}
       accessibilityRole="menuitem"
       accessibilityState={newAccessibilityState}
-      rippleColor={rippleColor}
       hitSlop={hitSlop}
     >
-      <View style={[styles.row, containerStyle]}>
+      <View style={[styles.row, { opacity: contentOpacity }, containerStyle]}>
         {leadingIcon ? (
           <View style={{ width: iconWidth }} pointerEvents="box-none">
             <Icon source={leadingIcon} size={24} color={iconColor} />

@@ -104,6 +104,7 @@ const TextInputOutlined = ({
   const {
     inputTextColor,
     activeColor,
+    disabledOpacity,
     outlineColor,
     placeholderColor,
     errorColor,
@@ -234,6 +235,7 @@ const TextInputOutlined = ({
     hasActiveOutline,
     activeColor,
     placeholderColor,
+    disabledOpacity,
     backgroundColor: labelBackgroundColor,
     errorColor,
     labelTranslationXOffset,
@@ -399,6 +401,7 @@ const TextInputOutlined = ({
               lineHeight,
               fontWeight,
               color: inputTextColor,
+              opacity: disabledOpacity,
               textAlignVertical: multiline ? 'top' : 'center',
               textAlign: textAlign
                 ? textAlign

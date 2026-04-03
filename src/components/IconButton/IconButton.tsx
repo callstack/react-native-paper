@@ -6,7 +6,6 @@ import {
   ViewStyle,
   View,
   Animated,
-  ColorValue,
 } from 'react-native';
 
 import { getIconButtonColor } from './utils';
@@ -42,10 +41,6 @@ export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
    * Background color of the icon container.
    */
   containerColor?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
   /**
    * @supported Available in v5.x with theme version 3
    * Whether icon button is selected. A selected button receives alternative combination of icon and container colors.
@@ -120,7 +115,6 @@ const IconButton = forwardRef<View, Props>(
       icon,
       iconColor: customIconColor,
       containerColor: customContainerColor,
-      rippleColor: customRippleColor,
       size = 24,
       accessibilityLabel,
       disabled,
@@ -141,16 +135,20 @@ const IconButton = forwardRef<View, Props>(
 
     const IconComponent = animated ? CrossFadeIcon : Icon;
 
-    const { iconColor, rippleColor, backgroundColor, borderColor } =
-      getIconButtonColor({
-        theme,
-        disabled,
-        selected,
-        mode,
-        customIconColor,
-        customContainerColor,
-        customRippleColor,
-      });
+    const {
+      iconColor,
+      iconOpacity,
+      backgroundColor,
+      borderColor,
+      backgroundOpacity,
+    } = getIconButtonColor({
+      theme,
+      disabled,
+      selected,
+      mode,
+      customIconColor,
+      customContainerColor,
+    });
 
     const buttonSize = size + 2 * PADDING;
 
@@ -171,7 +169,8 @@ const IconButton = forwardRef<View, Props>(
         testID={`${testID}-container`}
         style={[
           {
-            backgroundColor,
+            backgroundColor:
+              backgroundOpacity < 1 ? undefined : backgroundColor,
             width: buttonSize,
             height: buttonSize,
           },
@@ -182,11 +181,19 @@ const IconButton = forwardRef<View, Props>(
         container
         elevation={0}
       >
+        {backgroundOpacity < 1 && (
+          <View
+            pointerEvents="none"
+            style={[
+              StyleSheet.absoluteFill,
+              { backgroundColor, opacity: backgroundOpacity },
+            ]}
+          />
+        )}
         <TouchableRipple
           borderless
           centered
           onPress={onPress}
-          rippleColor={rippleColor}
           accessibilityLabel={accessibilityLabel}
           style={[styles.touchable, contentStyle]}
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
@@ -203,11 +210,13 @@ const IconButton = forwardRef<View, Props>(
           testID={testID}
           {...rest}
         >
-          {loading ? (
-            <ActivityIndicator size={size} color={iconColor} />
-          ) : (
-            <IconComponent color={iconColor} source={icon} size={size} />
-          )}
+          <View style={{ opacity: iconOpacity }}>
+            {loading ? (
+              <ActivityIndicator size={size} color={iconColor} />
+            ) : (
+              <IconComponent color={iconColor} source={icon} size={size} />
+            )}
+          </View>
         </TouchableRipple>
       </Surface>
     );

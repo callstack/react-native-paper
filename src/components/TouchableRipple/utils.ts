@@ -5,6 +5,7 @@ import color from 'color';
 import type { InternalTheme } from '../../types';
 
 const getUnderlayColor = ({
+  theme,
   calculatedRippleColor,
   underlayColor,
 }: {
@@ -16,7 +17,11 @@ const getUnderlayColor = ({
     return underlayColor;
   }
 
-  return color(calculatedRippleColor).rgb().string();
+  if (typeof calculatedRippleColor === 'string') {
+    return color(calculatedRippleColor).rgb().string();
+  }
+  // PlatformColor — can't convert, return stateLayer default
+  return theme.colors.primary;
 };
 
 const getRippleColor = ({
@@ -30,7 +35,7 @@ const getRippleColor = ({
     return rippleColor;
   }
 
-  return color(theme.colors.onSurface).alpha(0.12).rgb().string();
+  return theme.colors.stateLayerPressed;
 };
 
 export const getTouchableRippleColors = ({

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -8,8 +7,6 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-
-import color from 'color';
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
@@ -58,10 +55,6 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    */
   labelMaxFontSizeMultiplier?: number;
   /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
-  /**
    * Sets additional distance outside of element in which a press can be detected.
    */
   hitSlop?: TouchableRippleProps['hitSlop'];
@@ -97,7 +90,6 @@ const DrawerItem = ({
   active,
   disabled,
   theme: themeOverrides,
-  rippleColor: customRippleColor,
   style,
   onPress,
   background,
@@ -117,7 +109,6 @@ const DrawerItem = ({
 
   const labelMargin = icon ? 12 : 0;
   const borderRadius = 7 * roundness;
-  const rippleColor = color(contentColor).alpha(0.12).rgb().string();
   const font = theme.fonts.labelLarge;
 
   return (
@@ -131,7 +122,6 @@ const DrawerItem = ({
         accessibilityRole="button"
         accessibilityState={{ selected: active }}
         accessibilityLabel={accessibilityLabel}
-        rippleColor={customRippleColor || rippleColor}
         theme={theme}
         hitSlop={hitSlop}
       >

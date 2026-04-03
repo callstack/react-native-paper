@@ -138,6 +138,7 @@ const TextInputFlat = ({
   const {
     inputTextColor,
     activeColor,
+    disabledOpacity,
     underlineColorCustom,
     placeholderColor,
     errorColor,
@@ -289,6 +290,7 @@ const TextInputFlat = ({
     hasActiveOutline,
     activeColor,
     placeholderColor,
+    disabledOpacity,
     errorColor,
     roundness,
     maxFontSizeMultiplier: rest.maxFontSizeMultiplier,
@@ -346,6 +348,7 @@ const TextInputFlat = ({
         error={error}
         colors={colors}
         activeColor={activeColor}
+        disabledOpacity={disabledOpacity}
       />
       <View
         onLayout={onInputLayout}
@@ -413,6 +416,7 @@ const TextInputFlat = ({
               lineHeight,
               fontWeight,
               color: inputTextColor,
+              opacity: disabledOpacity,
               textAlignVertical: multiline ? 'top' : 'center',
               textAlign: textAlign
                 ? textAlign

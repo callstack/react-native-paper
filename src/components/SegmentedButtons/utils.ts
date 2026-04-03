@@ -1,6 +1,9 @@
 import { ViewStyle } from 'react-native';
 
+import { tokens } from '../../styles/themes/tokens';
 import type { InternalTheme } from '../../types';
+
+const { stateOpacity } = tokens.md.ref;
 
 type BaseProps = {
   theme: InternalTheme;
@@ -89,7 +92,7 @@ const getSegmentedButtonBackgroundColor = ({ checked, theme }: BaseProps) => {
 
 const getSegmentedButtonBorderColor = ({ theme, disabled }: BaseProps) => {
   if (disabled) {
-    return theme.colors.surfaceDisabled;
+    return theme.colors.outlineVariant;
   }
   return theme.colors.outline;
 };
@@ -108,7 +111,7 @@ const getSegmentedButtonTextColor = ({
   uncheckedColor,
 }: SegmentedButtonProps) => {
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return theme.colors.onSurface;
   }
   if (checked) {
     return checkedColor ?? theme.colors.onSecondaryContainer;
@@ -141,5 +144,7 @@ export const getSegmentedButtonColors = ({
   });
   const borderWidth = getSegmentedButtonBorderWidth({ theme });
 
-  return { backgroundColor, borderColor, textColor, borderWidth };
+  const textOpacity = disabled ? stateOpacity.disabled : stateOpacity.enabled;
+
+  return { backgroundColor, borderColor, textColor, textOpacity, borderWidth };
 };

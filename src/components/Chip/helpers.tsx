@@ -2,7 +2,10 @@ import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
 import color from 'color';
 
+import { tokens } from '../../styles/themes/tokens';
 import type { InternalTheme } from '../../types';
+
+const { stateOpacity } = tokens.md.ref;
 
 export type ChipAvatarProps = {
   style?: StyleProp<ViewStyle>;
@@ -28,14 +31,14 @@ const getBorderColor = ({
   }
 
   if (disabled) {
-    return color(theme.colors.onSurfaceVariant).alpha(0.12).rgb().string();
+    return theme.colors.surfaceContainer;
   }
 
   if (isSelectedColor) {
     return color(selectedColor).alpha(0.29).rgb().string();
   }
 
-  return theme.colors.outline;
+  return theme.colors.outlineVariant;
 };
 
 const getTextColor = ({
@@ -49,7 +52,7 @@ const getTextColor = ({
   const isSelectedColor = selectedColor !== undefined;
 
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return theme.colors.onSurface;
   }
 
   if (isSelectedColor) {
@@ -90,7 +93,7 @@ const getBackgroundColor = ({
     if (isOutlined) {
       return 'transparent';
     }
-    return color(theme.colors.onSurfaceVariant).alpha(0.12).rgb().string();
+    return theme.colors.surfaceContainerLow;
   }
 
   return getDefaultBackgroundColor({ theme, isOutlined });
@@ -101,42 +104,15 @@ const getSelectedBackgroundColor = ({
   isOutlined,
   disabled,
   customBackgroundColor,
-  showSelectedOverlay,
 }: BaseProps & {
   customBackgroundColor?: ColorValue;
-  showSelectedOverlay?: boolean;
 }) => {
-  const backgroundColor = getBackgroundColor({
+  return getBackgroundColor({
     theme,
     disabled,
     isOutlined,
     customBackgroundColor,
   });
-
-  if (isOutlined) {
-    if (showSelectedOverlay) {
-      return color(backgroundColor)
-        .mix(color(theme.colors.onSurfaceVariant), 0.12)
-        .rgb()
-        .string();
-    }
-    return color(backgroundColor)
-      .mix(color(theme.colors.onSurfaceVariant), 0)
-      .rgb()
-      .string();
-  }
-
-  if (showSelectedOverlay) {
-    return color(backgroundColor)
-      .mix(color(theme.colors.onSecondaryContainer), 0.12)
-      .rgb()
-      .string();
-  }
-
-  return color(backgroundColor)
-    .mix(color(theme.colors.onSecondaryContainer), 0)
-    .rgb()
-    .string();
 };
 
 const getIconColor = ({
@@ -150,7 +126,7 @@ const getIconColor = ({
   const isSelectedColor = selectedColor !== undefined;
 
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return theme.colors.onSurface;
   }
 
   if (isSelectedColor) {
@@ -164,50 +140,16 @@ const getIconColor = ({
   return theme.colors.onSecondaryContainer;
 };
 
-const getRippleColor = ({
-  theme,
-  isOutlined,
-  disabled,
-  selectedColor,
-  customRippleColor,
-}: BaseProps & {
-  selectedBackgroundColor: string;
-  selectedColor?: string;
-  customRippleColor?: ColorValue;
-}) => {
-  if (customRippleColor) {
-    return customRippleColor;
-  }
-
-  const isSelectedColor = selectedColor !== undefined;
-  const textColor = getTextColor({
-    theme,
-    disabled,
-    selectedColor,
-    isOutlined,
-  });
-
-  if (isSelectedColor) {
-    return color(selectedColor).alpha(0.12).rgb().string();
-  }
-
-  return color(textColor).alpha(0.12).rgb().string();
-};
-
 export const getChipColors = ({
   isOutlined,
   theme,
   selectedColor,
-  showSelectedOverlay,
   customBackgroundColor,
   disabled,
-  customRippleColor,
 }: BaseProps & {
   customBackgroundColor?: ColorValue;
   disabled?: boolean;
-  showSelectedOverlay?: boolean;
   selectedColor?: string;
-  customRippleColor?: ColorValue;
 }) => {
   const baseChipColorProps = { theme, isOutlined, disabled };
 
@@ -219,8 +161,11 @@ export const getChipColors = ({
   const selectedBackgroundColor = getSelectedBackgroundColor({
     ...baseChipColorProps,
     customBackgroundColor,
-    showSelectedOverlay,
   });
+
+  const contentOpacity = disabled
+    ? stateOpacity.disabled
+    : stateOpacity.enabled;
 
   return {
     borderColor: getBorderColor({
@@ -236,12 +181,7 @@ export const getChipColors = ({
       ...baseChipColorProps,
       selectedColor,
     }),
-    rippleColor: getRippleColor({
-      ...baseChipColorProps,
-      selectedColor,
-      selectedBackgroundColor,
-      customRippleColor,
-    }),
+    contentOpacity,
     backgroundColor,
     selectedBackgroundColor,
   };

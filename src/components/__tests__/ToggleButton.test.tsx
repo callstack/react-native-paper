@@ -2,10 +2,8 @@ import * as React from 'react';
 import { Animated } from 'react-native';
 
 import { act, render } from '@testing-library/react-native';
-import color from 'color';
 
 import { getTheme } from '../../core/theming';
-import { tokens } from '../../styles/themes/tokens';
 import ToggleButton from '../ToggleButton';
 import { getToggleButtonColor } from '../ToggleButton/utils';
 
@@ -33,44 +31,22 @@ it('renders unchecked toggle button', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('render toggle button with custom ripple color', () => {
-  const { getByTestId } = render(
-    <ToggleButton
-      disabled
-      value="toggle"
-      status="checked"
-      icon="heart"
-      testID="toggle-button"
-      rippleColor="purple"
-    />
-  );
-
-  const iconContainer = getByTestId('toggle-button-container').props.children;
-  expect(iconContainer.props.rippleColor).toBe('purple');
-});
-
 describe('getToggleButtonColor', () => {
   it('should return correct color when checked and theme version 3', () => {
     expect(getToggleButtonColor({ theme: getTheme(), checked: true })).toBe(
-      color(getTheme().colors.onSecondaryContainer)
-        .alpha(tokens.md.ref.stateOpacity.pressed)
-        .rgb()
-        .string()
+      getTheme().colors.surfaceContainerHighest
     );
   });
 
   it('should return correct color when checked and theme version 3, dark theme', () => {
     expect(getToggleButtonColor({ theme: getTheme(true), checked: true })).toBe(
-      color(getTheme(true).colors.onSecondaryContainer)
-        .alpha(tokens.md.ref.stateOpacity.pressed)
-        .rgb()
-        .string()
+      getTheme(true).colors.surfaceContainerHighest
     );
   });
 
-  it('should return transparent color when not checked', () => {
+  it('should return correct color when not checked', () => {
     expect(getToggleButtonColor({ theme: getTheme(), checked: false })).toBe(
-      'transparent'
+      getTheme().colors.surfaceContainer
     );
   });
 });

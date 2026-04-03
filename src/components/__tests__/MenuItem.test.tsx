@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { render } from '@testing-library/react-native';
-import color from 'color';
 
 import { getTheme } from '../../core/theming';
 import Menu from '../Menu/Menu';
@@ -71,7 +70,10 @@ describe('getMenuItemColor - title color', () => {
         theme: getTheme(),
         disabled: true,
       })
-    ).toMatchObject({ titleColor: getTheme().colors.onSurfaceDisabled });
+    ).toMatchObject({
+      titleColor: getTheme().colors.onSurface,
+      contentOpacity: 0.38,
+    });
   });
 
   it('should return correct theme color, for theme version 3', () => {
@@ -92,7 +94,10 @@ describe('getMenuItemColor - icon color', () => {
         theme: getTheme(),
         disabled: true,
       })
-    ).toMatchObject({ iconColor: getTheme().colors.onSurfaceDisabled });
+    ).toMatchObject({
+      iconColor: getTheme().colors.onSurfaceVariant,
+      contentOpacity: 0.38,
+    });
   });
 
   it('should return correct theme color, for theme version 3', () => {
@@ -102,21 +107,6 @@ describe('getMenuItemColor - icon color', () => {
       })
     ).toMatchObject({
       iconColor: getTheme().colors.onSurfaceVariant,
-    });
-  });
-});
-
-describe('getMenuItemColor - ripple color', () => {
-  it('should return correct theme color, for theme version 3', () => {
-    expect(
-      getMenuItemColor({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme().colors.onSurfaceVariant)
-        .alpha(0.12)
-        .rgb()
-        .string(),
     });
   });
 });

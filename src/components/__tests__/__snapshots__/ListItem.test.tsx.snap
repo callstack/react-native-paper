@@ -217,6 +217,9 @@ exports[`renders list item with custom description 1`] = `
                         "paddingLeft": 0,
                       },
                       {
+                        "opacity": 1,
+                      },
+                      {
                         "paddingRight": 0,
                       },
                     ]

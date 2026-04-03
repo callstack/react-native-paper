@@ -55,7 +55,7 @@ describe('Modal', () => {
       );
 
       expect(getByTestId('modal-backdrop')).toHaveStyle({
-        backgroundColor: MD3LightTheme.colors.backdrop,
+        backgroundColor: MD3LightTheme.colors.scrim,
       });
     });
 
@@ -66,7 +66,7 @@ describe('Modal', () => {
           testID="modal"
           theme={{
             colors: {
-              backdrop: 'transparent',
+              scrim: 'transparent',
             },
           }}
         >
@@ -119,7 +119,7 @@ describe('Modal', () => {
         });
 
         expect(getByTestId('modal-backdrop')).toHaveStyle({
-          opacity: 1,
+          opacity: 0.32,
         });
 
         expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
@@ -156,7 +156,7 @@ describe('Modal', () => {
       });
 
       expect(getByTestId('modal-backdrop')).toHaveStyle({
-        opacity: 1,
+        opacity: 0.32,
       });
 
       expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
@@ -198,7 +198,7 @@ describe('Modal', () => {
         });
 
         expect(getByTestId('modal-backdrop')).toHaveStyle({
-          opacity: 1,
+          opacity: 0.32,
         });
 
         expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
@@ -241,7 +241,7 @@ describe('Modal', () => {
         });
 
         expect(getByTestId('modal-backdrop')).toHaveStyle({
-          opacity: 1,
+          opacity: 0.32,
         });
 
         expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
@@ -308,7 +308,7 @@ describe('Modal', () => {
         });
 
         expect(getByTestId('modal-backdrop')).toHaveStyle({
-          opacity: 1,
+          opacity: 0.32,
         });
 
         expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
@@ -376,7 +376,7 @@ describe('Modal', () => {
         });
 
         expect(getByTestId('modal-backdrop')).toHaveStyle({
-          opacity: 1,
+          opacity: 0.32,
         });
         expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
@@ -393,7 +393,7 @@ describe('Modal', () => {
         );
 
         expect(getByTestId('modal-backdrop')).toHaveStyle({
-          opacity: 1,
+          opacity: 0.32,
         });
         expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
@@ -406,7 +406,7 @@ describe('Modal', () => {
         );
 
         expect(getByTestId('modal-backdrop')).toHaveStyle({
-          opacity: 1,
+          opacity: 0.32,
         });
         expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
@@ -453,7 +453,7 @@ describe('Modal', () => {
         );
 
         expect(getByTestId('modal-backdrop')).toHaveStyle({
-          opacity: 1,
+          opacity: 0.32,
         });
         expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
@@ -466,7 +466,7 @@ describe('Modal', () => {
         );
 
         expect(getByTestId('modal-backdrop')).toHaveStyle({
-          opacity: 1,
+          opacity: 0.32,
         });
         expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
@@ -491,7 +491,7 @@ describe('Modal', () => {
         );
 
         expect(getByTestId('modal-backdrop')).toHaveStyle({
-          opacity: 1,
+          opacity: 0.32,
         });
         expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
@@ -504,7 +504,7 @@ describe('Modal', () => {
         );
 
         expect(getByTestId('modal-backdrop')).toHaveStyle({
-          opacity: 1,
+          opacity: 0.32,
         });
         expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,
@@ -527,7 +527,7 @@ describe('Modal', () => {
         });
 
         expect(getByTestId('modal-backdrop')).toHaveStyle({
-          opacity: 1,
+          opacity: 0.32,
         });
         expect(getByTestId('modal-surface-outer-layer')).toHaveStyle({
           opacity: 1,

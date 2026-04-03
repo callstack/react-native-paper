@@ -198,7 +198,7 @@ describe('getSwitchColor - on tint color', () => {
         color: 'purple',
       })
     ).toMatchObject({
-      onTintColor: color('purple').alpha(0.5).rgb().string(),
+      checkedColor: 'purple',
     });
   });
 

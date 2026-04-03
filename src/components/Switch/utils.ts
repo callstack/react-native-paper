@@ -81,7 +81,7 @@ const getOnTintColor = ({
   }
 
   if (value) {
-    return setColor(checkedColor).alpha(0.5).rgb().string();
+    return theme.colors.surfaceVariant;
   }
 
   if (theme.dark) {

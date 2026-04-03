@@ -13,7 +13,7 @@ const ac = (name: string) =>
 /**
  * Picks the correct color value for the current Android API level.
  * - API 34+: uses the named role resource (system_*_light/dark)
- * - API 31-33: uses the tonal accent resource (system_accent*_NNN), or ref if null
+ * - API 31-33: uses the tonal accent resource (system_accent*_NNN), or ref
  * - API < 31: uses the reference palette string from the base theme
  * @see https://github.com/material-components/material-components-android/blob/master/docs/theming/Color.md
  */
@@ -108,7 +108,7 @@ const lightColors = {
   ),
   onErrorContainer: pick(
     'system_on_error_container_light',
-    MD3LightTheme.colors.errorContainer,
+    MD3LightTheme.colors.onErrorContainer,
     MD3LightTheme.colors.onErrorContainer
   ),
   onSurface: pick(

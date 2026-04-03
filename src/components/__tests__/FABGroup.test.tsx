@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Animated } from 'react-native';
 
 import { act, fireEvent, render } from '@testing-library/react-native';
-import color from 'color';
 
 import { getTheme } from '../../core/theming';
 import FAB from '../FAB';
@@ -26,10 +25,7 @@ describe('getFABGroupColors - backdrop color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      backdropColor: color(getTheme().colors.background)
-        .alpha(0.95)
-        .rgb()
-        .string(),
+      backdropColor: getTheme().colors.scrim,
     });
   });
 
@@ -39,10 +35,7 @@ describe('getFABGroupColors - backdrop color', () => {
         theme: getTheme(false),
       })
     ).toMatchObject({
-      backdropColor: color(getTheme(false).colors.background)
-        .alpha(0.95)
-        .rgb()
-        .string(),
+      backdropColor: getTheme(false).colors.scrim,
     });
   });
 });
@@ -178,37 +171,6 @@ it('correctly adds label prop', () => {
   );
 
   expect(getByText('Label test')).toBeTruthy();
-});
-
-it('correct renders custom ripple color passed to FAB.Group and its item', () => {
-  const { getByTestId } = render(
-    <FAB.Group
-      visible
-      open
-      label="Label test"
-      testID="fab-group"
-      rippleColor={'orange'}
-      icon="plus"
-      onStateChange={() => {}}
-      actions={[
-        {
-          label: 'testing',
-          onPress() {},
-          icon: '',
-          rippleColor: 'yellow',
-          testID: 'fab-group-item',
-        },
-      ]}
-    />
-  );
-
-  expect(
-    getByTestId('fab-group-container').props.children.props.rippleColor
-  ).toBe('orange');
-
-  expect(
-    getByTestId('fab-group-item-container').props.children.props.rippleColor
-  ).toBe('yellow');
 });
 
 it('animated value changes correctly', () => {

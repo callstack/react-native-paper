@@ -1,7 +1,6 @@
 import * as React from 'react';
 import type {
   AccessibilityState,
-  ColorValue,
   NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   TextLayoutEventData,
@@ -19,8 +18,6 @@ import {
   ViewStyle,
   Text,
 } from 'react-native';
-
-import color from 'color';
 
 import { getCombinedStyles, getFABColors, getLabelSizeWeb } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -67,14 +64,6 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * Custom color for the icon and label of the `FAB`.
    */
   color?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
-  /**
-   * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
-   */
-  disabled?: boolean;
   /**
    * Whether `FAB` is currently visible.
    */
@@ -213,8 +202,6 @@ const AnimatedFAB = ({
   accessibilityLabel = label,
   accessibilityState,
   color: customColor,
-  rippleColor: customRippleColor,
-  disabled,
   onPress,
   onLongPress,
   delayLongPress,
@@ -308,13 +295,9 @@ const AnimatedFAB = ({
   const { backgroundColor, foregroundColor } = getFABColors({
     theme,
     variant,
-    disabled,
     customColor,
     customBackgroundColor,
   });
-
-  const rippleColor =
-    customRippleColor || color(foregroundColor).alpha(0.12).rgb().string();
 
   const extendedWidth = textWidth + SIZE + borderRadius;
 
@@ -370,14 +353,9 @@ const AnimatedFAB = ({
     ...font,
   };
 
-  const md3Elevation = disabled || !isIOS ? 0 : 3;
+  const md3Elevation = !isIOS ? 0 : 3;
 
-  const baseStyle = [
-    StyleSheet.absoluteFill,
-    disabled ? styles.disabled : styles.shadow,
-  ];
-
-  const newAccessibilityState = { ...accessibilityState, disabled };
+  const baseStyle = [StyleSheet.absoluteFill, styles.shadow];
 
   return (
     <Surface
@@ -461,11 +439,9 @@ const AnimatedFAB = ({
               onPress={onPress}
               onLongPress={onLongPress}
               delayLongPress={delayLongPress}
-              rippleColor={rippleColor}
-              disabled={disabled}
               accessibilityLabel={accessibilityLabel}
               accessibilityRole="button"
-              accessibilityState={newAccessibilityState}
+              accessibilityState={accessibilityState}
               testID={testID}
               style={{ borderRadius }}
               theme={theme}
@@ -563,9 +539,6 @@ const AnimatedFAB = ({
 const styles = StyleSheet.create({
   standard: {
     height: SIZE,
-  },
-  disabled: {
-    elevation: 0,
   },
   // eslint-disable-next-line react-native/no-color-literals
   container: {

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -14,6 +13,7 @@ import Checkbox from './Checkbox';
 import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
 import { useInternalTheme } from '../../core/theming';
+import { tokens } from '../../styles/themes/tokens';
 import type { ThemeProp, MD3TypescaleKey } from '../../types';
 import TouchableRipple, {
   Props as TouchableRippleProps,
@@ -58,10 +58,6 @@ export type Props = {
    * Custom color for checkbox.
    */
   color?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
   /**
    * Additional styles for container View.
    */
@@ -148,7 +144,6 @@ const CheckboxItem = ({
   disabled,
   labelVariant = 'bodyLarge',
   labelMaxFontSizeMultiplier = 1.5,
-  rippleColor,
   background,
   hitSlop,
   ...props
@@ -167,11 +162,13 @@ const CheckboxItem = ({
   }
 
   const textColor = theme.colors.onSurface;
-  const disabledTextColor = theme.colors.onSurfaceDisabled;
   const textAlign = isLeading ? 'right' : 'left';
 
   const computedStyle = {
-    color: disabled ? disabledTextColor : textColor,
+    color: textColor,
+    opacity: disabled
+      ? tokens.md.ref.stateOpacity.disabled
+      : tokens.md.ref.stateOpacity.enabled,
     textAlign,
   } as TextStyle;
 
@@ -187,7 +184,6 @@ const CheckboxItem = ({
       onLongPress={onLongPress}
       testID={testID}
       disabled={disabled}
-      rippleColor={rippleColor}
       theme={theme}
       background={background}
       hitSlop={hitSlop}

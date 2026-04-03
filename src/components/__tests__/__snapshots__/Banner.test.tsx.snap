@@ -204,6 +204,9 @@ exports[`render visible banner, with custom theme 1`] = `
                         "flexDirection": "row",
                         "justifyContent": "center",
                       },
+                      {
+                        "opacity": 1,
+                      },
                       undefined,
                     ]
                   }
@@ -626,6 +629,9 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                         "flexDirection": "row",
                         "justifyContent": "center",
                       },
+                      {
+                        "opacity": 1,
+                      },
                       undefined,
                     ]
                   }
@@ -895,6 +901,9 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                         "flexDirection": "row",
                         "justifyContent": "center",
                       },
+                      {
+                        "opacity": 1,
+                      },
                       undefined,
                     ]
                   }
@@ -1043,6 +1052,9 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                         "alignItems": "center",
                         "flexDirection": "row",
                         "justifyContent": "center",
+                      },
+                      {
+                        "opacity": 1,
                       },
                       undefined,
                     ]

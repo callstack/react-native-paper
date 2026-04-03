@@ -59,6 +59,9 @@ exports[`Menu Item renders menu item 1`] = `
           {
             "flexDirection": "row",
           },
+          {
+            "opacity": 1,
+          },
           undefined,
         ]
       }
@@ -217,6 +220,9 @@ exports[`Menu Item renders menu item 1`] = `
         [
           {
             "flexDirection": "row",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]
@@ -377,6 +383,9 @@ exports[`Menu Item renders menu item 1`] = `
           {
             "flexDirection": "row",
           },
+          {
+            "opacity": 0.38,
+          },
           undefined,
         ]
       }
@@ -397,7 +406,7 @@ exports[`Menu Item renders menu item 1`] = `
           style={
             [
               {
-                "color": "rgba(29, 27, 32, 0.38)",
+                "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
               [
@@ -460,7 +469,7 @@ exports[`Menu Item renders menu item 1`] = `
                 },
                 [
                   {
-                    "color": "rgba(29, 27, 32, 0.38)",
+                    "color": "rgba(29, 27, 32, 1)",
                     "fontFamily": "System",
                     "fontSize": 16,
                     "fontWeight": "400",
@@ -536,6 +545,9 @@ exports[`Menu Item renders menu item 1`] = `
           {
             "flexDirection": "row",
           },
+          {
+            "opacity": 0.38,
+          },
           undefined,
         ]
       }
@@ -556,7 +568,7 @@ exports[`Menu Item renders menu item 1`] = `
           style={
             [
               {
-                "color": "rgba(29, 27, 32, 0.38)",
+                "color": "rgba(73, 69, 79, 1)",
                 "fontSize": 24,
               },
               [
@@ -619,7 +631,7 @@ exports[`Menu Item renders menu item 1`] = `
                 },
                 [
                   {
-                    "color": "rgba(29, 27, 32, 0.38)",
+                    "color": "rgba(29, 27, 32, 1)",
                     "fontFamily": "System",
                     "fontSize": 16,
                     "fontWeight": "400",
@@ -694,6 +706,9 @@ exports[`Menu Item renders menu item 1`] = `
         [
           {
             "flexDirection": "row",
+          },
+          {
+            "opacity": 1,
           },
           undefined,
         ]

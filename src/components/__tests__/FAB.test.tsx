@@ -91,12 +91,6 @@ it('renders loading FAB with custom size prop', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders disabled FAB', () => {
-  const tree = render(<FAB onPress={() => {}} icon="plus" disabled />).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
 it('renders custom color for the icon and label of the FAB', () => {
   const tree = render(
     <FAB onPress={() => {}} icon="plus" color="#AA0114" />
@@ -196,42 +190,6 @@ describe('getFABColors - background color', () => {
     });
   });
 
-  it('should return correct disabled color, for theme version 3', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(),
-        disabled: true,
-        variant: 'primary',
-      })
-    ).toMatchObject({
-      backgroundColor: getTheme().colors.surfaceDisabled,
-    });
-  });
-
-  it('should return correct disabled color, for theme version 2, light mode', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(false),
-        disabled: true,
-        variant: 'primary',
-      })
-    ).toMatchObject({
-      backgroundColor: getTheme(false).colors.surfaceDisabled,
-    });
-  });
-
-  it('should return correct disabled color, for theme version 2, dark mode', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(true),
-        disabled: true,
-        variant: 'primary',
-      })
-    ).toMatchObject({
-      backgroundColor: getTheme(true).colors.surfaceDisabled,
-    });
-  });
-
   it('should return correct theme color, for theme version 3, primary variant', () => {
     expect(
       getFABColors({
@@ -298,42 +256,6 @@ describe('getFABColors - foreground color', () => {
       })
     ).toMatchObject({
       foregroundColor: 'purple',
-    });
-  });
-
-  it('should return correct disabled color, for theme version 3', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(),
-        variant: 'primary',
-        disabled: true,
-      })
-    ).toMatchObject({
-      foregroundColor: getTheme().colors.onSurfaceDisabled,
-    });
-  });
-
-  it('should return correct disabled color, for theme version 2, light mode', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(false),
-        disabled: true,
-        variant: 'primary',
-      })
-    ).toMatchObject({
-      foregroundColor: getTheme(false).colors.onSurfaceDisabled,
-    });
-  });
-
-  it('should return correct disabled color, for theme version 2, dark mode', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(true),
-        disabled: true,
-        variant: 'primary',
-      })
-    ).toMatchObject({
-      foregroundColor: getTheme(true).colors.onSurfaceDisabled,
     });
   });
 

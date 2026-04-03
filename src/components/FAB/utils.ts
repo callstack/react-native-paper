@@ -7,8 +7,6 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
-
 import type { InternalTheme } from '../../types';
 
 type GetCombinedStylesProps = {
@@ -29,7 +27,6 @@ type Variant = 'primary' | 'secondary' | 'tertiary' | 'surface';
 type BaseProps = {
   isVariant: (variant: Variant) => boolean;
   theme: InternalTheme;
-  disabled?: boolean;
 };
 
 export const getCombinedStyles = ({
@@ -165,15 +162,10 @@ export const getCombinedStyles = ({
 const getBackgroundColor = ({
   theme,
   isVariant,
-  disabled,
   customBackgroundColor,
 }: BaseProps & { customBackgroundColor?: ColorValue }) => {
-  if (customBackgroundColor && !disabled) {
+  if (customBackgroundColor) {
     return customBackgroundColor;
-  }
-
-  if (disabled) {
-    return theme.colors.surfaceDisabled;
   }
 
   if (isVariant('primary')) {
@@ -198,15 +190,10 @@ const getBackgroundColor = ({
 const getForegroundColor = ({
   theme,
   isVariant,
-  disabled,
   customColor,
 }: BaseProps & { customColor?: string }) => {
-  if (typeof customColor !== 'undefined' && !disabled) {
+  if (typeof customColor !== 'undefined') {
     return customColor;
-  }
-
-  if (disabled) {
-    return theme.colors.onSurfaceDisabled;
   }
 
   if (isVariant('primary')) {
@@ -231,23 +218,19 @@ const getForegroundColor = ({
 export const getFABColors = ({
   theme,
   variant,
-  disabled,
   customColor,
   customBackgroundColor,
-  customRippleColor,
 }: {
   theme: InternalTheme;
   variant: string;
-  disabled?: boolean;
   customColor?: string;
   customBackgroundColor?: ColorValue;
-  customRippleColor?: ColorValue;
 }) => {
   const isVariant = (variantToCompare: Variant) => {
     return variant === variantToCompare;
   };
 
-  const baseFABColorProps = { theme, isVariant, disabled };
+  const baseFABColorProps = { theme, isVariant };
 
   const backgroundColor = getBackgroundColor({
     ...baseFABColorProps,
@@ -262,8 +245,6 @@ export const getFABColors = ({
   return {
     backgroundColor,
     foregroundColor,
-    rippleColor:
-      customRippleColor || color(foregroundColor).alpha(0.12).rgb().string(),
   };
 };
 
@@ -281,7 +262,7 @@ const getBackdropColor = ({
   if (customBackdropColor) {
     return customBackdropColor;
   }
-  return color(theme.colors.background).alpha(0.95).rgb().string();
+  return theme.colors.scrim;
 };
 
 const getStackedFABBackgroundColor = ({ theme }: { theme: InternalTheme }) => {

@@ -57,8 +57,8 @@ describe('getSegmentedButtonColors', () => {
     theme         | disabled | checked  | checkedColor | uncheckedColor | expected
     ${getTheme()} | ${false} | ${true}  | ${undefined} | ${undefined}   | ${getTheme().colors.onSecondaryContainer}
     ${getTheme()} | ${false} | ${false} | ${undefined} | ${undefined}   | ${getTheme().colors.onSurface}
-    ${getTheme()} | ${true}  | ${true}  | ${undefined} | ${undefined}   | ${getTheme().colors.onSurfaceDisabled}
-    ${getTheme()} | ${true}  | ${false} | ${undefined} | ${undefined}   | ${getTheme().colors.onSurfaceDisabled}
+    ${getTheme()} | ${true}  | ${true}  | ${undefined} | ${undefined}   | ${getTheme().colors.onSurface}
+    ${getTheme()} | ${true}  | ${false} | ${undefined} | ${undefined}   | ${getTheme().colors.onSurface}
     ${getTheme()} | ${false} | ${true}  | ${'a125f5'}  | ${undefined}   | ${'a125f5'}
     ${getTheme()} | ${false} | ${false} | ${undefined} | ${'000'}       | ${'000'}
     ${getTheme()} | ${false} | ${false} | ${'a125f5'}  | ${'000'}       | ${'000'}
@@ -121,7 +121,7 @@ describe('getSegmentedButtonColors', () => {
         checked: false,
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.surfaceDisabled,
+      borderColor: getTheme().colors.outlineVariant,
     });
   });
 
@@ -145,7 +145,8 @@ describe('getSegmentedButtonColors', () => {
         checked: false,
       })
     ).toMatchObject({
-      textColor: getTheme().colors.onSurfaceDisabled,
+      textColor: getTheme().colors.onSurface,
+      textOpacity: 0.38,
     });
   });
 });

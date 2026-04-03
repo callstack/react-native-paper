@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   AccessibilityState,
   Animated,
-  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -79,14 +78,6 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * Custom color for the icon and label of the `FAB`.
    */
   color?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
-  /**
-   * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
-   */
-  disabled?: boolean;
   /**
    * Whether `FAB` is currently visible.
    */
@@ -189,8 +180,6 @@ const FAB = forwardRef<View, Props>(
       accessibilityState,
       animated = true,
       color: customColor,
-      rippleColor: customRippleColor,
-      disabled,
       onPress,
       onLongPress,
       delayLongPress,
@@ -242,13 +231,11 @@ const FAB = forwardRef<View, Props>(
       backgroundColor: customBackgroundColor,
     } = (StyleSheet.flatten(style) || {}) as ViewStyle;
 
-    const { backgroundColor, foregroundColor, rippleColor } = getFABColors({
+    const { backgroundColor, foregroundColor } = getFABColors({
       theme,
       variant,
-      disabled,
       customColor,
       customBackgroundColor,
-      customRippleColor,
     });
 
     const isLargeSize = size === 'large';
@@ -263,9 +250,7 @@ const FAB = forwardRef<View, Props>(
       ...font,
     };
 
-    const md3Elevation = isFlatMode || disabled ? 0 : 3;
-
-    const newAccessibilityState = { ...accessibilityState, disabled };
+    const md3Elevation = isFlatMode ? 0 : 3;
 
     return (
       <Surface
@@ -295,11 +280,9 @@ const FAB = forwardRef<View, Props>(
           onPress={onPress}
           onLongPress={onLongPress}
           delayLongPress={delayLongPress}
-          rippleColor={rippleColor}
-          disabled={disabled}
           accessibilityLabel={accessibilityLabel}
           accessibilityRole="button"
-          accessibilityState={newAccessibilityState}
+          accessibilityState={accessibilityState}
           testID={testID}
           style={{ borderRadius }}
           {...rest}
@@ -358,9 +341,6 @@ const styles = StyleSheet.create({
   },
   uppercaseLabel: {
     textTransform: 'uppercase',
-  },
-  disabled: {
-    elevation: 0,
   },
 });
 

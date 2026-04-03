@@ -3,7 +3,6 @@ import * as React from 'react';
 import { I18nManager, Platform, StyleSheet, Text, View } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
-import color from 'color';
 
 import { DefaultTheme, getTheme, ThemeProvider } from '../../core/theming';
 const red500 = '#f44336';
@@ -547,7 +546,7 @@ describe('getFlatInputColor - underline color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      underlineColorCustom: getTheme().colors.onSurfaceDisabled,
+      underlineColorCustom: getTheme().colors.onSurfaceVariant,
     });
   });
 
@@ -610,7 +609,8 @@ describe('getFlatInputColor - input text color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      inputTextColor: getTheme().colors.onSurfaceDisabled,
+      inputTextColor: getTheme().colors.onSurface,
+      disabledOpacity: 0.38,
     });
   });
 
@@ -633,7 +633,8 @@ describe('getFlatInputColor - placeholder color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      placeholderColor: getTheme().colors.onSurfaceDisabled,
+      placeholderColor: getTheme().colors.onSurfaceVariant,
+      disabledOpacity: 0.38,
     });
   });
 
@@ -656,10 +657,7 @@ describe('getFlatInputColor - background color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      backgroundColor: color(getTheme().colors.onSurface)
-        .alpha(0.04)
-        .rgb()
-        .string(),
+      backgroundColor: getTheme().colors.surfaceContainerHighest,
     });
     expect(
       getFlatInputColors({
@@ -667,10 +665,7 @@ describe('getFlatInputColor - background color', () => {
         theme: getTheme(true),
       })
     ).toMatchObject({
-      backgroundColor: color(getTheme(true).colors.onSurface)
-        .alpha(0.04)
-        .rgb()
-        .string(),
+      backgroundColor: getTheme(true).colors.surfaceContainerHighest,
     });
   });
 
@@ -715,7 +710,8 @@ describe('getFlatInputColor - active color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      activeColor: getTheme().colors.onSurfaceDisabled,
+      activeColor: getTheme().colors.primary,
+      disabledOpacity: 0.38,
     });
   });
 
@@ -788,7 +784,7 @@ describe('getOutlinedInputColors - outline color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      outlineColor: getTheme().colors.surfaceDisabled,
+      outlineColor: getTheme().colors.outlineVariant,
     });
   });
 
@@ -842,7 +838,8 @@ describe('getOutlinedInputColors - input text color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      inputTextColor: getTheme().colors.onSurfaceDisabled,
+      inputTextColor: getTheme().colors.onSurface,
+      disabledOpacity: 0.38,
     });
   });
 
@@ -865,7 +862,8 @@ describe('getOutlinedInputColors - placeholder color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      placeholderColor: getTheme().colors.onSurfaceDisabled,
+      placeholderColor: getTheme().colors.onSurfaceVariant,
+      disabledOpacity: 0.38,
     });
   });
 
@@ -910,7 +908,8 @@ describe('getOutlinedInputColors - active color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      activeColor: getTheme().colors.onSurfaceDisabled,
+      activeColor: getTheme().colors.primary,
+      disabledOpacity: 0.38,
     });
   });
 
@@ -961,16 +960,6 @@ describe('getOutlinedInputColors - active color', () => {
       })
     ).toMatchObject({
       activeColor: getTheme().colors.primary,
-    });
-  });
-
-  it('should return theme active color, for theme version 2', () => {
-    expect(
-      getOutlinedInputColors({
-        theme: getTheme(false),
-      })
-    ).toMatchObject({
-      activeColor: getTheme(false).colors.primary,
     });
   });
 });

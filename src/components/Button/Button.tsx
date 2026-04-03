@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   AccessibilityRole,
   Animated,
-  ColorValue,
   GestureResponderEvent,
   Platform,
   PressableAndroidRippleConfig,
@@ -12,8 +11,6 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-
-import color from 'color';
 
 import {
   ButtonMode,
@@ -66,10 +63,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Custom button's text color.
    */
   textColor?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
   /**
    * Whether to show a loading indicator.
    */
@@ -186,7 +179,6 @@ const Button = (
     icon,
     buttonColor: customButtonColor,
     textColor: customTextColor,
-    rippleColor: customRippleColor,
     children,
     accessibilityLabel,
     accessibilityHint,
@@ -282,18 +274,21 @@ const Button = (
   const borderRadius = 5 * roundness;
   const iconSize = 18;
 
-  const { backgroundColor, borderColor, textColor, borderWidth } =
-    getButtonColors({
-      customButtonColor,
-      customTextColor,
-      theme,
-      mode,
-      disabled,
-      dark,
-    });
-
-  const rippleColor =
-    customRippleColor || color(textColor).alpha(0.12).rgb().string();
+  const {
+    backgroundColor,
+    borderColor,
+    textColor,
+    textOpacity,
+    borderWidth,
+    backgroundOpacity,
+  } = getButtonColors({
+    customButtonColor,
+    customTextColor,
+    theme,
+    mode,
+    disabled,
+    dark,
+  });
 
   const touchableStyle = {
     ...borderRadiusStyles,
@@ -301,7 +296,7 @@ const Button = (
   };
 
   const buttonStyle = {
-    backgroundColor,
+    backgroundColor: backgroundOpacity < 1 ? 'transparent' : backgroundColor,
     borderColor,
     borderWidth,
     ...touchableStyle,
@@ -348,6 +343,19 @@ const Button = (
       elevation={elevation}
       container
     >
+      {backgroundOpacity < 1 && (
+        <View
+          pointerEvents="none"
+          style={[
+            StyleSheet.absoluteFill,
+            {
+              backgroundColor,
+              opacity: backgroundOpacity,
+              borderRadius: touchableStyle.borderRadius,
+            },
+          ]}
+        />
+      )}
       <TouchableRipple
         borderless
         background={background}
@@ -363,13 +371,12 @@ const Button = (
         accessible={accessible}
         hitSlop={hitSlop}
         disabled={disabled}
-        rippleColor={rippleColor}
         style={getButtonTouchableRippleStyle(touchableStyle, borderWidth)}
         testID={testID}
         theme={theme}
         ref={touchableRef}
       >
-        <View style={[styles.content, contentStyle]}>
+        <View style={[styles.content, { opacity: textOpacity }, contentStyle]}>
           {icon && loading !== true ? (
             <View style={iconStyle} testID={`${testID}-icon-container`}>
               <Icon

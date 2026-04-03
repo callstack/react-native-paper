@@ -1,6 +1,3 @@
-import color from 'color';
-
-import { tokens } from '../../styles/themes/tokens';
 import type { InternalTheme } from '../../types';
 
 export const getToggleButtonColor = ({
@@ -11,10 +8,7 @@ export const getToggleButtonColor = ({
   checked: boolean | null;
 }) => {
   if (checked) {
-    return color(theme.colors.onSecondaryContainer)
-      .alpha(tokens.md.ref.stateOpacity.pressed)
-      .rgb()
-      .string();
+    return theme.colors.surfaceContainerHighest;
   }
-  return 'transparent';
+  return theme.colors.surfaceContainer;
 };

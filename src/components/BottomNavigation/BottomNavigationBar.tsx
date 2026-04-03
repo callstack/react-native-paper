@@ -565,12 +565,15 @@ const BottomNavigationBar = <Route extends BaseRoute>({
             // We render the active icon and label on top of inactive ones and cross-fade them on change.
             // This trick gives the illusion that we are animating between active and inactive colors.
             // This is to ensure that we can use native driver, as colors cannot be animated with native driver.
-            const activeOpacity = focused ? 1 : 0;
-            const inactiveOpacity = shifting
-              ? active.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [1, 0],
-                })
+            const animatedActiveOpacity = active;
+            const animatedInactiveOpacity = active.interpolate({
+              inputRange: [0, 1],
+              outputRange: [1, 0],
+            });
+
+            const staticActiveOpacity = focused ? 1 : 0;
+            const staticInactiveOpacity = shifting
+              ? animatedInactiveOpacity
               : focused
               ? 0
               : 1;
@@ -662,8 +665,8 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                         styles.iconWrapper,
                         {
                           opacity: isShiftingOrLabeled
-                            ? activeOpacity
-                            : activeOpacity,
+                            ? animatedActiveOpacity
+                            : staticActiveOpacity,
                         },
                       ]}
                     >
@@ -686,8 +689,8 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                         styles.iconWrapper,
                         {
                           opacity: isShiftingOrLabeled
-                            ? inactiveOpacity
-                            : inactiveOpacity,
+                            ? animatedInactiveOpacity
+                            : staticInactiveOpacity,
                         },
                       ]}
                     >
@@ -726,8 +729,8 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                           styles.labelWrapper,
                           {
                             opacity: isShiftingOrLabeled
-                              ? activeOpacity
-                              : activeOpacity,
+                              ? animatedActiveOpacity
+                              : staticActiveOpacity,
                           },
                         ]}
                       >
@@ -759,8 +762,8 @@ const BottomNavigationBar = <Route extends BaseRoute>({
                             styles.labelWrapper,
                             {
                               opacity: isShiftingOrLabeled
-                                ? inactiveOpacity
-                                : inactiveOpacity,
+                                ? animatedInactiveOpacity
+                                : staticInactiveOpacity,
                             },
                           ]}
                         >

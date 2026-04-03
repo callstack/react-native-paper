@@ -1,10 +1,11 @@
 import { type ViewStyle } from 'react-native';
 
-import color from 'color';
-
 import { black, white } from '../../styles/themes/baseColors';
+import { tokens } from '../../styles/themes/tokens';
 import type { InternalTheme } from '../../types';
 import { splitStyles } from '../../utils/splitStyles';
+
+const { stateOpacity } = tokens.md.ref;
 
 export type ButtonMode =
   | 'text'
@@ -34,10 +35,6 @@ const isDark = ({
     return false;
   }
 
-  if (backgroundColor !== 'transparent') {
-    return !color(backgroundColor).isLight();
-  }
-
   return false;
 };
 
@@ -57,7 +54,7 @@ const getButtonBackgroundColor = ({
     if (isMode('outlined') || isMode('text')) {
       return 'transparent';
     }
-    return theme.colors.surfaceDisabled;
+    return theme.colors.onSurface;
   }
 
   if (isMode('elevated')) {
@@ -92,7 +89,7 @@ const getButtonTextColor = ({
   }
 
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return theme.colors.onSurface;
   }
 
   if (typeof dark === 'boolean') {
@@ -120,13 +117,9 @@ const getButtonTextColor = ({
   return theme.colors.primary;
 };
 
-const getButtonBorderColor = ({ isMode, disabled, theme }: BaseProps) => {
-  if (disabled && isMode('outlined')) {
-    return theme.colors.surfaceDisabled;
-  }
-
+const getButtonBorderColor = ({ isMode, theme }: BaseProps) => {
   if (isMode('outlined')) {
-    return theme.colors.outline;
+    return theme.colors.outlineVariant;
   }
 
   return 'transparent';
@@ -174,15 +167,24 @@ export const getButtonColors = ({
     dark,
   });
 
-  const borderColor = getButtonBorderColor({ isMode, theme, disabled });
+  const borderColor = getButtonBorderColor({ isMode, theme });
 
   const borderWidth = getButtonBorderWidth({ isMode, theme });
+
+  const textOpacity = disabled ? stateOpacity.disabled : stateOpacity.enabled;
+
+  const backgroundOpacity =
+    disabled && !isMode('outlined') && !isMode('text')
+      ? stateOpacity.pressed
+      : stateOpacity.enabled;
 
   return {
     backgroundColor,
     borderColor,
     textColor,
+    textOpacity,
     borderWidth,
+    backgroundOpacity,
   };
 };
 

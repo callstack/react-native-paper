@@ -53,7 +53,7 @@ const CheckboxIOS = ({
   const checked = status === 'checked';
   const indeterminate = status === 'indeterminate';
 
-  const { checkedColor, rippleColor } = getSelectionControlIOSColor({
+  const { checkedColor, checkedColorOpacity } = getSelectionControlIOSColor({
     theme,
     disabled,
     customColor: rest.color,
@@ -66,7 +66,6 @@ const CheckboxIOS = ({
     <TouchableRipple
       {...rest}
       borderless
-      rippleColor={rippleColor}
       onPress={onPress}
       disabled={disabled}
       accessibilityRole="checkbox"
@@ -76,7 +75,7 @@ const CheckboxIOS = ({
       testID={testID}
       theme={theme}
     >
-      <View style={{ opacity }}>
+      <View style={{ opacity: opacity * checkedColorOpacity }}>
         <MaterialCommunityIcon
           allowFontScaling={false}
           name={icon}

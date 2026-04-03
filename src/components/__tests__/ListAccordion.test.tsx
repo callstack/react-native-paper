@@ -2,7 +2,6 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { render } from '@testing-library/react-native';
-import color from 'color';
 
 import { getTheme } from '../../core/theming';
 import { red500 } from '../../styles/themes/baseColors';
@@ -188,45 +187,6 @@ describe('getAccordionColors - title text color', () => {
       })
     ).toMatchObject({
       titleTextColor: getTheme().colors?.primary,
-    });
-  });
-});
-
-describe('getAccordionColors - ripple color', () => {
-  it('should return theme color, for theme version 3', () => {
-    expect(
-      getAccordionColors({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme().colors.onSurface)
-        .alpha(0.12)
-        .rgb()
-        .string(),
-    });
-  });
-
-  it('should return theme color, for theme version 2', () => {
-    expect(
-      getAccordionColors({
-        theme: getTheme(false),
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme(false).colors.onSurface)
-        .alpha(0.12)
-        .rgb()
-        .string(),
-    });
-  });
-
-  it('should return primary color if it is expanded', () => {
-    expect(
-      getAccordionColors({
-        theme: getTheme(),
-        isExpanded: true,
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme().colors.primary).alpha(0.12).rgb().string(),
     });
   });
 });

@@ -42,7 +42,6 @@ export type MD3Colors = {
   surfaceContainerHigh: string;
   surfaceContainerHighest: string;
   surfaceVariant: string;
-  surfaceDisabled: string;
   background: string;
   error: string;
   errorContainer: string;
@@ -54,7 +53,6 @@ export type MD3Colors = {
   onTertiaryContainer: string;
   onSurface: string;
   onSurfaceVariant: string;
-  onSurfaceDisabled: string;
   onError: string;
   onErrorContainer: string;
   onBackground: string;
@@ -77,59 +75,12 @@ export type MD3Colors = {
   onTertiaryFixedVariant: string;
   shadow: string;
   scrim: string;
-  backdrop: string;
+  /** Pre-computed state layer color at press opacity (0.10).
+   *  Used for ripple effects. Avoids runtime alpha manipulation
+   *  which is incompatible with PlatformColor on Android.
+   *  @see https://m3.material.io/foundations/interaction/states/state-layers */
+  stateLayerPressed: string;
   elevation: MD3ElevationColors;
-};
-
-export type MD3AndroidColors = {
-  primary: number;
-  primaryContainer: number;
-  secondary: number;
-  secondaryContainer: number;
-  tertiary: number;
-  tertiaryContainer: number;
-  surface: number;
-  surfaceDim: number;
-  surfaceBright: number;
-  surfaceContainerLowest: number;
-  surfaceContainerLow: number;
-  surfaceContainer: number;
-  surfaceContainerHigh: number;
-  surfaceContainerHighest: number;
-  surfaceVariant: number;
-  background: number;
-  error: number;
-  errorContainer: number;
-  onPrimary: number;
-  onPrimaryContainer: number;
-  onSecondary: number;
-  onSecondaryContainer: number;
-  onTertiary: number;
-  onTertiaryContainer: number;
-  onSurface: number;
-  onSurfaceVariant: number;
-  onError: number;
-  onErrorContainer: number;
-  onBackground: number;
-  outline: number;
-  outlineVariant: number;
-  inverseSurface: number;
-  inverseOnSurface: number;
-  inversePrimary: number;
-  primaryFixed: number;
-  primaryFixedDim: number;
-  onPrimaryFixed: number;
-  onPrimaryFixedVariant: number;
-  secondaryFixed: number;
-  secondaryFixedDim: number;
-  onSecondaryFixed: number;
-  onSecondaryFixedVariant: number;
-  tertiaryFixed: number;
-  tertiaryFixedDim: number;
-  onTertiaryFixed: number;
-  onTertiaryFixedVariant: number;
-  shadow: number;
-  scrim: number;
 };
 
 export type ThemeProp = $DeepPartial<InternalTheme>;

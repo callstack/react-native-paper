@@ -1,4 +1,7 @@
+import { tokens } from '../../styles/themes/tokens';
 import type { InternalTheme } from '../../types';
+
+const { stateOpacity } = tokens.md.ref;
 
 type BaseProps = {
   theme: InternalTheme;
@@ -8,12 +11,18 @@ type BaseProps = {
 
 export function getTextColor({ theme, disabled, type }: BaseProps) {
   if (type === 'error') {
-    return theme.colors.error;
+    return { color: theme.colors.error, opacity: stateOpacity.enabled };
   }
 
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return {
+      color: theme.colors.onSurfaceVariant,
+      opacity: stateOpacity.disabled,
+    };
   }
 
-  return theme.colors.onSurfaceVariant;
+  return {
+    color: theme.colors.onSurfaceVariant,
+    opacity: stateOpacity.enabled,
+  };
 }

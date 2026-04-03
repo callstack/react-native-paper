@@ -350,7 +350,8 @@ describe('getButtonColors - background color', () => {
           disabled: true,
         })
       ).toMatchObject({
-        backgroundColor: getTheme().colors.surfaceDisabled,
+        backgroundColor: getTheme().colors.onSurface,
+        backgroundOpacity: 0.1,
       });
     })
   );
@@ -365,7 +366,8 @@ describe('getButtonColors - background color', () => {
           disabled: true,
         })
       ).toMatchObject({
-        backgroundColor: getTheme(true).colors.surfaceDisabled,
+        backgroundColor: getTheme(true).colors.onSurface,
+        backgroundOpacity: 0.1,
       });
     })
   );
@@ -551,7 +553,8 @@ describe('getButtonColors - text color', () => {
         mode: 'text',
       })
     ).toMatchObject({
-      textColor: getTheme().colors.onSurfaceDisabled,
+      textColor: getTheme().colors.onSurface,
+      textOpacity: 0.38,
     });
   });
 
@@ -564,7 +567,8 @@ describe('getButtonColors - text color', () => {
         mode: 'text',
       })
     ).toMatchObject({
-      textColor: getTheme(true).colors.onSurfaceDisabled,
+      textColor: getTheme(true).colors.onSurface,
+      textOpacity: 0.38,
     });
   });
 
@@ -700,7 +704,7 @@ describe('getButtonColors - border color', () => {
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.surfaceDisabled,
+      borderColor: getTheme().colors.outlineVariant,
     });
   });
 
@@ -712,7 +716,7 @@ describe('getButtonColors - border color', () => {
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme(true).colors.surfaceDisabled,
+      borderColor: getTheme(true).colors.outlineVariant,
     });
   });
 
@@ -723,7 +727,7 @@ describe('getButtonColors - border color', () => {
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.outline,
+      borderColor: getTheme().colors.outlineVariant,
     });
   });
 
@@ -734,7 +738,7 @@ describe('getButtonColors - border color', () => {
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme(true).colors.outline,
+      borderColor: getTheme(true).colors.outlineVariant,
     });
   });
 

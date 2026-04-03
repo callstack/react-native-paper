@@ -410,6 +410,9 @@ exports[`renders snackbar with action button 1`] = `
                       "flexDirection": "row",
                       "justifyContent": "center",
                     },
+                    {
+                      "opacity": 1,
+                    },
                     undefined,
                   ]
                 }
