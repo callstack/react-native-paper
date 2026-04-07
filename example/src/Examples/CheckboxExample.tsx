@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { Checkbox, MD3Colors, Text, TouchableRipple } from 'react-native-paper';
+import { Checkbox, Colors, Text, TouchableRipple } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -28,7 +28,7 @@ const CheckboxExample = () => {
           <TextComponent>Custom</TextComponent>
           <View pointerEvents="none">
             <Checkbox
-              color={MD3Colors.error70}
+              color={Colors.error70}
               status={checkedCustom ? 'checked' : 'unchecked'}
             />
           </View>

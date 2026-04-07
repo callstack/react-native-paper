@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 
-import { MD3DarkTheme, MD3LightTheme, MD3Theme } from 'react-native-paper';
+import { DarkTheme, LightTheme, Theme } from 'react-native-paper';
 
 type ReducerAction<T extends keyof State> = {
   payload: State[T];
@@ -525,7 +525,7 @@ export const teamsList = [
 
 const lightPinkColors = {
   colors: {
-    ...MD3LightTheme.colors,
+    ...LightTheme.colors,
     primary: 'rgb(154, 64, 87)',
     onPrimary: 'rgb(255, 255, 255)',
     primaryContainer: 'rgb(255, 217, 223)',
@@ -571,7 +571,7 @@ const lightPinkColors = {
 
 const darkPinkColors = {
   colors: {
-    ...MD3DarkTheme.colors,
+    ...DarkTheme.colors,
     primary: 'rgb(255, 177, 192)',
     onPrimary: 'rgb(95, 17, 42)',
     primaryContainer: 'rgb(124, 41, 64)',
@@ -617,7 +617,7 @@ const darkPinkColors = {
 
 const lightGreenColors = {
   colors: {
-    ...MD3LightTheme.colors,
+    ...LightTheme.colors,
     primary: 'rgb(0, 110, 0)',
     onPrimary: 'rgb(255, 255, 255)',
     primaryContainer: 'rgb(141, 251, 119)',
@@ -663,7 +663,7 @@ const lightGreenColors = {
 
 const darkGreenColors = {
   colors: {
-    ...MD3DarkTheme.colors,
+    ...DarkTheme.colors,
     primary: 'rgb(114, 222, 94)',
     onPrimary: 'rgb(0, 58, 0)',
     primaryContainer: 'rgb(0, 83, 0)',
@@ -709,7 +709,7 @@ const darkGreenColors = {
 
 const lightBlueColors = {
   colors: {
-    ...MD3LightTheme.colors,
+    ...LightTheme.colors,
     primary: 'rgb(52, 61, 255)',
     onPrimary: 'rgb(255, 255, 255)',
     primaryContainer: 'rgb(224, 224, 255)',
@@ -755,7 +755,7 @@ const lightBlueColors = {
 
 const darkBlueColors = {
   colors: {
-    ...MD3DarkTheme.colors,
+    ...DarkTheme.colors,
     primary: 'rgb(190, 194, 255)',
     onPrimary: 'rgb(0, 1, 172)',
     primaryContainer: 'rgb(0, 0, 239)',
@@ -801,7 +801,7 @@ const darkBlueColors = {
 
 const lightOrangeColors = {
   colors: {
-    ...MD3LightTheme.colors,
+    ...LightTheme.colors,
     primary: 'rgb(133, 84, 0)',
     onPrimary: 'rgb(255, 255, 255)',
     primaryContainer: 'rgb(255, 221, 183)',
@@ -847,7 +847,7 @@ const lightOrangeColors = {
 
 const darkOrangeColors = {
   colors: {
-    ...MD3DarkTheme.colors,
+    ...DarkTheme.colors,
     primary: 'rgb(255, 185, 92)',
     onPrimary: 'rgb(70, 42, 0)',
     primaryContainer: 'rgb(101, 62, 0)',
@@ -893,7 +893,7 @@ const darkOrangeColors = {
 
 const lightRedColors = {
   colors: {
-    ...MD3LightTheme.colors,
+    ...LightTheme.colors,
     primary: 'rgb(192, 1, 0)',
     onPrimary: 'rgb(255, 255, 255)',
     primaryContainer: 'rgb(255, 218, 212)',
@@ -939,7 +939,7 @@ const lightRedColors = {
 
 const darkRedColors = {
   colors: {
-    ...MD3DarkTheme.colors,
+    ...DarkTheme.colors,
     primary: 'rgb(255, 180, 168)',
     onPrimary: 'rgb(105, 1, 0)',
     primaryContainer: 'rgb(147, 1, 0)',
@@ -985,7 +985,7 @@ const darkRedColors = {
 
 const lightYellowColors = {
   colors: {
-    ...MD3LightTheme.colors,
+    ...LightTheme.colors,
     primary: 'rgb(98, 98, 0)',
     onPrimary: 'rgb(255, 255, 255)',
     primaryContainer: 'rgb(234, 234, 0)',
@@ -1031,7 +1031,7 @@ const lightYellowColors = {
 
 const darkYellowColors = {
   colors: {
-    ...MD3DarkTheme.colors,
+    ...DarkTheme.colors,
     primary: 'rgb(205, 205, 0)',
     onPrimary: 'rgb(50, 50, 0)',
     primaryContainer: 'rgb(73, 73, 0)',
@@ -1077,7 +1077,7 @@ const darkYellowColors = {
 
 const lightCyanColors = {
   colors: {
-    ...MD3LightTheme.colors,
+    ...LightTheme.colors,
     primary: 'rgb(0, 106, 106)',
     onPrimary: 'rgb(255, 255, 255)',
     primaryContainer: 'rgb(0, 251, 251)',
@@ -1123,7 +1123,7 @@ const lightCyanColors = {
 
 const darkCyanColors = {
   colors: {
-    ...MD3DarkTheme.colors,
+    ...DarkTheme.colors,
     primary: 'rgb(0, 221, 221)',
     onPrimary: 'rgb(0, 55, 55)',
     primaryContainer: 'rgb(0, 79, 79)',
@@ -1169,80 +1169,80 @@ const darkCyanColors = {
 
 export const colorThemes = {
   paper: {
-    light: MD3LightTheme,
-    dark: MD3DarkTheme,
+    light: LightTheme,
+    dark: DarkTheme,
   },
   pink: {
     light: {
-      ...MD3LightTheme,
+      ...LightTheme,
       ...lightPinkColors,
     },
     dark: {
-      ...MD3DarkTheme,
+      ...DarkTheme,
       ...darkPinkColors,
     },
   },
   green: {
     light: {
-      ...MD3LightTheme,
+      ...LightTheme,
       ...lightGreenColors,
     },
     dark: {
-      ...MD3DarkTheme,
+      ...DarkTheme,
       ...darkGreenColors,
     },
   },
   blue: {
     light: {
-      ...MD3LightTheme,
+      ...LightTheme,
       ...lightBlueColors,
     },
     dark: {
-      ...MD3DarkTheme,
+      ...DarkTheme,
       ...darkBlueColors,
     },
   },
   orange: {
     light: {
-      ...MD3LightTheme,
+      ...LightTheme,
       ...lightOrangeColors,
     },
     dark: {
-      ...MD3DarkTheme,
+      ...DarkTheme,
       ...darkOrangeColors,
     },
   },
   red: {
     light: {
-      ...MD3LightTheme,
+      ...LightTheme,
       ...lightRedColors,
     },
     dark: {
-      ...MD3DarkTheme,
+      ...DarkTheme,
       ...darkRedColors,
     },
   },
   yellow: {
     light: {
-      ...MD3LightTheme,
+      ...LightTheme,
       ...lightYellowColors,
     },
     dark: {
-      ...MD3DarkTheme,
+      ...DarkTheme,
       ...darkYellowColors,
     },
   },
   cyan: {
     light: {
-      ...MD3LightTheme,
+      ...LightTheme,
       ...lightCyanColors,
     },
     dark: {
-      ...MD3DarkTheme,
+      ...DarkTheme,
       ...darkCyanColors,
     },
   },
-} as { [key: string]: { light: MD3Theme; dark: MD3Theme } };
+} as { [key: string]: { light: Theme; dark: Theme } };
 
 export const songsData = [
   {

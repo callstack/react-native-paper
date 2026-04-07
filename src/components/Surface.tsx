@@ -12,11 +12,11 @@ import {
 import { useInternalTheme } from '../core/theming';
 import { isAnimatedValue } from '../styles/overlay';
 import shadow from '../styles/shadow';
-import type { ThemeProp, MD3Elevation } from '../types';
+import type { ThemeProp, Elevation as ElevationProp } from '../types';
 import { forwardRef } from '../utils/forwardRef';
 import { splitStyles } from '../utils/splitStyles';
 
-type Elevation = 0 | 1 | 2 | 3 | 4 | 5 | Animated.Value;
+type Elevation = ElevationProp | Animated.Value;
 
 export type Props = Omit<React.ComponentPropsWithRef<typeof View>, 'style'> & {
   /**
@@ -262,7 +262,7 @@ const Surface = forwardRef<View, Props>(
         return elevation.interpolate({
           inputRange,
           outputRange: inputRange.map((elevation) => {
-            return colors.elevation?.[`level${elevation as MD3Elevation}`];
+            return colors.elevation?.[`level${elevation as ElevationProp}`];
           }),
         });
       }

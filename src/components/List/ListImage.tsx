@@ -25,7 +25,7 @@ export type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { List, MD3Colors } from 'react-native-paper';
+ * import { List, Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <>
@@ -40,7 +40,7 @@ export type Props = {
 const ListImage = ({ style, source, variant = 'image' }: Props) => {
   const getStyles = () => {
     if (variant === 'video') {
-      return [style, styles.videoV3];
+      return [style, styles.video];
     }
 
     return [style, styles.image];
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
   },
-  videoV3: {
+  video: {
     width: 114,
     height: 64,
     marginLeft: 0,

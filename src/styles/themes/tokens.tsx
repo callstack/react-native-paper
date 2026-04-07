@@ -248,4 +248,4 @@ export const tokens = {
   },
 };
 
-export const MD3Colors = ref.palette;
+export const Colors = ref.palette;

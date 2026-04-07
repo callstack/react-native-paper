@@ -1800,10 +1800,6 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                 style={
                   [
                     {
-                      "marginLeft": -4,
-                      "marginRight": 12,
-                    },
-                    {
                       "marginLeft": -16,
                       "marginRight": 16,
                     },
@@ -1864,13 +1860,9 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                       },
                       [
                         {
-                          "marginHorizontal": 16,
-                          "marginVertical": 9,
-                          "textAlign": "center",
-                        },
-                        {
                           "marginHorizontal": 24,
                           "marginVertical": 10,
+                          "textAlign": "center",
                         },
                         undefined,
                         false,

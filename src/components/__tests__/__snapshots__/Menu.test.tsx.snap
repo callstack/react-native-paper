@@ -133,13 +133,9 @@ exports[`renders menu with content styles 1`] = `
                       },
                       [
                         {
-                          "marginHorizontal": 16,
-                          "marginVertical": 9,
-                          "textAlign": "center",
-                        },
-                        {
                           "marginHorizontal": 24,
                           "marginVertical": 10,
+                          "textAlign": "center",
                         },
                         undefined,
                         false,
@@ -696,13 +692,9 @@ exports[`renders not visible menu 1`] = `
                     },
                     [
                       {
-                        "marginHorizontal": 16,
-                        "marginVertical": 9,
-                        "textAlign": "center",
-                      },
-                      {
                         "marginHorizontal": 24,
                         "marginVertical": 10,
+                        "textAlign": "center",
                       },
                       undefined,
                       false,
@@ -864,13 +856,9 @@ exports[`renders visible menu 1`] = `
                       },
                       [
                         {
-                          "marginHorizontal": 16,
-                          "marginVertical": 9,
-                          "textAlign": "center",
-                        },
-                        {
                           "marginHorizontal": 24,
                           "marginVertical": 10,
+                          "textAlign": "center",
                         },
                         undefined,
                         false,

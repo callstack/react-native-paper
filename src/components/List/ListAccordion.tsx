@@ -245,7 +245,7 @@ const ListAccordion = ({
     <View>
       <View style={{ backgroundColor: theme?.colors?.background }}>
         <TouchableRipple
-          style={[styles.containerV3, style]}
+          style={[styles.container, style]}
           onPress={handlePress}
           onLongPress={onLongPress}
           delayLongPress={delayLongPress}
@@ -259,7 +259,7 @@ const ListAccordion = ({
           hitSlop={hitSlop}
         >
           <View
-            style={[styles.rowV3, containerStyle]}
+            style={[styles.row, containerStyle]}
             pointerEvents={pointerEvents}
           >
             {left
@@ -268,7 +268,7 @@ const ListAccordion = ({
                   style: getLeftStyles(alignToTop, description),
                 })
               : null}
-            <View style={[styles.itemV3, styles.content, contentStyle]}>
+            <View style={[styles.content, contentStyle]}>
               <Text
                 selectable={false}
                 numberOfLines={titleNumberOfLines}
@@ -330,7 +330,7 @@ const ListAccordion = ({
               !child.props.right
             ) {
               return React.cloneElement(child, {
-                style: [styles.childV3, child.props.style],
+                style: [styles.child, child.props.style],
                 theme,
               });
             }
@@ -349,11 +349,11 @@ const styles = StyleSheet.create({
     marginVertical: 6,
     paddingLeft: 8,
   },
-  containerV3: {
+  container: {
     paddingVertical: 8,
     paddingRight: 24,
   },
-  rowV3: {
+  row: {
     flexDirection: 'row',
     marginVertical: 6,
   },
@@ -368,15 +368,13 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
   },
-  itemV3: {
-    paddingLeft: 16,
-  },
-  childV3: {
+  child: {
     paddingLeft: 40,
   },
   content: {
     flex: 1,
     justifyContent: 'center',
+    paddingLeft: 16,
   },
 });
 

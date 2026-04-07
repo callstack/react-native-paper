@@ -26,7 +26,7 @@ export type Fonts = {
   thin: Font;
 };
 
-export type MD3Colors = {
+export type Colors = {
   primary: string;
   primaryContainer: string;
   secondary: string;
@@ -80,7 +80,7 @@ export type MD3Colors = {
    *  which is incompatible with PlatformColor on Android.
    *  @see https://m3.material.io/foundations/interaction/states/state-layers */
   stateLayerPressed: string;
-  elevation: MD3ElevationColors;
+  elevation: ElevationColors;
 };
 
 export type ThemeProp = $DeepPartial<InternalTheme>;
@@ -94,15 +94,14 @@ export type ThemeBase = {
   };
 };
 
-export type MD3Theme = ThemeBase & {
-  colors: MD3Colors;
-  fonts: MD3Typescale;
+export type Theme = ThemeBase & {
+  colors: Colors;
+  fonts: Typescale;
 };
 
-export type InternalTheme = MD3Theme;
+export type InternalTheme = Theme;
 
-// MD3 types
-export enum MD3TypescaleKey {
+export enum TypescaleKey {
   displayLarge = 'displayLarge',
   displayMedium = 'displayMedium',
   displaySmall = 'displaySmall',
@@ -124,7 +123,7 @@ export enum MD3TypescaleKey {
   bodySmall = 'bodySmall',
 }
 
-export type MD3Type = {
+export type TypeConfig = {
   fontFamily: string;
   letterSpacing: number;
   fontWeight: Font['fontWeight'];
@@ -133,14 +132,14 @@ export type MD3Type = {
   fontStyle?: Font['fontStyle'];
 };
 
-export type MD3Typescale =
+export type Typescale =
   | {
-      [key in MD3TypescaleKey]: MD3Type;
+      [key in TypescaleKey]: TypeConfig;
     } & {
-      ['default']: Omit<MD3Type, 'lineHeight' | 'fontSize'>;
+      ['default']: Omit<TypeConfig, 'lineHeight' | 'fontSize'>;
     };
 
-export type MD3Elevation = 0 | 1 | 2 | 3 | 4 | 5;
+export type Elevation = 0 | 1 | 2 | 3 | 4 | 5;
 
 export enum ElevationLevels {
   'level0',
@@ -151,7 +150,7 @@ export enum ElevationLevels {
   'level5',
 }
 
-export type MD3ElevationColors = {
+export type ElevationColors = {
   [key in keyof typeof ElevationLevels]: string;
 };
 

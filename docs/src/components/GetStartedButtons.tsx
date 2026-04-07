@@ -9,8 +9,8 @@ import Link from '@docusaurus/Link';
 import { useColorMode } from '@docusaurus/theme-common';
 import {
   Button,
-  MD3DarkTheme as DarkTheme,
-  MD3LightTheme as DefaultTheme,
+  DarkTheme as DarkTheme,
+  LightTheme as DefaultTheme,
   PaperProvider,
 } from 'react-native-paper';
 

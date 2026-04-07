@@ -13,7 +13,7 @@ import {
   configureFonts,
   HelperText,
   List,
-  MD3Colors,
+  Colors,
   TextInput,
 } from 'react-native-paper';
 
@@ -567,7 +567,7 @@ const TextInputExample = () => {
                   <Text>
                     <Text
                       style={{
-                        color: MD3Colors.error50,
+                        color: Colors.error50,
                       }}
                     >
                       *
@@ -597,8 +597,8 @@ const TextInputExample = () => {
               onChangeText={(flatUnderlineColors) =>
                 inputActionHandler('flatUnderlineColors', flatUnderlineColors)
               }
-              underlineColor={MD3Colors.primary70}
-              activeUnderlineColor={MD3Colors.tertiary50}
+              underlineColor={Colors.primary70}
+              activeUnderlineColor={Colors.tertiary50}
             />
             <TextInput
               mode="outlined"
@@ -609,8 +609,8 @@ const TextInputExample = () => {
               onChangeText={(outlinedColors) =>
                 inputActionHandler('outlinedColors', outlinedColors)
               }
-              outlineColor={MD3Colors.primary70}
-              activeOutlineColor={MD3Colors.tertiary50}
+              outlineColor={Colors.primary70}
+              activeOutlineColor={Colors.tertiary50}
             />
             <TextInput
               mode="outlined"
@@ -883,7 +883,7 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
   inputLabelText: {
-    color: MD3Colors.tertiary70,
+    color: Colors.tertiary70,
   },
   left: {
     width: '30%',

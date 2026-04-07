@@ -29,13 +29,13 @@ const ICON_SIZE = 24;
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { List, MD3Colors } from 'react-native-paper';
+ * import { List, Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <>
- *     <List.Icon color={MD3Colors.tertiary70} icon="folder" />
- *     <List.Icon color={MD3Colors.tertiary70} icon="equal" />
- *     <List.Icon color={MD3Colors.tertiary70} icon="calendar" />
+ *     <List.Icon color={Colors.tertiary70} icon="folder" />
+ *     <List.Icon color={Colors.tertiary70} icon="equal" />
+ *     <List.Icon color={Colors.tertiary70} icon="calendar" />
  *   </>
  * );
  *
@@ -51,14 +51,14 @@ const ListIcon = ({
   const theme = useInternalTheme(themeOverrides);
 
   return (
-    <View style={[styles.itemV3, style]} pointerEvents="box-none">
+    <View style={[styles.item, style]} pointerEvents="box-none">
       <Icon source={icon} size={ICON_SIZE} color={iconColor} theme={theme} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  itemV3: {
+  item: {
     alignItems: 'center',
     justifyContent: 'center',
   },

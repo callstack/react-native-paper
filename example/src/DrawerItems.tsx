@@ -9,7 +9,7 @@ import {
   Button,
   Dialog,
   Drawer,
-  MD3Colors,
+  Colors,
   Switch,
   Text,
   TouchableRipple,
@@ -136,8 +136,8 @@ function DrawerItems() {
 
   const coloredLabelTheme = {
     colors: {
-      secondaryContainer: MD3Colors.tertiary80,
-      onSecondaryContainer: MD3Colors.tertiary20,
+      secondaryContainer: Colors.tertiary80,
+      onSecondaryContainer: Colors.tertiary20,
     },
   };
 

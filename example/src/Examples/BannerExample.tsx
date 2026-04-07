@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 
-import { Banner, FAB, MD3Colors } from 'react-native-paper';
+import { Banner, FAB, Colors } from 'react-native-paper';
 
 import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
@@ -32,11 +32,11 @@ const BannerExample = () => {
   const customTheme = {
     ...defaultTheme,
     colors: {
-      onSurface: MD3Colors.tertiary100,
+      onSurface: Colors.tertiary100,
       elevation: {
-        level1: MD3Colors.tertiary50,
+        level1: Colors.tertiary50,
       },
-      primary: MD3Colors.tertiary10,
+      primary: Colors.tertiary10,
     },
   };
 

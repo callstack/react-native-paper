@@ -18,7 +18,7 @@ import {
   AppbarChildProps,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { MD3Elevation, ThemeProp } from '../../types';
+import type { Elevation, ThemeProp } from '../../types';
 import Surface from '../Surface';
 
 export type Props = Omit<
@@ -237,7 +237,7 @@ const Appbar = ({
         insets,
         restStyle,
       ]}
-      elevation={elevation as MD3Elevation}
+      elevation={elevation as Elevation}
       container
       {...rest}
     >

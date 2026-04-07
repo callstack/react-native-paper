@@ -275,7 +275,7 @@ const ButtonExample = () => {
             mode="outlined"
             onPress={() => {}}
             style={styles.button}
-            labelStyle={[styles.fontStyles, styles.md3FontStyles]}
+            labelStyle={[styles.fontStyles]}
           >
             Custom Font
           </Button>
@@ -367,10 +367,8 @@ const styles = StyleSheet.create({
   flexReverse: {
     flexDirection: 'row-reverse',
   },
-  md3FontStyles: {
-    lineHeight: 32,
-  },
   fontStyles: {
+    lineHeight: 32,
     fontWeight: '800',
     fontSize: 24,
   },

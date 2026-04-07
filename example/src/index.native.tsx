@@ -10,10 +10,10 @@ import { StatusBar } from 'expo-status-bar';
 import * as Updates from 'expo-updates';
 import {
   PaperProvider,
-  MD3DarkTheme,
-  MD3LightTheme,
-  MD3DynamicDarkTheme,
-  MD3DynamicLightTheme,
+  DarkTheme,
+  LightTheme,
+  DynamicDarkTheme,
+  DynamicLightTheme,
 } from 'react-native-paper';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
@@ -57,10 +57,10 @@ export default function PaperExample() {
 
   const theme = React.useMemo(() => {
     if (deviceColorsSupported && shouldUseDeviceColors) {
-      return isDarkMode ? MD3DynamicDarkTheme : MD3DynamicLightTheme;
+      return isDarkMode ? DynamicDarkTheme : DynamicLightTheme;
     }
 
-    return isDarkMode ? MD3DarkTheme : MD3LightTheme;
+    return isDarkMode ? DarkTheme : LightTheme;
   }, [isDarkMode, shouldUseDeviceColors]);
 
   React.useEffect(() => {

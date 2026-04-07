@@ -23,7 +23,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import MenuItem from './MenuItem';
 import { useInternalTheme } from '../../core/theming';
-import type { MD3Elevation, ThemeProp } from '../../types';
+import type { Elevation, ThemeProp } from '../../types';
 import { ElevationLevels } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import { BackHandler } from '../../utils/BackHandler/BackHandler';
@@ -72,7 +72,7 @@ export type Props = {
    * Elevation level of the menu's content. Shadow styles are calculated based on this value. Default `backgroundColor` is taken from the corresponding `theme.colors.elevation` property. By default equals `2`.
    * @supported Available in v5.x with theme version 3
    */
-  elevation?: MD3Elevation;
+  elevation?: Elevation;
   /**
    * Mode of the menu's content.
    * - `elevated` - Surface with a shadow and background color corresponding to set `elevation` value.
@@ -104,7 +104,7 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 
 const WINDOW_LAYOUT = Dimensions.get('window');
 
-const DEFAULT_ELEVATION: MD3Elevation = 2;
+const DEFAULT_ELEVATION: Elevation = 2;
 export const ELEVATION_LEVELS_MAP = Object.values(
   ElevationLevels
 ) as ElevationLevels[];

@@ -4,7 +4,7 @@ import { View, StyleSheet, Animated } from 'react-native';
 import {
   Button,
   ProgressBar,
-  MD3Colors,
+  Colors,
   ProgressBarProps,
   Text,
 } from 'react-native-paper';
@@ -62,7 +62,7 @@ const ProgressBarExample = () => {
         <ProgressBar
           progress={progress}
           visible={visible}
-          color={MD3Colors.error50}
+          color={Colors.error50}
         />
       </View>
 
@@ -73,9 +73,9 @@ const ProgressBarExample = () => {
         <ProgressBar
           progress={progress}
           visible={visible}
-          color={MD3Colors.error50}
+          color={Colors.error50}
           style={{
-            backgroundColor: MD3Colors.secondary50,
+            backgroundColor: Colors.secondary50,
           }}
         />
       </View>

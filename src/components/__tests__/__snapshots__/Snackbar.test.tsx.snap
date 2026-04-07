@@ -439,12 +439,9 @@ exports[`renders snackbar with action button 1`] = `
                         },
                         [
                           {
-                            "marginHorizontal": 16,
-                            "marginVertical": 9,
-                            "textAlign": "center",
-                          },
-                          {
                             "marginHorizontal": 12,
+                            "marginVertical": 10,
+                            "textAlign": "center",
                           },
                           false,
                           false,

@@ -8,7 +8,7 @@ import {
 
 import { act, fireEvent, render } from '@testing-library/react-native';
 
-import { MD3LightTheme } from '../../styles/themes';
+import { LightTheme } from '../../styles/themes';
 import Modal from '../Modal';
 
 jest.mock('react-native-safe-area-context', () => ({
@@ -55,7 +55,7 @@ describe('Modal', () => {
       );
 
       expect(getByTestId('modal-backdrop')).toHaveStyle({
-        backgroundColor: MD3LightTheme.colors.scrim,
+        backgroundColor: LightTheme.colors.scrim,
       });
     });
 

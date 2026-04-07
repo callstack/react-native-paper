@@ -1,4 +1,4 @@
-import { MD3DarkTheme, MD3LightTheme } from '../../styles/themes';
+import { DarkTheme, LightTheme } from '../../styles/themes';
 import { adaptNavigationTheme } from '../theming';
 
 const NavigationLightTheme = {
@@ -40,17 +40,17 @@ const NavigationCustomLightTheme = {
 };
 
 const AppCustomLightTheme = {
-  ...MD3LightTheme,
+  ...LightTheme,
   colors: {
-    ...MD3LightTheme.colors,
+    ...LightTheme.colors,
     primary: 'purple',
   },
 };
 
 const AppCustomDarkTheme = {
-  ...MD3DarkTheme,
+  ...DarkTheme,
   colors: {
-    ...MD3DarkTheme.colors,
+    ...DarkTheme.colors,
     primary: 'orchid',
   },
 };
@@ -89,88 +89,82 @@ describe('adaptNavigationTheme', () => {
         ...NavigationLightTheme,
         colors: {
           ...NavigationLightTheme.colors,
-          primary: MD3LightTheme.colors.primary,
-          background: MD3LightTheme.colors.background,
-          card: MD3LightTheme.colors.elevation.level2,
-          text: MD3LightTheme.colors.onSurface,
-          border: MD3LightTheme.colors.outline,
-          notification: MD3LightTheme.colors.error,
+          primary: LightTheme.colors.primary,
+          background: LightTheme.colors.background,
+          card: LightTheme.colors.elevation.level2,
+          text: LightTheme.colors.onSurface,
+          border: LightTheme.colors.outline,
+          notification: LightTheme.colors.error,
         },
       },
       DarkTheme: {
         ...NavigationDarkTheme,
         colors: {
           ...NavigationDarkTheme.colors,
-          primary: MD3DarkTheme.colors.primary,
-          background: MD3DarkTheme.colors.background,
-          card: MD3DarkTheme.colors.elevation.level2,
-          text: MD3DarkTheme.colors.onSurface,
-          border: MD3DarkTheme.colors.outline,
-          notification: MD3DarkTheme.colors.error,
+          primary: DarkTheme.colors.primary,
+          background: DarkTheme.colors.background,
+          card: DarkTheme.colors.elevation.level2,
+          text: DarkTheme.colors.onSurface,
+          border: DarkTheme.colors.outline,
+          notification: DarkTheme.colors.error,
         },
       },
     });
   });
 
   it('should return adapted navigation light theme', () => {
-    const { LightTheme } = adaptNavigationTheme({
+    const { LightTheme: adaptedLight } = adaptNavigationTheme({
       reactNavigationLight: NavigationLightTheme,
     });
 
-    const { colors } = MD3LightTheme;
-
-    expect(LightTheme).toMatchObject({
+    expect(adaptedLight).toMatchObject({
       ...NavigationLightTheme,
       colors: {
         ...NavigationLightTheme.colors,
-        primary: colors.primary,
-        background: colors.background,
-        card: colors.elevation.level2,
-        text: colors.onSurface,
-        border: colors.outline,
-        notification: colors.error,
+        primary: LightTheme.colors.primary,
+        background: LightTheme.colors.background,
+        card: LightTheme.colors.elevation.level2,
+        text: LightTheme.colors.onSurface,
+        border: LightTheme.colors.outline,
+        notification: LightTheme.colors.error,
       },
     });
   });
 
   it('should return adapted navigation dark theme', () => {
-    const { DarkTheme } = adaptNavigationTheme({
+    const { DarkTheme: adaptedDark } = adaptNavigationTheme({
       reactNavigationDark: NavigationDarkTheme,
     });
 
-    const { colors } = MD3DarkTheme;
-
-    expect(DarkTheme).toMatchObject({
+    expect(adaptedDark).toMatchObject({
       ...NavigationDarkTheme,
       colors: {
         ...NavigationDarkTheme.colors,
-        primary: colors.primary,
-        background: colors.background,
-        card: colors.elevation.level2,
-        text: colors.onSurface,
-        border: colors.outline,
-        notification: colors.error,
+        primary: DarkTheme.colors.primary,
+        background: DarkTheme.colors.background,
+        card: DarkTheme.colors.elevation.level2,
+        text: DarkTheme.colors.onSurface,
+        border: DarkTheme.colors.outline,
+        notification: DarkTheme.colors.error,
       },
     });
   });
 
   it('should return adapted custom navigation theme', () => {
-    const { LightTheme } = adaptNavigationTheme({
+    const { LightTheme: adaptedLight } = adaptNavigationTheme({
       reactNavigationLight: NavigationCustomLightTheme,
     });
 
-    const { colors } = MD3LightTheme;
-
-    expect(LightTheme).toMatchObject({
+    expect(adaptedLight).toMatchObject({
       ...NavigationCustomLightTheme,
       colors: {
         ...NavigationCustomLightTheme.colors,
-        primary: colors.primary,
-        background: colors.background,
-        card: colors.elevation.level2,
-        text: colors.onSurface,
-        border: colors.outline,
-        notification: colors.error,
+        primary: LightTheme.colors.primary,
+        background: LightTheme.colors.background,
+        card: LightTheme.colors.elevation.level2,
+        text: LightTheme.colors.onSurface,
+        border: LightTheme.colors.outline,
+        notification: LightTheme.colors.error,
         secondary: 'rgb(150,45,85)',
         tertiary: 'rgb(105,45,85)',
       },
@@ -222,41 +216,41 @@ describe('adaptNavigationTheme', () => {
   });
 
   it('should adapt navigation theme with fonts', () => {
-    const { LightTheme } = adaptNavigationTheme({
+    const { LightTheme: adaptedLight } = adaptNavigationTheme({
       reactNavigationLight: NavigationThemeWithFonts,
     });
 
-    expect(LightTheme).toMatchObject({
+    expect(adaptedLight).toMatchObject({
       ...NavigationThemeWithFonts,
       colors: {
         ...NavigationThemeWithFonts.colors,
-        primary: MD3LightTheme.colors.primary,
-        background: MD3LightTheme.colors.background,
-        card: MD3LightTheme.colors.elevation.level2,
-        text: MD3LightTheme.colors.onSurface,
-        border: MD3LightTheme.colors.outline,
-        notification: MD3LightTheme.colors.error,
+        primary: LightTheme.colors.primary,
+        background: LightTheme.colors.background,
+        card: LightTheme.colors.elevation.level2,
+        text: LightTheme.colors.onSurface,
+        border: LightTheme.colors.outline,
+        notification: LightTheme.colors.error,
       },
       fonts: {
         regular: {
-          fontFamily: MD3LightTheme.fonts.bodyMedium.fontFamily,
-          fontWeight: MD3LightTheme.fonts.bodyMedium.fontWeight,
-          letterSpacing: MD3LightTheme.fonts.bodyMedium.letterSpacing,
+          fontFamily: LightTheme.fonts.bodyMedium.fontFamily,
+          fontWeight: LightTheme.fonts.bodyMedium.fontWeight,
+          letterSpacing: LightTheme.fonts.bodyMedium.letterSpacing,
         },
         medium: {
-          fontFamily: MD3LightTheme.fonts.titleMedium.fontFamily,
-          fontWeight: MD3LightTheme.fonts.titleMedium.fontWeight,
-          letterSpacing: MD3LightTheme.fonts.titleMedium.letterSpacing,
+          fontFamily: LightTheme.fonts.titleMedium.fontFamily,
+          fontWeight: LightTheme.fonts.titleMedium.fontWeight,
+          letterSpacing: LightTheme.fonts.titleMedium.letterSpacing,
         },
         bold: {
-          fontFamily: MD3LightTheme.fonts.headlineSmall.fontFamily,
-          fontWeight: MD3LightTheme.fonts.headlineSmall.fontWeight,
-          letterSpacing: MD3LightTheme.fonts.headlineSmall.letterSpacing,
+          fontFamily: LightTheme.fonts.headlineSmall.fontFamily,
+          fontWeight: LightTheme.fonts.headlineSmall.fontWeight,
+          letterSpacing: LightTheme.fonts.headlineSmall.letterSpacing,
         },
         heavy: {
-          fontFamily: MD3LightTheme.fonts.headlineLarge.fontFamily,
-          fontWeight: MD3LightTheme.fonts.headlineLarge.fontWeight,
-          letterSpacing: MD3LightTheme.fonts.headlineLarge.letterSpacing,
+          fontFamily: LightTheme.fonts.headlineLarge.fontFamily,
+          fontWeight: LightTheme.fonts.headlineLarge.fontWeight,
+          letterSpacing: LightTheme.fonts.headlineLarge.letterSpacing,
         },
       },
     });

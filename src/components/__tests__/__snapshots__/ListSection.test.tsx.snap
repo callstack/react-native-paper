@@ -340,12 +340,10 @@ exports[`renders list section with custom title style 1`] = `
         style={
           [
             {
-              "paddingLeft": 16,
-            },
-            {
               "flexGrow": 1,
               "flexShrink": 1,
               "justifyContent": "center",
+              "paddingLeft": 16,
             },
             undefined,
           ]
@@ -493,12 +491,10 @@ exports[`renders list section with custom title style 1`] = `
         style={
           [
             {
-              "paddingLeft": 16,
-            },
-            {
               "flexGrow": 1,
               "flexShrink": 1,
               "justifyContent": "center",
+              "paddingLeft": 16,
             },
             undefined,
           ]
@@ -880,12 +876,10 @@ exports[`renders list section with subheader 1`] = `
         style={
           [
             {
-              "paddingLeft": 16,
-            },
-            {
               "flexGrow": 1,
               "flexShrink": 1,
               "justifyContent": "center",
+              "paddingLeft": 16,
             },
             undefined,
           ]
@@ -1033,12 +1027,10 @@ exports[`renders list section with subheader 1`] = `
         style={
           [
             {
-              "paddingLeft": 16,
-            },
-            {
               "flexGrow": 1,
               "flexShrink": 1,
               "justifyContent": "center",
+              "paddingLeft": 16,
             },
             undefined,
           ]
@@ -1380,12 +1372,10 @@ exports[`renders list section without subheader 1`] = `
         style={
           [
             {
-              "paddingLeft": 16,
-            },
-            {
               "flexGrow": 1,
               "flexShrink": 1,
               "justifyContent": "center",
+              "paddingLeft": 16,
             },
             undefined,
           ]
@@ -1533,12 +1523,10 @@ exports[`renders list section without subheader 1`] = `
         style={
           [
             {
-              "paddingLeft": 16,
-            },
-            {
               "flexGrow": 1,
               "flexShrink": 1,
               "justifyContent": "center",
+              "paddingLeft": 16,
             },
             undefined,
           ]

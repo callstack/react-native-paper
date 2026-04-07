@@ -37,7 +37,6 @@ export const Underline = ({
       testID="text-input-underline"
       style={[
         styles.underline,
-        styles.md3Underline,
         {
           backgroundColor,
           opacity: disabledOpacity,
@@ -60,10 +59,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    height: 2,
-    zIndex: 1,
-  },
-  md3Underline: {
     height: 1,
+    zIndex: 1,
   },
 });

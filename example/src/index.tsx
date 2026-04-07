@@ -5,7 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { InitialState, NavigationContainer } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { useKeepAwake } from 'expo-keep-awake';
-import { PaperProvider, MD3DarkTheme, MD3LightTheme } from 'react-native-paper';
+import { PaperProvider, DarkTheme, LightTheme } from 'react-native-paper';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 import DrawerItems from './DrawerItems';
@@ -42,7 +42,7 @@ export default function PaperExample() {
   const [rippleEffectEnabled, setRippleEffectEnabled] = React.useState(true);
 
   const theme = React.useMemo(() => {
-    return isDarkMode ? MD3DarkTheme : MD3LightTheme;
+    return isDarkMode ? DarkTheme : LightTheme;
   }, [isDarkMode]);
 
   React.useEffect(() => {

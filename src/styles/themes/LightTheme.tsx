@@ -1,12 +1,12 @@
 import color from 'color';
 
 import { tokens } from './tokens';
-import type { MD3Theme } from '../../types';
+import type { Theme } from '../../types';
 import configureFonts from '../fonts';
 
 const { palette, stateOpacity } = tokens.md.ref;
 
-export const MD3LightTheme: MD3Theme = {
+export const LightTheme: Theme = {
   dark: false,
   roundness: 4,
   colors: {

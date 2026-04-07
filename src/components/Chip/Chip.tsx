@@ -292,7 +292,6 @@ const Chip = ({
     <Surface
       style={[
         styles.container,
-        styles.md3Container,
         {
           backgroundColor: selected ? selectedBackgroundColor : backgroundColor,
           borderColor,
@@ -324,21 +323,10 @@ const Chip = ({
         hitSlop={hitSlop}
       >
         <View
-          style={[
-            styles.content,
-            styles.md3Content,
-            { opacity: contentOpacity },
-            contentSpacings,
-          ]}
+          style={[styles.content, { opacity: contentOpacity }, contentSpacings]}
         >
           {avatar && !icon ? (
-            <View
-              style={[
-                styles.avatarWrapper,
-                styles.md3AvatarWrapper,
-                disabled && { opacity },
-              ]}
-            >
+            <View style={[styles.avatarWrapper, disabled && { opacity }]}>
               {React.isValidElement<ChipAvatarProps>(avatar)
                 ? React.cloneElement(avatar, {
                     style: [styles.avatar, avatar.props.style],
@@ -350,12 +338,11 @@ const Chip = ({
             <View
               style={[
                 styles.icon,
-                styles.md3Icon,
                 avatar
                   ? [
                       styles.avatar,
                       styles.avatarSelected,
-                      selected && styles.md3SelectedIcon,
+                      selected && styles.selectedIcon,
                     ]
                   : null,
               ]}
@@ -387,12 +374,7 @@ const Chip = ({
             variant="labelLarge"
             selectable={false}
             numberOfLines={1}
-            style={[
-              styles.md3LabelText,
-              labelTextStyle,
-              labelSpacings,
-              textStyle,
-            ]}
+            style={[styles.labelText, labelTextStyle, labelSpacings, textStyle]}
             ellipsizeMode={ellipsizeMode}
             maxFontSizeMultiplier={maxFontSizeMultiplier}
           >
@@ -408,7 +390,7 @@ const Chip = ({
             accessibilityRole="button"
             accessibilityLabel={closeIconAccessibilityLabel}
           >
-            <View style={[styles.icon, styles.closeIcon, styles.md3CloseIcon]}>
+            <View style={[styles.closeIcon]}>
               {closeIcon ? (
                 <Icon source={closeIcon} color={iconColor} size={iconSize} />
               ) : (
@@ -429,38 +411,28 @@ const Chip = ({
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: StyleSheet.hairlineWidth,
+    borderWidth: 1,
     borderStyle: 'solid',
     flexDirection: Platform.select({ default: 'column', web: 'row' }),
-  },
-  md3Container: {
-    borderWidth: 1,
   },
   content: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 4,
+    paddingLeft: 0,
     position: 'relative',
   },
-  md3Content: {
-    paddingLeft: 0,
-  },
   icon: {
-    padding: 4,
-    alignSelf: 'center',
-  },
-  md3Icon: {
+    paddingTop: 4,
+    paddingBottom: 4,
     paddingLeft: 8,
     paddingRight: 0,
+    alignSelf: 'center',
   },
   closeIcon: {
-    marginRight: 4,
-  },
-  md3CloseIcon: {
     marginRight: 8,
     padding: 0,
   },
-  md3LabelText: {
+  labelText: {
     textAlignVertical: 'center',
     marginVertical: 6,
   },
@@ -470,13 +442,10 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   avatarWrapper: {
-    marginRight: 4,
-  },
-  md3AvatarWrapper: {
     marginLeft: 4,
     marginRight: 0,
   },
-  md3SelectedIcon: {
+  selectedIcon: {
     paddingLeft: 4,
   },
   // eslint-disable-next-line react-native/no-color-literals

@@ -5,7 +5,7 @@ import {
   Badge,
   IconButton,
   List,
-  MD3Colors,
+  Colors,
   Text,
   Switch,
 } from 'react-native-paper';
@@ -41,7 +41,7 @@ const BadgeExample = () => {
               style={[
                 styles.badge,
                 {
-                  backgroundColor: MD3Colors.primary80,
+                  backgroundColor: Colors.primary80,
                 },
               ]}
             >

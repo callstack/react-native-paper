@@ -353,7 +353,7 @@ const AnimatedFAB = ({
     ...font,
   };
 
-  const md3Elevation = !isIOS ? 0 : 3;
+  const elevation = !isIOS ? 0 : 3;
 
   const baseStyle = [StyleSheet.absoluteFill, styles.shadow];
 
@@ -374,7 +374,7 @@ const AnimatedFAB = ({
         styles.container,
         restStyle,
       ]}
-      elevation={md3Elevation}
+      elevation={elevation}
       theme={theme}
       container
     >

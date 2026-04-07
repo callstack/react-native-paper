@@ -61,12 +61,10 @@ exports[`renders list item with custom description 1`] = `
       style={
         [
           {
-            "paddingLeft": 16,
-          },
-          {
             "flexGrow": 1,
             "flexShrink": 1,
             "justifyContent": "center",
+            "paddingLeft": 16,
           },
           undefined,
         ]
@@ -210,11 +208,8 @@ exports[`renders list item with custom description 1`] = `
                       {
                         "alignItems": "center",
                         "flexDirection": "row",
-                        "paddingLeft": 4,
-                        "position": "relative",
-                      },
-                      {
                         "paddingLeft": 0,
+                        "position": "relative",
                       },
                       {
                         "opacity": 1,
@@ -230,11 +225,10 @@ exports[`renders list item with custom description 1`] = `
                       [
                         {
                           "alignSelf": "center",
-                          "padding": 4,
-                        },
-                        {
+                          "paddingBottom": 4,
                           "paddingLeft": 8,
                           "paddingRight": 0,
+                          "paddingTop": 4,
                         },
                         null,
                       ]
@@ -387,12 +381,10 @@ exports[`renders list item with custom title and description styles 1`] = `
       style={
         [
           {
-            "paddingLeft": 16,
-          },
-          {
             "flexGrow": 1,
             "flexShrink": 1,
             "justifyContent": "center",
+            "paddingLeft": 16,
           },
           undefined,
         ]
@@ -535,12 +527,10 @@ exports[`renders list item with left and right items 1`] = `
       style={
         [
           {
-            "paddingLeft": 16,
-          },
-          {
             "flexGrow": 1,
             "flexShrink": 1,
             "justifyContent": "center",
+            "paddingLeft": 16,
           },
           undefined,
         ]
@@ -769,12 +759,10 @@ exports[`renders list item with left item 1`] = `
       style={
         [
           {
-            "paddingLeft": 16,
-          },
-          {
             "flexGrow": 1,
             "flexShrink": 1,
             "justifyContent": "center",
+            "paddingLeft": 16,
           },
           undefined,
         ]
@@ -878,12 +866,10 @@ exports[`renders list item with right item 1`] = `
       style={
         [
           {
-            "paddingLeft": 16,
-          },
-          {
             "flexGrow": 1,
             "flexShrink": 1,
             "justifyContent": "center",
+            "paddingLeft": 16,
           },
           undefined,
         ]
@@ -990,12 +976,10 @@ exports[`renders list item with title and description 1`] = `
       style={
         [
           {
-            "paddingLeft": 16,
-          },
-          {
             "flexGrow": 1,
             "flexShrink": 1,
             "justifyContent": "center",
+            "paddingLeft": 16,
           },
           undefined,
         ]
@@ -1131,12 +1115,10 @@ exports[`renders with a description with typeof number 1`] = `
       style={
         [
           {
-            "paddingLeft": 16,
-          },
-          {
             "flexGrow": 1,
             "flexShrink": 1,
             "justifyContent": "center",
+            "paddingLeft": 16,
           },
           undefined,
         ]

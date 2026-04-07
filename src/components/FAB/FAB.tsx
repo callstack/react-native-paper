@@ -250,7 +250,7 @@ const FAB = forwardRef<View, Props>(
       ...font,
     };
 
-    const md3Elevation = isFlatMode ? 0 : 3;
+    const elevation = isFlatMode ? 0 : 3;
 
     return (
       <Surface
@@ -271,7 +271,7 @@ const FAB = forwardRef<View, Props>(
         ]}
         pointerEvents={visible ? 'auto' : 'none'}
         testID={`${testID}-container`}
-        elevation={md3Elevation}
+        elevation={elevation}
         container
       >
         <TouchableRipple

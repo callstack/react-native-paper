@@ -1,4 +1,4 @@
-import type { MD3Type, MD3Typescale, MD3TypescaleKey } from '../types';
+import type { TypeConfig, Typescale, TypescaleKey } from '../types';
 import { typescale } from './themes/tokens';
 
 export const fontConfig = {
@@ -60,16 +60,16 @@ export const fontConfig = {
 
 // eslint-disable-next-line no-redeclare
 export default function configureFonts(params?: {
-  config?: Partial<MD3Type>;
-}): MD3Typescale;
+  config?: Partial<TypeConfig>;
+}): Typescale;
 // eslint-disable-next-line no-redeclare
 export default function configureFonts(params?: {
-  config?: Partial<Record<MD3TypescaleKey, Partial<MD3Type>>>;
-}): MD3Typescale;
+  config?: Partial<Record<TypescaleKey, Partial<TypeConfig>>>;
+}): Typescale;
 // eslint-disable-next-line no-redeclare
 export default function configureFonts(params: {
-  config: Record<string, MD3Type>;
-}): MD3Typescale & { [key: string]: MD3Type };
+  config: Record<string, TypeConfig>;
+}): Typescale & { [key: string]: TypeConfig };
 // eslint-disable-next-line no-redeclare
 export default function configureFonts(params?: any) {
   const { config } = params || {};
@@ -88,7 +88,7 @@ export default function configureFonts(params?: any) {
         variantName,
         { ...variantProperties, ...config },
       ])
-    ) as MD3Typescale;
+    ) as Typescale;
   }
 
   return Object.assign(
@@ -96,7 +96,7 @@ export default function configureFonts(params?: any) {
     typescale,
     ...Object.entries(config).map(([variantName, variantProperties]) => ({
       [variantName]: {
-        ...(typescale[variantName as MD3TypescaleKey] as object),
+        ...(typescale[variantName as TypescaleKey] as object),
         ...(variantProperties as object),
       },
     }))

@@ -315,16 +315,13 @@ const Button = (
   const iconStyle =
     StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
       ? [
-          styles.iconReverse,
-          styles[`md3IconReverse${compact ? 'Compact' : ''}`],
+          styles[`iconReverse${compact ? 'Compact' : ''}`],
           isMode('text') &&
-            styles[`md3IconReverseTextMode${compact ? 'Compact' : ''}`],
+            styles[`iconReverseTextMode${compact ? 'Compact' : ''}`],
         ]
       : [
-          styles.icon,
-          styles[`md3Icon${compact ? 'Compact' : ''}`],
-          isMode('text') &&
-            styles[`md3IconTextMode${compact ? 'Compact' : ''}`],
+          styles[`icon${compact ? 'Compact' : ''}`],
+          isMode('text') && styles[`iconTextMode${compact ? 'Compact' : ''}`],
         ];
 
   return (
@@ -407,12 +404,11 @@ const Button = (
             numberOfLines={1}
             testID={`${testID}-text`}
             style={[
-              styles.label,
               isMode('text')
                 ? icon || loading
-                  ? styles.md3LabelTextAddons
-                  : styles.md3LabelText
-                : styles.md3Label,
+                  ? styles.labelTextAddons
+                  : styles.labelText
+                : styles.label,
               compact && styles.compactLabel,
               uppercase && styles.uppercaseLabel,
               textStyle,
@@ -441,67 +437,59 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  icon: {
-    marginLeft: 12,
-    marginRight: -4,
-  },
-  iconReverse: {
-    marginRight: 12,
-    marginLeft: -4,
-  },
   /* eslint-disable react-native/no-unused-styles */
-  md3Icon: {
+  icon: {
     marginLeft: 16,
     marginRight: -16,
   },
-  md3IconCompact: {
+  iconCompact: {
     marginLeft: 8,
     marginRight: 0,
   },
-  md3IconReverse: {
+  iconReverse: {
     marginLeft: -16,
     marginRight: 16,
   },
-  md3IconReverseCompact: {
+  iconReverseCompact: {
     marginLeft: 0,
     marginRight: 8,
   },
-  md3IconTextMode: {
+  iconTextMode: {
     marginLeft: 12,
     marginRight: -8,
   },
-  md3IconTextModeCompact: {
+  iconTextModeCompact: {
     marginLeft: 6,
     marginRight: 0,
   },
-  md3IconReverseTextMode: {
+  iconReverseTextMode: {
     marginLeft: -8,
     marginRight: 12,
   },
-  md3IconReverseTextModeCompact: {
+  iconReverseTextModeCompact: {
     marginLeft: 0,
     marginRight: 6,
   },
   /* eslint-enable react-native/no-unused-styles */
-  label: {
-    textAlign: 'center',
-    marginVertical: 9,
-    marginHorizontal: 16,
-  },
   compactLabel: {
     marginHorizontal: 8,
   },
   uppercaseLabel: {
     textTransform: 'uppercase',
   },
-  md3Label: {
+  label: {
+    textAlign: 'center',
     marginVertical: 10,
     marginHorizontal: 24,
   },
-  md3LabelText: {
+  labelText: {
+    textAlign: 'center',
+    marginVertical: 10,
     marginHorizontal: 12,
   },
-  md3LabelTextAddons: {
+  labelTextAddons: {
+    textAlign: 'center',
+    marginVertical: 10,
     marginHorizontal: 16,
   },
 });

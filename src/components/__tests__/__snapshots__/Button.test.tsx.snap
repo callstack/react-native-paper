@@ -121,12 +121,9 @@ exports[`renders button with an accessibility hint 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
                     "marginHorizontal": 12,
+                    "marginVertical": 10,
+                    "textAlign": "center",
                   },
                   undefined,
                   false,
@@ -274,12 +271,9 @@ exports[`renders button with an accessibility label 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
                     "marginHorizontal": 12,
+                    "marginVertical": 10,
+                    "textAlign": "center",
                   },
                   undefined,
                   false,
@@ -426,12 +420,9 @@ exports[`renders button with button color 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
                     "marginHorizontal": 12,
+                    "marginVertical": 10,
+                    "textAlign": "center",
                   },
                   undefined,
                   false,
@@ -578,12 +569,9 @@ exports[`renders button with color 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
                     "marginHorizontal": 12,
+                    "marginVertical": 10,
+                    "textAlign": "center",
                   },
                   undefined,
                   false,
@@ -730,12 +718,9 @@ exports[`renders button with custom testID 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
                     "marginHorizontal": 12,
+                    "marginVertical": 10,
+                    "textAlign": "center",
                   },
                   undefined,
                   false,
@@ -864,10 +849,6 @@ exports[`renders button with icon 1`] = `
           style={
             [
               {
-                "marginLeft": 12,
-                "marginRight": -4,
-              },
-              {
                 "marginLeft": 16,
                 "marginRight": -16,
               },
@@ -932,11 +913,8 @@ exports[`renders button with icon 1`] = `
                 [
                   {
                     "marginHorizontal": 16,
-                    "marginVertical": 9,
+                    "marginVertical": 10,
                     "textAlign": "center",
-                  },
-                  {
-                    "marginHorizontal": 16,
                   },
                   undefined,
                   false,
@@ -1067,10 +1045,6 @@ exports[`renders button with icon in reverse order 1`] = `
           style={
             [
               {
-                "marginLeft": -4,
-                "marginRight": 12,
-              },
-              {
                 "marginLeft": -16,
                 "marginRight": 16,
               },
@@ -1135,11 +1109,8 @@ exports[`renders button with icon in reverse order 1`] = `
                 [
                   {
                     "marginHorizontal": 16,
-                    "marginVertical": 9,
+                    "marginVertical": 10,
                     "textAlign": "center",
-                  },
-                  {
-                    "marginHorizontal": 16,
                   },
                   undefined,
                   false,
@@ -1286,13 +1257,9 @@ exports[`renders contained contained with mode 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
                     "marginHorizontal": 24,
                     "marginVertical": 10,
+                    "textAlign": "center",
                   },
                   undefined,
                   false,
@@ -1439,12 +1406,9 @@ exports[`renders disabled button 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
                     "marginHorizontal": 12,
+                    "marginVertical": 10,
+                    "textAlign": "center",
                   },
                   undefined,
                   false,
@@ -1584,10 +1548,6 @@ exports[`renders loading button 1`] = `
                 "justifyContent": "center",
               },
               [
-                {
-                  "marginLeft": 12,
-                  "marginRight": -4,
-                },
                 {
                   "marginLeft": 16,
                   "marginRight": -16,
@@ -1800,11 +1760,8 @@ exports[`renders loading button 1`] = `
                 [
                   {
                     "marginHorizontal": 16,
-                    "marginVertical": 9,
+                    "marginVertical": 10,
                     "textAlign": "center",
-                  },
-                  {
-                    "marginHorizontal": 16,
                   },
                   undefined,
                   false,
@@ -1951,13 +1908,9 @@ exports[`renders outlined button with mode 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
                     "marginHorizontal": 24,
                     "marginVertical": 10,
+                    "textAlign": "center",
                   },
                   undefined,
                   false,
@@ -2104,12 +2057,9 @@ exports[`renders text button by default 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
                     "marginHorizontal": 12,
+                    "marginVertical": 10,
+                    "textAlign": "center",
                   },
                   undefined,
                   false,
@@ -2256,12 +2206,9 @@ exports[`renders text button with mode 1`] = `
                 },
                 [
                   {
-                    "marginHorizontal": 16,
-                    "marginVertical": 9,
-                    "textAlign": "center",
-                  },
-                  {
                     "marginHorizontal": 12,
+                    "marginVertical": 10,
+                    "textAlign": "center",
                   },
                   undefined,
                   false,
