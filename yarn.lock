@@ -3887,13 +3887,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@material/material-color-utilities@npm:^0.2.7":
-  version: 0.2.7
-  resolution: "@material/material-color-utilities@npm:0.2.7"
-  checksum: 10c0/7734f8d7cffe6a92d47fcca82b4846e39ffd79be9c057f3299466696dcdee5379b8a8a3aa6a9692d40bd6900905f689105d9a8ce47882ab22348df10621f70cd
-  languageName: node
-  linkType: hard
-
 "@mdx-js/mdx@npm:^0.20.3":
   version: 0.20.3
   resolution: "@mdx-js/mdx@npm:0.20.3"
