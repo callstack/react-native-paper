@@ -8,11 +8,11 @@ export const PreferencesContext = React.createContext<{
   toggleCollapsed: () => void;
   toggleCustomFont: () => void;
   toggleRippleEffect: () => void;
-  toggleShouldUseDeviceColors?: () => void;
+  toggleShouldUseDynamicTheme?: () => void;
   theme: Theme;
   rtl: boolean;
   collapsed: boolean;
   customFontLoaded: boolean;
   rippleEffectEnabled: boolean;
-  shouldUseDeviceColors?: boolean;
+  shouldUseDynamicTheme?: boolean;
 } | null>(null);

@@ -1433,5 +1433,5 @@ export const restaurantsData = [
   },
 ];
 
-export const deviceColorsSupported =
+export const dynamicThemeSupported =
   Platform.OS === 'android' && (Platform.Version as number) >= 31;

@@ -20,7 +20,7 @@ import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 import DrawerItems from './DrawerItems';
 import { PreferencesContext } from './PreferencesContext';
 import App from './RootNavigator';
-import { deviceColorsSupported } from '../utils';
+import { dynamicThemeSupported } from '../utils';
 import {
   CombinedDefaultTheme,
   CombinedDarkTheme,
@@ -45,7 +45,7 @@ export default function PaperExample() {
     InitialState | undefined
   >();
 
-  const [shouldUseDeviceColors, setShouldUseDeviceColors] =
+  const [shouldUseDynamicTheme, setShouldUseDynamicTheme] =
     React.useState(true);
   const [isDarkMode, setIsDarkMode] = React.useState(false);
   const [rtl, setRtl] = React.useState<boolean>(
@@ -56,12 +56,12 @@ export default function PaperExample() {
   const [rippleEffectEnabled, setRippleEffectEnabled] = React.useState(true);
 
   const theme = React.useMemo(() => {
-    if (deviceColorsSupported && shouldUseDeviceColors) {
+    if (dynamicThemeSupported && shouldUseDynamicTheme) {
       return isDarkMode ? DynamicDarkTheme : DynamicLightTheme;
     }
 
     return isDarkMode ? DarkTheme : LightTheme;
-  }, [isDarkMode, shouldUseDeviceColors]);
+  }, [isDarkMode, shouldUseDynamicTheme]);
 
   React.useEffect(() => {
     const restoreState = async () => {
@@ -128,8 +128,8 @@ export default function PaperExample() {
 
   const preferences = React.useMemo(
     () => ({
-      toggleShouldUseDeviceColors: () =>
-        setShouldUseDeviceColors((oldValue) => !oldValue),
+      toggleShouldUseDynamicTheme: () =>
+        setShouldUseDynamicTheme((oldValue) => !oldValue),
       toggleTheme: () => setIsDarkMode((oldValue) => !oldValue),
       toggleRtl: () => setRtl((rtl) => !rtl),
       toggleCollapsed: () => setCollapsed(!collapsed),
@@ -140,14 +140,14 @@ export default function PaperExample() {
       collapsed,
       rtl,
       theme,
-      shouldUseDeviceColors,
+      shouldUseDynamicTheme: shouldUseDynamicTheme,
     }),
     [
       rtl,
       theme,
       collapsed,
       customFontLoaded,
-      shouldUseDeviceColors,
+      shouldUseDynamicTheme,
       rippleEffectEnabled,
     ]
   );

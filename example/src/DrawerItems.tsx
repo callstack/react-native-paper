@@ -16,7 +16,7 @@ import {
   Portal,
 } from 'react-native-paper';
 
-import { deviceColorsSupported, isWeb } from '../utils';
+import { dynamicThemeSupported, isWeb } from '../utils';
 import { useExampleTheme } from './hooks/useExampleTheme';
 import { PreferencesContext } from './PreferencesContext';
 
@@ -103,7 +103,7 @@ function DrawerItems() {
   if (!preferences) throw new Error('PreferencesContext not provided');
 
   const {
-    toggleShouldUseDeviceColors,
+    toggleShouldUseDynamicTheme,
     toggleTheme,
     toggleRtl: toggleRTL,
     toggleCollapsed,
@@ -114,7 +114,7 @@ function DrawerItems() {
     collapsed,
     rtl: isRTL,
     theme: { dark: isDarkTheme },
-    shouldUseDeviceColors,
+    shouldUseDynamicTheme,
   } = preferences;
 
   const _handleToggleRTL = () => {
@@ -181,12 +181,12 @@ function DrawerItems() {
           </Drawer.Section>
 
           <Drawer.Section title="Preferences">
-            {deviceColorsSupported ? (
-              <TouchableRipple onPress={toggleShouldUseDeviceColors}>
+            {dynamicThemeSupported ? (
+              <TouchableRipple onPress={toggleShouldUseDynamicTheme}>
                 <View style={styles.preference}>
-                  <Text variant="labelLarge">Use device colors *</Text>
+                  <Text variant="labelLarge">Use Dynamic Theme</Text>
                   <View pointerEvents="none">
-                    <Switch value={shouldUseDeviceColors} />
+                    <Switch value={shouldUseDynamicTheme} />
                   </View>
                 </View>
               </TouchableRipple>
