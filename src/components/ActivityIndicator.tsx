@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
   },
 
   layer: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
 
     justifyContent: 'center',
     alignItems: 'center',
