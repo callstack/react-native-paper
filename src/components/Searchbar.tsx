@@ -338,7 +338,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             accessibilityRole="button"
             borderless
             onPress={onTraileringIconPress}
-            iconColor={traileringIconColor || theme.colors.onSurfaceVariant}
+            iconColor={traileringIconColor || colors.onSurfaceVariant}
             icon={traileringIcon}
             accessibilityLabel={traileringIconAccessibilityLabel}
             testID={`${testID}-trailering-icon`}
