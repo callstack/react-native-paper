@@ -20,7 +20,7 @@ exports[`allows customizing Route's type via generics 1`] = `
           "flex": 1,
         },
         {
-          "backgroundColor": "rgba(255, 251, 255, 1)",
+          "backgroundColor": "rgba(254, 247, 255, 1)",
         },
       ]
     }
@@ -113,7 +113,7 @@ exports[`allows customizing Route's type via generics 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
+            "backgroundColor": "rgba(247, 242, 250, 1)",
             "overflow": "hidden",
           }
         }
@@ -687,7 +687,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
           "flex": 1,
         },
         {
-          "backgroundColor": "rgba(255, 251, 255, 1)",
+          "backgroundColor": "rgba(254, 247, 255, 1)",
         },
       ]
     }
@@ -780,7 +780,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
+            "backgroundColor": "rgba(247, 242, 250, 1)",
             "overflow": "hidden",
           }
         }
@@ -1428,7 +1428,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
           "flex": 1,
         },
         {
-          "backgroundColor": "rgba(255, 251, 255, 1)",
+          "backgroundColor": "rgba(254, 247, 255, 1)",
         },
       ]
     }
@@ -1521,7 +1521,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
+            "backgroundColor": "rgba(247, 242, 250, 1)",
             "overflow": "hidden",
           }
         }
@@ -2169,7 +2169,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
           "flex": 1,
         },
         {
-          "backgroundColor": "rgba(255, 251, 255, 1)",
+          "backgroundColor": "rgba(254, 247, 255, 1)",
         },
       ]
     }
@@ -2394,7 +2394,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
+            "backgroundColor": "rgba(247, 242, 250, 1)",
             "overflow": "hidden",
           }
         }
@@ -4030,7 +4030,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
           "flex": 1,
         },
         {
-          "backgroundColor": "rgba(255, 251, 255, 1)",
+          "backgroundColor": "rgba(254, 247, 255, 1)",
         },
       ]
     }
@@ -4123,7 +4123,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
+            "backgroundColor": "rgba(247, 242, 250, 1)",
             "overflow": "hidden",
           }
         }
@@ -5504,7 +5504,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
           "flex": 1,
         },
         {
-          "backgroundColor": "rgba(255, 251, 255, 1)",
+          "backgroundColor": "rgba(254, 247, 255, 1)",
         },
       ]
     }
@@ -5597,7 +5597,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
+            "backgroundColor": "rgba(247, 242, 250, 1)",
             "overflow": "hidden",
           }
         }
@@ -6206,7 +6206,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
           "flex": 1,
         },
         {
-          "backgroundColor": "rgba(255, 251, 255, 1)",
+          "backgroundColor": "rgba(254, 247, 255, 1)",
         },
       ]
     }
@@ -6299,7 +6299,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
+            "backgroundColor": "rgba(247, 242, 250, 1)",
             "overflow": "hidden",
           }
         }
@@ -7200,7 +7200,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
           "flex": 1,
         },
         {
-          "backgroundColor": "rgba(255, 251, 255, 1)",
+          "backgroundColor": "rgba(254, 247, 255, 1)",
         },
       ]
     }
@@ -7293,7 +7293,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
+            "backgroundColor": "rgba(247, 242, 250, 1)",
             "overflow": "hidden",
           }
         }
@@ -8301,7 +8301,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
           "flex": 1,
         },
         {
-          "backgroundColor": "rgba(255, 251, 255, 1)",
+          "backgroundColor": "rgba(254, 247, 255, 1)",
         },
       ]
     }
@@ -8394,7 +8394,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
+            "backgroundColor": "rgba(247, 242, 250, 1)",
             "overflow": "hidden",
           }
         }
@@ -9249,7 +9249,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
           "flex": 1,
         },
         {
-          "backgroundColor": "rgba(255, 251, 255, 1)",
+          "backgroundColor": "rgba(254, 247, 255, 1)",
         },
       ]
     }
@@ -9342,7 +9342,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
+            "backgroundColor": "rgba(247, 242, 250, 1)",
             "overflow": "hidden",
           }
         }
@@ -10350,7 +10350,7 @@ exports[`renders shifting bottom navigation 1`] = `
           "flex": 1,
         },
         {
-          "backgroundColor": "rgba(255, 251, 255, 1)",
+          "backgroundColor": "rgba(254, 247, 255, 1)",
         },
       ]
     }
@@ -10443,7 +10443,7 @@ exports[`renders shifting bottom navigation 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "rgb(243, 237, 246)",
+            "backgroundColor": "rgba(247, 242, 250, 1)",
             "overflow": "hidden",
           }
         }

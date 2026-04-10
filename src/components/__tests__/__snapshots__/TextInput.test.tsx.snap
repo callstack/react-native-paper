@@ -1009,7 +1009,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
         },
         false,
         {
-          "backgroundColor": "rgba(255, 251, 255, 1)",
+          "backgroundColor": "rgba(254, 247, 255, 1)",
           "borderColor": "rgba(121, 116, 126, 1)",
           "borderRadius": 4,
           "borderWidth": 1,
@@ -1086,7 +1086,7 @@ exports[`correctly applies height to multiline Outline TextInput 1`] = `
             numberOfLines={1}
             style={
               {
-                "backgroundColor": "rgba(255, 251, 255, 1)",
+                "backgroundColor": "rgba(254, 247, 255, 1)",
                 "color": "transparent",
                 "fontFamily": "System",
                 "fontSize": 16,

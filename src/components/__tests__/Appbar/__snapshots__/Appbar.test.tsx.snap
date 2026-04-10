@@ -5,7 +5,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(255, 251, 255, 1)",
+      "backgroundColor": "rgba(254, 247, 255, 1)",
       "height": 64,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -23,7 +23,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "rgba(255, 251, 255, 1)",
+        "backgroundColor": "rgba(254, 247, 255, 1)",
         "flex": 1,
         "flexDirection": "row",
         "paddingBottom": undefined,
@@ -46,7 +46,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
       collapsable={false}
       style={
         {
-          "backgroundColor": "rgb(238, 232, 244)",
+          "backgroundColor": "rgba(243, 237, 247, 1)",
           "borderRadius": 28,
           "shadowColor": "#000",
           "shadowOffset": {
@@ -64,7 +64,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "rgb(238, 232, 244)",
+            "backgroundColor": "rgba(243, 237, 247, 1)",
             "borderRadius": 28,
             "flex": undefined,
             "flexDirection": "row",
@@ -409,7 +409,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(255, 251, 255, 1)",
+      "backgroundColor": "rgba(254, 247, 255, 1)",
       "height": 64,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -427,7 +427,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "rgba(255, 251, 255, 1)",
+        "backgroundColor": "rgba(254, 247, 255, 1)",
         "flex": 1,
         "flexDirection": "row",
         "paddingBottom": undefined,
