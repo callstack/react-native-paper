@@ -82,21 +82,25 @@ exports[`render visible banner, with custom theme 1`] = `
                 },
                 {
                   "color": "rgba(28, 27, 31, 1)",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                },
-                {
                   "writingDirection": "ltr",
                 },
                 [
                   {
-                    "flex": 1,
-                    "margin": 8,
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
                   },
-                  {
-                    "color": "rgba(28, 27, 31, 1)",
-                  },
+                  [
+                    {
+                      "flex": 1,
+                      "margin": 8,
+                    },
+                    {
+                      "color": "#00f",
+                    },
+                  ],
                 ],
               ]
             }
@@ -234,7 +238,6 @@ exports[`render visible banner, with custom theme 1`] = `
                               "marginVertical": 9,
                               "textAlign": "center",
                             },
-                            false,
                             {
                               "marginHorizontal": 12,
                             },
@@ -364,21 +367,25 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
                 },
                 {
                   "color": "rgba(28, 27, 31, 1)",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                },
-                {
                   "writingDirection": "ltr",
                 },
                 [
                   {
-                    "flex": 1,
-                    "margin": 8,
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
                   },
-                  {
-                    "color": "rgba(28, 27, 31, 1)",
-                  },
+                  [
+                    {
+                      "flex": 1,
+                      "margin": 8,
+                    },
+                    {
+                      "color": "rgba(28, 27, 31, 1)",
+                    },
+                  ],
                 ],
               ]
             }
@@ -505,21 +512,25 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                 },
                 {
                   "color": "rgba(28, 27, 31, 1)",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                },
-                {
                   "writingDirection": "ltr",
                 },
                 [
                   {
-                    "flex": 1,
-                    "margin": 8,
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
                   },
-                  {
-                    "color": "rgba(28, 27, 31, 1)",
-                  },
+                  [
+                    {
+                      "flex": 1,
+                      "margin": 8,
+                    },
+                    {
+                      "color": "rgba(28, 27, 31, 1)",
+                    },
+                  ],
                 ],
               ]
             }
@@ -657,7 +668,6 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                               "marginVertical": 9,
                               "textAlign": "center",
                             },
-                            false,
                             {
                               "marginHorizontal": 12,
                             },
@@ -775,21 +785,25 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 },
                 {
                   "color": "rgba(28, 27, 31, 1)",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                },
-                {
                   "writingDirection": "ltr",
                 },
                 [
                   {
-                    "flex": 1,
-                    "margin": 8,
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
                   },
-                  {
-                    "color": "rgba(28, 27, 31, 1)",
-                  },
+                  [
+                    {
+                      "flex": 1,
+                      "margin": 8,
+                    },
+                    {
+                      "color": "rgba(28, 27, 31, 1)",
+                    },
+                  ],
                 ],
               ]
             }
@@ -927,7 +941,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                               "marginVertical": 9,
                               "textAlign": "center",
                             },
-                            false,
                             {
                               "marginHorizontal": 12,
                             },
@@ -1077,7 +1090,6 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                               "marginVertical": 9,
                               "textAlign": "center",
                             },
-                            false,
                             {
                               "marginHorizontal": 12,
                             },
@@ -1217,21 +1229,25 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
                 },
                 {
                   "color": "rgba(28, 27, 31, 1)",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                },
-                {
                   "writingDirection": "ltr",
                 },
                 [
                   {
-                    "flex": 1,
-                    "margin": 8,
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
                   },
-                  {
-                    "color": "rgba(28, 27, 31, 1)",
-                  },
+                  [
+                    {
+                      "flex": 1,
+                      "margin": 8,
+                    },
+                    {
+                      "color": "rgba(28, 27, 31, 1)",
+                    },
+                  ],
                 ],
               ]
             }
@@ -1336,21 +1352,25 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
                 },
                 {
                   "color": "rgba(28, 27, 31, 1)",
-                  "fontFamily": "System",
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                },
-                {
                   "writingDirection": "ltr",
                 },
                 [
                   {
-                    "flex": 1,
-                    "margin": 8,
+                    "fontFamily": "System",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
                   },
-                  {
-                    "color": "rgba(28, 27, 31, 1)",
-                  },
+                  [
+                    {
+                      "flex": 1,
+                      "margin": 8,
+                    },
+                    {
+                      "color": "rgba(28, 27, 31, 1)",
+                    },
+                  ],
                 ],
               ]
             }

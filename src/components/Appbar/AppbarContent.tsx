@@ -12,12 +12,14 @@ import {
   ViewProps,
 } from 'react-native';
 
-import color from 'color';
-
 import { modeTextVariant } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import { white } from '../../styles/themes/v2/colors';
-import type { $RemoveChildren, MD3TypescaleKey, ThemeProp } from '../../types';
+import type {
+  $RemoveChildren,
+  MD3Theme,
+  MD3TypescaleKey,
+  ThemeProp,
+} from '../../types';
 import Text, { TextRef } from '../Typography/Text';
 
 type TitleString = {
@@ -102,8 +104,6 @@ export type Props = $RemoveChildren<typeof View> & {
  */
 const AppbarContent = ({
   color: titleColor,
-  subtitle,
-  subtitleStyle,
   onPress,
   disabled,
   style,
@@ -117,15 +117,9 @@ const AppbarContent = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { isV3, colors } = theme;
+  const { colors, fonts } = theme as MD3Theme;
 
-  const titleTextColor = titleColor
-    ? titleColor
-    : isV3
-    ? colors.onSurface
-    : white;
-
-  const subtitleColor = color(titleTextColor).alpha(0.7).rgb().string();
+  const titleTextColor = titleColor ? titleColor : colors.onSurface;
 
   const modeContainerStyles = {
     small: styles.v3DefaultContainer,
@@ -138,7 +132,7 @@ const AppbarContent = ({
 
   const contentWrapperProps = {
     pointerEvents: 'box-none' as ViewProps['pointerEvents'],
-    style: [styles.container, isV3 && modeContainerStyles[mode], style],
+    style: [styles.container, modeContainerStyles[mode], style],
     testID,
     ...rest,
   };
@@ -147,18 +141,13 @@ const AppbarContent = ({
     <>
       {typeof title === 'string' ? (
         <Text
-          {...(isV3 && { variant })}
+          variant={variant}
           ref={titleRef}
           style={[
             {
               color: titleTextColor,
-              ...(isV3
-                ? theme.fonts[variant]
-                : Platform.OS === 'ios'
-                ? theme.fonts.regular
-                : theme.fonts.medium),
+              ...fonts[variant],
             },
-            !isV3 && styles.title,
             titleStyle,
           ]}
           numberOfLines={1}
@@ -180,14 +169,6 @@ const AppbarContent = ({
       ) : (
         title
       )}
-      {!isV3 && subtitle ? (
-        <Text
-          style={[styles.subtitle, { color: subtitleColor }, subtitleStyle]}
-          numberOfLines={1}
-        >
-          {subtitle}
-        </Text>
-      ) : null}
     </>
   );
 
@@ -232,12 +213,6 @@ const styles = StyleSheet.create({
     paddingTop: 36,
     justifyContent: 'flex-end',
     paddingBottom: 28,
-  },
-  title: {
-    fontSize: Platform.OS === 'ios' ? 17 : 20,
-  },
-  subtitle: {
-    fontSize: Platform.OS === 'ios' ? 11 : 14,
   },
 });
 

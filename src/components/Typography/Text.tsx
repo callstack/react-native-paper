@@ -94,7 +94,7 @@ const Text = (
     setNativeProps: (args: Object) => root.current?.setNativeProps(args),
   }));
 
-  if (theme.isV3 && variant) {
+  if (variant) {
     let font = theme.fonts[variant];
     let textStyle = [font, style];
 
@@ -155,10 +155,10 @@ const Text = (
       />
     );
   } else {
-    const font = theme.isV3 ? theme.fonts.default : theme.fonts?.regular;
+    const font = theme.fonts.default;
     const textStyle = {
       ...font,
-      color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,
+      color: theme.colors?.onSurface,
     };
     return (
       <NativeText

@@ -6,7 +6,7 @@ import {
   TextStyle,
 } from 'react-native';
 
-import type { MD2Theme } from 'src/types';
+import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../../../core/theming';
 import { forwardRef } from '../../../utils/forwardRef';
@@ -16,7 +16,7 @@ type Props = React.ComponentProps<typeof NativeText> & {
   /**
    * @optional
    */
-  theme?: MD2Theme;
+  theme?: ThemeProp;
 };
 
 // @component-group Typography
@@ -43,8 +43,7 @@ const Text: React.ForwardRefRenderFunction<{}, Props> = (
       ref={root}
       style={[
         {
-          ...(!theme.isV3 && theme.fonts?.regular),
-          color: theme.isV3 ? theme.colors?.onSurface : theme.colors.text,
+          color: theme.colors?.onSurface,
         },
         styles.text,
         style,

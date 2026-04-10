@@ -16,19 +16,14 @@ type Props = React.ComponentProps<typeof Text> & {
 
 const StyledText = ({
   alpha = 1,
-  family,
+  family: _family,
   style,
   theme: themeOverrides,
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
 
-  const textColor = color(
-    theme.isV3 ? theme.colors.onSurface : theme.colors?.text
-  )
-    .alpha(alpha)
-    .rgb()
-    .string();
+  const textColor = color(theme.colors.onSurface).alpha(alpha).rgb().string();
   const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
 
   return (
@@ -38,7 +33,6 @@ const StyledText = ({
         styles.text,
         {
           color: textColor,
-          ...(!theme.isV3 && theme.fonts?.[family]),
           writingDirection,
         },
         style,

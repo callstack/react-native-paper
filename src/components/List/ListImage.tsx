@@ -7,7 +7,6 @@ import {
   ImageStyle,
 } from 'react-native';
 
-import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 
 export type Props = {
@@ -42,16 +41,11 @@ const ListImage = ({
   style,
   source,
   variant = 'image',
-  theme: themeOverrides,
+  theme: _theme,
 }: Props) => {
-  const theme = useInternalTheme(themeOverrides);
   const getStyles = () => {
     if (variant === 'video') {
-      if (!theme.isV3) {
-        return [style, styles.video];
-      }
-
-      return [style, styles.videoV3];
+      return [style, styles.video];
     }
 
     return [style, styles.image];
@@ -73,11 +67,6 @@ const styles = StyleSheet.create({
     height: 56,
   },
   video: {
-    width: 100,
-    height: 64,
-    marginLeft: 0,
-  },
-  videoV3: {
     width: 114,
     height: 64,
     marginLeft: 0,

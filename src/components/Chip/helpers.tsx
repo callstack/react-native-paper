@@ -2,8 +2,9 @@ import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
 import color from 'color';
 
-import { black, white } from '../../styles/themes/v2/colors';
-import type { InternalTheme } from '../../types';
+import type { InternalTheme, MD3Theme } from '../../types';
+
+const md3 = (theme: InternalTheme) => theme as MD3Theme;
 
 export type ChipAvatarProps = {
   style?: StyleProp<ViewStyle>;
@@ -20,40 +21,25 @@ const getBorderColor = ({
   isOutlined,
   disabled,
   selectedColor,
-  backgroundColor,
+  backgroundColor: _backgroundColor,
 }: BaseProps & { backgroundColor: string; selectedColor?: string }) => {
   const isSelectedColor = selectedColor !== undefined;
+  const { colors } = md3(theme);
 
-  if (theme.isV3) {
-    if (!isOutlined) {
-      // If the Chip mode is "flat", set border color to transparent
-      return 'transparent';
-    }
-
-    if (disabled) {
-      return color(theme.colors.onSurfaceVariant).alpha(0.12).rgb().string();
-    }
-
-    if (isSelectedColor) {
-      return color(selectedColor).alpha(0.29).rgb().string();
-    }
-
-    return theme.colors.outline;
+  if (!isOutlined) {
+    // If the Chip mode is "flat", set border color to transparent
+    return 'transparent';
   }
 
-  if (isOutlined) {
-    if (isSelectedColor) {
-      return color(selectedColor).alpha(0.29).rgb().string();
-    }
-
-    if (theme.dark) {
-      return color(white).alpha(0.29).rgb().string();
-    }
-
-    return color(black).alpha(0.29).rgb().string();
+  if (disabled) {
+    return color(colors.onSurfaceVariant).alpha(0.12).rgb().string();
   }
 
-  return backgroundColor;
+  if (isSelectedColor) {
+    return color(selectedColor).alpha(0.29).rgb().string();
+  }
+
+  return colors.outline;
 };
 
 const getTextColor = ({
@@ -65,54 +51,32 @@ const getTextColor = ({
   selectedColor?: string;
 }) => {
   const isSelectedColor = selectedColor !== undefined;
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.onSurfaceDisabled;
-    }
-
-    if (isSelectedColor) {
-      return selectedColor;
-    }
-
-    if (isOutlined) {
-      return theme.colors.onSurfaceVariant;
-    }
-
-    return theme.colors.onSecondaryContainer;
-  }
-
+  const { colors } = md3(theme);
   if (disabled) {
-    return theme.colors.disabled;
+    return colors.onSurfaceDisabled;
   }
 
   if (isSelectedColor) {
-    return color(selectedColor).alpha(0.87).rgb().string();
+    return selectedColor;
   }
 
-  return color(theme.colors.text).alpha(0.87).rgb().string();
+  if (isOutlined) {
+    return colors.onSurfaceVariant;
+  }
+
+  return colors.onSecondaryContainer;
 };
 
 const getDefaultBackgroundColor = ({
   theme,
   isOutlined,
 }: Omit<BaseProps, 'disabled' | 'selectedColor'>) => {
-  if (theme.isV3) {
-    if (isOutlined) {
-      return theme.colors.surface;
-    }
-
-    return theme.colors.secondaryContainer;
-  }
-
+  const { colors } = md3(theme);
   if (isOutlined) {
-    return theme.colors?.surface;
+    return colors.surface;
   }
 
-  if (theme.dark) {
-    return '#383838';
-  }
-
-  return '#ebebeb';
+  return colors.secondaryContainer;
 };
 
 const getBackgroundColor = ({
@@ -123,17 +87,16 @@ const getBackgroundColor = ({
 }: BaseProps & {
   customBackgroundColor?: ColorValue;
 }) => {
+  const { colors } = md3(theme);
   if (typeof customBackgroundColor === 'string') {
     return customBackgroundColor;
   }
 
-  if (theme.isV3) {
-    if (disabled) {
-      if (isOutlined) {
-        return 'transparent';
-      }
-      return color(theme.colors.onSurfaceVariant).alpha(0.12).rgb().string();
+  if (disabled) {
+    if (isOutlined) {
+      return 'transparent';
     }
+    return color(colors.onSurfaceVariant).alpha(0.12).rgb().string();
   }
 
   return getDefaultBackgroundColor({ theme, isOutlined });
@@ -149,6 +112,7 @@ const getSelectedBackgroundColor = ({
   customBackgroundColor?: ColorValue;
   showSelectedOverlay?: boolean;
 }) => {
+  const { colors } = md3(theme);
   const backgroundColor = getBackgroundColor({
     theme,
     disabled,
@@ -156,45 +120,30 @@ const getSelectedBackgroundColor = ({
     customBackgroundColor,
   });
 
-  if (theme.isV3) {
-    if (isOutlined) {
-      if (showSelectedOverlay) {
-        return color(backgroundColor)
-          .mix(color(theme.colors.onSurfaceVariant), 0.12)
-          .rgb()
-          .string();
-      }
-      return color(backgroundColor)
-        .mix(color(theme.colors.onSurfaceVariant), 0)
-        .rgb()
-        .string();
-    }
-
+  if (isOutlined) {
     if (showSelectedOverlay) {
       return color(backgroundColor)
-        .mix(color(theme.colors.onSecondaryContainer), 0.12)
+        .mix(color(colors.onSurfaceVariant), 0.12)
         .rgb()
         .string();
     }
-
     return color(backgroundColor)
-      .mix(color(theme.colors.onSecondaryContainer), 0)
+      .mix(color(colors.onSurfaceVariant), 0)
       .rgb()
       .string();
   }
 
-  if (theme.dark) {
-    if (isOutlined) {
-      return color(backgroundColor).lighten(0.2).rgb().string();
-    }
-    return color(backgroundColor).lighten(0.4).rgb().string();
+  if (showSelectedOverlay) {
+    return color(backgroundColor)
+      .mix(color(colors.onSecondaryContainer), 0.12)
+      .rgb()
+      .string();
   }
 
-  if (isOutlined) {
-    return color(backgroundColor).darken(0.08).rgb().string();
-  }
-
-  return color(backgroundColor).darken(0.2).rgb().string();
+  return color(backgroundColor)
+    .mix(color(colors.onSecondaryContainer), 0)
+    .rgb()
+    .string();
 };
 
 const getIconColor = ({
@@ -206,31 +155,20 @@ const getIconColor = ({
   selectedColor?: string;
 }) => {
   const isSelectedColor = selectedColor !== undefined;
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.onSurfaceDisabled;
-    }
-
-    if (isSelectedColor) {
-      return selectedColor;
-    }
-
-    if (isOutlined) {
-      return theme.colors.onSurfaceVariant;
-    }
-
-    return theme.colors.onSecondaryContainer;
-  }
-
+  const { colors } = md3(theme);
   if (disabled) {
-    return theme.colors.disabled;
+    return colors.onSurfaceDisabled;
   }
 
   if (isSelectedColor) {
-    return color(selectedColor).alpha(0.54).rgb().string();
+    return selectedColor;
   }
 
-  return color(theme.colors.text).alpha(0.54).rgb().string();
+  if (isOutlined) {
+    return colors.onSurfaceVariant;
+  }
+
+  return colors.onSecondaryContainer;
 };
 
 const getRippleColor = ({
@@ -238,7 +176,7 @@ const getRippleColor = ({
   isOutlined,
   disabled,
   selectedColor,
-  selectedBackgroundColor,
+  selectedBackgroundColor: _selectedBackgroundColor,
   customRippleColor,
 }: BaseProps & {
   selectedBackgroundColor: string;
@@ -257,19 +195,11 @@ const getRippleColor = ({
     isOutlined,
   });
 
-  if (theme.isV3) {
-    if (isSelectedColor) {
-      return color(selectedColor).alpha(0.12).rgb().string();
-    }
-
-    return color(textColor).alpha(0.12).rgb().string();
-  }
-
   if (isSelectedColor) {
-    return color(selectedColor).fade(0.5).rgb().string();
+    return color(selectedColor).alpha(0.12).rgb().string();
   }
 
-  return selectedBackgroundColor;
+  return color(textColor).alpha(0.12).rgb().string();
 };
 
 export const getChipColors = ({

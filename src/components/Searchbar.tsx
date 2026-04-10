@@ -23,7 +23,7 @@ import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
 import { useInternalTheme } from '../core/theming';
-import type { ThemeProp } from '../types';
+import type { MD3Theme, ThemeProp } from '../types';
 import { forwardRef } from '../utils/forwardRef';
 
 interface Style {
@@ -208,6 +208,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
+    const { colors, fonts } = theme as MD3Theme;
     const root = React.useRef<TextInput>(null);
 
     React.useImperativeHandle(ref, () => ({
@@ -227,34 +228,26 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       onClearIconPress?.(e);
     };
 
-    const { roundness, dark, isV3, fonts } = theme;
+    const { roundness, dark } = theme;
 
-    const placeholderTextColor = isV3
-      ? theme.colors.onSurface
-      : theme.colors?.placeholder;
-    const textColor = isV3 ? theme.colors.onSurfaceVariant : theme.colors.text;
-    const md2IconColor = dark
-      ? textColor
-      : color(textColor).alpha(0.54).rgb().string();
-    const iconColor =
-      customIconColor || (isV3 ? theme.colors.onSurfaceVariant : md2IconColor);
+    const placeholderTextColor = colors.onSurface;
+    const textColor = colors.onSurfaceVariant;
+    const iconColor = customIconColor || colors.onSurfaceVariant;
     const rippleColor =
       customRippleColor || color(textColor).alpha(0.32).rgb().string();
     const traileringRippleColor =
       customTraileringRippleColor ||
       color(textColor).alpha(0.32).rgb().string();
 
-    const font = isV3
-      ? {
-          ...fonts.bodyLarge,
-          lineHeight: Platform.select({
-            ios: 0,
-            default: fonts.bodyLarge.lineHeight,
-          }),
-        }
-      : theme.fonts.regular;
+    const font = {
+      ...fonts.bodyLarge,
+      lineHeight: Platform.select({
+        ios: 0,
+        default: fonts.bodyLarge.lineHeight,
+      }),
+    };
 
-    const isBarMode = isV3 && mode === 'bar';
+    const isBarMode = mode === 'bar';
     const shouldRenderTraileringIcon =
       isBarMode &&
       traileringIcon &&
@@ -265,16 +258,15 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       <Surface
         style={[
           { borderRadius: roundness },
-          !isV3 && styles.elevation,
-          isV3 && {
-            backgroundColor: theme.colors.elevation.level3,
+          {
+            backgroundColor: colors.elevation.level3,
             borderRadius: roundness * (isBarMode ? 7 : 0),
           },
           styles.container,
           style,
         ]}
         testID={`${testID}-container`}
-        {...(theme.isV3 && { elevation })}
+        elevation={elevation}
         container
         theme={theme}
       >
@@ -307,12 +299,12 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
               ...font,
               ...Platform.select({ web: { outline: 'none' } }),
             },
-            isV3 && (isBarMode ? styles.barModeInput : styles.viewModeInput),
+            isBarMode ? styles.barModeInput : styles.viewModeInput,
             inputStyle,
           ]}
           placeholder={placeholder || ''}
           placeholderTextColor={placeholderTextColor}
-          selectionColor={theme.colors?.primary}
+          selectionColor={colors.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
           keyboardAppearance={dark ? 'dark' : 'light'}
@@ -325,7 +317,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
         {loading ? (
           <ActivityIndicator
             testID="activity-indicator"
-            style={isV3 ? styles.v3Loader : styles.loader}
+            style={styles.v3Loader}
           />
         ) : (
           // Clear icon should be always rendered within Searchbar – it's transparent,
@@ -336,8 +328,8 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             pointerEvents={value ? 'auto' : 'none'}
             testID={`${testID}-icon-wrapper`}
             style={[
-              isV3 && !value && styles.v3ClearIcon,
-              isV3 && right !== undefined && styles.v3ClearIconHidden,
+              !value && styles.v3ClearIcon,
+              right !== undefined && styles.v3ClearIconHidden,
             ]}
           >
             <IconButton
@@ -350,7 +342,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
                 clearIcon ||
                 (({ size, color }) => (
                   <MaterialCommunityIcon
-                    name={isV3 ? 'close' : 'close-circle-outline'}
+                    name="close"
                     color={color}
                     size={size}
                     direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
@@ -368,7 +360,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
             accessibilityRole="button"
             borderless
             onPress={onTraileringIconPress}
-            iconColor={traileringIconColor || theme.colors.onSurfaceVariant}
+            iconColor={traileringIconColor || colors.onSurfaceVariant}
             rippleColor={traileringRippleColor}
             icon={traileringIcon}
             accessibilityLabel={traileringIconAccessibilityLabel}
@@ -377,13 +369,13 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
         ) : null}
         {isBarMode &&
           right?.({ color: textColor, style: styles.rightStyle, testID })}
-        {isV3 && !isBarMode && showDivider && (
+        {!isBarMode && showDivider && (
           <Divider
             bold
             style={[
               styles.divider,
               {
-                backgroundColor: theme.colors.outline,
+                backgroundColor: colors.outline,
               },
             ]}
             testID={`${testID}-divider`}
@@ -414,12 +406,6 @@ const styles = StyleSheet.create({
   viewModeInput: {
     paddingLeft: 0,
     minHeight: 72,
-  },
-  elevation: {
-    elevation: 4,
-  },
-  loader: {
-    margin: 10,
   },
   v3Loader: {
     marginHorizontal: 16,

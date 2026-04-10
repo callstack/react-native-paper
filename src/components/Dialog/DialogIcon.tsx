@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../../core/theming';
+import type { MD3Theme } from '../../types';
 import Icon, { IconSource } from '../Icon';
 
 export type Props = {
@@ -69,13 +70,10 @@ const DialogIcon = ({
   theme: themeOverrides,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-
-  if (!theme.isV3) {
-    return null;
-  }
+  const { colors } = theme as MD3Theme;
 
   //@ts-ignore
-  const iconColor = color || theme.colors.secondary;
+  const iconColor = color || colors.secondary;
 
   return (
     <View style={styles.wrapper}>
