@@ -19,13 +19,20 @@ export const MD3DarkTheme: MD3Theme = {
     secondaryContainer: palette.secondary30,
     tertiary: palette.tertiary80,
     tertiaryContainer: palette.tertiary30,
-    surface: palette.neutral10,
+    surface: palette.neutral6,
+    surfaceDim: palette.neutral6,
+    surfaceBright: palette.neutral24,
+    surfaceContainerLowest: palette.neutral4,
+    surfaceContainerLow: palette.neutral10,
+    surfaceContainer: palette.neutral12,
+    surfaceContainerHigh: palette.neutral17,
+    surfaceContainerHighest: palette.neutral22,
     surfaceVariant: palette.neutralVariant30,
     surfaceDisabled: color(palette.neutral90)
       .alpha(opacity.level2)
       .rgb()
       .string(),
-    background: palette.neutral10,
+    background: palette.neutral6,
     error: palette.error80,
     errorContainer: palette.error30,
     onPrimary: palette.primary20,
@@ -48,19 +55,28 @@ export const MD3DarkTheme: MD3Theme = {
     inverseSurface: palette.neutral90,
     inverseOnSurface: palette.neutral20,
     inversePrimary: palette.primary40,
+    primaryFixed: palette.primary90,
+    primaryFixedDim: palette.primary80,
+    onPrimaryFixed: palette.primary10,
+    onPrimaryFixedVariant: palette.primary30,
+    secondaryFixed: palette.secondary90,
+    secondaryFixedDim: palette.secondary80,
+    onSecondaryFixed: palette.secondary10,
+    onSecondaryFixedVariant: palette.secondary30,
+    tertiaryFixed: palette.tertiary90,
+    tertiaryFixedDim: palette.tertiary80,
+    onTertiaryFixed: palette.tertiary10,
+    onTertiaryFixedVariant: palette.tertiary30,
     shadow: palette.neutral0,
     scrim: palette.neutral0,
     backdrop: color(MD3Colors.neutralVariant20).alpha(0.4).rgb().string(),
     elevation: {
       level0: 'transparent',
-      // Note: Color values with transparency cause RN to transfer shadows to children nodes
-      // instead of View component in Surface. Providing solid background fixes the issue.
-      // Opaque color values generated with `palette.primary80` used as background
-      level1: 'rgb(37, 35, 42)', // palette.primary80, alpha 0.05
-      level2: 'rgb(44, 40, 49)', // palette.primary80, alpha 0.08
-      level3: 'rgb(49, 44, 56)', // palette.primary80, alpha 0.11
-      level4: 'rgb(51, 46, 58)', // palette.primary80, alpha 0.12
-      level5: 'rgb(52, 49, 63)', // palette.primary80, alpha 0.14
+      level1: palette.neutral4,
+      level2: palette.neutral10,
+      level3: palette.neutral12,
+      level4: palette.neutral17,
+      level5: palette.neutral22,
     },
   },
 };

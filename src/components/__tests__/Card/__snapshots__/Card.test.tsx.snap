@@ -5,7 +5,7 @@ exports[`Card renders an outlined card 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(255, 251, 255, 1)",
+      "backgroundColor": "rgba(254, 247, 255, 1)",
       "borderRadius": 12,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -22,7 +22,7 @@ exports[`Card renders an outlined card 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(255, 251, 255, 1)",
+        "backgroundColor": "rgba(254, 247, 255, 1)",
         "borderRadius": 12,
         "flex": undefined,
         "shadowColor": "#000",
