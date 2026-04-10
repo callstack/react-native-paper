@@ -5,7 +5,7 @@ exports[`render visible banner, with custom theme 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgb(247, 243, 249)",
+      "backgroundColor": "rgba(255, 255, 255, 1)",
       "opacity": 1,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -22,7 +22,7 @@ exports[`render visible banner, with custom theme 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgb(247, 243, 249)",
+        "backgroundColor": "rgba(255, 255, 255, 1)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": {
@@ -278,7 +278,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgb(247, 243, 249)",
+      "backgroundColor": "rgba(255, 255, 255, 1)",
       "opacity": 0,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -295,7 +295,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgb(247, 243, 249)",
+        "backgroundColor": "rgba(255, 255, 255, 1)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": {
@@ -413,7 +413,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgb(247, 243, 249)",
+      "backgroundColor": "rgba(255, 255, 255, 1)",
       "opacity": 1,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -430,7 +430,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgb(247, 243, 249)",
+        "backgroundColor": "rgba(255, 255, 255, 1)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": {
@@ -708,7 +708,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgb(247, 243, 249)",
+      "backgroundColor": "rgba(255, 255, 255, 1)",
       "opacity": 1,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -725,7 +725,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgb(247, 243, 249)",
+        "backgroundColor": "rgba(255, 255, 255, 1)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": {
@@ -1130,7 +1130,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgb(247, 243, 249)",
+      "backgroundColor": "rgba(255, 255, 255, 1)",
       "opacity": 1,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -1147,7 +1147,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgb(247, 243, 249)",
+        "backgroundColor": "rgba(255, 255, 255, 1)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": {
@@ -1275,7 +1275,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgb(247, 243, 249)",
+      "backgroundColor": "rgba(255, 255, 255, 1)",
       "opacity": 1,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -1292,7 +1292,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgb(247, 243, 249)",
+        "backgroundColor": "rgba(255, 255, 255, 1)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": {
