@@ -1,16 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import {
-  Checkbox,
-  MD2Colors,
-  MD3Colors,
-  Paragraph,
-  Text,
-  TouchableRipple,
-} from 'react-native-paper';
+import { Checkbox, MD3Colors, Text, TouchableRipple } from 'react-native-paper';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const CheckboxExample = () => {
@@ -18,14 +10,11 @@ const CheckboxExample = () => {
   const [checkedCustom, setCheckedCustom] = React.useState<boolean>(true);
   const [indeterminate, setIndeterminate] = React.useState<boolean>(true);
 
-  const { isV3 } = useExampleTheme();
-  const TextComponent = isV3 ? Text : Paragraph;
-
   return (
     <ScreenWrapper style={styles.container}>
       <TouchableRipple onPress={() => setCheckedNormal(!checkedNormal)}>
         <View style={styles.row}>
-          <TextComponent>Normal</TextComponent>
+          <Text>Normal</Text>
           <View pointerEvents="none">
             <Checkbox status={checkedNormal ? 'checked' : 'unchecked'} />
           </View>
@@ -34,10 +23,10 @@ const CheckboxExample = () => {
 
       <TouchableRipple onPress={() => setCheckedCustom(!checkedCustom)}>
         <View style={styles.row}>
-          <TextComponent>Custom</TextComponent>
+          <Text>Custom</Text>
           <View pointerEvents="none">
             <Checkbox
-              color={isV3 ? MD3Colors.error70 : MD2Colors.blue500}
+              color={MD3Colors.error70}
               status={checkedCustom ? 'checked' : 'unchecked'}
             />
           </View>
@@ -46,7 +35,7 @@ const CheckboxExample = () => {
 
       <TouchableRipple onPress={() => setIndeterminate(!indeterminate)}>
         <View style={styles.row}>
-          <TextComponent>Indeterminate</TextComponent>
+          <Text>Indeterminate</Text>
           <View pointerEvents="none">
             <Checkbox status={indeterminate ? 'indeterminate' : 'unchecked'} />
           </View>
@@ -54,15 +43,15 @@ const CheckboxExample = () => {
       </TouchableRipple>
 
       <View style={styles.row}>
-        <TextComponent>Checked (Disabled)</TextComponent>
+        <Text>Checked (Disabled)</Text>
         <Checkbox status="checked" disabled />
       </View>
       <View style={styles.row}>
-        <TextComponent>Unchecked (Disabled)</TextComponent>
+        <Text>Unchecked (Disabled)</Text>
         <Checkbox status="unchecked" disabled />
       </View>
       <View style={styles.row}>
-        <TextComponent>Indeterminate (Disabled)</TextComponent>
+        <Text>Indeterminate (Disabled)</Text>
         <Checkbox status="indeterminate" disabled />
       </View>
     </ScreenWrapper>

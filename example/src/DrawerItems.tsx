@@ -9,7 +9,6 @@ import {
   Button,
   Dialog,
   Drawer,
-  MD2Colors,
   MD3Colors,
   Switch,
   Text,
@@ -107,7 +106,6 @@ function DrawerItems() {
     toggleShouldUseDeviceColors,
     toggleTheme,
     toggleRtl: toggleRTL,
-    toggleThemeVersion,
     toggleCollapsed,
     toggleCustomFont,
     toggleRippleEffect,
@@ -137,14 +135,10 @@ function DrawerItems() {
   };
 
   const coloredLabelTheme = {
-    colors: isV3
-      ? {
-          secondaryContainer: MD3Colors.tertiary80,
-          onSecondaryContainer: MD3Colors.tertiary20,
-        }
-      : {
-          primary: MD2Colors.tealA200,
-        },
+    colors: {
+      secondaryContainer: MD3Colors.tertiary80,
+      onSecondaryContainer: MD3Colors.tertiary20,
+    },
   };
 
   return (
@@ -216,15 +210,6 @@ function DrawerItems() {
                 </View>
               </TouchableRipple>
             )}
-
-            <TouchableRipple onPress={toggleThemeVersion}>
-              <View style={[styles.preference, isV3 && styles.v3Preference]}>
-                <Text variant="labelLarge">MD 2</Text>
-                <View pointerEvents="none">
-                  <Switch value={!isV3} />
-                </View>
-              </View>
-            </TouchableRipple>
 
             {isV3 && (
               <TouchableRipple onPress={toggleCollapsed}>

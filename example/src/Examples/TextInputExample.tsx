@@ -13,7 +13,6 @@ import {
   configureFonts,
   HelperText,
   List,
-  MD2Colors,
   MD3Colors,
   TextInput,
 } from 'react-native-paper';
@@ -138,11 +137,7 @@ const TextInputExample = () => {
 
     const newColors = {
       ...state.iconsColor,
-      [name]: !color
-        ? theme.isV3
-          ? theme.colors.primary
-          : theme.colors?.accent
-        : undefined,
+      [name]: !color ? theme.colors.primary : undefined,
     };
 
     dispatch({
@@ -572,9 +567,7 @@ const TextInputExample = () => {
                   <Text>
                     <Text
                       style={{
-                        color: theme.isV3
-                          ? MD3Colors.error50
-                          : MD2Colors.red500,
+                        color: MD3Colors.error50,
                       }}
                     >
                       *
@@ -604,12 +597,8 @@ const TextInputExample = () => {
               onChangeText={(flatUnderlineColors) =>
                 inputActionHandler('flatUnderlineColors', flatUnderlineColors)
               }
-              underlineColor={
-                theme.isV3 ? MD3Colors.primary70 : MD2Colors.pink400
-              }
-              activeUnderlineColor={
-                theme.isV3 ? MD3Colors.tertiary50 : MD2Colors.amber900
-              }
+              underlineColor={MD3Colors.primary70}
+              activeUnderlineColor={MD3Colors.tertiary50}
             />
             <TextInput
               mode="outlined"
@@ -620,12 +609,8 @@ const TextInputExample = () => {
               onChangeText={(outlinedColors) =>
                 inputActionHandler('outlinedColors', outlinedColors)
               }
-              outlineColor={
-                theme.isV3 ? MD3Colors.primary70 : MD2Colors.pink400
-              }
-              activeOutlineColor={
-                theme.isV3 ? MD3Colors.tertiary50 : MD2Colors.amber900
-              }
+              outlineColor={MD3Colors.primary70}
+              activeOutlineColor={MD3Colors.tertiary50}
             />
             <TextInput
               mode="outlined"

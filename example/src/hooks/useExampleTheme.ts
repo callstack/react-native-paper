@@ -1,3 +1,3 @@
-import { MD2Theme, MD3Theme, useTheme } from 'react-native-paper';
+import { useTheme, type MD3Theme } from 'react-native-paper';
 
-export const useExampleTheme = () => useTheme<MD2Theme | MD3Theme>();
+export const useExampleTheme = () => useTheme<MD3Theme>();
