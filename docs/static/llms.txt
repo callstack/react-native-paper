@@ -17,7 +17,6 @@
 - Icons: https://callstack.github.io/react-native-paper/docs/guides/icons
 - Fonts: https://callstack.github.io/react-native-paper/docs/guides/fonts
 - React Native Web: https://callstack.github.io/react-native-paper/docs/guides/react-native-web
-- Migration to v5: https://callstack.github.io/react-native-paper/docs/guides/migration-guide-to-5.0
 - Recommended Libraries: https://callstack.github.io/react-native-paper/docs/guides/recommended-libraries
 - Contributing: https://callstack.github.io/react-native-paper/docs/guides/contributing
 - Bottom Navigation: https://callstack.github.io/react-native-paper/docs/guides/bottom-navigation
