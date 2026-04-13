@@ -716,7 +716,7 @@ const styles = StyleSheet.create({
         cursor: 'auto',
       },
     }),
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     width: '100%',
   },
 });

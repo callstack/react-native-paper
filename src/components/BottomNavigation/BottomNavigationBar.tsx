@@ -957,7 +957,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   iconWrapper: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     alignItems: 'center',
   },
   v3IconWrapper: {
@@ -968,7 +968,7 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
   },
   labelWrapper: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
   },
   // eslint-disable-next-line react-native/no-color-literals
   label: {
