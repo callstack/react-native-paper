@@ -423,13 +423,11 @@ const BottomNavigation = <Route extends BaseRoute>({
       });
     },
     [
-      shifting,
       navigationState.routes,
       offsetsAnims,
       scale,
       tabsPositionAnims,
       sceneAnimationEasing,
-      theme,
     ]
   );
 
