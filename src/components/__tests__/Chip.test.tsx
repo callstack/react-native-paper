@@ -186,48 +186,6 @@ describe('getChipColors - icon color', () => {
   });
 });
 
-describe('getChipColors - ripple color', () => {
-  it('should return theme color, for theme version 3, flat mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(),
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme().colors.onSecondaryContainer)
-        .alpha(0.12)
-        .rgb()
-        .string(),
-    });
-  });
-
-  it('should return theme color, for theme version 3, outline mode', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(),
-        isOutlined: true,
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme().colors.onSurfaceVariant)
-        .alpha(0.12)
-        .rgb()
-        .string(),
-    });
-  });
-
-  it('should return custom color, for theme version 3', () => {
-    expect(
-      getChipColors({
-        theme: getTheme(),
-        selectedColor: 'purple',
-        isOutlined: false,
-      })
-    ).toMatchObject({
-      rippleColor: color('purple').alpha(0.12).rgb().string(),
-    });
-  });
-});
-
 describe('getChipColor - selected background color', () => {
   it('should return custom color, for theme version 3, outlined mode', () => {
     expect(

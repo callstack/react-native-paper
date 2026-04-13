@@ -1,7 +1,6 @@
 import * as React from 'react';
 import type {
   AccessibilityState,
-  ColorValue,
   NativeSyntheticEvent,
   PressableAndroidRippleConfig,
   TextLayoutEventData,
@@ -19,8 +18,6 @@ import {
   ViewStyle,
   Text,
 } from 'react-native';
-
-import color from 'color';
 
 import { getCombinedStyles, getFABColors, getLabelSizeWeb } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -67,10 +64,6 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    * Custom color for the icon and label of the `FAB`.
    */
   color?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
   /**
    * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
@@ -213,7 +206,6 @@ const AnimatedFAB = ({
   accessibilityLabel = label,
   accessibilityState,
   color: customColor,
-  rippleColor: customRippleColor,
   disabled,
   onPress,
   onLongPress,
@@ -312,9 +304,6 @@ const AnimatedFAB = ({
     customColor,
     customBackgroundColor,
   });
-
-  const rippleColor =
-    customRippleColor || color(foregroundColor).alpha(0.12).rgb().string();
 
   const extendedWidth = textWidth + SIZE + borderRadius;
 
@@ -462,7 +451,6 @@ const AnimatedFAB = ({
               onPress={onPress}
               onLongPress={onLongPress}
               delayLongPress={delayLongPress}
-              rippleColor={rippleColor}
               disabled={disabled}
               accessibilityLabel={accessibilityLabel}
               accessibilityRole="button"

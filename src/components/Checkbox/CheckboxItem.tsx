@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -58,10 +57,6 @@ export type Props = {
    * Custom color for checkbox.
    */
   color?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
   /**
    * Additional styles for container View.
    */
@@ -148,7 +143,6 @@ const CheckboxItem = ({
   disabled,
   labelVariant = 'bodyLarge',
   labelMaxFontSizeMultiplier = 1.5,
-  rippleColor,
   background,
   hitSlop,
   ...props
@@ -187,7 +181,6 @@ const CheckboxItem = ({
       onLongPress={onLongPress}
       testID={testID}
       disabled={disabled}
-      rippleColor={rippleColor}
       theme={theme}
       background={background}
       hitSlop={hitSlop}

@@ -171,37 +171,6 @@ const getIconColor = ({
   return colors.onSecondaryContainer;
 };
 
-const getRippleColor = ({
-  theme,
-  isOutlined,
-  disabled,
-  selectedColor,
-  selectedBackgroundColor: _selectedBackgroundColor,
-  customRippleColor,
-}: BaseProps & {
-  selectedBackgroundColor: string;
-  selectedColor?: string;
-  customRippleColor?: ColorValue;
-}) => {
-  if (customRippleColor) {
-    return customRippleColor;
-  }
-
-  const isSelectedColor = selectedColor !== undefined;
-  const textColor = getTextColor({
-    theme,
-    disabled,
-    selectedColor,
-    isOutlined,
-  });
-
-  if (isSelectedColor) {
-    return color(selectedColor).alpha(0.12).rgb().string();
-  }
-
-  return color(textColor).alpha(0.12).rgb().string();
-};
-
 export const getChipColors = ({
   isOutlined,
   theme,
@@ -209,13 +178,11 @@ export const getChipColors = ({
   showSelectedOverlay,
   customBackgroundColor,
   disabled,
-  customRippleColor,
 }: BaseProps & {
   customBackgroundColor?: ColorValue;
   disabled?: boolean;
   showSelectedOverlay?: boolean;
   selectedColor?: string;
-  customRippleColor?: ColorValue;
 }) => {
   const baseChipColorProps = { theme, isOutlined, disabled };
 
@@ -243,12 +210,6 @@ export const getChipColors = ({
     iconColor: getIconColor({
       ...baseChipColorProps,
       selectedColor,
-    }),
-    rippleColor: getRippleColor({
-      ...baseChipColorProps,
-      selectedColor,
-      selectedBackgroundColor,
-      customRippleColor,
     }),
     backgroundColor,
     selectedBackgroundColor,

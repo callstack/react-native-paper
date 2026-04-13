@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -11,7 +10,6 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
 import type { ThemeProp } from 'src/types';
 
 import {
@@ -46,10 +44,6 @@ export type Props = {
    * Custom color for checked Text and Icon.
    */
   checkedColor?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
   /**
    * Whether the button is disabled.
    */
@@ -119,7 +113,6 @@ const SegmentedButtonItem = ({
   showSelectedCheck,
   checkedColor,
   uncheckedColor,
-  rippleColor: customRippleColor,
   background,
   icon,
   testID,
@@ -167,9 +160,6 @@ const SegmentedButtonItem = ({
     theme,
     segment,
   });
-  const rippleColor =
-    customRippleColor || color(textColor).alpha(0.12).rgb().string();
-
   const showIcon = !icon ? false : label && checked ? !showSelectedCheck : true;
   const showCheckedIcon = checked && showSelectedCheck;
 
@@ -214,7 +204,6 @@ const SegmentedButtonItem = ({
         accessibilityState={{ disabled, checked }}
         accessibilityRole="button"
         disabled={disabled}
-        rippleColor={rippleColor}
         testID={testID}
         style={rippleStyle}
         background={background}
