@@ -6,7 +6,6 @@ import {
   ViewStyle,
   View,
   Animated,
-  ColorValue,
 } from 'react-native';
 
 import { getIconButtonColor } from './utils';
@@ -43,11 +42,6 @@ export type Props = Omit<$RemoveChildren<typeof TouchableRipple>, 'style'> & {
    */
   containerColor?: string;
   /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
-  /**
-   * @supported Available in v5.x with theme version 3
    * Whether icon button is selected. A selected button receives alternative combination of icon and container colors.
    */
   selected?: boolean;
@@ -120,7 +114,6 @@ const IconButton = forwardRef<View, Props>(
       icon,
       iconColor: customIconColor,
       containerColor: customContainerColor,
-      rippleColor: customRippleColor,
       size = 24,
       accessibilityLabel,
       disabled,
@@ -141,16 +134,14 @@ const IconButton = forwardRef<View, Props>(
 
     const IconComponent = animated ? CrossFadeIcon : Icon;
 
-    const { iconColor, rippleColor, backgroundColor, borderColor } =
-      getIconButtonColor({
-        theme,
-        disabled,
-        selected,
-        mode,
-        customIconColor,
-        customContainerColor,
-        customRippleColor,
-      });
+    const { iconColor, backgroundColor, borderColor } = getIconButtonColor({
+      theme,
+      disabled,
+      selected,
+      mode,
+      customIconColor,
+      customContainerColor,
+    });
 
     const buttonSize = size + 2 * PADDING;
 
@@ -186,7 +177,6 @@ const IconButton = forwardRef<View, Props>(
           borderless
           centered
           onPress={onPress}
-          rippleColor={rippleColor}
           accessibilityLabel={accessibilityLabel}
           style={[styles.touchable, contentStyle]}
           // @ts-expect-error We keep old a11y props for backwards compat with old RN versions

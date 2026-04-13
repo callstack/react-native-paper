@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   AccessibilityRole,
   Animated,
-  ColorValue,
   GestureResponderEvent,
   Platform,
   PressableAndroidRippleConfig,
@@ -12,8 +11,6 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-
-import color from 'color';
 
 import {
   ButtonMode,
@@ -66,10 +63,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Custom button's text color.
    */
   textColor?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
   /**
    * Whether to show a loading indicator.
    */
@@ -186,7 +179,6 @@ const Button = (
     icon,
     buttonColor: customButtonColor,
     textColor: customTextColor,
-    rippleColor: customRippleColor,
     children,
     accessibilityLabel,
     accessibilityHint,
@@ -292,9 +284,6 @@ const Button = (
       dark,
     });
 
-  const rippleColor =
-    customRippleColor || color(textColor).alpha(0.12).rgb().string();
-
   const touchableStyle = {
     ...borderRadiusStyles,
     borderRadius: borderRadiusStyles.borderRadius ?? borderRadius,
@@ -363,7 +352,6 @@ const Button = (
         accessible={accessible}
         hitSlop={hitSlop}
         disabled={disabled}
-        rippleColor={rippleColor}
         style={getButtonTouchableRippleStyle(touchableStyle, borderWidth)}
         testID={testID}
         theme={theme}

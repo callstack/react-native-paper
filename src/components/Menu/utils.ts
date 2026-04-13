@@ -1,7 +1,3 @@
-import type { ColorValue } from 'react-native';
-
-import color from 'color';
-
 import type { InternalTheme, MD3Theme } from '../../types';
 import type { IconSource } from '../Icon';
 
@@ -17,7 +13,6 @@ type ContentProps = {
 type ColorProps = {
   theme: InternalTheme;
   disabled?: boolean;
-  customRippleColor?: ColorValue;
 };
 
 const getDisabledColor = (theme: InternalTheme) => {
@@ -42,29 +37,10 @@ const getIconColor = ({ theme, disabled }: ColorProps) => {
   return colors.onSurfaceVariant;
 };
 
-const getRippleColor = ({
-  theme,
-  customRippleColor,
-}: Omit<ColorProps, 'disabled'>) => {
-  if (customRippleColor) {
-    return customRippleColor;
-  }
-
-  return color((theme as MD3Theme).colors.onSurfaceVariant)
-    .alpha(0.12)
-    .rgb()
-    .string();
-};
-
-export const getMenuItemColor = ({
-  theme,
-  disabled,
-  customRippleColor,
-}: ColorProps) => {
+export const getMenuItemColor = ({ theme, disabled }: ColorProps) => {
   return {
     titleColor: getTitleColor({ theme, disabled }),
     iconColor: getIconColor({ theme, disabled }),
-    rippleColor: getRippleColor({ theme, customRippleColor }),
   };
 };
 

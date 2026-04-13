@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  ColorValue,
   Easing,
   I18nManager,
   StyleProp,
@@ -41,12 +40,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    */
   icon?: IconSource;
   /**
-   * @supported Available in v5.x with theme version 3
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
-  /**
-   * @supported Available in v5.x with theme version 3
    * Function to execute on icon button press. The icon button appears only when this prop is specified.
    */
   onIconPress?: () => void;
@@ -161,7 +154,6 @@ const Snackbar = ({
   contentStyle,
   theme: themeOverrides,
   maxFontSizeMultiplier,
-  rippleColor,
   testID,
   ...rest
 }: Props) => {
@@ -253,7 +245,6 @@ const Snackbar = ({
     style: actionStyle,
     label: actionLabel,
     onPress: onPressAction,
-    rippleColor: actionRippleColor,
     ...actionProps
   } = action || {};
 
@@ -338,7 +329,6 @@ const Snackbar = ({
                 compact={false}
                 mode="text"
                 theme={theme}
-                rippleColor={actionRippleColor}
                 {...actionProps}
               >
                 {actionLabel}
@@ -349,8 +339,7 @@ const Snackbar = ({
                 accessibilityRole="button"
                 borderless
                 onPress={onIconPress}
-                iconColor={colors.inverseOnSurface}
-                rippleColor={rippleColor}
+                iconColor={theme.colors.inverseOnSurface}
                 theme={theme}
                 icon={
                   icon ||
