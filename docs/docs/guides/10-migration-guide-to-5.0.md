@@ -4,7 +4,7 @@ title: Introducing v5 with Material You
 
 React Native Paper v5 is all about adopting the new Material Design 3 <i>aka</i> Material You. It was released in October 2021 after intense work and effort to make Material You follow a more expressive approach to design.
 
-Paper now supports both Material Design 2 and 3 through the configuration described in [Versioning](#versioning) and is compatible with a handful of API changes. 
+Current releases use Material Design 3 only; the historical `version: 2` / MD2 theme APIs described below were removed after v5. Use this guide when upgrading older apps to MD3. 
 
 # Migration guide to Material You 5.0
 
@@ -36,15 +36,12 @@ npx pod-install
 
 ### Versioning
 
-Introducing Material You <i>(MD3)</i> into `react-native-paper` doesn't mean dropping previous Material Design <i>(MD2)</i>! On the contrary, both of them will be supported, however, not simultaneously. To specify which design system components should follow in the app, there is a newly created property in [the theme](https://callstack.github.io/react-native-paper/docs/guides/theming#theme-properties) named `version` that accepts one of two values:
-
-* <b>3</b> – <b>(default)</b> new Material You <i>(MD3)</i>,
-* <b>2</b> - previous Material Design <i>(MD2)</i>.
+In v5, Material You <i>(MD3)</i> became the default theme. Earlier releases also exposed `version: 2` for Material Design 2; that option and MD2 theme exports have since been removed—use MD3 themes (`MD3LightTheme` / `MD3DarkTheme`) only.
 
 ```js
 theme: {
   /* ... */
-  version: 3 | 2
+  version: 3
 }
 ```
 
@@ -166,35 +163,13 @@ Take a look at the suggested replacement diff:
 
 ### Configure fonts
 
-The existing utility called `configureFonts` was adjusted to help users configure their theme fonts in both version, that's why that function, as of today, is going to accept the object with the follwing properties as an argument:
+The `configureFonts` helper configures the Material Design 3 typescale. Pass overrides via the `config` object (see [Fonts](https://callstack.github.io/react-native-paper/docs/guides/fonts.html)).
 
 ```ts
-configureFonts(params)
+configureFonts({ config: { bodyLarge: { fontFamily: 'System' } } })
 ```
 
-<b>Parameters:</b>
-
-| NAME        | TYPE        | REQUIRED    |
-| ----------- | ----------- | ----------- |
-| params      | object      | No          |
-
-Valid `params` keys are:
-
-  * `config` ([MD2FontsConfig](https://github.com/callstack/react-native-paper/blob/main/src/styles/fonts.tsx#L63) | [MD3FontsConfig](https://github.com/callstack/react-native-paper/blob/main/src/styles/fonts.tsx#L67)) - fonts config object appropriate to the MD version
-  * `isV3` (boolean) - whether adjusting theme fonts for v3. Default it <b>true</b>.
-
-To use your current font config from <b>v2</b> and migrate to <b>v3</b> there are two requirements:
-* the font config previously passed directly into function has to be passed into the params object property called `config`
-* the params object property `isV3` has to be set to `false`
-
-```diff
-- configureFonts(fontConfig)
-+ configureFonts({config: fontConfig, isV3: false})
-```
-
-:::tip
-If you want to check how to use `configureFonts` on MD3, check the [Fonts](https://callstack.github.io/react-native-paper/docs/guides/fonts.html) guide.
-:::
+Older direct calls like `configureFonts(fontConfig)` and MD2 platform-split configs should be replaced with MD3 variant keys (`displayLarge`, `bodyMedium`, and so on).
 
 ## Components
 

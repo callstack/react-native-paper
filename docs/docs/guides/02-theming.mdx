@@ -65,9 +65,7 @@ You can change the theme prop dynamically and all the components will automatica
 A theme usually contains the following properties:
 
 - `dark` (`boolean`): whether this is a dark theme or light theme.
-- `version`: specify which design system components should follow in the app
-  - 3 - new Material You (MD3)
-  - 2 - previous Material Design (MD2)
+- `version`: Material You (MD3); kept for compatibility and normalized to `3` by `PaperProvider`
 - `mode` (`'adaptive' | 'exact'`): color mode for dark theme (See [Dark Theme](#dark-theme)).
 - `roundness` (`number`): roundness of common elements, such as buttons.
 - `colors` (`object`): various colors used throughout different elements.
@@ -471,111 +469,13 @@ export default function HomeScreen() {
 }
 ```
 
-## Material Design 2
+## Material Design 3
 
-Using Material Design 2 is <b>fully supported in React Native Paper v5.x</b>.
+React Native Paper ships with Material Design 3 (Material You) only. Customize the default experience by extending `MD3LightTheme` or `MD3DarkTheme` (see [Extending the theme](#extending-the-theme) and [Advanced theme overrides](#advanced-theme-overrides)).
 
-### Simple setup
+### Migrating from Material Design 2
 
-In order to use the Material Design 2 theme you can just pass `{ version: 2 }` to the PaperProvider theme prop:
-
-```js
-import * as React from 'react';
-import { PaperProvider } from 'react-native-paper';
-import App from './src/App';
-
-export default function Main() {
-  return (
-    <PaperProvider theme={{ version: 2 }}>
-      <App />
-    </PaperProvider>
-  );
-}
-```
-
-Specifying `{ version: 2 }` tells React Native Paper to use the built in Material Design 2 theme, so you don't have to fully extend it on your own.
-
-### Advanced setup
-
-As with any theme, you can also specify your custom properties within the Material Design 2 theme:
-
-```js
-import * as React from 'react';
-import { MD2LightTheme, PaperProvider } from 'react-native-paper';
-import App from './src/App';
-
-export default function Main() {
-  const theme = {
-    ...MD2LightTheme,
-
-    // Specify a custom property
-    custom: 'property',
-
-    // Specify a custom nested property
-    colors: {
-      ...MD2LightTheme.colors,
-      primary: '#fefefe',
-    },
-  };
-
-  return (
-    <PaperProvider theme={theme}>
-      <App />
-    </PaperProvider>
-  );
-}
-```
-
-### Typescript
-
-Due to the amount of changes in the theme's schema shape it falls into the [Advanced theme overrides](#advanced-theme-overrides) category. The steps are identical as with any advanced theme, just make sure to extend the built-in `MD2LightTheme` or `MD2DarkTheme` instead of `MD3LightTheme` or `MD3DarkTheme`.
-
-The final example for Material Design 2 would look like this:
-
-```ts
-import * as React from 'react';
-import { MD2LightTheme, PaperProvider, useTheme } from 'react-native-paper';
-import App from './src/App';
-
-const theme = {
-  // Extend Material Design 2 theme
-
-  ...MD2LightTheme, // or MD2DarkTheme
-
-  // Specify a custom property
-  myOwnProperty: true,
-
-  // Specify a custom nested property
-  colors: {
-    ...MD2LightTheme.colors,
-    myOwnColor: '#BADA55',
-  },
-};
-
-export type AppTheme = typeof theme;
-
-export const useAppTheme = () => useTheme<AppTheme>();
-
-export default function Main() {
-  return (
-    <PaperProvider theme={theme}>
-      <App />
-    </PaperProvider>
-  );
-}
-
-// App.tsx
-
-export default function App() {
-  const { theme } = useAppTheme();
-
-  return <View style={{ backgroundColor: theme.colors.primary }} />;
-}
-```
-
-### Migrating to Material You
-
-If you are migrating from Material Design 2 (4.x and lower) to Material You (5.x), please refer to our [Migration Guide](https://callstack.github.io/react-native-paper/docs/guides/migration-guide-to-5.0)
+If you are upgrading from Material Design 2 (4.x and lower), follow the [Migration Guide](https://callstack.github.io/react-native-paper/docs/guides/migration-guide-to-5.0).
 
 ## Applying a theme to a paper component
 
