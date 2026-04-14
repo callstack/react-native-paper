@@ -110,7 +110,7 @@ export type Props = Omit<
  *         styles.bottom,
  *         {
  *           height: BOTTOM_APPBAR_HEIGHT + bottom,
- *           backgroundColor: theme.colors.elevation.level2,
+ *           backgroundColor: theme.colors.surfaceContainer,
  *         },
  *       ]}
  *       safeAreaInsets={{ bottom }}

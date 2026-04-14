@@ -7,7 +7,6 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
 import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../../core/theming';
@@ -286,7 +285,7 @@ const DataTablePagination = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const labelColor = color(theme.colors.onSurface).alpha(0.6).rgb().string();
+  const labelColor = theme.colors.onSurfaceVariant;
 
   return (
     <View

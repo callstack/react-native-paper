@@ -306,15 +306,19 @@ const FABGroup = ({
     }
   };
 
-  const { labelColor, backdropColor, stackedFABBackgroundColor } =
-    getFABGroupColors({ theme, customBackdropColor });
+  const {
+    labelColor,
+    backdropColor,
+    backdropOpacity: backdropMaxOpacity,
+    stackedFABBackgroundColor,
+  } = getFABGroupColors({ theme, customBackdropColor });
 
   const backdropOpacity = open
     ? backdrop.interpolate({
         inputRange: [0, 0.5, 1],
-        outputRange: [0, 1, 1],
+        outputRange: [0, backdropMaxOpacity, backdropMaxOpacity],
       })
-    : backdrop;
+    : Animated.multiply(backdrop, backdropMaxOpacity);
 
   const opacities = animations.current;
 

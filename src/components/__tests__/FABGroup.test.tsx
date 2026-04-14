@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Animated } from 'react-native';
 
 import { act, fireEvent, render } from '@testing-library/react-native';
-import color from 'color';
 
 import { getTheme } from '../../core/theming';
 import FAB from '../FAB';
@@ -26,10 +25,30 @@ describe('getFABGroupColors - backdrop color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      backdropColor: color(getTheme().colors.background)
-        .alpha(0.95)
-        .rgb()
-        .string(),
+      backdropColor: getTheme().colors.background,
+    });
+  });
+});
+
+describe('getFABGroupColors - backdrop opacity', () => {
+  it('should return scrimAlpha when no custom backdrop color', () => {
+    expect(
+      getFABGroupColors({
+        theme: getTheme(),
+      })
+    ).toMatchObject({
+      backdropOpacity: 0.95,
+    });
+  });
+
+  it('should return 1 when custom backdrop color is provided', () => {
+    expect(
+      getFABGroupColors({
+        theme: getTheme(),
+        customBackdropColor: 'transparent',
+      })
+    ).toMatchObject({
+      backdropOpacity: 1,
     });
   });
 });
@@ -53,7 +72,7 @@ describe('getFABGroupColors - stacked FAB background color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      stackedFABBackgroundColor: getTheme().colors.elevation.level3,
+      stackedFABBackgroundColor: getTheme().colors.surfaceContainerHigh,
     });
   });
 });

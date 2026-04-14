@@ -33,7 +33,7 @@ export const getAppbarBackgroundColor = (
   }
 
   if (elevated) {
-    return colors.elevation.level2;
+    return colors.surfaceContainer;
   }
 
   return colors.surface;

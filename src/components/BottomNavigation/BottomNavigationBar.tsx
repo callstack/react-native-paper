@@ -450,7 +450,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
     backgroundColor?: ColorValue;
   };
 
-  const backgroundColor = customBackground || colors.elevation.level2;
+  const backgroundColor = customBackground || colors.surfaceContainer;
 
   const activeTintColor = getActiveTintColor({
     activeColor,

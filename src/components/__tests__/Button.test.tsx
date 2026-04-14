@@ -5,8 +5,11 @@ import { act, fireEvent, render } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
 import { pink500, white } from '../../styles/themes/v2/colors';
+import { tokens } from '../../styles/themes/v3/tokens';
 import Button from '../Button/Button';
 import { getButtonColors } from '../Button/utils';
+
+const { stateOpacity } = tokens.md.ref;
 
 const styles = StyleSheet.create({
   flexing: {
@@ -349,7 +352,8 @@ describe('getButtonColors - background color', () => {
           disabled: true,
         })
       ).toMatchObject({
-        backgroundColor: getTheme().colors.surfaceDisabled,
+        backgroundColor: getTheme().colors.onSurface,
+        backgroundOpacity: stateOpacity.pressed,
       });
     })
   );
@@ -364,7 +368,8 @@ describe('getButtonColors - background color', () => {
           disabled: true,
         })
       ).toMatchObject({
-        backgroundColor: getTheme(true).colors.surfaceDisabled,
+        backgroundColor: getTheme(true).colors.onSurface,
+        backgroundOpacity: stateOpacity.pressed,
       });
     })
   );
@@ -376,7 +381,7 @@ describe('getButtonColors - background color', () => {
         mode: 'elevated',
       })
     ).toMatchObject({
-      backgroundColor: getTheme().colors.elevation.level1,
+      backgroundColor: getTheme().colors.surfaceContainerLow,
     });
   });
 
@@ -387,7 +392,7 @@ describe('getButtonColors - background color', () => {
         mode: 'elevated',
       })
     ).toMatchObject({
-      backgroundColor: getTheme(true).colors.elevation.level1,
+      backgroundColor: getTheme(true).colors.surfaceContainerLow,
     });
   });
 
@@ -485,7 +490,8 @@ describe('getButtonColors - text color', () => {
         mode: 'text',
       })
     ).toMatchObject({
-      textColor: getTheme().colors.onSurfaceDisabled,
+      textColor: getTheme().colors.onSurface,
+      textOpacity: stateOpacity.disabled,
     });
   });
 
@@ -498,7 +504,8 @@ describe('getButtonColors - text color', () => {
         mode: 'text',
       })
     ).toMatchObject({
-      textColor: getTheme(true).colors.onSurfaceDisabled,
+      textColor: getTheme(true).colors.onSurface,
+      textOpacity: stateOpacity.disabled,
     });
   });
 
@@ -596,7 +603,7 @@ describe('getButtonColors - border color', () => {
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.surfaceDisabled,
+      borderColor: getTheme().colors.outlineVariant,
     });
   });
 
@@ -608,7 +615,7 @@ describe('getButtonColors - border color', () => {
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme(true).colors.surfaceDisabled,
+      borderColor: getTheme(true).colors.outlineVariant,
     });
   });
 
@@ -619,7 +626,7 @@ describe('getButtonColors - border color', () => {
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.outline,
+      borderColor: getTheme().colors.outlineVariant,
     });
   });
 
@@ -630,7 +637,7 @@ describe('getButtonColors - border color', () => {
         mode: 'outlined',
       })
     ).toMatchObject({
-      borderColor: getTheme(true).colors.outline,
+      borderColor: getTheme(true).colors.outlineVariant,
     });
   });
 

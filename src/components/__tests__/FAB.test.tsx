@@ -91,12 +91,6 @@ it('renders loading FAB with custom size prop', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('renders disabled FAB', () => {
-  const tree = render(<FAB onPress={() => {}} icon="plus" disabled />).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
 it('renders custom color for the icon and label of the FAB', () => {
   const tree = render(
     <FAB onPress={() => {}} icon="plus" color="#AA0114" />
@@ -196,19 +190,7 @@ describe('getFABColors - background color', () => {
     });
   });
 
-  it('should return correct disabled color, for theme version 3', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(),
-        disabled: true,
-        variant: 'primary',
-      })
-    ).toMatchObject({
-      backgroundColor: getTheme().colors.surfaceDisabled,
-    });
-  });
-
-  it('should return correct theme color, for theme version 3, primary variant', () => {
+  it('should return correct theme color, primary variant', () => {
     expect(
       getFABColors({
         theme: getTheme(),
@@ -248,7 +230,7 @@ describe('getFABColors - background color', () => {
         variant: 'surface',
       })
     ).toMatchObject({
-      backgroundColor: getTheme().colors.elevation.level3,
+      backgroundColor: getTheme().colors.surfaceContainerHigh,
     });
   });
 });
@@ -266,19 +248,7 @@ describe('getFABColors - foreground color', () => {
     });
   });
 
-  it('should return correct disabled color, for theme version 3', () => {
-    expect(
-      getFABColors({
-        theme: getTheme(),
-        variant: 'primary',
-        disabled: true,
-      })
-    ).toMatchObject({
-      foregroundColor: getTheme().colors.onSurfaceDisabled,
-    });
-  });
-
-  it('should return correct theme color, for theme version 3, primary variant', () => {
+  it('should return correct theme color, primary variant', () => {
     expect(
       getFABColors({
         theme: getTheme(),

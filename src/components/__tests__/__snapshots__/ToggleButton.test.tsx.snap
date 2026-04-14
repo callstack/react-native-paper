@@ -5,7 +5,7 @@ exports[`renders disabled toggle button 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(29, 25, 43, 0.12)",
+      "backgroundColor": "rgba(230, 224, 233, 1)",
       "borderRadius": 4,
       "height": 42,
       "margin": 0,
@@ -25,7 +25,7 @@ exports[`renders disabled toggle button 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(29, 25, 43, 0.12)",
+        "backgroundColor": "rgba(230, 224, 233, 1)",
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 4,
         "borderWidth": 0,
@@ -105,35 +105,43 @@ exports[`renders disabled toggle button 1`] = `
       }
       testID="icon-button"
     >
-      <Text
-        accessibilityElementsHidden={true}
-        importantForAccessibility="no-hide-descendants"
-        pointerEvents="none"
-        selectable={false}
+      <View
         style={
-          [
-            {
-              "color": "rgba(29, 27, 32, 0.38)",
-              "fontSize": 24,
-            },
-            [
-              {
-                "lineHeight": 24,
-                "transform": [
-                  {
-                    "scaleX": 1,
-                  },
-                ],
-              },
-              {
-                "backgroundColor": "transparent",
-              },
-            ],
-          ]
+          {
+            "opacity": 0.38,
+          }
         }
       >
-        heart
-      </Text>
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          heart
+        </Text>
+      </View>
     </View>
   </View>
 </View>
@@ -144,7 +152,7 @@ exports[`renders toggle button 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(29, 25, 43, 0.12)",
+      "backgroundColor": "rgba(230, 224, 233, 1)",
       "borderRadius": 4,
       "height": 42,
       "margin": 0,
@@ -164,7 +172,7 @@ exports[`renders toggle button 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(29, 25, 43, 0.12)",
+        "backgroundColor": "rgba(230, 224, 233, 1)",
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 4,
         "borderWidth": 0,
@@ -239,35 +247,43 @@ exports[`renders toggle button 1`] = `
       }
       testID="icon-button"
     >
-      <Text
-        accessibilityElementsHidden={true}
-        importantForAccessibility="no-hide-descendants"
-        pointerEvents="none"
-        selectable={false}
+      <View
         style={
-          [
-            {
-              "color": "rgba(73, 69, 79, 1)",
-              "fontSize": 24,
-            },
-            [
-              {
-                "lineHeight": 24,
-                "transform": [
-                  {
-                    "scaleX": 1,
-                  },
-                ],
-              },
-              {
-                "backgroundColor": "transparent",
-              },
-            ],
-          ]
+          {
+            "opacity": 1,
+          }
         }
       >
-        heart
-      </Text>
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(73, 69, 79, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          heart
+        </Text>
+      </View>
     </View>
   </View>
 </View>
@@ -278,7 +294,7 @@ exports[`renders unchecked toggle button 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "transparent",
+      "backgroundColor": "rgba(243, 237, 247, 1)",
       "borderRadius": 4,
       "height": 42,
       "margin": 0,
@@ -298,7 +314,7 @@ exports[`renders unchecked toggle button 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "transparent",
+        "backgroundColor": "rgba(243, 237, 247, 1)",
         "borderColor": "rgba(121, 116, 126, 1)",
         "borderRadius": 4,
         "borderWidth": 0,
@@ -378,35 +394,43 @@ exports[`renders unchecked toggle button 1`] = `
       }
       testID="icon-button"
     >
-      <Text
-        accessibilityElementsHidden={true}
-        importantForAccessibility="no-hide-descendants"
-        pointerEvents="none"
-        selectable={false}
+      <View
         style={
-          [
-            {
-              "color": "rgba(29, 27, 32, 0.38)",
-              "fontSize": 24,
-            },
-            [
-              {
-                "lineHeight": 24,
-                "transform": [
-                  {
-                    "scaleX": 1,
-                  },
-                ],
-              },
-              {
-                "backgroundColor": "transparent",
-              },
-            ],
-          ]
+          {
+            "opacity": 0.38,
+          }
         }
       >
-        heart
-      </Text>
+        <Text
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          selectable={false}
+          style={
+            [
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "fontSize": 24,
+              },
+              [
+                {
+                  "lineHeight": 24,
+                  "transform": [
+                    {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                {
+                  "backgroundColor": "transparent",
+                },
+              ],
+            ]
+          }
+        >
+          heart
+        </Text>
+      </View>
     </View>
   </View>
 </View>

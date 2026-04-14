@@ -79,10 +79,6 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
    */
   color?: string;
   /**
-   * Whether `FAB` is disabled. A disabled button is greyed out and `onPress` is not called on touch.
-   */
-  disabled?: boolean;
-  /**
    * Whether `FAB` is currently visible.
    */
   visible?: boolean;
@@ -184,7 +180,6 @@ const FAB = forwardRef<View, Props>(
       accessibilityState,
       animated = true,
       color: customColor,
-      disabled,
       onPress,
       onLongPress,
       delayLongPress,
@@ -239,7 +234,6 @@ const FAB = forwardRef<View, Props>(
     const { backgroundColor, foregroundColor } = getFABColors({
       theme,
       variant,
-      disabled,
       customColor,
       customBackgroundColor,
     });
@@ -256,9 +250,7 @@ const FAB = forwardRef<View, Props>(
       ...font,
     };
 
-    const md3Elevation = isFlatMode || disabled ? 0 : 3;
-
-    const newAccessibilityState = { ...accessibilityState, disabled };
+    const md3Elevation = isFlatMode ? 0 : 3;
 
     return (
       <Surface
@@ -288,10 +280,9 @@ const FAB = forwardRef<View, Props>(
           onPress={onPress}
           onLongPress={onLongPress}
           delayLongPress={delayLongPress}
-          disabled={disabled}
           accessibilityLabel={accessibilityLabel}
           accessibilityRole="button"
-          accessibilityState={newAccessibilityState}
+          accessibilityState={accessibilityState}
           testID={testID}
           style={{ borderRadius }}
           {...rest}

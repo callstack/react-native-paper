@@ -186,7 +186,7 @@ const AppbarExample = ({ navigation }: Props) => {
             height: height + bottom,
           },
           {
-            backgroundColor: theme.colors.elevation.level2,
+            backgroundColor: theme.colors.surfaceContainerHigh,
           },
         ]}
         safeAreaInsets={{ bottom, left, right }}

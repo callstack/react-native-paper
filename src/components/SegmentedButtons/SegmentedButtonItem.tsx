@@ -146,7 +146,7 @@ const SegmentedButtonItem = ({
   }, [checked, checkScale, showSelectedCheck]);
 
   const { roundness } = theme;
-  const { borderColor, textColor, borderWidth, backgroundColor } =
+  const { borderColor, textColor, textOpacity, borderWidth, backgroundColor } =
     getSegmentedButtonColors({
       checked,
       theme,
@@ -210,7 +210,9 @@ const SegmentedButtonItem = ({
         theme={theme}
         hitSlop={hitSlop}
       >
-        <View style={[styles.content, { paddingVertical }]}>
+        <View
+          style={[styles.content, { paddingVertical, opacity: textOpacity }]}
+        >
           {showCheckedIcon ? (
             <Animated.View
               testID={`${testID}-check-icon`}

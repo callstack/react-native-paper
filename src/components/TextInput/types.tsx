@@ -115,6 +115,7 @@ export type LabelProps = {
   paddingRight?: number;
   labelTranslationXOffset?: number;
   placeholderColor: string | null;
+  disabledOpacity?: number;
   backgroundColor?: ColorValue;
   label?: TextInputLabelProp | null;
   hasActiveOutline?: boolean | null;
