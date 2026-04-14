@@ -13,6 +13,7 @@ import Checkbox from './Checkbox';
 import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
 import { useInternalTheme } from '../../core/theming';
+import { tokens } from '../../styles/themes/v3/tokens';
 import type { ThemeProp, MD3TypescaleKey } from '../../types';
 import TouchableRipple, {
   Props as TouchableRippleProps,
@@ -161,11 +162,13 @@ const CheckboxItem = ({
   }
 
   const textColor = theme.colors.onSurface;
-  const disabledTextColor = theme.colors.onSurfaceDisabled;
   const textAlign = isLeading ? 'right' : 'left';
 
   const computedStyle = {
-    color: disabled ? disabledTextColor : textColor,
+    color: textColor,
+    opacity: disabled
+      ? tokens.md.ref.stateOpacity.disabled
+      : tokens.md.ref.stateOpacity.enabled,
     textAlign,
   } as TextStyle;
 

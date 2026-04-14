@@ -134,7 +134,13 @@ const IconButton = forwardRef<View, Props>(
 
     const IconComponent = animated ? CrossFadeIcon : Icon;
 
-    const { iconColor, backgroundColor, borderColor } = getIconButtonColor({
+    const {
+      iconColor,
+      iconOpacity,
+      backgroundColor,
+      borderColor,
+      backgroundOpacity,
+    } = getIconButtonColor({
       theme,
       disabled,
       selected,
@@ -162,7 +168,8 @@ const IconButton = forwardRef<View, Props>(
         testID={`${testID}-container`}
         style={[
           {
-            backgroundColor,
+            backgroundColor:
+              backgroundOpacity < 1 ? undefined : backgroundColor,
             width: buttonSize,
             height: buttonSize,
           },
@@ -173,6 +180,15 @@ const IconButton = forwardRef<View, Props>(
         container
         elevation={0}
       >
+        {backgroundOpacity < 1 && (
+          <View
+            pointerEvents="none"
+            style={[
+              StyleSheet.absoluteFill,
+              { backgroundColor, opacity: backgroundOpacity },
+            ]}
+          />
+        )}
         <TouchableRipple
           borderless
           centered
@@ -193,11 +209,13 @@ const IconButton = forwardRef<View, Props>(
           testID={testID}
           {...rest}
         >
-          {loading ? (
-            <ActivityIndicator size={size} color={iconColor} />
-          ) : (
-            <IconComponent color={iconColor} source={icon} size={size} />
-          )}
+          <View style={{ opacity: iconOpacity }}>
+            {loading ? (
+              <ActivityIndicator size={size} color={iconColor} />
+            ) : (
+              <IconComponent color={iconColor} source={icon} size={size} />
+            )}
+          </View>
         </TouchableRipple>
       </Surface>
     );

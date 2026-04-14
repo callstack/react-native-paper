@@ -3,11 +3,14 @@ import * as React from 'react';
 import { render } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
+import { tokens } from '../../styles/themes/v3/tokens';
 import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
 import {
   getDisabledSegmentedButtonStyle,
   getSegmentedButtonColors,
 } from '../SegmentedButtons/utils';
+
+const { stateOpacity } = tokens.md.ref;
 
 it('renders segmented button', () => {
   const tree = render(
@@ -57,8 +60,8 @@ describe('getSegmentedButtonColors', () => {
     theme         | disabled | checked  | checkedColor | uncheckedColor | expected
     ${getTheme()} | ${false} | ${true}  | ${undefined} | ${undefined}   | ${getTheme().colors.onSecondaryContainer}
     ${getTheme()} | ${false} | ${false} | ${undefined} | ${undefined}   | ${getTheme().colors.onSurface}
-    ${getTheme()} | ${true}  | ${true}  | ${undefined} | ${undefined}   | ${getTheme().colors.onSurfaceDisabled}
-    ${getTheme()} | ${true}  | ${false} | ${undefined} | ${undefined}   | ${getTheme().colors.onSurfaceDisabled}
+    ${getTheme()} | ${true}  | ${true}  | ${undefined} | ${undefined}   | ${getTheme().colors.onSurface}
+    ${getTheme()} | ${true}  | ${false} | ${undefined} | ${undefined}   | ${getTheme().colors.onSurface}
     ${getTheme()} | ${false} | ${true}  | ${'a125f5'}  | ${undefined}   | ${'a125f5'}
     ${getTheme()} | ${false} | ${false} | ${undefined} | ${'000'}       | ${'000'}
     ${getTheme()} | ${false} | ${false} | ${'a125f5'}  | ${'000'}       | ${'000'}
@@ -121,7 +124,7 @@ describe('getSegmentedButtonColors', () => {
         checked: false,
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.surfaceDisabled,
+      borderColor: getTheme().colors.outlineVariant,
     });
   });
 
@@ -145,7 +148,8 @@ describe('getSegmentedButtonColors', () => {
         checked: false,
       })
     ).toMatchObject({
-      textColor: getTheme().colors.onSurfaceDisabled,
+      textColor: getTheme().colors.onSurface,
+      textOpacity: stateOpacity.disabled,
     });
   });
 });

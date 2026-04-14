@@ -14,6 +14,7 @@ type UnderlineProps = {
   activeColor: string;
   underlineColorCustom?: string;
   hasActiveOutline?: boolean;
+  disabledOpacity?: number;
   style?: StyleProp<ViewStyle>;
   theme?: ThemeProp;
 };
@@ -25,6 +26,7 @@ export const Underline = ({
   activeColor,
   underlineColorCustom,
   hasActiveOutline,
+  disabledOpacity,
   style,
   theme: _themeOverrides,
 }: UnderlineProps) => {
@@ -44,6 +46,7 @@ export const Underline = ({
         styles.md3Underline,
         {
           backgroundColor,
+          opacity: disabledOpacity,
           // Underlines is thinner when input is not focused
           transform: [
             {

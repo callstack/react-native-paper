@@ -196,7 +196,6 @@ const Chip = ({
   theme: themeOverrides,
   testID = 'chip',
   selectedColor,
-  showSelectedOverlay = false,
   showSelectedCheck = true,
   ellipsizeMode,
   compact,
@@ -257,13 +256,13 @@ const Chip = ({
     borderColor,
     textColor,
     iconColor,
+    contentOpacity,
     selectedBackgroundColor,
     backgroundColor,
   } = getChipColors({
     isOutlined,
     theme,
     selectedColor,
-    showSelectedOverlay,
     customBackgroundColor,
     disabled,
   });
@@ -324,7 +323,14 @@ const Chip = ({
         theme={theme}
         hitSlop={hitSlop}
       >
-        <View style={[styles.content, styles.md3Content, contentSpacings]}>
+        <View
+          style={[
+            styles.content,
+            styles.md3Content,
+            { opacity: contentOpacity },
+            contentSpacings,
+          ]}
+        >
           {avatar && !icon ? (
             <View
               style={[

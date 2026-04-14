@@ -7,8 +7,6 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
-
 import type { InternalTheme } from '../../types';
 
 type GetCombinedStylesProps = {
@@ -29,7 +27,6 @@ type Variant = 'primary' | 'secondary' | 'tertiary' | 'surface';
 type BaseProps = {
   isVariant: (variant: Variant) => boolean;
   theme: InternalTheme;
-  disabled?: boolean;
 };
 
 export const getCombinedStyles = ({
@@ -165,15 +162,10 @@ export const getCombinedStyles = ({
 const getBackgroundColor = ({
   theme,
   isVariant,
-  disabled,
   customBackgroundColor,
 }: BaseProps & { customBackgroundColor?: ColorValue }) => {
-  if (customBackgroundColor && !disabled) {
+  if (customBackgroundColor) {
     return customBackgroundColor;
-  }
-
-  if (disabled) {
-    return theme.colors.surfaceDisabled;
   }
 
   if (isVariant('primary')) {
@@ -189,7 +181,7 @@ const getBackgroundColor = ({
   }
 
   if (isVariant('surface')) {
-    return theme.colors.elevation.level3;
+    return theme.colors.surfaceContainerHigh;
   }
 
   return theme.colors.primaryContainer;
@@ -198,15 +190,10 @@ const getBackgroundColor = ({
 const getForegroundColor = ({
   theme,
   isVariant,
-  disabled,
   customColor,
 }: BaseProps & { customColor?: string }) => {
-  if (typeof customColor !== 'undefined' && !disabled) {
+  if (typeof customColor !== 'undefined') {
     return customColor;
-  }
-
-  if (disabled) {
-    return theme.colors.onSurfaceDisabled;
   }
 
   if (isVariant('primary')) {
@@ -231,13 +218,11 @@ const getForegroundColor = ({
 export const getFABColors = ({
   theme,
   variant,
-  disabled,
   customColor,
   customBackgroundColor,
 }: {
   theme: InternalTheme;
   variant: string;
-  disabled?: boolean;
   customColor?: string;
   customBackgroundColor?: ColorValue;
 }) => {
@@ -245,7 +230,7 @@ export const getFABColors = ({
     return variant === variantToCompare;
   };
 
-  const baseFABColorProps = { theme, isVariant, disabled };
+  const baseFABColorProps = { theme, isVariant };
 
   const backgroundColor = getBackgroundColor({
     ...baseFABColorProps,
@@ -267,21 +252,8 @@ const getLabelColor = ({ theme }: { theme: InternalTheme }) => {
   return theme.colors.onSurface;
 };
 
-const getBackdropColor = ({
-  theme,
-  customBackdropColor,
-}: {
-  theme: InternalTheme;
-  customBackdropColor?: string;
-}) => {
-  if (customBackdropColor) {
-    return customBackdropColor;
-  }
-  return color(theme.colors.background).alpha(0.95).rgb().string();
-};
-
 const getStackedFABBackgroundColor = ({ theme }: { theme: InternalTheme }) => {
-  return theme.colors.elevation.level3;
+  return theme.colors.surfaceContainerHigh;
 };
 
 export const getFABGroupColors = ({
@@ -293,7 +265,8 @@ export const getFABGroupColors = ({
 }) => {
   return {
     labelColor: getLabelColor({ theme }),
-    backdropColor: getBackdropColor({ theme, customBackdropColor }),
+    backdropColor: customBackdropColor ?? theme.colors.background,
+    backdropOpacity: customBackdropColor ? 1 : 0.95,
     stackedFABBackgroundColor: getStackedFABBackgroundColor({ theme }),
   };
 };

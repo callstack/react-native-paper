@@ -232,10 +232,9 @@ const ListAccordion = ({
     ? groupContext.expandedId === id
     : expandedInternal;
 
-  const { descriptionColor, titleTextColor} = getAccordionColors({
+  const { descriptionColor, titleTextColor } = getAccordionColors({
     theme,
     isExpanded,
-
   });
 
   const handlePress =

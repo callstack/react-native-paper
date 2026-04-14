@@ -1,50 +1,10 @@
-import color from 'color';
-
 import { getTheme } from '../../../core/theming';
+import { tokens } from '../../../styles/themes/v3/tokens';
 import {
   getAndroidSelectionControlColor,
   getSelectionControlIOSColor,
 } from '../../Checkbox/utils';
-
-describe('getAndroidSelectionControlColor - ripple color', () => {
-  it('should return correct disabled color, for theme version 3', () => {
-    expect(
-      getAndroidSelectionControlColor({
-        theme: getTheme(),
-        disabled: true,
-        checked: false,
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme().colors.onSurface)
-        .alpha(0.16)
-        .rgb()
-        .string(),
-    });
-  });
-
-  it('should return custom color', () => {
-    expect(
-      getAndroidSelectionControlColor({
-        theme: getTheme(),
-        customColor: 'purple',
-        checked: false,
-      })
-    ).toMatchObject({
-      rippleColor: color('purple').fade(0.32).rgb().string(),
-    });
-  });
-
-  it('should return theme color, for theme version 3', () => {
-    expect(
-      getAndroidSelectionControlColor({
-        theme: getTheme(),
-        checked: false,
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme().colors.primary).fade(0.32).rgb().string(),
-    });
-  });
-});
+const { stateOpacity } = tokens.md.ref;
 
 describe('getAndroidSelectionControlColor - checkbox color', () => {
   it('should return correct disabled color, for theme version 3', () => {
@@ -55,7 +15,8 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
         checked: false,
       })
     ).toMatchObject({
-      selectionControlColor: getTheme().colors.onSurfaceDisabled,
+      selectionControlColor: getTheme().colors.onSurface,
+      selectionControlOpacity: stateOpacity.disabled,
     });
   });
 
@@ -104,41 +65,26 @@ describe('getAndroidSelectionControlColor - checkbox color', () => {
       selectionControlColor: getTheme().colors.onSurfaceVariant,
     });
   });
-});
 
-describe('getSelectionControlIOSColor - ripple color', () => {
-  it('should return correct disabled color, for theme version 3', () => {
+  it('should return theme color, unchecked, dark mode', () => {
     expect(
-      getSelectionControlIOSColor({
-        theme: getTheme(),
-        disabled: true,
+      getAndroidSelectionControlColor({
+        theme: getTheme(true),
+        checked: false,
       })
     ).toMatchObject({
-      rippleColor: color(getTheme().colors.onSurface)
-        .alpha(0.16)
-        .rgb()
-        .string(),
+      selectionControlColor: getTheme(true).colors.onSurfaceVariant,
     });
   });
 
-  it('should return custom color', () => {
+  it('should return theme color, unchecked, light mode', () => {
     expect(
-      getSelectionControlIOSColor({
-        theme: getTheme(),
-        customColor: 'purple',
+      getAndroidSelectionControlColor({
+        theme: getTheme(false),
+        checked: false,
       })
     ).toMatchObject({
-      rippleColor: color('purple').fade(0.32).rgb().string(),
-    });
-  });
-
-  it('should return theme color, for theme version 3', () => {
-    expect(
-      getSelectionControlIOSColor({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme().colors.primary).fade(0.32).rgb().string(),
+      selectionControlColor: getTheme(false).colors.onSurfaceVariant,
     });
   });
 });
@@ -151,7 +97,8 @@ describe('getSelectionControlIOSColor - checked color', () => {
         disabled: true,
       })
     ).toMatchObject({
-      checkedColor: getTheme().colors.onSurfaceDisabled,
+      checkedColor: getTheme().colors.primary,
+      checkedColorOpacity: stateOpacity.disabled,
     });
   });
 

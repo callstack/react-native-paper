@@ -29,7 +29,7 @@ const getRippleColor = ({
     return rippleColor;
   }
 
-  return color(theme.colors.onSurface).alpha(0.1).rgb().string();
+  return theme.colors.stateLayerPressed;
 };
 
 export const getTouchableRippleColors = ({

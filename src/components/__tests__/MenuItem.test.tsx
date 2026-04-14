@@ -3,8 +3,11 @@ import * as React from 'react';
 import { render } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
+import { tokens } from '../../styles/themes/v3/tokens';
 import Menu from '../Menu/Menu';
 import { getMenuItemColor } from '../Menu/utils';
+
+const { stateOpacity } = tokens.md.ref;
 
 describe('Menu Item', () => {
   it('renders menu item', () => {
@@ -70,7 +73,10 @@ describe('getMenuItemColor - title color', () => {
         theme: getTheme(),
         disabled: true,
       })
-    ).toMatchObject({ titleColor: getTheme().colors.onSurfaceDisabled });
+    ).toMatchObject({
+      titleColor: getTheme().colors.onSurface,
+      contentOpacity: stateOpacity.disabled,
+    });
   });
 
   it('should return correct theme color, for theme version 3', () => {
@@ -91,7 +97,10 @@ describe('getMenuItemColor - icon color', () => {
         theme: getTheme(),
         disabled: true,
       })
-    ).toMatchObject({ iconColor: getTheme().colors.onSurfaceDisabled });
+    ).toMatchObject({
+      iconColor: getTheme().colors.onSurfaceVariant,
+      contentOpacity: stateOpacity.disabled,
+    });
   });
 
   it('should return correct theme color, for theme version 3', () => {

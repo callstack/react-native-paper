@@ -274,15 +274,21 @@ const Button = (
   const borderRadius = 5 * roundness;
   const iconSize = 18;
 
-  const { backgroundColor, borderColor, textColor, borderWidth } =
-    getButtonColors({
-      customButtonColor,
-      customTextColor,
-      theme,
-      mode,
-      disabled,
-      dark,
-    });
+  const {
+    backgroundColor,
+    borderColor,
+    textColor,
+    textOpacity,
+    borderWidth,
+    backgroundOpacity,
+  } = getButtonColors({
+    customButtonColor,
+    customTextColor,
+    theme,
+    mode,
+    disabled,
+    dark,
+  });
 
   const touchableStyle = {
     ...borderRadiusStyles,
@@ -290,7 +296,7 @@ const Button = (
   };
 
   const buttonStyle = {
-    backgroundColor,
+    backgroundColor: backgroundOpacity < 1 ? 'transparent' : backgroundColor,
     borderColor,
     borderWidth,
     ...touchableStyle,
@@ -337,6 +343,19 @@ const Button = (
       elevation={elevation}
       container
     >
+      {backgroundOpacity < 1 && (
+        <View
+          pointerEvents="none"
+          style={[
+            StyleSheet.absoluteFill,
+            {
+              backgroundColor,
+              opacity: backgroundOpacity,
+              borderRadius: touchableStyle.borderRadius,
+            },
+          ]}
+        />
+      )}
       <TouchableRipple
         borderless
         background={background}
@@ -357,7 +376,7 @@ const Button = (
         theme={theme}
         ref={touchableRef}
       >
-        <View style={[styles.content, contentStyle]}>
+        <View style={[styles.content, { opacity: textOpacity }, contentStyle]}>
           {icon && loading !== true ? (
             <View style={iconStyle} testID={`${testID}-icon-container`}>
               <Icon

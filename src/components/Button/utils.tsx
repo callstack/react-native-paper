@@ -1,10 +1,11 @@
 import type { ViewStyle } from 'react-native';
 
-import color from 'color';
-
 import { black, white } from '../../styles/themes/v2/colors';
+import { tokens } from '../../styles/themes/v3/tokens';
 import type { InternalTheme, MD3Theme } from '../../types';
 import { splitStyles } from '../../utils/splitStyles';
+
+const { stateOpacity } = tokens.md.ref;
 
 export type ButtonMode =
   | 'text'
@@ -34,10 +35,6 @@ const isDark = ({
     return false;
   }
 
-  if (backgroundColor !== 'transparent') {
-    return !color(backgroundColor).isLight();
-  }
-
   return false;
 };
 
@@ -58,12 +55,11 @@ const getButtonBackgroundColor = ({
     if (isMode('outlined') || isMode('text')) {
       return 'transparent';
     }
-
-    return colors.surfaceDisabled;
+    return colors.onSurface;
   }
 
   if (isMode('elevated')) {
-    return colors.elevation.level1;
+    return colors.surfaceContainerLow;
   }
 
   if (isMode('contained')) {
@@ -95,7 +91,7 @@ const getButtonTextColor = ({
   }
 
   if (disabled) {
-    return colors.onSurfaceDisabled;
+    return theme.colors.onSurface;
   }
 
   if (typeof dark === 'boolean') {
@@ -123,14 +119,9 @@ const getButtonTextColor = ({
   return colors.primary;
 };
 
-const getButtonBorderColor = ({ isMode, disabled, theme }: BaseProps) => {
-  const { colors } = theme as MD3Theme;
-  if (disabled && isMode('outlined')) {
-    return colors.surfaceDisabled;
-  }
-
+const getButtonBorderColor = ({ isMode, theme }: BaseProps) => {
   if (isMode('outlined')) {
-    return colors.outline;
+    return theme.colors.outlineVariant;
   }
 
   return 'transparent';
@@ -179,15 +170,24 @@ export const getButtonColors = ({
     dark,
   });
 
-  const borderColor = getButtonBorderColor({ isMode, theme, disabled });
+  const borderColor = getButtonBorderColor({ isMode, theme });
 
   const borderWidth = getButtonBorderWidth({ isMode, theme });
+
+  const textOpacity = disabled ? stateOpacity.disabled : stateOpacity.enabled;
+
+  const backgroundOpacity =
+    disabled && !isMode('outlined') && !isMode('text')
+      ? stateOpacity.pressed
+      : stateOpacity.enabled;
 
   return {
     backgroundColor,
     borderColor,
     textColor,
+    textOpacity,
     borderWidth,
+    backgroundOpacity,
   };
 };
 

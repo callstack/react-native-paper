@@ -1,4 +1,7 @@
+import { tokens } from '../../styles/themes/v3/tokens';
 import type { InternalTheme } from '../../types';
+
+const { stateOpacity } = tokens.md.ref;
 
 type IconButtonMode = 'outlined' | 'contained' | 'contained-tonal';
 
@@ -7,20 +10,6 @@ type BaseProps = {
   isMode: (mode: IconButtonMode) => boolean;
   disabled?: boolean;
   selected?: boolean;
-};
-
-const getBorderColor = ({
-  theme,
-  disabled,
-}: {
-  theme: InternalTheme;
-  disabled?: boolean;
-}) => {
-  if (disabled) {
-    return theme.colors.surfaceDisabled;
-  }
-
-  return theme.colors.outline;
 };
 
 const getBackgroundColor = ({
@@ -32,7 +21,7 @@ const getBackgroundColor = ({
 }: BaseProps & { customContainerColor?: string }) => {
   if (disabled) {
     if (isMode('contained') || isMode('contained-tonal')) {
-      return theme.colors.surfaceDisabled;
+      return theme.colors.onSurface;
     }
   }
 
@@ -71,7 +60,7 @@ const getIconColor = ({
   customIconColor,
 }: BaseProps & { customIconColor?: string }) => {
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return theme.colors.onSurface;
   }
 
   if (typeof customIconColor !== 'undefined') {
@@ -136,12 +125,23 @@ export const getIconButtonColor = ({
     customIconColor,
   });
 
+  const iconOpacity = disabled ? stateOpacity.disabled : stateOpacity.enabled;
+
+  const backgroundColor = getBackgroundColor({
+    ...baseIconColorProps,
+    customContainerColor,
+  });
+
+  const backgroundOpacity =
+    disabled && (isMode('contained') || isMode('contained-tonal'))
+      ? stateOpacity.disabled
+      : stateOpacity.enabled;
+
   return {
     iconColor,
-    backgroundColor: getBackgroundColor({
-      ...baseIconColorProps,
-      customContainerColor,
-    }),
-    borderColor: getBorderColor({ theme, disabled }),
+    iconOpacity,
+    backgroundColor,
+    borderColor: theme.colors.outlineVariant,
+    backgroundOpacity,
   };
 };
