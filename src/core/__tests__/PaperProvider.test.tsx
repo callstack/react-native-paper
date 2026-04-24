@@ -102,8 +102,8 @@ const createProvider = (theme?: ThemeProp) => {
   );
 };
 
-const ExtendedLightTheme = { ...MD3LightTheme, isV3: true } as ThemeProp;
-const ExtendedDarkTheme = { ...MD3DarkTheme, isV3: true } as ThemeProp;
+const ExtendedLightTheme = { ...MD3LightTheme } as ThemeProp;
+const ExtendedDarkTheme = { ...MD3DarkTheme } as ThemeProp;
 
 describe('PaperProvider', () => {
   beforeEach(() => {

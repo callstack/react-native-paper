@@ -76,19 +76,13 @@ const PaperProvider = (props: Props) => {
     const scheme = colorScheme === 'dark' ? 'dark' : 'light';
     const defaultThemeBase = defaultThemes[scheme];
 
-    const extendedThemeBase = {
+    return {
       ...defaultThemeBase,
       ...props.theme,
-      version: 3 as const,
       animation: {
         ...props.theme?.animation,
         scale: reduceMotionEnabled ? 0 : 1,
       },
-    };
-
-    return {
-      ...extendedThemeBase,
-      isV3: true as const,
     };
   }, [colorScheme, props.theme, reduceMotionEnabled]);
 

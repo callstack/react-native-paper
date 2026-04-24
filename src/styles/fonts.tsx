@@ -45,17 +45,14 @@ function configureV3Fonts(
 // eslint-disable-next-line no-redeclare
 export default function configureFonts(params?: {
   config?: Partial<MD3Type>;
-  isV3?: true;
 }): MD3Typescale;
 // eslint-disable-next-line no-redeclare
 export default function configureFonts(params?: {
   config?: Partial<Record<MD3TypescaleKey, Partial<MD3Type>>>;
-  isV3?: true;
 }): MD3Typescale;
 // eslint-disable-next-line no-redeclare
 export default function configureFonts(params: {
   config: Record<string, MD3Type>;
-  isV3?: true;
 }): MD3Typescale & { [key: string]: MD3Type };
 // eslint-disable-next-line no-redeclare
 export default function configureFonts(params?: any) {

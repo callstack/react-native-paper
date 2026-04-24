@@ -713,7 +713,7 @@ const TextInputExample = () => {
                 placeholder="Custom colors"
               />
             </View>
-            {fontsLoaded && theme.isV3 ? (
+            {fontsLoaded ? (
               <View style={styles.inputContainerStyle}>
                 <TextInput
                   mode="outlined"

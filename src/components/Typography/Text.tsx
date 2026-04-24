@@ -10,7 +10,6 @@ import {
 
 import AnimatedText from './AnimatedText';
 import type { VariantProp } from './types';
-import StyledText from './v2/StyledText';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
@@ -100,9 +99,7 @@ const Text = (
 
     if (
       React.isValidElement(rest.children) &&
-      (rest.children.type === Component ||
-        rest.children.type === AnimatedText ||
-        rest.children.type === StyledText)
+      (rest.children.type === Component || rest.children.type === AnimatedText)
     ) {
       const { props } = rest.children as {
         props: { variant?: string; style?: StyleProp<TextStyle> };

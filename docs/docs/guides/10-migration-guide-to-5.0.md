@@ -38,14 +38,9 @@ npx pod-install
 
 In v5, Material You <i>(MD3)</i> became the default theme. Earlier releases also exposed `version: 2` for Material Design 2; that option and MD2 theme exports have since been removed—use MD3 themes (`MD3LightTheme` / `MD3DarkTheme`) only.
 
-```js
-theme: {
-  /* ... */
-  version: 3
-}
-```
+The theme object no longer includes `version` or `isV3`. Material Design 3 is the only supported mode; use `MD3LightTheme` / `MD3DarkTheme` (or a custom object matching the `MD3Theme` shape) without setting a version flag.
 
-Read more about using Material Design 2 in our [Material Design 2 theming guide](https://callstack.github.io/react-native-paper/docs/guides/theming#material-design-2)
+Read more about theming in the [theming guide](https://callstack.github.io/react-native-paper/docs/guides/theming).
 
 ### Colors
 
@@ -158,6 +153,9 @@ Take a look at the suggested replacement diff:
 + <Text variant="bodySmall">Caption</Text>
  ```
 
+:::caution
+The standalone components `Caption`, `Headline`, `Paragraph`, `Subheading`, and `Title` are no longer exported from `react-native-paper`. Use `<Text variant="…" />` as in the diff above.
+:::
 
 👉 You can find more about typography on the [Material You website](https://m3.material.io/styles/typography/overview)
 

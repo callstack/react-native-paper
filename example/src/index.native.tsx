@@ -196,7 +196,7 @@ export default function PaperExample() {
               );
             }}
           </SafeAreaInsetsContext.Consumer>
-          <StatusBar style={!theme.isV3 || theme.dark ? 'light' : 'dark'} />
+          <StatusBar style={theme.dark ? 'light' : 'dark'} />
         </NavigationContainer>
       </PreferencesContext.Provider>
     </PaperProvider>

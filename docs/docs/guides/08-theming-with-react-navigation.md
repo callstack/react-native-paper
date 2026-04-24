@@ -51,8 +51,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity } from 'react-native';
 import {
   Card,
-  Title,
-  Paragraph,
+  Text,
   List,
   PaperProvider,
 } from 'react-native-paper';
@@ -70,8 +69,8 @@ const HomeScreen = ({ navigation }) => (
   >
     <Card>
       <Card.Content>
-        <Title>{title}</Title>
-        <Paragraph>{content}</Paragraph>
+        <Text variant="titleLarge">{title}</Text>
+        <Text variant="bodyMedium">{content}</Text>
       </Card.Content>
     </Card>
   </TouchableOpacity>
