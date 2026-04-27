@@ -147,10 +147,6 @@ export type Props<Route extends BaseRoute> = {
    */
   getBadge?: (props: { route: Route }) => boolean | number | string | undefined;
   /**
-   * Get color for the tab, uses `route.color` by default.
-   */
-  getColor?: (props: { route: Route }) => string | undefined;
-  /**
    * Get label text for the tab, uses `route.title` by default. Use `renderLabel` to replace label component.
    */
   getLabelText?: (props: { route: Route }) => string | undefined;
@@ -317,7 +313,6 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   ),
   getLabelText = ({ route }: { route: Route }) => route.title,
   getBadge = ({ route }: { route: Route }) => route.badge,
-  getColor: _getColor = ({ route }: { route: Route }) => route.color,
   getAccessibilityLabel = ({ route }: { route: Route }) =>
     route.accessibilityLabel,
   getTestID = ({ route }: { route: Route }) => route.testID,
