@@ -45,16 +45,6 @@ export type Props = $RemoveChildren<typeof View> & {
    */
   titleRef?: React.RefObject<TextRef>;
   /**
-   * @deprecated Deprecated in v5.x
-   * Text for the subtitle.
-   */
-  subtitle?: React.ReactNode;
-  /**
-   * @deprecated Deprecated in v5.x
-   * Style for the subtitle.
-   */
-  subtitleStyle?: StyleProp<TextStyle>;
-  /**
    * Function to execute on press.
    */
   onPress?: (e: GestureResponderEvent) => void;
@@ -86,7 +76,7 @@ export type Props = $RemoveChildren<typeof View> & {
 } & (TitleString | TitleElement);
 
 /**
- * A component used to display a title and optional subtitle in an appbar.
+ * A component used to display a title in an appbar.
  *
  * ## Usage
  * ```js

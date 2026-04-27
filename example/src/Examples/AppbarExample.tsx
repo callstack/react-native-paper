@@ -58,11 +58,7 @@ const AppbarExample = ({ navigation }: Props) => {
           {showLeftIcon && (
             <Appbar.BackAction onPress={() => navigation.goBack()} />
           )}
-          <Appbar.Content
-            title="Title"
-            subtitle={showSubtitle ? 'Subtitle' : null}
-            onPress={() => setShowSnackbar(true)}
-          />
+          <Appbar.Content title="Title" onPress={() => setShowSnackbar(true)} />
           {isCenterAlignedMode
             ? false
             : showCalendarIcon && (
