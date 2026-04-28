@@ -62,16 +62,6 @@ describe('getSwitchColor - checked color', () => {
       checkedColor: getTheme().colors.primary,
     });
   });
-
-  it('should return theme color, for theme version 2', () => {
-    expect(
-      getSwitchColor({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      checkedColor: getTheme(false, false).colors.accent,
-    });
-  });
 });
 
 describe('getSwitchColor - thumb tint color', () => {
@@ -163,24 +153,12 @@ describe('getSwitchColor - on tint color', () => {
     });
   });
 
-  it('should return checked color for iOS platform, for theme version 2', () => {
-    Platform.OS = 'ios';
-
-    expect(
-      getSwitchColor({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      onTintColor: getTheme(false, false).colors.accent,
-    });
-  });
-
   it('should return custom color for iOS platform', () => {
     Platform.OS = 'ios';
 
     expect(
       getSwitchColor({
-        theme: getTheme(false, false),
+        theme: getTheme(),
         color: 'purple',
       })
     ).toMatchObject({
@@ -198,17 +176,6 @@ describe('getSwitchColor - on tint color', () => {
       })
     ).toMatchObject({
       onTintColor: color(white).alpha(0.06).rgb().string(),
-    });
-  });
-
-  it('should return correct disabled color, for theme version 2, dark mode', () => {
-    expect(
-      getSwitchColor({
-        theme: getTheme(true, false),
-        disabled: true,
-      })
-    ).toMatchObject({
-      onTintColor: color(white).alpha(0.1).rgb().string(),
     });
   });
 

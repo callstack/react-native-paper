@@ -108,27 +108,17 @@ const DrawerItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { roundness, isV3 } = theme;
+  const { roundness } = theme;
 
-  const backgroundColor = active
-    ? isV3
-      ? theme.colors.secondaryContainer
-      : color(theme.colors.primary).alpha(0.12).rgb().string()
-    : undefined;
+  const backgroundColor = active ? theme.colors.secondaryContainer : undefined;
   const contentColor = active
-    ? isV3
-      ? theme.colors.onSecondaryContainer
-      : theme.colors.primary
-    : isV3
-    ? theme.colors.onSurfaceVariant
-    : color(theme.colors.text).alpha(0.68).rgb().string();
+    ? theme.colors.onSecondaryContainer
+    : theme.colors.onSurfaceVariant;
 
-  const labelMargin = icon ? (isV3 ? 12 : 32) : 0;
-  const borderRadius = (isV3 ? 7 : 1) * roundness;
-  const rippleColor = isV3
-    ? color(contentColor).alpha(0.12).rgb().string()
-    : undefined;
-  const font = isV3 ? theme.fonts.labelLarge : theme.fonts.medium;
+  const labelMargin = icon ? 12 : 0;
+  const borderRadius = 7 * roundness;
+  const rippleColor = color(contentColor).alpha(0.12).rgb().string();
+  const font = theme.fonts.labelLarge;
 
   return (
     <View {...rest}>
@@ -139,8 +129,8 @@ const DrawerItem = ({
         onPress={onPress}
         style={[
           styles.container,
+          styles.v3Container,
           { backgroundColor, borderRadius },
-          isV3 && styles.v3Container,
           style,
         ]}
         accessibilityRole="button"
@@ -150,7 +140,7 @@ const DrawerItem = ({
         theme={theme}
         hitSlop={hitSlop}
       >
-        <View style={[styles.wrapper, isV3 && styles.v3Wrapper]}>
+        <View style={[styles.wrapper, styles.v3Wrapper]}>
           <View style={styles.content}>
             {icon ? (
               <Icon source={icon} size={24} color={contentColor} />

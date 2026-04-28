@@ -2,9 +2,8 @@ import React from 'react';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet, Animated } from 'react-native';
 
-import overlay from '../../styles/overlay';
-import { black, white } from '../../styles/themes/v2/colors';
-import type { InternalTheme, ThemeProp } from '../../types';
+import { white } from '../../styles/themes/v2/colors';
+import type { InternalTheme, MD3Theme, ThemeProp } from '../../types';
 
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 
@@ -24,26 +23,17 @@ const borderStyleProperties = [
 
 export const getAppbarBackgroundColor = (
   theme: InternalTheme,
-  elevation: number,
+  _elevation: number,
   customBackground?: ColorValue,
   elevated?: boolean
 ) => {
-  const { isV3, dark: isDarkTheme, mode, colors } = theme;
-  const isAdaptiveMode = mode === 'adaptive';
+  const { colors } = theme as MD3Theme;
   if (customBackground) {
     return customBackground;
   }
 
-  if (!isV3) {
-    if (isDarkTheme && isAdaptiveMode) {
-      return overlay(elevation, colors?.surface);
-    }
-
-    return colors.primary;
-  }
-
   if (elevated) {
-    return theme.colors.elevation.level2;
+    return colors.elevation.level2;
   }
 
   return colors.surface;
@@ -52,7 +42,6 @@ export const getAppbarBackgroundColor = (
 export const getAppbarColor = ({
   color,
   isDark,
-  isV3,
 }: BaseProps & { color: string }) => {
   if (typeof color !== 'undefined') {
     return color;
@@ -62,11 +51,7 @@ export const getAppbarColor = ({
     return white;
   }
 
-  if (isV3) {
-    return undefined;
-  }
-
-  return black;
+  return undefined;
 };
 
 export const getAppbarBorders = (
@@ -89,13 +74,11 @@ export const getAppbarBorders = (
 
 type BaseProps = {
   isDark: boolean;
-  isV3: boolean;
 };
 
 type RenderAppbarContentProps = BaseProps & {
   children: React.ReactNode;
   shouldCenterContent?: boolean;
-  isV3: boolean;
   renderOnly?: (string | boolean)[];
   renderExcept?: string[];
   mode?: AppbarModes;
@@ -133,7 +116,6 @@ export const renderAppbarContent = ({
   children,
   isDark,
   shouldCenterContent = false,
-  isV3,
   renderOnly,
   renderExcept,
   mode = 'small',
@@ -172,16 +154,14 @@ export const renderAppbarContent = ({
         theme?: ThemeProp;
       } = {
         theme,
-        color: getAppbarColor({ color: child.props.color, isDark, isV3 }),
+        color: getAppbarColor({ color: child.props.color, isDark }),
       };
 
       // @ts-expect-error: TypeScript complains about the type of type but it doesn't matter
       if (child.type.displayName === 'Appbar.Content') {
         props.mode = mode;
         props.style = [
-          isV3
-            ? i === 0 && !shouldCenterContent && styles.v3Spacing
-            : i !== 0 && styles.v2Spacing,
+          i === 0 && !shouldCenterContent && styles.v3Spacing,
           shouldCenterContent && styles.centerAlignedContent,
           child.props.style,
         ];
@@ -194,9 +174,6 @@ export const renderAppbarContent = ({
 const styles = StyleSheet.create({
   centerAlignedContent: {
     alignItems: 'center',
-  },
-  v2Spacing: {
-    marginLeft: 8,
   },
   v3Spacing: {
     marginLeft: 12,

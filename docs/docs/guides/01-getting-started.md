@@ -165,7 +165,3 @@ export default function Main() {
   );
 }
 ```
-
-:::note
-For MD2 check the following [Material Design 2 default theme](https://github.com/callstack/react-native-paper/blob/main/src/styles/themes/v2/LightTheme.tsx).
-:::

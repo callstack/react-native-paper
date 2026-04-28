@@ -9,28 +9,20 @@ import {
   List,
 } from 'react-native-paper';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const SurfaceExample = () => {
-  const { isV3 } = useExampleTheme();
-  const v2Elevation = [1, 2, 4, 8, 12];
-  const elevationValues = isV3 ? Array.from({ length: 6 }) : v2Elevation;
+  const elevationValues = Array.from({ length: 6 });
 
   const renderSurface = (index: number, mode: 'flat' | 'elevated') => (
     <Surface
       key={index}
-      style={[
-        styles.surface,
-        isV3 ? styles.v3Surface : { elevation: v2Elevation[index] },
-      ]}
+      style={[styles.surface, styles.v3Surface]}
       mode={mode}
-      {...(isV3 && { elevation: index as MD3Elevation })}
+      elevation={index as MD3Elevation}
     >
       <Text variant="bodyLarge">
-        {isV3
-          ? `Elevation ${index === 1 ? '(default)' : ''} ${index}`
-          : `${elevationValues[index]}`}
+        {`Elevation ${index === 1 ? '(default)' : ''} ${index}`}
       </Text>
     </Surface>
   );

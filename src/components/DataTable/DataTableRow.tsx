@@ -8,10 +8,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
-
 import { useInternalTheme } from '../../core/theming';
-import { black, white } from '../../styles/themes/v2/colors';
 import type { $RemoveChildren, ThemeProp } from '../../types';
 import TouchableRipple from '../TouchableRipple/TouchableRipple';
 
@@ -66,12 +63,7 @@ const DataTableRow = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const borderBottomColor = theme.isV3
-    ? theme.colors.surfaceVariant
-    : color(theme.dark ? white : black)
-        .alpha(0.12)
-        .rgb()
-        .string();
+  const borderBottomColor = theme.colors.surfaceVariant;
 
   return (
     <TouchableRipple

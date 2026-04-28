@@ -7,7 +7,7 @@
 
 - Install: npm install react-native-paper react-native-safe-area-context
 - Wrap your app with PaperProvider
-- Default theme is Material You (MD3); set theme.version: 2 for MD2
+- Default theme is Material You (MD3)
 - Requires React Native 0.72+ and React 18+
 
 ## Guides
@@ -63,7 +63,7 @@
 
 - Theme object accepts colors, dark, roundness, fonts, animation, and version properties
 - Use useTheme() hook or ThemeProvider for nested theme overrides
-- MD3 (Material You) is the default; set version: 2 for MD2 compatibility
+- MD3 (Material You) is the only supported design system; extend MD3LightTheme / MD3DarkTheme
 - See theming guide: https://callstack.github.io/react-native-paper/docs/guides/theming
 
 ## Provider Pattern

@@ -1,10 +1,7 @@
 import * as React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-import color from 'color';
-
 import { useInternalTheme } from '../../core/theming';
-import { black, white } from '../../styles/themes/v2/colors';
 import type { ThemeProp } from '../../types';
 
 export type Props = React.ComponentPropsWithRef<typeof View> & {
@@ -52,12 +49,7 @@ const DataTableHeader = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const borderBottomColor = theme.isV3
-    ? theme.colors.surfaceVariant
-    : color(theme.dark ? white : black)
-        .alpha(0.12)
-        .rgb()
-        .string();
+  const borderBottomColor = theme.colors.surfaceVariant;
 
   return (
     <View {...rest} style={[styles.header, { borderBottomColor }, style]}>

@@ -7,8 +7,6 @@ import type {
   DimensionValue,
 } from 'react-native';
 
-import type { ThemeProp } from 'src/types';
-
 import { AdornmentSide, AdornmentType, InputMode } from './enums';
 import TextInputAffix, { AffixAdornment } from './TextInputAffix';
 import TextInputIcon, { IconAdornment } from './TextInputIcon';
@@ -56,7 +54,6 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   paddingHorizontal,
   inputOffset = 0,
   mode,
-  isV3,
 }: {
   inputOffset?: number;
   adornmentConfig: AdornmentConfig[];
@@ -64,9 +61,8 @@ export function getAdornmentStyleAdjustmentForNativeInput({
   rightAffixWidth: number;
   mode?: 'outlined' | 'flat';
   paddingHorizontal?: DimensionValue;
-  isV3?: boolean;
 }): AdornmentStyleAdjustmentForNativeInput | {} {
-  const { OUTLINED_INPUT_OFFSET, ADORNMENT_OFFSET } = getConstants(isV3);
+  const { OUTLINED_INPUT_OFFSET, ADORNMENT_OFFSET } = getConstants();
 
   if (adornmentConfig.length) {
     const adornmentStyleAdjustmentForNativeInput = adornmentConfig.map(
@@ -133,7 +129,6 @@ export interface TextInputAdornmentProps {
   isTextInputFocused: boolean;
   paddingHorizontal?: DimensionValue;
   maxFontSizeMultiplier?: number | undefined | null;
-  theme?: ThemeProp;
   disabled?: boolean;
 }
 
@@ -149,7 +144,6 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
   forceFocus,
   paddingHorizontal,
   maxFontSizeMultiplier,
-  theme,
   disabled,
 }) => {
   if (adornmentConfig.length) {
@@ -174,7 +168,6 @@ const TextInputAdornment: React.FunctionComponent<TextInputAdornmentProps> = ({
             return (
               <IconAdornment
                 {...commonProps}
-                theme={theme}
                 key={side}
                 icon={inputAdornmentComponent}
                 topPosition={topPosition[AdornmentType.Icon]}

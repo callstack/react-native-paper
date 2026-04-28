@@ -8,7 +8,7 @@ import {
 
 import SafeAreaProviderCompat from './SafeAreaProviderCompat';
 import { Provider as SettingsProvider, Settings } from './settings';
-import { defaultThemesByVersion, ThemeProvider } from './theming';
+import { defaultThemes, ThemeProvider } from './theming';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
 import type { ThemeProp } from '../types';
@@ -21,12 +21,8 @@ export type Props = {
 };
 
 const PaperProvider = (props: Props) => {
-  const isOnlyVersionInTheme =
-    props.theme && Object.keys(props.theme).length === 1 && props.theme.version;
-
   const colorSchemeName =
-    ((!props.theme || isOnlyVersionInTheme) && Appearance?.getColorScheme()) ||
-    'light';
+    (!props.theme && Appearance?.getColorScheme()) || 'light';
 
   const [reduceMotionEnabled, setReduceMotionEnabled] =
     React.useState<boolean>(false);
@@ -59,13 +55,13 @@ const PaperProvider = (props: Props) => {
 
   React.useEffect(() => {
     let appearanceSubscription: NativeEventSubscription | undefined;
-    if (!props.theme || isOnlyVersionInTheme) {
+    if (!props.theme) {
       appearanceSubscription = Appearance?.addChangeListener(
         handleAppearanceChange
       ) as NativeEventSubscription | undefined;
     }
     return () => {
-      if (!props.theme || isOnlyVersionInTheme) {
+      if (!props.theme) {
         if (appearanceSubscription) {
           appearanceSubscription.remove();
         } else {
@@ -74,26 +70,19 @@ const PaperProvider = (props: Props) => {
         }
       }
     };
-  }, [props.theme, isOnlyVersionInTheme]);
+  }, [props.theme]);
 
   const theme = React.useMemo(() => {
-    const themeVersion = props.theme?.version || 3;
     const scheme = colorScheme === 'dark' ? 'dark' : 'light';
-    const defaultThemeBase = defaultThemesByVersion[themeVersion][scheme];
+    const defaultThemeBase = defaultThemes[scheme];
 
-    const extendedThemeBase = {
+    return {
       ...defaultThemeBase,
       ...props.theme,
-      version: themeVersion,
       animation: {
         ...props.theme?.animation,
         scale: reduceMotionEnabled ? 0 : 1,
       },
-    };
-
-    return {
-      ...extendedThemeBase,
-      isV3: extendedThemeBase.version === 3,
     };
   }, [colorScheme, props.theme, reduceMotionEnabled]);
 

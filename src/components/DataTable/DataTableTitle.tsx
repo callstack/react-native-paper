@@ -105,7 +105,7 @@ const DataTableTitle = ({
     }).start();
   }, [sortDirection, spinAnim]);
 
-  const textColor = theme.isV3 ? theme.colors.onSurface : theme?.colors?.text;
+  const textColor = theme.colors.onSurface;
 
   const alphaTextColor = color(textColor).alpha(0.6).rgb().string();
 

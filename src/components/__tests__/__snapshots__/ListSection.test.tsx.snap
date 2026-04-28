@@ -170,9 +170,7 @@ exports[`renders list section with custom title style 1`] = `
           "lineHeight": 20,
         },
       },
-      "isV3": true,
       "roundness": 4,
-      "version": 3,
     }
   }
 >
@@ -697,9 +695,7 @@ exports[`renders list section with subheader 1`] = `
           "lineHeight": 20,
         },
       },
-      "isV3": true,
       "roundness": 4,
-      "version": 3,
     }
   }
 >
@@ -1222,9 +1218,7 @@ exports[`renders list section without subheader 1`] = `
           "lineHeight": 20,
         },
       },
-      "isV3": true,
       "roundness": 4,
-      "version": 3,
     }
   }
 >

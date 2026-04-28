@@ -20,15 +20,11 @@ const getBorderColor = ({
   theme: InternalTheme;
   disabled?: boolean;
 }) => {
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.surfaceDisabled;
-    }
-
-    return theme.colors.outline;
+  if (disabled) {
+    return theme.colors.surfaceDisabled;
   }
 
-  return undefined;
+  return theme.colors.outline;
 };
 
 const getBackgroundColor = ({
@@ -38,40 +34,34 @@ const getBackgroundColor = ({
   selected,
   customContainerColor,
 }: BaseProps & { customContainerColor?: string }) => {
-  if (theme.isV3) {
-    if (disabled) {
-      if (isMode('contained') || isMode('contained-tonal')) {
-        return theme.colors.surfaceDisabled;
-      }
-    }
-
-    if (typeof customContainerColor !== 'undefined') {
-      return customContainerColor;
-    }
-
-    if (isMode('contained')) {
-      if (selected) {
-        return theme.colors.primary;
-      }
-      return theme.colors.surfaceVariant;
-    }
-
-    if (isMode('contained-tonal')) {
-      if (selected) {
-        return theme.colors.secondaryContainer;
-      }
-      return theme.colors.surfaceVariant;
-    }
-
-    if (isMode('outlined')) {
-      if (selected) {
-        return theme.colors.inverseSurface;
-      }
+  if (disabled) {
+    if (isMode('contained') || isMode('contained-tonal')) {
+      return theme.colors.surfaceDisabled;
     }
   }
 
   if (typeof customContainerColor !== 'undefined') {
     return customContainerColor;
+  }
+
+  if (isMode('contained')) {
+    if (selected) {
+      return theme.colors.primary;
+    }
+    return theme.colors.surfaceVariant;
+  }
+
+  if (isMode('contained-tonal')) {
+    if (selected) {
+      return theme.colors.secondaryContainer;
+    }
+    return theme.colors.surfaceVariant;
+  }
+
+  if (isMode('outlined')) {
+    if (selected) {
+      return theme.colors.inverseSurface;
+    }
   }
 
   return undefined;
@@ -84,65 +74,52 @@ const getIconColor = ({
   selected,
   customIconColor,
 }: BaseProps & { customIconColor?: string }) => {
-  if (theme.isV3) {
-    if (disabled) {
-      return theme.colors.onSurfaceDisabled;
-    }
-
-    if (typeof customIconColor !== 'undefined') {
-      return customIconColor;
-    }
-
-    if (isMode('contained')) {
-      if (selected) {
-        return theme.colors.onPrimary;
-      }
-      return theme.colors.primary;
-    }
-
-    if (isMode('contained-tonal')) {
-      if (selected) {
-        return theme.colors.onSecondaryContainer;
-      }
-      return theme.colors.onSurfaceVariant;
-    }
-
-    if (isMode('outlined')) {
-      if (selected) {
-        return theme.colors.inverseOnSurface;
-      }
-      return theme.colors.onSurfaceVariant;
-    }
-
-    if (selected) {
-      return theme.colors.primary;
-    }
-    return theme.colors.onSurfaceVariant;
+  if (disabled) {
+    return theme.colors.onSurfaceDisabled;
   }
 
   if (typeof customIconColor !== 'undefined') {
     return customIconColor;
   }
 
-  return theme.colors.text;
+  if (isMode('contained')) {
+    if (selected) {
+      return theme.colors.onPrimary;
+    }
+    return theme.colors.primary;
+  }
+
+  if (isMode('contained-tonal')) {
+    if (selected) {
+      return theme.colors.onSecondaryContainer;
+    }
+    return theme.colors.onSurfaceVariant;
+  }
+
+  if (isMode('outlined')) {
+    if (selected) {
+      return theme.colors.inverseOnSurface;
+    }
+    return theme.colors.onSurfaceVariant;
+  }
+
+  if (selected) {
+    return theme.colors.primary;
+  }
+  return theme.colors.onSurfaceVariant;
 };
 
 const getRippleColor = ({
-  theme,
   iconColor,
   customRippleColor,
 }: {
-  theme: InternalTheme;
   iconColor: string;
   customRippleColor?: ColorValue;
 }) => {
   if (customRippleColor) {
     return customRippleColor;
   }
-  if (theme.isV3) {
-    return color(iconColor).alpha(0.12).rgb().string();
-  }
-  return color(iconColor).alpha(0.32).rgb().string();
+  return color(iconColor).alpha(0.12).rgb().string();
 };
 
 export const getIconButtonColor = ({
@@ -184,7 +161,7 @@ export const getIconButtonColor = ({
       ...baseIconColorProps,
       customContainerColor,
     }),
-    rippleColor: getRippleColor({ theme, iconColor, customRippleColor }),
+    rippleColor: getRippleColor({ iconColor, customRippleColor }),
     borderColor: getBorderColor({ theme, disabled }),
   };
 };

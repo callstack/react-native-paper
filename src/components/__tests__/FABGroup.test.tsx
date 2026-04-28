@@ -32,16 +32,6 @@ describe('getFABGroupColors - backdrop color', () => {
         .string(),
     });
   });
-
-  it('should return correct backdrop color, for theme version 2', () => {
-    expect(
-      getFABGroupColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      backdropColor: getTheme(false, false).colors.backdrop,
-    });
-  });
 });
 
 describe('getFABGroupColors - label color', () => {
@@ -54,29 +44,6 @@ describe('getFABGroupColors - label color', () => {
       labelColor: getTheme().colors.onSurface,
     });
   });
-
-  it('should return correct theme color, dark mode, for theme version 2', () => {
-    expect(
-      getFABGroupColors({
-        theme: getTheme(true, false),
-      })
-    ).toMatchObject({
-      labelColor: getTheme(true, false).colors.text,
-    });
-  });
-
-  it('should return correct theme color, light mode, for theme version 2', () => {
-    expect(
-      getFABGroupColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      labelColor: color(getTheme(false, false).colors.text)
-        .fade(0.54)
-        .rgb()
-        .string(),
-    });
-  });
 });
 
 describe('getFABGroupColors - stacked FAB background color', () => {
@@ -87,16 +54,6 @@ describe('getFABGroupColors - stacked FAB background color', () => {
       })
     ).toMatchObject({
       stackedFABBackgroundColor: getTheme().colors.elevation.level3,
-    });
-  });
-
-  it('should return correct theme color, dark mode, for theme version 2', () => {
-    expect(
-      getFABGroupColors({
-        theme: getTheme(false, false),
-      })
-    ).toMatchObject({
-      stackedFABBackgroundColor: getTheme(false, false).colors.surface,
     });
   });
 });

@@ -166,10 +166,8 @@ const CheckboxItem = ({
     checkbox = <Checkbox {...checkboxProps} />;
   }
 
-  const textColor = theme.isV3 ? theme.colors.onSurface : theme.colors.text;
-  const disabledTextColor = theme.isV3
-    ? theme.colors.onSurfaceDisabled
-    : theme.colors.disabled;
+  const textColor = theme.colors.onSurface;
+  const disabledTextColor = theme.colors.onSurfaceDisabled;
   const textAlign = isLeading ? 'right' : 'left';
 
   const computedStyle = {
@@ -204,12 +202,7 @@ const CheckboxItem = ({
           variant={labelVariant}
           testID={`${testID}-text`}
           maxFontSizeMultiplier={labelMaxFontSizeMultiplier}
-          style={[
-            styles.label,
-            !theme.isV3 && styles.font,
-            computedStyle,
-            labelStyle,
-          ]}
+          style={[styles.label, computedStyle, labelStyle]}
         >
           {label}
         </Text>
@@ -237,8 +230,5 @@ const styles = StyleSheet.create({
   label: {
     flexShrink: 1,
     flexGrow: 1,
-  },
-  font: {
-    fontSize: 16,
   },
 });

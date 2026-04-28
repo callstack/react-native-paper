@@ -69,7 +69,6 @@ const IconAdornment: React.FunctionComponent<
     icon: React.ReactNode;
     topPosition: number;
     side: 'left' | 'right';
-    theme?: ThemeProp;
     disabled?: boolean;
   } & Omit<StyleContextType, 'style'>
 > = ({
@@ -79,11 +78,9 @@ const IconAdornment: React.FunctionComponent<
   isTextInputFocused,
   forceFocus,
   testID,
-  theme: themeOverrides,
   disabled,
 }) => {
-  const { isV3 } = useInternalTheme(themeOverrides);
-  const { ICON_OFFSET } = getConstants(isV3);
+  const { ICON_OFFSET } = getConstants();
 
   const style = {
     top: topPosition,
