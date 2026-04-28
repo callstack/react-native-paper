@@ -51,6 +51,7 @@ export { default as Surface } from './components/Surface';
 export { default as Switch } from './components/Switch/Switch';
 export { default as Appbar } from './components/Appbar';
 export { default as TouchableRipple } from './components/TouchableRipple/TouchableRipple';
+export { default as TextField } from './components/TextField/TextField';
 export { default as TextInput } from './components/TextInput/TextInput';
 export { default as ToggleButton } from './components/ToggleButton';
 export { default as SegmentedButtons } from './components/SegmentedButtons/SegmentedButtons';
@@ -135,6 +136,11 @@ export type { Props as SearchbarProps } from './components/Searchbar';
 export type { Props as SnackbarProps } from './components/Snackbar';
 export type { Props as SurfaceProps } from './components/Surface';
 export type { Props as SwitchProps } from './components/Switch/Switch';
+export type {
+  TextFieldProps,
+  TextFieldAccessoryProps,
+  TextFieldVariant,
+} from './components/TextField/TextField';
 export type { Props as TextInputProps } from './components/TextInput/TextInput';
 export type { Props as TextInputAffixProps } from './components/TextInput/Adornment/TextInputAffix';
 export type { Props as TextInputIconProps } from './components/TextInput/Adornment/TextInputIcon';

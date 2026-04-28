@@ -170,6 +170,7 @@ const config = {
             TextInputAffix: 'TextInput/Adornment/TextInputAffix',
             TextInputIcon: 'TextInput/Adornment/TextInputIcon',
           },
+          TextField: 'TextField/TextField',
           ToggleButton: {
             ToggleButton: 'ToggleButton/ToggleButton',
             ToggleButtonGroup: 'ToggleButton/ToggleButtonGroup',
@@ -206,6 +207,8 @@ const config = {
             }
 
             const customUrls = {
+              TextField: 'src/components/TextField/TextField.tsx',
+              TextInput: 'src/components/TextInput/TextInput.tsx',
               TextInputAffix:
                 'src/components/TextInput/Adornment/TextInputAffix.tsx',
               TextInputIcon:

@@ -146,6 +146,10 @@ const screenshots = {
     'iOS (disabled)': 'screenshots/switch-disabled.ios.png',
   },
   Text: 'screenshots/typography.png',
+  TextField: {
+    filled: 'screenshots/text-field-filled.png',
+    outlined: 'screenshots/text-field-outlined.png',
+  },
   TextInput: {
     'flat (focused)': 'screenshots/textinput-flat.focused.png',
     'flat (disabled)': 'screenshots/textinput-flat.disabled.png',

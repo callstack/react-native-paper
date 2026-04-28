@@ -1,0 +1,55 @@
+import { I18nManager } from 'react-native';
+
+import {
+  ACCESSORY_SIZE,
+  LINE_HEIGHT_DELTA,
+  TEXT_FIELD_ACCESSORY_MARGIN_HORIZONTAL,
+  TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL,
+  TEXT_FIELD_PADDING_VERTICAL,
+} from '../constants';
+
+// ==================
+// LAYOUT SUPPORT
+// ==================
+
+const isRTL = I18nManager.isRTL;
+const layoutSupportMultiplier = isRTL ? -1 : 1;
+
+// ==================
+// LABEL POSITIONING
+// ==================
+export const LABEL_PADDING_HORIZONTAL = 4;
+
+export const LABEL_LEFT_OFFSET_WITH_ACCESSORY =
+  ACCESSORY_SIZE +
+  TEXT_FIELD_ACCESSORY_MARGIN_HORIZONTAL +
+  TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL -
+  LABEL_PADDING_HORIZONTAL;
+
+export const LABEL_LEFT_OFFSET_WITHOUT_ACCESSORY =
+  TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL;
+
+export const ACTIVE_LABEL_TOP_POSITION =
+  -TEXT_FIELD_PADDING_VERTICAL + LINE_HEIGHT_DELTA;
+
+export const LABEL_TRANSLATE_X_WITH_ACCESSORY =
+  -layoutSupportMultiplier *
+  (ACCESSORY_SIZE +
+    TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL -
+    LABEL_PADDING_HORIZONTAL);
+
+export const LABEL_TRANSLATE_X_WITHOUT_ACCESSORY =
+  -layoutSupportMultiplier * LABEL_PADDING_HORIZONTAL;
+
+// ==================
+// PLACEHOLDER POSITIONING
+// ==================
+
+export const PLACEHOLDER_TOP_POSITION =
+  TEXT_FIELD_PADDING_VERTICAL + LINE_HEIGHT_DELTA;
+
+// ============
+// OPACITY
+// ============
+
+export const OUTLINE_ALPHA = 0.12;

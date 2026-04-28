@@ -1,0 +1,328 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders filled TextField with label and value 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={false}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  role="none"
+  style={
+    [
+      {},
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "borderTopEndRadius": 4,
+          "borderTopStartRadius": 4,
+          "flexDirection": "row",
+          "minHeight": 56,
+          "paddingVertical": 8,
+        },
+        {
+          "backgroundColor": "rgba(230, 224, 233, 1)",
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      pointerEvents="none"
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+          },
+          {
+            "backgroundColor": "rgba(121, 116, 126, 1)",
+            "height": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        {
+          "backgroundColor": "rgba(103, 80, 164, 1)",
+          "bottom": 0,
+          "height": 2,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "transform": [
+            {
+              "scaleX": 0,
+            },
+          ],
+        }
+      }
+    />
+    <View
+      aria-hidden={true}
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        {
+          "left": 16,
+          "position": "absolute",
+          "top": 8,
+        }
+      }
+    >
+      <Text
+        collapsable={false}
+        style={
+          {
+            "color": "rgba(73, 69, 79, 1)",
+            "fontSize": 12,
+            "fontWeight": "400",
+            "includeFontPadding": false,
+            "paddingHorizontal": 0,
+            "paddingVertical": 0,
+          }
+        }
+      >
+        Email
+      </Text>
+    </View>
+    <View
+      style={
+        [
+          {
+            "flex": 1,
+            "justifyContent": "flex-end",
+            "paddingHorizontal": 16,
+          },
+          undefined,
+        ]
+      }
+    >
+      <TextInput
+        aria-disabled={false}
+        aria-invalid={false}
+        aria-label="Email"
+        cursorColor="rgba(103, 80, 164, 1)"
+        editable={true}
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        onFocus={[Function]}
+        selectionColor="rgba(103, 80, 164, 1)"
+        style={
+          [
+            {
+              "fontWeight": "400",
+              "includeFontPadding": false,
+              "paddingHorizontal": 0,
+              "paddingVertical": 0,
+            },
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "fontSize": 16,
+              "textAlign": "left",
+              "writingDirection": "ltr",
+            },
+            undefined,
+            false,
+            false,
+            undefined,
+          ]
+        }
+        value="a@b.co"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders outlined TextField with label and value 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={false}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  role="none"
+  style={
+    [
+      {},
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "borderRadius": 4,
+          "flexDirection": "row",
+          "minHeight": 56,
+          "paddingVertical": 8,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      pointerEvents="none"
+      style={
+        [
+          {
+            "borderRadius": 4,
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderWidth": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    />
+    <View
+      aria-hidden={true}
+      collapsable={false}
+      pointerEvents="none"
+      style={
+        {
+          "backgroundColor": "rgba(254, 247, 255, 1)",
+          "left": 16,
+          "paddingHorizontal": 4,
+          "position": "absolute",
+          "top": -6,
+          "transform": [
+            {
+              "translateX": -4,
+            },
+          ],
+        }
+      }
+    >
+      <Text
+        collapsable={false}
+        style={
+          {
+            "color": "rgba(73, 69, 79, 1)",
+            "fontSize": 12,
+            "fontWeight": "400",
+            "includeFontPadding": false,
+            "paddingHorizontal": 0,
+            "paddingVertical": 0,
+          }
+        }
+      >
+        Password
+      </Text>
+    </View>
+    <View
+      style={
+        [
+          {
+            "flex": 1,
+            "justifyContent": "center",
+            "paddingHorizontal": 16,
+          },
+          undefined,
+        ]
+      }
+    >
+      <TextInput
+        aria-disabled={false}
+        aria-invalid={false}
+        aria-label="Password"
+        cursorColor="rgba(103, 80, 164, 1)"
+        editable={true}
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        onFocus={[Function]}
+        selectionColor="rgba(103, 80, 164, 1)"
+        style={
+          [
+            {
+              "fontWeight": "400",
+              "includeFontPadding": false,
+              "paddingHorizontal": 0,
+              "paddingVertical": 0,
+            },
+            {
+              "color": "rgba(29, 27, 32, 1)",
+              "fontSize": 16,
+              "textAlign": "left",
+              "writingDirection": "ltr",
+            },
+            undefined,
+            false,
+            false,
+            undefined,
+          ]
+        }
+        value="secret"
+      />
+    </View>
+  </View>
+</View>
+`;

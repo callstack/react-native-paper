@@ -43,6 +43,7 @@ import SwitchExample from './Examples/SwitchExample';
 import TeamDetails from './Examples/TeamDetails';
 import TeamsList from './Examples/TeamsList';
 import TextExample from './Examples/TextExample';
+import TextFieldExample from './Examples/TextFieldExample';
 import TextInputExample from './Examples/TextInputExample';
 import ThemeExample from './Examples/ThemeExample';
 import ThemingWithReactNavigation from './Examples/ThemingWithReactNavigation';
@@ -89,6 +90,7 @@ export const mainExamples: Record<
   surface: SurfaceExample,
   switch: SwitchExample,
   text: TextExample,
+  textField: TextFieldExample,
   textInput: TextInputExample,
   toggleButton: ToggleButtonExample,
   tooltipExample: TooltipExample,
