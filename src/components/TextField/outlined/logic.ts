@@ -6,7 +6,11 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { INPUT_FONT_SIZE, isWeb } from '../constants';
+import {
+  INPUT_FONT_SIZE,
+  TEXT_FIELD_PADDING_VERTICAL,
+  isWeb,
+} from '../constants';
 import {
   $disabledStyle,
   $supportingTextStyle,
@@ -110,7 +114,11 @@ export const getOutlinedTextFieldData = (
     $fieldStyleOverride,
   ];
 
-  const $containerStyles = [$containerStyle, $containerStyleOverride];
+  const $containerStyles: StyleProp<ViewStyle> = [
+    $containerStyle,
+    textInputProps.multiline && { alignItems: 'flex-start' },
+    $containerStyleOverride,
+  ];
 
   const $supportingTextStyles: StyleProp<TextStyle> = [
     $supportingTextStyle,
@@ -158,6 +166,7 @@ export const getOutlinedTextFieldData = (
     },
     textInputProps.multiline && {
       height: 'auto' as TextStyle['height'],
+      paddingTop: TEXT_FIELD_PADDING_VERTICAL,
     },
     isWeb && {
       outlineStyle: 'none' as TextStyle['outlineStyle'],

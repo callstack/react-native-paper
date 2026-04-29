@@ -28,7 +28,7 @@ import {
 import {
   LABEL_START_OFFSET_WITH_ACCESSORY,
   LABEL_START_OFFSET_WITHOUT_ACCESSORY,
-  PADDING_TOP,
+  MULTILINE_PADDING_TOP,
 } from './constants';
 import {
   $containerStyle,
@@ -180,7 +180,11 @@ export const getFilledTextFieldData = (
     $animatedActiveOutlineStyle,
   ];
 
-  const $containerStyles = [$containerStyle, $containerStyleOverride];
+  const $containerStyles: StyleProp<ViewStyle> = [
+    $containerStyle,
+    textInputProps.multiline && { alignItems: 'flex-start' },
+    $containerStyleOverride,
+  ];
 
   const $supportingTextStyles: StyleProp<TextStyle> = [
     $supportingTextStyle,
@@ -203,7 +207,7 @@ export const getFilledTextFieldData = (
     },
     textInputProps.multiline && {
       height: 'auto' as TextStyle['height'],
-      paddingTop: PADDING_TOP,
+      paddingTop: MULTILINE_PADDING_TOP,
     },
     isWeb && {
       outlineStyle: 'none' as TextStyle['outlineStyle'],

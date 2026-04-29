@@ -264,7 +264,7 @@ function TextField(props: TextFieldProps) {
 
         <View style={$containerStyles}>
           {hasPrefix && (
-            <Text {...prefixProps} style={$prefixStyles}>
+            <Text aria-hidden {...prefixProps} style={$prefixStyles}>
               {prefix}
             </Text>
           )}
@@ -286,7 +286,7 @@ function TextField(props: TextFieldProps) {
           />
 
           {hasSuffix && (
-            <Text {...suffixProps} style={$suffixStyles}>
+            <Text aria-hidden {...suffixProps} style={$suffixStyles}>
               {suffix}
             </Text>
           )}
