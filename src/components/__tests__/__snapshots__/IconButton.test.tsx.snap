@@ -26,7 +26,7 @@ exports[`renders disabled icon button 1`] = `
     style={
       {
         "backgroundColor": "transparent",
-        "borderColor": "rgba(28, 27, 31, 0.12)",
+        "borderColor": "rgba(29, 27, 32, 0.12)",
         "borderRadius": 20,
         "borderWidth": 0,
         "elevation": 0,
@@ -115,7 +115,7 @@ exports[`renders disabled icon button 1`] = `
         style={
           [
             {
-              "color": "rgba(28, 27, 31, 0.38)",
+              "color": "rgba(29, 27, 32, 0.38)",
               "fontSize": 24,
             },
             [

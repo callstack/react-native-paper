@@ -160,7 +160,7 @@ exports[`renders chip with close button 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -455,7 +455,7 @@ exports[`renders chip with custom close button 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -750,7 +750,7 @@ exports[`renders chip with icon 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -907,7 +907,7 @@ exports[`renders chip with onPress 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -1064,7 +1064,7 @@ exports[`renders outlined disabled chip 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -1081,7 +1081,7 @@ exports[`renders outlined disabled chip 1`] = `
                     "textAlignVertical": "center",
                   },
                   {
-                    "color": "rgba(28, 27, 31, 0.38)",
+                    "color": "rgba(29, 27, 32, 0.38)",
                     "fontFamily": "System",
                     "fontSize": 14,
                     "fontWeight": "500",
@@ -1266,7 +1266,7 @@ exports[`renders selected chip 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [

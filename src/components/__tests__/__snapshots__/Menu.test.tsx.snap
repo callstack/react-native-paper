@@ -117,7 +117,7 @@ exports[`renders menu with content styles 1`] = `
                       "textAlign": "left",
                     },
                     {
-                      "color": "rgba(28, 27, 31, 1)",
+                      "color": "rgba(29, 27, 32, 1)",
                       "writingDirection": "ltr",
                     },
                     [
@@ -259,7 +259,7 @@ exports[`renders menu with content styles 1`] = `
           collapsable={false}
           style={
             {
-              "backgroundColor": "rgb(243, 237, 246)",
+              "backgroundColor": "rgba(247, 242, 250, 1)",
               "borderRadius": 4,
               "borderTopLeftRadius": 0,
               "borderTopRightRadius": 0,
@@ -288,7 +288,7 @@ exports[`renders menu with content styles 1`] = `
             pointerEvents="box-none"
             style={
               {
-                "backgroundColor": "rgb(243, 237, 246)",
+                "backgroundColor": "rgba(247, 242, 250, 1)",
                 "borderRadius": 4,
                 "borderTopLeftRadius": 0,
                 "borderTopRightRadius": 0,
@@ -394,7 +394,7 @@ exports[`renders menu with content styles 1`] = `
                           "textAlign": "left",
                         },
                         {
-                          "color": "rgba(28, 27, 31, 1)",
+                          "color": "rgba(29, 27, 32, 1)",
                           "writingDirection": "ltr",
                         },
                         [
@@ -407,7 +407,7 @@ exports[`renders menu with content styles 1`] = `
                           },
                           [
                             {
-                              "color": "rgba(28, 27, 31, 1)",
+                              "color": "rgba(29, 27, 32, 1)",
                               "fontFamily": "System",
                               "fontSize": 16,
                               "fontWeight": "400",
@@ -515,7 +515,7 @@ exports[`renders menu with content styles 1`] = `
                           "textAlign": "left",
                         },
                         {
-                          "color": "rgba(28, 27, 31, 1)",
+                          "color": "rgba(29, 27, 32, 1)",
                           "writingDirection": "ltr",
                         },
                         [
@@ -528,7 +528,7 @@ exports[`renders menu with content styles 1`] = `
                           },
                           [
                             {
-                              "color": "rgba(28, 27, 31, 1)",
+                              "color": "rgba(29, 27, 32, 1)",
                               "fontFamily": "System",
                               "fontSize": 16,
                               "fontWeight": "400",
@@ -671,7 +671,7 @@ exports[`renders not visible menu 1`] = `
                     "textAlign": "left",
                   },
                   {
-                    "color": "rgba(28, 27, 31, 1)",
+                    "color": "rgba(29, 27, 32, 1)",
                     "writingDirection": "ltr",
                   },
                   [
@@ -836,7 +836,7 @@ exports[`renders visible menu 1`] = `
                       "textAlign": "left",
                     },
                     {
-                      "color": "rgba(28, 27, 31, 1)",
+                      "color": "rgba(29, 27, 32, 1)",
                       "writingDirection": "ltr",
                     },
                     [
@@ -978,7 +978,7 @@ exports[`renders visible menu 1`] = `
           collapsable={false}
           style={
             {
-              "backgroundColor": "rgb(243, 237, 246)",
+              "backgroundColor": "rgba(247, 242, 250, 1)",
               "borderRadius": 4,
               "opacity": 0,
               "shadowColor": "#000",
@@ -1005,7 +1005,7 @@ exports[`renders visible menu 1`] = `
             pointerEvents="box-none"
             style={
               {
-                "backgroundColor": "rgb(243, 237, 246)",
+                "backgroundColor": "rgba(247, 242, 250, 1)",
                 "borderRadius": 4,
                 "flex": undefined,
                 "paddingVertical": 8,
@@ -1109,7 +1109,7 @@ exports[`renders visible menu 1`] = `
                           "textAlign": "left",
                         },
                         {
-                          "color": "rgba(28, 27, 31, 1)",
+                          "color": "rgba(29, 27, 32, 1)",
                           "writingDirection": "ltr",
                         },
                         [
@@ -1122,7 +1122,7 @@ exports[`renders visible menu 1`] = `
                           },
                           [
                             {
-                              "color": "rgba(28, 27, 31, 1)",
+                              "color": "rgba(29, 27, 32, 1)",
                               "fontFamily": "System",
                               "fontSize": 16,
                               "fontWeight": "400",
@@ -1230,7 +1230,7 @@ exports[`renders visible menu 1`] = `
                           "textAlign": "left",
                         },
                         {
-                          "color": "rgba(28, 27, 31, 1)",
+                          "color": "rgba(29, 27, 32, 1)",
                           "writingDirection": "ltr",
                         },
                         [
@@ -1243,7 +1243,7 @@ exports[`renders visible menu 1`] = `
                           },
                           [
                             {
-                              "color": "rgba(28, 27, 31, 1)",
+                              "color": "rgba(29, 27, 32, 1)",
                               "fontFamily": "System",
                               "fontSize": 16,
                               "fontWeight": "400",

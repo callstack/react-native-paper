@@ -57,8 +57,11 @@ export default function PaperExample() {
     }
 
     return isDarkMode
-      ? { ...MD3DarkTheme, colors: mdTheme.dark }
-      : { ...MD3LightTheme, colors: mdTheme.light };
+      ? { ...MD3DarkTheme, colors: { ...MD3DarkTheme.colors, ...mdTheme.dark } }
+      : {
+          ...MD3LightTheme,
+          colors: { ...MD3LightTheme.colors, ...mdTheme.light },
+        };
   }, [isDarkMode, mdTheme, shouldUseDeviceColors]);
 
   React.useEffect(() => {

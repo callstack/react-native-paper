@@ -303,13 +303,13 @@ describe('getAppbarColors', () => {
 
   it('should return v3 light color if theme version is 3', () => {
     expect(getAppbarBackgroundColor(getTheme(), elevation)).toBe(
-      tokens.md.ref.palette.neutral99
+      tokens.md.ref.palette.neutral98
     );
   });
 
   it('should return v3 dark color if theme version is 3', () => {
     expect(getAppbarBackgroundColor(getTheme(true), elevation)).toBe(
-      tokens.md.ref.palette.neutral10
+      tokens.md.ref.palette.neutral6
     );
   });
 });
