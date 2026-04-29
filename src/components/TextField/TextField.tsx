@@ -33,7 +33,6 @@ export type TextFieldSharedApi = {
   hasError: boolean;
   $animatedLabelWrapperStyle: Animated.WithAnimatedObject<ViewStyle>;
   $animatedLabelTextStyle: Animated.WithAnimatedObject<TextStyle>;
-  $animatedPlaceholderStyle: Animated.WithAnimatedObject<TextStyle>;
   $animatedActiveOutlineStyle?: Animated.WithAnimatedObject<ViewStyle>;
 };
 
@@ -176,9 +175,10 @@ function TextField(props: TextFieldProps) {
     $containerStyles,
     $inputStyles,
     $supportingTextStyles,
+    $placeholderTextColor,
     $selectionColor,
     $cursorColor,
-    $animatedPlaceholderStyles,
+    placeholder,
     LeadingAccessory,
     TrailingAccessory,
     focusInput,
@@ -238,19 +238,6 @@ function TextField(props: TextFieldProps) {
         )}
 
         <View style={$containerStyles}>
-          {/* Animated placeholder — a custom Text node that fades in once the
-            label has floated up; rendered only when a placeholder is provided
-            and the field is empty so it never overlaps real input text */}
-          {!!textInputProps.placeholder && !textInputProps.value && (
-            <Animated.Text
-              aria-hidden
-              pointerEvents="none"
-              style={$animatedPlaceholderStyles}
-            >
-              {textInputProps.placeholder}
-            </Animated.Text>
-          )}
-
           <TextInput
             aria-label={label}
             aria-disabled={disabled}
@@ -262,7 +249,8 @@ function TextField(props: TextFieldProps) {
             selectionColor={$selectionColor}
             cursorColor={$cursorColor}
             {...textInputProps}
-            placeholder={undefined}
+            placeholder={placeholder}
+            placeholderTextColor={$placeholderTextColor}
             style={$inputStyles}
           />
         </View>

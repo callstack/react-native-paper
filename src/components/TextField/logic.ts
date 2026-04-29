@@ -73,6 +73,9 @@ export const useTextField = (props: TextFieldProps) => {
   const { selectionColor: $selectionColor, cursorColor: $cursorColor } =
     getAccentColors({ theme, hasError });
 
+  const $placeholderTextColor =
+    props.placeholderTextColor ?? theme.colors.onSurfaceVariant;
+
   // =======================
   // LABEL ANIMATION
   // =======================
@@ -80,7 +83,6 @@ export const useTextField = (props: TextFieldProps) => {
   const {
     $animatedLabelWrapperStyle,
     $animatedLabelTextStyle,
-    $animatedPlaceholderStyle,
     $animatedActiveOutlineStyle,
   } = useTextFieldAnimation({
     variant,
@@ -121,12 +123,16 @@ export const useTextField = (props: TextFieldProps) => {
     hasError,
     $animatedLabelWrapperStyle,
     $animatedLabelTextStyle,
-    $animatedPlaceholderStyle,
     $animatedActiveOutlineStyle,
   };
 
+  // =======================
+  // COMPONENTS
+  // =======================
+
   const LeadingAccessory = isRTL ? props.EndAccessory : props.StartAccessory;
   const TrailingAccessory = isRTL ? props.StartAccessory : props.EndAccessory;
+  const placeholder = isFocused ? props.placeholder : undefined;
 
   // =======================
   // STYLES
@@ -135,11 +141,12 @@ export const useTextField = (props: TextFieldProps) => {
   const $pressableStyles = [$pressableStyle, $pressableStyleOverride];
 
   const data = {
-    isFocused,
     $pressableStyles,
+    $placeholderTextColor,
     $selectionColor,
     $cursorColor,
     $animatedActiveOutlineStyles: undefined,
+    placeholder,
     LeadingAccessory,
     TrailingAccessory,
     onFocusHandler,
@@ -173,7 +180,6 @@ const useTextFieldAnimation = ({
 }): {
   $animatedLabelWrapperStyle: Animated.WithAnimatedObject<ViewStyle>;
   $animatedLabelTextStyle: Animated.WithAnimatedObject<TextStyle>;
-  $animatedPlaceholderStyle: Animated.WithAnimatedObject<TextStyle>;
   $animatedActiveOutlineStyle?: Animated.WithAnimatedObject<ViewStyle>;
 } => {
   const focusProgress = useRef(new Animated.Value(isFocused ? 1 : 0)).current;
@@ -216,11 +222,6 @@ const useTextFieldAnimation = ({
       outputRange: [INACTIVE_LABEL_TOP_POSITION, activeTop],
     });
 
-    const opacity = floatingProgress.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, 1],
-    });
-
     if (variant === 'filled') {
       const scaleX = focusProgress.interpolate({
         inputRange: [0, 1],
@@ -230,7 +231,6 @@ const useTextFieldAnimation = ({
       return {
         $animatedLabelWrapperStyle: { top },
         $animatedLabelTextStyle: { fontSize },
-        $animatedPlaceholderStyle: { opacity },
         $animatedActiveOutlineStyle: {
           transform: [{ scaleX }],
         },
@@ -254,7 +254,6 @@ const useTextFieldAnimation = ({
         ],
       },
       $animatedLabelTextStyle: { fontSize },
-      $animatedPlaceholderStyle: { opacity },
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [variant, hasAccessory]);

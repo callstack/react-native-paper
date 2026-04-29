@@ -41,13 +41,6 @@ export const LABEL_TRANSLATE_X_WITH_ACCESSORY =
 export const LABEL_TRANSLATE_X_WITHOUT_ACCESSORY =
   -layoutSupportMultiplier * LABEL_PADDING_HORIZONTAL;
 
-// ==================
-// PLACEHOLDER POSITIONING
-// ==================
-
-export const PLACEHOLDER_TOP_POSITION =
-  TEXT_FIELD_PADDING_VERTICAL + LINE_HEIGHT_DELTA;
-
 // ============
 // OPACITY
 // ============

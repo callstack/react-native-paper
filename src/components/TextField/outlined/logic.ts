@@ -6,11 +6,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import {
-  INPUT_FONT_SIZE,
-  isWeb,
-  TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL,
-} from '../constants';
+import { INPUT_FONT_SIZE, isWeb } from '../constants';
 import {
   $disabledStyle,
   $supportingTextStyle,
@@ -24,7 +20,6 @@ import {
   LABEL_START_OFFSET_WITH_ACCESSORY,
   LABEL_START_OFFSET_WITHOUT_ACCESSORY,
   DISABLED_OUTLINE_OPACITY,
-  PLACEHOLDER_TOP_POSITION,
 } from './constants';
 import {
   $containerStyle,
@@ -57,7 +52,6 @@ export const getOutlinedTextFieldData = (
     hasError,
     $animatedLabelWrapperStyle,
     $animatedLabelTextStyle,
-    $animatedPlaceholderStyle,
   } = api;
 
   // =======================
@@ -178,31 +172,12 @@ export const getOutlinedTextFieldData = (
     disabled && $disabledStyle,
   ];
 
-  const $animatedPlaceholderStyles: StyleProp<
-    Animated.WithAnimatedObject<TextStyle> | TextStyle
-  > = [
-    $inputStyle,
-    {
-      position: 'absolute',
-      top: PLACEHOLDER_TOP_POSITION,
-      left: TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL,
-      fontSize: INPUT_FONT_SIZE,
-      color:
-        textInputProps.placeholderTextColor ?? theme.colors.onSurfaceVariant,
-      textAlign: isRTL ? 'right' : 'left',
-      writingDirection: isRTL ? 'rtl' : 'ltr',
-    },
-    disabled && $disabledStyle,
-    $animatedPlaceholderStyle,
-  ];
-
   return {
     input,
     disabled,
     hasError,
     $animatedLabelWrapperStyles,
     $animatedLabelTextStyles,
-    $animatedPlaceholderStyles,
     $fieldStyles,
     $disabledBackgroundStyles: undefined,
     $outlineStyles,

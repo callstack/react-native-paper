@@ -142,6 +142,7 @@ exports[`renders filled TextField with label and value 1`] = `
         onBlur={[Function]}
         onChangeText={[Function]}
         onFocus={[Function]}
+        placeholderTextColor="rgba(73, 69, 79, 1)"
         selectionColor="rgba(103, 80, 164, 1)"
         style={
           [
@@ -299,6 +300,7 @@ exports[`renders outlined TextField with label and value 1`] = `
         onBlur={[Function]}
         onChangeText={[Function]}
         onFocus={[Function]}
+        placeholderTextColor="rgba(73, 69, 79, 1)"
         selectionColor="rgba(103, 80, 164, 1)"
         style={
           [

@@ -11,7 +11,6 @@ import {
   INACTIVE_INDICATOR_SIZE,
   INPUT_FONT_SIZE,
   isWeb,
-  TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL,
 } from '../constants';
 import {
   $disabledStyle,
@@ -63,7 +62,6 @@ export const getFilledTextFieldData = (
     hasError,
     $animatedLabelWrapperStyle,
     $animatedLabelTextStyle,
-    $animatedPlaceholderStyle,
     $animatedActiveOutlineStyle,
   } = api;
 
@@ -220,31 +218,12 @@ export const getFilledTextFieldData = (
     disabled && $disabledStyle,
   ];
 
-  const $animatedPlaceholderStyles: StyleProp<
-    Animated.WithAnimatedObject<TextStyle> | TextStyle
-  > = [
-    $inputStyle,
-    {
-      position: 'absolute',
-      top: PADDING_TOP,
-      left: TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL,
-      fontSize: INPUT_FONT_SIZE,
-      color:
-        textInputProps.placeholderTextColor ?? theme.colors.onSurfaceVariant,
-      textAlign: isRTL ? 'right' : 'left',
-      writingDirection: isRTL ? 'rtl' : 'ltr',
-    },
-    disabled && $disabledStyle,
-    $animatedPlaceholderStyle,
-  ];
-
   return {
     input,
     disabled,
     hasError,
     $animatedLabelWrapperStyles,
     $animatedLabelTextStyles,
-    $animatedPlaceholderStyles,
     $fieldStyles,
     $disabledBackgroundStyles,
     $outlineStyles,

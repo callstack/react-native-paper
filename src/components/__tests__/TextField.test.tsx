@@ -429,7 +429,7 @@ it('hides placeholder when the TextField is not focused', () => {
 });
 
 it('shows placeholder when the TextField is focused', () => {
-  const { getByTestId, getByText } = render(
+  const { getByTestId } = render(
     <TextField
       label="Email"
       value=""
@@ -441,12 +441,13 @@ it('shows placeholder when the TextField is focused', () => {
 
   fireEvent(getByTestId('tf-input'), 'focus');
 
-  expect(getByTestId('tf-input').props.placeholder).toBeUndefined();
-  expect(getByText('e.g. user@example.com')).toBeTruthy();
+  expect(getByTestId('tf-input').props.placeholder).toBe(
+    'e.g. user@example.com'
+  );
 });
 
 it('shows placeholder on multiline TextField when focused', () => {
-  const { getByTestId, getByText } = render(
+  const { getByTestId } = render(
     <TextField
       label="Notes"
       value=""
@@ -461,8 +462,7 @@ it('shows placeholder on multiline TextField when focused', () => {
 
   fireEvent(getByTestId('tf-multiline'), 'focus');
 
-  expect(getByTestId('tf-multiline').props.placeholder).toBeUndefined();
-  expect(getByText('Add a note…')).toBeTruthy();
+  expect(getByTestId('tf-multiline').props.placeholder).toBe('Add a note…');
 });
 
 it('hides placeholder again after the TextField loses focus', () => {
