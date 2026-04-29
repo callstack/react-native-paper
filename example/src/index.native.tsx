@@ -13,9 +13,9 @@ import { PaperProvider, MD3DarkTheme, MD3LightTheme } from 'react-native-paper';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 import DrawerItems from './DrawerItems';
+import { PreferencesContext } from './PreferencesContext';
 import App from './RootNavigator';
 import { deviceColorsSupported } from '../utils';
-import { PreferencesContext } from './PreferencesContext';
 import {
   CombinedDefaultTheme,
   CombinedDarkTheme,

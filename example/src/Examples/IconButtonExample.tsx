@@ -137,7 +137,7 @@ const ButtonExample = () => {
             mode="contained"
             style={styles.slightlyRounded}
             size={24}
-            contentStyle={{ padding: 8 }}
+            contentStyle={styles.contentPadding}
             iconColor={MD3Colors.tertiary50}
             onPress={() => {}}
           />
@@ -189,6 +189,9 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     width: 48,
     height: 48,
+  },
+  contentPadding: {
+    padding: 8,
   },
   differentBorderRadius: {
     borderTopLeftRadius: 2,
