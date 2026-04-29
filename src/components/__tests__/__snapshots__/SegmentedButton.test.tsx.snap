@@ -91,6 +91,7 @@ exports[`renders segmented button 1`] = `
               "paddingVertical": 9,
             },
             {
+              "opacity": 1,
               "paddingVertical": 9,
             },
           ]
@@ -216,6 +217,7 @@ exports[`renders segmented button 1`] = `
               "paddingVertical": 9,
             },
             {
+              "opacity": 1,
               "paddingVertical": 9,
             },
           ]

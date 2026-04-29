@@ -99,7 +99,7 @@ const CheckboxAndroid = ({
   const checked = status === 'checked';
   const indeterminate = status === 'indeterminate';
 
-  const { rippleColor, selectionControlColor } =
+  const { selectionControlColor, selectionControlOpacity } =
     getAndroidSelectionControlColor({
       theme,
       disabled,
@@ -123,7 +123,6 @@ const CheckboxAndroid = ({
     <TouchableRipple
       {...rest}
       borderless
-      rippleColor={rippleColor}
       onPress={onPress}
       disabled={disabled}
       accessibilityRole="checkbox"
@@ -133,7 +132,12 @@ const CheckboxAndroid = ({
       testID={testID}
       theme={theme}
     >
-      <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+      <Animated.View
+        style={{
+          transform: [{ scale: scaleAnim }],
+          opacity: selectionControlOpacity,
+        }}
+      >
         <MaterialCommunityIcon
           allowFontScaling={false}
           name={icon}

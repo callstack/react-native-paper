@@ -1,10 +1,10 @@
 import color from 'color';
 
 import { MD3LightTheme } from './LightTheme';
-import { MD3Colors, tokens } from './tokens';
+import { tokens } from './tokens';
 import type { MD3Theme } from '../../../types';
 
-const { palette, opacity } = tokens.md.ref;
+const { palette, stateOpacity } = tokens.md.ref;
 
 export const MD3DarkTheme: MD3Theme = {
   ...MD3LightTheme,
@@ -26,10 +26,6 @@ export const MD3DarkTheme: MD3Theme = {
     surfaceContainerHigh: palette.neutral17,
     surfaceContainerHighest: palette.neutral22,
     surfaceVariant: palette.neutralVariant30,
-    surfaceDisabled: color(palette.neutral90)
-      .alpha(opacity.level2)
-      .rgb()
-      .string(),
     background: palette.neutral6,
     error: palette.error80,
     errorContainer: palette.error30,
@@ -41,10 +37,6 @@ export const MD3DarkTheme: MD3Theme = {
     onTertiaryContainer: palette.tertiary90,
     onSurface: palette.neutral90,
     onSurfaceVariant: palette.neutralVariant80,
-    onSurfaceDisabled: color(palette.neutral90)
-      .alpha(opacity.level4)
-      .rgb()
-      .string(),
     onError: palette.error20,
     onErrorContainer: palette.error80,
     onBackground: palette.neutral90,
@@ -67,12 +59,15 @@ export const MD3DarkTheme: MD3Theme = {
     onTertiaryFixedVariant: palette.tertiary30,
     shadow: palette.neutral0,
     scrim: palette.neutral0,
-    backdrop: color(MD3Colors.neutralVariant20).alpha(0.4).rgb().string(),
+    stateLayerPressed: color(palette.neutral90)
+      .alpha(stateOpacity.pressed)
+      .rgb()
+      .string(),
     elevation: {
       level0: 'transparent',
-      level1: palette.neutral4,
-      level2: palette.neutral10,
-      level3: palette.neutral12,
+      level1: palette.neutral10,
+      level2: palette.neutral12,
+      level3: palette.neutral17,
       level4: palette.neutral17,
       level5: palette.neutral22,
     },

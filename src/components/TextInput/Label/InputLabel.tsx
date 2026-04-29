@@ -18,7 +18,6 @@ const InputLabel = (props: InputLabelProps) => {
     wiggle,
     error,
     focused,
-    opacity,
     labelLayoutWidth,
     labelLayoutHeight,
     labelBackground,
@@ -44,6 +43,8 @@ const InputLabel = (props: InputLabelProps) => {
     backgroundColor,
     roundness,
     placeholderColor,
+    disabledOpacity,
+    opacity,
     errorColor,
     labelTranslationXOffset,
     maxFontSizeMultiplier,
@@ -139,7 +140,12 @@ const InputLabel = (props: InputLabelProps) => {
     // This gives the effect of animating the color, but allows us to use native driver
     <View
       pointerEvents="none"
-      style={[StyleSheet.absoluteFill, styles.overflow, styles.labelContainer]}
+      style={[
+        StyleSheet.absoluteFill,
+        styles.overflow,
+        styles.labelContainer,
+        disabledOpacity != null && { opacity: disabledOpacity },
+      ]}
     >
       <Animated.View
         pointerEvents="none"

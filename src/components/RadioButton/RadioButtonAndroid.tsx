@@ -110,20 +110,18 @@ const RadioButtonAndroid = ({
             value,
           }) === 'checked';
 
-        const { rippleColor, selectionControlColor } =
-          getAndroidSelectionControlColor({
-            theme,
-            disabled,
-            checked,
-            customColor: rest.color,
-            customUncheckedColor: rest.uncheckedColor,
-          });
+        const { selectionControlColor } = getAndroidSelectionControlColor({
+          theme,
+          disabled,
+          checked,
+          customColor: rest.color,
+          customUncheckedColor: rest.uncheckedColor,
+        });
 
         return (
           <TouchableRipple
             {...rest}
             borderless
-            rippleColor={rippleColor}
             onPress={
               disabled
                 ? undefined

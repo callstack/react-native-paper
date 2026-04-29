@@ -1,6 +1,7 @@
-import color from 'color';
-
+import { tokens } from '../../styles/themes/v3/tokens';
 import type { InternalTheme } from '../../types';
+
+const { stateOpacity } = tokens.md.ref;
 
 const getAndroidCheckedColor = ({
   theme,
@@ -30,22 +31,6 @@ const getAndroidUncheckedColor = ({
   return theme.colors.onSurfaceVariant;
 };
 
-const getAndroidRippleColor = ({
-  theme,
-  checkedColor,
-  disabled,
-}: {
-  theme: InternalTheme;
-  checkedColor: string;
-  disabled?: boolean;
-}) => {
-  if (disabled) {
-    return color(theme.colors.onSurface).alpha(0.16).rgb().string();
-  }
-
-  return color(checkedColor).fade(0.32).rgb().string();
-};
-
 const getAndroidControlColor = ({
   theme,
   checked,
@@ -60,7 +45,7 @@ const getAndroidControlColor = ({
   disabled?: boolean;
 }) => {
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return theme.colors.onSurface;
   }
 
   if (checked) {
@@ -87,8 +72,11 @@ export const getAndroidSelectionControlColor = ({
     theme,
     customUncheckedColor,
   });
+  const selectionControlOpacity = disabled
+    ? stateOpacity.disabled
+    : stateOpacity.enabled;
+
   return {
-    rippleColor: getAndroidRippleColor({ theme, checkedColor, disabled }),
     selectionControlColor: getAndroidControlColor({
       theme,
       disabled,
@@ -96,6 +84,7 @@ export const getAndroidSelectionControlColor = ({
       checkedColor,
       uncheckedColor,
     }),
+    selectionControlOpacity,
   };
 };
 
@@ -109,7 +98,7 @@ const getIOSCheckedColor = ({
   disabled?: boolean;
 }) => {
   if (disabled) {
-    return theme.colors.onSurfaceDisabled;
+    return theme.colors.primary;
   }
 
   if (customColor) {
@@ -117,21 +106,6 @@ const getIOSCheckedColor = ({
   }
 
   return theme.colors.primary;
-};
-
-const getIOSRippleColor = ({
-  theme,
-  checkedColor,
-  disabled,
-}: {
-  theme: InternalTheme;
-  checkedColor: string;
-  disabled?: boolean;
-}) => {
-  if (disabled) {
-    return color(theme.colors.onSurface).alpha(0.16).rgb().string();
-  }
-  return color(checkedColor).fade(0.32).rgb().string();
 };
 
 export const getSelectionControlIOSColor = ({
@@ -144,12 +118,12 @@ export const getSelectionControlIOSColor = ({
   customColor?: string;
 }) => {
   const checkedColor = getIOSCheckedColor({ theme, disabled, customColor });
+  const checkedColorOpacity = disabled
+    ? stateOpacity.disabled
+    : stateOpacity.enabled;
+
   return {
     checkedColor,
-    rippleColor: getIOSRippleColor({
-      theme,
-      checkedColor,
-      disabled,
-    }),
+    checkedColorOpacity,
   };
 };

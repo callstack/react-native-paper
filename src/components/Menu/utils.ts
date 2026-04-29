@@ -1,5 +1,8 @@
-import type { InternalTheme, MD3Theme } from '../../types';
+import { tokens } from '../../styles/themes/v3/tokens';
+import type { InternalTheme } from '../../types';
 import type { IconSource } from '../Icon';
+
+const { stateOpacity } = tokens.md.ref;
 
 export const MIN_WIDTH = 112;
 export const MAX_WIDTH = 280;
@@ -15,32 +18,23 @@ type ColorProps = {
   disabled?: boolean;
 };
 
-const getDisabledColor = (theme: InternalTheme) => {
-  return (theme as MD3Theme).colors.onSurfaceDisabled;
+const getTitleColor = ({ theme }: ColorProps) => {
+  return theme.colors.onSurface;
 };
 
-const getTitleColor = ({ theme, disabled }: ColorProps) => {
-  const { colors } = theme as MD3Theme;
-  if (disabled) {
-    return getDisabledColor(theme);
-  }
-
-  return colors.onSurface;
-};
-
-const getIconColor = ({ theme, disabled }: ColorProps) => {
-  const { colors } = theme as MD3Theme;
-  if (disabled) {
-    return getDisabledColor(theme);
-  }
-
-  return colors.onSurfaceVariant;
+const getIconColor = ({ theme }: ColorProps) => {
+  return theme.colors.onSurfaceVariant;
 };
 
 export const getMenuItemColor = ({ theme, disabled }: ColorProps) => {
+  const contentOpacity = disabled
+    ? stateOpacity.disabled
+    : stateOpacity.enabled;
+
   return {
     titleColor: getTitleColor({ theme, disabled }),
     iconColor: getIconColor({ theme, disabled }),
+    contentOpacity,
   };
 };
 

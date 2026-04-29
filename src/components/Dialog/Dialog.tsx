@@ -105,10 +105,10 @@ const Dialog = ({
 }: Props) => {
   const { right, left } = useSafeAreaInsets();
   const theme = useInternalTheme(themeOverrides);
-  const { roundness, colors } = theme as MD3Theme;
+  const { roundness } = theme as MD3Theme;
   const borderRadius = 7 * roundness;
 
-  const backgroundColor = colors.elevation.level3;
+  const backgroundColor = theme.colors.surfaceContainerHigh;
 
   return (
     <Modal
