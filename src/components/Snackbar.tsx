@@ -339,7 +339,7 @@ const Snackbar = ({
                 accessibilityRole="button"
                 borderless
                 onPress={onIconPress}
-                iconColor={theme.colors.inverseOnSurface}
+                iconColor={colors.inverseOnSurface}
                 theme={theme}
                 icon={
                   icon ||

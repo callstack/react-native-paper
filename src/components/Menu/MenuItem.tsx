@@ -145,7 +145,7 @@ const MenuItem = ({
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { titleColor, iconColor } = getMenuItemColor({
+  const { titleColor, iconColor, contentOpacity } = getMenuItemColor({
     theme,
     disabled,
   });
@@ -185,7 +185,7 @@ const MenuItem = ({
       accessibilityState={newAccessibilityState}
       hitSlop={hitSlop}
     >
-      <View style={[styles.row, containerStyle]}>
+      <View style={[styles.row, { opacity: contentOpacity }, containerStyle]}>
         {leadingIcon ? (
           <View style={[{ width: iconWidth }]} pointerEvents="box-none">
             <Icon source={leadingIcon} size={24} color={iconColor} />

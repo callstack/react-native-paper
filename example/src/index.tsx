@@ -111,9 +111,9 @@ export default function PaperExample() {
       rippleEffectEnabled,
       // noop for web, specified to avoid type errors
       toggleRtl: noop,
-      toggleShouldUseDeviceColors: noop,
+      toggleShouldUseDynamicTheme: noop,
       rtl: false,
-      shouldUseDeviceColors: false,
+      shouldUseDynamicTheme: false,
     }),
     [theme, collapsed, customFontLoaded, rippleEffectEnabled]
   );

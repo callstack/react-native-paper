@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { I18nManager } from 'react-native';
 
-import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { InitialState, NavigationContainer } from '@react-navigation/native';
@@ -9,13 +8,19 @@ import { useFonts } from 'expo-font';
 import { useKeepAwake } from 'expo-keep-awake';
 import { StatusBar } from 'expo-status-bar';
 import * as Updates from 'expo-updates';
-import { PaperProvider, MD3DarkTheme, MD3LightTheme } from 'react-native-paper';
+import {
+  PaperProvider,
+  MD3DarkTheme,
+  MD3LightTheme,
+  DynamicLightTheme,
+  DynamicDarkTheme,
+} from 'react-native-paper';
 import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
 
 import DrawerItems from './DrawerItems';
 import { PreferencesContext } from './PreferencesContext';
 import App from './RootNavigator';
-import { deviceColorsSupported } from '../utils';
+import { dynamicThemeSupported } from '../utils';
 import {
   CombinedDefaultTheme,
   CombinedDarkTheme,
@@ -40,7 +45,7 @@ export default function PaperExample() {
     InitialState | undefined
   >();
 
-  const [shouldUseDeviceColors, setShouldUseDeviceColors] =
+  const [shouldUseDynamicTheme, setShouldUseDynamicTheme] =
     React.useState(true);
   const [isDarkMode, setIsDarkMode] = React.useState(false);
   const [rtl, setRtl] = React.useState<boolean>(
@@ -50,19 +55,13 @@ export default function PaperExample() {
   const [customFontLoaded, setCustomFont] = React.useState(false);
   const [rippleEffectEnabled, setRippleEffectEnabled] = React.useState(true);
 
-  const { theme: mdTheme } = useMaterial3Theme();
   const theme = React.useMemo(() => {
-    if (!deviceColorsSupported || !shouldUseDeviceColors) {
-      return isDarkMode ? MD3DarkTheme : MD3LightTheme;
+    if (dynamicThemeSupported && shouldUseDynamicTheme) {
+      return isDarkMode ? DynamicDarkTheme : DynamicLightTheme;
     }
 
-    return isDarkMode
-      ? { ...MD3DarkTheme, colors: { ...MD3DarkTheme.colors, ...mdTheme.dark } }
-      : {
-          ...MD3LightTheme,
-          colors: { ...MD3LightTheme.colors, ...mdTheme.light },
-        };
-  }, [isDarkMode, mdTheme, shouldUseDeviceColors]);
+    return isDarkMode ? MD3DarkTheme : MD3LightTheme;
+  }, [isDarkMode, shouldUseDynamicTheme]);
 
   React.useEffect(() => {
     const restoreState = async () => {
@@ -129,8 +128,8 @@ export default function PaperExample() {
 
   const preferences = React.useMemo(
     () => ({
-      toggleShouldUseDeviceColors: () =>
-        setShouldUseDeviceColors((oldValue) => !oldValue),
+      toggleShouldUseDynamicTheme: () =>
+        setShouldUseDynamicTheme((oldValue) => !oldValue),
       toggleTheme: () => setIsDarkMode((oldValue) => !oldValue),
       toggleRtl: () => setRtl((rtl) => !rtl),
       toggleCollapsed: () => setCollapsed(!collapsed),
@@ -141,14 +140,14 @@ export default function PaperExample() {
       collapsed,
       rtl,
       theme,
-      shouldUseDeviceColors,
+      shouldUseDynamicTheme: shouldUseDynamicTheme,
     }),
     [
       rtl,
       theme,
       collapsed,
       customFontLoaded,
-      shouldUseDeviceColors,
+      shouldUseDynamicTheme,
       rippleEffectEnabled,
     ]
   );

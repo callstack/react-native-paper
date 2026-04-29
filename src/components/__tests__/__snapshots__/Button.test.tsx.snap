@@ -92,6 +92,9 @@ exports[`renders button with an accessibility hint 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            {
+              "opacity": 1,
+            },
             undefined,
           ]
         }
@@ -242,6 +245,9 @@ exports[`renders button with an accessibility label 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            {
+              "opacity": 1,
+            },
             undefined,
           ]
         }
@@ -390,6 +396,9 @@ exports[`renders button with button color 1`] = `
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
+            },
+            {
+              "opacity": 1,
             },
             undefined,
           ]
@@ -540,6 +549,9 @@ exports[`renders button with color 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            {
+              "opacity": 1,
+            },
             undefined,
           ]
         }
@@ -689,6 +701,9 @@ exports[`renders button with custom testID 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            {
+              "opacity": 1,
+            },
             undefined,
           ]
         }
@@ -837,6 +852,9 @@ exports[`renders button with icon 1`] = `
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
+            },
+            {
+              "opacity": 1,
             },
             undefined,
           ]
@@ -1035,6 +1053,9 @@ exports[`renders button with icon in reverse order 1`] = `
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
+            },
+            {
+              "opacity": 1,
             },
             {
               "flexDirection": "row-reverse",
@@ -1236,6 +1257,9 @@ exports[`renders contained contained with mode 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            {
+              "opacity": 1,
+            },
             undefined,
           ]
         }
@@ -1386,6 +1410,9 @@ exports[`renders disabled button 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            {
+              "opacity": 0.38,
+            },
             undefined,
           ]
         }
@@ -1422,7 +1449,7 @@ exports[`renders disabled button 1`] = `
                   undefined,
                   false,
                   {
-                    "color": "rgba(29, 27, 32, 0.38)",
+                    "color": "rgba(29, 27, 32, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,
                     "fontWeight": "500",
@@ -1534,6 +1561,9 @@ exports[`renders loading button 1`] = `
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
+            },
+            {
+              "opacity": 1,
             },
             undefined,
           ]
@@ -1824,7 +1854,7 @@ exports[`renders outlined button with mode 1`] = `
     style={
       {
         "backgroundColor": "transparent",
-        "borderColor": "rgba(121, 116, 126, 1)",
+        "borderColor": "rgba(202, 196, 208, 1)",
         "borderRadius": 20,
         "borderStyle": "solid",
         "borderWidth": 1,
@@ -1891,6 +1921,9 @@ exports[`renders outlined button with mode 1`] = `
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
+            },
+            {
+              "opacity": 1,
             },
             undefined,
           ]
@@ -2042,6 +2075,9 @@ exports[`renders text button by default 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            {
+              "opacity": 1,
+            },
             undefined,
           ]
         }
@@ -2190,6 +2226,9 @@ exports[`renders text button with mode 1`] = `
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
+            },
+            {
+              "opacity": 1,
             },
             undefined,
           ]

@@ -142,7 +142,7 @@ const TextInputIcon = ({
 
   const theme = useInternalTheme(themeOverrides);
 
-  const iconColor = getIconColor({
+  const { color: iconColor, opacity: iconOpacity } = getIconColor({
     theme,
     disabled,
     isTextInputFocused,
@@ -150,7 +150,7 @@ const TextInputIcon = ({
   });
 
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container, { opacity: iconOpacity }, style]}>
       <IconButton
         icon={icon}
         style={styles.iconButton}

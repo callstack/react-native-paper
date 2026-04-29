@@ -163,6 +163,7 @@ exports[`can render leading radio button control 1`] = `
               },
               {
                 "color": "rgba(29, 27, 32, 1)",
+                "opacity": 1,
                 "textAlign": "right",
               },
               undefined,
@@ -257,6 +258,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
               },
               {
                 "color": "rgba(29, 27, 32, 1)",
+                "opacity": 1,
                 "textAlign": "left",
               },
               undefined,
@@ -408,6 +410,7 @@ exports[`can render the iOS radio button on different platforms 1`] = `
               },
               {
                 "color": "rgba(29, 27, 32, 1)",
+                "opacity": 1,
                 "textAlign": "left",
               },
               undefined,
@@ -585,6 +588,7 @@ exports[`renders unchecked 1`] = `
               },
               {
                 "color": "rgba(29, 27, 32, 1)",
+                "opacity": 1,
                 "textAlign": "left",
               },
               undefined,

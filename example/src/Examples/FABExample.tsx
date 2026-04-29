@@ -96,14 +96,6 @@ const FABExample = () => {
           visible={visible}
         />
         <FAB
-          icon="cancel"
-          label="Disabled FAB"
-          style={styles.fab}
-          onPress={() => {}}
-          visible={visible}
-          disabled
-        />
-        <FAB
           icon="format-letter-case"
           label="Mixed case"
           style={styles.fab}

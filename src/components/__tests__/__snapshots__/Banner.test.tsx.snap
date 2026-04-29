@@ -5,7 +5,7 @@ exports[`render visible banner, with custom theme 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(255, 255, 255, 1)",
+      "backgroundColor": "rgba(247, 242, 250, 1)",
       "opacity": 1,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -22,7 +22,7 @@ exports[`render visible banner, with custom theme 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(255, 255, 255, 1)",
+        "backgroundColor": "rgba(247, 242, 250, 1)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": {
@@ -208,6 +208,9 @@ exports[`render visible banner, with custom theme 1`] = `
                         "flexDirection": "row",
                         "justifyContent": "center",
                       },
+                      {
+                        "opacity": 1,
+                      },
                       undefined,
                     ]
                   }
@@ -278,7 +281,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(255, 255, 255, 1)",
+      "backgroundColor": "rgba(247, 242, 250, 1)",
       "opacity": 0,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -295,7 +298,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(255, 255, 255, 1)",
+        "backgroundColor": "rgba(247, 242, 250, 1)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": {
@@ -413,7 +416,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(255, 255, 255, 1)",
+      "backgroundColor": "rgba(247, 242, 250, 1)",
       "opacity": 1,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -430,7 +433,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(255, 255, 255, 1)",
+        "backgroundColor": "rgba(247, 242, 250, 1)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": {
@@ -638,6 +641,9 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                         "flexDirection": "row",
                         "justifyContent": "center",
                       },
+                      {
+                        "opacity": 1,
+                      },
                       undefined,
                     ]
                   }
@@ -708,7 +714,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(255, 255, 255, 1)",
+      "backgroundColor": "rgba(247, 242, 250, 1)",
       "opacity": 1,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -725,7 +731,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(255, 255, 255, 1)",
+        "backgroundColor": "rgba(247, 242, 250, 1)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": {
@@ -911,6 +917,9 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                         "flexDirection": "row",
                         "justifyContent": "center",
                       },
+                      {
+                        "opacity": 1,
+                      },
                       undefined,
                     ]
                   }
@@ -1060,6 +1069,9 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                         "flexDirection": "row",
                         "justifyContent": "center",
                       },
+                      {
+                        "opacity": 1,
+                      },
                       undefined,
                     ]
                   }
@@ -1130,7 +1142,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(255, 255, 255, 1)",
+      "backgroundColor": "rgba(247, 242, 250, 1)",
       "opacity": 1,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -1147,7 +1159,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(255, 255, 255, 1)",
+        "backgroundColor": "rgba(247, 242, 250, 1)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": {
@@ -1275,7 +1287,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgba(255, 255, 255, 1)",
+      "backgroundColor": "rgba(247, 242, 250, 1)",
       "opacity": 1,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -1292,7 +1304,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgba(255, 255, 255, 1)",
+        "backgroundColor": "rgba(247, 242, 250, 1)",
         "flex": undefined,
         "shadowColor": "#000",
         "shadowOffset": {
