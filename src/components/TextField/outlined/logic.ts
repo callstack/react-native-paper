@@ -21,9 +21,9 @@ import {
 import type { TextFieldProps, TextFieldSharedApi } from '../TextField';
 import { getSupportingTextColor, getLabelColor } from '../utils';
 import {
-  LABEL_LEFT_OFFSET_WITH_ACCESSORY,
-  LABEL_LEFT_OFFSET_WITHOUT_ACCESSORY,
-  OUTLINE_ALPHA,
+  LABEL_START_OFFSET_WITH_ACCESSORY,
+  LABEL_START_OFFSET_WITHOUT_ACCESSORY,
+  DISABLED_OUTLINE_OPACITY,
   PLACEHOLDER_TOP_POSITION,
 } from './constants';
 import {
@@ -109,7 +109,7 @@ export const getOutlinedTextFieldData = (
       borderWidth: isFocused ? 2 : 1,
       borderColor: outlineColor,
     },
-    disabled && { opacity: OUTLINE_ALPHA },
+    disabled && { opacity: DISABLED_OUTLINE_OPACITY },
     $fieldStyleOverride,
   ];
 
@@ -131,8 +131,8 @@ export const getOutlinedTextFieldData = (
     $labelWrapperStyle,
     {
       left: hasAccessory
-        ? LABEL_LEFT_OFFSET_WITH_ACCESSORY
-        : LABEL_LEFT_OFFSET_WITHOUT_ACCESSORY,
+        ? LABEL_START_OFFSET_WITH_ACCESSORY
+        : LABEL_START_OFFSET_WITHOUT_ACCESSORY,
       backgroundColor: labelBackgroundColor,
     },
     $animatedLabelWrapperStyle,

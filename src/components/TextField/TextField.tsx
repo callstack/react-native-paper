@@ -74,7 +74,7 @@ export interface TextFieldProps extends TextInputProps {
   pressableStyle?: StyleProp<ViewStyle>;
   /**
    * Style overrides for the field container (the bordered row that includes
-   * LeftAccessory, input content, and RightAccessory).
+   * StartAccessory, input content, and EndAccessory).
    */
   fieldStyle?: StyleProp<ViewStyle>;
   /**
@@ -84,19 +84,19 @@ export interface TextFieldProps extends TextInputProps {
   containerStyle?: StyleProp<ViewStyle>;
   theme?: ThemeProp;
   /**
-   * An optional component to render on the right side of the input.
+   * An optional component to render on the start side of the input (leading in LTR).
    */
-  RightAccessory?: ComponentType<TextFieldAccessoryProps>;
+  StartAccessory?: ComponentType<TextFieldAccessoryProps>;
   /**
-   * An optional component to render on the left side of the input.
+   * An optional component to render on the end side of the input (trailing in LTR).
    */
-  LeftAccessory?: ComponentType<TextFieldAccessoryProps>;
+  EndAccessory?: ComponentType<TextFieldAccessoryProps>;
 }
 
 /**
  * A text field lets users enter and edit text. It shows an optional floating label,
  * supports `filled` and `outlined` variants, optional supporting text (including
- * error state), and left/right accessories.
+ * error state), and start/end accessories.
  *
  * ## Usage
  * ```js
@@ -130,8 +130,8 @@ export interface TextFieldProps extends TextInputProps {
  *       label="Search"
  *       value={text}
  *       onChangeText={setText}
- *       LeftAccessory={LeadingAccessory}
- *       RightAccessory={TrailingAccessory}
+ *       StartAccessory={LeadingAccessory}
+ *       EndAccessory={TrailingAccessory}
  *     />
  *   );
  * };
@@ -155,8 +155,8 @@ function TextField(props: TextFieldProps) {
     fieldStyle,
     containerStyle,
     theme,
-    LeftAccessory,
-    RightAccessory,
+    StartAccessory,
+    EndAccessory,
     ...textInputProps
   } = props;
 

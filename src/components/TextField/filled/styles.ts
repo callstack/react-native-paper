@@ -6,7 +6,7 @@ import {
   TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL,
   TEXT_FIELD_PADDING_VERTICAL,
 } from '../constants';
-import { FILLED_CONTAINER_ALPHA } from './constants';
+import { DISABLED_CONTAINER_OPACITY } from './constants';
 
 export const $fieldStyle: ViewStyle = {
   minHeight: TEXT_FIELD_HEIGHT,
@@ -40,16 +40,13 @@ export const $labelTextStyle: TextStyle = {
   paddingHorizontal: 0,
 };
 
-/* Disabled tint (`onSurface @ 0.04`) is rendered as a childless overlay so its
-     alpha can be applied via the `opacity` style without leaking onto the label
-     and input. The View accepts `PlatformColor` directly. */
 export const $disabledBackgroundStyle: ViewStyle = {
   position: 'absolute',
   top: 0,
   left: 0,
   right: 0,
   bottom: 0,
-  opacity: FILLED_CONTAINER_ALPHA,
+  opacity: DISABLED_CONTAINER_OPACITY,
   borderTopStartRadius: TEXT_FIELD_BORDER_RADIUS,
   borderTopEndRadius: TEXT_FIELD_BORDER_RADIUS,
 };

@@ -149,7 +149,8 @@ it('does not pass TextField-only props through to TextInput', () => {
   const input = getByTestId('tf-native');
   expect(input.props.variant).toBeUndefined();
   expect(input.props.theme).toBeUndefined();
-  expect(input.props.LeftAccessory).toBeUndefined();
+  expect(input.props.StartAccessory).toBeUndefined();
+  expect(input.props.EndAccessory).toBeUndefined();
   expect(input.props.pressableStyle).toBeUndefined();
   expect(input.props.fieldStyle).toBeUndefined();
   expect(input.props.containerStyle).toBeUndefined();
@@ -238,17 +239,17 @@ it('exposes the TextInput instance via ref prop', () => {
 });
 
 it('passes status, editable, and multiline to accessories', () => {
-  const leftProps: TextFieldAccessoryProps[] = [];
-  const rightProps: TextFieldAccessoryProps[] = [];
+  const startAccessoryProps: TextFieldAccessoryProps[] = [];
+  const endAccessoryProps: TextFieldAccessoryProps[] = [];
 
-  function LeftAccessory(props: TextFieldAccessoryProps) {
-    leftProps.push(props);
-    return <View testID="left-accessory" />;
+  function StartAccessory(props: TextFieldAccessoryProps) {
+    startAccessoryProps.push(props);
+    return <View testID="start-accessory" />;
   }
 
-  function RightAccessory(props: TextFieldAccessoryProps) {
-    rightProps.push(props);
-    return <View testID="right-accessory" />;
+  function EndAccessory(props: TextFieldAccessoryProps) {
+    endAccessoryProps.push(props);
+    return <View testID="end-accessory" />;
   }
 
   const { getByTestId } = render(
@@ -259,19 +260,19 @@ it('passes status, editable, and multiline to accessories', () => {
       multiline
       status="error"
       editable={false}
-      LeftAccessory={LeftAccessory}
-      RightAccessory={RightAccessory}
+      StartAccessory={StartAccessory}
+      EndAccessory={EndAccessory}
     />
   );
 
-  expect(getByTestId('left-accessory')).toBeTruthy();
-  expect(getByTestId('right-accessory')).toBeTruthy();
-  expect(leftProps[0]).toMatchObject({
+  expect(getByTestId('start-accessory')).toBeTruthy();
+  expect(getByTestId('end-accessory')).toBeTruthy();
+  expect(startAccessoryProps[0]).toMatchObject({
     status: 'error',
     editable: false,
     multiline: true,
   });
-  expect(rightProps[0]).toMatchObject({
+  expect(endAccessoryProps[0]).toMatchObject({
     status: 'error',
     editable: false,
     multiline: true,
@@ -357,15 +358,15 @@ it('applies RTL writing direction to supporting text', () => {
   );
 });
 
-it('places RightAccessory before LeftAccessory in the tree when RTL', () => {
+it('places EndAccessory before StartAccessory in the tree when RTL', () => {
   I18nManager.isRTL = true;
 
-  function LeftAccessory() {
-    return <View testID="rtl-acc-from-left-prop" />;
+  function StartAccessory() {
+    return <View testID="rtl-acc-from-start-prop" />;
   }
 
-  function RightAccessory() {
-    return <View testID="rtl-acc-from-right-prop" />;
+  function EndAccessory() {
+    return <View testID="rtl-acc-from-end-prop" />;
   }
 
   const { toJSON } = render(
@@ -373,27 +374,27 @@ it('places RightAccessory before LeftAccessory in the tree when RTL', () => {
       label="Email"
       value=""
       onChangeText={() => {}}
-      LeftAccessory={LeftAccessory}
-      RightAccessory={RightAccessory}
+      StartAccessory={StartAccessory}
+      EndAccessory={EndAccessory}
       testID="tf-input-rtl-order"
     />
   );
 
   const tree = toJSON();
-  expect(
-    firstIndexOfTestIdInTree(tree, 'rtl-acc-from-right-prop')
-  ).toBeLessThan(firstIndexOfTestIdInTree(tree, 'rtl-acc-from-left-prop'));
+  expect(firstIndexOfTestIdInTree(tree, 'rtl-acc-from-end-prop')).toBeLessThan(
+    firstIndexOfTestIdInTree(tree, 'rtl-acc-from-start-prop')
+  );
 });
 
-it('places LeftAccessory before RightAccessory in the tree when LTR', () => {
+it('places StartAccessory before EndAccessory in the tree when LTR', () => {
   I18nManager.isRTL = false;
 
-  function LeftAccessory() {
-    return <View testID="ltr-acc-from-left-prop" />;
+  function StartAccessory() {
+    return <View testID="ltr-acc-from-start-prop" />;
   }
 
-  function RightAccessory() {
-    return <View testID="ltr-acc-from-right-prop" />;
+  function EndAccessory() {
+    return <View testID="ltr-acc-from-end-prop" />;
   }
 
   const { toJSON } = render(
@@ -401,16 +402,16 @@ it('places LeftAccessory before RightAccessory in the tree when LTR', () => {
       label="Email"
       value=""
       onChangeText={() => {}}
-      LeftAccessory={LeftAccessory}
-      RightAccessory={RightAccessory}
+      StartAccessory={StartAccessory}
+      EndAccessory={EndAccessory}
       testID="tf-input-ltr-order"
     />
   );
 
   const tree = toJSON();
-  expect(firstIndexOfTestIdInTree(tree, 'ltr-acc-from-left-prop')).toBeLessThan(
-    firstIndexOfTestIdInTree(tree, 'ltr-acc-from-right-prop')
-  );
+  expect(
+    firstIndexOfTestIdInTree(tree, 'ltr-acc-from-start-prop')
+  ).toBeLessThan(firstIndexOfTestIdInTree(tree, 'ltr-acc-from-end-prop'));
 });
 
 it('hides placeholder when the TextField is not focused', () => {
@@ -481,9 +482,9 @@ it('hides placeholder again after the TextField loses focus', () => {
   expect(getByTestId('tf-input').props.placeholder).toBeUndefined();
 });
 
-it('maps a lone LeftAccessory to leading in LTR and trailing in RTL (tree order)', () => {
-  function LoneLeftAccessory() {
-    return <View testID="lone-left-acc" />;
+it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order)', () => {
+  function LoneStartAccessory() {
+    return <View testID="lone-start-acc" />;
   }
 
   I18nManager.isRTL = false;
@@ -493,7 +494,7 @@ it('maps a lone LeftAccessory to leading in LTR and trailing in RTL (tree order)
       label="Email"
       value=""
       onChangeText={() => {}}
-      LeftAccessory={LoneLeftAccessory}
+      StartAccessory={LoneStartAccessory}
       testID="tf-lone-ltr"
     />
   );
@@ -505,18 +506,18 @@ it('maps a lone LeftAccessory to leading in LTR and trailing in RTL (tree order)
       label="Email"
       value=""
       onChangeText={() => {}}
-      LeftAccessory={LoneLeftAccessory}
+      StartAccessory={LoneStartAccessory}
       testID="tf-lone-rtl"
     />
   );
 
   const ltrTree = toJsonLtr();
-  expect(firstIndexOfTestIdInTree(ltrTree, 'lone-left-acc')).toBeLessThan(
+  expect(firstIndexOfTestIdInTree(ltrTree, 'lone-start-acc')).toBeLessThan(
     firstIndexOfTestIdInTree(ltrTree, 'tf-lone-ltr')
   );
 
   const rtlTree = toJsonRtl();
   expect(firstIndexOfTestIdInTree(rtlTree, 'tf-lone-rtl')).toBeLessThan(
-    firstIndexOfTestIdInTree(rtlTree, 'lone-left-acc')
+    firstIndexOfTestIdInTree(rtlTree, 'lone-start-acc')
   );
 });

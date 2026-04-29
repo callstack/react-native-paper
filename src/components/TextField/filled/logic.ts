@@ -27,8 +27,8 @@ import {
   getSupportingTextColor,
 } from '../utils';
 import {
-  LABEL_LEFT_OFFSET_WITH_ACCESSORY,
-  LABEL_LEFT_OFFSET_WITHOUT_ACCESSORY,
+  LABEL_START_OFFSET_WITH_ACCESSORY,
+  LABEL_START_OFFSET_WITHOUT_ACCESSORY,
   PADDING_TOP,
 } from './constants';
 import {
@@ -120,8 +120,8 @@ export const getFilledTextFieldData = (
     $labelWrapperStyle,
     {
       left: hasAccessory
-        ? LABEL_LEFT_OFFSET_WITH_ACCESSORY
-        : LABEL_LEFT_OFFSET_WITHOUT_ACCESSORY,
+        ? LABEL_START_OFFSET_WITH_ACCESSORY
+        : LABEL_START_OFFSET_WITHOUT_ACCESSORY,
     },
     $animatedLabelWrapperStyle,
   ];
@@ -146,7 +146,7 @@ export const getFilledTextFieldData = (
     $fieldStyleOverride,
   ];
 
-  /* Disabled tint (`onSurface @ 0.04`) is rendered as a childless overlay so its
+  /* Disabled tint (DISABLED_CONTAINER_OPACITY) is rendered as a childless overlay so its
      alpha can be applied via the `opacity` style without leaking onto the label
      and input. The View accepts `PlatformColor` directly. */
   const $disabledBackgroundStyles: StyleProp<ViewStyle> = disabled

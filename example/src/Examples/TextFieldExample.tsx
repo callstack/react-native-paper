@@ -74,8 +74,8 @@ const TextFieldExample = () => {
           label="With accessories"
           value={searchQuery}
           onChangeText={setSearchQuery}
-          LeftAccessory={SearchLeadingAccessory}
-          RightAccessory={ClearFilledSearchAccessory}
+          StartAccessory={SearchLeadingAccessory}
+          EndAccessory={ClearFilledSearchAccessory}
           pressableStyle={styles.field}
           placeholder="Search"
         />
@@ -139,8 +139,8 @@ const TextFieldExample = () => {
           label="With accessories"
           value={outlinedSearchQuery}
           onChangeText={setOutlinedSearchQuery}
-          LeftAccessory={SearchLeadingAccessory}
-          RightAccessory={ClearOutlinedSearchAccessory}
+          StartAccessory={SearchLeadingAccessory}
+          EndAccessory={ClearOutlinedSearchAccessory}
           pressableStyle={styles.field}
           placeholder="Search"
         />

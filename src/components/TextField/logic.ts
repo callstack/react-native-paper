@@ -63,7 +63,7 @@ export const useTextField = (props: TextFieldProps) => {
   const { isRTL } = I18nManager;
   const disabled = props.editable === false || props.status === 'disabled';
   const isFloating = isFocused || !!props.value;
-  const hasAccessory = isRTL ? !!props.RightAccessory : !!props.LeftAccessory;
+  const hasAccessory = isRTL ? !!props.EndAccessory : !!props.StartAccessory;
   const hasError = props.status === 'error';
 
   // =======================
@@ -125,8 +125,8 @@ export const useTextField = (props: TextFieldProps) => {
     $animatedActiveOutlineStyle,
   };
 
-  const LeadingAccessory = isRTL ? props.RightAccessory : props.LeftAccessory;
-  const TrailingAccessory = isRTL ? props.LeftAccessory : props.RightAccessory;
+  const LeadingAccessory = isRTL ? props.EndAccessory : props.StartAccessory;
+  const TrailingAccessory = isRTL ? props.StartAccessory : props.EndAccessory;
 
   // =======================
   // STYLES
