@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
 import { act, render } from '@testing-library/react-native';
-import color from 'color';
 
 import { getTheme } from '../../core/theming';
 import { pink500 } from '../../styles/themes/v2/colors';
@@ -304,21 +303,6 @@ describe('getIconButtonColor - border color', () => {
       })
     ).toMatchObject({
       borderColor: getTheme().colors.outline,
-    });
-  });
-});
-
-describe('getIconButtonColor - ripple color', () => {
-  it('should return theme color, for theme version 3', () => {
-    expect(
-      getIconButtonColor({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme().colors.onSurfaceVariant)
-        .alpha(0.12)
-        .rgb()
-        .string(),
     });
   });
 });

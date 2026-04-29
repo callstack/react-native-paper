@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   AccessibilityState,
   Animated,
-  ColorValue,
   GestureResponderEvent,
   Platform,
   PressableAndroidRippleConfig,
@@ -73,10 +72,6 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Note: Check will not be shown if `icon` is specified. If specified, `icon` will be shown regardless of `selected`.
    */
   showSelectedCheck?: boolean;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
   /**
    * Whether the chip is disabled. A disabled chip is greyed out and `onPress` is not called on touch.
    */
@@ -201,7 +196,6 @@ const Chip = ({
   theme: themeOverrides,
   testID = 'chip',
   selectedColor,
-  rippleColor: customRippleColor,
   showSelectedOverlay = false,
   showSelectedCheck = true,
   ellipsizeMode,
@@ -263,7 +257,6 @@ const Chip = ({
     borderColor,
     textColor,
     iconColor,
-    rippleColor,
     selectedBackgroundColor,
     backgroundColor,
   } = getChipColors({
@@ -273,7 +266,6 @@ const Chip = ({
     showSelectedOverlay,
     customBackgroundColor,
     disabled,
-    customRippleColor,
   });
 
   const accessibilityState: AccessibilityState = {
@@ -324,7 +316,6 @@ const Chip = ({
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}
         onPressOut={hasPassedTouchHandler ? handlePressOut : undefined}
         delayLongPress={delayLongPress}
-        rippleColor={rippleColor}
         disabled={disabled}
         accessibilityLabel={accessibilityLabel}
         accessibilityRole={accessibilityRole}

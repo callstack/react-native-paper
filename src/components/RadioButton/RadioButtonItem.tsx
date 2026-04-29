@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -60,10 +59,6 @@ export type Props = {
    * Custom color for radio.
    */
   color?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
   /**
    * Status of radio button.
    */
@@ -152,7 +147,6 @@ const RadioButtonItem = ({
   disabled,
   color,
   uncheckedColor,
-  rippleColor,
   status,
   theme: themeOverrides,
   background,
@@ -223,7 +217,6 @@ const RadioButtonItem = ({
             disabled={disabled}
             background={background}
             theme={theme}
-            rippleColor={rippleColor}
             hitSlop={hitSlop}
           >
             <View style={[styles.container, style]} pointerEvents="none">

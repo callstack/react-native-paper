@@ -1,11 +1,5 @@
 import * as React from 'react';
-import type {
-  Animated,
-  ColorValue,
-  StyleProp,
-  View,
-  ViewStyle,
-} from 'react-native';
+import type { Animated, StyleProp, View, ViewStyle } from 'react-native';
 
 import type { ThemeProp } from 'src/types';
 
@@ -20,10 +14,6 @@ export type Props = React.ComponentPropsWithoutRef<typeof IconButton> & {
    *  Custom color for action icon.
    */
   color?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
   /**
    * Name of the icon to show.
    */
@@ -91,7 +81,6 @@ const AppbarAction = forwardRef<View, Props>(
       accessibilityLabel,
       isLeading,
       theme: themeOverrides,
-      rippleColor,
       ...rest
     }: Props,
     ref
@@ -115,7 +104,6 @@ const AppbarAction = forwardRef<View, Props>(
         accessibilityLabel={accessibilityLabel}
         animated
         ref={ref}
-        rippleColor={rippleColor}
         {...rest}
       />
     );

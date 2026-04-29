@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  ColorValue,
   I18nManager,
   StyleProp,
   StyleSheet,
@@ -58,14 +57,6 @@ type PaginationDropdownProps = {
    */
   onItemsPerPageChange?: (numberOfItemsPerPage: number) => void;
   /**
-   * Color of the dropdown item ripple effect.
-   */
-  dropdownItemRippleColor?: ColorValue;
-  /**
-   * Color of the select page dropdown ripple effect.
-   */
-  selectPageDropdownRippleColor?: ColorValue;
-  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -89,10 +80,6 @@ type PaginationControlsProps = {
    */
   showFastPaginationControls?: boolean;
   /**
-   * Color of the pagination control ripple effect.
-   */
-  paginationControlRippleColor?: ColorValue;
-  /**
    * @optional
    */
   theme?: ThemeProp;
@@ -104,7 +91,6 @@ const PaginationControls = ({
   onPageChange,
   showFastPaginationControls,
   theme: themeOverrides,
-  paginationControlRippleColor,
 }: PaginationControlsProps) => {
   const theme = useInternalTheme(themeOverrides);
 
@@ -123,7 +109,6 @@ const PaginationControls = ({
             />
           )}
           iconColor={textColor}
-          rippleColor={paginationControlRippleColor}
           disabled={page === 0}
           onPress={() => onPageChange(0)}
           accessibilityLabel="page-first"
@@ -140,7 +125,6 @@ const PaginationControls = ({
           />
         )}
         iconColor={textColor}
-        rippleColor={paginationControlRippleColor}
         disabled={page === 0}
         onPress={() => onPageChange(page - 1)}
         accessibilityLabel="chevron-left"
@@ -156,7 +140,6 @@ const PaginationControls = ({
           />
         )}
         iconColor={textColor}
-        rippleColor={paginationControlRippleColor}
         disabled={numberOfPages === 0 || page === numberOfPages - 1}
         onPress={() => onPageChange(page + 1)}
         accessibilityLabel="chevron-right"
@@ -173,7 +156,6 @@ const PaginationControls = ({
             />
           )}
           iconColor={textColor}
-          rippleColor={paginationControlRippleColor}
           disabled={numberOfPages === 0 || page === numberOfPages - 1}
           onPress={() => onPageChange(numberOfPages - 1)}
           accessibilityLabel="page-last"
@@ -189,8 +171,6 @@ const PaginationDropdown = ({
   numberOfItemsPerPage,
   onItemsPerPageChange,
   theme: themeOverrides,
-  selectPageDropdownRippleColor,
-  dropdownItemRippleColor,
 }: PaginationDropdownProps) => {
   const theme = useInternalTheme(themeOverrides);
   const { colors } = theme;
@@ -209,7 +189,6 @@ const PaginationDropdown = ({
           icon="menu-down"
           contentStyle={styles.contentStyle}
           theme={theme}
-          rippleColor={selectPageDropdownRippleColor}
         >
           {`${numberOfItemsPerPage}`}
         </Button>
@@ -227,7 +206,6 @@ const PaginationDropdown = ({
             onItemsPerPageChange?.(option);
             toggleSelect(false);
           }}
-          rippleColor={dropdownItemRippleColor}
           title={option}
           theme={theme}
         />
@@ -304,8 +282,6 @@ const DataTablePagination = ({
   onItemsPerPageChange,
   selectPageDropdownLabel,
   selectPageDropdownAccessibilityLabel,
-  selectPageDropdownRippleColor,
-  dropdownItemRippleColor,
   theme: themeOverrides,
   ...rest
 }: Props) => {
@@ -339,8 +315,6 @@ const DataTablePagination = ({
               numberOfItemsPerPageList={numberOfItemsPerPageList}
               numberOfItemsPerPage={numberOfItemsPerPage}
               onItemsPerPageChange={onItemsPerPageChange}
-              selectPageDropdownRippleColor={selectPageDropdownRippleColor}
-              dropdownItemRippleColor={dropdownItemRippleColor}
               theme={theme}
             />
           </View>

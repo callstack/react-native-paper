@@ -1,6 +1,5 @@
-import { ColorValue, StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet, StyleProp, ViewStyle } from 'react-native';
 
-import color from 'color';
 import type { EllipsizeProp, InternalTheme, ThemeProp } from 'src/types';
 
 type Description =
@@ -90,11 +89,9 @@ const styles = StyleSheet.create({
 export const getAccordionColors = ({
   theme,
   isExpanded,
-  customRippleColor,
 }: {
   theme: InternalTheme;
   isExpanded?: boolean;
-  customRippleColor?: ColorValue;
 }) => {
   const titleColor = theme.colors.onSurface;
 
@@ -102,12 +99,8 @@ export const getAccordionColors = ({
 
   const titleTextColor = isExpanded ? theme.colors?.primary : titleColor;
 
-  const rippleColor =
-    customRippleColor || color(titleTextColor).alpha(0.12).rgb().string();
-
   return {
     descriptionColor,
     titleTextColor,
-    rippleColor,
   };
 };

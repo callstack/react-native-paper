@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { render } from '@testing-library/react-native';
-import color from 'color';
 
 import { getTheme } from '../../core/theming';
 import Menu from '../Menu/Menu';
@@ -102,21 +101,6 @@ describe('getMenuItemColor - icon color', () => {
       })
     ).toMatchObject({
       iconColor: getTheme().colors.onSurfaceVariant,
-    });
-  });
-});
-
-describe('getMenuItemColor - ripple color', () => {
-  it('should return correct theme color, for theme version 3', () => {
-    expect(
-      getMenuItemColor({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme().colors.onSurfaceVariant)
-        .alpha(0.12)
-        .rgb()
-        .string(),
     });
   });
 });
