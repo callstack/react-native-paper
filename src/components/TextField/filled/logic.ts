@@ -182,7 +182,6 @@ export const getFilledTextFieldData = (
 
   const $containerStyles: StyleProp<ViewStyle> = [
     $containerStyle,
-    textInputProps.multiline && { alignItems: 'flex-start' },
     $containerStyleOverride,
   ];
 

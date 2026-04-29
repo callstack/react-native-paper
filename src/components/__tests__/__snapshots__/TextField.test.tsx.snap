@@ -131,7 +131,6 @@ exports[`renders filled TextField with label and value 1`] = `
             "paddingHorizontal": 16,
           },
           undefined,
-          undefined,
         ]
       }
     >
@@ -292,7 +291,6 @@ exports[`renders outlined TextField with label and value 1`] = `
             "flexDirection": "row",
             "paddingHorizontal": 16,
           },
-          undefined,
           undefined,
         ]
       }
