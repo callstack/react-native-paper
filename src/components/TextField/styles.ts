@@ -12,10 +12,10 @@ import { tokens } from '../../styles/themes/v3/tokens';
 export const $pressableStyle: ViewStyle = {};
 
 export const $inputStyle: StyleProp<TextStyle> = {
-  fontWeight: '400',
-  includeFontPadding: false,
   paddingVertical: 0,
   paddingHorizontal: 0,
+  includeFontPadding: false,
+  fontWeight: '400',
 };
 
 export const $supportingTextStyle: TextStyle = {

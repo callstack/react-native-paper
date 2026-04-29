@@ -65,6 +65,8 @@ export const useTextField = (props: TextFieldProps) => {
   const isFloating = isFocused || !!props.value;
   const hasAccessory = isRTL ? !!props.EndAccessory : !!props.StartAccessory;
   const hasError = props.status === 'error';
+  const hasPrefix = !!props.prefix && isFloating;
+  const hasSuffix = !!props.suffix && isFloating;
 
   // =======================
   // THEME TOKENS
@@ -121,6 +123,7 @@ export const useTextField = (props: TextFieldProps) => {
     disabled,
     hasAccessory,
     hasError,
+    hasSuffix,
     $animatedLabelWrapperStyle,
     $animatedLabelTextStyle,
     $animatedActiveOutlineStyle,
@@ -141,6 +144,7 @@ export const useTextField = (props: TextFieldProps) => {
   const $pressableStyles = [$pressableStyle, $pressableStyleOverride];
 
   const data = {
+    hasPrefix,
     $pressableStyles,
     $placeholderTextColor,
     $selectionColor,

@@ -156,6 +156,10 @@ it('does not pass TextField-only props through to TextInput', () => {
   expect(input.props.containerStyle).toBeUndefined();
   expect(input.props.supportingText).toBeUndefined();
   expect(input.props.supportingTextProps).toBeUndefined();
+  expect(input.props.prefix).toBeUndefined();
+  expect(input.props.prefixProps).toBeUndefined();
+  expect(input.props.suffix).toBeUndefined();
+  expect(input.props.suffixProps).toBeUndefined();
 });
 
 it('invokes onFocus and onBlur on the TextInput', () => {
@@ -520,4 +524,185 @@ it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order
   expect(firstIndexOfTestIdInTree(rtlTree, 'tf-lone-rtl')).toBeLessThan(
     firstIndexOfTestIdInTree(rtlTree, 'lone-start-acc')
   );
+});
+
+it('shows prefix and suffix when the field is floating and hides them after value is cleared while blurred', () => {
+  const { getByTestId, queryByTestId, rerender } = render(
+    <TextField
+      label="Amount"
+      value="1"
+      onChangeText={() => {}}
+      prefix="$"
+      suffix="/100"
+      testID="tf-ps"
+      prefixProps={{ testID: 'tf-prefix' }}
+      suffixProps={{ testID: 'tf-suffix' }}
+    />
+  );
+
+  expect(getByTestId('tf-prefix')).toBeTruthy();
+  expect(getByTestId('tf-suffix')).toBeTruthy();
+
+  rerender(
+    <TextField
+      label="Amount"
+      value=""
+      onChangeText={() => {}}
+      prefix="$"
+      suffix="/100"
+      testID="tf-ps"
+      prefixProps={{ testID: 'tf-prefix' }}
+      suffixProps={{ testID: 'tf-suffix' }}
+    />
+  );
+
+  expect(queryByTestId('tf-prefix')).toBeNull();
+  expect(queryByTestId('tf-suffix')).toBeNull();
+  expect(getByTestId('tf-ps')).toBeTruthy();
+});
+
+it('renders prefix and suffix while focused even when value is empty', () => {
+  const { getByTestId, queryByTestId } = render(
+    <TextField
+      label="Amount"
+      value=""
+      onChangeText={() => {}}
+      prefix="$"
+      suffix=" kg"
+      testID="tf-ps-focus"
+      prefixProps={{ testID: 'tf-prefix-focus' }}
+      suffixProps={{ testID: 'tf-suffix-focus' }}
+    />
+  );
+
+  expect(queryByTestId('tf-prefix-focus')).toBeNull();
+  expect(queryByTestId('tf-suffix-focus')).toBeNull();
+
+  fireEvent(getByTestId('tf-ps-focus'), 'focus');
+
+  expect(getByTestId('tf-prefix-focus')).toBeTruthy();
+  expect(getByTestId('tf-suffix-focus')).toBeTruthy();
+});
+
+it('places prefix Text before the TextInput and suffix Text after it', () => {
+  const { toJSON } = render(
+    <TextField
+      label="Label"
+      value="x"
+      onChangeText={() => {}}
+      prefix="$"
+      suffix="/100"
+      testID="tf-order"
+      prefixProps={{ testID: 'order-prefix' }}
+      suffixProps={{ testID: 'order-suffix' }}
+    />
+  );
+
+  const tree = toJSON();
+  expect(firstIndexOfTestIdInTree(tree, 'order-prefix')).toBeLessThan(
+    firstIndexOfTestIdInTree(tree, 'tf-order')
+  );
+  expect(firstIndexOfTestIdInTree(tree, 'tf-order')).toBeLessThan(
+    firstIndexOfTestIdInTree(tree, 'order-suffix')
+  );
+});
+
+it('aligns input text toward the suffix when suffix is active (LTR)', () => {
+  const { getByTestId } = render(
+    <TextField
+      label="Label"
+      value="5"
+      onChangeText={() => {}}
+      suffix="/100"
+      testID="tf-suffix-align-ltr"
+    />
+  );
+
+  expect(
+    StyleSheet.flatten(getByTestId('tf-suffix-align-ltr').props.style)
+  ).toEqual(
+    expect.objectContaining({
+      textAlign: 'right',
+      writingDirection: 'ltr',
+    })
+  );
+});
+
+it('aligns input text toward the suffix when suffix is active (RTL)', () => {
+  I18nManager.isRTL = true;
+
+  const { getByTestId } = render(
+    <TextField
+      label="Label"
+      value="5"
+      onChangeText={() => {}}
+      suffix="/100"
+      testID="tf-suffix-align-rtl"
+    />
+  );
+
+  expect(
+    StyleSheet.flatten(getByTestId('tf-suffix-align-rtl').props.style)
+  ).toEqual(
+    expect.objectContaining({
+      textAlign: 'left',
+      writingDirection: 'rtl',
+    })
+  );
+});
+
+it('uses default horizontal alignment when suffix prop exists but suffix is not shown yet (LTR)', () => {
+  const { getByTestId } = render(
+    <TextField
+      label="Label"
+      value=""
+      onChangeText={() => {}}
+      suffix="/100"
+      testID="tf-no-suffix-yet"
+    />
+  );
+
+  expect(
+    StyleSheet.flatten(getByTestId('tf-no-suffix-yet').props.style)
+  ).toEqual(
+    expect.objectContaining({
+      textAlign: 'left',
+      writingDirection: 'ltr',
+    })
+  );
+});
+
+it('does not apply the TextInput style prop to prefix or suffix Text', () => {
+  const { getByTestId } = render(
+    <TextField
+      label="Label"
+      value="1"
+      onChangeText={() => {}}
+      prefix="$"
+      suffix="]"
+      style={{ fontSize: 40, letterSpacing: 9 }}
+      testID="tf-input-style"
+      prefixProps={{ testID: 'pfx-no-input-style' }}
+      suffixProps={{ testID: 'sfx-no-input-style' }}
+    />
+  );
+
+  const inputFlat = StyleSheet.flatten(
+    getByTestId('tf-input-style').props.style
+  );
+  expect(inputFlat).toEqual(
+    expect.objectContaining({ fontSize: 40, letterSpacing: 9 })
+  );
+
+  const prefixFlat = StyleSheet.flatten(
+    getByTestId('pfx-no-input-style').props.style
+  );
+  const suffixFlat = StyleSheet.flatten(
+    getByTestId('sfx-no-input-style').props.style
+  );
+
+  expect(prefixFlat.fontSize).not.toBe(40);
+  expect(prefixFlat.letterSpacing).toBeUndefined();
+  expect(suffixFlat.fontSize).not.toBe(40);
+  expect(suffixFlat.letterSpacing).toBeUndefined();
 });

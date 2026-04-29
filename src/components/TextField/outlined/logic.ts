@@ -40,6 +40,8 @@ export const getOutlinedTextFieldData = (
     style: $inputStyleOverride,
     fieldStyle: $fieldStyleOverride,
     containerStyle: $containerStyleOverride,
+    prefixProps,
+    suffixProps,
     ...textInputProps
   } = props;
 
@@ -50,6 +52,7 @@ export const getOutlinedTextFieldData = (
     disabled,
     hasAccessory,
     hasError,
+    hasSuffix,
     $animatedLabelWrapperStyle,
     $animatedLabelTextStyle,
   } = api;
@@ -147,9 +150,10 @@ export const getOutlinedTextFieldData = (
   const $inputStyles: StyleProp<TextStyle> = [
     $inputStyle,
     {
+      flex: 1,
       color: onSurface,
       fontSize: INPUT_FONT_SIZE,
-      textAlign: isRTL ? 'right' : 'left',
+      textAlign: hasSuffix === isRTL ? 'left' : 'right',
       writingDirection: isRTL ? 'rtl' : 'ltr',
     },
     textInputProps.multiline && {
@@ -160,6 +164,26 @@ export const getOutlinedTextFieldData = (
     },
     disabled && $disabledStyle,
     $inputStyleOverride,
+  ];
+
+  const $prefixStyles: StyleProp<TextStyle> = [
+    $inputStyle,
+    {
+      fontSize: INPUT_FONT_SIZE,
+      color: onSurface,
+    },
+    disabled && $disabledStyle,
+    prefixProps?.style,
+  ];
+
+  const $suffixStyles: StyleProp<TextStyle> = [
+    $inputStyle,
+    {
+      fontSize: INPUT_FONT_SIZE,
+      color: onSurface,
+    },
+    disabled && $disabledStyle,
+    suffixProps?.style,
   ];
 
   const $leadingAccessoryStyles = [
@@ -176,6 +200,7 @@ export const getOutlinedTextFieldData = (
     input,
     disabled,
     hasError,
+    hasSuffix,
     $animatedLabelWrapperStyles,
     $animatedLabelTextStyles,
     $fieldStyles,
@@ -184,6 +209,8 @@ export const getOutlinedTextFieldData = (
     $containerStyles,
     $supportingTextStyles,
     $inputStyles,
+    $prefixStyles,
+    $suffixStyles,
     $leadingAccessoryStyles,
     $trailingAccessoryStyles,
   };

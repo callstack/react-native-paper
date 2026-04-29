@@ -26,8 +26,9 @@ export const $outlineStyle: ViewStyle = {
 
 export const $containerStyle: ViewStyle = {
   flex: 1,
+  flexDirection: 'row',
+  alignItems: 'center',
   paddingHorizontal: TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL,
-  justifyContent: 'center',
 };
 
 export const $labelWrapperStyle: ViewStyle = {

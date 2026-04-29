@@ -125,8 +125,9 @@ exports[`renders filled TextField with label and value 1`] = `
       style={
         [
           {
+            "alignItems": "flex-end",
             "flex": 1,
-            "justifyContent": "flex-end",
+            "flexDirection": "row",
             "paddingHorizontal": 16,
           },
           undefined,
@@ -154,6 +155,7 @@ exports[`renders filled TextField with label and value 1`] = `
             },
             {
               "color": "rgba(29, 27, 32, 1)",
+              "flex": 1,
               "fontSize": 16,
               "textAlign": "left",
               "writingDirection": "ltr",
@@ -283,8 +285,9 @@ exports[`renders outlined TextField with label and value 1`] = `
       style={
         [
           {
+            "alignItems": "center",
             "flex": 1,
-            "justifyContent": "center",
+            "flexDirection": "row",
             "paddingHorizontal": 16,
           },
           undefined,
@@ -312,6 +315,7 @@ exports[`renders outlined TextField with label and value 1`] = `
             },
             {
               "color": "rgba(29, 27, 32, 1)",
+              "flex": 1,
               "fontSize": 16,
               "textAlign": "left",
               "writingDirection": "ltr",

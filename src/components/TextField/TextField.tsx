@@ -31,6 +31,7 @@ export type TextFieldSharedApi = {
   disabled: boolean;
   hasAccessory: boolean;
   hasError: boolean;
+  hasSuffix: boolean;
   $animatedLabelWrapperStyle: Animated.WithAnimatedObject<ViewStyle>;
   $animatedLabelTextStyle: Animated.WithAnimatedObject<TextStyle>;
   $animatedActiveOutlineStyle?: Animated.WithAnimatedObject<ViewStyle>;
@@ -67,6 +68,22 @@ export interface TextFieldProps extends TextInputProps {
    * Pass any additional props directly to the supporting text `Text` component.
    */
   supportingTextProps?: TextProps;
+  /**
+   * A short text string displayed at the start of the input (e.g. `"$"`).
+   */
+  prefix?: string;
+  /**
+   * Pass any additional props directly to the prefix `Text` component.
+   */
+  prefixProps?: TextProps;
+  /**
+   * A short text string displayed at the end of the input (e.g. `"/100"`).
+   */
+  suffix?: string;
+  /**
+   * Pass any additional props directly to the suffix `Text` component.
+   */
+  suffixProps?: TextProps;
   /**
    * Style overrides for the pressable root element.
    */
@@ -156,12 +173,18 @@ function TextField(props: TextFieldProps) {
     theme,
     StartAccessory,
     EndAccessory,
+    prefix,
+    prefixProps,
+    suffix,
+    suffixProps,
     ...textInputProps
   } = props;
 
   const {
     input,
     disabled,
+    hasPrefix,
+    hasSuffix,
     hasError,
     $pressableStyles,
     $leadingAccessoryStyles,
@@ -174,6 +197,8 @@ function TextField(props: TextFieldProps) {
     $animatedLabelTextStyles,
     $containerStyles,
     $inputStyles,
+    $prefixStyles,
+    $suffixStyles,
     $supportingTextStyles,
     $placeholderTextColor,
     $selectionColor,
@@ -238,6 +263,12 @@ function TextField(props: TextFieldProps) {
         )}
 
         <View style={$containerStyles}>
+          {hasPrefix && (
+            <Text {...prefixProps} style={$prefixStyles}>
+              {prefix}
+            </Text>
+          )}
+
           <TextInput
             aria-label={label}
             aria-disabled={disabled}
@@ -253,6 +284,12 @@ function TextField(props: TextFieldProps) {
             placeholderTextColor={$placeholderTextColor}
             style={$inputStyles}
           />
+
+          {hasSuffix && (
+            <Text {...suffixProps} style={$suffixStyles}>
+              {suffix}
+            </Text>
+          )}
         </View>
 
         {!!TrailingAccessory && (

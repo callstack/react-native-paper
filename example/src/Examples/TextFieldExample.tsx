@@ -18,10 +18,14 @@ const TextFieldExample = () => {
   const [email, setEmail] = React.useState('');
   const [filledPassword, setFilledPassword] = React.useState('');
   const [filledNotes, setFilledNotes] = React.useState('');
+  const [filledPrefix, setFilledPrefix] = React.useState('');
+  const [filledSuffix, setFilledSuffix] = React.useState('');
   const [outlinedSearchQuery, setOutlinedSearchQuery] = React.useState('');
   const [outlinedText, setOutlinedText] = React.useState('');
   const [outlinedPassword, setOutlinedPassword] = React.useState('');
   const [outlinedNotes, setOutlinedNotes] = React.useState('');
+  const [outlinedPrefix, setOutlinedPrefix] = React.useState('');
+  const [outlinedSuffix, setOutlinedSuffix] = React.useState('');
   const [errorField, setErrorField] = React.useState('invalid@');
 
   const ClearFilledSearchAccessory = ({
@@ -131,6 +135,28 @@ const TextFieldExample = () => {
           textContentType="password"
           pressableStyle={styles.field}
         />
+
+        <TextField
+          variant="filled"
+          label="Label"
+          value={filledPrefix}
+          onChangeText={setFilledPrefix}
+          prefix="$"
+          pressableStyle={styles.field}
+          placeholder="0.00"
+          keyboardType="decimal-pad"
+          StartAccessory={SearchLeadingAccessory}
+        />
+        <TextField
+          variant="filled"
+          label="Label"
+          value={filledSuffix}
+          onChangeText={setFilledSuffix}
+          suffix="/100"
+          pressableStyle={styles.field}
+          keyboardType="number-pad"
+          EndAccessory={ClearFilledSearchAccessory}
+        />
       </List.Section>
 
       <List.Section title="Outlined" style={styles.section}>
@@ -191,6 +217,27 @@ const TextFieldExample = () => {
           secureTextEntry
           textContentType="password"
           pressableStyle={styles.field}
+        />
+        <TextField
+          variant="outlined"
+          label="Label"
+          value={outlinedPrefix}
+          onChangeText={setOutlinedPrefix}
+          prefix="$"
+          pressableStyle={styles.field}
+          placeholder="0.00"
+          keyboardType="decimal-pad"
+          StartAccessory={SearchLeadingAccessory}
+        />
+        <TextField
+          variant="outlined"
+          label="Label"
+          value={outlinedSuffix}
+          onChangeText={setOutlinedSuffix}
+          suffix="/100"
+          pressableStyle={styles.field}
+          keyboardType="number-pad"
+          EndAccessory={ClearOutlinedSearchAccessory}
         />
       </List.Section>
     </ScreenWrapper>
