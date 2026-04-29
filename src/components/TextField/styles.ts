@@ -2,8 +2,8 @@ import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import {
   ACCESSORY_SIZE,
-  HELPER_FONT_SIZE,
-  HELPER_MARGIN_TOP,
+  SUPPORTING_TEXT_FONT_SIZE,
+  SUPPORTING_TEXT_MARGIN_TOP,
   TEXT_FIELD_ACCESSORY_MARGIN_HORIZONTAL,
   TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL,
 } from './constants';
@@ -19,9 +19,9 @@ export const $inputStyle: StyleProp<TextStyle> = {
 };
 
 export const $supportingTextStyle: TextStyle = {
-  marginTop: HELPER_MARGIN_TOP,
+  marginTop: SUPPORTING_TEXT_MARGIN_TOP,
   paddingHorizontal: TEXT_FIELD_INPUT_WRAPPER_PADDING_HORIZONTAL,
-  fontSize: HELPER_FONT_SIZE,
+  fontSize: SUPPORTING_TEXT_FONT_SIZE,
   fontWeight: '400',
   textAlign: 'left',
 };

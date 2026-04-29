@@ -135,7 +135,8 @@ export const useTextField = (props: TextFieldProps) => {
 
   const LeadingAccessory = isRTL ? props.EndAccessory : props.StartAccessory;
   const TrailingAccessory = isRTL ? props.StartAccessory : props.EndAccessory;
-  const placeholder = isFocused ? props.placeholder : undefined;
+  // https://github.com/facebook/react-native/issues/31573
+  const placeholder = isFocused ? props.placeholder : ' ';
 
   // =======================
   // STYLES

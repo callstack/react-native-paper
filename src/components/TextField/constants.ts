@@ -25,7 +25,7 @@ export const LINE_HEIGHT_DELTA = 2;
 export const INPUT_FONT_SIZE = 16;
 export const ACTIVE_LABEL_FONT_SIZE = 12;
 export const INACTIVE_LABEL_FONT_SIZE = INPUT_FONT_SIZE;
-export const HELPER_FONT_SIZE = 12;
+export const SUPPORTING_TEXT_FONT_SIZE = 12;
 
 export const INACTIVE_LABEL_TOP_POSITION =
   (TEXT_FIELD_HEIGHT -
@@ -38,7 +38,7 @@ export const INACTIVE_LABEL_TOP_POSITION =
 // =================
 // HELPER TEXT LAYOUT
 // =================
-export const HELPER_MARGIN_TOP = 4;
+export const SUPPORTING_TEXT_MARGIN_TOP = 4;
 
 // =========
 // ANIMATION

@@ -258,7 +258,7 @@ function TextField(props: TextFieldProps) {
             style={$leadingAccessoryStyles}
             status={status}
             editable={!disabled}
-            multiline={textInputProps.multiline ?? false}
+            multiline={!!textInputProps.multiline}
           />
         )}
 
@@ -297,7 +297,7 @@ function TextField(props: TextFieldProps) {
             style={$trailingAccessoryStyles}
             status={status}
             editable={!disabled}
-            multiline={textInputProps.multiline ?? false}
+            multiline={!!textInputProps.multiline}
           />
         )}
       </View>

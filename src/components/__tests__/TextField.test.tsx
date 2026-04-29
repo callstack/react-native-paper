@@ -418,7 +418,7 @@ it('places StartAccessory before EndAccessory in the tree when LTR', () => {
   ).toBeLessThan(firstIndexOfTestIdInTree(tree, 'ltr-acc-from-end-prop'));
 });
 
-it('hides placeholder when the TextField is not focused', () => {
+it('does not expose the placeholder string when the TextField is not focused', () => {
   const { getByTestId } = render(
     <TextField
       label="Email"
@@ -429,7 +429,8 @@ it('hides placeholder when the TextField is not focused', () => {
     />
   );
 
-  expect(getByTestId('tf-input').props.placeholder).toBeUndefined();
+  /* Sentinel space avoids iOS multiline UITextView not updating placeholder from nil (react-native#31573). */
+  expect(getByTestId('tf-input').props.placeholder).toBe(' ');
 });
 
 it('shows placeholder when the TextField is focused', () => {
@@ -462,14 +463,14 @@ it('shows placeholder on multiline TextField when focused', () => {
     />
   );
 
-  expect(getByTestId('tf-multiline').props.placeholder).toBeUndefined();
+  expect(getByTestId('tf-multiline').props.placeholder).toBe(' ');
 
   fireEvent(getByTestId('tf-multiline'), 'focus');
 
   expect(getByTestId('tf-multiline').props.placeholder).toBe('Add a note…');
 });
 
-it('hides placeholder again after the TextField loses focus', () => {
+it('does not expose the placeholder string again after the TextField loses focus', () => {
   const { getByTestId } = render(
     <TextField
       label="Email"
@@ -483,7 +484,7 @@ it('hides placeholder again after the TextField loses focus', () => {
   fireEvent(getByTestId('tf-input'), 'focus');
   fireEvent(getByTestId('tf-input'), 'blur');
 
-  expect(getByTestId('tf-input').props.placeholder).toBeUndefined();
+  expect(getByTestId('tf-input').props.placeholder).toBe(' ');
 });
 
 it('maps a lone StartAccessory to leading in LTR and trailing in RTL (tree order)', () => {
