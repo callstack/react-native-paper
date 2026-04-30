@@ -170,7 +170,10 @@ const config = {
             TextInputAffix: 'TextInput/Adornment/TextInputAffix',
             TextInputIcon: 'TextInput/Adornment/TextInputIcon',
           },
-          TextField: 'TextField/TextField',
+          TextField: {
+            TextField: 'TextField/TextField',
+            TextFieldIcon: 'TextField/TextFieldIcon',
+          },
           ToggleButton: {
             ToggleButton: 'ToggleButton/ToggleButton',
             ToggleButtonGroup: 'ToggleButton/ToggleButtonGroup',

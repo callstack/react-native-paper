@@ -128,8 +128,16 @@ export interface TextFieldProps extends TextInputProps {
  *     <TextField.Icon {...props} icon="magnify" />
  *   );
  *
- *   const ClearIcon = (props) => (
- *     <TextField.Icon {...props} icon="close" onPress={() => setText('')} />
+ *   const ClearAccessory = ({ style, editable }) => (
+ *     <Pressable
+ *       style={style}
+ *       disabled={!editable}
+ *       onPress={() => setText('')}
+ *       accessibilityRole="button"
+ *       accessibilityLabel="Clear text"
+ *     >
+ *       <Icon source="close" size={24} />
+ *     </Pressable>
  *   );
  *
  *   return (
@@ -138,7 +146,7 @@ export interface TextFieldProps extends TextInputProps {
  *       value={text}
  *       onChangeText={setText}
  *       StartAccessory={SearchIcon}
- *       EndAccessory={ClearIcon}
+ *       EndAccessory={ClearAccessory}
  *     />
  *   );
  * };

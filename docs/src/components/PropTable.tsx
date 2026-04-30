@@ -12,12 +12,14 @@ const typeDefinitions = {
   ThemeProp:
     'https://callstack.github.io/react-native-paper/docs/guides/theming#theme-properties',
   'ComponentType<TextFieldAccessoryProps>':
-    'https://github.com/callstack/react-native-paper/blob/main/src/components/TextField/TextField.tsx#L21',
+    'https://github.com/callstack/react-native-paper/blob/main/src/components/TextField/TextField.tsx#L20',
   AccessibilityState:
     'https://reactnative.dev/docs/accessibility#accessibilitystate',
   'StyleProp<ViewStyle>': 'https://reactnative.dev/docs/view-style-props',
   'StyleProp<TextStyle>': 'https://reactnative.dev/docs/text-style-props',
   TextProps: 'https://reactnative.dev/docs/text#props',
+  AccessibilityProps:
+    'https://reactnative.dev/docs/accessibility#accessibilityprops',
 };
 
 const renderBadge = (annotation: string) => {

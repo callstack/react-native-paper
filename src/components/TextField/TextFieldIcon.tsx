@@ -31,13 +31,13 @@ export interface TextFieldIconProps extends TextFieldAccessoryProps {
   /**
    * Function to execute on press.
    */
-  onPress?: (e: GestureResponderEvent) => void;
+  onPress?: (event: GestureResponderEvent) => void;
 }
 
 /**
- * A pre-built accessory component that renders an icon button inside a TextField.
- * Accepts all `TextFieldAccessoryProps` (passed automatically by the parent) plus
- * icon-specific props.
+ * A component to render a leading / trailing icon in the TextField
+ * (inside `StartAccessory` or `EndAccessory`). Accepts icon-specific props as well as
+ * `TextFieldAccessoryProps`, which TextField forwards automatically.
  *
  * ## Usage
  * ```js
@@ -72,7 +72,7 @@ export interface TextFieldIconProps extends TextFieldAccessoryProps {
 const TextFieldIcon = ({
   icon,
   color,
-  size = ACCESSORY_SIZE,
+  size,
   style,
   status,
   editable,
@@ -81,6 +81,8 @@ const TextFieldIcon = ({
   onPress,
 }: TextFieldIconProps) => {
   const theme = useInternalTheme(themeOverride);
+
+  const iconSize = size ?? ACCESSORY_SIZE;
 
   const iconColor = getIconColor({
     theme,
@@ -95,7 +97,7 @@ const TextFieldIcon = ({
       <IconButton
         icon={icon}
         iconColor={iconColor}
-        size={size}
+        size={iconSize}
         style={$iconStyle}
         onPress={onPressHandler}
         {...accessibility}
