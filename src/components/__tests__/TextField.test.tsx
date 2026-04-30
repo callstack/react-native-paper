@@ -3,9 +3,8 @@ import { I18nManager, StyleSheet, TextInput, View } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 
-import TextField, {
-  type TextFieldAccessoryProps,
-} from '../TextField/TextField';
+import TextField from '../TextField';
+import type { TextFieldAccessoryProps } from '../TextField/TextField';
 
 const defaultI18nIsRTL = I18nManager.isRTL;
 
@@ -38,6 +37,90 @@ it('renders outlined TextField with label and value', () => {
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('renders filled TextField with TextField.Icon accessories', () => {
+  const tree = render(
+    <TextField
+      label="Search"
+      value="q"
+      onChangeText={() => {}}
+      StartAccessory={(props: TextFieldAccessoryProps) => (
+        <TextField.Icon {...props} icon="magnify" color="#49454F" />
+      )}
+      EndAccessory={(props: TextFieldAccessoryProps) => (
+        <TextField.Icon {...props} icon="close" color="#49454F" />
+      )}
+    />
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders outlined TextField with TextField.Icon accessories', () => {
+  const tree = render(
+    <TextField
+      variant="outlined"
+      label="Search"
+      value="q"
+      onChangeText={() => {}}
+      StartAccessory={(props: TextFieldAccessoryProps) => (
+        <TextField.Icon {...props} icon="magnify" color="#49454F" />
+      )}
+      EndAccessory={(props: TextFieldAccessoryProps) => (
+        <TextField.Icon {...props} icon="close" color="#49454F" />
+      )}
+    />
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('fires onPress on TextField.Icon end accessory', () => {
+  const onClear = jest.fn();
+  const { getAllByTestId } = render(
+    <TextField
+      label="Search"
+      value="x"
+      onChangeText={() => {}}
+      StartAccessory={(props: TextFieldAccessoryProps) => (
+        <TextField.Icon {...props} icon="magnify" />
+      )}
+      EndAccessory={(props: TextFieldAccessoryProps) => (
+        <TextField.Icon
+          {...props}
+          icon="close"
+          onPress={onClear}
+          accessibilityLabel="Clear"
+        />
+      )}
+    />
+  );
+
+  fireEvent.press(getAllByTestId('icon-button')[1]);
+
+  expect(onClear).toHaveBeenCalledTimes(1);
+});
+
+it('disables TextField.Icon when the field is not editable', () => {
+  const { getAllByTestId } = render(
+    <TextField
+      label="Search"
+      value="x"
+      onChangeText={() => {}}
+      editable={false}
+      StartAccessory={(props: TextFieldAccessoryProps) => (
+        <TextField.Icon {...props} icon="magnify" />
+      )}
+      EndAccessory={(props: TextFieldAccessoryProps) => (
+        <TextField.Icon {...props} icon="close" />
+      )}
+    />
+  );
+
+  const buttons = getAllByTestId('icon-button');
+  expect(buttons[0].props.accessibilityState?.disabled).toBe(true);
+  expect(buttons[1].props.accessibilityState?.disabled).toBe(true);
 });
 
 it('renders supporting text below the field', () => {

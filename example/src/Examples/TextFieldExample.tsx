@@ -27,6 +27,8 @@ const TextFieldExample = () => {
   const [outlinedPrefix, setOutlinedPrefix] = React.useState('');
   const [outlinedSuffix, setOutlinedSuffix] = React.useState('');
   const [errorField, setErrorField] = React.useState('invalid@');
+  const [filledIconQuery, setFilledIconQuery] = React.useState('');
+  const [outlinedIconQuery, setOutlinedIconQuery] = React.useState('');
 
   const ClearFilledSearchAccessory = ({
     style,
@@ -80,6 +82,26 @@ const TextFieldExample = () => {
           onChangeText={setSearchQuery}
           StartAccessory={SearchLeadingAccessory}
           EndAccessory={ClearFilledSearchAccessory}
+          pressableStyle={styles.field}
+          placeholder="Search"
+        />
+        <TextField
+          variant="filled"
+          label="TextField.Icon"
+          value={filledIconQuery}
+          onChangeText={setFilledIconQuery}
+          StartAccessory={(props: TextFieldAccessoryProps) => (
+            <TextField.Icon {...props} icon="magnify" color={iconMuted} />
+          )}
+          EndAccessory={(props: TextFieldAccessoryProps) => (
+            <TextField.Icon
+              {...props}
+              icon="close"
+              color={iconMuted}
+              accessibilityLabel="Clear text"
+              onPress={() => setFilledIconQuery('')}
+            />
+          )}
           pressableStyle={styles.field}
           placeholder="Search"
         />
@@ -167,6 +189,26 @@ const TextFieldExample = () => {
           onChangeText={setOutlinedSearchQuery}
           StartAccessory={SearchLeadingAccessory}
           EndAccessory={ClearOutlinedSearchAccessory}
+          pressableStyle={styles.field}
+          placeholder="Search"
+        />
+        <TextField
+          variant="outlined"
+          label="TextField.Icon"
+          value={outlinedIconQuery}
+          onChangeText={setOutlinedIconQuery}
+          StartAccessory={(props: TextFieldAccessoryProps) => (
+            <TextField.Icon {...props} icon="magnify" color={iconMuted} />
+          )}
+          EndAccessory={(props: TextFieldAccessoryProps) => (
+            <TextField.Icon
+              {...props}
+              icon="close"
+              color={iconMuted}
+              accessibilityLabel="Clear text"
+              onPress={() => setOutlinedIconQuery('')}
+            />
+          )}
           pressableStyle={styles.field}
           placeholder="Search"
         />

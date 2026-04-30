@@ -101,10 +101,12 @@ export interface TextFieldProps extends TextInputProps {
   theme?: ThemeProp;
   /**
    * An optional component to render on the start side of the input (leading in LTR).
+   * Can be a custom component or `TextField.Icon`.
    */
   StartAccessory?: ComponentType<TextFieldAccessoryProps>;
   /**
    * An optional component to render on the end side of the input (trailing in LTR).
+   * Can be a custom component or `TextField.Icon`.
    */
   EndAccessory?: ComponentType<TextFieldAccessoryProps>;
 }
@@ -117,28 +119,17 @@ export interface TextFieldProps extends TextInputProps {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Pressable, View } from 'react-native';
- * import { Icon, TextField } from 'react-native-paper';
+ * import { TextField } from 'react-native-paper';
  *
  * const MyComponent = () => {
  *   const [text, setText] = React.useState('');
  *
- *   const LeadingAccessory = ({ style }) => (
- *     <View style={style}>
- *       <Icon source="magnify" size={24} />
- *     </View>
+ *   const SearchIcon = (props) => (
+ *     <TextField.Icon {...props} icon="magnify" />
  *   );
  *
- *   const TrailingAccessory = ({ style, editable }) => (
- *     <Pressable
- *       style={style}
- *       disabled={!editable}
- *       onPress={() => setText('')}
- *       accessibilityRole="button"
- *       accessibilityLabel="Clear text"
- *     >
- *       <Icon source="close" size={24} />
- *     </Pressable>
+ *   const ClearIcon = (props) => (
+ *     <TextField.Icon {...props} icon="close" onPress={() => setText('')} />
  *   );
  *
  *   return (
@@ -146,8 +137,8 @@ export interface TextFieldProps extends TextInputProps {
  *       label="Search"
  *       value={text}
  *       onChangeText={setText}
- *       StartAccessory={LeadingAccessory}
- *       EndAccessory={TrailingAccessory}
+ *       StartAccessory={SearchIcon}
+ *       EndAccessory={ClearIcon}
  *     />
  *   );
  * };
