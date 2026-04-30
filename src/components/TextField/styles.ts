@@ -43,3 +43,12 @@ export const $leadingAccessoryStyle: ViewStyle = {
 export const $disabledStyle: ViewStyle = {
   opacity: tokens.md.ref.stateOpacity.disabled,
 };
+
+export const $iconWrapperStyle: ViewStyle = {
+  justifyContent: 'center',
+  alignItems: 'center',
+};
+
+export const $iconStyle: ViewStyle = {
+  margin: 0,
+};

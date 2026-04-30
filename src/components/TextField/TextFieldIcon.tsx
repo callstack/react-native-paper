@@ -1,8 +1,13 @@
 import React from 'react';
-import { GestureResponderEvent, StyleSheet, View } from 'react-native';
+import { AccessibilityProps, GestureResponderEvent, View } from 'react-native';
 
-import type { TextFieldAccessoryProps } from './TextField';
+import { useInternalTheme } from '../../core/theming';
+import type { ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
+import { ACCESSORY_SIZE } from './constants';
+import { $iconStyle, $iconWrapperStyle } from './styles';
+import type { TextFieldAccessoryProps } from './TextField';
+import { getIconColor } from './utils';
 import IconButton from '../IconButton/IconButton';
 
 export interface TextFieldIconProps extends TextFieldAccessoryProps {
@@ -19,9 +24,10 @@ export interface TextFieldIconProps extends TextFieldAccessoryProps {
    */
   size?: number;
   /**
-   * Accessibility label for the icon button.
+   * Accessibility props for the icon button.
    */
-  accessibilityLabel?: string;
+  accessibility?: AccessibilityProps;
+  theme?: ThemeProp;
   /**
    * Function to execute on press.
    */
@@ -66,37 +72,38 @@ export interface TextFieldIconProps extends TextFieldAccessoryProps {
 const TextFieldIcon = ({
   icon,
   color,
-  size = 24,
+  size = ACCESSORY_SIZE,
   style,
+  status,
   editable,
-  accessibilityLabel,
+  accessibility,
+  theme: themeOverride,
   onPress,
 }: TextFieldIconProps) => {
+  const theme = useInternalTheme(themeOverride);
+
+  const iconColor = getIconColor({
+    theme,
+    color,
+    status,
+  });
+
+  const onPressHandler = editable ? onPress : undefined;
+
   return (
-    <View style={[styles.container, style]}>
+    <View style={[$iconWrapperStyle, style]}>
       <IconButton
         icon={icon}
-        onPress={onPress}
-        iconColor={color}
-        disabled={!editable}
+        iconColor={iconColor}
         size={size}
-        style={styles.iconButton}
-        accessibilityLabel={accessibilityLabel}
+        style={$iconStyle}
+        onPress={onPressHandler}
+        {...accessibility}
       />
     </View>
   );
 };
 
 TextFieldIcon.displayName = 'TextField.Icon';
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  iconButton: {
-    margin: 0,
-  },
-});
 
 export default TextFieldIcon;

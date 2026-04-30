@@ -86,3 +86,18 @@ export const getFieldBackgroundColor = ({
 
   return theme.colors.surfaceContainerHighest;
 };
+
+export const getIconColor = ({
+  theme,
+  color,
+  status,
+}: {
+  theme: InternalTheme;
+  color?: string;
+  status?: 'error' | 'disabled';
+}) => {
+  if (color) return color;
+  if (status === 'error') return theme.colors.error;
+  if (status === 'disabled') return theme.colors.onSurface;
+  return theme.colors.onSurfaceVariant;
+};

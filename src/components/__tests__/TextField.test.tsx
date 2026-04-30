@@ -76,6 +76,45 @@ it('renders outlined TextField with TextField.Icon accessories', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('renders filled TextField with TextField.Icon accessories when status is error', () => {
+  const tree = render(
+    <TextField
+      label="Search"
+      value="q"
+      onChangeText={() => {}}
+      status="error"
+      StartAccessory={(props: TextFieldAccessoryProps) => (
+        <TextField.Icon {...props} icon="magnify" />
+      )}
+      EndAccessory={(props: TextFieldAccessoryProps) => (
+        <TextField.Icon {...props} icon="close" onPress={() => {}} />
+      )}
+    />
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders outlined TextField with TextField.Icon accessories when status is error', () => {
+  const tree = render(
+    <TextField
+      variant="outlined"
+      label="Search"
+      value="q"
+      onChangeText={() => {}}
+      status="error"
+      StartAccessory={(props: TextFieldAccessoryProps) => (
+        <TextField.Icon {...props} icon="magnify" />
+      )}
+      EndAccessory={(props: TextFieldAccessoryProps) => (
+        <TextField.Icon {...props} icon="close" onPress={() => {}} />
+      )}
+    />
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('fires onPress on TextField.Icon end accessory', () => {
   const onClear = jest.fn();
   const { getAllByTestId } = render(
@@ -91,7 +130,7 @@ it('fires onPress on TextField.Icon end accessory', () => {
           {...props}
           icon="close"
           onPress={onClear}
-          accessibilityLabel="Clear"
+          accessibility={{ accessibilityLabel: 'Clear' }}
         />
       )}
     />

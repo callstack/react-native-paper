@@ -98,7 +98,6 @@ const TextFieldExample = () => {
               {...props}
               icon="close"
               color={iconMuted}
-              accessibilityLabel="Clear text"
               onPress={() => setFilledIconQuery('')}
             />
           )}
@@ -205,7 +204,6 @@ const TextFieldExample = () => {
               {...props}
               icon="close"
               color={iconMuted}
-              accessibilityLabel="Clear text"
               onPress={() => setOutlinedIconQuery('')}
             />
           )}
