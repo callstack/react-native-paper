@@ -19,7 +19,7 @@ import {
   getLabelColor,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { MD3Theme, ThemeProp } from '../../types';
+import type { Theme, ThemeProp } from '../../types';
 import useAnimatedValue from '../../utils/useAnimatedValue';
 import useAnimatedValueArray from '../../utils/useAnimatedValueArray';
 import useIsKeyboardShown from '../../utils/useIsKeyboardShown';
@@ -333,7 +333,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
   theme: themeOverrides,
 }: Props<Route>) => {
   const theme = useInternalTheme(themeOverrides);
-  const { colors } = theme as MD3Theme;
+  const { colors } = theme as Theme;
   const { bottom, left, right } = useSafeAreaInsets();
   const { scale } = theme.animation;
   const compact = compactProp ?? false;
@@ -582,7 +582,7 @@ const BottomNavigationBar = <Route extends BaseRoute>({
 
             const isLegacyOrV3Shifting = shifting && labeled;
 
-            const font = (theme as MD3Theme).fonts.labelMedium;
+            const font = (theme as Theme).fonts.labelMedium;
 
             return renderTouchable({
               key: route.key,

@@ -2,18 +2,18 @@ import type { ComponentType } from 'react';
 
 import { $DeepPartial, createTheming } from '@callstack/react-theme-provider';
 
-import { MD3DarkTheme, MD3LightTheme } from '../styles/themes';
-import type { InternalTheme, MD3Theme, NavigationTheme } from '../types';
+import { DarkTheme, LightTheme } from '../styles/themes';
+import type { InternalTheme, Theme, NavigationTheme } from '../types';
 
-export const DefaultTheme = MD3LightTheme;
+export const DefaultTheme = LightTheme;
 
 export const {
   ThemeProvider,
   withTheme,
   useTheme: useAppTheme,
-} = createTheming<unknown>(MD3LightTheme);
+} = createTheming<unknown>(LightTheme);
 
-export function useTheme<T = MD3Theme>(overrides?: $DeepPartial<T>) {
+export function useTheme<T = Theme>(overrides?: $DeepPartial<T>) {
   return useAppTheme<T>(overrides);
 }
 
@@ -26,8 +26,8 @@ export const withInternalTheme = <Props extends { theme: InternalTheme }, C>(
 ) => withTheme<Props, C>(WrappedComponent);
 
 export const defaultThemes = {
-  light: MD3LightTheme,
-  dark: MD3DarkTheme,
+  light: LightTheme,
+  dark: DarkTheme,
 };
 
 export const getTheme = <Scheme extends boolean = false>(
@@ -41,14 +41,14 @@ export const getTheme = <Scheme extends boolean = false>(
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
   reactNavigationLight: T;
-  materialLight?: MD3Theme;
+  materialLight?: Theme;
 }): {
   LightTheme: NavigationTheme;
 };
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme<T extends NavigationTheme>(themes: {
   reactNavigationDark: T;
-  materialDark?: MD3Theme;
+  materialDark?: Theme;
 }): {
   DarkTheme: NavigationTheme;
 };
@@ -59,8 +59,8 @@ export function adaptNavigationTheme<
 >(themes: {
   reactNavigationLight: TLight;
   reactNavigationDark: TDark;
-  materialLight?: MD3Theme;
-  materialDark?: MD3Theme;
+  materialLight?: Theme;
+  materialDark?: Theme;
 }): { LightTheme: TLight; DarkTheme: TDark };
 // eslint-disable-next-line no-redeclare
 export function adaptNavigationTheme(themes: any) {
@@ -72,8 +72,8 @@ export function adaptNavigationTheme(themes: any) {
   } = themes;
 
   const MD3Themes = {
-    light: materialLight || MD3LightTheme,
-    dark: materialDark || MD3DarkTheme,
+    light: materialLight || LightTheme,
+    dark: materialDark || DarkTheme,
   };
 
   const result: { LightTheme?: any; DarkTheme?: any } = {};
@@ -91,7 +91,7 @@ export function adaptNavigationTheme(themes: any) {
 
 const getAdaptedTheme = <T extends NavigationTheme>(
   theme: T,
-  materialTheme: MD3Theme
+  materialTheme: Theme
 ): T => {
   const base = {
     ...theme,

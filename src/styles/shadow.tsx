@@ -1,9 +1,9 @@
 import { Animated } from 'react-native';
 
-import { MD3Colors } from './themes/v3/tokens';
+import { Palette } from './themes/tokens';
 
 const MD3_SHADOW_OPACITY = 0.3;
-const MD3_SHADOW_COLOR = MD3Colors.primary0;
+const MD3_SHADOW_COLOR = Palette.primary0;
 
 export default function shadow(elevation: number | Animated.Value = 0) {
   return v3Shadow(elevation);

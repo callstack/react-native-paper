@@ -17,8 +17,8 @@ import useLatestCallback from 'use-latest-callback';
 
 import { ChipAvatarProps, getChipColors } from './helpers';
 import { useInternalTheme } from '../../core/theming';
-import { white } from '../../styles/themes/v2/colors';
-import type { $Omit, EllipsizeProp, MD3Theme, ThemeProp } from '../../types';
+import { white } from '../../styles/themes/colors';
+import type { $Omit, EllipsizeProp, Theme, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import type { IconSource } from '../Icon';
 import Icon from '../Icon';
@@ -286,7 +286,7 @@ const Chip = ({
   };
   const labelTextStyle = {
     color: textColor,
-    ...(theme as MD3Theme).fonts.labelLarge,
+    ...(theme as Theme).fonts.labelLarge,
   };
   return (
     <Surface
@@ -367,7 +367,7 @@ const Chip = ({
                     avatar
                       ? white
                       : !disabled
-                      ? (theme as MD3Theme).colors.primary
+                      ? (theme as Theme).colors.primary
                       : iconColor
                   }
                   size={18}

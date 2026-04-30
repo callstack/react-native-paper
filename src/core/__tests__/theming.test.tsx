@@ -1,4 +1,4 @@
-import { MD3DarkTheme, MD3LightTheme } from '../../styles/themes';
+import { DarkTheme, LightTheme } from '../../styles/themes';
 import { adaptNavigationTheme } from '../theming';
 
 const NavigationLightTheme = {
@@ -40,17 +40,17 @@ const NavigationCustomLightTheme = {
 };
 
 const AppCustomLightTheme = {
-  ...MD3LightTheme,
+  ...LightTheme,
   colors: {
-    ...MD3LightTheme.colors,
+    ...LightTheme.colors,
     primary: 'purple',
   },
 };
 
 const AppCustomDarkTheme = {
-  ...MD3DarkTheme,
+  ...DarkTheme,
   colors: {
-    ...MD3DarkTheme.colors,
+    ...DarkTheme.colors,
     primary: 'orchid',
   },
 };
@@ -89,37 +89,37 @@ describe('adaptNavigationTheme', () => {
         ...NavigationLightTheme,
         colors: {
           ...NavigationLightTheme.colors,
-          primary: MD3LightTheme.colors.primary,
-          background: MD3LightTheme.colors.background,
-          card: MD3LightTheme.colors.surfaceContainer,
-          text: MD3LightTheme.colors.onSurface,
-          border: MD3LightTheme.colors.outline,
-          notification: MD3LightTheme.colors.error,
+          primary: LightTheme.colors.primary,
+          background: LightTheme.colors.background,
+          card: LightTheme.colors.surfaceContainer,
+          text: LightTheme.colors.onSurface,
+          border: LightTheme.colors.outline,
+          notification: LightTheme.colors.error,
         },
       },
       DarkTheme: {
         ...NavigationDarkTheme,
         colors: {
           ...NavigationDarkTheme.colors,
-          primary: MD3DarkTheme.colors.primary,
-          background: MD3DarkTheme.colors.background,
-          card: MD3DarkTheme.colors.surfaceContainer,
-          text: MD3DarkTheme.colors.onSurface,
-          border: MD3DarkTheme.colors.outline,
-          notification: MD3DarkTheme.colors.error,
+          primary: DarkTheme.colors.primary,
+          background: DarkTheme.colors.background,
+          card: DarkTheme.colors.surfaceContainer,
+          text: DarkTheme.colors.onSurface,
+          border: DarkTheme.colors.outline,
+          notification: DarkTheme.colors.error,
         },
       },
     });
   });
 
   it('should return adapted navigation light theme', () => {
-    const { LightTheme } = adaptNavigationTheme({
+    const { LightTheme: navLight } = adaptNavigationTheme({
       reactNavigationLight: NavigationLightTheme,
     });
 
-    const { colors } = MD3LightTheme;
+    const { colors } = LightTheme;
 
-    expect(LightTheme).toMatchObject({
+    expect(navLight).toMatchObject({
       ...NavigationLightTheme,
       colors: {
         ...NavigationLightTheme.colors,
@@ -134,13 +134,13 @@ describe('adaptNavigationTheme', () => {
   });
 
   it('should return adapted navigation dark theme', () => {
-    const { DarkTheme } = adaptNavigationTheme({
+    const { DarkTheme: navDark } = adaptNavigationTheme({
       reactNavigationDark: NavigationDarkTheme,
     });
 
-    const { colors } = MD3DarkTheme;
+    const { colors } = DarkTheme;
 
-    expect(DarkTheme).toMatchObject({
+    expect(navDark).toMatchObject({
       ...NavigationDarkTheme,
       colors: {
         ...NavigationDarkTheme.colors,
@@ -155,13 +155,13 @@ describe('adaptNavigationTheme', () => {
   });
 
   it('should return adapted custom navigation theme', () => {
-    const { LightTheme } = adaptNavigationTheme({
+    const { LightTheme: navLight } = adaptNavigationTheme({
       reactNavigationLight: NavigationCustomLightTheme,
     });
 
-    const { colors } = MD3LightTheme;
+    const { colors } = LightTheme;
 
-    expect(LightTheme).toMatchObject({
+    expect(navLight).toMatchObject({
       ...NavigationCustomLightTheme,
       colors: {
         ...NavigationCustomLightTheme.colors,
@@ -178,14 +178,14 @@ describe('adaptNavigationTheme', () => {
   });
 
   it('should return adapted navigation light theme based on custom app light theme', () => {
-    const { LightTheme } = adaptNavigationTheme({
+    const { LightTheme: navLight } = adaptNavigationTheme({
       reactNavigationLight: NavigationLightTheme,
       materialLight: AppCustomLightTheme,
     });
 
     const { colors } = AppCustomLightTheme;
 
-    expect(LightTheme).toMatchObject({
+    expect(navLight).toMatchObject({
       ...NavigationLightTheme,
       colors: {
         ...NavigationLightTheme.colors,
@@ -200,14 +200,14 @@ describe('adaptNavigationTheme', () => {
   });
 
   it('should return adapted navigation dark theme based on custom app dark theme', () => {
-    const { DarkTheme } = adaptNavigationTheme({
+    const { DarkTheme: navDark } = adaptNavigationTheme({
       reactNavigationDark: NavigationDarkTheme,
       materialDark: AppCustomDarkTheme,
     });
 
     const { colors } = AppCustomDarkTheme;
 
-    expect(DarkTheme).toMatchObject({
+    expect(navDark).toMatchObject({
       ...NavigationDarkTheme,
       colors: {
         ...NavigationDarkTheme.colors,
@@ -222,53 +222,53 @@ describe('adaptNavigationTheme', () => {
   });
 
   it('should adapt navigation theme with fonts', () => {
-    const { LightTheme } = adaptNavigationTheme({
+    const { LightTheme: navLight } = adaptNavigationTheme({
       reactNavigationLight: NavigationThemeWithFonts,
     });
 
-    expect(LightTheme).toMatchObject({
+    expect(navLight).toMatchObject({
       ...NavigationThemeWithFonts,
       colors: {
         ...NavigationThemeWithFonts.colors,
-        primary: MD3LightTheme.colors.primary,
-        background: MD3LightTheme.colors.background,
-        card: MD3LightTheme.colors.surfaceContainer,
-        text: MD3LightTheme.colors.onSurface,
-        border: MD3LightTheme.colors.outline,
-        notification: MD3LightTheme.colors.error,
+        primary: LightTheme.colors.primary,
+        background: LightTheme.colors.background,
+        card: LightTheme.colors.surfaceContainer,
+        text: LightTheme.colors.onSurface,
+        border: LightTheme.colors.outline,
+        notification: LightTheme.colors.error,
       },
       fonts: {
         regular: {
-          fontFamily: MD3LightTheme.fonts.bodyMedium.fontFamily,
-          fontWeight: MD3LightTheme.fonts.bodyMedium.fontWeight,
-          letterSpacing: MD3LightTheme.fonts.bodyMedium.letterSpacing,
+          fontFamily: LightTheme.fonts.bodyMedium.fontFamily,
+          fontWeight: LightTheme.fonts.bodyMedium.fontWeight,
+          letterSpacing: LightTheme.fonts.bodyMedium.letterSpacing,
         },
         medium: {
-          fontFamily: MD3LightTheme.fonts.titleMedium.fontFamily,
-          fontWeight: MD3LightTheme.fonts.titleMedium.fontWeight,
-          letterSpacing: MD3LightTheme.fonts.titleMedium.letterSpacing,
+          fontFamily: LightTheme.fonts.titleMedium.fontFamily,
+          fontWeight: LightTheme.fonts.titleMedium.fontWeight,
+          letterSpacing: LightTheme.fonts.titleMedium.letterSpacing,
         },
         bold: {
-          fontFamily: MD3LightTheme.fonts.headlineSmall.fontFamily,
-          fontWeight: MD3LightTheme.fonts.headlineSmall.fontWeight,
-          letterSpacing: MD3LightTheme.fonts.headlineSmall.letterSpacing,
+          fontFamily: LightTheme.fonts.headlineSmall.fontFamily,
+          fontWeight: LightTheme.fonts.headlineSmall.fontWeight,
+          letterSpacing: LightTheme.fonts.headlineSmall.letterSpacing,
         },
         heavy: {
-          fontFamily: MD3LightTheme.fonts.headlineLarge.fontFamily,
-          fontWeight: MD3LightTheme.fonts.headlineLarge.fontWeight,
-          letterSpacing: MD3LightTheme.fonts.headlineLarge.letterSpacing,
+          fontFamily: LightTheme.fonts.headlineLarge.fontFamily,
+          fontWeight: LightTheme.fonts.headlineLarge.fontWeight,
+          letterSpacing: LightTheme.fonts.headlineLarge.letterSpacing,
         },
       },
     });
   });
 
   it('should not expect fonts on theme without fonts', () => {
-    const { LightTheme, DarkTheme } = adaptNavigationTheme({
+    const { LightTheme: navLight, DarkTheme: navDark } = adaptNavigationTheme({
       reactNavigationLight: NavigationLightTheme,
       reactNavigationDark: NavigationDarkTheme,
     });
 
-    expect(LightTheme).not.toHaveProperty('fonts');
-    expect(DarkTheme).not.toHaveProperty('fonts');
+    expect(navLight).not.toHaveProperty('fonts');
+    expect(navDark).not.toHaveProperty('fonts');
   });
 });

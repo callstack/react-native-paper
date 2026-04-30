@@ -3,7 +3,7 @@ import * as React from 'react';
 import { render } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
-import { tokens } from '../../styles/themes/v3/tokens';
+import { tokens } from '../../styles/themes/tokens';
 import Menu from '../Menu/Menu';
 import { getMenuItemColor } from '../Menu/utils';
 

@@ -45,10 +45,10 @@ const DURATION = 2400;
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ActivityIndicator, MD3Colors } from 'react-native-paper';
+ * import { ActivityIndicator, Palette } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <ActivityIndicator animating={true} color={MD3Colors.error50} />
+ *   <ActivityIndicator animating={true} color={Palette.error50} />
  * );
  *
  * export default MyComponent;
