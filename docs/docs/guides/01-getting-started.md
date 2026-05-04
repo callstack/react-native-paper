@@ -18,6 +18,16 @@ npm install react-native-paper
 npm install react-native-safe-area-context
 ```
 
+- You also need to install [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/) and [react-native-worklets](https://docs.swmansion.com/react-native-worklets/) for animations.
+
+```bash npm2yarn
+npm install react-native-reanimated react-native-worklets
+```
+
+:::note
+If you're using a bare React Native project (not Expo), you need to add `react-native-worklets/plugin` to your `babel.config.js` plugins array. See the [Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/) for details.
+:::
+
 Additionaly for `iOS` platform there is a requirement to link the native parts of the library:
 
 ```bash

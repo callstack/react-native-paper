@@ -4,6 +4,10 @@ jest.useFakeTimers();
 
 jest.mock('react-native-safe-area-context', () => mockSafeAreaContext);
 
+jest.mock('react-native-worklets', () =>
+  require('react-native-worklets/src/mock')
+);
+
 jest.mock('@react-native-vector-icons/material-design-icons', () => {
   const React = require('react');
   const { Text } = require('react-native');
