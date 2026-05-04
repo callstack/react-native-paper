@@ -2,7 +2,7 @@ import { Platform, PlatformColor } from 'react-native';
 
 import { DarkTheme } from './DarkTheme';
 import { LightTheme } from './LightTheme';
-import type { Theme } from '../../types';
+import type { Theme } from '../types';
 
 const isApi34 = (Platform.Version as number) >= 34;
 const isApi31 = (Platform.Version as number) >= 31;
