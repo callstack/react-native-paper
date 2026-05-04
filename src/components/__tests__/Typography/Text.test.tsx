@@ -3,9 +3,9 @@ import * as React from 'react';
 import { render } from '@testing-library/react-native';
 
 import PaperProvider from '../../../core/PaperProvider';
-import configureFonts from '../../../styles/fonts';
-import { LightTheme } from '../../../styles/themes';
-import { tokens } from '../../../styles/themes/tokens';
+import configureFonts from '../../../theme/fonts';
+import { LightTheme } from '../../../theme/schemes';
+import { tokens } from '../../../theme/tokens';
 import Text, { customText } from '../../Typography/Text';
 
 const content = 'Something rendered as a child content';

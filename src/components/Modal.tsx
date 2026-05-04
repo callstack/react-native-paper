@@ -14,7 +14,7 @@ import useLatestCallback from 'use-latest-callback';
 
 import Surface from './Surface';
 import { useInternalTheme } from '../core/theming';
-import { tokens } from '../styles/themes/tokens';
+import { tokens } from '../theme/tokens';
 import type { ThemeProp } from '../types';
 import { addEventListener } from '../utils/addEventListener';
 import { BackHandler } from '../utils/BackHandler/BackHandler';

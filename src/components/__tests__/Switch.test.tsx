@@ -13,7 +13,7 @@ import {
   grey800,
   pink500,
   grey700,
-} from '../../styles/themes/colors';
+} from '../../theme/colors';
 import Switch from '../Switch/Switch';
 import { getSwitchColor } from '../Switch/utils';
 

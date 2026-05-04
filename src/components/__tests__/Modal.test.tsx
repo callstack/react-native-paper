@@ -8,8 +8,8 @@ import {
 
 import { act, fireEvent, render } from '@testing-library/react-native';
 
-import { LightTheme } from '../../styles/themes';
-import { tokens } from '../../styles/themes/tokens';
+import { LightTheme } from '../../theme/schemes';
+import { tokens } from '../../theme/tokens';
 import Modal from '../Modal';
 
 const { scrimAlpha } = tokens.md.ref;

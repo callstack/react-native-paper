@@ -1,4 +1,4 @@
-import { DarkTheme, LightTheme } from '../../styles/themes';
+import { DarkTheme, LightTheme } from '../../theme/schemes';
 import { adaptNavigationTheme } from '../theming';
 
 const NavigationLightTheme = {
