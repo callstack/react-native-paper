@@ -13,7 +13,7 @@ import Checkbox from './Checkbox';
 import CheckboxAndroid from './CheckboxAndroid';
 import CheckboxIOS from './CheckboxIOS';
 import { useInternalTheme } from '../../core/theming';
-import { tokens } from '../../styles/themes/tokens';
+import { tokens } from '../../theme/tokens';
 import type { ThemeProp, TypescaleKey } from '../../types';
 import TouchableRipple, {
   Props as TouchableRippleProps,

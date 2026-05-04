@@ -8,9 +8,9 @@
  * Do not add anything here that isn't a deprecated alias.
  */
 
-import { DarkTheme } from './styles/themes/DarkTheme';
-import { LightTheme } from './styles/themes/LightTheme';
-import { Palette } from './styles/themes/tokens';
+import { DarkTheme } from './theme/schemes/DarkTheme';
+import { LightTheme } from './theme/schemes/LightTheme';
+import { Palette } from './theme/tokens';
 import { TypescaleKey } from './types';
 import type { Theme, Elevation } from './types';
 

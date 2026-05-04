@@ -8,7 +8,7 @@ import {
 
 import { render, act } from '@testing-library/react-native';
 
-import { LightTheme, DarkTheme } from '../../styles/themes';
+import { LightTheme, DarkTheme } from '../../theme/schemes';
 import type { ThemeProp } from '../../types';
 import PaperProvider from '../PaperProvider';
 import { useTheme } from '../theming';

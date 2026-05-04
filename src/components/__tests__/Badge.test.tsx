@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { render } from '@testing-library/react-native';
 
-import { red500 } from '../../styles/themes/colors';
+import { red500 } from '../../theme/colors';
 import Badge from '../Badge';
 
 it('renders badge', () => {

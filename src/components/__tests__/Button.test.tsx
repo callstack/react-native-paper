@@ -4,8 +4,8 @@ import { Animated, StyleSheet } from 'react-native';
 import { act, fireEvent, render } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
-import { pink500, white } from '../../styles/themes/colors';
-import { tokens } from '../../styles/themes/tokens';
+import { pink500, white } from '../../theme/colors';
+import { tokens } from '../../theme/tokens';
 import Button from '../Button/Button';
 import { getButtonColors } from '../Button/utils';
 

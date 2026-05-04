@@ -1,7 +1,7 @@
 import type { ViewStyle } from 'react-native';
 
-import { black, white } from '../../styles/themes/colors';
-import { tokens } from '../../styles/themes/tokens';
+import { black, white } from '../../theme/colors';
+import { tokens } from '../../theme/tokens';
 import type { InternalTheme, Theme } from '../../types';
 import { splitStyles } from '../../utils/splitStyles';
 

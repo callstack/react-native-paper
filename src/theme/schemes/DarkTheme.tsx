@@ -1,8 +1,8 @@
 import color from 'color';
 
 import { LightTheme } from './LightTheme';
-import { tokens } from './tokens';
 import type { Theme } from '../../types';
+import { tokens } from '../tokens';
 
 const { palette, stateOpacity } = tokens.md.ref;
 

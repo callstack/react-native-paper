@@ -18,7 +18,7 @@ import {
   getAppbarBorders,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import shadow from '../../styles/shadow';
+import shadow from '../../theme/shadow';
 import type { ThemeProp } from '../../types';
 
 export type Props = Omit<

@@ -1,5 +1,5 @@
 import { getTheme } from '../../../core/theming';
-import { tokens } from '../../../styles/themes/tokens';
+import { tokens } from '../../../theme/tokens';
 import {
   getAndroidSelectionControlColor,
   getSelectionControlIOSColor,
