@@ -1,5 +1,5 @@
-import type { TypescaleStyle, Typescale, TypescaleKey } from '../types';
 import { typescale } from './tokens';
+import type { TypescaleStyle, Typescale, TypescaleKey } from './types';
 
 type FontsConfig =
   | {
