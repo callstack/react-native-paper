@@ -13,7 +13,6 @@ export * from './styles/themes';
 export { default as Provider } from './core/PaperProvider';
 export { default as PaperProvider } from './core/PaperProvider';
 export { default as shadow } from './styles/shadow';
-export { default as overlay } from './styles/overlay';
 export { default as configureFonts } from './styles/fonts';
 
 import * as Avatar from './components/Avatar/Avatar';

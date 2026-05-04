@@ -1,7 +1,7 @@
 import type { TypescaleStyle, Typescale, TypescaleKey } from '../types';
 import { typescale } from './themes/tokens';
 
-type MD3FontsConfig =
+type FontsConfig =
   | {
       [key in TypescaleKey]: Partial<TypescaleStyle>;
     }
@@ -10,8 +10,8 @@ type MD3FontsConfig =
     }
   | Partial<TypescaleStyle>;
 
-function configureV3Fonts(
-  config: MD3FontsConfig
+function configureFontsConfig(
+  config: FontsConfig
 ): Typescale | (Typescale & { [key: string]: TypescaleStyle }) {
   if (!config) {
     return typescale;
@@ -57,5 +57,5 @@ export default function configureFonts(params: {
 // eslint-disable-next-line no-redeclare
 export default function configureFonts(params?: any) {
   const { config } = params || {};
-  return configureV3Fonts(config);
+  return configureFontsConfig(config);
 }

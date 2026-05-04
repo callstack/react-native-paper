@@ -10,9 +10,9 @@ import {
 } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
-import { isAnimatedValue } from '../styles/overlay';
 import shadow from '../styles/shadow';
 import type { Elevation, Theme, ThemeProp } from '../types';
+import { isAnimatedValue } from '../utils/animations';
 import { forwardRef } from '../utils/forwardRef';
 import { splitStyles } from '../utils/splitStyles';
 
