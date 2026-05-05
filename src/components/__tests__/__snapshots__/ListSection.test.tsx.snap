@@ -292,6 +292,102 @@ exports[`renders list section with custom title style 1`] = `
           "lineHeight": 20,
         },
       },
+      "motion": {
+        "duration": {
+          "extraLong1": 700,
+          "extraLong2": 800,
+          "extraLong3": 900,
+          "extraLong4": 1000,
+          "long1": 450,
+          "long2": 500,
+          "long3": 550,
+          "long4": 600,
+          "medium1": 250,
+          "medium2": 300,
+          "medium3": 350,
+          "medium4": 400,
+          "short1": 50,
+          "short2": 100,
+          "short3": 150,
+          "short4": 200,
+        },
+        "easing": {
+          "emphasized": [
+            0.2,
+            0,
+            0,
+            1,
+          ],
+          "emphasizedAccelerate": [
+            0.3,
+            0,
+            0.8,
+            0.15,
+          ],
+          "emphasizedDecelerate": [
+            0.05,
+            0.7,
+            0.1,
+            1,
+          ],
+          "linear": [
+            0,
+            0,
+            1,
+            1,
+          ],
+          "standard": [
+            0.2,
+            0,
+            0,
+            1,
+          ],
+          "standardAccelerate": [
+            0.3,
+            0,
+            1,
+            1,
+          ],
+          "standardDecelerate": [
+            0,
+            0,
+            0,
+            1,
+          ],
+        },
+        "spring": {
+          "default": {
+            "effects": {
+              "damping": 1,
+              "stiffness": 1600,
+            },
+            "spatial": {
+              "damping": 0.8,
+              "stiffness": 380,
+            },
+          },
+          "fast": {
+            "effects": {
+              "damping": 1,
+              "stiffness": 3800,
+            },
+            "spatial": {
+              "damping": 0.6,
+              "stiffness": 800,
+            },
+          },
+          "slow": {
+            "effects": {
+              "damping": 1,
+              "stiffness": 800,
+            },
+            "spatial": {
+              "damping": 0.8,
+              "stiffness": 200,
+            },
+          },
+        },
+      },
       "shapes": {
         "corner": {
           "extraExtraLarge": 48,
@@ -950,6 +1046,102 @@ exports[`renders list section with subheader 1`] = `
           "lineHeight": 20,
         },
       },
+      "motion": {
+        "duration": {
+          "extraLong1": 700,
+          "extraLong2": 800,
+          "extraLong3": 900,
+          "extraLong4": 1000,
+          "long1": 450,
+          "long2": 500,
+          "long3": 550,
+          "long4": 600,
+          "medium1": 250,
+          "medium2": 300,
+          "medium3": 350,
+          "medium4": 400,
+          "short1": 50,
+          "short2": 100,
+          "short3": 150,
+          "short4": 200,
+        },
+        "easing": {
+          "emphasized": [
+            0.2,
+            0,
+            0,
+            1,
+          ],
+          "emphasizedAccelerate": [
+            0.3,
+            0,
+            0.8,
+            0.15,
+          ],
+          "emphasizedDecelerate": [
+            0.05,
+            0.7,
+            0.1,
+            1,
+          ],
+          "linear": [
+            0,
+            0,
+            1,
+            1,
+          ],
+          "standard": [
+            0.2,
+            0,
+            0,
+            1,
+          ],
+          "standardAccelerate": [
+            0.3,
+            0,
+            1,
+            1,
+          ],
+          "standardDecelerate": [
+            0,
+            0,
+            0,
+            1,
+          ],
+        },
+        "spring": {
+          "default": {
+            "effects": {
+              "damping": 1,
+              "stiffness": 1600,
+            },
+            "spatial": {
+              "damping": 0.8,
+              "stiffness": 380,
+            },
+          },
+          "fast": {
+            "effects": {
+              "damping": 1,
+              "stiffness": 3800,
+            },
+            "spatial": {
+              "damping": 0.6,
+              "stiffness": 800,
+            },
+          },
+          "slow": {
+            "effects": {
+              "damping": 1,
+              "stiffness": 800,
+            },
+            "spatial": {
+              "damping": 0.8,
+              "stiffness": 200,
+            },
+          },
+        },
+      },
       "shapes": {
         "corner": {
           "extraExtraLarge": 48,
@@ -1604,6 +1796,102 @@ exports[`renders list section without subheader 1`] = `
           "fontWeight": "700",
           "letterSpacing": 0.1,
           "lineHeight": 20,
+        },
+      },
+      "motion": {
+        "duration": {
+          "extraLong1": 700,
+          "extraLong2": 800,
+          "extraLong3": 900,
+          "extraLong4": 1000,
+          "long1": 450,
+          "long2": 500,
+          "long3": 550,
+          "long4": 600,
+          "medium1": 250,
+          "medium2": 300,
+          "medium3": 350,
+          "medium4": 400,
+          "short1": 50,
+          "short2": 100,
+          "short3": 150,
+          "short4": 200,
+        },
+        "easing": {
+          "emphasized": [
+            0.2,
+            0,
+            0,
+            1,
+          ],
+          "emphasizedAccelerate": [
+            0.3,
+            0,
+            0.8,
+            0.15,
+          ],
+          "emphasizedDecelerate": [
+            0.05,
+            0.7,
+            0.1,
+            1,
+          ],
+          "linear": [
+            0,
+            0,
+            1,
+            1,
+          ],
+          "standard": [
+            0.2,
+            0,
+            0,
+            1,
+          ],
+          "standardAccelerate": [
+            0.3,
+            0,
+            1,
+            1,
+          ],
+          "standardDecelerate": [
+            0,
+            0,
+            0,
+            1,
+          ],
+        },
+        "spring": {
+          "default": {
+            "effects": {
+              "damping": 1,
+              "stiffness": 1600,
+            },
+            "spatial": {
+              "damping": 0.8,
+              "stiffness": 380,
+            },
+          },
+          "fast": {
+            "effects": {
+              "damping": 1,
+              "stiffness": 3800,
+            },
+            "spatial": {
+              "damping": 0.6,
+              "stiffness": 800,
+            },
+          },
+          "slow": {
+            "effects": {
+              "damping": 1,
+              "stiffness": 800,
+            },
+            "spatial": {
+              "damping": 0.8,
+              "stiffness": 200,
+            },
+          },
         },
       },
       "shapes": {
