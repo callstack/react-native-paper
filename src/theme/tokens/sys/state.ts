@@ -9,5 +9,7 @@ export const defaultState: ThemeState = {
     focused: stateOpacity.focused,
     pressed: stateOpacity.pressed,
     dragged: stateOpacity.dragged,
+    disabled: stateOpacity.disabled,
+    enabled: stateOpacity.enabled,
   },
 };
