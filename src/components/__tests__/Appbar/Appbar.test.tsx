@@ -232,21 +232,6 @@ describe('AppbarAction', () => {
     expect(appbarActionIcon.props.color).toBe('purple');
   });
 
-  it('should be rendered with custom ripple color', () => {
-    const { getByTestId } = render(
-      <Appbar>
-        <Appbar.Action
-          icon="menu"
-          rippleColor="purple"
-          testID="appbar-action"
-        />
-      </Appbar>
-    );
-    const appbarActionContainer = getByTestId('appbar-action-container').props
-      .children;
-    expect(appbarActionContainer.props.rippleColor).toBe('purple');
-  });
-
   it('should render AppbarBackAction with custom color', () => {
     const { getByTestId } = render(
       <Appbar>
@@ -303,13 +288,13 @@ describe('getAppbarColors', () => {
 
   it('should return v3 light color if theme version is 3', () => {
     expect(getAppbarBackgroundColor(getTheme(), elevation)).toBe(
-      tokens.md.ref.palette.neutral99
+      tokens.md.ref.palette.neutral98
     );
   });
 
   it('should return v3 dark color if theme version is 3', () => {
     expect(getAppbarBackgroundColor(getTheme(true), elevation)).toBe(
-      tokens.md.ref.palette.neutral10
+      tokens.md.ref.palette.neutral6
     );
   });
 });

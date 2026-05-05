@@ -3887,13 +3887,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@material/material-color-utilities@npm:^0.2.7":
-  version: 0.2.7
-  resolution: "@material/material-color-utilities@npm:0.2.7"
-  checksum: 10c0/7734f8d7cffe6a92d47fcca82b4846e39ffd79be9c057f3299466696dcdee5379b8a8a3aa6a9692d40bd6900905f689105d9a8ce47882ab22348df10621f70cd
-  languageName: node
-  linkType: hard
-
 "@mdx-js/mdx@npm:^0.20.3":
   version: 0.20.3
   resolution: "@mdx-js/mdx@npm:0.20.3"
@@ -4314,20 +4307,6 @@ __metadata:
   dependencies:
     "@octokit/openapi-types": "npm:^12.11.0"
   checksum: 10c0/81cfa58e5524bf2e233d75a346e625fd6e02a7b919762c6ddb523ad6fb108943ef9d34c0298ff3c5a44122e449d9038263bc22959247fd6ff8894a48888ac705
-  languageName: node
-  linkType: hard
-
-"@pchmn/expo-material3-theme@npm:^1.3.2":
-  version: 1.3.2
-  resolution: "@pchmn/expo-material3-theme@npm:1.3.2"
-  dependencies:
-    "@material/material-color-utilities": "npm:^0.2.7"
-    color: "npm:^4.2.3"
-  peerDependencies:
-    expo: "*"
-    react: "*"
-    react-native: "*"
-  checksum: 10c0/89aa0a65b04f4a7f709c35bbdc2f7830dff73e0335877d36a091c55fb174ce82e4b2c67690657978b03fc563ab4c20565ded0ed7faec94d0a384a9c5085dfe19
   languageName: node
   linkType: hard
 
@@ -20063,7 +20042,6 @@ __metadata:
     "@babel/core": "npm:^7.25.2"
     "@expo/vector-icons": "npm:^15.0.2"
     "@expo/webpack-config": "npm:~19.0.1"
-    "@pchmn/expo-material3-theme": "npm:^1.3.2"
     "@react-native-async-storage/async-storage": "npm:2.2.0"
     "@react-native-masked-view/masked-view": "npm:0.3.2"
     "@react-navigation/bottom-tabs": "npm:^7.3.10"

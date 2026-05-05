@@ -3,16 +3,18 @@ import * as React from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
-import color from 'color';
 
 import PaperProvider from '../../core/PaperProvider';
 import { DefaultTheme, getTheme, ThemeProvider } from '../../core/theming';
 import { red500 } from '../../styles/themes/v2/colors';
+import { tokens } from '../../styles/themes/v3/tokens';
 import {
   getFlatInputColors,
   getOutlinedInputColors,
 } from '../TextInput/helpers';
 import TextInput, { Props } from '../TextInput/TextInput';
+
+const { stateOpacity } = tokens.md.ref;
 
 const style = StyleSheet.create({
   inputStyle: {
@@ -547,7 +549,7 @@ describe('getFlatInputColor - underline color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      underlineColorCustom: getTheme().colors.onSurfaceDisabled,
+      underlineColorCustom: getTheme().colors.onSurfaceVariant,
     });
   });
 
@@ -610,7 +612,8 @@ describe('getFlatInputColor - input text color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      inputTextColor: getTheme().colors.onSurfaceDisabled,
+      inputTextColor: getTheme().colors.onSurface,
+      disabledOpacity: stateOpacity.disabled,
     });
   });
 
@@ -626,18 +629,19 @@ describe('getFlatInputColor - input text color', () => {
 });
 
 describe('getFlatInputColor - placeholder color', () => {
-  it('should return correct disabled color, for theme version 3', () => {
+  it('should return correct disabled color', () => {
     expect(
       getFlatInputColors({
         disabled: true,
         theme: getTheme(),
       })
     ).toMatchObject({
-      placeholderColor: getTheme().colors.onSurfaceDisabled,
+      placeholderColor: getTheme().colors.onSurfaceVariant,
+      disabledOpacity: stateOpacity.disabled,
     });
   });
 
-  it('should return correct theme color, for theme version 3', () => {
+  it('should return correct theme color', () => {
     expect(
       getFlatInputColors({
         theme: getTheme(),
@@ -656,10 +660,7 @@ describe('getFlatInputColor - background color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      backgroundColor: color(getTheme().colors.onSurface)
-        .alpha(0.04)
-        .rgb()
-        .string(),
+      backgroundColor: getTheme().colors.surfaceContainerHighest,
     });
     expect(
       getFlatInputColors({
@@ -667,10 +668,7 @@ describe('getFlatInputColor - background color', () => {
         theme: getTheme(true),
       })
     ).toMatchObject({
-      backgroundColor: color(getTheme(true).colors.onSurface)
-        .alpha(0.04)
-        .rgb()
-        .string(),
+      backgroundColor: getTheme(true).colors.surfaceContainerHighest,
     });
   });
 
@@ -715,7 +713,8 @@ describe('getFlatInputColor - active color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      activeColor: getTheme().colors.onSurfaceDisabled,
+      activeColor: getTheme().colors.primary,
+      disabledOpacity: stateOpacity.disabled,
     });
   });
 
@@ -778,7 +777,7 @@ describe('getOutlinedInputColors - outline color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      outlineColor: getTheme().colors.surfaceDisabled,
+      outlineColor: getTheme().colors.outlineVariant,
     });
   });
 
@@ -832,7 +831,8 @@ describe('getOutlinedInputColors - input text color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      inputTextColor: getTheme().colors.onSurfaceDisabled,
+      inputTextColor: getTheme().colors.onSurface,
+      disabledOpacity: stateOpacity.disabled,
     });
   });
 
@@ -855,7 +855,8 @@ describe('getOutlinedInputColors - placeholder color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      placeholderColor: getTheme().colors.onSurfaceDisabled,
+      placeholderColor: getTheme().colors.onSurfaceVariant,
+      disabledOpacity: stateOpacity.disabled,
     });
   });
 
@@ -900,7 +901,8 @@ describe('getOutlinedInputColors - active color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      activeColor: getTheme().colors.onSurfaceDisabled,
+      activeColor: getTheme().colors.primary,
+      disabledOpacity: stateOpacity.disabled,
     });
   });
 

@@ -10,8 +10,6 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import color from 'color';
-
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
@@ -108,7 +106,7 @@ const DataTableTitle = ({
 
   const textColor = theme.colors.onSurface;
 
-  const alphaTextColor = color(textColor).alpha(0.6).rgb().string();
+  const alphaTextColor = theme.colors.onSurfaceVariant;
 
   const spin = spinAnim.interpolate({
     inputRange: [0, 1],

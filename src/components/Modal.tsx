@@ -14,10 +14,13 @@ import useLatestCallback from 'use-latest-callback';
 
 import Surface from './Surface';
 import { useInternalTheme } from '../core/theming';
+import { tokens } from '../styles/themes/v3/tokens';
 import type { ThemeProp } from '../types';
 import { addEventListener } from '../utils/addEventListener';
 import { BackHandler } from '../utils/BackHandler/BackHandler';
 import useAnimatedValue from '../utils/useAnimatedValue';
+
+const { scrimAlpha } = tokens.md.ref;
 
 export type Props = {
   /**
@@ -201,8 +204,11 @@ function Modal({
         style={[
           styles.backdrop,
           {
-            backgroundColor: theme.colors?.backdrop,
-            opacity,
+            backgroundColor: theme.colors.scrim,
+            opacity: opacity.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, scrimAlpha],
+            }),
           },
         ]}
         testID={`${testID}-backdrop`}

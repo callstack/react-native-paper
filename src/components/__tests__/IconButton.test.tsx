@@ -2,12 +2,14 @@ import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
 import { act, render } from '@testing-library/react-native';
-import color from 'color';
 
 import { getTheme } from '../../core/theming';
 import { pink500 } from '../../styles/themes/v2/colors';
+import { tokens } from '../../styles/themes/v3/tokens';
 import IconButton from '../IconButton/IconButton';
 import { getIconButtonColor } from '../IconButton/utils';
+
+const { stateOpacity } = tokens.md.ref;
 
 const styles = StyleSheet.create({
   square: {
@@ -97,7 +99,8 @@ describe('getIconButtonColor - icon color', () => {
         disabled: true,
       })
     ).toMatchObject({
-      iconColor: getTheme().colors.onSurfaceDisabled,
+      iconColor: getTheme().colors.onSurface,
+      iconOpacity: stateOpacity.disabled,
     });
   });
 
@@ -212,7 +215,10 @@ describe('getIconButtonColor - background color', () => {
           mode,
           disabled: true,
         })
-      ).toMatchObject({ backgroundColor: getTheme().colors.surfaceDisabled });
+      ).toMatchObject({
+        backgroundColor: getTheme().colors.onSurface,
+        backgroundOpacity: stateOpacity.disabled,
+      });
     })
   );
 
@@ -293,7 +299,7 @@ describe('getIconButtonColor - border color', () => {
         disabled: true,
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.surfaceDisabled,
+      borderColor: getTheme().colors.outlineVariant,
     });
   });
 
@@ -303,22 +309,7 @@ describe('getIconButtonColor - border color', () => {
         theme: getTheme(),
       })
     ).toMatchObject({
-      borderColor: getTheme().colors.outline,
-    });
-  });
-});
-
-describe('getIconButtonColor - ripple color', () => {
-  it('should return theme color, for theme version 3', () => {
-    expect(
-      getIconButtonColor({
-        theme: getTheme(),
-      })
-    ).toMatchObject({
-      rippleColor: color(getTheme().colors.onSurfaceVariant)
-        .alpha(0.12)
-        .rgb()
-        .string(),
+      borderColor: getTheme().colors.outlineVariant,
     });
   });
 });

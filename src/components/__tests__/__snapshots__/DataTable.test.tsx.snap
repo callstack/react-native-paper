@@ -54,7 +54,7 @@ exports[`DataTable.Cell renders data table cell 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -128,7 +128,7 @@ exports[`DataTable.Cell renders right aligned data table cell 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -213,7 +213,7 @@ exports[`DataTable.Header renders data table header 1`] = `
             "textAlign": "left",
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontWeight": "400",
             "letterSpacing": 0,
@@ -233,7 +233,7 @@ exports[`DataTable.Header renders data table header 1`] = `
             },
             {},
             {
-              "color": "rgba(28, 27, 31, 0.6)",
+              "color": "rgba(73, 69, 79, 1)",
             },
             undefined,
           ],
@@ -294,7 +294,7 @@ exports[`DataTable.Header renders data table header 1`] = `
             "textAlign": "left",
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontWeight": "400",
             "letterSpacing": 0,
@@ -314,7 +314,7 @@ exports[`DataTable.Header renders data table header 1`] = `
             },
             {},
             {
-              "color": "rgba(28, 27, 31, 0.6)",
+              "color": "rgba(73, 69, 79, 1)",
             },
             undefined,
           ],
@@ -352,7 +352,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -366,7 +366,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
             "marginRight": 16,
           },
           {
-            "color": "rgba(28, 27, 31, 0.6)",
+            "color": "rgba(73, 69, 79, 1)",
           },
         ],
       ]
@@ -404,7 +404,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
@@ -481,35 +481,43 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
           }
           testID="icon-button"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
-              [
-                {
-                  "color": "rgba(28, 27, 31, 1)",
-                  "fontSize": 24,
-                },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
-            chevron-left
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-left
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -538,7 +546,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
@@ -615,35 +623,43 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
           }
           testID="icon-button"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
-              [
-                {
-                  "color": "rgba(28, 27, 31, 1)",
-                  "fontSize": 24,
-                },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
-            chevron-right
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-right
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -676,7 +692,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -690,7 +706,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             "marginRight": 16,
           },
           {
-            "color": "rgba(28, 27, 31, 0.6)",
+            "color": "rgba(73, 69, 79, 1)",
           },
         ],
       ]
@@ -730,7 +746,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
@@ -807,35 +823,43 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           }
           testID="icon-button"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
-              [
-                {
-                  "color": "rgba(28, 27, 31, 1)",
-                  "fontSize": 24,
-                },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
-            page-first
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              page-first
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -864,7 +888,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
@@ -941,35 +965,43 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           }
           testID="icon-button"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
-              [
-                {
-                  "color": "rgba(28, 27, 31, 1)",
-                  "fontSize": 24,
-                },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
-            chevron-left
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-left
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -998,7 +1030,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
@@ -1075,35 +1107,43 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           }
           testID="icon-button"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
-              [
-                {
-                  "color": "rgba(28, 27, 31, 1)",
-                  "fontSize": 24,
-                },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
-            chevron-right
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-right
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -1132,7 +1172,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
@@ -1209,35 +1249,43 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           }
           testID="icon-button"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
-              [
-                {
-                  "color": "rgba(28, 27, 31, 1)",
-                  "fontSize": 24,
-                },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
-            page-last
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              page-last
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -1270,7 +1318,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -1284,7 +1332,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
             "marginRight": 16,
           },
           {
-            "color": "rgba(28, 27, 31, 0.6)",
+            "color": "rgba(73, 69, 79, 1)",
           },
         ],
       ]
@@ -1324,7 +1372,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
@@ -1401,35 +1449,43 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
           }
           testID="icon-button"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
-              [
-                {
-                  "color": "rgba(28, 27, 31, 1)",
-                  "fontSize": 24,
-                },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
-            chevron-left
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-left
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -1458,7 +1514,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
@@ -1535,35 +1591,43 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
           }
           testID="icon-button"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
-              [
-                {
-                  "color": "rgba(28, 27, 31, 1)",
-                  "fontSize": 24,
-                },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
-            chevron-right
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-right
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -1606,7 +1670,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "textAlign": "left",
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontFamily": "System",
             "fontWeight": "400",
             "letterSpacing": 0,
@@ -1620,7 +1684,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               "marginRight": 16,
             },
             {
-              "color": "rgba(28, 27, 31, 0.6)",
+              "color": "rgba(73, 69, 79, 1)",
             },
           ],
         ]
@@ -1654,7 +1718,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           style={
             {
               "backgroundColor": "transparent",
-              "borderColor": "rgba(121, 116, 126, 1)",
+              "borderColor": "rgba(202, 196, 208, 1)",
               "borderRadius": 20,
               "borderStyle": "solid",
               "borderWidth": 1,
@@ -1724,6 +1788,9 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                     "justifyContent": "center",
                   },
                   {
+                    "opacity": 1,
+                  },
+                  {
                     "flexDirection": "row-reverse",
                   },
                 ]
@@ -1784,7 +1851,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                       "textAlign": "left",
                     },
                     {
-                      "color": "rgba(28, 27, 31, 1)",
+                      "color": "rgba(29, 27, 32, 1)",
                       "writingDirection": "ltr",
                     },
                     [
@@ -1839,7 +1906,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -1853,7 +1920,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "marginRight": 16,
           },
           {
-            "color": "rgba(28, 27, 31, 0.6)",
+            "color": "rgba(73, 69, 79, 1)",
           },
         ],
       ]
@@ -1893,7 +1960,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
@@ -1970,35 +2037,43 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           }
           testID="icon-button"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
-              [
-                {
-                  "color": "rgba(28, 27, 31, 1)",
-                  "fontSize": 24,
-                },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
-            page-first
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              page-first
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -2027,7 +2102,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
@@ -2104,35 +2179,43 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           }
           testID="icon-button"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
-              [
-                {
-                  "color": "rgba(28, 27, 31, 1)",
-                  "fontSize": 24,
-                },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
-            chevron-left
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-left
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -2161,7 +2244,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
@@ -2238,35 +2321,43 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           }
           testID="icon-button"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
-              [
-                {
-                  "color": "rgba(28, 27, 31, 1)",
-                  "fontSize": 24,
-                },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
-            chevron-right
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              chevron-right
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -2295,7 +2386,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
         style={
           {
             "backgroundColor": "transparent",
-            "borderColor": "rgba(121, 116, 126, 1)",
+            "borderColor": "rgba(202, 196, 208, 1)",
             "borderRadius": 20,
             "borderWidth": 0,
             "elevation": 0,
@@ -2372,35 +2463,43 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           }
           testID="icon-button"
         >
-          <Text
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no-hide-descendants"
-            pointerEvents="none"
-            selectable={false}
+          <View
             style={
-              [
-                {
-                  "color": "rgba(28, 27, 31, 1)",
-                  "fontSize": 24,
-                },
-                [
-                  {
-                    "lineHeight": 24,
-                    "transform": [
-                      {
-                        "scaleX": 1,
-                      },
-                    ],
-                  },
-                  {
-                    "backgroundColor": "transparent",
-                  },
-                ],
-              ]
+              {
+                "opacity": 1,
+              }
             }
           >
-            page-last
-          </Text>
+            <Text
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "rgba(29, 27, 32, 1)",
+                    "fontSize": 24,
+                  },
+                  [
+                    {
+                      "lineHeight": 24,
+                      "transform": [
+                        {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                ]
+              }
+            >
+              page-last
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -2474,7 +2573,7 @@ exports[`DataTable.Title renders data table title with press handler 1`] = `
       style={
         [
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontSize": 16,
           },
           [
@@ -2504,7 +2603,7 @@ exports[`DataTable.Title renders data table title with press handler 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -2602,7 +2701,7 @@ exports[`DataTable.Title renders data table title with sort icon 1`] = `
       style={
         [
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "fontSize": 16,
           },
           [
@@ -2632,7 +2731,7 @@ exports[`DataTable.Title renders data table title with sort icon 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -2718,7 +2817,7 @@ exports[`DataTable.Title renders right aligned data table title 1`] = `
           "textAlign": "left",
         },
         {
-          "color": "rgba(28, 27, 31, 1)",
+          "color": "rgba(29, 27, 32, 1)",
           "fontFamily": "System",
           "fontWeight": "400",
           "letterSpacing": 0,
@@ -2738,7 +2837,7 @@ exports[`DataTable.Title renders right aligned data table title 1`] = `
           },
           {},
           {
-            "color": "rgba(28, 27, 31, 0.6)",
+            "color": "rgba(73, 69, 79, 1)",
           },
           undefined,
         ],

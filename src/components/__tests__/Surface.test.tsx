@@ -65,7 +65,7 @@ describe('Surface', () => {
         shadowRadius: 12,
       });
       expect(getByTestId('surface-test')).toHaveStyle({
-        backgroundColor: getTheme().colors.elevation.level5,
+        backgroundColor: getTheme().colors.surfaceContainerHighest,
       });
     });
 
@@ -256,7 +256,7 @@ describe('Surface', () => {
 
       expect(getByTestId(testID)).not.toHaveStyle({ elevation: 5 });
       expect(getByTestId(testID)).toHaveStyle({
-        backgroundColor: getTheme().colors.elevation.level5,
+        backgroundColor: getTheme().colors.surfaceContainerHighest,
       });
     });
   });

@@ -145,7 +145,7 @@ exports[`can render leading radio button control 1`] = `
             "textAlign": "left",
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "writingDirection": "ltr",
           },
           [
@@ -162,7 +162,8 @@ exports[`can render leading radio button control 1`] = `
                 "flexShrink": 1,
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
+                "opacity": 1,
                 "textAlign": "right",
               },
               undefined,
@@ -239,7 +240,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
             "textAlign": "left",
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "writingDirection": "ltr",
           },
           [
@@ -256,7 +257,8 @@ exports[`can render the Android radio button on different platforms 1`] = `
                 "flexShrink": 1,
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
+                "opacity": 1,
                 "textAlign": "left",
               },
               undefined,
@@ -390,7 +392,7 @@ exports[`can render the iOS radio button on different platforms 1`] = `
             "textAlign": "left",
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "writingDirection": "ltr",
           },
           [
@@ -407,7 +409,8 @@ exports[`can render the iOS radio button on different platforms 1`] = `
                 "flexShrink": 1,
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
+                "opacity": 1,
                 "textAlign": "left",
               },
               undefined,
@@ -567,7 +570,7 @@ exports[`renders unchecked 1`] = `
             "textAlign": "left",
           },
           {
-            "color": "rgba(28, 27, 31, 1)",
+            "color": "rgba(29, 27, 32, 1)",
             "writingDirection": "ltr",
           },
           [
@@ -584,7 +587,8 @@ exports[`renders unchecked 1`] = `
                 "flexShrink": 1,
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
+                "opacity": 1,
                 "textAlign": "left",
               },
               undefined,

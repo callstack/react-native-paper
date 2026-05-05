@@ -5,6 +5,7 @@ import {
   StyleProp,
   StyleSheet,
   TextStyle,
+  View,
 } from 'react-native';
 
 import { getTextColor } from './utils';
@@ -122,36 +123,42 @@ const HelperText = ({
     textHeight = e.nativeEvent.layout.height;
   };
 
-  const textColor = getTextColor({ theme, disabled, type });
+  const { color: textColor, opacity: textOpacity } = getTextColor({
+    theme,
+    disabled,
+    type,
+  });
 
   return (
-    <AnimatedText
-      onLayout={handleTextLayout}
-      style={[
-        styles.text,
-        padding !== 'none' ? styles.padding : {},
-        {
-          color: textColor,
-          opacity: shown,
-          transform:
-            visible && type === 'error'
-              ? [
-                  {
-                    translateY: shown.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [-textHeight / 2, 0],
-                    }),
-                  },
-                ]
-              : [],
-        },
-        style,
-      ]}
-      maxFontSizeMultiplier={maxFontSizeMultiplier}
-      {...rest}
-    >
-      {rest.children}
-    </AnimatedText>
+    <View style={{ opacity: textOpacity }}>
+      <AnimatedText
+        onLayout={handleTextLayout}
+        style={[
+          styles.text,
+          padding !== 'none' ? styles.padding : {},
+          {
+            color: textColor,
+            opacity: shown,
+            transform:
+              visible && type === 'error'
+                ? [
+                    {
+                      translateY: shown.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [-textHeight / 2, 0],
+                      }),
+                    },
+                  ]
+                : [],
+          },
+          style,
+        ]}
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
+        {...rest}
+      >
+        {rest.children}
+      </AnimatedText>
+    </View>
   );
 };
 

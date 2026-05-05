@@ -1,15 +1,9 @@
 import type { ComponentType } from 'react';
 
 import { $DeepPartial, createTheming } from '@callstack/react-theme-provider';
-import color from 'color';
 
 import { MD3DarkTheme, MD3LightTheme } from '../styles/themes';
-import type {
-  InternalTheme,
-  MD3Theme,
-  MD3AndroidColors,
-  NavigationTheme,
-} from '../types';
+import type { InternalTheme, MD3Theme, NavigationTheme } from '../types';
 
 export const DefaultTheme = MD3LightTheme;
 
@@ -105,7 +99,7 @@ const getAdaptedTheme = <T extends NavigationTheme>(
       ...theme.colors,
       primary: materialTheme.colors.primary,
       background: materialTheme.colors.background,
-      card: materialTheme.colors.elevation.level2,
+      card: materialTheme.colors.surfaceContainer,
       text: materialTheme.colors.onSurface,
       border: materialTheme.colors.outline,
       notification: materialTheme.colors.error,
@@ -141,20 +135,4 @@ const getAdaptedTheme = <T extends NavigationTheme>(
   }
 
   return base;
-};
-
-export const getDynamicThemeElevations = (scheme: MD3AndroidColors) => {
-  const elevationValues = ['transparent', 0.05, 0.08, 0.11, 0.12, 0.14];
-  return elevationValues.reduce((elevations, elevationValue, index) => {
-    return {
-      ...elevations,
-      [`level${index}`]:
-        index === 0
-          ? elevationValue
-          : color(scheme.surface)
-              .mix(color(scheme.primary), elevationValue as number)
-              .rgb()
-              .string(),
-    };
-  }, {});
 };

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -16,6 +15,7 @@ import { RadioButtonContext, RadioButtonContextType } from './RadioButtonGroup';
 import RadioButtonIOS from './RadioButtonIOS';
 import { handlePress, isChecked } from './utils';
 import { useInternalTheme } from '../../core/theming';
+import { tokens } from '../../styles/themes/v3/tokens';
 import type { ThemeProp, MD3TypescaleKey } from '../../types';
 import TouchableRipple, {
   Props as TouchableRippleProps,
@@ -60,10 +60,6 @@ export type Props = {
    * Custom color for radio.
    */
   color?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
   /**
    * Status of radio button.
    */
@@ -152,7 +148,6 @@ const RadioButtonItem = ({
   disabled,
   color,
   uncheckedColor,
-  rippleColor,
   status,
   theme: themeOverrides,
   background,
@@ -185,11 +180,13 @@ const RadioButtonItem = ({
   }
 
   const textColor = theme.colors.onSurface;
-  const disabledTextColor = theme.colors.onSurfaceDisabled;
   const textAlign = isLeading ? 'right' : 'left';
 
   const computedStyle = {
-    color: disabled ? disabledTextColor : textColor,
+    color: textColor,
+    opacity: disabled
+      ? tokens.md.ref.stateOpacity.disabled
+      : tokens.md.ref.stateOpacity.enabled,
     textAlign,
   } as TextStyle;
 
@@ -223,7 +220,6 @@ const RadioButtonItem = ({
             disabled={disabled}
             background={background}
             theme={theme}
-            rippleColor={rippleColor}
             hitSlop={hitSlop}
           >
             <View style={[styles.container, style]} pointerEvents="none">

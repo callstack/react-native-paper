@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  ColorValue,
   GestureResponderEvent,
   NativeSyntheticEvent,
   StyleProp,
@@ -94,10 +93,6 @@ export type Props = {
    */
   descriptionStyle?: StyleProp<TextStyle>;
   /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
-  /**
    * Truncate Title text such that the total number of lines does not
    * exceed this number.
    */
@@ -186,7 +181,6 @@ const ListAccordion = ({
   descriptionStyle,
   titleNumberOfLines = 1,
   descriptionNumberOfLines = 2,
-  rippleColor: customRippleColor,
   style,
   containerStyle,
   contentStyle,
@@ -239,10 +233,9 @@ const ListAccordion = ({
     ? groupContext.expandedId === id
     : expandedInternal;
 
-  const { descriptionColor, titleTextColor, rippleColor } = getAccordionColors({
+  const { descriptionColor, titleTextColor } = getAccordionColors({
     theme,
     isExpanded,
-    customRippleColor,
   });
 
   const handlePress =
@@ -257,7 +250,6 @@ const ListAccordion = ({
           onPress={handlePress}
           onLongPress={onLongPress}
           delayLongPress={delayLongPress}
-          rippleColor={rippleColor}
           accessibilityRole="button"
           accessibilityState={{ expanded: isExpanded }}
           accessibilityLabel={accessibilityLabel}

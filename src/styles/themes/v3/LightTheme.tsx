@@ -1,10 +1,10 @@
 import color from 'color';
 
-import { MD3Colors, tokens } from './tokens';
+import { tokens } from './tokens';
 import type { MD3Theme } from '../../../types';
 import configureFonts from '../../fonts';
 
-const { palette, opacity } = tokens.md.ref;
+const { palette, stateOpacity } = tokens.md.ref;
 
 export const MD3LightTheme: MD3Theme = {
   dark: false,
@@ -16,13 +16,16 @@ export const MD3LightTheme: MD3Theme = {
     secondaryContainer: palette.secondary90,
     tertiary: palette.tertiary40,
     tertiaryContainer: palette.tertiary90,
-    surface: palette.neutral99,
+    surface: palette.neutral98,
+    surfaceDim: palette.neutral87,
+    surfaceBright: palette.neutral98,
+    surfaceContainerLowest: palette.neutral100,
+    surfaceContainerLow: palette.neutral96,
+    surfaceContainer: palette.neutral94,
+    surfaceContainerHigh: palette.neutral92,
+    surfaceContainerHighest: palette.neutral90,
     surfaceVariant: palette.neutralVariant90,
-    surfaceDisabled: color(palette.neutral10)
-      .alpha(opacity.level2)
-      .rgb()
-      .string(),
-    background: palette.neutral99,
+    background: palette.neutral98,
     error: palette.error40,
     errorContainer: palette.error90,
     onPrimary: palette.primary100,
@@ -33,10 +36,6 @@ export const MD3LightTheme: MD3Theme = {
     onTertiaryContainer: palette.tertiary10,
     onSurface: palette.neutral10,
     onSurfaceVariant: palette.neutralVariant30,
-    onSurfaceDisabled: color(palette.neutral10)
-      .alpha(opacity.level4)
-      .rgb()
-      .string(),
     onError: palette.error100,
     onErrorContainer: palette.error10,
     onBackground: palette.neutral10,
@@ -45,19 +44,31 @@ export const MD3LightTheme: MD3Theme = {
     inverseSurface: palette.neutral20,
     inverseOnSurface: palette.neutral95,
     inversePrimary: palette.primary80,
+    primaryFixed: palette.primary90,
+    primaryFixedDim: palette.primary80,
+    onPrimaryFixed: palette.primary10,
+    onPrimaryFixedVariant: palette.primary30,
+    secondaryFixed: palette.secondary90,
+    secondaryFixedDim: palette.secondary80,
+    onSecondaryFixed: palette.secondary10,
+    onSecondaryFixedVariant: palette.secondary30,
+    tertiaryFixed: palette.tertiary90,
+    tertiaryFixedDim: palette.tertiary80,
+    onTertiaryFixed: palette.tertiary10,
+    onTertiaryFixedVariant: palette.tertiary30,
     shadow: palette.neutral0,
     scrim: palette.neutral0,
-    backdrop: color(MD3Colors.neutralVariant20).alpha(0.4).rgb().string(),
+    stateLayerPressed: color(palette.neutral10)
+      .alpha(stateOpacity.pressed)
+      .rgb()
+      .string(),
     elevation: {
       level0: 'transparent',
-      // Note: Color values with transparency cause RN to transfer shadows to children nodes
-      // instead of View component in Surface. Providing solid background fixes the issue.
-      // Opaque color values generated with `palette.primary99` used as background
-      level1: 'rgb(247, 243, 249)', // palette.primary40, alpha 0.05
-      level2: 'rgb(243, 237, 246)', // palette.primary40, alpha 0.08
-      level3: 'rgb(238, 232, 244)', // palette.primary40, alpha 0.11
-      level4: 'rgb(236, 230, 243)', // palette.primary40, alpha 0.12
-      level5: 'rgb(233, 227, 241)', // palette.primary40, alpha 0.14
+      level1: palette.neutral96,
+      level2: palette.neutral94,
+      level3: palette.neutral92,
+      level4: palette.neutral92,
+      level5: palette.neutral90,
     },
   },
   fonts: configureFonts(),

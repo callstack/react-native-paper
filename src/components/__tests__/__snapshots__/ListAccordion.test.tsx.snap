@@ -5,7 +5,7 @@ exports[`renders expanded accordion 1`] = `
   <View
     style={
       {
-        "backgroundColor": "rgba(255, 251, 254, 1)",
+        "backgroundColor": "rgba(254, 247, 255, 1)",
       }
     }
   >
@@ -90,7 +90,7 @@ exports[`renders expanded accordion 1`] = `
                   "textAlign": "left",
                 },
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontFamily": "System",
                   "fontWeight": "400",
                   "letterSpacing": 0,
@@ -237,7 +237,7 @@ exports[`renders expanded accordion 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "fontFamily": "System",
                 "fontWeight": "400",
                 "letterSpacing": 0,
@@ -250,7 +250,7 @@ exports[`renders expanded accordion 1`] = `
                   "fontSize": 16,
                 },
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                 },
                 undefined,
               ],
@@ -270,7 +270,7 @@ exports[`renders list accordion with children 1`] = `
   <View
     style={
       {
-        "backgroundColor": "rgba(255, 251, 254, 1)",
+        "backgroundColor": "rgba(254, 247, 255, 1)",
       }
     }
   >
@@ -402,7 +402,7 @@ exports[`renders list accordion with children 1`] = `
                   "textAlign": "left",
                 },
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontFamily": "System",
                   "fontWeight": "400",
                   "letterSpacing": 0,
@@ -415,7 +415,7 @@ exports[`renders list accordion with children 1`] = `
                     "fontSize": 16,
                   },
                   {
-                    "color": "rgba(28, 27, 31, 1)",
+                    "color": "rgba(29, 27, 32, 1)",
                   },
                   undefined,
                 ],
@@ -477,7 +477,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
   <View
     style={
       {
-        "backgroundColor": "rgba(255, 251, 254, 1)",
+        "backgroundColor": "rgba(254, 247, 255, 1)",
       }
     }
   >
@@ -562,7 +562,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
                   "textAlign": "left",
                 },
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontFamily": "System",
                   "fontWeight": "400",
                   "letterSpacing": 0,
@@ -575,7 +575,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
                     "fontSize": 16,
                   },
                   {
-                    "color": "rgba(28, 27, 31, 1)",
+                    "color": "rgba(29, 27, 32, 1)",
                   },
                   {
                     "color": "#f44336",
@@ -596,7 +596,7 @@ exports[`renders list accordion with custom title and description styles 1`] = `
                   "textAlign": "left",
                 },
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontFamily": "System",
                   "fontWeight": "400",
                   "letterSpacing": 0,
@@ -677,7 +677,7 @@ exports[`renders list accordion with left items 1`] = `
   <View
     style={
       {
-        "backgroundColor": "rgba(255, 251, 254, 1)",
+        "backgroundColor": "rgba(254, 247, 255, 1)",
       }
     }
   >
@@ -809,7 +809,7 @@ exports[`renders list accordion with left items 1`] = `
                   "textAlign": "left",
                 },
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontFamily": "System",
                   "fontWeight": "400",
                   "letterSpacing": 0,
@@ -822,7 +822,7 @@ exports[`renders list accordion with left items 1`] = `
                     "fontSize": 16,
                   },
                   {
-                    "color": "rgba(28, 27, 31, 1)",
+                    "color": "rgba(29, 27, 32, 1)",
                   },
                   undefined,
                 ],
@@ -884,7 +884,7 @@ exports[`renders multiline list accordion 1`] = `
   <View
     style={
       {
-        "backgroundColor": "rgba(255, 251, 254, 1)",
+        "backgroundColor": "rgba(254, 247, 255, 1)",
       }
     }
   >
@@ -969,7 +969,7 @@ exports[`renders multiline list accordion 1`] = `
                   "textAlign": "left",
                 },
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontFamily": "System",
                   "fontWeight": "400",
                   "letterSpacing": 0,
@@ -982,7 +982,7 @@ exports[`renders multiline list accordion 1`] = `
                     "fontSize": 16,
                   },
                   {
-                    "color": "rgba(28, 27, 31, 1)",
+                    "color": "rgba(29, 27, 32, 1)",
                   },
                   undefined,
                 ],
@@ -1001,7 +1001,7 @@ exports[`renders multiline list accordion 1`] = `
                   "textAlign": "left",
                 },
                 {
-                  "color": "rgba(28, 27, 31, 1)",
+                  "color": "rgba(29, 27, 32, 1)",
                   "fontFamily": "System",
                   "fontWeight": "400",
                   "letterSpacing": 0,

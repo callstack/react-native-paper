@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  ColorValue,
   GestureResponderEvent,
   Pressable,
   StyleProp,
@@ -43,7 +42,6 @@ export type Props = {
    * - `toggleStackOnLongPress`: callback that is called when `FAB` is long pressed
    * - `size`: size of action item. Defaults to `small`. @supported Available in v5.x
    * - `testID`: testID to be used on tests
-   * - `rippleColor`: color of the ripple effect.
    */
   actions: Array<{
     icon: IconSource;
@@ -60,7 +58,6 @@ export type Props = {
     onPress: (e: GestureResponderEvent) => void;
     size?: 'small' | 'medium';
     testID?: string;
-    rippleColor?: ColorValue;
   }>;
   /**
    * Icon to display for the `FAB`.
@@ -79,10 +76,6 @@ export type Props = {
    * Custom backdrop color for opened speed dial background.
    */
   backdropColor?: string;
-  /**
-   * Color of the ripple effect.
-   */
-  rippleColor?: ColorValue;
   /**
    * Function to execute on pressing the `FAB`.
    */
@@ -221,7 +214,6 @@ const FABGroup = ({
   variant = 'primary',
   enableLongPressWhenStackOpened = false,
   backdropColor: customBackdropColor,
-  rippleColor,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
   const { top, bottom, right, left } = useSafeAreaInsets();
@@ -314,15 +306,19 @@ const FABGroup = ({
     }
   };
 
-  const { labelColor, backdropColor, stackedFABBackgroundColor } =
-    getFABGroupColors({ theme, customBackdropColor });
+  const {
+    labelColor,
+    backdropColor,
+    backdropOpacity: backdropMaxOpacity,
+    stackedFABBackgroundColor,
+  } = getFABGroupColors({ theme, customBackdropColor });
 
   const backdropOpacity = open
     ? backdrop.interpolate({
         inputRange: [0, 0.5, 1],
-        outputRange: [0, 1, 1],
+        outputRange: [0, backdropMaxOpacity, backdropMaxOpacity],
       })
-    : backdrop;
+    : Animated.multiply(backdrop, backdropMaxOpacity);
 
   const opacities = animations.current;
 
@@ -466,7 +462,6 @@ const FABGroup = ({
                   importantForAccessibility="no-hide-descendants"
                   testID={it.testID}
                   visible={open}
-                  rippleColor={it.rippleColor}
                 />
               </View>
             );
@@ -487,7 +482,6 @@ const FABGroup = ({
           label={label}
           testID={testID}
           variant={variant}
-          rippleColor={rippleColor}
         />
       </View>
     </View>

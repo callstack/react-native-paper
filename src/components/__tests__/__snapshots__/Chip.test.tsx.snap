@@ -101,6 +101,9 @@ exports[`renders chip with close button 1`] = `
               "paddingLeft": 0,
             },
             {
+              "opacity": 1,
+            },
+            {
               "paddingRight": 34,
             },
           ]
@@ -160,7 +163,7 @@ exports[`renders chip with close button 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -396,6 +399,9 @@ exports[`renders chip with custom close button 1`] = `
               "paddingLeft": 0,
             },
             {
+              "opacity": 1,
+            },
+            {
               "paddingRight": 34,
             },
           ]
@@ -455,7 +461,7 @@ exports[`renders chip with custom close button 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -691,6 +697,9 @@ exports[`renders chip with icon 1`] = `
               "paddingLeft": 0,
             },
             {
+              "opacity": 1,
+            },
+            {
               "paddingRight": 0,
             },
           ]
@@ -750,7 +759,7 @@ exports[`renders chip with icon 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -893,6 +902,9 @@ exports[`renders chip with onPress 1`] = `
               "paddingLeft": 0,
             },
             {
+              "opacity": 1,
+            },
+            {
               "paddingRight": 0,
             },
           ]
@@ -907,7 +919,7 @@ exports[`renders chip with onPress 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -972,7 +984,7 @@ exports[`renders outlined disabled chip 1`] = `
     style={
       {
         "backgroundColor": "transparent",
-        "borderColor": "rgba(73, 69, 79, 0.12)",
+        "borderColor": "rgba(243, 237, 247, 1)",
         "borderRadius": 8,
         "borderStyle": "solid",
         "borderWidth": 1,
@@ -1050,6 +1062,9 @@ exports[`renders outlined disabled chip 1`] = `
               "paddingLeft": 0,
             },
             {
+              "opacity": 0.38,
+            },
+            {
               "paddingRight": 0,
             },
           ]
@@ -1064,7 +1079,7 @@ exports[`renders outlined disabled chip 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
@@ -1081,7 +1096,7 @@ exports[`renders outlined disabled chip 1`] = `
                     "textAlignVertical": "center",
                   },
                   {
-                    "color": "rgba(28, 27, 31, 0.38)",
+                    "color": "rgba(29, 27, 32, 1)",
                     "fontFamily": "System",
                     "fontSize": 14,
                     "fontWeight": "500",
@@ -1111,7 +1126,7 @@ exports[`renders selected chip 1`] = `
   collapsable={false}
   style={
     {
-      "backgroundColor": "rgb(232, 222, 248)",
+      "backgroundColor": "rgba(232, 222, 248, 1)",
       "borderRadius": 8,
       "shadowColor": "#000",
       "shadowOffset": {
@@ -1128,7 +1143,7 @@ exports[`renders selected chip 1`] = `
     collapsable={false}
     style={
       {
-        "backgroundColor": "rgb(232, 222, 248)",
+        "backgroundColor": "rgba(232, 222, 248, 1)",
         "borderColor": "transparent",
         "borderRadius": 8,
         "borderStyle": "solid",
@@ -1207,6 +1222,9 @@ exports[`renders selected chip 1`] = `
               "paddingLeft": 0,
             },
             {
+              "opacity": 1,
+            },
+            {
               "paddingRight": 0,
             },
           ]
@@ -1266,7 +1284,7 @@ exports[`renders selected chip 1`] = `
                 "textAlign": "left",
               },
               {
-                "color": "rgba(28, 27, 31, 1)",
+                "color": "rgba(29, 27, 32, 1)",
                 "writingDirection": "ltr",
               },
               [
