@@ -1,15 +1,9 @@
 import * as React from 'react';
 import { ReactNode } from 'react';
-import {
-  Animated,
-  I18nManager,
-  StyleProp,
-  StyleSheet,
-  TextStyle,
-  Text,
-} from 'react-native';
+import { Animated, StyleProp, StyleSheet, TextStyle, Text } from 'react-native';
 
 import type { VariantProp } from './types';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
@@ -48,7 +42,7 @@ const AnimatedText = forwardRef<Text & HTMLElement, Props<never>>(
     ref
   ) {
     const theme = useInternalTheme(themeOverrides);
-    const writingDirection = I18nManager.getConstants().isRTL ? 'rtl' : 'ltr';
+    const { direction: writingDirection } = useLocale();
 
     if (variant) {
       const font = theme.fonts[variant];

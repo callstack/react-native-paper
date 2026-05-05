@@ -6,6 +6,7 @@ import {
   NativeEventSubscription,
 } from 'react-native';
 
+import { getDefaultDirection, LocaleProvider, type Direction } from './locale';
 import SafeAreaProviderCompat from './SafeAreaProviderCompat';
 import { Provider as SettingsProvider, Settings } from './settings';
 import { defaultThemes, ThemeProvider } from './theming';
@@ -18,11 +19,14 @@ export type Props = {
   children: React.ReactNode;
   theme?: ThemeProp;
   settings?: Settings;
+  direction?: Direction;
 };
 
 const PaperProvider = (props: Props) => {
   const colorSchemeName =
     (!props.theme && Appearance?.getColorScheme()) || 'light';
+
+  const direction = props.direction ?? getDefaultDirection();
 
   const [reduceMotionEnabled, setReduceMotionEnabled] =
     React.useState<boolean>(false);
@@ -101,7 +105,9 @@ const PaperProvider = (props: Props) => {
     <SafeAreaProviderCompat>
       <PortalHost>
         <SettingsProvider value={settingsValue}>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <LocaleProvider value={{ direction }}>
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          </LocaleProvider>
         </SettingsProvider>
       </PortalHost>
     </SafeAreaProviderCompat>

@@ -10,7 +10,6 @@ import {
   Animated,
   Easing,
   GestureResponderEvent,
-  I18nManager,
   Platform,
   ScrollView,
   StyleProp,
@@ -23,6 +22,7 @@ import {
 import color from 'color';
 
 import { getCombinedStyles, getFABColors, getLabelSizeWeb } from './utils';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { $Omit, $RemoveChildren, ThemeProp } from '../../types';
 import type { IconSource } from '../Icon';
@@ -232,12 +232,13 @@ const AnimatedFAB = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   const uppercase: boolean = uppercaseProp ?? false;
   const isIOS = Platform.OS === 'ios';
   const isWeb = Platform.OS === 'web';
   const isAnimatedFromRight = animateFrom === 'right';
   const isIconStatic = iconMode === 'static';
-  const { isRTL } = I18nManager;
+  const isRTL = direction === 'rtl';
   const labelRef = React.useRef<Text & HTMLElement>(null);
   const { current: visibility } = React.useRef<Animated.Value>(
     new Animated.Value(visible ? 1 : 0)
@@ -359,6 +360,7 @@ const AnimatedFAB = ({
   const combinedStyles = getCombinedStyles({
     isAnimatedFromRight,
     isIconStatic,
+    isRTL,
     distance,
     animFAB,
   });

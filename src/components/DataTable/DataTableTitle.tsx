@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Animated,
   GestureResponderEvent,
-  I18nManager,
   PixelRatio,
   Pressable,
   StyleProp,
@@ -13,6 +12,7 @@ import {
 
 import color from 'color';
 
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -93,6 +93,7 @@ const DataTableTitle = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   const { current: spinAnim } = React.useRef<Animated.Value>(
     new Animated.Value(sortDirection === 'ascending' ? 0 : 1)
   );
@@ -120,7 +121,7 @@ const DataTableTitle = ({
         name="arrow-up"
         size={16}
         color={textColor}
-        direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+        direction={direction}
       />
     </Animated.View>
   ) : null;
@@ -142,7 +143,7 @@ const DataTableTitle = ({
           // if numberOfLines causes wrap, center is lost. Align directly, sensitive to numeric and RTL
           numberOfLines > 1
             ? numeric
-              ? I18nManager.getConstants().isRTL
+              ? direction === 'rtl'
                 ? styles.leftText
                 : styles.rightText
               : styles.centerText

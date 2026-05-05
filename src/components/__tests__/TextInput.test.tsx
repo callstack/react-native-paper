@@ -1,10 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import { I18nManager, Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 import color from 'color';
 
+import PaperProvider from '../../core/PaperProvider';
 import { DefaultTheme, getTheme, ThemeProvider } from '../../core/theming';
 import { red500 } from '../../styles/themes/v2/colors';
 import {
@@ -257,28 +258,27 @@ it('renders input placeholder initially with transparent placeholderTextColor', 
 
 it('correctly applies padding offset to input label on Android when RTL', () => {
   Platform.OS = 'android';
-  I18nManager.isRTL = true;
 
   const { getByTestId } = render(
-    <TextInput
-      label="Flat input"
-      mode="flat"
-      testID="text-input-flat"
-      left={
-        <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
-      }
-      right={
-        <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
-      }
-    />
+    <PaperProvider direction="rtl">
+      <TextInput
+        label="Flat input"
+        mode="flat"
+        testID="text-input-flat"
+        left={
+          <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
+        }
+        right={
+          <TextInput.Affix text={affixTextValue} textStyle={style.inputStyle} />
+        }
+      />
+    </PaperProvider>
   );
 
   expect(getByTestId('text-input-flat-label-active')).toHaveStyle({
     paddingLeft: 56,
     paddingRight: 16,
   });
-
-  I18nManager.isRTL = false;
 });
 
 it('correctly applies padding offset to input label on Android when LTR', () => {

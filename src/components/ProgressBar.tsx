@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Animated,
-  I18nManager,
   LayoutChangeEvent,
   Platform,
   StyleProp,
@@ -10,6 +9,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
+import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
 
@@ -53,7 +53,6 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
 
 const INDETERMINATE_DURATION = 2000;
 const INDETERMINATE_MAX_WIDTH = 0.6;
-const { isRTL } = I18nManager;
 
 /**
  * Progress bar is an indicator used to present progress of some activity in the app.
@@ -84,6 +83,8 @@ const ProgressBar = ({
 }: Props) => {
   const isWeb = Platform.OS === 'web';
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
+  const isRTL = direction === 'rtl';
   const { current: timer } = React.useRef<Animated.Value>(
     new Animated.Value(0)
   );

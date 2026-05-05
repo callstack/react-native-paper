@@ -8,6 +8,8 @@ export {
   adaptNavigationTheme,
 } from './core/theming';
 
+export { useLocale } from './core/locale';
+
 export * from './styles/themes';
 
 export { default as Provider } from './core/PaperProvider';

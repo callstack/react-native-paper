@@ -1,12 +1,8 @@
 import * as React from 'react';
-import {
-  I18nManager,
-  Image,
-  ImageSourcePropType,
-  Platform,
-} from 'react-native';
+import { Image, ImageSourcePropType, Platform } from 'react-native';
 
 import { accessibilityProps } from './MaterialCommunityIcon';
+import { useLocale } from '../core/locale';
 import { Consumer as SettingsConsumer } from '../core/settings';
 import { useInternalTheme } from '../core/theming';
 import type { ThemeProp } from '../types';
@@ -109,12 +105,11 @@ const Icon = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction: layoutDirection } = useLocale();
   const direction =
     typeof source === 'object' && source.direction && source.source
       ? source.direction === 'auto'
-        ? I18nManager.getConstants().isRTL
-          ? 'rtl'
-          : 'ltr'
+        ? layoutDirection
         : source.direction
       : null;
 

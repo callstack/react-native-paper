@@ -3,7 +3,6 @@ import {
   Animated,
   ColorValue,
   Easing,
-  I18nManager,
   StyleProp,
   StyleSheet,
   View,
@@ -19,6 +18,7 @@ import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
 import Text from './Typography/Text';
+import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
 import type { $Omit, $RemoveChildren, MD3Theme, ThemeProp } from '../types';
 
@@ -166,6 +166,7 @@ const Snackbar = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   const { bottom, right, left } = useSafeAreaInsets();
 
   const { current: opacity } = React.useRef<Animated.Value>(
@@ -360,9 +361,7 @@ const Snackbar = ({
                         name="close"
                         color={color}
                         size={size}
-                        direction={
-                          I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'
-                        }
+                        direction={direction}
                       />
                     );
                   })

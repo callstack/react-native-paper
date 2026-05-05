@@ -1,11 +1,5 @@
 import { MutableRefObject } from 'react';
-import {
-  Animated,
-  ColorValue,
-  I18nManager,
-  Platform,
-  ViewStyle,
-} from 'react-native';
+import { Animated, ColorValue, Platform, ViewStyle } from 'react-native';
 
 import color from 'color';
 
@@ -14,6 +8,7 @@ import type { InternalTheme } from '../../types';
 type GetCombinedStylesProps = {
   isAnimatedFromRight: boolean;
   isIconStatic: boolean;
+  isRTL: boolean;
   distance: number;
   animFAB: Animated.Value;
 };
@@ -35,11 +30,10 @@ type BaseProps = {
 export const getCombinedStyles = ({
   isAnimatedFromRight,
   isIconStatic,
+  isRTL,
   distance,
   animFAB,
 }: GetCombinedStylesProps): CombinedStyles => {
-  const { isRTL } = I18nManager;
-
   const defaultPositionStyles = { left: -distance, right: undefined };
 
   const combinedStyles: CombinedStyles = {
