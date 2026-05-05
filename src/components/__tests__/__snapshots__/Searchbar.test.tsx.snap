@@ -202,7 +202,7 @@ exports[`activity indicator snapshot test 1`] = `
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": "400",
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": 0,
           },
           {
@@ -620,7 +620,7 @@ exports[`renders with placeholder 1`] = `
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": "400",
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": 0,
           },
           {
@@ -997,7 +997,7 @@ exports[`renders with text 1`] = `
             "fontFamily": "System",
             "fontSize": 16,
             "fontWeight": "400",
-            "letterSpacing": 0.15,
+            "letterSpacing": 0.5,
             "lineHeight": 0,
           },
           {
