@@ -122,8 +122,8 @@ const ref = {
   stateOpacity: {
     dragged: 0.16,
     pressed: 0.1,
-    focus: 0.1,
-    hover: 0.08,
+    focused: 0.1,
+    hovered: 0.08,
     disabled: 0.38,
     enabled: 1.0,
   },

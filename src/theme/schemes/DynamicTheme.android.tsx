@@ -2,6 +2,7 @@ import { Platform, PlatformColor } from 'react-native';
 
 import { DarkTheme } from './DarkTheme';
 import { LightTheme } from './LightTheme';
+import { defaultState } from '../tokens/sys/state';
 import type { Theme } from '../types';
 
 const isApi34 = (Platform.Version as number) >= 34;
@@ -494,9 +495,11 @@ const darkColors = {
 export const DynamicLightTheme: Theme = {
   ...LightTheme,
   colors: { ...LightTheme.colors, ...lightColors },
+  state: defaultState,
 };
 
 export const DynamicDarkTheme: Theme = {
   ...DarkTheme,
   colors: { ...DarkTheme.colors, ...darkColors },
+  state: defaultState,
 };
