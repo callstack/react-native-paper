@@ -7,7 +7,7 @@ exports[`renders button with an accessibility hint 1`] = `
     {
       "backgroundColor": "transparent",
       "borderRadius": 20,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -29,7 +29,7 @@ exports[`renders button with an accessibility hint 1`] = `
         "borderWidth": 0,
         "flex": undefined,
         "minWidth": 64,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -160,7 +160,7 @@ exports[`renders button with an accessibility label 1`] = `
     {
       "backgroundColor": "transparent",
       "borderRadius": 20,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -182,7 +182,7 @@ exports[`renders button with an accessibility label 1`] = `
         "borderWidth": 0,
         "flex": undefined,
         "minWidth": 64,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -313,7 +313,7 @@ exports[`renders button with button color 1`] = `
     {
       "backgroundColor": "#e91e63",
       "borderRadius": 20,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -335,7 +335,7 @@ exports[`renders button with button color 1`] = `
         "borderWidth": 0,
         "flex": undefined,
         "minWidth": 64,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -465,7 +465,7 @@ exports[`renders button with color 1`] = `
     {
       "backgroundColor": "transparent",
       "borderRadius": 20,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -487,7 +487,7 @@ exports[`renders button with color 1`] = `
         "borderWidth": 0,
         "flex": undefined,
         "minWidth": 64,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -617,7 +617,7 @@ exports[`renders button with custom testID 1`] = `
     {
       "backgroundColor": "transparent",
       "borderRadius": 20,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -639,7 +639,7 @@ exports[`renders button with custom testID 1`] = `
         "borderWidth": 0,
         "flex": undefined,
         "minWidth": 64,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -769,7 +769,7 @@ exports[`renders button with icon 1`] = `
     {
       "backgroundColor": "transparent",
       "borderRadius": 20,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -791,7 +791,7 @@ exports[`renders button with icon 1`] = `
         "borderWidth": 0,
         "flex": undefined,
         "minWidth": 64,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -970,7 +970,7 @@ exports[`renders button with icon in reverse order 1`] = `
     {
       "backgroundColor": "transparent",
       "borderRadius": 20,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -992,7 +992,7 @@ exports[`renders button with icon in reverse order 1`] = `
         "borderWidth": 0,
         "flex": undefined,
         "minWidth": 64,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -1173,7 +1173,7 @@ exports[`renders contained contained with mode 1`] = `
     {
       "backgroundColor": "rgba(103, 80, 164, 1)",
       "borderRadius": 20,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -1195,7 +1195,7 @@ exports[`renders contained contained with mode 1`] = `
         "borderWidth": 0,
         "flex": undefined,
         "minWidth": 64,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -1326,7 +1326,7 @@ exports[`renders disabled button 1`] = `
     {
       "backgroundColor": "transparent",
       "borderRadius": 20,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -1348,7 +1348,7 @@ exports[`renders disabled button 1`] = `
         "borderWidth": 0,
         "flex": undefined,
         "minWidth": 64,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -1478,7 +1478,7 @@ exports[`renders loading button 1`] = `
     {
       "backgroundColor": "transparent",
       "borderRadius": 20,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -1500,7 +1500,7 @@ exports[`renders loading button 1`] = `
         "borderWidth": 0,
         "flex": undefined,
         "minWidth": 64,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -1838,7 +1838,7 @@ exports[`renders outlined button with mode 1`] = `
     {
       "backgroundColor": "transparent",
       "borderRadius": 20,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -1860,7 +1860,7 @@ exports[`renders outlined button with mode 1`] = `
         "borderWidth": 1,
         "flex": undefined,
         "minWidth": 64,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -1991,7 +1991,7 @@ exports[`renders text button by default 1`] = `
     {
       "backgroundColor": "transparent",
       "borderRadius": 20,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -2013,7 +2013,7 @@ exports[`renders text button by default 1`] = `
         "borderWidth": 0,
         "flex": undefined,
         "minWidth": 64,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -2143,7 +2143,7 @@ exports[`renders text button with mode 1`] = `
     {
       "backgroundColor": "transparent",
       "borderRadius": 20,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -2165,7 +2165,7 @@ exports[`renders text button with mode 1`] = `
         "borderWidth": 0,
         "flex": undefined,
         "minWidth": 64,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,

@@ -7,7 +7,7 @@ exports[`renders chip with close button 1`] = `
     {
       "backgroundColor": "rgba(232, 222, 248, 1)",
       "borderRadius": 8,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -29,7 +29,7 @@ exports[`renders chip with close button 1`] = `
         "borderWidth": 1,
         "flex": undefined,
         "flexDirection": "column",
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -305,7 +305,7 @@ exports[`renders chip with custom close button 1`] = `
     {
       "backgroundColor": "rgba(232, 222, 248, 1)",
       "borderRadius": 8,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -327,7 +327,7 @@ exports[`renders chip with custom close button 1`] = `
         "borderWidth": 1,
         "flex": undefined,
         "flexDirection": "column",
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -603,7 +603,7 @@ exports[`renders chip with icon 1`] = `
     {
       "backgroundColor": "rgba(232, 222, 248, 1)",
       "borderRadius": 8,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -625,7 +625,7 @@ exports[`renders chip with icon 1`] = `
         "borderWidth": 1,
         "flex": undefined,
         "flexDirection": "column",
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -808,7 +808,7 @@ exports[`renders chip with onPress 1`] = `
     {
       "backgroundColor": "rgba(232, 222, 248, 1)",
       "borderRadius": 8,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -830,7 +830,7 @@ exports[`renders chip with onPress 1`] = `
         "borderWidth": 1,
         "flex": undefined,
         "flexDirection": "column",
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -968,7 +968,7 @@ exports[`renders outlined disabled chip 1`] = `
     {
       "backgroundColor": "transparent",
       "borderRadius": 8,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -990,7 +990,7 @@ exports[`renders outlined disabled chip 1`] = `
         "borderWidth": 1,
         "flex": undefined,
         "flexDirection": "column",
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -1128,7 +1128,7 @@ exports[`renders selected chip 1`] = `
     {
       "backgroundColor": "rgba(232, 222, 248, 1)",
       "borderRadius": 8,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -1150,7 +1150,7 @@ exports[`renders selected chip 1`] = `
         "borderWidth": 1,
         "flex": undefined,
         "flexDirection": "column",
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,

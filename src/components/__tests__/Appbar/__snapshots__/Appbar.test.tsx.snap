@@ -7,7 +7,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
     {
       "backgroundColor": "rgba(254, 247, 255, 1)",
       "height": 64,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -31,7 +31,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         "paddingLeft": undefined,
         "paddingRight": undefined,
         "paddingTop": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -48,7 +48,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
         {
           "backgroundColor": "rgba(236, 230, 240, 1)",
           "borderRadius": 28,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -68,7 +68,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
             "borderRadius": 28,
             "flex": undefined,
             "flexDirection": "row",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -87,7 +87,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
               "borderRadius": 20,
               "height": 40,
               "margin": 6,
-              "shadowColor": "#000",
+              "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
                 "width": 0,
@@ -110,7 +110,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                 "elevation": 0,
                 "flex": 1,
                 "overflow": "hidden",
-                "shadowColor": "#000",
+                "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
                   "height": 0,
                   "width": 0,
@@ -279,7 +279,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                 "borderRadius": 20,
                 "height": 40,
                 "margin": 6,
-                "shadowColor": "#000",
+                "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
                   "height": 0,
                   "width": 0,
@@ -302,7 +302,7 @@ exports[`Appbar does not pass any additional props to Searchbar 1`] = `
                   "elevation": 0,
                   "flex": 1,
                   "overflow": "hidden",
-                  "shadowColor": "#000",
+                  "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
                     "width": 0,
@@ -427,7 +427,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
     {
       "backgroundColor": "rgba(254, 247, 255, 1)",
       "height": 64,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -451,7 +451,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
         "paddingLeft": undefined,
         "paddingRight": undefined,
         "paddingTop": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -470,7 +470,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -493,7 +493,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -721,7 +721,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -744,7 +744,7 @@ exports[`Appbar passes additional props to AppbarBackAction, AppbarContent and A
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,

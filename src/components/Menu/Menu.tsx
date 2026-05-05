@@ -23,7 +23,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import MenuItem from './MenuItem';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { Elevation, Theme, ThemeProp } from '../../types';
+import type { Elevation, ElevationLevel, Theme, ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import { BackHandler } from '../../utils/BackHandler/BackHandler';
 import Portal from '../Portal/Portal';
@@ -104,15 +104,6 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 const WINDOW_LAYOUT = Dimensions.get('window');
 
 const DEFAULT_ELEVATION: Elevation = 2;
-export const ELEVATION_LEVELS_MAP = [
-  'level0',
-  'level1',
-  'level2',
-  'level3',
-  'level4',
-  'level5',
-] as const;
-
 const DEFAULT_MODE = 'elevated';
 
 const focusFirstDOMNode = (el: View | null | undefined) => {
@@ -680,7 +671,9 @@ const Menu = ({
                   shadowMenuContainerStyle,
                   {
                     backgroundColor:
-                      md3Colors.elevation[ELEVATION_LEVELS_MAP[elevation]],
+                      md3Colors.elevation[
+                        `level${elevation}` as ElevationLevel
+                      ],
                   },
                   contentStyle,
                 ]}

@@ -7,7 +7,7 @@ exports[`Card renders an outlined card 1`] = `
     {
       "backgroundColor": "rgba(254, 247, 255, 1)",
       "borderRadius": 12,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 0,
         "width": 0,
@@ -25,7 +25,7 @@ exports[`Card renders an outlined card 1`] = `
         "backgroundColor": "rgba(254, 247, 255, 1)",
         "borderRadius": 12,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,

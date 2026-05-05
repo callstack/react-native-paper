@@ -387,7 +387,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -410,7 +410,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -529,7 +529,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -552,7 +552,7 @@ exports[`DataTable.Pagination renders data table pagination 1`] = `
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -729,7 +729,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -752,7 +752,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -871,7 +871,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -894,7 +894,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -1013,7 +1013,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -1036,7 +1036,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -1155,7 +1155,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -1178,7 +1178,7 @@ exports[`DataTable.Pagination renders data table pagination with fast-forward bu
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -1355,7 +1355,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -1378,7 +1378,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -1497,7 +1497,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -1520,7 +1520,7 @@ exports[`DataTable.Pagination renders data table pagination with label 1`] = `
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -1702,7 +1702,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "backgroundColor": "transparent",
             "borderRadius": 20,
             "marginRight": 16,
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -1724,7 +1724,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
               "borderWidth": 1,
               "flex": undefined,
               "minWidth": 64,
-              "shadowColor": "#000",
+              "shadowColor": "rgba(0, 0, 0, 1)",
               "shadowOffset": {
                 "height": 0,
                 "width": 0,
@@ -1943,7 +1943,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -1966,7 +1966,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -2085,7 +2085,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -2108,7 +2108,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -2227,7 +2227,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -2250,7 +2250,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -2369,7 +2369,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
           "borderRadius": 20,
           "height": 40,
           "margin": 6,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -2392,7 +2392,7 @@ exports[`DataTable.Pagination renders data table pagination with options select 
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,

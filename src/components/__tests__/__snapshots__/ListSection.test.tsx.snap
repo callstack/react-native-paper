@@ -75,6 +75,14 @@ exports[`renders list section with custom title style 1`] = `
         "tertiaryFixedDim": "rgba(239, 184, 200, 1)",
       },
       "dark": false,
+      "elevation": {
+        "level0": 0,
+        "level1": 1,
+        "level2": 2,
+        "level3": 3,
+        "level4": 4,
+        "level5": 5,
+      },
       "fonts": {
         "bodyLarge": {
           "fontFamily": "System",
@@ -829,6 +837,14 @@ exports[`renders list section with subheader 1`] = `
         "tertiaryFixedDim": "rgba(239, 184, 200, 1)",
       },
       "dark": false,
+      "elevation": {
+        "level0": 0,
+        "level1": 1,
+        "level2": 2,
+        "level3": 3,
+        "level4": 4,
+        "level5": 5,
+      },
       "fonts": {
         "bodyLarge": {
           "fontFamily": "System",
@@ -1581,6 +1597,14 @@ exports[`renders list section without subheader 1`] = `
         "tertiaryFixedDim": "rgba(239, 184, 200, 1)",
       },
       "dark": false,
+      "elevation": {
+        "level0": 0,
+        "level1": 1,
+        "level2": 2,
+        "level3": 3,
+        "level4": 4,
+        "level5": 5,
+      },
       "fonts": {
         "bodyLarge": {
           "fontFamily": "System",
