@@ -14,6 +14,7 @@ export { default as Provider } from './core/PaperProvider';
 export { default as PaperProvider } from './core/PaperProvider';
 export { default as shadow } from './theme/shadow';
 export { default as configureFonts } from './theme/fonts';
+export { cornersToStyle } from './theme/tokens/sys/shape';
 
 import * as Avatar from './components/Avatar/Avatar';
 import * as Drawer from './components/Drawer/Drawer';

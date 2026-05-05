@@ -188,6 +188,18 @@ exports[`renders list section with custom title style 1`] = `
         },
       },
       "roundness": 4,
+      "shapes": {
+        "extraExtraLarge": 48,
+        "extraLarge": 28,
+        "extraLargeIncreased": 32,
+        "extraSmall": 4,
+        "full": 9999,
+        "large": 16,
+        "largeIncreased": 20,
+        "medium": 12,
+        "none": 0,
+        "small": 8,
+      },
       "state": {
         "opacity": {
           "disabled": 0.38,
@@ -740,6 +752,18 @@ exports[`renders list section with subheader 1`] = `
         },
       },
       "roundness": 4,
+      "shapes": {
+        "extraExtraLarge": 48,
+        "extraLarge": 28,
+        "extraLargeIncreased": 32,
+        "extraSmall": 4,
+        "full": 9999,
+        "large": 16,
+        "largeIncreased": 20,
+        "medium": 12,
+        "none": 0,
+        "small": 8,
+      },
       "state": {
         "opacity": {
           "disabled": 0.38,
@@ -1290,6 +1314,18 @@ exports[`renders list section without subheader 1`] = `
         },
       },
       "roundness": 4,
+      "shapes": {
+        "extraExtraLarge": 48,
+        "extraLarge": 28,
+        "extraLargeIncreased": 32,
+        "extraSmall": 4,
+        "full": 9999,
+        "large": 16,
+        "largeIncreased": 20,
+        "medium": 12,
+        "none": 0,
+        "small": 8,
+      },
       "state": {
         "opacity": {
           "disabled": 0.38,
