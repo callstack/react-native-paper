@@ -81,7 +81,8 @@ const TextInputOutlined = ({
 }: ChildTextInputProps) => {
   const adornmentConfig = getAdornmentConfig({ left, right });
 
-  const { colors, roundness } = theme;
+  const { colors } = theme;
+  const roundness = theme.shapes.corner.extraSmall;
   const font = theme.fonts.bodyLarge;
   const hasActiveOutline = parentState.focused || error;
 

@@ -187,7 +187,18 @@ exports[`renders list section with custom title style 1`] = `
           "lineHeight": 20,
         },
       },
-      "roundness": 4,
+      "shapes": {
+        "corner": {
+          "extraExtraLarge": 48,
+          "extraLarge": 28,
+          "extraLargeIncreased": 32,
+          "extraSmall": 4,
+          "large": 16,
+          "largeIncreased": 20,
+          "medium": 12,
+          "small": 8,
+        },
+      },
     }
   }
 >
@@ -729,7 +740,18 @@ exports[`renders list section with subheader 1`] = `
           "lineHeight": 20,
         },
       },
-      "roundness": 4,
+      "shapes": {
+        "corner": {
+          "extraExtraLarge": 48,
+          "extraLarge": 28,
+          "extraLargeIncreased": 32,
+          "extraSmall": 4,
+          "large": 16,
+          "largeIncreased": 20,
+          "medium": 12,
+          "small": 8,
+        },
+      },
     }
   }
 >
@@ -1269,7 +1291,18 @@ exports[`renders list section without subheader 1`] = `
           "lineHeight": 20,
         },
       },
-      "roundness": 4,
+      "shapes": {
+        "corner": {
+          "extraExtraLarge": 48,
+          "extraLarge": 28,
+          "extraLargeIncreased": 32,
+          "extraSmall": 4,
+          "large": 16,
+          "largeIncreased": 20,
+          "medium": 12,
+          "small": 8,
+        },
+      },
     }
   }
 >

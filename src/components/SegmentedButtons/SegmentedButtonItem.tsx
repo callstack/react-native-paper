@@ -145,7 +145,6 @@ const SegmentedButtonItem = ({
     }
   }, [checked, checkScale, showSelectedCheck]);
 
-  const { roundness } = theme;
   const { borderColor, textColor, textOpacity, borderWidth, backgroundColor } =
     getSegmentedButtonColors({
       checked,
@@ -155,7 +154,7 @@ const SegmentedButtonItem = ({
       uncheckedColor,
     });
 
-  const borderRadius = 5 * roundness;
+  const borderRadius = theme.shapes.corner.largeIncreased;
   const segmentBorderRadius = getSegmentedButtonBorderRadius({
     theme,
     segment,

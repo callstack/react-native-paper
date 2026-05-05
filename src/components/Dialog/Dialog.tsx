@@ -105,8 +105,7 @@ const Dialog = ({
 }: Props) => {
   const { right, left } = useSafeAreaInsets();
   const theme = useInternalTheme(themeOverrides);
-  const { roundness } = theme as Theme;
-  const borderRadius = 7 * roundness;
+  const borderRadius = (theme as Theme).shapes.corner.extraLarge;
 
   const backgroundColor = theme.colors.surfaceContainerHigh;
 

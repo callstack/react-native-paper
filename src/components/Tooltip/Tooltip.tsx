@@ -209,7 +209,7 @@ const Tooltip = ({
                   measurement as Measurement,
                   children as React.ReactElement<TooltipChildProps>
                 ),
-                borderRadius: theme.roundness,
+                borderRadius: theme.shapes.corner.extraSmall,
                 ...(measurement.measured ? styles.visible : styles.hidden),
               },
             ]}

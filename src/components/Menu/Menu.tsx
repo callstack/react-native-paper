@@ -622,7 +622,7 @@ const Menu = ({
         }),
       },
     ],
-    borderRadius: theme.roundness,
+    borderRadius: theme.shapes.corner.extraSmall,
     ...(scrollableMenuHeight ? { height: scrollableMenuHeight } : {}),
   };
 

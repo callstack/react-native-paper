@@ -83,7 +83,7 @@ it('renders active chip if only onLongPress handler is passed', () => {
 
 it('renders chip with zero border radius', () => {
   const { getByTestId } = render(
-    <Chip testID="active-chip" theme={{ roundness: 0 }}>
+    <Chip testID="active-chip" theme={{ shapes: { corner: { small: 0 } } }}>
       Active chip
     </Chip>
   );
