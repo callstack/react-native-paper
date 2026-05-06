@@ -3,7 +3,7 @@ import type { ComponentType } from 'react';
 import { $DeepPartial, createTheming } from '@callstack/react-theme-provider';
 
 import { DarkTheme, LightTheme } from './schemes';
-import type { InternalTheme, Theme, NavigationTheme } from '../types';
+import type { InternalTheme, Theme, NavigationTheme } from './types';
 
 export const DefaultTheme = LightTheme;
 
