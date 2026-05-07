@@ -92,6 +92,8 @@ const PaperProvider = (props: Props) => {
 
   const { children, settings } = props;
 
+  const localeValue = React.useMemo(() => ({ direction }), [direction]);
+
   const settingsValue = React.useMemo(
     () => ({
       icon: MaterialCommunityIcon,
@@ -105,7 +107,7 @@ const PaperProvider = (props: Props) => {
     <SafeAreaProviderCompat>
       <PortalHost>
         <SettingsProvider value={settingsValue}>
-          <LocaleProvider value={{ direction }}>
+          <LocaleProvider value={localeValue}>
             <ThemeProvider theme={theme}>{children}</ThemeProvider>
           </LocaleProvider>
         </SettingsProvider>
