@@ -1,1 +1,3 @@
-require('react-native-reanimated').setUpTests();
+import { setUpTests } from 'react-native-reanimated';
+
+setUpTests();
