@@ -4,7 +4,6 @@ export {
   useTheme,
   withTheme,
   ThemeProvider,
-  DefaultTheme,
   adaptNavigationTheme,
 } from './core/theming';
 
