@@ -12,6 +12,11 @@ import { useSystemColorScheme } from './useSystemColorScheme';
 import MaterialCommunityIcon from '../components/MaterialCommunityIcon';
 import PortalHost from '../components/Portal/PortalHost';
 import { ReduceMotionContext } from '../theme/accessibility/ReduceMotionContext';
+import {
+  isDynamicColorSupported,
+  lightDynamicColors,
+  darkDynamicColors,
+} from '../theme/schemes/DynamicTheme';
 import type { ThemeProp } from '../types';
 
 export type Props = {
@@ -20,28 +25,33 @@ export type Props = {
   settings?: Settings;
   direction?: Direction;
   reduceMotion?: ReduceMotionPreference;
+  dynamicColor?: boolean;
 };
 
 const PaperProvider = (props: Props) => {
-  const { reduceMotion = 'auto' } = props;
+  const { reduceMotion = 'auto', dynamicColor = false } = props;
 
   const colorScheme = useSystemColorScheme(!props.theme);
   const resolvedReduceMotion = useResolvedReduceMotion(reduceMotion);
 
   const theme = React.useMemo(() => {
-    const scheme = colorScheme === 'dark' ? 'dark' : 'light';
-    const defaultThemeBase = defaultThemes[scheme];
-    const userScale = props.theme?.animation?.scale ?? 1;
+    const isDark = props.theme?.dark ?? colorScheme === 'dark';
+    const base = defaultThemes[isDark ? 'dark' : 'light'];
+    const dynamicColors =
+      dynamicColor && isDynamicColorSupported
+        ? isDark
+          ? darkDynamicColors
+          : lightDynamicColors
+        : undefined;
+    const scale = resolvedReduceMotion ? 0 : props.theme?.animation?.scale ?? 1;
 
     return {
-      ...defaultThemeBase,
+      ...base,
       ...props.theme,
-      animation: {
-        ...props.theme?.animation,
-        scale: resolvedReduceMotion ? 0 : userScale,
-      },
+      colors: { ...base.colors, ...props.theme?.colors, ...dynamicColors },
+      animation: { ...props.theme?.animation, scale },
     };
-  }, [colorScheme, props.theme, resolvedReduceMotion]);
+  }, [colorScheme, props.theme, resolvedReduceMotion, dynamicColor]);
 
   const { children, settings } = props;
 

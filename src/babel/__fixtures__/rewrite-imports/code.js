@@ -10,5 +10,4 @@ import {
   NonExistentSecond as Stuff,
   ThemeProvider,
   withTheme,
-  DefaultTheme,
 } from 'react-native-paper';

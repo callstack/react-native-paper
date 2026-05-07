@@ -213,6 +213,19 @@ describe('PaperProvider', () => {
     ).toStrictEqual(0);
   });
 
+  it('leaves theme.colors unchanged when dynamicColor is true on an unsupported platform', async () => {
+    mockAppearance();
+    const { getByTestId } = render(
+      <PaperProvider dynamicColor>
+        <FakeChild />
+      </PaperProvider>
+    );
+    // `isDynamicColorSupported` is false on the test platform → no color override.
+    expect(getByTestId('provider-child-view').props.theme.colors.primary).toBe(
+      LightTheme.colors.primary
+    );
+  });
+
   it('should set Appearance listeners, if there is no theme', async () => {
     mockAppearance();
     const { getByTestId } = render(createProvider());
