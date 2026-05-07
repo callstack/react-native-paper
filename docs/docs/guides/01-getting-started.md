@@ -24,9 +24,7 @@ npm install react-native-safe-area-context
 npm install react-native-reanimated react-native-worklets
 ```
 
-:::note
-If you're using a bare React Native project (not Expo), you need to add `react-native-worklets/plugin` to your `babel.config.js` plugins array. See the [Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/) for details.
-:::
+- Follow the [React Native Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/) for your toolchain (Expo vs React Native Community CLI). **Community CLI** setups must add `'react-native-worklets/plugin'` **last** in your `babel.config.js` `plugins` array. **Expo** setups follow that guide’s Expo steps (install packages and rebuild native code); starter templates [since Expo SDK 50](https://expo.dev/changelog/2024/01-18-sdk-50) usually include the Worklets Babel plugin already—add it only if your `babel.config.js` does not.
 
 Additionaly for `iOS` platform there is a requirement to link the native parts of the library:
 
@@ -50,7 +48,7 @@ If you use Expo, you don't need to install vector icons - those are the part of 
 
 :::info
 If you don't want to install vector icons, you can use [babel-plugin-optional-require](https://github.com/satya164/babel-plugin-optional-require) to opt-out.
-:::note
+:::
 
 ### Bundle size optimization
 
