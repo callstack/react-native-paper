@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   Appearance,
   AccessibilityInfo,
+  Platform,
   View,
   ColorSchemeName,
 } from 'react-native';
@@ -9,7 +10,7 @@ import {
 import { render, act } from '@testing-library/react-native';
 
 import { useReduceMotion } from '../../theme/accessibility/ReduceMotionContext';
-import { LightTheme, DarkTheme } from '../../theme/schemes';
+import { DarkTheme, DynamicLightTheme, LightTheme } from '../../theme/schemes';
 import type { ThemeProp } from '../../types';
 import PaperProvider from '../PaperProvider';
 import { useTheme } from '../theming';
@@ -106,9 +107,12 @@ const createProvider = (theme?: ThemeProp) => {
 const ExtendedLightTheme = { ...LightTheme } as ThemeProp;
 const ExtendedDarkTheme = { ...DarkTheme } as ThemeProp;
 
+const defaultPlatform = Platform.OS;
+
 describe('PaperProvider', () => {
   beforeEach(() => {
     jest.resetModules();
+    Platform.OS = defaultPlatform;
   });
 
   it('handles theme change', async () => {
@@ -211,6 +215,11 @@ describe('PaperProvider', () => {
     expect(
       getByTestId('provider-child-view').props.theme.animation.scale
     ).toStrictEqual(0);
+  });
+
+  it('DynamicLightTheme falls back to LightTheme on non-Android platforms', () => {
+    Platform.OS = 'ios';
+    expect(DynamicLightTheme.colors).toStrictEqual(LightTheme.colors);
   });
 
   it('should set Appearance listeners, if there is no theme', async () => {

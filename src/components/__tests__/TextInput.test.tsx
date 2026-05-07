@@ -5,9 +5,10 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 import { fireEvent } from '@testing-library/react-native';
 
 import PaperProvider from '../../core/PaperProvider';
-import { DefaultTheme, getTheme, ThemeProvider } from '../../core/theming';
+import { getTheme, ThemeProvider } from '../../core/theming';
 import { render } from '../../test-utils';
 import { red500 } from '../../theme/colors';
+import { LightTheme } from '../../theme/schemes';
 import { tokens } from '../../theme/tokens';
 import {
   getFlatInputColors,
@@ -369,9 +370,9 @@ it('calls onLayout on right-side affix adornment', () => {
 it("correctly applies theme background to label when input's background is transparent", () => {
   const backgroundColor = 'transparent';
   const theme = {
-    ...DefaultTheme,
+    ...LightTheme,
     colors: {
-      ...DefaultTheme.colors,
+      ...LightTheme.colors,
       background: 'pink',
     },
   };

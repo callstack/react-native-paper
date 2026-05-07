@@ -3,9 +3,7 @@ import type { ComponentType } from 'react';
 import { $DeepPartial, createTheming } from '@callstack/react-theme-provider';
 
 import { DarkTheme, LightTheme } from './schemes';
-import type { InternalTheme, Theme, NavigationTheme } from './types';
-
-export const DefaultTheme = LightTheme;
+import type { Theme, NavigationTheme } from './types';
 
 export const {
   ThemeProvider,
@@ -18,11 +16,11 @@ export function useTheme<T = Theme>(overrides?: $DeepPartial<T>) {
 }
 
 export const useInternalTheme = (
-  themeOverrides: $DeepPartial<InternalTheme> | undefined
-) => useAppTheme<InternalTheme>(themeOverrides);
+  themeOverrides: $DeepPartial<Theme> | undefined
+) => useAppTheme<Theme>(themeOverrides);
 
-export const withInternalTheme = <Props extends { theme: InternalTheme }, C>(
-  WrappedComponent: ComponentType<Props & { theme: InternalTheme }> & C
+export const withInternalTheme = <Props extends { theme: Theme }, C>(
+  WrappedComponent: ComponentType<Props & { theme: Theme }> & C
 ) => withTheme<Props, C>(WrappedComponent);
 
 export const defaultThemes = {

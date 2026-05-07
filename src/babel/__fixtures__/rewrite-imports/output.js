@@ -8,4 +8,3 @@ import { MD3Colors } from "react-native-paper/lib/module/deprecated";
 import { NonExistent, NonExistentSecond as Stuff } from "react-native-paper/lib/module/index.js";
 import { ThemeProvider } from "react-native-paper/lib/module/core/theming";
 import { withTheme } from "react-native-paper/lib/module/core/theming";
-import { DefaultTheme } from "react-native-paper/lib/module/core/theming";
