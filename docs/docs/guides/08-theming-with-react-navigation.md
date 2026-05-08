@@ -11,11 +11,9 @@ But how to make them work together?
 
 ## Themes adaptation
 
-### Material Design 3
+React Native Paper uses the Material Design 3 color system, which differs from React Navigation’s default theme shape.
 
-React Native Paper follows the Material Design 3 <i>(Material You)</i> color system, which differs from React Navigation’s default theme shape. 
-
-However, to simplify adapting React Navigation theme colors, to use the ones from React Native Paper, it's worth using a utility called `adaptNavigationTheme` – it accepts navigation-compliant themes in both modes and returns their equivalents adjusted to Material Design 3.
+To adapt React Navigation’s theme to use Paper’s colors, use the `adaptNavigationTheme` utility. It accepts navigation-compliant themes and returns equivalents that match Paper’s color scheme.
 
 ```ts
 import {
@@ -24,19 +22,17 @@ import {
 } from '@react-navigation/native';
 import { adaptNavigationTheme } from 'react-native-paper';
 
-const { LightTheme, DarkTheme } = adaptNavigationTheme({
-  reactNavigationLight: NavigationDefaultTheme,
-  reactNavigationDark: NavigationDarkTheme,
-});
+const { LightTheme: NavLightTheme, DarkTheme: NavDarkTheme } =
+  adaptNavigationTheme({
+    reactNavigationLight: NavigationDefaultTheme,
+    reactNavigationDark: NavigationDarkTheme,
+  });
 ```
 
-Library exports also Material Design 3 themes in both modes:
+Library exports themes in both modes:
 
 ```js
-import {
-  MD3LightTheme,
-  MD3DarkTheme,
-} from 'react-native-paper';
+import { LightTheme, DarkTheme } from 'react-native-paper';
 ```
 
 ## Combining theme objects
@@ -110,8 +106,6 @@ To make things easier we can use [deepmerge](https://www.npmjs.com/package/deepm
 npm install deepmerge
 ```
 
-### Material Design 3
-
 ```js
 import {
   NavigationContainer,
@@ -119,45 +113,45 @@ import {
   DefaultTheme as NavigationDefaultTheme,
 } from '@react-navigation/native';
 import {
-  MD3DarkTheme,
-  MD3LightTheme,
+  DarkTheme,
+  LightTheme,
   adaptNavigationTheme,
 } from 'react-native-paper';
 import merge from 'deepmerge';
 
-const { LightTheme, DarkTheme } = adaptNavigationTheme({
-  reactNavigationLight: NavigationDefaultTheme,
-  reactNavigationDark: NavigationDarkTheme,
-});
+const { LightTheme: NavLightTheme, DarkTheme: NavDarkTheme } =
+  adaptNavigationTheme({
+    reactNavigationLight: NavigationDefaultTheme,
+    reactNavigationDark: NavigationDarkTheme,
+  });
 
-const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
-const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
+const CombinedDefaultTheme = merge(LightTheme, NavLightTheme);
+const CombinedDarkTheme = merge(DarkTheme, NavDarkTheme);
 ```
 
 Alternatively, we could merge those themes using vanilla JavaScript:
 
-### Material Design 3
-
 ```js
-const { LightTheme, DarkTheme } = adaptNavigationTheme({
-  reactNavigationLight: NavigationDefaultTheme,
-  reactNavigationDark: NavigationDarkTheme,
-});
+const { LightTheme: NavLightTheme, DarkTheme: NavDarkTheme } =
+  adaptNavigationTheme({
+    reactNavigationLight: NavigationDefaultTheme,
+    reactNavigationDark: NavigationDarkTheme,
+  });
 
 const CombinedDefaultTheme = {
-  ...MD3LightTheme,
   ...LightTheme,
+  ...NavLightTheme,
   colors: {
-    ...MD3LightTheme.colors,
     ...LightTheme.colors,
+    ...NavLightTheme.colors,
   },
 };
 const CombinedDarkTheme = {
-  ...MD3DarkTheme,
   ...DarkTheme,
+  ...NavDarkTheme,
   colors: {
-    ...MD3DarkTheme.colors,
     ...DarkTheme.colors,
+    ...NavDarkTheme.colors,
   },
 };
 ```
