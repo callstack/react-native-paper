@@ -24,7 +24,7 @@ npm install react-native-safe-area-context
 npm install react-native-reanimated react-native-worklets
 ```
 
-- Follow the [React Native Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/) for your toolchain (Expo vs React Native Community CLI). **Community CLI** setups must add `'react-native-worklets/plugin'` **last** in your `babel.config.js` `plugins` array. **Expo** setups follow that guide’s Expo steps (install packages and rebuild native code); starter templates [since Expo SDK 50](https://expo.dev/changelog/2024/01-18-sdk-50) usually include the Worklets Babel plugin already—add it only if your `babel.config.js` does not.
+- Follow the [React Native Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/) for your toolchain (Expo vs React Native Community CLI). **Community CLI** setups must add `'react-native-worklets/plugin'` **last** in your `babel.config.js` `plugins` array. **Expo** setups follow that guide’s Expo steps (install packages and rebuild native code); starter templates [since Expo SDK 50](https://expo.dev/changelog/2024/01-18-sdk-50) usually include the Worklets Babel plugin already—add it only if your `babel.config.js` does not. Paper declares **minimum** supported versions for `react-native-reanimated` and `react-native-worklets` under `peerDependencies` in [`package.json`](https://github.com/callstack/react-native-paper/blob/main/package.json) (`>=` ranges, not pinned versions). When troubleshooting animation or native build problems, confirm your installed packages meet those minimums.
 
 Additionaly for `iOS` platform there is a requirement to link the native parts of the library:
 
