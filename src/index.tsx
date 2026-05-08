@@ -8,7 +8,7 @@ export {
   adaptNavigationTheme,
 } from './core/theming';
 
-export { useLocale } from './core/locale';
+export { useLocale, LocaleProvider } from './core/locale';
 
 export * from './styles/themes';
 

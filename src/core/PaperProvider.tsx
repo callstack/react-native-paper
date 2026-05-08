@@ -26,8 +26,6 @@ const PaperProvider = (props: Props) => {
   const colorSchemeName =
     (!props.theme && Appearance?.getColorScheme()) || 'light';
 
-  const direction = props.direction ?? getDefaultDirection();
-
   const [reduceMotionEnabled, setReduceMotionEnabled] =
     React.useState<boolean>(false);
   const [colorScheme, setColorScheme] =
@@ -92,7 +90,7 @@ const PaperProvider = (props: Props) => {
 
   const { children, settings } = props;
 
-  const localeValue = React.useMemo(() => ({ direction }), [direction]);
+  const direction = props.direction ?? getDefaultDirection();
 
   const settingsValue = React.useMemo(
     () => ({
@@ -107,7 +105,7 @@ const PaperProvider = (props: Props) => {
     <SafeAreaProviderCompat>
       <PortalHost>
         <SettingsProvider value={settingsValue}>
-          <LocaleProvider value={localeValue}>
+          <LocaleProvider direction={direction}>
             <ThemeProvider theme={theme}>{children}</ThemeProvider>
           </LocaleProvider>
         </SettingsProvider>
