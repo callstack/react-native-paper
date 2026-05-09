@@ -118,6 +118,8 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
 };
 
 const SIZE = 56;
+const SHADOW_LAYER_Z_INDEX = 1;
+const CONTENT_LAYER_Z_INDEX = 2;
 
 /**
  * An animated, extending horizontally floating action button represents the primary action in an application.
@@ -553,9 +555,19 @@ const styles = StyleSheet.create({
   innerWrapper: {
     flexDirection: 'row',
     overflow: 'hidden',
+    ...Platform.select({
+      android: {
+        zIndex: CONTENT_LAYER_Z_INDEX,
+      },
+    }),
   },
   shadowWrapper: {
     elevation: 0,
+    ...Platform.select({
+      android: {
+        zIndex: SHADOW_LAYER_Z_INDEX,
+      },
+    }),
   },
   shadow: {
     elevation: 3,
