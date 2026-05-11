@@ -4,8 +4,8 @@ import { Animated, StyleSheet, Text } from 'react-native';
 import { act } from '@testing-library/react-native';
 
 import { getTheme } from '../../../core/theming';
-import { MD3Colors } from '../../../styles/themes/v3/tokens';
 import { render } from '../../../test-utils';
+import { Palette } from '../../../theme/tokens';
 import Button from '../../Button/Button';
 import Card from '../../Card/Card';
 import { getCardColors, getCardCoverStyle } from '../../Card/utils';
@@ -54,14 +54,14 @@ describe('Card', () => {
       <Card
         mode="outlined"
         accessibilityLabel="card"
-        style={{ borderColor: MD3Colors.error50 }}
+        style={{ borderColor: Palette.error50 }}
       >
         {null}
       </Card>
     );
 
     expect(getByLabelText('card')).toHaveStyle({
-      borderColor: MD3Colors.error50,
+      borderColor: Palette.error50,
     });
   });
 

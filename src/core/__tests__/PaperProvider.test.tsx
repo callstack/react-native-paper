@@ -8,7 +8,7 @@ import {
 
 import { render, act } from '@testing-library/react-native';
 
-import { MD3LightTheme, MD3DarkTheme } from '../../styles/themes';
+import { LightTheme, DarkTheme } from '../../theme/schemes';
 import type { ThemeProp } from '../../types';
 import PaperProvider from '../PaperProvider';
 import { useTheme } from '../theming';
@@ -102,8 +102,8 @@ const createProvider = (theme?: ThemeProp) => {
   );
 };
 
-const ExtendedLightTheme = { ...MD3LightTheme } as ThemeProp;
-const ExtendedDarkTheme = { ...MD3DarkTheme } as ThemeProp;
+const ExtendedLightTheme = { ...LightTheme } as ThemeProp;
+const ExtendedDarkTheme = { ...DarkTheme } as ThemeProp;
 
 describe('PaperProvider', () => {
   beforeEach(() => {
@@ -125,13 +125,13 @@ describe('PaperProvider', () => {
   it('handles overriding animation with the custom one', () => {
     const { getByTestId } = render(
       createProvider({
-        ...MD3LightTheme,
+        ...LightTheme,
         animation: { defaultAnimationDuration: 250 },
       })
     );
 
     expect(getByTestId('provider-child-view').props.theme).toStrictEqual({
-      ...MD3LightTheme,
+      ...LightTheme,
       animation: { scale: 1, defaultAnimationDuration: 250 },
     });
   });

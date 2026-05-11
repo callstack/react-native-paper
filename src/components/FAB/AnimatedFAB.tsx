@@ -357,7 +357,7 @@ const AnimatedFAB = ({
 
   const md3Elevation = !isIOS ? 0 : 3;
 
-  const shadowStyle = styles.v3Shadow;
+  const shadowStyle = styles.shadow;
   const baseStyle = [StyleSheet.absoluteFill, shadowStyle];
 
   const newAccessibilityState = { ...accessibilityState };
@@ -557,7 +557,7 @@ const styles = StyleSheet.create({
   shadowWrapper: {
     elevation: 0,
   },
-  v3Shadow: {
+  shadow: {
     elevation: 3,
   },
   iconWrapper: {

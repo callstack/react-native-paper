@@ -6,13 +6,13 @@ import { Animated, StyleSheet } from 'react-native';
 import { fireEvent } from '@testing-library/react-native';
 import { act } from 'react-test-renderer';
 
-import { MD3Colors } from '../../styles/themes/v3/tokens';
 import { render } from '../../test-utils';
+import { Palette } from '../../theme/tokens';
 import AnimatedFAB from '../FAB/AnimatedFAB';
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: MD3Colors.tertiary50,
+    backgroundColor: Palette.tertiary50,
   },
 });
 

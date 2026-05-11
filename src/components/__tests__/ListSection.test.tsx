@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { red500 } from '../../styles/themes/v2/colors';
 import { render } from '../../test-utils';
+import { red500 } from '../../theme/colors';
 import ListIcon from '../List/ListIcon';
 import ListItem from '../List/ListItem';
 import ListSection from '../List/ListSection';

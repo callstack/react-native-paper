@@ -14,7 +14,7 @@ import {
   MD3_OUTLINED_INPUT_OFFSET,
 } from './constants';
 import type { TextInputLabelProp } from './types';
-import { tokens } from '../../styles/themes/v3/tokens';
+import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../types';
 
 const { stateOpacity } = tokens.md.ref;

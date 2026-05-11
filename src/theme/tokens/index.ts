@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 
-import type { Font } from '../../../types';
+import type { Font } from '../types';
 
 const ref = {
   palette: {
@@ -250,4 +250,4 @@ export const tokens = {
   },
 };
 
-export const MD3Colors = ref.palette;
+export const Palette = ref.palette;

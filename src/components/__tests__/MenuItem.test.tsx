@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import { getTheme } from '../../core/theming';
-import { tokens } from '../../styles/themes/v3/tokens';
 import { render } from '../../test-utils';
+import { tokens } from '../../theme/tokens';
 import Menu from '../Menu/Menu';
 import { getMenuItemColor } from '../Menu/utils';
 

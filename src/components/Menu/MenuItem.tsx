@@ -17,7 +17,7 @@ import {
   MIN_WIDTH,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { MD3Theme, ThemeProp } from '../../types';
+import type { Theme, ThemeProp } from '../../types';
 import Icon, { IconSource } from '../Icon';
 import TouchableRipple, {
   Props as TouchableRippleProps,
@@ -163,7 +163,7 @@ const MenuItem = ({
 
   const titleTextStyle = {
     color: titleColor,
-    ...(theme as MD3Theme).fonts.bodyLarge,
+    ...(theme as Theme).fonts.bodyLarge,
   };
 
   const newAccessibilityState = { ...accessibilityState, disabled };

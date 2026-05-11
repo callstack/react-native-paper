@@ -1,8 +1,8 @@
 import type { ViewStyle } from 'react-native';
 
-import { black, white } from '../../styles/themes/v2/colors';
-import { tokens } from '../../styles/themes/v3/tokens';
-import type { InternalTheme, MD3Theme } from '../../types';
+import { black, white } from '../../theme/colors';
+import { tokens } from '../../theme/tokens';
+import type { InternalTheme, Theme } from '../../types';
 import { splitStyles } from '../../utils/splitStyles';
 
 const { stateOpacity } = tokens.md.ref;
@@ -46,7 +46,7 @@ const getButtonBackgroundColor = ({
 }: BaseProps & {
   customButtonColor?: string;
 }) => {
-  const { colors } = theme as MD3Theme;
+  const { colors } = theme as Theme;
   if (customButtonColor && !disabled) {
     return customButtonColor;
   }
@@ -85,7 +85,7 @@ const getButtonTextColor = ({
   backgroundColor: string;
   dark?: boolean;
 }) => {
-  const { colors } = theme as MD3Theme;
+  const { colors } = theme as Theme;
   if (customTextColor && !disabled) {
     return customTextColor;
   }

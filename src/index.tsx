@@ -1,4 +1,4 @@
-export { MD3Colors } from './styles/themes/v3/tokens';
+export { Palette } from './theme/tokens';
 
 export {
   useTheme,
@@ -10,13 +10,13 @@ export {
 
 export { useLocale, LocaleProvider } from './core/locale';
 
-export * from './styles/themes';
+export * from './theme/schemes';
 
 export { default as Provider } from './core/PaperProvider';
 export { default as PaperProvider } from './core/PaperProvider';
-export { default as shadow } from './styles/shadow';
-export { default as overlay } from './styles/overlay';
-export { default as configureFonts } from './styles/fonts';
+
+export { default as shadow } from './theme/shadow';
+export { default as configureFonts } from './theme/fonts';
 
 import * as Avatar from './components/Avatar/Avatar';
 import * as Drawer from './components/Drawer/Drawer';
@@ -148,9 +148,18 @@ export type {
   MaterialBottomTabScreenProps,
 } from './react-navigation';
 
-export type {
-  MD3Theme,
-  ThemeBase,
-  MD3Elevation,
-  MD3TypescaleKey,
+export {
+  TypescaleKey,
+  type Theme,
+  type ThemeBase,
+  type Elevation,
 } from './types';
+
+export {
+  MD3LightTheme,
+  MD3DarkTheme,
+  MD3Colors,
+  MD3TypescaleKey,
+  type MD3Theme,
+  type MD3Elevation,
+} from './deprecated';

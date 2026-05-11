@@ -18,7 +18,7 @@ import {
   getButtonTouchableRippleStyle,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
-import type { $Omit, MD3Theme, ThemeProp } from '../../types';
+import type { $Omit, Theme, ThemeProp } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import { splitStyles } from '../../utils/splitStyles';
@@ -305,7 +305,7 @@ const Button = (
   const { color: customLabelColor, fontSize: customLabelSize } =
     StyleSheet.flatten(labelStyle) || {};
 
-  const font = (theme as MD3Theme).fonts.labelLarge;
+  const font = (theme as Theme).fonts.labelLarge;
 
   const textStyle = {
     color: textColor,

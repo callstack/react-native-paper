@@ -2,8 +2,8 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { getTheme } from '../../core/theming';
-import { red500 } from '../../styles/themes/v2/colors';
 import { render } from '../../test-utils';
+import { red500 } from '../../theme/colors';
 import ListAccordion from '../List/ListAccordion';
 import ListAccordionGroup from '../List/ListAccordionGroup';
 import ListIcon from '../List/ListIcon';

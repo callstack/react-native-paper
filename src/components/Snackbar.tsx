@@ -19,7 +19,7 @@ import Surface from './Surface';
 import Text from './Typography/Text';
 import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
-import type { $Omit, $RemoveChildren, MD3Theme, ThemeProp } from '../types';
+import type { $Omit, $RemoveChildren, Theme, ThemeProp } from '../types';
 
 export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
@@ -236,7 +236,7 @@ const Snackbar = ({
     }
   }, [visible, handleOnVisible, handleOnHidden]);
 
-  const { colors, roundness } = theme as MD3Theme;
+  const { colors, roundness } = theme as Theme;
 
   if (hidden) {
     return null;

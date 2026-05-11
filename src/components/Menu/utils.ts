@@ -1,4 +1,4 @@
-import { tokens } from '../../styles/themes/v3/tokens';
+import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../types';
 import type { IconSource } from '../Icon';
 

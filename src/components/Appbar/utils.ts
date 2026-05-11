@@ -2,8 +2,8 @@ import React from 'react';
 import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet, Animated } from 'react-native';
 
-import { white } from '../../styles/themes/v2/colors';
-import type { InternalTheme, MD3Theme, ThemeProp } from '../../types';
+import { white } from '../../theme/colors';
+import type { InternalTheme, Theme, ThemeProp } from '../../types';
 
 export type AppbarModes = 'small' | 'medium' | 'large' | 'center-aligned';
 
@@ -27,7 +27,7 @@ export const getAppbarBackgroundColor = (
   customBackground?: ColorValue,
   elevated?: boolean
 ) => {
-  const { colors } = theme as MD3Theme;
+  const { colors } = theme as Theme;
   if (customBackground) {
     return customBackground;
   }
