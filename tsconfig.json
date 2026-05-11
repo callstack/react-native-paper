@@ -31,9 +31,10 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "types": ["jest"]
+    "types": ["jest", "node"]
   },
   "exclude": [
-    "lib/**/*"
+    "lib/**/*",
+    "src/test-utils.tsx"
   ]
 }
