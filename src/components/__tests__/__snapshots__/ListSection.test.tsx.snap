@@ -188,16 +188,6 @@ exports[`renders list section with custom title style 1`] = `
         },
       },
       "roundness": 4,
-      "state": {
-        "opacity": {
-          "disabled": 0.38,
-          "dragged": 0.16,
-          "enabled": 1,
-          "focused": 0.1,
-          "hovered": 0.08,
-          "pressed": 0.1,
-        },
-      },
     }
   }
 >
@@ -740,16 +730,6 @@ exports[`renders list section with subheader 1`] = `
         },
       },
       "roundness": 4,
-      "state": {
-        "opacity": {
-          "disabled": 0.38,
-          "dragged": 0.16,
-          "enabled": 1,
-          "focused": 0.1,
-          "hovered": 0.08,
-          "pressed": 0.1,
-        },
-      },
     }
   }
 >
@@ -1290,16 +1270,6 @@ exports[`renders list section without subheader 1`] = `
         },
       },
       "roundness": 4,
-      "state": {
-        "opacity": {
-          "disabled": 0.38,
-          "dragged": 0.16,
-          "enabled": 1,
-          "focused": 0.1,
-          "hovered": 0.08,
-          "pressed": 0.1,
-        },
-      },
     }
   }
 >

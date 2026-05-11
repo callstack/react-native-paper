@@ -22,27 +22,22 @@ export type Fonts = {
   thin: Font;
 };
 
-export enum TypescaleKey {
-  displayLarge = 'displayLarge',
-  displayMedium = 'displayMedium',
-  displaySmall = 'displaySmall',
-
-  headlineLarge = 'headlineLarge',
-  headlineMedium = 'headlineMedium',
-  headlineSmall = 'headlineSmall',
-
-  titleLarge = 'titleLarge',
-  titleMedium = 'titleMedium',
-  titleSmall = 'titleSmall',
-
-  labelLarge = 'labelLarge',
-  labelMedium = 'labelMedium',
-  labelSmall = 'labelSmall',
-
-  bodyLarge = 'bodyLarge',
-  bodyMedium = 'bodyMedium',
-  bodySmall = 'bodySmall',
-}
+export type TypescaleKey =
+  | 'displayLarge'
+  | 'displayMedium'
+  | 'displaySmall'
+  | 'headlineLarge'
+  | 'headlineMedium'
+  | 'headlineSmall'
+  | 'titleLarge'
+  | 'titleMedium'
+  | 'titleSmall'
+  | 'labelLarge'
+  | 'labelMedium'
+  | 'labelSmall'
+  | 'bodyLarge'
+  | 'bodyMedium'
+  | 'bodySmall';
 
 export type TypescaleStyle = {
   fontFamily: string;
@@ -53,9 +48,6 @@ export type TypescaleStyle = {
   fontStyle?: Font['fontStyle'];
 };
 
-export type Typescale =
-  | {
-      [key in TypescaleKey]: TypescaleStyle;
-    } & {
-      ['default']: Omit<TypescaleStyle, 'lineHeight' | 'fontSize'>;
-    };
+export type Typescale = Record<TypescaleKey, TypescaleStyle> & {
+  default: Omit<TypescaleStyle, 'lineHeight' | 'fontSize'>;
+};
