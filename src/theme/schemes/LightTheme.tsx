@@ -1,78 +1,10 @@
-import color from 'color';
-
-import type { Theme } from '../../types';
-import configureFonts from '../fonts';
+import { baseTheme } from './base';
 import { tokens } from '../tokens';
-
-const { palette, stateOpacity } = tokens.md.ref;
+import { buildScheme } from '../tokens/sys/color/roles';
+import type { Theme } from '../types';
 
 export const LightTheme: Theme = {
+  ...baseTheme,
   dark: false,
-  roundness: 4,
-  colors: {
-    primary: palette.primary40,
-    primaryContainer: palette.primary90,
-    secondary: palette.secondary40,
-    secondaryContainer: palette.secondary90,
-    tertiary: palette.tertiary40,
-    tertiaryContainer: palette.tertiary90,
-    surface: palette.neutral98,
-    surfaceDim: palette.neutral87,
-    surfaceBright: palette.neutral98,
-    surfaceContainerLowest: palette.neutral100,
-    surfaceContainerLow: palette.neutral96,
-    surfaceContainer: palette.neutral94,
-    surfaceContainerHigh: palette.neutral92,
-    surfaceContainerHighest: palette.neutral90,
-    surfaceVariant: palette.neutralVariant90,
-    background: palette.neutral98,
-    error: palette.error40,
-    errorContainer: palette.error90,
-    onPrimary: palette.primary100,
-    onPrimaryContainer: palette.primary10,
-    onSecondary: palette.secondary100,
-    onSecondaryContainer: palette.secondary10,
-    onTertiary: palette.tertiary100,
-    onTertiaryContainer: palette.tertiary10,
-    onSurface: palette.neutral10,
-    onSurfaceVariant: palette.neutralVariant30,
-    onError: palette.error100,
-    onErrorContainer: palette.error10,
-    onBackground: palette.neutral10,
-    outline: palette.neutralVariant50,
-    outlineVariant: palette.neutralVariant80,
-    inverseSurface: palette.neutral20,
-    inverseOnSurface: palette.neutral95,
-    inversePrimary: palette.primary80,
-    primaryFixed: palette.primary90,
-    primaryFixedDim: palette.primary80,
-    onPrimaryFixed: palette.primary10,
-    onPrimaryFixedVariant: palette.primary30,
-    secondaryFixed: palette.secondary90,
-    secondaryFixedDim: palette.secondary80,
-    onSecondaryFixed: palette.secondary10,
-    onSecondaryFixedVariant: palette.secondary30,
-    tertiaryFixed: palette.tertiary90,
-    tertiaryFixedDim: palette.tertiary80,
-    onTertiaryFixed: palette.tertiary10,
-    onTertiaryFixedVariant: palette.tertiary30,
-    shadow: palette.neutral0,
-    scrim: palette.neutral0,
-    stateLayerPressed: color(palette.neutral10)
-      .alpha(stateOpacity.pressed)
-      .rgb()
-      .string(),
-    elevation: {
-      level0: 'transparent',
-      level1: palette.neutral96,
-      level2: palette.neutral94,
-      level3: palette.neutral92,
-      level4: palette.neutral92,
-      level5: palette.neutral90,
-    },
-  },
-  fonts: configureFonts(),
-  animation: {
-    scale: 1.0,
-  },
+  colors: buildScheme(tokens.md.ref.palette, tokens.md.ref, { mode: 'light' }),
 };
