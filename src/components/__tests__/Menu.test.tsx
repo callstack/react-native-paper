@@ -5,7 +5,7 @@ import { act, screen, waitFor } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
-import { Elevation, ElevationLevel } from '../../types';
+import { Elevation } from '../../types';
 import Button from '../Button/Button';
 import Menu from '../Menu/Menu';
 import Portal from '../Portal/Portal';
@@ -88,8 +88,7 @@ it('renders menu with content styles', () => {
     );
 
     expect(getByTestId('menu-surface')).toHaveStyle({
-      backgroundColor:
-        theme.colors.elevation[`level${elevation}` as ElevationLevel],
+      backgroundColor: theme.colors.elevation[`level${elevation}`],
     });
   })
 );

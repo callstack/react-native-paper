@@ -23,7 +23,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import MenuItem from './MenuItem';
 import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
-import type { Elevation, ElevationLevel, Theme, ThemeProp } from '../../types';
+import type { Elevation, Theme, ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import { BackHandler } from '../../utils/BackHandler/BackHandler';
 import Portal from '../Portal/Portal';
@@ -670,10 +670,7 @@ const Menu = ({
                   styles.shadowMenuContainer,
                   shadowMenuContainerStyle,
                   {
-                    backgroundColor:
-                      md3Colors.elevation[
-                        `level${elevation}` as ElevationLevel
-                      ],
+                    backgroundColor: md3Colors.elevation[`level${elevation}`],
                   },
                   contentStyle,
                 ]}

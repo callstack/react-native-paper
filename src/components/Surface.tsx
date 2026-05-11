@@ -96,13 +96,13 @@ function getStyleForShadowLayer(
       shadowOffset: {
         width: 0,
         height: elevation.interpolate({
-          inputRange: [...elevationInputRange],
-          outputRange: [...shadowLayers[layer].height],
+          inputRange: elevationInputRange,
+          outputRange: shadowLayers[layer].height,
         }),
       },
       shadowRadius: elevation.interpolate({
-        inputRange: [...elevationInputRange],
-        outputRange: [...shadowLayers[layer].shadowRadius],
+        inputRange: elevationInputRange,
+        outputRange: shadowLayers[layer].shadowRadius,
       }),
     };
   }
@@ -252,9 +252,9 @@ const Surface = forwardRef<View, Props>(
     const backgroundColor = (() => {
       if (isAnimatedValue(elevation)) {
         return elevation.interpolate({
-          inputRange: [...elevationInputRange],
-          outputRange: [...elevationInputRange].map((elevation) => {
-            return colors.elevation?.[`level${elevation as Elevation}`];
+          inputRange: elevationInputRange,
+          outputRange: elevationInputRange.map((elevation) => {
+            return colors.elevation?.[`level${elevation}`];
           }),
         });
       }
@@ -286,17 +286,15 @@ const Surface = forwardRef<View, Props>(
     }
 
     if (Platform.OS === 'android') {
-      const elevationLevel = [...androidElevationLevels];
-
       const getElevationAndroid = () => {
         if (isAnimatedValue(elevation)) {
           return elevation.interpolate({
-            inputRange: [...elevationInputRange],
-            outputRange: elevationLevel,
+            inputRange: elevationInputRange,
+            outputRange: androidElevationLevels,
           });
         }
 
-        return elevationLevel[elevation];
+        return androidElevationLevels[elevation];
       };
 
       const { margin, padding, transform, borderRadius } = (StyleSheet.flatten(

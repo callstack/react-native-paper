@@ -167,7 +167,7 @@ const Appbar = ({
     elevation = elevated ? 2 : 0,
     ...restStyle
   } = (flattenedStyle || {}) as Exclude<typeof flattenedStyle, number> & {
-    elevation?: number;
+    elevation?: Elevation;
     backgroundColor?: ColorValue;
   };
 
@@ -234,7 +234,7 @@ const Appbar = ({
         insets,
         restStyle,
       ]}
-      elevation={elevation as Elevation}
+      elevation={elevation}
       container
       {...rest}
     >

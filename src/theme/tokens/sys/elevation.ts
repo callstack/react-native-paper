@@ -3,7 +3,8 @@
 
 import { Animated } from 'react-native';
 
-import type { ThemeElevation } from '../../types';
+import { isAnimatedValue } from '../../../utils/animations';
+import type { Elevation, ThemeElevation } from '../../types';
 
 export const defaultElevation: ThemeElevation = {
   level0: 0,
@@ -14,9 +15,9 @@ export const defaultElevation: ThemeElevation = {
   level5: 5,
 };
 
-export const elevationInputRange = [0, 1, 2, 3, 4, 5] as const;
+export const elevationInputRange: Elevation[] = Object.values(defaultElevation);
 
-export const androidElevationLevels = [0, 1, 3, 6, 8, 12] as const;
+export const androidElevationLevels = [0, 1, 3, 6, 8, 12];
 
 export const shadowLayers = [
   {
@@ -29,20 +30,20 @@ export const shadowLayers = [
     height: [0, 1, 1, 1, 2, 4],
     shadowRadius: [0, 2, 2, 3, 3, 4],
   },
-] as const;
+];
 
 export function shadow(
   elevation: number | Animated.Value = 0,
   shadowColor: string
 ) {
-  if (elevation instanceof Animated.Value) {
+  if (isAnimatedValue(elevation)) {
     return {
       shadowColor,
       shadowOffset: {
         width: new Animated.Value(0),
         height: elevation.interpolate({
-          inputRange: [...elevationInputRange],
-          outputRange: [...shadowLayers[0].height],
+          inputRange: elevationInputRange,
+          outputRange: shadowLayers[0].height,
         }),
       },
       shadowOpacity: elevation.interpolate({
@@ -51,8 +52,8 @@ export function shadow(
         extrapolate: 'clamp',
       }),
       shadowRadius: elevation.interpolate({
-        inputRange: [...elevationInputRange],
-        outputRange: [...shadowLayers[0].shadowRadius],
+        inputRange: elevationInputRange,
+        outputRange: shadowLayers[0].shadowRadius,
       }),
     };
   }
