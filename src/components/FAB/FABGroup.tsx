@@ -520,7 +520,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   container: {
-    ...StyleSheet.absoluteFill,
+    ...StyleSheet.absoluteFillObject,
     justifyContent: 'flex-end',
   },
   fab: {
@@ -529,7 +529,7 @@ const styles = StyleSheet.create({
     marginTop: 0,
   },
   backdrop: {
-    ...StyleSheet.absoluteFill,
+    ...StyleSheet.absoluteFillObject,
   },
   containerStyle: {
     borderRadius: 5,
