@@ -8,8 +8,8 @@ import {
 
 import { act, fireEvent, render } from '@testing-library/react-native';
 
-import { MD3LightTheme } from '../../styles/themes';
-import { tokens } from '../../styles/themes/v3/tokens';
+import { LightTheme } from '../../styles/themes';
+import { tokens } from '../../styles/themes/tokens';
 import Modal from '../Modal';
 
 const { scrimAlpha } = tokens.md.ref;
@@ -58,7 +58,7 @@ describe('Modal', () => {
       );
 
       expect(getByTestId('modal-backdrop')).toHaveStyle({
-        backgroundColor: MD3LightTheme.colors.scrim,
+        backgroundColor: LightTheme.colors.scrim,
       });
     });
 

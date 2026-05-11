@@ -4,7 +4,7 @@ import type { Animated, StyleProp, View, ViewStyle } from 'react-native';
 import type { ThemeProp } from 'src/types';
 
 import { useInternalTheme } from '../../core/theming';
-import type { MD3Theme } from '../../types';
+import type { Theme } from '../../types';
 import { forwardRef } from '../../utils/forwardRef';
 import type { IconSource } from '../Icon';
 import IconButton from '../IconButton/IconButton';
@@ -86,7 +86,7 @@ const AppbarAction = forwardRef<View, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
-    const { colors } = theme as MD3Theme;
+    const { colors } = theme as Theme;
 
     const actionIconColor = iconColor
       ? iconColor

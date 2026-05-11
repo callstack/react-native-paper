@@ -1,4 +1,4 @@
-import type { InternalTheme, MD3Theme } from '../../types';
+import type { InternalTheme, Theme } from '../../types';
 
 export const getActiveTintColor = ({
   activeColor,
@@ -11,7 +11,7 @@ export const getActiveTintColor = ({
     return activeColor;
   }
 
-  return (theme as MD3Theme).colors.onSecondaryContainer;
+  return (theme as Theme).colors.onSecondaryContainer;
 };
 
 export const getInactiveTintColor = ({
@@ -25,7 +25,7 @@ export const getInactiveTintColor = ({
     return inactiveColor;
   }
 
-  return (theme as MD3Theme).colors.onSurfaceVariant;
+  return (theme as Theme).colors.onSurfaceVariant;
 };
 
 export const getLabelColor = ({
@@ -39,7 +39,7 @@ export const getLabelColor = ({
   focused: boolean;
   theme: InternalTheme;
 }) => {
-  const { colors } = theme as MD3Theme;
+  const { colors } = theme as Theme;
   if (hasColor) {
     return tintColor;
   }

@@ -2,10 +2,10 @@ import type { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
 import color from 'color';
 
-import { tokens } from '../../styles/themes/v3/tokens';
-import type { InternalTheme, MD3Theme } from '../../types';
+import { tokens } from '../../styles/themes/tokens';
+import type { InternalTheme, Theme } from '../../types';
 
-const md3 = (theme: InternalTheme) => theme as MD3Theme;
+const md3 = (theme: InternalTheme) => theme as Theme;
 
 const { stateOpacity } = tokens.md.ref;
 

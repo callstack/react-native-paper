@@ -1,4 +1,4 @@
-export { MD3Colors } from './styles/themes/v3/tokens';
+export { Palette } from './styles/themes/tokens';
 
 export {
   useTheme,
@@ -13,7 +13,6 @@ export * from './styles/themes';
 export { default as Provider } from './core/PaperProvider';
 export { default as PaperProvider } from './core/PaperProvider';
 export { default as shadow } from './styles/shadow';
-export { default as overlay } from './styles/overlay';
 export { default as configureFonts } from './styles/fonts';
 
 import * as Avatar from './components/Avatar/Avatar';
@@ -146,9 +145,18 @@ export type {
   MaterialBottomTabScreenProps,
 } from './react-navigation';
 
-export type {
-  MD3Theme,
-  ThemeBase,
-  MD3Elevation,
-  MD3TypescaleKey,
+export {
+  TypescaleKey,
+  type Theme,
+  type ThemeBase,
+  type Elevation,
 } from './types';
+
+export {
+  MD3LightTheme,
+  MD3DarkTheme,
+  MD3Colors,
+  MD3TypescaleKey,
+  type MD3Theme,
+  type MD3Elevation,
+} from './deprecated';

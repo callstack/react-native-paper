@@ -1,13 +1,13 @@
 import color from 'color';
 
-import { MD3LightTheme } from './LightTheme';
+import { LightTheme } from './LightTheme';
 import { tokens } from './tokens';
-import type { MD3Theme } from '../../../types';
+import type { Theme } from '../../types';
 
 const { palette, stateOpacity } = tokens.md.ref;
 
-export const MD3DarkTheme: MD3Theme = {
-  ...MD3LightTheme,
+export const DarkTheme: Theme = {
+  ...LightTheme,
   dark: true,
   mode: 'adaptive',
   colors: {

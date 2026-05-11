@@ -20,7 +20,7 @@ import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
 import { useInternalTheme } from '../core/theming';
-import type { MD3Theme, ThemeProp } from '../types';
+import type { Theme, ThemeProp } from '../types';
 import { forwardRef } from '../utils/forwardRef';
 
 interface Style {
@@ -193,7 +193,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
-    const { colors, fonts } = theme as MD3Theme;
+    const { colors, fonts } = theme as Theme;
     const root = React.useRef<TextInput>(null);
 
     React.useImperativeHandle(ref, () => ({

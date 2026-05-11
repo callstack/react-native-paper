@@ -5,8 +5,8 @@ import { I18nManager, Platform, StyleSheet, Text, View } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 
 import { DefaultTheme, getTheme, ThemeProvider } from '../../core/theming';
-import { red500 } from '../../styles/themes/v2/colors';
-import { tokens } from '../../styles/themes/v3/tokens';
+import { red500 } from '../../styles/themes/colors';
+import { tokens } from '../../styles/themes/tokens';
 import {
   getFlatInputColors,
   getOutlinedInputColors,

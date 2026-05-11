@@ -1,6 +1,6 @@
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import type { InternalTheme, MD3Theme } from '../../types';
+import type { InternalTheme, Theme } from '../../types';
 
 type CardMode = 'elevated' | 'outlined' | 'contained';
 
@@ -41,7 +41,7 @@ export const getCardCoverStyle = ({
 };
 
 const getBorderColor = ({ theme }: { theme: InternalTheme }) => {
-  return (theme as MD3Theme).colors.outline;
+  return (theme as Theme).colors.outline;
 };
 
 const getBackgroundColor = ({
@@ -51,7 +51,7 @@ const getBackgroundColor = ({
   theme: InternalTheme;
   isMode: (mode: CardMode) => boolean;
 }) => {
-  const { colors } = theme as MD3Theme;
+  const { colors } = theme as Theme;
   if (isMode('contained')) {
     return colors.surfaceVariant;
   }

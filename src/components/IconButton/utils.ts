@@ -1,4 +1,4 @@
-import { tokens } from '../../styles/themes/v3/tokens';
+import { tokens } from '../../styles/themes/tokens';
 import type { InternalTheme } from '../../types';
 
 const { stateOpacity } = tokens.md.ref;

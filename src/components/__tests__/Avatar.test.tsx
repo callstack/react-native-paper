@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 import { fireEvent, render } from '@testing-library/react-native';
 
-import { red500 } from '../../styles/themes/v2/colors';
+import { red500 } from '../../styles/themes/colors';
 import * as Avatar from '../Avatar/Avatar';
 
 const styles = StyleSheet.create({
