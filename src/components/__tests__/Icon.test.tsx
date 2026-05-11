@@ -1,8 +1,7 @@
 import React from 'react';
 import { Image } from 'react-native';
 
-import { render } from '@testing-library/react-native';
-
+import { render } from '../../test-utils';
 import Icon from '../Icon';
 
 const ICON_SIZE = 24;

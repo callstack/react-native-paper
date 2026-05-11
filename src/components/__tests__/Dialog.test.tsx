@@ -7,9 +7,10 @@ import {
   BackHandlerStatic as RNBackHandlerStatic,
 } from 'react-native';
 
-import { act, fireEvent, render } from '@testing-library/react-native';
+import { act, fireEvent } from '@testing-library/react-native';
 
 import Dialog from '../../components/Dialog/Dialog';
+import { render } from '../../test-utils';
 import Button from '../Button/Button';
 
 interface BackHandlerStatic extends RNBackHandlerStatic {

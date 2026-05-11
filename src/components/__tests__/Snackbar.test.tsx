@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 
-import { act, render } from '@testing-library/react-native';
+import { act } from '@testing-library/react-native';
 
 import { red200, white } from '../../styles/themes/v2/colors';
+import { render } from '../../test-utils';
 import Snackbar from '../Snackbar';
 
 const styles = StyleSheet.create({

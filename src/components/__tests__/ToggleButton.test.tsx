@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Animated } from 'react-native';
 
-import { act, render } from '@testing-library/react-native';
+import { act } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
+import { render } from '../../test-utils';
 import ToggleButton from '../ToggleButton';
 import { getToggleButtonColor } from '../ToggleButton/utils';
 

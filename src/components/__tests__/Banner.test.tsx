@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Animated, Image } from 'react-native';
 
-import { act, render } from '@testing-library/react-native';
+import { act } from '@testing-library/react-native';
 
+import { render } from '../../test-utils';
 import Banner from '../Banner';
 
 it('renders hidden banner, without action buttons and without image', () => {

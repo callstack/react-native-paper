@@ -11,9 +11,9 @@ export type LocaleContextValue = {
   direction: Direction;
 };
 
-export const LocaleContext = React.createContext<LocaleContextValue>({
-  direction: I18nManager.getConstants?.().isRTL ? 'rtl' : 'ltr',
-});
+export const LocaleContext = React.createContext<LocaleContextValue | null>(
+  null
+);
 
 export type LocaleProviderProps = {
   direction: Direction;
@@ -32,10 +32,13 @@ export function LocaleProvider({ direction, children }: LocaleProviderProps) {
 
 /**
  * Returns the locale context value. Must be used inside a `PaperProvider` (or `LocaleProvider`).
- * Falls back to the system direction from `I18nManager` when used outside a provider.
  */
 export function useLocale(): LocaleContextValue {
-  return React.useContext(LocaleContext);
+  const context = React.useContext(LocaleContext);
+  if (context === null) {
+    throw new Error('useLocale must be used within a LocaleProvider');
+  }
+  return context;
 }
 
 export const getDefaultDirection = (): Direction =>

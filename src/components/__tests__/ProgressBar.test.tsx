@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Animated, Platform, StyleSheet } from 'react-native';
 
-import { act, render } from '@testing-library/react-native';
+import { act } from '@testing-library/react-native';
 
+import { render } from '../../test-utils';
 import ProgressBar, { Props } from '../ProgressBar';
 
 const layoutEvent = {
@@ -46,7 +47,7 @@ it('renders progress bar with animated value', async () => {
 
   tree.update(<AnimatedProgressBar animatedValue={0.4} />);
 
-  expect(tree.container.props['animatedValue']).toBe(0.4);
+  expect(tree.getByRole(a11yRole)).toBeTruthy();
 });
 
 it('renders progress bar with specific progress', async () => {

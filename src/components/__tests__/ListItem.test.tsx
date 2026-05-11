@@ -2,9 +2,10 @@ import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import { Text, View } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
 
 import { red500 } from '../../styles/themes/v2/colors';
+import { render } from '../../test-utils';
 import Chip from '../Chip/Chip';
 import IconButton from '../IconButton/IconButton';
 import ListIcon from '../List/ListIcon';

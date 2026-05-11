@@ -2,12 +2,13 @@
 import * as React from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
 
 import PaperProvider from '../../core/PaperProvider';
 import { DefaultTheme, getTheme, ThemeProvider } from '../../core/theming';
 import { red500 } from '../../styles/themes/v2/colors';
 import { tokens } from '../../styles/themes/v3/tokens';
+import { render } from '../../test-utils';
 import {
   getFlatInputColors,
   getOutlinedInputColors,

@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Animated, Dimensions, StyleSheet, View } from 'react-native';
 
-import { act, render, screen, waitFor } from '@testing-library/react-native';
+import { act, screen, waitFor } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
+import { render } from '../../test-utils';
 import { MD3Elevation } from '../../types';
 import Button from '../Button/Button';
 import Menu, { ELEVATION_LEVELS_MAP } from '../Menu/Menu';
