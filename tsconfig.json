@@ -34,7 +34,6 @@
     "types": ["jest", "node"]
   },
   "exclude": [
-    "lib/**/*",
-    "src/test-utils.tsx"
+    "lib/**/*"
   ]
 }
