@@ -17,7 +17,7 @@ import useLatestCallback from 'use-latest-callback';
 
 import { ChipAvatarProps, getChipColors } from './helpers';
 import { useInternalTheme } from '../../core/theming';
-import { white } from '../../styles/themes/colors';
+import { white } from '../../theme/colors';
 import type { $Omit, EllipsizeProp, Theme, ThemeProp } from '../../types';
 import hasTouchHandler from '../../utils/hasTouchHandler';
 import type { IconSource } from '../Icon';

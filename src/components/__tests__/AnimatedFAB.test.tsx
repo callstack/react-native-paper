@@ -6,7 +6,7 @@ import { Animated, StyleSheet } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import { act } from 'react-test-renderer';
 
-import { Palette } from '../../styles/themes/tokens';
+import { Palette } from '../../theme/tokens';
 import AnimatedFAB from '../FAB/AnimatedFAB';
 
 const styles = StyleSheet.create({

@@ -1,6 +1,6 @@
 import { Animated } from 'react-native';
 
-import { Palette } from './themes/tokens';
+import { Palette } from './tokens';
 
 const SHADOW_OPACITY = 0.3;
 const SHADOW_COLOR = Palette.primary0;

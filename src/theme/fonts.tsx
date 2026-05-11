@@ -1,5 +1,5 @@
 import type { TypescaleStyle, Typescale, TypescaleKey } from '../types';
-import { typescale } from './themes/tokens';
+import { typescale } from './tokens';
 
 type FontsConfig =
   | {

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
-import shadow from '../styles/shadow';
+import shadow from '../theme/shadow';
 import type { Elevation, Theme, ThemeProp } from '../types';
 import { isAnimatedValue } from '../utils/animations';
 import { forwardRef } from '../utils/forwardRef';

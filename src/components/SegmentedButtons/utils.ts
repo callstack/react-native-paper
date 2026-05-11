@@ -1,6 +1,6 @@
 import { ViewStyle } from 'react-native';
 
-import { tokens } from '../../styles/themes/tokens';
+import { tokens } from '../../theme/tokens';
 import type { InternalTheme } from '../../types';
 
 const { stateOpacity } = tokens.md.ref;
