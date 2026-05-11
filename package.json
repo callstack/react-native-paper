@@ -120,10 +120,10 @@
   "jest": {
     "preset": "react-native",
     "setupFiles": [
-      "<rootDir>/testSetup.js"
+      "<rootDir>/jest/testSetup.js"
     ],
     "setupFilesAfterEnv": [
-      "<rootDir>/jestSetupAfterEnv.js",
+      "<rootDir>/jest/jestSetupAfterEnv.js",
       "@testing-library/jest-native/extend-expect"
     ],
     "cacheDirectory": "./cache/jest",

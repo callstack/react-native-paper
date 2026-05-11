@@ -2,37 +2,60 @@
 title: Getting Started
 ---
 
+import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
+
 # Getting Started
 
 ## Installation
 
-- Open a Terminal in your project's folder and run:
+Open a Terminal in your project's folder and install the library:
+
+<Tabs groupId="expo-vs-cli">
+  <TabItem value="expo" label="Expo" default>
+
+```bash
+npx expo install react-native-paper
+```
+
+  </TabItem>
+  <TabItem value="community-cli" label="Community CLI">
 
 ```bash npm2yarn
 npm install react-native-paper
 ```
 
-- From `v5` there is a need to install [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) for handling safe area.
+  </TabItem>
+</Tabs>
 
-```bash npm2yarn
-npm install react-native-safe-area-context
-```
+React Native Paper uses [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) for handling safe area, [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/) and [react-native-worklets](https://docs.swmansion.com/react-native-worklets/) for animations.
 
-- You also need to install [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/) and [react-native-worklets](https://docs.swmansion.com/react-native-worklets/) for animations.
-
-```bash npm2yarn
-npm install react-native-reanimated react-native-worklets
-```
-
-- Follow the [React Native Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/) for your toolchain (Expo vs React Native Community CLI). **Community CLI** setups must add `'react-native-worklets/plugin'` **last** in your `babel.config.js` `plugins` array. **Expo** setups follow that guide’s Expo steps (install packages and rebuild native code); starter templates [since Expo SDK 50](https://expo.dev/changelog/2024/01-18-sdk-50) usually include the Worklets Babel plugin already—add it only if your `babel.config.js` does not. Paper declares **minimum** supported versions for `react-native-reanimated` and `react-native-worklets` under `peerDependencies` in [`package.json`](https://github.com/callstack/react-native-paper/blob/main/package.json) (`>=` ranges, not pinned versions). When troubleshooting animation or native build problems, confirm your installed packages meet those minimums.
-
-Additionaly for `iOS` platform there is a requirement to link the native parts of the library:
+<Tabs groupId="expo-vs-cli">
+  <TabItem value="expo" label="Expo" default>
 
 ```bash
-npx pod-install
+npx expo install react-native-safe-area-context react-native-reanimated react-native-worklets
 ```
 
-- If you're on a vanilla React Native project, you also need to install and link [@react-native-vector-icons/material-design-icons](https://github.com/oblador/react-native-vector-icons).
+  </TabItem>
+  <TabItem value="community-cli" label="Community CLI">
+
+```bash npm2yarn
+npm install react-native-safe-area-context react-native-reanimated react-native-worklets
+```
+
+  </TabItem>
+</Tabs>
+
+Follow the [React Native Reanimated installation guide](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/).
+
+Minimum requirements:
+
+- `react-native-reanimated` **≥ 4.3.0**
+- `react-native-worklets` **≥ 0.8.1**
+- `react-native-safe-area-context` — version compatible with your React Native toolchain.
+
+If you're on a vanilla React Native project, you also need to install and link [@react-native-vector-icons/material-design-icons](https://github.com/oblador/react-native-vector-icons).
 
 Specifically `MaterialDesignIcons` icon pack needs to be included in the project, because some components use those internally (e.g. `AppBar.BackAction` on Android).
 
