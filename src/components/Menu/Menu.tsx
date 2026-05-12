@@ -24,7 +24,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import MenuItem from './MenuItem';
 import { useInternalTheme } from '../../core/theming';
 import type { Elevation, Theme, ThemeProp } from '../../types';
-import { ElevationLevels } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
 import { BackHandler } from '../../utils/BackHandler/BackHandler';
 import Portal from '../Portal/Portal';
@@ -105,9 +104,14 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 const WINDOW_LAYOUT = Dimensions.get('window');
 
 const DEFAULT_ELEVATION: Elevation = 2;
-export const ELEVATION_LEVELS_MAP = Object.values(
-  ElevationLevels
-) as ElevationLevels[];
+export const ELEVATION_LEVELS_MAP = [
+  'level0',
+  'level1',
+  'level2',
+  'level3',
+  'level4',
+  'level5',
+] as const;
 
 const DEFAULT_MODE = 'elevated';
 

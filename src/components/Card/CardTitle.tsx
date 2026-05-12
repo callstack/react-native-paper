@@ -40,7 +40,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
-  titleVariant?: keyof typeof TypescaleKey;
+  titleVariant?: TypescaleKey;
   /**
    * Text for the subtitle. Note that this will only accept a string or `<Text>`-based node.
    */
@@ -69,7 +69,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
-  subtitleVariant?: keyof typeof TypescaleKey;
+  subtitleVariant?: TypescaleKey;
   /**
    * Callback which returns a React element to display on the left side.
    */

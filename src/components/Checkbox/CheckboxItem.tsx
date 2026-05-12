@@ -86,7 +86,7 @@ export type Props = {
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
-  labelVariant?: keyof typeof TypescaleKey;
+  labelVariant?: TypescaleKey;
   /**
    * @optional
    */
