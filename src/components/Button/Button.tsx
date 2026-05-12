@@ -17,6 +17,7 @@ import {
   ButtonMode,
   getButtonColors,
   getButtonIconStyle,
+  getButtonRippleColor,
   getButtonTouchableRippleStyle,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -97,6 +98,11 @@ export type Props = $Omit<
    * https://reactnative.dev/docs/pressable#rippleconfig
    */
   background?: PressableAndroidRippleConfig;
+  /**
+   * Color of the ripple effect / state layer. Defaults to the label color at
+   * the pressed-state opacity.
+   */
+  rippleColor?: ColorValue;
   /**
    * Accessibility label for the button. This is read by the screen reader when the user taps the button.
    */
@@ -214,6 +220,7 @@ const Button = (
     testID = 'button',
     accessible,
     background,
+    rippleColor: customRippleColor,
     maxFontSizeMultiplier,
     touchableRef,
     ...rest
@@ -329,6 +336,8 @@ const Button = (
     dark,
   });
 
+  const rippleColor = getButtonRippleColor({ textColor, customRippleColor });
+
   const touchableStyle = {
     ...borderRadiusStyles,
     borderRadius: borderRadiusStyles.borderRadius ?? borderRadius,
@@ -389,6 +398,7 @@ const Button = (
       <TouchableRipple
         borderless
         background={background}
+        rippleColor={rippleColor}
         onPress={onPress}
         onLongPress={onLongPress}
         onPressIn={hasPassedTouchHandler ? handlePressIn : undefined}

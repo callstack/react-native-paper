@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { Animated, StyleSheet } from 'react-native';
+import { Animated, PlatformColor, StyleSheet } from 'react-native';
 
 import { act, fireEvent } from '@testing-library/react-native';
+import color from 'color';
 
 import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
 import { pink500, white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
 import Button from '../Button/Button';
-import { getButtonColors } from '../Button/utils';
+import { getButtonColors, getButtonRippleColor } from '../Button/utils';
 
 const { stateOpacity } = tokens.md.ref;
 
@@ -802,6 +803,26 @@ describe('getButtonColors - border width', () => {
         });
       })
   );
+});
+
+describe('getButtonRippleColor', () => {
+  it('returns the custom ripple color when one is provided', () => {
+    expect(
+      getButtonRippleColor({ textColor: '#123456', customRippleColor: 'red' })
+    ).toBe('red');
+  });
+
+  it('defaults to the label color at the pressed-state opacity', () => {
+    expect(getButtonRippleColor({ textColor: '#123456' })).toBe(
+      color('#123456').alpha(stateOpacity.pressed).rgb().string()
+    );
+  });
+
+  it('returns undefined when the label color is not a plain string', () => {
+    expect(
+      getButtonRippleColor({ textColor: PlatformColor('?attr/colorPrimary') })
+    ).toBeUndefined();
+  });
 });
 
 it('animated value changes correctly', () => {

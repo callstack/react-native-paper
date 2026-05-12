@@ -1,5 +1,7 @@
 import type { ColorValue, ViewStyle } from 'react-native';
 
+import color from 'color';
+
 import { black, white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
 import type { InternalTheme, Theme } from '../../types';
@@ -224,6 +226,33 @@ export const getButtonColors = ({
     borderWidth,
     backgroundOpacity,
   };
+};
+
+/**
+ * Returns the color used for the button's ripple / state layer. Defaults to
+ * the label color at the pressed-state opacity (per Material Design 3), unless
+ * a custom ripple color is provided.
+ *
+ * When the label color is not a plain string (e.g. an Android Material You
+ * `PlatformColor`), `undefined` is returned so `TouchableRipple` falls back to
+ * its own default state-layer color.
+ */
+export const getButtonRippleColor = ({
+  textColor,
+  customRippleColor,
+}: {
+  textColor: ColorValue;
+  customRippleColor?: ColorValue;
+}): ColorValue | undefined => {
+  if (customRippleColor) {
+    return customRippleColor;
+  }
+
+  if (typeof textColor !== 'string') {
+    return undefined;
+  }
+
+  return color(textColor).alpha(stateOpacity.pressed).rgb().string();
 };
 
 type ViewStyleBorderRadiusStyles = Partial<
