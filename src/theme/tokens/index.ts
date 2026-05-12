@@ -114,6 +114,8 @@ const ref = {
       default: 'sans-serif-medium',
     }),
     weightMedium: '500' as Font['fontWeight'],
+
+    weightBold: '700' as Font['fontWeight'],
   },
 
   /** State layers opacity
@@ -143,9 +145,22 @@ const mediumType = {
   fontWeight: ref.typeface.weightMedium,
 };
 
+const emphasizedMediumType = {
+  fontFamily: ref.typeface.plainMedium,
+  letterSpacing: 0,
+  fontWeight: ref.typeface.weightMedium,
+};
+
+const emphasizedBoldType = {
+  fontFamily: ref.typeface.plainMedium,
+  letterSpacing: 0,
+  fontWeight: ref.typeface.weightBold,
+};
+
 export const typescale = {
   displayLarge: {
     ...regularType,
+    letterSpacing: -0.25,
     lineHeight: 64,
     fontSize: 57,
   },
@@ -216,6 +231,7 @@ export const typescale = {
     ...mediumType,
     fontWeight: ref.typeface.weightRegular,
     fontFamily: ref.typeface.brandRegular,
+    letterSpacing: 0.5,
     lineHeight: 24,
     fontSize: 16,
   },
@@ -231,6 +247,95 @@ export const typescale = {
     ...mediumType,
     fontWeight: ref.typeface.weightRegular,
     fontFamily: ref.typeface.brandRegular,
+    letterSpacing: 0.4,
+    lineHeight: 16,
+    fontSize: 12,
+  },
+
+  displayLargeEmphasized: {
+    ...emphasizedMediumType,
+    letterSpacing: -0.25,
+    lineHeight: 64,
+    fontSize: 57,
+  },
+  displayMediumEmphasized: {
+    ...emphasizedMediumType,
+    lineHeight: 52,
+    fontSize: 45,
+  },
+  displaySmallEmphasized: {
+    ...emphasizedMediumType,
+    lineHeight: 44,
+    fontSize: 36,
+  },
+
+  headlineLargeEmphasized: {
+    ...emphasizedMediumType,
+    lineHeight: 40,
+    fontSize: 32,
+  },
+  headlineMediumEmphasized: {
+    ...emphasizedMediumType,
+    lineHeight: 36,
+    fontSize: 28,
+  },
+  headlineSmallEmphasized: {
+    ...emphasizedMediumType,
+    lineHeight: 32,
+    fontSize: 24,
+  },
+
+  titleLargeEmphasized: {
+    ...emphasizedMediumType,
+    lineHeight: 28,
+    fontSize: 22,
+  },
+  titleMediumEmphasized: {
+    ...emphasizedBoldType,
+    letterSpacing: 0.15,
+    lineHeight: 24,
+    fontSize: 16,
+  },
+  titleSmallEmphasized: {
+    ...emphasizedBoldType,
+    letterSpacing: 0.1,
+    lineHeight: 20,
+    fontSize: 14,
+  },
+
+  labelLargeEmphasized: {
+    ...emphasizedBoldType,
+    letterSpacing: 0.1,
+    lineHeight: 20,
+    fontSize: 14,
+  },
+  labelMediumEmphasized: {
+    ...emphasizedBoldType,
+    letterSpacing: 0.5,
+    lineHeight: 16,
+    fontSize: 12,
+  },
+  labelSmallEmphasized: {
+    ...emphasizedBoldType,
+    letterSpacing: 0.5,
+    lineHeight: 16,
+    fontSize: 11,
+  },
+
+  bodyLargeEmphasized: {
+    ...emphasizedMediumType,
+    letterSpacing: 0.5,
+    lineHeight: 24,
+    fontSize: 16,
+  },
+  bodyMediumEmphasized: {
+    ...emphasizedMediumType,
+    letterSpacing: 0.25,
+    lineHeight: 20,
+    fontSize: 14,
+  },
+  bodySmallEmphasized: {
+    ...emphasizedMediumType,
     letterSpacing: 0.4,
     lineHeight: 16,
     fontSize: 12,

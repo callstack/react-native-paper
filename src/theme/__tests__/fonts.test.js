@@ -1,4 +1,4 @@
-const customFontV3 = {
+const customFont = {
   displayLarge: {
     fontFamily: 'NotoSans',
     letterSpacing: 0,
@@ -104,6 +104,111 @@ const customFontV3 = {
     lineHeight: 16,
     fontSize: 12,
   },
+  displayLargeEmphasized: {
+    fontFamily: 'NotoSans',
+    letterSpacing: 0,
+    fontWeight: '500',
+    lineHeight: 64,
+    fontSize: 57,
+  },
+  displayMediumEmphasized: {
+    fontFamily: 'NotoSans',
+    letterSpacing: 0,
+    fontWeight: '500',
+    lineHeight: 52,
+    fontSize: 45,
+  },
+  displaySmallEmphasized: {
+    fontFamily: 'NotoSans',
+    letterSpacing: 0,
+    fontWeight: '500',
+    lineHeight: 44,
+    fontSize: 36,
+  },
+  headlineLargeEmphasized: {
+    fontFamily: 'NotoSans',
+    letterSpacing: 0,
+    fontWeight: '500',
+    lineHeight: 40,
+    fontSize: 32,
+  },
+  headlineMediumEmphasized: {
+    fontFamily: 'NotoSans',
+    letterSpacing: 0,
+    fontWeight: '500',
+    lineHeight: 36,
+    fontSize: 28,
+  },
+  headlineSmallEmphasized: {
+    fontFamily: 'NotoSans',
+    letterSpacing: 0,
+    fontWeight: '500',
+    lineHeight: 32,
+    fontSize: 24,
+  },
+  titleLargeEmphasized: {
+    fontFamily: 'NotoSans',
+    letterSpacing: 0,
+    fontWeight: '500',
+    lineHeight: 28,
+    fontSize: 22,
+  },
+  titleMediumEmphasized: {
+    fontFamily: 'NotoSans',
+    letterSpacing: 0,
+    fontWeight: '700',
+    lineHeight: 24,
+    fontSize: 16,
+  },
+  titleSmallEmphasized: {
+    fontFamily: 'NotoSans',
+    letterSpacing: 0,
+    fontWeight: '700',
+    lineHeight: 20,
+    fontSize: 14,
+  },
+  labelLargeEmphasized: {
+    fontFamily: 'NotoSans',
+    letterSpacing: 0,
+    fontWeight: '700',
+    lineHeight: 20,
+    fontSize: 14,
+  },
+  labelMediumEmphasized: {
+    fontFamily: 'NotoSans',
+    letterSpacing: 0,
+    fontWeight: '700',
+    lineHeight: 16,
+    fontSize: 12,
+  },
+  labelSmallEmphasized: {
+    fontFamily: 'NotoSans',
+    letterSpacing: 0,
+    fontWeight: '700',
+    lineHeight: 16,
+    fontSize: 11,
+  },
+  bodyLargeEmphasized: {
+    fontFamily: 'NotoSans',
+    letterSpacing: 0,
+    fontWeight: '500',
+    lineHeight: 24,
+    fontSize: 16,
+  },
+  bodyMediumEmphasized: {
+    fontFamily: 'NotoSans',
+    letterSpacing: 0,
+    fontWeight: '500',
+    lineHeight: 20,
+    fontSize: 14,
+  },
+  bodySmallEmphasized: {
+    fontFamily: 'NotoSans',
+    letterSpacing: 0,
+    fontWeight: '500',
+    lineHeight: 16,
+    fontSize: 12,
+  },
   default: {
     fontFamily: 'NotoSans',
     letterSpacing: 0,
@@ -152,7 +257,7 @@ describe('configureFonts', () => {
           letterSpacing: 0,
         },
       })
-    ).toEqual(customFontV3);
+    ).toEqual(customFont);
   });
 
   it('overrides properties passed in config for several variants', () => {
@@ -179,7 +284,7 @@ describe('configureFonts', () => {
       ...typescale,
       bodyLarge: {
         fontFamily: 'NotoSans',
-        letterSpacing: 0.15,
+        letterSpacing: 0.5,
         fontWeight: '400',
         fontStyle: 'italic',
         lineHeight: 24,

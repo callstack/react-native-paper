@@ -153,7 +153,7 @@ exports[`can render leading radio button control 1`] = `
               "fontFamily": "System",
               "fontSize": 16,
               "fontWeight": "400",
-              "letterSpacing": 0.15,
+              "letterSpacing": 0.5,
               "lineHeight": 24,
             },
             [
@@ -248,7 +248,7 @@ exports[`can render the Android radio button on different platforms 1`] = `
               "fontFamily": "System",
               "fontSize": 16,
               "fontWeight": "400",
-              "letterSpacing": 0.15,
+              "letterSpacing": 0.5,
               "lineHeight": 24,
             },
             [
@@ -400,7 +400,7 @@ exports[`can render the iOS radio button on different platforms 1`] = `
               "fontFamily": "System",
               "fontSize": 16,
               "fontWeight": "400",
-              "letterSpacing": 0.15,
+              "letterSpacing": 0.5,
               "lineHeight": 24,
             },
             [
@@ -578,7 +578,7 @@ exports[`renders unchecked 1`] = `
               "fontFamily": "System",
               "fontSize": 16,
               "fontWeight": "400",
-              "letterSpacing": 0.15,
+              "letterSpacing": 0.5,
               "lineHeight": 24,
             },
             [
