@@ -74,15 +74,19 @@ const BannerExample = () => {
     >
       <Stack spacing={16}>
         <Stack direction="row" spacing={8} style={styles.row}>
-          <Button loading onPress={() => {}}>
-            Loading
-          </Button>
-          <Button mode="contained-tonal" icon="camera" onPress={() => {}}>
-            Icon
-          </Button>
-          <Button icon="camera" mode="contained" onPress={() => {}}>
-            Press me
-          </Button>
+          <Button loading onPress={() => {}} label="Loading" />
+          <Button
+            mode="contained-tonal"
+            icon="camera"
+            onPress={() => {}}
+            label="Icon"
+          />
+          <Button
+            icon="camera"
+            mode="contained"
+            onPress={() => {}}
+            label="Press me"
+          />
           <FAB icon="plus" size="small" onPress={() => {}} />
           <FAB icon="plus" size="medium" onPress={() => {}} />
           <FAB icon="plus" size="large" onPress={() => {}} />

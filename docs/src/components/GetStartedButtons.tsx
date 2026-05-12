@@ -36,9 +36,12 @@ const GetStartedButton = () => {
   return (
     <View style={styles.container}>
       <Link to="/docs/guides/getting-started" style={noTextDecoration}>
-        <Button mode="contained" style={styles.button} onPress={noop}>
-          Get started
-        </Button>
+        <Button
+          mode="contained"
+          style={styles.button}
+          onPress={noop}
+          label="Get started"
+        />
       </Link>
       <Button
         mode="outlined"
@@ -47,9 +50,8 @@ const GetStartedButton = () => {
             'https://snack.expo.dev/@react-native-paper/react-native-paper-example_v5'
           )
         }
-      >
-        Try on Snack
-      </Button>
+        label="Try on Snack"
+      />
     </View>
   );
 };
