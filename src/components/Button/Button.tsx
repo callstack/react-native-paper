@@ -210,7 +210,7 @@ const Button = (
     },
     [mode]
   );
-  const { roundness, animation } = theme;
+  const { animation } = theme;
   const uppercase = uppercaseProp ?? false;
   const isWeb = Platform.OS === 'web';
 
@@ -271,7 +271,7 @@ const Button = (
     (style) => style.startsWith('border') && style.endsWith('Radius')
   );
 
-  const borderRadius = 5 * roundness;
+  const borderRadius = theme.shapes.corner.largeIncreased;
   const iconSize = 18;
 
   const {

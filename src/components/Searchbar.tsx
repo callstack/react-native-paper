@@ -20,6 +20,7 @@ import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
 import { useInternalTheme } from '../core/theming';
+import { cornerNone } from '../theme/tokens/sys/shape';
 import type { Theme, ThemeProp } from '../types';
 import { forwardRef } from '../utils/forwardRef';
 
@@ -213,7 +214,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
       onClearIconPress?.(e);
     };
 
-    const { roundness, dark } = theme;
+    const { dark } = theme;
 
     const placeholderTextColor = theme.colors.onSurface;
     const textColor = theme.colors.onSurfaceVariant;
@@ -237,10 +238,12 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
     return (
       <Surface
         style={[
-          { borderRadius: roundness },
+          { borderRadius: theme.shapes.corner.extraSmall },
           {
             backgroundColor: theme.colors.surfaceContainerHigh,
-            borderRadius: roundness * (isBarMode ? 7 : 0),
+            borderRadius: isBarMode
+              ? theme.shapes.corner.extraLarge
+              : cornerNone,
           },
           styles.container,
           style,

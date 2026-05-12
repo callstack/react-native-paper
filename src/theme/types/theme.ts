@@ -1,6 +1,7 @@
 import type { $DeepPartial } from '@callstack/react-theme-provider';
 
 import type { ThemeColors } from './color';
+import type { ThemeShapes } from './shape';
 import type { Typescale } from './typography';
 
 type Mode = 'adaptive' | 'exact';
@@ -8,7 +9,6 @@ type Mode = 'adaptive' | 'exact';
 export type ThemeBase = {
   dark: boolean;
   mode?: Mode;
-  roundness: number;
   animation: {
     scale: number;
     defaultAnimationDuration?: number;
@@ -18,6 +18,7 @@ export type ThemeBase = {
 export type Theme = ThemeBase & {
   colors: ThemeColors;
   fonts: Typescale;
+  shapes: ThemeShapes;
 };
 
 export type InternalTheme = Theme;
