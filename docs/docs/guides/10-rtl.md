@@ -8,9 +8,17 @@ React Native Paper supports right-to-left (RTL) layouts for languages such as Ar
 
 ## How it works
 
-On React Native, the writing direction is normally controlled by `I18nManager.forceRTL`. React Native Paper reads this automatically i.e. no configuration is needed for native apps that already set up RTL via `I18nManager`.
+By default, React Native Paper reads the writing direction from `I18nManager.getConstants().isRTL` on native platforms. So it will use your existing RTL setup on initial render.
 
-However, `I18nManager` is a no-op on **React Native Web**, which means RTL layouts break silently in web apps. The `direction` prop on `PaperProvider` (and the `LocaleProvider` component) lets you explicitly control the writing direction so Paper behaves correctly on all platforms.
+See [I18nManager](http://reactnative.dev/docs/i18nmanager) docs and [Enabling RTL support in Expo](https://docs.expo.dev/guides/localization/#enabling-rtl-support) to configure your app properly.
+
+On the Web, the RTL value is not set globally, unlike native platforms. `I18nManager.getConstants().isRTL` is a no-op on [React Native Web](https://necolas.github.io/react-native-web/). To enable RTL globally, you can specify `dir` attribute on the `html` element:
+
+<html dir="rtl">
+  <!-- App content -->
+</html>
+
+Then, let `react-native-paper` know about it by using the `direction` prop on `PaperProvider` or the `LocaleProvider` component to match the writing direction in your app.
 
 :::note
 The `direction` prop informs React Native Paper about the text direction in the app i.e. it doesn't change the text direction by itself. If you intend to support RTL languages, it's important to set this prop to the correct value that's configured in the app. If it doesn't match the actual text direction, the layout might be incorrect.
