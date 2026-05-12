@@ -14,9 +14,11 @@ See [I18nManager](http://reactnative.dev/docs/i18nmanager) docs and [Enabling RT
 
 On the Web, the RTL value is not set globally, unlike native platforms. `I18nManager.getConstants().isRTL` is a no-op on [React Native Web](https://necolas.github.io/react-native-web/). To enable RTL globally, you can specify `dir` attribute on the `html` element:
 
+```html
 <html dir="rtl">
   <!-- App content -->
 </html>
+```
 
 Then, let `react-native-paper` know about it by using the `direction` prop on `PaperProvider` or the `LocaleProvider` component to match the writing direction in your app.
 
