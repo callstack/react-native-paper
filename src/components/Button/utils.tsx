@@ -14,6 +14,41 @@ export type ButtonMode =
   | 'elevated'
   | 'contained-tonal';
 
+export type ButtonIconPosition = 'leading' | 'trailing';
+
+/**
+ * Returns the margins applied to the button's icon (or loading indicator)
+ * depending on the button mode, density and the position of the icon relative
+ * to the label.
+ */
+export const getButtonIconStyle = ({
+  mode,
+  compact,
+  position,
+}: {
+  mode: ButtonMode;
+  compact?: boolean;
+  position: ButtonIconPosition;
+}): Pick<ViewStyle, 'marginLeft' | 'marginRight'> => {
+  const isTextMode = mode === 'text';
+
+  if (position === 'trailing') {
+    if (compact) {
+      return { marginLeft: 0, marginRight: isTextMode ? 6 : 8 };
+    }
+    return isTextMode
+      ? { marginLeft: -8, marginRight: 12 }
+      : { marginLeft: -16, marginRight: 16 };
+  }
+
+  if (compact) {
+    return { marginLeft: isTextMode ? 6 : 8, marginRight: 0 };
+  }
+  return isTextMode
+    ? { marginLeft: 12, marginRight: -8 }
+    : { marginLeft: 16, marginRight: -16 };
+};
+
 type BaseProps = {
   isMode: (mode: ButtonMode) => boolean;
   theme: InternalTheme;

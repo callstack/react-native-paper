@@ -181,7 +181,7 @@ const PaginationDropdown = ({
           onPress={() => toggleSelect(true)}
           style={styles.button}
           icon="menu-down"
-          contentStyle={styles.contentStyle}
+          iconPosition="trailing"
           theme={theme}
           label={`${numberOfItemsPerPage}`}
         />
@@ -357,9 +357,6 @@ const styles = StyleSheet.create({
   },
   iconsContainer: {
     flexDirection: 'row',
-  },
-  contentStyle: {
-    flexDirection: 'row-reverse',
   },
 });
 

@@ -16,6 +16,7 @@ import {
 import {
   ButtonMode,
   getButtonColors,
+  getButtonIconStyle,
   getButtonTouchableRippleStyle,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -70,6 +71,10 @@ export type Props = $Omit<
    * Icon to display for the `Button`.
    */
   icon?: IconSource;
+  /**
+   * Position of the `icon` relative to the label. Defaults to `'leading'`.
+   */
+  iconPosition?: 'leading' | 'trailing';
   /**
    * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
@@ -126,7 +131,10 @@ export type Props = $Omit<
   delayLongPress?: number;
   /**
    * Style of button's inner content.
-   * Use this prop to apply custom height and width, to set a custom padding or to set the icon on the right with `flexDirection: 'row-reverse'`.
+   * Use this prop to apply custom height and width or to set a custom padding.
+   *
+   * Note: setting `flexDirection: 'row-reverse'` here to move the icon to the
+   * trailing edge is deprecated — use the `iconPosition` prop instead.
    */
   contentStyle?: StyleProp<ViewStyle>;
   /**
@@ -184,6 +192,7 @@ const Button = (
     dark,
     loading,
     icon,
+    iconPosition,
     buttonColor: customButtonColor,
     textColor: customTextColor,
     label,
@@ -229,6 +238,20 @@ const Button = (
   }
 
   const labelContent = label != null ? label : children;
+
+  const flattenedContentStyle = StyleSheet.flatten(contentStyle) as
+    | ViewStyle
+    | undefined;
+  const usesReverseContentStyle =
+    flattenedContentStyle?.flexDirection === 'row-reverse';
+
+  if (process.env.NODE_ENV !== 'production' && usesReverseContentStyle) {
+    console.warn(
+      'Button: setting `flexDirection: \'row-reverse\'` in `contentStyle` to move the icon to the trailing edge is deprecated. Use the `iconPosition="trailing"` prop instead.'
+    );
+  }
+
+  const isTrailingIcon = iconPosition === 'trailing' || usesReverseContentStyle;
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -328,20 +351,11 @@ const Button = (
     ...font,
   };
 
-  const iconStyle =
-    StyleSheet.flatten(contentStyle)?.flexDirection === 'row-reverse'
-      ? [
-          styles.iconReverse,
-          styles[`md3IconReverse${compact ? 'Compact' : ''}`],
-          isMode('text') &&
-            styles[`md3IconReverseTextMode${compact ? 'Compact' : ''}`],
-        ]
-      : [
-          styles.icon,
-          styles[`md3Icon${compact ? 'Compact' : ''}`],
-          isMode('text') &&
-            styles[`md3IconTextMode${compact ? 'Compact' : ''}`],
-        ];
+  const iconStyle = getButtonIconStyle({
+    mode,
+    compact,
+    position: isTrailingIcon ? 'trailing' : 'leading',
+  });
 
   return (
     <Surface
@@ -392,7 +406,14 @@ const Button = (
         theme={theme}
         ref={touchableRef}
       >
-        <View style={[styles.content, { opacity: textOpacity }, contentStyle]}>
+        <View
+          style={[
+            styles.content,
+            isTrailingIcon && styles.contentReverse,
+            { opacity: textOpacity },
+            contentStyle,
+          ]}
+        >
           {icon && loading !== true ? (
             <View style={iconStyle} testID={`${testID}-icon-container`}>
               <Icon
@@ -457,48 +478,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  icon: {
-    marginLeft: 12,
-    marginRight: -4,
+  contentReverse: {
+    flexDirection: 'row-reverse',
   },
-  iconReverse: {
-    marginRight: 12,
-    marginLeft: -4,
-  },
-  /* eslint-disable react-native/no-unused-styles */
-  md3Icon: {
-    marginLeft: 16,
-    marginRight: -16,
-  },
-  md3IconCompact: {
-    marginLeft: 8,
-    marginRight: 0,
-  },
-  md3IconReverse: {
-    marginLeft: -16,
-    marginRight: 16,
-  },
-  md3IconReverseCompact: {
-    marginLeft: 0,
-    marginRight: 8,
-  },
-  md3IconTextMode: {
-    marginLeft: 12,
-    marginRight: -8,
-  },
-  md3IconTextModeCompact: {
-    marginLeft: 6,
-    marginRight: 0,
-  },
-  md3IconReverseTextMode: {
-    marginLeft: -8,
-    marginRight: 12,
-  },
-  md3IconReverseTextModeCompact: {
-    marginLeft: 0,
-    marginRight: 6,
-  },
-  /* eslint-enable react-native/no-unused-styles */
   label: {
     textAlign: 'center',
     marginVertical: 9,

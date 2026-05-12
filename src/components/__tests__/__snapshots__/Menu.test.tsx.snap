@@ -104,6 +104,7 @@ exports[`renders menu with content styles 1`] = `
                     "flexDirection": "row",
                     "justifyContent": "center",
                   },
+                  false,
                   {
                     "opacity": 1,
                   },
@@ -667,6 +668,7 @@ exports[`renders not visible menu 1`] = `
                   "flexDirection": "row",
                   "justifyContent": "center",
                 },
+                false,
                 {
                   "opacity": 1,
                 },
@@ -835,6 +837,7 @@ exports[`renders visible menu 1`] = `
                     "flexDirection": "row",
                     "justifyContent": "center",
                   },
+                  false,
                   {
                     "opacity": 1,
                   },

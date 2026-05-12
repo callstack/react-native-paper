@@ -1788,27 +1788,21 @@ exports[`DataTable.Pagination renders data table pagination with options select 
                     "justifyContent": "center",
                   },
                   {
-                    "opacity": 1,
-                  },
-                  {
                     "flexDirection": "row-reverse",
                   },
+                  {
+                    "opacity": 1,
+                  },
+                  undefined,
                 ]
               }
             >
               <View
                 style={
-                  [
-                    {
-                      "marginLeft": -4,
-                      "marginRight": 12,
-                    },
-                    {
-                      "marginLeft": -16,
-                      "marginRight": 16,
-                    },
-                    false,
-                  ]
+                  {
+                    "marginLeft": -16,
+                    "marginRight": 16,
+                  }
                 }
                 testID="button-icon-container"
               >

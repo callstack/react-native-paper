@@ -357,6 +357,58 @@ describe('button icon styles', () => {
   );
 });
 
+describe('icon position', () => {
+  it('places the icon before the label by default', () => {
+    const { getByTestId } = render(
+      <Button testID="button" mode="outlined" icon="camera" label="Press me" />
+    );
+
+    expect(getByTestId('button-icon-container')).toHaveStyle({
+      marginLeft: 16,
+      marginRight: -16,
+    });
+  });
+
+  it('places the icon after the label when iconPosition is "trailing"', () => {
+    const { getByTestId } = render(
+      <Button
+        testID="button"
+        mode="outlined"
+        icon="chevron-right"
+        iconPosition="trailing"
+        label="Next"
+      />
+    );
+
+    expect(getByTestId('button-icon-container')).toHaveStyle({
+      marginLeft: -16,
+      marginRight: 16,
+    });
+  });
+
+  it('still flips the icon via the deprecated contentStyle row-reverse and warns', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const { getByTestId } = render(
+      <Button
+        testID="button"
+        mode="outlined"
+        icon="chevron-right"
+        contentStyle={styles.flexing}
+        label="Next"
+      />
+    );
+
+    expect(getByTestId('button-icon-container')).toHaveStyle({
+      marginLeft: -16,
+      marginRight: 16,
+    });
+    expect(warn).toHaveBeenCalledWith(
+      expect.stringContaining('`contentStyle`')
+    );
+    warn.mockRestore();
+  });
+});
+
 describe('getButtonColors - background color', () => {
   const customButtonColor = '#111111';
 

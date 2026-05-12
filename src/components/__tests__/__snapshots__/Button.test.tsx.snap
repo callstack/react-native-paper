@@ -92,6 +92,7 @@ exports[`renders button with an accessibility hint 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            false,
             {
               "opacity": 1,
             },
@@ -245,6 +246,7 @@ exports[`renders button with an accessibility label 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            false,
             {
               "opacity": 1,
             },
@@ -397,6 +399,7 @@ exports[`renders button with button color 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            false,
             {
               "opacity": 1,
             },
@@ -549,6 +552,7 @@ exports[`renders button with color 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            false,
             {
               "opacity": 1,
             },
@@ -701,6 +705,7 @@ exports[`renders button with custom testID 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            false,
             {
               "opacity": 1,
             },
@@ -853,6 +858,7 @@ exports[`renders button with icon 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            false,
             {
               "opacity": 1,
             },
@@ -862,20 +868,10 @@ exports[`renders button with icon 1`] = `
       >
         <View
           style={
-            [
-              {
-                "marginLeft": 12,
-                "marginRight": -4,
-              },
-              {
-                "marginLeft": 16,
-                "marginRight": -16,
-              },
-              {
-                "marginLeft": 12,
-                "marginRight": -8,
-              },
-            ]
+            {
+              "marginLeft": 12,
+              "marginRight": -8,
+            }
           }
           testID="button-icon-container"
         >
@@ -1055,6 +1051,9 @@ exports[`renders button with icon in reverse order 1`] = `
               "justifyContent": "center",
             },
             {
+              "flexDirection": "row-reverse",
+            },
+            {
               "opacity": 1,
             },
             {
@@ -1065,20 +1064,10 @@ exports[`renders button with icon in reverse order 1`] = `
       >
         <View
           style={
-            [
-              {
-                "marginLeft": -4,
-                "marginRight": 12,
-              },
-              {
-                "marginLeft": -16,
-                "marginRight": 16,
-              },
-              {
-                "marginLeft": -8,
-                "marginRight": 12,
-              },
-            ]
+            {
+              "marginLeft": -8,
+              "marginRight": 12,
+            }
           }
           testID="button-icon-container"
         >
@@ -1257,6 +1246,7 @@ exports[`renders contained contained with mode 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            false,
             {
               "opacity": 1,
             },
@@ -1410,6 +1400,7 @@ exports[`renders disabled button 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            false,
             {
               "opacity": 0.38,
             },
@@ -1562,6 +1553,7 @@ exports[`renders loading button 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            false,
             {
               "opacity": 1,
             },
@@ -1583,20 +1575,10 @@ exports[`renders loading button 1`] = `
                 "alignItems": "center",
                 "justifyContent": "center",
               },
-              [
-                {
-                  "marginLeft": 12,
-                  "marginRight": -4,
-                },
-                {
-                  "marginLeft": 16,
-                  "marginRight": -16,
-                },
-                {
-                  "marginLeft": 12,
-                  "marginRight": -8,
-                },
-              ],
+              {
+                "marginLeft": 12,
+                "marginRight": -8,
+              },
             ]
           }
         >
@@ -1922,6 +1904,7 @@ exports[`renders outlined button with mode 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            false,
             {
               "opacity": 1,
             },
@@ -2075,6 +2058,7 @@ exports[`renders text button by default 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            false,
             {
               "opacity": 1,
             },
@@ -2227,6 +2211,7 @@ exports[`renders text button with mode 1`] = `
               "flexDirection": "row",
               "justifyContent": "center",
             },
+            false,
             {
               "opacity": 1,
             },
