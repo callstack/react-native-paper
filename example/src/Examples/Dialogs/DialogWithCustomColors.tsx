@@ -27,9 +27,7 @@ const DialogWithCustomColors = ({
           </TextComponent>
         </Dialog.Content>
         <Dialog.Actions>
-          <Button textColor={Palette.primary95} onPress={close}>
-            Ok
-          </Button>
+          <Button textColor={Palette.primary95} onPress={close} label="Ok" />
         </Dialog.Actions>
       </Dialog>
     </Portal>

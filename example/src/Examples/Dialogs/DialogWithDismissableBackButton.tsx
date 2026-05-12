@@ -26,10 +26,8 @@ const DialogWithDismissableBackButton = ({
         </TextComponent>
       </Dialog.Content>
       <Dialog.Actions>
-        <Button textColor={Palette.tertiary50} disabled>
-          Disagree
-        </Button>
-        <Button onPress={close}>Agree</Button>
+        <Button textColor={Palette.tertiary50} disabled label="Disagree" />
+        <Button onPress={close} label="Agree" />
       </Dialog.Actions>
     </Dialog>
   </Portal>
