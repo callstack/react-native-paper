@@ -3,13 +3,13 @@ import { View, StyleSheet, Animated } from 'react-native';
 
 import {
   Button,
+  Palette,
   ProgressBar,
-  MD3Colors,
   ProgressBarProps,
   Text,
+  useTheme,
 } from 'react-native-paper';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 class ClassProgressBar extends React.Component {
@@ -27,7 +27,7 @@ const AnimatedProgressBar = Animated.createAnimatedComponent(ClassProgressBar);
 const ProgressBarExample = () => {
   const [visible, setVisible] = React.useState<boolean>(true);
   const [progress, setProgress] = React.useState<number>(0.3);
-  const theme = useExampleTheme();
+  const theme = useTheme();
   const { current: progressBarValue } = React.useRef(new Animated.Value(0));
 
   const runCustomAnimation = () => {
@@ -62,7 +62,7 @@ const ProgressBarExample = () => {
         <ProgressBar
           progress={progress}
           visible={visible}
-          color={MD3Colors.error50}
+          color={Palette.error50}
         />
       </View>
 
@@ -73,9 +73,9 @@ const ProgressBarExample = () => {
         <ProgressBar
           progress={progress}
           visible={visible}
-          color={MD3Colors.error40}
+          color={Palette.error40}
           style={{
-            backgroundColor: MD3Colors.secondary50,
+            backgroundColor: Palette.secondary50,
           }}
         />
       </View>

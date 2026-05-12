@@ -138,25 +138,5 @@ export type { Props as TextProps } from './components/Typography/Text';
 export type { Props as SegmentedButtonsProps } from './components/SegmentedButtons/SegmentedButtons';
 export type { Props as ListImageProps } from './components/List/ListImage';
 export type { Props as TooltipProps } from './components/Tooltip/Tooltip';
-export type {
-  MaterialBottomTabNavigationEventMap,
-  MaterialBottomTabNavigationOptions,
-  MaterialBottomTabNavigationProp,
-  MaterialBottomTabScreenProps,
-} from './react-navigation';
 
-export {
-  TypescaleKey,
-  type Theme,
-  type ThemeBase,
-  type Elevation,
-} from './types';
-
-export {
-  MD3LightTheme,
-  MD3DarkTheme,
-  MD3Colors,
-  MD3TypescaleKey,
-  type MD3Theme,
-  type MD3Elevation,
-} from './deprecated';
+export { TypescaleKey, type Theme, type Elevation } from './types';
