@@ -190,6 +190,13 @@ export type Props = $Omit<
  * export default MyComponent;
  * ```
  */
+
+// Elevation levels (MD3) used by the `elevated` mode: level 1 at rest,
+// level 2 while pressed.
+const initialElevation = 1;
+const activeElevation = 2;
+const iconSize = 18;
+
 const Button = (
   {
     disabled,
@@ -228,12 +235,7 @@ const Button = (
   ref: React.ForwardedRef<View>
 ) => {
   const theme = useInternalTheme(themeOverrides);
-  const isMode = React.useCallback(
-    (modeToCompare: ButtonMode) => {
-      return mode === modeToCompare;
-    },
-    [mode]
-  );
+  const isMode = (modeToCompare: ButtonMode) => mode === modeToCompare;
   const { animation } = theme;
   const uppercase = uppercaseProp ?? false;
   const isWeb = Platform.OS === 'web';
@@ -246,9 +248,10 @@ const Button = (
 
   const labelContent = label != null ? label : children;
 
-  const flattenedContentStyle = StyleSheet.flatten(contentStyle) as
-    | ViewStyle
-    | undefined;
+  const flattenedContentStyle = React.useMemo(
+    () => StyleSheet.flatten(contentStyle) as ViewStyle | undefined,
+    [contentStyle]
+  );
   const usesReverseContentStyle =
     flattenedContentStyle?.flexDirection === 'row-reverse';
 
@@ -268,8 +271,6 @@ const Button = (
   });
 
   const isElevationEntitled = !disabled && isMode('elevated');
-  const initialElevation = 1;
-  const activeElevation = 2;
 
   const { current: elevation } = React.useRef<Animated.Value>(
     new Animated.Value(isElevationEntitled ? initialElevation : 0)
@@ -283,42 +284,50 @@ const Button = (
       duration: 0,
       useNativeDriver: true,
     });
-  }, [isElevationEntitled, elevation, initialElevation]);
+  }, [isElevationEntitled, elevation]);
 
-  const handlePressIn = (e: GestureResponderEvent) => {
-    onPressIn?.(e);
-    if (isMode('elevated')) {
-      const { scale } = animation;
-      Animated.timing(elevation, {
-        toValue: activeElevation,
-        duration: 200 * scale,
-        useNativeDriver:
-          isWeb || Platform.constants.reactNativeVersion.minor <= 72,
-      }).start();
-    }
-  };
-
-  const handlePressOut = (e: GestureResponderEvent) => {
-    onPressOut?.(e);
-    if (isMode('elevated')) {
-      const { scale } = animation;
-      Animated.timing(elevation, {
-        toValue: initialElevation,
-        duration: 150 * scale,
-        useNativeDriver:
-          isWeb || Platform.constants.reactNativeVersion.minor <= 72,
-      }).start();
-    }
-  };
-
-  const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
-  const [, borderRadiusStyles] = splitStyles(
-    flattenedStyles,
-    (style) => style.startsWith('border') && style.endsWith('Radius')
+  const handlePressIn = React.useCallback(
+    (e: GestureResponderEvent) => {
+      onPressIn?.(e);
+      if (mode === 'elevated') {
+        const { scale } = animation;
+        Animated.timing(elevation, {
+          toValue: activeElevation,
+          duration: 200 * scale,
+          useNativeDriver:
+            isWeb || Platform.constants.reactNativeVersion.minor <= 72,
+        }).start();
+      }
+    },
+    [onPressIn, mode, animation, elevation, isWeb]
   );
 
+  const handlePressOut = React.useCallback(
+    (e: GestureResponderEvent) => {
+      onPressOut?.(e);
+      if (mode === 'elevated') {
+        const { scale } = animation;
+        Animated.timing(elevation, {
+          toValue: initialElevation,
+          duration: 150 * scale,
+          useNativeDriver:
+            isWeb || Platform.constants.reactNativeVersion.minor <= 72,
+        }).start();
+      }
+    },
+    [onPressOut, mode, animation, elevation, isWeb]
+  );
+
+  const borderRadiusStyles = React.useMemo(() => {
+    const flattenedStyles = (StyleSheet.flatten(style) || {}) as ViewStyle;
+    const [, radiusStyles] = splitStyles(
+      flattenedStyles,
+      (key) => key.startsWith('border') && key.endsWith('Radius')
+    );
+    return radiusStyles;
+  }, [style]);
+
   const borderRadius = theme.shapes.corner.largeIncreased;
-  const iconSize = 18;
 
   const {
     backgroundColor,
@@ -327,44 +336,75 @@ const Button = (
     textOpacity,
     borderWidth,
     backgroundOpacity,
-  } = getButtonColors({
-    customButtonColor,
-    customTextColor,
-    theme,
-    mode,
-    disabled,
-    dark,
-  });
+  } = React.useMemo(
+    () =>
+      getButtonColors({
+        customButtonColor,
+        customTextColor,
+        theme,
+        mode,
+        disabled,
+        dark,
+      }),
+    [customButtonColor, customTextColor, theme, mode, disabled, dark]
+  );
 
-  const rippleColor = getButtonRippleColor({ textColor, customRippleColor });
+  const rippleColor = React.useMemo(
+    () => getButtonRippleColor({ textColor, customRippleColor }),
+    [textColor, customRippleColor]
+  );
 
-  const touchableStyle = {
-    ...borderRadiusStyles,
-    borderRadius: borderRadiusStyles.borderRadius ?? borderRadius,
-  };
+  const touchableStyle = React.useMemo(
+    () => ({
+      ...borderRadiusStyles,
+      borderRadius: borderRadiusStyles.borderRadius ?? borderRadius,
+    }),
+    [borderRadiusStyles, borderRadius]
+  );
 
-  const buttonStyle = {
-    backgroundColor: backgroundOpacity < 1 ? 'transparent' : backgroundColor,
-    borderColor,
-    borderWidth,
-    ...touchableStyle,
-  };
+  const buttonStyle = React.useMemo(
+    () => ({
+      backgroundColor: backgroundOpacity < 1 ? 'transparent' : backgroundColor,
+      borderColor,
+      borderWidth,
+      ...touchableStyle,
+    }),
+    [
+      backgroundOpacity,
+      backgroundColor,
+      borderColor,
+      borderWidth,
+      touchableStyle,
+    ]
+  );
 
-  const { color: customLabelColor, fontSize: customLabelSize } =
-    StyleSheet.flatten(labelStyle) || {};
+  const touchableRippleStyle = React.useMemo(
+    () => getButtonTouchableRippleStyle(touchableStyle, borderWidth),
+    [touchableStyle, borderWidth]
+  );
 
-  const font = (theme as Theme).fonts.labelLarge;
+  const { color: customLabelColor, fontSize: customLabelSize } = React.useMemo(
+    () => StyleSheet.flatten(labelStyle) || {},
+    [labelStyle]
+  );
 
-  const textStyle = {
-    color: textColor,
-    ...font,
-  };
+  const textStyle = React.useMemo(
+    () => ({
+      color: textColor,
+      ...(theme as Theme).fonts.labelLarge,
+    }),
+    [textColor, theme]
+  );
 
-  const iconStyle = getButtonIconStyle({
-    mode,
-    compact,
-    position: isTrailingIcon ? 'trailing' : 'leading',
-  });
+  const iconStyle = React.useMemo(
+    () =>
+      getButtonIconStyle({
+        mode,
+        compact,
+        position: isTrailingIcon ? 'trailing' : 'leading',
+      }),
+    [mode, compact, isTrailingIcon]
+  );
 
   return (
     <Surface
@@ -411,7 +451,7 @@ const Button = (
         accessible={accessible}
         hitSlop={hitSlop}
         disabled={disabled}
-        style={getButtonTouchableRippleStyle(touchableStyle, borderWidth)}
+        style={touchableRippleStyle}
         testID={testID}
         theme={theme}
         ref={touchableRef}
