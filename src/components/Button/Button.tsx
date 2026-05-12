@@ -31,7 +31,10 @@ import TouchableRipple, {
 } from '../TouchableRipple/TouchableRipple';
 import Text from '../Typography/Text';
 
-export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
+export type Props = $Omit<
+  React.ComponentProps<typeof Surface>,
+  'mode' | 'children'
+> & {
   /**
    * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis.
    * - `text` - flat button without background or outline, used for the lowest priority actions, especially when presenting multiple options.
@@ -74,9 +77,14 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
   /**
    * Label text of the button.
    */
-  children: React.ReactNode;
+  label?: string;
   /**
-   * Make the label text uppercased. Note that this won't work if you pass React elements as children.
+   * @deprecated Use `label` instead. When both `label` and `children` are set, `label` is used.
+   * Label text of the button.
+   */
+  children?: React.ReactNode;
+  /**
+   * Make the label text uppercased.
    */
   uppercase?: boolean;
   /**
@@ -157,9 +165,12 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
  * import { Button } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Button icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
- *     Press me
- *   </Button>
+ *   <Button
+ *     icon="camera"
+ *     mode="contained"
+ *     onPress={() => console.log('Pressed')}
+ *     label="Press me"
+ *   />
  * );
  *
  * export default MyComponent;
@@ -175,6 +186,7 @@ const Button = (
     icon,
     buttonColor: customButtonColor,
     textColor: customTextColor,
+    label,
     children,
     accessibilityLabel,
     accessibilityHint,
@@ -209,6 +221,14 @@ const Button = (
   const { animation } = theme;
   const uppercase = uppercaseProp ?? false;
   const isWeb = Platform.OS === 'web';
+
+  if (process.env.NODE_ENV !== 'production' && children != null) {
+    console.warn(
+      'Button: the `children` prop is deprecated and will be removed in a future release. Use the `label` prop instead.'
+    );
+  }
+
+  const labelContent = label != null ? label : children;
 
   const hasPassedTouchHandler = hasTouchHandler({
     onPress,
@@ -416,7 +436,7 @@ const Button = (
             ]}
             maxFontSizeMultiplier={maxFontSizeMultiplier}
           >
-            {children}
+            {labelContent}
           </Text>
         </View>
       </TouchableRipple>
