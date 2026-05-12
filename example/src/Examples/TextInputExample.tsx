@@ -10,15 +10,15 @@ import {
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import { useFonts } from 'expo-font';
 import {
-  configureFonts,
   HelperText,
   List,
-  MD3Colors,
+  Palette,
   TextInput,
+  configureFonts,
+  useTheme,
 } from 'react-native-paper';
 
 import { inputReducer, State } from '../../utils';
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const MAX_LENGTH = 20;
@@ -124,7 +124,7 @@ const TextInputExample = () => {
 
   const _isUsernameValid = (name: string) => /^[a-zA-Z]*$/.test(name);
 
-  const theme = useExampleTheme();
+  const theme = useTheme();
 
   const inputActionHandler = (type: keyof State, payload: string) =>
     dispatch({
@@ -567,7 +567,7 @@ const TextInputExample = () => {
                   <Text>
                     <Text
                       style={{
-                        color: MD3Colors.error50,
+                        color: Palette.error50,
                       }}
                     >
                       *
@@ -597,8 +597,8 @@ const TextInputExample = () => {
               onChangeText={(flatUnderlineColors) =>
                 inputActionHandler('flatUnderlineColors', flatUnderlineColors)
               }
-              underlineColor={MD3Colors.primary70}
-              activeUnderlineColor={MD3Colors.tertiary50}
+              underlineColor={Palette.primary70}
+              activeUnderlineColor={Palette.tertiary50}
             />
             <TextInput
               mode="outlined"
@@ -609,8 +609,8 @@ const TextInputExample = () => {
               onChangeText={(outlinedColors) =>
                 inputActionHandler('outlinedColors', outlinedColors)
               }
-              outlineColor={MD3Colors.primary70}
-              activeOutlineColor={MD3Colors.tertiary50}
+              outlineColor={Palette.primary70}
+              activeOutlineColor={Palette.tertiary50}
             />
             <TextInput
               mode="outlined"
@@ -883,7 +883,7 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
   inputLabelText: {
-    color: MD3Colors.tertiary70,
+    color: Palette.tertiary70,
   },
   left: {
     width: '30%',

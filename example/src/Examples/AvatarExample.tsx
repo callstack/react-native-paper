@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { Avatar, List, MD3Colors } from 'react-native-paper';
+import { Avatar, List, Palette } from 'react-native-paper';
 
 import ScreenWrapper from '../ScreenWrapper';
 
@@ -14,11 +14,11 @@ const AvatarExample = () => {
             style={[
               styles.avatar,
               {
-                backgroundColor: MD3Colors.error70,
+                backgroundColor: Palette.error70,
               },
             ]}
             label="XD"
-            color={MD3Colors.primary0}
+            color={Palette.primary0}
           />
           <Avatar.Text style={styles.avatar} label="XD" />
           <Avatar.Text style={styles.avatar} label="XD" size={80} />
@@ -30,11 +30,11 @@ const AvatarExample = () => {
             style={[
               styles.avatar,
               {
-                backgroundColor: MD3Colors.error70,
+                backgroundColor: Palette.error70,
               },
             ]}
             icon="folder"
-            color={MD3Colors.primary0}
+            color={Palette.primary0}
           />
           <Avatar.Icon style={styles.avatar} icon="folder" />
           <Avatar.Icon style={styles.avatar} icon="folder" size={80} />

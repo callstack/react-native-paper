@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import {
-  MD3Colors,
+  Palette,
   RadioButton,
   Text,
   TouchableRipple,
@@ -45,7 +45,7 @@ const RadioButtonExample = () => {
           <View pointerEvents="none">
             <RadioButton
               value="custom"
-              color={MD3Colors.error70}
+              color={Palette.error70}
               status={checked === 'custom' ? 'checked' : 'unchecked'}
             />
           </View>

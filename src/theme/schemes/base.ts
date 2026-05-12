@@ -4,7 +4,7 @@ import { defaultShapes } from '../tokens/sys/shape';
 import { defaultFonts } from '../tokens/sys/typography';
 import type { Theme } from '../types';
 
-type ThemeDefaults = Omit<Theme, 'dark' | 'mode' | 'colors'>;
+type ThemeDefaults = Omit<Theme, 'dark' | 'colors'>;
 
 export const themeDefaults: ThemeDefaults = {
   animation: {

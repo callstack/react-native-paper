@@ -6,10 +6,7 @@ import type {
   AnimatedFABAnimateFrom,
   AnimatedFABIconMode,
 } from 'react-native-paper';
-import { RadioButton, Text } from 'react-native-paper';
-
-import { useExampleTheme } from '../../hooks/useExampleTheme';
-
+import { RadioButton, Text, useTheme } from 'react-native-paper';
 export type Controls = {
   iconMode: AnimatedFABIconMode;
   animateFrom: AnimatedFABAnimateFrom;
@@ -84,7 +81,7 @@ const CustomFABControls = ({
   setControls,
   controls: { animateFrom, iconMode },
 }: Props) => {
-  const { colors } = useExampleTheme();
+  const { colors } = useTheme();
 
   const setIconMode = (newIconMode: AnimatedFABIconMode) =>
     setControls((state) => ({ ...state, iconMode: newIconMode }));

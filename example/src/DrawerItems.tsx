@@ -15,15 +15,15 @@ import {
   Button,
   Dialog,
   Drawer,
-  MD3Colors,
+  Palette,
+  Portal,
   Switch,
   Text,
   TouchableRipple,
-  Portal,
+  useTheme,
 } from 'react-native-paper';
 
 import { dynamicThemeSupported, isWeb } from '../utils';
-import { useExampleTheme } from './hooks/useExampleTheme';
 import { PreferencesContext } from './PreferencesContext';
 
 const DrawerItemsData = [
@@ -101,7 +101,7 @@ function DrawerItems() {
 
   const _setDrawerItem = (index: number) => setDrawerItemIndex(index);
 
-  const { colors } = useExampleTheme();
+  const { colors } = useTheme();
   const isIOS = Platform.OS === 'ios';
   const expoGoExecution =
     Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
@@ -142,8 +142,8 @@ function DrawerItems() {
 
   const coloredLabelTheme = {
     colors: {
-      secondaryContainer: MD3Colors.tertiary80,
-      onSecondaryContainer: MD3Colors.tertiary20,
+      secondaryContainer: Palette.tertiary80,
+      onSecondaryContainer: Palette.tertiary20,
     },
   };
 

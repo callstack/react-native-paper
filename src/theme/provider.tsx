@@ -5,19 +5,21 @@ import { $DeepPartial, createTheming } from '@callstack/react-theme-provider';
 import { DarkTheme, LightTheme } from './schemes';
 import type { Theme, NavigationTheme } from './types';
 
-export const {
+const {
   ThemeProvider,
   withTheme,
-  useTheme: useAppTheme,
+  useTheme: useThemeBase,
 } = createTheming<unknown>(LightTheme);
 
+export { ThemeProvider, withTheme };
+
 export function useTheme<T = Theme>(overrides?: $DeepPartial<T>) {
-  return useAppTheme<T>(overrides);
+  return useThemeBase<T>(overrides);
 }
 
 export const useInternalTheme = (
   themeOverrides: $DeepPartial<Theme> | undefined
-) => useAppTheme<Theme>(themeOverrides);
+) => useThemeBase<Theme>(themeOverrides);
 
 export const withInternalTheme = <Props extends { theme: Theme }, C>(
   WrappedComponent: ComponentType<Props & { theme: Theme }> & C
