@@ -132,7 +132,7 @@ describe('CardActions', () => {
     const { getByTestId } = render(
       <Card>
         <Card.Actions testID="card-actions">
-          <Button mode="contained">Agree</Button>
+          <Button mode="contained" label="Agree" />
         </Card.Actions>
       </Card>
     );
@@ -150,9 +150,8 @@ describe('CardActions', () => {
             testID="card-actions-button"
             mode="contained"
             style={styles.customBorderRadius}
-          >
-            Agree
-          </Button>
+            label="Agree"
+          />
         </Card.Actions>
       </Card>
     );

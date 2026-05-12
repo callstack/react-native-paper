@@ -113,7 +113,7 @@ const DURATION_LONG = 10000;
  *
  *   return (
  *     <View style={styles.container}>
- *       <Button onPress={onToggleSnackBar}>{visible ? 'Hide' : 'Show'}</Button>
+ *       <Button onPress={onToggleSnackBar} label={visible ? 'Hide' : 'Show'} />
  *       <Snackbar
  *         visible={visible}
  *         onDismiss={onDismissSnackBar}
@@ -330,10 +330,9 @@ const Snackbar = ({
                 compact={false}
                 mode="text"
                 theme={theme}
+                label={actionLabel}
                 {...actionProps}
-              >
-                {actionLabel}
-              </Button>
+              />
             ) : null}
             {isIconButton ? (
               <IconButton

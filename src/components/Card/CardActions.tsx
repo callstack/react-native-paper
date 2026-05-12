@@ -25,8 +25,8 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
  * const MyComponent = () => (
  *   <Card>
  *     <Card.Actions>
- *       <Button>Cancel</Button>
- *       <Button>Ok</Button>
+ *       <Button label="Cancel" />
+ *       <Button label="Ok" />
  *     </Card.Actions>
  *   </Card>
  * );

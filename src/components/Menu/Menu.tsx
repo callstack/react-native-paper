@@ -154,7 +154,7 @@ const isBrowser = () => Platform.OS === 'web' && 'document' in global;
  *         <Menu
  *           visible={visible}
  *           onDismiss={closeMenu}
- *           anchor={<Button onPress={openMenu}>Show menu</Button>}>
+ *           anchor={<Button onPress={openMenu} label="Show menu" />}>
  *           <Menu.Item onPress={() => {}} title="Item 1" />
  *           <Menu.Item onPress={() => {}} title="Item 2" />
  *           <Divider />

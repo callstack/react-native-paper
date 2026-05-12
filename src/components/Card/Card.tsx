@@ -127,8 +127,8 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
  *     </Card.Content>
  *     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
  *     <Card.Actions>
- *       <Button>Cancel</Button>
- *       <Button>Ok</Button>
+ *       <Button label="Cancel" />
+ *       <Button label="Ok" />
  *     </Card.Actions>
  *   </Card>
  * );

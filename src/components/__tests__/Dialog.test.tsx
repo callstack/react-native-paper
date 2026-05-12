@@ -110,8 +110,8 @@ describe('DialogActions', () => {
   it('should render passed children', () => {
     const { getByTestId } = render(
       <Dialog.Actions>
-        <Button testID="button-cancel">Cancel</Button>
-        <Button testID="button-ok">Ok</Button>
+        <Button testID="button-cancel" label="Cancel" />
+        <Button testID="button-ok" label="Ok" />
       </Dialog.Actions>
     );
 
@@ -122,8 +122,8 @@ describe('DialogActions', () => {
   it('should apply default styles', () => {
     const { getByTestId } = render(
       <Dialog.Actions testID="dialog-actions">
-        <Button>Cancel</Button>
-        <Button>Ok</Button>
+        <Button label="Cancel" />
+        <Button label="Ok" />
       </Dialog.Actions>
     );
 
@@ -141,8 +141,8 @@ describe('DialogActions', () => {
   it('should apply custom styles', () => {
     const { getByTestId } = render(
       <Dialog.Actions testID="dialog-actions">
-        <Button style={styles.spacing}>Cancel</Button>
-        <Button style={styles.noSpacing}>Ok</Button>
+        <Button style={styles.spacing} label="Cancel" />
+        <Button style={styles.noSpacing} label="Ok" />
       </Dialog.Actions>
     );
 
