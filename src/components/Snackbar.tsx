@@ -236,7 +236,7 @@ const Snackbar = ({
     }
   }, [visible, handleOnVisible, handleOnHidden]);
 
-  const { colors, roundness } = theme as Theme;
+  const { colors } = theme as Theme;
 
   if (hidden) {
     return null;
@@ -296,7 +296,7 @@ const Snackbar = ({
           styles.container,
           {
             backgroundColor,
-            borderRadius: roundness,
+            borderRadius: (theme as Theme).shapes.corner.extraSmall,
             opacity: opacity,
             transform: [
               {

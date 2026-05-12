@@ -132,7 +132,12 @@ it('renders FAB with custom border radius', () => {
 
 it('renders FAB with zero border radius', () => {
   const { getByTestId } = render(
-    <FAB theme={{ roundness: 0 }} onPress={() => {}} icon="plus" testID="fab" />
+    <FAB
+      theme={{ shapes: { corner: { large: 0 } } }}
+      onPress={() => {}}
+      icon="plus"
+      testID="fab"
+    />
   );
 
   expect(getByTestId('fab-container')).toHaveStyle({ borderRadius: 0 });

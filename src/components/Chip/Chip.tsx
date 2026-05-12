@@ -205,7 +205,6 @@ const Chip = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { roundness } = theme;
   const isWeb = Platform.OS === 'web';
 
   const { current: elevation } = React.useRef<Animated.Value>(
@@ -244,7 +243,7 @@ const Chip = ({
   });
 
   const opacity = 0.38;
-  const defaultBorderRadius = roundness * 2;
+  const defaultBorderRadius = theme.shapes.corner.small;
   const iconSize = 18;
 
   const {

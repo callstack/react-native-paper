@@ -181,7 +181,7 @@ const Card = (
   const { current: elevationDarkAdaptive } = React.useRef<Animated.Value>(
     new Animated.Value(cardElevation)
   );
-  const { animation, dark, mode, roundness } = theme;
+  const { animation, dark, mode } = theme;
 
   const prevDarkRef = React.useRef<boolean>(dark);
   React.useEffect(() => {
@@ -267,7 +267,7 @@ const Card = (
   );
 
   const borderRadiusCombinedStyles = {
-    borderRadius: 3 * roundness,
+    borderRadius: theme.shapes.corner.medium,
     ...borderRadiusStyles,
   };
 

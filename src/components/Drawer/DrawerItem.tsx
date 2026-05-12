@@ -100,7 +100,6 @@ const DrawerItem = ({
   ...rest
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
-  const { roundness } = theme;
 
   const backgroundColor = active ? theme.colors.secondaryContainer : undefined;
   const contentColor = active
@@ -108,7 +107,7 @@ const DrawerItem = ({
     : theme.colors.onSurfaceVariant;
 
   const labelMargin = icon ? 12 : 0;
-  const borderRadius = 7 * roundness;
+  const borderRadius = theme.shapes.corner.extraLarge;
   const font = theme.fonts.labelLarge;
 
   return (

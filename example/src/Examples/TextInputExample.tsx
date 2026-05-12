@@ -672,7 +672,7 @@ const TextInputExample = () => {
               <TextInput
                 mode="outlined"
                 theme={{
-                  roundness: 25,
+                  shapes: { corner: { extraSmall: 25 } },
                 }}
                 label="Outlined text input with custom roundness"
               />
@@ -681,7 +681,7 @@ const TextInputExample = () => {
               <TextInput
                 mode="outlined"
                 label="Outlined text input without roundness"
-                theme={{ roundness: 0 }}
+                theme={{ shapes: { corner: { extraSmall: 0 } } }}
               />
             </View>
             <View style={styles.inputContainerStyle}>

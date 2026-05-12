@@ -11,8 +11,7 @@
 import { DarkTheme } from './theme/schemes/DarkTheme';
 import { LightTheme } from './theme/schemes/LightTheme';
 import { Palette } from './theme/tokens';
-import { TypescaleKey } from './types';
-import type { Theme, Elevation } from './types';
+import type { Theme, Elevation, TypescaleKey } from './types';
 
 /**
  * @deprecated Use `LightTheme` instead. Will be removed in a future version.
@@ -32,8 +31,6 @@ export const MD3Colors = Palette;
 /**
  * @deprecated Use `TypescaleKey` instead. Will be removed in a future version.
  */
-export const MD3TypescaleKey = TypescaleKey;
-// eslint-disable-next-line no-redeclare
 export type MD3TypescaleKey = TypescaleKey;
 
 /**

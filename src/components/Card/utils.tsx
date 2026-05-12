@@ -26,17 +26,15 @@ export const getCardCoverStyle = ({
   index?: number;
   total?: number;
 }) => {
-  const { roundness } = theme;
-
   if (Object.keys(borderRadiusStyles).length > 0) {
     return {
-      borderRadius: 3 * roundness,
+      borderRadius: theme.shapes.corner.medium,
       ...borderRadiusStyles,
     };
   }
 
   return {
-    borderRadius: 3 * roundness,
+    borderRadius: theme.shapes.corner.medium,
   };
 };
 

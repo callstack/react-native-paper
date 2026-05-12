@@ -221,7 +221,7 @@ describe('getCardCoverStyle - border radius', () => {
         theme: getTheme(),
         borderRadiusStyles: {},
       })
-    ).toMatchObject({ borderRadius: 3 * getTheme().roundness });
+    ).toMatchObject({ borderRadius: getTheme().shapes.corner.medium });
   });
 });
 

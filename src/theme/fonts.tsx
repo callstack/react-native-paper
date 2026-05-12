@@ -2,12 +2,8 @@ import { typescale } from './tokens';
 import type { TypescaleStyle, Typescale, TypescaleKey } from './types';
 
 type FontsConfig =
-  | {
-      [key in TypescaleKey]: Partial<TypescaleStyle>;
-    }
-  | {
-      [key: string]: TypescaleStyle;
-    }
+  | Record<TypescaleKey, Partial<TypescaleStyle>>
+  | Record<string, TypescaleStyle>
   | Partial<TypescaleStyle>;
 
 function configureFontsConfig(

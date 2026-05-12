@@ -88,7 +88,7 @@ export type Props = {
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
    */
-  labelVariant?: keyof typeof TypescaleKey;
+  labelVariant?: TypescaleKey;
   /**
    * Specifies the largest possible scale a label font can reach.
    */

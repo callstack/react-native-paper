@@ -80,7 +80,8 @@ const TextInputFlat = ({
   const isAndroid = Platform.OS === 'android';
   const { direction } = useLocale();
   const isRTL = direction === 'rtl';
-  const { colors, roundness } = theme;
+  const { colors } = theme;
+  const roundness = theme.shapes.corner.extraSmall;
   const font = theme.fonts.bodyLarge;
   const hasActiveOutline = parentState.focused || error;
 
@@ -158,8 +159,8 @@ const TextInputFlat = ({
 
   const containerStyle = {
     backgroundColor,
-    borderTopLeftRadius: theme.roundness,
-    borderTopRightRadius: theme.roundness,
+    borderTopLeftRadius: roundness,
+    borderTopRightRadius: roundness,
   };
 
   const labelScale = MINIMIZED_LABEL_FONT_SIZE / fontSize;
