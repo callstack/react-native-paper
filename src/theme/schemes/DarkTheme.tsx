@@ -7,7 +7,6 @@ import type { Theme } from '../types';
 export const DarkTheme: Theme = {
   ...themeDefaults,
   dark: true,
-  mode: 'adaptive',
   colors: buildScheme(tokens.md.ref.palette, tokens.md.ref, { mode: 'dark' }),
   shapes: defaultShapes,
 };

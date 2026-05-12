@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import type { MD3Theme } from 'react-native-paper';
+import type { Theme } from 'react-native-paper';
 
 export const PreferencesContext = React.createContext<{
   toggleTheme: () => void;
@@ -9,7 +9,7 @@ export const PreferencesContext = React.createContext<{
   toggleCustomFont: () => void;
   toggleRippleEffect: () => void;
   toggleShouldUseDynamicTheme?: () => void;
-  theme: MD3Theme;
+  theme: Theme;
   rtl: boolean;
   collapsed: boolean;
   customFontLoaded: boolean;

@@ -9,8 +9,8 @@ import Link from '@docusaurus/Link';
 import { useColorMode } from '@docusaurus/theme-common';
 import {
   Button,
-  MD3DarkTheme as DarkTheme,
-  MD3LightTheme as DefaultTheme,
+  DarkTheme,
+  LightTheme,
   PaperProvider,
 } from 'react-native-paper';
 
@@ -95,7 +95,7 @@ const Shimmer = () => {
 const ThemedGetStarted = () => {
   const isDarkTheme = useColorMode().colorMode === 'dark';
   return (
-    <PaperProvider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
+    <PaperProvider theme={isDarkTheme ? DarkTheme : LightTheme}>
       <GetStartedButton />
     </PaperProvider>
   );

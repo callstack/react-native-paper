@@ -3,7 +3,7 @@ import type { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 import { Animated, FlatList, Platform, StyleSheet, View } from 'react-native';
 
 import Icon from '@react-native-vector-icons/material-design-icons';
-import { Avatar, MD3Colors, Text } from 'react-native-paper';
+import { Avatar, Palette, Text, useTheme } from 'react-native-paper';
 
 import CustomFAB from './CustomFAB';
 import CustomFABControls, {
@@ -11,8 +11,6 @@ import CustomFABControls, {
   initialControls,
 } from './CustomFABControls';
 import { animatedFABExampleData } from '../../../utils';
-import { useExampleTheme } from '../../hooks/useExampleTheme';
-
 type Item = {
   id: string;
   sender: string;
@@ -26,7 +24,7 @@ type Item = {
 };
 
 const AnimatedFABExample = () => {
-  const { colors } = useExampleTheme();
+  const { colors } = useTheme();
 
   const isIOS = Platform.OS === 'ios';
 
@@ -46,7 +44,7 @@ const AnimatedFABExample = () => {
           <Avatar.Text
             style={[styles.avatar, { backgroundColor: item.bgColor }]}
             label={item.initials}
-            color={MD3Colors.primary100}
+            color={Palette.primary100}
             size={40}
           />
           <View style={styles.itemTextContentContainer}>
@@ -89,7 +87,7 @@ const AnimatedFABExample = () => {
               <Icon
                 name={item.favorite ? 'star' : 'star-outline'}
                 color={
-                  item.favorite ? MD3Colors.error70 : MD3Colors.neutralVariant70
+                  item.favorite ? Palette.error70 : Palette.neutralVariant70
                 }
                 size={20}
                 onPress={() => setVisible(!visible)}

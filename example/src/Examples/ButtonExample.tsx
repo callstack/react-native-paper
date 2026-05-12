@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
-import { Button, List, Text } from 'react-native-paper';
+import { Button, List, Text, useTheme } from 'react-native-paper';
 
-import { useExampleTheme } from '../hooks/useExampleTheme';
 import ScreenWrapper from '../ScreenWrapper';
 
 const ButtonExample = () => {
-  const theme = useExampleTheme();
+  const theme = useTheme();
 
   const color = theme.colors.inversePrimary;
 
