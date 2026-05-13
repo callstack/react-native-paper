@@ -10,6 +10,13 @@ const ButtonExample = () => {
 
   const color = theme.colors.inversePrimary;
 
+  const [selectedToggles, setSelectedToggles] = React.useState<
+    Record<string, boolean>
+  >({});
+
+  const toggle = (key: string) =>
+    setSelectedToggles((prev) => ({ ...prev, [key]: !prev[key] }));
+
   return (
     <ScreenWrapper>
       <List.Section title="Text button (text)">
@@ -336,6 +343,76 @@ const ButtonExample = () => {
                 style={styles.button}
                 icon="camera"
                 label={`Compact ${mode}`}
+              />
+            );
+          })}
+        </View>
+      </List.Section>
+      <List.Section title="Size (expressive)">
+        <View style={styles.row}>
+          {(
+            ['extra-small', 'small', 'medium', 'large', 'extra-large'] as const
+          ).map((size) => (
+            <Button
+              key={size}
+              mode="contained"
+              size={size}
+              icon="star"
+              onPress={() => {}}
+              style={styles.button}
+              label={size}
+            />
+          ))}
+        </View>
+      </List.Section>
+      <List.Section title="Shape (expressive)">
+        <View style={styles.row}>
+          {(['extra-small', 'small', 'medium', 'large'] as const).map(
+            (size) => (
+              <Button
+                key={`round-${size}`}
+                mode="outlined"
+                size={size}
+                shape="round"
+                onPress={() => {}}
+                style={styles.button}
+                label={`${size} round`}
+              />
+            )
+          )}
+        </View>
+        <View style={styles.row}>
+          {(['extra-small', 'small', 'medium', 'large'] as const).map(
+            (size) => (
+              <Button
+                key={`square-${size}`}
+                mode="outlined"
+                size={size}
+                shape="square"
+                onPress={() => {}}
+                style={styles.button}
+                label={`${size} square`}
+              />
+            )
+          )}
+        </View>
+      </List.Section>
+      <List.Section title="Toggle (expressive)">
+        <View style={styles.row}>
+          {(['outlined', 'text', 'contained-tonal'] as const).map((mode) => {
+            const key = `toggle-${mode}`;
+            const selected = !!selectedToggles[key];
+            return (
+              <Button
+                key={key}
+                mode={mode}
+                size="small"
+                shape="round"
+                selected={selected}
+                onPress={() => toggle(key)}
+                style={styles.button}
+                icon={selected ? 'check' : 'plus'}
+                label={mode}
               />
             );
           })}
