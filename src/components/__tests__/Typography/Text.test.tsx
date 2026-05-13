@@ -1,8 +1,7 @@
 import * as React from 'react';
 
-import { render } from '@testing-library/react-native';
-
 import PaperProvider from '../../../core/PaperProvider';
+import { render } from '../../../test-utils';
 import configureFonts from '../../../theme/fonts';
 import { LightTheme } from '../../../theme/schemes';
 import { tokens } from '../../../theme/tokens';

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   GestureResponderEvent,
-  I18nManager,
   NativeSyntheticEvent,
   StyleProp,
   StyleSheet,
@@ -16,6 +15,7 @@ import {
 import { ListAccordionGroupContext } from './ListAccordionGroup';
 import type { ListChildProps, Style } from './utils';
 import { getAccordionColors, getLeftStyles } from './utils';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
@@ -198,6 +198,7 @@ const ListAccordion = ({
   hitSlop,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   const [expanded, setExpanded] = React.useState<boolean>(
     expandedProp || false
   );
@@ -316,7 +317,7 @@ const ListAccordion = ({
                   name={isExpanded ? 'chevron-up' : 'chevron-down'}
                   color={descriptionColor}
                   size={24}
-                  direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                  direction={direction}
                 />
               )}
             </View>

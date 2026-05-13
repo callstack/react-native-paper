@@ -1,9 +1,10 @@
 import React from 'react';
 import { Animated, StyleSheet, Text } from 'react-native';
 
-import { act, render } from '@testing-library/react-native';
+import { act } from '@testing-library/react-native';
 
 import { getTheme } from '../../../core/theming';
+import { render } from '../../../test-utils';
 import { Palette } from '../../../theme/tokens';
 import Button from '../../Button/Button';
 import Card from '../../Card/Card';

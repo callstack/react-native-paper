@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Animated } from 'react-native';
 
-import { act, fireEvent, render } from '@testing-library/react-native';
+import { act, fireEvent } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
+import { render } from '../../test-utils';
 import FAB from '../FAB';
 import { getFABGroupColors } from '../FAB/utils';
 

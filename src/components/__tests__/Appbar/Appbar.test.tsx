@@ -1,10 +1,11 @@
 import React from 'react';
 import { Animated } from 'react-native';
 
-import { act, render } from '@testing-library/react-native';
+import { act } from '@testing-library/react-native';
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock';
 
 import { getTheme } from '../../../core/theming';
+import { render } from '../../../test-utils';
 import { tokens } from '../../../theme/tokens';
 import Appbar from '../../Appbar';
 import {

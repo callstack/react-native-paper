@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react-native';
-
+import { render } from '../../../test-utils';
 import DrawerCollapsedItem from '../../Drawer/DrawerCollapsedItem';
 
 describe('DrawerCollapsedItem', () => {

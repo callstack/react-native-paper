@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Animated } from 'react-native';
 
-import { act, fireEvent, render } from '@testing-library/react-native';
+import { act, fireEvent } from '@testing-library/react-native';
 
+import { render } from '../../test-utils';
 import * as Avatar from '../Avatar/Avatar';
 import Searchbar from '../Searchbar';
 

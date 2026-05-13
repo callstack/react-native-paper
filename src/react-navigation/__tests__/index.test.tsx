@@ -2,9 +2,10 @@ import * as React from 'react';
 import { Button, Text, View } from 'react-native';
 
 import { NavigationContainer, ParamListBase } from '@react-navigation/native';
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
 
 import PaperProvider from '../../core/PaperProvider';
+import { render } from '../../test-utils';
 import {
   createMaterialBottomTabNavigator,
   MaterialBottomTabScreenProps,

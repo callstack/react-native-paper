@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 
-import { act, render } from '@testing-library/react-native';
+import { act } from '@testing-library/react-native';
 
 import { getTheme } from '../../core/theming';
+import { render } from '../../test-utils';
 import { pink500 } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
 import IconButton from '../IconButton/IconButton';

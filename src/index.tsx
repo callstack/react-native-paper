@@ -8,10 +8,13 @@ export {
   adaptNavigationTheme,
 } from './core/theming';
 
+export { useLocale, LocaleProvider } from './core/locale';
+
 export * from './theme/schemes';
 
 export { default as Provider } from './core/PaperProvider';
 export { default as PaperProvider } from './core/PaperProvider';
+
 export { default as shadow } from './theme/shadow';
 export { default as configureFonts } from './theme/fonts';
 

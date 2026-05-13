@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Animated,
   GestureResponderEvent,
-  I18nManager,
   Platform,
   StyleProp,
   StyleSheet,
@@ -19,6 +18,7 @@ import type { IconSource } from './Icon';
 import IconButton from './IconButton/IconButton';
 import MaterialCommunityIcon from './MaterialCommunityIcon';
 import Surface from './Surface';
+import { useLocale } from '../core/locale';
 import { useInternalTheme } from '../core/theming';
 import { cornerNone } from '../theme/tokens/sys/shape';
 import type { Theme, ThemeProp } from '../types';
@@ -194,6 +194,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
     ref
   ) => {
     const theme = useInternalTheme(themeOverrides);
+    const { direction } = useLocale();
     const { colors, fonts } = theme as Theme;
     const root = React.useRef<TextInput>(null);
 
@@ -229,6 +230,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
     };
 
     const isBarMode = mode === 'bar';
+    const inputTextAlign = direction === 'rtl' ? 'right' : 'left';
     const shouldRenderTraileringIcon =
       isBarMode &&
       traileringIcon &&
@@ -265,7 +267,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
                 name="magnify"
                 color={color}
                 size={size}
-                direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                direction={direction}
               />
             ))
           }
@@ -280,6 +282,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
               color: textColor,
               ...font,
               ...Platform.select({ web: { outline: 'none' } }),
+              textAlign: inputTextAlign,
             },
             isBarMode ? styles.barModeInput : styles.viewModeInput,
             inputStyle,
@@ -326,7 +329,7 @@ const Searchbar = forwardRef<TextInputHandles, Props>(
                     name="close"
                     color={color}
                     size={size}
-                    direction={I18nManager.getConstants().isRTL ? 'rtl' : 'ltr'}
+                    direction={direction}
                   />
                 ))
               }
@@ -376,7 +379,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingLeft: 8,
     alignSelf: 'stretch',
-    textAlign: I18nManager.getConstants().isRTL ? 'right' : 'left',
     minWidth: 0,
   },
   barModeInput: {

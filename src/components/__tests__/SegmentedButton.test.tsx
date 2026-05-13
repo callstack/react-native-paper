@@ -1,8 +1,7 @@
 import * as React from 'react';
 
-import { render } from '@testing-library/react-native';
-
 import { getTheme } from '../../core/theming';
+import { render } from '../../test-utils';
 import { tokens } from '../../theme/tokens';
 import SegmentedButtons from '../SegmentedButtons/SegmentedButtons';
 import {

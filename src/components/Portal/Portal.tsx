@@ -4,6 +4,7 @@ import type { InternalTheme } from 'src/types';
 
 import PortalConsumer from './PortalConsumer';
 import PortalHost, { PortalContext, PortalMethods } from './PortalHost';
+import { LocaleContext, LocaleProvider } from '../../core/locale';
 import {
   Consumer as SettingsConsumer,
   Provider as SettingsProvider,
@@ -49,19 +50,25 @@ class Portal extends React.Component<Props> {
     const { children, theme } = this.props;
 
     return (
-      <SettingsConsumer>
-        {(settings) => (
-          <PortalContext.Consumer>
-            {(manager) => (
-              <PortalConsumer manager={manager as PortalMethods}>
-                <SettingsProvider value={settings}>
-                  <ThemeProvider theme={theme}>{children}</ThemeProvider>
-                </SettingsProvider>
-              </PortalConsumer>
+      <LocaleContext.Consumer>
+        {(locale) => (
+          <SettingsConsumer>
+            {(settings) => (
+              <PortalContext.Consumer>
+                {(manager) => (
+                  <PortalConsumer manager={manager as PortalMethods}>
+                    <SettingsProvider value={settings}>
+                      <LocaleProvider direction={locale!.direction}>
+                        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+                      </LocaleProvider>
+                    </SettingsProvider>
+                  </PortalConsumer>
+                )}
+              </PortalContext.Consumer>
             )}
-          </PortalContext.Consumer>
+          </SettingsConsumer>
         )}
-      </SettingsConsumer>
+      </LocaleContext.Consumer>
     );
   }
 }

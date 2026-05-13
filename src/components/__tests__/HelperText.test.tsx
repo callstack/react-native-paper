@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { render } from '@testing-library/react-native';
-
 import { getTheme } from '../../core/theming';
+import { render } from '../../test-utils';
 import HelperText from '../HelperText/HelperText';
 
 describe('HelperText', () => {

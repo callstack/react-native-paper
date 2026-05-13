@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 
-import { act, render } from '@testing-library/react-native';
+import { act } from '@testing-library/react-native';
 
+import { render } from '../../test-utils';
 import { red200, white } from '../../theme/colors';
 import Snackbar from '../Snackbar';
 

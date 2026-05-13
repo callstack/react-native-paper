@@ -4,7 +4,6 @@ import {
   Dimensions,
   Easing,
   EmitterSubscription,
-  I18nManager,
   Keyboard,
   KeyboardEvent as RNKeyboardEvent,
   LayoutRectangle,
@@ -22,6 +21,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import MenuItem from './MenuItem';
+import { useLocale } from '../../core/locale';
 import { useInternalTheme } from '../../core/theming';
 import type { Elevation, Theme, ThemeProp } from '../../types';
 import { addEventListener } from '../../utils/addEventListener';
@@ -200,6 +200,7 @@ const Menu = ({
   keyboardShouldPersistTaps,
 }: Props) => {
   const theme = useInternalTheme(themeOverrides);
+  const { direction } = useLocale();
   const { colors: md3Colors } = theme as Theme;
   const insets = useSafeAreaInsets();
   const [rendered, setRendered] = React.useState(visible);
@@ -630,7 +631,7 @@ const Menu = ({
     top: isCoordinate(anchor)
       ? topTransformation
       : topTransformation + additionalVerticalValue,
-    ...(I18nManager.getConstants().isRTL
+    ...(direction === 'rtl'
       ? { right: leftTransformation }
       : { left: leftTransformation }),
   };
