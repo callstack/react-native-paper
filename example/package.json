@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.2",
-    "@expo/webpack-config": "~19.0.1",
     "@react-native-async-storage/async-storage": "2.2.0",
     "@react-native-masked-view/masked-view": "0.3.2",
     "@react-navigation/bottom-tabs": "^7.3.10",
@@ -30,7 +29,6 @@
     "expo-splash-screen": "~56.0.5",
     "expo-status-bar": "~56.0.4",
     "expo-updates": "~56.0.10",
-    "file-loader": "^6.2.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-native": "0.85.3",
@@ -40,14 +38,12 @@
     "react-native-safe-area-context": "~5.7.0",
     "react-native-screens": "4.25.0",
     "react-native-web": "^0.21.0",
-    "react-native-worklets": "0.8.3",
-    "typeface-roboto": "^1.1.13"
+    "react-native-worklets": "0.8.3"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
     "babel-plugin-module-resolver": "^5.0.0",
-    "babel-preset-expo": "~56.0.0",
-    "url-loader": "^4.1.1"
+    "babel-preset-expo": "~56.0.0"
   },
   "engines": {
     "node": ">=20"
