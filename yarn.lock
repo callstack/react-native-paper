@@ -10677,13 +10677,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"escape-string-regexp@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "escape-string-regexp@npm:5.0.0"
-  checksum: 10c0/6366f474c6f37a802800a435232395e04e9885919873e382b157ab7e8f0feb8fed71497f84a6f6a81a49aab41815522f5839112bd38026d203aea0c91622df95
-  languageName: node
-  linkType: hard
-
 "eslint-config-prettier@npm:^8.3.0":
   version: 8.10.2
   resolution: "eslint-config-prettier@npm:8.10.2"
@@ -11668,7 +11661,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.1.1, fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.0, fast-glob@npm:^3.3.3":
+"fast-glob@npm:^3.1.1, fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.0":
   version: 3.3.3
   resolution: "fast-glob@npm:3.3.3"
   dependencies:
@@ -19698,16 +19691,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-monorepo-config@npm:^0.1.6":
-  version: 0.1.10
-  resolution: "react-native-monorepo-config@npm:0.1.10"
-  dependencies:
-    escape-string-regexp: "npm:^5.0.0"
-    fast-glob: "npm:^3.3.3"
-  checksum: 10c0/fa88a725b4fe65443291fba746cccf2a3732defe6c8e1f7aab532b8345feac2b34af7fe17a28a96d30c7b9520f0f99e42962069ef8eb31acc4d33e7aa3b68a83
-  languageName: node
-  linkType: hard
-
 "react-native-paper-example@workspace:example":
   version: 0.0.0-use.local
   resolution: "react-native-paper-example@workspace:example"
@@ -19734,7 +19717,6 @@ __metadata:
     react-dom: "npm:19.2.3"
     react-native: "npm:0.85.3"
     react-native-gesture-handler: "npm:~2.31.1"
-    react-native-monorepo-config: "npm:^0.1.6"
     react-native-reanimated: "npm:4.3.1"
     react-native-safe-area-context: "npm:~5.7.0"
     react-native-screens: "npm:4.25.0"
