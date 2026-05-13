@@ -15,10 +15,12 @@ import {
 
 import {
   ButtonMode,
+  ButtonShape,
   ButtonSize,
   getButtonColors,
   getButtonIconStyle,
   getButtonRippleColor,
+  getButtonShapeRadius,
   getButtonSizeStyle,
   getButtonTouchableRippleStyle,
 } from './utils';
@@ -67,6 +69,14 @@ export type Props = $Omit<
    * between icon and label, and the label typescale.
    */
   size?: ButtonSize;
+  /**
+   * Shape variant of the button (Material Design 3 expressive). `'round'`
+   * uses the full-pill corner radius; `'square'` uses a smaller per-size
+   * corner radius. When omitted, the button keeps its legacy corner radius
+   * (`theme.shapes.corner.largeIncreased`). Overridden by an explicit
+   * `borderRadius` in `style`.
+   */
+  shape?: ButtonShape;
   /**
    * Custom button's background color.
    */
@@ -214,6 +224,7 @@ const Button = (
     compact,
     mode = 'text',
     size,
+    shape,
     dark,
     loading,
     icon,
@@ -339,7 +350,9 @@ const Button = (
     return radiusStyles;
   }, [style]);
 
-  const borderRadius = theme.shapes.corner.largeIncreased;
+  const borderRadius = shape
+    ? getButtonShapeRadius({ size, shape })
+    : theme.shapes.corner.largeIncreased;
 
   const {
     backgroundColor,

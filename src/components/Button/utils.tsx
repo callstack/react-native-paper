@@ -4,6 +4,7 @@ import color from 'color';
 
 import { black, white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
+import { cornerFull } from '../../theme/tokens/sys/shape';
 import type { InternalTheme, Theme } from '../../types';
 import { splitStyles } from '../../utils/splitStyles';
 
@@ -84,6 +85,35 @@ const BUTTON_SIZE_STYLES: Record<ButtonSize, ButtonSizeStyle> = {
 
 export const getButtonSizeStyle = (size: ButtonSize): ButtonSizeStyle =>
   BUTTON_SIZE_STYLES[size];
+
+export type ButtonShape = 'round' | 'square';
+
+/**
+ * Per-size corner radii for the Material Design 3 expressive shape variants.
+ * `round` is always the full-pill radius; `square` uses a per-size smaller
+ * corner. Used only when the `shape` prop is set on `Button`.
+ */
+const BUTTON_SHAPE_RADIUS: Record<ButtonSize, Record<ButtonShape, number>> = {
+  'extra-small': { round: cornerFull, square: 12 },
+  small: { round: cornerFull, square: 12 },
+  medium: { round: cornerFull, square: 16 },
+  large: { round: cornerFull, square: 28 },
+  'extra-large': { round: cornerFull, square: 28 },
+};
+
+const DEFAULT_SHAPE_RADIUS: Record<ButtonShape, number> = {
+  round: cornerFull,
+  square: 12,
+};
+
+export const getButtonShapeRadius = ({
+  size,
+  shape,
+}: {
+  size?: ButtonSize;
+  shape: ButtonShape;
+}): number =>
+  size ? BUTTON_SHAPE_RADIUS[size][shape] : DEFAULT_SHAPE_RADIUS[shape];
 
 /**
  * Returns the margins applied to the button's icon (or loading indicator)

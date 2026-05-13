@@ -12,6 +12,7 @@ import Button from '../Button/Button';
 import {
   getButtonColors,
   getButtonRippleColor,
+  getButtonShapeRadius,
   getButtonSizeStyle,
 } from '../Button/utils';
 
@@ -29,6 +30,9 @@ const styles = StyleSheet.create({
   },
   noRadius: {
     borderRadius: 0,
+  },
+  overrideRadius: {
+    borderRadius: 4,
   },
 });
 
@@ -877,6 +881,59 @@ describe('size prop', () => {
       });
     })
   );
+});
+
+describe('getButtonShapeRadius', () => {
+  it.each([
+    ['extra-small', 9999, 12],
+    ['small', 9999, 12],
+    ['medium', 9999, 16],
+    ['large', 9999, 28],
+    ['extra-large', 9999, 28],
+  ] as const)('returns expected radii for size=%s', (size, round, square) => {
+    expect(getButtonShapeRadius({ size, shape: 'round' })).toBe(round);
+    expect(getButtonShapeRadius({ size, shape: 'square' })).toBe(square);
+  });
+
+  it('falls back to default radii when size is omitted', () => {
+    expect(getButtonShapeRadius({ shape: 'round' })).toBe(9999);
+    expect(getButtonShapeRadius({ shape: 'square' })).toBe(12);
+  });
+});
+
+describe('shape prop', () => {
+  it('applies the round (full-pill) radius', () => {
+    const { getByTestId } = render(
+      <Button testID="button" shape="round" label="X" />
+    );
+    expect(getByTestId('button-container')).toHaveStyle({ borderRadius: 9999 });
+  });
+
+  it('applies the square radius (default size)', () => {
+    const { getByTestId } = render(
+      <Button testID="button" shape="square" label="X" />
+    );
+    expect(getByTestId('button-container')).toHaveStyle({ borderRadius: 12 });
+  });
+
+  it('uses the per-size square radius when both size and shape are set', () => {
+    const { getByTestId } = render(
+      <Button testID="button" size="large" shape="square" label="X" />
+    );
+    expect(getByTestId('button-container')).toHaveStyle({ borderRadius: 28 });
+  });
+
+  it('lets an explicit borderRadius in `style` override the shape', () => {
+    const { getByTestId } = render(
+      <Button
+        testID="button"
+        shape="round"
+        style={styles.overrideRadius}
+        label="X"
+      />
+    );
+    expect(getByTestId('button-container')).toHaveStyle({ borderRadius: 4 });
+  });
 });
 
 it('animated value changes correctly', () => {
