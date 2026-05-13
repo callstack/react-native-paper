@@ -44,7 +44,6 @@ const CustomControl = ({
     ({ item }: ListRenderItemInfo<(typeof options)[number]>) => {
       return (
         <TouchableOpacity
-          accessibilityRole="button"
           onPress={() => onChange(item)}
           style={styles.controlItem}
         >
