@@ -183,7 +183,7 @@ function DrawerItems() {
           <Drawer.Section title="Preferences">
             {dynamicThemeSupported ? (
               <TouchableRipple onPress={toggleShouldUseDynamicTheme}>
-                <View style={(styles.preference, styles.v3Preference)}>
+                <View style={[styles.preference, styles.v3Preference]}>
                   <Text variant="labelLarge">Use Dynamic Theme</Text>
                   <View pointerEvents="none">
                     <Switch value={shouldUseDynamicTheme} />
