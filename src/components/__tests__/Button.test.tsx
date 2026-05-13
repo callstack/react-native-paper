@@ -936,6 +936,75 @@ describe('shape prop', () => {
   });
 });
 
+describe('selected prop', () => {
+  it('sets accessibilityState.selected', () => {
+    const { getByTestId } = render(
+      <Button testID="button" selected onPress={() => {}} label="X" />
+    );
+
+    expect(getByTestId('button').props.accessibilityState).toMatchObject({
+      selected: true,
+    });
+  });
+
+  it('flips a round button into the square radius when selected', () => {
+    const { getByTestId } = render(
+      <Button testID="button" size="large" shape="round" selected label="X" />
+    );
+
+    expect(getByTestId('button-container')).toHaveStyle({ borderRadius: 28 });
+  });
+
+  it('flips a square button into the round radius when selected', () => {
+    const { getByTestId } = render(
+      <Button testID="button" shape="square" selected label="X" />
+    );
+
+    expect(getByTestId('button-container')).toHaveStyle({ borderRadius: 9999 });
+  });
+
+  it('gives an outlined button the tonal-selected appearance', () => {
+    expect(
+      getButtonColors({
+        theme: getTheme(),
+        mode: 'outlined',
+        selected: true,
+      })
+    ).toMatchObject({
+      backgroundColor: getTheme().colors.secondaryContainer,
+      textColor: getTheme().colors.onSecondaryContainer,
+      borderColor: 'transparent',
+      borderWidth: 0,
+    });
+  });
+
+  it('gives a text-mode button the tonal-selected appearance', () => {
+    expect(
+      getButtonColors({
+        theme: getTheme(),
+        mode: 'text',
+        selected: true,
+      })
+    ).toMatchObject({
+      backgroundColor: getTheme().colors.secondaryContainer,
+      textColor: getTheme().colors.onSecondaryContainer,
+    });
+  });
+
+  it('does not change contained colors when selected', () => {
+    expect(
+      getButtonColors({
+        theme: getTheme(),
+        mode: 'contained',
+        selected: true,
+      })
+    ).toMatchObject({
+      backgroundColor: getTheme().colors.primary,
+      textColor: getTheme().colors.onPrimary,
+    });
+  });
+});
+
 it('animated value changes correctly', () => {
   const value = new Animated.Value(1);
   const { getByTestId } = render(

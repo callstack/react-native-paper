@@ -78,6 +78,19 @@ export type Props = $Omit<
    */
   shape?: ButtonShape;
   /**
+   * Whether this button is in the selected state (Material Design 3
+   * expressive toggle). When `true`:
+   *
+   * - The `shape` is flipped: `'round'` becomes `'square'` and vice versa.
+   * - For `outlined` and `text` modes, the button adopts a filled
+   *   `secondaryContainer` appearance (matches `contained-tonal`).
+   * - `accessibilityState.selected` is set so screen readers announce the
+   *   toggle state.
+   *
+   * Other modes only flip the shape.
+   */
+  selected?: boolean;
+  /**
    * Custom button's background color.
    */
   buttonColor?: ColorValue;
@@ -225,6 +238,7 @@ const Button = (
     mode = 'text',
     size,
     shape,
+    selected,
     dark,
     loading,
     icon,
@@ -350,8 +364,17 @@ const Button = (
     return radiusStyles;
   }, [style]);
 
-  const borderRadius = shape
-    ? getButtonShapeRadius({ size, shape })
+  // When the button is `selected`, flip the requested shape so the
+  // unselected/selected pair contrasts visually (round ↔ square).
+  const effectiveShape: ButtonShape | undefined = shape
+    ? selected
+      ? shape === 'round'
+        ? 'square'
+        : 'round'
+      : shape
+    : undefined;
+  const borderRadius = effectiveShape
+    ? getButtonShapeRadius({ size, shape: effectiveShape })
     : theme.shapes.corner.largeIncreased;
 
   const {
@@ -370,8 +393,9 @@ const Button = (
         mode,
         disabled,
         dark,
+        selected,
       }),
-    [customButtonColor, customTextColor, theme, mode, disabled, dark]
+    [customButtonColor, customTextColor, theme, mode, disabled, dark, selected]
   );
 
   const rippleColor = React.useMemo(
@@ -479,7 +503,7 @@ const Button = (
         accessibilityLabel={accessibilityLabel}
         accessibilityHint={accessibilityHint}
         accessibilityRole={accessibilityRole}
-        accessibilityState={{ disabled }}
+        accessibilityState={{ disabled, selected }}
         accessible={accessible}
         hitSlop={hitSlop}
         disabled={disabled}

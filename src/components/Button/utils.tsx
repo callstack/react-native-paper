@@ -152,6 +152,7 @@ type BaseProps = {
   isMode: (mode: ButtonMode) => boolean;
   theme: InternalTheme;
   disabled?: boolean;
+  selected?: boolean;
 };
 
 const isDark = ({
@@ -177,6 +178,7 @@ const getButtonBackgroundColor = ({
   theme,
   disabled,
   customButtonColor,
+  selected,
 }: BaseProps & {
   customButtonColor?: ColorValue;
 }) => {
@@ -190,6 +192,12 @@ const getButtonBackgroundColor = ({
       return 'transparent';
     }
     return colors.onSurface;
+  }
+
+  // Selected toggle (only outlined/text adopt a filled "tonal-selected" look;
+  // contained / contained-tonal / elevated already render filled).
+  if (selected && (isMode('outlined') || isMode('text'))) {
+    return colors.secondaryContainer;
   }
 
   if (isMode('elevated')) {
@@ -214,6 +222,7 @@ const getButtonTextColor = ({
   customTextColor,
   backgroundColor,
   dark,
+  selected,
 }: BaseProps & {
   customTextColor?: ColorValue;
   backgroundColor: ColorValue;
@@ -226,6 +235,11 @@ const getButtonTextColor = ({
 
   if (disabled) {
     return theme.colors.onSurface;
+  }
+
+  // Selected toggle for outlined/text mirrors the contained-tonal label color.
+  if (selected && (isMode('outlined') || isMode('text'))) {
+    return colors.onSecondaryContainer;
   }
 
   if (typeof dark === 'boolean') {
@@ -253,7 +267,12 @@ const getButtonTextColor = ({
   return colors.primary;
 };
 
-const getButtonBorderColor = ({ isMode, theme }: BaseProps) => {
+const getButtonBorderColor = ({ isMode, theme, selected }: BaseProps) => {
+  // A selected outlined toggle drops its outline (the filled background takes
+  // over as the visual affordance).
+  if (selected && isMode('outlined')) {
+    return 'transparent';
+  }
   if (isMode('outlined')) {
     return theme.colors.outlineVariant;
   }
@@ -261,7 +280,13 @@ const getButtonBorderColor = ({ isMode, theme }: BaseProps) => {
   return 'transparent';
 };
 
-const getButtonBorderWidth = ({ isMode }: Omit<BaseProps, 'disabled'>) => {
+const getButtonBorderWidth = ({
+  isMode,
+  selected,
+}: Omit<BaseProps, 'disabled' | 'theme'>) => {
+  if (selected && isMode('outlined')) {
+    return 0;
+  }
   if (isMode('outlined')) {
     return 1;
   }
@@ -276,6 +301,7 @@ export const getButtonColors = ({
   customTextColor,
   disabled,
   dark,
+  selected,
 }: {
   theme: InternalTheme;
   mode: ButtonMode;
@@ -283,6 +309,7 @@ export const getButtonColors = ({
   customTextColor?: ColorValue;
   disabled?: boolean;
   dark?: boolean;
+  selected?: boolean;
 }) => {
   const isMode = (modeToCompare: ButtonMode) => {
     return mode === modeToCompare;
@@ -293,6 +320,7 @@ export const getButtonColors = ({
     theme,
     disabled,
     customButtonColor,
+    selected,
   });
 
   const textColor = getButtonTextColor({
@@ -302,11 +330,12 @@ export const getButtonColors = ({
     customTextColor,
     backgroundColor,
     dark,
+    selected,
   });
 
-  const borderColor = getButtonBorderColor({ isMode, theme });
+  const borderColor = getButtonBorderColor({ isMode, theme, selected });
 
-  const borderWidth = getButtonBorderWidth({ isMode, theme });
+  const borderWidth = getButtonBorderWidth({ isMode, selected });
 
   const textOpacity = disabled ? stateOpacity.disabled : stateOpacity.enabled;
 
