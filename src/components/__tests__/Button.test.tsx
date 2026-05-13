@@ -9,7 +9,11 @@ import { render } from '../../test-utils';
 import { pink500, white } from '../../theme/colors';
 import { tokens } from '../../theme/tokens';
 import Button from '../Button/Button';
-import { getButtonColors, getButtonRippleColor } from '../Button/utils';
+import {
+  getButtonColors,
+  getButtonRippleColor,
+  getButtonSizeStyle,
+} from '../Button/utils';
 
 const { stateOpacity } = tokens.md.ref;
 
@@ -823,6 +827,56 @@ describe('getButtonRippleColor', () => {
       getButtonRippleColor({ textColor: PlatformColor('?attr/colorPrimary') })
     ).toBeUndefined();
   });
+});
+
+describe('getButtonSizeStyle', () => {
+  it.each([
+    ['extra-small', 32, 12, 16, 4, 'labelLarge'],
+    ['small', 40, 16, 20, 8, 'labelLarge'],
+    ['medium', 56, 24, 24, 8, 'titleMedium'],
+    ['large', 96, 48, 32, 12, 'headlineSmall'],
+    ['extra-large', 136, 64, 40, 16, 'headlineLarge'],
+  ] as const)(
+    'returns expected metrics for %s',
+    (size, minHeight, paddingHorizontal, iconSize, iconGap, labelVariant) => {
+      expect(getButtonSizeStyle(size)).toEqual({
+        minHeight,
+        paddingHorizontal,
+        iconSize,
+        iconGap,
+        labelVariant,
+      });
+    }
+  );
+});
+
+describe('size prop', () => {
+  it('renders a button with per-size metrics', () => {
+    const tree = render(
+      <Button size="medium" icon="camera" label="Medium" />
+    ).toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  (
+    [
+      ['extra-small', 14],
+      ['small', 14],
+      ['medium', 16],
+      ['large', 24],
+      ['extra-large', 32],
+    ] as const
+  ).forEach(([size, expectedFontSize]) =>
+    it(`applies the ${size} typescale to the label`, () => {
+      const { getByTestId } = render(
+        <Button size={size} testID="button" label="X" />
+      );
+      expect(getByTestId('button-text')).toHaveStyle({
+        fontSize: expectedFontSize,
+      });
+    })
+  );
 });
 
 it('animated value changes correctly', () => {

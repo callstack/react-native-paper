@@ -18,6 +18,73 @@ export type ButtonMode =
 
 export type ButtonIconPosition = 'leading' | 'trailing';
 
+export type ButtonSize =
+  | 'extra-small'
+  | 'small'
+  | 'medium'
+  | 'large'
+  | 'extra-large';
+
+export type ButtonLabelVariant =
+  | 'labelLarge'
+  | 'titleMedium'
+  | 'headlineSmall'
+  | 'headlineLarge';
+
+export type ButtonSizeStyle = {
+  minHeight: number;
+  paddingHorizontal: number;
+  iconSize: number;
+  iconGap: number;
+  labelVariant: ButtonLabelVariant;
+};
+
+/**
+ * Per-size metrics for the Material Design 3 (expressive) button sizes.
+ * Used when the `size` prop is explicitly set; if `size` is omitted, the
+ * Button keeps its legacy visuals.
+ */
+const BUTTON_SIZE_STYLES: Record<ButtonSize, ButtonSizeStyle> = {
+  'extra-small': {
+    minHeight: 32,
+    paddingHorizontal: 12,
+    iconSize: 16,
+    iconGap: 4,
+    labelVariant: 'labelLarge',
+  },
+  small: {
+    minHeight: 40,
+    paddingHorizontal: 16,
+    iconSize: 20,
+    iconGap: 8,
+    labelVariant: 'labelLarge',
+  },
+  medium: {
+    minHeight: 56,
+    paddingHorizontal: 24,
+    iconSize: 24,
+    iconGap: 8,
+    labelVariant: 'titleMedium',
+  },
+  large: {
+    minHeight: 96,
+    paddingHorizontal: 48,
+    iconSize: 32,
+    iconGap: 12,
+    labelVariant: 'headlineSmall',
+  },
+  'extra-large': {
+    minHeight: 136,
+    paddingHorizontal: 64,
+    iconSize: 40,
+    iconGap: 16,
+    labelVariant: 'headlineLarge',
+  },
+};
+
+export const getButtonSizeStyle = (size: ButtonSize): ButtonSizeStyle =>
+  BUTTON_SIZE_STYLES[size];
+
 /**
  * Returns the margins applied to the button's icon (or loading indicator)
  * depending on the button mode, density and the position of the icon relative

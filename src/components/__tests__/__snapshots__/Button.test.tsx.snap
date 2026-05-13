@@ -2272,3 +2272,195 @@ exports[`renders text button with mode 1`] = `
   </View>
 </View>
 `;
+
+exports[`size prop renders a button with per-size metrics 1`] = `
+<View
+  collapsable={false}
+  style={
+    {
+      "backgroundColor": "transparent",
+      "borderRadius": 20,
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0,
+      "shadowRadius": 0,
+    }
+  }
+  testID="button-container-outer-layer"
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "backgroundColor": "transparent",
+        "borderColor": "transparent",
+        "borderRadius": 20,
+        "borderStyle": "solid",
+        "borderWidth": 0,
+        "flex": undefined,
+        "minWidth": 64,
+        "shadowColor": "rgba(0, 0, 0, 1)",
+        "shadowOffset": {
+          "height": 0,
+          "width": 0,
+        },
+        "shadowOpacity": 0,
+        "shadowRadius": 0,
+      }
+    }
+    testID="button-container"
+  >
+    <View
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": true,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        [
+          {
+            "overflow": "hidden",
+          },
+          {
+            "borderRadius": 20,
+          },
+        ]
+      }
+      testID="button"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "center",
+            },
+            false,
+            {
+              "gap": 8,
+              "minHeight": 56,
+              "paddingHorizontal": 24,
+            },
+            {
+              "opacity": 1,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View
+          testID="button-icon-container"
+        >
+          <Text
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "rgba(103, 80, 164, 1)",
+                  "fontSize": 24,
+                },
+                [
+                  {
+                    "lineHeight": 24,
+                    "transform": [
+                      {
+                        "scaleX": 1,
+                      },
+                    ],
+                  },
+                  {
+                    "backgroundColor": "transparent",
+                  },
+                ],
+              ]
+            }
+          >
+            camera
+          </Text>
+        </View>
+        <Text
+          numberOfLines={1}
+          selectable={false}
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(29, 27, 32, 1)",
+                "writingDirection": "ltr",
+              },
+              [
+                {
+                  "fontFamily": "System",
+                  "fontSize": 16,
+                  "fontWeight": "500",
+                  "letterSpacing": 0.15,
+                  "lineHeight": 24,
+                },
+                [
+                  {
+                    "marginHorizontal": 16,
+                    "marginVertical": 9,
+                    "textAlign": "center",
+                  },
+                  {
+                    "marginHorizontal": 0,
+                    "marginVertical": 0,
+                  },
+                  false,
+                  false,
+                  {
+                    "color": "rgba(103, 80, 164, 1)",
+                    "fontFamily": "System",
+                    "fontSize": 16,
+                    "fontWeight": "500",
+                    "letterSpacing": 0.15,
+                    "lineHeight": 24,
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          testID="button-text"
+        >
+          Medium
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;

@@ -15,9 +15,11 @@ import {
 
 import {
   ButtonMode,
+  ButtonSize,
   getButtonColors,
   getButtonIconStyle,
   getButtonRippleColor,
+  getButtonSizeStyle,
   getButtonTouchableRippleStyle,
 } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -56,6 +58,15 @@ export type Props = $Omit<
    * Use a compact look, useful for `text` buttons in a row.
    */
   compact?: boolean;
+  /**
+   * Size of the button (Material Design 3 expressive). One of
+   * `'extra-small' | 'small' | 'medium' | 'large' | 'extra-large'`.
+   *
+   * When omitted, the button uses its legacy visuals. When set, the size
+   * controls the minimum height, horizontal padding, icon size, the gap
+   * between icon and label, and the label typescale.
+   */
+  size?: ButtonSize;
   /**
    * Custom button's background color.
    */
@@ -202,6 +213,7 @@ const Button = (
     disabled,
     compact,
     mode = 'text',
+    size,
     dark,
     loading,
     icon,
@@ -388,22 +400,29 @@ const Button = (
     [labelStyle]
   );
 
+  const sizeStyle = React.useMemo(
+    () => (size ? getButtonSizeStyle(size) : undefined),
+    [size]
+  );
+
   const textStyle = React.useMemo(
     () => ({
       color: textColor,
-      ...(theme as Theme).fonts.labelLarge,
+      ...(theme as Theme).fonts[sizeStyle?.labelVariant ?? 'labelLarge'],
     }),
-    [textColor, theme]
+    [textColor, theme, sizeStyle]
   );
 
   const iconStyle = React.useMemo(
     () =>
-      getButtonIconStyle({
-        mode,
-        compact,
-        position: isTrailingIcon ? 'trailing' : 'leading',
-      }),
-    [mode, compact, isTrailingIcon]
+      sizeStyle
+        ? null
+        : getButtonIconStyle({
+            mode,
+            compact,
+            position: isTrailingIcon ? 'trailing' : 'leading',
+          }),
+    [mode, compact, isTrailingIcon, sizeStyle]
   );
 
   return (
@@ -460,15 +479,27 @@ const Button = (
           style={[
             styles.content,
             isTrailingIcon && styles.contentReverse,
+            ...(sizeStyle
+              ? [
+                  {
+                    minHeight: sizeStyle.minHeight,
+                    paddingHorizontal: sizeStyle.paddingHorizontal,
+                    gap: sizeStyle.iconGap,
+                  },
+                ]
+              : []),
             { opacity: textOpacity },
             contentStyle,
           ]}
         >
           {icon && loading !== true ? (
-            <View style={iconStyle} testID={`${testID}-icon-container`}>
+            <View
+              style={iconStyle ?? undefined}
+              testID={`${testID}-icon-container`}
+            >
               <Icon
                 source={icon}
-                size={customLabelSize ?? iconSize}
+                size={sizeStyle?.iconSize ?? customLabelSize ?? iconSize}
                 color={
                   typeof customLabelColor === 'string'
                     ? customLabelColor
@@ -479,28 +510,30 @@ const Button = (
           ) : null}
           {loading ? (
             <ActivityIndicator
-              size={customLabelSize ?? iconSize}
+              size={sizeStyle?.iconSize ?? customLabelSize ?? iconSize}
               color={
                 typeof customLabelColor === 'string'
                   ? customLabelColor
                   : textColor
               }
-              style={iconStyle}
+              style={iconStyle ?? undefined}
             />
           ) : null}
           <Text
-            variant="labelLarge"
+            variant={sizeStyle?.labelVariant ?? 'labelLarge'}
             selectable={false}
             numberOfLines={1}
             testID={`${testID}-text`}
             style={[
               styles.label,
-              isMode('text')
+              sizeStyle
+                ? styles.sizedLabel
+                : isMode('text')
                 ? icon || loading
                   ? styles.md3LabelTextAddons
                   : styles.md3LabelText
                 : styles.md3Label,
-              compact && styles.compactLabel,
+              !sizeStyle && compact && styles.compactLabel,
               uppercase && styles.uppercaseLabel,
               textStyle,
               labelStyle,
@@ -535,6 +568,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: 9,
     marginHorizontal: 16,
+  },
+  sizedLabel: {
+    marginVertical: 0,
+    marginHorizontal: 0,
   },
   compactLabel: {
     marginHorizontal: 8,
