@@ -6,11 +6,11 @@
   "private": true,
   "scripts": {
     "eas-build-pre-install": "cd .. && yarn",
-    "start": "EXPO_NO_TYPESCRIPT_SETUP=1 expo start --go",
-    "android": "EXPO_NO_TYPESCRIPT_SETUP=1 expo start --android",
+    "start": "EXPO_NO_TYPESCRIPT_SETUP=1 expo start --dev-client",
+    "android": "EXPO_NO_TYPESCRIPT_SETUP=1 expo start --android --dev-client",
     "android:native": "EXPO_NO_TYPESCRIPT_SETUP=1 expo run:android",
     "ios:native": "EXPO_NO_TYPESCRIPT_SETUP=1 expo run:ios",
-    "ios": "EXPO_NO_TYPESCRIPT_SETUP=1 expo start --ios",
+    "ios": "EXPO_NO_TYPESCRIPT_SETUP=1 expo start --ios --dev-client",
     "web": "EXPO_NO_TYPESCRIPT_SETUP=1 expo start --web"
   },
   "dependencies": {
