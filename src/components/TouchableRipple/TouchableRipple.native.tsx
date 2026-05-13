@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   underlay: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     zIndex: 2,
   },
 });

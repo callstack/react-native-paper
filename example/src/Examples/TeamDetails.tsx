@@ -213,7 +213,7 @@ const ThemeBasedOnSourceColor = ({ navigation, route }: Props) => {
 
   const theme = colorThemes[sourceColor || 'paper'];
 
-  const systemColorScheme = useColorScheme() || 'light';
+  const systemColorScheme = useColorScheme() === 'dark' ? 'dark' : 'light';
   const colorScheme = darkMode ? 'dark' : systemColorScheme;
 
   return (
