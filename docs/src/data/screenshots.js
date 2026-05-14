@@ -154,6 +154,10 @@ const screenshots = {
   },
   'TextInput.Affix': 'screenshots/textinput-outline.affix.png',
   'TextInput.Icon': 'screenshots/textinput-flat.icon.png',
+  TextField: {
+    filled: 'screenshots/text-field-filled.png',
+    outlined: 'screenshots/text-field-outlined.png',
+  },
   ToggleButton: 'screenshots/toggle-button.png',
   'ToggleButton.Group': 'screenshots/toggle-button-group.gif',
   'ToggleButton.Row': 'screenshots/toggle-button-row.gif',

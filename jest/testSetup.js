@@ -14,17 +14,14 @@ jest.mock('@react-native-vector-icons/material-design-icons', () => {
 
   const MockIcon = ({ name, color, size, style, ...props }) => {
     return (
-      <Text 
-        style={[{ color, fontSize: size }, style]} 
-        {...props}
-      >
+      <Text style={[{ color, fontSize: size }, style]} {...props}>
         {name || '□'}
       </Text>
     );
   };
 
   MockIcon.displayName = 'MockedMaterialDesignIcon';
-  
+
   return {
     __esModule: true,
     default: MockIcon,
@@ -88,6 +85,8 @@ jest.mock('react-native', () => {
   RN.Animated.timing = timing;
   RN.Animated.loop = loop;
   RN.Animated.parallel = parallel;
+
+  jest.spyOn(RN.PixelRatio, 'getFontScale').mockReturnValue(1);
 
   return RN;
 });

@@ -170,6 +170,10 @@ const config = {
             TextInputAffix: 'TextInput/Adornment/TextInputAffix',
             TextInputIcon: 'TextInput/Adornment/TextInputIcon',
           },
+          TextField: {
+            TextField: 'TextField/TextField',
+            TextFieldIcon: 'TextField/TextFieldIcon',
+          },
           ToggleButton: {
             ToggleButton: 'ToggleButton/ToggleButton',
             ToggleButtonGroup: 'ToggleButton/ToggleButtonGroup',
@@ -210,6 +214,8 @@ const config = {
                 'src/components/TextInput/Adornment/TextInputAffix.tsx',
               TextInputIcon:
                 'src/components/TextInput/Adornment/TextInputIcon.tsx',
+              TextField: 'src/components/TextField/TextField.tsx',
+
               Text: 'src/components/Typography/Text.tsx',
               showcase: 'docs/src/components/Showcase.tsx',
             };
