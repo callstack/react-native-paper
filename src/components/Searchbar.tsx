@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   GestureResponderEvent,
   Platform,
   StyleProp,
@@ -53,7 +54,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   /**
    * Custom color for icon, default will be derived from theme
    */
-  iconColor?: string;
+  iconColor?: ColorValue;
   /**
    * Callback to execute if we want the left icon to act as button.
    */
@@ -86,7 +87,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    * @supported Available in v5.x with theme version 3
    * Custom color for the right trailering icon, default will be derived from theme
    */
-  traileringIconColor?: string;
+  traileringIconColor?: ColorValue;
   /**
    * Callback to execute on the right trailering icon button press.
    */
@@ -101,7 +102,7 @@ export type Props = React.ComponentPropsWithRef<typeof TextInput> & {
    * Works only when `mode` is set to "bar".
    */
   right?: (props: {
-    color: string;
+    color: ColorValue;
     style: Style;
     testID: string;
   }) => React.ReactNode;

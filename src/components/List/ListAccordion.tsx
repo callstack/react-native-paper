@@ -1,15 +1,16 @@
 import * as React from 'react';
 import {
+  ColorValue,
   GestureResponderEvent,
   NativeSyntheticEvent,
+  PressableAndroidRippleConfig,
   StyleProp,
   StyleSheet,
-  TextStyle,
   TextLayoutEventData,
+  TextStyle,
   View,
   ViewProps,
   ViewStyle,
-  PressableAndroidRippleConfig,
 } from 'react-native';
 
 import { ListAccordionGroupContext } from './ListAccordionGroup';
@@ -36,7 +37,7 @@ export type Props = {
   /**
    * Callback which returns a React element to display on the left side.
    */
-  left?: (props: { color: string; style: Style }) => React.ReactNode;
+  left?: (props: { color: ColorValue; style: Style }) => React.ReactNode;
   /**
    * Callback which returns a React element to display on the right side.
    */

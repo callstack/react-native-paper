@@ -122,7 +122,12 @@ const TouchableRipple = (
     theme,
     rippleColor,
   });
-  const hoverColor = color(calculatedRippleColor).fade(0.5).rgb().string();
+  // Web-only style. PlatformColor doesn't exist on web, so the calculated
+  // ripple color is effectively always a string here.
+  const hoverColor =
+    typeof calculatedRippleColor === 'string'
+      ? color(calculatedRippleColor).fade(0.5).rgb().string()
+      : calculatedRippleColor;
   const { rippleEffectEnabled } = React.useContext<Settings>(SettingsContext);
 
   const { onPress, onLongPress, onPressIn, onPressOut } = rest;

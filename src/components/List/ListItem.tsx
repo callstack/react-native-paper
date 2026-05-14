@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  ColorValue,
   GestureResponderEvent,
   NativeSyntheticEvent,
   StyleProp,
@@ -22,7 +23,7 @@ type Title =
   | ((props: {
       selectable: boolean;
       ellipsizeMode: EllipsizeProp | undefined;
-      color: string;
+      color: ColorValue;
       fontSize: number;
     }) => React.ReactNode);
 
@@ -31,7 +32,7 @@ type Description =
   | ((props: {
       selectable: boolean;
       ellipsizeMode: EllipsizeProp | undefined;
-      color: string;
+      color: ColorValue;
       fontSize: number;
     }) => React.ReactNode);
 
@@ -47,11 +48,11 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Callback which returns a React element to display on the left side.
    */
-  left?: (props: { color: string; style: Style }) => React.ReactNode;
+  left?: (props: { color: ColorValue; style: Style }) => React.ReactNode;
   /**
    * Callback which returns a React element to display on the right side.
    */
-  right?: (props: { color: string; style?: Style }) => React.ReactNode;
+  right?: (props: { color: ColorValue; style?: Style }) => React.ReactNode;
   /**
    * Function to execute on press.
    */
@@ -172,7 +173,7 @@ const ListItem = (
   };
 
   const renderDescription = (
-    descriptionColor: string,
+    descriptionColor: ColorValue,
     description?: Description | null
   ) => {
     return typeof description === 'function' ? (

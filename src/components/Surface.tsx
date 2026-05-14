@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   Platform,
   ShadowStyleIOS,
   StyleProp,
@@ -83,7 +84,7 @@ const outerLayerStyleProperties: (keyof ViewStyle)[] = [
 function getStyleForShadowLayer(
   elevation: SurfaceElevation,
   layer: 0 | 1,
-  shadowColor: string
+  shadowColor: ColorValue
 ): Animated.WithAnimatedValue<ShadowStyleIOS> {
   if (isAnimatedValue(elevation)) {
     return {
@@ -122,8 +123,10 @@ const SurfaceIOS = forwardRef<
   View,
   Omit<Props, 'elevation'> & {
     elevation: SurfaceElevation;
-    backgroundColor?: string | Animated.AnimatedInterpolation<string | number>;
-    shadowColor: string;
+    backgroundColor?:
+      | ColorValue
+      | Animated.AnimatedInterpolation<string | number>;
+    shadowColor: ColorValue;
   }
 >(
   (

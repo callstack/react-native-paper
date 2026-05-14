@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Animated, StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import {
+  Animated,
+  ColorValue,
+  StyleProp,
+  StyleSheet,
+  ViewStyle,
+} from 'react-native';
 
 import type { ThemeProp } from '../../../types';
 
@@ -9,10 +15,10 @@ type UnderlineProps = {
   };
   error?: boolean;
   colors?: {
-    error?: string;
+    error?: ColorValue;
   };
-  activeColor: string;
-  underlineColorCustom?: string;
+  activeColor: ColorValue;
+  underlineColorCustom?: ColorValue;
   hasActiveOutline?: boolean;
   disabledOpacity?: number;
   style?: StyleProp<ViewStyle>;

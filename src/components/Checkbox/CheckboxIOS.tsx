@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { GestureResponderEvent, StyleSheet, View } from 'react-native';
+import {
+  ColorValue,
+  GestureResponderEvent,
+  StyleSheet,
+  View,
+} from 'react-native';
 
 import { getSelectionControlIOSColor } from './utils';
 import { useInternalTheme } from '../../core/theming';
@@ -23,7 +28,7 @@ export type Props = $RemoveChildren<typeof TouchableRipple> & {
   /**
    * Custom color for checkbox.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * @optional
    */

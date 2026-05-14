@@ -1,7 +1,7 @@
 // M3 elevation tokens and shadow builder per spec:
 // https://m3.material.io/styles/elevation/tokens
 
-import { Animated } from 'react-native';
+import { Animated, type ColorValue } from 'react-native';
 
 import { isAnimatedValue } from '../../../utils/animations';
 import type { Elevation, ThemeElevation } from '../../types';
@@ -34,7 +34,7 @@ export const shadowLayers = [
 
 export function shadow(
   elevation: number | Animated.Value = 0,
-  shadowColor: string
+  shadowColor: ColorValue
 ) {
   if (isAnimatedValue(elevation)) {
     return {

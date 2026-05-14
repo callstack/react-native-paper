@@ -1,3 +1,5 @@
+import type { ColorValue } from 'react-native';
+
 import { tokens } from '../../../theme/tokens';
 import type { InternalTheme } from '../../../types';
 
@@ -22,7 +24,9 @@ export function getIconColor({
   customColor,
 }: BaseProps & {
   isTextInputFocused: boolean;
-  customColor?: ((isTextInputFocused: boolean) => string | undefined) | string;
+  customColor?:
+    | ColorValue
+    | ((isTextInputFocused: boolean) => ColorValue | undefined);
 }) {
   const color =
     typeof customColor === 'function'

@@ -1,12 +1,19 @@
 import * as React from 'react';
 import { ComponentProps } from 'react';
-import { StyleSheet, Text, Platform, Role, ViewProps } from 'react-native';
+import {
+  ColorValue,
+  Platform,
+  Role,
+  StyleSheet,
+  Text,
+  ViewProps,
+} from 'react-native';
 
 import { black } from '../theme/colors';
 
 export type IconProps = {
   name: ComponentProps<typeof MaterialCommunityIcons>['name'];
-  color?: string;
+  color?: ColorValue;
   size: number;
   direction: 'rtl' | 'ltr';
   allowFontScaling?: boolean;
@@ -59,7 +66,7 @@ type IconModuleType = React.ComponentType<
     | typeof import('@react-native-vector-icons/material-design-icons').default
     | typeof import('react-native-vector-icons/MaterialCommunityIcons').default
   > & {
-    color: string;
+    color: ColorValue;
     pointerEvents?: ViewProps['pointerEvents'];
   }
 >;

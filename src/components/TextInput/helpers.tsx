@@ -1,3 +1,5 @@
+import type { ColorValue } from 'react-native';
+
 import { AdornmentSide, AdornmentType } from './Adornment/enums';
 import type { AdornmentConfig } from './Adornment/types';
 import {
@@ -302,7 +304,7 @@ type Mode = 'flat' | 'outlined';
 const getInputTextColor = ({
   theme,
   textColor,
-}: BaseProps & { textColor?: string }) => {
+}: BaseProps & { textColor?: ColorValue }) => {
   if (textColor) {
     return textColor;
   }
@@ -318,8 +320,8 @@ const getActiveColor = ({
   mode,
 }: BaseProps & {
   error?: boolean;
-  activeUnderlineColor?: string;
-  activeOutlineColor?: string;
+  activeUnderlineColor?: ColorValue;
+  activeOutlineColor?: ColorValue;
   mode?: Mode;
 }) => {
   const isFlat = mode === 'flat';
@@ -344,8 +346,8 @@ const getSelectionColor = ({
   activeColor,
   customSelectionColor,
 }: {
-  activeColor: string;
-  customSelectionColor?: string;
+  activeColor: ColorValue;
+  customSelectionColor?: ColorValue;
 }) => {
   if (typeof customSelectionColor !== 'undefined') {
     return customSelectionColor;
@@ -365,7 +367,7 @@ const getFlatUnderlineColor = ({
   theme,
   disabled,
   underlineColor,
-}: BaseProps & { underlineColor?: string }) => {
+}: BaseProps & { underlineColor?: ColorValue }) => {
   if (!disabled && underlineColor) {
     return underlineColor;
   }
@@ -377,7 +379,7 @@ const getOutlinedOutlineInputColor = ({
   theme,
   disabled,
   customOutlineColor,
-}: BaseProps & { customOutlineColor?: string }) => {
+}: BaseProps & { customOutlineColor?: ColorValue }) => {
   if (!disabled && customOutlineColor) {
     return customOutlineColor;
   }
@@ -401,10 +403,10 @@ export const getFlatInputColors = ({
   error,
   theme,
 }: {
-  underlineColor?: string;
-  activeUnderlineColor?: string;
-  customSelectionColor?: string;
-  textColor?: string;
+  underlineColor?: ColorValue;
+  activeUnderlineColor?: ColorValue;
+  customSelectionColor?: ColorValue;
+  textColor?: ColorValue;
   disabled?: boolean;
   error?: boolean;
   theme: InternalTheme;
@@ -448,10 +450,10 @@ export const getOutlinedInputColors = ({
   error,
   theme,
 }: {
-  activeOutlineColor?: string;
-  customOutlineColor?: string;
-  customSelectionColor?: string;
-  textColor?: string;
+  activeOutlineColor?: ColorValue;
+  customOutlineColor?: ColorValue;
+  customSelectionColor?: ColorValue;
+  textColor?: ColorValue;
   disabled?: boolean;
   error?: boolean;
   theme: InternalTheme;
