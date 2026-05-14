@@ -122,7 +122,7 @@ export type Props<Route extends BaseRoute> = {
   renderIcon?: (props: {
     route: Route;
     focused: boolean;
-    color: string;
+    color: ColorValue;
   }) => React.ReactNode;
   /**
    * Callback which React Element to be used as tab label.
@@ -130,7 +130,7 @@ export type Props<Route extends BaseRoute> = {
   renderLabel?: (props: {
     route: Route;
     focused: boolean;
-    color: string;
+    color: ColorValue;
   }) => React.ReactNode;
   /**
    * Callback which returns a React element to be used as the touchable for the tab item.

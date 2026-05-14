@@ -53,7 +53,7 @@ export default function BottomNavigationBarExample() {
           renderIcon={({ route, focused, color }) =>
             descriptors[route.key].options.tabBarIcon?.({
               focused,
-              color,
+              color: typeof color === 'string' ? color : '',
               size: 24,
             }) || null
           }

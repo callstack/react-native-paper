@@ -1,7 +1,5 @@
 import type { ColorValue } from 'react-native';
 
-import color from 'color';
-
 import type { InternalTheme } from '../../types';
 
 const getUnderlayColor = ({
@@ -15,7 +13,7 @@ const getUnderlayColor = ({
     return underlayColor;
   }
 
-  return color(calculatedRippleColor).rgb().string();
+  return calculatedRippleColor;
 };
 
 const getRippleColor = ({

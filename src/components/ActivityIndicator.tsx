@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Animated,
+  ColorValue,
   Easing,
   Platform,
   StyleProp,
@@ -20,7 +21,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * The color of the spinner.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Size of the indicator.
    */

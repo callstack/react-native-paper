@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { Image, ImageSourcePropType, Platform } from 'react-native';
+import {
+  Image,
+  ImageSourcePropType,
+  Platform,
+  type ColorValue,
+} from 'react-native';
 
 import { accessibilityProps } from './MaterialCommunityIcon';
 import { useLocale } from '../core/locale';
@@ -12,7 +17,7 @@ type IconSourceBase = string | ImageSourcePropType;
 export type IconSource =
   | IconSourceBase
   | Readonly<{ source: IconSourceBase; direction: 'rtl' | 'ltr' | 'auto' }>
-  | ((props: IconProps & { color: string }) => React.ReactNode);
+  | ((props: IconProps & { color: ColorValue }) => React.ReactNode);
 
 type IconProps = {
   /**
@@ -65,7 +70,7 @@ export type Props = IconProps & {
   /**
    * Color of the icon.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * TestID used for testing purposes
    */

@@ -1,10 +1,16 @@
 import * as React from 'react';
-import { Image, Platform, StyleSheet, View } from 'react-native';
+import { ColorValue, Image, Platform, StyleSheet, View } from 'react-native';
 
 import { useLocale } from '../../core/locale';
 import MaterialCommunityIcon from '../MaterialCommunityIcon';
 
-const AppbarBackIcon = ({ size, color }: { size: number; color: string }) => {
+const AppbarBackIcon = ({
+  size,
+  color,
+}: {
+  size: number;
+  color: ColorValue;
+}) => {
   const { direction } = useLocale();
   const isRTL = direction === 'rtl';
   const iosIconSize = size - 3;

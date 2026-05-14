@@ -87,7 +87,14 @@ export default function MaterialBottomTabView({
         }
 
         if (typeof options.tabBarIcon === 'function') {
-          return options.tabBarIcon({ focused, color });
+          // react-navigation's tabBarIcon types `color` as `string`. When
+          // dynamicColor is on (Android), `color` is an OpaqueColorValue and
+          // can't be forwarded; fall back to an empty string. Consumers who
+          // need device-tinted tab icons should use BottomNavigation directly.
+          return options.tabBarIcon({
+            focused,
+            color: typeof color === 'string' ? color : '',
+          });
         }
 
         return null;

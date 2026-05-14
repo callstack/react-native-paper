@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { I18nManager, StyleSheet, View, Platform } from 'react-native';
+import {
+  ColorValue,
+  I18nManager,
+  Platform,
+  StyleSheet,
+  View,
+} from 'react-native';
 
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import Constants, { ExecutionEnvironment } from 'expo-constants';
@@ -31,7 +37,7 @@ const DrawerItemsData = [
     label: 'Starred',
     icon: 'star',
     key: 1,
-    right: ({ color }: { color: string }) => (
+    right: ({ color }: { color: ColorValue }) => (
       <Badge
         visible
         size={8}

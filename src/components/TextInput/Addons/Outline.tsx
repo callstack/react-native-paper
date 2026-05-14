@@ -10,10 +10,10 @@ import {
 import { TextInputLabelProp } from '../types';
 
 type OutlineProps = {
-  activeColor: string;
+  activeColor: ColorValue;
   backgroundColor: ColorValue;
   hasActiveOutline?: boolean;
-  outlineColor?: string;
+  outlineColor?: ColorValue;
   roundness?: number;
   label?: TextInputLabelProp;
   style?: StyleProp<ViewStyle>;

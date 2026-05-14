@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   AccessibilityState,
   Animated,
+  ColorValue,
   GestureResponderEvent,
   Platform,
   PressableAndroidRippleConfig,
@@ -61,7 +62,7 @@ export type Props = $Omit<React.ComponentProps<typeof Surface>, 'mode'> & {
    * Note: With theme version 3 `selectedColor` doesn't apply to the `icon`.
    *       If you want specify custom color for the `icon`, render your own `Icon` component.
    */
-  selectedColor?: string;
+  selectedColor?: ColorValue;
   /**
    * @supported Available in v5.x with theme version 3
    * Whether to display overlay on selected chip
