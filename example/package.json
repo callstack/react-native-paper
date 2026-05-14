@@ -21,7 +21,7 @@
     "@react-navigation/drawer": "^7.3.9",
     "@react-navigation/native": "^7.1.6",
     "@react-navigation/stack": "^7.2.10",
-    "expo": "^56.0.0-preview.10",
+    "expo": "~56.0.0-preview.11",
     "expo-crypto": "~56.0.3",
     "expo-dev-client": "~56.0.9",
     "expo-font": "~56.0.3",
