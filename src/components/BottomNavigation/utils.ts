@@ -1,13 +1,15 @@
+import type { ColorValue } from 'react-native';
+
 import type { InternalTheme, Theme } from '../../types';
 
 export const getActiveTintColor = ({
   activeColor,
   theme,
 }: {
-  activeColor: string | undefined;
+  activeColor: ColorValue | undefined;
   theme: InternalTheme;
 }) => {
-  if (typeof activeColor === 'string') {
+  if (activeColor != null) {
     return activeColor;
   }
 
@@ -18,10 +20,10 @@ export const getInactiveTintColor = ({
   inactiveColor,
   theme,
 }: {
-  inactiveColor: string | undefined;
+  inactiveColor: ColorValue | undefined;
   theme: InternalTheme;
 }) => {
-  if (typeof inactiveColor === 'string') {
+  if (inactiveColor != null) {
     return inactiveColor;
   }
 
@@ -34,7 +36,7 @@ export const getLabelColor = ({
   focused,
   theme,
 }: {
-  tintColor: string;
+  tintColor: ColorValue;
   hasColor: boolean;
   focused: boolean;
   theme: InternalTheme;

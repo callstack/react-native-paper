@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -49,7 +50,7 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
   /**
    * Callback which returns a React element to display on the right side. For instance a Badge.
    */
-  right?: (props: { color: string }) => React.ReactNode;
+  right?: (props: { color: ColorValue }) => React.ReactNode;
   /**
    * Specifies the largest possible scale a label font can reach.
    */

@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { View, ViewStyle, StyleSheet, StyleProp } from 'react-native';
+import {
+  ColorValue,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native';
 
 import { useInternalTheme } from '../../core/theming';
 import type { ThemeProp } from '../../types';
@@ -13,7 +19,7 @@ export type Props = {
   /**
    * Color for the icon.
    */
-  color?: string;
+  color?: ColorValue;
   style?: StyleProp<ViewStyle>;
   /**
    * @optional

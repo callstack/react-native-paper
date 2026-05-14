@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   AccessibilityState,
   Animated,
+  ColorValue,
   GestureResponderEvent,
   PressableAndroidRippleConfig,
   StyleProp,
@@ -77,7 +78,7 @@ export type Props = $Omit<$RemoveChildren<typeof Surface>, 'mode'> & {
   /**
    * Custom color for the icon and label of the `FAB`.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Whether `FAB` is currently visible.
    */

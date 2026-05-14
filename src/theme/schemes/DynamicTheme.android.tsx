@@ -1,4 +1,4 @@
-import { Platform, PlatformColor } from 'react-native';
+import { Platform, PlatformColor, type ColorValue } from 'react-native';
 
 import { DarkTheme } from './DarkTheme';
 import { LightTheme } from './LightTheme';
@@ -7,8 +7,7 @@ import type { Theme, ThemeColors } from '../types';
 
 const apiLevel = Platform.Version as number;
 
-const ac = (name: string) =>
-  PlatformColor(`@android:color/${name}`) as unknown as string;
+const ac = (name: string) => PlatformColor(`@android:color/${name}`);
 
 /**
  * Picks the correct color value for the current Android API level.
@@ -20,7 +19,7 @@ const ac = (name: string) =>
  * (MCL @color/m3_ref_palette_* resources and error roles). Those fall through to ref.
  * @see https://github.com/material-components/material-components-android/blob/master/docs/theming/Color.md
  */
-const pick = (api34: string, api31: string | null, ref: string): string =>
+const pick = (api34: string, api31: string | null, ref: string): ColorValue =>
   apiLevel >= 34
     ? ac(api34)
     : apiLevel >= 31 && api31 !== null

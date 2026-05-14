@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ColorValue, StyleSheet, View } from 'react-native';
 
 import type { ThemeProp } from 'src/types';
 
@@ -11,7 +11,7 @@ export type Props = {
   /**
    *  Custom color for action icon.
    */
-  color?: string;
+  color?: ColorValue;
   /**
    * Name of the icon to show.
    */
