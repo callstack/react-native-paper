@@ -78,7 +78,7 @@ exports[`allows customizing Route's type via generics 1`] = `
         "bottom": 0,
         "left": 0,
         "right": 0,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -97,7 +97,7 @@ exports[`allows customizing Route's type via generics 1`] = `
         {
           "backgroundColor": "transparent",
           "flex": undefined,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -745,7 +745,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         "bottom": 0,
         "left": 0,
         "right": 0,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -764,7 +764,7 @@ exports[`hides labels in non-shifting bottom navigation 1`] = `
         {
           "backgroundColor": "transparent",
           "flex": undefined,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -1486,7 +1486,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         "bottom": 0,
         "left": 0,
         "right": 0,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -1505,7 +1505,7 @@ exports[`hides labels in shifting bottom navigation 1`] = `
         {
           "backgroundColor": "transparent",
           "flex": undefined,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -2359,7 +2359,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
         "bottom": 0,
         "left": 0,
         "right": 0,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -2378,7 +2378,7 @@ exports[`renders bottom navigation with getLazy 1`] = `
         {
           "backgroundColor": "transparent",
           "flex": undefined,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -4088,7 +4088,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
         "bottom": 0,
         "left": 0,
         "right": 0,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -4107,7 +4107,7 @@ exports[`renders bottom navigation with scene animation 1`] = `
         {
           "backgroundColor": "transparent",
           "flex": undefined,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -5562,7 +5562,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         "bottom": 0,
         "left": 0,
         "right": 0,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -5581,7 +5581,7 @@ exports[`renders custom icon and label in non-shifting bottom navigation 1`] = `
         {
           "backgroundColor": "transparent",
           "flex": undefined,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -6264,7 +6264,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         "bottom": 0,
         "left": 0,
         "right": 0,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -6283,7 +6283,7 @@ exports[`renders custom icon and label in shifting bottom navigation 1`] = `
         {
           "backgroundColor": "transparent",
           "flex": undefined,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -7258,7 +7258,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         "bottom": 0,
         "left": 0,
         "right": 0,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -7277,7 +7277,7 @@ exports[`renders custom icon and label with custom colors in non-shifting bottom
         {
           "backgroundColor": "transparent",
           "flex": undefined,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -8359,7 +8359,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         "bottom": 0,
         "left": 0,
         "right": 0,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -8378,7 +8378,7 @@ exports[`renders custom icon and label with custom colors in shifting bottom nav
         {
           "backgroundColor": "transparent",
           "flex": undefined,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -9307,7 +9307,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
         "bottom": 0,
         "left": 0,
         "right": 0,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -9326,7 +9326,7 @@ exports[`renders non-shifting bottom navigation 1`] = `
         {
           "backgroundColor": "transparent",
           "flex": undefined,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -10408,7 +10408,7 @@ exports[`renders shifting bottom navigation 1`] = `
         "bottom": 0,
         "left": 0,
         "right": 0,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 0,
           "width": 0,
@@ -10427,7 +10427,7 @@ exports[`renders shifting bottom navigation 1`] = `
         {
           "backgroundColor": "transparent",
           "flex": undefined,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,

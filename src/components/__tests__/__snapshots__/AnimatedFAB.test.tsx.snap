@@ -9,7 +9,7 @@ exports[`renders animated fab 1`] = `
       "borderRadius": 16,
       "opacity": 1,
       "position": "absolute",
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -32,7 +32,7 @@ exports[`renders animated fab 1`] = `
         "backgroundColor": "transparent",
         "borderRadius": 16,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -296,7 +296,7 @@ exports[`renders animated fab with label on the left 1`] = `
       "borderRadius": 16,
       "opacity": 1,
       "position": "absolute",
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -319,7 +319,7 @@ exports[`renders animated fab with label on the left 1`] = `
         "backgroundColor": "transparent",
         "borderRadius": 16,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -585,7 +585,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
       "borderRadius": 16,
       "opacity": 1,
       "position": "absolute",
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -608,7 +608,7 @@ exports[`renders animated fab with label on the right by default 1`] = `
         "backgroundColor": "transparent",
         "borderRadius": 16,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,

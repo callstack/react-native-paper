@@ -104,15 +104,6 @@ const EASING = Easing.bezier(0.4, 0, 0.2, 1);
 const WINDOW_LAYOUT = Dimensions.get('window');
 
 const DEFAULT_ELEVATION: Elevation = 2;
-export const ELEVATION_LEVELS_MAP = [
-  'level0',
-  'level1',
-  'level2',
-  'level3',
-  'level4',
-  'level5',
-] as const;
-
 const DEFAULT_MODE = 'elevated';
 
 const focusFirstDOMNode = (el: View | null | undefined) => {
@@ -679,8 +670,7 @@ const Menu = ({
                   styles.shadowMenuContainer,
                   shadowMenuContainerStyle,
                   {
-                    backgroundColor:
-                      md3Colors.elevation[ELEVATION_LEVELS_MAP[elevation]],
+                    backgroundColor: md3Colors.elevation[`level${elevation}`],
                   },
                   contentStyle,
                 ]}

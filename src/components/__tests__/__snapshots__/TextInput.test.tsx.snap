@@ -2039,7 +2039,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
           "borderRadius": 20,
           "height": 40,
           "margin": 0,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -2062,7 +2062,7 @@ exports[`correctly renders left-side affix adornment, and right-side icon adornm
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,
@@ -2435,7 +2435,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
           "borderRadius": 20,
           "height": 40,
           "margin": 0,
-          "shadowColor": "#000",
+          "shadowColor": "rgba(0, 0, 0, 1)",
           "shadowOffset": {
             "height": 0,
             "width": 0,
@@ -2458,7 +2458,7 @@ exports[`correctly renders left-side icon adornment, and right-side affix adornm
             "elevation": 0,
             "flex": 1,
             "overflow": "hidden",
-            "shadowColor": "#000",
+            "shadowColor": "rgba(0, 0, 0, 1)",
             "shadowOffset": {
               "height": 0,
               "width": 0,

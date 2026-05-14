@@ -10,7 +10,12 @@ import {
 } from 'react-native';
 
 import { useInternalTheme } from '../core/theming';
-import shadow from '../theme/shadow';
+import {
+  androidElevationLevels,
+  elevationInputRange,
+  shadow,
+  shadowLayers,
+} from '../theme/tokens/sys/elevation';
 import type { Elevation, Theme, ThemeProp } from '../types';
 import { isAnimatedValue } from '../utils/animations';
 import { forwardRef } from '../utils/forwardRef';
@@ -75,54 +80,41 @@ const outerLayerStyleProperties: (keyof ViewStyle)[] = [
   'opacity',
 ];
 
-const shadowColor = '#000';
-const iOSShadowOutputRanges = [
-  {
-    shadowOpacity: 0.15,
-    height: [0, 1, 2, 4, 6, 8],
-    shadowRadius: [0, 3, 6, 8, 10, 12],
-  },
-  {
-    shadowOpacity: 0.3,
-    height: [0, 1, 1, 1, 2, 4],
-    shadowRadius: [0, 1, 2, 3, 3, 4],
-  },
-];
-const inputRange = [0, 1, 2, 3, 4, 5];
 function getStyleForShadowLayer(
   elevation: SurfaceElevation,
-  layer: 0 | 1
+  layer: 0 | 1,
+  shadowColor: string
 ): Animated.WithAnimatedValue<ShadowStyleIOS> {
   if (isAnimatedValue(elevation)) {
     return {
       shadowColor,
       shadowOpacity: elevation.interpolate({
         inputRange: [0, 1],
-        outputRange: [0, iOSShadowOutputRanges[layer].shadowOpacity],
+        outputRange: [0, shadowLayers[layer].shadowOpacity],
         extrapolate: 'clamp',
       }),
       shadowOffset: {
         width: 0,
         height: elevation.interpolate({
-          inputRange,
-          outputRange: iOSShadowOutputRanges[layer].height,
+          inputRange: elevationInputRange,
+          outputRange: shadowLayers[layer].height,
         }),
       },
       shadowRadius: elevation.interpolate({
-        inputRange,
-        outputRange: iOSShadowOutputRanges[layer].shadowRadius,
+        inputRange: elevationInputRange,
+        outputRange: shadowLayers[layer].shadowRadius,
       }),
     };
   }
 
   return {
     shadowColor,
-    shadowOpacity: elevation ? iOSShadowOutputRanges[layer].shadowOpacity : 0,
+    shadowOpacity: elevation ? shadowLayers[layer].shadowOpacity : 0,
     shadowOffset: {
       width: 0,
-      height: iOSShadowOutputRanges[layer].height[elevation],
+      height: shadowLayers[layer].height[elevation],
     },
-    shadowRadius: iOSShadowOutputRanges[layer].shadowRadius[elevation],
+    shadowRadius: shadowLayers[layer].shadowRadius[elevation],
   };
 }
 
@@ -131,6 +123,7 @@ const SurfaceIOS = forwardRef<
   Omit<Props, 'elevation'> & {
     elevation: SurfaceElevation;
     backgroundColor?: string | Animated.AnimatedInterpolation<string | number>;
+    shadowColor: string;
   }
 >(
   (
@@ -138,6 +131,7 @@ const SurfaceIOS = forwardRef<
       elevation,
       style,
       backgroundColor,
+      shadowColor,
       testID,
       children,
       mode = 'elevated',
@@ -173,14 +167,14 @@ const SurfaceIOS = forwardRef<
       const isElevated = mode === 'elevated';
 
       const outerLayerViewStyles = {
-        ...(isElevated && getStyleForShadowLayer(elevation, 0)),
+        ...(isElevated && getStyleForShadowLayer(elevation, 0, shadowColor)),
         ...outerLayerStyles,
         ...borderRadiusStyles,
         backgroundColor: bgColor,
       };
 
       const innerLayerViewStyles = {
-        ...(isElevated && getStyleForShadowLayer(elevation, 1)),
+        ...(isElevated && getStyleForShadowLayer(elevation, 1, shadowColor)),
         ...filteredStyles,
         ...borderRadiusStyles,
         flex:
@@ -191,7 +185,7 @@ const SurfaceIOS = forwardRef<
       };
 
       return [outerLayerViewStyles, innerLayerViewStyles];
-    }, [style, elevation, backgroundColor, mode, container]);
+    }, [style, elevation, backgroundColor, shadowColor, mode, container]);
 
     return (
       <Animated.View
@@ -255,14 +249,12 @@ const Surface = forwardRef<View, Props>(
 
     const { colors } = theme as Theme;
 
-    const inputRange = [0, 1, 2, 3, 4, 5];
-
     const backgroundColor = (() => {
       if (isAnimatedValue(elevation)) {
         return elevation.interpolate({
-          inputRange,
-          outputRange: inputRange.map((elevation) => {
-            return colors.elevation?.[`level${elevation as Elevation}`];
+          inputRange: elevationInputRange,
+          outputRange: elevationInputRange.map((elevation) => {
+            return colors.elevation?.[`level${elevation}`];
           }),
         });
       }
@@ -282,7 +274,9 @@ const Surface = forwardRef<View, Props>(
           testID={testID}
           style={[
             { backgroundColor },
-            elevation && isElevated ? shadow(elevation) : null,
+            elevation && isElevated
+              ? shadow(elevation, theme.colors.shadow)
+              : null,
             style,
           ]}
         >
@@ -292,17 +286,15 @@ const Surface = forwardRef<View, Props>(
     }
 
     if (Platform.OS === 'android') {
-      const elevationLevel = [0, 3, 6, 9, 12, 15];
-
       const getElevationAndroid = () => {
         if (isAnimatedValue(elevation)) {
           return elevation.interpolate({
-            inputRange,
-            outputRange: elevationLevel,
+            inputRange: elevationInputRange,
+            outputRange: androidElevationLevels,
           });
         }
 
-        return elevationLevel[elevation];
+        return androidElevationLevels[elevation];
       };
 
       const { margin, padding, transform, borderRadius } = (StyleSheet.flatten(
@@ -340,6 +332,7 @@ const Surface = forwardRef<View, Props>(
         ref={ref}
         elevation={elevation}
         backgroundColor={backgroundColor}
+        shadowColor={theme.colors.shadow}
         style={style}
         testID={testID}
         mode={mode}

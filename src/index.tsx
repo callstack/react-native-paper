@@ -14,8 +14,6 @@ export * from './theme/schemes';
 
 export { default as Provider } from './core/PaperProvider';
 export { default as PaperProvider } from './core/PaperProvider';
-
-export { default as shadow } from './theme/shadow';
 export { default as configureFonts } from './theme/fonts';
 
 import * as Avatar from './components/Avatar/Avatar';

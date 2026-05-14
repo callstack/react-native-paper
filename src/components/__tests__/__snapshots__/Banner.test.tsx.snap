@@ -7,7 +7,7 @@ exports[`render visible banner, with custom theme 1`] = `
     {
       "backgroundColor": "rgba(247, 242, 250, 1)",
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 1,
         "width": 0,
@@ -24,13 +24,13 @@ exports[`render visible banner, with custom theme 1`] = `
       {
         "backgroundColor": "rgba(247, 242, 250, 1)",
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
         },
         "shadowOpacity": 0.3,
-        "shadowRadius": 1,
+        "shadowRadius": 2,
       }
     }
     testID="surface"
@@ -124,7 +124,7 @@ exports[`render visible banner, with custom theme 1`] = `
                 "backgroundColor": "transparent",
                 "borderRadius": 20,
                 "margin": 4,
-                "shadowColor": "#000",
+                "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
                   "height": 0,
                   "width": 0,
@@ -146,7 +146,7 @@ exports[`render visible banner, with custom theme 1`] = `
                   "borderWidth": 0,
                   "flex": undefined,
                   "minWidth": "auto",
-                  "shadowColor": "#000",
+                  "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
                     "width": 0,
@@ -283,7 +283,7 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
     {
       "backgroundColor": "rgba(247, 242, 250, 1)",
       "opacity": 0,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 1,
         "width": 0,
@@ -300,13 +300,13 @@ exports[`renders hidden banner, without action buttons and without image 1`] = `
       {
         "backgroundColor": "rgba(247, 242, 250, 1)",
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
         },
         "shadowOpacity": 0.3,
-        "shadowRadius": 1,
+        "shadowRadius": 2,
       }
     }
     testID="surface"
@@ -418,7 +418,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
     {
       "backgroundColor": "rgba(247, 242, 250, 1)",
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 1,
         "width": 0,
@@ -435,13 +435,13 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
       {
         "backgroundColor": "rgba(247, 242, 250, 1)",
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
         },
         "shadowOpacity": 0.3,
-        "shadowRadius": 1,
+        "shadowRadius": 2,
       }
     }
     testID="surface"
@@ -557,7 +557,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                 "backgroundColor": "transparent",
                 "borderRadius": 20,
                 "margin": 4,
-                "shadowColor": "#000",
+                "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
                   "height": 0,
                   "width": 0,
@@ -579,7 +579,7 @@ exports[`renders visible banner, with action buttons and with image 1`] = `
                   "borderWidth": 0,
                   "flex": undefined,
                   "minWidth": "auto",
-                  "shadowColor": "#000",
+                  "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
                     "width": 0,
@@ -716,7 +716,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
     {
       "backgroundColor": "rgba(247, 242, 250, 1)",
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 1,
         "width": 0,
@@ -733,13 +733,13 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
       {
         "backgroundColor": "rgba(247, 242, 250, 1)",
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
         },
         "shadowOpacity": 0.3,
-        "shadowRadius": 1,
+        "shadowRadius": 2,
       }
     }
     testID="surface"
@@ -833,7 +833,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 "backgroundColor": "transparent",
                 "borderRadius": 20,
                 "margin": 4,
-                "shadowColor": "#000",
+                "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
                   "height": 0,
                   "width": 0,
@@ -855,7 +855,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   "borderWidth": 0,
                   "flex": undefined,
                   "minWidth": "auto",
-                  "shadowColor": "#000",
+                  "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
                     "width": 0,
@@ -985,7 +985,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                 "backgroundColor": "transparent",
                 "borderRadius": 20,
                 "margin": 4,
-                "shadowColor": "#000",
+                "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
                   "height": 0,
                   "width": 0,
@@ -1007,7 +1007,7 @@ exports[`renders visible banner, with action buttons and without image 1`] = `
                   "borderWidth": 0,
                   "flex": undefined,
                   "minWidth": "auto",
-                  "shadowColor": "#000",
+                  "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
                     "width": 0,
@@ -1144,7 +1144,7 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
     {
       "backgroundColor": "rgba(247, 242, 250, 1)",
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 1,
         "width": 0,
@@ -1161,13 +1161,13 @@ exports[`renders visible banner, without action buttons and with image 1`] = `
       {
         "backgroundColor": "rgba(247, 242, 250, 1)",
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
         },
         "shadowOpacity": 0.3,
-        "shadowRadius": 1,
+        "shadowRadius": 2,
       }
     }
     testID="surface"
@@ -1289,7 +1289,7 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
     {
       "backgroundColor": "rgba(247, 242, 250, 1)",
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 1,
         "width": 0,
@@ -1306,13 +1306,13 @@ exports[`renders visible banner, without action buttons and without image 1`] = 
       {
         "backgroundColor": "rgba(247, 242, 250, 1)",
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
         },
         "shadowOpacity": 0.3,
-        "shadowRadius": 1,
+        "shadowRadius": 2,
       }
     }
     testID="surface"

@@ -123,7 +123,7 @@ exports[`renders list item with custom description 1`] = `
               {
                 "backgroundColor": "rgba(232, 222, 248, 1)",
                 "borderRadius": 8,
-                "shadowColor": "#000",
+                "shadowColor": "rgba(0, 0, 0, 1)",
                 "shadowOffset": {
                   "height": 0,
                   "width": 0,
@@ -145,7 +145,7 @@ exports[`renders list item with custom description 1`] = `
                   "borderWidth": 1,
                   "flex": undefined,
                   "flexDirection": "column",
-                  "shadowColor": "#000",
+                  "shadowColor": "rgba(0, 0, 0, 1)",
                   "shadowOffset": {
                     "height": 0,
                     "width": 0,

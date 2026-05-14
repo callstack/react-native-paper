@@ -8,7 +8,7 @@ exports[`renders FAB with custom size prop 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 25,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -32,7 +32,7 @@ exports[`renders FAB with custom size prop 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 25,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -182,7 +182,7 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -206,7 +206,7 @@ exports[`renders custom color for the icon and label of the FAB 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -356,7 +356,7 @@ exports[`renders default FAB 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -380,7 +380,7 @@ exports[`renders default FAB 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -530,7 +530,7 @@ exports[`renders extended FAB 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -554,7 +554,7 @@ exports[`renders extended FAB 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -745,7 +745,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 25,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -769,7 +769,7 @@ exports[`renders extended FAB with custom size prop 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 25,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -959,7 +959,7 @@ exports[`renders large FAB 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 28,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -983,7 +983,7 @@ exports[`renders large FAB 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 28,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -1133,7 +1133,7 @@ exports[`renders loading FAB 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -1157,7 +1157,7 @@ exports[`renders loading FAB 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -1438,7 +1438,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 25,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -1462,7 +1462,7 @@ exports[`renders loading FAB with custom size prop 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 25,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -1743,7 +1743,7 @@ exports[`renders not visible FAB 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -1767,7 +1767,7 @@ exports[`renders not visible FAB 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -1917,7 +1917,7 @@ exports[`renders small FAB 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 12,
       "opacity": 1,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -1941,7 +1941,7 @@ exports[`renders small FAB 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 12,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
@@ -2091,7 +2091,7 @@ exports[`renders visible FAB 1`] = `
       "backgroundColor": "rgba(234, 221, 255, 1)",
       "borderRadius": 16,
       "opacity": 0,
-      "shadowColor": "#000",
+      "shadowColor": "rgba(0, 0, 0, 1)",
       "shadowOffset": {
         "height": 4,
         "width": 0,
@@ -2115,7 +2115,7 @@ exports[`renders visible FAB 1`] = `
         "backgroundColor": "rgba(234, 221, 255, 1)",
         "borderRadius": 16,
         "flex": undefined,
-        "shadowColor": "#000",
+        "shadowColor": "rgba(0, 0, 0, 1)",
         "shadowOffset": {
           "height": 1,
           "width": 0,
